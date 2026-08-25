@@ -26,6 +26,33 @@
         "spawns": [{ "mapName": "moc_fild18", "description": "Sograt Desert" }]
       },
       "imageUrl": "/images/monsters/1091.gif"
+    },
+    {
+      "id": 1583,
+      "name": "Tao Gunka",
+      "ragnarokZero": {
+        "level": 110, "size": "Large", "element": "Neutral 3", "elementType": "Neutral", "elementLevel": 3, "race": "Demon",
+        "hp": "???", "baseExp": "", "jobExp": "", "flee95": 541, "hit100": 498,
+        "atkMin": 3757, "atkMax": 3757, "defense": 404, "magicDefense": 143,
+        "drops": [
+          { "itemId": 504, "name": "White Potion", "rate": 15 },
+          { "itemId": 1720, "name": "Rudra Bow", "rate": "???" }
+        ],
+        "spawns": [{ "mapName": "b_bea_d01", "description": "West Cave Karu" }]
+      },
+      "imageUrl": "/images/monsters/1583.gif"
+    },
+    {
+      "id": 1185,
+      "name": "Whisper",
+      "ragnarokZero": {
+        "level": 34, "size": "Small", "element": "Shadow 1", "elementType": "Shadow", "elementLevel": 1, "race": "Demon",
+        "hp": "", "baseExp": "", "jobExp": "", "flee95": "", "hit100": "",
+        "atkMin": "", "atkMax": "", "defense": "", "magicDefense": "",
+        "drops": [{ "itemId": 1059, "name": "Fabric", "rate": 0.5 }],
+        "spawns": [{ "mapName": "gl_c02_a", "description": "Glast Heim Castle 2F" }]
+      },
+      "imageUrl": "/images/monsters/1185.gif"
     }
   ]
 }

@@ -68,15 +68,19 @@ export function transformMonster(raw: any): MonsterRow {
     element_level: rz.elementLevel ?? null,
     race: rz.race ?? null,
     size: rz.size ?? null,
-    hp: rz.hp,
-    atk_min: rz.atkMin ?? null,
-    atk_max: rz.atkMax ?? null,
-    def: rz.defense ?? null,
-    mdef: rz.magicDefense ?? null,
-    flee: rz.flee95 ?? null,
-    hit: rz.hit100 ?? null,
-    base_exp: rz.baseExp ?? 0,
-    job_exp: rz.jobExp ?? 0,
+    // The raw feed uses "" and "???" as "unknown value" markers on numeric
+    // fields (e.g. Tao Gunka id 1583 has hp "???", baseExp "", jobExp "").
+    // Route every numeric field through toNumberOrNull so one bad row cannot
+    // abort the whole batch upsert. NOT NULL columns fall back to 0.
+    hp: toNumberOrNull(rz.hp) ?? 0,
+    atk_min: toNumberOrNull(rz.atkMin),
+    atk_max: toNumberOrNull(rz.atkMax),
+    def: toNumberOrNull(rz.defense),
+    mdef: toNumberOrNull(rz.magicDefense),
+    flee: toNumberOrNull(rz.flee95),
+    hit: toNumberOrNull(rz.hit100),
+    base_exp: toNumberOrNull(rz.baseExp) ?? 0,
+    job_exp: toNumberOrNull(rz.jobExp) ?? 0,
     image_url: raw.imageUrl ?? null,
   };
 }

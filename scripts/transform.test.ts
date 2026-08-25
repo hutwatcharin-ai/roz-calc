@@ -28,6 +28,45 @@ describe('transformMonster', () => {
       image_url: '/images/monsters/1001.gif',
     });
   });
+
+  // Real raw data (data/raw/monsters.json) uses "" and "???" as "unknown"
+  // markers on numeric fields. Any unparseable value in a batch upsert aborts
+  // the whole import, so these must be coerced, never passed through raw.
+  it('coerces sentinel values in NOT NULL columns to 0 (Tao Gunka, real raw data)', () => {
+    const row = transformMonster(monstersFixture.monsters[2]);
+    expect(row.id).toBe(1583);
+    expect(row.hp).toBe(0);
+    expect(row.base_exp).toBe(0);
+    expect(row.job_exp).toBe(0);
+    // Fields that do hold real numbers are still passed through untouched.
+    expect(row.atk_min).toBe(3757);
+    expect(row.def).toBe(404);
+    expect(row.flee).toBe(541);
+  });
+
+  it('coerces sentinel values in nullable columns to null (Whisper, real raw data)', () => {
+    const row = transformMonster(monstersFixture.monsters[3]);
+    expect(row).toEqual({
+      id: 1185,
+      name_en: 'Whisper',
+      name_th: null,
+      level: 34,
+      element: 'Shadow',
+      element_level: 1,
+      race: 'Demon',
+      size: 'Small',
+      hp: 0,
+      atk_min: null,
+      atk_max: null,
+      def: null,
+      mdef: null,
+      flee: null,
+      hit: null,
+      base_exp: 0,
+      job_exp: 0,
+      image_url: '/images/monsters/1185.gif',
+    });
+  });
 });
 
 describe('transformDrops', () => {
