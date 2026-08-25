@@ -53,6 +53,16 @@ Import ครั้งเดียว/รีเฟรชเป็นรอบ (�
 
 **Error handling หน้าเว็บ:** query ไม่เจอผล → empty state ปกติ ไม่ throw; Supabase ล่ม → fallback message ไม่ crash หน้า
 
+## 4.1 Assets (รูปมอนสเตอร์/ไอเทม/NPC)
+
+ตรวจแล้ว (2026-08-25) — โหลดตรงจากโดเมนที่ใช้ได้ (ไม่ผ่านเว็บที่ถูกบล็อกในข้อ 2):
+
+- **มอนสเตอร์**: `ragnarokzero.net/images/monsters/{monster_id}.gif` — ตรวจตัวอย่าง 1001/1091/1583 โหลดสำเร็จ (real GIF, 200)
+- **ไอเทม**: `ragnarokzero.net/images/items/{item_id}.gif` — ส่วนใหญ่โหลดได้ แต่แคตตาล็อกไอเทมของ ragnarokzero.net ไม่ครบเท่า midgardhub (เช่น "Red Potion" ไม่มีในชุดเขา) → ไอเทมที่ไม่มีรูปต้อง fallback เป็น placeholder icon ในหน้าเว็บ ไม่ error
+- **NPC**: `rozerodb.com/assets/npcs/{npc_name_lowercase}.gif` — มี 84 สไปรต์ ครอบคลุมเฉพาะ NPC ที่ผูกกับเควสที่ import ไว้แล้ว (ไม่ใช่ NPC ทั้งหมดในเกม)
+
+**แผน**: สคริปต์ import ดาวน์โหลดรูปมาเก็บเอง (mirror ใน object storage/Supabase Storage หรือ public folder ของเว็บเรา) ไม่ hotlink ตรงจากปลายทางตอน production — กัน dependency กับเว็บคนอื่นตอน serve จริง และลดโหลดปลายทางเวลามีคนเข้าเว็บเรา
+
 ## 5. Tech Stack & Deploy
 
 - Next.js 14+ (App Router) + Supabase — เหมือน PCX Hub/kidkrob
