@@ -1,3 +1,4 @@
+/* app/globals.css */
 :root {
   --ground: #0B0820;
   --panel: #150E33;
@@ -6,14 +7,54 @@
   --dim: #B3A9E6;
   --faint: #7A70AD;
   --hair: rgba(244, 242, 255, 0.14);
+
   --yellow: #FFE53D;
+  --yellow-ink: #241E00;
   --pink: #FF3D9A;
   --cyan: #3DE8FF;
+
+  --radius: 8px;
+  --shell: clamp(16px, 3.6vw, 40px);
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: var(--ground);
   color: var(--text);
-  font-family: "Sarabun", system-ui, sans-serif;
+  color-scheme: dark;
+  font: 400 16px/1.6 "Sarabun", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+h1, h2, h3, p, table { margin: 0; }
+table { border-collapse: collapse; width: 100%; }
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+.shell { max-width: 1280px; margin-inline: auto; padding-inline: var(--shell); }
+
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--ground); border-bottom: 1px solid var(--hair);
+}
+.topbar__in {
+  display: flex; align-items: center; gap: 28px; height: 64px;
+  max-width: 1280px; margin-inline: auto; padding-inline: var(--shell);
+}
+.brand__mark { font: 700 20px/1 "Chakra Petch", sans-serif; letter-spacing: -0.01em; color: var(--text); }
+.brand__mark em { font-style: normal; color: var(--yellow); }
+
+.topnav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
+.topnav a {
+  font: 700 12.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.04em; text-transform: uppercase;
+  text-decoration: none; color: var(--dim); padding: 9px 13px; border-radius: 6px; white-space: nowrap;
+}
+.topnav a:hover { color: var(--text); background: var(--panel); }
+.topnav a.on { color: var(--yellow-ink); background: var(--yellow); }
+
+.panel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card { border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); padding: 18px; }
+.card--pink { box-shadow: 4px 4px 0 var(--pink); }
+.card--cyan { box-shadow: 4px 4px 0 var(--cyan); }
+.card--yellow { box-shadow: 4px 4px 0 var(--yellow); }
