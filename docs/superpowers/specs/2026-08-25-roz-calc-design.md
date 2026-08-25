@@ -20,7 +20,7 @@
 | แหล่ง | ใช้ได้ไหม | เหตุผล |
 |---|---|---|
 | `ragnarokzero.net` — `/data/monsters.json`, `/data/items.json` | ✅ ใช้เป็นหลัก | robots.txt ไม่บล็อก ไม่มี ToS ห้าม bulk scrape ที่พบ ข้อมูลมี drop table + baseStats(STR/AGI/VIT/INT/DEX/LUK) + spawn map ครบ (ต้นทางแท้จริงคือ TWRoZ public asset feed) |
-| `rozerodb.com` — `/player-skills` (851 ตัว, 9 หน้า) | ✅ ใช้เสริม | ไม่มีข้อห้ามเช่นกัน มี skill↔class mapping ที่อีกสองแหล่งไม่มี — ยังไม่ดึงเต็ม รอทำตอน implementation |
+| `rozerodb.com` — `/player-skills` (851 ตัว, 9 หน้า) + `/assets/npcs/` (84 สไปรต์) | ✅ ใช้เสริม | ไม่มีข้อห้ามเช่นกัน มี skill↔class mapping ที่อีกสองแหล่งไม่มี — **ดึงครบแล้ว 851/851** เก็บที่ `data/raw/skills.json` |
 | `midgardhub.com` — `/data/monsters.json` ฯลฯ | ⚠️ ใช้เฉพาะ personal reference | ToS ระบุห้าม "scrape, republish, or redistribute large portions of the database in bulk without permission" — **ห้ามใช้เป็นฐานข้อมูลของเว็บสาธารณะนี้** ใช้ maps/quests เทียบข้อมูลส่วนตัวได้เท่านั้น |
 | `ragnarokzero.wiki`, `ragnarokze.ro`, `assets.twroz.wiki` | ❌ ห้ามแตะ | robots.txt ระบุ `User-agent: ClaudeBot Disallow: /` ตรงตัว — เคารพ directive นี้เสมอ ไม่ว่าจะขอกี่รอบ |
 | `wiki.playragnarokzero.com` | ❌ ใช้ไม่ได้ | โดเมนเข้าไม่ถึง (ตายหรือไม่มีจริง) |
@@ -92,7 +92,7 @@ Import ครั้งเดียว/รีเฟรชเป็นรอบ (�
 ## 8. งานที่ยังไม่เสร็จ / ต้องทำตอน implementation
 
 - [ ] ตั้งชื่อโปรเจกต์/โดเมนจริง (ตอนนี้ใช้ codename `roz-calc`)
-- [ ] ดึง skill data เต็ม 851 ตัวจาก rozerodb.com (9 หน้า, ยังไม่ได้ทำตอน brainstorm)
+- [x] ดึง skill data เต็ม 851 ตัวจาก rozerodb.com — เก็บที่ `data/raw/skills.json` (2026-08-25) ⚠️ ข้อมูลต้นทางเองไม่สมบูรณ์: 448/851 ตัวไม่มี type (active/passive), 418/851 ไม่มี classes ที่ผูก — เว็บต้นทางระบุเองว่า "Client-data verification in progress" ต้อง handle ค่า null พวกนี้ตอนออกแบบ UI (อย่า assume มีครบทุก field)
 - [ ] เขียน+verify สูตร ATK/HP/MATK มาตรฐาน RO ให้ตรงพฤติกรรมเกมมากที่สุดเท่าที่ทำได้ พร้อม unit test — ต้องตัดสินใจก่อนว่าใช้สูตรยุค Renewal หรือ Pre-Renewal เป็นฐาน (job list ที่เจอมี High Priest/Sniper/Paladin ชี้ว่าเป็น Renewal-era แต่ยังไม่ยืนยัน)
 - [ ] ออกแบบ schema/flow ของ `feedback_reports` + หน้า admin รีวิว (ยังไม่ลง detail)
 - [ ] Supabase project ใหม่ (ยังไม่สร้าง)
