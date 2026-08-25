@@ -1,0 +1,18 @@
+name: Keep Supabase alive
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # every day at 03:00 UTC (~10:00 Thailand time)
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit the home page (triggers a real Supabase query)
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" "http://x130k1pxl928ne421jk9i5ic.207.148.123.125.sslip.io/")
+          echo "home page returned HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "::warning::Site did not return 200 (got $code) — check the Coolify deployment"
+          fi
