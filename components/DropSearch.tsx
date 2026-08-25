@@ -5,14 +5,30 @@ interface DropRow {
   rate: number;
 }
 
-export default function DropSearch({ query, rows }: { query: string; rows: DropRow[] }) {
+export default function DropSearch({
+  query,
+  resolvedName,
+  rows,
+}: {
+  query: string;
+  resolvedName?: string | null;
+  rows: DropRow[];
+}) {
   return (
     <div className="card card--pink">
       <form>
         <input className="mono" type="text" name="q" defaultValue={query} placeholder="ชื่อไอเทม เช่น Elunium Ore" />
         <button type="submit">ค้นหา</button>
       </form>
-      {query && rows.length === 0 && <p style={{ color: 'var(--faint)' }}>ไม่พบไอเทมนี้</p>}
+      {query && !resolvedName && <p style={{ color: 'var(--faint)' }}>ไม่พบไอเทมนี้</p>}
+      {resolvedName && (
+        <p style={{ marginTop: 10, fontSize: 13, color: 'var(--dim)' }}>
+          ผลลัพธ์สำหรับ: <b className="mono" style={{ color: 'var(--pink)' }}>{resolvedName}</b>
+        </p>
+      )}
+      {resolvedName && rows.length === 0 && (
+        <p style={{ color: 'var(--faint)' }}>ไอเทมนี้ไม่มีมอนสเตอร์ตัวไหนดรอป</p>
+      )}
       <div style={{ marginTop: 12 }}>
         {rows.map((row) => (
           <div

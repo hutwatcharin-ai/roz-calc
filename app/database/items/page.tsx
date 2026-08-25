@@ -2,9 +2,21 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 
+// Daily ISR (spec §5). Also keeps the page off the build-time static path, so
+// the build does not need Supabase env vars present at build time.
+export const revalidate = 86400;
+
 export default async function ItemListPage() {
   const db = supabaseBrowser();
-  const { data: items } = await db.from('items').select('id, name_en, category, weapon_type').order('id').limit(100);
+  const { data: items, error } = await db
+    .from('items')
+    .select('id, name_en, category, weapon_type')
+    .order('id')
+    .limit(100);
+
+  if (error) {
+    console.error('items list query failed', error);
+  }
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>

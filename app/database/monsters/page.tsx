@@ -2,9 +2,21 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 
+// Daily ISR (spec §5). Also keeps the page off the build-time static path, so
+// the build does not need Supabase env vars present at build time.
+export const revalidate = 86400;
+
 export default async function MonsterListPage() {
   const db = supabaseBrowser();
-  const { data: monsters } = await db.from('monsters').select('id, name_en, level, race, element').order('level').limit(100);
+  const { data: monsters, error } = await db
+    .from('monsters')
+    .select('id, name_en, level, race, element')
+    .order('level')
+    .limit(100);
+
+  if (error) {
+    console.error('monsters list query failed', error);
+  }
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>

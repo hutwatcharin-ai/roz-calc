@@ -8,14 +8,19 @@ export default function FeedbackButton({ pageType, entityId }: { pageType: strin
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [sent, setSent] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   async function submit() {
+    setFailed(false);
     const db = supabaseBrowser();
     const { error } = await db.from('feedback_reports').insert({ page_type: pageType, entity_id: entityId, message });
-    if (!error) {
-      setSent(true);
-      setMessage('');
+    if (error) {
+      console.error('feedback insert failed', error);
+      setFailed(true);
+      return;
     }
+    setSent(true);
+    setMessage('');
   }
 
   if (sent) {
@@ -31,15 +36,23 @@ export default function FeedbackButton({ pageType, entityId }: { pageType: strin
   }
 
   return (
-    <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-      <input
-        className="mono"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="อธิบายจุดที่ผิด"
-        style={{ flex: 1 }}
-      />
-      <button type="button" onClick={submit} disabled={!message.trim()}>ส่ง</button>
+    <div style={{ marginTop: 8 }}>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <input
+          className="mono"
+          value={message}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            if (failed) setFailed(false);
+          }}
+          placeholder="อธิบายจุดที่ผิด"
+          style={{ flex: 1 }}
+        />
+        <button type="button" onClick={submit} disabled={!message.trim()}>ส่ง</button>
+      </div>
+      {failed && (
+        <p style={{ marginTop: 6, fontSize: 12, color: 'var(--pink)' }}>ส่งไม่สำเร็จ ลองอีกครั้ง</p>
+      )}
     </div>
   );
 }

@@ -5,7 +5,8 @@ const LINKS = [
   { href: '/', label: 'หาจุดตี' },
   { href: '/drop-finder', label: 'ค้นของดรอป' },
   { href: '/stat-calculator', label: 'คำนวณสเตตัส' },
-  { href: '/database/monsters', label: 'ฐานข้อมูล' },
+  { href: '/database/monsters', label: 'มอนสเตอร์' },
+  { href: '/database/items', label: 'ไอเทม' },
 ];
 
 export default function Nav() {

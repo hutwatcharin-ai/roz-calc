@@ -6,12 +6,20 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   const db = supabaseBrowser();
   const id = Number(params.id);
 
-  const { data: item } = await db.from('items').select('*').eq('id', id).single();
+  // maybeSingle (not single): a missing id must come back as data:null with no
+  // error, so a genuine 404 stays distinguishable from a real query failure.
+  const { data: item, error } = await db.from('items').select('*').eq('id', id).maybeSingle();
   const { data: droppedBy } = await db
     .from('monster_drops')
     .select('rate, monsters(id, name_en)')
     .eq('item_id', id)
     .order('rate', { ascending: false });
+
+  // A failed query must not read as "this item does not exist".
+  if (error) {
+    console.error('item detail query failed', error);
+    return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
+  }
 
   if (!item) {
     return <main className="shell" style={{ paddingBlock: 32 }}>ไม่พบไอเทมนี้</main>;
