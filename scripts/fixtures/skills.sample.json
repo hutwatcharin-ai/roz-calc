@@ -1,0 +1,4 @@
+[
+  { "slug": "16th-night", "name": "16th Night", "type": null, "max_level": 5, "element": null, "classes": [], "icon": "/assets/local/catalog/ae8479a6df6aa601a6102d132c5132f0.webp" },
+  { "slug": "acid-terror", "name": "Acid Terror", "type": "active", "max_level": 5, "element": null, "classes": ["Alchemist"], "icon": "/assets/local/catalog/e5918d9576872db9caf4731eb66ad3ab.webp" }
+]

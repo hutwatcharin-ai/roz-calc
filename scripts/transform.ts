@@ -118,3 +118,25 @@ export function transformItem(raw: any): ItemRow {
     icon_url: raw.iconUrl ?? null,
   };
 }
+
+export interface SkillRow {
+  slug: string;
+  name: string;
+  type: string | null;
+  max_level: number | null;
+  element: string | null;
+  classes: string[];
+  icon_url: string | null;
+}
+
+export function transformSkill(raw: any): SkillRow {
+  return {
+    slug: raw.slug,
+    name: raw.name,
+    type: raw.type ?? null,
+    max_level: raw.max_level ?? null,
+    element: raw.element ?? null,
+    classes: raw.classes ?? [],
+    icon_url: raw.icon ?? null,
+  };
+}

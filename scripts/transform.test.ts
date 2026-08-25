@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import monstersFixture from './fixtures/monsters.sample.json';
 import itemsFixture from './fixtures/items.sample.json';
-import { transformMonster, transformItem, transformDrops, transformSpawns } from './transform';
+import skillsFixture from './fixtures/skills.sample.json';
+import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill } from './transform';
 
 describe('transformMonster', () => {
   it('maps a raw monster to the monsters table shape', () => {
@@ -73,5 +74,26 @@ describe('transformItem', () => {
     expect(row.weapon_type).toBeNull();
     expect(row.buy_price).toBe(1200);
     expect(row.sell_price).toBe(10);
+  });
+});
+
+describe('transformSkill', () => {
+  it('maps a raw skill to the skills table shape', () => {
+    const row = transformSkill(skillsFixture[1]);
+    expect(row).toEqual({
+      slug: 'acid-terror',
+      name: 'Acid Terror',
+      type: 'active',
+      max_level: 5,
+      element: null,
+      classes: ['Alchemist'],
+      icon_url: '/assets/local/catalog/e5918d9576872db9caf4731eb66ad3ab.webp',
+    });
+  });
+
+  it('passes through null type/classes for unverified skills', () => {
+    const row = transformSkill(skillsFixture[0]);
+    expect(row.type).toBeNull();
+    expect(row.classes).toEqual([]);
   });
 });

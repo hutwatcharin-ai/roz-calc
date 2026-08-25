@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { supabaseAdmin } from '../lib/supabase';
-import { transformMonster, transformItem, transformDrops, transformSpawns } from './transform';
+import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill } from './transform';
 
 function loadJson(path: string): any {
   return JSON.parse(readFileSync(path, 'utf-8'));
@@ -52,7 +52,24 @@ async function importMonstersAndItems() {
   console.log('Monsters and items import complete.');
 }
 
-importMonstersAndItems().catch((err) => {
+async function importSkills() {
+  const db = supabaseAdmin();
+  const skillsRaw = loadJson('data/raw/skills.json');
+  console.log(`Importing ${skillsRaw.length} skills...`);
+  const skillRows = skillsRaw.map(transformSkill);
+  const { error } = await db.from('skills').upsert(skillRows);
+  if (error) {
+    throw new Error(`Failed to import skills: ${error.message}`);
+  }
+  console.log('Skills import complete.');
+}
+
+async function main() {
+  await importMonstersAndItems();
+  await importSkills();
+}
+
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
