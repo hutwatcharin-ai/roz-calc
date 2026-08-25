@@ -5,6 +5,7 @@ interface FarmingRow {
   hp: number;
   exp_per_hp: number;
   avg_zeny_per_kill: number;
+  image_url: string | null;
   spawn?: string;
 }
 
@@ -29,7 +30,20 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
         <tbody>
           {rows.map((row) => (
             <tr key={row.monster_id}>
-              <td>{row.name_en}</td>
+              <td>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {row.image_url && (
+                    <img
+                      src={row.image_url}
+                      alt=""
+                      width={24}
+                      height={24}
+                      style={{ imageRendering: 'pixelated', flexShrink: 0 }}
+                    />
+                  )}
+                  {row.name_en}
+                </div>
+              </td>
               <td className="mono" style={{ textAlign: 'right' }}>{row.level}</td>
               <td className="mono" style={{ textAlign: 'right' }}>{row.hp.toLocaleString()}</td>
               <td className="mono" style={{ textAlign: 'right', color: 'var(--yellow)' }}>{row.exp_per_hp}</td>

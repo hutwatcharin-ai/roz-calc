@@ -2,16 +2,21 @@ import { describe, it, expect } from 'vitest';
 import { mergeSearchResults } from './search';
 
 describe('mergeSearchResults', () => {
-  it('tags monsters and items with the correct type and href', () => {
-    const monsters = [{ id: 1091, name_en: 'Dragon Fly' }];
-    const items = [{ id: 757, name_en: 'Elunium Ore' }];
+  it('tags monsters and items with the correct type, href, and icon', () => {
+    const monsters = [{ id: 1091, name_en: 'Dragon Fly', image_url: '/images/monsters/1091.gif' }];
+    const items = [{ id: 757, name_en: 'Elunium Ore', icon_url: '/images/items/757.gif' }];
 
     const result = mergeSearchResults(monsters, items);
 
     expect(result).toEqual([
-      { type: 'monster', id: 1091, name: 'Dragon Fly', href: '/database/monsters/1091' },
-      { type: 'item', id: 757, name: 'Elunium Ore', href: '/database/items/757' },
+      { type: 'monster', id: 1091, name: 'Dragon Fly', href: '/database/monsters/1091', iconUrl: '/images/monsters/1091.gif' },
+      { type: 'item', id: 757, name: 'Elunium Ore', href: '/database/items/757', iconUrl: '/images/items/757.gif' },
     ]);
+  });
+
+  it('defaults iconUrl to null when the row has no image', () => {
+    const result = mergeSearchResults([{ id: 1, name_en: 'A' }], []);
+    expect(result[0].iconUrl).toBeNull();
   });
 
   it('returns an empty list when both inputs are empty', () => {

@@ -1,6 +1,8 @@
 export interface SearchRow {
   id: number;
   name_en: string;
+  image_url?: string | null;
+  icon_url?: string | null;
 }
 
 export interface SearchResult {
@@ -8,6 +10,7 @@ export interface SearchResult {
   id: number;
   name: string;
   href: string;
+  iconUrl: string | null;
 }
 
 export function mergeSearchResults(monsters: SearchRow[], items: SearchRow[]): SearchResult[] {
@@ -16,6 +19,7 @@ export function mergeSearchResults(monsters: SearchRow[], items: SearchRow[]): S
     id: m.id,
     name: m.name_en,
     href: `/database/monsters/${m.id}`,
+    iconUrl: m.image_url ?? null,
   }));
 
   const itemResults: SearchResult[] = items.map((i) => ({
@@ -23,6 +27,7 @@ export function mergeSearchResults(monsters: SearchRow[], items: SearchRow[]): S
     id: i.id,
     name: i.name_en,
     href: `/database/items/${i.id}`,
+    iconUrl: i.icon_url ?? null,
   }));
 
   return [...monsterResults, ...itemResults];

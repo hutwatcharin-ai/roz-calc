@@ -45,8 +45,8 @@ export default function GlobalSearch() {
     const timer = setTimeout(async () => {
       const db = supabaseBrowser();
       const [{ data: monsters, error: monstersError }, { data: items, error: itemsError }] = await Promise.all([
-        db.from('monsters').select('id, name_en').ilike('name_en', `%${query}%`).limit(5),
-        db.from('items').select('id, name_en').ilike('name_en', `%${query}%`).limit(5),
+        db.from('monsters').select('id, name_en, image_url').ilike('name_en', `%${query}%`).limit(5),
+        db.from('items').select('id, name_en, icon_url').ilike('name_en', `%${query}%`).limit(5),
       ]);
 
       if (monstersError) console.error('global search: monsters query failed', monstersError);
@@ -142,7 +142,12 @@ export default function GlobalSearch() {
                     textDecoration: 'none',
                   }}
                 >
-                  <span>{r.name}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    {r.iconUrl && (
+                      <img src={r.iconUrl} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                    )}
+                    {r.name}
+                  </span>
                   <span
                     className="mono"
                     style={{

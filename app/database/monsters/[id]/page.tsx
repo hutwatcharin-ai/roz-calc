@@ -11,7 +11,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   const { data: monster, error } = await db.from('monsters').select('*').eq('id', id).maybeSingle();
   const { data: drops } = await db
     .from('monster_drops')
-    .select('rate, items(name_en, sell_price)')
+    .select('rate, items(name_en, sell_price, icon_url)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
 
@@ -27,16 +27,34 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{monster.name_en}</h1>
-      <p style={{ color: 'var(--dim)' }}>Lv.{monster.level} · {monster.race} · {monster.element}</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        {monster.image_url && (
+          <img
+            src={monster.image_url}
+            alt=""
+            width={64}
+            height={64}
+            style={{ imageRendering: 'pixelated' }}
+          />
+        )}
+        <div>
+          <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{monster.name_en}</h1>
+          <p style={{ color: 'var(--dim)' }}>Lv.{monster.level} · {monster.race} · {monster.element}</p>
+        </div>
+      </div>
       <div className="card" style={{ marginTop: 20 }}>
         <p>HP {monster.hp.toLocaleString()} · ATK {monster.atk_min}–{monster.atk_max} · DEF {monster.def}</p>
       </div>
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: '"Chakra Petch", sans-serif', marginBottom: 10 }}>ตารางดรอป</h2>
         {(drops ?? []).map((d: any, i: number) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-            <span>{d.items.name_en}</span>
+          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {d.items.icon_url && (
+                <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+              )}
+              {d.items.name_en}
+            </span>
             <span className="mono">{d.rate}%</span>
           </div>
         ))}

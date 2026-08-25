@@ -2,6 +2,7 @@
 interface DropRow {
   monster_id: number;
   monster_name: string;
+  monster_image_url?: string | null;
   rate: number;
 }
 
@@ -35,7 +36,12 @@ export default function DropSearch({
             key={row.monster_id}
             style={{ display: 'flex', justifyContent: 'space-between', padding: '9px 0', borderBottom: '1px solid var(--hair)' }}
           >
-            <span>{row.monster_name}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {row.monster_image_url && (
+                <img src={row.monster_image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+              )}
+              {row.monster_name}
+            </span>
             <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate}%</span>
           </div>
         ))}

@@ -11,7 +11,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   const { data: item, error } = await db.from('items').select('*').eq('id', id).maybeSingle();
   const { data: droppedBy } = await db
     .from('monster_drops')
-    .select('rate, monsters(id, name_en)')
+    .select('rate, monsters(id, name_en, image_url)')
     .eq('item_id', id)
     .order('rate', { ascending: false });
 
@@ -27,8 +27,21 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{item.name_en}</h1>
-      <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        {item.icon_url && (
+          <img
+            src={item.icon_url}
+            alt=""
+            width={48}
+            height={48}
+            style={{ imageRendering: 'pixelated' }}
+          />
+        )}
+        <div>
+          <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{item.name_en}</h1>
+          <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
+        </div>
+      </div>
       <div className="card" style={{ marginTop: 20 }}>
         {item.atk !== null && <p>ATK {item.atk} · Weapon Lv.{item.weapon_level} · Required Lv.{item.required_level}</p>}
         {item.equippable_classes.length > 0 && <p>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>}
@@ -36,8 +49,13 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: '"Chakra Petch", sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
         {(droppedBy ?? []).map((d: any, i: number) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-            <span>{d.monsters.name_en}</span>
+          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {d.monsters.image_url && (
+                <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+              )}
+              {d.monsters.name_en}
+            </span>
             <span className="mono">{d.rate}%</span>
           </div>
         ))}
