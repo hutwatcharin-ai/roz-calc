@@ -1,0 +1,19 @@
+:root {
+  --ground: #0B0820;
+  --panel: #150E33;
+  --panel-2: #1D1444;
+  --text: #F4F2FF;
+  --dim: #B3A9E6;
+  --faint: #7A70AD;
+  --hair: rgba(244, 242, 255, 0.14);
+  --yellow: #FFE53D;
+  --pink: #FF3D9A;
+  --cyan: #3DE8FF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: "Sarabun", system-ui, sans-serif;
+}
