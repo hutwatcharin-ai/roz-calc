@@ -1,5 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
+import FeedbackButton from '@/components/FeedbackButton';
 
 export default async function MonsterDetailPage({ params }: { params: { id: string } }) {
   const db = supabaseBrowser();
@@ -31,6 +32,9 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             <span className="mono">{d.rate}%</span>
           </div>
         ))}
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <FeedbackButton pageType="monster" entityId={String(monster.id)} />
       </div>
     </main>
   );

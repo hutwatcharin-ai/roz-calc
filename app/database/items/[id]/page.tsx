@@ -1,5 +1,6 @@
 // app/database/items/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
+import FeedbackButton from '@/components/FeedbackButton';
 
 export default async function ItemDetailPage({ params }: { params: { id: string } }) {
   const db = supabaseBrowser();
@@ -32,6 +33,9 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
             <span className="mono">{d.rate}%</span>
           </div>
         ))}
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <FeedbackButton pageType="item" entityId={String(item.id)} />
       </div>
     </main>
   );
