@@ -24,8 +24,11 @@
 | `midgardhub.com` — `/data/monsters.json` ฯลฯ | ⚠️ ใช้เฉพาะ personal reference | ToS ระบุห้าม "scrape, republish, or redistribute large portions of the database in bulk without permission" — **ห้ามใช้เป็นฐานข้อมูลของเว็บสาธารณะนี้** ใช้ maps/quests เทียบข้อมูลส่วนตัวได้เท่านั้น |
 | `ragnarokzero.wiki`, `ragnarokze.ro`, `assets.twroz.wiki` | ❌ ห้ามแตะ | robots.txt ระบุ `User-agent: ClaudeBot Disallow: /` ตรงตัว — เคารพ directive นี้เสมอ ไม่ว่าจะขอกี่รอบ |
 | `wiki.playragnarokzero.com` | ❌ ใช้ไม่ได้ | โดเมนเข้าไม่ถึง (ตายหรือไม่มีจริง) |
+| `D:\RagnarokZero\data.grf` (game client ของ user เอง) | ❌ ไม่แกะ | ไม่ใช่ GRF มาตรฐาน (signature `"Event Horizon"` ไม่ใช่ `"Master of Magic"`, version 0x300) — เป็น container เข้ารหัส/กันแกะที่ทีมเกมทำเอง เครื่องมือมาตรฐาน (GRF Editor/GrfCL) เปิดไม่ได้ (error ทันที) **ไม่ reverse-engineer format ที่ตั้งใจป้องกันการแกะ** แม้เป็นไฟล์เกมของ user เอง — ไม่จำเป็นด้วย เพราะข้อมูลจากไฟล์นี้ (อ้างอิง `sourcePath: data.grf!/data/luafiles514/.../iteminfo.lub` ใน items.json) หลุดออกมาเป็น JSON สาธารณะผ่าน ragnarokzero.net อยู่แล้ว |
 
-**นัยสำคัญ:** สูตรคำนวณ ATK/HP/MATK ในฟีเจอร์ #3 เป็น**สูตร RO มาตรฐานที่เขียนขึ้นเอง**จากความรู้เกมสาธารณะ ไม่ใช่ค่าที่ยืนยันจาก Ragnarok Zero โดยตรง (ไม่มีแหล่งข้อมูล job/stat-growth ที่ใช้ซ้ำได้ถูกกฎหมาย) — **ต้องติดป้าย "ค่าประมาณการ" ถาวรในหน้า UI** พร้อมช่องทางแจ้งแก้ไข
+**นัยสำคัญ:** สูตรคำนวณ ATK/HP/MATK ในฟีเจอร์ #3 เป็น**สูตร RO มาตรฐานที่เขียนขึ้นเอง**จากความรู้เกมสาธารณะ ไม่ใช่ค่าที่ยืนยันจาก Ragnarok Zero โดยตรง (ไม่มีแหล่งข้อมูล job/stat-growth ที่ใช้ซ้ำได้ถูกกฎหมาย หรือดึงออกมาได้จริง — client ก็เข้ารหัสกันไว้) — **ต้องติดป้าย "ค่าประมาณการ" ถาวรในหน้า UI** พร้อมช่องทางแจ้งแก้ไข
+
+**อัปเดตจาก deep-research (2026-08-25):** ไม่มีแหล่งไหนเผยแพร่สูตรตัวเลขจริงของเกมนี้เลย (ทั้งทางการและชุมชน) หลักฐานดีสุดที่หาได้คือคลิป YouTube ของผู้สร้างเกมเองพูดว่าระบบเอียงไปทาง **Renewal** (ไม่ใช่ Pre-Renewal) ยืนยันเชิงกลไกได้จริงด้วยระบบ **Fixed/Variable cast time แยกกัน** ซึ่งมีเฉพาะยุค Renewal — แต่ผู้สร้างเองก็บอก "ไม่ใช่ Renewal 100%" และ ASPD อาจต่างจากสูตรมาตรฐานโดยไม่ยืนยันชัด → **ตัดสินใจ: ใช้สูตร RO Renewal เป็นฐาน** (ไม่ใช่ Pre-Renewal) สำหรับ Stat/Build Calculator แต่ป้าย "ค่าประมาณการ" ยังต้องอยู่ถาวรเหมือนเดิม
 
 ## 3. สถาปัตยกรรมข้อมูล (Supabase)
 
@@ -93,6 +96,7 @@ Import ครั้งเดียว/รีเฟรชเป็นรอบ (�
 
 - [ ] ตั้งชื่อโปรเจกต์/โดเมนจริง (ตอนนี้ใช้ codename `roz-calc`)
 - [x] ดึง skill data เต็ม 851 ตัวจาก rozerodb.com — เก็บที่ `data/raw/skills.json` (2026-08-25) ⚠️ ข้อมูลต้นทางเองไม่สมบูรณ์: 448/851 ตัวไม่มี type (active/passive), 418/851 ไม่มี classes ที่ผูก — เว็บต้นทางระบุเองว่า "Client-data verification in progress" ต้อง handle ค่า null พวกนี้ตอนออกแบบ UI (อย่า assume มีครบทุก field)
-- [ ] เขียน+verify สูตร ATK/HP/MATK มาตรฐาน RO ให้ตรงพฤติกรรมเกมมากที่สุดเท่าที่ทำได้ พร้อม unit test — ต้องตัดสินใจก่อนว่าใช้สูตรยุค Renewal หรือ Pre-Renewal เป็นฐาน (job list ที่เจอมี High Priest/Sniper/Paladin ชี้ว่าเป็น Renewal-era แต่ยังไม่ยืนยัน)
+- [x] ตัดสินใจฐานสูตร: **Renewal** (ยืนยันทิศทางด้วย deep-research 2026-08-25 — ดูหัวข้อ 2) — [ ] ยังต้องเขียน+verify สูตร ATK/HP/MATK จริงจากฐาน Renewal พร้อม unit test (ไม่มีตัวเลขยืนยัน 100% จากเกมนี้โดยตรง)
+- [ ] ดึง NPC data เต็มจาก rozerodb.com — **เสร็จแล้ว 84/84** (2026-08-25) เก็บที่ `data/raw/npcs.json` + สไปรต์ที่ `data/raw/images/npcs/` — หมายเหตุ: ครอบคลุมเฉพาะ NPC ที่ผูกกับเควสที่มีคนลง index ไว้ ไม่ใช่ NPC ทั้งหมดในเกม
 - [ ] ออกแบบ schema/flow ของ `feedback_reports` + หน้า admin รีวิว (ยังไม่ลง detail)
 - [ ] Supabase project ใหม่ (ยังไม่สร้าง)
