@@ -44,7 +44,9 @@ async function importMonstersAndItems() {
   }
 
   console.log(`Importing ${spawnRows.length} spawn rows...`);
-  const { error: spawnsError } = await db.from('monster_spawns').insert(spawnRows);
+  const { error: spawnsError } = await db
+    .from('monster_spawns')
+    .upsert(spawnRows, { onConflict: 'monster_id,map_code' });
   if (spawnsError) {
     throw new Error(`Failed to import monster_spawns: ${spawnsError.message}`);
   }
