@@ -1,0 +1,33 @@
+{
+  "items": [
+    {
+      "id": 504,
+      "displayName": "White Potion",
+      "category": "Consumable / Recovery",
+      "attributes": { "weight": 15, "buyPrice": 1200, "sellPrice": 10 },
+      "description": {
+        "lines": ["Recovery tonic finely ground from White Herb. Recovers about 325 HP.", "Weight : 15"]
+      },
+      "iconUrl": "/images/items/504.gif"
+    },
+    {
+      "id": 1131,
+      "displayName": "Ice Falchion",
+      "category": "Weapon",
+      "attributes": { "weight": 60, "buyPrice": "", "sellPrice": "" },
+      "description": {
+        "lines": [
+          "A blue-bladed sword imbued with the power of water.",
+          "Type : Sword",
+          "ATK : 100",
+          "Weight : 60",
+          "Element : Water",
+          "Weapon Level : 4",
+          "Required Level : 40",
+          "Equippable by : Swordsman Class, Merchant Class, Thief Class"
+        ]
+      },
+      "iconUrl": "/images/items/1131.gif"
+    }
+  ]
+}
