@@ -1,0 +1,674 @@
+[
+  {
+    "slug": "4_BABYLEOPARD",
+    "name": "4_BABYLEOPARD",
+    "sprite": "/assets/npcs/4_babyleopard.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_CAT_ADMIRAL",
+    "name": "4_CAT_ADMIRAL",
+    "sprite": "/assets/npcs/4_cat_admiral.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Alberta"
+  },
+  {
+    "slug": "4_COOK",
+    "name": "4_COOK",
+    "sprite": "/assets/npcs/4_cook.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_ENERGY_BLACK",
+    "name": "4_ENERGY_BLACK",
+    "sprite": "/assets/npcs/4_energy_black.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ztw_evt01"
+  },
+  {
+    "slug": "4_F_01",
+    "name": "4_F_01",
+    "sprite": "/assets/npcs/4_f_01.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_F_03",
+    "name": "4_F_03",
+    "sprite": "/assets/npcs/4_f_03.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_F_ALCHE_A",
+    "name": "4_F_ALCHE_A",
+    "sprite": "/assets/npcs/4_f_alche_a.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_F_BARYO_GIRL",
+    "name": "4_F_BARYO_GIRL",
+    "sprite": "/assets/npcs/4_f_baryo_girl.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_F_CAPEGIRL",
+    "name": "4_F_CAPEGIRL",
+    "sprite": "/assets/npcs/4_f_capegirl.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Nif_fild01"
+  },
+  {
+    "slug": "4_F_CHNDOCTOR",
+    "name": "4_F_CHNDOCTOR",
+    "sprite": "/assets/npcs/4_f_chndoctor.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_F_CHNDRESS2",
+    "name": "4_F_CHNDRESS2",
+    "sprite": "/assets/npcs/4_f_chndress2.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_F_CHNDRESS3",
+    "name": "4_F_CHNDRESS3",
+    "sprite": "/assets/npcs/4_f_chndress3.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang Region"
+  },
+  {
+    "slug": "4_F_CHNWOMAN",
+    "name": "4_F_CHNWOMAN",
+    "sprite": "/assets/npcs/4_f_chnwoman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_F_CRU",
+    "name": "4_F_CRU",
+    "sprite": "/assets/npcs/4_f_cru.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo Region"
+  },
+  {
+    "slug": "4_F_EINWOMAN",
+    "name": "4_F_EINWOMAN",
+    "sprite": "/assets/npcs/4_f_einwoman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_F_GODEMOM",
+    "name": "4_F_GODEMOM",
+    "sprite": "/assets/npcs/4_f_godemom.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Morocc Region"
+  },
+  {
+    "slug": "4_F_GON",
+    "name": "4_F_GON",
+    "sprite": "/assets/npcs/4_f_gon.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Morocc Region"
+  },
+  {
+    "slug": "4_F_HUGIRL",
+    "name": "4_F_HUGIRL",
+    "sprite": "/assets/npcs/4_f_hugirl.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_F_JOB_BLACKSMITH",
+    "name": "4_F_JOB_BLACKSMITH",
+    "sprite": "/assets/npcs/4_f_job_blacksmith.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_F_KID2",
+    "name": "4_F_KID2",
+    "sprite": "/assets/npcs/4_f_kid2.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera"
+  },
+  {
+    "slug": "4_F_LGTGRAND",
+    "name": "4_F_LGTGRAND",
+    "sprite": "/assets/npcs/4_f_lgtgrand.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_F_RANGER",
+    "name": "4_F_RANGER",
+    "sprite": "/assets/npcs/4_f_ranger.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_F_RUSWOMAN1",
+    "name": "4_F_RUSWOMAN1",
+    "sprite": "/assets/npcs/4_f_ruswoman1.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_F_RUSWOMAN3",
+    "name": "4_F_RUSWOMAN3",
+    "sprite": "/assets/npcs/4_f_ruswoman3.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_F_SHADOWCHASER",
+    "name": "4_F_SHADOWCHASER",
+    "sprite": "/assets/npcs/4_f_shadowchaser.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_F_SWORDMAN",
+    "name": "4_F_SWORDMAN",
+    "sprite": "/assets/npcs/4_f_swordman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_F_THAIAYO",
+    "name": "4_F_THAIAYO",
+    "sprite": "/assets/npcs/4_f_thaiayo.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_F_THAIGIRL",
+    "name": "4_F_THAIGIRL",
+    "sprite": "/assets/npcs/4_f_thaigirl.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_F_TWGRANDMOM",
+    "name": "4_F_TWGRANDMOM",
+    "sprite": "/assets/npcs/4_f_twgrandmom.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_F_UMGIRL",
+    "name": "4_F_UMGIRL",
+    "sprite": "/assets/npcs/4_f_umgirl.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Location not indexed"
+  },
+  {
+    "slug": "4_F_UMOLDWOMAN",
+    "name": "4_F_UMOLDWOMAN",
+    "sprite": "/assets/npcs/4_f_umoldwoman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Umbala"
+  },
+  {
+    "slug": "4_F_UMWOMAN",
+    "name": "4_F_UMWOMAN",
+    "sprite": "/assets/npcs/4_f_umwoman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Location not indexed"
+  },
+  {
+    "slug": "4_GEFFEN_01",
+    "name": "4_GEFFEN_01",
+    "sprite": "/assets/npcs/4_geffen_01.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Geffen Region"
+  },
+  {
+    "slug": "4_KID01",
+    "name": "4_KID01",
+    "sprite": "/assets/npcs/4_kid01.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_LAM",
+    "name": "4_LAM",
+    "sprite": "/assets/npcs/4_lam.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera"
+  },
+  {
+    "slug": "4_M_ALCHE_C",
+    "name": "4_M_ALCHE_C",
+    "sprite": "/assets/npcs/4_m_alche_c.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_M_ARCHER",
+    "name": "4_M_ARCHER",
+    "sprite": "/assets/npcs/4_m_archer.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_M_ARUNA_NFM1",
+    "name": "4_M_ARUNA_NFM1",
+    "sprite": "/assets/npcs/4_m_aruna_nfm1.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_M_BUDDHIST",
+    "name": "4_M_BUDDHIST",
+    "sprite": "/assets/npcs/4_m_buddhist.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya Region"
+  },
+  {
+    "slug": "4_M_CHN8GUEK",
+    "name": "4_M_CHN8GUEK",
+    "sprite": "/assets/npcs/4_m_chn8guek.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang Region"
+  },
+  {
+    "slug": "4_M_CHNCOOK",
+    "name": "4_M_CHNCOOK",
+    "sprite": "/assets/npcs/4_m_chncook.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_M_CHNGENERL",
+    "name": "4_M_CHNGENERL",
+    "sprite": "/assets/npcs/4_m_chngenerl.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_M_CHNMAN",
+    "name": "4_M_CHNMAN",
+    "sprite": "/assets/npcs/4_m_chnman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_M_CHNMONK",
+    "name": "4_M_CHNMONK",
+    "sprite": "/assets/npcs/4_m_chnmonk.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_M_CHNOLD",
+    "name": "4_M_CHNOLD",
+    "sprite": "/assets/npcs/4_m_chnold.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_M_CHNSOLDIER",
+    "name": "4_M_CHNSOLDIER",
+    "sprite": "/assets/npcs/4_m_chnsoldier.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Louyang"
+  },
+  {
+    "slug": "4_M_DST_GRAND",
+    "name": "4_M_DST_GRAND",
+    "sprite": "/assets/npcs/4_m_dst_grand.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Morocc Region"
+  },
+  {
+    "slug": "4_M_DSTMAN",
+    "name": "4_M_DSTMAN",
+    "sprite": "/assets/npcs/4_m_dstman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Morocc Region"
+  },
+  {
+    "slug": "4_M_DSTMANDEAD",
+    "name": "4_M_DSTMANDEAD",
+    "sprite": "/assets/npcs/4_m_dstmandead.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Morocc Region"
+  },
+  {
+    "slug": "4_M_HUMERCHANT",
+    "name": "4_M_HUMERCHANT",
+    "sprite": "/assets/npcs/4_m_humerchant.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_M_JOB_BLACKSMITH",
+    "name": "4_M_JOB_BLACKSMITH",
+    "sprite": "/assets/npcs/4_m_job_blacksmith.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Gonryun Dungeon"
+  },
+  {
+    "slug": "4_M_JOB_WIZARD",
+    "name": "4_M_JOB_WIZARD",
+    "sprite": "/assets/npcs/4_m_job_wizard.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Location not indexed"
+  },
+  {
+    "slug": "4_M_JPNOJI",
+    "name": "4_M_JPNOJI",
+    "sprite": "/assets/npcs/4_m_jpnoji.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_M_JPNOJI2",
+    "name": "4_M_JPNOJI2",
+    "sprite": "/assets/npcs/4_m_jpnoji2.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Gonryun"
+  },
+  {
+    "slug": "4_M_KID1",
+    "name": "4_M_KID1",
+    "sprite": "/assets/npcs/4_m_kid1.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_M_KID2",
+    "name": "4_M_KID2",
+    "sprite": "/assets/npcs/4_m_kid2.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_M_LGTPOOR",
+    "name": "4_M_LGTPOOR",
+    "sprite": "/assets/npcs/4_m_lgtpoor.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Niflheim"
+  },
+  {
+    "slug": "4_M_MIDDLE",
+    "name": "4_M_MIDDLE",
+    "sprite": "/assets/npcs/4_m_middle.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Morocc Region"
+  },
+  {
+    "slug": "4_M_MIDDLE1",
+    "name": "4_M_MIDDLE1",
+    "sprite": "/assets/npcs/4_m_middle1.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Alberta"
+  },
+  {
+    "slug": "4_M_MIKID",
+    "name": "4_M_MIKID",
+    "sprite": "/assets/npcs/4_m_mikid.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_M_REPAIR",
+    "name": "4_M_REPAIR",
+    "sprite": "/assets/npcs/4_m_repair.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Geffen Region"
+  },
+  {
+    "slug": "4_M_RUSBALD",
+    "name": "4_M_RUSBALD",
+    "sprite": "/assets/npcs/4_m_rusbald.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Alberta"
+  },
+  {
+    "slug": "4_M_RUSKING",
+    "name": "4_M_RUSKING",
+    "sprite": "/assets/npcs/4_m_rusking.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_M_SAGE_A",
+    "name": "4_M_SAGE_A",
+    "sprite": "/assets/npcs/4_m_sage_a.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_M_SEAMAN",
+    "name": "4_M_SEAMAN",
+    "sprite": "/assets/npcs/4_m_seaman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_M_SITDOWN",
+    "name": "4_M_SITDOWN",
+    "sprite": "/assets/npcs/4_m_sitdown.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Prontera Region"
+  },
+  {
+    "slug": "4_M_SIT_NOVICE",
+    "name": "4_M_SIT_NOVICE",
+    "sprite": "/assets/npcs/4_m_sit_novice.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Geffen Region"
+  },
+  {
+    "slug": "4_M_SNOWMAN",
+    "name": "4_M_SNOWMAN",
+    "sprite": "/assets/npcs/4_m_snowman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Xmas_fild01"
+  },
+  {
+    "slug": "4_M_SURA",
+    "name": "4_M_SURA",
+    "sprite": "/assets/npcs/4_m_sura.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_M_THAIAYO",
+    "name": "4_M_THAIAYO",
+    "sprite": "/assets/npcs/4_m_thaiayo.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_M_THAIOLD",
+    "name": "4_M_THAIOLD",
+    "sprite": "/assets/npcs/4_m_thaiold.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_M_THAIONGBAK",
+    "name": "4_M_THAIONGBAK",
+    "sprite": "/assets/npcs/4_m_thaiongbak.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Ayothaya"
+  },
+  {
+    "slug": "4_M_TWMASKMAN",
+    "name": "4_M_TWMASKMAN",
+    "sprite": "/assets/npcs/4_m_twmaskman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Gonryun"
+  },
+  {
+    "slug": "4_M_TWMIDMAN",
+    "name": "4_M_TWMIDMAN",
+    "sprite": "/assets/npcs/4_m_twmidman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Gonryun"
+  },
+  {
+    "slug": "4_M_TWOLDMAN",
+    "name": "4_M_TWOLDMAN",
+    "sprite": "/assets/npcs/4_m_twoldman.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Alberta"
+  },
+  {
+    "slug": "4_M_UMCHIE",
+    "name": "4_M_UMCHIE",
+    "sprite": "/assets/npcs/4_m_umchie.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Umbala"
+  },
+  {
+    "slug": "4_M_UMKID",
+    "name": "4_M_UMKID",
+    "sprite": "/assets/npcs/4_m_umkid.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Umbala"
+  },
+  {
+    "slug": "4_M_UMSOLDIER",
+    "name": "4_M_UMSOLDIER",
+    "sprite": "/assets/npcs/4_m_umsoldier.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Umbala"
+  },
+  {
+    "slug": "4_M_YOYOROGUE",
+    "name": "4_M_YOYOROGUE",
+    "sprite": "/assets/npcs/4_m_yoyorogue.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_NFWISP",
+    "name": "4_NFWISP",
+    "sprite": "/assets/npcs/4_nfwisp.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Geffen Region"
+  },
+  {
+    "slug": "4_ROPEPILE",
+    "name": "4_ROPEPILE",
+    "sprite": "/assets/npcs/4_ropepile.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_SOIL",
+    "name": "4_SOIL",
+    "sprite": "/assets/npcs/4_soil.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Mjolnir Mountains"
+  },
+  {
+    "slug": "4_TOWER_07",
+    "name": "4_TOWER_07",
+    "sprite": "/assets/npcs/4_tower_07.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  },
+  {
+    "slug": "4_TOWER_09",
+    "name": "4_TOWER_09",
+    "sprite": "/assets/npcs/4_tower_09.gif",
+    "quest_count": 1,
+    "map_count": 1,
+    "location": "Comodo"
+  }
+]
