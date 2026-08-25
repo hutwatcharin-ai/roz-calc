@@ -34,6 +34,12 @@ describe('transformDrops', () => {
     const rows = transformDrops(monstersFixture.monsters[1]);
     expect(rows).toEqual([{ monster_id: 1091, item_id: 507, rate: 40 }]);
   });
+
+  it('filters out drop entries whose rate is unparseable (e.g. "???")', () => {
+    const rows = transformDrops(monstersFixture.monsters[1]);
+    expect(rows.find((r) => r.item_id === 480569)).toBeUndefined();
+    expect(rows.every((r) => typeof r.rate === 'number' && Number.isFinite(r.rate))).toBe(true);
+  });
 });
 
 describe('transformSpawns', () => {

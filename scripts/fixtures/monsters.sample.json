@@ -4,7 +4,7 @@
       "id": 1001,
       "name": "Scorpion",
       "ragnarokZero": {
-        "level": 16, "size": "Small", "element": "Fire", "elementLevel": 1, "race": "Insect",
+        "level": 16, "size": "Small", "element": "Fire 1", "elementType": "Fire", "elementLevel": 1, "race": "Insect",
         "hp": 136, "baseExp": 338, "jobExp": 75, "flee95": 206, "hit100": 232,
         "atkMin": 7, "atkMax": 7, "defense": 16, "magicDefense": 5,
         "drops": [{ "itemId": 601, "name": "Fly Wing", "rate": 5 }],
@@ -16,10 +16,13 @@
       "id": 1091,
       "name": "Dragon Fly",
       "ragnarokZero": {
-        "level": 56, "size": "Small", "element": "Wind", "elementLevel": 1, "race": "Insect",
+        "level": 56, "size": "Small", "element": "Wind 1", "elementType": "Wind", "elementLevel": 1, "race": "Insect",
         "hp": 3477, "baseExp": 18144, "jobExp": 4412, "flee95": 275, "hit100": 303,
         "atkMin": 122, "atkMax": 122, "defense": 57, "magicDefense": 28,
-        "drops": [{ "itemId": 507, "name": "Red Herb", "rate": 40 }],
+        "drops": [
+          { "itemId": 507, "name": "Red Herb", "rate": 40 },
+          { "itemId": 480569, "name": "[Costume] Summer Forest Vacation", "rate": "???" }
+        ],
         "spawns": [{ "mapName": "moc_fild18", "description": "Sograt Desert" }]
       },
       "imageUrl": "/images/monsters/1091.gif"

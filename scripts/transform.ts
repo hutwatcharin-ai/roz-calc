@@ -64,7 +64,7 @@ export function transformMonster(raw: any): MonsterRow {
     name_en: raw.name,
     name_th: null,
     level: rz.level,
-    element: rz.element ?? null,
+    element: rz.elementType ?? null,
     element_level: rz.elementLevel ?? null,
     race: rz.race ?? null,
     size: rz.size ?? null,
@@ -83,11 +83,13 @@ export function transformMonster(raw: any): MonsterRow {
 
 export function transformDrops(raw: any): DropRow[] {
   const drops = raw.ragnarokZero.drops ?? [];
-  return drops.map((d: any) => ({
-    monster_id: raw.id,
-    item_id: d.itemId,
-    rate: d.rate,
-  }));
+  return drops
+    .map((d: any) => ({
+      monster_id: raw.id,
+      item_id: d.itemId,
+      rate: toNumberOrNull(d.rate),
+    }))
+    .filter((row: any): row is DropRow => row.rate !== null);
 }
 
 export function transformSpawns(raw: any): SpawnRow[] {

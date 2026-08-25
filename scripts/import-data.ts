@@ -28,6 +28,15 @@ async function importMonstersAndItems() {
   const dropRows = monstersRaw.flatMap(transformDrops);
   const spawnRows = monstersRaw.flatMap(transformSpawns);
 
+  const rawDropCount = monstersRaw.reduce(
+    (sum: number, m: any) => sum + (m.ragnarokZero.drops?.length ?? 0),
+    0,
+  );
+  const skippedDropCount = rawDropCount - dropRows.length;
+  if (skippedDropCount > 0) {
+    console.log(`Skipped ${skippedDropCount} drop rows with unparseable rate`);
+  }
+
   console.log(`Importing ${dropRows.length} drop rows...`);
   const { error: dropsError } = await db.from('monster_drops').upsert(dropRows, { onConflict: 'monster_id,item_id' });
   if (dropsError) {
