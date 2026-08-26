@@ -26,11 +26,15 @@ create index if not exists monsters_not_aggressive_idx
   on monsters (level)
   where is_aggressive = false;
 
--- One row per (monster, skill). skill_id is the game's numeric id; skill_name
--- is the internal constant (e.g. NPC_POISON) because the raw feed gives no
--- display name here and inventing one would be guessing.
+-- A monster's skill list is an ordered list of behaviour entries with no
+-- natural key. A skill can appear multiple times at different levels or with
+-- different state (idle vs attack), and each appearance is distinct. The
+-- primary key is the position in the source array, not the skill itself: a
+-- re-import must be able to overwrite every entry regardless of whether the
+-- feed changed only its rate or state, or added/removed entries.
 create table if not exists monster_skills (
   monster_id integer not null references monsters (id) on delete cascade,
+  entry_index integer not null,
   skill_id integer not null,
   skill_name text not null,
   skill_lv integer,
@@ -39,7 +43,7 @@ create table if not exists monster_skills (
   delay integer,
   target text,
   state text,
-  primary key (monster_id, skill_id, skill_name)
+  primary key (monster_id, entry_index)
 );
 
 create index if not exists monster_skills_monster_idx on monster_skills (monster_id);

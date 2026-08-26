@@ -185,6 +185,7 @@ export function transformSkill(raw: any): SkillRow {
 
 export interface MonsterSkillRow {
   monster_id: number;
+  entry_index: number;
   skill_id: number;
   skill_name: string;
   skill_lv: number | null;
@@ -209,24 +210,18 @@ function parsePercent(value: unknown): number | null {
 
 export function transformMonsterSkills(raw: any): MonsterSkillRow[] {
   const skills = raw?.ragnarokZero?.skills ?? [];
-  const seen = new Set<string>();
   const rows: MonsterSkillRow[] = [];
 
-  for (const s of skills) {
+  for (let index = 0; index < skills.length; index++) {
+    const s = skills[index];
     const skillId = toNumberOrNull(s?.skillId);
     const skillName = typeof s?.name === 'string' ? s.name.trim() : '';
-    // Both are primary key components; a row missing either cannot be stored.
+    // Both skillId and skillName are required fields; a row missing either cannot be stored.
     if (skillId === null || skillName === '') continue;
-
-    // The feed lists some skills twice at different levels. The primary key is
-    // (monster_id, skill_id, skill_name), so a batch containing both would
-    // abort the whole upsert. First occurrence wins.
-    const key = `${skillId}:${skillName}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
 
     rows.push({
       monster_id: raw.id,
+      entry_index: index,
       skill_id: skillId,
       skill_name: skillName,
       skill_lv: toNumberOrNull(s?.skillLv),

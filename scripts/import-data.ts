@@ -61,7 +61,7 @@ async function importMonstersAndItems() {
   const monsterSkillRows = monstersRaw.flatMap(transformMonsterSkills);
   console.log(`Importing ${monsterSkillRows.length} monster skill rows...`);
   await upsertInChunks(db, 'monster_skills', monsterSkillRows, {
-    onConflict: 'monster_id,skill_id,skill_name',
+    onConflict: 'monster_id,entry_index',
   });
 
   console.log('Monsters and items import complete.');

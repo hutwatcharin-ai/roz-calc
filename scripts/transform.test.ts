@@ -264,6 +264,7 @@ describe('transformMonsterSkills', () => {
     expect(rows).toHaveLength(1);
     expect(rows[0]).toEqual({
       monster_id: 1002,
+      entry_index: 0,
       skill_id: 176,
       skill_name: 'NPC_POISON',
       skill_lv: 3,
@@ -296,7 +297,7 @@ describe('transformMonsterSkills', () => {
     expect(rows).toEqual([]);
   });
 
-  it('de-duplicates entries that share the primary key', () => {
+  it('keeps both entries that share skillId and name but differ in skillLv', () => {
     const rows = transformMonsterSkills({
       id: 1002,
       ragnarokZero: {
@@ -306,6 +307,24 @@ describe('transformMonsterSkills', () => {
         ],
       },
     });
-    expect(rows).toHaveLength(1);
+    expect(rows).toHaveLength(2);
+    expect(rows[0].entry_index).toBe(0);
+    expect(rows[1].entry_index).toBe(1);
+  });
+
+  it('preserves entry_index even when an entry is skipped', () => {
+    const rows = transformMonsterSkills({
+      id: 1002,
+      ragnarokZero: {
+        skills: [
+          { skillId: 1, skillLv: 1, name: 'FIRST', rate: '5.00%' },
+          { skillId: 2, skillLv: 1, rate: '5.00%' }, // No name, will be skipped
+          { skillId: 3, skillLv: 1, name: 'THIRD', rate: '5.00%' },
+        ],
+      },
+    });
+    expect(rows).toHaveLength(2);
+    expect(rows[0].entry_index).toBe(0);
+    expect(rows[1].entry_index).toBe(2);
   });
 });
