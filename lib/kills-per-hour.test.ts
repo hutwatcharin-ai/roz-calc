@@ -80,4 +80,12 @@ describe('KILL_RATE_DISCLAIMER', () => {
   it('is non-empty, because the figure must never ship unlabelled', () => {
     expect(KILL_RATE_DISCLAIMER.length).toBeGreaterThan(0);
   });
+
+  it('states the figure is an upper bound, not just that a disclaimer exists', () => {
+    // Non-empty alone would stay green even if this were replaced with
+    // unrelated Thai text -- shipping the number without the "upper bound,
+    // the real figure is always lower" framing is the thing this constant
+    // exists to prevent.
+    expect(KILL_RATE_DISCLAIMER).toContain('เพดานบน');
+  });
 });
