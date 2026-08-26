@@ -53,6 +53,27 @@ table { border-collapse: collapse; width: 100%; }
 .topnav a:hover { color: var(--text); background: var(--panel); }
 .topnav a.on { color: var(--yellow-ink); background: var(--yellow); }
 
+/* A route that does not exist yet (lib/nav-links.ts ready:false). Same slot,
+   same label, but no hover state and no pointer -- the label is present, not
+   a promise of a working link. */
+.topnav .soon, .subnav .soon {
+  color: var(--faint);
+  cursor: default;
+  opacity: 0.6;
+  white-space: nowrap;
+  border-radius: 6px;
+}
+.topnav .soon {
+  font: 700 12.5px/1 "IBM Plex Mono", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 9px 13px;
+}
+.subnav .soon {
+  font: 500 13px/1.6 "Sarabun", sans-serif;
+  padding: 5px 9px;
+}
+
 .panel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card { border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); padding: 18px; }
 .card--pink { box-shadow: 4px 4px 0 var(--pink); }

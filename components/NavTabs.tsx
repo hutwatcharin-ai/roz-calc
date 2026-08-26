@@ -23,36 +23,45 @@ export default function NavTabs() {
   return (
     <>
       <nav className="topnav" aria-label="เมนูหลัก">
-        {PRIMARY_LINKS.map((link) => {
-          const active = isActivePrimaryLink(link.href, pathname);
-          return (
+        {PRIMARY_LINKS.map((link) =>
+          link.ready ? (
             <Link
               key={link.href}
               href={link.href}
-              className={active ? 'on' : undefined}
-              aria-current={active ? 'page' : undefined}
+              className={isActivePrimaryLink(link.href, pathname) ? 'on' : undefined}
+              aria-current={isActivePrimaryLink(link.href, pathname) ? 'page' : undefined}
             >
               {link.label}
             </Link>
-          );
-        })}
+          ) : (
+            // Not a link: the route does not exist yet. The label still shows
+            // so players know it is coming, but there is nothing to click and
+            // nothing to 404 into.
+            <span key={link.href} className="soon" aria-disabled="true">
+              {link.label}
+            </span>
+          ),
+        )}
       </nav>
 
       {secondRow && (
         <nav className="subnav" aria-label="เมนูย่อย">
-          {secondRow.map((link) => {
-            const active = isActiveLink(link.href, pathname);
-            return (
+          {secondRow.map((link) =>
+            link.ready ? (
               <Link
                 key={link.href}
                 href={link.href}
-                className={active ? 'on' : undefined}
-                aria-current={active ? 'page' : undefined}
+                className={isActiveLink(link.href, pathname) ? 'on' : undefined}
+                aria-current={isActiveLink(link.href, pathname) ? 'page' : undefined}
               >
                 {link.label}
               </Link>
-            );
-          })}
+            ) : (
+              <span key={link.href} className="soon" aria-disabled="true">
+                {link.label}
+              </span>
+            ),
+          )}
         </nav>
       )}
     </>

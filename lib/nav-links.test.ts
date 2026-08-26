@@ -5,7 +5,13 @@ import {
   isActivePrimaryLink,
   PRIMARY_LINKS,
   SECTION_LINKS,
+  type NavLink,
 } from './nav-links';
+
+// Routes confirmed to exist today (finding #1): / , /drop-finder,
+// /database/monsters, /database/items, plus the two detail routes, which are
+// not entries in these tables. Every other listed href is a Wave 2 promise.
+const READY_ROUTES = new Set(['/', '/drop-finder', '/database/monsters', '/database/items']);
 
 describe('sectionForPath', () => {
   it('puts database routes in the database section', () => {
@@ -67,8 +73,10 @@ describe('isActivePrimaryLink', () => {
     expect(isActivePrimaryLink('/database/monsters', '/database/cards')).toBe(true);
   });
 
-  it('highlights the tools section link on a sibling tools page, not the database one', () => {
-    expect(isActivePrimaryLink('/tools/elements', '/tools/farm-planner')).toBe(true);
+  it('never highlights the tools section link, since /tools/elements is not ready', () => {
+    // Would be true under the plain section-matching rule below -- the
+    // readiness gate must win.
+    expect(isActivePrimaryLink('/tools/elements', '/tools/farm-planner')).toBe(false);
     expect(isActivePrimaryLink('/database/monsters', '/tools/farm-planner')).toBe(false);
   });
 
@@ -105,5 +113,26 @@ describe('link tables', () => {
   it('gives every link a non-empty Thai label', () => {
     const all = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools];
     for (const link of all) expect(link.label.trim().length).toBeGreaterThan(0);
+  });
+
+  it('marks ready exactly the routes that exist today, and no others', () => {
+    const all = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools];
+    for (const link of all) {
+      expect(link.ready).toBe(READY_ROUTES.has(link.href));
+    }
+  });
+
+  it('never reports an unready link active, by either matching function', () => {
+    const all: NavLink[] = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools];
+    const unready = all.filter((l) => !l.ready);
+    expect(unready.length).toBeGreaterThan(0); // sanity: there is something to test
+
+    for (const link of unready) {
+      // Even visiting the link's own route (impossible in practice, since it
+      // renders as text, but the function must still refuse) must not report
+      // it active.
+      expect(isActiveLink(link.href, link.href)).toBe(false);
+      expect(isActivePrimaryLink(link.href, link.href)).toBe(false);
+    }
   });
 });
