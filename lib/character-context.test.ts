@@ -60,6 +60,14 @@ describe('parseCharacterContext', () => {
   it('rejects a JSON array, which parses but is not a context', () => {
     expect(parseCharacterContext('[]')).toBeNull();
   });
+
+  it('rejects job: "constructor" (prototype property) to prevent NaN in calculations', () => {
+    expect(parseCharacterContext(JSON.stringify({ ...VALID, job: 'constructor' }))).toBeNull();
+  });
+
+  it('rejects job: "__proto__" (prototype property) to prevent NaN in calculations', () => {
+    expect(parseCharacterContext(JSON.stringify({ ...VALID, job: '__proto__' }))).toBeNull();
+  });
 });
 
 describe('readCharacterContext', () => {

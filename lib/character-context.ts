@@ -46,7 +46,7 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
   if (!isPositiveNumber(level)) return null;
   if (!isPositiveNumber(damagePerHit)) return null;
   if (!isPositiveNumber(attacksPerSecond)) return null;
-  if (typeof job !== 'string' || !(job in JOB_PROFILES)) return null;
+  if (typeof job !== 'string' || !Object.prototype.hasOwnProperty.call(JOB_PROFILES, job)) return null;
 
   return { level, job: job as JobKey, damagePerHit, attacksPerSecond };
 }
