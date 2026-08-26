@@ -105,6 +105,7 @@ describe('transformItem', () => {
       buy_price: null,
       sell_price: null,
       icon_url: '/images/items/1131.gif',
+      description: 'A blue-bladed sword imbued with the power of water.\nType : Sword\nATK : 100\nWeight : 60\nElement : Water\nWeapon Level : 4\nRequired Level : 40\nEquippable by : Swordsman Class, Merchant Class, Thief Class',
     });
   });
 
@@ -134,5 +135,26 @@ describe('transformSkill', () => {
     const row = transformSkill(skillsFixture[0]);
     expect(row.type).toBeNull();
     expect(row.classes).toEqual([]);
+  });
+});
+
+describe('transformItem description', () => {
+  it('joins description lines with newlines', () => {
+    const row = transformItem({
+      id: 4001,
+      displayName: 'Poring Card',
+      description: { lines: ['ATK +20', 'Class : Card'] },
+    });
+    expect(row.description).toBe('ATK +20\nClass : Card');
+  });
+
+  it('returns null when the item has no description', () => {
+    const row = transformItem({ id: 909, displayName: 'Jellopy' });
+    expect(row.description).toBeNull();
+  });
+
+  it('returns null for an empty lines array rather than an empty string', () => {
+    const row = transformItem({ id: 910, displayName: 'Fluff', description: { lines: [] } });
+    expect(row.description).toBeNull();
   });
 });

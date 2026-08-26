@@ -46,6 +46,7 @@ export interface ItemRow {
   buy_price: number | null;
   sell_price: number | null;
   icon_url: string | null;
+  description: string | null;
 }
 
 function toNumberOrNull(value: unknown): number | null {
@@ -120,6 +121,10 @@ export function transformItem(raw: any): ItemRow {
     buy_price: toNumberOrNull(raw.attributes?.buyPrice),
     sell_price: toNumberOrNull(raw.attributes?.sellPrice),
     icon_url: raw.iconUrl ?? null,
+    // Stored as one string with newlines preserved; the item page renders it
+    // with white-space: pre-line. An empty lines array becomes null, not "",
+    // so "no description" is one value everywhere instead of two.
+    description: raw.description?.lines?.length ? raw.description.lines.join('\n') : null,
   };
 }
 

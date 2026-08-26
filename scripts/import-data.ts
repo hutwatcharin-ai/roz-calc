@@ -6,6 +6,27 @@ function loadJson(path: string): any {
   return JSON.parse(readFileSync(path, 'utf-8'));
 }
 
+// Supabase rejects or silently truncates very large single requests. Every
+// import upsert goes through here so row count never becomes a hidden cap.
+const UPSERT_CHUNK = 500;
+
+async function upsertInChunks(
+  db: ReturnType<typeof supabaseAdmin>,
+  table: string,
+  rows: any[],
+  options?: { onConflict: string },
+) {
+  for (let i = 0; i < rows.length; i += UPSERT_CHUNK) {
+    const chunk = rows.slice(i, i + UPSERT_CHUNK);
+    const { error } = await db.from(table).upsert(chunk, options);
+    if (error) {
+      throw new Error(
+        `Failed to import ${table} rows ${i}-${i + chunk.length - 1}, aborting: ${error.message}`,
+      );
+    }
+  }
+}
+
 async function importMonstersAndItems() {
   const db = supabaseAdmin();
   const monstersRaw = loadJson('data/raw/monsters.json').monsters;
@@ -13,17 +34,11 @@ async function importMonstersAndItems() {
 
   console.log(`Importing ${itemsRaw.length} items...`);
   const itemRows = itemsRaw.map(transformItem);
-  const { error: itemsError } = await db.from('items').upsert(itemRows);
-  if (itemsError) {
-    throw new Error(`Failed to import items, aborting (no partial overwrite): ${itemsError.message}`);
-  }
+  await upsertInChunks(db, 'items', itemRows);
 
   console.log(`Importing ${monstersRaw.length} monsters...`);
   const monsterRows = monstersRaw.map(transformMonster);
-  const { error: monstersError } = await db.from('monsters').upsert(monsterRows);
-  if (monstersError) {
-    throw new Error(`Failed to import monsters, aborting: ${monstersError.message}`);
-  }
+  await upsertInChunks(db, 'monsters', monsterRows);
 
   const dropRows = monstersRaw.flatMap(transformDrops);
   const spawnRows = monstersRaw.flatMap(transformSpawns);
@@ -38,18 +53,10 @@ async function importMonstersAndItems() {
   }
 
   console.log(`Importing ${dropRows.length} drop rows...`);
-  const { error: dropsError } = await db.from('monster_drops').upsert(dropRows, { onConflict: 'monster_id,item_id' });
-  if (dropsError) {
-    throw new Error(`Failed to import monster_drops: ${dropsError.message}`);
-  }
+  await upsertInChunks(db, 'monster_drops', dropRows, { onConflict: 'monster_id,item_id' });
 
   console.log(`Importing ${spawnRows.length} spawn rows...`);
-  const { error: spawnsError } = await db
-    .from('monster_spawns')
-    .upsert(spawnRows, { onConflict: 'monster_id,map_code' });
-  if (spawnsError) {
-    throw new Error(`Failed to import monster_spawns: ${spawnsError.message}`);
-  }
+  await upsertInChunks(db, 'monster_spawns', spawnRows, { onConflict: 'monster_id,map_code' });
 
   console.log('Monsters and items import complete.');
 }
