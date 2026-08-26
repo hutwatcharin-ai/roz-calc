@@ -29,7 +29,7 @@ export function aggroLevel(
 ): AggroLevel {
   if (!monster.is_aggressive) return 'safe';
   if (monster.atk_max === null) return 'aggressive';
-  if (playerMaxHp === null || playerMaxHp <= 0) return 'aggressive';
+  if (playerMaxHp === null || !Number.isFinite(playerMaxHp) || playerMaxHp <= 0) return 'aggressive';
   return monster.atk_max >= playerMaxHp * DANGER_ATK_RATIO ? 'danger' : 'caution';
 }
 

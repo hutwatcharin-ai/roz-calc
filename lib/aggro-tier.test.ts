@@ -36,6 +36,18 @@ describe('aggroLevel', () => {
   it('reports the ungraded level when player HP is zero, never dividing by it', () => {
     expect(aggroLevel({ is_aggressive: true, atk_max: 100 }, 0)).toBe('aggressive');
   });
+
+  it('reports the ungraded level when player HP is NaN, preventing invented answers', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: 100 }, NaN)).toBe('aggressive');
+  });
+
+  it('threshold scales with player HP: 150 ATK is caution at 5000 HP but danger at 100 HP', () => {
+    // Same monster, different player sizes. Threshold should move with the player.
+    // At 5000 HP: threshold is 1000, so 150 is caution
+    expect(aggroLevel({ is_aggressive: true, atk_max: 150 }, 5000)).toBe('caution');
+    // At 100 HP: threshold is 20, so 150 is danger
+    expect(aggroLevel({ is_aggressive: true, atk_max: 150 }, 100)).toBe('danger');
+  });
 });
 
 describe('playerMaxHpFromContext', () => {
