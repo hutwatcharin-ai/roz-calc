@@ -95,6 +95,7 @@ table { border-collapse: collapse; width: 100%; }
   align-items: center;
   gap: 4px;
   padding: 2px 8px;
+  border: 1.5px solid transparent;
   border-radius: 999px;
   font: 600 12px/1.6 "Sarabun", sans-serif;
   white-space: nowrap;
@@ -105,9 +106,17 @@ table { border-collapse: collapse; width: 100%; }
 .aggro__glyph { font-size: 11px; }
 
 .aggro--safe { background: var(--status-safe); color: var(--status-safe-ink); }
-.aggro--aggressive { background: var(--yellow); color: var(--yellow-ink); }
+
+/* "aggressive" (attacks first, ungraded -- no player or no monster ATK to
+   grade against) is hollow: outline only, no fill, distinct glyph ("?").
+   "caution" (attacks first, graded mild) is filled solid, same as "danger" --
+   the fill says "this is graded", the colour says how bad. Colour alone used
+   to be the only difference between these two states; now the fill/border and
+   the glyph both carry it too. Both stay inside --yellow, the only colour this
+   pair may use. */
+.aggro--aggressive { background: transparent; border-color: var(--yellow); color: var(--yellow); }
 .aggro--caution { background: var(--yellow); color: var(--yellow-ink); }
-.aggro--danger { background: var(--status-danger); color: var(--status-danger-ink); }
+.aggro--danger { background: var(--status-danger); color: var(--status-danger-ink); font-weight: 700; }
 
 /* Two-tier nav (spec 6.1). The shell wraps so the second row lands on its own
    line; the search box keeps its place on the first line by not being allowed
@@ -140,11 +149,23 @@ table { border-collapse: collapse; width: 100%; }
 .subnav a:hover { color: var(--text); background: var(--panel-2); }
 .subnav a.on { color: var(--yellow); background: var(--panel-2); }
 
-/* On a phone the top row collapses to the two most-used pages plus search; the
-   section links stay reachable through the second row, which scrolls. */
+/* On a phone there is not enough inline room beside the brand mark and search
+   button for four nav links plus the section row (measured: .topnav had
+   clientWidth 68px against a 349px scrollWidth, so two of four primary links
+   sat entirely off-screen, reachable only by scrolling a 68px-wide strip).
+   No hamburger: with only four short labels left in the top row after the
+   two-tier split, a toggle would hide reachable content for no gain. Instead
+   .topnav takes the full shell width on its own line and wraps, so all four
+   are visible with no interaction; brand and search share the first line
+   (both are short), and .subnav moves below .topnav. */
 @media (max-width: 640px) {
-  .topnav { font-size: 13px; }
-  .subnav { padding-top: 4px; }
+  .topnav {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    order: 2;
+  }
+  .subnav { order: 3; padding-top: 4px; }
 }
 
 /* Shared list-table styling. Every list page uses .data-table so one rule set
@@ -213,6 +234,4 @@ table { border-collapse: collapse; width: 100%; }
   /* The name cell is the card's heading: full width, no label, no alignment. */
   .data-table td[data-label=""] { display: block; padding-bottom: 6px; }
   .data-table td[data-label=""]::before { content: none; }
-
-  .data-table td.num { text-align: right; }
 }
