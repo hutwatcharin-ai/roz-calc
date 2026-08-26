@@ -49,8 +49,19 @@ describe('expPerHour', () => {
     expect(expPerHour(2400, 50)).toBe(120000);
   });
 
-  it('is zero when the monster gives no experience', () => {
-    expect(expPerHour(2400, 0)).toBe(0);
+  it('returns null when EXP per kill is zero, which is the unknown-EXP marker, not a real zero', () => {
+    // transformMonster stores 0 for monsters whose raw base_exp is "" or
+    // "???" -- 202 of 524 monsters, none of them a literal 0 in the feed.
+    // Reporting "0 EXP/hour" for one of those would invent a game value.
+    expect(expPerHour(2400, 0)).toBeNull();
+  });
+
+  it('returns null for negative EXP per kill', () => {
+    expect(expPerHour(2400, -50)).toBeNull();
+  });
+
+  it('returns null for non-finite EXP per kill instead of producing NaN', () => {
+    expect(expPerHour(2400, Number.NaN)).toBeNull();
   });
 
   it('stays in the expected range for a server-average monster', () => {

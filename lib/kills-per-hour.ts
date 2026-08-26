@@ -47,6 +47,12 @@ export function killRate(input: KillRateInput): KillRate | null {
   };
 }
 
-export function expPerHour(killsPerHour: number, expPerKill: number): number {
+// expPerKill of 0 is the unknown-EXP marker transformMonster writes when the
+// raw feed says "" or "???" -- not a monster that gives no experience. 202 of
+// 524 monsters carry that marker, every one of them from a sentinel, not a
+// literal zero in the feed. Reporting "0 EXP/ชั่วโมง" for one of those would
+// state a game value we do not have.
+export function expPerHour(killsPerHour: number, expPerKill: number): number | null {
+  if (!isUsable(expPerKill)) return null;
   return killsPerHour * expPerKill;
 }
