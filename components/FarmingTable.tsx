@@ -16,21 +16,21 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
 
   return (
     <div className="card card--yellow" style={{ overflowX: 'auto' }}>
-      <table>
+      <table className="data-table">
         <thead>
           <tr>
-            <th style={{ textAlign: 'left' }}>มอนสเตอร์</th>
-            <th style={{ textAlign: 'right' }}>Lv</th>
-            <th style={{ textAlign: 'right' }}>HP</th>
-            <th style={{ textAlign: 'right' }}>EXP/HP</th>
-            <th style={{ textAlign: 'right' }}>Zeny/ตัว</th>
-            <th style={{ textAlign: 'left' }}>แมพ</th>
+            <th>มอนสเตอร์</th>
+            <th className="num">Lv</th>
+            <th className="num">HP</th>
+            <th className="num">EXP/HP</th>
+            <th className="num">Zeny/ตัว</th>
+            <th>แมพ</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => (
             <tr key={row.monster_id}>
-              <td>
+              <td data-label="">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   {row.image_url && (
                     <img
@@ -44,11 +44,11 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                   {row.name_en}
                 </div>
               </td>
-              <td className="mono" style={{ textAlign: 'right' }}>{row.level}</td>
-              <td className="mono" style={{ textAlign: 'right' }}>{row.hp.toLocaleString()}</td>
-              <td className="mono" style={{ textAlign: 'right', color: 'var(--yellow)' }}>{row.exp_per_hp}</td>
-              <td className="mono" style={{ textAlign: 'right' }}>{row.avg_zeny_per_kill.toLocaleString()}</td>
-              <td>{row.spawn ?? '—'}</td>
+              <td data-label="Lv" className="num">{row.level}</td>
+              <td data-label="HP" className="num">{row.hp.toLocaleString()}</td>
+              <td data-label="EXP/HP" className="num" style={{ color: 'var(--yellow)' }}>{row.exp_per_hp}</td>
+              <td data-label="Zeny/ตัว" className="num">{row.avg_zeny_per_kill.toLocaleString()}</td>
+              <td data-label="แมพ">{row.spawn ?? '—'}</td>
             </tr>
           ))}
         </tbody>

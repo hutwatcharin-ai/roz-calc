@@ -120,3 +120,73 @@ table { border-collapse: collapse; width: 100%; }
   .topnav { font-size: 13px; }
   .subnav { padding-top: 4px; }
 }
+
+/* Shared list-table styling. Every list page uses .data-table so one rule set
+   covers all six of them (spec 6.4). */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 14px/1.6 "Sarabun", sans-serif;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--hair);
+  color: var(--faint);
+  font: 600 12px/1.6 "Sarabun", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover { background: var(--panel-2); }
+.data-table td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.data-table th.num { text-align: right; }
+
+/* Below 720px the table becomes stacked cards. The measured failure: at 340px
+   the Farming Finder's fourth column, EXP/HP, sits off-screen -- and that value
+   is the entire point of the page. Most visitors play on a phone, so this is
+   the majority case, not an edge case.
+   Same HTML, different display. Each cell carries its own label via data-label,
+   so nothing is hidden and nothing is rendered twice. */
+@media (max-width: 720px) {
+  .data-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
+
+  .data-table tr {
+    border: 1px solid var(--hair);
+    border-radius: var(--radius);
+    background: var(--panel-2);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+
+  .data-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    padding: 3px 0;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    color: var(--faint);
+    font: 600 12px/1.6 "Sarabun", sans-serif;
+    white-space: nowrap;
+  }
+
+  /* The name cell is the card's heading: full width, no label, no alignment. */
+  .data-table td[data-label=""] { display: block; padding-bottom: 6px; }
+  .data-table td[data-label=""]::before { content: none; }
+
+  .data-table td.num { text-align: right; }
+}

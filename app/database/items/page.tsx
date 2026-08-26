@@ -63,18 +63,18 @@ export default async function ItemListPage({
       </form>
 
       <div className="card">
-        <table>
+        <table className="data-table">
           <thead>
             <tr>
-              <th style={{ textAlign: 'left' }}>ชื่อ</th>
-              <th style={{ textAlign: 'left' }}>หมวด</th>
-              <th style={{ textAlign: 'left' }}>ประเภทอาวุธ</th>
+              <th>ชื่อ</th>
+              <th>หมวด</th>
+              <th>ประเภทอาวุธ</th>
             </tr>
           </thead>
           <tbody>
             {(items ?? []).map((it) => (
               <tr key={it.id}>
-                <td>
+                <td data-label="">
                   <Link href={`/database/items/${it.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {it.icon_url && (
                       <img src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
@@ -82,8 +82,8 @@ export default async function ItemListPage({
                     {it.name_en}
                   </Link>
                 </td>
-                <td>{it.category}</td>
-                <td>{it.weapon_type ?? '—'}</td>
+                <td data-label="หมวด">{it.category ?? '—'}</td>
+                <td data-label="ประเภทอาวุธ">{it.weapon_type ?? '—'}</td>
               </tr>
             ))}
             {(items ?? []).length === 0 && (

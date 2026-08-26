@@ -75,19 +75,19 @@ export default async function MonsterListPage({
       </form>
 
       <div className="card">
-        <table>
+        <table className="data-table">
           <thead>
             <tr>
-              <th style={{ textAlign: 'left' }}>ชื่อ</th>
-              <th style={{ textAlign: 'right' }}>Lv</th>
-              <th style={{ textAlign: 'left' }}>เผ่า</th>
-              <th style={{ textAlign: 'left' }}>ธาตุ</th>
+              <th>ชื่อ</th>
+              <th className="num">Lv</th>
+              <th>เผ่า</th>
+              <th>ธาตุ</th>
             </tr>
           </thead>
           <tbody>
             {(monsters ?? []).map((m) => (
               <tr key={m.id}>
-                <td>
+                <td data-label="">
                   <Link href={`/database/monsters/${m.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {m.image_url && (
                       <img src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
@@ -95,9 +95,9 @@ export default async function MonsterListPage({
                     {m.name_en}
                   </Link>
                 </td>
-                <td className="mono" style={{ textAlign: 'right' }}>{m.level}</td>
-                <td>{m.race}</td>
-                <td>{m.element}</td>
+                <td data-label="Lv" className="num">{m.level}</td>
+                <td data-label="เผ่า">{m.race ?? '—'}</td>
+                <td data-label="ธาตุ">{m.element ?? '—'}</td>
               </tr>
             ))}
             {(monsters ?? []).length === 0 && (
