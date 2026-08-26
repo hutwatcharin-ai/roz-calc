@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { supabaseAdmin } from '../lib/supabase';
-import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill } from './transform';
+import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill, transformMonsterSkills } from './transform';
 
 function loadJson(path: string): any {
   return JSON.parse(readFileSync(path, 'utf-8'));
@@ -57,6 +57,12 @@ async function importMonstersAndItems() {
 
   console.log(`Importing ${spawnRows.length} spawn rows...`);
   await upsertInChunks(db, 'monster_spawns', spawnRows, { onConflict: 'monster_id,map_code' });
+
+  const monsterSkillRows = monstersRaw.flatMap(transformMonsterSkills);
+  console.log(`Importing ${monsterSkillRows.length} monster skill rows...`);
+  await upsertInChunks(db, 'monster_skills', monsterSkillRows, {
+    onConflict: 'monster_id,skill_id,skill_name',
+  });
 
   console.log('Monsters and items import complete.');
 }

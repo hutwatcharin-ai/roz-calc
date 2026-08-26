@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import monstersFixture from './fixtures/monsters.sample.json';
 import itemsFixture from './fixtures/items.sample.json';
 import skillsFixture from './fixtures/skills.sample.json';
-import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill } from './transform';
+import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill, transformMonsterSkills } from './transform';
 
 describe('transformMonster', () => {
   it('maps a raw monster to the monsters table shape', () => {
@@ -26,6 +26,17 @@ describe('transformMonster', () => {
       base_exp: 338,
       job_exp: 75,
       image_url: '/images/monsters/1001.gif',
+      is_aggressive: false,
+      is_mvp: false,
+      loots_items: false,
+      matk_min: null,
+      matk_max: null,
+      str: null,
+      agi: null,
+      vit: null,
+      int_: null,
+      dex: null,
+      luk: null,
     });
   });
 
@@ -65,6 +76,17 @@ describe('transformMonster', () => {
       base_exp: 0,
       job_exp: 0,
       image_url: '/images/monsters/1185.gif',
+      is_aggressive: false,
+      is_mvp: false,
+      loots_items: false,
+      matk_min: null,
+      matk_max: null,
+      str: null,
+      agi: null,
+      vit: null,
+      int_: null,
+      dex: null,
+      luk: null,
     });
   });
 });
@@ -156,5 +178,134 @@ describe('transformItem description', () => {
   it('returns null for an empty lines array rather than an empty string', () => {
     const row = transformItem({ id: 910, displayName: 'Fluff', description: { lines: [] } });
     expect(row.description).toBeNull();
+  });
+});
+
+describe('transformMonster special status and stats', () => {
+  const base = {
+    id: 1002,
+    name: 'Poring',
+    ragnarokZero: { level: 1, hp: 50, baseExp: 2, jobExp: 1 },
+  };
+
+  it('reads Aggressive out of the specialStatus object array', () => {
+    const row = transformMonster({
+      ...base,
+      ragnarokZero: {
+        ...base.ragnarokZero,
+        specialStatus: [{ raw: 'Can move', en: 'Can move' }, { raw: 'Aggressive', en: 'Aggressive' }],
+      },
+    });
+    expect(row.is_aggressive).toBe(true);
+    expect(row.is_mvp).toBe(false);
+    expect(row.loots_items).toBe(false);
+  });
+
+  it('reads MVP and Loots items independently', () => {
+    const row = transformMonster({
+      ...base,
+      ragnarokZero: {
+        ...base.ragnarokZero,
+        specialStatus: [{ raw: 'MVP', en: 'MVP' }, { raw: 'Loots items', en: 'Loots items' }],
+      },
+    });
+    expect(row.is_mvp).toBe(true);
+    expect(row.loots_items).toBe(true);
+    expect(row.is_aggressive).toBe(false);
+  });
+
+  it('defaults every flag to false when specialStatus is missing', () => {
+    const row = transformMonster(base);
+    expect(row.is_aggressive).toBe(false);
+    expect(row.is_mvp).toBe(false);
+    expect(row.loots_items).toBe(false);
+  });
+
+  it('maps baseStats.int to the int_ column', () => {
+    const row = transformMonster({
+      ...base,
+      ragnarokZero: {
+        ...base.ragnarokZero,
+        baseStats: { str: 12, agi: 15, vit: 10, int: 5, dex: 19, luk: 5 },
+      },
+    });
+    expect(row.int_).toBe(5);
+    expect(row.str).toBe(12);
+    expect(row.dex).toBe(19);
+  });
+
+  it('leaves stats null when baseStats is absent rather than defaulting to zero', () => {
+    const row = transformMonster(base);
+    expect(row.str).toBeNull();
+    expect(row.int_).toBeNull();
+    expect(row.matk_min).toBeNull();
+  });
+});
+
+describe('transformMonsterSkills', () => {
+  it('parses the percent-string rate into a number', () => {
+    const rows = transformMonsterSkills({
+      id: 1002,
+      ragnarokZero: {
+        skills: [
+          {
+            skillId: 176,
+            skillLv: 3,
+            name: 'NPC_POISON',
+            rate: '5.00%',
+            state: 'attack',
+            castTime: 800,
+            delay: 5000,
+            target: 'target',
+          },
+        ],
+      },
+    });
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toEqual({
+      monster_id: 1002,
+      skill_id: 176,
+      skill_name: 'NPC_POISON',
+      skill_lv: 3,
+      rate: 5,
+      cast_time: 800,
+      delay: 5000,
+      target: 'target',
+      state: 'attack',
+    });
+  });
+
+  it('returns an empty array when the monster has no skills', () => {
+    expect(transformMonsterSkills({ id: 1002, ragnarokZero: {} })).toEqual([]);
+  });
+
+  it('keeps the row with a null rate rather than dropping the skill', () => {
+    const rows = transformMonsterSkills({
+      id: 1002,
+      ragnarokZero: { skills: [{ skillId: 1, skillLv: 1, name: 'NPC_X', rate: '' }] },
+    });
+    expect(rows).toHaveLength(1);
+    expect(rows[0].rate).toBeNull();
+  });
+
+  it('drops a skill entry with no name, which cannot satisfy the primary key', () => {
+    const rows = transformMonsterSkills({
+      id: 1002,
+      ragnarokZero: { skills: [{ skillId: 1, skillLv: 1, rate: '5.00%' }] },
+    });
+    expect(rows).toEqual([]);
+  });
+
+  it('de-duplicates entries that share the primary key', () => {
+    const rows = transformMonsterSkills({
+      id: 1002,
+      ragnarokZero: {
+        skills: [
+          { skillId: 176, skillLv: 3, name: 'NPC_POISON', rate: '5.00%' },
+          { skillId: 176, skillLv: 5, name: 'NPC_POISON', rate: '9.00%' },
+        ],
+      },
+    });
+    expect(rows).toHaveLength(1);
   });
 });

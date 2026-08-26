@@ -19,6 +19,17 @@ export interface MonsterRow {
   base_exp: number;
   job_exp: number;
   image_url: string | null;
+  is_aggressive: boolean;
+  is_mvp: boolean;
+  loots_items: boolean;
+  matk_min: number | null;
+  matk_max: number | null;
+  str: number | null;
+  agi: number | null;
+  vit: number | null;
+  int_: number | null;
+  dex: number | null;
+  luk: number | null;
 }
 
 export interface DropRow {
@@ -58,6 +69,15 @@ function toNumberOrNull(value: unknown): number | null {
   return null;
 }
 
+// specialStatus is an array of {raw, en} objects, not strings. The distinct raw
+// values across all 524 monsters are: "", "Physically attackable", "Can move",
+// "Loots items", "Aggressive", "MVP", "mini".
+function hasSpecialStatus(raw: any, label: string): boolean {
+  const list = raw?.ragnarokZero?.specialStatus;
+  if (!Array.isArray(list)) return false;
+  return list.some((s: any) => s?.raw === label);
+}
+
 export function transformMonster(raw: any): MonsterRow {
   const rz = raw.ragnarokZero;
   return {
@@ -83,6 +103,19 @@ export function transformMonster(raw: any): MonsterRow {
     base_exp: toNumberOrNull(rz.baseExp) ?? 0,
     job_exp: toNumberOrNull(rz.jobExp) ?? 0,
     image_url: raw.imageUrl ?? null,
+    is_aggressive: hasSpecialStatus(raw, 'Aggressive'),
+    is_mvp: hasSpecialStatus(raw, 'MVP'),
+    loots_items: hasSpecialStatus(raw, 'Loots items'),
+    matk_min: toNumberOrNull(rz.magicAtkMin),
+    matk_max: toNumberOrNull(rz.magicAtkMax),
+    // Absent baseStats stays null. Defaulting to 0 would render as a real stat
+    // of zero on the monster page, which is a different claim than "unknown".
+    str: toNumberOrNull(rz.baseStats?.str),
+    agi: toNumberOrNull(rz.baseStats?.agi),
+    vit: toNumberOrNull(rz.baseStats?.vit),
+    int_: toNumberOrNull(rz.baseStats?.int),
+    dex: toNumberOrNull(rz.baseStats?.dex),
+    luk: toNumberOrNull(rz.baseStats?.luk),
   };
 }
 
@@ -148,4 +181,62 @@ export function transformSkill(raw: any): SkillRow {
     classes: raw.classes ?? [],
     icon_url: raw.icon ?? null,
   };
+}
+
+export interface MonsterSkillRow {
+  monster_id: number;
+  skill_id: number;
+  skill_name: string;
+  skill_lv: number | null;
+  rate: number | null;
+  cast_time: number | null;
+  delay: number | null;
+  target: string | null;
+  state: string | null;
+}
+
+// rate arrives as a percent string like "5.00%". Strip the sign and parse; an
+// empty or unparseable rate becomes null rather than dropping the skill, since
+// "this monster casts Poison" is useful even when the frequency is unknown.
+function parsePercent(value: unknown): number | null {
+  if (typeof value === 'number') return value;
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim().replace(/%$/, '');
+  if (trimmed === '') return null;
+  const n = Number(trimmed);
+  return Number.isNaN(n) ? null : n;
+}
+
+export function transformMonsterSkills(raw: any): MonsterSkillRow[] {
+  const skills = raw?.ragnarokZero?.skills ?? [];
+  const seen = new Set<string>();
+  const rows: MonsterSkillRow[] = [];
+
+  for (const s of skills) {
+    const skillId = toNumberOrNull(s?.skillId);
+    const skillName = typeof s?.name === 'string' ? s.name.trim() : '';
+    // Both are primary key components; a row missing either cannot be stored.
+    if (skillId === null || skillName === '') continue;
+
+    // The feed lists some skills twice at different levels. The primary key is
+    // (monster_id, skill_id, skill_name), so a batch containing both would
+    // abort the whole upsert. First occurrence wins.
+    const key = `${skillId}:${skillName}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    rows.push({
+      monster_id: raw.id,
+      skill_id: skillId,
+      skill_name: skillName,
+      skill_lv: toNumberOrNull(s?.skillLv),
+      rate: parsePercent(s?.rate),
+      cast_time: toNumberOrNull(s?.castTime),
+      delay: toNumberOrNull(s?.delay),
+      target: typeof s?.target === 'string' && s.target !== '' ? s.target : null,
+      state: typeof s?.state === 'string' && s.state !== '' ? s.state : null,
+    });
+  }
+
+  return rows;
 }
