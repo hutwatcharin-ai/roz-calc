@@ -2,14 +2,28 @@
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
+import { cache } from 'react';
+
+// Shared by generateMetadata and the page body so a request does one query for
+// the row instead of two -- the two callers used to select different column
+// lists, which meant Next's fetch memoisation couldn't collapse them. Returns
+// the raw { data, error } so each caller keeps its own error handling; this
+// helper must not swallow the error itself.
+const getMonster = cache((id: number) =>
+  supabaseBrowser().from('monsters').select('*').eq('id', id).maybeSingle()
+);
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const db = supabaseBrowser();
-  const { data: monster } = await db
-    .from('monsters')
-    .select('name_en, level, element, hp, race')
-    .eq('id', Number(params.id))
-    .maybeSingle();
+  const { data: monster, error } = await getMonster(Number(params.id));
+
+  // A failed query must not read as "this monster does not exist" -- only a
+  // clean query returning no row may claim that. On error we know nothing
+  // about the row, so we make no title/description claim either way rather
+  // than tell a crawler a live page is dead.
+  if (error) {
+    console.error('monster detail query failed (metadata)', error);
+    return {};
+  }
 
   if (!monster) return { title: 'ไม่พบมอนสเตอร์นี้' };
 
@@ -32,7 +46,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
   // maybeSingle (not single): a missing id must come back as data:null with no
   // error, so a genuine 404 stays distinguishable from a real query failure.
-  const { data: monster, error } = await db.from('monsters').select('*').eq('id', id).maybeSingle();
+  const { data: monster, error } = await getMonster(id);
   const { data: drops } = await db
     .from('monster_drops')
     .select('rate, items(name_en, sell_price, icon_url)')

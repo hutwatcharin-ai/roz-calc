@@ -23,9 +23,12 @@ async function allIds(table: 'monsters' | 'items'): Promise<number[]> {
       .order('id')
       .range(from, from + PAGE - 1);
 
+    // A mid-loop error must fail the build/response loudly, not truncate
+    // silently: swallowing it here would mean the ~1,000-row cap and a
+    // transient query failure look identical from the outside -- a
+    // sitemap.xml that's quietly missing a quarter of the site.
     if (error) {
-      console.error(`sitemap: ${table} query failed`, error);
-      break;
+      throw new Error(`sitemap: ${table} query failed for range ${from}-${from + PAGE - 1}: ${error.message}`);
     }
     if (!data || data.length === 0) break;
 
