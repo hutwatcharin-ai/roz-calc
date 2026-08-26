@@ -40,9 +40,8 @@ async function main() {
     // prefix back for rozerodb's /assets/local/catalog/ prefix, so a missing
     // file behind a rewritten path still gets fetched below instead of being
     // silently skipped and left as a dead link.
-    const sourcePath = icon.startsWith(PUBLIC_PREFIX)
-      ? `/assets/local/catalog/${file}`
-      : icon;
+    const wasMirrored = icon.startsWith(PUBLIC_PREFIX);
+    const sourcePath = wasMirrored ? `/assets/local/catalog/${file}` : icon;
     const outPath = join(OUT_DIR, file);
 
     if (existsSync(outPath)) {
@@ -51,11 +50,24 @@ async function main() {
       continue;
     }
 
+    // On a failed fetch below, an entry that was not already mirrored falls
+    // back to sourcePath (the third-party URL) as before -- there is nothing
+    // better to point at. But an entry that WAS already mirrored must keep
+    // pointing at its own local path even though the file is missing: falling
+    // back to sourcePath here would write rozerodb's third-party URL into the
+    // database on the next import, reintroducing the exact 404 this script
+    // exists to prevent. Leaving skill.icon untouched keeps it a local path
+    // (still broken until the next successful mirror) rather than a
+    // regression to a worse, third-party-dependent one.
+    function recordFailure(reason: string) {
+      failed.push(`${skill.slug}: ${reason}${wasMirrored ? ' (already mirrored, icon left unchanged)' : ''}`);
+      if (!wasMirrored) skill.icon = sourcePath;
+    }
+
     try {
       const res = await fetch(`${SOURCE_ORIGIN}${sourcePath}`);
       if (!res.ok) {
-        failed.push(`${skill.slug}: HTTP ${res.status}`);
-        skill.icon = sourcePath;
+        recordFailure(`HTTP ${res.status}`);
         await sleep(DELAY_MS);
         continue;
       }
@@ -72,8 +84,7 @@ async function main() {
       // with no error anywhere -- exactly the silent-failure mode that shipped
       // 65 blank covers on another project.
       if (buf.length < 64) {
-        failed.push(`${skill.slug}: ${buf.length} bytes`);
-        skill.icon = sourcePath;
+        recordFailure(`${buf.length} bytes`);
         await sleep(DELAY_MS);
         continue;
       }
@@ -86,8 +97,7 @@ async function main() {
         buf.toString('ascii', 8, 12) === 'WEBP';
       if (!isWebp) {
         const preview = buf.slice(0, 16).toString('hex');
-        failed.push(`${skill.slug}: not a WebP file (${buf.length} bytes, starts with ${preview})`);
-        skill.icon = sourcePath;
+        recordFailure(`not a WebP file (${buf.length} bytes, starts with ${preview})`);
         await sleep(DELAY_MS);
         continue;
       }
@@ -95,8 +105,7 @@ async function main() {
       skill.icon = `${PUBLIC_PREFIX}/${file}`;
       downloaded++;
     } catch (err) {
-      failed.push(`${skill.slug}: ${(err as Error).message}`);
-      skill.icon = sourcePath;
+      recordFailure((err as Error).message);
     }
 
     await sleep(DELAY_MS);
