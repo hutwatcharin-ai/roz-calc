@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "import-data": "tsx scripts/import-data.ts"
+    "import-data": "tsx scripts/import-data.ts",
+    "mirror-skill-icons": "tsx scripts/mirror-skill-icons.ts"
   },
   "dependencies": {
     "next": "^14.2.0",
