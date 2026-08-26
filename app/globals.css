@@ -87,3 +87,36 @@ table { border-collapse: collapse; width: 100%; }
 .aggro--aggressive { background: var(--yellow); color: var(--yellow-ink); }
 .aggro--caution { background: var(--yellow); color: var(--yellow-ink); }
 .aggro--danger { background: var(--status-danger); color: var(--status-danger-ink); }
+
+/* Two-tier nav (spec 6.1). The shell wraps so the second row lands on its own
+   line; the search box keeps its place on the first line by not being allowed
+   to wrap ahead of it. */
+.topbar__in { flex-wrap: wrap; }
+
+.subnav {
+  display: flex;
+  gap: 4px;
+  flex-basis: 100%;
+  overflow-x: auto;
+  padding-top: 6px;
+  border-top: 1px solid var(--hair);
+}
+
+.subnav a {
+  padding: 5px 9px;
+  border-radius: 6px;
+  font: 500 13px/1.6 "Sarabun", sans-serif;
+  color: var(--dim);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.subnav a:hover { color: var(--text); background: var(--panel-2); }
+.subnav a.on { color: var(--yellow); background: var(--panel-2); }
+
+/* On a phone the top row collapses to the two most-used pages plus search; the
+   section links stay reachable through the second row, which scrolls. */
+@media (max-width: 640px) {
+  .topnav { font-size: 13px; }
+  .subnav { padding-top: 4px; }
+}

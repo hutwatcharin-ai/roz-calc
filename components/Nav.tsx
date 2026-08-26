@@ -1,26 +1,18 @@
 // components/Nav.tsx
-import Link from 'next/link';
-import GlobalSearch from './GlobalSearch';
+//
+// Server component wrapper. Only NavTabs is a client component -- it needs
+// usePathname -- so the shell, the brand mark, and the search box stay on the
+// server (spec 4).
 
-const LINKS = [
-  { href: '/', label: 'หาจุดตี' },
-  { href: '/drop-finder', label: 'ค้นของดรอป' },
-  { href: '/database/monsters', label: 'มอนสเตอร์' },
-  { href: '/database/items', label: 'ไอเทม' },
-];
+import GlobalSearch from './GlobalSearch';
+import NavTabs from './NavTabs';
 
 export default function Nav() {
   return (
     <div className="topbar">
       <div className="topbar__in">
         <span className="brand__mark">ZERO<em>CALC</em></span>
-        <nav className="topnav">
-          {LINKS.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <NavTabs />
         <GlobalSearch />
       </div>
     </div>
