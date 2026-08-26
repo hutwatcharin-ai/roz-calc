@@ -3,6 +3,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
 import { cache } from 'react';
+import { notFound } from 'next/navigation';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -30,8 +31,13 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   // Every value here comes from the row. Nothing is filled in when the column is
   // null -- an invented element or HP would be a factual claim we cannot make.
   const parts = [`เลเวล ${monster.level}`];
-  if (monster.element) parts.push(`ธาตุ${monster.element}`);
-  if (monster.race) parts.push(`เผ่า${monster.race}`);
+  if (monster.element) parts.push(`ธาตุ ${monster.element}`);
+  if (monster.race) parts.push(`เผ่า ${monster.race}`);
+  // Truthy, not "!== null": 0 is this database's unknown-HP sentinel (see the
+  // same convention in kills-per-hour.ts), not a monster with 0 HP, so a
+  // missing value must skip this line rather than print "HP 0". A future
+  // column where 0 is a real value must not copy this pattern -- use
+  // `!== null` there instead.
   if (monster.hp) parts.push(`HP ${monster.hp.toLocaleString('en-US')}`);
 
   return {
@@ -59,8 +65,11 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
   }
 
+  // A clean query that found no row is a genuine 404 -- unlike the error
+  // branch above, which must keep rendering its neutral message and never
+  // become a 404 for a query we simply failed to run.
   if (!monster) {
-    return <main className="shell" style={{ paddingBlock: 32 }}>ไม่พบมอนสเตอร์นี้</main>;
+    notFound();
   }
 
   return (

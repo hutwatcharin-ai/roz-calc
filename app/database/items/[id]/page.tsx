@@ -3,6 +3,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
 import { cache } from 'react';
+import { notFound } from 'next/navigation';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -57,8 +58,11 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
     return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
   }
 
+  // A clean query that found no row is a genuine 404 -- unlike the error
+  // branch above, which must keep rendering its neutral message and never
+  // become a 404 for a query we simply failed to run.
   if (!item) {
-    return <main className="shell" style={{ paddingBlock: 32 }}>ไม่พบไอเทมนี้</main>;
+    notFound();
   }
 
   return (
