@@ -9,9 +9,9 @@ import { cache } from 'react';
 // lists, which meant Next's fetch memoisation couldn't collapse them. Returns
 // the raw { data, error } so each caller keeps its own error handling; this
 // helper must not swallow the error itself.
-const getItem = cache((id: number) =>
-  supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle()
-);
+const getItem = cache(async (id: number) => {
+  return await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
+});
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { data: item, error } = await getItem(Number(params.id));
