@@ -5,6 +5,15 @@ import { SITE_URL } from '@/lib/site';
 // Regenerated with the daily ISR window, same as the list pages.
 export const revalidate = 86400;
 
+// This route uses no dynamic functions, so Next would otherwise prerender it
+// at build time -- and the throw below on a Supabase error would then fail
+// the whole build. A Supabase blip during deploy (the free-tier project
+// pausing is exactly the risk the keep-alive workflow exists to mitigate)
+// would then block every unrelated hotfix from shipping until Supabase is
+// back. Forcing this one route to render per-request keeps that failure
+// scoped to a 500 on /sitemap.xml instead of a failed deploy.
+export const dynamic = 'force-dynamic';
+
 const STATIC_PATHS = ['/', '/drop-finder', '/database/monsters', '/database/items'];
 
 // Supabase caps a single select at 1,000 rows and does not say so when it
