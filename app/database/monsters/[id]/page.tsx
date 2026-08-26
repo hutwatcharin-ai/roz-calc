@@ -1,6 +1,30 @@
 // app/database/monsters/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const db = supabaseBrowser();
+  const { data: monster } = await db
+    .from('monsters')
+    .select('name_en, level, element, hp, race')
+    .eq('id', Number(params.id))
+    .maybeSingle();
+
+  if (!monster) return { title: 'ไม่พบมอนสเตอร์นี้' };
+
+  // Every value here comes from the row. Nothing is filled in when the column is
+  // null -- an invented element or HP would be a factual claim we cannot make.
+  const parts = [`เลเวล ${monster.level}`];
+  if (monster.element) parts.push(`ธาตุ${monster.element}`);
+  if (monster.race) parts.push(`เผ่า${monster.race}`);
+  if (monster.hp) parts.push(`HP ${monster.hp.toLocaleString('en-US')}`);
+
+  return {
+    title: `${monster.name_en} (Lv.${monster.level}) — ดรอป จุดเกิด ค่าสถานะ`,
+    description: `${monster.name_en} ${parts.join(' ')} — ดูของที่ดรอป อัตราดรอป แมพที่เจอ และค่าสถานะครบใน ROZ Calc`,
+  };
+}
 
 export default async function MonsterDetailPage({ params }: { params: { id: string } }) {
   const db = supabaseBrowser();

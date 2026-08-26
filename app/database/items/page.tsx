@@ -3,6 +3,11 @@ import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
 
+export const metadata = {
+  title: 'ฐานข้อมูลไอเทม',
+  description: 'ไอเทมทั้งหมดในเกม Ragnarok Zero Global พร้อมค่าพลังโจมตี เลเวลที่ใช้ได้ อาชีพที่ใส่ได้ และมอนสเตอร์ที่ดรอป',
+};
+
 // Daily ISR (spec §5). Note: this does NOT move the page off the build-time
 // prerender path — Next.js still prerenders it once at build, so Supabase
 // env vars must still be present as build-time variables in Coolify.

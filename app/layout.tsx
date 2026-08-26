@@ -1,7 +1,27 @@
 import './globals.css';
 import Nav from '@/components/Nav';
+import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 
-export const metadata = { title: 'ROZ Calc' };
+// metadataBase turns the relative OG path below into the absolute URL that
+// crawlers and chat clients require -- a relative og:image is ignored.
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'ROZ Calc — ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย',
+    // Every page that sets its own title gets the site name appended.
+    template: '%s | ROZ Calc',
+  },
+  description:
+    'ฐานข้อมูลมอนสเตอร์ ไอเทม และเครื่องมือหาจุดฟาร์มของ Ragnarok Zero Global ภาษาไทย คำนวณ EXP ต่อชั่วโมงและหาของดรอปได้ในที่เดียว',
+  openGraph: {
+    type: 'website',
+    siteName: 'ROZ Calc',
+    locale: 'th_TH',
+    images: ['/og-default.png'],
+  },
+  twitter: { card: 'summary_large_image' },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

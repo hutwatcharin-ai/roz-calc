@@ -1,6 +1,28 @@
 // app/database/items/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const db = supabaseBrowser();
+  const { data: item } = await db
+    .from('items')
+    .select('name_en, category, atk, required_level')
+    .eq('id', Number(params.id))
+    .maybeSingle();
+
+  if (!item) return { title: 'ไม่พบไอเทมนี้' };
+
+  const parts: string[] = [];
+  if (item.category) parts.push(item.category);
+  if (item.atk !== null) parts.push(`ATK ${item.atk}`);
+  if (item.required_level !== null) parts.push(`ใช้ได้ที่เลเวล ${item.required_level}`);
+
+  return {
+    title: `${item.name_en} — ดรอปจากมอนตัวไหน`,
+    description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน ROZ Calc`,
+  };
+}
 
 export default async function ItemDetailPage({ params }: { params: { id: string } }) {
   const db = supabaseBrowser();

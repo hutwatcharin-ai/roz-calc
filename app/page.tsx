@@ -1,6 +1,12 @@
 import { supabaseBrowser } from '@/lib/supabase';
 import FarmingTable from '@/components/FarmingTable';
 
+export const metadata = {
+  title: 'หามอนสเตอร์คุ้มสุดสำหรับเลเวลของคุณ',
+  description:
+    'ใส่เลเวลแล้วดูว่ามอนสเตอร์ตัวไหนให้ EXP ต่อ HP สูงสุด เรียงอันดับให้อัตโนมัติจากมอนสเตอร์ทั้งหมดในเกม Ragnarok Zero Global',
+};
+
 async function getFarmingRows(minLevel: number, maxLevel: number) {
   const db = supabaseBrowser();
   const { data: stats, error } = await db

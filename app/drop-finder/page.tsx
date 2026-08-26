@@ -2,6 +2,11 @@
 import { supabaseBrowser } from '@/lib/supabase';
 import DropSearch from '@/components/DropSearch';
 
+export const metadata = {
+  title: 'ค้นหาว่าของชิ้นนี้ดรอปจากมอนตัวไหน',
+  description: 'พิมพ์ชื่อไอเทมแล้วดูว่ามอนสเตอร์ตัวไหนดรอป อัตราดรอปเท่าไร และเจอมอนตัวนั้นได้ที่แมพไหน',
+};
+
 // Resolve the search text to exactly one item. An exact (case-insensitive)
 // name wins outright; only if nothing matches exactly do we fall back to a
 // substring match. The caller surfaces the resolved name so a fallback match
