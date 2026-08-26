@@ -52,14 +52,15 @@ describe('aggroLevel', () => {
 
 describe('playerMaxHpFromContext', () => {
   it('returns null with no character, so callers get the two-level badge', () => {
-    expect(playerMaxHpFromContext(null, 20)).toBeNull();
+    expect(playerMaxHpFromContext(null)).toBeNull();
   });
 
-  it('returns a positive HP for a real character', () => {
-    const ctx: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5 };
-    const hp = playerMaxHpFromContext(ctx, 20);
-    expect(hp).not.toBeNull();
-    expect(hp!).toBeGreaterThan(0);
+  it('computes the exact HP for a real character, pinned so argument order cannot silently swap', () => {
+    // maxHp(level, vit, job): 35 + 50*20*1.25 = 1285, *(1 + 20/100) = 1542.
+    // Asserting only ">0" would stay green even if level and vit were swapped
+    // inside maxHp -- that swap gives 803, a threshold 47% too low.
+    const ctx: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20 };
+    expect(playerMaxHpFromContext(ctx)).toBe(1542);
   });
 });
 

@@ -12,6 +12,7 @@ export interface CharacterContext {
   job: JobKey;
   damagePerHit: number;
   attacksPerSecond: number;
+  vit: number;
 }
 
 export const CHARACTER_STORAGE_KEY = 'roz-calc:character';
@@ -41,14 +42,15 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
 
   if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return null;
 
-  const { level, job, damagePerHit, attacksPerSecond } = parsed as Record<string, unknown>;
+  const { level, job, damagePerHit, attacksPerSecond, vit } = parsed as Record<string, unknown>;
 
   if (!isPositiveNumber(level)) return null;
   if (!isPositiveNumber(damagePerHit)) return null;
   if (!isPositiveNumber(attacksPerSecond)) return null;
+  if (!isPositiveNumber(vit)) return null;
   if (typeof job !== 'string' || !Object.prototype.hasOwnProperty.call(JOB_PROFILES, job)) return null;
 
-  return { level, job: job as JobKey, damagePerHit, attacksPerSecond };
+  return { level, job: job as JobKey, damagePerHit, attacksPerSecond, vit };
 }
 
 // Storage access itself throws in some browsers (Safari private mode, blocked

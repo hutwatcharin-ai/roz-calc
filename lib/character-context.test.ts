@@ -7,7 +7,7 @@ import {
   type CharacterContext,
 } from './character-context';
 
-const VALID: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5 };
+const VALID: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20 };
 
 function fakeStorage(initial: Record<string, string> = {}) {
   const map = new Map(Object.entries(initial));
@@ -55,6 +55,15 @@ describe('parseCharacterContext', () => {
 
   it('rejects a non-positive level', () => {
     expect(parseCharacterContext(JSON.stringify({ ...VALID, level: 0 }))).toBeNull();
+  });
+
+  it('rejects a payload missing vit -- a value stored before vit existed must not silently pass', () => {
+    const { vit, ...withoutVit } = VALID as any;
+    expect(parseCharacterContext(JSON.stringify(withoutVit))).toBeNull();
+  });
+
+  it('rejects a non-positive vit', () => {
+    expect(parseCharacterContext(JSON.stringify({ ...VALID, vit: 0 }))).toBeNull();
   });
 
   it('rejects a JSON array, which parses but is not a context', () => {

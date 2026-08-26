@@ -33,11 +33,11 @@ export function aggroLevel(
   return monster.atk_max >= playerMaxHp * DANGER_ATK_RATIO ? 'danger' : 'caution';
 }
 
-// VIT is passed in rather than stored on the context: the character form asks
-// for level, job, damage, and attack speed -- four numbers a player can read off
-// their own screen -- and asking for VIT too would make it five for one badge.
-// Callers pass a representative VIT; the graded levels move with it.
-export function playerMaxHpFromContext(ctx: CharacterContext | null, vit: number): number | null {
+// VIT lives on CharacterContext itself (lib/character-context.ts) rather than
+// being passed in separately: two Wave 2 pages guessing different VITs for the
+// same player would grade the same monster differently, and a guessed VIT
+// driving a "อันตราย"/"ระวัง" claim is an invented game value.
+export function playerMaxHpFromContext(ctx: CharacterContext | null): number | null {
   if (!ctx) return null;
-  return maxHp(ctx.level, vit, ctx.job);
+  return maxHp(ctx.level, ctx.vit, ctx.job);
 }
