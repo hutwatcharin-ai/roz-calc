@@ -58,3 +58,32 @@ table { border-collapse: collapse; width: 100%; }
 .card--pink { box-shadow: 4px 4px 0 var(--pink); }
 .card--cyan { box-shadow: 4px 4px 0 var(--cyan); }
 .card--yellow { box-shadow: 4px 4px 0 var(--yellow); }
+
+/* Status colours for the aggro badge. These are state colours, not new design
+   accents -- do not use them decoratively anywhere else. --yellow is reused
+   from the existing palette so the badge stays inside the Neon Arcade set. */
+:root {
+  --status-safe: #3DFFA6;
+  --status-safe-ink: #002415;
+  --status-danger: #FF5A5A;
+  --status-danger-ink: #2A0000;
+}
+
+.aggro {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font: 600 12px/1.6 "Sarabun", sans-serif;
+  white-space: nowrap;
+}
+
+/* Every variant carries a glyph as well as a colour: colour alone would make
+   the site's clearest differentiator unreadable to a colour-blind player. */
+.aggro__glyph { font-size: 11px; }
+
+.aggro--safe { background: var(--status-safe); color: var(--status-safe-ink); }
+.aggro--aggressive { background: var(--yellow); color: var(--yellow-ink); }
+.aggro--caution { background: var(--yellow); color: var(--yellow-ink); }
+.aggro--danger { background: var(--status-danger); color: var(--status-danger-ink); }

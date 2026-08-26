@@ -1,0 +1,60 @@
+import { describe, it, expect } from 'vitest';
+import { aggroLevel, playerMaxHpFromContext, DANGER_ATK_RATIO, AGGRO_LABELS } from './aggro-tier';
+import type { CharacterContext } from './character-context';
+
+const PLAYER_HP = 1000;
+
+describe('aggroLevel', () => {
+  it('is safe when the monster does not attack first, regardless of its ATK', () => {
+    expect(aggroLevel({ is_aggressive: false, atk_max: 9999 }, PLAYER_HP)).toBe('safe');
+  });
+
+  it('treats a null aggression flag as safe, matching the column default', () => {
+    expect(aggroLevel({ is_aggressive: null, atk_max: 100 }, PLAYER_HP)).toBe('safe');
+  });
+
+  it('reports the ungraded level when the player is unknown', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: 100 }, null)).toBe('aggressive');
+  });
+
+  it('reports the ungraded level when the monster ATK is unknown', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: null }, PLAYER_HP)).toBe('aggressive');
+  });
+
+  it('is caution when one hit takes less than the danger share of player HP', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: 150 }, PLAYER_HP)).toBe('caution');
+  });
+
+  it('is danger at exactly the threshold, not one point past it', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: PLAYER_HP * DANGER_ATK_RATIO }, PLAYER_HP)).toBe('danger');
+  });
+
+  it('is danger when one hit takes more than the danger share', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: 500 }, PLAYER_HP)).toBe('danger');
+  });
+
+  it('reports the ungraded level when player HP is zero, never dividing by it', () => {
+    expect(aggroLevel({ is_aggressive: true, atk_max: 100 }, 0)).toBe('aggressive');
+  });
+});
+
+describe('playerMaxHpFromContext', () => {
+  it('returns null with no character, so callers get the two-level badge', () => {
+    expect(playerMaxHpFromContext(null, 20)).toBeNull();
+  });
+
+  it('returns a positive HP for a real character', () => {
+    const ctx: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5 };
+    const hp = playerMaxHpFromContext(ctx, 20);
+    expect(hp).not.toBeNull();
+    expect(hp!).toBeGreaterThan(0);
+  });
+});
+
+describe('AGGRO_LABELS', () => {
+  it('has a Thai label for every level, so no badge is colour-only', () => {
+    for (const level of ['safe', 'aggressive', 'caution', 'danger'] as const) {
+      expect(AGGRO_LABELS[level].length).toBeGreaterThan(0);
+    }
+  });
+});
