@@ -39,7 +39,7 @@ table { border-collapse: collapse; width: 100%; }
   background: var(--ground); border-bottom: 1px solid var(--hair);
 }
 .topbar__in {
-  display: flex; align-items: center; gap: 28px; height: 64px;
+  display: flex; align-items: center; gap: 28px; min-height: 64px;
   max-width: 1280px; margin-inline: auto; padding-inline: var(--shell);
 }
 .brand__mark { font: 700 20px/1 "Chakra Petch", sans-serif; letter-spacing: -0.01em; color: var(--text); }
@@ -97,6 +97,11 @@ table { border-collapse: collapse; width: 100%; }
   display: flex;
   gap: 4px;
   flex-basis: 100%;
+  /* Comes after the search button in DOM order (brand, topnav, subnav,
+     search), so without an explicit order it would push search onto a third
+     flex line instead of the second. order:1 puts it after every default-
+     order sibling so search stays on line one, beside the nav. */
+  order: 1;
   overflow-x: auto;
   padding-top: 6px;
   border-top: 1px solid var(--hair);

@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { sectionForPath, isActiveLink, PRIMARY_LINKS, SECTION_LINKS } from './nav-links';
+import {
+  sectionForPath,
+  isActiveLink,
+  isActivePrimaryLink,
+  PRIMARY_LINKS,
+  SECTION_LINKS,
+} from './nav-links';
 
 describe('sectionForPath', () => {
   it('puts database routes in the database section', () => {
@@ -49,6 +55,33 @@ describe('isActiveLink', () => {
 
   it('does not match a route sharing a name prefix', () => {
     expect(isActiveLink('/database/item', '/database/items')).toBe(false);
+  });
+});
+
+describe('isActivePrimaryLink', () => {
+  it('highlights the database section link on a sibling database page', () => {
+    expect(isActivePrimaryLink('/database/monsters', '/database/items')).toBe(true);
+  });
+
+  it('highlights the database section link on another sibling database page', () => {
+    expect(isActivePrimaryLink('/database/monsters', '/database/cards')).toBe(true);
+  });
+
+  it('highlights the tools section link on a sibling tools page, not the database one', () => {
+    expect(isActivePrimaryLink('/tools/elements', '/tools/farm-planner')).toBe(true);
+    expect(isActivePrimaryLink('/database/monsters', '/tools/farm-planner')).toBe(false);
+  });
+
+  it('highlights only the drop-finder link on the drop-finder page', () => {
+    expect(isActivePrimaryLink('/drop-finder', '/drop-finder')).toBe(true);
+    expect(isActivePrimaryLink('/database/monsters', '/drop-finder')).toBe(false);
+    expect(isActivePrimaryLink('/tools/elements', '/drop-finder')).toBe(false);
+  });
+
+  it('highlights only the home link on the home page', () => {
+    expect(isActivePrimaryLink('/', '/')).toBe(true);
+    expect(isActivePrimaryLink('/database/monsters', '/')).toBe(false);
+    expect(isActivePrimaryLink('/tools/elements', '/')).toBe(false);
   });
 });
 

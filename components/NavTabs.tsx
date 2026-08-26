@@ -7,7 +7,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { PRIMARY_LINKS, SECTION_LINKS, sectionForPath, isActiveLink } from '@/lib/nav-links';
+import {
+  PRIMARY_LINKS,
+  SECTION_LINKS,
+  sectionForPath,
+  isActiveLink,
+  isActivePrimaryLink,
+} from '@/lib/nav-links';
 
 export default function NavTabs() {
   const pathname = usePathname() ?? '/';
@@ -18,7 +24,7 @@ export default function NavTabs() {
     <>
       <nav className="topnav" aria-label="เมนูหลัก">
         {PRIMARY_LINKS.map((link) => {
-          const active = isActiveLink(link.href, pathname);
+          const active = isActivePrimaryLink(link.href, pathname);
           return (
             <Link
               key={link.href}

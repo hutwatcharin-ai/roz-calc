@@ -61,3 +61,15 @@ export function isActiveLink(href: string, pathname: string): boolean {
   if (href === '/') return normalise(pathname) === '/';
   return isUnder(pathname, href);
 }
+
+// The top row answers a different question than the second row: not "which
+// page" but "which section". A primary link that stands in for a whole
+// section (e.g. /database/monsters for "ฐานข้อมูล") must stay highlighted on
+// every page in that section, not just its own href -- otherwise five of the
+// six database pages show no highlight at all. Links that are not section
+// stand-ins (home, drop finder) keep the isActiveLink rule.
+export function isActivePrimaryLink(href: string, pathname: string): boolean {
+  const linkSection = sectionForPath(href);
+  if (linkSection) return sectionForPath(pathname) === linkSection;
+  return isActiveLink(href, pathname);
+}
