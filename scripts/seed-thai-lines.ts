@@ -662,6 +662,206 @@ const EFFECT_TH_4: Record<string, string> = {
     'สารานุกรมที่จัดพิมพ์โดยสำนักดังใน Prontera ขึ้นชื่อเรื่องมุมที่แข็งราวหิน คนว่ากันว่าเหมือนฝังเพชร 3Carat ไว้ที่ขอบ',
 };
 
+// Batch 3, part 3: set bonuses, refine thresholds written as `When refine
+// level is ...`, spell scrolls, and the rest of the effect lines.
+const EFFECT_TH_5: Record<string, string> = {
+  'Reduces Variable Casting Time by 5%.': 'ลด Variable Casting Time 5%',
+  'Reflects 30% of all melee physical damage.':
+    'สะท้อนความเสียหายกายภาพระยะประชิดทั้งหมด 30%',
+  'Reflects 5% of melee physical damage received. DEF +1.':
+    'สะท้อนความเสียหายกายภาพระยะประชิดที่ได้รับ 5% และ DEF +1',
+  'Resistance to Demon monsters 10%.': 'Resistance ต่อมอนสเตอร์ Demon 10%',
+  'Restores 3 SP per hit when striking an enemy.':
+    'ฟื้นฟู SP 3 ทุกครั้งที่โจมตีศัตรูเข้าเป้า',
+  'Restores all HP and SP upon revival.': 'ฟื้นฟู HP และ SP เต็มเมื่อฟื้นคืนชีพ',
+  'Slightly increases ASPD (After Attack Delay decreased).':
+    'เพิ่ม ASPD เล็กน้อย (ดีเลย์หลังโจมตีลดลง)',
+  'STR +2, Cannot be Refined.': 'STR +2 ตีบวกไม่ได้',
+  'Takes 50% additional damage from Ghost-Property attacks.':
+    'ได้รับความเสียหายจากการโจมตีธาตุ Ghost เพิ่ม 50%',
+  'The [Intimidate] autocast is no longer used.': 'ไม่ร่าย [Intimidate] อัตโนมัติอีกต่อไป',
+  'The higher the opponent\'s DEF, the more powerful its damage.':
+    'ยิ่ง DEF ของคู่ต่อสู้สูง ความเสียหายยิ่งแรง',
+  'The wearer\'s HP does not regenerate naturally and loses 666 HP every 10 seconds.':
+    'HP ของผู้สวมใส่ไม่ฟื้นเองตามธรรมชาติ และเสีย HP 666 ทุก 10 วินาที',
+  'Upon unequipping, lose 999 HP.': 'เมื่อถอดออก เสีย HP 999',
+  'Triggers Auto-Spell Provoke Lv 3 with a certain chance when performing physical attacks.':
+    'มีโอกาสร่าย Auto-Spell Provoke Lv 3 เมื่อโจมตีกายภาพ',
+  'Using Bash pushes enemies back by 5 cells.': 'ใช้ Bash แล้วผลักศัตรูถอยไป 5 ช่อง',
+  'When hitting with Mammonite, knocks enemies back by 5 cells.':
+    'เมื่อโจมตีเข้าด้วย Mammonite จะผลักศัตรูถอยไป 5 ช่อง',
+  'When attacking, has a low chance to cast [Fire Ball] Lv 3.':
+    'เมื่อโจมตี มีโอกาสน้อยที่จะร่าย [Fire Ball] Lv 3',
+  'When receiving physical damage, chance to autocast Kyrie Eleison Lv.10.':
+    'เมื่อได้รับความเสียหายกายภาพ มีโอกาสร่าย Kyrie Eleison Lv.10 อัตโนมัติ',
+  'When drinking juice, HP Heal effect +50%.': 'เมื่อดื่มน้ำผลไม้ ผลการฟื้นฟู HP +50%',
+  'When killing a monster, has a chance to drop Steel Arrow.':
+    'เมื่อสังหารมอนสเตอร์ มีโอกาสดรอป Steel Arrow',
+  'When killing Insect monsters, Apple, Banana, or Carrot Juice may drop with a certain chance.':
+    'เมื่อสังหารมอนสเตอร์ Insect มีโอกาสดรอป Apple, Banana หรือ Carrot Juice',
+  'When killing Insect monsters, has a chance to obtain the \'Thunder Box\' item.':
+    'เมื่อสังหารมอนสเตอร์ Insect มีโอกาสได้รับไอเทม \'Thunder Box\'',
+  'When an Acolyte Class attacks Demon or Undead Monsters, CRIT +9.':
+    'เมื่อ Acolyte Class โจมตีมอนสเตอร์ Demon หรือ Undead จะได้ CRIT +9',
+  'When attacking Brute Monsters, CRIT +7.': 'เมื่อโจมตีมอนสเตอร์ Brute ได้ CRIT +7',
+  'When attacking Fish Monsters, CRIT +7.': 'เมื่อโจมตีมอนสเตอร์ Fish ได้ CRIT +7',
+  'When equipped by Thief Class, CRIT +4.': 'เมื่อ Thief Class สวมใส่ ได้ CRIT +4',
+  'When equipped by Thief Class, FLEE Rate +20.':
+    'เมื่อ Thief Class สวมใส่ ได้อัตรา FLEE +20',
+  'When equipped by Thief Class, Perfect Dodge +5.':
+    'เมื่อ Thief Class สวมใส่ ได้ Perfect Dodge +5',
+  'When worn by a Swordsman Class character, Perfect Dodge +3.':
+    'เมื่อ Swordsman Class สวมใส่ ได้ Perfect Dodge +3',
+  'When worn by a Swordsman Class character, recovery from Red, Yellow, and White Potions +50%.':
+    'เมื่อ Swordsman Class สวมใส่ การฟื้นฟูจาก Red, Yellow และ White Potion +50%',
+  'When worn by a Novice or Super Novice, has a 20% chance to autocast [Endure] Lv.1 when you take physical damage.':
+    'เมื่อ Novice หรือ Super Novice สวมใส่ มีโอกาส 20% ร่าย [Endure] Lv.1 อัตโนมัติ เมื่อได้รับความเสียหายกายภาพ',
+  'When worn by a Novice or Super Novice, has a chance to autocast [Increase AGI] Lv.1 when you take physical damage.':
+    'เมื่อ Novice หรือ Super Novice สวมใส่ มีโอกาสร่าย [Increase AGI] Lv.1 อัตโนมัติ เมื่อได้รับความเสียหายกายภาพ',
+  'When performing physical attacks, has a certain chance to transform into Lunatic for 5 seconds. Movement speed increases during the transformation (does not stack with Increase Agility).':
+    'เมื่อโจมตีกายภาพ มีโอกาสแปลงร่างเป็น Lunatic เป็นเวลา 5 วินาที ระหว่างแปลงร่างความเร็วเคลื่อนที่เพิ่มขึ้น (ไม่ซ้อนกับ Increase Agility)',
+  'When performing physical attacks, has a certain chance to transform into Smokie for 5 seconds. Movement speed increases during the transformation (does not stack with Increase Agility).':
+    'เมื่อโจมตีกายภาพ มีโอกาสแปลงร่างเป็น Smokie เป็นเวลา 5 วินาที ระหว่างแปลงร่างความเร็วเคลื่อนที่เพิ่มขึ้น (ไม่ซ้อนกับ Increase Agility)',
+
+  // Refine thresholds written as a condition rather than `At +N refine`.
+  'When refine level is 5 or higher, ATK and MATK increase by 1 per refine level.':
+    'เมื่อระดับตีบวก 5 ขึ้นไป ATK และ MATK เพิ่มขึ้น 1 ต่อทุกระดับตีบวก',
+  'When refine level is 5 or lower, MDEF +5.': 'เมื่อระดับตีบวก 5 หรือต่ำกว่า ได้ MDEF +5',
+  'When refine level is 5 or lower, MDEF +8.': 'เมื่อระดับตีบวก 5 หรือต่ำกว่า ได้ MDEF +8',
+  'When refine level is 9 or higher, [Bash] damage +10%.':
+    'เมื่อระดับตีบวก 9 ขึ้นไป ความเสียหาย [Bash] +10%',
+  'When refine level is 9 or higher, MaxHP +10% and MaxSP +10%.':
+    'เมื่อระดับตีบวก 9 ขึ้นไป MaxHP +10% และ MaxSP +10%',
+  'When refine level is 9 or higher, MDEF +5.': 'เมื่อระดับตีบวก 9 ขึ้นไป ได้ MDEF +5',
+  'When refined to +9 or higher, Neutral-Property Resistance +5% and FLEE Rate +5.':
+    'เมื่อตีบวก +9 ขึ้นไป Resistance ธาตุ Neutral +5% และอัตรา FLEE +5',
+  'When refinement level is 9 or higher, FLEE +20.': 'เมื่อระดับตีบวก 9 ขึ้นไป ได้ FLEE +20',
+  'While using a blunt weapon, increases CRIT by 1 per weapon refine, and at +10 increases Critical Damage by 10%.':
+    'ขณะใช้อาวุธทู่ CRIT เพิ่มขึ้น 1 ต่อทุกระดับตีบวกของอาวุธ และที่ +10 เพิ่ม Critical Damage 10%',
+  'While using a knuckle, reduces After Attack Delay by 1% per refine, and at +10 increases ASPD by 2.':
+    'ขณะใช้นักเกิล ดีเลย์หลังโจมตีลดลง 1% ต่อทุกระดับตีบวก และที่ +10 เพิ่ม ASPD 2',
+  'When worn with Prisoner Uniform, ATK +2 per refine level on Prisoner Uniform.':
+    'เมื่อสวมใส่คู่กับ Prisoner Uniform ได้ ATK +2 ต่อทุกระดับตีบวกของ Prisoner Uniform',
+  'When worn with Shackles, ATK +1 per refine level on Shackles.':
+    'เมื่อสวมใส่คู่กับ Shackles ได้ ATK +1 ต่อทุกระดับตีบวกของ Shackles',
+  'When equipped with Shackles, ATK +5. Additional ATK increases based on the refine level of Shackles.':
+    'เมื่อสวมใส่คู่กับ Shackles ได้ ATK +5 และ ATK เพิ่มเติมตามระดับตีบวกของ Shackles',
+
+  // Card and gear set bonuses
+  'When equipped together with Arclouse Card, increases FLEE by 2 per shield refine.':
+    'เมื่อสวมใส่คู่กับ Arclouse Card FLEE เพิ่มขึ้น 2 ต่อทุกระดับตีบวกของ Shield',
+  'When equipped together with Bathory Card, increases INT by 1 per armor refine.':
+    'เมื่อสวมใส่คู่กับ Bathory Card INT เพิ่มขึ้น 1 ต่อทุกระดับตีบวกของ Armor',
+  'When equipped together with Black Leather Boots, Flee +10.':
+    'เมื่อสวมใส่คู่กับ Black Leather Boots ได้ Flee +10',
+  'When equipped together with Crab, Shellfish, and Aster Card, Fish monsters have a chance to drop Sashimi when hunted, and Physical Damage to Water-property Monsters +30%.':
+    'เมื่อสวมใส่คู่กับ Crab, Shellfish และ Aster Card มอนสเตอร์ Fish มีโอกาสดรอป Sashimi เมื่อถูกล่า และ Physical Damage ต่อมอนสเตอร์ธาตุ Water +30%',
+  'When equipped together with High Orc Card, grants ASPD +2 and ATK +25.':
+    'เมื่อสวมใส่คู่กับ High Orc Card ให้ ASPD +2 และ ATK +25',
+  'When equipped together with Leg, Zipper Bear, Myst Case, and Baby Leopard Cards:':
+    'เมื่อสวมใส่คู่กับ Leg, Zipper Bear, Myst Case และ Baby Leopard Card:',
+  'When equipped together with Lude Card, MaxSP +60.':
+    'เมื่อสวมใส่คู่กับ Lude Card ได้ MaxSP +60',
+  'When equipped together with Luna Bow, DEX +1, SP +50, and SP recovery rate +10%.':
+    'เมื่อสวมใส่คู่กับ Luna Bow ได้ DEX +1, SP +50 และอัตราฟื้นฟู SP +10%',
+  'When equipped together with Magician Hat, DEX +2, INT +2, and SP recovery rate +5%. MATK increases by 1% per refine.':
+    'เมื่อสวมใส่คู่กับ Magician Hat ได้ DEX +2, INT +2 และอัตราฟื้นฟู SP +5% MATK เพิ่มขึ้น 1% ต่อทุกระดับตีบวก',
+  'When equipped together with Miyabi Doll, Evil Nymph, Parasite, Harpy, and Bloody Butterfly Cards:':
+    'เมื่อสวมใส่คู่กับ Miyabi Doll, Evil Nymph, Parasite, Harpy และ Bloody Butterfly Card:',
+  'When equipped together with Ninja Suit, SP consumption -20% and MHP +300.':
+    'เมื่อสวมใส่คู่กับ Ninja Suit การใช้ SP -20% และ MHP +300',
+  'When equipped together with Penomena Card, increases ASPD by 1 per 2 shield refines.':
+    'เมื่อสวมใส่คู่กับ Penomena Card ASPD เพิ่มขึ้น 1 ต่อทุก 2 ระดับตีบวกของ Shield',
+  'When equipped together with Permeter, Solider, Freezer, and Heater Cards, the following effects are added:':
+    'เมื่อสวมใส่คู่กับ Permeter, Solider, Freezer และ Heater Card จะได้ผลเพิ่มดังนี้:',
+  'When equipped together with Quve Card, MaxHP +300.':
+    'เมื่อสวมใส่คู่กับ Quve Card ได้ MaxHP +300',
+  'When equipped together with The Wanderer, Wild Rose, Shinobi, and Zhu Po Long Cards, the following effects are added:':
+    'เมื่อสวมใส่คู่กับ The Wanderer, Wild Rose, Shinobi และ Zhu Po Long Card จะได้ผลเพิ่มดังนี้:',
+  'When equipped with Alarm, Clock, and Punk Card, MDEF +3 and DEF +3.':
+    'เมื่อสวมใส่คู่กับ Alarm, Clock และ Punk Card ได้ MDEF +3 และ DEF +3',
+  'When equipped with Chonchon Card, FLEE Rate +18.':
+    'เมื่อสวมใส่คู่กับ Chonchon Card ได้อัตรา FLEE +18',
+  'When equipped with Poring Card, FLEE Rate +18.':
+    'เมื่อสวมใส่คู่กับ Poring Card ได้อัตรา FLEE +18',
+  'When equipped with Rocker Card, FLEE Rate +18.':
+    'เมื่อสวมใส่คู่กับ Rocker Card ได้อัตรา FLEE +18',
+  'When equipped with Rogue Card, FLEE Rate +18.':
+    'เมื่อสวมใส่คู่กับ Rogue Card ได้อัตรา FLEE +18',
+  'When equipped with Wolf Card, FLEE Rate +18.':
+    'เมื่อสวมใส่คู่กับ Wolf Card ได้อัตรา FLEE +18',
+  'When used with Lunatic Card, FLEE Rate +18.':
+    'เมื่อใช้คู่กับ Lunatic Card ได้อัตรา FLEE +18',
+  'When used with Tarou Card, STR +3.': 'เมื่อใช้คู่กับ Tarou Card ได้ STR +3',
+  'When equipped with Claw Card, the reduction becomes -20%.':
+    'เมื่อสวมใส่คู่กับ Claw Card การลดจะกลายเป็น -20%',
+  'When equipped with Criatura Academy Hat, ATK +5 and MATK +5.':
+    'เมื่อสวมใส่คู่กับ Criatura Academy Hat ได้ ATK +5 และ MATK +5',
+  'When equipped with Cruiser, Anolian, Alligator, and Dragon Tail Card:':
+    'เมื่อสวมใส่คู่กับ Cruiser, Anolian, Alligator และ Dragon Tail Card:',
+  'When equipped with Dark Illusion Card, MHP/MSP +20%.':
+    'เมื่อสวมใส่คู่กับ Dark Illusion Card ได้ MHP/MSP +20%',
+  'When equipped with Joker Card, physical/magical attacks have a chance to transform you into Joker for 7 seconds.':
+    'เมื่อสวมใส่คู่กับ Joker Card การโจมตีกายภาพ/เวทมีโอกาสแปลงร่างคุณเป็น Joker เป็นเวลา 7 วินาที',
+  'When equipped with Mummy Card, Perfect Hit +20%.':
+    'เมื่อสวมใส่คู่กับ Mummy Card ได้ Perfect Hit +20%',
+  'When equipped with Owl Baron Card, chance to autocast Lightning Bolt Lv 5 when dealing physical damage.':
+    'เมื่อสวมใส่คู่กับ Owl Baron Card มีโอกาสร่าย Lightning Bolt Lv 5 อัตโนมัติ เมื่อสร้างความเสียหายกายภาพ',
+  'When equipped with Skeleton Card, greatly increased chance to inflict Sleep.':
+    'เมื่อสวมใส่คู่กับ Skeleton Card โอกาสทำให้ติด Sleep เพิ่มขึ้นมาก',
+  'When equipped with Steel Arrow, Ranged Weapon Physical Damage +50%.':
+    'เมื่อสวมใส่คู่กับ Steel Arrow ได้ Physical Damage ของ Weapon ระยะไกล +50%',
+  'When equipped with Triangle Panties, AGI +5, FLEE +10.':
+    'เมื่อสวมใส่คู่กับ Triangle Panties ได้ AGI +5, FLEE +10',
+  'When equipped with Zealotus Card, ATK +20 and LUK +3.':
+    'เมื่อสวมใส่คู่กับ Zealotus Card ได้ ATK +20 และ LUK +3',
+  'When Angel’s Blessing, Angel’s Descent, Angel’s Protection, Angel’s Warmth, and Angel’s Kiss are all equipped, HP +900, SP +100,':
+    'เมื่อสวมใส่ Angel’s Blessing, Angel’s Descent, Angel’s Protection, Angel’s Warmth และ Angel’s Kiss ครบทุกชิ้น ได้ HP +900, SP +100,',
+
+  // Spell scrolls. One sentence repeated with a different element and skill.
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Earth-property magic [Earth Spike] Lv.3.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Earth อย่าง [Earth Spike] Lv.3 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Fire-property magic [Fire Bolt] Lv.3.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Fire อย่าง [Fire Bolt] Lv.3 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Fire-property magic Fire Bolt at Lv.5.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Fire อย่าง Fire Bolt ที่ Lv.5 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Fire-property magic Fire Wall at Lv.5.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Fire อย่าง Fire Wall ที่ Lv.5 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Ghost-property magic [Soul Strike] Lv.3.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Ghost อย่าง [Soul Strike] Lv.3 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Ghost-property magic [Soul Strike] Lv.5.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Ghost อย่าง [Soul Strike] Lv.5 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Water-property magic [Frost Driver] Lv.1.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Water อย่าง [Frost Driver] Lv.1 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Water-property magic Cold Bolt at Lv.5.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Water อย่าง Cold Bolt ที่ Lv.5 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Wind-property magic [Lightning Bolt] Lv.3.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Wind อย่าง [Lightning Bolt] Lv.3 ได้',
+  'Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Wind-property magic Lightning Bolt at Lv.5.':
+    'ม้วนคัมภีร์ที่บรรจุเวทซึ่งสร้างจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Wind อย่าง Lightning Bolt ที่ Lv.5 ได้',
+
+  // Consumables and gear left over from part 2
+  'Ripe fruit picked from the Mastela tree. A vibrant purple fruit with a refreshing taste. Recovers a large amount of HP.':
+    'ผลไม้สุกที่เก็บจากต้น Mastela ผลสีม่วงสดรสชาติสดชื่น ฟื้นฟู HP จำนวนมาก',
+  'Round orange fruit with refreshing flavor and scent, eaten fresh or used for juice or jam. Recovers a small amount of HP and SP.':
+    'ผลไม้ทรงกลมสีส้ม รสและกลิ่นสดชื่น กินสดหรือทำน้ำผลไม้หรือแยมก็ได้ ฟื้นฟู HP และ SP เล็กน้อย',
+  'Seed of the Yggdrasil fruit, origin of this world. Gentle, nutty aroma restores one\'s vigor. Recovers half of the user\'s HP and SP.':
+    'เมล็ดของผลไม้ Yggdrasil ต้นกำเนิดของโลกนี้ กลิ่นหอมนวลคล้ายถั่วช่วยคืนความกระปรี้กระเปร่า ฟื้นฟู HP และ SP ของผู้ใช้ครึ่งหนึ่ง',
+  'Substance collected from honeybees, similar to milk. Known as royal jelly and said to be very nutritious. Cures various Status Ailment (Poison, Curse, Silence, Confusion, Blind) and recovers HP and SP together.':
+    'สารที่เก็บจากผึ้ง ลักษณะคล้ายนม รู้จักกันในชื่อนมผึ้งและว่ากันว่ามีคุณค่าทางอาหารสูงมาก รักษาสถานะผิดปกติหลายอย่าง (Poison, Curse, Silence, Confusion, Blind) และฟื้นฟู HP กับ SP ไปพร้อมกัน',
+  'Sweet and sticky liquid widely used as food and also medicinal for its high nutritional value. Recovers a small amount of HP and SP.':
+    'ของเหลวหวานเหนียวที่ใช้เป็นอาหารอย่างแพร่หลาย และใช้เป็นยาเพราะคุณค่าทางอาหารสูง ฟื้นฟู HP และ SP เล็กน้อย',
+  'Sweet and tasty candy. Recovers about 45 HP.': 'ลูกอมรสหวานอร่อย ฟื้นฟู HP ประมาณ 45',
+  'Well-cooked meat, looks appetizing. Recovers a small amount of HP.':
+    'เนื้อย่างสุกดี ดูน่ากิน ฟื้นฟู HP เล็กน้อย',
+  'Staff that converts the user’s mental power into destructive force, guaranteeing fearsome power even with little SP.':
+    'คทาที่แปลงพลังจิตของผู้ใช้เป็นแรงทำลาย ให้พลังน่าสะพรึงแม้มี SP น้อย',
+  'Strange item that fills you with energy and makes you want to work when equipped.':
+    'ไอเทมประหลาดที่เติมพลังให้คุณและทำให้อยากทำงานเมื่อสวมใส่',
+  'Unrefined ore containing the metal known as Oridecon, the so-called divine metal. The amount of Oridecon within is small and extremely difficult to refine, making it highly valuable and very rare.':
+    'แร่ดิบที่มีโลหะชื่อ Oridecon ซึ่งเรียกกันว่าโลหะแห่งทวยเทพ ปริมาณ Oridecon ในแร่มีน้อยและถลุงยากอย่างยิ่ง จึงมีค่าสูงและหายากมาก',
+};
+
 async function main(): Promise<void> {
   const db = supabaseAdmin();
 
@@ -701,6 +901,7 @@ async function main(): Promise<void> {
   add(EFFECT_TH_2, 'effect');
   add(EFFECT_TH_3, 'effect');
   add(EFFECT_TH_4, 'effect');
+  add(EFFECT_TH_5, 'effect');
   add(FLAVOUR_TH, 'flavour');
 
   const { error } = await db
@@ -710,7 +911,7 @@ async function main(): Promise<void> {
 
   console.log(`seeded ${rows.length} lines, covering ${covered} occurrences`);
   console.log(
-    `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length + Object.keys(EFFECT_TH_3).length + Object.keys(EFFECT_TH_4).length} effect, ` +
+    `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length + Object.keys(EFFECT_TH_3).length + Object.keys(EFFECT_TH_4).length + Object.keys(EFFECT_TH_5).length} effect, ` +
       `${Object.keys(FLAVOUR_TH).length} flavour`,
   );
   console.log(`deferred classes: ${DEFERRED_RULES.length}`);

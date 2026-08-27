@@ -219,14 +219,28 @@ export function checkTranslation(
     for (const [term, srcList] of srcAnchored) {
       const thaiList = thaiAnchored.get(term);
       if (!thaiList) continue;
-      if (srcList.join(',') === thaiList.join(',')) continue;
+      // Every value the source ties to this term must still be tied to it in the
+      // Thai. Not equality: Thai word order legitimately puts a term next to a
+      // number the English had elsewhere -- `SP recovery rate +10%` becomes
+      // `อัตราฟื้นฟู SP +10%`, which anchors one more value to SP than the source
+      // did. Requiring containment still catches a transposition, because a
+      // swapped value is missing from the term it belongs to.
+      const remaining = [...thaiList];
+      const missing = srcList.filter((token) => {
+        const at = remaining.indexOf(token);
+        if (at === -1) return true;
+        remaining.splice(at, 1);
+        return false;
+      });
+      if (missing.length === 0) continue;
       issues.push({
         rule: 'number-mismatch',
         source,
         thai,
         detail:
           `${term} has [${srcList.join(', ')}] in the source ` +
-          `but [${thaiList.join(', ')}] in the translation`,
+          `but [${thaiList.join(', ')}] in the translation ` +
+          `(missing: ${missing.join(', ')})`,
       });
     }
   }

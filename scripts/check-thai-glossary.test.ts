@@ -249,3 +249,23 @@ describe('acknowledged exemptions', () => {
   });
 });
 
+describe('anchored numbers tolerate Thai word order', () => {
+  it('allows the Thai to anchor MORE values to a term than the source did', () => {
+    // `SP recovery rate +10%` puts "rate" before the number; the Thai
+    // `อัตราฟื้นฟู SP +10%` puts SP there. SP now anchors two values where the
+    // English anchored one, and the translation is correct.
+    const en =
+      'When equipped together with Luna Bow, DEX +1, SP +50, and SP recovery rate +10%.';
+    const th = 'เมื่อสวมใส่คู่กับ Luna Bow ได้ DEX +1, SP +50 และอัตราฟื้นฟู SP +10%';
+    expect(checkTranslation(en, th)).toEqual([]);
+  });
+
+  it('still catches a transposition, which containment cannot hide', () => {
+    // The swapped value is MISSING from the term it belongs to, which is what
+    // the rule tests -- so tolerating extra anchors costs no detection.
+    expect(checkTranslation('ATK +5, DEF +3', 'ATK เพิ่ม +3 และ DEF เพิ่ม +5')).toContainEqual(
+      expect.objectContaining({ rule: 'number-mismatch' }),
+    );
+  });
+});
+
