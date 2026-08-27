@@ -671,7 +671,7 @@ Two facts checked while designing this: the busiest map holds **29** monsters an
 
 **Interfaces:**
 - Consumes: `supabaseBrowser()`; `Pagination`; `AggroBadge` from `components/AggroBadge.tsx` taking `{ level: AggroLevel }`; `aggroLevel(monster: { is_aggressive: boolean | null; atk_max: number | null }, playerMaxHp: number | null): AggroLevel` from `lib/aggro-tier.ts`.
-- Produces: routes `/database/maps` and `/database/maps/[code]`.
+- Produces: the `map_stats` view (`map_code`, `map_display_name`, `monster_count` — 497 rows, one per map) and the routes `/database/maps` and `/database/maps/[code]`.
 
 **Note on the aggro badge:** pass `null` for `playerMaxHp` on both pages. There is no character context wired into any page yet, and `aggroLevel` deliberately returns the two-level answer when the player is unknown. Do not invent a player to get three levels.
 
@@ -1160,6 +1160,13 @@ const FETCH_PAGE = 1000;
 
 // 851 rows is under the cap today but close enough that a plain select()
 // would start truncating silently the moment more content ships.
+//
+// Ordered by name THEN slug, never by name alone. Five skill names are not
+// unique -- "Elemental Change -" occurs three times, and Axe/Lefthand/
+// Righthand Mastery twice each -- and Postgres does not guarantee a stable
+// order among tied rows across separate queries, so paging on name alone can
+// return a row twice or skip it entirely. slug is unique across all 851 rows,
+// so appending it makes the sort total and the paging safe.
 async function allSkills() {
   const db = supabaseBrowser();
   const rows: any[] = [];
@@ -1169,6 +1176,7 @@ async function allSkills() {
       .from('skills')
       .select('slug, name, type, max_level, element, classes, icon_url')
       .order('name')
+      .order('slug')
       .range(from, from + FETCH_PAGE - 1);
 
     if (error) {
