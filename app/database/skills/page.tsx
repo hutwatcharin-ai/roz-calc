@@ -23,7 +23,11 @@ const FETCH_PAGE = 1000;
 // order among tied rows across separate queries, so paging on name alone can
 // return a row twice or skip it entirely. slug is unique across all 851 rows,
 // so appending it makes the sort total and the paging safe.
-async function allSkills() {
+// A mid-loop error must be reported, not truncated into a short list that
+// looks like a complete (if small) result -- the same failure app/sitemap.ts's
+// allIds() throws on. This page renders its own error state instead of
+// throwing, so the failure comes back as a flag rather than an exception.
+async function allSkills(): Promise<{ skills: any[]; error: boolean }> {
   const db = supabaseBrowser();
   const rows: any[] = [];
 
@@ -37,14 +41,14 @@ async function allSkills() {
 
     if (error) {
       console.error('skills query failed', error);
-      break;
+      return { skills: [], error: true };
     }
     if (!data || data.length === 0) break;
     rows.push(...data);
     if (data.length < FETCH_PAGE) break;
   }
 
-  return rows;
+  return { skills: rows, error: false };
 }
 
 // Next hands back a string[] when a query key repeats (e.g. ?job=Knight&job=Mage).
@@ -71,7 +75,7 @@ export default async function SkillsPage({
   const tab = firstParam(searchParams.tab) === 'unreleased' ? 'unreleased' : 'ingame';
   const page = Math.max(1, Number(firstParam(searchParams.page)) || 1);
 
-  const skills = await allSkills();
+  const { skills, error } = await allSkills();
 
   const inGame = skills.filter((s) => isInGameSkill(s.classes));
   const unreleased = skills.filter((s) => !isInGameSkill(s.classes));
@@ -121,20 +125,23 @@ export default async function SkillsPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลสกิล</h1>
+      {/* A query error and a genuine zero-result search must read differently --
+          otherwise an outage looks identical to "there are no skills", which
+          is false. */}
       <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {filtered.length} สกิล จาก {pool.length} สกิลในหมวดนี้
+        {error ? 'โหลดจำนวนสกิลไม่สำเร็จ' : `${filtered.length} สกิล จาก ${pool.length} สกิลในหมวดนี้`}
       </p>
 
       <div className="tabs" style={{ marginTop: 16 }}>
         <a href={buildHref(1, { tab: 'ingame' })} className={tab === 'ingame' ? 'on' : undefined}>
-          มีในเกม ({inGame.length})
+          มีในเกม ({error ? '—' : inGame.length})
         </a>
         <a href={buildHref(1, { tab: 'unreleased' })} className={tab === 'unreleased' ? 'on' : undefined}>
-          ยังไม่เปิดในเซิร์ฟ ({unreleased.length})
+          ยังไม่เปิดในเซิร์ฟ ({error ? '—' : unreleased.length})
         </a>
       </div>
 
-      {tab === 'unreleased' && (
+      {tab === 'unreleased' && !error && (
         <p style={{ color: 'var(--faint)', marginTop: 12, fontSize: 13 }}>
           สกิลกลุ่มนี้แบ่งเป็นสองกลุ่ม — {unreleasedNoClass.length} สกิลไม่มีอาชีพระบุไว้ในข้อมูลต้นทางเลย
           เราไม่ทราบว่าเป็นเพราะยังไม่เปิดใน Global หรือเป็นช่องว่างของข้อมูลที่เก็บมา
@@ -176,30 +183,40 @@ export default async function SkillsPage({
             </tr>
           </thead>
           <tbody>
-            {rows.map((s) => (
-              <tr key={s.slug}>
-                <td data-label="">
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {s.icon_url && (
-                      <img src={s.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {s.name}
-                  </span>
-                </td>
-                {/* 448 skills have no type and 691 no element. Those are real
-                    gaps in the source data, so they show as em-dashes. */}
-                <td data-label="ชนิด">{s.type ?? '—'}</td>
-                <td data-label="เลเวลสูงสุด" className="num">{s.max_level ?? '—'}</td>
-                <td data-label="ธาตุ">{s.element ?? '—'}</td>
-                <td data-label="อาชีพ">{(s.classes ?? []).length > 0 ? s.classes.join(', ') : '—'}</td>
-              </tr>
-            ))}
-            {rows.length === 0 && (
+            {error ? (
               <tr>
                 <td colSpan={5} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  ไม่พบสกิลที่ตรงเงื่อนไข
+                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
+            ) : (
+              <>
+                {rows.map((s) => (
+                  <tr key={s.slug}>
+                    <td data-label="">
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        {s.icon_url && (
+                          <img src={s.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                        )}
+                        {s.name}
+                      </span>
+                    </td>
+                    {/* 448 skills have no type and 691 no element. Those are real
+                        gaps in the source data, so they show as em-dashes. */}
+                    <td data-label="ชนิด">{s.type ?? '—'}</td>
+                    <td data-label="เลเวลสูงสุด" className="num">{s.max_level ?? '—'}</td>
+                    <td data-label="ธาตุ">{s.element ?? '—'}</td>
+                    <td data-label="อาชีพ">{(s.classes ?? []).length > 0 ? s.classes.join(', ') : '—'}</td>
+                  </tr>
+                ))}
+                {rows.length === 0 && (
+                  <tr>
+                    <td colSpan={5} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                      ไม่พบสกิลที่ตรงเงื่อนไข
+                    </td>
+                  </tr>
+                )}
+              </>
             )}
           </tbody>
         </table>

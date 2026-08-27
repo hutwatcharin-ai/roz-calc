@@ -94,8 +94,11 @@ export default async function CardsPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลการ์ด</h1>
+      {/* A query error and a genuine zero-result search must read differently --
+          otherwise an outage looks identical to "there are no cards", which is
+          false. */}
       <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {filtered.length} ใบ จากทั้งหมด {cards.length} ใบ
+        {error ? 'โหลดจำนวนการ์ดไม่สำเร็จ' : `${filtered.length} ใบ จากทั้งหมด ${cards.length} ใบ`}
       </p>
 
       <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
@@ -121,26 +124,36 @@ export default async function CardsPage({
             </tr>
           </thead>
           <tbody>
-            {rows.map((c) => (
-              <tr key={c.id}>
-                <td data-label="">
-                  <Link href={`/database/items/${c.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {c.icon_url && (
-                      <img src={c.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {c.name_en}
-                  </Link>
-                </td>
-                <td data-label="ช่องที่ใส่">{c.slot ?? '—'}</td>
-                <td data-label="เอฟเฟกต์" className="effect">{c.effect ?? '—'}</td>
-              </tr>
-            ))}
-            {rows.length === 0 && (
+            {error ? (
               <tr>
                 <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  ไม่พบการ์ดที่ตรงเงื่อนไข
+                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
+            ) : (
+              <>
+                {rows.map((c) => (
+                  <tr key={c.id}>
+                    <td data-label="">
+                      <Link href={`/database/items/${c.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        {c.icon_url && (
+                          <img src={c.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                        )}
+                        {c.name_en}
+                      </Link>
+                    </td>
+                    <td data-label="ช่องที่ใส่">{c.slot ?? '—'}</td>
+                    <td data-label="เอฟเฟกต์" className="effect">{c.effect ?? '—'}</td>
+                  </tr>
+                ))}
+                {rows.length === 0 && (
+                  <tr>
+                    <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                      ไม่พบการ์ดที่ตรงเงื่อนไข
+                    </td>
+                  </tr>
+                )}
+              </>
             )}
           </tbody>
         </table>

@@ -4,12 +4,19 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import { mergeSearchResults, SEARCH_TYPE_LABELS, type SearchResult } from '@/lib/search';
+import { escapeLikePattern } from '@/lib/like-escape';
 
 export default function GlobalSearch() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
+  // True when at least one of the six underlying queries failed. A partial
+  // list must never present itself as complete -- a player typing "prontera"
+  // during a maps outage still sees monster/item hits, but the box has to
+  // say a category could not be searched instead of implying maps simply has
+  // no match.
+  const [hasError, setHasError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -32,22 +39,21 @@ export default function GlobalSearch() {
     } else {
       setQuery('');
       setResults([]);
+      setHasError(false);
     }
   }, [open]);
 
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
+      setHasError(false);
       return;
     }
 
     setLoading(true);
     const timer = setTimeout(async () => {
       const db = supabaseBrowser();
-      // Escape the LIKE metacharacters so a literal % or _ in the query
-      // matches itself instead of acting as a wildcard -- the same escaping
-      // app/database/maps/page.tsx uses for its own ilike() search.
-      const needle = query.replace(/[\\%_]/g, (ch) => `\\${ch}`);
+      const needle = escapeLikePattern(query);
 
       const [monsters, items, cards, equipment, skills, maps] = await Promise.all([
         db.from('monsters').select('id, name_en, image_url').ilike('name_en', `%${needle}%`).limit(5),
@@ -76,6 +82,11 @@ export default function GlobalSearch() {
       if (skills.error) console.error('global search: skills query failed', skills.error);
       if (maps.error) console.error('global search: maps query failed', maps.error);
 
+      setHasError(
+        Boolean(
+          monsters.error || items.error || cards.error || equipment.error || skills.error || maps.error,
+        ),
+      );
       setResults(
         mergeSearchResults({
           monsters: monsters.data ?? [],
@@ -157,8 +168,18 @@ export default function GlobalSearch() {
               {loading && (
                 <p style={{ padding: '14px 16px', color: 'var(--faint)', margin: 0 }}>กำลังค้นหา...</p>
               )}
+              {/* A failed category must not read as "nothing there" -- results
+                  from the categories that succeeded are still shown below,
+                  but the list is flagged as incomplete rather than complete. */}
+              {!loading && hasError && (
+                <p style={{ padding: '10px 16px', color: 'var(--faint)', margin: 0, borderBottom: '1px solid var(--hair)' }}>
+                  ค้นบางหมวดไม่สำเร็จ ผลลัพธ์ด้านล่างอาจไม่ครบ
+                </p>
+              )}
               {!loading && query.trim() && results.length === 0 && (
-                <p style={{ padding: '14px 16px', color: 'var(--faint)', margin: 0 }}>ไม่พบผลลัพธ์</p>
+                <p style={{ padding: '14px 16px', color: 'var(--faint)', margin: 0 }}>
+                  {hasError ? 'ค้นหาไม่สำเร็จ ลองใหม่อีกครั้ง' : 'ไม่พบผลลัพธ์'}
+                </p>
               )}
               {results.map((r) => (
                 <Link
