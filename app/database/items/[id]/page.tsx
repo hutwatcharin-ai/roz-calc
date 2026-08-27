@@ -1,6 +1,9 @@
 // app/database/items/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
+import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
+import { composeThaiDescription } from '@/lib/item-description-th';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
@@ -56,11 +59,48 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
     .order('rate', { ascending: false });
   if (droppedByError) console.error('item dropped-by query failed', droppedByError);
 
+  // Before the dictionary reads, not after: an item query that failed renders
+  // this message no matter what the dictionaries say, so paying for two full
+  // table reads first is work thrown away on every failure.
+  //
   // A failed query must not read as "this item does not exist".
   if (error) {
     console.error('item detail query failed', error);
     return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
   }
+
+  // Paginated, not a bare .select(): PostgREST caps at 1,000 rows and reports
+  // no error when it truncates. item_description_lines holds roughly 1,339
+  // distinct prose lines after batch 2, so about 339 items' worth of effects
+  // would silently render in English with linesError null and nothing logged.
+  const [{ data: lineRows, error: linesError }, { data: termRows, error: termsError }] =
+    await Promise.all([
+      fetchAllRows<{ source_line: string; thai_line: string }>((from, to) =>
+        db
+          .from('item_description_lines')
+          .select('source_line, thai_line')
+          .order('source_line')
+          .range(from, to),
+      ),
+      fetchAllRows<{ source_term: string; thai_term: string | null }>((from, to) =>
+        db
+          .from('item_description_terms')
+          .select('source_term, thai_term')
+          .order('source_term')
+          .range(from, to),
+      ),
+    ]);
+
+  // A dictionary that failed to load is not an empty dictionary. Falling back to
+  // English for every line is the right behaviour either way, but the two cases
+  // must stay distinguishable in the logs.
+  if (linesError) console.error('item description lines query failed', linesError);
+  if (termsError) console.error('item description terms query failed', termsError);
+
+  const dict = {
+    lines: new Map((lineRows ?? []).map((r) => [r.source_line, r.thai_line])),
+    terms: new Map((termRows ?? []).map((r) => [r.source_term, r.thai_term])),
+  };
 
   // A clean query that found no row is a genuine 404 -- unlike the error
   // branch above, which must keep rendering its neutral message and never
@@ -114,9 +154,10 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       {item.description && (
         <div className="card" style={{ marginTop: 20 }}>
           <h2 className="section-title">คำอธิบาย</h2>
-          {/* Newlines in the source text carry meaning -- each effect is its
-              own line -- so they are preserved rather than collapsed. */}
-          <p style={{ whiteSpace: 'pre-line', color: 'var(--dim)' }}>{item.description}</p>
+          <DescriptionLanguageToggle
+            thaiLines={composeThaiDescription(item.description, dict).map((l) => l.thai ?? l.source)}
+            englishLines={item.description.split('\n').map((l: string) => l.replace(/\^[0-9a-fA-F]{6}/g, '').trim()).filter((l: string) => l !== '')}
+          />
         </div>
       )}
       <div className="card" style={{ marginTop: 20 }}>
