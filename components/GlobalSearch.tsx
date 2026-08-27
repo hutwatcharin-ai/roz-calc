@@ -60,7 +60,10 @@ export default function GlobalSearch() {
         db.from('items').select('id, name_en, icon_url')
           .in('category', ['Armor', 'Weapon', 'Costume Equipment'])
           .ilike('name_en', `%${needle}%`).limit(5),
-        db.from('skills').select('slug, name, icon_url').ilike('name', `%${needle}%`).limit(5),
+        // classes is fetched so mergeSearchResults can route a skill to the
+        // tab it actually lives on (isInGameSkill(classes)) instead of always
+        // landing on the default "ingame" tab, which 511 of 851 skills fail.
+        db.from('skills').select('slug, name, icon_url, classes').ilike('name', `%${needle}%`).limit(5),
         // map_stats is one row per map already, so no de-duplication is needed
         // here the way monster_spawns would have required.
         db.from('map_stats').select('map_code, map_display_name').ilike('search_text', `%${needle}%`).limit(5),

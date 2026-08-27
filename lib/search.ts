@@ -3,6 +3,8 @@
 // search-led nav and the search-led homepage -- are both blocked on this
 // covering all six.
 
+import { isInGameSkill } from './zero-jobs';
+
 export type SearchType = 'monster' | 'item' | 'card' | 'equipment' | 'skill' | 'map';
 
 export interface SearchRow {
@@ -16,6 +18,10 @@ export interface SkillSearchRow {
   slug: string;
   name: string;
   icon_url?: string | null;
+  // Which tab a skill's own detail row lives under on the skills page hinges
+  // on this. Optional/null/[] all mean "no class tag" -- isInGameSkill treats
+  // them the same way, so the href logic below must too.
+  classes?: string[] | null;
 }
 
 export interface MapSearchRow {
@@ -74,15 +80,22 @@ export function mergeSearchResults(groups: SearchGroups): SearchResult[] {
     ...groups.items.map((i) => fromItemRow(i, 'item')),
     ...groups.cards.map((c) => fromItemRow(c, 'card')),
     ...groups.equipment.map((e) => fromItemRow(e, 'equipment')),
-    ...groups.skills.map((s) => ({
-      id: s.slug,
-      type: 'skill' as const,
-      name: s.name,
-      // There is no skill detail page: the browser's own search is the
-      // destination, which keeps the result honest about what exists.
-      href: `/database/skills?q=${encodeURIComponent(s.name)}`,
-      iconUrl: s.icon_url ?? null,
-    })),
+    ...groups.skills.map((s) => {
+      // The skills page defaults to its "ingame" tab and filters to
+      // isInGameSkill(classes) before applying q. A skill that fails that
+      // check does not exist on the tab the plain href lands on -- the same
+      // failure this task exists to fix, one hop later -- so its href must
+      // say which tab it actually lives in.
+      const inGame = isInGameSkill(s.classes ?? null);
+      const qs = `q=${encodeURIComponent(s.name)}${inGame ? '' : '&tab=unreleased'}`;
+      return {
+        id: s.slug,
+        type: 'skill' as const,
+        name: s.name,
+        href: `/database/skills?${qs}`,
+        iconUrl: s.icon_url ?? null,
+      };
+    }),
     ...groups.maps.map((m) => ({
       id: m.map_code,
       type: 'map' as const,

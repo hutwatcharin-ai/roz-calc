@@ -28,8 +28,42 @@ describe('mergeSearchResults', () => {
   });
 
   it('keys a skill by slug, not by a numeric id', () => {
-    const [r] = mergeSearchResults({ ...empty, skills: [{ slug: 'bash', name: 'Bash', icon_url: '/images/skills/x.webp' }] });
+    const [r] = mergeSearchResults({ ...empty, skills: [{ slug: 'bash', name: 'Bash', icon_url: '/images/skills/x.webp', classes: ['Swordsman'] }] });
     expect(r).toEqual({ type: 'skill', id: 'bash', name: 'Bash', href: '/database/skills?q=Bash', iconUrl: '/images/skills/x.webp' });
+  });
+
+  it('sends an in-game skill to the default tab, with no tab parameter', () => {
+    // classes: ['Swordsman'] passes isInGameSkill, so the skill lives on the
+    // page's default ("ingame") tab -- no tab param needed to find it there.
+    const [r] = mergeSearchResults({ ...empty, skills: [{ slug: 'bash', name: 'Bash', classes: ['Swordsman'] }] });
+    expect(r.href).toBe('/database/skills?q=Bash');
+  });
+
+  it('sends an unreleased skill to the unreleased tab', () => {
+    // classes: ['Rebellion'] is not a Zero job, so isInGameSkill is false --
+    // the skill only exists in the "unreleased" pool and the href must say so,
+    // or the player lands on the default tab and finds nothing.
+    const [r] = mergeSearchResults({
+      ...empty,
+      skills: [{ slug: 'anti-material-blast', name: 'Anti Material Blast', classes: ['Rebellion'] }],
+    });
+    expect(r.href).toBe('/database/skills?q=Anti%20Material%20Blast&tab=unreleased');
+  });
+
+  it('sends a skill with no class tag to the unreleased tab', () => {
+    // 418 of the 511 unreleased skills carry no class at all -- null or [] --
+    // and isInGameSkill treats both as "not in game", so both must route here.
+    const [withNull] = mergeSearchResults({
+      ...empty,
+      skills: [{ slug: 'no-class', name: 'No Class Skill', classes: null }],
+    });
+    expect(withNull.href).toBe('/database/skills?q=No%20Class%20Skill&tab=unreleased');
+
+    const [withEmpty] = mergeSearchResults({
+      ...empty,
+      skills: [{ slug: 'empty-class', name: 'Empty Class Skill', classes: [] }],
+    });
+    expect(withEmpty.href).toBe('/database/skills?q=Empty%20Class%20Skill&tab=unreleased');
   });
 
   it('keys a map by code and falls back to the code when it has no name', () => {
