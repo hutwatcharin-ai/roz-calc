@@ -14,7 +14,16 @@ export const revalidate = 86400;
 // scoped to a 500 on /sitemap.xml instead of a failed deploy.
 export const dynamic = 'force-dynamic';
 
-const STATIC_PATHS = ['/', '/drop-finder', '/database/monsters', '/database/items'];
+const STATIC_PATHS = [
+  '/',
+  '/drop-finder',
+  '/database/monsters',
+  '/database/items',
+  '/database/cards',
+  '/database/equipment',
+  '/database/skills',
+  '/database/maps',
+];
 
 // Supabase caps a single select at 1,000 rows and does not say so when it
 // truncates. items alone is ~1,300, so a plain select() would silently drop
@@ -48,12 +57,54 @@ async function allIds(table: 'monsters' | 'items'): Promise<number[]> {
   return ids;
 }
 
+// map_stats has one row per map that actually has a detail page -- a map
+// code with no monster_spawns rows 404s on app/database/maps/[code]/page.tsx,
+// the same set app/database/maps/page.tsx lists. 497 rows today, well under
+// the 1,000-row cap, but this pages the same way allIds() does so a future
+// wave that grows past it doesn't silently drop URLs the way a plain
+// select() would.
+async function allMapCodes(): Promise<string[]> {
+  const db = supabaseBrowser();
+  const codes: string[] = [];
+
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await db
+      .from('map_stats')
+      .select('map_code')
+      .order('map_code')
+      .range(from, from + PAGE - 1);
+
+    if (error) {
+      throw new Error(`sitemap: map_stats query failed for range ${from}-${from + PAGE - 1}: ${error.message}`);
+    }
+    if (!data || data.length === 0) break;
+
+    codes.push(...data.map((row) => row.map_code));
+    if (data.length < PAGE) break;
+  }
+
+  return codes;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [monsterIds, itemIds] = await Promise.all([allIds('monsters'), allIds('items')]);
+  const [monsterIds, itemIds, mapCodes] = await Promise.all([
+    allIds('monsters'),
+    allIds('items'),
+    allMapCodes(),
+  ]);
 
   return [
     ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}`, changeFrequency: 'weekly' as const, priority: 1 })),
     ...monsterIds.map((id) => ({ url: `${SITE_URL}/database/monsters/${id}`, changeFrequency: 'monthly' as const, priority: 0.7 })),
     ...itemIds.map((id) => ({ url: `${SITE_URL}/database/items/${id}`, changeFrequency: 'monthly' as const, priority: 0.6 })),
+    // map_code is a string, not a numeric id, so it needs encodeURIComponent
+    // the way app/database/maps/page.tsx and monster spawn chips already link
+    // to it -- some codes carry characters (e.g. underscores are fine, but
+    // the column's type does not guarantee no others) that must survive the URL.
+    ...mapCodes.map((code) => ({
+      url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
   ];
 }
