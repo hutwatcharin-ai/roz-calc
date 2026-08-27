@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { checkTranslation, MUST_STAY_ENGLISH } from './check-thai-glossary';
+import {
+  ACKNOWLEDGED_EXEMPTIONS,
+  checkTranslation,
+  MUST_STAY_ENGLISH,
+} from './check-thai-glossary';
 
 describe('checkTranslation — numbers', () => {
   it('passes when every number survives', () => {
@@ -209,3 +213,39 @@ describe('checkTranslation — numbers, anchored to glossary terms', () => {
     expect(issues.map((i) => i.rule)).toEqual(['must-stay-english']);
   });
 });
+
+describe('acknowledged exemptions', () => {
+  const exemption = ACKNOWLEDGED_EXEMPTIONS[0];
+
+  it('lets the exempted line through', () => {
+    // `Critical Wounds` is a severe injury in flavour prose, not the CRIT stat,
+    // and the spec approves the Thai for this line verbatim.
+    expect(checkTranslation(exemption.source, 'เคียวจันทร์เสี้ยว บาดแผลฉกรรจ์')).toEqual([]);
+  });
+
+  it('does not exempt the same term on a different line', () => {
+    // The whole risk of an exemption list is that it quietly becomes a rule
+    // change. It is keyed on the exact source line, and this is the test that
+    // says so.
+    expect(checkTranslation('Critical Rate +30%.', 'อัตราคริ +30%')).toContainEqual(
+      expect.objectContaining({ detail: 'missing term: Critical' }),
+    );
+  });
+
+  it('does not exempt a different term on the exempted line', () => {
+    const altered = exemption.source.replace('Critical Wounds', 'Stun');
+    expect(checkTranslation(altered, 'เคียว บาดแผล')).toContainEqual(
+      expect.objectContaining({ detail: 'missing term: Stun' }),
+    );
+  });
+
+  it('gives every exemption a reason', () => {
+    // An exemption with no stated reason is indistinguishable from a mistake
+    // six months later.
+    for (const e of ACKNOWLEDGED_EXEMPTIONS) {
+      expect(e.why.trim().length).toBeGreaterThan(20);
+      expect(MUST_STAY_ENGLISH).toContain(e.term);
+    }
+  });
+});
+

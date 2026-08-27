@@ -147,6 +147,42 @@ function valueSide(text: string): string {
   return LABEL_VALUE.exec(text)?.[1] ?? text;
 }
 
+// A glossary term can appear in a source line without being the game term at
+// all: `Critical Wounds` in flavour prose is a severe injury, and `Earth` in
+// `beyond Earth` is the planet. Rendering those in English to satisfy the rule
+// would be worse Thai and, for the first one, would contradict a translation
+// the spec approves verbatim in section 7.
+//
+// The alternative -- weakening the rule for `Critical` and `Earth` everywhere
+// -- costs far more than it saves, so exemptions are listed one at a time,
+// against the exact line, with the reason. The count is printed on every run:
+// an exemption that nobody can see is just a hole.
+export interface Exemption {
+  readonly source: string;
+  readonly term: string;
+  readonly why: string;
+}
+
+export const ACKNOWLEDGED_EXEMPTIONS: readonly Exemption[] = [
+  {
+    source:
+      'As its name suggests, crescent scythe with a sinister curved blade like a half moon. ' +
+      'One hit makes it hard to avoid Critical Wounds.',
+    term: 'Critical',
+    why: '"Critical Wounds" is a severe injury, not the CRIT stat. Spec section 7 approves this translation verbatim.',
+  },
+  {
+    source:
+      'Some say the design is inspired by the eyes of intelligent beings living beyond Earth.',
+    term: 'Earth',
+    why: '"Earth" is the planet here, not the element.',
+  },
+];
+
+function isExempt(source: string, term: string): boolean {
+  return ACKNOWLEDGED_EXEMPTIONS.some((e) => e.source === source && e.term === term);
+}
+
 export interface CheckOptions {
   /**
    * The text is a label NAME (`Weapon Level`), not a value or a sentence.
@@ -204,6 +240,7 @@ export function checkTranslation(
       haystackThai = valueSide(thai);
     }
     if (containsTerm(haystackSource, term) && !containsTerm(haystackThai, term)) {
+      if (isExempt(source, term)) continue;
       issues.push({ rule: 'must-stay-english', source, thai, detail: `missing term: ${term}` });
     }
   }
@@ -284,6 +321,10 @@ async function main(): Promise<void> {
     `checked ${checked} translations ` +
       `(${(lines ?? []).length} lines, ${(terms ?? []).length - deliberatelyEnglish} terms; ` +
       `${deliberatelyEnglish} terms deliberately left in English)`,
+  );
+  console.log(
+    `${ACKNOWLEDGED_EXEMPTIONS.length} acknowledged exemptions are in force ` +
+      `(see ACKNOWLEDGED_EXEMPTIONS in this file)`,
   );
   console.log(issueCount === 0 ? 'no glossary issues' : `${issueCount} glossary issues`);
 
