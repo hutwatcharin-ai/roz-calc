@@ -8,7 +8,7 @@
     "test": "vitest run",
     "import-data": "tsx scripts/import-data.ts",
     "mirror-skill-icons": "tsx scripts/mirror-skill-icons.ts",
-    "seed-thai-batch1": "tsx scripts/seed-thai-batch1.ts"
+    "seed-thai-terms": "tsx scripts/seed-thai-terms.ts"
   },
   "dependencies": {
     "next": "^14.2.0",
