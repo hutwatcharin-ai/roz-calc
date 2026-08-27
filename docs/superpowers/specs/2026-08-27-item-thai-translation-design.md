@@ -196,16 +196,29 @@ create policy "item_description_terms public read"
 // lib/item-description-th.ts
 export interface DescriptionLine {
   source: string;
-  thai: string | null;   // null = ยังไม่แปล แสดงอังกฤษ
+  thai: string | null;   // null = ยังไม่แปล แสดงอังกฤษบรรทัดนั้น
+}
+
+export interface ThaiDictionaries {
+  lines: ReadonlyMap<string, string>;          // ร้อยแก้ว: บรรทัดเต็ม -> ไทย
+  terms: ReadonlyMap<string, string | null>;   // ป้าย/ค่าสถานะ: คำ -> ไทย (null = คงอังกฤษ)
 }
 
 export function composeThaiDescription(
   description: string | null,
-  lineMap: ReadonlyMap<string, string>,
+  dict: ThaiDictionaries,
 ): DescriptionLine[]
 ```
 
-แยกบรรทัด ตัดโค้ดสี หาในแมพ ถ้าไม่เจอคืน `thai: null` แล้วหน้าเว็บแสดงอังกฤษบรรทัดนั้น
+ลำดับการทำงานต่อหนึ่งบรรทัด:
+
+1. ตัดโค้ดสี `^RRGGBB` ออก
+2. ถ้าตรงรูป `<ป้าย> : <ค่า>` — หาป้ายใน `terms` เจอแล้วประกอบใหม่เป็น `<ป้ายไทย> : <ค่าเดิม>` · ถ้า `thai_term` เป็น null ให้คืนบรรทัดเดิมทั้งบรรทัด (ตั้งใจคงอังกฤษ ไม่ใช่ยังไม่แปล)
+3. ถ้าตรงรูป `<ชื่อค่าสถานะ> +N` — ทำแบบเดียวกันกับชื่อค่าสถานะ
+4. ถ้าไม่ใช่ทั้งสองแบบ — หาทั้งบรรทัดใน `lines`
+5. ไม่เจอที่ไหนเลย → `thai: null`
+
+**ข้อ 2 กับ 3 ต้องมาก่อนข้อ 4 เสมอ** ถ้าสลับลำดับ บรรทัด `DEF : 5` จะถูกมองเป็นร้อยแก้วแล้วไปรอคำแปลทั้งบรรทัด ซึ่งเป็นสิ่งที่ §2 อธิบายว่าทำให้จำนวนงานบานตามข้อมูล
 
 ### 4.3 การแสดงผล
 
