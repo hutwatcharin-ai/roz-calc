@@ -176,6 +176,30 @@ describe('composeThaiDescription', () => {
     expect(composeThaiDescription('MHP +100', blank)[0].thai).toBeNull();
   });
 
+  it('lets a whole-line translation outrank a term translation', () => {
+    // `During transformation : ATK +70` is a sentence that merely starts with a
+    // seeded label. Composing it from the term leaves the rest in English.
+    // Batch 2 stores the whole sentence, and that must win without anyone
+    // having to delete the term row first.
+    const both: ThaiDictionaries = {
+      lines: new Map([['During transformation : ATK +70', 'ระหว่างแปลงร่าง พลังโจมตี +70']]),
+      terms: new Map<string, string | null>([['During transformation', 'ระหว่างแปลงร่าง']]),
+    };
+    const [line] = composeThaiDescription('During transformation : ATK +70', both);
+    expect(line.thai).toBe('ระหว่างแปลงร่าง พลังโจมตี +70');
+  });
+
+  it('lets a whole-line translation outrank a NULL term row too', () => {
+    // A NULL row says "deliberately English". A stored whole line says
+    // "translated, and here it is". The second is a later, more specific
+    // decision and must not be overruled by the first.
+    const both: ThaiDictionaries = {
+      lines: new Map([['ATK : 100', 'พลังโจมตี : 100']]),
+      terms: new Map<string, string | null>([['ATK', null]]),
+    };
+    expect(composeThaiDescription('ATK : 100', both)[0].thai).toBe('พลังโจมตี : 100');
+  });
+
   it('keeps one entry per source line, in order', () => {
     const out = composeThaiDescription('Unbreakable.\nCan be sold to the Collector.', dict);
     expect(out.map((l) => l.thai)).toEqual(['ไม่แตก', 'ขายให้ Collector ได้']);

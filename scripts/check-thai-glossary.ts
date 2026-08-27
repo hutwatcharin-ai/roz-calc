@@ -4,6 +4,9 @@
 // afterwards gets shaped by the translations it is meant to judge.
 //
 // Run it with:  npx tsx scripts/check-thai-glossary.ts
+// It reads the live database, so NEXT_PUBLIC_SUPABASE_URL and
+// SUPABASE_SERVICE_ROLE_KEY must already be in the environment -- nothing
+// here loads `.env.local`. In bash:  set -a && . ./.env.local && set +a
 // Exits non-zero if any stored translation breaks a rule.
 
 import { supabaseAdmin } from '../lib/supabase';

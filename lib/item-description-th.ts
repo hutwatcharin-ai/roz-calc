@@ -93,19 +93,27 @@ export function composeThaiDescription(
       continue;
     }
 
+    // A whole-line translation outranks a term translation, always. The line
+    // dictionary holds a deliberate decision about this exact sentence; a term
+    // match is a generic substitution that happens to apply. Three lines in the
+    // data are sentences that merely start with a label term
+    // (`During transformation : ATK +70`), and composing them from the term
+    // leaves the rest in English. Batch 2 translates them whole, and it should
+    // not have to delete the term row to do it.
+    const wholeLine = usable(dict.lines.get(classified.source));
+    if (wholeLine !== null) {
+      out.push({ source: classified.source, thai: wholeLine });
+      continue;
+    }
+
     const stored = dict.terms.get(classified.term);
     const blankRow = typeof stored === 'string' && stored.trim() === '';
     if (!dict.terms.has(classified.term) || blankRow) {
       // No row means "not translated yet" -- distinct from a row holding NULL,
       // which means "considered, deliberately English" and is handled below.
       // Collapsing the two would make every untranslated term look finished.
-      //
-      // Some label-shaped and stat-shaped lines are really whole sentences
-      // (`During transformation : ATK +70`) or long phrases
-      // (`Earth-Property Resistance +5%`), and batch 2 translates those whole.
-      // Check the line dictionary before giving up, or those rows would exist
-      // and the page would still render English with nothing logged.
-      out.push({ source: classified.source, thai: usable(dict.lines.get(classified.source)) });
+      // The line dictionary was already consulted above and had nothing.
+      out.push({ source: classified.source, thai: null });
       continue;
     }
 
