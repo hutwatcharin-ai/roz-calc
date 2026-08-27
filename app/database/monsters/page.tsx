@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
+import { escapeLikePattern } from '@/lib/like-escape';
 
 export const metadata = {
   title: 'ฐานข้อมูลมอนสเตอร์',
@@ -30,7 +31,10 @@ export default async function MonsterListPage({
   const db = supabaseBrowser();
   let query = db.from('monsters').select('id, name_en, level, race, element, image_url', { count: 'exact' });
 
-  if (q) query = query.ilike('name_en', `%${q}%`);
+  if (q) {
+    const needle = escapeLikePattern(q);
+    query = query.ilike('name_en', `%${needle}%`);
+  }
   if (race) query = query.eq('race', race);
   if (element) query = query.eq('element', element);
 

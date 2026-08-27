@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
+import { escapeLikePattern } from '@/lib/like-escape';
 
 export const metadata = {
   title: 'ฐานข้อมูลไอเทม',
@@ -28,7 +29,10 @@ export default async function ItemListPage({
   const db = supabaseBrowser();
   let query = db.from('items').select('id, name_en, category, weapon_type, icon_url', { count: 'exact' });
 
-  if (q) query = query.ilike('name_en', `%${q}%`);
+  if (q) {
+    const needle = escapeLikePattern(q);
+    query = query.ilike('name_en', `%${needle}%`);
+  }
   if (category) query = query.eq('category', category);
 
   const from = (page - 1) * PAGE_SIZE;

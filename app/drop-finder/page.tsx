@@ -1,6 +1,7 @@
 // app/drop-finder/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
 import DropSearch from '@/components/DropSearch';
+import { escapeLikePattern } from '@/lib/like-escape';
 
 export const metadata = {
   title: 'ค้นหาว่าของชิ้นนี้ดรอปจากมอนตัวไหน',
@@ -12,10 +13,11 @@ export const metadata = {
 // substring match. The caller surfaces the resolved name so a fallback match
 // is visible to the user instead of silently picking an arbitrary row.
 async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string) {
+  const needle = escapeLikePattern(query);
   const { data: exact, error: exactError } = await db
     .from('items')
     .select('id, name_en')
-    .ilike('name_en', query)
+    .ilike('name_en', needle)
     .limit(1);
 
   if (exactError) {
@@ -27,7 +29,7 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
   const { data: partial, error: partialError } = await db
     .from('items')
     .select('id, name_en')
-    .ilike('name_en', `%${query}%`)
+    .ilike('name_en', `%${needle}%`)
     .order('name_en')
     .limit(1);
 
