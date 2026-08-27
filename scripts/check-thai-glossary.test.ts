@@ -24,8 +24,41 @@ describe('checkTranslation — numbers', () => {
     expect(issues.some((i) => i.rule === 'number-mismatch')).toBe(true);
   });
 
-  it('ignores the order numbers appear in', () => {
-    const issues = checkTranslation('ATK +5, DEF +3', 'DEF +3, ATK +5');
+  it('ignores the order numbers appear in when each keeps its own stat', () => {
+    // Thai word order legitimately moves whole phrases around. This is the
+    // legitimate case: +5 is still ATK's and +3 is still DEF's, only the two
+    // clauses swapped. Contrast with the transposition test below, where the
+    // numbers changed hands.
+    const issues = checkTranslation('ATK +5, DEF +3', 'DEF +3 และ ATK +5');
+    expect(issues.filter((i) => i.rule === 'number-mismatch')).toHaveLength(0);
+  });
+
+  it('catches a sign that flipped', () => {
+    // A penalty turned into a bonus. The digits are identical, so a rule that
+    // strips the sign reports nothing at all.
+    const issues = checkTranslation('HIT -10.', 'HIT +10');
+    expect(issues.some((i) => i.rule === 'number-mismatch')).toBe(true);
+  });
+
+  it('catches a percent that was dropped', () => {
+    // "5" and "5%" are different quantities. Stripping the unit makes a flat
+    // -5 damage reduction and a -5% one look like the same translation.
+    const issues = checkTranslation('Reduces damage by 5%.', 'ลดความเสียหาย 5');
+    expect(issues.some((i) => i.rule === 'number-mismatch')).toBe(true);
+  });
+
+  it('catches two numbers that swapped stats', () => {
+    // The multiset {3, 5} is unchanged, so an order-insensitive comparison of
+    // bare digits cannot see this. ATK now gets DEF's number and vice versa --
+    // every quantity on the line is wrong.
+    const issues = checkTranslation('ATK +5, DEF +3', 'ATK +3 และ DEF +5');
+    expect(issues.some((i) => i.rule === 'number-mismatch')).toBe(true);
+  });
+
+  it('does not demand an anchor the source never had', () => {
+    // The number is not preceded by a glossary term in either language, so it
+    // is compared on its own and Thai prose around it is free to differ.
+    const issues = checkTranslation('Adds a 6% chance to stun.', 'มีโอกาส 6% ทำให้สตัน');
     expect(issues.filter((i) => i.rule === 'number-mismatch')).toHaveLength(0);
   });
 });
@@ -52,6 +85,32 @@ describe('checkTranslation — terms that must stay English', () => {
   it('matches a term only as a whole word', () => {
     // "Fired" contains "Fire" but is not the element.
     const issues = checkTranslation('The arrow is Fired.', 'ลูกศรถูกยิงออกไป');
+    expect(issues.filter((i) => i.rule === 'must-stay-english')).toHaveLength(0);
+  });
+
+  it('does not read an equip slot inside a longer label name', () => {
+    // 155 lines read `Weapon Level : N`. "Weapon" there is part of the label
+    // NAME, and translating the label name is exactly what batch 1 does, so
+    // treating it as the equip slot flags all 155 -- the only complaint across
+    // 3,535 composed lines, and every one of them a false positive.
+    const issues = checkTranslation('Weapon Level : 3', 'ระดับอาวุธ : 3');
+    expect(issues.filter((i) => i.rule === 'must-stay-english')).toHaveLength(0);
+  });
+
+  it('still catches an equip slot translated away as a value', () => {
+    const issues = checkTranslation('Type : Weapon', 'ประเภท : อาวุธ');
+    expect(issues.some((i) => i.rule === 'must-stay-english' && i.detail.includes('Weapon'))).toBe(true);
+  });
+
+  it('does not read an equip slot inside a bare label name', () => {
+    // The term row itself, not the composed line: `Weapon Level` is stored and
+    // translated as one term, so there is no colon to separate name from value.
+    const issues = checkTranslation('Weapon Level', 'ระดับอาวุธ');
+    expect(issues.filter((i) => i.rule === 'must-stay-english')).toHaveLength(0);
+  });
+
+  it('accepts an equip slot carried through as the whole value', () => {
+    const issues = checkTranslation('Equipped on : Armor', 'ช่องที่ใส่ : Armor');
     expect(issues.filter((i) => i.rule === 'must-stay-english')).toHaveLength(0);
   });
 
