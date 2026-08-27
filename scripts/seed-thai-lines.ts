@@ -1102,6 +1102,249 @@ const FLAVOUR_TH_2: Record<string, string> = {
     "หินทรงสายฟ้าสีเขียวอ่อนที่เกิดจากแร่ wind of verdure",
 };
 
+// Batch 4, part 2: more flavour text -- monster parts, crafting materials,
+// weapons and headgear.
+const FLAVOUR_TH_3: Record<string, string> = {
+  "A part of a fish's breathing apparatus.":
+    "ส่วนหนึ่งของอวัยวะหายใจของปลา",
+  "A piece of iron shaped to fit on a horse's hoof for its protection.":
+    "แผ่นเหล็กที่ขึ้นรูปให้พอดีกับกีบม้าเพื่อป้องกันกีบ",
+  "A piece of nearly transparent fabric.":
+    "ผืนผ้าที่เกือบจะโปร่งใส",
+  "A piece of steel whose purpose is unknown, though it is clearly used to open and close something.":
+    "ชิ้นเหล็กที่ไม่รู้ว่าใช้ทำอะไร แต่ชัดเจนว่าใช้เปิดปิดอะไรบางอย่าง",
+  "A piece of wood that looks like it was put out while burning fiercely. No one knows what it is for, but it sells anyway.":
+    "ท่อนไม้ที่ดูเหมือนถูกดับตอนกำลังไหม้โชน ไม่มีใครรู้ว่าใช้ทำอะไร แต่ก็ขายได้อยู่ดี",
+  "A pinwheel fitted with sharp blades. It appears to be made for killing.":
+    "กังหันลมที่ติดใบมีดคม ดูเหมือนทำมาเพื่อสังหาร",
+  "A plate baked from yellow clay. It is hard and has a glossy sheen.":
+    "จานที่เผาจากดินเหนียวสีเหลือง แข็งและเป็นเงามัน",
+  "A portable case with glass panes that allow some contained light to illuminate dark areas.":
+    "กล่องพกพาที่มีแผ่นกระจก ให้แสงที่บรรจุไว้ส่องสว่างในที่มืดได้",
+  "A potion with a taste somewhere between Red Potion and Blue Potion. Somehow, it reminds you of the Savage roaming the Mjolnir Mountains.":
+    "ยาที่รสชาติอยู่กึ่งกลางระหว่าง Red Potion กับ Blue Potion ไม่รู้ทำไมถึงชวนให้นึกถึง Savage ที่เดินอยู่แถบ Mjolnir Mountains",
+  "A pouch filled to the brim with Guild Agit Coin.":
+    "ถุงที่อัดแน่นไปด้วย Guild Agit Coin",
+  "A powder ground from a poisonous toxin. Mixed into water and fed to someone, it would surely cause great suffering.":
+    "ผงที่บดจากพิษร้าย ผสมน้ำให้ใครกินคงทรมานไม่น้อย",
+  "A prehensile tail from a monkey.":
+    "หางลิงที่ใช้เกาะเกี่ยวได้",
+  "A premium set of refined cooking instruments. Feels like it could elevate any dish.":
+    "ชุดเครื่องครัวชั้นดีที่ประณีต รู้สึกเหมือนจะยกระดับอาหารได้ทุกจาน",
+  "A product from the Fantasia Tome Editorial Department’s automaton doll series.":
+    "ผลิตภัณฑ์จากซีรีส์ตุ๊กตากลไกของกองบรรณาธิการ Fantasia Tome",
+  "A pumpkin with a carved, spooky face.":
+    "ฟักทองที่แกะเป็นหน้าตาน่าขนลุก",
+  "A putrid, incredibly pungent corpse's nail.":
+    "เล็บศพที่เน่าและส่งกลิ่นฉุนอย่างเหลือเชื่อ",
+  "A rare, legendary sword in which the soul of a master smith lives on, blending power and beauty.":
+    "ดาบในตำนานอันหาได้ยาก ที่วิญญาณของช่างตีดาบผู้ยิ่งใหญ่ยังคงสถิตอยู่ ผสานทั้งพลังและความงาม",
+  "A red cloth you can wrap around your neck for warmth.":
+    "ผ้าสีแดงที่พันคอไว้ให้อบอุ่นได้",
+  "A remarkable whip enhanced with a weighted tip to increase its striking power.":
+    "แส้ชั้นเยี่ยมที่เสริมปลายให้หนักขึ้นเพื่อเพิ่มแรงฟาด",
+  "A ring placed in a cow's nose so that it can be steered more easily.":
+    "ห่วงที่สอดจมูกวัวเพื่อให้บังคับได้ง่ายขึ้น",
+  "A root from a tree which can be used to make medicine or rope.":
+    "รากไม้ที่ใช้ทำยาหรือทำเชือกได้",
+  "A roughly crafted shield made to block simple attacks.":
+    "โล่ที่ทำอย่างหยาบ ๆ ไว้กันการโจมตีธรรมดา",
+  "A round black pill so bitter-looking you can taste it just by looking.":
+    "ยาลูกกลอนสีดำที่ดูขมจนแค่มองก็รู้รส",
+  "A round shell that looks like it has been rolled up.":
+    "เปลือกทรงกลมที่ดูเหมือนม้วนตัวอยู่",
+  "A rounded cloth crown adorned with a jewel on top, radiating a classic sense of dignity.":
+    "มงกุฎผ้าทรงมนที่ประดับอัญมณีไว้ด้านบน แผ่ความสง่างามแบบคลาสสิก",
+  "A sash said to have been worn by a famous ninja. Its luxurious emblem gives off a mysterious light, as if it holds magical power.":
+    "ผ้าคาดเอวที่ว่ากันว่านินจาชื่อดังเคยคาด ตราสัญลักษณ์หรูหราของมันเปล่งแสงลึกลับราวกับมีพลังเวทซ่อนอยู่",
+  "A scale that is much sharper than a razor.":
+    "เกล็ดที่คมยิ่งกว่ามีดโกนมาก",
+  "A self-portrait depicting a young girl. Worn with age, her features are hard to make out, but she seems quite adorable.":
+    "ภาพวาดตัวเองของเด็กหญิงคนหนึ่ง เก่าจนหน้าตาดูไม่ค่อยออก แต่ก็ดูน่ารักไม่น้อย",
+  "A self-portrait that vividly depicts a distorted expression.":
+    "ภาพวาดตัวเองที่ถ่ายทอดสีหน้าบิดเบี้ยวได้อย่างชัดเจน",
+  "A set of cooking tools favored by royal court chefs. It feels like it will yield refined dishes.":
+    "ชุดเครื่องครัวที่พ่อครัวในราชสำนักนิยมใช้ รู้สึกเหมือนจะทำอาหารได้ประณีต",
+  "A set of fat lips cut from a giant deep sea fish.":
+    "ริมฝีปากหนาที่ตัดมาจากปลาน้ำลึกยักษ์",
+  "A set of hands taken from the face of a clock.":
+    "เข็มที่ถอดมาจากหน้าปัดนาฬิกา",
+  "A set of long metal rods aligned and fixed together. Found deep underwater, though its purpose remains unknown.":
+    "แท่งโลหะยาวที่เรียงและยึดติดกันไว้ พบใต้น้ำลึก แต่ยังไม่รู้ว่าใช้ทำอะไร",
+  "A set of tails that used to belong to a nine tailed fox.":
+    "หางชุดหนึ่งที่เคยเป็นของจิ้งจอกเก้าหาง",
+  "A set of wings cut from a moth.":
+    "ปีกที่ตัดมาจากผีเสื้อกลางคืน",
+  "A sewing tool used to wind thread for stitching.":
+    "อุปกรณ์เย็บผ้าที่ใช้กรอด้ายสำหรับเย็บ",
+  "A shard of a broken liquor jar. They say the fragrant, aged scent of liquor on it stirs the hearts of drinkers...":
+    "เศษไหเหล้าที่แตก ว่ากันว่ากลิ่นเหล้าบ่มหอมที่ติดอยู่ทำให้นักดื่มใจสั่น...",
+  "A sharp claw pulled from a leopard. Being pricked by it would surely sting quite a bit.":
+    "กรงเล็บคมที่ดึงมาจากเสือดาว โดนทิ่มคงเจ็บไม่น้อย",
+  "A sharp cuspid yanked from some monster's mouth.":
+    "เขี้ยวคมที่กระชากมาจากปากมอนสเตอร์ตัวหนึ่ง",
+  "A sharp needle from a Muka..":
+    "เข็มแหลมจาก Muka",
+  "A sharp talon from a bird's foot.":
+    "กรงเล็บแหลมจากเท้านก",
+  "A sharp, front limb severed from a mantis.":
+    "ขาหน้าแหลมคมที่ตัดมาจากตั๊กแตนตำข้าว",
+  "A sharp, poisonous fang.":
+    "เขี้ยวพิษที่แหลมคม",
+  "A sharp, serrated tooth pulled from the mouth of a giant deep sea fish.":
+    "ฟันหยักแหลมคมที่ดึงมาจากปากปลาน้ำลึกยักษ์",
+  "A shed skin peeling from an earthworm.":
+    "คราบที่ลอกออกมาจากไส้เดือน",
+  "A shell made from hardened scales that's used as protection.":
+    "เปลือกที่เกิดจากเกล็ดแข็งตัว ใช้ป้องกันตัว",
+  "A shell that sparkles with dazzling light.":
+    "เปลือกที่เปล่งประกายเจิดจ้า",
+  "A shimmering, reflective scale.":
+    "เกล็ดที่วาววับสะท้อนแสง",
+  "A short lock of braided hair.":
+    "ปอยผมถักสั้น ๆ",
+  "A shuriken that is broken and missing its edge. It is one of the secret weapons said to have been favored by spies of a faraway eastern land.":
+    "ชูริเคนที่หักและปลายบิ่น เป็นหนึ่งในอาวุธลับที่ว่ากันว่าสายลับจากดินแดนตะวันออกอันไกลโพ้นนิยมใช้",
+  "A simple device made to stir up a breeze. It would be nice to use on a hot day.":
+    "อุปกรณ์ง่าย ๆ ที่ทำไว้โบกให้เกิดลม ใช้ในวันที่อากาศร้อนคงดี",
+  "A simple knife.":
+    "มีดเรียบง่าย",
+  "A single scale from a Worm Tail.":
+    "เกล็ดหนึ่งชิ้นจาก Worm Tail",
+  "A single, functioning cell taken from some monster.":
+    "เซลล์ที่ยังทำงานได้หนึ่งเซลล์ ซึ่งเอามาจากมอนสเตอร์ตัวหนึ่ง",
+  "A skull-shaped ring whose inner band bears an inscription carved with a sharp blade: 'Even in death, forever...'":
+    "แหวนทรงกะโหลกที่ด้านในสลักด้วยใบมีดคมว่า 'แม้ตายไปก็ชั่วนิรันดร์...'",
+  "A sky colored ore that glows with the light of the deep ocean depths.":
+    "แร่สีฟ้าท้องฟ้าที่เรืองแสงดั่งแสงจากก้นมหาสมุทร",
+  "A slightly longer staff designed with power in mind rather than mobility.":
+    "คทาที่ยาวกว่าปกติเล็กน้อย ออกแบบโดยเน้นพลังมากกว่าความคล่องตัว",
+  "A small one-handed spear that was once also used as a throwing weapon.":
+    "หอกมือเดียวขนาดเล็กที่ครั้งหนึ่งเคยใช้เป็นอาวุธขว้างด้วย",
+  "A small pouch padded with cotton, made to hold needles.":
+    "ถุงเล็กบุสำลี ทำไว้เก็บเข็ม",
+  "A small sculpture that serves as the token for every true orc warrior.":
+    "รูปสลักเล็ก ๆ ที่เป็นเครื่องหมายของนักรบออร์คแท้ทุกคน",
+  "A small stellar crystal, fallen from the heavens.":
+    "ผลึกดาวชิ้นเล็กที่ร่วงมาจากฟากฟ้า",
+  "A small, pitch-black scrap of cloth. It cannot be seen in dark places.":
+    "เศษผ้าชิ้นเล็กสีดำสนิท มองไม่เห็นในที่มืด",
+  "A small, sturdy box coated in black lacquer. Said to contain one of the ingredients required to create a God Item.":
+    "กล่องเล็กแข็งแรงเคลือบแล็กเกอร์ดำ ว่ากันว่าภายในมีหนึ่งในวัตถุดิบที่ต้องใช้สร้าง God Item",
+  "A soft, squishy hat modeled after the hand-shaped mud creature Sting. It seems the creator ignored the wearer’s comfort entirely.":
+    "หมวกนุ่มหยุ่นที่ทำเลียนแบบ Sting สัตว์โคลนทรงมือ ดูเหมือนคนทำจะไม่สนใจความสบายของผู้สวมเลยแม้แต่น้อย",
+  "A solid, durable shell that's used as protection.":
+    "เปลือกแข็งทนทานที่ใช้ป้องกันตัว",
+  "A spear made from the corpse of a giant sea beast. Its jagged, saw-like blade can inflict deep wounds.":
+    "หอกที่ทำจากซากอสูรทะเลยักษ์ ใบหยักคล้ายเลื่อยของมันสร้างบาดแผลลึกได้",
+  "A spear whose curved blade resembles lightning, capable of both slashing and thrusting.":
+    "หอกที่ใบโค้งคล้ายสายฟ้า ใช้ได้ทั้งฟันและแทง",
+  "A spectacular sword with a blade forged out of meteorite that shines with starlight during the night.":
+    "ดาบงามตระการที่ใบหลอมจากอุกกาบาต ยามค่ำคืนจะเปล่งประกายดั่งแสงดาว",
+  "A spellbook containing powerful, ancient magic.":
+    "ตำราเวทที่บรรจุเวทมนตร์โบราณอันทรงพลัง",
+  "A spore discharged from a mushroom.":
+    "สปอร์ที่ปล่อยออกมาจากเห็ด",
+  "A steamed desert scorpion dish considered one of the four great delicacies of the Sograt Desert, cooked using the heat of the sands.":
+    "อาหารแมงป่องทะเลทรายนึ่ง นับเป็นหนึ่งในสี่ของเลิศรสแห่ง Sograt Desert ปรุงด้วยความร้อนจากผืนทราย",
+  "A stem from a plant which can be used to make medicine.":
+    "ลำต้นของพืชที่ใช้ทำยาได้",
+  "A sticky spider's web made of surprisingly strong threadlike fibers.":
+    "ใยแมงมุมเหนียวที่ทำจากเส้นใยซึ่งแข็งแรงเกินคาด",
+  "A sticky, unpleasant lump of mud.":
+    "ก้อนโคลนเหนียวน่ารังเกียจ",
+  "A stinger from a hornet or bee.":
+    "เหล็กในจากต่อหรือผึ้ง",
+  "A stone engraved with ancient hieroglyphs.":
+    "หินที่สลักอักษรภาพโบราณ",
+  "A stone tablet said to be inscribed with words of wisdom.":
+    "แผ่นศิลาที่ว่ากันว่าจารึกถ้อยคำแห่งปัญญาไว้",
+  "A string instrument found around Payon, Amatsu, and Louyang. Its playing technique has been lost, and it is said no one can play it properly today.":
+    "เครื่องสายที่พบแถบ Payon, Amatsu และ Louyang วิธีบรรเลงสูญหายไปแล้ว ว่ากันว่าทุกวันนี้ไม่มีใครเล่นมันได้อย่างถูกต้อง",
+  "A stringed instrument that produces sound by plucking the strings with the fingers.":
+    "เครื่องสายที่ให้เสียงด้วยการดีดสายด้วยนิ้ว",
+  "A striped uniform worn by prisoners, faintly stained with what looks like old blood.":
+    "ชุดลายทางที่นักโทษสวมใส่ มีคราบจาง ๆ ที่ดูเหมือนเลือดเก่า",
+  "A sword with a formless blade that seems both to exist and not exist. It attacks and breaks down the target's spirit.":
+    "ดาบที่ใบไร้รูปร่าง ดูเหมือนมีอยู่และไม่มีอยู่ในเวลาเดียวกัน มันโจมตีและบั่นทอนจิตวิญญาณของเป้าหมาย",
+  "A symbol which represents evil.":
+    "สัญลักษณ์ที่แทนความชั่วร้าย",
+  "A tail cut off from a dragon that, sadly, will never grow back.":
+    "หางที่ตัดมาจากมังกร น่าเสียดายที่มันจะไม่งอกใหม่อีก",
+  "A tail severed from a fish.":
+    "หางที่ตัดมาจากปลา",
+  "A talisman bearing the Taegeuk symbol at its center, ringed by the eight trigrams. In the old days it was used in geomancy and the like.":
+    "ยันต์ที่มีสัญลักษณ์ Taegeuk อยู่ตรงกลาง ล้อมด้วยแปดตรีลักษณ์ สมัยก่อนใช้ในวิชาดูฮวงจุ้ยและอื่น ๆ",
+  "A thick, sharpened fingernail from an orc.":
+    "เล็บหนาที่ลับคมแล้วจากออร์ค",
+  "A thin rat's tail.":
+    "หางหนูเรียวบาง",
+  "A tiger's paw that supposedly has the power to restore male vigor.":
+    "อุ้งเท้าเสือที่ว่ากันว่ามีสรรพคุณบำรุงกำลังบุรุษ",
+  "A token which shows a knight's loyalty to his lord.":
+    "เครื่องหมายที่แสดงความภักดีของอัศวินต่อเจ้านาย",
+  "A tough, sharp jaw from an ant.":
+    "กรามมดที่แข็งและคม",
+  "A tough, woody shelled nut from an oak tree.":
+    "ผลเปลือกแข็งเนื้อไม้จากต้นโอ๊ก",
+  "A traditional skirt that symbolizes virginity.":
+    "กระโปรงตามประเพณีที่เป็นสัญลักษณ์ของความบริสุทธิ์",
+  "A treasured T-shirt once worn by a certain witch, featuring a rabbit design she was fond of.":
+    "เสื้อยืดล้ำค่าที่แม่มดคนหนึ่งเคยสวม มีลายกระต่ายที่นางชื่นชอบ",
+  "A tree trunk of wood that is nice and solid.":
+    "ท่อนไม้ที่เนื้อดีและแน่น",
+  "A tree trunk of wood that is pretty low quality.":
+    "ท่อนไม้ที่คุณภาพค่อนข้างต่ำ",
+  "A tree trunk of wood with an excellent grain.":
+    "ท่อนไม้ที่ลายเนื้อไม้สวยเยี่ยม",
+  "A two-handed axe that demonstrates its true power in group combat.":
+    "ขวานสองมือที่แสดงพลังแท้จริงในการรบหมู่",
+  "A valuable metal in bullion form. It's used to make coins, jewelry, and gaudy false teeth.":
+    "โลหะมีค่าในรูปแท่ง ใช้ทำเหรียญ เครื่องประดับ และฟันปลอมฉูดฉาด",
+  "A very light, non-toxic metal used for refining and toughening armor.":
+    "โลหะไร้พิษที่เบามาก ใช้ตีบวกและเสริมความทนทานให้เกราะ",
+  "A very sturdy helmet made of bone. Though heavy and difficult to wear, its defensive capability is exceptional.":
+    "หมวกกระดูกที่แข็งแรงมาก แม้จะหนักและสวมใส่ยาก แต่ความสามารถในการป้องกันนั้นยอดเยี่ยม",
+  "A vessel woven from plant stems. After washing it with water, it must be dried in the sun.":
+    "ภาชนะที่สานจากลำต้นพืช ล้างน้ำแล้วต้องตากแดดให้แห้ง",
+  "A viscous plant substance used in the production of certain types of goods.":
+    "สารเหนียวจากพืชที่ใช้ผลิตสินค้าบางประเภท",
+  "A vivid red ore that glows from inside with an orange yellow light.":
+    "แร่สีแดงสดที่เรืองแสงสีเหลืองส้มออกมาจากภายใน",
+  "A weapon said to be made from the claw of Garm, gatekeeper of the underworld. It is always stained with blood.":
+    "อาวุธที่ว่ากันว่าทำจากกรงเล็บของ Garm ผู้เฝ้าประตูยมโลก มันเปื้อนเลือดอยู่เสมอ",
+  "A weapon so thin and astonishingly sharp it looks able to pry into the gap of any armor.":
+    "อาวุธที่บางและคมอย่างน่าทึ่ง ดูเหมือนจะงัดเข้าไปตามช่องว่างของเกราะใดก็ได้",
+  "A webbed foot cut from a monster's hind leg.":
+    "เท้าพังผืดที่ตัดมาจากขาหลังของมอนสเตอร์",
+  "A weird organic clump which is the brain of a Marine Sphere.":
+    "ก้อนอินทรีย์ประหลาดซึ่งเป็นสมองของ Marine Sphere",
+  "A whip made by twisting several thin whips into one, with an excellent feel as it coils on a strike.":
+    "แส้ที่ทำจากแส้เส้นเล็กหลายเส้นบิดรวมกัน สัมผัสยอดเยี่ยมเวลามันพันตัวตอนฟาด",
+  "A whip made entirely of iron.":
+    "แส้ที่ทำจากเหล็กล้วน",
+  "A widely known blessed metal to be used for refining and strengthening a weapon.":
+    "โลหะศักดิ์สิทธิ์ที่รู้จักกันแพร่หลาย ใช้ตีบวกและเสริมความแข็งแกร่งให้อาวุธ",
+  "A woody stem from a tree that's useful for lumber.":
+    "ลำต้นเนื้อไม้ที่ใช้เป็นไม้แปรรูปได้ดี",
+  "A worn, tattered page torn from an old book.":
+    "หน้ากระดาษเก่าขาดยับที่ฉีกมาจากหนังสือเล่มเก่า",
+  "Accessory pinned to clothing that brings out a bright, lively charm.":
+    "เครื่องประดับที่กลัดกับเสื้อผ้า ช่วยขับเสน่ห์สดใสมีชีวิตชีวา",
+  "Accessory that expresses a whistle in costume form. Said to help relieve stress and calm the mind whenever you blow it.":
+    "เครื่องประดับที่ทำนกหวีดออกมาในรูปแบบคอสตูม ว่ากันว่าเป่าทีไรก็ช่วยคลายเครียดและทำให้ใจสงบ",
+  "Accessory that, on closer inspection, has a small hole made for inserting something.":
+    "เครื่องประดับที่พอดูใกล้ ๆ จะเห็นรูเล็ก ๆ ทำไว้สำหรับเสียบอะไรบางอย่าง",
+  "Accessory used to tie and hold hair in place, with a small ribbon on top that emphasizes cuteness.":
+    "เครื่องประดับที่ใช้มัดและรวบผมให้อยู่ทรง ด้านบนมีโบว์เล็ก ๆ ที่ขับความน่ารัก",
+  "Adorable hairpin shaped after the vibrant wings of a blue butterfly.":
+    "กิ๊บติดผมน่ารักทรงปีกผีเสื้อสีน้ำเงินสดใส",
+  "Adorable panda-like hat that makes you imagine yourself snacking on bamboo leaves the moment you wear it. Surprisingly popular among women.":
+    "หมวกคล้ายแพนด้าน่ารัก สวมปุ๊บก็นึกภาพตัวเองกำลังแทะใบไผ่ ได้รับความนิยมในหมู่ผู้หญิงเกินคาด",
+  "Afro-style hat made for cheerful summer days.":
+    "หมวกทรงแอฟโฟรที่ทำมาเพื่อวันฤดูร้อนสดใส",
+};
+
 async function main(): Promise<void> {
   const db = supabaseAdmin();
 
