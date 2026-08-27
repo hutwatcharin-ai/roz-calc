@@ -495,3 +495,22 @@ table { border-collapse: collapse; width: 100%; }
 .tag--halved { border-color: var(--status-danger); color: var(--status-danger); }
 .tag--unknown { border-color: var(--hair); color: var(--faint); }
 .tag--risk { border-color: var(--yellow); color: var(--yellow); }
+
+/* Add-to-plan control. Same pill language as the nav toggle so it reads as a
+   control rather than a status tag -- .tag shapes are reserved for state the
+   page is reporting, not for something the reader can press. */
+.planbtn {
+  padding: 4px 12px;
+  border: 1.5px solid var(--cyan);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cyan);
+  font: 600 13px/1.6 "Sarabun", sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.planbtn:hover:not(:disabled) { background: var(--panel-2); }
+.planbtn--on { border-color: var(--status-safe); color: var(--status-safe); }
+.planbtn--compact { padding: 2px 9px; font-size: 12px; }
+.planbtn:disabled { opacity: 0.5; cursor: not-allowed; }

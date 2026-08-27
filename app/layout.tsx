@@ -2,6 +2,7 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import CharacterBar from '@/components/CharacterBar';
 import { CharacterContextProvider } from '@/components/CharacterContextProvider';
+import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
 

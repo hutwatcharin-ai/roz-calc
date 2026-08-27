@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
+import AddToPlanButton from '@/components/AddToPlanButton';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
@@ -62,6 +63,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
             {personal && <th className="num">EXP/ชม.</th>}
             {personal && <th>ดรอปตามช่วงเลเวล</th>}
             <th>แมพ</th>
+            <th />
           </tr>
         </thead>
         <tbody>
@@ -114,6 +116,11 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                   </td>
                 )}
                 <td data-label="แมพ">{row.spawn ?? '—'}</td>
+                {/* spec 3.6: the plan is built from the row a player is already
+                    looking at, not by retyping a name on another page. */}
+                <td data-label="">
+                  <AddToPlanButton monsterId={row.monster_id} compact />
+                </td>
               </tr>
             );
           })}

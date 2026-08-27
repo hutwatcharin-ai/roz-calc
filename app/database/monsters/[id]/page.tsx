@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import KillRatePanel from '@/components/KillRatePanel';
+import AddToPlanButton from '@/components/AddToPlanButton';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -151,6 +152,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <AggroBadge monster={{ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }} />
           {monster.is_mvp && <span className="tag">MVP</span>}
           {monster.loots_items && <span className="tag">เก็บของ</span>}
+          <AddToPlanButton monsterId={monster.id} />
         </div>
       </div>
 

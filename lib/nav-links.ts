@@ -39,7 +39,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   ],
   tools: [
     { href: '/tools/elements', label: 'ตารางธาตุ', ready: false },
-    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', ready: false },
+    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: true },
   ],
 };
