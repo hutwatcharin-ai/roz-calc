@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
-import { mergeSearchResults, type SearchResult } from '@/lib/search';
+import { mergeSearchResults, SEARCH_TYPE_LABELS, type SearchResult } from '@/lib/search';
 
 export default function GlobalSearch() {
   const [open, setOpen] = useState(false);
@@ -44,15 +44,45 @@ export default function GlobalSearch() {
     setLoading(true);
     const timer = setTimeout(async () => {
       const db = supabaseBrowser();
-      const [{ data: monsters, error: monstersError }, { data: items, error: itemsError }] = await Promise.all([
-        db.from('monsters').select('id, name_en, image_url').ilike('name_en', `%${query}%`).limit(5),
-        db.from('items').select('id, name_en, icon_url').ilike('name_en', `%${query}%`).limit(5),
+      // Escape the LIKE metacharacters so a literal % or _ in the query
+      // matches itself instead of acting as a wildcard -- the same escaping
+      // app/database/maps/page.tsx uses for its own ilike() search.
+      const needle = query.replace(/[\\%_]/g, (ch) => `\\${ch}`);
+
+      const [monsters, items, cards, equipment, skills, maps] = await Promise.all([
+        db.from('monsters').select('id, name_en, image_url').ilike('name_en', `%${needle}%`).limit(5),
+        // Items excludes cards and equipment so the same row cannot appear
+        // twice under two different badges.
+        db.from('items').select('id, name_en, icon_url')
+          .not('category', 'in', '("Card","Armor","Weapon","Costume Equipment")')
+          .ilike('name_en', `%${needle}%`).limit(5),
+        db.from('items').select('id, name_en, icon_url').eq('category', 'Card').ilike('name_en', `%${needle}%`).limit(5),
+        db.from('items').select('id, name_en, icon_url')
+          .in('category', ['Armor', 'Weapon', 'Costume Equipment'])
+          .ilike('name_en', `%${needle}%`).limit(5),
+        db.from('skills').select('slug, name, icon_url').ilike('name', `%${needle}%`).limit(5),
+        // map_stats is one row per map already, so no de-duplication is needed
+        // here the way monster_spawns would have required.
+        db.from('map_stats').select('map_code, map_display_name').ilike('search_text', `%${needle}%`).limit(5),
       ]);
 
-      if (monstersError) console.error('global search: monsters query failed', monstersError);
-      if (itemsError) console.error('global search: items query failed', itemsError);
+      if (monsters.error) console.error('global search: monsters query failed', monsters.error);
+      if (items.error) console.error('global search: items query failed', items.error);
+      if (cards.error) console.error('global search: cards query failed', cards.error);
+      if (equipment.error) console.error('global search: equipment query failed', equipment.error);
+      if (skills.error) console.error('global search: skills query failed', skills.error);
+      if (maps.error) console.error('global search: maps query failed', maps.error);
 
-      setResults(mergeSearchResults(monsters ?? [], items ?? []));
+      setResults(
+        mergeSearchResults({
+          monsters: monsters.data ?? [],
+          items: items.data ?? [],
+          cards: cards.data ?? [],
+          equipment: equipment.data ?? [],
+          skills: skills.data ?? [],
+          maps: maps.data ?? [],
+        }),
+      );
       setLoading(false);
     }, 300);
 
@@ -152,13 +182,13 @@ export default function GlobalSearch() {
                     className="mono"
                     style={{
                       fontSize: 10,
-                      color: r.type === 'monster' ? 'var(--yellow)' : 'var(--pink)',
+                      color: 'var(--faint)',
                       border: '1px solid var(--hair)',
                       borderRadius: 4,
                       padding: '2px 6px',
                     }}
                   >
-                    {r.type === 'monster' ? 'มอนสเตอร์' : 'ไอเทม'}
+                    {SEARCH_TYPE_LABELS[r.type]}
                   </span>
                 </Link>
               ))}
