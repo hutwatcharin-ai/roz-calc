@@ -139,6 +139,12 @@ export const DEFERRED_RULES: ReadonlyArray<{ rule: string; why: string }> = [
     rule: 'a costume tag: `[Costume] <item name>`',
     why: 'the tag and the item name are both proper nouns the game prints in English',
   },
+  {
+    rule: 'a line that is nothing but an item name',
+    why:
+      'proper nouns stay English by the glossary, so `Mermaid Headphones` has no ' +
+      'Thai form at all -- the same reason as the costume tag above',
+  },
 ];
 
 // Batch 3: effect lines that occur once. Fewer readers per line than batch 2,
@@ -2099,8 +2105,6 @@ const FLAVOUR_TH_7: Record<string, string> = {
     "ยาที่ทำจากพืชชื่อ Ment เป็นหลัก บรรเทาความเจ็บปวดได้ระยะหนึ่ง จึงใช้เป็นยาแก้ปวดด้วย",
   "Men’s suit that combines ease of movement with a stylish look.":
     "สูทผู้ชายที่รวมความคล่องตัวเข้ากับลุคที่ดูดี",
-  "Mermaid Headphones":
-    "Mermaid Headphones",
   "Milk prepared in a baby-friendly bottle.":
     "นมที่เตรียมไว้ในขวดสำหรับเด็กทารก",
   "Mineral-shaped mass formed when magical energy condenses within a living body, faintly radiating power.":
@@ -2217,6 +2221,27 @@ async function main(): Promise<void> {
     .from('item_description_lines')
     .upsert(rows, { onConflict: 'source_line' });
   if (error) throw new Error(`Failed to seed item_description_lines: ${error.message}`);
+
+  // An upsert never deletes, so a translation removed from the file above stays
+  // live forever -- and keeps failing the glossary gate with no way to fix it
+  // from here. `Mermaid Headphones` did exactly that: deleted from the file,
+  // still in the table, still reported. This makes the seed converge on the
+  // file rather than only ever growing.
+  const wanted = new Set(rows.map((r) => r.source_line));
+  const existing = await fetchAllRows<{ source_line: string }>((from, to) =>
+    db.from('item_description_lines').select('source_line').order('source_line').range(from, to),
+  );
+  if (existing.error) throw new Error(`Failed to read back: ${existing.error.message}`);
+  const stale = (existing.data ?? []).map((r) => r.source_line).filter((l) => !wanted.has(l));
+  if (stale.length > 0) {
+    const { error: deleteError } = await db
+      .from('item_description_lines')
+      .delete()
+      .in('source_line', stale);
+    if (deleteError) throw new Error(`Failed to remove stale rows: ${deleteError.message}`);
+    console.log(`removed ${stale.length} rows no longer in this file:`);
+    for (const l of stale) console.log(`  ${l}`);
+  }
 
   console.log(`seeded ${rows.length} lines, covering ${covered} occurrences`);
   const byKind = (k: Kind) =>
