@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { canJobEquip, isUnclassifiedClass, EQUIPMENT_CATEGORIES } from './equip-filter';
-import { isZeroJob } from './zero-jobs';
+import { isZeroJob, isKnownNonZeroJob } from './zero-jobs';
 
 describe('canJobEquip', () => {
   it('matches an exact job name', () => {
@@ -35,6 +35,22 @@ describe('canJobEquip', () => {
   it('matches any job when the class is unclassified (Swordman typo)', () => {
     expect(canJobEquip(['Swordman'], 'Knight')).toBe(true);
     expect(canJobEquip(['Swordman'], 'Mage')).toBe(true);
+  });
+
+  it('does not match any job when the class is a known non-Zero job (Ninja)', () => {
+    expect(canJobEquip(['Ninja'], 'Swordsman')).toBe(false);
+    expect(canJobEquip(['Ninja'], 'Knight')).toBe(false);
+  });
+
+  it('does not match any job when the class is a known non-Zero job (Soul Linker)', () => {
+    expect(canJobEquip(['Soul Linker'], 'Knight')).toBe(false);
+    expect(canJobEquip(['Soul Linker'], 'Wizard')).toBe(false);
+  });
+
+  it('allows one usable entry to override an unusable one on the same item', () => {
+    // An unusable entry (Ninja) must not veto a usable one (All Jobs) on the same item.
+    expect(canJobEquip(['Ninja', 'All Jobs'], 'Knight')).toBe(true);
+    expect(canJobEquip(['Soul Linker', 'Swordsman'], 'Swordsman')).toBe(true);
   });
 
   it('does not match an unrelated job', () => {
@@ -79,6 +95,23 @@ describe('isZeroJob', () => {
   });
 });
 
+describe('isKnownNonZeroJob', () => {
+  it('recognizes non-Zero jobs', () => {
+    expect(isKnownNonZeroJob('Ninja')).toBe(true);
+    expect(isKnownNonZeroJob('Soul Linker')).toBe(true);
+  });
+
+  it('rejects Zero jobs', () => {
+    expect(isKnownNonZeroJob('Swordsman')).toBe(false);
+    expect(isKnownNonZeroJob('Knight')).toBe(false);
+  });
+
+  it('is case-insensitive', () => {
+    expect(isKnownNonZeroJob('ninja')).toBe(true);
+    expect(isKnownNonZeroJob('SOUL LINKER')).toBe(true);
+  });
+});
+
 describe('isUnclassifiedClass', () => {
   it('recognizes unclassified entries', () => {
     expect(isUnclassifiedClass('Thief Classes')).toBe(true);
@@ -89,6 +122,11 @@ describe('isUnclassifiedClass', () => {
   it('recognizes real Zero jobs as classified', () => {
     expect(isUnclassifiedClass('Swordsman')).toBe(false);
     expect(isUnclassifiedClass('Knight')).toBe(false);
+  });
+
+  it('recognizes non-Zero jobs as classified', () => {
+    expect(isUnclassifiedClass('Ninja')).toBe(false);
+    expect(isUnclassifiedClass('Soul Linker')).toBe(false);
   });
 
   it('recognizes All Jobs forms as classified', () => {
