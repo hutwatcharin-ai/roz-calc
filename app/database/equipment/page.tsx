@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
 import { canJobEquip, EQUIPMENT_CATEGORIES } from '@/lib/equip-filter';
+import { isZeroJob } from '@/lib/zero-jobs';
 
 export const revalidate = 86400;
 
@@ -29,12 +30,14 @@ export default async function EquipmentPage({
   // 490 rows, well under the 1,000-row cap. Fetched whole because the job
   // filter is an array-membership rule with group values that SQL would need
   // awkward gymnastics to express, and because the job dropdown is derived
-  // from the same rows.
+  // from the same rows. Order by name_en, then id for stable pagination
+  // (name_en is not unique, so ties must be broken).
   const { data: allItems, error } = await db
     .from('items')
     .select('id, name_en, icon_url, category, weapon_type, atk, required_level, equippable_classes')
     .in('category', [...EQUIPMENT_CATEGORIES])
-    .order('name_en');
+    .order('name_en')
+    .order('id');
 
   if (error) {
     console.error('equipment query failed', error);
@@ -42,13 +45,14 @@ export default async function EquipmentPage({
 
   const items = allItems ?? [];
 
-  // Group values are not jobs, so they must not appear in a "which job" list.
+  // Job dropdown shows only real Zero jobs that appear in the data.
   const jobSet = new Set<string>();
   for (const it of items) {
     for (const c of it.equippable_classes ?? []) {
       const v = c.trim();
-      if (v === '' || v.toLowerCase().startsWith('all jobs')) continue;
-      jobSet.add(v);
+      if (isZeroJob(v)) {
+        jobSet.add(v);
+      }
     }
   }
   const jobs = [...jobSet].sort();
@@ -83,7 +87,7 @@ export default async function EquipmentPage({
       </p>
 
       <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่อสุปกรณ์..." />
+        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่ออุปกรณ์..." />
         <select name="category" defaultValue={category}>
           <option value="">ทุกหมวด</option>
           {EQUIPMENT_CATEGORIES.map((c) => (
@@ -108,6 +112,7 @@ export default async function EquipmentPage({
               <th>ชนิด</th>
               <th className="num">ATK</th>
               <th className="num">เลเวลที่ใช้ได้</th>
+              <th>อาชีพที่ใส่ได้</th>
             </tr>
           </thead>
           <tbody>
@@ -125,11 +130,12 @@ export default async function EquipmentPage({
                 <td data-label="ชนิด">{it.weapon_type ?? '—'}</td>
                 <td data-label="ATK" className="num">{it.atk ?? '—'}</td>
                 <td data-label="เลเวลที่ใช้ได้" className="num">{it.required_level ?? '—'}</td>
+                <td data-label="อาชีพที่ใส่ได้">{(it.equippable_classes ?? []).length > 0 ? (it.equippable_classes ?? []).join(', ') : '—'}</td>
               </tr>
             ))}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={5} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                <td colSpan={6} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                   ไม่พบอุปกรณ์ที่ตรงเงื่อนไข
                 </td>
               </tr>

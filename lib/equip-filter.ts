@@ -1,13 +1,21 @@
-// items.equippable_classes mixes real job names with group values. The two
-// commonest entries in the whole table are "All Jobs" (166 items) and
-// "All Jobs except Novice" (56), so a filter that compares against job names
-// alone hides the majority of what a player can actually wear.
+// items.equippable_classes mixes real job names with group values. The commonest
+// entries are "All Jobs" (166 items), "All Jobs except Novice" (56), and various job
+// names. Some entries are neither recognizable jobs nor group values (e.g. "Thief Classes",
+// "Newbie cannot smoke", "Swordman"). These are over-included as matching every job
+// rather than hidden, so data issues are visible and checkable.
+
+import { ZERO_JOBS, isZeroJob } from './zero-jobs';
 
 export const EQUIPMENT_CATEGORIES = ['Armor', 'Weapon', 'Costume Equipment'] as const;
 
-const ALL_JOBS = 'all jobs';
-const ALL_JOBS_EXCEPT_NOVICE = 'all jobs except novice';
-const NOVICE = 'novice';
+const ALL_JOBS_PREFIX = 'all jobs';
+
+export function isUnclassifiedClass(entry: string): boolean {
+  const normalized = entry.trim().toLowerCase();
+  // Unclassified if it's not an "All Jobs" form and not a real Zero job.
+  if (normalized.startsWith(ALL_JOBS_PREFIX)) return false;
+  return !isZeroJob(entry);
+}
 
 export function canJobEquip(equippableClasses: string[] | null, job: string): boolean {
   if (!equippableClasses || equippableClasses.length === 0) return false;
@@ -16,8 +24,20 @@ export function canJobEquip(equippableClasses: string[] | null, job: string): bo
 
   return equippableClasses.some((entry) => {
     const value = entry.trim().toLowerCase();
-    if (value === ALL_JOBS) return true;
-    if (value === ALL_JOBS_EXCEPT_NOVICE) return wanted !== NOVICE;
+
+    // "All Jobs" matches every job.
+    if (value === ALL_JOBS_PREFIX) return true;
+
+    // "All Jobs except <job>" matches every job except the named one.
+    if (value.startsWith(ALL_JOBS_PREFIX + ' except ')) {
+      const excluded = value.slice((ALL_JOBS_PREFIX + ' except ').length).trim();
+      return wanted !== excluded;
+    }
+
+    // Unclassified entries (not a real job, not an "All Jobs" form) match every job.
+    if (isUnclassifiedClass(entry)) return true;
+
+    // Otherwise, match by exact job name.
     return value === wanted;
   });
 }
