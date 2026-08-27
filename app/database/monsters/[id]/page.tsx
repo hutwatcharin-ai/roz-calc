@@ -147,29 +147,29 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         <div className="panel">
           <div className="card">
             <h2 className="section-title">ค่าสถานะ</h2>
-            <table className="data-table">
+            <table className="stat-table">
               <tbody>
-                <tr><td data-label="HP">HP</td><td className="num">{sentinel(monster.hp)}</td></tr>
-                <tr><td data-label="ATK">ATK</td><td className="num">{num(monster.atk_min)} – {num(monster.atk_max)}</td></tr>
-                <tr><td data-label="MATK">MATK</td><td className="num">{num(monster.matk_min)} – {num(monster.matk_max)}</td></tr>
-                <tr><td data-label="DEF">DEF</td><td className="num">{num(monster.def)}</td></tr>
-                <tr><td data-label="MDEF">MDEF</td><td className="num">{num(monster.mdef)}</td></tr>
-                <tr><td data-label="FLEE">FLEE</td><td className="num">{num(monster.flee)}</td></tr>
-                <tr><td data-label="HIT">HIT</td><td className="num">{num(monster.hit)}</td></tr>
+                <tr><td>HP</td><td className="num">{sentinel(monster.hp)}</td></tr>
+                <tr><td>ATK</td><td className="num">{num(monster.atk_min)} – {num(monster.atk_max)}</td></tr>
+                <tr><td>MATK</td><td className="num">{num(monster.matk_min)} – {num(monster.matk_max)}</td></tr>
+                <tr><td>DEF</td><td className="num">{num(monster.def)}</td></tr>
+                <tr><td>MDEF</td><td className="num">{num(monster.mdef)}</td></tr>
+                <tr><td>FLEE</td><td className="num">{num(monster.flee)}</td></tr>
+                <tr><td>HIT</td><td className="num">{num(monster.hit)}</td></tr>
               </tbody>
             </table>
           </div>
 
           <div className="card">
             <h2 className="section-title">สเตตัสพื้นฐาน</h2>
-            <table className="data-table">
+            <table className="stat-table">
               <tbody>
-                <tr><td data-label="STR">STR</td><td className="num">{num(monster.str)}</td></tr>
-                <tr><td data-label="AGI">AGI</td><td className="num">{num(monster.agi)}</td></tr>
-                <tr><td data-label="VIT">VIT</td><td className="num">{num(monster.vit)}</td></tr>
-                <tr><td data-label="INT">INT</td><td className="num">{num(monster.int_)}</td></tr>
-                <tr><td data-label="DEX">DEX</td><td className="num">{num(monster.dex)}</td></tr>
-                <tr><td data-label="LUK">LUK</td><td className="num">{num(monster.luk)}</td></tr>
+                <tr><td>STR</td><td className="num">{num(monster.str)}</td></tr>
+                <tr><td>AGI</td><td className="num">{num(monster.agi)}</td></tr>
+                <tr><td>VIT</td><td className="num">{num(monster.vit)}</td></tr>
+                <tr><td>INT</td><td className="num">{num(monster.int_)}</td></tr>
+                <tr><td>DEX</td><td className="num">{num(monster.dex)}</td></tr>
+                <tr><td>LUK</td><td className="num">{num(monster.luk)}</td></tr>
               </tbody>
             </table>
           </div>

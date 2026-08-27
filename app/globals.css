@@ -300,3 +300,24 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .chip:hover { color: var(--text); border-color: var(--cyan); }
+
+/* Stat tables (base stats, status) are label-value pairs, not a multi-column
+   grid with a header row -- .data-table's mobile card transformation exists to
+   rescue a wide header row on a narrow screen, and applying it here just
+   duplicates each label ("HP HP") because the label is already the cell's own
+   text. Two columns are narrow enough for any screen already, so nothing
+   changes at a breakpoint. */
+.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 14px/1.6 "Sarabun", sans-serif;
+}
+
+.stat-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: middle;
+}
+
+.stat-table tbody tr:hover { background: var(--panel-2); }
+.stat-table td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
