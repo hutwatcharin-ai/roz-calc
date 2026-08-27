@@ -47,22 +47,44 @@ async function allSkills() {
   return rows;
 }
 
+// Next hands back a string[] when a query key repeats (e.g. ?job=Knight&job=Mage).
+// Taking the first value keeps every downstream comparison a plain string
+// instead of failing silently against an array.
+function firstParam(v: string | string[] | undefined): string {
+  return Array.isArray(v) ? v[0] ?? '' : v ?? '';
+}
+
 export default async function SkillsPage({
   searchParams,
 }: {
-  searchParams: { q?: string; job?: string; type?: string; tab?: string; page?: string };
+  searchParams: {
+    q?: string | string[];
+    job?: string | string[];
+    type?: string | string[];
+    tab?: string | string[];
+    page?: string | string[];
+  };
 }) {
-  const q = searchParams.q ?? '';
-  const job = searchParams.job ?? '';
-  const type = searchParams.type ?? '';
-  const tab = searchParams.tab === 'unreleased' ? 'unreleased' : 'ingame';
-  const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  const q = firstParam(searchParams.q);
+  const job = firstParam(searchParams.job);
+  const type = firstParam(searchParams.type);
+  const tab = firstParam(searchParams.tab) === 'unreleased' ? 'unreleased' : 'ingame';
+  const page = Math.max(1, Number(firstParam(searchParams.page)) || 1);
 
   const skills = await allSkills();
 
   const inGame = skills.filter((s) => isInGameSkill(s.classes));
   const unreleased = skills.filter((s) => !isInGameSkill(s.classes));
   const pool = tab === 'unreleased' ? unreleased : inGame;
+
+  // The unreleased tab is not one thing -- it is two groups with different
+  // evidence behind them, and the copy below must say so honestly rather
+  // than asserting a reason for the group we don't have one for. Computed
+  // from the same `unreleased` array the tab count uses, so the sentence
+  // cannot drift from the data the way a hardcoded number would.
+  const unreleasedNoClass = unreleased.filter((s) => (s.classes ?? []).length === 0);
+  const unreleasedNonZeroJob = unreleased.filter((s) => (s.classes ?? []).length > 0);
+  const nonZeroJobExamples = [...new Set(unreleasedNonZeroJob.flatMap((s) => s.classes as string[]))].sort();
 
   const types = [...new Set(skills.map((s) => s.type).filter(Boolean))].sort();
 
@@ -114,8 +136,11 @@ export default async function SkillsPage({
 
       {tab === 'unreleased' && (
         <p style={{ color: 'var(--faint)', marginTop: 12, fontSize: 13 }}>
-          สกิลกลุ่มนี้อยู่ในไฟล์ข้อมูลของเกมแต่ยังไม่เปิดใน Global — เป็นสกิลคลาส 3 สกิลโฮมุนคูลุส
-          และสกิลของอาชีพที่ Zero ยังไม่มี ไม่ใช่ข้อมูลที่เราเก็บมาไม่ครบ
+          สกิลกลุ่มนี้แบ่งเป็นสองกลุ่ม — {unreleasedNoClass.length} สกิลไม่มีอาชีพระบุไว้ในข้อมูลต้นทางเลย
+          เราไม่ทราบว่าเป็นเพราะยังไม่เปิดใน Global หรือเป็นช่องว่างของข้อมูลที่เก็บมา
+          และอีก {unreleasedNonZeroJob.length} สกิลระบุอาชีพที่ Zero ยังไม่มีในเกม
+          {nonZeroJobExamples.length > 0 && <> เช่น {nonZeroJobExamples[0]} กับ {nonZeroJobExamples[1] ?? nonZeroJobExamples[0]}</>}
+          {' '}— กลุ่มหลังนี้ไม่ใช่ข้อมูลที่เราเก็บมาไม่ครบ
         </p>
       )}
 
