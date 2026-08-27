@@ -28,12 +28,21 @@ export interface DescriptionLine {
 }
 
 const COLOUR_CODE = /\^[0-9a-fA-F]{6}/g;
-const LABEL = /^([A-Za-z][A-Za-z '\/-]*?)\s*:\s*(.+)$/;
-const STAT = /^([A-Za-z][A-Za-z %'-]*?)\s*([+-]\s*\d+%?)\s*\.?$/;
+// Exported so the disjointness property can be asserted directly rather than
+// inferred from classifyLine's output: a test that only checks which branch
+// classifyLine took stays green when the two patterns start overlapping.
+export const LABEL = /^([A-Za-z][A-Za-z '\/-]*?)\s*:\s*(.+)$/;
+export const STAT = /^([A-Za-z][A-Za-z %'-]*?)\s*([+-]\s*\d+%?)\s*\.?$/;
 
-// Seven lines in the real data are sentences containing a colon. A structural
-// label is short by nature -- the longest real one is "Melee physical attacks"
-// at three words -- so length is what separates them, not the colon.
+// Some lines in the real data are sentences containing a colon, so the colon
+// alone cannot separate a structural label from prose -- length does.
+//
+// Measured against the live data at 10: the 20 label terms this admits top out
+// at "For each level of Faith learned" (six words). Raising the bound admits
+// more sentences as labels; lowering it to four would push two real labels
+// ("When worn with Prisoner Uniform" and "For each level of Faith learned")
+// into prose. The boundary is tested on both sides in
+// item-description-th.test.ts, so a future drift shows up as a red test.
 const MAX_LABEL_WORDS = 10;
 
 export function classifyLine(rawLine: string): ClassifiedLine | null {
@@ -57,6 +66,16 @@ export function classifyLine(rawLine: string): ClassifiedLine | null {
   return { kind: 'prose', term: source, value: '', source };
 }
 
+// An empty or whitespace-only translation is not a translation. `?? null` lets
+// `''` through as if it were real Thai, which renders a blank where an English
+// effect used to be (or `" : Card"` for a term) -- a silent drop, the worst
+// failure mode this feature has. Migration 0009 rejects such rows at the
+// database, and this treats any that predate it as absent.
+function usable(value: string | null | undefined): string | null {
+  if (typeof value !== 'string') return null;
+  return value.trim() === '' ? null : value;
+}
+
 export function composeThaiDescription(
   description: string | null,
   dict: ThaiDictionaries,
@@ -70,16 +89,27 @@ export function composeThaiDescription(
     if (!classified) continue;
 
     if (classified.kind === 'prose') {
-      out.push({ source: classified.source, thai: dict.lines.get(classified.term) ?? null });
+      out.push({ source: classified.source, thai: usable(dict.lines.get(classified.term)) });
       continue;
     }
 
-    if (!dict.terms.has(classified.term)) {
-      out.push({ source: classified.source, thai: null });
+    const stored = dict.terms.get(classified.term);
+    const blankRow = typeof stored === 'string' && stored.trim() === '';
+    if (!dict.terms.has(classified.term) || blankRow) {
+      // No row means "not translated yet" -- distinct from a row holding NULL,
+      // which means "considered, deliberately English" and is handled below.
+      // Collapsing the two would make every untranslated term look finished.
+      //
+      // Some label-shaped and stat-shaped lines are really whole sentences
+      // (`During transformation : ATK +70`) or long phrases
+      // (`Earth-Property Resistance +5%`), and batch 2 translates those whole.
+      // Check the line dictionary before giving up, or those rows would exist
+      // and the page would still render English with nothing logged.
+      out.push({ source: classified.source, thai: usable(dict.lines.get(classified.source)) });
       continue;
     }
 
-    const thaiTerm = dict.terms.get(classified.term);
+    const thaiTerm = stored;
     if (thaiTerm === null || thaiTerm === undefined) {
       // Deliberately English. The line is finished, not pending.
       out.push({ source: classified.source, thai: classified.source });
