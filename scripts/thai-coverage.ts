@@ -19,6 +19,28 @@ import { composeThaiDescription } from '../lib/item-description-th';
 
 const GAP_FILE = 'lines-gap.tsv';
 
+// The three classes DEFERRED_RULES describes, as code. Every word these lines
+// contain already stays English by the glossary, so no faithful translation of
+// them contains any Thai at all.
+const STAT_WORDS = new Set([
+  'ATK', 'MATK', 'DEF', 'MDEF', 'STR', 'AGI', 'VIT', 'INT', 'DEX', 'LUK',
+  'HIT', 'FLEE', 'CRIT', 'ASPD', 'MHP', 'MSP', 'SP', 'HP',
+  'MaxHP', 'MAXHP', 'MaxSP', 'MAXSP',
+  'Perfect', 'Dodge', 'Variable', 'Casting', 'Time',
+  'Ranged', 'Weapon', 'Physical', 'Damage',
+]);
+
+// Lines deferred one at a time, by name, with the reason recorded beside the
+// rule in seed-thai-lines.ts.
+const DEFERRED_BY_NAME = new Set(['Mermaid Headphones']);
+
+function isDeferred(line: string): boolean {
+  if (DEFERRED_BY_NAME.has(line)) return true;
+  if (line.startsWith('[Costume]')) return true;
+  const words = line.match(/[A-Za-z]+/g) ?? [];
+  return words.length > 0 && words.every((w) => STAT_WORDS.has(w));
+}
+
 async function main(): Promise<void> {
   const db = supabaseAdmin();
 
@@ -59,6 +81,19 @@ async function main(): Promise<void> {
   console.log(`  ${thai} render Thai (${pct}%)`);
   console.log(`  ${english} render English on purpose (a NULL dictionary entry)`);
   console.log(`  ${untranslated} untranslated, ${gap.size} of them distinct`);
+
+  // "Untranslated" is not the same as "left to do". Some lines have no Thai
+  // form at all, and saying the work is finished is only honest if a machine
+  // decides which those are -- so the classes from seed-thai-lines.ts are
+  // applied here rather than eyeballed.
+  const outstanding = [...gap.keys()].filter((line) => !isDeferred(line));
+  console.log(
+    `  of the distinct ones, ${gap.size - outstanding.length} have no Thai form ` +
+      `(see DEFERRED_RULES in scripts/seed-thai-lines.ts)`,
+  );
+  console.log(`  ${outstanding.length} still to translate`);
+  for (const line of outstanding.slice(0, 20)) console.log(`    ${line}`);
+  if (outstanding.length > 20) console.log(`    ... and ${outstanding.length - 20} more`);
 
   const sorted = [...gap].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   fs.writeFileSync(GAP_FILE, sorted.map(([line, n]) => `${n}\t${line}`).join('\n'), 'utf8');

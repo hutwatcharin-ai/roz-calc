@@ -2527,6 +2527,149 @@ const FLAVOUR_TH_9: Record<string, string> = {
     "helm ที่ดูแข็งแรงของ Dullahan พู่สีแดงตรงกลางคือจุดเด่น",
 };
 
+// Batch 4, part 9: the T-to-W range. This finishes every line in the data
+// that has a Thai form at all.
+const FLAVOUR_TH_10: Record<string, string> = {
+  "The sweet whispers of Loki, the arrogant god. Let your guard down against Loki's cunning words and you, too, may be swayed.":
+    "เสียงกระซิบหวานของ Loki เทพผู้หยิ่งผยอง เผลอวางใจกับคำลวงของ Loki เมื่อไร คุณก็อาจถูกโน้มน้าวได้เช่นกัน",
+  "The teeth cut from a dragon mask. Whatever they are made of, the teeth alone do not seem to be wood.":
+    "ฟันที่ตัดมาจากหน้ากากมังกร ไม่ว่าจะทำจากอะไร เฉพาะฟันดูไม่เหมือนไม้",
+  "The teeth of great Orc warriors. Can be sold to the Collector.":
+    "ฟันของนักรบ Orc ผู้ยิ่งใหญ่ ขายให้ Collector ได้",
+  "The wing of a giant butterfly. However, it seems to lack the wondrous power of a Butterfly Wing.":
+    "ปีกของผีเสื้อยักษ์ แต่ดูเหมือนจะไม่มีพลังมหัศจรรย์แบบ Butterfly Wing",
+  "Thick scarf worn to cover the neck and shoulders.":
+    "ผ้าพันคอหนาที่สวมคลุมคอและไหล่",
+  "This colorless liquid is the secret behind the addictiveness of beers and wine.":
+    "ของเหลวไร้สีนี้คือความลับเบื้องหลังความติดใจของเบียร์และไวน์",
+  "This is considered food for Mummy pets.":
+    "ถือเป็นอาหารสำหรับสัตว์เลี้ยง Mummy",
+  "This is considered food for Steel Chonchon pets.":
+    "ถือเป็นอาหารสำหรับสัตว์เลี้ยง Steel Chonchon",
+  "Though it appears as a frog, a gentle young man waits within—hoping for the girl who will break his curse.":
+    "แม้จะดูเป็นกบ แต่ข้างในมีชายหนุ่มผู้อ่อนโยนรออยู่—รอหญิงสาวที่จะถอนคำสาปให้เขา",
+  "Though made of paper, it is hard enough to be mistaken for a blade. Probably not good for writing a love letter...":
+    "แม้จะทำจากกระดาษ แต่ก็แข็งพอจะถูกเข้าใจผิดว่าเป็นใบมีด คงไม่เหมาะจะเขียนจดหมายรัก...",
+  "Though merely a shadow, it has been witnessed moving in unnervingly lifelike ways.":
+    "แม้จะเป็นเพียงเงา แต่ก็มีคนเห็นมันเคลื่อนไหวราวมีชีวิตจนน่าขนลุก",
+  "though sadly, the wearer cannot see it themselves.":
+    "แม้น่าเสียดายที่ผู้สวมมองไม่เห็นมันเอง",
+  "Through its hypnotic effects, even a Novice can feel like a master archmage when wielding the Hypnotist’s Staff.":
+    "ด้วยฤทธิ์สะกดจิตของมัน แม้แต่ Novice ก็รู้สึกเหมือนเป็นจอมเวทผู้ยิ่งใหญ่เมื่อถือ Hypnotist’s Staff",
+  "Tiger-skin-patterned underwear with straps on both sides. It seems to keep you warmer than it looks.":
+    "กางเกงในลายหนังเสือที่มีสายผูกทั้งสองข้าง ดูเหมือนจะอุ่นกว่าที่ตาเห็น",
+  "Tool enabling ranged attacks, made by connecting Elastic Rope between appropriately spaced Sturdy Branches and using stones as projectiles.":
+    "เครื่องมือที่ใช้โจมตีระยะไกล ทำโดยขึง Elastic Rope ระหว่าง Sturdy Branch ที่เว้นระยะพอดี แล้วใช้ก้อนหินเป็นกระสุน",
+  "Top-grade Banana produced in tropical regions. Monster Yoyo loves it.":
+    "Banana เกรดสูงสุดที่ผลิตในเขตร้อน มอนสเตอร์ Yoyo ชอบมาก",
+  "Torn magic tome once called the lifeline of a wizard. Its owner is unknown, and the contents are far too damaged to read.":
+    "ตำราเวทที่ขาดวิ่น ครั้งหนึ่งเคยถูกเรียกว่าเส้นชีวิตของนักเวท ไม่มีใครรู้ว่าเจ้าของเป็นใคร และเนื้อหาก็เสียหายจนอ่านไม่ได้",
+  "Traditional food enjoyed in a far eastern country, warm with flavorful meat packed inside, making it look delicious at a glance. Nowadays, various fillings are used as new alternatives.":
+    "อาหารตามประเพณีที่นิยมกันในประเทศทางตะวันออกอันไกลโพ้น ร้อน ๆ กับเนื้อรสดีอัดแน่นอยู่ข้างใน มองแวบเดียวก็น่ากิน ทุกวันนี้มีไส้หลากหลายแบบเป็นทางเลือกใหม่",
+  "Traditional mourning hat worn in an eastern land, said to symbolize respect for the departed.":
+    "หมวกไว้ทุกข์ตามประเพณีของดินแดนตะวันออก ว่ากันว่าเป็นสัญลักษณ์ของความเคารพต่อผู้จากไป",
+  "Tree commonly known as cocoa, native to warm regions and classified as a dicot of the Malvaceae family. Its fruit, once harvested and dried, becomes cacao beans. Roasting and grinding them yields cacao paste, which can be compressed to extract fat and produce cocoa, while the extracted fat is known as cacao butter. Adding milk flavor during the cacao paste stage and allowing it to set results in chocolate.":
+    "ต้นไม้ที่รู้จักกันทั่วไปว่าโกโก้ มีถิ่นกำเนิดในเขตอบอุ่นและจัดเป็นพืชใบเลี้ยงคู่วงศ์ Malvaceae ผลของมันเมื่อเก็บเกี่ยวและตากแห้งแล้วจะกลายเป็นเมล็ดคาเคา คั่วและบดจะได้เนื้อคาเคา ซึ่งอัดเพื่อสกัดไขมันออกมาทำโกโก้ได้ ส่วนไขมันที่สกัดได้เรียกว่าเนยคาเคา หากเติมรสนมในขั้นตอนเนื้อคาเคาแล้วปล่อยให้เซตตัวก็จะได้ช็อกโกแลต",
+  "Triangular bottoms with a yellowish tint, as if soaked in something. Rumor says going out wearing only these will get you carried off somewhere.":
+    "กางเกงทรงสามเหลี่ยมที่ออกสีเหลืองราวกับแช่อะไรมา ลือกันว่าใส่แค่นี้ออกไปข้างนอกแล้วจะโดนหิ้วไปที่ไหนสักแห่ง",
+  "Tricolor ribbon in green, white, and sky blue.":
+    "ริบบิ้นสามสี เขียว ขาว และฟ้า",
+  "Two large leaves barely covering the front and back. Using them to wrap food might feel a bit unsettling.":
+    "ใบไม้ใหญ่สองใบที่ปิดด้านหน้าและด้านหลังได้แบบเฉียดฉิว เอาไปห่ออาหารคงรู้สึกแปลก ๆ อยู่บ้าง",
+  "Two-handed axe that looks like it could knock anything away in a single blow.":
+    "ขวานสองมือที่ดูเหมือนฟาดทีเดียวก็ปัดทุกอย่างกระเด็นได้",
+  "Two-handed axe whose sheer weight makes its downward strikes terrifyingly destructive.":
+    "ขวานสองมือที่น้ำหนักล้วน ๆ ของมันทำให้การฟาดลงมาทำลายล้างอย่างน่าสะพรึง",
+  "Two-handed sword designed to excel at subduing enemies.":
+    "ดาบสองมือที่ออกแบบมาให้เก่งเรื่องปราบศัตรู",
+  "Typical Guard reinforced with thin layers of silver and iron. Known for its striking shine when reflecting light.":
+    "Guard ทั่วไปที่เสริมด้วยแผ่นเงินและเหล็กบาง ๆ ขึ้นชื่อเรื่องประกายสะดุดตาเวลาสะท้อนแสง",
+  "Uniquely four-leafed Clover. Said to bring great luck to the one who finds it.":
+    "Clover สี่แฉกที่ไม่เหมือนใคร ว่ากันว่านำโชคใหญ่มาให้ผู้ที่พบมัน",
+  "Unrefined gemstone containing various minerals. Might yield multiple types of jewels once processed.":
+    "อัญมณีดิบที่มีแร่หลายชนิดอยู่ข้างใน เจียระไนแล้วอาจได้อัญมณีหลายแบบ",
+  "Unripe sour and astringent apple. Monster Poring loves it.":
+    "แอปเปิลดิบรสเปรี้ยวฝาด มอนสเตอร์ Poring ชอบมาก",
+  "Upper garment worn by Wanderer. Designed not to hinder quick body movements.":
+    "เสื้อท่อนบนที่ Wanderer สวมใส่ ออกแบบมาไม่ให้ขวางการเคลื่อนไหวที่ว่องไว",
+  "Used for Alchemist skills.":
+    "ใช้กับสกิลของ Alchemist",
+  "User’s physical and magical defense is fixed at half.":
+    "ค่าป้องกันกายภาพและเวทของผู้ใช้ถูกตรึงไว้ที่ครึ่งหนึ่ง",
+  "Using it yields a random number of Guild Agit Coin.":
+    "ใช้แล้วได้ Guild Agit Coin จำนวนสุ่ม",
+  "Valuable coin obtained from Guild Dungeon. Can be exchanged for items by visiting NPCs inside the guild hideout.":
+    "เหรียญมีค่าที่ได้จาก Guild Dungeon แลกไอเทมได้โดยไปหา NPC ในที่ซ่อนของกิลด์",
+  "Various fruits cut into bite-sized pieces and coated with sugar. Starts with a sweet, crunchy bite and ends with refreshing fruit, easing the guilt of eating something so sugary.":
+    "ผลไม้หลายชนิดหั่นพอดีคำแล้วเคลือบน้ำตาล เริ่มด้วยความหวานกรอบและจบด้วยผลไม้สดชื่น ช่วยลดความรู้สึกผิดที่กินของหวานจัด",
+  "Versatile sword with a thick, sturdy blade.":
+    "ดาบอเนกประสงค์ที่ใบหนาและแข็งแรง",
+  "Versatile two-handed spear that allows many kinds of maneuvers, but has the drawback of being unusable in tight spaces.":
+    "หอกสองมืออเนกประสงค์ที่ใช้ลีลาได้หลากหลาย แต่มีข้อเสียคือใช้ในที่แคบไม่ได้",
+  "Very powerful Arrow forged from Oridecon.":
+    "Arrow ที่ทรงพลังมาก หลอมขึ้นจาก Oridecon",
+  "Very Shining Stone. Monster Green Petite loves it.":
+    "Shining Stone ที่เปล่งประกายมาก มอนสเตอร์ Green Petite ชอบมาก",
+  "Weapon is never destroyed.":
+    "Weapon ไม่มีวันแตก",
+  "Weapon with multiple blades, engineered to maximize destructive power.":
+    "Weapon ที่มีใบมีดหลายใบ ออกแบบมาให้อานุภาพทำลายสูงสุด",
+  "Weapon worn on the hands or wrists, allowing for a wide range of agile movements.":
+    "Weapon ที่สวมที่มือหรือข้อมือ ทำให้เคลื่อนไหวได้คล่องแคล่วหลากหลาย",
+  "Weathered magic circle whose purpose can no longer be discerned. The Magic Academy buys them at high prices.":
+    "วงเวทที่ผุกร่อนจนดูไม่ออกแล้วว่ามีไว้ทำอะไร Magic Academy รับซื้อในราคาสูง",
+  "Well-cooked meat pressed flat, also known as pressed meat.":
+    "เนื้อสุกที่อัดแบน หรือที่เรียกกันว่าเนื้ออัด",
+  "Well-crafted dagger distinguished by its finely made blade.":
+    "กริชฝีมือดีที่โดดเด่นด้วยใบมีดซึ่งทำอย่างประณีต",
+  "Well-crafted two-handed sword with a sharp, lively edge.":
+    "ดาบสองมือฝีมือดีที่คมกริบและมีชีวิตชีวา",
+  "When compressed, it becomes a material used to craft armor infused with agility.":
+    "เมื่ออัดแน่นแล้วจะกลายเป็นวัสดุสำหรับสร้างเกราะที่อาบด้วยความว่องไว",
+  "When compressed, it becomes a material used to craft armor infused with holiness.":
+    "เมื่ออัดแน่นแล้วจะกลายเป็นวัสดุสำหรับสร้างเกราะที่อาบด้วยความศักดิ์สิทธิ์",
+  "When compressed, it becomes a material used to craft armor infused with magical power.":
+    "เมื่ออัดแน่นแล้วจะกลายเป็นวัสดุสำหรับสร้างเกราะที่อาบด้วยพลังเวท",
+  "When compressed, it becomes a material used to craft armor infused with physical strength.":
+    "เมื่ออัดแน่นแล้วจะกลายเป็นวัสดุสำหรับสร้างเกราะที่อาบด้วยพละกำลัง",
+  "When compressed, it becomes a material used to craft certain accessories.":
+    "เมื่ออัดแน่นแล้วจะกลายเป็นวัสดุสำหรับสร้างเครื่องประดับบางชนิด",
+  "When worn by a Merchant Class character, Armor is not damaged.":
+    "เมื่อ Merchant Class สวมใส่ Armor จะไม่เสียหาย",
+  "When worn by a Merchant Class character, the Weapon is not damaged.":
+    "เมื่อ Merchant Class สวมใส่ Weapon จะไม่เสียหาย",
+  "When worn by a Thief Class character, skills do not consume Gemstones.":
+    "เมื่อ Thief Class สวมใส่ สกิลจะไม่ใช้ Gemstone",
+  "Whether it’s good for your skin remains a mystery.":
+    "ดีต่อผิวหรือเปล่ายังคงเป็นปริศนา",
+  "Whip charged with electricity. Handle with care to avoid shocking yourself.":
+    "แส้ที่อัดกระแสไฟฟ้าไว้ ใช้ด้วยความระวังเพื่อไม่ให้ไฟช็อตตัวเอง",
+  "Whip crafted by stringing shattered blades onto Wire Whip, delivering sharp cutting power similar to a sword.":
+    "แส้ที่ทำโดยร้อยเศษใบมีดเข้ากับ Wire Whip ให้แรงเฉือนคมคล้ายดาบ",
+  "Whip crafted from a single thickly shaped strand, delivering powerful strikes.":
+    "แส้ที่ทำจากเส้นหนาเส้นเดียว ฟาดได้ทรงพลัง",
+  "Whip shaped like an animal’s tail.":
+    "แส้ที่ทำเป็นทรงหางสัตว์",
+  "White bone thoroughly dried in the sun. Monster Desert Wolf cub loves it.":
+    "กระดูกขาวที่ตากแดดจนแห้งสนิท ลูก Desert Wolf ชอบมาก",
+  "White Lance used by the Knight of Honor.":
+    "White Lance ที่ Knight of Honor ใช้",
+  "White Potion made only from the youngest leaves of organic white herbs, giving it a refreshing taste.":
+    "White Potion ที่ทำจากใบอ่อนที่สุดของ white herb ออร์แกนิกเท่านั้น จึงมีรสสดชื่น",
+  "Wildcard often used as a secret trump in games.":
+    "ไพ่ตัวแทนที่มักใช้เป็นไม้ตายลับในเกม",
+  "Wind property.":
+    "ธาตุ Wind",
+  "Wings from a little demon, which look like those of a small bat.":
+    "ปีกจากปีศาจน้อย ที่ดูเหมือนปีกค้างคาวตัวเล็ก",
+  "Winter-themed hat allegedly “borrowed” from Santa by the Racoon Cheers Squad.":
+    "หมวกธีมฤดูหนาวที่ว่ากันว่า Racoon Cheers Squad “ยืม” มาจาก Santa",
+  "Wooden club that looks like anyone could use it with ease.":
+    "กระบองไม้ที่ดูเหมือนใครก็ใช้ได้ง่าย ๆ",
+  "Wrist restraints that are usually used on prisoners.":
+    "เครื่องพันธนาการข้อมือที่มักใช้กับนักโทษ",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -2542,6 +2685,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH_7, 'flavour'],
   [FLAVOUR_TH_8, 'flavour'],
   [FLAVOUR_TH_9, 'flavour'],
+  [FLAVOUR_TH_10, 'flavour'],
 ];
 
 async function main(): Promise<void> {
