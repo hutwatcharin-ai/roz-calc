@@ -235,3 +235,12 @@ table { border-collapse: collapse; width: 100%; }
   .data-table td[data-label=""] { display: block; padding-bottom: 6px; }
   .data-table td[data-label=""]::before { content: none; }
 }
+
+/* Card effects are one line in most rows but a few run long. Cap the column on
+   desktop so one verbose card cannot stretch every other row; the stacked
+   mobile layout has no columns to distort, so it wraps freely there. */
+.data-table td.effect { max-width: 520px; color: var(--dim); }
+
+@media (max-width: 720px) {
+  .data-table td.effect { max-width: none; }
+}

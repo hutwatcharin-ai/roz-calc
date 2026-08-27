@@ -32,7 +32,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   database: [
     { href: '/database/monsters', label: 'มอนสเตอร์', ready: true },
     { href: '/database/items', label: 'ไอเทม', ready: true },
-    { href: '/database/cards', label: 'การ์ด', ready: false },
+    { href: '/database/cards', label: 'การ์ด', ready: true },
     { href: '/database/equipment', label: 'อุปกรณ์', ready: false },
     { href: '/database/skills', label: 'สกิล', ready: false },
     { href: '/database/maps', label: 'แมพ', ready: false },
