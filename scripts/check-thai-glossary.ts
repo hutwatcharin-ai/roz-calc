@@ -190,6 +190,24 @@ export const ACKNOWLEDGED_EXEMPTIONS: readonly Exemption[] = [
     term: 'Critical',
     why: 'Means crucial, an ordinary English adjective, not the Critical stat.',
   },
+  {
+    source:
+      'Plant containing deadly poison. Monster Poison Spore loves it.',
+    term: 'Plant',
+    why: 'The botanical subject of the sentence, not the Plant monster race.',
+  },
+  {
+    source:
+      'Plant said to bloom shyly only in deep forests. Its season is limited, making it difficult to find.',
+    term: 'Plant',
+    why: 'The botanical subject of the sentence, not the Plant monster race.',
+  },
+  {
+    source:
+      'Plant with three heart-shaped leaves that blooms white flowers in June and July. Occasionally a four-leaf one appears, symbolizing great fortune.',
+    term: 'Plant',
+    why: 'The botanical subject of the sentence, not the Plant monster race.',
+  },
 ];
 
 function isExempt(source: string, term: string): boolean {

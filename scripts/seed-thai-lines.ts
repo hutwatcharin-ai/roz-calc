@@ -2165,6 +2165,194 @@ const FLAVOUR_TH_7: Record<string, string> = {
     "หนึ่งในอาวุธระดับตำนาน ความคมที่เกิดจากใบมีดสุญญากาศของมันนั้นเกินคำบรรยาย",
 };
 
+// Batch 4, part 7: the O-to-S range.
+const FLAVOUR_TH_8: Record<string, string> = {
+  "One-handed spear shorter than standard spears.":
+    "หอกมือเดียวที่สั้นกว่าหอกมาตรฐาน",
+  "One-handed sword once used by cavalry, with strong ceremonial significance.":
+    "ดาบมือเดียวที่ทหารม้าเคยใช้ มีความหมายเชิงพิธีการสูง",
+  "Only the wearer knows the true identity behind the noble beast’s mask.":
+    "มีเพียงผู้สวมเท่านั้นที่รู้ตัวตนจริงหลังหน้ากากอสูรผู้สูงศักดิ์",
+  "Ore that can be refined into Elunium. Used primarily in armor forging to produce Elunium.":
+    "แร่ที่ถลุงเป็น Elunium ได้ ใช้เป็นหลักในการตีเกราะเพื่อผลิต Elunium",
+  "Originally a large siege bow designed to break down walls and gates.":
+    "เดิมทีเป็นธนูล้อมเมืองขนาดใหญ่ที่ออกแบบมาทลายกำแพงและประตู",
+  "Originally a shampoo cap, but useful even outside bath time—":
+    "เดิมทีเป็นหมวกสระผม แต่ใช้ได้แม้นอกเวลาอาบน้ำ—",
+  "Outfit brought from an eastern island nation that not only greatly boosts the wearer’s abilities but also feels light and refreshing to wear.":
+    "ชุดที่นำมาจากประเทศเกาะทางตะวันออก ไม่เพียงเพิ่มความสามารถของผู้สวมอย่างมาก แต่ยังสวมแล้วเบาสบายสดชื่น",
+  "Outfit that draws every gaze the moment it is worn. Its glittering surface is excellent at catching the attention of others.":
+    "ชุดที่ดึงทุกสายตาทันทีที่สวม พื้นผิวแวววาวของมันเรียกความสนใจจากคนอื่นได้ดีเยี่ยม",
+  "Pacifier toy played with by small children. Made from gentle material that is harmless to them.":
+    "จุกหลอกที่เด็กเล็กใช้เล่น ทำจากวัสดุอ่อนโยนที่ไม่เป็นอันตรายต่อเด็ก",
+  "Pair it with flushed cheeks and it becomes an over-the-top hospitality set.":
+    "จับคู่กับแก้มแดงระเรื่อแล้วกลายเป็นชุดต้อนรับที่เว่อร์วังไปเลย",
+  "Pale pink quartz that turns blue when left in open air for long periods. Represents personal elevation.":
+    "ควอตซ์สีชมพูอ่อนที่เปลี่ยนเป็นสีน้ำเงินเมื่อตากอากาศไว้นาน ๆ สื่อถึงการยกระดับตัวเอง",
+  "Pale-green Soft Leaf with a very soft texture to the touch.":
+    "Soft Leaf สีเขียวอ่อนที่สัมผัสแล้วนุ่มมาก",
+  "Paper blessed by the sacred Priest. Allows the use of Holy-Property magic Heal":
+    "กระดาษที่ได้รับพรจาก Priest ผู้ศักดิ์สิทธิ์ ใช้เวทธาตุ Holy อย่าง Heal ได้",
+  "Paper treated with oil so water cannot soak through, giving it a slightly yellowish tint.":
+    "กระดาษที่ชุบน้ำมันไว้ไม่ให้น้ำซึมผ่าน จึงมีสีออกเหลืองเล็กน้อย",
+  "Part of Petite Tail. Rumored to regrow once cut.":
+    "ส่วนหนึ่งของ Petite Tail ลือกันว่าตัดแล้วงอกใหม่ได้",
+  "Peach so hard that it could deflect blades. Cannot be eaten, but would hurt considerably if thrown.":
+    "ลูกพีชที่แข็งจนปัดใบมีดได้ กินไม่ได้ แต่ถ้าขว้างใส่ก็เจ็บไม่น้อย",
+  "Peeled stem of Aloe with its inner gel stored inside. Extremely sour taste and sharp smell may be off-putting, but once tried, the flavor is said to be unforgettable.":
+    "ลำต้น Aloe ที่ปอกเปลือกแล้วเก็บเจลข้างในไว้ รสเปรี้ยวจัดและกลิ่นฉุนอาจทำให้เมิน แต่พอได้ลองแล้วว่ากันว่ารสชาติติดใจไม่ลืม",
+  "Perfect for running a street stall.":
+    "เหมาะกับการเปิดแผงขายของริมทาง",
+  "Physical attacks may gather Spirit Spheres.":
+    "การโจมตีกายภาพอาจสะสม Spirit Sphere",
+  "Piece of wood that looks suitable for crafting into various items.":
+    "ท่อนไม้ที่ดูเหมาะจะนำไปทำเป็นของใช้ต่าง ๆ",
+  "Pieces of armor so broken they seem unusable. A scrap-metal merchant might buy them.":
+    "ชิ้นส่วนเกราะที่แตกจนดูใช้ไม่ได้แล้ว พ่อค้าเศษเหล็กอาจรับซื้อ",
+  "Pieces of cloud kept in a bottle. Just watching the fragments shift into geometric shapes is mesmerizing.":
+    "เศษเมฆที่เก็บไว้ในขวด แค่มองเศษเมฆแปรเปลี่ยนเป็นรูปทรงเรขาคณิตก็เพลินแล้ว",
+  "Plant containing deadly poison. Monster Poison Spore loves it.":
+    "พืชที่มีพิษร้ายแรงถึงตาย มอนสเตอร์ Poison Spore ชอบมาก",
+  "Plant said to bloom shyly only in deep forests. Its season is limited, making it difficult to find.":
+    "พืชที่ว่ากันว่าบานอย่างขี้อายเฉพาะในป่าลึก ฤดูของมันสั้น จึงหาได้ยาก",
+  "Plant with three heart-shaped leaves that blooms white flowers in June and July. Occasionally a four-leaf one appears, symbolizing great fortune.":
+    "พืชใบรูปหัวใจสามแฉกที่ออกดอกสีขาวในเดือนมิถุนายนและกรกฎาคม บางครั้งก็มีต้นสี่แฉกโผล่มา ซึ่งเป็นสัญลักษณ์ของโชคลาภยิ่งใหญ่",
+  "Plump, healthy earthworm. Monster Peco Peco loves it.":
+    "ไส้เดือนอ้วนแข็งแรง มอนสเตอร์ Peco Peco ชอบมาก",
+  "Poporing-shaped Muffler. Looks like it would feel refreshing to wear in the heat of summer.":
+    "Muffler ทรง Poporing ดูแล้วน่าจะสวมสบายสดชื่นในหน้าร้อน",
+  "Popular Doram bath accessory, recreated as a costume item.":
+    "ของใช้ในห้องน้ำยอดนิยมของ Doram ที่ทำขึ้นใหม่เป็นไอเทมคอสตูม",
+  "Possesses strong restorative properties but works slowly.":
+    "มีสรรพคุณฟื้นฟูสูง แต่ออกฤทธิ์ช้า",
+  "Practical signboard with the word “sale” written on it.":
+    "ป้ายใช้งานจริงที่เขียนคำว่า “sale” ไว้",
+  "Practical sword widely distributed among common citizens.":
+    "ดาบใช้งานจริงที่แพร่หลายในหมู่สามัญชน",
+  "Primitive shoulder guard carved from wood for basic protection.":
+    "เกราะไหล่แบบดั้งเดิมที่แกะจากไม้ไว้ป้องกันขั้นพื้นฐาน",
+  "Probability increases if the wearer is Acolyte Class.":
+    "โอกาสเพิ่มขึ้นหากผู้สวมใส่เป็น Acolyte Class",
+  "Protective gear with blades mounted on each finger, making something like drinking tea rather difficult.":
+    "อุปกรณ์ป้องกันที่ติดใบมีดไว้ทุกนิ้ว ทำให้เรื่องอย่างการจิบชาลำบากพอสมควร",
+  "Pure white flower said to blur even memories. Contains components believed to ease pain.":
+    "ดอกไม้สีขาวบริสุทธิ์ที่ว่ากันว่าทำให้แม้ความทรงจำก็พร่าเลือน มีสารที่เชื่อกันว่าบรรเทาความเจ็บปวดได้",
+  "Pure white plate with a clean finish, suitable as a gift for women.":
+    "จานสีขาวบริสุทธิ์ผิวเรียบสะอาด เหมาะเป็นของขวัญสำหรับผู้หญิง",
+  "Rare mineral with a faint blue glow.":
+    "แร่หายากที่เรืองแสงสีน้ำเงินจาง ๆ",
+  "Rare mineral with a faint red glow.":
+    "แร่หายากที่เรืองแสงสีแดงจาง ๆ",
+  "Red bat wing.":
+    "ปีกค้างคาวสีแดง",
+  "Red muffler. Extremely red.":
+    "ผ้าพันคอสีแดง แดงมาก",
+  "Red picture frame, suitable as a gift.":
+    "กรอบรูปสีแดง เหมาะเป็นของขวัญ",
+  "Refinable.":
+    "ตีบวกได้",
+  "Refined star crumb.":
+    "star crumb ที่ผ่านการถลุงแล้ว",
+  "Refreshing Ice Cream. Eating too much might freeze your mouth...":
+    "Ice Cream เย็นชื่นใจ กินมากไปปากอาจแข็งเป็นน้ำแข็ง...",
+  "Removes size penalties on weapons.":
+    "ลบค่าลดทอนตามขนาดของอาวุธ",
+  "Report-like book said to contain terrifying stories of the end of the world.":
+    "หนังสือคล้ายรายงานที่ว่ากันว่าบรรจุเรื่องราวน่าสะพรึงของวันสิ้นโลก",
+  "Representative string instrument of a western land, notable for its small size yet clear tone.":
+    "เครื่องสายที่เป็นตัวแทนของดินแดนตะวันตก โดดเด่นที่ตัวเล็กแต่เสียงใส",
+  "Ring imbued with mysterious magic said to increase the wearer’s strength.":
+    "แหวนที่อาบด้วยเวทลึกลับซึ่งว่ากันว่าเพิ่มพละกำลังให้ผู้สวม",
+  "Ring placed into a horse's pierced nose to help steer it in a certain direction.":
+    "ห่วงที่สอดจมูกม้าที่เจาะไว้ เพื่อช่วยบังคับทิศทาง",
+  "Ring woven from flowers, carrying what feels like the shy innocence of a country girl.":
+    "แหวนที่ถักจากดอกไม้ ให้ความรู้สึกเหมือนความบริสุทธิ์ขี้อายของสาวชนบท",
+  "Ring-shaped head ornament set with small gemstones; unlike Headband, it may cause misunderstandings when worn by men.":
+    "เครื่องประดับศีรษะทรงวงแหวนที่ประดับอัญมณีเม็ดเล็ก ต่างจาก Headband ตรงที่ถ้าผู้ชายสวมก็อาจทำให้เข้าใจผิดได้",
+  "Ritual blade once used by guardian knights stationed to defend the castle.":
+    "ใบมีดพิธีกรรมที่อัศวินผู้พิทักษ์ซึ่งประจำการป้องกันปราสาทเคยใช้",
+  "Roasted Sweet Potato, roasted to perfection. Monster Smokie loves it.":
+    "Sweet Potato ย่างที่ย่างได้กำลังดี มอนสเตอร์ Smokie ชอบมาก",
+  "Robe infused with the essence of ancient sorcery. Its refreshing feel helps the wearer focus and concentrate more easily.":
+    "อาภรณ์ที่อาบด้วยแก่นแห่งวิชาเวทโบราณ สัมผัสสดชื่นของมันช่วยให้ผู้สวมมีสมาธิและจดจ่อได้ง่ายขึ้น",
+  "Robe of the angel in charge of Super Novice. Softly wraps the entire body, offering the best possible comfort.":
+    "อาภรณ์ของเทวดาผู้ดูแล Super Novice ห่อหุ้มทั้งร่างอย่างนุ่มนวล ให้ความสบายที่สุดเท่าที่จะเป็นไปได้",
+  "Robe woven from threads of precious silver.":
+    "อาภรณ์ที่ทอจากเส้นเงินล้ำค่า",
+  "Rock-forming mineral found in the earth’s crust and meteorites. Transparent pink or green types are prized as gemstones.":
+    "แร่ประกอบหินที่พบในเปลือกโลกและอุกกาบาต ชนิดใสสีชมพูหรือเขียวถูกยกให้เป็นอัญมณีล้ำค่า",
+  "Rod used for discipline in the name of education. Of course, it can also serve as a sufficiently intimidating weapon.":
+    "ไม้เรียวที่ใช้ลงโทษในนามของการศึกษา แน่นอนว่ามันใช้เป็นอาวุธที่น่าเกรงขามพอตัวได้ด้วย",
+  "Roots, which resemble human legs, that almost look capable of walking.":
+    "รากที่ดูคล้ายขาคน จนแทบเหมือนจะเดินได้",
+  "Rose carved from ice, created by a renowned sculptor from a cold region, making for a unique gift.":
+    "กุหลาบที่แกะจากน้ำแข็ง ฝีมือประติมากรชื่อดังจากเขตหนาว เป็นของขวัญที่ไม่เหมือนใคร",
+  "Round copper badge once given to officials traveling on government duty in an eastern country. They shouted \"The Secret Royal Inspector arrives!\" while holding it. Movement speed increases for a short duration.":
+    "ตราทองแดงทรงกลมที่เคยมอบให้ขุนนางซึ่งเดินทางไปราชการในประเทศทางตะวันออก พวกเขาจะชูมันขึ้นแล้วตะโกนว่า \"The Secret Royal Inspector arrives!\" ความเร็วเคลื่อนที่เพิ่มขึ้นในช่วงสั้น ๆ",
+  "Round fruit with a net-like pattern. Pale green interior gives off a sweet aroma.":
+    "ผลไม้ทรงกลมที่มีลายคล้ายตาข่าย เนื้อในสีเขียวอ่อนส่งกลิ่นหอมหวาน",
+  "Round headguard made from magical material. Unlike other materials, it is shaped so breathing is still possible.":
+    "เครื่องป้องกันศีรษะทรงกลมที่ทำจากวัสดุเวท ต่างจากวัสดุอื่นตรงที่ขึ้นรูปไว้ให้ยังหายใจได้",
+  "Round shield that is easy to craft and simple to handle, making it widely used.":
+    "โล่กลมที่ทำง่ายและใช้ง่าย จึงใช้กันแพร่หลาย",
+  "Said to gain a unique charm as the material ages.":
+    "ว่ากันว่ายิ่งวัสดุเก่าลง ยิ่งได้เสน่ห์เฉพาะตัว",
+  "Said to have a fresh, youthful taste.":
+    "ว่ากันว่ามีรสสดใสแบบวัยเยาว์",
+  "Same effect as Yellow Potion but much lighter.":
+    "ให้ผลเหมือน Yellow Potion แต่เบากว่ามาก",
+  "Sand so fine it is difficult to hold even with both hands.":
+    "ทรายที่ละเอียดจนกำไว้ด้วยสองมือก็ยังยาก",
+  "Sandals of the angel in charge of Super Novice. Jumping in these makes it feel as if you could leap all the way up to the sky.":
+    "รองเท้าแตะของเทวดาผู้ดูแล Super Novice กระโดดในรองเท้าคู่นี้แล้วรู้สึกเหมือนจะกระโจนขึ้นไปถึงฟ้าได้",
+  "Scales from a snake that can be used to make some rather flamboyant clothes.":
+    "เกล็ดงูที่ใช้ทำเสื้อผ้าฉูดฉาดได้",
+  "Scarf with a fearsome look, as if large nails were driven through it.":
+    "ผ้าพันคอหน้าตาน่าสะพรึง ราวกับมีตะปูใหญ่ตอกทะลุอยู่",
+  "Sea-Otter Leather that looks warm enough to make fine clothing. Its softness can be felt just from looking at it.":
+    "Sea-Otter Leather ที่ดูอบอุ่นพอจะทำเสื้อผ้าชั้นดี ความนุ่มของมันสัมผัสได้แค่มอง",
+  "Seaweed that grows in the ocean.":
+    "สาหร่ายที่ขึ้นในทะเล",
+  "Seaweed with vibrant, eye-catching colors.":
+    "สาหร่ายที่สีสันสดใสสะดุดตา",
+  "Seems designed with no concern for the wearer's feelings.":
+    "ดูเหมือนออกแบบมาโดยไม่สนใจความรู้สึกของผู้สวมเลย",
+  "Seems to be a byproduct of Angeling.":
+    "ดูเหมือนเป็นผลพลอยได้จาก Angeling",
+  "Seems to be a byproduct of Deviling.":
+    "ดูเหมือนเป็นผลพลอยได้จาก Deviling",
+  "Seems to be a byproduct of Drops.":
+    "ดูเหมือนเป็นผลพลอยได้จาก Drops",
+  "Seems to be a byproduct of Poporing.":
+    "ดูเหมือนเป็นผลพลอยได้จาก Poporing",
+  "Seems to be a byproduct of Poring.":
+    "ดูเหมือนเป็นผลพลอยได้จาก Poring",
+  "Seems to contain Jello Fragments inside.":
+    "ดูเหมือนมี Jello Fragment อยู่ข้างใน",
+  "Several strands of red thread attached as an ornament to the tip of a sword.":
+    "เส้นด้ายสีแดงหลายเส้นที่ผูกเป็นเครื่องประดับไว้ที่ปลายดาบ",
+  "Shackles worn on the ankles of prisoners or slaves to keep them from escaping easily. A chain connects both ankles with a heavy weight attached, greatly restricting movement.":
+    "โซ่ตรวนที่ล่ามข้อเท้านักโทษหรือทาสไว้ไม่ให้หนีง่าย โซ่เชื่อมข้อเท้าทั้งสองข้างและมีตุ้มถ่วงหนัก จำกัดการเคลื่อนไหวอย่างมาก",
+  "Shaped like a large bladed cartwheel — big and heavy, but tremendously powerful.":
+    "รูปทรงคล้ายล้อเกวียนติดใบมีดขนาดใหญ่ — ทั้งใหญ่และหนัก แต่ทรงพลังมหาศาล",
+  "Sharp claws taken from monkeys. Can be sold to the Collector.":
+    "กรงเล็บคมที่เอามาจากลิง ขายให้ Collector ได้",
+  "Sharp Katar carrying the chill of the prison.":
+    "กะตาร์คมที่พาความเยียบเย็นของเรือนจำมาด้วย",
+  "Sharp, hollow quills which used to cover and protect a porcupine.":
+    "ขนแหลมกลวงที่เคยปกคลุมและปกป้องเม่น",
+  "Shattered pieces of an eggshell.":
+    "เศษเปลือกไข่ที่แตกกระจาย",
+  "Shield forged from solid steel, boasting powerful defensive capability.":
+    "Shield ที่หลอมจากเหล็กกล้าตัน มีความสามารถในการป้องกันสูง",
+  "Shiny crystal that resembles Large Jellopy but with a stronger gleam.":
+    "ผลึกเงาวาวที่คล้าย Large Jellopy แต่เปล่งประกายแรงกว่า",
+  "Shoes with front tips sharpened like blades. Wearing them outside may be a bit too much of a challenge.":
+    "Shoes ที่ปลายหน้าลับคมราวใบมีด ใส่ออกไปข้างนอกอาจท้าทายเกินไปหน่อย",
+  "Short dagger with a gently curved blade.":
+    "กริชสั้นที่ใบมีดโค้งเล็กน้อย",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -2178,6 +2366,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH_5, 'flavour'],
   [FLAVOUR_TH_6, 'flavour'],
   [FLAVOUR_TH_7, 'flavour'],
+  [FLAVOUR_TH_8, 'flavour'],
 ];
 
 async function main(): Promise<void> {
