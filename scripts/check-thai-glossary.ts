@@ -177,6 +177,12 @@ export const ACKNOWLEDGED_EXEMPTIONS: readonly Exemption[] = [
     term: 'Earth',
     why: '"Earth" is the planet here, not the element.',
   },
+  {
+    source:
+      'Blind individual unable to distinguish objects. Easily deceived due to inability to see.',
+    term: 'Blind',
+    why: 'Describes a person who cannot see, not the Blind status ailment.',
+  },
 ];
 
 function isExempt(source: string, term: string): boolean {

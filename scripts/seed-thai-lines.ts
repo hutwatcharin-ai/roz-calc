@@ -1349,6 +1349,214 @@ const FLAVOUR_TH_3: Record<string, string> = {
 // never listed here seeds nothing and reports nothing -- which is exactly
 // what FLAVOUR_TH_3 did until this list replaced a hand-written call per
 // dictionary inside main().
+// Batch 4, part 3. `Armor gains <element>-Property property.` keeps both the
+// equip slot and the element in English, like every other line that names
+// them.
+const FLAVOUR_TH_4: Record<string, string> = {
+  "All-purpose armor cast from solid metal and shaped to fit the wearer.":
+    "เกราะอเนกประสงค์ที่หล่อจากโลหะตันและขึ้นรูปให้พอดีกับผู้สวมใส่",
+  "All-purpose two-handed sword engineered for reliable use in any situation.":
+    "ดาบสองมืออเนกประสงค์ที่ออกแบบให้ใช้ได้อย่างมั่นใจในทุกสถานการณ์",
+  "All-weather outfit crafted for travelers.":
+    "ชุดที่ทำมาสำหรับนักเดินทาง ใช้ได้ทุกสภาพอากาศ",
+  "also known by its nickname, the Magical Triangle Hood.":
+    "หรือที่รู้จักกันในชื่อเล่นว่า Magical Triangle Hood",
+  "An adventurer's suit that maximizes both defense and comfort.":
+    "ชุดนักผจญภัยที่ให้ทั้งการป้องกันและความสบายสูงสุด",
+  "An air of desperation can be felt—":
+    "สัมผัสได้ถึงความสิ้นหวังที่แผ่ออกมา—",
+  "An ancient ring.":
+    "แหวนโบราณ",
+  "An antenna that is extremely hard and sharply honed. Its pointed tip is polished like a blade.":
+    "หนวดที่แข็งมากและลับจนคม ปลายแหลมของมันขัดเงาราวกับใบมีด",
+  "An apple loved by Picky Poring.":
+    "แอปเปิลที่ Picky Poring ชื่นชอบ",
+  "An apron worn by the Alice monster.":
+    "ผ้ากันเปื้อนที่มอนสเตอร์ Alice สวมใส่",
+  "An electric Guitar designed in the shape of a Phen.":
+    "กีตาร์ไฟฟ้าที่ออกแบบเป็นรูปทรง Phen",
+  "An emblem given to an orc warrior that is proof of his heroism.":
+    "ตราสัญลักษณ์ที่มอบให้นักรบออร์ค เป็นเครื่องพิสูจน์ความกล้าหาญของเขา",
+  "An emblem said to be used by those who love to run fast. Just wearing it makes you want to dash off somewhere.":
+    "ตราสัญลักษณ์ที่ว่ากันว่าคนรักการวิ่งเร็วใช้กัน แค่สวมก็อยากออกวิ่งไปที่ไหนสักแห่ง",
+  "An expensive ring made of gold. Since ancient times, gold has symbolized unchanging love.":
+    "แหวนทองราคาแพง ตั้งแต่โบราณกาล ทองเป็นสัญลักษณ์ของรักที่ไม่แปรเปลี่ยน",
+  "An impure ore that forms iron after being refined.":
+    "แร่ไม่บริสุทธิ์ที่ถลุงแล้วได้เหล็ก",
+  "An iron and carbon alloy known for its structural durability.":
+    "โลหะผสมเหล็กกับคาร์บอนที่ขึ้นชื่อเรื่องความทนทานของโครงสร้าง",
+  "An iron chain so tangled it cannot be undone.":
+    "โซ่เหล็กที่พันกันยุ่งจนแก้ไม่ออก",
+  "An old rope, rotted and snapped. It feels like it would crumble at a touch.":
+    "เชือกเก่าที่ผุและขาด รู้สึกเหมือนแตะแล้วจะยุ่ยทันที",
+  "An Old Scroll filled with unfamiliar writing when unrolled.":
+    "Old Scroll ที่คลี่ออกมาแล้วเต็มไปด้วยตัวอักษรที่ไม่คุ้นตา",
+  "An old, battered frying pan no longer suitable for cooking.":
+    "กระทะเก่าบุบจนใช้ทำอาหารไม่ได้แล้ว",
+  "An old, rusted shuriken. Shuriken enthusiasts quietly buy them up.":
+    "ชูริเคนเก่าขึ้นสนิม พวกคนคลั่งชูริเคนแอบกว้านซื้อกัน",
+  "An old, used prison uniform.":
+    "ชุดนักโทษเก่าที่ผ่านการใช้งานมาแล้ว",
+  "An unpleasantly sticky, translucent green liquid.":
+    "ของเหลวสีเขียวโปร่งแสงที่เหนียวจนน่ารำคาญ",
+  "Ancient box emitting a mysterious blue glow. Something might be inside when opened.":
+    "หีบโบราณที่เปล่งแสงสีน้ำเงินลึกลับ เปิดออกมาอาจมีอะไรอยู่ข้างใน",
+  "Animal droppings, dung… Hard to call it by name, so it is simply called Poo Poo Hat.":
+    "มูลสัตว์ อุจจาระ… เรียกชื่อตรง ๆ ก็กระดากปาก เลยเรียกกันสั้น ๆ ว่า Poo Poo Hat",
+  "Animal droppings… poop… too unspeakable to say aloud, so it’s simply called Poo Poo Hat.":
+    "มูลสัตว์… อุจจาระ… พูดออกมาดัง ๆ ก็กระดากเกินไป เลยเรียกกันสั้น ๆ ว่า Poo Poo Hat",
+  "Animal hide that can be used in making clothes, coverings or bedding.":
+    "หนังสัตว์ที่ใช้ทำเสื้อผ้า ผ้าคลุม หรือเครื่องนอนได้",
+  "Antennae that serve as sensory organs for insects.":
+    "หนวดที่เป็นอวัยวะรับสัมผัสของแมลง",
+  "Apple juice stored in a bottle. Easier to drink and restores better than eating the fruit itself.":
+    "น้ำแอปเปิลบรรจุขวด ดื่มง่ายและฟื้นฟูได้ดีกว่ากินผลสด",
+  "Apple made famous when a legendary marksman of old shot it cleanly off his son's head.":
+    "แอปเปิลที่โด่งดังขึ้นมาเมื่อนักแม่นธนูในตำนานยิงมันหลุดจากหัวลูกชายตัวเองได้อย่างแม่นยำ",
+  "Argioph draped over the head, occasionally wriggling intensely.":
+    "Argioph ที่คลุมอยู่บนหัว บางครั้งก็ดิ้นแรง",
+  "Armor gains Earth-Property property.":
+    "Armor ได้คุณสมบัติธาตุ Earth",
+  "Armor gains Fire-Property property.":
+    "Armor ได้คุณสมบัติธาตุ Fire",
+  "Armor gains Poison-Property property.":
+    "Armor ได้คุณสมบัติธาตุ Poison",
+  "Armor gains Shadow-Property property.":
+    "Armor ได้คุณสมบัติธาตุ Shadow",
+  "Armor gains Undead property.":
+    "Armor ได้คุณสมบัติ Undead",
+  "Armor gains Water-Property property.":
+    "Armor ได้คุณสมบัติธาตุ Water",
+  "Armor gains Wind-Property property.":
+    "Armor ได้คุณสมบัติธาตุ Wind",
+  "Armor is never destroyed.":
+    "Armor ไม่มีวันแตก",
+  "Armor once worn by members of the Knight of Honor.":
+    "Armor ที่สมาชิกของ Knight of Honor เคยสวมใส่",
+  "Arrow carved from solid rock, imbued with the power of earth.":
+    "ลูกธนูที่สลักจากหินตัน อาบด้วยพลังแห่งปฐพี",
+  "Arrow made of Steel, boasting high attack power.":
+    "ลูกธนูที่ทำจาก Steel มีพลังโจมตีสูง",
+  "Arrow with an oil-soaked wad wrapped around the tip so it can be lit and fired.":
+    "ลูกธนูที่พันปุยชุบน้ำมันไว้ที่ปลาย จุดไฟแล้วยิงได้",
+  "Assassination dagger said to have been favored by Assassin Class.":
+    "กริชลอบสังหารที่ว่ากันว่า Assassin Class นิยมใช้",
+  "Axe said to drive its wielder to seek blood, making them strangely excited and restless in search of enemies.":
+    "ขวานที่ว่ากันว่าผลักดันผู้ถือให้กระหายเลือด ตื่นเต้นและกระวนกระวายอย่างประหลาดเพื่อตามหาศัตรู",
+  "Axe soaked with blood from countless swings on the battlefield, radiating a murderous aura that terrifies foes facing its edge.":
+    "ขวานที่ชุ่มเลือดจากการฟาดนับครั้งไม่ถ้วนในสนามรบ แผ่ไอสังหารที่ทำให้ศัตรูซึ่งเผชิญคมของมันหวาดกลัว",
+  "Bandana bearing the skull symbol of sea pirates, said to grant courage to the wearer.":
+    "ผ้าโพกที่มีสัญลักษณ์หัวกะโหลกของโจรสลัด ว่ากันว่ามอบความกล้าให้ผู้สวมใส่",
+  "Beard that instantly lends a heavy, dignified air to its wearer the moment it is put on.":
+    "เคราที่พอสวมปุ๊บก็ทำให้ผู้สวมดูหนักแน่นสง่างามขึ้นทันที",
+  "Beautiful cross-shaped ornament blessed by the gods, a rosary.":
+    "เครื่องประดับทรงกางเขนอันงดงามที่ได้รับพรจากทวยเทพ หรือลูกประคำ",
+  "Beautiful helmet adorned with gemstones; said to excel at defending against magic due to the mysterious resonance between the stones.":
+    "หมวกเกราะงดงามที่ประดับด้วยอัญมณี ว่ากันว่าป้องกันเวทได้ดีเยี่ยมเพราะการสั่นพ้องอันลึกลับระหว่างเม็ดหิน",
+  "Beautiful wing-shaped hat made by attaching angel feathers to a Headband; the feel of Soft Feather lifts the mood, making movements feel light and cheerful.":
+    "หมวกทรงปีกอันงดงามที่ทำโดยติดขนนกเทวดาเข้ากับ Headband สัมผัสของ Soft Feather ช่วยยกอารมณ์ ทำให้เคลื่อนไหวเบาและสดใส",
+  "Being made of solid rock, it is naturally heavy—and getting struck by it would make it hard for anyone to stay conscious.":
+    "เพราะทำจากหินตัน มันจึงหนักเป็นธรรมดา และโดนมันฟาดเข้าไปคงยากที่ใครจะยังมีสติอยู่",
+  "Bell made of gold. Produces an exquisitely clear sound.":
+    "ระฆังที่ทำจากทอง ให้เสียงใสกังวานอย่างวิเศษ",
+  "Belt worn around the body.":
+    "เข็มขัดที่คาดรอบตัว",
+  "Best consumed with water to avoid choking.":
+    "ควรกินพร้อมน้ำเพื่อไม่ให้ติดคอ",
+  "Beverage made from the juice of a fruit called Orange. Monster Drops loves it.":
+    "เครื่องดื่มที่ทำจากน้ำของผลไม้ชื่อ Orange มอนสเตอร์ Drops ชอบมาก",
+  "Bird perched on a branch, singing happily.":
+    "นกที่เกาะอยู่บนกิ่งไม้ ร้องเพลงอย่างมีความสุข",
+  "Black blade tainted by darkness, said to repel even light. Only the blade remains, yet it is so sharp that even the slightest touch can cut deeply.":
+    "ใบมีดดำที่ถูกความมืดแปดเปื้อน ว่ากันว่าผลักไสแม้กระทั่งแสง เหลือเพียงใบมีด แต่คมจนแค่สัมผัสเบา ๆ ก็บาดลึก",
+  "Black butterfly-shaped leather mask that somehow gives off a risqué feeling when you look at it. Likely used to give people a good scare.":
+    "หน้ากากหนังทรงผีเสื้อสีดำที่มองแล้วให้ความรู้สึกวาบหวิวอย่างบอกไม่ถูก คงใช้ไว้หลอกคนให้ตกใจเล่น",
+  "Black glasses that shield the eyes from harsh light and serve as a universally stylish fashion item.":
+    "แว่นดำที่กันแสงจ้าให้ดวงตา และเป็นแฟชั่นที่เข้ากับทุกคน",
+  "Black ladle made from a special material, light yet sturdy.":
+    "ทัพพีสีดำที่ทำจากวัสดุพิเศษ เบาแต่แข็งแรง",
+  "Black-colored dye that is made from a variable mixture of ground herbs.":
+    "สีย้อมสีดำที่ทำจากสมุนไพรบดผสมกันในสัดส่วนที่ไม่ตายตัว",
+  "Blind individual unable to distinguish objects. Easily deceived due to inability to see.":
+    "คนตาบอดที่แยกแยะสิ่งของไม่ได้ ถูกหลอกง่ายเพราะมองไม่เห็น",
+  "Blue Fish that shines like the sea. Said to be good for health.":
+    "Blue Fish ที่เปล่งประกายดั่งท้องทะเล ว่ากันว่าดีต่อสุขภาพ",
+  "Blue headband worn at a slight angle, catching the eye with its pretty shape.":
+    "ผ้าคาดผมสีน้ำเงินที่คาดเอียงเล็กน้อย สะดุดตาด้วยทรงที่สวยงาม",
+  "Blue pencil chewed so much that bite marks cover its surface.":
+    "ดินสอสีน้ำเงินที่ถูกกัดจนรอยฟันเต็มไปทั้งแท่ง",
+  "Blue Potion made only from the youngest leaves of organic blue herbs, giving it a refreshing taste.":
+    "Blue Potion ที่ทำจากใบอ่อนที่สุดของ blue herb ออร์แกนิกเท่านั้น จึงมีรสสดชื่น",
+  "Blue-painted Orc emblem, seemingly indicating higher status among Orcs.":
+    "ตราสัญลักษณ์ Orc ที่ทาสีน้ำเงิน ดูเหมือนบ่งบอกสถานะที่สูงกว่าในหมู่ Orc",
+  "Blunt weapon formed from several interlinked chains, delivering considerable impact and a strangely satisfying feeling upon strike.":
+    "อาวุธทู่ที่เกิดจากโซ่หลายเส้นคล้องต่อกัน ให้แรงกระแทกไม่น้อยและความรู้สึกสะใจอย่างประหลาดเวลาฟาด",
+  "Book in which a great sage recorded his enlightenment in the form of a diary.":
+    "หนังสือที่ปราชญ์ผู้ยิ่งใหญ่บันทึกการตื่นรู้ของตนไว้ในรูปแบบไดอารี",
+  "Book said to be imbued with the dry, cutting gale that carries not a trace of moisture.":
+    "หนังสือที่ว่ากันว่าอาบด้วยลมกรรโชกแห้งเฉียบที่ไม่มีความชื้นแม้แต่น้อย",
+  "Book said to be imbued with the power of earth that shakes and splits the very ground.":
+    "หนังสือที่ว่ากันว่าอาบด้วยพลังปฐพีที่สั่นสะเทือนและแยกผืนดินออกจากกัน",
+  "Book said to be imbued with the power of rough waves surging across the great ocean.":
+    "หนังสือที่ว่ากันว่าอาบด้วยพลังคลื่นเชี่ยวที่ซัดข้ามมหาสมุทรอันกว้างใหญ่",
+  "Book said to contain sacred scripture, its hefty weight allowing it to deliver powerful blows.":
+    "หนังสือที่ว่ากันว่าบรรจุคัมภีร์ศักดิ์สิทธิ์ น้ำหนักอันมากของมันทำให้ฟาดได้หนักหน่วง",
+  "Book said to contain the blazing heat of the sun, hot enough to melt Steel.":
+    "หนังสือที่ว่ากันว่าบรรจุความร้อนแผดเผาของดวงอาทิตย์ ร้อนพอจะหลอม Steel ได้",
+  "Boots designed to cover the ankles, crafted with mobility in mind.":
+    "รองเท้าบูตที่ออกแบบให้หุ้มข้อเท้า ทำขึ้นโดยคำนึงถึงความคล่องตัว",
+  "Bottled black fluid often used as a method of self defence by squid creatures.":
+    "ของเหลวสีดำบรรจุขวด ที่พวกหมึกมักใช้ป้องกันตัว",
+  "Bottled powder from the wings of a moth.":
+    "ผงจากปีกผีเสื้อกลางคืนบรรจุขวด",
+  "Bow said to have been favored by hunters. Though difficult to master, its precision and destructive power are more than enough to captivate anyone who learns to use it.":
+    "ธนูที่ว่ากันว่าพรานนิยมใช้ แม้จะฝึกให้ชำนาญได้ยาก แต่ความแม่นยำและอานุภาพทำลายของมันก็มากพอจะตรึงใจใครก็ตามที่ใช้เป็น",
+  "Bow used by Orc Archer, looking extremely large and powerful.":
+    "ธนูที่ Orc Archer ใช้ ดูใหญ่และทรงพลังอย่างยิ่ง",
+  "Box containing a gift when opened. What it holds cannot be known until the moment it is opened.":
+    "กล่องที่เปิดออกมาแล้วมีของขวัญอยู่ข้างใน จะรู้ว่ามีอะไรก็ต่อเมื่อเปิดเท่านั้น",
+  "Bracelet that looks magnificent yet somehow sorrowful. Monster Isis loves it.":
+    "กำไลที่ดูงามสง่าแต่ก็แฝงความเศร้าอย่างบอกไม่ถูก มอนสเตอร์ Isis ชอบมาก",
+  "Branch of an ancient tree that has gained magical power over countless ages. Its mysterious force can summon a living being.":
+    "กิ่งไม้จากต้นไม้โบราณที่สั่งสมพลังเวทมาตลอดกาลอันยาวนาน พลังลึกลับของมันเรียกสิ่งมีชีวิตออกมาได้",
+  "Brilliant metal shining with dazzling light. Ancient manuscripts say it appears before one who can change this world’s fate, accompanying their destiny.":
+    "โลหะเจิดจ้าที่เปล่งแสงพร่างพราย ตำราโบราณว่ามันจะปรากฏต่อหน้าผู้ที่เปลี่ยนชะตาของโลกนี้ได้ และร่วมทางไปกับชะตาของผู้นั้น",
+  "Brings back memories of hot summer days from childhood.":
+    "ชวนให้นึกถึงวันฤดูร้อนอันร้อนระอุในวัยเด็ก",
+  "Bristly, tough hair cut from a wild boar.":
+    "ขนแข็งหยาบที่ตัดมาจากหมูป่า",
+  "Broad crescent-shaped sword with a rounded blade.":
+    "ดาบทรงจันทร์เสี้ยวใบกว้างที่คมโค้งมน",
+  "Broken sword cracked beyond further use. Nearly a piece of scrap Cheol-i.":
+    "ดาบหักที่ร้าวจนใช้ต่อไม่ได้ แทบจะเป็นเศษ Cheol-i แล้ว",
+  "Brown plant root still covered in soil.":
+    "รากพืชสีน้ำตาลที่ยังมีดินติดอยู่",
+  "Butterfly wing powder that sparkles in the wind.":
+    "ผงปีกผีเสื้อที่เปล่งประกายในสายลม",
+  "Can be diluted to create Mixture.":
+    "เจือจางแล้วใช้ทำ Mixture ได้",
+  "Can be refined into the mineral known as Flame Heart.":
+    "ถลุงแล้วได้แร่ที่เรียกว่า Flame Heart",
+  "Can be refined into the mineral known as Great Nature.":
+    "ถลุงแล้วได้แร่ที่เรียกว่า Great Nature",
+  "Can be refined into the mineral known as Mystic Frozen.":
+    "ถลุงแล้วได้แร่ที่เรียกว่า Mystic Frozen",
+  "Can be refined into the mineral known as Rough Wind.":
+    "ถลุงแล้วได้แร่ที่เรียกว่า Rough Wind",
+  "Can be refined to obtain pure iron.":
+    "ถลุงแล้วได้เหล็กบริสุทธิ์",
+  "Can be refined together with iron to produce Steel.":
+    "ถลุงร่วมกับเหล็กแล้วได้ Steel",
+  "Can be used to craft powerful weapons and armor.":
+    "ใช้สร้างอาวุธและเกราะอันทรงพลังได้",
+  "Cardigan of the angel in charge of Super Novice. Once worn, the warmth it provides makes it feel like you would not catch a cold even if you slept outdoors.":
+    "คาร์ดิแกนของเทวดาผู้ดูแล Super Novice พอสวมแล้วความอบอุ่นที่ได้ทำให้รู้สึกเหมือนนอนกลางแจ้งก็ไม่เป็นหวัด",
+  "Carrot shimmering with rainbow colors. Gentle fragrance is captivating. Monster Lunatic loves it.":
+    "แครอทที่วาววับด้วยสีรุ้ง กลิ่นหอมอ่อน ๆ ชวนหลงใหล มอนสเตอร์ Lunatic ชอบมาก",
+  "Ceremonial sword said to have been used by a spirit priest who guided the dead. Unsuitable to use as an actual weapon.":
+    "ดาบพิธีกรรมที่ว่ากันว่านักบวชผู้นำทางดวงวิญญาณเคยใช้ ไม่เหมาะจะใช้เป็นอาวุธจริง",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -1358,6 +1566,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH, 'flavour'],
   [FLAVOUR_TH_2, 'flavour'],
   [FLAVOUR_TH_3, 'flavour'],
+  [FLAVOUR_TH_4, 'flavour'],
 ];
 
 async function main(): Promise<void> {
