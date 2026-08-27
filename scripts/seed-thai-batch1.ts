@@ -43,6 +43,12 @@ const LABEL_TH: Record<string, string | null> = {
   // labels mapped" ledger line came to be true against a short measurement.
   // Skill and item names (Faith, Prisoner Uniform) stay English, like every
   // other proper noun the game shows in English.
+  //
+  // NOTE for batch 2: these three render a Thai opener followed by an
+  // untranslated English clause, which is an improvement but not a finished
+  // line. compose() only consults item_description_lines when a term has NO
+  // row, so translating one of these whole means DELETING its row here -- a
+  // whole-line row alone will not override a term that is present.
   'During transformation': 'ระหว่างแปลงร่าง',
   'For each level of Faith learned': 'ต่อทุกเลเวลของ Faith ที่เรียนรู้',
   'When worn with Prisoner Uniform': 'เมื่อสวมคู่กับ Prisoner Uniform',
