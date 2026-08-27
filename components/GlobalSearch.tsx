@@ -137,7 +137,7 @@ export default function GlobalSearch() {
               className="mono"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="ค้นมอนสเตอร์หรือไอเทม..."
+              placeholder="ค้นทุกอย่างในฐานข้อมูล..."
               style={{
                 width: '100%',
                 padding: '14px 16px',
