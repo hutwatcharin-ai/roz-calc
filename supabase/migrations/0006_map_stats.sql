@@ -11,8 +11,12 @@
 -- per map, one request, no pagination and so no ordering to be unstable.
 --
 -- min(map_display_name) is safe: no map in the data carries two different
--- display names, and only 245 of 497 carry one at all -- the rest stay null and
--- the page shows the code instead of guessing a name.
+-- display names. Every row currently has one -- 111 of the 497 maps simply
+-- have their own map_code repeated as the "name" (not informative, but not
+-- null either), and the other 386 carry a genuine name (245 distinct names,
+-- some shared across sibling maps). Nothing here depends on that shape
+-- holding forever -- the column stays nullable and the page's own fallback
+-- to map_code is defensive, not a mechanism this data currently exercises.
 
 create or replace view map_stats as
 select

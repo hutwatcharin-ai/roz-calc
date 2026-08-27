@@ -29,10 +29,12 @@ export default async function MapsPage({
   let query = db.from('map_stats').select('map_code, map_display_name, monster_count', { count: 'exact' });
 
   if (q) {
-    // or() takes one string; a comma inside a value would split it, so the
-    // needle is stripped of commas rather than trusted.
-    const needle = q.replace(/[,()]/g, '');
-    query = query.or(`map_code.ilike.%${needle}%,map_display_name.ilike.%${needle}%`);
+    // Escape the LIKE metacharacters so a literal % or _ matches itself
+    // instead of acting as a wildcard. Backslash is Postgres's default LIKE
+    // escape character, so it must be escaped first or it would consume the
+    // escapes added after it.
+    const needle = q.replace(/[\\%_]/g, (ch) => `\\${ch}`);
+    query = query.ilike('search_text', `%${needle}%`);
   }
 
   const from = (page - 1) * PAGE_SIZE;
@@ -61,9 +63,14 @@ export default async function MapsPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลแมพ</h1>
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>{count ?? 0} แมพ</p>
+      {/* A query error and a genuine zero-result search must read differently --
+          otherwise an outage looks identical to "there are no maps", which is
+          false. */}
+      <p style={{ color: 'var(--faint)', marginTop: 6 }}>
+        {error ? 'โหลดจำนวนแมพไม่สำเร็จ' : `${count ?? 0} แมพ`}
+      </p>
       <p style={{ color: 'var(--faint)', marginTop: 4, fontSize: 13 }}>
-        แมพบางแห่งมีแต่รหัส เพราะข้อมูลต้นทางไม่มีชื่อให้ ไม่ได้แปลว่าแมพนั้นไม่มีอยู่
+        แมพบางแห่งแสดงแค่รหัส เพราะไม่มีชื่อเรียกอื่นนอกจากรหัสแมพเอง ไม่ได้แปลว่าแมพนั้นไม่มีอยู่
       </p>
 
       <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
@@ -81,23 +88,38 @@ export default async function MapsPage({
             </tr>
           </thead>
           <tbody>
-            {(maps ?? []).map((m) => (
-              <tr key={m.map_code}>
-                <td data-label="">
-                  <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`}>
-                    {m.map_display_name ?? m.map_code}
-                  </Link>
-                </td>
-                <td data-label="รหัส" className="mono">{m.map_code}</td>
-                <td data-label="จำนวนมอน" className="num">{m.monster_count}</td>
-              </tr>
-            ))}
-            {(maps ?? []).length === 0 && (
+            {error ? (
               <tr>
                 <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  ไม่พบแมพที่ตรงเงื่อนไข
+                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
+            ) : (
+              <>
+                {(maps ?? []).map((m) => (
+                  <tr key={m.map_code}>
+                    <td data-label="">
+                      <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`}>
+                        {/* map_display_name is populated for every row today --
+                            111 of 497 just repeat their own map_code, which is
+                            handled above by showing the code either way. This
+                            fallback guards a null the column's type still
+                            allows, not a shape the current data exercises. */}
+                        {m.map_display_name ?? m.map_code}
+                      </Link>
+                    </td>
+                    <td data-label="รหัส" className="mono">{m.map_code}</td>
+                    <td data-label="จำนวนมอน" className="num">{m.monster_count}</td>
+                  </tr>
+                ))}
+                {(maps ?? []).length === 0 && (
+                  <tr>
+                    <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                      ไม่พบแมพที่ตรงเงื่อนไข
+                    </td>
+                  </tr>
+                )}
+              </>
             )}
           </tbody>
         </table>
