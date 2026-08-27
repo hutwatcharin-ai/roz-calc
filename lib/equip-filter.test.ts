@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { canJobEquip, isUnclassifiedClass, EQUIPMENT_CATEGORIES } from './equip-filter';
-import { isZeroJob, isKnownNonZeroJob } from './zero-jobs';
+import { isZeroJob, isKnownNonZeroJob, jobAncestry } from './zero-jobs';
 
 describe('canJobEquip', () => {
   it('matches an exact job name', () => {
@@ -51,6 +51,40 @@ describe('canJobEquip', () => {
     // An unusable entry (Ninja) must not veto a usable one (All Jobs) on the same item.
     expect(canJobEquip(['Ninja', 'All Jobs'], 'Knight')).toBe(true);
     expect(canJobEquip(['Soul Linker', 'Swordsman'], 'Swordsman')).toBe(true);
+  });
+
+  it('skips empty and whitespace-only entries', () => {
+    expect(canJobEquip([''], 'Knight')).toBe(false);
+    expect(canJobEquip(['   '], 'Knight')).toBe(false);
+  });
+
+  it('includes class-1 gear when filtering class-2 (Knight sees Swordsman)', () => {
+    // Class-2 jobs inherit their class-1 gear
+    expect(canJobEquip(['Swordsman'], 'Knight')).toBe(true);
+    expect(canJobEquip(['Mage'], 'Wizard')).toBe(true);
+    expect(canJobEquip(['Archer'], 'Hunter')).toBe(true);
+    expect(canJobEquip(['Thief'], 'Assassin')).toBe(true);
+    expect(canJobEquip(['Acolyte'], 'Priest')).toBe(true);
+    expect(canJobEquip(['Merchant'], 'Blacksmith')).toBe(true);
+  });
+
+  it('does not include class-2 gear when filtering class-1 (Swordsman does not see Knight)', () => {
+    // One-way inheritance: class-1 does not get class-2 gear
+    expect(canJobEquip(['Knight'], 'Swordsman')).toBe(false);
+    expect(canJobEquip(['Wizard'], 'Mage')).toBe(false);
+    expect(canJobEquip(['Hunter'], 'Archer')).toBe(false);
+  });
+
+  it('ensures Novice is not an ancestor of class-1 jobs', () => {
+    // Novice is not part of any class-1 family
+    expect(canJobEquip(['Novice'], 'Swordsman')).toBe(false);
+    expect(canJobEquip(['Novice'], 'Knight')).toBe(false);
+  });
+
+  it('still excludes Novice in All Jobs except Novice after inheritance', () => {
+    // All Jobs except Novice must still exclude Novice even for class-2 jobs
+    expect(canJobEquip(['All Jobs except Novice'], 'Knight')).toBe(true);
+    expect(canJobEquip(['All Jobs except Novice'], 'Novice')).toBe(false);
   });
 
   it('does not match an unrelated job', () => {
@@ -137,6 +171,30 @@ describe('isUnclassifiedClass', () => {
 
   it('is case-insensitive on job matching', () => {
     expect(isUnclassifiedClass('swordsman')).toBe(false);
+  });
+
+  it('recognizes empty strings as not unclassified', () => {
+    expect(isUnclassifiedClass('')).toBe(false);
+    expect(isUnclassifiedClass('   ')).toBe(false);
+  });
+});
+
+describe('jobAncestry', () => {
+  it('returns class-1 job alone for class-1 jobs', () => {
+    expect(jobAncestry('Swordsman')).toEqual(['Swordsman']);
+    expect(jobAncestry('Mage')).toEqual(['Mage']);
+    expect(jobAncestry('Novice')).toEqual(['Novice']);
+  });
+
+  it('returns class-2 job followed by class-1 parent', () => {
+    expect(jobAncestry('Knight')).toEqual(['Knight', 'Swordsman']);
+    expect(jobAncestry('Wizard')).toEqual(['Wizard', 'Mage']);
+    expect(jobAncestry('Priest')).toEqual(['Priest', 'Acolyte']);
+  });
+
+  it('is case-insensitive on input but returns canonical names', () => {
+    expect(jobAncestry('knight')).toEqual(['Knight', 'Swordsman']);
+    expect(jobAncestry('WIZARD')).toEqual(['Wizard', 'Mage']);
   });
 });
 
