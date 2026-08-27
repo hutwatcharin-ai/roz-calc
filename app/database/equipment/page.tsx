@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
 import { canJobEquip, EQUIPMENT_CATEGORIES } from '@/lib/equip-filter';
-import { isZeroJob } from '@/lib/zero-jobs';
+import { ZERO_JOBS } from '@/lib/zero-jobs';
 
 export const revalidate = 86400;
 
@@ -29,9 +29,8 @@ export default async function EquipmentPage({
 
   // 490 rows, well under the 1,000-row cap. Fetched whole because the job
   // filter is an array-membership rule with group values that SQL would need
-  // awkward gymnastics to express, and because the job dropdown is derived
-  // from the same rows. Order by name_en, then id for stable pagination
-  // (name_en is not unique, so ties must be broken).
+  // awkward gymnastics to express. Order by name_en, then id for stable
+  // pagination (name_en is not unique, so ties must be broken).
   const { data: allItems, error } = await db
     .from('items')
     .select('id, name_en, icon_url, category, weapon_type, atk, required_level, equippable_classes')
@@ -45,17 +44,12 @@ export default async function EquipmentPage({
 
   const items = allItems ?? [];
 
-  // Job dropdown shows only real Zero jobs that appear in the data.
-  const jobSet = new Set<string>();
-  for (const it of items) {
-    for (const c of it.equippable_classes ?? []) {
-      const v = c.trim();
-      if (isZeroJob(v)) {
-        jobSet.add(v);
-      }
-    }
-  }
-  const jobs = [...jobSet].sort();
+  // Job dropdown lists all 20 canonical Zero jobs, not just the ones observed
+  // directly in equippable_classes -- canJobEquip resolves class-2 jobs
+  // through jobAncestry, so Knight and Wizard match gear even though no row
+  // tags them by name. Matches app/database/skills/page.tsx, which already
+  // uses ZERO_JOBS for the same reason.
+  const jobs = ZERO_JOBS;
 
   const needle = q.trim().toLowerCase();
   const filtered = items.filter((it) => {
@@ -82,8 +76,11 @@ export default async function EquipmentPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลอุปกรณ์</h1>
+      {/* A query error and a genuine zero-result search must read differently --
+          otherwise an outage looks identical to "there are no equipment", which
+          is false. */}
       <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {filtered.length} ชิ้น จากทั้งหมด {items.length} ชิ้น
+        {error ? 'โหลดจำนวนอุปกรณ์ไม่สำเร็จ' : `${filtered.length} ชิ้น จากทั้งหมด ${items.length} ชิ้น`}
       </p>
 
       <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
@@ -116,29 +113,39 @@ export default async function EquipmentPage({
             </tr>
           </thead>
           <tbody>
-            {rows.map((it) => (
-              <tr key={it.id}>
-                <td data-label="">
-                  <Link href={`/database/items/${it.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {it.icon_url && (
-                      <img src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {it.name_en}
-                  </Link>
-                </td>
-                <td data-label="หมวด">{it.category ?? '—'}</td>
-                <td data-label="ชนิด">{it.weapon_type ?? '—'}</td>
-                <td data-label="ATK" className="num">{it.atk ?? '—'}</td>
-                <td data-label="เลเวลที่ใช้ได้" className="num">{it.required_level ?? '—'}</td>
-                <td data-label="อาชีพที่ใส่ได้">{(it.equippable_classes ?? []).length > 0 ? (it.equippable_classes ?? []).join(', ') : '—'}</td>
-              </tr>
-            ))}
-            {rows.length === 0 && (
+            {error ? (
               <tr>
                 <td colSpan={6} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  ไม่พบอุปกรณ์ที่ตรงเงื่อนไข
+                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
+            ) : (
+              <>
+                {rows.map((it) => (
+                  <tr key={it.id}>
+                    <td data-label="">
+                      <Link href={`/database/items/${it.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        {it.icon_url && (
+                          <img src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                        )}
+                        {it.name_en}
+                      </Link>
+                    </td>
+                    <td data-label="หมวด">{it.category ?? '—'}</td>
+                    <td data-label="ชนิด">{it.weapon_type ?? '—'}</td>
+                    <td data-label="ATK" className="num">{it.atk ?? '—'}</td>
+                    <td data-label="เลเวลที่ใช้ได้" className="num">{it.required_level ?? '—'}</td>
+                    <td data-label="อาชีพที่ใส่ได้">{(it.equippable_classes ?? []).length > 0 ? (it.equippable_classes ?? []).join(', ') : '—'}</td>
+                  </tr>
+                ))}
+                {rows.length === 0 && (
+                  <tr>
+                    <td colSpan={6} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                      ไม่พบอุปกรณ์ที่ตรงเงื่อนไข
+                    </td>
+                  </tr>
+                )}
+              </>
             )}
           </tbody>
         </table>
