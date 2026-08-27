@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
+import { escapeLikePattern } from '@/lib/like-escape';
 
 export const revalidate = 86400;
 
@@ -25,34 +26,52 @@ export default async function MapsPage({
 
   // map_stats is one row per map -- 497 of them, inside the 1,000-row cap --
   // so this pages in SQL with an exact count instead of pulling 3,032 spawn
-  // rows across four requests and grouping them here.
-  let query = db.from('map_stats').select('map_code, map_display_name, monster_count', { count: 'exact' });
-
-  if (q) {
-    // Escape the LIKE metacharacters so a literal % or _ matches itself
-    // instead of acting as a wildcard. Backslash is Postgres's default LIKE
-    // escape character, so it is included in the character class too: a
-    // single pass over the original string escapes each character exactly
-    // once, so a backslash the user typed is escaped like any other
-    // metacharacter rather than being read back as an escape itself.
-    const needle = q.replace(/[\\%_]/g, (ch) => `\\${ch}`);
-    query = query.ilike('search_text', `%${needle}%`);
+  // rows across four requests and grouping them here. The other three list
+  // pages fetch everything and paginate/clamp in memory, so an out-of-range
+  // page never reaches Postgres; this page pages in SQL, so the requested
+  // page must be clamped to what the search actually matches *before* the
+  // ranged request is built, or an out-of-range page (e.g. ?page=11 when the
+  // search only fills 10) hits Postgres as a 416 range-not-satisfiable error,
+  // which supabase-js reports the same way as a real outage.
+  //
+  // That clamp needs a row count, and a count only comes back from a query --
+  // so this runs the filter twice: once head-only (count, no rows) to learn
+  // how many pages exist, then again with the clamped range for the actual
+  // rows. The extra round trip is the price of never asking Postgres for a
+  // range it cannot serve.
+  function filtered(head: boolean) {
+    let query = db
+      .from('map_stats')
+      .select('map_code, map_display_name, monster_count', { count: 'exact', head });
+    if (q) {
+      const needle = escapeLikePattern(q);
+      query = query.ilike('search_text', `%${needle}%`);
+    }
+    return query;
   }
 
-  const from = (page - 1) * PAGE_SIZE;
+  const { count, error: countError } = await filtered(true);
+  if (countError) {
+    console.error('maps count query failed', countError);
+  }
+
+  const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const from = (safePage - 1) * PAGE_SIZE;
+
   // Ordered by monster_count then map_code. map_code is unique in this view,
   // so the sort is total and paging is stable -- the property the raw table
   // could not offer.
-  const { data: maps, count, error } = await query
+  const { data: maps, error: dataError } = await filtered(false)
     .order('monster_count', { ascending: false })
     .order('map_code')
     .range(from, from + PAGE_SIZE - 1);
 
-  if (error) {
-    console.error('maps query failed', error);
+  if (dataError) {
+    console.error('maps query failed', dataError);
   }
 
-  const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
+  const error = Boolean(countError) || Boolean(dataError);
 
   function buildHref(targetPage: number) {
     const params = new URLSearchParams();
@@ -73,6 +92,7 @@ export default async function MapsPage({
       </p>
       <p style={{ color: 'var(--faint)', marginTop: 4, fontSize: 13 }}>
         แมพบางแห่งแสดงแค่รหัส เพราะไม่มีชื่อเรียกอื่นนอกจากรหัสแมพเอง ไม่ได้แปลว่าแมพนั้นไม่มีอยู่
+        รายการนี้ครอบคลุมเฉพาะแมพที่มีมอนสเตอร์เกิด แมพที่ไม่มีมอนเกิดเลยจะไม่อยู่ในรายการนี้
       </p>
 
       <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
@@ -127,7 +147,7 @@ export default async function MapsPage({
         </table>
       </div>
 
-      <Pagination page={page} totalPages={totalPages} buildHref={buildHref} />
+      <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} />
     </main>
   );
 }
