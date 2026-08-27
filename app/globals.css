@@ -321,3 +321,23 @@ table { border-collapse: collapse; width: 100%; }
 
 .stat-table tbody tr:hover { background: var(--panel-2); }
 .stat-table td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+/* Neutral classification tags (MVP, เก็บของ). Same pill shape as .aggro, but
+   built from panel/hairline tokens rather than --status-safe/--status-danger --
+   the stylesheet reserves those for aggro's graded state, not decoration.
+   Today aggroLevel is always called with playerMaxHp: null so the graded
+   levels never render, but the moment a real character context is wired in,
+   a genuine "danger" badge must stay visually distinct from "MVP" rather than
+   collide with it. These are classifications, not warnings. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1.5px solid var(--hair);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--dim);
+  font: 600 12px/1.6 "Sarabun", sans-serif;
+  white-space: nowrap;
+}

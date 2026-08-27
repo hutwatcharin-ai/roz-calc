@@ -62,23 +62,30 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     .eq('monster_id', id)
     .order('rate', { ascending: false });
 
-  const { data: spawns } = await db
+  // Each of these three has its own error slot: a failed spawn/skill/farming
+  // query must not read as "this monster has none of that" (which is what
+  // `data: null` alone would look like). getMonster's error already gets this
+  // treatment above; these three were missing it.
+  const { data: spawns, error: spawnsError } = await db
     .from('monster_spawns')
     .select('map_code, map_display_name')
     .eq('monster_id', id)
     .order('map_code');
+  if (spawnsError) console.error('monster spawns query failed', spawnsError);
 
-  const { data: monsterSkills } = await db
+  const { data: monsterSkills, error: skillsError } = await db
     .from('monster_skills')
     .select('skill_name, skill_lv, rate, cast_time, delay, target, state')
     .eq('monster_id', id)
     .order('entry_index');
+  if (skillsError) console.error('monster skills query failed', skillsError);
 
-  const { data: farming } = await db
+  const { data: farming, error: farmingError } = await db
     .from('monster_farming_stats')
     .select('avg_zeny_per_kill')
     .eq('monster_id', id)
     .maybeSingle();
+  if (farmingError) console.error('monster farming stats query failed', farmingError);
 
   // A failed query must not read as "this monster does not exist".
   if (error) {
@@ -103,6 +110,24 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   const sentinel = (v: number | null | undefined) =>
     v === null || v === undefined || v === 0 ? '—' : v.toLocaleString('en-US');
 
+  // Exhaustive over every distinct value seen in monster_skills.state (attack,
+  // chase, idle, angry, walk, loot, follow, dead) -- ordinary descriptive
+  // words, unlike skill_name's internal constants, so these get translated.
+  // A value the feed adds later renders verbatim rather than vanishing as
+  // '—', which would misreport it as unknown.
+  const SKILL_STATE_LABELS: Record<string, string> = {
+    attack: 'โจมตี',
+    chase: 'ไล่ตาม',
+    idle: 'ว่าง',
+    angry: 'โกรธ',
+    walk: 'เดิน',
+    loot: 'เก็บของ',
+    follow: 'ตาม',
+    dead: 'ตาย',
+  };
+  const stateLabel = (state: string | null) =>
+    state === null ? '—' : (SKILL_STATE_LABELS[state] ?? state);
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
@@ -122,8 +147,8 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             player opened this page and no competing site shows it. */}
         <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
           <AggroBadge level={aggro} />
-          {monster.is_mvp && <span className="aggro aggro--danger">MVP</span>}
-          {monster.loots_items && <span className="aggro aggro--caution">เก็บของ</span>}
+          {monster.is_mvp && <span className="tag">MVP</span>}
+          {monster.loots_items && <span className="tag">เก็บของ</span>}
         </div>
       </div>
 
@@ -137,7 +162,11 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
               className="reward-value mono"
               title="คิดจาก ราคาขายของที่ดรอป × อัตราดรอป ไม่ใช่เงินที่มอนดรอปออกมาตรงๆ"
             >
-              {zeny === null || zeny === undefined ? '—' : Number(zeny).toLocaleString('en-US')}
+              {farmingError
+                ? 'โหลดไม่สำเร็จ'
+                : zeny === null || zeny === undefined
+                  ? '—'
+                  : Number(zeny).toLocaleString('en-US')}
             </span>
           </div>
         </div>
@@ -205,7 +234,9 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
           <div className="card">
             <h2 className="section-title">จุดเกิด</h2>
-            {(spawns ?? []).length === 0 ? (
+            {spawnsError ? (
+              <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลจุดเกิดไม่สำเร็จ ลองใหม่อีกครั้ง</p>
+            ) : (spawns ?? []).length === 0 ? (
               <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลจุดเกิด</p>
             ) : (
               <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -222,7 +253,9 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
           <div className="card">
             <h2 className="section-title">สกิลที่มอนใช้</h2>
-            {(monsterSkills ?? []).length === 0 ? (
+            {skillsError ? (
+              <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลสกิลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
+            ) : (monsterSkills ?? []).length === 0 ? (
               <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลสกิล</p>
             ) : (
               <table className="data-table">
@@ -238,7 +271,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                       <td data-label="" className="mono">{s.skill_name}</td>
                       <td data-label="Lv" className="num">{num(s.skill_lv)}</td>
                       <td data-label="โอกาส" className="num">{s.rate === null ? '—' : `${s.rate}%`}</td>
-                      <td data-label="ตอน">{s.state ?? '—'}</td>
+                      <td data-label="ตอน">{stateLabel(s.state)}</td>
                     </tr>
                   ))}
                 </tbody>
