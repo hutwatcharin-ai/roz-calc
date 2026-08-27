@@ -26,8 +26,8 @@ export const PRIMARY_LINKS: NavLink[] = [
 
 // Some of these routes arrive in Wave 2. Listing them now means the nav is
 // built once instead of edited on every later task. All six database routes
-// are ready, and so is the AFK finder; the two remaining tools routes render
-// as unready text until their page ships.
+// are ready, and so are all three tools routes. A route added later renders
+// as unready text until its page ships.
 export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   database: [
     { href: '/database/monsters', label: 'มอนสเตอร์', ready: true },
@@ -38,7 +38,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/database/maps', label: 'แมพ', ready: true },
   ],
   tools: [
-    { href: '/tools/elements', label: 'ตารางธาตุ', ready: false },
+    { href: '/tools/elements', label: 'ตารางธาตุ', ready: true },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: true },
   ],
@@ -66,8 +66,13 @@ const ALL_LINKS: NavLink[] = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SE
 // An href not found in either table (e.g. a value a test makes up) is treated
 // as ready, since readiness only exists to gate the links this module actually
 // lists -- everything else falls back to plain path matching.
-function isReadyHref(href: string): boolean {
-  const link = ALL_LINKS.find((l) => l.href === href);
+//
+// `links` overrides the tables. Every listed route is ready today, so a test
+// for the readiness gate has nothing in the real tables to drive it; passing a
+// table in tests the gate itself rather than asserting the site still has an
+// unfinished page somewhere.
+function isReadyHref(href: string, links: NavLink[] = ALL_LINKS): boolean {
+  const link = links.find((l) => l.href === href);
   return link ? link.ready : true;
 }
 
@@ -77,8 +82,8 @@ function isReadyHref(href: string): boolean {
 //
 // An unready link is never active: it renders as plain text, not an <a>, so
 // there is nothing for aria-current or .on to attach to.
-export function isActiveLink(href: string, pathname: string): boolean {
-  if (!isReadyHref(href)) return false;
+export function isActiveLink(href: string, pathname: string, links?: NavLink[]): boolean {
+  if (!isReadyHref(href, links)) return false;
   if (href === '/') return normalise(pathname) === '/';
   return isUnder(pathname, href);
 }
@@ -89,9 +94,9 @@ export function isActiveLink(href: string, pathname: string): boolean {
 // every page in that section, not just its own href -- otherwise five of the
 // six database pages show no highlight at all. Links that are not section
 // stand-ins (home, drop finder) keep the isActiveLink rule.
-export function isActivePrimaryLink(href: string, pathname: string): boolean {
-  if (!isReadyHref(href)) return false;
+export function isActivePrimaryLink(href: string, pathname: string, links?: NavLink[]): boolean {
+  if (!isReadyHref(href, links)) return false;
   const linkSection = sectionForPath(href);
   if (linkSection) return sectionForPath(pathname) === linkSection;
-  return isActiveLink(href, pathname);
+  return isActiveLink(href, pathname, links);
 }

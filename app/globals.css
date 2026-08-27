@@ -564,3 +564,34 @@ table { border-collapse: collapse; width: 100%; }
 .entrycard:hover { background: var(--panel-2); border-color: var(--cyan); }
 .entrycard strong { font: 700 15px/1.4 "Chakra Petch", sans-serif; color: var(--cyan); }
 .entrycard span { font-size: 13px; color: var(--dim); line-height: 1.5; }
+
+/* Element modifier grid (spec 3.5). Colour bands plus the printed number: the
+   same rule the aggro badge follows, so the table is readable without colour. */
+.eltable {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 13px/1.5 "IBM Plex Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.eltable th {
+  padding: 6px 8px;
+  border: 1px solid var(--hair);
+  color: var(--faint);
+  font: 600 11px/1.4 "Sarabun", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.eltable th[scope='row'] { text-align: left; color: var(--dim); }
+.eltable td { padding: 6px 8px; border: 1px solid var(--hair); text-align: right; }
+
+/* Five bands, because "no damage at all" and "less damage" are different
+   answers to "can I fight here" -- collapsing them would hide the only value
+   that makes a map impossible. */
+.el--immune { background: rgba(255, 90, 90, 0.28); color: var(--status-danger); font-weight: 700; }
+.el--weak { background: rgba(255, 90, 90, 0.12); color: var(--text); }
+.el--flat { color: var(--faint); }
+.el--strong { background: rgba(61, 255, 166, 0.14); color: var(--status-safe); }
+.el--heal { background: rgba(61, 232, 255, 0.18); color: var(--cyan); font-weight: 700; }

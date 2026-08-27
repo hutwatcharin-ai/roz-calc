@@ -83,17 +83,20 @@ describe('isActivePrimaryLink', () => {
     expect(isActivePrimaryLink('/database/monsters', '/database/cards')).toBe(true);
   });
 
-  it('never highlights the tools section link, since /tools/elements is not ready', () => {
-    // Would be true under the plain section-matching rule below -- the
-    // readiness gate must win.
-    expect(isActivePrimaryLink('/tools/elements', '/tools/farm-planner')).toBe(false);
+  it('highlights the tools section link on every tools page', () => {
+    // This used to assert the opposite, because /tools/elements did not
+    // exist yet and the readiness gate overrode section matching. All three
+    // tools routes ship now, so the behaviour under test is the section
+    // rule itself.
+    expect(isActivePrimaryLink('/tools/afk-finder', '/tools/farm-planner')).toBe(true);
+    expect(isActivePrimaryLink('/tools/afk-finder', '/tools/elements')).toBe(true);
     expect(isActivePrimaryLink('/database/monsters', '/tools/farm-planner')).toBe(false);
   });
 
   it('highlights only the drop-finder link on the drop-finder page', () => {
     expect(isActivePrimaryLink('/drop-finder', '/drop-finder')).toBe(true);
     expect(isActivePrimaryLink('/database/monsters', '/drop-finder')).toBe(false);
-    expect(isActivePrimaryLink('/tools/elements', '/drop-finder')).toBe(false);
+    expect(isActivePrimaryLink('/tools/afk-finder', '/drop-finder')).toBe(false);
   });
 
   it('highlights only the home link on the home page', () => {
@@ -136,16 +139,18 @@ describe('link tables', () => {
   });
 
   it('never reports an unready link active, by either matching function', () => {
-    const all: NavLink[] = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools];
-    const unready = all.filter((l) => !l.ready);
-    expect(unready.length).toBeGreaterThan(0); // sanity: there is something to test
+    // Every listed route is ready today, so this drives the gate directly
+    // rather than looking for an unready entry in the tables. The old form
+    // asserted the tables contained one, which turned shipping the last
+    // tools page into a test failure about nothing.
+    const unready: NavLink[] = [{ href: '/tools/not-built-yet', label: 'ยังไม่มี', ready: false }];
 
     for (const link of unready) {
       // Even visiting the link's own route (impossible in practice, since it
       // renders as text, but the function must still refuse) must not report
       // it active.
-      expect(isActiveLink(link.href, link.href)).toBe(false);
-      expect(isActivePrimaryLink(link.href, link.href)).toBe(false);
+      expect(isActiveLink(link.href, link.href, [link])).toBe(false);
+      expect(isActivePrimaryLink(link.href, link.href, [link])).toBe(false);
     }
   });
 });

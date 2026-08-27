@@ -8,6 +8,7 @@ import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import KillRatePanel from '@/components/KillRatePanel';
 import AddToPlanButton from '@/components/AddToPlanButton';
+import MonsterElementPanel from '@/components/MonsterElementPanel';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -186,6 +187,8 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             expPerKill={monster.base_exp}
             monsterName={monster.name_en}
           />
+
+          <MonsterElementPanel element={monster.element} elementLevel={monster.element_level} />
 
           <div className="card">
             <h2 className="section-title">ค่าสถานะ</h2>
