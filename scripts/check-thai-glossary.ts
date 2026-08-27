@@ -183,6 +183,13 @@ export const ACKNOWLEDGED_EXEMPTIONS: readonly Exemption[] = [
     term: 'Blind',
     why: 'Describes a person who cannot see, not the Blind status ailment.',
   },
+  {
+    source:
+      'Despite the Critical drawback of requiring both hands, this excellent staff ' +
+      'greatly amplifies magical power.',
+    term: 'Critical',
+    why: 'Means crucial, an ordinary English adjective, not the Critical stat.',
+  },
 ];
 
 function isExempt(source: string, term: string): boolean {

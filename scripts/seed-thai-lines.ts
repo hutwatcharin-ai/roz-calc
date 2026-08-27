@@ -1557,6 +1557,224 @@ const FLAVOUR_TH_4: Record<string, string> = {
     "ดาบพิธีกรรมที่ว่ากันว่านักบวชผู้นำทางดวงวิญญาณเคยใช้ ไม่เหมาะจะใช้เป็นอาวุธจริง",
 };
 
+// Batch 4, part 4: status-immunity lines, costume pieces, daggers and dolls.
+const FLAVOUR_TH_5: Record<string, string> = {
+  "Changes armor element to Ghost-Property. Normal attacks from monsters are not affected by this effect.":
+    "เปลี่ยนธาตุของ Armor เป็นธาตุ Ghost การโจมตีปกติของมอนสเตอร์ไม่ได้รับผลจากความสามารถนี้",
+  "Changes armor element to Holy-Property.":
+    "เปลี่ยนธาตุของ Armor เป็นธาตุ Holy",
+  "Completely prevents Blind.":
+    "ป้องกัน Blind ได้อย่างสมบูรณ์",
+  "Completely prevents Confusion.":
+    "ป้องกัน Confusion ได้อย่างสมบูรณ์",
+  "Completely prevents Frozen.":
+    "ป้องกัน Frozen ได้อย่างสมบูรณ์",
+  "Completely prevents Petrification.":
+    "ป้องกันการกลายเป็นหินได้อย่างสมบูรณ์",
+  "Completely prevents Silence.":
+    "ป้องกัน Silence ได้อย่างสมบูรณ์",
+  "Completely prevents Sleep.":
+    "ป้องกัน Sleep ได้อย่างสมบูรณ์",
+  "Completely prevents Stun.":
+    "ป้องกัน Stun ได้อย่างสมบูรณ์",
+  "Circlet that seems to suit Yoyo perfectly.":
+    "Circlet ที่ดูเข้ากับ Yoyo อย่างลงตัว",
+  "Classic hat.":
+    "หมวกทรงคลาสสิก",
+  "Clear quartz once believed to be ancient frozen ice. Yellow-tinted varieties represent good communication and composure.":
+    "ควอตซ์ใสที่ครั้งหนึ่งเชื่อกันว่าเป็นน้ำแข็งโบราณ ชนิดที่ออกสีเหลืองสื่อถึงการสื่อสารที่ดีและความสงบนิ่ง",
+  "Cloak said to have been worn by a well-known local lord in ancient times; perfect for those seeking an air of overwhelming charisma.":
+    "ผ้าคลุมที่ว่ากันว่าเจ้าผู้ครองแคว้นชื่อดังในสมัยโบราณเคยสวม เหมาะสำหรับคนที่ต้องการออร่าบารมีล้นเหลือ",
+  "Clothing made from green fabric and blessed with divine protection, offering excellent defense for clergy members.":
+    "เสื้อผ้าที่ทำจากผ้าสีเขียวและได้รับพรคุ้มครองจากเบื้องบน ให้การป้องกันที่ยอดเยี่ยมสำหรับนักบวช",
+  "Common plant seen everywhere in the world. Though lacking fragrance and color, its leaves bring joy to many.":
+    "พืชธรรมดาที่พบได้ทั่วโลก แม้จะไม่มีกลิ่นและสีสัน แต่ใบของมันก็ทำให้หลายคนมีความสุข",
+  "Commonly used as a spice, this fiery red ingredient brings a hellish heat the moment it touches the tongue.":
+    "วัตถุดิบสีแดงจัดที่นิยมใช้เป็นเครื่องเทศ พอแตะลิ้นก็ร้อนราวตกนรก",
+  "Cookie baked to golden perfection, giving off a delightful aroma. Sweet flavor is excellent and restores stamina when eaten.":
+    "คุกกี้ที่อบจนเหลืองกำลังดี ส่งกลิ่นหอมน่ากิน รสหวานอร่อยเยี่ยมและกินแล้วฟื้นกำลัง",
+  "Cooking tools that legend says make any dish delicious, no matter what you cook.":
+    "เครื่องครัวที่ตำนานว่าทำอะไรก็อร่อยไปหมด",
+  "Cool summer straw hat that makes you want to cut grass and enjoy the feeling of harvest.":
+    "หมวกฟางเย็นสบายสำหรับฤดูร้อน ที่ทำให้อยากออกไปเกี่ยวหญ้าและดื่มด่ำบรรยากาศเก็บเกี่ยว",
+  "Costume accessory modeled after popular monster Sohee, with a large bell that really highlights its cuteness.":
+    "เครื่องประดับคอสตูมที่ทำเลียนแบบมอนสเตอร์ยอดนิยม Sohee มีกระดิ่งใบใหญ่ที่ขับความน่ารักออกมาเต็มที่",
+  "Costume chef’s hat topped with an entire cake.":
+    "หมวกเชฟคอสตูมที่มีเค้กทั้งก้อนวางอยู่ด้านบน",
+  "Costume hairband featuring a bat-shaped ornament and trailing red ribbons.":
+    "ที่คาดผมคอสตูมที่มีเครื่องประดับทรงค้างคาวและริบบิ้นแดงห้อยยาว",
+  "Costume hat distinguished by its small size.":
+    "หมวกคอสตูมที่โดดเด่นด้วยขนาดเล็ก",
+  "Costume hat resembling Wild Rose, which never lets its prey escape once it has been targeted with swift movements.":
+    "หมวกคอสตูมที่คล้าย Wild Rose ซึ่งเมื่อหมายตาเหยื่อแล้วก็ไม่เคยปล่อยให้หนีไปได้ด้วยการเคลื่อนไหวที่ว่องไว",
+  "Costume hat shaped like Picky, wearing a pressed eggshell.":
+    "หมวกคอสตูมทรง Picky ที่สวมเปลือกไข่กดไว้",
+  "Costume helmet modeled after a cobra.":
+    "หมวกเกราะคอสตูมที่ทำเลียนแบบงูเห่า",
+  "Costume Hood that makes you feel like a lively green frog, detailed enough to draw curious looks from passersby.":
+    "Hood คอสตูมที่ทำให้รู้สึกเหมือนเป็นกบเขียวจอมซน รายละเอียดดีพอที่จะเรียกสายตาสงสัยจากคนที่เดินผ่าน",
+  "Costume mask modeled after the nose of Savage.":
+    "หน้ากากคอสตูมที่ทำเลียนแบบจมูกของ Savage",
+  "Costume pancake with a sweet aroma.":
+    "แพนเค้กคอสตูมกลิ่นหอมหวาน",
+  "Costume replica of the Helm worn by the Khalitzburg Knights.":
+    "Helm จำลองแบบคอสตูมของที่อัศวิน Khalitzburg สวมใส่",
+  "Costume scarf crafted with many prayers—":
+    "ผ้าพันคอคอสตูมที่ทำขึ้นด้วยคำอธิษฐานมากมาย—",
+  "Costume set modeled after a bug-catching net.":
+    "ชุดคอสตูมที่ทำเลียนแบบสวิงจับแมลง",
+  "Costume shadow said to resemble a Deviruchi cloaked in darkness.":
+    "เงาคอสตูมที่ว่ากันว่าคล้าย Deviruchi ซึ่งห่มด้วยความมืด",
+  "Costume Stuffed Doll modeled after Savage Babe.":
+    "Stuffed Doll คอสตูมที่ทำเลียนแบบ Savage Babe",
+  "Costume that makes it look like you are crying. Looks convincing, but no actual tears are shed.":
+    "คอสตูมที่ทำให้ดูเหมือนกำลังร้องไห้ ดูสมจริงแต่ไม่มีน้ำตาไหลจริง",
+  "Cowboy-style hat that captures the classic spirit of the Wild West.":
+    "หมวกทรงคาวบอยที่จับจิตวิญญาณคลาสสิกของ Wild West เอาไว้",
+  "Cowboy-style hat that captures the flavor of the western frontier.":
+    "หมวกทรงคาวบอยที่จับกลิ่นอายของดินแดนชายแดนตะวันตกเอาไว้",
+  "Crown said to have been worn by a certain king; enchanted to refresh the wearer’s head and bolster their mental strength.":
+    "มงกุฎที่ว่ากันว่ากษัตริย์พระองค์หนึ่งเคยสวม ถูกร่ายเวทให้ศีรษะผู้สวมโปร่งโล่งและเสริมกำลังใจ",
+  "Crystal Mirror. Essential for women’s adornment and considered more luxurious than items made of ordinary glass.":
+    "Crystal Mirror ของจำเป็นสำหรับการแต่งตัวของผู้หญิง และถือว่าหรูหรากว่าของที่ทำจากแก้วธรรมดา",
+  "Curved blade designed for powerful slashing attacks.":
+    "ใบมีดโค้งที่ออกแบบมาเพื่อการฟันอย่างทรงพลัง",
+  "Cute, girlish broom decorated with charming ornaments.":
+    "ไม้กวาดทรงหวานแบบเด็กผู้หญิง ประดับด้วยของตกแต่งน่ารัก",
+  "Dagger adorned with very ornate patterns, often used by nobles as a ceremonial or decorative weapon.":
+    "กริชที่ประดับลวดลายวิจิตรมาก ขุนนางมักใช้เป็นอาวุธพิธีการหรือของประดับ",
+  "Dagger crafted with a special forging method passed down by a small desert tribe.":
+    "กริชที่ตีขึ้นด้วยวิธีพิเศษซึ่งสืบทอดกันมาในชนเผ่าเล็ก ๆ กลางทะเลทราย",
+  "Dagger crafted with practicality in mind for cutting tasks.":
+    "กริชที่ทำขึ้นโดยเน้นใช้งานจริงสำหรับงานตัด",
+  "Dagger focused more on thrusting than slashing.":
+    "กริชที่เน้นการแทงมากกว่าการฟัน",
+  "Dagger forged with a special technique. The wave pattern revealed on its blade when reflecting light is beautiful enough to leave one entranced.":
+    "กริชที่ตีขึ้นด้วยเทคนิคพิเศษ ลายคลื่นที่ปรากฏบนใบมีดเวลาสะท้อนแสงงามจนตะลึง",
+  "Dagger said to be made from the fang of some monster, gradually driving its wielder more ferocious the longer it is used.":
+    "กริชที่ว่ากันว่าทำจากเขี้ยวของมอนสเตอร์ตัวหนึ่ง ยิ่งใช้นานยิ่งค่อย ๆ ผลักผู้ถือให้ดุร้ายขึ้น",
+  "Dagger said to guide its wielder onto a path of good fortune.":
+    "กริชที่ว่ากันว่านำพาผู้ถือไปสู่เส้นทางแห่งโชคลาภ",
+  "Dark Contract. Monster Deviruchi loves it.":
+    "Dark Contract มอนสเตอร์ Deviruchi ชอบมาก",
+  "Dazzling pure-white robe embroidered with magical spells.":
+    "อาภรณ์สีขาวบริสุทธิ์อันเจิดจ้าที่ปักด้วยอักขระเวท",
+  "Depending on the wearer, especially men, it may give the wrong impression.":
+    "ขึ้นอยู่กับผู้สวมใส่ โดยเฉพาะผู้ชาย มันอาจให้ความรู้สึกที่ผิดไปได้",
+  "Despite the Critical drawback of requiring both hands, this excellent staff greatly amplifies magical power.":
+    "แม้จะมีข้อเสียร้ายแรงที่ต้องใช้สองมือ แต่คทาชั้นเยี่ยมนี้ก็ขยายพลังเวทได้อย่างมาก",
+  "Developed front claw of a crustacean. Getting pinched would certainly hurt.":
+    "ก้ามหน้าที่พัฒนาแล้วของสัตว์เปลือกแข็ง โดนหนีบเข้าไปคงเจ็บแน่",
+  "Device used to hatch monster eggs. Easy to carry and allows awakening your resting pet inside the egg.":
+    "อุปกรณ์ที่ใช้ฟักไข่มอนสเตอร์ พกพาง่ายและใช้ปลุกสัตว์เลี้ยงที่หลับอยู่ในไข่ได้",
+  "Dignified hat fit for gentlemen, said to embody the mellow and gentle nature of middle age, which is how it earned its name.":
+    "หมวกสง่างามสำหรับสุภาพบุรุษ ว่ากันว่าสื่อถึงความสุขุมอ่อนโยนของวัยกลางคน ซึ่งเป็นที่มาของชื่อมัน",
+  "Doll modeled after Rocker, which roams the plains playing instruments at leisure. Its Unchained Serenade sometimes earns the resentment of farmers during harvest season, yet it is surprisingly popular thanks to its gentle and kind-looking appearance.":
+    "ตุ๊กตาที่ทำเลียนแบบ Rocker ซึ่งเดินเล่นบรรเลงดนตรีไปตามทุ่ง เสียงเพลง Unchained Serenade ของมันบางครั้งก็ทำให้ชาวนาหมั่นไส้ในฤดูเก็บเกี่ยว แต่มันกลับได้รับความนิยมเกินคาดเพราะหน้าตาที่ดูอ่อนโยนใจดี",
+  "Doll modeled after Smokie, which lives in the forest. Surprisingly popular among men.":
+    "ตุ๊กตาที่ทำเลียนแบบ Smokie ซึ่งอาศัยอยู่ในป่า ได้รับความนิยมในหมู่ผู้ชายเกินคาด",
+  "Doll modeled after the monster Chonchon, adored passionately by certain eccentric people.":
+    "ตุ๊กตาที่ทำเลียนแบบมอนสเตอร์ Chonchon เป็นที่รักอย่างแรงกล้าของคนแปลก ๆ บางกลุ่ม",
+  "Doll modeled after the monster Spore, which lives in damp places.":
+    "ตุ๊กตาที่ทำเลียนแบบมอนสเตอร์ Spore ซึ่งอาศัยอยู่ในที่ชื้น",
+  "Doll modeled after Yoyo, which lives in groups deep within forests. Yoyo is highly intelligent, can become very friendly with people when well tamed, and is popular among young women and girls thanks to its cute appearance.":
+    "ตุ๊กตาที่ทำเลียนแบบ Yoyo ซึ่งอยู่รวมกันเป็นฝูงลึกเข้าไปในป่า Yoyo ฉลาดมาก ถ้าเลี้ยงดี ๆ จะสนิทกับคนได้มาก และเป็นที่นิยมในหมู่หญิงสาวและเด็กหญิงเพราะหน้าตาน่ารัก",
+  "Dried plant wrapped in paper and lit so the smoke can be inhaled; this is called Cigarette smoking, known to cause various diseases, so those who are not adults must never smoke it.":
+    "พืชแห้งที่ห่อกระดาษแล้วจุดไฟเพื่อสูดควัน เรียกกันว่าการสูบ Cigarette ซึ่งรู้กันว่าก่อโรคหลายอย่าง ผู้ที่ยังไม่บรรลุนิติภาวะห้ามสูบเด็ดขาด",
+  "Dried plants wrapped in paper and lit so the smoke can be inhaled, an act known as smoking. Known to cause many kinds of illness, so minors must never use it.":
+    "พืชแห้งที่ห่อกระดาษแล้วจุดไฟเพื่อสูดควัน การกระทำนี้เรียกว่าการสูบบุหรี่ รู้กันว่าก่อโรคหลายชนิด ผู้เยาว์ห้ามใช้เด็ดขาด",
+  "Dwarf-style fluffy beard that keeps the wearer warm enough to make a scarf unnecessary.":
+    "เคราฟูสไตล์ Dwarf ที่ให้ความอบอุ่นจนไม่ต้องใช้ผ้าพันคอ",
+  "Easy-to-wear shoes, though not particularly protective.":
+    "รองเท้าที่สวมง่าย แม้จะไม่ได้ป้องกันอะไรมากนัก",
+  "Eggshell made small so that pets can wear it.":
+    "เปลือกไข่ที่ทำให้เล็กลงเพื่อให้สัตว์เลี้ยงสวมได้",
+  "Elegant garment that seems to raise the wearer’s dignity by a step.":
+    "อาภรณ์สง่างามที่ดูเหมือนจะยกระดับความสง่าของผู้สวมขึ้นอีกขั้น",
+  "Enchanted wing plucked from a bird, allowing warp to a random place on the map. Allows warping to a random location on the map.":
+    "ปีกต้องมนตร์ที่ถอนมาจากนก ใช้วาร์ปไปยังจุดสุ่มบนแมพได้ ใช้วาร์ปไปยังตำแหน่งสุ่มบนแมพได้",
+  "Enhances weapon durability when used in weapon crafting.":
+    "เพิ่มความทนทานของอาวุธเมื่อใช้ในการตีอาวุธ",
+  "Enormous mass of Jellopy, though no one knows how or where it was formed.":
+    "ก้อน Jellopy ขนาดมหึมา แม้ไม่มีใครรู้ว่ามันก่อตัวขึ้นได้อย่างไรหรือที่ไหน",
+  "Excellent shoes made from durable fabric, offering both great mobility and reliable defense.":
+    "รองเท้าชั้นเยี่ยมที่ทำจากผ้าทนทาน ให้ทั้งความคล่องตัวและการป้องกันที่ไว้ใจได้",
+  "Expensive garment crafted from a fabric known as silk, offering excellent magical defense.":
+    "อาภรณ์ราคาแพงที่ทำจากผ้าซึ่งเรียกว่าไหม ให้การป้องกันเวทที่ยอดเยี่ยม",
+  "Extremely bitter herb that makes anyone grimace when eaten. Monster Poporing loves it.":
+    "สมุนไพรที่ขมมากจนใครกินก็หน้าเบ้ มอนสเตอร์ Poporing ชอบมาก",
+  "Extremely durable-looking Insect Carapace.":
+    "Insect Carapace ที่ดูทนทานอย่างยิ่ง",
+  "Extremely light garment that feels almost weightless, making movements feel quicker and lighter.":
+    "อาภรณ์ที่เบามากจนแทบไม่รู้สึกถึงน้ำหนัก ทำให้เคลื่อนไหวได้เร็วและเบาขึ้น",
+  "Extremely tough vine that cannot be torn by hand. Could function well as a rope.":
+    "เถาวัลย์ที่เหนียวมากจนฉีกด้วยมือไม่ได้ ใช้แทนเชือกได้ดี",
+  "Eyepatch said to have been worn by someone from a distant western land, rarely seen in eastern lands; perfect for concealing one’s identity, though those who wear it too often are rumored to be dragged off somewhere…":
+    "ผ้าปิดตาที่ว่ากันว่าคนจากดินแดนตะวันตกอันไกลโพ้นเคยสวม พบเห็นได้ยากในดินแดนตะวันออก เหมาะกับการปกปิดตัวตน แม้จะลือกันว่าคนที่สวมบ่อยเกินไปมักถูกลากตัวไปที่ไหนสักแห่ง…",
+  "Fearsome claws capable not only of striking but also slashing and tearing.":
+    "กรงเล็บน่าสะพรึงที่ไม่เพียงใช้ตี แต่ยังฟันและฉีกได้ด้วย",
+  "Fearsome killing blade with a chillingly blue edge.":
+    "ใบมีดสังหารน่าสะพรึงที่คมออกสีน้ำเงินเยือกเย็น",
+  "Feather that evokes the same comforting temptation as a warm blanket wrapping you on a cold morning when you don’t want to get up.":
+    "ขนนกที่ชวนให้รู้สึกอบอุ่นน่าหลงใหลเหมือนผ้าห่มที่ห่มคุณไว้ในเช้าหนาวที่ไม่อยากลุกจากที่นอน",
+  "Feels as if it would melt the instant it touches your tongue.":
+    "รู้สึกเหมือนจะละลายทันทีที่แตะลิ้น",
+  "Feels as if music begins to play when you wear it.":
+    "รู้สึกเหมือนมีดนตรีบรรเลงขึ้นเมื่อสวมมัน",
+  "Feels as though you’ve become a mother Warg.":
+    "รู้สึกราวกับได้กลายเป็นแม่ Warg",
+  "Fine, dried sand of the kind often seen on the roadside. It is so dry it crumbles when you grasp it.":
+    "ทรายละเอียดแห้งแบบที่มักเห็นข้างทาง แห้งจนกำแล้วร่วนหลุดมือ",
+  "Fist guard that protects from the wrist to the fingers.":
+    "เกราะหมัดที่ป้องกันตั้งแต่ข้อมือถึงนิ้ว",
+  "Fist guard used by a small tribe in a far eastern land.":
+    "เกราะหมัดที่ชนเผ่าเล็ก ๆ ในดินแดนตะวันออกอันไกลโพ้นใช้",
+  "Flower said to bloom from Singing Plant. Monster Rocker loves it.":
+    "ดอกไม้ที่ว่ากันว่าบานออกมาจาก Singing Plant มอนสเตอร์ Rocker ชอบมาก",
+  "Flower with a strong fragrance, used as seasoning in some dishes. Excessive intake is said to cause Hallucination.":
+    "ดอกไม้กลิ่นแรงที่ใช้ปรุงรสในอาหารบางจาน ว่ากันว่ากินมากเกินไปจะทำให้เกิด Hallucination",
+  "Flower worn in the hair; its beautiful single bloom pleases those who see it, but the wearer cannot enjoy the view.":
+    "ดอกไม้ที่ทัดผม ดอกเดียวงามพอจะทำให้คนเห็นเพลินตา แต่ผู้สวมกลับไม่ได้ชม",
+  "Flower worn in the hair. Its beauty brings joy to those who see it—":
+    "ดอกไม้ที่ทัดผม ความงามของมันทำให้คนที่เห็นมีความสุข—",
+  "Foam that lets the razor glide smoothly.":
+    "โฟมที่ช่วยให้มีดโกนไถได้ลื่น",
+  "Forbidden book containing secret techniques for demon summoning. Monster Baphomet Jr. loves it.":
+    "หนังสือต้องห้ามที่บรรจุวิชาลับสำหรับอัญเชิญปีศาจ มอนสเตอร์ Baphomet Jr. ชอบมาก",
+  "Forbidden charm that brings back the dead while keeping them as dead. Those who rise exist between life and death, becoming undead Dega.":
+    "เครื่องรางต้องห้ามที่เรียกคนตายกลับมาโดยที่ยังคงเป็นคนตาย ผู้ที่ฟื้นขึ้นจะอยู่กึ่งกลางระหว่างความเป็นและความตาย กลายเป็น Dega ผู้ไม่ตาย",
+  "Form-fitting outfit designed for ease of movement.":
+    "ชุดรัดรูปที่ออกแบบมาให้เคลื่อนไหวสะดวก",
+  "Four-leaf clover carrying the fresh scent of green grass. Feels like luck will follow.":
+    "โคลเวอร์สี่แฉกที่มีกลิ่นหญ้าเขียวสดชื่น รู้สึกเหมือนโชคจะตามมา",
+  "Fresh blood collected from livestock and stored in a bottle. Favored by certain beasts and monsters.":
+    "เลือดสดที่เก็บจากปศุสัตว์แล้วบรรจุขวด สัตว์ร้ายและมอนสเตอร์บางชนิดชอบ",
+  "Fresh carrot originating from Poring Village.":
+    "แครอทสดที่มาจาก Poring Village",
+  "Fresh green onion originating from Poring Village.":
+    "ต้นหอมสดที่มาจาก Poring Village",
+  "Fresh sprout newly emerged from a plant seed.":
+    "ต้นอ่อนสดที่เพิ่งงอกออกมาจากเมล็ดพืช",
+  "From the front, it hides its form entirely, giving the eerie sense of being possessed by a demon.":
+    "เมื่อมองจากด้านหน้า มันบังรูปร่างไว้ทั้งหมด ให้ความรู้สึกชวนขนลุกราวกับถูกปีศาจเข้าสิง",
+  "Fruit of a palm tree containing white juice inside.":
+    "ผลของต้นปาล์มที่ข้างในมีน้ำสีขาว",
+  "Fruit with a refreshing blend of sourness and sweetness. Shell is slightly hard and sharp—handle with caution.":
+    "ผลไม้ที่ผสมความเปรี้ยวและหวานได้อย่างสดชื่น เปลือกค่อนข้างแข็งและคม—ระวังเวลาจับ",
+  "Garment ornament crafted to mimic the form of a spider. Its legs spread out in a way that almost looks like wings.":
+    "เครื่องประดับ Garment ที่ทำเลียนแบบรูปร่างแมงมุม ขาของมันแผ่ออกจนแทบดูเหมือนปีก",
+  "Gemstone with a blue hue.":
+    "อัญมณีสีน้ำเงิน",
+  "Gemstone with a green hue.":
+    "อัญมณีสีเขียว",
+  "Gemstone with a pink hue.":
+    "อัญมณีสีชมพู",
+  "Gemstone with a red hue.":
+    "อัญมณีสีแดง",
+  "Gemstone with a sky-blue hue.":
+    "อัญมณีสีฟ้า",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -1567,6 +1785,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH_2, 'flavour'],
   [FLAVOUR_TH_3, 'flavour'],
   [FLAVOUR_TH_4, 'flavour'],
+  [FLAVOUR_TH_5, 'flavour'],
 ];
 
 async function main(): Promise<void> {
