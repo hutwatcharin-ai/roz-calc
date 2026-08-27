@@ -1775,6 +1775,208 @@ const FLAVOUR_TH_5: Record<string, string> = {
     "อัญมณีสีฟ้า",
 };
 
+// Batch 4, part 5: headgear, helms, gloves and the rest of the G-to-J range.
+const FLAVOUR_TH_6: Record<string, string> = {
+  "Gemstone with a teal hue.":
+    "อัญมณีสีเขียวอมฟ้า",
+  "Gemstone with a violet hue.":
+    "อัญมณีสีม่วง",
+  "Gemstone with a white hue.":
+    "อัญมณีสีขาว",
+  "Gemstone with a yellow hue.":
+    "อัญมณีสีเหลือง",
+  "Giant honey dipper still dripping with sweetness. Although only a costume, caution is advised as real Hornet may be drawn to it.":
+    "ไม้จุ่มน้ำผึ้งขนาดยักษ์ที่ยังหยดความหวานอยู่ แม้จะเป็นแค่คอสตูม แต่ก็ควรระวังเพราะ Hornet ตัวจริงอาจถูกดึงดูดมา",
+  "Giant sunflower hat designed to sit on top of the head; not exactly pleasing to the eye, but guaranteed to draw attention.":
+    "หมวกดอกทานตะวันยักษ์ที่ออกแบบให้วางอยู่บนหัว ไม่ได้สวยงามนัก แต่รับรองว่าเรียกสายตาแน่นอน",
+  "Glass shoes made entirely of glass, created with no concern for mobility or practicality, pursuing only visual beauty to the extreme.":
+    "รองเท้าแก้วที่ทำจากแก้วล้วน สร้างขึ้นโดยไม่สนใจความคล่องตัวหรือการใช้งานจริงเลย มุ่งแต่ความงามทางสายตาจนสุดทาง",
+  "Glasses with eyes opened wide in an angry glare; if a lover’s eyes actually look like this, the wisest choice is to apologize immediately.":
+    "แว่นที่เป็นรูปดวงตาเบิกกว้างจ้องอย่างโกรธเกรี้ยว ถ้าตาคนรักเป็นแบบนี้จริง ทางเลือกที่ฉลาดที่สุดคือรีบขอโทษทันที",
+  "Glossy shell that shines brightly, rolled into a round shape.":
+    "เปลือกเงาวาวที่ม้วนตัวเป็นทรงกลม",
+  "Gloves once used by a Mage.":
+    "ถุงมือที่ Mage เคยใช้",
+  "Gloves said to have been used by priests or clergy when conducting rituals, said to carry their accumulated knowledge.":
+    "ถุงมือที่ว่ากันว่านักบวชใช้เวลาประกอบพิธี ว่ากันว่ามันสั่งสมความรู้ของพวกเขาไว้",
+  "Gloves that, when worn, allow for fine, precise control of the hands.":
+    "ถุงมือที่สวมแล้วบังคับมือได้ละเอียดแม่นยำ",
+  "Gloves worn during executions.":
+    "ถุงมือที่สวมตอนประหารชีวิต",
+  "Golden mace that appears more noble and beautiful thanks to its material.":
+    "กระบองทองที่ดูสูงส่งและงดงามขึ้นเพราะวัสดุของมัน",
+  "Golden mask said to have been worn by a certain Pharaoh. Its shape and color are splendid, yet the fact that it is a death mask is unsettling.":
+    "หน้ากากทองที่ว่ากันว่าฟาโรห์พระองค์หนึ่งเคยสวม รูปทรงและสีสันงามตระการ แต่การที่มันเป็นหน้ากากมรณะก็ชวนอึดอัด",
+  "Graduation cap worn at academies and schools, sturdy enough that getting hit by a corner feels downright hellish.":
+    "หมวกจบการศึกษาที่สวมกันตามสถาบันและโรงเรียน แข็งพอที่โดนมุมฟาดแล้วเจ็บราวตกนรก",
+  "Grants immunity to Blind and Curse.":
+    "ให้ภูมิคุ้มกันต่อ Blind และ Curse",
+  "Grants immunity to Poison.":
+    "ให้ภูมิคุ้มกันต่อ Poison",
+  "Grants unlimited Movement Speed Increase.":
+    "ให้ Movement Speed Increase อย่างไม่จำกัด",
+  "Grape juice stored in a bottle. Easier to drink and restores better than eating the fruit itself.":
+    "น้ำองุ่นบรรจุขวด ดื่มง่ายและฟื้นฟูได้ดีกว่ากินผลสด",
+  "Green antennae of a grasshopper.":
+    "หนวดสีเขียวของตั๊กแตน",
+  "Green lace made to be worn by a pet or a baby.":
+    "ลูกไม้สีเขียวที่ทำไว้ให้สัตว์เลี้ยงหรือเด็กทารกสวม",
+  "Green moss grown with early morning dew. Monster Spore loves it.":
+    "มอสสีเขียวที่เติบโตด้วยน้ำค้างยามเช้าตรู่ มอนสเตอร์ Spore ชอบมาก",
+  "Grotesque mask that looks as if it is in great agony. Likely used by those with questionable taste to startle people.":
+    "หน้ากากน่าขยะแขยงที่ดูเหมือนกำลังทรมานอย่างหนัก คงมีคนรสนิยมประหลาดใช้ไว้หลอกคนให้ตกใจ",
+  "Hairpin decorated with a flower resembling the breeze across the meadows.":
+    "กิ๊บติดผมที่ประดับด้วยดอกไม้ซึ่งชวนให้นึกถึงสายลมพัดผ่านทุ่งหญ้า",
+  "Hairpin shaped like Claw Meat.":
+    "กิ๊บติดผมทรง Claw Meat",
+  "Halo-shaped headgear modeled after the ring said to appear above the heads of those who go to heaven. Despite appearances, it does not actually grant invisibility.":
+    "เครื่องสวมศีรษะทรงรัศมีที่ทำเลียนแบบวงแหวนซึ่งว่ากันว่าลอยอยู่เหนือหัวผู้ที่ได้ขึ้นสวรรค์ แม้หน้าตาจะเป็นอย่างนั้น แต่มันไม่ได้ทำให้ล่องหนได้จริง",
+  "Handle with care, as improper use may cause burns.":
+    "ใช้ด้วยความระมัดระวัง เพราะใช้ผิดวิธีอาจถูกไฟลวก",
+  "Handle with care, as improper use may cause frostbite.":
+    "ใช้ด้วยความระมัดระวัง เพราะใช้ผิดวิธีอาจโดนความเย็นกัด",
+  "Handsome Stylish Young Worm whose red bow tie around the neck is a charming point. Monster Picky loves it.":
+    "Stylish Young Worm รูปงามที่มีหูกระต่ายสีแดงรอบคอเป็นจุดเด่นน่ารัก มอนสเตอร์ Picky ชอบมาก",
+  "Hat bearing the marks of fierce battles fought on the front lines.":
+    "หมวกที่ยังคงร่องรอยของศึกดุเดือดในแนวหน้า",
+  "Hat fitted with large goggles resembling those used by aircraft pilots; said to protect the eyes from strong winds when worn.":
+    "หมวกที่ติดแว่นตาใบใหญ่คล้ายของนักบิน ว่ากันว่าสวมแล้วปกป้องดวงตาจากลมแรงได้",
+  "Hat inspired by the head of the monster Peco Peco.":
+    "หมวกที่ได้แรงบันดาลใจจากหัวของมอนสเตอร์ Peco Peco",
+  "Hat likely worn by high-ranking clergy; its flat shape provides surprisingly easy wear and high mobility.":
+    "หมวกที่น่าจะเป็นของนักบวชชั้นสูง ทรงแบนของมันสวมง่ายและคล่องตัวเกินคาด",
+  "Hat made from the hard shell of a fruit cut in half. Sturdy and offers excellent defense, but cannot be refined because it breaks when hammered.":
+    "หมวกที่ทำจากเปลือกแข็งของผลไม้ผ่าครึ่ง แข็งแรงและป้องกันได้ดีเยี่ยม แต่ตีบวกไม่ได้เพราะทุบแล้วแตก",
+  "Hat modeled after Magnolia, a vengeful spirit born from Peco Peco eggs that failed to endure the desert heat.":
+    "หมวกที่ทำเลียนแบบ Magnolia วิญญาณอาฆาตที่เกิดจากไข่ Peco Peco ซึ่งทนความร้อนของทะเลทรายไม่ไหว",
+  "Hat modeled after the green antennae of an insect. Wearing it is said to make you feel like a grasshopper leaping through a field.":
+    "หมวกที่ทำเลียนแบบหนวดสีเขียวของแมลง ว่ากันว่าสวมแล้วรู้สึกเหมือนเป็นตั๊กแตนที่กระโดดไปทั่วทุ่ง",
+  "Hat modeled after the mischievous monkey monster Yoyo.":
+    "หมวกที่ทำเลียนแบบมอนสเตอร์ลิงจอมซน Yoyo",
+  "Hat modeled after the wildly popular monster Poring. Definitely not made from rubber gloves, no matter how it looks!":
+    "หมวกที่ทำเลียนแบบมอนสเตอร์ยอดฮิต Poring ไม่ได้ทำจากถุงมือยางแน่นอน ไม่ว่าจะดูเหมือนแค่ไหนก็ตาม!",
+  "Hat modeled after those worn by soldiers long ago, redesigned with a modern touch.":
+    "หมวกที่ทำเลียนแบบของทหารสมัยก่อน ออกแบบใหม่ให้มีกลิ่นอายสมัยใหม่",
+  "Hat said to have been worn by a famed judge, filling the wearer with a sense of delivering justice.":
+    "หมวกที่ว่ากันว่าผู้พิพากษาชื่อดังเคยสวม ทำให้ผู้สวมเปี่ยมด้วยความรู้สึกของการผดุงความยุติธรรม",
+  "Hat said to have been worn by those who nurse the sick and care for patients in place of doctors; the red cross gives off an aura of sanctity.":
+    "หมวกที่ว่ากันว่าผู้ที่ดูแลคนป่วยแทนแพทย์เคยสวม กางเขนสีแดงของมันแผ่ออร่าศักดิ์สิทธิ์",
+  "Hat styled after the face of a cute, popular teddy bear.":
+    "หมวกทรงหน้าหมีเท็ดดี้แสนน่ารักที่เป็นที่นิยม",
+  "Hat symbolizing clergy, giving a solemn appearance when worn.":
+    "หมวกที่เป็นสัญลักษณ์ของนักบวช สวมแล้วดูขรึมขลัง",
+  "Hat that looks as if a cute chick is perched on your head.":
+    "หมวกที่ดูเหมือนมีลูกเจี๊ยบน่ารักเกาะอยู่บนหัวคุณ",
+  "Hat that looks as though chilled, chewy gelato has been placed right on top of your head.":
+    "หมวกที่ดูเหมือนมีเจลาโตเย็นเหนียวหนึบวางอยู่บนหัวคุณพอดี",
+  "Hat that looks like it could be seen in a distant land and symbolizes the sun. Tougher than it appears.":
+    "หมวกที่ดูเหมือนจะพบได้ในดินแดนไกลโพ้นและเป็นสัญลักษณ์ของดวงอาทิตย์ ทนกว่าที่ตาเห็น",
+  "Hat that makes the wearer feel as though they could launch into the sky the moment it is worn.":
+    "หมวกที่ทำให้ผู้สวมรู้สึกราวกับจะพุ่งขึ้นฟ้าได้ทันทีที่สวม",
+  "Hat that makes you feel as though you could lift off into the air the moment you put it on.":
+    "หมวกที่ทำให้รู้สึกราวกับจะลอยขึ้นกลางอากาศได้ทันทีที่สวม",
+  "Hat that older people can wear without feeling burdened when trying to dress up a little; may send them drifting into faint memories of their younger days.":
+    "หมวกที่ผู้สูงวัยสวมได้อย่างไม่เคอะเขินเวลาอยากแต่งตัวสักหน่อย และอาจพาให้ล่องลอยไปกับความทรงจำจาง ๆ ของวัยหนุ่มสาว",
+  "Hat worn at gatherings such as socials, celebrations, or birthday parties—":
+    "หมวกที่สวมในงานรวมตัวอย่างงานสังสรรค์ งานฉลอง หรืองานวันเกิด—",
+  "Hat worn by cathedral nuns, symbolizing modesty and self-restraint by keeping the hair concealed.":
+    "หมวกที่แม่ชีในมหาวิหารสวม เป็นสัญลักษณ์ของความสำรวมและการข่มใจด้วยการปกปิดเส้นผม",
+  "Headband featuring a small triangular cloth, said to be placed on the foreheads of the deceased in a small eastern island nation.":
+    "Headband ที่มีผ้าสามเหลี่ยมชิ้นเล็ก ว่ากันว่าใช้ติดหน้าผากผู้ตายในประเทศเกาะเล็ก ๆ ทางตะวันออก",
+  "Headband fitted with two sharp horns; a mysterious Headband said to provide high defense through unknown power.":
+    "Headband ที่ติดเขาแหลมสองข้าง เป็น Headband ลึกลับที่ว่ากันว่าให้การป้องกันสูงด้วยพลังที่ไม่มีใครรู้จัก",
+  "Headband modeled after the wings found on the back of a demon; said to make the wearer feel empowered the moment it is put on.":
+    "Headband ที่ทำเลียนแบบปีกบนหลังปีศาจ ว่ากันว่าทำให้ผู้สวมรู้สึกมีพลังทันทีที่สวม",
+  "Headband modeled after wings on a demon’s back; the moment it is worn, an unknown power makes the wearer feel stronger.":
+    "Headband ที่ทำเลียนแบบปีกบนหลังปีศาจ ทันทีที่สวม พลังที่ไม่มีใครรู้จักจะทำให้ผู้สวมรู้สึกแข็งแกร่งขึ้น",
+  "Headband topped with a small cross-shaped accessory.":
+    "Headband ที่ด้านบนมีเครื่องประดับทรงกางเขนชิ้นเล็ก",
+  "Headdress said to have been worn by an ancient queen. Design radiates such overwhelming dignity that it makes you bow your head, yet also stirs a strange urge to defy that majesty.":
+    "เครื่องประดับศีรษะที่ว่ากันว่าราชินีโบราณเคยสวม การออกแบบแผ่ความสง่าท่วมท้นจนต้องก้มหัวให้ แต่ก็กระตุ้นความอยากท้าทายพระบารมีนั้นอย่างประหลาด",
+  "Headgear forged from pure gold, admired for its beautiful appearance and refined style. Considered a luxury item and difficult to obtain.":
+    "Headgear ที่หลอมจากทองคำบริสุทธิ์ เป็นที่ชื่นชมด้วยรูปลักษณ์งดงามและสไตล์ประณีต ถือเป็นของหรูและหาได้ยาก",
+  "Headgear that draws out a lonely, cynical air around the wearer.":
+    "Headgear ที่ขับบรรยากาศเปล่าเปลี่ยวเย้ยหยันรอบตัวผู้สวมออกมา",
+  "Headpiece made from the branch of the earliest blooming spring flower. A sweet, gentle fragrance lingers around it.":
+    "เครื่องประดับศีรษะที่ทำจากกิ่งของดอกไม้ที่บานเป็นดอกแรกของฤดูใบไม้ผลิ มีกลิ่นหอมหวานอ่อน ๆ อบอวลอยู่รอบมัน",
+  "Headpiece traditionally worn by women at weddings; when worn by men, it can easily cause misunderstandings.":
+    "เครื่องประดับศีรษะที่ตามธรรมเนียมผู้หญิงสวมในงานแต่งงาน ถ้าผู้ชายสวมก็ทำให้เข้าใจผิดได้ง่าย",
+  "Healing and regeneration.":
+    "การรักษาและการฟื้นฟู",
+  "Healing remedy finely ground from Green Herb. Cures Poison, Silence, Blind, Confusion, Hallucination.":
+    "ยารักษาที่บดละเอียดจาก Green Herb รักษา Poison, Silence, Blind, Confusion และ Hallucination",
+  "Heavily decayed fish. Monster Chonchon loves it.":
+    "ปลาที่เน่าเปื่อยอย่างหนัก มอนสเตอร์ Chonchon ชอบมาก",
+  "Heavily scratched spoon worn down into a straight line. Likely used by prisoners to dig escape tunnels.":
+    "ช้อนที่เป็นรอยขูดหนักจนสึกเป็นเส้นตรง คงถูกนักโทษใช้ขุดอุโมงค์หนี",
+  "Heavy greatsword once wielded by the Knight of Honor.":
+    "ดาบใหญ่หนักที่ Knight of Honor เคยใช้",
+  "Helm of the Orc tribe. Orc craftsmanship is primitive and rugged in style.":
+    "Helm ของเผ่า Orc ฝีมือช่าง Orc ดิบและหยาบกระด้าง",
+  "Helm shaped like a fish fin said to protect Swordsman. Be careful—wearing it does not actually let you breathe underwater.":
+    "Helm ทรงครีบปลาที่ว่ากันว่าปกป้อง Swordsman ระวังไว้—สวมแล้วไม่ได้หายใจใต้น้ำได้จริง",
+  "Helm worn by Knight of Abyss.":
+    "Helm ที่ Knight of Abyss สวมใส่",
+  "Helmet crafted from bone, extremely solid but heavy. Difficult for most to wear, yet its defensive power is remarkable.":
+    "หมวกเกราะที่ทำจากกระดูก แข็งมากแต่หนัก คนส่วนใหญ่สวมได้ยาก แต่พลังป้องกันของมันน่าทึ่ง",
+  "Helmet formed by combining rings of multiple attributes. Its appearance is both majestic and ornate.":
+    "หมวกเกราะที่เกิดจากการรวมวงแหวนหลายคุณสมบัติเข้าด้วยกัน รูปลักษณ์ทั้งสง่างามและวิจิตร",
+  "Helmet made of solid metal providing high defense, though it looks like it could strain the neck if worn incorrectly.":
+    "หมวกเกราะโลหะตันที่ให้การป้องกันสูง แม้จะดูเหมือนสวมผิดท่าแล้วอาจเมื่อยคอ",
+  "Helmet modeled after the beautiful wings of an angel.":
+    "หมวกเกราะที่ทำเลียนแบบปีกอันงดงามของเทวดา",
+  "Helmet shaped like a signboard reading 'Recruiting Guild Member!'. Shall we siege together?":
+    "หมวกเกราะทรงป้ายที่เขียนว่า 'Recruiting Guild Member!' มาตีป้อมด้วยกันไหม",
+  "Helmet styled like a signboard reading “Boyfriend Wanted!”":
+    "หมวกเกราะทรงป้ายที่เขียนว่า “Boyfriend Wanted!”",
+  "Herb that neutralizes various poisons. Cures Poison.":
+    "สมุนไพรที่ล้างพิษได้หลายชนิด รักษา Poison",
+  "High-power whip that discourages dangerous ideas.":
+    "แส้พลังสูงที่ทำให้ล้มเลิกความคิดอันตราย",
+  "High-quality ribbon made from soft Claw. Compared to Guitar and other ribbons, it feels especially soft to wear.":
+    "ริบบิ้นคุณภาพสูงที่ทำจาก Claw เนื้อนุ่ม เทียบกับ Guitar และริบบิ้นอื่น ๆ แล้วสวมสบายนุ่มเป็นพิเศษ",
+  "Highly resistant to powerful strikes, yet oddly vulnerable to weaker blows.":
+    "ทนต่อการฟาดหนัก ๆ ได้ดีมาก แต่กลับเปราะบางต่อการตีเบา ๆ อย่างประหลาด",
+  "Holy axe imbued with sacred power, often used in rituals.":
+    "ขวาน Holy ที่อาบด้วยพลังศักดิ์สิทธิ์ มักใช้ในพิธีกรรม",
+  "Holy robe overflowing with sacred power that keeps the wearer’s faith from wavering, said to grant unshakable Faith in any situation.":
+    "อาภรณ์ Holy ที่เปี่ยมด้วยพลังศักดิ์สิทธิ์ ทำให้ศรัทธาของผู้สวมไม่คลอนแคลน ว่ากันว่ามอบ Faith ที่ไม่สั่นคลอนในทุกสถานการณ์",
+  "Holy shield entrusted to the guardian angel assigned to the super Novice. Imbued with sacred power to repel evil.":
+    "โล่ Holy ที่มอบให้เทวดาผู้พิทักษ์ซึ่งได้รับมอบหมายให้ดูแล super Novice อาบด้วยพลังศักดิ์สิทธิ์เพื่อขับไล่ความชั่วร้าย",
+  "Horn imbued with the presence of Majoruros.":
+    "เขาที่อาบด้วยไอของ Majoruros",
+  "Horn made from ivory-like white material, rounded at the tip rather than sharpened.":
+    "เขาที่ทำจากวัสดุสีขาวคล้ายงาช้าง ปลายมนไม่ได้ลับให้แหลม",
+  "Horns sliced off the head of a little demon.":
+    "เขาที่เฉือนมาจากหัวปีศาจน้อย",
+  "Insect Monsters drop Wind of Verdure with a certain probability.":
+    "มอนสเตอร์ Insect มีโอกาสดรอป Wind of Verdure",
+  "Instrument whose form of expression has long been forgotten, though its lineage survives to this day.":
+    "เครื่องดนตรีที่รูปแบบการบรรเลงถูกลืมเลือนไปนานแล้ว แม้สายตระกูลของมันจะสืบทอดมาถึงทุกวันนี้",
+  "Iron so badly rusted that it is difficult to use. Monster Steel Chonchon loves it.":
+    "เหล็กที่ขึ้นสนิมหนักจนใช้งานยาก มอนสเตอร์ Steel Chonchon ชอบมาก",
+  "It has been redesigned with reduced size and power so it can be wielded as personal equipment.":
+    "มันถูกออกแบบใหม่ให้เล็กลงและลดพลังลง เพื่อให้ใช้เป็นอุปกรณ์ประจำตัวได้",
+  "Item created to lure Thief Bug by imitating their behavior.":
+    "ไอเทมที่สร้างขึ้นเพื่อล่อ Thief Bug ด้วยการเลียนแบบพฤติกรรมของมัน",
+  "Item shaped after Angry Mouth, enabling various expressions like an angry cat or an angry rabbit.":
+    "ไอเทมทรง Angry Mouth ที่ทำสีหน้าได้หลายแบบ ทั้งแมวโกรธหรือกระต่ายโกรธ",
+  "Item that can bring smiles to others when worn, though it may cause people to mistake the wearer for Rudolph the reindeer.":
+    "ไอเทมที่สวมแล้วเรียกรอยยิ้มจากคนอื่นได้ แม้อาจทำให้คนเข้าใจผิดว่าผู้สวมคือกวางเรนเดียร์ Rudolph",
+  "Its blade is a dazzling white, and because the blade is made of bone, it suits thrusting better than slashing.":
+    "ใบมีดของมันขาวเจิดจ้า และเพราะทำจากกระดูก มันจึงเหมาะกับการแทงมากกว่าการฟัน",
+  "Its excellent defense draws attention despite its heavy weight.":
+    "การป้องกันอันยอดเยี่ยมของมันเรียกความสนใจได้ แม้จะหนักก็ตาม",
+  "Its excellent warmth makes it a favorite for their outdoor camping activities.":
+    "ความอบอุ่นอันยอดเยี่ยมทำให้มันเป็นของโปรดสำหรับกิจกรรมตั้งแคมป์กลางแจ้ง",
+  "Its little hops are absolutely adorable.":
+    "ท่ากระโดดน้อย ๆ ของมันน่ารักสุด ๆ",
+  "Jeweled headpiece said to have been worn by a certain queen; the moment it is put on, magical clarity surrounds the wearer’s mind.":
+    "เครื่องประดับศีรษะประดับอัญมณีที่ว่ากันว่าราชินีพระองค์หนึ่งเคยสวม ทันทีที่สวม ความแจ่มใสเชิงเวทจะโอบล้อมจิตใจผู้สวม",
+  "Jewelry piece modeled after a pure white rose, subtly enhancing the wearer’s beauty.":
+    "เครื่องประดับที่ทำเลียนแบบกุหลาบขาวบริสุทธิ์ ขับความงามของผู้สวมอย่างละมุน",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -1786,6 +1988,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH_3, 'flavour'],
   [FLAVOUR_TH_4, 'flavour'],
   [FLAVOUR_TH_5, 'flavour'],
+  [FLAVOUR_TH_6, 'flavour'],
 ];
 
 async function main(): Promise<void> {
