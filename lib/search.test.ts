@@ -67,8 +67,10 @@ describe('mergeSearchResults', () => {
   });
 
   it('keys a map by code and falls back to the code when it has no name', () => {
-    // Only 245 of 497 maps carry a display name. A blank result row is worse
-    // than one showing the code.
+    // Defensive fallback: zero rows have a null display name today (111 of
+    // 497 just repeat their own map_code; 245 is the count of distinct
+    // names), but the column's type still allows null, and a blank result
+    // row would be worse than one showing the code.
     const [r] = mergeSearchResults({ ...empty, maps: [{ map_code: 'moc_f18_a', map_display_name: null }] });
     expect(r.name).toBe('moc_f18_a');
     expect(r.href).toBe('/database/maps/moc_f18_a');

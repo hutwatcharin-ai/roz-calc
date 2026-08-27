@@ -99,8 +99,11 @@ export function mergeSearchResults(groups: SearchGroups): SearchResult[] {
     ...groups.maps.map((m) => ({
       id: m.map_code,
       type: 'map' as const,
-      // Only 245 of 497 maps have a display name; a blank row is worse than
-      // one showing the code.
+      // Defensive fallback, not a gap this data actually has: every row
+      // carries a display name today (111 of 497 just repeat their own
+      // map_code; 245 is the count of distinct names across all 497). The
+      // column's type still allows null, so a future row without one falls
+      // back to the code rather than rendering blank.
       name: m.map_display_name ?? m.map_code,
       href: `/database/maps/${encodeURIComponent(m.map_code)}`,
       iconUrl: null,

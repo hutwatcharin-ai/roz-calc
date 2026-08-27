@@ -25,9 +25,9 @@ export const PRIMARY_LINKS: NavLink[] = [
 ];
 
 // Some of these routes arrive in Wave 2. Listing them now means the nav is
-// built once instead of edited on every later task. Only the two routes that
-// exist today (monsters, items) are ready; the rest render as unready text
-// until their page ships.
+// built once instead of edited on every later task. All six database routes
+// (monsters, items, cards, equipment, skills, maps) are ready today; the
+// tools routes render as unready text until their page ships.
 export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   database: [
     { href: '/database/monsters', label: 'มอนสเตอร์', ready: true },

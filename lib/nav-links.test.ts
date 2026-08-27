@@ -8,9 +8,10 @@ import {
   type NavLink,
 } from './nav-links';
 
-// Routes confirmed to exist today (finding #1): / , /drop-finder,
-// /database/monsters, /database/items, /database/cards, /database/equipment, plus the two detail routes, which are
-// not entries in these tables. Every other listed href is a Wave 2 promise.
+// Routes confirmed to exist today (finding #1): / , /drop-finder, and all six
+// database list pages -- monsters, items, cards, equipment, skills, maps --
+// plus their detail routes, which are not entries in these tables. Every
+// other listed href is a Wave 2 promise.
 const READY_ROUTES = new Set(['/', '/drop-finder', '/database/monsters', '/database/items', '/database/cards', '/database/equipment', '/database/skills', '/database/maps']);
 
 describe('sectionForPath', () => {
