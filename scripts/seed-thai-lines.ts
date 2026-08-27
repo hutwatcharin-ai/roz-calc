@@ -344,6 +344,324 @@ const EFFECT_TH_2: Record<string, string> = {
   'Contains all Lv.9 cooking recipes.': 'บรรจุสูตรอาหาร Lv.9 ทั้งหมด',
 };
 
+// Batch 3, part 2: procs written as `Has a chance to ...`, stat lines that
+// carry at least one translatable word, recovery items, and set-piece
+// conditionals.
+const EFFECT_TH_3: Record<string, string> = {
+  // Resistance and damage lines that have something to translate. A line whose
+  // every token is already English is covered by DEFERRED_RULES instead.
+  'Fire-Property/Shadow-Property Resistance -15%.': 'Resistance ธาตุ Fire/Shadow -15%',
+  'Ghost-Property/Wind-Property Resistance +20%.': 'Resistance ธาตุ Ghost/Wind +20%',
+  'Neutral-Property Resistance +10%, FLEE Rate +10.':
+    'Resistance ธาตุ Neutral +10%, อัตรา FLEE +10',
+  'Physical Damage Taken from Human/Brute Enemies -30%.':
+    'Physical Damage Taken จากศัตรู Human/Brute -30%',
+  'Physical Damage to Demi-Human, Brute, Plant, and Insect Monsters +7%.':
+    'Physical Damage ต่อมอนสเตอร์ Demi-Human, Brute, Plant และ Insect +7%',
+  'HIT +10, FLEE Rate +3.': 'HIT +10, อัตรา FLEE +3',
+  'Perfect Dodge +5, FLEE Rate +10.': 'Perfect Dodge +5, อัตรา FLEE +10',
+  'INT +2, Unbreakable.': 'INT +2 ไม่แตก',
+  'INT +3, DEX +2, Unbreakable.': 'INT +3, DEX +2 ไม่แตก',
+  'MDEF +10, Unbreakable.': 'MDEF +10 ไม่แตก',
+  'MDEF +3. Cannot be Refined.': 'MDEF +3 ตีบวกไม่ได้',
+  'MDEF +7 when refine level is 5 or lower.': 'MDEF +7 เมื่อระดับตีบวก 5 หรือต่ำกว่า',
+  'INT +2. If refine level ≥ 9, MSP +150.': 'INT +2 หากระดับตีบวก ≥ 9 จะได้ MSP +150',
+  'INT +1. When equipped by Acolyte Class, INT +1 and MDEF +1.':
+    'INT +1 เมื่อ Acolyte Class สวมใส่ จะได้ INT +1 และ MDEF +1',
+  'M.ATK +2 per refine level.': 'M.ATK +2 ต่อทุกระดับตีบวก',
+  'Raises MATK by 4 per shield refine.': 'เพิ่ม MATK 4 ต่อทุกระดับตีบวกของ Shield',
+  'HP +150. At +7 refine: HP +150. At +9 refine: HP +250.':
+    'HP +150 ตีบวก +7: HP +150 ตีบวก +9: HP +250',
+  'LUK and Critical Rate increase with the refine level.':
+    'LUK และอัตรา Critical เพิ่มขึ้นตามระดับตีบวก',
+  'Prisoner Uniform increases HIT and FLEE based on its refine level.':
+    'Prisoner Uniform เพิ่ม HIT และ FLEE ตามระดับตีบวก',
+  'Reduces After Attack Delay by 1% per 2 refine levels.':
+    'ลดดีเลย์หลังโจมตี 1% ต่อทุก 2 ระดับตีบวก',
+  'Reduces Ranged Physical Damage Taken by 5%, and by an additional 1% per armor refine.':
+    'ลด Physical Damage Taken จากระยะไกล 5% และลดอีก 1% ต่อทุกระดับตีบวกของ Armor',
+  'Reduces physical and magical damage received from Plant Monsters by 3%.':
+    'ลดความเสียหายกายภาพและเวทที่ได้รับจากมอนสเตอร์ Plant 3%',
+  'Reduces SP cost of skills by 30%.': 'ลด SP ที่สกิลใช้ 30%',
+  'Increases resistance to Poison by 30%.': 'เพิ่มความต้านทานต่อ Poison 30%',
+  'Grants 50% resistance to the Status Ailment effects of Poison, Curse, Silence, Confusion, and Blind.':
+    'ให้ความต้านทาน 50% ต่อสถานะผิดปกติ Poison, Curse, Silence, Confusion และ Blind',
+  'Increases ASPD (After Attack Delay -10%), CRIT +5.':
+    'เพิ่ม ASPD (ดีเลย์หลังโจมตี -10%), CRIT +5',
+  'Increases ASPD (After Attack Delay -8%).': 'เพิ่ม ASPD (ดีเลย์หลังโจมตี -8%)',
+  'Increases damage of Holy Cross and Pierce by 10%.':
+    'เพิ่มความเสียหายของ Holy Cross และ Pierce 10%',
+  'Increases Sonic Blow damage by 20%.': 'เพิ่มความเสียหายของ Sonic Blow 20%',
+  'Increases the effectiveness of your [Heal], [Sanctuary], and [Potion Pitcher] by 30%.':
+    'เพิ่มประสิทธิภาพของ [Heal], [Sanctuary] และ [Potion Pitcher] 30%',
+  'Heal Amount you cast is increased by 5%.': 'ปริมาณ Heal ที่คุณร่ายเพิ่มขึ้น 5%',
+  'Movement speed increases while equipped.': 'ความเร็วเคลื่อนที่เพิ่มขึ้นขณะสวมใส่',
+  'Grants continuous [Endure] effect.': 'ให้ผลของ [Endure] ตลอดเวลา',
+  'Ignores the DEF of Dragon-type monsters.': 'ไม่สนใจ DEF ของมอนสเตอร์ประเภท Dragon',
+  'Ignores the DEF of normal monsters.': 'ไม่สนใจ DEF ของมอนสเตอร์ทั่วไป',
+  'Normal physical attacks (excluding skills) become 9-cell splash attacks.':
+    'การโจมตีกายภาพปกติ (ไม่รวมสกิล) กลายเป็นการโจมตีกระจาย 9 ช่อง',
+
+  // `Has a chance to ...`
+  'Has a 1% chance to Freeze yourself when attacking.':
+    'มีโอกาส 1% ที่ตัวเองจะติด Freeze เมื่อโจมตี',
+  'Has a 3% chance to inflict Blind on the enemy when attacking.':
+    'มีโอกาส 3% ทำให้ศัตรูติด Blind เมื่อโจมตี',
+  'Has a 5% chance to Freeze the target when attacking.':
+    'มีโอกาส 5% ทำให้เป้าหมายติด Freeze เมื่อโจมตี',
+  'Has a 5% chance to inflict Stun when attacking. Unbreakable.':
+    'มีโอกาส 5% ทำให้ติด Stun เมื่อโจมตี และไม่แตก',
+  'Has a 50% chance to inflict Freeze on the enemy when you take physical damage.':
+    'มีโอกาส 50% ทำให้ศัตรูติด Freeze เมื่อคุณได้รับความเสียหายกายภาพ',
+  'Has a chance to activate [Cloaking] when you take physical damage (cast at your learned skill level).':
+    'มีโอกาสเปิด [Cloaking] เมื่อคุณได้รับความเสียหายกายภาพ (ร่ายที่เลเวลสกิลที่คุณเรียนไว้)',
+  'Has a chance to activate [Weapon Perfection] Lv.1 when dealing physical attacks.':
+    'มีโอกาสเปิด [Weapon Perfection] Lv.1 เมื่อโจมตีกายภาพ',
+  'Has a chance to autocast [Envenom] Lv.1 when dealing physical attacks.':
+    'มีโอกาสร่าย [Envenom] Lv.1 อัตโนมัติ เมื่อโจมตีกายภาพ',
+  'Has a chance to autocast [Heal] Lv.1 on yourself when dealing physical attacks. If you have learned [Heal] Lv.10, Lv.10 is cast instead.':
+    'มีโอกาสร่าย [Heal] Lv.1 ใส่ตัวเองอัตโนมัติ เมื่อโจมตีกายภาพ หากเรียน [Heal] Lv.10 ไว้ จะร่าย Lv.10 แทน',
+  'Has a chance to autocast [Magnum Break] Lv.10 when dealing physical attacks.':
+    'มีโอกาสร่าย [Magnum Break] Lv.10 อัตโนมัติ เมื่อโจมตีกายภาพ',
+  'Has a chance to cast [Heal] Lv.3 on yourself when you take physical damage.':
+    'มีโอกาสร่าย [Heal] Lv.3 ใส่ตัวเอง เมื่อคุณได้รับความเสียหายกายภาพ',
+  'Has a low chance to autocast [Cold Bolt] Lv.3 when dealing physical attacks.':
+    'มีโอกาสน้อยที่จะร่าย [Cold Bolt] Lv.3 อัตโนมัติ เมื่อโจมตีกายภาพ',
+  'Has a low chance to autocast [Fire Bolt] Lv.3 when dealing physical attacks.':
+    'มีโอกาสน้อยที่จะร่าย [Fire Bolt] Lv.3 อัตโนมัติ เมื่อโจมตีกายภาพ',
+  'Has a low chance to autocast [Thunderstorm] Lv.3 when attacking.':
+    'มีโอกาสน้อยที่จะร่าย [Thunderstorm] Lv.3 อัตโนมัติ เมื่อโจมตี',
+  'Has a low chance to cast [Heal] Lv.1 on yourself with melee physical attacks.':
+    'มีโอกาสน้อยที่จะร่าย [Heal] Lv.1 ใส่ตัวเอง เมื่อโจมตีกายภาพระยะประชิด',
+  'Has a low chance to break the enemy\'s weapon with melee physical attacks.':
+    'มีโอกาสน้อยที่จะทำให้อาวุธของศัตรูแตก เมื่อโจมตีกายภาพระยะประชิด',
+  'Has a low chance to drain 30% of the target\'s SP when attacking.':
+    'มีโอกาสน้อยที่จะดูด SP ของเป้าหมาย 30% เมื่อโจมตี',
+  'Has a low chance to inflict Bleeding on the enemy with melee physical attacks.':
+    'มีโอกาสน้อยที่จะทำให้ศัตรูติด Bleeding เมื่อโจมตีกายภาพระยะประชิด',
+  'Has a low chance to inflict Bleeding on the target when attacking.':
+    'มีโอกาสน้อยที่จะทำให้เป้าหมายติด Bleeding เมื่อโจมตี',
+  'Has a chance to inflict Blind on the enemy when you take physical damage.':
+    'มีโอกาสทำให้ศัตรูติด Blind เมื่อคุณได้รับความเสียหายกายภาพ',
+  'Has a chance to inflict Coma on the target.': 'มีโอกาสทำให้เป้าหมายติด Coma',
+  'Has a chance to inflict Confusion on the enemy when you take physical damage.':
+    'มีโอกาสทำให้ศัตรูติด Confusion เมื่อคุณได้รับความเสียหายกายภาพ',
+  'Has a chance to inflict Silence on the enemy when you take physical damage.':
+    'มีโอกาสทำให้ศัตรูติด Silence เมื่อคุณได้รับความเสียหายกายภาพ',
+  'Has a chance to inflict Silence on the target when attacking.':
+    'มีโอกาสทำให้เป้าหมายติด Silence เมื่อโจมตี',
+  'Has a chance to inflict Stun, Curse, Silence, Poison, or Bleeding on the target with melee physical attacks.':
+    'มีโอกาสทำให้เป้าหมายติด Stun, Curse, Silence, Poison หรือ Bleeding เมื่อโจมตีกายภาพระยะประชิด',
+  'Has a chance to transform a monster into another monster.':
+    'มีโอกาสแปลงมอนสเตอร์เป็นมอนสเตอร์ตัวอื่น',
+
+  // Drops on kill
+  'Has a chance to drop a recovery item each time you kill a monster.':
+    'มีโอกาสดรอปไอเทมฟื้นฟูทุกครั้งที่สังหารมอนสเตอร์',
+  'Has a chance to drop a Red Potion each time you kill an enemy.':
+    'มีโอกาสดรอป Red Potion ทุกครั้งที่สังหารศัตรู',
+  'Has a chance to drop Candy or Candy Cane each time you kill a Demi-Human monster.':
+    'มีโอกาสดรอป Candy หรือ Candy Cane ทุกครั้งที่สังหารมอนสเตอร์ Demi-Human',
+  'Has a chance to drop Meat or Monster\'s Feed each time you kill a Brute monster.':
+    'มีโอกาสดรอป Meat หรือ Monster\'s Feed ทุกครั้งที่สังหารมอนสเตอร์ Brute',
+  'Has a chance to drop Red Herb, Yellow Herb, or White Herb each time you kill a Plant monster.':
+    'มีโอกาสดรอป Red Herb, Yellow Herb หรือ White Herb ทุกครั้งที่สังหารมอนสเตอร์ Plant',
+  'Has a low chance to drop a Banana when you kill a monster. Banana recovery rate +100%.':
+    'มีโอกาสน้อยที่จะดรอป Banana เมื่อสังหารมอนสเตอร์ และอัตราฟื้นฟูของ Banana +100%',
+  'Has a chance to obtain a Gloomy Box each time you kill a Plant monster.':
+    'มีโอกาสได้รับ Gloomy Box ทุกครั้งที่สังหารมอนสเตอร์ Plant',
+  'Has a chance to obtain a Sunlight Box each time you kill an Angel monster.':
+    'มีโอกาสได้รับ Sunlight Box ทุกครั้งที่สังหารมอนสเตอร์ Angel',
+  'Has a chance to obtain Crystal Blue each time you kill a Fish-type monster.':
+    'มีโอกาสได้รับ Crystal Blue ทุกครั้งที่สังหารมอนสเตอร์ประเภท Fish',
+
+  // `On <event>, N% chance to inflict <status>`
+  'On enemy attack, 4% chance to inflict Poison.':
+    'เมื่อศัตรูโจมตี มีโอกาส 4% ทำให้ติด Poison',
+  'On enemy attack, 5% chance to inflict Confusion.':
+    'เมื่อศัตรูโจมตี มีโอกาส 5% ทำให้ติด Confusion',
+  'On physical attack, 2% chance to inflict Stun.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 2% ทำให้ติด Stun',
+  'On physical attack, 5% chance to inflict Blind.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Blind',
+  'On physical attack, 5% chance to inflict Curse.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Curse',
+  'On physical attack, 5% chance to inflict Frozen.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Frozen',
+  'On physical attack, 5% chance to inflict Poison.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Poison',
+  'On physical attack, 5% chance to inflict Silence.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Silence',
+  'On physical attack, 5% chance to inflict Sleep.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Sleep',
+  'On physical attack, 5% chance to inflict Stun.':
+    'เมื่อโจมตีกายภาพ มีโอกาส 5% ทำให้ติด Stun',
+  'Physical attacks have a 3% chance to inflict Bleeding.':
+    'การโจมตีกายภาพมีโอกาส 3% ทำให้ติด Bleeding',
+  'Physical attacks have a 5% chance to restore 100 HP every second for 5 seconds.':
+    'การโจมตีกายภาพมีโอกาส 5% ฟื้นฟู HP 100 ทุกวินาที เป็นเวลา 5 วินาที',
+  'Physical attacks have a chance to autocast Jupitel Thunder Lv.3.':
+    'การโจมตีกายภาพมีโอกาสร่าย Jupitel Thunder Lv.3 อัตโนมัติ',
+  'Physical attacks have a chance to autocast Sonic Blow Lv.1.':
+    'การโจมตีกายภาพมีโอกาสร่าย Sonic Blow Lv.1 อัตโนมัติ',
+  'Physical/Magical attacks have a 10% chance to restore 20 SP every second for 7 seconds.':
+    'การโจมตีกายภาพ/เวทมีโอกาส 10% ฟื้นฟู SP 20 ทุกวินาที เป็นเวลา 7 วินาที',
+  'Physical Damage Taken has a chance to autocast Auto Guard Lv.3.':
+    'เมื่อเกิด Physical Damage Taken มีโอกาสร่าย Auto Guard Lv.3 อัตโนมัติ',
+  'Physical Damage Taken has a chance to inflict Confusion.':
+    'เมื่อเกิด Physical Damage Taken มีโอกาสทำให้ติด Confusion',
+  'Physical Damage Taken has a chance to inflict Poison.':
+    'เมื่อเกิด Physical Damage Taken มีโอกาสทำให้ติด Poison',
+  'Inflicts Stone on enemies with a chance when taking physical damage.':
+    'มีโอกาสทำให้ศัตรูติด Stone เมื่อได้รับความเสียหายกายภาพ',
+
+  // Conditionals on stats, learned skills and job class
+  'If Auto Guard Lv.10 is learned, Lv.10 is autocast instead.':
+    'หากเรียน Auto Guard Lv.10 ไว้ จะร่าย Lv.10 อัตโนมัติแทน',
+  'If DEX is 77 or higher, greatly increased chance to inflict Stun.':
+    'หาก DEX ตั้งแต่ 77 ขึ้นไป โอกาสทำให้ติด Stun เพิ่มขึ้นมาก',
+  'If Double Attack is learned, activation chance follows the learned Double Attack skill level.':
+    'หากเรียน Double Attack ไว้ โอกาสทำงานจะอิงตามเลเวลสกิล Double Attack ที่เรียน',
+  'If Fire Ball Lv 10 is learned, autocast triggers Fire Ball Lv 10 instead.':
+    'หากเรียน Fire Ball Lv 10 ไว้ จะร่าย Fire Ball Lv 10 อัตโนมัติแทน',
+  'If Improve Concentration Lv 10 is learned, autocast triggers Improve Concentration Lv 10 instead.':
+    'หากเรียน Improve Concentration Lv 10 ไว้ จะร่าย Improve Concentration Lv 10 อัตโนมัติแทน',
+  'If INT is 77 or higher, the chance to inflict Stone increases.':
+    'หาก INT ตั้งแต่ 77 ขึ้นไป โอกาสทำให้ติด Stone เพิ่มขึ้น',
+  'If INT is 99 or higher, chance to autocast Kyrie Eleison increases.':
+    'หาก INT ตั้งแต่ 99 ขึ้นไป โอกาสร่าย Kyrie Eleison อัตโนมัติเพิ่มขึ้น',
+  'If Jupitel Thunder Lv.10 is learned, Lv.10 is autocast instead.':
+    'หากเรียน Jupitel Thunder Lv.10 ไว้ จะร่าย Lv.10 อัตโนมัติแทน',
+  'If Quagmire Lv.5 is learned, Lv.5 is cast instead of Lv.1.':
+    'หากเรียน Quagmire Lv.5 ไว้ จะร่าย Lv.5 แทน Lv.1',
+  'If STR is 77 or higher, the chance to inflict Confusion is higher.':
+    'หาก STR ตั้งแต่ 77 ขึ้นไป โอกาสทำให้ติด Confusion สูงขึ้น',
+  'If VIT is 77 or higher, the chance to inflict Silence is higher.':
+    'หาก VIT ตั้งแต่ 77 ขึ้นไป โอกาสทำให้ติด Silence สูงขึ้น',
+  'If the wearer is Assassin, the chance increases.':
+    'หากผู้สวมใส่เป็น Assassin โอกาสจะเพิ่มขึ้น',
+  'If you have not learned [Cloaking] Lv.3 or higher, it can only activate while next to a wall.':
+    'หากยังไม่ได้เรียน [Cloaking] Lv.3 ขึ้นไป จะทำงานได้เฉพาะตอนอยู่ติดกำแพงเท่านั้น',
+  'If the set wearer is a Mage Class character, variable cast time -15% and MATK +3%.':
+    'หากผู้สวมใส่ชุดเป็น Mage Class จะได้เวลาร่ายแบบแปรผัน -15% และ MATK +3%',
+  'If the set wearer is a Merchant Class character, has a chance to drop an Old Purple Box each time you kill a monster, and reflects 20% of single-target offensive magic.':
+    'หากผู้สวมใส่ชุดเป็น Merchant Class จะมีโอกาสดรอป Old Purple Box ทุกครั้งที่สังหารมอนสเตอร์ และสะท้อนเวทโจมตีเป้าหมายเดี่ยว 20%',
+  'If the set wearer is Archer Class, EXP gained from defeating Brute Monsters +5%, and chance to inflict Coma on Brute enemies when dealing physical damage.':
+    'หากผู้สวมใส่ชุดเป็น Archer Class จะได้ EXP จากการสังหารมอนสเตอร์ Brute +5% และมีโอกาสทำให้ศัตรู Brute ติด Coma เมื่อสร้างความเสียหายกายภาพ',
+
+  // SP and HP recovery on kill or on hit
+  'Recovers 1 SP per attack.': 'ฟื้นฟู SP 1 ต่อการโจมตี',
+  'Recovers 2 SP per attack.': 'ฟื้นฟู SP 2 ต่อการโจมตี',
+  'Recovers 5 SP each time you defeat Brute Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 ทุกครั้งที่สังหารมอนสเตอร์ Brute ด้วยการโจมตีกายภาพระยะประชิด',
+  'Recovers 5 SP each time you defeat Dragon Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 ทุกครั้งที่สังหารมอนสเตอร์ Dragon ด้วยการโจมตีกายภาพระยะประชิด',
+  'Recovers 5 SP when defeating Demi-Human Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 เมื่อสังหารมอนสเตอร์ Demi-Human ด้วยการโจมตีกายภาพระยะประชิด',
+  'Recovers 5 SP when defeating Fish Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 เมื่อสังหารมอนสเตอร์ Fish ด้วยการโจมตีกายภาพระยะประชิด',
+  'Recovers 5 SP when defeating Formless Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 เมื่อสังหารมอนสเตอร์ Formless ด้วยการโจมตีกายภาพระยะประชิด',
+  'Recovers 5 SP when defeating Plant Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 เมื่อสังหารมอนสเตอร์ Plant ด้วยการโจมตีกายภาพระยะประชิด',
+  'Recovers 5 SP when defeating Undead Monsters with melee physical attacks.':
+    'ฟื้นฟู SP 5 เมื่อสังหารมอนสเตอร์ Undead ด้วยการโจมตีกายภาพระยะประชิด',
+
+  'Heal Lv 3 usable.': 'ใช้ Heal Lv 3 ได้',
+  'Pierce Lv 3 usable.': 'ใช้ Pierce Lv 3 ได้',
+};
+
+// Consumables and the items that describe what they restore. Effect, not
+// flavour: how much HP a fruit gives is a decision a player makes at a vendor.
+const EFFECT_TH_4: Record<string, string> = {
+  'Recovers about 10% HP.': 'ฟื้นฟู HP ประมาณ 10%',
+  'Recovers about 10% SP.': 'ฟื้นฟู SP ประมาณ 10%',
+  'Recovers about 500 HP and about 60 SP.': 'ฟื้นฟู HP ประมาณ 500 และ SP ประมาณ 60',
+  'Exotic fruit with a sweet taste. Recovers a small amount of HP.':
+    'ผลไม้ต่างถิ่นรสหวาน ฟื้นฟู HP เล็กน้อย',
+  'Food processed to suit monsters’ taste. Recovers a small amount of HP.':
+    'อาหารที่ปรุงให้ถูกปากมอนสเตอร์ ฟื้นฟู HP เล็กน้อย',
+  'Food with a unique scent known to restore some SP.':
+    'อาหารกลิ่นเฉพาะตัวที่ขึ้นชื่อว่าฟื้นฟู SP ได้บ้าง',
+  'Fruit of the Yggdrasil tree, source of another world. After savoring its fantastical, primordial flavor, one finds their life force overflowing. Recovers all of the user\'s HP and SP.':
+    'ผลไม้จากต้น Yggdrasil ต้นกำเนิดของอีกโลกหนึ่ง เมื่อได้ลิ้มรสอันวิเศษดั่งปฐมกาล พลังชีวิตจะเอ่อล้น ฟื้นฟู HP และ SP ของผู้ใช้จนเต็ม',
+  'Fruit with a tangy and sour flavor. Recovers a small amount of SP.':
+    'ผลไม้รสเปรี้ยวจี๊ด ฟื้นฟู SP เล็กน้อย',
+  'Fruit with sweet and refreshing aroma. Recovers a small amount of HP.':
+    'ผลไม้กลิ่นหอมหวานสดชื่น ฟื้นฟู HP เล็กน้อย',
+  'Crustacean with five pairs of legs, turning pink when cooked and very tasty. Recovers a small amount of HP.':
+    'สัตว์เปลือกแข็งห้าคู่ขา สุกแล้วเปลี่ยนเป็นสีชมพูและรสชาติดีมาก ฟื้นฟู HP เล็กน้อย',
+  'Edible pumpkin. Recovers a small amount of HP.': 'ฟักทองกินได้ ฟื้นฟู HP เล็กน้อย',
+  'Leaf of a flower called Hinalle. Its cool, refreshing scent eases pain and restores vitality. Recovers a moderate amount of HP.':
+    'ใบของดอกไม้ชื่อ Hinalle กลิ่นเย็นสดชื่นช่วยบรรเทาความเจ็บปวดและคืนความกระปรี้กระเปร่า ฟื้นฟู HP ปานกลาง',
+  'Leaves cut and gathered from a plant called Aloe. Recovers a moderate amount of HP.':
+    'ใบที่ตัดเก็บมาจากพืชชื่อ Aloe ฟื้นฟู HP ปานกลาง',
+  'Lollipop-shaped candy. Recovers about 105 HP.': 'ลูกอมทรงอมยิ้ม ฟื้นฟู HP ประมาณ 105',
+  'Mental recovery tonic finely ground from Blue Herb. Recovers about 60 SP.':
+    'ยาบำรุงจิตใจที่บดละเอียดจาก Blue Herb ฟื้นฟู SP ประมาณ 60',
+  'Recovery tonic finely ground from White Herb. Recovers about 325 HP.':
+    'ยาบำรุงที่บดละเอียดจาก White Herb ฟื้นฟู HP ประมาณ 325',
+  'Oval fruit that turns yellow and fragrant when ripe. So sour that just thinking about it makes your mouth water! Recovers a small amount of SP.':
+    'ผลไม้ทรงรีที่สุกแล้วเปลี่ยนเป็นสีเหลืองและส่งกลิ่นหอม เปรี้ยวขนาดที่แค่นึกถึงก็น้ำลายสอ ฟื้นฟู SP เล็กน้อย',
+  'Popular red fruit with a sweet and tangy flavor. Recovers a small amount of SP.':
+    'ผลไม้สีแดงยอดนิยม รสหวานอมเปรี้ยว ฟื้นฟู SP เล็กน้อย',
+  'Precious herb with a unique scent that refreshes the mind. Recovers a small amount of SP.':
+    'สมุนไพรล้ำค่ากลิ่นเฉพาะตัวที่ช่วยให้จิตใจสดชื่น ฟื้นฟู SP เล็กน้อย',
+  'Processed and sterilized milk from cows. Commonly used as nutritious food for Kids. Recovers a small amount of HP.':
+    'นมวัวผ่านการฆ่าเชื้อ นิยมใช้เป็นอาหารบำรุงสำหรับเด็ก ฟื้นฟู HP เล็กน้อย',
+  'Purple root vegetable rich in starch and sweet in flavor, often used as food. Recovers a small amount of HP.':
+    'พืชหัวสีม่วงที่อุดมด้วยแป้งและรสหวาน นิยมใช้เป็นอาหาร ฟื้นฟู HP เล็กน้อย',
+  'Rare herb known for exceptional wound treatment. Recovers a small amount of HP.':
+    'สมุนไพรหายากที่ขึ้นชื่อเรื่องรักษาบาดแผลได้ดีเยี่ยม ฟื้นฟู HP เล็กน้อย',
+  'Rare herb known for strong wound treatment. Recovers a small amount of HP.':
+    'สมุนไพรหายากที่ขึ้นชื่อเรื่องรักษาบาดแผลได้ดี ฟื้นฟู HP เล็กน้อย',
+  'Rare herb known for treating wounds. Recovers a small amount of HP.':
+    'สมุนไพรหายากที่ขึ้นชื่อเรื่องรักษาบาดแผล ฟื้นฟู HP เล็กน้อย',
+  'Red vegetable with a sweet and unique aroma, often used in cooking. Recovers a small amount of HP.':
+    'ผักสีแดงกลิ่นหอมหวานเฉพาะตัว นิยมใช้ประกอบอาหาร ฟื้นฟู HP เล็กน้อย',
+  'Potion infused with ingredients that enhance focus. Increases ASPD when consumed. Usable by All Jobs.':
+    'ยาที่ผสมส่วนประกอบช่วยเพิ่มสมาธิ ดื่มแล้วเพิ่ม ASPD ใช้ได้ทุกอาชีพ',
+
+  // Weapons and gear whose description is mostly mechanical
+  'A composite bow crafted by combining various materials, designed with a focus on increasing damage output.':
+    'ธนูคอมโพสิตที่ประกอบจากวัสดุหลายชนิด ออกแบบโดยเน้นเพิ่มความเสียหาย',
+  'A small bow that doesn’t deal much damage but is easy to use.':
+    'ธนูเล็กที่สร้างความเสียหายไม่มาก แต่ใช้ง่าย',
+  'Bow tailored precisely to its user, greatly boosting HIT and overall damage.':
+    'ธนูที่ปรับให้เข้ากับผู้ใช้อย่างแม่นยำ เพิ่ม HIT และความเสียหายโดยรวมอย่างมาก',
+  'Composite bow modeled after animal horns, known for its high damage and precise accuracy.':
+    'ธนูคอมโพสิตที่ทำเลียนแบบเขาสัตว์ ขึ้นชื่อเรื่องความเสียหายสูงและความแม่นยำ',
+  'Divine bow imbued with holy power, dealing high damage while drawing out the user’s hidden potential.':
+    'ธนูศักดิ์สิทธิ์ที่อาบด้วยพลังบริสุทธิ์ สร้างความเสียหายสูงพร้อมดึงศักยภาพที่ซ่อนอยู่ของผู้ใช้ออกมา',
+  'Cloth worn on the hand to make drawing a bowstring easier and increase damage when firing arrows.':
+    'ผ้าที่สวมที่มือเพื่อให้ง้างสายธนูง่ายขึ้นและเพิ่มความเสียหายเมื่อยิงธนู',
+  'Guard that covers the back of the hand with a hard plate, boosting both protection and damage of each punch.':
+    'เกราะป้องกันหลังมือด้วยแผ่นแข็ง เพิ่มทั้งการป้องกันและความเสียหายของหมัดแต่ละหมัด',
+  'Dagger forged with lunar energy that absorbs the target’s SP to replenish the wielder’s own.':
+    'กริชที่หลอมด้วยพลังจันทรา ดูด SP ของเป้าหมายมาเติมให้ผู้ถือ',
+  'Katar infused with the essence of erupting flames, modeled after bursting fire. Occasionally inflicts Silence on enemies with a low chance.':
+    'กะตาร์ที่อาบด้วยแก่นเปลวไฟปะทุ ทำเลียนแบบไฟที่ระเบิดออก มีโอกาสน้อยที่จะทำให้ศัตรูติด Silence เป็นครั้งคราว',
+  'Glittering claws of Joker leave afterimages that strip everything from enemies. STR +2, Raging Trifecta Blow damage +10%.':
+    'กรงเล็บระยิบระยับของ Joker ที่ทิ้งภาพติดตาและปลิดทุกอย่างจากศัตรู STR +2 และความเสียหาย Raging Trifecta Blow +10%',
+  'Magic ring that manifests a protective power, greatly reducing damage taken by the wearer.':
+    'แหวนเวทที่เรียกพลังปกป้องออกมา ลดความเสียหายที่ผู้สวมใส่ได้รับอย่างมาก',
+  'A base item required for setting a trap.': 'ไอเทมพื้นฐานที่ต้องใช้ในการวางกับดัก',
+  'A paper blessed by a sublime Priest. Lets you use the Holy-property spell [Heal] at Level 5.':
+    'กระดาษที่ได้รับพรจาก Priest ชั้นสูง ใช้เวทธาตุ Holy อย่าง [Heal] ที่ Level 5 ได้',
+  'A paper inscribed with a mage\'s spell, made from the essence of ancient magical study. Lets you use the Earth-property spell [Earth Spike] at Level 5.':
+    'กระดาษที่จารเวทของนักเวท ทำจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Earth อย่าง [Earth Spike] ที่ Level 5 ได้',
+  'A paper inscribed with a mage\'s spell, made from the essence of ancient magical study. Lets you use the Fire-property spell [Fire Ball] at Level 5.':
+    'กระดาษที่จารเวทของนักเวท ทำจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Fire อย่าง [Fire Ball] ที่ Level 5 ได้',
+  'Paper containing a mage’s spell, crafted from the essence of ancient arcane studies. Allows the use of Water-Property magic Frost Driver at Lv.5.':
+    'กระดาษที่บรรจุเวทของนักเวท ทำจากแก่นแห่งวิชาเวทโบราณ ใช้เวทธาตุ Water อย่าง Frost Driver ที่ Lv.5 ได้',
+  'Arrow coated with a toxin that locks the jaw, with a chance to inflict Silence on the target.':
+    'ลูกธนูเคลือบพิษที่ทำให้ขากรรไกรค้าง มีโอกาสทำให้เป้าหมายติด Silence',
+  'Arrow whose serrated, razor-sharp tip increases CRIT when attacking.':
+    'ลูกธนูปลายหยักคมกริบที่เพิ่ม CRIT เมื่อโจมตี',
+  'Encyclopedia published by a famous house in Prontera, known for its rock-hard corners. People say it feels like they set 3Carat diamonds into the edges.':
+    'สารานุกรมที่จัดพิมพ์โดยสำนักดังใน Prontera ขึ้นชื่อเรื่องมุมที่แข็งราวหิน คนว่ากันว่าเหมือนฝังเพชร 3Carat ไว้ที่ขอบ',
+};
+
 async function main(): Promise<void> {
   const db = supabaseAdmin();
 
@@ -381,6 +699,8 @@ async function main(): Promise<void> {
 
   add(EFFECT_TH, 'effect');
   add(EFFECT_TH_2, 'effect');
+  add(EFFECT_TH_3, 'effect');
+  add(EFFECT_TH_4, 'effect');
   add(FLAVOUR_TH, 'flavour');
 
   const { error } = await db
@@ -390,7 +710,7 @@ async function main(): Promise<void> {
 
   console.log(`seeded ${rows.length} lines, covering ${covered} occurrences`);
   console.log(
-    `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length} effect, ` +
+    `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length + Object.keys(EFFECT_TH_3).length + Object.keys(EFFECT_TH_4).length} effect, ` +
       `${Object.keys(FLAVOUR_TH).length} flavour`,
   );
   console.log(`deferred classes: ${DEFERRED_RULES.length}`);
