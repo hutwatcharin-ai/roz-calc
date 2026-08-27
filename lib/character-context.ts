@@ -53,6 +53,31 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
   return { level, job: job as JobKey, damagePerHit, attacksPerSecond, vit };
 }
 
+// The same rules applied to what a person typed rather than to what storage
+// held. The form used to carry its own copy of them, which is how a value the
+// form accepted could be rejected on the next page load and silently vanish.
+// One set of rules, two entry points.
+export function characterFromInput(input: {
+  level: string;
+  job: string;
+  vit: string;
+  damagePerHit: string;
+  attacksPerSecond: string;
+}): CharacterContext | null {
+  // No separate blank check: Number('') and Number('   ') are both 0, and
+  // parseCharacterContext already rejects a non-positive number. One was
+  // written here and deleted again when removing it changed no test.
+  return parseCharacterContext(
+    JSON.stringify({
+      level: Number(input.level),
+      job: input.job,
+      vit: Number(input.vit),
+      damagePerHit: Number(input.damagePerHit),
+      attacksPerSecond: Number(input.attacksPerSecond),
+    }),
+  );
+}
+
 // Storage access itself throws in some browsers (Safari private mode, blocked
 // site data), not just returns null. Reading must never take a page down.
 export function readCharacterContext(storage: StorageLike | null): CharacterContext | null {

@@ -5,7 +5,6 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
 import AggroBadge from '@/components/AggroBadge';
-import { aggroLevel } from '@/lib/aggro-tier';
 
 export const revalidate = 86400;
 
@@ -91,7 +90,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
                 <td data-label="HP" className="num">{m.hp > 0 ? m.hp.toLocaleString('en-US') : '—'}</td>
                 <td data-label="Base EXP" className="num">{m.base_exp > 0 ? m.base_exp.toLocaleString('en-US') : '—'}</td>
                 <td data-label="เข้าตีเอง">
-                  <AggroBadge level={aggroLevel({ is_aggressive: m.is_aggressive, atk_max: m.atk_max }, null)} />
+                  <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
                 </td>
               </tr>
             ))}

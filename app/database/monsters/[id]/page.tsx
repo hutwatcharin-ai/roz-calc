@@ -6,7 +6,7 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
-import { aggroLevel } from '@/lib/aggro-tier';
+import KillRatePanel from '@/components/KillRatePanel';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -103,8 +103,6 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   if (!monster) {
     notFound();
   }
-
-  const aggro = aggroLevel({ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }, null);
   const zeny = farming?.avg_zeny_per_kill;
 
   // A dash rather than a number wherever the value is unknown. hp and base_exp
@@ -150,7 +148,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         {/* The badge sits in the header, not buried below: it is the reason a
             player opened this page and no competing site shows it. */}
         <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
-          <AggroBadge level={aggro} />
+          <AggroBadge monster={{ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }} />
           {monster.is_mvp && <span className="tag">MVP</span>}
           {monster.loots_items && <span className="tag">เก็บของ</span>}
         </div>
@@ -178,6 +176,15 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
       <div className="detail-cols">
         <div className="panel">
+          {/* First card in the left column: the personal answer comes before the
+              reference tables, because it is the thing this site can say and a
+              stat dump cannot. */}
+          <KillRatePanel
+            monsterHp={monster.hp}
+            expPerKill={monster.base_exp}
+            monsterName={monster.name_en}
+          />
+
           <div className="card">
             <h2 className="section-title">ค่าสถานะ</h2>
             <table className="stat-table">

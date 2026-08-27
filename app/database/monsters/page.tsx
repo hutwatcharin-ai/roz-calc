@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
+import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 
 export const metadata = {
@@ -29,7 +30,9 @@ export default async function MonsterListPage({
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
   const db = supabaseBrowser();
-  let query = db.from('monsters').select('id, name_en, level, race, element, image_url', { count: 'exact' });
+  let query = db
+    .from('monsters')
+    .select('id, name_en, level, race, element, image_url, is_aggressive, atk_max', { count: 'exact' });
 
   if (q) {
     const needle = escapeLikePattern(q);
@@ -91,6 +94,7 @@ export default async function MonsterListPage({
               <th className="num">Lv</th>
               <th>เผ่า</th>
               <th>ธาตุ</th>
+              <th>เข้าตีเอง</th>
             </tr>
           </thead>
           <tbody>
@@ -107,11 +111,16 @@ export default async function MonsterListPage({
                 <td data-label="Lv" className="num">{m.level}</td>
                 <td data-label="เผ่า">{m.race ?? '—'}</td>
                 <td data-label="ธาตุ">{m.element ?? '—'}</td>
+                {/* The flag rides with the monster on every surface, not just
+                    the detail page (spec 3.15.1). */}
+                <td data-label="เข้าตีเอง">
+                  <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
+                </td>
               </tr>
             ))}
             {(monsters ?? []).length === 0 && (
               <tr>
-                <td colSpan={4} style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                <td colSpan={5} style={{ color: 'var(--faint)', padding: '16px 0' }}>
                   ไม่พบมอนสเตอร์ที่ตรงเงื่อนไข
                 </td>
               </tr>

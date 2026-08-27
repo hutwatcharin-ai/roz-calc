@@ -1,5 +1,7 @@
 import './globals.css';
 import Nav from '@/components/Nav';
+import CharacterBar from '@/components/CharacterBar';
+import { CharacterContextProvider } from '@/components/CharacterContextProvider';
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
 
@@ -35,8 +37,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <Nav />
-        {children}
+        {/* The character context wraps the whole app: the aggro badge grades
+            itself from it on every page, so a provider mounted per page would
+            leave the badge ungraded wherever someone forgot to add one. */}
+        <CharacterContextProvider>
+          <Nav />
+          <CharacterBar />
+          {children}
+        </CharacterContextProvider>
       </body>
     </html>
   );

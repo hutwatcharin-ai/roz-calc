@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   CHARACTER_STORAGE_KEY,
+  characterFromInput,
   parseCharacterContext,
   readCharacterContext,
   writeCharacterContext,
@@ -111,5 +112,54 @@ describe('writeCharacterContext', () => {
 
   it('reports failure when storage is unavailable', () => {
     expect(writeCharacterContext(null, VALID)).toBe(false);
+  });
+});
+
+describe('characterFromInput', () => {
+  const good = {
+    level: '99',
+    job: 'knight',
+    vit: '50',
+    damagePerHit: '1200',
+    attacksPerSecond: '2.5',
+  };
+
+  it('accepts a filled-in form', () => {
+    expect(characterFromInput(good)).toEqual({
+      level: 99,
+      job: 'knight',
+      vit: 50,
+      damagePerHit: 1200,
+      attacksPerSecond: 2.5,
+    });
+  });
+
+  it('rejects a blank field', () => {
+    // Not because of a blank check -- there isn't one. Number('') is 0 and zero
+    // is not positive, so the rule that rejects "0" rejects "" and "   " too.
+    for (const key of ['level', 'vit', 'damagePerHit', 'attacksPerSecond'] as const) {
+      expect(characterFromInput({ ...good, [key]: '' })).toBeNull();
+      expect(characterFromInput({ ...good, [key]: '   ' })).toBeNull();
+    }
+  });
+
+  it('rejects zero, negatives and nonsense', () => {
+    expect(characterFromInput({ ...good, damagePerHit: '0' })).toBeNull();
+    expect(characterFromInput({ ...good, level: '-1' })).toBeNull();
+    expect(characterFromInput({ ...good, attacksPerSecond: 'สอง' })).toBeNull();
+  });
+
+  it('rejects a job that is not in JOB_PROFILES', () => {
+    // Including one that exists on Object.prototype: `job in JOB_PROFILES`
+    // would let "constructor" through and put NaN into every HP figure.
+    expect(characterFromInput({ ...good, job: 'constructor' })).toBeNull();
+    expect(characterFromInput({ ...good, job: 'bard' })).toBeNull();
+  });
+
+  it('agrees with what the form will read back from storage', () => {
+    // The whole point of sharing the validator: a value the form accepted must
+    // survive a round trip through storage unchanged.
+    const ctx = characterFromInput(good);
+    expect(parseCharacterContext(JSON.stringify(ctx))).toEqual(ctx);
   });
 });
