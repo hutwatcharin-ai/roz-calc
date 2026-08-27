@@ -51,7 +51,7 @@ async function findDrops(query: string) {
 
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
-    .select('monster_id, rate, monsters(name_en, image_url)')
+    .select('monster_id, rate, monsters(name_en, image_url, level, is_aggressive, atk_max)')
     .eq('item_id', item.id)
     .order('rate', { ascending: false })
     .limit(10);
@@ -67,6 +67,9 @@ async function findDrops(query: string) {
       monster_id: d.monster_id,
       monster_name: d.monsters.name_en,
       monster_image_url: d.monsters.image_url as string | null,
+      monster_level: (d.monsters.level ?? null) as number | null,
+      is_aggressive: (d.monsters.is_aggressive ?? null) as boolean | null,
+      atk_max: (d.monsters.atk_max ?? null) as number | null,
       rate: d.rate,
     })),
   };

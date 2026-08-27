@@ -21,13 +21,13 @@ export const PRIMARY_LINKS: NavLink[] = [
   { href: '/', label: 'หาจุดตี', ready: true },
   { href: '/drop-finder', label: 'ค้นของดรอป', ready: true },
   { href: '/database/monsters', label: 'ฐานข้อมูล', ready: true },
-  { href: '/tools/elements', label: 'เครื่องมือ', ready: false },
+  { href: '/tools/afk-finder', label: 'เครื่องมือ', ready: true },
 ];
 
 // Some of these routes arrive in Wave 2. Listing them now means the nav is
 // built once instead of edited on every later task. All six database routes
-// (monsters, items, cards, equipment, skills, maps) are ready today; the
-// tools routes render as unready text until their page ships.
+// are ready, and so is the AFK finder; the two remaining tools routes render
+// as unready text until their page ships.
 export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   database: [
     { href: '/database/monsters', label: 'มอนสเตอร์', ready: true },
@@ -40,7 +40,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   tools: [
     { href: '/tools/elements', label: 'ตารางธาตุ', ready: false },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', ready: false },
-    { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: false },
+    { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: true },
   ],
 };
 

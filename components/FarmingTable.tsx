@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
+import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 
 interface FarmingRow {
@@ -59,6 +60,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
             <th className="num">Zeny/ตัว</th>
             {personal && <th className="num">ตัว/ชม.</th>}
             {personal && <th className="num">EXP/ชม.</th>}
+            {personal && <th>ดรอปตามช่วงเลเวล</th>}
             <th>แมพ</th>
           </tr>
         </thead>
@@ -97,6 +99,18 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                 {personal && (
                   <td data-label="EXP/ชม." className="num">
                     {personalRate?.exp ? formatExpPerHour(personalRate.exp) : '—'}
+                  </td>
+                )}
+                {/* Drops fall by half beyond a 40-level gap (spec 3.9), which
+                    can matter more than the EXP this table sorts on. */}
+                {personal && character && (
+                  <td data-label="ดรอปตามช่วงเลเวล">
+                    <span
+                      className={`tag tag--${dropPenalty(character.level, row.level)}`}
+                      title={dropPenaltyDetail(character.level, row.level)}
+                    >
+                      {DROP_PENALTY_LABELS[dropPenalty(character.level, row.level)]}
+                    </span>
                   </td>
                 )}
                 <td data-label="แมพ">{row.spawn ?? '—'}</td>

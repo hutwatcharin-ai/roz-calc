@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   sectionForPath,
   isActiveLink,
@@ -12,7 +14,14 @@ import {
 // database list pages -- monsters, items, cards, equipment, skills, maps --
 // plus their detail routes, which are not entries in these tables. Every
 // other listed href is a Wave 2 promise.
-const READY_ROUTES = new Set(['/', '/drop-finder', '/database/monsters', '/database/items', '/database/cards', '/database/equipment', '/database/skills', '/database/maps']);
+// Derived from the filesystem, not listed by hand: a hand-written list is one
+// more thing to update when a route ships, and the one time it was not
+// updated it failed as a puzzle rather than as a warning. A route is ready
+// exactly when its page file exists.
+function routeExists(href: string): boolean {
+  const dir = href === '/' ? '' : href;
+  return existsSync(join(process.cwd(), 'app', dir, 'page.tsx'));
+}
 
 describe('sectionForPath', () => {
   it('puts database routes in the database section', () => {
@@ -116,10 +125,13 @@ describe('link tables', () => {
     for (const link of all) expect(link.label.trim().length).toBeGreaterThan(0);
   });
 
-  it('marks ready exactly the routes that exist today, and no others', () => {
+  it('marks ready exactly the routes whose page file exists', () => {
     const all = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools];
     for (const link of all) {
-      expect(link.ready).toBe(READY_ROUTES.has(link.href));
+      expect({ href: link.href, ready: link.ready }).toEqual({
+        href: link.href,
+        ready: routeExists(link.href),
+      });
     }
   });
 

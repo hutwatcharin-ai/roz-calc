@@ -487,3 +487,11 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .btn:hover { filter: brightness(1.08); }
+
+/* Drop-penalty and risk tags. Same pill as .tag, recoloured by state -- and
+   deliberately three states, not two: the middle level band has no confirmed
+   penalty either way, so it must not borrow the colour of a known answer. */
+.tag--none { border-color: var(--status-safe); color: var(--status-safe); }
+.tag--halved { border-color: var(--status-danger); color: var(--status-danger); }
+.tag--unknown { border-color: var(--hair); color: var(--faint); }
+.tag--risk { border-color: var(--yellow); color: var(--yellow); }
