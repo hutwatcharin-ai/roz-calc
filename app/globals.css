@@ -341,3 +341,20 @@ table { border-collapse: collapse; width: 100%; }
   font: 600 12px/1.6 "Sarabun", sans-serif;
   white-space: nowrap;
 }
+
+/* Language switch on the item description. Two small pills reusing the tab
+   treatment, so "which one is active" reads the same way it does elsewhere. */
+.lang-toggle { display: flex; gap: 4px; margin-bottom: 10px; }
+
+.lang-toggle button {
+  padding: 3px 10px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--dim);
+  font: 600 12px/1.6 "Sarabun", sans-serif;
+  cursor: pointer;
+}
+
+.lang-toggle button:hover { color: var(--text); background: var(--panel-2); }
+.lang-toggle button.on { color: var(--yellow-ink); background: var(--yellow); border-color: var(--yellow); }
