@@ -16,7 +16,7 @@
 
 - **Thai for every user-facing string.** Code, identifiers, and comments in English.
 - **Never invent game values.** A missing value renders `—`, never `0`, `N/A`, or a guess. `hp = 0` and `base_exp = 0` are this database's unknown-value sentinels, written when the raw feed said `""` or `"???"` — they are not real zeros.
-- **No migrations in this plan.** Every column read here already exists. If a task appears to need a new one, stop and report instead of adding it.
+- **One migration only, and it adds a view — no table or column changes.** Task 3 adds `map_stats`. Everything else reads columns Wave 1 already created; if another task appears to need a new one, stop and report instead of adding it.
 - **Supabase returns at most 1,000 rows per request and does not warn when it truncates.** Any query meant to cover a whole table must page with `.range()`.
 - **`NULL` in SQL is not `false`.** `WHERE col NOT LIKE '...'` silently returns neither the matching nor the non-matching row when `col` is null.
 - **Server components stay server components.** `'use client'` belongs only on a small leaf component that needs browser APIs, never on a route file — that would cost the per-page metadata Wave 1 added.
@@ -654,8 +654,20 @@ git commit -m "feat: add equipment browser with job filter"
 Spec §3.2. `monster_spawns` holds 3,032 rows across 497 maps and nothing on the site reads them except one line on the monster page. A map page turns "where do I go" into a browsable answer.
 
 **Files:**
-- Create: `app/database/maps/page.tsx`, `app/database/maps/[code]/page.tsx`
+- Create: `supabase/migrations/0006_map_stats.sql`, `app/database/maps/page.tsx`, `app/database/maps/[code]/page.tsx`
 - Modify: `lib/nav-links.ts`
+
+**Why this task needs a view, and why paging the raw table is the wrong answer.**
+
+`monster_spawns` holds 3,032 rows and Supabase caps a request at 1,000, so the obvious move is to page through it with `.range()` and group the rows in JavaScript. That is what the first draft of this plan said to do, and it is subtly wrong.
+
+Paging requires an ORDER BY, and the only column worth ordering by here is `map_code` — which has ties, roughly six rows per map. **Postgres does not guarantee a stable order among tied rows across separate queries.** If the planner picks a different scan, or a write lands between two pages, a row can be returned twice or skipped entirely, and the page shows a wrong monster count for a map with no error anywhere.
+
+I tested it against the live database: today all four pages come back with exactly 3,032 distinct rows, none duplicated. That is the current behaviour, not a promise — it rests on an implementation detail the database is free to change.
+
+The fix removes the question instead of managing it. Aggregating in SQL yields **497 rows, one per map** — comfortably inside the cap, one request, no pagination and therefore no ordering to be unstable. It also matches what this project already does for `monster_farming_stats`.
+
+Two facts checked while designing this: the busiest map holds **29** monsters and the average is 6.1, so the detail page is nowhere near the cap and needs no paging of its own; and **no map carries two different display names**, so `min(map_display_name)` collapses the 245 named maps without discarding anything.
 
 **Interfaces:**
 - Consumes: `supabaseBrowser()`; `Pagination`; `AggroBadge` from `components/AggroBadge.tsx` taking `{ level: AggroLevel }`; `aggroLevel(monster: { is_aggressive: boolean | null; atk_max: number | null }, playerMaxHp: number | null): AggroLevel` from `lib/aggro-tier.ts`.
@@ -663,7 +675,45 @@ Spec §3.2. `monster_spawns` holds 3,032 rows across 497 maps and nothing on the
 
 **Note on the aggro badge:** pass `null` for `playerMaxHp` on both pages. There is no character context wired into any page yet, and `aggroLevel` deliberately returns the two-level answer when the player is unknown. Do not invent a player to get three levels.
 
-- [ ] **Step 1: Build the list page**
+- [ ] **Step 1: Write the migration**
+
+Create `supabase/migrations/0006_map_stats.sql`:
+
+```sql
+-- 0006_map_stats.sql
+--
+-- monster_spawns holds 3,032 rows and Supabase caps a request at 1,000, so a
+-- map list built from the raw table has to page. Paging needs an ORDER BY, and
+-- the only useful column, map_code, has ties -- about six rows per map.
+-- Postgres does not guarantee a stable order among tied rows across separate
+-- queries, so a row can be returned twice or skipped between pages, and a map
+-- shows a wrong monster count with no error anywhere.
+--
+-- Aggregating here removes the question rather than managing it: 497 rows, one
+-- per map, one request, no pagination and so no ordering to be unstable.
+--
+-- min(map_display_name) is safe: no map in the data carries two different
+-- display names, and only 245 of 497 carry one at all -- the rest stay null and
+-- the page shows the code instead of guessing a name.
+
+create or replace view map_stats as
+select
+  s.map_code,
+  min(s.map_display_name) as map_display_name,
+  count(*)::integer as monster_count
+from monster_spawns s
+group by s.map_code;
+
+-- Without security_invoker a view runs as its owner and bypasses the RLS
+-- policies on the table beneath it. monster_spawns is public-read anyway, but
+-- the setting is stated explicitly so the next view added here inherits the
+-- habit rather than the omission.
+alter view map_stats set (security_invoker = on);
+```
+
+**Do not apply this migration.** You have no database credentials. The controller applies it and confirms before the page is verified.
+
+- [ ] **Step 2: Build the list page**
 
 Create `app/database/maps/page.tsx`:
 
@@ -682,33 +732,6 @@ export const metadata = {
 };
 
 const PAGE_SIZE = 50;
-const FETCH_PAGE = 1000;
-
-// 3,032 spawn rows is over the 1,000-row cap, and a plain select() would
-// silently return only the first third -- with a third of the maps simply
-// missing from the page and nothing looking wrong.
-async function allSpawns() {
-  const db = supabaseBrowser();
-  const rows: { map_code: string; map_display_name: string | null }[] = [];
-
-  for (let from = 0; ; from += FETCH_PAGE) {
-    const { data, error } = await db
-      .from('monster_spawns')
-      .select('map_code, map_display_name')
-      .order('map_code')
-      .range(from, from + FETCH_PAGE - 1);
-
-    if (error) {
-      console.error('maps query failed', error);
-      break;
-    }
-    if (!data || data.length === 0) break;
-    rows.push(...data);
-    if (data.length < FETCH_PAGE) break;
-  }
-
-  return rows;
-}
 
 export default async function MapsPage({
   searchParams,
@@ -718,32 +741,34 @@ export default async function MapsPage({
   const q = searchParams.q ?? '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
-  const spawns = await allSpawns();
+  const db = supabaseBrowser();
 
-  const byCode = new Map<string, { code: string; name: string | null; count: number }>();
-  for (const s of spawns) {
-    const existing = byCode.get(s.map_code);
-    if (existing) {
-      existing.count += 1;
-      // Only 245 of 497 maps carry a display name; take the first non-null.
-      if (!existing.name && s.map_display_name) existing.name = s.map_display_name;
-    } else {
-      byCode.set(s.map_code, { code: s.map_code, name: s.map_display_name, count: 1 });
-    }
+  // map_stats is one row per map -- 497 of them, inside the 1,000-row cap --
+  // so this pages in SQL with an exact count instead of pulling 3,032 spawn
+  // rows across four requests and grouping them here.
+  let query = db.from('map_stats').select('map_code, map_display_name, monster_count', { count: 'exact' });
+
+  if (q) {
+    // or() takes one string; a comma inside a value would split it, so the
+    // needle is stripped of commas rather than trusted.
+    const needle = q.replace(/[,()]/g, '');
+    query = query.or(`map_code.ilike.%${needle}%,map_display_name.ilike.%${needle}%`);
   }
 
-  const needle = q.trim().toLowerCase();
-  const maps = [...byCode.values()]
-    .filter((m) =>
-      !needle ||
-      m.code.toLowerCase().includes(needle) ||
-      (m.name ?? '').toLowerCase().includes(needle),
-    )
-    .sort((a, b) => b.count - a.count);
+  const from = (page - 1) * PAGE_SIZE;
+  // Ordered by monster_count then map_code. map_code is unique in this view,
+  // so the sort is total and paging is stable -- the property the raw table
+  // could not offer.
+  const { data: maps, count, error } = await query
+    .order('monster_count', { ascending: false })
+    .order('map_code')
+    .range(from, from + PAGE_SIZE - 1);
 
-  const totalPages = Math.max(1, Math.ceil(maps.length / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-  const rows = maps.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  if (error) {
+    console.error('maps query failed', error);
+  }
+
+  const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
 
   function buildHref(targetPage: number) {
     const params = new URLSearchParams();
@@ -756,9 +781,7 @@ export default async function MapsPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลแมพ</h1>
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {maps.length} แมพ จากทั้งหมด {byCode.size} แมพ
-      </p>
+      <p style={{ color: 'var(--faint)', marginTop: 6 }}>{count ?? 0} แมพ</p>
       <p style={{ color: 'var(--faint)', marginTop: 4, fontSize: 13 }}>
         แมพบางแห่งมีแต่รหัส เพราะข้อมูลต้นทางไม่มีชื่อให้ ไม่ได้แปลว่าแมพนั้นไม่มีอยู่
       </p>
@@ -778,16 +801,18 @@ export default async function MapsPage({
             </tr>
           </thead>
           <tbody>
-            {rows.map((m) => (
-              <tr key={m.code}>
+            {(maps ?? []).map((m) => (
+              <tr key={m.map_code}>
                 <td data-label="">
-                  <Link href={`/database/maps/${encodeURIComponent(m.code)}`}>{m.name ?? m.code}</Link>
+                  <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`}>
+                    {m.map_display_name ?? m.map_code}
+                  </Link>
                 </td>
-                <td data-label="รหัส" className="mono">{m.code}</td>
-                <td data-label="จำนวนมอน" className="num">{m.count}</td>
+                <td data-label="รหัส" className="mono">{m.map_code}</td>
+                <td data-label="จำนวนมอน" className="num">{m.monster_count}</td>
               </tr>
             ))}
-            {rows.length === 0 && (
+            {(maps ?? []).length === 0 && (
               <tr>
                 <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                   ไม่พบแมพที่ตรงเงื่อนไข
@@ -798,13 +823,13 @@ export default async function MapsPage({
         </table>
       </div>
 
-      <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} />
+      <Pagination page={page} totalPages={totalPages} buildHref={buildHref} />
     </main>
   );
 }
 ```
 
-- [ ] **Step 2: Build the detail page**
+- [ ] **Step 3: Build the detail page**
 
 Create `app/database/maps/[code]/page.tsx`:
 
@@ -914,11 +939,11 @@ export default async function MapDetailPage({ params }: { params: { code: string
 }
 ```
 
-- [ ] **Step 3: Turn the nav link on**
+- [ ] **Step 4: Turn the nav link on**
 
 In `lib/nav-links.ts`, change the `/database/maps` entry's `ready` to `true`.
 
-- [ ] **Step 4: Check it in a browser**
+- [ ] **Step 5: Check it in a browser**
 
 Open `/database/maps` and confirm, reporting each:
 - 497 maps listed, sorted with the busiest first.
@@ -927,14 +952,18 @@ Open `/database/maps` and confirm, reporting each:
 - A monster whose `hp` is 0 shows `—` in the HP column, not `0`.
 - `/database/maps/does_not_exist` returns 404, not a 200 with an empty table.
 
-- [ ] **Step 5: Run the suite and commit**
+- [ ] **Step 6: Run the suite and commit**
 
 Run: `npm test && npx tsc --noEmit && npm run build`
 
 ```bash
-git add app/database/maps lib/nav-links.ts
-git commit -m "feat: add maps browser with per-map monster lists"
+git add supabase/migrations/0006_map_stats.sql app/database/maps lib/nav-links.ts
+git commit -m "feat: add maps browser backed by a pre-aggregated view"
 ```
+
+- [ ] **Step 7: [CONTROLLER] Apply the migration**
+
+The controller applies `0006_map_stats.sql` and confirms `select count(*) from map_stats` returns 497 and that `reloptions` still reads `security_invoker=on`. The browser checks in Step 5 cannot pass until this has run — until then the page queries a view that does not exist.
 
 ---
 
