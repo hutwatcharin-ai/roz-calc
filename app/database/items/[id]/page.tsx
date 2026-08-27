@@ -46,11 +46,15 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   // maybeSingle (not single): a missing id must come back as data:null with no
   // error, so a genuine 404 stays distinguishable from a real query failure.
   const { data: item, error } = await getItem(id);
-  const { data: droppedBy } = await db
+  // Every card and equipment row links here for exactly this section -- a
+  // failed query must not read as "nothing drops this" (data: null looks
+  // identical to a real empty result without its own error slot).
+  const { data: droppedBy, error: droppedByError } = await db
     .from('monster_drops')
     .select('rate, monsters(id, name_en, image_url)')
     .eq('item_id', id)
     .order('rate', { ascending: false });
+  if (droppedByError) console.error('item dropped-by query failed', droppedByError);
 
   // A failed query must not read as "this item does not exist".
   if (error) {
@@ -117,17 +121,23 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       )}
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: '"Chakra Petch", sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
-        {(droppedBy ?? []).map((d: any, i: number) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              {d.monsters.image_url && (
-                <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-              )}
-              {d.monsters.name_en}
-            </span>
-            <span className="mono">{d.rate}%</span>
-          </div>
-        ))}
+        {droppedByError ? (
+          <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
+        ) : (droppedBy ?? []).length === 0 ? (
+          <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปไอเทมนี้</p>
+        ) : (
+          (droppedBy ?? []).map((d: any, i: number) => (
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                {d.monsters.image_url && (
+                  <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                )}
+                {d.monsters.name_en}
+              </span>
+              <span className="mono">{d.rate}%</span>
+            </div>
+          ))
+        )}
       </div>
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="item" entityId={String(item.id)} />

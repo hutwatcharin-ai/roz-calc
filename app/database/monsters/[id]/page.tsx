@@ -56,11 +56,15 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // maybeSingle (not single): a missing id must come back as data:null with no
   // error, so a genuine 404 stays distinguishable from a real query failure.
   const { data: monster, error } = await getMonster(id);
-  const { data: drops } = await db
+  // Drops are the reason most players open this page, and a failed query
+  // here must not read as "this monster drops nothing" -- the same failure
+  // class the spawns/skills/farming queries below were already fixed for.
+  const { data: drops, error: dropsError } = await db
     .from('monster_drops')
     .select('rate, items(name_en, sell_price, icon_url)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
+  if (dropsError) console.error('monster drops query failed', dropsError);
 
   // Each of these three has its own error slot: a failed spawn/skill/farming
   // query must not read as "this monster has none of that" (which is what
@@ -212,21 +216,27 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 <tr><th>ไอเทม</th><th className="num">อัตราดรอป</th></tr>
               </thead>
               <tbody>
-                {(drops ?? []).map((d: any, i: number) => (
-                  <tr key={i}>
-                    <td data-label="">
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        {d.items?.icon_url && (
-                          <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                        )}
-                        {d.items?.name_en ?? '—'}
-                      </span>
-                    </td>
-                    <td data-label="อัตราดรอป" className="num">{d.rate}%</td>
-                  </tr>
-                ))}
-                {(drops ?? []).length === 0 && (
-                  <tr><td colSpan={2} data-label="" style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลของที่ดรอป</td></tr>
+                {dropsError ? (
+                  <tr><td colSpan={2} data-label="" style={{ color: 'var(--faint)' }}>โหลดข้อมูลของที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</td></tr>
+                ) : (
+                  <>
+                    {(drops ?? []).map((d: any, i: number) => (
+                      <tr key={i}>
+                        <td data-label="">
+                          <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            {d.items?.icon_url && (
+                              <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                            )}
+                            {d.items?.name_en ?? '—'}
+                          </span>
+                        </td>
+                        <td data-label="อัตราดรอป" className="num">{d.rate}%</td>
+                      </tr>
+                    ))}
+                    {(drops ?? []).length === 0 && (
+                      <tr><td colSpan={2} data-label="" style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลของที่ดรอป</td></tr>
+                    )}
+                  </>
                 )}
               </tbody>
             </table>
