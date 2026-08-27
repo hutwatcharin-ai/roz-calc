@@ -4,6 +4,9 @@ import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import AggroBadge from '@/components/AggroBadge';
+import { aggroLevel } from '@/lib/aggro-tier';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -59,6 +62,24 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     .eq('monster_id', id)
     .order('rate', { ascending: false });
 
+  const { data: spawns } = await db
+    .from('monster_spawns')
+    .select('map_code, map_display_name')
+    .eq('monster_id', id)
+    .order('map_code');
+
+  const { data: monsterSkills } = await db
+    .from('monster_skills')
+    .select('skill_name, skill_lv, rate, cast_time, delay, target, state')
+    .eq('monster_id', id)
+    .order('entry_index');
+
+  const { data: farming } = await db
+    .from('monster_farming_stats')
+    .select('avg_zeny_per_kill')
+    .eq('monster_id', id)
+    .maybeSingle();
+
   // A failed query must not read as "this monster does not exist".
   if (error) {
     console.error('monster detail query failed', error);
@@ -72,40 +93,161 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     notFound();
   }
 
+  const aggro = aggroLevel({ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }, null);
+  const zeny = farming?.avg_zeny_per_kill;
+
+  // A dash rather than a number wherever the value is unknown. hp and base_exp
+  // of 0 are this database's unknown-value sentinels, not real zeros.
+  const num = (v: number | null | undefined) =>
+    v === null || v === undefined ? '—' : v.toLocaleString('en-US');
+  const sentinel = (v: number | null | undefined) =>
+    v === null || v === undefined || v === 0 ? '—' : v.toLocaleString('en-US');
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
         {monster.image_url && (
-          <img
-            src={monster.image_url}
-            alt=""
-            width={64}
-            height={64}
-            style={{ imageRendering: 'pixelated' }}
-          />
+          <img src={monster.image_url} alt="" width={64} height={64} style={{ imageRendering: 'pixelated' }} />
         )}
         <div>
           <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{monster.name_en}</h1>
-          <p style={{ color: 'var(--dim)' }}>Lv.{monster.level} · {monster.race} · {monster.element}</p>
+          <p style={{ color: 'var(--dim)' }}>
+            Lv.{monster.level}
+            {monster.race ? ` · ${monster.race}` : ''}
+            {monster.element ? ` · ${monster.element}${monster.element_level ?? ''}` : ''}
+            {monster.size ? ` · ${monster.size}` : ''}
+          </p>
+        </div>
+        {/* The badge sits in the header, not buried below: it is the reason a
+            player opened this page and no competing site shows it. */}
+        <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
+          <AggroBadge level={aggro} />
+          {monster.is_mvp && <span className="aggro aggro--danger">MVP</span>}
+          {monster.loots_items && <span className="aggro aggro--caution">เก็บของ</span>}
         </div>
       </div>
-      <div className="card" style={{ marginTop: 20 }}>
-        <p>HP {monster.hp.toLocaleString()} · ATK {monster.atk_min}–{monster.atk_max} · DEF {monster.def}</p>
-      </div>
-      <div className="card" style={{ marginTop: 20 }}>
-        <h2 style={{ fontFamily: '"Chakra Petch", sans-serif', marginBottom: 10 }}>ตารางดรอป</h2>
-        {(drops ?? []).map((d: any, i: number) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              {d.items.icon_url && (
-                <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-              )}
-              {d.items.name_en}
+
+      <div className="card card--yellow" style={{ marginTop: 20 }}>
+        <div className="reward-row">
+          <div><span className="reward-label">Base EXP</span><span className="reward-value mono">{sentinel(monster.base_exp)}</span></div>
+          <div><span className="reward-label">Job EXP</span><span className="reward-value mono">{sentinel(monster.job_exp)}</span></div>
+          <div>
+            <span className="reward-label">Zeny/ตัว</span>
+            <span
+              className="reward-value mono"
+              title="คิดจาก ราคาขายของที่ดรอป × อัตราดรอป ไม่ใช่เงินที่มอนดรอปออกมาตรงๆ"
+            >
+              {zeny === null || zeny === undefined ? '—' : Number(zeny).toLocaleString('en-US')}
             </span>
-            <span className="mono">{d.rate}%</span>
           </div>
-        ))}
+        </div>
       </div>
+
+      <div className="detail-cols">
+        <div className="panel">
+          <div className="card">
+            <h2 className="section-title">ค่าสถานะ</h2>
+            <table className="data-table">
+              <tbody>
+                <tr><td data-label="HP">HP</td><td className="num">{sentinel(monster.hp)}</td></tr>
+                <tr><td data-label="ATK">ATK</td><td className="num">{num(monster.atk_min)} – {num(monster.atk_max)}</td></tr>
+                <tr><td data-label="MATK">MATK</td><td className="num">{num(monster.matk_min)} – {num(monster.matk_max)}</td></tr>
+                <tr><td data-label="DEF">DEF</td><td className="num">{num(monster.def)}</td></tr>
+                <tr><td data-label="MDEF">MDEF</td><td className="num">{num(monster.mdef)}</td></tr>
+                <tr><td data-label="FLEE">FLEE</td><td className="num">{num(monster.flee)}</td></tr>
+                <tr><td data-label="HIT">HIT</td><td className="num">{num(monster.hit)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="card">
+            <h2 className="section-title">สเตตัสพื้นฐาน</h2>
+            <table className="data-table">
+              <tbody>
+                <tr><td data-label="STR">STR</td><td className="num">{num(monster.str)}</td></tr>
+                <tr><td data-label="AGI">AGI</td><td className="num">{num(monster.agi)}</td></tr>
+                <tr><td data-label="VIT">VIT</td><td className="num">{num(monster.vit)}</td></tr>
+                <tr><td data-label="INT">INT</td><td className="num">{num(monster.int_)}</td></tr>
+                <tr><td data-label="DEX">DEX</td><td className="num">{num(monster.dex)}</td></tr>
+                <tr><td data-label="LUK">LUK</td><td className="num">{num(monster.luk)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="panel">
+          <div className="card">
+            <h2 className="section-title">ของที่ดรอป</h2>
+            <table className="data-table">
+              <thead>
+                <tr><th>ไอเทม</th><th className="num">อัตราดรอป</th></tr>
+              </thead>
+              <tbody>
+                {(drops ?? []).map((d: any, i: number) => (
+                  <tr key={i}>
+                    <td data-label="">
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        {d.items?.icon_url && (
+                          <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                        )}
+                        {d.items?.name_en ?? '—'}
+                      </span>
+                    </td>
+                    <td data-label="อัตราดรอป" className="num">{d.rate}%</td>
+                  </tr>
+                ))}
+                {(drops ?? []).length === 0 && (
+                  <tr><td colSpan={2} data-label="" style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลของที่ดรอป</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="card">
+            <h2 className="section-title">จุดเกิด</h2>
+            {(spawns ?? []).length === 0 ? (
+              <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลจุดเกิด</p>
+            ) : (
+              <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {(spawns ?? []).map((s: any) => (
+                  <li key={s.map_code}>
+                    <Link href={`/database/maps/${encodeURIComponent(s.map_code)}`} className="chip">
+                      {s.map_display_name ?? s.map_code}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className="card">
+            <h2 className="section-title">สกิลที่มอนใช้</h2>
+            {(monsterSkills ?? []).length === 0 ? (
+              <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลสกิล</p>
+            ) : (
+              <table className="data-table">
+                <thead>
+                  <tr><th>สกิล</th><th className="num">Lv</th><th className="num">โอกาส</th><th>ตอน</th></tr>
+                </thead>
+                <tbody>
+                  {(monsterSkills ?? []).map((s: any, i: number) => (
+                    <tr key={i}>
+                      {/* skill_name is the game's internal constant. The feed
+                          gives no display name here, and inventing one would
+                          be inventing a game value. */}
+                      <td data-label="" className="mono">{s.skill_name}</td>
+                      <td data-label="Lv" className="num">{num(s.skill_lv)}</td>
+                      <td data-label="โอกาส" className="num">{s.rate === null ? '—' : `${s.rate}%`}</td>
+                      <td data-label="ตอน">{s.state ?? '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="monster" entityId={String(monster.id)} />
       </div>

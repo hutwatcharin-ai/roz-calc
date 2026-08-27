@@ -260,3 +260,43 @@ table { border-collapse: collapse; width: 100%; }
 
 .tabs a:hover { color: var(--text); background: var(--panel-2); }
 .tabs a.on { color: var(--yellow); background: var(--panel-2); }
+
+/* Monster detail: two columns on desktop, one on a phone. Deliberately not
+   tabs -- 524 of these pages are the site's main search entry point, and
+   content inside an unopened tab is both worse for search and invisible to
+   Ctrl+F. */
+.detail-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .detail-cols { grid-template-columns: 1fr; }
+}
+
+.section-title {
+  font: 700 15px/1.4 "Chakra Petch", sans-serif;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.reward-row { display: flex; flex-wrap: wrap; gap: 28px; }
+.reward-row > div { display: flex; flex-direction: column; gap: 2px; }
+.reward-label { font: 600 12px/1.4 "Sarabun", sans-serif; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.reward-value { font-size: 22px; color: var(--text); }
+
+.chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--dim);
+  font: 500 13px/1.6 "Sarabun", sans-serif;
+  text-decoration: none;
+}
+
+.chip:hover { color: var(--text); border-color: var(--cyan); }
