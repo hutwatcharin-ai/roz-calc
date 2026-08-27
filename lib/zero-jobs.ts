@@ -47,19 +47,15 @@ export function jobAncestry(job: string): string[] {
   const result: string[] = [];
   let current: string | undefined = normalized;
 
-  while (current) {
+  while (current !== undefined) {
     // Find the canonical job name (preserving case)
     const canonical = ZERO_JOBS.find((j) => j.toLowerCase() === current);
     if (canonical) {
       result.push(canonical);
     }
     // Move to parent (using normalized current to look up in JOB_PARENT)
-    const parentName = JOB_PARENT[current];
-    if (parentName) {
-      current = parentName.toLowerCase();
-    } else {
-      current = undefined;
-    }
+    const parentName: string | undefined = JOB_PARENT[current as keyof typeof JOB_PARENT];
+    current = parentName ? parentName.toLowerCase() : undefined;
   }
 
   return result;
