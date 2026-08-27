@@ -58,14 +58,14 @@ function escapeRegExp(s: string): string {
 //   Reduces damage 5%.  -> ลดความเสียหาย 5   a percentage becomes a flat amount
 //   ATK +5, DEF +3      -> ATK +3, DEF +5   the two stats swap numbers
 //
-// The first two need the sign and the `%` kept. The third needs the number tied
-// to something, because the multiset {3, 5} is identical either way -- so a
-// number is anchored to the glossary term immediately in front of it. That is
-// the one anchor that survives translation by definition: MUST_STAY_ENGLISH is
-// the list of things the Thai has to keep verbatim.
+// The first two are caught by keeping the sign and the `%` on the token. The
+// third is not: the multiset {+3, +5} is identical either way, so the numbers
+// have to be tied to something that survives translation. MUST_STAY_ENGLISH is
+// exactly the list of things the Thai keeps verbatim, so a number is also
+// recorded against the glossary term immediately in front of it.
 //
-// Anything not preceded by a glossary term is compared on its own, so ordinary
-// Thai prose around a number is still free to differ.
+// Both comparisons stay order-insensitive, because Thai word order legitimately
+// moves a whole clause -- `DEF +3 และ ATK +5` keeps every number with its stat.
 const NUMBER = /([+-]?)\s*(\d+)\s*(%?)/g;
 
 function anchorBefore(text: string, index: number): string {
@@ -81,15 +81,29 @@ function anchorBefore(text: string, index: number): string {
   return best;
 }
 
-// Order-insensitive at the token level: Thai word order legitimately moves a
-// whole clause, and `DEF +3 และ ATK +5` keeps every number with its own stat.
+/** Every number in `text` as `sign + digits + unit`, sorted. */
 export function numberTokens(text: string): string[] {
   const tokens: string[] = [];
   for (const m of text.matchAll(NUMBER)) {
     const [, sign, digits, percent] = m;
-    tokens.push(`${anchorBefore(text, m.index ?? 0)}${sign}${digits}${percent}`);
+    tokens.push(`${sign}${digits}${percent}`);
   }
   return tokens.sort();
+}
+
+/** The same tokens, grouped by the glossary term standing in front of them. */
+function anchoredNumbers(text: string): Map<string, string[]> {
+  const byTerm = new Map<string, string[]>();
+  for (const m of text.matchAll(NUMBER)) {
+    const anchor = anchorBefore(text, m.index ?? 0);
+    if (anchor === '') continue;
+    const [, sign, digits, percent] = m;
+    const list = byTerm.get(anchor) ?? [];
+    list.push(`${sign}${digits}${percent}`);
+    byTerm.set(anchor, list);
+  }
+  for (const list of byTerm.values()) list.sort();
+  return byTerm;
 }
 
 // Whole-word only: "Fired" contains "Fire" but is not the element, and flagging
@@ -128,6 +142,27 @@ export function checkTranslation(source: string, thai: string): GlossaryIssue[] 
       thai,
       detail: `source has [${srcNums.join(', ')}], translation has [${thaiNums.join(', ')}]`,
     });
+  } else {
+    // Only when the quantities themselves agree, so a line is never reported
+    // twice for the same defect. A term is compared only where it anchors a
+    // number on BOTH sides: `FLEE Rate +5.` renders as `อัตรา FLEE +5`, which
+    // puts FLEE next to the number where the English had "Rate" there, and
+    // that is a legitimate rendering, not a moved quantity.
+    const srcAnchored = anchoredNumbers(source);
+    const thaiAnchored = anchoredNumbers(thai);
+    for (const [term, srcList] of srcAnchored) {
+      const thaiList = thaiAnchored.get(term);
+      if (!thaiList || thaiList.length === 0) continue;
+      if (srcList.join(',') === thaiList.join(',')) continue;
+      issues.push({
+        rule: 'number-mismatch',
+        source,
+        thai,
+        detail:
+          `${term} has [${srcList.join(', ')}] in the source ` +
+          `but [${thaiList.join(', ')}] in the translation`,
+      });
+    }
   }
 
   for (const term of MUST_STAY_ENGLISH) {

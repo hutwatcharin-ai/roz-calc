@@ -132,3 +132,20 @@ describe('checkTranslation — untranslated lines', () => {
     expect(issues.filter((i) => i.rule === 'no-thai-characters')).toHaveLength(0);
   });
 });
+
+describe('checkTranslation — numbers, anchored to glossary terms', () => {
+  it('accepts a glossary term that moves next to the number', () => {
+    // Live case, 14 lines: the English reads "FLEE Rate +5", so nothing is
+    // anchored to FLEE there, while the Thai renders "อัตรา FLEE +5" and puts
+    // FLEE right in front of the number. The quantity did not move.
+    const issues = checkTranslation('FLEE Rate +5.', 'อัตรา FLEE +5');
+    expect(issues.filter((i) => i.rule === 'number-mismatch')).toHaveLength(0);
+  });
+
+  it('reports a swap once, not twice', () => {
+    const issues = checkTranslation('ATK +5, DEF +3', 'ATK +3 และ DEF +5');
+    const mismatches = issues.filter((i) => i.rule === 'number-mismatch');
+    expect(mismatches).toHaveLength(2); // one per stat that lost its number
+    expect(mismatches.every((i) => /ATK|DEF/.test(i.detail))).toBe(true);
+  });
+});
