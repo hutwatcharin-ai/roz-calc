@@ -11,7 +11,7 @@ import {
 // Routes confirmed to exist today (finding #1): / , /drop-finder,
 // /database/monsters, /database/items, /database/cards, /database/equipment, plus the two detail routes, which are
 // not entries in these tables. Every other listed href is a Wave 2 promise.
-const READY_ROUTES = new Set(['/', '/drop-finder', '/database/monsters', '/database/items', '/database/cards', '/database/equipment']);
+const READY_ROUTES = new Set(['/', '/drop-finder', '/database/monsters', '/database/items', '/database/cards', '/database/equipment', '/database/maps']);
 
 describe('sectionForPath', () => {
   it('puts database routes in the database section', () => {
