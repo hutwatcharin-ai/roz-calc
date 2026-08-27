@@ -514,3 +514,53 @@ table { border-collapse: collapse; width: 100%; }
 .planbtn--on { border-color: var(--status-safe); color: var(--status-safe); }
 .planbtn--compact { padding: 2px 9px; font-size: 12px; }
 .planbtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Home page stat row (spec 6.2). Each figure is a live count and a link to the
+   page it counts, so the row doubles as the shortest path into the database. */
+.sitestats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.sitestats__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 14px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  text-decoration: none;
+  min-width: 96px;
+}
+
+.sitestats__item:hover { background: var(--panel-2); border-color: var(--cyan); }
+.sitestats__count { font: 700 18px/1.2 "IBM Plex Mono", monospace; color: var(--yellow); }
+.sitestats__label { font-size: 12px; color: var(--dim); }
+
+/* Entry cards at the foot of the home page. Capped at four by spec 6.2 so the
+   page stays a tool with context around it rather than a link menu. */
+.entrycards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.entrycard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.entrycard:hover { background: var(--panel-2); border-color: var(--cyan); }
+.entrycard strong { font: 700 15px/1.4 "Chakra Petch", sans-serif; color: var(--cyan); }
+.entrycard span { font-size: 13px; color: var(--dim); line-height: 1.5; }
