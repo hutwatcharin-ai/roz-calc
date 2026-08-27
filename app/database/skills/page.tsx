@@ -81,6 +81,12 @@ export default async function SkillsPage({
   function buildHref(targetPage: number, overrides: Record<string, string> = {}) {
     const params = new URLSearchParams();
     const next = { q, job, type, tab, ...overrides };
+    // The job filter only has a control on the in-game tab, and the two tabs
+    // are a strict partition of isInGameSkill -- a canonical Zero-job value
+    // can never match a row on the unreleased tab. Carrying it across a tab
+    // switch would land the player on an unexplainable empty page with no
+    // visible control to clear it, so switching tabs always drops it.
+    if (next.tab !== tab) next.job = '';
     if (next.q) params.set('q', next.q);
     if (next.job) params.set('job', next.job);
     if (next.type) params.set('type', next.type);
