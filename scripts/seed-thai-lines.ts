@@ -1977,6 +1977,190 @@ const FLAVOUR_TH_6: Record<string, string> = {
     "เครื่องประดับที่ทำเลียนแบบกุหลาบขาวบริสุทธิ์ ขับความงามของผู้สวมอย่างละมุน",
 };
 
+// Batch 4, part 6: the J-to-O range -- spears, masks, medicines and dolls.
+const FLAVOUR_TH_7: Record<string, string> = {
+  "Juice made from Animal Blood favored by monsters. Monster Hunter Fly loves it.":
+    "น้ำที่ทำจาก Animal Blood ซึ่งมอนสเตอร์ชอบ มอนสเตอร์ Hunter Fly ชอบมาก",
+  "Juice of Banana stored in a bottle. Easier to drink and restores better than eating the fruit itself.":
+    "น้ำ Banana บรรจุขวด ดื่มง่ายและฟื้นฟูได้ดีกว่ากินผลสด",
+  "Just a simple stone that you can pick up around anywhere.":
+    "ก้อนหินธรรมดาที่เก็บได้ทั่วไปแทบทุกที่",
+  "Katar shaped from cutting wind, capable of occasionally putting enemies into Sleep.":
+    "กะตาร์ที่ขึ้นรูปจากลมเฉือน มีบ้างที่ทำให้ศัตรูติด Sleep ได้",
+  "Key that can open a certain door within the Clock Tower.":
+    "กุญแจที่เปิดประตูบานหนึ่งใน Clock Tower ได้",
+  "Key that can open the underground door of the Clock Tower.":
+    "กุญแจที่เปิดประตูชั้นใต้ดินของ Clock Tower ได้",
+  "Large hibiscus flower decoration—found only in Ayothaya.":
+    "เครื่องประดับดอกชบาขนาดใหญ่—พบได้เฉพาะใน Ayothaya",
+  "Large Leaf that looks as though it could be worn on the head during rain.":
+    "Large Leaf ที่ดูเหมือนจะเอามาสวมหัวกันฝนได้",
+  "Large one-handed spear with a long shaft and an added scythe-like weapon, allowing a wide variety of attack patterns.":
+    "หอกมือเดียวขนาดใหญ่ที่ด้ามยาวและติดอาวุธคล้ายเคียวเพิ่มเข้ามา ทำให้โจมตีได้หลากหลายรูปแบบ",
+  "Large rat claw, likely covered in countless germs.":
+    "กรงเล็บหนูขนาดใหญ่ ที่คงเต็มไปด้วยเชื้อโรคนับไม่ถ้วน",
+  "Large towel made from cool material to block excessive sunlight and heat.":
+    "ผ้าขนหนูผืนใหญ่ที่ทำจากวัสดุเย็นสบายเพื่อกันแดดจ้าและความร้อน",
+  "Large two-handed sword with a thick blade, designed for both offense and defense.":
+    "ดาบสองมือขนาดใหญ่ใบหนา ออกแบบมาเพื่อทั้งบุกและรับ",
+  "Leaf shimmering with razor-sharp blue light. Getting cut by it hurts terribly.":
+    "ใบไม้ที่วาววับด้วยแสงสีน้ำเงินคมกริบ โดนบาดเข้าไปเจ็บมาก",
+  "Legendary hat made for people who avoid others. When worn, people around the wearer somehow start to keep their distance. Rumor says wearing this hat on a date will get you kicked out on the spot.":
+    "หมวกในตำนานที่ทำมาเพื่อคนที่หลบเลี่ยงผู้อื่น พอสวมแล้วคนรอบข้างก็เริ่มถอยห่างอย่างบอกไม่ถูก ลือกันว่าสวมหมวกนี้ไปเดตแล้วจะโดนไล่กลับทันที",
+  "Legendary plant said to shine more brilliantly than anything else in the deep night. It blooms alone in remote forests, glowing brightly. Some say heaven can be seen within its light, but once the flower is plucked, the glow vanishes forever.":
+    "พืชในตำนานที่ว่ากันว่าเปล่งประกายเจิดจ้ากว่าสิ่งใดในยามดึก มันบานอยู่เดียวดายในป่าลึกและส่องแสงสว่างไสว บางคนว่าเห็นสรวงสวรรค์ได้ในแสงนั้น แต่พอเด็ดดอกมา แสงก็ดับไปตลอดกาล",
+  "Lethal weapon forged through ancient techniques, capable of bewildering enemies with its diverse movements.":
+    "อาวุธสังหารที่ตีขึ้นด้วยเทคนิคโบราณ ทำให้ศัตรูสับสนได้ด้วยลีลาที่หลากหลาย",
+  "Light cloth hood worn to protect the head and shoulders.":
+    "ฮู้ดผ้าบางที่สวมเพื่อปกป้องศีรษะและไหล่",
+  "Light garment made of pure cotton. Worn together with Triangle Panties, it feels so light it is as if you could float away.":
+    "อาภรณ์บางเบาที่ทำจากฝ้ายแท้ สวมคู่กับ Triangle Panties แล้วเบาจนรู้สึกเหมือนจะลอยได้",
+  "Light to the point of feeling empty when eaten, often used for dieting by women. Said to have almost no nutritional value?":
+    "เบาจนกินแล้วรู้สึกโหวง ผู้หญิงมักใช้ลดน้ำหนัก ว่ากันว่าแทบไม่มีคุณค่าทางอาหารเลย?",
+  "Light wooden pants roughly put together. In hot regions they are light and help prevent sweating.":
+    "กางเกงไม้เบาที่ประกอบขึ้นอย่างหยาบ ๆ ในเขตร้อนมันเบาและช่วยไม่ให้เหงื่อออก",
+  "Light, inflated summer ball in bright colors—perfect for playing on the beach.":
+    "ลูกบอลฤดูร้อนเป่าลม เบาและสีสดใส—เหมาะกับการเล่นที่ชายหาด",
+  "Light, short staff designed to keep movement light and agile.":
+    "คทาสั้นน้ำหนักเบาที่ออกแบบให้เคลื่อนไหวเบาและคล่องแคล่ว",
+  "Lightweight and cute at a glance.":
+    "น้ำหนักเบาและมองแวบเดียวก็น่ารัก",
+  "Long cloth neatly rolled and tied into a pretty bow shape, usually for women; when worn by men, it can cause misunderstandings unless they are quite boyish.":
+    "ผ้าผืนยาวที่ม้วนเรียบร้อยแล้วผูกเป็นโบว์สวย ปกติเป็นของผู้หญิง ถ้าผู้ชายสวมก็อาจทำให้เข้าใจผิดได้ เว้นแต่จะดูห้าวพอ",
+  "Long coat that reaches below the knees, offering some protection against the cold—though it might be a bit much to wear in the summer…":
+    "เสื้อโค้ตยาวคลุมใต้เข่า กันหนาวได้อยู่บ้าง—แม้จะดูเกินไปหน่อยถ้าใส่ในหน้าร้อน…",
+  "Long one-handed spear said to have been used by infantry.":
+    "หอกมือเดียวขนาดยาวที่ว่ากันว่าทหารราบเคยใช้",
+  "Long pipe used to smoke Cigarette; this act is called smoking, known to cause various diseases, so those who are not adults must never smoke it.":
+    "กล้องยาวที่ใช้สูบ Cigarette การกระทำนี้เรียกว่าการสูบบุหรี่ ซึ่งรู้กันว่าก่อโรคหลายอย่าง ผู้ที่ยังไม่บรรลุนิติภาวะห้ามสูบเด็ดขาด",
+  "Long spear used for mounted charges.":
+    "หอกยาวที่ใช้พุ่งเข้าใส่บนหลังสัตว์",
+  "Long white dress worn by women at weddings. It is no exaggeration to say that almost every woman dreams of the day she gets to wear it.":
+    "ชุดขาวยาวที่ผู้หญิงสวมในงานแต่งงาน พูดได้ไม่เกินจริงว่าผู้หญิงเกือบทุกคนฝันถึงวันที่จะได้สวมมัน",
+  "Long-hafted mace that keeps enemies uneasy even when they think they are far enough away.":
+    "กระบองด้ามยาวที่ทำให้ศัตรูไม่สบายใจ แม้จะคิดว่าถอยห่างพอแล้วก็ตาม",
+  "Long, slender thrusting sword.":
+    "ดาบแทงเรียวยาว",
+  "Looks delicious, but sadly, it’s only a costume item and cannot be eaten.":
+    "ดูน่ากิน แต่น่าเสียดายที่มันเป็นแค่ไอเทมคอสตูมและกินไม่ได้",
+  "Looks like a rabbit pet you can perch on your head. It looks very soft.":
+    "ดูเหมือนกระต่ายเลี้ยงที่วางไว้บนหัวได้ ดูนุ่มมาก",
+  "Lustrous, well-brushed hair cut from a virgin.":
+    "เส้นผมเงางามที่หวีเรียบร้อย ตัดมาจากหญิงพรหมจรรย์",
+  "Mace fitted with a blade, greatly amplifying its destructive power.":
+    "กระบองที่ติดใบมีด เพิ่มอานุภาพทำลายขึ้นอย่างมาก",
+  "Made from the peeled hide of a black bear. It looks warm, but it surely smells terrible.":
+    "ทำจากหนังหมีดำที่ลอกมา ดูอบอุ่นดี แต่คงเหม็นแน่ ๆ",
+  "Magic book used by magicians, large and thick enough to be used as a shield.":
+    "หนังสือเวทที่นักเวทใช้ ใหญ่และหนาพอจะใช้เป็นโล่ได้",
+  "Magic staff retaining fragments of ancient arcane knowledge,":
+    "คทาเวทที่ยังคงเศษเสี้ยวของวิชาเวทโบราณไว้",
+  "Magical Arrow imbued with the power of wind.":
+    "Magical Arrow ที่อาบด้วยพลังแห่งลม",
+  "Magical wooden core powering Wooden Golems.":
+    "แกนไม้เวทที่ให้พลังแก่ Wooden Golem",
+  "Magically enchanted Everlasting Rose. Only a few are ever made, making it extremely expensive, but as a symbol of unfading eternal love, it is highly sought after by young men.":
+    "Everlasting Rose ที่ร่ายเวทไว้ ทำขึ้นได้เพียงไม่กี่ดอกจึงแพงมาก แต่ในฐานะสัญลักษณ์ของรักนิรันดร์ที่ไม่โรยรา ชายหนุ่มต่างเสาะหากันมาก",
+  "Magician Hat that looks like a rabbit might jump out the moment you reach inside. Fairly sturdy and not easily broken.":
+    "Magician Hat ที่ดูเหมือนพอล้วงมือลงไปก็จะมีกระต่ายกระโดดออกมา ค่อนข้างแข็งแรงและไม่แตกง่าย",
+  "Makes a charming gift as well.":
+    "ใช้เป็นของขวัญก็น่ารักดี",
+  "Mask marked with a bold X; looks like something often worn during mass protests to press collective demands.":
+    "หน้ากากที่มีเครื่องหมาย X ตัวหนา ดูเหมือนของที่มักใส่กันในการชุมนุมประท้วงเพื่อเรียกร้องข้อเสนอร่วมกัน",
+  "Mask modeled after Whisper, as if wearing a Whisper face pack.":
+    "หน้ากากที่ทำเลียนแบบ Whisper ราวกับกำลังแปะมาสก์หน้า Whisper อยู่",
+  "Mask of a bandaged zombie — perfect for having fun during the Halloween festival.":
+    "หน้ากากซอมบี้พันผ้าพันแผล — เหมาะกับการสนุกในเทศกาล Halloween",
+  "Mask perfect for when something is so annoying or unfunny that it just makes you sick of it. That is pretty much its only purpose.":
+    "หน้ากากที่เหมาะกับตอนที่อะไรบางอย่างน่ารำคาญหรือไม่ตลกจนเบื่อหน่าย ประโยชน์ของมันก็มีแค่นั้นแหละ",
+  "Mask shaped like a wide smile. When someone wears it, no one can tell what kind of expression they are making underneath.":
+    "หน้ากากทรงยิ้มกว้าง พอมีคนสวม ก็ไม่มีใครรู้ว่าข้างใต้ทำสีหน้าแบบไหนอยู่",
+  "Mask that conveys the firm resolve befitting Goblin leaders. Still, in the end, it is just Goblin.":
+    "หน้ากากที่สื่อถึงความมุ่งมั่นเด็ดเดี่ยวอันสมกับหัวหน้า Goblin ถึงอย่างนั้น สุดท้ายมันก็แค่ Goblin",
+  "Mask with a wide-eyed, round expression. Try wearing it when something truly surprising happens.":
+    "หน้ากากที่ทำตาโตกลมด้วยความประหลาดใจ ลองสวมตอนเจอเรื่องน่าตกใจจริง ๆ ดู",
+  "Mask with eyes wide open in round surprise. Fun to wear whenever something truly astonishing happens.":
+    "หน้ากากที่เบิกตากลมโตด้วยความประหลาดใจ สวมตอนเจอเรื่องน่าทึ่งจริง ๆ แล้วสนุกดี",
+  "Mask worn by Goblins, crudely made and said to draw finger-pointing from those who see it.":
+    "หน้ากากที่ Goblin สวม ทำอย่างหยาบ ๆ และว่ากันว่าใครเห็นก็ต้องชี้นิ้ว",
+  "Massive axe whose enormous blade can make foes lose their will to fight before the battle even begins.":
+    "ขวานมหึมาที่ใบขนาดใหญ่ของมันทำให้ศัตรูหมดใจสู้ตั้งแต่ยังไม่เริ่มรบ",
+  "Massive hammer delivering overwhelming downward force.":
+    "ค้อนมหึมาที่ส่งแรงกดลงมาอย่างท่วมท้น",
+  "Massive mace whose ferocity belies its name, striking fear into anyone who sees it despite being called the morning star.":
+    "กระบองมหึมาที่ความดุร้ายสวนทางกับชื่อ ใครเห็นก็หวาดกลัว ทั้งที่เรียกกันว่าดาวประจำรุ่ง",
+  "Massive ribbon overwhelming in size; on women it further emphasizes cuteness and beauty, but when worn by men… words fail.":
+    "ริบบิ้นมหึมาที่ขนาดท่วมท้น บนตัวผู้หญิงยิ่งขับความน่ารักและความงาม แต่ถ้าผู้ชายสวม… ก็ไม่รู้จะพูดยังไง",
+  "Massive two-handed sword that overwhelms foes with sheer weight and swing speed.":
+    "ดาบสองมือมหึมาที่ข่มศัตรูด้วยน้ำหนักล้วน ๆ และความเร็วในการเหวี่ยง",
+  "Massive two-handed sword with a blade that looks capable of smashing anything in its path.":
+    "ดาบสองมือมหึมาที่ใบดูเหมือนจะทุบทุกอย่างที่ขวางหน้าให้แหลกได้",
+  "Medicine made mainly from a plant called Ment. Eases pain for a certain time, so it is also used as an analgesic.":
+    "ยาที่ทำจากพืชชื่อ Ment เป็นหลัก บรรเทาความเจ็บปวดได้ระยะหนึ่ง จึงใช้เป็นยาแก้ปวดด้วย",
+  "Men’s suit that combines ease of movement with a stylish look.":
+    "สูทผู้ชายที่รวมความคล่องตัวเข้ากับลุคที่ดูดี",
+  "Mermaid Headphones":
+    "Mermaid Headphones",
+  "Milk prepared in a baby-friendly bottle.":
+    "นมที่เตรียมไว้ในขวดสำหรับเด็กทารก",
+  "Mineral-shaped mass formed when magical energy condenses within a living body, faintly radiating power.":
+    "ก้อนทรงแร่ที่เกิดขึ้นเมื่อพลังเวทควบแน่นอยู่ในร่างสิ่งมีชีวิต แผ่พลังออกมาจาง ๆ",
+  "Mini silk hat costume adorned with angel wings.":
+    "หมวกไหมใบจิ๋วแบบคอสตูมที่ประดับปีกเทวดา",
+  "Monsters drop a certain amount of Zeny with a fixed probability.":
+    "มอนสเตอร์มีโอกาสคงที่ที่จะดรอป Zeny จำนวนหนึ่ง",
+  "Most delicious part of Savage.":
+    "ส่วนที่อร่อยที่สุดของ Savage",
+  "Most standard form of one-handed spear.":
+    "หอกมือเดียวรูปแบบมาตรฐานที่สุด",
+  "Mother who met an unfortunate end. Her memory remains vividly, giving an ominous feeling.":
+    "มารดาที่จบชีวิตลงอย่างน่าเศร้า ความทรงจำของนางยังคงชัดเจนและให้ความรู้สึกเป็นลางร้าย",
+  "Multi-purpose dagger created with practicality as its main focus.":
+    "กริชอเนกประสงค์ที่สร้างขึ้นโดยเน้นการใช้งานจริงเป็นหลัก",
+  "Multi-purpose dagger said to have been used by the army of an ancient kingdom, slightly long for a typical dagger.":
+    "กริชอเนกประสงค์ที่ว่ากันว่ากองทัพของอาณาจักรโบราณเคยใช้ ยาวกว่ากริชทั่วไปเล็กน้อย",
+  "Muscular and fatty clam tissue that can be cooked in all sorts of ways.":
+    "เนื้อหอยที่ทั้งเหนียวและมัน นำไปปรุงได้สารพัดวิธี",
+  "Mysterious earring that, once worn, surrounds the wearer with clarity and helps maintain a clear mind.":
+    "ต่างหูลึกลับที่พอสวมแล้วจะโอบล้อมผู้สวมด้วยความแจ่มใสและช่วยให้จิตใจปลอดโปร่ง",
+  "Mysterious hat said to push the wearer’s mental strength to its limits, allowing more frequent spellcasting, though its mobility is something best left unmentioned.":
+    "หมวกลึกลับที่ว่ากันว่าดันกำลังใจของผู้สวมไปจนสุดขีด ทำให้ร่ายเวทได้ถี่ขึ้น แม้เรื่องความคล่องตัวจะไม่พูดถึงดีกว่า",
+  "Mysterious medicine that cures various Status Ailment (Poison, Curse, Silence, Confusion, Blind, Hallucination).":
+    "ยาลึกลับที่รักษาสถานะผิดปกติได้หลายอย่าง (Poison, Curse, Silence, Confusion, Blind, Hallucination)",
+  "Mysterious necklace that, once worn around the neck, wraps the body in reassurance and makes the wearer feel stronger without even noticing.":
+    "สร้อยคอลึกลับที่พอคล้องคอแล้วจะโอบร่างกายด้วยความอุ่นใจ และทำให้ผู้สวมรู้สึกแข็งแกร่งขึ้นโดยไม่ทันรู้ตัว",
+  "Mystical plant said to sing sorrowful songs alone on bright moonlit nights. Legend tells of a woman who waited endlessly for a departed lover, eventually turning into this plant.":
+    "พืชลึกลับที่ว่ากันว่าร้องเพลงเศร้าอยู่ลำพังในคืนเดือนหงาย ตำนานเล่าถึงหญิงสาวที่เฝ้ารอคนรักซึ่งจากไปอย่างไม่มีที่สิ้นสุด จนสุดท้ายกลายเป็นพืชชนิดนี้",
+  "Nameless flower with neither fragrance nor thorns.":
+    "ดอกไม้ไร้ชื่อที่ไม่มีทั้งกลิ่นและหนาม",
+  "Necklace once worn around the neck of the monster Matyr. Some say Matyr’s swift abilities come from this very necklace.":
+    "สร้อยคอที่เคยคล้องคอมอนสเตอร์ Matyr บางคนว่าความว่องไวของ Matyr มาจากสร้อยเส้นนี้เอง",
+  "Necktie worn on the head.":
+    "เนกไทที่เอามาสวมบนหัว",
+  "Never becomes damaged.":
+    "ไม่มีวันเสียหาย",
+  "Newly sprouted young plant. Fresh and pure in appearance.":
+    "ต้นอ่อนที่เพิ่งงอก ดูสดใสบริสุทธิ์",
+  "Not just an ordinary fried egg.":
+    "ไม่ใช่แค่ไข่ดาวธรรมดา",
+  "Notebook that seems as though it once held cards. Its worn pages give off a mysterious aura.":
+    "สมุดที่ดูเหมือนเคยเก็บการ์ดไว้ หน้ากระดาษที่สึกกร่อนแผ่ออร่าลึกลับ",
+  "Occasionally curses the wielder.":
+    "บางครั้งก็สาปผู้ถือ",
+  "Old broom passed down through generations. Monster Dokebi loves it.":
+    "ไม้กวาดเก่าที่สืบทอดกันมาหลายชั่วคน มอนสเตอร์ Dokebi ชอบมาก",
+  "Old Treasure Chest filled with ancient coins, ornaments, and jewels.":
+    "Old Treasure Chest ที่เต็มไปด้วยเหรียญ เครื่องประดับ และอัญมณีโบราณ",
+  "Old, dirty bandage that's so soiled, it's almost worthless.":
+    "ผ้าพันแผลเก่าสกปรกที่เปื้อนจนแทบไม่มีค่า",
+  "Once a Honey Jar filled with honey, now completely emptied—someone must have eaten it all.":
+    "เคยเป็น Honey Jar ที่เต็มไปด้วยน้ำผึ้ง ตอนนี้ว่างเปล่าสนิท—คงมีใครกินไปหมดแล้ว",
+  "Once symbol of Pharaoh, now shattered and barely able to exert any of its former power…":
+    "เคยเป็นสัญลักษณ์ของฟาโรห์ ตอนนี้แตกหักและแทบไม่เหลือพลังเดิมให้ใช้แล้ว…",
+  "One of the legendary weapons. Its sharpness, born of a vacuum blade, is beyond words.":
+    "หนึ่งในอาวุธระดับตำนาน ความคมที่เกิดจากใบมีดสุญญากาศของมันนั้นเกินคำบรรยาย",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -1989,6 +2173,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH_4, 'flavour'],
   [FLAVOUR_TH_5, 'flavour'],
   [FLAVOUR_TH_6, 'flavour'],
+  [FLAVOUR_TH_7, 'flavour'],
 ];
 
 async function main(): Promise<void> {
