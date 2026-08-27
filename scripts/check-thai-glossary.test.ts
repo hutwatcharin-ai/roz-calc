@@ -102,11 +102,16 @@ describe('checkTranslation — terms that must stay English', () => {
     expect(issues.some((i) => i.rule === 'must-stay-english' && i.detail.includes('Weapon'))).toBe(true);
   });
 
-  it('does not read an equip slot inside a bare label name', () => {
+  it('needs to be told a bare string is a label name', () => {
     // The term row itself, not the composed line: `Weapon Level` is stored and
-    // translated as one term, so there is no colon to separate name from value.
-    const issues = checkTranslation('Weapon Level', 'ระดับอาวุธ');
-    expect(issues.filter((i) => i.rule === 'must-stay-english')).toHaveLength(0);
+    // translated as one term, so there is no colon to separate name from value
+    // and the caller has to say which it is. Guessing from the string alone is
+    // what produced the over-reaching heuristic this replaced.
+    const named = checkTranslation('Weapon Level', 'ระดับอาวุธ', { isLabelName: true });
+    expect(named.filter((i) => i.rule === 'must-stay-english')).toHaveLength(0);
+
+    const unnamed = checkTranslation('Weapon Level', 'ระดับอาวุธ');
+    expect(unnamed.filter((i) => i.rule === 'must-stay-english')).toHaveLength(1);
   });
 
   it('accepts an equip slot carried through as the whole value', () => {
@@ -147,5 +152,60 @@ describe('checkTranslation — numbers, anchored to glossary terms', () => {
     const mismatches = issues.filter((i) => i.rule === 'number-mismatch');
     expect(mismatches).toHaveLength(2); // one per stat that lost its number
     expect(mismatches.every((i) => /ATK|DEF/.test(i.detail))).toBe(true);
+  });
+
+  it('still catches an equip slot translated away inside prose', () => {
+    // The corpus batch 2 writes is prose. An earlier fix exempted an equip slot
+    // whenever an English word sat beside it, which is almost always in prose,
+    // and silenced the rule across 186 live occurrences.
+    expect(checkTranslation('Armor is never destroyed.', 'เกราะไม่มีวันแตก')).toContainEqual(
+      expect.objectContaining({ rule: 'must-stay-english', detail: 'missing term: Armor' }),
+    );
+    expect(
+      checkTranslation('Shield forged from solid steel.', 'โล่หลอมจากเหล็กกล้า'),
+    ).toContainEqual(expect.objectContaining({ detail: 'missing term: Shield' }));
+  });
+
+  it('catches an equip slot translated away inside a multi-word value', () => {
+    expect(
+      checkTranslation('Type : Two-handed Weapon', 'ประเภท : อาวุธสองมือ'),
+    ).toContainEqual(expect.objectContaining({ detail: 'missing term: Weapon' }));
+  });
+
+  it('leaves an equip slot alone when it is part of a label NAME', () => {
+    // `Weapon Level : 4` reads 155 times. Batch 1 translates label names on
+    // purpose, so the word on the left of the colon is not the equip slot.
+    expect(checkTranslation('Weapon Level : 4', 'ระดับอาวุธ : 4')).toEqual([]);
+    expect(checkTranslation('Weapon Level', 'ระดับอาวุธ', { isLabelName: true })).toEqual([]);
+  });
+
+  it('reads a decimal as one number', () => {
+    // Bare `\d+` splits `0.1` into `0` and `1`, so a flipped decimal compares
+    // equal. Ten live lines carry `Weight : 0.1`.
+    expect(checkTranslation('Weight : 0.1', 'น้ำหนัก : 1.0')).toContainEqual(
+      expect.objectContaining({ rule: 'number-mismatch' }),
+    );
+    expect(checkTranslation('Weight : 0.1', 'น้ำหนัก : 0.1')).toEqual([]);
+  });
+
+  it('reads a thousands separator as the same number without it', () => {
+    expect(checkTranslation('Weight : 1,000', 'น้ำหนัก : 1000')).toEqual([]);
+  });
+
+  it('catches a transposition with a Thai word between the stat and its number', () => {
+    // `ATK เพิ่ม +3` is the natural Thai rendering, so an anchor that only looks
+    // at the character immediately before the number never fires on real text.
+    expect(
+      checkTranslation('ATK +5, DEF +3', 'ATK เพิ่ม +3 และ DEF เพิ่ม +5'),
+    ).toContainEqual(expect.objectContaining({ rule: 'number-mismatch' }));
+    expect(checkTranslation('ATK +5, DEF +3', 'DEF เพิ่ม +3 และ ATK เพิ่ม +5')).toEqual([]);
+  });
+
+  it('does not report a line twice when a term is missing from the translation', () => {
+    // The anchored pass skips a term the translation dropped: `must-stay-english`
+    // already says so, and a second number-mismatch on the same line would train
+    // the reader to skim.
+    const issues = checkTranslation('ATK +5.', 'พลังโจมตี +5');
+    expect(issues.map((i) => i.rule)).toEqual(['must-stay-english']);
   });
 });

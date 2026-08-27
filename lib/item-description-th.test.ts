@@ -148,7 +148,7 @@ describe('composeThaiDescription', () => {
     expect(stat.thai).not.toBe(stat.source);
   });
 
-  it('falls back to the whole-line dictionary for an unseeded label term', () => {
+  it('uses the whole-line dictionary for a label term that has no row at all', () => {
     // Three real prose sentences classify as labels, plus 144 lines across 107
     // phrase-shaped stat names. Batch 2 translates those whole; without this
     // fallback the row would exist and the page would still show English.
@@ -193,11 +193,27 @@ describe('composeThaiDescription', () => {
     // A NULL row says "deliberately English". A stored whole line says
     // "translated, and here it is". The second is a later, more specific
     // decision and must not be overruled by the first.
+    //
+    // The fixture keeps `Weight`, not a stat abbreviation: `ATK : 100` ->
+    // `พลังโจมตี : 100` is a row the branch's own glossary checker rejects, and
+    // a test should not assert desired behaviour with input that could never
+    // legitimately be stored.
     const both: ThaiDictionaries = {
-      lines: new Map([['ATK : 100', 'พลังโจมตี : 100']]),
-      terms: new Map<string, string | null>([['ATK', null]]),
+      lines: new Map([['Weight : 60', 'หนัก 60 หน่วย']]),
+      terms: new Map<string, string | null>([['Weight', null]]),
     };
-    expect(composeThaiDescription('ATK : 100', both)[0].thai).toBe('พลังโจมตี : 100');
+    expect(composeThaiDescription('Weight : 60', both)[0].thai).toBe('หนัก 60 หน่วย');
+  });
+
+  it('treats a blank whole-line row as absent and still composes from the term', () => {
+    // Migration 0009 rejects a blank at the database, but compose is the second
+    // layer: a blank that predates it must not blank out the line, and it must
+    // not shadow a perfectly good term translation either.
+    const blankLine: ThaiDictionaries = {
+      lines: new Map([['Weight : 60', '   ']]),
+      terms: new Map<string, string | null>([['Weight', 'น้ำหนัก']]),
+    };
+    expect(composeThaiDescription('Weight : 60', blankLine)[0].thai).toBe('น้ำหนัก : 60');
   });
 
   it('keeps one entry per source line, in order', () => {

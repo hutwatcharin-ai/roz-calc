@@ -37,6 +37,12 @@ export const MUST_STAY_ENGLISH: readonly string[] = [
   'Brute', 'Demi-Human', 'Demon', 'Formless', 'Insect', 'Plant', 'Fish', 'Dragon', 'Angel',
   // equip slots
   'Armor', 'Weapon', 'Shield', 'Garment', 'Shoes', 'Accessory', 'Headgear',
+  // Terms the seed marks NULL -- "considered, deliberately English". A batch-2
+  // whole-line row now outranks a term row (see lib/item-description-th.ts), so
+  // without these three a line translating them into Thai would render with no
+  // complaint. `Flee` is spelled both ways in the data and the match is
+  // case-sensitive, so both spellings are listed.
+  'Cooldown', 'Critical', 'Flee',
   // frequently referenced NPC
   'Collector',
 ];
@@ -45,6 +51,12 @@ export const MUST_STAY_ENGLISH: readonly string[] = [
 // inside a longer LABEL NAME -- `Weapon Level : N` reads 155 times in the live
 // data. Translating a label name is exactly what batch 1 does, so these terms
 // are looked for only on the value side of a label, never in its name.
+//
+// Scoping to the value is the whole fix. An earlier attempt exempted the term
+// whenever an English word sat beside it, which is almost always in prose, and
+// silenced the rule across 186 live occurrences -- `Armor is never destroyed.`,
+// `Shield forged from solid steel`, every `Armor gains Fire-Property property.`
+// Prose is exactly what batch 2 writes. 155 false positives were not worth that.
 const EQUIP_SLOTS: ReadonlySet<string> = new Set([
   'Armor', 'Weapon', 'Shield', 'Garment', 'Shoes', 'Accessory', 'Headgear',
 ]);
@@ -69,10 +81,21 @@ function escapeRegExp(s: string): string {
 //
 // Both comparisons stay order-insensitive, because Thai word order legitimately
 // moves a whole clause -- `DEF +3 และ ATK +5` keeps every number with its stat.
-const NUMBER = /([+-]?)\s*(\d+)\s*(%?)/g;
+// Digits may carry thousands separators and a decimal part. Matching bare
+// `\d+` splits `0.1` into two tokens, so `Weight : 0.1` and `น้ำหนัก : 1.0`
+// compare equal -- and ten live lines carry a decimal weight.
+const NUMBER = /([+-]?)\s*(\d+(?:,\d{3})*(?:\.\d+)?)\s*(%?)/g;
 
+function normaliseDigits(digits: string): string {
+  return digits.replace(/,/g, '');
+}
+
+// Thai puts a verb between the stat and its number -- `ATK เพิ่ม +3` is the
+// natural rendering, not a contrived one -- so the anchor has to look past any
+// run of non-Latin text. The strip stops at the first Latin letter or digit, so
+// `ATK +5 และ +3` still anchors nothing to ATK for the second number.
 function anchorBefore(text: string, index: number): string {
-  const before = text.slice(0, index).replace(/\s+$/, '');
+  const before = text.slice(0, index).replace(/[^A-Za-z0-9]+$/, '');
   let best = '';
   for (const term of MUST_STAY_ENGLISH) {
     if (term.length <= best.length || !before.endsWith(term)) continue;
@@ -89,7 +112,7 @@ export function numberTokens(text: string): string[] {
   const tokens: string[] = [];
   for (const m of text.matchAll(NUMBER)) {
     const [, sign, digits, percent] = m;
-    tokens.push(`${sign}${digits}${percent}`);
+    tokens.push(`${sign}${normaliseDigits(digits)}${percent}`);
   }
   return tokens.sort();
 }
@@ -102,7 +125,7 @@ function anchoredNumbers(text: string): Map<string, string[]> {
     if (anchor === '') continue;
     const [, sign, digits, percent] = m;
     const list = byTerm.get(anchor) ?? [];
-    list.push(`${sign}${digits}${percent}`);
+    list.push(`${sign}${normaliseDigits(digits)}${percent}`);
     byTerm.set(anchor, list);
   }
   for (const list of byTerm.values()) list.sort();
@@ -115,25 +138,29 @@ function containsTerm(text: string, term: string): boolean {
   return new RegExp(`(^|[^A-Za-z])${escapeRegExp(term)}([^A-Za-z]|$)`).test(text);
 }
 
-// An equip slot is a VALUE ("Equipped on : Armor", "Type : Weapon"), and it is
-// only the equip slot when it stands on its own. `Weapon Level` is a label
-// NAME that happens to start with the word, and batch 1 translates label names
-// on purpose -- so a whole-word match flags all 155 `Weapon Level : N` lines
-// and the term row behind them. Standing alone means not glued to another
-// English word by a single space or hyphen.
-function containsStandaloneTerm(text: string, term: string): boolean {
-  const pattern = new RegExp(`(^|[^A-Za-z])${escapeRegExp(term)}([^A-Za-z]|$)`, 'g');
-  for (const match of text.matchAll(pattern)) {
-    const start = (match.index ?? 0) + match[1].length;
-    const end = start + term.length;
-    if (/[A-Za-z][ -]$/.test(text.slice(0, start))) continue;
-    if (/^[ -][A-Za-z]/.test(text.slice(end))) continue;
-    return true;
-  }
-  return false;
+// The part of a line an equip slot can legitimately appear in: the value of a
+// `Name : Value` line, or the whole thing when there is no label. A label NAME
+// is the one place batch 1 deliberately renders these words in Thai.
+const LABEL_VALUE = /^[^:]+\s:\s(.+)$/;
+
+function valueSide(text: string): string {
+  return LABEL_VALUE.exec(text)?.[1] ?? text;
 }
 
-export function checkTranslation(source: string, thai: string): GlossaryIssue[] {
+export interface CheckOptions {
+  /**
+   * The text is a label NAME (`Weapon Level`), not a value or a sentence.
+   * Batch 1 translates label names on purpose, so the equip-slot rule does not
+   * apply to them at all. Term rows of kind `label` pass this; nothing else does.
+   */
+  isLabelName?: boolean;
+}
+
+export function checkTranslation(
+  source: string,
+  thai: string,
+  options: CheckOptions = {},
+): GlossaryIssue[] {
   const issues: GlossaryIssue[] = [];
 
   const srcNums = numberTokens(source);
@@ -155,7 +182,7 @@ export function checkTranslation(source: string, thai: string): GlossaryIssue[] 
     const thaiAnchored = anchoredNumbers(thai);
     for (const [term, srcList] of srcAnchored) {
       const thaiList = thaiAnchored.get(term);
-      if (!thaiList || thaiList.length === 0) continue;
+      if (!thaiList) continue;
       if (srcList.join(',') === thaiList.join(',')) continue;
       issues.push({
         rule: 'number-mismatch',
@@ -169,8 +196,14 @@ export function checkTranslation(source: string, thai: string): GlossaryIssue[] 
   }
 
   for (const term of MUST_STAY_ENGLISH) {
-    const present = EQUIP_SLOTS.has(term) ? containsStandaloneTerm : containsTerm;
-    if (present(source, term) && !present(thai, term)) {
+    let haystackSource = source;
+    let haystackThai = thai;
+    if (EQUIP_SLOTS.has(term)) {
+      if (options.isLabelName) continue;
+      haystackSource = valueSide(source);
+      haystackThai = valueSide(thai);
+    }
+    if (containsTerm(haystackSource, term) && !containsTerm(haystackThai, term)) {
       issues.push({ rule: 'must-stay-english', source, thai, detail: `missing term: ${term}` });
     }
   }
@@ -221,8 +254,13 @@ async function main(): Promise<void> {
   const { data: terms, error: termsError } = await fetchAllRows<{
     source_term: string;
     thai_term: string | null;
+    kind: string;
   }>((from, to) =>
-    db.from('item_description_terms').select('source_term, thai_term').order('source_term').range(from, to),
+    db
+      .from('item_description_terms')
+      .select('source_term, thai_term, kind')
+      .order('source_term')
+      .range(from, to),
   );
   if (termsError) throw new Error(`Failed to read item_description_terms: ${termsError.message}`);
 
@@ -236,7 +274,10 @@ async function main(): Promise<void> {
       continue;
     }
     checked += 1;
-    report(`term "${row.source_term}"`, checkTranslation(row.source_term, row.thai_term));
+    report(
+      `term "${row.source_term}"`,
+      checkTranslation(row.source_term, row.thai_term, { isLabelName: row.kind === 'label' }),
+    );
   }
 
   console.log(

@@ -46,9 +46,9 @@ const LABEL_TH: Record<string, string | null> = {
   //
   // NOTE for batch 2: these three render a Thai opener followed by an
   // untranslated English clause, which is an improvement but not a finished
-  // line. compose() only consults item_description_lines when a term has NO
-  // row, so translating one of these whole means DELETING its row here -- a
-  // whole-line row alone will not override a term that is present.
+  // line. To finish one, put the whole sentence in item_description_lines and
+  // leave this row alone -- compose() gives the line dictionary priority over
+  // the term dictionary, so the whole line wins on its own.
   'During transformation': 'ระหว่างแปลงร่าง',
   'For each level of Faith learned': 'ต่อทุกเลเวลของ Faith ที่เรียนรู้',
   'When worn with Prisoner Uniform': 'เมื่อสวมคู่กับ Prisoner Uniform',
