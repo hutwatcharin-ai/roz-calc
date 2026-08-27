@@ -31,8 +31,10 @@ export default async function MapsPage({
   if (q) {
     // Escape the LIKE metacharacters so a literal % or _ matches itself
     // instead of acting as a wildcard. Backslash is Postgres's default LIKE
-    // escape character, so it must be escaped first or it would consume the
-    // escapes added after it.
+    // escape character, so it is included in the character class too: a
+    // single pass over the original string escapes each character exactly
+    // once, so a backslash the user typed is escaped like any other
+    // metacharacter rather than being read back as an escape itself.
     const needle = q.replace(/[\\%_]/g, (ch) => `\\${ch}`);
     query = query.ilike('search_text', `%${needle}%`);
   }
