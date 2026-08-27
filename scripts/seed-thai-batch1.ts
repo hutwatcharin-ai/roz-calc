@@ -35,6 +35,10 @@ const STAT_TH: Record<string, string | null> = {
   'STR': null, 'AGI': null, 'VIT': null, 'INT': null, 'DEX': null, 'LUK': null,
   'HIT': null, 'FLEE': null, 'CRIT': null, 'ASPD': null,
   'MHP': null, 'MSP': null, 'SP': null, 'HP': null,
+  // Alternate spellings of stats already mapped above, listed separately
+  // because the lookup is exact and the source data is not consistent about
+  // capitalisation or abbreviation.
+  'Flee': null, 'Max HP': null, 'Max SP': null,
   'FLEE Rate': 'อัตรา FLEE',
   'Perfect Dodge': null,
   'Movement Speed': 'ความเร็วเคลื่อนที่',
