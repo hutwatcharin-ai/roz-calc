@@ -81,32 +81,60 @@ async function main() {
     }
   }
 
-  const rows: { source_term: string; thai_term: string | null; kind: string }[] = [];
+  // A term can legitimately appear as both a label and a stat name -- ATK and
+  // DEF are both, in the live data. `source_term` is the primary key, so an
+  // upsert batch containing two rows for the same term makes Postgres refuse
+  // the whole batch ("ON CONFLICT DO UPDATE command cannot affect row a
+  // second time"). Rows are therefore built into a Map keyed by source_term,
+  // not an array, so each term contributes exactly one row.
+  const rowsByTerm = new Map<string, { source_term: string; thai_term: string | null; kind: string }>();
+  const conflicts: string[] = [];
   const unseeded: string[] = [];
   let covered = 0;
+  let merged = 0;
 
-  for (const [term, count] of labels) {
-    if (term in LABEL_TH) {
-      rows.push({ source_term: term, thai_term: LABEL_TH[term], kind: 'label' });
-      covered += count;
-    } else {
-      unseeded.push(`label (${count}x): ${term}`);
+  function addTerm(term: string, count: number, mapping: Record<string, string | null>, kind: string) {
+    if (!(term in mapping)) {
+      unseeded.push(`${kind} (${count}x): ${term}`);
+      return;
+    }
+    covered += count;
+    const thaiTerm = mapping[term];
+    const existing = rowsByTerm.get(term);
+    if (!existing) {
+      // `kind` records where the term was first seen, not an exhaustive
+      // classification -- a term like ATK is genuinely both a label and a
+      // stat name.
+      rowsByTerm.set(term, { source_term: term, thai_term: thaiTerm, kind });
+      return;
+    }
+    merged += 1;
+    if (existing.thai_term !== thaiTerm) {
+      // A term meaning one thing as a label and another as a stat is a real
+      // inconsistency in the mapping, not something to paper over. Silently
+      // keeping whichever came first would hide that behind a working seed,
+      // so this fails loudly instead -- nothing in today's data hits this
+      // path, which is exactly why it must fail if it ever does.
+      conflicts.push(
+        `${term}: ${existing.kind}=${JSON.stringify(existing.thai_term)} vs ${kind}=${JSON.stringify(thaiTerm)}`,
+      );
     }
   }
 
-  for (const [term, count] of stats) {
-    if (term in STAT_TH) {
-      rows.push({ source_term: term, thai_term: STAT_TH[term], kind: 'stat' });
-      covered += count;
-    } else {
-      unseeded.push(`stat (${count}x): ${term}`);
-    }
+  for (const [term, count] of labels) addTerm(term, count, LABEL_TH, 'label');
+  for (const [term, count] of stats) addTerm(term, count, STAT_TH, 'stat');
+
+  if (conflicts.length > 0) {
+    throw new Error(`Conflicting translations between label and stat mappings:\n${conflicts.join('\n')}`);
   }
+
+  const rows = [...rowsByTerm.values()];
 
   const { error } = await db.from('item_description_terms').upsert(rows, { onConflict: 'source_term' });
   if (error) throw new Error(`Failed to seed terms: ${error.message}`);
 
   console.log(`seeded ${rows.length} terms, covering ${covered} lines`);
+  console.log(`merged ${merged} terms that appear as both a label and a stat name`);
   console.log(`not seeded: ${unseeded.length}`);
   for (const u of unseeded.slice(0, 40)) console.log(`  ${u}`);
   if (unseeded.length > 40) console.log(`  ... and ${unseeded.length - 40} more`);
