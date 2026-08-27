@@ -2353,6 +2353,180 @@ const FLAVOUR_TH_8: Record<string, string> = {
     "กริชสั้นที่ใบมีดโค้งเล็กน้อย",
 };
 
+// Batch 4, part 8: the S-to-T range.
+const FLAVOUR_TH_9: Record<string, string> = {
+  "showing remarkable performance.":
+    "แสดงประสิทธิภาพอันโดดเด่น",
+  "Showy wig appealing to those who want a unique look. Its three bright colors easily draw everyone’s attention.":
+    "วิกหวือหวาที่ถูกใจคนอยากดูไม่เหมือนใคร สามสีสดของมันเรียกสายตาทุกคนได้ง่าย ๆ",
+  "Signboard engraved with the enigmatic word “STOP.”":
+    "ป้ายที่สลักคำปริศนาว่า “STOP”",
+  "Silver dagger symbolizing purity. Monster Sohee loves it.":
+    "กริชเงินที่เป็นสัญลักษณ์ของความบริสุทธิ์ มอนสเตอร์ Sohee ชอบมาก",
+  "Silver ring whose clear silvery-gray shine, unlike gold, is more than enough to capture the eye of anyone who sees it.":
+    "แหวนเงินที่ประกายเทาเงินใสของมัน ต่างจากทอง แต่ก็มากพอจะดึงสายตาใครก็ตามที่เห็น",
+  "Simple hat with a wide brim designed to block sunlight.":
+    "หมวกเรียบง่ายปีกกว้างที่ออกแบบมากันแดด",
+  "Simple jacket made from inexpensive leather.":
+    "แจ็กเก็ตเรียบง่ายที่ทำจากหนังราคาไม่แพง",
+  "Simple yet practical outerwear commonly worn by clergy.":
+    "เสื้อคลุมนอกที่เรียบง่ายแต่ใช้งานได้จริง นักบวชนิยมสวม",
+  "Single strand of Leaf held in the mouth; may make the wearer feel like a wanderer drifting with the wind.":
+    "Leaf เส้นเดียวที่คาบไว้ในปาก อาจทำให้ผู้สวมรู้สึกเหมือนคนพเนจรที่ล่องลอยไปกับสายลม",
+  "Skin cut from the neck of a lizard.":
+    "หนังที่ตัดมาจากคอกิ้งก่า",
+  "Skin from a larva that has been shed or peeled off.":
+    "คราบจากตัวอ่อนที่ลอกหรือปลิ้นออกมา",
+  "Skin shedded from an insect.":
+    "คราบที่ลอกออกมาจากแมลง",
+  "Skull of the dead.":
+    "กะโหลกของผู้ตาย",
+  "Sleeveless long coat with a stylish silhouette.":
+    "เสื้อโค้ตยาวแขนกุดที่ทรงดูดี",
+  "Slender vine used by plants to cling to objects as they grow upward.":
+    "เถาเรียวที่พืชใช้เกาะสิ่งของขณะเลื้อยขึ้นสูง",
+  "Slice of a large cake. Soft cream melts gently in the mouth. Restores stamina when eaten.":
+    "เค้กก้อนใหญ่ชิ้นหนึ่ง ครีมนุ่มละลายในปากอย่างละมุน กินแล้วฟื้นกำลัง",
+  "Small and cute yet stylish in its own way, looking good on any gender.":
+    "เล็กและน่ารัก แต่ก็มีสไตล์ในแบบของมัน เข้ากับทุกเพศ",
+  "Small enough to sit comfortably on the shoulder.":
+    "เล็กพอจะเกาะบนไหล่ได้อย่างสบาย",
+  "Small glass bead often used as a toy by mischievous children.":
+    "ลูกแก้วเม็ดเล็กที่เด็กซนมักเอาไปเล่น",
+  "Small jeweled circlet worn on the head.":
+    "circlet เม็ดเล็กประดับอัญมณีที่สวมบนศีรษะ",
+  "Small mustache reminiscent of a very famous black-and-white TV character, neatly trimmed.":
+    "หนวดเล็กที่ชวนให้นึกถึงตัวละครทีวีขาวดำชื่อดังมาก เล็มไว้เรียบร้อย",
+  "Small pair of red ribbons that serves as a charming accent, making young girls look even cuter.":
+    "ริบบิ้นแดงคู่เล็ก ๆ ที่เป็นจุดเด่นน่ารัก ทำให้เด็กหญิงดูน่ารักยิ่งขึ้น",
+  "Small sprout-shaped hat in a fresh green color.":
+    "หมวกทรงต้นอ่อนใบเล็กสีเขียวสดชื่น",
+  "Small, cute Headband modeled after cat ears.":
+    "Headband เล็กน่ารักที่ทำเลียนแบบหูแมว",
+  "Small, cute star-shaped hairpin that lets the wearer show off a lively charm.":
+    "กิ๊บติดผมทรงดาวเล็กน่ารักที่ช่วยให้ผู้สวมอวดเสน่ห์สดใสได้",
+  "Smooth, glossy paper that seems perfect for writing on. It feels very nice and seems quite high-quality. Perfect for a love letter...":
+    "กระดาษเรียบเงาที่ดูเหมาะกับการเขียนมาก สัมผัสดีและดูคุณภาพสูงทีเดียว เหมาะกับจดหมายรัก...",
+  "So slippery that stepping on a blob dropped on the floor is extremely dangerous.":
+    "ลื่นมากจนเหยียบก้อนที่หล่นอยู่บนพื้นแล้วอันตรายสุด ๆ",
+  "Soft cloth placed under a baby's chin to keep milk or drool from staining clothing.":
+    "ผ้านุ่มที่รองใต้คางทารกไม่ให้นมหรือน้ำลายเปื้อนเสื้อผ้า",
+  "Soft mold powder.":
+    "ผงเชื้อราเนื้อนุ่ม",
+  "Soft white yarn wound into a round ball.":
+    "ไหมพรมสีขาวเนื้อนุ่มที่พันเป็นก้อนกลม",
+  "someone please set her up on a date.":
+    "ใครก็ได้ช่วยจัดเดตให้เธอที",
+  "something that just makes you feel cheerful when you put it on.":
+    "อะไรบางอย่างที่พอสวมแล้วรู้สึกสดใสขึ้นมาเฉย ๆ",
+  "Spear whose tip burns with heat like hellfire, just as its name implies.":
+    "หอกที่ปลายลุกโชนด้วยความร้อนราวไฟนรก สมกับชื่อของมัน",
+  "Spear whose wide double-edged blade is tipped with two sharp prongs.":
+    "หอกที่ใบสองคมกว้างและปลายมีสองง่ามแหลม",
+  "Spear with a hook-shaped tip that pushes and pulls foes, making it difficult for them to move.":
+    "หอกที่ปลายเป็นตะขอ ใช้ดันและดึงศัตรูจนขยับตัวลำบาก",
+  "Spear with a massive blade that blurs the line between sword and spear.":
+    "หอกที่ใบใหญ่มหึมาจนเส้นแบ่งระหว่างดาบกับหอกพร่าเลือน",
+  "Spear with an inward-leaning, sword-like blade.":
+    "หอกที่ใบเอียงเข้าด้านในคล้ายใบดาบ",
+  "Specially crafted restraining cuffs said to be used only on master thieves. Extremely sturdy—neither breakable nor refinable!":
+    "กุญแจมือพิเศษที่ว่ากันว่าใช้กับจอมโจรฝีมือดีเท่านั้น แข็งแรงอย่างยิ่ง—ทั้งไม่แตกและตีบวกไม่ได้!",
+  "Specially processed sweet and rich milk. Monster Savage Babe loves it.":
+    "นมหวานเข้มข้นที่ผ่านการแปรรูปเป็นพิเศษ มอนสเตอร์ Savage Babe ชอบมาก",
+  "Spore from a poisonous mushroom.":
+    "สปอร์จากเห็ดพิษ",
+  "Squishy hat modeled after Sting, a hand-shaped lump of mud.":
+    "หมวกนุ่มหยุ่นที่ทำเลียนแบบ Sting ก้อนโคลนทรงมือ",
+  "Staff favored by a gentleman from a distant land; some versions are said to hide a slender blade within.":
+    "คทาที่สุภาพบุรุษจากดินแดนไกลโพ้นนิยมใช้ บางรุ่นว่ากันว่าซ่อนใบมีดเรียวไว้ข้างใน",
+  "Staff occasionally carried by Owl Duke in place of an umbrella.":
+    "คทาที่ Owl Duke บางครั้งก็ถือแทนร่ม",
+  "Staff once wielded by Flame Ghost, imbued with Fire-Property magic.":
+    "คทาที่ Flame Ghost เคยใช้ อาบด้วยเวทธาตุ Fire",
+  "Staff once wielded by Ice Ghost, imbued with Water-Property magic.":
+    "คทาที่ Ice Ghost เคยใช้ อาบด้วยเวทธาตุ Water",
+  "Staff said to be used by priests and clerics in rituals, their hidden knowledge enhancing its power.":
+    "คทาที่ว่ากันว่านักบวชใช้ในพิธีกรรม ความรู้ที่ซ่อนอยู่ของพวกเขาเสริมพลังให้มัน",
+  "Standard Arrow found almost anywhere, made from easily obtainable materials and commonly used.":
+    "Arrow มาตรฐานที่หาได้แทบทุกที่ ทำจากวัสดุที่หาง่ายและใช้กันทั่วไป",
+  "Statue said to strengthen the unity of a group. Those who see it feel a stronger bond forming within.":
+    "รูปปั้นที่ว่ากันว่าเสริมความสามัคคีของหมู่คณะ ผู้ที่ได้เห็นจะรู้สึกถึงสายสัมพันธ์ที่แน่นแฟ้นขึ้นในใจ",
+  "Sticky skin of Anolian.":
+    "หนังเหนียวของ Anolian",
+  "Strange glasses that use compressed glass to make distant things appear right in front of you.":
+    "แว่นประหลาดที่ใช้แก้วอัดแน่นทำให้สิ่งที่อยู่ไกลดูเหมือนอยู่ตรงหน้า",
+  "Stretchy cord that snaps back to its original length with applied force. Surprisingly fun to play with.":
+    "เชือกยืดที่ดีดกลับสู่ความยาวเดิมเมื่อออกแรง เล่นแล้วสนุกเกินคาด",
+  "Stuffed doll shaped like a rabbit, made from fabric and cotton, suitable as a gift for young girls.":
+    "ตุ๊กตายัดนุ่นทรงกระต่ายที่ทำจากผ้าและสำลี เหมาะเป็นของขวัญสำหรับเด็กหญิง",
+  "Sturdy Decorative Eggshell worn on the head. Its glossy shell is tougher than it looks, and rumors say it can momentarily make others mistake you for someone with certain traits.":
+    "Decorative Eggshell ที่แข็งแรงและสวมบนศีรษะ เปลือกเงาของมันทนกว่าที่ตาเห็น และลือกันว่ามันทำให้คนอื่นเข้าใจผิดชั่วขณะว่าคุณเป็นคนที่มีลักษณะบางอย่าง",
+  "Sturdy metal mouthguard that, once worn, is enough to make one feel as though they have become “Automatic Doll Z.”":
+    "ที่ครอบปากโลหะแข็งแรงที่พอสวมแล้วก็ทำให้รู้สึกราวกับได้กลายเป็น “Automatic Doll Z”",
+  "Sturdy-looking tree branch seemingly useful for many purposes.":
+    "กิ่งไม้ที่ดูแข็งแรงและน่าจะใช้ประโยชน์ได้หลายอย่าง",
+  "Stylish costume ornament inspired by a wolf.":
+    "เครื่องประดับคอสตูมทรงเท่ที่ได้แรงบันดาลใจจากหมาป่า",
+  "such as when playing in the sea.":
+    "เช่นตอนเล่นน้ำทะเล",
+  "Suspicious box marked with a Poring.":
+    "กล่องน่าสงสัยที่มีรูป Poring ติดอยู่",
+  "Sword named after a renowned eastern bladesmith. Often called a cursed blade, yet its power cannot be ignored.":
+    "ดาบที่ตั้งชื่อตามช่างตีดาบชื่อดังแห่งตะวันออก มักถูกเรียกว่าดาบต้องคำสาป แต่พลังของมันก็มองข้ามไม่ได้",
+  "Sword that seems usable by anyone, except for priests.":
+    "ดาบที่ดูเหมือนใครก็ใช้ได้ ยกเว้นนักบวช",
+  "Sword used by the Orc tribe. Considered extremely rare, as blades among Orc nobles symbolized political authority.":
+    "ดาบที่เผ่า Orc ใช้ ถือว่าหายากอย่างยิ่ง เพราะในหมู่ขุนนาง Orc ใบมีดเป็นสัญลักษณ์ของอำนาจทางการเมือง",
+  "Sword with a rounded pommel for elegant decoration.":
+    "ดาบที่ด้ามท้ายมนเพื่อความงามในการประดับ",
+  "Tattered and worn clothing scraps. No one knows who buys them, yet they sell surprisingly well.":
+    "เศษเสื้อผ้าขาดปุปะ ไม่มีใครรู้ว่าใครซื้อ แต่ก็ขายดีเกินคาด",
+  "Tattered-looking Cloak seemingly stitched together from scraps, yet it offers surprisingly strong magical protection.":
+    "Cloak ที่ดูขาดปุปะราวกับเย็บจากเศษผ้า แต่กลับให้การป้องกันเวทที่แข็งแกร่งเกินคาด",
+  "Terrifying mace studded with nails so viciously that neither the wielder nor the target knows what to do about it.":
+    "กระบองน่าสะพรึงที่ตอกตะปูไว้โหดร้ายจนทั้งผู้ถือและเป้าหมายไม่รู้จะทำยังไงกับมันดี",
+  "Terrifying staff adorned with a human skull. Its performance is excellent, but a dark aura always clings to it.":
+    "คทาน่าสะพรึงที่ประดับด้วยกะโหลกมนุษย์ ประสิทธิภาพยอดเยี่ยม แต่ก็มีออร่ามืดเกาะติดอยู่เสมอ",
+  "The bumpy skin peeled from a poisonous toad's back. Handle with care — touch it carelessly and the poison may give you a painful time!":
+    "หนังปุ่มปมที่ลอกมาจากหลังคางคกพิษ จับด้วยความระวัง — แตะพลาดแล้วพิษอาจทำให้ทรมานได้!",
+  "The color of the blade seems to warn of this sword's danger.":
+    "สีของใบมีดดูเหมือนจะเตือนถึงอันตรายของดาบเล่มนี้",
+  "The dried shell of a sea turtle. It is very hard and can be processed for many uses. Sells to collectible merchants.":
+    "กระดองเต่าทะเลตากแห้ง แข็งมากและแปรรูปใช้ได้หลายอย่าง ขายให้พ่อค้าของสะสมได้",
+  "The fin of a fish.":
+    "ครีบปลา",
+  "The hair cut from a medusa head, which is essentially just a bunch of snakes.":
+    "เส้นผมที่ตัดมาจากหัวเมดูซา ซึ่งเอาจริง ๆ ก็คือฝูงงูนั่นแหละ",
+  "The hat of the monster Hyegun. It is worn and tattered, but surprisingly has strong defense.":
+    "หมวกของมอนสเตอร์ Hyegun เก่าและขาดปุปะ แต่ป้องกันได้ดีเกินคาด",
+  "The heart of a mermaid.":
+    "หัวใจของนางเงือก",
+  "The hind leg of a grasshopper.":
+    "ขาหลังของตั๊กแตน",
+  "The horn from a Dokebi which are rumored to bring great fortune to their owner.":
+    "เขาจาก Dokebi ที่ลือกันว่านำโชคลาภยิ่งใหญ่มาสู่เจ้าของ",
+  "The Huuma Shuriken 'Calm Mind' keeps the user's mind clear, granting an unshakable composure. A steadfast mind that never wavers, even in the hardest situation, is a great aid in battle.":
+    "Huuma Shuriken 'Calm Mind' ทำให้จิตใจผู้ใช้แจ่มใส มอบความสงบนิ่งที่ไม่สั่นคลอน จิตที่มั่นคงไม่หวั่นไหวแม้ในสถานการณ์ยากที่สุดคือตัวช่วยสำคัญในการรบ",
+  "The Khalitzburg order, composed entirely of women, is said to have once defended Glast Heim alongside Heinrich.":
+    "หน่วย Khalitzburg ซึ่งประกอบด้วยผู้หญิงล้วน ว่ากันว่าครั้งหนึ่งเคยปกป้อง Glast Heim เคียงข้าง Heinrich",
+  "The plucked whiskers of a mole.":
+    "หนวดที่ถอนมาจากตุ่น",
+  "The severed tail of a scorpion.":
+    "หางแมงป่องที่ถูกตัดขาด",
+  "The severed tongue of a reptile.":
+    "ลิ้นสัตว์เลื้อยคลานที่ถูกตัดขาด",
+  "The sharp fang of Hatii.":
+    "เขี้ยวคมของ Hatii",
+  "The sharpened tooth of a bat.":
+    "ฟันค้างคาวที่ลับคมแล้ว",
+  "The shell of a marine mollusk.":
+    "เปลือกของหอยทะเล",
+  "The stump of a branch lodged in a tree.":
+    "ตอกิ่งที่ฝังคาอยู่ในต้นไม้",
+  "The sturdy-looking helm of a Dullahan. The red tassel at its center is the highlight.":
+    "helm ที่ดูแข็งแรงของ Dullahan พู่สีแดงตรงกลางคือจุดเด่น",
+};
+
 const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [EFFECT_TH, 'effect'],
   [EFFECT_TH_2, 'effect'],
@@ -2367,6 +2541,7 @@ const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
   [FLAVOUR_TH_6, 'flavour'],
   [FLAVOUR_TH_7, 'flavour'],
   [FLAVOUR_TH_8, 'flavour'],
+  [FLAVOUR_TH_9, 'flavour'],
 ];
 
 async function main(): Promise<void> {
