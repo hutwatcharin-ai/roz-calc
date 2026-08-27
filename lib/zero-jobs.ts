@@ -12,6 +12,11 @@ export function isZeroJob(job: string): boolean {
   return ZERO_JOBS.some((j) => j.toLowerCase() === normalized);
 }
 
+export function isInGameSkill(classes: string[] | null): boolean {
+  if (!classes || classes.length === 0) return false;
+  return classes.some(isZeroJob);
+}
+
 // These are job names that appear in this game's item data but are not playable
 // in Ragnarok Zero Global. The list is deliberately short and evidence-based,
 // holding only values actually observed in equippable_classes, not every job

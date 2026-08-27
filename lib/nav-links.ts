@@ -34,7 +34,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/database/items', label: 'ไอเทม', ready: true },
     { href: '/database/cards', label: 'การ์ด', ready: true },
     { href: '/database/equipment', label: 'อุปกรณ์', ready: true },
-    { href: '/database/skills', label: 'สกิล', ready: false },
+    { href: '/database/skills', label: 'สกิล', ready: true },
     { href: '/database/maps', label: 'แมพ', ready: true },
   ],
   tools: [
