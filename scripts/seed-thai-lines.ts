@@ -1330,13 +1330,13 @@ const FLAVOUR_TH_3: Record<string, string> = {
   "A worn, tattered page torn from an old book.":
     "หน้ากระดาษเก่าขาดยับที่ฉีกมาจากหนังสือเล่มเก่า",
   "Accessory pinned to clothing that brings out a bright, lively charm.":
-    "เครื่องประดับที่กลัดกับเสื้อผ้า ช่วยขับเสน่ห์สดใสมีชีวิตชีวา",
+    "Accessory ที่กลัดกับเสื้อผ้า ช่วยขับเสน่ห์สดใสมีชีวิตชีวา",
   "Accessory that expresses a whistle in costume form. Said to help relieve stress and calm the mind whenever you blow it.":
-    "เครื่องประดับที่ทำนกหวีดออกมาในรูปแบบคอสตูม ว่ากันว่าเป่าทีไรก็ช่วยคลายเครียดและทำให้ใจสงบ",
+    "Accessory ที่ทำนกหวีดออกมาในรูปแบบคอสตูม ว่ากันว่าเป่าทีไรก็ช่วยคลายเครียดและทำให้ใจสงบ",
   "Accessory that, on closer inspection, has a small hole made for inserting something.":
-    "เครื่องประดับที่พอดูใกล้ ๆ จะเห็นรูเล็ก ๆ ทำไว้สำหรับเสียบอะไรบางอย่าง",
+    "Accessory ที่พอดูใกล้ ๆ จะเห็นรูเล็ก ๆ ทำไว้สำหรับเสียบอะไรบางอย่าง",
   "Accessory used to tie and hold hair in place, with a small ribbon on top that emphasizes cuteness.":
-    "เครื่องประดับที่ใช้มัดและรวบผมให้อยู่ทรง ด้านบนมีโบว์เล็ก ๆ ที่ขับความน่ารัก",
+    "Accessory ที่ใช้มัดและรวบผมให้อยู่ทรง ด้านบนมีโบว์เล็ก ๆ ที่ขับความน่ารัก",
   "Adorable hairpin shaped after the vibrant wings of a blue butterfly.":
     "กิ๊บติดผมน่ารักทรงปีกผีเสื้อสีน้ำเงินสดใส",
   "Adorable panda-like hat that makes you imagine yourself snacking on bamboo leaves the moment you wear it. Surprisingly popular among women.":
@@ -1344,6 +1344,21 @@ const FLAVOUR_TH_3: Record<string, string> = {
   "Afro-style hat made for cheerful summer days.":
     "หมวกทรงแอฟโฟรที่ทำมาเพื่อวันฤดูร้อนสดใส",
 };
+
+// Every dictionary in the file, in one list. A chunk that is declared but
+// never listed here seeds nothing and reports nothing -- which is exactly
+// what FLAVOUR_TH_3 did until this list replaced a hand-written call per
+// dictionary inside main().
+const DICTIONARIES: ReadonlyArray<[Record<string, string>, Kind]> = [
+  [EFFECT_TH, 'effect'],
+  [EFFECT_TH_2, 'effect'],
+  [EFFECT_TH_3, 'effect'],
+  [EFFECT_TH_4, 'effect'],
+  [EFFECT_TH_5, 'effect'],
+  [FLAVOUR_TH, 'flavour'],
+  [FLAVOUR_TH_2, 'flavour'],
+  [FLAVOUR_TH_3, 'flavour'],
+];
 
 async function main(): Promise<void> {
   const db = supabaseAdmin();
@@ -1380,13 +1395,7 @@ async function main(): Promise<void> {
     }
   }
 
-  add(EFFECT_TH, 'effect');
-  add(EFFECT_TH_2, 'effect');
-  add(EFFECT_TH_3, 'effect');
-  add(EFFECT_TH_4, 'effect');
-  add(EFFECT_TH_5, 'effect');
-  add(FLAVOUR_TH, 'flavour');
-  add(FLAVOUR_TH_2, 'flavour');
+  for (const [map, kind] of DICTIONARIES) add(map, kind);
 
   const { error } = await db
     .from('item_description_lines')
@@ -1394,10 +1403,9 @@ async function main(): Promise<void> {
   if (error) throw new Error(`Failed to seed item_description_lines: ${error.message}`);
 
   console.log(`seeded ${rows.length} lines, covering ${covered} occurrences`);
-  console.log(
-    `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length + Object.keys(EFFECT_TH_3).length + Object.keys(EFFECT_TH_4).length + Object.keys(EFFECT_TH_5).length} effect, ` +
-      `${Object.keys(FLAVOUR_TH).length + Object.keys(FLAVOUR_TH_2).length} flavour`,
-  );
+  const byKind = (k: Kind) =>
+    DICTIONARIES.filter(([, kind]) => kind === k).reduce((n, [m]) => n + Object.keys(m).length, 0);
+  console.log(`  ${byKind('effect')} effect, ${byKind('flavour')} flavour`);
   console.log(`deferred classes: ${DEFERRED_RULES.length}`);
   for (const d of DEFERRED_RULES) console.log(`  ${d.rule}\n    ${d.why}`);
 
