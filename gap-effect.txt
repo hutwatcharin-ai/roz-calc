@@ -1,0 +1,410 @@
+LUK +2, MDEF +5.
+(However, the Critical Rate increase applies only up to refine level +10.)
+[Arrow Vulcan] and [Musical Strike] damage +10%.
+[Bash] skill Lv.5 can be used.
+[Cloaking] 1Lv can be used.
+[Cold Bolt] Lv.3 can be used.
+[Costume] Baby Dragon
+[Costume] Party Member Recruitment Hat
+[Cure] Lv.1 can be used.
+[Detoxify] 1Lv can be used.
+[Discount] Lv.5 can be used.
+[Double Attack] Lv.1 can be used.
+[Envenom] 3Lv can be used.
+[Fire Bolt] Lv.3 can be used.
+[Fire Bolt], [Cold Bolt], and [Lightning Bolt] damage +10%.
+[Fire Wall] damage +5%.
+[Frost Diver] damage +5%.
+[Heal]  Lv.1 can be used.
+[Hiding] 1Lv can be used.
+[Magnum Break] 3Lv can be used.
+[Mammonite] damage +20%.
+[Shield Charge] and [Shield Boomerang] damage +10%.
+[Sight] Lv.1 can be used.
+[Steal] Lv.1 can be used.
+[Teleport] 1Lv can be used.
+[Throw Huuma Shuriken] damage +30%.
+0.5% chance to be inflicted with Blind yourself when attacking.
+10% extra damage to Boss monsters.
+3% extra damage to Demi-Human monsters.
+5% chance to inflict Blind on the enemy when attacking.
+5% chance to inflict Stun when attacking.
+50% chance to drop Meat when a Brute monster dies.
+A box containing 10 WoE Blue Potion.
+A box containing 30 WoE White Potion.
+A box containing 50 WoE Violet Potion.
+A composite bow crafted by combining various materials, designed with a focus on increasing damage output.
+A paper blessed by a sublime Priest. Lets you use the Holy-property spell [Heal] at Level 5.
+A paper inscribed with a mage's spell, made from the essence of ancient magical study. Lets you use the Earth-property spell [Earth Spike] at Level 5.
+A paper inscribed with a mage's spell, made from the essence of ancient magical study. Lets you use the Fire-property spell [Fire Ball] at Level 5.
+A small bow that doesn’t deal much damage but is easy to use.
+Able to use Cure Lv 1.
+Able to use Heal Lv 1.
+Additional 20% damage to Human-type enemies.
+Additional 7% damage to Earth, Water, Fire, and Wind-property Monsters.
+AGI +1, FLEE +10.
+AGI +1, LUK +1, MDEF +3.
+AGI +1, MDEF +3.
+AGI +2, Perfect Dodge +1.
+AGI +5, DEX +3,
+All DEF of the wearer reduced to 1/3.
+All defense is reduced to 1/2 while equipped.
+and when taking physical damage, has a low chance to auto-cast [Assumptio] Lv 1 on the wearer.
+Arrow coated with a toxin that locks the jaw, with a chance to inflict Silence on the target.
+Arrow Quiver containing 500 crystal Arrow.
+Arrow whose serrated, razor-sharp tip increases CRIT when attacking.
+ASPD increased (after-attack delay -5%).
+ASPD increases (After Attack Delay -15%).
+At +7 refine, additional +5% damage to Meteor Storm and Fire Pillar.
+At +7 refine, additional +5% damage to Storm Gust, Frost Nova, and Frost Driver.
+At +7 refine, Heal effect +12%.
+At +7 refine, Raging Quadruple Blow damage +15%.
+At +7 refine: additional MATK +2.
+At +7 refine: Additional MHP +20 per level of Faith.
+At +7 refine: additionally increases damage of Holy Cross and Pierce by 5%.
+At +7 refine: increases Critical Damage by 15%.
+At +7 refine: MHP +75, MSP +25.
+At +7 refine: Physical Damage to Undead Monsters +5%.
+At +7, increases Critical Damage by 10%.
+At +9 refine, additional +5% damage to Meteor Storm and Fire Pillar.
+At +9 refine, additional +5% damage to Storm Gust, Frost Nova, and Frost Driver.
+At +9 refine, Magnus Exorcismus damage +20%.
+At +9 refine, Raging Thrust damage +15%.
+At +9 refine: Additional MHP +30 per level of Faith.
+At +9 refine: additional Variable Casting Time -1%, Fire Magical Damage +1%.
+At +9 refine: additionally increases Critical Damage by 15%, ASPD +1.
+At +9 refine: additionally increases damage of Holy Cross and Pierce by 10%.
+At +9 refine: ASPD +1, Physical Damage to Undead Monsters +10%.
+At +9 refine: MHP +75, MSP +25.
+At +9, increases Critical Damage by an additional 10%.
+at Lv.3.
+ATK +5. MATK +5.
+Bow tailored precisely to its user, greatly boosting HIT and overall damage.
+Can refine armor.
+Can refine Lv.1 weapons.
+Can refine Lv.2 weapons.
+Can refine Lv.3 and Lv.4 weapons.
+Casts Frost Driver Lv 3 with a chance when performing physical attacks.
+Casts Quagmire Lv.1 when taking physical damage.
+Chance to auto-cast [Meteor Storm] Lv.5 when receiving physical damage.
+Chance to autocast Bash Lv.1 when dealing physical damage.
+Chance to autocast Fire Ball Lv.3 when dealing physical damage.
+Chance to autocast Impositio Manus Lv.3 on self when dealing physical damage.
+Chance to autocast Improve Concentration Lv.1 when receiving physical damage.
+Chance to autocast Lex Aeterna Lv.1 on the target when dealing physical damage.
+Chance to autocast Sight Lv.1 when receiving physical attacks.
+Chance to autocast Signum Crucis Lv.5 when receiving physical damage.
+Chance to autocast Snatch Lv.1 when dealing physical damage.
+Chance to inflict Curse on the attacker when receiving physical damage.
+Chance to inflict Frozen when receiving physical damage.
+Chance to inflict Petrify on the attacker when taking physical damage.
+Chance to inflict Silence when receiving physical damage.
+Chance to inflict Sleep when receiving physical damage.
+Chance to obtain Gasping Box when defeating Demi-Human Monsters.
+Chance to obtain gemstones when defeating monsters.
+Chance to obtain Gift Box when defeating monsters.
+Chance to obtain Giggling Box when defeating Undead Monsters.
+Chance to obtain Green Live when defeating Plant Monsters.
+Chance to obtain Jellopy or Large Jellopy when defeating monsters.
+Chance to obtain Old Blue Box when defeating monsters.
+Chance to obtain Red Blood when defeating Brute Monsters.
+Chance to obtain Vengeful Box when defeating Demon Monsters.
+Chance to reduce enemy SP on hit. When equipped by Sage, restores 1 SP each time a physical attack hits a monster.
+Cloth worn on the hand to make drawing a bowstring easier and increase damage when firing arrows.
+Composite bow modeled after animal horns, known for its high damage and precise accuracy.
+Consumes 1 SP per hit.
+Consumes 2 SP per attack.
+Contains all Lv.6 cooking recipes.
+Contains all Lv.7 cooking recipes.
+Contains all Lv.9 cooking recipes.
+CRIT +20, additional CRIT based on pure LUK.
+CRIT +7 when attacking Formless Monsters.
+CRIT +7 when attacking Undead Monsters.
+Critical +3. ASPD increased (after-attack delay -3%).
+Critical Damage +10%. When attacking Brute Monsters, CRIT +7.
+Crustacean with five pairs of legs, turning pink when cooked and very tasty. Recovers a small amount of HP.
+Dagger forged with lunar energy that absorbs the target’s SP to replenish the wielder’s own.
+Damage of Storm Gust, Frost Nova, and Frost Driver +10%.
+Deals additional 5% damage to Holy-property Monsters.
+DEF +2 and MDEF +3 when refine level is 5 or lower.
+DEF +2. MDEF +2.
+DEF +5, MDEF +5.
+DEF of equipped armor is reduced to 1/3.
+DEX +1, AGI +1, SP +50.
+DEX +2, LUK +2.
+Divine bow imbued with holy power, dealing high damage while drawing out the user’s hidden potential.
+Drops Fruit Mix with a chance when defeating Formless Monsters.
+Drops sushi or sashimi with a chance when defeating Fish Monsters.
+Edible pumpkin. Recovers a small amount of HP.
+Encyclopedia published by a famous house in Prontera, known for its rock-hard corners. People say it feels like they set 3Carat diamonds into the edges.
+Every 2 refine levels increase ASPD (After Attack Delay -1%).
+Exotic fruit with a sweet taste. Recovers a small amount of HP.
+Fire-Property/Shadow-Property Resistance -15%.
+Food processed to suit monsters’ taste. Recovers a small amount of HP.
+Food with a unique scent known to restore some SP.
+Fruit of the Yggdrasil tree, source of another world. After savoring its fantastical, primordial flavor, one finds their life force overflowing. Recovers all of the user's HP and SP.
+Fruit with a tangy and sour flavor. Recovers a small amount of SP.
+Fruit with sweet and refreshing aroma. Recovers a small amount of HP.
+Ghost-Property/Wind-Property Resistance +20%.
+Glittering claws of Joker leave afterimages that strip everything from enemies. STR +2, Raging Trifecta Blow damage +10%.
+Grants 50% resistance to the Status Ailment effects of Poison, Curse, Silence, Confusion, and Blind.
+Grants continuous [Endure] effect.
+Guard that covers the back of the hand with a hard plate, boosting both protection and damage of each punch.
+Has a 1% chance to Freeze yourself when attacking.
+Has a 3% chance to inflict Blind on the enemy when attacking.
+Has a 5% chance to Freeze the target when attacking.
+Has a 5% chance to inflict Stun when attacking. Unbreakable.
+Has a 50% chance to inflict Freeze on the enemy when you take physical damage.
+Has a chance to activate [Cloaking] when you take physical damage (cast at your learned skill level).
+Has a chance to activate [Weapon Perfection] Lv.1 when dealing physical attacks.
+Has a chance to autocast [Envenom] Lv.1 when dealing physical attacks.
+Has a chance to autocast [Heal] Lv.1 on yourself when dealing physical attacks. If you have learned [Heal] Lv.10, Lv.10 is cast instead.
+Has a chance to autocast [Magnum Break] Lv.10 when dealing physical attacks.
+Has a chance to cast [Heal] Lv.3 on yourself when you take physical damage.
+Has a chance to drop a recovery item each time you kill a monster.
+Has a chance to drop a Red Potion each time you kill an enemy.
+Has a chance to drop Candy or Candy Cane each time you kill a Demi-Human monster.
+Has a chance to drop Meat or Monster's Feed each time you kill a Brute monster.
+Has a chance to drop Red Herb, Yellow Herb, or White Herb each time you kill a Plant monster.
+Has a chance to inflict Blind on the enemy when you take physical damage.
+Has a chance to inflict Coma on the target.
+Has a chance to inflict Confusion on the enemy when you take physical damage.
+Has a chance to inflict Silence on the enemy when you take physical damage.
+Has a chance to inflict Silence on the target when attacking.
+Has a chance to inflict Stun, Curse, Silence, Poison, or Bleeding on the target with melee physical attacks.
+Has a chance to obtain a Gloomy Box each time you kill a Plant monster.
+Has a chance to obtain a Sunlight Box each time you kill an Angel monster.
+Has a chance to obtain Crystal Blue each time you kill a Fish-type monster.
+Has a chance to transform a monster into another monster.
+Has a low chance to autocast [Cold Bolt] Lv.3 when dealing physical attacks.
+Has a low chance to autocast [Fire Bolt] Lv.3 when dealing physical attacks.
+Has a low chance to autocast [Thunderstorm] Lv.3 when attacking.
+Has a low chance to break the enemy's weapon with melee physical attacks.
+Has a low chance to cast [Heal] Lv.1 on yourself with melee physical attacks.
+Has a low chance to drain 30% of the target's SP when attacking.
+Has a low chance to drop a Banana when you kill a monster. Banana recovery rate +100%.
+Has a low chance to inflict Bleeding on the enemy with melee physical attacks.
+Has a low chance to inflict Bleeding on the target when attacking.
+Heal Amount you cast is increased by 5%.
+Heal Lv 3 usable.
+HIT +10, ATK +10.
+HIT +10, FLEE Rate +3.
+HP +150. At +7 refine: HP +150. At +9 refine: HP +250.
+If Auto Guard Lv.10 is learned, Lv.10 is autocast instead.
+If DEX is 77 or higher, greatly increased chance to inflict Stun.
+If Double Attack is learned, activation chance follows the learned Double Attack skill level.
+If Fire Ball Lv 10 is learned, autocast triggers Fire Ball Lv 10 instead.
+If Improve Concentration Lv 10 is learned, autocast triggers Improve Concentration Lv 10 instead.
+If INT is 77 or higher, the chance to inflict Stone increases.
+If INT is 99 or higher, chance to autocast Kyrie Eleison increases.
+If Jupitel Thunder Lv.10 is learned, Lv.10 is autocast instead.
+If Quagmire Lv.5 is learned, Lv.5 is cast instead of Lv.1.
+If STR is 77 or higher, the chance to inflict Confusion is higher.
+If the set wearer is a Mage Class character, variable cast time -15% and MATK +3%.
+If the set wearer is a Merchant Class character, has a chance to drop an Old Purple Box each time you kill a monster, and reflects 20% of single-target offensive magic.
+If the set wearer is Archer Class, EXP gained from defeating Brute Monsters +5%, and chance to inflict Coma on Brute enemies when dealing physical damage.
+If the wearer is Assassin, the chance increases.
+If VIT is 77 or higher, the chance to inflict Silence is higher.
+If you have not learned [Cloaking] Lv.3 or higher, it can only activate while next to a wall.
+Ignores the DEF of Dragon-type monsters.
+Ignores the DEF of normal monsters.
+Increases ASPD (After Attack Delay -10%), CRIT +5.
+Increases ASPD (After Attack Delay -8%).
+Increases damage of Holy Cross and Pierce by 10%.
+Increases resistance to Poison by 30%.
+Increases Sonic Blow damage by 20%.
+Increases the effectiveness of your [Heal], [Sanctuary], and [Potion Pitcher] by 30%.
+Inflicts Stone on enemies with a chance when taking physical damage.
+INT +1, MDEF +5.
+INT +1. When equipped by Acolyte Class, INT +1 and MDEF +1.
+INT +2, LUK +1.
+INT +2, Unbreakable.
+INT +2. If refine level ≥ 9, MSP +150.
+INT +3, DEX +2, Unbreakable.
+Katar infused with the essence of erupting flames, modeled after bursting fire. Occasionally inflicts Silence on enemies with a low chance.
+Leaf of a flower called Hinalle. Its cool, refreshing scent eases pain and restores vitality. Recovers a moderate amount of HP.
+Leaves cut and gathered from a plant called Aloe. Recovers a moderate amount of HP.
+Lollipop-shaped candy. Recovers about 105 HP.
+LUK +1, MDEF +4.
+LUK +5, MDEF +10.
+LUK and Critical Rate increase with the refine level.
+M.ATK +2 per refine level.
+Magic ring that manifests a protective power, greatly reducing damage taken by the wearer.
+MATK +125. DEX +1.
+MAXHP -10%, MAXSP -10%, Variable Casting Time -10%.
+MaxHP -40%. MaxSP +50%.
+MaxHP +500, DEF +5, MDEF +5.
+MDEF +10, Unbreakable.
+MDEF +3. Cannot be Refined.
+MDEF +5, INT +1.
+MDEF +7 when refine level is 5 or lower.
+Mental recovery tonic finely ground from Blue Herb. Recovers about 60 SP.
+MHP +150, MSP +75.
+MHP/MSP +8%.
+Movement speed increases while equipped.
+Neutral-Property Resistance +10%, FLEE Rate +10.
+Normal physical attacks (excluding skills) become 9-cell splash attacks.
+On enemy attack, 4% chance to inflict Poison.
+On enemy attack, 5% chance to inflict Confusion.
+On physical attack, 2% chance to inflict Stun.
+On physical attack, 5% chance to inflict Blind.
+On physical attack, 5% chance to inflict Curse.
+On physical attack, 5% chance to inflict Frozen.
+On physical attack, 5% chance to inflict Poison.
+On physical attack, 5% chance to inflict Silence.
+On physical attack, 5% chance to inflict Sleep.
+On physical attack, 5% chance to inflict Stun.
+Oval fruit that turns yellow and fragrant when ripe. So sour that just thinking about it makes your mouth water! Recovers a small amount of SP.
+Paper containing a mage’s spell, crafted from the essence of ancient arcane studies. Allows the use of Water-Property magic Frost Driver at Lv.5.
+Perfect Dodge +20, LUK +5.
+Perfect Dodge +5, FLEE Rate +10.
+Physical attacks have a 3% chance to inflict Bleeding.
+Physical attacks have a 5% chance to restore 100 HP every second for 5 seconds.
+Physical attacks have a chance to autocast Jupitel Thunder Lv.3.
+Physical attacks have a chance to autocast Sonic Blow Lv.1.
+Physical Damage Taken from Human/Brute Enemies -30%.
+Physical Damage Taken has a chance to autocast Auto Guard Lv.3.
+Physical Damage Taken has a chance to inflict Confusion.
+Physical Damage Taken has a chance to inflict Poison.
+Physical Damage to Demi-Human, Brute, Plant, and Insect Monsters +7%.
+Physical/Magical attacks have a 10% chance to restore 20 SP every second for 7 seconds.
+Pierce Lv 3 usable.
+Popular red fruit with a sweet and tangy flavor. Recovers a small amount of SP.
+Potion infused with ingredients that enhance focus. Increases ASPD when consumed. Usable by All Jobs.
+Precious herb with a unique scent that refreshes the mind. Recovers a small amount of SP.
+Prisoner Uniform increases HIT and FLEE based on its refine level.
+Processed and sterilized milk from cows. Commonly used as nutritious food for Kids. Recovers a small amount of HP.
+Purple root vegetable rich in starch and sweet in flavor, often used as food. Recovers a small amount of HP.
+Raises MATK by 4 per shield refine.
+Ranged Weapon Physical Damage +20%,
+Rare herb known for exceptional wound treatment. Recovers a small amount of HP.
+Rare herb known for strong wound treatment. Recovers a small amount of HP.
+Rare herb known for treating wounds. Recovers a small amount of HP.
+Recovers 1 SP per attack.
+Recovers 2 SP per attack.
+Recovers 5 SP each time you defeat Brute Monsters with melee physical attacks.
+Recovers 5 SP each time you defeat Dragon Monsters with melee physical attacks.
+Recovers 5 SP when defeating Demi-Human Monsters with melee physical attacks.
+Recovers 5 SP when defeating Fish Monsters with melee physical attacks.
+Recovers 5 SP when defeating Formless Monsters with melee physical attacks.
+Recovers 5 SP when defeating Plant Monsters with melee physical attacks.
+Recovers 5 SP when defeating Undead Monsters with melee physical attacks.
+Recovers about 10% HP.
+Recovers about 10% SP.
+Recovers about 500 HP and about 60 SP.
+Recovery tonic finely ground from White Herb. Recovers about 325 HP.
+Red vegetable with a sweet and unique aroma, often used in cooking. Recovers a small amount of HP.
+Reduces After Attack Delay by 1% per 2 refine levels.
+Reduces physical and magical damage received from Plant Monsters by 3%.
+Reduces Ranged Physical Damage Taken by 5%, and by an additional 1% per armor refine.
+Reduces SP cost of skills by 30%.
+Reduces Variable Casting Time by 5%.
+Reflects 30% of all melee physical damage.
+Reflects 5% of melee physical damage received. DEF +1.
+Resistance to Demon monsters 10%.
+Restores 3 SP per hit when striking an enemy.
+Restores all HP and SP upon revival.
+Ripe fruit picked from the Mastela tree. A vibrant purple fruit with a refreshing taste. Recovers a large amount of HP.
+Round orange fruit with refreshing flavor and scent, eaten fresh or used for juice or jam. Recovers a small amount of HP and SP.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Earth-property magic [Earth Spike] Lv.3.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Fire-property magic [Fire Bolt] Lv.3.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Fire-property magic Fire Bolt at Lv.5.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Fire-property magic Fire Wall at Lv.5.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Ghost-property magic [Soul Strike] Lv.3.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Ghost-property magic [Soul Strike] Lv.5.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Water-property magic [Frost Driver] Lv.1.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Water-property magic Cold Bolt at Lv.5.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Wind-property magic [Lightning Bolt] Lv.3.
+Scroll containing a spell crafted from the essence of ancient magical studies. Allows use of the Wind-property magic Lightning Bolt at Lv.5.
+Seed of the Yggdrasil fruit, origin of this world. Gentle, nutty aroma restores one's vigor. Recovers half of the user's HP and SP.
+Slightly increases ASPD (After Attack Delay decreased).
+Staff that converts the user’s mental power into destructive force, guaranteeing fearsome power even with little SP.
+STR +1, INT +1.
+STR +1, INT +2, DEX +1.
+STR +1, MDEF +2.
+STR +1, VIT +1.
+STR +1. AGI +1. MDEF +1.
+STR +2, Cannot be Refined.
+STR +2, VIT +1, MDEF +3.
+STR +5. AGI +5.
+Strange item that fills you with energy and makes you want to work when equipped.
+Substance collected from honeybees, similar to milk. Known as royal jelly and said to be very nutritious. Cures various Status Ailment (Poison, Curse, Silence, Confusion, Blind) and recovers HP and SP together.
+Sweet and sticky liquid widely used as food and also medicinal for its high nutritional value. Recovers a small amount of HP and SP.
+Sweet and tasty candy. Recovers about 45 HP.
+Takes 50% additional damage from Ghost-Property attacks.
+The [Intimidate] autocast is no longer used.
+The higher the opponent's DEF, the more powerful its damage.
+The wearer's HP does not regenerate naturally and loses 666 HP every 10 seconds.
+Triggers Auto-Spell Provoke Lv 3 with a certain chance when performing physical attacks.
+Unrefined ore containing the metal known as Oridecon, the so-called divine metal. The amount of Oridecon within is small and extremely difficult to refine, making it highly valuable and very rare.
+Upon unequipping, lose 999 HP.
+Using Bash pushes enemies back by 5 cells.
+Variable Casting Time -2%, MATK +2.
+Well-cooked meat, looks appetizing. Recovers a small amount of HP.
+When an Acolyte Class attacks Demon or Undead Monsters, CRIT +9.
+When Angel’s Blessing, Angel’s Descent, Angel’s Protection, Angel’s Warmth, and Angel’s Kiss are all equipped, HP +900, SP +100,
+When attacking Brute Monsters, CRIT +7.
+When attacking Fish Monsters, CRIT +7.
+When attacking, has a low chance to cast [Fire Ball] Lv 3.
+When drinking juice, HP Heal effect +50%.
+When equipped by Thief Class, CRIT +4.
+When equipped by Thief Class, FLEE Rate +20.
+When equipped by Thief Class, Perfect Dodge +5.
+When equipped together with Arclouse Card, increases FLEE by 2 per shield refine.
+When equipped together with Bathory Card, increases INT by 1 per armor refine.
+When equipped together with Black Leather Boots, Flee +10.
+When equipped together with Crab, Shellfish, and Aster Card, Fish monsters have a chance to drop Sashimi when hunted, and Physical Damage to Water-property Monsters +30%.
+When equipped together with High Orc Card, grants ASPD +2 and ATK +25.
+When equipped together with Leg, Zipper Bear, Myst Case, and Baby Leopard Cards:
+When equipped together with Lude Card, MaxSP +60.
+When equipped together with Luna Bow, DEX +1, SP +50, and SP recovery rate +10%.
+When equipped together with Magician Hat, DEX +2, INT +2, and SP recovery rate +5%. MATK increases by 1% per refine.
+When equipped together with Miyabi Doll, Evil Nymph, Parasite, Harpy, and Bloody Butterfly Cards:
+When equipped together with Ninja Suit, SP consumption -20% and MHP +300.
+When equipped together with Penomena Card, increases ASPD by 1 per 2 shield refines.
+When equipped together with Permeter, Solider, Freezer, and Heater Cards, the following effects are added:
+When equipped together with Quve Card, MaxHP +300.
+When equipped together with The Wanderer, Wild Rose, Shinobi, and Zhu Po Long Cards, the following effects are added:
+When equipped with Alarm, Clock, and Punk Card, MDEF +3 and DEF +3.
+When equipped with Chonchon Card, FLEE Rate +18.
+When equipped with Claw Card, the reduction becomes -20%.
+When equipped with Criatura Academy Hat, ATK +5 and MATK +5.
+When equipped with Cruiser, Anolian, Alligator, and Dragon Tail Card:
+When equipped with Dark Illusion Card, MHP/MSP +20%.
+When equipped with Joker Card, physical/magical attacks have a chance to transform you into Joker for 7 seconds.
+When equipped with Mummy Card, Perfect Hit +20%.
+When equipped with Owl Baron Card, chance to autocast Lightning Bolt Lv 5 when dealing physical damage.
+When equipped with Poring Card, FLEE Rate +18.
+When equipped with Rocker Card, FLEE Rate +18.
+When equipped with Rogue Card, FLEE Rate +18.
+When equipped with Shackles, ATK +5. Additional ATK increases based on the refine level of Shackles.
+When equipped with Skeleton Card, greatly increased chance to inflict Sleep.
+When equipped with Steel Arrow, Ranged Weapon Physical Damage +50%.
+When equipped with Triangle Panties, AGI +5, FLEE +10.
+When equipped with Wolf Card, FLEE Rate +18.
+When equipped with Zealotus Card, ATK +20 and LUK +3.
+When hitting with Mammonite, knocks enemies back by 5 cells.
+When killing a monster, has a chance to drop Steel Arrow.
+When killing Insect monsters, Apple, Banana, or Carrot Juice may drop with a certain chance.
+When killing Insect monsters, has a chance to obtain the 'Thunder Box' item.
+When performing physical attacks, has a certain chance to transform into Lunatic for 5 seconds. Movement speed increases during the transformation (does not stack with Increase Agility).
+When performing physical attacks, has a certain chance to transform into Smokie for 5 seconds. Movement speed increases during the transformation (does not stack with Increase Agility).
+When receiving physical damage, chance to autocast Kyrie Eleison Lv.10.
+When refine level is 5 or higher, ATK and MATK increase by 1 per refine level.
+When refine level is 5 or lower, MDEF +5.
+When refine level is 5 or lower, MDEF +8.
+When refine level is 9 or higher, [Bash] damage +10%.
+When refine level is 9 or higher, MaxHP +10% and MaxSP +10%.
+When refine level is 9 or higher, MDEF +5.
+When refined to +9 or higher, Neutral-Property Resistance +5% and FLEE Rate +5.
+When refinement level is 9 or higher, FLEE +20.
+When used with Lunatic Card, FLEE Rate +18.
+When used with Tarou Card, STR +3.
+When worn by a Novice or Super Novice, has a 20% chance to autocast [Endure] Lv.1 when you take physical damage.
+When worn by a Novice or Super Novice, has a chance to autocast [Increase AGI] Lv.1 when you take physical damage.
+When worn by a Swordsman Class character, Perfect Dodge +3.
+When worn by a Swordsman Class character, recovery from Red, Yellow, and White Potions +50%.
+When worn with Prisoner Uniform, ATK +2 per refine level on Prisoner Uniform.
+When worn with Shackles, ATK +1 per refine level on Shackles.
+While using a blunt weapon, increases CRIT by 1 per weapon refine, and at +10 increases Critical Damage by 10%.
+While using a knuckle, reduces After Attack Delay by 1% per refine, and at +10 increases ASPD by 2.

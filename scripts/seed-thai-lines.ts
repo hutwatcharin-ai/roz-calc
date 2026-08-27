@@ -124,11 +124,224 @@ const FLAVOUR_TH: Record<string, string> = {
     'บางคนว่าดีไซน์นี้ได้แรงบันดาลใจจากดวงตาของสิ่งมีชีวิตทรงปัญญาที่อยู่นอกโลก',
 };
 
-// Deliberately left English, with the reason. A row that cannot pass the gate
-// is worse than no row: it makes the gate the thing people learn to ignore.
-export const DEFERRED: Record<string, string> = {
-  'LUK +2, MDEF +5.':
-    'every token is a stat abbreviation, so any faithful translation contains no Thai at all',
+// Classes of line deliberately left English, with the reason. A row that cannot
+// pass the glossary gate is worse than no row: it makes the gate the thing
+// people learn to ignore.
+export const DEFERRED_RULES: ReadonlyArray<{ rule: string; why: string }> = [
+  {
+    rule: 'a line made only of stat abbreviations, numbers and punctuation',
+    why:
+      'every token already stays English by the glossary, so a faithful ' +
+      'translation contains no Thai at all -- `AGI +1, FLEE +10.`, ' +
+      '`DEF +5, MDEF +5.`, `LUK +2, MDEF +5.` and about thirty more',
+  },
+  {
+    rule: 'a costume tag: `[Costume] <item name>`',
+    why: 'the tag and the item name are both proper nouns the game prints in English',
+  },
+];
+
+// Batch 3: effect lines that occur once. Fewer readers per line than batch 2,
+// but these are the lines that change what a player equips, so they come
+// before flavour text.
+const EFFECT_TH_2: Record<string, string> = {
+  '(However, the Critical Rate increase applies only up to refine level +10.)':
+    '(แต่การเพิ่มอัตรา Critical มีผลถึงระดับตีบวก +10 เท่านั้น)',
+
+  // `[Skill] can be used.` The game is not consistent about writing the level
+  // as `Lv.3` or `3Lv`; the Thai keeps whichever form the source used.
+  '[Bash] skill Lv.5 can be used.': 'ใช้สกิล [Bash] Lv.5 ได้',
+  '[Cloaking] 1Lv can be used.': 'ใช้ [Cloaking] 1Lv ได้',
+  '[Cold Bolt] Lv.3 can be used.': 'ใช้ [Cold Bolt] Lv.3 ได้',
+  '[Cure] Lv.1 can be used.': 'ใช้ [Cure] Lv.1 ได้',
+  '[Detoxify] 1Lv can be used.': 'ใช้ [Detoxify] 1Lv ได้',
+  '[Discount] Lv.5 can be used.': 'ใช้ [Discount] Lv.5 ได้',
+  '[Double Attack] Lv.1 can be used.': 'ใช้ [Double Attack] Lv.1 ได้',
+  '[Envenom] 3Lv can be used.': 'ใช้ [Envenom] 3Lv ได้',
+  '[Fire Bolt] Lv.3 can be used.': 'ใช้ [Fire Bolt] Lv.3 ได้',
+  '[Heal]  Lv.1 can be used.': 'ใช้ [Heal] Lv.1 ได้',
+  '[Hiding] 1Lv can be used.': 'ใช้ [Hiding] 1Lv ได้',
+  '[Magnum Break] 3Lv can be used.': 'ใช้ [Magnum Break] 3Lv ได้',
+  '[Sight] Lv.1 can be used.': 'ใช้ [Sight] Lv.1 ได้',
+  '[Steal] Lv.1 can be used.': 'ใช้ [Steal] Lv.1 ได้',
+  '[Teleport] 1Lv can be used.': 'ใช้ [Teleport] 1Lv ได้',
+  'Able to use Cure Lv 1.': 'ใช้ Cure Lv 1 ได้',
+  'Able to use Heal Lv 1.': 'ใช้ Heal Lv 1 ได้',
+  'at Lv.3.': 'ที่ Lv.3',
+
+  // `[Skill] damage +N%.`
+  '[Arrow Vulcan] and [Musical Strike] damage +10%.':
+    'ความเสียหาย [Arrow Vulcan] และ [Musical Strike] +10%',
+  '[Fire Bolt], [Cold Bolt], and [Lightning Bolt] damage +10%.':
+    'ความเสียหาย [Fire Bolt], [Cold Bolt] และ [Lightning Bolt] +10%',
+  '[Fire Wall] damage +5%.': 'ความเสียหาย [Fire Wall] +5%',
+  '[Frost Diver] damage +5%.': 'ความเสียหาย [Frost Diver] +5%',
+  '[Mammonite] damage +20%.': 'ความเสียหาย [Mammonite] +20%',
+  '[Shield Charge] and [Shield Boomerang] damage +10%.':
+    'ความเสียหาย [Shield Charge] และ [Shield Boomerang] +10%',
+  '[Throw Huuma Shuriken] damage +30%.': 'ความเสียหาย [Throw Huuma Shuriken] +30%',
+  'Damage of Storm Gust, Frost Nova, and Frost Driver +10%.':
+    'ความเสียหายของ Storm Gust, Frost Nova และ Frost Driver +10%',
+
+  // Chance-to-inflict and chance-to-proc
+  '0.5% chance to be inflicted with Blind yourself when attacking.':
+    'มีโอกาส 0.5% ที่ตัวเองจะติด Blind เมื่อโจมตี',
+  '5% chance to inflict Blind on the enemy when attacking.':
+    'มีโอกาส 5% ทำให้ศัตรูติด Blind เมื่อโจมตี',
+  '5% chance to inflict Stun when attacking.': 'มีโอกาส 5% ทำให้ติด Stun เมื่อโจมตี',
+  'Chance to inflict Curse on the attacker when receiving physical damage.':
+    'มีโอกาสทำให้ผู้โจมตีติด Curse เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to inflict Frozen when receiving physical damage.':
+    'มีโอกาสทำให้ติด Frozen เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to inflict Petrify on the attacker when taking physical damage.':
+    'มีโอกาสทำให้ผู้โจมตีติด Petrify เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to inflict Silence when receiving physical damage.':
+    'มีโอกาสทำให้ติด Silence เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to inflict Sleep when receiving physical damage.':
+    'มีโอกาสทำให้ติด Sleep เมื่อได้รับความเสียหายกายภาพ',
+  'Casts Frost Driver Lv 3 with a chance when performing physical attacks.':
+    'มีโอกาสร่าย Frost Driver Lv 3 เมื่อโจมตีกายภาพ',
+  'Casts Quagmire Lv.1 when taking physical damage.':
+    'ร่าย Quagmire Lv.1 เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to auto-cast [Meteor Storm] Lv.5 when receiving physical damage.':
+    'มีโอกาสร่าย [Meteor Storm] Lv.5 อัตโนมัติ เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to autocast Bash Lv.1 when dealing physical damage.':
+    'มีโอกาสร่าย Bash Lv.1 อัตโนมัติ เมื่อสร้างความเสียหายกายภาพ',
+  'Chance to autocast Fire Ball Lv.3 when dealing physical damage.':
+    'มีโอกาสร่าย Fire Ball Lv.3 อัตโนมัติ เมื่อสร้างความเสียหายกายภาพ',
+  'Chance to autocast Impositio Manus Lv.3 on self when dealing physical damage.':
+    'มีโอกาสร่าย Impositio Manus Lv.3 ใส่ตัวเองอัตโนมัติ เมื่อสร้างความเสียหายกายภาพ',
+  'Chance to autocast Improve Concentration Lv.1 when receiving physical damage.':
+    'มีโอกาสร่าย Improve Concentration Lv.1 อัตโนมัติ เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to autocast Lex Aeterna Lv.1 on the target when dealing physical damage.':
+    'มีโอกาสร่าย Lex Aeterna Lv.1 ใส่เป้าหมายอัตโนมัติ เมื่อสร้างความเสียหายกายภาพ',
+  'Chance to autocast Sight Lv.1 when receiving physical attacks.':
+    'มีโอกาสร่าย Sight Lv.1 อัตโนมัติ เมื่อได้รับการโจมตีกายภาพ',
+  'Chance to autocast Signum Crucis Lv.5 when receiving physical damage.':
+    'มีโอกาสร่าย Signum Crucis Lv.5 อัตโนมัติ เมื่อได้รับความเสียหายกายภาพ',
+  'Chance to autocast Snatch Lv.1 when dealing physical damage.':
+    'มีโอกาสร่าย Snatch Lv.1 อัตโนมัติ เมื่อสร้างความเสียหายกายภาพ',
+
+  // Chance-to-obtain on kill. `defeating` is locked to สังหาร.
+  'Chance to obtain Gasping Box when defeating Demi-Human Monsters.':
+    'มีโอกาสได้รับ Gasping Box เมื่อสังหารมอนสเตอร์ Demi-Human',
+  'Chance to obtain gemstones when defeating monsters.':
+    'มีโอกาสได้รับ gemstone เมื่อสังหารมอนสเตอร์',
+  'Chance to obtain Gift Box when defeating monsters.':
+    'มีโอกาสได้รับ Gift Box เมื่อสังหารมอนสเตอร์',
+  'Chance to obtain Giggling Box when defeating Undead Monsters.':
+    'มีโอกาสได้รับ Giggling Box เมื่อสังหารมอนสเตอร์ Undead',
+  'Chance to obtain Green Live when defeating Plant Monsters.':
+    'มีโอกาสได้รับ Green Live เมื่อสังหารมอนสเตอร์ Plant',
+  'Chance to obtain Jellopy or Large Jellopy when defeating monsters.':
+    'มีโอกาสได้รับ Jellopy หรือ Large Jellopy เมื่อสังหารมอนสเตอร์',
+  'Chance to obtain Old Blue Box when defeating monsters.':
+    'มีโอกาสได้รับ Old Blue Box เมื่อสังหารมอนสเตอร์',
+  'Chance to obtain Red Blood when defeating Brute Monsters.':
+    'มีโอกาสได้รับ Red Blood เมื่อสังหารมอนสเตอร์ Brute',
+  'Chance to obtain Vengeful Box when defeating Demon Monsters.':
+    'มีโอกาสได้รับ Vengeful Box เมื่อสังหารมอนสเตอร์ Demon',
+  'Drops Fruit Mix with a chance when defeating Formless Monsters.':
+    'มีโอกาสดรอป Fruit Mix เมื่อสังหารมอนสเตอร์ Formless',
+  'Drops sushi or sashimi with a chance when defeating Fish Monsters.':
+    'มีโอกาสดรอปซูชิหรือซาชิมิ เมื่อสังหารมอนสเตอร์ Fish',
+  '50% chance to drop Meat when a Brute monster dies.':
+    'มีโอกาส 50% ดรอป Meat เมื่อมอนสเตอร์ Brute ตาย',
+
+  // Extra damage against a group
+  '10% extra damage to Boss monsters.': 'ความเสียหายต่อมอนสเตอร์ Boss เพิ่ม 10%',
+  '3% extra damage to Demi-Human monsters.': 'ความเสียหายต่อมอนสเตอร์ Demi-Human เพิ่ม 3%',
+  'Additional 20% damage to Human-type enemies.': 'ความเสียหายต่อศัตรูประเภทมนุษย์ เพิ่ม 20%',
+  'Additional 7% damage to Earth, Water, Fire, and Wind-property Monsters.':
+    'ความเสียหายต่อมอนสเตอร์ธาตุ Earth, Water, Fire และ Wind เพิ่ม 7%',
+  'Deals additional 5% damage to Holy-property Monsters.':
+    'สร้างความเสียหายต่อมอนสเตอร์ธาตุ Holy เพิ่ม 5%',
+  'CRIT +7 when attacking Formless Monsters.': 'CRIT +7 เมื่อโจมตีมอนสเตอร์ Formless',
+  'CRIT +7 when attacking Undead Monsters.': 'CRIT +7 เมื่อโจมตีมอนสเตอร์ Undead',
+  'CRIT +20, additional CRIT based on pure LUK.':
+    'CRIT +20 และได้ CRIT เพิ่มตามค่า LUK ล้วน',
+  'Critical Damage +10%. When attacking Brute Monsters, CRIT +7.':
+    'Critical Damage +10% เมื่อโจมตีมอนสเตอร์ Brute ได้ CRIT +7',
+  'Critical +3. ASPD increased (after-attack delay -3%).':
+    'Critical +3 ASPD เพิ่มขึ้น (ดีเลย์หลังโจมตี -3%)',
+  'ASPD increased (after-attack delay -5%).': 'ASPD เพิ่มขึ้น (ดีเลย์หลังโจมตี -5%)',
+  'ASPD increases (After Attack Delay -15%).': 'ASPD เพิ่มขึ้น (ดีเลย์หลังโจมตี -15%)',
+  'Every 2 refine levels increase ASPD (After Attack Delay -1%).':
+    'ทุก 2 ระดับตีบวก เพิ่ม ASPD (ดีเลย์หลังโจมตี -1%)',
+
+  // Refine thresholds. `refine` is locked to ตีบวก.
+  'At +7 refine, additional +5% damage to Meteor Storm and Fire Pillar.':
+    'ตีบวก +7: ความเสียหาย Meteor Storm และ Fire Pillar เพิ่มอีก +5%',
+  'At +9 refine, additional +5% damage to Meteor Storm and Fire Pillar.':
+    'ตีบวก +9: ความเสียหาย Meteor Storm และ Fire Pillar เพิ่มอีก +5%',
+  'At +7 refine, additional +5% damage to Storm Gust, Frost Nova, and Frost Driver.':
+    'ตีบวก +7: ความเสียหาย Storm Gust, Frost Nova และ Frost Driver เพิ่มอีก +5%',
+  'At +9 refine, additional +5% damage to Storm Gust, Frost Nova, and Frost Driver.':
+    'ตีบวก +9: ความเสียหาย Storm Gust, Frost Nova และ Frost Driver เพิ่มอีก +5%',
+  'At +7 refine, Heal effect +12%.': 'ตีบวก +7: ผลของ Heal +12%',
+  'At +7 refine, Raging Quadruple Blow damage +15%.':
+    'ตีบวก +7: ความเสียหาย Raging Quadruple Blow +15%',
+  'At +7 refine: additional MATK +2.': 'ตีบวก +7: MATK +2 เพิ่มเติม',
+  'At +7 refine: Additional MHP +20 per level of Faith.':
+    'ตีบวก +7: MHP +20 เพิ่มเติม ต่อทุกเลเวลของ Faith',
+  'At +9 refine: Additional MHP +30 per level of Faith.':
+    'ตีบวก +9: MHP +30 เพิ่มเติม ต่อทุกเลเวลของ Faith',
+  'At +7 refine: additionally increases damage of Holy Cross and Pierce by 5%.':
+    'ตีบวก +7: เพิ่มความเสียหายของ Holy Cross และ Pierce อีก 5%',
+  'At +9 refine: additionally increases damage of Holy Cross and Pierce by 10%.':
+    'ตีบวก +9: เพิ่มความเสียหายของ Holy Cross และ Pierce อีก 10%',
+  'At +7 refine: increases Critical Damage by 15%.':
+    'ตีบวก +7: เพิ่ม Critical Damage 15%',
+  'At +7, increases Critical Damage by 10%.': 'ตีบวก +7: เพิ่ม Critical Damage 10%',
+  'At +9, increases Critical Damage by an additional 10%.':
+    'ตีบวก +9: เพิ่ม Critical Damage อีก 10%',
+  'At +9 refine: additionally increases Critical Damage by 15%, ASPD +1.':
+    'ตีบวก +9: เพิ่ม Critical Damage อีก 15% และ ASPD +1',
+  'At +7 refine: MHP +75, MSP +25.': 'ตีบวก +7: MHP +75, MSP +25',
+  'At +9 refine: MHP +75, MSP +25.': 'ตีบวก +9: MHP +75, MSP +25',
+  'At +7 refine: Physical Damage to Undead Monsters +5%.':
+    'ตีบวก +7: Physical Damage ต่อมอนสเตอร์ Undead +5%',
+  'At +9 refine: ASPD +1, Physical Damage to Undead Monsters +10%.':
+    'ตีบวก +9: ASPD +1 และ Physical Damage ต่อมอนสเตอร์ Undead +10%',
+  'At +9 refine, Magnus Exorcismus damage +20%.':
+    'ตีบวก +9: ความเสียหาย Magnus Exorcismus +20%',
+  'At +9 refine, Raging Thrust damage +15%.':
+    'ตีบวก +9: ความเสียหาย Raging Thrust +15%',
+  'At +9 refine: additional Variable Casting Time -1%, Fire Magical Damage +1%.':
+    'ตีบวก +9: Variable Casting Time -1% และความเสียหายเวทธาตุ Fire +1% เพิ่มเติม',
+  'DEF +2 and MDEF +3 when refine level is 5 or lower.':
+    'DEF +2 และ MDEF +3 เมื่อระดับตีบวก 5 หรือต่ำกว่า',
+
+  // Refine tools
+  'Can refine armor.': 'ใช้ตีบวก Armor ได้',
+  'Can refine Lv.1 weapons.': 'ใช้ตีบวกอาวุธ Lv.1 ได้',
+  'Can refine Lv.2 weapons.': 'ใช้ตีบวกอาวุธ Lv.2 ได้',
+  'Can refine Lv.3 and Lv.4 weapons.': 'ใช้ตีบวกอาวุธ Lv.3 และ Lv.4 ได้',
+
+  // Costs and penalties
+  'Consumes 1 SP per hit.': 'ใช้ SP 1 หน่วยต่อการโจมตีที่เข้าเป้า',
+  'Consumes 2 SP per attack.': 'ใช้ SP 2 หน่วยต่อการโจมตี',
+  'All DEF of the wearer reduced to 1/3.': 'DEF ทั้งหมดของผู้สวมใส่ลดเหลือ 1/3',
+  'All defense is reduced to 1/2 while equipped.':
+    'ค่าป้องกันทั้งหมดลดเหลือ 1/2 ขณะสวมใส่',
+  'DEF of equipped armor is reduced to 1/3.':
+    'DEF ของ Armor ที่สวมใส่ลดเหลือ 1/3',
+  'Chance to reduce enemy SP on hit. When equipped by Sage, restores 1 SP each time a physical attack hits a monster.':
+    'มีโอกาสลด SP ศัตรูเมื่อโจมตีเข้า เมื่อ Sage สวมใส่ จะฟื้นฟู SP 1 หน่วยทุกครั้งที่โจมตีกายภาพเข้ามอนสเตอร์',
+
+  // Fragments the game wraps mid-sentence. Translated as the fragment they are,
+  // because that is what the page shows on its own line.
+  'and when taking physical damage, has a low chance to auto-cast [Assumptio] Lv 1 on the wearer.':
+    'และเมื่อได้รับความเสียหายกายภาพ มีโอกาสน้อยที่จะร่าย [Assumptio] Lv 1 ใส่ผู้สวมใส่อัตโนมัติ',
+
+  // Boxes and quivers
+  'A box containing 10 WoE Blue Potion.': 'กล่องบรรจุ WoE Blue Potion 10 ชิ้น',
+  'A box containing 30 WoE White Potion.': 'กล่องบรรจุ WoE White Potion 30 ชิ้น',
+  'A box containing 50 WoE Violet Potion.': 'กล่องบรรจุ WoE Violet Potion 50 ชิ้น',
+  'Arrow Quiver containing 500 crystal Arrow.': 'กระบอกลูกธนูบรรจุ crystal Arrow 500 ดอก',
+  'Contains all Lv.6 cooking recipes.': 'บรรจุสูตรอาหาร Lv.6 ทั้งหมด',
+  'Contains all Lv.7 cooking recipes.': 'บรรจุสูตรอาหาร Lv.7 ทั้งหมด',
+  'Contains all Lv.9 cooking recipes.': 'บรรจุสูตรอาหาร Lv.9 ทั้งหมด',
 };
 
 async function main(): Promise<void> {
@@ -167,6 +380,7 @@ async function main(): Promise<void> {
   }
 
   add(EFFECT_TH, 'effect');
+  add(EFFECT_TH_2, 'effect');
   add(FLAVOUR_TH, 'flavour');
 
   const { error } = await db
@@ -175,9 +389,12 @@ async function main(): Promise<void> {
   if (error) throw new Error(`Failed to seed item_description_lines: ${error.message}`);
 
   console.log(`seeded ${rows.length} lines, covering ${covered} occurrences`);
-  console.log(`  ${Object.keys(EFFECT_TH).length} effect, ${Object.keys(FLAVOUR_TH).length} flavour`);
-  console.log(`deliberately deferred: ${Object.keys(DEFERRED).length}`);
-  for (const [line, why] of Object.entries(DEFERRED)) console.log(`  ${line}\n    ${why}`);
+  console.log(
+    `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length} effect, ` +
+      `${Object.keys(FLAVOUR_TH).length} flavour`,
+  );
+  console.log(`deferred classes: ${DEFERRED_RULES.length}`);
+  for (const d of DEFERRED_RULES) console.log(`  ${d.rule}\n    ${d.why}`);
 
   if (orphans.length > 0) {
     console.log(`\nKEYS THAT MATCH NO LINE IN THE DATA: ${orphans.length}`);

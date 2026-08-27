@@ -1,0 +1,880 @@
+A base item required for setting a trap.
+A baton fitted with a protruding hook, which can be used to disarm an opponent's weapon. Its lethality is low, but it is easy to use.
+A bear's foot that has a unique flavor and supposedly has the power to restore male vigor.
+A beautiful lock of golden human hair.
+A bird's beak.
+A bird's feather that can be used in decor or in fabric creation.
+A birdcage-like cage with a bat trapped inside.
+A black cat doll. For some reason, it feels as if it is alive.
+A black cloth mask used to cover the face. They say that when worn, even a parent could not recognize their own child.
+A black mineral substance that can form steel once it is combined with iron.
+A blue-bladed sword imbued with the power of water.
+A blue-green ore imbued with a faint, mesmerizing light.
+A blunt weapon that looks like a single hit could leave your head spinning.
+A bone taken from an undead skeleton.
+A bottle of sand that sparkles like the stars and is usually found in witch broom bristles.
+A box that is buried with the dead. It contains precious items pertaining to a dead individual.
+A braided pigtail that has been cut from the head of a young girl.
+A broken piece of a shield. It is quite solid and sturdy.
+A broken piece of Dullahan armor. It is very hard.
+A broken piece of the mask a Tengu wore. It is quite red, and the nose on the mask is especially long and unsightly.
+A broken turtle shell. It still sells for a fair price. It seems it was once used in astrology...
+A bug shell that reflects the colors of the rainbow.
+A bunch of tough, strong tendons.
+A bundle of frog eggs.
+A carnivorous flower with a digestive system that's very much like that of humans.
+A celestial robe so sheer you can see through it. It is very light and thin, and its fluttering form is beautiful.
+A ceremonial mask used by an ancient shaman.
+A chipped, rusted kitchen knife. Here and there are stains of dried blood.
+A Circlet said to be worn by leaders of a certain tribe. The central red gem is rumored to symbolize great authority.
+A citrus-colored, bud-shaped stone formed from green live ore.
+A claw severed from a wolf's paw.
+A cloth woven from silk so soft it feels wonderful against the skin.
+A clump of monster fur and fuzz that can be used to make thread and fabric.
+A collection of thin, long, light dragonfly wings cut and gathered together. It does not look possible to wear them on your back.
+A common book, but its considerable weight makes it quite painful when used to strike.
+A complete set of corpse's teeth. Well, as complete as it can get.
+A crescent-moon-shaped brooch sparkling in gold.
+A cross-shaped bow known for its rapid fire and strong destructive power.
+A crustacean's claw.
+A crystal made entirely of fine sand.
+A cubic grain of sand that brightly sparkles.
+A cuspid pulled out of a cursed orc's mouth.
+A cuspid wrenched out of from a gruesome orc's jaw.
+A cut piece of bamboo. Bamboo is hollow inside, yet famous for growing straight and fast.
+A dagger with a pitch-black blade.
+A dark red, heart-shaped stone formed from red blood ore.
+A dark-colored Bamboo Hat that hides your eyes when pulled down low.
+A dark-colored mask worn by assassins to hide their faces. Putting it on somehow makes your heart feel like it disappears.
+A decaying scale with a horribly offensive odor.
+A decorative horn broken off a dragon mask. It appears to be carved from wood and painted.
+A decorative stone resembling a cat's eye. It gives off a rare and beautiful light.
+A deep crimson gemstone that radiates an unknown power.
+A deep crimson gemstone.
+A dented cooking pot worn down from years of use. Still usable for meals, and strangely charming in its own way.
+A diary kept by a wrongfully imprisoned inmate, filled with notes secretly written out of the guards’ sight.
+A doll modeled after a certain girl. It seems to have been made with great care.
+A doll modeled after the popular monster Marionette. Wearing it gives a slight chill on top of the head.
+A doll that was hung from a rope. Keeping it feels as if it might bring a curse.
+A dragon's cuspid that is sharp enough to pierce through dragon scales.
+A dragon's iridescent scale that is tough enough to protect from weather and most forms of harm.
+A famous headgear said to have been worn long ago by a heroic woman. Her kick-based fighting once captivated everyone.
+A feather that boasts full, lustrous barbs used for making clothes of the highest quality.
+A figure of a hand that contains great religious symbolism.
+A flexible, prehensile, and boneless appendage.
+A fragment of a spear blade that gives off an eerie blue glow.
+A fragment of broken stone. It bears a beautiful pattern and is said to sell to stone collectors.
+A freshly cut tongue with a disgusting coating of sticky saliva.
+A fruit peel known for being slippery when stepped on. Wearing this in battle seems to irritate opponents.
+A fun lantern made by hollowing out a pumpkin and setting a candle inside, so light shines through its comical face.
+A girl's sock with pretty multicolored stripes.
+A hammer used blacksmiths for refining.
+A hard and sharp horn.
+A hard crab shell that smells horrible.
+A hard shell taken from a dead clam.
+A hard shell that's used as protection.
+A hard, spiral shaped shell used by snails.
+A hat modeled after the fierce cat Wild Rose.
+A hat worn during school graduation ceremonies. Surprisingly firm, and getting struck by its sharp corners is said to bring pain reminiscent of hell.
+A Headband that looks like something worn by natives living deep in jungles or remote wilderness.
+A headpiece blessed by the guardian angel of Super Novice. Kissing this ornament might feel like receiving an indirect kiss from an angel.
+A heart constructed entirely out of stone..
+A heart that will never stop beating.
+A helmet shaped like a plump, appetizing blue fish. The fishy smell is probably just your imagination.
+A helmet worn to prevent worksite accidents. Its rounded design greatly reduces impact and its sturdiness protects the wearer from most hazards.
+A highly valuable token obtainable from the Guild Hideout Dungeon. Used for item exchanges and enchantments.
+A hind leg that has been cut from a bug.
+A killing whip reinforced with metal beads for greater destructive force, leaving the impression that it could tear off flesh upon impact.
+A kimono that is old but still quite wearable. Its beautiful pattern and colors captivate any who see it.
+A kind of small black spirit, with the red ornament on its head as the highlight. Small and cute, it would be popular as a doll.
+A knife with unrivaled ability for cutting meat. It is simple to use and widely popular.
+A large bow that looks difficult to handle.
+A large hat worn by a pirate captain. Made oversized to project the captain’s authority, it almost resembles a pirate ship drifting across the sea—though it is quite worn out.
+A leaf with magical properties. Smokies use this to change form or become invisible.
+A lemon colored ore that contains a pale, greenish light.
+A leopard's hide with its spotted pattern well preserved. They say someone once made underwear from it and ruled the jungle.
+A letter card that seems good for when you first learn your letters. It also seems to be used often for events.
+A letter card that seems good for when you first learn your letters. It seems to be used for events.
+A light blue, crystal formed from crystal blue ore.
+A liquid with interesting characteristics and many possible applications.
+A liquid with unique scientific properties. It's difficult to mix in water and is normally diluted in a solution. Can be diluted to create Counteragent.
+A lock of cut hair with a sleek, glossy shine. Gaze at its luster and your very soul feels like it might slip away.
+A long cloak made of durable fabric that covers the neck, shoulders, and even the back. It also offers respectable defense.
+A mace said to be used in a certain sport. Its rounded tip and high-hardness carbon steel raise its lethality.
+A malleable, silver-white metal that's very light weight and easy to temper.
+A manteau so worn out it seems it can no longer be worn.
+A marzipan shaped like Poring sits on top.
+A mask symbolizing Zealotus, the mistress of the Glast Heim Underground Prison. Wearing it gives the unsettling feeling of looking down on humans.
+A mask with a flamboyant pattern, used at festivals.
+A miraculous lump of ice that will never melt.
+A mole's claw that is sturdy enough to dig into the ground.
+A moustache shaved off an old fairy that has somehow maintained its entire shape and form.
+A mysterious necklace that is rumored to possess the power of clairvoyance.
+A mysteriously sticky liquid.
+A necklace given by a master once one earns the honor of joining the Assassin Guild.
+A needle that has snapped and become useless.
+A one-handed sword popularized by its use by sea adventurers.
+A one-handed, formal dress sword imbued with fire.
+A pale green, lightning bolt-shaped stone formed from wind of verdure ore.
+A part of a fish's breathing apparatus.
+A piece of iron shaped to fit on a horse's hoof for its protection.
+A piece of nearly transparent fabric.
+A piece of steel whose purpose is unknown, though it is clearly used to open and close something.
+A piece of wood that looks like it was put out while burning fiercely. No one knows what it is for, but it sells anyway.
+A pinwheel fitted with sharp blades. It appears to be made for killing.
+A plate baked from yellow clay. It is hard and has a glossy sheen.
+A portable case with glass panes that allow some contained light to illuminate dark areas.
+A potion with a taste somewhere between Red Potion and Blue Potion. Somehow, it reminds you of the Savage roaming the Mjolnir Mountains.
+A pouch filled to the brim with Guild Agit Coin.
+A powder ground from a poisonous toxin. Mixed into water and fed to someone, it would surely cause great suffering.
+A prehensile tail from a monkey.
+A premium set of refined cooking instruments. Feels like it could elevate any dish.
+A product from the Fantasia Tome Editorial Department’s automaton doll series.
+A pumpkin with a carved, spooky face.
+A putrid, incredibly pungent corpse's nail.
+A rare, legendary sword in which the soul of a master smith lives on, blending power and beauty.
+A red cloth you can wrap around your neck for warmth.
+A remarkable whip enhanced with a weighted tip to increase its striking power.
+A ring placed in a cow's nose so that it can be steered more easily.
+A root from a tree which can be used to make medicine or rope.
+A roughly crafted shield made to block simple attacks.
+A round black pill so bitter-looking you can taste it just by looking.
+A round shell that looks like it has been rolled up.
+A rounded cloth crown adorned with a jewel on top, radiating a classic sense of dignity.
+A sash said to have been worn by a famous ninja. Its luxurious emblem gives off a mysterious light, as if it holds magical power.
+A scale that is much sharper than a razor.
+A self-portrait depicting a young girl. Worn with age, her features are hard to make out, but she seems quite adorable.
+A self-portrait that vividly depicts a distorted expression.
+A set of cooking tools favored by royal court chefs. It feels like it will yield refined dishes.
+A set of fat lips cut from a giant deep sea fish.
+A set of hands taken from the face of a clock.
+A set of long metal rods aligned and fixed together. Found deep underwater, though its purpose remains unknown.
+A set of tails that used to belong to a nine tailed fox.
+A set of wings cut from a moth.
+A sewing tool used to wind thread for stitching.
+A shard of a broken liquor jar. They say the fragrant, aged scent of liquor on it stirs the hearts of drinkers...
+A sharp claw pulled from a leopard. Being pricked by it would surely sting quite a bit.
+A sharp cuspid yanked from some monster's mouth.
+A sharp needle from a Muka..
+A sharp talon from a bird's foot.
+A sharp, front limb severed from a mantis.
+A sharp, poisonous fang.
+A sharp, serrated tooth pulled from the mouth of a giant deep sea fish.
+A shed skin peeling from an earthworm.
+A shell made from hardened scales that's used as protection.
+A shell that sparkles with dazzling light.
+A shimmering, reflective scale.
+A short lock of braided hair.
+A shuriken that is broken and missing its edge. It is one of the secret weapons said to have been favored by spies of a faraway eastern land.
+A simple device made to stir up a breeze. It would be nice to use on a hot day.
+A simple knife.
+A single scale from a Worm Tail.
+A single, functioning cell taken from some monster.
+A skull-shaped ring whose inner band bears an inscription carved with a sharp blade: 'Even in death, forever...'
+A sky colored ore that glows with the light of the deep ocean depths.
+A slightly longer staff designed with power in mind rather than mobility.
+A small one-handed spear that was once also used as a throwing weapon.
+A small pouch padded with cotton, made to hold needles.
+A small sculpture that serves as the token for every true orc warrior.
+A small stellar crystal, fallen from the heavens.
+A small, pitch-black scrap of cloth. It cannot be seen in dark places.
+A small, sturdy box coated in black lacquer. Said to contain one of the ingredients required to create a God Item.
+A soft, squishy hat modeled after the hand-shaped mud creature Sting. It seems the creator ignored the wearer’s comfort entirely.
+A solid, durable shell that's used as protection.
+A spear made from the corpse of a giant sea beast. Its jagged, saw-like blade can inflict deep wounds.
+A spear whose curved blade resembles lightning, capable of both slashing and thrusting.
+A spectacular sword with a blade forged out of meteorite that shines with starlight during the night.
+A spellbook containing powerful, ancient magic.
+A spore discharged from a mushroom.
+A steamed desert scorpion dish considered one of the four great delicacies of the Sograt Desert, cooked using the heat of the sands.
+A stem from a plant which can be used to make medicine.
+A sticky spider's web made of surprisingly strong threadlike fibers.
+A sticky, unpleasant lump of mud.
+A stinger from a hornet or bee.
+A stone engraved with ancient hieroglyphs.
+A stone tablet said to be inscribed with words of wisdom.
+A string instrument found around Payon, Amatsu, and Louyang. Its playing technique has been lost, and it is said no one can play it properly today.
+A stringed instrument that produces sound by plucking the strings with the fingers.
+A striped uniform worn by prisoners, faintly stained with what looks like old blood.
+A sword with a formless blade that seems both to exist and not exist. It attacks and breaks down the target's spirit.
+A symbol which represents evil.
+A tail cut off from a dragon that, sadly, will never grow back.
+A tail severed from a fish.
+A talisman bearing the Taegeuk symbol at its center, ringed by the eight trigrams. In the old days it was used in geomancy and the like.
+A thick, sharpened fingernail from an orc.
+A thin rat's tail.
+A tiger's paw that supposedly has the power to restore male vigor.
+A token which shows a knight's loyalty to his lord.
+A tough, sharp jaw from an ant.
+A tough, woody shelled nut from an oak tree.
+A traditional skirt that symbolizes virginity.
+A treasured T-shirt once worn by a certain witch, featuring a rabbit design she was fond of.
+A tree trunk of wood that is nice and solid.
+A tree trunk of wood that is pretty low quality.
+A tree trunk of wood with an excellent grain.
+A two-handed axe that demonstrates its true power in group combat.
+A valuable metal in bullion form. It's used to make coins, jewelry, and gaudy false teeth.
+A very light, non-toxic metal used for refining and toughening armor.
+A very sturdy helmet made of bone. Though heavy and difficult to wear, its defensive capability is exceptional.
+A vessel woven from plant stems. After washing it with water, it must be dried in the sun.
+A viscous plant substance used in the production of certain types of goods.
+A vivid red ore that glows from inside with an orange yellow light.
+A weapon said to be made from the claw of Garm, gatekeeper of the underworld. It is always stained with blood.
+A weapon so thin and astonishingly sharp it looks able to pry into the gap of any armor.
+A webbed foot cut from a monster's hind leg.
+A weird organic clump which is the brain of a Marine Sphere.
+A whip made by twisting several thin whips into one, with an excellent feel as it coils on a strike.
+A whip made entirely of iron.
+A widely known blessed metal to be used for refining and strengthening a weapon.
+A woody stem from a tree that's useful for lumber.
+A worn, tattered page torn from an old book.
+Accessory pinned to clothing that brings out a bright, lively charm.
+Accessory that expresses a whistle in costume form. Said to help relieve stress and calm the mind whenever you blow it.
+Accessory that, on closer inspection, has a small hole made for inserting something.
+Accessory used to tie and hold hair in place, with a small ribbon on top that emphasizes cuteness.
+Adorable hairpin shaped after the vibrant wings of a blue butterfly.
+Adorable panda-like hat that makes you imagine yourself snacking on bamboo leaves the moment you wear it. Surprisingly popular among women.
+Afro-style hat made for cheerful summer days.
+All-purpose armor cast from solid metal and shaped to fit the wearer.
+All-purpose two-handed sword engineered for reliable use in any situation.
+All-weather outfit crafted for travelers.
+also known by its nickname, the Magical Triangle Hood.
+An adventurer's suit that maximizes both defense and comfort.
+An air of desperation can be felt—
+An ancient ring.
+An antenna that is extremely hard and sharply honed. Its pointed tip is polished like a blade.
+An apple loved by Picky Poring.
+An apron worn by the Alice monster.
+An electric Guitar designed in the shape of a Phen.
+An emblem given to an orc warrior that is proof of his heroism.
+An emblem said to be used by those who love to run fast. Just wearing it makes you want to dash off somewhere.
+An expensive ring made of gold. Since ancient times, gold has symbolized unchanging love.
+An impure ore that forms iron after being refined.
+An iron and carbon alloy known for its structural durability.
+An iron chain so tangled it cannot be undone.
+An old rope, rotted and snapped. It feels like it would crumble at a touch.
+An Old Scroll filled with unfamiliar writing when unrolled.
+An old, battered frying pan no longer suitable for cooking.
+An old, rusted shuriken. Shuriken enthusiasts quietly buy them up.
+An old, used prison uniform.
+An unpleasantly sticky, translucent green liquid.
+Ancient box emitting a mysterious blue glow. Something might be inside when opened.
+Animal droppings, dung… Hard to call it by name, so it is simply called Poo Poo Hat.
+Animal droppings… poop… too unspeakable to say aloud, so it’s simply called Poo Poo Hat.
+Animal hide that can be used in making clothes, coverings or bedding.
+Antennae that serve as sensory organs for insects.
+Apple juice stored in a bottle. Easier to drink and restores better than eating the fruit itself.
+Apple made famous when a legendary marksman of old shot it cleanly off his son's head.
+Argioph draped over the head, occasionally wriggling intensely.
+Armor gains Earth-Property property.
+Armor gains Fire-Property property.
+Armor gains Poison-Property property.
+Armor gains Shadow-Property property.
+Armor gains Undead property.
+Armor gains Water-Property property.
+Armor gains Wind-Property property.
+Armor is never destroyed.
+Armor once worn by members of the Knight of Honor.
+Arrow carved from solid rock, imbued with the power of earth.
+Arrow made of Steel, boasting high attack power.
+Arrow with an oil-soaked wad wrapped around the tip so it can be lit and fired.
+Assassination dagger said to have been favored by Assassin Class.
+Axe said to drive its wielder to seek blood, making them strangely excited and restless in search of enemies.
+Axe soaked with blood from countless swings on the battlefield, radiating a murderous aura that terrifies foes facing its edge.
+Bandana bearing the skull symbol of sea pirates, said to grant courage to the wearer.
+Beard that instantly lends a heavy, dignified air to its wearer the moment it is put on.
+Beautiful cross-shaped ornament blessed by the gods, a rosary.
+Beautiful helmet adorned with gemstones; said to excel at defending against magic due to the mysterious resonance between the stones.
+Beautiful wing-shaped hat made by attaching angel feathers to a Headband; the feel of Soft Feather lifts the mood, making movements feel light and cheerful.
+Being made of solid rock, it is naturally heavy—and getting struck by it would make it hard for anyone to stay conscious.
+Bell made of gold. Produces an exquisitely clear sound.
+Belt worn around the body.
+Best consumed with water to avoid choking.
+Beverage made from the juice of a fruit called Orange. Monster Drops loves it.
+Bird perched on a branch, singing happily.
+Black blade tainted by darkness, said to repel even light. Only the blade remains, yet it is so sharp that even the slightest touch can cut deeply.
+Black butterfly-shaped leather mask that somehow gives off a risqué feeling when you look at it. Likely used to give people a good scare.
+Black glasses that shield the eyes from harsh light and serve as a universally stylish fashion item.
+Black ladle made from a special material, light yet sturdy.
+Black-colored dye that is made from a variable mixture of ground herbs.
+Blind individual unable to distinguish objects. Easily deceived due to inability to see.
+Blue Fish that shines like the sea. Said to be good for health.
+Blue headband worn at a slight angle, catching the eye with its pretty shape.
+Blue pencil chewed so much that bite marks cover its surface.
+Blue Potion made only from the youngest leaves of organic blue herbs, giving it a refreshing taste.
+Blue-painted Orc emblem, seemingly indicating higher status among Orcs.
+Blunt weapon formed from several interlinked chains, delivering considerable impact and a strangely satisfying feeling upon strike.
+Book in which a great sage recorded his enlightenment in the form of a diary.
+Book said to be imbued with the dry, cutting gale that carries not a trace of moisture.
+Book said to be imbued with the power of earth that shakes and splits the very ground.
+Book said to be imbued with the power of rough waves surging across the great ocean.
+Book said to contain sacred scripture, its hefty weight allowing it to deliver powerful blows.
+Book said to contain the blazing heat of the sun, hot enough to melt Steel.
+Boots designed to cover the ankles, crafted with mobility in mind.
+Bottled black fluid often used as a method of self defence by squid creatures.
+Bottled powder from the wings of a moth.
+Bow said to have been favored by hunters. Though difficult to master, its precision and destructive power are more than enough to captivate anyone who learns to use it.
+Bow used by Orc Archer, looking extremely large and powerful.
+Box containing a gift when opened. What it holds cannot be known until the moment it is opened.
+Bracelet that looks magnificent yet somehow sorrowful. Monster Isis loves it.
+Branch of an ancient tree that has gained magical power over countless ages. Its mysterious force can summon a living being.
+Brilliant metal shining with dazzling light. Ancient manuscripts say it appears before one who can change this world’s fate, accompanying their destiny.
+Brings back memories of hot summer days from childhood.
+Bristly, tough hair cut from a wild boar.
+Broad crescent-shaped sword with a rounded blade.
+Broken sword cracked beyond further use. Nearly a piece of scrap Cheol-i.
+Brown plant root still covered in soil.
+Butterfly wing powder that sparkles in the wind.
+Can be diluted to create Mixture.
+Can be refined into the mineral known as Flame Heart.
+Can be refined into the mineral known as Great Nature.
+Can be refined into the mineral known as Mystic Frozen.
+Can be refined into the mineral known as Rough Wind.
+Can be refined to obtain pure iron.
+Can be refined together with iron to produce Steel.
+Can be used to craft powerful weapons and armor.
+Cardigan of the angel in charge of Super Novice. Once worn, the warmth it provides makes it feel like you would not catch a cold even if you slept outdoors.
+Carrot shimmering with rainbow colors. Gentle fragrance is captivating. Monster Lunatic loves it.
+Ceremonial sword said to have been used by a spirit priest who guided the dead. Unsuitable to use as an actual weapon.
+Changes armor element to Ghost-Property. Normal attacks from monsters are not affected by this effect.
+Changes armor element to Holy-Property.
+Circlet that seems to suit Yoyo perfectly.
+Classic hat.
+Clear quartz once believed to be ancient frozen ice. Yellow-tinted varieties represent good communication and composure.
+Cloak said to have been worn by a well-known local lord in ancient times; perfect for those seeking an air of overwhelming charisma.
+Clothing made from green fabric and blessed with divine protection, offering excellent defense for clergy members.
+Common plant seen everywhere in the world. Though lacking fragrance and color, its leaves bring joy to many.
+Commonly used as a spice, this fiery red ingredient brings a hellish heat the moment it touches the tongue.
+Completely prevents Blind.
+Completely prevents Confusion.
+Completely prevents Frozen.
+Completely prevents Petrification.
+Completely prevents Silence.
+Completely prevents Sleep.
+Completely prevents Stun.
+Cookie baked to golden perfection, giving off a delightful aroma. Sweet flavor is excellent and restores stamina when eaten.
+Cooking tools that legend says make any dish delicious, no matter what you cook.
+Cool summer straw hat that makes you want to cut grass and enjoy the feeling of harvest.
+Costume accessory modeled after popular monster Sohee, with a large bell that really highlights its cuteness.
+Costume chef’s hat topped with an entire cake.
+Costume hairband featuring a bat-shaped ornament and trailing red ribbons.
+Costume hat distinguished by its small size.
+Costume hat resembling Wild Rose, which never lets its prey escape once it has been targeted with swift movements.
+Costume hat shaped like Picky, wearing a pressed eggshell.
+Costume helmet modeled after a cobra.
+Costume Hood that makes you feel like a lively green frog, detailed enough to draw curious looks from passersby.
+Costume mask modeled after the nose of Savage.
+Costume pancake with a sweet aroma.
+Costume replica of the Helm worn by the Khalitzburg Knights.
+Costume scarf crafted with many prayers—
+Costume set modeled after a bug-catching net.
+Costume shadow said to resemble a Deviruchi cloaked in darkness.
+Costume Stuffed Doll modeled after Savage Babe.
+Costume that makes it look like you are crying. Looks convincing, but no actual tears are shed.
+Cowboy-style hat that captures the classic spirit of the Wild West.
+Cowboy-style hat that captures the flavor of the western frontier.
+Crown said to have been worn by a certain king; enchanted to refresh the wearer’s head and bolster their mental strength.
+Crystal Mirror. Essential for women’s adornment and considered more luxurious than items made of ordinary glass.
+Curved blade designed for powerful slashing attacks.
+Cute, girlish broom decorated with charming ornaments.
+Dagger adorned with very ornate patterns, often used by nobles as a ceremonial or decorative weapon.
+Dagger crafted with a special forging method passed down by a small desert tribe.
+Dagger crafted with practicality in mind for cutting tasks.
+Dagger focused more on thrusting than slashing.
+Dagger forged with a special technique. The wave pattern revealed on its blade when reflecting light is beautiful enough to leave one entranced.
+Dagger said to be made from the fang of some monster, gradually driving its wielder more ferocious the longer it is used.
+Dagger said to guide its wielder onto a path of good fortune.
+Dark Contract. Monster Deviruchi loves it.
+Dazzling pure-white robe embroidered with magical spells.
+Depending on the wearer, especially men, it may give the wrong impression.
+Despite the Critical drawback of requiring both hands, this excellent staff greatly amplifies magical power.
+Developed front claw of a crustacean. Getting pinched would certainly hurt.
+Device used to hatch monster eggs. Easy to carry and allows awakening your resting pet inside the egg.
+Dignified hat fit for gentlemen, said to embody the mellow and gentle nature of middle age, which is how it earned its name.
+Doll modeled after Rocker, which roams the plains playing instruments at leisure. Its Unchained Serenade sometimes earns the resentment of farmers during harvest season, yet it is surprisingly popular thanks to its gentle and kind-looking appearance.
+Doll modeled after Smokie, which lives in the forest. Surprisingly popular among men.
+Doll modeled after the monster Chonchon, adored passionately by certain eccentric people.
+Doll modeled after the monster Spore, which lives in damp places.
+Doll modeled after Yoyo, which lives in groups deep within forests. Yoyo is highly intelligent, can become very friendly with people when well tamed, and is popular among young women and girls thanks to its cute appearance.
+Dried plant wrapped in paper and lit so the smoke can be inhaled; this is called Cigarette smoking, known to cause various diseases, so those who are not adults must never smoke it.
+Dried plants wrapped in paper and lit so the smoke can be inhaled, an act known as smoking. Known to cause many kinds of illness, so minors must never use it.
+Dwarf-style fluffy beard that keeps the wearer warm enough to make a scarf unnecessary.
+Easy-to-wear shoes, though not particularly protective.
+Eggshell made small so that pets can wear it.
+Elegant garment that seems to raise the wearer’s dignity by a step.
+Enchanted wing plucked from a bird, allowing warp to a random place on the map. Allows warping to a random location on the map.
+Enhances weapon durability when used in weapon crafting.
+Enormous mass of Jellopy, though no one knows how or where it was formed.
+Excellent shoes made from durable fabric, offering both great mobility and reliable defense.
+Expensive garment crafted from a fabric known as silk, offering excellent magical defense.
+Extremely bitter herb that makes anyone grimace when eaten. Monster Poporing loves it.
+Extremely durable-looking Insect Carapace.
+Extremely light garment that feels almost weightless, making movements feel quicker and lighter.
+Extremely tough vine that cannot be torn by hand. Could function well as a rope.
+Eyepatch said to have been worn by someone from a distant western land, rarely seen in eastern lands; perfect for concealing one’s identity, though those who wear it too often are rumored to be dragged off somewhere…
+Fearsome claws capable not only of striking but also slashing and tearing.
+Fearsome killing blade with a chillingly blue edge.
+Feather that evokes the same comforting temptation as a warm blanket wrapping you on a cold morning when you don’t want to get up.
+Feels as if it would melt the instant it touches your tongue.
+Feels as if music begins to play when you wear it.
+Feels as though you’ve become a mother Warg.
+Fine, dried sand of the kind often seen on the roadside. It is so dry it crumbles when you grasp it.
+Fist guard that protects from the wrist to the fingers.
+Fist guard used by a small tribe in a far eastern land.
+Flower said to bloom from Singing Plant. Monster Rocker loves it.
+Flower with a strong fragrance, used as seasoning in some dishes. Excessive intake is said to cause Hallucination.
+Flower worn in the hair; its beautiful single bloom pleases those who see it, but the wearer cannot enjoy the view.
+Flower worn in the hair. Its beauty brings joy to those who see it—
+Foam that lets the razor glide smoothly.
+Forbidden book containing secret techniques for demon summoning. Monster Baphomet Jr. loves it.
+Forbidden charm that brings back the dead while keeping them as dead. Those who rise exist between life and death, becoming undead Dega.
+Form-fitting outfit designed for ease of movement.
+Four-leaf clover carrying the fresh scent of green grass. Feels like luck will follow.
+Fresh blood collected from livestock and stored in a bottle. Favored by certain beasts and monsters.
+Fresh carrot originating from Poring Village.
+Fresh green onion originating from Poring Village.
+Fresh sprout newly emerged from a plant seed.
+From the front, it hides its form entirely, giving the eerie sense of being possessed by a demon.
+Fruit of a palm tree containing white juice inside.
+Fruit with a refreshing blend of sourness and sweetness. Shell is slightly hard and sharp—handle with caution.
+Garment ornament crafted to mimic the form of a spider. Its legs spread out in a way that almost looks like wings.
+Gemstone with a blue hue.
+Gemstone with a green hue.
+Gemstone with a pink hue.
+Gemstone with a red hue.
+Gemstone with a sky-blue hue.
+Gemstone with a teal hue.
+Gemstone with a violet hue.
+Gemstone with a white hue.
+Gemstone with a yellow hue.
+Giant honey dipper still dripping with sweetness. Although only a costume, caution is advised as real Hornet may be drawn to it.
+Giant sunflower hat designed to sit on top of the head; not exactly pleasing to the eye, but guaranteed to draw attention.
+Glass shoes made entirely of glass, created with no concern for mobility or practicality, pursuing only visual beauty to the extreme.
+Glasses with eyes opened wide in an angry glare; if a lover’s eyes actually look like this, the wisest choice is to apologize immediately.
+Glossy shell that shines brightly, rolled into a round shape.
+Gloves once used by a Mage.
+Gloves said to have been used by priests or clergy when conducting rituals, said to carry their accumulated knowledge.
+Gloves that, when worn, allow for fine, precise control of the hands.
+Gloves worn during executions.
+Golden mace that appears more noble and beautiful thanks to its material.
+Golden mask said to have been worn by a certain Pharaoh. Its shape and color are splendid, yet the fact that it is a death mask is unsettling.
+Graduation cap worn at academies and schools, sturdy enough that getting hit by a corner feels downright hellish.
+Grants immunity to Blind and Curse.
+Grants immunity to Poison.
+Grants unlimited Movement Speed Increase.
+Grape juice stored in a bottle. Easier to drink and restores better than eating the fruit itself.
+Green antennae of a grasshopper.
+Green lace made to be worn by a pet or a baby.
+Green moss grown with early morning dew. Monster Spore loves it.
+Grotesque mask that looks as if it is in great agony. Likely used by those with questionable taste to startle people.
+Hairpin decorated with a flower resembling the breeze across the meadows.
+Hairpin shaped like Claw Meat.
+Halo-shaped headgear modeled after the ring said to appear above the heads of those who go to heaven. Despite appearances, it does not actually grant invisibility.
+Handle with care, as improper use may cause burns.
+Handle with care, as improper use may cause frostbite.
+Handsome Stylish Young Worm whose red bow tie around the neck is a charming point. Monster Picky loves it.
+Hat bearing the marks of fierce battles fought on the front lines.
+Hat fitted with large goggles resembling those used by aircraft pilots; said to protect the eyes from strong winds when worn.
+Hat inspired by the head of the monster Peco Peco.
+Hat likely worn by high-ranking clergy; its flat shape provides surprisingly easy wear and high mobility.
+Hat made from the hard shell of a fruit cut in half. Sturdy and offers excellent defense, but cannot be refined because it breaks when hammered.
+Hat modeled after Magnolia, a vengeful spirit born from Peco Peco eggs that failed to endure the desert heat.
+Hat modeled after the green antennae of an insect. Wearing it is said to make you feel like a grasshopper leaping through a field.
+Hat modeled after the mischievous monkey monster Yoyo.
+Hat modeled after the wildly popular monster Poring. Definitely not made from rubber gloves, no matter how it looks!
+Hat modeled after those worn by soldiers long ago, redesigned with a modern touch.
+Hat said to have been worn by a famed judge, filling the wearer with a sense of delivering justice.
+Hat said to have been worn by those who nurse the sick and care for patients in place of doctors; the red cross gives off an aura of sanctity.
+Hat styled after the face of a cute, popular teddy bear.
+Hat symbolizing clergy, giving a solemn appearance when worn.
+Hat that looks as if a cute chick is perched on your head.
+Hat that looks as though chilled, chewy gelato has been placed right on top of your head.
+Hat that looks like it could be seen in a distant land and symbolizes the sun. Tougher than it appears.
+Hat that makes the wearer feel as though they could launch into the sky the moment it is worn.
+Hat that makes you feel as though you could lift off into the air the moment you put it on.
+Hat that older people can wear without feeling burdened when trying to dress up a little; may send them drifting into faint memories of their younger days.
+Hat worn at gatherings such as socials, celebrations, or birthday parties—
+Hat worn by cathedral nuns, symbolizing modesty and self-restraint by keeping the hair concealed.
+Headband featuring a small triangular cloth, said to be placed on the foreheads of the deceased in a small eastern island nation.
+Headband fitted with two sharp horns; a mysterious Headband said to provide high defense through unknown power.
+Headband modeled after the wings found on the back of a demon; said to make the wearer feel empowered the moment it is put on.
+Headband modeled after wings on a demon’s back; the moment it is worn, an unknown power makes the wearer feel stronger.
+Headband topped with a small cross-shaped accessory.
+Headdress said to have been worn by an ancient queen. Design radiates such overwhelming dignity that it makes you bow your head, yet also stirs a strange urge to defy that majesty.
+Headgear forged from pure gold, admired for its beautiful appearance and refined style. Considered a luxury item and difficult to obtain.
+Headgear that draws out a lonely, cynical air around the wearer.
+Headpiece made from the branch of the earliest blooming spring flower. A sweet, gentle fragrance lingers around it.
+Headpiece traditionally worn by women at weddings; when worn by men, it can easily cause misunderstandings.
+Healing and regeneration.
+Healing remedy finely ground from Green Herb. Cures Poison, Silence, Blind, Confusion, Hallucination.
+Heavily decayed fish. Monster Chonchon loves it.
+Heavily scratched spoon worn down into a straight line. Likely used by prisoners to dig escape tunnels.
+Heavy greatsword once wielded by the Knight of Honor.
+Helm of the Orc tribe. Orc craftsmanship is primitive and rugged in style.
+Helm shaped like a fish fin said to protect Swordsman. Be careful—wearing it does not actually let you breathe underwater.
+Helm worn by Knight of Abyss.
+Helmet crafted from bone, extremely solid but heavy. Difficult for most to wear, yet its defensive power is remarkable.
+Helmet formed by combining rings of multiple attributes. Its appearance is both majestic and ornate.
+Helmet made of solid metal providing high defense, though it looks like it could strain the neck if worn incorrectly.
+Helmet modeled after the beautiful wings of an angel.
+Helmet shaped like a signboard reading 'Recruiting Guild Member!'. Shall we siege together?
+Helmet styled like a signboard reading “Boyfriend Wanted!”
+Herb that neutralizes various poisons. Cures Poison.
+High-power whip that discourages dangerous ideas.
+High-quality ribbon made from soft Claw. Compared to Guitar and other ribbons, it feels especially soft to wear.
+Highly resistant to powerful strikes, yet oddly vulnerable to weaker blows.
+Holy axe imbued with sacred power, often used in rituals.
+Holy robe overflowing with sacred power that keeps the wearer’s faith from wavering, said to grant unshakable Faith in any situation.
+Holy shield entrusted to the guardian angel assigned to the super Novice. Imbued with sacred power to repel evil.
+Horn imbued with the presence of Majoruros.
+Horn made from ivory-like white material, rounded at the tip rather than sharpened.
+Horns sliced off the head of a little demon.
+Insect Monsters drop Wind of Verdure with a certain probability.
+Instrument whose form of expression has long been forgotten, though its lineage survives to this day.
+Iron so badly rusted that it is difficult to use. Monster Steel Chonchon loves it.
+It has been redesigned with reduced size and power so it can be wielded as personal equipment.
+Item created to lure Thief Bug by imitating their behavior.
+Item shaped after Angry Mouth, enabling various expressions like an angry cat or an angry rabbit.
+Item that can bring smiles to others when worn, though it may cause people to mistake the wearer for Rudolph the reindeer.
+Its blade is a dazzling white, and because the blade is made of bone, it suits thrusting better than slashing.
+Its excellent defense draws attention despite its heavy weight.
+Its excellent warmth makes it a favorite for their outdoor camping activities.
+Its little hops are absolutely adorable.
+Jeweled headpiece said to have been worn by a certain queen; the moment it is put on, magical clarity surrounds the wearer’s mind.
+Jewelry piece modeled after a pure white rose, subtly enhancing the wearer’s beauty.
+Juice made from Animal Blood favored by monsters. Monster Hunter Fly loves it.
+Juice of Banana stored in a bottle. Easier to drink and restores better than eating the fruit itself.
+Just a simple stone that you can pick up around anywhere.
+Katar shaped from cutting wind, capable of occasionally putting enemies into Sleep.
+Key that can open a certain door within the Clock Tower.
+Key that can open the underground door of the Clock Tower.
+Large hibiscus flower decoration—found only in Ayothaya.
+Large Leaf that looks as though it could be worn on the head during rain.
+Large one-handed spear with a long shaft and an added scythe-like weapon, allowing a wide variety of attack patterns.
+Large rat claw, likely covered in countless germs.
+Large towel made from cool material to block excessive sunlight and heat.
+Large two-handed sword with a thick blade, designed for both offense and defense.
+Leaf shimmering with razor-sharp blue light. Getting cut by it hurts terribly.
+Legendary hat made for people who avoid others. When worn, people around the wearer somehow start to keep their distance. Rumor says wearing this hat on a date will get you kicked out on the spot.
+Legendary plant said to shine more brilliantly than anything else in the deep night. It blooms alone in remote forests, glowing brightly. Some say heaven can be seen within its light, but once the flower is plucked, the glow vanishes forever.
+Lethal weapon forged through ancient techniques, capable of bewildering enemies with its diverse movements.
+Light cloth hood worn to protect the head and shoulders.
+Light garment made of pure cotton. Worn together with Triangle Panties, it feels so light it is as if you could float away.
+Light to the point of feeling empty when eaten, often used for dieting by women. Said to have almost no nutritional value?
+Light wooden pants roughly put together. In hot regions they are light and help prevent sweating.
+Light, inflated summer ball in bright colors—perfect for playing on the beach.
+Light, short staff designed to keep movement light and agile.
+Lightweight and cute at a glance.
+Long cloth neatly rolled and tied into a pretty bow shape, usually for women; when worn by men, it can cause misunderstandings unless they are quite boyish.
+Long coat that reaches below the knees, offering some protection against the cold—though it might be a bit much to wear in the summer…
+Long one-handed spear said to have been used by infantry.
+Long pipe used to smoke Cigarette; this act is called smoking, known to cause various diseases, so those who are not adults must never smoke it.
+Long spear used for mounted charges.
+Long white dress worn by women at weddings. It is no exaggeration to say that almost every woman dreams of the day she gets to wear it.
+Long-hafted mace that keeps enemies uneasy even when they think they are far enough away.
+Long, slender thrusting sword.
+Looks delicious, but sadly, it’s only a costume item and cannot be eaten.
+Looks like a rabbit pet you can perch on your head. It looks very soft.
+Lustrous, well-brushed hair cut from a virgin.
+Mace fitted with a blade, greatly amplifying its destructive power.
+Made from the peeled hide of a black bear. It looks warm, but it surely smells terrible.
+Magic book used by magicians, large and thick enough to be used as a shield.
+Magic staff retaining fragments of ancient arcane knowledge,
+Magical Arrow imbued with the power of wind.
+Magical wooden core powering Wooden Golems.
+Magically enchanted Everlasting Rose. Only a few are ever made, making it extremely expensive, but as a symbol of unfading eternal love, it is highly sought after by young men.
+Magician Hat that looks like a rabbit might jump out the moment you reach inside. Fairly sturdy and not easily broken.
+Makes a charming gift as well.
+Mask marked with a bold X; looks like something often worn during mass protests to press collective demands.
+Mask modeled after Whisper, as if wearing a Whisper face pack.
+Mask of a bandaged zombie — perfect for having fun during the Halloween festival.
+Mask perfect for when something is so annoying or unfunny that it just makes you sick of it. That is pretty much its only purpose.
+Mask shaped like a wide smile. When someone wears it, no one can tell what kind of expression they are making underneath.
+Mask that conveys the firm resolve befitting Goblin leaders. Still, in the end, it is just Goblin.
+Mask with a wide-eyed, round expression. Try wearing it when something truly surprising happens.
+Mask with eyes wide open in round surprise. Fun to wear whenever something truly astonishing happens.
+Mask worn by Goblins, crudely made and said to draw finger-pointing from those who see it.
+Massive axe whose enormous blade can make foes lose their will to fight before the battle even begins.
+Massive hammer delivering overwhelming downward force.
+Massive mace whose ferocity belies its name, striking fear into anyone who sees it despite being called the morning star.
+Massive ribbon overwhelming in size; on women it further emphasizes cuteness and beauty, but when worn by men… words fail.
+Massive two-handed sword that overwhelms foes with sheer weight and swing speed.
+Massive two-handed sword with a blade that looks capable of smashing anything in its path.
+Medicine made mainly from a plant called Ment. Eases pain for a certain time, so it is also used as an analgesic.
+Men’s suit that combines ease of movement with a stylish look.
+Mermaid Headphones
+Milk prepared in a baby-friendly bottle.
+Mineral-shaped mass formed when magical energy condenses within a living body, faintly radiating power.
+Mini silk hat costume adorned with angel wings.
+Monsters drop a certain amount of Zeny with a fixed probability.
+Most delicious part of Savage.
+Most standard form of one-handed spear.
+Mother who met an unfortunate end. Her memory remains vividly, giving an ominous feeling.
+Multi-purpose dagger created with practicality as its main focus.
+Multi-purpose dagger said to have been used by the army of an ancient kingdom, slightly long for a typical dagger.
+Muscular and fatty clam tissue that can be cooked in all sorts of ways.
+Mysterious earring that, once worn, surrounds the wearer with clarity and helps maintain a clear mind.
+Mysterious hat said to push the wearer’s mental strength to its limits, allowing more frequent spellcasting, though its mobility is something best left unmentioned.
+Mysterious medicine that cures various Status Ailment (Poison, Curse, Silence, Confusion, Blind, Hallucination).
+Mysterious necklace that, once worn around the neck, wraps the body in reassurance and makes the wearer feel stronger without even noticing.
+Mystical plant said to sing sorrowful songs alone on bright moonlit nights. Legend tells of a woman who waited endlessly for a departed lover, eventually turning into this plant.
+Nameless flower with neither fragrance nor thorns.
+Necklace once worn around the neck of the monster Matyr. Some say Matyr’s swift abilities come from this very necklace.
+Necktie worn on the head.
+Never becomes damaged.
+Newly sprouted young plant. Fresh and pure in appearance.
+Not just an ordinary fried egg.
+Notebook that seems as though it once held cards. Its worn pages give off a mysterious aura.
+Occasionally curses the wielder.
+Old broom passed down through generations. Monster Dokebi loves it.
+Old Treasure Chest filled with ancient coins, ornaments, and jewels.
+Old, dirty bandage that's so soiled, it's almost worthless.
+Once a Honey Jar filled with honey, now completely emptied—someone must have eaten it all.
+Once symbol of Pharaoh, now shattered and barely able to exert any of its former power…
+One of the legendary weapons. Its sharpness, born of a vacuum blade, is beyond words.
+One-handed spear shorter than standard spears.
+One-handed sword once used by cavalry, with strong ceremonial significance.
+Only the wearer knows the true identity behind the noble beast’s mask.
+Ore that can be refined into Elunium. Used primarily in armor forging to produce Elunium.
+Originally a large siege bow designed to break down walls and gates.
+Originally a shampoo cap, but useful even outside bath time—
+Outfit brought from an eastern island nation that not only greatly boosts the wearer’s abilities but also feels light and refreshing to wear.
+Outfit that draws every gaze the moment it is worn. Its glittering surface is excellent at catching the attention of others.
+Pacifier toy played with by small children. Made from gentle material that is harmless to them.
+Pair it with flushed cheeks and it becomes an over-the-top hospitality set.
+Pale pink quartz that turns blue when left in open air for long periods. Represents personal elevation.
+Pale-green Soft Leaf with a very soft texture to the touch.
+Paper blessed by the sacred Priest. Allows the use of Holy-Property magic Heal
+Paper treated with oil so water cannot soak through, giving it a slightly yellowish tint.
+Part of Petite Tail. Rumored to regrow once cut.
+Peach so hard that it could deflect blades. Cannot be eaten, but would hurt considerably if thrown.
+Peeled stem of Aloe with its inner gel stored inside. Extremely sour taste and sharp smell may be off-putting, but once tried, the flavor is said to be unforgettable.
+Perfect for running a street stall.
+Physical attacks may gather Spirit Spheres.
+Piece of wood that looks suitable for crafting into various items.
+Pieces of armor so broken they seem unusable. A scrap-metal merchant might buy them.
+Pieces of cloud kept in a bottle. Just watching the fragments shift into geometric shapes is mesmerizing.
+Plant containing deadly poison. Monster Poison Spore loves it.
+Plant said to bloom shyly only in deep forests. Its season is limited, making it difficult to find.
+Plant with three heart-shaped leaves that blooms white flowers in June and July. Occasionally a four-leaf one appears, symbolizing great fortune.
+Plump, healthy earthworm. Monster Peco Peco loves it.
+Poporing-shaped Muffler. Looks like it would feel refreshing to wear in the heat of summer.
+Popular Doram bath accessory, recreated as a costume item.
+Possesses strong restorative properties but works slowly.
+Practical signboard with the word “sale” written on it.
+Practical sword widely distributed among common citizens.
+Primitive shoulder guard carved from wood for basic protection.
+Probability increases if the wearer is Acolyte Class.
+Protective gear with blades mounted on each finger, making something like drinking tea rather difficult.
+Pure white flower said to blur even memories. Contains components believed to ease pain.
+Pure white plate with a clean finish, suitable as a gift for women.
+Rare mineral with a faint blue glow.
+Rare mineral with a faint red glow.
+Red bat wing.
+Red muffler. Extremely red.
+Red picture frame, suitable as a gift.
+Refinable.
+Refined star crumb.
+Refreshing Ice Cream. Eating too much might freeze your mouth...
+Removes size penalties on weapons.
+Report-like book said to contain terrifying stories of the end of the world.
+Representative string instrument of a western land, notable for its small size yet clear tone.
+Ring imbued with mysterious magic said to increase the wearer’s strength.
+Ring placed into a horse's pierced nose to help steer it in a certain direction.
+Ring woven from flowers, carrying what feels like the shy innocence of a country girl.
+Ring-shaped head ornament set with small gemstones; unlike Headband, it may cause misunderstandings when worn by men.
+Ritual blade once used by guardian knights stationed to defend the castle.
+Roasted Sweet Potato, roasted to perfection. Monster Smokie loves it.
+Robe infused with the essence of ancient sorcery. Its refreshing feel helps the wearer focus and concentrate more easily.
+Robe of the angel in charge of Super Novice. Softly wraps the entire body, offering the best possible comfort.
+Robe woven from threads of precious silver.
+Rock-forming mineral found in the earth’s crust and meteorites. Transparent pink or green types are prized as gemstones.
+Rod used for discipline in the name of education. Of course, it can also serve as a sufficiently intimidating weapon.
+Roots, which resemble human legs, that almost look capable of walking.
+Rose carved from ice, created by a renowned sculptor from a cold region, making for a unique gift.
+Round copper badge once given to officials traveling on government duty in an eastern country. They shouted "The Secret Royal Inspector arrives!" while holding it. Movement speed increases for a short duration.
+Round fruit with a net-like pattern. Pale green interior gives off a sweet aroma.
+Round headguard made from magical material. Unlike other materials, it is shaped so breathing is still possible.
+Round shield that is easy to craft and simple to handle, making it widely used.
+Said to gain a unique charm as the material ages.
+Said to have a fresh, youthful taste.
+Same effect as Yellow Potion but much lighter.
+Sand so fine it is difficult to hold even with both hands.
+Sandals of the angel in charge of Super Novice. Jumping in these makes it feel as if you could leap all the way up to the sky.
+Scales from a snake that can be used to make some rather flamboyant clothes.
+Scarf with a fearsome look, as if large nails were driven through it.
+Sea-Otter Leather that looks warm enough to make fine clothing. Its softness can be felt just from looking at it.
+Seaweed that grows in the ocean.
+Seaweed with vibrant, eye-catching colors.
+Seems designed with no concern for the wearer's feelings.
+Seems to be a byproduct of Angeling.
+Seems to be a byproduct of Deviling.
+Seems to be a byproduct of Drops.
+Seems to be a byproduct of Poporing.
+Seems to be a byproduct of Poring.
+Seems to contain Jello Fragments inside.
+Several strands of red thread attached as an ornament to the tip of a sword.
+Shackles worn on the ankles of prisoners or slaves to keep them from escaping easily. A chain connects both ankles with a heavy weight attached, greatly restricting movement.
+Shaped like a large bladed cartwheel — big and heavy, but tremendously powerful.
+Sharp claws taken from monkeys. Can be sold to the Collector.
+Sharp Katar carrying the chill of the prison.
+Sharp, hollow quills which used to cover and protect a porcupine.
+Shattered pieces of an eggshell.
+Shield forged from solid steel, boasting powerful defensive capability.
+Shiny crystal that resembles Large Jellopy but with a stronger gleam.
+Shoes with front tips sharpened like blades. Wearing them outside may be a bit too much of a challenge.
+Short dagger with a gently curved blade.
+showing remarkable performance.
+Showy wig appealing to those who want a unique look. Its three bright colors easily draw everyone’s attention.
+Signboard engraved with the enigmatic word “STOP.”
+Silver dagger symbolizing purity. Monster Sohee loves it.
+Silver ring whose clear silvery-gray shine, unlike gold, is more than enough to capture the eye of anyone who sees it.
+Simple hat with a wide brim designed to block sunlight.
+Simple jacket made from inexpensive leather.
+Simple yet practical outerwear commonly worn by clergy.
+Single strand of Leaf held in the mouth; may make the wearer feel like a wanderer drifting with the wind.
+Skin cut from the neck of a lizard.
+Skin from a larva that has been shed or peeled off.
+Skin shedded from an insect.
+Skull of the dead.
+Sleeveless long coat with a stylish silhouette.
+Slender vine used by plants to cling to objects as they grow upward.
+Slice of a large cake. Soft cream melts gently in the mouth. Restores stamina when eaten.
+Small and cute yet stylish in its own way, looking good on any gender.
+Small enough to sit comfortably on the shoulder.
+Small glass bead often used as a toy by mischievous children.
+Small jeweled circlet worn on the head.
+Small mustache reminiscent of a very famous black-and-white TV character, neatly trimmed.
+Small pair of red ribbons that serves as a charming accent, making young girls look even cuter.
+Small sprout-shaped hat in a fresh green color.
+Small, cute Headband modeled after cat ears.
+Small, cute star-shaped hairpin that lets the wearer show off a lively charm.
+Smooth, glossy paper that seems perfect for writing on. It feels very nice and seems quite high-quality. Perfect for a love letter...
+So slippery that stepping on a blob dropped on the floor is extremely dangerous.
+Soft cloth placed under a baby's chin to keep milk or drool from staining clothing.
+Soft mold powder.
+Soft white yarn wound into a round ball.
+someone please set her up on a date.
+something that just makes you feel cheerful when you put it on.
+Spear whose tip burns with heat like hellfire, just as its name implies.
+Spear whose wide double-edged blade is tipped with two sharp prongs.
+Spear with a hook-shaped tip that pushes and pulls foes, making it difficult for them to move.
+Spear with a massive blade that blurs the line between sword and spear.
+Spear with an inward-leaning, sword-like blade.
+Specially crafted restraining cuffs said to be used only on master thieves. Extremely sturdy—neither breakable nor refinable!
+Specially processed sweet and rich milk. Monster Savage Babe loves it.
+Spore from a poisonous mushroom.
+Squishy hat modeled after Sting, a hand-shaped lump of mud.
+Staff favored by a gentleman from a distant land; some versions are said to hide a slender blade within.
+Staff occasionally carried by Owl Duke in place of an umbrella.
+Staff once wielded by Flame Ghost, imbued with Fire-Property magic.
+Staff once wielded by Ice Ghost, imbued with Water-Property magic.
+Staff said to be used by priests and clerics in rituals, their hidden knowledge enhancing its power.
+Standard Arrow found almost anywhere, made from easily obtainable materials and commonly used.
+Statue said to strengthen the unity of a group. Those who see it feel a stronger bond forming within.
+Sticky skin of Anolian.
+Strange glasses that use compressed glass to make distant things appear right in front of you.
+Stretchy cord that snaps back to its original length with applied force. Surprisingly fun to play with.
+Stuffed doll shaped like a rabbit, made from fabric and cotton, suitable as a gift for young girls.
+Sturdy Decorative Eggshell worn on the head. Its glossy shell is tougher than it looks, and rumors say it can momentarily make others mistake you for someone with certain traits.
+Sturdy metal mouthguard that, once worn, is enough to make one feel as though they have become “Automatic Doll Z.”
+Sturdy-looking tree branch seemingly useful for many purposes.
+Stylish costume ornament inspired by a wolf.
+such as when playing in the sea.
+Suspicious box marked with a Poring.
+Sword named after a renowned eastern bladesmith. Often called a cursed blade, yet its power cannot be ignored.
+Sword that seems usable by anyone, except for priests.
+Sword used by the Orc tribe. Considered extremely rare, as blades among Orc nobles symbolized political authority.
+Sword with a rounded pommel for elegant decoration.
+Tattered and worn clothing scraps. No one knows who buys them, yet they sell surprisingly well.
+Tattered-looking Cloak seemingly stitched together from scraps, yet it offers surprisingly strong magical protection.
+Terrifying mace studded with nails so viciously that neither the wielder nor the target knows what to do about it.
+Terrifying staff adorned with a human skull. Its performance is excellent, but a dark aura always clings to it.
+The bumpy skin peeled from a poisonous toad's back. Handle with care — touch it carelessly and the poison may give you a painful time!
+The color of the blade seems to warn of this sword's danger.
+The dried shell of a sea turtle. It is very hard and can be processed for many uses. Sells to collectible merchants.
+The fin of a fish.
+The hair cut from a medusa head, which is essentially just a bunch of snakes.
+The hat of the monster Hyegun. It is worn and tattered, but surprisingly has strong defense.
+The heart of a mermaid.
+The hind leg of a grasshopper.
+The horn from a Dokebi which are rumored to bring great fortune to their owner.
+The Huuma Shuriken 'Calm Mind' keeps the user's mind clear, granting an unshakable composure. A steadfast mind that never wavers, even in the hardest situation, is a great aid in battle.
+The Khalitzburg order, composed entirely of women, is said to have once defended Glast Heim alongside Heinrich.
+The plucked whiskers of a mole.
+The severed tail of a scorpion.
+The severed tongue of a reptile.
+The sharp fang of Hatii.
+The sharpened tooth of a bat.
+The shell of a marine mollusk.
+The stump of a branch lodged in a tree.
+The sturdy-looking helm of a Dullahan. The red tassel at its center is the highlight.
+The sweet whispers of Loki, the arrogant god. Let your guard down against Loki's cunning words and you, too, may be swayed.
+The teeth cut from a dragon mask. Whatever they are made of, the teeth alone do not seem to be wood.
+The teeth of great Orc warriors. Can be sold to the Collector.
+The wing of a giant butterfly. However, it seems to lack the wondrous power of a Butterfly Wing.
+Thick scarf worn to cover the neck and shoulders.
+This colorless liquid is the secret behind the addictiveness of beers and wine.
+This is considered food for Mummy pets.
+This is considered food for Steel Chonchon pets.
+Though it appears as a frog, a gentle young man waits within—hoping for the girl who will break his curse.
+Though made of paper, it is hard enough to be mistaken for a blade. Probably not good for writing a love letter...
+Though merely a shadow, it has been witnessed moving in unnervingly lifelike ways.
+though sadly, the wearer cannot see it themselves.
+Through its hypnotic effects, even a Novice can feel like a master archmage when wielding the Hypnotist’s Staff.
+Tiger-skin-patterned underwear with straps on both sides. It seems to keep you warmer than it looks.
+Tool enabling ranged attacks, made by connecting Elastic Rope between appropriately spaced Sturdy Branches and using stones as projectiles.
+Top-grade Banana produced in tropical regions. Monster Yoyo loves it.
+Torn magic tome once called the lifeline of a wizard. Its owner is unknown, and the contents are far too damaged to read.
+Traditional food enjoyed in a far eastern country, warm with flavorful meat packed inside, making it look delicious at a glance. Nowadays, various fillings are used as new alternatives.
+Traditional mourning hat worn in an eastern land, said to symbolize respect for the departed.
+Tree commonly known as cocoa, native to warm regions and classified as a dicot of the Malvaceae family. Its fruit, once harvested and dried, becomes cacao beans. Roasting and grinding them yields cacao paste, which can be compressed to extract fat and produce cocoa, while the extracted fat is known as cacao butter. Adding milk flavor during the cacao paste stage and allowing it to set results in chocolate.
+Triangular bottoms with a yellowish tint, as if soaked in something. Rumor says going out wearing only these will get you carried off somewhere.
+Tricolor ribbon in green, white, and sky blue.
+Two large leaves barely covering the front and back. Using them to wrap food might feel a bit unsettling.
+Two-handed axe that looks like it could knock anything away in a single blow.
+Two-handed axe whose sheer weight makes its downward strikes terrifyingly destructive.
+Two-handed sword designed to excel at subduing enemies.
+Typical Guard reinforced with thin layers of silver and iron. Known for its striking shine when reflecting light.
+Uniquely four-leafed Clover. Said to bring great luck to the one who finds it.
+Unrefined gemstone containing various minerals. Might yield multiple types of jewels once processed.
+Unripe sour and astringent apple. Monster Poring loves it.
+Upper garment worn by Wanderer. Designed not to hinder quick body movements.
+Used for Alchemist skills.
+User’s physical and magical defense is fixed at half.
+Using it yields a random number of Guild Agit Coin.
+Valuable coin obtained from Guild Dungeon. Can be exchanged for items by visiting NPCs inside the guild hideout.
+Various fruits cut into bite-sized pieces and coated with sugar. Starts with a sweet, crunchy bite and ends with refreshing fruit, easing the guilt of eating something so sugary.
+Versatile sword with a thick, sturdy blade.
+Versatile two-handed spear that allows many kinds of maneuvers, but has the drawback of being unusable in tight spaces.
+Very powerful Arrow forged from Oridecon.
+Very Shining Stone. Monster Green Petite loves it.
+Weapon is never destroyed.
+Weapon with multiple blades, engineered to maximize destructive power.
+Weapon worn on the hands or wrists, allowing for a wide range of agile movements.
+Weathered magic circle whose purpose can no longer be discerned. The Magic Academy buys them at high prices.
+Well-cooked meat pressed flat, also known as pressed meat.
+Well-crafted dagger distinguished by its finely made blade.
+Well-crafted two-handed sword with a sharp, lively edge.
+When compressed, it becomes a material used to craft armor infused with agility.
+When compressed, it becomes a material used to craft armor infused with holiness.
+When compressed, it becomes a material used to craft armor infused with magical power.
+When compressed, it becomes a material used to craft armor infused with physical strength.
+When compressed, it becomes a material used to craft certain accessories.
+When worn by a Merchant Class character, Armor is not damaged.
+When worn by a Merchant Class character, the Weapon is not damaged.
+When worn by a Thief Class character, skills do not consume Gemstones.
+Whether it’s good for your skin remains a mystery.
+Whip charged with electricity. Handle with care to avoid shocking yourself.
+Whip crafted by stringing shattered blades onto Wire Whip, delivering sharp cutting power similar to a sword.
+Whip crafted from a single thickly shaped strand, delivering powerful strikes.
+Whip shaped like an animal’s tail.
+White bone thoroughly dried in the sun. Monster Desert Wolf cub loves it.
+White Lance used by the Knight of Honor.
+White Potion made only from the youngest leaves of organic white herbs, giving it a refreshing taste.
+Wildcard often used as a secret trump in games.
+Wind property.
+Wings from a little demon, which look like those of a small bat.
+Winter-themed hat allegedly “borrowed” from Santa by the Racoon Cheers Squad.
+Wooden club that looks like anyone could use it with ease.
+Wrist restraints that are usually used on prisoners.
