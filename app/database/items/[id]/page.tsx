@@ -83,9 +83,38 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         </div>
       </div>
       <div className="card" style={{ marginTop: 20 }}>
-        {item.atk !== null && <p>ATK {item.atk} · Weapon Lv.{item.weapon_level} · Required Lv.{item.required_level}</p>}
+        {item.atk !== null && (
+          <p>
+            ATK {item.atk}
+            {item.weapon_level !== null ? ` · Weapon Lv.${item.weapon_level}` : ''}
+            {item.required_level !== null ? ` · ใช้ได้ที่เลเวล ${item.required_level}` : ''}
+          </p>
+        )}
         {item.equippable_classes.length > 0 && <p>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>}
+        <div className="reward-row" style={{ marginTop: 12 }}>
+          <div>
+            <span className="reward-label">ราคาซื้อ</span>
+            <span className="reward-value mono">
+              {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
+            </span>
+          </div>
+          <div>
+            <span className="reward-label">ราคาขาย</span>
+            <span className="reward-value mono">
+              {item.sell_price === null ? '—' : item.sell_price.toLocaleString('en-US')}
+            </span>
+          </div>
+        </div>
       </div>
+
+      {item.description && (
+        <div className="card" style={{ marginTop: 20 }}>
+          <h2 className="section-title">คำอธิบาย</h2>
+          {/* Newlines in the source text carry meaning -- each effect is its
+              own line -- so they are preserved rather than collapsed. */}
+          <p style={{ whiteSpace: 'pre-line', color: 'var(--dim)' }}>{item.description}</p>
+        </div>
+      )}
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: '"Chakra Petch", sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
         {(droppedBy ?? []).map((d: any, i: number) => (
