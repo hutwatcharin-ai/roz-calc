@@ -21,8 +21,6 @@ export interface AfkCandidate {
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   const { character, ready } = useCharacterContext();
 
-  if (!ready) return null;
-
   // hp 0 is the importer's unknown-HP marker, so these rows can never pass the
   // one-hit filter. Saying so is cheaper than letting a reader wonder why the
   // total never adds up.
@@ -32,23 +30,16 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   // level and the damage per hit, and a page-local copy is exactly the
   // duplicate source of truth the shared context exists to prevent (spec
   // 3.15.2) -- two boxes drift, and this one decides a safety verdict.
-  if (!character) {
-    return (
-      <div className="card" style={{ marginTop: 20 }}>
-        <h2 className="section-title">ต้องรู้ดาเมจของคุณก่อน</h2>
-        <p className="muted">
-          กรอกเลเวลกับดาเมจต่อครั้งในแถบด้านบนของหน้า แล้วหน้านี้จะกรองให้เหลือเฉพาะมอนที่คุณฆ่าได้ในหมัดเดียว
-        </p>
-        <p className="muted">
-          มอนที่ไม่เข้าโจมตีก่อนในเกมนี้มีทั้งหมด {rows.length} ตัว
-          {unknownHp > 0 && ` — ในจำนวนนี้ ${unknownHp} ตัวไม่มีค่า HP ในข้อมูล จึงตัดสินให้ไม่ได้ไม่ว่าดาเมจเท่าไร`}
-        </p>
-      </div>
-    );
-  }
+  //
+  // Until it is filled in, the page shows every monster that does not attack
+  // first rather than an empty prompt. That is a real answer to half the
+  // question, it is what a crawler and a first-time visitor see (neither has
+  // a character context, and this page exists to be findable and shareable),
+  // and it renders on the server instead of appearing after hydration.
+  const personal = ready && character !== null;
 
   const candidates = rows
-    .filter((row) => diesInOneHit(row.hp, character.damagePerHit))
+    .filter((row) => (personal && character ? diesInOneHit(row.hp, character.damagePerHit) : true))
     .map((row) => ({ row, risks: riskySkills(row.skills) }))
     // Safety before EXP, which is the whole reason this is not just a filter on
     // the farming finder: a monster with a skill that can lock or swarm the bot
@@ -60,12 +51,21 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   return (
     <>
       <div className="card" style={{ marginTop: 20 }}>
-        <p className="muted" style={{ margin: 0 }}>
-          จากมอนที่ไม่เข้าโจมตีก่อน {rows.length} ตัว ดาเมจ {character.damagePerHit.toLocaleString()} ต่อครั้งของคุณ
-          ฆ่าได้ในหมัดเดียว <strong>{candidates.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
-          ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท
-          {unknownHp > 0 && ` (อีก ${unknownHp} ตัวไม่มีค่า HP ในข้อมูล จึงไม่ถูกนับ)`}
-        </p>
+        {personal && character ? (
+          <p className="muted" style={{ margin: 0 }}>
+            จากมอนที่ไม่เข้าโจมตีก่อน {rows.length} ตัว ดาเมจ {character.damagePerHit.toLocaleString()} ต่อครั้งของคุณ
+            ฆ่าได้ในหมัดเดียว <strong>{candidates.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
+            ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท
+            {unknownHp > 0 && ` (อีก ${unknownHp} ตัวไม่มีค่า HP ในข้อมูล จึงไม่ถูกนับ)`}
+          </p>
+        ) : (
+          <p className="muted" style={{ margin: 0 }}>
+            มอนที่ไม่เข้าโจมตีก่อนทั้งหมด <strong>{rows.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
+            ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท ·{' '}
+            <strong>กรอกเลเวลกับดาเมจต่อครั้งในแถบด้านบน</strong>{' '}
+            แล้วรายการนี้จะเหลือเฉพาะตัวที่คุณฆ่าได้ในหมัดเดียว และบอกด้วยว่าดรอปโดนหักตามช่วงเลเวลหรือเปล่า
+          </p>
+        )}
       </div>
 
       {/* Two limits, stated up front rather than in a footnote, because both
@@ -78,7 +78,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
       {candidates.length === 0 ? (
         <p className="muted" style={{ marginTop: 20 }}>
-          ดาเมจ {character.damagePerHit.toLocaleString()} ต่อครั้งยังฆ่ามอนที่ไม่เข้าโจมตีก่อนตัวไหนไม่ได้ในหมัดเดียว
+          ดาเมจ {character?.damagePerHit.toLocaleString()} ต่อครั้งยังฆ่ามอนที่ไม่เข้าโจมตีก่อนตัวไหนไม่ได้ในหมัดเดียว
         </p>
       ) : (
         <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
@@ -89,7 +89,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                 <th className="num">Lv</th>
                 <th className="num">HP</th>
                 <th className="num">EXP/HP</th>
-                <th>ดรอปตามช่วงเลเวล</th>
+                {personal && <th>ดรอปตามช่วงเลเวล</th>}
                 <th>สกิลที่ต้องระวัง</th>
                 <th>แมพ</th>
               </tr>
@@ -112,18 +112,22 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                     </div>
                   </td>
                   <td data-label="Lv" className="num">{row.level}</td>
-                  <td data-label="HP" className="num">{(row.hp ?? 0).toLocaleString()}</td>
+                  <td data-label="HP" className="num">
+                    {row.hp && row.hp > 0 ? row.hp.toLocaleString() : '—'}
+                  </td>
                   <td data-label="EXP/HP" className="num" style={{ color: 'var(--yellow)' }}>
                     {row.exp_per_hp ?? '—'}
                   </td>
-                  <td data-label="ดรอปตามช่วงเลเวล">
-                    <span
-                      className={`tag tag--${dropPenalty(character.level, row.level)}`}
-                      title={dropPenaltyDetail(character.level, row.level)}
-                    >
-                      {DROP_PENALTY_LABELS[dropPenalty(character.level, row.level)]}
-                    </span>
-                  </td>
+                  {personal && character && (
+                    <td data-label="ดรอปตามช่วงเลเวล">
+                      <span
+                        className={`tag tag--${dropPenalty(character.level, row.level)}`}
+                        title={dropPenaltyDetail(character.level, row.level)}
+                      >
+                        {DROP_PENALTY_LABELS[dropPenalty(character.level, row.level)]}
+                      </span>
+                    </td>
+                  )}
                   <td data-label="สกิลที่ต้องระวัง">
                     {risks.length === 0 ? (
                       <span className="muted">ไม่มี</span>
