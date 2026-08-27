@@ -66,9 +66,14 @@ describe('classifyLine', () => {
     expect(classifyLine('   ')).toBeNull();
   });
 
-  it('checks the label shape before the stat shape', () => {
-    // "DEF : 5" matches label; if stat were tried first this would misread.
-    expect(classifyLine('DEF : 5')?.kind).toBe('label');
+  it('distinguishes label and stat patterns: disjoint shapes', () => {
+    // STAT pattern name class excludes `:`, LABEL requires `:`. No string can
+    // match both. Verify that colon forces label, and that a signed number in
+    // a label value (e.g. "Cooldown : +5") preserves the value untouched.
+    const labelOnly = classifyLine('Cooldown : +5');
+    expect(labelOnly?.kind).toBe('label');
+    expect(labelOnly?.term).toBe('Cooldown');
+    expect(labelOnly?.value).toBe('+5'); // signed number survives as label value
   });
 });
 

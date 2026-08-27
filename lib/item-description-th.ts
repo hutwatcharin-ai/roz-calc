@@ -40,9 +40,10 @@ export function classifyLine(rawLine: string): ClassifiedLine | null {
   const source = rawLine.replace(COLOUR_CODE, '').trim();
   if (source === '') return null;
 
-  // Label before stat, always. Reversed, "DEF : 5" would be read as prose and
-  // wait for a whole-line translation -- the growth-with-the-data problem the
-  // two-table design exists to prevent.
+  // Check label shape. Label requires a colon; stat name class excludes colons.
+  // The two patterns are structurally disjoint (no string matches both), so the
+  // order is arbitrary. Checked first for readability — labels are the larger,
+  // more obvious case.
   const label = LABEL.exec(source);
   if (label && label[1].trim().split(/\s+/).length <= MAX_LABEL_WORDS) {
     return { kind: 'label', term: label[1].trim(), value: label[2].trim(), source };
