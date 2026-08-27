@@ -862,6 +862,246 @@ const EFFECT_TH_5: Record<string, string> = {
     'แร่ดิบที่มีโลหะชื่อ Oridecon ซึ่งเรียกกันว่าโลหะแห่งทวยเทพ ปริมาณ Oridecon ในแร่มีน้อยและถลุงยากอย่างยิ่ง จึงมีค่าสูงและหายากมาก',
 };
 
+// Batch 4, part 1: flavour text. Proper nouns -- monsters, places, guilds,
+// item names -- stay English, because a player matching the page against
+// their inventory needs the same string in both places.
+const FLAVOUR_TH_2: Record<string, string> = {
+  "A baton fitted with a protruding hook, which can be used to disarm an opponent's weapon. Its lethality is low, but it is easy to use.":
+    "กระบองที่ติดตะขอยื่นออกมา ใช้ปลดอาวุธคู่ต่อสู้ได้ อานุภาพสังหารต่ำแต่ใช้ง่าย",
+  "A bear's foot that has a unique flavor and supposedly has the power to restore male vigor.":
+    "อุ้งเท้าหมีรสชาติเฉพาะตัว ว่ากันว่ามีสรรพคุณบำรุงกำลังบุรุษ",
+  "A beautiful lock of golden human hair.":
+    "ปอยผมมนุษย์สีทองงดงาม",
+  "A bird's beak.":
+    "จะงอยปากนก",
+  "A bird's feather that can be used in decor or in fabric creation.":
+    "ขนนกที่ใช้ตกแต่งหรือทำผ้าได้",
+  "A birdcage-like cage with a bat trapped inside.":
+    "กรงคล้ายกรงนกที่มีค้างคาวติดอยู่ข้างใน",
+  "A black cat doll. For some reason, it feels as if it is alive.":
+    "ตุ๊กตาแมวดำ ไม่รู้ทำไมถึงรู้สึกเหมือนมันมีชีวิต",
+  "A black cloth mask used to cover the face. They say that when worn, even a parent could not recognize their own child.":
+    "หน้ากากผ้าสีดำสำหรับปิดหน้า ว่ากันว่าสวมแล้วแม้พ่อแม่ก็จำลูกตัวเองไม่ได้",
+  "A black mineral substance that can form steel once it is combined with iron.":
+    "แร่สีดำที่เมื่อผสมกับเหล็กแล้วกลายเป็นเหล็กกล้า",
+  "A blue-bladed sword imbued with the power of water.":
+    "ดาบใบสีน้ำเงินที่อาบด้วยพลังแห่งน้ำ",
+  "A blue-green ore imbued with a faint, mesmerizing light.":
+    "แร่สีเขียวอมฟ้าที่เปล่งแสงจาง ๆ ชวนต้องมนตร์",
+  "A blunt weapon that looks like a single hit could leave your head spinning.":
+    "อาวุธทู่ที่ดูแล้วโดนทีเดียวก็หัวหมุน",
+  "A bone taken from an undead skeleton.":
+    "กระดูกที่เอามาจากโครงกระดูกอันเดด",
+  "A bottle of sand that sparkles like the stars and is usually found in witch broom bristles.":
+    "ขวดทรายที่เปล่งประกายดั่งดวงดาว มักพบตามขนไม้กวาดของแม่มด",
+  "A box that is buried with the dead. It contains precious items pertaining to a dead individual.":
+    "หีบที่ฝังไปพร้อมผู้ตาย ภายในบรรจุของมีค่าของผู้ตาย",
+  "A braided pigtail that has been cut from the head of a young girl.":
+    "เปียถักที่ตัดมาจากศีรษะเด็กหญิง",
+  "A broken piece of a shield. It is quite solid and sturdy.":
+    "เศษโล่ที่แตกออกมา ยังคงแข็งแรงทนทานอยู่มาก",
+  "A broken piece of Dullahan armor. It is very hard.":
+    "เศษเกราะของ Dullahan ที่แตกออกมา แข็งมาก",
+  "A broken piece of the mask a Tengu wore. It is quite red, and the nose on the mask is especially long and unsightly.":
+    "เศษหน้ากากที่ Tengu เคยสวม สีแดงจัด และจมูกบนหน้ากากยาวจนดูไม่งาม",
+  "A broken turtle shell. It still sells for a fair price. It seems it was once used in astrology...":
+    "กระดองเต่าที่แตกแล้ว ยังขายได้ราคาพอสมควร ดูเหมือนเคยใช้ในการดูดาวมาก่อน...",
+  "A bug shell that reflects the colors of the rainbow.":
+    "เปลือกแมลงที่สะท้อนสีรุ้ง",
+  "A bunch of tough, strong tendons.":
+    "มัดเอ็นที่เหนียวและแข็งแรง",
+  "A bundle of frog eggs.":
+    "กลุ่มไข่กบ",
+  "A carnivorous flower with a digestive system that's very much like that of humans.":
+    "ดอกไม้กินเนื้อที่มีระบบย่อยอาหารคล้ายมนุษย์มาก",
+  "A celestial robe so sheer you can see through it. It is very light and thin, and its fluttering form is beautiful.":
+    "อาภรณ์สวรรค์บางจนมองทะลุ เบาและบางมาก ยามพลิ้วไหวงดงามยิ่ง",
+  "A ceremonial mask used by an ancient shaman.":
+    "หน้ากากพิธีกรรมที่หมอผีโบราณใช้",
+  "A chipped, rusted kitchen knife. Here and there are stains of dried blood.":
+    "มีดครัวบิ่นและขึ้นสนิม มีคราบเลือดแห้งกระจายอยู่ทั่ว",
+  "A Circlet said to be worn by leaders of a certain tribe. The central red gem is rumored to symbolize great authority.":
+    "Circlet ที่ว่ากันว่าผู้นำของชนเผ่าหนึ่งสวมใส่ อัญมณีสีแดงตรงกลางลือกันว่าเป็นสัญลักษณ์ของอำนาจอันยิ่งใหญ่",
+  "A citrus-colored, bud-shaped stone formed from green live ore.":
+    "หินทรงตูมสีส้มอมเหลืองที่เกิดจากแร่ green live",
+  "A claw severed from a wolf's paw.":
+    "กรงเล็บที่ตัดมาจากอุ้งเท้าหมาป่า",
+  "A cloth woven from silk so soft it feels wonderful against the skin.":
+    "ผ้าทอจากไหมที่นุ่มจนสัมผัสผิวแล้วรู้สึกดีเหลือเกิน",
+  "A clump of monster fur and fuzz that can be used to make thread and fabric.":
+    "กระจุกขนมอนสเตอร์ที่ใช้ทำเส้นด้ายและผ้าได้",
+  "A collection of thin, long, light dragonfly wings cut and gathered together. It does not look possible to wear them on your back.":
+    "ปีกแมลงปอบาง ยาว และเบา ที่ตัดรวบรวมมาไว้ด้วยกัน ดูแล้วคงติดหลังไม่ได้",
+  "A common book, but its considerable weight makes it quite painful when used to strike.":
+    "หนังสือธรรมดา แต่หนักพอที่จะเจ็บไม่น้อยเมื่อใช้ฟาด",
+  "A complete set of corpse's teeth. Well, as complete as it can get.":
+    "ชุดฟันศพครบชุด เอาเป็นว่าครบเท่าที่จะครบได้",
+  "A crescent-moon-shaped brooch sparkling in gold.":
+    "เข็มกลัดทรงจันทร์เสี้ยวเปล่งประกายสีทอง",
+  "A cross-shaped bow known for its rapid fire and strong destructive power.":
+    "ธนูทรงกากบาทที่ขึ้นชื่อเรื่องยิงรัวและอานุภาพทำลายสูง",
+  "A crustacean's claw.":
+    "ก้ามของสัตว์เปลือกแข็ง",
+  "A crystal made entirely of fine sand.":
+    "ผลึกที่เกิดจากเม็ดทรายละเอียดล้วน ๆ",
+  "A cubic grain of sand that brightly sparkles.":
+    "เม็ดทรายทรงลูกบาศก์ที่เปล่งประกายสดใส",
+  "A cuspid pulled out of a cursed orc's mouth.":
+    "เขี้ยวที่ถอนมาจากปากออร์คต้องคำสาป",
+  "A cuspid wrenched out of from a gruesome orc's jaw.":
+    "เขี้ยวที่งัดออกมาจากกรามออร์คน่าขยะแขยง",
+  "A cut piece of bamboo. Bamboo is hollow inside, yet famous for growing straight and fast.":
+    "ท่อนไม้ไผ่ที่ตัดมา ไผ่กลวงข้างในแต่ขึ้นชื่อเรื่องโตตรงและเร็ว",
+  "A dagger with a pitch-black blade.":
+    "กริชใบมีดดำสนิท",
+  "A dark red, heart-shaped stone formed from red blood ore.":
+    "หินทรงหัวใจสีแดงเข้มที่เกิดจากแร่ red blood",
+  "A dark-colored Bamboo Hat that hides your eyes when pulled down low.":
+    "Bamboo Hat สีเข้มที่กดต่ำแล้วบังตาได้",
+  "A dark-colored mask worn by assassins to hide their faces. Putting it on somehow makes your heart feel like it disappears.":
+    "หน้ากากสีเข้มที่นักฆ่าสวมปิดหน้า สวมแล้วรู้สึกเหมือนหัวใจหายไปอย่างบอกไม่ถูก",
+  "A decaying scale with a horribly offensive odor.":
+    "เกล็ดที่กำลังเน่าเปื่อยและส่งกลิ่นเหม็นรุนแรง",
+  "A decorative horn broken off a dragon mask. It appears to be carved from wood and painted.":
+    "เขาประดับที่หักมาจากหน้ากากมังกร ดูเหมือนแกะจากไม้แล้วทาสี",
+  "A decorative stone resembling a cat's eye. It gives off a rare and beautiful light.":
+    "หินประดับที่คล้ายตาแมว เปล่งแสงงดงามหาได้ยาก",
+  "A deep crimson gemstone that radiates an unknown power.":
+    "อัญมณีสีแดงเข้มที่แผ่พลังบางอย่างที่ไม่มีใครรู้จัก",
+  "A deep crimson gemstone.":
+    "อัญมณีสีแดงเข้ม",
+  "A dented cooking pot worn down from years of use. Still usable for meals, and strangely charming in its own way.":
+    "หม้อบุบที่ใช้งานมานานปี ยังหุงหาอาหารได้ และมีเสน่ห์ในแบบของมันอย่างประหลาด",
+  "A diary kept by a wrongfully imprisoned inmate, filled with notes secretly written out of the guards’ sight.":
+    "ไดอารีของนักโทษที่ถูกจองจำอย่างไม่เป็นธรรม เต็มไปด้วยบันทึกที่แอบเขียนลับตาผู้คุม",
+  "A doll modeled after a certain girl. It seems to have been made with great care.":
+    "ตุ๊กตาที่ทำเลียนแบบเด็กหญิงคนหนึ่ง ดูเหมือนทำขึ้นด้วยความใส่ใจอย่างมาก",
+  "A doll modeled after the popular monster Marionette. Wearing it gives a slight chill on top of the head.":
+    "ตุ๊กตาที่ทำเลียนแบบมอนสเตอร์ยอดนิยม Marionette สวมแล้วรู้สึกเย็นวาบบนศีรษะเล็กน้อย",
+  "A doll that was hung from a rope. Keeping it feels as if it might bring a curse.":
+    "ตุ๊กตาที่ถูกแขวนด้วยเชือก เก็บไว้แล้วรู้สึกเหมือนจะนำคำสาปมาให้",
+  "A dragon's cuspid that is sharp enough to pierce through dragon scales.":
+    "เขี้ยวมังกรที่คมพอจะเจาะทะลุเกล็ดมังกรได้",
+  "A dragon's iridescent scale that is tough enough to protect from weather and most forms of harm.":
+    "เกล็ดมังกรเหลือบรุ้งที่ทนพอจะกันทั้งดินฟ้าอากาศและภยันตรายเกือบทุกอย่าง",
+  "A famous headgear said to have been worn long ago by a heroic woman. Her kick-based fighting once captivated everyone.":
+    "เครื่องสวมศีรษะเลื่องชื่อที่ว่ากันว่าวีรสตรีในอดีตเคยสวม ลีลาการต่อสู้ด้วยเท้าของนางเคยตรึงใจผู้คน",
+  "A feather that boasts full, lustrous barbs used for making clothes of the highest quality.":
+    "ขนนกที่มีแพนขนหนาเป็นเงางาม ใช้ทำเสื้อผ้าคุณภาพสูงสุด",
+  "A figure of a hand that contains great religious symbolism.":
+    "รูปสลักมือที่แฝงความหมายทางศาสนาอย่างลึกซึ้ง",
+  "A flexible, prehensile, and boneless appendage.":
+    "รยางค์ไร้กระดูกที่ยืดหยุ่นและใช้จับสิ่งของได้",
+  "A fragment of a spear blade that gives off an eerie blue glow.":
+    "เศษใบหอกที่เปล่งแสงสีน้ำเงินชวนขนลุก",
+  "A fragment of broken stone. It bears a beautiful pattern and is said to sell to stone collectors.":
+    "เศษหินที่แตกออกมา มีลวดลายงดงามและว่ากันว่าขายให้นักสะสมหินได้",
+  "A freshly cut tongue with a disgusting coating of sticky saliva.":
+    "ลิ้นที่เพิ่งถูกตัดมา เคลือบด้วยน้ำลายเหนียวน่าขยะแขยง",
+  "A fruit peel known for being slippery when stepped on. Wearing this in battle seems to irritate opponents.":
+    "เปลือกผลไม้ที่ขึ้นชื่อว่าเหยียบแล้วลื่น สวมออกรบแล้วดูเหมือนจะกวนประสาทคู่ต่อสู้",
+  "A fun lantern made by hollowing out a pumpkin and setting a candle inside, so light shines through its comical face.":
+    "โคมสนุก ๆ ที่ทำจากฟักทองคว้านไส้แล้วใส่เทียนไว้ข้างใน แสงจึงลอดออกมาตามหน้าตาตลก ๆ ของมัน",
+  "A girl's sock with pretty multicolored stripes.":
+    "ถุงเท้าเด็กหญิงลายทางหลากสีน่ารัก",
+  "A hammer used blacksmiths for refining.":
+    "ค้อนที่ช่างตีเหล็กใช้ตีบวก",
+  "A hard and sharp horn.":
+    "เขาที่แข็งและแหลมคม",
+  "A hard crab shell that smells horrible.":
+    "กระดองปูแข็งที่ส่งกลิ่นเหม็นมาก",
+  "A hard shell taken from a dead clam.":
+    "เปลือกแข็งที่เอามาจากหอยที่ตายแล้ว",
+  "A hard shell that's used as protection.":
+    "เปลือกแข็งที่ใช้ป้องกันตัว",
+  "A hard, spiral shaped shell used by snails.":
+    "เปลือกแข็งทรงเกลียวที่หอยทากใช้",
+  "A hat modeled after the fierce cat Wild Rose.":
+    "หมวกที่ทำเลียนแบบแมวดุร้าย Wild Rose",
+  "A hat worn during school graduation ceremonies. Surprisingly firm, and getting struck by its sharp corners is said to bring pain reminiscent of hell.":
+    "หมวกที่สวมในพิธีจบการศึกษา แข็งเกินคาด และว่ากันว่าโดนมุมแหลมของมันฟาดแล้วเจ็บราวตกนรก",
+  "A Headband that looks like something worn by natives living deep in jungles or remote wilderness.":
+    "Headband ที่ดูเหมือนของที่ชนพื้นเมืองในป่าลึกหรือถิ่นทุรกันดารสวมใส่",
+  "A headpiece blessed by the guardian angel of Super Novice. Kissing this ornament might feel like receiving an indirect kiss from an angel.":
+    "เครื่องสวมศีรษะที่ได้รับพรจากเทวดาผู้พิทักษ์ของ Super Novice จูบเครื่องประดับนี้แล้วอาจรู้สึกเหมือนได้รับจูบทางอ้อมจากเทวดา",
+  "A heart constructed entirely out of stone..":
+    "หัวใจที่สร้างจากหินล้วน ๆ",
+  "A heart that will never stop beating.":
+    "หัวใจที่จะไม่มีวันหยุดเต้น",
+  "A helmet shaped like a plump, appetizing blue fish. The fishy smell is probably just your imagination.":
+    "หมวกทรงปลาสีน้ำเงินอ้วนน่ากิน กลิ่นคาวคงเป็นแค่จินตนาการของคุณ",
+  "A helmet worn to prevent worksite accidents. Its rounded design greatly reduces impact and its sturdiness protects the wearer from most hazards.":
+    "หมวกที่สวมเพื่อกันอุบัติเหตุในที่ทำงาน ทรงกลมช่วยลดแรงกระแทกได้มาก และความแข็งแรงปกป้องผู้สวมจากอันตรายเกือบทุกอย่าง",
+  "A highly valuable token obtainable from the Guild Hideout Dungeon. Used for item exchanges and enchantments.":
+    "เหรียญตราล้ำค่าที่ได้จาก Guild Hideout Dungeon ใช้แลกไอเทมและทำ enchant",
+  "A hind leg that has been cut from a bug.":
+    "ขาหลังที่ตัดมาจากแมลง",
+  "A killing whip reinforced with metal beads for greater destructive force, leaving the impression that it could tear off flesh upon impact.":
+    "แส้สังหารที่เสริมลูกปัดโลหะเพื่อเพิ่มอานุภาพทำลาย ดูแล้วเหมือนฟาดทีเดียวเนื้อหลุด",
+  "A kimono that is old but still quite wearable. Its beautiful pattern and colors captivate any who see it.":
+    "กิโมโนเก่าแต่ยังสวมใส่ได้ดี ลวดลายและสีสันงดงามตรึงตาผู้พบเห็น",
+  "A kind of small black spirit, with the red ornament on its head as the highlight. Small and cute, it would be popular as a doll.":
+    "ภูตดำตัวเล็กชนิดหนึ่ง จุดเด่นคือเครื่องประดับสีแดงบนหัว ตัวเล็กน่ารัก ทำเป็นตุ๊กตาคงขายดี",
+  "A knife with unrivaled ability for cutting meat. It is simple to use and widely popular.":
+    "มีดที่หั่นเนื้อได้ดีอย่างหาตัวจับยาก ใช้ง่ายและเป็นที่นิยมกว้างขวาง",
+  "A large bow that looks difficult to handle.":
+    "ธนูขนาดใหญ่ที่ดูใช้ยาก",
+  "A large hat worn by a pirate captain. Made oversized to project the captain’s authority, it almost resembles a pirate ship drifting across the sea—though it is quite worn out.":
+    "หมวกใบใหญ่ของกัปตันโจรสลัด ทำให้ใหญ่เกินตัวเพื่อแสดงบารมีของกัปตัน ดูเกือบเหมือนเรือโจรสลัดที่ล่องอยู่กลางทะเล แม้จะเก่าไปมากแล้วก็ตาม",
+  "A leaf with magical properties. Smokies use this to change form or become invisible.":
+    "ใบไม้ที่มีคุณสมบัติเวทมนตร์ Smokie ใช้แปลงร่างหรือล่องหน",
+  "A lemon colored ore that contains a pale, greenish light.":
+    "แร่สีเลมอนที่ภายในมีแสงเขียวจาง ๆ",
+  "A leopard's hide with its spotted pattern well preserved. They say someone once made underwear from it and ruled the jungle.":
+    "หนังเสือดาวที่ลายจุดยังคงสมบูรณ์ ว่ากันว่าเคยมีคนเอาไปทำกางเกงในแล้วครองป่าได้",
+  "A letter card that seems good for when you first learn your letters. It also seems to be used often for events.":
+    "การ์ดตัวอักษรที่ดูเหมาะกับตอนหัดอ่านเขียน และดูเหมือนจะใช้ในอีเวนต์บ่อย ๆ ด้วย",
+  "A letter card that seems good for when you first learn your letters. It seems to be used for events.":
+    "การ์ดตัวอักษรที่ดูเหมาะกับตอนหัดอ่านเขียน ดูเหมือนจะใช้ในอีเวนต์",
+  "A light blue, crystal formed from crystal blue ore.":
+    "ผลึกสีฟ้าอ่อนที่เกิดจากแร่ crystal blue",
+  "A liquid with interesting characteristics and many possible applications.":
+    "ของเหลวที่มีคุณสมบัติน่าสนใจและใช้ประโยชน์ได้หลายทาง",
+  "A liquid with unique scientific properties. It's difficult to mix in water and is normally diluted in a solution. Can be diluted to create Counteragent.":
+    "ของเหลวที่มีคุณสมบัติทางวิทยาศาสตร์เฉพาะตัว ผสมน้ำยากและปกติต้องเจือจางในสารละลาย เจือจางแล้วใช้ทำ Counteragent ได้",
+  "A lock of cut hair with a sleek, glossy shine. Gaze at its luster and your very soul feels like it might slip away.":
+    "ปอยผมที่ตัดมา ลื่นเป็นเงางาม จ้องความเงางามของมันแล้วรู้สึกเหมือนวิญญาณจะหลุดลอย",
+  "A long cloak made of durable fabric that covers the neck, shoulders, and even the back. It also offers respectable defense.":
+    "ผ้าคลุมยาวจากผ้าทนทานที่คลุมทั้งคอ ไหล่ ไปจนถึงหลัง ให้ค่าป้องกันได้พอตัวด้วย",
+  "A mace said to be used in a certain sport. Its rounded tip and high-hardness carbon steel raise its lethality.":
+    "กระบองที่ว่ากันว่าใช้ในกีฬาชนิดหนึ่ง ปลายมนและเหล็กกล้าคาร์บอนความแข็งสูงยิ่งเพิ่มอานุภาพสังหาร",
+  "A malleable, silver-white metal that's very light weight and easy to temper.":
+    "โลหะสีขาวเงินที่ตีขึ้นรูปง่าย น้ำหนักเบามากและชุบแข็งง่าย",
+  "A manteau so worn out it seems it can no longer be worn.":
+    "ผ้าคลุมที่เก่าจนดูเหมือนจะสวมใส่ไม่ได้อีกแล้ว",
+  "A marzipan shaped like Poring sits on top.":
+    "มาร์ซิแพนทรง Poring วางอยู่ด้านบน",
+  "A mask symbolizing Zealotus, the mistress of the Glast Heim Underground Prison. Wearing it gives the unsettling feeling of looking down on humans.":
+    "หน้ากากที่เป็นสัญลักษณ์ของ Zealotus เจ้านายแห่ง Glast Heim Underground Prison สวมแล้วรู้สึกชวนอึดอัดราวกับกำลังมองมนุษย์จากเบื้องบน",
+  "A mask with a flamboyant pattern, used at festivals.":
+    "หน้ากากลายฉูดฉาดที่ใช้ในงานเทศกาล",
+  "A miraculous lump of ice that will never melt.":
+    "ก้อนน้ำแข็งมหัศจรรย์ที่ไม่มีวันละลาย",
+  "A mole's claw that is sturdy enough to dig into the ground.":
+    "กรงเล็บตุ่นที่แข็งแรงพอจะขุดลงดินได้",
+  "A moustache shaved off an old fairy that has somehow maintained its entire shape and form.":
+    "หนวดที่โกนมาจากภูตแก่ ไม่รู้ทำไมถึงยังคงรูปทรงไว้ได้ทั้งชุด",
+  "A mysterious necklace that is rumored to possess the power of clairvoyance.":
+    "สร้อยคอลึกลับที่ลือกันว่ามีพลังหยั่งรู้",
+  "A mysteriously sticky liquid.":
+    "ของเหลวเหนียวอย่างลึกลับ",
+  "A necklace given by a master once one earns the honor of joining the Assassin Guild.":
+    "สร้อยคอที่อาจารย์มอบให้เมื่อได้รับเกียรติเข้าร่วม Assassin Guild",
+  "A needle that has snapped and become useless.":
+    "เข็มที่หักจนใช้การไม่ได้แล้ว",
+  "A one-handed sword popularized by its use by sea adventurers.":
+    "ดาบมือเดียวที่นิยมกันขึ้นมาเพราะนักผจญภัยทางทะเลใช้",
+  "A one-handed, formal dress sword imbued with fire.":
+    "ดาบพิธีการมือเดียวที่อาบด้วยไฟ",
+  "A pale green, lightning bolt-shaped stone formed from wind of verdure ore.":
+    "หินทรงสายฟ้าสีเขียวอ่อนที่เกิดจากแร่ wind of verdure",
+};
+
 async function main(): Promise<void> {
   const db = supabaseAdmin();
 
@@ -903,6 +1143,7 @@ async function main(): Promise<void> {
   add(EFFECT_TH_4, 'effect');
   add(EFFECT_TH_5, 'effect');
   add(FLAVOUR_TH, 'flavour');
+  add(FLAVOUR_TH_2, 'flavour');
 
   const { error } = await db
     .from('item_description_lines')
@@ -912,7 +1153,7 @@ async function main(): Promise<void> {
   console.log(`seeded ${rows.length} lines, covering ${covered} occurrences`);
   console.log(
     `  ${Object.keys(EFFECT_TH).length + Object.keys(EFFECT_TH_2).length + Object.keys(EFFECT_TH_3).length + Object.keys(EFFECT_TH_4).length + Object.keys(EFFECT_TH_5).length} effect, ` +
-      `${Object.keys(FLAVOUR_TH).length} flavour`,
+      `${Object.keys(FLAVOUR_TH).length + Object.keys(FLAVOUR_TH_2).length} flavour`,
   );
   console.log(`deferred classes: ${DEFERRED_RULES.length}`);
   for (const d of DEFERRED_RULES) console.log(`  ${d.rule}\n    ${d.why}`);
