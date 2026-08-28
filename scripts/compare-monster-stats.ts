@@ -80,7 +80,10 @@ function parsePage(text: string): Record<string, string | number> | null {
 
   // "Race Undead Aggressive Physically attackable Can move Stats" -- the race
   // word, then whichever flags apply, then the stat block.
-  const race = /\bRace ([A-Za-z ]+?) (?:Physically|Can move|Loots|Aggressive|Stats)\b/.exec(block);
+  // MVP prints between the race and the other flags ("Race Undead MVP
+  // Physically attackable"), so it has to terminate the race capture or it
+  // gets swallowed into it -- which reported all 18 MVPs as race mismatches.
+  const race = /\bRace ([A-Za-z ]+?) (?:MVP|Physically|Can move|Loots|Aggressive|Stats)\b/.exec(block);
   if (race) out.Race = race[1].trim();
 
   const flagStart = block.indexOf('Race ');
@@ -91,6 +94,7 @@ function parsePage(text: string): Record<string, string | number> | null {
     // is the only published source that carries it.
     out.Aggressive = flags.includes('Aggressive') ? 1 : 0;
     out.Loots = flags.includes('Loots items') ? 1 : 0;
+    out.Mvp = flags.includes('MVP') ? 1 : 0;
   }
 
   // ATK prints as a range with an en dash.
@@ -139,7 +143,7 @@ function compare(ours: Row, theirs: Record<string, string | number>): string[] {
     }
   }
 
-  for (const [ourKey, label] of [['is_aggressive', 'Aggressive'], ['loots_items', 'Loots']] as const) {
+  for (const [ourKey, label] of [['is_aggressive', 'Aggressive'], ['loots_items', 'Loots'], ['is_mvp', 'Mvp']] as const) {
     const them = theirs[label];
     if (them === undefined || ours[ourKey] === null || ours[ourKey] === undefined) continue;
     if ((ours[ourKey] ? 1 : 0) !== Number(them)) {
