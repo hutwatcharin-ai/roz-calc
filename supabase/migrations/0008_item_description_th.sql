@@ -11,6 +11,14 @@
 -- that look alike and mean different things, and a lookup would collide.
 
 -- Prose: stored whole, because there is no label/value structure to separate.
+--
+-- NOTE (28 Aug, after this migration was applied): this table is no longer
+-- prose-only. compose() gives a whole-line translation priority over a term
+-- translation, so a label- or stat-shaped line can be translated here too --
+-- `During transformation : ATK +70` is a sentence that merely starts with a
+-- seeded label. The `kind` check below still reads effect/flavour, which is
+-- about what the line SAYS, not about its shape, so it needs no change.
+-- The SQL is untouched; only this comment was corrected.
 create table if not exists item_description_lines (
   source_line text primary key,
   thai_line text not null,

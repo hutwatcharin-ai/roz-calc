@@ -69,6 +69,18 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
     return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
   }
 
+  // Alongside the error branch above, and for the same reason: a request for an
+  // id that does not exist renders a 404 whatever the dictionaries hold, so
+  // reading two full tables first is work thrown away on every bad id --
+  // including every crawler probing for one.
+  //
+  // A clean query that found no row is a genuine 404. The error branch above
+  // must never become one: a query we simply failed to run says nothing about
+  // whether the item exists.
+  if (!item) {
+    notFound();
+  }
+
   // Paginated, not a bare .select(): PostgREST caps at 1,000 rows and reports
   // no error when it truncates. item_description_lines holds roughly 1,339
   // distinct prose lines after batch 2, so about 339 items' worth of effects
@@ -101,13 +113,6 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
     lines: new Map((lineRows ?? []).map((r) => [r.source_line, r.thai_line])),
     terms: new Map((termRows ?? []).map((r) => [r.source_term, r.thai_term])),
   };
-
-  // A clean query that found no row is a genuine 404 -- unlike the error
-  // branch above, which must keep rendering its neutral message and never
-  // become a 404 for a query we simply failed to run.
-  if (!item) {
-    notFound();
-  }
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
