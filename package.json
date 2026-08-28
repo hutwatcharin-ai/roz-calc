@@ -9,7 +9,12 @@
     "import-data": "tsx scripts/import-data.ts",
     "mirror-skill-icons": "tsx scripts/mirror-skill-icons.ts",
     "seed-thai-terms": "tsx scripts/seed-thai-terms.ts",
-    "check-monster-images": "tsx scripts/check-monster-images.ts"
+    "check-monster-images": "tsx scripts/check-monster-images.ts",
+    "verify:elements": "tsx scripts/compare-element-tables.ts",
+    "verify:refine": "tsx scripts/compare-refine-rates.ts",
+    "verify:tables": "tsx scripts/compare-rozerodb-tables.ts",
+    "verify:monsters": "tsx scripts/compare-monster-stats.ts",
+    "verify": "npm run verify:elements && npm run verify:refine && npm run verify:tables"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
