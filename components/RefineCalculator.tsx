@@ -131,14 +131,31 @@ export default function RefineCalculator() {
             </td>
           </tr>
           <tr>
-            <td>{spec.ore} ที่ใช้</td>
-            <td className="num">{count(cost.expectedOre)} ก้อน</td>
+            <td>
+              ตีทั้งหมดกี่ครั้ง
+              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
+                นับครั้งที่พังด้วย
+              </span>
+            </td>
+            <td className="num">{count(cost.expectedAttempts)} ครั้ง</td>
+          </tr>
+          <tr>
+            <td>
+              {spec.ore} ที่ใช้
+              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
+                คู่มือไม่ได้บอกว่าตีหนึ่งครั้งกินแร่กี่ก้อน — เว็บนี้จึงไม่สรุปให้
+              </span>
+            </td>
+            <td className="num">
+              <span className="muted">{count(cost.expectedAttempts)} × จำนวนก้อนต่อครั้ง</span>
+            </td>
           </tr>
           <tr>
             <td>
               ค่าตีบวก
               <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                {zeny(spec.feeZeny)} ต่อครั้ง เสียทั้งครั้งที่สำเร็จและครั้งที่พัง
+                {zeny(spec.feeZeny)} ต่อครั้ง เสียทั้งครั้งที่สำเร็จและครั้งที่พัง ·
+                ตัวเลขนี้แน่นอน ไม่ขึ้นกับจำนวนแร่
               </span>
             </td>
             <td className="num">{zeny(cost.expectedFeeZeny)}</td>
@@ -146,17 +163,17 @@ export default function RefineCalculator() {
           <tr>
             <td>
               ค่าแร่
-              {spec.oreZeny === null && (
-                <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                  {spec.ore} ดรอปจากมอนสเตอร์ คู่มือไม่ได้ให้ราคา NPC ไว้
-                </span>
-              )}
+              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
+                {spec.oreZeny === null
+                  ? `${spec.ore} ดรอปจากมอนสเตอร์ คู่มือไม่ได้ให้ราคา NPC ไว้`
+                  : 'ต่อหนึ่งก้อนต่อหนึ่งครั้ง คูณจำนวนก้อนต่อครั้งเอง'}
+              </span>
             </td>
             <td className="num">
               {spec.oreZeny === null ? (
-                <span className="muted">ราคาตลาด × {count(cost.expectedOre)}</span>
+                <span className="muted">ราคาตลาด × {count(cost.expectedAttempts)} × ก้อนต่อครั้ง</span>
               ) : (
-                zeny(cost.expectedOreZeny ?? 0)
+                <span className="muted">{zeny(cost.expectedOreZenyPerPiece ?? 0)} × ก้อนต่อครั้ง</span>
               )}
             </td>
           </tr>

@@ -176,6 +176,14 @@ export const ARMOUR_DEF: number[] = [
  * What one attempt needs. Ore prices are the guide's NPC prices where it gives
  * one; the refine fee is charged whether the attempt succeeds or not.
  *
+ * What the guide does NOT give is how many pieces of ore one attempt eats -- its
+ * materials table has no quantity column. Assuming one piece because other
+ * Ragnarok versions work that way is the same reasoning that makes rAthena's
+ * Renewal numbers wrong for Zero, and Zero has already changed refining once by
+ * giving each equipment level its own success table. So nothing here converts
+ * attempts into ore pieces: the site reports attempts and says the rest is
+ * unknown.
+ *
  * The guide lists three ores for weapon Lv3, Lv4 and armour (plain,
  * Concentrated, HD) and one for Lv1 and Lv2. Concentrated is the "special"
  * chance column. HD is a different game -- it drops the refine by one instead

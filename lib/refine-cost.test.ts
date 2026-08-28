@@ -16,7 +16,7 @@ function lcg(seed: number): () => number {
 function simulate(gear: GearType, target: number, special: boolean, runs: number, seed: number) {
   const rand = lcg(seed);
   let items = 0;
-  let ore = 0;
+  let attempts = 0;
 
   for (let run = 0; run < runs; run += 1) {
     for (;;) {
@@ -24,7 +24,7 @@ function simulate(gear: GearType, target: number, special: boolean, runs: number
       let level = 0;
       let alive = true;
       while (alive && level < target) {
-        ore += 1;
+        attempts += 1;
         if (rand() * 100 < chanceAt(gear, level + 1, special)) level += 1;
         else alive = false;
       }
@@ -32,7 +32,7 @@ function simulate(gear: GearType, target: number, special: boolean, runs: number
     }
   }
 
-  return { items: items / runs, ore: ore / runs };
+  return { items: items / runs, attempts: attempts / runs };
 }
 
 describe('refineCost', () => {
@@ -40,16 +40,16 @@ describe('refineCost', () => {
     const cost = refineCost('weapon1', 1, false);
     expect(cost.runChance).toBeCloseTo(90, 6);
     expect(cost.expectedItems).toBeCloseTo(1 / 0.9, 6);
-    expect(cost.expectedOre).toBeCloseTo(1 / 0.9, 6);
+    expect(cost.expectedAttempts).toBeCloseTo(1 / 0.9, 6);
   });
 
   it('compounds two steps rather than averaging them', () => {
     // 90% then 90% is 81% for the pair, and the second attempt only happens on
-    // the runs that survived the first -- so ore is not simply 2 x items.
+    // the runs that survived the first -- so attempts are not simply 2 x items.
     const cost = refineCost('weapon1', 2, false);
     expect(cost.runChance).toBeCloseTo(81, 6);
     expect(cost.expectedItems).toBeCloseTo(1 / 0.81, 6);
-    expect(cost.expectedOre).toBeCloseTo((1 / 0.81) * 1.9, 6);
+    expect(cost.expectedAttempts).toBeCloseTo((1 / 0.81) * 1.9, 6);
   });
 
   it('spends no spare items when every step is certain', () => {
@@ -57,7 +57,7 @@ describe('refineCost', () => {
     const cost = refineCost('armour', 3, true);
     expect(cost.runChance).toBe(100);
     expect(cost.expectedItems).toBe(1);
-    expect(cost.expectedOre).toBe(3);
+    expect(cost.expectedAttempts).toBe(3);
     expect(cost.itemsFor50).toBe(1);
     expect(cost.itemsFor90).toBe(1);
   });
@@ -78,8 +78,8 @@ describe('refineCost', () => {
       const label = `${gear} +${target}${special ? ' special' : ''}`;
       expect(sim.items / exact.expectedItems, `${label} items`).toBeGreaterThan(0.9);
       expect(sim.items / exact.expectedItems, `${label} items`).toBeLessThan(1.1);
-      expect(sim.ore / exact.expectedOre, `${label} ore`).toBeGreaterThan(0.9);
-      expect(sim.ore / exact.expectedOre, `${label} ore`).toBeLessThan(1.1);
+      expect(sim.attempts / exact.expectedAttempts, `${label} attempts`).toBeGreaterThan(0.9);
+      expect(sim.attempts / exact.expectedAttempts, `${label} attempts`).toBeLessThan(1.1);
     }
   });
 
@@ -93,14 +93,17 @@ describe('refineCost', () => {
 
   it('charges the fee on every attempt, including the failed ones', () => {
     const cost = refineCost('weapon1', 2, false);
-    expect(cost.expectedFeeZeny).toBeCloseTo(cost.expectedOre * 1000, 6);
-    expect(cost.expectedOreZeny).toBeCloseTo(cost.expectedOre * 200, 6);
+    expect(cost.expectedFeeZeny).toBeCloseTo(cost.expectedAttempts * 1000, 6);
+    expect(cost.expectedOreZenyPerPiece).toBeCloseTo(cost.expectedAttempts * 200, 6);
   });
 
   it('leaves the ore bill unpriced where the guide publishes no price', () => {
     // Oridecon has no NPC price on the guide's table. Multiplying by a made-up
     // market price would make the total look researched when it is not.
-    expect(refineCost('weapon3', 7, false).expectedOreZeny).toBeNull();
+    //
+    // Note the name: this is per piece per attempt. Nothing published says how
+    // many pieces one attempt eats, so the site cannot turn it into a total.
+    expect(refineCost('weapon3', 7, false).expectedOreZenyPerPiece).toBeNull();
     expect(refineCost('weapon3', 7, false).expectedFeeZeny).toBeGreaterThan(0);
   });
 

@@ -32,12 +32,23 @@ export type RefineCost = {
   runChance: number;
   /** Expected equipment consumed, counting the one you keep. */
   expectedItems: number;
-  /** Expected ore consumed, one per attempt. */
-  expectedOre: number;
-  /** Expected refine fees in Zeny. Ore is priced separately, and only when the guide gives a price. */
+  /**
+   * Expected attempts. NOT the same as ore pieces: how many pieces one attempt
+   * eats is not published anywhere we can read, and assuming one because other
+   * Ragnarok versions do it is the exact reasoning that makes rAthena's Renewal
+   * numbers wrong for Zero. Callers must present this as attempts.
+   */
+  expectedAttempts: number;
+  /**
+   * Expected refine fees in Zeny. This one is solid: the guide's fee column is
+   * per attempt, and an attempt is an attempt whether it succeeds or not.
+   */
   expectedFeeZeny: number;
-  /** Expected ore cost in Zeny, or null where the guide publishes no price. */
-  expectedOreZeny: number | null;
+  /**
+   * Ore cost in Zeny PER PIECE PER ATTEMPT -- multiply by however many pieces
+   * an attempt turns out to eat. Null where the guide publishes no price.
+   */
+  expectedOreZenyPerPiece: number | null;
   /** Items that give a 50% chance of at least one success. */
   itemsFor50: number;
   /** Items that give a 90% chance of at least one success. */
@@ -76,7 +87,7 @@ export function refineCost(
 
   const runChance = reach;
   const expectedItems = 1 / runChance;
-  const expectedOre = expectedItems * attemptsPerRun;
+  const expectedAttempts = expectedItems * attemptsPerRun;
 
   const spec = (special ? ORE[gear].special : null) ?? ORE[gear].normal;
 
@@ -84,9 +95,9 @@ export function refineCost(
     steps,
     runChance: runChance * 100,
     expectedItems,
-    expectedOre,
-    expectedFeeZeny: expectedOre * spec.feeZeny,
-    expectedOreZeny: spec.oreZeny === null ? null : expectedOre * spec.oreZeny,
+    expectedAttempts,
+    expectedFeeZeny: expectedAttempts * spec.feeZeny,
+    expectedOreZenyPerPiece: spec.oreZeny === null ? null : expectedAttempts * spec.oreZeny,
     itemsFor50: itemsForConfidence(runChance * 100, 0.5),
     itemsFor90: itemsForConfidence(runChance * 100, 0.9),
   };
