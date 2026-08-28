@@ -7,16 +7,15 @@
 //    an extrapolation would look authoritative while being invented.
 //
 // 2. The guide labels the columns "LV" and "exp" and never says which direction
-//    a row means: the EXP needed to REACH that level, or the EXP needed to
-//    LEAVE it. The base table's first row is 0, which only makes sense as
-//    "reaching level 1 costs nothing", so that is the reading encoded below.
-//    It is not confirmed against the game yet, and one glance at a level-2
-//    character settles it: if the bar fills at 2,500 this reading is right, if
-//    it fills at 3,000 every row is off by one.
+//    a row means. It is settled now, and by two facts together: the site owner
+//    confirms the EXP bar resets to 0 on every level-up, so each row is one
+//    bar's worth rather than a running total; and row 1 is 0, so row 1 cannot
+//    be the bar a level-1 character fills or that character would level
+//    instantly.
 //
-//    Until that is confirmed, EXP_ROWS is exported raw and the site prints the
-//    table as the guide prints it. expToReach() carries the assumption, alone,
-//    so confirming it is a one-line change with a test already pinned to it.
+//    So row N is the bar filled to REACH level N. A level-1 character is
+//    working on row 2 -- 2,500 EXP -- and on reaching level 2 starts again at
+//    zero against row 3. expToLevelUpFrom() is the function that says this.
 
 /** The base EXP column, index 0 = level 1. Value is the guide's number for that row. */
 export const BASE_EXP_ROWS: number[] = [
@@ -43,9 +42,9 @@ export const FIRST_JOB_EXP_ROWS: number[] = [
 export const MAX_PUBLISHED_BASE_LEVEL = BASE_EXP_ROWS.length;
 
 /**
- * EXP needed to go from level-1 to level, on the reading described at the top
- * of this file. Returns null past the last row the guide publishes rather than
- * extrapolating a number nobody has seen.
+ * The bar filled to arrive at this level, which a character one level below is
+ * currently working on. Returns null past the last row the guide publishes
+ * rather than extrapolating a number nobody has seen.
  */
 export function expToReach(level: number): number | null {
   if (!Number.isInteger(level) || level < 1) return null;
@@ -59,4 +58,41 @@ export function totalExpToReach(level: number): number | null {
   let total = 0;
   for (let n = 1; n <= level; n += 1) total += BASE_EXP_ROWS[n - 1];
   return total;
+}
+
+/**
+ * The bar a character at this level is filling right now. Null once the guide
+ * runs out -- a level-50 character's next bar is simply not published.
+ */
+export function expToLevelUpFrom(level: number): number | null {
+  if (!Number.isInteger(level) || level < 1) return null;
+  return expToReach(level + 1);
+}
+
+/**
+ * Total base EXP to climb from one level to another. Null if either end is off
+ * the published table, rather than a total that quietly omits the missing rows.
+ */
+export function totalExpBetween(from: number, to: number): number | null {
+  if (!Number.isInteger(from) || !Number.isInteger(to)) return null;
+  if (from < 1 || to <= from || to > MAX_PUBLISHED_BASE_LEVEL) return null;
+  let total = 0;
+  for (let level = from + 1; level <= to; level += 1) total += BASE_EXP_ROWS[level - 1];
+  return total;
+}
+
+/** How much of the current bar is left to fill, and how many of one monster that is. */
+export type LevelProgress = { need: number; kills: number };
+
+/**
+ * Kills of a monster worth expPerKill needed to go from level to level+1,
+ * starting from an empty bar. Null when the guide has no row for the next
+ * level, or when the monster's EXP is missing or zero -- a monster that gives
+ * nothing never levels anyone, and "Infinity kills" is not an answer.
+ */
+export function killsToLevelUp(level: number, expPerKill: number): LevelProgress | null {
+  const need = expToLevelUpFrom(level);
+  if (need === null) return null;
+  if (!Number.isFinite(expPerKill) || expPerKill <= 0) return null;
+  return { need, kills: Math.ceil(need / expPerKill) };
 }

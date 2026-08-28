@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import {
   BASE_EXP_ROWS,
+  expToLevelUpFrom,
+  killsToLevelUp,
+  totalExpBetween,
   FIRST_JOB_EXP_ROWS,
   MAX_PUBLISHED_BASE_LEVEL,
   NOVICE_JOB_EXP_ROWS,
@@ -82,5 +85,55 @@ describe('lookups', () => {
     expect(totalExpToReach(1)).toBe(0);
     expect(totalExpToReach(3)).toBe(5_500);
     expect(totalExpToReach(50)).toBe(BASE_EXP_ROWS.reduce((a, b) => a + b, 0));
+  });
+});
+
+describe('expToLevelUpFrom', () => {
+  it('gives a level-1 character the 2,500 bar, not the 0 one', () => {
+    // The whole point of the direction question. Row 1 is 0; a level-1
+    // character is working on row 2. Reading it the other way would tell every
+    // new player they level for free.
+    expect(expToLevelUpFrom(1)).toBe(2_500);
+    expect(expToLevelUpFrom(2)).toBe(3_000);
+  });
+
+  it('runs out where the guide runs out', () => {
+    expect(expToLevelUpFrom(49)).toBe(14_834_800);
+    expect(expToLevelUpFrom(50)).toBeNull();
+    expect(expToLevelUpFrom(0)).toBeNull();
+  });
+});
+
+describe('totalExpBetween', () => {
+  it('adds only the levels actually climbed', () => {
+    // 1 to 3 is row 2 plus row 3, not row 1 plus row 2 plus row 3.
+    expect(totalExpBetween(1, 3)).toBe(2_500 + 3_000);
+  });
+
+  it('agrees with the running total when starting from level 1', () => {
+    expect(totalExpBetween(1, 20)).toBe(totalExpToReach(20));
+  });
+
+  it('refuses a range it cannot cover in full', () => {
+    // Returning a partial sum would understate the climb without saying so.
+    expect(totalExpBetween(40, 60)).toBeNull();
+    expect(totalExpBetween(10, 10)).toBeNull();
+    expect(totalExpBetween(30, 20)).toBeNull();
+  });
+});
+
+describe('killsToLevelUp', () => {
+  it('rounds up, because a part-killed monster gives nothing', () => {
+    // Level 1 needs 2,500. At 300 EXP a kill that is 8.33 kills, so 9.
+    expect(killsToLevelUp(1, 300)).toEqual({ need: 2_500, kills: 9 });
+  });
+
+  it('says nothing rather than Infinity for a monster worth no EXP', () => {
+    expect(killsToLevelUp(10, 0)).toBeNull();
+    expect(killsToLevelUp(10, -5)).toBeNull();
+  });
+
+  it('says nothing past the last level the guide publishes', () => {
+    expect(killsToLevelUp(50, 1_000)).toBeNull();
   });
 });

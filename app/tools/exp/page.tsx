@@ -5,6 +5,7 @@
 // needs JavaScript to show its numbers is a worse reference table.
 
 import Link from 'next/link';
+import ExpRangeCalculator from '@/components/ExpRangeCalculator';
 import {
   BASE_EXP_ROWS,
   FIRST_JOB_EXP_ROWS,
@@ -48,13 +49,16 @@ export default function ExpPage() {
       </div>
 
       <div className="ceiling-note" style={{ marginTop: 12 }}>
-        <strong>สองข้อที่ตารางนี้ยังตอบไม่ได้:</strong> คู่มือหยุดที่เลเวล{' '}
-        {MAX_PUBLISHED_BASE_LEVEL} ทั้งที่เกมไปไกลกว่านั้น เว็บนี้จึงไม่ต่อเส้นโค้งเอาเอง ·
-        และคู่มือไม่ได้บอกว่าเลขในแถวคือ EXP ที่ใช้ <em>เพื่อขึ้นมาถึง</em> เลเวลนั้น
-        หรือ <em>เพื่อออกจาก</em> เลเวลนั้น เว็บนี้อ่านแบบแรกเพราะแถวเลเวล 1 เป็น 0
-        (ซึ่งมีเหตุผลเฉพาะแบบแรก) ถ้าตัวละครเลเวล 2 ของคุณแถบ EXP เต็มที่ 3,000 ไม่ใช่ 2,500
-        แปลว่าอ่านผิด ช่วยบอกด้วย
+        <strong>แถวหนึ่งแถวคืออะไร:</strong> แถบ EXP รีเซ็ตเป็น 0 ทุกครั้งที่ขึ้นเลเวล
+        แต่ละแถวจึงเป็นแถบหนึ่งใบ ไม่ใช่ยอดสะสม · และแถวเลเวล 1 เป็น 0
+        ซึ่งเป็นไปได้ทางเดียวคือ <strong>แถว N คือแถบที่เก็บเพื่อขึ้นถึงเลเวล N</strong> —
+        ตัวละครเลเวล 1 กำลังเก็บแถบของแถวเลเวล 2 คือ 2,500
+        <br />
+        <strong>ข้อจำกัด:</strong> คู่มือหยุดที่เลเวล {MAX_PUBLISHED_BASE_LEVEL} ทั้งที่เกมไปไกลกว่านั้น
+        เว็บนี้จึงไม่ต่อเส้นโค้งเอาเอง เลเวลที่สูงกว่านี้จะขึ้นว่าไม่มีข้อมูล ไม่ใช่เดาให้
       </div>
+
+      <ExpRangeCalculator />
 
       <h2 className="section-title" style={{ marginTop: 28 }}>
         เลเวลฐาน

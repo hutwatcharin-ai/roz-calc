@@ -8,6 +8,7 @@
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { formatExpPerHour, formatKillTime, formatKillsPerHour } from '@/lib/format-rate';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
+import { MAX_PUBLISHED_BASE_LEVEL, killsToLevelUp } from '@/lib/exp-table';
 
 export default function KillRatePanel({
   monsterHp,
@@ -53,6 +54,14 @@ export default function KillRatePanel({
 
   const exp = expPerHour(rate.killsPerHour, expPerKill ?? 0);
 
+  // "How many more of these until I level" is the question the EXP-per-hour
+  // number is a proxy for. It assumes an empty bar, because the site has no way
+  // to know how far through the current level a player is and asking for it
+  // would be one more field nobody fills in.
+  const progress = killsToLevelUp(character.level, expPerKill ?? 0);
+  const hoursToLevel =
+    progress && rate.killsPerHour > 0 ? progress.kills / rate.killsPerHour : null;
+
   return (
     <div className="card">
       <h2 className="section-title">คุณตีตัวนี้ได้กี่ตัวต่อชั่วโมง</h2>
@@ -74,6 +83,32 @@ export default function KillRatePanel({
             <td>EXP ต่อชั่วโมง</td>
             <td className="num">
               {exp === null ? <span className="muted">ไม่มีค่า EXP ในข้อมูล</span> : formatExpPerHour(exp)}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              ตีอีกกี่ตัวขึ้นเลเวล {character.level + 1}
+              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
+                นับจากแถบ EXP ว่าง
+              </span>
+            </td>
+            <td className="num">
+              {progress === null ? (
+                <span className="muted">
+                  {character.level >= MAX_PUBLISHED_BASE_LEVEL
+                    ? `คู่มือทางการมี EXP ถึงเลเวล ${MAX_PUBLISHED_BASE_LEVEL} เท่านั้น`
+                    : 'ไม่มีค่า EXP ในข้อมูล'}
+                </span>
+              ) : (
+                <>
+                  {progress.kills.toLocaleString()} ตัว
+                  {hoursToLevel !== null && (
+                    <span className="muted" style={{ display: 'block', fontSize: 12 }}>
+                      {formatKillTime(hoursToLevel * 3600)}
+                    </span>
+                  )}
+                </>
+              )}
             </td>
           </tr>
         </tbody>
