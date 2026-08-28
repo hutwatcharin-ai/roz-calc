@@ -1,9 +1,18 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { supabaseAdmin } from '../lib/supabase';
 import { transformMonster, transformItem, transformDrops, transformSpawns, transformSkill, transformMonsterSkills } from './transform';
+import { missingImages, withServableImages } from './monster-images';
 
 function loadJson(path: string): any {
   return JSON.parse(readFileSync(path, 'utf-8'));
+}
+
+// Only paths this site serves from /public are ours to vouch for; an absolute
+// URL to somewhere else is left alone.
+function servedFileExists(publicPath: string): boolean {
+  if (!publicPath.startsWith('/')) return true;
+  return existsSync(join(process.cwd(), 'public', publicPath));
 }
 
 // Supabase rejects or silently truncates very large single requests. Every
@@ -37,7 +46,17 @@ async function importMonstersAndItems() {
   await upsertInChunks(db, 'items', itemRows);
 
   console.log(`Importing ${monstersRaw.length} monsters...`);
-  const monsterRows = monstersRaw.map(transformMonster);
+  // The feed names an image for every monster; two of them were never mirrored,
+  // so storing the URL put a broken-image icon on every surface those monsters
+  // appear on and nothing reported it. A URL to a file we do not serve is worse
+  // than no URL, and re-running the import must not put it back.
+  const transformed = monstersRaw.map(transformMonster);
+  const dropped = missingImages(transformed, servedFileExists);
+  if (dropped.length > 0) {
+    console.log(`  ${dropped.length} monsters name an image this checkout does not serve:`);
+    for (const row of dropped) console.log(`    ${row.id}  ${row.name_en}  ${row.image_url}`);
+  }
+  const monsterRows = withServableImages(transformed, servedFileExists);
   await upsertInChunks(db, 'monsters', monsterRows);
 
   const dropRows = monstersRaw.flatMap(transformDrops);

@@ -8,7 +8,8 @@
     "test": "vitest run",
     "import-data": "tsx scripts/import-data.ts",
     "mirror-skill-icons": "tsx scripts/mirror-skill-icons.ts",
-    "seed-thai-terms": "tsx scripts/seed-thai-terms.ts"
+    "seed-thai-terms": "tsx scripts/seed-thai-terms.ts",
+    "check-monster-images": "tsx scripts/check-monster-images.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
