@@ -99,7 +99,34 @@ describe('the monster page panel', () => {
   it('renders without JavaScript state, from the monster own fields', async () => {
     await mount(<MonsterBestWeaponPanel element="Undead" elementLevel={1} size="Large" />);
     expect(container.textContent).toContain('ตีตัวนี้ด้วยอะไรดี');
-    expect(container.textContent).toContain('ธาตุ Undead1');
+    expect(container.textContent).toContain('Undead1');
+  });
+
+  it('names every element tied for best rather than picking one', async () => {
+    // Water-1 takes 150 from Wind and from Poison. A player who owns one of
+    // them should not be told to go and find the other.
+    await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
+    expect(container.textContent).toContain('Wind');
+    expect(container.textContent).toContain('Poison');
+    expect(container.textContent).toContain('ธาตุนี้เท่ากันหมด');
+  });
+
+  it('groups the weapon types that keep everything, rather than naming one', async () => {
+    // The failure this replaced: a top-eight list where every row read 150%,
+    // because ranking weapon and element together makes the top a tie pile.
+    // Wind into Water-1 is 150 and several weapon types are 100% against
+    // Medium, so all of them belong on the same line.
+    await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
+    expect(container.textContent).toContain('Bare hand');
+    expect(container.textContent).toContain('One-Handed Sword');
+    expect(container.textContent).toContain('150%');
+  });
+
+  it('says what the worst weapon type costs, in the same element', async () => {
+    await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
+    // Every weapon at 75% against Medium lands 112.5% instead of 150%.
+    expect(container.textContent).toContain('112.5%');
+    expect(container.textContent).toContain('หายไป 25%');
   });
 
   it('shows nothing when a field it needs is missing', async () => {

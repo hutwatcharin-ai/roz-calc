@@ -92,3 +92,30 @@ export function shareOfBest(chosen: Combo, best: number): number | null {
   if (best <= 0) return null;
   return (chosen.total / best) * 100;
 }
+
+/**
+ * Every attack element tied for best against a target. Usually more than one --
+ * Wind and Poison both hit Water for 150 -- and listing only the first would
+ * send players hunting one element when another they already own does the same.
+ */
+export function bestElements(defence: Element, defenceLevel: ElementLevel): Element[] {
+  const ranked = rankElements(defence, defenceLevel);
+  const top = ranked[0]?.element ?? 0;
+  return ranked.filter((row) => row.element === top).map((row) => row.attack);
+}
+
+/**
+ * Weapon types ranked for one attack element against one target. This is the
+ * table worth showing: ranking all weapon-and-element pairs together puts
+ * twenty identical best scores at the top and says nothing.
+ */
+export function rankWeapons(
+  attack: Element,
+  defence: Element,
+  defenceLevel: ElementLevel,
+  size: MonsterSize,
+): Combo[] {
+  return SIZE_TABLE.map((weapon) => comboFor(weapon, attack, defence, defenceLevel, size)).sort(
+    (a, b) => b.total - a.total,
+  );
+}

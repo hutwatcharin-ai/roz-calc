@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
+  bestElements,
+  rankWeapons,
   bestTotal,
   combine,
   comboFor,
@@ -97,5 +99,35 @@ describe('bestTotal and shareOfBest', () => {
 
   it('returns null rather than dividing by zero when nothing lands', () => {
     expect(shareOfBest(comboFor(weapon('Book'), 'Neutral', 'Undead', 1, 'large'), 0)).toBeNull();
+  });
+});
+
+describe('bestElements', () => {
+  it('lists every element tied for best, not just the first', () => {
+    // Water-1 takes 150 from both Wind and Poison. Naming one would send a
+    // player shopping for an element they may already have the alternative to.
+    const best = bestElements('Water', 1);
+    expect(best).toContain('Wind');
+    expect(best).toContain('Poison');
+    expect(best.length).toBeGreaterThan(1);
+  });
+
+  it('holds to one when only one element is best', () => {
+    const best = bestElements('Undead', 4);
+    expect(new Set(best.map((el) => elementModifier(el, 'Undead', 4))).size).toBe(1);
+  });
+});
+
+describe('rankWeapons', () => {
+  it('ranks the weapon types for a single element, so the top is not a tie pile', () => {
+    const ranked = rankWeapons('Wind', 'Water', 1, 'medium');
+    expect(ranked).toHaveLength(SIZE_TABLE.length);
+    expect(new Set(ranked.map((c) => c.weapon.weapon)).size).toBe(SIZE_TABLE.length);
+    expect(ranked[0].total).toBeGreaterThan(ranked[ranked.length - 1].total);
+  });
+
+  it('keeps the element fixed across the whole ranking', () => {
+    const ranked = rankWeapons('Fire', 'Earth', 2, 'small');
+    expect(new Set(ranked.map((c) => c.element)).size).toBe(1);
   });
 });
