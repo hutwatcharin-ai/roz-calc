@@ -2,8 +2,11 @@
 //
 // Source: Ragnarok Zero's own game guide, ระบบพิเศษ > ระบบธาตุ, transcribed in
 // scripts/official-element-data.ts. These are the game's published numbers, not
-// a Renewal reference -- 399 of the 400 cells match rAthena's Renewal table and
-// the single difference is documented at the source.
+// a Renewal reference -- 399 of the 400 cells match rAthena's Renewal table.
+// The single cell that differed, Lv2 Undead -> Poison, ships as rAthena has it
+// (50, not the guide's 75): the guide's Lv2 Poison row duplicates its Lv1 row
+// character for character, and the site owner, who plays the game, calls it a
+// typo on their page. See OVERRIDES in the generator.
 //
 // Percentages, read attacker-first: ELEMENT_TABLE[defenceLevel][attack][defence].
 // 100 means unchanged, 0 means the hit does nothing, above 100 means stronger.
@@ -38,7 +41,7 @@ export const ELEMENT_TABLE: Record<ElementLevel, Record<Element, Record<Element,
     Holy: { Neutral: 100, Water: 100, Earth: 100, Fire: 100, Wind: 100, Poison: 75, Holy: 0, Shadow: 150, Ghost: 100, Undead: 150 },
     Shadow: { Neutral: 100, Water: 100, Earth: 100, Fire: 100, Wind: 100, Poison: 75, Holy: 150, Shadow: 0, Ghost: 100, Undead: 0 },
     Ghost: { Neutral: 70, Water: 100, Earth: 100, Fire: 100, Wind: 100, Poison: 75, Holy: 80, Shadow: 80, Ghost: 150, Undead: 125 },
-    Undead: { Neutral: 100, Water: 100, Earth: 100, Fire: 80, Wind: 100, Poison: 75, Holy: 150, Shadow: 0, Ghost: 125, Undead: 0 },
+    Undead: { Neutral: 100, Water: 100, Earth: 100, Fire: 80, Wind: 100, Poison: 50, Holy: 150, Shadow: 0, Ghost: 125, Undead: 0 },
   },
   3: {
     Neutral: { Neutral: 100, Water: 100, Earth: 100, Fire: 100, Wind: 100, Poison: 100, Holy: 100, Shadow: 100, Ghost: 50, Undead: 100 },

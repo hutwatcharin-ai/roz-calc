@@ -8,7 +8,7 @@
 // Needs network access to raw.githubusercontent.com. Exits non-zero if the
 // differences are not exactly the known list below.
 
-import { ELEMENTS, type Element, type ElementLevel } from '../lib/element-table';
+import { ELEMENT_TABLE, ELEMENTS, type Element, type ElementLevel } from '../lib/element-table';
 import { OFFICIAL_COLUMNS, OFFICIAL_ELEMENT_TABLE } from './official-element-data';
 
 const RATHENA_URL = 'https://raw.githubusercontent.com/rathena/rathena/master/db/re/attr_fix.yml';
@@ -16,8 +16,14 @@ const RATHENA_URL = 'https://raw.githubusercontent.com/rathena/rathena/master/db
 // rAthena writes Dark where the game writes Shadow.
 const RENAME: Record<string, string> = { Dark: 'Shadow' };
 
-// The differences we already know about and have decided to keep. Anything
-// outside this list is a transcription error until proven otherwise.
+// The differences we already know about. Anything outside this list is a
+// transcription error until proven otherwise.
+//
+// The one entry is also the one cell the site does NOT ship as the guide has
+// it: the guide's Lv2 Poison row duplicates its Lv1 row character for
+// character, so the generator overrides it back to rAthena's 50. That is why
+// the second check below expects the shipped table to differ from rAthena
+// nowhere at all -- if the override ever stops being applied, this run says so.
 const KNOWN: { level: ElementLevel; attack: Element; defence: Element; official: number; rathena: number }[] = [
   { level: 2, attack: 'Undead', defence: 'Poison', official: 75, rathena: 50 },
 ];
@@ -89,6 +95,7 @@ async function main(): Promise<void> {
 
   if (unexpected.length === 0 && missing.length === 0) {
     console.log('\nexactly the known differences -- the transcription holds');
+    compareShipped(rathena);
     return;
   }
 
@@ -101,6 +108,30 @@ async function main(): Promise<void> {
     for (const line of missing) console.log(`  ${line}`);
   }
   process.exitCode = 1;
+  compareShipped(rathena);
+}
+
+// The table the site actually renders, after the generator's overrides. Every
+// cell should now match rAthena: the guide agreed on 399 of them and the site
+// sides with rAthena on the 400th.
+function compareShipped(rathena: Record<number, Record<string, Record<string, number>>>): void {
+  const differ: string[] = [];
+  for (const level of [1, 2, 3, 4] as ElementLevel[]) {
+    for (const attack of ELEMENTS) {
+      for (const defence of ELEMENTS) {
+        const ours = ELEMENT_TABLE[level][attack][defence];
+        const theirs = rathena[level]?.[attack]?.[defence];
+        if (ours !== theirs) differ.push(`Lv${level} ${attack} -> ${defence}: site ${ours}, rAthena ${theirs}`);
+      }
+    }
+  }
+
+  console.log(`\nlib/element-table.ts (what the site renders) vs rAthena: ${differ.length} differ`);
+  for (const line of differ) console.log(`  ${line}`);
+  if (differ.length > 0) {
+    console.log('the override in generate-element-table.ts is not being applied -- regenerate');
+    process.exitCode = 1;
+  }
 }
 
 main().catch((err) => {

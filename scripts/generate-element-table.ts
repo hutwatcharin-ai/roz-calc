@@ -7,7 +7,7 @@
 // numbers and can drop the "unverified for Zero" warning the page carried.
 //
 // The one disagreement is documented in scripts/official-element-data.ts and
-// kept as the official page has it.
+// overridden below, back to rAthena's value, on the site owner's judgement.
 //
 // Run it with:  npx tsx scripts/generate-element-table.ts
 // It writes lib/element-table.ts. Commit the output; this script exists so the
@@ -16,6 +16,26 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { OFFICIAL_COLUMNS, OFFICIAL_ELEMENT_TABLE } from './official-element-data';
+
+// Cells where the site deliberately ships something other than what the guide
+// prints. Kept here rather than edited into official-element-data.ts so that
+// file stays a faithful record of the page and the cross-check against rAthena
+// keeps working.
+//
+// Undead -> Poison at level 2: the guide prints 75, rAthena says 50, and the
+// guide's level-2 Poison row is character for character identical to its
+// level-1 row -- the signature of a copy-paste slip. The site owner plays the
+// game and judged it a typo on their page. rAthena's 75 / 50 / 25 / 0 series
+// across the four levels is what ships.
+const OVERRIDES: { level: 1 | 2 | 3 | 4; attack: string; defence: string; value: number; why: string }[] = [
+  {
+    level: 2,
+    attack: 'Undead',
+    defence: 'Poison',
+    value: 50,
+    why: 'guide prints 75; its level-2 Poison row duplicates level 1, and rAthena runs 75/50/25/0',
+  },
+];
 
 const OUT = path.join(process.cwd(), 'lib', 'element-table.ts');
 
@@ -57,6 +77,22 @@ function main(): void {
     }
   }
 
+  for (const override of OVERRIDES) {
+    const before = byAttacker[override.level][override.attack][override.defence];
+    if (before === undefined) {
+      throw new Error(`override targets a cell that does not exist: ${override.attack} -> ${override.defence}`);
+    }
+    if (before === override.value) {
+      throw new Error(
+        `override for Lv${override.level} ${override.attack} -> ${override.defence} is a no-op; the guide already says ${override.value}`,
+      );
+    }
+    byAttacker[override.level][override.attack][override.defence] = override.value;
+    console.log(
+      `override Lv${override.level} ${override.attack} -> ${override.defence}: ${before} -> ${override.value} (${override.why})`,
+    );
+  }
+
   // Refuses to write a partial file: a missing cell would render as a blank in
   // a table whose whole job is to be complete.
   for (const level of LEVELS) {
@@ -81,8 +117,11 @@ function main(): void {
 //
 // Source: Ragnarok Zero's own game guide, ระบบพิเศษ > ระบบธาตุ, transcribed in
 // scripts/official-element-data.ts. These are the game's published numbers, not
-// a Renewal reference -- 399 of the 400 cells match rAthena's Renewal table and
-// the single difference is documented at the source.
+// a Renewal reference -- 399 of the 400 cells match rAthena's Renewal table.
+// The single cell that differed, Lv2 Undead -> Poison, ships as rAthena has it
+// (50, not the guide's 75): the guide's Lv2 Poison row duplicates its Lv1 row
+// character for character, and the site owner, who plays the game, calls it a
+// typo on their page. See OVERRIDES in the generator.
 //
 // Percentages, read attacker-first: ELEMENT_TABLE[defenceLevel][attack][defence].
 // 100 means unchanged, 0 means the hit does nothing, above 100 means stronger.

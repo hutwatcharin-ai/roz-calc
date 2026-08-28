@@ -42,6 +42,8 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: true },
     { href: '/tools/sizes', label: 'ตารางขนาด', ready: true },
+    { href: '/tools/refine', label: 'ตีบวก', ready: true },
+    { href: '/tools/exp', label: 'EXP ต่อเลเวล', ready: true },
   ],
 };
 

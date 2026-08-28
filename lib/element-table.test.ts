@@ -78,14 +78,18 @@ describe('ELEMENT_TABLE', () => {
     expect(elementModifier('Fire', 'Water', 1)).toBe(90);
   });
 
-  it('keeps the one value where the official guide and rAthena disagree', () => {
-    // Official prints 75, rAthena says 50, and rAthena's 75/50/25/0 series is
-    // the tidier one -- which is exactly why this is pinned. The site follows
-    // the official number, and a future regeneration must not quietly restore
-    // the neater value. scripts/compare-element-tables.ts tracks the same fact.
-    expect(elementModifier('Undead', 'Poison', 2)).toBe(75);
-    expect([1, 3, 4].map((l) => elementModifier('Undead', 'Poison', l as ElementLevel))).toEqual([
-      75, 25, 0,
+  it("ships rAthena's value on the one cell the guide got wrong", () => {
+    // The guide prints 75 here. Its level-2 Poison row is character for
+    // character identical to its level-1 row, which is what a copy-paste slip
+    // looks like, and the site owner -- who plays the game -- calls it a typo.
+    // So the generator overrides this single cell back to 50, and the series
+    // reads 75 / 50 / 25 / 0 like every other resistance ladder in the table.
+    // Pinned because a regeneration that silently drops the override would
+    // restore the guide's number without anyone noticing.
+    // scripts/compare-element-tables.ts tracks the same fact against rAthena.
+    expect(elementModifier('Undead', 'Poison', 2)).toBe(50);
+    expect([1, 2, 3, 4].map((l) => elementModifier('Undead', 'Poison', l as ElementLevel))).toEqual([
+      75, 50, 25, 0,
     ]);
   });
 
