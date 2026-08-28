@@ -941,3 +941,43 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 }
 .emptystate strong { color: var(--text); }
 .emptystate p { margin: 0 0 12px; }
+
+/* ---------------------------------------------------------------------------
+   Site footer
+
+   The site had none: nothing said who made it, nothing said where the numbers
+   came from, and nothing distinguished it from an official site. Pages carry a
+   source line for their own tables; the catalogue itself had no credit at all.
+   --------------------------------------------------------------------------- */
+.sitefooter {
+  margin-top: 56px;
+  border-top: 1px solid var(--hair);
+  background: var(--panel);
+}
+.sitefooter__in { padding-block: 28px 40px; }
+.sitefooter__lead {
+  margin: 0 0 22px;
+  max-width: 62ch;
+  color: var(--dim);
+  font: 400 14px/1.7 "Sarabun", sans-serif;
+}
+.sitefooter__lead strong { color: var(--text); }
+.sitefooter__cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px 32px;
+}
+.sitefooter__h {
+  margin: 0 0 8px;
+  font: 600 14px/1.4 "Chakra Petch", sans-serif;
+  color: var(--text);
+}
+.sitefooter ul { margin: 0; padding-inline-start: 0; list-style: none; }
+.sitefooter li {
+  margin-bottom: 7px;
+  color: var(--faint);
+  font: 400 13px/1.6 "Sarabun", sans-serif;
+}
+.sitefooter li strong { color: var(--dim); font-weight: 600; }
+.sitefooter a { color: var(--dim); text-decoration: none; border-bottom: 1px solid var(--hair); }
+.sitefooter a:hover { color: var(--text); border-bottom-color: var(--dim); }

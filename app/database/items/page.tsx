@@ -17,7 +17,24 @@ export const metadata = {
 export const revalidate = 86400;
 
 const PAGE_SIZE = 50;
-const CATEGORIES = ['Armor', 'Card', 'Consumable / Recovery', 'Costume Equipment', 'Other', 'Pet', 'Weapon'];
+// Every category present in the table. Enchantment, Enchant Stone and Special
+// arrived with the 1,222 items rozerodb had and our own source never did; they
+// are kept as their own options rather than folded into Other, because a
+// category nobody can filter to is a category nobody finds.
+// scripts/import-rozerodb-items.ts prints any category word it could not map,
+// which is how these three were noticed.
+const CATEGORIES = [
+  'Armor',
+  'Card',
+  'Consumable / Recovery',
+  'Costume Equipment',
+  'Enchant Stone',
+  'Enchantment',
+  'Other',
+  'Pet',
+  'Special',
+  'Weapon',
+];
 
 export default async function ItemListPage({
   searchParams,

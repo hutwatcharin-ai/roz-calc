@@ -34,6 +34,13 @@ const CATEGORY: Record<string, string> = {
   Armor: 'Armor',
   Card: 'Card',
   Pet: 'Pet',
+  // They write "Costume" where our table already says "Costume Equipment".
+  // Two spellings of one category would split the filter in half.
+  Costume: 'Costume Equipment',
+  // Enchantment, Enchant Stone and Special are categories our own source never
+  // had at all. They are deliberately NOT folded into "Other": a category we
+  // have never seen should appear in the filter as itself so somebody notices
+  // it, rather than being absorbed into the bucket nobody browses.
 };
 
 export interface ItemRow {

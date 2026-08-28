@@ -1,6 +1,7 @@
 import './globals.css';
 import Nav from '@/components/Nav';
 import CharacterBar from '@/components/CharacterBar';
+import SiteFooter from '@/components/SiteFooter';
 import { CharacterContextProvider } from '@/components/CharacterContextProvider';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           <CharacterBar />
           {children}
+          <SiteFooter />
         </CharacterContextProvider>
       </body>
     </html>
