@@ -120,7 +120,7 @@ export default async function MonsterListPage({
                 <td data-label="">
                   <Link href={`/database/monsters/${m.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {m.image_url && (
-                      <img src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                      <img loading="lazy" decoding="async" src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                     )}
                     {m.name_en}
                   </Link>

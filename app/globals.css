@@ -5,7 +5,11 @@
   --panel-2: #1D1444;
   --text: #F4F2FF;
   --dim: #B3A9E6;
-  --faint: #7A70AD;
+  /* Was #7A70AD, which measured 4.44:1 on the page ground and 3.84:1 on
+     --panel-2 -- below the 4.5:1 floor on every surface it was used for, and it
+     is the colour of every table header, source line, and count. #8F86C4 is
+     5.16:1 on the darkest surface it sits on. */
+  --faint: #8F86C4;
   --hair: rgba(244, 242, 255, 0.14);
 
   --yellow: #FFE53D;
@@ -598,7 +602,9 @@ table { border-collapse: collapse; width: 100%; }
   padding: 6px 8px;
   border: 1px solid var(--hair);
   color: var(--faint);
-  font: 600 11px/1.4 "Sarabun", sans-serif;
+  /* 12px is the floor for text that is meant to be read; 11px was the one
+     place on the site under it, on 22 header cells of the refine table. */
+  font: 600 12px/1.4 "Sarabun", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   white-space: nowrap;
@@ -981,3 +987,12 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 .sitefooter li strong { color: var(--dim); font-weight: 600; }
 .sitefooter a { color: var(--dim); text-decoration: none; border-bottom: 1px solid var(--hair); }
 .sitefooter a:hover { color: var(--text); border-bottom-color: var(--dim); }
+
+/* A keyboard shortcut hint is noise on a device with no keyboard, and it was
+   the one thing pushing the search button past a 320px viewport. */
+@media (hover: none) and (pointer: coarse) {
+  .kbd-hint { display: none; }
+}
+@media (max-width: 360px) {
+  .kbd-hint { display: none; }
+}

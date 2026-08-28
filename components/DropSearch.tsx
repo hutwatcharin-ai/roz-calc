@@ -58,7 +58,7 @@ export default function DropSearch({
           >
             <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
               {row.monster_image_url && (
-                <img src={row.monster_image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                <img loading="lazy" decoding="async" src={row.monster_image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
               )}
               <Link href={`/database/monsters/${row.monster_id}`}>{row.monster_name}</Link>
               {row.monster_level !== null && <span className="muted">Lv.{row.monster_level}</span>}

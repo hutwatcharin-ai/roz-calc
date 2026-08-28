@@ -74,7 +74,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                 <td data-label="">
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                     {row.image_url && (
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={row.image_url}
                         alt=""
                         width={24}

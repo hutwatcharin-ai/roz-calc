@@ -153,7 +153,7 @@ export default function CharacterBar() {
             </button>
           </div>
 
-          {error && <p className="charbar__error">{error}</p>}
+          {error && <p className="charbar__error" role="alert">{error}</p>}
 
           {/* Four jobs, not nineteen: HP factors for the rest are not in the
               data yet, and picking numbers for them would put an invented game
@@ -164,7 +164,7 @@ export default function CharacterBar() {
           </p>
           <p className="charbar__note">ค่าที่กรอกเก็บไว้ในเบราว์เซอร์ของคุณเครื่องเดียว ไม่ได้ส่งไปไหน</p>
           {!persisted && (
-            <p className="charbar__error">
+            <p className="charbar__error" role="alert">
               เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) — ใช้ได้ในหน้านี้ แต่พอปิดแท็บแล้วต้องกรอกใหม่
             </p>
           )}

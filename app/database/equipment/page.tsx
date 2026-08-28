@@ -139,7 +139,7 @@ export default async function EquipmentPage({
                     <td data-label="">
                       <Link href={`/database/items/${it.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         {it.icon_url && (
-                          <img src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                          <img loading="lazy" decoding="async" src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                         )}
                         {it.name_en}
                       </Link>

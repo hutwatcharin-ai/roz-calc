@@ -41,14 +41,14 @@ export default function FilterState({
   // number reads as the total.
   if (active.length === 0) {
     return (
-      <p className="filterstate">
+      <p className="filterstate" role="status" aria-live="polite">
         <span className="filterstate__count">{count.toLocaleString('en-US')}</span> {unit}ทั้งหมด
       </p>
     );
   }
 
   return (
-    <p className="filterstate">
+    <p className="filterstate" role="status" aria-live="polite">
       <span className="filterstate__count">
         พบ {count.toLocaleString('en-US')} {unit}
       </span>

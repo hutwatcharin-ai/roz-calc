@@ -198,7 +198,7 @@ export default async function SkillsPage({
                     <td data-label="">
                       <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         {s.icon_url && (
-                          <img src={s.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                          <img loading="lazy" decoding="async" src={s.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                         )}
                         {s.name}
                       </span>

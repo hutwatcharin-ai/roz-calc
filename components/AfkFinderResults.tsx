@@ -108,7 +108,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                   <td data-label="">
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {row.image_url && (
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={row.image_url}
                           alt=""
                           width={24}

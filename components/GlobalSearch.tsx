@@ -122,7 +122,7 @@ export default function GlobalSearch() {
         }}
       >
         ค้นหา
-        <span className="mono" style={{ fontSize: 11, opacity: 0.7 }}>
+        <span className="mono kbd-hint" style={{ fontSize: 12, opacity: 0.7 }} aria-hidden="true">
           Ctrl+K
         </span>
       </button>

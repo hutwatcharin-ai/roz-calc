@@ -149,7 +149,7 @@ export default async function CardsPage({
                     <td data-label="">
                       <Link href={`/database/items/${c.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         {c.icon_url && (
-                          <img src={c.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                          <img loading="lazy" decoding="async" src={c.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                         )}
                         {c.name_en}
                       </Link>
