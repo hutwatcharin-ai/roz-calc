@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { supabaseBrowser } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
+import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 
 // Regenerated with the daily ISR window, same as the list pages.
 export const revalidate = 86400;
@@ -14,15 +15,16 @@ export const revalidate = 86400;
 // scoped to a 500 on /sitemap.xml instead of a failed deploy.
 export const dynamic = 'force-dynamic';
 
-const STATIC_PATHS = [
-  '/',
-  '/drop-finder',
-  '/database/monsters',
-  '/database/items',
-  '/database/cards',
-  '/database/equipment',
-  '/database/skills',
-  '/database/maps',
+// Derived from the nav tables rather than listed again here. This list was
+// hand-written and went stale the moment three tools pages shipped -- they
+// were live, linked from the nav, and absent from the sitemap, which is the
+// kind of gap nothing complains about. The nav tables are already checked
+// against the filesystem by lib/nav-links.test.ts, so deriving from them means
+// a route can only reach the sitemap if its page file exists.
+export const STATIC_PATHS: string[] = [
+  ...new Set([...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools]
+    .filter((link) => link.ready)
+    .map((link) => link.href)),
 ];
 
 // Supabase caps a single select at 1,000 rows and does not say so when it
