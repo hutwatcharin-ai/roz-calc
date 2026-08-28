@@ -69,15 +69,17 @@ export default async function HomePage({
         พร้อมเครื่องมือที่คิดจากค่าตัวละครของคุณเอง
       </p>
       <SiteStats stats={stats} />
-      <form style={{ display: 'flex', gap: 12, margin: '20px 0' }}>
+      {/* The three controls did not wrap, so at 320px the button sat 41px
+          past the right edge -- the last thing on the site that did. */}
+      <form className="filterbar" style={{ margin: '20px 0' }}>
         <label>
           เลเวล{' '}
-          <input className="mono" type="number" name="level" defaultValue={level} />
+          <input className="mono" type="number" name="level" defaultValue={level} inputMode="numeric" style={{ width: 96 }} />
         </label>
         <label>
-          ±<input className="mono" type="number" name="range" defaultValue={range} style={{ width: 60 }} />
+          ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 72 }} />
         </label>
-        <button type="submit">ค้นหา</button>
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
       <div className="panel">
         <FarmingTable rows={rows} />
