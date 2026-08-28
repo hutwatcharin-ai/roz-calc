@@ -676,3 +676,106 @@ table { border-collapse: collapse; width: 100%; }
     z-index: 1;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Direction B additions: collapse reference material, and let a long page be
+   navigated instead of scrolled.
+   --------------------------------------------------------------------------- */
+
+/* A reference table nobody opened is a table nobody had to scroll past. The
+   summary stays a real control: keyboard operable, and it says what is inside
+   and how big it is so the choice to open it is informed. */
+.disclose {
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  margin-top: 14px;
+}
+.disclose > summary {
+  cursor: pointer;
+  padding: 13px 14px;
+  font: 600 15px/1.4 "Chakra Petch", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  min-height: 44px; /* touch target */
+}
+.disclose > summary::-webkit-details-marker { display: none; }
+.disclose > summary::before {
+  content: '▸';
+  color: var(--faint);
+  transition: transform 0.15s;
+}
+.disclose[open] > summary::before { transform: rotate(90deg); }
+.disclose > summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+.disclose__count { color: var(--faint); font: 400 13px/1.4 "Sarabun", sans-serif; margin-inline-start: auto; }
+.disclose__body { padding: 0 14px 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .disclose > summary::before { transition: none; }
+}
+
+/* Jump links for a page that is genuinely long. Not a substitute for ordering
+   the page well -- it is there because a monster page has nine sections and a
+   reader arrives wanting one of them. */
+.jumpbar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-block: 4px 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.jumpbar::-webkit-scrollbar { display: none; }
+.jumpbar a {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  color: var(--dim);
+  text-decoration: none;
+  font: 400 13px/1.3 "Sarabun", sans-serif;
+  white-space: nowrap;
+}
+.jumpbar a:hover, .jumpbar a:focus-visible { border-color: var(--cyan); color: var(--text); }
+
+/* Anchored sections must not land under the sticky header. */
+[id^='sec-'] { scroll-margin-top: 16px; }
+
+/* The headline answer: the number the page exists to produce, before the
+   controls that produce it. */
+.answer {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.answer__value {
+  font: 700 clamp(28px, 8vw, 40px)/1.1 "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+}
+.answer__unit { font: 400 15px/1.4 "Sarabun", sans-serif; color: var(--dim); }
+.answer__caption { margin: 0 0 14px; color: var(--faint); font: 400 13px/1.6 "Sarabun", sans-serif; }
+
+/* Controls as a wrapping row rather than a stack of full-width fields: four
+   selects stacked is four screens-worth of thumb travel on a phone. */
+.controlrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-bottom: 14px;
+}
+.controlrow label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 140px;
+  font: 400 12px/1.4 "Sarabun", sans-serif;
+  color: var(--faint);
+}
+.controlrow select, .controlrow input {
+  min-height: 44px;
+}

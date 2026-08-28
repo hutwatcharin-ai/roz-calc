@@ -58,14 +58,18 @@ export default function RefinePage() {
 
       <RefineCalculator />
 
-      <h2 className="section-title" style={{ marginTop: 28 }}>
-        โอกาสสำเร็จทุกขั้น
-      </h2>
+      <details className="disclose">
+        <summary>
+          ตารางโอกาสสำเร็จทุกขั้น
+          <span className="disclose__count">20 ขั้น × 5 ชนิดของ</span>
+        </summary>
+        <div className="disclose__body">
       <p className="muted" style={{ maxWidth: '65ch' }}>
         คอลัมน์ &ldquo;เข้มข้น&rdquo; คือแร่ Concentrated · อาวุธเลเวล 1 กับ 2
         คู่มือให้แร่มาชนิดเดียว แต่ยังพิมพ์ตัวเลขคอลัมน์นี้ไว้
       </p>
-      <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
+      <p className="tablescroll__hint">เลื่อนตารางซ้ายขวาได้ · ชื่อแถวจะค้างไว้ให้</p>
+      <div className="card tablescroll" style={{ marginTop: 12 }}>
         <table className="eltable">
           <thead>
             <tr>
@@ -106,14 +110,21 @@ export default function RefinePage() {
         </table>
       </div>
 
-      <h2 className="section-title" style={{ marginTop: 28 }}>
-        ตีบวกแล้วได้อะไร
-      </h2>
+        </div>
+      </details>
+
+      <details className="disclose">
+        <summary>
+          ตีบวกแล้วได้ ATK / DEF เท่าไร
+          <span className="disclose__count">20 ขั้น</span>
+        </summary>
+        <div className="disclose__body">
       <p className="muted" style={{ maxWidth: '65ch' }}>
         อาวุธได้ ATK/MATK สองก้อน: ก้อนหลักที่ขึ้นทุกขั้น กับก้อนพิเศษที่เริ่มให้เมื่อถึงขั้นสูงพอ
         อาวุธเลเวลสูงเริ่มได้ก้อนพิเศษเร็วกว่าและได้มากกว่า · เกราะได้ DEF เท่ากับขั้นยกกำลังสอง
       </p>
-      <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
+      <p className="tablescroll__hint">เลื่อนตารางซ้ายขวาได้ · ชื่อแถวจะค้างไว้ให้</p>
+      <div className="card tablescroll" style={{ marginTop: 12 }}>
         <table className="eltable">
           <thead>
             <tr>
@@ -152,9 +163,15 @@ export default function RefinePage() {
         </table>
       </div>
 
-      <h2 className="section-title" style={{ marginTop: 28 }}>
-        แร่และค่าธรรมเนียม
-      </h2>
+        </div>
+      </details>
+
+      <details className="disclose">
+        <summary>
+          แร่และค่าธรรมเนียม
+          <span className="disclose__count">5 ชนิดของ</span>
+        </summary>
+        <div className="disclose__body">
       <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
         <table className="stat-table">
           <thead>
@@ -193,6 +210,9 @@ export default function RefinePage() {
           </tbody>
         </table>
       </div>
+
+        </div>
+      </details>
 
       <p className="ceiling-note" style={{ marginTop: 16 }}>
         <strong>แร่ HD ไม่ได้อยู่ในหน้านี้:</strong> ตีพังแล้วขั้นตีบวกลด 1 แทนที่จะทำของหาย
