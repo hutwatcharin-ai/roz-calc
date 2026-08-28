@@ -1,31 +1,24 @@
-// Generates lib/element-table.ts from rAthena's attr_fix.yml.
+// Generates lib/element-table.ts from the official Zero guide's tables.
 //
-// Why a generator and not a hand-typed constant: the table is 400 numbers, and
-// spec 3.10 draws the line that makes rAthena citable here -- FORMULA is
-// Renewal and may be referenced, DATA (monster stats, refine rates, skill
-// trees) is reworked in Zero and may not. The element modifier table is part of
-// how damage is computed, not Zero-specific content.
+// It used to read rAthena's attr_fix.yml, cited under spec 3.10's formula/data
+// line. That was the best source available at the time and it is no longer the
+// best one: the game's own guide publishes all four attribute levels, and 399
+// of its 400 cells agree with rAthena, so the site now ships the official
+// numbers and can drop the "unverified for Zero" warning the page carried.
 //
-// Typing 400 values from memory would have been wrong: Water vs Wind is 90 in
-// the file, not the 50 I would have written, and Water vs Poison is 150, not
-// 100. The numbers come from the file or they do not go in.
+// The one disagreement is documented in scripts/official-element-data.ts and
+// kept as the official page has it.
 //
 // Run it with:  npx tsx scripts/generate-element-table.ts
 // It writes lib/element-table.ts. Commit the output; this script exists so the
-// values stay auditable, not so they are fetched at build time.
+// values stay auditable, not so they are computed at build time.
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { OFFICIAL_COLUMNS, OFFICIAL_ELEMENT_TABLE } from './official-element-data';
 
-const SOURCE_URL = 'https://raw.githubusercontent.com/rathena/rathena/master/db/re/attr_fix.yml';
 const OUT = path.join(process.cwd(), 'lib', 'element-table.ts');
 
-// rAthena writes "Dark"; the client, our monsters table and every page on this
-// site write "Shadow". One name for one element, and it is the game's.
-const RENAME: Record<string, string> = { Dark: 'Shadow' };
-
-// Order matters: it is the order the table renders in, and it matches the
-// element filter on the monster list page.
 const ELEMENTS = [
   'Neutral',
   'Water',
@@ -39,94 +32,62 @@ const ELEMENTS = [
   'Undead',
 ] as const;
 
-type Table = Record<number, Record<string, Record<string, number>>>;
+const LEVELS = [1, 2, 3, 4] as const;
 
-// A deliberately small parser rather than a YAML dependency: the file is two
-// levels of plain "key: value" under a list of levels, and adding a parser for
-// one generator would be a runtime dependency for a build-time job.
-function parse(yaml: string): Table {
-  const table: Table = {};
-  let level: number | null = null;
-  let attacker: string | null = null;
+function main(): void {
+  // The official grid is defender-major; the site reads it attacker-major
+  // ("I swing Fire, what happens?"), so it is transposed exactly once, here.
+  const byAttacker: Record<number, Record<string, Record<string, number>>> = {};
 
-  for (const raw of yaml.split('\n')) {
-    const line = raw.replace(/\r$/, '');
-    if (line.trim() === '' || line.trim().startsWith('#')) continue;
+  for (const level of LEVELS) {
+    byAttacker[level] = {};
+    for (const attacker of ELEMENTS) byAttacker[level][attacker] = {};
 
-    const levelMatch = /^\s*-\s*Level:\s*(\d+)\s*$/.exec(line);
-    if (levelMatch) {
-      level = Number(levelMatch[1]);
-      table[level] = {};
-      attacker = null;
-      continue;
-    }
-    if (level === null) continue;
-
-    const attackerMatch = /^ {4}([A-Za-z]+):\s*$/.exec(line);
-    if (attackerMatch) {
-      attacker = RENAME[attackerMatch[1]] ?? attackerMatch[1];
-      table[level][attacker] = {};
-      continue;
-    }
-
-    const valueMatch = /^ {6}([A-Za-z]+):\s*(-?\d+)\s*$/.exec(line);
-    if (valueMatch && attacker) {
-      const defender = RENAME[valueMatch[1]] ?? valueMatch[1];
-      table[level][attacker][defender] = Number(valueMatch[2]);
+    for (const defender of ELEMENTS) {
+      const row = OFFICIAL_ELEMENT_TABLE[level][defender];
+      if (row.length !== OFFICIAL_COLUMNS.length) {
+        throw new Error(`Lv${level} ${defender}: ${row.length} values, expected ${OFFICIAL_COLUMNS.length}`);
+      }
+      row.forEach((value, i) => {
+        if (!Number.isInteger(value) || value < -100 || value > 200) {
+          throw new Error(`Lv${level} ${OFFICIAL_COLUMNS[i]} -> ${defender}: ${value} is out of range`);
+        }
+        byAttacker[level][OFFICIAL_COLUMNS[i]][defender] = value;
+      });
     }
   }
 
-  return table;
-}
-
-async function main(): Promise<void> {
-  const response = await fetch(SOURCE_URL);
-  if (!response.ok) throw new Error(`Failed to fetch attr_fix.yml: ${response.status}`);
-  const yaml = await response.text();
-
-  const table = parse(yaml);
-  const levels = Object.keys(table).map(Number).sort((a, b) => a - b);
-
-  // Every cell must be present after parsing. A quietly missing attacker or
-  // defender would render as a blank in a table whose whole job is to be
-  // complete, so this refuses to write a partial file.
-  const missing: string[] = [];
-  for (const level of levels) {
+  // Refuses to write a partial file: a missing cell would render as a blank in
+  // a table whose whole job is to be complete.
+  for (const level of LEVELS) {
     for (const attacker of ELEMENTS) {
       for (const defender of ELEMENTS) {
-        // rAthena omits a cell when the value is the 100% default.
-        if (table[level]?.[attacker]?.[defender] === undefined) {
-          missing.push(`Lv${level} ${attacker} -> ${defender}`);
+        if (byAttacker[level][attacker][defender] === undefined) {
+          throw new Error(`Lv${level} ${attacker} -> ${defender} is missing`);
         }
       }
     }
   }
-  if (levels.length !== 4) throw new Error(`Expected 4 attribute levels, parsed ${levels.length}`);
-  if (missing.length > 0) {
-    throw new Error(`attr_fix.yml did not yield every cell (${missing.length} missing): ${missing.slice(0, 5).join(', ')}`);
-  }
 
-  const rows = levels
-    .map((level) => {
-      const byAttacker = ELEMENTS.map((attacker) => {
-        const values = ELEMENTS.map((defender) => `${defender}: ${table[level][attacker][defender]}`).join(', ');
-        return `    ${attacker}: { ${values} },`;
-      }).join('\n');
-      return `  ${level}: {\n${byAttacker}\n  },`;
-    })
-    .join('\n');
+  const rows = LEVELS.map((level) => {
+    const body = ELEMENTS.map((attacker) => {
+      const values = ELEMENTS.map((d) => `${d}: ${byAttacker[level][attacker][d]}`).join(', ');
+      return `    ${attacker}: { ${values} },`;
+    }).join('\n');
+    return `  ${level}: {\n${body}\n  },`;
+  }).join('\n');
 
   const file = `// GENERATED by scripts/generate-element-table.ts -- do not edit by hand.
 //
-// Source: ${SOURCE_URL}
-// rAthena is GPL-3.0. These are the Renewal element modifiers, cited under the
-// rule spec 3.10 draws: rAthena's FORMULA side is Renewal and may be
-// referenced; its DATA side (monster stats, refine rates, skill trees) is
-// reworked in Zero and may not.
+// Source: Ragnarok Zero's own game guide, ระบบพิเศษ > ระบบธาตุ, transcribed in
+// scripts/official-element-data.ts. These are the game's published numbers, not
+// a Renewal reference -- 399 of the 400 cells match rAthena's Renewal table and
+// the single difference is documented at the source.
 //
-// Percentages. 100 means unchanged, 0 means immune, negative means the hit
-// heals the target. "Dark" in the source file is written "Shadow" here, the
-// name the game and every other page on this site use.
+// Percentages, read attacker-first: ELEMENT_TABLE[defenceLevel][attack][defence].
+// 100 means unchanged, 0 means the hit does nothing, above 100 means stronger.
+// The official page prints the Ghost column as "Ninja Aura"; the site uses
+// Ghost, the name the monsters table and the game's element field use.
 
 export const ELEMENTS = [${ELEMENTS.map((e) => `'${e}'`).join(', ')}] as const;
 
@@ -137,8 +98,6 @@ export const ELEMENT_TABLE: Record<ElementLevel, Record<Element, Record<Element,
 ${rows}
 };
 
-// Thai labels for the element names. The element names themselves stay English
-// everywhere on this site, because the game prints them in English.
 export const ELEMENT_LEVEL_LABEL = 'ระดับธาตุของเป้าหมาย';
 
 export function elementModifier(
@@ -152,10 +111,7 @@ export function elementModifier(
 
   fs.writeFileSync(OUT, file, 'utf8');
   console.log(`wrote ${OUT}`);
-  console.log(`${levels.length} attribute levels x ${ELEMENTS.length} x ${ELEMENTS.length} = ${levels.length * ELEMENTS.length * ELEMENTS.length} cells`);
+  console.log(`${LEVELS.length} attribute levels x ${ELEMENTS.length} x ${ELEMENTS.length} = ${LEVELS.length * ELEMENTS.length ** 2} cells, from the official guide`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+main();

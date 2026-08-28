@@ -9,6 +9,7 @@ import AggroBadge from '@/components/AggroBadge';
 import KillRatePanel from '@/components/KillRatePanel';
 import AddToPlanButton from '@/components/AddToPlanButton';
 import MonsterElementPanel from '@/components/MonsterElementPanel';
+import MonsterSizePanel from '@/components/MonsterSizePanel';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -189,6 +190,8 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           />
 
           <MonsterElementPanel element={monster.element} elementLevel={monster.element_level} />
+
+          <MonsterSizePanel size={monster.size} />
 
           <div className="card">
             <h2 className="section-title">ค่าสถานะ</h2>

@@ -21,17 +21,21 @@ export default function ElementsPage() {
         ดูได้ที่หน้ามอนตัวนั้น แล้วมาเทียบกับตารางระดับเดียวกัน
       </p>
 
-      {/* Permanent, not dismissible -- spec 3.5 requires it, and the source is
-          named so a reader can go and check rather than take our word. */}
+      {/* Spec 3.5 asked for a permanent warning because the only source at the
+          time was Renewal reference data. The source is now the game's own
+          guide, so this says where the numbers come from instead of warning
+          that they might not apply. */}
       <div className="ceiling-note" style={{ marginTop: 16 }}>
-        <strong>ที่มาของตัวเลข:</strong> ตารางนี้มาจากไฟล์ <code>db/re/attr_fix.yml</code> ของ{' '}
-        <a href="https://github.com/rathena/rathena" target="_blank" rel="noopener noreferrer">
-          rAthena
-        </a>{' '}
-        ซึ่งเป็นค่าของระบบ Renewal มาตรฐาน — <strong>ยังไม่มีใครยืนยันว่าตรงกับ Zero ทุกช่อง</strong> ·
-        เว็บนี้อ้างอิง rAthena ได้เฉพาะฝั่ง "สูตร" ซึ่งรวมตารางธาตุ ส่วนฝั่ง "ข้อมูล" อย่างค่าสถานะมอน
-        อัตราตีบวก และผังสกิล Zero แก้ใหม่หมด จึงไม่เอามาใช้
+        <strong>ที่มาของตัวเลข:</strong> ตารางนี้ถอดมาจาก<strong>คู่มือเกมทางการของ Ragnarok Zero</strong>{' '}
+        (ระบบพิเศษ &gt; ระบบธาตุ) ครบทั้ง 4 ระดับ · ตรวจทานทีละช่องกับตาราง Renewal ของ rAthena แล้ว{' '}
+        <strong>ตรงกัน 399 จาก 400 ช่อง</strong> ช่องที่ต่างคือ Undead ตี Poison ที่ระดับ 2
+        ซึ่งคู่มือเขียน 75 ส่วน rAthena เขียน 50 — เว็บนี้ใช้ค่าของคู่มือ
       </div>
+
+      <p className="muted" style={{ marginTop: 12, maxWidth: '65ch' }}>
+        หมายเหตุชื่อธาตุ: คู่มือทางการเรียกธาตุ Ghost ว่า <strong>Ninja Aura</strong> ·
+        เว็บนี้ใช้ชื่อ Ghost ตามที่ข้อมูลมอนสเตอร์และตัวเกมใช้ ค่าทุกช่องเป็นของธาตุเดียวกัน
+      </p>
 
       {LEVELS.map((level) => (
         <ElementTable key={level} level={level} />

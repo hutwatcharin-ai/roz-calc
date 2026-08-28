@@ -1,11 +1,14 @@
 // Drop rate versus the level gap between player and monster.
 //
-// Two facts are confirmed (spec 3.9, from players reporting the same thing
-// across several videos): inside +/-19 there is no penalty at all, and beyond
-// +/-40 drops are halved. Nothing confirms what happens in between, so this
-// returns a third state instead of interpolating -- a made-up curve through the
-// middle would look more precise than the evidence and would be read as a game
-// value.
+// Two facts, and now from the game's own guide rather than from players
+// reporting the same thing across several videos (spec 3.9): the official
+// ระบบความแตกต่างของเลเวล page prints exactly two rows -- "~ -19: no penalty"
+// and "-40 ~: reduced 50%".
+//
+// The middle stays unknown, and the official page is the reason to be confident
+// about that rather than merely cautious: given the chance to state what
+// happens between 20 and 39, the publisher did not. Interpolating a curve there
+// would look more precise than any evidence anyone has.
 
 export type DropPenalty = 'none' | 'unknown' | 'halved';
 

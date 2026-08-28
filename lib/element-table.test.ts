@@ -37,11 +37,14 @@ describe('ELEMENT_TABLE', () => {
     expect(Math.max(...values)).toBeLessThanOrEqual(200);
   });
 
-  it('uses the game\'s element names, not rAthena\'s', () => {
-    // rAthena writes "Dark"; the client, our monsters table and every page here
-    // write "Shadow". A missed rename would leave a column nothing can look up.
+  it('uses the game\'s element names, not the ones its sources print', () => {
+    // rAthena writes "Dark" and the official guide prints "Ninja Aura" where
+    // everything else writes Ghost. A missed rename either way would leave a
+    // column that nothing on the site can look up.
     expect(ELEMENTS).toContain('Shadow');
+    expect(ELEMENTS).toContain('Ghost');
     expect(ELEMENTS as readonly string[]).not.toContain('Dark');
+    expect(ELEMENTS as readonly string[]).not.toContain('Ninja Aura');
     for (const level of LEVELS) {
       expect(Object.keys(ELEMENT_TABLE[level]).sort()).toEqual([...ELEMENTS].sort());
     }
@@ -62,6 +65,28 @@ describe('ELEMENT_TABLE', () => {
     // to a map they cannot fight on.
     for (const level of LEVELS) expect(elementModifier('Shadow', 'Undead', level)).toBe(0);
     expect(elementModifier('Poison', 'Poison', 1)).toBe(0);
+  });
+
+  it('is transposed the right way round', () => {
+    // The official grid is defender-major and this table is attacker-major, so
+    // a transpose bug would swap every asymmetric pair and still pass every
+    // check above. Fire beats Earth and loses to Water; the reverse is a
+    // different, wrong table.
+    expect(elementModifier('Fire', 'Earth', 1)).toBe(150);
+    expect(elementModifier('Earth', 'Fire', 1)).toBe(90);
+    expect(elementModifier('Water', 'Fire', 1)).toBe(150);
+    expect(elementModifier('Fire', 'Water', 1)).toBe(90);
+  });
+
+  it('keeps the one value where the official guide and rAthena disagree', () => {
+    // Official prints 75, rAthena says 50, and rAthena's 75/50/25/0 series is
+    // the tidier one -- which is exactly why this is pinned. The site follows
+    // the official number, and a future regeneration must not quietly restore
+    // the neater value. scripts/compare-element-tables.ts tracks the same fact.
+    expect(elementModifier('Undead', 'Poison', 2)).toBe(75);
+    expect([1, 3, 4].map((l) => elementModifier('Undead', 'Poison', l as ElementLevel))).toEqual([
+      75, 25, 0,
+    ]);
   });
 
   it('agrees with the table it reads from', () => {

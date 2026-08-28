@@ -14,9 +14,9 @@ describe('dropPenalty', () => {
   });
 
   it('refuses to interpolate between the two confirmed points', () => {
-    // Players confirmed +/-19 (no penalty) and beyond +/-40 (halved). Nothing
-    // confirms the middle, and a smooth curve through it would read as a game
-    // value rather than as the guess it would be.
+    // The official guide prints exactly two rows: "~ -19: no penalty" and
+    // "-40 ~: reduced 50%". Given the chance to state the middle, the publisher
+    // did not, so neither does this.
     expect(dropPenalty(50, 70)).toBe('unknown');
     expect(dropPenalty(50, 90)).toBe('unknown');
     expect(dropPenalty(50, 20)).toBe('unknown');

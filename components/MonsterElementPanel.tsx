@@ -63,8 +63,7 @@ export default function MonsterElementPanel({
       </p>
 
       <p className="muted">
-        ตัวเลขมาจาก <Link href="/tools/elements">ตารางธาตุ</Link> ซึ่งอ้างอิงค่า Renewal ของ rAthena
-        และยังไม่ยืนยันว่าตรงกับ Zero ทุกช่อง
+        ตัวเลขมาจาก <Link href="/tools/elements">ตารางธาตุ</Link> ซึ่งถอดมาจากคู่มือเกมทางการของ Zero
       </p>
     </div>
   );

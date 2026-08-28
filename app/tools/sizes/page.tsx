@@ -1,0 +1,69 @@
+// app/tools/sizes/page.tsx
+import Link from 'next/link';
+import { SIZE_TABLE, SIZES, SIZE_LABELS } from '@/lib/size-table';
+
+export const metadata = {
+  title: 'ตารางขนาด',
+  description:
+    'ตารางตัวคูณความเสียหายตามประเภทอาวุธ × ขนาดมอนสเตอร์ของ Ragnarok Zero Global — ดูว่าอาวุธชนิดไหนตีมอนขนาดเล็ก กลาง ใหญ่ ได้เต็มหรือโดนหัก',
+};
+
+function band(value: number): string {
+  if (value < 75) return 'el--immune';
+  if (value < 100) return 'el--weak';
+  return 'el--flat';
+}
+
+export default function SizesPage() {
+  return (
+    <main className="shell" style={{ paddingBlock: 32 }}>
+      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ตารางขนาด</h1>
+      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
+        ความเสียหายที่อาวุธแต่ละชนิดทำได้ ขึ้นกับขนาดของมอนสเตอร์ด้วย ไม่ใช่แค่ธาตุ —
+        หนังสือตีมอนขนาดใหญ่เหลือ 50% ซึ่งหักหนักกว่าการ์ดส่วนใหญ่ที่หามาใส่
+      </p>
+
+      <div className="ceiling-note" style={{ marginTop: 16 }}>
+        <strong>ที่มาของตัวเลข:</strong> คู่มือเกมทางการของ Ragnarok Zero (ระบบพิเศษ &gt; ระบบขนาด) ·
+        ตัวคูณนี้คิดก่อนตัวคูณธาตุ ดูคู่กับ <Link href="/tools/elements">ตารางธาตุ</Link> ได้
+      </div>
+
+      <div className="card" style={{ marginTop: 16, overflowX: 'auto' }}>
+        <table className="eltable">
+          <thead>
+            <tr>
+              <th scope="col">ประเภทอาวุธ</th>
+              {SIZES.map((size) => (
+                <th key={size} scope="col">
+                  {SIZE_LABELS[size]}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {SIZE_TABLE.map((row) => (
+              <tr key={row.weapon}>
+                <th scope="row">
+                  {row.weapon}
+                  <span className="muted" style={{ fontSize: 12, marginInlineStart: 6 }}>
+                    {row.label}
+                  </span>
+                </th>
+                {SIZES.map((size) => (
+                  <td key={size} className={`el ${band(row[size])}`}>
+                    {row[size]}%
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="muted" style={{ marginTop: 20 }}>
+        อยากรู้ว่ามอนตัวไหนขนาดอะไร เปิด <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link>{' '}
+        แล้วกดเข้าไปดูรายตัว หน้ามอนจะบอกด้วยว่าอาวุธชนิดไหนตีตัวนั้นได้เต็ม
+      </p>
+    </main>
+  );
+}
