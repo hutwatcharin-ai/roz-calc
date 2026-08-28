@@ -595,3 +595,84 @@ table { border-collapse: collapse; width: 100%; }
 .el--flat { color: var(--faint); }
 .el--strong { background: rgba(61, 255, 166, 0.14); color: var(--status-safe); }
 .el--heal { background: rgba(61, 232, 255, 0.18); color: var(--cyan); font-weight: 700; }
+
+/* ---------------------------------------------------------------------------
+   Page header, source line, and mobile tables (UX audit 28 Aug, F5 F6 F7)
+
+   Three things the audit measured, fixed in one place rather than per page.
+   --------------------------------------------------------------------------- */
+
+/* F5: the title was inline-styled at a fixed 32px in eighteen files. One rule,
+   and it scales down so a long Thai heading stops wrapping on a narrow phone. */
+.pagehead { margin-block: 4px 18px; }
+.pagehead__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pagehead__title {
+  font: 700 clamp(22px, 5.6vw, 32px)/1.25 "Chakra Petch", sans-serif;
+  margin: 0;
+  text-wrap: balance;
+}
+.pagehead__lead {
+  margin: 8px 0 0;
+  max-width: 62ch;
+  color: var(--dim);
+  font: 400 15px/1.65 "Sarabun", sans-serif;
+}
+
+/* F7: provenance used to be a filled panel with an accent border, as loud as
+   the content, and pages stacked two or three of them. It is a line now.
+   .ceiling-note stays as it was and is reserved for genuine warnings, so that
+   the two stop looking alike -- a reader who learns to skip the source line
+   must not learn to skip a safety warning with it. */
+.source-note {
+  margin: 10px 0 0;
+  padding-inline-start: 10px;
+  border-inline-start: 2px solid var(--hair);
+  color: var(--faint);
+  font: 400 13px/1.6 "Sarabun", sans-serif;
+  max-width: 70ch;
+}
+.source-note strong { color: var(--dim); font-weight: 600; }
+.source-note a { color: var(--dim); }
+
+/* A source line that belongs to one card rather than to the page. */
+.card > .source-note:last-child { margin-top: 12px; }
+
+/* F6: .data-table already became stacked cards below 720px. .stat-table and
+   .eltable did not, so every tools page built on them needed a sideways scroll
+   -- measured at 562px of table inside a 390px viewport on the refine page.
+
+   .stat-table is a two-column label/value list, so it needs no transformation,
+   only room: the label column stops forcing a minimum width and long labels
+   wrap instead of pushing the value off-screen. */
+@media (max-width: 560px) {
+  .stat-table td:first-child,
+  .stat-table th[scope='row'] { width: auto; padding-inline-start: 0; }
+  .stat-table td.num { padding-inline-end: 0; white-space: nowrap; }
+  .stat-table td, .stat-table th { padding-block: 10px; }
+}
+
+/* .eltable is a genuine matrix and cannot be stacked without losing the
+   comparison it exists for. It keeps its sideways scroll, but says so and
+   pins the row label, so a reader can tell which row they are on. */
+.tablescroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tablescroll__hint {
+  display: none;
+  margin: 0 0 8px;
+  color: var(--faint);
+  font: 400 12px/1.5 "Sarabun", sans-serif;
+}
+@media (max-width: 720px) {
+  .tablescroll__hint { display: block; }
+  .eltable th[scope='row'] {
+    position: sticky;
+    inset-inline-start: 0;
+    background: var(--panel);
+    z-index: 1;
+  }
+}

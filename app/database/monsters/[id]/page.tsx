@@ -141,7 +141,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <img src={monster.image_url} alt="" width={64} height={64} style={{ imageRendering: 'pixelated' }} />
         )}
         <div>
-          <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{monster.name_en}</h1>
+          <h1 className="pagehead__title">{monster.name_en}</h1>
           <p style={{ color: 'var(--dim)' }}>
             Lv.{monster.level}
             {monster.race ? ` · ${monster.race}` : ''}
@@ -181,9 +181,16 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
       <div className="detail-cols">
         <div className="panel">
-          {/* First card in the left column: the personal answer comes before the
-              reference tables, because it is the thing this site can say and a
-              stat dump cannot. */}
+          {/* Answers before reference. The summary used to sit third, at 2,271px
+              on a phone, underneath the two thirty-row tables it summarises --
+              so a reader decided from half the picture and never saw the line
+              that existed to stop exactly that (UX audit F3). */}
+          <MonsterBestWeaponPanel
+            element={monster.element}
+            elementLevel={monster.element_level}
+            size={monster.size}
+          />
+
           <KillRatePanel
             monsterHp={monster.hp}
             expPerKill={monster.base_exp}
@@ -193,12 +200,6 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <MonsterElementPanel element={monster.element} elementLevel={monster.element_level} />
 
           <MonsterSizePanel size={monster.size} />
-
-          <MonsterBestWeaponPanel
-            element={monster.element}
-            elementLevel={monster.element_level}
-            size={monster.size}
-          />
 
           <div className="card">
             <h2 className="section-title">ค่าสถานะ</h2>

@@ -5,6 +5,7 @@
 // who arrives from search should see them without waiting for JavaScript.
 
 import { Fragment } from 'react';
+import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
 import RefineCalculator from '@/components/RefineCalculator';
 import {
@@ -38,27 +39,22 @@ function band(chance: number): string {
 export default function RefinePage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ตีบวก</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        &ldquo;+7 โอกาส 50%&rdquo; ฟังดูเหมือนตีสองครั้งก็ได้ แต่ตีพังของหาย ต้องเริ่มใหม่ที่ +0
-        ด้วยของชิ้นใหม่ ตัวเลขที่ต้องรู้จริง ๆ คือ <strong>ต้องเตรียมของกี่ชิ้น</strong> ไม่ใช่โอกาสต่อครั้ง
-      </p>
-
-      <div className="ceiling-note" style={{ marginTop: 16 }}>
-        <strong>ที่มาของตัวเลข:</strong> คู่มือเกมทางการของ Ragnarok Zero (คู่มือผู้เชี่ยวชาญ &gt; การตีบวก)
-        · ตาราง ATK และ DEF ตรวจแล้วว่าเป็นสูตรเลขล้วน เทสต์ในโค้ดคำนวณใหม่ทั้งตารางแล้วเทียบทีละช่อง
-        · ส่วนตารางโอกาสไม่มีสูตรรองรับ จึงเทียบกับ rozerodb ที่ถอดหน้าเดียวกันแยกกันมา
-        <strong> ตรงกันครบ 200 ช่อง</strong> (รอบแรกต่างกัน 4 ช่อง — เว็บนี้อ่านผิดเอง แก้แล้ว)
-      </div>
-
-      <div className="ceiling-note" style={{ marginTop: 12 }}>
-        <strong>สิ่งที่เว็บนี้ยังตอบไม่ได้:</strong> ตีหนึ่งครั้ง<strong>กินแร่กี่ก้อน</strong> —
-        ตารางวัตถุดิบของคู่มือไม่มีคอลัมน์จำนวน และเว็บอื่นที่ถอดหน้าเดียวกันก็ไม่มี
-        แปลว่ายังไม่มีใครตีพิมพ์ไว้ · เว็บนี้จึงบอกได้แค่ว่า<strong>ตีทั้งหมดกี่ครั้ง</strong>
-        แล้วปล่อยให้คูณเอง · ไม่เหมาว่า &ldquo;RO ภาคอื่นกินก้อนเดียว Zero ก็คงเหมือนกัน&rdquo;
-        เพราะ Zero แก้กลไกตีบวกไปแล้วอย่างน้อยหนึ่งอย่าง (แยกตารางโอกาสตามระดับของ ซึ่งภาคอื่นไม่มี)
-        · <strong>ค่าธรรมเนียมไม่กระทบ</strong> เพราะคิดต่อครั้ง ไม่ใช่ต่อก้อน
-      </div>
+      <PageHeader
+        title="ตีบวก"
+        lead={
+          <>
+            &ldquo;+7 โอกาส 50%&rdquo; ฟังดูเหมือนตีสองครั้งก็ได้ แต่ตีพังของหาย ต้องเริ่มใหม่ที่ +0
+            ด้วยของชิ้นใหม่ ตัวเลขที่ต้องรู้จริง ๆ คือ <strong>ต้องเตรียมของกี่ชิ้น</strong>{' '}
+            ไม่ใช่โอกาสต่อครั้ง
+          </>
+        }
+        source={
+          <>
+            <strong>ที่มา:</strong> คู่มือเกมทางการ (คู่มือผู้เชี่ยวชาญ &gt; การตีบวก) ·
+            ตารางโอกาสเทียบกับ rozerodb ที่ถอดหน้าเดียวกันแยกกันมา <strong>ตรงกันครบ 200 ช่อง</strong>
+          </>
+        }
+      />
 
       <RefineCalculator />
 
