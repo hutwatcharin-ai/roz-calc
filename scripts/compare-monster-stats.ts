@@ -6,8 +6,9 @@
 // source. An import that silently dropped or shifted a column would look
 // exactly like a working site.
 //
-// ragnarokzero.net publishes the same fields per monster and its robots.txt
-// allows everything but /m/. It states it derives from public TWRoZ data, which
+// ragnarokzero.net publishes the same fields per monster, including the
+// Aggressive flag the AFK finder decides safety on, and its robots.txt allows
+// everything but /m/. It states it derives from public TWRoZ data, which
 // is likely our own upstream too -- so agreement mostly proves our import is
 // faithful rather than proving the numbers are right about the live game. A
 // disagreement is still worth knowing about, and that is what this reports.
@@ -77,8 +78,20 @@ function parsePage(text: string): Record<string, string | number> | null {
     out.ElementLevel = Number(element[2]);
   }
 
+  // "Race Undead Aggressive Physically attackable Can move Stats" -- the race
+  // word, then whichever flags apply, then the stat block.
   const race = /\bRace ([A-Za-z ]+?) (?:Physically|Can move|Loots|Aggressive|Stats)\b/.exec(block);
   if (race) out.Race = race[1].trim();
+
+  const flagStart = block.indexOf('Race ');
+  const flagEnd = block.indexOf(' Stats ');
+  if (flagStart !== -1 && flagEnd > flagStart) {
+    const flags = block.slice(flagStart, flagEnd);
+    // is_aggressive is the field the AFK finder decides safety on, and this
+    // is the only published source that carries it.
+    out.Aggressive = flags.includes('Aggressive') ? 1 : 0;
+    out.Loots = flags.includes('Loots items') ? 1 : 0;
+  }
 
   // ATK prints as a range with an en dash.
   const atk = /\bATK (\d[\d,]*)[–-](\d[\d,]*)/.exec(block);
@@ -123,6 +136,14 @@ function compare(ours: Row, theirs: Record<string, string | number>): string[] {
     if (theirs[label] === undefined || ours[ourKey] === null) continue;
     if (Number(ours[ourKey]) !== Number(theirs[label])) {
       differences.push(`${ourKey}: ours ${ours[ourKey]}, theirs ${theirs[label]}`);
+    }
+  }
+
+  for (const [ourKey, label] of [['is_aggressive', 'Aggressive'], ['loots_items', 'Loots']] as const) {
+    const them = theirs[label];
+    if (them === undefined || ours[ourKey] === null || ours[ourKey] === undefined) continue;
+    if ((ours[ourKey] ? 1 : 0) !== Number(them)) {
+      differences.push(`${ourKey}: ours ${ours[ourKey]}, theirs ${Number(them) === 1}`);
     }
   }
 
