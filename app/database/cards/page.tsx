@@ -1,6 +1,8 @@
 // app/database/cards/page.tsx
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
+import PageHeader from '@/components/PageHeader';
+import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { parseCardSlot } from '@/lib/card-slot';
 
@@ -93,16 +95,26 @@ export default async function CardsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลการ์ด</h1>
+      <PageHeader title="ฐานข้อมูลการ์ด" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no cards", which is
           false. */}
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {error ? 'โหลดจำนวนการ์ดไม่สำเร็จ' : `${filtered.length} ใบ จากทั้งหมด ${cards.length} ใบ`}
-      </p>
+      {error ? (
+        <p className="filterstate">โหลดจำนวนการ์ดไม่สำเร็จ</p>
+      ) : (
+        <FilterState
+          count={filtered.length}
+          unit="ใบ"
+          filters={[
+            { label: 'คำค้น', value: q },
+            { label: 'ช่อง', value: slot },
+          ]}
+          clearHref="/database/cards"
+        />
+      )}
 
-      <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่อการ์ดหรือเอฟเฟกต์ เช่น LUK" />
+      <form className="filterbar">
+        <input type="search" name="q" defaultValue={q} placeholder="ชื่อการ์ด หรือเอฟเฟกต์ เช่น LUK" />
         <select name="slot" defaultValue={slot}>
           <option value="">ทุกช่อง</option>
           {slots.map(([s, n]) => (
@@ -111,7 +123,7 @@ export default async function CardsPage({
             </option>
           ))}
         </select>
-        <button type="submit">กรอง</button>
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
 
       <div className="card">

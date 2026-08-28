@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
+import PageHeader from '@/components/PageHeader';
+import FilterState, { EmptyState } from '@/components/FilterState';
 import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 
@@ -62,12 +64,11 @@ export default async function MonsterListPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลมอนสเตอร์</h1>
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>{count ?? 0} ตัวทั้งหมด</p>
+      <PageHeader title="ฐานข้อมูลมอนสเตอร์" />
 
-      <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่อมอนสเตอร์..." />
-        <select name="race" defaultValue={race}>
+      <form className="filterbar">
+        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อมอนสเตอร์" aria-label="ค้นชื่อมอนสเตอร์" />
+        <select name="race" defaultValue={race} aria-label="เผ่า">
           <option value="">ทุกเผ่า</option>
           {RACES.map((r) => (
             <option key={r} value={r}>
@@ -75,7 +76,7 @@ export default async function MonsterListPage({
             </option>
           ))}
         </select>
-        <select name="element" defaultValue={element}>
+        <select name="element" defaultValue={element} aria-label="ธาตุ">
           <option value="">ทุกธาตุ</option>
           {ELEMENTS.map((e) => (
             <option key={e} value={e}>
@@ -83,9 +84,25 @@ export default async function MonsterListPage({
             </option>
           ))}
         </select>
-        <button type="submit">กรอง</button>
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
 
+      <FilterState
+        count={count ?? 0}
+        unit="ตัว"
+        filters={[
+          { label: 'คำค้น', value: q },
+          { label: 'เผ่า', value: race },
+          { label: 'ธาตุ', value: element },
+        ]}
+        clearHref="/database/monsters"
+      />
+
+      {(monsters ?? []).length === 0 ? (
+        <div className="card">
+          <EmptyState what={q || undefined} clearHref="/database/monsters" />
+        </div>
+      ) : (
       <div className="card">
         <table className="data-table">
           <thead>
@@ -118,16 +135,10 @@ export default async function MonsterListPage({
                 </td>
               </tr>
             ))}
-            {(monsters ?? []).length === 0 && (
-              <tr>
-                <td colSpan={5} style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  ไม่พบมอนสเตอร์ที่ตรงเงื่อนไข
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>
+      )}
 
       <Pagination page={page} totalPages={totalPages} buildHref={buildHref} />
     </main>

@@ -215,13 +215,25 @@ table { border-collapse: collapse; width: 100%; }
     margin-bottom: 10px;
   }
 
+  /* One field per line made a five-field card 180px tall, and a fifty-row page
+     9,642px -- eleven screens of thumb travel to read one page of a list. The
+     fields flow inline instead: the name is the heading, everything else is a
+     meta line under it. Nothing is hidden and every field keeps its label. */
+  .data-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+  }
+
   .data-table td {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: 5px;
     border: 0;
-    padding: 3px 0;
+    padding: 2px 0;
+    width: auto;
+    flex: 0 0 auto;
   }
 
   .data-table td::before {
@@ -231,9 +243,17 @@ table { border-collapse: collapse; width: 100%; }
     white-space: nowrap;
   }
 
-  /* The name cell is the card's heading: full width, no label, no alignment. */
-  .data-table td[data-label=""] { display: block; padding-bottom: 6px; }
+  /* The name cell is the card's heading: its own line, no label. */
+  .data-table td[data-label=""] {
+    flex: 1 1 100%;
+    padding-bottom: 4px;
+    font-size: 15px;
+  }
   .data-table td[data-label=""]::before { content: none; }
+
+  /* A cell whose value is long enough to need its own line says so. */
+  .data-table td.effect, .data-table td.wide { flex: 1 1 100%; }
+  .data-table td.num { font-size: 14px; }
 }
 
 /* Card effects are one line in most rows but a few run long. Cap the column on
@@ -595,3 +615,329 @@ table { border-collapse: collapse; width: 100%; }
 .el--flat { color: var(--faint); }
 .el--strong { background: rgba(61, 255, 166, 0.14); color: var(--status-safe); }
 .el--heal { background: rgba(61, 232, 255, 0.18); color: var(--cyan); font-weight: 700; }
+
+/* ---------------------------------------------------------------------------
+   Page header, source line, and mobile tables (UX audit 28 Aug, F5 F6 F7)
+
+   Three things the audit measured, fixed in one place rather than per page.
+   --------------------------------------------------------------------------- */
+
+/* F5: the title was inline-styled at a fixed 32px in eighteen files. One rule,
+   and it scales down so a long Thai heading stops wrapping on a narrow phone. */
+.pagehead { margin-block: 4px 18px; }
+.pagehead__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pagehead__title {
+  font: 700 clamp(22px, 5.6vw, 32px)/1.25 "Chakra Petch", sans-serif;
+  margin: 0;
+  text-wrap: balance;
+}
+.pagehead__lead {
+  margin: 8px 0 0;
+  max-width: 62ch;
+  color: var(--dim);
+  font: 400 15px/1.65 "Sarabun", sans-serif;
+}
+
+/* F7: provenance used to be a filled panel with an accent border, as loud as
+   the content, and pages stacked two or three of them. It is a line now.
+   .ceiling-note stays as it was and is reserved for genuine warnings, so that
+   the two stop looking alike -- a reader who learns to skip the source line
+   must not learn to skip a safety warning with it. */
+.source-note {
+  margin: 10px 0 0;
+  padding-inline-start: 10px;
+  border-inline-start: 2px solid var(--hair);
+  color: var(--faint);
+  font: 400 13px/1.6 "Sarabun", sans-serif;
+  max-width: 70ch;
+}
+.source-note strong { color: var(--dim); font-weight: 600; }
+.source-note a { color: var(--dim); }
+
+/* A source line that belongs to one card rather than to the page. */
+.card > .source-note:last-child { margin-top: 12px; }
+
+/* F6: .data-table already became stacked cards below 720px. .stat-table and
+   .eltable did not, so every tools page built on them needed a sideways scroll
+   -- measured at 562px of table inside a 390px viewport on the refine page.
+
+   .stat-table is a two-column label/value list, so it needs no transformation,
+   only room: the label column stops forcing a minimum width and long labels
+   wrap instead of pushing the value off-screen. */
+@media (max-width: 560px) {
+  .stat-table td:first-child,
+  .stat-table th[scope='row'] { width: auto; padding-inline-start: 0; }
+  .stat-table td.num { padding-inline-end: 0; white-space: nowrap; }
+  .stat-table td, .stat-table th { padding-block: 10px; }
+}
+
+/* .eltable is a genuine matrix and cannot be stacked without losing the
+   comparison it exists for. It keeps its sideways scroll, but says so and
+   pins the row label, so a reader can tell which row they are on. */
+.tablescroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tablescroll__hint {
+  display: none;
+  margin: 0 0 8px;
+  color: var(--faint);
+  font: 400 12px/1.5 "Sarabun", sans-serif;
+}
+@media (max-width: 720px) {
+  .tablescroll__hint { display: block; }
+  .eltable th[scope='row'] {
+    position: sticky;
+    inset-inline-start: 0;
+    background: var(--panel);
+    z-index: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Direction B additions: collapse reference material, and let a long page be
+   navigated instead of scrolled.
+   --------------------------------------------------------------------------- */
+
+/* A reference table nobody opened is a table nobody had to scroll past. The
+   summary stays a real control: keyboard operable, and it says what is inside
+   and how big it is so the choice to open it is informed. */
+.disclose {
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  margin-top: 14px;
+}
+.disclose > summary {
+  cursor: pointer;
+  padding: 13px 14px;
+  font: 600 15px/1.4 "Chakra Petch", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  min-height: 44px; /* touch target */
+}
+.disclose > summary::-webkit-details-marker { display: none; }
+.disclose > summary::before {
+  content: '▸';
+  color: var(--faint);
+  transition: transform 0.15s;
+}
+.disclose[open] > summary::before { transform: rotate(90deg); }
+.disclose > summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+.disclose__count { color: var(--faint); font: 400 13px/1.4 "Sarabun", sans-serif; margin-inline-start: auto; }
+.disclose__body { padding: 0 14px 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .disclose > summary::before { transition: none; }
+}
+
+/* Jump links for a page that is genuinely long. Not a substitute for ordering
+   the page well -- it is there because a monster page has nine sections and a
+   reader arrives wanting one of them. */
+.jumpbar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-block: 4px 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.jumpbar::-webkit-scrollbar { display: none; }
+.jumpbar a {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  color: var(--dim);
+  text-decoration: none;
+  font: 400 13px/1.3 "Sarabun", sans-serif;
+  white-space: nowrap;
+}
+.jumpbar a:hover, .jumpbar a:focus-visible { border-color: var(--cyan); color: var(--text); }
+
+/* Anchored sections must not land under the sticky header. */
+[id^='sec-'] { scroll-margin-top: 16px; }
+
+/* The headline answer: the number the page exists to produce, before the
+   controls that produce it. */
+.answer {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.answer__value {
+  font: 700 clamp(28px, 8vw, 40px)/1.1 "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+}
+.answer__unit { font: 400 15px/1.4 "Sarabun", sans-serif; color: var(--dim); }
+.answer__caption { margin: 0 0 14px; color: var(--faint); font: 400 13px/1.6 "Sarabun", sans-serif; }
+
+/* Controls as a wrapping row rather than a stack of full-width fields: four
+   selects stacked is four screens-worth of thumb travel on a phone. */
+.controlrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-bottom: 14px;
+}
+.controlrow label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 140px;
+  font: 400 12px/1.4 "Sarabun", sans-serif;
+  color: var(--faint);
+}
+.controlrow select, .controlrow input {
+  min-height: 44px;
+}
+
+/* ---------------------------------------------------------------------------
+   Form controls, site-wide (UX audit, controls pass)
+
+   Measured before this existed: every control on the six database list pages
+   rendered as a browser default -- rgb(59,59,59) inputs and rgb(107,107,107)
+   buttons inside a dark indigo site -- because only .charbar__form ever styled
+   them. The filter button was 44x22px, and every control on every page was
+   between 22px and 34px tall against a 44px touch minimum.
+
+   Element selectors on purpose: a control should look right because it is a
+   control, not because someone remembered a class name. Every new tool this
+   site grows inherits it.
+   --------------------------------------------------------------------------- */
+input[type='text'],
+input[type='search'],
+input[type='number'],
+select,
+textarea {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  color: var(--text);
+  font: 400 15px/1.5 "Sarabun", sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+}
+input::placeholder { color: var(--faint); }
+
+/* Native select arrows disappear with appearance:none, so one is drawn back.
+   The padding keeps text clear of it, and the arrow is inline SVG rather than a
+   pseudo-element because a select cannot have children. */
+select {
+  padding-inline-end: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B3A9E6' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+select:dir(rtl) { background-position: left 12px center; }
+
+button,
+input[type='submit'],
+a.btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1.5px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  color: var(--text);
+  font: 600 15px/1.4 "Sarabun", sans-serif;
+  cursor: pointer;
+}
+button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)); background: var(--panel); }
+
+/* One visible focus ring for everything that takes focus. There was none at
+   all before, on any control, which fails the accessibility floor the UX
+   standard sets and makes the site unusable by keyboard. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* .btn stays the one loud action per page (spec: a page has one dominant
+   action). It inherits the sizing above and only repaints. */
+.btn {
+  border: 1.5px solid var(--yellow);
+  background: var(--yellow);
+  color: var(--yellow-ink);
+}
+.btn:hover { filter: brightness(1.08); background: var(--yellow); border-color: var(--yellow); }
+
+/* Disabled controls must look unavailable rather than merely quiet. */
+:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* The character bar is a strip inside a fixed-height band, so it is the one
+   place a control may be shorter than the touch minimum -- it keeps its own
+   width and height. Nothing else should borrow this class: the tools that did
+   inherited a 40px control and a stacked layout meant for a header strip. */
+.charbar__form input,
+.charbar__form select { width: 150px; padding-block: 6px; min-height: 40px; font-size: 14px; }
+
+/* A filter row: controls flow, and the submit sits with them rather than on a
+   line of its own. */
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+  margin: 18px 0 14px;
+}
+.filterbar input[type='text'],
+.filterbar input[type='search'] { flex: 1 1 200px; min-width: 0; }
+.filterbar select { flex: 0 1 auto; }
+.filterbar .btn { flex: 0 0 auto; }
+
+/* What the filter did, said out loud: a result count, the filters in force,
+   and one control that removes them. Filtering silently and leaving the
+   original total on screen is how a reader ends up believing they are looking
+   at everything. */
+.filterstate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: var(--dim);
+  font: 400 14px/1.6 "Sarabun", sans-serif;
+}
+.filterstate__count { color: var(--text); font-weight: 600; }
+.filterchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--dim);
+}
+.filterstate a.filterclear {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.filterstate a.filterclear:hover { border-bottom-color: var(--cyan); }
+
+/* Nothing matched. Says what was searched, and offers the way back. */
+.emptystate {
+  padding: 28px 18px;
+  text-align: center;
+  color: var(--dim);
+  font: 400 15px/1.7 "Sarabun", sans-serif;
+}
+.emptystate strong { color: var(--text); }
+.emptystate p { margin: 0 0 12px; }

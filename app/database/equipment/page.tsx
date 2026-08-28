@@ -1,6 +1,8 @@
 // app/database/equipment/page.tsx
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
+import PageHeader from '@/components/PageHeader';
+import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { canJobEquip, EQUIPMENT_CATEGORIES } from '@/lib/equip-filter';
 import { ZERO_JOBS } from '@/lib/zero-jobs';
@@ -75,16 +77,27 @@ export default async function EquipmentPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลอุปกรณ์</h1>
+      <PageHeader title="ฐานข้อมูลอุปกรณ์" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no equipment", which
           is false. */}
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {error ? 'โหลดจำนวนอุปกรณ์ไม่สำเร็จ' : `${filtered.length} ชิ้น จากทั้งหมด ${items.length} ชิ้น`}
-      </p>
+      {error ? (
+        <p className="filterstate">โหลดจำนวนอุปกรณ์ไม่สำเร็จ</p>
+      ) : (
+        <FilterState
+          count={filtered.length}
+          unit="ชิ้น"
+          filters={[
+            { label: 'คำค้น', value: q },
+            { label: 'หมวด', value: category },
+            { label: 'อาชีพ', value: job },
+          ]}
+          clearHref="/database/equipment"
+        />
+      )}
 
-      <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่ออุปกรณ์..." />
+      <form className="filterbar">
+        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่ออุปกรณ์..." />
         <select name="category" defaultValue={category}>
           <option value="">ทุกหมวด</option>
           {EQUIPMENT_CATEGORIES.map((c) => (
@@ -97,7 +110,7 @@ export default async function EquipmentPage({
             <option key={j} value={j}>{j}</option>
           ))}
         </select>
-        <button type="submit">กรอง</button>
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
 
       <div className="card">

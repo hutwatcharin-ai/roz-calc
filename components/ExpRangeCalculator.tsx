@@ -22,7 +22,7 @@ export default function ExpRangeCalculator() {
     <div className="card" style={{ marginTop: 16 }}>
       <h2 className="section-title">จากเลเวลนี้ไปเลเวลนั้น ใช้ EXP เท่าไร</h2>
 
-      <form className="charbar__form" onSubmit={(e) => e.preventDefault()}>
+      <form className="controlrow" onSubmit={(e) => e.preventDefault()}>
         <label>
           ตอนนี้เลเวล
           <select value={from} onChange={(e) => setFrom(Number(e.target.value))}>

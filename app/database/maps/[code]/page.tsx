@@ -59,7 +59,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{name}</h1>
+      <h1 className="pagehead__title">{name}</h1>
       <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>{code}</p>
       <p style={{ color: 'var(--dim)', marginTop: 10 }}>มอนสเตอร์ {monsters.length} ชนิดในแมพนี้</p>
 

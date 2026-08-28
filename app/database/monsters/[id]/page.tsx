@@ -141,7 +141,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <img src={monster.image_url} alt="" width={64} height={64} style={{ imageRendering: 'pixelated' }} />
         )}
         <div>
-          <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{monster.name_en}</h1>
+          <h1 className="pagehead__title">{monster.name_en}</h1>
           <p style={{ color: 'var(--dim)' }}>
             Lv.{monster.level}
             {monster.race ? ` · ${monster.race}` : ''}
@@ -179,29 +179,51 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         </div>
       </div>
 
+      {/* Nine sections and 5,600px of page. A reader arrives wanting one of
+          them, so the page says which are there and jumps. */}
+      <nav className="jumpbar" aria-label="ข้ามไปที่หัวข้อ">
+        <a href="#sec-answer">ตีด้วยอะไรดี</a>
+        <a href="#sec-drops">ของที่ดรอป</a>
+        <a href="#sec-spawns">จุดเกิด</a>
+        <a href="#sec-stats">ค่าสถานะ</a>
+        <a href="#sec-skills">สกิล</a>
+      </nav>
+
       <div className="detail-cols">
         <div className="panel">
-          {/* First card in the left column: the personal answer comes before the
-              reference tables, because it is the thing this site can say and a
-              stat dump cannot. */}
+          {/* Answers before reference. The summary used to sit third, at 2,271px
+              on a phone, underneath the two thirty-row tables it summarises --
+              so a reader decided from half the picture and never saw the line
+              that existed to stop exactly that (UX audit F3). */}
+          <div id="sec-answer">
+          <MonsterBestWeaponPanel
+            element={monster.element}
+            elementLevel={monster.element_level}
+            size={monster.size}
+          />
+          </div>
+
           <KillRatePanel
             monsterHp={monster.hp}
             expPerKill={monster.base_exp}
             monsterName={monster.name_en}
           />
 
-          <MonsterElementPanel element={monster.element} elementLevel={monster.element_level} />
-
-          <MonsterSizePanel size={monster.size} />
-
-          <MonsterBestWeaponPanel
-            element={monster.element}
-            elementLevel={monster.element_level}
-            size={monster.size}
-          />
+          {/* The two reference tables are thirty rows the summary above already
+              read for the reader. Open on request rather than scrolled past. */}
+          <details className="disclose" id="sec-tables">
+            <summary>
+              ตารางเต็ม: ธาตุและขนาด
+              <span className="disclose__count">10 ธาตุ · 20 ชนิดอาวุธ</span>
+            </summary>
+            <div className="disclose__body">
+              <MonsterElementPanel element={monster.element} elementLevel={monster.element_level} />
+              <MonsterSizePanel size={monster.size} />
+            </div>
+          </details>
 
           <div className="card">
-            <h2 className="section-title">ค่าสถานะ</h2>
+            <h2 className="section-title" id="sec-stats">ค่าสถานะ</h2>
             <table className="stat-table">
               <tbody>
                 <tr><td>HP</td><td className="num">{sentinel(monster.hp)}</td></tr>
@@ -232,7 +254,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
         <div className="panel">
           <div className="card">
-            <h2 className="section-title">ของที่ดรอป</h2>
+            <h2 className="section-title" id="sec-drops">ของที่ดรอป</h2>
             <table className="data-table">
               <thead>
                 <tr><th>ไอเทม</th><th className="num">อัตราดรอป</th></tr>
@@ -265,7 +287,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           </div>
 
           <div className="card">
-            <h2 className="section-title">จุดเกิด</h2>
+            <h2 className="section-title" id="sec-spawns">จุดเกิด</h2>
             {spawnsError ? (
               <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลจุดเกิดไม่สำเร็จ ลองใหม่อีกครั้ง</p>
             ) : (spawns ?? []).length === 0 ? (
@@ -284,7 +306,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           </div>
 
           <div className="card">
-            <h2 className="section-title">สกิลที่มอนใช้</h2>
+            <h2 className="section-title" id="sec-skills">สกิลที่มอนใช้</h2>
             {skillsError ? (
               <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลสกิลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
             ) : (monsterSkills ?? []).length === 0 ? (

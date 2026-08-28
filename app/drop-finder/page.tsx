@@ -81,7 +81,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ค้นของดรอป</h1>
+      <h1 className="pagehead__title">ค้นของดรอป</h1>
       <div className="panel" style={{ marginTop: 20 }}>
         <DropSearch query={query} resolvedName={resolvedName} rows={rows} />
       </div>

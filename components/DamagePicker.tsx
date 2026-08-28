@@ -56,7 +56,7 @@ export default function DamagePicker({
         {compact ? 'ตีตัวนี้ด้วยอะไรดี' : 'อาวุธที่ถืออยู่ ตีเป้าหมายนี้ได้กี่เปอร์เซ็นต์'}
       </h2>
 
-      <form className="charbar__form" onSubmit={(e) => e.preventDefault()}>
+      <form className="controlrow" onSubmit={(e) => e.preventDefault()}>
         {!compact && (
           <>
             <label>

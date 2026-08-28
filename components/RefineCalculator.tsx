@@ -52,7 +52,20 @@ export default function RefineCalculator() {
     <div className="card" style={{ marginTop: 16 }}>
       <h2 className="section-title">ตีถึง +{target} ต้องเตรียมเท่าไร</h2>
 
-      <form className="charbar__form" onSubmit={(e) => e.preventDefault()}>
+      {/* The number first, the controls that produced it second. A reader who
+          arrived asking "what does +7 cost" should not have to operate four
+          selects before seeing an answer -- the defaults already answer it. */}
+      <div className="answer">
+        <span className="answer__value">{count(cost.expectedItems)}</span>
+        <span className="answer__unit">ชิ้น โดยเฉลี่ย</span>
+      </div>
+      <p className="answer__caption">
+        เตรียม {cost.itemsFor50} ชิ้นสำเร็จ 50%
+        {Number.isFinite(cost.itemsFor90) && ` · ${cost.itemsFor90} ชิ้นสำเร็จ 90%`} ·
+        ของ 1 ชิ้นรอดถึง +{target} {cost.runChance.toFixed(cost.runChance < 1 ? 3 : 1)}%
+      </p>
+
+      <form className="controlrow" onSubmit={(e) => e.preventDefault()}>
         <label>
           อุปกรณ์
           <select value={gear} onChange={(e) => setGear(e.target.value as GearType)}>
@@ -105,32 +118,6 @@ export default function RefineCalculator() {
       <table className="stat-table" style={{ marginTop: 12 }}>
         <tbody>
           <tr>
-            <td>ของ 1 ชิ้นรอดถึง +{target}</td>
-            <td className="num">{cost.runChance.toFixed(cost.runChance < 1 ? 3 : 1)}%</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>ต้องเตรียมของกี่ชิ้น</strong>
-              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                โดยเฉลี่ย นับชิ้นที่สำเร็จด้วย
-              </span>
-            </td>
-            <td className="num">
-              <strong>{count(cost.expectedItems)} ชิ้น</strong>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              เตรียม {cost.itemsFor50} ชิ้น สำเร็จ 50%
-              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                คนครึ่งหนึ่งใช้ไม่เกินจำนวนนี้ — ค่าเฉลี่ยข้างบนถูกดึงสูงด้วยคนดวงซวย
-              </span>
-            </td>
-            <td className="num">
-              {Number.isFinite(cost.itemsFor90) ? `${cost.itemsFor90} ชิ้น สำเร็จ 90%` : '—'}
-            </td>
-          </tr>
-          <tr>
             <td>
               ตีทั้งหมดกี่ครั้ง
               <span className="muted" style={{ display: 'block', fontSize: 12 }}>
@@ -180,9 +167,12 @@ export default function RefineCalculator() {
         </tbody>
       </table>
 
-      <h3 className="section-title" style={{ marginTop: 18, fontSize: 16 }}>
-        ทีละขั้น
-      </h3>
+      <details className="disclose">
+        <summary>
+          ทีละขั้น
+          <span className="disclose__count">{cost.steps.length} ขั้น</span>
+        </summary>
+        <div className="disclose__body">
       <table className="stat-table">
         <thead>
           <tr>
@@ -203,6 +193,14 @@ export default function RefineCalculator() {
           ))}
         </tbody>
       </table>
+        </div>
+      </details>
+
+      <p className="source-note">
+        <strong>ตีหนึ่งครั้งกินแร่กี่ก้อน ยังไม่มีใครตีพิมพ์</strong> — ตารางวัตถุดิบของคู่มือไม่มีคอลัมน์จำนวน
+        และเว็บอื่นที่ถอดหน้าเดียวกันก็ไม่มี เว็บนี้จึงบอกเป็น &ldquo;จำนวนครั้ง&rdquo; แล้วปล่อยให้คูณเอง
+        · ค่าธรรมเนียมไม่กระทบ เพราะคิดต่อครั้ง
+      </p>
 
       <p className="ceiling-note" style={{ marginTop: 14 }}>
         คิดแบบตีพัง <strong>ของหาย</strong> ซึ่งเป็นสิ่งที่แร่ธรรมดากับแร่เข้มข้นทำ — พังแล้วเริ่มใหม่ที่ +0

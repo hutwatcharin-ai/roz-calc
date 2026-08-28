@@ -101,7 +101,7 @@ export default async function AfkFinderPage() {
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>หาจุด AFK ปลอดภัย</h1>
+      <h1 className="pagehead__title">หาจุด AFK ปลอดภัย</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         เกมนี้มีบอทในตัวให้ใช้ฟรีไม่จำกัด คำถามจึงไม่ใช่ "ตีอะไรคุ้ม" แต่เป็น "ทิ้งบอทไว้ตรงไหนแล้วกลับมาไม่ตาย"
         หน้านี้ตัดมอนที่เข้าโจมตีก่อนออกทั้งหมด แล้วเหลือเฉพาะตัวที่ดาเมจของคุณฆ่าได้ในหมัดเดียว

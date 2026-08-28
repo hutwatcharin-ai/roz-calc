@@ -19,18 +19,17 @@ export const metadata = {
 export default function DamagePage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ตีตัวนี้ด้วยอะไรดี</h1>
+      <h1 className="pagehead__title">ตีตัวนี้ด้วยอะไรดี</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         ธาตุกับขนาดเป็นตัวคูณคนละตัวที่<strong>คูณกัน</strong> คนส่วนใหญ่ดูทีละตาราง —
         ธาตุ 200% ที่ดูชี้ขาด เจอขนาด 50% ก็เหลือ 100% เท่ามือเปล่า
         ส่วนขนาด 50% ที่ดูเหมือนจบเห่ ถ้าธาตุเข้าทางก็ยังชนะตัวเลือกอื่น
       </p>
 
-      <div className="ceiling-note" style={{ marginTop: 16 }}>
-        <strong>ที่มาของตัวเลข:</strong> ตารางธาตุกับตารางขนาดของ
-        <strong>คู่มือเกมทางการ Ragnarok Zero</strong> ทั้งคู่ · หน้านี้ไม่ได้เพิ่มตัวเลขใหม่
-        แค่คูณสองตารางที่มีอยู่แล้ว
-      </div>
+      <p className="source-note">
+        <strong>ที่มา:</strong> ตารางธาตุกับตารางขนาดของคู่มือเกมทางการทั้งคู่ ·
+        หน้านี้ไม่ได้เพิ่มตัวเลขใหม่ แค่คูณสองตารางที่มีอยู่แล้ว
+      </p>
 
       <DamagePicker />
 

@@ -57,7 +57,7 @@ export default async function HomePage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>
+      <h1 className="pagehead__title">
         หามอนสเตอร์คุ้มสุด สำหรับเลเวลของแก
       </h1>
       {/* spec 6.2 keeps the farming finder AT "/" rather than moving it behind

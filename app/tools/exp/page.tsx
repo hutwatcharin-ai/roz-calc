@@ -36,17 +36,16 @@ const BASE_TOTALS = runningTotals(BASE_EXP_ROWS);
 export default function ExpPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>EXP ต่อเลเวล</h1>
+      <h1 className="pagehead__title">EXP ต่อเลเวล</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         ตัวเลขที่คู่มือให้คือ EXP ของแต่ละเลเวล คอลัมน์ &ldquo;รวมสะสม&rdquo; เว็บนี้บวกให้เอง —
         เป็นตัวเลขที่บอกว่าจากเลเวล 1 ถึงเลเวลนั้นต้องใช้ทั้งหมดเท่าไร
       </p>
 
-      <div className="ceiling-note" style={{ marginTop: 16 }}>
-        <strong>ที่มาของตัวเลข:</strong> คู่มือเกมทางการของ Ragnarok Zero (คู่มือผู้เชี่ยวชาญ &gt;
-        เลเวลตัวละคร) · เส้นโค้งฐานขึ้นเกือบพอดี 1.2 เท่าทุกเลเวล เทสต์ในโค้ดตรวจอัตราส่วนนี้ทุกแถว
-        อ่านเลขผิดตัวเดียวอัตราส่วนจะเพี้ยนและเทสต์บอกว่าเลเวลไหน
-      </div>
+      <p className="source-note">
+        <strong>ที่มา:</strong> คู่มือเกมทางการ (คู่มือผู้เชี่ยวชาญ &gt; เลเวลตัวละคร) ·
+        เส้นโค้งฐานขึ้นเกือบพอดี 1.2 เท่าทุกเลเวล เทสต์ในโค้ดตรวจอัตราส่วนนี้ทุกแถว
+      </p>
 
       <div className="ceiling-note" style={{ marginTop: 12 }}>
         <strong>แถวหนึ่งแถวคืออะไร:</strong> แถบ EXP รีเซ็ตเป็น 0 ทุกครั้งที่ขึ้นเลเวล
