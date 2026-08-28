@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import { JOB_PROFILES, type JobKey } from '@/lib/formulas';
 import { maxHp } from '@/lib/formulas';
 import { characterFromInput, type CharacterContext } from '@/lib/character-context';
+import { usePathname } from 'next/navigation';
+import { usesCharacterContext } from '@/lib/nav-links';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 
 const JOB_KEYS = Object.keys(JOB_PROFILES) as JobKey[];
@@ -40,6 +42,7 @@ function draftFrom(ctx: CharacterContext | null): Draft {
 }
 
 export default function CharacterBar() {
+  const pathname = usePathname();
   const { character, setCharacter, ready, persisted } = useCharacterContext();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
@@ -50,6 +53,13 @@ export default function CharacterBar() {
   useEffect(() => {
     setDraft(draftFrom(character));
   }, [character]);
+
+  // Hooks first, then the two reasons to render nothing.
+  //
+  // A page that reads no character value gets no character bar: it was costing
+  // 61px of a 900px phone screen on eleven pages, for a control that could not
+  // change anything the reader was looking at.
+  if (!usesCharacterContext(pathname ?? '/')) return null;
 
   // Nothing is rendered until storage has been read. Rendering "ยังไม่ได้ตั้งค่า"
   // for a moment to a player who HAS set it up would be a wrong claim, however
@@ -72,7 +82,7 @@ export default function CharacterBar() {
     ? `${JOB_PROFILES[character.job].label} Lv.${character.level} · VIT ${character.vit} · ` +
       `ตี ${character.damagePerHit.toLocaleString()} ต่อครั้ง · ${character.attacksPerSecond} ครั้ง/วิ · ` +
       `HP ${maxHp(character.level, character.vit, character.job).toLocaleString()}`
-    : 'ยังไม่รู้ว่าคุณเล่นอะไร — กรอกแล้วเว็บจะบอกได้ว่ามอนตัวไหนอันตรายกับคุณ และคุณตีได้กี่ตัวต่อชั่วโมง';
+    : 'กรอกตัวละครของคุณ แล้วหน้านี้จะคิดให้เป็นตัวเลขของคุณเอง';
 
   return (
     <div className="charbar">

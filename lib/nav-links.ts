@@ -104,3 +104,29 @@ export function isActivePrimaryLink(href: string, pathname: string, links?: NavL
   if (linkSection) return sectionForPath(pathname) === linkSection;
   return isActiveLink(href, pathname, links);
 }
+
+/**
+ * Pages whose content changes with the player's own numbers.
+ *
+ * The character bar was in the layout, so it rode along on every page --
+ * measured at 61px of a 900px phone screen, on eleven pages that never read a
+ * single value from it: the element table, the size table, the EXP tables, the
+ * refine and damage calculators, and the five database list pages. A control
+ * that cannot affect what you are looking at is not a control, it is furniture.
+ *
+ * Listed as prefixes because the detail routes are dynamic.
+ */
+const CHARACTER_PATHS = [
+  '/', // farming finder: kills and EXP per hour, aggro grading
+  '/drop-finder', // aggro grading on every result
+  '/database/monsters', // list and detail: aggro grading, kill rate, time to level
+  '/database/maps', // spawn lists carry the aggro flag
+  '/tools/afk-finder', // the whole page is a function of the player's damage
+  '/tools/farm-planner', // ranks the plan by the player's kill rate
+];
+
+export function usesCharacterContext(pathname: string): boolean {
+  const path = normalise(pathname);
+  if (path === '/') return true;
+  return CHARACTER_PATHS.some((p) => p !== '/' && (path === p || path.startsWith(`${p}/`)));
+}

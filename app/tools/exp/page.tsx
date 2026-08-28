@@ -83,7 +83,15 @@ export default function ExpPage() {
         </table>
       </div>
 
-      <div className="detail-cols" style={{ marginTop: 28 }}>
+      {/* Two more fifty-row tables. Most readers came for the base curve, and
+          stacking all three made the page seven phone screens tall. */}
+      <details className="disclose">
+        <summary>
+          ตาราง Job EXP
+          <span className="disclose__count">Novice 10 · อาชีพขั้น 1 · 50 ระดับ</span>
+        </summary>
+        <div className="disclose__body">
+      <div className="detail-cols" style={{ marginTop: 8 }}>
         <div>
           <h2 className="section-title">Job EXP — Novice</h2>
           <p className="muted">Novice ตันที่ job level {NOVICE_JOB_EXP_ROWS.length}</p>
@@ -130,6 +138,9 @@ export default function ExpPage() {
           </div>
         </div>
       </div>
+
+        </div>
+      </details>
 
       <p className="muted" style={{ marginTop: 20 }}>
         ดูต่อ: <Link href="/tools/afk-finder">หาจุด AFK</Link> ·{' '}
