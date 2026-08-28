@@ -1,6 +1,8 @@
 // app/database/maps/page.tsx
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
+import PageHeader from '@/components/PageHeader';
+import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { escapeLikePattern } from '@/lib/like-escape';
 
@@ -83,21 +85,28 @@ export default async function MapsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลแมพ</h1>
+      <PageHeader title="ฐานข้อมูลแมพ" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no maps", which is
           false. */}
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>
-        {error ? 'โหลดจำนวนแมพไม่สำเร็จ' : `${count ?? 0} แมพ`}
-      </p>
+      {error ? (
+        <p className="filterstate">โหลดจำนวนแมพไม่สำเร็จ</p>
+      ) : (
+        <FilterState
+          count={count ?? 0}
+          unit="แมพ"
+          filters={[{ label: 'คำค้น', value: q }]}
+          clearHref="/database/maps"
+        />
+      )}
       <p style={{ color: 'var(--faint)', marginTop: 4, fontSize: 13 }}>
         แมพบางแห่งแสดงแค่รหัส เพราะไม่มีชื่อเรียกอื่นนอกจากรหัสแมพเอง ไม่ได้แปลว่าแมพนั้นไม่มีอยู่
         รายการนี้ครอบคลุมเฉพาะแมพที่มีมอนสเตอร์เกิด แมพที่ไม่มีมอนเกิดเลยจะไม่อยู่ในรายการนี้
       </p>
 
-      <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่อหรือรหัสแมพ..." />
-        <button type="submit">ค้นหา</button>
+      <form className="filterbar">
+        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อหรือรหัสแมพ..." />
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
 
       <div className="card">

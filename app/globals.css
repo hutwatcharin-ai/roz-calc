@@ -215,13 +215,25 @@ table { border-collapse: collapse; width: 100%; }
     margin-bottom: 10px;
   }
 
+  /* One field per line made a five-field card 180px tall, and a fifty-row page
+     9,642px -- eleven screens of thumb travel to read one page of a list. The
+     fields flow inline instead: the name is the heading, everything else is a
+     meta line under it. Nothing is hidden and every field keeps its label. */
+  .data-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+  }
+
   .data-table td {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: 5px;
     border: 0;
-    padding: 3px 0;
+    padding: 2px 0;
+    width: auto;
+    flex: 0 0 auto;
   }
 
   .data-table td::before {
@@ -231,9 +243,17 @@ table { border-collapse: collapse; width: 100%; }
     white-space: nowrap;
   }
 
-  /* The name cell is the card's heading: full width, no label, no alignment. */
-  .data-table td[data-label=""] { display: block; padding-bottom: 6px; }
+  /* The name cell is the card's heading: its own line, no label. */
+  .data-table td[data-label=""] {
+    flex: 1 1 100%;
+    padding-bottom: 4px;
+    font-size: 15px;
+  }
   .data-table td[data-label=""]::before { content: none; }
+
+  /* A cell whose value is long enough to need its own line says so. */
+  .data-table td.effect, .data-table td.wide { flex: 1 1 100%; }
+  .data-table td.num { font-size: 14px; }
 }
 
 /* Card effects are one line in most rows but a few run long. Cap the column on
@@ -779,3 +799,145 @@ table { border-collapse: collapse; width: 100%; }
 .controlrow select, .controlrow input {
   min-height: 44px;
 }
+
+/* ---------------------------------------------------------------------------
+   Form controls, site-wide (UX audit, controls pass)
+
+   Measured before this existed: every control on the six database list pages
+   rendered as a browser default -- rgb(59,59,59) inputs and rgb(107,107,107)
+   buttons inside a dark indigo site -- because only .charbar__form ever styled
+   them. The filter button was 44x22px, and every control on every page was
+   between 22px and 34px tall against a 44px touch minimum.
+
+   Element selectors on purpose: a control should look right because it is a
+   control, not because someone remembered a class name. Every new tool this
+   site grows inherits it.
+   --------------------------------------------------------------------------- */
+input[type='text'],
+input[type='search'],
+input[type='number'],
+select,
+textarea {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  color: var(--text);
+  font: 400 15px/1.5 "Sarabun", sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+}
+input::placeholder { color: var(--faint); }
+
+/* Native select arrows disappear with appearance:none, so one is drawn back.
+   The padding keeps text clear of it, and the arrow is inline SVG rather than a
+   pseudo-element because a select cannot have children. */
+select {
+  padding-inline-end: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B3A9E6' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+select:dir(rtl) { background-position: left 12px center; }
+
+button,
+input[type='submit'],
+a.btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1.5px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  color: var(--text);
+  font: 600 15px/1.4 "Sarabun", sans-serif;
+  cursor: pointer;
+}
+button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)); background: var(--panel); }
+
+/* One visible focus ring for everything that takes focus. There was none at
+   all before, on any control, which fails the accessibility floor the UX
+   standard sets and makes the site unusable by keyboard. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* .btn stays the one loud action per page (spec: a page has one dominant
+   action). It inherits the sizing above and only repaints. */
+.btn {
+  border: 1.5px solid var(--yellow);
+  background: var(--yellow);
+  color: var(--yellow-ink);
+}
+.btn:hover { filter: brightness(1.08); background: var(--yellow); border-color: var(--yellow); }
+
+/* Disabled controls must look unavailable rather than merely quiet. */
+:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* The character bar is a strip inside a fixed-height band, so it is the one
+   place a control may be shorter than the touch minimum -- it keeps its own
+   width and height. Nothing else should borrow this class: the tools that did
+   inherited a 40px control and a stacked layout meant for a header strip. */
+.charbar__form input,
+.charbar__form select { width: 150px; padding-block: 6px; min-height: 40px; font-size: 14px; }
+
+/* A filter row: controls flow, and the submit sits with them rather than on a
+   line of its own. */
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+  margin: 18px 0 14px;
+}
+.filterbar input[type='text'],
+.filterbar input[type='search'] { flex: 1 1 200px; min-width: 0; }
+.filterbar select { flex: 0 1 auto; }
+.filterbar .btn { flex: 0 0 auto; }
+
+/* What the filter did, said out loud: a result count, the filters in force,
+   and one control that removes them. Filtering silently and leaving the
+   original total on screen is how a reader ends up believing they are looking
+   at everything. */
+.filterstate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: var(--dim);
+  font: 400 14px/1.6 "Sarabun", sans-serif;
+}
+.filterstate__count { color: var(--text); font-weight: 600; }
+.filterchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--dim);
+}
+.filterstate a.filterclear {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.filterstate a.filterclear:hover { border-bottom-color: var(--cyan); }
+
+/* Nothing matched. Says what was searched, and offers the way back. */
+.emptystate {
+  padding: 28px 18px;
+  text-align: center;
+  color: var(--dim);
+  font: 400 15px/1.7 "Sarabun", sans-serif;
+}
+.emptystate strong { color: var(--text); }
+.emptystate p { margin: 0 0 12px; }

@@ -1,6 +1,8 @@
 // app/database/items/page.tsx
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
+import PageHeader from '@/components/PageHeader';
+import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { escapeLikePattern } from '@/lib/like-escape';
 
@@ -55,11 +57,19 @@ export default async function ItemListPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลไอเทม</h1>
-      <p style={{ color: 'var(--faint)', marginTop: 6 }}>{count ?? 0} ชิ้นทั้งหมด</p>
+      <PageHeader title="ฐานข้อมูลไอเทม" />
+      <FilterState
+        count={count ?? 0}
+        unit="ชิ้น"
+        filters={[
+          { label: 'คำค้น', value: q },
+          { label: 'หมวด', value: category },
+        ]}
+        clearHref="/database/items"
+      />
 
-      <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่อไอเทม..." />
+      <form className="filterbar">
+        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อไอเทม..." />
         <select name="category" defaultValue={category}>
           <option value="">ทุกหมวด</option>
           {CATEGORIES.map((c) => (
@@ -68,7 +78,7 @@ export default async function ItemListPage({
             </option>
           ))}
         </select>
-        <button type="submit">กรอง</button>
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
 
       <div className="card">

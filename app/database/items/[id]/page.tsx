@@ -127,7 +127,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           />
         )}
         <div>
-          <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>{item.name_en}</h1>
+          <h1 className="pagehead__title">{item.name_en}</h1>
           <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
         </div>
       </div>

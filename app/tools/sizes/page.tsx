@@ -17,7 +17,7 @@ function band(value: number): string {
 export default function SizesPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ตารางขนาด</h1>
+      <h1 className="pagehead__title">ตารางขนาด</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         ความเสียหายที่อาวุธแต่ละชนิดทำได้ ขึ้นกับขนาดของมอนสเตอร์ด้วย ไม่ใช่แค่ธาตุ —
         หนังสือตีมอนขนาดใหญ่เหลือ 50% ซึ่งหักหนักกว่าการ์ดส่วนใหญ่ที่หามาใส่

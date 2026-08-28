@@ -48,6 +48,14 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   const clean = candidates.filter((c) => c.risks.length === 0).length;
 
+  // Measured at 31,164px on a phone -- 34.6 screens -- because with no
+  // character filled in every non-aggressive monster qualifies and all 238 were
+  // rendered. The list is sorted safest-first, so the tail is the part nobody
+  // scrolls to; it is capped and the cap is stated rather than silently applied.
+  const CAP = 40;
+  const shown = candidates.slice(0, CAP);
+  const hidden = candidates.length - shown.length;
+
   return (
     <>
       <div className="card" style={{ marginTop: 20 }}>
@@ -95,7 +103,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
               </tr>
             </thead>
             <tbody>
-              {candidates.map(({ row, risks }) => (
+              {shown.map(({ row, risks }) => (
                 <tr key={row.monster_id}>
                   <td data-label="">
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -150,6 +158,13 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
               ))}
             </tbody>
           </table>
+          {hidden > 0 && (
+            <p className="source-note">
+              แสดง {shown.length} ตัวแรกจาก {candidates.length} ตัวที่ผ่านเกณฑ์ · เรียงปลอดภัยที่สุดก่อน
+              {' '}อีก {hidden} ตัวที่เหลือปลอดภัยน้อยกว่าหรือให้ EXP น้อยกว่าทั้งหมด
+              {!character && ' · กรอกดาเมจของคุณในแถบด้านบนแล้วรายการจะเหลือเฉพาะตัวที่คุณฆ่าได้จริง'}
+            </p>
+          )}
         </div>
       )}
     </>

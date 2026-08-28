@@ -1,5 +1,7 @@
 // app/database/skills/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
+import PageHeader from '@/components/PageHeader';
+import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { ZERO_JOBS, isInGameSkill } from '@/lib/zero-jobs';
 
@@ -124,7 +126,7 @@ export default async function SkillsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 style={{ fontFamily: '"Chakra Petch", sans-serif', fontSize: 32 }}>ฐานข้อมูลสกิล</h1>
+      <PageHeader title="ฐานข้อมูลสกิล" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no skills", which
           is false. */}
@@ -151,9 +153,9 @@ export default async function SkillsPage({
         </p>
       )}
 
-      <form style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '20px 0' }}>
+      <form className="filterbar">
         <input type="hidden" name="tab" value={tab} />
-        <input className="mono" type="text" name="q" defaultValue={q} placeholder="ค้นชื่อสกิล..." />
+        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อสกิล..." />
         {tab === 'ingame' && (
           <select name="job" defaultValue={job}>
             <option value="">ทุกอาชีพ</option>
@@ -168,7 +170,7 @@ export default async function SkillsPage({
             <option key={t} value={t as string}>{t as string}</option>
           ))}
         </select>
-        <button type="submit">กรอง</button>
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
 
       <div className="card">
