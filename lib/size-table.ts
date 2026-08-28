@@ -6,6 +6,19 @@
 // This is the other half of the "will my weapon actually hurt this thing"
 // question the element table answers. A Book against a Large monster is 50%
 // before any element modifier, which is a bigger swing than most cards.
+//
+// One cell is disputed. rozerodb transcribed the same guide and reads Whip
+// against Large as 50 where this reads 75; scripts/compare-rozerodb-tables.ts
+// tracks it, and the other 59 cells agree. rAthena cannot settle it -- its
+// Renewal table says 75 and its pre-Renewal table says 50, and its size_fix.yml
+// lists only overrides rather than the whole matrix. Classic Ragnarok gives Whip
+// and Book the same profile, which would make 50 right, but that is an argument
+// from convention rather than a reading of the page, so the transcription
+// stands until someone looks at the guide again.
+//
+// rozerodb also carries a row this table does not: Spear while mounted on a
+// Peco or Gryphon, at 75 / 100 / 100. Whether the official page prints it is
+// unconfirmed, so it is not invented here.
 
 export const SIZES = ['small', 'medium', 'large'] as const;
 export type MonsterSize = (typeof SIZES)[number];
