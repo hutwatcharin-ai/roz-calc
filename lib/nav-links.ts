@@ -43,6 +43,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: true },
     { href: '/tools/sizes', label: 'ตารางขนาด', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', ready: true },
+    { href: '/tools/damage', label: 'ตีด้วยอะไรดี', ready: true },
     { href: '/tools/exp', label: 'EXP ต่อเลเวล', ready: true },
   ],
 };
