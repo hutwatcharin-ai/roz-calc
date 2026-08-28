@@ -10,10 +10,20 @@
 // the cross-check that makes a hand transcription of ~200 numbers trustworthy:
 // a misread digit breaks the line and the test says which one.
 //
-// The success table is the one with no formula behind it. It is checked only
-// for shape (never rises with refine level, special never worse than normal),
-// and its low rows are the numbers to doubt first if a player reports a
-// mismatch.
+// The success table has no formula behind it, so it is cross-checked three
+// other ways instead, and all three earned their keep: the first transcription
+// of it read armour's special column at +11 to +14 as 18 when it is 8.
+//
+//   1. scripts/compare-refine-rates.ts diffs all 200 cells against rozerodb's
+//      independent transcription of the same official page. That is what caught
+//      the four wrong cells.
+//   2. The armour column is identical to the Lv.4 weapon column at every level.
+//      docs/refine-rates-reference.md recorded that from video research long
+//      before this table existed, and the wrong cells broke it.
+//   3. From +11 upward the special ore stops helping: normal equals special in
+//      every column. The wrong cells were the only exception to that too.
+//
+// Both invariants are pinned in lib/refine-table.test.ts.
 
 export const GEAR_TYPES = ['armour', 'weapon1', 'weapon2', 'weapon3', 'weapon4'] as const;
 export type GearType = (typeof GEAR_TYPES)[number];
@@ -44,10 +54,10 @@ export const REFINE_CHANCE: Record<GearType, RefineChance[]> = {
     { normal: 20, special: 40 },
     { normal: 20, special: 40 },
     { normal: 9, special: 20 },
-    { normal: 8, special: 18 },
-    { normal: 8, special: 18 },
-    { normal: 8, special: 18 },
-    { normal: 8, special: 18 },
+    { normal: 8, special: 8 },
+    { normal: 8, special: 8 },
+    { normal: 8, special: 8 },
+    { normal: 8, special: 8 },
     { normal: 7, special: 7 },
     { normal: 7, special: 7 },
     { normal: 7, special: 7 },
@@ -187,7 +197,11 @@ export const ARMOUR_DEF: number[] = [
  * The guide lists three ores for weapon Lv3, Lv4 and armour (plain,
  * Concentrated, HD) and one for Lv1 and Lv2. Concentrated is the "special"
  * chance column. HD is a different game -- it drops the refine by one instead
- * of destroying the item -- and is deliberately not costed here.
+ * of destroying the item, and only on equipment already at +7 to +9 -- so it is
+ * deliberately not costed here.
+ *
+ * A failure also destroys any cards socketed into the equipment, which the
+ * per-attempt Zeny figures do not attempt to price.
  */
 export type OreSpec = { ore: string; oreZeny: number | null; feeZeny: number };
 

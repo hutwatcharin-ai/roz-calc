@@ -145,3 +145,37 @@ describe('ore and fees', () => {
     expect(ORE.weapon1.normal.oreZeny).toBe(200);
   });
 });
+
+describe('structure the success table turns out to have', () => {
+  // Discovered by diffing against rozerodb's independent transcription of the
+  // same official page: 196 of 200 cells agreed, and the four that did not
+  // broke both invariants below. They are pinned so a future edit that
+  // reintroduces that reading fails here rather than shipping.
+
+  it('gives armour exactly the Lv.4 weapon column', () => {
+    // docs/refine-rates-reference.md recorded this from video research before
+    // the official table was available: armour and the heaviest weapons refine
+    // on the same schedule.
+    for (let i = 0; i < MAX_REFINE; i += 1) {
+      expect(REFINE_CHANCE.armour[i], `+${i + 1}`).toEqual(REFINE_CHANCE.weapon4[i]);
+    }
+  });
+
+  it('stops the special ore helping at all above +10', () => {
+    for (const gear of GEAR_TYPES) {
+      for (let i = 10; i < MAX_REFINE; i += 1) {
+        const row = REFINE_CHANCE[gear][i];
+        expect(row.special, `${gear} +${i + 1}`).toBe(row.normal);
+      }
+    }
+  });
+
+  it('keeps the special ore strictly better somewhere below +10', () => {
+    // The mirror of the rule above: if special never helped anywhere, the two
+    // columns would be one column and the rule above would be vacuous.
+    const helps = GEAR_TYPES.some((gear) =>
+      REFINE_CHANCE[gear].slice(0, 10).some((row) => row.special > row.normal),
+    );
+    expect(helps).toBe(true);
+  });
+});
