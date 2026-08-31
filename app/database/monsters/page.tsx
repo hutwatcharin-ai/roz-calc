@@ -116,7 +116,7 @@ export default async function MonsterListPage({
             count stay honest; the hidden form field keeps ?c=1 across a new
             text search too. */}
         {showC && <input type="hidden" name="c" value="1" />}
-        <CVariantToggle mode="nav" navShow={showC} navHref={(show) => buildHref(1, show)} />
+        <CVariantToggle mode="nav" navShow={showC} navHrefShow={buildHref(1, true)} navHrefHide={buildHref(1, false)} />
       </form>
 
       <FilterState

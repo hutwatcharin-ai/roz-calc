@@ -40,12 +40,15 @@ export function applyRootAttr(show: boolean) {
 
 export default function CVariantToggle({
   mode,
-  navHref,
+  navHrefShow,
+  navHrefHide,
   navShow,
 }: {
   mode: 'local' | 'nav';
-  /** nav mode: current URL rebuilt without paging, ?c=1 appended when showing */
-  navHref?: (show: boolean) => string;
+  /** nav mode: pre-built URLs (page 1) — plain strings because a server
+      component cannot hand a function across the client boundary */
+  navHrefShow?: string;
+  navHrefHide?: string;
   /** nav mode: whether the current server render already includes C monsters */
   navShow?: boolean;
 }) {
@@ -67,8 +70,9 @@ export default function CVariantToggle({
     if (mode === 'local') {
       setShow(nextShow);
       applyRootAttr(nextShow);
-    } else if (navHref) {
-      router.push(navHref(nextShow));
+    } else {
+      const href = nextShow ? navHrefShow : navHrefHide;
+      if (href) router.push(href);
     }
   }
 
