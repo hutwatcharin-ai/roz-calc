@@ -10,6 +10,7 @@
 //
 // Run:  npx tsx scripts/mirror-item-icons.ts [--limit N]
 
+import { createHash } from 'node:crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createClient } from '@supabase/supabase-js';
@@ -56,7 +57,13 @@ async function main(): Promise<void> {
         if (res.ok) {
           const buf = Buffer.from(await res.arrayBuffer());
           // GIF87a / GIF89a magic; anything else is an error page in disguise.
-          if (buf.length > 30 && buf.subarray(0, 4).toString('latin1') === 'GIF8') {
+          // The magic check alone let 1,986 of ratemyserver's "No Image"
+          // placeholder gifs through (valid GIFs, useless pixels) -- reject
+          // that exact file by hash so a re-run cannot re-import it.
+          const NO_IMAGE_MD5 = 'a34c3279bc568da4e0000b817fa15a61';
+          const isGif = buf.length > 30 && buf.subarray(0, 4).toString('latin1') === 'GIF8';
+          const isPlaceholder = createHash('md5').update(buf).digest('hex') === NO_IMAGE_MD5;
+          if (isGif && !isPlaceholder) {
             fs.writeFileSync(file, buf);
             saved = true;
           } else badBytes += 1;
