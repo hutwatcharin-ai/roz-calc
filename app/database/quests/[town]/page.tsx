@@ -4,6 +4,7 @@
 // so a single quest is shareable as /database/quests/louyang#q12424 without
 // existing as a page of its own -- the design's answer to 766 thin pages.
 
+import { linkItemRefs } from '@/lib/quest-item-refs';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -113,18 +114,18 @@ export default async function QuestTownPage({ params }: { params: { town: string
               to match names and objects against what the game shows them. */}
           {(quest.objective_th ?? quest.objective) && (
             <p style={{ marginTop: 8 }}>
-              <strong>เป้าหมาย:</strong> {quest.objective_th ?? quest.objective}
+              <strong>เป้าหมาย:</strong> {linkItemRefs((quest.objective_th ?? quest.objective) as string)}
             </p>
           )}
           {quest.description_th ? (
             <>
-              <p style={{ marginTop: 8, maxWidth: '70ch' }}>{quest.description_th}</p>
+              <p style={{ marginTop: 8, maxWidth: '70ch' }}>{linkItemRefs(quest.description_th)}</p>
               {quest.description && (
                 <p className="muted" style={{ marginTop: 4, maxWidth: '70ch', fontSize: 13 }}>{quest.description}</p>
               )}
             </>
           ) : (
-            quest.description && <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>{quest.description}</p>
+            quest.description && <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>{linkItemRefs(quest.description)}</p>
           )}
 
           {quest.chain_next_id !== null && (

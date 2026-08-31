@@ -19,10 +19,12 @@ interface DropRow {
 export default function DropSearch({
   query,
   resolvedName,
+  resolvedId,
   rows,
 }: {
   query: string;
   resolvedName?: string | null;
+  resolvedId?: number | null;
   rows: DropRow[];
 }) {
   const { character, ready } = useCharacterContext();
@@ -36,7 +38,14 @@ export default function DropSearch({
       {query && !resolvedName && <p style={{ color: 'var(--faint)' }}>ไม่พบไอเทมนี้</p>}
       {resolvedName && (
         <p style={{ marginTop: 10, fontSize: 13, color: 'var(--dim)' }}>
-          ผลลัพธ์สำหรับ: <b className="mono" style={{ color: 'var(--pink)' }}>{resolvedName}</b>
+          ผลลัพธ์สำหรับ:{' '}
+          {resolvedId ? (
+            <Link href={`/database/items/${resolvedId}`} className="mono" style={{ color: 'var(--pink)', fontWeight: 700 }}>
+              {resolvedName}
+            </Link>
+          ) : (
+            <b className="mono" style={{ color: 'var(--pink)' }}>{resolvedName}</b>
+          )}
         </p>
       )}
       {resolvedName && rows.length === 0 && (

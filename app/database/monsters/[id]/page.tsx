@@ -66,7 +66,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // class the spawns/skills/farming queries below were already fixed for.
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
-    .select('rate, items(name_en, sell_price, icon_url)')
+    .select('rate, items(id, name_en, sell_price, icon_url)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
   if (dropsError) console.error('monster drops query failed', dropsError);
@@ -278,12 +278,21 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                     {(drops ?? []).map((d: any, i: number) => (
                       <tr key={i}>
                         <td data-label="">
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            {d.items?.icon_url && (
-                              <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                            )}
-                            {d.items?.name_en ?? '—'}
-                          </span>
+                          {d.items?.id ? (
+                            <Link href={`/database/items/${d.items.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              {d.items.icon_url && (
+                                <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                              )}
+                              {d.items.name_en ?? '—'}
+                            </Link>
+                          ) : (
+                            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              {d.items?.icon_url && (
+                                <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                              )}
+                              {d.items?.name_en ?? '—'}
+                            </span>
+                          )}
                         </td>
                         <td data-label="อัตราดรอป" className="num">{d.rate}%</td>
                       </tr>

@@ -200,12 +200,12 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         ) : (
           (droppedBy ?? []).map((d: any, i: number) => (
             <div key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Link href={`/database/monsters/${d.monsters.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {d.monsters.image_url && (
                   <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
                 )}
                 {d.monsters.name_en}
-              </span>
+              </Link>
               <span className="mono">{d.rate}%</span>
             </div>
           ))

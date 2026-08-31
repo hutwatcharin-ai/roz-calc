@@ -43,11 +43,11 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
 }
 
 async function findDrops(query: string) {
-  if (!query) return { resolvedName: null, rows: [] };
+  if (!query) return { resolvedName: null, resolvedId: null, rows: [] };
   const db = supabaseBrowser();
 
   const item = await resolveItem(db, query);
-  if (!item) return { resolvedName: null, rows: [] };
+  if (!item) return { resolvedName: null, resolvedId: null, rows: [] };
 
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
@@ -58,11 +58,12 @@ async function findDrops(query: string) {
 
   if (dropsError || !drops) {
     if (dropsError) console.error('monster_drops query failed', dropsError);
-    return { resolvedName: item.name_en, rows: [] };
+    return { resolvedName: item.name_en, resolvedId: item.id as number, rows: [] };
   }
 
   return {
     resolvedName: item.name_en as string,
+    resolvedId: item.id as number,
     rows: drops.map((d: any) => ({
       monster_id: d.monster_id,
       monster_name: d.monsters.name_en,
@@ -77,13 +78,13 @@ async function findDrops(query: string) {
 
 export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string } }) {
   const query = searchParams.q ?? '';
-  const { resolvedName, rows } = await findDrops(query);
+  const { resolvedName, resolvedId, rows } = await findDrops(query);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 className="pagehead__title">ค้นของดรอป</h1>
       <div className="panel" style={{ marginTop: 20 }}>
-        <DropSearch query={query} resolvedName={resolvedName} rows={rows} />
+        <DropSearch query={query} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
       </div>
     </main>
   );

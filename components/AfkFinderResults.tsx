@@ -56,13 +56,11 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   const clean = candidates.filter((c) => c.risks.length === 0).length;
 
-  // Measured at 31,164px on a phone -- 34.6 screens -- because with no
-  // character filled in every non-aggressive monster qualifies and all 238 were
-  // rendered. The list is sorted safest-first, so the tail is the part nobody
-  // scrolls to; it is capped and the cap is stated rather than silently applied.
-  const CAP = 40;
-  const shown = candidates.slice(0, CAP);
-  const hidden = candidates.length - shown.length;
+  // No cap: every qualifying monster renders (user request, 31 Aug). The list
+  // stays sorted safest-first, so the risky tail is at the bottom where it
+  // belongs, and ~220 rows render fine.
+  const shown = candidates;
+  const hidden = 0;
 
   return (
     <>
@@ -200,13 +198,10 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
               ))}
             </tbody>
           </table>
-          {hidden > 0 && (
-            <p className="source-note">
-              แสดง {shown.length} ตัวแรกจาก {candidates.length} ตัวที่ผ่านเกณฑ์ · เรียงปลอดภัยที่สุดก่อน
-              {' '}อีก {hidden} ตัวที่เหลือปลอดภัยน้อยกว่าหรือให้ EXP น้อยกว่าทั้งหมด
-              {!character && ' · กรอกดาเมจของคุณในแถบด้านบนแล้วรายการจะเหลือเฉพาะตัวที่คุณฆ่าได้จริง'}
-            </p>
-          )}
+          <p className="source-note">
+            แสดงครบทั้ง {shown.length} ตัวที่ผ่านเกณฑ์ · เรียงปลอดภัยที่สุดก่อน
+            {!character && ' · กรอกดาเมจของคุณในแถบด้านบนแล้วรายการจะเหลือเฉพาะตัวที่คุณฆ่าได้จริง'}
+          </p>
         </div>
       )}
     </>
