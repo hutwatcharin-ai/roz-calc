@@ -229,3 +229,57 @@ export function parseSkill(raw: string): ParsedSkill | null {
     requires,
   };
 }
+
+export interface ParsedQuest {
+  id: number;
+  name: string;
+  mapCode: string | null;
+  coordX: number | null;
+  coordY: number | null;
+  zone: string | null;
+  type: string;
+  objective: string | null;
+  description: string | null;
+  chainName: string | null;
+  chainNextId: number | null;
+}
+
+/**
+ * "← Quest <name> # <id> Map <code|—> Coordinates <x, y> Zone <name|—> Type
+ * <word> [Objective ...] [Description ...] [Quest chain <name> # <next id>]".
+ * Objective and Description are optional and ordered; "0, 0" coordinates are
+ * the page's placeholder, not a location.
+ */
+export function parseQuest(raw: string): ParsedQuest | null {
+  const i = raw.indexOf('← Quest ');
+  if (i === -1) return null;
+  const t = raw.slice(i + '← Quest '.length);
+
+  const head = /^(.+?) # (\d+) Map (.+?) Coordinates (\d+), (\d+) Zone (.+?) Type (\w+)/.exec(t);
+  if (!head) return null;
+
+  const coordX = Number(head[4]);
+  const coordY = Number(head[5]);
+  const placeholderCoords = coordX === 0 && coordY === 0;
+
+  const section = (label: string, stops: string) => {
+    const m = new RegExp(`${label} (.+?)(?= ${stops}|$)`).exec(t);
+    return m ? text(m[1]) : null;
+  };
+
+  const chain = / Quest chain (.+?) # (\d+)/.exec(t);
+
+  return {
+    id: Number(head[2]),
+    name: head[1].trim(),
+    mapCode: text(head[3]),
+    coordX: placeholderCoords ? null : coordX,
+    coordY: placeholderCoords ? null : coordY,
+    zone: text(head[6]),
+    type: head[7],
+    objective: section('Objective', '(?:Description|Quest chain|RO ZERO DATABASE)'),
+    description: section('Description', '(?:Quest chain|RO ZERO DATABASE)'),
+    chainName: chain ? chain[1].trim() : null,
+    chainNextId: chain ? Number(chain[2]) : null,
+  };
+}

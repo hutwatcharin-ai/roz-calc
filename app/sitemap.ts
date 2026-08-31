@@ -88,11 +88,20 @@ async function allMapCodes(): Promise<string[]> {
   return codes;
 }
 
+// Quest HUB pages only -- the 766 quests deliberately do not get their own
+// URLs (spec 2026-08-31-quests: anchors on the hub page, no thin pages).
+async function allQuestTowns(): Promise<string[]> {
+  const { data, error } = await supabaseBrowser().from('quests').select('town_key').order('town_key');
+  if (error) throw new Error(`sitemap: quests query failed: ${error.message}`);
+  return [...new Set((data ?? []).map((row) => row.town_key))];
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [monsterIds, itemIds, mapCodes] = await Promise.all([
+  const [monsterIds, itemIds, mapCodes, questTowns] = await Promise.all([
     allIds('monsters'),
     allIds('items'),
     allMapCodes(),
+    allQuestTowns(),
   ]);
 
   return [
@@ -107,6 +116,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
+    })),
+    ...questTowns.map((town) => ({
+      url: `${SITE_URL}/database/quests/${encodeURIComponent(town)}`,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
     })),
   ];
 }

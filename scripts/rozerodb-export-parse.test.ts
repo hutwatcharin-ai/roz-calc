@@ -182,3 +182,47 @@ describe('the second equipment header shape', () => {
     expect(e.weaponLevel).toBe(4);
   });
 });
+
+import { parseQuest } from './rozerodb-export-parse';
+
+describe('parseQuest', () => {
+  const WITH_MAP =
+    '← Quest Neutralizer and Mixture # 14719 Map alberta_in Coordinates 133, 55 Zone Alberta Type story Objective Ditrimi Potion and Kalepodi Potion Description Detrimindexta and Karvodailnirol Show either Detrimindexta or Karvodailnirol to Louitz. Quest chain Neutralizer and Mixture 01 # 14720 RO ZERO DATABASE · Ragnarok Zero Global community database';
+  const NO_MAP =
+    '← Quest Recovering from Fatigue # 12420 Map — Coordinates 0, 0 Zone — Type story Description Resets at 04:00 It would be difficult to explore Orc’s Memory again until you recover from fatigue. RO ZERO DATABASE · Ragnarok Zero Global community database';
+  const KILL =
+    '← Quest Wax Materials # 14743 Map — Coordinates 0, 0 Zone — Type kill Description To extract wax, you will need either 50 [Bee Sting]939 obtained by hunting Hornet and Vitata, or 1 [Royal Jelly]526. Bring them to Me. RO ZERO DATABASE · Ragnarok Zero Global community database';
+
+  it('reads a located quest with objective, description, and its chain link', () => {
+    const q = parseQuest(WITH_MAP)!;
+    expect(q.id).toBe(14719);
+    expect(q.name).toBe('Neutralizer and Mixture');
+    expect(q.mapCode).toBe('alberta_in');
+    expect(q.coordX).toBe(133);
+    expect(q.coordY).toBe(55);
+    expect(q.zone).toBe('Alberta');
+    expect(q.type).toBe('story');
+    expect(q.objective).toBe('Ditrimi Potion and Kalepodi Potion');
+    expect(q.description).toContain('Louitz');
+    expect(q.description).not.toContain('Quest chain');
+    expect(q.chainName).toBe('Neutralizer and Mixture 01');
+    expect(q.chainNextId).toBe(14720);
+  });
+
+  it('reads a mapless quest: dashes become null and 0,0 is a placeholder, not a place', () => {
+    const q = parseQuest(NO_MAP)!;
+    expect(q.mapCode).toBeNull();
+    expect(q.zone).toBeNull();
+    expect(q.coordX).toBeNull();
+    expect(q.objective).toBeNull();
+    expect(q.description).toContain('Resets at 04:00');
+    expect(q.chainNextId).toBeNull();
+  });
+
+  it('keeps item references in the game text verbatim', () => {
+    // "[Bee Sting]939" is the game's own item notation; rewriting it is a
+    // rendering decision, not a parsing one.
+    expect(parseQuest(KILL)!.description).toContain('[Bee Sting]939');
+    expect(parseQuest(KILL)!.type).toBe('kill');
+  });
+});

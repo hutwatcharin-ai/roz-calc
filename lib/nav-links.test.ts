@@ -113,7 +113,9 @@ describe('link tables', () => {
     expect(PRIMARY_LINKS.map((l) => l.href)).toContain('/drop-finder');
   });
 
-  it('lists the six database pages the spec names', () => {
+  it('lists the seven database pages', () => {
+    // Six from the v2 spec plus quests, added 31 Aug from the rozerodb export
+    // (spec 2026-08-31-quests).
     expect(SECTION_LINKS.database.map((l) => l.href)).toEqual([
       '/database/monsters',
       '/database/items',
@@ -121,6 +123,7 @@ describe('link tables', () => {
       '/database/equipment',
       '/database/skills',
       '/database/maps',
+      '/database/quests',
     ]);
   });
 
