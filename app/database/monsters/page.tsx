@@ -42,7 +42,7 @@ export default async function MonsterListPage({
   const db = supabaseBrowser();
   let query = db
     .from('monsters')
-    .select('id, name_en, level, race, element, image_url, is_aggressive, atk_max', { count: 'exact' });
+    .select('id, name_en, level, race, element, image_url, is_aggressive, atk_max, hp, base_exp', { count: 'exact' });
 
   if (q) {
     const needle = escapeLikePattern(q);
@@ -124,39 +124,33 @@ export default async function MonsterListPage({
         </div>
       ) : (
       <div className="card">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>ชื่อ</th>
-              <th className="num">Lv</th>
-              <th>เผ่า</th>
-              <th>ธาตุ</th>
-              <th>เข้าตีเอง</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(monsters ?? []).map((m) => (
-              <tr key={m.id}>
-                <td data-label="">
-                  <Link href={`/database/monsters/${m.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {m.image_url && (
-                      <img loading="lazy" decoding="async" src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {m.name_en}
-                  </Link>
-                </td>
-                <td data-label="Lv" className="num">{m.level}</td>
-                <td data-label="เผ่า">{m.race ?? '—'}</td>
-                <td data-label="ธาตุ">{m.element ?? '—'}</td>
-                {/* The flag rides with the monster on every surface, not just
-                    the detail page (spec 3.15.1). */}
-                <td data-label="เข้าตีเอง">
+        {/* Same recognition-first card grid as the item list, plus the numbers
+            players scan for when picking a hunting spot (Lv/HP/EXP) and the
+            aggro flag, which rides with the monster on every surface, not just
+            the detail page (spec 3.15.1). */}
+        <div className="mongrid">
+          {(monsters ?? []).map((m) => (
+            <Link key={m.id} href={`/database/monsters/${m.id}`} className="moncard">
+              {m.image_url ? (
+                <img className="moncard__sprite" loading="lazy" decoding="async" src={m.image_url} alt="" width={40} height={40} />
+              ) : (
+                <span className="moncard__sprite" aria-hidden="true" />
+              )}
+              <span className="moncard__body">
+                <span className="moncard__top">
+                  <span className="moncard__name">{m.name_en}</span>
                   <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </span>
+                <span className="moncard__meta">
+                  Lv {m.level ?? '—'} · {m.race ?? '—'} · {m.element ?? '—'}
+                </span>
+                <span className="moncard__meta">
+                  HP {m.hp != null ? m.hp.toLocaleString('en-US') : '—'} · EXP {m.base_exp != null ? m.base_exp.toLocaleString('en-US') : '—'}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
       )}
 

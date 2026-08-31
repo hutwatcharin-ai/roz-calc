@@ -1134,3 +1134,40 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   -webkit-box-orient: vertical;
 }
 .itemcard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
+
+/* Monster browse grid: item-card pattern widened for a sprite plus two stat
+   lines (Lv/race/element, HP/EXP) and the aggro badge. */
+.mongrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.moncard {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  text-decoration: none;
+  min-height: 44px;
+}
+.moncard:hover { border-color: var(--cyan); }
+.moncard__sprite {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.moncard__body { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.moncard__top { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.moncard__name {
+  color: var(--text);
+  font: 500 13px/1.35 "Sarabun", sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.moncard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
