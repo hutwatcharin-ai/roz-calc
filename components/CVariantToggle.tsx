@@ -64,11 +64,18 @@ export default function CVariantToggle({
     }
   }, [mode]);
 
+  // nav mode: the checkbox is controlled, so it must follow the URL when the
+  // client-side navigation lands — without this the box snaps straight back
+  // and looks dead, because initial useState never re-reads the prop.
+  useEffect(() => {
+    if (mode === 'nav') setShow(!!navShow);
+  }, [mode, navShow]);
+
   function onChange(checkedHide: boolean) {
     const nextShow = !checkedHide;
     writeShow(nextShow);
+    setShow(nextShow);
     if (mode === 'local') {
-      setShow(nextShow);
       applyRootAttr(nextShow);
     } else {
       const href = nextShow ? navHrefShow : navHrefHide;
