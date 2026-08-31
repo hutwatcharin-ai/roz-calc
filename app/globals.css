@@ -1056,3 +1056,14 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   color: var(--faint);
   font: 600 12px/1.3 "Sarabun", sans-serif;
 }
+
+/* A disclosure that lives inside a table row: quieter than the page-level
+   .disclose -- no border box, just an expandable line under the skill. */
+.disclose--row { border: 0; background: transparent; margin-top: 2px; }
+.disclose--row > summary {
+  padding: 4px 0;
+  min-height: 32px;
+  font: 400 13px/1.5 "Sarabun", sans-serif;
+  color: var(--dim);
+}
+.disclose--row .disclose__body { padding: 0 0 6px; }

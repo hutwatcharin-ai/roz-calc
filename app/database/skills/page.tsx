@@ -36,7 +36,7 @@ async function allSkills(): Promise<{ skills: any[]; error: boolean }> {
   for (let from = 0; ; from += FETCH_PAGE) {
     const { data, error } = await db
       .from('skills')
-      .select('slug, name, type, max_level, element, classes, icon_url')
+      .select('slug, name, type, max_level, element, classes, icon_url, description, requires')
       .order('name')
       .order('slug')
       .range(from, from + FETCH_PAGE - 1);
@@ -209,6 +209,23 @@ export default async function SkillsPage({
                     <td data-label="เลเวลสูงสุด" className="num">{s.max_level ?? '—'}</td>
                     <td data-label="ธาตุ">{s.element ?? '—'}</td>
                     <td data-label="อาชีพ">{(s.classes ?? []).length > 0 ? s.classes.join(', ') : '—'}</td>
+                    {/* 581 skills carry a description from the export; the rest
+                        genuinely have none upstream and get no empty cell. */}
+                    {(s.description || s.requires) && (
+                      <td data-label="" className="wide">
+                        <details className="disclose disclose--row">
+                          <summary>รายละเอียดสกิล</summary>
+                          <div className="disclose__body">
+                            {s.description && <p className="muted" style={{ maxWidth: '65ch' }}>{s.description}</p>}
+                            {s.requires && (
+                              <p className="muted">
+                                ต้องมีก่อน: <strong>{s.requires}</strong>
+                              </p>
+                            )}
+                          </div>
+                        </details>
+                      </td>
+                    )}
                   </tr>
                 ))}
                 {rows.length === 0 && (

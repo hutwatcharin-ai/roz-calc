@@ -1,0 +1,43 @@
+{
+  "source": "https://rozerodb.com",
+  "generated_at": "2026-08-31T03:17:13.042Z",
+  "format": "JSON Lines; one public webpage per record",
+  "fields": [
+    "url",
+    "path",
+    "category",
+    "slug",
+    "status",
+    "title",
+    "description",
+    "heading",
+    "text",
+    "fetched_at"
+  ],
+  "requested_urls": 7403,
+  "successful_urls": 7403,
+  "failed_urls": 0,
+  "counts": {
+    "home": 1,
+    "cash-shop": 1,
+    "maps": 573,
+    "equipment": 2693,
+    "monsters": 585,
+    "marketplace": 1,
+    "npcs": 1,
+    "cards": 263,
+    "quests": 767,
+    "skills": 1,
+    "items": 1650,
+    "recipes": 1,
+    "player-skills": 852,
+    "guides": 6,
+    "tools": 8
+  },
+  "failures": [],
+  "notes": [
+    "Content is extracted from publicly rendered pages listed in sitemap.xml plus the eight public tool routes.",
+    "The /api/ path is intentionally not accessed because robots.txt disallows crawlers there.",
+    "Images, executable downloads, and other binary assets are not mirrored."
+  ]
+}
