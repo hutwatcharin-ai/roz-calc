@@ -9,8 +9,8 @@ import { supabaseBrowser } from '@/lib/supabase';
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'แผนที่โลก Ragnarok Zero',
-  description: 'แผนที่โลก Ragnarok Zero แบบโต้ตอบ ค้นหาเมือง ดันเจียน แมพ และมอนสเตอร์ พร้อมดูช่วงเลเวลและความอันตราย',
+  title: 'Interactive World Map — Ragnarok Zero',
+  description: 'Interactive Ragnarok Zero world map with English region and map names, monster level ranges, aggressive spawn counts, search, pan and zoom.',
 };
 
 export default async function WorldMapPage() {
@@ -28,7 +28,7 @@ export default async function WorldMapPage() {
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
         <Link href="/database/maps">ฐานข้อมูลแมพ</Link><span className="crumbs__sep" aria-hidden="true">›</span><span className="crumbs__here">แผนที่โลก</span>
       </nav>
-      <PageHeader title="แผนที่โลก" lead="เลือกพื้นที่เพื่อดูว่าแถวนั้นมีมอนเลเวลไหนและอันตรายแค่ไหน" />
+      <PageHeader title="Interactive World Map" lead="เลือก Region เพื่อดู Map IDs ช่วงเลเวลมอน และความอันตรายของพื้นที่" />
       {error && <p className="worldmap-page__warning">โหลดสถิติมอนสเตอร์ไม่สำเร็จชั่วคราว แต่ยังใช้แผนที่และเปิดรายชื่อพื้นที่ได้</p>}
       <WorldMap regions={regions} />
       <p className="worldmap-page__foot">แผนที่นี้เน้นพื้นที่สำคัญและกำลังเพิ่มจุดอย่างต่อเนื่อง รายการแมพที่มีมอนสเตอร์ครบทั้งหมดอยู่ที่ <Link href="/database/maps">ฐานข้อมูลแมพ →</Link></p>

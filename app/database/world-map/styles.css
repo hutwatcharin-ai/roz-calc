@@ -9,6 +9,19 @@
 .worldmap__search { flex: 1; }
 .worldmap__search input { width: 100%; }
 .worldmap__match { color: var(--faint); font-size: 13px; white-space: nowrap; }
+.worldmap__jump { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--hair); background: var(--panel-2); }
+.worldmap__jump > strong { color: var(--faint); font: 700 10px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; white-space: nowrap; }
+.worldmap__jump > div { display: flex; gap: 5px; overflow-x: auto; scrollbar-width: thin; padding-block: 2px; }
+.worldmap__jumpbtn { flex: none; padding: 5px 9px; border: 1px solid var(--hair); border-radius: 999px; background: var(--panel); color: var(--dim); font: 600 12px/1.2 "Sarabun", sans-serif; cursor: pointer; }
+.worldmap__jumpbtn:hover, .worldmap__jumpbtn[aria-pressed="true"] { color: var(--text); background: var(--ground); }
+.worldmap__jumpbtn--city { border-color: var(--yellow); }
+.worldmap__jumpbtn--dungeon { border-color: var(--pink); }
+.worldmap__jumpbtn--field { border-color: var(--cyan); border-style: dashed; }
+.worldmap__legend { display: flex; align-items: center; gap: 5px; color: var(--faint); font-size: 10px; white-space: nowrap; }
+.worldmap__legend i { width: 8px; height: 8px; border-radius: 2px; background: var(--cyan); }
+.worldmap__legend .is-city { background: var(--yellow); }
+.worldmap__legend .is-dungeon { background: var(--pink); }
+.worldmap__legend .is-field { background: var(--cyan); }
 .worldmap__layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; min-height: min(68vh, 720px); }
 .worldmap__viewport { position: relative; min-height: 590px; overflow: hidden; background: #080617; cursor: grab; touch-action: none; user-select: none; }
 .worldmap__viewport:active { cursor: grabbing; }
@@ -52,6 +65,8 @@
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (max-width: 760px) {
   .worldmap__toolbar { align-items: stretch; flex-direction: column; gap: 5px; }
+  .worldmap__jump { grid-template-columns: 1fr; gap: 5px; }
+  .worldmap__legend { display: none; }
   .worldmap__layout { display: block; min-height: 0; }
   .worldmap__viewport { min-height: 58vh; }
   .worldmap__panel { display: none; position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; max-height: 62vh; border: 1px solid var(--hair); border-radius: 16px 16px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,.55); }

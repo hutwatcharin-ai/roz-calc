@@ -21,6 +21,7 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
   const [query, setQuery] = useState('');
   const matches = useMemo(() => new Set(searchMapRegions(regions, query)), [regions, query]);
   const selected = regions.find((region) => region.slug === selectedSlug) ?? null;
+  const plottedMaps = useMemo(() => new Set(regions.flatMap((region) => region.mapCodes)).size, [regions]);
 
   const dimensions = useCallback(() => {
     const rect = viewportRef.current?.getBoundingClientRect();
@@ -75,6 +76,13 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
     }
   }
 
+  function jumpToRegion(region: MapRegion) {
+    const { width, height } = dimensions();
+    setView((current) => focusRegion(current, region, width, height));
+    selectRegion(region);
+    viewportRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
   function pointerDown(event: React.PointerEvent) {
     if ((event.target as HTMLElement).closest('button, a, input')) return;
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -97,9 +105,21 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
       <div className="worldmap__toolbar">
         <label className="worldmap__search">
           <span className="sr-only">ค้นหาในแผนที่</span>
-          <input type="search" value={query} onChange={(event) => onSearch(event.target.value)} placeholder="ค้นหาแมพ มอนสเตอร์ หรือเขต..." />
+          <input type="search" value={query} onChange={(event) => onSearch(event.target.value)} placeholder="ค้นหา Map, Monster หรือ Region..." />
         </label>
-        <span className="worldmap__match" aria-live="polite">{query ? `พบ ${matches.size} จุด` : `${regions.length} พื้นที่สำคัญ`}</span>
+        <span className="worldmap__match" aria-live="polite">{query ? `พบ ${matches.size} จุด` : `${plottedMaps} map IDs · ${regions.length} regions`}</span>
+      </div>
+
+      <div className="worldmap__jump" aria-label="Jump to Region">
+        <strong>JUMP TO REGION</strong>
+        <div>
+          {regions.map((region) => (
+            <button key={region.slug} type="button" className={`worldmap__jumpbtn worldmap__jumpbtn--${region.kind}`} onClick={() => jumpToRegion(region)} aria-pressed={selectedSlug === region.slug}>
+              {region.nameEn}
+            </button>
+          ))}
+        </div>
+        <span className="worldmap__legend"><i className="is-city" />City <i className="is-dungeon" />Dungeon <i className="is-field" />Field</span>
       </div>
 
       <div className="worldmap__layout">
@@ -118,7 +138,7 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
           onClick={(event) => { if (event.target === event.currentTarget) selectRegion(null); }}
         >
           <div className="worldmap__stage" style={{ transform: `translate3d(${view.x}px, ${view.y}px, 0) scale(${view.scale})` }}>
-            <img src="/images/maps/worldmap.jpg" width="1280" height="1024" alt="แผนที่โลก Orbis of Midgard" draggable={false} />
+            <img src="/images/maps/worldmap.jpg" width="1280" height="1024" alt="Orbis of Midgard world map" draggable={false} />
             {regions.map((region) => {
               const isMatch = matches.has(region.slug);
               return (
@@ -127,11 +147,11 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
                   type="button"
                   className={`worldmap__pin worldmap__pin--${region.kind}${selectedSlug === region.slug ? ' is-selected' : ''}${query && !isMatch ? ' is-dimmed' : ''}${query && isMatch ? ' is-match' : ''}`}
                   style={{ left: region.x, top: region.y, width: Math.max(44, region.width), height: Math.max(44, region.height) }}
-                  aria-label={`${region.nameTh ?? region.nameEn}, ${region.mapCodes.length} แมพ`}
+                  aria-label={`${region.nameEn}, ${region.mapCodes.length} map IDs`}
                   aria-pressed={selectedSlug === region.slug}
                   onClick={(event) => { event.stopPropagation(); selectRegion(region); }}
                 >
-                  <span>{region.nameTh ?? region.nameEn}</span>{region.hasKafra && <b aria-label="มี Kafra Teleport">K</b>}
+                  <span>{region.nameEn}</span>{region.hasKafra && <b aria-label="Kafra Teleport available">K</b>}
                 </button>
               );
             })}
@@ -149,8 +169,7 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
             <>
               <button className="worldmap__close" type="button" onClick={() => selectRegion(null)} aria-label="ปิดรายละเอียด">×</button>
               <span className="worldmap__eyebrow">{selected.kind === 'city' ? 'เมือง' : selected.kind === 'dungeon' ? 'ดันเจียน' : 'พื้นที่'}</span>
-              <h2>{selected.nameTh ?? selected.nameEn}</h2>
-              <p className="worldmap__english">{selected.nameEn}</p>
+              <h2>{selected.nameEn}</h2>
               <dl className="worldmap__stats">
                 <div><dt>แมพ</dt><dd>{selected.mapCodes.length}</dd></div>
                 <div><dt>เลเวลมอน</dt><dd>{levelText(selected)}</dd></div>
@@ -158,7 +177,7 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
                 <div><dt>เข้าตีเอง</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount} ชนิด` : '—'}</dd></div>
               </dl>
               {selected.hasKafra && <p className="worldmap__kafra"><strong>Kafra Teleport</strong><br />เชื่อมเมืองหลัก: {KAFRA_DESTINATIONS.join(', ')}</p>}
-              <h3>แมพในพื้นที่</h3>
+              <h3>Map IDs ในพื้นที่</h3>
               <ul className="worldmap__maplist">
                 {selected.mapCodes.map((code) => {
                   const available = selected.monsterNames.length > 0 || selected.monsterCount > 0;
