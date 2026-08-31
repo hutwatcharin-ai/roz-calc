@@ -4,6 +4,7 @@ import { isCVariant } from '@/lib/c-variant';
 import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
+import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 
 export interface AfkCandidate {
@@ -16,7 +17,7 @@ export interface AfkCandidate {
   avg_zeny_per_kill: number | null;
   image_url: string | null;
   skills: string[];
-  spawn: string | null;
+  spawn: { name: string; code: string; aggroCount: number } | null;
 }
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
@@ -43,9 +44,15 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
     .filter((row) => (personal && character ? diesInOneHit(row.hp, character.damagePerHit) : true))
     .map((row) => ({ row, risks: riskySkills(row.skills) }))
     // Safety before EXP, which is the whole reason this is not just a filter on
-    // the farming finder: a monster with a skill that can lock or swarm the bot
-    // belongs below a clean one however much EXP it gives.
-    .sort((a, b) => a.risks.length - b.risks.length || (b.row.exp_per_hp ?? 0) - (a.row.exp_per_hp ?? 0));
+    // the farming finder: own risky skills first, then how dangerous the best
+    // map's neighbours are, then EXP. A clean monster on a map with aggressive
+    // neighbours is still a worse AFK spot than one on an empty field.
+    .sort(
+      (a, b) =>
+        a.risks.length - b.risks.length ||
+        (a.row.spawn?.aggroCount ?? 99) - (b.row.spawn?.aggroCount ?? 99) ||
+        (b.row.exp_per_hp ?? 0) - (a.row.exp_per_hp ?? 0),
+    );
 
   const clean = candidates.filter((c) => c.risks.length === 0).length;
 
@@ -82,7 +89,9 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
       <div className="ceiling-note" style={{ marginTop: 12 }}>
         <strong>ข้อจำกัดที่ต้องรู้:</strong> หน้านี้ใช้ดาเมจที่คุณกรอกตรงๆ ไม่ได้คูณธาตุอาวุธกับธาตุมอนให้
         เพราะยังไม่มีข้อมูลว่าอาวุธของคุณเป็นธาตุอะไร ไม่ใช่เพราะไม่มีตารางธาตุ (ตารางทางการอยู่ที่หน้าตารางธาตุแล้ว) ·
-        และการจัดสกิลว่าเสี่ยงมาจาก<strong>ชื่อสกิลในไฟล์เกม</strong> ไม่ได้มาจากการทดสอบจริง
+        และการจัดสกิลว่าเสี่ยงมาจาก<strong>ชื่อสกิลในไฟล์เกม</strong> ไม่ได้มาจากการทดสอบจริง ·
+        คอลัมน์แมพเลือก<strong>แมพที่มีมอนโจมตีก่อนน้อยชนิดที่สุด</strong>ที่มอนตัวนั้นเกิด
+        (นับเป็นชนิด ไม่ใช่จำนวนตัว){personal && <> · EXP/ชม. เป็น{KILL_RATE_DISCLAIMER}</>}
       </div>
 
       {candidates.length === 0 ? (
@@ -98,9 +107,10 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                 <th className="num">Lv</th>
                 <th className="num">HP</th>
                 <th className="num">EXP/HP</th>
+                {personal && <th className="num">EXP/ชม.</th>}
                 {personal && <th>ดรอปตามช่วงเลเวล</th>}
                 <th>สกิลที่ต้องระวัง</th>
-                <th>แมพ</th>
+                <th>แมพที่เสี่ยงต่ำสุด</th>
               </tr>
             </thead>
             <tbody>
@@ -128,6 +138,19 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                     {row.exp_per_hp ?? '—'}
                   </td>
                   {personal && character && (
+                    <td data-label="EXP/ชม." className="num">
+                      {(() => {
+                        const rate = killRate({
+                          monsterHp: row.hp ?? 0,
+                          damagePerHit: character.damagePerHit,
+                          attacksPerSecond: character.attacksPerSecond,
+                        });
+                        const exp = rate ? expPerHour(rate.killsPerHour, row.base_exp ?? 0) : null;
+                        return exp != null ? Math.round(exp).toLocaleString() : '—';
+                      })()}
+                    </td>
+                  )}
+                  {personal && character && (
                     <td data-label="ดรอปตามช่วงเลเวล">
                       <span
                         className={`tag tag--${dropPenalty(character.level, row.level)}`}
@@ -154,7 +177,25 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                       </div>
                     )}
                   </td>
-                  <td data-label="แมพ">{row.spawn ?? '—'}</td>
+                  <td data-label="แมพที่เสี่ยงต่ำสุด">
+                    {row.spawn ? (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                        <Link href={`/database/maps/${encodeURIComponent(row.spawn.code)}`}>{row.spawn.name}</Link>
+                        {row.spawn.aggroCount === 0 ? (
+                          <span className="tag tag--none" title="ไม่มีมอนสเตอร์ที่โจมตีก่อนเกิดในแมพนี้เลย">แมพสะอาด</span>
+                        ) : (
+                          <span
+                            className="tag tag--risk"
+                            title={`ในแมพนี้มีมอนสเตอร์ที่โจมตีก่อนอยู่ ${row.spawn.aggroCount} ชนิด — บอทอาจโดนตัวอื่นตีแม้เป้าหมายจะไม่โจมตีก่อน`}
+                          >
+                            โจมตีก่อน {row.spawn.aggroCount} ชนิด
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      '—'
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

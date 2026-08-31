@@ -57,19 +57,32 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
   const skills = await fetchAllRows<{ monster_id: number; skill_name: string }>((from, to) =>
     db.from('monster_skills').select('monster_id, skill_name').in('monster_id', ids).order('monster_id').range(from, to),
   );
-  const spawns = await fetchAllRows<{ monster_id: number; map_display_name: string | null }>((from, to) =>
+  // Spawns for the candidates AND the aggro census for every map they spawn
+  // on: a non-aggressive target on a map crawling with aggressive monsters is
+  // exactly the spot this page must not recommend -- the bot dies to the
+  // neighbours, not the target.
+  const spawns = await fetchAllRows<{ monster_id: number; map_code: string | null; map_display_name: string | null }>((from, to) =>
     db
       .from('monster_spawns')
-      .select('monster_id, map_display_name')
+      .select('monster_id, map_code, map_display_name')
       .in('monster_id', ids)
       .order('monster_id')
       .range(from, to),
   );
+  const allSpawns = await fetchAllRows<{ monster_id: number; map_code: string | null }>((from, to) =>
+    db.from('monster_spawns').select('monster_id, map_code').order('monster_id').range(from, to),
+  );
+  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null }>((from, to) =>
+    db.from('monsters').select('id, is_aggressive').order('id').range(from, to),
+  );
 
   // A failed skill or spawn read must not render as "no skills, no maps" -- the
   // first would be a safety claim we did not earn.
-  if (skills.error || spawns.error) {
-    console.error('afk finder detail query failed', skills.error ?? spawns.error);
+  if (skills.error || spawns.error || allSpawns.error || aggroFlags.error) {
+    console.error(
+      'afk finder detail query failed',
+      skills.error ?? spawns.error ?? allSpawns.error ?? aggroFlags.error,
+    );
     return { rows: [], failed: true };
   }
 
@@ -80,10 +93,27 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
     skillsByMonster.set(row.monster_id, list);
   }
 
-  const mapByMonster = new Map<number, string>();
+  // How many aggressive species live on each map. Species, not spawn counts:
+  // we know what spawns where, not how many of each.
+  const isAggro = new Map<number, boolean>();
+  for (const m of aggroFlags.data ?? []) isAggro.set(m.id, !!m.is_aggressive);
+  const aggroSpeciesByMap = new Map<string, Set<number>>();
+  for (const sp of allSpawns.data ?? []) {
+    if (!sp.map_code || !isAggro.get(sp.monster_id)) continue;
+    const set = aggroSpeciesByMap.get(sp.map_code) ?? new Set<number>();
+    set.add(sp.monster_id);
+    aggroSpeciesByMap.set(sp.map_code, set);
+  }
+
+  // Best spawn per monster = the map with the fewest aggressive species, not
+  // the first row PostgREST happens to return.
+  const spawnByMonster = new Map<number, { name: string; code: string; aggroCount: number }>();
   for (const row of spawns.data ?? []) {
-    if (!mapByMonster.has(row.monster_id) && row.map_display_name) {
-      mapByMonster.set(row.monster_id, row.map_display_name);
+    if (!row.map_code || !row.map_display_name) continue;
+    const aggroCount = aggroSpeciesByMap.get(row.map_code)?.size ?? 0;
+    const current = spawnByMonster.get(row.monster_id);
+    if (!current || aggroCount < current.aggroCount) {
+      spawnByMonster.set(row.monster_id, { name: row.map_display_name, code: row.map_code, aggroCount });
     }
   }
 
@@ -91,7 +121,7 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
     rows: (stats.data ?? []).map((s) => ({
       ...s,
       skills: skillsByMonster.get(s.monster_id) ?? [],
-      spawn: mapByMonster.get(s.monster_id) ?? null,
+      spawn: spawnByMonster.get(s.monster_id) ?? null,
     })),
     failed: false,
   };
