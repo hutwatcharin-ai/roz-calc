@@ -7,7 +7,7 @@ import RecentlyViewed from '@/components/RecentlyViewed';
 export const metadata = {
   title: 'หามอนสเตอร์คุ้มสุดสำหรับเลเวลของคุณ',
   description:
-    'ใส่เลเวลแล้วดูว่ามอนสเตอร์ตัวไหนให้ EXP ต่อ HP สูงสุด เรียงอันดับให้อัตโนมัติจากมอนสเตอร์ทั้งหมดในเกม Ragnarok Zero Global',
+    'ใส่เลเวลแล้วดูว่ามอนสเตอร์ตัวไหนให้ EXP ต่อ HP สูงสุด พร้อมฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยของ Ragnarok Zero Global',
 };
 
 async function getFarmingRows(minLevel: number, maxLevel: number) {
@@ -46,69 +46,91 @@ export default async function HomePage({
 }: {
   searchParams: { level?: string; range?: string };
 }) {
+  // The farming finder still lives at "/" (spec 6.2: the link people share in
+  // game chat keeps working, params and all). What changed is the default
+  // view: intent cards first, and the results table renders only after a
+  // search -- a first-time visitor sees what the site can do, not a table
+  // computed for a level they never chose.
+  const searched = searchParams.level !== undefined;
   const level = Number(searchParams.level ?? 50);
   const range = Number(searchParams.range ?? 10);
-  // Both reads start together: the stat row does not depend on the level
-  // filter, so waiting for one before the other would add a round trip for
-  // nothing.
+
   const [rows, stats] = await Promise.all([
-    getFarmingRows(Math.max(1, level - range), level + range),
+    searched ? getFarmingRows(Math.max(1, level - range), level + range) : Promise.resolve([]),
     getSiteStats(),
   ]);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">
-        หามอนสเตอร์คุ้มสุด สำหรับเลเวลของแก
-      </h1>
-      {/* spec 6.2 keeps the farming finder AT "/" rather than moving it behind
-          a landing page: the link people share in game chat stays the same and
-          a returning player still lands on the tool, not on a menu. What is
-          added is context around it. */}
+      <h1 className="pagehead__title">ตอนนี้แกติดอะไรอยู่?</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        ส่วนหนึ่งของฐานข้อมูล Ragnarok Zero Global ภาษาไทย — มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล และแมพ
-        พร้อมเครื่องมือที่คิดจากค่าตัวละครของคุณเอง
+        ฐานข้อมูล Ragnarok Zero Global ภาษาไทย พร้อมเครื่องมือที่คิดจากค่าตัวละครของแกเอง
       </p>
-      <SiteStats stats={stats} />
-      {/* The three controls did not wrap, so at 320px the button sat 41px
-          past the right edge -- the last thing on the site that did. */}
-      <form className="filterbar" style={{ margin: '20px 0' }}>
-        <label>
-          เลเวล{' '}
-          <input className="mono" type="number" name="level" defaultValue={level} inputMode="numeric" style={{ width: 96 }} />
-        </label>
-        <label>
-          ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 72 }} />
-        </label>
-        <button type="submit" className="btn">ค้นหา</button>
-      </form>
-      <RecentlyViewed />
 
-      <div className="panel">
-        <FarmingTable rows={rows} />
+      <div className="qgrid">
+        {/* Card one IS the tool, not a link to it: the embedded form submits
+            to this same page, so the regular player still searches from "/"
+            in one step, exactly like before the redesign. */}
+        <div className="qcard qcard--yellow">
+          <strong>เลเวลตันแล้ว ตีอะไรดี</strong>
+          <span>เดี๋ยวจัดมอนคุ้มสุดให้ พร้อมเตือนตัวที่โจมตีก่อน</span>
+          <form className="qcard__form" action="/#results">
+            <label>
+              เลเวล{' '}
+              <input className="mono" type="number" name="level" defaultValue={searched ? level : 50} inputMode="numeric" style={{ width: 80 }} />
+            </label>
+            <label>
+              ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 56 }} />
+            </label>
+            <button type="submit" className="btn">ค้นหา</button>
+          </form>
+        </div>
+
+        <div className="qcard qcard--cyan">
+          <strong>อยากได้ของชิ้นนี้</strong>
+          <span>พิมพ์ชื่อไอเทม บอกเลยว่ามอนตัวไหนดรอป อัตราเท่าไร</span>
+          <form className="qcard__form" action="/drop-finder">
+            <input type="search" name="q" placeholder="เช่น Jellopy" aria-label="ค้นชื่อไอเทม" style={{ flex: 1, minWidth: 110 }} />
+            <button type="submit" className="btn">ค้นดรอป</button>
+          </form>
+        </div>
+
+        <Link href="/database/equipment" className="qcard qcard--pink">
+          <strong>ของชิ้นนี้ดีไหม ใส่ได้ไหม</strong>
+          <span>อุปกรณ์ 1,815 ชิ้น กรองตามอาชีพ ชนิด เลเวล — การ์ดอีก 313 ใบ</span>
+          <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
+        </Link>
+
+        <Link href="/tools/afk-finder" className="qcard qcard--cyan">
+          <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
+          <span>เฉพาะมอนที่ไม่โจมตีก่อนและดาเมจแกฆ่าได้หมัดเดียว พร้อมเตือนสกิลอันตราย</span>
+          <em className="qcard__go">หาจุด AFK →</em>
+        </Link>
       </div>
 
-      {/* Four cards, not eight: spec 6.2 caps this row so the page does not
-          turn into the link menu it deliberately is not. The element table is
-          not among them because that page does not exist yet -- an entry card
-          pointing at a 404 is worse than one fewer card. */}
-      <div className="entrycards">
-        <Link href="/drop-finder" className="entrycard">
-          <strong>ค้นของดรอป</strong>
-          <span>พิมพ์ชื่อไอเทม แล้วดูว่ามอนตัวไหนดรอปและอัตราเท่าไร</span>
-        </Link>
-        <Link href="/tools/afk-finder" className="entrycard">
-          <strong>หาจุด AFK</strong>
-          <span>มอนที่ไม่โจมตีก่อนและตายในหมัดเดียว สำหรับปล่อยบอททิ้งไว้</span>
-        </Link>
-        <Link href="/tools/farm-planner" className="entrycard">
-          <strong>แผนฟาร์ม</strong>
-          <span>เก็บรายชื่อมอนที่ตั้งใจจะไปตี ไว้เทียบกันในหน้าเดียว</span>
-        </Link>
-        <Link href="/database/maps" className="entrycard">
-          <strong>แมพ</strong>
-          <span>ดูว่าแต่ละแมพมีมอนอะไร ระดับไหน และอันตรายแค่ไหน</span>
-        </Link>
+      {searched && (
+        <div className="panel" id="results" style={{ marginTop: 24 }}>
+          <h2 className="pagehead__title" style={{ fontSize: 20 }}>
+            มอนคุ้มสุดช่วงเลเวล {Math.max(1, level - range)}–{level + range}
+          </h2>
+          <FarmingTable rows={rows} />
+        </div>
+      )}
+
+      <RecentlyViewed />
+      <SiteStats stats={stats} />
+
+      {/* Explore row: the sections the four cards do not cover. Chips, not
+          cards -- this row must stay quieter than the questions above it. */}
+      <div className="explorerow">
+        {/* No counts here: the live numbers sit in SiteStats right above, and
+            hardcoded copies drift the day the data changes. */}
+        <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
+        <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
+        <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>
+        <Link href="/database/skills" className="chiplink">สกิล</Link>
+        <Link href="/tools/farm-planner" className="chiplink">แผนฟาร์ม</Link>
+        <Link href="/database/maps" className="chiplink">แมพ</Link>
       </div>
     </main>
   );

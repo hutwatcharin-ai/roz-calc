@@ -579,6 +579,67 @@ table { border-collapse: collapse; width: 100%; }
 
 /* Entry cards at the foot of the home page. Capped at four by spec 6.2 so the
    page stays a tool with context around it rather than a link menu. */
+/* Homepage intent cards (2026-08-31 redesign, "แบบ 3+1"): four questions a
+   player actually has, first card embeds the working farming-finder form.
+   Neon drop shadows reuse the existing card accent trio. */
+.qgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+.qcard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 16px;
+  text-decoration: none;
+}
+.qcard--yellow { box-shadow: 4px 4px 0 var(--yellow); }
+.qcard--cyan { box-shadow: 4px 4px 0 var(--cyan); }
+.qcard--pink { box-shadow: 4px 4px 0 var(--pink); }
+a.qcard:hover { background: var(--panel-2); }
+.qcard strong { font: 700 16px/1.35 "Chakra Petch", sans-serif; color: var(--text); }
+.qcard span { font: 400 13px/1.6 "Sarabun", sans-serif; color: var(--faint); }
+.qcard__go { font: 600 13px/1 "Sarabun", sans-serif; font-style: normal; color: var(--yellow); margin-top: auto; padding-top: 8px; }
+.qcard__form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.qcard__form label { font: 500 13px/1.4 "Sarabun", sans-serif; color: var(--dim); white-space: nowrap; }
+.qcard__form input {
+  background: var(--panel-2);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  color: var(--text);
+  font: 500 14px/1.4 "Sarabun", sans-serif;
+  padding: 8px 10px;
+  min-height: 40px;
+}
+.qcard__form .btn { min-height: 40px; }
+
+.explorerow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.chiplink {
+  font: 600 13px/1 "Sarabun", sans-serif;
+  color: var(--dim);
+  background: var(--panel);
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 10px 14px;
+  text-decoration: none;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+.chiplink:hover { color: var(--text); border-color: var(--cyan); }
+
 .entrycards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
