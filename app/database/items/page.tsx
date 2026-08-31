@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
+import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import Pagination from '@/components/Pagination';
@@ -131,9 +132,7 @@ export default async function ItemListPage({
               <tr key={it.id}>
                 <td data-label="">
                   <Link href={`/database/items/${it.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {it.icon_url && (
-                      <img loading="lazy" decoding="async" src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
+                    <ItemIcon iconUrl={it.icon_url} category={it.category} />
                     {it.name_en}
                   </Link>
                 </td>

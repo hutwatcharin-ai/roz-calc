@@ -1067,3 +1067,17 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   color: var(--dim);
 }
 .disclose--row .disclose__body { padding: 0 0 6px; }
+
+/* Stand-in tile for items with no sprite on file. Same footprint as the real
+   24px icons so rows with and without art align. */
+.iconph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 1px solid var(--hair);
+  border-radius: 4px;
+  background: var(--panel-2);
+  color: var(--faint);
+  font: 600 10px/1 "IBM Plex Mono", ui-monospace, monospace;
+}

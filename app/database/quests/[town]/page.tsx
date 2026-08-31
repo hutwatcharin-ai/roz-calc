@@ -22,6 +22,9 @@ const TYPE_LABELS: Record<string, string> = {
 interface QuestRow {
   id: number;
   name: string;
+  name_th: string | null;
+  objective_th: string | null;
+  description_th: string | null;
   map_code: string | null;
   coord_x: number | null;
   coord_y: number | null;
@@ -45,7 +48,7 @@ export default async function QuestTownPage({ params }: { params: { town: string
   const db = supabaseBrowser();
   const { data, error } = await db
     .from('quests')
-    .select('id, name, map_code, coord_x, coord_y, zone, type, objective, description, chain_name, chain_next_id')
+    .select('id, name, name_th, map_code, coord_x, coord_y, zone, type, objective, objective_th, description, description_th, chain_name, chain_next_id')
     .eq('town_key', params.town)
     .order('id');
 
@@ -87,6 +90,7 @@ export default async function QuestTownPage({ params }: { params: { town: string
             <h2 className="section-title" style={{ margin: 0 }}>
               <a href={`#q${quest.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                 {quest.name}
+                {quest.name_th && <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}> · {quest.name_th}</span>}
               </a>
             </h2>
             <span className="tag">{TYPE_LABELS[quest.type] ?? quest.type}</span>
@@ -104,12 +108,24 @@ export default async function QuestTownPage({ params }: { params: { town: string
             )}
           </p>
 
-          {quest.objective && (
+          {/* Thai leads once translated; the English original stays visible in
+              small type because the in-game client is English -- a player has
+              to match names and objects against what the game shows them. */}
+          {(quest.objective_th ?? quest.objective) && (
             <p style={{ marginTop: 8 }}>
-              <strong>เป้าหมาย:</strong> {quest.objective}
+              <strong>เป้าหมาย:</strong> {quest.objective_th ?? quest.objective}
             </p>
           )}
-          {quest.description && <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>{quest.description}</p>}
+          {quest.description_th ? (
+            <>
+              <p style={{ marginTop: 8, maxWidth: '70ch' }}>{quest.description_th}</p>
+              {quest.description && (
+                <p className="muted" style={{ marginTop: 4, maxWidth: '70ch', fontSize: 13 }}>{quest.description}</p>
+              )}
+            </>
+          ) : (
+            quest.description && <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>{quest.description}</p>
+          )}
 
           {quest.chain_next_id !== null && (
             <p className="muted" style={{ marginTop: 8 }}>

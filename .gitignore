@@ -6,3 +6,4 @@ tsconfig.tsbuildinfo
 
 # Scratch measurement dumps from the Thai translation scripts
 *-gap.tsv
+docs/midgardhub-export/

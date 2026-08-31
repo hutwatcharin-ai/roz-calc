@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import RecordVisit from '@/components/RecordVisit';
+import ItemIcon from '@/components/ItemIcon';
 // app/database/items/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
@@ -126,15 +127,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       <RecordVisit kind="item" id={item.id} name={item.name_en} />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        {item.icon_url && (
-          <img
-            src={item.icon_url}
-            alt=""
-            width={48}
-            height={48}
-            style={{ imageRendering: 'pixelated' }}
-          />
-        )}
+        <ItemIcon iconUrl={item.icon_url} category={item.category} size={40} />
         <div>
           <h1 className="pagehead__title">{item.name_en}</h1>
           <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
