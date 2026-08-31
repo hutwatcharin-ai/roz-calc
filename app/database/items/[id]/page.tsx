@@ -126,37 +126,60 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       </nav>
       <RecordVisit kind="item" id={item.id} name={item.name_en} />
 
+      {/* The hero: a big sprite next to the name, and the stats as labelled
+          tiles rather than a prose line -- a reader scans ATK/price the way
+          they scan a stat window in game, not as a sentence (competitor-gap
+          note in memory, plan item 3). Tiles render only for stats the item
+          actually has: a potion page shows prices, not a wall of dashes. */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <ItemIcon iconUrl={item.icon_url} category={item.category} size={40} />
+        <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
         <div>
           <h1 className="pagehead__title">{item.name_en}</h1>
           <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
         </div>
       </div>
-      <div className="card" style={{ marginTop: 20 }}>
+
+      <div className="statgrid" style={{ marginTop: 20 }}>
         {item.atk !== null && (
-          <p>
-            ATK {item.atk}
-            {item.weapon_level !== null ? ` · Weapon Lv.${item.weapon_level}` : ''}
-            {item.required_level !== null ? ` · ใช้ได้ที่เลเวล ${item.required_level}` : ''}
-          </p>
+          <div className="statgrid__cell">
+            <span className="reward-label">ATK</span>
+            <span className="reward-value mono">{item.atk}</span>
+          </div>
         )}
-        {item.equippable_classes.length > 0 && <p>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>}
-        <div className="reward-row" style={{ marginTop: 12 }}>
-          <div>
-            <span className="reward-label">ราคาซื้อ</span>
-            <span className="reward-value mono">
-              {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
-            </span>
+        {item.weapon_level !== null && (
+          <div className="statgrid__cell">
+            <span className="reward-label">Weapon Lv</span>
+            <span className="reward-value mono">{item.weapon_level}</span>
           </div>
-          <div>
-            <span className="reward-label">ราคาขาย</span>
-            <span className="reward-value mono">
-              {item.sell_price === null ? '—' : item.sell_price.toLocaleString('en-US')}
-            </span>
+        )}
+        {item.required_level !== null && (
+          <div className="statgrid__cell">
+            <span className="reward-label">ใช้ได้ที่เลเวล</span>
+            <span className="reward-value mono">{item.required_level}</span>
           </div>
+        )}
+        <div className="statgrid__cell">
+          <span className="reward-label">ราคาซื้อ</span>
+          <span className="reward-value mono">
+            {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
+          </span>
         </div>
+        <div className="statgrid__cell">
+          <span className="reward-label">ราคาขาย</span>
+          <span className="reward-value mono">
+            {item.sell_price === null ? '—' : item.sell_price.toLocaleString('en-US')}
+          </span>
+        </div>
+        {item.weapon_level !== null && item.weapon_level >= 1 && (
+          <Link href="/tools/refine" className="statgrid__cell statgrid__cell--link">
+            <span className="reward-label">ตีบวกตัวนี้</span>
+            <span className="reward-value">คิดต้นทุน →</span>
+          </Link>
+        )}
       </div>
+      {item.equippable_classes.length > 0 && (
+        <p className="muted" style={{ marginTop: 10 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
+      )}
 
       {item.description && (
         <div className="card" style={{ marginTop: 20 }}>

@@ -118,38 +118,30 @@ export default async function ItemListPage({
         <button type="submit" className="btn">ค้นหา</button>
       </form>
 
+      {(items ?? []).length === 0 ? (
+        <div className="card">
+          <EmptyState what={q || undefined} clearHref="/database/items" />
+        </div>
+      ) : (
       <div className="card">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>ชื่อ</th>
-              <th>หมวด</th>
-              <th>ประเภทอาวุธ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(items ?? []).map((it) => (
-              <tr key={it.id}>
-                <td data-label="">
-                  <Link href={`/database/items/${it.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <ItemIcon iconUrl={it.icon_url} category={it.category} />
-                    {it.name_en}
-                  </Link>
-                </td>
-                <td data-label="หมวด">{it.category ?? '—'}</td>
-                <td data-label="ประเภทอาวุธ">{it.weapon_type ?? '—'}</td>
-              </tr>
-            ))}
-            {(items ?? []).length === 0 && (
-              <tr>
-                <td colSpan={3} style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  ไม่พบไอเทมที่ตรงเงื่อนไข
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+{/* A card grid, not a table: with sprites now mirrored for every item, the
+            icon carries recognition -- players know items by sprite before name.
+            Multi-column also makes 50 items shorter on a phone than the old
+            three-column table stack was (UX audit: item list was 5.7 screens). */}
+        <div className="itemgrid">
+          {(items ?? []).map((it) => (
+            <Link key={it.id} href={`/database/items/${it.id}`} className="itemcard">
+              <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />
+              <span className="itemcard__name">{it.name_en}</span>
+              <span className="itemcard__meta">
+                {it.category ?? '—'}
+                {it.weapon_type ? ` · ${it.weapon_type}` : ''}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
+      )}
 
       <Pagination page={page} totalPages={totalPages} buildHref={buildHref} total={count ?? 0} pageSize={PAGE_SIZE} />
     </main>

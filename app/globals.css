@@ -1081,3 +1081,56 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   color: var(--faint);
   font: 600 10px/1 "IBM Plex Mono", ui-monospace, monospace;
 }
+
+/* Labelled stat tiles on a detail page. Tiles only render for stats the item
+   has, so the grid is as wide as the item is interesting. */
+.statgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.statgrid__cell {
+  background: var(--panel);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.statgrid__cell--link { text-decoration: none; background: var(--panel-2); }
+.statgrid__cell--link:hover { background: var(--panel); }
+.statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
+
+/* Item browse grid. Recognition-first: sprite, then name, then category. */
+.itemgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 8px;
+}
+.itemcard {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  text-decoration: none;
+  min-height: 44px;
+}
+.itemcard:hover { border-color: var(--cyan); }
+.itemcard > :first-child { grid-row: 1 / 3; }
+.itemcard__name {
+  color: var(--text);
+  font: 500 13px/1.35 "Sarabun", sans-serif;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.itemcard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
