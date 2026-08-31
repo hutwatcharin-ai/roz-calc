@@ -4,6 +4,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
+import RecentlyViewed from '@/components/RecentlyViewed';
 import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 
@@ -24,11 +25,18 @@ const ELEMENTS = ['Earth', 'Fire', 'Ghost', 'Holy', 'Neutral', 'Poison', 'Shadow
 export default async function MonsterListPage({
   searchParams,
 }: {
-  searchParams: { q?: string; race?: string; element?: string; page?: string };
+  searchParams: { q?: string; race?: string; element?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   const race = searchParams.race ?? '';
   const element = searchParams.element ?? '';
+  // A whitelist, not a passthrough: the sort key goes into the query.
+  const SORTS = {
+    level: { label: 'เลเวลน้อยก่อน', column: 'level', ascending: true },
+    exp: { label: 'EXP มากก่อน', column: 'base_exp', ascending: false },
+    name: { label: 'ชื่อ A-Z', column: 'name_en', ascending: true },
+  } as const;
+  const sort = (searchParams.sort ?? 'level') in SORTS ? ((searchParams.sort ?? 'level') as keyof typeof SORTS) : 'level';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
   const db = supabaseBrowser();
@@ -44,7 +52,10 @@ export default async function MonsterListPage({
   if (element) query = query.eq('element', element);
 
   const from = (page - 1) * PAGE_SIZE;
-  const { data: monsters, count, error } = await query.order('level').range(from, from + PAGE_SIZE - 1);
+  const { data: monsters, count, error } = await query
+    .order(SORTS[sort].column, { ascending: SORTS[sort].ascending, nullsFirst: false })
+    .order('id')
+    .range(from, from + PAGE_SIZE - 1);
 
   if (error) {
     console.error('monsters list query failed', error);
@@ -57,6 +68,7 @@ export default async function MonsterListPage({
     if (q) params.set('q', q);
     if (race) params.set('race', race);
     if (element) params.set('element', element);
+    if (sort !== 'level') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/monsters${qs ? `?${qs}` : ''}`;
@@ -65,6 +77,7 @@ export default async function MonsterListPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader title="ฐานข้อมูลมอนสเตอร์" />
+      <RecentlyViewed />
 
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อมอนสเตอร์" aria-label="ค้นชื่อมอนสเตอร์" />
@@ -81,6 +94,13 @@ export default async function MonsterListPage({
           {ELEMENTS.map((e) => (
             <option key={e} value={e}>
               {e}
+            </option>
+          ))}
+        </select>
+        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
+          {Object.entries(SORTS).map(([key, s]) => (
+            <option key={key} value={key}>
+              เรียง: {s.label}
             </option>
           ))}
         </select>
@@ -140,7 +160,7 @@ export default async function MonsterListPage({
       </div>
       )}
 
-      <Pagination page={page} totalPages={totalPages} buildHref={buildHref} />
+      <Pagination page={page} totalPages={totalPages} buildHref={buildHref} total={count ?? 0} pageSize={PAGE_SIZE} />
     </main>
   );
 }

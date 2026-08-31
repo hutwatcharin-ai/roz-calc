@@ -11,6 +11,7 @@ import AddToPlanButton from '@/components/AddToPlanButton';
 import MonsterElementPanel from '@/components/MonsterElementPanel';
 import MonsterSizePanel from '@/components/MonsterSizePanel';
 import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
+import RecordVisit from '@/components/RecordVisit';
 
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
@@ -136,6 +137,16 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      {/* Half the visits to a detail page come from outside -- search, a shared
+          link -- where the browser back button leads off the site. The crumb is
+          the way up. */}
+      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
+        <Link href="/database/monsters">มอนสเตอร์</Link>
+        <span className="crumbs__sep" aria-hidden="true">›</span>
+        <span className="crumbs__here">{monster.name_en}</span>
+      </nav>
+      <RecordVisit kind="monster" id={monster.id} name={monster.name_en} />
+
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
         {monster.image_url && (
           <img src={monster.image_url} alt="" width={64} height={64} style={{ imageRendering: 'pixelated' }} />

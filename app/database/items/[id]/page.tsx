@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import RecordVisit from '@/components/RecordVisit';
 // app/database/items/[id]/page.tsx
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
@@ -116,6 +118,13 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
+        <Link href="/database/items">ไอเทม</Link>
+        <span className="crumbs__sep" aria-hidden="true">›</span>
+        <span className="crumbs__here">{item.name_en}</span>
+      </nav>
+      <RecordVisit kind="item" id={item.id} name={item.name_en} />
+
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
         {item.icon_url && (
           <img

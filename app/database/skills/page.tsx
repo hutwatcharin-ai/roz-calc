@@ -224,7 +224,7 @@ export default async function SkillsPage({
         </table>
       </div>
 
-      <Pagination page={safePage} totalPages={totalPages} buildHref={(p) => buildHref(p)} />
+      <Pagination page={safePage} totalPages={totalPages} buildHref={(p) => buildHref(p)} total={filtered.length} pageSize={PAGE_SIZE} />
 
       <p style={{ color: 'var(--faint)', marginTop: 24, fontSize: 13 }}>
         หน้านี้เป็นรายการสกิล ยังไม่ใช่ตัววางแผนบิลด์ — ตัววางแผนต้องใช้ข้อมูลเงื่อนไขสกิลที่ต้องลงก่อน

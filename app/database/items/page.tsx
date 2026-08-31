@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
+import RecentlyViewed from '@/components/RecentlyViewed';
 import Pagination from '@/components/Pagination';
 import { escapeLikePattern } from '@/lib/like-escape';
 
@@ -39,10 +40,16 @@ const CATEGORIES = [
 export default async function ItemListPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; page?: string };
+  searchParams: { q?: string; category?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   const category = searchParams.category ?? '';
+  const SORTS = {
+    id: { label: 'รหัสไอเทม', column: 'id', ascending: true },
+    name: { label: 'ชื่อ A-Z', column: 'name_en', ascending: true },
+    buy: { label: 'ราคาซื้อสูงก่อน', column: 'buy_price', ascending: false },
+  } as const;
+  const sort = (searchParams.sort ?? 'id') in SORTS ? ((searchParams.sort ?? 'id') as keyof typeof SORTS) : 'id';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
   const db = supabaseBrowser();
@@ -55,7 +62,10 @@ export default async function ItemListPage({
   if (category) query = query.eq('category', category);
 
   const from = (page - 1) * PAGE_SIZE;
-  const { data: items, count, error } = await query.order('id').range(from, from + PAGE_SIZE - 1);
+  const { data: items, count, error } = await query
+    .order(SORTS[sort].column, { ascending: SORTS[sort].ascending, nullsFirst: false })
+    .order('id')
+    .range(from, from + PAGE_SIZE - 1);
 
   if (error) {
     console.error('items list query failed', error);
@@ -67,6 +77,7 @@ export default async function ItemListPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (category) params.set('category', category);
+    if (sort !== 'id') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/items${qs ? `?${qs}` : ''}`;
@@ -75,6 +86,7 @@ export default async function ItemListPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader title="ฐานข้อมูลไอเทม" />
+      <RecentlyViewed />
       <FilterState
         count={count ?? 0}
         unit="ชิ้น"
@@ -92,6 +104,13 @@ export default async function ItemListPage({
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
               {c}
+            </option>
+          ))}
+        </select>
+        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
+          {Object.entries(SORTS).map(([key, s]) => (
+            <option key={key} value={key}>
+              เรียง: {s.label}
             </option>
           ))}
         </select>
@@ -133,7 +152,7 @@ export default async function ItemListPage({
         </table>
       </div>
 
-      <Pagination page={page} totalPages={totalPages} buildHref={buildHref} />
+      <Pagination page={page} totalPages={totalPages} buildHref={buildHref} total={count ?? 0} pageSize={PAGE_SIZE} />
     </main>
   );
 }

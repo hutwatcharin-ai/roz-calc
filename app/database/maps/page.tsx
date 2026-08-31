@@ -156,7 +156,7 @@ export default async function MapsPage({
         </table>
       </div>
 
-      <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} />
+      <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} total={count ?? 0} pageSize={PAGE_SIZE} />
     </main>
   );
 }

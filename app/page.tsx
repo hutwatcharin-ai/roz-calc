@@ -2,6 +2,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import FarmingTable from '@/components/FarmingTable';
 import Link from 'next/link';
 import SiteStats, { getSiteStats } from '@/components/SiteStats';
+import RecentlyViewed from '@/components/RecentlyViewed';
 
 export const metadata = {
   title: 'หามอนสเตอร์คุ้มสุดสำหรับเลเวลของคุณ',
@@ -81,6 +82,8 @@ export default async function HomePage({
         </label>
         <button type="submit" className="btn">ค้นหา</button>
       </form>
+      <RecentlyViewed />
+
       <div className="panel">
         <FarmingTable rows={rows} />
       </div>

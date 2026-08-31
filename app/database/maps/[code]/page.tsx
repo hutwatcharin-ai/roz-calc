@@ -59,6 +59,12 @@ export default async function MapDetailPage({ params }: { params: { code: string
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
+        <Link href="/database/maps">แมพ</Link>
+        <span className="crumbs__sep" aria-hidden="true">›</span>
+        <span className="crumbs__here">{name}</span>
+      </nav>
+
       <h1 className="pagehead__title">{name}</h1>
       <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>{code}</p>
       <p style={{ color: 'var(--dim)', marginTop: 10 }}>มอนสเตอร์ {monsters.length} ชนิดในแมพนี้</p>

@@ -171,7 +171,7 @@ export default async function CardsPage({
         </table>
       </div>
 
-      <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} />
+      <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} total={filtered.length} pageSize={PAGE_SIZE} />
     </main>
   );
 }
