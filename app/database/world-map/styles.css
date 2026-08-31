@@ -1,5 +1,4 @@
-
-/* Interactive world atlas */
+/* Interactive tile atlas */
 .worldmap-page { padding-block: 28px 36px; }
 .worldmap-page__warning { margin-bottom: 12px; padding: 9px 12px; border: 1px solid var(--yellow); color: var(--yellow); border-radius: var(--radius); }
 .worldmap-page__foot { margin-top: 14px; color: var(--dim); font-size: 14px; }
@@ -8,69 +7,80 @@
 .worldmap__toolbar { display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--hair); }
 .worldmap__search { flex: 1; }
 .worldmap__search input { width: 100%; }
-.worldmap__match { color: var(--faint); font-size: 13px; white-space: nowrap; }
+.worldmap__match { color: var(--faint); font: 600 12px/1.4 "IBM Plex Mono", monospace; white-space: nowrap; }
 .worldmap__jump { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--hair); background: var(--panel-2); }
 .worldmap__jump > strong { color: var(--faint); font: 700 10px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; white-space: nowrap; }
 .worldmap__jump > div { display: flex; gap: 5px; overflow-x: auto; scrollbar-width: thin; padding-block: 2px; }
-.worldmap__jumpbtn { flex: none; padding: 5px 9px; border: 1px solid var(--hair); border-radius: 999px; background: var(--panel); color: var(--dim); font: 600 12px/1.2 "Sarabun", sans-serif; cursor: pointer; }
-.worldmap__jumpbtn:hover, .worldmap__jumpbtn[aria-pressed="true"] { color: var(--text); background: var(--ground); }
-.worldmap__jumpbtn--city { border-color: var(--yellow); }
-.worldmap__jumpbtn--dungeon { border-color: var(--pink); }
-.worldmap__jumpbtn--field { border-color: var(--cyan); border-style: dashed; }
+.worldmap__jump button { --region: var(--cyan); flex: none; padding: 5px 9px; border: 1px solid color-mix(in srgb, var(--region) 75%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--region) 11%, var(--panel)); color: var(--text); font: 600 12px/1.2 "Sarabun", sans-serif; cursor: pointer; }
+.worldmap__jump button:hover, .worldmap__jump button:focus-visible { outline: 2px solid var(--region); outline-offset: 1px; }
 .worldmap__legend { display: flex; align-items: center; gap: 5px; color: var(--faint); font-size: 10px; white-space: nowrap; }
-.worldmap__legend i { width: 8px; height: 8px; border-radius: 2px; background: var(--cyan); }
-.worldmap__legend .is-city { background: var(--yellow); }
-.worldmap__legend .is-dungeon { background: var(--pink); }
-.worldmap__legend .is-field { background: var(--cyan); }
-.worldmap__layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; min-height: min(68vh, 720px); }
-.worldmap__viewport { position: relative; min-height: 590px; overflow: hidden; background: #080617; cursor: grab; touch-action: none; user-select: none; }
+.worldmap__legend i { width: 10px; height: 10px; border: 1px solid var(--cyan); border-radius: 2px; background: color-mix(in srgb, var(--cyan) 22%, transparent); }
+.worldmap__legend .is-dungeon { width: 16px; border-color: var(--pink); background: var(--pink); }
+.worldmap__layout { display: grid; grid-template-columns: minmax(0,1fr) 320px; min-height: min(72vh, 760px); }
+.worldmap__viewport { position: relative; min-height: 620px; overflow: hidden; background: #080617; cursor: grab; touch-action: none; user-select: none; }
 .worldmap__viewport:active { cursor: grabbing; }
 .worldmap__stage { position: absolute; inset: 0 auto auto 0; width: 1280px; height: 1024px; transform-origin: 0 0; will-change: transform; }
 .worldmap__stage > img { display: block; width: 1280px; height: 1024px; pointer-events: none; }
-.worldmap__pin { position: absolute; display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 2px 5px; border: 2px solid var(--cyan); border-radius: 6px; background: rgba(11,8,32,.78); color: #fff; font: 700 12px/1.15 "Sarabun", sans-serif; cursor: pointer; box-shadow: 0 0 0 2px rgba(11,8,32,.55); transition: opacity .18s, filter .18s, background .18s; }
-.worldmap__pin span { text-shadow: 0 1px 2px #000; }
-.worldmap__pin b { position: absolute; right: -7px; top: -9px; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--yellow); color: var(--yellow-ink); font: 800 11px/1 "IBM Plex Mono", monospace; }
-.worldmap__pin--city { border-color: var(--yellow); }
-.worldmap__pin--dungeon { border-color: var(--pink); }
-.worldmap__pin--field { border-style: dashed; }
-.worldmap__pin:hover, .worldmap__pin:focus-visible, .worldmap__pin.is-selected { z-index: 3; outline: none; background: var(--panel-2); box-shadow: 0 0 0 3px var(--text), 0 0 22px var(--cyan); }
-.worldmap__pin.is-dimmed { opacity: .16; }
-.worldmap__pin.is-match { z-index: 4; animation: worldmap-pulse 1.1s ease-in-out infinite alternate; }
-@keyframes worldmap-pulse { to { filter: brightness(1.6); box-shadow: 0 0 24px var(--yellow); } }
-.worldmap__controls { position: absolute; z-index: 8; right: 12px; bottom: 12px; display: flex; gap: 5px; }
+.worldmap__region-label { position: absolute; z-index: 3; translate: -50% calc(-100% - 7px); font: 800 15px/1 "Chakra Petch", sans-serif; white-space: nowrap; text-shadow: 0 2px 4px #000, 0 0 10px #000; pointer-events: none; }
+.worldmap__tile { --region: var(--cyan); position: absolute; z-index: 2; translate: -50% -50%; padding: 0; border: 1.5px solid var(--region); border-radius: 2px; background: color-mix(in srgb, var(--region) 17%, transparent); cursor: pointer; box-shadow: inset 0 0 10px rgba(0,0,0,.16); transition: opacity .15s, filter .15s, background .15s, box-shadow .15s; }
+.worldmap__tile:hover, .worldmap__tile:focus-visible, .worldmap__tile.is-selected { z-index: 8; outline: none; background: color-mix(in srgb, var(--region) 38%, transparent); box-shadow: 0 0 0 3px rgba(255,255,255,.72), 0 0 18px var(--region); }
+.worldmap__tile.is-dimmed, .worldmap__dungeon.is-dimmed { opacity: .1; }
+.worldmap__tile.is-match, .worldmap__dungeon.is-match { z-index: 9; filter: brightness(1.8); box-shadow: 0 0 18px var(--yellow); }
+.worldmap__routes { position: absolute; inset: 0; z-index: 4; width: 1280px; height: 1024px; pointer-events: none; }
+.worldmap__routes line { stroke: color-mix(in srgb, var(--pink) 75%, transparent); stroke-width: 2; }
+.worldmap__dungeon { position: absolute; z-index: 5; translate: -50% -50%; padding: 4px 8px; border: 1px solid #ff9bca; border-radius: 4px; background: #a71359; color: #fff; font: 800 11px/1.1 "Sarabun", sans-serif; white-space: nowrap; cursor: pointer; box-shadow: 0 2px 7px rgba(0,0,0,.65); }
+.worldmap__dungeon:hover, .worldmap__dungeon:focus-visible, .worldmap__dungeon.is-selected { z-index: 9; outline: 2px solid #fff; outline-offset: 2px; box-shadow: 0 0 18px var(--pink); }
+.worldmap__tooltip { position: absolute; z-index: 30; width: 226px; padding: 11px 12px; border: 1px solid rgba(244,242,255,.28); border-radius: 8px; background: rgba(21,14,51,.97); color: var(--text); box-shadow: 0 10px 34px rgba(0,0,0,.6); transform-origin: top left; pointer-events: none; }
+.worldmap__tooltip.is-pinned { pointer-events: auto; }
+.worldmap__tooltip-region { display: block; margin-bottom: 4px; font: 800 10px/1 "IBM Plex Mono", monospace; letter-spacing: .06em; text-transform: uppercase; }
+.worldmap__tooltip strong { display: block; font: 700 15px/1.25 "Chakra Petch", sans-serif; }
+.worldmap__tooltip code { display: block; margin: 2px 0 8px; color: var(--faint); font-size: 10px; }
+.worldmap__tooltip-icons { display: flex; min-height: 30px; align-items: center; gap: 4px; flex-wrap: wrap; }
+.worldmap__tooltip-icons img { object-fit: contain; image-rendering: pixelated; }
+.worldmap__tooltip-icons span { color: var(--dim); font-size: 11px; font-weight: 700; }
+.worldmap__tooltip-icons em { color: var(--faint); font-size: 11px; font-style: normal; }
+.worldmap__tooltip small { display: block; margin-top: 7px; color: var(--dim); font-size: 10px; }
+.worldmap__tooltip a { display: inline-block; margin-top: 8px; color: var(--cyan); font-size: 11px; font-weight: 700; text-decoration: none; }
+.worldmap__controls { position: absolute; z-index: 40; right: 12px; bottom: 12px; display: flex; gap: 5px; }
 .worldmap__controls button, .worldmap__close { border: 1px solid var(--hair); background: var(--panel); color: var(--text); cursor: pointer; }
 .worldmap__controls button { min-width: 42px; height: 42px; padding-inline: 10px; border-radius: 6px; font: 700 16px/1 "IBM Plex Mono", monospace; }
 .worldmap__controls button:last-child { font-size: 11px; }
 .worldmap__controls button:hover { border-color: var(--cyan); }
-.worldmap__hint { position: absolute; left: 12px; bottom: 12px; padding: 5px 8px; border-radius: 4px; background: rgba(11,8,32,.82); color: var(--dim); font-size: 12px; pointer-events: none; }
+.worldmap__hint { position: absolute; left: 12px; bottom: 12px; z-index: 20; padding: 5px 8px; border-radius: 4px; background: rgba(11,8,32,.86); color: var(--dim); font-size: 12px; pointer-events: none; }
 .worldmap__panel { position: relative; padding: 22px; border-left: 1px solid var(--hair); background: var(--panel); overflow-y: auto; }
 .worldmap__empty { display: grid; place-content: center; min-height: 100%; text-align: center; color: var(--dim); }
 .worldmap__empty strong { color: var(--text); font-family: "Chakra Petch", sans-serif; }
 .worldmap__empty p { margin-top: 8px; font-size: 14px; }
 .worldmap__close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; font-size: 22px; }
-.worldmap__eyebrow { color: var(--cyan); font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
-.worldmap__panel h2 { margin-top: 7px; font: 700 25px/1.2 "Chakra Petch", sans-serif; }
-.worldmap__english { color: var(--faint); font-size: 13px; }
+.worldmap__eyebrow { color: var(--cyan); font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; }
+.worldmap__panel h2 { margin-top: 7px; padding-right: 28px; font: 700 25px/1.2 "Chakra Petch", sans-serif; }
+.worldmap__code { margin-top: 4px; color: var(--faint); font-size: 12px; }
 .worldmap__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 18px 0; background: var(--hair); }
 .worldmap__stats div { padding: 10px; background: var(--panel-2); }
 .worldmap__stats dt { color: var(--faint); font-size: 11px; }
 .worldmap__stats dd { margin: 2px 0 0; font-weight: 700; }
-.worldmap__kafra { margin-bottom: 18px; padding: 10px; border-left: 3px solid var(--yellow); background: var(--panel-2); color: var(--dim); font-size: 13px; }
-.worldmap__kafra strong { color: var(--yellow); }
 .worldmap__panel h3 { font-size: 15px; }
-.worldmap__maplist { margin: 8px 0 0; padding: 0; list-style: none; }
-.worldmap__maplist li { border-top: 1px solid var(--hair); }
-.worldmap__maplist a, .worldmap__maplist li > span { display: flex; justify-content: space-between; padding: 8px 2px; color: var(--text); text-decoration: none; }
-.worldmap__maplist a:hover { color: var(--cyan); }
+.worldmap__monsters { display: grid; gap: 1px; max-height: 300px; margin: 8px 0 16px; padding: 0; overflow-y: auto; list-style: none; background: var(--hair); }
+.worldmap__monsters li { background: var(--panel-2); }
+.worldmap__monsters a { display: flex; align-items: center; gap: 9px; padding: 7px 9px; color: var(--text); text-decoration: none; }
+.worldmap__monsters a:hover { background: color-mix(in srgb, var(--cyan) 8%, var(--panel-2)); }
+.worldmap__monsters img { object-fit: contain; image-rendering: pixelated; }
+.worldmap__monsters span { display: flex; min-width: 0; flex-direction: column; }
+.worldmap__monsters strong { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.worldmap__monsters small { color: var(--faint); font-size: 10px; }
+.worldmap__none { padding: 12px; color: var(--faint); font-size: 12px; }
+.worldmap__open { display: block; text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (max-width: 760px) {
   .worldmap__toolbar { align-items: stretch; flex-direction: column; gap: 5px; }
+  .worldmap__match { white-space: normal; }
   .worldmap__jump { grid-template-columns: 1fr; gap: 5px; }
   .worldmap__legend { display: none; }
   .worldmap__layout { display: block; min-height: 0; }
-  .worldmap__viewport { min-height: 58vh; }
-  .worldmap__panel { display: none; position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; max-height: 62vh; border: 1px solid var(--hair); border-radius: 16px 16px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,.55); }
+  .worldmap__viewport { min-height: 62vh; }
+  .worldmap__panel { display: none; position: fixed; z-index: 60; left: 0; right: 0; bottom: 0; max-height: 68vh; border: 1px solid var(--hair); border-radius: 16px 16px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,.65); }
   .worldmap__panel.is-open { display: block; }
-  .worldmap__hint { display: none; }
+  .worldmap__hint { left: 8px; bottom: 8px; max-width: 170px; font-size: 10px; }
+  .worldmap__tooltip { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .worldmap__pin.is-match { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .worldmap__tile, .worldmap__dungeon { transition: none; } }
