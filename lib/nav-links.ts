@@ -10,6 +10,10 @@ export type NavSection = 'database' | 'tools' | null;
 export interface NavLink {
   href: string;
   label: string;
+  // A game-item sprite shown before the label (midgardhub-style). Paths are
+  // OUR mirrored sprites under public/images -- never a hotlink. Optional:
+  // the primary row stays text-only.
+  icon?: string;
   // False for a route that does not exist yet. An unready link renders as
   // plain text -- present so players know it is coming, but never a clickable
   // href to a page that 404s. A Wave 2 task flips this to true the day the
@@ -29,23 +33,30 @@ export const PRIMARY_LINKS: NavLink[] = [
 // are ready, and so are all three tools routes. A route added later renders
 // as unready text until its page ships.
 export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
+  // Ordered by use: hunting flow first, biggest catalogs next. Icons are
+  // recognisable vanilla items so a player reads the row without the words:
+  // Poring, Sword, Poring Card, Red Potion, Emperium, Fly Wing, Butterfly
+  // Wing, Old Magicbook.
   database: [
-    { href: '/database/monsters', label: 'มอนสเตอร์', ready: true },
-    { href: '/database/items', label: 'ไอเทม', ready: true },
-    { href: '/database/cards', label: 'การ์ด', ready: true },
-    { href: '/database/equipment', label: 'อุปกรณ์', ready: true },
-    { href: '/database/skills', label: 'สกิล', ready: true },
-    { href: '/database/maps', label: 'แมพ', ready: true },
-    { href: '/database/quests', label: 'เควส', ready: true },
+    { href: '/database/monsters', label: 'มอนสเตอร์', icon: '/images/monsters/1002.gif', ready: true },
+    { href: '/database/equipment', label: 'อุปกรณ์', icon: '/images/items/1101.gif', ready: true },
+    { href: '/database/cards', label: 'การ์ด', icon: '/images/items/4001.gif', ready: true },
+    { href: '/database/items', label: 'ไอเทม', icon: '/images/items/501.gif', ready: true },
+    { href: '/database/quests', label: 'เควส', icon: '/images/items/714.gif', ready: true },
+    { href: '/database/maps', label: 'แมพ', icon: '/images/items/601.gif', ready: true },
+    { href: '/database/world-map', label: 'แผนที่โลก', icon: '/images/items/602.gif', ready: true },
+    { href: '/database/skills', label: 'สกิล', icon: '/images/items/7433.gif', ready: true },
   ],
+  // Red Blood (element stone), Apple, Yggdrasil Leaf, Branch of Dead Tree,
+  // Elunium, Knife, Yggdrasil Berry.
   tools: [
-    { href: '/tools/elements', label: 'ตารางธาตุ', ready: true },
-    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', ready: true },
-    { href: '/tools/afk-finder', label: 'หาจุด AFK', ready: true },
-    { href: '/tools/sizes', label: 'ตารางขนาด', ready: true },
-    { href: '/tools/refine', label: 'ตีบวก', ready: true },
-    { href: '/tools/damage', label: 'ตีด้วยอะไรดี', ready: true },
-    { href: '/tools/exp', label: 'EXP ต่อเลเวล', ready: true },
+    { href: '/tools/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
+    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
+    { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
+    { href: '/tools/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
+    { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
+    { href: '/tools/damage', label: 'ตีด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
+    { href: '/tools/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
   ],
 };
 

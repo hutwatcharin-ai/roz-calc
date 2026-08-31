@@ -113,17 +113,18 @@ describe('link tables', () => {
     expect(PRIMARY_LINKS.map((l) => l.href)).toContain('/drop-finder');
   });
 
-  it('lists the seven database pages', () => {
-    // Six from the v2 spec plus quests, added 31 Aug from the rozerodb export
-    // (spec 2026-08-31-quests).
+  it('lists the eight database pages in browse order', () => {
+    // Reordered 31 Aug for the section split: hunting flow first, then the
+    // catalogs by size, world map added the day it shipped.
     expect(SECTION_LINKS.database.map((l) => l.href)).toEqual([
       '/database/monsters',
-      '/database/items',
-      '/database/cards',
       '/database/equipment',
-      '/database/skills',
-      '/database/maps',
+      '/database/cards',
+      '/database/items',
       '/database/quests',
+      '/database/maps',
+      '/database/world-map',
+      '/database/skills',
     ]);
   });
 

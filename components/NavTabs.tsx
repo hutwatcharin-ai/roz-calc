@@ -54,6 +54,10 @@ export default function NavTabs() {
                 className={isActiveLink(link.href, pathname) ? 'on' : undefined}
                 aria-current={isActiveLink(link.href, pathname) ? 'page' : undefined}
               >
+                {link.icon && (
+                  // Decorative: the label right next to it says the same thing.
+                  <img className="subnav__icon" src={link.icon} alt="" width={16} height={16} />
+                )}
                 {link.label}
               </Link>
             ) : (

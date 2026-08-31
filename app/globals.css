@@ -78,6 +78,16 @@ table { border-collapse: collapse; width: 100%; }
   padding: 5px 9px;
 }
 
+/* Game-item sprite before each subnav label (midgardhub-style, but every
+   sprite is our own mirrored file). Pixelated so the 16px scale stays crisp;
+   slightly dimmed until the row is active or hovered. */
+.subnav__icon {
+  image-rendering: pixelated;
+  flex: none;
+  opacity: 0.8;
+}
+.subnav a.on .subnav__icon, .subnav a:hover .subnav__icon { opacity: 1; }
+
 .panel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card { border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); padding: 18px; }
 .card--pink { box-shadow: 4px 4px 0 var(--pink); }
@@ -142,6 +152,9 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .subnav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 5px 9px;
   border-radius: 6px;
   font: 500 13px/1.6 "Sarabun", sans-serif;
