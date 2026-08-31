@@ -99,7 +99,7 @@ export default async function HomePage({
         </Link>
         <Link href="/tools/afk-finder" className="entrycard">
           <strong>หาจุด AFK</strong>
-          <span>มอนที่ไม่เข้าตีเองและตายในหมัดเดียว สำหรับปล่อยบอททิ้งไว้</span>
+          <span>มอนที่ไม่โจมตีก่อนและตายในหมัดเดียว สำหรับปล่อยบอททิ้งไว้</span>
         </Link>
         <Link href="/tools/farm-planner" className="entrycard">
           <strong>แผนฟาร์ม</strong>

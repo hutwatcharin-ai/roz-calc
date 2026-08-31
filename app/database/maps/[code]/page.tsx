@@ -77,7 +77,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
               <th className="num">Lv</th>
               <th className="num">HP</th>
               <th className="num">Base EXP</th>
-              <th>เข้าตีเอง</th>
+              <th>โจมตีก่อน</th>
             </tr>
           </thead>
           <tbody>
@@ -95,7 +95,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
                 {/* hp and base_exp of 0 are the unknown-value sentinels, not real zeros. */}
                 <td data-label="HP" className="num">{m.hp > 0 ? m.hp.toLocaleString('en-US') : '—'}</td>
                 <td data-label="Base EXP" className="num">{m.base_exp > 0 ? m.base_exp.toLocaleString('en-US') : '—'}</td>
-                <td data-label="เข้าตีเอง">
+                <td data-label="โจมตีก่อน">
                   <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
                 </td>
               </tr>

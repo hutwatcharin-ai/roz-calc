@@ -1,0 +1,860 @@
+{
+  "regions": {
+    "umbala": {
+      "label": "Umbala",
+      "x": 332,
+      "y": 688,
+      "color": "#4d7c0f"
+    },
+    "geffen": {
+      "label": "Geffen",
+      "x": 606,
+      "y": 557,
+      "color": "#7c3aed"
+    },
+    "lutie": {
+      "label": "Lutie / Xmas",
+      "x": 825,
+      "y": 934,
+      "color": "#0e7490"
+    },
+    "prontera": {
+      "label": "Prontera",
+      "x": 841,
+      "y": 615,
+      "color": "#ae2012"
+    },
+    "alberta": {
+      "label": "Alberta",
+      "x": 1086,
+      "y": 939,
+      "color": "#0369a1"
+    },
+    "mjolnir": {
+      "label": "Mjolnir",
+      "x": 763,
+      "y": 469,
+      "color": "#78350f"
+    },
+    "morocc": {
+      "label": "Morocc",
+      "x": 631,
+      "y": 869,
+      "color": "#b45309"
+    },
+    "izlude": {
+      "label": "Izlude",
+      "x": 887,
+      "y": 660,
+      "color": "#059669"
+    },
+    "payon": {
+      "label": "Payon",
+      "x": 990,
+      "y": 775,
+      "color": "#0e7490"
+    },
+    "comodo": {
+      "label": "Comodo",
+      "x": 327,
+      "y": 864,
+      "color": "#0891b2"
+    },
+    "aldebaran": {
+      "label": "Al De Baran",
+      "x": 841,
+      "y": 322,
+      "color": "#334155"
+    }
+  },
+  "tiles": {
+    "prt_fild00": {
+      "x": 724,
+      "y": 557,
+      "region": "prontera",
+      "w": 57,
+      "h": 58
+    },
+    "prt_fild01": {
+      "x": 841,
+      "y": 557,
+      "region": "prontera",
+      "w": 58,
+      "h": 58
+    },
+    "prt_fild02": {
+      "x": 899,
+      "y": 557,
+      "region": "prontera",
+      "w": 56,
+      "h": 58
+    },
+    "prt_fild03": {
+      "x": 957,
+      "y": 549,
+      "region": "prontera",
+      "w": 58,
+      "h": 42
+    },
+    "prt_fild04": {
+      "x": 724,
+      "y": 615,
+      "region": "prontera",
+      "w": 57,
+      "h": 56
+    },
+    "prt_fild05": {
+      "x": 782,
+      "y": 615,
+      "region": "prontera",
+      "w": 58,
+      "h": 56
+    },
+    "prt_fild06": {
+      "x": 899,
+      "y": 615,
+      "region": "prontera",
+      "w": 56,
+      "h": 56
+    },
+    "prt_fild07": {
+      "x": 782,
+      "y": 673,
+      "region": "prontera",
+      "w": 58,
+      "h": 57
+    },
+    "prt_fild08": {
+      "x": 841,
+      "y": 673,
+      "region": "prontera",
+      "w": 58,
+      "h": 57
+    },
+    "prt_fild09": {
+      "x": 782,
+      "y": 731,
+      "region": "prontera",
+      "w": 58,
+      "h": 58
+    },
+    "prt_fild10": {
+      "x": 724,
+      "y": 731,
+      "region": "prontera",
+      "w": 57,
+      "h": 58
+    },
+    "prt_fild11": {
+      "x": 665,
+      "y": 731,
+      "region": "prontera",
+      "w": 58,
+      "h": 58
+    },
+    "gef_fild00": {
+      "x": 665,
+      "y": 557,
+      "region": "geffen",
+      "w": 58,
+      "h": 58
+    },
+    "gef_fild01": {
+      "x": 665,
+      "y": 615,
+      "region": "geffen",
+      "w": 58,
+      "h": 56
+    },
+    "gef_fild02": {
+      "x": 724,
+      "y": 673,
+      "region": "geffen",
+      "w": 57,
+      "h": 57
+    },
+    "gef_fild03": {
+      "x": 665,
+      "y": 673,
+      "region": "geffen",
+      "w": 58,
+      "h": 57
+    },
+    "gef_fild04": {
+      "x": 606,
+      "y": 498,
+      "region": "geffen",
+      "w": 59,
+      "h": 58
+    },
+    "gef_fild05": {
+      "x": 547,
+      "y": 498,
+      "region": "geffen",
+      "w": 57,
+      "h": 58
+    },
+    "gef_fild06": {
+      "x": 489,
+      "y": 498,
+      "region": "geffen",
+      "w": 57,
+      "h": 58
+    },
+    "gef_fild07": {
+      "x": 547,
+      "y": 557,
+      "region": "geffen",
+      "w": 57,
+      "h": 58
+    },
+    "gef_fild08": {
+      "x": 489,
+      "y": 557,
+      "region": "geffen",
+      "w": 57,
+      "h": 58
+    },
+    "gef_fild09": {
+      "x": 606,
+      "y": 615,
+      "region": "geffen",
+      "w": 59,
+      "h": 56
+    },
+    "gef_fild10": {
+      "x": 606,
+      "y": 673,
+      "region": "geffen",
+      "w": 59,
+      "h": 57
+    },
+    "gef_fild11": {
+      "x": 606,
+      "y": 731,
+      "region": "geffen",
+      "w": 59,
+      "h": 58
+    },
+    "pay_fild01": {
+      "x": 965,
+      "y": 833,
+      "region": "payon",
+      "w": 58,
+      "h": 57
+    },
+    "pay_fild02": {
+      "x": 982,
+      "y": 900,
+      "region": "payon",
+      "w": 43,
+      "h": 62
+    },
+    "pay_fild03": {
+      "x": 1031,
+      "y": 908,
+      "region": "payon",
+      "w": 54,
+      "h": 46
+    },
+    "pay_fild04": {
+      "x": 899,
+      "y": 731,
+      "region": "payon",
+      "w": 56,
+      "h": 58
+    },
+    "pay_fild06": {
+      "x": 1031,
+      "y": 961,
+      "region": "payon",
+      "w": 54,
+      "h": 57
+    },
+    "pay_fild07": {
+      "x": 1024,
+      "y": 833,
+      "region": "payon",
+      "w": 58,
+      "h": 57
+    },
+    "pay_fild08": {
+      "x": 1034,
+      "y": 775,
+      "region": "payon",
+      "w": 39,
+      "h": 57
+    },
+    "pay_fild09": {
+      "x": 1084,
+      "y": 775,
+      "region": "payon",
+      "w": 59,
+      "h": 57
+    },
+    "pay_fild10": {
+      "x": 1084,
+      "y": 833,
+      "region": "payon",
+      "w": 59,
+      "h": 57
+    },
+    "moc_fild01": {
+      "x": 841,
+      "y": 731,
+      "region": "morocc",
+      "w": 58,
+      "h": 58
+    },
+    "moc_fild02": {
+      "x": 882,
+      "y": 785,
+      "region": "morocc",
+      "w": 48,
+      "h": 48
+    },
+    "moc_fild03": {
+      "x": 909,
+      "y": 839,
+      "region": "morocc",
+      "w": 52,
+      "h": 58
+    },
+    "moc_fild07": {
+      "x": 631,
+      "y": 815,
+      "region": "morocc",
+      "w": 56,
+      "h": 59
+    },
+    "moc_fild11": {
+      "x": 689,
+      "y": 922,
+      "region": "morocc",
+      "w": 57,
+      "h": 56
+    },
+    "moc_fild12": {
+      "x": 631,
+      "y": 922,
+      "region": "morocc",
+      "w": 56,
+      "h": 56
+    },
+    "moc_fild13": {
+      "x": 859,
+      "y": 839,
+      "region": "morocc",
+      "w": 46,
+      "h": 58
+    },
+    "moc_fild16": {
+      "x": 747,
+      "y": 968,
+      "region": "morocc",
+      "w": 58,
+      "h": 57
+    },
+    "moc_fild17": {
+      "x": 689,
+      "y": 980,
+      "region": "morocc",
+      "w": 57,
+      "h": 58
+    },
+    "moc_fild18": {
+      "x": 631,
+      "y": 980,
+      "region": "morocc",
+      "w": 56,
+      "h": 58
+    },
+    "cmd_fild01": {
+      "x": 396,
+      "y": 864,
+      "region": "comodo",
+      "w": 58,
+      "h": 58
+    },
+    "cmd_fild02": {
+      "x": 396,
+      "y": 922,
+      "region": "comodo",
+      "w": 58,
+      "h": 56
+    },
+    "cmd_fild03": {
+      "x": 455,
+      "y": 864,
+      "region": "comodo",
+      "w": 57,
+      "h": 58
+    },
+    "cmd_fild04": {
+      "x": 455,
+      "y": 922,
+      "region": "comodo",
+      "w": 57,
+      "h": 56
+    },
+    "cmd_fild06": {
+      "x": 514,
+      "y": 922,
+      "region": "comodo",
+      "w": 59,
+      "h": 56
+    },
+    "cmd_fild07": {
+      "x": 514,
+      "y": 980,
+      "region": "comodo",
+      "w": 59,
+      "h": 58
+    },
+    "cmd_fild08": {
+      "x": 573,
+      "y": 922,
+      "region": "comodo",
+      "w": 58,
+      "h": 56
+    },
+    "cmd_fild09": {
+      "x": 573,
+      "y": 980,
+      "region": "comodo",
+      "w": 58,
+      "h": 58
+    },
+    "um_fild01": {
+      "x": 268,
+      "y": 805,
+      "region": "umbala",
+      "w": 57,
+      "h": 58
+    },
+    "um_fild02": {
+      "x": 327,
+      "y": 805,
+      "region": "umbala",
+      "w": 59,
+      "h": 58
+    },
+    "um_fild03": {
+      "x": 387,
+      "y": 805,
+      "region": "umbala",
+      "w": 59,
+      "h": 58
+    },
+    "um_fild04": {
+      "x": 327,
+      "y": 746,
+      "region": "umbala",
+      "w": 59,
+      "h": 58
+    },
+    "mjolnir_01": {
+      "x": 606,
+      "y": 440,
+      "region": "mjolnir",
+      "w": 59,
+      "h": 57
+    },
+    "mjolnir_02": {
+      "x": 665,
+      "y": 440,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 57
+    },
+    "mjolnir_03": {
+      "x": 724,
+      "y": 440,
+      "region": "mjolnir",
+      "w": 57,
+      "h": 57
+    },
+    "mjolnir_04": {
+      "x": 782,
+      "y": 440,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 57
+    },
+    "mjolnir_05": {
+      "x": 841,
+      "y": 440,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 57
+    },
+    "mjolnir_06": {
+      "x": 665,
+      "y": 498,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 58
+    },
+    "mjolnir_07": {
+      "x": 724,
+      "y": 498,
+      "region": "mjolnir",
+      "w": 57,
+      "h": 58
+    },
+    "mjolnir_08": {
+      "x": 782,
+      "y": 498,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 58
+    },
+    "mjolnir_09": {
+      "x": 782,
+      "y": 557,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 58
+    },
+    "mjolnir_10": {
+      "x": 841,
+      "y": 498,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 58
+    },
+    "mjolnir_11": {
+      "x": 899,
+      "y": 498,
+      "region": "mjolnir",
+      "w": 56,
+      "h": 58
+    },
+    "mjolnir_12": {
+      "x": 841,
+      "y": 381,
+      "region": "mjolnir",
+      "w": 58,
+      "h": 58
+    },
+    "xmas_fild01": {
+      "x": 825,
+      "y": 991,
+      "region": "lutie",
+      "w": 59,
+      "h": 55
+    },
+    "gld_dun01": {
+      "x": 804,
+      "y": 667,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun01_2": {
+      "x": 818,
+      "y": 667,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun02": {
+      "x": 834,
+      "y": 667,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun02_2": {
+      "x": 848,
+      "y": 667,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun03": {
+      "x": 864,
+      "y": 667,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun03_2": {
+      "x": 878,
+      "y": 667,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun04": {
+      "x": 804,
+      "y": 682,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "gld_dun04_2": {
+      "x": 818,
+      "y": 682,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "prt_ca01": {
+      "x": 834,
+      "y": 682,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "prt_ca02": {
+      "x": 848,
+      "y": 682,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "prt_sewb1": {
+      "x": 864,
+      "y": 742,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "prt_sewb2": {
+      "x": 878,
+      "y": 742,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "prt_sewb3": {
+      "x": 804,
+      "y": 757,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "prt_sewb4": {
+      "x": 818,
+      "y": 757,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "treasure01": {
+      "x": 834,
+      "y": 772,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "treasure02": {
+      "x": 848,
+      "y": 772,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "treasure_n1": {
+      "x": 864,
+      "y": 772,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "treasure_n2": {
+      "x": 878,
+      "y": 772,
+      "region": "prontera",
+      "w": 13,
+      "h": 13
+    },
+    "anthell01": {
+      "x": 594,
+      "y": 891,
+      "region": "morocc",
+      "w": 13,
+      "h": 13
+    },
+    "anthell02": {
+      "x": 608,
+      "y": 891,
+      "region": "morocc",
+      "w": 13,
+      "h": 13
+    },
+    "alde_dun01": {
+      "x": 804,
+      "y": 344,
+      "region": "aldebaran",
+      "w": 13,
+      "h": 13
+    },
+    "alde_dun02": {
+      "x": 818,
+      "y": 344,
+      "region": "aldebaran",
+      "w": 13,
+      "h": 13
+    },
+    "alde_dun03": {
+      "x": 834,
+      "y": 344,
+      "region": "aldebaran",
+      "w": 13,
+      "h": 13
+    },
+    "alde_dun04": {
+      "x": 848,
+      "y": 344,
+      "region": "aldebaran",
+      "w": 13,
+      "h": 13
+    },
+    "beach_dun": {
+      "x": 320,
+      "y": 886,
+      "region": "comodo",
+      "w": 13,
+      "h": 13
+    },
+    "beach_dun2": {
+      "x": 334,
+      "y": 886,
+      "region": "comodo",
+      "w": 13,
+      "h": 13
+    },
+    "beach_dun3": {
+      "x": 350,
+      "y": 886,
+      "region": "comodo",
+      "w": 13,
+      "h": 13
+    },
+    "iz_dun00": {
+      "x": 894,
+      "y": 712,
+      "region": "izlude",
+      "w": 13,
+      "h": 13
+    },
+    "iz_dun01": {
+      "x": 910,
+      "y": 712,
+      "region": "izlude",
+      "w": 13,
+      "h": 13
+    },
+    "iz_dun02": {
+      "x": 924,
+      "y": 712,
+      "region": "izlude",
+      "w": 13,
+      "h": 13
+    },
+    "iz_dun03": {
+      "x": 850,
+      "y": 727,
+      "region": "izlude",
+      "w": 13,
+      "h": 13
+    },
+    "iz_dun04": {
+      "x": 864,
+      "y": 727,
+      "region": "izlude",
+      "w": 13,
+      "h": 13
+    },
+    "xmas_dun01": {
+      "x": 832,
+      "y": 971,
+      "region": "lutie",
+      "w": 13,
+      "h": 13
+    },
+    "xmas_dun02": {
+      "x": 848,
+      "y": 971,
+      "region": "lutie",
+      "w": 13,
+      "h": 13
+    }
+  },
+  "dungeons": [
+    {
+      "slug": "gef_dun00",
+      "name": "Geffen Dungeon",
+      "parent": "geffen",
+      "parentX": 606,
+      "parentY": 557,
+      "x": 500,
+      "y": 545
+    },
+    {
+      "slug": "orcsdun01",
+      "name": "Orc Dungeon",
+      "parent": "gef_fild10",
+      "parentX": 606,
+      "parentY": 673,
+      "x": 500,
+      "y": 690
+    },
+    {
+      "slug": "c_tower1",
+      "name": "Clock Tower",
+      "parent": "aldebaran",
+      "parentX": 841,
+      "parentY": 322,
+      "x": 841,
+      "y": 255
+    },
+    {
+      "slug": "prt_maze01",
+      "name": "Hidden Dungeon",
+      "parent": "prt_fild01",
+      "parentX": 841,
+      "parentY": 557,
+      "x": 960,
+      "y": 540
+    },
+    {
+      "slug": "mjo_dun01",
+      "name": "Hidden Dungeon",
+      "parent": "mjolnir_12",
+      "parentX": 841,
+      "parentY": 381,
+      "x": 960,
+      "y": 370
+    },
+    {
+      "slug": "in_sphinx1",
+      "name": "Sphinx",
+      "parent": "moc_fild19",
+      "parentX": 585,
+      "parentY": 865,
+      "x": 480,
+      "y": 890
+    },
+    {
+      "slug": "moc_pryd01",
+      "name": "Pyramids",
+      "parent": "moc_ruins",
+      "parentX": 585,
+      "parentY": 833,
+      "x": 480,
+      "y": 790
+    },
+    {
+      "slug": "pay_dun00",
+      "name": "Payon Cave",
+      "parent": "pay_arche",
+      "parentX": 1008,
+      "parentY": 720,
+      "x": 1120,
+      "y": 690
+    }
+  ]
+}

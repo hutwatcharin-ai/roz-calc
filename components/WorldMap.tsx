@@ -174,7 +174,7 @@ export default function WorldMap({ regions }: { regions: MapRegion[] }) {
                 <div><dt>แมพ</dt><dd>{selected.mapCodes.length}</dd></div>
                 <div><dt>เลเวลมอน</dt><dd>{levelText(selected)}</dd></div>
                 <div><dt>มอนที่เกิด</dt><dd>{selected.monsterCount || '—'}</dd></div>
-                <div><dt>เข้าตีเอง</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount} ชนิด` : '—'}</dd></div>
+                <div><dt>โจมตีก่อน</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount} ชนิด` : '—'}</dd></div>
               </dl>
               {selected.hasKafra && <p className="worldmap__kafra"><strong>Kafra Teleport</strong><br />เชื่อมเมืองหลัก: {KAFRA_DESTINATIONS.join(', ')}</p>}
               <h3>Map IDs ในพื้นที่</h3>

@@ -73,7 +73,7 @@ describe('AGGRO_LABELS', () => {
 
   it('gives every level a distinct label -- the property that actually proves no badge is colour-only', () => {
     // Non-empty alone would stay green even if two levels shared a label
-    // (e.g. aggressive and caution both saying "เข้าตีเอง"), which is exactly
+    // (e.g. aggressive and caution both saying "โจมตีก่อน"), which is exactly
     // the colour-only failure this constant exists to prevent.
     const labels = (['safe', 'aggressive', 'caution', 'danger'] as const).map((l) => AGGRO_LABELS[l]);
     expect(new Set(labels).size).toBe(labels.length);

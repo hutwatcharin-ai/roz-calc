@@ -15,7 +15,7 @@ export const DANGER_ATK_RATIO = 0.2;
 
 export const AGGRO_LABELS: Record<AggroLevel, string> = {
   safe: 'ปลอดภัย',
-  aggressive: 'เข้าตีเอง',
+  aggressive: 'โจมตีก่อน',
   caution: 'ระวัง',
   danger: 'อันตราย',
 };
