@@ -44,6 +44,9 @@ export default async function ItemListPage({
   searchParams: { q?: string; category?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
+  // The default view is the wearable/usable catalog: costumes are a quarter
+  // of the table and pure vanity, so they only appear when asked for --
+  // via their own category or the explicit "all" option.
   const category = searchParams.category ?? '';
   const SORTS = {
     id: { label: 'รหัสไอเทม', column: 'id', ascending: true },
@@ -60,7 +63,13 @@ export default async function ItemListPage({
     const needle = escapeLikePattern(q);
     query = query.ilike('name_en', `%${needle}%`);
   }
-  if (category) query = query.eq('category', category);
+  if (category === 'all') {
+    // no category filter: everything, costumes included
+  } else if (category) {
+    query = query.eq('category', category);
+  } else {
+    query = query.neq('category', 'Costume Equipment');
+  }
 
   const from = (page - 1) * PAGE_SIZE;
   const { data: items, count, error } = await query
@@ -93,7 +102,7 @@ export default async function ItemListPage({
         unit="ชิ้น"
         filters={[
           { label: 'คำค้น', value: q },
-          { label: 'หมวด', value: category },
+          { label: 'หมวด', value: category === 'all' ? 'ทั้งหมด (รวมคอสตูม)' : category },
         ]}
         clearHref="/database/items"
       />
@@ -101,7 +110,8 @@ export default async function ItemListPage({
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อไอเทม..." />
         <select name="category" defaultValue={category}>
-          <option value="">ทุกหมวด</option>
+          <option value="">ทุกหมวด (ไม่รวมคอสตูม)</option>
+          <option value="all">ทั้งหมด (รวมคอสตูม)</option>
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -116,6 +126,13 @@ export default async function ItemListPage({
           ))}
         </select>
         <button type="submit" className="btn">ค้นหา</button>
+        <Link
+          href="/database/items?category=Costume%20Equipment"
+          className="btn"
+          style={{ textDecoration: 'none' }}
+        >
+          คอสตูม
+        </Link>
       </form>
 
       {(items ?? []).length === 0 ? (
