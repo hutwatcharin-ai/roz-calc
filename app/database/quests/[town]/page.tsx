@@ -45,7 +45,13 @@ export async function generateMetadata({ params }: { params: { town: string } })
   };
 }
 
-export default async function QuestTownPage({ params }: { params: { town: string } }) {
+export default async function QuestTownPage({
+  params,
+  searchParams,
+}: {
+  params: { town: string };
+  searchParams: { type?: string };
+}) {
   const db = supabaseBrowser();
   const { data, error } = await db
     .from('quests')
@@ -58,13 +64,20 @@ export default async function QuestTownPage({ params }: { params: { town: string
     return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
   }
 
-  const quests = (data ?? []) as QuestRow[];
-  if (quests.length === 0) notFound();
+  const allQuests = (data ?? []) as QuestRow[];
+  if (allQuests.length === 0) notFound();
+
+  // Type chips are derived from what this town actually has, so a filter that
+  // would show nothing is never offered. The whole hub stays one page; this
+  // narrows it without changing any quest's canonical anchor.
+  const typesHere = [...new Set(allQuests.map((q) => q.type))].sort();
+  const typeFilter = typesHere.includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
+  const quests = typeFilter ? allQuests.filter((q) => q.type === typeFilter) : allQuests;
 
   // Anchors only link within this hub: chains can cross hubs, and a dead #q
   // anchor silently scrolls nowhere, which reads as a broken page.
-  const idsHere = new Set(quests.map((q) => q.id));
-  const label = hubLabel(params.town, quests.find((q) => q.zone)?.zone ?? null);
+  const idsHere = new Set(allQuests.map((q) => q.id));
+  const label = hubLabel(params.town, allQuests.find((q) => q.zone)?.zone ?? null);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -76,7 +89,7 @@ export default async function QuestTownPage({ params }: { params: { town: string
 
       <PageHeader
         title={`เควส ${label}`}
-        lead={`${quests.length} เควส · กดชื่อเควสเพื่อคัดลอกลิงก์เจาะรายเควสได้`}
+        lead={`${typeFilter ? `${quests.length} จาก ${allQuests.length}` : allQuests.length} เควส · กดชื่อเควสเพื่อคัดลอกลิงก์เจาะรายเควสได้`}
         source={
           <>
             <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม ภาษาอังกฤษตามต้นฉบับ ·
@@ -84,6 +97,25 @@ export default async function QuestTownPage({ params }: { params: { town: string
           </>
         }
       />
+
+      {typesHere.length > 1 && (
+        <nav className="explorerow" aria-label="กรองตามประเภทเควส" style={{ marginTop: 14 }}>
+          <Link href={`/database/quests/${params.town}`} className="chiplink" aria-current={typeFilter === '' ? 'true' : undefined} style={typeFilter === '' ? { borderColor: 'var(--cyan)', color: 'var(--text)' } : undefined}>
+            ทุกประเภท
+          </Link>
+          {typesHere.map((t) => (
+            <Link
+              key={t}
+              href={`/database/quests/${params.town}?type=${encodeURIComponent(t)}`}
+              className="chiplink"
+              aria-current={typeFilter === t ? 'true' : undefined}
+              style={typeFilter === t ? { borderColor: 'var(--cyan)', color: 'var(--text)' } : undefined}
+            >
+              {TYPE_LABELS[t] ?? t}
+            </Link>
+          ))}
+        </nav>
+      )}
 
       {quests.map((quest) => (
         <section key={quest.id} id={`q${quest.id}`} className="card" style={{ marginTop: 14 }}>

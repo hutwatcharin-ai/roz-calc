@@ -27,7 +27,7 @@ const ELEMENTS = ['Earth', 'Fire', 'Ghost', 'Holy', 'Neutral', 'Poison', 'Shadow
 export default async function MonsterListPage({
   searchParams,
 }: {
-  searchParams: { q?: string; race?: string; element?: string; sort?: string; page?: string; c?: string };
+  searchParams: { q?: string; race?: string; element?: string; lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string };
 }) {
   const q = searchParams.q ?? '';
   const race = searchParams.race ?? '';
@@ -35,6 +35,10 @@ export default async function MonsterListPage({
   // Challenge clones are opt-in: absent param = hidden. Server-side so the
   // result count and pagination stay exact (unlike the CSS hide elsewhere).
   const showC = searchParams.c === '1';
+  // Level bounds: hunting is level-band shopping, and the sort alone cannot
+  // answer "what is around my level". Empty stays empty; junk becomes empty.
+  const lvmin = Math.max(0, Number(searchParams.lvmin ?? 0) || 0);
+  const lvmax = Math.max(0, Number(searchParams.lvmax ?? 0) || 0);
   // A whitelist, not a passthrough: the sort key goes into the query.
   const SORTS = {
     level: { label: 'เลเวลน้อยก่อน', column: 'level', ascending: true },
@@ -56,6 +60,8 @@ export default async function MonsterListPage({
   if (race) query = query.eq('race', race);
   if (element) query = query.eq('element', element);
   if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+  if (lvmin > 0) query = query.gte('level', lvmin);
+  if (lvmax > 0) query = query.lte('level', lvmax);
 
   const from = (page - 1) * PAGE_SIZE;
   const { data: monsters, count, error } = await query
@@ -74,6 +80,8 @@ export default async function MonsterListPage({
     if (q) params.set('q', q);
     if (race) params.set('race', race);
     if (element) params.set('element', element);
+    if (lvmin > 0) params.set('lvmin', String(lvmin));
+    if (lvmax > 0) params.set('lvmax', String(lvmax));
     if (sort !== 'level') params.set('sort', sort);
     if (showCOverride ?? showC) params.set('c', '1');
     if (targetPage > 1) params.set('page', String(targetPage));
@@ -104,6 +112,12 @@ export default async function MonsterListPage({
             </option>
           ))}
         </select>
+        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 Sarabun, sans-serif' }}>
+          Lv{' '}
+          <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลต่ำสุด" />
+          –
+          <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลสูงสุด" />
+        </label>
         <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
           {Object.entries(SORTS).map(([key, s]) => (
             <option key={key} value={key}>
@@ -126,6 +140,7 @@ export default async function MonsterListPage({
           { label: 'คำค้น', value: q },
           { label: 'เผ่า', value: race },
           { label: 'ธาตุ', value: element },
+          { label: 'เลเวล', value: lvmin > 0 || lvmax > 0 ? `${lvmin > 0 ? lvmin : '1'}–${lvmax > 0 ? lvmax : 'สูงสุด'}` : '' },
         ]}
         clearHref="/database/monsters"
       />

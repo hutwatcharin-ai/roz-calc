@@ -1,6 +1,7 @@
 'use client';
 
 import { isCVariant } from '@/lib/c-variant';
+import { useState } from 'react';
 import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
@@ -22,6 +23,11 @@ export interface AfkCandidate {
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   const { character, ready } = useCharacterContext();
+  // Two safety toggles, client-side: the list is already filtered in the
+  // browser (the one-hit rule needs the character context), so these belong
+  // on the same side. Off by default -- the full picture first.
+  const [cleanMapOnly, setCleanMapOnly] = useState(false);
+  const [noRiskOnly, setNoRiskOnly] = useState(false);
 
   // hp 0 is the importer's unknown-HP marker, so these rows can never pass the
   // one-hit filter. Saying so is cheaper than letting a reader wonder why the
@@ -42,7 +48,9 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   const candidates = rows
     .filter((row) => (personal && character ? diesInOneHit(row.hp, character.damagePerHit) : true))
+    .filter((row) => !cleanMapOnly || row.spawn?.aggroCount === 0)
     .map((row) => ({ row, risks: riskySkills(row.skills) }))
+    .filter((c) => !noRiskOnly || c.risks.length === 0)
     // Safety before EXP, which is the whole reason this is not just a filter on
     // the farming finder: own risky skills first, then how dangerous the best
     // map's neighbours are, then EXP. A clean monster on a map with aggressive
@@ -82,6 +90,17 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
         )}
       </div>
 
+      <div className="filterbar" style={{ marginTop: 12 }}>
+        <label className="cvtoggle">
+          <input type="checkbox" checked={cleanMapOnly} onChange={(e) => setCleanMapOnly(e.target.checked)} />
+          เฉพาะแมพสะอาด (ไม่มีมอนโจมตีก่อนร่วมแมพ)
+        </label>
+        <label className="cvtoggle">
+          <input type="checkbox" checked={noRiskOnly} onChange={(e) => setNoRiskOnly(e.target.checked)} />
+          เฉพาะตัวไม่มีสกิลเสี่ยง
+        </label>
+      </div>
+
       {/* Two limits, stated up front rather than in a footnote, because both
           could turn this page's verdict into a wrong one. */}
       <div className="ceiling-note" style={{ marginTop: 12 }}>
@@ -94,7 +113,9 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
       {candidates.length === 0 ? (
         <p className="muted" style={{ marginTop: 20 }}>
-          ดาเมจ {character?.damagePerHit.toLocaleString()} ต่อครั้งยังฆ่ามอนที่ไม่เข้าโจมตีก่อนตัวไหนไม่ได้ในหมัดเดียว
+          {cleanMapOnly || noRiskOnly
+            ? 'ไม่มีตัวไหนผ่านทั้งเกณฑ์ที่ติ๊กไว้ ลองเอาติ๊กออกดู'
+            : `ดาเมจ ${character?.damagePerHit.toLocaleString()} ต่อครั้งยังฆ่ามอนที่ไม่เข้าโจมตีก่อนตัวไหนไม่ได้ในหมัดเดียว`}
         </p>
       ) : (
         <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
