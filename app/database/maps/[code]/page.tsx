@@ -5,6 +5,8 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
 import AggroBadge from '@/components/AggroBadge';
+import CVariantToggle from '@/components/CVariantToggle';
+import { isCVariant } from '@/lib/c-variant';
 
 export const revalidate = 86400;
 
@@ -56,6 +58,9 @@ export default async function MapDetailPage({ params }: { params: { code: string
     .map((s: any) => s.monsters)
     .filter(Boolean)
     .sort((a: any, b: any) => a.level - b.level);
+  // Challenge clones stay in the static HTML (this page is ISR) but carry the
+  // cvariant class, hidden by CSS until the player opts in via the toggle.
+  const cCount = monsters.filter((m: any) => isCVariant(m.name_en)).length;
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -67,7 +72,11 @@ export default async function MapDetailPage({ params }: { params: { code: string
 
       <h1 className="pagehead__title">{name}</h1>
       <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>{code}</p>
-      <p style={{ color: 'var(--dim)', marginTop: 10 }}>มอนสเตอร์ {monsters.length} ชนิดในแมพนี้</p>
+      <p style={{ color: 'var(--dim)', marginTop: 10 }}>
+        มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
+        {cCount > 0 && ` (+${cCount} มอน Challenge)`}
+      </p>
+      {cCount > 0 && <CVariantToggle mode="local" />}
 
       <div className="card" style={{ marginTop: 20 }}>
         <table className="data-table">
@@ -82,7 +91,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
           </thead>
           <tbody>
             {monsters.map((m: any) => (
-              <tr key={m.id}>
+              <tr key={m.id} className={isCVariant(m.name_en) ? 'cvariant' : undefined}>
                 <td data-label="">
                   <Link href={`/database/monsters/${m.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {m.image_url && (

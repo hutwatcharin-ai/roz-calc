@@ -1,3 +1,4 @@
+import { isCVariant } from '@/lib/c-variant';
 import Link from 'next/link';
 import RecordVisit from '@/components/RecordVisit';
 import ItemIcon from '@/components/ItemIcon';
@@ -198,7 +199,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปไอเทมนี้</p>
         ) : (
           (droppedBy ?? []).map((d: any, i: number) => (
-            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
+            <div key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {d.monsters.image_url && (
                   <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />

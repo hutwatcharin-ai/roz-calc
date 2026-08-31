@@ -7,6 +7,8 @@ import FilterState, { EmptyState } from '@/components/FilterState';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
+import CVariantToggle from '@/components/CVariantToggle';
+import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 export const metadata = {
   title: 'ฐานข้อมูลมอนสเตอร์',
@@ -25,11 +27,14 @@ const ELEMENTS = ['Earth', 'Fire', 'Ghost', 'Holy', 'Neutral', 'Poison', 'Shadow
 export default async function MonsterListPage({
   searchParams,
 }: {
-  searchParams: { q?: string; race?: string; element?: string; sort?: string; page?: string };
+  searchParams: { q?: string; race?: string; element?: string; sort?: string; page?: string; c?: string };
 }) {
   const q = searchParams.q ?? '';
   const race = searchParams.race ?? '';
   const element = searchParams.element ?? '';
+  // Challenge clones are opt-in: absent param = hidden. Server-side so the
+  // result count and pagination stay exact (unlike the CSS hide elsewhere).
+  const showC = searchParams.c === '1';
   // A whitelist, not a passthrough: the sort key goes into the query.
   const SORTS = {
     level: { label: 'เลเวลน้อยก่อน', column: 'level', ascending: true },
@@ -50,6 +55,7 @@ export default async function MonsterListPage({
   }
   if (race) query = query.eq('race', race);
   if (element) query = query.eq('element', element);
+  if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
 
   const from = (page - 1) * PAGE_SIZE;
   const { data: monsters, count, error } = await query
@@ -63,12 +69,13 @@ export default async function MonsterListPage({
 
   const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
 
-  function buildHref(targetPage: number) {
+  function buildHref(targetPage: number, showCOverride?: boolean) {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (race) params.set('race', race);
     if (element) params.set('element', element);
     if (sort !== 'level') params.set('sort', sort);
+    if (showCOverride ?? showC) params.set('c', '1');
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/monsters${qs ? `?${qs}` : ''}`;
@@ -105,6 +112,11 @@ export default async function MonsterListPage({
           ))}
         </select>
         <button type="submit" className="btn">ค้นหา</button>
+        {/* Toggling re-navigates (page reset to 1) so the server filter and
+            count stay honest; the hidden form field keeps ?c=1 across a new
+            text search too. */}
+        {showC && <input type="hidden" name="c" value="1" />}
+        <CVariantToggle mode="nav" navShow={showC} navHref={(show) => buildHref(1, show)} />
       </form>
 
       <FilterState

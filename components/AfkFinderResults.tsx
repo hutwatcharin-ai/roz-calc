@@ -1,5 +1,6 @@
 'use client';
 
+import { isCVariant } from '@/lib/c-variant';
 import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
@@ -104,7 +105,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
             </thead>
             <tbody>
               {shown.map(({ row, risks }) => (
-                <tr key={row.monster_id}>
+                <tr key={row.monster_id} className={isCVariant(row.name_en) ? 'cvariant' : undefined}>
                   <td data-label="">
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {row.image_url && (

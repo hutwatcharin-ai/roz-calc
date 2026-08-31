@@ -1171,3 +1171,21 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   white-space: nowrap;
 }
 .moncard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
+
+/* Challenge clones (C1-C9) are opt-in. Rows carry .cvariant server-side and
+   stay hidden until CVariantToggle sets data-show-cvariant on <html> — so the
+   default needs no JS and never flashes. The monster list filters server-side
+   instead (exact counts) and renders no .cvariant rows at all. */
+:root:not([data-show-cvariant]) .cvariant { display: none; }
+.cvtoggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 4px;
+  color: var(--dim);
+  font: 400 13px/1.4 "Sarabun", sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+.cvtoggle input { width: 16px; height: 16px; accent-color: var(--cyan); cursor: pointer; }

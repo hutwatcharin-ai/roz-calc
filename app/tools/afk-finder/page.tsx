@@ -8,6 +8,7 @@
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import AfkFinderResults, { type AfkCandidate } from '@/components/AfkFinderResults';
+import CVariantToggle from '@/components/CVariantToggle';
 
 export const metadata = {
   title: 'หาจุด AFK ปลอดภัย',
@@ -121,7 +122,10 @@ export default async function AfkFinderPage() {
       {failed ? (
         <p className="muted" style={{ marginTop: 20 }}>ดึงข้อมูลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
       ) : (
-        <AfkFinderResults rows={rows} />
+        <>
+          <div style={{ marginTop: 16 }}><CVariantToggle mode="local" /></div>
+          <AfkFinderResults rows={rows} />
+        </>
       )}
     </main>
   );
