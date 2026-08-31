@@ -46,7 +46,8 @@ table { border-collapse: collapse; width: 100%; }
   display: flex; align-items: center; gap: 28px; min-height: 64px;
   max-width: 1280px; margin-inline: auto; padding-inline: var(--shell);
 }
-.brand__mark { font: 700 20px/1 "Chakra Petch", sans-serif; letter-spacing: -0.01em; color: var(--text); }
+.brand__mark { font: 700 20px/1 "Chakra Petch", sans-serif; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+.brand__mark:hover em { color: var(--cyan); }
 .brand__mark em { font-style: normal; color: var(--yellow); }
 
 .topnav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }

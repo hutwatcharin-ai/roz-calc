@@ -22,7 +22,9 @@ export interface NavLink {
 }
 
 export const PRIMARY_LINKS: NavLink[] = [
-  { href: '/', label: 'หาจุดตี', ready: true },
+  // Renamed from "หาจุดตี" when the homepage became the intent-card landing:
+  // the finder still lives there (card 1), but the tab's job is "take me home".
+  { href: '/', label: 'หน้าแรก', ready: true },
   { href: '/drop-finder', label: 'ค้นของดรอป', ready: true },
   { href: '/database/monsters', label: 'ฐานข้อมูล', ready: true },
   { href: '/tools/afk-finder', label: 'เครื่องมือ', ready: true },
