@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'RO Zero Thai',
     locale: 'th_TH',
-    images: ['/og-default.png'],
+    images: ['/og-default.jpg'],
   },
   twitter: { card: 'summary_large_image' },
 };
