@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   return {
     title: `${item.name_en} — ดรอปจากมอนตัวไหน`,
-    description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน ROZ Calc`,
+    description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน RO Zero Thai`,
   };
 }
 

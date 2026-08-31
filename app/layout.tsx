@@ -12,15 +12,15 @@ import { SITE_URL } from '@/lib/site';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ROZ Calc — ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย',
+    default: 'RO Zero Thai — ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย',
     // Every page that sets its own title gets the site name appended.
-    template: '%s | ROZ Calc',
+    template: '%s | RO Zero Thai',
   },
   description:
     'ฐานข้อมูลมอนสเตอร์ ไอเทม และเครื่องมือหาจุดฟาร์มของ Ragnarok Zero Global ภาษาไทย คำนวณ EXP ต่อชั่วโมงและหาของดรอปได้ในที่เดียว',
   openGraph: {
     type: 'website',
-    siteName: 'ROZ Calc',
+    siteName: 'RO Zero Thai',
     locale: 'th_TH',
     images: ['/og-default.png'],
   },

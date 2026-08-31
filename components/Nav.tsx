@@ -11,7 +11,7 @@ export default function Nav() {
   return (
     <div className="topbar">
       <div className="topbar__in">
-        <span className="brand__mark">ZERO<em>CALC</em></span>
+        <span className="brand__mark">RO ZERO<em>THAI</em></span>
         <NavTabs />
         <GlobalSearch />
       </div>

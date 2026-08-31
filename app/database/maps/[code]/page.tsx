@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
   const name = data.find((r) => r.map_display_name)?.map_display_name ?? code;
   return {
     title: `${name} — มอนสเตอร์ในแมพนี้`,
-    description: `${name} (${code}) มีมอนสเตอร์ ${data.length} ชนิด ดูเลเวล HP EXP และของที่ดรอปได้ใน ROZ Calc`,
+    description: `${name} (${code}) มีมอนสเตอร์ ${data.length} ชนิด ดูเลเวล HP EXP และของที่ดรอปได้ใน RO Zero Thai`,
   };
 }
 
