@@ -43,7 +43,12 @@ table { border-collapse: collapse; width: 100%; }
   background: var(--ground); border-bottom: 1px solid var(--hair);
 }
 .topbar__in {
-  display: flex; align-items: center; gap: 28px; min-height: 64px;
+  display: flex; align-items: center; column-gap: 28px; row-gap: 0;
+  /* Fixed padding, no min-height centering: with min-height the brand row sat
+     centered on one-row pages but got pushed flush to the top edge wherever
+     the subnav row made the content taller -- the whole bar jumped when
+     navigating between sections (user report, 1 Sep). */
+  padding-top: 14px; padding-bottom: 14px;
   max-width: 1280px; margin-inline: auto; padding-inline: var(--shell);
 }
 .brand__mark { font: 700 20px/1 "Chakra Petch", sans-serif; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
@@ -148,9 +153,11 @@ table { border-collapse: collapse; width: 100%; }
      is gone, so the row order comment above it went with it. */
   flex-wrap: wrap;
   /* Equal air above and below the button row -- bottom used to be 0, so the
-     cards sat flush on the topbar's bottom border (user report, 1 Sep). */
+     cards sat flush on the topbar's bottom border (user report, 1 Sep).
+     Bottom air now comes from .topbar__in's own padding; margin-top keeps
+     the divider off the brand row since the container row-gap is 0. */
+  margin-top: 12px;
   padding-top: 8px;
-  padding-bottom: 8px;
   border-top: 1px solid var(--hair);
 }
 
@@ -191,6 +198,8 @@ table { border-collapse: collapse; width: 100%; }
     flex-wrap: wrap;
     overflow-x: visible;
     order: 2;
+    /* Own row below the brand; container row-gap is 0. */
+    margin-top: 10px;
   }
   /* Phone: the section row becomes an equal-button grid (user pick "B",
      1 Sep) -- every entry visible, no scrolling, thumb-sized targets.
@@ -198,7 +207,6 @@ table { border-collapse: collapse; width: 100%; }
   .subnav {
     order: 3;
     padding-top: 8px;
-    padding-bottom: 8px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
