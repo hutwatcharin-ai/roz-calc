@@ -4,6 +4,13 @@
 
 ## 1–2 ก.ย. 2026 — รอบใหญ่: โครงหน้า, hit/flee, แปลไทย, NPC
 
+**2 ก.ย. (ดึก) — feature รัว**
+- Cash Shop: ราคาบาทจากอัตราเติมจริง gnjoy TH (1,000 KP = 32฿ เส้นตรง, `THB_PER_KP` ใน lib/cash-shop-analysis) · ฿/วัน + ป้าย "คุ้มกว่าแบบสั้น X%/วัน" คู่ 7/30 วัน 6 คู่ · ชิปหมวด 6 หมวด (rule-based) + sort คุ้มสุดต่อวัน · ตะกร้าเติมเงิน (components/CashPlan, localStorage `roz-calc:cash-plan`, topUpPlan บอกแพ็คที่ต้องกด)
+- เควส UX (จาก flow review ใน artifact): หน้ารวมเรียงตามเส้นทางผู้เล่น (`hubOrder`) + เปลี่ยนชื่อกลุ่ม "(ไม่ระบุเมือง)" + ตัวอย่างชื่อเควสบนการ์ด · หน้าเมืองจัดกลุ่มสายเควสเป็นขั้น 1→2→3 ป้าย "เริ่มสายที่นี่" (`lib/quest-chains`)
+- `/tools/farm-guide` จุดฟาร์มแนะนำ 7 ช่วงเลเวล (SERP ไทยว่าง) · hit-flee tool กรอก HIT/FLEE ตรง + ปุ่มดึงจาก charbar (ลิงก์ dex/agi/luk เก่า migrate) · equipment cascade ชนิดโผล่ทันที 3 หมวด + ตำแหน่งคอสตูม crawl จาก rozerodb 894 ตัว (Upper/Mid/Lower Head/Garment...) · equip_jobs เติม 546 แถวจาก midgardhub CSV
+- ราคาขาย equipment sync rozerodb 303 แถว · OG รายมอนพยายามแล้ว 502 บน prod (@vercel/og module crash) — revert, ฟอนต์ Sarabun ค้างไว้ใน assets/fonts
+- รางวัลเควส: สรุปว่าไม่มีแหล่งไหนมี (อยู่ฝั่ง server script) — divine-pride มีหน้าเควสแต่ Rewards ว่าง, irowiki ห้าม fetch — ถ้าจะมีต้อง crowdsource เอง (user ปล่อยไปก่อน)
+
 **SEO hardening (1 ก.ย. ค่ำ — จาก audit 8-agent ใน docs/SEO_AUDIT.md)**
 - canonical ทุกหน้า (layout `alternates.canonical './'` — ตัด query เอง) · middleware 301 www/sslip→apex · security headers 5 ตัว + ปิด X-Powered-By · sitemap ตัด priority/changefreq
 - JSON-LD: WebSite+SearchAction (หน้าแรก), BreadcrumbList (มอน/ไอเทม/เควส/แมพ), Thing+PropertyValue (มอน/ไอเทม — ห้าม Product/Offer กับของในเกม)
