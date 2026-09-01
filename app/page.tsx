@@ -37,8 +37,8 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
   const monsterIds = (stats ?? []).map((s) => s.monster_id);
   const [{ data: spawns }, { data: accStats }] = await Promise.all([
     db.from('monster_spawns').select('monster_id, map_display_name').in('monster_id', monsterIds),
-    // The REAL per-mob flee from the game files powers the hit-chance column.
-    db.from('monsters').select('id, flee').in('id', monsterIds),
+    // midgardhub's hit_100 threshold (player HIT for 100%) powers the hit-chance column.
+    db.from('monsters').select('id, hit_100:hit').in('id', monsterIds),
   ]);
 
   const spawnByMonster = new Map<number, string>();
@@ -52,7 +52,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
   return (stats ?? []).map((s) => ({
     ...s,
     spawn: spawnByMonster.get(s.monster_id),
-    flee: accById.get(s.monster_id)?.flee ?? null,
+    hit100: accById.get(s.monster_id)?.hit_100 ?? null,
   }));
 }
 

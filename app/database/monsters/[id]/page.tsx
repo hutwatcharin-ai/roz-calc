@@ -1,5 +1,5 @@
 // app/database/monsters/[id]/page.tsx
-import { fleeToCapDodge, hitToNeverMiss } from '@/lib/hit-flee';
+import { mobThresholds } from '@/lib/monster-thresholds';
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
@@ -294,8 +294,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 <tr><td>MATK</td><td className="num">{num(monster.matk_min)} – {num(monster.matk_max)}</td></tr>
                 <tr><td>DEF</td><td className="num">{num(monster.def)}</td></tr>
                 <tr><td>MDEF</td><td className="num">{num(monster.mdef)}</td></tr>
-                <tr><td>FLEE</td><td className="num">{num(monster.flee)}</td></tr>
-                <tr><td>HIT</td><td className="num">{num(monster.hit)}</td></tr>
+
               </tbody>
             </table>
           </div>
@@ -312,37 +311,34 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 <tr><td>LUK</td><td className="num">{num(monster.luk)}</td></tr>
               </tbody>
             </table>
-            {/* Real per-mob values from the game files (the monsters table
-                stores them) -- NOT computed from level+stat: mob mode bonuses
-                make the base formula wrong per-monster (Mummy: file FLEE 293
-                vs formula 159). Null stays a dash. */}
+            {/* hit_100/flee_95 are midgardhub's player-facing thresholds --
+                they already ARE the targets to show. The old code treated
+                them as raw mob stats and added +20/+75 on top (wrong by
+                exactly that much for a day, 1 Sep). */}
             {(() => {
-              const flee = monster.flee ?? null;
-              const hit = monster.hit ?? null;
-              if (flee === null && hit === null) return null;
+              const { hit100, flee95 } = mobThresholds(monster);
+              if (hit100 === null && flee95 === null) return null;
               return (
                 <div style={{ marginTop: 12 }}>
                   <h3 className="section-title" style={{ fontSize: 14 }}>แม่นยำ/หลบ</h3>
                   <table className="stat-table">
                     <tbody>
-                      {flee !== null && <tr><td>FLEE</td><td className="num">{flee}</td></tr>}
-                      {hit !== null && <tr><td>HIT</td><td className="num">{hit}</td></tr>}
-                      {flee !== null && (
+                      {hit100 !== null && (
                         <tr>
                           <td>ตีมันโดน 100% ต้องมี HIT</td>
-                          <td className="num" style={{ color: 'var(--yellow)' }}>{hitToNeverMiss(flee)}</td>
+                          <td className="num" style={{ color: 'var(--yellow)' }}>{hit100}</td>
                         </tr>
                       )}
-                      {hit !== null && (
+                      {flee95 !== null && (
                         <tr>
                           <td>หลบมัน 95% ต้องมี FLEE</td>
-                          <td className="num" style={{ color: 'var(--cyan)' }}>{fleeToCapDodge(hit)}</td>
+                          <td className="num" style={{ color: 'var(--cyan)' }}>{flee95}</td>
                         </tr>
                       )}
                     </tbody>
                   </table>
                   <p className="source-note" style={{ marginTop: 6 }}>
-                    HIT/FLEE คือค่าจริงจากไฟล์เกม · เป้า &ldquo;โดน 100%&rdquo; = FLEE+20 และ &ldquo;หลบตัน 95%&rdquo; = HIT+75 ตามสูตร Renewal
+                    ค่าเป้าทั้งสองมาจาก midgardhub (คอลัมน์ Hit 100% / Flee 95%) — เป็นค่าฝั่งผู้เล่นที่วัดมาแล้ว ไม่ใช่สเตตัสของมอน
                   </p>
                 </div>
               );

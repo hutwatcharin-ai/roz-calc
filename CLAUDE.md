@@ -12,7 +12,7 @@
 ## ฐานข้อมูล (Supabase, project `qxqxpnqrchzdpvqpsjvv`)
 
 - PostgREST ตัดที่ **1,000 แถวเงียบๆ** — ตารางเกินพันต้องใช้ `lib/fetch-all-rows.ts` (items 3,833 · monster_drops ~3,750 · spawns 2,688)
-- `monsters` มี **hit/flee จริงจากไฟล์เกม** (490/524 ตัว) — ห้ามคำนวณจาก level+stat มาแสดง (Mummy: ไฟล์ 293 vs สูตร 159) สูตรใน `lib/hit-flee.ts` ใช้ฝั่งผู้เล่นเท่านั้น
+- ⚠️ `monsters.hit_100` / `monsters.flee_95` (เดิมชื่อ hit/flee — เคยตีความผิดมาแล้ว 1 วัน): **ไม่ใช่สเตตัสของมอน** แต่เป็นค่าฝั่งผู้เล่นจาก midgardhub — hit_100 = HIT ที่ตีมอนตัวนี้โดน 100%, flee_95 = FLEE ที่หลบมันได้ 95% · แสดงเป็นเป้าได้ตรงๆ **ห้ามบวก +20/+75 ทับ** · โอกาส: ตีโดน = clamp(100−(hit_100−HIT)), มันตีเราโดน = clamp(5+(flee_95−FLEE)) — ดู `lib/hit-flee.ts` + `lib/monster-thresholds.ts`
 - ค่า 0 ใน hp/base_exp = sentinel ไม่รู้ค่า · agi/dex ที่ไม่รู้เป็น NULL (ไม่ใช่ 0)
 - `monster_drops.rate` เป็น NULL ได้ = ดรอปที่เกมไม่เปิดเผยอัตรา (UI แสดง "ไม่ทราบอัตรา"/"?")
 - ตารางเสริม: `cash_shop_items` (77, ราคา ณ 31 ส.ค. 2026) · `quest_npcs` (quest_id → sprite_code, 81 แถว)

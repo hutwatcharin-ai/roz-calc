@@ -1,51 +1,46 @@
 import { describe, expect, it } from 'vitest';
-import {
-  fleeToCapDodge,
-  hitChancePct,
-  hitToNeverMiss,
-  mobFlee,
-  mobHit,
-  playerFlee,
-  playerHit,
-} from './hit-flee';
+import { hitChanceVsMob, mobHitChance, playerFlee, playerHit } from './hit-flee';
 
-describe('player formulas', () => {
-  it('matches the rAthena renewal base values', () => {
-    // Lv1 all-1s naked novice: 175+1+1+0 hit, 100+1+1+0 flee.
-    expect(playerHit(1, 1, 1)).toBe(177);
-    expect(playerFlee(1, 1, 1)).toBe(102);
-    // LUK breakpoints: /3 for hit, /5 for flee, floored.
-    expect(playerHit(50, 30, 29)).toBe(175 + 50 + 30 + 9);
-    expect(playerFlee(50, 40, 29)).toBe(100 + 50 + 40 + 5);
+describe('player formulas (rAthena renewal, verified 2026-09-01)', () => {
+  it('HIT = 175 + Lv + DEX + floor(LUK/3)', () => {
+    // Pinned from the character-context v1 migration: knight Lv50 dex60 luk20.
+    expect(playerHit(50, 60, 20)).toBe(291);
+    expect(playerHit(1, 1, 0)).toBe(177);
+  });
+
+  it('FLEE = 100 + Lv + AGI + floor(LUK/5)', () => {
+    expect(playerFlee(50, 40, 20)).toBe(194);
+    expect(playerFlee(1, 1, 0)).toBe(102);
   });
 });
 
-describe('mob formulas', () => {
-  it('computes from level+stat and refuses unknowns', () => {
-    // Wolf: Lv 54, AGI 24, DEX 33.
-    expect(mobFlee(54, 24)).toBe(178);
-    expect(mobHit(54, 33)).toBe(237);
-    expect(mobFlee(null, 24)).toBeNull();
-    expect(mobFlee(54, null)).toBeNull();
-    expect(mobHit(null, 33)).toBeNull();
-  });
-});
+describe('threshold-based mob math (midgardhub hit_100 / flee_95 columns)', () => {
+  // The stored values are PLAYER-side targets (discovered 2026-09-01 after a
+  // day of treating them as raw mob stats): hit_100 = HIT for a 100% hit,
+  // flee_95 = FLEE for the 95% dodge cap. Chance moves 1% per point.
 
-describe('hit chance', () => {
-  it('is 80 + hit - flee clamped to [5, 100]', () => {
-    expect(hitChancePct(200, 200)).toBe(80);
-    expect(hitChancePct(220, 200)).toBe(100); // exactly flee+20
-    expect(hitChancePct(219, 200)).toBe(99);
-    expect(hitChancePct(100, 300)).toBe(5); // floor
-    expect(hitChancePct(999, 0)).toBe(100); // ceiling
+  it('hitting the mob: 100% exactly at hit_100, -1%/point below, floor 5%', () => {
+    // Poring hit_100 = 203 (midgardhub CSV, pinned).
+    expect(hitChanceVsMob(203, 203)).toBe(100);
+    expect(hitChanceVsMob(300, 203)).toBe(100); // over-cap stays 100
+    expect(hitChanceVsMob(183, 203)).toBe(80);
+    expect(hitChanceVsMob(0, 203)).toBe(5); // floor
   });
 
-  it('thresholds agree with the chance function', () => {
-    const flee = 178;
-    expect(hitChancePct(hitToNeverMiss(flee), flee)).toBe(100);
-    expect(hitChancePct(hitToNeverMiss(flee) - 1, flee)).toBe(99);
-    const hit = 237;
-    expect(hitChancePct(hit, fleeToCapDodge(hit))).toBe(5);
-    expect(hitChancePct(hit, fleeToCapDodge(hit) - 1)).toBe(6);
+  it('mob hitting you: 5% exactly at flee_95, +1%/point below, cap 100%', () => {
+    // Poring flee_95 = 178 (midgardhub CSV, pinned).
+    expect(mobHitChance(178, 178)).toBe(5);
+    expect(mobHitChance(178, 300)).toBe(5); // over-cap stays 5
+    expect(mobHitChance(178, 100)).toBe(83);
+    expect(mobHitChance(178, 0)).toBe(100); // cap
+  });
+
+  it('the old +20/+75 bug cannot come back: thresholds display as-is', () => {
+    // Mummy: flee_95 = 293, hit_100 = 259 (midgardhub CSV). The old code
+    // showed HIT target flee+20=313 and FLEE target hit+75=334 — both wrong.
+    // The correct targets ARE the stored values.
+    const mummy = { hit_100: 259, flee_95: 293 };
+    expect(hitChanceVsMob(mummy.hit_100, mummy.hit_100)).toBe(100);
+    expect(mobHitChance(mummy.flee_95, mummy.flee_95)).toBe(5);
   });
 });

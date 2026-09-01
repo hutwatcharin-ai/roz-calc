@@ -21,8 +21,8 @@
 - โลโก้ใหม่: favicon (app/icon.png) + apple-icon + og-default.jpg
 
 **hit/flee**
-- `lib/hit-flee.ts`: สูตรฝั่งผู้เล่น (HIT=175+Lv+DEX+LUK/3, FLEE=100+Lv+AGI+LUK/5, โอกาส=80+HIT−FLEE clamp 5–100, โดนชัวร์ FLEE+20, หลบตัน HIT+75 — ยืนยันกับซอร์ส rAthena)
-- **ฝั่งมอนใช้ค่าจริงจากคอลัมน์ monsters.hit/flee เท่านั้น** (บั๊กที่เคยคำนวณทับถูกแก้ — Mummy ไฟล์ 293 vs สูตร 159)
+- 🔴 **แก้การตีความผิดครั้งใหญ่ (1 ก.ย. ดึก, user ชี้):** คอลัมน์ hit/flee ที่ import จาก midgardhub ไม่ใช่สเตตัสมอน — CSV ต้นทางชื่อ `hit_100`/`flee_95` = ค่าฝั่งผู้เล่น (HIT ตีโดน 100% / FLEE หลบ 95%) โค้ดเดิมบวก +20/+75 ทับอีกชั้น → เป้า FLEE เพี้ยน ~100 แต้ม (Poring โชว์ 278 ที่ถูกคือ 178) แก้ครบ 5 จุด (หน้ามอน/หน้าแรก/AFK/hit-flee tool/สูตรใน lib) + เทสต์ pin ค่าจริง Poring 203/178, Mummy 259/293 — **DB ยัง rename ไม่ได้ (PAT ตาย) โค้ดใช้ alias `hit_100:hit` ใน select + helper รับสองชื่อ — rename จริงเมื่อได้ PAT ใหม่**
+- `lib/hit-flee.ts`: สูตรฝั่งผู้เล่น HIT=175+Lv+DEX+LUK/3, FLEE=100+Lv+AGI+LUK/5 (ยืนยัน rAthena) · ฝั่งมอนใช้ threshold: ตีโดน=clamp(100−(hit_100−HIT)), โดนตี=clamp(5+(flee_95−FLEE))
 - ใช้ใน: หน้ามอน (บล็อกแม่นยำ/หลบ + เป้า HIT/FLEE), หน้าแรก (คอลัมน์ตีโดน% + EXP/ชม.คูณ hit), AFK (คอลัมน์มันตีเราโดน + มอน aggro ที่หลบตันเข้าลิสต์พร้อมป้าย "โจมตีก่อน·หลบได้"), tool ใหม่ `/tools/hit-flee` (แชร์ลิงก์ได้)
 - character context v2: กรอก Max HP/HIT/FLEE ตรงจากจอเกม แทน VIT/อาชีพ/DEX/AGI/LUK — ตัดสูตร HP เดาเอง + ข้อจำกัด 4 อาชีพทิ้ง, เซฟเก่า migrate อัตโนมัติ, มีปุ่มล้างค่า
 
@@ -52,7 +52,8 @@
 - ป้าย aggro เปลี่ยนคำ "เข้าตีเอง"→"โจมตีก่อน"
 
 **ค้าง/ไอเดียต่อ**
-- SEO audit: ก้อนหลักทำแล้ว 1 ก.ย. (ดูหัวข้อ SEO hardening) — ที่ยังค้าง: หน้า About/ติดต่อ + ลิงก์ source ใน footer, item pages บาง 3,833 หน้า (enrich หรือ noindex), reposition หน้าแรกตาม SXO, lastmod (ต้องมี updated_at จริงก่อน)
+- SEO audit: ทำแล้วเกือบหมด 1 ก.ย. (hardening + About/ติดต่อ + ลิงก์ source + ประโยคสรุป entity + trust หน้าแรก) — ค้าง: item pages ที่ยังบางจริง (พิจารณา noindex), lastmod (รอ updated_at จริง)
+- ⏳ รอ PAT Supabase ใหม่จาก user: rename คอลัมน์ monsters.hit→hit_100, flee→flee_95 แล้วกวาด alias `hit_100:hit`/`flee_95:flee` ใน select 3 จุด (หน้าแรก, afk-finder, hit-flee tool)
 - midgardhub equip_jobs (~1,000 items) ยังไม่ import (มี canJobEquip ใช้ equippable_classes จาก rozerodb แล้วบางส่วน)
 - ตัววางแผนบิลด์สกิล — ต้องการข้อมูลเงื่อนไขสกิล (ยังไม่มี)
 - ฝั่ง user: ตั้ง GSC + submit sitemap · ปิด auto-renew โดเมนจดผิด rezerothai.com

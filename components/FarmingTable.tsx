@@ -8,7 +8,7 @@ import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
-import { hitChancePct } from '@/lib/hit-flee';
+import { hitChanceVsMob } from '@/lib/hit-flee';
 
 interface FarmingRow {
   monster_id: number;
@@ -22,7 +22,7 @@ interface FarmingRow {
   is_aggressive: boolean | null;
   atk_max: number | null;
   spawn?: string;
-  flee?: number | null;
+  hit100?: number | null;
 }
 
 export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
@@ -44,9 +44,10 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
   const canHit = character && character.hit != null;
   function hitPctFor(row: FarmingRow): number | null {
     if (!character || character.hit == null) return null;
-    // Real per-mob flee from the game files, not level+agi+100.
-    if (row.flee == null) return null;
-    return hitChancePct(character.hit, row.flee);
+    // hit_100 is the player-HIT threshold from midgardhub (100% at it,
+    // -1%/point below) -- not the mob's own stats.
+    if (row.hit100 == null) return null;
+    return hitChanceVsMob(character.hit, row.hit100);
   }
 
   function rateFor(row: FarmingRow) {

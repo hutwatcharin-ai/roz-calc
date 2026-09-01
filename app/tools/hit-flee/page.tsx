@@ -10,9 +10,8 @@ import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import AggroBadge from '@/components/AggroBadge';
 import {
-  fleeToCapDodge,
-  hitChancePct,
-  hitToNeverMiss,
+  hitChanceVsMob,
+  mobHitChance,
   playerFlee,
   playerHit,
 } from '@/lib/hit-flee';
@@ -44,7 +43,7 @@ export default async function HitFleePage({
   const { data: monsters, error } = filled
     ? await db
         .from('monsters')
-        .select('id, name_en, level, hit, flee, image_url, is_aggressive, atk_max')
+        .select('id, name_en, level, hit_100:hit, flee_95:flee, image_url, is_aggressive, atk_max')
         .gte('level', Math.max(1, lv - range))
         .lte('level', lv + range)
         .not('name_en', 'like', 'C_ %')
@@ -61,7 +60,7 @@ export default async function HitFleePage({
         lead="กรอกค่าตัวละคร แล้วดูเป็นเปอร์เซ็นต์: คุณตีมอนโดนแค่ไหน และมอนตีคุณโดนแค่ไหน"
         source={
           <>
-            <strong>ที่มา:</strong> HIT/FLEE ฝั่งคุณคิดจากสูตร Renewal (HIT = 175+Lv+DEX+LUK/3 · FLEE = 100+Lv+AGI+LUK/5) · HIT/FLEE ฝั่งมอนคือค่าจริงจากไฟล์เกม · โอกาสโดน = 80+HIT−FLEE (ขั้นต่ำ 5% เพดาน 100%)
+            <strong>ที่มา:</strong> HIT/FLEE ฝั่งคุณคิดจากสูตร Renewal (HIT = 175+Lv+DEX+LUK/3 · FLEE = 100+Lv+AGI+LUK/5) · ฝั่งมอนใช้ค่าเป้าที่วัดแล้วจาก midgardhub (HIT ที่ตีโดน 100% / FLEE ที่หลบได้ 95%) · โอกาสขยับ 1% ต่อ 1 แต้ม (ขั้นต่ำ 5% เพดาน 100%)
           </>
         }
       />
@@ -128,10 +127,10 @@ export default async function HitFleePage({
             </thead>
             <tbody>
               {(monsters ?? []).map((m) => {
-                const flee = (m.flee ?? null) as number | null;
-                const hit = (m.hit ?? null) as number | null;
-                const youHit = flee !== null ? hitChancePct(myHit, flee) : null;
-                const theyHit = hit !== null ? hitChancePct(hit, myFlee) : null;
+                const hit100 = (m.hit_100 ?? null) as number | null;
+                const flee95 = (m.flee_95 ?? null) as number | null;
+                const youHit = hit100 !== null ? hitChanceVsMob(myHit, hit100) : null;
+                const theyHit = flee95 !== null ? mobHitChance(flee95, myFlee) : null;
                 return (
                   <tr key={m.id}>
                     <td data-label="">
@@ -158,8 +157,8 @@ export default async function HitFleePage({
                         </span>
                       )}
                     </td>
-                    <td data-label="โดน 100% ต้อง HIT" className="num">{flee === null ? '—' : hitToNeverMiss(flee)}</td>
-                    <td data-label="หลบตัน 95% ต้อง FLEE" className="num">{hit === null ? '—' : fleeToCapDodge(hit)}</td>
+                    <td data-label="โดน 100% ต้อง HIT" className="num">{hit100 === null ? '—' : hit100}</td>
+                    <td data-label="หลบตัน 95% ต้อง FLEE" className="num">{flee95 === null ? '—' : flee95}</td>
                   </tr>
                 );
               })}
