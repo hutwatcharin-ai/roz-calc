@@ -11,6 +11,10 @@ import { SITE_URL } from '@/lib/site';
 // crawlers and chat clients require -- a relative og:image is ignored.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // Relative canonical: Next 14.2 resolves './' to the current route's path
+  // (query stripped) against metadataBase, so every page self-canonicalizes
+  // without touching each generateMetadata (audit Critical #1).
+  alternates: { canonical: './' },
   title: {
     default: 'RO Zero Thai — ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย',
     // Every page that sets its own title gets the site name appended.

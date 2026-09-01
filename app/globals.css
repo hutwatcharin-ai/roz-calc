@@ -59,6 +59,9 @@ table { border-collapse: collapse; width: 100%; }
 .topnav a {
   font: 700 12.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.04em; text-transform: uppercase;
   text-decoration: none; color: var(--dim); padding: 9px 13px; border-radius: 6px; white-space: nowrap;
+  /* 44px touch target like every other control (audit High #8) -- the primary
+     nav was the one interactive strip left at ~30px. */
+  min-height: 44px; display: inline-flex; align-items: center;
 }
 .topnav a:hover { color: var(--text); background: var(--panel); }
 .topnav a.on { color: var(--yellow-ink); background: var(--yellow); }
@@ -217,7 +220,7 @@ table { border-collapse: collapse; width: 100%; }
     border-radius: 8px;
     padding: 9px 8px;
     white-space: normal;
-    min-height: 40px;
+    min-height: 44px;
   }
   .subnav a.on {
     color: var(--yellow-ink);
@@ -1007,7 +1010,9 @@ textarea {
   border-radius: var(--radius);
   background: var(--panel-2);
   color: var(--text);
-  font: 400 15px/1.5 "Sarabun", sans-serif;
+  /* 16px, not 15px: iOS Safari auto-zooms into any focused input whose font
+     is under 16px (audit Medium, iOS zoom jump). */
+  font: 400 16px/1.5 "Sarabun", sans-serif;
   -webkit-appearance: none;
   appearance: none;
 }

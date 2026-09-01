@@ -105,22 +105,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   return [
-    ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}`, changeFrequency: 'weekly' as const, priority: 1 })),
-    ...monsterIds.map((id) => ({ url: `${SITE_URL}/database/monsters/${id}`, changeFrequency: 'monthly' as const, priority: 0.7 })),
-    ...itemIds.map((id) => ({ url: `${SITE_URL}/database/items/${id}`, changeFrequency: 'monthly' as const, priority: 0.6 })),
+    ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}`, })),
+    ...monsterIds.map((id) => ({ url: `${SITE_URL}/database/monsters/${id}`, })),
+    ...itemIds.map((id) => ({ url: `${SITE_URL}/database/items/${id}`, })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but
     // the column's type does not guarantee no others) that must survive the URL.
     ...mapCodes.map((code) => ({
       url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
     })),
     ...questTowns.map((town) => ({
       url: `${SITE_URL}/database/quests/${encodeURIComponent(town)}`,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
     })),
   ];
 }

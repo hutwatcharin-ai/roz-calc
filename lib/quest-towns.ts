@@ -62,6 +62,11 @@ export function hubLabel(townKey: string, zoneName?: string | null): string {
   if (townKey === OTHER_KEY) return 'เมืองอื่นๆ และเควสย่อย';
   if (townKey.startsWith('type-')) return TYPE_LABELS[townKey.slice(5)] ?? townKey;
   // A zone-based hub shows the zone's own spelling when the caller has it;
-  // otherwise the slug is presentable enough to not crash a title.
-  return zoneName ?? townKey;
+  // otherwise prettify the slug ("prontera-region" -> "Prontera Region") —
+  // the raw slug was leaking into <title> tags (SEO audit, Medium #11).
+  if (zoneName) return zoneName;
+  return townKey
+    .split('-')
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(' ');
 }
