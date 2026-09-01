@@ -3,7 +3,9 @@
 // components/DropSearch.tsx
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
+import CVariantToggle from '@/components/CVariantToggle';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
+import { isCVariant } from '@/lib/c-variant';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 
 interface DropRow {
@@ -54,10 +56,15 @@ export default function DropSearch({
       {/* Capped width: on a wide screen the % sat a full viewport away from
           the name (user screenshot, 1 Sep) -- an eye has to travel the gap.
           65ch keeps name and rate in one glance. */}
+      {/* Same rule as every other monster surface: Challenge clones hidden by
+          default, one checkbox to reveal (they carried 7 of 10 result rows on
+          common items and buried the real monsters). */}
+      {rows.some((row) => isCVariant(row.monster_name)) && <CVariantToggle mode="local" />}
       <div style={{ marginTop: 12, maxWidth: 720 }}>
         {rows.map((row) => (
           <div
             key={row.monster_id}
+            className={isCVariant(row.monster_name) ? 'cvariant' : undefined}
             style={{
               display: 'flex',
               justifyContent: 'space-between',

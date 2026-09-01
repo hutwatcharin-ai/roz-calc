@@ -1379,7 +1379,9 @@ a.cashlist__row:hover { background: var(--panel-2); }
    stay hidden until CVariantToggle sets data-show-cvariant on <html> — so the
    default needs no JS and never flashes. The monster list filters server-side
    instead (exact counts) and renders no .cvariant rows at all. */
-:root:not([data-show-cvariant]) .cvariant { display: none; }
+/* !important: some rows (drop finder, item dropped-by) lay out with an inline
+   display:flex, which silently beat this rule and let C rows show. */
+:root:not([data-show-cvariant]) .cvariant { display: none !important; }
 .cvtoggle {
   display: inline-flex;
   align-items: center;
