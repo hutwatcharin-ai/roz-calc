@@ -1,0 +1,986 @@
+[
+{
+"code": "4_BABYLEOPARD",
+"links": [
+{
+"quest_id": 3506,
+"quest_name": "Ouch Taiya: Feed for little mandarin ducks",
+"map": "ayothaya",
+"x": 258,
+"y": 97
+}
+]
+},
+{
+"code": "4_CAT_ADMIRAL",
+"links": [
+{
+"quest_id": 3501,
+"quest_name": "Ouch Taiya: Heading to the Unknown",
+"map": "alberta",
+"x": 246,
+"y": 94
+}
+]
+},
+{
+"code": "4_COOK",
+"links": [
+{
+"quest_id": 16186,
+"quest_name": "Sizzling Charcoal-Broiled Breath Dumpling",
+"map": "comodo",
+"x": 108,
+"y": 205
+}
+]
+},
+{
+"code": "4_ENERGY_BLACK",
+"links": [
+{
+"quest_id": 24148,
+"quest_name": "Please! -wait-",
+"map": "ztw_evt01",
+"x": 160,
+"y": 307
+}
+]
+},
+{
+"code": "4_F_01",
+"links": [
+{
+"quest_id": 22901,
+"quest_name": "Smokie, Nemesis of Cabbages",
+"map": "prt_fild01",
+"x": 357,
+"y": 310
+}
+]
+},
+{
+"code": "4_F_03",
+"links": [
+{
+"quest_id": 3502,
+"quest_name": "Ouch Taiya: Finally taking the first step",
+"map": "ayothaya",
+"x": 157,
+"y": 79
+}
+]
+},
+{
+"code": "4_F_ALCHE_A",
+"links": [
+{
+"quest_id": 22318,
+"quest_name": "Mjolnir: Obsessed with Wings",
+"map": "mjolnir_12",
+"x": 149,
+"y": 79
+}
+]
+},
+{
+"code": "4_F_BARYO_GIRL",
+"links": [
+{
+"quest_id": 16206,
+"quest_name": "Hide-and-Seek with the Children",
+"map": "comodo",
+"x": 186,
+"y": 173
+}
+]
+},
+{
+"code": "4_F_CAPEGIRL",
+"links": [
+{
+"quest_id": 22352,
+"quest_name": "Niflefim: Pumpkins must be protected",
+"map": "nif_fild01",
+"x": 209,
+"y": 52
+}
+]
+},
+{
+"code": "4_F_CHNDOCTOR",
+"links": [
+{
+"quest_id": 14878,
+"quest_name": "Please go find Xiaoxian in the hotel. He should be organizing information on the second floor now.",
+"map": "lou_in02",
+"x": 45,
+"y": 116
+}
+]
+},
+{
+"code": "4_F_CHNDRESS2",
+"links": [
+{
+"quest_id": 14947,
+"quest_name": "How about working with my neighbor in the cell next to me while I\u2019m in jail? The man works in a weapons shop.",
+"map": "lou_in02",
+"x": 109,
+"y": 175
+}
+]
+},
+{
+"code": "4_F_CHNDRESS3",
+"links": [
+{
+"quest_id": 14931,
+"quest_name": "Can you help me go to the village entrance to find the lady selling firecrackers to get some things?",
+"map": "lou_fild01",
+"x": 224,
+"y": 348
+}
+]
+},
+{
+"code": "4_F_CHNWOMAN",
+"links": [
+{
+"quest_id": 14877,
+"quest_name": "Dragon City: Wang Ling Monster Expedition Team",
+"map": "lou_in02",
+"x": 203,
+"y": 86
+}
+]
+},
+{
+"code": "4_F_CRU",
+"links": [
+{
+"quest_id": 22508,
+"quest_name": "Saint Darmain: Illusion Maintenance",
+"map": "cmd_fild07",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_F_EINWOMAN",
+"links": [
+{
+"quest_id": 22309,
+"quest_name": "To Leon",
+"map": "mjolnir_07",
+"x": 239,
+"y": 223
+}
+]
+},
+{
+"code": "4_F_GODEMOM",
+"links": [
+{
+"quest_id": 22702,
+"quest_name": "Peco Peco Egg \u00d730",
+"map": "moc_fild12",
+"x": 176,
+"y": 376
+}
+]
+},
+{
+"code": "4_F_GON",
+"links": [
+{
+"quest_id": 22716,
+"quest_name": "Sograt: Suspicious Creatures",
+"map": "moc_fild16",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_F_HUGIRL",
+"links": [
+{
+"quest_id": 16208,
+"quest_name": "Find Jane",
+"map": "comodo",
+"x": 109,
+"y": 146
+}
+]
+},
+{
+"code": "4_F_JOB_BLACKSMITH",
+"links": [
+{
+"quest_id": 22302,
+"quest_name": "Mjolnir: A Collector\u2019s Hobby",
+"map": "mjolnir_02",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_F_KID2",
+"links": [
+{
+"quest_id": 2314,
+"quest_name": "Clan Registration Consultation.",
+"map": "prt_in",
+"x": 42,
+"y": 110
+}
+]
+},
+{
+"code": "4_F_LGTGRAND",
+"links": [
+{
+"quest_id": 16201,
+"quest_name": "Words from Grandmother",
+"map": "comodo",
+"x": 110,
+"y": 208
+}
+]
+},
+{
+"code": "4_F_RANGER",
+"links": [
+{
+"quest_id": 22313,
+"quest_name": "Smokie 20",
+"map": "mjolnir_06",
+"x": 162,
+"y": 254
+}
+]
+},
+{
+"code": "4_F_RUSWOMAN1",
+"links": [
+{
+"quest_id": 22303,
+"quest_name": "Mjolnir: Obstructing Business",
+"map": "mjolnir_03",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_F_RUSWOMAN3",
+"links": [
+{
+"quest_id": 22315,
+"quest_name": "Mjolnir: With All Those Legs!",
+"map": "mjolnir_10",
+"x": 321,
+"y": 57
+}
+]
+},
+{
+"code": "4_F_SHADOWCHASER",
+"links": [
+{
+"quest_id": 14944,
+"quest_name": "There is a suitable candidate in the hotel. Come with me.",
+"map": "lou_in02",
+"x": 75,
+"y": 131
+}
+]
+},
+{
+"code": "4_F_SWORDMAN",
+"links": [
+{
+"quest_id": 22904,
+"quest_name": "With Heartfelt Colorful Shell",
+"map": "prt_fild02",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_F_THAIAYO",
+"links": [
+{
+"quest_id": 3540,
+"quest_name": "Soak the hot-blooded believers",
+"map": "ayothaya",
+"x": 226,
+"y": 264
+}
+]
+},
+{
+"code": "4_F_THAIGIRL",
+"links": [
+{
+"quest_id": 3504,
+"quest_name": "Ouch Taiya: Songkran Festival!",
+"map": "ayothaya",
+"x": 202,
+"y": 265
+}
+]
+},
+{
+"code": "4_F_TWGRANDMOM",
+"links": [
+{
+"quest_id": 16202,
+"quest_name": "A Story You\u2019ve Never Heard Before",
+"map": "comodo",
+"x": 108,
+"y": 209
+}
+]
+},
+{
+"code": "4_F_UMGIRL",
+"links": []
+},
+{
+"code": "4_F_UMOLDWOMAN",
+"links": [
+{
+"quest_id": 16247,
+"quest_name": "The Umbala Shaman\u2019s Special Ability",
+"map": "um_in",
+"x": 44,
+"y": 71
+}
+]
+},
+{
+"code": "4_F_UMWOMAN",
+"links": []
+},
+{
+"code": "4_GEFFEN_01",
+"links": [
+{
+"quest_id": 22744,
+"quest_name": "Geffen: I Want a Creamy Card Too",
+"map": "gef_fild05",
+"x": 137,
+"y": 259
+}
+]
+},
+{
+"code": "4_KID01",
+"links": [
+{
+"quest_id": 22910,
+"quest_name": "Things Mom Hates",
+"map": "prt_fild05",
+"x": 352,
+"y": 218
+}
+]
+},
+{
+"code": "4_LAM",
+"links": [
+{
+"quest_id": 8324,
+"quest_name": "Take a trip to Prontera.",
+"map": "prt_in",
+"x": 56,
+"y": 56
+}
+]
+},
+{
+"code": "4_M_ALCHE_C",
+"links": [
+{
+"quest_id": 14950,
+"quest_name": "Take 1 clay ball to the gunpowder manufacturing expert. Remember, it must be 1.",
+"map": "lou_in01",
+"x": 43,
+"y": 147
+}
+]
+},
+{
+"code": "4_M_ARCHER",
+"links": [
+{
+"quest_id": 16203,
+"quest_name": "Dragon Beard Candy Delivery",
+"map": "cmd_in02",
+"x": 195,
+"y": 112
+}
+]
+},
+{
+"code": "4_M_ARUNA_NFM1",
+"links": [
+{
+"quest_id": 22317,
+"quest_name": "Mjolnir: Way Too Many, Even for Me",
+"map": "mjolnir_11",
+"x": 263,
+"y": 291
+}
+]
+},
+{
+"code": "4_M_BUDDHIST",
+"links": [
+{
+"quest_id": 3525,
+"quest_name": "Ancient Temple Cleansing Work: Eliminate the Leaf Cats",
+"map": "ayo_fild01",
+"x": 125,
+"y": 199
+}
+]
+},
+{
+"code": "4_M_CHN8GUEK",
+"links": [
+{
+"quest_id": 14872,
+"quest_name": "The soup base that the Four Dragons transferred to the soup was stolen without incident. Now go back and find Jiu Yanfu.",
+"map": "lou_fild01",
+"x": 195,
+"y": 177
+}
+]
+},
+{
+"code": "4_M_CHNCOOK",
+"links": [
+{
+"quest_id": 16185,
+"quest_name": "Soft and Slippery Special Dragon Beard Noodles",
+"map": "comodo",
+"x": 103,
+"y": 205
+}
+]
+},
+{
+"code": "4_M_CHNGENERL",
+"links": [
+{
+"quest_id": 14940,
+"quest_name": "Take this to the prefect.",
+"map": "lou_in01",
+"x": 99,
+"y": 158
+}
+]
+},
+{
+"code": "4_M_CHNMAN",
+"links": [
+{
+"quest_id": 14895,
+"quest_name": "Dragon City: Hospital of Dragon City",
+"map": "lou_in02",
+"x": 254,
+"y": 56
+}
+]
+},
+{
+"code": "4_M_CHNMONK",
+"links": [
+{
+"quest_id": 14946,
+"quest_name": "Are you recruiting companions? In this case, please go find the martial arts master Lang Lang. He will definitely be a powerful force.",
+"map": "louyang",
+"x": 106,
+"y": 214
+}
+]
+},
+{
+"code": "4_M_CHNOLD",
+"links": [
+{
+"quest_id": 14879,
+"quest_name": "Although it is troublesome, please go to the hospital for a checkup first. Did you know? Catching age-old illnesses early can save your life.",
+"map": "lou_in02",
+"x": 253,
+"y": 37
+}
+]
+},
+{
+"code": "4_M_CHNSOLDIER",
+"links": [
+{
+"quest_id": 14880,
+"quest_name": "The physical examination has been completed, so now you can go directly to the royal tomb. Please don&#x27;t push yourself too hard.",
+"map": "louyang",
+"x": 42,
+"y": 276
+}
+]
+},
+{
+"code": "4_M_DSTMAN",
+"links": [
+{
+"quest_id": 22715,
+"quest_name": "The man has regained consciousness. Talk to him.",
+"map": "moc_fild11",
+"x": 215,
+"y": 215
+}
+]
+},
+{
+"code": "4_M_DSTMANDEAD",
+"links": [
+{
+"quest_id": 22713,
+"quest_name": "You drew water from the oasis. Wake the collapsed man.",
+"map": "moc_fild11",
+"x": 215,
+"y": 215
+}
+]
+},
+{
+"code": "4_M_DST_GRAND",
+"links": [
+{
+"quest_id": 22704,
+"quest_name": "Sograt: Excavation Team Intern",
+"map": "moc_fild07",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_M_HUMERCHANT",
+"links": [
+{
+"quest_id": 22304,
+"quest_name": "Mjolnir: Is This Medicine Too?",
+"map": "mjolnir_08",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_M_JOB_BLACKSMITH",
+"links": [
+{
+"quest_id": 22852,
+"quest_name": "Blacksmith Wenjiale(3)",
+"map": "gon_dun03",
+"x": 68,
+"y": 12
+}
+]
+},
+{
+"code": "4_M_JOB_WIZARD",
+"links": []
+},
+{
+"code": "4_M_JPNOJI",
+"links": [
+{
+"quest_id": 16187,
+"quest_name": "Comodo Original Sea Dragon Grandmother Cooking Showdown",
+"map": "comodo",
+"x": 105,
+"y": 208
+}
+]
+},
+{
+"code": "4_M_JPNOJI2",
+"links": [
+{
+"quest_id": 22851,
+"quest_name": "Blacksmith Wenjiale(2)",
+"map": "gon_in",
+"x": 72,
+"y": 70
+}
+]
+},
+{
+"code": "4_M_KID1",
+"links": [
+{
+"quest_id": 22923,
+"quest_name": "Dad\u2019s Carrot Cake",
+"map": "prt_fild08",
+"x": 154,
+"y": 377
+}
+]
+},
+{
+"code": "4_M_KID2",
+"links": [
+{
+"quest_id": 16209,
+"quest_name": "Find Heath",
+"map": "comodo",
+"x": 147,
+"y": 334
+}
+]
+},
+{
+"code": "4_M_LGTPOOR",
+"links": [
+{
+"quest_id": 22356,
+"quest_name": "Stepped on the shadow on the witch picture in the square. Go back to Xiuxiu and listen to what follows.",
+"map": "niflheim",
+"x": 226,
+"y": 244
+}
+]
+},
+{
+"code": "4_M_MIDDLE",
+"links": [
+{
+"quest_id": 22718,
+"quest_name": "Sograt: Ingredients for a Local Specialty",
+"map": "moc_fild18",
+"x": 169,
+"y": 352
+}
+]
+},
+{
+"code": "4_M_MIDDLE1",
+"links": [
+{
+"quest_id": 16212,
+"quest_name": "Turtle Island: Navigation Officer 1st Class Gao Danfuluo",
+"map": "alberta",
+"x": 244,
+"y": 118
+}
+]
+},
+{
+"code": "4_M_MIKID",
+"links": [
+{
+"quest_id": 22314,
+"quest_name": "Mjolnir: Just to Have More Fun",
+"map": "mjolnir_09",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_M_REPAIR",
+"links": [
+{
+"quest_id": 22742,
+"quest_name": "The bridge seems sufficiently repaired. Return to Bridge Repairer Laon to receive your reward.",
+"map": "gef_fild04",
+"x": 210,
+"y": 58
+}
+]
+},
+{
+"code": "4_M_RUSBALD",
+"links": [
+{
+"quest_id": 3500,
+"quest_name": "Ouch Taiya: Looking for supporters",
+"map": "alberta",
+"x": 148,
+"y": 177
+}
+]
+},
+{
+"code": "4_M_RUSKING",
+"links": [
+{
+"quest_id": 3503,
+"quest_name": "Ouch Taiya: Meeting with the Leader",
+"map": "ayothaya",
+"x": 208,
+"y": 277
+}
+]
+},
+{
+"code": "4_M_SAGE_A",
+"links": [
+{
+"quest_id": 22915,
+"quest_name": "Tell No One",
+"map": "prt_fild00",
+"x": 251,
+"y": 238
+}
+]
+},
+{
+"code": "4_M_SEAMAN",
+"links": [
+{
+"quest_id": 22905,
+"quest_name": "Fishing Bait (1)",
+"map": "prt_fild03",
+"x": 336,
+"y": 62
+}
+]
+},
+{
+"code": "4_M_SITDOWN",
+"links": [
+{
+"quest_id": 22924,
+"quest_name": "The Tree Spirit of the Lush Forest",
+"map": "prt_fild10",
+"x": 250,
+"y": 272
+}
+]
+},
+{
+"code": "4_M_SIT_NOVICE",
+"links": [
+{
+"quest_id": 22749,
+"quest_name": "Geffen: Fishing Novice",
+"map": "gef_fild08",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_M_SNOWMAN",
+"links": [
+{
+"quest_id": 22913,
+"quest_name": "Defeat Sasquatch",
+"map": "xmas_fild01",
+"x": 0,
+"y": 0
+}
+]
+},
+{
+"code": "4_M_SURA",
+"links": [
+{
+"quest_id": 22316,
+"quest_name": "Mjolnir: A Tough Sparring Match",
+"map": "mjolnir_05",
+"x": 185,
+"y": 227
+}
+]
+},
+{
+"code": "4_M_THAIAYO",
+"links": [
+{
+"quest_id": 3510,
+"quest_name": "Ouch Taiya: Throwing water on Tuo Hengkun",
+"map": "ayothaya",
+"x": 145,
+"y": 282
+}
+]
+},
+{
+"code": "4_M_THAIOLD",
+"links": [
+{
+"quest_id": 3505,
+"quest_name": "Ouch Taiya: Preparing for the celebration",
+"map": "ayothaya",
+"x": 62,
+"y": 148
+}
+]
+},
+{
+"code": "4_M_THAIONGBAK",
+"links": [
+{
+"quest_id": 3515,
+"quest_name": "Obtain 20 shrimps, the main ingredient required for Thai BBQ, from Tong Bo.",
+"map": "ayothaya",
+"x": 153,
+"y": 86
+}
+]
+},
+{
+"code": "4_M_TWMASKMAN",
+"links": [
+{
+"quest_id": 22822,
+"quest_name": "Shi Yanwen\u2019s invitation",
+"map": "gon_in",
+"x": 17,
+"y": 93
+}
+]
+},
+{
+"code": "4_M_TWMIDMAN",
+"links": [
+{
+"quest_id": 22824,
+"quest_name": "Scattered Daoli(1)",
+"map": "gonryun",
+"x": 237,
+"y": 226
+}
+]
+},
+{
+"code": "4_M_TWOLDMAN",
+"links": [
+{
+"quest_id": 16211,
+"quest_name": "Turtle Island: Records of Turtle Island",
+"map": "alberta",
+"x": 246,
+"y": 117
+}
+]
+},
+{
+"code": "4_M_UMCHIE",
+"links": [
+{
+"quest_id": 16245,
+"quest_name": "Learn the Utan Tribe Language",
+"map": "um_in",
+"x": 39,
+"y": 122
+}
+]
+},
+{
+"code": "4_M_UMKID",
+"links": [
+{
+"quest_id": 22506,
+"quest_name": "Umbala: Face-to-Face",
+"map": "um_in",
+"x": 139,
+"y": 50
+}
+]
+},
+{
+"code": "4_M_UMSOLDIER",
+"links": [
+{
+"quest_id": 22501,
+"quest_name": "Umbala: Prenetan\u2019s Worry",
+"map": "umbala",
+"x": 201,
+"y": 96
+}
+]
+},
+{
+"code": "4_M_YOYOROGUE",
+"links": [
+{
+"quest_id": 16210,
+"quest_name": "Report to the Teacher",
+"map": "comodo",
+"x": 217,
+"y": 147
+}
+]
+},
+{
+"code": "4_NFWISP",
+"links": [
+{
+"quest_id": 22734,
+"quest_name": "Geffen: Swamp Preservation",
+"map": "gef_fild01",
+"x": 37,
+"y": 102
+}
+]
+},
+{
+"code": "4_ROPEPILE",
+"links": [
+{
+"quest_id": 22305,
+"quest_name": "Mjolnir: Fragrant Ughhh..",
+"map": "mjolnir_07",
+"x": 333,
+"y": 100
+}
+]
+},
+{
+"code": "4_SOIL",
+"links": [
+{
+"quest_id": 22310,
+"quest_name": "Mjolnir: Broken Trap",
+"map": "mjolnir_06",
+"x": 61,
+"y": 217
+}
+]
+},
+{
+"code": "4_TOWER_07",
+"links": [
+{
+"quest_id": 16205,
+"quest_name": "Deliver Candy to Cortu",
+"map": "cmd_in02",
+"x": 43,
+"y": 57
+}
+]
+},
+{
+"code": "4_TOWER_09",
+"links": [
+{
+"quest_id": 16204,
+"quest_name": "Deliver Candy to Sertorang",
+"map": "cmd_in02",
+"x": 73,
+"y": 29
+}
+]
+}
+]

@@ -67,6 +67,14 @@ export default async function QuestTownPage({
   const allQuests = (data ?? []) as QuestRow[];
   if (allQuests.length === 0) notFound();
 
+  // Quest-giver NPC sprites (quest_npcs, mirrored from the public rozerodb
+  // pages -- 81 quests have one). Missing rows just render no sprite.
+  const { data: npcRows } = await db
+    .from('quest_npcs')
+    .select('quest_id, sprite_code')
+    .in('quest_id', allQuests.map((q) => q.id));
+  const npcByQuest = new Map((npcRows ?? []).map((n) => [n.quest_id, n.sprite_code]));
+
   // Type chips are derived from what this town actually has, so a filter that
   // would show nothing is never offered. The whole hub stays one page; this
   // narrows it without changing any quest's canonical anchor.
@@ -129,31 +137,46 @@ export default async function QuestTownPage({
             <span className="tag">{TYPE_LABELS[quest.type] ?? quest.type}</span>
           </div>
 
-          <p className="muted" style={{ marginTop: 6 }}>
-            เควส #{quest.id}
-            {quest.map_code && (
-              <>
-                {' · '}แมพ <span className="mono">{quest.map_code}</span>
-                {quest.coord_x !== null && quest.coord_y !== null && (
-                  <span className="mono"> ({quest.coord_x}, {quest.coord_y})</span>
-                )}
-              </>
+          <p className="muted" style={{ marginTop: 4, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            {npcByQuest.has(quest.id) && (
+              <img
+                src={`/images/npcs/${(npcByQuest.get(quest.id) as string).toLowerCase()}.gif`}
+                alt=""
+                height={42}
+                style={{ imageRendering: 'pixelated' }}
+              />
             )}
+            <span>
+              เควส #{quest.id}
+              {npcByQuest.has(quest.id) && (
+                <>
+                  {' · '}NPC <span className="mono">{npcByQuest.get(quest.id)}</span>
+                </>
+              )}
+              {quest.map_code && (
+                <>
+                  {' · '}แมพ <span className="mono">{quest.map_code}</span>
+                  {quest.coord_x !== null && quest.coord_y !== null && (
+                    <span className="mono"> ({quest.coord_x}, {quest.coord_y})</span>
+                  )}
+                </>
+              )}
+            </span>
           </p>
 
           {/* Thai leads once translated; the English original stays visible in
               small type because the in-game client is English -- a player has
               to match names and objects against what the game shows them. */}
           {(quest.objective_th ?? quest.objective) && (
-            <p style={{ marginTop: 8 }}>
+            <p style={{ marginTop: 6, lineHeight: 1.55 }}>
               <strong>เป้าหมาย:</strong> {linkItemRefs((quest.objective_th ?? quest.objective) as string)}
             </p>
           )}
           {quest.description_th ? (
             <>
-              <p style={{ marginTop: 8, maxWidth: '70ch' }}>{linkItemRefs(quest.description_th)}</p>
+              <p style={{ marginTop: 6, maxWidth: '70ch', lineHeight: 1.55 }}>{linkItemRefs(quest.description_th)}</p>
               {quest.description && (
-                <p className="muted" style={{ marginTop: 4, maxWidth: '70ch', fontSize: 13 }}>{quest.description}</p>
+                <p className="muted" style={{ marginTop: 3, maxWidth: '70ch', fontSize: 13, lineHeight: 1.5 }}>{quest.description}</p>
               )}
             </>
           ) : (
