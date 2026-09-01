@@ -59,6 +59,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/tools/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
     { href: '/tools/damage', label: 'ตีด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
+    { href: '/tools/hit-flee', label: 'ตีโดนไหม', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
   ],
 };

@@ -59,7 +59,7 @@ describe('playerMaxHpFromContext', () => {
     // maxHp(level, vit, job): 35 + 50*20*1.25 = 1285, *(1 + 20/100) = 1542.
     // Asserting only ">0" would stay green even if level and vit were swapped
     // inside maxHp -- that swap gives 803, a threshold 47% too low.
-    const ctx: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20 };
+    const ctx: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20, dex: null, agi: null, luk: null };
     expect(playerMaxHpFromContext(ctx)).toBe(1542);
   });
 });

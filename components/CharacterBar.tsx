@@ -20,6 +20,9 @@ interface Draft {
   vit: string;
   damagePerHit: string;
   attacksPerSecond: string;
+  dex: string;
+  agi: string;
+  luk: string;
 }
 
 const EMPTY_DRAFT: Draft = {
@@ -28,6 +31,9 @@ const EMPTY_DRAFT: Draft = {
   vit: '',
   damagePerHit: '',
   attacksPerSecond: '',
+  dex: '',
+  agi: '',
+  luk: '',
 };
 
 function draftFrom(ctx: CharacterContext | null): Draft {
@@ -38,6 +44,9 @@ function draftFrom(ctx: CharacterContext | null): Draft {
     vit: String(ctx.vit),
     damagePerHit: String(ctx.damagePerHit),
     attacksPerSecond: String(ctx.attacksPerSecond),
+    dex: ctx.dex != null ? String(ctx.dex) : '',
+    agi: ctx.agi != null ? String(ctx.agi) : '',
+    luk: ctx.luk != null ? String(ctx.luk) : '',
   };
 }
 
@@ -144,6 +153,39 @@ export default function CharacterBar() {
               inputMode="decimal"
               value={draft.attacksPerSecond}
               onChange={(e) => setDraft({ ...draft, attacksPerSecond: e.target.value })}
+            />
+          </label>
+          {/* Optional trio: powers hit/dodge math (โอกาสตีโดน, หลบมอน). Blank
+              is fine -- every page that uses them says what filling them in
+              unlocks. */}
+          <label>
+            DEX (ไม่บังคับ)
+            <input
+              type="number"
+              min="1"
+              inputMode="numeric"
+              value={draft.dex}
+              onChange={(e) => setDraft({ ...draft, dex: e.target.value })}
+            />
+          </label>
+          <label>
+            AGI (ไม่บังคับ)
+            <input
+              type="number"
+              min="1"
+              inputMode="numeric"
+              value={draft.agi}
+              onChange={(e) => setDraft({ ...draft, agi: e.target.value })}
+            />
+          </label>
+          <label>
+            LUK (ไม่บังคับ)
+            <input
+              type="number"
+              min="1"
+              inputMode="numeric"
+              value={draft.luk}
+              onChange={(e) => setDraft({ ...draft, luk: e.target.value })}
             />
           </label>
 

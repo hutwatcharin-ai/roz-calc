@@ -8,7 +8,7 @@ import {
   type CharacterContext,
 } from './character-context';
 
-const VALID: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20 };
+const VALID: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20, dex: null, agi: null, luk: null };
 
 function fakeStorage(initial: Record<string, string> = {}) {
   const map = new Map(Object.entries(initial));
@@ -131,7 +131,15 @@ describe('characterFromInput', () => {
       vit: 50,
       damagePerHit: 1200,
       attacksPerSecond: 2.5,
+      dex: null,
+      agi: null,
+      luk: null,
     });
+  });
+
+  it('carries the optional accuracy stats through and degrades junk to null', () => {
+    expect(characterFromInput({ ...good, dex: '80', agi: '60', luk: '30' })).toMatchObject({ dex: 80, agi: 60, luk: 30 });
+    expect(characterFromInput({ ...good, dex: 'abc', agi: '-5', luk: '' })).toMatchObject({ dex: null, agi: null, luk: null });
   });
 
   it('rejects a blank field', () => {

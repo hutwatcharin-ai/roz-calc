@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
+import { fleeToCapDodge, hitChancePct, mobHit, playerFlee } from '@/lib/hit-flee';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
@@ -20,6 +21,9 @@ export interface AfkCandidate {
   image_url: string | null;
   skills: string[];
   spawn: { name: string; code: string; aggroCount: number } | null;
+  is_aggressive?: boolean | null;
+  agi?: number | null;
+  dex?: number | null;
 }
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
@@ -34,8 +38,10 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   // hp 0 is the importer's unknown-HP marker, so these rows can never pass the
   // one-hit filter. Saying so is cheaper than letting a reader wonder why the
-  // total never adds up.
-  const unknownHp = rows.filter((r) => !r.hp || r.hp <= 0).length;
+  // total never adds up. Base pool = non-aggressive rows (aggressive ones only
+  // enter via the dodge-cap rule below).
+  const baseRows = rows.filter((r) => !r.is_aggressive);
+  const unknownHp = baseRows.filter((r) => !r.hp || r.hp <= 0).length;
 
   // No second damage box on this page. The character bar already holds the
   // level and the damage per hit, and a page-local copy is exactly the
@@ -48,8 +54,30 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   // a character context, and this page exists to be findable and shareable),
   // and it renders on the server instead of appearing after hydration.
   const personal = ready && character !== null;
+  // The dodge math turns on only with AGI+LUK filled in; myFlee null keeps
+  // every aggressive monster out, exactly as before the hit/flee wave.
+  const myFlee = personal && character && character.agi != null && character.luk != null
+    ? playerFlee(character.level, character.agi, character.luk)
+    : null;
+
+  function theirHitPct(row: AfkCandidate): number | null {
+    if (myFlee === null) return null;
+    const hit = mobHit(row.level, row.dex ?? null);
+    if (hit === null) return null;
+    return hitChancePct(hit, myFlee);
+  }
+
+  // An aggressive monster qualifies only when it CANNOT realistically hit us:
+  // our FLEE at or past its 95%-dodge threshold.
+  function safeFromAggro(row: AfkCandidate): boolean {
+    if (myFlee === null) return false;
+    const hit = mobHit(row.level, row.dex ?? null);
+    if (hit === null) return false;
+    return myFlee >= fleeToCapDodge(hit);
+  }
 
   const candidates = rows
+    .filter((row) => (row.is_aggressive ? safeFromAggro(row) : true))
     .filter((row) => (personal && character ? diesInOneHit(row.hp, character.damagePerHit) : true))
     .filter((row) => !cleanMapOnly || row.spawn?.aggroCount === 0)
     .map((row) => ({ row, risks: riskySkills(row.skills) }))
@@ -86,14 +114,20 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
       <div className="card" style={{ marginTop: 20 }}>
         {personal && character ? (
           <p className="muted" style={{ margin: 0 }}>
-            จากมอนที่ไม่เข้าโจมตีก่อน {rows.length} ตัว ดาเมจ {character.damagePerHit.toLocaleString()} ต่อครั้งของคุณ
+            จากมอนที่ไม่เข้าโจมตีก่อน {baseRows.length} ตัว ดาเมจ {character.damagePerHit.toLocaleString()} ต่อครั้งของคุณ
             ฆ่าได้ในหมัดเดียว <strong>{candidates.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
             ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท
             {unknownHp > 0 && ` (อีก ${unknownHp} ตัวไม่มีค่า HP ในข้อมูล จึงไม่ถูกนับ)`}
+            {myFlee !== null && (() => {
+              const bonus = candidates.filter((c) => c.row.is_aggressive).length;
+              return bonus > 0
+                ? ` · FLEE ${myFlee} ของคุณเปิดเพิ่มอีก ${bonus} ตัวที่โจมตีก่อนแต่ตีคุณแทบไม่โดน (หลบ ≥95%)`
+                : '';
+            })()}
           </p>
         ) : (
           <p className="muted" style={{ margin: 0 }}>
-            มอนที่ไม่เข้าโจมตีก่อนทั้งหมด <strong>{rows.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
+            มอนที่ไม่เข้าโจมตีก่อนทั้งหมด <strong>{baseRows.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
             ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท ·{' '}
             <strong>กรอกเลเวลกับดาเมจต่อครั้งในแถบด้านบน</strong>{' '}
             แล้วรายการนี้จะเหลือเฉพาะตัวที่คุณฆ่าได้ในหมัดเดียว และบอกด้วยว่าดรอปโดนหักตามช่วงเลเวลหรือเปล่า
@@ -137,6 +171,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                 <th className="num"><button type="button" className="thsort" onClick={() => toggle('level')}>Lv {indicator('level')}</button></th>
                 <th className="num"><button type="button" className="thsort" onClick={() => toggle('hp')}>HP {indicator('hp')}</button></th>
                 <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp_per_hp')}>EXP/HP {indicator('exp_per_hp')}</button></th>
+                {myFlee !== null && <th className="num">มันตีเราโดน</th>}
                 {personal && <th className="num">EXP/ชม.</th>}
                 {personal && <th>ดรอปตามช่วงเลเวล</th>}
                 <th>สกิลที่ต้องระวัง</th>
@@ -158,6 +193,9 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                         />
                       )}
                       <Link href={`/database/monsters/${row.monster_id}`}>{row.name_en}</Link>
+                      {row.is_aggressive && (
+                        <span className="tag tag--risk" title="มอนตัวนี้โจมตีก่อน แต่ HIT ของมันตีค่า FLEE ของคุณแทบไม่โดน (หลบถึงเพดาน 95%)">โจมตีก่อน·หลบได้</span>
+                      )}
                     </div>
                   </td>
                   <td data-label="Lv" className="num">{row.level}</td>
@@ -167,6 +205,19 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                   <td data-label="EXP/HP" className="num" style={{ color: 'var(--yellow)' }}>
                     {row.exp_per_hp ?? '—'}
                   </td>
+                  {myFlee !== null && (
+                    <td data-label="มันตีเราโดน" className="num">
+                      {(() => {
+                        const p = theirHitPct(row);
+                        if (p === null) return '—';
+                        return (
+                          <span style={{ color: p <= 5 ? 'var(--status-safe)' : p >= 50 ? 'var(--status-danger)' : undefined }}>
+                            {p}%
+                          </span>
+                        );
+                      })()}
+                    </td>
+                  )}
                   {personal && character && (
                     <td data-label="EXP/ชม." className="num">
                       {(() => {

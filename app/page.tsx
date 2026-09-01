@@ -26,10 +26,12 @@ async function getFarmingRows(minLevel: number, maxLevel: number) {
   }
 
   const monsterIds = (stats ?? []).map((s) => s.monster_id);
-  const { data: spawns } = await db
-    .from('monster_spawns')
-    .select('monster_id, map_display_name')
-    .in('monster_id', monsterIds);
+  const [{ data: spawns }, { data: accStats }] = await Promise.all([
+    db.from('monster_spawns').select('monster_id, map_display_name').in('monster_id', monsterIds),
+    // agi/dex live on monsters, not the farming view -- they power the
+    // hit-chance column when the player has DEX/LUK filled in.
+    db.from('monsters').select('id, agi, dex').in('id', monsterIds),
+  ]);
 
   const spawnByMonster = new Map<number, string>();
   for (const s of spawns ?? []) {
@@ -38,7 +40,13 @@ async function getFarmingRows(minLevel: number, maxLevel: number) {
     }
   }
 
-  return (stats ?? []).map((s) => ({ ...s, spawn: spawnByMonster.get(s.monster_id) }));
+  const accById = new Map((accStats ?? []).map((m) => [m.id, m]));
+  return (stats ?? []).map((s) => ({
+    ...s,
+    spawn: spawnByMonster.get(s.monster_id),
+    agi: accById.get(s.monster_id)?.agi ?? null,
+    dex: accById.get(s.monster_id)?.dex ?? null,
+  }));
 }
 
 export default async function HomePage({

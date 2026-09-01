@@ -13,6 +13,12 @@ export interface CharacterContext {
   damagePerHit: number;
   attacksPerSecond: number;
   vit: number;
+  // Optional accuracy/evasion stats (2026-09-01, hit/flee wave). Null means
+  // "not filled in" -- older stored payloads lack these keys entirely, and a
+  // parse that rejected them would wipe every player's saved character.
+  dex: number | null;
+  agi: number | null;
+  luk: number | null;
 }
 
 export const CHARACTER_STORAGE_KEY = 'roz-calc:character';
@@ -24,6 +30,13 @@ export interface StorageLike {
 
 function isPositiveNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value) && value > 0;
+}
+
+// For the optional stats: absent or junk degrades to null rather than
+// invalidating the whole context -- these arrived later than the required
+// fields and must never break an existing save.
+function optionalPositive(value: unknown): number | null {
+  return isPositiveNumber(value) ? value : null;
 }
 
 // Validates rather than casts. A stored payload can be stale (written by an
@@ -42,7 +55,7 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
 
   if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return null;
 
-  const { level, job, damagePerHit, attacksPerSecond, vit } = parsed as Record<string, unknown>;
+  const { level, job, damagePerHit, attacksPerSecond, vit, dex, agi, luk } = parsed as Record<string, unknown>;
 
   if (!isPositiveNumber(level)) return null;
   if (!isPositiveNumber(damagePerHit)) return null;
@@ -50,7 +63,16 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
   if (!isPositiveNumber(vit)) return null;
   if (typeof job !== 'string' || !Object.prototype.hasOwnProperty.call(JOB_PROFILES, job)) return null;
 
-  return { level, job: job as JobKey, damagePerHit, attacksPerSecond, vit };
+  return {
+    level,
+    job: job as JobKey,
+    damagePerHit,
+    attacksPerSecond,
+    vit,
+    dex: optionalPositive(dex),
+    agi: optionalPositive(agi),
+    luk: optionalPositive(luk),
+  };
 }
 
 // The same rules applied to what a person typed rather than to what storage
@@ -63,6 +85,9 @@ export function characterFromInput(input: {
   vit: string;
   damagePerHit: string;
   attacksPerSecond: string;
+  dex?: string;
+  agi?: string;
+  luk?: string;
 }): CharacterContext | null {
   // No separate blank check: Number('') and Number('   ') are both 0, and
   // parseCharacterContext already rejects a non-positive number. One was
@@ -74,6 +99,9 @@ export function characterFromInput(input: {
       vit: Number(input.vit),
       damagePerHit: Number(input.damagePerHit),
       attacksPerSecond: Number(input.attacksPerSecond),
+      dex: input.dex ? Number(input.dex) : null,
+      agi: input.agi ? Number(input.agi) : null,
+      luk: input.luk ? Number(input.luk) : null,
     }),
   );
 }

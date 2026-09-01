@@ -8,6 +8,7 @@ import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
+import { hitChancePct, mobFlee, playerHit } from '@/lib/hit-flee';
 
 interface FarmingRow {
   monster_id: number;
@@ -21,6 +22,8 @@ interface FarmingRow {
   is_aggressive: boolean | null;
   atk_max: number | null;
   spawn?: string;
+  agi?: number | null;
+  dex?: number | null;
 }
 
 export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
@@ -36,6 +39,16 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
   // waiting for input, and rendering them with a guessed damage figure would
   // rank the table on a number nobody supplied.
   const personal = ready && character !== null;
+
+  // Hit chance needs the optional DEX/LUK from the character bar; without
+  // them the column simply does not render rather than assuming 100%.
+  const canHit = character && character.dex != null && character.luk != null;
+  function hitPctFor(row: FarmingRow): number | null {
+    if (!character || character.dex == null || character.luk == null) return null;
+    const flee = mobFlee(row.level, row.agi ?? null);
+    if (flee === null) return null;
+    return hitChancePct(playerHit(character.level, character.dex, character.luk), flee);
+  }
 
   function rateFor(row: FarmingRow) {
     if (!character) return null;
@@ -61,6 +74,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('hp')}>HP {indicator('hp')}</button></th>
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp_per_hp')}>EXP/HP {indicator('exp_per_hp')}</button></th>
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('zeny')}>Zeny/ตัว {indicator('zeny')}</button></th>
+            {personal && canHit && <th className="num">ตีโดน</th>}
             {personal && <th className="num">ตัว/ชม.</th>}
             {personal && <th className="num">EXP/ชม.</th>}
             {personal && <th>ดรอปตามช่วงเลเวล</th>}
@@ -102,6 +116,14 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                 <td data-label="HP" className="num">{row.hp.toLocaleString()}</td>
                 <td data-label="EXP/HP" className="num" style={{ color: 'var(--yellow)' }}>{row.exp_per_hp}</td>
                 <td data-label="Zeny/ตัว" className="num">{row.avg_zeny_per_kill.toLocaleString()}</td>
+                {personal && canHit && (
+                  <td data-label="ตีโดน" className="num">
+                    {(() => {
+                      const p = hitPctFor(row);
+                      return p === null ? '—' : `${p}%`;
+                    })()}
+                  </td>
+                )}
                 {personal && (
                   <td data-label="ตัว/ชม." className="num">
                     {personalRate ? formatKillsPerHour(personalRate.rate.killsPerHour) : '—'}
@@ -109,7 +131,14 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                 )}
                 {personal && (
                   <td data-label="EXP/ชม." className="num">
-                    {personalRate?.exp ? formatExpPerHour(personalRate.exp) : '—'}
+                    {(() => {
+                      if (!personalRate?.exp) return '—';
+                      // With DEX/LUK known, misses are real: scale by hit
+                      // chance so the ranking stops assuming every swing lands.
+                      const p = hitPctFor(row);
+                      const exp = p === null ? personalRate.exp : (personalRate.exp * p) / 100;
+                      return formatExpPerHour(exp);
+                    })()}
                   </td>
                 )}
                 {/* Drops fall by half beyond a 40-level gap (spec 3.9), which

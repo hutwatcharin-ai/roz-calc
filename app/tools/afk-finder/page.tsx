@@ -21,9 +21,11 @@ export const revalidate = 86400;
 async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean }> {
   const db = supabaseBrowser();
 
-  // Every monster that does not attack first. The one-hit filter happens in the
-  // browser because the damage figure lives in the character context, and 238
-  // rows is small enough to hand over whole.
+  // ALL monsters now, not just the non-aggressive ones: with the player's
+  // AGI/LUK known, an aggressive monster whose HIT cannot reach our FLEE
+  // (95% dodge cap) is ALSO a safe AFK target -- the client filters, because
+  // the verdict depends on the character context. The one-hit filter happens
+  // in the browser for the same reason.
   const stats = await fetchAllRows<{
     monster_id: number;
     name_en: string;
@@ -33,11 +35,11 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
     exp_per_hp: number | null;
     avg_zeny_per_kill: number | null;
     image_url: string | null;
+    is_aggressive: boolean | null;
   }>((from, to) =>
     db
       .from('monster_farming_stats')
-      .select('monster_id, name_en, level, hp, base_exp, exp_per_hp, avg_zeny_per_kill, image_url')
-      .eq('is_aggressive', false)
+      .select('monster_id, name_en, level, hp, base_exp, exp_per_hp, avg_zeny_per_kill, image_url, is_aggressive')
       .order('monster_id')
       .range(from, to),
   );
@@ -72,8 +74,8 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
   const allSpawns = await fetchAllRows<{ monster_id: number; map_code: string | null }>((from, to) =>
     db.from('monster_spawns').select('monster_id, map_code').order('monster_id').range(from, to),
   );
-  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null }>((from, to) =>
-    db.from('monsters').select('id, is_aggressive').order('id').range(from, to),
+  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null; agi: number | null; dex: number | null }>((from, to) =>
+    db.from('monsters').select('id, is_aggressive, agi, dex').order('id').range(from, to),
   );
 
   // A failed skill or spawn read must not render as "no skills, no maps" -- the
@@ -117,11 +119,14 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
     }
   }
 
+  const accById = new Map((aggroFlags.data ?? []).map((m) => [m.id, m]));
   return {
     rows: (stats.data ?? []).map((s) => ({
       ...s,
       skills: skillsByMonster.get(s.monster_id) ?? [],
       spawn: spawnByMonster.get(s.monster_id) ?? null,
+      agi: accById.get(s.monster_id)?.agi ?? null,
+      dex: accById.get(s.monster_id)?.dex ?? null,
     })),
     failed: false,
   };
