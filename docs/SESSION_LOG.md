@@ -22,6 +22,7 @@
 - กวาดไอคอน "No Image" ปลอม 1,986 ไฟล์ (md5 เดียวกัน) — mirror script reject hash นั้นแล้ว · สรุป item: sprite จริง 2,500 / ตัวย่อ 1,333
 - Slot การ์ด: parse จาก rozerodb export 2,661 คู่ → matched 1,781 (`data/equipment-slots.json`)
 - ดรอปไม่ทราบอัตรา 410 แถวจาก midgardhub CSV (rate NULL) — ดรอปที่มีอัตราตรงกับเขาอยู่แล้วทุกช่อง · เครดิตใน footer
+- ราคาซื้อ/ขาย equipment sync จาก rozerodb รายหน้า 1,815 ตัว (user report ราคาขายไม่ตรงเกม, user เลือกเชื่อ rozerodb) — อัปเดต 303 แถว หลายตัวขายจริงได้ 0 (Trident 25,500→0) · ของ ETC ตรงอยู่แล้ว (client dataset มี sell จริงเช่น Star Crumb 10z)
 - weapon_type ล้างแล้ว: case dupes รวม, Sword/Spear เปล่า→One-handed, Helmet→Headgear
 - AFK: ความปลอดภัยระดับแมพ (census มอน aggro ต่อแมพจาก spawns ทุกแถว เลือกแมพเสี่ยงต่ำสุด + ป้ายแมพสะอาด/โจมตีก่อน N ชนิด) + ปลด cap แสดงครบ + toggle แมพสะอาด/ไม่มีสกิลเสี่ยง
 
