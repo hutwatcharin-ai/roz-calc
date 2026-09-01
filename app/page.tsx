@@ -77,9 +77,12 @@ export default async function HomePage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตอนนี้ติดอะไรอยู่?</h1>
+      {/* H1 carries the queries players actually type (จุดฟาร์ม / Ragnarok
+          Zero / ภาษาไทย), not a mood line — this is the only H1 the domain
+          gets to rank with (user call, 1 Sep). */}
+      <h1 className="pagehead__title">หาจุดฟาร์ม Ragnarok Zero Global ตามเลเวลของคุณ</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        ฐานข้อมูล Ragnarok Zero Global ภาษาไทย — เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
+        ฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด เควส ภาษาไทย — เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
       </p>
 
       <div className="qgrid">
