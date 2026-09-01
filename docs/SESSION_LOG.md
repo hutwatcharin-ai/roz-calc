@@ -32,7 +32,7 @@
 - Cash Shop 77 (`data/cash-shop-th.json`)
 
 **NPC ในเควส**
-- ทำได้แล้ว (เคยสรุปว่าไม่ได้): crawl หน้า NPC รายตัวของ rozerodb 84 หน้า → join NPC→quest 81 คู่ (`data/npc-quests.json`, ตาราง `quest_npcs`), sprite 84 ไฟล์ `public/images/npcs/` — การ์ดเควสโชว์รูป+รหัส (มี session ขนานทำ feature เดียวกัน commit b105a3d — ไฟล์ตรงกัน ไม่ชน)
+- ทำได้แล้ว (เคยสรุปว่าไม่ได้): crawl หน้า NPC รายตัวของ rozerodb 84 หน้า → join NPC→quest 81 คู่ (`data/npc-quests.json`, ตาราง `quest_npcs`), sprite 84 ไฟล์ `public/images/npcs/` — การ์ดเควสโชว์รูป+รหัส (มี session ขนานทำ feature เดียวกัน commit b105a3d — ไฟล์ตรงกัน ไม่ชน) · hover ที่รูป NPC ขยาย 2.4 เท่า (`.npcsprite`, scale จากเท้า, ปิด transition ตาม prefers-reduced-motion)
 
 **อื่นๆ**
 - ลิงก์ entity เชื่อมครบ: ดรอปในหน้ามอน→item, dropped-by ในหน้า item→มอน, drop-finder→item, อ้างอิง `[ชื่อ]id` ในเควส (133 จุด) → item (lib/quest-item-refs + เทสต์)
