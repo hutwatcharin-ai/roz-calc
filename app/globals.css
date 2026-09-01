@@ -147,7 +147,10 @@ table { border-collapse: collapse; width: 100%; }
      (user decision, 1 Sep). The search button that used to share row one
      is gone, so the row order comment above it went with it. */
   flex-wrap: wrap;
-  padding-top: 6px;
+  /* Equal air above and below the button row -- bottom used to be 0, so the
+     cards sat flush on the topbar's bottom border (user report, 1 Sep). */
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-top: 1px solid var(--hair);
 }
 
@@ -162,13 +165,16 @@ table { border-collapse: collapse; width: 100%; }
   text-decoration: none;
   white-space: nowrap;
   /* Card buttons on every width (user pick, 1 Sep) -- same face as the
-     phone grid, so the nav reads as one system. */
-  background: var(--panel);
+     phone grid, so the nav reads as one system. --panel-2 not --panel: on the
+     page ground --panel barely read as a surface (user report, 1 Sep). */
+  background: var(--panel-2);
   border: 1px solid var(--hair);
 }
 
-.subnav a:hover { color: var(--text); background: var(--panel-2); }
-.subnav a.on { color: var(--yellow); background: var(--panel-2); border-color: var(--yellow); }
+.subnav a:hover { color: var(--text); border-color: var(--cyan); }
+/* Active = filled yellow, same language as the topnav pill -- the two rows
+   used to speak two different active styles (user report, 1 Sep). */
+.subnav a.on { color: var(--yellow-ink); background: var(--yellow); border-color: var(--yellow); font-weight: 700; }
 
 /* On a phone there is not enough inline room beside the brand mark and search
    button for four nav links plus the section row (measured: .topnav had
@@ -198,7 +204,7 @@ table { border-collapse: collapse; width: 100%; }
     gap: 5px;
   }
   .subnav a {
-    background: var(--panel);
+    background: var(--panel-2);
     border: 1px solid var(--hair);
     border-radius: 8px;
     padding: 9px 8px;
@@ -206,9 +212,9 @@ table { border-collapse: collapse; width: 100%; }
     min-height: 40px;
   }
   .subnav a.on {
-    color: var(--yellow);
+    color: var(--yellow-ink);
     border-color: var(--yellow);
-    background: var(--panel-2);
+    background: var(--yellow);
     box-shadow: none;
   }
 }
@@ -449,12 +455,12 @@ table { border-collapse: collapse; width: 100%; }
 
 /* Reserves the collapsed height before storage has been read, so the page does
    not jump once the context loads. */
-.charbar--placeholder { min-height: 41px; }
+.charbar--placeholder { min-height: 45px; }
 
 .charbar__row {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 8px 16px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
