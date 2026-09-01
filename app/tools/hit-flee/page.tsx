@@ -19,7 +19,7 @@ import {
 export const metadata = {
   title: 'คำนวณ HIT/FLEE Ragnarok Zero',
   description:
-    'กรอกเลเวล DEX AGI LUK แล้วดูว่าตีมอนแต่ละตัวโดนกี่เปอร์เซ็นต์ และมอนตีคุณโดนแค่ไหน คำนวณจากสูตร Renewal ของ Ragnarok Zero',
+    'กรอก HIT/FLEE จากหน้าต่างสเตตัส แล้วดูว่าตีมอนแต่ละตัวโดนกี่เปอร์เซ็นต์ และมอนตีคุณโดนแค่ไหน ใน Ragnarok Zero',
 };
 
 export const revalidate = 86400;
@@ -27,17 +27,25 @@ export const revalidate = 86400;
 export default async function HitFleePage({
   searchParams,
 }: {
-  searchParams: { lv?: string; dex?: string; agi?: string; luk?: string; range?: string };
+  searchParams: { lv?: string; hit?: string; flee?: string; dex?: string; agi?: string; luk?: string; range?: string };
 }) {
   const lv = Math.max(0, Number(searchParams.lv ?? 0) || 0);
+  const range = Math.max(1, Number(searchParams.range ?? 10) || 10);
+
+  // Since the mob side is player-facing thresholds, the player side needs no
+  // formula either: type HIT/FLEE straight off the status window (Alt+A),
+  // same call as character-context v2 (user, 2 Sep). Old shared links that
+  // carried dex/agi/luk still resolve through the Renewal formulas.
+  const hitParam = Math.max(0, Number(searchParams.hit ?? 0) || 0);
+  const fleeParam = Math.max(0, Number(searchParams.flee ?? 0) || 0);
   const dex = Math.max(0, Number(searchParams.dex ?? 0) || 0);
   const agi = Math.max(0, Number(searchParams.agi ?? 0) || 0);
   const luk = Math.max(0, Number(searchParams.luk ?? 0) || 0);
-  const range = Math.max(1, Number(searchParams.range ?? 10) || 10);
-  const filled = lv > 0;
+  const legacy = hitParam === 0 && fleeParam === 0 && (dex > 0 || agi > 0 || luk > 0);
 
-  const myHit = filled ? playerHit(lv, dex, luk) : null;
-  const myFlee = filled ? playerFlee(lv, agi, luk) : null;
+  const myHit = hitParam > 0 ? hitParam : legacy && lv > 0 ? playerHit(lv, dex, luk) : null;
+  const myFlee = fleeParam > 0 ? fleeParam : legacy && lv > 0 ? playerFlee(lv, agi, luk) : null;
+  const filled = lv > 0 && myHit !== null && myFlee !== null;
 
   const db = supabaseBrowser();
   const { data: monsters, error } = filled
@@ -57,10 +65,10 @@ export default async function HitFleePage({
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader
         title="คำนวณ HIT / FLEE — ตีโดนไหม หลบพ้นไหม"
-        lead="กรอกค่าตัวละคร แล้วดูเป็นเปอร์เซ็นต์: คุณตีมอนโดนแค่ไหน และมอนตีคุณโดนแค่ไหน"
+        lead="กรอก HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วดูเป็นเปอร์เซ็นต์: คุณตีมอนโดนแค่ไหน และมอนตีคุณโดนแค่ไหน"
         source={
           <>
-            <strong>ที่มา:</strong> HIT/FLEE ฝั่งคุณคิดจากสูตร Renewal (HIT = 175+Lv+DEX+LUK/3 · FLEE = 100+Lv+AGI+LUK/5) · ฝั่งมอนใช้ค่าเป้าที่วัดแล้วจาก midgardhub (HIT ที่ตีโดน 100% / FLEE ที่หลบได้ 95%) · โอกาสขยับ 1% ต่อ 1 แต้ม (ขั้นต่ำ 5% เพดาน 100%)
+            <strong>ที่มา:</strong> ฝั่งมอนใช้ค่าเป้าที่วัดแล้วจาก midgardhub (HIT ที่ตีโดน 100% / FLEE ที่หลบได้ 95%) · โอกาสขยับ 1% ต่อ 1 แต้ม (ขั้นต่ำ 5% เพดาน 100%)
           </>
         }
       />
@@ -71,16 +79,12 @@ export default async function HitFleePage({
           <input className="mono" type="number" name="lv" defaultValue={lv > 0 ? lv : ''} inputMode="numeric" style={{ width: 76 }} required />
         </label>
         <label>
-          DEX{' '}
-          <input className="mono" type="number" name="dex" defaultValue={dex > 0 ? dex : ''} inputMode="numeric" style={{ width: 76 }} />
+          HIT{' '}
+          <input className="mono" type="number" name="hit" defaultValue={myHit ?? ''} inputMode="numeric" style={{ width: 90 }} required />
         </label>
         <label>
-          AGI{' '}
-          <input className="mono" type="number" name="agi" defaultValue={agi > 0 ? agi : ''} inputMode="numeric" style={{ width: 76 }} />
-        </label>
-        <label>
-          LUK{' '}
-          <input className="mono" type="number" name="luk" defaultValue={luk > 0 ? luk : ''} inputMode="numeric" style={{ width: 76 }} />
+          FLEE{' '}
+          <input className="mono" type="number" name="flee" defaultValue={myFlee ?? ''} inputMode="numeric" style={{ width: 90 }} required />
         </label>
         <label>
           ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 64 }} aria-label="ช่วงเลเวลมอน" />
@@ -103,8 +107,8 @@ export default async function HitFleePage({
 
       {!filled && (
         <p className="muted" style={{ marginTop: 18, maxWidth: '65ch' }}>
-          ใส่เลเวลแล้วกดคำนวณ (DEX/AGI/LUK ว่าง = 0) —
-          ได้ตารางต่อมอน: ตีโดนกี่ % โดนตีกี่ % และเป้า HIT/FLEE สำหรับ &ldquo;โดน 100%&rdquo; / &ldquo;หลบตัน 95%&rdquo;
+          ใส่เลเวลกับ HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วกดคำนวณ —
+          ได้ตารางต่อมอน: ตีโดนกี่ % โดนตีกี่ % และเป้า HIT/FLEE สำหรับ &ldquo;โดน 100%&rdquo; / &ldquo;หลบตัน 95%&rdquo; · เลเวลใช้เลือกช่วงมอนที่โชว์เท่านั้น
         </p>
       )}
 
