@@ -4,7 +4,6 @@
 // failure players care about, and no competing site surfaces this field at all
 // (spec 3.15.1). It appears on every surface a monster appears on.
 
-import { maxHp } from './formulas';
 import type { CharacterContext } from './character-context';
 
 export type AggroLevel = 'safe' | 'aggressive' | 'caution' | 'danger';
@@ -33,11 +32,9 @@ export function aggroLevel(
   return monster.atk_max >= playerMaxHp * DANGER_ATK_RATIO ? 'danger' : 'caution';
 }
 
-// VIT lives on CharacterContext itself (lib/character-context.ts) rather than
-// being passed in separately: two Wave 2 pages guessing different VITs for the
-// same player would grade the same monster differently, and a guessed VIT
-// driving a "อันตราย"/"ระวัง" claim is an invented game value.
+// v2: the player types the Max HP the game shows -- gear and buffs included --
+// so the danger grade stands on a real number instead of our HP formula.
 export function playerMaxHpFromContext(ctx: CharacterContext | null): number | null {
   if (!ctx) return null;
-  return maxHp(ctx.level, ctx.vit, ctx.job);
+  return ctx.maxHp;
 }

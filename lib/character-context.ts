@@ -5,20 +5,22 @@
 // No React and no browser globals in this file. Callers pass storage in, which
 // is what lets these run under plain vitest with no DOM.
 
-import { JOB_PROFILES, type JobKey } from './formulas';
+import { JOB_PROFILES, maxHp as maxHpFormula, type JobKey } from './formulas';
+import { playerFlee, playerHit } from './hit-flee';
 
+// v2 (2026-09-01): the player enters numbers the game already shows on the
+// status window -- Max HP, HIT, FLEE -- instead of VIT/job/DEX/AGI/LUK that we
+// then pushed through formulas of our own. Direct numbers include gear and
+// buffs, work for every job, and remove two guessed formulas from under the
+// site's danger badge. v1 payloads are migrated in the parser below.
 export interface CharacterContext {
   level: number;
-  job: JobKey;
   damagePerHit: number;
   attacksPerSecond: number;
-  vit: number;
-  // Optional accuracy/evasion stats (2026-09-01, hit/flee wave). Null means
-  // "not filled in" -- older stored payloads lack these keys entirely, and a
-  // parse that rejected them would wipe every player's saved character.
-  dex: number | null;
-  agi: number | null;
-  luk: number | null;
+  maxHp: number;
+  // Optional: null means "not filled in".
+  hit: number | null;
+  flee: number | null;
 }
 
 export const CHARACTER_STORAGE_KEY = 'roz-calc:character';
@@ -55,24 +57,46 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
 
   if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return null;
 
-  const { level, job, damagePerHit, attacksPerSecond, vit, dex, agi, luk } = parsed as Record<string, unknown>;
+  const { level, job, damagePerHit, attacksPerSecond, vit, dex, agi, luk, maxHp, hit, flee } =
+    parsed as Record<string, unknown>;
 
   if (!isPositiveNumber(level)) return null;
   if (!isPositiveNumber(damagePerHit)) return null;
   if (!isPositiveNumber(attacksPerSecond)) return null;
-  if (!isPositiveNumber(vit)) return null;
-  if (typeof job !== 'string' || !Object.prototype.hasOwnProperty.call(JOB_PROFILES, job)) return null;
 
-  return {
-    level,
-    job: job as JobKey,
-    damagePerHit,
-    attacksPerSecond,
-    vit,
-    dex: optionalPositive(dex),
-    agi: optionalPositive(agi),
-    luk: optionalPositive(luk),
-  };
+  // v2 payload: maxHp present.
+  if (isPositiveNumber(maxHp)) {
+    return {
+      level,
+      damagePerHit,
+      attacksPerSecond,
+      maxHp,
+      hit: optionalPositive(hit),
+      flee: optionalPositive(flee),
+    };
+  }
+
+  // v1 migration: derive the direct numbers once from the old fields via the
+  // same formulas v1 applied on every read. A later save writes v2.
+  if (
+    isPositiveNumber(vit) &&
+    typeof job === 'string' &&
+    Object.prototype.hasOwnProperty.call(JOB_PROFILES, job)
+  ) {
+    const dexN = optionalPositive(dex);
+    const agiN = optionalPositive(agi);
+    const lukN = optionalPositive(luk) ?? 0;
+    return {
+      level,
+      damagePerHit,
+      attacksPerSecond,
+      maxHp: maxHpFormula(level, vit, job as JobKey),
+      hit: dexN !== null ? playerHit(level, dexN, lukN) : null,
+      flee: agiN !== null ? playerFlee(level, agiN, lukN) : null,
+    };
+  }
+
+  return null;
 }
 
 // The same rules applied to what a person typed rather than to what storage
@@ -81,13 +105,11 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
 // One set of rules, two entry points.
 export function characterFromInput(input: {
   level: string;
-  job: string;
-  vit: string;
+  maxHp: string;
   damagePerHit: string;
   attacksPerSecond: string;
-  dex?: string;
-  agi?: string;
-  luk?: string;
+  hit?: string;
+  flee?: string;
 }): CharacterContext | null {
   // No separate blank check: Number('') and Number('   ') are both 0, and
   // parseCharacterContext already rejects a non-positive number. One was
@@ -95,13 +117,11 @@ export function characterFromInput(input: {
   return parseCharacterContext(
     JSON.stringify({
       level: Number(input.level),
-      job: input.job,
-      vit: Number(input.vit),
+      maxHp: Number(input.maxHp),
       damagePerHit: Number(input.damagePerHit),
       attacksPerSecond: Number(input.attacksPerSecond),
-      dex: input.dex ? Number(input.dex) : null,
-      agi: input.agi ? Number(input.agi) : null,
-      luk: input.luk ? Number(input.luk) : null,
+      hit: input.hit ? Number(input.hit) : null,
+      flee: input.flee ? Number(input.flee) : null,
     }),
   );
 }

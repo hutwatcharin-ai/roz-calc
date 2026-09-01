@@ -8,7 +8,14 @@ import {
   type CharacterContext,
 } from './character-context';
 
-const VALID: CharacterContext = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20, dex: null, agi: null, luk: null };
+const VALID: CharacterContext = {
+  level: 50,
+  damagePerHit: 250,
+  attacksPerSecond: 2.5,
+  maxHp: 1542,
+  hit: null,
+  flee: null,
+};
 
 function fakeStorage(initial: Record<string, string> = {}) {
   const map = new Map(Object.entries(initial));
@@ -21,15 +28,15 @@ function fakeStorage(initial: Record<string, string> = {}) {
 function throwingStorage() {
   return {
     getItem: () => {
-      throw new DOMException('The operation is insecure.', 'SecurityError');
+      throw new Error('blocked');
     },
     setItem: () => {
-      throw new DOMException('The operation is insecure.', 'SecurityError');
+      throw new Error('blocked');
     },
   };
 }
 
-describe('parseCharacterContext', () => {
+describe('parseCharacterContext (v2)', () => {
   it('parses a well-formed payload', () => {
     expect(parseCharacterContext(JSON.stringify(VALID))).toEqual(VALID);
   });
@@ -39,44 +46,67 @@ describe('parseCharacterContext', () => {
   });
 
   it('returns null for malformed JSON instead of throwing', () => {
-    expect(parseCharacterContext('{not json')).toBeNull();
+    expect(parseCharacterContext('{oops')).toBeNull();
   });
 
   it('returns null when a required field is missing', () => {
-    expect(parseCharacterContext(JSON.stringify({ level: 50, job: 'knight' }))).toBeNull();
-  });
-
-  it('returns null for an unknown job rather than trusting it', () => {
-    expect(parseCharacterContext(JSON.stringify({ ...VALID, job: 'summoner' }))).toBeNull();
+    const { maxHp: _hp, ...rest } = VALID;
+    expect(parseCharacterContext(JSON.stringify(rest))).toBeNull();
   });
 
   it('returns null when a numeric field arrives as a string', () => {
-    expect(parseCharacterContext(JSON.stringify({ ...VALID, level: '50' }))).toBeNull();
+    expect(parseCharacterContext(JSON.stringify({ ...VALID, maxHp: '1542' }))).toBeNull();
   });
 
-  it('rejects a non-positive level', () => {
+  it('rejects a non-positive level or maxHp', () => {
     expect(parseCharacterContext(JSON.stringify({ ...VALID, level: 0 }))).toBeNull();
+    expect(parseCharacterContext(JSON.stringify({ ...VALID, maxHp: 0 }))).toBeNull();
   });
 
-  it('rejects a payload missing vit -- a value stored before vit existed must not silently pass', () => {
-    const { vit, ...withoutVit } = VALID as any;
-    expect(parseCharacterContext(JSON.stringify(withoutVit))).toBeNull();
-  });
-
-  it('rejects a non-positive vit', () => {
-    expect(parseCharacterContext(JSON.stringify({ ...VALID, vit: 0 }))).toBeNull();
+  it('degrades junk optional hit/flee to null instead of rejecting the save', () => {
+    expect(parseCharacterContext(JSON.stringify({ ...VALID, hit: 'abc', flee: -4 }))).toEqual({
+      ...VALID,
+      hit: null,
+      flee: null,
+    });
   });
 
   it('rejects a JSON array, which parses but is not a context', () => {
-    expect(parseCharacterContext('[]')).toBeNull();
+    expect(parseCharacterContext(JSON.stringify([VALID]))).toBeNull();
+  });
+});
+
+describe('parseCharacterContext (v1 migration)', () => {
+  const V1 = { level: 50, job: 'knight', damagePerHit: 250, attacksPerSecond: 2.5, vit: 20 };
+
+  it('derives maxHp from the old vit/job via the v1 formula, pinned', () => {
+    // knight hpFactor 1.25: (35 + 50*20*1.25) * 1.20 = 1542.
+    expect(parseCharacterContext(JSON.stringify(V1))).toEqual({
+      level: 50,
+      damagePerHit: 250,
+      attacksPerSecond: 2.5,
+      maxHp: 1542,
+      hit: null,
+      flee: null,
+    });
   });
 
-  it('rejects job: "constructor" (prototype property) to prevent NaN in calculations', () => {
-    expect(parseCharacterContext(JSON.stringify({ ...VALID, job: 'constructor' }))).toBeNull();
+  it('derives hit/flee from old dex/agi/luk via the renewal formulas, pinned', () => {
+    const parsed = parseCharacterContext(JSON.stringify({ ...V1, dex: 60, agi: 40, luk: 20 }));
+    // 175+50+60+6 = 291 · 100+50+40+4 = 194.
+    expect(parsed).toMatchObject({ hit: 291, flee: 194 });
   });
 
-  it('rejects job: "__proto__" (prototype property) to prevent NaN in calculations', () => {
-    expect(parseCharacterContext(JSON.stringify({ ...VALID, job: '__proto__' }))).toBeNull();
+  it('rejects a v1 payload with an unknown or prototype-property job', () => {
+    // `job in JOB_PROFILES` would let "constructor" through and put NaN into
+    // the migrated maxHp.
+    expect(parseCharacterContext(JSON.stringify({ ...V1, job: 'constructor' }))).toBeNull();
+    expect(parseCharacterContext(JSON.stringify({ ...V1, job: '__proto__' }))).toBeNull();
+    expect(parseCharacterContext(JSON.stringify({ ...V1, job: 'bard' }))).toBeNull();
+  });
+
+  it('rejects a v1 payload with non-positive vit', () => {
+    expect(parseCharacterContext(JSON.stringify({ ...V1, vit: 0 }))).toBeNull();
   });
 });
 
@@ -118,8 +148,7 @@ describe('writeCharacterContext', () => {
 describe('characterFromInput', () => {
   const good = {
     level: '99',
-    job: 'knight',
-    vit: '50',
+    maxHp: '5000',
     damagePerHit: '1200',
     attacksPerSecond: '2.5',
   };
@@ -127,25 +156,23 @@ describe('characterFromInput', () => {
   it('accepts a filled-in form', () => {
     expect(characterFromInput(good)).toEqual({
       level: 99,
-      job: 'knight',
-      vit: 50,
+      maxHp: 5000,
       damagePerHit: 1200,
       attacksPerSecond: 2.5,
-      dex: null,
-      agi: null,
-      luk: null,
+      hit: null,
+      flee: null,
     });
   });
 
-  it('carries the optional accuracy stats through and degrades junk to null', () => {
-    expect(characterFromInput({ ...good, dex: '80', agi: '60', luk: '30' })).toMatchObject({ dex: 80, agi: 60, luk: 30 });
-    expect(characterFromInput({ ...good, dex: 'abc', agi: '-5', luk: '' })).toMatchObject({ dex: null, agi: null, luk: null });
+  it('carries the optional hit/flee through and degrades junk to null', () => {
+    expect(characterFromInput({ ...good, hit: '290', flee: '195' })).toMatchObject({ hit: 290, flee: 195 });
+    expect(characterFromInput({ ...good, hit: 'abc', flee: '-5' })).toMatchObject({ hit: null, flee: null });
   });
 
-  it('rejects a blank field', () => {
+  it('rejects a blank required field', () => {
     // Not because of a blank check -- there isn't one. Number('') is 0 and zero
     // is not positive, so the rule that rejects "0" rejects "" and "   " too.
-    for (const key of ['level', 'vit', 'damagePerHit', 'attacksPerSecond'] as const) {
+    for (const key of ['level', 'maxHp', 'damagePerHit', 'attacksPerSecond'] as const) {
       expect(characterFromInput({ ...good, [key]: '' })).toBeNull();
       expect(characterFromInput({ ...good, [key]: '   ' })).toBeNull();
     }
@@ -157,17 +184,10 @@ describe('characterFromInput', () => {
     expect(characterFromInput({ ...good, attacksPerSecond: 'สอง' })).toBeNull();
   });
 
-  it('rejects a job that is not in JOB_PROFILES', () => {
-    // Including one that exists on Object.prototype: `job in JOB_PROFILES`
-    // would let "constructor" through and put NaN into every HP figure.
-    expect(characterFromInput({ ...good, job: 'constructor' })).toBeNull();
-    expect(characterFromInput({ ...good, job: 'bard' })).toBeNull();
-  });
-
   it('agrees with what the form will read back from storage', () => {
     // The whole point of sharing the validator: a value the form accepted must
     // survive a round trip through storage unchanged.
-    const ctx = characterFromInput(good);
+    const ctx = characterFromInput({ ...good, hit: '290', flee: '195' });
     expect(parseCharacterContext(JSON.stringify(ctx))).toEqual(ctx);
   });
 });

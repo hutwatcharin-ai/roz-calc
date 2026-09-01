@@ -3,51 +3,46 @@
 // The one place the site asks who the player is. Every tool reads the answer
 // from the shared context instead of asking again (spec 3.15.2), so this bar
 // sits in the layout and is the only form that writes it.
+//
+// v2 (2026-09-01): the form asks for the numbers the game's status window
+// already shows -- Max HP, HIT, FLEE -- instead of VIT/job/DEX/AGI/LUK that
+// v1 pushed through formulas of our own. Direct numbers include gear and
+// buffs, work for every job (the 4-job HP-factor limit is gone with the
+// formula), and the danger badge now stands on a real value.
 
 import { useEffect, useState } from 'react';
-import { JOB_PROFILES, type JobKey } from '@/lib/formulas';
-import { maxHp } from '@/lib/formulas';
 import { characterFromInput, type CharacterContext } from '@/lib/character-context';
-import { playerFlee, playerHit } from '@/lib/hit-flee';
 import { usePathname } from 'next/navigation';
 import { usesCharacterContext } from '@/lib/nav-links';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 
-const JOB_KEYS = Object.keys(JOB_PROFILES) as JobKey[];
-
 interface Draft {
   level: string;
-  job: JobKey;
-  vit: string;
+  maxHp: string;
   damagePerHit: string;
   attacksPerSecond: string;
-  dex: string;
-  agi: string;
-  luk: string;
+  hit: string;
+  flee: string;
 }
 
 const EMPTY_DRAFT: Draft = {
   level: '',
-  job: JOB_KEYS[0],
-  vit: '',
+  maxHp: '',
   damagePerHit: '',
   attacksPerSecond: '',
-  dex: '',
-  agi: '',
-  luk: '',
+  hit: '',
+  flee: '',
 };
 
 function draftFrom(ctx: CharacterContext | null): Draft {
   if (!ctx) return EMPTY_DRAFT;
   return {
     level: String(ctx.level),
-    job: ctx.job,
-    vit: String(ctx.vit),
+    maxHp: String(ctx.maxHp),
     damagePerHit: String(ctx.damagePerHit),
     attacksPerSecond: String(ctx.attacksPerSecond),
-    dex: ctx.dex != null ? String(ctx.dex) : '',
-    agi: ctx.agi != null ? String(ctx.agi) : '',
-    luk: ctx.luk != null ? String(ctx.luk) : '',
+    hit: ctx.hit != null ? String(ctx.hit) : '',
+    flee: ctx.flee != null ? String(ctx.flee) : '',
   };
 }
 
@@ -80,7 +75,7 @@ export default function CharacterBar() {
     event.preventDefault();
     const next = characterFromInput(draft);
     if (!next) {
-      setError('กรอกตัวเลขให้ครบทุกช่อง และต้องมากกว่า 0');
+      setError('กรอกตัวเลขให้ครบ 4 ช่องแรก และต้องมากกว่า 0');
       return;
     }
     setError(null);
@@ -89,9 +84,10 @@ export default function CharacterBar() {
   }
 
   const summary = character
-    ? `${JOB_PROFILES[character.job].label} Lv.${character.level} · VIT ${character.vit} · ` +
-      `ตี ${character.damagePerHit.toLocaleString()} ต่อครั้ง · ${character.attacksPerSecond} ครั้ง/วิ · ` +
-      `HP ${maxHp(character.level, character.vit, character.job).toLocaleString()}`
+    ? `Lv.${character.level} · HP ${character.maxHp.toLocaleString()} · ` +
+      `ตี ${character.damagePerHit.toLocaleString()} ต่อครั้ง · ${character.attacksPerSecond} ครั้ง/วิ` +
+      (character.hit != null ? ` · HIT ${character.hit}` : '') +
+      (character.flee != null ? ` · FLEE ${character.flee}` : '')
     : 'กรอกตัวละครของคุณ แล้วหน้านี้จะคิดให้เป็นตัวเลขของคุณเอง';
 
   return (
@@ -117,24 +113,14 @@ export default function CharacterBar() {
             />
           </label>
           <label>
-            อาชีพ
-            <select value={draft.job} onChange={(e) => setDraft({ ...draft, job: e.target.value as JobKey })}>
-              {JOB_KEYS.map((key) => (
-                <option key={key} value={key}>
-                  {JOB_PROFILES[key].label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            VIT
+            Max HP
             <input
               type="number"
               min="1"
               inputMode="numeric"
-              placeholder="เช่น 30"
-              value={draft.vit}
-              onChange={(e) => setDraft({ ...draft, vit: e.target.value })}
+              placeholder="ดูจากหน้าจอเกม"
+              value={draft.maxHp}
+              onChange={(e) => setDraft({ ...draft, maxHp: e.target.value })}
             />
           </label>
           <label>
@@ -160,65 +146,35 @@ export default function CharacterBar() {
               onChange={(e) => setDraft({ ...draft, attacksPerSecond: e.target.value })}
             />
           </label>
-          {/* Optional trio in its own labeled group so "ไม่บังคับ" also says
-              what filling it in buys. Live HIT/FLEE preview renders as soon
-              as the numbers allow it -- the payoff is visible before saving. */}
+          {/* Optional pair, straight from the game's status window (Alt+A) --
+              no formula between the player and the number. */}
           <fieldset className="charbar__group">
             <legend>
-              ใส่เพิ่มแล้วได้อีก 3 อย่าง: โอกาสตีโดน% · EXP/ชม.แบบหักตีพลาด · จุด AFK แบบ &ldquo;มอนตีเราไม่โดน&rdquo;
+              ใส่ HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วได้อีก 3 อย่าง: โอกาสตีโดน% · EXP/ชม.แบบหักตีพลาด · จุด AFK แบบ &ldquo;มอนตีเราไม่โดน&rdquo;
             </legend>
             <div className="charbar__groupfields">
               <label>
-                DEX
+                HIT
                 <input
                   type="number"
                   min="1"
                   inputMode="numeric"
-                  placeholder="เช่น 60"
-                  value={draft.dex}
-                  onChange={(e) => setDraft({ ...draft, dex: e.target.value })}
+                  placeholder="เช่น 290"
+                  value={draft.hit}
+                  onChange={(e) => setDraft({ ...draft, hit: e.target.value })}
                 />
               </label>
               <label>
-                AGI
+                FLEE
                 <input
                   type="number"
                   min="1"
                   inputMode="numeric"
-                  placeholder="เช่น 40"
-                  value={draft.agi}
-                  onChange={(e) => setDraft({ ...draft, agi: e.target.value })}
+                  placeholder="เช่น 195"
+                  value={draft.flee}
+                  onChange={(e) => setDraft({ ...draft, flee: e.target.value })}
                 />
               </label>
-              <label>
-                LUK
-                <input
-                  type="number"
-                  min="1"
-                  inputMode="numeric"
-                  placeholder="เช่น 20"
-                  value={draft.luk}
-                  onChange={(e) => setDraft({ ...draft, luk: e.target.value })}
-                />
-              </label>
-              {(() => {
-                const lv = Number(draft.level);
-                if (!(lv > 0)) return null;
-                const dexN = Number(draft.dex);
-                const agiN = Number(draft.agi);
-                const lukN = draft.luk ? Number(draft.luk) : 0;
-                if (!Number.isFinite(lukN) || lukN < 0) return null;
-                const hit = dexN > 0 ? playerHit(lv, dexN, lukN) : null;
-                const flee = agiN > 0 ? playerFlee(lv, agiN, lukN) : null;
-                if (hit === null && flee === null) return null;
-                return (
-                  <p className="charbar__preview" aria-live="polite">
-                    {hit !== null && <>HIT <b className="mono">{hit}</b></>}
-                    {hit !== null && flee !== null && ' · '}
-                    {flee !== null && <>FLEE <b className="mono">{flee}</b></>}
-                  </p>
-                );
-              })()}
             </div>
           </fieldset>
 
@@ -230,12 +186,9 @@ export default function CharacterBar() {
 
           {error && <p className="charbar__error" role="alert">{error}</p>}
 
-          {/* Four jobs, not nineteen: HP factors for the rest are not in the
-              data yet, and picking numbers for them would put an invented game
-              value behind an "อันตราย" badge. */}
           <p className="charbar__note">
-            อาชีพมีให้เลือก {JOB_KEYS.length} สายที่มีตัวคูณ HP ในข้อมูลจริง (สายอื่นเดาไม่ได้ ตัวเลขอันตรายจะผิด) ·
-            ทุกค่าเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น ไม่ได้ส่งไปไหน
+            ทุกช่องคือตัวเลขที่เกมโชว์อยู่แล้ว ไม่ต้องคำนวณอะไรเอง (อยากลองสูตรดูเอง ไปที่หน้า &ldquo;ตีโดนไหม&rdquo;) ·
+            ค่าเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น ไม่ได้ส่งไปไหน
           </p>
           {!persisted && (
             <p className="charbar__error" role="alert">

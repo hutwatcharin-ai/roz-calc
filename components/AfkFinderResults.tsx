@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
-import { fleeToCapDodge, hitChancePct, mobHit, playerFlee } from '@/lib/hit-flee';
+import { fleeToCapDodge, hitChancePct, mobHit } from '@/lib/hit-flee';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
@@ -54,11 +54,10 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   // a character context, and this page exists to be findable and shareable),
   // and it renders on the server instead of appearing after hydration.
   const personal = ready && character !== null;
-  // The dodge math turns on only with AGI+LUK filled in; myFlee null keeps
-  // every aggressive monster out, exactly as before the hit/flee wave.
-  const myFlee = personal && character && character.agi != null && character.luk != null
-    ? playerFlee(character.level, character.agi, character.luk)
-    : null;
+  // The dodge math turns on only with FLEE filled in (copied straight off the
+  // status window); null keeps every aggressive monster out, exactly as
+  // before the hit/flee wave.
+  const myFlee = personal && character && character.flee != null ? character.flee : null;
 
   function theirHitPct(row: AfkCandidate): number | null {
     if (myFlee === null) return null;

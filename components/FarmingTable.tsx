@@ -8,7 +8,7 @@ import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
-import { hitChancePct, mobFlee, playerHit } from '@/lib/hit-flee';
+import { hitChancePct, mobFlee } from '@/lib/hit-flee';
 
 interface FarmingRow {
   monster_id: number;
@@ -40,14 +40,14 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
   // rank the table on a number nobody supplied.
   const personal = ready && character !== null;
 
-  // Hit chance needs the optional DEX/LUK from the character bar; without
-  // them the column simply does not render rather than assuming 100%.
-  const canHit = character && character.dex != null && character.luk != null;
+  // Hit chance needs the HIT the player copied off the status window; without
+  // it the column simply does not render rather than assuming 100%.
+  const canHit = character && character.hit != null;
   function hitPctFor(row: FarmingRow): number | null {
-    if (!character || character.dex == null || character.luk == null) return null;
+    if (!character || character.hit == null) return null;
     const flee = mobFlee(row.level, row.agi ?? null);
     if (flee === null) return null;
-    return hitChancePct(playerHit(character.level, character.dex, character.luk), flee);
+    return hitChancePct(character.hit, flee);
   }
 
   function rateFor(row: FarmingRow) {
