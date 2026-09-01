@@ -34,7 +34,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 export default async function EquipmentPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; type?: string; job?: string; maxlv?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; type?: string; job?: string; minlv?: string; maxlv?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   const category = searchParams.category ?? '';
@@ -49,9 +49,12 @@ export default async function EquipmentPage({
   } as const;
   const sort = (searchParams.sort ?? 'name') in SORTS ? ((searchParams.sort ?? 'name') as keyof typeof SORTS) : 'name';
   const job = searchParams.job ?? '';
-  // "ใส่ได้ถึง Lv" -- gear whose required level fits the player. Unknown
-  // required_level passes: hiding gear we lack data for would read as
-  // "cannot wear", which is a claim the data does not make.
+  // Required-level band: "ใส่ได้ตั้งแต่ Lv X" (required_level >= X) up to an
+  // optional ceiling. Unknown required_level passes only the ceiling side:
+  // hiding gear we lack data for would read as "cannot wear", which is a
+  // claim the data does not make -- but a floor asks for gear that NEEDS at
+  // least X, and unknown cannot answer that.
+  const minlv = Math.max(0, Number(searchParams.minlv ?? 0) || 0);
   const maxlv = Math.max(0, Number(searchParams.maxlv ?? 0) || 0);
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
@@ -98,6 +101,7 @@ export default async function EquipmentPage({
   const filtered = items.filter((it) => {
     if (category && it.category !== category) return false;
     if (type && it.weapon_type !== type) return false;
+    if (minlv > 0 && (it.required_level == null || it.required_level < minlv)) return false;
     if (maxlv > 0 && it.required_level != null && it.required_level > maxlv) return false;
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
     if (needle && !it.name_en.toLowerCase().includes(needle)) return false;
@@ -119,6 +123,7 @@ export default async function EquipmentPage({
     if (category) params.set('category', category);
     if (type) params.set('type', type);
     if (job) params.set('job', job);
+    if (minlv > 0) params.set('minlv', String(minlv));
     if (maxlv > 0) params.set('maxlv', String(maxlv));
     if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
@@ -143,7 +148,7 @@ export default async function EquipmentPage({
             { label: 'หมวด', value: CATEGORY_LABELS[category] ?? category },
             { label: 'ชนิด', value: type },
             { label: 'อาชีพ', value: job },
-            { label: 'ใส่ได้ถึง Lv', value: maxlv > 0 ? String(maxlv) : '' },
+            { label: 'ต้องใช้ Lv', value: minlv > 0 || maxlv > 0 ? `${minlv > 0 ? minlv : '1'}–${maxlv > 0 ? maxlv : 'สูงสุด'}` : '' },
           ]}
           clearHref="/database/equipment"
         />
@@ -174,8 +179,10 @@ export default async function EquipmentPage({
           ))}
         </select>
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 Sarabun, sans-serif' }}>
-          ใส่ได้ถึง Lv{' '}
-          <input className="mono" type="number" name="maxlv" defaultValue={maxlv > 0 ? maxlv : ''} placeholder="เช่น 45" inputMode="numeric" style={{ width: 84 }} aria-label="เลเวลตัวละคร" />
+          ใส่ได้ตั้งแต่ Lv{' '}
+          <input className="mono" type="number" name="minlv" defaultValue={minlv > 0 ? minlv : ''} placeholder="เช่น 40" inputMode="numeric" style={{ width: 74 }} aria-label="ต้องใช้เลเวลอย่างน้อย" />
+          –
+          <input className="mono" type="number" name="maxlv" defaultValue={maxlv > 0 ? maxlv : ''} placeholder="ถึง" inputMode="numeric" style={{ width: 74 }} aria-label="ต้องใช้เลเวลไม่เกิน" />
         </label>
         <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
           {Object.entries(SORTS).map(([key, v]) => (
