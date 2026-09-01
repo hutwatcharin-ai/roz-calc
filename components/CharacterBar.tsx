@@ -88,7 +88,7 @@ export default function CharacterBar() {
       `ตี ${character.damagePerHit.toLocaleString()} ต่อครั้ง · ${character.attacksPerSecond} ครั้ง/วิ` +
       (character.hit != null ? ` · HIT ${character.hit}` : '') +
       (character.flee != null ? ` · FLEE ${character.flee}` : '')
-    : 'กรอกตัวละครของคุณ แล้วหน้านี้จะคิดให้เป็นตัวเลขของคุณเอง';
+    : 'กรอกค่าตัวละคร แล้วทุกเครื่องมือจะคิดเป็นตัวเลขของคุณ';
 
   return (
     <div className="charbar">
@@ -200,8 +200,7 @@ export default function CharacterBar() {
           {error && <p className="charbar__error" role="alert">{error}</p>}
 
           <p className="charbar__note">
-            ทุกช่องคือตัวเลขที่เกมโชว์อยู่แล้ว ไม่ต้องคำนวณอะไรเอง (อยากลองสูตรดูเอง ไปที่หน้า &ldquo;ตีโดนไหม&rdquo;) ·
-            ค่าเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น ไม่ได้ส่งไปไหน
+            ทุกช่องคือตัวเลขที่เกมโชว์อยู่แล้ว · ค่าเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น
           </p>
           {!persisted && (
             <p className="charbar__error" role="alert">

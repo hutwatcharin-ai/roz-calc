@@ -77,9 +77,9 @@ export default async function HomePage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตอนนี้แกติดอะไรอยู่?</h1>
+      <h1 className="pagehead__title">ตอนนี้ติดอะไรอยู่?</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        ฐานข้อมูล Ragnarok Zero Global ภาษาไทย พร้อมเครื่องมือที่คิดจากค่าตัวละครของแกเอง
+        ฐานข้อมูล Ragnarok Zero Global ภาษาไทย — เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
       </p>
 
       <div className="qgrid">
@@ -88,7 +88,7 @@ export default async function HomePage({
             in one step, exactly like before the redesign. */}
         <div className="qcard qcard--yellow">
           <strong>เลเวลตันแล้ว ตีอะไรดี</strong>
-          <span>เดี๋ยวจัดมอนคุ้มสุดให้ พร้อมเตือนตัวที่โจมตีก่อน</span>
+          <span>จัดอันดับมอนคุ้มสุดในช่วงเลเวล พร้อมเตือนตัวที่โจมตีก่อน</span>
           <form className="qcard__form" action="/#results">
             {showC && <input type="hidden" name="c" value="1" />}
             <label>
@@ -104,7 +104,7 @@ export default async function HomePage({
 
         <div className="qcard qcard--cyan">
           <strong>อยากได้ของชิ้นนี้</strong>
-          <span>พิมพ์ชื่อไอเทม บอกเลยว่ามอนตัวไหนดรอป อัตราเท่าไร</span>
+          <span>พิมพ์ชื่อไอเทม ดูว่ามอนตัวไหนดรอป อัตราเท่าไร</span>
           <form className="qcard__form" action="/drop-finder">
             <input type="search" name="q" placeholder="เช่น Jellopy" aria-label="ค้นชื่อไอเทม" style={{ flex: 1, minWidth: 110 }} />
             <button type="submit" className="btn">ค้นดรอป</button>
@@ -113,13 +113,13 @@ export default async function HomePage({
 
         <Link href="/database/equipment" className="qcard qcard--pink">
           <strong>ของชิ้นนี้ดีไหม ใส่ได้ไหม</strong>
-          <span>อุปกรณ์ 1,815 ชิ้น กรองตามอาชีพ ชนิด เลเวล — การ์ดอีก 313 ใบ</span>
+          <span>อุปกรณ์กว่า 1,800 ชิ้น กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ</span>
           <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
         </Link>
 
         <Link href="/tools/afk-finder" className="qcard qcard--cyan">
           <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
-          <span>เฉพาะมอนที่ไม่โจมตีก่อนและดาเมจแกฆ่าได้หมัดเดียว พร้อมเตือนสกิลอันตราย</span>
+          <span>มอนที่ไม่โจมตีก่อนและฆ่าได้ในหมัดเดียว พร้อมเตือนสกิลอันตราย</span>
           <em className="qcard__go">หาจุด AFK →</em>
         </Link>
       </div>

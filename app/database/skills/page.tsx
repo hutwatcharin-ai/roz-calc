@@ -252,8 +252,7 @@ export default async function SkillsPage({
       <Pagination page={safePage} totalPages={totalPages} buildHref={(p) => buildHref(p)} total={filtered.length} pageSize={PAGE_SIZE} />
 
       <p style={{ color: 'var(--faint)', marginTop: 24, fontSize: 13 }}>
-        หน้านี้เป็นรายการสกิล ยังไม่ใช่ตัววางแผนบิลด์ — ตัววางแผนต้องใช้ข้อมูลเงื่อนไขสกิลที่ต้องลงก่อน
-        ซึ่งยังไม่มีในฐานข้อมูล
+        หน้านี้คือรายการสกิล — ตัววางแผนบิลด์ยังไม่มี (ต้องใช้ข้อมูลเงื่อนไขสกิลที่ยังไม่มีในฐาน)
       </p>
     </main>
   );

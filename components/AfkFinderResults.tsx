@@ -146,11 +146,9 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
       {/* Two limits, stated up front rather than in a footnote, because both
           could turn this page's verdict into a wrong one. */}
       <div className="ceiling-note" style={{ marginTop: 12 }}>
-        <strong>ข้อจำกัดที่ต้องรู้:</strong> หน้านี้ใช้ดาเมจที่คุณกรอกตรงๆ ไม่ได้คูณธาตุอาวุธกับธาตุมอนให้
-        เพราะยังไม่มีข้อมูลว่าอาวุธของคุณเป็นธาตุอะไร ไม่ใช่เพราะไม่มีตารางธาตุ (ตารางทางการอยู่ที่หน้าตารางธาตุแล้ว) ·
-        และการจัดสกิลว่าเสี่ยงมาจาก<strong>ชื่อสกิลในไฟล์เกม</strong> ไม่ได้มาจากการทดสอบจริง ·
-        คอลัมน์แมพเลือก<strong>แมพที่มีมอนโจมตีก่อนน้อยชนิดที่สุด</strong>ที่มอนตัวนั้นเกิด
-        (นับเป็นชนิด ไม่ใช่จำนวนตัว){personal && <> · EXP/ชม. เป็น{KILL_RATE_DISCLAIMER}</>}
+        <strong>ข้อจำกัด:</strong> ดาเมจใช้ตามที่กรอก ไม่ได้คูณธาตุให้ ·
+        สกิล &ldquo;เสี่ยง&rdquo; ตัดสินจากชื่อสกิลในไฟล์เกม ไม่ใช่การทดสอบจริง ·
+        คอลัมน์แมพเลือกแมพที่มีมอนโจมตีก่อนน้อยชนิดสุดที่ตัวนั้นเกิด{personal && <> · EXP/ชม. เป็น{KILL_RATE_DISCLAIMER}</>}
       </div>
 
       {candidates.length === 0 ? (

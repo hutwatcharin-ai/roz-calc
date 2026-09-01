@@ -104,9 +104,8 @@ export default async function HitFleePage({
 
       {!filled && (
         <p className="muted" style={{ marginTop: 18, maxWidth: '65ch' }}>
-          ใส่อย่างน้อยเลเวล (DEX/AGI/LUK ไม่ใส่ = คิดเป็น 0) แล้วกดคำนวณ —
-          ตารางจะบอกทีละมอนว่าตีโดนกี่ % หลบมันได้แค่ไหน พร้อมเป้าว่าต้องมี HIT/FLEE เท่าไหร่ถึง
-          "โดน 100%" หรือ "หลบตัน 95%"
+          ใส่เลเวลแล้วกดคำนวณ (DEX/AGI/LUK ว่าง = 0) —
+          ได้ตารางต่อมอน: ตีโดนกี่ % โดนตีกี่ % และเป้า HIT/FLEE สำหรับ &ldquo;โดน 100%&rdquo; / &ldquo;หลบตัน 95%&rdquo;
         </p>
       )}
 

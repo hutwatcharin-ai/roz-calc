@@ -19,8 +19,7 @@ export default function SizesPage() {
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 className="pagehead__title">ตารางขนาด</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        ความเสียหายที่อาวุธแต่ละชนิดทำได้ ขึ้นกับขนาดของมอนสเตอร์ด้วย ไม่ใช่แค่ธาตุ —
-        หนังสือตีมอนขนาดใหญ่เหลือ 50% ซึ่งหักหนักกว่าการ์ดส่วนใหญ่ที่หามาใส่
+        ดาเมจขึ้นกับขนาดมอนด้วย ไม่ใช่แค่ธาตุ — เช่น หนังสือตีมอนใหญ่เหลือ 50%
       </p>
 
       <div className="ceiling-note" style={{ marginTop: 16 }}>
