@@ -711,6 +711,24 @@ a.qcard:hover { background: var(--panel-2); }
 }
 .chiplink:hover { color: var(--text); border-color: var(--cyan); }
 
+/* Quest-giver NPC sprite: grows on hover so the pixel art is actually
+   viewable without leaving the card. Scales from its feet (bottom-left),
+   floats above neighbours while zoomed, and stays put for reduced-motion. */
+.npcsprite {
+  image-rendering: pixelated;
+  flex: none;
+  transform-origin: left bottom;
+  transition: transform 0.15s ease-out;
+  position: relative;
+}
+.npcsprite:hover {
+  transform: scale(2.4);
+  z-index: 5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .npcsprite { transition: none; }
+}
+
 .entrycards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

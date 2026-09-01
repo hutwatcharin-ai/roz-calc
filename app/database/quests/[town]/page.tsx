@@ -140,10 +140,10 @@ export default async function QuestTownPage({
           <p className="muted" style={{ marginTop: 4, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             {npcByQuest.has(quest.id) && (
               <img
+                className="npcsprite"
                 src={`/images/npcs/${(npcByQuest.get(quest.id) as string).toLowerCase()}.gif`}
                 alt=""
                 height={42}
-                style={{ imageRendering: 'pixelated' }}
               />
             )}
             <span>
