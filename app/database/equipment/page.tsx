@@ -1,5 +1,6 @@
 // app/database/equipment/page.tsx
 import Link from 'next/link';
+import EquipCategoryType from '@/components/EquipCategoryType';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -25,6 +26,19 @@ const PAGE_SIZE = 50;
 // "Sword"/"Spear" mapped to their one-handed forms).
 const WEAPON_TYPES = ['Bow', 'Dagger', 'One-handed Sword', 'Two-handed Sword', 'One-handed Axe', 'Two-handed Axe', 'One-handed Spear', 'Two-handed Spear', 'One-handed Staff', 'Two-handed Staff', 'Mace', 'Book', 'Katar', 'Knuckle', 'Whip', 'Instrument', 'Huuma Shuriken', 'Arrow'];
 const ARMOR_TYPES = ['Headgear', 'Armor', 'Garment', 'Shoes', 'Shield', 'Accessory'];
+// Costume positions crawled from rozerodb item pages (2 Sep) -- values are
+// what items.weapon_type actually holds for Costume Equipment rows.
+const COSTUME_TYPES = ['Upper Head', 'Mid Head', 'Lower Head', 'Upper/Mid Head', 'Mid/Lower Head', 'Upper/Lower Head', 'All Head Slots', 'Garment'];
+const TYPES_BY_CATEGORY: Record<string, readonly string[]> = {
+  Weapon: WEAPON_TYPES,
+  Armor: ARMOR_TYPES,
+  'Costume Equipment': COSTUME_TYPES,
+};
+const TYPE_PLACEHOLDERS: Record<string, string> = {
+  Weapon: 'ทุกชนิดอาวุธ',
+  Armor: 'ทุกตำแหน่งสวม',
+  'Costume Equipment': 'ทุกตำแหน่งคอสตูม',
+};
 const CATEGORY_LABELS: Record<string, string> = {
   Weapon: 'อาวุธ',
   Armor: 'เกราะ/สวมใส่',
@@ -40,7 +54,7 @@ export default async function EquipmentPage({
   const category = searchParams.category ?? '';
   // Subtype only applies with a kind chosen, and only values from the fixed
   // lists pass -- the param goes into a comparison, never into SQL.
-  const subtypeOptions = category === 'Weapon' ? WEAPON_TYPES : category === 'Armor' ? ARMOR_TYPES : [];
+  const subtypeOptions = TYPES_BY_CATEGORY[category] ?? [];
   const type = subtypeOptions.includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
   const SORTS = {
     name: { label: 'ชื่อ A-Z' },
@@ -159,22 +173,14 @@ export default async function EquipmentPage({
 
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่ออุปกรณ์..." />
-        <select name="category" defaultValue={category}>
-          <option value="">ทุกหมวด</option>
-          {EQUIPMENT_CATEGORIES.map((c) => (
-            <option key={c} value={c}>{CATEGORY_LABELS[c] ?? c}</option>
-          ))}
-        </select>
-        {/* The subtype list depends on the kind, so it only renders once a kind
-            is picked -- the form round-trips through the server, no JS. */}
-        {subtypeOptions.length > 0 && (
-          <select name="type" defaultValue={type} aria-label="ชนิด">
-            <option value="">{category === 'Weapon' ? 'ทุกชนิดอาวุธ' : 'ทุกตำแหน่งสวม'}</option>
-            {subtypeOptions.map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-        )}
+        <EquipCategoryType
+          initialCategory={category}
+          initialType={type}
+          categories={EQUIPMENT_CATEGORIES}
+          labels={CATEGORY_LABELS}
+          typesByCategory={TYPES_BY_CATEGORY}
+          placeholders={TYPE_PLACEHOLDERS}
+        />
         <select name="job" defaultValue={job}>
           <option value="">ทุกอาชีพ</option>
           {jobs.map((j) => (
