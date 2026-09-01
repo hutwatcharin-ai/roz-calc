@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { JOB_PROFILES, type JobKey } from '@/lib/formulas';
 import { maxHp } from '@/lib/formulas';
 import { characterFromInput, type CharacterContext } from '@/lib/character-context';
+import { playerFlee, playerHit } from '@/lib/hit-flee';
 import { usePathname } from 'next/navigation';
 import { usesCharacterContext } from '@/lib/nav-links';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
@@ -110,6 +111,7 @@ export default function CharacterBar() {
               type="number"
               min="1"
               inputMode="numeric"
+              placeholder="เช่น 50"
               value={draft.level}
               onChange={(e) => setDraft({ ...draft, level: e.target.value })}
             />
@@ -130,6 +132,7 @@ export default function CharacterBar() {
               type="number"
               min="1"
               inputMode="numeric"
+              placeholder="เช่น 30"
               value={draft.vit}
               onChange={(e) => setDraft({ ...draft, vit: e.target.value })}
             />
@@ -140,6 +143,7 @@ export default function CharacterBar() {
               type="number"
               min="1"
               inputMode="numeric"
+              placeholder="เช่น 250"
               value={draft.damagePerHit}
               onChange={(e) => setDraft({ ...draft, damagePerHit: e.target.value })}
             />
@@ -151,43 +155,72 @@ export default function CharacterBar() {
               min="0.1"
               step="0.1"
               inputMode="decimal"
+              placeholder="เช่น 1.5"
               value={draft.attacksPerSecond}
               onChange={(e) => setDraft({ ...draft, attacksPerSecond: e.target.value })}
             />
           </label>
-          {/* Optional trio: powers hit/dodge math (โอกาสตีโดน, หลบมอน). Blank
-              is fine -- every page that uses them says what filling them in
-              unlocks. */}
-          <label>
-            DEX (ไม่บังคับ)
-            <input
-              type="number"
-              min="1"
-              inputMode="numeric"
-              value={draft.dex}
-              onChange={(e) => setDraft({ ...draft, dex: e.target.value })}
-            />
-          </label>
-          <label>
-            AGI (ไม่บังคับ)
-            <input
-              type="number"
-              min="1"
-              inputMode="numeric"
-              value={draft.agi}
-              onChange={(e) => setDraft({ ...draft, agi: e.target.value })}
-            />
-          </label>
-          <label>
-            LUK (ไม่บังคับ)
-            <input
-              type="number"
-              min="1"
-              inputMode="numeric"
-              value={draft.luk}
-              onChange={(e) => setDraft({ ...draft, luk: e.target.value })}
-            />
-          </label>
+          {/* Optional trio in its own labeled group so "ไม่บังคับ" also says
+              what filling it in buys. Live HIT/FLEE preview renders as soon
+              as the numbers allow it -- the payoff is visible before saving. */}
+          <fieldset className="charbar__group">
+            <legend>
+              ใส่เพิ่มแล้วได้อีก 3 อย่าง: โอกาสตีโดน% · EXP/ชม.แบบหักตีพลาด · จุด AFK แบบ &ldquo;มอนตีเราไม่โดน&rdquo;
+            </legend>
+            <div className="charbar__groupfields">
+              <label>
+                DEX
+                <input
+                  type="number"
+                  min="1"
+                  inputMode="numeric"
+                  placeholder="เช่น 60"
+                  value={draft.dex}
+                  onChange={(e) => setDraft({ ...draft, dex: e.target.value })}
+                />
+              </label>
+              <label>
+                AGI
+                <input
+                  type="number"
+                  min="1"
+                  inputMode="numeric"
+                  placeholder="เช่น 40"
+                  value={draft.agi}
+                  onChange={(e) => setDraft({ ...draft, agi: e.target.value })}
+                />
+              </label>
+              <label>
+                LUK
+                <input
+                  type="number"
+                  min="1"
+                  inputMode="numeric"
+                  placeholder="เช่น 20"
+                  value={draft.luk}
+                  onChange={(e) => setDraft({ ...draft, luk: e.target.value })}
+                />
+              </label>
+              {(() => {
+                const lv = Number(draft.level);
+                if (!(lv > 0)) return null;
+                const dexN = Number(draft.dex);
+                const agiN = Number(draft.agi);
+                const lukN = draft.luk ? Number(draft.luk) : 0;
+                if (!Number.isFinite(lukN) || lukN < 0) return null;
+                const hit = dexN > 0 ? playerHit(lv, dexN, lukN) : null;
+                const flee = agiN > 0 ? playerFlee(lv, agiN, lukN) : null;
+                if (hit === null && flee === null) return null;
+                return (
+                  <p className="charbar__preview" aria-live="polite">
+                    {hit !== null && <>HIT <b className="mono">{hit}</b></>}
+                    {hit !== null && flee !== null && ' · '}
+                    {flee !== null && <>FLEE <b className="mono">{flee}</b></>}
+                  </p>
+                );
+              })()}
+            </div>
+          </fieldset>
 
           <div className="charbar__actions">
             <button type="submit" className="btn">
@@ -201,10 +234,9 @@ export default function CharacterBar() {
               data yet, and picking numbers for them would put an invented game
               value behind an "อันตราย" badge. */}
           <p className="charbar__note">
-            ตอนนี้มีค่า HP ให้เลือก {JOB_KEYS.length} อาชีพ ({JOB_KEYS.map((k) => JOB_PROFILES[k].label).join(', ')}) —
-            อาชีพอื่นยังไม่มีตัวคูณ HP ในข้อมูล จึงยังไม่ใส่ให้เลือก เพราะเดาแล้วตัวเลขอันตรายจะผิด
+            อาชีพมีให้เลือก {JOB_KEYS.length} สายที่มีตัวคูณ HP ในข้อมูลจริง (สายอื่นเดาไม่ได้ ตัวเลขอันตรายจะผิด) ·
+            ทุกค่าเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น ไม่ได้ส่งไปไหน
           </p>
-          <p className="charbar__note">ค่าที่กรอกเก็บไว้ในเบราว์เซอร์ของคุณเครื่องเดียว ไม่ได้ส่งไปไหน</p>
           {!persisted && (
             <p className="charbar__error" role="alert">
               เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) — ใช้ได้ในหน้านี้ แต่พอปิดแท็บแล้วต้องกรอกใหม่

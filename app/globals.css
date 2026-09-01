@@ -467,6 +467,34 @@ table { border-collapse: collapse; width: 100%; }
   align-items: flex-end;
 }
 
+/* The optional DEX/AGI/LUK trio: one bordered group whose legend says what
+   filling it in unlocks, with a live HIT/FLEE preview inside. */
+.charbar__group {
+  flex-basis: 100%;
+  border: 1px dashed var(--hair);
+  border-radius: var(--radius);
+  padding: 10px 12px 12px;
+  margin: 0;
+}
+.charbar__group legend {
+  padding: 0 6px;
+  font-size: 12px;
+  color: var(--faint);
+}
+.charbar__groupfields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+.charbar__preview {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--cyan);
+  align-self: center;
+}
+.charbar__preview b { font-weight: 700; }
+
 .charbar__form label {
   display: flex;
   flex-direction: column;
