@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { hubLabel } from '@/lib/quest-towns';
 
 export const revalidate = 86400;
@@ -95,6 +97,13 @@ export default async function QuestTownPage({
         <span className="crumbs__here">{label}</span>
       </nav>
 
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'เควส', path: '/database/quests' },
+          { name: label, path: `/database/quests/${params.town}` },
+        ])}
+      />
       <PageHeader
         title={`เควส ${label}`}
         lead={`${typeFilter ? `${quests.length} จาก ${allQuests.length}` : allQuests.length} เควส · กดชื่อเควสเพื่อคัดลอกลิงก์เจาะรายเควสได้`}

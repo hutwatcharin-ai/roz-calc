@@ -1,4 +1,6 @@
 import { isCVariant } from '@/lib/c-variant';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import Link from 'next/link';
 import RecordVisit from '@/components/RecordVisit';
 import ItemIcon from '@/components/ItemIcon';
@@ -126,6 +128,26 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <span className="crumbs__here">{item.name_en}</span>
       </nav>
       <RecordVisit kind="item" id={item.id} name={item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'ไอเทม', path: '/database/items' },
+          { name: item.name_en, path: `/database/items/${item.id}` },
+        ])}
+      />
+      <JsonLd
+        data={entityJsonLd({
+          path: `/database/items/${item.id}`,
+          name: item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en,
+          description: item.description_th ?? item.description,
+          properties: [
+            ...(item.category ? [{ name: 'Category', value: item.category }] : []),
+            ...(item.buy_price ? [{ name: 'BuyPrice', value: item.buy_price, unitText: 'Zeny' }] : []),
+            ...(item.sell_price ? [{ name: 'SellPrice', value: item.sell_price, unitText: 'Zeny' }] : []),
+            ...(item.slots > 0 ? [{ name: 'Slots', value: item.slots }] : []),
+          ],
+        })}
+      />
 
       {/* The hero: a big sprite next to the name, and the stats as labelled
           tiles rather than a prose line -- a reader scans ATK/price the way

@@ -9,6 +9,8 @@ import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import KillRatePanel from '@/components/KillRatePanel';
 import AddToPlanButton from '@/components/AddToPlanButton';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import MonsterElementPanel from '@/components/MonsterElementPanel';
 import MonsterSizePanel from '@/components/MonsterSizePanel';
 import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
@@ -147,6 +149,28 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         <span className="crumbs__here">{monster.name_en}</span>
       </nav>
       <RecordVisit kind="monster" id={monster.id} name={monster.name_en} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'มอนสเตอร์', path: '/database/monsters' },
+          { name: monster.name_en, path: `/database/monsters/${monster.id}` },
+        ])}
+      />
+      <JsonLd
+        data={entityJsonLd({
+          path: `/database/monsters/${monster.id}`,
+          name: monster.name_en,
+          description: `มอนสเตอร์ Ragnarok Zero Global เลเวล ${monster.level}`,
+          properties: [
+            { name: 'Level', value: monster.level },
+            ...(monster.race ? [{ name: 'Race', value: monster.race }] : []),
+            ...(monster.element ? [{ name: 'Element', value: `${monster.element}${monster.element_level ?? ''}` }] : []),
+            ...(monster.size ? [{ name: 'Size', value: monster.size }] : []),
+            ...(monster.hp ? [{ name: 'HP', value: monster.hp }] : []),
+            ...(monster.base_exp ? [{ name: 'Base EXP', value: monster.base_exp }] : []),
+          ],
+        })}
+      />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
         {monster.image_url && (

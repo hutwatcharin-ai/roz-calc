@@ -5,6 +5,8 @@ import SiteStats, { getSiteStats } from '@/components/SiteStats';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import JsonLd from '@/components/JsonLd';
+import { websiteJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
@@ -79,6 +81,7 @@ export default async function HomePage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd data={websiteJsonLd()} />
       {/* H1 carries the queries players actually type (จุดฟาร์ม / Ragnarok
           Zero / ภาษาไทย), not a mood line — this is the only H1 the domain
           gets to rank with (user call, 1 Sep). */}
@@ -153,6 +156,9 @@ export default async function HomePage({
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>
         <Link href="/database/skills" className="chiplink">สกิล</Link>
+        {/* ตารางธาตุ was orphaned (only reachable from monster-page footers)
+            while its Thai keyword has no Zero-specific competitor (SXO audit). */}
+        <Link href="/tools/elements" className="chiplink">ตารางธาตุ</Link>
         <Link href="/tools/farm-planner" className="chiplink">แผนฟาร์ม</Link>
         <Link href="/database/maps" className="chiplink">แมพ</Link>
       </div>

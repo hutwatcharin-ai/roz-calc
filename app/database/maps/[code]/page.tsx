@@ -1,5 +1,7 @@
 // app/database/maps/[code]/page.tsx
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
@@ -69,6 +71,13 @@ export default async function MapDetailPage({ params }: { params: { code: string
         <span className="crumbs__here">{name}</span>
       </nav>
 
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'แมพ', path: '/database/maps' },
+          { name, path: `/database/maps/${params.code}` },
+        ])}
+      />
       <h1 className="pagehead__title">{name}</h1>
       <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>{code}</p>
       <p style={{ color: 'var(--dim)', marginTop: 10 }}>
