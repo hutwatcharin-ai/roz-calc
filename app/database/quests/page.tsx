@@ -9,7 +9,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import { escapeLikePattern } from '@/lib/like-escape';
-import { hubLabel } from '@/lib/quest-towns';
+import { hubLabel, hubOrder } from '@/lib/quest-towns';
 
 export const metadata = {
   title: 'เควส Ragnarok Zero',
@@ -37,7 +37,7 @@ export default async function QuestIndexPage({
   // Hub cards come from grouping the whole table; 766 rows is one query.
   const { data: quests, error } = await db
     .from('quests')
-    .select('id, name, zone, type, town_key')
+    .select('id, name, name_th, zone, type, town_key')
     .order('id');
 
   if (error) {
@@ -52,13 +52,24 @@ export default async function QuestIndexPage({
 
   const rows = quests ?? [];
 
-  const hubs = new Map<string, { label: string; count: number }>();
+  const hubs = new Map<string, { label: string; count: number; samples: string[] }>();
   for (const quest of rows) {
     const existing = hubs.get(quest.town_key);
-    if (existing) existing.count += 1;
-    else hubs.set(quest.town_key, { label: hubLabel(quest.town_key, quest.zone), count: 1 });
+    if (existing) {
+      existing.count += 1;
+      if (existing.samples.length < 2) existing.samples.push(quest.name_th ?? quest.name);
+    } else {
+      hubs.set(quest.town_key, {
+        label: hubLabel(quest.town_key, quest.zone),
+        count: 1,
+        samples: [quest.name_th ?? quest.name],
+      });
+    }
   }
-  const hubList = [...hubs.entries()].sort((a, b) => b[1].count - a[1].count);
+  // Player-journey order, not quest count (quest UX pass, 2 Sep).
+  const hubList = [...hubs.entries()].sort(
+    (a, b) => hubOrder(a[0]) - hubOrder(b[0]) || a[1].label.localeCompare(b[1].label, 'th'),
+  );
 
   // The search is a name filter over the same rows -- no second query, and the
   // results deep-link into the hub pages by anchor.
@@ -72,7 +83,7 @@ export default async function QuestIndexPage({
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader
         title="เควส Ragnarok Zero Global แยกตามเมือง"
-        lead="จัดกลุ่มตามเมือง — เปิดเมืองที่กำลังเล่นอยู่ แล้วเควสทุกตัวในเมืองนั้นอยู่หน้าเดียวกัน"
+        lead="เริ่มจากสายเนื้อเรื่องหลัก หรือเปิดเมืองที่กำลังเล่นอยู่ — เควสทุกตัวของเมืองนั้นอยู่หน้าเดียวกัน เรียงตามเส้นทางที่ผู้เล่นใหม่เจอจริง"
         source={
           <>
             <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม (ผ่านชุดข้อมูลสาธารณะของ rozerodb) ·
@@ -128,6 +139,11 @@ export default async function QuestIndexPage({
           <Link key={key} href={`/database/quests/${key}`} className="card entrycard">
             <strong>{hub.label}</strong>
             <span className="muted">{hub.count} เควส</span>
+            {/* Two example names so the card says what's inside before the
+                click — the label alone did not (quest UX pass, 2 Sep). */}
+            <span className="muted" style={{ fontSize: 13, display: 'block', marginTop: 2 }}>
+              เช่น {hub.samples.map((n) => (n.length > 38 ? `${n.slice(0, 38)}…` : n)).join(' · ')}
+            </span>
           </Link>
         ))}
       </div>

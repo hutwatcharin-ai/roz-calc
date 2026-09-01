@@ -18,12 +18,50 @@ export interface QuestForGrouping {
   type: string;
 }
 
+// "(ไม่ระบุเมือง)" told the reader only what we don't know — renamed to say
+// what is inside (quest UX pass, 2 Sep).
 const TYPE_LABELS: Record<string, string> = {
-  story: 'เควสเนื้อเรื่อง (ไม่ระบุเมือง)',
-  kill: 'เควสล่ามอนสเตอร์ (ไม่ระบุเมือง)',
-  fetch: 'เควสหาของ (ไม่ระบุเมือง)',
-  talk: 'เควสพูดคุย (ไม่ระบุเมือง)',
+  story: 'สายเนื้อเรื่องหลัก',
+  kill: 'เควสล่ามอนสเตอร์รวม',
+  fetch: 'เควสหาของรวม',
+  talk: 'เควสพูดคุยรวม',
 };
+
+// Hub order on the index page: the main story line first, then towns in the
+// order a new player actually reaches them, then the pooled type groups, and
+// the leftovers last. Unknown zone hubs slot after the known towns,
+// alphabetically. This replaces sorting by quest count, which put Louyang
+// (73) above the starter towns (quest UX pass, 2 Sep).
+const HUB_ORDER: string[] = [
+  'type-story',
+  'prontera-region',
+  'alberta',
+  'payon',
+  'geffen',
+  'geffen-region',
+  'morocc',
+  'morocc-region',
+  'mjolnir-mountains',
+  'byalan-dungeon',
+  'glast-heim',
+  'comodo',
+  'umbala',
+  'niflheim',
+  'ayothaya',
+  'louyang',
+  'gonryun',
+  'amatsu',
+];
+
+export function hubOrder(townKey: string): number {
+  const i = HUB_ORDER.indexOf(townKey);
+  if (i >= 0) return i;
+  if (townKey === 'type-kill') return 900;
+  if (townKey === 'type-fetch') return 901;
+  if (townKey === 'type-talk') return 902;
+  if (townKey === OTHER_KEY) return 999;
+  return 500; // unknown town: after known towns, callers tiebreak by label
+}
 
 /** "Alberta" -> "alberta", "Prontera Region" -> "prontera-region". */
 export function slugifyZone(zone: string): string {

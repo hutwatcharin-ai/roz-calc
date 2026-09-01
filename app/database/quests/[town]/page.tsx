@@ -12,6 +12,7 @@ import PageHeader from '@/components/PageHeader';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { hubLabel } from '@/lib/quest-towns';
+import { buildChains } from '@/lib/quest-chains';
 
 export const revalidate = 86400;
 
@@ -84,58 +85,27 @@ export default async function QuestTownPage({
   const typeFilter = typesHere.includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
   const quests = typeFilter ? allQuests.filter((q) => q.type === typeFilter) : allQuests;
 
+  // Chain grouping (quest UX pass, 2 Sep): the default view shows each quest
+  // line as numbered steps with one clear start, singles after. A type filter
+  // would shred chains of mixed types, so the filtered view stays flat.
+  const grouped = typeFilter ? { chains: [] as QuestRow[][], singles: quests } : buildChains(quests);
+
   // Anchors only link within this hub: chains can cross hubs, and a dead #q
   // anchor silently scrolls nowhere, which reads as a broken page.
   const idsHere = new Set(allQuests.map((q) => q.id));
   const label = hubLabel(params.town, allQuests.find((q) => q.zone)?.zone ?? null);
 
-  return (
-    <main className="shell" style={{ paddingBlock: 32 }}>
-      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
-        <Link href="/database/quests">เควส</Link>
-        <span className="crumbs__sep" aria-hidden="true">›</span>
-        <span className="crumbs__here">{label}</span>
-      </nav>
 
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: 'หน้าแรก', path: '/' },
-          { name: 'เควส', path: '/database/quests' },
-          { name: label, path: `/database/quests/${params.town}` },
-        ])}
-      />
-      <PageHeader
-        title={`เควส ${label}`}
-        lead={`${typeFilter ? `${quests.length} จาก ${allQuests.length}` : allQuests.length} เควส · กดชื่อเควสเพื่อคัดลอกลิงก์เจาะรายเควสได้`}
-        source={
-          <>
-            <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม ภาษาอังกฤษตามต้นฉบับ ·
-            พิกัดคือจุดที่เกมผูกไว้กับเควส ไม่ใช่ทุกเควสจะมี
-          </>
-        }
-      />
+  function QuestCard({ quest, step, total }: { quest: QuestRow; step?: number; total?: number }) {
+    return (
 
-      {typesHere.length > 1 && (
-        <nav className="explorerow" aria-label="กรองตามประเภทเควส" style={{ marginTop: 14 }}>
-          <Link href={`/database/quests/${params.town}`} className="chiplink" aria-current={typeFilter === '' ? 'true' : undefined} style={typeFilter === '' ? { borderColor: 'var(--cyan)', color: 'var(--text)' } : undefined}>
-            ทุกประเภท
-          </Link>
-          {typesHere.map((t) => (
-            <Link
-              key={t}
-              href={`/database/quests/${params.town}?type=${encodeURIComponent(t)}`}
-              className="chiplink"
-              aria-current={typeFilter === t ? 'true' : undefined}
-              style={typeFilter === t ? { borderColor: 'var(--cyan)', color: 'var(--text)' } : undefined}
-            >
-              {TYPE_LABELS[t] ?? t}
-            </Link>
-          ))}
-        </nav>
-      )}
-
-      {quests.map((quest) => (
-        <section key={quest.id} id={`q${quest.id}`} className="card" style={{ marginTop: 14 }}>
+        <section key={quest.id} id={`q${quest.id}`} className="card" style={{ marginTop: step && step > 1 ? 10 : 14 }}>
+          {step && total && total > 1 && (
+            <p className="muted" style={{ margin: '0 0 4px', fontSize: 13 }}>
+              ขั้นที่ {step}/{total}
+              {step === 1 && <span className="tag" style={{ marginLeft: 8 }}>เริ่มสายที่นี่</span>}
+            </p>
+          )}
           <div className="pagehead__row">
             <h2 className="section-title" style={{ margin: 0 }}>
               {/* One language per heading: the bilingual concatenation made 32
@@ -206,7 +176,77 @@ export default async function QuestTownPage({
             </p>
           )}
         </section>
+
+    );
+  }
+
+  return (
+    <main className="shell" style={{ paddingBlock: 32 }}>
+      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
+        <Link href="/database/quests">เควส</Link>
+        <span className="crumbs__sep" aria-hidden="true">›</span>
+        <span className="crumbs__here">{label}</span>
+      </nav>
+
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'เควส', path: '/database/quests' },
+          { name: label, path: `/database/quests/${params.town}` },
+        ])}
+      />
+      <PageHeader
+        title={`เควส ${label}`}
+        lead={`${typeFilter ? `${quests.length} จาก ${allQuests.length}` : allQuests.length} เควส · กดชื่อเควสเพื่อคัดลอกลิงก์เจาะรายเควสได้`}
+        source={
+          <>
+            <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม ภาษาอังกฤษตามต้นฉบับ ·
+            พิกัดคือจุดที่เกมผูกไว้กับเควส ไม่ใช่ทุกเควสจะมี
+          </>
+        }
+      />
+
+      {typesHere.length > 1 && (
+        <nav className="explorerow" aria-label="กรองตามประเภทเควส" style={{ marginTop: 14 }}>
+          <Link href={`/database/quests/${params.town}`} className="chiplink" aria-current={typeFilter === '' ? 'true' : undefined} style={typeFilter === '' ? { borderColor: 'var(--cyan)', color: 'var(--text)' } : undefined}>
+            ทุกประเภท
+          </Link>
+          {typesHere.map((t) => (
+            <Link
+              key={t}
+              href={`/database/quests/${params.town}?type=${encodeURIComponent(t)}`}
+              className="chiplink"
+              aria-current={typeFilter === t ? 'true' : undefined}
+              style={typeFilter === t ? { borderColor: 'var(--cyan)', color: 'var(--text)' } : undefined}
+            >
+              {TYPE_LABELS[t] ?? t}
+            </Link>
+          ))}
+        </nav>
+      )}
+
+      {grouped.chains.map((chain) => (
+        <section key={`chain-${chain[0].id}`} style={{ marginTop: 20 }}>
+          <h2 className="section-title" style={{ margin: '0 0 2px' }}>
+            สายเควส: {chain[0].name_th ?? chain[0].name}
+            <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}> · {chain.length} ขั้น</span>
+          </h2>
+          {chain.map((quest, i) => (
+            <QuestCard key={quest.id} quest={quest} step={i + 1} total={chain.length} />
+          ))}
+        </section>
       ))}
+
+      {grouped.singles.length > 0 && (
+        <section style={{ marginTop: 20 }}>
+          {grouped.chains.length > 0 && (
+            <h2 className="section-title" style={{ margin: '0 0 2px' }}>เควสเดี่ยว</h2>
+          )}
+          {grouped.singles.map((quest) => (
+            <QuestCard key={quest.id} quest={quest} />
+          ))}
+        </section>
+      )}
     </main>
   );
 }
