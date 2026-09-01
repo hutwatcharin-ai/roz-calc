@@ -48,7 +48,7 @@ function draftFrom(ctx: CharacterContext | null): Draft {
 
 export default function CharacterBar() {
   const pathname = usePathname();
-  const { character, setCharacter, ready, persisted } = useCharacterContext();
+  const { character, setCharacter, clearCharacter, ready, persisted } = useCharacterContext();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
   const [error, setError] = useState<string | null>(null);
@@ -178,10 +178,23 @@ export default function CharacterBar() {
             </div>
           </fieldset>
 
-          <div className="charbar__actions">
+          <div className="charbar__actions" style={{ gap: 8 }}>
             <button type="submit" className="btn">
               บันทึก
             </button>
+            {character && (
+              <button
+                type="button"
+                className="charbar__toggle"
+                onClick={() => {
+                  clearCharacter();
+                  setDraft(EMPTY_DRAFT);
+                  setError(null);
+                }}
+              >
+                ล้างค่า
+              </button>
+            )}
           </div>
 
           {error && <p className="charbar__error" role="alert">{error}</p>}

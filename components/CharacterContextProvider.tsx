@@ -7,6 +7,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import {
+  CHARACTER_STORAGE_KEY,
   readCharacterContext,
   writeCharacterContext,
   type CharacterContext,
@@ -15,6 +16,7 @@ import {
 interface CharacterContextValue {
   character: CharacterContext | null;
   setCharacter: (next: CharacterContext) => void;
+  clearCharacter: () => void;
   // False until the first client-side read completes. Server render and first
   // client render must produce identical markup or React logs a hydration
   // mismatch, so consumers render the no-character branch until this is true.
@@ -27,6 +29,7 @@ interface CharacterContextValue {
 const Ctx = createContext<CharacterContextValue>({
   character: null,
   setCharacter: () => {},
+  clearCharacter: () => {},
   ready: false,
   persisted: true,
 });
@@ -55,7 +58,18 @@ export function CharacterContextProvider({ children }: { children: ReactNode }) 
     setPersisted(writeCharacterContext(browserStorage(), next));
   }
 
-  return <Ctx.Provider value={{ character, setCharacter, ready, persisted }}>{children}</Ctx.Provider>;
+  function clearCharacter() {
+    setCharacterState(null);
+    try {
+      browserStorage()?.removeItem(CHARACTER_STORAGE_KEY);
+    } catch {
+      /* blocked storage: in-memory state is cleared either way */
+    }
+  }
+
+  return (
+    <Ctx.Provider value={{ character, setCharacter, clearCharacter, ready, persisted }}>{children}</Ctx.Provider>
+  );
 }
 
 export function useCharacterContext(): CharacterContextValue {

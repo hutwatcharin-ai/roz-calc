@@ -3,6 +3,8 @@ import FarmingTable from '@/components/FarmingTable';
 import Link from 'next/link';
 import SiteStats, { getSiteStats } from '@/components/SiteStats';
 import RecentlyViewed from '@/components/RecentlyViewed';
+import CVariantToggle from '@/components/CVariantToggle';
+import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 export const metadata = {
   title: 'หามอนสเตอร์คุ้มสุดสำหรับเลเวลของคุณ',
@@ -10,15 +12,18 @@ export const metadata = {
     'ใส่เลเวลแล้วดูว่ามอนสเตอร์ตัวไหนให้ EXP ต่อ HP สูงสุด พร้อมฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยของ Ragnarok Zero Global',
 };
 
-async function getFarmingRows(minLevel: number, maxLevel: number) {
+async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean) {
   const db = supabaseBrowser();
-  const { data: stats, error } = await db
+  let query = db
     .from('monster_farming_stats')
     .select('*')
     .gte('level', minLevel)
-    .lte('level', maxLevel)
-    .order('exp_per_hp', { ascending: false })
-    .limit(20);
+    .lte('level', maxLevel);
+  // Challenge clones dominate the EXP/HP ranking (they are inflated copies),
+  // so the default ranking is the real world; ?c=1 opts them in, same rule as
+  // the monster list.
+  if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+  const { data: stats, error } = await query.order('exp_per_hp', { ascending: false }).limit(20);
 
   if (error) {
     console.error('monster_farming_stats query failed', error);
@@ -52,7 +57,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number) {
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: { level?: string; range?: string };
+  searchParams: { level?: string; range?: string; c?: string };
 }) {
   // The farming finder still lives at "/" (spec 6.2: the link people share in
   // game chat keeps working, params and all). What changed is the default
@@ -62,11 +67,15 @@ export default async function HomePage({
   const searched = searchParams.level !== undefined;
   const level = Number(searchParams.level ?? 50);
   const range = Number(searchParams.range ?? 10);
+  const showC = searchParams.c === '1';
 
   const [rows, stats] = await Promise.all([
-    searched ? getFarmingRows(Math.max(1, level - range), level + range) : Promise.resolve([]),
+    searched ? getFarmingRows(Math.max(1, level - range), level + range, showC) : Promise.resolve([]),
     getSiteStats(),
   ]);
+
+  const resultsHref = (show: boolean) =>
+    `/?level=${level}&range=${range}${show ? '&c=1' : ''}#results`;
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -83,6 +92,7 @@ export default async function HomePage({
           <strong>เลเวลตันแล้ว ตีอะไรดี</strong>
           <span>เดี๋ยวจัดมอนคุ้มสุดให้ พร้อมเตือนตัวที่โจมตีก่อน</span>
           <form className="qcard__form" action="/#results">
+            {showC && <input type="hidden" name="c" value="1" />}
             <label>
               เลเวล{' '}
               <input className="mono" type="number" name="level" defaultValue={searched ? level : 50} inputMode="numeric" style={{ width: 80 }} />
@@ -118,9 +128,12 @@ export default async function HomePage({
 
       {searched && (
         <div className="panel" id="results" style={{ marginTop: 24 }}>
-          <h2 className="pagehead__title" style={{ fontSize: 20 }}>
-            มอนคุ้มสุดช่วงเลเวล {Math.max(1, level - range)}–{level + range}
-          </h2>
+          <div className="pagehead__row" style={{ alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+            <h2 className="pagehead__title" style={{ fontSize: 20, margin: 0 }}>
+              มอนคุ้มสุดช่วงเลเวล {Math.max(1, level - range)}–{level + range}
+            </h2>
+            <CVariantToggle mode="nav" navShow={showC} navHrefShow={resultsHref(true)} navHrefHide={resultsHref(false)} />
+          </div>
           <FarmingTable rows={rows} />
         </div>
       )}
