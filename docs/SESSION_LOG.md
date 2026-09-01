@@ -52,7 +52,7 @@
 - ป้าย aggro เปลี่ยนคำ "เข้าตีเอง"→"โจมตีก่อน"
 
 **ค้าง/ไอเดียต่อ**
-- SEO audit fixes ใน `docs/SEO_AUDIT.md` (canonical, schema, security headers, C2 thin pages) ยังไม่ได้ทำ
+- SEO audit: ก้อนหลักทำแล้ว 1 ก.ย. (ดูหัวข้อ SEO hardening) — ที่ยังค้าง: หน้า About/ติดต่อ + ลิงก์ source ใน footer, item pages บาง 3,833 หน้า (enrich หรือ noindex), reposition หน้าแรกตาม SXO, lastmod (ต้องมี updated_at จริงก่อน)
 - midgardhub equip_jobs (~1,000 items) ยังไม่ import (มี canJobEquip ใช้ equippable_classes จาก rozerodb แล้วบางส่วน)
 - ตัววางแผนบิลด์สกิล — ต้องการข้อมูลเงื่อนไขสกิล (ยังไม่มี)
 - ฝั่ง user: ตั้ง GSC + submit sitemap · ปิด auto-renew โดเมนจดผิด rezerothai.com
