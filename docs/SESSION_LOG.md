@@ -4,6 +4,15 @@
 
 ## 1–2 ก.ย. 2026 — รอบใหญ่: โครงหน้า, hit/flee, แปลไทย, NPC
 
+**SEO hardening (1 ก.ย. ค่ำ — จาก audit 8-agent ใน docs/SEO_AUDIT.md)**
+- canonical ทุกหน้า (layout `alternates.canonical './'` — ตัด query เอง) · middleware 301 www/sslip→apex · security headers 5 ตัว + ปิด X-Powered-By · sitemap ตัด priority/changefreq
+- JSON-LD: WebSite+SearchAction (หน้าแรก), BreadcrumbList (มอน/ไอเทม/เควส/แมพ), Thing+PropertyValue (มอน/ไอเทม — ห้าม Product/Offer กับของในเกม)
+- ฟอนต์ self-host next/font แทนลิงก์ googleapis (CSS ผ่านตัวแปร --font-*)
+- **บั๊กลึก: supabase ส่ง Authorization ทุก fetch → Next 14 บังคับ no-store เงียบๆ ทำ revalidate ไร้ผล** — override global fetch ใส่ `next.revalidate` ใน supabaseBrowser
+- entity pages (มอน/ไอเทม/แมพ) = on-demand ISR: revalidate 86400 + generateStaticParams ว่าง (MISS→HIT, s-maxage=86400) · sprite /images/** immutable
+- touch target topnav/subnav 44px, input 16px กัน iOS zoom, title เควสเลิกโชว์ slug ดิบ, ตารางธาตุเข้า explore row หน้าแรก
+- ⚠️ ค้างฝั่ง user: **Cloudflare ยัง DYNAMIC กับ HTML** — s-maxage ถูกส่งแล้วแต่ CF ไม่ cache HTML จนกว่าจะตั้ง Cache Rule ในแดชบอร์ด (ระวัง rule ล่างทับบน + ต้องยกเว้น RSC — ดูบทเรียน PCX) · GSC + submit sitemap ยังไม่ทำ
+
 **โครงหน้า/เมนู**
 - แยก database เป็น 3 หน้าแบบ rozerodb: `/database/equipment` (1,815 — cascade หมวด→ชนิด 18 อาวุธ/6 ตำแหน่ง, filter อาชีพ+Slot+"ใส่ได้ที่ Lv", sort ATK/Lv), `/database/items` (ของใช้ 1,705, ลิงก์เก่า redirect), `/database/cards` (313)
 - Cash Shop ใหม่: 77 รายการ ราคา KP+€ ณ 31 ส.ค. 2026, ตาราง `cash_shop_items`, รูปจาก Divine-Pride, อยู่ในเมนูถัดจากไอเทม
