@@ -17,7 +17,7 @@ export const metadata = {
 // always the one the player means, so ties resolve toward it.
 async function pickDroppable(
   db: ReturnType<typeof supabaseBrowser>,
-  candidates: { id: number; name_en: string }[],
+  candidates: { id: number; name_en: string; slots?: number | null }[],
 ) {
   if (candidates.length === 1) return candidates[0];
   const { data, error } = await db
@@ -36,7 +36,7 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
   const needle = escapeLikePattern(query);
   const { data: exact, error: exactError } = await db
     .from('items')
-    .select('id, name_en')
+    .select('id, name_en, slots')
     .ilike('name_en', needle)
     .limit(10);
 
@@ -48,7 +48,7 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
 
   const { data: partial, error: partialError } = await db
     .from('items')
-    .select('id, name_en')
+    .select('id, name_en, slots')
     .ilike('name_en', `%${needle}%`)
     .order('name_en')
     .limit(10);
@@ -63,20 +63,20 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
 }
 
 async function findDrops(query: string, itemId: number | null) {
-  if (!query && !itemId) return { resolvedName: null, resolvedId: null, rows: [] };
+  if (!query && !itemId) return { resolvedName: null, resolvedInputName: null, resolvedId: null, rows: [] };
   const db = supabaseBrowser();
 
   // An explicit id (starter-table links) skips name resolution entirely:
   // same-name items make a name round-trip ambiguous.
-  let item: { id: number; name_en: string } | null = null;
+  let item: { id: number; name_en: string; slots?: number | null } | null = null;
   if (itemId) {
-    const { data, error } = await db.from('items').select('id, name_en').eq('id', itemId).limit(1);
+    const { data, error } = await db.from('items').select('id, name_en, slots').eq('id', itemId).limit(1);
     if (error) console.error('item id lookup failed', error);
     item = data?.[0] ?? null;
   } else {
     item = await resolveItem(db, query);
   }
-  if (!item) return { resolvedName: null, resolvedId: null, rows: [] };
+  if (!item) return { resolvedName: null, resolvedInputName: null, resolvedId: null, rows: [] };
 
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
@@ -90,11 +90,12 @@ async function findDrops(query: string, itemId: number | null) {
 
   if (dropsError || !drops) {
     if (dropsError) console.error('monster_drops query failed', dropsError);
-    return { resolvedName: item.name_en, resolvedId: item.id as number, rows: [] };
+    return { resolvedName: (item.slots ?? 0) > 0 ? `${item.name_en} [${item.slots}]` : item.name_en, resolvedInputName: item.name_en, resolvedId: item.id as number, rows: [] };
   }
 
   return {
-    resolvedName: item.name_en as string,
+    resolvedName: (item.slots ?? 0) > 0 ? `${item.name_en} [${item.slots}]` : (item.name_en as string),
+    resolvedInputName: item.name_en as string,
     resolvedId: item.id as number,
     rows: drops.map((d: any) => ({
       monster_id: d.monster_id,
@@ -121,7 +122,7 @@ async function starterList() {
   const db = supabaseBrowser();
   const { data: items, error } = await db
     .from('items')
-    .select('id, name_en, name_th, sell_price, icon_url')
+    .select('id, name_en, name_th, sell_price, icon_url, slots')
     .gt('sell_price', 0)
     .order('sell_price', { ascending: false })
     .limit(60);
@@ -148,7 +149,7 @@ async function starterList() {
 export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string } }) {
   const query = searchParams.q ?? '';
   const itemId = Number(searchParams.id) || null;
-  const { resolvedName, resolvedId, rows } = await findDrops(query, itemId);
+  const { resolvedName, resolvedInputName, resolvedId, rows } = await findDrops(query, itemId);
   const searched = Boolean(query || itemId);
   const starters = searched ? [] : await starterList();
 
@@ -166,7 +167,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
         </p>
       )}
       <div className="panel" style={{ marginTop: 20 }}>
-        <DropSearch query={query || resolvedName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
+        <DropSearch query={query || resolvedInputName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
       </div>
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>
@@ -188,6 +189,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
                       <a href={`/drop-finder?id=${it.id}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                         {it.icon_url && <img src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />}
                         {it.name_en}
+                        {(it.slots ?? 0) > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}>[{it.slots}]</span>}
                         {it.name_th && <span className="muted">{it.name_th}</span>}
                       </a>
                     </td>

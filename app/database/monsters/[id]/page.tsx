@@ -67,7 +67,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // class the spawns/skills/farming queries below were already fixed for.
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
-    .select('rate, items(id, name_en, sell_price, icon_url)')
+    .select('rate, items(id, name_en, sell_price, icon_url, slots)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
   if (dropsError) console.error('monster drops query failed', dropsError);
@@ -319,7 +319,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                               {d.items.icon_url && (
                                 <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
                               )}
-                              {d.items.name_en ?? '—'}
+                              {d.items.name_en ?? '—'}{(d.items?.slots ?? 0) > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{d.items.slots}]</span>}
                             </Link>
                           ) : (
                             <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

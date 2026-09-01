@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   if (item.required_level !== null) parts.push(`ใช้ได้ที่เลเวล ${item.required_level}`);
 
   return {
-    title: `${item.name_en} — ดรอปจากมอนตัวไหน`,
+    title: `${item.name_en}${item.slots > 0 ? ` [${item.slots}]` : ''} — ดรอปจากมอนตัวไหน`,
     description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน RO Zero Thai`,
   };
 }
@@ -125,7 +125,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <span className="crumbs__sep" aria-hidden="true">›</span>
         <span className="crumbs__here">{item.name_en}</span>
       </nav>
-      <RecordVisit kind="item" id={item.id} name={item.name_en} />
+      <RecordVisit kind="item" id={item.id} name={item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en} />
 
       {/* The hero: a big sprite next to the name, and the stats as labelled
           tiles rather than a prose line -- a reader scans ATK/price the way
@@ -135,7 +135,10 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
         <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
         <div>
-          <h1 className="pagehead__title">{item.name_en}</h1>
+          <h1 className="pagehead__title">
+            {item.name_en}
+            {item.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{item.slots}]</span>}
+          </h1>
           <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
         </div>
       </div>
