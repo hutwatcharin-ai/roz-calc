@@ -43,10 +43,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             itself from it on every page, so a provider mounted per page would
             leave the badge ungraded wherever someone forgot to add one. */}
         <CharacterContextProvider>
-          <Nav />
-          <CharacterBar />
-          {children}
-          <SiteFooter />
+          {/* Farm plan wraps the app for the same reason: the add button on a
+              monster page and the planner page must share one plan. Without
+              this wrapper every consumer gets the default context and the
+              whole feature silently renders nothing (shipped broken once). */}
+          <FarmPlanProvider>
+            <Nav />
+            <CharacterBar />
+            {children}
+            <SiteFooter />
+          </FarmPlanProvider>
         </CharacterContextProvider>
       </body>
     </html>
