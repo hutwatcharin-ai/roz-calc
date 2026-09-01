@@ -5,7 +5,6 @@
 // server (spec 4).
 
 import Link from 'next/link';
-import GlobalSearch from './GlobalSearch';
 import NavTabs from './NavTabs';
 
 export default function Nav() {
@@ -18,7 +17,6 @@ export default function Nav() {
           RO ZERO<em>THAI</em>
         </Link>
         <NavTabs />
-        <GlobalSearch />
       </div>
     </div>
   );
