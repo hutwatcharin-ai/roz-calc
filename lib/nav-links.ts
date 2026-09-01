@@ -44,11 +44,10 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/database/equipment', label: 'อุปกรณ์', icon: '/images/items/1101.gif', ready: true },
     { href: '/database/cards', label: 'การ์ด', icon: '/images/items/4001.gif', ready: true },
     { href: '/database/items', label: 'ไอเทม', icon: '/images/items/501.gif', ready: true },
+    { href: '/database/cash-shop', label: 'Cash Shop', icon: '/images/items/969.gif', ready: true },
     { href: '/database/quests', label: 'เควส', icon: '/images/items/714.gif', ready: true },
     { href: '/database/maps', label: 'แมพ', icon: '/images/items/601.gif', ready: true },
-    { href: '/database/world-map', label: 'แผนที่โลก', icon: '/images/items/602.gif', ready: true },
     { href: '/database/skills', label: 'สกิล', icon: '/images/items/7433.gif', ready: true },
-    { href: '/database/cash-shop', label: 'Cash Shop', icon: '/images/items/969.gif', ready: true },
   ],
   // Red Blood (element stone), Apple, Yggdrasil Leaf, Branch of Dead Tree,
   // Elunium, Knife, Yggdrasil Berry.

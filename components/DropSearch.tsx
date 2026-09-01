@@ -51,7 +51,10 @@ export default function DropSearch({
       {resolvedName && rows.length === 0 && (
         <p style={{ color: 'var(--faint)' }}>ไอเทมนี้ไม่มีมอนสเตอร์ตัวไหนดรอป</p>
       )}
-      <div style={{ marginTop: 12 }}>
+      {/* Capped width: on a wide screen the % sat a full viewport away from
+          the name (user screenshot, 1 Sep) -- an eye has to travel the gap.
+          65ch keeps name and rate in one glance. */}
+      <div style={{ marginTop: 12, maxWidth: 720 }}>
         {rows.map((row) => (
           <div
             key={row.monster_id}

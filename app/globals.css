@@ -212,6 +212,21 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .data-table tbody tr:hover { background: var(--panel-2); }
+
+/* Clickable column headers: same face as a static th, plus a direction
+   glyph. A button, not a link -- sorting is state, not navigation. */
+.thsort {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--faint);
+  font: 600 12px/1.6 "Sarabun", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.thsort:hover { color: var(--text); }
 .data-table td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 .data-table th.num { text-align: right; }
 

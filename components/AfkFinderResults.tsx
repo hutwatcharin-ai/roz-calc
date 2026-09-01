@@ -7,6 +7,7 @@ import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type Skil
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
+import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
 export interface AfkCandidate {
   monster_id: number;
@@ -28,6 +29,8 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   // on the same side. Off by default -- the full picture first.
   const [cleanMapOnly, setCleanMapOnly] = useState(false);
   const [noRiskOnly, setNoRiskOnly] = useState(false);
+  // Header sort overrides the safest-first default; null key = default order.
+  const { sort, toggle, indicator } = useTableSort();
 
   // hp 0 is the importer's unknown-HP marker, so these rows can never pass the
   // one-hit filter. Saying so is cheaper than letting a reader wonder why the
@@ -64,10 +67,18 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   const clean = candidates.filter((c) => c.risks.length === 0).length;
 
+  const sorted = bySorted(candidates, sort, (c, key) =>
+    key === 'name' ? c.row.name_en
+    : key === 'level' ? c.row.level
+    : key === 'hp' ? c.row.hp
+    : key === 'exp_per_hp' ? c.row.exp_per_hp
+    : null,
+  );
+
   // No cap: every qualifying monster renders (user request, 31 Aug). The list
   // stays sorted safest-first, so the risky tail is at the bottom where it
   // belongs, and ~220 rows render fine.
-  const shown = candidates;
+  const shown = sorted;
   const hidden = 0;
 
   return (
@@ -122,10 +133,10 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
           <table className="data-table">
             <thead>
               <tr>
-                <th>มอนสเตอร์</th>
-                <th className="num">Lv</th>
-                <th className="num">HP</th>
-                <th className="num">EXP/HP</th>
+                <th><button type="button" className="thsort" onClick={() => toggle('name', false)}>มอนสเตอร์ {indicator('name')}</button></th>
+                <th className="num"><button type="button" className="thsort" onClick={() => toggle('level')}>Lv {indicator('level')}</button></th>
+                <th className="num"><button type="button" className="thsort" onClick={() => toggle('hp')}>HP {indicator('hp')}</button></th>
+                <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp_per_hp')}>EXP/HP {indicator('exp_per_hp')}</button></th>
                 {personal && <th className="num">EXP/ชม.</th>}
                 {personal && <th>ดรอปตามช่วงเลเวล</th>}
                 <th>สกิลที่ต้องระวัง</th>

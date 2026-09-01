@@ -7,6 +7,7 @@ import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour
 import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
+import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
 interface FarmingRow {
   monster_id: number;
@@ -24,6 +25,7 @@ interface FarmingRow {
 
 export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
   const { character, ready } = useCharacterContext();
+  const { sort, toggle, indicator } = useTableSort();
 
   if (rows.length === 0) {
     return <p style={{ color: 'var(--faint)' }}>ไม่พบมอนสเตอร์ในช่วงเลเวลนี้</p>;
@@ -54,11 +56,11 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
       <table className="data-table">
         <thead>
           <tr>
-            <th>มอนสเตอร์</th>
-            <th className="num">Lv</th>
-            <th className="num">HP</th>
-            <th className="num">EXP/HP</th>
-            <th className="num">Zeny/ตัว</th>
+            <th><button type="button" className="thsort" onClick={() => toggle('name', false)}>มอนสเตอร์ {indicator('name')}</button></th>
+            <th className="num"><button type="button" className="thsort" onClick={() => toggle('level')}>Lv {indicator('level')}</button></th>
+            <th className="num"><button type="button" className="thsort" onClick={() => toggle('hp')}>HP {indicator('hp')}</button></th>
+            <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp_per_hp')}>EXP/HP {indicator('exp_per_hp')}</button></th>
+            <th className="num"><button type="button" className="thsort" onClick={() => toggle('zeny')}>Zeny/ตัว {indicator('zeny')}</button></th>
             {personal && <th className="num">ตัว/ชม.</th>}
             {personal && <th className="num">EXP/ชม.</th>}
             {personal && <th>ดรอปตามช่วงเลเวล</th>}
@@ -67,7 +69,14 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => {
+          {bySorted(rows, sort, (r, key) =>
+            key === 'name' ? r.name_en
+            : key === 'level' ? r.level
+            : key === 'hp' ? r.hp
+            : key === 'exp_per_hp' ? r.exp_per_hp
+            : key === 'zeny' ? r.avg_zeny_per_kill
+            : null,
+          ).map((row) => {
             const personalRate = personal ? rateFor(row) : null;
             return (
               <tr key={row.monster_id}>

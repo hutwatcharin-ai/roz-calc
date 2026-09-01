@@ -104,6 +104,15 @@ export default async function MapsPage({
         รายการนี้ครอบคลุมเฉพาะแมพที่มีมอนสเตอร์เกิด แมพที่ไม่มีมอนเกิดเลยจะไม่อยู่ในรายการนี้
       </p>
 
+      {/* The interactive world map lives under this section now (merged from
+          its own nav entry, 1 Sep) -- a banner, not an embed: the atlas is a
+          heavy client bundle that map-list visitors should not pay for. */}
+      <Link href="/database/world-map" className="qcard qcard--cyan" style={{ marginTop: 14, display: 'flex' }}>
+        <strong>🗺 แผนที่โลกแบบกดได้</strong>
+        <span>ดูทั้งทวีปเป็นภาพเดียว 102 โซน — ชี้เห็นมอนเด่น/ช่วงเลเวล กดเข้าแมพได้เลย</span>
+        <em className="qcard__go">เปิดแผนที่โลก →</em>
+      </Link>
+
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อหรือรหัสแมพ..." />
         <button type="submit" className="btn">ค้นหา</button>

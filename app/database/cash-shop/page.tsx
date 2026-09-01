@@ -80,7 +80,7 @@ export default async function CashShopPage({
             {(rows ?? []).map((r) => {
               const body = (
                 <>
-                  <ItemIcon iconUrl={linkable.has(r.item_id) ? `/images/items/${r.item_id}.gif` : null} category="Other" size={32} />
+                  <ItemIcon iconUrl={`/images/items/${r.item_id}.png`} category="Other" size={32} />
                   <span className="cashlist__body">
                     <span className="cashlist__name">
                       {r.name_en}
@@ -112,7 +112,7 @@ export default async function CashShopPage({
 
       <p className="source-note" style={{ marginTop: 14 }}>
         <strong>ที่มา:</strong> รวบรวมจากรายการ Cash Shop สาธารณะ ณ 31 ส.ค. 2026 · KP คือเงินสดในเกม
-        ราคายูโรเป็นค่าประมาณจากอัตราแลก ณ วันเก็บข้อมูล
+        ราคายูโรเป็นค่าประมาณจากอัตราแลก ณ วันเก็บข้อมูล · รูปไอเทมจาก Divine-Pride
       </p>
     </main>
   );

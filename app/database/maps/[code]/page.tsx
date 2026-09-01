@@ -4,8 +4,7 @@ import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
-import AggroBadge from '@/components/AggroBadge';
-import CVariantToggle from '@/components/CVariantToggle';
+import MapMonsterTable from '@/components/MapMonsterTable';
 import { isCVariant } from '@/lib/c-variant';
 
 export const revalidate = 86400;
@@ -76,42 +75,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
         มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
         {cCount > 0 && ` (+${cCount} มอน Challenge)`}
       </p>
-      {cCount > 0 && <CVariantToggle mode="local" />}
-
-      <div className="card" style={{ marginTop: 20 }}>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>มอนสเตอร์</th>
-              <th className="num">Lv</th>
-              <th className="num">HP</th>
-              <th className="num">Base EXP</th>
-              <th>โจมตีก่อน</th>
-            </tr>
-          </thead>
-          <tbody>
-            {monsters.map((m: any) => (
-              <tr key={m.id} className={isCVariant(m.name_en) ? 'cvariant' : undefined}>
-                <td data-label="">
-                  <Link href={`/database/monsters/${m.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {m.image_url && (
-                      <img src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {m.name_en}
-                  </Link>
-                </td>
-                <td data-label="Lv" className="num">{m.level}</td>
-                {/* hp and base_exp of 0 are the unknown-value sentinels, not real zeros. */}
-                <td data-label="HP" className="num">{m.hp > 0 ? m.hp.toLocaleString('en-US') : '—'}</td>
-                <td data-label="Base EXP" className="num">{m.base_exp > 0 ? m.base_exp.toLocaleString('en-US') : '—'}</td>
-                <td data-label="โจมตีก่อน">
-                  <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <MapMonsterTable monsters={monsters} cCount={cCount} />
     </main>
   );
 }
