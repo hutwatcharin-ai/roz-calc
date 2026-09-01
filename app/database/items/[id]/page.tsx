@@ -74,7 +74,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   // identical to a real empty result without its own error slot).
   const { data: droppedBy, error: droppedByError } = await db
     .from('monster_drops')
-    .select('rate, monsters(id, name_en, image_url)')
+    .select('rate, monsters(id, name_en, image_url, level)')
     .eq('item_id', id)
     .order('rate', { ascending: false });
   if (droppedByError) console.error('item dropped-by query failed', droppedByError);
@@ -175,6 +175,24 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
             {item.name_en}
             {item.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{item.slots}]</span>}
           </h1>
+          {/* One fluent sentence a crawler or reader can lift whole (GEO
+              audit): the same facts the tables below hold, as prose. */}
+          {(() => {
+            const rows = (droppedBy ?? []).filter((d: any) => d.monsters && !isCVariant(d.monsters.name_en));
+            const lowest = rows.length
+              ? rows.reduce((a: any, b: any) => ((b.monsters.level ?? 999) < (a.monsters.level ?? 999) ? b : a))
+              : null;
+            return (
+              <p className="muted" style={{ marginTop: 6, maxWidth: '65ch' }}>
+                {item.name_en}
+                {item.category ? ` เป็นไอเทมหมวด ${item.category}` : ''}
+                {item.sell_price ? ` ขายร้าน NPC ได้ ${item.sell_price.toLocaleString()} Zeny` : ''}
+                {rows.length > 0 && lowest?.monsters
+                  ? ` ดรอปจากมอนสเตอร์ ${rows.length} ชนิด ตัวเลเวลต่ำสุดคือ ${(lowest.monsters as any).name_en} (Lv.${(lowest.monsters as any).level ?? '—'}${lowest.rate != null ? ` อัตรา ${lowest.rate}%` : ''})`
+                  : ''}
+              </p>
+            );
+          })()}
           <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
         </div>
       </div>

@@ -138,9 +138,11 @@ export default async function QuestTownPage({
         <section key={quest.id} id={`q${quest.id}`} className="card" style={{ marginTop: 14 }}>
           <div className="pagehead__row">
             <h2 className="section-title" style={{ margin: 0 }}>
+              {/* One language per heading: the bilingual concatenation made 32
+                  near-identical wall-of-text H2s per page (audit M3). Thai
+                  leads when translated; the EN name moves to the meta line. */}
               <a href={`#q${quest.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                {quest.name}
-                {quest.name_th && <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}> · {quest.name_th}</span>}
+                {quest.name_th ?? quest.name}
               </a>
             </h2>
             <span className="tag">{TYPE_LABELS[quest.type] ?? quest.type}</span>
@@ -156,7 +158,8 @@ export default async function QuestTownPage({
               />
             )}
             <span>
-              เควส #{quest.id}
+              {quest.name_th && <span>{quest.name}</span>}
+            เควส #{quest.id}
               {npcByQuest.has(quest.id) && (
                 <>
                   {' · '}NPC <span className="mono">{npcByQuest.get(quest.id)}</span>

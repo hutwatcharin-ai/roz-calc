@@ -146,6 +146,12 @@ export default async function HomePage({
 
       <RecentlyViewed />
       <SiteStats stats={stats} />
+      {/* One trust sentence under the scale numbers (SXO audit): the deep
+          pages already earn trust with sourced numbers — say so up front. */}
+      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
+        ตัวเลขทุกตัวมีที่มาและตรวจทานไขว้กับ ragnarokzero.net, rozerodb และ rAthena —{' '}
+        <Link href="/about">อ่านวิธีตรวจทานและช่องทางแจ้งข้อมูลผิด</Link>
+      </p>
 
       {/* Explore row: the sections the four cards do not cover. Chips, not
           cards -- this row must stay quieter than the questions above it. */}

@@ -31,17 +31,17 @@ export default function SiteFooter() {
                 <strong>ข้อมูลมอนสเตอร์และไอเทม</strong> — ชุดข้อมูลสาธารณะจากไคลเอนต์เกม
               </li>
               <li>
-                <strong>rozerodb.com</strong> — ไอเทมประมาณ 1,200 ชิ้นที่ชุดข้อมูลของเราไม่มี
+                <strong><a href="https://rozerodb.com" target="_blank" rel="noopener noreferrer">rozerodb.com</a></strong> — ไอเทมประมาณ 1,200 ชิ้นที่ชุดข้อมูลของเราไม่มี
                 และใช้ตรวจทานตารางตีบวกกับตารางขนาด
               </li>
               <li>
-                <strong>ragnarokzero.net</strong> — ใช้ตรวจทานค่าสถานะมอนสเตอร์ครบทั้ง 524 ตัว
+                <strong><a href="https://ragnarokzero.net" target="_blank" rel="noopener noreferrer">ragnarokzero.net</a></strong> — ใช้ตรวจทานค่าสถานะมอนสเตอร์ครบทั้ง 524 ตัว
               </li>
               <li>
-                <strong>midgardhub.com</strong> — รายการดรอปชนิดไม่ทราบอัตรา 410 แถวที่ต้นทางอื่นไม่มี
+                <strong><a href="https://midgardhub.com" target="_blank" rel="noopener noreferrer">midgardhub.com</a></strong> — รายการดรอปชนิดไม่ทราบอัตรา 410 แถวที่ต้นทางอื่นไม่มี
               </li>
               <li>
-                <strong>rAthena</strong> — ใช้ตรวจทานตารางธาตุทั้ง 4 ระดับ
+                <strong><a href="https://github.com/rathena/rathena" target="_blank" rel="noopener noreferrer">rAthena</a></strong> — ใช้ตรวจทานตารางธาตุทั้ง 4 ระดับ
               </li>
             </ul>
           </div>
@@ -51,7 +51,7 @@ export default function SiteFooter() {
             <ul>
               <li>ตัวเลขไหนยังไม่ยืนยัน จะเขียนกำกับไว้ตรงจุดนั้น</li>
               <li>ค่าที่คิดจากตัวละครเป็นเพดานบน — ไม่รวมเวลาเดินและรอมอนเกิด</li>
-              <li>เจอเลขไม่ตรงกับในเกม แจ้งได้เลย</li>
+              <li>เจอเลขไม่ตรงกับในเกม <a href="https://github.com/hutwatcharin-ai/roz-calc/issues" target="_blank" rel="noopener noreferrer">แจ้งได้เลย</a></li>
             </ul>
           </div>
 
@@ -69,6 +69,9 @@ export default function SiteFooter() {
               </li>
               <li>
                 <Link href="/tools/refine">ตีบวกต้องเตรียมเท่าไร</Link>
+              </li>
+              <li>
+                <Link href="/about">เกี่ยวกับเว็บนี้</Link>
               </li>
             </ul>
           </div>

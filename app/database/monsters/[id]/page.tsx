@@ -209,6 +209,19 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         </div>
       </div>
 
+      {/* Fluent one-liner for crawlers and quick readers (GEO audit): the
+          headline facts as a sentence, not table fragments. */}
+      <p className="muted" style={{ marginTop: 10, maxWidth: '70ch' }}>
+        {monster.name_en} มอนสเตอร์เลเวล {monster.level}
+        {monster.race ? ` เผ่า ${monster.race}` : ''}
+        {monster.element ? ` ธาตุ ${monster.element}${monster.element_level ?? ''}` : ''}
+        {monster.size ? ` ขนาด ${monster.size}` : ''}
+        {(() => {
+          const top = (drops ?? []).find((d: any) => d.items?.name_en && d.rate != null);
+          return top ? ` — ดรอปเด่น: ${(top.items as any).name_en} ${top.rate}%` : '';
+        })()}
+      </p>
+
       <div className="card card--yellow" style={{ marginTop: 20 }}>
         <div className="reward-row">
           <div><span className="reward-label">Base EXP</span><span className="reward-value mono">{sentinel(monster.base_exp)}</span></div>
