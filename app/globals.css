@@ -728,6 +728,35 @@ a.qcard:hover { background: var(--panel-2); }
 }
 .chiplink:hover { color: var(--text); border-color: var(--cyan); }
 
+/* Cash-shop top-up basket. Row wrapper holds the link row plus the +/- basket
+   controls beside it (a button cannot nest inside the row's <Link>). The bar
+   sticks to the viewport bottom while anything is in the basket. */
+.cashlist__rowwrap { display: flex; align-items: center; gap: 8px; }
+.cashlist__rowwrap > a, .cashlist__rowwrap > .cashlist__row { flex: 1; min-width: 0; }
+.cashplan__btns { display: inline-flex; align-items: center; gap: 6px; flex: none; }
+.cashplan__step {
+  min-width: 34px; min-height: 34px; border-radius: 8px;
+  border: 1px solid var(--hair); background: var(--panel-2); color: var(--text);
+  font: 700 16px/1 var(--font-mono), monospace; cursor: pointer;
+}
+.cashplan__step:hover { border-color: var(--cyan); }
+.cashplan__qty { color: var(--yellow); min-width: 18px; text-align: center; }
+.cashplan__bar {
+  position: sticky; bottom: 0; z-index: 15; margin-top: 14px;
+  background: var(--panel-2); border-top: 2px solid var(--yellow);
+}
+.cashplan__bar-in {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding-block: 10px; font: 500 14px/1.5 var(--font-sarabun), sans-serif;
+}
+.cashplan__plan { color: var(--dim); }
+.cashplan__clear {
+  margin-left: auto; min-height: 34px; padding-inline: 12px; border-radius: 8px;
+  border: 1px solid var(--hair); background: transparent; color: var(--dim);
+  font: 600 13px/1 var(--font-sarabun), sans-serif; cursor: pointer;
+}
+.cashplan__clear:hover { color: var(--text); border-color: var(--status-danger); }
+
 /* Quest-giver NPC sprite: grows on hover so the pixel art is actually
    viewable without leaving the card. Scales from its feet (bottom-left),
    floats above neighbours while zoomed, and stays put for reduced-motion. */
