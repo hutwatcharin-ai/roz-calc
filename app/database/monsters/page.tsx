@@ -112,7 +112,7 @@ export default async function MonsterListPage({
             </option>
           ))}
         </select>
-        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 Sarabun, sans-serif' }}>
+        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 var(--font-sarabun), sans-serif' }}>
           Lv{' '}
           <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลต่ำสุด" />
           –

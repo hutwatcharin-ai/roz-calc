@@ -16,6 +16,20 @@ import MonsterSizePanel from '@/components/MonsterSizePanel';
 import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
 import RecordVisit from '@/components/RecordVisit';
 
+// ISR (SEO audit Critical-adjacent, perf #1): game reference data changes only
+// when we import — cache the rendered page and let the CDN serve it. A deploy
+// or the 24h window busts it.
+export const revalidate = 86400;
+
+// Empty on purpose: no paths are prebuilt (build stays fast), but the mere
+// presence of generateStaticParams switches the route from per-request SSR to
+// on-demand ISR -- first hit renders, later hits come from the page cache.
+export async function generateStaticParams() {
+  return [];
+}
+
+
+
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
 // lists, which meant Next's fetch memoisation couldn't collapse them. Returns

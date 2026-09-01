@@ -11,6 +11,14 @@ import { isCVariant } from '@/lib/c-variant';
 
 export const revalidate = 86400;
 
+// Empty on purpose: no paths are prebuilt (build stays fast), but the mere
+// presence of generateStaticParams switches the route from per-request SSR to
+// on-demand ISR -- first hit renders, later hits come from the page cache.
+export async function generateStaticParams() {
+  return [];
+}
+
+
 // Shared by generateMetadata and the page body so one request does one query.
 // Returns the raw { data, error } so each caller keeps its own handling.
 const getMapSpawns = cache(async (code: string) => {

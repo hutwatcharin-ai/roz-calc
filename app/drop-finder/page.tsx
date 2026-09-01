@@ -171,7 +171,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
       </div>
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>
-          <h2 style={{ font: '700 16px/1.6 Sarabun, sans-serif' }}>ของขายได้ราคาที่ฟาร์มได้</h2>
+          <h2 style={{ font: '700 16px/1.6 var(--font-sarabun), sans-serif' }}>ของขายได้ราคาที่ฟาร์มได้</h2>
           <p className="muted" style={{ marginTop: 2 }}>เรียงตามราคาขายร้าน NPC · กดชื่อเพื่อดูว่าตัวไหนดรอป</p>
           <div style={{ overflowX: 'auto' }}>
             <table className="data-table" style={{ marginTop: 10 }}>

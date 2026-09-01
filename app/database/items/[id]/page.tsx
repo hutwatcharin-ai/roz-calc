@@ -14,6 +14,20 @@ import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
 
+// ISR (SEO audit Critical-adjacent, perf #1): game reference data changes only
+// when we import — cache the rendered page and let the CDN serve it. A deploy
+// or the 24h window busts it.
+export const revalidate = 86400;
+
+// Empty on purpose: no paths are prebuilt (build stays fast), but the mere
+// presence of generateStaticParams switches the route from per-request SSR to
+// on-demand ISR -- first hit renders, later hits come from the page cache.
+export async function generateStaticParams() {
+  return [];
+}
+
+
+
 // Shared by generateMetadata and the page body so a request does one query for
 // the row instead of two -- the two callers used to select different column
 // lists, which meant Next's fetch memoisation couldn't collapse them. Returns
@@ -223,7 +237,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         </div>
       )}
       <div className="card" style={{ marginTop: 20 }}>
-        <h2 style={{ fontFamily: '"Chakra Petch", sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
+        <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
         {droppedByError ? (
           <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
         ) : (droppedBy ?? []).length === 0 ? (

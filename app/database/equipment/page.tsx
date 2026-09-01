@@ -181,7 +181,7 @@ export default async function EquipmentPage({
             <option key={j} value={j}>{j}</option>
           ))}
         </select>
-        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 Sarabun, sans-serif' }}>
+        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 var(--font-sarabun), sans-serif' }}>
           ใส่ได้ที่ Lv{' '}
           <input className="mono" type="number" name="mylv" defaultValue={mylv > 0 ? mylv : ''} placeholder="เลเวลของคุณ" inputMode="numeric" style={{ width: 104 }} aria-label="เลเวลตัวละครของคุณ" />
         </label>

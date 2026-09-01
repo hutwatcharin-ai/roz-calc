@@ -62,6 +62,9 @@ describe('hubLabel', () => {
 
   it('prefers the zone spelling the data actually has', () => {
     expect(hubLabel('alberta', 'Alberta')).toBe('Alberta');
-    expect(hubLabel('alberta', null)).toBe('alberta');
+    // No zone spelling on hand: the slug is prettified, never shown raw --
+    // the raw slug used to leak into <title> tags (SEO audit 1 Sep).
+    expect(hubLabel('alberta', null)).toBe('Alberta');
+    expect(hubLabel('prontera-region', null)).toBe('Prontera Region');
   });
 });

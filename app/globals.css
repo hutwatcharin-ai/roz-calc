@@ -28,13 +28,13 @@ body {
   background: var(--ground);
   color: var(--text);
   color-scheme: dark;
-  font: 400 16px/1.6 "Sarabun", system-ui, -apple-system, sans-serif;
+  font: 400 16px/1.6 var(--font-sarabun), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, p, table { margin: 0; }
 table { border-collapse: collapse; width: 100%; }
-.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 
 .shell { max-width: 1280px; margin-inline: auto; padding-inline: var(--shell); }
 
@@ -51,13 +51,13 @@ table { border-collapse: collapse; width: 100%; }
   padding-top: 14px; padding-bottom: 14px;
   max-width: 1280px; margin-inline: auto; padding-inline: var(--shell);
 }
-.brand__mark { font: 700 20px/1 "Chakra Petch", sans-serif; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+.brand__mark { font: 700 20px/1 var(--font-chakra), sans-serif; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
 .brand__mark:hover em { color: var(--cyan); }
 .brand__mark em { font-style: normal; color: var(--yellow); }
 
 .topnav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
 .topnav a {
-  font: 700 12.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.04em; text-transform: uppercase;
+  font: 700 12.5px/1 var(--font-mono), monospace; letter-spacing: 0.04em; text-transform: uppercase;
   text-decoration: none; color: var(--dim); padding: 9px 13px; border-radius: 6px; white-space: nowrap;
   /* 44px touch target like every other control (audit High #8) -- the primary
      nav was the one interactive strip left at ~30px. */
@@ -77,13 +77,13 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 6px;
 }
 .topnav .soon {
-  font: 700 12.5px/1 "IBM Plex Mono", monospace;
+  font: 700 12.5px/1 var(--font-mono), monospace;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 9px 13px;
 }
 .subnav .soon {
-  font: 500 13px/1.6 "Sarabun", sans-serif;
+  font: 500 13px/1.6 var(--font-sarabun), sans-serif;
   padding: 5px 9px;
 }
 
@@ -120,7 +120,7 @@ table { border-collapse: collapse; width: 100%; }
   padding: 2px 8px;
   border: 1.5px solid transparent;
   border-radius: 999px;
-  font: 600 12px/1.6 "Sarabun", sans-serif;
+  font: 600 12px/1.6 var(--font-sarabun), sans-serif;
   white-space: nowrap;
 }
 
@@ -170,7 +170,7 @@ table { border-collapse: collapse; width: 100%; }
   gap: 6px;
   padding: 7px 11px;
   border-radius: 8px;
-  font: 500 13px/1.6 "Sarabun", sans-serif;
+  font: 500 13px/1.6 var(--font-sarabun), sans-serif;
   color: var(--dim);
   text-decoration: none;
   white-space: nowrap;
@@ -235,7 +235,7 @@ table { border-collapse: collapse; width: 100%; }
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font: 400 14px/1.6 "Sarabun", sans-serif;
+  font: 400 14px/1.6 var(--font-sarabun), sans-serif;
 }
 
 .data-table th {
@@ -243,7 +243,7 @@ table { border-collapse: collapse; width: 100%; }
   padding: 8px 10px;
   border-bottom: 1px solid var(--hair);
   color: var(--faint);
-  font: 600 12px/1.6 "Sarabun", sans-serif;
+  font: 600 12px/1.6 var(--font-sarabun), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -264,14 +264,14 @@ table { border-collapse: collapse; width: 100%; }
   border: 0;
   padding: 0;
   color: var(--faint);
-  font: 600 12px/1.6 "Sarabun", sans-serif;
+  font: 600 12px/1.6 var(--font-sarabun), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   cursor: pointer;
   white-space: nowrap;
 }
 .thsort:hover { color: var(--text); }
-.data-table td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.data-table td.num { text-align: right; font-family: var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 .data-table th.num { text-align: right; }
 
 /* Below 720px the table becomes stacked cards. The measured failure: at 340px
@@ -316,7 +316,7 @@ table { border-collapse: collapse; width: 100%; }
   .data-table td::before {
     content: attr(data-label);
     color: var(--faint);
-    font: 600 12px/1.6 "Sarabun", sans-serif;
+    font: 600 12px/1.6 var(--font-sarabun), sans-serif;
     white-space: nowrap;
   }
 
@@ -349,7 +349,7 @@ table { border-collapse: collapse; width: 100%; }
 .tabs a {
   padding: 8px 14px;
   border-radius: 6px 6px 0 0;
-  font: 600 14px/1.6 "Sarabun", sans-serif;
+  font: 600 14px/1.6 var(--font-sarabun), sans-serif;
   color: var(--dim);
   text-decoration: none;
   white-space: nowrap;
@@ -375,14 +375,14 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .section-title {
-  font: 700 15px/1.4 "Chakra Petch", sans-serif;
+  font: 700 15px/1.4 var(--font-chakra), sans-serif;
   color: var(--text);
   margin-bottom: 10px;
 }
 
 .reward-row { display: flex; flex-wrap: wrap; gap: 28px; }
 .reward-row > div { display: flex; flex-direction: column; gap: 2px; }
-.reward-label { font: 600 12px/1.4 "Sarabun", sans-serif; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.reward-label { font: 600 12px/1.4 var(--font-sarabun), sans-serif; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
 .reward-value { font-size: 22px; color: var(--text); }
 
 .chip {
@@ -392,7 +392,7 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 999px;
   background: var(--panel-2);
   color: var(--dim);
-  font: 500 13px/1.6 "Sarabun", sans-serif;
+  font: 500 13px/1.6 var(--font-sarabun), sans-serif;
   text-decoration: none;
 }
 
@@ -407,7 +407,7 @@ table { border-collapse: collapse; width: 100%; }
 .stat-table {
   width: 100%;
   border-collapse: collapse;
-  font: 400 14px/1.6 "Sarabun", sans-serif;
+  font: 400 14px/1.6 var(--font-sarabun), sans-serif;
 }
 
 .stat-table td {
@@ -417,7 +417,7 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .stat-table tbody tr:hover { background: var(--panel-2); }
-.stat-table td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.stat-table td.num { text-align: right; font-family: var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 
 /* Neutral classification tags (MVP, เก็บของ). Same pill shape as .aggro, but
    built from panel/hairline tokens rather than --status-safe/--status-danger --
@@ -434,7 +434,7 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 999px;
   background: var(--panel-2);
   color: var(--dim);
-  font: 600 12px/1.6 "Sarabun", sans-serif;
+  font: 600 12px/1.6 var(--font-sarabun), sans-serif;
   white-space: nowrap;
 }
 
@@ -448,7 +448,7 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 999px;
   background: transparent;
   color: var(--dim);
-  font: 600 12px/1.6 "Sarabun", sans-serif;
+  font: 600 12px/1.6 var(--font-sarabun), sans-serif;
   cursor: pointer;
 }
 
@@ -607,7 +607,7 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 8px;
   background: var(--yellow);
   color: var(--yellow-ink);
-  font: 600 14px/1.6 "Sarabun", sans-serif;
+  font: 600 14px/1.6 var(--font-sarabun), sans-serif;
   cursor: pointer;
 }
 
@@ -630,7 +630,7 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 999px;
   background: transparent;
   color: var(--cyan);
-  font: 600 13px/1.6 "Sarabun", sans-serif;
+  font: 600 13px/1.6 var(--font-sarabun), sans-serif;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -662,7 +662,7 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 .sitestats__item:hover { background: var(--panel-2); border-color: var(--cyan); }
-.sitestats__count { font: 700 18px/1.2 "IBM Plex Mono", monospace; color: var(--yellow); }
+.sitestats__count { font: 700 18px/1.2 var(--font-mono), monospace; color: var(--yellow); }
 .sitestats__label { font-size: 12px; color: var(--dim); }
 
 /* Entry cards at the foot of the home page. Capped at four by spec 6.2 so the
@@ -690,9 +690,9 @@ table { border-collapse: collapse; width: 100%; }
 .qcard--cyan { box-shadow: 4px 4px 0 var(--cyan); }
 .qcard--pink { box-shadow: 4px 4px 0 var(--pink); }
 a.qcard:hover { background: var(--panel-2); }
-.qcard strong { font: 700 16px/1.35 "Chakra Petch", sans-serif; color: var(--text); }
-.qcard span { font: 400 13px/1.6 "Sarabun", sans-serif; color: var(--faint); }
-.qcard__go { font: 600 13px/1 "Sarabun", sans-serif; font-style: normal; color: var(--yellow); margin-top: auto; padding-top: 8px; }
+.qcard strong { font: 700 16px/1.35 var(--font-chakra), sans-serif; color: var(--text); }
+.qcard span { font: 400 13px/1.6 var(--font-sarabun), sans-serif; color: var(--faint); }
+.qcard__go { font: 600 13px/1 var(--font-sarabun), sans-serif; font-style: normal; color: var(--yellow); margin-top: auto; padding-top: 8px; }
 .qcard__form {
   display: flex;
   align-items: center;
@@ -701,13 +701,13 @@ a.qcard:hover { background: var(--panel-2); }
   margin-top: auto;
   padding-top: 10px;
 }
-.qcard__form label { font: 500 13px/1.4 "Sarabun", sans-serif; color: var(--dim); white-space: nowrap; }
+.qcard__form label { font: 500 13px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); white-space: nowrap; }
 .qcard__form input {
   background: var(--panel-2);
   border: 1px solid var(--hair);
   border-radius: 6px;
   color: var(--text);
-  font: 500 14px/1.4 "Sarabun", sans-serif;
+  font: 500 14px/1.4 var(--font-sarabun), sans-serif;
   padding: 8px 10px;
   min-height: 40px;
 }
@@ -715,7 +715,7 @@ a.qcard:hover { background: var(--panel-2); }
 
 .explorerow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
 .chiplink {
-  font: 600 13px/1 "Sarabun", sans-serif;
+  font: 600 13px/1 var(--font-sarabun), sans-serif;
   color: var(--dim);
   background: var(--panel);
   border: 1px solid var(--hair);
@@ -766,7 +766,7 @@ a.qcard:hover { background: var(--panel-2); }
 }
 
 .entrycard:hover { background: var(--panel-2); border-color: var(--cyan); }
-.entrycard strong { font: 700 15px/1.4 "Chakra Petch", sans-serif; color: var(--cyan); }
+.entrycard strong { font: 700 15px/1.4 var(--font-chakra), sans-serif; color: var(--cyan); }
 .entrycard span { font-size: 13px; color: var(--dim); line-height: 1.5; }
 
 /* Element modifier grid (spec 3.5). Colour bands plus the printed number: the
@@ -774,7 +774,7 @@ a.qcard:hover { background: var(--panel-2); }
 .eltable {
   width: 100%;
   border-collapse: collapse;
-  font: 400 13px/1.5 "IBM Plex Mono", ui-monospace, monospace;
+  font: 400 13px/1.5 var(--font-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }
 
@@ -784,7 +784,7 @@ a.qcard:hover { background: var(--panel-2); }
   color: var(--faint);
   /* 12px is the floor for text that is meant to be read; 11px was the one
      place on the site under it, on 22 header cells of the refine table. */
-  font: 600 12px/1.4 "Sarabun", sans-serif;
+  font: 600 12px/1.4 var(--font-sarabun), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   white-space: nowrap;
@@ -819,7 +819,7 @@ a.qcard:hover { background: var(--panel-2); }
   flex-wrap: wrap;
 }
 .pagehead__title {
-  font: 700 clamp(22px, 5.6vw, 32px)/1.25 "Chakra Petch", sans-serif;
+  font: 700 clamp(22px, 5.6vw, 32px)/1.25 var(--font-chakra), sans-serif;
   margin: 0;
   text-wrap: balance;
 }
@@ -827,7 +827,7 @@ a.qcard:hover { background: var(--panel-2); }
   margin: 8px 0 0;
   max-width: 62ch;
   color: var(--dim);
-  font: 400 15px/1.65 "Sarabun", sans-serif;
+  font: 400 15px/1.65 var(--font-sarabun), sans-serif;
 }
 
 /* F7: provenance used to be a filled panel with an accent border, as loud as
@@ -840,7 +840,7 @@ a.qcard:hover { background: var(--panel-2); }
   padding-inline-start: 10px;
   border-inline-start: 2px solid var(--hair);
   color: var(--faint);
-  font: 400 13px/1.6 "Sarabun", sans-serif;
+  font: 400 13px/1.6 var(--font-sarabun), sans-serif;
   max-width: 70ch;
 }
 .source-note strong { color: var(--dim); font-weight: 600; }
@@ -871,7 +871,7 @@ a.qcard:hover { background: var(--panel-2); }
   display: none;
   margin: 0 0 8px;
   color: var(--faint);
-  font: 400 12px/1.5 "Sarabun", sans-serif;
+  font: 400 12px/1.5 var(--font-sarabun), sans-serif;
 }
 @media (max-width: 720px) {
   .tablescroll__hint { display: block; }
@@ -900,7 +900,7 @@ a.qcard:hover { background: var(--panel-2); }
 .disclose > summary {
   cursor: pointer;
   padding: 13px 14px;
-  font: 600 15px/1.4 "Chakra Petch", sans-serif;
+  font: 600 15px/1.4 var(--font-chakra), sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -915,7 +915,7 @@ a.qcard:hover { background: var(--panel-2); }
 }
 .disclose[open] > summary::before { transform: rotate(90deg); }
 .disclose > summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
-.disclose__count { color: var(--faint); font: 400 13px/1.4 "Sarabun", sans-serif; margin-inline-start: auto; }
+.disclose__count { color: var(--faint); font: 400 13px/1.4 var(--font-sarabun), sans-serif; margin-inline-start: auto; }
 .disclose__body { padding: 0 14px 14px; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -941,7 +941,7 @@ a.qcard:hover { background: var(--panel-2); }
   border-radius: 999px;
   color: var(--dim);
   text-decoration: none;
-  font: 400 13px/1.3 "Sarabun", sans-serif;
+  font: 400 13px/1.3 var(--font-sarabun), sans-serif;
   white-space: nowrap;
 }
 .jumpbar a:hover, .jumpbar a:focus-visible { border-color: var(--cyan); color: var(--text); }
@@ -959,12 +959,12 @@ a.qcard:hover { background: var(--panel-2); }
   margin-bottom: 4px;
 }
 .answer__value {
-  font: 700 clamp(28px, 8vw, 40px)/1.1 "IBM Plex Mono", ui-monospace, monospace;
+  font: 700 clamp(28px, 8vw, 40px)/1.1 var(--font-mono), ui-monospace, monospace;
   color: var(--yellow);
   font-variant-numeric: tabular-nums;
 }
-.answer__unit { font: 400 15px/1.4 "Sarabun", sans-serif; color: var(--dim); }
-.answer__caption { margin: 0 0 14px; color: var(--faint); font: 400 13px/1.6 "Sarabun", sans-serif; }
+.answer__unit { font: 400 15px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); }
+.answer__caption { margin: 0 0 14px; color: var(--faint); font: 400 13px/1.6 var(--font-sarabun), sans-serif; }
 
 /* Controls as a wrapping row rather than a stack of full-width fields: four
    selects stacked is four screens-worth of thumb travel on a phone. */
@@ -979,7 +979,7 @@ a.qcard:hover { background: var(--panel-2); }
   flex-direction: column;
   gap: 4px;
   flex: 1 1 140px;
-  font: 400 12px/1.4 "Sarabun", sans-serif;
+  font: 400 12px/1.4 var(--font-sarabun), sans-serif;
   color: var(--faint);
 }
 .controlrow select, .controlrow input {
@@ -1012,7 +1012,7 @@ textarea {
   color: var(--text);
   /* 16px, not 15px: iOS Safari auto-zooms into any focused input whose font
      is under 16px (audit Medium, iOS zoom jump). */
-  font: 400 16px/1.5 "Sarabun", sans-serif;
+  font: 400 16px/1.5 var(--font-sarabun), sans-serif;
   -webkit-appearance: none;
   appearance: none;
 }
@@ -1042,7 +1042,7 @@ a.btn {
   border-radius: var(--radius);
   background: var(--panel-2);
   color: var(--text);
-  font: 600 15px/1.4 "Sarabun", sans-serif;
+  font: 600 15px/1.4 var(--font-sarabun), sans-serif;
   cursor: pointer;
 }
 button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)); background: var(--panel); }
@@ -1100,7 +1100,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
   gap: 8px;
   margin: 0 0 14px;
   color: var(--dim);
-  font: 400 14px/1.6 "Sarabun", sans-serif;
+  font: 400 14px/1.6 var(--font-sarabun), sans-serif;
 }
 .filterstate__count { color: var(--text); font-weight: 600; }
 .filterchip {
@@ -1125,7 +1125,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
   padding: 28px 18px;
   text-align: center;
   color: var(--dim);
-  font: 400 15px/1.7 "Sarabun", sans-serif;
+  font: 400 15px/1.7 var(--font-sarabun), sans-serif;
 }
 .emptystate strong { color: var(--text); }
 .emptystate p { margin: 0 0 12px; }
@@ -1147,7 +1147,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
   margin: 0 0 22px;
   max-width: 62ch;
   color: var(--dim);
-  font: 400 14px/1.7 "Sarabun", sans-serif;
+  font: 400 14px/1.7 var(--font-sarabun), sans-serif;
 }
 .sitefooter__lead strong { color: var(--text); }
 .sitefooter__cols {
@@ -1157,14 +1157,14 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 }
 .sitefooter__h {
   margin: 0 0 8px;
-  font: 600 14px/1.4 "Chakra Petch", sans-serif;
+  font: 600 14px/1.4 var(--font-chakra), sans-serif;
   color: var(--text);
 }
 .sitefooter ul { margin: 0; padding-inline-start: 0; list-style: none; }
 .sitefooter li {
   margin-bottom: 7px;
   color: var(--faint);
-  font: 400 13px/1.6 "Sarabun", sans-serif;
+  font: 400 13px/1.6 var(--font-sarabun), sans-serif;
 }
 .sitefooter li strong { color: var(--dim); font-weight: 600; }
 .sitefooter a { color: var(--dim); text-decoration: none; border-bottom: 1px solid var(--hair); }
@@ -1187,7 +1187,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 .pager__range {
   margin: 0 0 8px;
   color: var(--faint);
-  font: 400 13px/1.5 "Sarabun", sans-serif;
+  font: 400 13px/1.5 var(--font-sarabun), sans-serif;
 }
 .pager__row {
   display: flex;
@@ -1207,7 +1207,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
   border-radius: var(--radius);
   color: var(--dim);
   text-decoration: none;
-  font: 500 14px/1 "IBM Plex Mono", ui-monospace, monospace;
+  font: 500 14px/1 var(--font-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }
 a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
@@ -1224,7 +1224,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   gap: 6px;
   flex-wrap: wrap;
   margin: 0 0 10px;
-  font: 400 13px/1.5 "Sarabun", sans-serif;
+  font: 400 13px/1.5 var(--font-sarabun), sans-serif;
   color: var(--faint);
 }
 .crumbs a { color: var(--dim); text-decoration: none; }
@@ -1236,7 +1236,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   flex: 0 0 auto;
   align-self: center;
   color: var(--faint);
-  font: 600 12px/1.3 "Sarabun", sans-serif;
+  font: 600 12px/1.3 var(--font-sarabun), sans-serif;
 }
 
 /* A disclosure that lives inside a table row: quieter than the page-level
@@ -1245,7 +1245,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .disclose--row > summary {
   padding: 4px 0;
   min-height: 32px;
-  font: 400 13px/1.5 "Sarabun", sans-serif;
+  font: 400 13px/1.5 var(--font-sarabun), sans-serif;
   color: var(--dim);
 }
 .disclose--row .disclose__body { padding: 0 0 6px; }
@@ -1261,7 +1261,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   border-radius: 4px;
   background: var(--panel-2);
   color: var(--faint);
-  font: 600 10px/1 "IBM Plex Mono", ui-monospace, monospace;
+  font: 600 10px/1 var(--font-mono), ui-monospace, monospace;
 }
 
 /* Labelled stat tiles on a detail page. Tiles only render for stats the item
@@ -1309,13 +1309,13 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .itemcard > :first-child { grid-row: 1 / 3; }
 .itemcard__name {
   color: var(--text);
-  font: 500 13px/1.35 "Sarabun", sans-serif;
+  font: 500 13px/1.35 var(--font-sarabun), sans-serif;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.itemcard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
+.itemcard__meta { color: var(--faint); font: 400 11px/1.4 var(--font-sarabun), sans-serif; }
 
 /* Monster browse grid: item-card pattern widened for a sprite plus two stat
    lines (Lv/race/element, HP/EXP) and the aggro badge. */
@@ -1347,12 +1347,12 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .moncard__top { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .moncard__name {
   color: var(--text);
-  font: 500 13px/1.35 "Sarabun", sans-serif;
+  font: 500 13px/1.35 var(--font-sarabun), sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.moncard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
+.moncard__meta { color: var(--faint); font: 400 11px/1.4 var(--font-sarabun), sans-serif; }
 
 /* Cash shop rows: icon, name + description, price block right-aligned. */
 .cashlist { display: flex; flex-direction: column; }
@@ -1367,10 +1367,10 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .cashlist__row:last-child { border-bottom: 0; }
 a.cashlist__row:hover { background: var(--panel-2); }
 .cashlist__body { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.cashlist__name { color: var(--text); font: 600 14px/1.4 "Sarabun", sans-serif; }
+.cashlist__name { color: var(--text); font: 600 14px/1.4 var(--font-sarabun), sans-serif; }
 .cashlist__desc {
   color: var(--faint);
-  font: 400 12px/1.5 "Sarabun", sans-serif;
+  font: 400 12px/1.5 var(--font-sarabun), sans-serif;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1394,7 +1394,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   min-height: 44px;
   padding: 0 4px;
   color: var(--dim);
-  font: 400 13px/1.4 "Sarabun", sans-serif;
+  font: 400 13px/1.4 var(--font-sarabun), sans-serif;
   cursor: pointer;
   user-select: none;
 }

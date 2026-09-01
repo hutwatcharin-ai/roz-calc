@@ -5,7 +5,15 @@ import SiteFooter from '@/components/SiteFooter';
 import { CharacterContextProvider } from '@/components/CharacterContextProvider';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
+import { Sarabun, Chakra_Petch, IBM_Plex_Mono } from 'next/font/google';
 import { SITE_URL } from '@/lib/site';
+
+// Self-hosted via next/font (SEO audit High #5): kills the render-blocking
+// fonts.googleapis.com round trip and auto-tunes fallback metrics against
+// font-swap layout shift. CSS refers to the families through these variables.
+const sarabun = Sarabun({ subsets: ['thai', 'latin'], weight: ['400', '500', '600', '700'], variable: '--font-sarabun', display: 'swap' });
+const chakra = Chakra_Petch({ subsets: ['thai', 'latin'], weight: ['600', '700'], variable: '--font-chakra', display: 'swap' });
+const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-mono', display: 'swap' });
 
 // metadataBase turns the relative OG path below into the absolute URL that
 // crawlers and chat clients require -- a relative og:image is ignored.
@@ -33,15 +41,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="th">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Sarabun:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
-        />
-      </head>
+    <html lang="th" className={`${sarabun.variable} ${chakra.variable} ${plexMono.variable}`}>
+
       <body>
         {/* The character context wraps the whole app: the aggro badge grades
             itself from it on every page, so a provider mounted per page would
