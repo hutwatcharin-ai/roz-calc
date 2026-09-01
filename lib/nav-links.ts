@@ -53,6 +53,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   // Red Blood (element stone), Apple, Yggdrasil Leaf, Branch of Dead Tree,
   // Elunium, Knife, Yggdrasil Berry.
   tools: [
+    { href: '/tools/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
     { href: '/tools/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },

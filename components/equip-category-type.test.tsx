@@ -39,7 +39,7 @@ afterEach(() => {
 });
 
 function selects(): HTMLSelectElement[] {
-  return [...container.querySelectorAll('select')];
+  return Array.from(container.querySelectorAll('select'));
 }
 
 function pickCategory(value: string) {
@@ -61,7 +61,7 @@ describe('EquipCategoryType', () => {
     act(() => root.render(<EquipCategoryType {...props} />));
     pickCategory('Costume Equipment');
     const type = selects()[1];
-    const options = [...type.options].map((o) => o.textContent);
+    const options = Array.from(type.options).map((o) => o.textContent);
     expect(options).toContain('Upper Head');
     expect(options).toContain('ทุกตำแหน่งคอสตูม');
     expect(options).not.toContain('Bow');
@@ -72,6 +72,6 @@ describe('EquipCategoryType', () => {
     expect(selects()[1].value).toBe('Bow');
     pickCategory('Armor');
     expect(selects()[1].value).toBe('');
-    expect([...selects()[1].options].map((o) => o.textContent)).toContain('Shoes');
+    expect(Array.from(selects()[1].options).map((o) => o.textContent)).toContain('Shoes');
   });
 });

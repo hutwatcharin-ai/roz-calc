@@ -6,6 +6,7 @@
 // hits you. GET params, not the character bar: this page must work as a
 // shareable link ("ดูตารางกู" in a game chat) with no setup.
 import Link from 'next/link';
+import HitFleePrefill from '@/components/HitFleePrefill';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import AggroBadge from '@/components/AggroBadge';
@@ -105,6 +106,7 @@ export default async function HitFleePage({
         </div>
       )}
 
+      {!filled && <HitFleePrefill />}
       {!filled && (
         <p className="muted" style={{ marginTop: 18, maxWidth: '65ch' }}>
           ใส่เลเวลกับ HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วกดคำนวณ —
