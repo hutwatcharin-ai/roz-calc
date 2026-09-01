@@ -46,7 +46,7 @@ export default async function CardsPage({
   // which would silently drop the row whose description is null.
   const { data: allCards, error } = await db
     .from('items')
-    .select('id, name_en, icon_url, description')
+    .select('id, name_en, icon_url, description, description_th')
     .eq('category', 'Card')
     .order('name_en');
 
@@ -57,7 +57,10 @@ export default async function CardsPage({
   const cards = (allCards ?? []).map((c) => ({
     ...c,
     slot: parseCardSlot(c.description),
-    effect: cardEffect(c.description),
+    // Thai translation leads when present; the English effect still powers
+    // the search below so "LUK" and English phrasing keep matching.
+    effect: c.description_th ?? cardEffect(c.description),
+    effectEn: cardEffect(c.description),
   }));
 
   // The filter list is derived from the data rather than hardcoded, so a value
@@ -76,7 +79,8 @@ export default async function CardsPage({
     // LUK", not for a card whose name they already know.
     return (
       c.name_en.toLowerCase().includes(needle) ||
-      (c.effect ?? '').toLowerCase().includes(needle)
+      (c.effect ?? '').toLowerCase().includes(needle) ||
+      (c.effectEn ?? '').toLowerCase().includes(needle)
     );
   });
 

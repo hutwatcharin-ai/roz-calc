@@ -88,7 +88,7 @@ export default async function CashShopPage({
                         <span className="tag tag--risk" style={{ marginLeft: 6 }}>จำกัด {r.purchase_limit}</span>
                       )}
                     </span>
-                    <span className="cashlist__desc">{r.description}</span>
+                    <span className="cashlist__desc">{r.description_th ?? r.description}</span>
                   </span>
                   <span className="cashlist__price">
                     <b className="mono">{r.kp_price.toLocaleString('en-US')} KP</b>
