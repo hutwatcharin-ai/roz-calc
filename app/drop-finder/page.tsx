@@ -12,26 +12,46 @@ export const metadata = {
 // name wins outright; only if nothing matches exactly do we fall back to a
 // substring match. The caller surfaces the resolved name so a fallback match
 // is visible to the user instead of silently picking an arbitrary row.
+// Several game items share one name across ids ("Shield" is 460060 and
+// 460071; only one drops). On a drop-finder, the candidate that has drops is
+// always the one the player means, so ties resolve toward it.
+async function pickDroppable(
+  db: ReturnType<typeof supabaseBrowser>,
+  candidates: { id: number; name_en: string }[],
+) {
+  if (candidates.length === 1) return candidates[0];
+  const { data, error } = await db
+    .from('monster_drops')
+    .select('item_id')
+    .in('item_id', candidates.map((c) => c.id));
+  if (error) {
+    console.error('droppable tiebreak failed', error);
+    return candidates[0];
+  }
+  const withDrops = new Set((data ?? []).map((d) => d.item_id));
+  return candidates.find((c) => withDrops.has(c.id)) ?? candidates[0];
+}
+
 async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string) {
   const needle = escapeLikePattern(query);
   const { data: exact, error: exactError } = await db
     .from('items')
     .select('id, name_en')
     .ilike('name_en', needle)
-    .limit(1);
+    .limit(10);
 
   if (exactError) {
     console.error('item exact lookup failed', exactError);
     return null;
   }
-  if (exact && exact.length > 0) return exact[0];
+  if (exact && exact.length > 0) return pickDroppable(db, exact);
 
   const { data: partial, error: partialError } = await db
     .from('items')
     .select('id, name_en')
     .ilike('name_en', `%${needle}%`)
     .order('name_en')
-    .limit(1);
+    .limit(10);
 
   if (partialError) {
     console.error('item substring lookup failed', partialError);
@@ -39,14 +59,23 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
   }
   if (!partial || partial.length === 0) return null;
 
-  return partial[0];
+  return pickDroppable(db, partial);
 }
 
-async function findDrops(query: string) {
-  if (!query) return { resolvedName: null, resolvedId: null, rows: [] };
+async function findDrops(query: string, itemId: number | null) {
+  if (!query && !itemId) return { resolvedName: null, resolvedId: null, rows: [] };
   const db = supabaseBrowser();
 
-  const item = await resolveItem(db, query);
+  // An explicit id (starter-table links) skips name resolution entirely:
+  // same-name items make a name round-trip ambiguous.
+  let item: { id: number; name_en: string } | null = null;
+  if (itemId) {
+    const { data, error } = await db.from('items').select('id, name_en').eq('id', itemId).limit(1);
+    if (error) console.error('item id lookup failed', error);
+    item = data?.[0] ?? null;
+  } else {
+    item = await resolveItem(db, query);
+  }
   if (!item) return { resolvedName: null, resolvedId: null, rows: [] };
 
   const { data: drops, error: dropsError } = await db
@@ -116,15 +145,17 @@ async function starterList() {
     .map((i) => ({ ...i, dropCount: count.get(i.id) as number }));
 }
 
-export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string } }) {
+export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string } }) {
   const query = searchParams.q ?? '';
-  const { resolvedName, resolvedId, rows } = await findDrops(query);
-  const starters = query ? [] : await starterList();
+  const itemId = Number(searchParams.id) || null;
+  const { resolvedName, resolvedId, rows } = await findDrops(query, itemId);
+  const searched = Boolean(query || itemId);
+  const starters = searched ? [] : await starterList();
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 className="pagehead__title">ค้นของดรอป — ไอเทมดรอปจากมอนตัวไหน</h1>
-      {!query && (
+      {!searched && (
         <p className="muted" style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           ลองค้น:
           {SAMPLE_SEARCHES.map((name) => (
@@ -135,7 +166,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
         </p>
       )}
       <div className="panel" style={{ marginTop: 20 }}>
-        <DropSearch query={query} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
+        <DropSearch query={query || resolvedName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
       </div>
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>
@@ -154,7 +185,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
                 {starters.map((it) => (
                   <tr key={it.id}>
                     <td>
-                      <a href={`/drop-finder?q=${encodeURIComponent(it.name_en)}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                      <a href={`/drop-finder?id=${it.id}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                         {it.icon_url && <img src={it.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />}
                         {it.name_en}
                         {it.name_th && <span className="muted">{it.name_th}</span>}
@@ -169,7 +200,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
           </div>
         </section>
       )}
-      {!query && (
+      {!searched && (
         <p className="muted" style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           เครื่องมือใกล้กัน:
           <a className="chiplink" href="/">หาจุดฟาร์ม</a>
