@@ -2,7 +2,7 @@
 import FarmPlannerBoard from '@/components/FarmPlannerBoard';
 
 export const metadata = {
-  title: 'แผนฟาร์ม',
+  title: 'แผนฟาร์ม Ragnarok Zero',
   description:
     'บันทึกรายชื่อมอนสเตอร์ที่วางแผนจะไปฟาร์มใน Ragnarok Zero Global แล้วดู EXP/HP, Zeny ต่อตัว, แมพที่เจอ และผลรวมในหน้าเดียว',
 };

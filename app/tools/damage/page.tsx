@@ -11,7 +11,7 @@ import { ELEMENTS } from '@/lib/element-table';
 import { SIZE_LABELS, SIZES, SIZE_TABLE } from '@/lib/size-table';
 
 export const metadata = {
-  title: 'ตีตัวนี้ด้วยอะไรดี',
+  title: 'ตีด้วยอะไรดี — คำนวณดาเมจธาตุ',
   description:
     'รวมตัวคูณธาตุกับตัวคูณขนาดของ Ragnarok Zero Global เข้าด้วยกัน — บอกว่าอาวุธที่ถืออยู่ตีเป้าหมายนั้นเข้ากี่เปอร์เซ็นต์ และควรเปลี่ยนเป็นธาตุอะไร',
 };

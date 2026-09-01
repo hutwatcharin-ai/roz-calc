@@ -14,7 +14,7 @@ import {
 } from '@/lib/exp-table';
 
 export const metadata = {
-  title: 'EXP ต่อเลเวล',
+  title: 'ตาราง EXP ต่อเลเวล Ragnarok Zero',
   description:
     'ตาราง EXP ต่อเลเวลของ Ragnarok Zero Global จากคู่มือเกมทางการ เลเวลฐาน 1-50 และ Job EXP ของ Novice กับอาชีพขั้นที่ 1 พร้อมยอดสะสม',
 };

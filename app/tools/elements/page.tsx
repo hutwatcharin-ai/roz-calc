@@ -4,7 +4,7 @@ import ElementTable from '@/components/ElementTable';
 import type { ElementLevel } from '@/lib/element-table';
 
 export const metadata = {
-  title: 'ตารางธาตุ',
+  title: 'ตารางธาตุ Ragnarok Zero',
   description:
     'ตารางตัวคูณความเสียหายธาตุโจมตี × ธาตุป้องกันของ Ragnarok Zero Global ครบทั้ง 4 ระดับธาตุ ดูว่าอาวุธธาตุไหนแรงกับมอนธาตุอะไร',
 };

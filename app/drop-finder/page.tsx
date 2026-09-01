@@ -4,7 +4,7 @@ import DropSearch from '@/components/DropSearch';
 import { escapeLikePattern } from '@/lib/like-escape';
 
 export const metadata = {
-  title: 'ค้นหาว่าของชิ้นนี้ดรอปจากมอนตัวไหน',
+  title: 'ค้นของดรอป Ragnarok Zero',
   description: 'พิมพ์ชื่อไอเทมแล้วดูว่ามอนสเตอร์ตัวไหนดรอป อัตราดรอปเท่าไร และเจอมอนตัวนั้นได้ที่แมพไหน',
 };
 

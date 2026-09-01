@@ -21,7 +21,7 @@ import {
 } from '@/lib/refine-table';
 
 export const metadata = {
-  title: 'ตีบวก — โอกาสสำเร็จและค่าใช้จ่ายจริง',
+  title: 'อัตราตีบวก Ragnarok Zero',
   description:
     'ตารางโอกาสตีบวกทุกขั้นของ Ragnarok Zero Global จากคู่มือเกมทางการ พร้อมคำนวณว่ากว่าจะถึง +7 +10 ต้องเตรียมของกี่ชิ้น แร่กี่ก้อน เสีย Zeny เท่าไร',
 };

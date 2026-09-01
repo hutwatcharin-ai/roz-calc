@@ -18,7 +18,7 @@ import {
 } from '@/lib/hit-flee';
 
 export const metadata = {
-  title: 'ตีโดนไหม — คิด HIT/FLEE',
+  title: 'คำนวณ HIT/FLEE Ragnarok Zero',
   description:
     'กรอกเลเวล DEX AGI LUK แล้วดูว่าตีมอนแต่ละตัวโดนกี่เปอร์เซ็นต์ และมอนตีคุณโดนแค่ไหน คำนวณจากสูตร Renewal ของ Ragnarok Zero',
 };

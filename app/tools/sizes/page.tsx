@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { SIZE_TABLE, SIZES, SIZE_LABELS } from '@/lib/size-table';
 
 export const metadata = {
-  title: 'ตารางขนาด',
+  title: 'ตารางขนาด Ragnarok Zero',
   description:
     'ตารางตัวคูณความเสียหายตามประเภทอาวุธ × ขนาดมอนสเตอร์ของ Ragnarok Zero Global — ดูว่าอาวุธชนิดไหนตีมอนขนาดเล็ก กลาง ใหญ่ ได้เต็มหรือโดนหัก',
 };

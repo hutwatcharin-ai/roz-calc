@@ -11,7 +11,7 @@ import AfkFinderResults, { type AfkCandidate } from '@/components/AfkFinderResul
 import CVariantToggle from '@/components/CVariantToggle';
 
 export const metadata = {
-  title: 'หาจุด AFK ปลอดภัย',
+  title: 'หาจุด AFK ปลอดภัย Ragnarok Zero',
   description:
     'หามอนสเตอร์ที่ไม่เข้าโจมตีก่อนและตายในหมัดเดียว สำหรับปล่อยบอทใน Ragnarok Zero Global — กรองด้วยดาเมจของคุณเอง พร้อมเตือนสกิลที่ทำให้บอทตาย',
 };

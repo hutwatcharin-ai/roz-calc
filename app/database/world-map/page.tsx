@@ -8,7 +8,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'Interactive World Map — Ragnarok Zero',
+  title: 'แผนที่โลก Ragnarok Zero',
   description: 'Explore 102 Ragnarok Zero map tiles with English map names, monster previews, level ranges, aggressive spawn counts, search, pan and zoom.',
 };
 

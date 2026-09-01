@@ -7,7 +7,9 @@ import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 export const metadata = {
-  title: 'หามอนสเตอร์คุ้มสุดสำหรับเลเวลของคุณ',
+  // Root page shares the root layout's segment, so the "| RO Zero Thai"
+  // title template does NOT apply here -- brand goes in by hand.
+  title: 'RO Zero Thai — หาจุดฟาร์ม Ragnarok Zero ภาษาไทย',
   description:
     'ใส่เลเวลแล้วดูว่ามอนสเตอร์ตัวไหนให้ EXP ต่อ HP สูงสุด พร้อมฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยของ Ragnarok Zero Global',
 };
