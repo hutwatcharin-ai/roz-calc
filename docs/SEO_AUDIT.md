@@ -1,49 +1,59 @@
-# SEO Audit — rozerothai.com · 31 สิงหาคม 2569
+# SEO Audit — rozerothai.com (2026-09-01, full 8-agent pass)
 
-คะแนนรวม ~55/100 · ตรวจด้วย 8 subagent (technical / content / schema / sitemap / performance / visual / GEO / SXO)
-บน production จริงวันแรกที่ผูกโดเมน · **สถานะ: user ให้พักไว้ รออัปเดตเว็บรอบใหม่ แล้วค่อยแก้+ตรวจซ้ำ**
+แทนที่ audit 2026-08-31 · คะแนนรวมถ่วงน้ำหนัก **~56/100**
+(Technical 58 · Content 62 · On-Page ~65 · Schema ~5 · Performance ~60 · AI/GEO 56 · SXO home 28 / entity 45)
 
-ข้อที่ agent สรุปผิดและถูกตัดออกแล้ว: "ไม่มีหน้าตารางธาตุ" (มี — /tools/elements แต่ agent หาไม่เจอ),
-"ไม่อ้างที่มาเลย" (หน้า tools อ้าง แต่ trafilatura ตัดบรรทัด .source-note ทิ้ง — เป็น finding กลายๆ ว่า
-extractor มองไม่เห็นบรรทัดที่มาของเรา), ชื่อเว็บ "RozerothAI" (จริงคือ RO Zero Thai)
+**ความจริงข้อแรก:** `site:rozerothai.com` = 0 ผล ยังไม่ index เลย — ทุกข้อข้างล่างไร้ผลจนกว่า user ตั้ง GSC + submit sitemap
 
-## Critical
-- **C1 เว็บเปิดได้ 3 ทางโดยไม่มี canonical** — apex / www / sslip ตอบ 200 เนื้อหา byte เดียวกัน
-  และไม่มี `rel=canonical` สักหน้าใน 3,558 หน้า → canonical ทุกหน้า + 301 www→apex + sslip→apex
-  · พิสูจน์: curl เห็น canonical, www ตอบ 301
-- **C2 หน้าไอเทม 2,522 หน้า เนื้อหาซ้ำ 93%** (วัดจริง: item 501 vs 502 ต่างกัน 1 คำ) บนโดเมนอายุ 1 วัน
-  = โปรไฟล์ doorway → หน้าที่มีของจริง (คำอธิบาย/ตารางดรอป) อยู่ใน sitemap ต่อ, หน้าเปล่า noindex จนกว่าจะเติม
+## Critical (โค้ด)
+
+1. **canonical ไม่มีทั้งเว็บ + www เสิร์ฟซ้ำ 200** — `www.rozerothai.com` กับ apex ให้เนื้อหา byte-identical ไม่ redirect หากัน + query variants (`?level=`, `?q=`, `?page=`, `?c=1`) เป็น 200 title ซ้ำ canonical ไม่มี
+   แก้: Cloudflare Redirect Rule 301 www→apex · `alternates.canonical` ใน generateMetadata ทุก route (strip query)
+2. **Security headers = ศูนย์** — ไม่มี HSTS/nosniff/frame-ancestors/Referrer-Policy เลย
+   แก้: `headers()` ใน next.config.js (HSTS 31536000, nosniff, Referrer-Policy strict-origin-when-cross-origin, CSP frame-ancestors 'self', Permissions-Policy)
+3. **Structured data = ศูนย์ทุกหน้า** (JSON-LD/microdata/RDFa) — schema agent ให้ JSON-LD พร้อมใช้ 3 ชุดในรายงานเต็ม: WebSite+SearchAction (`/drop-finder?q=` — ยืนยัน param แล้วว่า `q` จริง), BreadcrumbList, WebPage+Thing+PropertyValue สำหรับ entity
+   ⚠️ ห้ามใช้ Product/Offer กับ item ในเกม (เสี่ยง manual action) — ใช้ Thing · ห้าม HowTo/FAQPage ใหม่
 
 ## High
-- **H1 schema = 0 ทั้งเว็บ** → BreadcrumbList (มี UI แล้ว) + WebSite + ItemList
-  ⚠️ ห้ามใส่ SearchAction (ไม่มี /search route) · ห้ามชี้ /tools (ไม่มี index page) · ห้าม HowTo/FAQPage
-- **H2 Cloudflare ไม่ cache เลย** — ทุกหน้า `no-store` + cf DYNAMIC (หน้า database เป็น ƒ dynamic เพราะ searchParams)
-  · ทางแก้: CF Cache Rule (ดูบทเรียน RSC ใน project_pcxhub_product_images) หรือทำหน้า detail เป็น ISR จริง
-- **H3 LCP แย่: /tools/refine 4.58s, /database/monsters 4.50s** — TTFB ดี (73-270ms) แต่ตัวหนังสือรอ hydration
-  (pagehead__lead หน่วง 2.1s) → ลด JS ก่อน paint / ตรวจ font
-- **H4 tap target ที่ผมวัดตกรอบก่อน**: เมนูหลัก 30px, แท็บหมวด 31-33px, **ลิงก์ชื่อมอนในตาราง 24px**
-  (รอบก่อนวัดแค่ input/select/button ใน main — ไม่ได้วัด nav กับ a ในตาราง)
-- **H5 ไม่มีหน้า "เกี่ยวกับเว็บนี้"** — /about /contact = 404 · จุดขายเรื่องตรวจทานอยู่แค่ใน footer
-- **H6 security headers = 0** (HSTS, X-Content-Type-Options, X-Frame-Options)
+
+4. **HTML ไม่ cache ที่ edge เลย** — ทุกหน้า `no-store` + `cf-cache-status: DYNAMIC` ทั้งที่เป็นข้อมูลเกมแทบนิ่ง → ISR (`export const revalidate = 3600`) หน้า database ทั้งหมด (TTFB วัดได้ 200–350ms origin-bound; edge hit จะเหลือ <50ms)
+5. **Google Fonts บล็อกเรนเดอร์** — 3 ตระกูล 10 น้ำหนัก 44 @font-face จาก googleapis ใน head → ย้ายเป็น `next/font/google` (self-host + adjustFontFallback ลด CLS)
+6. **ไม่มีหน้า About/ติดต่อ + แหล่งอ้างอิงไม่มีลิงก์** — ลิงก์ออกนอกเว็บ = 0 ทั้งเว็บ ชื่อ source ใน footer เป็น text เปล่า → ทำหน้า "เกี่ยวกับ" สั้นๆ + ช่องทางติดต่อ + ใส่ `<a>` ให้ทุก source (จำเป็นก่อนคิดเรื่อง AdSense ด้วย)
+7. **หน้าแรกขายผิดจุด (SXO)** — คีย์เวิร์ด "ro zero ฐานข้อมูลภาษาไทย" ว่างจริงใน SERP (มีแต่ข่าวเปิดเกม) แต่หน้าแรกขาย farm finder อย่างเดียว · `/tools/elements` เป็นหน้า orphan ทั้งที่ "ragnarok zero ตารางธาตุ" ไม่มีคู่แข่ง Zero-specific ภาษาไทยเลย → เพิ่มเข้า explore row หน้าแรก
+8. **topnav สูง ~30px** ต่ำกว่า 44px ทุกหน้า (subnav มือถือ 40px) → `min-height:44px` แบบเดียวกับปุ่มอื่นที่ทำแล้ว
+9. **item pages 3,833 หน้าโปรไฟล์บาง/ซ้ำ template** (Jellopy-tier: ต่างกัน ~62 บรรทัด/2,000) — เสริม fact ที่คำนวณได้จากข้อมูลเดิม ("ตัวถูกสุดที่ดรอป", "ใช้ในเควสไหน") หรือ noindex ตัวว่างจนกว่าจะมีเนื้อ
 
 ## Medium
-- M1 `/drop-finder` HTML มีแต่เมนู เนื้อหาขึ้นหลัง JS (บั๊กแบบเดียวกับหน้า AFK ที่เคยแก้)
-- M2 หน้ามอน/ไอเทมไม่มีบรรทัดที่มา (มีแต่หน้า tools)
-- M3 ไม่มีวันที่ทั้งเว็บ — sitemap ไม่มี lastmod, หน้าไม่มี "อัปเดตเมื่อ" (อย่าใส่วันปลอม — ใส่เมื่อมีวันจริงจาก import)
-- M4 title หน้าแรกหน้าเดียวที่ไม่มี "| RO Zero Thai"
-- M5 H2 หน้า tools เป็นป้าย ไม่ใช่รูปคำถามที่คนค้น + ควรมีย่อหน้าตอบก่อนตาราง (GEO)
+
+- sitemap: ไม่มี lastmod (อย่าใส่วันปลอม — ต้องมี updated_at จริงก่อน) · ตัด priority/changefreq (Google ไม่อ่าน)
+- http→https เป็น 302 ควรเป็น 301 (เช็ค Cloudflare Always Use HTTPS)
+- sprite `/images/**` cache แค่ 4 ชม. เจอ EXPIRED → `max-age=31536000, immutable`
+- input font 15px → 16px (กัน iOS auto-zoom ตอน focus)
+- หน้าเควสรายเมือง: `<title>` เป็น slug ดิบ "เควส prontera-region" + H2 เป็นประโยคเควสเต็มสองภาษา 32 อัน → H2 ใช้ชื่อเควสสั้น เนื้อความลงไปเป็น body
+- entity pages ไม่มี "ตรวจข้อมูลล่าสุดเมื่อ" — pattern มีแล้วที่ cash-shop เอามาใช้ต่อ
+- og:image ใช้ default รูปเดียวทั้งเว็บ
+- เพิ่มย่อหน้าสรุป ~120 คำภาษาคนต่อ entity ("Poring ธาตุ Water เผ่า Plant ดรอป Jellopy 70%...") — GEO citability
+- alt="": visual agent ยืนยันถูกแล้ว (decorative ข้างชื่อ text) — GEO agent เห็นต่าง · คงไว้แบบเดิม ยกเว้นรูปที่ไม่มี text ข้างๆ
 
 ## Low
-- llms.txt · IndexNow · ตัด changefreq/priority ออกจาก sitemap (Google ไม่อ่าน)
 
-## ผ่านแล้ว (อย่าไปแตะให้พัง)
-SSR จริงทุกหน้าหลัก · title/description ไม่ซ้ำ 3,558 หน้า · CLS ดีหมด · robots+sitemap ถูก ·
-ไม่บล็อกบอท AI ตัวไหน (ตั้งใจ — เว็บอยากถูกอ้าง) · เนื้อหา tools "genuine expertise, not AI filler"
+- `X-Powered-By: Next.js` → poweredByHeader:false · `//double-slash` เสิร์ฟซ้ำ (canonical แก้ให้เอง) · IndexNow ยังไม่มี key file · llms.txt ไม่มี (optional, Google ไม่อ่าน)
 
-## ช่องว่าง SERP ที่เจอ (SXO)
-- **"ragnarok zero ตารางธาตุ" ไม่มีเว็บ Zero จริงแข่งเลย** — มีแต่ไกด์ RO ภาคอื่น · /tools/elements มีอยู่แล้ว รอถูก index
-- คู่แข่งที่ชนะโชว์ "sourced from official server data" เป็นจุดขายแบบเดียวกับเรา แต่เขียนเด่นกว่า
-- คำค้นดรอปมี YouTube แทรกครึ่ง SERP — format ที่เราไม่มีเลย
+## ฝั่ง user (บล็อกทุกอย่าง)
 
-## ตัวคูณของทั้งลิสต์
-**GSC ยังไม่ได้ตั้ง + ยังไม่ submit sitemap** — ทุกข้อข้างบนไร้ผลจนกว่า Google จะรู้จักเว็บ
+1. ตั้ง Google Search Console + submit sitemap.xml — **สำคัญสุดในลิสต์นี้ทั้งหมด**
+2. เช็ค Cloudflare Bot Fight Mode ว่าไม่ได้ 403 UA ของ Googlebot/AI crawlers ที่ edge
+
+## จุดแข็งที่ยืนยันแล้ว (อย่าไปพัง)
+
+SSR เต็ม (ข้อมูลอยู่ใน HTML ไม่ต้องรัน JS) · sitemap 4,907 URL สะอาดไม่มี query รั่ว · robots.txt เปิดหมด · 404 จริงไม่ใช่ soft-404 · brotli + `_next/static` immutable ถูกแล้ว · รูปมี width/height ครบ + lazy · charbar จอง 45px กัน CLS · methodology footer ("ตัวเลขมาจากไหน") = สัญญาณ E-E-A-T ของจริง · หน้า monster (588 คำ 11 heading) คือหน้าที่แข็งสุดของเว็บ
+
+## ลำดับลงมือ
+
+1. (user) GSC + submit sitemap
+2. canonical + 301 www + security headers + strip priority/changefreq — ครึ่งวัน
+3. JSON-LD 3 ชุด template-level — ครึ่งวัน
+4. ISR หน้า database + sprite cache immutable + next/font — 1 วัน
+5. About/ติดต่อ + ลิงก์ source + หน้าแรก reposition + elements เข้า explore row — 1 วัน
+6. touch targets + input 16px + quest H2/title — ครึ่งวัน
+7. ค่อยว่ากัน: enrich item pages, สรุปภาษาคนต่อ entity, guide layer ("จุดฟาร์มแนะนำตามเลเวล")
