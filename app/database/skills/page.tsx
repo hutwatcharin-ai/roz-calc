@@ -36,7 +36,7 @@ async function allSkills(): Promise<{ skills: any[]; error: boolean }> {
   for (let from = 0; ; from += FETCH_PAGE) {
     const { data, error } = await db
       .from('skills')
-      .select('slug, name, type, max_level, element, classes, icon_url, description, requires')
+      .select('slug, name, type, max_level, element, classes, icon_url, description, description_th, requires')
       .order('name')
       .order('slug')
       .range(from, from + FETCH_PAGE - 1);
@@ -216,7 +216,15 @@ export default async function SkillsPage({
                         <details className="disclose disclose--row">
                           <summary>รายละเอียดสกิล</summary>
                           <div className="disclose__body">
-                            {s.description && <p className="muted" style={{ maxWidth: '65ch' }}>{s.description}</p>}
+                            {/* Thai leads once translated; the English original
+                                stays in small type because the in-game client is
+                                English. */}
+                            {s.description_th && <p style={{ maxWidth: '65ch' }}>{s.description_th}</p>}
+                            {s.description && (
+                              <p className="muted" style={{ maxWidth: '65ch', fontSize: s.description_th ? 12.5 : undefined }}>
+                                {s.description}
+                              </p>
+                            )}
                             {s.requires && (
                               <p className="muted">
                                 ต้องมีก่อน: <strong>{s.requires}</strong>
