@@ -154,7 +154,7 @@ export default async function EquipmentPage({
             { label: 'ชนิด', value: type },
             { label: 'อาชีพ', value: job },
             { label: 'ต้องใช้ Lv', value: minlv > 0 || maxlv > 0 ? `${minlv > 0 ? minlv : '1'}–${maxlv > 0 ? maxlv : 'สูงสุด'}` : '' },
-            { label: 'ช่อง', value: slotsParam !== '' ? (slotsParam === '0' ? 'ไม่มีช่อง' : `${slotsParam} ช่อง`) : '' },
+            { label: 'Slot', value: slotsParam !== '' ? (slotsParam === '0' ? 'ไม่มี Slot' : `${slotsParam} Slot`) : '' },
           ]}
           clearHref="/database/equipment"
         />
@@ -190,13 +190,13 @@ export default async function EquipmentPage({
           –
           <input className="mono" type="number" name="maxlv" defaultValue={maxlv > 0 ? maxlv : ''} placeholder="ถึง" inputMode="numeric" style={{ width: 74 }} aria-label="ต้องใช้เลเวลไม่เกิน" />
         </label>
-        <select name="slots" defaultValue={slotsParam} aria-label="จำนวนช่องการ์ด">
-          <option value="">ทุกช่อง</option>
-          <option value="4">4 ช่อง</option>
-          <option value="3">3 ช่อง</option>
-          <option value="2">2 ช่อง</option>
-          <option value="1">1 ช่อง</option>
-          <option value="0">ไม่มีช่อง</option>
+        <select name="slots" defaultValue={slotsParam} aria-label="จำนวน Slot">
+          <option value="">ทุก Slot</option>
+          <option value="4">4 Slot</option>
+          <option value="3">3 Slot</option>
+          <option value="2">2 Slot</option>
+          <option value="1">1 Slot</option>
+          <option value="0">ไม่มี Slot</option>
         </select>
         <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
           {Object.entries(SORTS).map(([key, v]) => (

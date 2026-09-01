@@ -38,6 +38,9 @@ export default function SiteFooter() {
                 <strong>ragnarokzero.net</strong> — ใช้ตรวจทานค่าสถานะมอนสเตอร์ครบทั้ง 524 ตัว
               </li>
               <li>
+                <strong>midgardhub.com</strong> — รายการดรอปชนิดไม่ทราบอัตรา 410 แถวที่ต้นทางอื่นไม่มี
+              </li>
+              <li>
                 <strong>rAthena</strong> — ใช้ตรวจทานตารางธาตุทั้ง 4 ระดับ
               </li>
             </ul>

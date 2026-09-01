@@ -330,7 +330,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                             </span>
                           )}
                         </td>
-                        <td data-label="อัตราดรอป" className="num">{d.rate}%</td>
+                        <td data-label="อัตราดรอป" className="num">{d.rate != null ? `${d.rate}%` : 'ไม่ทราบอัตรา'}</td>
                       </tr>
                     ))}
                     {(drops ?? []).length === 0 && (

@@ -89,7 +89,7 @@ export default function DropSearch({
                 </span>
               )}
             </span>
-            <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate}%</span>
+            <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate != null ? `${row.rate}%` : '?'}</span>
           </div>
         ))}
       </div>
