@@ -155,16 +155,20 @@ table { border-collapse: collapse; width: 100%; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 9px;
-  border-radius: 6px;
+  padding: 7px 11px;
+  border-radius: 8px;
   font: 500 13px/1.6 "Sarabun", sans-serif;
   color: var(--dim);
   text-decoration: none;
   white-space: nowrap;
+  /* Card buttons on every width (user pick, 1 Sep) -- same face as the
+     phone grid, so the nav reads as one system. */
+  background: var(--panel);
+  border: 1px solid var(--hair);
 }
 
 .subnav a:hover { color: var(--text); background: var(--panel-2); }
-.subnav a.on { color: var(--yellow); background: var(--panel-2); }
+.subnav a.on { color: var(--yellow); background: var(--panel-2); border-color: var(--yellow); }
 
 /* On a phone there is not enough inline room beside the brand mark and search
    button for four nav links plus the section row (measured: .topnav had
