@@ -61,7 +61,7 @@
 **ค้าง/ไอเดียต่อ**
 - SEO audit: ทำแล้วเกือบหมด 1 ก.ย. (hardening + About/ติดต่อ + ลิงก์ source + ประโยคสรุป entity + trust หน้าแรก) — ค้าง: item pages ที่ยังบางจริง (พิจารณา noindex), lastmod (รอ updated_at จริง)
 - ⏳ รอ PAT Supabase ใหม่จาก user: rename คอลัมน์ monsters.hit→hit_100, flee→flee_95 แล้วกวาด alias `hit_100:hit`/`flee_95:flee` ใน select 3 จุด (หน้าแรก, afk-finder, hit-flee tool)
-- midgardhub equip_jobs (~1,000 items) ยังไม่ import (มี canJobEquip ใช้ equippable_classes จาก rozerodb แล้วบางส่วน)
+- ~~midgardhub equip_jobs~~ ทำแล้ว 2 ก.ย. (546 แถวที่ว่าง)
 - ตัววางแผนบิลด์สกิล — ต้องการข้อมูลเงื่อนไขสกิล (ยังไม่มี)
 - ฝั่ง user: ตั้ง GSC + submit sitemap · ปิด auto-renew โดเมนจดผิด rezerothai.com
 
