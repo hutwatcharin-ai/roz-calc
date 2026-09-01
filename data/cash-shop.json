@@ -1,0 +1,618 @@
+[
+ {
+  "name": "AGI Reduction Potion",
+  "id": 22703,
+  "desc": "Reduces AGI by 1 and returns the point to the status pool. Cannot be used when AGI is 1.",
+  "kp": 300,
+  "eur": 0.26,
+  "limit": null
+ },
+ {
+  "name": "DEX Reduction Potion",
+  "id": 22706,
+  "desc": "Reduces DEX by 1 and returns the point to the status pool. Cannot be used when DEX is 1.",
+  "kp": 300,
+  "eur": 0.26,
+  "limit": null
+ },
+ {
+  "name": "INT Reduction Potion",
+  "id": 22705,
+  "desc": "Reduces INT by 1 and returns the point to the status pool. Cannot be used when INT is 1.",
+  "kp": 300,
+  "eur": 0.26,
+  "limit": null
+ },
+ {
+  "name": "LUK Reduction Potion",
+  "id": 22707,
+  "desc": "Reduces LUK by 1 and returns the point to the status pool. Cannot be used when LUK is 1.",
+  "kp": 300,
+  "eur": 0.26,
+  "limit": null
+ },
+ {
+  "name": "STR Reduction Potion",
+  "id": 22702,
+  "desc": "Reduces STR by 1 and returns the point to the status pool. Cannot be used when STR is 1.",
+  "kp": 300,
+  "eur": 0.26,
+  "limit": null
+ },
+ {
+  "name": "VIT Reduction Potion",
+  "id": 22704,
+  "desc": "Reduces VIT by 1 and returns the point to the status pool. Cannot be used when VIT is 1.",
+  "kp": 300,
+  "eur": 0.26,
+  "limit": null
+ },
+ {
+  "name": "Small Healing Potion 10ea Box",
+  "id": 200890,
+  "desc": "A box containing 10 Small Healing Potion. When consumed, restores 5% of MHP every 5 seconds for 30 minutes. The effect does not activate while in Frenzy state. The item effect disappears if the character becomes incapacitated. Cannot be used during WoE, and the effect will not activate. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 500,
+  "eur": 0.43,
+  "limit": null
+ },
+ {
+  "name": "Zelstar 4ea Box",
+  "id": 200886,
+  "desc": "A box containing 4 Zelstar. A gem formed when Jellopy dropped by monsters was buried underground, exposed to extreme pressure and heat for tens of thousands of years, and fossilized. Can be used in various ways, including World Transportation Service and the Refinery (Mineral Synthesis). Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 700,
+  "eur": 0.6,
+  "limit": null
+ },
+ {
+  "name": "Costume Unbinding Injection Box",
+  "id": 200889,
+  "desc": "Box containing 1 [Costume] Unbinding Injector. Can be used by talking to the Costume Unbinder NPC (prontera 251 267). By consuming 1 '[Costume] Unbinding Injector' +1 'Bound Costume', it can be exchanged for 1 'Costume'. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 800,
+  "eur": 0.68,
+  "limit": null
+ },
+ {
+  "name": "Kafra Storage Bell Box - 7 Days",
+  "id": 200913,
+  "desc": "A box containing 1 Kafra Storage Bell usable for 7 days. Shake it anywhere to have a Kafra Employee open Storage. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 900,
+  "eur": 0.77,
+  "limit": null
+ },
+ {
+  "name": "Tool Dealer Summon Bell Box - 7 Days",
+  "id": 200914,
+  "desc": "A box containing 1 Merchant Call Bell usable for 7 days. With this, Tool Dealer can be called anywhere to buy useful consumables or sell items being carried. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 900,
+  "eur": 0.77,
+  "limit": null
+ },
+ {
+  "name": "Launch Celebration Special Limited Package",
+  "id": 200999,
+  "desc": "A special limited package celebrating the launch. Contains the following items. Life Insurance Certificate ×10 [Event] Small Healing Potion ×30 [Event] Small Mana Potion ×20 [Event] Token of Siegfried ×2 World Teleport Ticket ×30",
+  "kp": 1000,
+  "eur": 0.85,
+  "limit": "1/1"
+ },
+ {
+  "name": "Life Insurance 10ea Box",
+  "id": 200903,
+  "desc": "A box containing 10 Life Insurance Certificate. For those preparing for the unexpected. But do not get hurt on purpose. Life Insurance Certificate - For 30 minutes after use, no EXP is lost on death. The effect ends after one death. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 1000,
+  "eur": 0.85,
+  "limit": null
+ },
+ {
+  "name": "Account Death Penalty Buff Box - 7 Days",
+  "id": 200912,
+  "desc": "[Usage Period] 7 days after item use [Applies To] All characters on the server of the character that used the item Contains a potion that grants the following effects to all characters on the server for 7 days. - Death penalty -50% Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 1300,
+  "eur": 1.11,
+  "limit": null
+ },
+ {
+  "name": "Account Drop Rate Buff Box - 7 Days",
+  "id": 200911,
+  "desc": "[Usage Period] 7 days after item use [Applies To] All characters on the server of the character that used the item Contains a potion that grants the following effects to all characters on the server for 7 days. - Item drop rate +10% Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Agi Up Potion 10ea Box",
+  "id": 200898,
+  "desc": "A box containing 10 Agi Up Potion. A potion that produces an even greater effect when used with other ASPD-boosting potions. When consumed, ASPD increases slightly more for 30 minutes. Applies the same way as existing ASPD potions, and the amount of ASPD gained may vary depending on AGI. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Ale's Blessing 10ea Box",
+  "id": 200896,
+  "desc": "A box containing 10 Ale's Blessing. A potion containing the blessing known as Ale's Blessing, bestowed by the god of herbs. For 30 minutes, incoming Heal and the effectiveness of certain recovery items used increase by 20%. The item effect disappears if the character becomes incapacitated. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Challenge Drink 10ea Box",
+  "id": 200893,
+  "desc": "A box containing 10 Challenge Drink. A drink that activates internal energy and greatly enhances ability. For 30 minutes, ATK/MATK +30, ATK/MATK +1%, HIT/FLEE +30, ASPD +1, SP consumption -5%, fixed casting time -30%. (% modifiers to fixed casting do not stack. Only the largest effect applies.) The item effect disappears if the character becomes incapacitated. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Enriched Abrasive 10ea Box",
+  "id": 200897,
+  "desc": "A box containing 10 Concentrated Polishing Agent. A Polishing Agent that sharpens Weapon. Apply to Weapon to increase CRIT by 30 for 30 minutes. The item effect disappears if the character becomes incapacitated. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Megaphone 10ea Box",
+  "id": 200905,
+  "desc": "A box containing 10 Megaphone. It seems to be a miniature megaphone. Megaphone - Broadcasts the entered message to the entire server. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Mimir's Well 10ea Box",
+  "id": 200895,
+  "desc": "A box containing 10 Mimir's Well. Water drawn from the spring of wisdom known as the spring of Mimir. For 30 minutes, MSP +10%, SP consumption -10%. (When buffs with the same effect are stacked, only the most recently used effect is applied.) The item effect disappears if the character becomes incapacitated. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Premium Course Meal Box",
+  "id": 200892,
+  "desc": "A box containing 10 Premium Course Meal. A Premium dish made by condensing all dishes reputed to be good for the body. For 30 minutes, All Stats +10, ATK +30, MATK +30. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Unlimited Drink 10ea Box",
+  "id": 200894,
+  "desc": "A box containing 10 Unlimited Drink. A drink that activates internal energy, briefly surging with what feels like limitless power. For 30 minutes, MHP/MSP +5%. Critical Damage/ranged physical damage/all property magic damage +5%. Casting cannot be interrupted. The item effect disappears if the character becomes incapacitated. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 1500,
+  "eur": 1.28,
+  "limit": null
+ },
+ {
+  "name": "Account EXP Buff Box - 7 Days",
+  "id": 200910,
+  "desc": "[Usage Period] 7 days after item use [Applies To] All characters on the server of the character that used the item Contains a potion that grants the following effects to all characters on the server for 7 days. - EXP +10% - Job EXP +10% Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 1800,
+  "eur": 1.53,
+  "limit": null
+ },
+ {
+  "name": "Bubble Gum 5ea Box",
+  "id": 200916,
+  "desc": "A box containing 5 sweet, chewy Bubble Gum. Bubble Gum - Doubles the chance for monsters to drop items for 30 minutes.",
+  "kp": 2000,
+  "eur": 1.7,
+  "limit": "1/1"
+ },
+ {
+  "name": "Gym Membership Card Box",
+  "id": 200930,
+  "desc": "A box containing 1 Gym Membership that increases carrying capacity. If this membership is given to a certain NPC, a special skill that increases carrying capacity is taught. Carrying capacity increases by 200 per skill level and can be learned up to Lv. 10. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 2000,
+  "eur": 1.7,
+  "limit": null
+ },
+ {
+  "name": "Inventory Expansion Coupon Box",
+  "id": 200931,
+  "desc": "A box containing 1 ticket used to expand the maximum number of item types that can be carried. <TIPBOX>[Usage Guide]<INFO>65</INFO></TIPBOX> Once this item is opened, it becomes ineligible for cancellation.",
+  "kp": 2000,
+  "eur": 1.7,
+  "limit": null
+ },
+ {
+  "name": "Kafra Storage Bell Box",
+  "id": 200907,
+  "desc": "A box containing 1 Kafra Storage Bell usable for 30 days. Shake it anywhere to have a Kafra Employee open Storage. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 2000,
+  "eur": 1.7,
+  "limit": null
+ },
+ {
+  "name": "Tool Dealer Summon Bell Box",
+  "id": 200908,
+  "desc": "A box containing 1 Merchant Call Bell usable for 30 days. With this, Tool Dealer can be called anywhere to buy useful consumables or sell items being carried. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 2000,
+  "eur": 1.7,
+  "limit": null
+ },
+ {
+  "name": "Clothing Dye Coupon II Box",
+  "id": 200901,
+  "desc": "A box containing 1 coupon that restores Clothes to their original color. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 2500,
+  "eur": 2.13,
+  "limit": null
+ },
+ {
+  "name": "Essential Package - 7 Days",
+  "id": 200909,
+  "desc": "[Usage Period] 7 days after item use [Applies To] Character that used the item EXP/item drop rate +10% for 7 days. Provides full recovery and buffs 3 times per day. Also grants a one-time bonus of 5 World Transfer Ticket when opened. An essential package useful for everyone! Provides 3 Yggdrasil Dew daily for full HP/SP recovery and buffs. [Blessing of Yggdrasil] For 1 hour, all base stats +7, ATK/MATK +30, HIT/FLEE +5. Consumes 1 Yggdrasil Dew or 1 Zelstar Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 2500,
+  "eur": 2.13,
+  "limit": null
+ },
+ {
+  "name": "Token of Siegfried 10ea Box",
+  "id": 200904,
+  "desc": "A box containing 10 Token of Siegfried. Token of Siegfried - Allows immediate resurrection at the place of death. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 2500,
+  "eur": 2.13,
+  "limit": null
+ },
+ {
+  "name": "Beauty Coupon Box",
+  "id": 200899,
+  "desc": "A box containing 1 Beauty Coupon. An item for those who want something that sets them apart. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Clothing Dye Coupon Box",
+  "id": 200900,
+  "desc": "A box containing 1 coupon that dyes Clothes. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Axe Box",
+  "id": 200926,
+  "desc": "Open the box to choose either +7 Shining Hammer or +7 Shining Windhawk. Shining Hammer Shining Windhawk Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Bow Box",
+  "id": 200929,
+  "desc": "Open the box to obtain +7 Shining Great Bow. Shining Great Bow Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Dagger Box",
+  "id": 200923,
+  "desc": "Open the box to obtain +7 Shining Stiletto. Shining Stiletto Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Mace Box",
+  "id": 200928,
+  "desc": "Open the box to obtain +7 Shining Smasher. Shining Smasher Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Spear Box",
+  "id": 200925,
+  "desc": "Open the box to choose either +7 Shining Short Spear or +7 Shining Guisarme. Shining Short Spear Shining Guisarme Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Staff Box",
+  "id": 200927,
+  "desc": "Open the box to choose either +7 Shining Wand or +7 Shining Metal Staff. Shining Wand Shining Metal Staff Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Shining Sword Box",
+  "id": 200924,
+  "desc": "Open the box to choose either +7 Shining Ring Pommel Saber or +7 Shining Bastard Sword. Shining Ring Pommel Saber Shining Bastard Sword Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3000,
+  "eur": 2.55,
+  "limit": null
+ },
+ {
+  "name": "Account Death Penalty Buff Box",
+  "id": 200881,
+  "desc": "[Usage Period] 30 days after item use [Applies To] All characters on the server of the character that used the item Contains a potion that grants the following effects to all characters on the server for 30 days. - Death penalty -50% Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3500,
+  "eur": 2.98,
+  "limit": null
+ },
+ {
+  "name": "Boarding Halter Box - 30 Days",
+  "id": 200906,
+  "desc": "A box containing 1 Riding Bridle. Usable for 30 days. A mysterious bridle that allows riding any mount suited to each Classes. Mount types are divided by class branch, and change to the matching mount upon transcending or changing class. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 3500,
+  "eur": 2.98,
+  "limit": null
+ },
+ {
+  "name": "Small Mana Potion 10ea Box",
+  "id": 200891,
+  "desc": "A box containing 10 Small Mana Potion. When consumed, restores 5% of MSP every 5 seconds for 30 minutes. The effect does not activate while in Frenzy state. The item effect disappears if the character becomes incapacitated. Cannot be used during WoE, and the effect will not activate. Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 3500,
+  "eur": 2.98,
+  "limit": "5/5"
+ },
+ {
+  "name": "Account Drop Rate Buff Box",
+  "id": 200880,
+  "desc": "[Usage Period] 30 days after item use [Applies To] All characters on the server of the character that used the item Contains a potion that grants the following effects to all characters on the server for 30 days. - Item drop rate +10% Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 4000,
+  "eur": 3.4,
+  "limit": null
+ },
+ {
+  "name": "Growth Elixir 5ea Box",
+  "id": 200915,
+  "desc": "A box containing 5 Growth Elixir. Growth Elixir - Increases EXP gained by 50% for 30 minutes.",
+  "kp": 4000,
+  "eur": 3.4,
+  "limit": "5/5"
+ },
+ {
+  "name": "Hidden World Key Gift Box",
+  "id": 200888,
+  "desc": "A gift box containing Key to the Hidden World (30 Days)]. Key to the Hidden World is character bound. ※ While carrying this item, talking to NPC Mysterious Guide (PVP map warp NPC) enables the dialogue that moves you to the PVP map. ※ Key to the Hidden World is a usable item. After use, a special BUFF is obtained. ※ Special BUFF: EXP and item drop rate +10%, lasts 12 hours.",
+  "kp": 4000,
+  "eur": 3.4,
+  "limit": null
+ },
+ {
+  "name": "Account EXP Buff Box",
+  "id": 200879,
+  "desc": "[Usage Period] 30 days after item use [Applies To] All characters on the server of the character that used the item Contains a potion that grants the following effects to all characters on the server for 30 days. - EXP +10% - Job EXP +10% Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "HD Bradium 10ea Box",
+  "id": 200884,
+  "desc": "A box containing 10 HD Bradium. Repeated research by scholars of Midgard has further increased its density and strength. It seems even more demanding for refining Weapon. - When refining Weapon at +10 or higher, failure will not destroy the Weapon. - (If refinement fails, the refine level decreases by 1.) Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "HD Carnium 10ea Box",
+  "id": 200885,
+  "desc": "A box containing 10 HD Carnium. Compressed over an unimaginably long time, its density and strength have increased even further. It seems even more demanding for refining armor. - When refining armor at +10 or higher, failure will not destroy the armor. - (If refinement fails, the refine level decreases by 1.) Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "HD Elunium 10ea Box",
+  "id": 200268,
+  "desc": "Box containing 10 Enriched Elunium. Delicate ore that protects valuable equipment during refinement. - When refining armor at +7 or higher, failure does not destroy the armor. However, this ore cannot refine beyond +10. - (Refine level decreases by 1 upon failure.) Once this item is opened, it becomes ineligible for refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "HD Oridecon 10ea Box",
+  "id": 200267,
+  "desc": "Box containing 10 Enriched Oridecon. Delicate ore that protects valuable equipment during refinement. - When refining a weapon at +7 or higher, failure does not destroy the weapon; instead, its refine level decreases by 1. This ore cannot refine beyond +10. - (Refine level decreases by 1 upon failure.) Once this item is opened, it becomes ineligible for refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Shining Acolyte Armor Package",
+  "id": 200920,
+  "desc": "Contains 5 pieces of equipment usable by Acolytes. Shining Saint's Robe Shining Hood Shining Sandals Shining Buckler Shining Clip Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Shining Archer Armor Package",
+  "id": 200922,
+  "desc": "Contains 5 pieces of equipment usable by Archers. Shining Tights Shining Muffler Shining Shoes Shining Guard Shining Clip Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Shining Mage Armor Package",
+  "id": 200918,
+  "desc": "Contains 5 pieces of equipment usable by Mages. Shining Formal Dress Shining Hood Shining Sandals Shining Guard Shining Clip Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Shining Merchant Armor Package",
+  "id": 200919,
+  "desc": "Contains 5 pieces of equipment usable by Merchants. Shining Long Coat Shining Cloak Shining Sandals Shining Buckler Shining Clip Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Shining Swordsman Armor Package",
+  "id": 200917,
+  "desc": "Contains 5 pieces of equipment usable by the Swordsman class. Shining Chain Mail Shining Cloak Shining Boots Shining Shield Shining Clip Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Shining Thief Armor Package",
+  "id": 200921,
+  "desc": "Contains 5 pieces of equipment usable by Thieves. Shining Thief Clothes Shining Muffler Shining Shoes Shining Buckler Shining Clip Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 5000,
+  "eur": 4.25,
+  "limit": null
+ },
+ {
+  "name": "Essential Package",
+  "id": 200878,
+  "desc": "[Usage Period] 30 days after item use [Applies To] Character that used the item EXP/item drop rate +10% for 30 days. Provides full recovery and buffs 3 times per day. Also grants a one-time bonus of 30 World Transfer Ticket when opened. An essential package useful for everyone! Provides 3 Yggdrasil Dew daily for full HP/SP recovery and buffs. [Blessing of Yggdrasil] For 1 hour, all base stats +7, ATK/MATK +30, HIT/FLEE +5. Consumes 1 Yggdrasil Dew or 1 Zelstar Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 6000,
+  "eur": 5.1,
+  "limit": null
+ },
+ {
+  "name": "Zelstar 40ea Box",
+  "id": 200887,
+  "desc": "A box containing 40 Zelstar. A gem formed when Jellopy dropped by monsters was buried underground, exposed to extreme pressure and heat for tens of thousands of years, and fossilized. Can be used in various ways, including World Transportation Service and the Refinery (Mineral Synthesis). Once this item is opened, it becomes ineligible for cancellation and refund.",
+  "kp": 7000,
+  "eur": 5.95,
+  "limit": null
+ },
+ {
+  "name": "Launch Celebration Growth Package",
+  "id": 201000,
+  "desc": "A growth package celebrating the launch. Contains the following items. _ Account EXP Buff Account Drop Rate Buff [Event] Account Death Penalty Buff - 7 Days _ Weight : 0",
+  "kp": 9000,
+  "eur": 7.65,
+  "limit": "1/1"
+ },
+ {
+  "name": "Launch Celebration Consumables Package",
+  "id": 201001,
+  "desc": "A consumables package celebrating the launch. Contains the following items. Small Healing Potion ×30 Small Mana Potion ×30 [Event] Unlimited Fly Wing 1-Day Box ×1 [Event] Life Insurance Certificate ×5",
+  "kp": 10000,
+  "eur": 8.5,
+  "limit": "1/1"
+ },
+ {
+  "name": "Launch Celebration Elixir Package",
+  "id": 201002,
+  "desc": "A special medicine package to commemorate the launch. Contains Growth Elixir ×15. _ Weight : 0",
+  "kp": 10000,
+  "eur": 8.5,
+  "limit": "1/1"
+ },
+ {
+  "name": "Costume Straight Long Box",
+  "id": 200998,
+  "desc": "A box containing [Costume] White Cat Straight Long ×1. _ Weight : 1",
+  "kp": 15000,
+  "eur": 12.75,
+  "limit": "1/1"
+ },
+ {
+  "name": "Name Change Card Box",
+  "id": 200902,
+  "desc": "A box containing 1 Card that can change a character's name. ※ This item can only be used after leaving the party and guild. Once this item is opened, it becomes ineligible for refund.",
+  "kp": 15000,
+  "eur": 12.75,
+  "limit": null
+ },
+ {
+  "name": "Launch Celebration Special Limited Package I",
+  "id": 200981,
+  "desc": "This is a costume package created to celebrate the launch. Contains the following items. Launch Celebration Costume Selection Package I [Event] Growth Elixir ×5",
+  "kp": 20000,
+  "eur": 17.0,
+  "limit": "1/1"
+ },
+ {
+  "name": "Premium Buff Package",
+  "id": 201007,
+  "desc": "A buff package celebrating the launch. The following items are included. _ Premium Course Meal ×50 Challenge Drink ×50 Unlimited Drink ×50 _ Weight : 0",
+  "kp": 20000,
+  "eur": 17.0,
+  "limit": "1/1"
+ },
+ {
+  "name": "Premium Growth Package",
+  "id": 201005,
+  "desc": "A growth package to commemorate the launch. Contains the following items. _ Account EXP Buff Account Drop Rate Buff Account Death Penalty Buff Blessing of Yggdrasil [Event] Growth Elixir ×5 World Teleport Ticket ×30 _ Weight : 0",
+  "kp": 20000,
+  "eur": 17.0,
+  "limit": "1/1"
+ },
+ {
+  "name": "Premium Recovery Package",
+  "id": 201006,
+  "desc": "A recovery package celebrating the launch. The following items are included. Small Healing Potion ×100 Small Mana Potion ×50 [Event] Ale's Blessing ×20",
+  "kp": 20000,
+  "eur": 17.0,
+  "limit": "1/1"
+ },
+ {
+  "name": "Baby Shark Bag Costume Package",
+  "id": 200969,
+  "desc": "Package/Box A package containing a Baby Shark Bag costume.",
+  "kp": 25000,
+  "eur": 21.25,
+  "limit": null
+ },
+ {
+  "name": "Baby Shark Hood Costume Package",
+  "id": 200968,
+  "desc": "Package/Box A package containing a Baby Shark Hood costume. The following items are included. Zelstar x30 World Teleport Ticket x50 Token of Siegfried x10",
+  "kp": 25000,
+  "eur": 21.25,
+  "limit": null
+ },
+ {
+  "name": "Premium Elixir Package",
+  "id": 201008,
+  "desc": "An elixir package celebrating the launch. The following items are included. _ Growth Elixir ×40 Bubble Gum ×10 _ Weight : 0",
+  "kp": 30000,
+  "eur": 25.5,
+  "limit": "1/1"
+ },
+ {
+  "name": "Baby Shark Doll Package",
+  "id": 200970,
+  "desc": "Package/Box A package containing a Baby Shark Doll costume. Zelstar x50 World Teleport Ticket x100 Token of Siegfried x30",
+  "kp": 35000,
+  "eur": 29.75,
+  "limit": null
+ },
+ {
+  "name": "Launch Celebration Special Limited Package II",
+  "id": 200982,
+  "desc": "This is a costume package created to celebrate the launch. Contains the following items. Launch Celebration Costume Selection Package II Premium Course Meal ×35 Enriched Abrasive ×35 Life Insurance ×10 Token of Siegfried ×10 [Event] Bubble Gum ×10",
+  "kp": 35000,
+  "eur": 29.75,
+  "limit": "2/2"
+ },
+ {
+  "name": "Launch Celebration Special Limited Package III",
+  "id": 200983,
+  "desc": "This is a costume package created to celebrate the launch. Contains the following items. Launch Celebration Costume Selection Package II Small Healing Potion ×50 Small Mana Potion ×40 [Event] Unlimited Drink ×10 [Event] Ale's Blessing ×10",
+  "kp": 35000,
+  "eur": 29.75,
+  "limit": "2/2"
+ },
+ {
+  "name": "VIP Buff Package",
+  "id": 201014,
+  "desc": "A buff package celebrating the launch. Contains the following items. _ Premium Course Meal ×170 Challenge Drink ×170 Unlimited Drink ×170 _ Weight : 0",
+  "kp": 60000,
+  "eur": 51.0,
+  "limit": "1/1"
+ },
+ {
+  "name": "Costume Mystery Wing Box",
+  "id": 200997,
+  "desc": "A box containing [Costume] Mystery Wing ×1. _ Weight : 1",
+  "kp": 70000,
+  "eur": 59.5,
+  "limit": "1/1"
+ }
+]

@@ -1247,6 +1247,32 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 }
 .moncard__meta { color: var(--faint); font: 400 11px/1.4 "Sarabun", sans-serif; }
 
+/* Cash shop rows: icon, name + description, price block right-aligned. */
+.cashlist { display: flex; flex-direction: column; }
+.cashlist__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--hair);
+  text-decoration: none;
+}
+.cashlist__row:last-child { border-bottom: 0; }
+a.cashlist__row:hover { background: var(--panel-2); }
+.cashlist__body { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.cashlist__name { color: var(--text); font: 600 14px/1.4 "Sarabun", sans-serif; }
+.cashlist__desc {
+  color: var(--faint);
+  font: 400 12px/1.5 "Sarabun", sans-serif;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.cashlist__price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
+.cashlist__price b { color: var(--yellow); font-size: 14px; }
+.cashlist__price span { color: var(--faint); font-size: 11px; }
+
 /* Challenge clones (C1-C9) are opt-in. Rows carry .cvariant server-side and
    stay hidden until CVariantToggle sets data-show-cvariant on <html> — so the
    default needs no JS and never flashes. The monster list filters server-side
