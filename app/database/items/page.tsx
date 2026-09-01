@@ -101,7 +101,7 @@ export default async function ItemListPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฐานข้อมูลไอเทม" />
+      <PageHeader title="ฐานข้อมูลไอเทม Ragnarok Zero" />
       <RecentlyViewed />
       <FilterState
         count={count ?? 0}

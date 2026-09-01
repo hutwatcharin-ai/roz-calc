@@ -30,7 +30,7 @@ export default async function WorldMapPage() {
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
         <Link href="/database/maps">ฐานข้อมูลแมพ</Link><span className="crumbs__sep" aria-hidden="true">›</span><span className="crumbs__here">Interactive World Map</span>
       </nav>
-      <PageHeader title="Interactive World Map" lead="ชี้แต่ละช่องเพื่อดูมอนสเตอร์ทันที หรือเลือก Region เพื่อซูมไปยังพื้นที่นั้น" />
+      <PageHeader title="แผนที่โลก Ragnarok Zero — Interactive World Map" lead="ชี้แต่ละช่องเพื่อดูมอนสเตอร์ทันที หรือเลือก Region เพื่อซูมไปยังพื้นที่นั้น" />
       {(error || countError) && <p className="worldmap-page__warning">โหลดสถิติบางส่วนไม่สำเร็จชั่วคราว แต่ยังค้นหาและเปิดแผนที่ได้</p>}
       <WorldMap tiles={tiles} dungeons={dungeons} regions={WORLD_MAP_REGIONS} totalMaps={count ?? 497} />
       <p className="worldmap-page__foot">World atlas แสดง 102 map IDs และ dungeon หลัก ส่วนรายการฐานข้อมูลครบทั้งหมดอยู่ที่ <Link href="/database/maps">ฐานข้อมูลแมพ →</Link></p>

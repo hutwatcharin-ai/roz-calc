@@ -126,7 +126,7 @@ export default async function SkillsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฐานข้อมูลสกิล" />
+      <PageHeader title="ฐานข้อมูลสกิล Ragnarok Zero" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no skills", which
           is false. */}

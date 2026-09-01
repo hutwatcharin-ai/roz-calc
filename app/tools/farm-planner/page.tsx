@@ -10,7 +10,7 @@ export const metadata = {
 export default function FarmPlannerPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">แผนฟาร์ม</h1>
+      <h1 className="pagehead__title">แผนฟาร์ม Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         กดปุ่ม "เพิ่มเข้าแผน" จากหน้ามอนสเตอร์หรือจากตารางในหน้าแรก แล้วรายการจะมารวมกันที่นี่
         เก็บไว้ในเบราว์เซอร์ของคุณเครื่องเดียว ไม่ต้องสมัครสมาชิก

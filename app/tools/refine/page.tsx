@@ -40,7 +40,7 @@ export default function RefinePage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader
-        title="ตีบวก"
+        title="อัตราตีบวก Ragnarok Zero"
         lead={
           <>
             ตีพังของหาย ต้องเริ่มใหม่ที่ +0 — ตัวเลขที่ต้องรู้จริงคือ <strong>ต้องเตรียมของกี่ชิ้น</strong>

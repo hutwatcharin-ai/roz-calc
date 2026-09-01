@@ -44,7 +44,7 @@ export default async function QuestIndexPage({
     console.error('quests query failed', error);
     return (
       <main className="shell" style={{ paddingBlock: 32 }}>
-        <PageHeader title="เควส" />
+        <PageHeader title="เควส Ragnarok Zero Global แยกตามเมือง" />
         <p className="muted">โหลดข้อมูลเควสไม่สำเร็จ ลองใหม่อีกครั้ง</p>
       </main>
     );
@@ -71,7 +71,7 @@ export default async function QuestIndexPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader
-        title="เควส"
+        title="เควส Ragnarok Zero Global แยกตามเมือง"
         lead="จัดกลุ่มตามเมือง — เปิดเมืองที่กำลังเล่นอยู่ แล้วเควสทุกตัวในเมืองนั้นอยู่หน้าเดียวกัน"
         source={
           <>

@@ -135,7 +135,7 @@ export default async function EquipmentPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฐานข้อมูลอุปกรณ์" />
+      <PageHeader title="ฐานข้อมูลอุปกรณ์ Ragnarok Zero" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no equipment", which
           is false. */}

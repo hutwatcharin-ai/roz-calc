@@ -49,7 +49,7 @@ export default async function CashShopPage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader
-        title="Cash Shop"
+        title="Cash Shop Ragnarok Zero — ราคาและของในร้าน"
         lead={`${count ?? 0} รายการ · ราคา ณ 31 ส.ค. 2026 — ราคาจริงเปลี่ยนตามอีเวนต์ เช็คในเกมก่อนซื้อเสมอ`}
       />
 

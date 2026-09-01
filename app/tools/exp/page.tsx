@@ -36,7 +36,7 @@ const BASE_TOTALS = runningTotals(BASE_EXP_ROWS);
 export default function ExpPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">EXP ต่อเลเวล</h1>
+      <h1 className="pagehead__title">ตาราง EXP ต่อเลเวล Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         EXP ที่ต้องใช้ต่อเลเวล พร้อมคอลัมน์รวมสะสมตั้งแต่เลเวล 1
       </p>

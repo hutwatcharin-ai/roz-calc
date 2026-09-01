@@ -91,7 +91,7 @@ export default async function MonsterListPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฐานข้อมูลมอนสเตอร์" />
+      <PageHeader title="ฐานข้อมูลมอนสเตอร์ Ragnarok Zero" />
       <RecentlyViewed />
 
       <form className="filterbar">

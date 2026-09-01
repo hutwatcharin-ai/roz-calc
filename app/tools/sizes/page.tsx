@@ -17,7 +17,7 @@ function band(value: number): string {
 export default function SizesPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตารางขนาด</h1>
+      <h1 className="pagehead__title">ตารางขนาด Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         ดาเมจขึ้นกับขนาดมอนด้วย ไม่ใช่แค่ธาตุ — เช่น หนังสือตีมอนใหญ่เหลือ 50%
       </p>

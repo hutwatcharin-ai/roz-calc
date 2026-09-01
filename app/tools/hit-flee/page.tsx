@@ -57,7 +57,7 @@ export default async function HitFleePage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader
-        title="ตีโดนไหม"
+        title="คำนวณ HIT / FLEE — ตีโดนไหม หลบพ้นไหม"
         lead="กรอกค่าตัวละคร แล้วดูเป็นเปอร์เซ็นต์: คุณตีมอนโดนแค่ไหน และมอนตีคุณโดนแค่ไหน"
         source={
           <>

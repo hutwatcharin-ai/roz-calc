@@ -14,7 +14,7 @@ const LEVELS: ElementLevel[] = [1, 2, 3, 4];
 export default function ElementsPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตารางธาตุ</h1>
+      <h1 className="pagehead__title">ตารางธาตุ Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         แถว = ธาตุอาวุธ · คอลัมน์ = ธาตุเป้าหมาย · ตัวเลข = ดาเมจที่เหลือ (100% เท่าเดิม, เกินคือแรงขึ้น) ·
         ระดับธาตุของมอน (1–4) ดูได้ในหน้ามอนตัวนั้น

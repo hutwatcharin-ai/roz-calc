@@ -19,7 +19,7 @@ export const metadata = {
 export default function DamagePage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตีตัวนี้ด้วยอะไรดี</h1>
+      <h1 className="pagehead__title">ตีตัวนี้ด้วยอะไรดี — ธาตุและอาวุธที่คูณแรงสุด</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         ธาตุกับขนาดเป็นตัวคูณคนละตัวที่<strong>คูณกัน</strong> คนส่วนใหญ่ดูทีละตาราง —
         ธาตุ 200% ที่ดูชี้ขาด เจอขนาด 50% ก็เหลือ 100% เท่ามือเปล่า

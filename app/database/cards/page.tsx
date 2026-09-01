@@ -99,7 +99,7 @@ export default async function CardsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฐานข้อมูลการ์ด" />
+      <PageHeader title="ฐานข้อมูลการ์ด Ragnarok Zero" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no cards", which is
           false. */}
