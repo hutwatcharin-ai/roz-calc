@@ -74,8 +74,8 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
   const allSpawns = await fetchAllRows<{ monster_id: number; map_code: string | null }>((from, to) =>
     db.from('monster_spawns').select('monster_id, map_code').order('monster_id').range(from, to),
   );
-  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null; agi: number | null; dex: number | null }>((from, to) =>
-    db.from('monsters').select('id, is_aggressive, agi, dex').order('id').range(from, to),
+  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null; hit: number | null }>((from, to) =>
+    db.from('monsters').select('id, is_aggressive, hit').order('id').range(from, to),
   );
 
   // A failed skill or spawn read must not render as "no skills, no maps" -- the
@@ -125,8 +125,7 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
       ...s,
       skills: skillsByMonster.get(s.monster_id) ?? [],
       spawn: spawnByMonster.get(s.monster_id) ?? null,
-      agi: accById.get(s.monster_id)?.agi ?? null,
-      dex: accById.get(s.monster_id)?.dex ?? null,
+      hit: accById.get(s.monster_id)?.hit ?? null,
     })),
     failed: false,
   };

@@ -141,6 +141,12 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       </div>
 
       <div className="statgrid" style={{ marginTop: 20 }}>
+        {item.slots !== null && item.slots !== undefined && (
+          <div className="statgrid__cell">
+            <span className="reward-label">ช่องการ์ด</span>
+            <span className="reward-value mono">{item.slots > 0 ? `[${item.slots}]` : 'ไม่มี'}</span>
+          </div>
+        )}
         {item.atk !== null && (
           <div className="statgrid__cell">
             <span className="reward-label">ATK</span>

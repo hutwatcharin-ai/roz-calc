@@ -1,5 +1,5 @@
 // app/database/monsters/[id]/page.tsx
-import { fleeToCapDodge, hitToNeverMiss, mobFlee, mobHit } from '@/lib/hit-flee';
+import { fleeToCapDodge, hitToNeverMiss } from '@/lib/hit-flee';
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
@@ -261,17 +261,17 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 <tr><td>LUK</td><td className="num">{num(monster.luk)}</td></tr>
               </tbody>
             </table>
-            {/* Derived, not observed: renewal formulas verified against the
-                rAthena source (lib/hit-flee.ts). Rendered only when the inputs
-                exist -- a FLEE invented for an unknown AGI would be a fake
-                safety number. */}
+            {/* Real per-mob values from the game files (the monsters table
+                stores them) -- NOT computed from level+stat: mob mode bonuses
+                make the base formula wrong per-monster (Mummy: file FLEE 293
+                vs formula 159). Null stays a dash. */}
             {(() => {
-              const flee = mobFlee(monster.level, monster.agi);
-              const hit = mobHit(monster.level, monster.dex);
+              const flee = monster.flee ?? null;
+              const hit = monster.hit ?? null;
               if (flee === null && hit === null) return null;
               return (
                 <div style={{ marginTop: 12 }}>
-                  <h3 className="section-title" style={{ fontSize: 14 }}>แม่นยำ/หลบ (คำนวณจากสูตร)</h3>
+                  <h3 className="section-title" style={{ fontSize: 14 }}>แม่นยำ/หลบ</h3>
                   <table className="stat-table">
                     <tbody>
                       {flee !== null && <tr><td>FLEE</td><td className="num">{flee}</td></tr>}
@@ -291,8 +291,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                     </tbody>
                   </table>
                   <p className="source-note" style={{ marginTop: 6 }}>
-                    คำนวณจากสูตร Renewal (FLEE = Lv+AGI+100, HIT = Lv+DEX+150, โดน 100% ที่ FLEE+20, หลบตัน 95% ที่ HIT+75)
-                    — ไม่ใช่ค่าที่วัดจากเกมจริง
+                    HIT/FLEE คือค่าจริงจากไฟล์เกม · เป้า &ldquo;โดน 100%&rdquo; = FLEE+20 และ &ldquo;หลบตัน 95%&rdquo; = HIT+75 ตามสูตร Renewal
                   </p>
                 </div>
               );

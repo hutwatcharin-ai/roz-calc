@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
-import { fleeToCapDodge, hitChancePct, mobHit } from '@/lib/hit-flee';
+import { fleeToCapDodge, hitChancePct } from '@/lib/hit-flee';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
@@ -22,8 +22,7 @@ export interface AfkCandidate {
   skills: string[];
   spawn: { name: string; code: string; aggroCount: number } | null;
   is_aggressive?: boolean | null;
-  agi?: number | null;
-  dex?: number | null;
+  hit?: number | null;
 }
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
@@ -61,18 +60,17 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   function theirHitPct(row: AfkCandidate): number | null {
     if (myFlee === null) return null;
-    const hit = mobHit(row.level, row.dex ?? null);
-    if (hit === null) return null;
-    return hitChancePct(hit, myFlee);
+    // Real per-mob hit from the game files, not level+dex+150.
+    if (row.hit == null) return null;
+    return hitChancePct(row.hit, myFlee);
   }
 
   // An aggressive monster qualifies only when it CANNOT realistically hit us:
   // our FLEE at or past its 95%-dodge threshold.
   function safeFromAggro(row: AfkCandidate): boolean {
     if (myFlee === null) return false;
-    const hit = mobHit(row.level, row.dex ?? null);
-    if (hit === null) return false;
-    return myFlee >= fleeToCapDodge(hit);
+    if (row.hit == null) return false;
+    return myFlee >= fleeToCapDodge(row.hit);
   }
 
   const candidates = rows

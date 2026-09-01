@@ -34,7 +34,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 export default async function EquipmentPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; type?: string; job?: string; minlv?: string; maxlv?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; type?: string; job?: string; minlv?: string; maxlv?: string; slots?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   const category = searchParams.category ?? '';
@@ -56,6 +56,8 @@ export default async function EquipmentPage({
   // least X, and unknown cannot answer that.
   const minlv = Math.max(0, Number(searchParams.minlv ?? 0) || 0);
   const maxlv = Math.max(0, Number(searchParams.maxlv ?? 0) || 0);
+  // Slot filter: '' = any, '0'..'4' exact. Values outside that are ignored.
+  const slotsParam = ['0', '1', '2', '3', '4'].includes(searchParams.slots ?? '') ? (searchParams.slots as string) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
   const db = supabaseBrowser();
@@ -74,10 +76,11 @@ export default async function EquipmentPage({
     atk: number | null;
     required_level: number | null;
     equippable_classes: string[] | null;
+    slots: number | null;
   }>((from, to) =>
     db
       .from('items')
-      .select('id, name_en, icon_url, category, weapon_type, atk, required_level, equippable_classes')
+      .select('id, name_en, icon_url, category, weapon_type, atk, required_level, equippable_classes, slots')
       .in('category', [...EQUIPMENT_CATEGORIES])
       .order('name_en')
       .order('id')
@@ -101,6 +104,7 @@ export default async function EquipmentPage({
   const filtered = items.filter((it) => {
     if (category && it.category !== category) return false;
     if (type && it.weapon_type !== type) return false;
+    if (slotsParam !== '' && it.slots !== Number(slotsParam)) return false;
     if (minlv > 0 && (it.required_level == null || it.required_level < minlv)) return false;
     if (maxlv > 0 && it.required_level != null && it.required_level > maxlv) return false;
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
@@ -125,6 +129,7 @@ export default async function EquipmentPage({
     if (job) params.set('job', job);
     if (minlv > 0) params.set('minlv', String(minlv));
     if (maxlv > 0) params.set('maxlv', String(maxlv));
+    if (slotsParam !== '') params.set('slots', slotsParam);
     if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
@@ -149,6 +154,7 @@ export default async function EquipmentPage({
             { label: 'ชนิด', value: type },
             { label: 'อาชีพ', value: job },
             { label: 'ต้องใช้ Lv', value: minlv > 0 || maxlv > 0 ? `${minlv > 0 ? minlv : '1'}–${maxlv > 0 ? maxlv : 'สูงสุด'}` : '' },
+            { label: 'ช่อง', value: slotsParam !== '' ? (slotsParam === '0' ? 'ไม่มีช่อง' : `${slotsParam} ช่อง`) : '' },
           ]}
           clearHref="/database/equipment"
         />
@@ -184,6 +190,14 @@ export default async function EquipmentPage({
           –
           <input className="mono" type="number" name="maxlv" defaultValue={maxlv > 0 ? maxlv : ''} placeholder="ถึง" inputMode="numeric" style={{ width: 74 }} aria-label="ต้องใช้เลเวลไม่เกิน" />
         </label>
+        <select name="slots" defaultValue={slotsParam} aria-label="จำนวนช่องการ์ด">
+          <option value="">ทุกช่อง</option>
+          <option value="4">4 ช่อง</option>
+          <option value="3">3 ช่อง</option>
+          <option value="2">2 ช่อง</option>
+          <option value="1">1 ช่อง</option>
+          <option value="0">ไม่มีช่อง</option>
+        </select>
         <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
           {Object.entries(SORTS).map(([key, v]) => (
             <option key={key} value={key}>เรียง: {v.label}</option>
@@ -208,7 +222,10 @@ export default async function EquipmentPage({
             {rows.map((it) => (
               <Link key={it.id} href={`/database/items/${it.id}`} className="itemcard">
                 <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />
-                <span className="itemcard__name">{it.name_en}</span>
+                <span className="itemcard__name">
+                  {it.name_en}
+                  {it.slots != null && it.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{it.slots}]</span>}
+                </span>
                 <span className="itemcard__meta">
                   {it.weapon_type ?? CATEGORY_LABELS[it.category ?? ''] ?? '—'}
                   {it.atk != null && it.atk > 0 ? ` · ATK ${it.atk}` : ''}

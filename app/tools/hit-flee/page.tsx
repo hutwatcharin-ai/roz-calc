@@ -13,8 +13,6 @@ import {
   fleeToCapDodge,
   hitChancePct,
   hitToNeverMiss,
-  mobFlee,
-  mobHit,
   playerFlee,
   playerHit,
 } from '@/lib/hit-flee';
@@ -46,7 +44,7 @@ export default async function HitFleePage({
   const { data: monsters, error } = filled
     ? await db
         .from('monsters')
-        .select('id, name_en, level, agi, dex, image_url, is_aggressive, atk_max')
+        .select('id, name_en, level, hit, flee, image_url, is_aggressive, atk_max')
         .gte('level', Math.max(1, lv - range))
         .lte('level', lv + range)
         .not('name_en', 'like', 'C_ %')
@@ -63,9 +61,7 @@ export default async function HitFleePage({
         lead="กรอกค่าตัวละคร แล้วดูเป็นเปอร์เซ็นต์: คุณตีมอนโดนแค่ไหน และมอนตีคุณโดนแค่ไหน"
         source={
           <>
-            <strong>ที่มา:</strong> สูตร Renewal ตรวจกับซอร์ส rAthena (HIT = 175+Lv+DEX+LUK/3 ·
-            FLEE = 100+Lv+AGI+LUK/5 · โอกาสโดน = 80+HIT−FLEE, ขั้นต่ำ 5% เพดาน 100%) —
-            ค่าที่ Gravity จูนเฉพาะเซิร์ฟอาจต่างจากนี้
+            <strong>ที่มา:</strong> HIT/FLEE ฝั่งคุณคิดจากสูตร Renewal (HIT = 175+Lv+DEX+LUK/3 · FLEE = 100+Lv+AGI+LUK/5) · HIT/FLEE ฝั่งมอนคือค่าจริงจากไฟล์เกม · โอกาสโดน = 80+HIT−FLEE (ขั้นต่ำ 5% เพดาน 100%)
           </>
         }
       />
@@ -133,8 +129,8 @@ export default async function HitFleePage({
             </thead>
             <tbody>
               {(monsters ?? []).map((m) => {
-                const flee = mobFlee(m.level, m.agi);
-                const hit = mobHit(m.level, m.dex);
+                const flee = (m.flee ?? null) as number | null;
+                const hit = (m.hit ?? null) as number | null;
                 const youHit = flee !== null ? hitChancePct(myHit, flee) : null;
                 const theyHit = hit !== null ? hitChancePct(hit, myFlee) : null;
                 return (
@@ -171,7 +167,7 @@ export default async function HitFleePage({
             </tbody>
           </table>
           <p className="source-note">
-            มอนที่ขึ้น — คือตัวที่ไม่มีค่า AGI/DEX ในข้อมูล (28 จาก 524 ตัว) · มอน Challenge ไม่รวมในตารางนี้
+            มอนที่ขึ้น — คือตัวที่ไม่มีค่า HIT/FLEE ในไฟล์เกม (ราว 34 จาก 524 ตัว) · มอน Challenge ไม่รวมในตารางนี้
           </p>
         </div>
       )}

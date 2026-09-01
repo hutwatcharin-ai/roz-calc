@@ -19,8 +19,11 @@ export function playerFlee(level: number, agi: number, luk: number): number {
   return 100 + level + agi + Math.floor(luk / 5);
 }
 
-// Monster stats can be unknown (null) -- 28 of 524 rows. Null in, null out:
-// inventing a FLEE for a monster we do not know would be a made-up safety claim.
+// DO NOT compute monster HIT/FLEE from level+stat for display: the monsters
+// table carries the REAL per-mob hit/flee straight from the game files
+// (Mummy: FLEE 293 where level+agi+100 gives 159 -- mob mode bonuses make the
+// base formula wrong per-monster). 490/524 rows have them; null stays null.
+// These helpers remain only for hypothetical math where no file value exists.
 export function mobFlee(level: number | null, agi: number | null): number | null {
   if (level == null || agi == null) return null;
   return 100 + level + agi;

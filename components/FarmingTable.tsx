@@ -8,7 +8,7 @@ import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
-import { hitChancePct, mobFlee } from '@/lib/hit-flee';
+import { hitChancePct } from '@/lib/hit-flee';
 
 interface FarmingRow {
   monster_id: number;
@@ -22,8 +22,7 @@ interface FarmingRow {
   is_aggressive: boolean | null;
   atk_max: number | null;
   spawn?: string;
-  agi?: number | null;
-  dex?: number | null;
+  flee?: number | null;
 }
 
 export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
@@ -45,9 +44,9 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
   const canHit = character && character.hit != null;
   function hitPctFor(row: FarmingRow): number | null {
     if (!character || character.hit == null) return null;
-    const flee = mobFlee(row.level, row.agi ?? null);
-    if (flee === null) return null;
-    return hitChancePct(character.hit, flee);
+    // Real per-mob flee from the game files, not level+agi+100.
+    if (row.flee == null) return null;
+    return hitChancePct(character.hit, row.flee);
   }
 
   function rateFor(row: FarmingRow) {
