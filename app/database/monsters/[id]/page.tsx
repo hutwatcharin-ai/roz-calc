@@ -337,9 +337,6 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                       )}
                     </tbody>
                   </table>
-                  <p className="source-note" style={{ marginTop: 6 }}>
-                    ค่าเป้าทั้งสองมาจาก midgardhub (คอลัมน์ Hit 100% / Flee 95%) — เป็นค่าฝั่งผู้เล่นที่วัดมาแล้ว ไม่ใช่สเตตัสของมอน
-                  </p>
                 </div>
               );
             })()}
