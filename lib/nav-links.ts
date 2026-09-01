@@ -47,6 +47,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/database/cash-shop', label: 'Cash Shop', icon: '/images/items/969.gif', ready: true },
     { href: '/database/quests', label: 'เควส', icon: '/images/items/714.gif', ready: true },
     { href: '/database/maps', label: 'แมพ', icon: '/images/items/601.gif', ready: true },
+    { href: '/database/world-map', label: 'แผนที่โลก', icon: '/images/items/602.gif', ready: true },
     { href: '/database/skills', label: 'สกิล', icon: '/images/items/7433.gif', ready: true },
   ],
   // Red Blood (element stone), Apple, Yggdrasil Leaf, Branch of Dead Tree,
