@@ -10,10 +10,14 @@ import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import { escapeLikePattern } from '@/lib/like-escape';
 
+// อัตราจริงจากหน้าเติมเงิน gnjoy TH (2 ก.ย. 2569): 1,000 KP = 32 บาท
+// ทุกแพ็คเป็นเส้นตรง (200,000 KP = 6,400 บาท) จึงคูณตรงได้เลย
+const THB_PER_KP = 32 / 1000;
+
 export const metadata = {
   title: 'ฐานข้อมูล Cash Shop',
   description:
-    'ไอเทม Cash Shop ทั้งหมดใน Ragnarok Zero Global พร้อมราคา KP เทียบเงินยูโร และเงื่อนไขจำกัดจำนวนซื้อ',
+    'ไอเทม Cash Shop ทั้งหมดใน Ragnarok Zero Global พร้อมราคา KP เทียบเงินบาท และเงื่อนไขจำกัดจำนวนซื้อ',
 };
 
 export const revalidate = 86400;
@@ -92,7 +96,7 @@ export default async function CashShopPage({
                   </span>
                   <span className="cashlist__price">
                     <b className="mono">{r.kp_price.toLocaleString('en-US')} KP</b>
-                    {r.eur_approx != null && <span className="mono">≈ €{Number(r.eur_approx).toFixed(2)}</span>}
+                    <span className="mono">≈ ฿{(r.kp_price * THB_PER_KP).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
                   </span>
                 </>
               );
@@ -112,7 +116,7 @@ export default async function CashShopPage({
 
       <p className="source-note" style={{ marginTop: 14 }}>
         <strong>ที่มา:</strong> รวบรวมจากรายการ Cash Shop สาธารณะ ณ 31 ส.ค. 2026 · KP คือเงินสดในเกม
-        ราคายูโรเป็นค่าประมาณจากอัตราแลก ณ วันเก็บข้อมูล · รูปไอเทมจาก Divine-Pride
+        ราคาบาทคิดจากอัตราเติมจริงของ gnjoy TH (1,000 KP = 32 บาท, 2 ก.ย. 2569) · รูปไอเทมจาก Divine-Pride
       </p>
     </main>
   );
