@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 const getMapSpawns = cache(async (code: string) => {
   return await supabaseBrowser()
     .from('monster_spawns')
-    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, atk_max)')
+    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, atk_max, hit_100, flee_95)')
     .eq('map_code', code);
 });
 
