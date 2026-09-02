@@ -51,7 +51,6 @@ export default function SiteFooter() {
             <ul>
               <li>ตัวเลขไหนยังไม่ยืนยัน จะเขียนกำกับไว้ตรงจุดนั้น</li>
               <li>ค่าที่คิดจากตัวละครเป็นเพดานบน — ไม่รวมเวลาเดินและรอมอนเกิด</li>
-              <li>เจอเลขไม่ตรงกับในเกม <a href="https://github.com/hutwatcharin-ai/roz-calc/issues" target="_blank" rel="noopener noreferrer">แจ้งได้เลย</a></li>
             </ul>
           </div>
 
@@ -75,7 +74,33 @@ export default function SiteFooter() {
               </li>
             </ul>
           </div>
+
+          {/* Split on purpose (user, 2 Sep): a bug report and an ad inquiry
+              are different audiences reading the same footer -- a would-be
+              advertiser landing on "แจ้งบั๊กที่ GitHub" reads as a hobby
+              project with no business contact, and quietly leaves. */}
+          <div>
+            <h2 className="sitefooter__h">ติดต่อ</h2>
+            <ul>
+              <li>
+                เจอข้อมูลผิด{' '}
+                <a href="https://github.com/hutwatcharin-ai/roz-calc/issues" target="_blank" rel="noopener noreferrer">
+                  แจ้งที่ GitHub Issues
+                </a>
+              </li>
+              <li>
+                <a
+                  className="sitefooter__adlink"
+                  href="mailto:kidkrob@gmail.com?subject=สอบถามลงโฆษณา%20rozerothai.com"
+                >
+                  ลงโฆษณา / ติดต่อธุรกิจ →
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <p className="sitefooter__bottom">© {new Date().getFullYear()} RO Zero Thai · rozerothai.com</p>
       </div>
     </footer>
   );

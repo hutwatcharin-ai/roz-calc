@@ -5,7 +5,7 @@ import { organizationJsonLd } from '@/lib/jsonld';
 export const metadata = {
   title: 'เกี่ยวกับเว็บนี้',
   description:
-    'RO Zero Thai คือฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย ทำโดยผู้เล่น — ที่มาของตัวเลข วิธีตรวจทาน และช่องทางแจ้งข้อมูลผิด',
+    'RO Zero Thai คือฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย ทำโดยผู้เล่น — ที่มาของตัวเลข วิธีตรวจทาน ช่องทางแจ้งข้อมูลผิด และติดต่อธุรกิจ',
 };
 
 // Static trust page (SEO audit High #6): who runs the site, how the numbers
@@ -37,13 +37,21 @@ export default function AboutPage() {
       </section>
 
       <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title">เจอข้อมูลผิด / อยากติดต่อ</h2>
+        <h2 className="section-title">เจอข้อมูลผิด</h2>
         <p style={{ marginTop: 8 }}>
           แจ้งได้ที่{' '}
           <a href="https://github.com/hutwatcharin-ai/roz-calc/issues" target="_blank" rel="noopener noreferrer">
             GitHub Issues ของโปรเจกต์
           </a>{' '}
           — บอกชื่อมอน/ไอเทมกับเลขที่เห็นในเกมมาด้วย จะได้ตามแก้ถูกตัว
+        </p>
+      </section>
+
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title">ลงโฆษณา / ติดต่อธุรกิจ</h2>
+        <p style={{ marginTop: 8 }}>
+          ทักมาได้ที่{' '}
+          <a href="mailto:kidkrob@gmail.com?subject=สอบถามลงโฆษณา%20rozerothai.com">kidkrob@gmail.com</a>
         </p>
       </section>
 

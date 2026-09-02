@@ -1199,6 +1199,29 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 .sitefooter a { color: var(--dim); text-decoration: none; border-bottom: 1px solid var(--hair); }
 .sitefooter a:hover { color: var(--text); border-bottom-color: var(--dim); }
 
+/* The one link in the footer meant for a different reader (an advertiser,
+   not a player) -- filled and yellow so it reads as a business contact, not
+   another source citation (user, 2 Sep). */
+.sitefooter__adlink {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  font: 600 13px/1.4 var(--font-sarabun), sans-serif;
+}
+.sitefooter__adlink:hover { color: var(--yellow-ink); background: var(--text); }
+
+.sitefooter__bottom {
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+  color: var(--faint);
+  font: 400 12.5px/1.5 var(--font-sarabun), sans-serif;
+}
+
 /* A keyboard shortcut hint is noise on a device with no keyboard, and it was
    the one thing pushing the search button past a 320px viewport. */
 @media (hover: none) and (pointer: coarse) {
