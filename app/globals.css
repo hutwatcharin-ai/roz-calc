@@ -728,6 +728,38 @@ a.qcard:hover { background: var(--panel-2); }
 }
 .chiplink:hover { color: var(--text); border-color: var(--cyan); }
 
+/* The patch chip needs to read as news, not as another database link sitting
+   in the same row (user, 2 Sep: "ทำให้แตกต่างโดดเด่นหน่อย" -- an outline in
+   the accent colour still matched every other pill's shape and weight). Filled
+   --yellow reuses the site's one reserved-for-signal colour instead of adding
+   a second accent, and the dot's motion is what a static border can't do:
+   catch the eye of someone who has seen this row before and stopped reading
+   it. prefers-reduced-motion turns the dot solid, motion is decoration here. */
+.chiplink--patch {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--yellow-ink);
+  font-weight: 700;
+  padding-inline-start: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.chiplink--patch:hover { color: var(--yellow-ink); border-color: var(--text); background: var(--text); }
+.chiplink--patch .chiplink__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--yellow-ink);
+  animation: chiplink-pulse 1.8s ease-in-out infinite;
+}
+@keyframes chiplink-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.75); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chiplink--patch .chiplink__dot { animation: none; }
+}
+
 /* Cash-shop top-up basket. Row wrapper holds the link row plus the +/- basket
    controls beside it (a button cannot nest inside the row's <Link>). The bar
    sticks to the viewport bottom while anything is in the basket. */
