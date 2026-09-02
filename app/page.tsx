@@ -8,6 +8,7 @@ import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import JsonLd from '@/components/JsonLd';
 import { websiteJsonLd } from '@/lib/jsonld';
 import { timeAgoTh } from '@/lib/time-ago';
+import { getLastUpdated } from '@/lib/last-updated';
 
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
@@ -60,20 +61,6 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
   }));
 }
 
-// Newest updated_at across the three maintained tables (added 2 Sep). A real
-// freshness signal, not a claim -- if the column stops being maintained this
-// stops advancing too, which is the point.
-async function getLastUpdated(): Promise<string | null> {
-  const db = supabaseBrowser();
-  const [m, i, q] = await Promise.all([
-    db.from('monsters').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
-    db.from('items').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
-    db.from('quests').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
-  ]);
-  const dates = [m.data?.updated_at, i.data?.updated_at, q.data?.updated_at].filter((d): d is string => Boolean(d));
-  if (dates.length === 0) return null;
-  return dates.sort().at(-1) ?? null;
-}
 
 export default async function HomePage({
   searchParams,

@@ -26,14 +26,56 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title">ตัวเลขตรวจทานยังไง</h2>
+      {/* Moved here from the footer (user, 2 Sep) -- linked as /about#sources
+          from the footer's "ตัวเลขมาจากไหน". Keep the per-source lines
+          honest: each names what that source actually contributed. */}
+      <section className="card" id="sources" style={{ marginTop: 14, scrollMarginTop: 80 }}>
+        <h2 className="section-title">ตัวเลขมาจากไหน</h2>
         <p style={{ marginTop: 8 }}>
-          ข้อมูลหลักมาจากชุดข้อมูลสาธารณะของไคลเอนต์เกม แล้วตรวจทานไขว้กับแหล่งอื่นเป็นรายเรื่อง:
-          ค่าสถานะมอนสเตอร์ครบ 524 ตัวเทียบกับ ragnarokzero.net · ตารางธาตุทั้ง 4
-          ระดับเทียบกับซอร์สโค้ด rAthena · ราคาซื้อ-ขายและตารางตีบวกเทียบกับ rozerodb.com
-          — ตัวเลขไหนยังไม่ยืนยัน จะเขียนกำกับไว้ตรงจุดที่ตัวเลขโชว์เสมอ ไม่ใส่เลขมั่ว
+          ข้อมูลหลักมาจากชุดข้อมูลสาธารณะของไคลเอนต์เกม แล้วตรวจทานไขว้กับแหล่งอื่นเป็นรายเรื่อง
         </p>
+        <dl className="sourcelist">
+          <div>
+            <dt>คู่มือเกมทางการ</dt>
+            <dd>ตารางธาตุ ตารางขนาด อัตราตีบวก EXP ต่อเลเวล</dd>
+          </div>
+          <div>
+            <dt>ข้อมูลมอนสเตอร์และไอเทม</dt>
+            <dd>ชุดข้อมูลสาธารณะจากไคลเอนต์เกม</dd>
+          </div>
+          <div>
+            <dt>
+              <a href="https://rozerodb.com" target="_blank" rel="noopener noreferrer">rozerodb.com</a>
+            </dt>
+            <dd>ไอเทมประมาณ 1,200 ชิ้นที่ชุดข้อมูลของเราไม่มี ราคาขายของสวมใส่ และใช้ตรวจทานตารางตีบวกกับตารางขนาด</dd>
+          </div>
+          <div>
+            <dt>
+              <a href="https://ragnarokzero.net" target="_blank" rel="noopener noreferrer">ragnarokzero.net</a>
+            </dt>
+            <dd>ใช้ตรวจทานค่าสถานะมอนสเตอร์ครบทั้ง 524 ตัว</dd>
+          </div>
+          <div>
+            <dt>
+              <a href="https://midgardhub.com" target="_blank" rel="noopener noreferrer">midgardhub.com</a>
+            </dt>
+            <dd>รายการดรอปชนิดไม่ทราบอัตรา 410 แถวที่ต้นทางอื่นไม่มี และค่า HIT/FLEE เป้าหมายต่อมอน</dd>
+          </div>
+          <div>
+            <dt>
+              <a href="https://github.com/rathena/rathena" target="_blank" rel="noopener noreferrer">rAthena</a>
+            </dt>
+            <dd>ใช้ตรวจทานตารางธาตุทั้ง 4 ระดับ</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title">ที่ควรรู้ก่อนเชื่อ</h2>
+        <ul className="sourcelist__caveats">
+          <li>ตัวเลขไหนยังไม่ยืนยัน จะเขียนกำกับไว้ตรงจุดที่ตัวเลขโชว์เสมอ ไม่ใส่เลขมั่ว</li>
+          <li>ค่าที่คิดจากตัวละครเป็นเพดานบน — ไม่รวมเวลาเดินและรอมอนเกิด</li>
+        </ul>
       </section>
 
       <section className="card" style={{ marginTop: 14 }}>
