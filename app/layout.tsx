@@ -6,6 +6,7 @@ import { CharacterContextProvider } from '@/components/CharacterContextProvider'
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
 import { Sarabun, Chakra_Petch, IBM_Plex_Mono } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { SITE_URL } from '@/lib/site';
 
 // Self-hosted via next/font (SEO audit High #5): kills the render-blocking
@@ -59,6 +60,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SiteFooter />
           </FarmPlanProvider>
         </CharacterContextProvider>
+        {/* Only in production: a dev server hitting GA4 would mix local
+            traffic into the real property's numbers. */}
+        {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
