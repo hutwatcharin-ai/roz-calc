@@ -59,7 +59,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
     { href: '/tools/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
-    { href: '/tools/hit-flee', label: 'ตีมอนโดนไหม', icon: '/images/items/1750.gif', ready: true },
+    { href: '/tools/hit-flee', label: 'คำนวณ Hit/Flee', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
     { href: '/tools/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/tools/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },

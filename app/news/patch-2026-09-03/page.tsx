@@ -102,7 +102,7 @@ export default function PatchNotePage() {
         <ul style={{ marginTop: 8, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
           <li>เลเวลตัน 50 อยู่ — ดูว่าช่วง 46–60 ตีอะไรคุ้มที่ <Link href="/tools/farm-guide">จุดฟาร์มแนะนำ</Link> แล้วเตรียมของไว้</li>
           <li>จะเปลี่ยนอาชีพ 2 — เช็คว่าอุปกรณ์ที่ถืออยู่ยังใส่ได้ไหมที่ <Link href="/database/equipment">ฐานข้อมูลอุปกรณ์</Link> (กรองตามอาชีพได้)</li>
-          <li>ดันเจี้ยนใหม่มีมอนสเตอร์ใหม่ — กรอก HIT/FLEE ที่แถบตัวละครไว้ พอข้อมูลมอนเข้าเว็บ <Link href="/tools/hit-flee">ตีมอนโดนไหม</Link> จะคิดให้ทันที</li>
+          <li>ดันเจี้ยนใหม่มีมอนสเตอร์ใหม่ — กรอก HIT/FLEE ที่แถบตัวละครไว้ พอข้อมูลมอนเข้าเว็บ <Link href="/tools/hit-flee">คำนวณ Hit/Flee</Link> จะคิดให้ทันที</li>
         </ul>
       </section>
 
