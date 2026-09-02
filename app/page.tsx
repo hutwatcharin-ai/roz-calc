@@ -41,7 +41,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
   const [{ data: spawns }, { data: accStats }] = await Promise.all([
     db.from('monster_spawns').select('monster_id, map_display_name').in('monster_id', monsterIds),
     // midgardhub's hit_100 threshold (player HIT for 100%) powers the hit-chance column.
-    db.from('monsters').select('id, hit_100:hit').in('id', monsterIds),
+    db.from('monsters').select('id, hit_100').in('id', monsterIds),
   ]);
 
   const spawnByMonster = new Map<number, string>();

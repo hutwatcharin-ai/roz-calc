@@ -75,7 +75,7 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
     db.from('monster_spawns').select('monster_id, map_code').order('monster_id').range(from, to),
   );
   const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null; flee_95: number | null }>((from, to) =>
-    db.from('monsters').select('id, is_aggressive, flee_95:flee').order('id').range(from, to),
+    db.from('monsters').select('id, is_aggressive, flee_95').order('id').range(from, to),
   );
 
   // A failed skill or spawn read must not render as "no skills, no maps" -- the

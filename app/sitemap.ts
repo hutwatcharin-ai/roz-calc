@@ -32,14 +32,23 @@ export const STATIC_PATHS: string[] = [
 // hundreds of URLs from the sitemap and nothing would look wrong.
 const PAGE = 1000;
 
-async function allIds(table: 'monsters' | 'items'): Promise<number[]> {
+interface IdRow {
+  id: number;
+  updated_at: string;
+}
+
+// Real per-row timestamps (added 2026-09-02) -- never a literal date. A
+// hardcoded lastmod would lie the moment a value it describes stops being
+// true, so nothing here is written until the column exists and is
+// maintained by the actual write path.
+async function allIds(table: 'monsters' | 'items'): Promise<IdRow[]> {
   const db = supabaseBrowser();
-  const ids: number[] = [];
+  const rows: IdRow[] = [];
 
   for (let from = 0; ; from += PAGE) {
     const { data, error } = await db
       .from(table)
-      .select('id')
+      .select('id, updated_at')
       .order('id')
       .range(from, from + PAGE - 1);
 
@@ -52,11 +61,11 @@ async function allIds(table: 'monsters' | 'items'): Promise<number[]> {
     }
     if (!data || data.length === 0) break;
 
-    ids.push(...data.map((row) => row.id));
+    rows.push(...data);
     if (data.length < PAGE) break;
   }
 
-  return ids;
+  return rows;
 }
 
 // map_stats has one row per map that actually has a detail page -- a map
@@ -90,10 +99,17 @@ async function allMapCodes(): Promise<string[]> {
 
 // Quest HUB pages only -- the 766 quests deliberately do not get their own
 // URLs (spec 2026-08-31-quests: anchors on the hub page, no thin pages).
-async function allQuestTowns(): Promise<string[]> {
-  const { data, error } = await supabaseBrowser().from('quests').select('town_key').order('town_key');
+// lastmod per hub is the newest updated_at among the quests folded into it --
+// a hub page's content changes the day any quest in it does.
+async function allQuestTowns(): Promise<Map<string, string>> {
+  const { data, error } = await supabaseBrowser().from('quests').select('town_key, updated_at').order('town_key');
   if (error) throw new Error(`sitemap: quests query failed: ${error.message}`);
-  return [...new Set((data ?? []).map((row) => row.town_key))];
+  const latest = new Map<string, string>();
+  for (const row of data ?? []) {
+    const cur = latest.get(row.town_key);
+    if (!cur || row.updated_at > cur) latest.set(row.town_key, row.updated_at);
+  }
+  return latest;
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -105,9 +121,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   return [
-    ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}`, })),
-    ...monsterIds.map((id) => ({ url: `${SITE_URL}/database/monsters/${id}`, })),
-    ...itemIds.map((id) => ({ url: `${SITE_URL}/database/items/${id}`, })),
+    ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
+    ...monsterIds.map((row) => ({ url: `${SITE_URL}/database/monsters/${row.id}`, lastModified: row.updated_at })),
+    ...itemIds.map((row) => ({ url: `${SITE_URL}/database/items/${row.id}`, lastModified: row.updated_at })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but
@@ -115,8 +131,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...mapCodes.map((code) => ({
       url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
     })),
-    ...questTowns.map((town) => ({
+    ...[...questTowns.entries()].map(([town, lastModified]) => ({
       url: `${SITE_URL}/database/quests/${encodeURIComponent(town)}`,
+      lastModified,
     })),
   ];
 }

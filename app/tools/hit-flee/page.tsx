@@ -52,7 +52,7 @@ export default async function HitFleePage({
   const { data: monsters, error } = filled
     ? await db
         .from('monsters')
-        .select('id, name_en, level, hit_100:hit, flee_95:flee, image_url, is_aggressive, atk_max')
+        .select('id, name_en, level, hit_100, flee_95, image_url, is_aggressive, atk_max')
         .gte('level', Math.max(1, lv - range))
         .lte('level', lv + range)
         .not('name_en', 'like', 'C_ %')
