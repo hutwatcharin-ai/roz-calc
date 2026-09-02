@@ -113,7 +113,7 @@ export default async function HomePage({
               <input className="mono" type="number" name="level" defaultValue={searched ? level : 50} inputMode="numeric" style={{ width: 80 }} />
             </label>
             <label>
-              ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 56 }} />
+              ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 72 }} />
             </label>
             <button type="submit" className="btn">ค้นหา</button>
           </form>
@@ -128,13 +128,20 @@ export default async function HomePage({
           </form>
         </div>
 
-        <Link href="/database/equipment" className="qcard qcard--pink">
+        {/* Only three accent colours exist in the palette (yellow/cyan/pink --
+            see the "Neon Arcade" note above), so one of these four cards must
+            repeat one. Grouped by kind rather than left as a coin flip: card
+            1 (yellow) is the primary action; cards 2 and 3 share cyan because
+            both are "look something up" tools (drop → monster, item → gear);
+            card 4 gets its own colour (pink) because it's a different kind of
+            action (leaving a bot unattended), not another lookup. */}
+        <Link href="/database/equipment" className="qcard qcard--cyan">
           <strong>ของชิ้นนี้ดีไหม ใส่ได้ไหม</strong>
           <span>อุปกรณ์กว่า 1,800 ชิ้น กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ</span>
           <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
         </Link>
 
-        <Link href="/tools/afk-finder" className="qcard qcard--cyan">
+        <Link href="/tools/afk-finder" className="qcard qcard--pink">
           <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
           <span>มอนที่ไม่โจมตีก่อนและฆ่าได้ในหมัดเดียว พร้อมเตือนสกิลอันตราย</span>
           <em className="qcard__go">หาจุด AFK →</em>
