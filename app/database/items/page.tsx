@@ -1,5 +1,7 @@
 // app/database/items/page.tsx
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
+import { itemListJsonLd } from '@/lib/jsonld';
 import { redirect } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
@@ -101,6 +103,15 @@ export default async function ItemListPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      {items && items.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd({
+            path: '/database/items',
+            rows: items.map((i) => ({ id: i.id, name: i.name_en })),
+            detailPath: (id) => `/database/items/${id}`,
+          })}
+        />
+      )}
       <PageHeader title="ฐานข้อมูลไอเทม Ragnarok Zero" />
       <RecentlyViewed />
       <FilterState

@@ -1,5 +1,7 @@
 // app/database/equipment/page.tsx
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
+import { itemListJsonLd } from '@/lib/jsonld';
 import EquipCategoryType from '@/components/EquipCategoryType';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
@@ -149,6 +151,15 @@ export default async function EquipmentPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      {rows.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd({
+            path: '/database/equipment',
+            rows: rows.map((r) => ({ id: r.id, name: r.name_en })),
+            detailPath: (id) => `/database/items/${id}`,
+          })}
+        />
+      )}
       <PageHeader title="ฐานข้อมูลอุปกรณ์ Ragnarok Zero" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no equipment", which

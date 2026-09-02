@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
+import { organizationJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
   title: 'เกี่ยวกับเว็บนี้',
@@ -12,6 +14,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32, maxWidth: 820 }}>
+      <JsonLd data={organizationJsonLd()} />
       <h1 className="pagehead__title">เกี่ยวกับ RO Zero Thai</h1>
 
       <section className="card" style={{ marginTop: 20 }}>

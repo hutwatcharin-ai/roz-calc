@@ -14,7 +14,8 @@
     "verify:refine": "tsx scripts/compare-refine-rates.ts",
     "verify:tables": "tsx scripts/compare-rozerodb-tables.ts",
     "verify:monsters": "tsx scripts/compare-monster-stats.ts",
-    "verify": "npm run verify:elements && npm run verify:refine && npm run verify:tables"
+    "verify": "npm run verify:elements && npm run verify:refine && npm run verify:tables",
+    "indexnow": "tsx scripts/ping-indexnow.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

@@ -24,6 +24,38 @@ export function websiteJsonLd() {
   };
 }
 
+export function organizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'RO Zero Thai',
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}/icon.png`,
+    // A fan-made community project, not a company -- no address/phone/social
+    // profile to claim, and none invented. sameAs omitted until one is real.
+  };
+}
+
+/** ItemList for a paginated list page -- position numbers the current page's
+ *  rows only (they are display order, not a claim about the whole catalogue). */
+export function itemListJsonLd(opts: {
+  path: string;
+  rows: { id: number | string; name: string }[];
+  detailPath: (id: number | string) => string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    url: `${SITE_URL}${opts.path}`,
+    itemListElement: opts.rows.map((r, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: r.name,
+      url: `${SITE_URL}${opts.detailPath(r.id)}`,
+    })),
+  };
+}
+
 export interface Crumb {
   name: string;
   path: string;

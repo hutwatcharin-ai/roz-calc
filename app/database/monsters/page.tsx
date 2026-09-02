@@ -1,5 +1,7 @@
 // app/database/monsters/page.tsx
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
+import { itemListJsonLd } from '@/lib/jsonld';
 import { supabaseBrowser } from '@/lib/supabase';
 import Pagination from '@/components/Pagination';
 import PageHeader from '@/components/PageHeader';
@@ -91,6 +93,15 @@ export default async function MonsterListPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      {monsters && monsters.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd({
+            path: '/database/monsters',
+            rows: monsters.map((m) => ({ id: m.id, name: m.name_en })),
+            detailPath: (id) => `/database/monsters/${id}`,
+          })}
+        />
+      )}
       <PageHeader title="ฐานข้อมูลมอนสเตอร์ Ragnarok Zero" />
       <RecentlyViewed />
 
