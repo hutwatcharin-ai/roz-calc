@@ -7,6 +7,7 @@ import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import JsonLd from '@/components/JsonLd';
 import { websiteJsonLd } from '@/lib/jsonld';
+import { timeAgoTh } from '@/lib/time-ago';
 
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
@@ -59,6 +60,21 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
   }));
 }
 
+// Newest updated_at across the three maintained tables (added 2 Sep). A real
+// freshness signal, not a claim -- if the column stops being maintained this
+// stops advancing too, which is the point.
+async function getLastUpdated(): Promise<string | null> {
+  const db = supabaseBrowser();
+  const [m, i, q] = await Promise.all([
+    db.from('monsters').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
+    db.from('items').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
+    db.from('quests').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
+  ]);
+  const dates = [m.data?.updated_at, i.data?.updated_at, q.data?.updated_at].filter((d): d is string => Boolean(d));
+  if (dates.length === 0) return null;
+  return dates.sort().at(-1) ?? null;
+}
+
 export default async function HomePage({
   searchParams,
 }: {
@@ -74,9 +90,10 @@ export default async function HomePage({
   const range = Number(searchParams.range ?? 10);
   const showC = searchParams.c === '1';
 
-  const [rows, stats] = await Promise.all([
+  const [rows, stats, lastUpdated] = await Promise.all([
     searched ? getFarmingRows(Math.max(1, level - range), level + range, showC) : Promise.resolve([]),
     getSiteStats(),
+    getLastUpdated(),
   ]);
 
   const resultsHref = (show: boolean) =>
@@ -151,12 +168,13 @@ export default async function HomePage({
 
       <RecentlyViewed />
       <SiteStats stats={stats} />
-      {/* One trust sentence under the scale numbers (SXO audit): the deep
-          pages already earn trust with sourced numbers — say so up front. */}
-      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        ตัวเลขทุกตัวมีที่มาและตรวจทานไขว้กับ ragnarokzero.net, rozerodb และ rAthena —{' '}
-        <Link href="/about">อ่านวิธีตรวจทานและช่องทางแจ้งข้อมูลผิด</Link>
-      </p>
+      {/* Freshness badge, not a trust claim (user, 2 Sep): computed live from
+          updated_at, so it can only ever say something true. */}
+      {lastUpdated && (
+        <p className="muted" style={{ marginTop: 8 }}>
+          ข้อมูลอัปเดตล่าสุด {timeAgoTh(lastUpdated)}
+        </p>
+      )}
 
       {/* Explore row: the sections the four cards do not cover. Chips, not
           cards -- this row must stay quieter than the questions above it. */}
