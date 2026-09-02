@@ -123,6 +123,10 @@ async function starterList() {
   const { data: items, error } = await db
     .from('items')
     .select('id, name_en, name_th, sell_price, icon_url, slots')
+    // Equipment excluded (user call, 2 Sep): equipment NPC-sell prices swing
+    // with the market/patches and several were plain wrong before the
+    // rozerodb sync — the starter list stays on goods with stable prices.
+    .not('category', 'in', '("Armor","Weapon","Costume Equipment")')
     .gt('sell_price', 0)
     .order('sell_price', { ascending: false })
     .limit(60);
