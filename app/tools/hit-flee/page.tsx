@@ -5,17 +5,11 @@
 // monster in your level band with the chance you hit it and the chance it
 // hits you. GET params, not the character bar: this page must work as a
 // shareable link ("ดูตารางกู" in a game chat) with no setup.
-import Link from 'next/link';
 import HitFleePrefill from '@/components/HitFleePrefill';
+import HitFleeTable, { type HitFleeRow } from '@/components/HitFleeTable';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
-import AggroBadge from '@/components/AggroBadge';
-import {
-  hitChanceVsMob,
-  mobHitChance,
-  playerFlee,
-  playerHit,
-} from '@/lib/hit-flee';
+import { playerFlee, playerHit } from '@/lib/hit-flee';
 
 export const metadata = {
   title: 'คำนวณ HIT/FLEE Ragnarok Zero',
@@ -120,56 +114,7 @@ export default async function HitFleePage({
 
       {filled && (monsters ?? []).length > 0 && myHit !== null && myFlee !== null && (
         <div className="card" style={{ marginTop: 16, overflowX: 'auto' }}>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>มอนสเตอร์</th>
-                <th className="num">Lv</th>
-                <th className="num">คุณตีมันโดน</th>
-                <th className="num">มันตีคุณโดน</th>
-                <th className="num">โดน 100% ต้อง HIT</th>
-                <th className="num">หลบตัน 95% ต้อง FLEE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(monsters ?? []).map((m) => {
-                const hit100 = (m.hit_100 ?? null) as number | null;
-                const flee95 = (m.flee_95 ?? null) as number | null;
-                const youHit = hit100 !== null ? hitChanceVsMob(myHit, hit100) : null;
-                const theyHit = flee95 !== null ? mobHitChance(flee95, myFlee) : null;
-                return (
-                  <tr key={m.id}>
-                    <td data-label="">
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                        {m.image_url && (
-                          <img loading="lazy" decoding="async" src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                        )}
-                        <Link href={`/database/monsters/${m.id}`}>{m.name_en}</Link>
-                        <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
-                      </span>
-                    </td>
-                    <td data-label="Lv" className="num">{m.level}</td>
-                    <td data-label="คุณตีมันโดน" className="num">
-                      {youHit === null ? '—' : (
-                        <span style={{ color: youHit === 100 ? 'var(--status-safe)' : youHit < 70 ? 'var(--status-danger)' : 'var(--yellow)' }}>
-                          {youHit}%
-                        </span>
-                      )}
-                    </td>
-                    <td data-label="มันตีคุณโดน" className="num">
-                      {theyHit === null ? '—' : (
-                        <span style={{ color: theyHit <= 5 ? 'var(--status-safe)' : theyHit >= 50 ? 'var(--status-danger)' : undefined }}>
-                          {theyHit}%
-                        </span>
-                      )}
-                    </td>
-                    <td data-label="โดน 100% ต้อง HIT" className="num">{hit100 === null ? '—' : hit100}</td>
-                    <td data-label="หลบตัน 95% ต้อง FLEE" className="num">{flee95 === null ? '—' : flee95}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <HitFleeTable monsters={(monsters ?? []) as HitFleeRow[]} myHit={myHit} myFlee={myFlee} />
           <p className="source-note">
             มอนที่ขึ้น — คือตัวที่ไม่มีค่า HIT/FLEE ในไฟล์เกม (ราว 34 จาก 524 ตัว) · มอน Challenge ไม่รวมในตารางนี้
           </p>
