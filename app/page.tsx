@@ -95,7 +95,7 @@ export default async function HomePage({
             to this same page, so the regular player still searches from "/"
             in one step, exactly like before the redesign. */}
         <div className="qcard qcard--yellow">
-          <strong>เลเวลตันแล้ว ตีอะไรดี</strong>
+          <strong>เลเวลนี้ตีอะไรดี</strong>
           <span>จัดอันดับมอนคุ้มสุดในช่วงเลเวล พร้อมเตือนตัวที่โจมตีก่อน</span>
           <form className="qcard__form" action="/#results">
             {showC && <input type="hidden" name="c" value="1" />}
