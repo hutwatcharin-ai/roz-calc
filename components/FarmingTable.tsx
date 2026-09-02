@@ -72,6 +72,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
             <th><button type="button" className="thsort" onClick={() => toggle('name', false)}>มอนสเตอร์ {indicator('name')}</button></th>
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('level')}>Lv {indicator('level')}</button></th>
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('hp')}>HP {indicator('hp')}</button></th>
+            <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp')}>EXP {indicator('exp')}</button></th>
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp_per_hp')}>EXP/HP {indicator('exp_per_hp')}</button></th>
             <th className="num"><button type="button" className="thsort" onClick={() => toggle('zeny')}>Zeny/ตัว {indicator('zeny')}</button></th>
             {personal && canHit && <th className="num">ตีโดน</th>}
@@ -87,6 +88,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
             key === 'name' ? r.name_en
             : key === 'level' ? r.level
             : key === 'hp' ? r.hp
+            : key === 'exp' ? r.base_exp ?? 0
             : key === 'exp_per_hp' ? r.exp_per_hp
             : key === 'zeny' ? r.avg_zeny_per_kill
             : null,
@@ -114,6 +116,9 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                 </td>
                 <td data-label="Lv" className="num">{row.level}</td>
                 <td data-label="HP" className="num">{row.hp.toLocaleString()}</td>
+                {/* Base EXP per kill (user, 2 Sep): the ratio alone hides
+                    whether a 5.2 comes from 300 EXP or 18,000. */}
+                <td data-label="EXP" className="num">{row.base_exp == null ? '—' : row.base_exp.toLocaleString()}</td>
                 <td data-label="EXP/HP" className="num" style={{ color: 'var(--yellow)' }}>{row.exp_per_hp}</td>
                 <td data-label="Zeny/ตัว" className="num">{row.avg_zeny_per_kill.toLocaleString()}</td>
                 {personal && canHit && (
