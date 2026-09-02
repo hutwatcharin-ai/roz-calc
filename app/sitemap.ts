@@ -21,10 +21,21 @@ export const dynamic = 'force-dynamic';
 // kind of gap nothing complains about. The nav tables are already checked
 // against the filesystem by lib/nav-links.test.ts, so deriving from them means
 // a route can only reach the sitemap if its page file exists.
+// News pages are not nav entries, so they are listed here by hand. One line
+// per page, added the day it ships -- the same "route exists" check the nav
+// tables get from lib/nav-links.test.ts does not cover these, so keep it short.
+export const NEWS_PATHS: string[] = ['/news/patch-2026-09-03'];
+
+// Static routes that live outside the nav tables (footer-only pages, news).
+// Exported so sitemap.test.ts can assert STATIC_PATHS is exactly nav + these
+// and nothing else has crept in.
+export const EXTRA_STATIC_PATHS: string[] = ['/about', ...NEWS_PATHS];
+
 export const STATIC_PATHS: string[] = [
   ...new Set([...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools]
     .filter((link) => link.ready)
     .map((link) => link.href)),
+  ...EXTRA_STATIC_PATHS,
 ];
 
 // Supabase caps a single select at 1,000 rows and does not say so when it

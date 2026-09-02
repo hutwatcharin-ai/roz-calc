@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { STATIC_PATHS } from './sitemap';
+import { EXTRA_STATIC_PATHS, STATIC_PATHS } from './sitemap';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 
 function pageFileFor(href: string): string {
@@ -9,16 +9,26 @@ function pageFileFor(href: string): string {
 }
 
 describe('sitemap static paths', () => {
-  it('covers every route the nav offers, with nothing left behind', () => {
+  it('covers every route the nav offers plus the hand-listed extras, nothing else', () => {
     // The hand-written list this replaced went stale the day three tools pages
     // shipped: live, linked from the nav, absent from the sitemap, and nothing
-    // anywhere complained.
+    // anywhere complained. Pages outside the nav (footer-only, news) are the
+    // one hand-kept list left, and it is asserted here so a stray path cannot
+    // sneak in without showing up in a diff of EXTRA_STATIC_PATHS.
     const navHrefs = new Set(
       [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools]
         .filter((link) => link.ready)
         .map((link) => link.href),
     );
+    for (const extra of EXTRA_STATIC_PATHS) navHrefs.add(extra);
     expect(new Set(STATIC_PATHS)).toEqual(navHrefs);
+  });
+
+  it('keeps the extras out of the nav (or they belong in nav-links, not here)', () => {
+    const navHrefs = new Set(
+      [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools].map((link) => link.href),
+    );
+    for (const extra of EXTRA_STATIC_PATHS) expect(navHrefs.has(extra)).toBe(false);
   });
 
   it('lists each route once, however many nav rows point at it', () => {

@@ -4,6 +4,12 @@
 
 ## 1–2 ก.ย. 2026 — รอบใหญ่: โครงหน้า, hit/flee, แปลไทย, NPC
 
+**2 ก.ย. (บ่าย) — เตรียมแพทช์ 3 ก.ย. + ปิดงาน SEO ฝั่ง user**
+- หน้า `/news/patch-2026-09-03` สรุปประกาศปิดปรับปรุงเป็นไทย (เวลาไทย 07:00–11:15, cap 60/60, 2nd Job, Episode 1-2, Orc Underground/Comodo Luanda/Memorial ×2, Raid equipment) + Article JSON-LD + ชิปเหลืองบน explore row หน้าแรก (เอาออกหลัง ~1 สัปดาห์) · sitemap มี `EXTRA_STATIC_PATHS` (/about + news) และเทสต์ล็อกไว้
+- **runbook พรุ่งนี้: `docs/PATCH-2026-09-03.md`** (re-crawl rozerodb → import --dry → import → เควสใหม่+แปล → equipment pipeline → cash shop → IndexNow → อัปเดตหน้าแพทช์) · 2nd Job รองรับอยู่แล้วใน `lib/zero-jobs.ts`
+- ฝั่ง user เสร็จครบ 6 ข้อ: GSC verify+sitemap ✓ · CF Cache Rule `cache-html` (ยกเว้น `_rsc`) ✓ · Always Use HTTPS 301 ✓ · Bot Fight ปิดอยู่แล้ว + AI bot policy Allow ✓ · Supabase PAT ใหม่ (scope roz-calc DB rw, 7 วัน) → rename `hit_100/flee_95` จริง + `updated_at` 3 ตาราง + lastmod ใน sitemap ✓ · โดเมนผิดปิด auto-renew ✓
+- SEO ก้อนโค้ด: IndexNow key + `npm run indexnow` (ยิงแล้ว 4,908 URL) · ItemList JSON-LD 3 หน้า list · Organization บน /about · footer แยกคอลัมน์ติดต่อ (บั๊ก→GitHub / โฆษณา→`kidkrob@gmail.com`) + copyright · หน้าแรก: badge "ข้อมูลอัปเดตล่าสุด X ที่แล้ว" จาก updated_at แทนประโยค trust · charbar กรอก ASPD แทนครั้ง/วิ (50/(200−ASPD)) · เมนู tools เรียงตามงาน + "ตีมอนโดนไหม/ตีมอนด้วยอะไรดี" · positioning หน้าแรกเป็น "ฐานข้อมูล…ภาษาไทย" (H1/title/og)
+
 **2 ก.ย. (ดึก) — feature รัว**
 - Cash Shop: ราคาบาทจากอัตราเติมจริง gnjoy TH (1,000 KP = 32฿ เส้นตรง, `THB_PER_KP` ใน lib/cash-shop-analysis) · ฿/วัน + ป้าย "คุ้มกว่าแบบสั้น X%/วัน" คู่ 7/30 วัน 6 คู่ · ชิปหมวด 6 หมวด (rule-based) + sort คุ้มสุดต่อวัน · ตะกร้าเติมเงิน (components/CashPlan, localStorage `roz-calc:cash-plan`, topUpPlan บอกแพ็คที่ต้องกด)
 - เควส UX (จาก flow review ใน artifact): หน้ารวมเรียงตามเส้นทางผู้เล่น (`hubOrder`) + เปลี่ยนชื่อกลุ่ม "(ไม่ระบุเมือง)" + ตัวอย่างชื่อเควสบนการ์ด · หน้าเมืองจัดกลุ่มสายเควสเป็นขั้น 1→2→3 ป้าย "เริ่มสายที่นี่" (`lib/quest-chains`)

@@ -36,6 +36,30 @@ export function organizationJsonLd() {
   };
 }
 
+/** News/patch-note summary page. Article (not NewsArticle: we are a
+ *  secondary source summarizing an official notice, not the publisher). */
+export function articleJsonLd(opts: {
+  path: string;
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: `${SITE_URL}${opts.path}`,
+    headline: opts.headline,
+    description: opts.description,
+    inLanguage: 'th',
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
+    author: { '@type': 'Organization', name: 'RO Zero Thai', url: `${SITE_URL}/about` },
+    publisher: { '@type': 'Organization', name: 'RO Zero Thai', url: `${SITE_URL}/`, logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon.png` } },
+    image: `${SITE_URL}/og-default.jpg`,
+  };
+}
+
 /** ItemList for a paginated list page -- position numbers the current page's
  *  rows only (they are display order, not a claim about the whole catalogue). */
 export function itemListJsonLd(opts: {

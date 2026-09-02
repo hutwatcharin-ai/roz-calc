@@ -181,6 +181,9 @@ export default async function HomePage({
       <div className="explorerow">
         {/* No counts here: the live numbers sit in SiteStats right above, and
             hardcoded copies drift the day the data changes. */}
+        {/* Time-boxed: the patch chip leads while the patch is news, then
+            drops back out of the row (see docs/PATCH-2026-09-03.md). */}
+        <Link href="/news/patch-2026-09-03" className="chiplink" style={{ borderColor: 'var(--yellow)', color: 'var(--yellow)' }}>แพทช์ 3 ก.ย. — เลเวล 60 / อาชีพ 2</Link>
         <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>
