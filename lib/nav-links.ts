@@ -52,15 +52,18 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   ],
   // Red Blood (element stone), Apple, Yggdrasil Leaf, Branch of Dead Tree,
   // Elunium, Knife, Yggdrasil Berry.
+  // Ordered by the player's task, not build order (user, 2 Sep): find a spot
+  // to farm -> fight the monster -> reference tables -> extras. "มอน" in the
+  // two fight tools keeps them from reading as refine (ตีบวก) siblings.
   tools: [
     { href: '/tools/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
-    { href: '/tools/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
-    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
+    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
+    { href: '/tools/hit-flee', label: 'ตีมอนโดนไหม', icon: '/images/items/1750.gif', ready: true },
+    { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
+    { href: '/tools/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/tools/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
-    { href: '/tools/damage', label: 'ตีด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
-    { href: '/tools/hit-flee', label: 'ตีโดนไหม', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
   ],
 };
