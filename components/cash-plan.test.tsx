@@ -21,7 +21,7 @@ afterEach(() => {
 });
 
 function clickPlus(name: string) {
-  const btn = [...container.querySelectorAll('button')].find((b) => b.getAttribute('aria-label') === `เพิ่ม ${name} เข้าแผนเติมเงิน`)!;
+  const btn = Array.from(container.querySelectorAll('button')).find((b) => b.getAttribute('aria-label') === `เพิ่ม ${name} เข้าแผนเติมเงิน`)!;
   act(() => btn.dispatchEvent(new MouseEvent('click', { bubbles: true })));
 }
 
@@ -58,7 +58,7 @@ describe('cash plan basket', () => {
       ),
     );
     clickPlus('EXP Box');
-    const minus = [...container.querySelectorAll('button')].find((b) => b.getAttribute('aria-label') === 'เอา EXP Box ออก 1 ชิ้น')!;
+    const minus = Array.from(container.querySelectorAll('button')).find((b) => b.getAttribute('aria-label') === 'เอา EXP Box ออก 1 ชิ้น')!;
     act(() => minus.dispatchEvent(new MouseEvent('click', { bubbles: true })));
     expect(container.querySelector('.cashplan__bar')).toBeNull();
   });

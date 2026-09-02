@@ -20,7 +20,7 @@ interface Draft {
   level: string;
   maxHp: string;
   damagePerHit: string;
-  attacksPerSecond: string;
+  aspd: string;
   hit: string;
   flee: string;
 }
@@ -29,7 +29,7 @@ const EMPTY_DRAFT: Draft = {
   level: '',
   maxHp: '',
   damagePerHit: '',
-  attacksPerSecond: '',
+  aspd: '',
   hit: '',
   flee: '',
 };
@@ -40,7 +40,7 @@ function draftFrom(ctx: CharacterContext | null): Draft {
     level: String(ctx.level),
     maxHp: String(ctx.maxHp),
     damagePerHit: String(ctx.damagePerHit),
-    attacksPerSecond: String(ctx.attacksPerSecond),
+    aspd: String(ctx.aspd),
     hit: ctx.hit != null ? String(ctx.hit) : '',
     flee: ctx.flee != null ? String(ctx.flee) : '',
   };
@@ -85,7 +85,7 @@ export default function CharacterBar() {
 
   const summary = character
     ? `Lv.${character.level} · HP ${character.maxHp.toLocaleString()} · ` +
-      `ตี ${character.damagePerHit.toLocaleString()} ต่อครั้ง · ${character.attacksPerSecond} ครั้ง/วิ` +
+      `ตี ${character.damagePerHit.toLocaleString()} ต่อครั้ง · ASPD ${character.aspd} (≈${character.attacksPerSecond.toFixed(1)} ครั้ง/วิ)` +
       (character.hit != null ? ` · HIT ${character.hit}` : '') +
       (character.flee != null ? ` · FLEE ${character.flee}` : '')
     : 'กรอกค่าตัวละคร แล้วทุกเครื่องมือจะคิดเป็นตัวเลขของคุณ';
@@ -135,15 +135,15 @@ export default function CharacterBar() {
             />
           </label>
           <label>
-            โจมตีต่อวินาที
+            ASPD
             <input
               type="number"
-              min="0.1"
-              step="0.1"
-              inputMode="decimal"
-              placeholder="เช่น 1.5"
-              value={draft.attacksPerSecond}
-              onChange={(e) => setDraft({ ...draft, attacksPerSecond: e.target.value })}
+              min="1"
+              max="199"
+              inputMode="numeric"
+              placeholder="เช่น 187 (จากจอเกม)"
+              value={draft.aspd}
+              onChange={(e) => setDraft({ ...draft, aspd: e.target.value })}
             />
           </label>
           {/* Optional pair, straight from the game's status window (Alt+A) --

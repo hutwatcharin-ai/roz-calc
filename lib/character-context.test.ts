@@ -11,6 +11,7 @@ import {
 const VALID: CharacterContext = {
   level: 50,
   damagePerHit: 250,
+  aspd: 180, // 50/(200-180) = 2.5/s
   attacksPerSecond: 2.5,
   maxHp: 1542,
   hit: null,
@@ -84,6 +85,7 @@ describe('parseCharacterContext (v1 migration)', () => {
     expect(parseCharacterContext(JSON.stringify(V1))).toEqual({
       level: 50,
       damagePerHit: 250,
+      aspd: 180, // migrated: 200 - 50/2.5
       attacksPerSecond: 2.5,
       maxHp: 1542,
       hit: null,
@@ -150,18 +152,30 @@ describe('characterFromInput', () => {
     level: '99',
     maxHp: '5000',
     damagePerHit: '1200',
-    attacksPerSecond: '2.5',
+    aspd: '180', // 50/(200-180) = 2.5 hits/sec
   };
 
-  it('accepts a filled-in form', () => {
+  it('accepts a filled-in form and derives attacks/sec from ASPD', () => {
     expect(characterFromInput(good)).toEqual({
       level: 99,
       maxHp: 5000,
       damagePerHit: 1200,
+      aspd: 180,
       attacksPerSecond: 2.5,
       hit: null,
       flee: null,
     });
+  });
+
+  it('pins the ASPD conversion at the community-known points', () => {
+    expect(characterFromInput({ ...good, aspd: '150' })!.attacksPerSecond).toBe(1);
+    expect(characterFromInput({ ...good, aspd: '190' })!.attacksPerSecond).toBe(5);
+    expect(characterFromInput({ ...good, aspd: '193' })!.attacksPerSecond).toBeCloseTo(7.142, 2);
+  });
+
+  it('rejects an ASPD at or past 200 (the formula divides by 200 - aspd)', () => {
+    expect(characterFromInput({ ...good, aspd: '200' })).toBeNull();
+    expect(characterFromInput({ ...good, aspd: '250' })).toBeNull();
   });
 
   it('carries the optional hit/flee through and degrades junk to null', () => {
@@ -172,7 +186,7 @@ describe('characterFromInput', () => {
   it('rejects a blank required field', () => {
     // Not because of a blank check -- there isn't one. Number('') is 0 and zero
     // is not positive, so the rule that rejects "0" rejects "" and "   " too.
-    for (const key of ['level', 'maxHp', 'damagePerHit', 'attacksPerSecond'] as const) {
+    for (const key of ['level', 'maxHp', 'damagePerHit', 'aspd'] as const) {
       expect(characterFromInput({ ...good, [key]: '' })).toBeNull();
       expect(characterFromInput({ ...good, [key]: '   ' })).toBeNull();
     }
@@ -181,7 +195,7 @@ describe('characterFromInput', () => {
   it('rejects zero, negatives and nonsense', () => {
     expect(characterFromInput({ ...good, damagePerHit: '0' })).toBeNull();
     expect(characterFromInput({ ...good, level: '-1' })).toBeNull();
-    expect(characterFromInput({ ...good, attacksPerSecond: 'สอง' })).toBeNull();
+    expect(characterFromInput({ ...good, aspd: 'สอง' })).toBeNull();
   });
 
   it('agrees with what the form will read back from storage', () => {

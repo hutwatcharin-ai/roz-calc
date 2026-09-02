@@ -13,14 +13,27 @@ import { playerFlee, playerHit } from './hit-flee';
 // then pushed through formulas of our own. Direct numbers include gear and
 // buffs, work for every job, and remove two guessed formulas from under the
 // site's danger badge. v1 payloads are migrated in the parser below.
+//
+// v3 (2026-09-02, user call): attacks-per-second becomes ASPD -- the number
+// the status window shows -- and the rate is derived. rAthena: attack delay
+// = (200 - ASPD) x 20ms, so hits/sec = 50 / (200 - ASPD). Sanity pins:
+// ASPD 150 = 1/s, 190 = 5/s, 193 (renewal cap) = 7.14/s. v2 saves migrate
+// through the inverse.
 export interface CharacterContext {
   level: number;
   damagePerHit: number;
+  /** The status-window ASPD (1-199). */
+  aspd: number;
+  /** Derived: 50 / (200 - aspd). Kept so every consumer reads it directly. */
   attacksPerSecond: number;
   maxHp: number;
   // Optional: null means "not filled in".
   hit: number | null;
   flee: number | null;
+}
+
+export function aspdToAttacksPerSecond(aspd: number): number {
+  return 50 / (200 - aspd);
 }
 
 export const CHARACTER_STORAGE_KEY = 'roz-calc:character';
@@ -62,14 +75,28 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
 
   if (!isPositiveNumber(level)) return null;
   if (!isPositiveNumber(damagePerHit)) return null;
-  if (!isPositiveNumber(attacksPerSecond)) return null;
+
+  // v3 carries aspd; v1/v2 carried attacksPerSecond. Either one is enough.
+  const { aspd } = parsed as Record<string, unknown>;
+  let aspdN: number;
+  let apsN: number;
+  if (isPositiveNumber(aspd) && aspd < 200) {
+    aspdN = aspd;
+    apsN = aspdToAttacksPerSecond(aspd);
+  } else if (isPositiveNumber(attacksPerSecond)) {
+    apsN = attacksPerSecond;
+    aspdN = Math.round((200 - 50 / attacksPerSecond) * 10) / 10;
+  } else {
+    return null;
+  }
 
   // v2 payload: maxHp present.
   if (isPositiveNumber(maxHp)) {
     return {
       level,
       damagePerHit,
-      attacksPerSecond,
+      aspd: aspdN,
+      attacksPerSecond: apsN,
       maxHp,
       hit: optionalPositive(hit),
       flee: optionalPositive(flee),
@@ -89,7 +116,8 @@ export function parseCharacterContext(raw: string | null): CharacterContext | nu
     return {
       level,
       damagePerHit,
-      attacksPerSecond,
+      aspd: aspdN,
+      attacksPerSecond: apsN,
       maxHp: maxHpFormula(level, vit, job as JobKey),
       hit: dexN !== null ? playerHit(level, dexN, lukN) : null,
       flee: agiN !== null ? playerFlee(level, agiN, lukN) : null,
@@ -107,7 +135,7 @@ export function characterFromInput(input: {
   level: string;
   maxHp: string;
   damagePerHit: string;
-  attacksPerSecond: string;
+  aspd: string;
   hit?: string;
   flee?: string;
 }): CharacterContext | null {
@@ -119,7 +147,7 @@ export function characterFromInput(input: {
       level: Number(input.level),
       maxHp: Number(input.maxHp),
       damagePerHit: Number(input.damagePerHit),
-      attacksPerSecond: Number(input.attacksPerSecond),
+      aspd: Number(input.aspd),
       hit: input.hit ? Number(input.hit) : null,
       flee: input.flee ? Number(input.flee) : null,
     }),

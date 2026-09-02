@@ -57,7 +57,7 @@ describe('playerMaxHpFromContext', () => {
 
   it('computes the exact HP for a real character, pinned so argument order cannot silently swap', () => {
     // v2: the context carries the player's real Max HP directly.
-    const ctx: CharacterContext = { level: 50, damagePerHit: 250, attacksPerSecond: 2.5, maxHp: 1542, hit: null, flee: null };
+    const ctx: CharacterContext = { level: 50, damagePerHit: 250, aspd: 180, attacksPerSecond: 2.5, maxHp: 1542, hit: null, flee: null };
     expect(playerMaxHpFromContext(ctx)).toBe(1542);
   });
 });
