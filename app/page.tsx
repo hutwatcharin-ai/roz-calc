@@ -11,9 +11,12 @@ import { websiteJsonLd } from '@/lib/jsonld';
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
   // title template does NOT apply here -- brand goes in by hand.
-  title: 'RO Zero Thai — หาจุดฟาร์ม Ragnarok Zero ภาษาไทย',
+  // DB-first positioning (user call, 2 Sep): the Thai-language database IS
+  // the moat — the English competitors own lookup, nobody owns Thai. The
+  // farm-spot keyword lives on /tools/farm-guide instead.
+  title: 'RO Zero Thai — ฐานข้อมูล Ragnarok Zero ภาษาไทย',
   description:
-    'ใส่เลเวลแล้วดูว่ามอนสเตอร์ตัวไหนให้ EXP ต่อ HP สูงสุด พร้อมฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยของ Ragnarok Zero Global',
+    'ฐานข้อมูล Ragnarok Zero Global ภาษาไทย — มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยครบ พร้อมเครื่องมือหาจุดฟาร์มที่คิดเป็นตัวเลขของตัวละครคุณ',
 };
 
 async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean) {
@@ -82,12 +85,14 @@ export default async function HomePage({
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <JsonLd data={websiteJsonLd()} />
-      {/* H1 carries the queries players actually type (จุดฟาร์ม / Ragnarok
-          Zero / ภาษาไทย), not a mood line — this is the only H1 the domain
-          gets to rank with (user call, 1 Sep). */}
-      <h1 className="pagehead__title">หาจุดฟาร์ม Ragnarok Zero Global ตามเลเวลของคุณ</h1>
+      {/* DB-first H1 (user call, 2 Sep): "ฐานข้อมูล...ภาษาไทย" is the SERP
+          whitespace and the translation moat; the farm keyword is held by
+          /tools/farm-guide. No hardcoded counts here — SiteStats below
+          carries the live ones. */}
+      <h1 className="pagehead__title">ฐานข้อมูล Ragnarok Zero Global ภาษาไทย</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        ฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด เควส ภาษาไทย — เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
+        มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล — <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
+        เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
       </p>
 
       <div className="qgrid">
