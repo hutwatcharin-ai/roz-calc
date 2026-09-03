@@ -1437,6 +1437,26 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .statgrid__cell--link:hover { background: var(--panel); }
 .statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
 
+/* Guides hub: one card per page, with a line saying what it answers. Wider
+   than an item card because the sentence is the point of the card. */
+.guidecard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  text-decoration: none;
+  grid-column: span 2;
+}
+.guidecard:hover { border-color: var(--cyan); background: var(--panel-2); }
+.guidecard__title { font: 700 15px/1.3 var(--font-chakra), sans-serif; color: var(--text); }
+.guidecard__blurb { font-size: 13px; color: var(--dim); }
+@media (max-width: 640px) {
+  .guidecard { grid-column: span 1; }
+}
+
 /* Skill planner. The grid is the in-game skill window's shape (seven columns,
    empty cells kept so a skill holds its position), and every cell is a control,
    so the whole thing has to stay usable at thumb size on a phone. */
@@ -1475,30 +1495,39 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   border: 1px solid var(--hair);
   border-radius: var(--radius);
   background: var(--panel);
-  padding: 8px;
+  padding: 6px 7px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-height: 96px;
+  gap: 4px;
 }
-.skillcell--empty { border-style: dashed; opacity: 0.25; min-height: 0; }
+.skillcell--empty { border-style: dashed; opacity: 0.18; }
 .skillcell--taken { border-color: var(--cyan); background: var(--panel-2); }
-.skillcell--locked { opacity: 0.62; }
-.skillcell__head { display: flex; justify-content: space-between; align-items: start; gap: 6px; }
-.skillcell__name { font: 600 12.5px/1.25 var(--font-sarabun), sans-serif; }
-.skillcell__lv { font-size: 12px; color: var(--dim); white-space: nowrap; }
-.skillcell__tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.skillcell__tags .tag { font-size: 9.5px; padding: 1px 5px; }
-.skillcell__need { font-size: 11px; color: var(--faint); margin: 0; }
-.skillcell__row { display: flex; gap: 6px; margin-top: auto; }
+.skillcell--locked { opacity: 0.55; }
+.skillcell__head { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.skillcell__icon { flex: none; image-rendering: pixelated; }
+.skillcell__icon--none { width: 24px; height: 24px; border-radius: 4px; background: var(--panel-2); }
+/* Two lines then ellipsis: a long skill name must not make its cell taller
+   than the row, or the grid stops reading as a grid. */
+.skillcell__name {
+  font: 600 11.5px/1.25 var(--font-sarabun), sans-serif;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.skillcell__lv { font-size: 12px; color: var(--text); min-width: 34px; text-align: center; }
+.skillcell__max { color: var(--faint); font-size: 10.5px; }
+.skillcell__need { font-size: 10px; color: var(--faint); margin: 0; line-height: 1.25; }
+.skillcell__row { display: flex; align-items: center; gap: 4px; margin-top: auto; }
 .skillcell__row button {
   flex: 1;
-  min-height: 32px;
+  min-height: 26px;
   border: 1px solid var(--hair);
-  border-radius: 6px;
+  border-radius: 5px;
   background: var(--panel-2);
   color: var(--text);
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 1;
   cursor: pointer;
 }
 .skillcell__row button:hover:not(:disabled) { border-color: var(--cyan); color: var(--cyan); }

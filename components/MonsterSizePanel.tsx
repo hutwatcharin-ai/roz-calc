@@ -58,7 +58,7 @@ export default function MonsterSizePanel({ size }: { size: string | null }) {
       </p>
 
       <p className="muted">
-        ตัวเลขมาจาก <Link href="/tools/sizes">ตารางขนาด</Link> ของคู่มือเกมทางการ ·
+        ตัวเลขมาจาก <Link href="/guides/sizes">ตารางขนาด</Link> ของคู่มือเกมทางการ ·
         คิดก่อนตัวคูณธาตุ
       </p>
     </div>

@@ -1,4 +1,4 @@
-// app/tools/exp/page.tsx
+// app/guides/exp/page.tsx
 //
 // The guide's EXP tables, plus the running total it does not print. Entirely
 // server-rendered: this page is a reference table, and a reference table that

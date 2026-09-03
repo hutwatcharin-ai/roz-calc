@@ -74,7 +74,7 @@ export default async function FarmGuidePage() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
-          { name: 'จุดฟาร์มแนะนำ', path: '/tools/farm-guide' },
+          { name: 'จุดฟาร์มแนะนำ', path: '/guides/farm-guide' },
         ])}
       />
       <h1 className="pagehead__title">จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero</h1>

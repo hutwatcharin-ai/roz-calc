@@ -72,7 +72,7 @@ export default function DamagePage() {
       </div>
 
       <p className="muted" style={{ marginTop: 16 }}>
-        ตารางธาตุเต็ม 4 ระดับอยู่ที่ <Link href="/tools/elements">ตารางธาตุ</Link> ·{' '}
+        ตารางธาตุเต็ม 4 ระดับอยู่ที่ <Link href="/guides/elements">ตารางธาตุ</Link> ·{' '}
         ธาตุที่มีในเกม {ELEMENTS.length} ธาตุ · ประเภทอาวุธ {SIZE_TABLE.length} ชนิด
         <Fragment> · </Fragment>
         <Link href="/tools/refine">ตีบวกเพิ่ม ATK ได้เท่าไร</Link>

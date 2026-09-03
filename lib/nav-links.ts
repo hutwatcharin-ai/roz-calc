@@ -5,7 +5,7 @@
 // Pure data and pure functions: no React here, so the route mapping is testable
 // without rendering.
 
-export type NavSection = 'database' | 'tools' | null;
+export type NavSection = 'database' | 'tools' | 'guides' | null;
 
 export interface NavLink {
   href: string;
@@ -28,13 +28,17 @@ export const PRIMARY_LINKS: NavLink[] = [
   { href: '/drop-finder', label: 'ค้นของดรอป', ready: true },
   { href: '/database/monsters', label: 'ฐานข้อมูล', ready: true },
   { href: '/tools/afk-finder', label: 'เครื่องมือ', ready: true },
+  // Split off the tools row on 3 Sep 2026: a table you read and a calculator
+  // you feed your own numbers to are different errands, and ten mixed chips
+  // made the row something to scan rather than choose from.
+  { href: '/guides', label: 'ไกด์', ready: true },
 ];
 
 // Some of these routes arrive in Wave 2. Listing them now means the nav is
 // built once instead of edited on every later task. All six database routes
 // are ready, and so are all three tools routes. A route added later renders
 // as unready text until its page ships.
-export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
+export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> = {
   // Ordered by use: hunting flow first, biggest catalogs next. Icons are
   // recognisable vanilla items so a player reads the row without the words:
   // Poring, Sword, Poring Card, Red Potion, Emperium, Fly Wing, Butterfly
@@ -56,17 +60,22 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   // Ordered by the player's task, not build order (user, 2 Sep): find a spot
   // to farm -> fight the monster -> reference tables -> extras. "มอน" in the
   // two fight tools keeps them from reading as refine (ตีบวก) siblings.
+  // Only pages that take the player's own numbers and answer with theirs.
   tools: [
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
-    { href: '/tools/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
     { href: '/tools/hit-flee', label: 'คำนวณ Hit/Flee', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
-    { href: '/tools/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
-    { href: '/tools/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
-    { href: '/tools/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
+  ],
+  // Pages you read: fixed game tables, and the written guide. Moved here from
+  // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
+  guides: [
+    { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
+    { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
+    { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
+    { href: '/guides/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
   ],
 };
 
@@ -84,10 +93,16 @@ function isUnder(pathname: string, prefix: string): boolean {
 export function sectionForPath(pathname: string): NavSection {
   if (isUnder(pathname, '/database')) return 'database';
   if (isUnder(pathname, '/tools')) return 'tools';
+  if (isUnder(pathname, '/guides')) return 'guides';
   return null;
 }
 
-const ALL_LINKS: NavLink[] = [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools];
+const ALL_LINKS: NavLink[] = [
+  ...PRIMARY_LINKS,
+  ...SECTION_LINKS.database,
+  ...SECTION_LINKS.tools,
+  ...SECTION_LINKS.guides,
+];
 
 // An href not found in either table (e.g. a value a test makes up) is treated
 // as ready, since readiness only exists to gate the links this module actually

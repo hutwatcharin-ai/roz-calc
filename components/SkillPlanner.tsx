@@ -35,12 +35,14 @@ const TIER_LABELS: Record<string, string> = {
 
 function SkillCell({
   skill,
+  icon,
   level,
   blocking,
   onRaise,
   onLower,
 }: {
   skill: PlannerSkill;
+  icon: string | null;
   level: number;
   blocking: { slug: string; name: string; level: number }[];
   onRaise: () => void;
@@ -48,46 +50,60 @@ function SkillCell({
 }) {
   const max = skill.max_level ?? 1;
   const locked = blocking.length > 0 && level === 0;
+  // Everything that is not the name, the level and the two buttons lives in
+  // the tooltip: the grid is 7 cells wide, and a card that spells out its
+  // prerequisites inline made each stage a screenful on its own.
+  const title = [
+    skill.name,
+    skill.free ? 'สกิลเควส — ไม่กินแต้ม' : null,
+    skill.required_job_level !== null ? `ต้อง Job Lv ${skill.required_job_level}` : null,
+    locked ? `ต้องมี ${blocking.map((b) => `${b.name} Lv ${b.level}`).join(' + ')} ก่อน` : null,
+  ]
+    .filter(Boolean)
+    .join(' · ');
 
   return (
-    <div className={`skillcell${level > 0 ? ' skillcell--taken' : ''}${locked ? ' skillcell--locked' : ''}`}>
+    <div
+      className={`skillcell${level > 0 ? ' skillcell--taken' : ''}${locked ? ' skillcell--locked' : ''}`}
+      title={title}
+    >
       <div className="skillcell__head">
+        {icon ? (
+          <img className="skillcell__icon" src={icon} alt="" width={24} height={24} loading="lazy" decoding="async" />
+        ) : (
+          <span className="skillcell__icon skillcell__icon--none" aria-hidden="true" />
+        )}
         <span className="skillcell__name">{skill.name}</span>
-        <span className="skillcell__lv mono">
-          {level}/{max}
-        </span>
       </div>
-      <div className="skillcell__tags">
-        {skill.free && <span className="tag tag--none">เควส · ไม่กินแต้ม</span>}
-        {skill.passive === 'passive' && <span className="tag">Passive</span>}
-        {skill.required_job_level !== null && <span className="tag tag--risk">ต้อง Job Lv {skill.required_job_level}</span>}
-      </div>
-      {/* The reason a skill cannot be taken is on the card, not in a tooltip:
-          "why is this greyed out" is the question the whole grid exists to
-          answer. */}
-      {locked && (
-        <p className="skillcell__need">
-          ต้องมี {blocking.map((b) => `${b.name} Lv ${b.level}`).join(' + ')} ก่อน
-        </p>
-      )}
       <div className="skillcell__row">
         <button type="button" onClick={onLower} disabled={level === 0} aria-label={`ลด ${skill.name}`}>
           −
         </button>
+        <span className="skillcell__lv mono">
+          {level}<span className="skillcell__max">/{max}</span>
+        </span>
         <button type="button" onClick={onRaise} disabled={level >= max} aria-label={`เพิ่ม ${skill.name}`}>
           +
         </button>
       </div>
+      {/* Only the blocking reason survives on the card itself: it is the
+          question the grid exists to answer, and it disappears once met. */}
+      {locked && <p className="skillcell__need">ต้องมี {blocking.map((b) => b.name).join(' + ')}</p>}
     </div>
   );
 }
 
-export default function SkillPlanner() {
+export default function SkillPlanner({ icons }: { icons: Record<string, string> }) {
   const router = useRouter();
   const params = useSearchParams();
 
-  const classSlug = CLASS_SLUGS.includes(params.get('class') ?? '') ? (params.get('class') as string) : 'knight';
-  const [build, setBuild] = useState<Build>(() => decodeBuild(classSlug, params.get('build') ?? ''));
+  // State, not a value read back out of the URL each render: the effect below
+  // writes the URL, and reading the class from the URL meant a class switch
+  // was immediately overwritten by the effect still holding the old one --
+  // the dropdown moved and the page did not.
+  const initialClass = CLASS_SLUGS.includes(params.get('class') ?? '') ? (params.get('class') as string) : 'knight';
+  const [classSlug, setClassSlug] = useState(initialClass);
+  const [build, setBuild] = useState<Build>(() => decodeBuild(initialClass, params.get('build') ?? ''));
   const [copied, setCopied] = useState(false);
 
   const stages = useMemo(() => lineFor(classSlug), [classSlug]);
@@ -106,10 +122,11 @@ export default function SkillPlanner() {
   const changeClass = useCallback((slug: string) => {
     // Skills carry over only where the new line has them -- switching Knight
     // to Crusader keeps the Swordsman half, which is what a player comparing
-    // the two branches wants.
+    // the two branches wants. The URL follows from the effect above, so it is
+    // not written here as well.
     setBuild((current) => decodeBuild(slug, encodeBuild(current)));
-    router.replace(`/tools/skill-planner?class=${slug}`, { scroll: false });
-  }, [router]);
+    setClassSlug(slug);
+  }, []);
 
   const totalSpent = spend.reduce((n, s) => n + s.spent, 0);
   const anyOver = spend.some((s) => s.over);
@@ -184,6 +201,7 @@ export default function SkillPlanner() {
                   <SkillCell
                     key={skill.slug}
                     skill={skill}
+                    icon={icons[skill.slug] ?? null}
                     level={build[skill.slug] ?? 0}
                     blocking={blockedBy(classSlug, build, skill.slug)}
                     onRaise={() => setBuild((b) => raise(classSlug, b, skill.slug))}

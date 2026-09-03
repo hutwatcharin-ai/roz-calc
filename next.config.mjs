@@ -2,6 +2,18 @@
 const nextConfig = {
   // Framework fingerprint header off (SEO audit 2026-09-01, Low #9).
   poweredByHeader: false,
+  // The reference tables and the written guide moved out of /tools on
+  // 3 Sep 2026: /tools is where you put your own numbers in and get an answer,
+  // /guides is what you read. Permanent, because the new path is where these
+  // pages live now -- anything already linking or indexed follows once.
+  async redirects() {
+    return [
+      { source: '/tools/elements', destination: '/guides/elements', permanent: true },
+      { source: '/tools/sizes', destination: '/guides/sizes', permanent: true },
+      { source: '/tools/exp', destination: '/guides/exp', permanent: true },
+      { source: '/tools/farm-guide', destination: '/guides/farm-guide', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

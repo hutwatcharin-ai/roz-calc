@@ -24,7 +24,7 @@ export const metadata = {
 export const revalidate = 3600;
 
 const CHANGES: { th: string; en: string; link?: { href: string; label: string } }[] = [
-  { th: 'ขยายเลเวลสูงสุดเป็น Base 60 / Job 60', en: 'Max level cap expanded to Base 60 and Job 60', link: { href: '/tools/farm-guide', label: 'จุดฟาร์มช่วง 46–60' } },
+  { th: 'ขยายเลเวลสูงสุดเป็น Base 60 / Job 60', en: 'Max level cap expanded to Base 60 and Job 60', link: { href: '/guides/farm-guide', label: 'จุดฟาร์มช่วง 46–60' } },
   { th: 'เพิ่มเควสรายวันสำหรับเลเวล 50–60', en: 'Added daily quests for Level 50–60' },
   { th: 'เควสใหม่: The Curse of the Gaebolg Family – Part 1', en: 'Added New Quest: The Curse of the Gaebolg Family – Part 1' },
   { th: 'เพิ่มอาชีพ 2 (2nd Job Class)', en: 'Added 2nd Job Class', link: { href: '/database/equipment?job=Knight', label: 'อุปกรณ์กรองตามอาชีพ 2' } },
@@ -117,7 +117,7 @@ export default function PatchNotePage() {
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">ใช้เว็บนี้ทำอะไรได้ตอนนี้</h2>
         <ul style={{ marginTop: 8, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <li>ดันไป 60 — ช่วง 46–60 ตีอะไรคุ้มดูที่ <Link href="/tools/farm-guide">จุดฟาร์มแนะนำ</Link> (มอนเก่า ข้อมูลครบอยู่แล้ว)</li>
+          <li>ดันไป 60 — ช่วง 46–60 ตีอะไรคุ้มดูที่ <Link href="/guides/farm-guide">จุดฟาร์มแนะนำ</Link> (มอนเก่า ข้อมูลครบอยู่แล้ว)</li>
           <li>เปลี่ยนอาชีพ 2 แล้ว — เช็คว่าอุปกรณ์ที่ถืออยู่ยังใส่ได้ไหมที่ <Link href="/database/equipment">ฐานข้อมูลอุปกรณ์</Link> (กรองตามอาชีพได้)</li>
           <li>ของใหม่ยังไม่มีตัวเลขในเว็บ — มอนใหม่ในดันเจี้ยนใหม่ก็เช่นกัน กรอก HIT/FLEE ที่แถบตัวละครไว้ก่อน พอข้อมูลเข้า <Link href="/tools/hit-flee">คำนวณ Hit/Flee</Link> จะคิดให้ทันที</li>
         </ul>

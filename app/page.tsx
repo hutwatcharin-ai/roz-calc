@@ -15,7 +15,7 @@ export const metadata = {
   // title template does NOT apply here -- brand goes in by hand.
   // DB-first positioning (user call, 2 Sep): the Thai-language database IS
   // the moat — the English competitors own lookup, nobody owns Thai. The
-  // farm-spot keyword lives on /tools/farm-guide instead.
+  // farm-spot keyword lives on /guides/farm-guide instead.
   title: 'RO Zero Thai — ฐานข้อมูล Ragnarok Zero ภาษาไทย',
   description:
     'ฐานข้อมูล Ragnarok Zero Global ภาษาไทย — มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยครบ พร้อมเครื่องมือหาจุดฟาร์มที่คิดเป็นตัวเลขของตัวละครคุณ',
@@ -91,7 +91,7 @@ export default async function HomePage({
       <JsonLd data={websiteJsonLd()} />
       {/* DB-first H1 (user call, 2 Sep): "ฐานข้อมูล...ภาษาไทย" is the SERP
           whitespace and the translation moat; the farm keyword is held by
-          /tools/farm-guide. No hardcoded counts here — SiteStats below
+          /guides/farm-guide. No hardcoded counts here — SiteStats below
           carries the live ones. */}
       <h1 className="pagehead__title">ฐานข้อมูล Ragnarok Zero Global ภาษาไทย</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
@@ -187,7 +187,7 @@ export default async function HomePage({
         <Link href="/database/skills" className="chiplink">สกิล</Link>
         {/* ตารางธาตุ was orphaned (only reachable from monster-page footers)
             while its Thai keyword has no Zero-specific competitor (SXO audit). */}
-        <Link href="/tools/elements" className="chiplink">ตารางธาตุ</Link>
+        <Link href="/guides/elements" className="chiplink">ตารางธาตุ</Link>
         <Link href="/tools/farm-planner" className="chiplink">แผนฟาร์ม</Link>
         <Link href="/database/maps" className="chiplink">แมพ</Link>
       </div>

@@ -1,4 +1,4 @@
-// app/tools/sizes/page.tsx
+// app/guides/sizes/page.tsx
 import Link from 'next/link';
 import { SIZE_TABLE, SIZES, SIZE_LABELS } from '@/lib/size-table';
 
@@ -24,7 +24,7 @@ export default function SizesPage() {
 
       <div className="ceiling-note" style={{ marginTop: 16 }}>
         <strong>ที่มาของตัวเลข:</strong> คู่มือเกมทางการของ Ragnarok Zero (ระบบพิเศษ &gt; ระบบขนาด) ·
-        ตัวคูณนี้คิดก่อนตัวคูณธาตุ ดูคู่กับ <Link href="/tools/elements">ตารางธาตุ</Link> ได้
+        ตัวคูณนี้คิดก่อนตัวคูณธาตุ ดูคู่กับ <Link href="/guides/elements">ตารางธาตุ</Link> ได้
         · เทียบกับ rozerodb ที่ถอดหน้าเดียวกันแยกกันมา <strong>ตรงกัน 59 จาก 60 ช่อง</strong>{' '}
         ช่องที่ต่างคือ <strong>แส้ตีเป้าหมายขนาดใหญ่</strong> เว็บนี้อ่านได้ 75% เขาอ่านได้ 50%
         ยังไม่ตัดสิน ใครเปิดคู่มือหน้านั้นได้ช่วยดูให้ที

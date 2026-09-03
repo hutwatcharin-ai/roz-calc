@@ -31,7 +31,14 @@ describe('sectionForPath', () => {
   });
 
   it('puts tool routes in the tools section', () => {
-    expect(sectionForPath('/tools/elements')).toBe('tools');
+    expect(sectionForPath('/tools/refine')).toBe('tools');
+  });
+
+  it('puts the guide routes in their own section, not tools', () => {
+    // The reference tables moved out of /tools on 3 Sep 2026: a table you read
+    // and a calculator you feed numbers to are different errands.
+    expect(sectionForPath('/guides')).toBe('guides');
+    expect(sectionForPath('/guides/elements')).toBe('guides');
   });
 
   it('gives the home page no section, so no second row renders', () => {
@@ -90,7 +97,7 @@ describe('isActivePrimaryLink', () => {
     // tools routes ship now, so the behaviour under test is the section
     // rule itself.
     expect(isActivePrimaryLink('/tools/afk-finder', '/tools/farm-planner')).toBe(true);
-    expect(isActivePrimaryLink('/tools/afk-finder', '/tools/elements')).toBe(true);
+    expect(isActivePrimaryLink('/tools/afk-finder', '/tools/refine')).toBe(true);
     expect(isActivePrimaryLink('/database/monsters', '/tools/farm-planner')).toBe(false);
   });
 
@@ -103,7 +110,7 @@ describe('isActivePrimaryLink', () => {
   it('highlights only the home link on the home page', () => {
     expect(isActivePrimaryLink('/', '/')).toBe(true);
     expect(isActivePrimaryLink('/database/monsters', '/')).toBe(false);
-    expect(isActivePrimaryLink('/tools/elements', '/')).toBe(false);
+    expect(isActivePrimaryLink('/tools/refine', '/')).toBe(false);
   });
 });
 
@@ -185,9 +192,9 @@ describe('usesCharacterContext', () => {
 
   it('drops it from every page that reads none', () => {
     for (const path of [
-      '/tools/elements',
-      '/tools/sizes',
-      '/tools/exp',
+      '/guides/elements',
+      '/guides/sizes',
+      '/guides/exp',
       '/tools/damage',
       '/tools/refine',
       '/database/items',

@@ -63,7 +63,7 @@ export default function MonsterElementPanel({
       </p>
 
       <p className="muted">
-        ตัวเลขมาจาก <Link href="/tools/elements">ตารางธาตุ</Link> ซึ่งถอดมาจากคู่มือเกมทางการของ Zero
+        ตัวเลขมาจาก <Link href="/guides/elements">ตารางธาตุ</Link> ซึ่งถอดมาจากคู่มือเกมทางการของ Zero
       </p>
     </div>
   );

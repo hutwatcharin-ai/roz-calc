@@ -219,8 +219,8 @@ export default function RefinePage() {
       </p>
 
       <p className="muted" style={{ marginTop: 16 }}>
-        ดูต่อ: <Link href="/tools/elements">ตารางธาตุ</Link> ·{' '}
-        <Link href="/tools/sizes">ตารางขนาด</Link>
+        ดูต่อ: <Link href="/guides/elements">ตารางธาตุ</Link> ·{' '}
+        <Link href="/guides/sizes">ตารางขนาด</Link>
       </p>
     </main>
   );

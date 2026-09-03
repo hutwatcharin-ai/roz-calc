@@ -1,4 +1,4 @@
-// app/tools/elements/page.tsx
+// app/guides/elements/page.tsx
 import Link from 'next/link';
 import ElementTable from '@/components/ElementTable';
 import type { ElementLevel } from '@/lib/element-table';
