@@ -7,3 +7,10 @@ tsconfig.tsbuildinfo
 # Scratch measurement dumps from the Thai translation scripts
 *-gap.tsv
 docs/midgardhub-export/
+
+# Raw exploratory crawl of roz.prontera.info + the rozeroguide Google Site
+# (2 Sep research thread) -- 100MB+ of mostly-opaque Nuxt payload, not yet
+# tied to any shipped feature. Commit a small derived file instead if this
+# data ends up actually used, the way rozerodb-export's targeted import
+# scripts did.
+docs/prontera-export/data/
