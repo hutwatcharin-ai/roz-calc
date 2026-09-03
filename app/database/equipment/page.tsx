@@ -8,7 +8,8 @@ import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { canJobEquip } from '@/lib/equip-filter';
-import { GEAR_CATEGORIES } from '@/lib/item-href';
+import { COSTUME_CATEGORY, GEAR_CATEGORIES } from '@/lib/item-href';
+import { redirect } from 'next/navigation';
 import { ZERO_JOBS } from '@/lib/zero-jobs';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import ItemIcon from '@/components/ItemIcon';
@@ -50,6 +51,10 @@ export default async function EquipmentPage({
   searchParams: { q?: string; category?: string; type?: string; job?: string; mylv?: string; slots?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
+  // Anything still asking this list for costumes -- an old link, a bookmark,
+  // the item list's legacy category map -- gets sent to the page that has
+  // them, rather than a filter that now matches nothing.
+  if ((searchParams.category ?? '') === COSTUME_CATEGORY) redirect('/database/costumes');
   const category = searchParams.category ?? '';
   // Subtype only applies with a kind chosen, and only values from the fixed
   // lists pass -- the param goes into a comparison, never into SQL.

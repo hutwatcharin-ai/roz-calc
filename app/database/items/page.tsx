@@ -42,7 +42,9 @@ const CATEGORIES = [
 const MOVED: Record<string, string> = {
   Weapon: '/database/equipment?category=Weapon',
   Armor: '/database/equipment?category=Armor',
-  'Costume Equipment': '/database/equipment?category=Costume%20Equipment',
+  // Costumes left the equipment list on 3 Sep 2026 -- that page no longer has
+  // a Costume option, so this param used to land on an empty filtered list.
+  'Costume Equipment': '/database/costumes',
   Card: '/database/cards',
 };
 
