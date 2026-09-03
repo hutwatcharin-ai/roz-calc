@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { canJobEquip, isUnclassifiedClass, EQUIPMENT_CATEGORIES } from './equip-filter';
+import { canJobEquip, isUnclassifiedClass } from './equip-filter';
+import { GEAR_CATEGORIES } from './item-href';
 import { isZeroJob, isKnownNonZeroJob, jobAncestry } from './zero-jobs';
 
 describe('canJobEquip', () => {
@@ -198,8 +199,10 @@ describe('jobAncestry', () => {
   });
 });
 
-describe('EQUIPMENT_CATEGORIES', () => {
-  it('is exactly the three categories that make up the 490 wearable items', () => {
-    expect([...EQUIPMENT_CATEGORIES]).toEqual(['Armor', 'Weapon', 'Costume Equipment']);
+describe('GEAR_CATEGORIES', () => {
+  it('is exactly the two categories the equipment list holds', () => {
+    // Costume Equipment is deliberately absent: it has its own list and its
+    // own route since 3 Sep 2026 (see lib/item-href.ts).
+    expect([...GEAR_CATEGORIES]).toEqual(['Armor', 'Weapon']);
   });
 });

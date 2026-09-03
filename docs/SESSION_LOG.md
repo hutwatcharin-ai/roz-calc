@@ -26,6 +26,13 @@
 - ออปชั่นสุ่มยาวกว่าค่าพลังของชิ้นนั้นเอง → ยุบเป็น `<details>` (`components/RandomOptionsCard.tsx`) ปิดมาก่อน เหมือนปุ่ม "Show possible options" ของ prontera — ไม่มี JS ฝั่ง client เพิ่ม เนื้อหายังอยู่ใน HTML ให้ crawler อ่าน
 - user ยอมรับความเสี่ยงย้าย URL เพราะเพิ่งส่ง sitemap เข้า GSC เมื่อ 2 ก.ย. (ยังไม่ทันติด index)
 
+**แยกคอสตูมออกจากอุปกรณ์อีกชั้น (user: "เปิดเข้ามาจะเจอคอสตูมเยอะมากๆๆๆ")**
+- ตัวเลขจริง: อุปกรณ์ 1,815 = อาวุธ 465 + เกราะ 410 + **คอสตูม 940 (52%)** เรียงชื่อ A-Z คอสตูมเลยกลบทุกหน้า
+- `/database/costumes` (list) + `/database/costumes/[id]` — ฟิลเตอร์เหลือแค่ชื่อ+ตำแหน่งที่สวม เพราะฟิลด์อื่นไม่มีข้อมูลจริง (884/940 ต้องการเลเวล 1, 905 ไม่มี slot, equippable_classes ว่างหรือ All Jobs ทั้งหมด)
+- 3 route redirect หากันด้วยกติกาเดียวใน `lib/item-href.ts` (`GEAR_CATEGORIES` / `COSTUME_CATEGORY`) — `EQUIPMENT_CATEGORIES` ย้ายออกจาก equip-filter มาที่นี่
+- body ของหน้า gear/costume ใช้ `components/GearDetail.tsx` ร่วมกัน (ไม่ก๊อป 2 ชุด) + `lib/gear-detail.ts` โหลดข้อมูลร่วม
+- แก้ทุกจุดที่รู้ category: nav (ชิปคอสตูม), SiteStats (นับแยก 875/940), GlobalSearch (คิวรีแยก ไม่งั้นผลลัพธ์ 5 อันโดนคอสตูมกิน), search badge "คอสตูม", "เพิ่งดู" kind ใหม่, sitemap แยกอัตโนมัติผ่าน itemHref
+
 ## 1–2 ก.ย. 2026 — รอบใหญ่: โครงหน้า, hit/flee, แปลไทย, NPC
 
 **2 ก.ย. (บ่าย) — เตรียมแพทช์ 3 ก.ย. + ปิดงาน SEO ฝั่ง user**

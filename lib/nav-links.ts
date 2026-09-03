@@ -42,6 +42,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   database: [
     { href: '/database/monsters', label: 'มอนสเตอร์', icon: '/images/monsters/1002.gif', ready: true },
     { href: '/database/equipment', label: 'อุปกรณ์', icon: '/images/items/1101.gif', ready: true },
+    { href: '/database/costumes', label: 'คอสตูม', icon: '/images/items/19585.gif', ready: true },
     { href: '/database/cards', label: 'การ์ด', icon: '/images/items/4001.gif', ready: true },
     { href: '/database/items', label: 'ไอเทม', icon: '/images/items/501.gif', ready: true },
     { href: '/database/cash-shop', label: 'Cash Shop', icon: '/images/items/969.gif', ready: true },

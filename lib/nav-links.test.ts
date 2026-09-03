@@ -113,12 +113,13 @@ describe('link tables', () => {
     expect(PRIMARY_LINKS.map((l) => l.href)).toContain('/drop-finder');
   });
 
-  it('lists the nine database pages in browse order', () => {
+  it('lists the ten database pages in browse order', () => {
     // Reordered 31 Aug for the section split: hunting flow first, then the
     // catalogs by size, world map added the day it shipped.
     expect(SECTION_LINKS.database.map((l) => l.href)).toEqual([
       '/database/monsters',
       '/database/equipment',
+      '/database/costumes',
       '/database/cards',
       '/database/items',
       '/database/cash-shop',

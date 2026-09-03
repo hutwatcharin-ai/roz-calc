@@ -5,7 +5,7 @@
 
 import { isInGameSkill } from './zero-jobs';
 
-export type SearchType = 'monster' | 'item' | 'card' | 'equipment' | 'skill' | 'map';
+export type SearchType = 'monster' | 'item' | 'card' | 'equipment' | 'costume' | 'skill' | 'map';
 
 export interface SearchRow {
   id: number;
@@ -34,6 +34,7 @@ export interface SearchGroups {
   items: SearchRow[];
   cards: SearchRow[];
   equipment: SearchRow[];
+  costumes: SearchRow[];
   skills: SkillSearchRow[];
   maps: MapSearchRow[];
 }
@@ -52,6 +53,7 @@ export const SEARCH_TYPE_LABELS: Record<SearchType, string> = {
   item: 'ไอเทม',
   card: 'การ์ด',
   equipment: 'อุปกรณ์',
+  costume: 'คอสตูม',
   skill: 'สกิล',
   map: 'แมพ',
 };
@@ -61,10 +63,15 @@ function fromItemRow(row: SearchRow, type: SearchType): SearchResult {
     id: String(row.id),
     type,
     name: row.name_en,
-    // Cards are items and share the item detail page; gear has had its own
-    // route since 3 Sep 2026. The badge is what tells the player which kind of
-    // thing they found.
-    href: type === 'equipment' ? `/database/equipment/${row.id}` : `/database/items/${row.id}`,
+    // Cards are items and share the item detail page; gear and costumes have
+    // had their own routes since 3 Sep 2026. The badge is what tells the
+    // player which kind of thing they found.
+    href:
+      type === 'equipment'
+        ? `/database/equipment/${row.id}`
+        : type === 'costume'
+          ? `/database/costumes/${row.id}`
+          : `/database/items/${row.id}`,
     iconUrl: row.icon_url ?? null,
   };
 }
@@ -81,6 +88,7 @@ export function mergeSearchResults(groups: SearchGroups): SearchResult[] {
     ...groups.items.map((i) => fromItemRow(i, 'item')),
     ...groups.cards.map((c) => fromItemRow(c, 'card')),
     ...groups.equipment.map((e) => fromItemRow(e, 'equipment')),
+    ...groups.costumes.map((c) => fromItemRow(c, 'costume')),
     ...groups.skills.map((s) => {
       // The skills page defaults to its "ingame" tab and filters to
       // isInGameSkill(classes) before applying q. A skill that fails that

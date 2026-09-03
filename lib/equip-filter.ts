@@ -6,7 +6,10 @@
 
 import { isZeroJob, isKnownNonZeroJob, jobAncestry } from './zero-jobs';
 
-export const EQUIPMENT_CATEGORIES = ['Armor', 'Weapon', 'Costume Equipment'] as const;
+// The category lists moved to lib/item-href.ts on 3 Sep 2026, when gear and
+// costumes stopped sharing a route: the same constants now decide which detail
+// page a row gets, so they live next to that rule rather than beside the job
+// matcher.
 
 const ALL_JOBS_PREFIX = 'all jobs';
 

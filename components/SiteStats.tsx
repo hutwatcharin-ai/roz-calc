@@ -7,7 +7,7 @@
 
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
-import { EQUIPMENT_CATEGORIES } from '@/lib/equip-filter';
+import { COSTUME_CATEGORY, GEAR_CATEGORIES } from '@/lib/item-href';
 
 export interface SiteStat {
   href: string;
@@ -20,11 +20,12 @@ export interface SiteStat {
 export async function getSiteStats(): Promise<SiteStat[]> {
   const db = supabaseBrowser();
 
-  const [monsters, items, cards, equipment, skills, maps] = await Promise.all([
+  const [monsters, items, cards, equipment, costumes, skills, maps] = await Promise.all([
     db.from('monsters').select('id', { count: 'exact', head: true }),
     db.from('items').select('id', { count: 'exact', head: true }),
     db.from('items').select('id', { count: 'exact', head: true }).eq('category', 'Card'),
-    db.from('items').select('id', { count: 'exact', head: true }).in('category', [...EQUIPMENT_CATEGORIES]),
+    db.from('items').select('id', { count: 'exact', head: true }).in('category', [...GEAR_CATEGORIES]),
+    db.from('items').select('id', { count: 'exact', head: true }).eq('category', COSTUME_CATEGORY),
     // `slug`, not `id`: the skills table is keyed by slug and has no id column,
     // so selecting one returns an error and the count comes back null.
     db.from('skills').select('slug', { count: 'exact', head: true }),
@@ -33,7 +34,7 @@ export async function getSiteStats(): Promise<SiteStat[]> {
 
   // A failed count renders as a dash, not as zero: "0 มอนสเตอร์" would be a
   // claim about the database rather than about the request.
-  const results = [monsters, items, cards, equipment, skills, maps];
+  const results = [monsters, items, cards, equipment, costumes, skills, maps];
   for (const result of results) {
     if (result.error) console.error('site stat count failed', result.error);
   }
@@ -43,6 +44,7 @@ export async function getSiteStats(): Promise<SiteStat[]> {
     { href: '/database/items', label: 'ไอเทม', count: items.count ?? null },
     { href: '/database/cards', label: 'การ์ด', count: cards.count ?? null },
     { href: '/database/equipment', label: 'อุปกรณ์', count: equipment.count ?? null },
+    { href: '/database/costumes', label: 'คอสตูม', count: costumes.count ?? null },
     { href: '/database/skills', label: 'สกิล', count: skills.count ?? null },
     { href: '/database/maps', label: 'แมพ', count: maps.count ?? null },
   ];

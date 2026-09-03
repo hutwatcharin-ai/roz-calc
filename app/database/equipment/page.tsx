@@ -7,7 +7,8 @@ import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
-import { canJobEquip, EQUIPMENT_CATEGORIES } from '@/lib/equip-filter';
+import { canJobEquip } from '@/lib/equip-filter';
+import { GEAR_CATEGORIES } from '@/lib/item-href';
 import { ZERO_JOBS } from '@/lib/zero-jobs';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import ItemIcon from '@/components/ItemIcon';
@@ -17,7 +18,7 @@ export const revalidate = 86400;
 export const metadata = {
   title: 'ฐานข้อมูลอุปกรณ์',
   description:
-    'อาวุธ เกราะ และคอสตูมทั้งหมดในเกม Ragnarok Zero Global กรองตามอาชีพที่ใส่ได้และเลเวลที่ต้องการ พร้อมค่าพลังโจมตี',
+    'อาวุธและเกราะทั้งหมดในเกม Ragnarok Zero Global กรองตามอาชีพที่ใส่ได้และเลเวลที่ต้องการ พร้อมค่าพลังโจมตี (คอสตูมแยกอยู่หน้าคอสตูม)',
 };
 
 const PAGE_SIZE = 50;
@@ -28,23 +29,19 @@ const PAGE_SIZE = 50;
 // "Sword"/"Spear" mapped to their one-handed forms).
 const WEAPON_TYPES = ['Bow', 'Dagger', 'One-handed Sword', 'Two-handed Sword', 'One-handed Axe', 'Two-handed Axe', 'One-handed Spear', 'Two-handed Spear', 'One-handed Staff', 'Two-handed Staff', 'Mace', 'Book', 'Katar', 'Knuckle', 'Whip', 'Instrument', 'Huuma Shuriken', 'Arrow'];
 const ARMOR_TYPES = ['Headgear', 'Armor', 'Garment', 'Shoes', 'Shield', 'Accessory'];
-// Costume positions crawled from rozerodb item pages (2 Sep) -- values are
-// what items.weapon_type actually holds for Costume Equipment rows.
-const COSTUME_TYPES = ['Upper Head', 'Mid Head', 'Lower Head', 'Upper/Mid Head', 'Mid/Lower Head', 'Upper/Lower Head', 'All Head Slots', 'Garment'];
+// Costumes are not listed here: they moved to /database/costumes on 3 Sep 2026,
+// where 940 cosmetic rows stop crowding out the 875 pieces of real gear.
 const TYPES_BY_CATEGORY: Record<string, readonly string[]> = {
   Weapon: WEAPON_TYPES,
   Armor: ARMOR_TYPES,
-  'Costume Equipment': COSTUME_TYPES,
 };
 const TYPE_PLACEHOLDERS: Record<string, string> = {
   Weapon: 'ทุกชนิดอาวุธ',
   Armor: 'ทุกตำแหน่งสวม',
-  'Costume Equipment': 'ทุกตำแหน่งคอสตูม',
 };
 const CATEGORY_LABELS: Record<string, string> = {
   Weapon: 'อาวุธ',
   Armor: 'เกราะ/สวมใส่',
-  'Costume Equipment': 'คอสตูม',
 };
 
 export default async function EquipmentPage({
@@ -77,8 +74,10 @@ export default async function EquipmentPage({
 
   const db = supabaseBrowser();
 
-  // 1,815 rows since costumes moved here -- over PostgREST's silent 1,000-row
-  // cap, so this MUST paginate (fetchAllRows). Fetched whole because the job
+  // 875 rows since costumes moved out, under PostgREST's silent 1,000-row cap
+  // -- but it stays paginated (fetchAllRows), because a cap that truncates
+  // without an error is not something to leave one import away from biting.
+  // Fetched whole because the job
   // filter is an array-membership rule with group values that SQL would need
   // awkward gymnastics to express. Order by name_en, then id for stable
   // pagination (name_en is not unique, so ties must be broken).
@@ -96,7 +95,7 @@ export default async function EquipmentPage({
     db
       .from('items')
       .select('id, name_en, icon_url, category, weapon_type, atk, required_level, equippable_classes, slots')
-      .in('category', [...EQUIPMENT_CATEGORIES])
+      .in('category', [...GEAR_CATEGORIES])
       .order('name_en')
       .order('id')
       .range(from, to),
@@ -161,6 +160,12 @@ export default async function EquipmentPage({
         />
       )}
       <PageHeader title="ฐานข้อมูลอุปกรณ์ Ragnarok Zero" />
+      {/* Costumes outnumbered real gear here 940 to 875 and buried it. They
+          have their own page now, and this is the signpost for the player who
+          came looking for them. */}
+      <p className="muted" style={{ marginTop: -6, marginBottom: 12 }}>
+        หน้านี้เฉพาะอาวุธกับเกราะ · หาคอสตูมไปที่ <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
+      </p>
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no equipment", which
           is false. */}
@@ -187,7 +192,7 @@ export default async function EquipmentPage({
         <EquipCategoryType
           initialCategory={category}
           initialType={type}
-          categories={EQUIPMENT_CATEGORIES}
+          categories={GEAR_CATEGORIES}
           labels={CATEGORY_LABELS}
           typesByCategory={TYPES_BY_CATEGORY}
           placeholders={TYPE_PLACEHOLDERS}

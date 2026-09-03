@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mergeSearchResults, SEARCH_TYPE_LABELS, type SearchGroups } from './search';
 
-const empty: SearchGroups = { monsters: [], items: [], cards: [], equipment: [], skills: [], maps: [] };
+const empty: SearchGroups = { monsters: [], items: [], cards: [], equipment: [], costumes: [], skills: [], maps: [] };
 
 describe('mergeSearchResults', () => {
   it('returns nothing for empty groups', () => {
@@ -89,16 +89,23 @@ describe('mergeSearchResults', () => {
     expect(r.href).toBe('/database/maps/a%20b');
   });
 
-  it('keeps every group and orders them monsters, items, cards, equipment, skills, maps', () => {
+  it('keeps every group and orders them monsters, items, cards, equipment, costumes, skills, maps', () => {
     const results = mergeSearchResults({
       monsters: [{ id: 1, name_en: 'M', image_url: null }],
       items: [{ id: 2, name_en: 'I', icon_url: null }],
       cards: [{ id: 3, name_en: 'C', icon_url: null }],
       equipment: [{ id: 4, name_en: 'E', icon_url: null }],
+      costumes: [{ id: 5, name_en: 'K', icon_url: null }],
       skills: [{ slug: 's', name: 'S', icon_url: null }],
       maps: [{ map_code: 'p', map_display_name: null }],
     });
-    expect(results.map((r) => r.type)).toEqual(['monster', 'item', 'card', 'equipment', 'skill', 'map']);
+    expect(results.map((r) => r.type)).toEqual(['monster', 'item', 'card', 'equipment', 'costume', 'skill', 'map']);
+  });
+
+  it('sends a costume to the costume route, not the gear one', () => {
+    const [r] = mergeSearchResults({ ...empty, costumes: [{ id: 19585, name_en: 'Costume Feather Beret', icon_url: null }] });
+    expect(r.type).toBe('costume');
+    expect(r.href).toBe('/database/costumes/19585');
   });
 
   it('defaults a missing icon to null rather than undefined', () => {
@@ -110,8 +117,8 @@ describe('mergeSearchResults', () => {
 describe('SEARCH_TYPE_LABELS', () => {
   it('has a distinct Thai label for every type', () => {
     const labels = Object.values(SEARCH_TYPE_LABELS);
-    expect(labels).toHaveLength(6);
-    expect(new Set(labels).size).toBe(6);
+    expect(labels).toHaveLength(7);
+    expect(new Set(labels).size).toBe(7);
     for (const l of labels) expect(l.trim().length).toBeGreaterThan(0);
   });
 });

@@ -55,7 +55,7 @@ export default function GlobalSearch() {
       const db = supabaseBrowser();
       const needle = escapeLikePattern(query);
 
-      const [monsters, items, cards, equipment, skills, maps] = await Promise.all([
+      const [monsters, items, cards, equipment, costumes, skills, maps] = await Promise.all([
         db.from('monsters').select('id, name_en, image_url').ilike('name_en', `%${needle}%`).limit(5),
         // Items excludes cards and equipment so the same row cannot appear
         // twice under two different badges.
@@ -64,7 +64,13 @@ export default function GlobalSearch() {
           .ilike('name_en', `%${needle}%`).limit(5),
         db.from('items').select('id, name_en, icon_url').eq('category', 'Card').ilike('name_en', `%${needle}%`).limit(5),
         db.from('items').select('id, name_en, icon_url')
-          .in('category', ['Armor', 'Weapon', 'Costume Equipment'])
+          .in('category', ['Armor', 'Weapon'])
+          .ilike('name_en', `%${needle}%`).limit(5),
+        // Costumes are their own group, not gear: they outnumber real equipment
+        // 940 to 875, so sharing one bucket of five results meant a search for
+        // "wing" could return nothing a player can fight in.
+        db.from('items').select('id, name_en, icon_url')
+          .eq('category', 'Costume Equipment')
           .ilike('name_en', `%${needle}%`).limit(5),
         // classes is fetched so mergeSearchResults can route a skill to the
         // tab it actually lives on (isInGameSkill(classes)) instead of always
@@ -79,12 +85,13 @@ export default function GlobalSearch() {
       if (items.error) console.error('global search: items query failed', items.error);
       if (cards.error) console.error('global search: cards query failed', cards.error);
       if (equipment.error) console.error('global search: equipment query failed', equipment.error);
+      if (costumes.error) console.error('global search: costumes query failed', costumes.error);
       if (skills.error) console.error('global search: skills query failed', skills.error);
       if (maps.error) console.error('global search: maps query failed', maps.error);
 
       setHasError(
         Boolean(
-          monsters.error || items.error || cards.error || equipment.error || skills.error || maps.error,
+          monsters.error || items.error || cards.error || equipment.error || costumes.error || skills.error || maps.error,
         ),
       );
       setResults(
@@ -93,6 +100,7 @@ export default function GlobalSearch() {
           items: items.data ?? [],
           cards: cards.data ?? [],
           equipment: equipment.data ?? [],
+          costumes: costumes.data ?? [],
           skills: skills.data ?? [],
           maps: maps.data ?? [],
         }),

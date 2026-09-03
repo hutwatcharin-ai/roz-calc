@@ -1,11 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { isEquipmentCategory, itemHref } from './item-href';
+import { isCostumeCategory, isEquipmentCategory, isGearCategory, itemHref } from './item-href';
 
 describe('itemHref', () => {
-  it('sends the three equipment categories to the equipment route', () => {
+  it('sends weapons and armour to the gear route', () => {
     expect(itemHref(1163, 'Weapon')).toBe('/database/equipment/1163');
     expect(itemHref(2301, 'Armor')).toBe('/database/equipment/2301');
-    expect(itemHref(20000, 'Costume Equipment')).toBe('/database/equipment/20000');
+  });
+
+  it('sends costumes to their own route, not the gear one', () => {
+    // 940 of the 1,815 wearable rows are costumes; sharing the gear route is
+    // what buried armour in the list this split exists to fix.
+    expect(itemHref(19585, 'Costume Equipment')).toBe('/database/costumes/19585');
+    expect(isGearCategory('Costume Equipment')).toBe(false);
+    expect(isEquipmentCategory('Costume Equipment')).toBe(true);
   });
 
   it('leaves everything else on the item route', () => {
@@ -14,12 +21,13 @@ describe('itemHref', () => {
     expect(itemHref(909, null)).toBe('/database/items/909');
   });
 
-  it('does not treat a near-miss category name as equipment', () => {
-    // The redirect pair keys off this exact set: a category that reads like
-    // gear but is not in EQUIPMENT_CATEGORIES must stay on the item route, or
-    // the two routes bounce a request between each other forever.
+  it('does not treat a near-miss category name as wearable', () => {
+    // The three routes redirect to each other off these exact strings: a
+    // category that reads like gear but is not one must stay on the item
+    // route, or two routes bounce a request between each other forever.
     expect(isEquipmentCategory('Equipment')).toBe(false);
-    expect(isEquipmentCategory('weapon')).toBe(false);
+    expect(isGearCategory('weapon')).toBe(false);
+    expect(isCostumeCategory('Costume')).toBe(false);
     expect(isEquipmentCategory(undefined)).toBe(false);
   });
 });

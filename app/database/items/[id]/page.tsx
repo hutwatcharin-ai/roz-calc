@@ -10,7 +10,7 @@ import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
-import { isEquipmentCategory } from '@/lib/item-href';
+import { isEquipmentCategory, itemHref } from '@/lib/item-href';
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
@@ -93,12 +93,12 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
     notFound();
   }
 
-  // Gear moved to its own route on 3 Sep 2026 (see the header comment on
-  // app/database/equipment/[id]/page.tsx). Old links, bookmarks and anything
-  // already crawled land here and are sent on permanently, so a weapon has one
-  // canonical URL rather than two pages holding the same row.
+  // Gear and costumes moved to their own routes on 3 Sep 2026 (see the header
+  // comment on app/database/equipment/[id]/page.tsx). Old links, bookmarks and
+  // anything already crawled land here and are sent on permanently, so a
+  // weapon has one canonical URL rather than two pages holding the same row.
   if (isEquipmentCategory(item.category)) {
-    permanentRedirect(`/database/equipment/${id}`);
+    permanentRedirect(itemHref(id, item.category));
   }
 
   // A failed query must not read as "nothing drops this" (data: null looks
