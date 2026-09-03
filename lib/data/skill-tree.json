@@ -1,0 +1,6333 @@
+{
+  "fetched_at": "2026-09-03T10:17:33.045Z",
+  "source": "https://roz.prontera.info/skills/planner",
+  "lines": {
+    "novice": [
+      "novice"
+    ],
+    "acolyte": [
+      "novice",
+      "acolyte"
+    ],
+    "archer": [
+      "novice",
+      "archer"
+    ],
+    "mage": [
+      "novice",
+      "mage"
+    ],
+    "merchant": [
+      "novice",
+      "merchant"
+    ],
+    "swordsman": [
+      "novice",
+      "swordsman"
+    ],
+    "thief": [
+      "novice",
+      "thief"
+    ],
+    "alchemist": [
+      "novice",
+      "merchant",
+      "alchemist"
+    ],
+    "assassin": [
+      "novice",
+      "thief",
+      "assassin"
+    ],
+    "bard": [
+      "novice",
+      "archer",
+      "bard"
+    ],
+    "blacksmith": [
+      "novice",
+      "merchant",
+      "blacksmith"
+    ],
+    "crusader": [
+      "novice",
+      "swordsman",
+      "crusader"
+    ],
+    "dancer": [
+      "novice",
+      "archer",
+      "dancer"
+    ],
+    "hunter": [
+      "novice",
+      "archer",
+      "hunter"
+    ],
+    "knight": [
+      "novice",
+      "swordsman",
+      "knight"
+    ],
+    "monk": [
+      "novice",
+      "acolyte",
+      "monk"
+    ],
+    "priest": [
+      "novice",
+      "acolyte",
+      "priest"
+    ],
+    "rogue": [
+      "novice",
+      "thief",
+      "rogue"
+    ],
+    "sage": [
+      "novice",
+      "mage",
+      "sage"
+    ],
+    "wizard": [
+      "novice",
+      "mage",
+      "wizard"
+    ]
+  },
+  "stages": [
+    {
+      "slug": "novice",
+      "name": "Novice",
+      "tier": "base",
+      "skill_points": 10,
+      "skills": [
+        {
+          "slug": "basic-skill",
+          "name": "Basic Skill",
+          "max_level": 9,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "first-aid",
+          "name": "First Aid",
+          "max_level": 1,
+          "free": true,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "play-dead",
+          "name": "Play Dead",
+          "max_level": 1,
+          "free": true,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "slug": "acolyte",
+      "name": "Acolyte",
+      "tier": "first_class",
+      "skill_points": 49,
+      "skills": [
+        {
+          "slug": "ruwach",
+          "name": "Ruwach",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "heal",
+          "name": "Heal",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "aqua-benedicta",
+          "name": "Aqua Benedicta",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "mace-mastery",
+          "name": "Mace Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "divine-protection",
+          "name": "Divine Protection",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "holy-light",
+          "name": "Holy Light",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "teleport",
+          "name": "Teleport",
+          "max_level": 2,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "ruwach",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "cure",
+          "name": "Cure",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "heal",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "increase-agility",
+          "name": "Increase Agility",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "heal",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "blessing",
+          "name": "Blessing",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "divine-protection",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "demon-bane",
+          "name": "Demon Bane",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "divine-protection",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "angelus",
+          "name": "Angelus",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "divine-protection",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "warp-portal",
+          "name": "Warp Portal",
+          "max_level": 4,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "teleport",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "decrease-agility",
+          "name": "Decrease Agility",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "increase-agility",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "signum-crucis",
+          "name": "Signum Crucis",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "demon-bane",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "pneuma",
+          "name": "Pneuma",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "warp-portal",
+              "level": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "archer",
+      "name": "Archer",
+      "tier": "first_class",
+      "skill_points": 49,
+      "skills": [
+        {
+          "slug": "double-strafe",
+          "name": "Double Strafe",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "owls-eye",
+          "name": "Owl's Eye",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "arrow-repel",
+          "name": "Arrow Repel",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "arrow-shower",
+          "name": "Arrow Shower",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "double-strafe",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "vultures-eye",
+          "name": "Vulture's Eye",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "owls-eye",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "arrow-crafting",
+          "name": "Arrow Crafting",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "improve-concentration",
+          "name": "Improve Concentration",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "vultures-eye",
+              "level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "mage",
+      "name": "Mage",
+      "tier": "first_class",
+      "skill_points": 49,
+      "skills": [
+        {
+          "slug": "stone-curse",
+          "name": "Stone Curse",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "cold-bolt",
+          "name": "Cold Bolt",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "lightning-bolt",
+          "name": "Lightning Bolt",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "napalm-beat",
+          "name": "Napalm Beat",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "fire-bolt",
+          "name": "Fire Bolt",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "sight",
+          "name": "Sight",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "earth-spike",
+          "name": "Earth Spike",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "stone-curse",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "frost-driver",
+          "name": "Frost Driver",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cold-bolt",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "thunder-storm",
+          "name": "Thunder Storm",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lightning-bolt",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "soul-strike",
+          "name": "Soul Strike",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "napalm-beat",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "fire-ball",
+          "name": "Fire Ball",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "fire-bolt",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "energy-coat",
+          "name": "Energy Coat",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "increase-sp-recovery",
+          "name": "Increase SP Recovery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "safety-wall",
+          "name": "Safety Wall",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "soul-strike",
+              "level": 5
+            },
+            {
+              "slug": "napalm-beat",
+              "level": 7
+            }
+          ]
+        },
+        {
+          "slug": "fire-wall",
+          "name": "Fire Wall",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "fire-ball",
+              "level": 5
+            },
+            {
+              "slug": "sight",
+              "level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "merchant",
+      "name": "Merchant",
+      "tier": "first_class",
+      "skill_points": 49,
+      "skills": [
+        {
+          "slug": "enlarge-weight-limit",
+          "name": "Enlarge Weight Limit",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "axe-mastery",
+          "name": "Axe Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "mammonite",
+          "name": "Mammonite",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "crazy-uproar",
+          "name": "Crazy Uproar",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "item-appraisal",
+          "name": "Item Appraisal",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "discount",
+          "name": "Discount",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "enlarge-weight-limit",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "pushcart",
+          "name": "Pushcart",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "enlarge-weight-limit",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "change-cart",
+          "name": "Change Cart",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "overcharge",
+          "name": "Overcharge",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "discount",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "vending",
+          "name": "Vending",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "pushcart",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "cart-revolution",
+          "name": "Cart Revolution",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "cart-boost",
+          "name": "Cart Boost",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "pushcart",
+              "level": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "swordsman",
+      "name": "Swordsman",
+      "tier": "first_class",
+      "skill_points": 49,
+      "skills": [
+        {
+          "slug": "sword-mastery",
+          "name": "Sword Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "increase-hp-recovery",
+          "name": "Increase HP Recovery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "bash",
+          "name": "Bash",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "provoke",
+          "name": "Provoke",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "berserk",
+          "name": "Berserk",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "hp-recovery-while-moving",
+          "name": "HP Recovery While Moving",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "two-handed-sword-mastery",
+          "name": "Two Handed Sword Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "sword-mastery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "magnum-break",
+          "name": "Magnum Break",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "bash",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "endure",
+          "name": "Endure",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "provoke",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "fatal-blow",
+          "name": "Fatal Blow",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "spear-mastery",
+          "name": "Spear Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "passive",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "slug": "thief",
+      "name": "Thief",
+      "tier": "first_class",
+      "skill_points": 49,
+      "skills": [
+        {
+          "slug": "double-attack",
+          "name": "Double Attack",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "steal",
+          "name": "Steal",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "envenom",
+          "name": "Envenom",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "sand-attack",
+          "name": "Sand Attack",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "stone-fling",
+          "name": "Stone Fling",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "improve-dodge",
+          "name": "Improve Dodge",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "hiding",
+          "name": "Hiding",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "steal",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "detoxify",
+          "name": "Detoxify",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "envenom",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "back-slide",
+          "name": "Back Slide",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "find-stone",
+          "name": "Find Stone",
+          "max_level": 1,
+          "free": true,
+          "is_default": true,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "sword-mastery",
+          "name": "Sword Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "passive",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "slug": "alchemist",
+      "name": "Alchemist",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "potion-research",
+          "name": "Potion Research",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "mace-mastery",
+          "name": "Mace Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "high-speed-cart-ram",
+          "name": "High Speed Cart Ram",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cart-boost",
+              "level": 1
+            },
+            {
+              "slug": "mammonite",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "biochemical-helm",
+          "name": "Biochemical Helm",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "prepare-potion",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "bioethics",
+          "name": "Bioethics",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "prepare-potion",
+          "name": "Prepare Potion",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "potion-research",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "synthesized-shield",
+          "name": "Synthesized Shield",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "biochemical-helm",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "vaporize",
+          "name": "Vaporize",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "bioethics",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "summon-marine-sphere",
+          "name": "Summon Marine Sphere",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "prepare-potion",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "aid-potion",
+          "name": "Aid Potion",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "prepare-potion",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "bomb",
+          "name": "Bomb",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "prepare-potion",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "acid-terror",
+          "name": "Acid Terror",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "prepare-potion",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "summon-flora",
+          "name": "Summon Flora",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "prepare-potion",
+              "level": 6
+            }
+          ]
+        },
+        {
+          "slug": "synthetic-armor",
+          "name": "Synthetic Armor",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "synthesized-shield",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "call-homunculus",
+          "name": "Call Homunculus",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 20,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "vaporize",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "aid-condensed-potion",
+          "name": "Aid Condensed Potion",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "aid-potion",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "acid-bomb",
+          "name": "Acid Bomb",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "bomb",
+              "level": 5
+            },
+            {
+              "slug": "acid-terror",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "alchemical-weapon",
+          "name": "Alchemical Weapon",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "synthetic-armor",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "homunculus-resurrection",
+          "name": "Homunculus Resurrection",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 27,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "call-homunculus",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "full-chemical-protection",
+          "name": "Full Chemical Protection",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 33,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "synthesized-shield",
+              "level": 5
+            },
+            {
+              "slug": "synthetic-armor",
+              "level": 5
+            },
+            {
+              "slug": "alchemical-weapon",
+              "level": 5
+            },
+            {
+              "slug": "biochemical-helm",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "dubious-salesmanship",
+          "name": "Dubious Salesmanship",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 34,
+          "passive": "passive",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "slug": "assassin",
+      "name": "Assassin",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "righthand-mastery",
+          "name": "Righthand Mastery",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "katar-mastery",
+          "name": "Katar Mastery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "cloaking",
+          "name": "Cloaking",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hiding",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "enchant-poison",
+          "name": "Enchant Poison",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "envenom",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "venom-knife",
+          "name": "Venom Knife",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "lefthand-mastery",
+          "name": "Lefthand Mastery",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "righthand-mastery",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "sonic-blow",
+          "name": "Sonic Blow",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "katar-mastery",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "advanced-katar-mastery",
+          "name": "Advanced Katar Mastery",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "katar-mastery",
+              "level": 7
+            },
+            {
+              "slug": "double-attack",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "venom-dust",
+          "name": "Venom Dust",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "enchant-poison",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "poison-react",
+          "name": "Poison React",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "enchant-poison",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "create-deadly-poison",
+          "name": "Create Deadly Poison",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "envenom",
+              "level": 10
+            },
+            {
+              "slug": "detoxify",
+              "level": 1
+            },
+            {
+              "slug": "enchant-poison",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "sonic-acceleration",
+          "name": "Sonic Acceleration",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "grimtooth",
+          "name": "Grimtooth",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cloaking",
+              "level": 2
+            },
+            {
+              "slug": "sonic-blow",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "venom-splasher",
+          "name": "Venom Splasher",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "venom-dust",
+              "level": 5
+            },
+            {
+              "slug": "poison-react",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "soul-destroyer",
+          "name": "Soul Destroyer",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "envenom",
+              "level": 5
+            },
+            {
+              "slug": "cloaking",
+              "level": 3
+            },
+            {
+              "slug": "double-attack",
+              "level": 5
+            },
+            {
+              "slug": "enchant-poison",
+              "level": 6
+            }
+          ]
+        },
+        {
+          "slug": "enchant-deadly-poison",
+          "name": "Enchant Deadly Poison",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "create-deadly-poison",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "meteor-assault",
+          "name": "Meteor Assault",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "soul-destroyer",
+              "level": 1
+            },
+            {
+              "slug": "sonic-blow",
+              "level": 5
+            },
+            {
+              "slug": "righthand-mastery",
+              "level": 3
+            },
+            {
+              "slug": "katar-mastery",
+              "level": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "bard",
+      "name": "Bard",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "amp",
+          "name": "Amp",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "music-lessons",
+          "name": "Music Lessons",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "unchained-serenade",
+          "name": "Unchained Serenade",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "music-lessons",
+              "level": 1
+            },
+            {
+              "slug": "amp",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "pang-voice",
+          "name": "Pang Voice",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "encore",
+          "name": "Encore",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "amp",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "melody-strike",
+          "name": "Melody Strike",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "music-lessons",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "perfect-tablature",
+          "name": "Perfect Tablature",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "unchained-serenade",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "impressive-riff",
+          "name": "Impressive Riff",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "unchained-serenade",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "magic-strings",
+          "name": "Magic Strings",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "unchained-serenade",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "song-of-lutie",
+          "name": "Song of Lutie",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "unchained-serenade",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "unbarring-octave",
+          "name": "Unbarring Octave",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "encore",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "lullaby",
+          "name": "Lullaby",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "perfect-tablature",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "classical-pluck",
+          "name": "Classical Pluck",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "impressive-riff",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "acoustic-rhythm",
+          "name": "Acoustic Rhythm",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "magic-strings",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "battle-theme",
+          "name": "Battle Theme",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "song-of-lutie",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "power-cord",
+          "name": "Power Cord",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lullaby",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "down-tempo",
+          "name": "Down Tempo",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "classical-pluck",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "mental-sensing",
+          "name": "Mental Sensing",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "acoustic-rhythm",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "harmonic-lick",
+          "name": "Harmonic Lick",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "battle-theme",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "arrow-vulcan",
+          "name": "Arrow Vulcan",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "melody-strike",
+              "level": 1
+            },
+            {
+              "slug": "arrow-shower",
+              "level": 5
+            },
+            {
+              "slug": "double-strafe",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "sheltering-bliss",
+          "name": "Sheltering Bliss",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 30,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "improve-concentration",
+              "level": 5
+            },
+            {
+              "slug": "music-lessons",
+              "level": 7
+            }
+          ]
+        },
+        {
+          "slug": "marionette-control",
+          "name": "Marionette Control",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 31,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "music-lessons",
+              "level": 5
+            },
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "hermodes-rod",
+          "name": "Hermode's Rod",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 32,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "music-lessons",
+              "level": 10
+            },
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "skilled-special-singer",
+          "name": "Skilled Special Singer",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 38,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "music-lessons",
+              "level": 10
+            },
+            {
+              "slug": "marionette-control",
+              "level": 1
+            },
+            {
+              "slug": "unchained-serenade",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "tarot-card-of-fate",
+          "name": "Tarot Card of Fate",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 39,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            },
+            {
+              "slug": "unchained-serenade",
+              "level": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "blacksmith",
+      "name": "Blacksmith",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "iron-tempering",
+          "name": "Iron Tempering",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "skin-tempering",
+          "name": "Skin Tempering",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "hilt-binding",
+          "name": "Hilt Binding",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "hammerfall",
+          "name": "Hammerfall",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "smith-dagger",
+          "name": "Smith Dagger",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "steel-tempering",
+          "name": "Steel Tempering",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "iron-tempering",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "enchanted-stone-craft",
+          "name": "Enchanted Stone Craft",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "iron-tempering",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "weaponry-research",
+          "name": "Weaponry Research",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "hilt-binding",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "adrenaline-rush",
+          "name": "Adrenaline Rush",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hammerfall",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "smith-spear",
+          "name": "Smith Spear",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "smith-dagger",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "smith-sword",
+          "name": "Smith Sword",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "smith-dagger",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "smith-knuckle",
+          "name": "Smith Knuckle",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "smith-dagger",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "ore-discovery",
+          "name": "Ore Discovery",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "steel-tempering",
+              "level": 1
+            },
+            {
+              "slug": "hilt-binding",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "repair-weapon",
+          "name": "Repair Weapon",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "weaponry-research",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "weapon-perfection",
+          "name": "Weapon Perfection",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "weaponry-research",
+              "level": 2
+            },
+            {
+              "slug": "adrenaline-rush",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "power-thrust",
+          "name": "Power Thrust",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "adrenaline-rush",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "smith-two-handed-sword",
+          "name": "Smith Two-handed Sword",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "smith-sword",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "smith-mace",
+          "name": "Smith Mace",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 20,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "smith-knuckle",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "high-speed-cart-ram",
+          "name": "High Speed Cart Ram",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 21,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cart-boost",
+              "level": 1
+            },
+            {
+              "slug": "mammonite",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "shattering-strike",
+          "name": "Shattering Strike",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hilt-binding",
+              "level": 1
+            },
+            {
+              "slug": "power-thrust",
+              "level": 3
+            },
+            {
+              "slug": "weaponry-research",
+              "level": 5
+            },
+            {
+              "slug": "skin-tempering",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "maximize-power",
+          "name": "Maximize Power",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "weapon-perfection",
+              "level": 3
+            },
+            {
+              "slug": "power-thrust",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "maximum-power-thrust",
+          "name": "Maximum Power-Thrust",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "power-thrust",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "smith-axe",
+          "name": "Smith Axe",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "smith-sword",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "axe-mastery-2",
+          "name": "Axe Mastery ",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 28,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "axe-boomerang",
+          "name": "Axe Boomerang",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "axe-mastery-2",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "power-swing",
+          "name": "Power Swing",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 30,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "axe-boomerang",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "dubious-salesmanship",
+          "name": "Dubious Salesmanship",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 34,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "axe-tornado",
+          "name": "Axe Tornado ",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 36,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "axe-mastery-2",
+              "level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "crusader",
+      "name": "Crusader",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "faith",
+          "name": "Faith",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "relax",
+          "name": "Relax",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "provoke",
+              "level": 5
+            },
+            {
+              "slug": "increase-hp-recovery",
+              "level": 10
+            },
+            {
+              "slug": "endure",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "guard",
+          "name": "Guard",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "spear-quicken",
+          "name": "Spear Quicken",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spear-mastery",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "peco-peco-ride",
+          "name": "Peco Peco Ride",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "endure",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "shrink",
+          "name": "Shrink",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "divine-protection",
+          "name": "Divine Protection",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "faith",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "heal",
+          "name": "Heal",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "faith",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "smite",
+          "name": "Smite",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "guard",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "cannon-spear",
+          "name": "Cannon Spear",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spear-quicken",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "cavalier-mastery",
+          "name": "Cavalier Mastery",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "peco-peco-ride",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "demon-bane",
+          "name": "Demon Bane",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "divine-protection",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "resistant-souls",
+          "name": "Resistant Souls",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "divine-protection",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "cure",
+          "name": "Cure",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "heal",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "shield-boomerang",
+          "name": "Shield Boomerang",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "smite",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "gloria-domini",
+          "name": "Gloria Domini",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 21,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "endure",
+              "level": 5
+            },
+            {
+              "slug": "demon-bane",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "holy-cross",
+          "name": "Holy Cross",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "demon-bane",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "battle-chant",
+          "name": "Battle Chant",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "faith",
+              "level": 8
+            },
+            {
+              "slug": "demon-bane",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "defending-aura",
+          "name": "Defending Aura",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "shield-boomerang",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "shield-reflect",
+          "name": "Shield Reflect",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "shield-boomerang",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "rapid-smiting",
+          "name": "Rapid Smiting",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "shield-boomerang",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "martyrs-reckoning",
+          "name": "Martyr's Reckoning",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 28,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "endure",
+              "level": 1
+            },
+            {
+              "slug": "gloria-domini",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "grand-cross",
+          "name": "Grand Cross",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "holy-cross",
+              "level": 6
+            },
+            {
+              "slug": "faith",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "sacrifice",
+          "name": "Sacrifice",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 32,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "resistant-souls",
+              "level": 4
+            },
+            {
+              "slug": "shield-reflect",
+              "level": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "dancer",
+      "name": "Dancer",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "amp",
+          "name": "Amp",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "dance-lessons",
+          "name": "Dance Lessons",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "hip-shaker",
+          "name": "Hip Shaker",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "dance-lessons",
+              "level": 1
+            },
+            {
+              "slug": "amp",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "charming-wink",
+          "name": "Charming Wink",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "encore",
+          "name": "Encore",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "amp",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "slinging-arrow",
+          "name": "Slinging Arrow",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "dance-lessons",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "focus-ballet",
+          "name": "Focus Ballet",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hip-shaker",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "slow-grace",
+          "name": "Slow Grace",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hip-shaker",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "lady-luck",
+          "name": "Lady Luck",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hip-shaker",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "gypsys-kiss",
+          "name": "Gypsy's Kiss",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hip-shaker",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "dazzler",
+          "name": "Dazzler",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "encore",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "lullaby",
+          "name": "Lullaby",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "focus-ballet",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "classical-pluck",
+          "name": "Classical Pluck",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "slow-grace",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "acoustic-rhythm",
+          "name": "Acoustic Rhythm",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lady-luck",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "battle-theme",
+          "name": "Battle Theme",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "gypsys-kiss",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "power-cord",
+          "name": "Power Cord",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lullaby",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "down-tempo",
+          "name": "Down Tempo",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "classical-pluck",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "mental-sensing",
+          "name": "Mental Sensing",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "acoustic-rhythm",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "harmonic-lick",
+          "name": "Harmonic Lick",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "battle-theme",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "arrow-vulcan",
+          "name": "Arrow Vulcan",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "double-strafe",
+              "level": 5
+            },
+            {
+              "slug": "slinging-arrow",
+              "level": 1
+            },
+            {
+              "slug": "arrow-shower",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "sheltering-bliss",
+          "name": "Sheltering Bliss",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 30,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "improve-concentration",
+              "level": 5
+            },
+            {
+              "slug": "dance-lessons",
+              "level": 7
+            }
+          ]
+        },
+        {
+          "slug": "marionette-control",
+          "name": "Marionette Control",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 31,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "dance-lessons",
+              "level": 5
+            },
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "hermodes-rod",
+          "name": "Hermode's Rod",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 32,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            },
+            {
+              "slug": "dance-lessons",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "skilled-special-singer",
+          "name": "Skilled Special Singer",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 38,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hip-shaker",
+              "level": 3
+            },
+            {
+              "slug": "dance-lessons",
+              "level": 10
+            },
+            {
+              "slug": "marionette-control",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "tarot-card-of-fate",
+          "name": "Tarot Card of Fate",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 39,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hip-shaker",
+              "level": 3
+            },
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "hunter",
+      "name": "Hunter",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "beastbane",
+          "name": "Beastbane",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "skid-trap",
+          "name": "Skid Trap",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "land-mine",
+          "name": "Land Mine",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "focused-arrow-strike",
+          "name": "Focused Arrow Strike",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            },
+            {
+              "slug": "double-strafe",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "falconry-mastery",
+          "name": "Falconry Mastery",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "beastbane",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "flasher",
+          "name": "Flasher",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "skid-trap",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "anklesnare",
+          "name": "Anklesnare",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "skid-trap",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "remove-trap",
+          "name": "Remove Trap",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "land-mine",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "wind-walker",
+          "name": "Wind Walker",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "improve-concentration",
+              "level": 9
+            }
+          ]
+        },
+        {
+          "slug": "phantasmic-arrow",
+          "name": "Phantasmic Arrow",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "blitz-beat",
+          "name": "Blitz Beat",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "falconry-mastery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "sandman",
+          "name": "Sandman",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "flasher",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "freezing-trap",
+          "name": "Freezing Trap",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "flasher",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "shockwave-trap",
+          "name": "Shockwave Trap",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "anklesnare",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "spring-trap",
+          "name": "Spring Trap",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "falconry-mastery",
+              "level": 1
+            },
+            {
+              "slug": "remove-trap",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "detect",
+          "name": "Detect",
+          "max_level": 4,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "falconry-mastery",
+              "level": 1
+            },
+            {
+              "slug": "improve-concentration",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "steel-crow",
+          "name": "Steel Crow",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 21,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "blitz-beat",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "blast-mine",
+          "name": "Blast Mine",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "sandman",
+              "level": 1
+            },
+            {
+              "slug": "land-mine",
+              "level": 1
+            },
+            {
+              "slug": "freezing-trap",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "talkie-box",
+          "name": "Talkie Box",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "shockwave-trap",
+              "level": 1
+            },
+            {
+              "slug": "remove-trap",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "falcon-eyes",
+          "name": "Falcon Eyes",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "vultures-eye",
+              "level": 10
+            },
+            {
+              "slug": "owls-eye",
+              "level": 10
+            },
+            {
+              "slug": "falconry-mastery",
+              "level": 1
+            },
+            {
+              "slug": "improve-concentration",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "falcon-assault",
+          "name": "Falcon Assault",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 28,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "vultures-eye",
+              "level": 5
+            },
+            {
+              "slug": "falconry-mastery",
+              "level": 1
+            },
+            {
+              "slug": "steel-crow",
+              "level": 3
+            },
+            {
+              "slug": "blitz-beat",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "claymore-trap",
+          "name": "Claymore Trap",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "blast-mine",
+              "level": 1
+            },
+            {
+              "slug": "shockwave-trap",
+              "level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "knight",
+      "name": "Knight",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "two-hand-quicken",
+          "name": "Two Hand Quicken",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "two-handed-sword-mastery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "counter-attack",
+          "name": "Counter Attack",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "two-handed-sword-mastery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "peco-peco-ride",
+          "name": "Peco Peco Ride",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "endure",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "pierce",
+          "name": "Pierce",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spear-mastery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "aura-blade",
+          "name": "Aura Blade",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "magnum-break",
+              "level": 5
+            },
+            {
+              "slug": "two-handed-sword-mastery",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "relax",
+          "name": "Relax",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "provoke",
+              "level": 5
+            },
+            {
+              "slug": "increase-hp-recovery",
+              "level": 10
+            },
+            {
+              "slug": "endure",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "charge-attack",
+          "name": "Charge Attack",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "parry",
+          "name": "Parry",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "two-hand-quicken",
+              "level": 3
+            },
+            {
+              "slug": "two-handed-sword-mastery",
+              "level": 10
+            },
+            {
+              "slug": "provoke",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "bowling-bash",
+          "name": "Bowling Bash",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "counter-attack",
+              "level": 5
+            },
+            {
+              "slug": "two-handed-sword-mastery",
+              "level": 5
+            },
+            {
+              "slug": "two-hand-quicken",
+              "level": 10
+            },
+            {
+              "slug": "magnum-break",
+              "level": 3
+            },
+            {
+              "slug": "bash",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "cavalier-mastery",
+          "name": "Cavalier Mastery",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "peco-peco-ride",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "spear-boomerang",
+          "name": "Spear Boomerang",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "pierce",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "spear-stab",
+          "name": "Spear Stab",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "pierce",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "spear-dynamo",
+          "name": "Spear Dynamo",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spear-mastery",
+              "level": 5
+            },
+            {
+              "slug": "peco-peco-ride",
+              "level": 1
+            },
+            {
+              "slug": "increase-hp-recovery",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "frenzy",
+          "name": "Frenzy",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "traumatic-blow",
+          "name": "Traumatic Blow",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spear-mastery",
+              "level": 9
+            },
+            {
+              "slug": "peco-peco-ride",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "brandish-spear",
+          "name": "Brandish Spear",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "peco-peco-ride",
+              "level": 1
+            },
+            {
+              "slug": "spear-stab",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "clashing-spiral",
+          "name": "Clashing Spiral",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spear-stab",
+              "level": 5
+            },
+            {
+              "slug": "pierce",
+              "level": 5
+            },
+            {
+              "slug": "spear-mastery",
+              "level": 5
+            },
+            {
+              "slug": "peco-peco-ride",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "vital-strike",
+          "name": "Vital Strike",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cavalier-mastery",
+              "level": 3
+            },
+            {
+              "slug": "traumatic-blow",
+              "level": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "monk",
+      "name": "Monk",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "iron-fists",
+          "name": "Iron Fists",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "demon-bane",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "flee",
+          "name": "Flee",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "divine-protection",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "spiritual-bestowment",
+          "name": "Spiritual Bestowment",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "summon-spirit-sphere",
+          "name": "Summon Spirit Sphere",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "iron-fists",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "occult-impaction",
+          "name": "Occult Impaction",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "summon-spirit-sphere",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "raging-trifecta-blow",
+          "name": "Raging Trifecta Blow",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "iron-fists",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "root",
+          "name": "Root",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "flee",
+              "level": 5
+            },
+            {
+              "slug": "summon-spirit-sphere",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "excruciating-palm",
+          "name": "Excruciating Palm",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "spiritual-sphere-absorption",
+          "name": "Spiritual Sphere Absorption",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "summon-spirit-sphere",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "throw-spirit-sphere",
+          "name": "Throw Spirit Sphere",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "occult-impaction",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "raging-quadruple-blow",
+          "name": "Raging Quadruple Blow",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "raging-trifecta-blow",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "spiritual-cadence",
+          "name": "Spiritual Cadence",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "root",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "raging-palm-strike",
+          "name": "Raging Palm Strike",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "summon-spirit-sphere",
+              "level": 5
+            },
+            {
+              "slug": "iron-fists",
+              "level": 7
+            }
+          ]
+        },
+        {
+          "slug": "fury",
+          "name": "Fury",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 21,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spiritual-sphere-absorption",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "raging-thrust",
+          "name": "Raging Thrust",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "raging-quadruple-blow",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "mental-strength",
+          "name": "Mental Strength",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spiritual-cadence",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "zen",
+          "name": "Zen",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 28,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "fury",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "guillotine-fist",
+          "name": "Guillotine Fist",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "throw-spirit-sphere",
+              "level": 3
+            },
+            {
+              "slug": "fury",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "glacier-fist",
+          "name": "Glacier Fist",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 30,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "raging-trifecta-blow",
+              "level": 5
+            },
+            {
+              "slug": "iron-fists",
+              "level": 5
+            },
+            {
+              "slug": "raging-thrust",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "snap",
+          "name": "Snap",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 32,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "mental-strength",
+              "level": 3
+            },
+            {
+              "slug": "fury",
+              "level": 3
+            },
+            {
+              "slug": "raging-thrust",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "rising-dragon",
+          "name": "Rising Dragon",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 35,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "zen",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "chain-crush-combo",
+          "name": "Chain Crush Combo",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 37,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "iron-fists",
+              "level": 5
+            },
+            {
+              "slug": "summon-spirit-sphere",
+              "level": 5
+            },
+            {
+              "slug": "glacier-fist",
+              "level": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "priest",
+      "name": "Priest",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "kyrie-eleison",
+          "name": "Kyrie Eleison",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "angelus",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "magnificat",
+          "name": "Magnificat",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "status-recovery",
+          "name": "Status Recovery",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "increase-sp-recovery",
+          "name": "Increase SP Recovery",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "lex-divina",
+          "name": "Lex Divina",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "ruwach",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "impositio-manus",
+          "name": "Impositio Manus",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "sanctuary",
+          "name": "Sanctuary",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "heal",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "gloria",
+          "name": "Gloria",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "magnificat",
+              "level": 3
+            },
+            {
+              "slug": "kyrie-eleison",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "cantocandidus",
+          "name": "Cantocandidus",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "increase-agility",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "resurrection",
+          "name": "Resurrection",
+          "max_level": 4,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "status-recovery",
+              "level": 1
+            },
+            {
+              "slug": "increase-sp-recovery",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "assumptio",
+          "name": "Assumptio",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "increase-sp-recovery",
+              "level": 3
+            },
+            {
+              "slug": "angelus",
+              "level": 1
+            },
+            {
+              "slug": "impositio-manus",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "lex-aeterna",
+          "name": "Lex Aeterna",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lex-divina",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "suffragium",
+          "name": "Suffragium",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "impositio-manus",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "aspersio",
+          "name": "Aspersio",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "impositio-manus",
+              "level": 3
+            },
+            {
+              "slug": "aqua-benedicta",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "b-s-sacramenti",
+          "name": "B.S Sacramenti ",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "gloria",
+              "level": 3
+            },
+            {
+              "slug": "aspersio",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "clementia",
+          "name": "Clementia",
+          "max_level": 3,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "blessing",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "turn-undead",
+          "name": "Turn Undead",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lex-divina",
+              "level": 3
+            },
+            {
+              "slug": "resurrection",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "basilica",
+          "name": "Basilica",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "kyrie-eleison",
+              "level": 3
+            },
+            {
+              "slug": "gloria",
+              "level": 2
+            },
+            {
+              "slug": "increase-sp-recovery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "duple-light",
+          "name": "Duple Light",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "aspersio",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "meditation",
+          "name": "Meditation",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "aspersio",
+              "level": 3
+            },
+            {
+              "slug": "lex-divina",
+              "level": 5
+            },
+            {
+              "slug": "increase-sp-recovery",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "safety-wall",
+          "name": "Safety Wall",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 20,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "sanctuary",
+              "level": 3
+            },
+            {
+              "slug": "aspersio",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "spiritual-thrift",
+          "name": "Spiritual Thrift",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "demon-bane",
+              "level": 10
+            },
+            {
+              "slug": "mace-mastery",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "magnus-exorcismus",
+          "name": "Magnus Exorcismus",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lex-aeterna",
+              "level": 1
+            },
+            {
+              "slug": "safety-wall",
+              "level": 1
+            },
+            {
+              "slug": "turn-undead",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "redemptio",
+          "name": "Redemptio",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 27,
+          "passive": "active",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "slug": "rogue",
+      "name": "Rogue",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "vultures-eye",
+          "name": "Vulture's Eye",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "owls-eye",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "stalk",
+          "name": "Stalk",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "hiding",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "gank",
+          "name": "Gank",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "steal",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "divest-helm",
+          "name": "Divest Helm",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "counter-instinct",
+          "name": "Counter Instinct",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "close-confine",
+          "name": "Close Confine",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "double-strafe",
+          "name": "Double Strafe",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "vultures-eye",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "stealth",
+          "name": "Stealth",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hiding",
+              "level": 5
+            },
+            {
+              "slug": "stalk",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "back-stab",
+          "name": "Back Stab",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "gank",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "divest-shield",
+          "name": "Divest Shield",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "divest-helm",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "remove-trap",
+          "name": "Remove Trap",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 14,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "double-strafe",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "sightless-mind",
+          "name": "Sightless Mind",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "back-stab",
+              "level": 2
+            },
+            {
+              "slug": "stalk",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "divest-armor",
+          "name": "Divest Armor",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "divest-shield",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "slyness",
+          "name": "Slyness",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "divest-shield",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "triangle-shot",
+          "name": "Triangle Shot",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 21,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "double-strafe",
+              "level": 7
+            }
+          ]
+        },
+        {
+          "slug": "snatch",
+          "name": "Snatch",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "back-stab",
+              "level": 4
+            },
+            {
+              "slug": "sightless-mind",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "divest-weapon",
+          "name": "Divest Weapon",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "divest-armor",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "scribble",
+          "name": "Scribble",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 25,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "slyness",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "haggle",
+          "name": "Haggle",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "slyness",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "plagiarism",
+          "name": "Plagiarism",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "snatch",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "full-divestment",
+          "name": "Full Divestment",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 31,
+          "passive": null,
+          "prerequisites": [
+            {
+              "slug": "divest-armor",
+              "level": 5
+            },
+            {
+              "slug": "divest-weapon",
+              "level": 5
+            },
+            {
+              "slug": "divest-helm",
+              "level": 5
+            },
+            {
+              "slug": "divest-shield",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "shadow-spell",
+          "name": "Shadow Spell",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 36,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "plagiarism",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "preserve",
+          "name": "Preserve",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 37,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "plagiarism",
+              "level": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sage",
+      "name": "Sage",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "study",
+          "name": "Study",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "passive",
+          "prerequisites": []
+        },
+        {
+          "slug": "sense",
+          "name": "Sense",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "elemental-change-water",
+          "name": "Elemental Change - Water",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "elemental-change-wind",
+          "name": "Elemental Change - Wind",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "elemental-change-ground",
+          "name": "Elemental Change - Ground",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "elemental-change-fire",
+          "name": "Elemental Change - Fire",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "create-elemental-converter",
+          "name": "Create Elemental Converter",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "fiber-lock",
+          "name": "Fiber Lock",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "study",
+              "level": 9
+            }
+          ]
+        },
+        {
+          "slug": "endow-quake",
+          "name": "Endow Quake",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "stone-curse",
+              "level": 1
+            },
+            {
+              "slug": "study",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "cast-cancel",
+          "name": "Cast Cancel",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "study",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "magic-rod",
+          "name": "Magic Rod",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "study",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "endow-tsunami",
+          "name": "Endow Tsunami",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cold-bolt",
+              "level": 1
+            },
+            {
+              "slug": "study",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "endow-tornado",
+          "name": "Endow Tornado",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "lightning-bolt",
+              "level": 1
+            },
+            {
+              "slug": "study",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "endow-blaze",
+          "name": "Endow Blaze",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "fire-bolt",
+              "level": 1
+            },
+            {
+              "slug": "study",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "heavens-drive",
+          "name": "Heaven's Drive",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "earth-spike",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "free-cast",
+          "name": "Free Cast",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 16,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "cast-cancel",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "spell-breaker",
+          "name": "Spell Breaker",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "magic-rod",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "deluge",
+          "name": "Deluge",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 18,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "endow-tsunami",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "whirlwind",
+          "name": "Whirlwind",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "endow-tornado",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "volcano",
+          "name": "Volcano",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 20,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "endow-blaze",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "soul-exhale",
+          "name": "Soul Exhale",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 21,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spell-breaker",
+              "level": 2
+            },
+            {
+              "slug": "magic-rod",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "hindsight",
+          "name": "Hindsight",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 23,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "free-cast",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "dispell",
+          "name": "Dispell",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 24,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "spell-breaker",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "blinding-mist",
+          "name": "Blinding Mist",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 26,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "whirlwind",
+              "level": 2
+            },
+            {
+              "slug": "deluge",
+              "level": 2
+            }
+          ]
+        },
+        {
+          "slug": "land-protector",
+          "name": "Land Protector",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 27,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "whirlwind",
+              "level": 3
+            },
+            {
+              "slug": "deluge",
+              "level": 3
+            },
+            {
+              "slug": "volcano",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "indulge",
+          "name": "Indulge",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 28,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "increase-sp-recovery",
+              "level": 1
+            },
+            {
+              "slug": "magic-rod",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "double-bolt",
+          "name": "Double Bolt",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 29,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hindsight",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "foresight",
+          "name": "Foresight",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 30,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "free-cast",
+              "level": 5
+            },
+            {
+              "slug": "hindsight",
+              "level": 1
+            },
+            {
+              "slug": "study",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "soul-siphon",
+          "name": "Soul Siphon",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 31,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "magic-rod",
+              "level": 3
+            },
+            {
+              "slug": "cast-cancel",
+              "level": 5
+            },
+            {
+              "slug": "dispell",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "hocus-pocus",
+          "name": "Hocus-pocus",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 34,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hindsight",
+              "level": 5
+            },
+            {
+              "slug": "dispell",
+              "level": 1
+            },
+            {
+              "slug": "land-protector",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "spell-fist",
+          "name": "Spell Fist",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 37,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "hindsight",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "slug": "mind-breaker",
+          "name": "Mind Breaker",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 38,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "soul-siphon",
+              "level": 2
+            },
+            {
+              "slug": "increase-sp-recovery",
+              "level": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "wizard",
+      "name": "Wizard",
+      "tier": "second_job",
+      "skill_points": 59,
+      "skills": [
+        {
+          "slug": "sense",
+          "name": "Sense",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 0,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "ice-wall",
+          "name": "Ice Wall",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 1,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "frost-driver",
+              "level": 1
+            },
+            {
+              "slug": "stone-curse",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "jupitel-thunder",
+          "name": "Jupitel Thunder",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 2,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "napalm-beat",
+              "level": 1
+            },
+            {
+              "slug": "lightning-bolt",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "heavens-drive",
+          "name": "Heaven's Drive",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 3,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "earth-spike",
+              "level": 3
+            }
+          ]
+        },
+        {
+          "slug": "sightrasher",
+          "name": "Sightrasher",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 4,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "sight",
+              "level": 1
+            },
+            {
+              "slug": "lightning-bolt",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "fire-pillar",
+          "name": "Fire Pillar",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 5,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "fire-wall",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "sight-blaster",
+          "name": "Sight Blaster",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 6,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "ganbantein",
+          "name": "Ganbantein",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 7,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "sense",
+              "level": 1
+            },
+            {
+              "slug": "ice-wall",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "frost-nova",
+          "name": "Frost Nova",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 8,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "ice-wall",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "lord-of-vermilion",
+          "name": "Lord of Vermilion",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 9,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "thunder-storm",
+              "level": 1
+            },
+            {
+              "slug": "jupitel-thunder",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "quagmire",
+          "name": "Quagmire",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 10,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "heavens-drive",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "meteor-storm",
+          "name": "Meteor Storm",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 11,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "sightrasher",
+              "level": 2
+            },
+            {
+              "slug": "thunder-storm",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "stave-crasher",
+          "name": "Stave Crasher",
+          "max_level": 1,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 12,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "increase-sp-recovery",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "soul-drain",
+          "name": "Soul Drain",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 13,
+          "passive": "passive",
+          "prerequisites": [
+            {
+              "slug": "increase-sp-recovery",
+              "level": 5
+            },
+            {
+              "slug": "soul-strike",
+              "level": 7
+            }
+          ]
+        },
+        {
+          "slug": "waterball",
+          "name": "Waterball",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 15,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "cold-bolt",
+              "level": 1
+            },
+            {
+              "slug": "lightning-bolt",
+              "level": 1
+            }
+          ]
+        },
+        {
+          "slug": "gravitational-field",
+          "name": "Gravitational Field",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 17,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "stave-crasher",
+              "level": 1
+            },
+            {
+              "slug": "quagmire",
+              "level": 1
+            },
+            {
+              "slug": "mystical-amplification",
+              "level": 10
+            }
+          ]
+        },
+        {
+          "slug": "napalm-vulcan",
+          "name": "Napalm Vulcan",
+          "max_level": 5,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 19,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "napalm-beat",
+              "level": 5
+            }
+          ]
+        },
+        {
+          "slug": "mystical-amplification",
+          "name": "Mystical Amplification",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 20,
+          "passive": "active",
+          "prerequisites": []
+        },
+        {
+          "slug": "storm-gust",
+          "name": "Storm Gust",
+          "max_level": 10,
+          "free": false,
+          "is_default": false,
+          "required_job_level": null,
+          "tree_slot": 22,
+          "passive": "active",
+          "prerequisites": [
+            {
+              "slug": "jupitel-thunder",
+              "level": 3
+            },
+            {
+              "slug": "frost-driver",
+              "level": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

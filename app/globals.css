@@ -1437,6 +1437,84 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .statgrid__cell--link:hover { background: var(--panel); }
 .statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
 
+/* Skill planner. The grid is the in-game skill window's shape (seven columns,
+   empty cells kept so a skill holds its position), and every cell is a control,
+   so the whole thing has to stay usable at thumb size on a phone. */
+.planbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  margin-bottom: 14px;
+}
+.planbar__total { margin-left: auto; color: var(--cyan); font-weight: 700; }
+.planwarn {
+  border: 1px solid var(--yellow);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  color: var(--yellow);
+  font-size: 13px;
+  margin-bottom: 14px;
+  max-width: 80ch;
+}
+.planstage { margin-bottom: 22px; }
+.planstage__head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.planstage__pts { margin-left: auto; color: var(--dim); }
+.planstage__pts--over { color: var(--yellow); font-weight: 700; }
+.skillgrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+.skillcell {
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 96px;
+}
+.skillcell--empty { border-style: dashed; opacity: 0.25; min-height: 0; }
+.skillcell--taken { border-color: var(--cyan); background: var(--panel-2); }
+.skillcell--locked { opacity: 0.62; }
+.skillcell__head { display: flex; justify-content: space-between; align-items: start; gap: 6px; }
+.skillcell__name { font: 600 12.5px/1.25 var(--font-sarabun), sans-serif; }
+.skillcell__lv { font-size: 12px; color: var(--dim); white-space: nowrap; }
+.skillcell__tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.skillcell__tags .tag { font-size: 9.5px; padding: 1px 5px; }
+.skillcell__need { font-size: 11px; color: var(--faint); margin: 0; }
+.skillcell__row { display: flex; gap: 6px; margin-top: auto; }
+.skillcell__row button {
+  flex: 1;
+  min-height: 32px;
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+}
+.skillcell__row button:hover:not(:disabled) { border-color: var(--cyan); color: var(--cyan); }
+.skillcell__row button:disabled { opacity: 0.35; cursor: default; }
+
+/* Seven columns of controls do not fit a phone. Fewer columns break the
+   in-game alignment, which is worth less than being able to press the
+   buttons -- the empty cells drop out entirely at that width. */
+@media (max-width: 900px) {
+  .skillgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .skillcell--empty { display: none; }
+}
+@media (max-width: 520px) {
+  .skillgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* Equipment detail hero: sprite beside the name and the slot/type chips. */
 .equiphero { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .equiphero__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }

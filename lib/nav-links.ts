@@ -57,6 +57,7 @@ export const SECTION_LINKS: Record<'database' | 'tools', NavLink[]> = {
   // to farm -> fight the monster -> reference tables -> extras. "มอน" in the
   // two fight tools keeps them from reading as refine (ตีบวก) siblings.
   tools: [
+    { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
     { href: '/tools/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
