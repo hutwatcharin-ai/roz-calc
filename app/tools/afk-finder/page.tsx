@@ -5,6 +5,7 @@
 // (safety first, EXP second) and its own URL so it can be shared into a game
 // chat by name (spec 3.8).
 
+import Caveat from '@/components/Caveat';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import AfkFinderResults, { type AfkCandidate } from '@/components/AfkFinderResults';
@@ -138,14 +139,13 @@ export default async function AfkFinderPage() {
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 className="pagehead__title">หาจุด AFK ปลอดภัย</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        เกมมีบอทในตัวให้ใช้ฟรี — คำถามคือทิ้งบอทไว้ตรงไหนแล้วกลับมาไม่ตาย
-        หน้านี้เหลือเฉพาะมอนที่ไม่โจมตีก่อนและดาเมจคุณฆ่าได้ในหมัดเดียว
+        มอนที่ไม่โจมตีก่อน และดาเมจของคุณฆ่าได้ในหมัดเดียว — ทิ้งบอทไว้แล้วกลับมาไม่ตาย
       </p>
 
-      <div className="ceiling-note" style={{ marginTop: 16, maxWidth: '65ch' }}>
+      <Caveat label="ที่มาของธง “โจมตีก่อน”">
         <strong>ธง &ldquo;โจมตีก่อน&rdquo;</strong> มาจากไฟล์เกม (ตรวจกับ ragnarokzero.net ตรงครบ 524 ตัว) ·
         Scorpion กับ Hornet ติดธง &ldquo;ไม่โจมตีก่อน&rdquo; จริงในภาคนี้ — ก่อนทิ้งบอทนาน ๆ ยืนดูสักพักก่อน
-      </div>
+      </Caveat>
 
       {failed ? (
         <p className="muted" style={{ marginTop: 20 }}>ดึงข้อมูลไม่สำเร็จ ลองใหม่อีกครั้ง</p>

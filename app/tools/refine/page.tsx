@@ -4,6 +4,7 @@
 // rendered on the server: the numbers are the reason to visit, and a visitor
 // who arrives from search should see them without waiting for JavaScript.
 
+import Caveat from '@/components/Caveat';
 import { Fragment } from 'react';
 import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
@@ -212,11 +213,11 @@ export default function RefinePage() {
         </div>
       </details>
 
-      <p className="ceiling-note" style={{ marginTop: 16 }}>
+      <Caveat label="เรื่องแร่ HD">
         <strong>แร่ HD ไม่ได้อยู่ในหน้านี้:</strong> ตีพังแล้วขั้นตีบวกลด 1 แทนที่จะทำของหาย
         และ<strong>ใช้ได้เฉพาะของที่อยู่ที่ +7 ถึง +9 เท่านั้น</strong> ซึ่งเป็นการคิดคนละแบบกับตารางข้างบนทั้งหมด
         · ราคาแลก HD ที่ NPC คือ 20,000 Zeny
-      </p>
+      </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
         ดูต่อ: <Link href="/guides/elements">ตารางธาตุ</Link> ·{' '}

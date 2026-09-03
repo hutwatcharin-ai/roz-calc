@@ -1437,6 +1437,35 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .statgrid__cell--link:hover { background: var(--panel); }
 .statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
 
+/* Folded caveats. Same content the .ceiling-note boxes used to show open;
+   the summary line is what stays visible. */
+.caveat {
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  margin-top: 12px;
+  max-width: 80ch;
+}
+.caveat > summary {
+  cursor: pointer;
+  padding: 8px 12px;
+  font: 500 12.5px/1.3 var(--font-sarabun), sans-serif;
+  color: var(--faint);
+  list-style: none;
+}
+.caveat > summary::-webkit-details-marker { display: none; }
+.caveat > summary::after { content: ' ▾'; color: var(--dim); }
+.caveat[open] > summary::after { content: ' ▴'; }
+.caveat > summary:hover { color: var(--dim); }
+.caveat__body {
+  padding: 0 12px 10px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--dim);
+}
+.caveat__body strong { color: var(--text); font-weight: 600; }
+.caveat__body a { color: var(--cyan); }
+
 /* Guides hub: one card per page, with a line saying what it answers. Wider
    than an item card because the sentence is the point of the card. */
 .guidecard {
@@ -1485,61 +1514,58 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .planstage__head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .planstage__pts { margin-left: auto; color: var(--dim); }
 .planstage__pts--over { color: var(--yellow); font-weight: 700; }
+.planstage__bar { flex-basis: 100%; height: 3px; border-radius: 2px; background: var(--hair); overflow: hidden; }
+.planstage__bar > span { display: block; height: 100%; background: var(--cyan); }
+.planstage__bar > span.planstage__bar--over { background: var(--yellow); }
 .skillgrid {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(178px, 1fr));
+  gap: 8px;
   margin-top: 10px;
 }
 .skillcell {
   border: 1px solid var(--hair);
   border-radius: var(--radius);
   background: var(--panel);
-  padding: 6px 7px;
+  padding: 8px 9px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
-.skillcell--empty { border-style: dashed; opacity: 0.18; }
 .skillcell--taken { border-color: var(--cyan); background: var(--panel-2); }
-.skillcell--locked { opacity: 0.55; }
-.skillcell__head { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.skillcell--locked { opacity: 0.5; }
+.skillcell__head { display: flex; align-items: center; gap: 7px; min-width: 0; }
 .skillcell__icon { flex: none; image-rendering: pixelated; }
 .skillcell__icon--none { width: 24px; height: 24px; border-radius: 4px; background: var(--panel-2); }
-/* Two lines then ellipsis: a long skill name must not make its cell taller
-   than the row, or the grid stops reading as a grid. */
+/* Two lines then ellipsis: a long skill name must not make its card taller
+   than its neighbours and break the row. */
 .skillcell__name {
-  font: 600 11.5px/1.25 var(--font-sarabun), sans-serif;
+  font: 600 12px/1.3 var(--font-sarabun), sans-serif;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.skillcell__lv { font-size: 12px; color: var(--text); min-width: 34px; text-align: center; }
+.skillcell__bar { height: 3px; border-radius: 2px; background: var(--hair); overflow: hidden; }
+.skillcell__bar > span { display: block; height: 100%; background: var(--cyan); }
+.skillcell__lv { font-size: 12.5px; color: var(--text); min-width: 38px; text-align: center; }
 .skillcell__max { color: var(--faint); font-size: 10.5px; }
-.skillcell__need { font-size: 10px; color: var(--faint); margin: 0; line-height: 1.25; }
-.skillcell__row { display: flex; align-items: center; gap: 4px; margin-top: auto; }
+.skillcell__need { font-size: 10.5px; color: var(--faint); margin: 0; line-height: 1.3; }
+.skillcell__row { display: flex; align-items: center; gap: 5px; margin-top: auto; }
 .skillcell__row button {
   flex: 1;
-  min-height: 26px;
+  min-height: 28px;
   border: 1px solid var(--hair);
-  border-radius: 5px;
+  border-radius: 6px;
   background: var(--panel-2);
   color: var(--text);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1;
   cursor: pointer;
 }
 .skillcell__row button:hover:not(:disabled) { border-color: var(--cyan); color: var(--cyan); }
-.skillcell__row button:disabled { opacity: 0.35; cursor: default; }
+.skillcell__row button:disabled { opacity: 0.3; cursor: default; }
 
-/* Seven columns of controls do not fit a phone. Fewer columns break the
-   in-game alignment, which is worth less than being able to press the
-   buttons -- the empty cells drop out entirely at that width. */
-@media (max-width: 900px) {
-  .skillgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .skillcell--empty { display: none; }
-}
 @media (max-width: 520px) {
   .skillgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

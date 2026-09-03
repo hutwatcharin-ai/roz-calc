@@ -1,5 +1,6 @@
 'use client';
 
+import Caveat from '@/components/Caveat';
 import { isCVariant } from '@/lib/c-variant';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -112,23 +113,17 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
       <div className="card" style={{ marginTop: 20 }}>
         {personal && character ? (
           <p className="muted" style={{ margin: 0 }}>
-            จากมอนที่ไม่เข้าโจมตีก่อน {baseRows.length} ตัว ดาเมจ {character.damagePerHit.toLocaleString()} ต่อครั้งของคุณ
-            ฆ่าได้ในหมัดเดียว <strong>{candidates.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
-            ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท
-            {unknownHp > 0 && ` (อีก ${unknownHp} ตัวไม่มีค่า HP ในข้อมูล จึงไม่ถูกนับ)`}
+            ฆ่าได้ในหมัดเดียว <strong>{candidates.length}</strong> ตัว · ไม่มีสกิลเสี่ยง <strong>{clean}</strong> ตัว
+            {unknownHp > 0 && ` · ไม่มีค่า HP ${unknownHp} ตัว จึงไม่นับ`}
             {myFlee !== null && (() => {
               const bonus = candidates.filter((c) => c.row.is_aggressive).length;
-              return bonus > 0
-                ? ` · FLEE ${myFlee} ของคุณเปิดเพิ่มอีก ${bonus} ตัวที่โจมตีก่อนแต่ตีคุณแทบไม่โดน (หลบ ≥95%)`
-                : '';
+              return bonus > 0 ? ` · FLEE ${myFlee} เปิดเพิ่มอีก ${bonus} ตัว` : '';
             })()}
           </p>
         ) : (
           <p className="muted" style={{ margin: 0 }}>
-            มอนที่ไม่เข้าโจมตีก่อนทั้งหมด <strong>{baseRows.length}</strong> ตัว — ในจำนวนนี้ <strong>{clean}</strong>{' '}
-            ตัวไม่มีสกิลที่เว็บนี้จัดว่าเสี่ยงกับบอท ·{' '}
-            <strong>กรอกเลเวลกับดาเมจต่อครั้งในแถบด้านบน</strong>{' '}
-            แล้วรายการนี้จะเหลือเฉพาะตัวที่คุณฆ่าได้ในหมัดเดียว และบอกด้วยว่าดรอปโดนหักตามช่วงเลเวลหรือเปล่า
+            ไม่โจมตีก่อน <strong>{baseRows.length}</strong> ตัว · ไม่มีสกิลเสี่ยง <strong>{clean}</strong> ตัว ·{' '}
+            <strong>กรอกเลเวลกับดาเมจข้างบน</strong> เพื่อกรองเหลือตัวที่ฆ่าได้ในหมัดเดียว
           </p>
         )}
       </div>
@@ -146,11 +141,11 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
       {/* Two limits, stated up front rather than in a footnote, because both
           could turn this page's verdict into a wrong one. */}
-      <div className="ceiling-note" style={{ marginTop: 12 }}>
+      <Caveat label="ข้อจำกัดของตัวเลขนี้">
         <strong>ข้อจำกัด:</strong> ดาเมจใช้ตามที่กรอก ไม่ได้คูณธาตุให้ ·
         สกิล &ldquo;เสี่ยง&rdquo; ตัดสินจากชื่อสกิลในไฟล์เกม ไม่ใช่การทดสอบจริง ·
         คอลัมน์แมพเลือกแมพที่มีมอนโจมตีก่อนน้อยชนิดสุดที่ตัวนั้นเกิด{personal && <> · EXP/ชม. เป็น{KILL_RATE_DISCLAIMER}</>}
-      </div>
+      </Caveat>
 
       {candidates.length === 0 ? (
         <p className="muted" style={{ marginTop: 20 }}>

@@ -4,6 +4,7 @@
 // server-rendered: this page is a reference table, and a reference table that
 // needs JavaScript to show its numbers is a worse reference table.
 
+import Caveat from '@/components/Caveat';
 import Link from 'next/link';
 import ExpRangeCalculator from '@/components/ExpRangeCalculator';
 import {
@@ -45,11 +46,11 @@ export default function ExpPage() {
         <strong>ที่มา:</strong> คู่มือเกมทางการ · เส้นโค้งฐานขึ้นราว 1.2 เท่าต่อเลเวล
       </p>
 
-      <div className="ceiling-note" style={{ marginTop: 12 }}>
+      <Caveat label="วิธีอ่านตาราง และข้อจำกัด">
         <strong>วิธีอ่าน:</strong> แถว N = EXP ที่ต้องเก็บเพื่อขึ้นถึงเลเวล N (แถบรีเซ็ตทุกครั้งที่ขึ้นเลเวล)
         <br />
         <strong>ข้อจำกัด:</strong> คู่มือมีถึงเลเวล {MAX_PUBLISHED_BASE_LEVEL} — เกินกว่านั้นขึ้นว่าไม่มีข้อมูล ไม่เดาให้
-      </div>
+      </Caveat>
 
       <ExpRangeCalculator />
 

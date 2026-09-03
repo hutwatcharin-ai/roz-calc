@@ -6,6 +6,7 @@
 // number a player actually needs before walking to the NPC: how many spare
 // pieces of equipment to bring, and how much Zeny the failures will eat.
 
+import Caveat from '@/components/Caveat';
 import { useMemo, useState } from 'react';
 import { refineCost, oreFor } from '@/lib/refine-cost';
 import {
@@ -202,11 +203,11 @@ export default function RefineCalculator() {
         · ค่าธรรมเนียมไม่กระทบ เพราะคิดต่อครั้ง
       </p>
 
-      <p className="ceiling-note" style={{ marginTop: 14 }}>
+      <Caveat label="ข้อจำกัดของตัวเลขนี้">
         คิดแบบตีพัง <strong>ของหาย</strong> ซึ่งเป็นสิ่งที่แร่ธรรมดากับแร่เข้มข้นทำ — พังแล้วเริ่มใหม่ที่ +0
         ด้วยของชิ้นใหม่ และ<strong>การ์ดที่ใส่ไว้หายไปด้วย</strong> ซึ่งตัวเลข Zeny ข้างบนไม่ได้ตีราคาให้
         · แร่ HD ไม่ทำแบบนั้น (ลดขั้นลง 1 แทน) แต่ใช้ได้เฉพาะของที่อยู่ที่ +7 ถึง +9 คนละวิธีคิด เว็บนี้ยังไม่คิดให้
-      </p>
+      </Caveat>
     </div>
   );
 }

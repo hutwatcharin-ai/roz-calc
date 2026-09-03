@@ -7,6 +7,7 @@
 // answer. This does it, and keeps both parts visible so the reason is legible
 // rather than a single number to trust.
 
+import Caveat from '@/components/Caveat';
 import { useMemo, useState } from 'react';
 import { ELEMENTS, type Element, type ElementLevel } from '@/lib/element-table';
 import { SIZE_LABELS, SIZE_TABLE, SIZES, type MonsterSize } from '@/lib/size-table';
@@ -184,10 +185,10 @@ export default function DamagePicker({
         </tbody>
       </table>
 
-      <p className="ceiling-note" style={{ marginTop: 14 }}>
+      <Caveat label="ตัวเลขนี้คืออะไร">
         ตัวเลขนี้คือ<strong>เปอร์เซ็นต์ที่เข้าเป้า</strong> (ธาตุ×ขนาด จากคู่มือทางการ) —
         ไม่ใช่ดาเมจจริง เพราะยังไม่รวม ATK/DEF/การ์ด/สกิล
-      </p>
+      </Caveat>
     </div>
   );
 }

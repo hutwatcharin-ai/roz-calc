@@ -21,11 +21,11 @@ import {
   type PlannerSkill,
 } from '@/lib/skill-planner';
 
-// The in-game skill window is a grid, and tree_slot is a position in it. The
-// slots run 0..34 with gaps, and Novice's three skills sit at 0, 7 and 14 --
-// one column apart, which is what fixes the width at seven. Empty cells are
-// rendered as gaps so a skill keeps its place instead of sliding up.
-const COLUMNS = 7;
+// tree_slot is a position in the in-game skill window, and the first version
+// of this page rendered that grid literally -- seven columns with the gaps
+// left empty. On Novice that meant three cards in twenty-one cells, and the
+// dashed holes were the first thing a player asked about. The slot now decides
+// order only: cards flow, so a stage is as tall as it has skills.
 
 const TIER_LABELS: Record<string, string> = {
   base: 'อาชีพเริ่มต้น',
@@ -74,6 +74,11 @@ function SkillCell({
           <span className="skillcell__icon skillcell__icon--none" aria-hidden="true" />
         )}
         <span className="skillcell__name">{skill.name}</span>
+      </div>
+      {/* A bar rather than only a number: at a glance a stage shows which
+          skills are maxed, which are started, and which are untouched. */}
+      <div className="skillcell__bar" aria-hidden="true">
+        <span style={{ width: `${(level / max) * 100}%` }} />
       </div>
       <div className="skillcell__row">
         <button type="button" onClick={onLower} disabled={level === 0} aria-label={`ลด ${skill.name}`}>
@@ -172,16 +177,13 @@ export default function SkillPlanner({ icons }: { icons: Record<string, string> 
 
       {anyOver && (
         <p className="planwarn">
-          ใส่แต้มเกินที่อาชีพนั้นมี — เว็บนี้ไม่ล็อกให้ เพราะเพดานแต้มมาจากข้อมูลของ prontera.info
-          (10 / 49 / 59 = 1 แต้มต่อ job level) ยังไม่ได้ยืนยันจากในเกมเอง ถือเป็นคำเตือนไว้ก่อน
+          ใส่แต้มเกินที่อาชีพนั้นมี — เตือนไว้เฉย ๆ ไม่ได้ล็อก
         </p>
       )}
 
       {stages.map((stage) => {
         const stageSpend = spend.find((s) => s.stage.slug === stage.slug)!;
-        const slots = new Map(stage.skills.filter((s) => s.tree_slot !== null).map((s) => [s.tree_slot as number, s]));
-        const maxSlot = Math.max(...slots.keys());
-        const cells = Array.from({ length: Math.ceil((maxSlot + 1) / COLUMNS) * COLUMNS }, (_, i) => slots.get(i) ?? null);
+        const skills = [...stage.skills].sort((a, b) => (a.tree_slot ?? 0) - (b.tree_slot ?? 0));
 
         return (
           <section key={stage.slug} className="planstage">
@@ -192,23 +194,25 @@ export default function SkillPlanner({ icons }: { icons: Record<string, string> 
               <span className={`planstage__pts mono${stageSpend.over ? ' planstage__pts--over' : ''}`}>
                 {stageSpend.spent} / {stageSpend.budget} แต้ม
               </span>
+              <div className="planstage__bar" aria-hidden="true">
+                <span
+                  className={stageSpend.over ? 'planstage__bar--over' : undefined}
+                  style={{ width: `${Math.min(100, (stageSpend.spent / stageSpend.budget) * 100)}%` }}
+                />
+              </div>
             </header>
             <div className="skillgrid">
-              {cells.map((skill, i) =>
-                skill === null ? (
-                  <div key={`empty-${i}`} className="skillcell skillcell--empty" aria-hidden="true" />
-                ) : (
-                  <SkillCell
-                    key={skill.slug}
-                    skill={skill}
-                    icon={icons[skill.slug] ?? null}
-                    level={build[skill.slug] ?? 0}
-                    blocking={blockedBy(classSlug, build, skill.slug)}
-                    onRaise={() => setBuild((b) => raise(classSlug, b, skill.slug))}
-                    onLower={() => setBuild((b) => lower(classSlug, b, skill.slug))}
-                  />
-                ),
-              )}
+              {skills.map((skill) => (
+                <SkillCell
+                  key={skill.slug}
+                  skill={skill}
+                  icon={icons[skill.slug] ?? null}
+                  level={build[skill.slug] ?? 0}
+                  blocking={blockedBy(classSlug, build, skill.slug)}
+                  onRaise={() => setBuild((b) => raise(classSlug, b, skill.slug))}
+                  onLower={() => setBuild((b) => lower(classSlug, b, skill.slug))}
+                />
+              ))}
             </div>
           </section>
         );
