@@ -46,13 +46,6 @@ export default function RandomOptionsCard({ lines }: { lines: ResolvedPoolLine[]
             </table>
           </div>
         ))}
-        <p className="source-note" style={{ marginTop: 10 }}>
-          ที่มา:{' '}
-          <a href={lines[0].sourceUrl} target="_blank" rel="noopener noreferrer">
-            คู่มือทางการ gnjoy.com.tw
-          </a>{' '}
-          ผ่าน prontera.info
-        </p>
       </div>
     </details>
   );
