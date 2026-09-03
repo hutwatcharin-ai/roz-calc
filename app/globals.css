@@ -1437,6 +1437,42 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .statgrid__cell--link:hover { background: var(--panel); }
 .statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
 
+/* Equipment detail hero: sprite beside the name and the slot/type chips. */
+.equiphero { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.equiphero__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+/* The random-option pool, collapsed. Open, it is 40+ rows -- longer than the
+   gear's own stats -- so it ships closed and the drop list stays reachable
+   without scrolling past it. */
+.rndopt {
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.rndopt__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  font: 600 15px/1.3 var(--font-chakra), sans-serif;
+  color: var(--text);
+  list-style: none;
+}
+.rndopt__summary::-webkit-details-marker { display: none; }
+.rndopt__summary::after {
+  content: 'ดูออปชั่น ▾';
+  font: 500 12px/1 var(--font-sarabun), sans-serif;
+  color: var(--cyan);
+  white-space: nowrap;
+}
+.rndopt[open] .rndopt__summary::after { content: 'ซ่อน ▴'; }
+.rndopt__summary:hover { background: var(--panel-2); }
+.rndopt__count { color: var(--faint); font-size: 12px; margin-left: auto; }
+.rndopt__body { padding: 0 18px 18px; border-top: 1px solid var(--hair); }
+.rndopt__line { font-size: 13px; color: var(--dim); margin-top: 12px; display: flex; align-items: center; gap: 8px; }
+
 /* Item browse grid. Recognition-first: sprite, then name, then category. */
 .itemgrid {
   display: grid;

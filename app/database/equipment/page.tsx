@@ -156,7 +156,7 @@ export default async function EquipmentPage({
           data={itemListJsonLd({
             path: '/database/equipment',
             rows: rows.map((r) => ({ id: r.id, name: r.name_en })),
-            detailPath: (id) => `/database/items/${id}`,
+            detailPath: (id) => `/database/equipment/${id}`,
           })}
         />
       )}
@@ -232,7 +232,7 @@ export default async function EquipmentPage({
               what a player scans equipment by (type, ATK, level). */}
           <div className="itemgrid">
             {rows.map((it) => (
-              <Link key={it.id} href={`/database/items/${it.id}`} className="itemcard">
+              <Link key={it.id} href={`/database/equipment/${it.id}`} className="itemcard">
                 <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />
                 <span className="itemcard__name">
                   {it.name_en}

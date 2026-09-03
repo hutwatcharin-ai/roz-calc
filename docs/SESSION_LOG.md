@@ -2,6 +2,30 @@
 
 บันทึกงานรอบใหญ่ (ล่าสุดอยู่บนสุด) — กติกาการทำงานอยู่ที่ `/CLAUDE.md`
 
+## 3 ก.ย. 2026 — prontera.info เป็นแหล่งใหม่ + แยกหน้าอุปกรณ์
+
+**ดึงข้อมูล roz.prontera.info + Google Site rozeroguide**
+- crawler เต็มเว็บ 7,698 URL จาก sitemap 15 หมวด (`docs/prontera-export/crawl-prontera.mjs`) — raw JSONL ~107 MB **gitignored** (commit เฉพาะไฟล์สรุปที่ใช้จริง)
+- payload เป็น Nuxt 3 devalue: ทุกเลขที่เป็นค่าใน object/array คือ index อ้างกลับไปใน array เดียวกัน + tuple `["Ref"|"Reactive"|…, index]` โปร่งใส — ถอดรหัสแล้ว **ตรวจกับ DOM จริงในเบราว์เซอร์ ไม่ใช่เดา** (`resolve-lib.mjs`)
+- ⚠️ manifest ของ crawler รอบแรกบอก "0 failed" ทั้งที่มี 429/404 จริง ~1,114 หน้า (14.5%) เพราะเช็คแค่ fetch throw ไม่เช็ค status — skills แก้ครบด้วย `retry-skills.mjs` (156 ตัวกลับมา 200), หมวดอื่นยังค้าง
+- ราคาที่ user คิดว่าแม่น = ราคา NPC static เท่านั้น — ราคาตลาดผู้เล่นว่างทุกตัวที่สุ่มเช็ค (Jellopy/Elunium ก็ว่าง)
+
+**Random Options (ออปชั่นสุ่ม) — ของใหม่จริงที่ไม่มีที่อื่น**
+- 8 pool (`lib/data/random-option-pools.json`) ต้นทาง `roz.gnjoy.com.tw/Guide` confidence official
+- melee กับ ranged เหมือนกันทุก option (พิสูจน์จากข้อมูลที่ resolve แล้ว ไม่ใช่เชื่อคำอธิบายหน้าเว็บ) → เหลือตัวแปรเดียว: magic (Staff) vs ที่เหลือ — เช็คทุกชนิดอาวุธสดกับ UI ของ prontera เอง (Book = melee)
+- `lib/random-options.ts` + เทสต์ 8 ข้อ (พิสูจน์ว่าเทสต์แดงได้จริงด้วยการย้าย Book ไป magic ชั่วคราว)
+
+**รางวัลเควส + พิกัด NPC**
+- ตาราง `quest_rewards` (item ต่อเควส) + คอลัมน์ `reward_base_exp/job_exp/zeny` บน quests — จาก prontera (`quest_id_ingame` ตรงกับ `quests.id` เป๊ะ) แสดงบรรทัด "รางวัล:" ในหน้าเควสรายเมือง
+- เติมพิกัด NPC ที่ว่าง 12 แถว (`map_navi_code` ของ prontera = `map_code` แบบ rAthena ตรงตัว)
+
+**แยกหน้าอุปกรณ์ออกจากไอเทม (user: "ของสวมใส่มันเหมือนไอเทมขยะ")**
+- route ใหม่ `/database/equipment/[id]` — hero + ชิป (หมวด/ชนิด/Weapon Lv/ID) + statgrid + ออปชั่นสุ่ม + คำอธิบาย + มอนที่ดรอป; breadcrumb "อุปกรณ์ › อาวุธ › ชื่อ"
+- `/database/items/[id]` 308 ไป equipment ถ้า category อยู่ใน `EQUIPMENT_CATEGORIES` และ equipment 308 กลับถ้าไม่ใช่ — กติกาเดียวกันที่ `lib/item-href.ts` (เทสต์กันเคสชื่อใกล้เคียงที่จะทำให้ redirect วนกัน)
+- แก้ต้นทางลิงก์ให้ชี้ตรงไม่ต้องเด้ง: ดรอปในหน้ามอน (select เพิ่ม category), หน้ารวมอุปกรณ์ + ItemList JSON-LD, search (badge อุปกรณ์), "เพิ่งดู" (kind ใหม่ `equipment`), **sitemap แยก 1,815 equipment / 2,018 item** (ถ้าปล่อยให้ sitemap ชี้ URL ที่ redirect GSC จะรายงานเป็น soft-redirect)
+- ออปชั่นสุ่มยาวกว่าค่าพลังของชิ้นนั้นเอง → ยุบเป็น `<details>` (`components/RandomOptionsCard.tsx`) ปิดมาก่อน เหมือนปุ่ม "Show possible options" ของ prontera — ไม่มี JS ฝั่ง client เพิ่ม เนื้อหายังอยู่ใน HTML ให้ crawler อ่าน
+- user ยอมรับความเสี่ยงย้าย URL เพราะเพิ่งส่ง sitemap เข้า GSC เมื่อ 2 ก.ย. (ยังไม่ทันติด index)
+
 ## 1–2 ก.ย. 2026 — รอบใหญ่: โครงหน้า, hit/flee, แปลไทย, NPC
 
 **2 ก.ย. (บ่าย) — เตรียมแพทช์ 3 ก.ย. + ปิดงาน SEO ฝั่ง user**

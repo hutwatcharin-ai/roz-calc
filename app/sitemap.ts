@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { supabaseBrowser } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
+import { itemHref } from '@/lib/item-href';
 
 // Regenerated with the daily ISR window, same as the list pages.
 export const revalidate = 86400;
@@ -46,6 +47,10 @@ const PAGE = 1000;
 interface IdRow {
   id: number;
   updated_at: string;
+  // items only: decides whether a row's canonical URL is the item route or the
+  // equipment one. A sitemap that lists the redirecting URL instead sends every
+  // crawl through a 308 and reports as a soft-redirect issue in Search Console.
+  category?: string | null;
 }
 
 // Real per-row timestamps (added 2026-09-02) -- never a literal date. A
@@ -57,11 +62,12 @@ async function allIds(table: 'monsters' | 'items'): Promise<IdRow[]> {
   const rows: IdRow[] = [];
 
   for (let from = 0; ; from += PAGE) {
-    const { data, error } = await db
-      .from(table)
-      .select('id, updated_at')
-      .order('id')
-      .range(from, from + PAGE - 1);
+    // Two literal selects, not one computed string: the client's select()
+    // types parse the column list at compile time and reject an expression.
+    const { data, error } =
+      table === 'items'
+        ? await db.from('items').select('id, updated_at, category').order('id').range(from, from + PAGE - 1)
+        : await db.from('monsters').select('id, updated_at').order('id').range(from, from + PAGE - 1);
 
     // A mid-loop error must fail the build/response loudly, not truncate
     // silently: swallowing it here would mean the ~1,000-row cap and a
@@ -72,7 +78,7 @@ async function allIds(table: 'monsters' | 'items'): Promise<IdRow[]> {
     }
     if (!data || data.length === 0) break;
 
-    rows.push(...data);
+    rows.push(...(data as IdRow[]));
     if (data.length < PAGE) break;
   }
 
@@ -134,7 +140,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
     ...monsterIds.map((row) => ({ url: `${SITE_URL}/database/monsters/${row.id}`, lastModified: row.updated_at })),
-    ...itemIds.map((row) => ({ url: `${SITE_URL}/database/items/${row.id}`, lastModified: row.updated_at })),
+    ...itemIds.map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but

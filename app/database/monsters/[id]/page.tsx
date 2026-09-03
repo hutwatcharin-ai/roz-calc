@@ -15,6 +15,7 @@ import MonsterElementPanel from '@/components/MonsterElementPanel';
 import MonsterSizePanel from '@/components/MonsterSizePanel';
 import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
 import RecordVisit from '@/components/RecordVisit';
+import { itemHref } from '@/lib/item-href';
 
 // ISR (SEO audit Critical-adjacent, perf #1): game reference data changes only
 // when we import — cache the rendered page and let the CDN serve it. A deploy
@@ -83,7 +84,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // class the spawns/skills/farming queries below were already fixed for.
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
-    .select('rate, items(id, name_en, sell_price, icon_url, slots)')
+    .select('rate, items(id, name_en, sell_price, icon_url, slots, category)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
   if (dropsError) console.error('monster drops query failed', dropsError);
@@ -359,7 +360,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                       <tr key={i}>
                         <td data-label="">
                           {d.items?.id ? (
-                            <Link href={`/database/items/${d.items.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <Link href={itemHref(d.items.id, d.items.category)} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                               {d.items.icon_url && (
                                 <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
                               )}

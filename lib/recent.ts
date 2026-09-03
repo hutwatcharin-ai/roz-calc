@@ -8,7 +8,7 @@
 // Safari private mode -- must degrade to "no list", never to a crash.
 
 export interface RecentEntry {
-  kind: 'monster' | 'item';
+  kind: 'monster' | 'item' | 'equipment';
   id: number;
   name: string;
 }
@@ -25,7 +25,7 @@ function isEntry(value: unknown): value is RecentEntry {
   if (typeof value !== 'object' || value === null) return false;
   const e = value as Record<string, unknown>;
   return (
-    (e.kind === 'monster' || e.kind === 'item') &&
+    (e.kind === 'monster' || e.kind === 'item' || e.kind === 'equipment') &&
     typeof e.id === 'number' &&
     Number.isFinite(e.id) &&
     typeof e.name === 'string' &&
@@ -63,5 +63,9 @@ export function addRecent(storage: StorageLike, entry: RecentEntry): RecentEntry
 }
 
 export function hrefFor(entry: RecentEntry): string {
-  return entry.kind === 'monster' ? `/database/monsters/${entry.id}` : `/database/items/${entry.id}`;
+  if (entry.kind === 'monster') return `/database/monsters/${entry.id}`;
+  // Gear has its own route; an entry stored before the 3 Sep 2026 split still
+  // reads 'item' and lands on the item page, which redirects it on.
+  if (entry.kind === 'equipment') return `/database/equipment/${entry.id}`;
+  return `/database/items/${entry.id}`;
 }

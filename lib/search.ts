@@ -61,9 +61,10 @@ function fromItemRow(row: SearchRow, type: SearchType): SearchResult {
     id: String(row.id),
     type,
     name: row.name_en,
-    // Cards and equipment are items and share the item detail page. The badge
-    // is what tells the player which kind of thing they found.
-    href: `/database/items/${row.id}`,
+    // Cards are items and share the item detail page; gear has had its own
+    // route since 3 Sep 2026. The badge is what tells the player which kind of
+    // thing they found.
+    href: type === 'equipment' ? `/database/equipment/${row.id}` : `/database/items/${row.id}`,
     iconUrl: row.icon_url ?? null,
   };
 }

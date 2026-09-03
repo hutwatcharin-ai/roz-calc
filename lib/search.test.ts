@@ -21,10 +21,13 @@ describe('mergeSearchResults', () => {
     expect(r.href).toBe('/database/items/4118');
   });
 
-  it('sends equipment to the item detail page but labels it equipment', () => {
+  it('sends equipment to the equipment detail page, not the item one', () => {
+    // Gear split off /database/items/[id] on 3 Sep 2026. Linking to the old
+    // path still works -- it redirects -- but every search hit would take the
+    // extra hop, and the two pages would compete for the same query.
     const [r] = mergeSearchResults({ ...empty, equipment: [{ id: 1201, name_en: 'Knife', icon_url: null }] });
     expect(r.type).toBe('equipment');
-    expect(r.href).toBe('/database/items/1201');
+    expect(r.href).toBe('/database/equipment/1201');
   });
 
   it('keys a skill by slug, not by a numeric id', () => {
