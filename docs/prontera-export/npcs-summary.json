@@ -1,0 +1,5188 @@
+{
+  "source": "https://roz.prontera.info",
+  "extracted_at": "2026-09-03T04:48:37.778Z",
+  "count": 416,
+  "with_coords": 410,
+  "skipped_count": 98,
+  "npcs": [
+    {
+      "slug": "4w-sailor-nordfeld",
+      "name": "4W Sailor",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 153,
+      "y": 69,
+      "quests_given": []
+    },
+    {
+      "slug": "adept-adventurer-1",
+      "name": "Adept Adventurer",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 45,
+      "y": 80,
+      "quests_given": []
+    },
+    {
+      "slug": "afflicted-resident-location-2",
+      "name": "Afflicted Resident Location",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 161,
+      "y": 87,
+      "quests_given": []
+    },
+    {
+      "slug": "afflicted-resident-location-4",
+      "name": "Afflicted Resident Location",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 168,
+      "y": 86,
+      "quests_given": []
+    },
+    {
+      "slug": "alibas",
+      "name": "Alibas",
+      "map_slug": "sograt-desert-07",
+      "map_name": "Sograt Desert 07",
+      "map_navi_code": "moc_fild07",
+      "x": 197,
+      "y": 43,
+      "quests_given": [
+        "sograt-excavation-team-intern-22707"
+      ]
+    },
+    {
+      "slug": "ann",
+      "name": "Ann",
+      "map_slug": "prontera-field-05",
+      "map_name": "Prontera Field 05",
+      "map_navi_code": "prt_fild05",
+      "x": 351,
+      "y": 220,
+      "quests_given": [
+        "are-you-strong-3"
+      ]
+    },
+    {
+      "slug": "albert",
+      "name": "Albert",
+      "map_slug": "lutie-the-snow-village",
+      "map_name": "Lutie, the Snow Village",
+      "map_navi_code": "xmas",
+      "x": 161,
+      "y": 165,
+      "quests_given": [
+        "crafting-chef-s-hat-and-cake-hat-22179"
+      ]
+    },
+    {
+      "slug": "anxious-man",
+      "name": "Anxious Man",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 173,
+      "y": 77,
+      "quests_given": []
+    },
+    {
+      "slug": "archer-guildsman",
+      "name": "Archer Guildmaster",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": null,
+      "y": null,
+      "quests_given": []
+    },
+    {
+      "slug": "barbe-q",
+      "name": "Barbe Q",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 206,
+      "y": 304,
+      "quests_given": [
+        "coceracera-21404",
+        "coceracera-21408",
+        "coceracera"
+      ]
+    },
+    {
+      "slug": "auntie",
+      "name": "Auntie",
+      "map_slug": "sograt-desert-12",
+      "map_name": "Sograt Desert 12",
+      "map_navi_code": "moc_fild12",
+      "x": 176,
+      "y": 376,
+      "quests_given": [
+        "sograt-a-nutritious-snack-22702"
+      ]
+    },
+    {
+      "slug": "beach-resident",
+      "name": "Beach Resident",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 137,
+      "y": 172,
+      "quests_given": [
+        "food-delivery-16195",
+        "gather-feedback-16199"
+      ]
+    },
+    {
+      "slug": "barbe-q-s-house",
+      "name": "Barbe Q's House",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 249,
+      "y": 300,
+      "quests_given": []
+    },
+    {
+      "slug": "beetle",
+      "name": "Beetle",
+      "map_slug": "mt-mjolnir-north-side-05",
+      "map_name": "Mt. Mjolnir North Side 05",
+      "map_navi_code": "mjolnir_05",
+      "x": 185,
+      "y": 227,
+      "quests_given": [
+        "mjolnir-a-tough-sparring-match",
+        "mjolnir-a-tough-sparring-match-22365"
+      ]
+    },
+    {
+      "slug": "blacksmith-walter",
+      "name": "Blacksmith Walter",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 43,
+      "y": 68,
+      "quests_given": [
+        "missing-persons-5"
+      ]
+    },
+    {
+      "slug": "berito",
+      "name": "Berito",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 150,
+      "y": 144,
+      "quests_given": [
+        "missing-persons-1"
+      ]
+    },
+    {
+      "slug": "borwaju",
+      "name": "Borwaju",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 95,
+      "y": 93,
+      "quests_given": [
+        "second-job-change-dancer"
+      ]
+    },
+    {
+      "slug": "bridge-repairer-laon",
+      "name": "Bridge Repairer Laon",
+      "map_slug": "geffen-field-04",
+      "map_name": "Geffen Field 04",
+      "map_navi_code": "gef_fild04",
+      "x": 210,
+      "y": 58,
+      "quests_given": [
+        "geffen-northern-bridge-repairs-22742"
+      ]
+    },
+    {
+      "slug": "bridge-repairer-sion",
+      "name": "Bridge Repairer Sion",
+      "map_slug": "geffen-field-07",
+      "map_name": "Geffen Field 07",
+      "map_navi_code": "gef_fild07",
+      "x": 300,
+      "y": 205,
+      "quests_given": [
+        "geffen-west-bridge-repairs-22747",
+        "geffen-west-bridge-repairs-22748"
+      ]
+    },
+    {
+      "slug": "cedric",
+      "name": "Cedric",
+      "map_slug": "al-de-baran-the-border-city",
+      "map_name": "Al De Baran, the Border City",
+      "map_navi_code": "alde_alche",
+      "x": 240,
+      "y": 164,
+      "quests_given": [
+        "crafting-tulip-hairpin"
+      ]
+    },
+    {
+      "slug": "britia",
+      "name": "Britia",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 177,
+      "y": 85,
+      "quests_given": [
+        "comodo-plague-10",
+        "comodo-plague-11",
+        "comodo-plague-9"
+      ]
+    },
+    {
+      "slug": "chaos-1",
+      "name": "Chaos",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 38,
+      "y": 170,
+      "quests_given": []
+    },
+    {
+      "slug": "cave-front-guard",
+      "name": "Cave-front Guard",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 41,
+      "y": 133,
+      "quests_given": [
+        "whereabouts-of-the-grandson"
+      ]
+    },
+    {
+      "slug": "chaos-2",
+      "name": "Chaos",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 154,
+      "y": 115,
+      "quests_given": []
+    },
+    {
+      "slug": "chaos-3",
+      "name": "Chaos",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 267,
+      "y": 96,
+      "quests_given": []
+    },
+    {
+      "slug": "charb",
+      "name": "Charb",
+      "map_slug": "glast-heim",
+      "map_name": "Glast Heim",
+      "map_navi_code": "glast_01",
+      "x": 67,
+      "y": 193,
+      "quests_given": []
+    },
+    {
+      "slug": "charon",
+      "name": "Charon",
+      "map_slug": "glast-heim",
+      "map_name": "Glast Heim",
+      "map_navi_code": "glast_01",
+      "x": 206,
+      "y": 291,
+      "quests_given": [
+        "prisoners-dreaming-of-escape"
+      ]
+    },
+    {
+      "slug": "chief-mahnsoo",
+      "name": "Chief Mahnsoo",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": null,
+      "y": null,
+      "quests_given": []
+    },
+    {
+      "slug": "cherokee",
+      "name": "Cherokee",
+      "map_slug": "inside-alberta",
+      "map_name": "Inside Alberta",
+      "map_navi_code": "alberta_in",
+      "x": 122,
+      "y": 53,
+      "quests_given": [
+        "crafting-deer-horn"
+      ]
+    },
+    {
+      "slug": "child-2",
+      "name": "Child",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 214,
+      "y": 223,
+      "quests_given": []
+    },
+    {
+      "slug": "child-1",
+      "name": "Child",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 186,
+      "y": 173,
+      "quests_given": []
+    },
+    {
+      "slug": "child-4",
+      "name": "Child",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 147,
+      "y": 334,
+      "quests_given": []
+    },
+    {
+      "slug": "child-3",
+      "name": "Child",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 109,
+      "y": 146,
+      "quests_given": []
+    },
+    {
+      "slug": "children",
+      "name": "children",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 192,
+      "y": 89,
+      "quests_given": [
+        "crafting-theater-prop-22154"
+      ]
+    },
+    {
+      "slug": "cillia",
+      "name": "Cillia",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 190,
+      "y": 95,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14732"
+      ]
+    },
+    {
+      "slug": "claude",
+      "name": "Claude",
+      "map_slug": "glast-heim",
+      "map_name": "Glast Heim",
+      "map_navi_code": "glast_01",
+      "x": 205,
+      "y": 131,
+      "quests_given": [
+        "purifying-the-monastery",
+        "whereabouts-of-the-acolyte"
+      ]
+    },
+    {
+      "slug": "cinder",
+      "name": "Cinder",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 242,
+      "y": 179,
+      "quests_given": [
+        "memo-from-cinder",
+        "so-you-can-attend-the-ball"
+      ]
+    },
+    {
+      "slug": "clock-tower-3f",
+      "name": "Clock Tower 3F",
+      "map_slug": "clock-tower-3f",
+      "map_name": "Clock Tower 3F",
+      "map_navi_code": "c_tower3",
+      "x": 66,
+      "y": 145,
+      "quests_given": [
+        "living-clocks-2"
+      ]
+    },
+    {
+      "slug": "clock-tower-basement",
+      "name": "Clock Tower Basement",
+      "map_slug": "clock-tower-b4f",
+      "map_name": "Clock Tower B4F",
+      "map_navi_code": "alde_dun04",
+      "x": 80,
+      "y": 265,
+      "quests_given": [
+        "laughter-from-below"
+      ]
+    },
+    {
+      "slug": "coco",
+      "name": "Coco",
+      "map_slug": "geffen-field-09",
+      "map_name": "Geffen Field 09",
+      "map_navi_code": "gef_fild09",
+      "x": 140,
+      "y": 65,
+      "quests_given": [
+        "geffen-fishing-novice",
+        "mage-disappearance-case-4"
+      ]
+    },
+    {
+      "slug": "comodo-casino-1",
+      "name": "Comodo Casino",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 195,
+      "y": 112,
+      "quests_given": []
+    },
+    {
+      "slug": "comodo-beach",
+      "name": "Comodo Beach",
+      "map_slug": "kokomo-beach-02",
+      "map_name": "Kokomo Beach 02",
+      "map_navi_code": "cmd_fild02",
+      "x": 216,
+      "y": 364,
+      "quests_given": [
+        "comodo-plague-4",
+        "comodo-plague-5"
+      ]
+    },
+    {
+      "slug": "comodo-casino-2",
+      "name": "Comodo Casino",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 73,
+      "y": 29,
+      "quests_given": []
+    },
+    {
+      "slug": "comodo-casino-3",
+      "name": "Comodo Casino",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 43,
+      "y": 57,
+      "quests_given": []
+    },
+    {
+      "slug": "corpse-location-1",
+      "name": "Corpse Location 1",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 251,
+      "y": 207,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-5-1"
+      ]
+    },
+    {
+      "slug": "corpse-location-2",
+      "name": "Corpse Location 2",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 247,
+      "y": 189,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-5-2"
+      ]
+    },
+    {
+      "slug": "crusader-leader",
+      "name": "Crusader Leader",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 251,
+      "y": 75,
+      "quests_given": [
+        "second-job-change-crusader"
+      ]
+    },
+    {
+      "slug": "dana",
+      "name": "Dana",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 83,
+      "y": 205,
+      "quests_given": [
+        "crafting-doctor-band"
+      ]
+    },
+    {
+      "slug": "corpse-location-4",
+      "name": "Corpse Location 4",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 292,
+      "y": 153,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-5-4"
+      ]
+    },
+    {
+      "slug": "corpse-location-3",
+      "name": "Corpse Location 3",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 255,
+      "y": 149,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-5-3"
+      ]
+    },
+    {
+      "slug": "corpse-location-5",
+      "name": "Corpse Location 5",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 272,
+      "y": 126,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-5-5"
+      ]
+    },
+    {
+      "slug": "culvert-maintenance-soldier",
+      "name": "Culvert Maintenance Soldier",
+      "map_slug": "prontera-field-05",
+      "map_name": "Prontera Field 05",
+      "map_navi_code": "prt_fild05",
+      "x": 270,
+      "y": 212,
+      "quests_given": [
+        "royal-investigation-2"
+      ]
+    },
+    {
+      "slug": "craftsman",
+      "name": "craftsman",
+      "map_slug": "sograt-desert-18",
+      "map_name": "Sograt Desert 18",
+      "map_navi_code": "moc_fild18",
+      "x": 169,
+      "y": 352,
+      "quests_given": [
+        "cactus-sap",
+        "cactus-sap-22720",
+        "sograt-ingredients-for-a-local-specialty"
+      ]
+    },
+    {
+      "slug": "darquez",
+      "name": "Darquez",
+      "map_slug": "glast-heim",
+      "map_name": "Glast Heim",
+      "map_navi_code": "glast_01",
+      "x": 213,
+      "y": 294,
+      "quests_given": []
+    },
+    {
+      "slug": "designated-location",
+      "name": "designated location",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 38,
+      "y": 21,
+      "quests_given": [
+        "royal-investigation-6"
+      ]
+    },
+    {
+      "slug": "dietmar-2",
+      "name": "Dietmar",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 76,
+      "y": 310,
+      "quests_given": []
+    },
+    {
+      "slug": "dietmar-1",
+      "name": "Dietmar",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 140,
+      "y": 276,
+      "quests_given": []
+    },
+    {
+      "slug": "distracted-merchant",
+      "name": "Distracted Merchant",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 92,
+      "y": 110,
+      "quests_given": [
+        "crafting-raccoon-hat-22161",
+        "crafting-raccoon-hat-22162"
+      ]
+    },
+    {
+      "slug": "dolin",
+      "name": "Dolin",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 180,
+      "y": 147,
+      "quests_given": [
+        "it-keeps-appearing-in-my-dreams"
+      ]
+    },
+    {
+      "slug": "dongdong",
+      "name": "Dongdong",
+      "map_slug": "payon-forest-01-pay-fild01",
+      "map_name": "Payon Forest 01 (pay_fild01)",
+      "map_navi_code": "pay_fild01",
+      "x": 328,
+      "y": 351,
+      "quests_given": [
+        "anxious-waiting-for-firewood",
+        "it-s-just-firewood"
+      ]
+    },
+    {
+      "slug": "dongdong-s-father",
+      "name": "Dongdong's Father",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 173,
+      "y": 77,
+      "quests_given": []
+    },
+    {
+      "slug": "dung-heap-2",
+      "name": "Dung Heap",
+      "map_slug": "mt-mjolnir-south-side-07",
+      "map_name": "Mt. Mjolnir South Side 07",
+      "map_navi_code": "mjolnir_07",
+      "x": 118,
+      "y": 100,
+      "quests_given": []
+    },
+    {
+      "slug": "dung-heap-1",
+      "name": "Dung Heap",
+      "map_slug": "mt-mjolnir-south-side-07",
+      "map_name": "Mt. Mjolnir South Side 07",
+      "map_navi_code": "mjolnir_07",
+      "x": 333,
+      "y": 100,
+      "quests_given": []
+    },
+    {
+      "slug": "dung-heap-3",
+      "name": "Dung Heap",
+      "map_slug": "mt-mjolnir-south-side-07",
+      "map_name": "Mt. Mjolnir South Side 07",
+      "map_navi_code": "mjolnir_07",
+      "x": 153,
+      "y": 272,
+      "quests_given": []
+    },
+    {
+      "slug": "dung-heap-4",
+      "name": "Dung Heap",
+      "map_slug": "mt-mjolnir-south-side-07",
+      "map_name": "Mt. Mjolnir South Side 07",
+      "map_navi_code": "mjolnir_07",
+      "x": 316,
+      "y": 296,
+      "quests_given": []
+    },
+    {
+      "slug": "dungeon-floor-2",
+      "name": "Dungeon Floor 2",
+      "map_slug": "geffen-dungeon-b2f",
+      "map_name": "Geffen Dungeon B2F",
+      "map_navi_code": "gef_dun01",
+      "x": 115,
+      "y": 236,
+      "quests_given": [
+        "hunt-ghoul-and-jack",
+        "hunt-ghoul-and-jack-again-today"
+      ]
+    },
+    {
+      "slug": "dungeon-floor-3",
+      "name": "Dungeon Floor 3",
+      "map_slug": "geffen-dungeon-b3f",
+      "map_name": "Geffen Dungeon B3F",
+      "map_navi_code": "gef_dun02",
+      "x": 104,
+      "y": 142,
+      "quests_given": [
+        "hunt-marionette-and-deviruchi",
+        "hunt-marionette-and-deviruchi-again-today"
+      ]
+    },
+    {
+      "slug": "dungeon-floor-1",
+      "name": "Dungeon Floor 1",
+      "map_slug": "geffen-dungeon-b1f",
+      "map_name": "Geffen Dungeon B1F",
+      "map_navi_code": "gef_dun00",
+      "x": 104,
+      "y": 99,
+      "quests_given": [
+        "hunt-hunter-fly",
+        "hunt-hunter-fly-again-today"
+      ]
+    },
+    {
+      "slug": "east-cave-mao-1",
+      "name": "East Cave Mao",
+      "map_slug": "east-cave-mao",
+      "map_name": "East Cave Mao",
+      "map_navi_code": "beach_dun3",
+      "x": 23,
+      "y": 260,
+      "quests_given": []
+    },
+    {
+      "slug": "east-cave-mao-2",
+      "name": "East Cave Mao",
+      "map_slug": "east-cave-mao",
+      "map_name": "East Cave Mao",
+      "map_navi_code": "beach_dun3",
+      "x": 31,
+      "y": 253,
+      "quests_given": []
+    },
+    {
+      "slug": "east-field-of-the-goblin-settlement",
+      "name": "East Field of the Goblin Settlement",
+      "map_slug": "prontera-field-11",
+      "map_name": "Prontera Field 11",
+      "map_navi_code": "prt_fild11",
+      "x": 26,
+      "y": 281,
+      "quests_given": [
+        "troublesome-ones"
+      ]
+    },
+    {
+      "slug": "elder-before-the-buddha-statue",
+      "name": "Elder before the Buddha statue",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 139,
+      "y": 33,
+      "quests_given": [
+        "fox-hunt"
+      ]
+    },
+    {
+      "slug": "eric",
+      "name": "Eric",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 30,
+      "y": 71,
+      "quests_given": [
+        "eric-s-precious-headphones"
+      ]
+    },
+    {
+      "slug": "etila",
+      "name": "Etila",
+      "map_slug": "prontera-field-01",
+      "map_name": "Prontera Field 01",
+      "map_navi_code": "prt_fild01",
+      "x": 357,
+      "y": 310,
+      "quests_given": [
+        "smokie-nemesis-of-cabbages",
+        "smokie-nemesis-of-cabbages-pending",
+        "the-nemesis-of-cabbages-returns"
+      ]
+    },
+    {
+      "slug": "explorer",
+      "name": "Explorer",
+      "map_slug": "papuchicha-forest",
+      "map_name": "Papuchicha Forest",
+      "map_navi_code": "cmd_fild01",
+      "x": 40,
+      "y": 320,
+      "quests_given": [
+        "creepy-critters"
+      ]
+    },
+    {
+      "slug": "fontes-professor",
+      "name": "Fontes Professor",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 132,
+      "y": 207,
+      "quests_given": []
+    },
+    {
+      "slug": "forest",
+      "name": "Forest",
+      "map_slug": "inside-payon",
+      "map_name": "Inside Payon",
+      "map_navi_code": "payon_in03",
+      "x": 100,
+      "y": 22,
+      "quests_given": [
+        "crafting-theater-prop-22156"
+      ]
+    },
+    {
+      "slug": "familiar",
+      "name": "Familiar",
+      "map_slug": "sewer-tunnel-1f",
+      "map_name": "Sewer Tunnel 1F",
+      "map_navi_code": "prt_sewb1",
+      "x": 147,
+      "y": 178,
+      "quests_given": [
+        "royal-investigation-3"
+      ]
+    },
+    {
+      "slug": "for-me",
+      "name": "for me",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 185,
+      "y": 181,
+      "quests_given": [
+        "crafting-bandage-22169"
+      ]
+    },
+    {
+      "slug": "first-investigation-point",
+      "name": "First Investigation Point",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 211,
+      "y": 124,
+      "quests_given": [
+        "merchant-leader-rescue-operation-4-1"
+      ]
+    },
+    {
+      "slug": "forest-keeper-duri",
+      "name": "Forest Keeper Duri",
+      "map_slug": "payon-forest-09",
+      "map_name": "Payon Forest 09",
+      "map_navi_code": "pay_fild09",
+      "x": 91,
+      "y": 164,
+      "quests_given": [
+        "forest-keeper-s-roulette-1"
+      ]
+    },
+    {
+      "slug": "forest-keeper-hana",
+      "name": "Forest Keeper Hana",
+      "map_slug": "payon-forest-10",
+      "map_name": "Payon Forest 10",
+      "map_navi_code": "pay_fild10",
+      "x": 114,
+      "y": 371,
+      "quests_given": [
+        "forest-keeper-s-roulette-2"
+      ]
+    },
+    {
+      "slug": "forest-keeper-sena",
+      "name": "Forest Keeper Sena",
+      "map_slug": "payon-forest-07",
+      "map_name": "Payon Forest 07",
+      "map_navi_code": "pay_fild07",
+      "x": 291,
+      "y": 349,
+      "quests_given": [
+        "forest-keeper-s-roulette-3"
+      ]
+    },
+    {
+      "slug": "fountain-plaza",
+      "name": "Fountain Plaza",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 131,
+      "y": 40,
+      "quests_given": [
+        "mage-disappearance-case-2-101051"
+      ]
+    },
+    {
+      "slug": "fourth-investigation-point",
+      "name": "Fourth Investigation Point",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 163,
+      "y": 205,
+      "quests_given": [
+        "merchant-leader-rescue-operation-4-4"
+      ]
+    },
+    {
+      "slug": "friends-of-honest",
+      "name": "Friends of Honest",
+      "map_slug": "pyramid-1f",
+      "map_name": "Pyramid 1F",
+      "map_navi_code": "moc_pryd01",
+      "x": 20,
+      "y": 192,
+      "quests_given": [
+        "sweet-dreams-with-an-old-blue-box"
+      ]
+    },
+    {
+      "slug": "frederick",
+      "name": "Frederick",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 31,
+      "y": 100,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14733"
+      ]
+    },
+    {
+      "slug": "furious-zombie",
+      "name": "Furious Zombie",
+      "map_slug": "prontera-castle-b2f",
+      "map_name": "Prontera Castle B2F",
+      "map_navi_code": "prt_ca02",
+      "x": 56,
+      "y": 45,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-7"
+      ]
+    },
+    {
+      "slug": "galatei",
+      "name": "Galatei",
+      "map_slug": "mt-mjolnir-south-side-11",
+      "map_name": "Mt. Mjolnir South Side 11",
+      "map_navi_code": "mjolnir_11",
+      "x": 263,
+      "y": 291,
+      "quests_given": [
+        "mjolnir-way-too-many-even-for-me",
+        "mjolnir-way-too-many-even-for-me-22361"
+      ]
+    },
+    {
+      "slug": "general-spiegel-1",
+      "name": "General Spiegel",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 180,
+      "y": 26,
+      "quests_given": []
+    },
+    {
+      "slug": "geffen-tower",
+      "name": "Geffen Tower",
+      "map_slug": "geffen-tower",
+      "map_name": "Geffen Tower",
+      "map_navi_code": "gef_tower",
+      "x": 62,
+      "y": 171,
+      "quests_given": [
+        "mage-disappearance-case-1"
+      ]
+    },
+    {
+      "slug": "gallet",
+      "name": "Gallet",
+      "map_slug": "mt-mjolnir-south-side-06",
+      "map_name": "Mt. Mjolnir South Side 06",
+      "map_navi_code": "mjolnir_06",
+      "x": 162,
+      "y": 254,
+      "quests_given": [
+        "mjolnir-broken-trap-22313"
+      ]
+    },
+    {
+      "slug": "garim",
+      "name": "Garim",
+      "map_slug": "prontera-field-07",
+      "map_name": "Prontera Field 07",
+      "map_navi_code": "prt_fild07",
+      "x": 147,
+      "y": 320,
+      "quests_given": [
+        "for-reconciliation"
+      ]
+    },
+    {
+      "slug": "general-spiegel-2",
+      "name": "General Spiegel",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 109,
+      "y": 306,
+      "quests_given": []
+    },
+    {
+      "slug": "george",
+      "name": "George",
+      "map_slug": "geffen-tower",
+      "map_name": "Geffen Tower",
+      "map_navi_code": "gef_tower",
+      "x": 53,
+      "y": 103,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14734"
+      ]
+    },
+    {
+      "slug": "glast-heim-culvert",
+      "name": ":Glast Heim Culvert",
+      "map_slug": "glast-heim-culvert-3f",
+      "map_name": "Glast Heim Culvert 3F",
+      "map_navi_code": "gl_sew03",
+      "x": 171,
+      "y": 283,
+      "quests_given": [
+        "do-not-doubt"
+      ]
+    },
+    {
+      "slug": "glast-heim-castle-2",
+      "name": "Glast Heim Castle",
+      "map_slug": "glast-heim-castle-2f",
+      "map_name": "Glast Heim Castle 2F",
+      "map_navi_code": "gl_cas02",
+      "x": 104,
+      "y": 33,
+      "quests_given": []
+    },
+    {
+      "slug": "glast-heim-culvert-2",
+      "name": "Glast Heim Culvert",
+      "map_slug": "glast-heim-culvert-3f",
+      "map_name": "Glast Heim Culvert 3F",
+      "map_navi_code": "gl_sew03",
+      "x": 171,
+      "y": 283,
+      "quests_given": []
+    },
+    {
+      "slug": "glast-heim-chivalry",
+      "name": "Glast Heim Chivalry",
+      "map_slug": "knights-hall-1f",
+      "map_name": "Knights Hall 1F",
+      "map_navi_code": "gl_knt01",
+      "x": 150,
+      "y": 15,
+      "quests_given": [
+        "a-worthy-opponent",
+        "a-worthy-opponent-again",
+        "nothing-but-hollow-armor",
+        "nothing-but-hollow-armor-again",
+        "perhaps-a-righteous-soul-again"
+      ]
+    },
+    {
+      "slug": "glast-heim-castle-1",
+      "name": "Glast Heim Castle",
+      "map_slug": "glast-heim-castle-1f",
+      "map_name": "Glast Heim Castle 1F",
+      "map_navi_code": "gl_cas01",
+      "x": 199,
+      "y": 29,
+      "quests_given": []
+    },
+    {
+      "slug": "glast-heim-culvert-1",
+      "name": "Glast Heim Culvert",
+      "map_slug": "glast-heim-culvert-4f",
+      "map_name": "Glast Heim Culvert 4F",
+      "map_navi_code": "gl_sew04",
+      "x": 68,
+      "y": 277,
+      "quests_given": []
+    },
+    {
+      "slug": "glast-heim-underground-cave",
+      "name": ":Glast Heim Underground Cave",
+      "map_slug": "underground-cave-2f",
+      "map_name": "Underground Cave 2F",
+      "map_navi_code": "gl_dun02",
+      "x": 224,
+      "y": 266,
+      "quests_given": [
+        "delicious-no-pitiful-souls"
+      ]
+    },
+    {
+      "slug": "glast-heim-underground-cave-1",
+      "name": "Glast Heim Underground Cave",
+      "map_slug": "underground-cave-1f",
+      "map_name": "Underground Cave 1F",
+      "map_navi_code": "gl_dun01",
+      "x": 133,
+      "y": 271,
+      "quests_given": []
+    },
+    {
+      "slug": "glast-heim-underground-cave-2",
+      "name": "Glast Heim Underground Cave",
+      "map_slug": "underground-cave-2f",
+      "map_name": "Underground Cave 2F",
+      "map_navi_code": "gl_dun02",
+      "x": 224,
+      "y": 266,
+      "quests_given": []
+    },
+    {
+      "slug": "golden-hand",
+      "name": "Golden Hand",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 144,
+      "y": 166,
+      "quests_given": [
+        "crafting-welding-mask-22164",
+        "crafting-welding-mask"
+      ]
+    },
+    {
+      "slug": "golden-thief-bug-subjugation",
+      "name": "Golden Thief Bug Subjugation",
+      "map_slug": "sewer-tunnel-4f",
+      "map_name": "Sewer Tunnel 4F",
+      "map_navi_code": "prt_sewb4",
+      "x": 100,
+      "y": 105,
+      "quests_given": [
+        "raid-golden-thief-bug-subjugation"
+      ]
+    },
+    {
+      "slug": "grand-general-spiegel",
+      "name": "Grand General Spiegel",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 174,
+      "y": 258,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-1"
+      ]
+    },
+    {
+      "slug": "grandpa-1",
+      "name": "Grandpa",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 192,
+      "y": 109,
+      "quests_given": []
+    },
+    {
+      "slug": "grandmother",
+      "name": "Grandmother",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 237,
+      "y": 64,
+      "quests_given": [
+        "it-s-a-harmful-onion",
+        "strange-onion"
+      ]
+    },
+    {
+      "slug": "grandpa-2",
+      "name": "Grandpa",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 239,
+      "y": 64,
+      "quests_given": []
+    },
+    {
+      "slug": "grandpa-near-the-well",
+      "name": "Grandpa near the well",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 192,
+      "y": 109,
+      "quests_given": [
+        "a-message-from-lumin"
+      ]
+    },
+    {
+      "slug": "guard-1",
+      "name": "Guard",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 41,
+      "y": 133,
+      "quests_given": []
+    },
+    {
+      "slug": "guard-3",
+      "name": "Guard",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 222,
+      "y": 112,
+      "quests_given": []
+    },
+    {
+      "slug": "guard-2",
+      "name": "Guard",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 38,
+      "y": 134,
+      "quests_given": []
+    },
+    {
+      "slug": "guk-sunsu",
+      "name": "Guk Sunsu",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 103,
+      "y": 205,
+      "quests_given": [
+        "ingredients-for-dragon-beard-noodles",
+        "soft-and-slippery-special-dragon-beard-noodles"
+      ]
+    },
+    {
+      "slug": "guildsman-of-the-assassin-guild",
+      "name": "Guildsman of the Assassin Guild",
+      "map_slug": "assassin-guild",
+      "map_name": "Assassin Guild",
+      "map_navi_code": "in_moc_16",
+      "x": 19,
+      "y": 33,
+      "quests_given": [
+        "second-job-change-assassin"
+      ]
+    },
+    {
+      "slug": "hat-maker",
+      "name": "Hat Maker",
+      "map_slug": "al-de-baran-the-border-city",
+      "map_name": "Al De Baran, the Border City",
+      "map_navi_code": "alde_alche",
+      "x": 130,
+      "y": 140,
+      "quests_given": [
+        "crafting-clock-tower-manager-s-income",
+        "crafting-pocket-watch-headgear"
+      ]
+    },
+    {
+      "slug": "hat-artisan",
+      "name": "Hat Artisan",
+      "map_slug": "al-de-baran-the-border-city",
+      "map_name": "Al De Baran, the Border City",
+      "map_navi_code": "alde_alche",
+      "x": 51,
+      "y": 202,
+      "quests_given": [
+        "crafting-mushroom-headband-22159"
+      ]
+    },
+    {
+      "slug": "guso",
+      "name": "Guso",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 89,
+      "y": 204,
+      "quests_given": [
+        "crafting-striped-headband"
+      ]
+    },
+    {
+      "slug": "guk-danji",
+      "name": "Guk Danji",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 108,
+      "y": 209,
+      "quests_given": [
+        "a-story-you-ve-never-heard-before"
+      ]
+    },
+    {
+      "slug": "harsi",
+      "name": "Harsi",
+      "map_slug": "prontera-field-03",
+      "map_name": "Prontera Field 03",
+      "map_navi_code": "prt_fild03",
+      "x": 336,
+      "y": 62,
+      "quests_given": [
+        "fishing-bait-1",
+        "fishing-bait-2"
+      ]
+    },
+    {
+      "slug": "healer",
+      "name": "Healer",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 60,
+      "y": 43,
+      "quests_given": [
+        "critura-academy-4"
+      ]
+    },
+    {
+      "slug": "hidden-location",
+      "name": "Hidden Location",
+      "map_slug": "payon-cave-1f",
+      "map_name": "Payon Cave 1F",
+      "map_navi_code": "pay_dun00",
+      "x": 163,
+      "y": 142,
+      "quests_given": [
+        "sea-dragon-blade-missing-5"
+      ]
+    },
+    {
+      "slug": "him",
+      "name": "Him",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 76,
+      "y": 310,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14744",
+        "the-curse-of-the-gaebolg-family-14745"
+      ]
+    },
+    {
+      "slug": "hilde",
+      "name": "Hilde",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 321,
+      "y": 57,
+      "quests_given": [
+        "mjolnir-with-all-those-legs"
+      ]
+    },
+    {
+      "slug": "high-priest",
+      "name": "High Priest",
+      "map_slug": "inside-prontera-sanctuary",
+      "map_name": "Inside Prontera Sanctuary",
+      "map_navi_code": "prt_church",
+      "x": 16,
+      "y": 41,
+      "quests_given": [
+        "second-job-change-priest"
+      ]
+    },
+    {
+      "slug": "homeless-dealer",
+      "name": "Homeless Dealer",
+      "map_slug": "byalan-island",
+      "map_name": "Byalan Island",
+      "map_navi_code": "izlu2dun",
+      "x": 108,
+      "y": 68,
+      "quests_given": [
+        "an-opportunistic-gain",
+        "strike-while-the-iron-is-hot"
+      ]
+    },
+    {
+      "slug": "homeless-acolyte",
+      "name": "Homeless Acolyte",
+      "map_slug": "payon-cave-3f",
+      "map_name": "Payon Cave 3F",
+      "map_navi_code": "pay_dun02",
+      "x": 134,
+      "y": 123,
+      "quests_given": []
+    },
+    {
+      "slug": "honest-1",
+      "name": "Honest",
+      "map_slug": "morroc-ruins",
+      "map_name": "Morroc Ruins",
+      "map_navi_code": "moc_ruins",
+      "x": 101,
+      "y": 124,
+      "quests_given": []
+    },
+    {
+      "slug": "honest-2",
+      "name": "Honest",
+      "map_slug": "undersea-cave-2f",
+      "map_name": "Undersea Cave 2F",
+      "map_navi_code": "iz_dun01",
+      "x": 121,
+      "y": 158,
+      "quests_given": []
+    },
+    {
+      "slug": "hot-blooded-evangelist",
+      "name": "Hot-Blooded Evangelist",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 85,
+      "y": 74,
+      "quests_given": [
+        "memo-from-hot-blooded-evangelist",
+        "you-wear-the-fiery-headband"
+      ]
+    },
+    {
+      "slug": "house-next-door",
+      "name": "house next door",
+      "map_slug": "inside-payon",
+      "map_name": "Inside Payon",
+      "map_navi_code": "payon_in03",
+      "x": 100,
+      "y": 22,
+      "quests_given": [
+        "crafting-theater-prop-22155"
+      ]
+    },
+    {
+      "slug": "hunter-allan",
+      "name": "Hunter Allan",
+      "map_slug": "hunter-guild",
+      "map_name": "Hunter Guild",
+      "map_navi_code": "in_hunter",
+      "x": 99,
+      "y": 99,
+      "quests_given": [
+        "second-job-change-hunter"
+      ]
+    },
+    {
+      "slug": "investigator",
+      "name": "Investigator",
+      "map_slug": "lutie-field-2",
+      "map_name": "Lutie Field",
+      "map_navi_code": "xmas_fild01",
+      "x": 188,
+      "y": 137,
+      "quests_given": [
+        "defeat-sasquatch"
+      ]
+    },
+    {
+      "slug": "izlude-dungeon-floor-4",
+      "name": "Izlude Dungeon Floor 4",
+      "map_slug": "undersea-cave-4f",
+      "map_name": "Undersea Cave 4F",
+      "map_navi_code": "iz_dun03",
+      "x": 37,
+      "y": 64,
+      "quests_given": [
+        "consideration-for-a-friend"
+      ]
+    },
+    {
+      "slug": "iris",
+      "name": "Iris",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 173,
+      "y": 171,
+      "quests_given": [
+        "sea-dragon-blade-missing-1",
+        "sea-dragon-blade-missing-10"
+      ]
+    },
+    {
+      "slug": "inn",
+      "name": "Inn",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 68,
+      "y": 133,
+      "quests_given": [
+        "merchant-leader-rescue-operation-1"
+      ]
+    },
+    {
+      "slug": "jadis",
+      "name": "Jadis",
+      "map_slug": "prontera-field-10",
+      "map_name": "Prontera Field 10",
+      "map_navi_code": "prt_fild10",
+      "x": 250,
+      "y": 272,
+      "quests_given": [
+        "dog-food-is-acorn",
+        "the-tree-spirit-of-the-lush-forest"
+      ]
+    },
+    {
+      "slug": "isilain",
+      "name": "Isilain",
+      "map_slug": "prontera-field-06",
+      "map_name": "Prontera Field 06",
+      "map_navi_code": "prt_fild06",
+      "x": 29,
+      "y": 199,
+      "quests_given": [
+        "i-want-to-get-closer",
+        "i-want-to-get-closer-pending",
+        "you-i-cannot-approach"
+      ]
+    },
+    {
+      "slug": "jaycee-s-fianc-e",
+      "name": "Jaycee's Fiancée",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 44,
+      "y": 103,
+      "quests_given": []
+    },
+    {
+      "slug": "jingleheimer",
+      "name": "Jingleheimer",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 26,
+      "y": 25,
+      "quests_given": [
+        "a-stop-sign-you-can-wear-on-your-head",
+        "what-would-you-even-use-a-stop-sign-for"
+      ]
+    },
+    {
+      "slug": "karkatan",
+      "name": "Karkatan",
+      "map_slug": "inside-umbala",
+      "map_name": "Inside Umbala",
+      "map_navi_code": "um_in",
+      "x": 39,
+      "y": 122,
+      "quests_given": [
+        "learn-the-utan-tribe-language",
+        "learn-the-utan-tribe-language-16246",
+        "learn-the-utan-tribe-language-16248"
+      ]
+    },
+    {
+      "slug": "junior-mage",
+      "name": "Junior Mage",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 126,
+      "y": 133,
+      "quests_given": [
+        "trust-of-the-town",
+        "trust-of-the-town-21168",
+        "trust-of-the-town-21169"
+      ]
+    },
+    {
+      "slug": "komobi",
+      "name": "Komobi",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 105,
+      "y": 208,
+      "quests_given": [
+        "announce-the-results",
+        "comodo-original-sea-dragon-grandmother-cooking-showdown",
+        "start-the-cooking-showdown",
+        "taste-test"
+      ]
+    },
+    {
+      "slug": "king-gagor-vii",
+      "name": "King Gagor VII",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 278,
+      "y": 218,
+      "quests_given": [
+        "food-shortage",
+        "frog-stealth-technique",
+        "hero-of-the-frogs",
+        "threat-of-extinction",
+        "vengeance-for-the-kin"
+      ]
+    },
+    {
+      "slug": "knight-tibalt",
+      "name": "Knight Tibalt",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 210,
+      "y": 120,
+      "quests_given": [
+        "trust-of-the-town-21171",
+        "trust-of-the-town-21172"
+      ]
+    },
+    {
+      "slug": "krolla",
+      "name": "Krolla",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 40,
+      "y": 237,
+      "quests_given": [
+        "who-needs-a-graduation-cap-anyway"
+      ]
+    },
+    {
+      "slug": "lennox",
+      "name": "Lennox",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 156,
+      "y": 328,
+      "quests_given": [
+        "comodo-plague-1",
+        "comodo-plague-12",
+        "comodo-plague-2",
+        "comodo-plague-3"
+      ]
+    },
+    {
+      "slug": "kusequili",
+      "name": "Kusequili",
+      "map_slug": "undersea-cave-3f",
+      "map_name": "Undersea Cave 3F",
+      "map_navi_code": "iz_dun02",
+      "x": 228,
+      "y": 229,
+      "quests_given": [
+        "an-extreme-chef",
+        "gathering-cooking-ingredients"
+      ]
+    },
+    {
+      "slug": "lady",
+      "name": "Lady",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 217,
+      "y": 94,
+      "quests_given": [
+        "measures-for-the-children"
+      ]
+    },
+    {
+      "slug": "louitz",
+      "name": "Louitz",
+      "map_slug": "inside-alberta",
+      "map_name": "Inside Alberta",
+      "map_navi_code": "alberta_in",
+      "x": 133,
+      "y": 55,
+      "quests_given": [
+        "neutralizer-and-mixture"
+      ]
+    },
+    {
+      "slug": "leon",
+      "name": "Leon",
+      "map_slug": "mt-mjolnir-south-side-07",
+      "map_name": "Mt. Mjolnir South Side 07",
+      "map_navi_code": "mjolnir_07",
+      "x": 239,
+      "y": 223,
+      "quests_given": [
+        "mjolnir-fragrant-ughhh-22309"
+      ]
+    },
+    {
+      "slug": "little-petite-boy",
+      "name": "Little Petite Boy",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 40,
+      "y": 133,
+      "quests_given": [
+        "petite-flying-is-cute",
+        "petite-ground-is-cute",
+        "trust-of-the-town-21173"
+      ]
+    },
+    {
+      "slug": "lucian",
+      "name": "Lucian",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 38,
+      "y": 122,
+      "quests_given": [
+        "mage-disappearance-case-3",
+        "mage-disappearance-case-3-101052"
+      ]
+    },
+    {
+      "slug": "long-time-resident",
+      "name": "Long-time Resident",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 149,
+      "y": 88,
+      "quests_given": [
+        "crafting-theater-prop"
+      ]
+    },
+    {
+      "slug": "lushak",
+      "name": "Lushak",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 90,
+      "y": 131,
+      "quests_given": [
+        "missing-persons-4",
+        "missing-persons-7"
+      ]
+    },
+    {
+      "slug": "lumin",
+      "name": "Lumin",
+      "map_slug": "morroc-ruins",
+      "map_name": "Morroc Ruins",
+      "map_navi_code": "moc_ruins",
+      "x": 105,
+      "y": 124,
+      "quests_given": [
+        "i-can-t-sleep-at-all",
+        "you-can-t-live-on-just-one-night-s-sleep"
+      ]
+    },
+    {
+      "slug": "magic-guild-official",
+      "name": "Magic Guild Official",
+      "map_slug": "geffen-tower",
+      "map_name": "Geffen Tower",
+      "map_navi_code": "gef_tower",
+      "x": 111,
+      "y": 37,
+      "quests_given": [
+        "second-job-change-wizard"
+      ]
+    },
+    {
+      "slug": "mage-guild-girl",
+      "name": "Girl at the Chalkboard (Mage Guild)",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": null,
+      "y": null,
+      "quests_given": []
+    },
+    {
+      "slug": "man",
+      "name": "Man",
+      "map_slug": "geffen-tower",
+      "map_name": "Geffen Tower",
+      "map_navi_code": "gef_tower",
+      "x": 48,
+      "y": 140,
+      "quests_given": [
+        "the-horse-that-runs-through-nightmares",
+        "the-horse-that-runs-through-nightmares-again-today"
+      ]
+    },
+    {
+      "slug": "man-2",
+      "name": "man",
+      "map_slug": "sograt-desert-11",
+      "map_name": "Sograt Desert 11",
+      "map_navi_code": "moc_fild11",
+      "x": 215,
+      "y": 215,
+      "quests_given": [
+        "sograt-the-oasis-incident-22713",
+        "sograt-the-oasis-incident-22715",
+        "sograt-the-oasis-incident"
+      ]
+    },
+    {
+      "slug": "man-with-fox-mask",
+      "name": "Man with Fox Mask",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 63,
+      "y": 109,
+      "quests_given": [
+        "man-with-fox-mask"
+      ]
+    },
+    {
+      "slug": "mantue-tara",
+      "name": "Mantue Tara",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 108,
+      "y": 205,
+      "quests_given": [
+        "sizzling-charcoal-broiled-breath-dumpling",
+        "the-secret-of-breath-dumplings"
+      ]
+    },
+    {
+      "slug": "marianne",
+      "name": "Marianne",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 49,
+      "y": 172,
+      "quests_given": [
+        "carnivorous-child",
+        "fruit-juice-04"
+      ]
+    },
+    {
+      "slug": "masha",
+      "name": "Masha",
+      "map_slug": "inside-alberta",
+      "map_name": "Inside Alberta",
+      "map_navi_code": "alberta_in",
+      "x": 20,
+      "y": 18,
+      "quests_given": [
+        "return-to-the-merchant-guild",
+        "return-to-the-merchant-guild-8327",
+        "return-to-the-merchant-guild-8329",
+        "return-to-the-merchant-guild-8331",
+        "return-to-the-merchant-guild-8333"
+      ]
+    },
+    {
+      "slug": "master-alchemist",
+      "name": "Master Alchemist",
+      "map_slug": "al-de-baran-the-border-city",
+      "map_name": "Al De Baran, the Border City",
+      "map_navi_code": "alde_alche",
+      "x": 101,
+      "y": 184,
+      "quests_given": [
+        "second-job-change-alchemist"
+      ]
+    },
+    {
+      "slug": "matallan-tara",
+      "name": "Matallan Tara",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 110,
+      "y": 208,
+      "quests_given": [
+        "words-from-grandmother"
+      ]
+    },
+    {
+      "slug": "maxim-leader-1",
+      "name": "Maxim Leader",
+      "map_slug": "pyramid-1f",
+      "map_name": "Pyramid 1F",
+      "map_navi_code": "moc_pryd01",
+      "x": 20,
+      "y": 192,
+      "quests_given": []
+    },
+    {
+      "slug": "maxim-leader-2",
+      "name": "Maxim Leader",
+      "map_slug": "undersea-cave-3f",
+      "map_name": "Undersea Cave 3F",
+      "map_navi_code": "iz_dun02",
+      "x": 229,
+      "y": 231,
+      "quests_given": []
+    },
+    {
+      "slug": "me",
+      "name": "Me",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 119,
+      "y": 220,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14737"
+      ]
+    },
+    {
+      "slug": "michael",
+      "name": "Michael",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 185,
+      "y": 181,
+      "quests_given": [
+        "crafting-bandage-22167"
+      ]
+    },
+    {
+      "slug": "mel",
+      "name": "Mel",
+      "map_slug": "prontera-field-05",
+      "map_name": "Prontera Field 05",
+      "map_navi_code": "prt_fild05",
+      "x": 352,
+      "y": 218,
+      "quests_given": [
+        "things-mom-hates",
+        "things-mom-hates-pending",
+        "things-mom-really-hates"
+      ]
+    },
+    {
+      "slug": "merchant",
+      "name": "Merchant",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 127,
+      "y": 59,
+      "quests_given": [
+        "because-it-s-a-bamboo-hat"
+      ]
+    },
+    {
+      "slug": "mida",
+      "name": "Mida",
+      "map_slug": "sograt-desert-07",
+      "map_name": "Sograt Desert 07",
+      "map_navi_code": "moc_fild07",
+      "x": 49,
+      "y": 358,
+      "quests_given": [
+        "sograt-excavation-team-intern-22705"
+      ]
+    },
+    {
+      "slug": "midgard-receptionist-lucy",
+      "name": "Midgard Receptionist - Lucy",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 38,
+      "y": 103,
+      "quests_given": [
+        "dark-lord-extermination",
+        "drake-extermination",
+        "eddga-extermination",
+        "golden-thief-bug-extermination",
+        "moonlight-flower-extermination",
+        "orc-hero-extermination",
+        "orc-lord-extermination",
+        "osiris-extermination",
+        "pharaoh-extermination",
+        "phreeoni-extermination",
+        "queen-ant-extermination",
+        "tao-gunka-extermination"
+      ]
+    },
+    {
+      "slug": "middle-aged-man",
+      "name": "Middle-aged Man",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 173,
+      "y": 77,
+      "quests_given": [
+        "sweet-labor"
+      ]
+    },
+    {
+      "slug": "min-rey",
+      "name": "Min Rey",
+      "map_slug": "pharos-lighthouse",
+      "map_name": "Pharos Lighthouse",
+      "map_navi_code": "cmd_fild07",
+      "x": 201,
+      "y": 49,
+      "quests_given": []
+    },
+    {
+      "slug": "mini-pot",
+      "name": "Mini Pot",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 83,
+      "y": 189,
+      "quests_given": [
+        "crafting-mining-helmet-22152",
+        "crafting-mining-helmet"
+      ]
+    },
+    {
+      "slug": "mishuna",
+      "name": "Mishuna",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 137,
+      "y": 69,
+      "quests_given": [
+        "elemental-converter",
+        "elemental-change-fire",
+        "elemental-change-ground",
+        "elemental-change-water",
+        "elemental-change-wind",
+        "elemental-change"
+      ]
+    },
+    {
+      "slug": "mission-board-1",
+      "name": "Mission Board",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 122,
+      "y": 79,
+      "quests_given": []
+    },
+    {
+      "slug": "mission-board-2",
+      "name": "Mission Board",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 134,
+      "y": 64,
+      "quests_given": []
+    },
+    {
+      "slug": "mission-board-5",
+      "name": "Mission Board",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 125,
+      "y": 148,
+      "quests_given": []
+    },
+    {
+      "slug": "mission-board-3",
+      "name": "Mission Board",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 164,
+      "y": 97,
+      "quests_given": []
+    },
+    {
+      "slug": "mission-board-4",
+      "name": "Mission Board",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 175,
+      "y": 113,
+      "quests_given": []
+    },
+    {
+      "slug": "mission-board-7",
+      "name": "Mission Board",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 121,
+      "y": 69,
+      "quests_given": []
+    },
+    {
+      "slug": "mission-board-6",
+      "name": "Mission Board",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 200,
+      "y": 149,
+      "quests_given": []
+    },
+    {
+      "slug": "moonlight-flower",
+      "name": "Moonlight Flower",
+      "map_slug": "payon-cave-5f-abandoned-village",
+      "map_name": "Payon Cave 5F (Abandoned Village)",
+      "map_navi_code": "b_pay_d04",
+      "x": 120,
+      "y": 115,
+      "quests_given": [
+        "raid-moonlight-flower-subjugation"
+      ]
+    },
+    {
+      "slug": "morgenstein",
+      "name": "Morgenstein",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 141,
+      "y": 140,
+      "quests_given": [
+        "neutralizer-and-mixture-02",
+        "neutralizer-and-mixture-03"
+      ]
+    },
+    {
+      "slug": "movie",
+      "name": "Movie",
+      "map_slug": "lutie-the-snow-village",
+      "map_name": "Lutie, the Snow Village",
+      "map_navi_code": "xmas",
+      "x": 222,
+      "y": 156,
+      "quests_given": [
+        "crafting-candle"
+      ]
+    },
+    {
+      "slug": "morrison",
+      "name": "Morrison",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 47,
+      "y": 173,
+      "quests_given": [
+        "fruit-juice-01"
+      ]
+    },
+    {
+      "slug": "mysterious-woman-d",
+      "name": "Mysterious Woman D",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 76,
+      "y": 310,
+      "quests_given": [
+        "mysterious-woman-s-request-3"
+      ]
+    },
+    {
+      "slug": "mutant-ghoul",
+      "name": "Mutant Ghoul",
+      "map_slug": "prontera-castle-b2f",
+      "map_name": "Prontera Castle B2F",
+      "map_navi_code": "prt_ca02",
+      "x": 135,
+      "y": 65,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-6"
+      ]
+    },
+    {
+      "slug": "muhae",
+      "name": "Muhae",
+      "map_slug": "inside-st-capitolina-abbey",
+      "map_name": "Inside St. Capitolina Abbey",
+      "map_navi_code": "monk_in",
+      "x": 99,
+      "y": 58,
+      "quests_given": [
+        "second-job-change-monk"
+      ]
+    },
+    {
+      "slug": "nadir",
+      "name": "Nadir",
+      "map_slug": "glast-heim",
+      "map_name": "Glast Heim",
+      "map_navi_code": "glast_01",
+      "x": 204,
+      "y": 291,
+      "quests_given": [
+        "refined-taste",
+        "vicious-interrogator"
+      ]
+    },
+    {
+      "slug": "nari",
+      "name": "Nari",
+      "map_slug": "inside-lutie",
+      "map_name": "Inside Lutie",
+      "map_navi_code": "xmas_in",
+      "x": 178,
+      "y": 177,
+      "quests_given": [
+        "crafting-chef-s-hat-and-cake-hat-22182",
+        "crafting-chef-s-hat-and-cake-hat-22180",
+        "crafting-chef-s-hat-and-cake-hat-22181"
+      ]
+    },
+    {
+      "slug": "nana",
+      "name": "Nana",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 236,
+      "y": 164,
+      "quests_given": [
+        "crafting-hair-brush"
+      ]
+    },
+    {
+      "slug": "nonda-ancana",
+      "name": "Nonda Ancana",
+      "map_slug": "undersea-cave-3f",
+      "map_name": "Undersea Cave 3F",
+      "map_navi_code": "iz_dun02",
+      "x": 231,
+      "y": 230,
+      "quests_given": [
+        "a-woman-from-a-dream"
+      ]
+    },
+    {
+      "slug": "norbert",
+      "name": "Norbert",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 76,
+      "y": 135,
+      "quests_given": [
+        "a-feathered-hat-full-of-sentiment"
+      ]
+    },
+    {
+      "slug": "office-staff",
+      "name": "Office Staff",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 62,
+      "y": 339,
+      "quests_given": []
+    },
+    {
+      "slug": "numero",
+      "name": "Numero",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 110,
+      "y": 260,
+      "quests_given": [
+        "a-fine-sombrero",
+        "a-fine-straw-hat",
+        "numero-s-sombrero-memo",
+        "numero-s-straw-hat-memo"
+      ]
+    },
+    {
+      "slug": "old-wizard",
+      "name": "Old Wizard",
+      "map_slug": "geffen-field-00",
+      "map_name": "Geffen Field 00",
+      "map_navi_code": "gef_fild00",
+      "x": 48,
+      "y": 207,
+      "quests_given": [
+        "geffen-retired-wizard",
+        "geffen-retired-wizard-22722",
+        "geffen-retired-wizard-22724",
+        "geffen-retired-wizard-22725"
+      ]
+    },
+    {
+      "slug": "northeastern-trap",
+      "name": "Northeastern Trap",
+      "map_slug": "mt-mjolnir-south-side-06",
+      "map_name": "Mt. Mjolnir South Side 06",
+      "map_navi_code": "mjolnir_06",
+      "x": 322,
+      "y": 331,
+      "quests_given": [
+        "mjolnir-broken-trap-22312"
+      ]
+    },
+    {
+      "slug": "novice",
+      "name": "Novice",
+      "map_slug": "geffen-field-09",
+      "map_name": "Geffen Field 09",
+      "map_navi_code": "gef_fild09",
+      "x": 276,
+      "y": 113,
+      "quests_given": [
+        "geffen-fishing-novice-22751"
+      ]
+    },
+    {
+      "slug": "old-scholar",
+      "name": "Old Scholar",
+      "map_slug": "morroc-ruins",
+      "map_name": "Morroc Ruins",
+      "map_navi_code": "moc_ruins",
+      "x": 104,
+      "y": 122,
+      "quests_given": [
+        "a-pain-in-the-back-a-deal-made"
+      ]
+    },
+    {
+      "slug": "olli",
+      "name": "Olli",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 85,
+      "y": 204,
+      "quests_given": [
+        "crafting-light-bulb-headband"
+      ]
+    },
+    {
+      "slug": "orc-hero",
+      "name": "Orc Hero",
+      "map_slug": "geffen-field-03",
+      "map_name": "Geffen Field 03",
+      "map_navi_code": "gef_fild03",
+      "x": 225,
+      "y": 230,
+      "quests_given": [
+        "raid-orc-hero-subjugation"
+      ]
+    },
+    {
+      "slug": "otina",
+      "name": "Otina",
+      "map_slug": "prontera-field-08",
+      "map_name": "Prontera Field 08",
+      "map_navi_code": "prt_fild08",
+      "x": 154,
+      "y": 377,
+      "quests_given": [
+        "dad-s-carrot-cake"
+      ]
+    },
+    {
+      "slug": "outside",
+      "name": "Outside",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 76,
+      "y": 310,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14740"
+      ]
+    },
+    {
+      "slug": "paul",
+      "name": "Paul",
+      "map_slug": "prontera-field-05",
+      "map_name": "Prontera Field 05",
+      "map_navi_code": "prt_fild05",
+      "x": 353,
+      "y": 221,
+      "quests_given": [
+        "are-you-strong-1",
+        "are-you-strong-2"
+      ]
+    },
+    {
+      "slug": "overgrown-swamp",
+      "name": "Overgrown Swamp",
+      "map_slug": "geffen-field-01",
+      "map_name": "Geffen Field 01",
+      "map_navi_code": "gef_fild01",
+      "x": 96,
+      "y": 119,
+      "quests_given": [
+        "geffen-swamp-preservation-22735"
+      ]
+    },
+    {
+      "slug": "payon",
+      "name": "Payon",
+      "map_slug": "inside-payon",
+      "map_name": "Inside Payon",
+      "map_navi_code": "payon_in03",
+      "x": 188,
+      "y": 146,
+      "quests_given": [
+        "fruit-juice-03"
+      ]
+    },
+    {
+      "slug": "payon-cave-floor-1",
+      "name": "Payon Cave Floor 1",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 40,
+      "y": 130,
+      "quests_given": [
+        "only-you-can-get-this-for-me"
+      ]
+    },
+    {
+      "slug": "payon-forest-1",
+      "name": "Payon Forest",
+      "map_slug": "payon-forest-01-pay-fild01",
+      "map_name": "Payon Forest 01 (pay_fild01)",
+      "map_navi_code": "pay_fild01",
+      "x": 334,
+      "y": 350,
+      "quests_given": []
+    },
+    {
+      "slug": "payon-forest-2",
+      "name": "Payon Forest",
+      "map_slug": "payon-forest-03",
+      "map_name": "Payon Forest 03",
+      "map_navi_code": "pay_fild03",
+      "x": 388,
+      "y": 63,
+      "quests_given": []
+    },
+    {
+      "slug": "pero",
+      "name": "Pero",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 214,
+      "y": 186,
+      "quests_given": [
+        "crafting-fashion-sunglasses-and-heart-hairpin-22174",
+        "crafting-fashion-sunglasses-and-heart-hairpin-22173",
+        "crafting-fashion-sunglasses-and-heart-hairpin-22172"
+      ]
+    },
+    {
+      "slug": "petite-flying",
+      "name": "Petite (Flying)",
+      "map_slug": "geffen-field-08",
+      "map_name": "Geffen Field 08",
+      "map_navi_code": "gef_fild08",
+      "x": 357,
+      "y": 187,
+      "quests_given": [
+        "petite-flying-is-cute-again-today"
+      ]
+    },
+    {
+      "slug": "portal-2-nrd-fild01",
+      "name": "Portal 2",
+      "map_slug": "nordfeld-plains",
+      "map_name": "Nordfeld Plains",
+      "map_navi_code": "nrd_fild01",
+      "x": 31,
+      "y": 277,
+      "quests_given": []
+    },
+    {
+      "slug": "petite-ground",
+      "name": "Petite (Ground)",
+      "map_slug": "geffen-field-06",
+      "map_name": "Geffen Field 06",
+      "map_navi_code": "gef_fild06",
+      "x": 218,
+      "y": 20,
+      "quests_given": [
+        "petite-ground-is-cute-again-today"
+      ]
+    },
+    {
+      "slug": "poring-in-trouble",
+      "name": "Poring In Trouble",
+      "map_slug": "prontera-field-08",
+      "map_name": "Prontera Field 08",
+      "map_navi_code": "prt_fild08",
+      "x": 362,
+      "y": 272,
+      "quests_given": [
+        "adventuring-companion-2294",
+        "adventuring-companion-2295",
+        "adventuring-companion-2298"
+      ]
+    },
+    {
+      "slug": "place-where-we-first-met",
+      "name": "place where we first met",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 130,
+      "y": 67,
+      "quests_given": [
+        "crafting-theater-prop-22157"
+      ]
+    },
+    {
+      "slug": "portal-2-nrd-dun01",
+      "name": "Portal 2",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 53,
+      "y": 313,
+      "quests_given": []
+    },
+    {
+      "slug": "portal-2-nrd-dun02",
+      "name": "Portal 2",
+      "map_slug": "nordfeld-cave-2f",
+      "map_name": "Nordfeld Cave 2F",
+      "map_navi_code": "nrd_dun02",
+      "x": 20,
+      "y": 223,
+      "quests_given": []
+    },
+    {
+      "slug": "prenetan",
+      "name": "Prenetan",
+      "map_slug": "inside-umbala",
+      "map_name": "Inside Umbala",
+      "map_navi_code": "um_in",
+      "x": 139,
+      "y": 50,
+      "quests_given": [
+        "umbala-face-to-face"
+      ]
+    },
+    {
+      "slug": "president-of-academy",
+      "name": "President of Academy",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 139,
+      "y": 82,
+      "quests_given": [
+        "second-job-change-sage"
+      ]
+    },
+    {
+      "slug": "portal-2-nrd-fild02",
+      "name": "Portal 2",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 13,
+      "y": 77,
+      "quests_given": []
+    },
+    {
+      "slug": "priest-bampee",
+      "name": "Priest Bampee",
+      "map_slug": "inside-prontera-sanctuary",
+      "map_name": "Inside Prontera Sanctuary",
+      "map_navi_code": "prt_church",
+      "x": 185,
+      "y": 106,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14741",
+        "the-curse-of-the-gaebolg-family-14742"
+      ]
+    },
+    {
+      "slug": "prontera-castle",
+      "name": "Prontera Castle",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 216,
+      "y": 146,
+      "quests_given": [
+        "missing-persons-8"
+      ]
+    },
+    {
+      "slug": "prontera-church-priest",
+      "name": "Priest (Prontera Church)",
+      "map_slug": "inside-prontera-sanctuary",
+      "map_name": "Inside Prontera Sanctuary",
+      "map_navi_code": "prt_church",
+      "x": null,
+      "y": null,
+      "quests_given": []
+    },
+    {
+      "slug": "prontera-castle-underground",
+      "name": "Prontera Castle Underground",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 125,
+      "y": 249,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-2"
+      ]
+    },
+    {
+      "slug": "prontera-knight-master",
+      "name": "Prontera Knight Master",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 88,
+      "y": 101,
+      "quests_given": [
+        "second-job-change-knight"
+      ]
+    },
+    {
+      "slug": "prontera-library",
+      "name": "Prontera Library",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 120,
+      "y": 264,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family"
+      ]
+    },
+    {
+      "slug": "prontera-tavern",
+      "name": "Prontera Tavern",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 46,
+      "y": 67,
+      "quests_given": [
+        "royal-investigation-5"
+      ]
+    },
+    {
+      "slug": "puchuchartan",
+      "name": "Puchuchartan",
+      "map_slug": "inside-umbala",
+      "map_name": "Inside Umbala",
+      "map_navi_code": "um_in",
+      "x": 44,
+      "y": 71,
+      "quests_given": [
+        "the-umbala-shaman-s-special-ability"
+      ]
+    },
+    {
+      "slug": "pupil",
+      "name": "Pupil",
+      "map_slug": "mt-mjolnir-north-side-05",
+      "map_name": "Mt. Mjolnir North Side 05",
+      "map_navi_code": "mjolnir_05",
+      "x": 185,
+      "y": 227,
+      "quests_given": []
+    },
+    {
+      "slug": "ram",
+      "name": "Ram",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 95,
+      "y": 198,
+      "quests_given": [
+        "crafting-bandage-22168",
+        "crafting-bandage"
+      ]
+    },
+    {
+      "slug": "redon",
+      "name": "Redon",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 87,
+      "y": 205,
+      "quests_given": [
+        "crafting-cross-headband"
+      ]
+    },
+    {
+      "slug": "ranuka",
+      "name": "Ranuka",
+      "map_slug": "geffen-field-07",
+      "map_name": "Geffen Field 07",
+      "map_navi_code": "gef_fild07",
+      "x": 71,
+      "y": 233,
+      "quests_given": [
+        "memo-from-ranuka",
+        "the-secret-of-the-transforming-raccoon"
+      ]
+    },
+    {
+      "slug": "reno-1",
+      "name": "Reno",
+      "map_slug": "payon-cave-1f",
+      "map_name": "Payon Cave 1F",
+      "map_navi_code": "pay_dun00",
+      "x": 155,
+      "y": 174,
+      "quests_given": []
+    },
+    {
+      "slug": "reno-2",
+      "name": "Reno",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 182,
+      "y": 172,
+      "quests_given": []
+    },
+    {
+      "slug": "restaurant",
+      "name": "Restaurant",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 145,
+      "y": 324,
+      "quests_given": [
+        "comodo-plague-6"
+      ]
+    },
+    {
+      "slug": "rita",
+      "name": "Rita",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 85,
+      "y": 207,
+      "quests_given": [
+        "crafting-blue-headband"
+      ]
+    },
+    {
+      "slug": "rogue-guild-member",
+      "name": "Rogue Guild Member",
+      "map_slug": "thief-guild",
+      "map_name": "Thief Guild",
+      "map_navi_code": "moc_prydb1",
+      "x": 363,
+      "y": 122,
+      "quests_given": [
+        "second-job-change-rogue"
+      ]
+    },
+    {
+      "slug": "romanticist",
+      "name": "Romanticist",
+      "map_slug": "prontera-castle-b2f",
+      "map_name": "Prontera Castle B2F",
+      "map_navi_code": "prt_ca02",
+      "x": 107,
+      "y": 41,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-8"
+      ]
+    },
+    {
+      "slug": "royal-palace-library-1",
+      "name": "Royal Palace Library",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 335,
+      "y": 51,
+      "quests_given": []
+    },
+    {
+      "slug": "royal-palace-library-2",
+      "name": "Royal Palace Library",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 119,
+      "y": 220,
+      "quests_given": []
+    },
+    {
+      "slug": "royal-guardian-knight",
+      "name": "Royal Guardian Knight",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 195,
+      "y": 255,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-4",
+        "enemies-who-invaded-the-royal-palace-5"
+      ]
+    },
+    {
+      "slug": "royal-palace-library-3",
+      "name": "Royal Palace Library",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 325,
+      "y": 50,
+      "quests_given": []
+    },
+    {
+      "slug": "royal-palace",
+      "name": "Royal Palace",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 217,
+      "y": 159,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14730"
+      ]
+    },
+    {
+      "slug": "roz-f-dwarf-frypan",
+      "name": "Roz F Dwarf Frypan",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 246,
+      "y": 57,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 248,
+      "y": 61,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-frypan-nrd-dun01",
+      "name": "Roz F Dwarf Frypan",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 123,
+      "y": 226,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01-101-99",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 101,
+      "y": 99,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-frypan-nrd-dun01-215-218",
+      "name": "Roz F Dwarf Frypan",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 215,
+      "y": 218,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-frypan-nrd-dun01-218-182",
+      "name": "Roz F Dwarf Frypan",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 218,
+      "y": 182,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01-120-212",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 120,
+      "y": 212,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-frypan-nrd-fild02",
+      "name": "Roz F Dwarf Frypan",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 254,
+      "y": 128,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-frypan-nrd-in",
+      "name": "Roz F Dwarf Frypan",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 119,
+      "y": 307,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 58,
+      "y": 62,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01-160-105",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 160,
+      "y": 105,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01-200-147",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 200,
+      "y": 147,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01-213-223",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 213,
+      "y": 223,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-fild02",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 269,
+      "y": 119,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-in",
+      "name": "Roz F Dwarf",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 137,
+      "y": 322,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 240,
+      "y": 58,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hammer",
+      "name": "Roz M Dwarf Hammer",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 249,
+      "y": 57,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-f-dwarf-nrd-dun01-216-187",
+      "name": "Roz F Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 216,
+      "y": 187,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hammer-nrd-dun01",
+      "name": "Roz M Dwarf Hammer",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 120,
+      "y": 224,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hammer-nrd-dun01-218-223",
+      "name": "Roz M Dwarf Hammer",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 218,
+      "y": 223,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hammer-nrd-fild02",
+      "name": "Roz M Dwarf Hammer",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 258,
+      "y": 130,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 58,
+      "y": 102,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 238,
+      "y": 59,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hammer-nrd-in",
+      "name": "Roz M Dwarf Hammer",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 122,
+      "y": 319,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-60-59",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 60,
+      "y": 59,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-97-99",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 97,
+      "y": 99,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-165-98",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 165,
+      "y": 98,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-129-213",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 129,
+      "y": 213,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-194-147",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 194,
+      "y": 147,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-214-226",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 214,
+      "y": 226,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-dun01-221-186",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 221,
+      "y": 186,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-fild02",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 270,
+      "y": 125,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-hat-nrd-in",
+      "name": "Roz M Dwarf Hat",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 134,
+      "y": 317,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-dun01",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 99,
+      "y": 102,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-dun01-200-139",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 200,
+      "y": 139,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-dun01-161-98",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 161,
+      "y": 98,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-dun01-132-217",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 132,
+      "y": 217,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-dun01-220-227",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 220,
+      "y": 227,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-dun01-224-183",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 224,
+      "y": 183,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-fild02",
+      "name": "Roz M Dwarf",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 267,
+      "y": 128,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat-nrd-dun01",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 129,
+      "y": 225,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 244,
+      "y": 56,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-nrd-in",
+      "name": "Roz M Dwarf",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 144,
+      "y": 311,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat-nrd-dun01-197-143",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 197,
+      "y": 143,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat-nrd-dun01-216-177",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 216,
+      "y": 177,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat-nrd-dun01-220-217",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 220,
+      "y": 217,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat-nrd-fild02",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 258,
+      "y": 132,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-oldhat-nrd-in",
+      "name": "Roz M Dwarf Oldhat",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 137,
+      "y": 306,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 244,
+      "y": 53,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-dun01-162-101",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 162,
+      "y": 101,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-dun01-195-138",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 195,
+      "y": 138,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-dun01",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 131,
+      "y": 222,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-dun01-221-177",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 221,
+      "y": 177,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-dun01-223-223",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 223,
+      "y": 223,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-fild02",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 263,
+      "y": 131,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-m-dwarf-shield-nrd-in",
+      "name": "Roz M Dwarf Shield",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 142,
+      "y": 309,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-mq-skuld",
+      "name": "Roz Mq Skuld",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 122,
+      "y": 299,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 232,
+      "y": 118,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 101,
+      "y": 196,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-izlude",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 134,
+      "y": 100,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-164-123",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 164,
+      "y": 123,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-179-141",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 179,
+      "y": 141,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-246-72",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 246,
+      "y": 72,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-207-104",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 207,
+      "y": 104,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-214-91",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 214,
+      "y": 91,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-253-52",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 253,
+      "y": 52,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-251-70",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 251,
+      "y": 70,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-262-60",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 262,
+      "y": 60,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-125-268",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 125,
+      "y": 268,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nordfeld-268-111",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 268,
+      "y": 111,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-125-288",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 125,
+      "y": 288,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 125,
+      "y": 248,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-127-308",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 127,
+      "y": 308,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-132-308",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 132,
+      "y": 308,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-125-305",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 125,
+      "y": 305,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-126-323",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 126,
+      "y": 323,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-128-301",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 128,
+      "y": 301,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-128-295",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 128,
+      "y": 295,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-134-248",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 134,
+      "y": 248,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-133-323",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 133,
+      "y": 323,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-134-288",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 134,
+      "y": 288,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-nrd-in-134-268",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 134,
+      "y": 268,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-nordfeld-soldier-prontera",
+      "name": "Roz Nordfeld Soldier",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 167,
+      "y": 328,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-seal-sharvinetz",
+      "name": "Roz Seal Sharvinetz",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 125,
+      "y": 219,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-sharvinetz-nrd-dun01",
+      "name": "Roz Sharvinetz",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 125,
+      "y": 219,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-sharvinetz",
+      "name": "Roz Sharvinetz",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 246,
+      "y": 61,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-sharvinetz-nrd-in",
+      "name": "Roz Sharvinetz",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 126,
+      "y": 320,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-sharvinetz-nrd-fild02",
+      "name": "Roz Sharvinetz",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 262,
+      "y": 127,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-willien-deprantz-nrd-in",
+      "name": "Roz Willien Deprantz",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 126,
+      "y": 298,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-willien-deprantz",
+      "name": "Roz Willien Deprantz",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 248,
+      "y": 67,
+      "quests_given": []
+    },
+    {
+      "slug": "roz-willien-deprantz-nrd-in-130-322",
+      "name": "Roz Willien Deprantz",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 130,
+      "y": 322,
+      "quests_given": []
+    },
+    {
+      "slug": "runaway-book",
+      "name": "Runaway Book",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 122,
+      "y": 114,
+      "quests_given": []
+    },
+    {
+      "slug": "salih-hamid-1",
+      "name": "Salih Hamid",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 265,
+      "y": 65,
+      "quests_given": []
+    },
+    {
+      "slug": "sahario",
+      "name": "Sahario",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 178,
+      "y": 83,
+      "quests_given": [
+        "comodo-plague-13",
+        "enemies-who-invaded-the-royal-palace-10",
+        "first-meeting-with-tristan-iii-2",
+        "mage-disappearance-case-6",
+        "mage-disappearance-case-7",
+        "merchant-leader-rescue-operation-6",
+        "monster-subjugation-squad-7",
+        "monster-suppression-squad-8",
+        "royal-investigation-1",
+        "royal-investigation-7"
+      ]
+    },
+    {
+      "slug": "salih-hamid-2",
+      "name": "Salih Hamid",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 234,
+      "y": 154,
+      "quests_given": []
+    },
+    {
+      "slug": "salih-hamid-3",
+      "name": "Salih Hamid",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 55,
+      "y": 135,
+      "quests_given": []
+    },
+    {
+      "slug": "sam",
+      "name": "Sam",
+      "map_slug": "lutie-the-snow-village",
+      "map_name": "Lutie, the Snow Village",
+      "map_navi_code": "xmas",
+      "x": 196,
+      "y": 234,
+      "quests_given": [
+        "crafting-chef-s-hat-and-cake-hat"
+      ]
+    },
+    {
+      "slug": "sarka",
+      "name": "Sarka",
+      "map_slug": "prontera-field-00",
+      "map_name": "Prontera Field 00",
+      "map_navi_code": "prt_fild00",
+      "x": 251,
+      "y": 238,
+      "quests_given": [
+        "an-open-secret",
+        "an-open-secret-pending",
+        "tell-no-one"
+      ]
+    },
+    {
+      "slug": "security-guard-member-2",
+      "name": "Security Guard Member",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 170,
+      "y": 347,
+      "quests_given": []
+    },
+    {
+      "slug": "security-guard-member-1",
+      "name": "Security Guard Member",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 326,
+      "y": 215,
+      "quests_given": []
+    },
+    {
+      "slug": "schkern",
+      "name": "Schkern",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 118,
+      "y": 126,
+      "quests_given": [
+        "missing-persons-2"
+      ]
+    },
+    {
+      "slug": "second-investigation-point",
+      "name": "Second Investigation Point",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 213,
+      "y": 153,
+      "quests_given": [
+        "merchant-leader-rescue-operation-4-2"
+      ]
+    },
+    {
+      "slug": "seravi",
+      "name": "Seravi",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 166,
+      "y": 137,
+      "quests_given": [
+        "coceracera-21402",
+        "coceracera-21406"
+      ]
+    },
+    {
+      "slug": "selby",
+      "name": "Selby",
+      "map_slug": "mt-mjolnir-northern-foot",
+      "map_name": "Mt. Mjolnir Northern Foot",
+      "map_navi_code": "mjolnir_12",
+      "x": 149,
+      "y": 79,
+      "quests_given": [
+        "pending-collect-moth-dust",
+        "mjolnir-obsessed-with-wings",
+        "mjolnir-obsessed-with-wings-22363"
+      ]
+    },
+    {
+      "slug": "serdin",
+      "name": "Serdin",
+      "map_slug": "al-de-baran-the-border-city",
+      "map_name": "Al De Baran, the Border City",
+      "map_navi_code": "alde_alche",
+      "x": 143,
+      "y": 132,
+      "quests_given": [
+        "clock-tower-floor-1-cleanup",
+        "living-clocks-1"
+      ]
+    },
+    {
+      "slug": "sheep-1",
+      "name": "Sheep",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 56,
+      "y": 56,
+      "quests_given": []
+    },
+    {
+      "slug": "sheep-4",
+      "name": "Sheep",
+      "map_slug": "inside-al-de-baran",
+      "map_name": "Inside Al De Baran",
+      "map_navi_code": "aldeba_in",
+      "x": 97,
+      "y": 54,
+      "quests_given": []
+    },
+    {
+      "slug": "shipwreck",
+      "name": "Shipwreck",
+      "map_slug": "sunken-ship-1f",
+      "map_name": "Sunken Ship 1F",
+      "map_navi_code": "treasure01",
+      "x": 69,
+      "y": 24,
+      "quests_given": [
+        "continue-hiding-old-coin",
+        "economic-logic-of-creating-what-s-missing-again-today",
+        "for-the-frail-enthusiast",
+        "hide-all-the-old-coin",
+        "hide-old-coin",
+        "hide-old-coin-again",
+        "keep-hiding-old-coin",
+        "kukre-liver-tasting",
+        "kukre-liver-tasting-again-today",
+        "rescue-a-friend",
+        "rescue-a-friend-again-today"
+      ]
+    },
+    {
+      "slug": "sheep-3",
+      "name": "Sheep",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 128,
+      "y": 170,
+      "quests_given": []
+    },
+    {
+      "slug": "sheep-5",
+      "name": "Sheep",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 162,
+      "y": 257,
+      "quests_given": []
+    },
+    {
+      "slug": "sigrun",
+      "name": "Sigrun",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 44,
+      "y": 127,
+      "quests_given": [
+        "sea-dragon-blade-missing-8"
+      ]
+    },
+    {
+      "slug": "silver-haired-girl-2",
+      "name": "Silver-Haired Girl",
+      "map_slug": "secret-place",
+      "map_name": "Secret Place",
+      "map_navi_code": "tu_dc02_g",
+      "x": 31,
+      "y": 32,
+      "quests_given": []
+    },
+    {
+      "slug": "sheep-2",
+      "name": "Sheep",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 140,
+      "y": 173,
+      "quests_given": []
+    },
+    {
+      "slug": "silver-haired-girl-1",
+      "name": "Silver-Haired Girl",
+      "map_slug": "secret-place",
+      "map_name": "Secret Place",
+      "map_navi_code": "tu_dc02_g",
+      "x": 25,
+      "y": 22,
+      "quests_given": []
+    },
+    {
+      "slug": "small-settlement",
+      "name": "Small Settlement",
+      "map_slug": "geffen-field-11",
+      "map_name": "Geffen Field 11",
+      "map_navi_code": "gef_fild11",
+      "x": 162,
+      "y": 215,
+      "quests_given": [
+        "monster-subjugation-squad-4",
+        "monster-subjugation-squad-5"
+      ]
+    },
+    {
+      "slug": "southwest-prontera-field",
+      "name": "Southwest Prontera Field",
+      "map_slug": "prontera-field-07",
+      "map_name": "Prontera Field 07",
+      "map_navi_code": "prt_fild07",
+      "x": 251,
+      "y": 364,
+      "quests_given": [
+        "playground-stabilization-operation-rocker"
+      ]
+    },
+    {
+      "slug": "southeastern-trap",
+      "name": "Southeastern Trap",
+      "map_slug": "mt-mjolnir-south-side-06",
+      "map_name": "Mt. Mjolnir South Side 06",
+      "map_navi_code": "mjolnir_06",
+      "x": 288,
+      "y": 161,
+      "quests_given": [
+        "mjolnir-broken-trap-22311"
+      ]
+    },
+    {
+      "slug": "subjugation-master",
+      "name": "Subjugation Master",
+      "map_slug": "orc-village",
+      "map_name": "Orc Village",
+      "map_navi_code": "b_gef_f10",
+      "x": 78,
+      "y": 340,
+      "quests_given": [
+        "endless-orcs",
+        "greedy-one",
+        "monster-subjugation-squad-2",
+        "monster-subjugation-squad-3",
+        "orcs-total-extermination",
+        "supplies-have-arrived-1"
+      ]
+    },
+    {
+      "slug": "spraki",
+      "name": "Spraki",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 102,
+      "y": 44,
+      "quests_given": [
+        "critura-academy-0",
+        "first-request",
+        "try-changing-jobs-1"
+      ]
+    },
+    {
+      "slug": "stainer",
+      "name": "Stainer",
+      "map_slug": "prontera-field-02",
+      "map_name": "Prontera Field 02",
+      "map_navi_code": "prt_fild02",
+      "x": 319,
+      "y": 80,
+      "quests_given": [
+        "royal-investigation-4"
+      ]
+    },
+    {
+      "slug": "stranger",
+      "name": "Stranger",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 27,
+      "y": 237,
+      "quests_given": [
+        "sing-while-wearing-an-opera-mask"
+      ]
+    },
+    {
+      "slug": "subjugation-submaster",
+      "name": "Subjugation Submaster",
+      "map_slug": "geffen-field-11",
+      "map_name": "Geffen Field 11",
+      "map_navi_code": "gef_fild11",
+      "x": 128,
+      "y": 351,
+      "quests_given": [
+        "clearing-the-nimble-goblin",
+        "clearing-the-savage-goblin",
+        "supplies-have-arrived-2"
+      ]
+    },
+    {
+      "slug": "student-helden",
+      "name": "Student Helden",
+      "map_slug": "byalan-island",
+      "map_name": "Byalan Island",
+      "map_navi_code": "izlu2dun",
+      "x": 105,
+      "y": 68,
+      "quests_given": [
+        "biology-is-all-about-sample-collection",
+        "people-in-trouble-1"
+      ]
+    },
+    {
+      "slug": "summer-festival-snack-vendor",
+      "name": "Summer Festival Snack Vendor",
+      "map_slug": "geffen-field-01",
+      "map_name": "Geffen Field 01",
+      "map_navi_code": "gef_fild01",
+      "x": 201,
+      "y": 209,
+      "quests_given": [
+        "getting-your-feet-wet",
+        "hitting-your-stride",
+        "masterful-technique",
+        "number-one-under-the-sun",
+        "practice-makes-perfect",
+        "unbelievable",
+        "watermelon-hunt"
+      ]
+    },
+    {
+      "slug": "suerte",
+      "name": "Suerte",
+      "map_slug": "pharos-lighthouse",
+      "map_name": "Pharos Lighthouse",
+      "map_navi_code": "cmd_fild07",
+      "x": 199,
+      "y": 47,
+      "quests_given": []
+    },
+    {
+      "slug": "sunken-ship-floor-2",
+      "name": "Sunken Ship Floor 2",
+      "map_slug": "sunken-ship-2f",
+      "map_name": "Sunken Ship 2F",
+      "map_navi_code": "treasure02",
+      "x": 102,
+      "y": 27,
+      "quests_given": [
+        "cleaning-sunken-ship-floor-2-again-today"
+      ]
+    },
+    {
+      "slug": "sunken-ship-researcher",
+      "name": "Sunken Ship Researcher",
+      "map_slug": "island-near-the-shipwreck",
+      "map_name": "Island Near the Shipwreck",
+      "map_navi_code": "alb2trea",
+      "x": 94,
+      "y": 77,
+      "quests_given": [
+        "a-reliable-eccentric"
+      ]
+    },
+    {
+      "slug": "survivor-location-1",
+      "name": "Survivor Location 1",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 277,
+      "y": 232,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-4-1"
+      ]
+    },
+    {
+      "slug": "survivor-location-2",
+      "name": "Survivor Location 2",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 293,
+      "y": 224,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-4-2"
+      ]
+    },
+    {
+      "slug": "survivor-location-4",
+      "name": "Survivor Location 4",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 293,
+      "y": 194,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-4-4"
+      ]
+    },
+    {
+      "slug": "survivor-location-5",
+      "name": "Survivor Location 5",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 295,
+      "y": 178,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-4-5"
+      ]
+    },
+    {
+      "slug": "survivor-location-3",
+      "name": "Survivor Location 3",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 280,
+      "y": 206,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-4-3"
+      ]
+    },
+    {
+      "slug": "svalas",
+      "name": "Svalas",
+      "map_slug": "sograt-desert-01",
+      "map_name": "Sograt Desert 01",
+      "map_navi_code": "moc_fild01",
+      "x": 324,
+      "y": 264,
+      "quests_given": [
+        "muka-avoids-me"
+      ]
+    },
+    {
+      "slug": "sunken-ship-floor-1",
+      "name": "Sunken Ship Floor 1",
+      "map_slug": "sunken-ship-1f",
+      "map_name": "Sunken Ship 1F",
+      "map_navi_code": "treasure01",
+      "x": 69,
+      "y": 24,
+      "quests_given": [
+        "cleaning-sunken-ship-floor-1-again-today"
+      ]
+    },
+    {
+      "slug": "swamp-fairy",
+      "name": "Swamp Fairy",
+      "map_slug": "geffen-field-01",
+      "map_name": "Geffen Field 01",
+      "map_navi_code": "gef_fild01",
+      "x": 37,
+      "y": 102,
+      "quests_given": [
+        "geffen-drying-swamp",
+        "geffen-fallen-old-tree-swamp",
+        "geffen-overgrown-swamp",
+        "geffen-swamp-preservation"
+      ]
+    },
+    {
+      "slug": "swordman",
+      "name": "Swordman",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 82,
+      "y": 59,
+      "quests_given": [
+        "t-ear-muffs-for-a-world-issolation"
+      ]
+    },
+    {
+      "slug": "swordman-guildsman",
+      "name": "Swordman Guildmaster",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": null,
+      "y": null,
+      "quests_given": []
+    },
+    {
+      "slug": "t-glast-heim-chivalry",
+      "name": "«T:Glast Heim» Chivalry",
+      "map_slug": "knights-hall-1f",
+      "map_name": "Knights Hall 1F",
+      "map_navi_code": "gl_knt01",
+      "x": 150,
+      "y": 15,
+      "quests_given": []
+    },
+    {
+      "slug": "swordsman-training",
+      "name": "Swordsman Training",
+      "map_slug": "academy-2f",
+      "map_name": "Academy 2F",
+      "map_navi_code": "tu_ac02_f",
+      "x": 53,
+      "y": 53,
+      "quests_given": [
+        "try-changing-jobs-2"
+      ]
+    },
+    {
+      "slug": "tanyuu",
+      "name": "Tanyuu",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 300,
+      "y": 230,
+      "quests_given": [
+        "i-want-to-eat-fish",
+        "memo-from-roryuu"
+      ]
+    },
+    {
+      "slug": "tarosan",
+      "name": "Tarosan",
+      "map_slug": "prontera-field-05",
+      "map_name": "Prontera Field 05",
+      "map_navi_code": "prt_fild05",
+      "x": 21,
+      "y": 143,
+      "quests_given": [
+        "snails-scare-me-pending"
+      ]
+    },
+    {
+      "slug": "teacher",
+      "name": "Teacher",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 217,
+      "y": 147,
+      "quests_given": [
+        "report-to-the-teacher"
+      ]
+    },
+    {
+      "slug": "teamin",
+      "name": "Teamin",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 207,
+      "y": 163,
+      "quests_given": [
+        "fur-hat-recipe",
+        "grandmother-s-fur-hat"
+      ]
+    },
+    {
+      "slug": "tavern",
+      "name": "Tavern",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 34,
+      "y": 120,
+      "quests_given": [
+        "mage-disappearance-case-2"
+      ]
+    },
+    {
+      "slug": "that-man",
+      "name": "That man",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 147,
+      "y": 112,
+      "quests_given": [
+        "crafting-fashion-sunglasses-and-heart-hairpin"
+      ]
+    },
+    {
+      "slug": "that-way",
+      "name": "that way",
+      "map_slug": "al-de-baran-the-border-city",
+      "map_name": "Al De Baran, the Border City",
+      "map_navi_code": "alde_alche",
+      "x": 51,
+      "y": 202,
+      "quests_given": [
+        "crafting-mushroom-headband"
+      ]
+    },
+    {
+      "slug": "that-woman",
+      "name": "That woman",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 147,
+      "y": 300,
+      "quests_given": [
+        "crafting-fashion-sunglasses-and-heart-hairpin-22171"
+      ]
+    },
+    {
+      "slug": "the-building",
+      "name": "the building",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 42,
+      "y": 110,
+      "quests_given": [
+        "clan-registration-consultation"
+      ]
+    },
+    {
+      "slug": "the-field",
+      "name": "the field",
+      "map_slug": "geffen-field-03",
+      "map_name": "Geffen Field 03",
+      "map_navi_code": "gef_fild03",
+      "x": 130,
+      "y": 137,
+      "quests_given": [
+        "geffen-suspicious-treasure-hunt"
+      ]
+    },
+    {
+      "slug": "there-s-nothing-wrong",
+      "name": "there's nothing wrong",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 185,
+      "y": 181,
+      "quests_given": []
+    },
+    {
+      "slug": "timothee",
+      "name": "Timothee",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 154,
+      "y": 224,
+      "quests_given": [
+        "worrying-for-no-reason"
+      ]
+    },
+    {
+      "slug": "this-way",
+      "name": "This Way",
+      "map_slug": "central-palace-of-prontera",
+      "map_name": "Central Palace of Prontera",
+      "map_navi_code": "prt_cas",
+      "x": 76,
+      "y": 310,
+      "quests_given": [
+        "the-curse-of-the-gaebolg-family-14738"
+      ]
+    },
+    {
+      "slug": "thief-guide",
+      "name": "Thief Guide",
+      "map_slug": "thief-guild",
+      "map_name": "Thief Guild",
+      "map_navi_code": "moc_prydb1",
+      "x": null,
+      "y": null,
+      "quests_given": []
+    },
+    {
+      "slug": "third-investigation-point",
+      "name": "Third Investigation Point",
+      "map_slug": "mt-mjolnir-south-side-10",
+      "map_name": "Mt. Mjolnir South Side 10",
+      "map_navi_code": "mjolnir_10",
+      "x": 190,
+      "y": 207,
+      "quests_given": [
+        "merchant-leader-rescue-operation-4-3"
+      ]
+    },
+    {
+      "slug": "tired-man",
+      "name": "Tired Man",
+      "map_slug": "geffen-tower",
+      "map_name": "Geffen Tower",
+      "map_navi_code": "gef_tower",
+      "x": 48,
+      "y": 140,
+      "quests_given": []
+    },
+    {
+      "slug": "urre",
+      "name": "Urre",
+      "map_slug": "prontera-field-08",
+      "map_name": "Prontera Field 08",
+      "map_navi_code": "prt_fild08",
+      "x": 320,
+      "y": 230,
+      "quests_given": [
+        "practical-training-1",
+        "practical-training-2"
+      ]
+    },
+    {
+      "slug": "wandering-bard-aiolo",
+      "name": "Wandering Bard Aiolo",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "job_duncer",
+      "x": 193,
+      "y": 161,
+      "quests_given": [
+        "second-job-change-bard"
+      ]
+    },
+    {
+      "slug": "upstream",
+      "name": "upstream",
+      "map_slug": "geffen-field-09",
+      "map_name": "Geffen Field 09",
+      "map_navi_code": "gef_fild09",
+      "x": 310,
+      "y": 135,
+      "quests_given": [
+        "geffen-fishing-novice-22750"
+      ]
+    },
+    {
+      "slug": "wenatan",
+      "name": "Wenatan",
+      "map_slug": "hoomga-jungle-in-umbala",
+      "map_name": "Hoomga Jungle in Umbala",
+      "map_navi_code": "um_fild04",
+      "x": 260,
+      "y": 253,
+      "quests_given": [
+        "umbala-my-beautiful-brides"
+      ]
+    },
+    {
+      "slug": "western-field",
+      "name": "Western Field",
+      "map_slug": "prontera-field-04",
+      "map_name": "Prontera Field 04",
+      "map_navi_code": "prt_fild04",
+      "x": 378,
+      "y": 158,
+      "quests_given": [
+        "legendary-knight-ambernite"
+      ]
+    },
+    {
+      "slug": "western-trap",
+      "name": "Western Trap",
+      "map_slug": "mt-mjolnir-south-side-06",
+      "map_name": "Mt. Mjolnir South Side 06",
+      "map_navi_code": "mjolnir_06",
+      "x": 61,
+      "y": 217,
+      "quests_given": [
+        "mjolnir-broken-trap"
+      ]
+    },
+    {
+      "slug": "wombokoriotan",
+      "name": "Wombokoriotan",
+      "map_slug": "utan-tribe-s-village-umbala",
+      "map_name": "Utan Tribe's Village, Umbala",
+      "map_navi_code": "umbala",
+      "x": 201,
+      "y": 96,
+      "quests_given": [
+        "umbala-prenetan-s-worry"
+      ]
+    },
+    {
+      "slug": "yeonghwa",
+      "name": "Yeonghwa",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 217,
+      "y": 225,
+      "quests_given": [
+        "crafting-colorful-eggshell"
+      ]
+    },
+    {
+      "slug": "zonda-agency-promoter",
+      "name": "Zonda Agency Promoter",
+      "map_slug": "inside-alberta",
+      "map_name": "Inside Alberta",
+      "map_navi_code": "alberta_in",
+      "x": 71,
+      "y": 182,
+      "quests_given": [
+        "rescue-the-zonda-scam-victim",
+        "results-of-the-research"
+      ]
+    },
+    {
+      "slug": "young-mage",
+      "name": "young Mage",
+      "map_slug": "gypsy-village",
+      "map_name": "Gypsy Village",
+      "map_navi_code": "gef_fild05",
+      "x": 137,
+      "y": 259,
+      "quests_given": [
+        "geffen-i-want-a-creamy-card-too"
+      ]
+    },
+    {
+      "slug": "young-scholar",
+      "name": "Young Scholar",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 198,
+      "y": 111,
+      "quests_given": [
+        "a-young-scholar-s-taste",
+        "traces-of-grand-magic"
+      ]
+    },
+    {
+      "slug": "zombie",
+      "name": "Zombie",
+      "map_slug": "prontera-castle-b1f",
+      "map_name": "Prontera Castle B1F",
+      "map_navi_code": "prt_ca01",
+      "x": 186,
+      "y": 207,
+      "quests_given": [
+        "enemies-who-invaded-the-royal-palace-3"
+      ]
+    },
+    {
+      "slug": "zonda-promoter",
+      "name": "Zonda Promoter",
+      "map_slug": "inside-alberta",
+      "map_name": "Inside Alberta",
+      "map_navi_code": "alberta_in",
+      "x": 71,
+      "y": 182,
+      "quests_given": [
+        "a-promise-to-the-dead",
+        "trust-of-the-town-21170"
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "url": "https://roz.prontera.info/npcs/1-f-01",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-f-02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-f-03",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-m-02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-m-innkeeper",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-m-pastor",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-m-jobguider",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-m-merchant",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/1-m-pubmaster",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-cook",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/2-board1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-01-nordfeld",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-cook-nordfeld",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-01",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-05",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-dst-grand",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-godemom",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-gunslinger",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-huwoman",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-kid2",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-kafra3",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-premi",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-premi-geffen",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-premi-payon",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-premi-morocc",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-premi-prontera",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-sister",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-shabby",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-sitdown",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-f-teleporter",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-lam",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-lam-nordfeld-198-51",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-lam-nordfeld",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-03",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-barber",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-casman1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-03-nrd-in-250-135",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-03-nrd-in",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-archer",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-job-blacksmith",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-kid1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-kid2",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-kid2-prt-in",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-mocass1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-ky-sold",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-lgtgrand",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-mocass1-nordfeld",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-oilman",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-nfman",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-pierrot",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-pierrot-nordfeld",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-repair",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sage-a",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sage-a-nrd-fild02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sage-a-nrd-in",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sit-novice",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-dun01",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-fild01",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-dun02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-mimic",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-fild02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild01",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild01-96-84",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild01-96-178",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild02",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-in-151-307",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-in",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-in-152-300",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4-tower-17",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4w-m-01",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4w-m-01-nordfeld",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4w-m-03",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/4w-sailor",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/8-f",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/8-f-grandmother",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/adept-adventurer-2",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/afflicted-resident-location-1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/afflicted-resident-location-3",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/afflicted-resident-location-5",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/anxious-lady",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/apprentice",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/archeologist-1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/archeologist-2",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/assassin",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/assassin-guild-high-elder",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/battle-doll-judge",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/aurdipon",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/barne-q",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/barriojuna",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/beach-tourist-2",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/beach-tourist-1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/blacksmith-guildsman",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/blade",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/boy-1",
+      "reason": "status 404"
+    },
+    {
+      "url": "https://roz.prontera.info/npcs/boy-2",
+      "reason": "status 404"
+    }
+  ]
+}

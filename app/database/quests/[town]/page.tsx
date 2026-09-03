@@ -38,6 +38,15 @@ interface QuestRow {
   description: string | null;
   chain_name: string | null;
   chain_next_id: number | null;
+  reward_base_exp: number | null;
+  reward_job_exp: number | null;
+  reward_zeny: number | null;
+}
+
+interface QuestRewardRow {
+  quest_id: number;
+  item_name: string | null;
+  quantity: number;
 }
 
 export async function generateMetadata({ params }: { params: { town: string } }) {
@@ -58,7 +67,7 @@ export default async function QuestTownPage({
   const db = supabaseBrowser();
   const { data, error } = await db
     .from('quests')
-    .select('id, name, name_th, map_code, coord_x, coord_y, zone, type, objective, objective_th, description, description_th, chain_name, chain_next_id')
+    .select('id, name, name_th, map_code, coord_x, coord_y, zone, type, objective, objective_th, description, description_th, chain_name, chain_next_id, reward_base_exp, reward_job_exp, reward_zeny')
     .eq('town_key', params.town)
     .order('id');
 
@@ -77,6 +86,21 @@ export default async function QuestTownPage({
     .select('quest_id, sprite_code')
     .in('quest_id', allQuests.map((q) => q.id));
   const npcByQuest = new Map((npcRows ?? []).map((n) => [n.quest_id, n.sprite_code]));
+
+  // Item rewards (quest_rewards, mirrored from prontera.info -- 3 Sep 2026,
+  // 79 rows across ~58 quests). A different source than the rest of this
+  // page's quest text (game files), so it gets its own source line rather
+  // than blending into "ที่มา" above -- most quests will show nothing here,
+  // which is the honest state, not a bug.
+  const { data: rewardRows } = await db
+    .from('quest_rewards')
+    .select('quest_id, item_name, quantity')
+    .in('quest_id', allQuests.map((q) => q.id));
+  const rewardsByQuest = new Map<number, QuestRewardRow[]>();
+  for (const r of (rewardRows ?? []) as QuestRewardRow[]) {
+    if (!rewardsByQuest.has(r.quest_id)) rewardsByQuest.set(r.quest_id, []);
+    rewardsByQuest.get(r.quest_id)!.push(r);
+  }
 
   // Type chips are derived from what this town actually has, so a filter that
   // would show nothing is never offered. The whole hub stays one page; this
@@ -164,6 +188,24 @@ export default async function QuestTownPage({
           ) : (
             quest.description && <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>{linkItemRefs(quest.description)}</p>
           )}
+
+          {(() => {
+            const rewards = rewardsByQuest.get(quest.id);
+            const hasNumeric = quest.reward_base_exp !== null || quest.reward_job_exp !== null || quest.reward_zeny !== null;
+            if (!rewards?.length && !hasNumeric) return null;
+            return (
+              <p className="muted" style={{ marginTop: 8 }}>
+                <strong>รางวัล:</strong>{' '}
+                {[
+                  quest.reward_base_exp !== null && `EXP ${quest.reward_base_exp.toLocaleString()}`,
+                  quest.reward_job_exp !== null && `Job EXP ${quest.reward_job_exp.toLocaleString()}`,
+                  quest.reward_zeny !== null && `${quest.reward_zeny.toLocaleString()} Zeny`,
+                  ...(rewards ?? []).map((r) => (r.quantity > 1 ? `${r.item_name} ×${r.quantity}` : r.item_name)),
+                ].filter(Boolean).join(' · ')}
+                <span className="mono" style={{ fontSize: 11, marginLeft: 6 }} title="ข้อมูลรางวัลจาก prontera.info ไม่ใช่ไฟล์เกมโดยตรง อาจไม่ครบทุกเควส">(prontera.info)</span>
+              </p>
+            );
+          })()}
 
           {quest.chain_next_id !== null && (
             <p className="muted" style={{ marginTop: 8 }}>
