@@ -1,10 +1,10 @@
 {
   "source": "https://roz.prontera.info",
-  "extracted_at": "2026-09-03T04:48:00.408Z",
-  "count": 722,
-  "with_quest_id": 722,
-  "with_any_reward_data": 80,
-  "skipped_count": 105,
+  "extracted_at": "2026-09-03T09:38:57.790Z",
+  "count": 827,
+  "with_quest_id": 827,
+  "with_any_reward_data": 89,
+  "skipped_count": 0,
   "quests": [
     {
       "quest_id_ingame": 22207,
@@ -1484,6 +1484,139 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21090,
+      "slug": "bonus-experience-21090",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21091,
+      "slug": "bonus-experience-21091",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21094,
+      "slug": "bonus-experience-21094",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21095,
+      "slug": "bonus-experience-21095",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21096,
+      "slug": "bonus-experience-21096",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21097,
+      "slug": "bonus-experience-21097",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21098,
+      "slug": "bonus-experience-21098",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 21092,
       "slug": "bonus-experience-21092",
       "name": "Bonus Experience!",
@@ -1560,8 +1693,84 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21330,
+      "slug": "bonus-experience-21330",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 21328,
       "slug": "bonus-experience-21328",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21331,
+      "slug": "bonus-experience-21331",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21333,
+      "slug": "bonus-experience-21333",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21332,
+      "slug": "bonus-experience-21332",
       "name": "Bonus Experience!",
       "quest_type": "side",
       "min_base_level": null,
@@ -1617,8 +1826,103 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21334,
+      "slug": "bonus-experience-21334",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 21327,
       "slug": "bonus-experience-21327",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21335,
+      "slug": "bonus-experience-21335",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21336,
+      "slug": "bonus-experience-21336",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21337,
+      "slug": "bonus-experience-21337",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21342,
+      "slug": "bonus-experience-21342",
       "name": "Bonus Experience!",
       "quest_type": "side",
       "min_base_level": null,
@@ -1712,10 +2016,124 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21344,
+      "slug": "bonus-experience-21344",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21346,
+      "slug": "bonus-experience-21346",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 21343,
       "slug": "bonus-experience-21343",
       "name": "Bonus Experience!",
       "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21345,
+      "slug": "bonus-experience-21345",
+      "name": "Bonus Experience!",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21011,
+      "slug": "bucket-of-liquor",
+      "name": "Bucket of Liquor",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22719,
+      "slug": "cactus-sap",
+      "name": "Cactus Sap",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sograt-desert-18",
+      "start_map_name": "Sograt Desert 18",
+      "start_location_hint": "moc_fild18",
+      "start_npc_name": "craftsman",
+      "start_npc_slug": "craftsman",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 1000118,
+      "slug": "bunrmep",
+      "name": "Beunremeb",
+      "quest_type": "main",
       "min_base_level": null,
       "min_job_level": null,
       "start_map_slug": null,
@@ -1788,6 +2206,82 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 22720,
+      "slug": "cactus-sap-22720",
+      "name": "Cactus Sap",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sograt-desert-18",
+      "start_map_name": "Sograt Desert 18",
+      "start_location_hint": null,
+      "start_npc_name": "craftsman",
+      "start_npc_slug": "craftsman",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 14724,
+      "slug": "carnivorous-child",
+      "name": "Carnivorous Child",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-prontera",
+      "start_map_name": "Inside Prontera",
+      "start_location_hint": "prt_in",
+      "start_npc_name": "Marianne",
+      "start_npc_slug": "marianne",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22058,
+      "slug": "children-of-izlude",
+      "name": "Children of Izlude",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21136,
+      "slug": "cleaning-sunken-ship-floor-1-again-today",
+      "name": "Cleaning Sunken Ship Floor 1 Again Today",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sunken-ship-1f",
+      "start_map_name": "Sunken Ship 1F",
+      "start_location_hint": "treasure01",
+      "start_npc_name": "Sunken Ship Floor 1",
+      "start_npc_slug": "sunken-ship-floor-1",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 2314,
       "slug": "clan-registration-consultation",
       "name": "Clan Registration Consultation.",
@@ -1807,6 +2301,44 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21138,
+      "slug": "cleaning-sunken-ship-floor-2-again-today",
+      "name": "Cleaning Sunken Ship Floor 2 Again Today",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sunken-ship-2f",
+      "start_map_name": "Sunken Ship 2F",
+      "start_location_hint": "treasure02",
+      "start_npc_name": "Sunken Ship Floor 2",
+      "start_npc_slug": "sunken-ship-floor-2",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21264,
+      "slug": "clearing-the-nimble-goblin",
+      "name": "Clearing the Nimble Goblin",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "geffen-field-11",
+      "start_map_name": "Geffen Field 11",
+      "start_location_hint": "gef_fild11",
+      "start_npc_name": "Subjugation Submaster",
+      "start_npc_slug": "subjugation-submaster",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 12435,
       "slug": "chaos-zelostone-in-production",
       "name": "Chaos Jellostone In Production",
@@ -1818,6 +2350,393 @@
       "start_location_hint": null,
       "start_npc_name": null,
       "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21262,
+      "slug": "clearing-the-savage-goblin",
+      "name": "Clearing the Savage Goblin",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "geffen-field-11",
+      "start_map_name": "Geffen Field 11",
+      "start_location_hint": "gef_fild11",
+      "start_npc_name": "Subjugation Submaster",
+      "start_npc_slug": "subjugation-submaster",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21286,
+      "slug": "clock-tower-floor-1-cleanup",
+      "name": "Clock Tower Floor 1 Cleanup",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "al-de-baran-the-border-city",
+      "start_map_name": "Al De Baran, the Border City",
+      "start_location_hint": "aldebaran",
+      "start_npc_name": "Serdin",
+      "start_npc_slug": "serdin",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21401,
+      "slug": "coceracera",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Barbe Q",
+      "start_npc_slug": "barbe-q",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21405,
+      "slug": "coceracera-21405",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Barbe Q\\226\\128\\153s House",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21403,
+      "slug": "coceracera-21403",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "east-cave-mao",
+      "start_map_name": "East Cave Mao",
+      "start_location_hint": null,
+      "start_npc_name": "East Cave Mao",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21402,
+      "slug": "coceracera-21402",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Seravi",
+      "start_npc_slug": "seravi",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21404,
+      "slug": "coceracera-21404",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Barbe Q",
+      "start_npc_slug": "barbe-q",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21407,
+      "slug": "coceracera-21407",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "east-cave-mao",
+      "start_map_name": "East Cave Mao",
+      "start_location_hint": null,
+      "start_npc_name": "East Cave Mao",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21406,
+      "slug": "coceracera-21406",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Seravi",
+      "start_npc_slug": "seravi",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21408,
+      "slug": "coceracera-21408",
+      "name": "Coceracera",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Barbe Q",
+      "start_npc_slug": "barbe-q",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101607,
+      "slug": "comodo-exploration",
+      "name": "Comodo Exploration",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Mission Board",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "event-blue-potion-10ea-box-9539",
+          "item_name": "[Event] Blue Potion 10ea Box"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 101082,
+      "slug": "comodo-plague-1",
+      "name": "Comodo Plague - 1",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Lennox",
+      "start_npc_slug": "lennox",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 16187,
+      "slug": "comodo-original-sea-dragon-grandmother-cooking-showdown",
+      "name": "Comodo Original Sea Dragon Grandmother Cooking Showdown",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Komobi",
+      "start_npc_slug": "komobi",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101083,
+      "slug": "comodo-plague-2",
+      "name": "Comodo Plague - 2",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Lennox",
+      "start_npc_slug": "lennox",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101084,
+      "slug": "comodo-plague-2-1",
+      "name": "Comodo Plague - 2-1",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101086,
+      "slug": "comodo-plague-2-3",
+      "name": "Comodo Plague - 2-3",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101085,
+      "slug": "comodo-plague-2-2",
+      "name": "Comodo Plague - 2-2",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101088,
+      "slug": "comodo-plague-2-5",
+      "name": "Comodo Plague - 2-5",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101087,
+      "slug": "comodo-plague-2-4",
+      "name": "Comodo Plague - 2-4",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101089,
+      "slug": "comodo-plague-3",
+      "name": "Comodo Plague - 3",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Lennox",
+      "start_npc_slug": "lennox",
       "base_exp_reward": null,
       "job_exp_reward": null,
       "zeny_reward": null,
@@ -1845,6 +2764,25 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 101093,
+      "slug": "comodo-plague-7",
+      "name": "Comodo Plague - 7",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "east-cave-mao",
+      "start_map_name": "East Cave Mao",
+      "start_location_hint": null,
+      "start_npc_name": "East Cave Mao",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 101092,
       "slug": "comodo-plague-6",
       "name": "Comodo Plague - 6",
@@ -1856,6 +2794,63 @@
       "start_location_hint": null,
       "start_npc_name": "Restaurant",
       "start_npc_slug": "restaurant",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101097,
+      "slug": "comodo-plague-11",
+      "name": "Comodo Plague - 11",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Britia",
+      "start_npc_slug": "britia",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101096,
+      "slug": "comodo-plague-10",
+      "name": "Comodo Plague - 10",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Britia",
+      "start_npc_slug": "britia",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101094,
+      "slug": "comodo-plague-8",
+      "name": "Comodo Plague - 8",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
       "base_exp_reward": null,
       "job_exp_reward": null,
       "zeny_reward": null,
@@ -1883,6 +2878,25 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 101098,
+      "slug": "comodo-plague-11-1",
+      "name": "Comodo Plague - 11-1",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 101095,
       "slug": "comodo-plague-9",
       "name": "Comodo Plague - 9",
@@ -1902,6 +2916,44 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 101100,
+      "slug": "comodo-plague-11-3",
+      "name": "Comodo Plague - 11-3",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101102,
+      "slug": "comodo-plague-11-5",
+      "name": "Comodo Plague - 11-5",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": null,
+      "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 101099,
       "slug": "comodo-plague-11-2",
       "name": "Comodo Plague - 11-2",
@@ -1912,6 +2964,25 @@
       "start_map_name": "Inside Comodo",
       "start_location_hint": null,
       "start_npc_name": "Afflicted Resident Location",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 101505,
+      "slug": "comodo-plague-14",
+      "name": "Comodo Plague - 14",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
       "start_npc_slug": null,
       "base_exp_reward": null,
       "job_exp_reward": null,
@@ -1959,6 +3030,25 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21165,
+      "slug": "continue-hiding-old-coin",
+      "name": "Continue Hiding Old Coin",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sunken-ship-1f",
+      "start_map_name": "Sunken Ship 1F",
+      "start_location_hint": "treasure01",
+      "start_npc_name": "Shipwreck",
+      "start_npc_slug": "shipwreck",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 101104,
       "slug": "comodo-plague-13",
       "name": "Comodo Plague - 13",
@@ -1997,6 +3087,63 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 22165,
+      "slug": "crafting-bandage",
+      "name": "Crafting Giant Band Aid",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": "payon",
+      "start_npc_name": "Ram",
+      "start_npc_slug": "ram",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22167,
+      "slug": "crafting-bandage-22167",
+      "name": "Crafting Giant Band Aid",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": null,
+      "start_npc_name": "Michael",
+      "start_npc_slug": "michael",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22166,
+      "slug": "crafting-bandage-22166",
+      "name": "Crafting Giant Band Aid",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": null,
+      "start_npc_name": "there\\226\\128\\153s nothing wrong",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 700000,
       "slug": "contract-with-emily",
       "name": "Contract with Emily",
@@ -2008,6 +3155,77 @@
       "start_location_hint": null,
       "start_npc_name": null,
       "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22169,
+      "slug": "crafting-bandage-22169",
+      "name": "Crafting Giant Band Aid",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": null,
+      "start_npc_name": "for me",
+      "start_npc_slug": "for-me",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "giant-band-aid-5063",
+          "item_name": "Giant Band Aid"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 22183,
+      "slug": "crafting-candle",
+      "name": "Crafting Candle",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "lutie-the-snow-village",
+      "start_map_name": "Lutie, the Snow Village",
+      "start_location_hint": "xmas",
+      "start_npc_name": "Movie",
+      "start_npc_slug": "movie",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "candle-5028",
+          "item_name": "Candle"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 22178,
+      "slug": "crafting-chef-s-hat-and-cake-hat",
+      "name": "Crafting Chef’s Hat and Cake Hat",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "lutie-the-snow-village",
+      "start_map_name": "Lutie, the Snow Village",
+      "start_location_hint": "xmas",
+      "start_npc_name": "Sam",
+      "start_npc_slug": "sam",
       "base_exp_reward": null,
       "job_exp_reward": null,
       "zeny_reward": null,
@@ -2061,6 +3279,25 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 22180,
+      "slug": "crafting-chef-s-hat-and-cake-hat-22180",
+      "name": "Crafting Chef’s Hat and Cake Hat",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-lutie",
+      "start_map_name": "Inside Lutie",
+      "start_location_hint": null,
+      "start_npc_name": "Nari",
+      "start_npc_slug": "nari",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 22179,
       "slug": "crafting-chef-s-hat-and-cake-hat-22179",
       "name": "Crafting Chef’s Hat and Cake Hat",
@@ -2078,6 +3315,32 @@
       "is_repeatable": false,
       "eligible_classes": [],
       "rewards": []
+    },
+    {
+      "quest_id_ingame": 22177,
+      "slug": "crafting-colorful-eggshell",
+      "name": "Crafting Rainbow Eggshell",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "morroc-the-desert-city",
+      "start_map_name": "Morroc, the Desert City",
+      "start_location_hint": "morocc",
+      "start_npc_name": "Yeonghwa",
+      "start_npc_slug": "yeonghwa",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "rainbow-eggshell-5039",
+          "item_name": "Rainbow Eggshell"
+        }
+      ]
     },
     {
       "quest_id_ingame": 22181,
@@ -2128,6 +3391,32 @@
           "reward_kind": "fixed",
           "item_slug": "antlers-2284",
           "item_name": "Antlers"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 22059,
+      "slug": "crafting-doctor-band",
+      "name": "Crafting Doctor Band",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "izlude-the-satellite-city",
+      "start_map_name": "Izlude, the Satellite City",
+      "start_location_hint": "izlude",
+      "start_npc_name": "Dana",
+      "start_npc_slug": "dana",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "doctor-band-2273",
+          "item_name": "Doctor Band"
         }
       ]
     },
@@ -2208,6 +3497,63 @@
           "item_name": "Cross Hat"
         }
       ]
+    },
+    {
+      "quest_id_ingame": 22171,
+      "slug": "crafting-fashion-sunglasses-and-heart-hairpin-22171",
+      "name": "Crafting Fashionable Glasses and Heart Hairpin",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "That woman",
+      "start_npc_slug": "that-woman",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22170,
+      "slug": "crafting-fashion-sunglasses-and-heart-hairpin",
+      "name": "Crafting Fashionable Glasses and Heart Hairpin",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "That man",
+      "start_npc_slug": "that-man",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22172,
+      "slug": "crafting-fashion-sunglasses-and-heart-hairpin-22172",
+      "name": "Crafting Fashionable Glasses and Heart Hairpin",
+      "quest_type": "crafting",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": null,
+      "start_npc_name": "Pero",
+      "start_npc_slug": "pero",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
     },
     {
       "quest_id_ingame": 22151,
@@ -11838,6 +13184,78 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 100715,
+      "slug": "second-job-change-crusader",
+      "name": "Second Job Change: Crusader",
+      "quest_type": "side",
+      "min_base_level": 50,
+      "min_job_level": 50,
+      "start_map_slug": "central-palace-of-prontera",
+      "start_map_name": "Central Palace of Prontera",
+      "start_location_hint": "prt_cas",
+      "start_npc_name": "Crusader Leader",
+      "start_npc_slug": "crusader-leader",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [
+        {
+          "slug": "swordsman",
+          "name": "Swordsman"
+        }
+      ],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 100714,
+      "slug": "second-job-change-knight",
+      "name": "Second Job Change: Knight",
+      "quest_type": "side",
+      "min_base_level": 50,
+      "min_job_level": 50,
+      "start_map_slug": "inside-prontera",
+      "start_map_name": "Inside Prontera",
+      "start_location_hint": "prt_in",
+      "start_npc_name": "Prontera Knight Master",
+      "start_npc_slug": "prontera-knight-master",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [
+        {
+          "slug": "swordsman",
+          "name": "Swordsman"
+        }
+      ],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 100723,
+      "slug": "second-job-change-monk",
+      "name": "Second Job Change: Monk",
+      "quest_type": "side",
+      "min_base_level": 50,
+      "min_job_level": 50,
+      "start_map_slug": "inside-st-capitolina-abbey",
+      "start_map_name": "Inside St. Capitolina Abbey",
+      "start_location_hint": "monk_in",
+      "start_npc_name": "Muhae",
+      "start_npc_slug": "muhae",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [
+        {
+          "slug": "acolyte",
+          "name": "Acolyte"
+        }
+      ],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 100724,
       "slug": "second-job-change-hunter",
       "name": "Second Job Change: Hunter",
@@ -11886,6 +13304,78 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 100722,
+      "slug": "second-job-change-priest",
+      "name": "Second Job Change: Priest",
+      "quest_type": "side",
+      "min_base_level": 50,
+      "min_job_level": 50,
+      "start_map_slug": "inside-prontera-sanctuary",
+      "start_map_name": "Inside Prontera Sanctuary",
+      "start_location_hint": "prt_church",
+      "start_npc_name": "High Priest",
+      "start_npc_slug": "high-priest",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [
+        {
+          "slug": "acolyte",
+          "name": "Acolyte"
+        }
+      ],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 100721,
+      "slug": "second-job-change-sage",
+      "name": "Second Job Change: Sage",
+      "quest_type": "side",
+      "min_base_level": 50,
+      "min_job_level": 50,
+      "start_map_slug": "academy-1f",
+      "start_map_name": "Academy 1F",
+      "start_location_hint": "iz_ac01",
+      "start_npc_name": "President of Academy",
+      "start_npc_slug": "president-of-academy",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [
+        {
+          "slug": "mage",
+          "name": "Mage"
+        }
+      ],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 100720,
+      "slug": "second-job-change-wizard",
+      "name": "Second Job Change: Wizard",
+      "quest_type": "side",
+      "min_base_level": 50,
+      "min_job_level": 50,
+      "start_map_slug": "geffen-tower",
+      "start_map_name": "Geffen Tower",
+      "start_location_hint": "gef_tower",
+      "start_npc_name": "Magic Guild Official",
+      "start_npc_slug": "magic-guild-official",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [
+        {
+          "slug": "mage",
+          "name": "Mage"
+        }
+      ],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 100719,
       "slug": "second-job-change-rogue",
       "name": "Second Job Change: Rogue",
@@ -11907,6 +13397,44 @@
           "name": "Thief"
         }
       ],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 7798,
+      "slug": "seventh-cracked-rift-task",
+      "name": "Seventh Cracked Rift task.",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 1000116,
+      "slug": "shivsin",
+      "name": "Shifshin",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
       "rewards": []
     },
     {
@@ -11967,6 +13495,25 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 7797,
+      "slug": "sixth-cracked-rift-task",
+      "name": "Sixth Cracked Rift task.",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 250041,
       "slug": "shiba-quotes",
       "name": "Shiba Quotes",
@@ -11997,6 +13544,108 @@
       "start_location_hint": "prontera",
       "start_npc_name": "Stranger",
       "start_npc_slug": "stranger",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 16186,
+      "slug": "sizzling-charcoal-broiled-breath-dumpling",
+      "name": "Sizzling Charcoal-Broiled Breath Dumpling",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Mantue Tara",
+      "start_npc_slug": "mantue-tara",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22901,
+      "slug": "smokie-nemesis-of-cabbages",
+      "name": "Smokie, Nemesis of Cabbages",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "prontera-field-01",
+      "start_map_name": "Prontera Field 01",
+      "start_location_hint": "prt_fild01",
+      "start_npc_name": "Etila",
+      "start_npc_slug": "etila",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "nfs-orange-potion-20ea-box-23504",
+          "item_name": "[NFS] Orange Potion 20ea Box"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 22908,
+      "slug": "snails-scare-me-pending",
+      "name": "Snails Scare Me... - Pending",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "prontera-field-05",
+      "start_map_name": "Prontera Field 05",
+      "start_location_hint": "prt_fild05",
+      "start_npc_name": "Tarosan",
+      "start_npc_slug": "tarosan",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22201,
+      "slug": "so-you-can-attend-the-ball",
+      "name": "So You Can Attend the Ball",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Cinder",
+      "start_npc_slug": "cinder",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 16185,
+      "slug": "soft-and-slippery-special-dragon-beard-noodles",
+      "name": "Soft and Slippery Special Dragon Beard Noodles",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Guk Sunsu",
+      "start_npc_slug": "guk-sunsu",
       "base_exp_reward": null,
       "job_exp_reward": null,
       "zeny_reward": null,
@@ -12043,6 +13692,57 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 22702,
+      "slug": "sograt-a-nutritious-snack-22702",
+      "name": "Sograt: A Nutritious Snack",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sograt-desert-12",
+      "start_map_name": "Sograt Desert 12",
+      "start_location_hint": null,
+      "start_npc_name": "Auntie",
+      "start_npc_slug": "auntie",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "nfs-red-potion-20ea-box-23503",
+          "item_name": "[NFS] Red Potion 20ea Box"
+        },
+        {
+          "quantity": 20,
+          "reward_kind": "fixed",
+          "item_slug": "novice-magnifier-12325",
+          "item_name": "Novice Magnifier"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 22710,
+      "slug": "sograt-excavation-crew-lonia",
+      "name": "Sograt: Excavation Crew Lonia",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 22701,
       "slug": "sograt-a-nutritious-snack",
       "name": "Sograt: A Nutritious Snack",
@@ -12081,6 +13781,51 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 22704,
+      "slug": "sograt-excavation-team-intern",
+      "name": "Sograt: Excavation Team Intern",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sograt-desert-07",
+      "start_map_name": "Sograt Desert 07",
+      "start_location_hint": "moc_fild07",
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22718,
+      "slug": "sograt-ingredients-for-a-local-specialty",
+      "name": "Sograt: Ingredients for a Local Specialty",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sograt-desert-18",
+      "start_map_name": "Sograt Desert 18",
+      "start_location_hint": "moc_fild18",
+      "start_npc_name": "craftsman",
+      "start_npc_slug": "craftsman",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "tropical-sograt-12112",
+          "item_name": "Tropical Sograt"
+        }
+      ]
+    },
+    {
       "quest_id_ingame": 22709,
       "slug": "sograt-excavation-crew-pimon",
       "name": "Sograt: Excavation Crew Pimon",
@@ -12110,6 +13855,25 @@
       "start_map_name": null,
       "start_location_hint": null,
       "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22716,
+      "slug": "sograt-suspicious-creatures",
+      "name": "Sograt: Suspicious Creatures",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "sograt-desert-16",
+      "start_map_name": "Sograt Desert 16",
+      "start_location_hint": null,
+      "start_npc_name": "Sandman",
       "start_npc_slug": null,
       "base_exp_reward": null,
       "job_exp_reward": null,
@@ -12253,6 +14017,44 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21274,
+      "slug": "stabilizing-the-catacombs",
+      "name": "Stabilizing the Catacombs",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 16192,
+      "slug": "start-the-cooking-showdown",
+      "name": "Start the Cooking Showdown",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "comodo-the-beach-town",
+      "start_map_name": "Comodo, the Beach Town",
+      "start_location_hint": "comodo",
+      "start_npc_name": "Komobi",
+      "start_npc_slug": "komobi",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 21017,
       "slug": "soul-purification-ritual",
       "name": "Soul Purification Ritual",
@@ -12374,6 +14176,63 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 23105,
+      "slug": "still-hunting-bears",
+      "name": "Still Hunting Bears",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-forest-07",
+      "start_map_name": "Payon Forest 07",
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21036,
+      "slug": "strange-mushroom",
+      "name": "Strange Mushroom",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": "payon",
+      "start_npc_name": "Grandpa",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21033,
+      "slug": "strange-onion",
+      "name": "Strange Onion",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": "payon",
+      "start_npc_name": "Grandmother",
+      "start_npc_slug": "grandmother",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 21014,
       "slug": "stinking-slippery-ghosts",
       "name": "Stinking, Slippery Ghosts",
@@ -12385,6 +14244,25 @@
       "start_location_hint": "pay_dun00",
       "start_npc_name": "Reno",
       "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 21208,
+      "slug": "sweet-dreams-with-an-old-blue-box",
+      "name": "Sweet Dreams with an Old Blue Box",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "pyramid-1f",
+      "start_map_name": "Pyramid 1F",
+      "start_location_hint": "moc_pryd01",
+      "start_npc_name": "Friends of Honest",
+      "start_npc_slug": "friends-of-honest",
       "base_exp_reward": null,
       "job_exp_reward": null,
       "zeny_reward": null,
@@ -12469,6 +14347,82 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21028,
+      "slug": "sweet-labor",
+      "name": "Sweet Labor",
+      "quest_type": "daily",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "payon-the-mountain-village",
+      "start_map_name": "Payon, the Mountain Village",
+      "start_location_hint": "payon",
+      "start_npc_name": "Middle-aged Man",
+      "start_npc_slug": "middle-aged-man",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 8330,
+      "slug": "take-a-trip-to-al-de-baran",
+      "name": "Take a trip to Al De Baran.",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-al-de-baran",
+      "start_map_name": "Inside Al De Baran",
+      "start_location_hint": "aldeba_in",
+      "start_npc_name": "Sheep",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 8328,
+      "slug": "take-a-trip-to-comodo",
+      "name": "Take a trip to Comodo.",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-comodo",
+      "start_map_name": "Inside Comodo",
+      "start_location_hint": "cmd_in01",
+      "start_npc_name": "Sheep",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 8332,
+      "slug": "take-a-trip-to-morroc",
+      "name": "Take a trip to Morroc.",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "morroc-the-desert-city",
+      "start_map_name": "Morroc, the Desert City",
+      "start_location_hint": "morocc",
+      "start_npc_name": "Sheep",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 22102,
       "slug": "t-ear-muffs-for-a-world-issolation",
       "name": "«T:Ear Muffs» for a World Issolation",
@@ -12507,6 +14461,44 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 21025,
+      "slug": "tales-from-long-ago",
+      "name": "Tales from Long Ago",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 8986,
+      "slug": "talk-to-baby-shark",
+      "name": "Talk to Baby Shark",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": null,
+      "start_map_name": null,
+      "start_location_hint": null,
+      "start_npc_name": null,
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 8324,
       "slug": "take-a-trip-to-prontera",
       "name": "Take a trip to Prontera.",
@@ -12522,6 +14514,57 @@
       "job_exp_reward": null,
       "zeny_reward": null,
       "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 22915,
+      "slug": "tell-no-one",
+      "name": "Tell No One",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "prontera-field-00",
+      "start_map_name": "Prontera Field 00",
+      "start_location_hint": "prt_fild00",
+      "start_npc_name": "Sarka",
+      "start_npc_slug": "sarka",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": [
+        {
+          "quantity": 1,
+          "reward_kind": "fixed",
+          "item_slug": "nfs-red-potion-20ea-box-23503",
+          "item_name": "[NFS] Red Potion 20ea Box"
+        },
+        {
+          "quantity": 20,
+          "reward_kind": "fixed",
+          "item_slug": "novice-fly-wing-12323",
+          "item_name": "Novice Fly Wing"
+        }
+      ]
+    },
+    {
+      "quest_id_ingame": 200052,
+      "slug": "tao-gunka-extermination",
+      "name": "[Tao Gunka] Extermination",
+      "quest_type": "side",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "inside-prontera",
+      "start_map_name": "Inside Prontera",
+      "start_location_hint": "prt_in",
+      "start_npc_name": "Midgard Receptionist - Lucy",
+      "start_npc_slug": "midgard-receptionist-lucy",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": true,
       "eligible_classes": [],
       "rewards": []
     },
@@ -12545,6 +14588,25 @@
       "rewards": []
     },
     {
+      "quest_id_ingame": 14729,
+      "slug": "the-curse-of-the-gaebolg-family-14729",
+      "name": "The Curse of the Gaebolg Family",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "prontera",
+      "start_map_name": "Prontera",
+      "start_location_hint": null,
+      "start_npc_name": "Dietmar",
+      "start_npc_slug": null,
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
       "quest_id_ingame": 14727,
       "slug": "the-curse-of-the-gaebolg-family",
       "name": "The Curse of the Gaebolg Family",
@@ -12556,6 +14618,44 @@
       "start_location_hint": "prontera",
       "start_npc_name": "Prontera Library",
       "start_npc_slug": "prontera-library",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 14730,
+      "slug": "the-curse-of-the-gaebolg-family-14730",
+      "name": "The Curse of the Gaebolg Family",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "central-palace-of-prontera",
+      "start_map_name": "Central Palace of Prontera",
+      "start_location_hint": null,
+      "start_npc_name": "Royal Palace",
+      "start_npc_slug": "royal-palace",
+      "base_exp_reward": null,
+      "job_exp_reward": null,
+      "zeny_reward": null,
+      "is_repeatable": false,
+      "eligible_classes": [],
+      "rewards": []
+    },
+    {
+      "quest_id_ingame": 14731,
+      "slug": "the-curse-of-the-gaebolg-family-14731",
+      "name": "The Curse of the Gaebolg Family",
+      "quest_type": "main",
+      "min_base_level": null,
+      "min_job_level": null,
+      "start_map_slug": "central-palace-of-prontera",
+      "start_map_name": "Central Palace of Prontera",
+      "start_location_hint": null,
+      "start_npc_name": "Royal Palace Library",
+      "start_npc_slug": null,
       "base_exp_reward": null,
       "job_exp_reward": null,
       "zeny_reward": null,
@@ -14512,426 +16612,5 @@
       ]
     }
   ],
-  "skipped": [
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21090",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21091",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21094",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21095",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21096",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21097",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21098",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21330",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21331",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21333",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21332",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21334",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21335",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21336",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21337",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21342",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21344",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21346",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bonus-experience-21345",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bucket-of-liquor",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/cactus-sap",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/bunrmep",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/cactus-sap-22720",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/carnivorous-child",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/children-of-izlude",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/cleaning-sunken-ship-floor-1-again-today",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/cleaning-sunken-ship-floor-2-again-today",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/clearing-the-nimble-goblin",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/clearing-the-savage-goblin",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/clock-tower-floor-1-cleanup",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21405",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21403",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21402",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21404",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21407",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21406",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/coceracera-21408",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-exploration",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-original-sea-dragon-grandmother-cooking-showdown",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-2-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-2-3",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-2-2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-2-5",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-2-4",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-3",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-7",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-11",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-10",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-8",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-11-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-11-3",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-11-5",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/comodo-plague-14",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/continue-hiding-old-coin",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-bandage",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-bandage-22167",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-bandage-22166",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-bandage-22169",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-candle",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-chef-s-hat-and-cake-hat",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-chef-s-hat-and-cake-hat-22180",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-colorful-eggshell",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-doctor-band",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-fashion-sunglasses-and-heart-hairpin-22171",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-fashion-sunglasses-and-heart-hairpin",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/crafting-fashion-sunglasses-and-heart-hairpin-22172",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/second-job-change-crusader",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/second-job-change-knight",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/second-job-change-monk",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/second-job-change-priest",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/second-job-change-sage",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/second-job-change-wizard",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/seventh-cracked-rift-task",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/shivsin",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sixth-cracked-rift-task",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sizzling-charcoal-broiled-breath-dumpling",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/smokie-nemesis-of-cabbages",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/snails-scare-me-pending",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/so-you-can-attend-the-ball",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/soft-and-slippery-special-dragon-beard-noodles",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sograt-a-nutritious-snack-22702",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sograt-excavation-crew-lonia",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sograt-excavation-team-intern",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sograt-ingredients-for-a-local-specialty",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sograt-suspicious-creatures",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/stabilizing-the-catacombs",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/start-the-cooking-showdown",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/still-hunting-bears",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/strange-mushroom",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/strange-onion",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sweet-dreams-with-an-old-blue-box",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/sweet-labor",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/take-a-trip-to-al-de-baran",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/take-a-trip-to-comodo",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/take-a-trip-to-morroc",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/tales-from-long-ago",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/talk-to-baby-shark",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/tell-no-one",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/tao-gunka-extermination",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/the-curse-of-the-gaebolg-family-14729",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/the-curse-of-the-gaebolg-family-14730",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/quests/the-curse-of-the-gaebolg-family-14731",
-      "reason": "status 404"
-    }
-  ]
+  "skipped": []
 }

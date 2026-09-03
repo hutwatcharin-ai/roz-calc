@@ -21,3 +21,11 @@ function resolveSiteUrl(): string {
 }
 
 export const SITE_URL = resolveSiteUrl();
+
+// The live host, independent of NEXT_PUBLIC_SITE_URL. That variable is what
+// the current build renders as its own origin -- locally it is localhost --
+// so anything talking to the real site (a CDN purge, a canonical redirect)
+// must not read it. middleware.ts and scripts/purge-cloudflare.ts both key off
+// this instead.
+export const CANONICAL_HOST = 'rozerothai.com';
+export const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;

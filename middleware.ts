@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // leaving Google two extra live copies of the site. Everything that is not
 // the apex 301s to it, path and query preserved. localhost/127.* stay
 // untouched so local prod tests keep working.
-const CANONICAL_HOST = 'rozerothai.com';
+import { CANONICAL_HOST } from './lib/site';
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host') ?? '';

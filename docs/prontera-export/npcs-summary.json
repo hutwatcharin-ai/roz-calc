@@ -1,10 +1,800 @@
 {
   "source": "https://roz.prontera.info",
-  "extracted_at": "2026-09-03T04:48:37.778Z",
-  "count": 416,
-  "with_coords": 410,
-  "skipped_count": 98,
+  "extracted_at": "2026-09-03T09:38:58.108Z",
+  "count": 514,
+  "with_coords": 508,
+  "skipped_count": 0,
   "npcs": [
+    {
+      "slug": "1-f-01",
+      "name": "1 F 01",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 126,
+      "y": 188,
+      "quests_given": []
+    },
+    {
+      "slug": "1-f-02",
+      "name": "1 F 02",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 205,
+      "y": 218,
+      "quests_given": []
+    },
+    {
+      "slug": "1-f-03",
+      "name": "1 F 03",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 130,
+      "y": 154,
+      "quests_given": []
+    },
+    {
+      "slug": "1-m-02",
+      "name": "1 M 02",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 255,
+      "y": 141,
+      "quests_given": []
+    },
+    {
+      "slug": "1-m-innkeeper",
+      "name": "1 M Innkeeper",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 242,
+      "y": 263,
+      "quests_given": []
+    },
+    {
+      "slug": "1-m-pastor",
+      "name": "1 M Pastor",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 208,
+      "y": 196,
+      "quests_given": []
+    },
+    {
+      "slug": "1-m-jobguider",
+      "name": "1 M Jobguider",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 256,
+      "y": 127,
+      "quests_given": []
+    },
+    {
+      "slug": "1-m-merchant",
+      "name": "1 M Merchant",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 115,
+      "y": 144,
+      "quests_given": []
+    },
+    {
+      "slug": "1-m-pubmaster",
+      "name": "1 M Pubmaster",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 205,
+      "y": 142,
+      "quests_given": []
+    },
+    {
+      "slug": "4-cook",
+      "name": "4 Cook",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 70,
+      "y": 168,
+      "quests_given": []
+    },
+    {
+      "slug": "2-board1",
+      "name": "2 Board1",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 185,
+      "y": 106,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-01-nordfeld",
+      "name": "4 F 01",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 185,
+      "y": 103,
+      "quests_given": []
+    },
+    {
+      "slug": "4-cook-nordfeld",
+      "name": "4 Cook",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 124,
+      "y": 176,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-01",
+      "name": "4 F 01",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 115,
+      "y": 171,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-02",
+      "name": "4 F 02",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 159,
+      "y": 107,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-05",
+      "name": "4 F 05",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 222,
+      "y": 180,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-dst-grand",
+      "name": "4 F Dst Grand",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 208,
+      "y": 143,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-godemom",
+      "name": "4 F Godemom",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 119,
+      "y": 174,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-gunslinger",
+      "name": "4 F Gunslinger",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 121,
+      "y": 142,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-huwoman",
+      "name": "4 F Huwoman",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 126,
+      "y": 120,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-kid2",
+      "name": "4 F Kid2",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 220,
+      "y": 127,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-kafra3",
+      "name": "4 F Kafra3",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 192,
+      "y": 104,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-premi",
+      "name": "4 F Premi",
+      "map_slug": "alberta-the-port-city",
+      "map_name": "Alberta, the Port City",
+      "map_navi_code": "alberta",
+      "x": 119,
+      "y": 65,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-premi-geffen",
+      "name": "4 F Premi",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 122,
+      "y": 62,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-premi-payon",
+      "name": "4 F Premi",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 183,
+      "y": 104,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-premi-morocc",
+      "name": "4 F Premi",
+      "map_slug": "morroc-the-desert-city",
+      "map_name": "Morroc, the Desert City",
+      "map_navi_code": "morocc",
+      "x": 154,
+      "y": 97,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-premi-prontera",
+      "name": "4 F Premi",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 146,
+      "y": 86,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-sister",
+      "name": "4 F Sister",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 254,
+      "y": 195,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-shabby",
+      "name": "4 F Shabby",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 190,
+      "y": 64,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-sitdown",
+      "name": "4 F Sitdown",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 83,
+      "y": 116,
+      "quests_given": []
+    },
+    {
+      "slug": "4-f-teleporter",
+      "name": "4 F Teleporter",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 127,
+      "y": 175,
+      "quests_given": []
+    },
+    {
+      "slug": "4-lam",
+      "name": "4 Lam",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 190,
+      "y": 55,
+      "quests_given": []
+    },
+    {
+      "slug": "4-lam-nordfeld-198-51",
+      "name": "4 Lam",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 198,
+      "y": 51,
+      "quests_given": []
+    },
+    {
+      "slug": "4-lam-nordfeld",
+      "name": "4 Lam",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 193,
+      "y": 53,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-02",
+      "name": "4 M 02",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 152,
+      "y": 168,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-03",
+      "name": "4 M 03",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 228,
+      "y": 110,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-barber",
+      "name": "4 M Barber",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 113,
+      "y": 164,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-casman1",
+      "name": "4 M Casman1",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 236,
+      "y": 91,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-03-nrd-in-250-135",
+      "name": "4 M 03",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 250,
+      "y": 135,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-03-nrd-in",
+      "name": "4 M 03",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 146,
+      "y": 121,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-archer",
+      "name": "4 M Archer",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 262,
+      "y": 141,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-job-blacksmith",
+      "name": "4 M Job Blacksmith",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 187,
+      "y": 122,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-kid1",
+      "name": "4 M Kid1",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 217,
+      "y": 130,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-kid2",
+      "name": "4 M Kid2",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 135,
+      "y": 151,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-kid2-prt-in",
+      "name": "4 M Kid2",
+      "map_slug": "inside-prontera",
+      "map_name": "Inside Prontera",
+      "map_navi_code": "prt_in",
+      "x": 38,
+      "y": 104,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-mocass1",
+      "name": "4 M Mocass1",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 152,
+      "y": 227,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-ky-sold",
+      "name": "4 M Ky Sold",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 142,
+      "y": 80,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-lgtgrand",
+      "name": "4 M Lgtgrand",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 188,
+      "y": 157,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-mocass1-nordfeld",
+      "name": "4 M Mocass1",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 232,
+      "y": 240,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-oilman",
+      "name": "4 M Oilman",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 201,
+      "y": 183,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-nfman",
+      "name": "4 M Nfman",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 164,
+      "y": 70,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-pierrot",
+      "name": "4 M Pierrot",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 132,
+      "y": 142,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-pierrot-nordfeld",
+      "name": "4 M Pierrot",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 192,
+      "y": 136,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-repair",
+      "name": "4 M Repair",
+      "map_slug": "item-mall",
+      "map_name": "Item Mall",
+      "map_navi_code": "itemmall",
+      "x": 24,
+      "y": 74,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sage-a",
+      "name": "4 M Sage A",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 246,
+      "y": 68,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sage-a-nrd-fild02",
+      "name": "4 M Sage A",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 171,
+      "y": 230,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sage-a-nrd-in",
+      "name": "4 M Sage A",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 123,
+      "y": 294,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sit-novice",
+      "name": "4 M Sit Novice",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 160,
+      "y": 177,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sit-novice-nrd-dun01",
+      "name": "4 M Sit Novice",
+      "map_slug": "nordfeld-cave-1f",
+      "map_name": "Nordfeld Cave 1F",
+      "map_navi_code": "nrd_dun01",
+      "x": 40,
+      "y": 308,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sit-novice-nrd-fild01",
+      "name": "4 M Sit Novice",
+      "map_slug": "nordfeld-plains",
+      "map_name": "Nordfeld Plains",
+      "map_navi_code": "nrd_fild01",
+      "x": 36,
+      "y": 271,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sit-novice-nrd-dun02",
+      "name": "4 M Sit Novice",
+      "map_slug": "nordfeld-cave-2f",
+      "map_name": "Nordfeld Cave 2F",
+      "map_navi_code": "nrd_dun02",
+      "x": 17,
+      "y": 217,
+      "quests_given": []
+    },
+    {
+      "slug": "4-mimic",
+      "name": "4 Mimic",
+      "map_slug": "izlude-the-satellite-city",
+      "map_name": "Izlude, the Satellite City",
+      "map_navi_code": "tu_town_e",
+      "x": 121,
+      "y": 107,
+      "quests_given": []
+    },
+    {
+      "slug": "4-m-sit-novice-nrd-fild02",
+      "name": "4 M Sit Novice",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 24,
+      "y": 69,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white",
+      "name": "4 Point White",
+      "map_slug": "nordfeld-plains",
+      "map_name": "Nordfeld Plains",
+      "map_navi_code": "nrd_fild01",
+      "x": 25,
+      "y": 84,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-fild01",
+      "name": "4 Point White",
+      "map_slug": "nordfeld-plains",
+      "map_name": "Nordfeld Plains",
+      "map_navi_code": "nrd_fild01",
+      "x": 38,
+      "y": 125,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-fild01-96-84",
+      "name": "4 Point White",
+      "map_slug": "nordfeld-plains",
+      "map_name": "Nordfeld Plains",
+      "map_navi_code": "nrd_fild01",
+      "x": 96,
+      "y": 84,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-fild01-96-178",
+      "name": "4 Point White",
+      "map_slug": "nordfeld-plains",
+      "map_name": "Nordfeld Plains",
+      "map_navi_code": "nrd_fild01",
+      "x": 96,
+      "y": 178,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-fild02",
+      "name": "4 Point White",
+      "map_slug": "nordfeld-hills",
+      "map_name": "Nordfeld Hills",
+      "map_navi_code": "nrd_fild02",
+      "x": 175,
+      "y": 232,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-in-151-307",
+      "name": "4 Point White",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 151,
+      "y": 307,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-in",
+      "name": "4 Point White",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 151,
+      "y": 294,
+      "quests_given": []
+    },
+    {
+      "slug": "4-point-white-nrd-in-152-300",
+      "name": "4 Point White",
+      "map_slug": "inside-nordfeld",
+      "map_name": "Inside Nordfeld",
+      "map_navi_code": "nrd_in",
+      "x": 152,
+      "y": 300,
+      "quests_given": []
+    },
+    {
+      "slug": "4-tower-17",
+      "name": "4 Tower 17",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 143,
+      "y": 180,
+      "quests_given": []
+    },
+    {
+      "slug": "4w-m-01",
+      "name": "4W M 01",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 139,
+      "y": 164,
+      "quests_given": []
+    },
+    {
+      "slug": "4w-m-01-nordfeld",
+      "name": "4W M 01",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 156,
+      "y": 128,
+      "quests_given": []
+    },
+    {
+      "slug": "4w-m-03",
+      "name": "4W M 03",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 120,
+      "y": 153,
+      "quests_given": []
+    },
+    {
+      "slug": "4w-sailor",
+      "name": "4W Sailor",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 60,
+      "y": 152,
+      "quests_given": []
+    },
+    {
+      "slug": "8-f",
+      "name": "8 F",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 154,
+      "y": 152,
+      "quests_given": []
+    },
+    {
+      "slug": "8-f-grandmother",
+      "name": "8 F Grandmother",
+      "map_slug": "nordfeld",
+      "map_name": "Nordfeld",
+      "map_navi_code": "nordfeld",
+      "x": 175,
+      "y": 120,
+      "quests_given": []
+    },
+    {
+      "slug": "adept-adventurer-2",
+      "name": "Adept Adventurer",
+      "map_slug": "prontera-field-08",
+      "map_name": "Prontera Field 08",
+      "map_navi_code": "prt_fild08",
+      "x": 358,
+      "y": 272,
+      "quests_given": []
+    },
     {
       "slug": "4w-sailor-nordfeld",
       "name": "4W Sailor",
@@ -13,6 +803,26 @@
       "map_navi_code": "nordfeld",
       "x": 153,
       "y": 69,
+      "quests_given": []
+    },
+    {
+      "slug": "afflicted-resident-location-1",
+      "name": "Afflicted Resident Location",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 173,
+      "y": 73,
+      "quests_given": []
+    },
+    {
+      "slug": "afflicted-resident-location-3",
+      "name": "Afflicted Resident Location",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 166,
+      "y": 75,
       "quests_given": []
     },
     {
@@ -46,6 +856,48 @@
       "quests_given": []
     },
     {
+      "slug": "afflicted-resident-location-5",
+      "name": "Afflicted Resident Location",
+      "map_slug": "inside-comodo",
+      "map_name": "Inside Comodo",
+      "map_navi_code": "cmd_in01",
+      "x": 160,
+      "y": 77,
+      "quests_given": []
+    },
+    {
+      "slug": "anxious-lady",
+      "name": "Anxious Lady",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 217,
+      "y": 94,
+      "quests_given": []
+    },
+    {
+      "slug": "apprentice",
+      "name": "Apprentice",
+      "map_slug": "sograt-desert-17",
+      "map_name": "Sograt Desert 17",
+      "map_navi_code": "moc_fild17",
+      "x": 358,
+      "y": 277,
+      "quests_given": [
+        "finding-the-missing-apprentice"
+      ]
+    },
+    {
+      "slug": "archeologist-1",
+      "name": "Archeologist",
+      "map_slug": "payon-forest-01-pay-fild01",
+      "map_name": "Payon Forest 01 (pay_fild01)",
+      "map_navi_code": "pay_fild01",
+      "x": 312,
+      "y": 353,
+      "quests_given": []
+    },
+    {
       "slug": "alibas",
       "name": "Alibas",
       "map_slug": "sograt-desert-07",
@@ -58,6 +910,16 @@
       ]
     },
     {
+      "slug": "archeologist-2",
+      "name": "Archeologist",
+      "map_slug": "payon-archer-village",
+      "map_name": "Payon Archer Village",
+      "map_navi_code": "tu_arche_h",
+      "x": 41,
+      "y": 126,
+      "quests_given": []
+    },
+    {
       "slug": "ann",
       "name": "Ann",
       "map_slug": "prontera-field-05",
@@ -67,6 +929,19 @@
       "y": 220,
       "quests_given": [
         "are-you-strong-3"
+      ]
+    },
+    {
+      "slug": "assassin",
+      "name": "Assassin",
+      "map_slug": "sograt-desert-16",
+      "map_name": "Sograt Desert 16",
+      "map_navi_code": "moc_fild16",
+      "x": 198,
+      "y": 153,
+      "quests_given": [
+        "assassin-guild-assault-incident-1",
+        "assassin-guild-assault-incident-2"
       ]
     },
     {
@@ -92,6 +967,18 @@
       "quests_given": []
     },
     {
+      "slug": "assassin-guild-high-elder",
+      "name": "Assassin Guild High Elder",
+      "map_slug": "assassin-guild",
+      "map_name": "Assassin Guild",
+      "map_navi_code": "in_moc_16",
+      "x": 18,
+      "y": 35,
+      "quests_given": [
+        "assassin-guild-assault-incident-3"
+      ]
+    },
+    {
       "slug": "archer-guildsman",
       "name": "Archer Guildmaster",
       "map_slug": "payon-archer-village",
@@ -100,6 +987,28 @@
       "x": null,
       "y": null,
       "quests_given": []
+    },
+    {
+      "slug": "battle-doll-judge",
+      "name": "Battle Doll Judge",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 160,
+      "y": 307,
+      "quests_given": []
+    },
+    {
+      "slug": "aurdipon",
+      "name": "Aurdipon",
+      "map_slug": "geffen-the-city-of-magic",
+      "map_name": "Geffen, the City of Magic",
+      "map_navi_code": "geffen",
+      "x": 181,
+      "y": 114,
+      "quests_given": [
+        "neutralizer-and-mixture-01"
+      ]
     },
     {
       "slug": "barbe-q",
@@ -116,6 +1025,16 @@
       ]
     },
     {
+      "slug": "barne-q",
+      "name": "Barne Q",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "comodo",
+      "x": 249,
+      "y": 300,
+      "quests_given": []
+    },
+    {
       "slug": "auntie",
       "name": "Auntie",
       "map_slug": "sograt-desert-12",
@@ -125,6 +1044,18 @@
       "y": 376,
       "quests_given": [
         "sograt-a-nutritious-snack-22702"
+      ]
+    },
+    {
+      "slug": "barriojuna",
+      "name": "Barriojuna",
+      "map_slug": "payon-the-mountain-village",
+      "map_name": "Payon, the Mountain Village",
+      "map_navi_code": "tu_pay_g",
+      "x": 207,
+      "y": 172,
+      "quests_given": [
+        "crafting-magnifier"
       ]
     },
     {
@@ -151,6 +1082,38 @@
       "quests_given": []
     },
     {
+      "slug": "beach-tourist-2",
+      "name": "Beach Tourist",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "comodo",
+      "x": 93,
+      "y": 207,
+      "quests_given": []
+    },
+    {
+      "slug": "beach-tourist-1",
+      "name": "Beach Tourist",
+      "map_slug": "comodo-the-beach-town",
+      "map_name": "Comodo, the Beach Town",
+      "map_navi_code": "comodo",
+      "x": 94,
+      "y": 217,
+      "quests_given": []
+    },
+    {
+      "slug": "blacksmith-guildsman",
+      "name": "Blacksmith Guildsman",
+      "map_slug": "inside-geffen",
+      "map_name": "Inside Geffen",
+      "map_navi_code": "geffen_in",
+      "x": 110,
+      "y": 170,
+      "quests_given": [
+        "second-job-change-blacksmith"
+      ]
+    },
+    {
       "slug": "beetle",
       "name": "Beetle",
       "map_slug": "mt-mjolnir-north-side-05",
@@ -174,6 +1137,41 @@
       "quests_given": [
         "missing-persons-5"
       ]
+    },
+    {
+      "slug": "blade",
+      "name": "Blade",
+      "map_slug": "academy-1f",
+      "map_name": "Academy 1F",
+      "map_navi_code": "tu_ac01_e",
+      "x": 64,
+      "y": 74,
+      "quests_given": [
+        "critura-academy-1",
+        "critura-academy-2",
+        "critura-academy-3",
+        "critura-academy-5"
+      ]
+    },
+    {
+      "slug": "boy-1",
+      "name": "Boy",
+      "map_slug": "prontera",
+      "map_name": "Prontera",
+      "map_navi_code": "prontera",
+      "x": 248,
+      "y": 212,
+      "quests_given": []
+    },
+    {
+      "slug": "boy-2",
+      "name": "Boy",
+      "map_slug": "sograt-desert-17",
+      "map_name": "Sograt Desert 17",
+      "map_navi_code": "moc_fild17",
+      "x": 358,
+      "y": 277,
+      "quests_given": []
     },
     {
       "slug": "berito",
@@ -4791,398 +5789,5 @@
       ]
     }
   ],
-  "skipped": [
-    {
-      "url": "https://roz.prontera.info/npcs/1-f-01",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-f-02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-f-03",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-m-02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-m-innkeeper",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-m-pastor",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-m-jobguider",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-m-merchant",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/1-m-pubmaster",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-cook",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/2-board1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-01-nordfeld",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-cook-nordfeld",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-01",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-05",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-dst-grand",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-godemom",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-gunslinger",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-huwoman",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-kid2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-kafra3",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-premi",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-premi-geffen",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-premi-payon",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-premi-morocc",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-premi-prontera",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-sister",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-shabby",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-sitdown",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-f-teleporter",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-lam",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-lam-nordfeld-198-51",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-lam-nordfeld",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-03",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-barber",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-casman1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-03-nrd-in-250-135",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-03-nrd-in",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-archer",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-job-blacksmith",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-kid1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-kid2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-kid2-prt-in",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-mocass1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-ky-sold",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-lgtgrand",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-mocass1-nordfeld",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-oilman",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-nfman",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-pierrot",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-pierrot-nordfeld",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-repair",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sage-a",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sage-a-nrd-fild02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sage-a-nrd-in",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sit-novice",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-dun01",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-fild01",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-dun02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-mimic",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-m-sit-novice-nrd-fild02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild01",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild01-96-84",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild01-96-178",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-fild02",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-in-151-307",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-in",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-point-white-nrd-in-152-300",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4-tower-17",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4w-m-01",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4w-m-01-nordfeld",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4w-m-03",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/4w-sailor",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/8-f",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/8-f-grandmother",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/adept-adventurer-2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/afflicted-resident-location-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/afflicted-resident-location-3",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/afflicted-resident-location-5",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/anxious-lady",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/apprentice",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/archeologist-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/archeologist-2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/assassin",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/assassin-guild-high-elder",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/battle-doll-judge",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/aurdipon",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/barne-q",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/barriojuna",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/beach-tourist-2",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/beach-tourist-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/blacksmith-guildsman",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/blade",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/boy-1",
-      "reason": "status 404"
-    },
-    {
-      "url": "https://roz.prontera.info/npcs/boy-2",
-      "reason": "status 404"
-    }
-  ]
+  "skipped": []
 }

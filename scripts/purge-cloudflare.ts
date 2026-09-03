@@ -12,13 +12,23 @@
 //   with args purge just those URLs, e.g.
 //             npx tsx scripts/purge-cloudflare.ts /database/skills /about
 //
+// On Git Bash, prefix a path argument with MSYS_NO_PATHCONV=1 -- otherwise the
+// shell rewrites a leading slash into a Windows path and Cloudflare rejects
+// "C:/Program Files/Git/about" as an invalid domain (seen 3 Sep). Passing the
+// full https:// URL sidesteps it too.
+//
 // Needs two values in .env.local (both gitignored):
 //   CLOUDFLARE_ZONE_ID    the zone's id, from the dashboard's Overview page
 //   CLOUDFLARE_API_TOKEN  a token whose ONLY permission is Zone > Cache Purge,
 //                         scoped to this one zone. Not the Global API Key --
 //                         that one can do anything to the account.
 
-import { SITE_URL } from '../lib/site';
+// CANONICAL_ORIGIN, not SITE_URL: the latter is whatever origin the current
+// build renders as its own, which locally is http://localhost:3000 -- and
+// Cloudflare answered exactly that way the first time this ran, rejecting
+// "http://localhost:3000/about" as an invalid domain. A purge always targets
+// the live site.
+import { CANONICAL_ORIGIN } from '../lib/site';
 
 async function main(): Promise<void> {
   const zone = process.env.CLOUDFLARE_ZONE_ID;
@@ -31,7 +41,7 @@ async function main(): Promise<void> {
 
   const paths = process.argv.slice(2);
   const body = paths.length > 0
-    ? { files: paths.map((p) => (p.startsWith('http') ? p : `${SITE_URL}${p.startsWith('/') ? p : `/${p}`}`)) }
+    ? { files: paths.map((p) => (p.startsWith('http') ? p : `${CANONICAL_ORIGIN}${p.startsWith('/') ? p : `/${p}`}`)) }
     : { purge_everything: true };
 
   const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache`, {
