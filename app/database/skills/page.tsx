@@ -16,6 +16,25 @@ export const metadata = {
 const PAGE_SIZE = 50;
 const FETCH_PAGE = 1000;
 
+interface SkillLevel {
+  skill_slug: string;
+  level: number;
+  effect: string | null;
+  sp_cost: number | null;
+  attack_range: number | null;
+  cast_time_ms: number | null;
+  cooldown_ms: number | null;
+}
+
+// Milliseconds are what the source stores; seconds are what a player thinks
+// in. 1500 reads as 1.5 วิ, 800 as 0.8 วิ, and a null stays a dash rather
+// than becoming a zero.
+function seconds(ms: number | null): string {
+  if (ms === null) return '—';
+  if (ms === 0) return 'ทันที';
+  return `${(ms / 1000).toFixed(ms % 1000 === 0 ? 0 : 1)} วิ`;
+}
+
 // 851 rows is under the cap today but close enough that a plain select()
 // would start truncating silently the moment more content ships.
 //
@@ -105,6 +124,29 @@ export default async function SkillsPage({
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const rows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+  // Per-level numbers for the 50 rows this page renders, not for all 851 --
+  // the levels of a skill nobody expanded cost nothing to skip. 846 of our
+  // skills have them (4,363 rows); the rest render without the table rather
+  // than with an empty one.
+  const levelsBySkill = new Map<string, SkillLevel[]>();
+  if (rows.length > 0) {
+    const { data: levelRows, error: levelsError } = await supabaseBrowser()
+      .from('skill_levels')
+      .select('skill_slug, level, effect, sp_cost, attack_range, cast_time_ms, cooldown_ms')
+      .in('skill_slug', rows.map((s) => s.slug))
+      .order('skill_slug')
+      .order('level');
+    // A failed query is not "these skills have no levels": the table simply
+    // does not render, and the reason lands in the log rather than on screen
+    // as a claim about the game.
+    if (levelsError) console.error('skill levels query failed', levelsError);
+    for (const row of levelRows ?? []) {
+      const list = levelsBySkill.get(row.skill_slug) ?? [];
+      list.push(row as SkillLevel);
+      levelsBySkill.set(row.skill_slug, list);
+    }
+  }
 
   function buildHref(targetPage: number, overrides: Record<string, string> = {}) {
     const params = new URLSearchParams();
@@ -211,7 +253,7 @@ export default async function SkillsPage({
                     <td data-label="อาชีพ">{(s.classes ?? []).length > 0 ? s.classes.join(', ') : '—'}</td>
                     {/* 581 skills carry a description from the export; the rest
                         genuinely have none upstream and get no empty cell. */}
-                    {(s.description || s.requires) && (
+                    {(s.description || s.requires || (levelsBySkill.get(s.slug)?.length ?? 0) > 0) && (
                       <td data-label="" className="wide">
                         <details className="disclose disclose--row">
                           <summary>รายละเอียดสกิล</summary>
@@ -230,6 +272,47 @@ export default async function SkillsPage({
                                 ต้องมีก่อน: <strong>{s.requires}</strong>
                               </p>
                             )}
+                            {/* Per level: what the skill does at that level and
+                                what it costs. Columns that are empty for this
+                                skill are dropped rather than rendered as a
+                                column of dashes -- most skills have no cast or
+                                cooldown recorded, and a table of blanks reads
+                                as "this skill is instant", which it does not
+                                say. */}
+                            {(() => {
+                              const levels = levelsBySkill.get(s.slug) ?? [];
+                              if (levels.length === 0) return null;
+                              const hasRange = levels.some((l) => l.attack_range !== null);
+                              const hasCast = levels.some((l) => l.cast_time_ms !== null);
+                              const hasCooldown = levels.some((l) => l.cooldown_ms !== null);
+                              const hasSp = levels.some((l) => l.sp_cost !== null);
+                              return (
+                                <table className="data-table" style={{ marginTop: 10 }}>
+                                  <thead>
+                                    <tr>
+                                      <th className="num">Lv</th>
+                                      <th>ผล</th>
+                                      {hasSp && <th className="num">SP</th>}
+                                      {hasRange && <th className="num">ระยะ</th>}
+                                      {hasCast && <th className="num">ร่าย</th>}
+                                      {hasCooldown && <th className="num">คูลดาวน์</th>}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {levels.map((l) => (
+                                      <tr key={l.level}>
+                                        <td data-label="Lv" className="num mono">{l.level}</td>
+                                        <td data-label="ผล">{l.effect ?? '—'}</td>
+                                        {hasSp && <td data-label="SP" className="num mono">{l.sp_cost ?? '—'}</td>}
+                                        {hasRange && <td data-label="ระยะ" className="num mono">{l.attack_range ?? '—'}</td>}
+                                        {hasCast && <td data-label="ร่าย" className="num mono">{seconds(l.cast_time_ms)}</td>}
+                                        {hasCooldown && <td data-label="คูลดาวน์" className="num mono">{seconds(l.cooldown_ms)}</td>}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              );
+                            })()}
                           </div>
                         </details>
                       </td>
