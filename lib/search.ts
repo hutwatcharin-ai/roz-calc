@@ -63,15 +63,17 @@ function fromItemRow(row: SearchRow, type: SearchType): SearchResult {
     id: String(row.id),
     type,
     name: row.name_en,
-    // Cards are items and share the item detail page; gear and costumes have
-    // had their own routes since 3 Sep 2026. The badge is what tells the
-    // player which kind of thing they found.
+    // Gear, costumes and cards each have their own route since 3 Sep 2026;
+    // what stays on the item route is consumables and materials. The badge is
+    // what tells the player which kind of thing they found.
     href:
       type === 'equipment'
         ? `/database/equipment/${row.id}`
         : type === 'costume'
           ? `/database/costumes/${row.id}`
-          : `/database/items/${row.id}`,
+          : type === 'card'
+            ? `/database/cards/${row.id}`
+            : `/database/items/${row.id}`,
     iconUrl: row.icon_url ?? null,
   };
 }

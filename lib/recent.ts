@@ -8,7 +8,7 @@
 // Safari private mode -- must degrade to "no list", never to a crash.
 
 export interface RecentEntry {
-  kind: 'monster' | 'item' | 'equipment' | 'costume';
+  kind: 'monster' | 'item' | 'equipment' | 'costume' | 'card';
   id: number;
   name: string;
 }
@@ -25,7 +25,11 @@ function isEntry(value: unknown): value is RecentEntry {
   if (typeof value !== 'object' || value === null) return false;
   const e = value as Record<string, unknown>;
   return (
-    (e.kind === 'monster' || e.kind === 'item' || e.kind === 'equipment' || e.kind === 'costume') &&
+    (e.kind === 'monster' ||
+      e.kind === 'item' ||
+      e.kind === 'equipment' ||
+      e.kind === 'costume' ||
+      e.kind === 'card') &&
     typeof e.id === 'number' &&
     Number.isFinite(e.id) &&
     typeof e.name === 'string' &&
@@ -68,5 +72,6 @@ export function hrefFor(entry: RecentEntry): string {
   // reads 'item' and lands on the item page, which redirects it on.
   if (entry.kind === 'equipment') return `/database/equipment/${entry.id}`;
   if (entry.kind === 'costume') return `/database/costumes/${entry.id}`;
+  if (entry.kind === 'card') return `/database/cards/${entry.id}`;
   return `/database/items/${entry.id}`;
 }

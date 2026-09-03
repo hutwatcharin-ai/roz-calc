@@ -1,4 +1,5 @@
-// One `items` table, three detail routes: gear, costumes, and everything else.
+// One `items` table, four detail routes: gear, costumes, cards, and everything
+// else.
 //
 // Gear split off the item route on 3 Sep 2026 because a weapon rendered like a
 // Jellopy. Costumes split off gear the same day for the opposite reason: at 940
@@ -9,6 +10,7 @@
 
 export const GEAR_CATEGORIES = ['Armor', 'Weapon'] as const;
 export const COSTUME_CATEGORY = 'Costume Equipment';
+export const CARD_CATEGORY = 'Card';
 
 export function isGearCategory(category: string | null | undefined): boolean {
   return category != null && (GEAR_CATEGORIES as readonly string[]).includes(category);
@@ -16,6 +18,10 @@ export function isGearCategory(category: string | null | undefined): boolean {
 
 export function isCostumeCategory(category: string | null | undefined): boolean {
   return category === COSTUME_CATEGORY;
+}
+
+export function isCardCategory(category: string | null | undefined): boolean {
+  return category === CARD_CATEGORY;
 }
 
 /** Wearable at all -- gear or costume. */
@@ -26,5 +32,6 @@ export function isEquipmentCategory(category: string | null | undefined): boolea
 export function itemHref(id: number | string, category: string | null | undefined): string {
   if (isGearCategory(category)) return `/database/equipment/${id}`;
   if (isCostumeCategory(category)) return `/database/costumes/${id}`;
+  if (isCardCategory(category)) return `/database/cards/${id}`;
   return `/database/items/${id}`;
 }

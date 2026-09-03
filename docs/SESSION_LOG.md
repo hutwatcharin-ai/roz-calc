@@ -32,6 +32,12 @@
 - 3 route redirect หากันด้วยกติกาเดียวใน `lib/item-href.ts` (`GEAR_CATEGORIES` / `COSTUME_CATEGORY`) — `EQUIPMENT_CATEGORIES` ย้ายออกจาก equip-filter มาที่นี่
 - body ของหน้า gear/costume ใช้ `components/GearDetail.tsx` ร่วมกัน (ไม่ก๊อป 2 ชุด) + `lib/gear-detail.ts` โหลดข้อมูลร่วม
 - แก้ทุกจุดที่รู้ category: nav (ชิปคอสตูม), SiteStats (นับแยก 875/940), GlobalSearch (คิวรีแยก ไม่งั้นผลลัพธ์ 5 อันโดนคอสตูมกิน), search badge "คอสตูม", "เพิ่งดู" kind ใหม่, sitemap แยกอัตโนมัติผ่าน itemHref
+- ⚠️ บั๊กที่เกิดจากงานนี้เอง: หน้าไอเทมยัง redirect `?category=Costume Equipment` ไปหน้าอุปกรณ์ที่เพิ่งเอาตัวเลือกคอสตูมออก = ตกบนฟิลเตอร์ที่ไม่เจออะไร แก้แล้วทั้งสองฝั่ง
+
+**แยกการ์ด (313 ใบ) — เคสเดียวกัน มี list แล้วแต่ detail ยังเป็น template ไอเทม**
+- `/database/cards/[id]`: เอฟเฟกต์อยู่บนสุด (ไทย/อังกฤษสลับได้) + ชิปช่องที่ใส่ + มอนที่ดรอป — ของเดิมขึ้นราคา/slot ก่อน แล้วดันบรรทัดที่คนอ่านการ์ดต้องการลงล่าง
+- นับทั้งตาราง 3,833 แถว: Other 1,061 · Costume 940 · Weapon 465 · Armor 410 · Consumable 345 · Card 313 · Enchantment 172 · Special 65 · Enchant Stone 36 · Pet 26
+- ที่เหลือยังไม่แยก: Enchantment/Enchant Stone (คนค้นน้อยกว่า), Pet (26 ใบ ไม่คุ้ม route), **Other 1,061 แยกไม่ได้เพราะ weapon_type ว่าง 1,047/1,061** ต้องหาแหล่งจัดหมวดก่อน
 
 ## 1–2 ก.ย. 2026 — รอบใหญ่: โครงหน้า, hit/flee, แปลไทย, NPC
 

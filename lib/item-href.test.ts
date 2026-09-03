@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isCostumeCategory, isEquipmentCategory, isGearCategory, itemHref } from './item-href';
+import { isCardCategory, isCostumeCategory, isEquipmentCategory, isGearCategory, itemHref } from './item-href';
 
 describe('itemHref', () => {
   it('sends weapons and armour to the gear route', () => {
@@ -15,9 +15,14 @@ describe('itemHref', () => {
     expect(isEquipmentCategory('Costume Equipment')).toBe(true);
   });
 
-  it('leaves everything else on the item route', () => {
-    expect(itemHref(501, 'Consumable')).toBe('/database/items/501');
-    expect(itemHref(4118, 'Card')).toBe('/database/items/4118');
+  it('sends cards to the card route', () => {
+    expect(itemHref(4118, 'Card')).toBe('/database/cards/4118');
+    expect(isCardCategory('Card')).toBe(true);
+  });
+
+  it('leaves consumables and materials on the item route', () => {
+    expect(itemHref(501, 'Consumable / Recovery')).toBe('/database/items/501');
+    expect(itemHref(1000, 'Other')).toBe('/database/items/1000');
     expect(itemHref(909, null)).toBe('/database/items/909');
   });
 
@@ -28,6 +33,7 @@ describe('itemHref', () => {
     expect(isEquipmentCategory('Equipment')).toBe(false);
     expect(isGearCategory('weapon')).toBe(false);
     expect(isCostumeCategory('Costume')).toBe(false);
+    expect(isCardCategory('Cards')).toBe(false);
     expect(isEquipmentCategory(undefined)).toBe(false);
   });
 });

@@ -13,12 +13,12 @@ describe('mergeSearchResults', () => {
     expect(r).toEqual({ type: 'monster', id: '1002', name: 'Poring', href: '/database/monsters/1002', iconUrl: '/images/monsters/1002.gif' });
   });
 
-  it('sends a card to the item detail page but labels it a card', () => {
-    // Cards are items. The href must reach a real page; the badge is what
-    // tells the player which kind of thing they found.
+  it('sends a card to the card detail page, not the item one', () => {
+    // Cards got their own detail route on 3 Sep 2026: the item template leads
+    // with prices and slots and buried the effect line a card is read for.
     const [r] = mergeSearchResults({ ...empty, cards: [{ id: 4118, name_en: 'Ground Petite Card', icon_url: '/images/items/4118.gif' }] });
     expect(r.type).toBe('card');
-    expect(r.href).toBe('/database/items/4118');
+    expect(r.href).toBe('/database/cards/4118');
   });
 
   it('sends equipment to the equipment detail page, not the item one', () => {
