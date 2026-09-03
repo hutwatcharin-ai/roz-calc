@@ -15,8 +15,12 @@ describe('sitemap static paths', () => {
     // anywhere complained. Pages outside the nav (footer-only, news) are the
     // one hand-kept list left, and it is asserted here so a stray path cannot
     // sneak in without showing up in a diff of EXTRA_STATIC_PATHS.
+    // Every section, spread from the table itself rather than named one by
+    // one: this test listed database and tools by hand, so when the guides
+    // section shipped the sitemap dropped four live pages and the test agreed
+    // with it. A section added later is covered without touching this file.
     const navHrefs = new Set(
-      [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools]
+      [...PRIMARY_LINKS, ...Object.values(SECTION_LINKS).flat()]
         .filter((link) => link.ready)
         .map((link) => link.href),
     );
@@ -26,7 +30,7 @@ describe('sitemap static paths', () => {
 
   it('keeps the extras out of the nav (or they belong in nav-links, not here)', () => {
     const navHrefs = new Set(
-      [...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools].map((link) => link.href),
+      [...PRIMARY_LINKS, ...Object.values(SECTION_LINKS).flat()].map((link) => link.href),
     );
     for (const extra of EXTRA_STATIC_PATHS) expect(navHrefs.has(extra)).toBe(false);
   });

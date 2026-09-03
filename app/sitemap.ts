@@ -33,7 +33,7 @@ export const NEWS_PATHS: string[] = ['/news/patch-2026-09-03'];
 export const EXTRA_STATIC_PATHS: string[] = ['/about', ...NEWS_PATHS];
 
 export const STATIC_PATHS: string[] = [
-  ...new Set([...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools]
+  ...new Set([...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools, ...SECTION_LINKS.guides]
     .filter((link) => link.ready)
     .map((link) => link.href)),
   ...EXTRA_STATIC_PATHS,
