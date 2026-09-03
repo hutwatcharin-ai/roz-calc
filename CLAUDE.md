@@ -7,6 +7,8 @@
 - เทสต์: `npx vitest run` (~476 เทสต์) · typecheck: `npx tsc --noEmit` · build: `npx next build`
 - ทดสอบ prod ในเครื่อง: `npx next start -p 3177` — **ฆ่า listener เก่าก่อนเสมอ** (`netstat -ano | findstr :3177` แล้ว taskkill) — server เก่าค้างพอร์ตทำให้ start ใหม่ตาย EADDRINUSE เงียบๆ แล้วหน้าเสิร์ฟ CSS เก่า 400/ไร้สไตล์
 - deploy: push GitHub แล้ว `POST /api/v1/deploy?uuid=...` ที่ Coolify — **ห้าม deploy ถ้า push ยังไม่ติด** (network เครื่อง dev หลุดเป็นพักๆ push ล้มแล้ว deploy จะ build โค้ดเก่าเงียบๆ — เกิดมาแล้ว 2 ครั้ง) · grep ผล push ต้องรวมทั้ง "master -> master" และ "Everything up-to-date" (มีขีด)
+- **หลัง deploy ทุกครั้ง: `npm run purge`** (Cloudflare cache HTML 24 ชม. redeploy ไม่บัสต์ให้ — เคยเสิร์ฟ /about เก่า Age 8,474 วิ หลัง deploy สำเร็จ) · ต้องมี `CLOUDFLARE_ZONE_ID` + `CLOUDFLARE_API_TOKEN` (สิทธิ์ Zone > Cache Purge เท่านั้น) ใน `.env.local` · ถ้ายังไม่มี token ต้องกด Purge Everything ในแดชบอร์ดเอง
+- ⚠️ status ของ Coolify (`/api/v1/deployments/<uuid>`) เชื่อไม่ได้ — 3 ก.ย. ค้าง `running` ทั้งที่ container สลับแล้ว · เช็คของจริงที่ origin ตรงๆ: `curl -k --resolve rozerothai.com:443:207.148.123.125 https://rozerothai.com/<path>` (ข้าม Cloudflare)
 - แก้ข้อมูลใน DB แล้วจะ verify ในเครื่อง: ลบ `.next/cache/fetch-cache` ก่อน build ไม่งั้นเห็นค่าเก่า (Next Data Cache ข้าม build)
 
 ## ฐานข้อมูล (Supabase, project `qxqxpnqrchzdpvqpsjvv`)
