@@ -10,6 +10,7 @@ import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { randomOptionsFor } from '@/lib/random-options';
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
@@ -244,6 +245,39 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 10 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
       )}
+
+      {(() => {
+        const lines = randomOptionsFor(item.category, item.weapon_type, item.weapon_level);
+        if (!lines?.length) return null;
+        return (
+          <div className="card" style={{ marginTop: 20 }}>
+            <h2 className="section-title">ออปชั่นสุ่มที่ชิ้นนี้ทอยได้</h2>
+            <p className="muted" style={{ marginTop: 4 }}>
+              ดรอปจากมอนสเตอร์ทั่วไป — แต่ละบรรทัดทอยได้ตัวเลือกเดียวในช่วงที่แสดง
+            </p>
+            {lines.map((line) => (
+              <div key={line.lineIndex} style={{ marginTop: 12 }}>
+                <p style={{ fontSize: 13, color: 'var(--dim)' }}>
+                  บรรทัดที่ {line.lineIndex} · {line.acquisition === 'guaranteed' ? 'ได้เสมอ' : 'อาจได้'}
+                </p>
+                <table className="data-table" style={{ marginTop: 4 }}>
+                  <tbody>
+                    {line.entries.map((e) => (
+                      <tr key={e.option_key}>
+                        <td>{e.label_en}</td>
+                        <td className="num mono">{e.value_min}–{e.value_max}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
+            <p className="source-note" style={{ marginTop: 10 }}>
+              ที่มา: <a href={lines[0].sourceUrl} target="_blank" rel="noopener noreferrer">คู่มือทางการ gnjoy.com.tw</a> ผ่าน prontera.info
+            </p>
+          </div>
+        );
+      })()}
 
       {item.description && (
         <div className="card" style={{ marginTop: 20 }}>
