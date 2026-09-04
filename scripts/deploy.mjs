@@ -34,7 +34,11 @@ function loadEnv() {
   try {
     for (const line of fs.readFileSync('.env.local', 'utf8').split('\n')) {
       const match = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
-      if (match && !process.env[match[1]]) process.env[match[1]] = match[2];
+      // Quotes are shell syntax, not part of the value. COOLIFY_TOKEN is
+      // quoted in .env.local because it contains a pipe, and passing the
+      // quotes through to the Authorization header returned 401 on the first
+      // real run of this script.
+      if (match && !process.env[match[1]]) process.env[match[1]] = match[2].replace(/^["']|["']$/g, '');
     }
   } catch {
     // No file: every step below reports its own missing credential.
@@ -44,6 +48,18 @@ function loadEnv() {
 function arg(name) {
   const i = process.argv.indexOf(`--${name}`);
   return i >= 0 ? process.argv[i + 1] : null;
+}
+
+/**
+ * Git Bash rewrites a leading slash into a Windows path, so --path
+ * /database/maps arrives as C:/Program Files/Git/database/maps. Recover the
+ * site path rather than requesting a URL that cannot exist.
+ */
+function sitePath(raw) {
+  if (!raw) return null;
+  const stripped = raw.replace(new RegExp('^[A-Za-z]:[\\/](?:Program Files[\\/]Git)?', 'i'), '');
+  const withSlash = stripped.startsWith('/') ? stripped : '/' + stripped;
+  return withSlash.split(String.fromCharCode(92)).join('/');
 }
 
 function sh(command) {
@@ -88,7 +104,7 @@ function previewOnly({ shortSha, subject, filesChanged, path, verified, purged, 
 
 async function main() {
   loadEnv();
-  const path = arg('path');
+  const path = sitePath(arg('path'));
   const expect = arg('expect');
   const status = arg('status');
   const started = Date.now();
