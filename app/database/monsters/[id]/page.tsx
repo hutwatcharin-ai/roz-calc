@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import KillRatePanel from '@/components/KillRatePanel';
+import DamageEstimatePanel from '@/components/DamageEstimatePanel';
 import AddToPlanButton from '@/components/AddToPlanButton';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -266,6 +267,18 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             size={monster.size}
           />
           </div>
+
+          {/* Damage first, then the rate it produces: the panel below runs on
+              ดาเมจต่อครั้ง, and this is where that number comes from. */}
+          <DamageEstimatePanel
+            monsterName={monster.name_en}
+            size={monster.size}
+            element={monster.element}
+            elementLevel={monster.element_level}
+            def={monster.def}
+            level={monster.level}
+            vit={monster.vit}
+          />
 
           <KillRatePanel
             monsterHp={monster.hp}
