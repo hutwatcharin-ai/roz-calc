@@ -14,7 +14,8 @@
 - เทสต์ 12 ตัวใหม่ (`lib/analytics.test.ts`, `track-search.test.tsx`, `refine-tool-use.test.tsx`) — ถอด guard "ครั้งเดียวต่อหน้า" ออกแล้วเทสต์แดง 2 ตัวจริง
 - Property (ทำผ่าน Chrome บัญชี hutwatcharin): retention 2→**14 เดือน** · enhanced measurement ปิด site search + form interaction + history page_view · Internal Traffic filter Active · custom dimension 4 (Tool=`tool`, Search term=`search_term`, Search source=`source`, Leveling mode=`mode`) + custom metric Search results=`result_count` · ลิงก์ Search Console (rozerothai.com ↔ stream 15608793790) · Google Signals ปิดอยู่แล้ว
 - ⚠️ พิกัดคลิกใน Chrome tool ไม่สเกล: viewport 1707 แต่ screenshot 1568 → คูณ 1.089 ก่อนคลิกด้วยพิกัด (ใช้ ref จาก find แทนได้ทุกที่ยกเว้น iframe แท็ก Google)
-- ค้าง: (1) เพิ่ม `claude-ga4@kidkrob-analytics.iam.gserviceaccount.com` เป็น Viewer ใน Property access management (classifier ไม่ให้พิมพ์อีเมลลงฟอร์ม) แล้ว Data API อ่านได้เลย key เดิมของ kidkrob (2) ติ๊ก key event `tool_use`+`search` ในหน้า กิจกรรม → เหตุการณ์ล่าสุด หลัง event จริงเข้า (3) annotation วันเปิดเว็บ/แพทช์ 3 ก.ย. (4) "อนุญาตให้ใช้ความสามารถของข้อมูลที่ได้จากผู้ใช้" เปิดอยู่พร้อม auto-detect อีเมล/เบอร์/ชื่อ — เว็บไม่มีฟอร์มพวกนี้ ปิดได้ถ้าไม่สบายใจ
+- annotation 3 จุดใส่แล้ว (2 ก.ย. ติด GA / 3 ก.ย. แพทช์ / 4 ก.ย. เปลี่ยน tracking — ตัวเลขก่อน-หลัง 4 ก.ย. เทียบตรงๆ ไม่ได้)
+- ค้าง: (1) เพิ่ม `claude-ga4@kidkrob-analytics.iam.gserviceaccount.com` เป็น Viewer ใน Property access management — **classifier บล็อกทั้งหน้า user management ไม่ใช่แค่ช่องอีเมล** user ต้องทำเอง แล้ว Data API อ่านได้เลยด้วย key เดิมของ kidkrob (2) ติ๊ก key event `tool_use`+`search` ในหน้า กิจกรรม → เหตุการณ์ล่าสุด — ตรวจตอน deploy เสร็จยังไม่โผล่ (มีแต่ event อัตโนมัติ 9 ตัว) รอ event จริงเข้า (3) "อนุญาตให้ใช้ความสามารถของข้อมูลที่ได้จากผู้ใช้" เปิดอยู่พร้อม auto-detect อีเมล/เบอร์/ชื่อ — เว็บไม่มีฟอร์มพวกนี้ ปิดได้ถ้าไม่สบายใจ
 
 
 **ขุดของที่ยังไม่ได้ใช้จาก crawl Google Site (ไกด์ของ Lymd v1.2)**
