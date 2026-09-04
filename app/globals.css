@@ -1788,7 +1788,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   image-rendering: pixelated;
   border: 1px solid var(--hair);
   border-radius: 8px;
-  background: #000;
+  background: var(--panel);
 }
 .mapimg figcaption {
   margin-top: 6px;

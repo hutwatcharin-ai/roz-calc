@@ -122,13 +122,13 @@ export default async function MapDetailPage({ params }: { params: { code: string
         <figure className="mapimg">
           {/* 205x205 pixel minimap: scaled up it must stay crisp, and it is
               decorative next to the monster table, so the caption carries the
-              credit and the alt text stays short. */}
+              credit and the alt text stays short. Not lazy -- it sits above
+              the fold, and a lazy image there paints as an empty box first. */}
           <img
             src={picture.src}
             alt={`แผนที่ ${name}`}
             width={205}
             height={205}
-            loading="lazy"
             decoding="async"
           />
           <figcaption>
