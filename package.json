@@ -8,6 +8,7 @@
     "test": "vitest run",
     "import-data": "tsx scripts/import-data.ts",
     "mirror-skill-icons": "tsx scripts/mirror-skill-icons.ts",
+    "mirror-map-images": "node scripts/mirror-map-images.mjs",
     "seed-thai-terms": "tsx scripts/seed-thai-terms.ts",
     "check-monster-images": "tsx scripts/check-monster-images.ts",
     "verify:elements": "tsx scripts/compare-element-tables.ts",

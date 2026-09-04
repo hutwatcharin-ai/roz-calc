@@ -9,6 +9,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import MapMonsterTable from '@/components/MapMonsterTable';
 import { isCVariant } from '@/lib/c-variant';
 import { getMapCanonical } from '@/lib/map-canonical';
+import { mapImage } from '@/lib/map-image';
 
 export const revalidate = 86400;
 
@@ -84,6 +85,9 @@ export default async function MapDetailPage({ params }: { params: { code: string
   // Challenge clones stay in the static HTML (this page is ISR) but carry the
   // cvariant class, hidden by CSS until the player opts in via the toggle.
   const cCount = monsters.filter((m: any) => isCVariant(m.name_en)).length;
+  // Not every map has a picture, so this is null on 149 of them and the block
+  // below disappears rather than leaving a broken image behind.
+  const picture = mapImage(code);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -114,6 +118,25 @@ export default async function MapDetailPage({ params }: { params: { code: string
         มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
         {cCount > 0 && ` (+${cCount} มอน Challenge)`}
       </p>
+      {picture && (
+        <figure className="mapimg">
+          {/* 205x205 pixel minimap: scaled up it must stay crisp, and it is
+              decorative next to the monster table, so the caption carries the
+              credit and the alt text stays short. */}
+          <img
+            src={picture.src}
+            alt={`แผนที่ ${name}`}
+            width={205}
+            height={205}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            แผนที่ย่อ · ที่มา ratemyserver.net
+            {picture.fromCode && ` (ไฟล์ชื่อ ${picture.fromCode})`}
+          </figcaption>
+        </figure>
+      )}
       <MapMonsterTable monsters={monsters} cCount={cCount} />
     </main>
   );

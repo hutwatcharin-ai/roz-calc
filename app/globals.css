@@ -1773,3 +1773,25 @@ a.cashlist__row:hover { background: var(--panel-2); }
   user-select: none;
 }
 .cvtoggle input { width: 16px; height: 16px; accent-color: var(--cyan); cursor: pointer; }
+
+
+/* Mirrored minimap on a map page. Pixel art, so it is scaled by whole pixels
+   and never smoothed; it sits above the monster table and shrinks with the
+   column on a phone. */
+.mapimg {
+  margin: 16px 0 0;
+}
+.mapimg img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  image-rendering: pixelated;
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  background: #000;
+}
+.mapimg figcaption {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--faint);
+}
