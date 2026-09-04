@@ -4,6 +4,19 @@
 
 ## 4 ก.ย. 2026 — ถอดสูตรจาก prontera แล้วเอามาปรับของเรา
 
+**GA4 ตั้งค่าให้ตอบคำถามได้จริง (grill-me → ทำครบทั้งโค้ดและ property)**
+- คำถามที่ต้องตอบได้: "คนใช้ tool จริงไหมหรือแค่เปิดดู" กับ "คนค้นหาอะไรแล้วไม่เจอ" — เลือก 3 event เท่านั้น ตั้งใจไม่ทำมากกว่านี้ (ชื่อ event เปลี่ยนทีหลังไม่ได้ กราฟจะขาดเป็นสองท่อน)
+- โค้ด: `lib/analytics.ts` (`track`/`reportToolUse`/`gaBootstrap`) + `components/Analytics.tsx` ส่ง `page_view` เองทุก route change พร้อม `content_group` (home/database/tools/guides/news) เพราะ page_view อัตโนมัติยิงก่อนหน้าใหม่ render ทำให้ group ช้าไป 1 หน้า → config `send_page_view:false` + ปิด "page changes based on browser history" ใน enhanced measurement (ไม่งั้น page_view ซ้ำ 2 เท่า)
+- `search` ยิงจาก `TrackSearch` ใน `FilterState` (ครอบ 8 หน้า list ที่ป้าย "คำค้น") + DropSearch — param `search_term`/`result_count`/`source` · ยิงครั้งเดียวต่อคำ (เปลี่ยนหน้า 2 ไม่นับซ้ำ) · `result_count: 0` = คำที่หาไม่เจอ
+- `tool_use` ผ่าน hook `useToolUse(tool, params, armed)` — ยิงตอน**เปลี่ยน input ครั้งแรกหลังพร้อม** ครั้งเดียวต่อหน้าต่อ tool (`reportToolUse` เก็บใน module Map ให้ component หลายตัวของ tool เดียวแชร์กัน) · `armed` กันการโหลด localStorage ตอน mount ไม่ให้นับเป็นการใช้ · hit-flee เป็น form submit เลยนับตอน table mount (key = path+query ให้ submit ซ้ำนับใหม่)
+- `?internal=1` ตั้ง flag `roz-calc:internal` ใน localStorage → bootstrap ส่ง `traffic_type=internal` → Data filter "Internal Traffic" (มีอยู่แล้ว) เปลี่ยนจาก Testing เป็น **Active** · ไม่ต้องมีกฎ IP · `?internal=0` ล้าง
+- `NEXT_PUBLIC_GA_DEBUG=1` ทำให้ GA โหลดบน build ที่ไม่ใช่ production + `debug_mode:true` → เห็นใน DebugView โดยไม่ปนรายงาน · พิสูจน์แล้วบน `next start -p 3177`: DebugView เห็น page_view(content_group=tools) → tool_use(refine) → search(poring, 9 rows, monsters) ครบ page_view ไม่ซ้ำ
+- เทสต์ 12 ตัวใหม่ (`lib/analytics.test.ts`, `track-search.test.tsx`, `refine-tool-use.test.tsx`) — ถอด guard "ครั้งเดียวต่อหน้า" ออกแล้วเทสต์แดง 2 ตัวจริง
+- Property (ทำผ่าน Chrome บัญชี hutwatcharin): retention 2→**14 เดือน** · enhanced measurement ปิด site search + form interaction + history page_view · Internal Traffic filter Active · custom dimension 4 (Tool=`tool`, Search term=`search_term`, Search source=`source`, Leveling mode=`mode`) + custom metric Search results=`result_count` · ลิงก์ Search Console (rozerothai.com ↔ stream 15608793790) · Google Signals ปิดอยู่แล้ว
+- ⚠️ พิกัดคลิกใน Chrome tool ไม่สเกล: viewport 1707 แต่ screenshot 1568 → คูณ 1.089 ก่อนคลิกด้วยพิกัด (ใช้ ref จาก find แทนได้ทุกที่ยกเว้น iframe แท็ก Google)
+- ค้าง: (1) เพิ่ม `claude-ga4@kidkrob-analytics.iam.gserviceaccount.com` เป็น Viewer ใน Property access management (classifier ไม่ให้พิมพ์อีเมลลงฟอร์ม) แล้ว Data API อ่านได้เลย key เดิมของ kidkrob (2) ติ๊ก key event `tool_use`+`search` ในหน้า กิจกรรม → เหตุการณ์ล่าสุด หลัง event จริงเข้า (3) annotation วันเปิดเว็บ/แพทช์ 3 ก.ย. (4) "อนุญาตให้ใช้ความสามารถของข้อมูลที่ได้จากผู้ใช้" เปิดอยู่พร้อม auto-detect อีเมล/เบอร์/ชื่อ — เว็บไม่มีฟอร์มพวกนี้ ปิดได้ถ้าไม่สบายใจ
+
+
 **ขุดของที่ยังไม่ได้ใช้จาก crawl Google Site (ไกด์ของ Lymd v1.2)**
 - **`/guides/codes` โค้ดรับของ 18 โค้ด** — กรอกที่บัญชี GNJOY ของเข้า RODEX · เขียนชัดว่าเป็นโค้ดช่วงเปิดเซิร์ฟ อาจหมดอายุ และเว็บนี้ไม่ได้ทดสอบเอง
 - **สีรัศมีตอนของตกพื้น = จำนวนออปชั่นสุ่ม** (ฟ้า 1 · เหลือง 2 · ม่วง 3 · เขียว 4/แดง 5 ต้นทางเขียนว่า "to be checked" → ติดป้ายยังไม่ยืนยัน) ใส่ในการ์ดออปชั่นสุ่มบนหน้าอุปกรณ์

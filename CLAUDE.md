@@ -10,6 +10,7 @@
 - **หลัง deploy ทุกครั้ง: `npm run purge`** (Cloudflare cache HTML 24 ชม. redeploy ไม่บัสต์ให้ — เคยเสิร์ฟ /about เก่า Age 8,474 วิ หลัง deploy สำเร็จ) · ต้องมี `CLOUDFLARE_ZONE_ID` + `CLOUDFLARE_API_TOKEN` (สิทธิ์ Zone > Cache Purge เท่านั้น) ใน `.env.local` · ถ้ายังไม่มี token ต้องกด Purge Everything ในแดชบอร์ดเอง
 - ⚠️ status ของ Coolify (`/api/v1/deployments/<uuid>`) เชื่อไม่ได้ — 3 ก.ย. ค้าง `running` ทั้งที่ container สลับแล้ว · เช็คของจริงที่ origin ตรงๆ: `curl -k --resolve rozerothai.com:443:207.148.123.125 https://rozerothai.com/<path>` (ข้าม Cloudflare)
 - แก้ข้อมูลใน DB แล้วจะ verify ในเครื่อง: ลบ `.next/cache/fetch-cache` ก่อน build ไม่งั้นเห็นค่าเก่า (Next Data Cache ข้าม build)
+- GA4 (`G-ZKTNY2H104`, property 552516626): event มีแค่ 3 — `page_view`(+content_group) / `search` / `tool_use` — **ห้ามเปลี่ยนชื่อ event/param** (ประวัติแตก) ทุกอย่างผ่าน `lib/analytics.ts` · ทดสอบในเครื่อง: build ด้วย `NEXT_PUBLIC_GA_DEBUG=1` แล้วดู DebugView · เปิดเว็บด้วย `?internal=1` ครั้งเดียวต่อเบราว์เซอร์เพื่อไม่ให้ตัวเองปนใน report · property ปิด history-based page_view ไว้ ถ้าเอา `send_page_view:false` ออกจะได้ page_view ซ้ำ
 
 ## ฐานข้อมูล (Supabase, project `qxqxpnqrchzdpvqpsjvv`)
 
