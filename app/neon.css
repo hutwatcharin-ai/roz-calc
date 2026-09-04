@@ -1,0 +1,94 @@
+/* app/neon.css -- the "neon arcade" layer. Three levels were built and
+   screenshotted side by side on 4 Sep 2026 (glow only / + arcade-floor grid /
+   + arcade extras); the user picked the full one.
+
+   Nothing here changes layout, copy or the contrast of text on its
+   background; it only adds light. Every glow is a box-shadow or text-shadow,
+   never a filter, so paint stays cheap on a phone. Imported at the top of
+   globals.css, so every selector carries a leading `html` to outrank the
+   plain class rules that follow it. */
+
+:root {
+  --glow-yellow: rgba(255, 229, 61, 0.45);
+  --glow-cyan: rgba(61, 232, 255, 0.45);
+  --glow-pink: rgba(255, 61, 154, 0.45);
+}
+
+/* ---------- glow ---------- */
+html .card--pink, html .qcard--pink { box-shadow: 4px 4px 0 var(--pink), 0 0 22px var(--glow-pink); }
+html .card--cyan, html .qcard--cyan { box-shadow: 4px 4px 0 var(--cyan), 0 0 22px var(--glow-cyan); }
+html .card--yellow, html .qcard--yellow { box-shadow: 4px 4px 0 var(--yellow), 0 0 22px var(--glow-yellow); }
+
+html .brand__mark em { text-shadow: 0 0 10px var(--glow-yellow), 0 0 22px var(--glow-yellow); }
+html .pagehead__title,
+html h1.pagehead__title { text-shadow: 0 0 18px rgba(61, 232, 255, 0.3); }
+
+html .topnav a.on,
+html .subnav a.on,
+html .modebar__tab--on { box-shadow: 0 0 14px var(--glow-yellow); }
+html .btn:hover,
+html .btn:focus-visible { box-shadow: 0 0 16px var(--glow-yellow); }
+
+html .subnav a:hover,
+html .moncard:hover,
+html .itemcard:hover,
+html .chip:hover,
+html .filterchip:hover { box-shadow: 0 0 12px var(--glow-cyan); border-color: var(--cyan); }
+
+html input:focus-visible,
+html select:focus-visible {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 1px var(--cyan), 0 0 14px var(--glow-cyan);
+}
+
+html .topbar { border-bottom-color: rgba(61, 232, 255, 0.35); box-shadow: 0 1px 18px rgba(61, 232, 255, 0.12); }
+
+/* ---------- arcade floor ---------- */
+html body {
+  background-color: var(--ground);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(61, 232, 255, 0.10), transparent 60%),
+    linear-gradient(rgba(143, 134, 196, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143, 134, 196, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 36px 36px;
+  background-attachment: fixed;
+}
+/* Panels stay solid so the grid never runs behind text. */
+html .card, html .qcard { background-color: var(--panel); }
+html .topbar { background-color: var(--ground); }
+
+/* ---------- arcade extras ---------- */
+/* Chromatic split on the biggest title only -- one per page, never on body text. */
+html .pagehead__title, html h1.pagehead__title {
+  text-shadow: 2px 0 0 rgba(255, 61, 154, 0.55), -2px 0 0 rgba(61, 232, 255, 0.55), 0 0 18px rgba(61, 232, 255, 0.3);
+}
+html .brand__mark { text-shadow: 1px 0 0 rgba(255, 61, 154, 0.6), -1px 0 0 rgba(61, 232, 255, 0.6); }
+
+/* Counters read like an arcade score. */
+html .sitestats__count,
+html .answer__value { text-shadow: 0 0 12px var(--glow-yellow); }
+html .sitestats__item { border-color: rgba(255, 229, 61, 0.35); }
+
+/* Active nav gets the ▶ cursor of a menu screen. */
+html .topnav a.on::before { content: '▶'; font-size: 9px; margin-right: 6px; animation: neon-blink 1.1s steps(1) infinite; }
+@keyframes neon-blink { 50% { opacity: 0; } }
+
+/* Hi-score treatment for the first three rows of a ranked table. */
+html .data-table tr:nth-child(1) td:first-child { color: var(--yellow); text-shadow: 0 0 10px var(--glow-yellow); }
+html .data-table tr:nth-child(2) td:first-child { color: var(--cyan); text-shadow: 0 0 10px var(--glow-cyan); }
+html .data-table tr:nth-child(3) td:first-child { color: var(--pink); text-shadow: 0 0 10px var(--glow-pink); }
+
+/* Corner brackets on cards, like a cabinet bezel. */
+html .card, html .qcard { position: relative; }
+html .card::after, html .qcard::after {
+  content: '';
+  position: absolute; inset: 6px;
+  pointer-events: none;
+  border: 1px solid transparent;
+  border-image: linear-gradient(135deg, rgba(61, 232, 255, 0.5), transparent 30%, transparent 70%, rgba(255, 61, 154, 0.5)) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .topnav a.on::before { animation: none; }
+}

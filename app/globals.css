@@ -1,4 +1,5 @@
 /* app/globals.css */
+@import './neon.css';
 :root {
   --ground: #0B0820;
   --panel: #150E33;
