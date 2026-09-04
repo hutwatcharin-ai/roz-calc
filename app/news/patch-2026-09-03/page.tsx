@@ -10,10 +10,6 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 const PATH = '/news/patch-2026-09-03';
 const PUBLISHED = '2026-09-02T12:00:00+07:00';
 const MODIFIED = '2026-09-03T16:30:00+07:00';
-// When we last checked the source database for post-patch content. Written by
-// hand on each check rather than rendered from the clock: a live timestamp
-// would keep claiming the check happened whenever the page is rebuilt.
-const STATUS_CHECKED = '3 ก.ย. 16:15 น.';
 
 export const metadata = {
   title: 'แพทช์ 3 ก.ย. 2569 Ragnarok Zero — เลเวล 60, อาชีพ 2, ดันเจี้ยนใหม่',
@@ -66,18 +62,6 @@ export default function PatchNotePage() {
         สรุปประกาศทางการเป็นภาษาไทย (ประกาศ 2 ก.ย. 2569) — เป็นแพทช์ใหญ่ที่สุดตั้งแต่เปิดเซิร์ฟ
       </p>
 
-      {/* Status, not a claim about the game: what this page can verify is the
-          announced window and whether our own database has the new content
-          yet. Whether the server actually came back on time is not something
-          we can check from here, so it is not stated as fact. */}
-      <section className="card card--cyan" style={{ marginTop: 20 }}>
-        <h2 className="section-title">สถานะตอนนี้</h2>
-        <p style={{ marginTop: 8, maxWidth: '65ch' }}>
-          เลยเวลาเปิดเซิร์ฟที่ประกาศไว้ (11:15 น. วันนี้) แล้ว —
-          แต่ข้อมูลของใหม่ยังไม่เข้าเว็บนี้ เพราะแหล่งอ้างอิงที่เราดึงข้อมูลยังไม่อัปเดตหน้าของเขา
-          (เช็คล่าสุด {STATUS_CHECKED}) พอมีข้อมูลจะ import แล้วมอน/แมพ/เควสใหม่จะขึ้นเองทั้งเว็บ
-        </p>
-      </section>
 
       <section className="card card--yellow" style={{ marginTop: 14 }}>
         <h2 className="section-title">ปิดปรับปรุงเมื่อไหร่ (เวลาไทย)</h2>
@@ -119,18 +103,10 @@ export default function PatchNotePage() {
         <ul style={{ marginTop: 8, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
           <li>ดันไป 60 — ช่วง 46–60 ตีอะไรคุ้มดูที่ <Link href="/guides/farm-guide">จุดฟาร์มแนะนำ</Link> (มอนเก่า ข้อมูลครบอยู่แล้ว)</li>
           <li>เปลี่ยนอาชีพ 2 แล้ว — เช็คว่าอุปกรณ์ที่ถืออยู่ยังใส่ได้ไหมที่ <Link href="/database/equipment">ฐานข้อมูลอุปกรณ์</Link> (กรองตามอาชีพได้)</li>
-          <li>ของใหม่ยังไม่มีตัวเลขในเว็บ — มอนใหม่ในดันเจี้ยนใหม่ก็เช่นกัน กรอก HIT/FLEE ที่แถบตัวละครไว้ก่อน พอข้อมูลเข้า <Link href="/tools/hit-flee">คำนวณ Hit/Flee</Link> จะคิดให้ทันที</li>
+          <li>เลือกที่ฟาร์มช่วงใหม่ — ใส่เลเวลที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> แล้วดูว่าแมพไหนคุ้มสุด</li>
         </ul>
       </section>
 
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title">ของใหม่จะเข้าเว็บเมื่อไหร่</h2>
-        <p style={{ marginTop: 8, maxWidth: '65ch' }}>
-          ทันทีที่แหล่งอ้างอิงลงข้อมูลของแพทช์นี้ — มอนสเตอร์ ไอเทม อุปกรณ์ Raid และเควสใหม่ (แปลไทยครบเหมือนเดิม)
-          จะ import เข้าฐานข้อมูลแล้วขึ้นทุกหน้าที่เกี่ยวข้อง จนกว่าจะถึงตอนนั้นเว็บนี้จะไม่เดาตัวเลขของใหม่ให้
-          ช่องไหนไม่มีข้อมูลจะขึ้น &ldquo;—&rdquo; ไม่ใช่เลขที่แต่งขึ้น
-        </p>
-      </section>
 
       <p className="source-note" style={{ marginTop: 16 }}>
         <strong>ที่มา:</strong> ประกาศทางการ Ragnarok Zero: Global (gnjoy) หัวข้อ &ldquo;Scheduled Maintenance Reminder – 3rd September 2026&rdquo; ลงวันที่ 2 ก.ย. 2569 · หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ

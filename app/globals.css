@@ -1440,24 +1440,23 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 /* Mode tabs on the merged farm tool: three questions, one page. Each tab
    carries a line saying what it answers, because "AFK" and "เก็บเลเวล" alone
    do not tell a new player which one they want. */
-.modebar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.modebar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
 .modebar__tab {
-  flex: 1 1 200px;
-  text-align: left;
-  padding: 10px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
   border: 1px solid var(--hair);
-  border-radius: var(--radius);
+  border-radius: 999px;
   background: var(--panel);
   color: var(--text);
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
 }
 .modebar__tab:hover { border-color: var(--cyan); }
-.modebar__tab--on { border-color: var(--cyan); background: var(--panel-2); box-shadow: inset 0 -2px 0 var(--cyan); }
-.modebar__label { font: 700 14px/1.2 var(--font-chakra), sans-serif; }
-.modebar__blurb { font-size: 11.5px; color: var(--faint); }
+.modebar__tab--on { border-color: var(--cyan); background: var(--panel-2); color: var(--cyan); }
+.modebar__icon { image-rendering: pixelated; flex: none; }
+.modebar__label { font: 600 13px/1.2 var(--font-sarabun), sans-serif; }
+.modebar__blurb { font-size: 12px; color: var(--faint); margin: 0 0 14px; }
 
 /* The input strip a calculator owns. Deliberately plainer than the character
    bar it replaces: it sits inside the page, above the results it feeds, and

@@ -21,10 +21,13 @@ import type { Spot } from '@/lib/leveling-spots';
 
 export type FarmMode = 'level' | 'afk' | 'plan';
 
-const MODES: { key: FarmMode; label: string; blurb: string }[] = [
-  { key: 'level', label: 'เก็บเลเวล', blurb: 'แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP' },
-  { key: 'afk', label: 'ทิ้งบอท AFK', blurb: 'มอนที่ไม่โจมตีก่อนและตายหมัดเดียว' },
-  { key: 'plan', label: 'รายการของฉัน', blurb: 'มอนที่กดเพิ่มเข้าแผนไว้' },
+// Icon + two or three words on the tab, and the sentence only under the tab
+// you are on: three explanations stacked made the row taller than the first
+// result it was meant to introduce.
+const MODES: { key: FarmMode; icon: string; label: string; blurb: string }[] = [
+  { key: 'level', icon: '/images/items/607.gif', label: 'เก็บเลเวล', blurb: 'แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP ที่เก็บได้' },
+  { key: 'afk', icon: '/images/items/610.gif', label: 'ทิ้งบอท AFK', blurb: 'มอนที่ไม่โจมตีก่อนและคุณฆ่าได้ในหมัดเดียว' },
+  { key: 'plan', icon: '/images/items/512.gif', label: 'รายการของฉัน', blurb: 'เฉพาะมอนที่กดปุ่ม “เพิ่มเข้าแผน” ไว้' },
 ];
 
 export default function FarmSpots({
@@ -76,11 +79,12 @@ export default function FarmSpots({
             className={`modebar__tab${mode === m.key ? ' modebar__tab--on' : ''}`}
             onClick={() => setMode(m.key)}
           >
+            <img src={m.icon} alt="" width={18} height={18} className="modebar__icon" />
             <span className="modebar__label">{m.label}</span>
-            <span className="modebar__blurb">{m.blurb}</span>
           </button>
         ))}
       </div>
+      <p className="modebar__blurb">{MODES.find((m) => m.key === mode)?.blurb}</p>
 
       {mode === 'level' && <LevelingSpots spots={spots} level={level} />}
 
