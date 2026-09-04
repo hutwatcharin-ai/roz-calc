@@ -197,6 +197,11 @@ table { border-collapse: collapse; width: 100%; }
    are visible with no interaction; brand and search share the first line
    (both are short), and .subnav moves below .topnav. */
 @media (max-width: 640px) {
+  /* Not sticky on a phone. With the brand, four nav links and the 3x3
+     section grid all wrapped, the bar is ~360px tall -- pinned, it left
+     under half of an 840px screen for the page (user screenshot of a monster
+     page, 4 Sep). */
+  .topbar { position: static; }
   .topnav {
     flex-basis: 100%;
     flex-wrap: wrap;
@@ -917,11 +922,18 @@ a.qcard:hover { background: var(--panel-2); }
 
    .stat-table is a two-column label/value list, so it needs no transformation,
    only room: the label column stops forcing a minimum width and long labels
-   wrap instead of pushing the value off-screen. */
+   wrap instead of pushing the value off-screen.
+
+   The value cell wraps too. It used to be nowrap so a number would never
+   break, but the monster page puts a sentence under the number ("หายไป 40%
+   เพราะขนาดล้วน ๆ"), and nowrap on that sentence forced the value column
+   past the screen edge and squeezed the label column to one word per line
+   (user screenshot, 4 Sep). A bare number has no space to break at, so it
+   never wrapped anyway. */
 @media (max-width: 560px) {
   .stat-table td:first-child,
   .stat-table th[scope='row'] { width: auto; padding-inline-start: 0; }
-  .stat-table td.num { padding-inline-end: 0; white-space: nowrap; }
+  .stat-table td.num { padding-inline-end: 0; white-space: normal; }
   .stat-table td, .stat-table th { padding-block: 10px; }
 }
 
