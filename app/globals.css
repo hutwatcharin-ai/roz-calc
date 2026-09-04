@@ -1808,3 +1808,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   font-size: 12px;
   color: var(--faint);
 }
+
+/* Spawn count inside a map chip on the monster page: the number a player
+   actually compares maps by, kept quiet next to the name. */
+.chip__count { margin-left: 6px; font: 500 12px/1 var(--font-mono), monospace; color: var(--faint); }

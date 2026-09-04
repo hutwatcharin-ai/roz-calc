@@ -15,6 +15,8 @@ import MonsterSizePanel from '@/components/MonsterSizePanel';
 import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
 import RecordVisit from '@/components/RecordVisit';
 import { itemHref } from '@/lib/item-href';
+import { getMapCanonical } from '@/lib/map-canonical';
+import { foldSpawns, type SpawnRow } from '@/lib/spawn-chips';
 
 // ISR (SEO audit Critical-adjacent, perf #1): game reference data changes only
 // when we import — cache the rendered page and let the CDN serve it. A deploy
@@ -94,10 +96,14 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // treatment above; these three were missing it.
   const { data: spawns, error: spawnsError } = await db
     .from('monster_spawns')
-    .select('map_code, map_display_name')
+    .select('map_code, map_display_name, amount')
     .eq('monster_id', id)
     .order('map_code');
   if (spawnsError) console.error('monster spawns query failed', spawnsError);
+  // 28 rows become 11 chips: channel copies fold into the map that owns the
+  // page, and a name shared by several maps gets its code's number.
+  const canonical = await getMapCanonical();
+  const spawnChips = foldSpawns((spawns ?? []) as SpawnRow[], canonical.byCode);
 
   const { data: monsterSkills, error: skillsError } = await db
     .from('monster_skills')
@@ -396,10 +402,15 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
               <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลจุดเกิด</p>
             ) : (
               <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {(spawns ?? []).map((s: any) => (
-                  <li key={s.map_code}>
-                    <Link href={`/database/maps/${encodeURIComponent(s.map_code)}`} className="chip">
-                      {s.map_display_name ?? s.map_code}
+                {spawnChips.map((c) => (
+                  <li key={c.code}>
+                    <Link
+                      href={`/database/maps/${encodeURIComponent(c.code)}`}
+                      className="chip"
+                      title={`${c.code}${c.channels > 0 ? ` · อีก ${c.channels} ช่อง` : ''}`}
+                    >
+                      {c.label}
+                      {c.amount != null && <span className="chip__count">×{c.amount}</span>}
                     </Link>
                   </li>
                 ))}
