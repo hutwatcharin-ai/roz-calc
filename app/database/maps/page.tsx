@@ -1,10 +1,11 @@
 // app/database/maps/page.tsx
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { getMapCanonical } from '@/lib/map-canonical';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
-import { escapeLikePattern } from '@/lib/like-escape';
 
 export const revalidate = 86400;
 
@@ -26,52 +27,48 @@ export default async function MapsPage({
 
   const db = supabaseBrowser();
 
-  // map_stats is one row per map -- 497 of them, inside the 1,000-row cap --
-  // so this pages in SQL with an exact count instead of pulling 3,032 spawn
-  // rows across four requests and grouping them here. The other three list
-  // pages fetch everything and paginate/clamp in memory, so an out-of-range
-  // page never reaches Postgres; this page pages in SQL, so the requested
-  // page must be clamped to what the search actually matches *before* the
-  // ranged request is built, or an out-of-range page (e.g. ?page=11 when the
-  // search only fills 10) hits Postgres as a 416 range-not-satisfiable error,
-  // which supabase-js reports the same way as a real outage.
-  //
-  // That clamp needs a row count, and a count only comes back from a query --
-  // so this runs the filter twice: once head-only (count, no rows) to learn
-  // how many pages exist, then again with the clamped range for the actual
-  // rows. The extra round trip is the price of never asking Postgres for a
-  // range it cannot serve.
-  function filtered(head: boolean) {
-    let query = db
+  // 497 rows, well inside the 1,000-row cap, so this fetches the set and pages
+  // in memory like the other list pages. It used to page in SQL, which needed
+  // a head-count round trip and a clamp to avoid asking Postgres for a range
+  // it could not serve; folding channel copies out of the list made that
+  // arithmetic wrong anyway, because the row count and the page count stopped
+  // agreeing with what the reader sees.
+  const { data: allMaps, error: dataError } = await fetchAllRows<{
+    map_code: string;
+    map_display_name: string | null;
+    monster_count: number;
+  }>((from, to) =>
+    db
       .from('map_stats')
-      .select('map_code, map_display_name, monster_count', { count: 'exact', head });
-    if (q) {
-      const needle = escapeLikePattern(q);
-      query = query.ilike('search_text', `%${needle}%`);
-    }
-    return query;
-  }
-
-  const { count, error: countError } = await filtered(true);
-  if (countError) {
-    console.error('maps count query failed', countError);
-  }
-
-  const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-  const from = (safePage - 1) * PAGE_SIZE;
-
-  // Ordered by monster_count then map_code. map_code is unique in this view,
-  // so the sort is total and paging is stable -- the property the raw table
-  // could not offer.
-  const { data: maps, error: dataError } = await filtered(false)
-    .order('monster_count', { ascending: false })
-    .order('map_code')
-    .range(from, from + PAGE_SIZE - 1);
+      .select('map_code, map_display_name, monster_count')
+      .order('monster_count', { ascending: false })
+      .order('map_code')
+      .range(from, to),
+  );
 
   if (dataError) {
     console.error('maps query failed', dataError);
   }
+
+  // One row per place, not per channel: gef_fild10 stands for gef_f10_a and
+  // gef_f10_b, which hold the same monsters. The count of folded channels
+  // rides along so the row can say so.
+  const canonical = await getMapCanonical();
+  const needle = q.trim().toLowerCase();
+  const rows = (allMaps ?? [])
+    .filter((m) => !canonical.byCode[m.map_code])
+    .filter(
+      (m) =>
+        !needle ||
+        m.map_code.toLowerCase().includes(needle) ||
+        (m.map_display_name ?? '').toLowerCase().includes(needle),
+    );
+
+  const count = rows.length;
+  const countError = canonical.failed;
+  const totalPages = Math.max(1, Math.ceil(count / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const maps = rows.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const error = Boolean(countError) || Boolean(dataError);
 
@@ -100,7 +97,7 @@ export default async function MapsPage({
         />
       )}
       <p style={{ color: 'var(--faint)', marginTop: 4, fontSize: 13 }}>
-        แสดงเฉพาะแมพที่มีมอนสเตอร์เกิด · บางแมพขึ้นเป็นรหัสเพราะไม่มีชื่อเรียกอื่น
+        แสดงเฉพาะแมพที่มีมอนสเตอร์เกิด · แมพเดียวกันคนละช่อง (เช่น _a, _b) ยุบเป็นแถวเดียว · บางแมพขึ้นเป็นรหัสเพราะไม่มีชื่อเรียกอื่น
       </p>
 
 

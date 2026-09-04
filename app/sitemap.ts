@@ -3,6 +3,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 import { itemHref } from '@/lib/item-href';
+import { getMapCanonical } from '@/lib/map-canonical';
 
 // Regenerated with the daily ISR window, same as the list pages.
 export const revalidate = 86400;
@@ -130,11 +131,12 @@ async function allQuestTowns(): Promise<Map<string, string>> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [monsterIds, itemIds, mapCodes, questTowns] = await Promise.all([
+  const [monsterIds, itemIds, mapCodes, questTowns, mapCanonical] = await Promise.all([
     allIds('monsters'),
     allIds('items'),
     allMapCodes(),
     allQuestTowns(),
+    getMapCanonical(),
   ]);
 
   return [
@@ -145,9 +147,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but
     // the column's type does not guarantee no others) that must survive the URL.
-    ...mapCodes.map((code) => ({
-      url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
-    })),
+    // Channel copies redirect to their canonical map, so listing them here
+    // would fill the sitemap with URLs that 308 -- the same soft-redirect
+    // report the equipment split had to avoid.
+    ...mapCodes
+      .filter((code) => !mapCanonical.byCode[code])
+      .map((code) => ({
+        url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
+      })),
     ...[...questTowns.entries()].map(([town, lastModified]) => ({
       url: `${SITE_URL}/database/quests/${encodeURIComponent(town)}`,
       lastModified,

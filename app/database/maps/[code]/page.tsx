@@ -4,10 +4,11 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import type { Metadata } from 'next';
 import { cache } from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
 import MapMonsterTable from '@/components/MapMonsterTable';
 import { isCVariant } from '@/lib/c-variant';
+import { getMapCanonical } from '@/lib/map-canonical';
 
 export const revalidate = 86400;
 
@@ -49,6 +50,19 @@ export async function generateMetadata({ params }: { params: { code: string } })
 
 export default async function MapDetailPage({ params }: { params: { code: string } }) {
   const code = decodeURIComponent(params.code);
+
+  // Channel copies (gef_f10_a and _b against gef_fild10) hold the same
+  // monsters in the same numbers -- 118 pages of identical content across
+  // different URLs. They send the reader to the one page instead. An event
+  // channel (_z, one monster more) or a boss room (b_, different monster) is
+  // not a copy and keeps its own page; the rule is in lib/map-variants.ts and
+  // reads the monster set, never the code's shape.
+  const canonical = await getMapCanonical();
+  const owner = canonical.byCode[code];
+  if (owner && owner !== code) {
+    permanentRedirect(`/database/maps/${encodeURIComponent(owner)}`);
+  }
+
   const { data: spawns, error } = await getMapSpawns(code);
 
   if (error) {
@@ -87,7 +101,15 @@ export default async function MapDetailPage({ params }: { params: { code: string
         ])}
       />
       <h1 className="pagehead__title">{name}</h1>
-      <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>{code}</p>
+      <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>
+        {code}
+        {/* The channels this page stands for. Naming them keeps the fold
+            honest: a player who typed gef_f10_a into the URL and landed here
+            can see why. */}
+        {(canonical.variantsOf.get(code) ?? []).length > 0 && (
+          <span> · อีก {canonical.variantsOf.get(code)!.length} ช่อง: {canonical.variantsOf.get(code)!.join(', ')}</span>
+        )}
+      </p>
       <p style={{ color: 'var(--dim)', marginTop: 10 }}>
         มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
         {cCount > 0 && ` (+${cCount} มอน Challenge)`}
