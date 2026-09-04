@@ -55,13 +55,20 @@ const POSITION_LABELS: Record<string, string> = {
 export default async function CostumesPage({
   searchParams,
 }: {
-  searchParams: { q?: string; type?: string; page?: string };
+  searchParams: { q?: string; type?: string; page?: string; sort?: string };
 }) {
   const q = searchParams.q ?? '';
   // Only values from the fixed list pass -- the param goes into a comparison,
   // never into SQL.
   const type = (POSITIONS as readonly string[]).includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  // Whitelist, never a passthrough: the value picks a comparison, and an
+  // unknown one falls back to the default rather than sorting by nothing.
+  const SORTS = {
+    name: { label: 'ชื่อ A-Z' },
+    slot: { label: 'ตำแหน่งสวม' },
+  } as const;
+  const sort = (searchParams.sort ?? 'name') in SORTS ? ((searchParams.sort ?? 'name') as keyof typeof SORTS) : 'name';
 
   const db = supabaseBrowser();
 
@@ -97,6 +104,15 @@ export default async function CostumesPage({
     return true;
   });
 
+  if (sort === 'slot') {
+    // Position first, then name inside it, so the order is total -- two
+    // costumes on the same slot must not swap places between requests.
+    filtered.sort(
+      (a, b) =>
+        (a.weapon_type ?? 'zzz').localeCompare(b.weapon_type ?? 'zzz') || a.name_en.localeCompare(b.name_en),
+    );
+  }
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const rows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
@@ -105,6 +121,7 @@ export default async function CostumesPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (type) params.set('type', type);
+    if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/costumes${qs ? `?${qs}` : ''}`;
@@ -149,6 +166,11 @@ export default async function CostumesPage({
           <option value="">ทุกตำแหน่ง</option>
           {POSITIONS.map((p) => (
             <option key={p} value={p}>{POSITION_LABELS[p] ?? p}</option>
+          ))}
+        </select>
+        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
+          {Object.entries(SORTS).map(([key, v]) => (
+            <option key={key} value={key}>เรียง: {v.label}</option>
           ))}
         </select>
         <button type="submit" className="btn">ค้นหา</button>

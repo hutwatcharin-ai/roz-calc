@@ -88,6 +88,7 @@ export default async function SkillsPage({
     type?: string | string[];
     tab?: string | string[];
     page?: string | string[];
+    sort?: string | string[];
   };
 }) {
   const q = firstParam(searchParams.q);
@@ -95,6 +96,13 @@ export default async function SkillsPage({
   const type = firstParam(searchParams.type);
   const tab = firstParam(searchParams.tab) === 'unreleased' ? 'unreleased' : 'ingame';
   const page = Math.max(1, Number(firstParam(searchParams.page)) || 1);
+  const SORTS = {
+    name: { label: 'ชื่อ A-Z' },
+    maxlv: { label: 'เลเวลสูงสุดมากก่อน' },
+    type: { label: 'ชนิดสกิล' },
+  } as const;
+  const sortParam = firstParam(searchParams.sort) || 'name';
+  const sort = sortParam in SORTS ? (sortParam as keyof typeof SORTS) : 'name';
 
   const { skills, error } = await allSkills();
 
@@ -120,6 +128,14 @@ export default async function SkillsPage({
     if (needle && !s.name.toLowerCase().includes(needle)) return false;
     return true;
   });
+
+  // Name is the tiebreak in every order: five skill names repeat and slug is
+  // the only unique key, so ties are broken on it to keep paging stable.
+  if (sort === 'maxlv') {
+    filtered.sort((a, b) => (b.max_level ?? 0) - (a.max_level ?? 0) || a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug));
+  } else if (sort === 'type') {
+    filtered.sort((a, b) => (a.type ?? 'zzz').localeCompare(b.type ?? 'zzz') || a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug));
+  }
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
@@ -150,13 +166,14 @@ export default async function SkillsPage({
 
   function buildHref(targetPage: number, overrides: Record<string, string> = {}) {
     const params = new URLSearchParams();
-    const next = { q, job, type, tab, ...overrides };
+    const next = { q, job, type, tab, sort, ...overrides };
     // The job filter only has a control on the in-game tab, and the two tabs
     // are a strict partition of isInGameSkill -- a canonical Zero-job value
     // can never match a row on the unreleased tab. Carrying it across a tab
     // switch would land the player on an unexplainable empty page with no
     // visible control to clear it, so switching tabs always drops it.
     if (next.tab !== tab) next.job = '';
+    if (next.sort && next.sort !== 'name') params.set('sort', next.sort);
     if (next.q) params.set('q', next.q);
     if (next.job) params.set('job', next.job);
     if (next.type) params.set('type', next.type);
@@ -210,6 +227,11 @@ export default async function SkillsPage({
           <option value="">ทุกชนิด</option>
           {types.map((t) => (
             <option key={t} value={t as string}>{t as string}</option>
+          ))}
+        </select>
+        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
+          {Object.entries(SORTS).map(([key, v]) => (
+            <option key={key} value={key}>เรียง: {v.label}</option>
           ))}
         </select>
         <button type="submit" className="btn">ค้นหา</button>

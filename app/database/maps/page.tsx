@@ -20,10 +20,16 @@ const PAGE_SIZE = 50;
 export default async function MapsPage({
   searchParams,
 }: {
-  searchParams: { q?: string; page?: string };
+  searchParams: { q?: string; page?: string; sort?: string };
 }) {
   const q = searchParams.q ?? '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  const SORTS = {
+    monsters: { label: 'มอนเยอะก่อน' },
+    name: { label: 'ชื่อ A-Z' },
+    code: { label: 'รหัสแมพ' },
+  } as const;
+  const sort = (searchParams.sort ?? 'monsters') in SORTS ? ((searchParams.sort ?? 'monsters') as keyof typeof SORTS) : 'monsters';
 
   const db = supabaseBrowser();
 
@@ -64,6 +70,12 @@ export default async function MapsPage({
         (m.map_display_name ?? '').toLowerCase().includes(needle),
     );
 
+  if (sort === 'name') {
+    rows.sort((a, b) => (a.map_display_name ?? a.map_code).localeCompare(b.map_display_name ?? b.map_code) || a.map_code.localeCompare(b.map_code));
+  } else if (sort === 'code') {
+    rows.sort((a, b) => a.map_code.localeCompare(b.map_code));
+  }
+
   const count = rows.length;
   const countError = canonical.failed;
   const totalPages = Math.max(1, Math.ceil(count / PAGE_SIZE));
@@ -75,6 +87,7 @@ export default async function MapsPage({
   function buildHref(targetPage: number) {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
+    if (sort !== 'monsters') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/maps${qs ? `?${qs}` : ''}`;
@@ -103,6 +116,11 @@ export default async function MapsPage({
 
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อหรือรหัสแมพ..." />
+        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
+          {Object.entries(SORTS).map(([key, v]) => (
+            <option key={key} value={key}>เรียง: {v.label}</option>
+          ))}
+        </select>
         <button type="submit" className="btn">ค้นหา</button>
       </form>
 

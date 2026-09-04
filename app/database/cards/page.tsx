@@ -32,11 +32,16 @@ function cardEffect(description: string | null): string | null {
 export default async function CardsPage({
   searchParams,
 }: {
-  searchParams: { q?: string; slot?: string; page?: string };
+  searchParams: { q?: string; slot?: string; page?: string; sort?: string };
 }) {
   const q = searchParams.q ?? '';
   const slot = searchParams.slot ?? '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  const SORTS = {
+    name: { label: 'ชื่อ A-Z' },
+    slot: { label: 'ช่องที่ใส่' },
+  } as const;
+  const sort = (searchParams.sort ?? 'name') in SORTS ? ((searchParams.sort ?? 'name') as keyof typeof SORTS) : 'name';
 
   const db = supabaseBrowser();
 
@@ -84,6 +89,12 @@ export default async function CardsPage({
     );
   });
 
+  if (sort === 'slot') {
+    // Cards with no "Equipped on" line sort last rather than first: an unknown
+    // slot is not a slot that comes before Accessory.
+    filtered.sort((a, b) => (a.slot ?? 'zzz').localeCompare(b.slot ?? 'zzz') || a.name_en.localeCompare(b.name_en));
+  }
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const rows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
@@ -92,6 +103,7 @@ export default async function CardsPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (slot) params.set('slot', slot);
+    if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/cards${qs ? `?${qs}` : ''}`;
@@ -125,6 +137,11 @@ export default async function CardsPage({
             <option key={s} value={s}>
               {s} ({n})
             </option>
+          ))}
+        </select>
+        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
+          {Object.entries(SORTS).map(([key, v]) => (
+            <option key={key} value={key}>เรียง: {v.label}</option>
           ))}
         </select>
         <button type="submit" className="btn">ค้นหา</button>
