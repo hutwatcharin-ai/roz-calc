@@ -10,7 +10,7 @@ import { describe, expect, it } from 'vitest';
 const layout = readFileSync(new URL('./layout.tsx', import.meta.url), 'utf8');
 
 describe('root layout provider wiring', () => {
-  it.each(['CharacterContextProvider', 'FarmPlanProvider'])(
+  it.each(['FarmPlanProvider'])(
     'renders <%s> around the app, not just imports it',
     (name) => {
       expect(layout).toContain(`<${name}>`);

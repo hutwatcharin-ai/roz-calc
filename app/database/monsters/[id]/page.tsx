@@ -7,8 +7,6 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
-import KillRatePanel from '@/components/KillRatePanel';
-import DamageEstimatePanel from '@/components/DamageEstimatePanel';
 import AddToPlanButton from '@/components/AddToPlanButton';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -267,25 +265,14 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             size={monster.size}
           />
           </div>
-
-          {/* Damage first, then the rate it produces: the panel below runs on
-              ดาเมจต่อครั้ง, and this is where that number comes from. */}
-          <DamageEstimatePanel
-            monsterName={monster.name_en}
-            size={monster.size}
-            element={monster.element}
-            elementLevel={monster.element_level}
-            def={monster.def}
-            level={monster.level}
-            vit={monster.vit}
-          />
-
-          <KillRatePanel
-            monsterHp={monster.hp}
-            expPerKill={monster.base_exp}
-            monsterName={monster.name_en}
-            hit100={mobThresholds(monster).hit100}
-          />
+          {/* No input boxes on a database page (4 Sep 2026): a player who came
+              to read stats gets stats. The one who wants their own numbers
+              follows this to the calculator, which opens on this monster. */}
+          <p style={{ marginTop: 20 }}>
+            <Link className="chiplink" href={`/tools/damage?monster=${monster.id}`}>
+              คำนวณดาเมจกับตัวนี้ →
+            </Link>
+          </p>
 
           {/* The two reference tables are thirty rows the summary above already
               read for the reader. Open on request rather than scrolled past. */}

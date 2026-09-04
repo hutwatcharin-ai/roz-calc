@@ -7,6 +7,10 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import DamagePicker from '@/components/DamagePicker';
+import MonsterDamageCalculator, { type CalcMonster } from '@/components/MonsterDamageCalculator';
+import { supabaseBrowser } from '@/lib/supabase';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { isCVariant } from '@/lib/c-variant';
 import { ELEMENTS } from '@/lib/element-table';
 import { SIZE_LABELS, SIZES, SIZE_TABLE } from '@/lib/size-table';
 
@@ -16,7 +20,35 @@ export const metadata = {
     'รวมตัวคูณธาตุกับตัวคูณขนาดของ Ragnarok Zero Global เข้าด้วยกัน — บอกว่าอาวุธที่ถืออยู่ตีเป้าหมายนั้นเข้ากี่เปอร์เซ็นต์ และควรเปลี่ยนเป็นธาตุอะไร',
 };
 
-export default function DamagePage() {
+export const revalidate = 86400;
+
+async function getMonsters(): Promise<CalcMonster[]> {
+  const db = supabaseBrowser();
+  const { data, error } = await fetchAllRows<CalcMonster>((from, to) =>
+    db
+      .from('monsters')
+      .select('id, name_en, level, hp, base_exp, def, vit, size, element, element_level, hit_100')
+      .order('level')
+      .range(from, to),
+  );
+  if (error) {
+    console.error('damage calculator monster query failed', error);
+    return [];
+  }
+  // Challenge clones duplicate their parent under a near-identical name and
+  // would double the length of every search result here.
+  return (data ?? []).filter((m) => !isCVariant(m.name_en));
+}
+
+export default async function DamagePage({
+  searchParams,
+}: {
+  searchParams: { monster?: string | string[] };
+}) {
+  const monsters = await getMonsters();
+  const raw = Array.isArray(searchParams.monster) ? searchParams.monster[0] : searchParams.monster;
+  const initialMonsterId = Number.isFinite(Number(raw)) && raw ? Number(raw) : null;
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <h1 className="pagehead__title">ตีตัวนี้ด้วยอะไรดี — ธาตุและอาวุธที่คูณแรงสุด</h1>
@@ -31,6 +63,13 @@ export default function DamagePage() {
         หน้านี้ไม่ได้เพิ่มตัวเลขใหม่ แค่คูณสองตารางที่มีอยู่แล้ว
       </p>
 
+      {/* The full chain, for the player who wants a number rather than a
+          multiplier: ATK in, damage and EXP/hour out. A monster page links
+          straight here with ?monster=<id>. */}
+      <h2 className="section-title" style={{ marginTop: 24 }}>ดาเมจจริงกับมอนตัวหนึ่ง</h2>
+      <MonsterDamageCalculator monsters={monsters} initialMonsterId={initialMonsterId} />
+
+      <h2 className="section-title" style={{ marginTop: 28 }}>เทียบธาตุกับขนาดล้วน ๆ</h2>
       <DamagePicker />
 
       <h2 className="section-title" style={{ marginTop: 28 }}>

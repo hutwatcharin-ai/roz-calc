@@ -5,7 +5,6 @@
 // monster in your level band with the chance you hit it and the chance it
 // hits you. GET params, not the character bar: this page must work as a
 // shareable link ("ดูตารางกู" in a game chat) with no setup.
-import HitFleePrefill from '@/components/HitFleePrefill';
 import HitFleeTable, { type HitFleeRow } from '@/components/HitFleeTable';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
@@ -100,7 +99,6 @@ export default async function HitFleePage({
         </div>
       )}
 
-      {!filled && <HitFleePrefill />}
       {!filled && (
         <p className="muted" style={{ marginTop: 18, maxWidth: '65ch' }}>
           ใส่เลเวลกับ HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วกดคำนวณ —

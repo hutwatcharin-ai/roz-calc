@@ -7,7 +7,6 @@ import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { FARM_PLAN_STORAGE_KEY } from '@/lib/farm-plan';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
-import { CharacterContextProvider } from '@/components/CharacterContextProvider';
 import FarmPlannerBoard from '@/components/FarmPlannerBoard';
 
 (globalThis as unknown as { IS_REACT_ACT_ENVIRONMENT: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -72,11 +71,9 @@ let root: Root;
 async function mountBoard() {
   await act(async () => {
     root.render(
-      <CharacterContextProvider>
         <FarmPlanProvider>
           <FarmPlannerBoard />
         </FarmPlanProvider>
-      </CharacterContextProvider>,
     );
   });
 }
@@ -142,8 +139,9 @@ describe('the planner page', () => {
     // and this is the guard against someone later "adding a useful total".
     window.localStorage.setItem(FARM_PLAN_STORAGE_KEY, '[1002,1004]');
     window.localStorage.setItem(
-      'roz-calc:character',
-      JSON.stringify({ level: 20, job: 'knight', vit: 20, damagePerHit: 200, attacksPerSecond: 2 }),
+      'roz-calc:tool-numbers',
+      // The tool's own numbers now: ASPD 150 is exactly 1 attack/second.
+      JSON.stringify({ level: 20, damagePerHit: 200, aspd: 150 }),
     );
     await mountBoard();
 

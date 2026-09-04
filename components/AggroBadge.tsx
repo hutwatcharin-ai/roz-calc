@@ -1,8 +1,7 @@
 'use client';
 
 // components/AggroBadge.tsx
-import { AGGRO_LABELS, DANGER_ATK_RATIO, aggroLevel, playerMaxHpFromContext, type AggroLevel } from '@/lib/aggro-tier';
-import { useCharacterContext } from '@/components/CharacterContextProvider';
+import { AGGRO_LABELS, DANGER_ATK_RATIO, aggroLevel, type AggroLevel } from '@/lib/aggro-tier';
 
 // Glyph plus text, never colour alone. This badge is the site's clearest
 // differentiator; if it cannot be read, the advantage is gone.
@@ -25,14 +24,14 @@ export interface AggroMonster {
   atk_max: number | null;
 }
 
-// The badge grades itself rather than taking a level, so every surface a
-// monster appears on upgrades from two levels to three the moment the player
-// fills in the character bar -- without each page having to remember to read
-// the context. Before that, and in a browser where localStorage is unusable,
-// it renders the two-level answer, which is the honest one.
+// Two levels, not three: the third ("how hard does it hit YOU") needed the
+// player's Max HP, which came from the character bar removed on 4 Sep 2026.
+// This badge rides along on database pages, and those ask for nothing now --
+// so it states what the monster is, and the tools do the comparing.
 export default function AggroBadge({ monster }: { monster: AggroMonster }) {
-  const { character } = useCharacterContext();
-  const playerMaxHp = playerMaxHpFromContext(character);
+  // Kept as a named constant so the two-level branch below still reads as
+  // "we do not know the player's HP" rather than as dead code.
+  const playerMaxHp = null as number | null;
   const level = aggroLevel(monster, playerMaxHp);
 
   // The 20% cut-off is ours, not the game's, so the tooltip states it outright
@@ -42,7 +41,7 @@ export default function AggroBadge({ monster }: { monster: AggroMonster }) {
     level === 'safe'
       ? 'ไม่เข้าโจมตีก่อน'
       : playerMaxHp === null || monster.atk_max === null
-        ? 'เข้าโจมตีก่อน ยังบอกไม่ได้ว่าแรงแค่ไหนสำหรับคุณ — กรอกเลเวลกับอาชีพในแถบด้านบนแล้วจะแบ่งระดับให้'
+        ? `เข้าโจมตีก่อน${monster.atk_max === null ? '' : ` · ATK สูงสุด ${monster.atk_max.toLocaleString()}`}`
         : `ATK สูงสุด ${monster.atk_max.toLocaleString()} เทียบกับ HP ของคุณ ${playerMaxHp.toLocaleString()} ` +
           `(เกณฑ์ ${percent}% เป็นเกณฑ์ที่เว็บนี้ตั้งเอง ไม่ใช่ค่าจากเกม)`;
 

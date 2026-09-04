@@ -8,7 +8,8 @@ import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type Skil
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { hitChanceVsMob, mobHitChance } from '@/lib/hit-flee';
-import { useCharacterContext } from '@/components/CharacterContextProvider';
+import ToolNumbers, { useRememberedNumbers } from '@/components/ToolNumbers';
+import { attacksPerSecond } from '@/lib/player-numbers';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
 export interface AfkCandidate {
@@ -29,7 +30,20 @@ export interface AfkCandidate {
 }
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
-  const { character, ready } = useCharacterContext();
+  const [numbers, setNumbers, ready] = useRememberedNumbers();
+  const aps = attacksPerSecond(numbers.aspd);
+  // One shape for the rest of the file, so the old `character.x` reads keep
+  // working -- but every field is now optional and independently answered.
+  const character =
+    numbers.damagePerHit !== undefined && aps !== null
+      ? {
+          level: numbers.level ?? null,
+          damagePerHit: numbers.damagePerHit,
+          attacksPerSecond: aps,
+          hit: numbers.hit ?? null,
+          flee: numbers.flee ?? null,
+        }
+      : null;
   // Two safety toggles, client-side: the list is already filtered in the
   // browser (the one-hit rule needs the character context), so these belong
   // on the same side. Off by default -- the full picture first.
@@ -112,6 +126,15 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   return (
     <>
+      {/* The tool asks for what it reads, here, instead of a bar on every page
+          demanding four numbers before anyone can look at a monster. */}
+      <ToolNumbers
+        fields={['damagePerHit', 'aspd', 'flee', 'level']}
+        numbers={numbers}
+        onChange={setNumbers}
+        note="ดาเมจ + ASPD = กรองเหลือตัวที่ฆ่าได้หมัดเดียว · FLEE = บอกว่ามันตีเราโดนไหม · เลเวล = ดรอปโดนหักหรือเปล่า"
+      />
+
       <div className="card" style={{ marginTop: 20 }}>
         {personal && character ? (
           <p className="muted" style={{ margin: 0 }}>
@@ -166,7 +189,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                 <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp_per_hp')}>EXP/HP {indicator('exp_per_hp')}</button></th>
                 {myFlee !== null && <th className="num">มันตีเราโดน</th>}
                 {personal && <th className="num">EXP/ชม.</th>}
-                {personal && <th>ดรอปตามช่วงเลเวล</th>}
+                {personal && numbers.level !== undefined && <th>ดรอปตามช่วงเลเวล</th>}
                 <th>สกิลที่ต้องระวัง</th>
                 <th>แมพที่เสี่ยงต่ำสุด</th>
               </tr>
@@ -228,7 +251,9 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                       })()}
                     </td>
                   )}
-                  {personal && character && (
+                  {/* The level column only exists once a level is given: it is
+                      an optional field of this tool, not a prerequisite. */}
+                  {personal && character?.level != null && (
                     <td data-label="ดรอปตามช่วงเลเวล">
                       <span
                         className={`tag tag--${dropPenalty(character.level, row.level)}`}

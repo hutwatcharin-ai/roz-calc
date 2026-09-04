@@ -8,7 +8,6 @@ import {
   PRIMARY_LINKS,
   SECTION_LINKS,
   type NavLink,
-  usesCharacterContext,
 } from './nav-links';
 
 // Routes confirmed to exist today (finding #1): / , /drop-finder, and all six
@@ -169,48 +168,3 @@ describe('link tables', () => {
   });
 });
 
-describe('usesCharacterContext', () => {
-  // The character bar rides in the layout, so this list is the only thing
-  // deciding which pages carry 61px of it. Wrong in one direction it clutters a
-  // page that cannot use it; wrong in the other it hides the control a page
-  // depends on and leaves the reader with no way to fill it in.
-
-  it('keeps the bar on every page that reads a character value', () => {
-    for (const path of [
-      '/',
-      '/drop-finder',
-      '/database/monsters',
-      '/database/monsters/1002',
-      '/database/maps',
-      '/database/maps/prontera',
-      '/tools/afk-finder',
-      '/tools/farm-planner',
-    ]) {
-      expect(usesCharacterContext(path), path).toBe(true);
-    }
-  });
-
-  it('drops it from every page that reads none', () => {
-    for (const path of [
-      '/guides/elements',
-      '/guides/sizes',
-      '/guides/exp',
-      '/tools/damage',
-      '/tools/refine',
-      '/database/items',
-      '/database/items/501',
-      '/database/cards',
-      '/database/equipment',
-      '/database/skills',
-    ]) {
-      expect(usesCharacterContext(path), path).toBe(false);
-    }
-  });
-
-  it('does not let a prefix match a different route', () => {
-    // "/database/maps" must not claim "/database/maps-of-doom", and the root
-    // entry must not claim everything.
-    expect(usesCharacterContext('/database/mapsomething')).toBe(false);
-    expect(usesCharacterContext('/tools/elements/')).toBe(false);
-  });
-});

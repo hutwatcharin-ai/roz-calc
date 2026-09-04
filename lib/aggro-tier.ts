@@ -4,7 +4,6 @@
 // failure players care about, and no competing site surfaces this field at all
 // (spec 3.15.1). It appears on every surface a monster appears on.
 
-import type { CharacterContext } from './character-context';
 
 export type AggroLevel = 'safe' | 'aggressive' | 'caution' | 'danger';
 
@@ -34,7 +33,3 @@ export function aggroLevel(
 
 // v2: the player types the Max HP the game shows -- gear and buffs included --
 // so the danger grade stands on a real number instead of our HP formula.
-export function playerMaxHpFromContext(ctx: CharacterContext | null): number | null {
-  if (!ctx) return null;
-  return ctx.maxHp;
-}

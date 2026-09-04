@@ -1,8 +1,6 @@
 import './globals.css';
 import Nav from '@/components/Nav';
-import CharacterBar from '@/components/CharacterBar';
 import SiteFooter from '@/components/SiteFooter';
-import { CharacterContextProvider } from '@/components/CharacterContextProvider';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
 import { Sarabun, Chakra_Petch, IBM_Plex_Mono } from 'next/font/google';
@@ -48,18 +46,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* The character context wraps the whole app: the aggro badge grades
             itself from it on every page, so a provider mounted per page would
             leave the badge ungraded wherever someone forgot to add one. */}
-        <CharacterContextProvider>
           {/* Farm plan wraps the app for the same reason: the add button on a
               monster page and the planner page must share one plan. Without
               this wrapper every consumer gets the default context and the
               whole feature silently renders nothing (shipped broken once). */}
           <FarmPlanProvider>
             <Nav />
-            <CharacterBar />
             {children}
             <SiteFooter />
           </FarmPlanProvider>
-        </CharacterContextProvider>
         {/* Only in production: a dev server hitting GA4 would mix local
             traffic into the real property's numbers. */}
         {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (

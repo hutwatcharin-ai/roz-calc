@@ -6,14 +6,17 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
-import { useCharacterContext } from '@/components/CharacterContextProvider';
+import ToolNumbers, { useRememberedNumbers } from '@/components/ToolNumbers';
+import { attacksPerSecond } from '@/lib/player-numbers';
 import { dedupeZoneVariants, rankSpots, type Spot } from '@/lib/leveling-spots';
 import { formatExpPerHour } from '@/lib/format-rate';
 
 const SHOWN = 20;
 
 export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: number }) {
-  const { character, ready } = useCharacterContext();
+  const [numbers, setNumbers, ready] = useRememberedNumbers();
+  const aps = attacksPerSecond(numbers.aspd);
+  const canRate = numbers.damagePerHit !== undefined && aps !== null;
 
   // The level the page was fetched for wins over the character's own: a player
   // planning where to go at 60 is reading this page at 60.
@@ -22,23 +25,26 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
       rankSpots(
         dedupeZoneVariants(spots),
         level,
-        character
+        // Ranking by EXP/hour needs damage and attack speed; with either one
+        // missing the density fallback is the honest answer, not a rate built
+        // on a number the player never gave.
+        canRate
           ? {
-              level: character.level,
-              damagePerHit: character.damagePerHit,
-              attacksPerSecond: character.attacksPerSecond,
-              hit: character.hit,
+              level,
+              damagePerHit: numbers.damagePerHit as number,
+              attacksPerSecond: aps as number,
+              hit: numbers.hit ?? null,
             }
           : null,
       ),
-    [spots, level, character],
+    [spots, level, canRate, numbers.damagePerHit, aps, numbers.hit],
   );
 
   if (spots.length === 0) {
     return <p className="muted">ไม่มีแมพที่มีมอนช่วงเลเวลนี้ในข้อมูล</p>;
   }
 
-  const personal = ready && character !== null;
+  const personal = ready && canRate;
   const top = ranked.slice(0, SHOWN);
 
   return (
@@ -51,12 +57,12 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
         <button type="submit" className="btn">ดูแมพ</button>
       </form>
 
-      {!personal && (
-        <p className="muted" style={{ marginBottom: 12 }}>
-          ตอนนี้เรียงตามปริมาณ EXP ในแมพ (จำนวนมอน × EXP ถ่วงตามความใกล้เลเวล) —
-          กรอกดาเมจกับความเร็วตีในแถบตัวละคร แล้วจะเรียงตาม EXP/ชม. จริงของคุณแทน
-        </p>
-      )}
+      <ToolNumbers
+        fields={['damagePerHit', 'aspd', 'hit']}
+        numbers={numbers}
+        onChange={setNumbers}
+        note="กรอกดาเมจกับ ASPD แล้วอันดับจะคิดจาก EXP/ชม. ของคุณเอง ไม่กรอกก็ดูได้ (เรียงตามปริมาณ EXP ในแมพ)"
+      />
 
       <div className="card" style={{ overflowX: 'auto' }}>
         <table className="data-table">

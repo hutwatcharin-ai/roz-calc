@@ -5,7 +5,8 @@ import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import { supabaseBrowser } from '@/lib/supabase';
 import { useFarmPlan } from '@/components/FarmPlanProvider';
-import { useCharacterContext } from '@/components/CharacterContextProvider';
+import ToolNumbers, { useRememberedNumbers } from '@/components/ToolNumbers';
+import { attacksPerSecond } from '@/lib/player-numbers';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
 import { hitChanceVsMob } from '@/lib/hit-flee';
 import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
@@ -30,7 +31,12 @@ type LoadState = 'idle' | 'loading' | 'error';
 
 export default function FarmPlannerBoard() {
   const { plan, remove, ready, persisted } = useFarmPlan();
-  const { character, ready: characterReady } = useCharacterContext();
+  const [numbers, setNumbers, characterReady] = useRememberedNumbers();
+  const aps = attacksPerSecond(numbers.aspd);
+  const character =
+    numbers.damagePerHit !== undefined && aps !== null
+      ? { damagePerHit: numbers.damagePerHit, attacksPerSecond: aps, hit: numbers.hit ?? null, level: numbers.level ?? null }
+      : null;
   const [rows, setRows] = useState<PlannedMonster[]>([]);
   const [state, setState] = useState<LoadState>('idle');
 
@@ -158,6 +164,13 @@ export default function FarmPlannerBoard() {
 
   return (
     <>
+
+      <ToolNumbers
+        fields={['damagePerHit', 'aspd', 'hit', 'level']}
+        numbers={numbers}
+        onChange={setNumbers}
+        note="กรอกดาเมจกับ ASPD แล้วแผนจะบอก EXP/ชม. และเรียงตัวที่คุ้มสุดให้"
+      />
       {!persisted && (
         <p className="charbar__error" style={{ marginTop: 16 }}>
           เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) — แผนใช้ได้ระหว่างเปิดแท็บนี้ แต่ปิดแล้วจะหาย
@@ -175,7 +188,7 @@ export default function FarmPlannerBoard() {
               <th className="num">Zeny/ตัว</th>
               {personal && <th className="num">ตัว/ชม.</th>}
               {personal && <th className="num">EXP/ชม.</th>}
-              {personal && <th>ดรอปตามช่วงเลเวล</th>}
+              {personal && numbers.level !== undefined && <th>ดรอปตามช่วงเลเวล</th>}
               <th>แมพ</th>
               <th />
             </tr>
@@ -218,7 +231,7 @@ export default function FarmPlannerBoard() {
                     {personalRate?.exp ? formatExpPerHour(personalRate.exp) : '—'}
                   </td>
                 )}
-                {personal && character && (
+                {personal && character?.level != null && (
                   <td data-label="ดรอปตามช่วงเลเวล">
                     <span
                       className={`tag tag--${dropPenalty(character.level, row.level)}`}

@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { aggroLevel, playerMaxHpFromContext, DANGER_ATK_RATIO, AGGRO_LABELS } from './aggro-tier';
-import type { CharacterContext } from './character-context';
+import { aggroLevel, DANGER_ATK_RATIO, AGGRO_LABELS } from './aggro-tier';
 
 const PLAYER_HP = 1000;
 
@@ -50,17 +49,6 @@ describe('aggroLevel', () => {
   });
 });
 
-describe('playerMaxHpFromContext', () => {
-  it('returns null with no character, so callers get the two-level badge', () => {
-    expect(playerMaxHpFromContext(null)).toBeNull();
-  });
-
-  it('computes the exact HP for a real character, pinned so argument order cannot silently swap', () => {
-    // v2: the context carries the player's real Max HP directly.
-    const ctx: CharacterContext = { level: 50, damagePerHit: 250, aspd: 180, attacksPerSecond: 2.5, maxHp: 1542, hit: null, flee: null };
-    expect(playerMaxHpFromContext(ctx)).toBe(1542);
-  });
-});
 
 describe('AGGRO_LABELS', () => {
   it('has a Thai label for every level, so no badge is colour-only', () => {

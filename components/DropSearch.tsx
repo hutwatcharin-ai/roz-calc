@@ -4,9 +4,7 @@
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import CVariantToggle from '@/components/CVariantToggle';
-import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 import { isCVariant } from '@/lib/c-variant';
-import { useCharacterContext } from '@/components/CharacterContextProvider';
 
 interface DropRow {
   monster_id: number;
@@ -29,7 +27,6 @@ export default function DropSearch({
   resolvedId?: number | null;
   rows: DropRow[];
 }) {
-  const { character, ready } = useCharacterContext();
 
   return (
     <div className="card card--pink">
@@ -87,14 +84,6 @@ export default function DropSearch({
               <AggroBadge monster={{ is_aggressive: row.is_aggressive, atk_max: row.atk_max }} />
               {/* Drops are what this page is about, so the level-gap penalty
                   belongs here more than anywhere (spec 3.9). */}
-              {ready && character && row.monster_level !== null && (
-                <span
-                  className={`tag tag--${dropPenalty(character.level, row.monster_level)}`}
-                  title={dropPenaltyDetail(character.level, row.monster_level)}
-                >
-                  {DROP_PENALTY_LABELS[dropPenalty(character.level, row.monster_level)]}
-                </span>
-              )}
             </span>
             <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate != null ? `${row.rate}%` : '?'}</span>
           </div>
