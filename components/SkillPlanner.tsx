@@ -7,6 +7,7 @@
 // so a link is the share format.
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   blockedBy,
@@ -110,6 +111,7 @@ export default function SkillPlanner({ icons }: { icons: Record<string, string> 
   const [classSlug, setClassSlug] = useState(initialClass);
   const [build, setBuild] = useState<Build>(() => decodeBuild(initialClass, params.get('build') ?? ''));
   const [copied, setCopied] = useState(false);
+  useToolUse('skill_planner', { job: classSlug, build: encodeBuild(build) });
 
   const stages = useMemo(() => lineFor(classSlug), [classSlug]);
   const spend = useMemo(() => spendByStage(classSlug, build), [classSlug, build]);

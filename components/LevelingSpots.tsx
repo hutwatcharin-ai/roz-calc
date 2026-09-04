@@ -5,6 +5,7 @@
 // tested without React.
 
 import Link from 'next/link';
+import { useToolUse } from '@/lib/use-tool-use';
 import { useMemo } from 'react';
 import ToolNumbers, { useRememberedNumbers } from '@/components/ToolNumbers';
 import { attacksPerSecond } from '@/lib/player-numbers';
@@ -15,6 +16,7 @@ const SHOWN = 20;
 
 export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: number }) {
   const [numbers, setNumbers, ready] = useRememberedNumbers();
+  useToolUse('leveling_spots', { mode: 'level', level, damage: numbers.damagePerHit, aspd: numbers.aspd, hit: numbers.hit }, ready);
   const aps = attacksPerSecond(numbers.aspd);
   const canRate = numbers.damagePerHit !== undefined && aps !== null;
 

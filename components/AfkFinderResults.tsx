@@ -3,6 +3,7 @@
 import Caveat from '@/components/Caveat';
 import { isCVariant } from '@/lib/c-variant';
 import { useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
@@ -31,6 +32,7 @@ export interface AfkCandidate {
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
   const [numbers, setNumbers, ready] = useRememberedNumbers();
+  useToolUse('leveling_spots', { mode: 'afk', level: numbers.level, damage: numbers.damagePerHit, aspd: numbers.aspd, hit: numbers.hit }, ready);
   const aps = attacksPerSecond(numbers.aspd);
   // One shape for the rest of the file, so the old `character.x` reads keep
   // working -- but every field is now optional and independently answered.

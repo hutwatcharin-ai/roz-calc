@@ -9,6 +9,7 @@
 
 import Caveat from '@/components/Caveat';
 import { useMemo, useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import { ELEMENTS, type Element, type ElementLevel } from '@/lib/element-table';
 import { SIZE_LABELS, SIZE_TABLE, SIZES, type MonsterSize } from '@/lib/size-table';
 import { comboFor, rankCombos, rankElements, shareOfBest } from '@/lib/damage-multiplier';
@@ -42,6 +43,7 @@ export default function DamagePicker({
   const [size, setSize] = useState<MonsterSize>(initialSize);
   const [weaponName, setWeaponName] = useState(SIZE_TABLE[1].weapon);
   const [attack, setAttack] = useState<Element>('Neutral');
+  useToolUse('damage_picker', { defence, level, size, weapon: weaponName, attack, compact });
 
   const weapon = SIZE_TABLE.find((row) => row.weapon === weaponName) ?? SIZE_TABLE[0];
 

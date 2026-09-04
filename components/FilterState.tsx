@@ -12,6 +12,7 @@
 // impact, allow Clear All.
 
 import Link from 'next/link';
+import TrackSearch from '@/components/TrackSearch';
 
 export interface ActiveFilter {
   /** What the filter is, in the reader's words: "เผ่า", "ธาตุ", "คำค้น". */
@@ -35,19 +36,28 @@ export default function FilterState({
   clearHref: string;
 }) {
   const active = filters.filter((f) => f.value !== '');
+  // Every list page names its text search "คำค้น"; that one filter is the
+  // search event, with this count as its result.
+  const term = filters.find((f) => f.label === 'คำค้น')?.value ?? '';
+  const tracker = term ? <TrackSearch term={term} count={count} /> : null;
 
   // No filters: the count is the whole table, and saying so is the honest
   // wording. With filters it is a subset, and the wording has to change or the
   // number reads as the total.
   if (active.length === 0) {
     return (
-      <p className="filterstate" role="status" aria-live="polite">
-        <span className="filterstate__count">{count.toLocaleString('en-US')}</span> {unit}ทั้งหมด
-      </p>
+      <>
+        {tracker}
+        <p className="filterstate" role="status" aria-live="polite">
+          <span className="filterstate__count">{count.toLocaleString('en-US')}</span> {unit}ทั้งหมด
+        </p>
+      </>
     );
   }
 
   return (
+    <>
+      {tracker}
     <p className="filterstate" role="status" aria-live="polite">
       <span className="filterstate__count">
         พบ {count.toLocaleString('en-US')} {unit}
@@ -61,6 +71,7 @@ export default function FilterState({
         ล้างตัวกรอง
       </Link>
     </p>
+    </>
   );
 }
 

@@ -3,7 +3,9 @@
 // The hit/flee tool's result table with clickable column sorting (user, 2
 // Sep). Extracted from the server page so the sort can live in the browser;
 // the page still fetches the rows and passes the player's HIT/FLEE down.
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { reportToolUse } from '@/lib/analytics';
 import AggroBadge from '@/components/AggroBadge';
 import { hitChanceVsMob, mobHitChance } from '@/lib/hit-flee';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
@@ -21,6 +23,14 @@ export interface HitFleeRow {
 
 export default function HitFleeTable({ monsters, myHit, myFlee }: { monsters: HitFleeRow[]; myHit: number; myFlee: number }) {
   const { sort, toggle, indicator } = useTableSort();
+
+  // The page submits a form and re-renders with ?lv&hit&flee; this table
+  // only exists once all three are filled, so its mount is the use. Keyed by
+  // the full URL so a second submit on the same page counts again.
+  useEffect(() => {
+    reportToolUse('hit_flee', { hit: myHit, flee: myFlee, rows: monsters.length }, window.location.pathname + window.location.search);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Derived once per row so the sort keys and the cells agree.
   const rows = monsters.map((m) => {

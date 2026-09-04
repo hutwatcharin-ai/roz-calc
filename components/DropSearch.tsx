@@ -2,6 +2,7 @@
 
 // components/DropSearch.tsx
 import Link from 'next/link';
+import TrackSearch from '@/components/TrackSearch';
 import AggroBadge from '@/components/AggroBadge';
 import CVariantToggle from '@/components/CVariantToggle';
 import { isCVariant } from '@/lib/c-variant';
@@ -30,6 +31,8 @@ export default function DropSearch({
 
   return (
     <div className="card card--pink">
+      {/* An unresolved item is a search with no result, whatever rows says. */}
+      <TrackSearch term={query} count={resolvedName ? rows.length : 0} />
       <form>
         <input className="mono" type="text" name="q" defaultValue={query} placeholder="ชื่อไอเทม เช่น Elunium Ore" />
         <button type="submit">ค้นหา</button>

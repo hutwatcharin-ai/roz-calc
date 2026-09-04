@@ -9,6 +9,7 @@
 // HP. A monster page links here with ?monster=<id> preselected.
 
 import { useEffect, useMemo, useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import Link from 'next/link';
 import { physicalDamagePerHit } from '@/lib/damage';
 import { killRate, expPerHour, KILL_RATE_DISCLAIMER } from '@/lib/kills-per-hour';
@@ -60,6 +61,13 @@ export default function MonsterDamageCalculator({
   const [weapon, setWeapon] = useState<WeaponChoice>(EMPTY);
   const [monsterId, setMonsterId] = useState<number | null>(initialMonsterId);
   const [query, setQuery] = useState('');
+  // Armed once the remembered numbers (and, in the same commit, the weapon)
+  // have loaded, so the localStorage read does not count as a use.
+  useToolUse(
+    'damage',
+    { monster_id: monsterId, weapon_type: weapon.weaponType, weapon_element: weapon.weaponElement, has_atk: weapon.weaponAtk !== '', aspd: numbers.aspd, hit: numbers.hit },
+    ready,
+  );
 
   // localStorage only exists on the client; reading it during render would
   // make the server's markup and the browser's disagree.

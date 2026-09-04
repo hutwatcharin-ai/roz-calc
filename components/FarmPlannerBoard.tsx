@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -32,6 +33,7 @@ type LoadState = 'idle' | 'loading' | 'error';
 export default function FarmPlannerBoard() {
   const { plan, remove, ready, persisted } = useFarmPlan();
   const [numbers, setNumbers, characterReady] = useRememberedNumbers();
+  useToolUse('leveling_spots', { mode: 'plan', level: numbers.level, damage: numbers.damagePerHit, aspd: numbers.aspd, hit: numbers.hit }, characterReady);
   const aps = attacksPerSecond(numbers.aspd);
   const character =
     numbers.damagePerHit !== undefined && aps !== null

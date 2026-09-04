@@ -4,8 +4,9 @@ import SiteFooter from '@/components/SiteFooter';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
 import { Sarabun, Chakra_Petch, IBM_Plex_Mono } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Analytics from '@/components/Analytics';
 import { SITE_URL } from '@/lib/site';
+import { GA_DEBUG, gaBootstrap } from '@/lib/analytics';
 
 // Self-hosted via next/font (SEO audit High #5): kills the render-blocking
 // fonts.googleapis.com round trip and auto-tunes fallback metrics against
@@ -38,9 +39,22 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
 };
 
+// Production only, unless NEXT_PUBLIC_GA_DEBUG=1 asks for DebugView from a dev
+// server: a dev server hitting GA4 would mix local traffic into the real
+// property's numbers. With the debug flag every event carries debug_mode,
+// which GA4 keeps out of the reports.
+const GA_ID = (process.env.NODE_ENV === 'production' || GA_DEBUG) && process.env.NEXT_PUBLIC_GA_ID ? process.env.NEXT_PUBLIC_GA_ID : null;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th" className={`${sarabun.variable} ${chakra.variable} ${plexMono.variable}`}>
+      {/* Synchronous, ahead of hydration: the gtag stub must exist before the
+          first page_view effect runs, or that view is dropped. */}
+      {GA_ID && (
+        <head>
+          <script dangerouslySetInnerHTML={{ __html: gaBootstrap(GA_ID) }} />
+        </head>
+      )}
 
       <body>
         {/* The character context wraps the whole app: the aggro badge grades
@@ -55,11 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
             <SiteFooter />
           </FarmPlanProvider>
-        {/* Only in production: a dev server hitting GA4 would mix local
-            traffic into the real property's numbers. */}
-        {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
+        {GA_ID && <Analytics gaId={GA_ID} />}
       </body>
     </html>
   );

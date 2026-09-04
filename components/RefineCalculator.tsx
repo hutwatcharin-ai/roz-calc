@@ -8,6 +8,7 @@
 
 import Caveat from '@/components/Caveat';
 import { useMemo, useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import { refineCost, oreFor } from '@/lib/refine-cost';
 import {
   GEAR_LABELS,
@@ -36,6 +37,7 @@ export default function RefineCalculator() {
   const [target, setTarget] = useState(7);
   const [from, setFrom] = useState(0);
   const [special, setSpecial] = useState(false);
+  useToolUse('refine', { gear, target, from, special });
 
   const hasSpecial = ORE[gear].special !== null;
   const useSpecial = special && hasSpecial;

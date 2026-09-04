@@ -11,6 +11,7 @@
 // map" into "how much of it you can actually collect per hour".
 
 import { useEffect, useState } from 'react';
+import { useToolUse } from '@/lib/use-tool-use';
 import Link from 'next/link';
 import LevelingSpots from '@/components/LevelingSpots';
 import AfkFinderResults, { type AfkCandidate } from '@/components/AfkFinderResults';
@@ -42,6 +43,9 @@ export default function FarmSpots({
   const [mode, setMode] = useState<FarmMode>(initialMode);
   const [afk, setAfk] = useState<{ rows: AfkCandidate[]; failed: boolean } | null>(null);
   const [afkLoading, setAfkLoading] = useState(false);
+  // Switching mode is a use too; the number strips inside each mode report
+  // the same tool, and reportToolUse keeps it to one per page.
+  useToolUse('leveling_spots', { mode, level });
 
   // The AFK data is every monster's skills and every map's aggro census --
   // far more than the level window this page opens on. It loads when someone
