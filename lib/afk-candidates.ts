@@ -1,25 +1,15 @@
-// app/tools/afk-finder/page.tsx
+// The AFK finder's data, lifted out of its page so the merged farm-spots tool
+// can load it in the browser when someone switches to that mode (4 Sep 2026).
+// Loading it on every visit to the merged page would mean pulling every
+// monster's skills for a mode most visitors never open.
 //
-// "Where can I leave the bot and come back alive?" -- a different question from
-// the farming finder's "what is worth killing", with a different sort order
-// (safety first, EXP second) and its own URL so it can be shared into a game
-// chat by name (spec 3.8).
+// supabaseBrowser works on both sides; nothing here is server-only.
 
-import Caveat from '@/components/Caveat';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
-import AfkFinderResults, { type AfkCandidate } from '@/components/AfkFinderResults';
-import CVariantToggle from '@/components/CVariantToggle';
+import type { AfkCandidate } from '@/components/AfkFinderResults';
 
-export const metadata = {
-  title: 'หาจุด AFK ปลอดภัย Ragnarok Zero',
-  description:
-    'หามอนสเตอร์ที่ไม่เข้าโจมตีก่อนและตายในหมัดเดียว สำหรับปล่อยบอทใน Ragnarok Zero Global — กรองด้วยดาเมจของคุณเอง พร้อมเตือนสกิลที่ทำให้บอทตาย',
-};
-
-export const revalidate = 86400;
-
-async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean }> {
+export async function loadAfkCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean }> {
   const db = supabaseBrowser();
 
   // ALL monsters now, not just the non-aggressive ones: with the player's
@@ -133,31 +123,4 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
     })),
     failed: false,
   };
-}
-
-export default async function AfkFinderPage() {
-  const { rows, failed } = await getCandidates();
-
-  return (
-    <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">หาจุด AFK ปลอดภัย</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        มอนที่ไม่โจมตีก่อน และดาเมจของคุณฆ่าได้ในหมัดเดียว — ทิ้งบอทไว้แล้วกลับมาไม่ตาย
-      </p>
-
-      <Caveat label="ที่มาของธง “โจมตีก่อน”">
-        <strong>ธง &ldquo;โจมตีก่อน&rdquo;</strong> มาจากไฟล์เกม (ตรวจกับ ragnarokzero.net ตรงครบ 524 ตัว) ·
-        Scorpion กับ Hornet ติดธง &ldquo;ไม่โจมตีก่อน&rdquo; จริงในภาคนี้ — ก่อนทิ้งบอทนาน ๆ ยืนดูสักพักก่อน
-      </Caveat>
-
-      {failed ? (
-        <p className="muted" style={{ marginTop: 20 }}>ดึงข้อมูลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
-      ) : (
-        <>
-          <div style={{ marginTop: 16 }}><CVariantToggle mode="local" /></div>
-          <AfkFinderResults rows={rows} />
-        </>
-      )}
-    </main>
-  );
 }

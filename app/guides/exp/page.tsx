@@ -138,7 +138,7 @@ export default function ExpPage() {
       </details>
 
       <p className="muted" style={{ marginTop: 20 }}>
-        ดูต่อ: <Link href="/tools/afk-finder">หาจุด AFK</Link> ·{' '}
+        ดูต่อ: <Link href="/tools/leveling-spots?mode=afk">หาจุด AFK</Link> ·{' '}
         <Link href="/tools/refine">ตีบวก</Link>
       </p>
     </main>

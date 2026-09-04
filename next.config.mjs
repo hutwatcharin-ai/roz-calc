@@ -12,6 +12,11 @@ const nextConfig = {
       { source: '/tools/sizes', destination: '/guides/sizes', permanent: true },
       { source: '/tools/exp', destination: '/guides/exp', permanent: true },
       { source: '/tools/farm-guide', destination: '/guides/farm-guide', permanent: true },
+      // Three tools became one on 4 Sep 2026: they ran the same arithmetic
+      // behind three identical forms and differed only in which monsters were
+      // in scope. Each old URL lands on the mode it used to be.
+      { source: '/tools/afk-finder', destination: '/tools/leveling-spots?mode=afk', permanent: true },
+      { source: '/tools/farm-planner', destination: '/tools/leveling-spots?mode=plan', permanent: true },
     ];
   },
   async headers() {

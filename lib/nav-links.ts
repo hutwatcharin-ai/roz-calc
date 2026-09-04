@@ -27,7 +27,6 @@ export const PRIMARY_LINKS: NavLink[] = [
   { href: '/', label: 'หน้าแรก', ready: true },
   { href: '/drop-finder', label: 'ค้นของดรอป', ready: true },
   { href: '/database/monsters', label: 'ฐานข้อมูล', ready: true },
-  { href: '/tools/afk-finder', label: 'เครื่องมือ', ready: true },
   // Split off the tools row on 3 Sep 2026: a table you read and a calculator
   // you feed your own numbers to are different errands, and ten mixed chips
   // made the row something to scan rather than choose from.
@@ -62,10 +61,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // two fight tools keeps them from reading as refine (ตีบวก) siblings.
   // Only pages that take the player's own numbers and answer with theirs.
   tools: [
-    { href: '/tools/leveling-spots', label: 'ไปเก็บเลเวลที่ไหน', icon: '/images/items/607.gif', ready: true },
+    { href: '/tools/leveling-spots', label: 'ฟาร์มที่ไหนดี', icon: '/images/items/607.gif', ready: true },
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
-    { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
-    { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },
     { href: '/tools/hit-flee', label: 'คำนวณ Hit/Flee', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },

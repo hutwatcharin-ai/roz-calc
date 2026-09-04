@@ -4,6 +4,12 @@
 
 ## 4 ก.ย. 2026 — ถอดสูตรจาก prontera แล้วเอามาปรับของเรา
 
+**ยุบ 3 เครื่องมือเป็น 1 (`/tools/leveling-spots` = "ฟาร์มที่ไหนดี")**
+- leveling-spots + AFK finder + farm-planner คิดเลขชุดเดียวกัน (ดาเมจ → เวลาต่อตัว → EXP/ชม.) ต่างกันแค่ตัวกรองกับหน่วยที่แสดง → รวมเป็นหน้าเดียว 3 โหมด (`?mode=afk|plan`)
+- **โหมดตั้งต้นใส่แค่เลเวลก็ได้คำตอบ** (แบบ prontera) ใส่ดาเมจ/ASPD เพิ่มถึงเปลี่ยนเป็น EXP/ชม. จริง
+- ข้อมูลโหมด AFK โหลดตอนกดเข้าโหมด (`lib/afk-candidates.ts`) ไม่ถ่วงหน้าแรกของเครื่องมือ
+- 301: `/tools/afk-finder` → `?mode=afk` · `/tools/farm-planner` → `?mode=plan` · เมนูเครื่องมือ 7 → 5
+
 **ถอดแถบตัวละครออกทั้งระบบ (ฟีดแบ็กผู้ใช้: "ต้องมากดใส่เลขอะไรเยอะแยะ เขาแค่ต้องการดูข้อมูลมอนเฉยๆ")**
 - ลบ `CharacterBar` · `CharacterContextProvider` · `lib/character-context.ts` · `HitFleePrefill` · `KillRatePanel` · `DamageEstimatePanel` · `usesCharacterContext`/`CHARACTER_PATHS`
 - แทนด้วย `lib/player-numbers.ts` + `components/ToolNumbers.tsx` — **หน้าเครื่องมือถามเฉพาะช่องที่ตัวเองใช้ ไม่มีช่องบังคับ** (เดิมต้องกรอกครบ 4 ช่องถึงจะบันทึกได้)

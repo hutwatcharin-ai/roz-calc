@@ -51,7 +51,7 @@ export default function GuidesPage() {
       <PageHeader title="ไกด์และตารางอ้างอิง" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
         หน้าพวกนี้เปิดอ่านได้เลย ไม่ต้องกรอกอะไร — ส่วนที่ต้องใส่ตัวเลขของตัวเองแล้วให้เว็บคำนวณ อยู่ใน{' '}
-        <Link href="/tools/afk-finder">เครื่องมือ</Link>
+        <Link href="/tools/leveling-spots">เครื่องมือ</Link>
       </p>
 
       <div className="itemgrid">

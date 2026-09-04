@@ -210,7 +210,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
         <p className="muted" style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           เครื่องมือใกล้กัน:
           <a className="chiplink" href="/">หาจุดฟาร์ม</a>
-          <a className="chiplink" href="/tools/afk-finder">หาจุด AFK</a>
+          <a className="chiplink" href="/tools/leveling-spots?mode=afk">หาจุด AFK</a>
           <a className="chiplink" href="/tools/damage">ตีตัวนี้ด้วยอะไรดี</a>
         </p>
       )}

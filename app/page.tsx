@@ -141,7 +141,7 @@ export default async function HomePage({
           <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
         </Link>
 
-        <Link href="/tools/afk-finder" className="qcard qcard--pink">
+        <Link href="/tools/leveling-spots?mode=afk" className="qcard qcard--pink">
           <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
           <span>มอนที่ไม่โจมตีก่อนและฆ่าได้ในหมัดเดียว พร้อมเตือนสกิลอันตราย</span>
           <em className="qcard__go">หาจุด AFK →</em>
@@ -188,7 +188,7 @@ export default async function HomePage({
         {/* ตารางธาตุ was orphaned (only reachable from monster-page footers)
             while its Thai keyword has no Zero-specific competitor (SXO audit). */}
         <Link href="/guides/elements" className="chiplink">ตารางธาตุ</Link>
-        <Link href="/tools/farm-planner" className="chiplink">แผนฟาร์ม</Link>
+        <Link href="/tools/leveling-spots?mode=plan" className="chiplink">แผนฟาร์ม</Link>
         <Link href="/database/maps" className="chiplink">แมพ</Link>
       </div>
     </main>

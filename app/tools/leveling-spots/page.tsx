@@ -5,7 +5,7 @@
 // around the level and groups them by map.
 import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
-import LevelingSpots from '@/components/LevelingSpots';
+import FarmSpots, { type FarmMode } from '@/components/FarmSpots';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { LEVEL_SPAN, type Spot } from '@/lib/leveling-spots';
@@ -14,9 +14,9 @@ import { isCVariant } from '@/lib/c-variant';
 export const revalidate = 86400;
 
 export const metadata = {
-  title: 'ไปเก็บเลเวลที่ไหนดี',
+  title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล จุด AFK และแผนของคุณ',
   description:
-    'จัดอันดับแมพเก็บเลเวลของ Ragnarok Zero Global ตามเลเวลของคุณ — คิดจาก EXP ต่อชั่วโมงจริง (ดาเมจ ความเร็วตี โอกาสตีโดน) และจำนวนมอนในแมพ',
+    'ใส่เลเวลแล้วดูได้เลยว่าควรไปแมพไหนใน Ragnarok Zero Global · สลับเป็นโหมดหาจุดทิ้งบอท AFK หรือเทียบมอนที่เลือกไว้ · ใส่ดาเมจกับ ASPD เพิ่มเพื่อคิดเป็น EXP ต่อชั่วโมงจริงของคุณ',
 };
 
 const DEFAULT_LEVEL = 50;
@@ -95,22 +95,24 @@ async function getSpots(level: number): Promise<{ spots: Spot[]; failed: boolean
 export default async function LevelingSpotsPage({
   searchParams,
 }: {
-  searchParams: { level?: string | string[] };
+  searchParams: { level?: string | string[]; mode?: string | string[] };
 }) {
   const level = readLevel(searchParams.level);
+  const rawMode = Array.isArray(searchParams.mode) ? searchParams.mode[0] : searchParams.mode;
+  const mode: FarmMode = rawMode === 'afk' || rawMode === 'plan' ? rawMode : 'level';
   const { spots, failed } = await getSpots(level);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ไปเก็บเลเวลที่ไหนดี" />
+      <PageHeader title="ฟาร์มที่ไหนดี" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        แมพที่มีมอนช่วงเลเวลของคุณ เรียงตาม EXP ต่อชั่วโมงที่คุณทำได้จริง — กรอกดาเมจกับความเร็วตีในแถบตัวละครแล้วตัวเลขจะเป็นของคุณเอง
+        ใส่แค่เลเวลก็ได้คำตอบแล้ว — จะใส่ดาเมจกับ ASPD เพิ่มก็ได้ แล้วอันดับจะเปลี่ยนเป็น EXP ต่อชั่วโมงที่คุณทำได้จริง
       </p>
 
       {failed ? (
         <p className="muted">ดึงข้อมูลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
       ) : (
-        <LevelingSpots spots={spots} level={level} />
+        <FarmSpots spots={spots} level={level} initialMode={mode} />
       )}
 
       <Caveat>

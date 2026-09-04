@@ -1437,6 +1437,28 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .statgrid__cell--link:hover { background: var(--panel); }
 .statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
 
+/* Mode tabs on the merged farm tool: three questions, one page. Each tab
+   carries a line saying what it answers, because "AFK" and "เก็บเลเวล" alone
+   do not tell a new player which one they want. */
+.modebar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.modebar__tab {
+  flex: 1 1 200px;
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.modebar__tab:hover { border-color: var(--cyan); }
+.modebar__tab--on { border-color: var(--cyan); background: var(--panel-2); box-shadow: inset 0 -2px 0 var(--cyan); }
+.modebar__label { font: 700 14px/1.2 var(--font-chakra), sans-serif; }
+.modebar__blurb { font-size: 11.5px; color: var(--faint); }
+
 /* The input strip a calculator owns. Deliberately plainer than the character
    bar it replaces: it sits inside the page, above the results it feeds, and
    never appears on a page that only shows data. */
