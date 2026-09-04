@@ -1504,6 +1504,20 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .caveat__body strong { color: var(--text); font-weight: 600; }
 .caveat__body a { color: var(--cyan); }
 
+/* The code list: fixed-width chips, because a coupon code is read character
+   by character and a proportional font hides the difference between 0 and O. */
+.codegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.codegrid__item {
+  padding: 9px 12px;
+  border: 1px dashed var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  color: var(--cyan);
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+  user-select: all;
+}
+
 /* Guides hub: one card per page, with a line saying what it answers. Wider
    than an item card because the sentence is the point of the card. */
 .guidecard {
@@ -1642,6 +1656,8 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .rndopt__summary:hover { background: var(--panel-2); }
 .rndopt__count { color: var(--faint); font-size: 12px; margin-left: auto; }
 .rndopt__body { padding: 0 18px 18px; border-top: 1px solid var(--hair); }
+.rndopt__halo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); margin: 8px 0 0; }
+.rndopt__halo .tag { font-size: 10px; }
 .rndopt__line { font-size: 13px; color: var(--dim); margin-top: 12px; display: flex; align-items: center; gap: 8px; }
 
 /* Item browse grid. Recognition-first: sprite, then name, then category. */

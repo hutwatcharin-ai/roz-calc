@@ -71,6 +71,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
   guides: [
     { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
+    { href: '/guides/codes', label: 'โค้ดรับของ', icon: '/images/items/714.gif', ready: true },
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
     { href: '/guides/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },

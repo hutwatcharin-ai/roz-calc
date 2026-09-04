@@ -24,6 +24,17 @@ export default function RandomOptionsCard({ lines }: { lines: ResolvedPoolLine[]
           ดรอปจากมอนสเตอร์ทั่วไป — แต่ละบรรทัดทอยได้ตัวเลือกเดียวจากรายการของบรรทัดนั้น
           ชิ้นหนึ่งจึงติดออปชั่นได้ {lines.length} ออปชั่น
         </p>
+        {/* The halo tells you how many options a piece rolled before you pick
+            it up. Two of the five are marked "to be checked" by the guide this
+            came from, so they say so rather than passing as known. */}
+        <p className="rndopt__halo">
+          <span>สีรัศมีตอนของตกพื้น = จำนวนออปชั่น:</span>
+          <span className="tag" style={{ borderColor: '#5B8CFF', color: '#5B8CFF' }}>ฟ้า 1</span>
+          <span className="tag" style={{ borderColor: 'var(--yellow)', color: 'var(--yellow)' }}>เหลือง 2</span>
+          <span className="tag" style={{ borderColor: '#B98CFF', color: '#B98CFF' }}>ม่วง 3</span>
+          <span className="tag tag--unknown">เขียว 4 · ยังไม่ยืนยัน</span>
+          <span className="tag tag--unknown">แดง 5 · ยังไม่ยืนยัน</span>
+        </p>
         {lines.map((line) => (
           <div key={line.lineIndex} style={{ marginTop: 12 }}>
             <p className="rndopt__line">
