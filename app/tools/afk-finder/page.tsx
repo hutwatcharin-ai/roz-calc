@@ -75,8 +75,10 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
   const allSpawns = await fetchAllRows<{ monster_id: number; map_code: string | null }>((from, to) =>
     db.from('monster_spawns').select('monster_id, map_code').order('monster_id').range(from, to),
   );
-  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null; flee_95: number | null }>((from, to) =>
-    db.from('monsters').select('id, is_aggressive, flee_95').order('id').range(from, to),
+  const aggroFlags = await fetchAllRows<{ id: number; is_aggressive: boolean | null; flee_95: number | null; hit_100: number | null }>((from, to) =>
+    // hit_100 rides along for the EXP/hour column: a swing that misses costs
+    // the same second as one that lands.
+    db.from('monsters').select('id, is_aggressive, flee_95, hit_100').order('id').range(from, to),
   );
 
   // A failed skill or spawn read must not render as "no skills, no maps" -- the
@@ -127,6 +129,7 @@ async function getCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean 
       skills: skillsByMonster.get(s.monster_id) ?? [],
       spawn: spawnByMonster.get(s.monster_id) ?? null,
       flee95: accById.get(s.monster_id)?.flee_95 ?? null,
+      hit100: accById.get(s.monster_id)?.hit_100 ?? null,
     })),
     failed: false,
   };

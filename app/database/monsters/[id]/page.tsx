@@ -271,6 +271,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             monsterHp={monster.hp}
             expPerKill={monster.base_exp}
             monsterName={monster.name_en}
+            hit100={mobThresholds(monster).hit100}
           />
 
           {/* The two reference tables are thirty rows the summary above already

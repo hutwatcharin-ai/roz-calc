@@ -6,6 +6,7 @@
 // player who has not gone and stood somewhere cannot answer.
 
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
+import { hitChanceVsMob } from '@/lib/hit-flee';
 import { formatExpPerHour, formatKillTime, formatKillsPerHour } from '@/lib/format-rate';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { MAX_PUBLISHED_BASE_LEVEL, killsToLevelUp } from '@/lib/exp-table';
@@ -14,10 +15,13 @@ export default function KillRatePanel({
   monsterHp,
   expPerKill,
   monsterName,
+  hit100,
 }: {
   monsterHp: number | null;
   expPerKill: number | null;
   monsterName: string;
+  /** The mob's hit_100 threshold, so misses are counted (lib/hit-flee.ts). */
+  hit100?: number | null;
 }) {
   const { character, ready } = useCharacterContext();
 
@@ -34,10 +38,13 @@ export default function KillRatePanel({
     );
   }
 
+  const hitChance =
+    character.hit != null && hit100 != null ? hitChanceVsMob(character.hit, hit100) : null;
   const rate = killRate({
     monsterHp: monsterHp ?? 0,
     damagePerHit: character.damagePerHit,
     attacksPerSecond: character.attacksPerSecond,
+    hitChancePercent: hitChance,
   });
 
   // monsterHp 0 is the unknown-HP marker the importer writes for a "???" feed

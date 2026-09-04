@@ -7,6 +7,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import { useFarmPlan } from '@/components/FarmPlanProvider';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
+import { hitChanceVsMob } from '@/lib/hit-flee';
 import { formatExpPerHour, formatKillsPerHour } from '@/lib/format-rate';
 import { DROP_PENALTY_LABELS, dropPenalty, dropPenaltyDetail } from '@/lib/drop-penalty';
 
@@ -16,6 +17,7 @@ interface PlannedMonster {
   level: number;
   hp: number | null;
   base_exp: number | null;
+  hit_100: number | null;
   exp_per_hp: number | null;
   avg_zeny_per_kill: number | null;
   image_url: string | null;
@@ -52,7 +54,7 @@ export default function FarmPlannerBoard() {
         db
           .from('monster_farming_stats')
           .select(
-            'monster_id, name_en, level, hp, base_exp, exp_per_hp, avg_zeny_per_kill, image_url, is_aggressive, atk_max',
+            'monster_id, name_en, level, hp, base_exp, exp_per_hp, avg_zeny_per_kill, image_url, is_aggressive, atk_max, hit_100',
           )
           .in('monster_id', plan),
         db.from('monster_spawns').select('monster_id, map_display_name').in('monster_id', plan),
@@ -134,6 +136,8 @@ export default function FarmPlannerBoard() {
       monsterHp: row.hp,
       damagePerHit: character.damagePerHit,
       attacksPerSecond: character.attacksPerSecond,
+      hitChancePercent:
+        character.hit != null && row.hit_100 != null ? hitChanceVsMob(character.hit, row.hit_100) : null,
     });
     if (!rate) return null;
     return { rate, exp: expPerHour(rate.killsPerHour, row.base_exp ?? 0) };

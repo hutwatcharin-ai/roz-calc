@@ -89,3 +89,40 @@ describe('KILL_RATE_DISCLAIMER', () => {
     expect(KILL_RATE_DISCLAIMER).toContain('เพดานบน');
   });
 });
+
+describe('killRate with a hit chance', () => {
+  it('counts the swings that miss', () => {
+    // 3 landed hits at 50% means 6 swings, so the kill takes twice as long as
+    // the old model said. This is the whole point of the 4 Sep 2026 fix.
+    const r = killRate({ monsterHp: 250, damagePerHit: 100, attacksPerSecond: 2, hitChancePercent: 50 });
+    expect(r!.hitsToKill).toBe(3);
+    expect(r!.attacksToKill).toBe(6);
+    expect(r!.secondsToKill).toBe(3);
+    expect(r!.killsPerHour).toBe(1200);
+  });
+
+  it('rounds a partial swing up, the way a partial hit already was', () => {
+    // 3 hits at 80% is 3.75 swings: you cannot take three quarters of a swing.
+    const r = killRate({ monsterHp: 250, damagePerHit: 100, attacksPerSecond: 1, hitChancePercent: 80 });
+    expect(r!.attacksToKill).toBe(4);
+  });
+
+  it('changes nothing at 100%', () => {
+    const perfect = killRate({ monsterHp: 250, damagePerHit: 100, attacksPerSecond: 2, hitChancePercent: 100 });
+    const omitted = killRate({ monsterHp: 250, damagePerHit: 100, attacksPerSecond: 2 });
+    expect(perfect).toEqual(omitted);
+  });
+
+  it('falls back to every-swing-lands when the chance is unknown', () => {
+    // null is "we have no hit_100 for this mob, or no HIT for the player".
+    // Guessing a penalty there would invent a number; the old behaviour is the
+    // honest ceiling, and the disclaimer already says it is a ceiling.
+    const unknown = killRate({ monsterHp: 250, damagePerHit: 100, attacksPerSecond: 2, hitChancePercent: null });
+    expect(unknown!.attacksToKill).toBe(3);
+  });
+
+  it('treats a chance above 100 as 100 rather than speeding the kill up', () => {
+    const r = killRate({ monsterHp: 250, damagePerHit: 100, attacksPerSecond: 2, hitChancePercent: 150 });
+    expect(r!.attacksToKill).toBe(3);
+  });
+});

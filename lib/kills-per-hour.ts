@@ -8,10 +8,21 @@ export interface KillRateInput {
   monsterHp: number;
   damagePerHit: number;
   attacksPerSecond: number;
+  /**
+   * Percent chance a swing lands, from the mob's hit_100 threshold against the
+   * player's HIT (lib/hit-flee.ts). Optional: without it every swing is
+   * assumed to land, which is what this file did until 4 Sep 2026 -- and that
+   * overstated the rate by exactly the miss rate, ~20% on a mob whose hit_100
+   * sits 20 above the player's HIT.
+   */
+  hitChancePercent?: number | null;
 }
 
 export interface KillRate {
+  /** Landed hits needed to exhaust the mob's HP. */
   hitsToKill: number;
+  /** Swings needed including misses. Equals hitsToKill at 100% hit chance. */
+  attacksToKill: number;
   secondsToKill: number;
   killsPerHour: number;
 }
@@ -29,7 +40,7 @@ function isUsable(value: number): boolean {
 }
 
 export function killRate(input: KillRateInput): KillRate | null {
-  const { monsterHp, damagePerHit, attacksPerSecond } = input;
+  const { monsterHp, damagePerHit, attacksPerSecond, hitChancePercent } = input;
 
   // monsterHp of 0 is the unknown-HP marker transformMonster writes when the
   // raw feed says "???" -- not a monster that dies to nothing.
@@ -38,10 +49,21 @@ export function killRate(input: KillRateInput): KillRate | null {
   }
 
   const hitsToKill = Math.ceil(monsterHp / damagePerHit);
-  const secondsToKill = hitsToKill / attacksPerSecond;
+
+  // A missing or unusable hit chance means "we do not know", and the honest
+  // fallback there is the old behaviour -- every swing lands -- not a guessed
+  // penalty. A known chance is applied: at 80% it takes 1.25 swings to land
+  // one hit, so the kill takes a quarter longer.
+  const usableChance =
+    typeof hitChancePercent === 'number' && Number.isFinite(hitChancePercent) && hitChancePercent > 0
+      ? Math.min(100, hitChancePercent)
+      : 100;
+  const attacksToKill = Math.ceil(hitsToKill / (usableChance / 100));
+  const secondsToKill = attacksToKill / attacksPerSecond;
 
   return {
     hitsToKill,
+    attacksToKill,
     secondsToKill,
     killsPerHour: 3600 / secondsToKill,
   };

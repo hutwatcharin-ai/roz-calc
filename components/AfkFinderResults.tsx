@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { diesInOneHit, riskySkills, SKILL_RISK_LABELS, SKILL_RISK_WHY, type SkillRisk } from '@/lib/afk-safety';
 import { dropPenalty, dropPenaltyDetail, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
 import { KILL_RATE_DISCLAIMER, expPerHour, killRate } from '@/lib/kills-per-hour';
-import { mobHitChance } from '@/lib/hit-flee';
+import { hitChanceVsMob, mobHitChance } from '@/lib/hit-flee';
 import { useCharacterContext } from '@/components/CharacterContextProvider';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
@@ -24,6 +24,8 @@ export interface AfkCandidate {
   spawn: { name: string; code: string; aggroCount: number } | null;
   is_aggressive?: boolean | null;
   flee95?: number | null;
+  /** The mob's hit_100 threshold: the EXP/hour column counts misses with it. */
+  hit100?: number | null;
 }
 
 export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
@@ -216,6 +218,10 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                           monsterHp: row.hp ?? 0,
                           damagePerHit: character.damagePerHit,
                           attacksPerSecond: character.attacksPerSecond,
+                          hitChancePercent:
+                            character.hit != null && row.hit100 != null
+                              ? hitChanceVsMob(character.hit, row.hit100)
+                              : null,
                         });
                         const exp = rate ? expPerHour(rate.killsPerHour, row.base_exp ?? 0) : null;
                         return exp != null ? Math.round(exp).toLocaleString() : '—';

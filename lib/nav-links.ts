@@ -62,6 +62,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // two fight tools keeps them from reading as refine (ตีบวก) siblings.
   // Only pages that take the player's own numbers and answer with theirs.
   tools: [
+    { href: '/tools/leveling-spots', label: 'ไปเก็บเลเวลที่ไหน', icon: '/images/items/607.gif', ready: true },
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
     { href: '/tools/afk-finder', label: 'หาจุด AFK', icon: '/images/items/610.gif', ready: true },
     { href: '/tools/farm-planner', label: 'แผนฟาร์ม', icon: '/images/items/512.gif', ready: true },

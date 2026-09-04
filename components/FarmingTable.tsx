@@ -56,6 +56,10 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
       monsterHp: row.hp,
       damagePerHit: character.damagePerHit,
       attacksPerSecond: character.attacksPerSecond,
+      // Misses cost time: the same hit chance this table already shows in its
+      // own column now drives the rate, instead of the rate assuming every
+      // swing lands.
+      hitChancePercent: hitPctFor(row),
     });
     if (!rate) return null;
     // base_exp straight from the view, not exp_per_hp x hp: the ratio is stored
