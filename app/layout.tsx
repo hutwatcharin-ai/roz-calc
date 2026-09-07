@@ -3,17 +3,45 @@ import Nav from '@/components/Nav';
 import SiteFooter from '@/components/SiteFooter';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
-import { Sarabun, Chakra_Petch, IBM_Plex_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import Analytics from '@/components/Analytics';
 import { SITE_URL } from '@/lib/site';
 import { GA_DEBUG, gaBootstrap } from '@/lib/analytics';
 
-// Self-hosted via next/font (SEO audit High #5): kills the render-blocking
-// fonts.googleapis.com round trip and auto-tunes fallback metrics against
-// font-swap layout shift. CSS refers to the families through these variables.
-const sarabun = Sarabun({ subsets: ['thai', 'latin'], weight: ['400', '500', '600', '700'], variable: '--font-sarabun', display: 'swap' });
-const chakra = Chakra_Petch({ subsets: ['thai', 'latin'], weight: ['600', '700'], variable: '--font-chakra', display: 'swap' });
-const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-mono', display: 'swap' });
+// Self-hosted from files in the repo (assets/fonts/web, OFL, subset to
+// Thai+Latin with fontTools). This used to be next/font/google, which
+// downloads the fonts at build time: on 7 Sep 2026 the VPS could not reach
+// fonts.googleapis.com and the build died on it, so the deploy failed on a
+// change that had nothing to do with fonts. Now the build needs no network.
+// CSS refers to the families through these variables.
+const sarabun = localFont({
+  src: [
+    { path: '../assets/fonts/web/Sarabun-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../assets/fonts/web/Sarabun-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../assets/fonts/web/Sarabun-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: '../assets/fonts/web/Sarabun-Bold.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-sarabun',
+  display: 'swap',
+});
+const chakra = localFont({
+  src: [
+    { path: '../assets/fonts/web/ChakraPetch-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: '../assets/fonts/web/ChakraPetch-Bold.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-chakra',
+  display: 'swap',
+});
+const plexMono = localFont({
+  src: [
+    { path: '../assets/fonts/web/IBMPlexMono-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../assets/fonts/web/IBMPlexMono-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../assets/fonts/web/IBMPlexMono-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: '../assets/fonts/web/IBMPlexMono-Bold.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 // metadataBase turns the relative OG path below into the absolute URL that
 // crawlers and chat clients require -- a relative og:image is ignored.

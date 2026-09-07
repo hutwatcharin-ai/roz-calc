@@ -24,7 +24,10 @@ export interface MonsterDropRow {
 
 export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDropRow[]; failed: boolean }) {
   const { sort, toggle, indicator } = useTableSort();
-  const rows = bySorted(drops, sort, (d, key) =>
+  // Postgres puts NULL first under ORDER BY rate DESC, so untouched the
+  // table opened on "ไม่ทราบอัตรา" rows; bySorted sinks nulls, so the default
+  // view is the rate sort applied explicitly.
+  const rows = bySorted(drops, sort.key ? sort : { key: 'rate', desc: true }, (d, key) =>
     key === 'item' ? d.items?.name_en ?? null
     : key === 'rate' ? d.rate
     : key === 'price' ? (d.items?.sell_price && d.items.sell_price > 0 ? d.items.sell_price : null)
