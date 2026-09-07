@@ -68,7 +68,11 @@ export default async function MapDetailPage({ params }: { params: { code: string
 
   if (error) {
     console.error('map detail query failed', error);
-    return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
+    // Thrown, not rendered: these pages are ISR (revalidate 86400), and a
+    // rendered "error, try again" is a successful render that gets cached for
+    // a day. Seen 7 Sep 2026 on a transient Supabase timeout. A throw goes to
+    // app/error.tsx and is never cached.
+    throw new Error(`map detail query failed: ${error.message}`);
   }
 
   // A clean query returning nothing is a genuine 404 -- unlike the error

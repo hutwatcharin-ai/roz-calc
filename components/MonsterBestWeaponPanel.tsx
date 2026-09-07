@@ -1,21 +1,17 @@
 // components/MonsterBestWeaponPanel.tsx
 //
-// The conclusion the other two panels stop just short of.
-//
-// MonsterElementPanel ranks the elements and MonsterSizePanel ranks the weapon
-// types, and a reader who takes either at face value gets it wrong, because the
-// two multiply: a Book's 50% against Large is not fatal if the element is
-// right, and a 200% element is only average once a 50% weapon has halved it.
-//
-// Deliberately not a third table -- those two already list every row. This is
-// three lines: which element, which weapon types keep all of it, and what the
-// worst choice costs. Server rendered, since the answer is the same for every
-// visitor.
+// Two lines: which element, and which weapon types lose damage to size.
+// Rewritten 7 Sep 2026 after the user read the old version ("the wording is
+// bizarre, and there is too much of it"): it listed every element that tied
+// (nine, for a Neutral 3 monster), every weapon type in each group, and
+// explained in prose that the two multipliers multiply. Now each line says
+// the answer and stops; when nothing is interesting it says "any". The full
+// tables stay under the <details> below this card. Server rendered.
 
 import Link from 'next/link';
 import { ELEMENTS, type Element, type ElementLevel } from '@/lib/element-table';
 import { SIZE_LABELS, parseSize } from '@/lib/size-table';
-import { bestElements, rankWeapons } from '@/lib/damage-multiplier';
+import { elementAdvice, sizeGroups } from '@/lib/best-weapon-summary';
 
 function isElement(value: string | null): value is Element {
   return value !== null && (ELEMENTS as readonly string[]).includes(value);
@@ -25,8 +21,12 @@ function isElementLevel(value: number | null): value is ElementLevel {
   return value === 1 || value === 2 || value === 3 || value === 4;
 }
 
-function pct(value: number): string {
-  return Number.isInteger(value) ? `${value}%` : `${value.toFixed(1)}%`;
+// "ดาบสองมือ, กริช, ขวาน และอีก 2" -- three names is what a player can hold
+// in their head; the full list is one click down.
+function few(labels: string[], max = 4): string {
+  // "และอีก 1" is longer than the name it hides.
+  if (labels.length <= max + 1) return labels.join(', ');
+  return `${labels.slice(0, max).join(', ')} และอีก ${labels.length - max}`;
 }
 
 export default function MonsterBestWeaponPanel({
@@ -39,88 +39,64 @@ export default function MonsterBestWeaponPanel({
   size: string | null;
 }) {
   const parsedSize = parseSize(size);
-
-  // All three are needed to multiply anything. Missing one shows nothing rather
+  // All three are needed to say anything. Missing one shows nothing rather
   // than an answer computed against a default nobody chose.
   if (!isElement(element) || !isElementLevel(elementLevel) || parsedSize === null) return null;
 
-  // The element is picked first: the size multiplier scales every element by the
-  // same amount, so it cannot change which element is best.
-  const elements = bestElements(element, elementLevel);
-  const ranked = rankWeapons(elements[0], element, elementLevel, parsedSize);
-  const top = ranked[0];
-  const worst = ranked[ranked.length - 1];
-
-  // Several weapon types usually share the best size multiplier, and naming one
-  // would send a player shopping past the ones already in their bag.
-  const full = ranked.filter((combo) => combo.total === top.total);
-  const worstGroup = ranked.filter((combo) => combo.total === worst.total);
+  const el = elementAdvice(element, elementLevel);
+  const groups = sizeGroups(parsedSize);
+  const full = groups.find((g) => g.pct === 100);
+  const reduced = groups.filter((g) => g.pct < 100);
+  // Most weapon types usually keep the full hit; name the exceptions. When
+  // the exceptions are the majority, name the ones that keep it instead.
+  const nameFull = full !== undefined && reduced.reduce((n, g) => n + g.labels.length, 0) > full.labels.length;
 
   return (
     <div className="card">
-      <h2 className="section-title">สรุป: ตีตัวนี้ด้วยอะไรดี</h2>
-      <p className="muted" style={{ marginBottom: 12 }}>
-        ธาตุ {element}
-        {elementLevel} ขนาด{SIZE_LABELS[parsedSize]} · ตัวคูณสองตัวนี้<strong>คูณกัน</strong>{' '}
-        คนที่ดูทีละตารางจึงตอบผิดได้ทั้งสองทาง
-      </p>
-
-      <table className="stat-table">
-        <tbody>
-          <tr>
-            <td>
-              ธาตุอาวุธที่ควรใช้
-              {elements.length > 1 && (
-                <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                  {elements.length} ธาตุนี้เท่ากันหมด ใช้ตัวที่หาได้ก่อน
-                </span>
-              )}
-            </td>
-            <td className="num">
-              <strong>{elements.join(' / ')}</strong>
-              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                {pct(top.element)}
-              </span>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              ชนิดอาวุธที่ไม่โดนขนาดหัก
-              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                {full.map((c) => c.weapon.weapon).join(', ')}
-              </span>
-            </td>
-            <td className="num">
-              <strong>{pct(top.total)}</strong>
-              <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                {top.element}% × {top.size}%
-              </span>
-            </td>
-          </tr>
-
-          {worst.total < top.total && (
-            <tr>
-              <td>
-                ถ้าใช้ชนิดที่หักหนักสุด
-                <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                  {worstGroup.map((c) => c.weapon.weapon).join(', ')} — ธาตุเดียวกันแท้ ๆ
-                </span>
-              </td>
-              <td className="num">
-                {pct(worst.total)}
-                <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                  หายไป {Math.round(((top.total - worst.total) / top.total) * 100)}% เพราะขนาดล้วน ๆ
-                </span>
-              </td>
-            </tr>
+      <h2 className="section-title">ตีตัวนี้ด้วยอะไรดี</h2>
+      <dl className="advice">
+        <dt>ธาตุ</dt>
+        <dd>
+          {el.best.length > 0 ? (
+            <>
+              <strong>{el.best.join(' / ')}</strong> <span className="mono">{el.bestPct}%</span>
+            </>
+          ) : (
+            <>
+              ไหนก็ได้ <span className="muted">— {element}{elementLevel} ไม่มีจุดอ่อน</span>
+            </>
           )}
-        </tbody>
-      </table>
-
-      <p className="muted" style={{ marginTop: 10 }}>
-        เป็น<strong>ส่วนที่เข้าเป้า</strong> ไม่ใช่ดาเมจ — ATK, DEF, การ์ดและสกิลอยู่ระหว่างนี้กับเลขบนจอ ·
-        ลองสลับเองได้ที่ <Link href="/tools/damage">หน้าเทียบอาวุธ</Link>
+          {el.avoid.length > 0 && (
+            <span className="advice__avoid">
+              {' '}· เลี่ยง {few(el.avoid.map((a) => `${a.element} ${a.pct}%`), 3)}
+            </span>
+          )}
+        </dd>
+        <dt>ขนาด</dt>
+        <dd>
+          {SIZE_LABELS[parsedSize]}
+          {reduced.length === 0 ? (
+            <span className="muted"> — ทุกชนิดอาวุธตีเต็ม</span>
+          ) : nameFull ? (
+            <>
+              <span className="muted"> — ตีเต็มเฉพาะ </span>
+              {few(full!.labels)}
+              {reduced.map((g) => (
+                <span key={g.pct} className="advice__avoid"> · {reduced.length === 1 ? 'ที่เหลือ' : few(g.labels)} {g.pct}%</span>
+              ))}
+            </>
+          ) : (
+            <>
+              <span className="muted"> — อาวุธส่วนใหญ่ตีเต็ม</span>
+              {reduced.map((g) => (
+                <span key={g.pct} className="advice__avoid"> · {few(g.labels)} {g.pct}%</span>
+              ))}
+            </>
+          )}
+        </dd>
+      </dl>
+      <p className="muted" style={{ marginTop: 8, fontSize: 12 }}>
+        ตัวคูณธาตุ×ขนาดเท่านั้น ยังไม่รวม ATK/DEF/การ์ด · ลองอาวุธของคุณที่ <Link href="/tools/damage">หน้าเทียบอาวุธ</Link>
       </p>
     </div>
   );

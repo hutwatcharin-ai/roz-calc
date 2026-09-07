@@ -78,7 +78,11 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   // A failed query must not read as "this item does not exist".
   if (error) {
     console.error('item detail query failed', error);
-    return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
+    // Thrown, not rendered: these pages are ISR (revalidate 86400), and a
+    // rendered "error, try again" is a successful render that gets cached for
+    // a day. Seen 7 Sep 2026 on a transient Supabase timeout. A throw goes to
+    // app/error.tsx and is never cached.
+    throw new Error(`item detail query failed: ${error.message}`);
   }
 
   // Alongside the error branch above, and for the same reason: a request for an

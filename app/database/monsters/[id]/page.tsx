@@ -1,5 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import { mobThresholds } from '@/lib/monster-thresholds';
+import { riskySkills, SKILL_RISK_LABELS } from '@/lib/afk-safety';
 import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
@@ -122,7 +123,11 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // A failed query must not read as "this monster does not exist".
   if (error) {
     console.error('monster detail query failed', error);
-    return <main className="shell" style={{ paddingBlock: 32 }}>เกิดข้อผิดพลาด ลองใหม่อีกครั้ง</main>;
+    // Thrown, not rendered: these pages are ISR (revalidate 86400), and a
+    // rendered "error, try again" is a successful render that gets cached for
+    // a day. Seen 7 Sep 2026 on a transient Supabase timeout. A throw goes to
+    // app/error.tsx and is never cached.
+    throw new Error(`monster detail query failed: ${error.message}`);
   }
 
   // A clean query that found no row is a genuine 404 -- unlike the error
@@ -293,61 +298,51 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             </div>
           </details>
 
+          {/* One card for every number (7 Sep 2026, user: stats are primary,
+              skills secondary). Three stacked two-column tables ran half a
+              screen; a grid says the same in a third of the height. */}
           <div className="card">
             <h2 className="section-title" id="sec-stats">ค่าสถานะ</h2>
-            <table className="stat-table">
-              <tbody>
-                <tr><td>HP</td><td className="num">{sentinel(monster.hp)}</td></tr>
-                <tr><td>ATK</td><td className="num">{num(monster.atk_min)} – {num(monster.atk_max)}</td></tr>
-                <tr><td>MATK</td><td className="num">{num(monster.matk_min)} – {num(monster.matk_max)}</td></tr>
-                <tr><td>DEF</td><td className="num">{num(monster.def)}</td></tr>
-                <tr><td>MDEF</td><td className="num">{num(monster.mdef)}</td></tr>
-
-              </tbody>
-            </table>
-          </div>
-
-          <div className="card">
-            <h2 className="section-title">สเตตัสพื้นฐาน</h2>
-            <table className="stat-table">
-              <tbody>
-                <tr><td>STR</td><td className="num">{num(monster.str)}</td></tr>
-                <tr><td>AGI</td><td className="num">{num(monster.agi)}</td></tr>
-                <tr><td>VIT</td><td className="num">{num(monster.vit)}</td></tr>
-                <tr><td>INT</td><td className="num">{num(monster.int_)}</td></tr>
-                <tr><td>DEX</td><td className="num">{num(monster.dex)}</td></tr>
-                <tr><td>LUK</td><td className="num">{num(monster.luk)}</td></tr>
-              </tbody>
-            </table>
-            {/* hit_100/flee_95 are midgardhub's player-facing thresholds --
-                they already ARE the targets to show. The old code treated
-                them as raw mob stats and added +20/+75 on top (wrong by
-                exactly that much for a day, 1 Sep). */}
-            {(() => {
-              const { hit100, flee95 } = mobThresholds(monster);
-              if (hit100 === null && flee95 === null) return null;
-              return (
-                <div style={{ marginTop: 12 }}>
-                  <h3 className="section-title" style={{ fontSize: 14 }}>แม่นยำ/หลบ</h3>
-                  <table className="stat-table">
-                    <tbody>
-                      {hit100 !== null && (
-                        <tr>
-                          <td>ตีมันโดน 100% ต้องมี HIT</td>
-                          <td className="num" style={{ color: 'var(--yellow)' }}>{hit100}</td>
-                        </tr>
-                      )}
-                      {flee95 !== null && (
-                        <tr>
-                          <td>หลบมัน 95% ต้องมี FLEE</td>
-                          <td className="num" style={{ color: 'var(--cyan)' }}>{flee95}</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
+            <div className="statgrid statgrid--five">
+              <div className="statgrid__cell"><span className="reward-label">HP</span><span className="reward-value mono">{sentinel(monster.hp)}</span></div>
+              <div className="statgrid__cell"><span className="reward-label">ATK</span><span className="reward-value mono">{num(monster.atk_min)}–{num(monster.atk_max)}</span></div>
+              <div className="statgrid__cell"><span className="reward-label">MATK</span><span className="reward-value mono">{num(monster.matk_min)}–{num(monster.matk_max)}</span></div>
+              <div className="statgrid__cell"><span className="reward-label">DEF</span><span className="reward-value mono">{num(monster.def)}</span></div>
+              <div className="statgrid__cell"><span className="reward-label">MDEF</span><span className="reward-value mono">{num(monster.mdef)}</span></div>
+            </div>
+            <div className="statgrid statgrid--two" style={{ marginTop: 10 }}>
+              {(() => {
+                // hit_100/flee_95 are midgardhub's player-facing thresholds --
+                // they already ARE the targets to show. The old code treated
+                // them as raw mob stats and added +20/+75 on top (wrong by
+                // exactly that much for a day, 1 Sep).
+                const { hit100, flee95 } = mobThresholds(monster);
+                return (
+                  <>
+                    {hit100 !== null && (
+                      <div className="statgrid__cell" title="HIT ที่ต้องมีเพื่อตีมอนตัวนี้โดน 100%">
+                        <span className="reward-label">ตีโดน 100% ต้องมี HIT</span>
+                        <span className="reward-value mono" style={{ color: 'var(--yellow)' }}>{hit100}</span>
+                      </div>
+                    )}
+                    {flee95 !== null && (
+                      <div className="statgrid__cell" title="FLEE ที่ต้องมีเพื่อหลบมอนตัวนี้ 95%">
+                        <span className="reward-label">หลบ 95% ต้องมี FLEE</span>
+                        <span className="reward-value mono" style={{ color: 'var(--cyan)' }}>{flee95}</span>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
+            </div>
+            <div className="statgrid statgrid--dense" style={{ marginTop: 10 }}>
+              {([['STR', monster.str], ['AGI', monster.agi], ['VIT', monster.vit], ['INT', monster.int_], ['DEX', monster.dex], ['LUK', monster.luk]] as const).map(([label, value]) => (
+                <div key={label} className="statgrid__cell">
+                  <span className="reward-label">{label}</span>
+                  <span className="reward-value mono">{num(value)}</span>
                 </div>
-              );
-            })()}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -381,8 +376,28 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             )}
           </div>
 
-          <div className="card">
-            <h2 className="section-title" id="sec-skills">สกิลที่มอนใช้</h2>
+          {/* Skills are the secondary read (user, 7 Sep). Folded unless one
+              of them is the kind that changes where you stand -- summons,
+              locks, self-destruct, transform (lib/afk-safety) -- in which
+              case the card opens and says which. */}
+          {(() => {
+            const risks = riskySkills((monsterSkills ?? []).map((s: any) => String(s.skill_name)));
+            const count = (monsterSkills ?? []).length;
+            return (
+          <details className="disclose" id="sec-skills" open={risks.length > 0 || Boolean(skillsError)}>
+            <summary>
+              สกิลที่มอนใช้
+              <span className="disclose__count">
+                {skillsError
+                  ? 'โหลดไม่สำเร็จ'
+                  : count === 0
+                    ? 'ไม่มีข้อมูล'
+                    : risks.length > 0
+                      ? `${count} สกิล · ${risks.map((r) => SKILL_RISK_LABELS[r.risk]).filter((v, i, arr) => arr.indexOf(v) === i).join(', ')}`
+                      : `${count} สกิล · ไม่มีอะไรน่าห่วง`}
+              </span>
+            </summary>
+            <div className="disclose__body">
             {skillsError ? (
               <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลสกิลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
             ) : (monsterSkills ?? []).length === 0 ? (
@@ -407,7 +422,10 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 </tbody>
               </table>
             )}
-          </div>
+            </div>
+          </details>
+            );
+          })()}
         </div>
       </div>
 

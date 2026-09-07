@@ -1871,3 +1871,17 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .monlink:hover .monlink__pop,
 .monlink:focus-visible .monlink__pop { display: block; }
 @media (hover: none) { .monlink__pop { display: none !important; } }
+
+/* Two-line answer on the monster page (MonsterBestWeaponPanel). */
+.advice { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 0; }
+.advice dt { color: var(--faint); font-size: 13px; }
+.advice dd { margin: 0; }
+.advice__avoid { color: var(--pink); }
+.statgrid--five { grid-template-columns: repeat(5, 1fr); }
+.statgrid--two { grid-template-columns: repeat(2, 1fr); }
+.statgrid--dense { grid-template-columns: repeat(6, 1fr); }
+.statgrid--dense .statgrid__cell { padding: 8px 10px; }
+.statgrid--dense .reward-value { font-size: 15px; }
+@media (max-width: 560px) {
+  .statgrid--dense, .statgrid--five { grid-template-columns: repeat(3, 1fr); }
+}
