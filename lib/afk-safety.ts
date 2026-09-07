@@ -61,11 +61,109 @@ export function riskySkills(skillNames: readonly string[]): RiskySkill[] {
   return out;
 }
 
-// hp of 0 is the unknown-HP marker the importer writes for a "???" feed value,
-// not a monster that dies to nothing. Treating it as a one-hit kill would put
-// the most dangerous rows at the top of a page about safety.
-export function diesInOneHit(monsterHp: number | null, damagePerHit: number): boolean {
-  if (monsterHp === null || !Number.isFinite(monsterHp) || monsterHp <= 0) return false;
-  if (!Number.isFinite(damagePerHit) || damagePerHit <= 0) return false;
-  return monsterHp <= damagePerHit;
+// The AFK verdict (7 Sep 2026, replacing "dies in one hit"). The old gate
+// let through only monsters with HP under one hit of damage, which for any
+// real character is the Lv 1-25 shelf, however strong the numbers typed in.
+// The user's own definition of safe: "I dodge it, I hit it, I can farm all
+// night". The first two are computable from midgardhub's thresholds; the
+// third is not (no monster attack speed in the data), so it is stood in for
+// by a short fight -- at most N hits -- and the page says so.
+
+export type AfkStyle = 'melee' | 'magic';
+
+export type AfkFail =
+  | 'dodge' // the monster lands on us more often than the cap
+  | 'hit' // we land on it under 80% (melee only; magic never misses)
+  | 'hits' // takes more hits than the cap
+  | 'unknown_hp' // hp is the importer's 0/"???" marker
+  | 'unknown_flee' // no flee_95 for this monster: cannot judge, so not safe
+  | 'unknown_hit'; // no hit_100 (melee): same
+
+export const AFK_FAIL_LABELS: Record<AfkFail, string> = {
+  dodge: 'มันตีเราโดนบ่อยเกิน',
+  hit: 'เราตีมันไม่ค่อยโดน',
+  hits: 'ต้องตีหลายทีเกิน',
+  unknown_hp: 'ไม่มีค่า HP',
+  unknown_flee: 'ไม่มีค่า FLEE ของมอน',
+  unknown_hit: 'ไม่มีค่า HIT ของมอน',
+};
+
+export interface AfkRuleInput {
+  style: AfkStyle;
+  monster: {
+    hp: number | null;
+    flee95: number | null;
+    hit100: number | null;
+    isAggressive: boolean | null;
+    /** Aggressive monster kinds on the map we would stand on; null = unknown. */
+    mapAggroCount: number | null;
+  };
+  me: {
+    flee: number;
+    /** Required for melee, ignored for magic. */
+    hit: number | null;
+    damagePerHit: number;
+  };
+  /** Most hits (casts) a kill may take. */
+  maxHits: number;
+}
+
+export interface AfkVerdict {
+  ok: boolean;
+  fails: AfkFail[];
+  /** % chance the monster's attack lands on us. */
+  theirHitPct: number | null;
+  /** % chance our attack lands. 100 for magic. */
+  myHitPct: number | null;
+  /** Hits (casts) to kill, or null when HP is unknown. */
+  hits: number | null;
+  /** The dodge cap this monster was held to: 10 (strict) or 20. */
+  dodgeCap: number;
+}
+
+// One in five for a monster that waits to be hit; one in ten when it comes
+// to us, when its neighbours do, or when we cast (a landed hit breaks the
+// cast, so a hit costs the whole round, not a sliver of HP).
+export const DODGE_CAP_RELAXED = 20;
+export const DODGE_CAP_STRICT = 10;
+export const MY_HIT_FLOOR = 80;
+export const DEFAULT_MAX_HITS = 5;
+
+function theirChance(flee95: number, myFlee: number): number {
+  return Math.min(100, Math.max(5, 5 + flee95 - myFlee));
+}
+function myChance(myHit: number, hit100: number): number {
+  return Math.min(100, Math.max(5, 100 + myHit - hit100));
+}
+
+export function afkVerdict(input: AfkRuleInput): AfkVerdict {
+  const { style, monster, me, maxHits } = input;
+  const fails: AfkFail[] = [];
+  const strict = style === 'magic' || monster.isAggressive === true || (monster.mapAggroCount ?? 0) > 0;
+  const dodgeCap = strict ? DODGE_CAP_STRICT : DODGE_CAP_RELAXED;
+
+  let theirHitPct: number | null = null;
+  if (monster.flee95 == null) fails.push('unknown_flee');
+  else {
+    theirHitPct = theirChance(monster.flee95, me.flee);
+    if (theirHitPct > dodgeCap) fails.push('dodge');
+  }
+
+  let myHitPct: number | null = null;
+  if (style === 'magic') myHitPct = 100;
+  else if (monster.hit100 == null || me.hit == null) fails.push('unknown_hit');
+  else {
+    myHitPct = myChance(me.hit, monster.hit100);
+    if (myHitPct < MY_HIT_FLOOR) fails.push('hit');
+  }
+
+  let hits: number | null = null;
+  if (monster.hp == null || !Number.isFinite(monster.hp) || monster.hp <= 0) fails.push('unknown_hp');
+  else if (!Number.isFinite(me.damagePerHit) || me.damagePerHit <= 0) fails.push('unknown_hp');
+  else {
+    hits = Math.ceil(monster.hp / me.damagePerHit);
+    if (hits > maxHits) fails.push('hits');
+  }
+
+  return { ok: fails.length === 0, fails, theirHitPct, myHitPct, hits, dodgeCap };
 }

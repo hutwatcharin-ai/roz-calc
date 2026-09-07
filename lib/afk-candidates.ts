@@ -12,11 +12,10 @@ import type { AfkCandidate } from '@/components/AfkFinderResults';
 export async function loadAfkCandidates(): Promise<{ rows: AfkCandidate[]; failed: boolean }> {
   const db = supabaseBrowser();
 
-  // ALL monsters now, not just the non-aggressive ones: with the player's
-  // AGI/LUK known, an aggressive monster whose HIT cannot reach our FLEE
-  // (95% dodge cap) is ALSO a safe AFK target -- the client filters, because
-  // the verdict depends on the character context. The one-hit filter happens
-  // in the browser for the same reason.
+  // ALL monsters, not just the non-aggressive ones: the verdict (dodge cap,
+  // hit floor, hits-to-kill -- lib/afk-safety) depends on the player's own
+  // numbers, which live in the browser, so the client filters. An aggressive
+  // monster we dodge well enough is a safe target too.
   const stats = await fetchAllRows<{
     monster_id: number;
     name_en: string;

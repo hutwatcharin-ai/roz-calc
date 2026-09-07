@@ -7,7 +7,7 @@
 // needs it, and it asks only for the fields that tool reads. Nothing here is
 // required -- a tool shows whatever its filled-in fields allow.
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   playerNumbersFromInput,
   readPlayerNumbers,
@@ -23,6 +23,8 @@ const LABELS: Record<PlayerField, { label: string; hint: string; unlocks: string
   hit: { label: 'HIT', hint: 'เช่น 290', unlocks: 'โอกาสตีโดน' },
   flee: { label: 'FLEE', hint: 'เช่น 195', unlocks: 'มันตีเราโดนไหม' },
   maxHp: { label: 'Max HP', hint: 'เช่น 4200', unlocks: 'มอนตีเราแรงแค่ไหน' },
+  castSeconds: { label: 'วินาทีต่อร่าย', hint: 'เช่น 1.5', unlocks: 'EXP/ชม.' },
+  maxHits: { label: 'ฆ่าได้ภายใน (ที)', hint: 'เช่น 5', unlocks: 'ตัดตัวที่สู้นาน' },
 };
 
 export default function ToolNumbers({
@@ -30,25 +32,37 @@ export default function ToolNumbers({
   numbers,
   onChange,
   note,
+  labels,
 }: {
   fields: PlayerField[];
   numbers: PlayerNumbers;
   onChange: (next: PlayerNumbers) => void;
   note?: string;
+  /** Per-page wording for a field (the AFK finder calls damage "ดาเมจต่อร่าย" for a caster). */
+  labels?: Partial<Record<PlayerField, Partial<{ label: string; hint: string; unlocks: string }>>>;
 }) {
   // Draft strings, not numbers: a half-typed "1" in a number field must not
   // become a value and re-render the results under the cursor.
   const [draft, setDraft] = useState<Partial<Record<PlayerField, string>>>({});
 
+  // A box the player has not typed in follows the remembered numbers: on
+  // mount, when they finish loading from localStorage a tick later, and when
+  // the page swaps its field list (the AFK finder's melee/magic toggle). A box
+  // they have typed in is theirs until they clear it.
+  const touched = useRef(new Set<PlayerField>());
   useEffect(() => {
-    setDraft(
-      Object.fromEntries(fields.map((f) => [f, numbers[f] !== undefined ? String(numbers[f]) : ''])),
-    );
-    // Only on mount: after that the draft is the source of truth for the boxes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setDraft((prev) => {
+      const next = { ...prev };
+      for (const f of fields) {
+        if (touched.current.has(f)) continue;
+        next[f] = numbers[f] !== undefined ? String(numbers[f]) : '';
+      }
+      return next;
+    });
+  }, [fields.join(','), numbers]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function update(field: PlayerField, value: string) {
+    touched.current.add(field);
     const next = { ...draft, [field]: value };
     setDraft(next);
     const parsed = playerNumbersFromInput(next);
@@ -68,14 +82,15 @@ export default function ToolNumbers({
         {fields.map((field) => (
           <label key={field} className="toolnumbers__field">
             <span className="toolnumbers__label">
-              {LABELS[field].label}
-              <span className="toolnumbers__unlocks"> · {LABELS[field].unlocks}</span>
+              {labels?.[field]?.label ?? LABELS[field].label}
+              <span className="toolnumbers__unlocks"> · {labels?.[field]?.unlocks ?? LABELS[field].unlocks}</span>
             </span>
             <input
               className="mono"
               type="number"
-              inputMode="numeric"
-              placeholder={LABELS[field].hint}
+              inputMode={field === 'castSeconds' ? 'decimal' : 'numeric'}
+              step={field === 'castSeconds' ? 0.1 : undefined}
+              placeholder={labels?.[field]?.hint ?? LABELS[field].hint}
               value={draft[field] ?? ''}
               onChange={(e) => update(field, e.target.value)}
             />

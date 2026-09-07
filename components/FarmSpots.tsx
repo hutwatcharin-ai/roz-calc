@@ -27,7 +27,7 @@ export type FarmMode = 'level' | 'afk' | 'plan';
 // result it was meant to introduce.
 const MODES: { key: FarmMode; icon: string; label: string; blurb: string }[] = [
   { key: 'level', icon: '/images/items/607.gif', label: 'เก็บเลเวล', blurb: 'แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP ที่เก็บได้' },
-  { key: 'afk', icon: '/images/items/610.gif', label: 'ทิ้งบอท AFK', blurb: 'มอนที่ไม่โจมตีก่อนและคุณฆ่าได้ในหมัดเดียว' },
+  { key: 'afk', icon: '/images/items/610.gif', label: 'ทิ้งบอท AFK', blurb: 'มอนที่คุณหลบได้ ตีโดน และฆ่าได้ในไม่กี่ที' },
   { key: 'plan', icon: '/images/items/512.gif', label: 'รายการของฉัน', blurb: 'เฉพาะมอนที่กดปุ่ม “เพิ่มเข้าแผน” ไว้' },
 ];
 

@@ -143,7 +143,7 @@ export default async function HomePage({
 
         <Link href="/tools/leveling-spots?mode=afk" className="qcard qcard--pink">
           <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
-          <span>มอนที่ไม่โจมตีก่อนและฆ่าได้ในหมัดเดียว พร้อมเตือนสกิลอันตราย</span>
+          <span>มอนที่คุณหลบได้ ตีโดน และฆ่าได้ในไม่กี่ที พร้อมเตือนสกิลอันตราย</span>
           <em className="qcard__go">หาจุด AFK →</em>
         </Link>
       </div>

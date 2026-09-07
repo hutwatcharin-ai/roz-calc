@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { diesInOneHit, riskySkills, skillRisk } from './afk-safety';
+import { afkVerdict, riskySkills, skillRisk } from './afk-safety';
 
 describe('skillRisk', () => {
   it('flags the four things that break an unattended bot', () => {
@@ -38,23 +38,55 @@ describe('riskySkills', () => {
   });
 });
 
-describe('diesInOneHit', () => {
-  it('is true only when one hit covers the whole HP bar', () => {
-    expect(diesInOneHit(140, 1200)).toBe(true);
-    expect(diesInOneHit(1200, 1200)).toBe(true);
-    expect(diesInOneHit(1201, 1200)).toBe(false);
+describe('afkVerdict', () => {
+  // The user's own character on 7 Sep 2026: FLEE 267, HIT 290, 400 a hit.
+  const me = { flee: 267, hit: 290, damagePerHit: 400 };
+  const eclipse = { hp: 1168, flee95: 249, hit100: 273, isAggressive: false, mapAggroCount: 0 };
+
+  it('passes a Lv 34 monster the old one-hit rule threw away', () => {
+    const v = afkVerdict({ style: 'melee', monster: eclipse, me, maxHits: 5 });
+    expect(v.ok).toBe(true);
+    expect(v.theirHitPct).toBe(5); // 5 + 249 - 267 clamps to the floor
+    expect(v.myHitPct).toBe(100); // 100 + 290 - 273 clamps to the ceiling
+    expect(v.hits).toBe(3);
+    expect(v.dodgeCap).toBe(20);
   });
 
-  it('never treats the unknown-HP marker as a one-hit kill', () => {
-    // hp 0 is the importer's marker for a "???" feed value. Reading it as
-    // "dies instantly" would put the monsters we know least about at the top of
-    // a page whose whole purpose is safety.
-    expect(diesInOneHit(0, 1200)).toBe(false);
-    expect(diesInOneHit(null, 1200)).toBe(false);
+  it('holds a passive monster to one hit in five', () => {
+    // flee_95 282 -> 5 + 282 - 267 = 20: right at the cap, allowed.
+    expect(afkVerdict({ style: 'melee', monster: { ...eclipse, flee95: 282 }, me, maxHits: 5 }).ok).toBe(true);
+    const v = afkVerdict({ style: 'melee', monster: { ...eclipse, flee95: 283 }, me, maxHits: 5 });
+    expect(v.ok).toBe(false);
+    expect(v.fails).toEqual(['dodge']);
   });
 
-  it('refuses to answer without a real damage figure', () => {
-    expect(diesInOneHit(140, 0)).toBe(false);
-    expect(diesInOneHit(140, Number.NaN)).toBe(false);
+  it('holds an aggressive monster, a map with aggressive neighbours, and a caster to one in ten', () => {
+    const near = { ...eclipse, flee95: 280 }; // 18%: fine relaxed, not strict
+    expect(afkVerdict({ style: 'melee', monster: near, me, maxHits: 5 }).ok).toBe(true);
+    expect(afkVerdict({ style: 'melee', monster: { ...near, isAggressive: true }, me, maxHits: 5 }).fails).toEqual(['dodge']);
+    expect(afkVerdict({ style: 'melee', monster: { ...near, mapAggroCount: 2 }, me, maxHits: 5 }).fails).toEqual(['dodge']);
+    expect(afkVerdict({ style: 'magic', monster: near, me, maxHits: 5 }).fails).toEqual(['dodge']);
+  });
+
+  it('wants us to land 80% for melee, and never checks hit for magic', () => {
+    const slippery = { ...eclipse, hit100: 311 }; // 100 + 290 - 311 = 79
+    expect(afkVerdict({ style: 'melee', monster: slippery, me, maxHits: 5 }).fails).toEqual(['hit']);
+    expect(afkVerdict({ style: 'melee', monster: { ...eclipse, hit100: 310 }, me, maxHits: 5 }).ok).toBe(true);
+    const magic = afkVerdict({ style: 'magic', monster: slippery, me: { ...me, hit: null }, maxHits: 5 });
+    expect(magic.ok).toBe(true);
+    expect(magic.myHitPct).toBe(100);
+  });
+
+  it('caps the fight length, and the cap belongs to the caller', () => {
+    const tanky = { ...eclipse, hp: 2001 }; // 6 hits of 400
+    expect(afkVerdict({ style: 'melee', monster: tanky, me, maxHits: 5 }).fails).toEqual(['hits']);
+    expect(afkVerdict({ style: 'melee', monster: tanky, me, maxHits: 6 }).ok).toBe(true);
+  });
+
+  it('fails, not passes, when a threshold it needs is missing', () => {
+    expect(afkVerdict({ style: 'melee', monster: { ...eclipse, flee95: null }, me, maxHits: 5 }).fails).toEqual(['unknown_flee']);
+    expect(afkVerdict({ style: 'melee', monster: { ...eclipse, hit100: null }, me, maxHits: 5 }).fails).toEqual(['unknown_hit']);
+    expect(afkVerdict({ style: 'melee', monster: eclipse, me: { ...me, hit: null }, maxHits: 5 }).fails).toEqual(['unknown_hit']);
+    expect(afkVerdict({ style: 'melee', monster: { ...eclipse, hp: 0 }, me, maxHits: 5 }).fails).toEqual(['unknown_hp']);
   });
 });

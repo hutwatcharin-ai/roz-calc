@@ -16,7 +16,17 @@
 
 export const PLAYER_NUMBERS_KEY = 'roz-calc:tool-numbers';
 
-export type PlayerField = 'level' | 'damagePerHit' | 'aspd' | 'hit' | 'flee' | 'maxHp';
+export type PlayerField =
+  | 'level'
+  | 'damagePerHit'
+  | 'aspd'
+  | 'hit'
+  | 'flee'
+  | 'maxHp'
+  // AFK finder, 7 Sep 2026: seconds per cast for a caster (stands in for
+  // ASPD), and the longest fight the player will leave the bot in.
+  | 'castSeconds'
+  | 'maxHits';
 
 export type PlayerNumbers = Partial<Record<PlayerField, number>>;
 
@@ -25,7 +35,7 @@ export interface StorageLike {
   setItem(key: string, value: string): void;
 }
 
-const FIELDS: PlayerField[] = ['level', 'damagePerHit', 'aspd', 'hit', 'flee', 'maxHp'];
+const FIELDS: PlayerField[] = ['level', 'damagePerHit', 'aspd', 'hit', 'flee', 'maxHp', 'castSeconds', 'maxHits'];
 
 function usable(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value) && value > 0;
@@ -35,6 +45,12 @@ function usable(value: unknown): value is number {
 export function attacksPerSecond(aspd: number | undefined): number | null {
   if (!usable(aspd) || aspd >= 200) return null;
   return 50 / (200 - aspd);
+}
+
+/** Casts per second from the seconds one cast takes (cast time + after-cast delay). */
+export function castsPerSecond(castSeconds: number | undefined): number | null {
+  if (!usable(castSeconds)) return null;
+  return 1 / castSeconds;
 }
 
 /** Validates rather than casts: storage can hold anything an older build or another tab wrote. */
