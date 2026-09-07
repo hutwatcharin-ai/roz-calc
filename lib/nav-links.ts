@@ -75,6 +75,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
   guides: [
     { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
+    { href: '/guides/elemental-weapons', label: 'ทำอาวุธธาตุ', icon: '/images/items/994.gif', ready: true },
+    { href: '/guides/potion-crafting', label: 'ทำยา Alchemist', icon: '/images/items/7134.gif', ready: true },
     { href: '/guides/codes', label: 'โค้ดรับของ', icon: '/images/items/714.gif', ready: true },
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
@@ -144,4 +146,3 @@ export function isActivePrimaryLink(href: string, pathname: string, links?: NavL
   if (linkSection) return sectionForPath(pathname) === linkSection;
   return isActiveLink(href, pathname, links);
 }
-
