@@ -15,17 +15,17 @@
 }
 
 /* ---------- glow ---------- */
-html .card--pink, html .qcard--pink { box-shadow: 4px 4px 0 var(--pink), 0 0 22px var(--glow-pink); }
-html .card--cyan, html .qcard--cyan { box-shadow: 4px 4px 0 var(--cyan), 0 0 22px var(--glow-cyan); }
-html .card--yellow, html .qcard--yellow { box-shadow: 4px 4px 0 var(--yellow), 0 0 22px var(--glow-yellow); }
+html .card--pink, html .qcard--pink { box-shadow: 4px 4px 0 var(--pink), 0 0 14px rgba(255, 61, 154, 0.28); }
+html .card--cyan, html .qcard--cyan { box-shadow: 4px 4px 0 var(--cyan), 0 0 14px rgba(61, 232, 255, 0.28); }
+html .card--yellow, html .qcard--yellow { box-shadow: 4px 4px 0 var(--yellow), 0 0 16px rgba(255, 229, 61, 0.32); }
 
 html .brand__mark em { text-shadow: 0 0 10px var(--glow-yellow), 0 0 22px var(--glow-yellow); }
 html .pagehead__title,
 html h1.pagehead__title { text-shadow: 0 0 18px rgba(61, 232, 255, 0.3); }
 
 html .topnav a.on,
-html .subnav a.on,
-html .modebar__tab--on { box-shadow: 0 0 14px var(--glow-yellow); }
+html .subnav a.on { box-shadow: 0 0 12px rgba(255, 229, 61, 0.34); }
+html .modebar__tab--on { box-shadow: 0 0 12px rgba(61, 232, 255, 0.34); }
 html .btn:hover,
 html .btn:focus-visible { box-shadow: 0 0 16px var(--glow-yellow); }
 
@@ -52,7 +52,7 @@ html body {
     linear-gradient(rgba(143, 134, 196, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(143, 134, 196, 0.07) 1px, transparent 1px);
   background-size: 100% 100%, 36px 36px, 36px 36px;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 /* Panels stay solid so the grid never runs behind text. */
 html .card, html .qcard { background-color: var(--panel); }
@@ -70,18 +70,17 @@ html .sitestats__count,
 html .answer__value { text-shadow: 0 0 12px var(--glow-yellow); }
 html .sitestats__item { border-color: rgba(255, 229, 61, 0.35); }
 
-/* Active nav gets the ▶ cursor of a menu screen. */
-html .topnav a.on::before { content: '▶'; font-size: 9px; margin-right: 6px; animation: neon-blink 1.1s steps(1) infinite; }
-@keyframes neon-blink { 50% { opacity: 0; } }
+/* A static arcade cursor marks location without asking for attention forever. */
+html .topnav a.on::before { content: '▶'; font-size: 9px; margin-right: 6px; color: var(--pink); }
 
 /* Hi-score treatment for the first three rows of a ranked table. */
-html .data-table tr:nth-child(1) td:first-child { color: var(--yellow); text-shadow: 0 0 10px var(--glow-yellow); }
-html .data-table tr:nth-child(2) td:first-child { color: var(--cyan); text-shadow: 0 0 10px var(--glow-cyan); }
-html .data-table tr:nth-child(3) td:first-child { color: var(--pink); text-shadow: 0 0 10px var(--glow-pink); }
+html .data-table.is-ranked tr:nth-child(1) td:first-child { color: var(--yellow); text-shadow: 0 0 10px var(--glow-yellow); }
+html .data-table.is-ranked tr:nth-child(2) td:first-child { color: var(--cyan); text-shadow: 0 0 10px var(--glow-cyan); }
+html .data-table.is-ranked tr:nth-child(3) td:first-child { color: var(--pink); text-shadow: 0 0 10px var(--glow-pink); }
 
 /* Corner brackets on cards, like a cabinet bezel. */
-html .card, html .qcard { position: relative; }
-html .card::after, html .qcard::after {
+html .qcard, html .searchmodal__box { position: relative; }
+html .qcard::after, html .searchmodal__box::after {
   content: '';
   position: absolute; inset: 6px;
   pointer-events: none;
@@ -89,6 +88,11 @@ html .card::after, html .qcard::after {
   border-image: linear-gradient(135deg, rgba(61, 232, 255, 0.5), transparent 30%, transparent 70%, rgba(255, 61, 154, 0.5)) 1;
 }
 
+/* Results and active controls get the brightest light: neon communicates. */
+html .reward-value,
+html .monster-picker__selected strong { text-shadow: 0 0 10px rgba(61, 232, 255, 0.32); }
+html .ceiling-note { box-shadow: inset 8px 0 18px -16px var(--glow-yellow); }
+
 @media (prefers-reduced-motion: reduce) {
-  html .topnav a.on::before { animation: none; }
+  html *, html *::before, html *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
