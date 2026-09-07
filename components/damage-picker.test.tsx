@@ -97,36 +97,41 @@ describe('the damage multiplier tool', () => {
 
 describe('the monster page panel', () => {
   it('renders without JavaScript state, from the monster own fields', async () => {
+    // Undead 1 against Large: Fire and Holy tie at 125 (best), Poison 75,
+    // Shadow and Undead 0 (avoid); Book and Dagger are 50 against Large.
     await mount(<MonsterBestWeaponPanel element="Undead" elementLevel={1} size="Large" />);
     expect(container.textContent).toContain('ตีตัวนี้ด้วยอะไรดี');
-    expect(container.textContent).toContain('Undead1');
+    expect(container.textContent).toContain('ใหญ่');
   });
 
   it('names every element tied for best rather than picking one', async () => {
     // Water-1 takes 150 from Wind and from Poison. A player who owns one of
     // them should not be told to go and find the other.
     await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
-    expect(container.textContent).toContain('Wind');
-    expect(container.textContent).toContain('Poison');
-    expect(container.textContent).toContain('ธาตุนี้เท่ากันหมด');
-  });
-
-  it('groups the weapon types that keep everything, rather than naming one', async () => {
-    // The failure this replaced: a top-eight list where every row read 150%,
-    // because ranking weapon and element together makes the top a tie pile.
-    // Wind into Water-1 is 150 and several weapon types are 100% against
-    // Medium, so all of them belong on the same line.
-    await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
-    expect(container.textContent).toContain('Bare hand');
-    expect(container.textContent).toContain('One-Handed Sword');
+    expect(container.textContent).toContain('Wind / Poison');
     expect(container.textContent).toContain('150%');
   });
 
-  it('says what the worst weapon type costs, in the same element', async () => {
+  it('says which elements to avoid, worst first', async () => {
     await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
-    // Every weapon at 75% against Medium lands 112.5% instead of 150%.
-    expect(container.textContent).toContain('112.5%');
-    expect(container.textContent).toContain('หายไป 25%');
+    expect(container.textContent).toContain('เลี่ยง Water 25%');
+  });
+
+  it('says "any" instead of listing nine equal elements', async () => {
+    // Eclipse: Neutral 3, every element 100 except Ghost 50.
+    await mount(<MonsterBestWeaponPanel element="Neutral" elementLevel={3} size="Medium" />);
+    expect(container.textContent).toContain('ไหนก็ได้');
+    expect(container.textContent).not.toContain('Water / Earth');
+    expect(container.textContent).toContain('เลี่ยง Ghost 50%');
+  });
+
+  it('names the weapon types that lose to size, in Thai, pairs folded', async () => {
+    await mount(<MonsterBestWeaponPanel element="Water" elementLevel={1} size="Medium" />);
+    expect(container.textContent).toContain('กลาง');
+    expect(container.textContent).toContain('ขวาน');
+    expect(container.textContent).not.toContain('ขวานมือเดียว');
+    expect(container.textContent).toContain('75%');
+    expect(container.textContent).not.toContain('One-Handed');
   });
 
   it('shows nothing when a field it needs is missing', async () => {
