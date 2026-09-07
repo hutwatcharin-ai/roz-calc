@@ -92,8 +92,10 @@ export default function MonsterDamageCalculator({
 
   const matches = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    if (!needle) return monsters.slice(0, 40);
-    return monsters.filter((m) => m.name_en.toLowerCase().includes(needle)).slice(0, 40);
+    // Do not render a wall of forty choices before the calculator. Results
+    // appear only while searching; the chosen monster remains in the answer.
+    if (!needle) return [];
+    return monsters.filter((m) => m.name_en.toLowerCase().includes(needle)).slice(0, 8);
   }, [monsters, query]);
 
   const monster = monsters.find((m) => m.id === monsterId) ?? null;
@@ -194,7 +196,13 @@ export default function MonsterDamageCalculator({
             style={{ marginTop: 4, display: 'block', maxWidth: 320 }}
           />
         </label>
-        <div className="chiprow">
+        {monster && query.trim() === '' && (
+          <p className="monster-picker__selected" aria-live="polite">
+            เลือกอยู่: <strong>{monster.name_en}</strong>{' '}
+            <span className="mono">Lv{monster.level}</span>
+          </p>
+        )}
+        <div className="chiprow monster-picker__results" aria-live="polite">
           {matches.map((m) => (
             <button
               key={m.id}
@@ -205,7 +213,7 @@ export default function MonsterDamageCalculator({
               {m.name_en} <span className="mono" style={{ color: 'var(--faint)' }}>Lv{m.level}</span>
             </button>
           ))}
-          {matches.length === 0 && <span className="muted">ไม่พบมอนสเตอร์ชื่อนี้</span>}
+          {query.trim() !== '' && matches.length === 0 && <span className="muted">ไม่พบมอนสเตอร์ชื่อนี้</span>}
         </div>
       </div>
 

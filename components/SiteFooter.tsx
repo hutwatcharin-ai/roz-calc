@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { SECTION_LINKS } from '@/lib/nav-links';
 import { getLastUpdated } from '@/lib/last-updated';
 import { timeAgoTh } from '@/lib/time-ago';
+import FooterSection from './FooterSection';
 
 function LinkList({ links }: { links: typeof SECTION_LINKS.database }) {
   return (
@@ -54,22 +55,19 @@ export default async function SiteFooter() {
             </p>
           </div>
 
-          <nav className="sitefooter__col" aria-label="ฐานข้อมูล">
-            <h2 className="sitefooter__h">ฐานข้อมูล</h2>
-            <LinkList links={SECTION_LINKS.database} />
-          </nav>
+          <FooterSection title="ฐานข้อมูล">
+            <nav aria-label="ฐานข้อมูล"><LinkList links={SECTION_LINKS.database} /></nav>
+          </FooterSection>
 
-          <nav className="sitefooter__col" aria-label="เครื่องมือ">
-            <h2 className="sitefooter__h">เครื่องมือ</h2>
-            <LinkList links={SECTION_LINKS.tools} />
-          </nav>
+          <FooterSection title="เครื่องมือ">
+            <nav aria-label="เครื่องมือ"><LinkList links={SECTION_LINKS.tools} /></nav>
+          </FooterSection>
 
           {/* Split on purpose (user, 2 Sep): a bug report and an ad inquiry
               are different audiences reading the same footer -- a would-be
               advertiser landing on "แจ้งบั๊กที่ GitHub" reads as a hobby
               project with no business contact, and quietly leaves. */}
-          <div className="sitefooter__col">
-            <h2 className="sitefooter__h">เกี่ยวกับ</h2>
+          <FooterSection title="เกี่ยวกับ">
             <ul className="sitefooter__list">
               <li>
                 <Link href="/about">เกี่ยวกับเว็บนี้</Link>
@@ -89,7 +87,7 @@ export default async function SiteFooter() {
             >
               ลงโฆษณา / ติดต่อธุรกิจ →
             </a>
-          </div>
+          </FooterSection>
         </div>
 
         <div className="sitefooter__bottom">

@@ -146,7 +146,7 @@ export default function GlobalSearch() {
   return (
     <>
       <button type="button" className="searchbtn" onClick={() => setOpen(true)}>
-        <span aria-hidden="true">🔍</span> ค้นหาทุกอย่าง
+        <span aria-hidden="true">🔍</span> <span className="searchbtn__label">ค้นหาทุกอย่าง</span>
       </button>
 
       {open && (
