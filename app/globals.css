@@ -1892,3 +1892,46 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .searchmiss__line { margin: 6px 0 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .searchmiss__kind { color: var(--faint); font-size: 11px; margin-inline-start: 5px; }
 .searchmiss { text-align: left; }
+
+/* Search everything: the header button and its dialog (GlobalSearch). */
+.searchbtn {
+  margin-inline-start: auto;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; min-height: 36px;
+  background: var(--panel); border: 1px solid var(--hair); border-radius: 999px;
+  color: var(--dim); font: 500 13px/1 var(--font-sarabun), sans-serif; cursor: pointer;
+}
+.searchbtn:hover { color: var(--text); border-color: var(--cyan); box-shadow: 0 0 12px var(--glow-cyan); }
+.searchmodal {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(2px);
+  display: flex; align-items: flex-start; justify-content: center;
+  /* Clear of the two header rows, which stay visible behind the dialog. */
+  padding: max(150px, 14vh) 16px 16px;
+}
+.searchmodal__box { width: min(560px, 100%); padding: 0; overflow: hidden; }
+.searchmodal__input {
+  width: 100%; padding: 14px 16px; background: transparent; border: 0;
+  border-bottom: 1px solid var(--hair); color: var(--text); font-size: 16px; outline: none;
+}
+.searchmodal__list { max-height: 52vh; overflow-y: auto; }
+.searchmodal__note { padding: 14px 16px; margin: 0; color: var(--faint); font-size: 13px; }
+.searchmodal__note--warn { border-bottom: 1px solid var(--hair); }
+.searchmodal__row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 16px; border-bottom: 1px solid var(--hair);
+  color: var(--text); text-decoration: none;
+}
+.searchmodal__row:hover { background: var(--panel-2); }
+.searchmodal__name { display: flex; align-items: center; gap: 8px; }
+.searchmodal__badge {
+  flex: none; font-size: 10px; color: var(--faint);
+  border: 1px solid var(--hair); border-radius: 4px; padding: 2px 6px;
+}
+@media (max-width: 640px) {
+  /* The brand and the tabs already fill the first row on a phone; the button
+     drops onto its own line rather than squeezing them. */
+  .searchbtn { margin-inline-start: 0; width: 100%; justify-content: center; }
+  .searchmodal { padding-top: 120px; }
+}

@@ -14,9 +14,10 @@ describe('normalise', () => {
 });
 
 describe('matchScore', () => {
-  it('ranks exact, then prefix, then word-prefix, then anywhere', () => {
+  it('ranks exact, whole first word, prefix, word-prefix, then anywhere', () => {
     expect(matchScore('Orc', 'orc')).toBe(100);
-    expect(matchScore('Orc Warrior', 'orc')).toBe(80);
+    expect(matchScore('Orc Warrior', 'orc')).toBe(90);
+    expect(matchScore('Orcish Axe', 'orc')).toBe(80);
     expect(matchScore('Desert Wolf B', 'wolf')).toBe(70);
     expect(matchScore('Orcish Axe', 'rcish')).toBe(60);
   });
@@ -106,5 +107,14 @@ describe('searchWords', () => {
   it('gives one word per condition, punctuation dropped', () => {
     expect(searchWords(' Arc Wand [1] ')).toEqual(['arc', 'wand', '1']);
     expect(searchWords('   ')).toEqual([]);
+  });
+});
+
+describe('ties inside a score band', () => {
+  it('offers the plain name before the decorated one', () => {
+    // "card poring" scores every one of these 50 (all words present); the
+    // one the player almost certainly meant is the shortest.
+    const cards = ['Gem Poring Card', 'Poring Card', 'Picky Poring Card'];
+    expect(rankMatches(cards, 'card poring', (c) => c)[0]).toBe('Poring Card');
   });
 });

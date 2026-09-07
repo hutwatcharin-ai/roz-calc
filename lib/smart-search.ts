@@ -47,6 +47,10 @@ export function matchScore(name: string, query: string): number {
   const q = normalise(query);
   if (!q) return 0;
   if (n === q) return 100;
+  // Starts with the query AND stops there: "Orc Warrior" for "orc" is the
+  // monster; "Orcish Axe" merely begins with the same letters, and used to
+  // outrank it whenever row order felt like it.
+  if (n.startsWith(`${q} `)) return 90;
   if (n.startsWith(q)) return 80;
 
   const words = n.split(' ');
@@ -184,8 +188,9 @@ export function suggest<T>(
 /**
  * Filter and rank in one pass: the rows that match, best first.
  *
- * `tiebreak` keeps a stable order inside a score band (alphabetical is the
- * usual choice; the caller may prefer id).
+ * Inside a score band the shorter name wins, then alphabetical: "card
+ * poring" matches Poring Card and Gem Poring Card equally by the rule, and
+ * the plain one is what was asked for. `tiebreak` overrides that.
  */
 export function rankMatches<T>(
   items: readonly T[],
@@ -200,7 +205,10 @@ export function rankMatches<T>(
   scored.sort(
     (a, b) =>
       b.score - a.score ||
-      (tiebreak ? tiebreak(a.item, b.item) : nameOf(a.item).localeCompare(nameOf(b.item))),
+      (tiebreak
+        ? tiebreak(a.item, b.item)
+        : nameOf(a.item).length - nameOf(b.item).length ||
+          nameOf(a.item).localeCompare(nameOf(b.item))),
   );
   return scored.map((s) => s.item);
 }

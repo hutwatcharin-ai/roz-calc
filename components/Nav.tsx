@@ -6,6 +6,7 @@
 
 import Link from 'next/link';
 import NavTabs from './NavTabs';
+import GlobalSearch from './GlobalSearch';
 
 export default function Nav() {
   return (
@@ -17,6 +18,9 @@ export default function Nav() {
           RO ZERO<em>THAI</em>
         </Link>
         <NavTabs />
+        {/* Right-aligned by .topbar__search's margin, so it keeps its place
+            whether or not the section row below is showing. */}
+        <GlobalSearch />
       </div>
     </div>
   );
