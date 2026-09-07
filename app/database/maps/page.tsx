@@ -1,5 +1,6 @@
 // app/database/maps/page.tsx
 import Link from 'next/link';
+import { mapImage } from '@/lib/map-image';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { getMapCanonical } from '@/lib/map-canonical';
@@ -145,7 +146,19 @@ export default async function MapsPage({
                 {(maps ?? []).map((m) => (
                   <tr key={m.map_code}>
                     <td data-label="">
-                      <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`}>
+                      <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`} className="maprow">
+                        {/* Thumbnail of the same picture the map page shows;
+                            a blank square keeps rows aligned for the 134 maps
+                            without one. Lazy: 50 rows a page, most below
+                            the fold. */}
+                        {(() => {
+                          const pic = mapImage(m.map_code);
+                          return pic ? (
+                            <img className="maprow__thumb" src={pic.src} alt="" width={40} height={40} loading="lazy" decoding="async" />
+                          ) : (
+                            <span className="maprow__thumb maprow__thumb--none" aria-hidden="true" />
+                          );
+                        })()}
                         {/* map_display_name is populated for every row today --
                             111 of 497 just repeat their own map_code, which is
                             handled above by showing the code either way. This

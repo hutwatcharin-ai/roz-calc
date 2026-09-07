@@ -118,26 +118,34 @@ export default async function MapDetailPage({ params }: { params: { code: string
         มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
         {cCount > 0 && ` (+${cCount} มอน Challenge)`}
       </p>
+      {/* Picture beside the table on wide screens: the map page used to
+          leave its right half empty (UX critique, 6 Sep). Stacked on phones. */}
+      <div className={picture ? 'maplayout' : undefined}>
       {picture && (
-        <figure className="mapimg">
-          {/* 205x205 pixel minimap: scaled up it must stay crisp, and it is
-              decorative next to the monster table, so the caption carries the
-              credit and the alt text stays short. Not lazy -- it sits above
-              the fold, and a lazy image there paints as an empty box first. */}
+        <figure className={picture.kind === 'full' ? 'mapimg mapimg--full' : 'mapimg'}>
+          {/* Two sources: prontera.info's ~512 px terrain render when it has
+              the map, else ratemyserver's 205 px minimap (scaled up, kept
+              crisp). Decorative next to the monster table, so the caption
+              carries the credit and the alt text stays short. Not lazy -- it
+              sits above the fold, and a lazy image there paints as an empty
+              box first. */}
           <img
             src={picture.src}
             alt={`แผนที่ ${name}`}
-            width={205}
-            height={205}
+            width={picture.width}
+            height={picture.height}
             decoding="async"
           />
           <figcaption>
-            แผนที่ย่อ · ที่มา ratemyserver.net
+            {picture.kind === 'full' ? 'แผนที่ · ที่มา prontera.info' : 'แผนที่ย่อ · ที่มา ratemyserver.net'}
             {picture.fromCode && ` (ไฟล์ชื่อ ${picture.fromCode})`}
           </figcaption>
         </figure>
       )}
-      <MapMonsterTable monsters={monsters} cCount={cCount} />
+      <div className="maplayout__table">
+        <MapMonsterTable monsters={monsters} cCount={cCount} />
+      </div>
+      </div>
     </main>
   );
 }

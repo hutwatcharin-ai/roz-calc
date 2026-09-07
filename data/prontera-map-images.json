@@ -1,0 +1,1147 @@
+{
+"tu_ac01_e": {
+"asset": "/assets/abc2f4ec-97d3-417f-a8c4-121925a65f74",
+"name": "Academy 1F",
+"path": "/maps/academy-1f"
+},
+"alberta": {
+"asset": "/assets/38fdf90c-03cc-46dc-8858-a0de05ecb320",
+"name": "Alberta, the Port City",
+"path": "/maps/alberta-the-port-city"
+},
+"anthell01": {
+"asset": "/assets/4c1fce81-469b-4257-b667-120f0477b30f",
+"name": "Ant Hell 1F",
+"path": "/maps/ant-hell-1f"
+},
+"alde_alche": {
+"asset": "/assets/5edd6881-12b7-4c80-93c2-28d929be59f3",
+"name": "Al De Baran, the Border City",
+"path": "/maps/al-de-baran-the-border-city"
+},
+"tu_ac02_f": {
+"asset": "/assets/b87d64ad-d0f5-4e31-9677-2d7032f1ed42",
+"name": "Academy 2F",
+"path": "/maps/academy-2f"
+},
+"1@ant01": {
+"asset": "/assets/6c370568-0d20-4632-99d5-92485f9449fc",
+"name": "Ant Hell",
+"path": "/maps/ant-hell"
+},
+"b_an_d02": {
+"asset": "/assets/f1cd74c4-df62-4e61-8a8e-054bfdc6d0d0",
+"name": "Ant Hell 2F",
+"path": "/maps/ant-hell-2f"
+},
+"gefg_cas04": {
+"asset": "/assets/4831ac43-f976-494d-9fbc-126c3f1d3a96",
+"name": "Bergel",
+"path": "/maps/bergel"
+},
+"in_moc_16": {
+"asset": "/assets/ddbffbb8-ef57-4ea1-87c4-d1a1c591ae5b",
+"name": "Assassin Guild",
+"path": "/maps/assassin-guild"
+},
+"payg_cas05": {
+"asset": "/assets/6e6f8de9-c79e-4de1-8cbf-7191133a4b93",
+"name": "Bamboo Grove Hill",
+"path": "/maps/bamboo-grove-hill"
+},
+"gl_chyard": {
+"asset": "/assets/821ec3fd-ff37-46a4-9f89-7899222f437c",
+"name": "Catacombs",
+"path": "/maps/catacombs"
+},
+"payg_cas01": {
+"asset": "/assets/569dc4d9-a30f-4038-9e19-6bc94b228a5c",
+"name": "Bright Arbor",
+"path": "/maps/bright-arbor"
+},
+"gef_fild13": {
+"asset": "/assets/4ce9af51-d072-4eac-9a7a-a2c138be86db",
+"name": "Britoniah",
+"path": "/maps/britoniah"
+},
+"fire": {
+"asset": "/assets/eac3c8a4-f146-4612-85fb-1fdf89212747",
+"name": "Britoniah Dungeon 2F",
+"path": "/maps/britoniah-dungeon-2f"
+},
+"gld_dun04": {
+"asset": "/assets/7ee634c8-4924-4d76-a161-85e88e43fc1e",
+"name": "Britoniah Dungeon 1F",
+"path": "/maps/britoniah-dungeon-1f"
+},
+"c_tower1": {
+"asset": "/assets/63a43ab3-2adc-4a18-ac7a-a847fd7707ad",
+"name": "Clock Tower 1F",
+"path": "/maps/clock-tower-1f"
+},
+"izlu2dun": {
+"asset": "/assets/20a31b78-1a21-4b4f-a2d8-3c7f89157511",
+"name": "Byalan Island",
+"path": "/maps/byalan-island"
+},
+"prt_cas": {
+"asset": "/assets/12f6d0e8-4137-4a9c-9af0-bfe267935e64",
+"name": "Central Palace of Prontera",
+"path": "/maps/central-palace-of-prontera"
+},
+"um_dun01": {
+"asset": "/assets/f0eeb9cc-d3fc-463f-9dcb-36807eb2305a",
+"name": "Carpenter's Shop in the Tree",
+"path": "/maps/carpenter-s-shop-in-the-tree"
+},
+"sec_pri": {
+"asset": "/assets/6386782c-1a7e-4890-8f07-197b10bc140e",
+"name": "Chamber of Atonement (Valhalla Palace)",
+"path": "/maps/chamber-of-atonement-valhalla-palace"
+},
+"alde_dun01": {
+"asset": "/assets/1808a312-b36c-44f2-af4b-bd2f94f9b3e7",
+"name": "Clock Tower B1F",
+"path": "/maps/clock-tower-b1f"
+},
+"alde_dun02": {
+"asset": "/assets/6250e1dc-c7d7-40cf-9421-7b09943cc344",
+"name": "Clock Tower B2F",
+"path": "/maps/clock-tower-b2f"
+},
+"alde_dun04": {
+"asset": "/assets/bb8cd7aa-c54d-481e-97cd-0f39552a036b",
+"name": "Clock Tower B4F",
+"path": "/maps/clock-tower-b4f"
+},
+"alde_dun03": {
+"asset": "/assets/294d9aca-e7f2-4bcc-9533-fafb40bb00f2",
+"name": "Clock Tower B3F",
+"path": "/maps/clock-tower-b3f"
+},
+"job_duncer": {
+"asset": "/assets/f33d752e-e63e-4cb8-993c-256118b7ab44",
+"name": "Comodo, the Beach Town",
+"path": "/maps/comodo-the-beach-town"
+},
+"c_tower2": {
+"asset": "/assets/a0f522f5-e6a5-4ff4-8e5b-0bf1354ae8c4",
+"name": "Clock Tower 2F",
+"path": "/maps/clock-tower-2f"
+},
+"beach_dun3": {
+"asset": "/assets/2510bde3-b5ac-48f4-aa20-090242d397c5",
+"name": "East Cave Mao",
+"path": "/maps/east-cave-mao"
+},
+"cmd_fild09": {
+"asset": "/assets/55e9eedb-5431-4e72-ba3a-940155b2b456",
+"name": "Fortress Saint Darmain, South Side",
+"path": "/maps/fortress-saint-darmain-south-side"
+},
+"cmd_fild08": {
+"asset": "/assets/ab4024f8-793e-409d-8305-ad9e3d12f9eb",
+"name": "Fortress Saint Darmain, East Side",
+"path": "/maps/fortress-saint-darmain-east-side"
+},
+"c_tower3": {
+"asset": "/assets/1a5120a9-c6ae-40db-867f-3e6a9827b63d",
+"name": "Clock Tower 3F",
+"path": "/maps/clock-tower-3f"
+},
+"c_tower4": {
+"asset": "/assets/cbad6bee-9bb9-4a79-a819-039648d0e5e5",
+"name": "Clock Tower 4F",
+"path": "/maps/clock-tower-4f"
+},
+"cmd_fild06": {
+"asset": "/assets/63b354c0-1825-4cc8-82f5-23a004e9c29f",
+"name": "Fortress Saint Darmain, West Side",
+"path": "/maps/fortress-saint-darmain-west-side"
+},
+"gef_dun00": {
+"asset": "/assets/987f01b7-c7a0-4b62-8ec6-13dada663001",
+"name": "Geffen Dungeon B1F",
+"path": "/maps/geffen-dungeon-b1f"
+},
+"gef_dun01": {
+"asset": "/assets/df0638c9-4568-4188-90bc-52b1feaf79b8",
+"name": "Geffen Dungeon B2F",
+"path": "/maps/geffen-dungeon-b2f"
+},
+"gef_dun02": {
+"asset": "/assets/25aa7a30-8ea5-41e4-9e8d-a83b51daac50",
+"name": "Geffen Dungeon B3F",
+"path": "/maps/geffen-dungeon-b3f"
+},
+"b_gef_f03": {
+"asset": "/assets/6852e831-6489-43df-bdb6-26cb3b2ec585",
+"name": "Geffen Field",
+"path": "/maps/geffen-field"
+},
+"gef_fild01": {
+"asset": "/assets/0dc66d91-7131-4123-893d-52b59ffd33d3",
+"name": "Geffen Field 01",
+"path": "/maps/geffen-field-01"
+},
+"gef_fild03": {
+"asset": "/assets/f6653592-ec71-48e6-a394-56e30b62ef3d",
+"name": "Geffen Field 03",
+"path": "/maps/geffen-field-03"
+},
+"gef_fild02": {
+"asset": "/assets/0f346b05-01bd-4ec7-b3f8-b2387cfe52a2",
+"name": "Geffen Field 02",
+"path": "/maps/geffen-field-02"
+},
+"gef_fild06": {
+"asset": "/assets/b1746ee4-f2d6-4a5e-bd6c-570d9ff68626",
+"name": "Geffen Field 06",
+"path": "/maps/geffen-field-06"
+},
+"gef_fild07": {
+"asset": "/assets/27450963-6def-4da5-96ce-0232e2d70a1c",
+"name": "Geffen Field 07",
+"path": "/maps/geffen-field-07"
+},
+"1@sewb2": {
+"asset": "/assets/fb69300b-b74f-412e-a841-5d324ac0efd8",
+"name": "Culvert",
+"path": "/maps/culvert"
+},
+"gefg_cas02": {
+"asset": "/assets/19629dc7-6372-4cd0-b726-d6c289c7d2ef",
+"name": "Eeyorbriggar",
+"path": "/maps/eeyorbriggar"
+},
+"gef_fild08": {
+"asset": "/assets/1e550430-9fbf-4008-ad96-1af90c7a4b01",
+"name": "Geffen Field 08",
+"path": "/maps/geffen-field-08"
+},
+"gef_fild11": {
+"asset": "/assets/d7e2b29e-9767-43c0-9988-a5c91762239a",
+"name": "Geffen Field 11",
+"path": "/maps/geffen-field-11"
+},
+"gef_tower": {
+"asset": "/assets/92fd0790-1d85-443a-b63b-38d1cd8bab4d",
+"name": "Geffen Tower",
+"path": "/maps/geffen-tower"
+},
+"gef_fild09": {
+"asset": "/assets/c8871c65-ed5b-48d4-9ac0-ba889f776136",
+"name": "Geffen Field 09",
+"path": "/maps/geffen-field-09"
+},
+"gl_cas02": {
+"asset": "/assets/4612e7c7-9880-4b14-bcb2-f4d530c23c75",
+"name": "Glast Heim Castle 2F",
+"path": "/maps/glast-heim-castle-2f"
+},
+"gl_sew01": {
+"asset": "/assets/331a9500-f0b1-470b-9194-3a0573c553b9",
+"name": "Glast Heim Culvert 1F",
+"path": "/maps/glast-heim-culvert-1f"
+},
+"gl_sew03": {
+"asset": "/assets/bbf54299-f019-4e1d-8c0a-3711041329c7",
+"name": "Glast Heim Culvert 3F",
+"path": "/maps/glast-heim-culvert-3f"
+},
+"gl_sew04": {
+"asset": "/assets/527932a3-d99a-47f0-8f45-071b464a5c1d",
+"name": "Glast Heim Culvert 4F",
+"path": "/maps/glast-heim-culvert-4f"
+},
+"gl_cas01": {
+"asset": "/assets/a01ebca1-3b89-4849-8556-7b9d9524392f",
+"name": "Glast Heim Castle 1F",
+"path": "/maps/glast-heim-castle-1f"
+},
+"gef_fild04": {
+"asset": "/assets/655c9a8f-a6cb-4fb8-8bd4-44282994ecb1",
+"name": "Geffen Field 04",
+"path": "/maps/geffen-field-04"
+},
+"gld_dun01": {
+"asset": "/assets/8a3468b4-1009-48be-a8d6-463c58b64157",
+"name": "Greenwood Lake Dungeon 1F",
+"path": "/maps/greenwood-lake-dungeon-1f"
+},
+"gef_fild00": {
+"asset": "/assets/823b0560-ba55-4a09-a6d1-2b5778d1c780",
+"name": "Geffen Field 00",
+"path": "/maps/geffen-field-00"
+},
+"gef_fild05": {
+"asset": "/assets/d0e922be-d73c-45f6-bd6a-f02ff04f8f32",
+"name": "Gypsy Village",
+"path": "/maps/gypsy-village"
+},
+"glast_01": {
+"asset": "/assets/9b9e8180-4ee0-4ce1-a7c1-b67ebe2353fc",
+"name": "Glast Heim",
+"path": "/maps/glast-heim"
+},
+"earth": {
+"asset": "/assets/270258dd-b0a0-47a0-ae04-1f77bbe9c936",
+"name": "Valkyrie Realm Dungeon 2F",
+"path": "/maps/valkyrie-realm-dungeon-2f"
+},
+"geffen": {
+"asset": "/assets/06f37145-630d-4763-b80b-1c38dbfb8ea7",
+"name": "Geffen, the City of Magic",
+"path": "/maps/geffen-the-city-of-magic"
+},
+"gl_sew02": {
+"asset": "/assets/acd88153-3896-4f06-8eb8-a549a95fdca6",
+"name": "Glast Heim Culvert 2F",
+"path": "/maps/glast-heim-culvert-2f"
+},
+"in_hunter": {
+"asset": "/assets/28164f77-0525-4bed-8f48-8b0fe87e5fff",
+"name": "Hunter Guild",
+"path": "/maps/hunter-guild"
+},
+"prtg_cas05": {
+"asset": "/assets/4896d950-c1fc-4c5f-847a-8ade0a3ef4db",
+"name": "Gondul",
+"path": "/maps/gondul"
+},
+"pay_gld": {
+"asset": "/assets/808d36b6-30a6-4c8f-a9eb-4a3fb86ecaa4",
+"name": "Greenwood Lake",
+"path": "/maps/greenwood-lake"
+},
+"aldeg_cas02": {
+"asset": "/assets/6e2410ce-e67c-444d-920d-79212a84528c",
+"name": "Hohenschwangau",
+"path": "/maps/hohenschwangau"
+},
+"cmd_in01": {
+"asset": "/assets/f7089168-b550-4a7d-9202-fcbaa41c5251",
+"name": "Inside Comodo",
+"path": "/maps/inside-comodo"
+},
+"payg_cas03": {
+"asset": "/assets/001b8d50-efb9-48e0-8e18-3762685f00b4",
+"name": "Holy Shadow",
+"path": "/maps/holy-shadow"
+},
+"um_fild04": {
+"asset": "/assets/928ea65d-4291-4aa4-99ac-2077c5585174",
+"name": "Hoomga Jungle in Umbala",
+"path": "/maps/hoomga-jungle-in-umbala"
+},
+"alberta_in": {
+"asset": "/assets/505216e4-ca23-4b7d-a5b1-0c3c1c306d57",
+"name": "Inside Alberta",
+"path": "/maps/inside-alberta"
+},
+"aldeba_in": {
+"asset": "/assets/40b4e912-8ab2-41ed-bbaa-44900927ef03",
+"name": "Inside Al De Baran",
+"path": "/maps/inside-al-de-baran"
+},
+"alb_ship": {
+"asset": "/assets/d8e9422d-f048-4dc0-898b-cfd9340b8477",
+"name": "Inside Alberta Ship",
+"path": "/maps/inside-alberta-ship"
+},
+"morocc_in": {
+"asset": "/assets/4ea20024-6f9a-4f89-ae24-e309fa623dcd",
+"name": "Inside Morroc",
+"path": "/maps/inside-morroc"
+},
+"gl_in01": {
+"asset": "/assets/0f2787e7-042f-4d62-9925-6721972ad103",
+"name": "Inside Glast Heim",
+"path": "/maps/inside-glast-heim"
+},
+"geffen_in": {
+"asset": "/assets/9353fbb1-556c-4f7e-a9d9-ce9d5f86ab6a",
+"name": "Inside Geffen",
+"path": "/maps/inside-geffen"
+},
+"izlude_in": {
+"asset": "/assets/d32d9c51-8cc5-4cd1-a248-f0e01dfed08c",
+"name": "Inside Izlude",
+"path": "/maps/inside-izlude"
+},
+"xmas_in": {
+"asset": "/assets/a0ec0e80-9d1f-402c-bbaa-233112d84e5e",
+"name": "Inside Lutie",
+"path": "/maps/inside-lutie"
+},
+"payon_in03": {
+"asset": "/assets/5206d57d-526a-4ea3-bd24-2def348c2716",
+"name": "Inside Payon",
+"path": "/maps/inside-payon"
+},
+"monk_in": {
+"asset": "/assets/986f68ed-c2db-4d65-a19b-d3e69afbab70",
+"name": "Inside St. Capitolina Abbey",
+"path": "/maps/inside-st-capitolina-abbey"
+},
+"in_orcs01": {
+"asset": "/assets/fc9845bd-b2ef-46be-9f98-88e1c4f6918a",
+"name": "Inside Orc Village",
+"path": "/maps/inside-orc-village"
+},
+"treasure_n1": {
+"asset": "/assets/12737a47-8022-4c17-a7c2-b4679b1dcb14",
+"name": "Izlude Shipwreck 1F",
+"path": "/maps/izlude-shipwreck-1f"
+},
+"prt_church": {
+"asset": "/assets/e5a57c52-098d-4d10-bb80-a833948bea5f",
+"name": "Inside Prontera Sanctuary",
+"path": "/maps/inside-prontera-sanctuary"
+},
+"prt_castle": {
+"asset": "/assets/17b78d14-5e97-4ce9-91ca-ae3e5c03039e",
+"name": "Inside Prontera Castle",
+"path": "/maps/inside-prontera-castle"
+},
+"prt_in": {
+"asset": "/assets/d8c5ff60-7e1d-43b9-be4b-67da02a687f1",
+"name": "Inside Prontera",
+"path": "/maps/inside-prontera"
+},
+"um_in": {
+"asset": "/assets/881f5b7e-ddd0-430e-a42a-6d34eec26db1",
+"name": "Inside Umbala",
+"path": "/maps/inside-umbala"
+},
+"sec_in02": {
+"asset": "/assets/f578513d-9c20-4aa0-b50e-aab238fa855d",
+"name": "Inside Valhalla",
+"path": "/maps/inside-valhalla"
+},
+"alb2trea": {
+"asset": "/assets/4de86c06-c8e9-4722-9495-0bffde9c31b7",
+"name": "Island Near the Shipwreck",
+"path": "/maps/island-near-the-shipwreck"
+},
+"cmd_fild02": {
+"asset": "/assets/d8b11abd-dbb2-4354-afc8-49a1ec2a35a7",
+"name": "Kokomo Beach 02",
+"path": "/maps/kokomo-beach-02"
+},
+"cmd_fild04": {
+"asset": "/assets/810c99b3-a815-4b58-8013-4b7075eb5946",
+"name": "Kokomo Beach 04",
+"path": "/maps/kokomo-beach-04"
+},
+"prtg_cas01": {
+"asset": "/assets/50c23219-09f5-40af-b9cc-ee3abc733f89",
+"name": "Kriemhild",
+"path": "/maps/kriemhild"
+},
+"treasure_n2": {
+"asset": "/assets/3580fa80-774b-43f1-aff7-91e90872fb57",
+"name": "Izlude Shipwreck 2F",
+"path": "/maps/izlude-shipwreck-2f"
+},
+"prt_maze03": {
+"asset": "/assets/ff0ec695-fec2-4df5-820b-e8d4bda63b9a",
+"name": "Labyrinth Forest 3F",
+"path": "/maps/labyrinth-forest-3f"
+},
+"tu_town_e": {
+"asset": "/assets/b8d3fdaa-1618-41bb-9e27-8e1dabed08f6",
+"name": "Izlude, the Satellite City",
+"path": "/maps/izlude-the-satellite-city"
+},
+"um_fild03": {
+"asset": "/assets/b85bfb6d-4d38-4070-be5a-7bb7eff3a31c",
+"name": "Kalala Swamp in Umbala",
+"path": "/maps/kalala-swamp-in-umbala"
+},
+"gl_knt02": {
+"asset": "/assets/96a02621-5d73-459e-a89e-019c9a8cb0f6",
+"name": "Knights Hall 2F",
+"path": "/maps/knights-hall-2f"
+},
+"gl_knt01": {
+"asset": "/assets/f5fe221d-33bd-4b9e-a75f-bc43bcaf65da",
+"name": "Knights Hall 1F",
+"path": "/maps/knights-hall-1f"
+},
+"prt_maze01": {
+"asset": "/assets/09e069fa-3601-4572-89db-2690f047adb5",
+"name": "Labyrinth Forest 1F",
+"path": "/maps/labyrinth-forest-1f"
+},
+"prt_maze02": {
+"asset": "/assets/27955b88-a17e-4ba2-bd70-c721772344f4",
+"name": "Labyrinth Forest 2F",
+"path": "/maps/labyrinth-forest-2f"
+},
+"xmas_fild01": {
+"asset": "/assets/7d130aa4-70d3-4159-ac9e-2c58b49fe3e4",
+"name": "Lutie Field",
+"path": "/maps/lutie-field-2"
+},
+"um_fild01": {
+"asset": "/assets/ee2fe250-5b5a-4cf7-88b8-035b52659230",
+"name": "Luluka Forest in Umbala",
+"path": "/maps/luluka-forest-in-umbala"
+},
+"water": {
+"asset": "/assets/3bf9a00b-5180-4c8c-8244-9508434f7713",
+"name": "Prontera Field",
+"path": "/maps/prontera-field"
+},
+"prtg_cas03": {
+"asset": "/assets/1878faba-c3a7-4a39-bc18-811a71a1e030",
+"name": "Lazreagues",
+"path": "/maps/lazreagues"
+},
+"mjo_dun01": {
+"asset": "/assets/087a183a-74b6-4f55-80af-d076557396a0",
+"name": "Mjolnir Dead Pit 1F",
+"path": "/maps/mjolnir-dead-pit-1f"
+},
+"gld_dun02": {
+"asset": "/assets/000ae078-7d39-477e-a48d-742c07bae088",
+"name": "Luina Dungeon 1F",
+"path": "/maps/luina-dungeon-1f"
+},
+"wind": {
+"asset": "/assets/47265c42-9000-4e73-afc1-1ec30c49c0f2",
+"name": "Mt. Mjolnir South Side 06",
+"path": "/maps/mt-mjolnir-south-side-06"
+},
+"mjo_dun02": {
+"asset": "/assets/8c00a41c-d3da-46bb-9ec6-14712b3bd225",
+"name": "Mjolnir Dead Pit 2F",
+"path": "/maps/mjolnir-dead-pit-2f"
+},
+"alde_gld": {
+"asset": "/assets/662a5f61-c793-4c43-b83a-63c9f0295466",
+"name": "Luina, the Satellite City",
+"path": "/maps/luina-the-satellite-city"
+},
+"ztw_evt03": {
+"asset": "/assets/e84ba50d-0155-40fc-8d74-e8ed509fca78",
+"name": "Lutie Plaza",
+"path": "/maps/lutie-plaza"
+},
+"mjo_dun03": {
+"asset": "/assets/563265e9-7534-4cde-8af3-dd61da4fe4e9",
+"name": "Mjolnir Dead Pit 3F",
+"path": "/maps/mjolnir-dead-pit-3f"
+},
+"gl_church": {
+"asset": "/assets/9ef7c516-dad8-4f19-8cd3-a5cf9c813f3b",
+"name": "Monastery",
+"path": "/maps/monastery"
+},
+"poison": {
+"asset": "/assets/7d950161-bfe9-4875-acc6-4e3711f84eb1",
+"name": "Mt. Mjolnir South Side 11",
+"path": "/maps/mt-mjolnir-south-side-11"
+},
+"xmas": {
+"asset": "/assets/e41afc0f-33fc-4671-a815-710d4f9ce016",
+"name": "Lutie, the Snow Village",
+"path": "/maps/lutie-the-snow-village"
+},
+"mjolnir_12": {
+"asset": "/assets/f6d49d77-176a-4e21-b9e6-62522d1e39e2",
+"name": "Mt. Mjolnir Northern Foot",
+"path": "/maps/mt-mjolnir-northern-foot"
+},
+"gefg_cas05": {
+"asset": "/assets/2883a3f4-098d-4266-896f-3d9141f60f3e",
+"name": "Mersetzdeitz",
+"path": "/maps/mersetzdeitz"
+},
+"moc_ruins": {
+"asset": "/assets/721fe6ae-f33b-4bf1-9754-d0cc85673714",
+"name": "Morroc Ruins",
+"path": "/maps/morroc-ruins"
+},
+"morocc": {
+"asset": "/assets/7cfe9260-7fb0-4bc4-8433-7259a2d7535f",
+"name": "Morroc, the Desert City",
+"path": "/maps/morroc-the-desert-city"
+},
+"nrd_dun02": {
+"asset": "/assets/1e3d36ae-d1ee-40bc-a64d-ff720a9825bc",
+"name": "Nordfeld Cave 2F",
+"path": "/maps/nordfeld-cave-2f"
+},
+"aldeg_cas01": {
+"asset": "/assets/c6f25e8e-f580-41fd-87d3-5e5f17880f48",
+"name": "Neuschwanstein",
+"path": "/maps/neuschwanstein"
+},
+"nrd_dun01": {
+"asset": "/assets/205f0670-872b-4b1a-b4e6-06a912bba3be",
+"name": "Nordfeld Cave 1F",
+"path": "/maps/nordfeld-cave-1f"
+},
+"nrd_fild01": {
+"asset": "/assets/f8b096f1-26fc-4a6d-9376-9f31d27aa78d",
+"name": "Nordfeld Plains",
+"path": "/maps/nordfeld-plains"
+},
+"insect": {
+"asset": "/assets/62c5822b-daad-4cfd-b006-67eb0c8c1fe0",
+"name": "Mt. Mjolnir South Side 07",
+"path": "/maps/mt-mjolnir-south-side-07"
+},
+"bea_d02_c": {
+"asset": "/assets/ceb56e3b-98e9-4d2a-9cd1-b514a3b92f61",
+"name": "Northern Cave Luanda",
+"path": "/maps/northern-cave-luanda"
+},
+"nrd_fild02": {
+"asset": "/assets/7b256ac6-0626-46e0-bdba-b2d1bf83151e",
+"name": "Nordfeld Hills",
+"path": "/maps/nordfeld-hills"
+},
+"mjolnir_09": {
+"asset": "/assets/29287a62-071c-4922-8d20-abe15115e4a7",
+"name": "Mt. Mjolnir Southern Foot",
+"path": "/maps/mt-mjolnir-southern-foot"
+},
+"1@nraid": {
+"asset": "/assets/eedb81f5-83bb-410b-8b86-e2310ef50e30",
+"name": "Nordfeld Defense Battle",
+"path": "/maps/nordfeld-defense-battle"
+},
+"orcsdun02": {
+"asset": "/assets/22e5e4c2-446b-4e96-a135-2ad0a59b010d",
+"name": "Orc Underground Cave 2F",
+"path": "/maps/orc-underground-cave-2f"
+},
+"orc_d01_y": {
+"asset": "/assets/0ac395d6-e546-4e9a-9f55-1bfa8f1846b8",
+"name": "Orc Underground Cave 1F",
+"path": "/maps/orc-underground-cave-1f"
+},
+"1@orcs": {
+"asset": "/assets/cc72f7f3-349f-4272-b97d-9fcc091a4605",
+"name": "Orc Underground Cave",
+"path": "/maps/orc-underground-cave"
+},
+"aldeg_cas03": {
+"asset": "/assets/e76e2068-5f3e-49e7-9672-66ce4a83885a",
+"name": "Nuernberg",
+"path": "/maps/nuernberg"
+},
+"cmd_fild01": {
+"asset": "/assets/316ae12c-e7f5-4826-8ea3-81736a9e130a",
+"name": "Papuchicha Forest",
+"path": "/maps/papuchicha-forest"
+},
+"b_gef_f10": {
+"asset": "/assets/c9e14efa-f147-4a1f-ab77-4dd1a8b9f3b7",
+"name": "Orc Village",
+"path": "/maps/orc-village"
+},
+"tu_arche_h": {
+"asset": "/assets/da03ab5e-2604-4aa2-b78c-2eecfd7255ea",
+"name": "Payon Archer Village",
+"path": "/maps/payon-archer-village"
+},
+"um_dun02": {
+"asset": "/assets/56d66c9e-8b82-4d2b-b158-3a462d95abb6",
+"name": "Passage to a Foreign World",
+"path": "/maps/passage-to-a-foreign-world"
+},
+"pay_dun00": {
+"asset": "/assets/c4d458a6-a3d4-408c-9b17-66e39f1256b1",
+"name": "Payon Cave 1F",
+"path": "/maps/payon-cave-1f"
+},
+"pay_dun02": {
+"asset": "/assets/83901e9e-5581-4a39-891c-6c86da4c0c53",
+"name": "Payon Cave 3F",
+"path": "/maps/payon-cave-3f"
+},
+"pay_dun01": {
+"asset": "/assets/f3299585-c06e-47d9-8622-8c98d6734f30",
+"name": "Payon Cave 2F",
+"path": "/maps/payon-cave-2f"
+},
+"pay_dun03": {
+"asset": "/assets/0aceac2a-f758-4dc0-b215-28fbbf0b229c",
+"name": "Payon Cave 4F (Abandoned Village)",
+"path": "/maps/payon-cave-4f-abandoned-village"
+},
+"b_pay_d04": {
+"asset": "/assets/ce781929-b40c-4119-b53e-22fab47d3257",
+"name": "Payon Cave 5F (Abandoned Village)",
+"path": "/maps/payon-cave-5f-abandoned-village"
+},
+"pay_fild02": {
+"asset": "/assets/e1671fee-65c7-41c6-b754-fd0638ceaea6",
+"name": "Payon Forest 02",
+"path": "/maps/payon-forest-02"
+},
+"pay_fild06": {
+"asset": "/assets/cceffcc6-398b-41cb-aa67-977d778c45db",
+"name": "Payon Forest 06",
+"path": "/maps/payon-forest-06"
+},
+"pay_fild03": {
+"asset": "/assets/f3c2107e-939f-43a6-adc4-99a8371ff95e",
+"name": "Payon Forest 03",
+"path": "/maps/payon-forest-03"
+},
+"b_pay_f10": {
+"asset": "/assets/b89175e0-648e-4ea1-96c4-38395bc8e291",
+"name": "Payon Forest",
+"path": "/maps/payon-forest"
+},
+"pay_fild01": {
+"asset": "/assets/c7e49676-eef4-43df-8d84-8b120ea2b495",
+"name": "Payon Forest 01 (pay_fild01)",
+"path": "/maps/payon-forest-01-pay-fild01"
+},
+"pay_fild07": {
+"asset": "/assets/dd98a34a-dd49-4e44-850a-15379b22e2c3",
+"name": "Payon Forest 07",
+"path": "/maps/payon-forest-07"
+},
+"pay_fild08": {
+"asset": "/assets/2a7aca74-c717-4414-87c3-d714edb03ae8",
+"name": "Payon Forest 08",
+"path": "/maps/payon-forest-08"
+},
+"pay_fild10": {
+"asset": "/assets/83d48041-77da-481d-8788-f270cec03532",
+"name": "Payon Forest 10",
+"path": "/maps/payon-forest-10"
+},
+"pay_fild09": {
+"asset": "/assets/39ff5e9d-85ed-4b72-baeb-ff7cb3fdecc7",
+"name": "Payon Forest 09",
+"path": "/maps/payon-forest-09"
+},
+"cmd_fild07": {
+"asset": "/assets/fb0e8cff-2724-40b2-a9e7-4d84e518d3b8",
+"name": "Pharos Lighthouse",
+"path": "/maps/pharos-lighthouse"
+},
+"1@begi": {
+"asset": "/assets/1f69e5e3-ced8-40c6-84bc-12008aa7c243",
+"name": "Poring Village",
+"path": "/maps/poring-village"
+},
+"pay_mk": {
+"asset": "/assets/6d12f20c-298f-449d-997d-e5ca6c2da1e9",
+"name": "Payon Market Street",
+"path": "/maps/payon-market-street"
+},
+"tu_pay_g": {
+"asset": "/assets/35c276cb-f24a-4d48-8e0f-b86b04b0ce65",
+"name": "Payon, the Mountain Village",
+"path": "/maps/payon-the-mountain-village"
+},
+"prt_ca01": {
+"asset": "/assets/3cc2a4db-6fd6-49f1-95ec-1e11c6082d2a",
+"name": "Prontera Castle B1F",
+"path": "/maps/prontera-castle-b1f"
+},
+"prt_pri00": {
+"asset": "/assets/332f1638-da05-4f23-a1b7-61bf510b248a",
+"name": "Prison of Prontera",
+"path": "/maps/prison-of-prontera"
+},
+"prt_cas_q": {
+"asset": "/assets/96f81746-55a1-4832-97c9-a4c02bcbb4e2",
+"name": "Prontera Annex Palace",
+"path": "/maps/prontera-annex-palace"
+},
+"prt_ca02": {
+"asset": "/assets/9b8f4dbc-0005-4f94-80d6-9f33255dae66",
+"name": "Prontera Castle B2F",
+"path": "/maps/prontera-castle-b2f"
+},
+"prt_fild00": {
+"asset": "/assets/3964bb26-cc2a-4491-a31a-3ed32b04d209",
+"name": "Prontera Field 00",
+"path": "/maps/prontera-field-00"
+},
+"prt_fild01": {
+"asset": "/assets/8be61e97-a99f-4765-945f-f5e238d05906",
+"name": "Prontera Field 01",
+"path": "/maps/prontera-field-01"
+},
+"prt_fild02": {
+"asset": "/assets/04dded40-c203-4148-9e25-62d7beb6712c",
+"name": "Prontera Field 02",
+"path": "/maps/prontera-field-02"
+},
+"prt_fild03": {
+"asset": "/assets/76fa1072-e3ee-4f9e-a767-bf0fe3dcfec9",
+"name": "Prontera Field 03",
+"path": "/maps/prontera-field-03"
+},
+"prt_fild04": {
+"asset": "/assets/cee35766-919c-4a02-83c8-bf5d4ba958fd",
+"name": "Prontera Field 04",
+"path": "/maps/prontera-field-04"
+},
+"prt_fild06": {
+"asset": "/assets/74aa292e-62c6-4830-82ba-27d962fbc206",
+"name": "Prontera Field 06",
+"path": "/maps/prontera-field-06"
+},
+"prt_fild05": {
+"asset": "/assets/4d39a75f-accb-4b01-9eac-e1acd5aa1ece",
+"name": "Prontera Field 05",
+"path": "/maps/prontera-field-05"
+},
+"prt_fild07": {
+"asset": "/assets/1cf3482f-86a7-4821-8593-b0eedba6c16b",
+"name": "Prontera Field 07",
+"path": "/maps/prontera-field-07"
+},
+"prt_fild08": {
+"asset": "/assets/847df684-c68e-411e-a0d3-d3419608b2f7",
+"name": "Prontera Field 08",
+"path": "/maps/prontera-field-08"
+},
+"prt_fild09": {
+"asset": "/assets/cc4fb67a-3adb-4663-bd53-55dad731a0d6",
+"name": "Prontera Field 09",
+"path": "/maps/prontera-field-09"
+},
+"prt_fild10": {
+"asset": "/assets/1f93914b-072d-48d6-963e-c1618431e3cc",
+"name": "Prontera Field 10",
+"path": "/maps/prontera-field-10"
+},
+"prt_fild11": {
+"asset": "/assets/507b0eb6-9d8b-4cb1-a747-f56209fc7d08",
+"name": "Prontera Field 11",
+"path": "/maps/prontera-field-11"
+},
+"tra_fild": {
+"asset": "/assets/f98c2fbd-5f0e-4d92-a5a4-fba90257e6d9",
+"name": "Prontera Training Ground",
+"path": "/maps/prontera-training-ground"
+},
+"prt_mk": {
+"asset": "/assets/506a58c0-8f51-410a-be39-95353278daba",
+"name": "Prontera Market Street",
+"path": "/maps/prontera-market-street"
+},
+"moc_pryd01": {
+"asset": "/assets/bd541ce0-d8a6-4b56-ab9a-82c396b87773",
+"name": "Pyramid 1F",
+"path": "/maps/pyramid-1f"
+},
+"moc_pryd02": {
+"asset": "/assets/1c7082e5-f4b9-4e50-ab83-1301ccd896bd",
+"name": "Pyramid 2F",
+"path": "/maps/pyramid-2f"
+},
+"moc_pryd05": {
+"asset": "/assets/77a76b34-6392-4db6-a5de-e70ab5ba5d01",
+"name": "Pyramid B1F",
+"path": "/maps/pyramid-b1f"
+},
+"b_pry_d06": {
+"asset": "/assets/5c1108fb-15f8-4ef8-93eb-a83e1eaa0a45",
+"name": "Pyramid B2F",
+"path": "/maps/pyramid-b2f"
+},
+"moc_pryd04": {
+"asset": "/assets/d565e8ca-e9ce-4fd7-a804-973e2d8b397f",
+"name": "Pyramid 4F",
+"path": "/maps/pyramid-4f"
+},
+"moc_pryd03": {
+"asset": "/assets/9900bd16-68ee-4194-9dee-8048ebc903b5",
+"name": "Pyramid 3F",
+"path": "/maps/pyramid-3f"
+},
+"gefg_cas01": {
+"asset": "/assets/9ecebf58-5dea-48c1-bedd-cf449a8ddf4f",
+"name": "Repherion",
+"path": "/maps/repherion"
+},
+"aldeg_cas05": {
+"asset": "/assets/eef6cf75-5ff2-47e9-988f-6597bf552fe4",
+"name": "Rothenburg",
+"path": "/maps/rothenburg"
+},
+"payg_cas04": {
+"asset": "/assets/9308d3de-4006-4d4c-9178-a5e2cf1889c8",
+"name": "Scarlet Palace",
+"path": "/maps/scarlet-palace"
+},
+"payg_cas02": {
+"asset": "/assets/c5e5a188-afca-40d3-8b4f-0318141336ee",
+"name": "Sacred Palace",
+"path": "/maps/sacred-palace"
+},
+"tu_dc02_g": {
+"asset": "/assets/9192b890-1c14-4e82-bcda-2bc1140ab9d1",
+"name": "Secret Place",
+"path": "/maps/secret-place"
+},
+"prt_sewb2": {
+"asset": "/assets/0f9072eb-0dae-432a-9ac3-a1af82eae67a",
+"name": "Sewer Tunnel 2F",
+"path": "/maps/sewer-tunnel-2f"
+},
+"prt_sewb3": {
+"asset": "/assets/a53087ce-9ec4-4f3b-8bf7-b0f5cbdc8c1e",
+"name": "Sewer Tunnel 3F",
+"path": "/maps/sewer-tunnel-3f"
+},
+"prt_sewb1": {
+"asset": "/assets/1c873553-40ae-4568-9690-80165c999004",
+"name": "Sewer Tunnel 1F",
+"path": "/maps/sewer-tunnel-1f"
+},
+"prt_sewb4": {
+"asset": "/assets/a6420cd7-4c03-42b4-bd70-23510057c0f5",
+"name": "Sewer Tunnel 4F",
+"path": "/maps/sewer-tunnel-4f"
+},
+"b_moc_f17": {
+"asset": "/assets/d4ff023c-aa42-4abd-a250-99154fac52a6",
+"name": "Sograt Desert",
+"path": "/maps/sograt-desert"
+},
+"moc_fild01": {
+"asset": "/assets/e1c1e09b-8f42-411d-8e87-ecc2b5cdd374",
+"name": "Sograt Desert 01",
+"path": "/maps/sograt-desert-01"
+},
+"prtg_cas04": {
+"asset": "/assets/49a47f19-5997-47de-a50b-7f2a92ace06c",
+"name": "Skogul",
+"path": "/maps/skogul"
+},
+"moc_fild02": {
+"asset": "/assets/ab921443-f34d-41e2-8fce-668afac54506",
+"name": "Sograt Desert 02",
+"path": "/maps/sograt-desert-02"
+},
+"moc_fild03": {
+"asset": "/assets/557f6425-2740-483f-85e8-2fff4942f3ac",
+"name": "Sograt Desert 03",
+"path": "/maps/sograt-desert-03"
+},
+"pay_fild04": {
+"asset": "/assets/333067b6-43f2-4a8e-a4ff-baf42eadbaae",
+"name": "Sograt Desert 04",
+"path": "/maps/sograt-desert-04"
+},
+"moc_fild11": {
+"asset": "/assets/ca7b941e-9850-41ad-b4e9-8f5163672c75",
+"name": "Sograt Desert 11",
+"path": "/maps/sograt-desert-11"
+},
+"moc_fild07": {
+"asset": "/assets/1738f356-ee90-41c1-a456-0b2126e8e74f",
+"name": "Sograt Desert 07",
+"path": "/maps/sograt-desert-07"
+},
+"moc_fild12": {
+"asset": "/assets/25030bdb-3dd2-4a56-a594-1acdc9ae3b9d",
+"name": "Sograt Desert 12",
+"path": "/maps/sograt-desert-12"
+},
+"moc_fild13": {
+"asset": "/assets/bb85a511-2c42-46ad-ac4d-01f699afa33c",
+"name": "Sograt Desert 13",
+"path": "/maps/sograt-desert-13"
+},
+"moc_fild16": {
+"asset": "/assets/89796c61-24d3-45f2-9f5f-1287d2ccaf04",
+"name": "Sograt Desert 16",
+"path": "/maps/sograt-desert-16"
+},
+"moc_fild17": {
+"asset": "/assets/fc43ad4d-43f9-46de-9dae-62709cfcab6b",
+"name": "Sograt Desert 17",
+"path": "/maps/sograt-desert-17"
+},
+"moc_fild18": {
+"asset": "/assets/74881b49-e523-4b87-9a99-35469a49640d",
+"name": "Sograt Desert 18",
+"path": "/maps/sograt-desert-18"
+},
+"moc_fild19": {
+"asset": "/assets/1ff3a030-0028-4dc5-9f1f-49fce23425a2",
+"name": "Sograt Desert 19",
+"path": "/maps/sograt-desert-19"
+},
+"in_sphinx1": {
+"asset": "/assets/eef25caf-f424-4c7f-938f-765d135e4c78",
+"name": "Sphinx B1F",
+"path": "/maps/sphinx-b1f"
+},
+"in_sphinx2": {
+"asset": "/assets/25d08da4-4e9f-4ab9-a6a6-f83a5c5a934f",
+"name": "Sphinx B2F",
+"path": "/maps/sphinx-b2f"
+},
+"prt_monk": {
+"asset": "/assets/70585e7a-02ab-4c2e-a48d-f0cb706e1a77",
+"name": "St. Capitolina Abbey",
+"path": "/maps/st-capitolina-abbey"
+},
+"in_sphinx3": {
+"asset": "/assets/1af15c28-4847-4472-a82d-8b1455cd066c",
+"name": "Sphinx B3F",
+"path": "/maps/sphinx-b3f"
+},
+"in_sphinx5": {
+"asset": "/assets/50c6f3e3-3c88-4fda-b5f3-9d1036f4488d",
+"name": "Sphinx B5F",
+"path": "/maps/sphinx-b5f"
+},
+"in_sphinx4": {
+"asset": "/assets/e66d7671-d384-41d6-b751-63357793d0c9",
+"name": "Sphinx B4F",
+"path": "/maps/sphinx-b4f"
+},
+"gl_step": {
+"asset": "/assets/52c28397-2913-4969-ac92-5c1515e265af",
+"name": "Stair Dungeon",
+"path": "/maps/stair-dungeon"
+},
+"treasure01": {
+"asset": "/assets/d9c60f21-edcb-4e17-8d2f-e56488699b7a",
+"name": "Sunken Ship 1F",
+"path": "/maps/sunken-ship-1f"
+},
+"ztw_evt01": {
+"asset": "/assets/0f9d26c5-accf-4ce8-af4f-5dbdb39fa122",
+"name": "Summer Festival Grounds",
+"path": "/maps/summer-festival-grounds"
+},
+"treasure02": {
+"asset": "/assets/bcd6c112-86a3-4d4d-8fa1-b6f09da2626d",
+"name": "Sunken Ship 2F",
+"path": "/maps/sunken-ship-2f"
+},
+"moc_prydb1": {
+"asset": "/assets/6e17b583-cbf9-4023-984e-bb944df5c699",
+"name": "Thief Guild",
+"path": "/maps/thief-guild"
+},
+"xmas_dun01": {
+"asset": "/assets/68c62136-15d7-4ab2-afed-35401e21625d",
+"name": "Toy Factory Storage",
+"path": "/maps/toy-factory-storage"
+},
+"prtg_cas02": {
+"asset": "/assets/033871fc-81b4-4ab7-b8d9-6362e9d16ee6",
+"name": "Swanhild",
+"path": "/maps/swanhild"
+},
+"xmas_dun02": {
+"asset": "/assets/3ca8c45c-7d11-44ad-95e0-94e02d017e8c",
+"name": "Toy Factory Sorting Room",
+"path": "/maps/toy-factory-sorting-room"
+},
+"job_thief1": {
+"asset": "/assets/2b35f03c-d843-45b4-beef-6986f7dd2c6b",
+"name": "Thief Job Change Office",
+"path": "/maps/thief-job-change-office"
+},
+"um_fild02": {
+"asset": "/assets/579d55a7-2a8f-49bf-80ed-5ae02f8e0fa8",
+"name": "Umbala Hoomga Forest",
+"path": "/maps/umbala-hoomga-forest"
+},
+"gl_dun02": {
+"asset": "/assets/9ba6b654-6485-4b4b-a04c-7afbc3590a53",
+"name": "Underground Cave 2F",
+"path": "/maps/underground-cave-2f"
+},
+"gl_dun01": {
+"asset": "/assets/dd3a7d4c-fc3a-4e65-92f3-0e36baf1df42",
+"name": "Underground Cave 1F",
+"path": "/maps/underground-cave-1f"
+},
+"gl_prison1": {
+"asset": "/assets/a0986e51-cad2-47c2-bba2-188579dbed45",
+"name": "Underground Prison 2F",
+"path": "/maps/underground-prison-2f"
+},
+"gl_prison": {
+"asset": "/assets/62198445-94d0-4830-957f-6b1679d3229c",
+"name": "Underground Prison 1F",
+"path": "/maps/underground-prison-1f"
+},
+"iz_dun00": {
+"asset": "/assets/e8d6f86f-5534-4c5d-a47a-5bfc3c98fd93",
+"name": "Undersea Cave 1F",
+"path": "/maps/undersea-cave-1f"
+},
+"iz_dun01": {
+"asset": "/assets/c317318f-7846-43b1-9287-debb17f6e717",
+"name": "Undersea Cave 2F",
+"path": "/maps/undersea-cave-2f"
+},
+"iz_dun04": {
+"asset": "/assets/e1b58aea-865b-4b0f-8901-f23e4f93b725",
+"name": "Undersea Cave 5F",
+"path": "/maps/undersea-cave-5f"
+},
+"iz_dun02": {
+"asset": "/assets/593ae986-f22e-4993-8cb0-44db15c0cb52",
+"name": "Undersea Cave 3F",
+"path": "/maps/undersea-cave-3f"
+},
+"iz_dun03": {
+"asset": "/assets/a1e53252-88d1-42b5-a4c9-8fe8dfacc301",
+"name": "Undersea Cave 4F",
+"path": "/maps/undersea-cave-4f"
+},
+"umbala": {
+"asset": "/assets/98f4e6b7-0df8-4670-bade-b1ce73f96a3b",
+"name": "Utan Tribe's Village, Umbala",
+"path": "/maps/utan-tribe-s-village-umbala"
+},
+"gld_dun03": {
+"asset": "/assets/bd9a50f3-a5e4-4361-9452-32f46f84dfdd",
+"name": "Valkyrie Realm Dungeon 1F",
+"path": "/maps/valkyrie-realm-dungeon-1f"
+},
+"prt_gld": {
+"asset": "/assets/06e32e85-0b7b-4b03-9e66-5bc6d9704023",
+"name": "Valkyrie Realm",
+"path": "/maps/valkyrie-realm"
+},
+"b_bea_d01": {
+"asset": "/assets/6caaa011-23fc-4f48-ac03-e3efcfac43ae",
+"name": "West Cave Karu",
+"path": "/maps/west-cave-karu"
+},
+"beach_dun": {
+"asset": "/assets/6faf86cc-5a6b-4899-ae6b-2866c7ea4e9f",
+"name": "Western Cave Karu",
+"path": "/maps/western-cave-karu"
+},
+"aldeg_cas04": {
+"asset": "/assets/27990048-c352-482e-8b8d-abc159e30f15",
+"name": "Wuerzburg",
+"path": "/maps/wuerzburg"
+},
+"cmd_fild03": {
+"asset": "/assets/78bacc5b-e3a8-4be7-91c7-cf13a7160ff4",
+"name": "Zenhai Marsh",
+"path": "/maps/zenhai-marsh"
+},
+"gefg_cas03": {
+"asset": "/assets/7688f8c0-28dd-4c04-96de-99b2bc599a33",
+"name": "Yesnelph",
+"path": "/maps/yesnelph"
+}
+}

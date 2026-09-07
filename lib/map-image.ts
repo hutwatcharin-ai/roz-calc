@@ -13,9 +13,20 @@ export type MapImage = {
   src: string;
   /** Set when the picture is filed under the map's classic RO code instead of the Zero one. */
   fromCode: string | null;
+  /**
+   * 'full' is prontera.info's ~512 px terrain render (public/images/maps/full,
+   * WebP); 'mini' is ratemyserver's 205 px minimap GIF. Full wins when both
+   * exist: it is the picture a player recognises the place by (user, 7 Sep
+   * 2026, "maps should have a picture like prontera's").
+   */
+  kind: 'full' | 'mini';
+  width: number;
+  height: number;
 };
 
-let cache: { codes: Set<string>; source: Record<string, string> } | null = null;
+type FullIndex = Record<string, { prontera: string; name: string }>;
+
+let cache: { codes: Set<string>; source: Record<string, string>; full: FullIndex } | null = null;
 
 function load() {
   if (cache) return cache;
@@ -37,14 +48,32 @@ function load() {
   } catch {
     // Optional: absence only means no map needed a classic-code fallback.
   }
-  cache = { codes, source };
+  let full: FullIndex = {};
+  try {
+    full = JSON.parse(fs.readFileSync(path.join(DIR, 'full', '_index.json'), 'utf8'));
+  } catch {
+    // No prontera mirror on disk: the minimaps alone still work.
+  }
+  cache = { codes, source, full };
   return cache;
 }
 
 export function mapImage(code: string): MapImage | null {
-  const { codes, source } = load();
+  const { codes, source, full } = load();
+  const hit = full[code];
+  if (hit) {
+    return {
+      src: `/images/maps/full/${hit.prontera}.webp`,
+      fromCode: hit.prontera === code ? null : hit.prontera,
+      kind: 'full',
+      // Renders are 512 px on the long side at most; the box is square so
+      // the layout never shifts while the picture loads.
+      width: 512,
+      height: 512,
+    };
+  }
   if (!codes.has(code)) return null;
-  return { src: `/images/maps/${code}.gif`, fromCode: source[code] ?? null };
+  return { src: `/images/maps/${code}.gif`, fromCode: source[code] ?? null, kind: 'mini', width: 205, height: 205 };
 }
 
 /** For tests and for reporting coverage without touching the filesystem twice. */

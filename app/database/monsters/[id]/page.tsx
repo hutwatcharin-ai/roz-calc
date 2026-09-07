@@ -1,5 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import { mobThresholds } from '@/lib/monster-thresholds';
+import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
 import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
@@ -14,7 +15,6 @@ import MonsterElementPanel from '@/components/MonsterElementPanel';
 import MonsterSizePanel from '@/components/MonsterSizePanel';
 import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
 import RecordVisit from '@/components/RecordVisit';
-import { itemHref } from '@/lib/item-href';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { foldSpawns, type SpawnRow } from '@/lib/spawn-chips';
 
@@ -354,44 +354,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         <div className="panel">
           <div className="card">
             <h2 className="section-title" id="sec-drops">ของที่ดรอป</h2>
-            <table className="data-table">
-              <thead>
-                <tr><th>ไอเทม</th><th className="num">อัตราดรอป</th></tr>
-              </thead>
-              <tbody>
-                {dropsError ? (
-                  <tr><td colSpan={2} data-label="" style={{ color: 'var(--faint)' }}>โหลดข้อมูลของที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</td></tr>
-                ) : (
-                  <>
-                    {(drops ?? []).map((d: any, i: number) => (
-                      <tr key={i}>
-                        <td data-label="">
-                          {d.items?.id ? (
-                            <Link href={itemHref(d.items.id, d.items.category)} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                              {d.items.icon_url && (
-                                <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                              )}
-                              {d.items.name_en ?? '—'}{(d.items?.slots ?? 0) > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{d.items.slots}]</span>}
-                            </Link>
-                          ) : (
-                            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                              {d.items?.icon_url && (
-                                <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                              )}
-                              {d.items?.name_en ?? '—'}
-                            </span>
-                          )}
-                        </td>
-                        <td data-label="อัตราดรอป" className="num">{d.rate != null ? `${d.rate}%` : 'ไม่ทราบอัตรา'}</td>
-                      </tr>
-                    ))}
-                    {(drops ?? []).length === 0 && (
-                      <tr><td colSpan={2} data-label="" style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลของที่ดรอป</td></tr>
-                    )}
-                  </>
-                )}
-              </tbody>
-            </table>
+            <MonsterDropsTable drops={(drops ?? []) as unknown as MonsterDropRow[]} failed={Boolean(dropsError)} />
           </div>
 
           <div className="card">

@@ -123,6 +123,14 @@ const SAMPLE_SEARCHES = ['Jellopy', 'Elunium Ore', 'Steel', 'Emperium', 'Fluff',
 // and joined here; ~1,100 sellables x ~3,700 drop rows is a few kB.
 const STARTER_PAGE_SIZE = 40;
 
+function starterHref(sort: string, page: number): string {
+  const params = new URLSearchParams();
+  if (sort !== 'price') params.set('sort', sort);
+  if (page > 1) params.set('page', String(page));
+  const qs = params.toString();
+  return qs ? `/drop-finder?${qs}` : '/drop-finder';
+}
+
 interface StarterItem {
   id: number;
   name_en: string;
@@ -173,12 +181,18 @@ async function starterList(): Promise<StarterItem[]> {
     .sort((a, b) => b.sell_price - a.sell_price || a.name_en.localeCompare(b.name_en));
 }
 
-export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string; page?: string } }) {
+export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string; page?: string; sort?: string } }) {
   const query = searchParams.q ?? '';
   const itemId = Number(searchParams.id) || null;
   const { resolvedName, resolvedInputName, resolvedId, rows } = await findDrops(query, itemId);
   const searched = Boolean(query || itemId);
+  const sort = searchParams.sort === 'drops' || searchParams.sort === 'name' ? searchParams.sort : 'price';
   const allStarters = searched ? [] : await starterList();
+  // Server-rendered and paged, so the sort rides in the URL like the list
+  // pages do. Price is the table's premise, so it is the default and ties
+  // under the other keys fall back to it.
+  if (sort === 'drops') allStarters.sort((a, b) => b.dropCount - a.dropCount || b.sell_price - a.sell_price);
+  else if (sort === 'name') allStarters.sort((a, b) => a.name_en.localeCompare(b.name_en));
   const totalPages = Math.max(1, Math.ceil(allStarters.length / STARTER_PAGE_SIZE));
   const page = Math.min(totalPages, Math.max(1, Number(searchParams.page ?? 1) || 1));
   const starters = allStarters.slice((page - 1) * STARTER_PAGE_SIZE, page * STARTER_PAGE_SIZE);
@@ -207,9 +221,9 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
             <table className="data-table" style={{ marginTop: 10 }}>
               <thead>
                 <tr>
-                  <th>ไอเทม</th>
-                  <th style={{ textAlign: 'right' }}>ขายร้าน (Zeny)</th>
-                  <th style={{ textAlign: 'right' }}>มอนที่ดรอป</th>
+                  <th><a className="thsort" href={starterHref('name', 1)}>ไอเทม {sort === 'name' ? '↑' : '↕'}</a></th>
+                  <th style={{ textAlign: 'right' }}><a className="thsort" href={starterHref('price', 1)}>ขายร้าน (Zeny) {sort === 'price' ? '↓' : '↕'}</a></th>
+                  <th style={{ textAlign: 'right' }}><a className="thsort" href={starterHref('drops', 1)}>มอนที่ดรอป {sort === 'drops' ? '↓' : '↕'}</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -233,7 +247,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
           <Pagination
             page={page}
             totalPages={totalPages}
-            buildHref={(p) => (p === 1 ? '/drop-finder' : `/drop-finder?page=${p}`)}
+            buildHref={(p) => starterHref(sort, p)}
             total={allStarters.length}
             pageSize={STARTER_PAGE_SIZE}
           />

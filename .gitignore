@@ -14,3 +14,4 @@ docs/midgardhub-export/
 # data ends up actually used, the way rozerodb-export's targeted import
 # scripts did.
 docs/prontera-export/data/
+docs/prontera-export/map-images/

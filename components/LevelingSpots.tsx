@@ -6,6 +6,7 @@
 
 import Link from 'next/link';
 import MonsterLink from '@/components/MonsterLink';
+import { bySorted, useTableSort } from '@/lib/use-table-sort';
 import { useToolUse } from '@/lib/use-tool-use';
 import { useMemo } from 'react';
 import ToolNumbers, { useRememberedNumbers } from '@/components/ToolNumbers';
@@ -19,6 +20,7 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
   const [numbers, setNumbers, ready] = useRememberedNumbers();
   useToolUse('leveling_spots', { mode: 'level', level, damage: numbers.damagePerHit, aspd: numbers.aspd, hit: numbers.hit }, ready);
   const aps = attacksPerSecond(numbers.aspd);
+  const { sort, toggle, indicator } = useTableSort();
   const canRate = numbers.damagePerHit !== undefined && aps !== null;
 
   // The level the page was fetched for wins over the character's own: a player
@@ -48,7 +50,18 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
   }
 
   const personal = ready && canRate;
-  const top = ranked.slice(0, SHOWN);
+  // The rank number is the ranking's verdict and survives a column sort: a
+  // player sorting by population still sees which map the tool put first.
+  const top = bySorted(
+    ranked.slice(0, SHOWN).map((spot, i) => ({ spot, rank: i + 1 })),
+    sort,
+    (row, key) =>
+      key === 'map' ? row.spot.map_name
+      : key === 'count' ? row.spot.spawnTotal
+      : key === 'exp' ? row.spot.mixedExpPerHour
+      : key === 'best' ? row.spot.bestExpPerHour
+      : null,
+  );
 
   return (
     <>
@@ -71,15 +84,15 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
         <table className="data-table">
           <thead>
             <tr>
-              <th>แมพ</th>
-              <th className="num">มอนในแมพ</th>
-              {personal && <th className="num">EXP/ชม. เฉลี่ยทั้งแมพ</th>}
-              {personal && <th className="num">ตัวที่คุ้มสุด</th>}
+              <th><button type="button" className="thsort" onClick={() => toggle('map', false)}>แมพ {indicator('map')}</button></th>
+              <th className="num"><button type="button" className="thsort" onClick={() => toggle('count')}>มอนในแมพ {indicator('count')}</button></th>
+              {personal && <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp')}>EXP/ชม. เฉลี่ยทั้งแมพ {indicator('exp')}</button></th>}
+              {personal && <th className="num"><button type="button" className="thsort" onClick={() => toggle('best')}>ตัวที่คุ้มสุด {indicator('best')}</button></th>}
               <th>มอนหลักในแมพ</th>
             </tr>
           </thead>
           <tbody>
-            {top.map((spot, i) => {
+            {top.map(({ spot, rank }) => {
               // Biggest populations first: what you actually walk into.
               const headline = [...spot.scored]
                 .sort((a, b) => (b.amount ?? 0) - (a.amount ?? 0))
@@ -91,7 +104,7 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
               return (
                 <tr key={spot.map_code}>
                   <td data-label="">
-                    <span className="mono" style={{ color: 'var(--faint)' }}>#{i + 1}</span>{' '}
+                    <span className="mono" style={{ color: 'var(--faint)' }}>#{rank}</span>{' '}
                     <Link href={`/database/maps/${encodeURIComponent(spot.map_code)}`}>{spot.map_name}</Link>
                     {/* Our display names are not unique -- three different
                         Geffen fields all read "Geffen Field" -- so the code

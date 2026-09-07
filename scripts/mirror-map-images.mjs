@@ -33,7 +33,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
  * the one that answers is recorded in _source.json so the substitution is
  * auditable rather than invisible.
  */
-function candidates(code) {
+export function candidates(code) {
   const out = [];
   const base = code.replace(/_[abz]$/, '');
   // b_ marks Zero's second copy of a map (b_gef_f10 is the same Geffen Field
@@ -179,7 +179,9 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+// Also imported by mirror-prontera-maps.mjs for its code rewrites; only run
+// when invoked directly.
+if (process.argv[1] && /mirror-map-images\.mjs$/.test(process.argv[1])) main().catch((err) => {
   console.error(err);
   process.exitCode = 1;
 });
