@@ -2,6 +2,26 @@
 
 บันทึกงานรอบใหญ่ (ล่าสุดอยู่บนสุด) — กติกาการทำงานอยู่ที่ `/CLAUDE.md`
 
+## 7 ก.ย. 2026 — เมนู/รูป/sort/ฟอนต์ local
+
+**แก้ตามที่ user ชี้ (6 ข้อ)**
+- เมนู "เครื่องมือ" หายตั้งแต่ e866a87 (3 ก.ย. ลบลิงก์ afk-finder แล้วไม่ใส่คืน) — ใส่กลับ + เทสต์ `nav-links.test.ts` บังคับทุก section มีปุ่มแถวบน
+- Ork Warrior/Ork Hero/C4 Ork Warrior → Orc (DB 3 แถว + data/raw)
+- `components/MonsterLink` — ชื่อมอนในตารางเครื่องมือทุกตาราง hover แล้วรูปเด้ง (CSS ล้วน, โหลดรูปตอน hover ครั้งแรก, ซ่อนบน touch, 2 ตัวที่ไม่มีรูปซ่อน popup เอง)
+- drop-finder ของขายได้: ทุกตัวที่ขายร้านได้+มีมอนดรอป 529 รายการ 40/หน้า `?page=` + `?sort=price|drops|name`
+- ไอคอนไอเทม: `scripts/mirror-prontera-icons.mjs` ดึงจาก roz.prontera.info ด้วย uuid ที่อยู่ใน crawl 3 ก.ย. (ไม่ยิงหน้าเว็บ) 943 ตัว (44 เป็น PNG) + ก๊อปจากชื่อเดียวกัน 29 ตัว (Arc Wand [1] ← [2]) — ไม่มีรูป 1,333 → 361 · provenance `data/item-icon-sources.json`
+
+**sort** — ตารางฟาร์ม (เลข # ติดอันดับเดิม), ดรอปหน้ามอน (`MonsterDropsTable` + คอลัมน์ขายร้าน, default rate desc nulls ท้าย), ของขายได้ drop-finder · หน้าลิสต์มี sort อยู่แล้วทุกหน้า
+
+**รูปแมพแบบ prontera** — `scripts/mirror-prontera-maps.mjs` (uuid จาก crawl, match ตรง/ตาม base/ผ่าน `candidates()` ของ mirror-map-images) 140 ไฟล์ครอบ 363/497 code · raw PNG อยู่ `docs/prontera-export/map-images/` (gitignored) · `scripts/compress-map-images.py` → WebP q75 4.9 MB · `mapImage()` เลือก full ก่อน ถอยไป minimap rms (รวมมีรูป 473/497) · หน้าแมพ: ตารางซ้าย รูปขวา sticky ≥900px · ลิสต์แมพมี thumbnail
+
+**ฟอนต์ local** — deploy 1fb132f ล้มเพราะ VPS ต่อ fonts.googleapis.com ไม่ได้ตอน build (next/font/google ดึงตอน build) → ย้ายเป็น `next/font/local` ไฟล์ใน `assets/fonts/web` (OFL, subset ด้วย fontTools ~150 KB) build ไม่พึ่งเน็ตแล้ว
+- ⚠️ บทเรียน: ผลสคริปต์ deploy ต้องอ่านบรรทัด "gave up waiting for the origin" — มันยัง "told Telegram" ตามปกติ เคยอ่านผิดแล้วรายงานว่าขึ้นแล้ว 1 ครั้ง
+
+**VPS** — ดิสก์ 89% เพราะ image เก่า 17 ตัว × 1.2 GB → `docker image prune -a --filter until=1h` เหลือ 64% · ค้างฝั่ง user: เปิด Automated Cleanup ใน Coolify
+
+**ค้าง** — UX critique 6 ก.ย. เหลือ 7 ข้อ (ป้ายปลอดภัยทุกการ์ด, กำแพงชิปมอน /tools/damage, กล่อง damage บน farm tool, กล่องโค้ดเหมือน input, ปุ่ม 3 สไตล์บนหัวมอน, tab เหลืองบนเหลือง, แถว "เพิ่งดู") · แมพชื่อซ้ำ 2 แหล่ง (Toy Factory Storage / Lutie Toy Factory Warehouse) · แมพไม่มีรูป 24 (nif/bea_d03/tow_d/ztw_e03)
+
 ## 4 ก.ย. 2026 — ถอดสูตรจาก prontera แล้วเอามาปรับของเรา
 
 **GA4 ตั้งค่าให้ตอบคำถามได้จริง (grill-me → ทำครบทั้งโค้ดและ property)**
