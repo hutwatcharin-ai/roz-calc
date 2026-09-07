@@ -5,6 +5,7 @@
 // tested without React.
 
 import Link from 'next/link';
+import MonsterLink from '@/components/MonsterLink';
 import { useToolUse } from '@/lib/use-tool-use';
 import { useMemo } from 'react';
 import ToolNumbers, { useRememberedNumbers } from '@/components/ToolNumbers';
@@ -125,7 +126,7 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
                     <td data-label="ตัวที่คุ้มสุด" className="num">
                       {best ? (
                         <>
-                          <Link href={`/database/monsters/${best.monster_id}`}>{best.name_en}</Link>{' '}
+                          <MonsterLink id={best.monster_id} name={best.name_en} />{' '}
                           <span className="mono" style={{ color: 'var(--dim)' }}>
                             {formatExpPerHour(best.expPerHour!)}
                           </span>
@@ -139,7 +140,7 @@ export default function LevelingSpots({ spots, level }: { spots: Spot[]; level: 
                     {headline.map((m, k) => (
                       <span key={m.monster_id}>
                         {k > 0 && ' · '}
-                        <Link href={`/database/monsters/${m.monster_id}`}>{m.name_en}</Link>
+                        <MonsterLink id={m.monster_id} name={m.name_en} />
                         <span className="mono" style={{ color: 'var(--faint)' }}>
                           {' '}Lv{m.level}
                           {m.amount ? ` ×${m.amount}` : ''}

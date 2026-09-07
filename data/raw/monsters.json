@@ -5859,7 +5859,7 @@
     },
     {
       "id": 1023,
-      "name": "Ork Warrior",
+      "name": "Orc Warrior",
       "title": "Monster: Ork Warrior",
       "level": 52,
       "size": "Medium",
@@ -5881,7 +5881,7 @@
         "releaseDate": "",
         "name": {
           "en": "ORK_WARRIOR",
-          "enDisplay": "Ork Warrior",
+          "enDisplay": "Orc Warrior",
           "zhTw": "",
           "koKr": "오크 워리어"
         },
@@ -6272,7 +6272,7 @@
       "divinePride": {
         "sourceUrl": "https://www.divine-pride.net/database/monster/1023/orc-warrior",
         "indexPage": 7,
-        "name": "Ork Warrior",
+        "name": "Orc Warrior",
         "level": 52,
         "size": "Medium",
         "element": "Earth 1",
@@ -28486,7 +28486,7 @@
     },
     {
       "id": 1087,
-      "name": "Ork Hero",
+      "name": "Orc Hero",
       "title": "Monster: Ork Hero",
       "level": 60,
       "size": "Large",
@@ -28508,7 +28508,7 @@
         "releaseDate": "",
         "name": {
           "en": "ORK_HERO",
-          "enDisplay": "Ork Hero",
+          "enDisplay": "Orc Hero",
           "zhTw": "",
           "koKr": "오크 히어로(MVP)"
         },
@@ -29121,7 +29121,7 @@
       "divinePride": {
         "sourceUrl": "https://www.divine-pride.net/database/monster/1087/orc-hero",
         "indexPage": 8,
-        "name": "Ork Hero",
+        "name": "Orc Hero",
         "level": 60,
         "size": "Large",
         "element": "Earth 2",
@@ -137455,7 +137455,7 @@
     },
     {
       "id": 2722,
-      "name": "C4 Ork Warrior",
+      "name": "C4 Orc Warrior",
       "title": "Monster: C4 Ork Warrior",
       "level": 52,
       "size": "Medium",
@@ -137477,7 +137477,7 @@
         "releaseDate": "",
         "name": {
           "en": "C4_ORK_WARRIOR",
-          "enDisplay": "C4 Ork Warrior",
+          "enDisplay": "C4 Orc Warrior",
           "zhTw": "",
           "koKr": "분노의 오크 워리어"
         },
@@ -137839,7 +137839,7 @@
       "divinePride": {
         "sourceUrl": "https://www.divine-pride.net/database/monster/2722/furious-orc-warrior",
         "indexPage": 7,
-        "name": "C4 Ork Warrior",
+        "name": "C4 Orc Warrior",
         "level": 52,
         "size": "Medium",
         "element": "Earth 1",

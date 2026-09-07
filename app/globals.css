@@ -1812,3 +1812,31 @@ a.cashlist__row:hover { background: var(--panel-2); }
 /* Spawn count inside a map chip on the monster page: the number a player
    actually compares maps by, kept quiet next to the name. */
 .chip__count { margin-left: 6px; font: 500 12px/1 var(--font-mono), monospace; color: var(--faint); }
+
+/* Monster name with a sprite that pops up on hover (components/MonsterLink).
+   Hidden with display:none so the image is not fetched until first shown.
+   Anchored above the name; z-index keeps it over the next table row. */
+.monlink { position: relative; }
+.monlink__pop {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  padding: 8px;
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: 0 0 14px var(--glow-cyan), 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  pointer-events: none;
+}
+.monlink__pop img {
+  display: block;
+  max-width: 140px;
+  max-height: 140px;
+  image-rendering: pixelated;
+}
+.monlink:hover .monlink__pop,
+.monlink:focus-visible .monlink__pop { display: block; }
+@media (hover: none) { .monlink__pop { display: none !important; } }

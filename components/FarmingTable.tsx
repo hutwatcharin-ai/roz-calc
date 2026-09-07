@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import MonsterLink from '@/components/MonsterLink';
 import AggroBadge from '@/components/AggroBadge';
 import AddToPlanButton from '@/components/AddToPlanButton';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
@@ -65,7 +65,7 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                         style={{ imageRendering: 'pixelated', flexShrink: 0 }}
                       />
                     )}
-                    <Link href={`/database/monsters/${row.monster_id}`}>{row.name_en}</Link>
+                    <MonsterLink id={row.monster_id} name={row.name_en} />
                     {/* The flag travels with the monster wherever it appears
                         (spec 3.15.1); this table is where a player picks a spot
                         to stand, so it matters most here. */}

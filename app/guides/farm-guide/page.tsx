@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import MonsterLink from '@/components/MonsterLink';
 import { supabaseBrowser } from '@/lib/supabase';
 import AggroBadge from '@/components/AggroBadge';
 import JsonLd from '@/components/JsonLd';
@@ -107,7 +108,7 @@ export default async function FarmGuidePage() {
                         {r.image_url && (
                           <img loading="lazy" decoding="async" src={r.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                         )}
-                        <Link href={`/database/monsters/${r.monster_id}`}>{r.name_en}</Link>
+                        <MonsterLink id={r.monster_id} name={r.name_en} />
                         <AggroBadge monster={{ is_aggressive: r.is_aggressive, atk_max: null }} />
                       </span>
                     </td>

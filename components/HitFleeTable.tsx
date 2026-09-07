@@ -4,7 +4,7 @@
 // Sep). Extracted from the server page so the sort can live in the browser;
 // the page still fetches the rows and passes the player's HIT/FLEE down.
 import { useEffect } from 'react';
-import Link from 'next/link';
+import MonsterLink from '@/components/MonsterLink';
 import { reportToolUse } from '@/lib/analytics';
 import AggroBadge from '@/components/AggroBadge';
 import { hitChanceVsMob, mobHitChance } from '@/lib/hit-flee';
@@ -75,7 +75,7 @@ export default function HitFleeTable({ monsters, myHit, myFlee }: { monsters: Hi
                 {m.image_url && (
                   <img loading="lazy" decoding="async" src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                 )}
-                <Link href={`/database/monsters/${m.id}`}>{m.name_en}</Link>
+                <MonsterLink id={m.id} name={m.name_en} />
                 <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
               </span>
             </td>

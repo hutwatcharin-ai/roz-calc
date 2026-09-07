@@ -2,6 +2,7 @@
 
 // components/DropSearch.tsx
 import Link from 'next/link';
+import MonsterLink from '@/components/MonsterLink';
 import TrackSearch from '@/components/TrackSearch';
 import AggroBadge from '@/components/AggroBadge';
 import CVariantToggle from '@/components/CVariantToggle';
@@ -79,7 +80,7 @@ export default function DropSearch({
               {row.monster_image_url && (
                 <img loading="lazy" decoding="async" src={row.monster_image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
               )}
-              <Link href={`/database/monsters/${row.monster_id}`}>{row.monster_name}</Link>
+              <MonsterLink id={row.monster_id} name={row.monster_name} />
               {row.monster_level !== null && <span className="muted">Lv.{row.monster_level}</span>}
               {/* The flag belongs on every surface a monster appears on
                   (spec 3.15.1), and a drop hunt is one of the places a player

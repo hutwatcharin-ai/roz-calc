@@ -27,6 +27,10 @@ export const PRIMARY_LINKS: NavLink[] = [
   { href: '/', label: 'หน้าแรก', ready: true },
   { href: '/drop-finder', label: 'ค้นของดรอป', ready: true },
   { href: '/database/monsters', label: 'ฐานข้อมูล', ready: true },
+  // Dropped by accident in e866a87 (the three farming tools merged and the
+  // link that pointed at the old afk-finder went with them). Points at the
+  // first tool in the row, same as the database tab points at monsters.
+  { href: '/tools/leveling-spots', label: 'เครื่องมือ', ready: true },
   // Split off the tools row on 3 Sep 2026: a table you read and a calculator
   // you feed your own numbers to are different errands, and ten mixed chips
   // made the row something to scan rather than choose from.

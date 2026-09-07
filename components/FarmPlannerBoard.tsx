@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import MonsterLink from '@/components/MonsterLink';
 import { useToolUse } from '@/lib/use-tool-use';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
@@ -209,7 +210,7 @@ export default function FarmPlannerBoard() {
                         style={{ imageRendering: 'pixelated', flexShrink: 0 }}
                       />
                     )}
-                    <Link href={`/database/monsters/${row.monster_id}`}>{row.name_en}</Link>
+                    <MonsterLink id={row.monster_id} name={row.name_en} />
                     <AggroBadge monster={{ is_aggressive: row.is_aggressive, atk_max: row.atk_max }} />
                   </div>
                 </td>

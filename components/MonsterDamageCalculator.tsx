@@ -9,8 +9,8 @@
 // HP. A monster page links here with ?monster=<id> preselected.
 
 import { useEffect, useMemo, useState } from 'react';
+import MonsterLink from '@/components/MonsterLink';
 import { useToolUse } from '@/lib/use-tool-use';
-import Link from 'next/link';
 import { physicalDamagePerHit } from '@/lib/damage';
 import { killRate, expPerHour, KILL_RATE_DISCLAIMER } from '@/lib/kills-per-hour';
 import { hitChanceVsMob } from '@/lib/hit-flee';
@@ -214,7 +214,7 @@ export default function MonsterDamageCalculator({
       ) : (
         <div className="card">
           <h2 className="section-title">
-            <Link href={`/database/monsters/${monster.id}`}>{monster.name_en}</Link>{' '}
+            <MonsterLink id={monster.id} name={monster.name_en} />{' '}
             <span className="mono" style={{ color: 'var(--faint)', fontSize: 13 }}>
               Lv{monster.level} · DEF {monster.def ?? '—'} · {monster.element ?? '—'} · {monster.size ?? '—'}
             </span>

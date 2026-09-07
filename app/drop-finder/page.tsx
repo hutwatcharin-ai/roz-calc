@@ -2,6 +2,8 @@
 import { supabaseBrowser } from '@/lib/supabase';
 import DropSearch from '@/components/DropSearch';
 import { escapeLikePattern } from '@/lib/like-escape';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
+import Pagination from '@/components/Pagination';
 
 export const metadata = {
   title: 'ค้นของดรอป Ragnarok Zero',
@@ -114,30 +116,51 @@ async function findDrops(query: string, itemId: number | null) {
 // stay recognizable names rather than whatever tops a price sort.
 const SAMPLE_SEARCHES = ['Jellopy', 'Elunium Ore', 'Steel', 'Emperium', 'Fluff', 'Witherless Rose'];
 
-// Fills the page before the first search: the highest NPC-sell-price items
-// that actually drop from a monster. Top-60 by price then filtered to
-// droppable keeps it two light queries instead of an aggregate over the whole
-// drops table.
-async function starterList() {
+// Fills the page before the first search: every NPC-sellable item that drops
+// from a monster, best price first, 40 a page (user, 7 Sep 2026: the top-12
+// list was too short -- "bring up a lot more, with pages"). Both tables are
+// over PostgREST's 1,000-row cut, so each is read in full with fetchAllRows
+// and joined here; ~1,100 sellables x ~3,700 drop rows is a few kB.
+const STARTER_PAGE_SIZE = 40;
+
+interface StarterItem {
+  id: number;
+  name_en: string;
+  name_th: string | null;
+  sell_price: number;
+  icon_url: string | null;
+  slots: number | null;
+  dropCount: number;
+}
+
+async function starterList(): Promise<StarterItem[]> {
   const db = supabaseBrowser();
-  const { data: items, error } = await db
-    .from('items')
-    .select('id, name_en, name_th, sell_price, icon_url, slots')
-    // Equipment excluded (user call, 2 Sep): equipment NPC-sell prices swing
-    // with the market/patches and several were plain wrong before the
-    // rozerodb sync — the starter list stays on goods with stable prices.
-    .not('category', 'in', '("Armor","Weapon","Costume Equipment")')
-    .gt('sell_price', 0)
-    .order('sell_price', { ascending: false })
-    .limit(60);
+  const { data: items, error } = await fetchAllRows<{
+    id: number;
+    name_en: string;
+    name_th: string | null;
+    sell_price: number;
+    icon_url: string | null;
+    slots: number | null;
+  }>((from, to) =>
+    db
+      .from('items')
+      .select('id, name_en, name_th, sell_price, icon_url, slots')
+      // Equipment excluded (user call, 2 Sep): equipment NPC-sell prices swing
+      // with the market/patches and several were plain wrong before the
+      // rozerodb sync — the starter list stays on goods with stable prices.
+      .not('category', 'in', '("Armor","Weapon","Costume Equipment")')
+      .gt('sell_price', 0)
+      .order('id')
+      .range(from, to),
+  );
   if (error || !items || items.length === 0) {
     if (error) console.error('starter items query failed', error);
     return [];
   }
-  const { data: drops, error: dropsError } = await db
-    .from('monster_drops')
-    .select('item_id')
-    .in('item_id', items.map((i) => i.id));
+  const { data: drops, error: dropsError } = await fetchAllRows<{ id: number; item_id: number }>((from, to) =>
+    db.from('monster_drops').select('id, item_id').order('id').range(from, to),
+  );
   if (dropsError || !drops) {
     if (dropsError) console.error('starter drops query failed', dropsError);
     return [];
@@ -146,16 +169,19 @@ async function starterList() {
   for (const d of drops) count.set(d.item_id, (count.get(d.item_id) ?? 0) + 1);
   return items
     .filter((i) => count.has(i.id))
-    .slice(0, 12)
-    .map((i) => ({ ...i, dropCount: count.get(i.id) as number }));
+    .map((i) => ({ ...i, dropCount: count.get(i.id) as number }))
+    .sort((a, b) => b.sell_price - a.sell_price || a.name_en.localeCompare(b.name_en));
 }
 
-export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string } }) {
+export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string; page?: string } }) {
   const query = searchParams.q ?? '';
   const itemId = Number(searchParams.id) || null;
   const { resolvedName, resolvedInputName, resolvedId, rows } = await findDrops(query, itemId);
   const searched = Boolean(query || itemId);
-  const starters = searched ? [] : await starterList();
+  const allStarters = searched ? [] : await starterList();
+  const totalPages = Math.max(1, Math.ceil(allStarters.length / STARTER_PAGE_SIZE));
+  const page = Math.min(totalPages, Math.max(1, Number(searchParams.page ?? 1) || 1));
+  const starters = allStarters.slice((page - 1) * STARTER_PAGE_SIZE, page * STARTER_PAGE_SIZE);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -204,6 +230,13 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
               </tbody>
             </table>
           </div>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            buildHref={(p) => (p === 1 ? '/drop-finder' : `/drop-finder?page=${p}`)}
+            total={allStarters.length}
+            pageSize={STARTER_PAGE_SIZE}
+          />
         </section>
       )}
       {!searched && (

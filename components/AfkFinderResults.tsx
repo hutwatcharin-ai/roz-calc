@@ -1,6 +1,7 @@
 'use client';
 
 import Caveat from '@/components/Caveat';
+import MonsterLink from '@/components/MonsterLink';
 import { isCVariant } from '@/lib/c-variant';
 import { useState } from 'react';
 import { useToolUse } from '@/lib/use-tool-use';
@@ -210,7 +211,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
                           style={{ imageRendering: 'pixelated', flexShrink: 0 }}
                         />
                       )}
-                      <Link href={`/database/monsters/${row.monster_id}`}>{row.name_en}</Link>
+                      <MonsterLink id={row.monster_id} name={row.name_en} />
                       {row.is_aggressive && (
                         <span className="tag tag--risk" title="มอนตัวนี้โจมตีก่อน แต่ HIT ของมันตีค่า FLEE ของคุณแทบไม่โดน (หลบถึงเพดาน 95%)">โจมตีก่อน·หลบได้</span>
                       )}

@@ -4331,7 +4331,7 @@
         },
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 5,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
@@ -5052,7 +5052,7 @@
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 25,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"
@@ -11626,7 +11626,7 @@
         },
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 0.2,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
@@ -11927,7 +11927,7 @@
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 1,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"
@@ -15451,7 +15451,7 @@
       "droppedBy": [
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 45,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
@@ -15465,7 +15465,7 @@
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 100,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"
@@ -18577,7 +18577,7 @@
       "droppedBy": [
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 48.5,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -19232,7 +19232,7 @@
         },
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 22.8,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -26803,14 +26803,14 @@
       "droppedBy": [
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 0.03,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 0.15,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"
@@ -26980,7 +26980,7 @@
       "droppedBy": [
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 0.75,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -31778,14 +31778,14 @@
       "droppedBy": [
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 0.02,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 0.1,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"
@@ -39267,14 +39267,14 @@
       "droppedBy": [
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 0.01,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 0.05,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"
@@ -42943,7 +42943,7 @@
       "droppedBy": [
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 0.01,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -62635,7 +62635,7 @@
       "droppedBy": [
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 2.5,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -64232,7 +64232,7 @@
       "droppedBy": [
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 5,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -72994,7 +72994,7 @@
       "droppedBy": [
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": null,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
@@ -75783,7 +75783,7 @@
         },
         {
           "monsterId": 1087,
-          "monsterName": "Ork Hero",
+          "monsterName": "Orc Hero",
           "rate": 1.25,
           "iconUrl": "/images/monsters/1087.gif",
           "source": "TWRoZ monster detail drops"
@@ -78324,7 +78324,7 @@
       "droppedBy": [
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": null,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
@@ -81116,14 +81116,14 @@
         },
         {
           "monsterId": 1023,
-          "monsterName": "Ork Warrior",
+          "monsterName": "Orc Warrior",
           "rate": 0.05,
           "iconUrl": "/images/monsters/1023.gif",
           "source": "TWRoZ monster detail drops"
         },
         {
           "monsterId": 2722,
-          "monsterName": "C4 Ork Warrior",
+          "monsterName": "C4 Orc Warrior",
           "rate": 0.25,
           "iconUrl": "/images/monsters/2722.gif",
           "source": "TWRoZ monster detail drops"

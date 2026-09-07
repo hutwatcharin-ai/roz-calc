@@ -119,6 +119,14 @@ describe('link tables', () => {
     expect(PRIMARY_LINKS.map((l) => l.href)).toContain('/drop-finder');
   });
 
+  it('has a top-row entry for every section, so no section is reachable only by URL', () => {
+    // The tools entry vanished in e866a87 (its href was the deleted afk-finder)
+    // and nobody noticed for four days: every tool was still linked from the
+    // homepage cards, just not from the nav.
+    const sections = PRIMARY_LINKS.map((l) => sectionForPath(l.href)).filter(Boolean);
+    expect(sections).toEqual(['database', 'tools', 'guides']);
+  });
+
   it('lists the ten database pages in browse order', () => {
     // Reordered 31 Aug for the section split: hunting flow first, then the
     // catalogs by size, world map added the day it shipped.
