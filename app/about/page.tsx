@@ -2,10 +2,15 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { organizationJsonLd } from '@/lib/jsonld';
 
+// This page is the site's biggest search impression source and its worst
+// converter: 458 impressions at position 3.3 for people searching
+// "rozerodb", 5 clicks (Search Console, 90 days to 7 Sep 2026). They are
+// looking for a RO Zero database, and the title they saw said "about this
+// website". Same page, same position -- a title that answers the search.
 export const metadata = {
-  title: 'เกี่ยวกับเว็บนี้',
+  title: 'ฐานข้อมูล RO Zero ภาษาไทย — ตัวเลขมาจากไหน ตรวจยังไง',
   description:
-    'RO Zero Thai คือฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย ทำโดยผู้เล่น — ที่มาของตัวเลข วิธีตรวจทาน ช่องทางแจ้งข้อมูลผิด และติดต่อธุรกิจ',
+    'ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย ทำโดยผู้เล่น — มอนสเตอร์ ไอเทม การ์ด สกิล แมพ ครบ พร้อมบอกว่าตัวเลขแต่ละอย่างมาจากแหล่งไหนและตรวจทานยังไง',
 };
 
 // Static trust page (SEO audit High #6): who runs the site, how the numbers
@@ -16,6 +21,17 @@ export default function AboutPage() {
     <main className="shell" style={{ paddingBlock: 32, maxWidth: 820 }}>
       <JsonLd data={organizationJsonLd()} />
       <h1 className="pagehead__title">เกี่ยวกับ RO Zero Thai</h1>
+      {/* Straight into the database. Most arrivals here were searching for a
+          RO Zero database, not for a page about the site, and used to have
+          to find the nav to get one. */}
+      <p className="aboutjump">
+        <Link className="btn" href="/database/monsters">เปิดฐานข้อมูลมอนสเตอร์ →</Link>
+        <Link className="chiplink" href="/database/items">ไอเทม</Link>
+        <Link className="chiplink" href="/database/cards">การ์ด</Link>
+        <Link className="chiplink" href="/database/equipment">อุปกรณ์</Link>
+        <Link className="chiplink" href="/database/skills">สกิล</Link>
+        <Link className="chiplink" href="/database/maps">แมพ</Link>
+      </p>
 
       <section className="card" style={{ marginTop: 20 }}>
         <h2 className="section-title">เว็บนี้คืออะไร</h2>

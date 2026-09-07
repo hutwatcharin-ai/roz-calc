@@ -1,4 +1,6 @@
 import { isCVariant } from '@/lib/c-variant';
+import ThaiAliasLine from '@/components/ThaiAliasLine';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import Link from 'next/link';
@@ -57,9 +59,21 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   if (item.atk !== null) parts.push(`ATK ${item.atk}`);
   if (item.required_level !== null) parts.push(`ใช้ได้ที่เลเวล ${item.required_level}`);
 
+  // An item you buy and an item you farm are different questions, and the
+  // title has to answer the one being asked. "milk ro ซื้อที่ไหน" put us at
+  // position 3.7 with no click for 6 impressions, under a title that said
+  // "which monster drops it" (Search Console, 90 days to 7 Sep 2026).
+  const thai = thaiAliasNames('items', item.id);
+  const thaiPart = thai.length > 0 ? ` (${thai.join(' / ')})` : '';
+  const slotPart = item.slots > 0 ? ` [${item.slots}]` : '';
+  const buyable = typeof item.buy_price === 'number' && item.buy_price > 0;
+  const angle = buyable
+    ? `ราคาซื้อ ${item.buy_price.toLocaleString('en-US')}z · ดรอปจากมอนตัวไหน`
+    : 'ดรอปจากมอนตัวไหน';
+
   return {
-    title: `${item.name_en}${item.slots > 0 ? ` [${item.slots}]` : ''} — ดรอปจากมอนตัวไหน`,
-    description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน RO Zero Thai`,
+    title: `${item.name_en}${slotPart}${thaiPart} — ${angle}`,
+    description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${parts.length ? ` ${parts.join(' ')}` : ''}${buyable ? ` ซื้อจาก NPC ${item.buy_price.toLocaleString('en-US')}z` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน RO Zero Thai`,
   };
 }
 
@@ -189,6 +203,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
             {item.name_en}
             {item.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{item.slots}]</span>}
           </h1>
+          <ThaiAliasLine kind="items" id={item.id} />
           {/* One fluent sentence a crawler or reader can lift whole (GEO
               audit): the same facts the tables below hold, as prose. */}
           {(() => {

@@ -10,6 +10,7 @@ import RecentlyViewed from '@/components/RecentlyViewed';
 import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
+import { aliasIdsFor } from '@/lib/thai-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
@@ -60,8 +61,16 @@ export default async function MonsterListPage({
     // One condition per word, ANDed: "potion red" finds Red Potion, which
     // a single `%potion red%` never could. Words, not the raw string, is
     // the whole difference (7 Sep 2026).
-    for (const word of searchWords(q)) {
-      query = query.ilike('name_en', `%${escapeLikePattern(word)}%`);
+    // A Thai search cannot match an English column, so the Thai names
+    // players use are resolved to ids first and OR-ed in (lib/thai-aliases).
+    const aliasIds = aliasIdsFor('monsters', q);
+    if (aliasIds.length > 0) {
+      const like = searchWords(q).map((w) => `name_en.ilike.%25${escapeLikePattern(w)}%25`);
+      query = query.or([...like, `id.in.(${aliasIds.join(',')})`].join(','));
+    } else {
+      for (const word of searchWords(q)) {
+        query = query.ilike('name_en', `%${escapeLikePattern(word)}%`);
+      }
     }
   }
   if (race) query = query.eq('race', race);

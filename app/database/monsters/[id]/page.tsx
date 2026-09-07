@@ -1,5 +1,7 @@
 // app/database/monsters/[id]/page.tsx
 import { mobThresholds } from '@/lib/monster-thresholds';
+import ThaiAliasLine from '@/components/ThaiAliasLine';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 import { riskySkills, SKILL_RISK_LABELS } from '@/lib/afk-safety';
 import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -68,9 +70,16 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   // `!== null` there instead.
   if (monster.hp) parts.push(`HP ${monster.hp.toLocaleString('en-US')}`);
 
+  // The Thai name goes in the title when players have been searching for it.
+  // Search Console showed us at position 8 to 66 for คาราเมล, วอมเทล, หมาฟ้า
+  // and the rest, with no click, because the word was nowhere on the page
+  // (lib/thai-aliases). Nothing invented: only names people typed.
+  const thai = thaiAliasNames('monsters', monster.id);
+  const thaiPart = thai.length > 0 ? ` (${thai.join(' / ')})` : '';
+
   return {
-    title: `${monster.name_en} (Lv.${monster.level}) — ดรอป จุดเกิด ค่าสถานะ`,
-    description: `${monster.name_en} ${parts.join(' ')} — ดูของที่ดรอป อัตราดรอป แมพที่เจอ และค่าสถานะครบใน RO Zero Thai`,
+    title: `${monster.name_en}${thaiPart} (Lv.${monster.level}) — ดรอป จุดเกิด ค่าสถานะ`,
+    description: `${monster.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''} ${parts.join(' ')} — ดูของที่ดรอป อัตราดรอป แมพที่เจอ และค่าสถานะครบใน RO Zero Thai`,
   };
 }
 
@@ -203,6 +212,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         )}
         <div>
           <h1 className="pagehead__title">{monster.name_en}</h1>
+          <ThaiAliasLine kind="monsters" id={monster.id} />
           <p style={{ color: 'var(--dim)' }}>
             Lv.{monster.level}
             {monster.race ? ` · ${monster.race}` : ''}

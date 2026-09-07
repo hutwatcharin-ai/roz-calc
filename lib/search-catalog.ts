@@ -15,6 +15,7 @@ import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isCVariant } from '@/lib/c-variant';
 import { itemHref } from '@/lib/item-href';
 import { rankMatches, suggest, type Suggestion } from '@/lib/smart-search';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 
 export type SearchKind = 'monsters' | 'equipment' | 'costumes' | 'cards' | 'items' | 'maps';
 
@@ -57,6 +58,12 @@ export async function loadCatalog(): Promise<CatalogEntry[]> {
     // here would be the only place on the site that names them unasked.
     if (isCVariant(m.name_en)) continue;
     out.push({ kind: 'monsters', name: m.name_en, href: `/database/monsters/${m.id}` });
+    // The Thai names players use, as their own catalogue entries: typing
+    // คาราเมล on any page should find Caramel even though the row is
+    // English (lib/thai-aliases).
+    for (const alias of thaiAliasNames('monsters', m.id)) {
+      out.push({ kind: 'monsters', name: alias, href: `/database/monsters/${m.id}` });
+    }
   }
 
   const { data: items, error: itemsError } = await fetchAllRows<{
@@ -67,6 +74,9 @@ export async function loadCatalog(): Promise<CatalogEntry[]> {
   if (itemsError) console.error('search catalog: items failed', itemsError);
   for (const i of items ?? []) {
     out.push({ kind: itemKind(i.category), name: i.name_en, href: itemHref(i.id, i.category) });
+    for (const alias of thaiAliasNames('items', i.id)) {
+      out.push({ kind: itemKind(i.category), name: alias, href: itemHref(i.id, i.category) });
+    }
   }
 
   const { data: maps, error: mapsError } = await db
