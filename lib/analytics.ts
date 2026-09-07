@@ -46,6 +46,35 @@ export function contentGroupFor(pathname: string): ContentGroup {
 
 // GA4 cuts a param value at 100 characters silently. Cutting it here makes the
 // limit visible in the code instead of a surprise in the report.
+/**
+ * Query parameters that hold what someone is EDITING, not what they are
+ * looking at.
+ *
+ * The skill planner writes the whole build into `?build=` on every point
+ * spent, so its 19 organic users in August produced 771 page views -- 40
+ * each -- and the page ranked third on the site's top-pages report while
+ * having the fewest users of any tool (GA4, 30 days to 7 Sep 2026). A
+ * filter or a search term genuinely is a different page; a half-finished
+ * build is the same page mid-keystroke.
+ *
+ * `internal` is stripped for a different reason: it is a maintenance flag,
+ * and leaving it in would split every page's row in two.
+ */
+export const NON_PAGE_PARAMS = ['build', 'internal'];
+
+/**
+ * The path to report for a page view: the pathname plus the parameters that
+ * really name a different page, in a stable order so the same view is never
+ * counted under two spellings.
+ */
+export function pageViewPath(pathname: string, search: string | URLSearchParams): string {
+  const params = new URLSearchParams(search);
+  for (const name of NON_PAGE_PARAMS) params.delete(name);
+  const kept = [...params.entries()].sort(([a], [b]) => a.localeCompare(b));
+  const query = new URLSearchParams(kept).toString();
+  return query ? `${pathname}?${query}` : pathname;
+}
+
 const MAX_VALUE = 100;
 
 export function sanitizeParams(params: EventParams): Record<string, string | number | boolean> {

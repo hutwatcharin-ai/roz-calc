@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   applyInternalParam,
   contentGroupFor,
+  pageViewPath,
   INTERNAL_KEY,
   reportToolUse,
   resetToolUse,
@@ -92,5 +93,31 @@ describe('applyInternalParam', () => {
     expect(applyInternalParam(null, localStorage)).toBe(true);
     expect(localStorage.getItem(INTERNAL_KEY)).toBe('1');
     expect(calls).toEqual([]);
+  });
+});
+
+describe('pageViewPath', () => {
+  it('keeps the parameters that name a different page', () => {
+    expect(pageViewPath('/database/monsters', 'q=orc&page=2')).toBe('/database/monsters?page=2&q=orc');
+    expect(pageViewPath('/database/monsters', '')).toBe('/database/monsters');
+  });
+
+  it('drops the skill planner build, which changes on every point spent', () => {
+    // 19 users produced 771 views of this page in 30 days because each point
+    // rewrote the URL. The build is what they are editing, not a page.
+    expect(pageViewPath('/tools/skill-planner', 'class=knight&build=AAECAw')).toBe(
+      '/tools/skill-planner?class=knight',
+    );
+    expect(pageViewPath('/tools/skill-planner', 'build=AAECAw')).toBe('/tools/skill-planner');
+  });
+
+  it('drops the internal flag, which would split every page in two', () => {
+    expect(pageViewPath('/', 'internal=1')).toBe('/');
+  });
+
+  it('spells the same view one way whatever order the params arrive in', () => {
+    expect(pageViewPath('/database/items', 'page=2&q=potion')).toBe(
+      pageViewPath('/database/items', 'q=potion&page=2'),
+    );
   });
 });
