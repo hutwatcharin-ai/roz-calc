@@ -21,7 +21,7 @@ function isElementLevel(value: number | null): value is ElementLevel {
   return value === 1 || value === 2 || value === 3 || value === 4;
 }
 
-// "ดาบสองมือ, กริช, ขวาน และอีก 2" -- three names is what a player can hold
+// "ดาบสองมือ, มีด, ขวาน และอีก 2" -- three names is what a player can hold
 // in their head; the full list is one click down.
 function few(labels: string[], max = 4): string {
   // "และอีก 1" is longer than the name it hides.

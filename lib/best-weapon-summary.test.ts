@@ -27,15 +27,15 @@ describe('sizeGroups', () => {
     expect(g[1].pct).toBe(75);
     expect(g[1].labels).toContain('ขวาน');
     expect(g[1].labels).not.toContain('ขวานมือเดียว');
-    expect(g[1].labels).toContain('กริช');
-    expect(g[0].labels).toContain('ไม้เท้า');
+    expect(g[1].labels).toContain('มีด');
+    expect(g[0].labels).toContain('คทา');
   });
 
   it('keeps a pair apart when the two hands differ', () => {
     // Small: one-handed sword 75, two-handed sword 75 -> folded; dagger 100.
     const g = sizeGroups('small');
     const full = g.find((x) => x.pct === 100)!;
-    expect(full.labels).toContain('กริช');
+    expect(full.labels).toContain('มีด');
     expect(g.find((x) => x.pct === 50)!.labels).toEqual(['ขวาน']);
   });
 });

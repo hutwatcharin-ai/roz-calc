@@ -36,7 +36,7 @@
 - มอน Challenge (ชื่อ `C1 `–`C9 `, 159 ตัว): ซ่อน default ทุกหน้า — list ใช้ server filter `?c=1`, หน้าอื่นใช้ class `.cvariant` + `CVariantToggle`
 - character context v2 (`lib/character-context.ts`): เก็บเลขที่เกมโชว์ตรงๆ (Max HP/HIT/FLEE) — parser migrate เซฟ v1 (vit/job/dex/agi/luk) ผ่านสูตรเดิมอัตโนมัติ ห้าม reject
 - สำนวน UI: กระชับ ไม่ใช้ "แก" ไม่ใส่คำแก้ตัวยาวๆ — ข้อจำกัดเขียนสั้นๆ ตรงจุดที่ตัวเลขโชว์
-- คำว่า "Slot" ไม่ใช่ "ช่อง" สำหรับช่องการ์ดในอุปกรณ์
+- คำว่า "Slot" ไม่ใช่ "ช่อง" สำหรับช่องการ์ดในอุปกรณ์ · **ศัพท์อาวุธ/เกมใช้ตาม `docs/PLAYER_GLOSSARY.md`** (มีด ไม่ใช่กริช · คทา ไม่ใช่ไม้เท้า · สนับมือ · กาต้า · "ตีกี่ที" ไม่ใช่หมัด)
 - component client ที่เป็น controlled input: ต้อง sync state ตาม prop/URL หลัง navigation (บั๊ก checkbox ดีดกลับเคยเกิด) · ห้ามส่ง function จาก server เข้า client component (500 เฉพาะ runtime, build จับไม่ได้ — พิสูจน์ด้วย `next start` ก่อน deploy)
 - มีอีก Claude session ทำงาน repo นี้ขนานกันบ่อย: **ห้าม `git add -A`** (เลือกไฟล์รายตัว) · ห้าม `taskkill /IM node.exe` ทั้งเครื่อง
 
