@@ -7,6 +7,7 @@
 // slot, and equippable_classes is empty or "All Jobs" on every row), so the
 // only two questions worth asking are the name and the slot it covers.
 import Link from 'next/link';
+import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -100,7 +101,7 @@ export default async function CostumesPage({
   const needle = q.trim().toLowerCase();
   const filtered = items.filter((it) => {
     if (type && it.weapon_type !== type) return false;
-    if (needle && !it.name_en.toLowerCase().includes(needle)) return false;
+    if (needle && !matches(it.name_en, needle)) return false;
     return true;
   });
 
@@ -182,7 +183,7 @@ export default async function CostumesPage({
         </div>
       ) : rows.length === 0 ? (
         <div className="card">
-          <EmptyState what={q || undefined} clearHref="/database/costumes" />
+          <EmptyState kind="costumes" what={q || undefined} clearHref="/database/costumes" />
         </div>
       ) : (
         <div className="card">

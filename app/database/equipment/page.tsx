@@ -1,5 +1,6 @@
 // app/database/equipment/page.tsx
 import Link from 'next/link';
+import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
 import EquipCategoryType from '@/components/EquipCategoryType';
@@ -126,7 +127,7 @@ export default async function EquipmentPage({
     if (slotsParam !== '' && it.slots !== Number(slotsParam)) return false;
     if (mylv > 0 && it.required_level != null && it.required_level > mylv) return false;
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
-    if (needle && !it.name_en.toLowerCase().includes(needle)) return false;
+    if (needle && !matches(it.name_en, needle)) return false;
     return true;
   });
   if (sort === 'atk') {
@@ -234,7 +235,7 @@ export default async function EquipmentPage({
         </div>
       ) : rows.length === 0 ? (
         <div className="card">
-          <EmptyState what={q || undefined} clearHref="/database/equipment" />
+          <EmptyState kind="equipment" what={q || undefined} clearHref="/database/equipment" />
         </div>
       ) : (
         <div className="card">

@@ -9,6 +9,7 @@ import FilterState, { EmptyState } from '@/components/FilterState';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
+import { searchWords } from '@/lib/smart-search';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
@@ -56,8 +57,12 @@ export default async function MonsterListPage({
     .select('id, name_en, level, race, element, image_url, is_aggressive, atk_max, hp, base_exp', { count: 'exact' });
 
   if (q) {
-    const needle = escapeLikePattern(q);
-    query = query.ilike('name_en', `%${needle}%`);
+    // One condition per word, ANDed: "potion red" finds Red Potion, which
+    // a single `%potion red%` never could. Words, not the raw string, is
+    // the whole difference (7 Sep 2026).
+    for (const word of searchWords(q)) {
+      query = query.ilike('name_en', `%${escapeLikePattern(word)}%`);
+    }
   }
   if (race) query = query.eq('race', race);
   if (element) query = query.eq('element', element);
@@ -158,7 +163,7 @@ export default async function MonsterListPage({
 
       {(monsters ?? []).length === 0 ? (
         <div className="card">
-          <EmptyState what={q || undefined} clearHref="/database/monsters" />
+          <EmptyState kind="monsters" what={q || undefined} clearHref="/database/monsters" />
         </div>
       ) : (
       <div className="card">

@@ -1,5 +1,6 @@
 // app/database/cards/page.tsx
 import Link from 'next/link';
+import { matches } from '@/lib/smart-search';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -82,11 +83,9 @@ export default async function CardsPage({
     if (!needle) return true;
     // Searching effect text is the point: a player looks for "cards that add
     // LUK", not for a card whose name they already know.
-    return (
-      c.name_en.toLowerCase().includes(needle) ||
-      (c.effect ?? '').toLowerCase().includes(needle) ||
-      (c.effectEn ?? '').toLowerCase().includes(needle)
-    );
+    // Name and effect text, Thai and English: the cards page is the one
+    // people search by what the card DOES ("agi", "matk", "สัตว์").
+    return matches(`${c.name_en} ${c.effect ?? ''} ${c.effectEn ?? ''}`, needle);
   });
 
   if (sort === 'slot') {
@@ -191,6 +190,8 @@ export default async function CardsPage({
           </tbody>
         </table>
       </div>
+
+      {rows.length === 0 && q && <EmptyState kind="cards" what={q} clearHref="/database/cards" />}
 
       <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} total={filtered.length} pageSize={PAGE_SIZE} />
     </main>

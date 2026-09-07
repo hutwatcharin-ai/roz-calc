@@ -1885,3 +1885,10 @@ a.cashlist__row:hover { background: var(--panel-2); }
 @media (max-width: 560px) {
   .statgrid--dense, .statgrid--five { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* Empty search result: what to try instead (components/SearchMiss). */
+.searchmiss { margin-top: 20px; padding: 16px 18px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.searchmiss__head { margin: 0 0 8px; }
+.searchmiss__line { margin: 6px 0 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.searchmiss__kind { color: var(--faint); font-size: 11px; margin-inline-start: 5px; }
+.searchmiss { text-align: left; }

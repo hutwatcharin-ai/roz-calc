@@ -12,6 +12,8 @@
 // impact, allow Clear All.
 
 import Link from 'next/link';
+import SearchMiss from '@/components/SearchMiss';
+import { loadCatalog, searchMiss, type SearchKind } from '@/lib/search-catalog';
 import TrackSearch from '@/components/TrackSearch';
 
 export interface ActiveFilter {
@@ -79,26 +81,44 @@ export default function FilterState({
  * Nothing matched. Names what was searched so the reader can see the typo, and
  * offers the way back rather than leaving them on a blank page.
  */
-export function EmptyState({
+export async function EmptyState({
   what,
   clearHref,
+  kind,
 }: {
   /** What was searched for, quoted back. */
   what?: string;
   clearHref: string;
+  /**
+   * The section this page lists. Given it, a search that found nothing
+   * gets the catalogue treatment: the same word in another section, or the
+   * nearest spellings here. Omit it on pages with no section of their own
+   * (cash shop, quests) and the block is skipped.
+   */
+  kind?: SearchKind;
 }) {
+  // Only on a real miss, so the catalogue read never touches a normal page.
+  const miss = what && kind ? searchMiss(await loadCatalog(), what, kind) : null;
   return (
     <div className="emptystate">
-      <p>
-        {what ? (
-          <>
-            ไม่เจออะไรที่ตรงกับ <strong>{what}</strong>
-          </>
-        ) : (
-          'ไม่เจออะไรที่ตรงกับตัวกรองนี้'
-        )}
-      </p>
-      <p>ลองพิมพ์สั้นลง หรือใช้ชื่อภาษาอังกฤษ — ฐานข้อมูลเก็บชื่อไอเทมกับมอนเป็นภาษาอังกฤษ</p>
+      {what && miss ? (
+        // The miss block already names the query and what to try; repeating
+        // "nothing matched X" under it says it twice.
+        <SearchMiss query={what} miss={miss} />
+      ) : (
+        <>
+          <p>
+            {what ? (
+              <>
+                ไม่เจออะไรที่ตรงกับ <strong>{what}</strong>
+              </>
+            ) : (
+              'ไม่เจออะไรที่ตรงกับตัวกรองนี้'
+            )}
+          </p>
+          <p>ลองพิมพ์สั้นลง หรือใช้ชื่อภาษาอังกฤษ — ฐานข้อมูลเก็บชื่อไอเทมกับมอนเป็นภาษาอังกฤษ</p>
+        </>
+      )}
       <Link className="btn" href={clearHref}>
         ดูทั้งหมด
       </Link>

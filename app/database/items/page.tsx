@@ -10,6 +10,7 @@ import FilterState, { EmptyState } from '@/components/FilterState';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import Pagination from '@/components/Pagination';
 import { escapeLikePattern } from '@/lib/like-escape';
+import { searchWords } from '@/lib/smart-search';
 
 export const metadata = {
   title: 'ฐานข้อมูลไอเทม',
@@ -71,8 +72,12 @@ export default async function ItemListPage({
   let query = db.from('items').select('id, name_en, category, weapon_type, icon_url', { count: 'exact' });
 
   if (q) {
-    const needle = escapeLikePattern(q);
-    query = query.ilike('name_en', `%${needle}%`);
+    // One condition per word, ANDed: "potion red" finds Red Potion, which
+    // a single `%potion red%` never could. Words, not the raw string, is
+    // the whole difference (7 Sep 2026).
+    for (const word of searchWords(q)) {
+      query = query.ilike('name_en', `%${escapeLikePattern(word)}%`);
+    }
   }
   if (category) {
     query = query.eq('category', category);
@@ -154,7 +159,7 @@ export default async function ItemListPage({
 
       {(items ?? []).length === 0 ? (
         <div className="card">
-          <EmptyState what={q || undefined} clearHref="/database/items" />
+          <EmptyState kind="items" what={q || undefined} clearHref="/database/items" />
         </div>
       ) : (
       <div className="card">
