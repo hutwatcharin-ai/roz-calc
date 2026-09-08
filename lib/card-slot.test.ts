@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseCardSlot } from './card-slot';
+import { cardSlot, parseCardSlot } from './card-slot';
 
 describe('parseCardSlot', () => {
   it('reads the slot from the Equipped on line', () => {
@@ -31,5 +31,25 @@ describe('parseCardSlot', () => {
 
   it('returns null for an empty slot value instead of an empty string', () => {
     expect(parseCardSlot('Equipped on : \nWeight : 1')).toBeNull();
+  });
+});
+
+// Added 8 Sep 2026 with the folded slot the card list filters on. The raw
+// reading above stays exactly as it was: the card's own page still shows
+// what the client wrote, and only the list folds synonyms together.
+describe('cardSlot', () => {
+  it('folds the client\'s two words for one place into one slot', () => {
+    expect(cardSlot('Equipped on : Helmet')).toBe('headgear');
+    expect(cardSlot('Equipped on : Headgear')).toBe('headgear');
+    expect(cardSlot('Equipped on : Footgear')).toBe('shoes');
+    expect(cardSlot('Equipped on : Shoes')).toBe('shoes');
+  });
+
+  it('is null for a value it does not recognise, rather than the nearest one', () => {
+    // One card upstream carries "c" on this line. Folding it into anything
+    // would put a card in a slot the game never said it goes in.
+    expect(cardSlot('Equipped on : c')).toBeNull();
+    expect(cardSlot('Type : Card\nWeight : 1')).toBeNull();
+    expect(cardSlot(null)).toBeNull();
   });
 });

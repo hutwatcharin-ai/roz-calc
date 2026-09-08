@@ -6,46 +6,17 @@
 // armour to be Holy -- which card, and does it go in my armour or my shield?
 // That grouping exists on two outside sites and nowhere in Thai.
 //
-// Both the slot and the role are read out of our own items table. The game
-// client writes the slot into every card's description ("Equipped on :
-// Weapon") and writes the effect in a small, repetitive English, so a set of
-// patterns over that text is a reading of the game's own words rather than
-// an opinion about what each card is worth. Cards the patterns cannot place
-// fall into `other` instead of being forced into a bucket.
+// The role is read out of our own items table: the client writes each card's
+// effect in a small, repetitive English, so a set of patterns over that text
+// is a reading of the game's own words rather than an opinion about what
+// each card is worth. Cards the patterns cannot place fall into `other`
+// instead of being forced into a bucket.
+//
+// The slot is the same idea and lives in lib/card-slot, which owned it
+// first; it is re-exported here so a page that groups cards imports one
+// module rather than two.
 
-export type CardSlot = 'weapon' | 'armor' | 'shield' | 'garment' | 'shoes' | 'headgear' | 'accessory';
-
-export const SLOT_TH: Record<CardSlot, string> = {
-  weapon: 'อาวุธ',
-  armor: 'ชุด',
-  shield: 'โล่',
-  garment: 'ผ้าคลุม',
-  shoes: 'รองเท้า',
-  headgear: 'หมวก',
-  accessory: 'เครื่องประดับ',
-};
-
-// The client uses two words for two of the slots -- Headgear/Helmet and
-// Shoes/Footgear -- for the same place on the character.
-const SLOT_WORDS: Record<string, CardSlot> = {
-  weapon: 'weapon',
-  armor: 'armor',
-  armour: 'armor',
-  shield: 'shield',
-  garment: 'garment',
-  shoes: 'shoes',
-  footgear: 'shoes',
-  headgear: 'headgear',
-  helmet: 'headgear',
-  accessory: 'accessory',
-};
-
-/** The slot the client says the card is equipped in, or null when it does not say. */
-export function cardSlot(description: string | null | undefined): CardSlot | null {
-  const m = /Equipped on\s*:\s*([A-Za-z]+)/i.exec(description ?? '');
-  if (!m) return null;
-  return SLOT_WORDS[m[1].toLowerCase()] ?? null;
-}
+export { cardSlot, SLOT_TH, SLOT_ORDER, type CardSlot } from './card-slot';
 
 /** The effect text, without the client's trailing Type/Equipped on/Weight block. */
 export function cardEffect(description: string | null | undefined): string {

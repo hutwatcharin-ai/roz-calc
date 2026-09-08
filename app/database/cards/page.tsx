@@ -1,18 +1,29 @@
 // app/database/cards/page.tsx
+//
+// The card list, and since 8 Sep 2026 also the card *guide*: the same rows,
+// filterable by what the card is for.
+//
+// That grouping shipped for a few hours as a separate page under /guides and
+// it was the wrong call -- 288 cards listed twice with the same three
+// columns, two URLs competing for the same search, and two places to fix
+// anything. This page already had 360 views in 30 days and a slot filter, so
+// the grouping belongs on it. /guides/cards now redirects here.
 import Link from 'next/link';
 import { matches } from '@/lib/smart-search';
 import { supabaseBrowser } from '@/lib/supabase';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
-import { parseCardSlot } from '@/lib/card-slot';
+import { cardSlot, SLOT_ORDER, SLOT_TH, type CardSlot } from '@/lib/card-slot';
+import { ROLE_ORDER, ROLE_TH, cardRoles, type CardRole } from '@/lib/card-roles';
 
 export const revalidate = 86400;
 
 export const metadata = {
-  title: 'ฐานข้อมูลการ์ด',
+  title: 'ฐานข้อมูลการ์ด — การ์ดใบไหนใส่ช่องไหน เอาไว้ทำอะไร',
   description:
-    'การ์ดทั้งหมดในเกม Ragnarok Zero Global พร้อมเอฟเฟกต์และช่องที่ใส่ได้ ค้นจากเอฟเฟกต์ได้ เช่นพิมพ์ LUK เพื่อหาการ์ดที่เพิ่ม LUK',
+    'การ์ดทั้งหมดใน Ragnarok Zero Global พร้อมเอฟเฟกต์ ช่องที่ใส่ และมอนที่ดรอป · เลือกดูตามงานที่ต้องการได้เลย กันสถานะ เปลี่ยนธาตุชุด ต้านธาตุ ตีเผ่าไหนแรงขึ้น หรือค้นจากเอฟเฟกต์ เช่นพิมพ์ LUK',
 };
 
 const PAGE_SIZE = 50;
@@ -33,10 +44,11 @@ function cardEffect(description: string | null): string | null {
 export default async function CardsPage({
   searchParams,
 }: {
-  searchParams: { q?: string; slot?: string; page?: string; sort?: string };
+  searchParams: { q?: string; slot?: string; role?: string; page?: string; sort?: string };
 }) {
   const q = searchParams.q ?? '';
-  const slot = searchParams.slot ?? '';
+  const slot = SLOT_ORDER.includes(searchParams.slot as CardSlot) ? (searchParams.slot as CardSlot) : '';
+  const role = ROLE_ORDER.includes(searchParams.role as CardRole) ? (searchParams.role as CardRole) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
   const SORTS = {
     name: { label: 'ชื่อ A-Z' },
@@ -60,26 +72,62 @@ export default async function CardsPage({
     console.error('cards query failed', error);
   }
 
+  // Which monster drops each card. "Where do I get it" is the question that
+  // always follows "which card do I want", and answering it here saves the
+  // reader a click per card. fetchAllRows because monster_drops is well over
+  // the 1,000-row cap PostgREST applies silently.
+  const [dropsResult, monstersResult] = await Promise.all([
+    fetchAllRows<{ item_id: number; monster_id: number; rate: number | null }>((from, to) =>
+      db.from('monster_drops').select('item_id, monster_id, rate').order('id').range(from, to),
+    ),
+    fetchAllRows<{ id: number; name_en: string }>((from, to) =>
+      db.from('monsters').select('id, name_en').order('id').range(from, to),
+    ),
+  ]);
+  // A failed drops read must not render as "this card drops from nothing":
+  // the column simply goes quiet instead.
+  const dropsKnown = !dropsResult.error && !monstersResult.error;
+  const monsterName = new Map((monstersResult.data ?? []).map((m) => [m.id, m.name_en]));
+  const droppers = new Map<number, { id: number; name: string; rate: number }[]>();
+  for (const d of dropsResult.data ?? []) {
+    const name = monsterName.get(d.monster_id);
+    // A Challenge-dungeon clone is the same monster met somewhere else;
+    // listing both doubles the cell and tells the reader nothing new.
+    if (!name || /^C\d /.test(name)) continue;
+    const list = droppers.get(d.item_id) ?? [];
+    list.push({ id: d.monster_id, name, rate: d.rate ?? 0 });
+    droppers.set(d.item_id, list);
+  }
+
   const cards = (allCards ?? []).map((c) => ({
     ...c,
-    slot: parseCardSlot(c.description),
+    // The folded slot, not the raw string: Headgear and Helmet are one place
+    // on the character and splitting the filter into both helps nobody. The
+    // card's own page still shows the client's exact wording.
+    slot: cardSlot(c.description),
+    roles: cardRoles(c.description),
     // Thai translation leads when present; the English effect still powers
     // the search below so "LUK" and English phrasing keep matching.
     effect: c.description_th ?? cardEffect(c.description),
     effectEn: cardEffect(c.description),
+    from: (droppers.get(c.id) ?? []).sort((a, b) => b.rate - a.rate),
   }));
 
-  // The filter list is derived from the data rather than hardcoded, so a value
-  // that exists is never hidden -- synonym pairs and the upstream typo alike.
-  const slotCounts = new Map<string, number>();
+  // Counts come from the data, so an empty group never shows a chip that
+  // leads to an empty page.
+  const slotCounts = new Map<CardSlot, number>();
+  const roleCounts = new Map<CardRole, number>();
   for (const c of cards) {
     if (c.slot) slotCounts.set(c.slot, (slotCounts.get(c.slot) ?? 0) + 1);
+    for (const r of c.roles) roleCounts.set(r, (roleCounts.get(r) ?? 0) + 1);
   }
-  const slots = [...slotCounts.entries()].sort((a, b) => b[1] - a[1]);
+  const slots = SLOT_ORDER.filter((s) => slotCounts.has(s));
+  const roles = ROLE_ORDER.filter((r) => roleCounts.has(r));
 
   const needle = q.trim().toLowerCase();
   const filtered = cards.filter((c) => {
     if (slot && c.slot !== slot) return false;
+    if (role && !c.roles.includes(role)) return false;
     if (!needle) return true;
     // Searching effect text is the point: a player looks for "cards that add
     // LUK", not for a card whose name they already know.
@@ -102,8 +150,21 @@ export default async function CardsPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (slot) params.set('slot', slot);
+    if (role) params.set('role', role);
     if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
+    const qs = params.toString();
+    return `/database/cards${qs ? `?${qs}` : ''}`;
+  }
+
+  // A role chip keeps whatever search and slot are already on, and drops the
+  // page number, because page 4 of the old filter is not page 4 of this one.
+  function roleHref(target: CardRole | '') {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (slot) params.set('slot', slot);
+    if (target) params.set('role', target);
+    if (sort !== 'name') params.set('sort', sort);
     const qs = params.toString();
     return `/database/cards${qs ? `?${qs}` : ''}`;
   }
@@ -122,7 +183,8 @@ export default async function CardsPage({
           unit="ใบ"
           filters={[
             { label: 'คำค้น', value: q },
-            { label: 'ช่อง', value: slot },
+            { label: 'ช่อง', value: slot ? SLOT_TH[slot] : '' },
+            { label: 'เอาไว้', value: role ? ROLE_TH[role].title : '' },
           ]}
           clearHref="/database/cards"
         />
@@ -132,9 +194,9 @@ export default async function CardsPage({
         <input type="search" name="q" defaultValue={q} placeholder="ชื่อการ์ด หรือเอฟเฟกต์ เช่น LUK" />
         <select name="slot" defaultValue={slot}>
           <option value="">ทุกช่อง</option>
-          {slots.map(([s, n]) => (
+          {slots.map((s) => (
             <option key={s} value={s}>
-              {s} ({n})
+              {SLOT_TH[s]} ({slotCounts.get(s)})
             </option>
           ))}
         </select>
@@ -143,8 +205,30 @@ export default async function CardsPage({
             <option key={key} value={key}>เรียง: {v.label}</option>
           ))}
         </select>
+        {/* The role rides along in the form so hitting search does not throw
+            away the group the reader is standing in. */}
+        {role && <input type="hidden" name="role" value={role} />}
         <button type="submit" className="btn">ค้นหา</button>
       </form>
+
+      {/* The guide half: pick the job, not the name. Chips rather than another
+          dropdown because the list of jobs IS the thing worth reading -- a
+          player who does not know what a card can do for them learns it here.
+          A card sits in every group it truly serves, so the counts overlap. */}
+      <section style={{ marginTop: 14 }}>
+        <p className="muted" style={{ margin: '0 0 6px', fontSize: 13 }}>เอาไว้ทำอะไร</p>
+        <div className="chips">
+          <Link className={`chip${role === '' ? ' chip--on' : ''}`} href={roleHref('')}>
+            ทั้งหมด
+          </Link>
+          {roles.map((r) => (
+            <Link key={r} className={`chip${role === r ? ' chip--on' : ''}`} href={roleHref(r)} title={ROLE_TH[r].asks}>
+              {ROLE_TH[r].title} {roleCounts.get(r)}
+            </Link>
+          ))}
+        </div>
+        {role && <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>{ROLE_TH[role].asks}</p>}
+      </section>
 
       <div className="card">
         <table className="data-table">
@@ -153,12 +237,13 @@ export default async function CardsPage({
               <th>ชื่อ</th>
               <th>ช่องที่ใส่</th>
               <th>เอฟเฟกต์</th>
+              {dropsKnown && <th>ดรอปจาก</th>}
             </tr>
           </thead>
           <tbody>
             {error ? (
               <tr>
-                <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                   เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
@@ -174,13 +259,27 @@ export default async function CardsPage({
                         {c.name_en}
                       </Link>
                     </td>
-                    <td data-label="ช่องที่ใส่">{c.slot ?? '—'}</td>
+                    <td data-label="ช่องที่ใส่">{c.slot ? SLOT_TH[c.slot] : '—'}</td>
                     <td data-label="เอฟเฟกต์" className="effect">{c.effect ?? '—'}</td>
+                    {dropsKnown && (
+                      <td data-label="ดรอปจาก">
+                        {c.from.length === 0 ? (
+                          <span className="muted">ยังไม่รู้</span>
+                        ) : (
+                          <span className="recipe__list">
+                            {c.from.slice(0, 2).map((m) => (
+                              <Link key={m.id} href={`/database/monsters/${m.id}`}>{m.name}</Link>
+                            ))}
+                            {c.from.length > 2 && <span className="muted">+{c.from.length - 2}</span>}
+                          </span>
+                        )}
+                      </td>
+                    )}
                   </tr>
                 ))}
                 {rows.length === 0 && (
                   <tr>
-                    <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                    <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                       ไม่พบการ์ดที่ตรงเงื่อนไข
                     </td>
                   </tr>

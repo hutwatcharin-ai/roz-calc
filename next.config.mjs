@@ -8,6 +8,9 @@ const nextConfig = {
   // pages live now -- anything already linking or indexed follows once.
   async redirects() {
     return [
+      // The card guide lived here for a few hours on 8 Sep 2026 before the
+      // grouping moved onto the card list it was duplicating.
+      { source: '/guides/cards', destination: '/database/cards', permanent: true },
       { source: '/tools/elements', destination: '/guides/elements', permanent: true },
       { source: '/tools/sizes', destination: '/guides/sizes', permanent: true },
       { source: '/tools/exp', destination: '/guides/exp', permanent: true },
