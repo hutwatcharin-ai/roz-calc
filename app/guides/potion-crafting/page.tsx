@@ -9,39 +9,6 @@ export const metadata = {
     'วิธีปรุงยา Alchemist ด้วย Prepare Potion ใน Ragnarok Zero Global เตรียม Mortar Bowl ตำรา และวัตถุดิบ พร้อมรวมสูตรยาฟื้น ไอเทมเคมี Slim Potion และยาต้านธาตุ',
 };
 
-const RECIPE_GROUPS = [
-  { title: 'ยาฟื้นและยาทั่วไป — Potion Creation Guide', rows: [
-    ['Red Potion', 'Red Herb ×1 + Empty Potion Bottle ×1'],
-    ['Yellow Potion', 'Yellow Herb ×1 + Empty Potion Bottle ×1'],
-    ['White Potion', 'White Herb ×1 + Empty Potion Bottle ×1'],
-    ['Blue Potion', 'Blue Herb ×1 + Scell ×1 + Empty Potion Bottle ×1'],
-    ['Anodyne', 'Ment ×1 + Alcohol ×1 + Empty Bottle ×1'],
-    ['Aloevera', 'Aloe ×1 + Honey ×1 + Empty Bottle ×1'],
-  ] },
-  { title: 'ไอเทมเคมี — ใช้ตำราของไอเทมนั้น', rows: [
-    ['Alcohol', 'Stem ×5 + Poison Spore ×5 + Empty Test Tube ×1 + Empty Bottle ×1'],
-    ['Acid Bottle', 'Immortal Heart ×1 + Empty Bottle ×1'],
-    ['Bottle Grenade', 'Fabric ×1 + Alcohol ×1 + Empty Bottle ×1'],
-    ['Plant Bottle', 'Maneater Blossom ×2 + Empty Bottle ×1'],
-    ['Marine Sphere Bottle', 'Tendon ×1 + Detonator ×1 + Empty Bottle ×1'],
-    ['Glistening Coat', "Mermaid's Heart ×1 + Zenorc's Fang ×1 + Alcohol ×1 + Empty Bottle ×1"],
-  ] },
-  { title: 'Slim Potion — Slim Potion Creation Guide', rows: [
-    ['Condensed Red Potion', 'Red Potion ×1 + Cactus Needle ×1 + Empty Test Tube ×1'],
-    ['Condensed Yellow Potion', 'Yellow Potion ×1 + Mole Whiskers ×1 + Empty Test Tube ×1'],
-    ['Condensed White Potion', "White Potion ×1 + Witch's Starsand ×1 + Empty Test Tube ×1"],
-  ] },
-  { title: 'ยาต้านธาตุ — Elemental Potion Creation Guide', rows: [
-    ['Fireproof Potion', 'Frill ×2 + Red Gemstone ×1 + Empty Potion Bottle ×1'],
-    ['Coldproof Potion', "Mermaid's Heart ×3 + Blue Gemstone ×1 + Empty Potion Bottle ×1"],
-    ['Earthproof Potion', 'Large Jellopy ×2 + Yellow Gemstone ×1 + Empty Potion Bottle ×1'],
-    ['Thunderproof Potion', 'Moth Dust ×3 + Blue Gemstone ×1 + Empty Potion Bottle ×1'],
-  ] },
-  { title: 'Homunculus — Embryo Creation Guide', rows: [
-    ['Embryo', 'Morning Dew of Yggdrasil ×1 + Seed of Life ×1 + Glass Tube ×1'],
-  ] },
-] as const;
-
 export default function PotionCraftingGuidePage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -65,27 +32,14 @@ export default function PotionCraftingGuidePage() {
         </ol>
       </section>
 
-      {/* Kept as its own section: these twenty were checked against
-          rozerodb, a Zero database, one at a time. The generated table below
-          covers far more but is sourced differently, so the two are not
-          merged into one list that hides which is which. */}
-      {RECIPE_GROUPS.map((group) => (
-        <section className="card" style={{ marginTop: 16, overflowX: 'auto' }} key={group.title}>
-          <h2 className="section-title">{group.title}</h2>
-          <table className="stat-table">
-            <thead><tr><th scope="col">ของที่ได้</th><th scope="col">วัตถุดิบต่อ 1 ครั้ง</th></tr></thead>
-            <tbody>{group.rows.map(([name, materials]) => (
-              <tr key={name}><th scope="row">{name}</th><td>{materials}</td></tr>
-            ))}</tbody>
-          </table>
-        </section>
-      ))}
-
+      {/* Replaced twenty hand-typed rows on 7 Sep 2026. They were a subset
+          of this table, with no sprites and no links, and the grouping they
+          carried -- which Creation Guide each recipe needs -- is the
+          "ต้องมีติดตัว" column here. */}
       <section style={{ marginTop: 24 }}>
-        <h2 className="section-title">สูตรทั้งหมดที่พบในตารางการผลิต</h2>
+        <h2 className="section-title">สูตรทั้งหมด</h2>
         <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
-          กว้างกว่ารายการข้างบน แต่มาจากคนละแหล่ง — ตารางฝั่งเซิร์ฟเวอร์ทานกับฐานข้อมูล Zero
-          กดชื่อของได้ทุกชิ้นเพื่อดูว่าหาจากไหน
+          กดชื่อของได้ทุกชิ้นเพื่อดูว่าหาจากไหน · ตำราที่ต้องพกอยู่ในคอลัมน์ &ldquo;ต้องมีติดตัว&rdquo;
         </p>
         <CraftGuide kind="brew">
           <></>
@@ -103,7 +57,7 @@ export default function PotionCraftingGuidePage() {
       </section>
 
       <p className="source-note" style={{ marginTop: 16 }}>
-        <strong>ที่มา:</strong> สูตร 20 รายการจากหมวด Alchemist Brewing ใน <a href="https://rozerodb.com/recipes" rel="noopener noreferrer">RO ZERO DATABASE</a>; เงื่อนไข Prepare Potion และ Potion Research จากข้อมูลไคลเอนต์ ROZ ในฐานข้อมูลของเว็บนี้ ชื่อ “Medicine Bowl” ในฐานข้อมูลคือไอเทมเดียวกับ “Mortar Bowl” ที่คำอธิบายสกิลเรียกใช้
+        <strong>ที่มา:</strong> เงื่อนไข Prepare Potion และ Potion Research จากข้อมูลไคลเอนต์ ROZ ในฐานข้อมูลของเว็บนี้ ชื่อ “Medicine Bowl” ในฐานข้อมูลคือไอเทมเดียวกับ “Mortar Bowl” ที่คำอธิบายสกิลเรียกใช้
       </p>
       <p className="muted" style={{ marginTop: 16 }}>
         หาไอเทมวัตถุดิบเพิ่มเติมได้ที่ <Link href="/database/items">ฐานข้อมูลไอเทม</Link> และเช็กมอนที่ดรอปจากหน้าไอเทมแต่ละชิ้น

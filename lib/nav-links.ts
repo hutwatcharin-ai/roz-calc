@@ -75,9 +75,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
   guides: [
     { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
-    { href: '/guides/elemental-weapons', label: 'ทำอาวุธธาตุ', icon: '/images/items/994.gif', ready: true },
     { href: '/guides/potion-crafting', label: 'ทำยา Alchemist', icon: '/images/items/7134.gif', ready: true },
-    { href: '/guides/forging', label: 'ตีอาวุธ', icon: '/images/items/1101.gif', ready: true },
+    { href: '/guides/forging', label: 'ตีอาวุธ + อาวุธธาตุ', icon: '/images/items/1101.gif', ready: true },
     { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true },
     { href: '/guides/cooking', label: 'ทำอาหาร', icon: '/images/items/517.gif', ready: true },
     { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true },

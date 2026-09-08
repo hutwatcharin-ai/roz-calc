@@ -25,7 +25,7 @@ export default function OreRefiningPage() {
         kind="ore"
         extra={
           <p className="muted" style={{ marginTop: 16 }}>
-            หินธาตุที่หลอมได้เอาไปใช้ต่อที่ <Link href="/guides/elemental-weapons">วิธีทำอาวุธธาตุ</Link>{' '}
+            หินธาตุที่หลอมได้เอาไปใช้ต่อที่ <Link href="/guides/forging">ตีอาวุธและทำอาวุธธาตุ</Link>{' '}
             · เหล็กที่หลอมได้ใช้ที่ <Link href="/guides/forging">ตีอาวุธ</Link>
           </p>
         }

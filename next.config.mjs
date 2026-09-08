@@ -17,6 +17,9 @@ const nextConfig = {
       // in scope. Each old URL lands on the mode it used to be.
       { source: '/tools/afk-finder', destination: '/tools/leveling-spots?mode=afk', permanent: true },
       { source: '/tools/farm-planner', destination: '/tools/leveling-spots?mode=plan', permanent: true },
+      // Forging an elemental weapon IS forging: same skill, same recipe, a
+      // stone added at the anvil. Two pages described one action (7 Sep 2026).
+      { source: '/guides/elemental-weapons', destination: '/guides/forging', permanent: true },
     ];
   },
   async headers() {
