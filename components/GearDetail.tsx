@@ -4,6 +4,7 @@
 // each route passes its own section rather than keeping a second copy in sync.
 
 import Link from 'next/link';
+import ItemCrafting from '@/components/ItemCrafting';
 import { isCVariant } from '@/lib/c-variant';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -188,6 +189,10 @@ export default function GearDetail({
           />
         </div>
       )}
+
+      {/* Before the drop list: a craftable item is usually made, not farmed,
+          and the recipe is the shorter answer. */}
+      <ItemCrafting itemId={item.id} />
 
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>

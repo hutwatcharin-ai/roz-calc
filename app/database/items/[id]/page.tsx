@@ -1,4 +1,5 @@
 import { isCVariant } from '@/lib/c-variant';
+import ItemCrafting from '@/components/ItemCrafting';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import JsonLd from '@/components/JsonLd';
@@ -283,6 +284,10 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           />
         </div>
       )}
+      {/* Before the drop list: a craftable item is usually made, not farmed,
+          and the recipe is the shorter answer. */}
+      <ItemCrafting itemId={item.id} />
+
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
         {droppedByError ? (
