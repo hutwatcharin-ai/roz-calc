@@ -1576,6 +1576,11 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   user-select: all;
 }
 
+/* A code reported closed. Still selectable and still legible -- it is on the
+   page so a reader who meets it elsewhere can see it is spent -- but it must
+   not read as one of the ones worth trying, so it drops the cyan. */
+.codegrid__item--dead { color: var(--faint); background: transparent; }
+
 /* Guides hub: one card per page, with a line saying what it answers. Wider
    than an item card because the sentence is the point of the card. */
 .guidecard {
