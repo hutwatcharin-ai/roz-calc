@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; frame-src https://player.twitch.tv; script-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c6a13a">
+<link rel="icon" href="img/commun/logo.svg" type="image/svg+xml">
+<meta name="description" content="Coiffes et objets exclusifs de Ragnarok Zero Global : PNJ, matériaux requis et bonus pour fabriquer chaque pièce, en dehors de l'équipement des donjons mémoriaux.">
+<link rel="canonical" href="https://roz-global.info/guide-fabrication-exclusif.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guide ROZ:G">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://roz-global.info/guide-fabrication-exclusif.html">
+<meta property="og:title" content="Guide de fabrication d'équipements exclusifs · Guide Ragnarok Zero Global">
+<meta property="og:description" content="Coiffes et objets exclusifs de Ragnarok Zero Global : PNJ, matériaux requis et bonus pour fabriquer chaque pièce, en dehors de l'équipement des donjons mémoriaux.">
+<meta property="og:image" content="img/commun/og-image.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guide de fabrication d'équipements exclusifs · Guide Ragnarok Zero Global">
+<meta name="twitter:description" content="Coiffes et objets exclusifs de Ragnarok Zero Global : PNJ, matériaux requis et bonus pour fabriquer chaque pièce, en dehors de l'équipement des donjons mémoriaux.">
+<meta name="twitter:image" content="img/commun/og-image.webp">
+<title>Guide de fabrication d'équipements exclusifs · Guide Ragnarok Zero Global</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Guide ROZ:G","alternateName":"Carnet de l'aventurier - Ragnarok Zero Global","url":"https://roz-global.info/","inLanguage":"fr-FR"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://roz-global.info/index.html"},{"@type":"ListItem","position":2,"name":"Guide de fabrication d'équipements exclusifs","item":"https://roz-global.info/guide-fabrication-exclusif.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" id="gfonts-async">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/style.min.css?v=62">
+</head>
+<body id="top">
+
+<input type="checkbox" id="twitch-widget-toggle" class="tw-widget-toggle-input" checked>
+<aside class="tw-widget" aria-label="Stream Twitch de Poulpix">
+  <div class="tw-widget-head">
+    <span class="tw-widget-title">🔴 Poulpix en direct</span>
+    <label for="twitch-widget-toggle" class="tw-widget-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+  </div>
+  <div class="tw-widget-body">
+    <button type="button" class="tw-widget-facade" data-twitch-channel="poulpi_x" data-twitch-parent="roz-global.info" aria-label="Afficher le lecteur Twitch de poulpi_x">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg>
+      <span>Afficher le lecteur</span>
+    </button>
+    <a class="tw-widget-link" href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Voir sur Twitch ↗</a>
+  </div>
+</aside>
+<label for="twitch-widget-toggle" class="tw-widget-reopen" aria-label="Réafficher le stream Twitch" title="Réafficher le stream">🔴 Twitch</label>
+
+<input type="checkbox" id="utility-strip-toggle" class="utility-strip-toggle-input">
+<div class="utility-strip">
+  <div class="utility-social">
+    <a href="https://roz.mygnjoy.com/en/main" target="_blank" rel="noopener" aria-label="Site officiel" title="Site officiel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+    <a href="https://discord.com/invite/s6CqJnGqwX" target="_blank" rel="noopener" aria-label="Discord officiel" title="Discord officiel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.956 2.4189-2.1568 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9451 2.4189-2.1568 2.4189Z"></path></svg></a>
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener" aria-label="Twitch de Poulpix" title="Twitch de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg></a>
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener" aria-label="X (Twitter) de Poulpix" title="X (Twitter) de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+  </div>
+  <label for="utility-strip-toggle" class="utility-strip-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+</div>
+
+<nav class="site-nav">
+  <div class="brand-wrap">
+    <a class="brand" href="index.html" aria-label="Guide ROZ:G — Accueil"><img src="img/commun/logo.svg" alt="" width="32" height="32" class="brand-logo"></a>
+  </div>
+  <button type="button" class="search-trigger" data-search-open title="Rechercher (touche /)">
+    <span class="st-icon">🔍</span><span class="st-label">Rechercher une classe, un donjon, une mécanique…</span><span class="st-kbd">/</span>
+  </button>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Menu"></label>
+  <div class="nav-links">
+  <p class="nav-group-label">Guide du débutant</p>
+  <a class="pill" href="index.html">🏠 Sommaire</a>
+  <a class="pill" href="01-avant-de-commencer.html">🚪 Démarrer</a>
+  <a class="pill" href="02-interface.html">🖥️ Interface</a>
+  <a class="pill" href="03-choisir-sa-classe.html">⚔️ Classes</a>
+  <a class="pill" href="04-premiers-pas.html">👣 Premiers pas</a>
+  <a class="pill" href="05-le-monde.html">🗺️ Le monde</a>
+  <a class="pill" href="06-progression.html">📈 Progression</a>
+  <a class="pill" href="07-quotidien.html">☀️ Quotidien</a>
+  <a class="pill" href="08-equipement.html">🛡️ Équipement</a>
+  <a class="pill" href="09-argent-social.html">💰 Argent &amp; social</a>
+  <a class="pill" href="10-roadmap.html">🧭 Feuille de route</a>
+  <a class="pill" href="reference.html">📖 Référence</a>
+  <p class="nav-group-label">Guides avancés</p>
+  <a class="pill active" href="guide-avances.html">🗃️ Guides avancés</a>
+  <p class="nav-group-label">Annexes</p>
+  <a class="pill" href="ressources.html">📚 Ressources</a>
+  <a class="pill" href="codes-cadeaux.html">🎁 Codes cadeaux</a>
+  <a class="pill" href="rhcp.html">🎥 RHCP</a>
+  </div>
+</nav>
+<label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Recherche dans le guide">
+    <div class="search-input-wrap">
+      <input type="text" class="search-input" id="search-input" placeholder="Rechercher une classe, un lieu, une mécanique..." autocomplete="off">
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="page-title-bar">
+  <span class="ptb-chapter">Équipement exclusif</span>
+  <span class="ptb-title">🎨 Fabrication exclusive</span>
+</div>
+
+<header class="page-header">
+  <p class="eyebrow">Équipement exclusif</p>
+  <h1>🎨 Fabrication exclusive</h1>
+  <p>Coiffes et objets exclusifs de Ragnarok Zero Global : PNJ, matériaux requis et bonus pour fabriquer chaque pièce.</p>
+</header>
+
+    <aside class="page-toc" aria-label="Sommaire de la page">
+      <input type="checkbox" id="page-toc-toggle" class="page-toc-toggle-input">
+      <label for="page-toc-toggle" class="page-toc-label">Dans cette page</label>
+      <div class="page-toc-links">
+        <a href="#un-catalogue-dequipement-exclusif-a-fabriquer">Un catalogue d'équipement exclusif à fabriquer</a>
+        <a href="#catalogue-des-equipements-exclusifs">Le catalogue complet, pièce par pièce</a>
+      </div>
+    </aside>
+
+<main>
+
+  <section class="quest-card" id="intro">
+    <div class="badge">🎨</div>
+    <p class="chapter">Vue d'ensemble</p>
+    <h2 id="un-catalogue-dequipement-exclusif-a-fabriquer">Un catalogue d'équipement exclusif à fabriquer</h2>
+    <p>En dehors de l'équipement des donjons mémoriaux (voir <a href="donjon-equipement-fabrication.html">Améliorer l'équipement des donjons</a>), Ragnarok Zero Global propose une longue liste de coiffes et d'objets exclusifs, chacun fabriqué en une seule fois auprès d'un PNJ précis contre des matériaux à lui rapporter. Contrairement à l'équipement des donjons, rien ne progresse ici rang par rang : chaque pièce se fabrique directement dans sa version finale, puis se raffine normalement pour débloquer ses paliers de bonus (généralement +7 et +9).</p>
+    <p>La plupart de ces pièces sont des coiffes (emplacement supérieur, intermédiaire ou inférieur selon le modèle) ; une seule est une arme, le <strong>Bâton de flamme bleue</strong>. Deux objets partagent la même recette mais un nom différent (Casque du gérant de la tour de l'horloge et Épingle montre à gousset) : c'est le cas sur la page d'origine, pas une erreur de recopie.</p>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">🗂️</div>
+    <p class="chapter">Catalogue</p>
+    <h2 id="catalogue-des-equipements-exclusifs">Le catalogue complet, pièce par pièce</h2>
+    <p>Vingt-quatre pièces au total, une fiche par objet, classées par PNJ ou zone de départ. Le nom de chaque objet et de chaque matériau est suivi de son nom anglais original, avec un lien vers sa fiche sur <a href="https://rozerodb.com/" target="_blank" rel="noopener">Ragnarok Zero Database</a>.</p>
+<div class="eqz">
+  <input type="radio" name="eqz" id="eqz-prontera" class="eqz-radio" checked>
+  <input type="radio" name="eqz" id="eqz-atelier" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-yuno" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-aldebaran" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-payon" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-geffen" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-comodo" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-glastheim" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-amatsu" class="eqz-radio">
+  <input type="radio" name="eqz" id="eqz-louyang" class="eqz-radio">
+  <div class="eqz-tabs">
+    <label for="eqz-prontera">🏰 Prontera <span class="eqz-count">(1)</span></label>
+    <label for="eqz-atelier">🏪 Atelier Manus <span class="eqz-count">(7)</span></label>
+    <label for="eqz-yuno">🏯 Yuno <span class="eqz-count">(3)</span></label>
+    <label for="eqz-aldebaran">🎡 Aldebaran <span class="eqz-count">(4)</span></label>
+    <label for="eqz-payon">🌲 Payon <span class="eqz-count">(2)</span></label>
+    <label for="eqz-geffen">🔮 Geffen <span class="eqz-count">(1)</span></label>
+    <label for="eqz-comodo">🏖️ Comodo <span class="eqz-count">(1)</span></label>
+    <label for="eqz-glastheim">⚰️ Glast Heim <span class="eqz-count">(1)</span></label>
+    <label for="eqz-amatsu">⛩️ Amatsu <span class="eqz-count">(2)</span></label>
+    <label for="eqz-louyang">🏮 Louyang <span class="eqz-count">(2)</span></label>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-prontera">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5040.webp" alt="objet Blush" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Blush</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5040" target="_blank" rel="noopener">Blush</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Vieil homme aux joues roses · <code class="navi">/navi prontera 96/226</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe intermédiaire</li><li>Niv. 1</li><li>DEF 0</li><li>Poids 10</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/7047.webp" alt="objet Tablier d&#x27;Alice" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Tablier d&#x27;Alice <em>(<a href="https://rozerodb.com/items/7047" target="_blank" rel="noopener">Alice&#x27;s Apron</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Accessoire cosmétique à l'origine commercialisé auprès des adolescents.</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-atelier">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19358.webp" alt="objet Chapeau de sorcière noire" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Chapeau de sorcière noire [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19358" target="_blank" rel="noopener">Black Witch&#x27;s Hat</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 10</li><li>Poids 70</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2252.webp" alt="objet Chapeau de sorcier" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Chapeau de sorcier <em>(<a href="https://rozerodb.com/items/2252" target="_blank" rel="noopener">Wizard Hat</a>)</em></li><li><img src="img/craft-exclusif/1061.webp" alt="objet Poussière stellaire de sorcière" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">500 × Poussière stellaire de sorcière <em>(<a href="https://rozerodb.com/items/1061" target="_blank" rel="noopener">Witch Starsand</a>)</em></li><li><img src="img/craft-exclusif/983.webp" alt="objet Teinture noire" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Teinture noire <em>(<a href="https://rozerodb.com/items/983" target="_blank" rel="noopener">Black Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/25506.webp" alt="objet Balai mignon" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Balai mignon <em>(<a href="https://rozerodb.com/items/25506" target="_blank" rel="noopener">Cute Broom</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>+1% MATK tous les 2 niveaux de raffinage</li><li>+7 : MaxHP +50</li><li>+7 : MaxSP +100</li><li>+9 : Temps d'incantation variable -5%</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19360.webp" alt="objet Masque de Lude" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Masque de Lude</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19360" target="_blank" rel="noopener">Lude Mask</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffes intermédiaire &amp; inférieure</li><li>Niv. 60</li><li>DEF 2</li><li>Poids 10</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2278.webp" alt="objet Mr. Smile" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Mr. Smile <em>(<a href="https://rozerodb.com/items/2278" target="_blank" rel="noopener">Mr. Smile</a>)</em></li><li><img src="img/craft-exclusif/975.webp" alt="objet Teinture écarlate" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">2 × Teinture écarlate <em>(<a href="https://rozerodb.com/items/975" target="_blank" rel="noopener">Scarlet Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">20 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Résistance aux attaques d'ombre +2%</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19359.webp" alt="objet Capuche de Lude" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Capuche de Lude [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19359" target="_blank" rel="noopener">Lude Hood</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 5</li><li>Poids 30</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2282.webp" alt="objet Halo" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Halo <em>(<a href="https://rozerodb.com/items/2282" target="_blank" rel="noopener">Halo</a>)</em></li><li><img src="img/craft-exclusif/2274.webp" alt="objet Bandana fantôme" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Bandana fantôme <em>(<a href="https://rozerodb.com/items/2274" target="_blank" rel="noopener">Ghost Bandana</a>)</em></li><li><img src="img/craft-exclusif/982.webp" alt="objet Teinture blanche" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Teinture blanche <em>(<a href="https://rozerodb.com/items/982" target="_blank" rel="noopener">White Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/7212.webp" alt="objet Poupée pendue" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Poupée pendue <em>(<a href="https://rozerodb.com/items/7212" target="_blank" rel="noopener">Hung Doll</a>)</em></li><li><img src="img/craft-exclusif/7225.webp" alt="objet Lanterne citrouille" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Lanterne citrouille <em>(<a href="https://rozerodb.com/items/7225" target="_blank" rel="noopener">Pumpkin Lantern</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>+1% dégâts physiques contre les démons tous les 2 niveaux de raffinage</li><li>+7 : HIT +15</li><li>+9 : MaxHP +250</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19361.webp" alt="objet Sakkat du vagabond" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Sakkat du vagabond [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19361" target="_blank" rel="noopener">Wanderer&#x27;s Sakkat</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffes intermédiaire &amp; supérieure</li><li>Niv. 60</li><li>DEF 2</li><li>Poids 50</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2280.webp" alt="objet Sakkat" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Sakkat <em>(<a href="https://rozerodb.com/items/2280" target="_blank" rel="noopener">Sakkat</a>)</em></li><li><img src="img/craft-exclusif/983.webp" alt="objet Teinture noire" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Teinture noire <em>(<a href="https://rozerodb.com/items/983" target="_blank" rel="noopener">Black Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/1059.webp" alt="objet Tissu" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Tissu <em>(<a href="https://rozerodb.com/items/1059" target="_blank" rel="noopener">Fabric</a>)</em></li><li><img src="img/craft-exclusif/7005.webp" alt="objet Crâne" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Crâne <em>(<a href="https://rozerodb.com/items/7005" target="_blank" rel="noopener">Skull</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">40 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>AGI +1 tous les 2 niveaux de raffinage</li><li>LUK +1 tous les 2 niveaux de raffinage</li><li>+7 : ASPD +5%</li><li>+9 : ASPD +5%</li><li>+9 : CRIT +5</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19356.webp" alt="objet Perruque d&#x27;Alice" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Perruque d&#x27;Alice [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19356" target="_blank" rel="noopener">Alice Wig</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 10</li><li>Poids 70</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/7047.webp" alt="objet Tablier d&#x27;Alice" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Tablier d&#x27;Alice <em>(<a href="https://rozerodb.com/items/7047" target="_blank" rel="noopener">Alice&#x27;s Apron</a>)</em></li><li><img src="img/craft-exclusif/1020.webp" alt="objet Cheveux noirs" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">200 × Cheveux noirs <em>(<a href="https://rozerodb.com/items/1020" target="_blank" rel="noopener">Black Hair</a>)</em></li><li><img src="img/craft-exclusif/973.webp" alt="objet Contre-agent" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Contre-agent <em>(<a href="https://rozerodb.com/items/973" target="_blank" rel="noopener">Counteragent</a>)</em></li><li><img src="img/craft-exclusif/978.webp" alt="objet Teinture bleu cobalt" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Teinture bleu cobalt <em>(<a href="https://rozerodb.com/items/978" target="_blank" rel="noopener">Cobalt Blue Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Montant de soin +3% tous les 2 niveaux de raffinage</li><li>+7 : MaxHP +150</li><li>+7 : MaxSP +50</li><li>+9 : Temps d'incantation variable -5%</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19332.webp" alt="objet Casque de Khalitzburg" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Casque de Khalitzburg [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19332" target="_blank" rel="noopener">Khalitzburg&#x27;s Helm</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 10</li><li>Poids 70</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2229.webp" alt="objet Casque [1]" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Casque [1] <em>(<a href="https://rozerodb.com/items/2229" target="_blank" rel="noopener">Helm [1]</a>)</em></li><li><img src="img/craft-exclusif/1004.webp" alt="objet Emblème de chevalerie" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Emblème de chevalerie <em>(<a href="https://rozerodb.com/items/1004" target="_blank" rel="noopener">Chivalry Emblem</a>)</em></li><li><img src="img/craft-exclusif/978.webp" alt="objet Teinture bleu cobalt" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Teinture bleu cobalt <em>(<a href="https://rozerodb.com/items/978" target="_blank" rel="noopener">Cobalt Blue Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>CRIT +3</li><li>+7 : CRIT +2 supplémentaire</li><li>+9 : Dégâts critiques +5%</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19357.webp" alt="objet Casquette de Clark" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Casquette de Clark [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19357" target="_blank" rel="noopener">Clark&#x27;s Cap</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Atelier Manus</p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 10</li><li>Poids 70</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/1095.webp" alt="objet Aiguilles d&#x27;horloge" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Aiguilles d&#x27;horloge <em>(<a href="https://rozerodb.com/items/1095" target="_blank" rel="noopener">Clock Hands</a>)</em></li><li><img src="img/craft-exclusif/7026.webp" alt="objet Clé de la tour de l&#x27;horloge" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Clé de la tour de l&#x27;horloge <em>(<a href="https://rozerodb.com/items/7026" target="_blank" rel="noopener">Key of Clock Tower</a>)</em></li><li><img src="img/craft-exclusif/7027.webp" alt="objet Clé du sous-sol" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Clé du sous-sol <em>(<a href="https://rozerodb.com/items/7027" target="_blank" rel="noopener">Key of Underground</a>)</em></li><li><img src="img/craft-exclusif/978.webp" alt="objet Teinture bleu cobalt" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">3 × Teinture bleu cobalt <em>(<a href="https://rozerodb.com/items/978" target="_blank" rel="noopener">Cobalt Blue Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/982.webp" alt="objet Teinture blanche" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">3 × Teinture blanche <em>(<a href="https://rozerodb.com/items/982" target="_blank" rel="noopener">White Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/25429.webp" alt="objet Minerai de Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Minerai de Mithril <em>(<a href="https://rozerodb.com/items/25429" target="_blank" rel="noopener">Mithril Ore</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>+1% dégâts physiques contre les Formless tous les 2 niveaux de raffinage</li><li>+7 : HIT +15</li><li>+9 : MaxHP +250</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-yuno">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5021.webp" alt="objet Chagrin pour cupidité" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Chagrin pour cupidité</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5021" target="_blank" rel="noopener">Grief for Greed</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Marchand ruiné · <code class="navi">/navi yuno 65/195</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 38</li><li>DEF 8</li><li>Poids 120</li><li>Série Marchand uniquement</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2210.webp" alt="objet Bandeau" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Bandeau <em>(<a href="https://rozerodb.com/items/2210" target="_blank" rel="noopener">Hair Band</a>)</em></li><li><img src="img/craft-exclusif/969.webp" alt="objet Or" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Or <em>(<a href="https://rozerodb.com/items/969" target="_blank" rel="noopener">Gold</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>INT +1</li><li>DEX +1</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5023.webp" alt="objet Chapeau colis" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Chapeau colis</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5023" target="_blank" rel="noopener">Parcel Hat</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Marchand ruiné · <code class="navi">/navi yuno 65/195</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 1</li><li>DEF 0</li><li>Poids 100</li><li>Série Marchand uniquement</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/1059.webp" alt="objet Tissu" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">15 × Tissu <em>(<a href="https://rozerodb.com/items/1059" target="_blank" rel="noopener">Fabric</a>)</em></li><li><img src="img/craft-exclusif/907.webp" alt="objet Résine" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">10 × Résine <em>(<a href="https://rozerodb.com/items/907" target="_blank" rel="noopener">Resin</a>)</em></li><li><img src="img/craft-exclusif/978.webp" alt="objet Teinture bleu cobalt" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Teinture bleu cobalt <em>(<a href="https://rozerodb.com/items/978" target="_blank" rel="noopener">Cobalt Blue Dyestuffs</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Coiffe traditionnelle à pois, portée pour transporter des colis.</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5083.webp" alt="objet Ruban rouge" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Ruban rouge</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5083" target="_blank" rel="noopener">Red Ribbon</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Grand-mère aux rubans · <code class="navi">/navi yuno 114/206</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 45</li><li>DEF 2</li><li>Poids 20</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2244.webp" alt="objet Grand ruban" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Grand ruban <em>(<a href="https://rozerodb.com/items/2244" target="_blank" rel="noopener">Big Ribbon</a>)</em></li><li><img src="img/craft-exclusif/10007.webp" alt="objet Ruban de soie" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Ruban de soie <em>(<a href="https://rozerodb.com/items/10007" target="_blank" rel="noopener">Silk Ribbon</a>)</em></li><li><img src="img/craft-exclusif/2209.webp" alt="objet Ruban [1]" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Ruban [1] <em>(<a href="https://rozerodb.com/items/2209" target="_blank" rel="noopener">Ribbon [1]</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>MDEF +10</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-aldebaran">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5029.webp" alt="objet Chapeau champignon" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Chapeau champignon</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5029" target="_blank" rel="noopener">Spore Hat</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Recruteur excentrique · <code class="navi">/navi aldebaran 78/188</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 20</li><li>DEF 6</li><li>Poids 90</li><li>Toutes classes sauf Novice</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/7033.webp" alt="objet Spore vénéneuse" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Spore vénéneuse <em>(<a href="https://rozerodb.com/items/7033" target="_blank" rel="noopener">Poison Spore</a>)</em></li><li><img src="img/craft-exclusif/1015.webp" alt="objet Langue" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Langue <em>(<a href="https://rozerodb.com/items/1015" target="_blank" rel="noopener">Tongue</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Accessoire de déguisement imitant les monstres champignons.</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19333.webp" alt="objet Casque du gérant de la tour de l&#x27;horloge" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Casque du gérant de la tour de l&#x27;horloge</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19333" target="_blank" rel="noopener">Clock Tower Manager&#x27;s Headset</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Trouvé à Aldebaran</p>
+        <p class="eq-release">🗓️ Sortie prévue : octobre 2026 (donjon de la Tour de l'Horloge)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe intermédiaire</li><li>Niv. 60</li><li>DEF 10</li><li>Poids 10</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/25505.webp" alt="objet Joker&#x27;s Wild" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Joker&#x27;s Wild <em>(<a href="https://rozerodb.com/items/25505" target="_blank" rel="noopener">Joker&#x27;s Wild</a>)</em></li><li><img src="img/craft-exclusif/25506.webp" alt="objet Balai mignon" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Balai mignon <em>(<a href="https://rozerodb.com/items/25506" target="_blank" rel="noopener">Cute Broom</a>)</em></li><li><img src="img/craft-exclusif/25507.webp" alt="objet Corail coloré" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Corail coloré <em>(<a href="https://rozerodb.com/items/25507" target="_blank" rel="noopener">Colorful Coral</a>)</em></li><li><img src="img/craft-exclusif/25508.webp" alt="objet Marque de général orc" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Marque de général orc <em>(<a href="https://rozerodb.com/items/25508" target="_blank" rel="noopener">Orc General Mark</a>)</em></li><li><img src="img/craft-exclusif/25509.webp" alt="objet Coquillage rond brillant" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Coquillage rond brillant <em>(<a href="https://rozerodb.com/items/25509" target="_blank" rel="noopener">Shiny Round Shell</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">10 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>MATK +20</li><li>Avec la carte Clock Tower Manager : Temps d'incantation variable -15%</li><li>Avec la carte Clock Tower Manager : vitesse de déplacement augmentée</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5436.webp" alt="objet Couronne de mariée" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Couronne de mariée</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5436" target="_blank" rel="noopener">Bride&#x27;s Corolla</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Organisateur de mariage · <code class="navi">/navi aldebaran 95/110</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 1</li><li>DEF 1</li><li>Poids 20</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/10007.webp" alt="objet Ruban de soie" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Ruban de soie <em>(<a href="https://rozerodb.com/items/10007" target="_blank" rel="noopener">Silk Ribbon</a>)</em></li><li><img src="img/craft-exclusif/1032.webp" alt="objet Fleur mangeuse d&#x27;hommes" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Fleur mangeuse d&#x27;hommes <em>(<a href="https://rozerodb.com/items/1032" target="_blank" rel="noopener">Maneater Blossom</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>LUK +3</li><li>MDEF +2</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19334.webp" alt="objet Épingle montre à gousset" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Épingle montre à gousset</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19334" target="_blank" rel="noopener">Pocket Watch Hairpin</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Trouvé à Aldebaran</p>
+        <p class="eq-release">🗓️ Sortie prévue : octobre 2026 (donjon de la Tour de l'Horloge)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe intermédiaire</li><li>Niv. 60</li><li>DEF 10</li><li>Poids 10</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/25505.webp" alt="objet Joker&#x27;s Wild" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Joker&#x27;s Wild <em>(<a href="https://rozerodb.com/items/25505" target="_blank" rel="noopener">Joker&#x27;s Wild</a>)</em></li><li><img src="img/craft-exclusif/25506.webp" alt="objet Balai mignon" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Balai mignon <em>(<a href="https://rozerodb.com/items/25506" target="_blank" rel="noopener">Cute Broom</a>)</em></li><li><img src="img/craft-exclusif/25507.webp" alt="objet Corail coloré" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Corail coloré <em>(<a href="https://rozerodb.com/items/25507" target="_blank" rel="noopener">Colorful Coral</a>)</em></li><li><img src="img/craft-exclusif/25508.webp" alt="objet Marque de général orc" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Marque de général orc <em>(<a href="https://rozerodb.com/items/25508" target="_blank" rel="noopener">Orc General Mark</a>)</em></li><li><img src="img/craft-exclusif/25509.webp" alt="objet Coquillage rond brillant" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Coquillage rond brillant <em>(<a href="https://rozerodb.com/items/25509" target="_blank" rel="noopener">Shiny Round Shell</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">10 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>ATK +20</li><li>Avec la carte Clock : DEF +20</li><li>Avec la carte Clock : MaxSP +100</li><li>Avec la carte Alarm : MaxHP +1000</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-payon">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5173.webp" alt="objet Chapeau de magistrat" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Chapeau de magistrat [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5173" target="_blank" rel="noopener">Magistrate Hat</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Érudit en hanbok · <code class="navi">/navi payon 109/250</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 6</li><li>Poids 40</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2220.webp" alt="objet Chapeau" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Chapeau <em>(<a href="https://rozerodb.com/items/2220" target="_blank" rel="noopener">Hat</a>)</em></li><li><img src="img/craft-exclusif/954.webp" alt="objet Écaille brillante" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Écaille brillante <em>(<a href="https://rozerodb.com/items/954" target="_blank" rel="noopener">Shining Scale</a>)</em></li><li><img src="img/craft-exclusif/733.webp" alt="objet Diamant fêlé" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Diamant fêlé <em>(<a href="https://rozerodb.com/items/733" target="_blank" rel="noopener">Cracked Diamond</a>)</em></li><li><img src="img/craft-exclusif/983.webp" alt="objet Teinture noire" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Teinture noire <em>(<a href="https://rozerodb.com/items/983" target="_blank" rel="noopener">Black Dyestuffs</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Coiffe de fonctionnaire administratif de l'Est ancien.</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5174.webp" alt="objet Ayam" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Ayam [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5174" target="_blank" rel="noopener">Ayam</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Érudit en hanbok · <code class="navi">/navi payon 109/250</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 60</li><li>DEF 6</li><li>Poids 40</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/954.webp" alt="objet Écaille brillante" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Écaille brillante <em>(<a href="https://rozerodb.com/items/954" target="_blank" rel="noopener">Shining Scale</a>)</em></li><li><img src="img/craft-exclusif/733.webp" alt="objet Diamant fêlé" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Diamant fêlé <em>(<a href="https://rozerodb.com/items/733" target="_blank" rel="noopener">Cracked Diamond</a>)</em></li><li><img src="img/craft-exclusif/975.webp" alt="objet Teinture écarlate" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Teinture écarlate <em>(<a href="https://rozerodb.com/items/975" target="_blank" rel="noopener">Scarlet Dyestuffs</a>)</em></li><li><img src="img/craft-exclusif/1059.webp" alt="objet Tissu" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Tissu <em>(<a href="https://rozerodb.com/items/1059" target="_blank" rel="noopener">Fabric</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Chapeau de femme en soie rouge, orné de détails décoratifs.</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-geffen">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5050.webp" alt="objet Coquille de noix merveilleuse" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Coquille de noix merveilleuse</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5050" target="_blank" rel="noopener">Wonder Nutshell</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Forgeron Shinbi · <code class="navi">/navi geffen 176/148</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 30</li><li>DEF 10</li><li>Poids 30</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/5037.webp" alt="objet Coquille de noix" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Coquille de noix <em>(<a href="https://rozerodb.com/items/5037" target="_blank" rel="noopener">Nut Shell</a>)</em></li><li><img src="img/craft-exclusif/7053.webp" alt="objet Cyfar" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Cyfar <em>(<a href="https://rozerodb.com/items/7053" target="_blank" rel="noopener">Cyfar</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Ne peut pas être raffinée.</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-comodo">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/5043.webp" alt="objet Masque du fantôme de l&#x27;opéra" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Masque du fantôme de l&#x27;opéra</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/5043" target="_blank" rel="noopener">Opera Phantom Mask</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Réalisateur Cameron · <code class="navi">/navi comodo 166/178</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : inconnue</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe intermédiaire</li><li>Niv. 20</li><li>DEF 2</li><li>Poids 20</li><li>Toutes classes sauf Novice</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/2281.webp" alt="objet Masque d&#x27;Opéra" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Masque d&#x27;Opéra <em>(<a href="https://rozerodb.com/items/2281" target="_blank" rel="noopener">Opera Masque</a>)</em></li><li>50 000 Zeny</li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Masque porté par le tragique protagoniste théâtral.</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-glastheim">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/2049.webp" alt="objet Bâton de flamme bleue" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Bâton de flamme bleue [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/2049" target="_blank" rel="noopener">Staff of Blue Flame</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Altos · <code class="navi">/navi gl_step 110/127</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : décembre 2026 (Old Glast Heim)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Bâton à deux mains</li><li>Niv. 60</li><li>ATK 45</li><li>Poids 130</li><li>Série Mage uniquement</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/26138.webp" alt="objet Bâton de braise [1]" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Bâton de braise [1] <em>(<a href="https://rozerodb.com/items/26138" target="_blank" rel="noopener">Blaze Staff [1]</a>)</em></li><li><img src="img/craft-exclusif/26139.webp" alt="objet Bâton de glace [1]" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Bâton de glace [1] <em>(<a href="https://rozerodb.com/items/26139" target="_blank" rel="noopener">Ice Staff [1]</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li><li><img src="img/craft-exclusif/23686.webp" alt="objet Essence de flamme bleue" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Essence de flamme bleue <em>(<a href="https://rozerodb.com/items/23686" target="_blank" rel="noopener">Essence of Blue Flame</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>MATK +230</li><li>MaxSP +150</li><li>INT +5</li><li>Dégâts eau &amp; feu +5%</li><li>Chance de réduire le temps d'incantation variable de 30% pendant 7s</li><li>+7 : dégâts eau/feu additionnels +10%</li><li>+9 : dégâts eau/feu additionnels +10%</li><li>+9 : temps d'incantation variable -5%</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-amatsu">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19363.webp" alt="objet Poêle à charbon" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Poêle à charbon</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19363" target="_blank" rel="noopener">Charcoal Stove</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Tête d&#x27;Objet · <code class="navi">/navi ama_in01 180/75</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : mai 2027 (zone d'Amatsu, avec la classe Ninja)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe intermédiaire</li><li>Niv. 70</li><li>DEF 0</li><li>Poids 60</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/7150.webp" alt="objet Morceau de bambou" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Morceau de bambou <em>(<a href="https://rozerodb.com/items/7150" target="_blank" rel="noopener">Piece of Bamboo</a>)</em></li><li><img src="img/craft-exclusif/7158.webp" alt="objet Bocal d&#x27;alcool brisé" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">150 × Bocal d&#x27;alcool brisé <em>(<a href="https://rozerodb.com/items/7158" target="_blank" rel="noopener">Broken Liquor Jar</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li><li><img src="img/craft-exclusif/7152.webp" alt="objet Cheveux brillants" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">200 × Cheveux brillants <em>(<a href="https://rozerodb.com/items/7152" target="_blank" rel="noopener">Glossy Hair</a>)</em></li><li><img src="img/craft-exclusif/7156.webp" alt="objet Shuriken brisé" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">150 × Shuriken brisé <em>(<a href="https://rozerodb.com/items/7156" target="_blank" rel="noopener">Broken Shuriken</a>)</em></li><li><img src="img/craft-exclusif/25628.webp" alt="objet Pierre spirituelle" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Pierre spirituelle <em>(<a href="https://rozerodb.com/items/25628" target="_blank" rel="noopener">Spirit Stone</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>Montant de soin +10%</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19362.webp" alt="objet Casque du général dragon" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Casque du général dragon [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19362" target="_blank" rel="noopener">Dragon General Helm</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Un ménestrel étranger · <code class="navi">/navi ama_in01 171/17</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : mai 2027 (zone d'Amatsu, avec la classe Ninja)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 70</li><li>DEF 10</li><li>Poids 90</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <p class="eq-opt-label">Option 1 :</p><ul><li><img src="img/craft-exclusif/7153.webp" alt="objet Kimono usé" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Kimono usé <em>(<a href="https://rozerodb.com/items/7153" target="_blank" rel="noopener">Worn-out Kimono</a>)</em></li><li><img src="img/craft-exclusif/25629.webp" alt="objet Lettre nouée" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">10 × Lettre nouée <em>(<a href="https://rozerodb.com/items/25629" target="_blank" rel="noopener">Knotted Letter</a>)</em></li><li><img src="img/craft-exclusif/7159.webp" alt="objet Nez de Tengu" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Nez de Tengu <em>(<a href="https://rozerodb.com/items/7159" target="_blank" rel="noopener">Tengu Nose</a>)</em></li><li><img src="img/craft-exclusif/7155.webp" alt="objet Peau de crapaud vénéneux" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">500 × Peau de crapaud vénéneux <em>(<a href="https://rozerodb.com/items/7155" target="_blank" rel="noopener">Poisonous Toad Skin</a>)</em></li><li><img src="img/craft-exclusif/25628.webp" alt="objet Pierre spirituelle" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">200 × Pierre spirituelle <em>(<a href="https://rozerodb.com/items/25628" target="_blank" rel="noopener">Spirit Stone</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li></ul><p class="eq-opt-label">Option 2 :</p><ul><li><img src="img/craft-exclusif/7153.webp" alt="objet Kimono usé" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Kimono usé <em>(<a href="https://rozerodb.com/items/7153" target="_blank" rel="noopener">Worn-out Kimono</a>)</em></li><li><img src="img/craft-exclusif/7159.webp" alt="objet Nez de Tengu" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Nez de Tengu <em>(<a href="https://rozerodb.com/items/7159" target="_blank" rel="noopener">Tengu Nose</a>)</em></li><li><img src="img/craft-exclusif/7155.webp" alt="objet Peau de crapaud vénéneux" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">500 × Peau de crapaud vénéneux <em>(<a href="https://rozerodb.com/items/7155" target="_blank" rel="noopener">Poisonous Toad Skin</a>)</em></li><li><img src="img/craft-exclusif/25628.webp" alt="objet Pierre spirituelle" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">1200 × Pierre spirituelle <em>(<a href="https://rozerodb.com/items/25628" target="_blank" rel="noopener">Spirit Stone</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>ATK +30 (+10 tous les 2 niveaux de raffinage)</li><li>+7 : ASPD +7%</li><li>+9 : ATK +10%</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="eqz-panel" id="eqz-panel-louyang">
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19346.webp" alt="objet Chapeau poupée Bacsojin" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Chapeau poupée Bacsojin [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19346" target="_blank" rel="noopener">Bacsojin Doll Hat</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Socheon · <code class="navi">/navi louyang 186/54</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : avril 2027 (zone de Louyang)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 70</li><li>DEF 10</li><li>Poids 90</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <p class="eq-opt-label">Option 1 :</p><ul><li><img src="img/craft-exclusif/7268.webp" alt="objet Petite poupée fantôme" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Petite poupée fantôme <em>(<a href="https://rozerodb.com/items/7268" target="_blank" rel="noopener">Little Ghost Doll</a>)</em></li><li><img src="img/craft-exclusif/25622.webp" alt="objet Larme de serpent blanc" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">10 × Larme de serpent blanc <em>(<a href="https://rozerodb.com/items/25622" target="_blank" rel="noopener">White Snake&#x27;s Tear</a>)</em></li><li><img src="img/craft-exclusif/7266.webp" alt="objet Dentier du masque de dragon" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Dentier du masque de dragon <em>(<a href="https://rozerodb.com/items/7266" target="_blank" rel="noopener">Denture from Dragon Mask</a>)</em></li><li><img src="img/craft-exclusif/7264.webp" alt="objet Sable sec" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">500 × Sable sec <em>(<a href="https://rozerodb.com/items/7264" target="_blank" rel="noopener">Dry Sand</a>)</em></li><li><img src="img/craft-exclusif/25620.webp" alt="objet Pierre de dragon terrestre" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">200 × Pierre de dragon terrestre <em>(<a href="https://rozerodb.com/items/25620" target="_blank" rel="noopener">Earth Dragon Stone</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li></ul><p class="eq-opt-label">Option 2 :</p><ul><li><img src="img/craft-exclusif/7268.webp" alt="objet Petite poupée fantôme" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Petite poupée fantôme <em>(<a href="https://rozerodb.com/items/7268" target="_blank" rel="noopener">Little Ghost Doll</a>)</em></li><li><img src="img/craft-exclusif/7266.webp" alt="objet Dentier du masque de dragon" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Dentier du masque de dragon <em>(<a href="https://rozerodb.com/items/7266" target="_blank" rel="noopener">Denture from Dragon Mask</a>)</em></li><li><img src="img/craft-exclusif/7264.webp" alt="objet Sable sec" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">500 × Sable sec <em>(<a href="https://rozerodb.com/items/7264" target="_blank" rel="noopener">Dry Sand</a>)</em></li><li><img src="img/craft-exclusif/25620.webp" alt="objet Pierre de dragon terrestre" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">1200 × Pierre de dragon terrestre <em>(<a href="https://rozerodb.com/items/25620" target="_blank" rel="noopener">Earth Dragon Stone</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">5 × Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>MATK +30 (+10 par niveau de raffinage)</li><li>+7 : Temps d'incantation variable -7%</li><li>+9 : MATK +10%</li></ul>
+      </div>
+
+      <div class="eq-card">
+        <div class="eq-card-head">
+          <img src="img/craft-exclusif/19345.webp" alt="objet Bao Bao de la jeune fille verte" class="eq-card-icon" width="48" height="48" loading="lazy" decoding="async">
+          <div class="eq-card-titles">
+            <h3>Bao Bao de la jeune fille verte [1]</h3>
+            <span class="eq-en"><a href="https://rozerodb.com/items/19345" target="_blank" rel="noopener">Green Maiden&#x27;s Bao Bao</a></span>
+          </div>
+        </div>
+        <p class="eq-crafter">🧑‍🏭 Socheon · <code class="navi">/navi louyang 186/54</code></p>
+        <p class="eq-release">🗓️ Sortie prévue : avril 2027 (zone de Louyang)</p>
+        <span class="eq-mats-label">Caractéristiques</span>
+        <ul class="eq-stats-list"><li>Coiffe supérieure</li><li>Niv. 70</li><li>DEF 0</li><li>Poids 45</li></ul>
+        <span class="eq-mats-label">Matériaux requis</span>
+        <ul><li><img src="img/craft-exclusif/5042.webp" alt="objet Bao Bao" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Bao Bao <em>(<a href="https://rozerodb.com/items/5042" target="_blank" rel="noopener">Bao Bao</a>)</em></li><li><img src="img/craft-exclusif/7757.webp" alt="objet Mithril" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">Mithril <em>(<a href="https://rozerodb.com/items/7757" target="_blank" rel="noopener">Mithril</a>)</em></li><li><img src="img/craft-exclusif/25621.webp" alt="objet Écaille bleue" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Écaille bleue <em>(<a href="https://rozerodb.com/items/25621" target="_blank" rel="noopener">Blue Scale</a>)</em></li><li><img src="img/craft-exclusif/7264.webp" alt="objet Sable sec" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">500 × Sable sec <em>(<a href="https://rozerodb.com/items/7264" target="_blank" rel="noopener">Dry Sand</a>)</em></li><li><img src="img/craft-exclusif/25620.webp" alt="objet Pierre de dragon terrestre" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">100 × Pierre de dragon terrestre <em>(<a href="https://rozerodb.com/items/25620" target="_blank" rel="noopener">Earth Dragon Stone</a>)</em></li><li><img src="img/craft-exclusif/7267.webp" alt="objet Culotte de tigre" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">300 × Culotte de tigre <em>(<a href="https://rozerodb.com/items/7267" target="_blank" rel="noopener">Tiger Panty</a>)</em></li><li><img src="img/craft-exclusif/7268.webp" alt="objet Petite poupée fantôme" class="icon-inline" width="24" height="24" loading="lazy" decoding="async">50 × Petite poupée fantôme <em>(<a href="https://rozerodb.com/items/7268" target="_blank" rel="noopener">Little Ghost Doll</a>)</em></li></ul>
+        <span class="eq-bonus-label">Bonus &amp; effets</span>
+        <ul class="eq-bonus-list"><li>AGI +3</li><li>LUK +3</li><li>CRIT +1 par niveau de raffinage</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
+
+</main>
+
+<div class="see-also">
+  <p class="see-also-label">À lire aussi</p>
+  <div class="see-also-list">
+    <a href="donjon-equipement-fabrication.html">⚒️ Améliorer l'équipement</a>
+    <a href="cosmetiques.html">🎭 Guide des cosmétiques</a>
+    <a href="guide-avances.html">🗃️ Guides avancés</a>
+  </div>
+</div>
+
+<footer>
+  <div class="sig">~ Bonne aventure sur Ragnarok Zero Global ~</div>
+  <div class="foot-links">
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Twitch</a> ·
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener">X / Twitter</a> ·
+    <a href="https://www.tiktok.com/@poulpixtwitch" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Retour en haut de page" title="Retour en haut">↑</a>
+
+<script src="js/countdown.js?v=7" defer></script>
+<script src="js/search.js?v=1" defer></script>
+<script src="js/twitch-lazy.js?v=1" defer></script>
+<script src="js/font-swap.js?v=1" defer></script>
+<script src="js/sort-table.js?v=1" defer></script>
+</body>
+</html>

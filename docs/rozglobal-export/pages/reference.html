@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; frame-src https://player.twitch.tv; script-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c6a13a">
+<link rel="icon" href="img/commun/logo.svg" type="image/svg+xml">
+<meta name="description" content="Tables chiffrées à garder sous la main : dégâts selon la taille des monstres, courbes d'expérience par niveau, faiblesses élémentaires et systèmes spéciaux (limites de statistiques, drop selon le niveau), pour Ragnarok Zero Global.">
+<link rel="canonical" href="https://roz-global.info/reference.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guide ROZ:G">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://roz-global.info/reference.html">
+<meta property="og:title" content="Référence · Guide Ragnarok Zero Global">
+<meta property="og:description" content="Tables chiffrées à garder sous la main : dégâts selon la taille des monstres, courbes d'expérience par niveau, faiblesses élémentaires et systèmes spéciaux (limites de statistiques, drop selon le niveau), pour Ragnarok Zero Global.">
+<meta property="og:image" content="img/commun/og-image.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Référence · Guide Ragnarok Zero Global">
+<meta name="twitter:description" content="Tables chiffrées à garder sous la main : dégâts selon la taille des monstres, courbes d'expérience par niveau, faiblesses élémentaires et systèmes spéciaux (limites de statistiques, drop selon le niveau), pour Ragnarok Zero Global.">
+<meta name="twitter:image" content="img/commun/og-image.webp">
+<title>Référence · Guide Ragnarok Zero Global</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Guide ROZ:G","alternateName":"Carnet de l'aventurier - Ragnarok Zero Global","url":"https://roz-global.info/","inLanguage":"fr-FR"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://roz-global.info/index.html"},{"@type":"ListItem","position":2,"name":"Référence","item":"https://roz-global.info/reference.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" id="gfonts-async">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/style.min.css?v=62">
+</head>
+<body id="top">
+
+<input type="checkbox" id="twitch-widget-toggle" class="tw-widget-toggle-input" checked>
+<aside class="tw-widget" aria-label="Stream Twitch de Poulpix">
+  <div class="tw-widget-head">
+    <span class="tw-widget-title">🔴 Poulpix en direct</span>
+    <label for="twitch-widget-toggle" class="tw-widget-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+  </div>
+  <div class="tw-widget-body">
+    <button type="button" class="tw-widget-facade" data-twitch-channel="poulpi_x" data-twitch-parent="roz-global.info" aria-label="Afficher le lecteur Twitch de poulpi_x">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg>
+      <span>Afficher le lecteur</span>
+    </button>
+    <a class="tw-widget-link" href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Voir sur Twitch ↗</a>
+  </div>
+</aside>
+<label for="twitch-widget-toggle" class="tw-widget-reopen" aria-label="Réafficher le stream Twitch" title="Réafficher le stream">🔴 Twitch</label>
+
+<input type="checkbox" id="utility-strip-toggle" class="utility-strip-toggle-input">
+<div class="utility-strip">
+  <div class="utility-social">
+    <a href="https://roz.mygnjoy.com/en/main" target="_blank" rel="noopener" aria-label="Site officiel" title="Site officiel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+    <a href="https://discord.com/invite/s6CqJnGqwX" target="_blank" rel="noopener" aria-label="Discord officiel" title="Discord officiel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.956 2.4189-2.1568 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9451 2.4189-2.1568 2.4189Z"></path></svg></a>
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener" aria-label="Twitch de Poulpix" title="Twitch de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg></a>
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener" aria-label="X (Twitter) de Poulpix" title="X (Twitter) de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+  </div>
+  <label for="utility-strip-toggle" class="utility-strip-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+</div>
+
+<nav class="site-nav">
+  <div class="brand-wrap">
+    <a class="brand" href="index.html" aria-label="Guide ROZ:G — Accueil"><img src="img/commun/logo.svg" alt="" width="32" height="32" class="brand-logo"></a>
+  </div>
+  <button type="button" class="search-trigger" data-search-open title="Rechercher (touche /)">
+    <span class="st-icon">🔍</span><span class="st-label">Rechercher une classe, un donjon, une mécanique…</span><span class="st-kbd">/</span>
+  </button>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Menu"></label>
+  <div class="nav-links">
+  <p class="nav-group-label">Guide du débutant</p>
+  <a class="pill" href="index.html">🏠 Sommaire</a>
+  <a class="pill" href="01-avant-de-commencer.html">🚪 Démarrer</a>
+  <a class="pill" href="02-interface.html">🖥️ Interface</a>
+  <a class="pill" href="03-choisir-sa-classe.html">⚔️ Classes</a>
+  <a class="pill" href="04-premiers-pas.html">👣 Premiers pas</a>
+  <a class="pill" href="05-le-monde.html">🗺️ Le monde</a>
+  <a class="pill" href="06-progression.html">📈 Progression</a>
+  <a class="pill" href="07-quotidien.html">☀️ Quotidien</a>
+  <a class="pill" href="08-equipement.html">🛡️ Équipement</a>
+  <a class="pill" href="09-argent-social.html">💰 Argent &amp; social</a>
+  <a class="pill" href="10-roadmap.html">🧭 Feuille de route</a>
+  <a class="pill active" href="reference.html">📖 Référence</a>
+  <p class="nav-group-label">Guides avancés</p>
+  <a class="pill" href="guide-avances.html">🗃️ Guides avancés</a>
+  <p class="nav-group-label">Annexes</p>
+  <a class="pill" href="ressources.html">📚 Ressources</a>
+  <a class="pill" href="codes-cadeaux.html">🎁 Codes cadeaux</a>
+  <a class="pill" href="rhcp.html">🎥 RHCP</a>
+  </div>
+</nav>
+<label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Recherche dans le guide">
+    <div class="search-input-wrap">
+      <input type="text" class="search-input" id="search-input" placeholder="Rechercher une classe, un lieu, une mécanique..." autocomplete="off">
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="page-title-bar">
+  <span class="ptb-chapter">Chapitre 11</span>
+  <span class="ptb-title">🗂️ Données de référence</span>
+</div>
+
+<header class="page-header">
+  <p class="eyebrow">Chapitre 11</p>
+  <h1>🗂️ Données de référence</h1>
+  <p>Tables chiffrées à garder sous la main sur Ragnarok Zero Global : dégâts selon la taille des monstres, courbes d'expérience par niveau, faiblesses élémentaires et systèmes spéciaux.</p>
+</header>
+
+<div class="chapter-nav chapter-nav-top">
+  <a href="10-roadmap.html"><small>Précédent</small>← Feuille de route</a>
+  <a class="next" href="ressources.html"><small>Suivant</small>Ressources →</a>
+</div>
+
+    <aside class="page-toc" aria-label="Sommaire de la page">
+      <input type="checkbox" id="page-toc-toggle" class="page-toc-toggle-input">
+      <label for="page-toc-toggle" class="page-toc-label">Dans cette page</label>
+      <div class="page-toc-links">
+        <a href="#le-type-darme-compte-autant-que-sa-puissance">Le type d'arme compte autant que sa puissance</a>
+        <a href="#combien-dxp-pour-monter-dun-niveau">Combien d'XP pour monter d'un niveau ?</a>
+        <a href="#maitriser-la-physique-de-midgard">Maîtriser la physique de Midgard</a>
+        <a href="#limite-maximale-par-option">Limite maximale par option</a>
+        <a href="#difference-de-niveau-et-taux-de-drop">Différence de niveau et taux de drop</a>
+      </div>
+    </aside>
+
+<main>
+
+  <section class="quest-card">
+    <div class="badge">⚔️</div>
+    <p class="chapter">Dégâts par taille de monstre</p>
+    <h2 id="le-type-darme-compte-autant-que-sa-puissance">Le type d'arme compte autant que sa puissance</h2>
+    <p>Dans Ragnarok Zero, les dégâts infligés à un monstre varient selon sa taille (Small / Medium / Large) et le type d'arme équipée. Un multiplicateur s'applique par-dessus les dégâts bruts de l'arme.</p>
+    <table>
+      <tr><th>Type d'arme</th><th>Petit</th><th>Moyen</th><th>Grand</th></tr>
+      <tr><td>Mains nues</td><td>100 %</td><td>100 %</td><td>100 %</td></tr>
+      <tr><td>Épée à une main</td><td>75 %</td><td>100 %</td><td>75 %</td></tr>
+      <tr><td>Épée à deux mains</td><td>75 %</td><td>75 %</td><td>100 %</td></tr>
+      <tr><td>Dague</td><td>100 %</td><td>75 %</td><td>50 %</td></tr>
+      <tr><td>Hache à une main</td><td>50 %</td><td>75 %</td><td>100 %</td></tr>
+      <tr><td>Hache à deux mains</td><td>50 %</td><td>75 %</td><td>100 %</td></tr>
+      <tr><td>Katar</td><td>75 %</td><td>100 %</td><td>75 %</td></tr>
+      <tr><td>Bâton à une main</td><td>100 %</td><td>100 %</td><td>100 %</td></tr>
+      <tr><td>Bâton à deux mains</td><td>100 %</td><td>100 %</td><td>100 %</td></tr>
+      <tr><td>Masse à une main</td><td>75 %</td><td>100 %</td><td>100 %</td></tr>
+      <tr><td>Masse à deux mains</td><td>75 %</td><td>100 %</td><td>100 %</td></tr>
+      <tr><td>Arc</td><td>100 %</td><td>100 %</td><td>75 %</td></tr>
+      <tr><td>Lance à une main</td><td>75 %</td><td>75 %</td><td>100 %</td></tr>
+      <tr><td>Lance à deux mains</td><td>75 %</td><td>75 %</td><td>100 %</td></tr>
+      <tr><td>Poing américain</td><td>100 %</td><td>100 %</td><td>75 %</td></tr>
+      <tr><td>Livre</td><td>100 %</td><td>100 %</td><td>50 %</td></tr>
+      <tr><td>Fouet</td><td>75 %</td><td>100 %</td><td>75 %</td></tr>
+      <tr><td>Instrument de musique</td><td>75 %</td><td>100 %</td><td>75 %</td></tr>
+      <tr><td>Huuma Shuriken</td><td>75 %</td><td>75 %</td><td>100 %</td></tr>
+      <tr><td>Arme à feu</td><td>100 %</td><td>100 %</td><td>100 %</td></tr>
+    </table>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">📈</div>
+    <p class="chapter">Expérience par niveau</p>
+    <h2 id="combien-dxp-pour-monter-dun-niveau">Combien d'XP pour monter d'un niveau ?</h2>
+    <p>Trois courbes différentes selon votre statut : Novice, 1ère classe, puis la progression générale une fois plus avancé.</p>
+    <h3>Novice (niveaux 1 à 10)</h3>
+    <table>
+      <tr><th>Niv.</th><th>EXP requise</th><th>Niv.</th><th>EXP requise</th></tr>
+      <tr><td>1</td><td>5</td><td>6</td><td>113</td></tr>
+      <tr><td>2</td><td>12</td><td>7</td><td>188</td></tr>
+      <tr><td>3</td><td>22</td><td>8</td><td>256</td></tr>
+      <tr><td>4</td><td>35</td><td>9</td><td>335</td></tr>
+      <tr><td>5</td><td>50</td><td>10</td><td>425</td></tr>
+    </table>
+    <h3>Classes de 1ᵉʳ job (niveaux 1 à 50)</h3>
+    <table>
+      <tr><th>Niv.</th><th>EXP requise</th><th>Niv.</th><th>EXP requise</th></tr>
+      <tr><td>1</td><td>150</td><td>26</td><td>20,280</td></tr>
+      <tr><td>2</td><td>340</td><td>27</td><td>21,780</td></tr>
+      <tr><td>3</td><td>550</td><td>28</td><td>24,510</td></tr>
+      <tr><td>4</td><td>760</td><td>29</td><td>27,000</td></tr>
+      <tr><td>5</td><td>990</td><td>30</td><td>29,000</td></tr>
+      <tr><td>6</td><td>1,250</td><td>31</td><td>31,000</td></tr>
+      <tr><td>7</td><td>1,600</td><td>32</td><td>36,000</td></tr>
+      <tr><td>8</td><td>1,980</td><td>33</td><td>39,000</td></tr>
+      <tr><td>9</td><td>2,340</td><td>34</td><td>41,000</td></tr>
+      <tr><td>10</td><td>2,740</td><td>35</td><td>45,000</td></tr>
+      <tr><td>11</td><td>3,140</td><td>36</td><td>49,000</td></tr>
+      <tr><td>12</td><td>3,950</td><td>37</td><td>51,900</td></tr>
+      <tr><td>13</td><td>4,510</td><td>38</td><td>55,000</td></tr>
+      <tr><td>14</td><td>5,210</td><td>39</td><td>59,450</td></tr>
+      <tr><td>15</td><td>5,950</td><td>40</td><td>64,630</td></tr>
+      <tr><td>16</td><td>7,000</td><td>41</td><td>70,030</td></tr>
+      <tr><td>17</td><td>8,150</td><td>42</td><td>74,940</td></tr>
+      <tr><td>18</td><td>9,130</td><td>43</td><td>79,800</td></tr>
+      <tr><td>19</td><td>10,220</td><td>44</td><td>84,630</td></tr>
+      <tr><td>20</td><td>11,480</td><td>45</td><td>89,610</td></tr>
+      <tr><td>21</td><td>12,780</td><td>46</td><td>95,170</td></tr>
+      <tr><td>22</td><td>14,090</td><td>47</td><td>100,420</td></tr>
+      <tr><td>23</td><td>15,560</td><td>48</td><td>107,250</td></tr>
+      <tr><td>24</td><td>16,980</td><td>49</td><td>112,070</td></tr>
+      <tr><td>25</td><td>18,620</td><td>50</td><td>118,120</td></tr>
+    </table>
+    <h3>Niveau de personnage : courbe générale (niveaux 1 à 50)</h3>
+    <table>
+      <tr><th>Niv.</th><th>EXP requise</th><th>Niv.</th><th>EXP requise</th></tr>
+      <tr><td>1</td><td>0</td><td>26</td><td>186,800</td></tr>
+      <tr><td>2</td><td>2,500</td><td>27</td><td>224,100</td></tr>
+      <tr><td>3</td><td>3,000</td><td>28</td><td>268,900</td></tr>
+      <tr><td>4</td><td>3,600</td><td>29</td><td>322,600</td></tr>
+      <tr><td>5</td><td>4,300</td><td>30</td><td>387,100</td></tr>
+      <tr><td>6</td><td>5,100</td><td>31</td><td>464,500</td></tr>
+      <tr><td>7</td><td>6,100</td><td>32</td><td>557,400</td></tr>
+      <tr><td>8</td><td>7,300</td><td>33</td><td>668,800</td></tr>
+      <tr><td>9</td><td>8,700</td><td>34</td><td>802,500</td></tr>
+      <tr><td>10</td><td>10,400</td><td>35</td><td>963,000</td></tr>
+      <tr><td>11</td><td>12,400</td><td>36</td><td>1,155,600</td></tr>
+      <tr><td>12</td><td>14,800</td><td>37</td><td>1,386,700</td></tr>
+      <tr><td>13</td><td>17,700</td><td>38</td><td>1,664,000</td></tr>
+      <tr><td>14</td><td>21,200</td><td>39</td><td>1,996,800</td></tr>
+      <tr><td>15</td><td>25,400</td><td>40</td><td>2,396,100</td></tr>
+      <tr><td>16</td><td>30,400</td><td>41</td><td>2,875,300</td></tr>
+      <tr><td>17</td><td>36,400</td><td>42</td><td>3,450,300</td></tr>
+      <tr><td>18</td><td>43,600</td><td>43</td><td>4,140,300</td></tr>
+      <tr><td>19</td><td>52,300</td><td>44</td><td>4,968,300</td></tr>
+      <tr><td>20</td><td>62,700</td><td>45</td><td>5,961,900</td></tr>
+      <tr><td>21</td><td>75,200</td><td>46</td><td>7,154,200</td></tr>
+      <tr><td>22</td><td>90,200</td><td>47</td><td>8,585,000</td></tr>
+      <tr><td>23</td><td>108,200</td><td>48</td><td>10,302,000</td></tr>
+      <tr><td>24</td><td>129,800</td><td>49</td><td>12,362,400</td></tr>
+      <tr><td>25</td><td>155,700</td><td>50</td><td>14,834,800</td></tr>
+    </table>
+    <em class="tip">💡 Ces valeurs correspondent à l'XP nécessaire pour passer du niveau indiqué au suivant, pas au cumul total.</em>
+  </section>
+
+
+  <section class="quest-card" id="faiblesses-elementaires">
+    <div class="badge">🔥</div>
+    <p class="chapter">Faiblesses élémentaires</p>
+    <h2 id="maitriser-la-physique-de-midgard">Maîtriser la physique de Midgard</h2>
+    <p>Le tableau ci-dessous donne les multiplicateurs de dégâts pour les 10 éléments du jeu, selon le niveau de l'élément défenseur (1 à 4). Choisissez un onglet pour afficher la table correspondante.</p>
+    <div class="ewt">
+    <input type="radio" name="ewt-level" id="ewt-lv1" class="ewt-radio" checked>
+    <input type="radio" name="ewt-level" id="ewt-lv2" class="ewt-radio">
+    <input type="radio" name="ewt-level" id="ewt-lv3" class="ewt-radio">
+    <input type="radio" name="ewt-level" id="ewt-lv4" class="ewt-radio">
+      <div class="ewt-tabs">
+      <label for="ewt-lv1">Niv. 1</label>
+      <label for="ewt-lv2">Niv. 2</label>
+      <label for="ewt-lv3">Niv. 3</label>
+      <label for="ewt-lv4">Niv. 4</label>
+      </div>
+    <div class="ewt-panel" id="ewt-panel-1">
+      <div class="table-scroll">
+        <table class="ewt-table">
+      <tr><th class="ewt-corner">⚔️ Attaque \ Défense</th><th style="color:#8f8f98">Neutre</th><th style="color:#2f6fed">Eau</th><th style="color:#7c5cff">Terre</th><th style="color:#e5484d">Feu</th><th style="color:#f0a020">Vent</th><th style="color:#1f9d55">Poison</th><th style="color:#e8b923">Sacré</th><th style="color:#5b52e0">Ombre</th><th style="color:#d6409f">Fantôme</th><th style="color:#9d3fd1">Mort-vivant</th></tr>
+      <tr><td class="ewt-rowhead" style="background:#8f8f98;color:#fff">Neutre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">70%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#2f6fed;color:#fff">Eau</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="wk">150%</td><td class="rs">90%</td><td>100%</td><td class="rs">75%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#7c5cff;color:#fff">Terre</td><td>100%</td><td>100%</td><td class="rs">25%</td><td class="rs">90%</td><td class="wk">150%</td><td>100%</td><td class="rs">75%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e5484d;color:#fff">Feu</td><td>100%</td><td class="rs">90%</td><td class="wk">150%</td><td class="rs">25%</td><td>100%</td><td>100%</td><td class="rs">75%</td><td>100%</td><td>100%</td><td class="wk">125%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#f0a020;color:#2b2015">Vent</td><td>100%</td><td class="wk">150%</td><td class="rs">90%</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="rs">75%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#1f9d55;color:#fff">Poison</td><td>100%</td><td>100%</td><td class="wk">125%</td><td class="wk">125%</td><td class="wk">125%</td><td class="im">0%</td><td class="rs">75%</td><td class="rs">50%</td><td>100%</td><td class="rs">50%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e8b923;color:#2b2015">Sacré</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">0%</td><td class="wk">125%</td><td>100%</td><td class="wk">150%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#5b52e0;color:#fff">Ombre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">50%</td><td class="wk">125%</td><td class="im">0%</td><td>100%</td><td class="im">0%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#d6409f;color:#fff">Fantôme</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">75%</td><td class="rs">75%</td><td class="wk">125%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#9d3fd1;color:#fff">Mort-vivant</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">50%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="im">0%</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="ewt-panel" id="ewt-panel-2">
+      <div class="table-scroll">
+        <table class="ewt-table">
+      <tr><th class="ewt-corner">⚔️ Attaque \ Défense</th><th style="color:#8f8f98">Neutre</th><th style="color:#2f6fed">Eau</th><th style="color:#7c5cff">Terre</th><th style="color:#e5484d">Feu</th><th style="color:#f0a020">Vent</th><th style="color:#1f9d55">Poison</th><th style="color:#e8b923">Sacré</th><th style="color:#5b52e0">Ombre</th><th style="color:#d6409f">Fantôme</th><th style="color:#9d3fd1">Mort-vivant</th></tr>
+      <tr><td class="ewt-rowhead" style="background:#8f8f98;color:#fff">Neutre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">50%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#2f6fed;color:#fff">Eau</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="wk">175%</td><td class="rs">80%</td><td>100%</td><td class="rs">50%</td><td>100%</td><td class="rs">75%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#7c5cff;color:#fff">Terre</td><td>100%</td><td>100%</td><td class="im">0%</td><td class="rs">80%</td><td class="wk">175%</td><td>100%</td><td class="rs">50%</td><td>100%</td><td class="rs">75%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e5484d;color:#fff">Feu</td><td>100%</td><td class="rs">80%</td><td class="wk">175%</td><td class="im">0%</td><td>100%</td><td>100%</td><td class="rs">50%</td><td>100%</td><td class="rs">75%</td><td class="wk">150%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#f0a020;color:#2b2015">Vent</td><td>100%</td><td class="wk">175%</td><td class="rs">80%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="rs">50%</td><td>100%</td><td class="rs">75%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#1f9d55;color:#fff">Poison</td><td>100%</td><td>100%</td><td class="wk">150%</td><td class="wk">150%</td><td class="wk">150%</td><td class="im">0%</td><td class="rs">50%</td><td class="rs">25%</td><td class="rs">75%</td><td class="rs">25%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e8b923;color:#2b2015">Sacré</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="wk">125%</td><td class="im">-25%</td><td class="wk">150%</td><td>100%</td><td class="wk">175%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#5b52e0;color:#fff">Ombre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">25%</td><td class="wk">150%</td><td class="im">-25%</td><td>100%</td><td class="im">-25%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#d6409f;color:#fff">Fantôme</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">50%</td><td class="rs">50%</td><td class="wk">150%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#9d3fd1;color:#fff">Mort-vivant</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="im">-25%</td><td>100%</td><td class="im">-25%</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="ewt-panel" id="ewt-panel-3">
+      <div class="table-scroll">
+        <table class="ewt-table">
+      <tr><th class="ewt-corner">⚔️ Attaque \ Défense</th><th style="color:#8f8f98">Neutre</th><th style="color:#2f6fed">Eau</th><th style="color:#7c5cff">Terre</th><th style="color:#e5484d">Feu</th><th style="color:#f0a020">Vent</th><th style="color:#1f9d55">Poison</th><th style="color:#e8b923">Sacré</th><th style="color:#5b52e0">Ombre</th><th style="color:#d6409f">Fantôme</th><th style="color:#9d3fd1">Mort-vivant</th></tr>
+      <tr><td class="ewt-rowhead" style="background:#8f8f98;color:#fff">Neutre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">0%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#2f6fed;color:#fff">Eau</td><td>100%</td><td class="im">-25%</td><td>100%</td><td class="wk">200%</td><td class="rs">70%</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="rs">50%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#7c5cff;color:#fff">Terre</td><td>100%</td><td>100%</td><td class="im">-25%</td><td class="rs">70%</td><td class="wk">200%</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="rs">50%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e5484d;color:#fff">Feu</td><td>100%</td><td class="rs">70%</td><td class="wk">200%</td><td class="im">-25%</td><td>100%</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="rs">50%</td><td class="wk">175%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#f0a020;color:#2b2015">Vent</td><td>100%</td><td class="wk">200%</td><td class="rs">70%</td><td>100%</td><td class="im">-25%</td><td>100%</td><td class="rs">25%</td><td>100%</td><td class="rs">50%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#1f9d55;color:#fff">Poison</td><td>100%</td><td>100%</td><td class="wk">175%</td><td class="wk">175%</td><td class="wk">175%</td><td class="im">0%</td><td class="rs">25%</td><td class="im">0%</td><td class="rs">50%</td><td class="im">0%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e8b923;color:#2b2015">Sacré</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="wk">150%</td><td class="im">-50%</td><td class="wk">175%</td><td>100%</td><td class="wk">200%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#5b52e0;color:#fff">Ombre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">0%</td><td class="wk">175%</td><td class="im">-50%</td><td>100%</td><td class="im">-50%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#d6409f;color:#fff">Fantôme</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="rs">25%</td><td class="rs">25%</td><td class="wk">175%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#9d3fd1;color:#fff">Mort-vivant</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="im">-50%</td><td>100%</td><td class="im">-50%</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="ewt-panel" id="ewt-panel-4">
+      <div class="table-scroll">
+        <table class="ewt-table">
+      <tr><th class="ewt-corner">⚔️ Attaque \ Défense</th><th style="color:#8f8f98">Neutre</th><th style="color:#2f6fed">Eau</th><th style="color:#7c5cff">Terre</th><th style="color:#e5484d">Feu</th><th style="color:#f0a020">Vent</th><th style="color:#1f9d55">Poison</th><th style="color:#e8b923">Sacré</th><th style="color:#5b52e0">Ombre</th><th style="color:#d6409f">Fantôme</th><th style="color:#9d3fd1">Mort-vivant</th></tr>
+      <tr><td class="ewt-rowhead" style="background:#8f8f98;color:#fff">Neutre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">0%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#2f6fed;color:#fff">Eau</td><td>100%</td><td class="im">-50%</td><td>100%</td><td class="wk">200%</td><td class="rs">60%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="rs">25%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#7c5cff;color:#fff">Terre</td><td>100%</td><td>100%</td><td class="im">-50%</td><td class="rs">60%</td><td class="wk">200%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="rs">25%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e5484d;color:#fff">Feu</td><td>100%</td><td class="rs">60%</td><td class="wk">200%</td><td class="im">-50%</td><td>100%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="rs">25%</td><td class="wk">200%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#f0a020;color:#2b2015">Vent</td><td>100%</td><td class="wk">200%</td><td class="rs">60%</td><td>100%</td><td class="im">-50%</td><td>100%</td><td class="im">0%</td><td>100%</td><td class="rs">25%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#1f9d55;color:#fff">Poison</td><td>100%</td><td>100%</td><td class="wk">200%</td><td class="wk">200%</td><td class="wk">200%</td><td class="im">0%</td><td class="im">0%</td><td class="im">-25%</td><td class="rs">25%</td><td class="im">-25%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#e8b923;color:#2b2015">Sacré</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="wk">175%</td><td class="im">-100%</td><td class="wk">200%</td><td>100%</td><td class="wk">200%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#5b52e0;color:#fff">Ombre</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">-25%</td><td class="wk">200%</td><td class="im">-100%</td><td>100%</td><td class="im">-100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#d6409f;color:#fff">Fantôme</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">0%</td><td class="im">0%</td><td class="wk">200%</td><td>100%</td></tr>
+      <tr><td class="ewt-rowhead" style="background:#9d3fd1;color:#fff">Mort-vivant</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td class="im">-25%</td><td>100%</td><td class="im">-100%</td><td>100%</td><td class="im">-100%</td></tr>
+        </table>
+      </div>
+    </div>
+    </div>
+    <div class="ewt-legend">
+      <div class="ewt-legend-item"><span class="swatch wk"></span><strong>Faiblesse</strong><span>L'attaque inflige plus de 100&nbsp;% de dégâts. À privilégier pour maximiser les DPS.</span></div>
+      <div class="ewt-legend-item"><span class="swatch rs"></span><strong>Résistance</strong><span>L'attaque inflige moins de 100&nbsp;% de dégâts. Changez d'élément pour éviter la pénalité.</span></div>
+      <div class="ewt-legend-item"><span class="swatch im"></span><strong>Immunité / absorption</strong><span>L'attaque inflige 0&nbsp;% de dégâts, voire soigne la cible. Les éléments de haut niveau (3-4) sont souvent immunisés à leur propre élément.</span></div>
+    </div>
+    <em class="tip">💡 Le niveau élémentaire du défenseur (pas de l'attaquant) détermine quelle table utiliser : un monstre "Feu 2" se lit dans l'onglet Niv. 2, colonne Feu.</em>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">🛡️</div>
+    <p class="chapter">Systèmes spéciaux</p>
+    <h2 id="limite-maximale-par-option">Limite maximale par option</h2>
+    <p>Dans Ragnarok Zero, des valeurs d'application maximales sont fixées pour les options liées à la défense.</p>
+    <p>Par exemple, l'effet de réduction des dégâts infligés par les joueurs ne s'applique qu'à hauteur de <strong>-70&nbsp;% maximum</strong> : même si vous cumulez ensuite d'autres sources du même effet, le système de limite maximale par option ne prendra en compte que -70&nbsp;% au total. Tout ce qui dépasse cette valeur maximale n'est pas reflété dans les calculs de combat réels.</p>
+    <h3>Options soumises à une limite maximale</h3>
+    <ul>
+      <li>La résistance aux attaques élémentaires n'est prise en compte qu'à hauteur de <strong>-70&nbsp;%</strong> maximum.</li>
+      <li>La réduction des dégâts contre les monstres selon leur <strong>race</strong> n'est prise en compte qu'à hauteur de -70&nbsp;% maximum.</li>
+      <li>La réduction des dégâts contre les monstres selon leur <strong>taille</strong> n'est prise en compte qu'à hauteur de -70&nbsp;% maximum.</li>
+      <li>La réduction des dégâts contre les monstres selon leur <strong>type</strong> n'est prise en compte qu'à hauteur de -70&nbsp;% maximum.</li>
+      <li>L'<strong>esquive parfaite</strong> (Perfect Dodge) n'est prise en compte qu'à hauteur de 70&nbsp;% maximum.</li>
+      <li>La réduction des dégâts infligés par les <strong>joueurs</strong> n'est prise en compte qu'à hauteur de -70&nbsp;% maximum.</li>
+    </ul>
+    <em class="tip">💡 Cette limite s'applique aux bonus cumulés via équipement, buffs ou cartes (résistance, réduction de dégâts, esquive...). Elle ne change rien aux multiplicateurs de base du <a href="#faiblesses-elementaires">tableau des faiblesses élémentaires</a> plus haut sur cette page, qui reste un système indépendant.</em>
+    <h3>⚠️ Particularités de l'élément Mort-vivant</h3>
+    <ul>
+      <li>N'est pas repoussé par la compétence <strong>Fire Wall</strong>.</li>
+      <li>N'est pas affecté par <strong>Stone Curse</strong> (pétrification) ni par le gel (Freezing).</li>
+      <li>Ne peut pas être soigné par les compétences de soin, et subit au contraire des dégâts infligés par les compétences de soin ennemies.</li>
+      <li>Peut être tué instantanément par la compétence <strong>Turn Undead</strong>.</li>
+      <li>Ne peut pas être ressuscité après la mort avec une <strong>Yggdrasil Leaf</strong> ou la compétence <strong>Resurrection</strong>.</li>
+    </ul>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">📉</div>
+    <p class="chapter">Systèmes spéciaux</p>
+    <h2 id="difference-de-niveau-et-taux-de-drop">Différence de niveau et taux de drop</h2>
+    <p>Dans Ragnarok Zero, le taux de drop que vous pouvez obtenir varie selon la différence de niveau entre le monstre et le personnage.</p>
+    <h3>Réduction du taux de drop</h3>
+    <table>
+      <tr><th>Différence de niveau</th><th>Augmentation / Réduction</th></tr>
+      <tr><td>~ -19</td><td>Aucune pénalité</td></tr>
+      <tr><td>-40 ~</td><td>Réduction de 50&nbsp;%</td></tr>
+    </table>
+    <em class="tip">💡 Plus l'écart de niveau avec le monstre est grand, plus le taux de drop est pénalisé, jusqu'à -50&nbsp;% au-delà de -40 niveaux d'écart.</em>
+  </section>
+
+</main>
+
+<div class="chapter-nav">
+  <a href="10-roadmap.html"><small>Précédent</small>← Feuille de route</a>
+  <a class="next" href="ressources.html"><small>Suivant</small>Ressources →</a>
+</div>
+
+<div class="see-also">
+  <p class="see-also-label">À lire aussi</p>
+  <div class="see-also-list">
+    <a href="06-progression.html">⚔️ Monter de niveau sans souffrir</a>
+    <a href="cartes-equipement.html">🎴 Cartes utiles pour l'équipement</a>
+  </div>
+</div>
+
+<footer>
+  <div class="sig">~ Bonne aventure sur Ragnarok Zero Global ~</div>
+  <div class="foot-links">
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Twitch</a> ·
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener">X / Twitter</a> ·
+    <a href="https://www.tiktok.com/@poulpixtwitch" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Retour en haut de page" title="Retour en haut">↑</a>
+
+<script src="js/countdown.js?v=7" defer></script>
+<script src="js/search.js?v=1" defer></script>
+<script src="js/twitch-lazy.js?v=1" defer></script>
+<script src="js/font-swap.js?v=1" defer></script>
+<script src="js/sort-table.js?v=1" defer></script>
+</body>
+</html>

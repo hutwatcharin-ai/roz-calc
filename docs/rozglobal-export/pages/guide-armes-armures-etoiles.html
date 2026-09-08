@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; frame-src https://player.twitch.tv; script-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c6a13a">
+<link rel="icon" href="img/commun/logo.svg" type="image/svg+xml">
+<meta name="description" content="Aperçu du système d'activation des armes et armures étoile (★ et ★★) du serveur taïwanais TWROZ, pas encore disponible sur Ragnarok Zero Global : PNJ, matériaux et équipements concernés.">
+<link rel="canonical" href="https://roz-global.info/guide-armes-armures-etoiles.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guide ROZ:G">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://roz-global.info/guide-armes-armures-etoiles.html">
+<meta property="og:title" content="Système d'activation (armes et armures étoile) · Guide Ragnarok Zero Global">
+<meta property="og:description" content="Aperçu du système d'activation des armes et armures étoile (★ et ★★) du serveur taïwanais TWROZ, pas encore disponible sur Ragnarok Zero Global : PNJ, matériaux et équipements concernés.">
+<meta property="og:image" content="img/commun/og-image.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Système d'activation (armes et armures étoile) · Guide Ragnarok Zero Global">
+<meta name="twitter:description" content="Aperçu du système d'activation des armes et armures étoile (★ et ★★) du serveur taïwanais TWROZ, pas encore disponible sur Ragnarok Zero Global : PNJ, matériaux et équipements concernés.">
+<meta name="twitter:image" content="img/commun/og-image.webp">
+<title>Système d'activation (armes et armures étoile) · Guide Ragnarok Zero Global</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Guide ROZ:G","alternateName":"Carnet de l'aventurier - Ragnarok Zero Global","url":"https://roz-global.info/","inLanguage":"fr-FR"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://roz-global.info/index.html"},{"@type":"ListItem","position":2,"name":"Système d'activation (armes et armures étoile)","item":"https://roz-global.info/guide-armes-armures-etoiles.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" id="gfonts-async">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/style.min.css?v=62">
+</head>
+<body id="top">
+
+<input type="checkbox" id="twitch-widget-toggle" class="tw-widget-toggle-input" checked>
+<aside class="tw-widget" aria-label="Stream Twitch de Poulpix">
+  <div class="tw-widget-head">
+    <span class="tw-widget-title">🔴 Poulpix en direct</span>
+    <label for="twitch-widget-toggle" class="tw-widget-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+  </div>
+  <div class="tw-widget-body">
+    <button type="button" class="tw-widget-facade" data-twitch-channel="poulpi_x" data-twitch-parent="roz-global.info" aria-label="Afficher le lecteur Twitch de poulpi_x">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg>
+      <span>Afficher le lecteur</span>
+    </button>
+    <a class="tw-widget-link" href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Voir sur Twitch ↗</a>
+  </div>
+</aside>
+<label for="twitch-widget-toggle" class="tw-widget-reopen" aria-label="Réafficher le stream Twitch" title="Réafficher le stream">🔴 Twitch</label>
+
+<input type="checkbox" id="utility-strip-toggle" class="utility-strip-toggle-input">
+<div class="utility-strip">
+  <div class="utility-social">
+    <a href="https://roz.mygnjoy.com/en/main" target="_blank" rel="noopener" aria-label="Site officiel" title="Site officiel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+    <a href="https://discord.com/invite/s6CqJnGqwX" target="_blank" rel="noopener" aria-label="Discord officiel" title="Discord officiel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.956 2.4189-2.1568 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9451 2.4189-2.1568 2.4189Z"></path></svg></a>
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener" aria-label="Twitch de Poulpix" title="Twitch de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg></a>
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener" aria-label="X (Twitter) de Poulpix" title="X (Twitter) de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+  </div>
+  <label for="utility-strip-toggle" class="utility-strip-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+</div>
+
+<nav class="site-nav">
+  <div class="brand-wrap">
+    <a class="brand" href="index.html" aria-label="Guide ROZ:G — Accueil"><img src="img/commun/logo.svg" alt="" width="32" height="32" class="brand-logo"></a>
+  </div>
+  <button type="button" class="search-trigger" data-search-open title="Rechercher (touche /)">
+    <span class="st-icon">🔍</span><span class="st-label">Rechercher une classe, un donjon, une mécanique…</span><span class="st-kbd">/</span>
+  </button>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Menu"></label>
+  <div class="nav-links">
+  <p class="nav-group-label">Guide du débutant</p>
+  <a class="pill" href="index.html">🏠 Sommaire</a>
+  <a class="pill" href="01-avant-de-commencer.html">🚪 Démarrer</a>
+  <a class="pill" href="02-interface.html">🖥️ Interface</a>
+  <a class="pill" href="03-choisir-sa-classe.html">⚔️ Classes</a>
+  <a class="pill" href="04-premiers-pas.html">👣 Premiers pas</a>
+  <a class="pill" href="05-le-monde.html">🗺️ Le monde</a>
+  <a class="pill" href="06-progression.html">📈 Progression</a>
+  <a class="pill" href="07-quotidien.html">☀️ Quotidien</a>
+  <a class="pill" href="08-equipement.html">🛡️ Équipement</a>
+  <a class="pill" href="09-argent-social.html">💰 Argent &amp; social</a>
+  <a class="pill" href="10-roadmap.html">🧭 Feuille de route</a>
+  <a class="pill" href="reference.html">📖 Référence</a>
+  <p class="nav-group-label">Guides avancés</p>
+  <a class="pill active" href="guide-avances.html">🗃️ Guides avancés</a>
+  <p class="nav-group-label">Annexes</p>
+  <a class="pill" href="ressources.html">📚 Ressources</a>
+  <a class="pill" href="codes-cadeaux.html">🎁 Codes cadeaux</a>
+  <a class="pill" href="rhcp.html">🎥 RHCP</a>
+  </div>
+</nav>
+<label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Recherche dans le guide">
+    <div class="search-input-wrap">
+      <input type="text" class="search-input" id="search-input" placeholder="Rechercher une classe, un lieu, une mécanique..." autocomplete="off">
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="page-title-bar">
+  <span class="ptb-chapter">Aperçu TWROZ</span>
+  <span class="ptb-title">⭐ Guide des armes et armures étoilées</span>
+</div>
+
+<header class="page-header">
+  <p class="eyebrow">Aperçu TWROZ</p>
+  <h1>⭐ Guide des armes et armures étoilées</h1>
+  <p>Un guide du fonctionnement du système d'activation des armes et armures étoile de Ragnarok Zero Global.</p>
+</header>
+
+    <aside class="page-toc" aria-label="Sommaire de la page">
+      <input type="checkbox" id="page-toc-toggle" class="page-toc-toggle-input">
+      <label for="page-toc-toggle" class="page-toc-label">Dans cette page</label>
+      <div class="page-toc-links">
+        <a href="#le-systeme-dactivation-armes-et-armures-etoile">Le système d'activation : armes et armures étoile</a>
+        <a href="#echanger-son-equipement-contre-un-certificat">Échanger son équipement contre un certificat</a>
+        <a href="#lactivation-proprement-dite">L'activation proprement dite</a>
+        <a href="#trois-types-dequipement-deja-activables">Trois types d'équipement déjà activables</a>
+      </div>
+    </aside>
+
+<main>
+
+  <section class="quest-card">
+    <div class="badge">⭐</div>
+    <p class="chapter">Aperçu TWROZ</p>
+    <h2 id="le-systeme-dactivation-armes-et-armures-etoile">Le système d'activation : armes et armures étoile</h2>
+    <p>Ce système permet de convertir un équipement déjà bien raffiné en version « étoile » (★ ou ★★) : un nouveau palier d'équipement, sans perdre ni cartes, ni enchantements, ni capacités additionnelles.</p>
+    <em class="warn">⚠️ Ce système n'est pas encore disponible sur Ragnarok Zero Global et aucune date de sortie n'a été annoncée à ce jour : ce guide se base sur son fonctionnement actuel sur le serveur taïwanais (TWROZ), où il est déjà actif.</em>
+    <figure class="screenshot-frame">
+      <img src="img/etoiles/etoiles-1.webp" alt="bannière officielle de l'activation des armes étoile" width="1900" height="680" loading="lazy" decoding="async">
+      <figcaption>Capture officielle : « Armes UPGRADE, activez vos armes ★★ ! »</figcaption>
+    </figure>
+    <em class="tip">💡 À l'heure de cette annonce, seuls trois types d'équipement sont concernés : les armes de 2ᵉ palier ★★, les armes de 2ᵉ palier ★ et les armures classiques. D'autres pourraient s'y ajouter au fil des mises à jour, comme le rappelle l'éditeur en fin de page.</em>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">🧑‍🏭</div>
+    <p class="chapter">PNJ · Étape 1</p>
+    <h2 id="echanger-son-equipement-contre-un-certificat">Échanger son équipement contre un certificat</h2>
+    <p>Le PNJ <strong>Apprenti d'atelier Mingjia</strong> <code class="navi">/navi prontera 272 264</code> échange un équipement contre son certificat de forge correspondant, la matière première de tout le système.</p>
+    <figure class="screenshot-frame">
+      <img src="img/etoiles/etoiles-2.webp" alt="le PNJ Apprenti d'atelier Mingjia à Prontera" width="244" height="238" loading="lazy" decoding="async">
+      <figcaption>Capture : le PNJ Apprenti d'atelier Mingjia</figcaption>
+    </figure>
+    <ul>
+      <li>Un équipement lâché par un monstre ×1 s'échange contre un <strong>certificat de forge ★</strong> ×1.</li>
+      <li>Une arme déjà activée ×1 s'échange contre un <strong>certificat de forge ★★</strong> ×1.</li>
+    </ul>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">👴</div>
+    <p class="chapter">PNJ · Étape 2</p>
+    <h2 id="lactivation-proprement-dite">L'activation proprement dite</h2>
+    <p>Une fois les certificats et la monnaie d'appoint réunis, le PNJ <strong>Papi Daodao</strong> <code class="navi">/navi prontera 272 260</code> ouvre l'interface d'activation.</p>
+    <figure class="screenshot-frame">
+      <img src="img/etoiles/etoiles-3.webp" alt="le PNJ Papi Daodao à Prontera, atelier d'activation" width="215" height="251" loading="lazy" decoding="async">
+      <figcaption>Capture : le PNJ Papi Daodao, atelier d'activation</figcaption>
+    </figure>
+
+    <h3>Armes</h3>
+    <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Modification</th><th>Effet sur l'équipement</th><th>Matériaux requis</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2ᵉ palier ★★</td>
+          <td>Raffinage -3 ; cartes, enchantements et capacités additionnelles conservés.</td>
+          <td>3× certificat de forge ★★ correspondant, 30× pièce brisée de gobelin.</td>
+        </tr>
+        <tr>
+          <td>2ᵉ palier ★</td>
+          <td>Raffinage -7 ; cartes, enchantements et capacités additionnelles conservés.</td>
+          <td>100× certificat de forge ★ correspondant, 8× pièce brisée de gobelin.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Armures</h3>
+    <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Modification</th><th>Effet sur l'équipement</th><th>Matériaux requis</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Armure classique, règle « stable »</td>
+          <td>Raffinage -3 ; cartes, enchantements et capacités additionnelles conservés.</td>
+          <td>100× certificat de forge ★ correspondant, 30× pièce brisée de gobelin.</td>
+        </tr>
+        <tr>
+          <td>Armure classique, règle « intense »</td>
+          <td>Raffinage -7 ; cartes, enchantements et capacités additionnelles conservés.</td>
+          <td>10× certificat de forge ★ correspondant, 3× pièce brisée de gobelin.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <em class="tip">💡 Dans tous les cas, la perte de raffinage est le prix à payer pour débloquer le palier « étoile » de l'équipement : mieux vaut activer une pièce déjà bien raffinée plutôt qu'un +0.</em>
+
+    <div class="screenshot-grid">
+      <figure class="screenshot-frame">
+        <img src="img/etoiles/etoiles-4.webp" alt="exemple d'activation d'une arme +7 vers version étoile, 2e palier" width="1024" height="607" loading="lazy" decoding="async">
+        <figcaption>Capture : exemple sur une arme (2ᵉ palier ★)</figcaption>
+      </figure>
+      <figure class="screenshot-frame">
+        <img src="img/etoiles/etoiles-5.webp" alt="exemple d'activation d'une armure +10 vers +7 étoile, règle stable" width="1024" height="607" loading="lazy" decoding="async">
+        <figcaption>Capture : exemple sur une armure, règle « stable »</figcaption>
+      </figure>
+      <figure class="screenshot-frame">
+        <img src="img/etoiles/etoiles-6.webp" alt="exemple d'activation d'une armure +10 vers +3 étoile, règle intense" width="1024" height="607" loading="lazy" decoding="async">
+        <figcaption>Capture : exemple sur une armure, règle « intense »</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">🗂️</div>
+    <p class="chapter">Équipements concernés</p>
+    <h2 id="trois-types-dequipement-deja-activables">Trois types d'équipement déjà activables</h2>
+    <p>L'activation est ouverte aux armes de 2ᵉ palier ★★, aux armes de 2ᵉ palier ★ et aux armures classiques. Voici l'apparence et les effets de chaque équipement concerné ; les matériaux et la perte de raffinage restent ceux du tableau de modification ci-dessus, selon la catégorie.</p>
+    <p class="eq-sources">Sources (annonces officielles TWROZ, en chinois) : <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=218272" target="_blank" rel="noopener">armes ★★</a> · <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217788" target="_blank" rel="noopener">armes ★</a> · <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=218186" target="_blank" rel="noopener">armures classiques</a>.</p>
+
+    <h3>Armes de 2ᵉ palier ★★</h3>
+    <div class="table-scroll eq-table-scroll">
+    <table class="eq-table" id="table-armes-2etoiles">
+      <caption class="sr-only">Armes de 2ᵉ palier ★★ activables</caption>
+      <thead>
+        <tr><th>Apparence</th><th>Équipement</th><th>Type · caractéristiques</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-fouet-acier-entrave.webp" alt="apparence : ★★ Fouet en acier — Entrave" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Fouet en acier — Entrave</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+50, FLEE−40, DEF−80.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+2%.</li><li><strong>+7 et plus :</strong> ASPD accrue (délai après attaque −10%), MHP+200.</li><li><strong>+9 et plus :</strong> délai −15% (suppl.), MHP+300 (suppl.), et chance de déclencher « Danse chaotique des flèches » Nv.1 (compétence spéciale) sur une attaque de mêlée.</li><li><strong>+11 et plus (tous les +2) :</strong> FLEE+8, DEF+16 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Fouet</li><li>ATK 115</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 16</li><li>Danseuse</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-luth-chant.webp" alt="apparence : ★★ Luth — Chant" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Luth — Chant</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+50, FLEE−40, DEF−80.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+2%.</li><li><strong>+7 et plus :</strong> ASPD accrue (délai −10%), MHP+200.</li><li><strong>+9 et plus :</strong> délai −15% (suppl.), MHP+300 (suppl.), et chance de déclencher « Danse chaotique des flèches » Nv.1 en mêlée.</li><li><strong>+11 et plus (tous les +2) :</strong> FLEE+8, DEF+16 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Instrument</li><li>ATK 125</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Barde</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-hallebarde-perforation.webp" alt="apparence : ★★ Hallebarde brise-lame — Perforation" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Hallebarde brise-lame — Perforation</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+60, CRI+90.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+2%.</li><li><strong>+7 et plus :</strong> HIT+20, MHP+250.</li><li><strong>+9 et plus :</strong> HIT+35 (suppl.), MHP+400 (suppl.), MHP+6%, et apprend « Frappe de bouclier en chaîne » Nv.5, incantation variable −15%.</li><li><strong>+11 et plus (tous les +2) :</strong> CRI+18 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Lance (une main)</li><li>ATK 160</li><li>Poids 85</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Croisé</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-luth-resonance.webp" alt="apparence : ★★ Luth — Résonance" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Luth — Résonance</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+50, FLEE−80, DEF−40.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+3%.</li><li><strong>+7 et plus :</strong> MDEF+10, MHP+2%.</li><li><strong>+9 et plus :</strong> MDEF+15 (suppl.), MHP+3% (suppl.), et en cas de dégâts physiques reçus, chance de déclencher « Danse chaotique des flèches » Nv.1 sur l'agresseur.</li><li><strong>+11 et plus (tous les +2) :</strong> FLEE+16, DEF+8 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Instrument</li><li>ATK 125</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Barde</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-katar-trepas.webp" alt="apparence : ★★ Katar — Trépas" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Katar — Trépas</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+60, HIT−100, dégâts phys. à distance−40%.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. de mêlée+2%.</li><li><strong>+7 et plus :</strong> CRI+7, ASPD accrue (délai −14%), FLEE+5.</li><li><strong>+9 et plus :</strong> CRI+14 (suppl.), délai −28% (suppl.), FLEE+10 (suppl.), et si les compétences de maîtrise du Katar (de base et avancée) et de poison mortel atteignent un niveau cumulé de 20, débloque « Frappe rapide à deux lames » Nv.1 (taux de déclenchement selon le niveau de maîtrise).</li><li><strong>+11 et plus (tous les +2) :</strong> HIT+20, dégâts phys. à distance+8% (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Katar</li><li>ATK 155</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Assassin</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-epee-deux-mains-croc.webp" alt="apparence : ★★ Épée à deux mains — Croc" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Épée à deux mains — Croc</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+60, HIT−150, FLEE−90, MHP−10%.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. de mêlée+3%.</li><li><strong>+7 et plus :</strong> CRI+15, ASPD accrue (délai −25%), dégâts critiques+20%.</li><li><strong>+9 et plus :</strong> CRI+25 (suppl.), ASPD+2, dégâts critiques+40% (suppl.), et si Maîtrise de l'épée à deux mains, Parade et maîtrise de l'épée à deux mains atteignent le niveau 30, apprend « Frappe véloce enchaînée » Nv.7.</li><li><strong>+11 et plus (tous les +2) :</strong> HIT+30, FLEE+18, MHP+2% (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (deux mains)</li><li>ATK 210</li><li>Poids 130</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Chevalier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-arbalete-esprit.webp" alt="apparence : ★★ Arbalète — Esprit" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Arbalète — Esprit</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+40, CRI−60.</li>
+<li><strong>Tous les +2 :</strong> LUK+10.</li><li><strong>+7 et plus :</strong> ASPD accrue (délai −15%).</li><li><strong>+9 et plus :</strong> délai −20% (suppl.), ASPD+2, apprend « Impact fulgurant » Nv.5 ; en attaque à distance, chance de le déclencher sur l'ennemi.</li><li><strong>+11 et plus (tous les +2) :</strong> CRI+12 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Arc</li><li>ATK 135</li><li>Poids 90</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Chasseur</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-gantelet-combat.webp" alt="apparence : ★★ Gantelet de Hèle — Combat" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Gantelet de Hèle — Combat</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+80, MDEF−20, MSP−30%.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+2%.</li><li><strong>+7 et plus :</strong> ASPD accrue (délai −15%).</li><li><strong>+9 et plus :</strong> délai −20% (suppl.), ASPD+2, et si Poing des six harmonies, Paume corporelle en chaîne et Fanfaronnade du tigre féroce atteignent le niveau 20, chance de déclencher « Concentration de qi » Nv.5 sur une attaque de mêlée.</li><li><strong>+11 et plus (tous les +2) :</strong> MDEF+4, MSP+6% (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Poings</li><li>ATK 130</li><li>Poids 45</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Moine</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-hallebarde-benediction.webp" alt="apparence : ★★ Hallebarde brise-lame — Bénédiction" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Hallebarde brise-lame — Bénédiction</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MATK+40, CRI+90.</li>
+<li><strong>Tous les +2 :</strong> MATK+2%.</li><li><strong>+7 et plus :</strong> incantation −10%, MATK+30.</li><li><strong>+9 et plus :</strong> incantation −15% (suppl.), MATK+50 (suppl.), et si « Croix Sacrée » atteint Nv.10 : MATK+100, chaque lancer soigne 2500 PV/s pendant 3 s ; si « Majesté Divine » atteint Nv.5 : MATK+8% (suppl.).</li><li><strong>+11 et plus (tous les +2) :</strong> CRI+18 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Lance (une main)</li><li>ATK 160</li><li>Poids 85</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Croisé</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-epee-deux-mains-celerite.webp" alt="apparence : ★★ Épée à deux mains — Célérité" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Épée à deux mains — Célérité</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+40, HIT−100, FLEE−40.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. de mêlée+2%.</li><li><strong>+7 et plus :</strong> CRI+10, ASPD accrue (délai −10%), dégâts critiques+10%.</li><li><strong>+9 et plus :</strong> CRI+20 (suppl.), délai −15% (suppl.), dégâts critiques+30% (suppl.), et si Maîtrise de l'épée à deux mains, Parade et maîtrise de l'épée à deux mains atteignent le niveau 30, apprend « Frappe rapide à deux lames » Nv.5.</li><li><strong>+11 et plus (tous les +2) :</strong> HIT+20, FLEE+8 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (deux mains)</li><li>ATK 210</li><li>Poids 130</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Chevalier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-sabre-domaine.webp" alt="apparence : ★★ Sabre à pommeau rond — Domaine" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Sabre à pommeau rond — Domaine</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+25, HIT+90.</li>
+<li><strong>Tous les +2 :</strong> DEF+20, MDEF+2.</li><li><strong>+7 et plus :</strong> FLEE+10, MHP+300.</li><li><strong>+9 et plus :</strong> FLEE+20 (suppl.), MHP+450 (suppl.), MHP+6%, et apprend « Lancer de potion » Nv.5 : en cas d'attaque physique reçue, chance de restaurer 150 PV/s pendant 1 s.</li><li><strong>+11 et plus (tous les +2) :</strong> HIT+18 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (une main)</li><li>ATK 135</li><li>Poids 90</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Alchimiste</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-brassard-soleil.webp" alt="apparence : ★★ Brassard renforcé — Soleil" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Brassard renforcé — Soleil</p>
+          <p class="eq-flavor">Un brassard de la lignée Ninja. Un artisan de génie a sacrifié sa défense d'origine pour lui donner une résistance à la magie.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MDEF+5, ATK+10, STR+5, FLEE−120.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. contre les ennemis Terre/Vent/Eau+2%.</li><li><strong>+7 et plus :</strong> dégâts phys. contre Terre/Vent/Eau+5% (suppl.).</li><li><strong>+9 et plus :</strong> ATK+5% (suppl.), dégâts phys. à distance+7%, et si Maîtrise ninjutsu, Échappée de la cigale dorée et compétences de la lignée ninjutsu atteignent le niveau 40, coût en SP des compétences ninjutsu −50%.</li><li><strong>+11 et plus (tous les +2) :</strong> FLEE+24 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Bouclier</li><li>DEF 45</li><li>Poids 15</li><li>Niv. requis 50</li><li>Ninja</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-baton-echo.webp" alt="apparence : ★★ Bâton en chêne — Écho" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Bâton en chêne — Écho</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MATK+140, consommation de SP+120%, incantation variable+50%.</li>
+<li><strong>Tous les +2 :</strong> INT+1, dégâts magiques toutes éléments+2%.</li><li><strong>+7 et plus :</strong> SP−5%, incantation −5%.</li><li><strong>+9 et plus :</strong> SP−10% (suppl.), incantation −10% (suppl.), et si Tempête de neige, Météores, Choc de Jupitel, Champ de gravité et Plongeon glacial atteignent un niveau cumulé de 45, MATK+12%.</li><li><strong>+11 et plus (tous les +2) :</strong> SP−12%, incantation −5% (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Bâton (une main)</li><li>ATK 25</li><li>Poids 40</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Sorcier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-fouet-dispersion.webp" alt="apparence : ★★ Fouet en acier — Dispersion" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Fouet en acier — Dispersion</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+50, FLEE−80, DEF−40.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+3%.</li><li><strong>+7 et plus :</strong> MDEF+10, MHP+2%.</li><li><strong>+9 et plus :</strong> MDEF+15 (suppl.), MHP+3% (suppl.), et en cas de dégâts physiques reçus, chance de déclencher « Danse chaotique des flèches » Nv.1 sur l'agresseur.</li><li><strong>+11 et plus (tous les +2) :</strong> FLEE+16, DEF+8 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Fouet</li><li>ATK 115</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 16</li><li>Danseuse</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-baton-vagabondage.webp" alt="apparence : ★★ Bâton en chêne — Vagabondage" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Bâton en chêne — Vagabondage</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MATK+170, consommation de SP+60%, MHP−1000.</li>
+<li><strong>Tous les +2 :</strong> MATK+1%, MSP+2%, FLEE+5.</li><li><strong>+7 et plus :</strong> SP−10%, incantation −3%.</li><li><strong>+9 et plus :</strong> SP−20% (suppl.), incantation −7% (suppl.), et apprend « Drain d'âme » Nv.10, incantation fixe −15%.</li><li><strong>+11 et plus (tous les +2) :</strong> SP−12%, MHP+200 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Bâton (une main)</li><li>ATK 25</li><li>Poids 40</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Sorcier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-katar-extermination.webp" alt="apparence : ★★ Katar — Extermination" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Katar — Extermination</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+60, HIT−200, dégâts phys. à distance−100%.</li>
+<li><strong>Tous les +2 :</strong> ATK+6, dégâts phys. de mêlée+3%.</li><li><strong>+7 et plus :</strong> CRI+8, ASPD accrue (délai −11%), dégâts critiques+10%.</li><li><strong>+9 et plus :</strong> CRI+16 (suppl.), délai −22% (suppl.), dégâts critiques+10% (suppl.), et si les maîtrises du Katar (de base et avancée) et de poison mortel atteignent un niveau cumulé de 20, débloque « Frappe rapide à deux lames » Nv.1 (taux selon niveau de maîtrise).</li><li><strong>+11 et plus (tous les +2) :</strong> HIT+20, dégâts phys. à distance+10% (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Katar</li><li>ATK 155</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Assassin</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-gantelet-souffle.webp" alt="apparence : ★★ Gantelet de Hèle — Souffle" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Gantelet de Hèle — Souffle</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+80, MDEF−20, MSP−30%.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+2%.</li><li><strong>+7 et plus :</strong> SP−15%, ATK+2%.</li><li><strong>+9 et plus :</strong> SP−25% (suppl.), ATK+6% (suppl.), et apprend « Doigt divin » Nv.5 : en attaquant, chance de restaurer 6 SP/s pendant 1 s.</li><li><strong>+11 et plus (tous les +2) :</strong> MDEF+4, MSP+6% (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Poings</li><li>ATK 130</li><li>Poids 45</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Moine</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-arbalete-resonance.webp" alt="apparence : ★★ Arbalète — Résonance" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Arbalète — Résonance</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MATK+120, MHP−500, FLEE−60.</li>
+<li><strong>Tous les +2 :</strong> MATK+5.</li><li><strong>+7 et plus :</strong> ASPD accrue (délai −15%).</li><li><strong>+9 et plus :</strong> délai −20% (suppl.), ASPD+2.</li><li><strong>+11 et plus (tous les +2) :</strong> MHP+100, FLEE+12 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Arc</li><li>ATK 135</li><li>Poids 90</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Vagabond</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-sabre-limite.webp" alt="apparence : ★★ Sabre à pommeau rond — Limite" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Sabre à pommeau rond — Limite</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+45, DEF−60.</li>
+<li><strong>Tous les +2 :</strong> ATK+5, dégâts phys. à distance+2%.</li><li><strong>+7 et plus :</strong> HIT+20, incantation −8%.</li><li><strong>+9 et plus :</strong> HIT+35 (suppl.), incantation −12% (suppl.), et apprend « Jet de fiole d'acide et de feu » Nv.10 : chance de faire lâcher à l'ennemi une fiole d'acide ou une bouteille incendiaire.</li><li><strong>+11 et plus (tous les +2) :</strong> DEF+12 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (une main)</li><li>ATK 135</li><li>Poids 90</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Alchimiste</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme2-brassard-lune.webp" alt="apparence : ★★ Brassard renforcé — Lune" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★★ Brassard renforcé — Lune</p>
+          <p class="eq-flavor">Un brassard de la lignée Ninja. Un artisan de génie a sacrifié sa défense d'origine pour lui donner une résistance à la magie.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MDEF+5, MATK+10, INT+5, FLEE−120.</li>
+<li><strong>Tous les +2 :</strong> MATK+5, dégâts magiques contre les ennemis Terre/Vent/Eau+2%.</li><li><strong>+7 et plus :</strong> dégâts magiques contre Terre/Vent/Eau+5% (suppl.).</li><li><strong>+9 et plus :</strong> MATK+5% (suppl.), dégâts magiques toutes éléments+7%, et si Maîtrise ninjutsu et Échappée de la cigale dorée atteignent le niveau 15, coût en SP des compétences ninjutsu −50% (Fleur de feu, Formation de feu, Dragon explosif, Lame de glace, Colonne d'eau, Chute de cristaux, Lame de vent, Choc foudroyant, Vent du nord).</li><li><strong>+11 et plus (tous les +2) :</strong> FLEE+24 (suppl. à chaque palier).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Bouclier</li><li>DEF 45</li><li>Poids 15</li><li>Niv. requis 50</li><li>Ninja</li></ul></td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Armes de 2ᵉ palier ★</h3>
+    <div class="table-scroll eq-table-scroll">
+    <table class="eq-table" id="table-armes-1etoile">
+      <caption class="sr-only">Armes de 2ᵉ palier ★ activables</caption>
+      <thead>
+        <tr><th>Apparence</th><th>Équipement</th><th>Type · caractéristiques</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-marteau-simais.webp" alt="apparence : ★ Marteau de Simais" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Marteau de Simais</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, HIT−60.</li>
+<li><strong>+3 :</strong> HIT+3, INT+1, DEX+1.</li><li><strong>+7 :</strong> HIT+7, INT+1, DEX+1, LUK+1 (suppl.).</li><li><strong>+9 :</strong> HIT+10, INT+2, DEX+2, LUK+2 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Contondant</li><li>ATK 100</li><li>Poids 100</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Marchand</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-baton-chene.webp" alt="apparence : ★ Bâton en chêne" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Bâton en chêne</p>
+          <p class="eq-flavor">Un bâton imprégné de magie. Indestructible.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MATK+125, consommation de SP+20%.</li>
+<li><strong>+3 :</strong> SP−1%, soins prodigués+1%.</li><li><strong>+7 :</strong> SP−3% (suppl.), soins+3% (suppl.).</li><li><strong>+9 :</strong> SP−6% (suppl.), soins+6% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Bâton (une main)</li><li>ATK 25</li><li>Poids 40</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Novice, Mage, Acolyte</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-livre.webp" alt="apparence : ★ Livre" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Livre</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> Portée d'attaque à l'équipement : 3 cases. MATK+125, incantation variable+30%.</li>
+<li><strong>+3 :</strong> incantation −3%, ASPD+3%.</li><li><strong>+7 :</strong> incantation −7% (suppl.), ASPD+7% (suppl.).</li><li><strong>+9 :</strong> incantation −10% (suppl.), ASPD+15% (suppl.), ASPD+2.</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Livre</li><li>ATK 85</li><li>Poids 60</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Mage, Acolyte</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-arbalete.webp" alt="apparence : ★ Arbalète" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Arbalète</p>
+          <p class="eq-flavor">Un arc en forme de croix, rapide et puissant.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, MATK+100, MHP−350.</li>
+<li><strong>+3 :</strong> MHP+25, LUK+3.</li><li><strong>+7 :</strong> MHP+75 (suppl.), LUK+7 (suppl.).</li><li><strong>+9 :</strong> MHP+100 (suppl.), LUK+20 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Arc</li><li>ATK 125</li><li>Poids 90</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Voleur, Archer</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-sabre-pommeau-rond.webp" alt="apparence : ★ Sabre à pommeau rond" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Sabre à pommeau rond</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+25, CRI+30.</li>
+<li><strong>+3 :</strong> HIT+10, MHP+100.</li><li><strong>+7 :</strong> HIT+15 (suppl.), MHP+150 (suppl.).</li><li><strong>+9 :</strong> HIT+20 (suppl.), MHP+200 (suppl.), MHP+3%.</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (une main)</li><li>ATK 125</li><li>Poids 90</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Guerrier, Marchand, Voleur</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-hallebarde-brise-lame.webp" alt="apparence : ★ Hallebarde brise-lame" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Hallebarde brise-lame</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+30, CRI+40.</li>
+<li><strong>+3 :</strong> incantation −2%, MATK+20.</li><li><strong>+7 :</strong> incantation −4% (suppl.), MATK+40 (suppl.).</li><li><strong>+9 :</strong> incantation −9% (suppl.), MATK+90 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Lance (une main)</li><li>ATK 150</li><li>Poids 85</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Croisé</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-luth.webp" alt="apparence : ★ Luth" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Luth</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, HIT−60, DEF+40.</li>
+<li><strong>+3 :</strong> incantation −2%, MHP+75.</li><li><strong>+7 :</strong> incantation −2% (suppl.), MHP+125 (suppl.).</li><li><strong>+9 :</strong> incantation −6% (suppl.), MHP+200 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Instrument</li><li>ATK 125</li><li>Poids 50</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Barde</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-epee-alte.webp" alt="apparence : ★ Épée Alte" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Épée Alte</p>
+          <p class="eq-flavor">Une épée à deux mains conçue pour être polyvalente en toute situation.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, MDEF−20.</li>
+<li><strong>+3 :</strong> MDEF+1, HIT+10.</li><li><strong>+7 :</strong> MDEF+3 (suppl.), HIT+15 (suppl.).</li><li><strong>+9 :</strong> MDEF+6 (suppl.), HIT+20 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (deux mains)</li><li>ATK 190</li><li>Poids 160</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Guerrier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-katar.webp" alt="apparence : ★ Katar" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Katar</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+30, HIT−70.</li>
+<li><strong>+3 :</strong> CRI+2, ASPD+5%.</li><li><strong>+7 :</strong> CRI+3 (suppl.), ASPD+10% (suppl.).</li><li><strong>+9 :</strong> CRI+5 (suppl.), ASPD+15% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Katar</li><li>ATK 155</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Assassin</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-fouet-acier.webp" alt="apparence : ★ Fouet en acier" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Fouet en acier</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, HIT−40, DEF+60.</li>
+<li><strong>+3 :</strong> incantation −2%, MHP+75.</li><li><strong>+7 :</strong> incantation −2% (suppl.), MHP+125 (suppl.).</li><li><strong>+9 :</strong> incantation −6% (suppl.), MHP+200 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Fouet</li><li>ATK 115</li><li>Poids 100</li><li>Niv. arme 2</li><li>Niv. requis 16</li><li>Danseuse</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-hache-acier.webp" alt="apparence : ★ Hache en acier" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Hache en acier</p>
+          <p class="eq-flavor">Un marteau très puissant en frappe descendante. Indestructible.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+30, DEF−90.</li>
+<li><strong>+3 :</strong> DEF+10, CRI+3.</li><li><strong>+7 :</strong> DEF+20 (suppl.), CRI+7 (suppl.).</li><li><strong>+9 :</strong> DEF+35 (suppl.), CRI+15 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Hache (deux mains)</li><li>ATK 215</li><li>Poids 200</li><li>Niv. arme 2</li><li>Niv. requis 16</li><li>Guerrier, Marchand</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-arc-kroite.webp" alt="apparence : ★ Arc Kroïte" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Arc Kroïte</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, consommation de SP+50%.</li>
+<li><strong>+3 :</strong> SP−3%, INT+3, FLEE+3.</li><li><strong>+7 :</strong> SP−7% (suppl.), INT+7 (suppl.), FLEE+7 (suppl.).</li><li><strong>+9 :</strong> SP−20% (suppl.), INT+20 (suppl.), FLEE+15 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Arc</li><li>ATK 125</li><li>Poids 100</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Archer</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-epee-deux-mains.webp" alt="apparence : ★ Épée à deux mains" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Épée à deux mains</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, HIT−30, FLEE−60.</li>
+<li><strong>+3 :</strong> CRI+3, ASPD+3%.</li><li><strong>+7 :</strong> CRI+5 (suppl.), ASPD+7% (suppl.).</li><li><strong>+9 :</strong> CRI+7 (suppl.), ASPD+15% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Épée (deux mains)</li><li>ATK 190</li><li>Poids 130</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Guerrier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-lance-lame-courbe.webp" alt="apparence : ★ Lance à lame courbe" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Lance à lame courbe</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+40, VIT−10.</li>
+<li><strong>+3 :</strong> incantation −2%, HIT+5.</li><li><strong>+7 :</strong> incantation −2% (suppl.), HIT+10 (suppl.).</li><li><strong>+9 :</strong> incantation −6% (suppl.), HIT+30 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Lance (deux mains)</li><li>ATK 160</li><li>Poids 100</li><li>Niv. arme 2</li><li>Niv. requis 18</li><li>Guerrier</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-masse-chaine.webp" alt="apparence : ★ Masse à chaîne" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Masse à chaîne</p>
+          <p class="eq-flavor">Faite de plusieurs maillons de fer : un impact redoutable et une prise en main parfaite. Indestructible.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+18, DEF−90.</li>
+<li><strong>+3 :</strong> DEF+10, ASPD+3%.</li><li><strong>+7 :</strong> DEF+20 (suppl.), ASPD+7% (suppl.).</li><li><strong>+9 :</strong> DEF+35 (suppl.), ASPD+15% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Contondant</li><li>ATK 140</li><li>Poids 80</li><li>Niv. arme 2</li><li>Niv. requis 14</li><li>Guerrier, Marchand, Acolyte</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-dague-double-tranchant.webp" alt="apparence : ★ Dague à double tranchant" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Dague à double tranchant</p>
+          <p class="eq-flavor">Une dague à la lame bien affûtée, soigneusement forgée.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+20, MATK+60, FLEE−50.</li>
+<li><strong>+3 :</strong> FLEE+3, CRI+3.</li><li><strong>+7 :</strong> FLEE+7 (suppl.), CRI+7 (suppl.).</li><li><strong>+9 :</strong> FLEE+10 (suppl.), CRI+15 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Dague</li><li>ATK 143</li><li>Poids 70</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Novice, Guerrier, Archer, Voleur, Mage, Marchand</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-brassard-renforce.webp" alt="apparence : ★ Brassard renforcé" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Brassard renforcé</p>
+          <p class="eq-flavor">Un brassard de la lignée Ninja. Un artisan de génie a sacrifié sa défense d'origine pour lui donner une résistance à la magie.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MDEF+5, ATK+10, FLEE−60.</li>
+<li><strong>+3 :</strong> STR+3.</li><li><strong>+7 :</strong> ATK+15 (suppl.).</li><li><strong>+9 :</strong> ATK+3% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Bouclier</li><li>DEF 45</li><li>Poids 15</li><li>Niv. requis 50</li><li>Ninja</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/arme1-gantelet-hele.webp" alt="apparence : ★ Gantelet de Hèle" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Gantelet de Hèle</p>
+          
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> ATK+60, MDEF−20, MHP−300.</li>
+<li><strong>+3 :</strong> ASPD+5%, consommation de SP−5%.</li><li><strong>+7 :</strong> ASPD+10% (suppl.), SP−10% (suppl.).</li><li><strong>+9 :</strong> ASPD+20% (suppl.), SP−25% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Poings</li><li>ATK 120</li><li>Poids 45</li><li>Niv. arme 2</li><li>Niv. requis 12</li><li>Moine</li></ul></td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Armures classiques</h3>
+    <div class="table-scroll eq-table-scroll">
+    <table class="eq-table" id="table-armures-classiques">
+      <caption class="sr-only">Armures classiques activables</caption>
+      <thead>
+        <tr><th>Apparence</th><th>Équipement</th><th>Type · caractéristiques</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-cape-capuche.webp" alt="apparence : ★ Cape à capuche" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Cape à capuche</p>
+          <p class="eq-flavor">Une cape au motif plus élégant.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+100, récupération naturelle de PV+20%.</li>
+<li><strong>+3 et plus :</strong> MHP+200 (suppl.), MHP+1% (suppl.).</li><li><strong>+7 et plus :</strong> MHP+250 (suppl.), MHP+2% (suppl.).</li><li><strong>+9 et plus :</strong> MHP+450 (suppl.), MHP+4% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Cape</li><li>DEF 8</li><li>Poids 10</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-manteau-cuir.webp" alt="apparence : ★ Manteau en cuir" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Manteau en cuir</p>
+          <p class="eq-flavor">Confectionné non pas dans un cuir ordinaire, mais dans du cuir de Milos.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+250, MSP+20, FLEE+5.</li>
+<li><strong>Tous les +2 :</strong> MHP+100.</li><li><strong>+3 et plus :</strong> MHP+50 (suppl.), FLEE+3 (suppl.).</li><li><strong>+7 et plus :</strong> MHP+150 (suppl.), FLEE+5 (suppl.).</li><li><strong>+9 et plus :</strong> MHP+350 (suppl.), FLEE+12 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Armure</li><li>DEF 50</li><li>Poids 5</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-cotte-mailles.webp" alt="apparence : ★ Cotte de mailles en acier" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Cotte de mailles en acier</p>
+          <p class="eq-flavor">Une cotte de mailles en acier reforgée pour un équipement plus abouti.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+300, DEF+40, MDEF+2.</li>
+<li><strong>Tous les +2 :</strong> MHP+200, DEF+5.</li><li><strong>+3 et plus :</strong> MHP+200 (suppl.), DEF+30 (suppl.).</li><li><strong>+7 et plus :</strong> MHP+450 (suppl.), DEF+40 (suppl.).</li><li><strong>+9 et plus :</strong> MHP+1000 (suppl.), DEF+70 (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Armure</li><li>DEF 75</li><li>Poids 250</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-long-manteau.webp" alt="apparence : ★ Long manteau" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Long manteau</p>
+          <p class="eq-flavor">Un long manteau chaud, taillé dans les meilleures étoffes.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+150, MSP+50, DEF+40, MDEF+5.</li>
+<li><strong>Tous les +2 :</strong> MHP+200, MDEF+2.</li><li><strong>+3 et plus :</strong> MHP+100 (suppl.), MSP+20 (suppl.).</li><li><strong>+7 et plus :</strong> MHP+200 (suppl.), MSP+25 (suppl.).</li><li><strong>+9 et plus :</strong> MHP+400 (suppl.), MSP+35 (suppl.), MSP+5%.</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Armure</li><li>DEF 60</li><li>Poids 80</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-bottes-guerrier.webp" alt="apparence : ★ Bottes de guerrier" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Bottes de guerrier</p>
+          <p class="eq-flavor">Des bottes montantes à talon : en cas d'urgence, retirez-les et frappez avec !</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+100, récupération naturelle de PV+5%.</li>
+<li><strong>+3 et plus :</strong> MHP+200 (suppl.), récupération de PV+5% (suppl.).</li><li><strong>+7 et plus :</strong> MHP+350 (suppl.), récupération de PV+10% (suppl.).</li><li><strong>+9 et plus :</strong> MHP+8% (suppl.), soins reçus+10%.</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Chaussures</li><li>DEF 25</li><li>Poids 30</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-etole.webp" alt="apparence : ★ Étole" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Étole</p>
+          <p class="eq-flavor">Confectionnée dans une étoffe de meilleure qualité que l'étole d'origine, elle procure une sensation de chaleur intense.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+100, récupération naturelle de SP+20%.</li>
+<li><strong>+3 et plus :</strong> MHP+200 (suppl.), MSP+1% (suppl.).</li><li><strong>+7 et plus :</strong> MHP+250 (suppl.), MSP+2% (suppl.).</li><li><strong>+9 et plus :</strong> MHP+450 (suppl.), MSP+4% (suppl.).</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Cape</li><li>DEF 16</li><li>Poids 20</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      <tr>
+        <td class="eq-icon-cell"><img src="img/etoiles/liste/armure1-chaussures-legeres.webp" alt="apparence : ★ Chaussures légères" width="97" height="118" loading="lazy" decoding="async"></td>
+        <td>
+          <p class="eq-name">★ Chaussures légères</p>
+          <p class="eq-flavor">Des chaussures légères retravaillées : leur rouge éclatant est plus beau que jamais.</p>
+          <ul class="eq-effects">
+            <li><strong>Effet de base :</strong> MHP+100, récupération naturelle de SP+5%.</li>
+<li><strong>+3 et plus :</strong> MHP+200 (suppl.), récupération de SP+5% (suppl.).</li><li><strong>+7 et plus :</strong> MHP+350 (suppl.), récupération de SP+10% (suppl.).</li><li><strong>+9 et plus :</strong> MHP+8% (suppl.), soins reçus+10%.</li>
+          </ul>
+        </td>
+        <td class="eq-meta"><ul><li>Chaussures</li><li>DEF 15</li><li>Poids 10</li><li>Niv. requis 1</li><li>Toutes classes</li></ul></td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <em class="warn">⚠️ D'autres façons d'obtenir les certificats, ainsi que d'autres équipements activables, pourraient être ajoutés au fil des mises à jour : cette page sera actualisée en conséquence. Source : <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217787" target="_blank" rel="noopener">annonce officielle TWROZ du 28 août 2025</a>.</em>
+  </section>
+
+</main>
+
+<div class="see-also">
+  <p class="see-also-label">À lire aussi</p>
+  <div class="see-also-list">
+    <a href="10-roadmap.html">📜 La feuille de route</a>
+    <a href="raffinage.html">🔨 Guide du raffinage</a>
+    <a href="guide-avances.html">🗃️ Guides avancés</a>
+  </div>
+</div>
+
+<footer>
+  <div class="sig">~ Bonne aventure sur Ragnarok Zero Global ~</div>
+  <div class="foot-links">
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Twitch</a> ·
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener">X / Twitter</a> ·
+    <a href="https://www.tiktok.com/@poulpixtwitch" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Retour en haut de page" title="Retour en haut">↑</a>
+
+<script src="js/countdown.js?v=7" defer></script>
+<script src="js/search.js?v=1" defer></script>
+<script src="js/twitch-lazy.js?v=1" defer></script>
+<script src="js/font-swap.js?v=1" defer></script>
+<script src="js/sort-table.js?v=1" defer></script>
+</body>
+</html>

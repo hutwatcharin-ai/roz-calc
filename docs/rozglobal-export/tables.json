@@ -1,0 +1,6282 @@
+{
+ "01-avant-de-commencer.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Durée",
+     "Prix",
+     "Moyenne mensuelle"
+    ],
+    [
+     "1 mois (30 jours)",
+     "9,99 €",
+     "9,99 €/mois"
+    ],
+    [
+     "3 mois (90 jours)",
+     "25,99 €",
+     "8,66 €/mois"
+    ],
+    [
+     "6 mois (180 jours)",
+     "42,99 €",
+     "7,17 €/mois"
+    ],
+    [
+     "12 mois (365 jours)",
+     "76,99 €",
+     "6,42 €/mois"
+    ]
+   ]
+  }
+ ],
+ "06-progression.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Statistique",
+     "Rôle"
+    ],
+    [
+     "HP",
+     "Points de vie actuels et maximum."
+    ],
+    [
+     "SP",
+     "Points de compétence (mana) actuels et maximum."
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Statistique",
+     "Rôle"
+    ],
+    [
+     "FOR (Str)",
+     "Puissance d'attaque physique et limite de poids transportable avec les armes de mêlée."
+    ],
+    [
+     "AGI",
+     "Vitesse d'attaque, esquive (Dodge) et défense physique."
+    ],
+    [
+     "VIT",
+     "PV maximum, défense physique et défense magique."
+    ],
+    [
+     "INT",
+     "Puissance d'attaque magique, temps d'incantation et défense magique."
+    ],
+    [
+     "DEX",
+     "Attaque physique, précision (Hit), temps d'incantation et attaque magique avec les armes à distance (fouets et instruments inclus)."
+    ],
+    [
+     "CHA (Luk)",
+     "Taux de coup critique, précision, attaque physique, attaque magique, esquive et esquive parfaite."
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Statistique",
+     "Rôle"
+    ],
+    [
+     "ATQ (Atk)",
+     "Attaque physique : valeurs de statut et d'équipement affichées séparément."
+    ],
+    [
+     "ATQ.M (Matk)",
+     "Attaque magique : valeurs de statut et d'équipement affichées séparément."
+    ],
+    [
+     "PRÉC (Hit)",
+     "Précision."
+    ],
+    [
+     "Critique (Critical)",
+     "Taux de coup critique."
+    ],
+    [
+     "Point de statut (Status Point)",
+     "Points disponibles à répartir entre FOR, AGI, VIT, INT, DEX et CHA."
+    ],
+    [
+     "DÉF (Def)",
+     "Défense physique : valeurs de statut et d'équipement affichées séparément."
+    ],
+    [
+     "DÉF.M (Mdef)",
+     "Défense magique : valeurs de statut et d'équipement affichées séparément."
+    ],
+    [
+     "ESQ (Flee)",
+     "Esquive : taux normal et taux d'esquive parfaite affichés séparément."
+    ],
+    [
+     "V.ATQ (Aspd)",
+     "Vitesse d'attaque."
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Personnages",
+     "XP totale",
+     "XP par personne"
+    ],
+    [
+     "2",
+     "110 %",
+     "55 %"
+    ],
+    [
+     "3",
+     "120 %",
+     "40 %"
+    ],
+    [
+     "4",
+     "130 %",
+     "33 %"
+    ],
+    [
+     "5",
+     "130 %",
+     "26 %"
+    ],
+    [
+     "6",
+     "131 %",
+     "22 %"
+    ],
+    [
+     "7",
+     "131 %",
+     "19 %"
+    ],
+    [
+     "8",
+     "130 %",
+     "16 %"
+    ],
+    [
+     "9",
+     "131 %",
+     "15 %"
+    ],
+    [
+     "10",
+     "130 %",
+     "13 %"
+    ],
+    [
+     "11",
+     "132 %",
+     "12 %"
+    ],
+    [
+     "12",
+     "131 %",
+     "11 %"
+    ]
+   ]
+  }
+ ],
+ "08-equipement.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Objet",
+     "Localisation"
+    ],
+    [
+     "Masque d'Opéra",
+     "Prontera /navi prontera 27/233"
+    ],
+    [
+     "Brosse à cheveux",
+     "Comodo /navi comodo 224/171"
+    ],
+    [
+     "Chapeau de docteur (PhD)",
+     "Prontera /navi prontera 40/240"
+    ],
+    [
+     "Poisson bleu",
+     "Comodo /navi comodo 296/233"
+    ],
+    [
+     "Bonnet",
+     "Geffen /navi geffen 202/159"
+    ],
+    [
+     "Bandeau passionné",
+     "Morroc /navi morocc 79/65"
+    ],
+    [
+     "Sakkat",
+     "Morroc /navi morocc 128/55"
+    ],
+    [
+     "Masque de soudure",
+     "Geffen (intérieur) /navi geffen_in 143/167"
+    ]
+   ]
+  }
+ ],
+ "09-argent-social.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niveau",
+     "Coût en Zelstars",
+     "Coût en €",
+     "Achat le plus rentable"
+    ],
+    [
+     "41",
+     "1",
+     "0,60 €",
+     "1 petite"
+    ],
+    [
+     "42",
+     "2",
+     "0,60 €",
+     "1 petite"
+    ],
+    [
+     "43",
+     "3",
+     "0,60 €",
+     "1 petite"
+    ],
+    [
+     "44",
+     "4",
+     "0,60 €",
+     "1 petite"
+    ],
+    [
+     "45",
+     "5",
+     "1,20 €",
+     "2 petites"
+    ],
+    [
+     "46",
+     "6",
+     "1,20 €",
+     "2 petites"
+    ],
+    [
+     "47",
+     "7",
+     "1,20 €",
+     "2 petites"
+    ],
+    [
+     "48",
+     "8",
+     "1,20 €",
+     "2 petites"
+    ],
+    [
+     "49",
+     "9",
+     "1,80 €",
+     "3 petites"
+    ],
+    [
+     "50",
+     "10",
+     "1,80 €",
+     "3 petites"
+    ],
+    [
+     "51",
+     "11",
+     "1,80 €",
+     "3 petites"
+    ],
+    [
+     "52",
+     "12",
+     "1,80 €",
+     "3 petites"
+    ],
+    [
+     "53",
+     "13",
+     "2,40 €",
+     "4 petites"
+    ],
+    [
+     "54",
+     "14",
+     "2,40 €",
+     "4 petites"
+    ],
+    [
+     "55",
+     "15",
+     "2,40 €",
+     "4 petites"
+    ],
+    [
+     "56",
+     "16",
+     "2,40 €",
+     "4 petites"
+    ],
+    [
+     "57",
+     "17",
+     "3,00 €",
+     "5 petites"
+    ],
+    [
+     "58",
+     "18",
+     "3,00 €",
+     "5 petites"
+    ],
+    [
+     "59",
+     "19",
+     "3,00 €",
+     "5 petites"
+    ],
+    [
+     "60",
+     "20",
+     "3,00 €",
+     "5 petites"
+    ],
+    [
+     "61",
+     "21",
+     "3,60 €",
+     "6 petites"
+    ],
+    [
+     "62",
+     "22",
+     "3,60 €",
+     "6 petites"
+    ],
+    [
+     "63",
+     "23",
+     "3,60 €",
+     "6 petites"
+    ],
+    [
+     "64",
+     "24",
+     "3,60 €",
+     "6 petites"
+    ],
+    [
+     "65",
+     "25",
+     "4,20 €",
+     "7 petites"
+    ],
+    [
+     "66",
+     "26",
+     "4,20 €",
+     "7 petites"
+    ],
+    [
+     "67",
+     "27",
+     "4,20 €",
+     "7 petites"
+    ],
+    [
+     "68",
+     "28",
+     "4,20 €",
+     "7 petites"
+    ],
+    [
+     "69",
+     "29",
+     "4,80 €",
+     "8 petites"
+    ],
+    [
+     "70",
+     "30",
+     "4,80 €",
+     "8 petites"
+    ],
+    [
+     "71",
+     "31",
+     "4,80 €",
+     "8 petites"
+    ],
+    [
+     "72",
+     "32",
+     "4,80 €",
+     "8 petites"
+    ],
+    [
+     "73",
+     "33",
+     "5,40 €",
+     "9 petites"
+    ],
+    [
+     "74",
+     "34",
+     "5,40 €",
+     "9 petites"
+    ],
+    [
+     "75",
+     "35",
+     "5,40 €",
+     "9 petites"
+    ],
+    [
+     "76",
+     "36",
+     "5,40 €",
+     "9 petites"
+    ],
+    [
+     "77",
+     "37",
+     "5,95 €",
+     "1 grosse"
+    ],
+    [
+     "78",
+     "38",
+     "5,95 €",
+     "1 grosse"
+    ],
+    [
+     "79",
+     "39",
+     "5,95 €",
+     "1 grosse"
+    ],
+    [
+     "80",
+     "40",
+     "5,95 €",
+     "1 grosse"
+    ],
+    [
+     "81",
+     "41",
+     "6,55 €",
+     "1 grosse + 1 petite"
+    ],
+    [
+     "82",
+     "42",
+     "6,55 €",
+     "1 grosse + 1 petite"
+    ],
+    [
+     "83",
+     "43",
+     "6,55 €",
+     "1 grosse + 1 petite"
+    ],
+    [
+     "84",
+     "44",
+     "6,55 €",
+     "1 grosse + 1 petite"
+    ],
+    [
+     "85",
+     "45",
+     "7,15 €",
+     "1 grosse + 2 petites"
+    ],
+    [
+     "86",
+     "46",
+     "7,15 €",
+     "1 grosse + 2 petites"
+    ],
+    [
+     "87",
+     "47",
+     "7,15 €",
+     "1 grosse + 2 petites"
+    ],
+    [
+     "88",
+     "48",
+     "7,15 €",
+     "1 grosse + 2 petites"
+    ],
+    [
+     "89",
+     "49",
+     "7,75 €",
+     "1 grosse + 3 petites"
+    ],
+    [
+     "90",
+     "50",
+     "7,75 €",
+     "1 grosse + 3 petites"
+    ],
+    [
+     "91",
+     "51",
+     "7,75 €",
+     "1 grosse + 3 petites"
+    ],
+    [
+     "92",
+     "52",
+     "7,75 €",
+     "1 grosse + 3 petites"
+    ],
+    [
+     "93",
+     "53",
+     "8,35 €",
+     "1 grosse + 4 petites"
+    ],
+    [
+     "94",
+     "54",
+     "8,35 €",
+     "1 grosse + 4 petites"
+    ],
+    [
+     "95",
+     "55",
+     "8,35 €",
+     "1 grosse + 4 petites"
+    ],
+    [
+     "96",
+     "56",
+     "8,35 €",
+     "1 grosse + 4 petites"
+    ],
+    [
+     "97",
+     "57",
+     "8,95 €",
+     "1 grosse + 5 petites"
+    ],
+    [
+     "98",
+     "58",
+     "8,95 €",
+     "1 grosse + 5 petites"
+    ],
+    [
+     "99",
+     "59",
+     "8,95 €",
+     "1 grosse + 5 petites"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Emblème",
+     "Clan",
+     "Maître de clan",
+     "Bonus de clan"
+    ],
+    [
+     "",
+     "Sword Clan",
+     "Raffam Oranpere",
+     "STR +1 VIT +1 Max HP +30 Max SP +10"
+    ],
+    [
+     "",
+     "Arch Wand Clan",
+     "Devon Aire",
+     "INT +1 DEX +1 Max HP +30 Max SP +10"
+    ],
+    [
+     "",
+     "Golden Mace Clan",
+     "Berman Aire",
+     "LUK +1 INT +1 Max HP +30 Max SP +10"
+    ],
+    [
+     "",
+     "Crossbow Clan",
+     "Shaam Rumi",
+     "DEX +1 AGI +1 Max HP +30 Max SP +10"
+    ]
+   ]
+  }
+ ],
+ "cartes-equipement.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Andre (Andre)",
+     "ATK +20",
+     "Disponible"
+    ],
+    [
+     "Aster (Aster)",
+     "ATK +5 / Dégâts physiques vs Coquillage +30 %",
+     "Disponible"
+    ],
+    [
+     "Baphomet (Baphomet)",
+     "Attaques normales (hors compétences) deviennent une attaque de zone (9 cases) / HIT -10",
+     "Disponible"
+    ],
+    [
+     "Bébé Savage (Savage Babe)",
+     "Sur attaque physique, 5 % de chance d'infliger [Étourdissement (Stun) ]",
+     "Disponible"
+    ],
+    [
+     "Capitaine Boulder Dwarf (Boulder Dwarf Captain)",
+     "Dégâts physiques vs Boulder Dwarf +30 %",
+     "Disponible"
+    ],
+    [
+     "Caramel (Caramel)",
+     "Dégâts physiques vs Insecte +20 %",
+     "Disponible"
+    ],
+    [
+     "Chef d'escouade Boulder Dwarf (Boulder Dwarf Squad Leader)",
+     "Dégâts magiques vs Boulder Dwarf +30 %",
+     "Disponible"
+    ],
+    [
+     "Chef goblin (Goblin Leader)",
+     "Dégâts physiques vs Goblin +30 %",
+     "Disponible"
+    ],
+    [
+     "Chenille (Caterpillar)",
+     "Récupère 5 SP en tuant une Plante au corps-à-corps (perd 5 SP si retirée)",
+     "Disponible"
+    ],
+    [
+     "Chepet (Chepet)",
+     "Attaques physiques : chance de lancer Heal Niv. 5 sur l'ennemi",
+     "Disponible"
+    ],
+    [
+     "Chevalier sanglant (Bloody Knight)",
+     "Chance de lancer Meteor Storm Niv. 1 en attaquant / 10 % de chance d'étourdir au corps-à-corps subi / Meteor Storm inflige Aveuglement, Confusion ou Silence selon le raffinage",
+     "Disponible"
+    ],
+    [
+     "Coquillage (Shell Fish)",
+     "ATK +5 / Dégâts physiques vs Coquillage +30 %",
+     "Disponible"
+    ],
+    [
+     "Crabe (Crab)",
+     "ATK +5 / Dégâts physiques vs Coquillage +30 % (avec Aster et Coquillage : chance de faire tomber du Sashimi + Dégâts vs Eau +30 %)",
+     "Disponible"
+    ],
+    [
+     "Cruiser (Cruiser)",
+     "Dégâts critiques +10 % / CRIT +7 vs Brute",
+     "Disponible"
+    ],
+    [
+     "Dame orc (Orc Lady)",
+     "Dégâts physiques vs Orc +30 %",
+     "Disponible"
+    ],
+    [
+     "Deviace (Deviace)",
+     "Dégâts physiques vs Semi-humain, Brute, Plante et Insecte +7 %",
+     "Disponible"
+    ],
+    [
+     "Dracula (Dracula)",
+     "Attaques physiques/magiques : 10 % de chance de récupérer 20 SP par seconde pendant 7 sec",
+     "Disponible"
+    ],
+    [
+     "Dragonoïde mutant (Mutant Dragonoid)",
+     "ATK +15 / chance de lancer Fire Ball Niv. 3 (ou niveau appris) en attaquant",
+     "Disponible"
+    ],
+    [
+     "Drainliar (Drainliar)",
+     "Dégâts physiques vs Eau +20 %",
+     "Disponible"
+    ],
+    [
+     "Drake (Drake)",
+     "Retire les malus de taille de l'arme",
+     "Disponible"
+    ],
+    [
+     "Driller (Driller)",
+     "Récupère 5 SP en tuant un Dragon au corps-à-corps (perd 5 SP si retirée)",
+     "Disponible"
+    ],
+    [
+     "Drops (Drops)",
+     "DEX +1 / HIT +3",
+     "Disponible"
+    ],
+    [
+     "Elder (Elder)",
+     "Dégâts physiques vs Gardiens de siège +40 %",
+     "Disponible"
+    ],
+    [
+     "Fabre (Fabre)",
+     "VIT +1 / PV max +100",
+     "Disponible"
+    ],
+    [
+     "Familier (Familiar)",
+     "Sur attaque physique, 5 % de chance d'infliger [Aveuglement (Blind) ] / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Flora (Flora)",
+     "Dégâts physiques vs Poisson +20 %",
+     "Disponible"
+    ],
+    [
+     "Frelon (Hornet)",
+     "STR +1 / ATK +3",
+     "Disponible"
+    ],
+    [
+     "Goblin (Goblin)",
+     "Dégâts physiques vs Brute +20 %",
+     "Disponible"
+    ],
+    [
+     "Goblin archer (Goblin Archer)",
+     "Dégâts critiques +10 % / CRIT +7 vs Mort-vivant",
+     "Disponible"
+    ],
+    [
+     "Goblin Steamrider (Goblin Steamrider)",
+     "Dégâts critiques +10 % / CRIT +7 vs Informe",
+     "Disponible"
+    ],
+    [
+     "Golem (Golem)",
+     "L'arme ne peut pas être détruite / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Hydra (Hydra)",
+     "Dégâts physiques vs Semi-humain +20 %",
+     "Disponible"
+    ],
+    [
+     "Loup (Wolf)",
+     "ATK +15 / CRIT +1",
+     "Disponible"
+    ],
+    [
+     "Lunatic (Lunatic)",
+     "LUK +1 / CRIT +1 / P.Dodge +1",
+     "Disponible"
+    ],
+    [
+     "Magnolia (Magnolia)",
+     "Sur attaque physique, 5 % de chance d'infliger [Malédiction (Curse) ] / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Mandragora (Mandragora)",
+     "Dégâts physiques vs Vent +20 %",
+     "Disponible"
+    ],
+    [
+     "Marina (Marina)",
+     "Sur attaque physique, 5 % de chance d'infliger [Gelé (Frozen) ] / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Maître zombie (Zombie Master)",
+     "Récupère 5 SP en tuant un Mort-vivant au corps-à-corps (perd 5 SP si retirée)",
+     "Disponible"
+    ],
+    [
+     "Metaller (Metaller)",
+     "Sur attaque physique, 5 % de chance d'infliger [Silence (Silence) ] / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Minorous (Minorous) ⭐",
+     "ATK +5 / Dégâts physiques vs Grande taille +15 %",
+     "Disponible"
+    ],
+    [
+     "Mobster (Mobster)",
+     "Dégâts critiques +15 % (Thief : CRIT +4)",
+     "Disponible"
+    ],
+    [
+     "Mouche chasseuse (Hunter Fly)",
+     "5 % de chance de récupérer 100 PV par seconde pendant 5 sec en attaquant",
+     "Disponible"
+    ],
+    [
+     "Nereid (Nereid)",
+     "Récupère 5 SP en tuant une Brute au corps-à-corps (perd 5 SP si retirée)",
+     "Disponible"
+    ],
+    [
+     "Panzer Goblin (Panzer Goblin)",
+     "Dégâts critiques +10 % / CRIT +7 vs Brute",
+     "Disponible"
+    ],
+    [
+     "Petite de Terre (Earth Petite)",
+     "Dégâts physiques vs Dragon +20 %",
+     "Disponible"
+    ],
+    [
+     "Phoque (Fur Seal)",
+     "HIT +10 / FLEE +3 (Acolyte : CRIT +9 vs Démon et Mort-vivant)",
+     "Disponible"
+    ],
+    [
+     "Plankton (Plankton)",
+     "Sur attaque physique, 5 % de chance d'infliger [Sommeil (Sleep) ] / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Requiem (Requiem)",
+     "5 % de chance d'infliger [Confusion (Confusion) ] en attaquant",
+     "Disponible"
+    ],
+    [
+     "Roi scarabée (Beetle King)",
+     "Récupère 5 SP en tuant un Poisson au corps-à-corps (perd 5 SP si retirée)",
+     "Disponible"
+    ],
+    [
+     "Rotar Zairo (Rotar Zairo)",
+     "Dégâts critiques +10 % / CRIT +7 vs Poisson",
+     "Disponible"
+    ],
+    [
+     "Scarabée voleur femelle (Female Thief Bug)",
+     "AGI +1 / FLEE +1",
+     "Disponible"
+    ],
+    [
+     "Scorpion (Scorpion)",
+     "Dégâts physiques vs Plante +20 %",
+     "Disponible"
+    ],
+    [
+     "Serpent (Snake)",
+     "Sur attaque physique, 5 % de chance d'infliger [Poison (Poison) ] / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Sidewinder (Sidewinder)",
+     "Double Attack Niv. 1 (ou niveau déjà appris)",
+     "Disponible"
+    ],
+    [
+     "Squelette (Skeleton)",
+     "ATK +10 / sur attaque physique, 2 % de chance d'infliger [Étourdissement (Stun) ]",
+     "Disponible"
+    ],
+    [
+     "Squelette archer (Archer Skeleton)",
+     "Dégâts physiques à distance +10 %",
+     "Disponible"
+    ],
+    [
+     "Squelette orc (Orc Skeleton) ⭐",
+     "Dégâts physiques vs Sacré +20 %",
+     "Disponible"
+    ],
+    [
+     "Squelette ouvrier (Skeleton Worker) ⭐",
+     "ATK +5 / Dégâts physiques vs Taille moyenne +15 %",
+     "Disponible"
+    ],
+    [
+     "Squelette soldat (Soldier Skeleton)",
+     "CRIT +9",
+     "Disponible"
+    ],
+    [
+     "Strouf (Strouf)",
+     "Dégâts physiques vs Démon +20 %",
+     "Disponible"
+    ],
+    [
+     "Tireur de pierre (Stone Shooter)",
+     "HIT +10 / ATK +10",
+     "Disponible"
+    ],
+    [
+     "Tri-Joint (Tri-Joint)",
+     "Récupère 5 SP en tuant un Informe au corps-à-corps (perd 5 SP si retirée)",
+     "Disponible"
+    ],
+    [
+     "Vadon (Vadon)",
+     "Dégâts physiques vs Feu +20 %",
+     "Disponible"
+    ],
+    [
+     "Zenorc (Zenorc) ⭐",
+     "4 % de chance d'infliger [Poison (Poison) ] en attaquant / ATK +10",
+     "Disponible"
+    ],
+    [
+     "Œuf de Peco Peco (Peco Peco Egg)",
+     "Dégâts physiques vs Informe +20 %",
+     "Disponible"
+    ],
+    [
+     "Général orc (Orc General)",
+     "Arme contondante : CRIT +1 par raffinage (+10 : dégâts critiques +10 %) / Poing américain : délai après attaque -1 % par raffinage (+10 : ASPD +2) / avec Grand Orc : ASPD +2 et ATK +25",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Momie (Mummy)",
+     "HIT +20",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Hatii Bébé (Hatii Bebe)",
+     "Chance de lancer Frost Driver Niv. 3 en attaquant",
+     "Indisponible (DEC 2026)"
+    ],
+    [
+     "Chevalier abyssal (Abysmal Knight)",
+     "Dégâts physiques vs Boss +25 %",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Injustice (Injustice)",
+     "Chance de lancer Sonic Blow Niv. 1 en attaquant (avec Zealotus : ATK +20 et LUK +3)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Phendark (Phendark)",
+     "Récupère 5 SP en tuant un Semi-humain au corps-à-corps (perd 5 SP si retirée)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Prêtre des ténèbres (Dark Priest)",
+     "Chance de réduire le SP ennemi au contact / Sage : récupère 1 SP par attaque physique touchée",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Diabolic (Diabolic)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Gig (Gig)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Golem de lave (Lava Golem)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Kaho (Kaho)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Angeling (Angeling) ⭐",
+     "Change l'élément de l'armure en [Sacré (Holy) ]",
+     "Disponible"
+    ],
+    [
+     "Argiope (Argiope)",
+     "Change l'élément de l'armure en [Poison (Poison) ] / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Bathory (Bathory)",
+     "Change l'élément de l'armure en [Ombre (Shadow) ]",
+     "Disponible"
+    ],
+    [
+     "Bébé loup du désert (Baby Desert Wolf)",
+     "INT +1",
+     "Disponible"
+    ],
+    [
+     "Chonchon d'acier (Steel Chonchon)",
+     "DEF +2 / Résistance Vent +10 %",
+     "Disponible"
+    ],
+    [
+     "Cornutus (Cornutus)",
+     "L'armure ne peut pas être détruite / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Creamy effrayant (Creamy Fear)",
+     "Dégâts physiques subis : chance d'infliger [Confusion (Confusion) ]",
+     "Disponible"
+    ],
+    [
+     "Dokebi (Dokebi)",
+     "Change l'élément de l'armure en [Vent (Wind) ] / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Espadon (Swordfish)",
+     "Change l'élément de l'armure en [Eau (Water) ] / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Esprit mort (Wraith Dead)",
+     "Chance d'infliger [Malédiction (Curse) ] à l'attaquant en cas de dégâts physiques subis",
+     "Disponible"
+    ],
+    [
+     "Ghostring (Ghostring) ⭐",
+     "Change l'élément de l'armure en [Fantôme (Ghost) ] (n'affecte pas les attaques normales des monstres) / Récupération de PV -25 %",
+     "Disponible"
+    ],
+    [
+     "Golem de bois (Wooden Golem)",
+     "Récupération de PV +30 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Grenouille Roda (Roda Frog)",
+     "PV max +400 / SP max +50",
+     "Disponible"
+    ],
+    [
+     "Horloge (Clock)",
+     "Dégâts physiques subis : chance de lancer Auto Guard Niv. 3 (Niv. 10 si appris)",
+     "Disponible"
+    ],
+    [
+     "Marc (Marc)",
+     "Empêche totalement [Gelé (Frozen) ] / Résistance Eau +5 %",
+     "Disponible"
+    ],
+    [
+     "Pasana (Pasana)",
+     "Change l'élément de l'armure en [Feu (Fire) ] / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Peco Peco (Peco Peco)",
+     "PV max +10 %",
+     "Disponible"
+    ],
+    [
+     "Pest (Pest)",
+     "Dégâts physiques subis : chance d'infliger [Pétrification (Stone) ] (chance accrue si INT ≥ 77)",
+     "Disponible"
+    ],
+    [
+     "Picky (Picky)",
+     "STR +1 / ATK +10",
+     "Disponible"
+    ],
+    [
+     "Poring (Poring)",
+     "LUK +2 / P.Dodge +1",
+     "Disponible"
+    ],
+    [
+     "Pupa (Pupa)",
+     "PV max +700",
+     "Disponible"
+    ],
+    [
+     "Rocker (Rocker)",
+     "DEX +1 / ATK +5",
+     "Disponible"
+    ],
+    [
+     "Sandman (Sandman)",
+     "Change l'élément de l'armure en [Terre (Earth) ] / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Sasquatch (Sasquatch)",
+     "Dégâts physiques subis : chance d'infliger [Gelé (Frozen) ]",
+     "Disponible"
+    ],
+    [
+     "Savage (Savage)",
+     "VIT +3",
+     "Disponible"
+    ],
+    [
+     "Scarabée voleur (Thief Bug)",
+     "AGI +1",
+     "Disponible"
+    ],
+    [
+     "Seigneur orc (Orc Lord)",
+     "Renvoie 30 % des dégâts physiques au corps-à-corps",
+     "Disponible"
+    ],
+    [
+     "Tao Gunka (Tao Gunka)",
+     "PV max +50 % / DEF et MDEF fixées à la moitié",
+     "Disponible"
+    ],
+    [
+     "Œuf de Picky (Picky Egg)",
+     "VIT +1 / PV max +100",
+     "Disponible"
+    ],
+    [
+     "Brilight (Brilight)",
+     "Chance d'infliger [Silence (Silence) ] en cas de dégâts physiques subis",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Jeniffer (Jeniffer)",
+     "Dégâts physiques à distance subis -5 % (-1 % supplémentaire par raffinage) / avec Penomena : ASPD +1 tous les 2 raffinages de bouclier",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Anolian (Anolian)",
+     "Chance de lancer Improve Concentration Niv. 1 en cas de dégâts physiques subis (Niv. 10 si appris)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Cadre sombre (Dark Frame)",
+     "Dégâts physiques subis : chance d'infliger [Pétrification (Stone) ] à l'attaquant",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Chimère (Chimera)",
+     "Dégâts physiques subis : chance d'infliger [Poison (Poison) ] (chance accrue pour Assassin)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Druide maléfique (Evil Druid)",
+     "Change l'élément de l'armure en [Mort-vivant (Undead) ] / INT +1 / DEF +1",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Majoruros (Majoruros)",
+     "Dégâts physiques subis : chance d'infliger [Étourdissement (Stun) ]",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Prisonnier squelette (Skel Prisoner)",
+     "Dégâts physiques subis : chance d'infliger [Sommeil (Sleep) ] (fortement accrue avec Squelette)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Rybio (Rybio)",
+     "Dégâts physiques subis : chance d'infliger [Étourdissement (Stun) ] (fortement accrue si DEX ≥ 77)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Faucheur des cieux (Sky Deleter)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Faucheur des sols (Ground Deleter)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Grizzly (Grizzly)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Terreur cauchemardesque (Nightmare Terror)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Apocalypse (Apocalypse)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Archdam (Archdam)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Chèvre (Goat)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Dimik (Dimik)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Geographer (Geographer)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Venatu (Venatu)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Ambernite (Ambernite)",
+     "DEF +2",
+     "Disponible"
+    ],
+    [
+     "Anubis (Anubis) ⭐",
+     "Dégâts subis vs Ange -30 %",
+     "Disponible"
+    ],
+    [
+     "Argos (Argos)",
+     "Résistance Pétrification +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Bigfoot (Bigfoot)",
+     "Dégâts subis vs Insecte -30 %",
+     "Disponible"
+    ],
+    [
+     "Grenouille Thara (Thara Frog)",
+     "Dégâts subis vs Semi-humain -30 %",
+     "Disponible"
+    ],
+    [
+     "Guerrier orc (Orc Warrior)",
+     "Dégâts subis vs Brute -30 %",
+     "Disponible"
+    ],
+    [
+     "Horn (Horn)",
+     "Dégâts physiques à distance subis -35 %",
+     "Disponible"
+    ],
+    [
+     "Maya (Maya)",
+     "Résistance Fantôme/Vent +20 % / Résistance Feu/Ombre -15 % / Dégâts subis vs Humain-Brute -30 %",
+     "Disponible"
+    ],
+    [
+     "Megalodon (Megalodon)",
+     "Résistance Gelé +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Munak (Munak)",
+     "Résistance Pétrification +15 % / Résistance Terre +5 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Méduse (Medusa)",
+     "Empêche totalement [Pétrification (Stone) ] / Dégâts subis vs Démon -15 %",
+     "Disponible"
+    ],
+    [
+     "Parasite (Parasite)",
+     "DEF +1 / Résistance Neutre +5 %",
+     "Disponible"
+    ],
+    [
+     "Petite du Ciel (Sky Petite)",
+     "Dégâts subis vs Dragon -30 %",
+     "Disponible"
+    ],
+    [
+     "Scarabée voleur doré (Golden Thief Bug)",
+     "MDEF +250 / DEF physique -90 %",
+     "Disponible"
+    ],
+    [
+     "Œuf d'Andre (Andre Egg)",
+     "PV max +5 %",
+     "Disponible"
+    ],
+    [
+     "Œuf de scarabée voleur (Thief Bug Egg)",
+     "PV max +400",
+     "Disponible"
+    ],
+    [
+     "Arclouse (Arclouse)",
+     "DEF +2 et MDEF +3 si raffinage ≤ 5",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Erzsebet (Erzsebet)",
+     "MATK +4 par raffinage de bouclier (avec Bathory : INT +1 par raffinage d'armure)",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Grand Orc (High Orc)",
+     "Renvoie 5 % des dégâts physiques au corps-à-corps / DEF +1",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Momie ancienne (Ancient Mummy)",
+     "Chance de lancer Signum Crucis Niv. 5 en cas de dégâts physiques subis (avec Momie : Perfect Hit +20 %)",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Penomena (Penomena)",
+     "Dégâts subis vs Informe -30 %",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Super Joker (Extra Joker)",
+     "MDEF +10 par raffinage / avec Joker : chance de se transformer en Joker 7 sec (ATK/MATK +70, perd 77 PV et 7 SP par seconde)",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Alice (Alice)",
+     "Dégâts subis vs Boss -40 % / Dégâts subis vs monstre normal +40 %",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Khalitzburg (Khalitzburg)",
+     "Dégâts subis vs Démon -30 %",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Sting (Sting)",
+     "DEF +2 (raffinage ≥ 9 : MDEF +5)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Zealotus (Zealotus)",
+     "LUK +2 / Dégâts de Slinging Arrow et Melody Strike +10 %",
+     "Indisponible (JAN 2027)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Baphomet Jr. (Baphomet Jr.) ⭐",
+     "AGI +3 / CRIT +1",
+     "Disponible"
+    ],
+    [
+     "Bébé Orc (Orc Baby)",
+     "Résistance Neutre +10 % / FLEE +10 (raffiné +9 : Résistance Neutre +15 % / FLEE +15)",
+     "Disponible"
+    ],
+    [
+     "Choco (Choco)",
+     "P.Dodge +5 / FLEE +10",
+     "Disponible"
+    ],
+    [
+     "Condor (Condor)",
+     "FLEE +10",
+     "Disponible"
+    ],
+    [
+     "Crapaud (Toad)",
+     "P.Dodge +1 (avec Rogue : FLEE +18)",
+     "Disponible"
+    ],
+    [
+     "Dustiness (Dustiness)",
+     "Résistance Vent +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Frilldora (Frilldora)",
+     "Cloaking Niv. 1",
+     "Disponible"
+    ],
+    [
+     "Hode (Hode)",
+     "Résistance Terre +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Jakk (Jakk)",
+     "Résistance Feu +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Libellule dragon (Dragon Fly)",
+     "AGI +1 (avec Chonchon : FLEE +18)",
+     "Disponible"
+    ],
+    [
+     "Loup vagabond (Vagabond Wolf)",
+     "STR +1 (avec Loup : FLEE +18)",
+     "Disponible"
+    ],
+    [
+     "Marionnette (Marionette) ⭐",
+     "Résistance Fantôme +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Marse (Marse)",
+     "Résistance Eau +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Maîtrise (Mastering)",
+     "LUK +1 (avec Poring : FLEE +18)",
+     "Disponible"
+    ],
+    [
+     "Murmure (Whisper)",
+     "FLEE +20 / Dégâts Fantôme subis +50 %",
+     "Disponible"
+    ],
+    [
+     "Myst (Myst) ⭐",
+     "Résistance Poison +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Punk (Punk)",
+     "Dégâts physiques subis : lance Quagmire Niv. 1 (Niv. 5 si appris)",
+     "Disponible"
+    ],
+    [
+     "Queue de dragon (Dragon Tail)",
+     "AGI +1 / FLEE +10 / Dégâts de Double Strafe et Arrow Shower +5 %",
+     "Disponible"
+    ],
+    [
+     "Renard à neuf queues (Nine Tail)",
+     "AGI +2 (raffiné +9 : FLEE +20)",
+     "Disponible"
+    ],
+    [
+     "Vocal (Vocal)",
+     "MDEF +3 (avec Rocker : FLEE +18)",
+     "Disponible"
+    ],
+    [
+     "Zombie orc (Orc Zombie) ⭐",
+     "Résistance Mort-vivant +30 % / FLEE +5",
+     "Disponible"
+    ],
+    [
+     "Éclipse (Eclipse)",
+     "VIT +1 (avec Lunatic : FLEE +18)",
+     "Disponible"
+    ],
+    [
+     "Isis (Isis)",
+     "Résistance Ombre +30 % / FLEE +5",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Raydric (Raydric) ⭐",
+     "Résistance Neutre +20 %",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Wander Man (Wander Man)",
+     "Chance de lancer Snatch Niv. 1 en attaquant (Thief : FLEE +20)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Harpie (Harpy)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Alarme (Alarm)",
+     "Chance de lancer Sight Niv. 1 en cas d'attaque physique subie / PV max +300 / VIT +1",
+     "Disponible"
+    ],
+    [
+     "Amon Ra (Amon Ra)",
+     "Toutes les statistiques de base +1 / chance de lancer Kyrie Eleison Niv. 10 en cas de dégâts physiques subis (chance accrue si INT ≥ 99)",
+     "Disponible"
+    ],
+    [
+     "Biscuit de Noël (Christmas Cookie)",
+     "EXP vs Ange +10 % / Dégâts physiques subis vs Ange +20 %",
+     "Disponible"
+    ],
+    [
+     "Chonchon (Chonchon)",
+     "AGI +1 / FLEE +2",
+     "Disponible"
+    ],
+    [
+     "Eddga (Eddga)",
+     "Effet [Endure] permanent / PV max -25 %",
+     "Disponible"
+    ],
+    [
+     "Eggyra (Eggyra)",
+     "Récupération de SP +15 %",
+     "Disponible"
+    ],
+    [
+     "Gullinbursti (Gullinbursti)",
+     "EXP vs Poisson +10 % / Dégâts physiques subis vs Poisson +20 %",
+     "Disponible"
+    ],
+    [
+     "Homme-poisson (Merman)",
+     "Récupération PV +10 % / Récupération SP +10 % (avec Cruiser, Anolian, Alligator, Queue de dragon : dégâts à distance +20 %, AGI +5, DEX +3, Perfect Hit +20 % ; Archer : EXP vs Brute +5 % et chance de KO vs Brute)",
+     "Disponible"
+    ],
+    [
+     "Matyr (Matyr)",
+     "PV max +10 % / AGI +1",
+     "Disponible"
+    ],
+    [
+     "Megalith (Megalith)",
+     "MDEF +7 si raffinage ≤ 5",
+     "Disponible"
+    ],
+    [
+     "Raggler (Raggler)",
+     "STR +1 / VIT +1",
+     "Disponible"
+    ],
+    [
+     "Rose sauvage (Wild Rose)",
+     "AGI +1 (Thief : P.Dodge +5)",
+     "Disponible"
+    ],
+    [
+     "Scarabée voleur mâle (Male Thief Bug)",
+     "AGI +2",
+     "Disponible"
+    ],
+    [
+     "Seigneur des ténèbres (Dark Lord)",
+     "Chance de lancer Meteor Storm Niv. 5 en cas de dégâts physiques subis (avec Dark Illusion : PV/SP max +20 %)",
+     "Disponible"
+    ],
+    [
+     "Sohee (Sohee)",
+     "SP max +15 % / Récupération de SP +3 %",
+     "Disponible"
+    ],
+    [
+     "Ver ancien (Ancient Worm)",
+     "EXP vs Démon +10 % / Dégâts physiques subis vs Démon +20 %",
+     "Disponible"
+    ],
+    [
+     "Zombie (Zombie)",
+     "Récupération de PV +20 %",
+     "Disponible"
+    ],
+    [
+     "Sieglouse (Sieglouse)",
+     "ASPD +2 (avec Arclouse : FLEE +2 par raffinage de bouclier)",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Verit (Verit)",
+     "PV max +8 % / SP max +8 %",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Prisonnier zombie (Zombie Prisoner)",
+     "EXP vs Mort-vivant +10 % / Dégâts physiques subis vs Mort-vivant +20 %",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Explosion (Explosion)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Alligator (Alligator)",
+     "Dégâts physiques à distance subis -5 %",
+     "Disponible"
+    ],
+    [
+     "Bongun (Bongun)",
+     "Chance de lancer Bash Niv. 1 en attaquant (recul de 5 cases) / Dégâts subis vs Munak +100 %",
+     "Disponible"
+    ],
+    [
+     "Cookie (Cookie)",
+     "LUK +2 / Dégâts de Holy Light +10 %",
+     "Disponible"
+    ],
+    [
+     "Creamy (Creamy)",
+     "Teleport Niv. 1",
+     "Disponible"
+    ],
+    [
+     "Doppelganger (Doppelganger)",
+     "ASPD accrue (délai après attaque -15 %)",
+     "Disponible"
+    ],
+    [
+     "Fleur de lune (Moonlight Flower)",
+     "Augmentation de vitesse de déplacement illimitée",
+     "Disponible"
+    ],
+    [
+     "Galapago (Galapago)",
+     "Chance de faire tomber Pomme, Banane ou Jus de carotte sur les Insectes / Soin des jus +50 %",
+     "Disponible"
+    ],
+    [
+     "Grove (Grove)",
+     "Chance de faire tomber un Mélange de fruits sur les Informes",
+     "Disponible"
+    ],
+    [
+     "Général suprême (Greatest General)",
+     "Chance de récupérer des Sphères d'esprit en attaquant (accrue pour Acolyte)",
+     "Disponible"
+    ],
+    [
+     "Horong (Horong)",
+     "Sight Niv. 1",
+     "Disponible"
+    ],
+    [
+     "Kukre (Kukre)",
+     "AGI +2",
+     "Disponible"
+    ],
+    [
+     "Loutre de mer (Sea-Otter)",
+     "Chance de faire tomber Sushi/Sashimi sur les Poissons / Soin des sushis-sashimis +50 %",
+     "Disponible"
+    ],
+    [
+     "Mante (Mantis)",
+     "STR +3",
+     "Disponible"
+    ],
+    [
+     "Marin (Marin)",
+     "Chance d'obtenir de la Gelée ou de la Grande Gelée en tuant un monstre",
+     "Disponible"
+    ],
+    [
+     "Muka (Muka)",
+     "Récupération de PV +10 %",
+     "Disponible"
+    ],
+    [
+     "Obeaune (Obeaune)",
+     "Cure Niv. 1",
+     "Disponible"
+    ],
+    [
+     "Osiris (Osiris)",
+     "Restaure tous les PV/SP à la résurrection / Soins reçus +20 %",
+     "Disponible"
+    ],
+    [
+     "Phen (Phen)",
+     "Incantation ininterrompue / VCT +25 %",
+     "Disponible"
+    ],
+    [
+     "Phreeoni (Phreeoni)",
+     "HIT +100",
+     "Disponible"
+    ],
+    [
+     "Poporing (Poporing)",
+     "Detoxify Niv. 1",
+     "Disponible"
+    ],
+    [
+     "Queue de ver (Wormtail)",
+     "DEX +2",
+     "Disponible"
+    ],
+    [
+     "Simulacre (Mimic) ⭐",
+     "Chance de faire tomber une Vieille Boîte Bleue sur les monstres",
+     "Disponible"
+    ],
+    [
+     "Smokie (Smokie)",
+     "Hiding Niv. 1",
+     "Disponible"
+    ],
+    [
+     "Sphère marine (Marine Sphere)",
+     "Magnum Break Niv. 3",
+     "Disponible"
+    ],
+    [
+     "Spore (Spore)",
+     "VIT +2",
+     "Disponible"
+    ],
+    [
+     "Spore toxique (Poison Spore)",
+     "Envenom Niv. 3",
+     "Disponible"
+    ],
+    [
+     "Squelette pirate (Pirate Skeleton)",
+     "Discount Niv. 5",
+     "Disponible"
+    ],
+    [
+     "Tarou (Tarou)",
+     "STR +2",
+     "Disponible"
+    ],
+    [
+     "Vitata (Vitata)",
+     "Heal Niv. 1 / coût SP +25 %",
+     "Disponible"
+    ],
+    [
+     "Yoyo (Yoyo)",
+     "P.Dodge +5 / AGI +1",
+     "Disponible"
+    ],
+    [
+     "Zerom (Zerom)",
+     "DEX +3",
+     "Disponible"
+    ],
+    [
+     "Duc hibou (Owl Duke)",
+     "Chance de lancer Impositio Manus Niv. 3 sur soi en attaquant (avec Baron hibou : chance de lancer Lightning Bolt Niv. 5)",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Joker (Joker)",
+     "Steal Niv. 1",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Orc archer (Orc Archer)",
+     "Chance d'obtenir une Boîte pantelante sur les Semi-humains",
+     "Indisponible (OCT 2026)"
+    ],
+    [
+     "Baron hibou (Owl Baron)",
+     "Chance de lancer Lex Aeterna Niv. 1 sur la cible en attaquant",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Fantôme du vent (Wind Ghost)",
+     "Attaques physiques : chance de lancer Jupitel Thunder Niv. 3 (ou niveau appris)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Gargouille (Gargoyle)",
+     "Chance d'obtenir une Boîte Tonnerre sur les Insectes",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Raydric archer (Raydric Archer)",
+     "Chance d'obtenir une Boîte vengeresse sur les Démons",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Spectre (Wraith)",
+     "Chance d'obtenir une Boîte hilarante sur les Mort-vivants",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Ver sage (Sage Worm)",
+     "Chance d'obtenir des gemmes sur les monstres",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Blazer (Blazer)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (JUN 2027)"
+    ],
+    [
+     "Dormeur (Sleeper)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Carte",
+     "Effet",
+     "Disponibilité"
+    ],
+    [
+     "Caisse mystérieuse (Myst Case)",
+     "Chance d'obtenir une Boîte cadeau sur les monstres",
+     "Disponible"
+    ],
+    [
+     "Cauchemar (Nightmare)",
+     "Empêche totalement [Sommeil (Sleep) ] / AGI +1",
+     "Disponible"
+    ],
+    [
+     "Coco (Coco)",
+     "Résistance Sommeil +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Combattant Wootan (Wootan Fighter)",
+     "Résistance Saignement +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Crampe (Cramp)",
+     "Chance de faire tomber du Zeny sur les monstres (avec Tarou : STR +3)",
+     "Disponible"
+    ],
+    [
+     "Deviruchi (Deviruchi) ⭐",
+     "Empêche totalement [Aveuglement (Blind) ] / STR +1",
+     "Disponible"
+    ],
+    [
+     "Dryade (Dryad)",
+     "Chance d'obtenir une Feuille verte sur les Plantes / Résistance Terre +10 %",
+     "Disponible"
+    ],
+    [
+     "Frelon géant (Giant Hornet)",
+     "Chance d'obtenir un Souffle de verdure sur les Insectes / Résistance Vent +10 %",
+     "Disponible"
+    ],
+    [
+     "Gardien de tour (Tower Keeper)",
+     "INT +1 / VCT -5 % (avec Alarme, Horloge et Punk : MDEF +3 et DEF +3)",
+     "Disponible"
+    ],
+    [
+     "Giearth (Giearth)",
+     "Empêche totalement [Confusion (Confusion) ] / Résistance Terre +15 %",
+     "Disponible"
+    ],
+    [
+     "Golem stalactique (Stalactic Golem)",
+     "Résistance Étourdissement +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Goule (Ghoul)",
+     "Résistance Poison +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Héros orc (Orc Hero)",
+     "Empêche totalement [Étourdissement (Stun) ] / VIT +3",
+     "Disponible"
+    ],
+    [
+     "Leib Olmai (Leib Olmai)",
+     "Chance d'obtenir du Sang rouge sur les Brutes / Résistance Feu +10 %",
+     "Disponible"
+    ],
+    [
+     "Marduk (Marduk)",
+     "Empêche totalement [Silence (Silence) ]",
+     "Disponible"
+    ],
+    [
+     "Martin (Martin)",
+     "Résistance Aveuglement +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Novice Poring (Novice Poring)",
+     "LUK +1 (avec le chapeau de l'Académie Criatura : ATK +5 et MATK +5)",
+     "Disponible"
+    ],
+    [
+     "Pharaon (Pharaoh)",
+     "Coût en SP des compétences -30 %",
+     "Disponible"
+    ],
+    [
+     "Rideword (Rideword)",
+     "INT +1 (Acolyte : INT +1 et MDEF +1)",
+     "Disponible"
+    ],
+    [
+     "Saule (Willow)",
+     "SP max +80",
+     "Disponible"
+    ],
+    [
+     "Saule ancien (Elder Willow)",
+     "INT +2",
+     "Disponible"
+    ],
+    [
+     "Stainer (Stainer)",
+     "Résistance Silence +20 % / DEF +1",
+     "Disponible"
+    ],
+    [
+     "Tireur Wootan (Wootan Shooter)",
+     "DEF +1 / Résistance Confusion +20 %",
+     "Disponible"
+    ],
+    [
+     "Carat (Carat)",
+     "INT +2 (raffinage ≥ 9 : SP max +150)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Illusion sombre (Dark Illusion)",
+     "PV max -10 % / SP max -10 % / VCT -10 % (avec Griffe : -20 %)",
+     "Indisponible (JAN 2027)"
+    ],
+    [
+     "Grand Peco (Grand Peco)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Maîtresse (Mistress)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ],
+    [
+     "Vesper (Vesper)",
+     "Effet non communiqué pour l'instant",
+     "Indisponible (date inconnue)"
+    ]
+   ]
+  }
+ ],
+ "changement-de-classe-2.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Église de Prontera /navi prt_church 16/41"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Monastère /navi monk_in 99/58"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Forêt de Payon /navi in_hunter 99/99"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Comodo /navi comodo 193/161"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Comodo /navi job_duncer 95/93"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Tour de Geffen /navi gef_tower 111/37"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Académie d’Izlude /navi iz_ac01 139/82"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Geffen (intérieur) /navi geffen_in 110/170"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Al De Baran /navi alde_alche 101/184"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Prontera (intérieur) /navi prt_in 88/101"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Château de Prontera /navi prt_cas 251/75"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Désert de Morocc /navi in_moc_16 19/33"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Position",
+     "Phare de Faros /navi in_rogue 363/122"
+    ],
+    [
+     "Condition",
+     "Classe 1, niveau 50 de base et de job"
+    ],
+    [
+     "Récompense",
+     "Ticket d'évolution en classe 2"
+    ]
+   ]
+  }
+ ],
+ "codes-cadeaux.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Nom",
+     "Date de début de distribution",
+     "Date de fin de distribution",
+     "Statut"
+    ],
+    [
+     "THAIEVENT",
+     "18 août 2026",
+     "—",
+     "Actif"
+    ],
+    [
+     "RETURNTOZERO",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "ROZGERMANY",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "WELCOME",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "PORING777",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "DAILYGIFT",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "OPENZERO",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "GETREADY",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "STARTNOW",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "STARTINGANEW",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "ZEROSTART",
+     "18 août 2026",
+     "—",
+     "Actif"
+    ],
+    [
+     "ROZERO2026",
+     "18 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "GRANDLAUNCH",
+     "19 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "MIDGARD2026",
+     "19 août 2026",
+     "—",
+     "Actif"
+    ],
+    [
+     "ADVENTUREZERO",
+     "19 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "ROZGCREATOR",
+     "20 août 2026",
+     "—",
+     "Actif"
+    ],
+    [
+     "ROZGLAUNCH",
+     "20 août 2026",
+     "—",
+     "Actif"
+    ],
+    [
+     "ZEROTOINFINITY",
+     "28 août 2026",
+     "3 septembre 2026",
+     "Expiré"
+    ],
+    [
+     "ROZGTH",
+     "3 septembre 2026",
+     "—",
+     "Nouveau"
+    ],
+    [
+     "ROZGHYPE",
+     "3 septembre 2026",
+     "—",
+     "Nouveau"
+    ],
+    [
+     "ROZGISHERE",
+     "3 septembre 2026",
+     "—",
+     "Nouveau"
+    ],
+    [
+     "THAIROZG",
+     "3 septembre 2026",
+     "—",
+     "Nouveau"
+    ]
+   ]
+  }
+ ],
+ "cosmetiques.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Objet",
+     "Localisation",
+     "Matériaux requis"
+    ],
+    [
+     "Chapeau à plumes (Feather Bonnet)",
+     "/navi geffen 76/135",
+     "Oldster Romance ×1 Plumes d'oiseau ×300 (Feather of Birds)"
+    ],
+    [
+     "Sakkat",
+     "/navi morocc 127/59",
+     "Morceaux de bois ×120 (Trunk) 10 000 Zeny"
+    ],
+    [
+     "Chapeau de docteur (PhD) (Ph.D Hat)",
+     "/navi prontera 40/237",
+     "Hinalle ×10 Aloe ×10 Ment ×10"
+    ],
+    [
+     "Casque de mineur (Mine Hat)",
+     "/navi geffen 83/189",
+     "① Rapporter un casque de sécurité (Safety Helmet) et une lanterne (Candle) trouvés près des Skel Workers ② Matériaux : Acier ×25 (Steel) Miroir de cristal ×1 (Crystal Mirror) (en vente à Morroc)"
+    ],
+    [
+     "Chapeau tanuki (Raccoon Hat)",
+     "/navi alberta 92/110",
+     "① Se renseigner auprès du garde du port /navi alberta 222/112 ② Matériaux : Feuilles de tanuki ×50 (Raccoon Leaf) Bandeau de chat ×1 (Kitty Band)"
+    ],
+    [
+     "Toque de cuisinier (Chef Hat)",
+     "/navi xmas_in 178/177",
+     "Parts de gâteau ×20 (Piece of Cake) Teinture blanche ×1 (White Dyestuffs) Fourrure douce ×30 (Soft Fur)"
+    ],
+    [
+     "Chapeau gâteau (Cake Hat)",
+     "/navi xmas_in 178/177",
+     "Parts de gâteau ×20 (Piece of Cake) Sucettes ×5 (Candy Cane) Biscuits bien cuits ×15 (Well-baked Cookie) Acier ×10 (Steel) Bonbons ×10 (Candy)"
+    ],
+    [
+     "Chapeau pointu (fête) (Party Hat)",
+     "/navi aldebaran 180/132",
+     "Bonnet de Père Noël ×1 (Santa Hat) 20 000 Zeny"
+    ],
+    [
+     "Chapeau de paille (Straw Hat)",
+     "/navi comodo 110/260",
+     "Grain ×100 Liane robuste ×30 (Tough Vine)"
+    ],
+    [
+     "Sombrero",
+     "/navi comodo 110/260",
+     "Chapeau de paille ×1 (Straw Hat) Épines de cactus ×50 (Cactus Needle) Guitare ×1 (Guitar)"
+    ],
+    [
+     "Bonnet de fourrure (Beanie)",
+     "/navi geffen 207/163",
+     "Casquette ×1 (Cap) Duvet ×50 (Down) Plumes d'oiseau ×50 (Feather of Birds) Fourrure douce ×10 (Soft Fur)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Objet",
+     "Localisation",
+     "Matériaux requis"
+    ],
+    [
+     "Masque de renard (Kitsune Mask)",
+     "/navi pay_arche 63/109",
+     "Queues de renard ×999 (Nine Tails)"
+    ],
+    [
+     "Masque d'Opéra (Opera Masque)",
+     "/navi prontera 27/237",
+     "Acier ×20 (Steel) Herbe qui chante ×1 (Singing Plant) 5 000 Zeny"
+    ],
+    [
+     "Masque de soudure (Welding Mask)",
+     "/navi geffen_in 144/166",
+     "Acier ×25 (Steel) (à apporter deux fois) 2 000 Zeny à la seconde étape"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Objet",
+     "Localisation",
+     "Matériaux requis"
+    ],
+    [
+     "Bandeau médecin (Doctor Band)",
+     "/navi izlude 83/205",
+     "Bandana ×1 Fer ×50 (Iron) Diamant endommagé ×1 (Cracked Diamond)"
+    ],
+    [
+     "Bandeau ampoule (Bulb Band)",
+     "/navi izlude 85/204",
+     "Bandeau ×1 (Bandana) Bille de verre ×20 (Glass Bead)"
+    ],
+    [
+     "Bandeau croix (Cross Hat)",
+     "/navi izlude 87/205",
+     "Bandeau ×1 (Bandana) Rosaire ×1 (Rosary)"
+    ],
+    [
+     "Bandeau rayé (Striped Hairband)",
+     "/navi izlude 89/204",
+     "Bandeau ×1 (Bandana) Teinture bleue ×1 (Blue Dyestuffs)"
+    ],
+    [
+     "Bandeau bleu (Blue Hairband)",
+     "/navi izlude 85/207",
+     "Turban ×1 Teinture bleue ×1 (Blue Dyestuffs)"
+    ],
+    [
+     "Bandeau champignon (Decorative Mushroom)",
+     "/navi aldebaran 51/202",
+     "Spores de champignon ×50 (Mushroom Spore) (après avoir suivi le chien du PNJ)"
+    ],
+    [
+     "Bandeau passionné (Hot-blooded Headband)",
+     "/navi morocc 85/74",
+     "Carte Picky ×1 (Picky Card) Turban ×1 Teinture blanche ×1 (White Dyestuffs)"
+    ],
+    [
+     "Épingle cœur (Heart Hairpin)",
+     "/navi comodo 214/186",
+     "Frame Heart ×1 Bandeau ×1 (Bandana)"
+    ],
+    [
+     "Épingle tulipe (Tulip Hairpin)",
+     "/navi aldebaran 240/164",
+     "Smile ×1 Teinture rouge ×1 (Red Dyestuffs)"
+    ],
+    [
+     "Épingle fleur (Flower Hairpin)",
+     "/navi comodo 242/179",
+     "Pétale ×1 (Petal) Acier ×10 (Steel) 20 000 Zeny"
+    ],
+    [
+     "Brosse à cheveux (Hair Brush)",
+     "/navi comodo 236/164",
+     "Agent mélangeant ×1 (Mixture) Teinture rouge ×1 (Red Dyestuffs) Carapace très dure ×50 (Very Hard Shell) Hache ×1 (Axe)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Objet",
+     "Localisation",
+     "Matériaux requis"
+    ],
+    [
+     "Lunettes de soleil fashion (Fashionable Glasses)",
+     "/navi comodo 214/186",
+     "Lunettes de tête ×1 (Sunglasses) Teinture rouge ×1 (Red Dyestuffs)"
+    ],
+    [
+     "Cache-oreilles (Ear Muffs)",
+     "/navi geffen_in 82/59",
+     "Rubis maudit ×1 (Cursed Ruby) Fourrure douce ×200 (Soft Fur) Casque audio ×1 (Headset) 5 000 Zeny"
+    ],
+    [
+     "Casque audio (Headset)",
+     "/navi geffen_in 30/71",
+     "Acier ×30 (Steel) Alcool ×1 (Alcohol) Charbon ×1 (Coal)"
+    ],
+    [
+     "Panneau stop (Stop Post)",
+     "/navi alberta 26/25",
+     "Morceaux de bois ×50 (Trunk) Teinture noire ×1 (Black Dyestuffs)"
+    ],
+    [
+     "Télescope (Binoculars)",
+     "/navi payon 207/172",
+     "Spin Glass ×1 Acier ×100 (Steel) 50 000 Zeny"
+    ],
+    [
+     "Bois de cerf (Antlers)",
+     "/navi alberta_in 122/53",
+     "Cornes de démon ×3 (Evil Horn)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Objet",
+     "Localisation",
+     "Matériaux requis"
+    ],
+    [
+     "Poisson bleu (Blue Fish)",
+     "/navi comodo 300/230",
+     "Poisson pourri ×1 (Rotten Fish) Écailles pourries ×30 (Stinky Scale) Sashimi ×5 (Sushi) Queue de poisson ×1 (Fish Tail)"
+    ],
+    [
+     "Feuille de métamorphose (Smokie Leaf)",
+     "/navi gef_fild07 71/233",
+     "Feuilles de tanuki ×10 (Raccoon Leaf)"
+    ],
+    [
+     "Bougie (Candle)",
+     "/navi xmas 222/156",
+     "Mèche ×1 (Wick) Allumette ×1 (Matchstick)"
+    ],
+    [
+     "Coquille d'œuf multicolore (Rainbow Eggshell)",
+     "/navi morocc 217/225",
+     "Coquille décorative ×1 (Egg Shell) Teintures bleue/rouge/jaune ×1 chacune (Blue/Red/Yellow Dyestuffs)"
+    ],
+    [
+     "Pansement (Giant Band Aid)",
+     "/navi payon 185/181",
+     "① Prendre des nouvelles de Ram /navi payon 95/198 ② Matériaux : Bandage pourri ×50 (Rotten Bandage) Alcool ×1 (Alcohol)"
+    ]
+   ]
+  }
+ ],
+ "donjon-equipement-enchantement.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Action",
+     "Coût",
+     "Chance de destruction"
+    ],
+    [
+     "Enchanter",
+     "100 000 zeny",
+     "0 %"
+    ],
+    [
+     "Retirer l'enchantement",
+     "100 000 zeny",
+     "30 %"
+    ],
+    [
+     "Retirer l'enchantement",
+     "1 Zelstar",
+     "0 %"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Statistique",
+     "Valeur",
+     "Probabilité"
+    ],
+    [
+     "ESQ (Flee)",
+     "+3",
+     "6,03 %"
+    ],
+    [
+     "Critique (Critical)",
+     "+1",
+     "6,03 %"
+    ],
+    [
+     "DÉF (Def)",
+     "+15",
+     "5,17 %"
+    ],
+    [
+     "DÉF.M (Mdef)",
+     "+2",
+     "5,17 %"
+    ],
+    [
+     "Max HP",
+     "+50",
+     "6,18 %"
+    ],
+    [
+     "Max HP",
+     "+100",
+     "4,31 %"
+    ],
+    [
+     "Max HP",
+     "+200",
+     "3,45 %"
+    ],
+    [
+     "AGI",
+     "+1",
+     "10,52 %"
+    ],
+    [
+     "AGI",
+     "+2",
+     "0,09 %"
+    ],
+    [
+     "DEX",
+     "+1",
+     "10,52 %"
+    ],
+    [
+     "DEX",
+     "+2",
+     "0,09 %"
+    ],
+    [
+     "FOR (Str)",
+     "+1",
+     "10,52 %"
+    ],
+    [
+     "FOR (Str)",
+     "+2",
+     "0,09 %"
+    ],
+    [
+     "INT",
+     "+1",
+     "10,52 %"
+    ],
+    [
+     "INT",
+     "+2",
+     "0,09 %"
+    ],
+    [
+     "VIT",
+     "+1",
+     "10,52 %"
+    ],
+    [
+     "VIT",
+     "+2",
+     "0,09 %"
+    ],
+    [
+     "CHA (Luk)",
+     "+1",
+     "10,52 %"
+    ],
+    [
+     "CHA (Luk)",
+     "+2",
+     "0,09 %"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Statistique",
+     "Valeur",
+     "Probabilité (Cape)",
+     "Probabilité (Chaussures)"
+    ],
+    [
+     "ESQ (Flee)",
+     "+3",
+     "3,48 %",
+     "4,90 %"
+    ],
+    [
+     "Critique (Critical)",
+     "+1",
+     "3,48 %",
+     "4,90 %"
+    ],
+    [
+     "DÉF (Def)",
+     "+15",
+     "3,48 %",
+     "4,90 %"
+    ],
+    [
+     "DÉF.M (Mdef)",
+     "+2",
+     "3,48 %",
+     "4,90 %"
+    ],
+    [
+     "Max HP",
+     "+50",
+     "10,70 %",
+     "4,90 %"
+    ],
+    [
+     "Max HP",
+     "+100",
+     "8,91 %",
+     "3,50 %"
+    ],
+    [
+     "Max HP",
+     "+200",
+     "7,58 %",
+     "2,60 %"
+    ],
+    [
+     "Max HP",
+     "+300",
+     "6,31 %",
+     "1,70 %"
+    ],
+    [
+     "Max HP",
+     "+400",
+     "4,46 %",
+     "0,80 %"
+    ],
+    [
+     "AGI",
+     "+1",
+     "7,13 %",
+     "7,58 %"
+    ],
+    [
+     "AGI",
+     "+2",
+     "0,89 %",
+     "3,57 %"
+    ],
+    [
+     "DEX",
+     "+1",
+     "7,13 %",
+     "7,58 %"
+    ],
+    [
+     "DEX",
+     "+2",
+     "0,89 %",
+     "3,57 %"
+    ],
+    [
+     "FOR (Str)",
+     "+1",
+     "7,13 %",
+     "7,58 %"
+    ],
+    [
+     "FOR (Str)",
+     "+2",
+     "0,89 %",
+     "3,57 %"
+    ],
+    [
+     "INT",
+     "+1",
+     "7,13 %",
+     "7,58 %"
+    ],
+    [
+     "INT",
+     "+2",
+     "0,89 %",
+     "3,57 %"
+    ],
+    [
+     "VIT",
+     "+1",
+     "7,13 %",
+     "7,58 %"
+    ],
+    [
+     "VIT",
+     "+2",
+     "0,89 %",
+     "3,57 %"
+    ],
+    [
+     "CHA (Luk)",
+     "+1",
+     "7,13 %",
+     "7,58 %"
+    ],
+    [
+     "CHA (Luk)",
+     "+2",
+     "0,89 %",
+     "3,57 %"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Type",
+     "Rang",
+     "Pièces concernées",
+     "Emplacement de l'essence"
+    ],
+    [
+     "Répression",
+     "IV",
+     "Armure",
+     "4ᵉ emplacement"
+    ],
+    [
+     "Expédition",
+     "III",
+     "Armure",
+     "4ᵉ emplacement"
+    ],
+    [
+     "Contingent",
+     "II",
+     "Armure",
+     "3ᵉ emplacement"
+    ],
+    [
+     "Conquérant",
+     "I",
+     "Armure",
+     "2ᵉ emplacement"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Essence",
+     "Effet"
+    ],
+    [
+     "Mage Nv1",
+     "Augmente les dégâts de Cold Bolt, Fire Bolt et Lightning Bolt de 20 %. Tous les 2 niveaux de Fire Wall, temps d'incantation variable -1 %."
+    ],
+    [
+     "Mage Nv2",
+     "Augmente les dégâts de Cold Bolt, Fire Bolt et Lightning Bolt de 20 %. Par niveau de Fire Wall, temps d'incantation variable -1 %. Tous les 2 niveaux de raffinage de l'armure, Max SP +50."
+    ],
+    [
+     "Acolyte Nv1",
+     "Réduit de 15 % le coût en SP de Heal, Increase Agility et Blessing. Tous les 2 niveaux de Heal, montant des soins +1 %."
+    ],
+    [
+     "Acolyte Nv2",
+     "Réduit de 15 % le coût en SP de Heal, Increase Agility et Blessing. Par niveau de Heal, montant des soins +1 %. Tous les 2 niveaux de raffinage de l'armure, Max HP +70 et Max SP +30."
+    ],
+    [
+     "Archer Nv1",
+     "Réduit le coût en SP de Double Strafe de 5. Par niveau de Vulture's Eye, dégâts à l'arc +1 %."
+    ],
+    [
+     "Archer Nv2",
+     "Réduit le coût en SP de Double Strafe de 5. Par niveau de Vulture's Eye, dégâts à l'arc +2 %. Tous les 2 niveaux de raffinage de l'armure, dégâts d'Arrow Shower +5 %."
+    ],
+    [
+     "Swordsman Nv1",
+     "Réduit le coût en SP de Magnum Break de 10. Tous les 2 niveaux de Bash, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Swordsman Nv2",
+     "Réduit le coût en SP de Magnum Break de 10. Par niveau de Bash, ASPD augmentée (délai après attaque -1 %). Tous les 2 niveaux de raffinage de l'armure, dégâts de Magnum Break +15 %."
+    ],
+    [
+     "Thief Nv1",
+     "Si porté par un Thief, ATK +30. Tous les 2 niveaux de Steal, ASPD augmentée (délai après attaque -1 % par palier)."
+    ],
+    [
+     "Thief Nv2",
+     "Si porté par un Thief, ATK +30. Par niveau de Steal, ASPD augmentée (délai après attaque -1 %). Tous les 2 niveaux de raffinage de l'armure, FLEE +10."
+    ],
+    [
+     "Merchant Nv1",
+     "Par niveau de Discount, ATK +2. Tous les 2 niveaux d'Overcharge, ASPD augmentée (délai après attaque -1 % par palier)."
+    ],
+    [
+     "Merchant Nv2",
+     "Par niveau de Discount, ATK +2. Par niveau d'Overcharge, ASPD augmentée (délai après attaque -1 %). Tous les 2 niveaux de raffinage de l'armure, Max HP +100."
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Essence",
+     "Effet"
+    ],
+    [
+     "Knight Nv1",
+     "CRIT augmente de 3 fois le niveau de Cavalier Mastery. Augmente les dégâts de Bowling Bash de 20 %. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Knight Nv2",
+     "CRIT augmente de 5 fois le niveau de Cavalier Mastery. Augmente les dégâts de Bowling Bash de 20 %. Si porté par un Swordsman, dégâts critiques +7 %. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Blacksmith Nv1",
+     "Si porté par un Merchant, CRIT +10. Tous les 3 niveaux de Maximize Power, CRIT augmente. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Blacksmith Nv2",
+     "Si porté par un Merchant, CRIT +10. CRIT augmente de 5 fois le niveau de Maximize Power. Par niveau de Weaponry Research, dégâts critiques +1 %. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Assassin Nv1",
+     "CRIT augmente de 3 fois le niveau de Grimtooth. Augmente les dégâts de Sonic Blow de 20 %. Par niveau de raffinage de l'armure, dégâts critiques +1 %."
+    ],
+    [
+     "Assassin Nv2",
+     "CRIT augmente de 5 fois le niveau de Grimtooth. Augmente les dégâts de Sonic Blow de 20 %. Si porté par un Thief, ASPD augmentée (délai après attaque -7 %). Par niveau de raffinage de l'armure, dégâts critiques +1 %."
+    ],
+    [
+     "Wizard Nv1",
+     "Temps d'incantation variable réduit de 3 fois le niveau de Heaven's Drive. Augmente les dégâts de Meteor Storm, Lord of Vermilion et Storm Gust de 20 %. Tous les 2 niveaux de raffinage de l'armure, MATK +1 %."
+    ],
+    [
+     "Wizard Nv2",
+     "Temps d'incantation variable réduit de 5 fois le niveau de Heaven's Drive. Augmente les dégâts de Meteor Storm, Lord of Vermilion et Storm Gust de 20 %. Si porté par un Mage, FLEE +30. Tous les 2 niveaux de raffinage de l'armure, MATK +1 %."
+    ],
+    [
+     "Priest Nv1",
+     "Réduction du temps d'incantation variable augmentée de 3 fois le niveau de Magnificat. Augmente les dégâts de Magnus Exorcismus de 20 %. Tous les 2 niveaux de raffinage de l'armure, dégâts de Magnus Exorcismus +5 %."
+    ],
+    [
+     "Priest Nv2",
+     "Réduction du temps d'incantation variable augmentée de 5 fois le niveau de Magnificat. Augmente les dégâts de Magnus Exorcismus de 20 %. Si porté par un Acolyte, MATK +7 % et montant des soins +15 %. Tous les 2 niveaux de raffinage de l'armure, dégâts de Magnus Exorcismus +5 %."
+    ],
+    [
+     "Hunter Nv1",
+     "ASPD augmentée de 2 fois le niveau de Blitz Beat (délai après attaque -1 %). Augmente les dégâts de Blitz Beat de 40 %. Par niveau de raffinage de l'armure, LUK +1."
+    ],
+    [
+     "Hunter Nv2",
+     "ASPD augmentée de 3 fois le niveau de Blitz Beat (délai après attaque -1 %). Augmente les dégâts de Blitz Beat de 80 %. Par niveau de raffinage de l'armure, LUK +1."
+    ],
+    [
+     "Ninja Nv1",
+     "Effet non documenté sur RozeroDB à ce jour."
+    ],
+    [
+     "Ninja Nv2",
+     "Effet non documenté sur RozeroDB à ce jour."
+    ],
+    [
+     "Crusader Nv1",
+     "ATK augmente de 3 fois le niveau de Faith. Augmente les dégâts de Holy Cross de 15 %. Tous les 2 niveaux de raffinage de l'armure, Max HP +100."
+    ],
+    [
+     "Crusader Nv2",
+     "ATK augmente de 5 fois le niveau de Faith. Augmente les dégâts de Holy Cross de 15 %. Si porté par un Swordsman, DEF +80. Tous les 2 niveaux de raffinage de l'armure, Max HP +100."
+    ],
+    [
+     "Alchemist Nv1",
+     "Augmente l'ATK de 3 fois le niveau de Potion Research. ASPD augmentée (délai après attaque -10 %). Tous les 2 niveaux de raffinage de l'armure, CRIT +5."
+    ],
+    [
+     "Alchemist Nv2",
+     "Augmente l'ATK de 5 fois le niveau de Potion Research. ASPD augmentée (délai après attaque -10 %). Si porté par un Merchant, toutes les statistiques +7. Tous les 2 niveaux de raffinage de l'armure, CRIT +5."
+    ],
+    [
+     "Rogue Nv1",
+     "ATK augmente de 3 fois le niveau d'Intimidate. Augmente les dégâts de Sightless Mind de 20 %. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Rogue Nv2",
+     "ATK augmente de 5 fois le niveau d'Intimidate. Augmente les dégâts de Sightless Mind de 20 %. Réduit de 15 % le coût en SP de Sightless Mind. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Sage Nv1",
+     "MATK augmente de 3 fois le niveau de Hindsight. Augmente les dégâts de Heaven's Drive et Earth Spike de 20 %. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Sage Nv2",
+     "MATK augmente de 5 fois le niveau de Hindsight. Augmente les dégâts de Heaven's Drive et Earth Spike de 20 %. ASPD +1. Dégâts magiques de type Terre +15 %. Par niveau de raffinage de l'armure, ASPD augmentée (délai après attaque -1 %)."
+    ],
+    [
+     "Monk Nv1",
+     "ATK augmente de 3 fois le niveau de Demon Bane. Augmente les dégâts de Raging Quadruple Blow de 20 %. Tous les 2 niveaux de raffinage de l'armure, dégâts de Raging Thrust +5 %."
+    ],
+    [
+     "Monk Nv2",
+     "ATK augmente de 5 fois le niveau de Demon Bane. Augmente les dégâts de Raging Quadruple Blow de 20 %. Si porté par un Acolyte, les attaques normales au corps-à-corps ont une forte chance de déclencher Hindsight et Summon Spirit Sphere. Tous les 2 niveaux de raffinage de l'armure, dégâts de Raging Thrust +5 %."
+    ],
+    [
+     "Bard & Dancer Nv1",
+     "Réduit le temps de recharge d'Amp de la somme des niveaux de Music Lessons et Dance Lessons, jusqu'à 60 secondes. Tous les 2 niveaux de raffinage de l'armure, Max SP +30."
+    ],
+    [
+     "Bard & Dancer Nv2",
+     "Réduit le temps de recharge d'Amp de 3 fois la somme des niveaux de Music Lessons et Dance Lessons, jusqu'à 60 secondes. Si porté par un Archer, régénération naturelle de SP +50 %. Tous les 2 niveaux de raffinage de l'armure, Max SP +30."
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Essence II",
+     "Effet"
+    ],
+    [
+     "Knight Nv1",
+     "Augmente le HIT du niveau de Spear Mastery. Augmente les dégâts de Pierce de 20 %. Par niveau de raffinage de l'armure, ATK +2."
+    ],
+    [
+     "Knight Nv2",
+     "Augmente le HIT de 2 fois le niveau de Spear Mastery. Augmente les dégâts de Pierce de 20 % et de Brandish Spear de 40 %. Par niveau de raffinage de l'armure, ATK +2."
+    ],
+    [
+     "Blacksmith Nv1",
+     "Augmente le LUK du niveau de Skin Tempering. DEX +10. Tous les 2 niveaux de raffinage de l'armure, LUK +1."
+    ],
+    [
+     "Blacksmith Nv2",
+     "Augmente le LUK de 2 fois le niveau de Skin Tempering. DEX +10. Si porté par un Merchant, DEX +10 et LUK +10 supplémentaires. Tous les 2 niveaux de raffinage de l'armure, LUK +1."
+    ],
+    [
+     "Assassin Nv1",
+     "FLEE augmente de 3 fois le niveau de Lefthand Mastery. Dégâts de Venom Splasher +20 %. Tous les 2 niveaux de raffinage de l'armure, temps d'incantation variable -3 %."
+    ],
+    [
+     "Assassin Nv2",
+     "FLEE augmente de 5 fois le niveau de Lefthand Mastery. Augmente les dégâts de Venom Splasher de 40 %. Tous les 2 niveaux de raffinage, temps d'incantation variable -3 %."
+    ],
+    [
+     "Wizard Nv1",
+     "Réduction du temps d'incantation variable augmentée de 2 fois le niveau de Lord of Vermilion. Augmente les dégâts de Jupitel Thunder de 20 %. Par niveau de raffinage de l'armure, MATK +2."
+    ],
+    [
+     "Wizard Nv2",
+     "Réduction du temps d'incantation variable augmentée de 3 fois le niveau de Lord of Vermilion. Augmente les dégâts de Jupitel Thunder de 40 %. Par niveau de raffinage de l'armure, MATK +2."
+    ],
+    [
+     "Priest Nv1",
+     "Augmente l'ATK de 3 fois le niveau de Mace Mastery. Dégâts critiques +15 %. Par niveau de raffinage, ATK +2."
+    ],
+    [
+     "Priest Nv2",
+     "Augmente l'ATK de 5 fois le niveau de Mace Mastery. Dégâts critiques +15 %. Si porté par un Acolyte, les attaques normales au corps-à-corps ont une forte chance de déclencher Bash niv. 10. Par niveau de raffinage, ATK +2."
+    ],
+    [
+     "Hunter Nv1",
+     "Augmente l'ATK de 3 fois le niveau de Beastbane. Augmente les dégâts de Double Strafe de 20 %. Tous les 2 niveaux de raffinage, dégâts physiques à distance +3 %."
+    ],
+    [
+     "Hunter Nv2",
+     "Augmente l'ATK de 5 fois le niveau de Beastbane. Augmente les dégâts de Double Strafe de 40 %. Tous les 2 niveaux de raffinage, dégâts physiques à distance +3 %."
+    ],
+    [
+     "Ninja Nv1",
+     "Effet non documenté sur RozeroDB à ce jour."
+    ],
+    [
+     "Ninja Nv2",
+     "Effet non documenté sur RozeroDB à ce jour."
+    ],
+    [
+     "Crusader Nv1",
+     "MATK augmente de 3 fois le niveau de Faith. Augmente les dégâts de Grand Cross de 20 %. Par niveau de raffinage de l'armure, MATK +2."
+    ],
+    [
+     "Crusader Nv2",
+     "MATK augmente de 5 fois le niveau de Faith. Augmente les dégâts de Grand Cross de 20 %. Si porté par un Swordsman, soins reçus +15 %. Par niveau de raffinage de l'armure, MATK +2."
+    ],
+    [
+     "Alchemist Nv1",
+     "Augmente l'ATK de 3 fois le niveau de Prepare Potion. Augmente les dégâts de Mammonite de 100 %. Par niveau de raffinage, ATK +2."
+    ],
+    [
+     "Alchemist Nv2",
+     "Augmente l'ATK de 5 fois le niveau de Prepare Potion. Augmente les dégâts de Mammonite de 100 %. Si porté par un Merchant, les attaques normales au corps-à-corps ont une forte chance de déclencher Bash niv. 10. Par niveau de raffinage, ATK +2."
+    ],
+    [
+     "Rogue Nv1",
+     "Augmente le HIT du niveau de Gank. Augmente les dégâts de Back Stab de 20 %. Par niveau de raffinage, ATK +2."
+    ],
+    [
+     "Rogue Nv2",
+     "Augmente le HIT de 2 fois le niveau de Gank. Augmente les dégâts de Back Stab de 40 %. Par niveau de raffinage, ATK +2."
+    ],
+    [
+     "Sage Nv1",
+     "Augmente le MATK de 3 fois le niveau de Study. Augmente les dégâts de Fire Bolt, Cold Bolt et Lightning Bolt de 20 %. Par niveau de raffinage de l'armure, MATK +2."
+    ],
+    [
+     "Sage Nv2",
+     "Augmente le MATK de 5 fois le niveau de Study. Augmente les dégâts de Fire Bolt, Cold Bolt et Lightning Bolt de 40 %. Par niveau de raffinage de l'armure, MATK +2."
+    ],
+    [
+     "Monk Nv1",
+     "Réduit le temps d'incantation variable d'Occult Impaction de 3 fois le niveau de Demon Bane. Augmente les dégâts d'Occult Impaction de 20 %. Tous les 2 niveaux de raffinage, dégâts d'Occult Impaction +5 % supplémentaires."
+    ],
+    [
+     "Monk Nv2",
+     "Réduction du temps d'incantation variable d'Occult Impaction augmentée de 5 fois le niveau de Demon Bane. Augmente les dégâts d'Occult Impaction de 20 %. Utiliser Occult Impaction a une forte chance de déclencher Summon Spirit Sphere. Tous les 2 niveaux de raffinage de l'armure, dégâts d'Occult Impaction +5 % supplémentaires."
+    ],
+    [
+     "Bard & Dancer Nv1",
+     "Augmente l'ATK de 3 fois le niveau de Music Lessons ou Dance Lessons. Augmente les dégâts de Melody Strike ou Slinging Arrow de 20 %. Tous les 2 niveaux de raffinage, dégâts physiques à distance +1 %."
+    ],
+    [
+     "Bard & Dancer Nv2",
+     "Augmente l'ATK de 5 fois le niveau de Music Lessons ou Dance Lessons. Augmente les dégâts de Melody Strike ou Slinging Arrow de 40 %. Tous les 2 niveaux de raffinage, dégâts physiques à distance +1 %."
+    ]
+   ]
+  }
+ ],
+ "donjon-equipement-fabrication.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Passage",
+     "Pièce de base",
+     "Cristal requis (×50)",
+     "Pierres de Jellopy"
+    ],
+    [
+     "Répression → Expédition",
+     "1 pièce Répression",
+     "Cristal scintillant",
+     "Type et quantité selon la pièce"
+    ],
+    [
+     "Expédition → Contingent",
+     "1 pièce Expédition",
+     "Cristal azur",
+     "Type et quantité selon la pièce"
+    ],
+    [
+     "Contingent → Conquérant",
+     "1 pièce Contingent",
+     "Cristal cramoisi",
+     "Type et quantité selon la pièce"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pierre de Jellopy",
+     "Fragment nécessaire (×5)"
+    ],
+    [
+     "Pierre de Jellopy du Lotus Rouge (Crimson Jellostone)",
+     "Fragment de Jellopy de Poring (Poring Jello Fragment)"
+    ],
+    [
+     "Pierre de Jellopy Brise (Wind of Verdure Jellostone)",
+     "Fragment de Jellopy de Poporing (Poporing Jello Fragment)"
+    ],
+    [
+     "Pierre de Jellopy du Crépuscule (Dusk Jellostone)",
+     "Fragment de Jellopy de Drops (Drops Jello Fragment)"
+    ],
+    [
+     "Pierre de Jellopy Chaotique (Chaos Jellostone)",
+     "Fragment de Jellopy de Deviling (Deviling Jello Fragment)"
+    ],
+    [
+     "Pierre de Jellopy Sacrée (Holy Jellostone)",
+     "Fragment de Jellopy d'Angeling (Angeling Jello Fragment)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Pierres de Jellopy requises"
+    ],
+    [
+     "Armure d'expédition (Expedition's Armor)",
+     "2 × Pierre de Jellopy du Lotus Rouge (Crimson Jellostone)"
+    ],
+    [
+     "Robe d'expédition (Expedition's Robe)",
+     "2 × Pierre de Jellopy Brise (Wind of Verdure Jellostone)"
+    ],
+    [
+     "Bottes d'expédition (Expedition Boots)",
+     "1 × Pierre de Jellopy du Lotus Rouge (Crimson Jellostone) 1 × Pierre de Jellopy Chaotique (Chaos Jellostone)"
+    ],
+    [
+     "Cotte de mailles du contingent (Contingent Mail)",
+     "4 × Pierre de Jellopy du Lotus Rouge (Crimson Jellostone)"
+    ],
+    [
+     "Robe du contingent (Contingent Robe)",
+     "4 × Pierre de Jellopy Brise (Wind of Verdure Jellostone)"
+    ],
+    [
+     "Bague du contingent (Contingent Ring)",
+     "6 × Pierre de Jellopy Sacrée (Holy Jellostone)"
+    ],
+    [
+     "Cotte de mailles du conquérant (Conqueror's Mail)",
+     "6 × Pierre de Jellopy du Lotus Rouge (Crimson Jellostone)"
+    ],
+    [
+     "Bague du conquérant (Conqueror's Ring)",
+     "10 × Pierre de Jellopy Sacrée (Holy Jellostone)"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Accessoire",
+     "Matériaux",
+     "Donjon (Mode Difficile)"
+    ],
+    [
+     "Boucle d'oreille d'Émeraude maudite (Cursed Emerald Earring) [1]",
+     "15 × Émeraude maudite (Cursed Emerald) 10 × Minerai de Mithril (Mithril Ore)",
+     "Mémoire des orcs"
+    ],
+    [
+     "Boucles d'oreilles d'Opale scintillante (Shimmering Opal Earrings) [1]",
+     "15 × Opale brillante (Shimmering Opal) 10 × Minerai de Mithril (Mithril Ore)",
+     "Égouts de Prontera"
+    ],
+    [
+     "Anneau du Serment bleu (Ring of Blue Oath) [1]",
+     "15 × Saphir marin (Sapphire of the Blue Sea) 10 × Minerai de Mithril (Mithril Ore)",
+     "Izlude 2F"
+    ],
+    [
+     "Anneau du Serment rouge (Red Oath Ring) [1]",
+     "15 × Rubis ensanglanté (Ruby Soaked in Blood) 10 × Minerai de Mithril (Mithril Ore)",
+     "Enfer des fourmis 1F / Navire englouti"
+    ]
+   ]
+  }
+ ],
+ "donjon-equipement.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Rang",
+     "Nom",
+     "Niveau de base",
+     "Provenance"
+    ],
+    [
+     "IV",
+     "Répression (Subjugation)",
+     "60+",
+     "Coffres en Mode Normal des donjons mémoriaux ( Mémoire des orcs , Égouts de Prontera )"
+    ],
+    [
+     "III",
+     "Expédition (Expedition)",
+     "70+",
+     "Fabriqué à partir du Rang IV"
+    ],
+    [
+     "II",
+     "Contingent (Contingent)",
+     "80+",
+     "Fabriqué à partir du Rang III"
+    ],
+    [
+     "I",
+     "Conquérant (Conqueror)",
+     "90+",
+     "Fabriqué à partir du Rang II"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Baudrier de l'escouade de répression (Subjugation Team's Shoulder Belt) [1]",
+     "Cape",
+     "Résistance Neutre +7 %, FLEE +10"
+    ],
+    [
+     "Armure de l'escouade de répression (Subjugation Team's Armor) [1]",
+     "Armure",
+     "Max HP +300, Max SP +20, MDEF +5, DEF +20"
+    ],
+    [
+     "Bottes de l'escouade de répression (Subjugation Team Boots) [1]",
+     "Chaussures",
+     "Récup. HP +5 %, Récup. SP +3 %"
+    ],
+    [
+     "Bague de l'escouade de répression (Subjugation Team's Ring) [1]",
+     "Accessoire",
+     "STR +2, INT +2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Armure d'expédition (Expedition's Armor) [1]",
+     "Armure",
+     "Max HP +500, Max SP +30, MDEF +5, DEF +30 (+3 raffinage : DEF +10, Max HP +50)"
+    ],
+    [
+     "Manteau d'expédition (Expedition Manteau) [1]",
+     "Cape",
+     "Résistance Neutre +8 %, FLEE +15 (+3 raffinage : FLEE +3)"
+    ],
+    [
+     "Bottes d'expédition (Expedition Boots) [1]",
+     "Chaussures",
+     "Récup. HP +15 %, Récup. SP +5 % (+3 raffinage : AGI +1)"
+    ],
+    [
+     "Bague d'expédition (Expedition Ring) [1]",
+     "Accessoire",
+     "STR +3"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Robe d'expédition (Expedition's Robe) [1]",
+     "Armure",
+     "Max HP +400, Max SP +50, MDEF +5, DEF +30 (+3 raffinage : DEF +5, Max SP +10)"
+    ],
+    [
+     "Écharpe d'expédition (Expedition Muffler) [1]",
+     "Cape",
+     "Résistance Neutre +9 %, FLEE +12 (+3 raffinage : résistance Neutre +1 %)"
+    ],
+    [
+     "Chaussures d'expédition (Expedition Shoes) [1]",
+     "Chaussures",
+     "Récup. HP +10 %, Récup. SP +7 % (+3 raffinage : VIT +1)"
+    ],
+    [
+     "Anneau magique d'expédition (Expedition Magic Ring) [1]",
+     "Accessoire",
+     "INT +3"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Cotte de mailles du contingent (Contingent Mail) [1]",
+     "Armure",
+     "STR +1, AGI +1, Max HP +700, Max SP +50, MDEF +5, DEF +40 (+5 raffinage : DEF +15, Max HP +100)"
+    ],
+    [
+     "Cape du contingent (Contingent Cloak) [1]",
+     "Cape",
+     "ASPD augmentée (délai après attaque -3 %), FLEE +20 (+5 raffinage : délai après attaque -2 % supplémentaire)"
+    ],
+    [
+     "Bottes lourdes du contingent (Contingent Greaves) [1]",
+     "Chaussures",
+     "Récup. HP +18 %, Récup. SP +5 % (+5 raffinage : STR +2)"
+    ],
+    [
+     "Bague du contingent (Contingent Ring) [1]",
+     "Accessoire",
+     "STR +3, AGI +1"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Tunique du contingent (Contingent Cloth) [1]",
+     "Armure",
+     "DEX +1, AGI +1, Max HP +500, Max SP +60, MDEF +5, DEF +40 (+5 raffinage : DEF +15, Max SP +20)"
+    ],
+    [
+     "Manteau du contingent (Contingent Manteau) [1]",
+     "Cape",
+     "ASPD augmentée (délai après attaque -5 %), FLEE +15 (+5 raffinage : AGI +1)"
+    ],
+    [
+     "Bottes du contingent (Contingent Boots) [1]",
+     "Chaussures",
+     "Récup. HP +15 %, Récup. SP +7 % (+5 raffinage : DEX +2)"
+    ],
+    [
+     "Gant du contingent (Contingent Glove) [1]",
+     "Accessoire",
+     "DEX +3, AGI +1"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Robe du contingent (Contingent Robe) [1]",
+     "Armure",
+     "INT +1, DEX +1, Max HP +500, Max SP +70, MDEF +5, DEF +40 (+5 raffinage : DEF +10, Max SP +20)"
+    ],
+    [
+     "Écharpe du contingent (Contingent Muffler) [1]",
+     "Cape",
+     "Temps d'incantation variable -3 %, FLEE +16 (+5 raffinage : temps d'incantation variable -4 % supplémentaire)"
+    ],
+    [
+     "Chaussures du contingent (Contingent Shoes) [1]",
+     "Chaussures",
+     "Récup. HP +12 %, Récup. SP +10 % (+5 raffinage : INT +2)"
+    ],
+    [
+     "Anneau magique du contingent (Contingent Magic Ring) [1]",
+     "Accessoire",
+     "INT +3, DEX +1"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Tenue du contingent (Contingent Dress) [1]",
+     "Armure",
+     "INT +1, VIT +1, Max HP +600, Max SP +60, MDEF +5, DEF +40 (+5 raffinage : DEF +10, Max HP +100)"
+    ],
+    [
+     "Étole du contingent (Contingent Cape) [1]",
+     "Cape",
+     "Temps d'incantation variable -5 %, FLEE +12 (+5 raffinage : résistance Neutre +3 %)"
+    ],
+    [
+     "Chaussures magiques du contingent (Contingent Sandal) [1]",
+     "Chaussures",
+     "Récup. HP +15 %, Récup. SP +7 % (+5 raffinage : soins +2 %)"
+    ],
+    [
+     "Collier du contingent (Contingent Necklace) [1]",
+     "Accessoire",
+     "INT +3, VIT +1"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Cotte de mailles du conquérant (Conqueror's Mail) [1]",
+     "Armure",
+     "STR +2, AGI +2, Max HP +900, Max SP +60, MDEF +5, DEF +50 (+5 raffinage : DEF +20, Max HP +100 ; +7 raffinage : AGI +2)"
+    ],
+    [
+     "Cape du conquérant (Conqueror's Cloak) [1]",
+     "Cape",
+     "ASPD augmentée (délai après attaque -5 %), FLEE +25 (+5 raffinage : délai après attaque -2 % supplémentaire ; +7 raffinage : dégâts à distance +3 %)"
+    ],
+    [
+     "Bottes lourdes du conquérant (Conqueror's Greaves) [1]",
+     "Chaussures",
+     "Récup. HP +20 %, Récup. SP +7 % (+5 raffinage : STR +2 ; +7 raffinage : ATK +20)"
+    ],
+    [
+     "Bague du conquérant (Conqueror's Ring) [1]",
+     "Accessoire",
+     "STR +3, AGI +2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Tunique du conquérant (Conqueror's Cloth) [1]",
+     "Armure",
+     "DEX +2, AGI +2, Max HP +700, Max SP +80, MDEF +5, DEF +50 (+5 raffinage : DEF +20, Max SP +20 ; +7 raffinage : DEX +2)"
+    ],
+    [
+     "Manteau du conquérant (Conqueror's Manteau) [1]",
+     "Cape",
+     "ASPD augmentée (délai après attaque -7 %), FLEE +18 (+5 raffinage : AGI +1 ; +7 raffinage : dégâts critiques +4 %)"
+    ],
+    [
+     "Bottes du conquérant (Conqueror's Boots) [1]",
+     "Chaussures",
+     "Récup. HP +18 %, Récup. SP +9 % (+5 raffinage : DEX +2 ; +7 raffinage : FLEE +20)"
+    ],
+    [
+     "Gant du conquérant (Conqueror's Glove) [1]",
+     "Accessoire",
+     "DEX +3, AGI +2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Robe du conquérant (Conqueror's Robe) [1]",
+     "Armure",
+     "INT +2, DEX +2, Max HP +600, Max SP +90, MDEF +5, DEF +50 (+5 raffinage : DEF +15, Max SP +20 ; +7 raffinage : DEX +2)"
+    ],
+    [
+     "Écharpe du conquérant (Conqueror's Muffler) [1]",
+     "Cape",
+     "Temps d'incantation variable -5 %, FLEE +16 (+5 raffinage : -4 % supplémentaire ; +7 raffinage : -3 % supplémentaire)"
+    ],
+    [
+     "Chaussures du conquérant (Conqueror's Shoes) [1]",
+     "Chaussures",
+     "Récup. HP +15 %, Récup. SP +12 % (+5 raffinage : INT +2 ; +7 raffinage : MATK +20)"
+    ],
+    [
+     "Anneau magique du conquérant (Conqueror's Magic Ring) [1]",
+     "Accessoire",
+     "INT +3, DEX +2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Pièce",
+     "Emplacement",
+     "Bonus"
+    ],
+    [
+     "Tenue du conquérant (Conqueror's Dress) [1]",
+     "Armure",
+     "INT +2, VIT +2, Max HP +800, Max SP +70, MDEF +5, DEF +50 (+5 raffinage : DEF +15, Max HP +100 ; +7 raffinage : VIT +2)"
+    ],
+    [
+     "Étole du conquérant (Conqueror's Cape) [1]",
+     "Cape",
+     "Temps d'incantation variable -7 %, FLEE +12 (+5 raffinage : résistance Neutre +3 % ; +7 raffinage : +4 % supplémentaire)"
+    ],
+    [
+     "Chaussures magiques du conquérant (Conqueror's Magic Shoes) [1]",
+     "Chaussures",
+     "Récup. HP +17 %, Récup. SP +10 % (+5 raffinage : soins +2 % ; +7 raffinage : +4 % supplémentaire)"
+    ],
+    [
+     "Collier du conquérant (Conqueror's Necklace) [1]",
+     "Accessoire",
+     "INT +3, VIT +2"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Accessoire",
+     "Emplacement",
+     "Bonus (+7 raffinage / +9 raffinage)",
+     "Gemme (Mode Difficile)",
+     "Donjon"
+    ],
+    [
+     "Boucle d'oreille d'Émeraude maudite (Cursed Emerald Earring) [1]",
+     "Droite",
+     "DEX +2, AGI +2 (+7 : DEX +2, AGI +2 suppl. ; +9 : ASPD augmentée -2 % par tranche de 25 niveaux de base)",
+     "Émeraude maudite",
+     "Mémoire des orcs"
+    ],
+    [
+     "Boucles d'oreilles d'Opale scintillante (Shimmering Opal Earrings) [1]",
+     "Droite",
+     "INT +2, VIT +2 (+7 : INT +2, VIT +2 suppl. ; +9 : temps d'incantation variable -2 % par tranche de 25 niveaux de base)",
+     "Opale brillante",
+     "Égouts de Prontera"
+    ],
+    [
+     "Anneau du Serment bleu (Ring of Blue Oath) [1]",
+     "Gauche",
+     "INT +2, DEX +2 (+7 : INT +2, DEX +2 suppl. ; +9 : dégâts magiques Feu et Eau +1 % par tranche de 20 niveaux de base)",
+     "Saphir marin",
+     "Izlude 2F"
+    ],
+    [
+     "Anneau du Serment rouge (Red Oath Ring) [1]",
+     "Gauche",
+     "LUK +2, AGI +2 (+7 : LUK +2, AGI +2 suppl. ; +9 : dégâts critiques +1 % par tranche de 20 niveaux de base)",
+     "Rubis ensanglanté",
+     "Enfer des fourmis 1F et Navire englouti"
+    ]
+   ]
+  }
+ ],
+ "donjon-poring-village.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Jour",
+     "Récompense"
+    ],
+    [
+     "Lundi",
+     "Fragment de Jellopy de Poring"
+    ],
+    [
+     "Mardi",
+     "Fragment de Jellopy de Poporing"
+    ],
+    [
+     "Mercredi",
+     "Fragment de Jellopy de Drops"
+    ],
+    [
+     "Jeudi",
+     "Fragment de Jellopy de Deviling"
+    ],
+    [
+     "Vendredi",
+     "Fragment de Jellopy d'Angeling"
+    ],
+    [
+     "Samedi / Dimanche",
+     "Boîte de fragments de Jellopy"
+    ]
+   ]
+  }
+ ],
+ "guide-armes-armures-etoiles.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Modification",
+     "Effet sur l'équipement",
+     "Matériaux requis"
+    ],
+    [
+     "2ᵉ palier ★★",
+     "Raffinage -3 ; cartes, enchantements et capacités additionnelles conservés.",
+     "3× certificat de forge ★★ correspondant, 30× pièce brisée de gobelin."
+    ],
+    [
+     "2ᵉ palier ★",
+     "Raffinage -7 ; cartes, enchantements et capacités additionnelles conservés.",
+     "100× certificat de forge ★ correspondant, 8× pièce brisée de gobelin."
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Modification",
+     "Effet sur l'équipement",
+     "Matériaux requis"
+    ],
+    [
+     "Armure classique, règle « stable »",
+     "Raffinage -3 ; cartes, enchantements et capacités additionnelles conservés.",
+     "100× certificat de forge ★ correspondant, 30× pièce brisée de gobelin."
+    ],
+    [
+     "Armure classique, règle « intense »",
+     "Raffinage -7 ; cartes, enchantements et capacités additionnelles conservés.",
+     "10× certificat de forge ★ correspondant, 3× pièce brisée de gobelin."
+    ]
+   ]
+  },
+  {
+   "caption": "Armes de 2ᵉ palier ★★ activables",
+   "rows": [
+    [
+     "Apparence",
+     "Équipement",
+     "Type · caractéristiques"
+    ],
+    [
+     "",
+     "★★ Fouet en acier — Entrave Effet de base : ATK+50, FLEE−40, DEF−80. Tous les +2 : ATK+5, dégâts phys. à distance+2%. +7 et plus : ASPD accrue (délai après attaque −10%), MHP+200. +9 et plus : délai −15% (suppl.), MHP+300 (suppl.), et chance de déclencher « Danse chaotique des flèches » Nv.1 (compétence spéciale) sur une attaque de mêlée. +11 et plus (tous les +2) : FLEE+8, DEF+16 (suppl. à chaque palier).",
+     "Fouet ATK 115 Poids 80 Niv. arme 2 Niv. requis 16 Danseuse"
+    ],
+    [
+     "",
+     "★★ Luth — Chant Effet de base : ATK+50, FLEE−40, DEF−80. Tous les +2 : ATK+5, dégâts phys. à distance+2%. +7 et plus : ASPD accrue (délai −10%), MHP+200. +9 et plus : délai −15% (suppl.), MHP+300 (suppl.), et chance de déclencher « Danse chaotique des flèches » Nv.1 en mêlée. +11 et plus (tous les +2) : FLEE+8, DEF+16 (suppl. à chaque palier).",
+     "Instrument ATK 125 Poids 80 Niv. arme 2 Niv. requis 14 Barde"
+    ],
+    [
+     "",
+     "★★ Hallebarde brise-lame — Perforation Effet de base : ATK+60, CRI+90. Tous les +2 : ATK+5, dégâts phys. à distance+2%. +7 et plus : HIT+20, MHP+250. +9 et plus : HIT+35 (suppl.), MHP+400 (suppl.), MHP+6%, et apprend « Frappe de bouclier en chaîne » Nv.5, incantation variable −15%. +11 et plus (tous les +2) : CRI+18 (suppl. à chaque palier).",
+     "Lance (une main) ATK 160 Poids 85 Niv. arme 2 Niv. requis 18 Croisé"
+    ],
+    [
+     "",
+     "★★ Luth — Résonance Effet de base : ATK+50, FLEE−80, DEF−40. Tous les +2 : ATK+5, dégâts phys. à distance+3%. +7 et plus : MDEF+10, MHP+2%. +9 et plus : MDEF+15 (suppl.), MHP+3% (suppl.), et en cas de dégâts physiques reçus, chance de déclencher « Danse chaotique des flèches » Nv.1 sur l'agresseur. +11 et plus (tous les +2) : FLEE+16, DEF+8 (suppl. à chaque palier).",
+     "Instrument ATK 125 Poids 80 Niv. arme 2 Niv. requis 14 Barde"
+    ],
+    [
+     "",
+     "★★ Katar — Trépas Effet de base : ATK+60, HIT−100, dégâts phys. à distance−40%. Tous les +2 : ATK+5, dégâts phys. de mêlée+2%. +7 et plus : CRI+7, ASPD accrue (délai −14%), FLEE+5. +9 et plus : CRI+14 (suppl.), délai −28% (suppl.), FLEE+10 (suppl.), et si les compétences de maîtrise du Katar (de base et avancée) et de poison mortel atteignent un niveau cumulé de 20, débloque « Frappe rapide à deux lames » Nv.1 (taux de déclenchement selon le niveau de maîtrise). +11 et plus (tous les +2) : HIT+20, dégâts phys. à distance+8% (suppl. à chaque palier).",
+     "Katar ATK 155 Poids 80 Niv. arme 2 Niv. requis 18 Assassin"
+    ],
+    [
+     "",
+     "★★ Épée à deux mains — Croc Effet de base : ATK+60, HIT−150, FLEE−90, MHP−10%. Tous les +2 : ATK+5, dégâts phys. de mêlée+3%. +7 et plus : CRI+15, ASPD accrue (délai −25%), dégâts critiques+20%. +9 et plus : CRI+25 (suppl.), ASPD+2, dégâts critiques+40% (suppl.), et si Maîtrise de l'épée à deux mains, Parade et maîtrise de l'épée à deux mains atteignent le niveau 30, apprend « Frappe véloce enchaînée » Nv.7. +11 et plus (tous les +2) : HIT+30, FLEE+18, MHP+2% (suppl. à chaque palier).",
+     "Épée (deux mains) ATK 210 Poids 130 Niv. arme 2 Niv. requis 18 Chevalier"
+    ],
+    [
+     "",
+     "★★ Arbalète — Esprit Effet de base : ATK+40, CRI−60. Tous les +2 : LUK+10. +7 et plus : ASPD accrue (délai −15%). +9 et plus : délai −20% (suppl.), ASPD+2, apprend « Impact fulgurant » Nv.5 ; en attaque à distance, chance de le déclencher sur l'ennemi. +11 et plus (tous les +2) : CRI+12 (suppl. à chaque palier).",
+     "Arc ATK 135 Poids 90 Niv. arme 2 Niv. requis 18 Chasseur"
+    ],
+    [
+     "",
+     "★★ Gantelet de Hèle — Combat Effet de base : ATK+80, MDEF−20, MSP−30%. Tous les +2 : ATK+5, dégâts phys. à distance+2%. +7 et plus : ASPD accrue (délai −15%). +9 et plus : délai −20% (suppl.), ASPD+2, et si Poing des six harmonies, Paume corporelle en chaîne et Fanfaronnade du tigre féroce atteignent le niveau 20, chance de déclencher « Concentration de qi » Nv.5 sur une attaque de mêlée. +11 et plus (tous les +2) : MDEF+4, MSP+6% (suppl. à chaque palier).",
+     "Poings ATK 130 Poids 45 Niv. arme 2 Niv. requis 12 Moine"
+    ],
+    [
+     "",
+     "★★ Hallebarde brise-lame — Bénédiction Effet de base : MATK+40, CRI+90. Tous les +2 : MATK+2%. +7 et plus : incantation −10%, MATK+30. +9 et plus : incantation −15% (suppl.), MATK+50 (suppl.), et si « Croix Sacrée » atteint Nv.10 : MATK+100, chaque lancer soigne 2500 PV/s pendant 3 s ; si « Majesté Divine » atteint Nv.5 : MATK+8% (suppl.). +11 et plus (tous les +2) : CRI+18 (suppl. à chaque palier).",
+     "Lance (une main) ATK 160 Poids 85 Niv. arme 2 Niv. requis 18 Croisé"
+    ],
+    [
+     "",
+     "★★ Épée à deux mains — Célérité Effet de base : ATK+40, HIT−100, FLEE−40. Tous les +2 : ATK+5, dégâts phys. de mêlée+2%. +7 et plus : CRI+10, ASPD accrue (délai −10%), dégâts critiques+10%. +9 et plus : CRI+20 (suppl.), délai −15% (suppl.), dégâts critiques+30% (suppl.), et si Maîtrise de l'épée à deux mains, Parade et maîtrise de l'épée à deux mains atteignent le niveau 30, apprend « Frappe rapide à deux lames » Nv.5. +11 et plus (tous les +2) : HIT+20, FLEE+8 (suppl. à chaque palier).",
+     "Épée (deux mains) ATK 210 Poids 130 Niv. arme 2 Niv. requis 18 Chevalier"
+    ],
+    [
+     "",
+     "★★ Sabre à pommeau rond — Domaine Effet de base : ATK+25, HIT+90. Tous les +2 : DEF+20, MDEF+2. +7 et plus : FLEE+10, MHP+300. +9 et plus : FLEE+20 (suppl.), MHP+450 (suppl.), MHP+6%, et apprend « Lancer de potion » Nv.5 : en cas d'attaque physique reçue, chance de restaurer 150 PV/s pendant 1 s. +11 et plus (tous les +2) : HIT+18 (suppl. à chaque palier).",
+     "Épée (une main) ATK 135 Poids 90 Niv. arme 2 Niv. requis 14 Alchimiste"
+    ],
+    [
+     "",
+     "★★ Brassard renforcé — Soleil Un brassard de la lignée Ninja. Un artisan de génie a sacrifié sa défense d'origine pour lui donner une résistance à la magie. Effet de base : MDEF+5, ATK+10, STR+5, FLEE−120. Tous les +2 : ATK+5, dégâts phys. contre les ennemis Terre/Vent/Eau+2%. +7 et plus : dégâts phys. contre Terre/Vent/Eau+5% (suppl.). +9 et plus : ATK+5% (suppl.), dégâts phys. à distance+7%, et si Maîtrise ninjutsu, Échappée de la cigale dorée et compétences de la lignée ninjutsu atteignent le niveau 40, coût en SP des compétences ninjutsu −50%. +11 et plus (tous les +2) : FLEE+24 (suppl. à chaque palier).",
+     "Bouclier DEF 45 Poids 15 Niv. requis 50 Ninja"
+    ],
+    [
+     "",
+     "★★ Bâton en chêne — Écho Effet de base : MATK+140, consommation de SP+120%, incantation variable+50%. Tous les +2 : INT+1, dégâts magiques toutes éléments+2%. +7 et plus : SP−5%, incantation −5%. +9 et plus : SP−10% (suppl.), incantation −10% (suppl.), et si Tempête de neige, Météores, Choc de Jupitel, Champ de gravité et Plongeon glacial atteignent un niveau cumulé de 45, MATK+12%. +11 et plus (tous les +2) : SP−12%, incantation −5% (suppl. à chaque palier).",
+     "Bâton (une main) ATK 25 Poids 40 Niv. arme 2 Niv. requis 12 Sorcier"
+    ],
+    [
+     "",
+     "★★ Fouet en acier — Dispersion Effet de base : ATK+50, FLEE−80, DEF−40. Tous les +2 : ATK+5, dégâts phys. à distance+3%. +7 et plus : MDEF+10, MHP+2%. +9 et plus : MDEF+15 (suppl.), MHP+3% (suppl.), et en cas de dégâts physiques reçus, chance de déclencher « Danse chaotique des flèches » Nv.1 sur l'agresseur. +11 et plus (tous les +2) : FLEE+16, DEF+8 (suppl. à chaque palier).",
+     "Fouet ATK 115 Poids 80 Niv. arme 2 Niv. requis 16 Danseuse"
+    ],
+    [
+     "",
+     "★★ Bâton en chêne — Vagabondage Effet de base : MATK+170, consommation de SP+60%, MHP−1000. Tous les +2 : MATK+1%, MSP+2%, FLEE+5. +7 et plus : SP−10%, incantation −3%. +9 et plus : SP−20% (suppl.), incantation −7% (suppl.), et apprend « Drain d'âme » Nv.10, incantation fixe −15%. +11 et plus (tous les +2) : SP−12%, MHP+200 (suppl. à chaque palier).",
+     "Bâton (une main) ATK 25 Poids 40 Niv. arme 2 Niv. requis 12 Sorcier"
+    ],
+    [
+     "",
+     "★★ Katar — Extermination Effet de base : ATK+60, HIT−200, dégâts phys. à distance−100%. Tous les +2 : ATK+6, dégâts phys. de mêlée+3%. +7 et plus : CRI+8, ASPD accrue (délai −11%), dégâts critiques+10%. +9 et plus : CRI+16 (suppl.), délai −22% (suppl.), dégâts critiques+10% (suppl.), et si les maîtrises du Katar (de base et avancée) et de poison mortel atteignent un niveau cumulé de 20, débloque « Frappe rapide à deux lames » Nv.1 (taux selon niveau de maîtrise). +11 et plus (tous les +2) : HIT+20, dégâts phys. à distance+10% (suppl. à chaque palier).",
+     "Katar ATK 155 Poids 80 Niv. arme 2 Niv. requis 18 Assassin"
+    ],
+    [
+     "",
+     "★★ Gantelet de Hèle — Souffle Effet de base : ATK+80, MDEF−20, MSP−30%. Tous les +2 : ATK+5, dégâts phys. à distance+2%. +7 et plus : SP−15%, ATK+2%. +9 et plus : SP−25% (suppl.), ATK+6% (suppl.), et apprend « Doigt divin » Nv.5 : en attaquant, chance de restaurer 6 SP/s pendant 1 s. +11 et plus (tous les +2) : MDEF+4, MSP+6% (suppl. à chaque palier).",
+     "Poings ATK 130 Poids 45 Niv. arme 2 Niv. requis 12 Moine"
+    ],
+    [
+     "",
+     "★★ Arbalète — Résonance Effet de base : MATK+120, MHP−500, FLEE−60. Tous les +2 : MATK+5. +7 et plus : ASPD accrue (délai −15%). +9 et plus : délai −20% (suppl.), ASPD+2. +11 et plus (tous les +2) : MHP+100, FLEE+12 (suppl. à chaque palier).",
+     "Arc ATK 135 Poids 90 Niv. arme 2 Niv. requis 18 Vagabond"
+    ],
+    [
+     "",
+     "★★ Sabre à pommeau rond — Limite Effet de base : ATK+45, DEF−60. Tous les +2 : ATK+5, dégâts phys. à distance+2%. +7 et plus : HIT+20, incantation −8%. +9 et plus : HIT+35 (suppl.), incantation −12% (suppl.), et apprend « Jet de fiole d'acide et de feu » Nv.10 : chance de faire lâcher à l'ennemi une fiole d'acide ou une bouteille incendiaire. +11 et plus (tous les +2) : DEF+12 (suppl. à chaque palier).",
+     "Épée (une main) ATK 135 Poids 90 Niv. arme 2 Niv. requis 14 Alchimiste"
+    ],
+    [
+     "",
+     "★★ Brassard renforcé — Lune Un brassard de la lignée Ninja. Un artisan de génie a sacrifié sa défense d'origine pour lui donner une résistance à la magie. Effet de base : MDEF+5, MATK+10, INT+5, FLEE−120. Tous les +2 : MATK+5, dégâts magiques contre les ennemis Terre/Vent/Eau+2%. +7 et plus : dégâts magiques contre Terre/Vent/Eau+5% (suppl.). +9 et plus : MATK+5% (suppl.), dégâts magiques toutes éléments+7%, et si Maîtrise ninjutsu et Échappée de la cigale dorée atteignent le niveau 15, coût en SP des compétences ninjutsu −50% (Fleur de feu, Formation de feu, Dragon explosif, Lame de glace, Colonne d'eau, Chute de cristaux, Lame de vent, Choc foudroyant, Vent du nord). +11 et plus (tous les +2) : FLEE+24 (suppl. à chaque palier).",
+     "Bouclier DEF 45 Poids 15 Niv. requis 50 Ninja"
+    ]
+   ]
+  },
+  {
+   "caption": "Armes de 2ᵉ palier ★ activables",
+   "rows": [
+    [
+     "Apparence",
+     "Équipement",
+     "Type · caractéristiques"
+    ],
+    [
+     "",
+     "★ Marteau de Simais Effet de base : ATK+20, HIT−60. +3 : HIT+3, INT+1, DEX+1. +7 : HIT+7, INT+1, DEX+1, LUK+1 (suppl.). +9 : HIT+10, INT+2, DEX+2, LUK+2 (suppl.).",
+     "Contondant ATK 100 Poids 100 Niv. arme 2 Niv. requis 14 Marchand"
+    ],
+    [
+     "",
+     "★ Bâton en chêne Un bâton imprégné de magie. Indestructible. Effet de base : MATK+125, consommation de SP+20%. +3 : SP−1%, soins prodigués+1%. +7 : SP−3% (suppl.), soins+3% (suppl.). +9 : SP−6% (suppl.), soins+6% (suppl.).",
+     "Bâton (une main) ATK 25 Poids 40 Niv. arme 2 Niv. requis 12 Novice, Mage, Acolyte"
+    ],
+    [
+     "",
+     "★ Livre Effet de base : Portée d'attaque à l'équipement : 3 cases. MATK+125, incantation variable+30%. +3 : incantation −3%, ASPD+3%. +7 : incantation −7% (suppl.), ASPD+7% (suppl.). +9 : incantation −10% (suppl.), ASPD+15% (suppl.), ASPD+2.",
+     "Livre ATK 85 Poids 60 Niv. arme 2 Niv. requis 14 Mage, Acolyte"
+    ],
+    [
+     "",
+     "★ Arbalète Un arc en forme de croix, rapide et puissant. Effet de base : ATK+20, MATK+100, MHP−350. +3 : MHP+25, LUK+3. +7 : MHP+75 (suppl.), LUK+7 (suppl.). +9 : MHP+100 (suppl.), LUK+20 (suppl.).",
+     "Arc ATK 125 Poids 90 Niv. arme 2 Niv. requis 18 Voleur, Archer"
+    ],
+    [
+     "",
+     "★ Sabre à pommeau rond Effet de base : ATK+25, CRI+30. +3 : HIT+10, MHP+100. +7 : HIT+15 (suppl.), MHP+150 (suppl.). +9 : HIT+20 (suppl.), MHP+200 (suppl.), MHP+3%.",
+     "Épée (une main) ATK 125 Poids 90 Niv. arme 2 Niv. requis 14 Guerrier, Marchand, Voleur"
+    ],
+    [
+     "",
+     "★ Hallebarde brise-lame Effet de base : ATK+30, CRI+40. +3 : incantation −2%, MATK+20. +7 : incantation −4% (suppl.), MATK+40 (suppl.). +9 : incantation −9% (suppl.), MATK+90 (suppl.).",
+     "Lance (une main) ATK 150 Poids 85 Niv. arme 2 Niv. requis 18 Croisé"
+    ],
+    [
+     "",
+     "★ Luth Effet de base : ATK+20, HIT−60, DEF+40. +3 : incantation −2%, MHP+75. +7 : incantation −2% (suppl.), MHP+125 (suppl.). +9 : incantation −6% (suppl.), MHP+200 (suppl.).",
+     "Instrument ATK 125 Poids 50 Niv. arme 2 Niv. requis 14 Barde"
+    ],
+    [
+     "",
+     "★ Épée Alte Une épée à deux mains conçue pour être polyvalente en toute situation. Effet de base : ATK+20, MDEF−20. +3 : MDEF+1, HIT+10. +7 : MDEF+3 (suppl.), HIT+15 (suppl.). +9 : MDEF+6 (suppl.), HIT+20 (suppl.).",
+     "Épée (deux mains) ATK 190 Poids 160 Niv. arme 2 Niv. requis 18 Guerrier"
+    ],
+    [
+     "",
+     "★ Katar Effet de base : ATK+30, HIT−70. +3 : CRI+2, ASPD+5%. +7 : CRI+3 (suppl.), ASPD+10% (suppl.). +9 : CRI+5 (suppl.), ASPD+15% (suppl.).",
+     "Katar ATK 155 Poids 80 Niv. arme 2 Niv. requis 18 Assassin"
+    ],
+    [
+     "",
+     "★ Fouet en acier Effet de base : ATK+20, HIT−40, DEF+60. +3 : incantation −2%, MHP+75. +7 : incantation −2% (suppl.), MHP+125 (suppl.). +9 : incantation −6% (suppl.), MHP+200 (suppl.).",
+     "Fouet ATK 115 Poids 100 Niv. arme 2 Niv. requis 16 Danseuse"
+    ],
+    [
+     "",
+     "★ Hache en acier Un marteau très puissant en frappe descendante. Indestructible. Effet de base : ATK+30, DEF−90. +3 : DEF+10, CRI+3. +7 : DEF+20 (suppl.), CRI+7 (suppl.). +9 : DEF+35 (suppl.), CRI+15 (suppl.).",
+     "Hache (deux mains) ATK 215 Poids 200 Niv. arme 2 Niv. requis 16 Guerrier, Marchand"
+    ],
+    [
+     "",
+     "★ Arc Kroïte Effet de base : ATK+20, consommation de SP+50%. +3 : SP−3%, INT+3, FLEE+3. +7 : SP−7% (suppl.), INT+7 (suppl.), FLEE+7 (suppl.). +9 : SP−20% (suppl.), INT+20 (suppl.), FLEE+15 (suppl.).",
+     "Arc ATK 125 Poids 100 Niv. arme 2 Niv. requis 18 Archer"
+    ],
+    [
+     "",
+     "★ Épée à deux mains Effet de base : ATK+20, HIT−30, FLEE−60. +3 : CRI+3, ASPD+3%. +7 : CRI+5 (suppl.), ASPD+7% (suppl.). +9 : CRI+7 (suppl.), ASPD+15% (suppl.).",
+     "Épée (deux mains) ATK 190 Poids 130 Niv. arme 2 Niv. requis 18 Guerrier"
+    ],
+    [
+     "",
+     "★ Lance à lame courbe Effet de base : ATK+40, VIT−10. +3 : incantation −2%, HIT+5. +7 : incantation −2% (suppl.), HIT+10 (suppl.). +9 : incantation −6% (suppl.), HIT+30 (suppl.).",
+     "Lance (deux mains) ATK 160 Poids 100 Niv. arme 2 Niv. requis 18 Guerrier"
+    ],
+    [
+     "",
+     "★ Masse à chaîne Faite de plusieurs maillons de fer : un impact redoutable et une prise en main parfaite. Indestructible. Effet de base : ATK+18, DEF−90. +3 : DEF+10, ASPD+3%. +7 : DEF+20 (suppl.), ASPD+7% (suppl.). +9 : DEF+35 (suppl.), ASPD+15% (suppl.).",
+     "Contondant ATK 140 Poids 80 Niv. arme 2 Niv. requis 14 Guerrier, Marchand, Acolyte"
+    ],
+    [
+     "",
+     "★ Dague à double tranchant Une dague à la lame bien affûtée, soigneusement forgée. Effet de base : ATK+20, MATK+60, FLEE−50. +3 : FLEE+3, CRI+3. +7 : FLEE+7 (suppl.), CRI+7 (suppl.). +9 : FLEE+10 (suppl.), CRI+15 (suppl.).",
+     "Dague ATK 143 Poids 70 Niv. arme 2 Niv. requis 12 Novice, Guerrier, Archer, Voleur, Mage, Marchand"
+    ],
+    [
+     "",
+     "★ Brassard renforcé Un brassard de la lignée Ninja. Un artisan de génie a sacrifié sa défense d'origine pour lui donner une résistance à la magie. Effet de base : MDEF+5, ATK+10, FLEE−60. +3 : STR+3. +7 : ATK+15 (suppl.). +9 : ATK+3% (suppl.).",
+     "Bouclier DEF 45 Poids 15 Niv. requis 50 Ninja"
+    ],
+    [
+     "",
+     "★ Gantelet de Hèle Effet de base : ATK+60, MDEF−20, MHP−300. +3 : ASPD+5%, consommation de SP−5%. +7 : ASPD+10% (suppl.), SP−10% (suppl.). +9 : ASPD+20% (suppl.), SP−25% (suppl.).",
+     "Poings ATK 120 Poids 45 Niv. arme 2 Niv. requis 12 Moine"
+    ]
+   ]
+  },
+  {
+   "caption": "Armures classiques activables",
+   "rows": [
+    [
+     "Apparence",
+     "Équipement",
+     "Type · caractéristiques"
+    ],
+    [
+     "",
+     "★ Cape à capuche Une cape au motif plus élégant. Effet de base : MHP+100, récupération naturelle de PV+20%. +3 et plus : MHP+200 (suppl.), MHP+1% (suppl.). +7 et plus : MHP+250 (suppl.), MHP+2% (suppl.). +9 et plus : MHP+450 (suppl.), MHP+4% (suppl.).",
+     "Cape DEF 8 Poids 10 Niv. requis 1 Toutes classes"
+    ],
+    [
+     "",
+     "★ Manteau en cuir Confectionné non pas dans un cuir ordinaire, mais dans du cuir de Milos. Effet de base : MHP+250, MSP+20, FLEE+5. Tous les +2 : MHP+100. +3 et plus : MHP+50 (suppl.), FLEE+3 (suppl.). +7 et plus : MHP+150 (suppl.), FLEE+5 (suppl.). +9 et plus : MHP+350 (suppl.), FLEE+12 (suppl.).",
+     "Armure DEF 50 Poids 5 Niv. requis 1 Toutes classes"
+    ],
+    [
+     "",
+     "★ Cotte de mailles en acier Une cotte de mailles en acier reforgée pour un équipement plus abouti. Effet de base : MHP+300, DEF+40, MDEF+2. Tous les +2 : MHP+200, DEF+5. +3 et plus : MHP+200 (suppl.), DEF+30 (suppl.). +7 et plus : MHP+450 (suppl.), DEF+40 (suppl.). +9 et plus : MHP+1000 (suppl.), DEF+70 (suppl.).",
+     "Armure DEF 75 Poids 250 Niv. requis 1 Toutes classes"
+    ],
+    [
+     "",
+     "★ Long manteau Un long manteau chaud, taillé dans les meilleures étoffes. Effet de base : MHP+150, MSP+50, DEF+40, MDEF+5. Tous les +2 : MHP+200, MDEF+2. +3 et plus : MHP+100 (suppl.), MSP+20 (suppl.). +7 et plus : MHP+200 (suppl.), MSP+25 (suppl.). +9 et plus : MHP+400 (suppl.), MSP+35 (suppl.), MSP+5%.",
+     "Armure DEF 60 Poids 80 Niv. requis 1 Toutes classes"
+    ],
+    [
+     "",
+     "★ Bottes de guerrier Des bottes montantes à talon : en cas d'urgence, retirez-les et frappez avec ! Effet de base : MHP+100, récupération naturelle de PV+5%. +3 et plus : MHP+200 (suppl.), récupération de PV+5% (suppl.). +7 et plus : MHP+350 (suppl.), récupération de PV+10% (suppl.). +9 et plus : MHP+8% (suppl.), soins reçus+10%.",
+     "Chaussures DEF 25 Poids 30 Niv. requis 1 Toutes classes"
+    ],
+    [
+     "",
+     "★ Étole Confectionnée dans une étoffe de meilleure qualité que l'étole d'origine, elle procure une sensation de chaleur intense. Effet de base : MHP+100, récupération naturelle de SP+20%. +3 et plus : MHP+200 (suppl.), MSP+1% (suppl.). +7 et plus : MHP+250 (suppl.), MSP+2% (suppl.). +9 et plus : MHP+450 (suppl.), MSP+4% (suppl.).",
+     "Cape DEF 16 Poids 20 Niv. requis 1 Toutes classes"
+    ],
+    [
+     "",
+     "★ Chaussures légères Des chaussures légères retravaillées : leur rouge éclatant est plus beau que jamais. Effet de base : MHP+100, récupération naturelle de SP+5%. +3 et plus : MHP+200 (suppl.), récupération de SP+5% (suppl.). +7 et plus : MHP+350 (suppl.), récupération de SP+10% (suppl.). +9 et plus : MHP+8% (suppl.), soins reçus+10%.",
+     "Chaussures DEF 15 Poids 10 Niv. requis 1 Toutes classes"
+    ]
+   ]
+  }
+ ],
+ "mariage.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Compétence",
+     "Effet"
+    ],
+    [
+     "Je ne protégerai que toi",
+     "Consomme 10 % de vos PV pour restaurer 10 % des PV de votre conjoint."
+    ],
+    [
+     "Je me sacrifierai pour toi",
+     "Consomme 10 % de vos PM pour restaurer 10 % des PM de votre conjoint."
+    ],
+    [
+     "Tu me manques",
+     "Téléporte à vos côtés le personnage portant la bague assortie."
+    ]
+   ]
+  }
+ ],
+ "qpets.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Ville",
+     "Coordonnées"
+    ],
+    [
+     "Payon",
+     "/navi payon 175/131"
+    ],
+    [
+     "Geffen",
+     "/navi geffen 193/152"
+    ],
+    [
+     "Izlude",
+     "/navi izlude 72/98"
+    ],
+    [
+     "Morocc",
+     "/navi morocc 203/83"
+    ],
+    [
+     "Prontera",
+     "/navi prontera 218/21"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Œuf",
+     "Niveau 1",
+     "Niveau 2",
+     "Objet de dressage",
+     "Provient de"
+    ],
+    [
+     "Poring",
+     "LUK +2 CRIT +1",
+     "LUK +3 CRIT +1",
+     "Unripe Apple",
+     "Poring (0,2 %) Mastering (0,25 %)"
+    ],
+    [
+     "Drop",
+     "HIT +3 ATK +3",
+     "HIT +5 ATK +5",
+     "Orange Juice",
+     "Drops (0,2 %)"
+    ],
+    [
+     "Poporing",
+     "LUK +2 Rés. poison +10 %",
+     "LUK +3 Rés. poison +15 %",
+     "Bitter Herb",
+     "Green Plant (0,1 %)"
+    ],
+    [
+     "Lunatic",
+     "CRIT +2 ATK +2",
+     "CRIT +3 ATK +3",
+     "Rainbow Carrot",
+     "Lunatic (0,2 %) Eclipse (0,25 %)"
+    ],
+    [
+     "Savage Bebe",
+     "VIT +1 Max HP +50",
+     "VIT +2 Max HP +75",
+     "Sweet Milk",
+     "Savage Bebe (0,2 %)"
+    ],
+    [
+     "Rocker",
+     "Récup. HP +5 % Max HP +25",
+     "Récup. HP +8 % Max HP +38",
+     "Singing Flower",
+     "Flora (0,1 %)"
+    ],
+    [
+     "Spore",
+     "HIT +5",
+     "HIT +8",
+     "Dew-Laden Moss",
+     "Plankton (0,1 %) Grey / Red Mushroom (0,2 %)"
+    ],
+    [
+     "Poison Spore",
+     "STR +1 INT +1",
+     "STR +2 INT +2",
+     "Deadly Noxious Herb",
+     "Marina (0,1 %) White Plant (0,1 %)"
+    ],
+    [
+     "Little Poring",
+     "Récup. HP +50 %",
+     "Récup. HP +75 %",
+     "Little Unripe Apple",
+     "Poring (0,2 %) Mastering (0,25 %)"
+    ],
+    [
+     "Picky",
+     "STR +1 ATK +5",
+     "STR +2 ATK +8",
+     "Earthworm the Dude",
+     "Kukre (0,1 %)"
+    ],
+    [
+     "Chonchon",
+     "AGI +1 FLEE +2",
+     "AGI +2 FLEE +3",
+     "Rotten Fish",
+     "Megalodon (0,1 %) Wild Rose (0,18 %)"
+    ],
+    [
+     "Steel Chonchon",
+     "FLEE +6",
+     "FLEE +9",
+     "Rusty Iron",
+     "Scorpion (0,1 %) Dragon Fly (0,25 %)"
+    ],
+    [
+     "Hunter Fly",
+     "P.Dodge +2",
+     "P.Dodge +2 HIT +1",
+     "Monster Juice",
+     "Vagabond Wolf (0,25 %)"
+    ],
+    [
+     "Baby Desert Wolf",
+     "INT +1 Max SP +50",
+     "INT +2 Max SP +75",
+     "Well-Dried Bone",
+     "Pirate Swordsman (0,1 %)"
+    ],
+    [
+     "Peco Peco",
+     "Max HP +150",
+     "Max HP +200",
+     "Fatty Chubby Earthworm",
+     "Hode (0,1 %)"
+    ],
+    [
+     "Smokie",
+     "AGI +1 P.Dodge +1",
+     "AGI +2 P.Dodge +1",
+     "Baked Sweet Potato",
+     "Horong (0,1 %)"
+    ],
+    [
+     "Yoyo",
+     "CRIT +3",
+     "CRIT +5",
+     "Tropical Banana",
+     "Choco (0,1 %) Lady Tanee (20 %)"
+    ],
+    [
+     "Ground Petite",
+     "ASPD +1 %",
+     "ASPD +1 % AGI +1",
+     "Shining Stone",
+     "Zenorc (0,1 %)"
+    ],
+    [
+     "Isis",
+     "Dégâts phys. +1 %",
+     "Dégâts phys. +2 %",
+     "Armlet of Obedience",
+     "Verit (0,1 %) Maya (2,5 %)"
+    ],
+    [
+     "Orc Warrior",
+     "ATK +10",
+     "ATK +15",
+     "Orc Trophy",
+     "OBB"
+    ],
+    [
+     "Munak",
+     "INT +1 DEF +1",
+     "INT +2 DEF +2",
+     "No Recipient",
+     "OBB"
+    ],
+    [
+     "Dokebi",
+     "M.ATK +1 %",
+     "M.ATK +2 %",
+     "Old Broom",
+     "Bathory (0,1 %) Alice (0,2 %)"
+    ],
+    [
+     "Sohee",
+     "STR +1 DEX +1",
+     "STR +2 DEX +2",
+     "Silver Knife of Chastity",
+     "Moonlight (3,25 %)"
+    ],
+    [
+     "Deviruchi",
+     "Dégâts phys. +1 % M.ATK +1 %",
+     "→ et Max HP/SP +1 %",
+     "Contract in Shadow",
+     "Joker (0,1 %)"
+    ],
+    [
+     "Baphomet Jr.",
+     "DEF/M.DEF +1 Rés. étourd. +1 %",
+     "DEF/M.DEF +2 Rés. étourd. +2 %",
+     "Book of the Devil",
+     "Marduk (0,1 %)"
+    ],
+    [
+     "Bongun",
+     "VIT +1 Rés. étourd. +1 %",
+     "VIT +2 Rés. étourd. +2 %",
+     "Her Heart",
+     "OBB"
+    ]
+   ]
+  }
+ ],
+ "raffinage.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Équipement porté",
+     "Matériaux requis",
+     "Prix des matériaux",
+     "Coût de raffinage",
+     "En cas d'échec"
+    ],
+    [
+     "Arme de niveau 1",
+     "Phracon",
+     "200 Zeny",
+     "1 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Arme de niveau 2",
+     "Emveretarcon",
+     "1 000 Zeny",
+     "2 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Arme de niveau 3",
+     "Oridecon",
+     "Butin de monstre",
+     "10 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Oridecon Concentré",
+     "Échange auprès d'un PNJ",
+     "10 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Oridecon HD",
+     "Échange auprès d'un PNJ",
+     "20 000 Zeny",
+     "Seules les armes raffinées de +7 à +9 peuvent être raffinées. En cas d'échec, niveau de raffinage -1"
+    ],
+    [
+     "Arme de niveau 4",
+     "Oridecon",
+     "Butin de monstre",
+     "10 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Oridecon Concentré",
+     "Échange auprès d'un PNJ",
+     "10 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Oridecon HD",
+     "Échange auprès d'un PNJ",
+     "20 000 Zeny",
+     "Seules les armes raffinées de +7 à +9 peuvent être raffinées. En cas d'échec, niveau de raffinage -1"
+    ],
+    [
+     "Armure",
+     "Elunium",
+     "Butin de monstre",
+     "10 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Elunium Concentré",
+     "Échange auprès d'un PNJ",
+     "10 000 Zeny",
+     "Équipement détruit"
+    ],
+    [
+     "Élunium HD",
+     "Échange auprès d'un PNJ",
+     "20 000 Zeny",
+     "Seules les armes raffinées de +7 à +9 peuvent être raffinées. En cas d'échec, niveau de raffinage -1"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niveau",
+     "Proba. normale",
+     "Proba. spéciale",
+     "Bonus DEF"
+    ],
+    [
+     "1",
+     "90%",
+     "100%",
+     "1"
+    ],
+    [
+     "2",
+     "90%",
+     "100%",
+     "4"
+    ],
+    [
+     "3",
+     "90%",
+     "100%",
+     "9"
+    ],
+    [
+     "4",
+     "80%",
+     "100%",
+     "16"
+    ],
+    [
+     "5",
+     "60%",
+     "90%",
+     "25"
+    ],
+    [
+     "6",
+     "40%",
+     "70%",
+     "36"
+    ],
+    [
+     "7",
+     "40%",
+     "70%",
+     "49"
+    ],
+    [
+     "8",
+     "20%",
+     "40%",
+     "64"
+    ],
+    [
+     "9",
+     "20%",
+     "40%",
+     "81"
+    ],
+    [
+     "10",
+     "9%",
+     "20%",
+     "100"
+    ],
+    [
+     "11",
+     "8%",
+     "8%",
+     "121"
+    ],
+    [
+     "12",
+     "8%",
+     "8%",
+     "144"
+    ],
+    [
+     "13",
+     "8%",
+     "8%",
+     "169"
+    ],
+    [
+     "14",
+     "8%",
+     "8%",
+     "196"
+    ],
+    [
+     "15",
+     "7%",
+     "7%",
+     "225"
+    ],
+    [
+     "16",
+     "7%",
+     "7%",
+     "256"
+    ],
+    [
+     "17",
+     "7%",
+     "7%",
+     "289"
+    ],
+    [
+     "18",
+     "7%",
+     "7%",
+     "324"
+    ],
+    [
+     "19",
+     "5%",
+     "5%",
+     "361"
+    ],
+    [
+     "20",
+     "5%",
+     "5%",
+     "400"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niveau",
+     "Proba. normale",
+     "Proba. spéciale",
+     "Bonus ATK/MATK",
+     "Bonus spécial (max)"
+    ],
+    [
+     "1",
+     "90%",
+     "100%",
+     "2",
+     "-"
+    ],
+    [
+     "2",
+     "90%",
+     "100%",
+     "4",
+     "-"
+    ],
+    [
+     "3",
+     "90%",
+     "100%",
+     "6",
+     "-"
+    ],
+    [
+     "4",
+     "90%",
+     "100%",
+     "8",
+     "-"
+    ],
+    [
+     "5",
+     "90%",
+     "100%",
+     "10",
+     "-"
+    ],
+    [
+     "6",
+     "90%",
+     "100%",
+     "12",
+     "-"
+    ],
+    [
+     "7",
+     "80%",
+     "100%",
+     "14",
+     "-"
+    ],
+    [
+     "8",
+     "60%",
+     "90%",
+     "16",
+     "3"
+    ],
+    [
+     "9",
+     "40%",
+     "70%",
+     "18",
+     "6"
+    ],
+    [
+     "10",
+     "19%",
+     "30%",
+     "20",
+     "9"
+    ],
+    [
+     "11",
+     "18%",
+     "18%",
+     "22",
+     "12"
+    ],
+    [
+     "12",
+     "18%",
+     "18%",
+     "24",
+     "15"
+    ],
+    [
+     "13",
+     "18%",
+     "18%",
+     "26",
+     "18"
+    ],
+    [
+     "14",
+     "18%",
+     "18%",
+     "28",
+     "21"
+    ],
+    [
+     "15",
+     "18%",
+     "18%",
+     "30",
+     "24"
+    ],
+    [
+     "16",
+     "17%",
+     "17%",
+     "48",
+     "27"
+    ],
+    [
+     "17",
+     "17%",
+     "17%",
+     "66",
+     "30"
+    ],
+    [
+     "18",
+     "17%",
+     "17%",
+     "84",
+     "33"
+    ],
+    [
+     "19",
+     "15%",
+     "15%",
+     "102",
+     "36"
+    ],
+    [
+     "20",
+     "15%",
+     "15%",
+     "120",
+     "39"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niveau",
+     "Proba. normale",
+     "Proba. spéciale",
+     "Bonus ATK/MATK",
+     "Bonus spécial (max)"
+    ],
+    [
+     "1",
+     "90%",
+     "100%",
+     "3",
+     "-"
+    ],
+    [
+     "2",
+     "90%",
+     "100%",
+     "6",
+     "-"
+    ],
+    [
+     "3",
+     "90%",
+     "100%",
+     "9",
+     "-"
+    ],
+    [
+     "4",
+     "90%",
+     "100%",
+     "12",
+     "-"
+    ],
+    [
+     "5",
+     "90%",
+     "100%",
+     "15",
+     "-"
+    ],
+    [
+     "6",
+     "80%",
+     "100%",
+     "18",
+     "-"
+    ],
+    [
+     "7",
+     "60%",
+     "90%",
+     "21",
+     "5"
+    ],
+    [
+     "8",
+     "40%",
+     "70%",
+     "24",
+     "10"
+    ],
+    [
+     "9",
+     "20%",
+     "40%",
+     "27",
+     "15"
+    ],
+    [
+     "10",
+     "19%",
+     "30%",
+     "30",
+     "20"
+    ],
+    [
+     "11",
+     "18%",
+     "18%",
+     "33",
+     "25"
+    ],
+    [
+     "12",
+     "18%",
+     "18%",
+     "36",
+     "30"
+    ],
+    [
+     "13",
+     "18%",
+     "18%",
+     "39",
+     "35"
+    ],
+    [
+     "14",
+     "18%",
+     "18%",
+     "42",
+     "40"
+    ],
+    [
+     "15",
+     "18%",
+     "18%",
+     "45",
+     "45"
+    ],
+    [
+     "16",
+     "17%",
+     "17%",
+     "80",
+     "50"
+    ],
+    [
+     "17",
+     "17%",
+     "17%",
+     "115",
+     "55"
+    ],
+    [
+     "18",
+     "17%",
+     "17%",
+     "150",
+     "60"
+    ],
+    [
+     "19",
+     "15%",
+     "15%",
+     "185",
+     "65"
+    ],
+    [
+     "20",
+     "15%",
+     "15%",
+     "220",
+     "70"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niveau",
+     "Proba. normale",
+     "Proba. spéciale",
+     "Bonus ATK/MATK",
+     "Bonus spécial (max)"
+    ],
+    [
+     "1",
+     "90%",
+     "100%",
+     "5",
+     "-"
+    ],
+    [
+     "2",
+     "90%",
+     "100%",
+     "10",
+     "-"
+    ],
+    [
+     "3",
+     "90%",
+     "100%",
+     "15",
+     "-"
+    ],
+    [
+     "4",
+     "90%",
+     "100%",
+     "20",
+     "-"
+    ],
+    [
+     "5",
+     "80%",
+     "100%",
+     "25",
+     "-"
+    ],
+    [
+     "6",
+     "60%",
+     "90%",
+     "30",
+     "8"
+    ],
+    [
+     "7",
+     "50%",
+     "80%",
+     "35",
+     "16"
+    ],
+    [
+     "8",
+     "20%",
+     "40%",
+     "40",
+     "24"
+    ],
+    [
+     "9",
+     "20%",
+     "40%",
+     "45",
+     "32"
+    ],
+    [
+     "10",
+     "19%",
+     "30%",
+     "50",
+     "40"
+    ],
+    [
+     "11",
+     "15%",
+     "15%",
+     "55",
+     "48"
+    ],
+    [
+     "12",
+     "15%",
+     "15%",
+     "60",
+     "56"
+    ],
+    [
+     "13",
+     "15%",
+     "15%",
+     "65",
+     "64"
+    ],
+    [
+     "14",
+     "15%",
+     "15%",
+     "70",
+     "72"
+    ],
+    [
+     "15",
+     "11%",
+     "11%",
+     "75",
+     "80"
+    ],
+    [
+     "16",
+     "11%",
+     "11%",
+     "134",
+     "88"
+    ],
+    [
+     "17",
+     "11%",
+     "11%",
+     "193",
+     "96"
+    ],
+    [
+     "18",
+     "11%",
+     "11%",
+     "252",
+     "104"
+    ],
+    [
+     "19",
+     "9%",
+     "9%",
+     "311",
+     "112"
+    ],
+    [
+     "20",
+     "9%",
+     "9%",
+     "370",
+     "120"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niveau",
+     "Proba. normale",
+     "Proba. spéciale",
+     "Bonus ATK/MATK",
+     "Bonus spécial (max)"
+    ],
+    [
+     "1",
+     "90%",
+     "100%",
+     "8",
+     "-"
+    ],
+    [
+     "2",
+     "90%",
+     "100%",
+     "16",
+     "-"
+    ],
+    [
+     "3",
+     "90%",
+     "100%",
+     "24",
+     "-"
+    ],
+    [
+     "4",
+     "80%",
+     "100%",
+     "32",
+     "-"
+    ],
+    [
+     "5",
+     "60%",
+     "90%",
+     "40",
+     "14"
+    ],
+    [
+     "6",
+     "40%",
+     "70%",
+     "48",
+     "28"
+    ],
+    [
+     "7",
+     "40%",
+     "70%",
+     "56",
+     "42"
+    ],
+    [
+     "8",
+     "20%",
+     "40%",
+     "64",
+     "56"
+    ],
+    [
+     "9",
+     "20%",
+     "40%",
+     "72",
+     "70"
+    ],
+    [
+     "10",
+     "9%",
+     "20%",
+     "80",
+     "84"
+    ],
+    [
+     "11",
+     "8%",
+     "8%",
+     "88",
+     "98"
+    ],
+    [
+     "12",
+     "8%",
+     "8%",
+     "96",
+     "112"
+    ],
+    [
+     "13",
+     "8%",
+     "8%",
+     "104",
+     "126"
+    ],
+    [
+     "14",
+     "8%",
+     "8%",
+     "112",
+     "140"
+    ],
+    [
+     "15",
+     "7%",
+     "7%",
+     "120",
+     "154"
+    ],
+    [
+     "16",
+     "7%",
+     "7%",
+     "215",
+     "168"
+    ],
+    [
+     "17",
+     "7%",
+     "7%",
+     "310",
+     "182"
+    ],
+    [
+     "18",
+     "7%",
+     "7%",
+     "405",
+     "196"
+    ],
+    [
+     "19",
+     "5%",
+     "5%",
+     "500",
+     "210"
+    ],
+    [
+     "20",
+     "5%",
+     "5%",
+     "595",
+     "224"
+    ]
+   ]
+  }
+ ],
+ "reference.html": [
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Type d'arme",
+     "Petit",
+     "Moyen",
+     "Grand"
+    ],
+    [
+     "Mains nues",
+     "100 %",
+     "100 %",
+     "100 %"
+    ],
+    [
+     "Épée à une main",
+     "75 %",
+     "100 %",
+     "75 %"
+    ],
+    [
+     "Épée à deux mains",
+     "75 %",
+     "75 %",
+     "100 %"
+    ],
+    [
+     "Dague",
+     "100 %",
+     "75 %",
+     "50 %"
+    ],
+    [
+     "Hache à une main",
+     "50 %",
+     "75 %",
+     "100 %"
+    ],
+    [
+     "Hache à deux mains",
+     "50 %",
+     "75 %",
+     "100 %"
+    ],
+    [
+     "Katar",
+     "75 %",
+     "100 %",
+     "75 %"
+    ],
+    [
+     "Bâton à une main",
+     "100 %",
+     "100 %",
+     "100 %"
+    ],
+    [
+     "Bâton à deux mains",
+     "100 %",
+     "100 %",
+     "100 %"
+    ],
+    [
+     "Masse à une main",
+     "75 %",
+     "100 %",
+     "100 %"
+    ],
+    [
+     "Masse à deux mains",
+     "75 %",
+     "100 %",
+     "100 %"
+    ],
+    [
+     "Arc",
+     "100 %",
+     "100 %",
+     "75 %"
+    ],
+    [
+     "Lance à une main",
+     "75 %",
+     "75 %",
+     "100 %"
+    ],
+    [
+     "Lance à deux mains",
+     "75 %",
+     "75 %",
+     "100 %"
+    ],
+    [
+     "Poing américain",
+     "100 %",
+     "100 %",
+     "75 %"
+    ],
+    [
+     "Livre",
+     "100 %",
+     "100 %",
+     "50 %"
+    ],
+    [
+     "Fouet",
+     "75 %",
+     "100 %",
+     "75 %"
+    ],
+    [
+     "Instrument de musique",
+     "75 %",
+     "100 %",
+     "75 %"
+    ],
+    [
+     "Huuma Shuriken",
+     "75 %",
+     "75 %",
+     "100 %"
+    ],
+    [
+     "Arme à feu",
+     "100 %",
+     "100 %",
+     "100 %"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niv.",
+     "EXP requise",
+     "Niv.",
+     "EXP requise"
+    ],
+    [
+     "1",
+     "5",
+     "6",
+     "113"
+    ],
+    [
+     "2",
+     "12",
+     "7",
+     "188"
+    ],
+    [
+     "3",
+     "22",
+     "8",
+     "256"
+    ],
+    [
+     "4",
+     "35",
+     "9",
+     "335"
+    ],
+    [
+     "5",
+     "50",
+     "10",
+     "425"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niv.",
+     "EXP requise",
+     "Niv.",
+     "EXP requise"
+    ],
+    [
+     "1",
+     "150",
+     "26",
+     "20,280"
+    ],
+    [
+     "2",
+     "340",
+     "27",
+     "21,780"
+    ],
+    [
+     "3",
+     "550",
+     "28",
+     "24,510"
+    ],
+    [
+     "4",
+     "760",
+     "29",
+     "27,000"
+    ],
+    [
+     "5",
+     "990",
+     "30",
+     "29,000"
+    ],
+    [
+     "6",
+     "1,250",
+     "31",
+     "31,000"
+    ],
+    [
+     "7",
+     "1,600",
+     "32",
+     "36,000"
+    ],
+    [
+     "8",
+     "1,980",
+     "33",
+     "39,000"
+    ],
+    [
+     "9",
+     "2,340",
+     "34",
+     "41,000"
+    ],
+    [
+     "10",
+     "2,740",
+     "35",
+     "45,000"
+    ],
+    [
+     "11",
+     "3,140",
+     "36",
+     "49,000"
+    ],
+    [
+     "12",
+     "3,950",
+     "37",
+     "51,900"
+    ],
+    [
+     "13",
+     "4,510",
+     "38",
+     "55,000"
+    ],
+    [
+     "14",
+     "5,210",
+     "39",
+     "59,450"
+    ],
+    [
+     "15",
+     "5,950",
+     "40",
+     "64,630"
+    ],
+    [
+     "16",
+     "7,000",
+     "41",
+     "70,030"
+    ],
+    [
+     "17",
+     "8,150",
+     "42",
+     "74,940"
+    ],
+    [
+     "18",
+     "9,130",
+     "43",
+     "79,800"
+    ],
+    [
+     "19",
+     "10,220",
+     "44",
+     "84,630"
+    ],
+    [
+     "20",
+     "11,480",
+     "45",
+     "89,610"
+    ],
+    [
+     "21",
+     "12,780",
+     "46",
+     "95,170"
+    ],
+    [
+     "22",
+     "14,090",
+     "47",
+     "100,420"
+    ],
+    [
+     "23",
+     "15,560",
+     "48",
+     "107,250"
+    ],
+    [
+     "24",
+     "16,980",
+     "49",
+     "112,070"
+    ],
+    [
+     "25",
+     "18,620",
+     "50",
+     "118,120"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Niv.",
+     "EXP requise",
+     "Niv.",
+     "EXP requise"
+    ],
+    [
+     "1",
+     "0",
+     "26",
+     "186,800"
+    ],
+    [
+     "2",
+     "2,500",
+     "27",
+     "224,100"
+    ],
+    [
+     "3",
+     "3,000",
+     "28",
+     "268,900"
+    ],
+    [
+     "4",
+     "3,600",
+     "29",
+     "322,600"
+    ],
+    [
+     "5",
+     "4,300",
+     "30",
+     "387,100"
+    ],
+    [
+     "6",
+     "5,100",
+     "31",
+     "464,500"
+    ],
+    [
+     "7",
+     "6,100",
+     "32",
+     "557,400"
+    ],
+    [
+     "8",
+     "7,300",
+     "33",
+     "668,800"
+    ],
+    [
+     "9",
+     "8,700",
+     "34",
+     "802,500"
+    ],
+    [
+     "10",
+     "10,400",
+     "35",
+     "963,000"
+    ],
+    [
+     "11",
+     "12,400",
+     "36",
+     "1,155,600"
+    ],
+    [
+     "12",
+     "14,800",
+     "37",
+     "1,386,700"
+    ],
+    [
+     "13",
+     "17,700",
+     "38",
+     "1,664,000"
+    ],
+    [
+     "14",
+     "21,200",
+     "39",
+     "1,996,800"
+    ],
+    [
+     "15",
+     "25,400",
+     "40",
+     "2,396,100"
+    ],
+    [
+     "16",
+     "30,400",
+     "41",
+     "2,875,300"
+    ],
+    [
+     "17",
+     "36,400",
+     "42",
+     "3,450,300"
+    ],
+    [
+     "18",
+     "43,600",
+     "43",
+     "4,140,300"
+    ],
+    [
+     "19",
+     "52,300",
+     "44",
+     "4,968,300"
+    ],
+    [
+     "20",
+     "62,700",
+     "45",
+     "5,961,900"
+    ],
+    [
+     "21",
+     "75,200",
+     "46",
+     "7,154,200"
+    ],
+    [
+     "22",
+     "90,200",
+     "47",
+     "8,585,000"
+    ],
+    [
+     "23",
+     "108,200",
+     "48",
+     "10,302,000"
+    ],
+    [
+     "24",
+     "129,800",
+     "49",
+     "12,362,400"
+    ],
+    [
+     "25",
+     "155,700",
+     "50",
+     "14,834,800"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "⚔️ Attaque \\ Défense",
+     "Neutre",
+     "Eau",
+     "Terre",
+     "Feu",
+     "Vent",
+     "Poison",
+     "Sacré",
+     "Ombre",
+     "Fantôme",
+     "Mort-vivant"
+    ],
+    [
+     "Neutre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "70%",
+     "100%"
+    ],
+    [
+     "Eau",
+     "100%",
+     "25%",
+     "100%",
+     "150%",
+     "90%",
+     "100%",
+     "75%",
+     "100%",
+     "100%",
+     "100%"
+    ],
+    [
+     "Terre",
+     "100%",
+     "100%",
+     "25%",
+     "90%",
+     "150%",
+     "100%",
+     "75%",
+     "100%",
+     "100%",
+     "100%"
+    ],
+    [
+     "Feu",
+     "100%",
+     "90%",
+     "150%",
+     "25%",
+     "100%",
+     "100%",
+     "75%",
+     "100%",
+     "100%",
+     "125%"
+    ],
+    [
+     "Vent",
+     "100%",
+     "150%",
+     "90%",
+     "100%",
+     "25%",
+     "100%",
+     "75%",
+     "100%",
+     "100%",
+     "100%"
+    ],
+    [
+     "Poison",
+     "100%",
+     "100%",
+     "125%",
+     "125%",
+     "125%",
+     "0%",
+     "75%",
+     "50%",
+     "100%",
+     "50%"
+    ],
+    [
+     "Sacré",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "0%",
+     "125%",
+     "100%",
+     "150%"
+    ],
+    [
+     "Ombre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "50%",
+     "125%",
+     "0%",
+     "100%",
+     "0%"
+    ],
+    [
+     "Fantôme",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "75%",
+     "75%",
+     "125%",
+     "100%"
+    ],
+    [
+     "Mort-vivant",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "50%",
+     "100%",
+     "0%",
+     "100%",
+     "0%"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "⚔️ Attaque \\ Défense",
+     "Neutre",
+     "Eau",
+     "Terre",
+     "Feu",
+     "Vent",
+     "Poison",
+     "Sacré",
+     "Ombre",
+     "Fantôme",
+     "Mort-vivant"
+    ],
+    [
+     "Neutre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "50%",
+     "100%"
+    ],
+    [
+     "Eau",
+     "100%",
+     "0%",
+     "100%",
+     "175%",
+     "80%",
+     "100%",
+     "50%",
+     "100%",
+     "75%",
+     "100%"
+    ],
+    [
+     "Terre",
+     "100%",
+     "100%",
+     "0%",
+     "80%",
+     "175%",
+     "100%",
+     "50%",
+     "100%",
+     "75%",
+     "100%"
+    ],
+    [
+     "Feu",
+     "100%",
+     "80%",
+     "175%",
+     "0%",
+     "100%",
+     "100%",
+     "50%",
+     "100%",
+     "75%",
+     "150%"
+    ],
+    [
+     "Vent",
+     "100%",
+     "175%",
+     "80%",
+     "100%",
+     "0%",
+     "100%",
+     "50%",
+     "100%",
+     "75%",
+     "100%"
+    ],
+    [
+     "Poison",
+     "100%",
+     "100%",
+     "150%",
+     "150%",
+     "150%",
+     "0%",
+     "50%",
+     "25%",
+     "75%",
+     "25%"
+    ],
+    [
+     "Sacré",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "125%",
+     "-25%",
+     "150%",
+     "100%",
+     "175%"
+    ],
+    [
+     "Ombre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "25%",
+     "150%",
+     "-25%",
+     "100%",
+     "-25%"
+    ],
+    [
+     "Fantôme",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "50%",
+     "50%",
+     "150%",
+     "100%"
+    ],
+    [
+     "Mort-vivant",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "25%",
+     "100%",
+     "-25%",
+     "100%",
+     "-25%"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "⚔️ Attaque \\ Défense",
+     "Neutre",
+     "Eau",
+     "Terre",
+     "Feu",
+     "Vent",
+     "Poison",
+     "Sacré",
+     "Ombre",
+     "Fantôme",
+     "Mort-vivant"
+    ],
+    [
+     "Neutre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "0%",
+     "100%"
+    ],
+    [
+     "Eau",
+     "100%",
+     "-25%",
+     "100%",
+     "200%",
+     "70%",
+     "100%",
+     "25%",
+     "100%",
+     "50%",
+     "100%"
+    ],
+    [
+     "Terre",
+     "100%",
+     "100%",
+     "-25%",
+     "70%",
+     "200%",
+     "100%",
+     "25%",
+     "100%",
+     "50%",
+     "100%"
+    ],
+    [
+     "Feu",
+     "100%",
+     "70%",
+     "200%",
+     "-25%",
+     "100%",
+     "100%",
+     "25%",
+     "100%",
+     "50%",
+     "175%"
+    ],
+    [
+     "Vent",
+     "100%",
+     "200%",
+     "70%",
+     "100%",
+     "-25%",
+     "100%",
+     "25%",
+     "100%",
+     "50%",
+     "100%"
+    ],
+    [
+     "Poison",
+     "100%",
+     "100%",
+     "175%",
+     "175%",
+     "175%",
+     "0%",
+     "25%",
+     "0%",
+     "50%",
+     "0%"
+    ],
+    [
+     "Sacré",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "150%",
+     "-50%",
+     "175%",
+     "100%",
+     "200%"
+    ],
+    [
+     "Ombre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "0%",
+     "175%",
+     "-50%",
+     "100%",
+     "-50%"
+    ],
+    [
+     "Fantôme",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "25%",
+     "25%",
+     "175%",
+     "100%"
+    ],
+    [
+     "Mort-vivant",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "0%",
+     "100%",
+     "-50%",
+     "100%",
+     "-50%"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "⚔️ Attaque \\ Défense",
+     "Neutre",
+     "Eau",
+     "Terre",
+     "Feu",
+     "Vent",
+     "Poison",
+     "Sacré",
+     "Ombre",
+     "Fantôme",
+     "Mort-vivant"
+    ],
+    [
+     "Neutre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "0%",
+     "100%"
+    ],
+    [
+     "Eau",
+     "100%",
+     "-50%",
+     "100%",
+     "200%",
+     "60%",
+     "100%",
+     "0%",
+     "100%",
+     "25%",
+     "100%"
+    ],
+    [
+     "Terre",
+     "100%",
+     "100%",
+     "-50%",
+     "60%",
+     "200%",
+     "100%",
+     "0%",
+     "100%",
+     "25%",
+     "100%"
+    ],
+    [
+     "Feu",
+     "100%",
+     "60%",
+     "200%",
+     "-50%",
+     "100%",
+     "100%",
+     "0%",
+     "100%",
+     "25%",
+     "200%"
+    ],
+    [
+     "Vent",
+     "100%",
+     "200%",
+     "60%",
+     "100%",
+     "-50%",
+     "100%",
+     "0%",
+     "100%",
+     "25%",
+     "100%"
+    ],
+    [
+     "Poison",
+     "100%",
+     "100%",
+     "200%",
+     "200%",
+     "200%",
+     "0%",
+     "0%",
+     "-25%",
+     "25%",
+     "-25%"
+    ],
+    [
+     "Sacré",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "175%",
+     "-100%",
+     "200%",
+     "100%",
+     "200%"
+    ],
+    [
+     "Ombre",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "-25%",
+     "200%",
+     "-100%",
+     "100%",
+     "-100%"
+    ],
+    [
+     "Fantôme",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "0%",
+     "0%",
+     "200%",
+     "100%"
+    ],
+    [
+     "Mort-vivant",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "100%",
+     "-25%",
+     "100%",
+     "-100%",
+     "100%",
+     "-100%"
+    ]
+   ]
+  },
+  {
+   "caption": null,
+   "rows": [
+    [
+     "Différence de niveau",
+     "Augmentation / Réduction"
+    ],
+    [
+     "~ -19",
+     "Aucune pénalité"
+    ],
+    [
+     "-40 ~",
+     "Réduction de 50 %"
+    ]
+   ]
+  }
+ ]
+}

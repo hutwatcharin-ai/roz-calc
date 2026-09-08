@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; frame-src https://player.twitch.tv; script-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c6a13a">
+<link rel="icon" href="img/commun/logo.svg" type="image/svg+xml">
+<meta name="description" content="Un tutoriel très guidé, sans quête de changement de classe à rallonge : les tout premiers pas sur Ragnarok Zero Global. Chapitre 4 du guide FR.">
+<link rel="canonical" href="https://roz-global.info/04-premiers-pas.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guide ROZ:G">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://roz-global.info/04-premiers-pas.html">
+<meta property="og:title" content="Chapitre 04 · Premiers pas · Guide Ragnarok Zero Global">
+<meta property="og:description" content="Un tutoriel très guidé, sans quête de changement de classe à rallonge : les tout premiers pas sur Ragnarok Zero Global. Chapitre 4 du guide FR.">
+<meta property="og:image" content="img/commun/og-image.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapitre 04 · Premiers pas · Guide Ragnarok Zero Global">
+<meta name="twitter:description" content="Un tutoriel très guidé, sans quête de changement de classe à rallonge : les tout premiers pas sur Ragnarok Zero Global. Chapitre 4 du guide FR.">
+<meta name="twitter:image" content="img/commun/og-image.webp">
+<title>Chapitre 04 · Premiers pas · Guide Ragnarok Zero Global</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Guide ROZ:G","alternateName":"Carnet de l'aventurier - Ragnarok Zero Global","url":"https://roz-global.info/","inLanguage":"fr-FR"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://roz-global.info/index.html"},{"@type":"ListItem","position":2,"name":"Chapitre 04 · Premiers pas","item":"https://roz-global.info/04-premiers-pas.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" id="gfonts-async">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/style.min.css?v=62">
+</head>
+<body id="top">
+
+<input type="checkbox" id="twitch-widget-toggle" class="tw-widget-toggle-input" checked>
+<aside class="tw-widget" aria-label="Stream Twitch de Poulpix">
+  <div class="tw-widget-head">
+    <span class="tw-widget-title">🔴 Poulpix en direct</span>
+    <label for="twitch-widget-toggle" class="tw-widget-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+  </div>
+  <div class="tw-widget-body">
+    <button type="button" class="tw-widget-facade" data-twitch-channel="poulpi_x" data-twitch-parent="roz-global.info" aria-label="Afficher le lecteur Twitch de poulpi_x">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg>
+      <span>Afficher le lecteur</span>
+    </button>
+    <a class="tw-widget-link" href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Voir sur Twitch ↗</a>
+  </div>
+</aside>
+<label for="twitch-widget-toggle" class="tw-widget-reopen" aria-label="Réafficher le stream Twitch" title="Réafficher le stream">🔴 Twitch</label>
+
+<input type="checkbox" id="utility-strip-toggle" class="utility-strip-toggle-input">
+<div class="utility-strip">
+  <div class="utility-social">
+    <a href="https://roz.mygnjoy.com/en/main" target="_blank" rel="noopener" aria-label="Site officiel" title="Site officiel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+    <a href="https://discord.com/invite/s6CqJnGqwX" target="_blank" rel="noopener" aria-label="Discord officiel" title="Discord officiel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.956 2.4189-2.1568 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9451 2.4189-2.1568 2.4189Z"></path></svg></a>
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener" aria-label="Twitch de Poulpix" title="Twitch de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.286 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.429L22.286 12V0H4.286Zm16.286 11.143-3.429 3.428h-3.429l-3 3v-3H6.857V1.714h13.715v9.429Z"></path><path d="M16.571 4.714h1.715v5.143h-1.715zM11.857 4.714h1.715v5.143h-1.715z"></path></svg></a>
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener" aria-label="X (Twitter) de Poulpix" title="X (Twitter) de Poulpix"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+  </div>
+  <label for="utility-strip-toggle" class="utility-strip-close" aria-label="Fermer (jusqu'au rechargement de la page)" title="Fermer">✕</label>
+</div>
+
+<nav class="site-nav">
+  <div class="brand-wrap">
+    <a class="brand" href="index.html" aria-label="Guide ROZ:G — Accueil"><img src="img/commun/logo.svg" alt="" width="32" height="32" class="brand-logo"></a>
+  </div>
+  <button type="button" class="search-trigger" data-search-open title="Rechercher (touche /)">
+    <span class="st-icon">🔍</span><span class="st-label">Rechercher une classe, un donjon, une mécanique…</span><span class="st-kbd">/</span>
+  </button>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Menu"></label>
+  <div class="nav-links">
+  <p class="nav-group-label">Guide du débutant</p>
+  <a class="pill" href="index.html">🏠 Sommaire</a>
+  <a class="pill" href="01-avant-de-commencer.html">🚪 Démarrer</a>
+  <a class="pill" href="02-interface.html">🖥️ Interface</a>
+  <a class="pill" href="03-choisir-sa-classe.html">⚔️ Classes</a>
+  <a class="pill active" href="04-premiers-pas.html">👣 Premiers pas</a>
+  <a class="pill" href="05-le-monde.html">🗺️ Le monde</a>
+  <a class="pill" href="06-progression.html">📈 Progression</a>
+  <a class="pill" href="07-quotidien.html">☀️ Quotidien</a>
+  <a class="pill" href="08-equipement.html">🛡️ Équipement</a>
+  <a class="pill" href="09-argent-social.html">💰 Argent &amp; social</a>
+  <a class="pill" href="10-roadmap.html">🧭 Feuille de route</a>
+  <a class="pill" href="reference.html">📖 Référence</a>
+  <p class="nav-group-label">Guides avancés</p>
+  <a class="pill" href="guide-avances.html">🗃️ Guides avancés</a>
+  <p class="nav-group-label">Annexes</p>
+  <a class="pill" href="ressources.html">📚 Ressources</a>
+  <a class="pill" href="codes-cadeaux.html">🎁 Codes cadeaux</a>
+  <a class="pill" href="rhcp.html">🎥 RHCP</a>
+  </div>
+</nav>
+<label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Recherche dans le guide">
+    <div class="search-input-wrap">
+      <input type="text" class="search-input" id="search-input" placeholder="Rechercher une classe, un lieu, une mécanique..." autocomplete="off">
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="page-title-bar">
+  <span class="ptb-chapter">Chapitre 04</span>
+  <span class="ptb-title">🚩 Les tout premiers pas</span>
+</div>
+
+<header class="page-header">
+  <p class="eyebrow">Chapitre 04</p>
+  <h1>🚩 Les tout premiers pas</h1>
+  <p>Un tutoriel très guidé sur Ragnarok Zero Global, sans quête de changement de classe à rallonge.</p>
+</header>
+
+<div class="chapter-nav chapter-nav-top">
+  <a href="03-choisir-sa-classe.html"><small>Précédent</small>← Classes</a>
+  <a class="next" href="05-le-monde.html"><small>Suivant</small>Le monde →</a>
+</div>
+
+    <aside class="page-toc" aria-label="Sommaire de la page">
+      <input type="checkbox" id="page-toc-toggle" class="page-toc-toggle-input">
+      <label for="page-toc-toggle" class="page-toc-label">Dans cette page</label>
+      <div class="page-toc-links">
+        <a href="#un-debut-de-partie-tres-encadre">Un début de partie très encadré</a>
+        <a href="#choisir-sa-classe-sans-quete-complexe">Choisir sa classe sans quête complexe</a>
+      </div>
+    </aside>
+
+<main>
+
+  <section class="quest-card">
+    <div class="badge">🚩</div>
+    <p class="chapter">Tutoriel</p>
+    <h2 id="un-debut-de-partie-tres-encadre">Un début de partie très encadré</h2>
+    <p>Le démarrage sur Ragnarok Zero Global tranche avec l'expérience d'autres serveurs : les directions sont claires et le jeu vous prend par la main.</p>
+    <ul>
+      <li>Suivez simplement les flèches au sol pour aller d'un PNJ à l'autre et réaliser ce qu'on vous demande.</li>
+      <li>Aucun grind de job level n'est nécessaire pour changer de classe : les classes se débloquent au fil de la quête tutorielle.</li>
+    </ul>
+    <figure class="screenshot-frame">
+      <img src="img/premiers-pas/fleche.webp" alt="Flèche au sol à suivre" width="944" height="419" loading="lazy" decoding="async">
+      <figcaption>Capture : flèche au sol à suivre</figcaption>
+    </figure>
+  </section>
+
+  <section class="quest-card">
+    <div class="badge">🎓</div>
+    <p class="chapter">Changement de classe</p>
+    <h2 id="choisir-sa-classe-sans-quete-complexe">Choisir sa classe sans quête complexe</h2>
+    <p>Une fois le tutoriel bien avancé, il suffit de monter à l'étage et de rejoindre la salle correspondant à la classe voulue : plus besoin de la traditionnelle quête de changement de classe.</p>
+    <em class="tip">💡 Pas encore décidé(e) ? Direction le <a href="03-choisir-sa-classe.html">chapitre Classes</a> pour un aperçu de l'arbre complet et du calendrier de déblocage avant de monter à l'étage.</em>
+    <em class="warn">⚠️ N'oubliez pas d'allouer vos points de compétence avant de monter : sans cela, le PNJ refusera de vous faire changer de classe et vous resterez bloqué.</em>
+    <p>Une fois le changement effectué, il ne reste qu'à retourner voir le <code class="navi">PNJ Spraki</code> pour reprendre le fil de la quête principale.</p>
+    <figure class="screenshot-frame">
+      <img src="img/premiers-pas/etage.webp" alt="Monter à l'étage" width="790" height="552" loading="lazy" decoding="async">
+      <figcaption>Capture : monter à l'étage</figcaption>
+    </figure>
+    <figure class="screenshot-frame">
+      <img src="img/premiers-pas/jobclass.webp" alt="Salle de changement de classe" width="544" height="489" loading="lazy" decoding="async">
+      <figcaption>Capture : salle de changement de classe</figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<div class="chapter-nav">
+  <a href="03-choisir-sa-classe.html"><small>Précédent</small>← Classes</a>
+  <a class="next" href="05-le-monde.html"><small>Suivant</small>Le monde →</a>
+</div>
+
+<footer>
+  <div class="sig">~ Bonne aventure sur Ragnarok Zero Global ~</div>
+  <div class="foot-links">
+    <a href="https://www.twitch.tv/poulpi_x" target="_blank" rel="noopener">Twitch</a> ·
+    <a href="https://x.com/poulpi_x" target="_blank" rel="noopener">X / Twitter</a> ·
+    <a href="https://www.tiktok.com/@poulpixtwitch" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Retour en haut de page" title="Retour en haut">↑</a>
+
+<script src="js/countdown.js?v=7" defer></script>
+<script src="js/search.js?v=1" defer></script>
+<script src="js/twitch-lazy.js?v=1" defer></script>
+<script src="js/font-swap.js?v=1" defer></script>
+<script src="js/sort-table.js?v=1" defer></script>
+</body>
+</html>
