@@ -139,7 +139,10 @@ function myChance(myHit: number, hit100: number): number {
 export function afkVerdict(input: AfkRuleInput): AfkVerdict {
   const { style, monster, me, maxHits } = input;
   const fails: AfkFail[] = [];
-  const strict = style === 'magic' || monster.isAggressive === true || (monster.mapAggroCount ?? 0) > 0;
+  // Not `=== true`: a monster whose flag we do not have is held to the strict
+  // cap, the same as a known aggressive one. A missing threshold has always
+  // failed here rather than passed, and the aggression flag is a threshold.
+  const strict = style === 'magic' || monster.isAggressive !== false || (monster.mapAggroCount ?? 0) > 0;
   const dodgeCap = strict ? DODGE_CAP_STRICT : DODGE_CAP_RELAXED;
 
   let theirHitPct: number | null = null;

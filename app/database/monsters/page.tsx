@@ -11,6 +11,7 @@ import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
 import { aliasIdsFor } from '@/lib/thai-aliases';
+import { formerNameIdsFor } from '@/lib/former-names';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
@@ -99,7 +100,10 @@ export default async function MonsterListPage({
     // the whole difference (7 Sep 2026).
     // A Thai search cannot match an English column, so the Thai names
     // players use are resolved to ids first and OR-ed in (lib/thai-aliases).
-    const aliasIds = aliasIdsFor('monsters', q);
+    // Same treatment for a name this table used to carry: thirty monsters
+    // were renamed on 7-8 Sep 2026, and "Pecopeco" or "Wootan Fighter" must
+    // still land on the row that now says Peco Peco or Utan Fighter.
+    const aliasIds = [...new Set([...aliasIdsFor('monsters', q), ...formerNameIdsFor(q)])];
     if (aliasIds.length > 0) {
       const like = searchWords(q).map((w) => `name_en.ilike.%25${escapeLikePattern(w)}%25`);
       query = query.or([...like, `id.in.(${aliasIds.join(',')})`].join(','));

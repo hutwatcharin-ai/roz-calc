@@ -2,6 +2,7 @@
 import { mobThresholds } from '@/lib/monster-thresholds';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
+import FormerNameLine from '@/components/FormerNameLine';
 import { riskySkills, SKILL_RISK_LABELS } from '@/lib/afk-safety';
 import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -213,6 +214,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         <div>
           <h1 className="pagehead__title">{monster.name_en}</h1>
           <ThaiAliasLine kind="monsters" id={monster.id} />
+          <FormerNameLine id={monster.id} />
           <p style={{ color: 'var(--dim)' }}>
             Lv.{monster.level}
             {monster.race ? ` · ${monster.race}` : ''}

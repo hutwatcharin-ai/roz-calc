@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "what": "Names a monster used to be filed under here, kept searchable after it was renamed.",
+    "why": "Every rename in scripts/fix-monster-names.mjs replaced a name that our table really carried, and search matches whole words against the current name only. 'Pecopeco' no longer finds Peco Peco; 'Wootan Fighter' no longer finds Utan Fighter. Some of these are typos nobody would type, but the rest are the older or shorter form a long-time player still uses, and dropping them would trade one search miss for another.",
+    "rule": "Only a name this table actually held, with the date it was replaced. Not a guess at what someone might call the monster -- that is what data/aliases-th.json records, and it needs a real search behind it.",
+    "source": "scripts/fix-monster-names.mjs, rounds of 7 and 8 Sep 2026"
+  },
+  "monsters": {
+    "1005": [{ "name": "Farmiliar", "until": "2026-09-07" }],
+    "1010": [{ "name": "Wilow", "until": "2026-09-07" }],
+    "1019": [{ "name": "Pecopeco", "until": "2026-09-07" }],
+    "1033": [{ "name": "Elder Wilow", "until": "2026-09-07" }],
+    "1167": [{ "name": "Savage Babe", "until": "2026-09-07" }],
+    "1293": [{ "name": "Cremy Fear", "until": "2026-09-07" }],
+    "1047": [{ "name": "Pecopeco Egg", "until": "2026-09-07" }],
+    "1074": [{ "name": "Shellfish", "until": "2026-09-07" }],
+    "1281": [{ "name": "Sageworm", "until": "2026-09-07" }],
+    "1262": [{ "name": "Mutant Dragon", "until": "2026-09-07" }],
+    "1107": [{ "name": "Desert Wolf B", "until": "2026-09-08" }],
+    "1246": [{ "name": "Cookie Xmas", "until": "2026-09-08" }],
+    "1122": [{ "name": "Goblin 1", "until": "2026-09-08" }],
+    "1280": [{ "name": "Steam Goblin", "until": "2026-09-08" }],
+    "1687": [{ "name": "Green Iguana", "until": "2026-09-08" }],
+    "1515": [{ "name": "Garm Baby", "until": "2026-09-08" }],
+    "1150": [{ "name": "Moonlight", "until": "2026-09-08" }],
+    "1255": [{ "name": "Neraid", "until": "2026-09-08" }],
+    "1323": [{ "name": "See Otter", "until": "2026-09-08" }],
+    "1169": [{ "name": "Skel Worker", "until": "2026-09-08" }],
+    "1499": [{ "name": "Wootan Fighter", "until": "2026-09-08" }],
+    "1498": [{ "name": "Wootan Shooter", "until": "2026-09-08" }]
+  }
+}

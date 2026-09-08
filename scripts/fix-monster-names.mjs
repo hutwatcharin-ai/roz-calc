@@ -42,6 +42,31 @@ const FIXES = [
   [1281, 'Sageworm', 'Sage Worm'],
   [1074, 'Shellfish', 'Shell Fish'],
   [1279, 'Tri Joint', 'Tri-Joint'],
+
+  // Round two, 8 Sep 2026. The first pass compared names only where they
+  // were nearly the same word; this pass asked the card outright, by
+  // following the mob-to-card link in the prontera crawl rather than
+  // matching strings. Twelve more monsters are filed under a name their own
+  // card does not use -- and in every one of the twelve, prontera agrees
+  // with the card. Somebody hunting "Moonlight Flower" or "Skeleton Worker"
+  // found nothing at all.
+  //
+  // The names being replaced here are not typos, they are older or shorter
+  // forms, and some of them are what a long-time player would still type.
+  // Each one is kept in data/monster-former-names.json so the search still
+  // answers to it.
+  [1107, 'Desert Wolf B', 'Baby Desert Wolf'],
+  [1246, 'Cookie Xmas', 'Christmas Cookie'],
+  [1122, 'Goblin 1', 'Goblin'],
+  [1280, 'Steam Goblin', 'Goblin Steamrider'],
+  [1687, 'Green Iguana', 'Grove'],
+  [1515, 'Garm Baby', 'Hatii Bebe'],
+  [1150, 'Moonlight', 'Moonlight Flower'],
+  [1255, 'Neraid', 'Nereid'],
+  [1323, 'See Otter', 'Sea-Otter'],
+  [1169, 'Skel Worker', 'Skeleton Worker'],
+  [1499, 'Wootan Fighter', 'Utan Fighter'],
+  [1498, 'Wootan Shooter', 'Utan Shooter'],
 ];
 
 async function main() {

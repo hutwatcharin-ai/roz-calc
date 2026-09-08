@@ -129,6 +129,12 @@ table { border-collapse: collapse; width: 100%; }
    the site's clearest differentiator unreadable to a colour-blind player. */
 .aggro__glyph { font-size: 11px; }
 
+/* "unknown" is neither safe nor dangerous: we have no aggression flag for the
+   monster at all. It borrows no status colour -- green would read as safe and
+   yellow as "attacks first", and both would be claims we cannot make -- so it
+   is grey, hollow, and glyphed with a dash. */
+.aggro--unknown { background: transparent; border-color: var(--hair); color: var(--faint); }
+
 .aggro--safe { background: var(--status-safe); color: var(--status-safe-ink); }
 
 /* "aggressive" (attacks first, ungraded -- no player or no monster ATK to

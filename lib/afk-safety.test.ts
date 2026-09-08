@@ -68,6 +68,17 @@ describe('afkVerdict', () => {
     expect(afkVerdict({ style: 'magic', monster: near, me, maxHits: 5 }).fails).toEqual(['dodge']);
   });
 
+  // Added 8 Sep 2026 with the Nordfeld monsters, which carry no aggression
+  // flag in any source. An unknown flag is not a passive monster: it gets the
+  // same strict cap as a known aggressive one, so leaving overnight is refused
+  // rather than allowed on a guess.
+  it('holds a monster whose aggression is unknown to the strict cap', () => {
+    const near = { ...eclipse, flee95: 280 }; // 18%: fine relaxed, not strict
+    const unknown = afkVerdict({ style: 'melee', monster: { ...near, isAggressive: null }, me, maxHits: 5 });
+    expect(unknown.fails).toEqual(['dodge']);
+    expect(unknown.dodgeCap).toBe(afkVerdict({ style: 'melee', monster: { ...near, isAggressive: true }, me, maxHits: 5 }).dodgeCap);
+  });
+
   it('wants us to land 80% for melee, and never checks hit for magic', () => {
     const slippery = { ...eclipse, hit100: 311 }; // 100 + 290 - 311 = 79
     expect(afkVerdict({ style: 'melee', monster: slippery, me, maxHits: 5 }).fails).toEqual(['hit']);

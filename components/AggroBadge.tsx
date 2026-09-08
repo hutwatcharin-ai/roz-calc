@@ -13,6 +13,7 @@ import { AGGRO_LABELS, DANGER_ATK_RATIO, aggroLevel, type AggroLevel } from '@/l
 // pairs with the hollow-outline style in globals.css; "!" and "!!" read as
 // mild vs severe and pair with filled yellow / filled red.
 const GLYPHS: Record<AggroLevel, string> = {
+  unknown: '—',
   safe: '✓',
   aggressive: '?',
   caution: '!',
@@ -38,7 +39,9 @@ export default function AggroBadge({ monster }: { monster: AggroMonster }) {
   // and gives the two numbers it compares. A player who disagrees can see why.
   const percent = Math.round(DANGER_ATK_RATIO * 100);
   const title =
-    level === 'safe'
+    level === 'unknown'
+      ? 'ยังไม่มีข้อมูลว่าเข้าโจมตีก่อนหรือไม่ — อย่าเพิ่งปล่อยทิ้งไว้'
+      : level === 'safe'
       ? 'ไม่เข้าโจมตีก่อน'
       : playerMaxHp === null || monster.atk_max === null
         ? `เข้าโจมตีก่อน${monster.atk_max === null ? '' : ` · ATK สูงสุด ${monster.atk_max.toLocaleString()}`}`

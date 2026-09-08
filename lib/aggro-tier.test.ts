@@ -8,8 +8,12 @@ describe('aggroLevel', () => {
     expect(aggroLevel({ is_aggressive: false, atk_max: 9999 }, PLAYER_HP)).toBe('safe');
   });
 
-  it('treats a null aggression flag as safe, matching the column default', () => {
-    expect(aggroLevel({ is_aggressive: null, atk_max: 100 }, PLAYER_HP)).toBe('safe');
+  // Was 'safe' until 8 Sep 2026, when monsters with no aggression flag at all
+  // entered the table. "Safe" renders as a promise the monster leaves you
+  // alone while you are away from the keyboard; a row we know nothing about
+  // must not make it.
+  it('says unknown, not safe, when the aggression flag is missing', () => {
+    expect(aggroLevel({ is_aggressive: null, atk_max: 100 }, PLAYER_HP)).toBe('unknown');
   });
 
   it('reports the ungraded level when the player is unknown', () => {

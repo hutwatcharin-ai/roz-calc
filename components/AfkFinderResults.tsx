@@ -110,7 +110,7 @@ export default function AfkFinderResults({ rows }: { rows: AfkCandidate[] }) {
 
   // Non-aggressive pool for the impersonal view; with numbers in, aggressive
   // monsters join and are simply held to the stricter dodge cap.
-  const baseRows = rows.filter((r) => !r.is_aggressive);
+  const baseRows = rows.filter((r) => r.is_aggressive === false);
 
   type Judged = { row: AfkCandidate; verdict: AfkVerdict | null; risks: ReturnType<typeof riskySkills>; expHour: number | null };
   const judged: Judged[] = (personal ? rows : baseRows).map((row) => {

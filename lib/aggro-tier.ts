@@ -5,13 +5,14 @@
 // (spec 3.15.1). It appears on every surface a monster appears on.
 
 
-export type AggroLevel = 'safe' | 'aggressive' | 'caution' | 'danger';
+export type AggroLevel = 'unknown' | 'safe' | 'aggressive' | 'caution' | 'danger';
 
 // Our own threshold, not a game value: a hit costing at least this share of max
 // HP is called dangerous. The UI must say so, so a player can disagree with it.
 export const DANGER_ATK_RATIO = 0.2;
 
 export const AGGRO_LABELS: Record<AggroLevel, string> = {
+  unknown: 'ไม่มีข้อมูล',
   safe: 'ปลอดภัย',
   aggressive: 'โจมตีก่อน',
   caution: 'ระวัง',
@@ -25,6 +26,11 @@ export function aggroLevel(
   monster: { is_aggressive: boolean | null; atk_max: number | null },
   playerMaxHp: number | null,
 ): AggroLevel {
+  // Unknown is its own answer. The Nordfeld monsters imported on 8 Sep 2026
+  // carry no aggression flag in either source, and treating a missing flag as
+  // false would print "ไม่เข้าโจมตีก่อน" -- a promise the monster leaves you
+  // alone while you are away, made from no evidence at all.
+  if (monster.is_aggressive === null) return 'unknown';
   if (!monster.is_aggressive) return 'safe';
   if (monster.atk_max === null) return 'aggressive';
   if (playerMaxHp === null || !Number.isFinite(playerMaxHp) || playerMaxHp <= 0) return 'aggressive';
