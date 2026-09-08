@@ -99,19 +99,33 @@ export default async function CardsPage({
     droppers.set(d.item_id, list);
   }
 
-  const cards = (allCards ?? []).map((c) => ({
-    ...c,
-    // The folded slot, not the raw string: Headgear and Helmet are one place
-    // on the character and splitting the filter into both helps nobody. The
-    // card's own page still shows the client's exact wording.
-    slot: cardSlot(c.description),
-    roles: cardRoles(c.description),
-    // Thai translation leads when present; the English effect still powers
-    // the search below so "LUK" and English phrasing keep matching.
-    effect: c.description_th ?? cardEffect(c.description),
-    effectEn: cardEffect(c.description),
-    from: (droppers.get(c.id) ?? []).sort((a, b) => b.rate - a.rate),
-  }));
+  const squash = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const cards = (allCards ?? []).map((c) => {
+    const from = (droppers.get(c.id) ?? []).sort((a, b) => b.rate - a.rate);
+    // Every one of these is called "<something> Card" on a page headed
+    // "ฐานข้อมูลการ์ด", so the word is printed 315 times and distinguishes
+    // nothing. Dropped from the list; the card's own page still uses the
+    // full in-game name.
+    const name = c.name_en.replace(/ Card$/, '');
+    return {
+      ...c,
+      name,
+      // The folded slot, not the raw string: Headgear and Helmet are one
+      // place on the character and splitting the filter into both helps
+      // nobody. The card's own page still shows the client's exact wording.
+      slot: cardSlot(c.description),
+      roles: cardRoles(c.description),
+      // Thai translation leads when present; the English effect still powers
+      // the search below so "LUK" and English phrasing keep matching.
+      effect: c.description_th ?? cardEffect(c.description),
+      effectEn: cardEffect(c.description),
+      from,
+      // Worth printing only when it is not the obvious answer: a single
+      // dropper with the card's own name tells the reader nothing they did
+      // not already have on the same row.
+      dropNote: !(from.length === 1 && squash(from[0].name) === squash(name)),
+    };
+  });
 
   // Counts come from the data, so an empty group never shows a chip that
   // leads to an empty page.
@@ -190,6 +204,24 @@ export default async function CardsPage({
         />
       )}
 
+      {/* The guide half: pick the job, not the name. Chips rather than another
+          dropdown because the list of jobs IS the thing worth reading -- a
+          player who does not know what a card can do for them learns it here.
+          A card sits in every group it truly serves, so the counts overlap. */}
+      <section className="rolepick">
+        <h2 className="rolepick__label">เอาไว้ทำอะไร</h2>
+        <div className="chips">
+          <Link className={`chip${role === '' ? ' chip--on' : ''}`} href={roleHref('')}>
+            ทั้งหมด
+          </Link>
+          {roles.map((r) => (
+            <Link key={r} className={`chip${role === r ? ' chip--on' : ''}`} href={roleHref(r)} title={ROLE_TH[r].asks}>
+              {ROLE_TH[r].title} {roleCounts.get(r)}
+            </Link>
+          ))}
+        </div>
+        {role && <p className="rolepick__asks">{ROLE_TH[role].asks}</p>}
+      </section>
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ชื่อการ์ด หรือเอฟเฟกต์ เช่น LUK" />
         <select name="slot" defaultValue={slot}>
@@ -211,25 +243,6 @@ export default async function CardsPage({
         <button type="submit" className="btn">ค้นหา</button>
       </form>
 
-      {/* The guide half: pick the job, not the name. Chips rather than another
-          dropdown because the list of jobs IS the thing worth reading -- a
-          player who does not know what a card can do for them learns it here.
-          A card sits in every group it truly serves, so the counts overlap. */}
-      <section style={{ marginTop: 14 }}>
-        <p className="muted" style={{ margin: '0 0 6px', fontSize: 13 }}>เอาไว้ทำอะไร</p>
-        <div className="chips">
-          <Link className={`chip${role === '' ? ' chip--on' : ''}`} href={roleHref('')}>
-            ทั้งหมด
-          </Link>
-          {roles.map((r) => (
-            <Link key={r} className={`chip${role === r ? ' chip--on' : ''}`} href={roleHref(r)} title={ROLE_TH[r].asks}>
-              {ROLE_TH[r].title} {roleCounts.get(r)}
-            </Link>
-          ))}
-        </div>
-        {role && <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>{ROLE_TH[role].asks}</p>}
-      </section>
-
       <div className="card">
         <table className="data-table">
           <thead>
@@ -237,13 +250,12 @@ export default async function CardsPage({
               <th>ชื่อ</th>
               <th>ช่องที่ใส่</th>
               <th>เอฟเฟกต์</th>
-              {dropsKnown && <th>ดรอปจาก</th>}
             </tr>
           </thead>
           <tbody>
             {error ? (
               <tr>
-                <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                   เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
@@ -252,34 +264,41 @@ export default async function CardsPage({
                 {rows.map((c) => (
                   <tr key={c.id}>
                     <td data-label="">
-                      <Link href={`/database/cards/${c.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        {c.icon_url && (
-                          <img loading="lazy" decoding="async" src={c.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                        )}
-                        {c.name_en}
-                      </Link>
+                      <Link className="cardname" href={`/database/cards/${c.id}`}>{c.name}</Link>
+                      {/* Where it drops, said only where saying it adds
+                          something. 244 of 315 cards drop from the monster
+                          they are named after, so printing that in a column
+                          of its own made three quarters of the page repeat
+                          itself and buried the 55 rows where the answer is
+                          not the obvious one. */}
+                      {dropsKnown && c.dropNote && (
+                        <span className="cardfrom">
+                          {c.from.length === 0 ? (
+                            'ยังไม่รู้ว่าดรอปจากอะไร'
+                          ) : (
+                            <>
+                              ดรอปจาก{' '}
+                              {c.from.slice(0, 2).map((m, i) => (
+                                <span key={m.id}>
+                                  {i > 0 && ', '}
+                                  <Link href={`/database/monsters/${m.id}`}>{m.name}</Link>
+                                </span>
+                              ))}
+                              {c.from.length > 2 && ` +${c.from.length - 2}`}
+                            </>
+                          )}
+                        </span>
+                      )}
                     </td>
                     <td data-label="ช่องที่ใส่">{c.slot ? SLOT_TH[c.slot] : '—'}</td>
-                    <td data-label="เอฟเฟกต์" className="effect">{c.effect ?? '—'}</td>
-                    {dropsKnown && (
-                      <td data-label="ดรอปจาก">
-                        {c.from.length === 0 ? (
-                          <span className="muted">ยังไม่รู้</span>
-                        ) : (
-                          <span className="recipe__list">
-                            {c.from.slice(0, 2).map((m) => (
-                              <Link key={m.id} href={`/database/monsters/${m.id}`}>{m.name}</Link>
-                            ))}
-                            {c.from.length > 2 && <span className="muted">+{c.from.length - 2}</span>}
-                          </span>
-                        )}
-                      </td>
-                    )}
+                    <td data-label="เอฟเฟกต์" className="effect">
+                      <span className="effect__text">{c.effect ?? '—'}</span>
+                    </td>
                   </tr>
                 ))}
                 {rows.length === 0 && (
                   <tr>
-                    <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                    <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                       ไม่พบการ์ดที่ตรงเงื่อนไข
                     </td>
                   </tr>

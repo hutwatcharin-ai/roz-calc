@@ -269,6 +269,16 @@ table { border-collapse: collapse; width: 100%; }
 
 .data-table tbody tr:hover { background: var(--panel-2); }
 
+/* Links inside a list table were never styled, so every one of them rendered
+   in Chrome's own dark-mode link colour -- rgb(158,158,255), a blue that
+   appears nowhere else on this site -- with a full-strength underline. Fifty
+   rows of that is the loudest thing on the page and none of it is ours.
+   The underline stays: it is the affordance that does not depend on colour.
+   It just stops shouting. */
+.data-table a,
+.data-table a:visited { color: var(--text); text-decoration-color: var(--faint); text-underline-offset: 3px; }
+.data-table a:hover { color: var(--cyan); text-decoration-color: var(--cyan); }
+
 /* Clickable column headers: same face as a static th, plus a direction
    glyph. A button, not a link -- sorting is state, not navigation. */
 a.thsort { text-decoration: none; }
@@ -349,7 +359,39 @@ a.thsort { text-decoration: none; }
 /* Card effects are one line in most rows but a few run long. Cap the column on
    desktop so one verbose card cannot stretch every other row; the stacked
    mobile layout has no columns to distort, so it wraps freely there. */
-.data-table td.effect { max-width: 520px; color: var(--dim); }
+/* The effect column, and the two lines that sit under a card's name.
+   max-width on a td is advisory -- an auto-layout table widens it anyway, and
+   on the cards page the effect ran the full 1,100px while the column beside
+   it sat pinned to the right edge. The cap goes on an element inside the
+   cell, where it is honoured. */
+.data-table td.effect { color: var(--dim); }
+.effect__text { display: block; max-width: 68ch; }
+
+/* Card name, then -- only when it is not the obvious answer -- where it
+   drops. 244 of 315 cards come from the monster they are named after, so
+   this line appears on the 71 rows where it earns its space. */
+.cardname { font-weight: 600; }
+.cardfrom {
+  display: block;
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 12.5px;
+}
+.cardfrom a { color: var(--faint); }
+.cardfrom a:hover { color: var(--text); }
+
+/* "What is it for" comes before the search box: 90 days of logs recorded no
+   search on this page at all, and the group names are what a reader who does
+   not know card names can actually act on. */
+.rolepick { margin: 14px 0 12px; }
+.rolepick__label {
+  margin: 0 0 8px;
+  font: 600 13px/1.6 var(--font-sarabun), sans-serif;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.rolepick__asks { margin: 8px 0 0; color: var(--dim); font-size: 13px; }
 
 @media (max-width: 720px) {
   .data-table td.effect { max-width: none; }
@@ -410,6 +452,19 @@ a.thsort { text-decoration: none; }
 }
 
 .chip:hover { color: var(--text); border-color: var(--cyan); }
+
+/* A row of chips used as a filter. The selected one has to be obvious at a
+   glance in a row of fourteen, so it takes the site's accent fill rather
+   than only a border -- a border alone was the whole difference and it
+   disappeared among the others. */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip--on {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--yellow-ink);
+  font-weight: 700;
+}
+.chip--on:hover { color: var(--yellow-ink); border-color: var(--yellow); }
 
 /* Stat tables (base stats, status) are label-value pairs, not a multi-column
    grid with a header row -- .data-table's mobile card transformation exists to
