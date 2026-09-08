@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useToolUse } from '@/lib/use-tool-use';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { tipFacts, tipLevel, type SkillLevelMap, type SkillTipLine } from '@/lib/skill-details';
 import {
   blockedBy,
   CLASS_SLUGS,
@@ -39,6 +40,9 @@ function SkillCell({
   icon,
   level,
   blocking,
+  facts,
+  factsLevel,
+  description,
   onRaise,
   onLower,
 }: {
@@ -46,28 +50,54 @@ function SkillCell({
   icon: string | null;
   level: number;
   blocking: { slug: string; name: string; level: number }[];
+  /** What this skill does at the level chosen (or at 1 when none is spent). */
+  facts: SkillTipLine[];
+  factsLevel: number | null;
+  description: string | null;
   onRaise: () => void;
   onLower: () => void;
 }) {
   const max = skill.max_level ?? 1;
   const locked = blocking.length > 0 && level === 0;
-  // Everything that is not the name, the level and the two buttons lives in
-  // the tooltip: the grid is 7 cells wide, and a card that spells out its
-  // prerequisites inline made each stage a screenful on its own.
-  const title = [
-    skill.name,
+  // Conditions on one line, the same set the browser tooltip used to carry.
+  const conditions = [
     skill.free ? 'สกิลเควส — ไม่กินแต้ม' : null,
     skill.required_job_level !== null ? `ต้อง Job Lv ${skill.required_job_level}` : null,
     locked ? `ต้องมี ${blocking.map((b) => `${b.name} Lv ${b.level}`).join(' + ')} ก่อน` : null,
-  ]
-    .filter(Boolean)
-    .join(' · ');
+  ].filter(Boolean) as string[];
 
   return (
     <div
       className={`skillcell${level > 0 ? ' skillcell--taken' : ''}${locked ? ' skillcell--locked' : ''}`}
-      title={title}
     >
+      {/* Replaces the browser's own tooltip (7 Sep 2026): that one could not
+          be formatted, waited half a second, and had nowhere to put what the
+          chosen level actually does -- which is the question being asked on
+          this page. Hover and keyboard focus both open it; on a touch screen
+          it stays hidden, and the blocking line on the card carries the part
+          that matters most. */}
+      {(facts.length > 0 || description || conditions.length > 0) && (
+        <div className="skilltip" role="tooltip">
+          <p className="skilltip__head">
+            {skill.name}
+            {factsLevel !== null && (
+              <span className="skilltip__lv">
+                {level > 0 ? `Lv ${factsLevel}` : `ถ้าใส่ 1 แต้ม`}
+              </span>
+            )}
+          </p>
+          {facts.map((f) => (
+            <p className="skilltip__row" key={f.label}>
+              <span className="skilltip__label">{f.label}</span>
+              <span>{f.value}</span>
+            </p>
+          ))}
+          {description && <p className="skilltip__desc">{description}</p>}
+          {conditions.map((c) => (
+            <p className="skilltip__cond" key={c}>{c}</p>
+          ))}
+        </div>
+      )}
       <div className="skillcell__head">
         {icon ? (
           <img className="skillcell__icon" src={icon} alt="" width={24} height={24} loading="lazy" decoding="async" />
@@ -99,7 +129,17 @@ function SkillCell({
   );
 }
 
-export default function SkillPlanner({ icons }: { icons: Record<string, string> }) {
+export default function SkillPlanner({
+  icons,
+  levels = {},
+  descriptions = {},
+}: {
+  icons: Record<string, string>;
+  /** Per-level effect/SP/range/cast, keyed by slug then level. */
+  levels?: SkillLevelMap;
+  /** The Thai sentence about what the skill is, where we have one. */
+  descriptions?: Record<string, string>;
+}) {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -211,6 +251,9 @@ export default function SkillPlanner({ icons }: { icons: Record<string, string> 
                   icon={icons[skill.slug] ?? null}
                   level={build[skill.slug] ?? 0}
                   blocking={blockedBy(classSlug, build, skill.slug)}
+                  facts={tipFacts(levels, skill.slug, build[skill.slug] ?? 0)}
+                  factsLevel={tipLevel(levels, skill.slug, build[skill.slug] ?? 0)}
+                  description={descriptions[skill.slug] ?? null}
                   onRaise={() => setBuild((b) => raise(classSlug, b, skill.slug))}
                   onLower={() => setBuild((b) => lower(classSlug, b, skill.slug))}
                 />
