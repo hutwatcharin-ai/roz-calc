@@ -12,7 +12,7 @@ import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
 import { aliasIdsFor } from '@/lib/thai-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
-import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -21,7 +21,7 @@ import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 // else: no game name, no size, nothing telling the searcher this is the
 // thing they asked for.
 export const metadata = {
-  title: 'ข้อมูลมอนสเตอร์ RO Zero — 365 ตัว ดรอป จุดเกิด ค่าสถานะ',
+  title: 'ข้อมูลมอนสเตอร์ RO Zero — 349 ตัว ดรอป จุดเกิด ค่าสถานะ',
   description:
     'มอนสเตอร์ทุกตัวใน Ragnarok Zero Global ภาษาไทย — ค้นชื่อ กรองตามเผ่า ธาตุ ช่วงเลเวล ดูของที่ดรอป แมพที่เจอ HP EXP และ HIT/FLEE ที่ต้องมี',
 };
@@ -55,7 +55,7 @@ export default async function MonsterListPage({
 }: {
   searchParams: {
     q?: string; race?: string; element?: string; size?: string; aggro?: string;
-    lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string;
+    lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string; mj?: string;
   };
 }) {
   const q = searchParams.q ?? '';
@@ -68,6 +68,10 @@ export default async function MonsterListPage({
   // Challenge clones are opt-in: absent param = hidden. Server-side so the
   // result count and pagination stay exact (unlike the CSS hide elsewhere).
   const showC = searchParams.c === '1';
+  // Memorial-dungeon variants, hidden the same way and for the same reason:
+  // "Orc Warrior" and "Orc Warrior Mj" next to each other is one entry the
+  // reader wants and one they have to read past.
+  const showMj = searchParams.mj === '1';
   // Level bounds: hunting is level-band shopping, and the sort alone cannot
   // answer "what is around my level". Empty stays empty; junk becomes empty.
   const lvmin = Math.max(0, Number(searchParams.lvmin ?? 0) || 0);
@@ -107,6 +111,7 @@ export default async function MonsterListPage({
   if (size) query = query.eq('size', size);
   if (aggro) query = query.eq('is_aggressive', aggro === '1');
   if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+  if (!showMj) query = query.not('name_en', 'like', MJ_VARIANT_SQL_NOT_LIKE);
   if (lvmin > 0) query = query.gte('level', lvmin);
   if (lvmax > 0) query = query.lte('level', lvmax);
 
@@ -151,6 +156,24 @@ export default async function MonsterListPage({
 
   const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
 
+  // Same URL with the Mj switch flipped, always back to page 1: the row
+  // count changes, so the page number would stop meaning the same thing.
+  function mjHref(next: boolean): string {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (race) params.set('race', race);
+    if (element) params.set('element', element);
+    if (size) params.set('size', size);
+    if (aggro) params.set('aggro', aggro);
+    if (lvmin > 0) params.set('lvmin', String(lvmin));
+    if (lvmax > 0) params.set('lvmax', String(lvmax));
+    if (sort !== 'level') params.set('sort', sort);
+    if (showC) params.set('c', '1');
+    if (next) params.set('mj', '1');
+    const qs = params.toString();
+    return `/database/monsters${qs ? `?${qs}` : ''}`;
+  }
+
   function buildHref(targetPage: number, showCOverride?: boolean) {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
@@ -162,6 +185,7 @@ export default async function MonsterListPage({
     if (lvmax > 0) params.set('lvmax', String(lvmax));
     if (sort !== 'level') params.set('sort', sort);
     if (showCOverride ?? showC) params.set('c', '1');
+    if (showMj) params.set('mj', '1');
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/monsters${qs ? `?${qs}` : ''}`;
@@ -230,7 +254,15 @@ export default async function MonsterListPage({
             count stay honest; the hidden form field keeps ?c=1 across a new
             text search too. */}
         {showC && <input type="hidden" name="c" value="1" />}
+        {showMj && <input type="hidden" name="mj" value="1" />}
         <CVariantToggle mode="nav" navShow={showC} navHrefShow={buildHref(1, true)} navHrefHide={buildHref(1, false)} />
+        {/* Plain link, not the C toggle's remembered checkbox: this one has
+            no reason to follow the reader onto other pages, and the count is
+            named so nothing disappears silently. */}
+        <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
+          <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
+          ซ่อนมอนดันเจี้ยนพิเศษ (Mj) 16 ตัว
+        </Link>
       </form>
 
       <FilterState

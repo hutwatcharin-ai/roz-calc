@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isCVariant } from './c-variant';
+import { isCVariant, isMjVariant } from './c-variant';
 
 describe('isCVariant', () => {
   it('matches C<digit><space> prefixes', () => {
@@ -16,5 +16,21 @@ describe('isCVariant', () => {
     expect(isCVariant('')).toBe(false);
     expect(isCVariant(null)).toBe(false);
     expect(isCVariant(undefined)).toBe(false);
+  });
+});
+
+describe('isMjVariant', () => {
+  it('spots the memorial-dungeon variants by their suffix', () => {
+    expect(isMjVariant('Orc Warrior Mj')).toBe(true);
+    expect(isMjVariant('Hode Mj')).toBe(true);
+    expect(isMjVariant('Orc Warrior')).toBe(false);
+  });
+
+  it('does not fire on a name that merely contains the letters', () => {
+    // Checked against the whole table: nothing else contains "mj" at all,
+    // but the rule has to be the suffix, not a substring.
+    expect(isMjVariant('Mjolnir Guard')).toBe(false);
+    expect(isMjVariant('Mj')).toBe(false);
+    expect(isMjVariant(null)).toBe(false);
   });
 });
