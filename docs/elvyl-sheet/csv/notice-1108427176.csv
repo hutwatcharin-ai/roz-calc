@@ -1,0 +1,318 @@
+,,,,,,,,,,,,,,,,,
+,               NOTICE GLOBALE,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Cette notice sert pour les deux simulateur actuellement en place : [DPS Calc] et [Forge / Potion %] :
+Afin de les manipuler 3 grandes actions sont à votre disposition :
+
+- Remplir les cases : elles sont toujours dans un fond cyan pale, très souvent précèdé d'une case jaune et attendent une valeurs chiffrée de votre part.
+                                 Inutile de rajouter des mentions Les mises en formes sont automatiques. 
+
+- Cocher ou décocher : elles appliquent l'effet de la case qui la précède (ou la suive dans de rare cas)
+
+- Utiliser les menu déroulants :
+
+Il existe quelques sécurités qui vous avertissent d'un fond rouge lorsque vous faite quelque chose
+de normalement impossible et qui impacte votre DPS.
+Restez malgrés tout vigilant.",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,                  Notice [DPS Calc],,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Ce simulateur à été réalisé à la main en se basant un maximum sur les sources chinoises de TwRo Zero
+Tout leurs résultats et les miens s'appuient sur la force de multiples test et observations.
+ Il ne sera malheureusement jamais possible de valider tout à 100%.
+
+- les directs des joueurs du serveur, en particulier de [ 龜老闆 ] et [ 烈焰 ], stearmers réguliers sur youtube 
+- le calculateur chinois de R.Zero [ https://landgris.github.io/ROCalculator/?zero ] vérifié par plusieurs test
+  avec les stream des chaînes précèdentes.
+- le skill tree de [ https://rz.fharr.com/db/skilltree ]
+- le forum taiwanais ""Bahamut"" [ RO 仙境傳說Online 哈啦板 ]
+- le site officiel de TwRo [ RO仙境傳說 Online：樂園 ]
+
+
+Maintenant, place au ""simulateur"" ou plutôt calculateur : on ne se focalise que sur les calcul de vos dégâts.
+Je vous recommande au moins de dézommer (Ctrl + molette) pour avoir au moins son entièreté de gauche à droite.
+Il se découpe en quatre grandes zones ; vous, votre adversaire, l'équipe et la sélection de vos sorts offensifs + résultats :",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,1. Votre personnage →,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,2. L'ennemi →,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,"← 3. sélection des skill
+     offensifs + résultats",,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,"4. Les bonus de votre équipe ↑
+(exeption [Magnum Break])",,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,   1. Votre personnage,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Commençons par la partie de gauche, normalement assez intuitive :
+on y choisi sa classe, ses armes et réparti ses points de statistique.
+Des sécurités s'activeront si votre total de points dépensés exède votre maximum disponible
+ou si une statistique dépasse 99.",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Juste en dessous vous aller simuler les caractéristique de votre arme principale,
+rafinage, élément, etc...
+(un tableau supplémentaire apparaîtra plus bas en cas d'une deuxième)",,,,,,"Une partie avec les flèches apparaîtra si vous sélectionnez une arme à distance.
+Une sécurité rend leur valeur d'Atk nulle si vous ne portez plus une arme adéquate.
+⚠️Utilisez l'élément de votre arme pour simuler celui de vos munitions ⚠️",,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Avant de se penchez sur le reste de l'équipement, concentrons nous sur ce grand tableau à droite :
+Il se sépare en plusieurs catégories :
+",,,,,,,,,,,,,,,,
+,"🔶A gauche se trouve la partie de sélection des buffs et skills personnels :
+   - La première partie est commune à tous, ce sont les consomables comme les potions, food et parchemins.
+   - La deuxième partie dépend de la classe préalablement choisie (ici un [Knight] ).
+     S'y trouve d'abord tout ce qui peut modifier votre vitesse d'attaque, puis tout ce qui modifie vos dégâts
+
+Il suffit de cocher les cases pour voir apparaître leur bonus respectifs dans la bonne catégorie.
+Par exemple, cocher [Blessing] me donne bien 10 DEX et le total cumulé 10 + 7 + 6 = 24.
+Vous remarquerez que les points de bonus job se sont déjà automatiquement accordé à votre classe.
+(le job est volontairment bloqué en 50)
+
+🔷En haut se trouve les différentes statitiques impactés, rangées par catégories : vitesse, physique et magie 
+     Explications de termes justes après l'image ci-dessous",,,,,,,,,,,,,,,,
+,,,,"Stats qui modifient
+la vitesse d'attaque ↓",,,"Stats qui modifient
+les dégâts physiques ↓",,,,"Stats qui modifient
+les dégâts magiques ↓",,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Buffs / consomoables →
+(communs)            ",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Skills buff ASPD →
+                (personnels)        ",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Skills buff dégâts →
+ (personnels)        ",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,← Total,,,
+,,,,,,,,,,,,,,,,,
+,"Explications simplifiées de chaque caractéristique (pas besoin de rappel pour les stats de base).
+L'onglet [Formules] peut servir d'illustration.
+
+
+                                 ",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"🔷Partie ASPD :
+
+    - Skill potion / bonus : nouveau bonus flat qui est fortement dépendant de l'AGI.
+                                        Ne pas en avoir le rien quasi-inexstant, 
+                                        avoir beaucoup d'AGI le sublime.
+
+    - % Attack Speed : ..... parfois aussi appelé delay attack speed ; se trouve souvant
+                                        en combinaison avec le bonus précèdent.
+                                        Un multiplicateur puissant en fin de formule.
+
+    - Flat ASPD : ............. bonus additionnel en toute fin de calcul. Surtout fort pour
+                                        débloquer les derniers points et atteindre la vitesse
+                                        d'attaque maximale
+
+🔷Partie Magique :
+
+     - % M.ATK ...............┃ 
+     - M.ATK Equip' ........┃
+     - Mastery M.ATK .....┃ →  se référer aux catégorie physiques du même nom
+     - % bonus M.ATK ....┃      mais cette fois appliqué à la magie
+     - % Ignore M.DEF : .┃",,,,,,"🔷Partie Physique :
+
+    - CRIT et % CRIT : ... respectivement vos chances d'infliger un coup critique faisant 1,4 fois vos dégâts et un autres multiplicateur (% CRIT)
+                                       qui est lui-même multiplié par ce facteur 1,4 ; donc 1,4 x (1 + % CRIT)
+
+    - % ATK : .................. multiplacteur sur l'ATK de tout votre équipement + votre arme et son raffinage + consomables
+
+    - ATK Equip' : ........... ou ATK stuff ; tout ce qui contient la mention ""+ X ATK"" et qui viens de votre équipement + les consomables.
+                                       l'ATK des munitions et celle de BASE (j'insiste) de l'arme n'y figure pas. Une ligne sur votre arme qui dirait
+                                      par exemple ""+ 20 ATK"" pour une raison  ou une autre sera compté comme de l'ATK Equip'
+    
+    - % bonus skill ATK : multiplicateur supplémentaire rare en fin de formule commme [Over Thrust] ou [Magical amplification] côté magique
+
+    - Mastery ATK : ....... en règles générale, tout les bonus provenant de skills passifs d'un montant fixe qui disent ""+ x ATK"" ou
+                                     ""+ x damages"". C'est typiquement la série des skills comme [Mastery Mace] ou [Axe Mastery], d'où son nom.
+                                     on y trouve par exemple aussi d'autres passifs aux montants fixes comme [Weapon research]. La plupart
+                                     des buffs actifs de skill comme [Impositio Manus] ou [Song of a Drum] sont dans cette catégorie.
+                                     Désormais situé en milieu de formule, ils sont bien plus intéressant qu'avant.
+
+    - % Ignore DEF : .... réduit d'un pourcentage la Hard DEF de l'adverse.",,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Vous avez désormais toutes les clefs de compréhention pour simuler la suite de votre équipement réparti sur deux zones :
+les multplicateurs à gauche et tout le reste sur les deux lignes au dessus des totaux. Celle-ci sont libres et intervertibles.
+Vous y mettez aussi les bonus conférés par vos enchantement, vos cartes qui ne seraient pas des multiplicateurs,
+d'autre consomables qui ne sont pas listés ou ce que vous voulez.
+
+Vous pouvez ainsi trouver rapidement combien d'AGI il vous manque pour un ouveau point d'ASPD,
+voir à l'avance ce que ferait ce nouvel équipement, comparer deux enchantements,
+Qui est le plus fort entre +30 ATK et +2% ATK avec mon stuff,....
+
+C'est aussi une zone d'ajustement. Comme vous aurez pu le remarquer, tout vos skill sont considérés au niveau maximum
+Mais votre build n'a prévu de mettre que 5 points dans [Knuckle Mastery] ? Hop, un ""-15"" dans ""Mastery ATK"" 
+et s'est réglé. A vous de vous adapter. et n'ayez pas peur d'expérimenter.
+
+
+Astuce : Vous souhaitez indiquer que votre adversaire à 30% de résistance élémentaire contre vous ?
+              Mettre -30 dans vos multiplicateurs correspondants (ici % VS élément) reviens exactement au même.
+              Si vous aviez vous même 20%dans cette résistance, cela ne devient plus que -30+20 = -10%.",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,↑                    Simuler votre équipement                   ↑ ,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,   2. Votre adversaire,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Retrouver votre adversaire dans une base donnée comme [ https://midgardhub.com/database/monsters ]
+Le simulateur considère que vous avez 100% de chance de HIT.
+
+⚠️ Si vous ne trouvez pas la Soft DEF et M.DEF d'un monstre, il est possible de la calculer
+(tout passage entre crochet demande d'arrondir à l'inférieur). Sinon utilisez ces moyennes :
+
+",,,,,,,,,,,,,,,,
+,"Zones bas level (1~50) :
+
+- 30 Hard DEF / 10 M.DEF
+- 15 pour les Soft",,"Zone mid level (50~100) :
+
+- 100 Hard DEF / 45 M.DEF
+- 50 pour les Soft",,,"Zone HL : (100+) :
+
+- 250 Hard DEF / 100 M.DEF
+- 100 pour les Soft",,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Premiers MvP :
+
+- 325 Hard DEF / 120 M.DEF
+- 200 pour les Soft",,"MvP avancés :
+
+- 700 Hard DEF / 250 M.DEF
+- 400 pour les Soft",,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,   3. Choix des Skills offensifs et résultats,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Il est désormais temps de passer aux résultats. Ceux-ci soit séparés en trois partie :
+
+- Les Auto-attaques et leur DPS (le haut de la partie auto-cast les concerne)
+- Les dégâts Skills offensifs et leur temps de cast
+- Les autres sources de dégâts indirecte comme les autocast ou les homonculus
+
+En fonction de votre choix de classe, de nouvelles options vont apparaître.(voir exemples à droite)",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,"Zone dédiée au DPS
+des auto-attaques ↓",,,,"Sources de dégâts
+indirects ↓",,,,"Choisir la classe Hunter →
+en cochon le [Falcon]            ",,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,"Choisir la classe Sage
+débloque l'Auto-spell ↓",,,"Choisir la classe Alchemist
+débloque son Homonculus ↓"
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,"↑ Choix des Skill, dégâts 
+et vitesse d'incantation",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Pour les Skill, une liste sera proposé en fonction de la classe choisie.
+Une fenêtre à gauche, jusqu'alors caché peut alors parfois apparaître
+pour vous demander des informations supplémentaires : ",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Choisir un Skill vous donne dans l'ordre :
+
+- Sa formule (si un ""?"" appraît à la fin, c'est qu'il subsiste un doute dessus)
+- Le niveau du sort que vous utilisez et son niveau max (la case deviendra rouge si le dépassez)
+- Le multiplicateur de skill en fonction de vos choix précèdents et parfois de vos stats et autres
+- Son élément qui peut être fixe ou reprendre celui de votre arme. Il est comparé à l'élément de l'adversaire
+   et vous donne le multiplicateur de dégâts qui en découle.
+- Des infos sur le sort, comme sa porté, la taille de sa zone, ses prérequis, ses chances d'infliger un status,...
+
+- Les temps de canalisation, le delay et le cooldown du sort.
+⚠️Tout les valeur d'incantation sont celles du niveau maximum du sort choisi⚠️
+     N'hésitez pas à vous servir de [ RagZero 職業技能樹- 仙境傳說樂園(ROZ) ] au besoin
+
+Vous pouvez ensuite choissir les buff et votre équipement qui peuvent influencer sur ce temps d'incantation.
+La réduction de vos stats et déjà incluse tout en bas.
+
+Il ne reste plus qu'à en admirer les résultat sur la droite. Le nombre de Hit désigne le nombre d'instance de dégâts
+et restent purement informatifs. A ne pas multiplier avec le nombre en dessous.; Ce sont vos dégâts finaux.
+ ",,,,,,,,,,,,,"Les dégats de cet Asura
+ne sont vraiment pas terribles...
+A vous de mieux faire !",,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,   4. Les bonus d'équipe et autres,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"Vous êtiez seul jusqu'à présent, alors n'hésitez pas à faire appel à vos alliés.
+N'oublier pas que vous pouver aussi simuler ceux qui n'apparaissent pas ici.
+Comme certains effet de [Ring of Nibelungen]
+
+⚠️ Il n'y a pas de sécurité sur les doublons. Ce serait dommage de fausser
+vos calcul avec un deuxième [Gloria]",,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,"C'est la fin de cette notice.
+En espérant qu'elle saura vous aiguiller et répondre à vos questions
+
+Bon théorycrafting !",,,,,,,,,,,,,,,,

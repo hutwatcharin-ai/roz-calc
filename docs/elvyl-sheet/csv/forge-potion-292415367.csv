@@ -1,0 +1,27 @@
+,,,,,,,,,,,,,,,,,,
+,                        Forge / Potions,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,Blacksmith,,,Lvl Job,,50,,Skills Blacksmith,,,,,,Skills Alchemist,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,INT,DEX,LUK,,Smith weapon lvl,3,Iron tempering,,5,,Potion research,10,,,
+,Stats personnage,,,1,56,56,,Golden Anvil,5%,Steel tempering,,5,,Pharmacy,10,,,
+,Bonus job 50,,,2,12,2,,,,Enchanted stone,,5,,Instruction change,5,,(vérfier jour J si donne +5 INT),
+,,,,,,,,,,,,,,,,,,
+,Blessing,FALSE,,0,0,,,Forge (formules à vérifier IG jour J),,,,,,Potions (formules à vérifier IG),,,(malus craft),Pts / craft
+,Gloria,FALSE,,,,0,,"Star crumb ->
+/ Weapon lvl ",0,1,2,3,,"condensed
+Red / Yellow","73,15%",,.+/- 0 (vérifié),"0,43"
+,"Marionnette
+control (+50)",FALSE,,,0,0,,1,"92,8%","77,8%","62,8%","47,8%",,White Potion,"73,15%",, +0 ?,
+,"Song (ring
+of Nibelungen)",FALSE,,0,0,0,,2,"82,8%","67,8%","52,8%","37,8%",,"Condensed
+White","58,15%",,- 15 ?,
+,Battle chant,FALSE,,0,0,0,,3,"72,8%","57,8%","42,8%","27,8%",,Glistenning coat,"53,15%",,- 20 ?,
+,Food,FALSE,,0,0,0,,Iron,"97,8%",,,,,Resist potion,"68,15%",,- 5 ?,
+,Guild,FALSE,,,0,,,Steel,"87,8%",,,,,Alcohol,"83,15%",,.+10 ?,
+,"Yggdrasil
+blessing",FALSE,,0,0,0,,Elem. stone,"67,8%",,,,,Acid / Fire bottle,"68,15%",,- 5 ?,
+,bonus libre,,,0,0,0,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,Total =,,3,68,58,,,,,,,,,,,,
+,,".+ ""Stuff craft""",,7,105,73,,,,,,,,,,,,

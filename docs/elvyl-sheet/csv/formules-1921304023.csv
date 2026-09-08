@@ -1,0 +1,80 @@
+,,,,,,,,,,,
+,                  FORMULES,,,,,,,,,,
+,,,,,,,,,,,
+,Formule ATK / DMG (validée à 95~99% (doute sur l'ordre des multi et certains arrondis),,,,,,,,⚠️Tout résultat [ entre crochets ] est à arrondir à l'inférieur ⚠️,,
+,,,,,,,,,,,
+,(Status ATK),,"[ STR + ( DEX / 5 ) + ( LUK / 3 ) + ( Base level / 4 ) ]
+[ DEX + ( STR / 5 ) + ( LUK / 3 ) + ( Base level / 4 ) ]",,"(Mélée weapon)
+(Bow / Instrument / Whip)",,,,,,
+,,,,,,,,,,,
+,(Variance arme),,"[ ATK base arme x lvl arme x 0,05 ]",,,,,,,,
+,(Variance arme min),,"[ ATK arme + [ (ATK arme x STR / 200 ) - Variance arme ] ]
+[ ATK arme + [ (ATK arme x DEX / 200 ) - Variance arme ] ]",,,"(Mélée weapon)
+(Bow / Instrument / Whip)",,,,, 
+,(Variance arme max),,"[ ATK arme + [ ( ATK arme x STR / 200 ) + Variance arme ] ]
+[ ATK arme + [ ( ATK arme x DEX / 200 ) + Variance arme ] ]",,,"(Mélée weapon)
+(Bow / Instrument / Whip)",,,,,
+,,,,,,,,,,,
+,ATK arme rafinnée,,[ Variance Min OU Max + Refine + Over refine ],,,,,,,,
+,ATK Stuff Total,,[ ATK arme rafinnée x % Pénalité x % Avantage élément + Equip' ATK + Consomable ATK + Munitions ATK + Buff spéciaux ATK ],,,,,,→ Equip' ATK,"l'ATK des cartes, des enchantements
+et de tout l'équipement sans celle de base de l'arme",
+,Bonus % ATK,,[ ATK Stuff Total x % ATK ],,,,,,→ Buff spéciaux ATK,Quelques rares buff comme [Loud Exclamation],
+,ATK Multi,,"[ [ [ [ ATK Stuff Total x % VS Size ] x % VS Elem ] x % VS Race ] x % VS Specific ]
+(il semblerais que sur Zero l'ordre ait changé mais j'ai des doutes)",,,,,,→ % VS Specific,"Comprend ""Boss"" et ""Normal monster"" (Player inclu)",
+,A,,[ ATK Multi 1 + Bonus % ATK ],,,,,,,,
+,B,,[ A x % Avantage élément + Mastery ATK + Status ATK x 2 ],,,,,,→ Mastery ATK,"Tout les skill passifs ""+ X Damages"" ou ""+ X ATK"".
+Typiqument les [Mace Mastery] ou [Weapon Research]",
+,ATK FINALE,,[ [  B x % Mélée OU Ranged ] x % Physical ],,,,,,,,
+,,,,,,,,,,,
+,Auto basiques  →,, [ [ [ [ ATK Finale x % Hard DEF x (1 - % Ignore DEF ) ]  x % Bonus Skill ] + Bonus Flat - Soft DEF ],,,,,,→ % Bonus Skill,Quelques rares skill comme [Over Thrust] ou [Advenced Katar],
+,Auto CRIT  →,," [ [ [ [ [ ATK Finale x % Hard DEF x (1 - % Ignore DEF ) ] x % Bonus Skill ] x 1,4 x ( 1 + % CRIT) ] + ( Bonus Flat - Soft DEF )  x 1,4 ]",,,,,,→ Bonus Flat,"Il n'en existe que trois : [Meltdown] et [Aura Blade]
+plus [Evenom] seulement pour les Skill",
+,,,,,,,,,,,
+,SKILL  →,, [ [ [ [ ATK Finale x % Hard DEF x (1 - % Ignore DEF ) ] x ( % Bonus Skill + % Formule Skill ) ] + Bonus Flat - Soft DEF ],,,,,,,,
+,SKILL CRIT →,," [ [ [ [ ATK Finale x % Hard DEF x (1 - % Ignore DEF ) ] x ( % Bonus Skill + % Formule Skill ) ] x 1,4 ] x % Bonus CRIT / 2 ] - Soft DEF ]",,,,,,,,
+,,,(les skill ont CRIT / 2 chance de se produire),,,,,,(pas totalement sur de l'intéraction et la place des % bonus skill),,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,Formule M.ATK / DMG (validée à 95% ; doute sur l'ordre de certains bonus),,,,,,,,,,
+,,,,,,,,,,,
+,(Status M.ATK),,"[ INT x 1,5  + ( DEX / 5 ) + ( LUK / 3 ) + ( Base level / 4 ) ]",,,,,,,,
+,,,,,,,,,,,
+,(Variance arme),,"[ M.ATK base arme x lvl arme x 0,1 ]",,,,,,,,
+,(Variance arme min),,[ M.ATK arme - Variance arme ],,,,,,,,
+,(Variance arme max),,[ M.ATK arme + Variance arme ],,,,,,,,
+,M.ATK arme rafinnée,,[ Variance Min OU Max + M.ATK Refine + M.ATK Over refine ],,,,,,,,
+,M.ATK Stuff Total,,[ M.ATK arme rafinnée + Mastery M.ATK + Consommable M.ATK + Status M.ATK + Equip' M.ATK ],,,,,,→ Mastery M.ATK,"Comme pour la mastery ATK,
+mais il en existe que très peu : [Imposito Manus]",
+,Bonus % M.ATK,,[ M.ATK Stuff Total x % M.ATK ],,,,,,→ Equip' M.ATK,"la M.ATK des cartes, des enchantements
+et de tout l'équipement sans celle de base de l'arme",
+,M.ATK Multi,,"[ [ [ [ M.ATK Stuff Total x % VS Size ] x % VS Elem ] x % VS Race ] x % VS Specific ]
+(il semblerais que sur Zero l'ordre ait changé mais j'ai des doutes)",,,,,,→ % VS Specific,"Comprend ""Boss"" et ""Normal monster"" (Player inclu)",
+,M.ATK FINALE,,[ M.ATK Multi 1 + Bonus % M.ATK ],,,,,,,,
+,SKILL  →,," [ [ [ [ M.ATK Finale x % Hard M.DEF x (1 - % Ignore M.DEF ) ] x ( % Bonus Skill + % Formule Skill ) ] x % avantage élement ] - Soft DEF ]
+(des doutes sur l'agencement)",,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,Formule ASPD (validée à 100%),,,,,,,,,,
+,,,,,,,,,,,
+,(Stats bonus),,"[ √ ( DEX² / 5 + AGI² / 2 ) / 4 ]
+[ √ ( DEX² / 7 + AGI² / 2 ) / 4 ]","(Mélée weapon)
+(Bow / Instrument / Whip)",,,,,,,
+,A,,[ Base ASPD - Weapon Penalty + Shield OR Weapon 2 Penalty + Stats Bonus + ( Skill & Potion Bonus x  AGI / 200 ) ],,,,,,"→ Base ASPD
+→ Weapon penalty
+→ Shield Penalty","Se référer au tableau 
+dans l'onglet DPS [DEV]",
+,B,,[ ( 195 - A ) x % Attack Speed ) + A ],,,,,,→ Skill & Potion bonus,"Proviens de skill comme par exemple [Two Handed Quicken]
+Exemple de potion : Awakening ou Berserk potion.",
+,ASPD,,[ B + Flat ASPD ],,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+, Formules DEF & M.DEF (validée à 100%),,,,,,,,,,
+,,,,,,,,,,,
+,% Réduction Physique,,[ 100 - ( ( 4000 + DEF ) / ( 4000 + DEF x 10 ) x 100 ) ],,,,,,,,
+,% Réduction Magique,,[ 100 - ( ( 1000 + M.DEF ) / ( 1000 + M.DEF x 10 ) x 100 ) ],,,,,,,,
+,,,,,,,,,,,
+, Formule Variable cast time (validée à 100%),,,,,,,,,,
+,,,,,,,,,,,
+,% VTC Stats,,[ ( INT + DEX x 2 ) / 530 ],,,,,,,,
+,% Réduction VTC,,( % VTC Stats ) x ( % VTC Skill ) x ( % VTC Stuff ),,,,,,,,
