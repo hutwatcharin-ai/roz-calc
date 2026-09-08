@@ -14,9 +14,16 @@ import { aliasIdsFor } from '@/lib/thai-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
+// The site's most-visited page and its worst-converting entry from search:
+// "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
+// three clicks -- 3.7% where the site averages 9-11% (Search Console, 90
+// days to 7 Sep 2026). The old title said "ฐานข้อมูลมอนสเตอร์" and nothing
+// else: no game name, no size, nothing telling the searcher this is the
+// thing they asked for.
 export const metadata = {
-  title: 'ฐานข้อมูลมอนสเตอร์',
-  description: 'มอนสเตอร์ทั้งหมดในเกม Ragnarok Zero Global พร้อมเลเวล เผ่า ธาตุ ค่าสถานะ และของที่ดรอป',
+  title: 'ข้อมูลมอนสเตอร์ RO Zero — 365 ตัว ดรอป จุดเกิด ค่าสถานะ',
+  description:
+    'มอนสเตอร์ทุกตัวใน Ragnarok Zero Global ภาษาไทย — ค้นชื่อ กรองตามเผ่า ธาตุ ช่วงเลเวล ดูของที่ดรอป แมพที่เจอ HP EXP และ HIT/FLEE ที่ต้องมี',
 };
 
 // Daily ISR (spec §5). Note: this does NOT move the page off the build-time
@@ -27,15 +34,37 @@ export const revalidate = 86400;
 const PAGE_SIZE = 50;
 const RACES = ['Angel', 'Brute', 'Demi-Human', 'Demon', 'Dragon', 'Fish', 'Formless', 'Insect', 'Plant', 'Undead'];
 const ELEMENTS = ['Earth', 'Fire', 'Ghost', 'Holy', 'Neutral', 'Poison', 'Shadow', 'Undead', 'Water', 'Wind'];
+const SIZES = ['Small', 'Medium', 'Large'];
+
+// The value stays English -- it is what the column holds and what the game
+// shows -- but the dropdown says it in Thai as well. Someone searched
+// "เผ่า plant" on Google and landed here (Search Console, 90 days), which is
+// a person reading the word in Thai and the list only offering it in English.
+const RACE_TH: Record<string, string> = {
+  Angel: 'เทวดา', Brute: 'สัตว์', 'Demi-Human': 'กึ่งมนุษย์', Demon: 'ปีศาจ', Dragon: 'มังกร',
+  Fish: 'ปลา', Formless: 'ไร้รูปร่าง', Insect: 'แมลง', Plant: 'พืช', Undead: 'อันเดด',
+};
+const ELEMENT_TH: Record<string, string> = {
+  Earth: 'ดิน', Fire: 'ไฟ', Ghost: 'ผี', Holy: 'ศักดิ์สิทธิ์', Neutral: 'ไร้ธาตุ',
+  Poison: 'พิษ', Shadow: 'มืด', Undead: 'อันเดด', Water: 'น้ำ', Wind: 'ลม',
+};
+const SIZE_TH: Record<string, string> = { Small: 'เล็ก', Medium: 'กลาง', Large: 'ใหญ่' };
 
 export default async function MonsterListPage({
   searchParams,
 }: {
-  searchParams: { q?: string; race?: string; element?: string; lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string };
+  searchParams: {
+    q?: string; race?: string; element?: string; size?: string; aggro?: string;
+    lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string;
+  };
 }) {
   const q = searchParams.q ?? '';
   const race = searchParams.race ?? '';
   const element = searchParams.element ?? '';
+  const size = SIZES.includes(searchParams.size ?? '') ? (searchParams.size as string) : '';
+  // The card has carried this badge since the start; now it can be filtered
+  // on, which is the question behind it ("can I stand here AFK").
+  const aggro = searchParams.aggro === '1' ? '1' : searchParams.aggro === '0' ? '0' : '';
   // Challenge clones are opt-in: absent param = hidden. Server-side so the
   // result count and pagination stay exact (unlike the CSS hide elsewhere).
   const showC = searchParams.c === '1';
@@ -75,6 +104,8 @@ export default async function MonsterListPage({
   }
   if (race) query = query.eq('race', race);
   if (element) query = query.eq('element', element);
+  if (size) query = query.eq('size', size);
+  if (aggro) query = query.eq('is_aggressive', aggro === '1');
   if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
   if (lvmin > 0) query = query.gte('level', lvmin);
   if (lvmax > 0) query = query.lte('level', lvmax);
@@ -84,6 +115,35 @@ export default async function MonsterListPage({
     .order(SORTS[sort].column, { ascending: SORTS[sort].ascending, nullsFirst: false })
     .order('id')
     .range(from, from + PAGE_SIZE - 1);
+
+  // The drop people came for, on the card. Reading a monster up is nearly
+  // always "what does it give me", and the grid was a list of names with
+  // stats -- the search log for this page is 100% monster names typed into
+  // the box, because the cards themselves answered nothing worth stopping
+  // for. One query for the whole page, best rate first.
+  const ids = (monsters ?? []).map((m) => m.id);
+  const topDrops = new Map<number, { name: string; rate: number | null; id: number }[]>();
+  if (ids.length > 0) {
+    const { data: drops, error: dropsError } = await db
+      .from('monster_drops')
+      .select('monster_id, rate, items(id, name_en)')
+      .in('monster_id', ids)
+      .order('rate', { ascending: false, nullsFirst: false })
+      .range(0, 1999);
+    // No drops is a plainer card, not a broken page.
+    if (dropsError) console.error('monster list drops query failed', dropsError);
+    for (const d of (drops ?? []) as unknown as {
+      monster_id: number;
+      rate: number | null;
+      items: { id: number; name_en: string } | null;
+    }[]) {
+      if (!d.items) continue;
+      const list = topDrops.get(d.monster_id) ?? [];
+      if (list.length >= 2) continue;
+      list.push({ id: d.items.id, name: d.items.name_en, rate: d.rate });
+      topDrops.set(d.monster_id, list);
+    }
+  }
 
   if (error) {
     console.error('monsters list query failed', error);
@@ -96,6 +156,8 @@ export default async function MonsterListPage({
     if (q) params.set('q', q);
     if (race) params.set('race', race);
     if (element) params.set('element', element);
+    if (size) params.set('size', size);
+    if (aggro) params.set('aggro', aggro);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
     if (sort !== 'level') params.set('sort', sort);
@@ -125,7 +187,7 @@ export default async function MonsterListPage({
           <option value="">ทุกเผ่า</option>
           {RACES.map((r) => (
             <option key={r} value={r}>
-              {r}
+              {r} · {RACE_TH[r]}
             </option>
           ))}
         </select>
@@ -133,9 +195,22 @@ export default async function MonsterListPage({
           <option value="">ทุกธาตุ</option>
           {ELEMENTS.map((e) => (
             <option key={e} value={e}>
-              {e}
+              {e} · {ELEMENT_TH[e]}
             </option>
           ))}
+        </select>
+        <select name="size" defaultValue={size} aria-label="ขนาด">
+          <option value="">ทุกขนาด</option>
+          {SIZES.map((z) => (
+            <option key={z} value={z}>
+              {z} · {SIZE_TH[z]}
+            </option>
+          ))}
+        </select>
+        <select name="aggro" defaultValue={aggro} aria-label="โจมตีก่อนหรือไม่">
+          <option value="">โจมตีก่อน/ไม่ ก็ได้</option>
+          <option value="0">ไม่โจมตีก่อน</option>
+          <option value="1">โจมตีก่อน</option>
         </select>
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 var(--font-sarabun), sans-serif' }}>
           Lv{' '}
@@ -165,6 +240,11 @@ export default async function MonsterListPage({
           { label: 'คำค้น', value: q },
           { label: 'เผ่า', value: race },
           { label: 'ธาตุ', value: element },
+          // Every filter that is on has to appear here: a filter applied and
+          // not named is the reason a reader thinks the database is missing
+          // rows.
+          { label: 'ขนาด', value: size ? `${size} · ${SIZE_TH[size]}` : '' },
+          { label: 'พฤติกรรม', value: aggro === '1' ? 'โจมตีก่อน' : aggro === '0' ? 'ไม่โจมตีก่อน' : '' },
           { label: 'เลเวล', value: lvmin > 0 || lvmax > 0 ? `${lvmin > 0 ? lvmin : '1'}–${lvmax > 0 ? lvmax : 'สูงสุด'}` : '' },
         ]}
         clearHref="/database/monsters"
@@ -199,6 +279,18 @@ export default async function MonsterListPage({
                 <span className="moncard__meta">
                   HP {m.hp != null ? m.hp.toLocaleString('en-US') : '—'} · EXP {m.base_exp != null ? m.base_exp.toLocaleString('en-US') : '—'}
                 </span>
+                {(topDrops.get(m.id) ?? []).length > 0 && (
+                  <span className="moncard__drops">
+                    ดรอป:{' '}
+                    {(topDrops.get(m.id) ?? []).map((d, i) => (
+                      <span key={d.id}>
+                        {i > 0 && ' · '}
+                        {d.name}
+                        {d.rate != null && <span className="moncard__rate"> {d.rate}%</span>}
+                      </span>
+                    ))}
+                  </span>
+                )}
               </span>
             </Link>
           ))}

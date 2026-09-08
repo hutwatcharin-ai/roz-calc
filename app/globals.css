@@ -2050,3 +2050,15 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .skillgrid > .skillcell:nth-child(7n) .skilltip,
 .skillgrid > .skillcell:nth-child(7n + 6) .skilltip { left: auto; right: 0; transform: none; }
 @media (hover: none) { .skilltip { display: none !important; } }
+
+/* The drop a monster is looked up for, on its card in the list. */
+.moncard__drops {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.moncard__rate { font-family: var(--font-mono), ui-monospace, monospace; color: var(--faint); }
