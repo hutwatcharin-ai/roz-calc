@@ -1,22 +1,121 @@
 {
   "_meta": {
     "what": "Thai names players use for monsters and items. Used for on-site search, and shown on the entity page as 'เรียกอีกชื่อ'.",
-    "rule": "Every entry must come from a search someone really ran, not from translating a name. Each alias records the query, how many impressions it had, and the position Google put us at, so the claim can be checked later. Two kinds appear: a Thai spelling of the English name (คาราเมล for Caramel) and a nickname for what the thing looks like or does (หมาฟ้า, 'blue dog', for Wolf; การ์ดเทเลพอต, 'teleport card', for Creamy Card, which grants Teleport).",
-    "source": "Google Search Console, sc-domain:rozerothai.com, 90 days to 7 Sep 2026. Each pair is a query whose Thai text Google itself matched to that page.",
+    "rule": "Every entry must come from a search someone really ran, not from translating a name. `source` says which log it came from: `gsc` carries the impressions and the position Google put us at, `site-search` carries how many times it was typed into the site's own box (GA4, which has no position to report). Two kinds of name appear: a Thai spelling of the English name (คาราเมล for Caramel) and a nickname for what the thing looks like or does (หมาฟ้า, 'blue dog', for Wolf; การ์ดเทเลพอต, 'teleport card', for Creamy Card, which grants Teleport).",
+    "source": "Google Search Console, sc-domain:rozerothai.com, 90 days to 7 Sep 2026. Each pair is a query whose Thai text Google itself matched to that page. · บางคำมาจากช่องค้นในเว็บเอง (GA4 event search) ซึ่งบอกได้ว่าคนพิมพ์อะไรแล้วไม่เจอ",
     "regenerate": "node scripts/mine-thai-aliases.mjs  (proposes new pairs from the latest Search Console data; a human confirms before they land here)"
   },
   "monsters": {
-    "1013": [{ "name": "หมาฟ้า", "why": "ชื่อเล่น: หมาสีฟ้า", "query": "หมาฟ้า ro", "impressions": 3, "position": 43.0 }],
-    "1018": [{ "name": "ครีมมี่", "why": "ทับศัพท์ Creamy", "query": "creamy ro อยู่ แม พ ไหน", "impressions": 1, "position": 6.0 }],
-    "1024": [{ "name": "วอมเทล", "why": "ทับศัพท์ Worm Tail", "query": "วอมเทล ro", "impressions": 2, "position": 9.0 }],
-    "1077": [{ "name": "เห็ดม่วง", "why": "ชื่อเล่น: เห็ดสีม่วง", "query": "เห็ดม่วง ro", "impressions": 1, "position": 49.0 }],
-    "1091": [{ "name": "แมลงปอ", "why": "ชื่อเล่น: แมลงปอ", "query": "แมลงปอ ro", "impressions": 1, "position": 19.0 }],
-    "1103": [{ "name": "คาราเมล", "why": "ทับศัพท์ Caramel", "query": "คาราเมล ro", "impressions": 7, "position": 8.4 }],
-    "1170": [{ "name": "โซฮี", "why": "ทับศัพท์ Sohee", "query": "โซฮี ro", "impressions": 1, "position": 51.0 }],
-    "1271": [{ "name": "เข้เล็ก", "why": "ชื่อเล่น: จระเข้ตัวเล็ก", "query": "เข้เล็ก ro", "impressions": 1, "position": 16.0 }]
+    "1013": [
+      {
+        "name": "หมาฟ้า",
+        "why": "ชื่อเล่น: หมาสีฟ้า",
+        "query": "หมาฟ้า ro",
+        "impressions": 3,
+        "position": 43.0,
+        "source": "gsc"
+      }
+    ],
+    "1018": [
+      {
+        "name": "ครีมมี่",
+        "why": "ทับศัพท์ Creamy",
+        "query": "creamy ro อยู่ แม พ ไหน",
+        "impressions": 1,
+        "position": 6.0,
+        "source": "gsc"
+      }
+    ],
+    "1024": [
+      {
+        "name": "วอมเทล",
+        "why": "ทับศัพท์ Wormtail",
+        "query": "วอมเทล ro",
+        "impressions": 2,
+        "position": 9.0,
+        "source": "gsc"
+      }
+    ],
+    "1077": [
+      {
+        "name": "เห็ดม่วง",
+        "why": "ชื่อเล่น: เห็ดสีม่วง",
+        "query": "เห็ดม่วง ro",
+        "impressions": 1,
+        "position": 49.0,
+        "source": "gsc"
+      }
+    ],
+    "1091": [
+      {
+        "name": "แมลงปอ",
+        "why": "ชื่อเล่น: แมลงปอ",
+        "query": "แมลงปอ ro",
+        "impressions": 1,
+        "position": 19.0,
+        "source": "gsc"
+      }
+    ],
+    "1103": [
+      {
+        "name": "คาราเมล",
+        "why": "ทับศัพท์ Caramel",
+        "query": "คาราเมล ro",
+        "impressions": 7,
+        "position": 8.4,
+        "source": "gsc"
+      }
+    ],
+    "1170": [
+      {
+        "name": "โซฮี",
+        "why": "ทับศัพท์ Sohee",
+        "query": "โซฮี ro",
+        "impressions": 1,
+        "position": 51.0,
+        "source": "gsc"
+      }
+    ],
+    "1271": [
+      {
+        "name": "เข้เล็ก",
+        "why": "ชื่อเล่น: จระเข้ตัวเล็ก",
+        "query": "เข้เล็ก ro",
+        "impressions": 1,
+        "position": 16.0,
+        "source": "gsc"
+      }
+    ],
+    "1087": [
+      {
+        "name": "ออกฮีโร่",
+        "why": "ทับศัพท์ Orc Hero",
+        "query": "ออกฮีโร่",
+        "source": "site-search",
+        "searches": 2
+      }
+    ]
   },
   "items": {
-    "4040": [{ "name": "การ์ดเทเลพอต", "why": "ชื่อเล่น: การ์ดที่ให้สกิล Teleport", "query": "การ์ดเทเลพอต ro", "impressions": 1, "position": 8.0 }],
-    "7033": [{ "name": "เห็ดม่วง", "why": "ชื่อเล่น: เห็ดสีม่วง", "query": "เห็ดม่วง ro", "impressions": 1, "position": 34.0 }]
+    "4040": [
+      {
+        "name": "การ์ดเทเลพอต",
+        "why": "ชื่อเล่น: การ์ดที่ให้สกิล Teleport",
+        "query": "การ์ดเทเลพอต ro",
+        "impressions": 1,
+        "position": 8.0,
+        "source": "gsc"
+      }
+    ],
+    "7033": [
+      {
+        "name": "เห็ดม่วง",
+        "why": "ชื่อเล่น: เห็ดสีม่วง",
+        "query": "เห็ดม่วง ro",
+        "impressions": 1,
+        "position": 34.0,
+        "source": "gsc"
+      }
+    ]
   }
 }

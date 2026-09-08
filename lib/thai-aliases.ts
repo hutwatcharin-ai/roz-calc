@@ -25,8 +25,13 @@ export interface ThaiAlias {
   why: string;
   /** The search that evidences it. */
   query: string;
-  impressions: number;
-  position: number;
+  /** Which log it came from. Search Console reports a position; the site's
+   *  own search box does not, so the fields differ by source rather than
+   *  being filled in with a number nobody measured. */
+  source: 'gsc' | 'site-search';
+  impressions?: number;
+  position?: number;
+  searches?: number;
 }
 
 type AliasFile = {

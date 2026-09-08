@@ -21,9 +21,16 @@ describe('thaiAliases', () => {
         for (const alias of thaiAliases(kind, id)) {
           expect(alias.name.trim()).not.toBe('');
           expect(alias.query.trim()).not.toBe('');
-          expect(alias.impressions).toBeGreaterThan(0);
-          // A translated name would have no position to report.
-          expect(alias.position).toBeGreaterThan(0);
+          // Whichever log it came from, it has to say how often and how it
+          // was seen. A translated name could report neither.
+          if (alias.source === 'gsc') {
+            expect(alias.impressions).toBeGreaterThan(0);
+            expect(alias.position).toBeGreaterThan(0);
+          } else {
+            expect(alias.searches).toBeGreaterThan(0);
+            // The site's own search box has no ranking to report.
+            expect(alias.position).toBeUndefined();
+          }
         }
       }
     }

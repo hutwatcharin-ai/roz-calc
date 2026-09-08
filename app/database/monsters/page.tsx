@@ -55,7 +55,7 @@ export default async function MonsterListPage({
 }: {
   searchParams: {
     q?: string; race?: string; element?: string; size?: string; aggro?: string;
-    lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string; mj?: string;
+    lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string; mj?: string; mvp?: string;
   };
 }) {
   const q = searchParams.q ?? '';
@@ -72,6 +72,9 @@ export default async function MonsterListPage({
   // "Orc Warrior" and "Orc Warrior Mj" next to each other is one entry the
   // reader wants and one they have to read past.
   const showMj = searchParams.mj === '1';
+  // Somebody typed "mvp" into the search box, twice: the flag was in the
+  // table and nowhere on the page. 24 monsters carry it.
+  const mvpOnly = searchParams.mvp === '1';
   // Level bounds: hunting is level-band shopping, and the sort alone cannot
   // answer "what is around my level". Empty stays empty; junk becomes empty.
   const lvmin = Math.max(0, Number(searchParams.lvmin ?? 0) || 0);
@@ -112,6 +115,7 @@ export default async function MonsterListPage({
   if (aggro) query = query.eq('is_aggressive', aggro === '1');
   if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
   if (!showMj) query = query.not('name_en', 'like', MJ_VARIANT_SQL_NOT_LIKE);
+  if (mvpOnly) query = query.eq('is_mvp', true);
   if (lvmin > 0) query = query.gte('level', lvmin);
   if (lvmax > 0) query = query.lte('level', lvmax);
 
@@ -170,6 +174,7 @@ export default async function MonsterListPage({
     if (sort !== 'level') params.set('sort', sort);
     if (showC) params.set('c', '1');
     if (next) params.set('mj', '1');
+    if (mvpOnly) params.set('mvp', '1');
     const qs = params.toString();
     return `/database/monsters${qs ? `?${qs}` : ''}`;
   }
@@ -186,6 +191,7 @@ export default async function MonsterListPage({
     if (sort !== 'level') params.set('sort', sort);
     if (showCOverride ?? showC) params.set('c', '1');
     if (showMj) params.set('mj', '1');
+    if (mvpOnly) params.set('mvp', '1');
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/monsters${qs ? `?${qs}` : ''}`;
@@ -236,6 +242,10 @@ export default async function MonsterListPage({
           <option value="0">ไม่โจมตีก่อน</option>
           <option value="1">โจมตีก่อน</option>
         </select>
+        <select name="mvp" defaultValue={mvpOnly ? '1' : ''} aria-label="เฉพาะบอส MVP">
+          <option value="">ทุกตัว</option>
+          <option value="1">เฉพาะบอส MVP</option>
+        </select>
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 var(--font-sarabun), sans-serif' }}>
           Lv{' '}
           <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลต่ำสุด" />
@@ -277,6 +287,7 @@ export default async function MonsterListPage({
           // rows.
           { label: 'ขนาด', value: size ? `${size} · ${SIZE_TH[size]}` : '' },
           { label: 'พฤติกรรม', value: aggro === '1' ? 'โจมตีก่อน' : aggro === '0' ? 'ไม่โจมตีก่อน' : '' },
+          { label: 'บอส', value: mvpOnly ? 'เฉพาะ MVP' : '' },
           { label: 'เลเวล', value: lvmin > 0 || lvmax > 0 ? `${lvmin > 0 ? lvmin : '1'}–${lvmax > 0 ? lvmax : 'สูงสุด'}` : '' },
         ]}
         clearHref="/database/monsters"
