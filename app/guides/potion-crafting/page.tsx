@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import CraftGuide from '@/components/CraftGuide';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
@@ -64,6 +65,10 @@ export default function PotionCraftingGuidePage() {
         </ol>
       </section>
 
+      {/* Kept as its own section: these twenty were checked against
+          rozerodb, a Zero database, one at a time. The generated table below
+          covers far more but is sourced differently, so the two are not
+          merged into one list that hides which is which. */}
       {RECIPE_GROUPS.map((group) => (
         <section className="card" style={{ marginTop: 16, overflowX: 'auto' }} key={group.title}>
           <h2 className="section-title">{group.title}</h2>
@@ -75,6 +80,17 @@ export default function PotionCraftingGuidePage() {
           </table>
         </section>
       ))}
+
+      <section style={{ marginTop: 24 }}>
+        <h2 className="section-title">สูตรทั้งหมดที่พบในตารางการผลิต</h2>
+        <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
+          กว้างกว่ารายการข้างบน แต่มาจากคนละแหล่ง — ตารางฝั่งเซิร์ฟเวอร์ทานกับฐานข้อมูล Zero
+          กดชื่อของได้ทุกชิ้นเพื่อดูว่าหาจากไหน
+        </p>
+        <CraftGuide kind="brew">
+          <></>
+        </CraftGuide>
+      </section>
 
       <section className="card card--yellow" style={{ marginTop: 16 }}>
         <h2 className="section-title">เพิ่มโอกาสสำเร็จ</h2>

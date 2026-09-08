@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CraftGuide from '@/components/CraftGuide';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 
@@ -81,6 +82,16 @@ export default function ElementalWeaponsGuidePage() {
       <p className="muted" style={{ marginTop: 16 }}>
         ทำเสร็จแล้วควรใช้ตีมอนธาตุไหน ดู <Link href="/guides/elements">ตารางธาตุ</Link> หรือเทียบดาเมจที่ <Link href="/tools/damage">เครื่องคำนวณดาเมจ</Link>
       </p>
+      <section style={{ marginTop: 24 }}>
+        <h2 className="section-title">หินธาตุทำจากอะไร</h2>
+        <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
+          หินทั้งสี่ที่ใช้ตีอาวุธธาตุ หลอมเองได้จากของที่มอนธาตุนั้นดรอป
+        </p>
+        <CraftGuide kind="ore">
+          <></>
+        </CraftGuide>
+      </section>
+
     </main>
   );
 }
