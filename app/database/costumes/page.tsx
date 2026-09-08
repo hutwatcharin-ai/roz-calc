@@ -7,6 +7,7 @@
 // slot, and equippable_classes is empty or "All Jobs" on every row), so the
 // only two questions worth asking are the name and the slot it covers.
 import Link from 'next/link';
+import { isBound } from '@/lib/bound-items';
 import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
@@ -56,7 +57,7 @@ const POSITION_LABELS: Record<string, string> = {
 export default async function CostumesPage({
   searchParams,
 }: {
-  searchParams: { q?: string; type?: string; page?: string; sort?: string };
+  searchParams: { q?: string; type?: string; page?: string; sort?: string; bound?: string };
 }) {
   const q = searchParams.q ?? '';
   // Only values from the fixed list pass -- the param goes into a comparison,
@@ -98,8 +99,15 @@ export default async function CostumesPage({
   }
 
   const items = allItems ?? [];
+  // 682 of these are the account-bound copy of a costume already in the
+  // list, so they are hidden unless asked for (?bound=1). The count is shown
+  // next to the checkbox: hiding rows silently is how the whole set came to
+  // be deleted in August.
+  const showBound = searchParams.bound === '1';
+  const boundCount = items.filter((it) => isBound(it.name_en)).length;
   const needle = q.trim().toLowerCase();
   const filtered = items.filter((it) => {
+    if (!showBound && isBound(it.name_en)) return false;
     if (type && it.weapon_type !== type) return false;
     if (needle && !matches(it.name_en, needle)) return false;
     return true;
@@ -123,7 +131,20 @@ export default async function CostumesPage({
     if (q) params.set('q', q);
     if (type) params.set('type', type);
     if (sort !== 'name') params.set('sort', sort);
+    if (showBound) params.set('bound', '1');
     if (targetPage > 1) params.set('page', String(targetPage));
+    const qs = params.toString();
+    return `/database/costumes${qs ? `?${qs}` : ''}`;
+  }
+
+  // Same URL, the checkbox flipped, always back to page 1 -- the row count
+  // changes, so the page number would not mean the same thing.
+  function boundHref(next: boolean): string {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (type) params.set('type', type);
+    if (sort !== 'name') params.set('sort', sort);
+    if (next) params.set('bound', '1');
     const qs = params.toString();
     return `/database/costumes${qs ? `?${qs}` : ''}`;
   }
@@ -176,6 +197,13 @@ export default async function CostumesPage({
         </select>
         <button type="submit" className="btn">ค้นหา</button>
       </form>
+
+      <p className="filterbar" style={{ marginTop: 8 }}>
+        <Link className="cvtoggle" href={boundHref(!showBound)} scroll={false}>
+          <input type="checkbox" checked={!showBound} readOnly tabIndex={-1} aria-hidden="true" />
+          ซ่อนคอสตูมแบบผูกบัญชี (Bound) {boundCount.toLocaleString()} ชิ้น
+        </Link>
+      </p>
 
       {error ? (
         <div className="card">
