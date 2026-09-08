@@ -12,6 +12,10 @@ export type Confidence = 'both' | 'rathena-only' | 'prontera-only';
 export interface CraftMaterial {
   id: number;
   name: string;
+  /** Sprite path under /public, or null when the item has no mirrored icon. */
+  icon?: string | null;
+  /** Our own category, for ItemIcon's lettered stand-in and for itemHref. */
+  category?: string | null;
   /** 0 means the item must be in the bag but is not used up. */
   amount: number;
   held?: boolean;
@@ -20,7 +24,7 @@ export interface CraftMaterial {
 export interface Recipe {
   id: string;
   kind: CraftKind;
-  product: { id: number; name: string; amount: number };
+  product: CraftMaterial;
   materials: CraftMaterial[];
   itemLevel: number | null;
   skillId: number | null;

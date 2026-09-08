@@ -154,9 +154,15 @@ function pronteraRecipes() {
 async function ourItems(db) {
   const map = new Map();
   for (let from = 0; ; from += 1000) {
-    const { data, error } = await db.from('items').select('id, name_en').order('id').range(from, from + 999);
+    const { data, error } = await db
+      .from('items')
+      .select('id, name_en, icon_url, category')
+      .order('id')
+      .range(from, from + 999);
     if (error) throw error;
-    for (const r of data ?? []) map.set(r.id, r.name_en);
+    // The icon and category ride along so a recipe row can show the sprite
+    // without the page having to look up every item it names.
+    for (const r of data ?? []) map.set(r.id, { name: r.name_en, icon: r.icon_url, category: r.category });
     if ((data ?? []).length < 1000) break;
   }
   return map;
@@ -183,7 +189,10 @@ async function main() {
   const db = createClient(url, key);
   const items = await ourItems(db);
   const has = (id) => items.has(id);
-  const name = (id) => items.get(id);
+  const name = (id) => items.get(id).name;
+  const icon = (id) => items.get(id).icon ?? null;
+  const category = (id) => items.get(id).category ?? null;
+  const itemRef = (id, extra = {}) => ({ id, name: name(id), icon: icon(id), category: category(id), ...extra });
 
   const produce = parseProduce(await cached(RA_PRODUCE));
   const aegis = parseAegisNames(await Promise.all(RA_ITEMS.map(cached)));
@@ -238,8 +247,8 @@ async function main() {
     recipes.push({
       id: `p${r.product}-${r.materials.map((m) => m.id).join('-')}`,
       kind: kindOfSkill.get(r.skillId) ?? (match ? match.kind : 'other'),
-      product: { id: r.product, name: name(r.product), amount: 1 },
-      materials: r.materials.map((m) => ({ id: m.id, name: name(m.id), amount: m.amount, held: m.held || undefined })),
+      product: itemRef(r.product, { amount: 1 }),
+      materials: r.materials.map((m) => itemRef(m.id, { amount: m.amount, held: m.held || undefined })),
       itemLevel: r.itemLevel || null,
       skillId: r.skillId || null,
       skillLevel: r.skillLv || null,
@@ -256,8 +265,8 @@ async function main() {
       recipes.push({
         id: `a${a.source}-${m.id}`,
         kind: 'arrow',
-        product: { id: m.id, name: name(m.id), amount: m.amount },
-        materials: [{ id: a.source, name: name(a.source), amount: 1 }],
+        product: itemRef(m.id, { amount: m.amount }),
+        materials: [itemRef(a.source, { amount: 1 })],
         itemLevel: null,
         skillId: null,
         skillLevel: null,
@@ -279,8 +288,8 @@ async function main() {
     recipes.push({
       id: `x${pid}-${mats.map((m) => m.id).join('-')}`,
       kind: r.craft_type,
-      product: { id: pid, name: name(pid), amount: r.quantity ?? 1 },
-      materials: mats.map((m) => ({ id: m.id, name: name(m.id), amount: m.amount })),
+      product: itemRef(pid, { amount: r.quantity ?? 1 }),
+      materials: mats.map((m) => itemRef(m.id, { amount: m.amount })),
       itemLevel: r.item_level ?? null,
       skillId: null,
       skillLevel: null,

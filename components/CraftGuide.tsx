@@ -44,7 +44,7 @@ export default function CraftGuide({
       {confirmed.length > 0 && (
         <div className="card" style={{ marginTop: 16 }}>
           <h2 className="section-title">สูตรที่ตรงกัน 2 แหล่ง ({confirmed.length})</h2>
-          <RecipeTable rows={confirmed} showConfidence={false} materialFirst={sortBy === 'material'} />
+          <RecipeTable rows={confirmed} materialFirst={sortBy === 'material'} />
         </div>
       )}
 
