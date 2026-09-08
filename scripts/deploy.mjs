@@ -5,6 +5,14 @@
 //   - a failed push then a deploy that rebuilt the old commit (twice)
 //   - Coolify reporting "running" long after the container had swapped, and
 //     "in_progress" long after it had not, so its status is not the signal
+//   - --expect strings that were already on the page before the deploy, so
+//     the check passed against the OLD build and the deploy was reported as
+//     live while Coolify was still building. Three times on 8 Sep 2026, once
+//     with a marker that came from a database change (visible on every
+//     build) and twice with a marker the previous build already had. The
+//     signal is now Next's own per-build id, which cannot be present before
+//     the build that made it exists; --expect is checked afterwards, and a
+//     marker already on the page is refused outright rather than trusted
 //   - Cloudflare serving the old HTML for 24h because a redeploy does not
 //     bust its cache
 //   - a "deployed!" message in Telegram that said nothing about what changed,
@@ -87,6 +95,17 @@ function fetchOrigin(path, { headOnly = false } = {}) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * Next stamps a fresh random build id into every page of every build. It is
+ * the one thing on the page that is guaranteed to differ between the build
+ * that is running now and the build this deploy is about to make -- unlike
+ * any string we choose ourselves, which may already be there.
+ */
+function buildIdAt(path) {
+  const match = /buildId\\?"\s*:\s*\\?"([A-Za-z0-9_-]+)/.exec(fetchOrigin(path));
+  return match ? match[1] : null;
+}
+
 /** The Telegram message. Shared by the real run and --dry-run so what you preview is what gets sent. */
 function previewOnly({ shortSha, subject, filesChanged, path, verified, purged, minutes }) {
   return [
@@ -134,6 +153,23 @@ async function main() {
     console.error('COOLIFY_TOKEN missing from .env.local');
     process.exit(1);
   }
+
+  // Read the running build BEFORE triggering, so there is something to
+  // compare against. A marker already on the page proves nothing about the
+  // build that has not been made yet, so it is refused here rather than
+  // quietly passing in twenty seconds' time.
+  const buildIdBefore = path ? buildIdAt(path) : null;
+  if (path && expect && fetchOrigin(path).includes(expect)) {
+    console.error(
+      `--expect "${expect}" is already on ${path} before this deploy.\n` +
+        'It cannot tell the new build from the old one. Pick a string that only the new build has.',
+    );
+    process.exit(1);
+  }
+  if (path && !buildIdBefore) {
+    console.error(`could not read the current build id from ${path} -- is the origin up?`);
+    process.exit(1);
+  }
   const trigger = await fetch(`${COOLIFY_HOST}/api/v1/deploy?uuid=${APP_UUID}&force=true`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${coolifyToken}` },
@@ -144,25 +180,36 @@ async function main() {
   }
   console.log(`triggered ${shortSha} "${subject}"`);
 
-  // 3. Wait for the change itself, not for Coolify's opinion of it.
+  // 3. Wait for a NEW build to be serving, not for Coolify's opinion of it
+  // and not for a string that may predate it. Two separate questions, asked
+  // in order: did a new build ship, and does it contain the change.
   let verified = null;
-  if (path && (expect || status)) {
+  if (path) {
     const deadline = Date.now() + MAX_WAIT_MINUTES * 60_000;
+    let shipped = false;
     while (Date.now() < deadline) {
-      const hit = status
-        ? fetchOrigin(path, { headOnly: true }).trim() === status
-        : fetchOrigin(path).includes(expect);
-      if (hit) {
-        verified = true;
+      const now = status ? fetchOrigin(path, { headOnly: true }).trim() : buildIdAt(path);
+      // A --status check is about a redirect, which has no page and so no
+      // build id; there the status code itself is the signal.
+      if (status ? now === status : now && now !== buildIdBefore) {
+        shipped = true;
         break;
       }
       process.stdout.write('.');
       await sleep(POLL_SECONDS * 1000);
     }
-    if (verified === null) verified = false;
-    console.log(verified ? '\norigin serves the new build' : '\ngave up waiting for the origin');
+    if (!shipped) {
+      verified = false;
+      console.log(`\ngave up waiting: the origin is still serving build ${buildIdBefore}`);
+    } else if (expect && !fetchOrigin(path).includes(expect)) {
+      verified = false;
+      console.log(`\na new build is live but ${path} does not contain "${expect}"`);
+    } else {
+      verified = true;
+      console.log('\norigin serves the new build');
+    }
   } else {
-    console.log('no --path/--expect given: not verifying, and the message will say so');
+    console.log('no --path given: not verifying, and the message will say so');
   }
 
   // 4. Purge, but only once the origin has it -- purging early pulls the old
