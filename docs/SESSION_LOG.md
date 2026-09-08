@@ -191,3 +191,11 @@
 ## 31 ส.ค. 2026 และก่อนหน้า
 
 - rebrand rozerothai.com + Cloudflare orange cloud · เควสระบบ 34 town hubs · import rozerodb export (equipment/card/skill/quest parsers + เทสต์) · การ์ดกริด item/monster · statgrid หน้า item · mirror ไอคอน ratemyserver 3,202 · แปลเควสไทยครบ — รายละเอียดใน git log และ `docs/superpowers/specs/`
+# 8 ก.ย. 2026 — Neon UX pass + ไกด์ Blacksmith/Alchemist
+
+- UX/mobile: `6eb6838` ลด mobile shell และปรับ monster picker; `1f681bc` ลด neon decoration แล้วใช้ accent กับ interaction/state โดยไม่เพิ่ม JS/assets
+- เพิ่ม `/guides/elemental-weapons` และ `/guides/potion-crafting` ใน `875972b`; เชื่อม landing, nav, sitemap, breadcrumb และ internal links
+- แหล่งสูตรใช้ local RO ZERO DATABASE export/client skill data; เปอร์เซ็นต์สำเร็จจาก TWRO ไม่ถูกอ้างเป็นค่าทางการ ROZ
+- ตรวจผ่าน: TypeScript, Next production build, Vitest 64 files / 628 tests
+- deploy รอบแรก timeout ที่ origin; retry สำเร็จ, purge Cloudflare, แจ้ง Telegram และตรวจ public URL ทั้งสองได้ HTTP 200 + canonical ถูกต้อง
+- handoff ล่าสุด: `docs/HANDOFF-2026-09-08.md`
