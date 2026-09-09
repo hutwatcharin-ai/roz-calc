@@ -33,7 +33,7 @@
   "22108": { "n": "หมวกรับปริญญาเอาไปทำไม?", "d": "Krolla บอกว่าถ้าอยากให้ขอบ [Graduation Cap]5012 ปลอดภัย ให้เอา [Hinalle]703 x10, [Aloe]704 x10 และ [Ment]708 x10 มา" },
   "22109": { "n": "คราฟต์ Clock Tower Manager's Income", "o": "รวบรวมวัตถุดิบชุดคราฟต์", "d": "ช่างหมวกแห่ง Al De Baran บอกว่าถ้าอยากได้ [Clock Tower Manager's Income]19333 ให้รวบรวม [Jokers Wild]25505 x1, [Cute Broom]25506 x100, [Fancy Coral]25507 x100, [Orc General Token]25508 x100, [Shining Round Shell]25509 x100 และ [Mithril]25430 x10" },
   "22110": { "n": "คราฟต์ Pocket Watch Headgear", "d": "ช่างหมวกแห่ง Al De Baran บอกว่าถ้าอยากได้ [Pocket Watch Headgear]19334 ให้รวบรวม [Jokers Wild]25505 x1, [Cute Broom]25506 x100, [Fancy Coral]25507 x100, [Orc General Token]25508 x100, [Shining Round Shell]25509 x100 และ [Mithril]25430 x10" },
-  "22151": { "n": "คราฟต์ Mining Helmet", "o": "Safety Helmet x1 · Lantern x1", "d": "ช่วยหาของที่หายในเหมืองที — หา Safety Helmet x1 กับ Lantern x1 แถวโซน Skel Worker ฝากด้วยนะ! — Mini Pot" },
+  "22151": { "n": "คราฟต์ Mining Helmet", "o": "Safety Helmet x1 · Lantern x1", "d": "ช่วยหาของที่หายในเหมืองที — หา Safety Helmet x1 กับ Lantern x1 แถวโซน Skeleton Worker ฝากด้วยนะ! — Mini Pot" },
   "22152": { "n": "วัตถุดิบ Mining Helmet", "o": "Steel x25 · Crystal Mirror x1", "d": "อยากทำให้เหมือน [Mining Helmet]5031 เป๊ะๆ ต้องใช้ Steel x25 กับ Crystal Mirror x1 ที่ขายใน Morroc — Mini Pot" },
   "22153": { "n": "คราฟต์อุปกรณ์ละคร", "o": "ตามหาคุณปู่", "d": "ก่อนอื่นตามหาผู้อาศัยเก่าแก่ที่น่าจะรู้ว่าบ้านของ Forest อยู่ไหน" },
   "22154": { "n": "ถามเด็กๆ ดู", "d": "ผู้ใหญ่ดูลังเลที่จะบอกเรื่องบ้านของคนอื่น — งั้นลองถามเด็กๆ แทนสิ" },

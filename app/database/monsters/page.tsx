@@ -13,6 +13,7 @@ import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
 import { aliasIdsFor } from '@/lib/thai-aliases';
 import { formerNameIdsFor } from '@/lib/former-names';
+import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { monsterCounts } from '@/lib/counts';
@@ -117,7 +118,10 @@ export default async function MonsterListPage({
     // Same treatment for a name this table used to carry: thirty monsters
     // were renamed on 7-8 Sep 2026, and "Pecopeco" or "Wootan Fighter" must
     // still land on the row that now says Peco Peco or Utan Fighter.
-    const aliasIds = [...new Set([...aliasIdsFor('monsters', q), ...formerNameIdsFor(q)])];
+    // And the name on a card this monster drops: 39 cards are named after
+    // something the monster is not, so "Zealotus" has to reach Zherlthsh
+    // (lib/card-name-aliases).
+    const aliasIds = [...new Set([...aliasIdsFor('monsters', q), ...formerNameIdsFor(q), ...cardNameMonsterIds(q)])];
     if (aliasIds.length > 0) {
       const like = searchWords(q).map((w) => `name_en.ilike.%25${escapeLikePattern(w)}%25`);
       query = query.or([...like, `id.in.(${aliasIds.join(',')})`].join(','));

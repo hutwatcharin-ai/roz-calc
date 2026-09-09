@@ -96,7 +96,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // class the spawns/skills/farming queries below were already fixed for.
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
-    .select('rate, items(id, name_en, sell_price, icon_url, slots, category)')
+    .select('rate, items(id, name_en, sell_price, icon_url, slots, category, description, description_th)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
   if (dropsError) console.error('monster drops query failed', dropsError);

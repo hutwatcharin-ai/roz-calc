@@ -8,6 +8,9 @@
 
 import Link from 'next/link';
 import { itemHref } from '@/lib/item-href';
+import CardLink from '@/components/CardLink';
+import { cardSlot, SLOT_TH } from '@/lib/card-slot';
+import { cardEffect } from '@/lib/card-roles';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 
 export interface MonsterDropRow {
@@ -19,7 +22,20 @@ export interface MonsterDropRow {
     icon_url: string | null;
     slots: number | null;
     category: string | null;
+    description: string | null;
+    description_th: string | null;
   } | null;
+}
+
+/** Thai effect when we have it, the client's English otherwise. */
+function cardEffectText(th: string | null, en: string | null): string | null {
+  const text = cardEffect(th) || cardEffect(en);
+  return text ? text.split('\n').filter(Boolean).join(' · ') : null;
+}
+
+function cardSlotTh(description: string | null): string | null {
+  const slot = cardSlot(description);
+  return slot ? SLOT_TH[slot] : null;
 }
 
 export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDropRow[]; failed: boolean }) {
@@ -52,7 +68,22 @@ export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDro
           rows.map((d, i) => (
             <tr key={d.items?.id ?? i}>
               <td data-label="">
-                {d.items?.id ? (
+                {/* A card in a drop list is a name and nothing else -- the
+                    reader has to open it to learn whether it is worth the
+                    hunt. Hovering answers that without leaving the page. */}
+                {d.items?.id && d.items.category === 'Card' ? (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    {d.items.icon_url && (
+                      <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
+                    )}
+                    <CardLink
+                      id={d.items.id}
+                      name={d.items.name_en ?? '—'}
+                      effect={cardEffectText(d.items.description_th, d.items.description)}
+                      slot={cardSlotTh(d.items.description)}
+                    />
+                  </span>
+                ) : d.items?.id ? (
                   <Link href={itemHref(d.items.id, d.items.category)} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {d.items.icon_url && (
                       <img src={d.items.icon_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />

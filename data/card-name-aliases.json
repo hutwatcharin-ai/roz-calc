@@ -1,0 +1,285 @@
+{
+ "_meta": {
+  "what": "ชื่อการ์ดที่ใช้ค้นหามอนตัวที่ดรอปการ์ดใบนั้นได้",
+  "why": "การ์ดหลายใบชื่อไม่มีคำไหนตรงกับมอนที่ดรอปมันเลย พิมพ์ \"Zealotus\" จึงไม่เจอ Zherlthsh",
+  "claim": "ไม่ได้แปลว่าการ์ดชื่อนี้คือชื่ออีกชื่อของมอน แต่แปลว่าการ์ดชื่อนี้ดรอปจากมอนตัวนี้ ซึ่งเป็นแถวใน monster_drops ของเราเอง",
+  "rule": "เก็บเฉพาะคู่ที่ชื่อการ์ดไม่ซ้ำกับชื่อมอนตัวใด และการ์ดมีมอนดรอปตัวเดียว และค้นด้วยชื่อการ์ดแล้วยังไม่เจอ",
+  "regenerate": "node scripts/build-card-name-aliases.mjs",
+  "generatedAt": "2026-09-09T04:12:25.419Z"
+ },
+ "aliases": [
+  {
+   "alias": "Abysmal Knight",
+   "monster": 1219,
+   "monsterName": "Knight Of Abyss",
+   "card": 4140,
+   "cardName": "Abysmal Knight Card"
+  },
+  {
+   "alias": "Andre Egg",
+   "monster": 1097,
+   "monsterName": "Ant Egg",
+   "card": 4013,
+   "cardName": "Andre Egg Card"
+  },
+  {
+   "alias": "Assaulter",
+   "monster": 1315,
+   "monsterName": "Assulter",
+   "card": 4246,
+   "cardName": "Assaulter Card"
+  },
+  {
+   "alias": "Baphomet Jr.",
+   "monster": 1101,
+   "monsterName": "Baphomet",
+   "card": 4129,
+   "cardName": "Baphomet Jr. Card"
+  },
+  {
+   "alias": "Beetle King",
+   "monster": 1494,
+   "monsterName": "Kind Of Beetle",
+   "card": 4307,
+   "cardName": "Beetle King Card"
+  },
+  {
+   "alias": "Bloody Butterfly",
+   "monster": 1408,
+   "monsterName": "Blood Butterfly",
+   "card": 4327,
+   "cardName": "Bloody Butterfly Card"
+  },
+  {
+   "alias": "Boulder Dwarf Captain",
+   "monster": 25329,
+   "monsterName": "Boulder Dwarf Leader",
+   "card": 300944,
+   "cardName": "Boulder Dwarf Captain Card"
+  },
+  {
+   "alias": "Boulder Dwarf Siege Trooper",
+   "monster": 25327,
+   "monsterName": "Boulder Dwarf Hammer (Armored)",
+   "card": 300942,
+   "cardName": "Boulder Dwarf Siege Trooper Card"
+  },
+  {
+   "alias": "Boulder Dwarf Squad Leader",
+   "monster": 25328,
+   "monsterName": "Boulder Dwarf Mace (Armored)",
+   "card": 300943,
+   "cardName": "Boulder Dwarf Squad Leader Card"
+  },
+  {
+   "alias": "Dumpling Child",
+   "monster": 1409,
+   "monsterName": "Rice Cake Boy",
+   "card": 4154,
+   "cardName": "Dumpling Child Card"
+  },
+  {
+   "alias": "Enchanted Peach Tree",
+   "monster": 1410,
+   "monsterName": "Live Peach Tree",
+   "card": 4217,
+   "cardName": "Enchanted Peach Tree Card"
+  },
+  {
+   "alias": "Evil Nymph",
+   "monster": 1416,
+   "monsterName": "Wicked Nymph",
+   "card": 4258,
+   "cardName": "Evil Nymph Card"
+  },
+  {
+   "alias": "Evil Snake Lord",
+   "monster": 1418,
+   "monsterName": "Dark Snake Lord",
+   "card": 4330,
+   "cardName": "Evil Snake Lord Card"
+  },
+  {
+   "alias": "Female ThiefBug",
+   "monster": 1053,
+   "monsterName": "Thief Bug",
+   "card": 4026,
+   "cardName": "Female ThiefBug Card"
+  },
+  {
+   "alias": "Firelock Soldier",
+   "monster": 1403,
+   "monsterName": "Antique Firelock",
+   "card": 4160,
+   "cardName": "Firelock Soldier Card"
+  },
+  {
+   "alias": "Frozen Knight",
+   "monster": 1251,
+   "monsterName": "Knight Of Windstorm",
+   "card": 27269,
+   "cardName": "Frozen Knight Card"
+  },
+  {
+   "alias": "Golden Thief Bug",
+   "monster": 1086,
+   "monsterName": "Golden Bug",
+   "card": 27153,
+   "cardName": "Golden Thief Bug Card"
+  },
+  {
+   "alias": "Green Maiden",
+   "monster": 1631,
+   "monsterName": "Chung E",
+   "card": 4373,
+   "cardName": "Green Maiden Card"
+  },
+  {
+   "alias": "Hatii",
+   "monster": 1252,
+   "monsterName": "Garm",
+   "card": 4324,
+   "cardName": "Hatii Card"
+  },
+  {
+   "alias": "Hermit Plant",
+   "monster": 1413,
+   "monsterName": "Wild Ginseng",
+   "card": 4232,
+   "cardName": "Hermit Plant Card"
+  },
+  {
+   "alias": "Jing Guai",
+   "monster": 1517,
+   "monsterName": "Li Me Mang Ryang",
+   "card": 4265,
+   "cardName": "Jing Guai Card"
+  },
+  {
+   "alias": "Lord of The Dead",
+   "monster": 1373,
+   "monsterName": "Lord Of Death",
+   "card": 4276,
+   "cardName": "Lord of The Dead Card"
+  },
+  {
+   "alias": "Male ThiefBug",
+   "monster": 1054,
+   "monsterName": "ThiefBug",
+   "card": 4050,
+   "cardName": "Male ThiefBug Card"
+  },
+  {
+   "alias": "Mao Guai",
+   "monster": 1513,
+   "monsterName": "Civil Servant",
+   "card": 4202,
+   "cardName": "Mao Guai Card"
+  },
+  {
+   "alias": "Mi Gao",
+   "monster": 1516,
+   "monsterName": "Increase Soil",
+   "card": 4231,
+   "cardName": "Mi Gao Card"
+  },
+  {
+   "alias": "Miyabi Doll",
+   "monster": 1404,
+   "monsterName": "Miyabi Ningyo",
+   "card": 4208,
+   "cardName": "Miyabi Doll Card"
+  },
+  {
+   "alias": "Pickaxe Boulder Dwarf",
+   "monster": 25325,
+   "monsterName": "Boulder Dwarf Pick",
+   "card": 300940,
+   "cardName": "Pickaxe Boulder Dwarf Card"
+  },
+  {
+   "alias": "Picky Egg",
+   "monster": 1050,
+   "monsterName": "Picky",
+   "card": 4011,
+   "cardName": "Picky Egg Card"
+  },
+  {
+   "alias": "Picky Poring",
+   "monster": 2398,
+   "monsterName": "Little Poring",
+   "card": 4545,
+   "cardName": "Picky Poring Card"
+  },
+  {
+   "alias": "Pirate Skeleton",
+   "monster": 1071,
+   "monsterName": "Pirate Skel",
+   "card": 4073,
+   "cardName": "Pirate Skeleton Card"
+  },
+  {
+   "alias": "Poisonous Toad",
+   "monster": 1402,
+   "monsterName": "Poison Toad",
+   "card": 4175,
+   "cardName": "Poisonous Toad Card"
+  },
+  {
+   "alias": "Samurai Spector",
+   "monster": 1492,
+   "monsterName": "Incantation Samurai",
+   "card": 4263,
+   "cardName": "Samurai Spector Card"
+  },
+  {
+   "alias": "Sky Petite",
+   "monster": 1156,
+   "monsterName": "Petit",
+   "card": 4120,
+   "cardName": "Sky Petite Card"
+  },
+  {
+   "alias": "Tower Keeper",
+   "monster": 1270,
+   "monsterName": "C Tower Manager",
+   "card": 4229,
+   "cardName": "Tower Keeper Card"
+  },
+  {
+   "alias": "Wanderer",
+   "monster": 1208,
+   "monsterName": "Wander Man",
+   "card": 4210,
+   "cardName": "Wanderer Card"
+  },
+  {
+   "alias": "White Lady",
+   "monster": 1630,
+   "monsterName": "Bacsojin",
+   "card": 4372,
+   "cardName": "White Lady Card"
+  },
+  {
+   "alias": "Yao Jun",
+   "monster": 1512,
+   "monsterName": "Hyegun",
+   "card": 4328,
+   "cardName": "Yao Jun Card"
+  },
+  {
+   "alias": "Zealotus",
+   "monster": 1200,
+   "monsterName": "Zherlthsh",
+   "card": 4277,
+   "cardName": "Zealotus Card"
+  },
+  {
+   "alias": "Zhu Po Long",
+   "monster": 1514,
+   "monsterName": "Dancing Dragon",
+   "card": 4272,
+   "cardName": "Zhu Po Long Card"
+  }
+ ]
+}

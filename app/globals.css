@@ -1993,6 +1993,37 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .monlink:focus-visible .monlink__pop { display: block; }
 @media (hover: none) { .monlink__pop { display: none !important; } }
 
+/* A card name that shows its effect on hover. Same mechanism as .monlink and
+   the same reasoning -- CSS only, so nothing renders or loads until the
+   pointer is on it -- but it holds text rather than a sprite, because the
+   game has no per-card artwork to show: 313 card icons are 8 distinct
+   images. Wider than the sprite popup because an effect is a sentence. */
+.cardlink { position: relative; }
+.cardlink__pop {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 6px);
+  width: max-content;
+  max-width: 300px;
+  padding: 9px 11px;
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: 0 0 14px var(--glow-cyan), 0 8px 24px rgba(0, 0, 0, 0.5);
+  color: var(--text);
+  font: 400 12.5px/1.55 var(--font-sarabun), sans-serif;
+  white-space: normal;
+  text-align: left;
+  z-index: 20;
+  pointer-events: none;
+}
+.cardlink__slot { display: block; margin-bottom: 3px; color: var(--faint); font-size: 11.5px; }
+.cardlink__effect { display: block; }
+.cardlink:hover .cardlink__pop,
+.cardlink:focus-visible .cardlink__pop { display: block; }
+@media (hover: none) { .cardlink__pop { display: none !important; } }
+
 /* Two-line answer on the monster page (MonsterBestWeaponPanel). */
 .advice { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 0; }
 .advice dt { color: var(--faint); font-size: 13px; }
