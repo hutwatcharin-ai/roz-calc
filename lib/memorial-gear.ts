@@ -16,14 +16,14 @@
 import file from '@/data/memorial-gear.json';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { BASE_LEVEL_CAP } from '@/lib/level-cap';
 
 /**
- * Base level cap on RO Zero Global, raised to 60 by the patch of 3 Sep 2026
- * (see app/news/patch-2026-09-03). Ranks III, II and I need 70, 80 and 90, so
- * this one number decides what the page shows as reachable. When the cap
- * moves, change it here and the page follows.
+ * Re-exported so this page keeps its own name for the number while the number
+ * itself lives in one place (lib/level-cap). Ranks III, II and I need 70, 80
+ * and 90, so the cap decides what the page shows as reachable.
  */
-export const LEVEL_CAP = 60;
+export const LEVEL_CAP = BASE_LEVEL_CAP;
 
 export interface GearPiece {
   id: number | null;

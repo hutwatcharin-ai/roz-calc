@@ -104,8 +104,8 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
       )}
 
       <p className="muted" style={{ marginTop: 4, marginBottom: 14, maxWidth: '72ch' }}>
-        โบนัสขึ้นกับความสนิท — <strong>ระดับ 2 ต้องเลี้ยงจนสนิทมากขึ้น</strong> ·{' '}
-        <strong>ไข่ไม่ได้ดรอปจากมอน</strong> ต้องเอาของที่ใช้จับไปจับเอง ตัวเลข % คืออัตราดรอปของ<em>ของที่ใช้จับ</em>
+        <strong>ไข่ไม่ได้ดรอปจากมอน</strong> — ตัวเลข % คืออัตราดรอปของ<em>ของที่ใช้จับ</em> ·
+        โบนัสระดับ 2 ต้องเลี้ยงให้สนิทกว่าระดับ 1
         {undocumented > 0 && ` · อีก ${undocumented} ตัวมีไข่ในเกมแต่ยังไม่มีใครลงโบนัสไว้`}
       </p>
 

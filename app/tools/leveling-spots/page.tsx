@@ -106,7 +106,7 @@ export default async function LevelingSpotsPage({
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader title="ฟาร์มที่ไหนดี" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        ใส่แค่เลเวลก็ได้คำตอบแล้ว — จะใส่ดาเมจกับ ASPD เพิ่มก็ได้ แล้วอันดับจะเปลี่ยนเป็น EXP ต่อชั่วโมงที่คุณทำได้จริง
+        ใส่แค่เลเวลก็ได้คำตอบ — ใส่ดาเมจกับ ASPD ด้วย อันดับจะเปลี่ยนเป็น EXP ต่อชั่วโมงของคุณเอง
       </p>
 
       {failed ? (

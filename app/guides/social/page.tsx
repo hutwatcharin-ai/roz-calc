@@ -80,8 +80,7 @@ export default function SocialGuidePage() {
           </table>
         </div>
         <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-          ตารางในไกด์ต้นทางไล่ทีละเลเวลตั้งแต่ 41 ถึง 99 ทุกแถวตรงกับกติกาเลเวลละ 1 ไม่มีขั้นบันไดหรือส่วนลด
-          จึงเก็บเป็นกติกาแทนที่จะลอกตาราง 60 แถวมา
+          ไกด์ต้นทางไล่ทีละเลเวล 41-99 ทุกแถวตรงกับกติกานี้ ไม่มีขั้นบันไดหรือส่วนลด
         </p>
       </section>
 
@@ -117,13 +116,12 @@ export default function SocialGuidePage() {
       <section style={{ marginTop: 26 }}>
         <h2 className="section-title">แต่งงาน</h2>
         <p className="filterstate" style={{ marginTop: 2 }}>
-          <strong>ยังไม่เปิดในเซิร์ฟโกลบอล</strong> — โรดแมปทางการระบุ กุมภาพันธ์ 2027
-          ข้างล่างคือระบบที่มีอยู่แล้วในเซิร์ฟเวอร์เวอร์ชันอื่น
+          <strong>ยังไม่เปิดในเซิร์ฟโกลบอล</strong> — โรดแมประบุ ก.พ. 2027 · ข้างล่างคือระบบในเซิร์ฟเวอร์เวอร์ชันอื่น
         </p>
         <p className="muted" style={{ marginTop: 10, marginBottom: 10, maxWidth: '70ch' }}>
-          ต้องเลเวลฐาน {MARRIAGE_MIN_LEVEL} ขึ้นไปทั้งคู่ · ตั้งปาร์ตี้ด้วยกัน (ชาย-หญิง) ไปหา Wedding Assistant
-          แล้วไปที่ Bishop Bomars ในโบสถ์ · <strong>ฝ่ายชายขอก่อนเสมอ</strong> แล้วอีกฝ่ายยืนยันชื่อภายใน 3 นาที ·
-          หลังพิธีจะขยับตัวรบไม่ได้ราว 1 ชั่วโมง · แหวนแต่งงาน<strong>ขาย ทิ้ง หรือเทรดไม่ได้</strong>
+          เลเวลฐาน {MARRIAGE_MIN_LEVEL} ขึ้นไปทั้งคู่ · ตั้งปาร์ตี้ (ชาย-หญิง) ไปหา Wedding Assistant แล้วไป Bishop Bomars ที่โบสถ์ ·
+          <strong>ฝ่ายชายขอก่อน</strong> อีกฝ่ายยืนยันภายใน 3 นาที · หลังพิธีรบไม่ได้ราว 1 ชั่วโมง ·
+          แหวน<strong>ขาย ทิ้ง เทรดไม่ได้</strong>
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">
@@ -159,11 +157,10 @@ export default function SocialGuidePage() {
       </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
-        <strong>แคลน:</strong> ชื่อแคลน หัวหน้า และโบนัสตรงกันสองแหล่ง — ไกด์ฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026)
-        กับข้อมูลของ rAthena เอง (ตารางแคลนและบทพูดของ NPC ที่ประกาศโบนัส อ่าน 9 ก.ย. 2026) ·{' '}
-        <strong>สกิลแต่งงาน:</strong> ทั้งสามสกิลมีใน skill_db ของ rAthena ชื่อและผลตรงกัน ·{' '}
-        <strong>ค่ารีเซ็ตสเตตัส โบนัสโรงแรม และธนาคาร:</strong> มาจากไกด์<strong>แหล่งเดียว</strong> ยังไม่มีที่สองให้ตรวจ ·
-        rAthena เป็นโค้ดเบส Ragnarok ทั่วไป ไม่ใช่เซิร์ฟ Zero จึงใช้ยืนยันได้ แต่ถ้าขัดกันให้ยึดของ Zero
+        <strong>สองแหล่งตรงกัน:</strong> ชื่อแคลน หัวหน้า โบนัส และสกิลแต่งงานทั้งสาม — roz-global.info (8 ก.ย. 2026)
+        กับข้อมูล rAthena เอง (9 ก.ย. 2026) ·{' '}
+        <strong>แหล่งเดียว:</strong> ค่ารีเซ็ตสเตตัส โบนัสโรงแรม ธนาคาร ·
+        rAthena เป็นโค้ดเบส Ragnarok ทั่วไป ถ้าขัดกับ Zero ให้ยึด Zero
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>

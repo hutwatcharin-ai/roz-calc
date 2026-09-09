@@ -8,6 +8,7 @@ import Caveat from '@/components/Caveat';
 import Link from 'next/link';
 import ExpRangeCalculator from '@/components/ExpRangeCalculator';
 import { PARTY_EXP } from '@/lib/party-exp';
+import { BASE_LEVEL_CAP, BASE_LEVEL_CAP_SINCE } from '@/lib/level-cap';
 import {
   BASE_EXP_ROWS,
   FIRST_JOB_EXP_ROWS,
@@ -47,10 +48,19 @@ export default function ExpPage() {
         <strong>ที่มา:</strong> คู่มือเกมทางการ · เส้นโค้งฐานขึ้นราว 1.2 เท่าต่อเลเวล
       </p>
 
-      <Caveat label="วิธีอ่านตาราง และข้อจำกัด">
-        <strong>วิธีอ่าน:</strong> แถว N = EXP ที่ต้องเก็บเพื่อขึ้นถึงเลเวล N (แถบรีเซ็ตทุกครั้งที่ขึ้นเลเวล)
-        <br />
-        <strong>ข้อจำกัด:</strong> คู่มือมีถึงเลเวล {MAX_PUBLISHED_BASE_LEVEL} — เกินกว่านั้นขึ้นว่าไม่มีข้อมูล ไม่เดาให้
+      {/* The gap between the cap and the published table is the first thing a
+          reader needs, not a footnote: they will hit level 50 and find the
+          page silent about the ten levels above it. */}
+      <p className="filterstate" style={{ marginTop: 12 }}>
+        <strong>
+          เพดานเลเวลตอนนี้คือ {BASE_LEVEL_CAP} (ตั้งแต่ {BASE_LEVEL_CAP_SINCE}) แต่ตารางที่เผยแพร่มีถึงเลเวล{' '}
+          {MAX_PUBLISHED_BASE_LEVEL}
+        </strong>{' '}
+        — เลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} ยังไม่มีใครลงตัวเลขไว้ ที่นี่จึงไม่เดาให้
+      </p>
+
+      <Caveat label="วิธีอ่านตาราง">
+        แถว N = EXP ที่ต้องเก็บเพื่อขึ้นถึงเลเวล N — แถบรีเซ็ตทุกครั้งที่ขึ้นเลเวล
       </Caveat>
 
       <ExpRangeCalculator />
@@ -144,8 +154,8 @@ export default function ExpPage() {
         เข้าปาร์ตี้แล้ว EXP เป็นยังไง
       </h2>
       <p className="muted" style={{ marginTop: 6, marginBottom: 12, maxWidth: '68ch' }}>
-        ปาร์ตี้ได้ EXP <strong>รวม</strong>มากกว่าตีคนเดียว แต่ต้องหารกัน —{' '}
-        <strong>ต่อหัวน้อยลงตั้งแต่คนที่สอง</strong> สิ่งที่ปาร์ตี้ซื้อคือความเร็วในการฆ่า ไม่ใช่ EXP ต่อหัว
+        ปาร์ตี้ได้ EXP รวมมากกว่า แต่ต้องหารกัน — <strong>ต่อหัวน้อยลงตั้งแต่คนที่สอง</strong>{' '}
+        สิ่งที่ซื้อคือความเร็ว ไม่ใช่ EXP ต่อหัว
       </p>
       <div className="card" style={{ overflowX: 'auto' }}>
         <table className="data-table">
@@ -173,9 +183,8 @@ export default function ExpPage() {
         </table>
       </div>
       <p className="source-note" style={{ marginTop: 10 }}>
-        <strong>ที่มา:</strong> ไกด์ฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) <strong>แหล่งเดียว</strong> —
-        คู่มือทางการไม่ได้พิมพ์ตารางนี้ไว้ · ตั้งแต่ 4 คนขึ้นไปคอลัมน์รวมอยู่ที่ 130-132% ซึ่งเป็นผลจากการปัดเศษคอลัมน์ต่อหัว
-        ไม่ใช่กติกาที่แกว่ง (เอาต่อหัวคูณจำนวนคนแล้วกลับมาที่ยอดรวมทุกแถว)
+        <strong>ที่มา:</strong> roz-global.info (8 ก.ย. 2026) <strong>แหล่งเดียว</strong> —
+        คอลัมน์รวม 130-132% ตั้งแต่ 4 คนขึ้นไปคือผลของการปัดเศษต่อหัว ไม่ใช่กติกาที่แกว่ง
       </p>
 
       <p className="muted" style={{ marginTop: 20 }}>

@@ -35,11 +35,6 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
     why: 'the monsters that were cross-checked against ragnarokzero.net; the ten added on 8 Sep 2026 were checked against other sources, so a live count would claim a check that never happened',
   },
   {
-    file: 'app/guides/social/page.tsx',
-    text: '60 แถว',
-    why: 'the size of the mirrored guide stat-reset table as read on 8 Sep 2026, said to explain why the rule is stored instead of the table; it counts a source, not anything in our database',
-  },
-  {
     file: 'app/about/page.tsx',
     text: '410 แถว',
     why: 'unknown-rate drops contributed by midgardhub; verified against the table on 9 Sep 2026 and still exact',

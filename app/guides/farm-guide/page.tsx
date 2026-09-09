@@ -88,10 +88,9 @@ export default async function FarmGuidePage() {
       />
       <h1 className="pagehead__title">จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>
-        มอนสเตอร์ที่ EXP ต่อ HP คุ้มสุดของแต่ละช่วงเลเวล คิดจากข้อมูลเกมจริงทั้ง {countText(counts.total)} ตัว
-        อัปเดตตามฐานข้อมูลเสมอ — อยากได้ตัวเลขเฉพาะเลเวลคุณเป๊ะๆ ใช้{' '}
-        <Link href="/">ตัวค้นหน้าแรก</Link> หรือกรอกตัวละครที่แถบด้านบนแล้วทุกตารางจะคิดเป็น
-        ของคุณเอง
+        มอนที่ EXP ต่อ HP คุ้มสุดในแต่ละช่วงเลเวล คิดจากมอนทั้ง {countText(counts.total)} ตัวในฐานข้อมูล —
+        อยากได้ EXP ต่อชั่วโมงของตัวเองจริงๆ กรอกดาเมจกับ ASPD ที่{' '}
+        <Link href="/tools/leveling-spots">หาจุดเก็บเลเวล</Link>
       </p>
 
       {perBracket.map(({ lo, hi, top }) => (
@@ -138,8 +137,7 @@ export default async function FarmGuidePage() {
       ))}
 
       <p className="source-note" style={{ marginTop: 16 }}>
-        จัดอันดับด้วย EXP ต่อ HP (ฆ่าเร็ว-ได้เยอะ) · มอน Challenge (C1–C9) ไม่รวม ·
-        ตัวที่โจมตีก่อนมีป้ายเตือน เช็คสกิลอันตรายในหน้ามอนก่อนไปจริง
+        เรียงด้วย EXP ต่อ HP · ไม่รวมมอน Challenge (C1–C9) · ตัวที่โจมตีก่อนมีป้ายเตือน
       </p>
     </main>
   );

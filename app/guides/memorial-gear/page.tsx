@@ -95,8 +95,8 @@ export default async function MemorialGearPage() {
       />
       <PageHeader title="ชุดดันเจี้ยนความทรงจำ — 4 แรงค์" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
-        ชุดนี้ไม่ได้หากันทีละชิ้น แต่ <strong>อัปต่อกันเป็นทอด</strong> — เก็บของแรงค์ IV ตอนนี้แล้วอัปขึ้นไปเรื่อยๆ
-        ตอนเลเวลเปิดเพิ่ม · เลเวลสูงสุดตอนนี้คือ {LEVEL_CAP} จึงใส่ได้จริงแค่แรงค์เดียว ที่เหลือแสดงไว้ให้รู้ว่าของที่เก็บอยู่จะกลายเป็นอะไร
+        <strong>อัปต่อกันเป็นทอด</strong> ไม่ได้หาทีละชิ้น — เก็บแรงค์ IV แล้วอัปขึ้นไป ·
+        เพดานเลเวล {LEVEL_CAP} จึงใส่ได้จริงแรงค์เดียว ที่เหลือคือปลายทางของชิ้นที่เก็บอยู่
       </p>
 
       {failed && <p className="filterstate">โหลดข้อมูลไอเทมไม่สำเร็จ ค่าของแต่ละชิ้นอาจไม่ขึ้น</p>}
@@ -168,8 +168,7 @@ export default async function MemorialGearPage() {
       <section style={{ marginTop: 30 }}>
         <h2 className="section-title">แรงค์ที่ยังใส่ไม่ได้</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 12, maxWidth: '70ch', fontSize: 13 }}>
-          ต้องเลเวล {locked.map((r) => r.level).join(' / ')} ซึ่งเกินเพดาน {LEVEL_CAP} ตอนนี้ · เอามาลงไว้เพราะมันคือปลายทางของชิ้นที่คุณกำลังเก็บ
-          แต่ละแรงค์แยกเป็นชุดตามสายที่เล่น ใส่ครบ 4 ชิ้นในชุดเดียวกันถึงจะได้โบนัสเซ็ต
+          ต้องเลเวล {locked.map((r) => r.level).join(' / ')} เกินเพดาน {LEVEL_CAP} · ใส่ครบ 4 ชิ้นในชุดเดียวกันถึงได้โบนัสเซ็ต
         </p>
         {locked.map((r) => (
           <div key={r.rank} style={{ marginTop: 18 }}>
@@ -333,8 +332,7 @@ export default async function MemorialGearPage() {
 
         <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
-          หนึ่งครั้งได้หนึ่งอย่างจากตารางนี้ · <strong>+2 ของทุกสเตตัสหายากมาก</strong> ในเกราะอยู่ที่ 0.09% ต่อสเตตัส
-          แต่ในรองเท้าขึ้นไปถึง 3.57% — ถ้าจะลุ้น +2 ลุ้นที่รองเท้าคุ้มกว่าเยอะ
+          หนึ่งครั้งได้หนึ่งอย่าง · <strong>+2 หายากมาก</strong> — เกราะ 0.09% ต่อสเตตัส แต่รองเท้า 3.57% จะลุ้นให้ลุ้นที่รองเท้า
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">
@@ -359,8 +357,7 @@ export default async function MemorialGearPage() {
           </table>
         </div>
         <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-          &quot;—&quot; คือช่องนั้นไม่มีผลแบบนี้ในตารางเลย ไม่ใช่ 0% ·
-          ทั้งสามช่องรวมกันได้ 100.00% พอดี ซึ่งเป็นเหตุผลที่เชื่อว่าเป็นตัวเลขจากเกมจริง ไม่ใช่คนกะเอา
+          &quot;—&quot; คือไม่มีผลแบบนี้ในตาราง ไม่ใช่ 0% · ทั้งสามช่องรวมกันได้ 100.00% พอดี จึงเชื่อว่าเป็นตัวเลขจากเกม
         </p>
       </section>
 

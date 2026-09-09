@@ -274,7 +274,7 @@ export default function FarmPlannerBoard() {
           </>
         ) : (
           <p className="muted" style={{ marginTop: 12 }}>
-            กรอกดาเมจต่อครั้งกับความเร็วโจมตีในแถบด้านบน แล้วหน้านี้จะคิด EXP ต่อชั่วโมงและผลรวมให้ด้วย
+            กรอกช่องด้านบนแล้วจะได้ EXP ต่อชั่วโมงด้วย
           </p>
         )}
       </div>
