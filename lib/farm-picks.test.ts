@@ -1,7 +1,7 @@
 // The cases are the three real rows that made the old ranking wrong, with
 // their real numbers, so the test fails again if the weighting is removed.
 import { describe, it, expect } from 'vitest';
-import { farmPicks, farmBands, busiestMaps, unplaceable, type FarmCandidate, type SpawnPlace } from '@/lib/farm-picks';
+import { farmPicks, farmBands, busiestMaps, unplaceable, rankFarmRange, type FarmCandidate, type SpawnPlace } from '@/lib/farm-picks';
 
 const monster = (over: Partial<FarmCandidate> & { monsterId: number; name: string; level: number; expPerHp: number }): FarmCandidate => ({
   hp: 100,
@@ -87,5 +87,21 @@ describe('farmBands', () => {
 describe('unplaceable', () => {
   it('counts what was dropped, so the page can say so', () => {
     expect(unplaceable([DRAGON_FLY, CHONCHON], SPAWNS, 60)).toBe(1);
+  });
+});
+
+describe('rankFarmRange', () => {
+  it('ranks the placed monsters by density and keeps the rest aside', () => {
+    const { ranked, unplaced } = rankFarmRange([BLUE_PLANT, CHONCHON, DRAGON_FLY], SPAWNS);
+    expect(ranked.map((r) => r.name)).toEqual(['Chonchon', 'Blue Plant']);
+    // Dragon Fly has the second-best ratio here and no map at all: it is not
+    // dropped on this surface, because the reader chose the level range and an
+    // empty table would read as missing data.
+    expect(unplaced.map((r) => r.name)).toEqual(['Dragon Fly']);
+  });
+
+  it('never returns more rows than asked for', () => {
+    const { ranked, unplaced } = rankFarmRange([BLUE_PLANT, CHONCHON, DRAGON_FLY], SPAWNS, 2);
+    expect(ranked.length + unplaced.length).toBeLessThanOrEqual(2);
   });
 });

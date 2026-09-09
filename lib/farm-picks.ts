@@ -90,3 +90,34 @@ export function unplaceable(candidates: FarmCandidate[], spawns: SpawnPlace[], l
   const best = busiestMaps(spawns);
   return candidates.filter((c) => c.level <= levelCap && (c.expPerHp ?? 0) > 0 && !best.has(c.monsterId)).length;
 }
+
+/**
+ * The same ranking for a free level range rather than a fixed band, which is
+ * what the home page's finder needs.
+ *
+ * Monsters we cannot place come back separately instead of being dropped: the
+ * range is the reader's own choice there, and a range that quietly returns
+ * nothing looks like missing data. The page lists them after the ranked rows
+ * and says their map is unknown.
+ */
+export function rankFarmRange(
+  candidates: FarmCandidate[],
+  spawns: SpawnPlace[],
+  limit = 20,
+): { ranked: FarmPick[]; unplaced: FarmCandidate[] } {
+  const best = busiestMaps(spawns);
+  const usable = candidates.filter((c) => (c.expPerHp ?? 0) > 0);
+  const ranked = usable
+    .filter((c) => best.has(c.monsterId))
+    .map((c) => {
+      const place = best.get(c.monsterId)!;
+      return { ...c, bestMap: place.map, amount: place.amount, score: (c.expPerHp ?? 0) * place.amount };
+    })
+    .sort((a, b) => b.score - a.score || b.amount - a.amount)
+    .slice(0, limit);
+  const unplaced = usable
+    .filter((c) => !best.has(c.monsterId))
+    .sort((a, b) => (b.expPerHp ?? 0) - (a.expPerHp ?? 0))
+    .slice(0, Math.max(0, limit - ranked.length));
+  return { ranked, unplaced };
+}

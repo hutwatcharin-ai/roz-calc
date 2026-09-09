@@ -17,6 +17,8 @@ interface FarmingRow {
   is_aggressive: boolean | null;
   atk_max: number | null;
   spawn?: string;
+  /** How many stand on that map. Null when no spawn is known. */
+  spawnAmount?: number | null;
   hit100?: number | null;
 }
 
@@ -79,7 +81,17 @@ export default function FarmingTable({ rows }: { rows: FarmingRow[] }) {
                 <td data-label="EXP" className="num">{row.base_exp == null ? '—' : row.base_exp.toLocaleString()}</td>
                 <td data-label="EXP/HP" className="num" style={{ color: 'var(--yellow)' }}>{row.exp_per_hp}</td>
                 <td data-label="Zeny/ตัว" className="num">{row.avg_zeny_per_kill.toLocaleString()}</td>
-                <td data-label="แมพ">{row.spawn ?? '—'}</td>
+                {/* The count is half the ranking (lib/farm-picks): a spot is
+                    only worth standing in if there is a second one to kill. */}
+                <td data-label="แมพ">
+                  {row.spawn ? (
+                    <>
+                      {row.spawn} {row.spawnAmount ? <span className="muted">{row.spawnAmount} ตัว</span> : null}
+                    </>
+                  ) : (
+                    <span className="muted">ยังไม่รู้ว่าเกิดที่ไหน</span>
+                  )}
+                </td>
                 {/* spec 3.6: the plan is built from the row a player is already
                     looking at, not by retyping a name on another page. */}
                 <td data-label="">

@@ -46,6 +46,15 @@
         "source": "gsc"
       }
     ],
+    "1087": [
+      {
+        "name": "ออกฮีโร่",
+        "why": "ทับศัพท์ Orc Hero",
+        "query": "ออกฮีโร่",
+        "source": "site-search",
+        "searches": 2
+      }
+    ],
     "1091": [
       {
         "name": "แมลงปอ",
@@ -53,6 +62,16 @@
         "query": "แมลงปอ ro",
         "impressions": 1,
         "position": 19.0,
+        "source": "gsc"
+      }
+    ],
+    "1092": [
+      {
+        "name": "หมาฟ้า",
+        "why": "ชื่อเล่นเดียวกับ Wolf — Google ส่งคำนี้มาทั้งสองหน้า",
+        "query": "หมาฟ้า ro",
+        "impressions": 3,
+        "position": 66.5,
         "source": "gsc"
       }
     ],
@@ -66,6 +85,16 @@
         "source": "gsc"
       }
     ],
+    "1155": [
+      {
+        "name": "มังกรเขียว",
+        "why": "ชื่อเล่น: Petit ธาตุดินตัวสีเขียว",
+        "query": "มังกรเขียว ro",
+        "impressions": 3,
+        "position": 47.0,
+        "source": "gsc"
+      }
+    ],
     "1170": [
       {
         "name": "โซฮี",
@@ -73,6 +102,36 @@
         "query": "โซฮี ro",
         "impressions": 1,
         "position": 51.0,
+        "source": "gsc"
+      }
+    ],
+    "1179": [
+      {
+        "name": "วิปเปอร์",
+        "why": "ทับศัพท์ Whisper — ชื่อเดียวกับตัว Lv 34",
+        "query": "วิปเปอร์ ro",
+        "impressions": 1,
+        "position": 10.0,
+        "source": "gsc"
+      }
+    ],
+    "1185": [
+      {
+        "name": "วิปเปอร์",
+        "why": "ทับศัพท์ Whisper",
+        "query": "วิปเปอร์ ro",
+        "impressions": 1,
+        "position": 10.0,
+        "source": "gsc"
+      }
+    ],
+    "1265": [
+      {
+        "name": "คุกกี้",
+        "why": "ทับศัพท์ Cookie",
+        "query": "คุกกี้ ro",
+        "impressions": 1,
+        "position": 6.0,
         "source": "gsc"
       }
     ],
@@ -84,15 +143,6 @@
         "impressions": 1,
         "position": 16.0,
         "source": "gsc"
-      }
-    ],
-    "1087": [
-      {
-        "name": "ออกฮีโร่",
-        "why": "ทับศัพท์ Orc Hero",
-        "query": "ออกฮีโร่",
-        "source": "site-search",
-        "searches": 2
       }
     ]
   },
