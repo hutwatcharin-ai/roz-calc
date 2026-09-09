@@ -106,6 +106,21 @@ function buildIdAt(path) {
   return match ? match[1] : null;
 }
 
+/**
+ * The page as a string to search for --expect.
+ *
+ * React puts an HTML comment between static text and every value it
+ * interpolates, so `เพดานเลเวลคือ {CAP}` reaches the browser as
+ * `เพดานเลเวลคือ <!-- -->60`. A marker written the way it reads on screen then
+ * fails against the raw HTML -- which is how a correct deploy on 9 Sep 2026
+ * reported itself unverified and skipped the CDN purge, leaving the old page
+ * being served while the new one sat on the origin. Comments are stripped
+ * before the check so a marker may span an interpolation.
+ */
+function pageText(path) {
+  return fetchOrigin(path).split('<!-- -->').join('');
+}
+
 /** The Telegram message. Shared by the real run and --dry-run so what you preview is what gets sent. */
 function previewOnly({ shortSha, subject, filesChanged, path, verified, purged, minutes }) {
   return [
@@ -159,7 +174,7 @@ async function main() {
   // build that has not been made yet, so it is refused here rather than
   // quietly passing in twenty seconds' time.
   const buildIdBefore = path ? buildIdAt(path) : null;
-  if (path && expect && fetchOrigin(path).includes(expect)) {
+  if (path && expect && pageText(path).includes(expect)) {
     console.error(
       `--expect "${expect}" is already on ${path} before this deploy.\n` +
         'It cannot tell the new build from the old one. Pick a string that only the new build has.',
@@ -201,7 +216,7 @@ async function main() {
     if (!shipped) {
       verified = false;
       console.log(`\ngave up waiting: the origin is still serving build ${buildIdBefore}`);
-    } else if (expect && !fetchOrigin(path).includes(expect)) {
+    } else if (expect && !pageText(path).includes(expect)) {
       verified = false;
       console.log(`\na new build is live but ${path} does not contain "${expect}"`);
     } else {
