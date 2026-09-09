@@ -1,0 +1,239 @@
+{
+ "_meta": {
+  "what": "ดันเจี้ยนความทรงจำ 6 แห่ง: เลเวลที่เข้าได้ เข้าเดี่ยว/กลุ่ม และมอนในนั้น",
+  "source": "roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026)",
+  "gap": "มอนในดันเจี้ยนพวกนี้เกือบทั้งหมดเป็นตัวเฉพาะอินสแตนซ์ และไม่มีในตาราง monsters ของเราเลย จึงลิงก์ไปหน้ามอนไม่ได้ · ชื่อเดียวที่ตรงคือ Orc Skeleton แต่ค่าสถานะในอินสแตนซ์ไม่เท่ากับตัวปกติ (lv60 HP4,458 เทียบกับของเรา lv53 HP3,376) แปลว่าเป็นคนละตัว",
+  "regenerate": "node scripts/build-memorial-dungeons.mjs",
+  "generatedAt": "2026-09-09T04:40:53.394Z"
+ },
+ "dungeons": [
+  {
+   "name": "Poring Village",
+   "th": "หมู่บ้านโพริง",
+   "level": 30,
+   "levelMax": 60,
+   "map": "prt_fild05",
+   "x": 145,
+   "y": 235,
+   "party": true,
+   "dailyReset": false,
+   "monsters": [
+    {
+     "name": "Fortified Poring",
+     "level": 34,
+     "hp": 1023
+    },
+    {
+     "name": "Fortified Marin",
+     "level": 33,
+     "hp": 960
+    },
+    {
+     "name": "Fortified Poporing",
+     "level": 36,
+     "hp": 1167
+    },
+    {
+     "name": "Fortified Drops",
+     "level": 35,
+     "hp": 1095
+    },
+    {
+     "name": "Amering",
+     "level": 35,
+     "hp": 72810
+    },
+    {
+     "name": "Goldring",
+     "level": 35,
+     "hp": 72118
+    },
+    {
+     "name": "King Poring",
+     "level": 35,
+     "hp": 140000
+    }
+   ]
+  },
+  {
+   "name": "Orc's Memory",
+   "th": "ความทรงจำออร์ค",
+   "level": 59,
+   "levelMax": null,
+   "map": null,
+   "x": null,
+   "y": null,
+   "party": true,
+   "dailyReset": false,
+   "monsters": [
+    {
+     "name": "Orc Skeleton",
+     "level": 60,
+     "hp": 4458
+    },
+    {
+     "name": "Orc Zombie",
+     "level": 60,
+     "hp": 4475
+    },
+    {
+     "name": "Shaman's Flower",
+     "level": 98,
+     "hp": 5
+    },
+    {
+     "name": "Fallen Orc Hero",
+     "level": 70,
+     "hp": 2110562
+    }
+   ]
+  },
+  {
+   "name": "Prontera Culvert",
+   "th": "ท่อ Prontera",
+   "level": 59,
+   "levelMax": null,
+   "map": null,
+   "x": null,
+   "y": null,
+   "party": true,
+   "dailyReset": false,
+   "monsters": [
+    {
+     "name": "Sewer Giant Thief Bug",
+     "level": 60,
+     "hp": 3330
+    },
+    {
+     "name": "Sewer Thief Bug",
+     "level": 60,
+     "hp": 200
+    },
+    {
+     "name": "Ancient Thief Bug Egg",
+     "level": 60,
+     "hp": 10
+    },
+    {
+     "name": "Ancient Golden Thief Bug",
+     "level": 60,
+     "hp": 1200000
+    }
+   ]
+  },
+  {
+   "name": "Ant Hell 1F",
+   "th": "รังมด 1F",
+   "level": 70,
+   "levelMax": null,
+   "map": null,
+   "x": null,
+   "y": null,
+   "party": true,
+   "dailyReset": false,
+   "monsters": [
+    {
+     "name": "Cannibal Deniro",
+     "level": 70,
+     "hp": 5000
+    },
+    {
+     "name": "Cannibal Vitata",
+     "level": 71,
+     "hp": 5000
+    },
+    {
+     "name": "Cannibal Andre",
+     "level": 70,
+     "hp": 5000
+    },
+    {
+     "name": "Cannibal Pierre",
+     "level": 70,
+     "hp": 500
+    },
+    {
+     "name": "Cannibal Maya",
+     "level": 70,
+     "hp": 2200000
+    }
+   ]
+  },
+  {
+   "name": "Izlude 2F",
+   "th": "Izlude 2F",
+   "level": 80,
+   "levelMax": null,
+   "map": null,
+   "x": null,
+   "y": null,
+   "party": true,
+   "dailyReset": false,
+   "monsters": [
+    {
+     "name": "Deepsea Merman",
+     "level": 80,
+     "hp": 5000
+    },
+    {
+     "name": "Deepsea Obeaune",
+     "level": 80,
+     "hp": 5000
+    },
+    {
+     "name": "Deepsea Cornutus",
+     "level": 80,
+     "hp": 5000
+    },
+    {
+     "name": "Deepsea Marse",
+     "level": 80,
+     "hp": 5000
+    },
+    {
+     "name": "Deepsea Coelacanth",
+     "level": 80,
+     "hp": 2200000
+    }
+   ]
+  },
+  {
+   "name": "Sunken Ship",
+   "th": "เรือจม",
+   "level": 99,
+   "levelMax": null,
+   "map": null,
+   "x": null,
+   "y": null,
+   "party": true,
+   "dailyReset": false,
+   "monsters": [
+    {
+     "name": "Stormy Mimic",
+     "level": 99,
+     "hp": 100
+    },
+    {
+     "name": "Stormy Wraith",
+     "level": 99,
+     "hp": 19000
+    },
+    {
+     "name": "Stormy Pirate Skeleton",
+     "level": 99,
+     "hp": 19000
+    },
+    {
+     "name": "Stormy Whisper",
+     "level": 99,
+     "hp": 19000
+    },
+    {
+     "name": "Stormy Drake",
+     "level": 99,
+     "hp": 7200000
+    }
+   ]
+  }
+ ]
+}
