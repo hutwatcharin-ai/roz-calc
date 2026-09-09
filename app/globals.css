@@ -963,7 +963,12 @@ a.qcard:hover { background: var(--panel-2); }
   flex-wrap: wrap;
 }
 .pagehead__title {
-  font: 700 clamp(22px, 5.6vw, 32px)/1.25 var(--font-chakra), sans-serif;
+  /* Thai ink does not fit a 1.25 line box at this size: measured on
+     /database/monsters at 390px, the mark above ฐ and its tail both sit
+     outside the box, and on a title that wraps to two lines the descender of
+     the first line all but touches the second. 1.45 is the Thai line height
+     the rest of the type scale uses. */
+  font: 700 clamp(22px, 5.6vw, 32px)/1.45 var(--font-chakra), sans-serif;
   margin: 0;
   text-wrap: balance;
 }
@@ -2118,6 +2123,53 @@ a.cashlist__row:hover { background: var(--panel-2); }
   .searchbtn { margin-inline-start: auto; width: 44px; height: 44px; padding: 0; justify-content: center; }
   .searchbtn__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .searchmodal { padding-top: 120px; }
+}
+
+/* The five primary links, on a phone, within thumb reach (components/
+   BottomNav). Hidden above the breakpoint: on a wide screen the top row has
+   the room it needs and a second copy would be noise. */
+.bottomnav { display: none; }
+
+@media (max-width: 640px) {
+  .bottomnav {
+    display: flex;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    background: var(--panel);
+    border-top: 1px solid var(--hair);
+    /* Home-indicator strip on an iPhone: without this the last row of
+       buttons sits under it. */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .bottomnav__link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 6px 2px;
+    color: var(--dim);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    /* Hairlines between buttons, not around them: five equal targets read as
+       one bar. */
+    border-inline-start: 1px solid var(--hair);
+  }
+  .bottomnav__link:first-child { border-inline-start: 0; }
+  .bottomnav__link--on { color: var(--yellow-ink); background: var(--yellow); }
+
+  /* The top row's job moved down. Everything else in the bar stays: the brand
+     is the way home, the search button is the way to anything, and the
+     section row is the only way between pages inside a section. */
+  .topnav { display: none; }
+
+  /* Page content must not end underneath the fixed bar -- the footer's last
+     links were reachable only by over-scrolling without this. */
+  body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (max-width: 640px) {

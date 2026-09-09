@@ -1,6 +1,7 @@
 import './globals.css';
 import Nav from '@/components/Nav';
 import SiteFooter from '@/components/SiteFooter';
+import BottomNav from '@/components/BottomNav';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -96,6 +97,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Nav />
             {children}
             <SiteFooter />
+            {/* Phone only (CSS breakpoint): the five primary links move down
+                here and the top row hides itself, so the same links are never
+                on screen twice. */}
+            <BottomNav />
           </FarmPlanProvider>
         {GA_ID && <Analytics gaId={GA_ID} />}
       </body>
