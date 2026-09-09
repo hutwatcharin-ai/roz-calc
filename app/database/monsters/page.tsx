@@ -1,4 +1,5 @@
 // app/database/monsters/page.tsx
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
@@ -14,6 +15,7 @@ import { aliasIdsFor } from '@/lib/thai-aliases';
 import { formerNameIdsFor } from '@/lib/former-names';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { monsterCounts } from '@/lib/counts';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -21,11 +23,22 @@ import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant
 // days to 7 Sep 2026). The old title said "ฐานข้อมูลมอนสเตอร์" and nothing
 // else: no game name, no size, nothing telling the searcher this is the
 // thing they asked for.
-export const metadata = {
-  title: 'ข้อมูลมอนสเตอร์ RO Zero — 349 ตัว ดรอป จุดเกิด ค่าสถานะ',
-  description:
-    'มอนสเตอร์ทุกตัวใน Ragnarok Zero Global ภาษาไทย — ค้นชื่อ กรองตามเผ่า ธาตุ ช่วงเลเวล ดูของที่ดรอป แมพที่เจอ HP EXP และ HIT/FLEE ที่ต้องมี',
-};
+//
+// The count in the title is read from the table, not written here. It said
+// "349 ตัว" until 8 Sep 2026, when importing ten monsters made the page list
+// 359 and the title keep claiming 349 -- nothing errored, the title simply
+// became untrue (lib/counts).
+export async function generateMetadata(): Promise<Metadata> {
+  const { listed } = await monsterCounts();
+  // No number at all beats a wrong one: if the count did not come back, the
+  // title says what the page is without claiming a size.
+  const size = listed === null ? '' : ` — ${listed.toLocaleString('en-US')} ตัว`;
+  return {
+    title: `ข้อมูลมอนสเตอร์ RO Zero${size} ดรอป จุดเกิด ค่าสถานะ`,
+    description:
+      'มอนสเตอร์ทุกตัวใน Ragnarok Zero Global ภาษาไทย — ค้นชื่อ กรองตามเผ่า ธาตุ ช่วงเลเวล ดูของที่ดรอป แมพที่เจอ HP EXP และ HIT/FLEE ที่ต้องมี',
+  };
+}
 
 // Daily ISR (spec §5). Note: this does NOT move the page off the build-time
 // prerender path — Next.js still prerenders it once at build, so Supabase
@@ -90,6 +103,7 @@ export default async function MonsterListPage({
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
   const db = supabaseBrowser();
+  const counts = await monsterCounts();
   let query = db
     .from('monsters')
     .select('id, name_en, level, race, element, image_url, is_aggressive, atk_max, hp, base_exp', { count: 'exact' });
@@ -275,7 +289,7 @@ export default async function MonsterListPage({
             named so nothing disappears silently. */}
         <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
           <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
-          ซ่อนมอนดันเจี้ยนพิเศษ (Mj) 16 ตัว
+          ซ่อนมอนดันเจี้ยนพิเศษ (Mj) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
         </Link>
       </form>
 

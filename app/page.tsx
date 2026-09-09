@@ -83,6 +83,10 @@ export default async function HomePage({
     getLastUpdated(),
   ]);
 
+  // The equipment card's figure comes from the same count the stat row uses,
+  // so the two can never disagree the way they did.
+  const gearCount = stats.find((stat) => stat.href === '/database/equipment')?.count ?? null;
+
   const resultsHref = (show: boolean) =>
     `/?level=${level}&range=${range}${show ? '&c=1' : ''}#results`;
 
@@ -137,7 +141,10 @@ export default async function HomePage({
             action (leaving a bot unattended), not another lookup. */}
         <Link href="/database/equipment" className="qcard qcard--cyan">
           <strong>ของชิ้นนี้ดีไหม ใส่ได้ไหม</strong>
-          <span>อุปกรณ์กว่า 1,800 ชิ้น กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ</span>
+          {/* Counted, not written. This card claimed "กว่า 1,800 ชิ้น" while
+              the page it links to lists 876 -- the stat row directly above it
+              was already saying the real number (8 Sep 2026). */}
+          <span>{gearCount === null ? 'อุปกรณ์ กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ' : `อุปกรณ์กว่า ${gearCount.toLocaleString('en-US')} ชิ้น กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ`}</span>
           <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
         </Link>
 

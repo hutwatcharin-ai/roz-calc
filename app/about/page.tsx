@@ -69,7 +69,12 @@ export default function AboutPage() {
             <dt>
               <a href="https://ragnarokzero.net" target="_blank" rel="noopener noreferrer">ragnarokzero.net</a>
             </dt>
-            <dd>ใช้ตรวจทานค่าสถานะมอนสเตอร์ครบทั้ง 524 ตัว</dd>
+            {/* This number stays a literal on purpose. It is a claim about a
+                cross-check that happened, not about the size of the table --
+                the ten Nordfeld monsters added on 8 Sep 2026 were verified
+                against prontera and rozerodb, not against this source, so
+                counting live would claim a check that was never done. */}
+            <dd>ใช้ตรวจทานค่าสถานะมอนสเตอร์ 524 ตัวที่นำเข้ารอบแรก</dd>
           </div>
           <div>
             <dt>

@@ -9,6 +9,7 @@ import HitFleeTable, { type HitFleeRow } from '@/components/HitFleeTable';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import { playerFlee, playerHit } from '@/lib/hit-flee';
+import { countText, monsterCounts } from '@/lib/counts';
 
 export const metadata = {
   title: 'คำนวณ HIT/FLEE Ragnarok Zero',
@@ -25,6 +26,11 @@ export default async function HitFleePage({
 }) {
   const lv = Math.max(0, Number(searchParams.lv ?? 0) || 0);
   const range = Math.max(1, Number(searchParams.range ?? 10) || 10);
+  // Counted in this page's own universe: it filters Challenge clones out, so
+  // the note under the table has to count without them too. The old wording
+  // said "34 of 524" -- a denominator that included the 159 rows the page
+  // never shows (8 Sep 2026, lib/counts).
+  const counts = await monsterCounts();
 
   // Since the mob side is player-facing thresholds, the player side needs no
   // formula either: type HIT/FLEE straight off the status window (Alt+A),
@@ -114,7 +120,7 @@ export default async function HitFleePage({
         <div className="card" style={{ marginTop: 16, overflowX: 'auto' }}>
           <HitFleeTable monsters={(monsters ?? []) as HitFleeRow[]} myHit={myHit} myFlee={myFlee} />
           <p className="source-note">
-            มอนที่ขึ้น — คือตัวที่ไม่มีค่า HIT/FLEE ในไฟล์เกม (ราว 34 จาก 524 ตัว) · มอน Challenge ไม่รวมในตารางนี้
+            มอนที่ขึ้น — คือตัวที่ไม่มีค่า HIT/FLEE ในไฟล์เกม ({countText(counts.noChallengeMissingHitFlee)} จาก {countText(counts.noChallenge)} ตัว) · มอน Challenge ไม่รวมในตารางนี้
           </p>
         </div>
       )}

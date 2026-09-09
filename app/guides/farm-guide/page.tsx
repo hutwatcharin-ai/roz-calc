@@ -6,12 +6,19 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { isCVariant } from '@/lib/c-variant';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { countText, monsterCounts } from '@/lib/counts';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero',
-  description:
-    'จุดฟาร์ม Ragnarok Zero Global แยกตามช่วงเลเวล — มอนสเตอร์ที่ EXP ต่อ HP คุ้มสุดของแต่ละช่วง พร้อมแมพที่เจอและคำเตือนตัวที่โจมตีก่อน คิดจากข้อมูลเกมจริงทั้ง 524 ตัว',
-};
+// The size is counted, not written: it said 524 while the table held 534
+// (8 Sep 2026, lib/counts).
+export async function generateMetadata(): Promise<Metadata> {
+  const { total } = await monsterCounts();
+  const size = total === null ? 'ข้อมูลเกมจริง' : `ข้อมูลเกมจริงทั้ง ${total.toLocaleString('en-US')} ตัว`;
+  return {
+    title: 'จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero',
+    description: `จุดฟาร์ม Ragnarok Zero Global แยกตามช่วงเลเวล — มอนสเตอร์ที่ EXP ต่อ HP คุ้มสุดของแต่ละช่วง พร้อมแมพที่เจอและคำเตือนตัวที่โจมตีก่อน คิดจาก${size}`,
+  };
+}
 
 export const revalidate = 86400;
 
@@ -42,6 +49,7 @@ interface FarmRow {
 
 export default async function FarmGuidePage() {
   const db = supabaseBrowser();
+  const counts = await monsterCounts();
   const { data: rowsData, error: rowsError } = await fetchAllRows<FarmRow>((from, to) =>
     db
       .from('monster_farming_stats')
@@ -80,7 +88,7 @@ export default async function FarmGuidePage() {
       />
       <h1 className="pagehead__title">จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>
-        มอนสเตอร์ที่ EXP ต่อ HP คุ้มสุดของแต่ละช่วงเลเวล คิดจากข้อมูลเกมจริงทั้ง 524 ตัว
+        มอนสเตอร์ที่ EXP ต่อ HP คุ้มสุดของแต่ละช่วงเลเวล คิดจากข้อมูลเกมจริงทั้ง {countText(counts.total)} ตัว
         อัปเดตตามฐานข้อมูลเสมอ — อยากได้ตัวเลขเฉพาะเลเวลคุณเป๊ะๆ ใช้{' '}
         <Link href="/">ตัวค้นหน้าแรก</Link> หรือกรอกตัวละครที่แถบด้านบนแล้วทุกตารางจะคิดเป็น
         ของคุณเอง
