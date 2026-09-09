@@ -5,7 +5,7 @@
   "verified": "ไข่ที่หาเจอในตาราง items 24/26 · ของฝึก 26/26 · อัตราดรอปตรงกับ monster_drops 0 คู่ ต่างกัน 0 คู่",
   "npcNote": "พิกัด NPC ไม่มีแหล่งที่สอง — ตาราง map_stats ของเราสร้างจากจุดเกิดมอน จึงไม่มีแมพในอาคารทั้ง 13 แมพนี้",
   "regenerate": "node scripts/build-rozglobal-guides.mjs",
-  "generatedAt": "2026-09-09T04:26:31.886Z"
+  "generatedAt": "2026-09-09T04:30:04.724Z"
  },
  "qpetTowns": [
   {
@@ -461,6 +461,772 @@
    "sources": [],
    "eggId": 9025,
    "tamingId": 659
+  }
+ ],
+ "cosmetics": [
+  {
+   "item": "Feather Bonnet",
+   "map": "geffen",
+   "x": 76,
+   "y": 135,
+   "materials": [
+    {
+     "item": "Oldster Romance",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Feather of Birds",
+     "amount": 300,
+     "itemId": null
+    }
+   ],
+   "itemId": 5018
+  },
+  {
+   "item": "Sakkat",
+   "map": "morocc",
+   "x": 127,
+   "y": 59,
+   "materials": [
+    {
+     "item": "Trunk",
+     "amount": 120,
+     "itemId": 1019
+    },
+    {
+     "item": "Zeny",
+     "amount": 10000,
+     "itemId": null
+    }
+   ],
+   "itemId": 2280
+  },
+  {
+   "item": "Ph.D Hat",
+   "map": "prontera",
+   "x": 40,
+   "y": 237,
+   "materials": [
+    {
+     "item": "Hinalle",
+     "amount": 10,
+     "itemId": 703
+    },
+    {
+     "item": "Aloe",
+     "amount": 10,
+     "itemId": 704
+    },
+    {
+     "item": "Ment",
+     "amount": 10,
+     "itemId": 708
+    }
+   ],
+   "itemId": 5012
+  },
+  {
+   "item": "Mine Hat",
+   "map": "geffen",
+   "x": 83,
+   "y": 189,
+   "materials": [
+    {
+     "item": "Steel",
+     "amount": 25,
+     "itemId": 999
+    },
+    {
+     "item": "Crystal Mirror",
+     "amount": 1,
+     "itemId": 747
+    }
+   ],
+   "itemId": 5031
+  },
+  {
+   "item": "Raccoon Hat",
+   "map": "alberta",
+   "x": 92,
+   "y": 110,
+   "materials": [
+    {
+     "item": "Raccoon Leaf",
+     "amount": 50,
+     "itemId": 945
+    },
+    {
+     "item": "Kitty Band",
+     "amount": 1,
+     "itemId": null
+    }
+   ],
+   "itemId": 5033
+  },
+  {
+   "item": "Chef Hat",
+   "map": "xmas_in",
+   "x": 178,
+   "y": 177,
+   "materials": [
+    {
+     "item": "Piece of Cake",
+     "amount": 20,
+     "itemId": 539
+    },
+    {
+     "item": "White Dyestuffs",
+     "amount": 1,
+     "itemId": 982
+    },
+    {
+     "item": "Soft Fur",
+     "amount": 30,
+     "itemId": null
+    }
+   ],
+   "itemId": 5026
+  },
+  {
+   "item": "Cake Hat",
+   "map": "xmas_in",
+   "x": 178,
+   "y": 177,
+   "materials": [
+    {
+     "item": "Piece of Cake",
+     "amount": 20,
+     "itemId": 539
+    },
+    {
+     "item": "Candy Cane",
+     "amount": 5,
+     "itemId": 530
+    },
+    {
+     "item": "Well-baked Cookie",
+     "amount": 15,
+     "itemId": 538
+    },
+    {
+     "item": "Steel",
+     "amount": 10,
+     "itemId": 999
+    },
+    {
+     "item": "Candy",
+     "amount": 10,
+     "itemId": 529
+    }
+   ],
+   "itemId": 5024
+  },
+  {
+   "item": "Party Hat",
+   "map": "aldebaran",
+   "x": 180,
+   "y": 132,
+   "materials": [
+    {
+     "item": "Santa Hat",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Zeny",
+     "amount": 20000,
+     "itemId": null
+    }
+   ],
+   "itemId": null
+  },
+  {
+   "item": "Straw Hat",
+   "map": "comodo",
+   "x": 110,
+   "y": 260,
+   "materials": [
+    {
+     "item": "Grain",
+     "amount": 100,
+     "itemId": 577
+    },
+    {
+     "item": "Tough Vine",
+     "amount": 30,
+     "itemId": null
+    }
+   ],
+   "itemId": 5062
+  },
+  {
+   "item": "Sombrero",
+   "map": "comodo",
+   "x": 110,
+   "y": 260,
+   "materials": [
+    {
+     "item": "Straw Hat",
+     "amount": 1,
+     "itemId": 5062
+    },
+    {
+     "item": "Cactus Needle",
+     "amount": 50,
+     "itemId": 952
+    },
+    {
+     "item": "Guitar",
+     "amount": 1,
+     "itemId": 570061
+    }
+   ],
+   "itemId": 5067
+  },
+  {
+   "item": "Beanie",
+   "map": "geffen",
+   "x": 207,
+   "y": 163,
+   "materials": [
+    {
+     "item": "Cap",
+     "amount": 1,
+     "itemId": 2227
+    },
+    {
+     "item": "Down",
+     "amount": 50,
+     "itemId": null
+    },
+    {
+     "item": "Feather of Birds",
+     "amount": 50,
+     "itemId": null
+    },
+    {
+     "item": "Soft Fur",
+     "amount": 10,
+     "itemId": null
+    }
+   ],
+   "itemId": 5076
+  },
+  {
+   "item": "Kitsune Mask",
+   "map": "pay_arche",
+   "x": 63,
+   "y": 109,
+   "materials": [
+    {
+     "item": "Nine Tails",
+     "amount": 999,
+     "itemId": 1022
+    }
+   ],
+   "itemId": 5069
+  },
+  {
+   "item": "Opera Masque",
+   "map": "prontera",
+   "x": 27,
+   "y": 237,
+   "materials": [
+    {
+     "item": "Steel",
+     "amount": 20,
+     "itemId": 999
+    },
+    {
+     "item": "Singing Plant",
+     "amount": 1,
+     "itemId": 707
+    },
+    {
+     "item": "Zeny",
+     "amount": 5000,
+     "itemId": null
+    }
+   ],
+   "itemId": 2281
+  },
+  {
+   "item": "Welding Mask",
+   "map": "geffen_in",
+   "x": 144,
+   "y": 166,
+   "materials": [
+    {
+     "item": "Steel",
+     "amount": 25,
+     "itemId": 999
+    },
+    {
+     "item": "Zeny",
+     "amount": 2000,
+     "itemId": null
+    }
+   ],
+   "itemId": 2292
+  },
+  {
+   "item": "Doctor Band",
+   "map": "izlude",
+   "x": 83,
+   "y": 205,
+   "materials": [
+    {
+     "item": "Bandana",
+     "amount": 1,
+     "itemId": 2211
+    },
+    {
+     "item": "Iron",
+     "amount": 50,
+     "itemId": 998
+    },
+    {
+     "item": "Cracked Diamond",
+     "amount": 1,
+     "itemId": 733
+    }
+   ],
+   "itemId": 2273
+  },
+  {
+   "item": "Bulb Band",
+   "map": "izlude",
+   "x": 85,
+   "y": 204,
+   "materials": [
+    {
+     "item": "Bandana",
+     "amount": 1,
+     "itemId": 2211
+    },
+    {
+     "item": "Glass Bead",
+     "amount": 20,
+     "itemId": 746
+    }
+   ],
+   "itemId": 5034
+  },
+  {
+   "item": "Cross Hat",
+   "map": "izlude",
+   "x": 87,
+   "y": 205,
+   "materials": [
+    {
+     "item": "Bandana",
+     "amount": 1,
+     "itemId": 2211
+    },
+    {
+     "item": "Rosary",
+     "amount": 1,
+     "itemId": 2608
+    }
+   ],
+   "itemId": 5036
+  },
+  {
+   "item": "Striped Hairband",
+   "map": "izlude",
+   "x": 89,
+   "y": 204,
+   "materials": [
+    {
+     "item": "Bandana",
+     "amount": 1,
+     "itemId": 2211
+    },
+    {
+     "item": "Blue Dyestuffs",
+     "amount": 1,
+     "itemId": null
+    }
+   ],
+   "itemId": 5049
+  },
+  {
+   "item": "Blue Hairband",
+   "map": "izlude",
+   "x": 85,
+   "y": 207,
+   "materials": [
+    {
+     "item": "Turban",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Blue Dyestuffs",
+     "amount": 1,
+     "itemId": null
+    }
+   ],
+   "itemId": 5052
+  },
+  {
+   "item": "Decorative Mushroom",
+   "map": "aldebaran",
+   "x": 51,
+   "y": 202,
+   "materials": [
+    {
+     "item": "Mushroom Spore",
+     "amount": 50,
+     "itemId": 921
+    }
+   ],
+   "itemId": 5082
+  },
+  {
+   "item": "Hot-blooded Headband",
+   "map": "morocc",
+   "x": 85,
+   "y": 74,
+   "materials": [
+    {
+     "item": "Picky Card",
+     "amount": 1,
+     "itemId": 4008
+    },
+    {
+     "item": "Turban",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "White Dyestuffs",
+     "amount": 1,
+     "itemId": 982
+    }
+   ],
+   "itemId": 5070
+  },
+  {
+   "item": "Heart Hairpin",
+   "map": "comodo",
+   "x": 214,
+   "y": 186,
+   "materials": [
+    {
+     "item": "Frame Heart",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Bandana",
+     "amount": 1,
+     "itemId": 2211
+    }
+   ],
+   "itemId": 5041
+  },
+  {
+   "item": "Tulip Hairpin",
+   "map": "aldebaran",
+   "x": 240,
+   "y": 164,
+   "materials": [
+    {
+     "item": "Smile",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Red Dyestuffs",
+     "amount": 1,
+     "itemId": null
+    }
+   ],
+   "itemId": 5077
+  },
+  {
+   "item": "Flower Hairpin",
+   "map": "comodo",
+   "x": 242,
+   "y": 179,
+   "materials": [
+    {
+     "item": "Petal",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Steel",
+     "amount": 10,
+     "itemId": 999
+    },
+    {
+     "item": "Zeny",
+     "amount": 20000,
+     "itemId": null
+    }
+   ],
+   "itemId": 5061
+  },
+  {
+   "item": "Hair Brush",
+   "map": "comodo",
+   "x": 236,
+   "y": 164,
+   "materials": [
+    {
+     "item": "Mixture",
+     "amount": 1,
+     "itemId": 974
+    },
+    {
+     "item": "Red Dyestuffs",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Very Hard Shell",
+     "amount": 50,
+     "itemId": null
+    },
+    {
+     "item": "Axe",
+     "amount": 1,
+     "itemId": 520037
+    }
+   ],
+   "itemId": 5444
+  },
+  {
+   "item": "Fashionable Glasses",
+   "map": "comodo",
+   "x": 214,
+   "y": 186,
+   "materials": [
+    {
+     "item": "Sunglasses",
+     "amount": 1,
+     "itemId": 2201
+    },
+    {
+     "item": "Red Dyestuffs",
+     "amount": 1,
+     "itemId": null
+    }
+   ],
+   "itemId": 5047
+  },
+  {
+   "item": "Ear Muffs",
+   "map": "geffen_in",
+   "x": 82,
+   "y": 59,
+   "materials": [
+    {
+     "item": "Cursed Ruby",
+     "amount": 1,
+     "itemId": 724
+    },
+    {
+     "item": "Soft Fur",
+     "amount": 200,
+     "itemId": null
+    },
+    {
+     "item": "Headset",
+     "amount": 1,
+     "itemId": 5001
+    },
+    {
+     "item": "Zeny",
+     "amount": 5000,
+     "itemId": null
+    }
+   ],
+   "itemId": 2283
+  },
+  {
+   "item": "Headset",
+   "map": "geffen_in",
+   "x": 30,
+   "y": 71,
+   "materials": [
+    {
+     "item": "Steel",
+     "amount": 30,
+     "itemId": 999
+    },
+    {
+     "item": "Alcohol",
+     "amount": 1,
+     "itemId": 970
+    },
+    {
+     "item": "Coal",
+     "amount": 1,
+     "itemId": 1003
+    }
+   ],
+   "itemId": 5001
+  },
+  {
+   "item": "Stop Post",
+   "map": "alberta",
+   "x": 26,
+   "y": 25,
+   "materials": [
+    {
+     "item": "Trunk",
+     "amount": 50,
+     "itemId": 1019
+    },
+    {
+     "item": "Black Dyestuffs",
+     "amount": 1,
+     "itemId": 983
+    }
+   ],
+   "itemId": 2272
+  },
+  {
+   "item": "Binoculars",
+   "map": "payon",
+   "x": 207,
+   "y": 172,
+   "materials": [
+    {
+     "item": "Spin Glass",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Steel",
+     "amount": 100,
+     "itemId": 999
+    },
+    {
+     "item": "Zeny",
+     "amount": 50000,
+     "itemId": null
+    }
+   ],
+   "itemId": 2296
+  },
+  {
+   "item": "Antlers",
+   "map": "alberta_in",
+   "x": 122,
+   "y": 53,
+   "materials": [
+    {
+     "item": "Evil Horn",
+     "amount": 3,
+     "itemId": null
+    }
+   ],
+   "itemId": 2284
+  },
+  {
+   "item": "Blue Fish",
+   "map": "comodo",
+   "x": 300,
+   "y": 230,
+   "materials": [
+    {
+     "item": "Rotten Fish",
+     "amount": 1,
+     "itemId": 624
+    },
+    {
+     "item": "Stinky Scale",
+     "amount": 30,
+     "itemId": 959
+    },
+    {
+     "item": "Sushi",
+     "amount": 5,
+     "itemId": 551
+    },
+    {
+     "item": "Fish Tail",
+     "amount": 1,
+     "itemId": 1023
+    }
+   ],
+   "itemId": 5065
+  },
+  {
+   "item": "Smokie Leaf",
+   "map": "gef_fild07",
+   "x": 71,
+   "y": 233,
+   "materials": [
+    {
+     "item": "Raccoon Leaf",
+     "amount": 10,
+     "itemId": 945
+    }
+   ],
+   "itemId": 5064
+  },
+  {
+   "item": "Candle",
+   "map": "xmas",
+   "x": 222,
+   "y": 156,
+   "materials": [
+    {
+     "item": "Wick",
+     "amount": 1,
+     "itemId": null
+    },
+    {
+     "item": "Matchstick",
+     "amount": 1,
+     "itemId": 7035
+    }
+   ],
+   "itemId": 5028
+  },
+  {
+   "item": "Rainbow Eggshell",
+   "map": "morocc",
+   "x": 217,
+   "y": 225,
+   "materials": [
+    {
+     "item": "Egg Shell",
+     "amount": 1,
+     "itemId": 5015
+    },
+    {
+     "item": "Teintures bleue/rouge/jaune",
+     "amount": 1,
+     "itemId": null
+    }
+   ],
+   "itemId": 5039
+  },
+  {
+   "item": "Giant Band Aid",
+   "map": "payon",
+   "x": 185,
+   "y": 181,
+   "materials": [
+    {
+     "item": "Rotten Bandage",
+     "amount": 50,
+     "itemId": 930
+    },
+    {
+     "item": "Alcohol",
+     "amount": 1,
+     "itemId": 970
+    }
+   ],
+   "itemId": 5063
   }
  ],
  "jobChange": [

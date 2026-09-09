@@ -66,6 +66,59 @@ const qpets = tables['qpets.html'][1].rows.slice(1).map((row) => ({
   sources: eggSources(row[4]),
 }));
 
+// ------------------------------------------------------------- Cosmetics
+
+// Five tables of the same shape, split upstream by category with no heading
+// on any of them, so they are one list here. Every line is: what you get,
+// which NPC makes it, and what to bring.
+//
+// The guide writes each name in French with the English in brackets --
+// "Plumes d'oiseau ×300 (Feather of Birds)" -- and the English is the half
+// that joins to our items table, so that is what gets kept.
+function bracketedEnglish(text) {
+  const m = /\(([^)]+)\)\s*$/.exec(text.trim());
+  return (m ? m[1] : text).trim();
+}
+
+function craftMaterials(cell) {
+  const text = cell ?? '';
+  const out = [];
+  // Anchored on "×N": whatever sits before it is the name, and the bracketed
+  // English that follows wins when present. Splitting the cell on separators
+  // failed here -- "Oldster Romance ×1 Plumes d'oiseau ×300 (Feather of
+  // Birds)" mixes a bare name with a bracketed one, and "10 000 Zeny" has no
+  // × at all.
+  const re = /×\s*([\d\s,]+)\s*(?:\(([^)]+)\))?/g;
+  let last = 0;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const name = text
+      .slice(last, m.index)
+      .replace(/^\s*\)?\s*/, '')
+      .replace(/\([^)]*\)\s*/g, '')
+      .trim();
+    out.push({ item: (m[2] ?? name).trim(), amount: Number(m[1].replace(/[\s,]/g, '')) });
+    last = re.lastIndex;
+  }
+  for (const zeny of text.matchAll(/([\d][\d\s,]*)\s*Zeny/gi)) {
+    out.push({ item: 'Zeny', amount: Number(zeny[1].replace(/[\s,]/g, '')) });
+  }
+  return out;
+}
+
+const cosmetics = [0, 1, 2, 3, 4].flatMap((i) =>
+  (tables['cosmetiques.html'][i]?.rows ?? []).slice(1).map((row) => {
+    const m = /\/navi\s+(\S+)\s+(\d+)\/(\d+)/.exec(row[1] ?? '');
+    return {
+      item: bracketedEnglish(row[0]),
+      map: m?.[1] ?? null,
+      x: m ? Number(m[2]) : null,
+      y: m ? Number(m[3]) : null,
+      materials: craftMaterials(row[2]),
+    };
+  }),
+);
+
 // ------------------------------------------------------- Job change NPCs
 
 // One table per class, in the order the page's headings run.
@@ -164,7 +217,25 @@ async function crossCheck() {
       else rateChecks.differ.push(`${pet.pet}: ไกด์ ${source.rate}% / เรา ${ours}%`);
     }
   }
-  return { eggsFound, tamingFound, rateChecks };
+  // Cosmetics: the crafted item and every material, so the page links out
+  // instead of only naming. Zeny is money, not an item, and is left alone.
+  let cosmeticsFound = 0;
+  const materialMisses = new Set();
+  let materialCount = 0;
+  for (const entry of cosmetics) {
+    const made = itemByName.get(squash(entry.item));
+    entry.itemId = made?.id ?? null;
+    if (made) cosmeticsFound += 1;
+    for (const material of entry.materials) {
+      if (material.item === 'Zeny') { material.itemId = null; continue; }
+      materialCount += 1;
+      const found = itemByName.get(squash(material.item));
+      material.itemId = found?.id ?? null;
+      if (!found) materialMisses.add(material.item);
+    }
+  }
+
+  return { eggsFound, tamingFound, rateChecks, cosmeticsFound, materialCount, materialMisses: [...materialMisses] };
 }
 
 const check = await crossCheck();
@@ -182,13 +253,16 @@ const out = {
   },
   qpetTowns,
   qpets,
+  cosmetics,
   jobChange,
 };
 
 fs.writeFileSync(path.join(process.cwd(), 'data', 'rozglobal-guides.json'), JSON.stringify(out, null, 1));
-console.log(`qpets ${qpets.length} · เมืองที่มี NPC ${qpetTowns.length} · อาชีพ 2 ${jobChange.length}`);
+console.log(`qpets ${qpets.length} · เมืองที่มี NPC ${qpetTowns.length} · คอสตูมคราฟต์ ${cosmetics.length} · อาชีพ 2 ${jobChange.length}`);
 if (check) {
   console.log(`  ไข่เจอในตารางเรา ${check.eggsFound}/${qpets.length} · ของฝึก ${check.tamingFound}/${qpets.length}`);
   console.log(`  อัตราดรอป: ตรง ${check.rateChecks.agree} · ต่าง ${check.rateChecks.differ.length} · ไม่มีแถวให้เทียบ ${check.rateChecks.noRow} · ไม่รู้จักมอน ${check.rateChecks.noMonster}`);
+  console.log(`  คอสตูมที่หาเจอในตารางเรา ${check.cosmeticsFound}/${cosmetics.length} · วัตถุดิบที่หาไม่เจอ ${check.materialMisses.length} จาก ${check.materialCount}`);
+  for (const miss of check.materialMisses) console.log(`    ? ${miss}`);
   for (const d of check.rateChecks.differ) console.log(`    ! ${d}`);
 }

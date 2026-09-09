@@ -83,6 +83,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true },
     { href: '/guides/job-change', label: 'เปลี่ยนอาชีพ 2', icon: '/images/items/1201.gif', ready: true },
     { href: '/guides/pets', label: 'สัตว์เลี้ยง', icon: '/images/items/9001.gif', ready: true },
+    { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true },
+    { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/items/1101.gif', ready: true },
     { href: '/guides/codes', label: 'โค้ดรับของ', icon: '/images/items/714.gif', ready: true },
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },

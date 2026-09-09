@@ -44,10 +44,29 @@ export interface QpetTown {
   y: number | null;
 }
 
+export interface CraftMaterial {
+  item: string;
+  amount: number;
+  /** Null when the name does not match anything in our items table, or when
+   *  the "material" is Zeny. The page prints it as plain text rather than
+   *  guessing which item was meant. */
+  itemId: number | null;
+}
+
+export interface Cosmetic {
+  item: string;
+  map: string | null;
+  x: number | null;
+  y: number | null;
+  materials: CraftMaterial[];
+  itemId: number | null;
+}
+
 type Raw = {
   _meta: Record<string, string>;
   qpetTowns: QpetTown[];
   qpets: Qpet[];
+  cosmetics: Cosmetic[];
   jobChange: JobChangeNpc[];
 };
 
