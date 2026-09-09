@@ -127,9 +127,10 @@ describe('link tables', () => {
     expect(sections).toEqual(['database', 'tools', 'guides']);
   });
 
-  it('lists the ten database pages in browse order', () => {
+  it('lists the database pages in browse order', () => {
     // Reordered 31 Aug for the section split: hunting flow first, then the
-    // catalogs by size, world map added the day it shipped.
+    // catalogs by size, world map added the day it shipped. Pets joined on
+    // 9 Sep 2026, moved out of /guides because the page is one row per pet.
     expect(SECTION_LINKS.database.map((l) => l.href)).toEqual([
       '/database/monsters',
       '/database/equipment',
@@ -140,6 +141,7 @@ describe('link tables', () => {
       '/database/quests',
       '/database/maps',
       '/database/world-map',
+      '/database/pets',
       '/database/skills',
     ]);
   });

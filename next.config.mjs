@@ -8,6 +8,10 @@ const nextConfig = {
   // pages live now -- anything already linking or indexed follows once.
   async redirects() {
     return [
+      // Pets were a guide page until 9 Sep 2026. The content is one row per
+      // pet, which is what /database is for, and the guide listed 26 while the
+      // items table holds 28 eggs.
+      { source: '/guides/pets', destination: '/database/pets', permanent: true },
       // The card guide lived here for a few hours on 8 Sep 2026 before the
       // grouping moved onto the card list it was duplicating.
       { source: '/guides/cards', destination: '/database/cards', permanent: true },

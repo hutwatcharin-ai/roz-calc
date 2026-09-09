@@ -9,6 +9,9 @@
 // the guide our own tables could confirm.
 
 import file from '@/data/rozglobal-guides.json';
+import { formerNames } from '@/lib/former-names';
+
+const squash = (text: string): string => text.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 export interface QpetSource {
   monster: string;
@@ -71,6 +74,37 @@ type Raw = {
 };
 
 export const rozglobalGuides = file as unknown as Raw;
+
+/**
+ * The guide entry for an egg, matched on more than the egg's own name.
+ *
+ * Two of the 28 eggs missed a plain name match, and neither was missing data:
+ *
+ *   "Drops Egg" -- the guide files that pet as "Drop" but names its source
+ *     monster "Drops", so the monster name bridges the two.
+ *   "Savage Babe Egg" -- monster 1167 was renamed Savage Babe -> Savage Bebe
+ *     on 7 Sep 2026 on the evidence of its own card. The guide uses the new
+ *     spelling; the egg ITEM still carries the old one.
+ *
+ * So the lookup tries the pet's name, then the monster the guide says drops
+ * its taming item, then that monster's recorded former names. Each step is a
+ * fact already written down somewhere -- none of it is near-spelling guessing.
+ */
+export function qpetFor(petName: string): Qpet | null {
+  const wanted = squash(petName);
+  const pets = rozglobalGuides.qpets;
+  const direct = pets.find((pet) => squash(pet.pet) === wanted);
+  if (direct) return direct;
+  return (
+    pets.find((pet) =>
+      pet.sources.some(
+        (source) =>
+          squash(source.monster) === wanted ||
+          (source.monsterId !== null && formerNames(source.monsterId).some((old) => squash(old.name) === wanted)),
+      ),
+    ) ?? null
+  );
+}
 
 /** The in-game command a player pastes into chat to walk there. */
 export function naviCommand(map: string | null, x: number | null, y: number | null): string | null {

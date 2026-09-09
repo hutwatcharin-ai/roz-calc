@@ -1,18 +1,17 @@
 // app/guides/star-gear/page.tsx
 //
-// The ★ weapons and armour: what they are, what it costs to make one, and
-// every piece that exists.
+// The ★ system: what activated gear is, what turning a piece into one costs,
+// and which token each piece needs.
 //
-// This page is almost entirely our own data, which was not obvious at first.
-// The mirrored guide lists the pieces in French with no English anywhere --
-// "Fouet en acier", "Bâton en chêne" -- and no id to join on, so its tables
-// looked unusable. Then a search of our items table for names beginning with
-// ★ returned 58 rows: 31 weapons, 10 armours and 17 crafting tokens, each
-// with the client's own description and required level. The list and the
-// stats come from there.
+// It does NOT list the weapons and armour. It used to, and that was the
+// mistake: /database/equipment?q=★ returns the same 41 rows off the same
+// items table, so two pages were maintaining one list and competing for the
+// same search. The equipment database is where a list of equipment belongs;
+// this page keeps only what that database cannot say -- that activation costs
+// you 3 or 7 refine levels, what it takes, and which token goes with what.
 //
-// What the guide contributes is the one thing the client never states: the
-// price of activation, and that it costs you refine levels.
+// The tokens do stay here. They are category "Other", so the equipment
+// database does not carry them and there is nowhere else for them to be.
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -28,7 +27,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'อาวุธและชุดติดดาว ★ Ragnarok Zero — มีอะไรบ้าง ทำยังไง เสียอะไร',
   description:
-    'ของติดดาว ★ ใน Ragnarok Zero Global ทุกชิ้น พร้อมค่าสถานะจากในเกมและโบนัสตอนตีบวก +3 +7 +9 · วิธีเปลี่ยนของธรรมดาเป็นของติดดาว ใช้อะไรบ้าง และเสียตีบวกกี่ขั้น',
+    'ของติดดาว ★ ใน Ragnarok Zero Global — ปลุกยังไง เสียตีบวกกี่ขั้น ใช้โทเคนกับอะไรบ้าง และโทเคนแต่ละแบบใช้กับชิ้นไหน พร้อมลิงก์ดูของติดดาวทุกชิ้นในฐานข้อมูลอุปกรณ์',
 };
 
 // From the mirrored guide (roz-global.info, 8 Sep 2026). The client says
@@ -149,16 +148,15 @@ export default async function StarGearPage() {
 
       <section style={{ marginTop: 26 }}>
         <h2 className="section-title">
-          อาวุธติดดาว <span className="muted" style={{ fontWeight: 400 }}>· {weapons.length} ชิ้น</span>
+          ของติดดาวมีชิ้นไหนบ้าง <span className="muted" style={{ fontWeight: 400 }}>· {weapons.length + armour.length} ชิ้น</span>
         </h2>
-        <StarTable rows={weapons} />
-      </section>
-
-      <section style={{ marginTop: 26 }}>
-        <h2 className="section-title">
-          ชุดติดดาว <span className="muted" style={{ fontWeight: 400 }}>· {armour.length} ชิ้น</span>
-        </h2>
-        <StarTable rows={armour} />
+        {/* Linked, not listed. The equipment database already holds these rows
+            with the same stats, filters by job and level, and gives each one a
+            page of its own -- repeating them here only split the search. */}
+        <p className="muted" style={{ marginTop: 2, maxWidth: '70ch' }}>
+          อาวุธ {weapons.length} ชิ้นและชุด {armour.length} ชิ้น อยู่ในฐานข้อมูลอุปกรณ์อยู่แล้ว พร้อมค่าสถานะเต็มและกรองตามอาชีพกับเลเวลได้ —{' '}
+          <Link href="/database/equipment?q=%E2%98%85"><strong>เปิดดูของติดดาวทั้งหมด →</strong></Link>
+        </p>
       </section>
 
       <section style={{ marginTop: 26 }}>
@@ -172,7 +170,7 @@ export default async function StarGearPage() {
       </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
-        รายการของติดดาวทั้ง {rows.length} ชิ้นและค่าสถานะทุกบรรทัด<strong>มาจากข้อมูลไอเทมในเกม</strong>ที่เก็บไว้ในฐานข้อมูลเว็บนี้
+        รายชื่อโทเคนและค่าสถานะทุกบรรทัด<strong>มาจากข้อมูลไอเทมในเกม</strong>ที่เก็บไว้ในฐานข้อมูลเว็บนี้
         ไม่ได้แปลหรือสรุปใหม่ (ปล่อยเป็นภาษาอังกฤษเพราะไคลเอนต์โกลบอลเป็นอังกฤษ จะได้ตรงกับที่เห็นตอนกดดูของ) ·
         ส่วน<strong>ตารางค่าใช้จ่ายในการปลุกมาจากไกด์ภาษาฝรั่งเศส</strong> roz-global.info (อ่าน 8 ก.ย. 2026)
         เพราะไคลเอนต์บอกแต่ผลของชิ้นที่ปลุกแล้ว ไม่บอกว่าปลุกยังไง — เป็นแหล่งเดียว ยังไม่มีที่สองให้ตรวจ
