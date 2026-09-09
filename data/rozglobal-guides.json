@@ -1,0 +1,572 @@
+{
+ "_meta": {
+  "what": "ไข่ Qpet และ NPC เปลี่ยนอาชีพ 2 จาก roz-global.info",
+  "source": "roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026)",
+  "verified": "ไข่ที่หาเจอในตาราง items 24/26 · ของฝึก 26/26 · อัตราดรอปตรงกับ monster_drops 0 คู่ ต่างกัน 0 คู่",
+  "npcNote": "พิกัด NPC ไม่มีแหล่งที่สอง — ตาราง map_stats ของเราสร้างจากจุดเกิดมอน จึงไม่มีแมพในอาคารทั้ง 13 แมพนี้",
+  "regenerate": "node scripts/build-rozglobal-guides.mjs",
+  "generatedAt": "2026-09-09T04:26:31.886Z"
+ },
+ "qpetTowns": [
+  {
+   "town": "Payon",
+   "map": "payon",
+   "x": 175,
+   "y": 131
+  },
+  {
+   "town": "Geffen",
+   "map": "geffen",
+   "x": 193,
+   "y": 152
+  },
+  {
+   "town": "Izlude",
+   "map": "izlude",
+   "x": 72,
+   "y": 98
+  },
+  {
+   "town": "Morocc",
+   "map": "morocc",
+   "x": 203,
+   "y": 83
+  },
+  {
+   "town": "Prontera",
+   "map": "prontera",
+   "x": 218,
+   "y": 21
+  }
+ ],
+ "qpets": [
+  {
+   "pet": "Poring",
+   "level1": "LUK +2 CRIT +1",
+   "level2": "LUK +3 CRIT +1",
+   "taming": "Unripe Apple",
+   "sources": [
+    {
+     "monster": "Poring",
+     "rate": 0.2,
+     "monsterId": 1062
+    },
+    {
+     "monster": "Mastering",
+     "rate": 0.25,
+     "monsterId": 1090
+    }
+   ],
+   "eggId": 9001,
+   "tamingId": 619
+  },
+  {
+   "pet": "Drop",
+   "level1": "HIT +3 ATK +3",
+   "level2": "HIT +5 ATK +5",
+   "taming": "Orange Juice",
+   "sources": [
+    {
+     "monster": "Drops",
+     "rate": 0.2,
+     "monsterId": 1113
+    }
+   ],
+   "eggId": null,
+   "tamingId": 620
+  },
+  {
+   "pet": "Poporing",
+   "level1": "LUK +2 ต้านพิษ +10 %",
+   "level2": "LUK +3 ต้านพิษ +15 %",
+   "taming": "Bitter Herb",
+   "sources": [
+    {
+     "monster": "Green Plant",
+     "rate": 0.1,
+     "monsterId": 1080
+    }
+   ],
+   "eggId": 9003,
+   "tamingId": 621
+  },
+  {
+   "pet": "Lunatic",
+   "level1": "CRIT +2 ATK +2",
+   "level2": "CRIT +3 ATK +3",
+   "taming": "Rainbow Carrot",
+   "sources": [
+    {
+     "monster": "Lunatic",
+     "rate": 0.2,
+     "monsterId": 1063
+    },
+    {
+     "monster": "Eclipse",
+     "rate": 0.25,
+     "monsterId": 1093
+    }
+   ],
+   "eggId": 9004,
+   "tamingId": 622
+  },
+  {
+   "pet": "Savage Bebe",
+   "level1": "VIT +1 Max HP +50",
+   "level2": "VIT +2 Max HP +75",
+   "taming": "Sweet Milk",
+   "sources": [
+    {
+     "monster": "Savage Bebe",
+     "rate": 0.2,
+     "monsterId": 1167
+    }
+   ],
+   "eggId": null,
+   "tamingId": 627
+  },
+  {
+   "pet": "Rocker",
+   "level1": "ฟื้น HP +5 % Max HP +25",
+   "level2": "ฟื้น HP +8 % Max HP +38",
+   "taming": "Singing Flower",
+   "sources": [
+    {
+     "monster": "Flora",
+     "rate": 0.1,
+     "monsterId": 1118
+    }
+   ],
+   "eggId": 9011,
+   "tamingId": 629
+  },
+  {
+   "pet": "Spore",
+   "level1": "HIT +5",
+   "level2": "HIT +8",
+   "taming": "Dew-Laden Moss",
+   "sources": [
+    {
+     "monster": "Plankton",
+     "rate": 0.1,
+     "monsterId": 1161
+    },
+    {
+     "monster": "Red Mushroom",
+     "rate": 0.2,
+     "monsterId": 1085
+    }
+   ],
+   "eggId": 9012,
+   "tamingId": 630
+  },
+  {
+   "pet": "Poison Spore",
+   "level1": "STR +1 INT +1",
+   "level2": "STR +2 INT +2",
+   "taming": "Deadly Noxious Herb",
+   "sources": [
+    {
+     "monster": "Marina",
+     "rate": 0.1,
+     "monsterId": 1141
+    },
+    {
+     "monster": "White Plant",
+     "rate": 0.1,
+     "monsterId": 1082
+    }
+   ],
+   "eggId": 9013,
+   "tamingId": 631
+  },
+  {
+   "pet": "Little Poring",
+   "level1": "ฟื้น HP +50 %",
+   "level2": "ฟื้น HP +75 %",
+   "taming": "Little Unripe Apple",
+   "sources": [
+    {
+     "monster": "Poring",
+     "rate": 0.2,
+     "monsterId": 1062
+    },
+    {
+     "monster": "Mastering",
+     "rate": 0.25,
+     "monsterId": 1090
+    }
+   ],
+   "eggId": 9062,
+   "tamingId": 12846
+  },
+  {
+   "pet": "Picky",
+   "level1": "STR +1 ATK +5",
+   "level2": "STR +2 ATK +8",
+   "taming": "Earthworm the Dude",
+   "sources": [
+    {
+     "monster": "Kukre",
+     "rate": 0.1,
+     "monsterId": 1070
+    }
+   ],
+   "eggId": 9005,
+   "tamingId": 623
+  },
+  {
+   "pet": "Chonchon",
+   "level1": "AGI +1 FLEE +2",
+   "level2": "AGI +2 FLEE +3",
+   "taming": "Rotten Fish",
+   "sources": [
+    {
+     "monster": "Megalodon",
+     "rate": 0.1,
+     "monsterId": 1064
+    },
+    {
+     "monster": "Wild Rose",
+     "rate": 0.18,
+     "monsterId": 1261
+    }
+   ],
+   "eggId": 9006,
+   "tamingId": 624
+  },
+  {
+   "pet": "Steel Chonchon",
+   "level1": "FLEE +6",
+   "level2": "FLEE +9",
+   "taming": "Rusty Iron",
+   "sources": [
+    {
+     "monster": "Scorpion",
+     "rate": 0.1,
+     "monsterId": 1001
+    },
+    {
+     "monster": "Dragon Fly",
+     "rate": 0.25,
+     "monsterId": 1091
+    }
+   ],
+   "eggId": 9007,
+   "tamingId": 625
+  },
+  {
+   "pet": "Hunter Fly",
+   "level1": "P.Dodge +2",
+   "level2": "P.Dodge +2 HIT +1",
+   "taming": "Monster Juice",
+   "sources": [
+    {
+     "monster": "Vagabond Wolf",
+     "rate": 0.25,
+     "monsterId": 1092
+    }
+   ],
+   "eggId": 9008,
+   "tamingId": 626
+  },
+  {
+   "pet": "Baby Desert Wolf",
+   "level1": "INT +1 Max SP +50",
+   "level2": "INT +2 Max SP +75",
+   "taming": "Well-Dried Bone",
+   "sources": [
+    {
+     "monster": "Pirate Swordsman",
+     "rate": 0.1,
+     "monsterId": null
+    }
+   ],
+   "eggId": 9010,
+   "tamingId": 628
+  },
+  {
+   "pet": "Peco Peco",
+   "level1": "Max HP +150",
+   "level2": "Max HP +200",
+   "taming": "Fatty Chubby Earthworm",
+   "sources": [
+    {
+     "monster": "Hode",
+     "rate": 0.1,
+     "monsterId": 1127
+    }
+   ],
+   "eggId": 9014,
+   "tamingId": 632
+  },
+  {
+   "pet": "Smokie",
+   "level1": "AGI +1 P.Dodge +1",
+   "level2": "AGI +2 P.Dodge +1",
+   "taming": "Baked Sweet Potato",
+   "sources": [
+    {
+     "monster": "Horong",
+     "rate": 0.1,
+     "monsterId": 1129
+    }
+   ],
+   "eggId": 9015,
+   "tamingId": 633
+  },
+  {
+   "pet": "Yoyo",
+   "level1": "CRIT +3",
+   "level2": "CRIT +5",
+   "taming": "Tropical Banana",
+   "sources": [
+    {
+     "monster": "Choco",
+     "rate": 0.1,
+     "monsterId": 1214
+    },
+    {
+     "monster": "Lady Tanee",
+     "rate": 20,
+     "monsterId": 1688
+    }
+   ],
+   "eggId": 9016,
+   "tamingId": 634
+  },
+  {
+   "pet": "Ground Petite",
+   "level1": "ASPD +1 %",
+   "level2": "ASPD +1 % AGI +1",
+   "taming": "Shining Stone",
+   "sources": [
+    {
+     "monster": "Zenorc",
+     "rate": 0.1,
+     "monsterId": 1177
+    }
+   ],
+   "eggId": 9022,
+   "tamingId": 640
+  },
+  {
+   "pet": "Isis",
+   "level1": "ดาเมจกายภาพ +1 %",
+   "level2": "ดาเมจกายภาพ +2 %",
+   "taming": "Armlet of Obedience",
+   "sources": [
+    {
+     "monster": "Verit",
+     "rate": 0.1,
+     "monsterId": 1032
+    },
+    {
+     "monster": "Maya",
+     "rate": 2.5,
+     "monsterId": 1147
+    }
+   ],
+   "eggId": 9021,
+   "tamingId": 639
+  },
+  {
+   "pet": "Orc Warrior",
+   "level1": "ATK +10",
+   "level2": "ATK +15",
+   "taming": "Orc Trophy",
+   "sources": [],
+   "eggId": 9017,
+   "tamingId": 635
+  },
+  {
+   "pet": "Munak",
+   "level1": "INT +1 DEF +1",
+   "level2": "INT +2 DEF +2",
+   "taming": "No Recipient",
+   "sources": [],
+   "eggId": 9018,
+   "tamingId": 636
+  },
+  {
+   "pet": "Dokebi",
+   "level1": "M.ATK +1 %",
+   "level2": "M.ATK +2 %",
+   "taming": "Old Broom",
+   "sources": [
+    {
+     "monster": "Bathory",
+     "rate": 0.1,
+     "monsterId": 1102
+    },
+    {
+     "monster": "Alice",
+     "rate": 0.2,
+     "monsterId": 1275
+    }
+   ],
+   "eggId": 9019,
+   "tamingId": 637
+  },
+  {
+   "pet": "Sohee",
+   "level1": "STR +1 DEX +1",
+   "level2": "STR +2 DEX +2",
+   "taming": "Silver Knife of Chastity",
+   "sources": [
+    {
+     "monster": "Moonlight",
+     "rate": 3.25,
+     "monsterId": 1150
+    }
+   ],
+   "eggId": 9020,
+   "tamingId": 638
+  },
+  {
+   "pet": "Deviruchi",
+   "level1": "ดาเมจกายภาพ +1 % M.ATK +1 %",
+   "level2": "· Max HP/SP +1 %",
+   "taming": "Contract in Shadow",
+   "sources": [
+    {
+     "monster": "Joker",
+     "rate": 0.1,
+     "monsterId": 1131
+    }
+   ],
+   "eggId": 9023,
+   "tamingId": 641
+  },
+  {
+   "pet": "Baphomet Jr.",
+   "level1": "DEF/M.DEF +1 ต้านสตัน +1 %",
+   "level2": "DEF/M.DEF +2 ต้านสตัน +2 %",
+   "taming": "Book of the Devil",
+   "sources": [
+    {
+     "monster": "Marduk",
+     "rate": 0.1,
+     "monsterId": 1140
+    }
+   ],
+   "eggId": 9024,
+   "tamingId": 642
+  },
+  {
+   "pet": "Bongun",
+   "level1": "VIT +1 ต้านสตัน +1 %",
+   "level2": "VIT +2 ต้านสตัน +2 %",
+   "taming": "Her Heart",
+   "sources": [],
+   "eggId": 9025,
+   "tamingId": 659
+  }
+ ],
+ "jobChange": [
+  {
+   "job": "Priest",
+   "place": "โบสถ์ Prontera",
+   "map": "prt_church",
+   "x": 16,
+   "y": 41,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Monk",
+   "place": "วัด (Monastery)",
+   "map": "monk_in",
+   "x": 99,
+   "y": 58,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Hunter",
+   "place": "ป่า Payon",
+   "map": "in_hunter",
+   "x": 99,
+   "y": 99,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Bard",
+   "place": "Comodo",
+   "map": "comodo",
+   "x": 193,
+   "y": 161,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Dancer",
+   "place": "Comodo",
+   "map": "job_duncer",
+   "x": 95,
+   "y": 93,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Wizard",
+   "place": "หอคอย Geffen",
+   "map": "gef_tower",
+   "x": 111,
+   "y": 37,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Sage",
+   "place": "สถาบัน Izlude",
+   "map": "iz_ac01",
+   "x": 139,
+   "y": 82,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Blacksmith",
+   "place": "ในเมือง Geffen",
+   "map": "geffen_in",
+   "x": 110,
+   "y": 170,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Alchemist",
+   "place": "Al De Baran",
+   "map": "alde_alche",
+   "x": 101,
+   "y": 184,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Knight",
+   "place": "ในเมือง Prontera",
+   "map": "prt_in",
+   "x": 88,
+   "y": 101,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Crusader",
+   "place": "ปราสาท Prontera",
+   "map": "prt_cas",
+   "x": 251,
+   "y": 75,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Assassin",
+   "place": "ทะเลทราย Morocc",
+   "map": "in_moc_16",
+   "x": 19,
+   "y": 33,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  },
+  {
+   "job": "Rogue",
+   "place": "ประภาคาร Faros",
+   "map": "in_rogue",
+   "x": 363,
+   "y": 122,
+   "requirement": "Classe 1, niveau 50 de base et de job"
+  }
+ ]
+}

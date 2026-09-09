@@ -1993,6 +1993,20 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .monlink:focus-visible .monlink__pop { display: block; }
 @media (hover: none) { .monlink__pop { display: none !important; } }
 
+/* A /navi command. It exists to be selected and pasted into the game's chat
+   box, so it is styled as something you copy rather than as prose. */
+.navicmd {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px dashed var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  color: var(--cyan);
+  font-size: 12.5px;
+  user-select: all;
+  white-space: nowrap;
+}
+
 /* A card name that shows its effect on hover. Same mechanism as .monlink and
    the same reasoning -- CSS only, so nothing renders or loads until the
    pointer is on it -- but it holds text rather than a sprite, because the
