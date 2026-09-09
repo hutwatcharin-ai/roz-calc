@@ -219,6 +219,13 @@ async function main() {
     } else if (expect && !pageText(path).includes(expect)) {
       verified = false;
       console.log(`\na new build is live but ${path} does not contain "${expect}"`);
+      // The build shipped; only the assertion failed. Say what that leaves
+      // behind, because the CDN is still serving the old page and the next
+      // step is a person's judgement: twice on 9 Sep 2026 the marker was the
+      // thing that was wrong (one spanned an interpolation, one was text that
+      // only renders for some inputs) while the deploy itself was fine.
+      console.log('the CDN was NOT purged. check the marker first -- interpolated? only rendered for some inputs?');
+      console.log('then run: npm run purge');
     } else {
       verified = true;
       console.log('\norigin serves the new build');
