@@ -90,6 +90,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
     { href: '/guides/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
+    { href: '/guides/social', label: 'รีเซ็ตสเตตัส แคลน แต่งงาน', icon: '/images/items/2635.gif', ready: true },
   ],
 };
 

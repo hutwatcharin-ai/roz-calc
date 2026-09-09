@@ -50,7 +50,8 @@ export default function RefinePage() {
         source={
           <>
             <strong>ที่มา:</strong> คู่มือเกมทางการ (คู่มือผู้เชี่ยวชาญ &gt; การตีบวก) ·
-            ตารางโอกาสเทียบกับ rozerodb ที่ถอดหน้าเดียวกันแยกกันมา <strong>ตรงกันครบ 200 ช่อง</strong>
+            เทียบกับอีกสองเว็บที่ถอดหน้าเดียวกันแยกกันมา (rozerodb, roz-global.info)
+            <strong>ตรงกันครบ 380 ช่อง</strong> ทั้งโอกาสสำเร็จ ATK/MATK และ DEF ต่อขั้น
           </>
         }
       />

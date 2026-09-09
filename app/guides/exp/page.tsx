@@ -7,6 +7,7 @@
 import Caveat from '@/components/Caveat';
 import Link from 'next/link';
 import ExpRangeCalculator from '@/components/ExpRangeCalculator';
+import { PARTY_EXP } from '@/lib/party-exp';
 import {
   BASE_EXP_ROWS,
   FIRST_JOB_EXP_ROWS,
@@ -136,6 +137,46 @@ export default function ExpPage() {
 
         </div>
       </details>
+
+      {/* Put after the tables on purpose: this is the one number on the page
+          that changes a decision rather than answering "how much left". */}
+      <h2 className="section-title" style={{ marginTop: 28 }}>
+        เข้าปาร์ตี้แล้ว EXP เป็นยังไง
+      </h2>
+      <p className="muted" style={{ marginTop: 6, marginBottom: 12, maxWidth: '68ch' }}>
+        ปาร์ตี้ได้ EXP <strong>รวม</strong>มากกว่าตีคนเดียว แต่ต้องหารกัน —{' '}
+        <strong>ต่อหัวน้อยลงตั้งแต่คนที่สอง</strong> สิ่งที่ปาร์ตี้ซื้อคือความเร็วในการฆ่า ไม่ใช่ EXP ต่อหัว
+      </p>
+      <div className="card" style={{ overflowX: 'auto' }}>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th scope="col">คนในปาร์ตี้</th>
+              <th scope="col">EXP รวมทั้งปาร์ตี้</th>
+              <th scope="col">ต่อหัว</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1 (คนเดียว)</th>
+              <td className="num">100%</td>
+              <td className="num">100%</td>
+            </tr>
+            {PARTY_EXP.map((row) => (
+              <tr key={row.members}>
+                <th scope="row">{row.members}</th>
+                <td className="num">{row.total}%</td>
+                <td className="num">{row.each}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="source-note" style={{ marginTop: 10 }}>
+        <strong>ที่มา:</strong> ไกด์ฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) <strong>แหล่งเดียว</strong> —
+        คู่มือทางการไม่ได้พิมพ์ตารางนี้ไว้ · ตั้งแต่ 4 คนขึ้นไปคอลัมน์รวมอยู่ที่ 130-132% ซึ่งเป็นผลจากการปัดเศษคอลัมน์ต่อหัว
+        ไม่ใช่กติกาที่แกว่ง (เอาต่อหัวคูณจำนวนคนแล้วกลับมาที่ยอดรวมทุกแถว)
+      </p>
 
       <p className="muted" style={{ marginTop: 20 }}>
         ดูต่อ: <Link href="/tools/leveling-spots?mode=afk">หาจุด AFK</Link> ·{' '}
