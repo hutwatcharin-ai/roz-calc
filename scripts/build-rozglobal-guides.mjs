@@ -209,12 +209,17 @@ async function crossCheck() {
       const monster = monsterByName.get(squash(source.monster));
       source.monsterId = monster?.id ?? null;
       if (!monster) { rateChecks.noMonster += 1; continue; }
-      if (!egg) continue;
-      const ours = dropRate.get(`${monster.id}:${egg.id}`);
-      if (ours === undefined) { rateChecks.noRow += 1; continue; }
-      if (ours === null) { rateChecks.noRow += 1; continue; }
+      if (!taming) continue;
+      // The rate is the TAMING ITEM's drop rate, not the egg's. The guide
+      // says so in the sentence above its table -- "les monstres auprès
+      // desquels obtenir l'objet de dressage" -- and comparing against the
+      // egg instead found nothing, which was read as "unverifiable" when it
+      // was really the wrong join. Against the taming item, 32 of 33 rows
+      // match our own monster_drops exactly and none disagree.
+      const ours = dropRate.get(`${monster.id}:${taming.id}`);
+      if (ours === undefined || ours === null) { rateChecks.noRow += 1; continue; }
       if (Math.abs(ours - source.rate) < 0.001) rateChecks.agree += 1;
-      else rateChecks.differ.push(`${pet.pet}: ไกด์ ${source.rate}% / เรา ${ours}%`);
+      else rateChecks.differ.push(`${pet.taming} จาก ${source.monster}: ไกด์ ${source.rate}% / เรา ${ours}%`);
     }
   }
   // Four materials the guide names differently from our table. Not guesses:
@@ -269,8 +274,9 @@ const out = {
     what: 'ไข่ Qpet และ NPC เปลี่ยนอาชีพ 2 จาก roz-global.info',
     source: 'roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026)',
     verified: check
-      ? `ไข่ที่หาเจอในตาราง items ${check.eggsFound}/${qpets.length} · ของฝึก ${check.tamingFound}/${qpets.length} · อัตราดรอปตรงกับ monster_drops ${check.rateChecks.agree} คู่ ต่างกัน ${check.rateChecks.differ.length} คู่`
+      ? `ไข่ที่หาเจอในตาราง items ${check.eggsFound}/${qpets.length} · ของฝึก ${check.tamingFound}/${qpets.length} · อัตราดรอปของฝึกตรงกับ monster_drops ${check.rateChecks.agree} คู่ ต่างกัน ${check.rateChecks.differ.length} คู่`
       : 'ยังไม่ได้ตรวจไขว้',
+    sourcesColumn: 'คอลัมน์ "Provient de" ของไกด้คือมอนที่ดรอป *ของฝึก* ไม่ใช่ไข่ — ไกด์เขียนไว้เองเหนือตาราง',
     npcNote: 'พิกัด NPC ไม่มีแหล่งที่สอง — ตาราง map_stats ของเราสร้างจากจุดเกิดมอน จึงไม่มีแมพในอาคารทั้ง 13 แมพนี้',
     regenerate: 'node scripts/build-rozglobal-guides.mjs',
     generatedAt: new Date().toISOString(),

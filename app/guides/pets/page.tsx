@@ -6,9 +6,12 @@
 // description -- an egg's text says nothing about LUK +2 -- so a player
 // cannot compare pets from our own database at all.
 //
-// The drop rates come with a finding attached: our monster_drops has no rows
-// for pet eggs at all, none of the 26, so there was nothing to check them
-// against. The page says so instead of implying two sources agreed.
+// The rate column was mislabelled on the first pass. It is the drop rate of
+// the TAMING ITEM, not of the egg -- the guide says so in the sentence above
+// its own table, and a player pointed out that pet eggs do not drop at all.
+// Compared against the right item, 32 of its 33 rows match our monster_drops
+// exactly with no disagreement, so the column is fully cross-checked rather
+// than the single unverifiable source it was published as.
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -24,7 +27,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'สัตว์เลี้ยง Ragnarok Zero — ตัวไหนให้สเตตัสอะไร จับด้วยอะไร',
   description:
-    'สัตว์เลี้ยงใน Ragnarok Zero Global ทุกตัว บอกโบนัสสเตตัสตอนสนิทระดับ 1 และ 2 ของที่ใช้จับ ไข่ดรอปจากมอนตัวไหนกี่เปอร์เซ็นต์ และ NPC สัตว์เลี้ยงอยู่เมืองไหนพร้อมพิกัด',
+    'สัตว์เลี้ยงใน Ragnarok Zero Global ทุกตัว บอกโบนัสสเตตัสตอนสนิทระดับ 1 และ 2 ใช้ของอะไรจับ ของนั้นดรอปจากมอนตัวไหนกี่เปอร์เซ็นต์ และ NPC สัตว์เลี้ยงอยู่เมืองไหนพร้อมพิกัด',
 };
 
 export default function PetsPage() {
@@ -42,7 +45,8 @@ export default function PetsPage() {
       <PageHeader title="สัตว์เลี้ยง — ตัวไหนให้อะไร" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
         สัตว์เลี้ยง {qpets.length} ตัว · โบนัสขึ้นกับความสนิท — <strong>ระดับ 2 ต้องเลี้ยงจนสนิทมากขึ้น</strong>
-        โบนัสนี้ไม่ได้เขียนไว้ในคำอธิบายไข่ในเกม จึงเทียบจากฐานข้อมูลเฉยๆ ไม่ได้
+        โบนัสนี้ไม่ได้เขียนไว้ในคำอธิบายไข่ในเกม จึงเทียบจากฐานข้อมูลเฉยๆ ไม่ได้ ·
+        <strong>ไข่ไม่ได้ดรอปจากมอน</strong> ต้องเอาของที่ใช้จับไปจับเอง — ช่องขวาสุดคือมอนที่ดรอป<em>ของที่ใช้จับ</em>
       </p>
 
       <div className="card">
@@ -54,7 +58,7 @@ export default function PetsPage() {
                 <th>สนิทระดับ 1</th>
                 <th>สนิทระดับ 2</th>
                 <th>ของที่ใช้จับ</th>
-                <th>ไข่ดรอปจาก</th>
+                <th>ของฝึกดรอปจาก</th>
               </tr>
             </thead>
             <tbody>
@@ -82,7 +86,7 @@ export default function PetsPage() {
                       <span className="recipe__item">{pet.taming}</span>
                     )}
                   </td>
-                  <td data-label="ไข่ดรอปจาก">
+                  <td data-label="ของฝึกดรอปจาก">
                     {pet.sources.length === 0 ? (
                       <span className="muted">ไม่ระบุ</span>
                     ) : (
@@ -138,10 +142,11 @@ export default function PetsPage() {
       </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
-        โบนัสสเตตัส ของที่ใช้จับ และอัตราดรอปของไข่ มาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) ·
-        ไข่และของที่ใช้จับ<strong>ตรวจแล้วว่ามีอยู่จริงในฐานข้อมูลไอเทมของเรา</strong> และลิงก์ไปดูได้ ·
-        แต่<strong>อัตราดรอปตรวจไม่ได้</strong> เพราะตาราง monster_drops ของเราไม่มีแถวของไข่สัตว์เลี้ยงเลยสักตัวจาก {qpets.length} ตัว —
-        เป็นช่องว่างของข้อมูลเรา ไม่ใช่ข้อผิดของไกด์ ตัวเลขนี้จึงมาจากแหล่งเดียว
+        โบนัสสเตตัสมาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) เป็นแหล่งเดียว เพราะคำอธิบายไข่ในเกมไม่ได้เขียนไว้ ·
+        ส่วน<strong>อัตราดรอปของฝึกตรวจกับตารางดรอปของเราแล้ว ตรงกัน 32 จาก 33 คู่ ไม่มีคู่ไหนขัดกันเลย</strong>
+        (อีกคู่เป็นมอนชื่อ Pirate Swordsman ที่ไม่มีในฐานข้อมูลเรา) ·
+        <strong>ไข่ไม่ได้ดรอปจากมอน</strong> — ตัวเลข % คืออัตราดรอปของ<em>ของที่ใช้จับ</em> ไม่ใช่ของไข่
+        (ตอนแรกหน้านี้เขียนผิดเป็น &quot;ไข่ดรอปจาก&quot; แก้แล้ว 9 ก.ย. 2026)
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>

@@ -2,10 +2,11 @@
  "_meta": {
   "what": "ไข่ Qpet และ NPC เปลี่ยนอาชีพ 2 จาก roz-global.info",
   "source": "roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026)",
-  "verified": "ไข่ที่หาเจอในตาราง items 24/26 · ของฝึก 26/26 · อัตราดรอปตรงกับ monster_drops 0 คู่ ต่างกัน 0 คู่",
+  "verified": "ไข่ที่หาเจอในตาราง items 24/26 · ของฝึก 26/26 · อัตราดรอปของฝึกตรงกับ monster_drops 32 คู่ ต่างกัน 0 คู่",
+  "sourcesColumn": "คอลัมน์ \"Provient de\" ของไกด้คือมอนที่ดรอป *ของฝึก* ไม่ใช่ไข่ — ไกด์เขียนไว้เองเหนือตาราง",
   "npcNote": "พิกัด NPC ไม่มีแหล่งที่สอง — ตาราง map_stats ของเราสร้างจากจุดเกิดมอน จึงไม่มีแมพในอาคารทั้ง 13 แมพนี้",
   "regenerate": "node scripts/build-rozglobal-guides.mjs",
-  "generatedAt": "2026-09-09T05:12:11.205Z"
+  "generatedAt": "2026-09-09T05:40:46.082Z"
  },
  "qpetTowns": [
   {

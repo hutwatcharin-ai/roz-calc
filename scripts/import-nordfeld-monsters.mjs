@@ -88,7 +88,12 @@ async function main() {
     rows.push({
       id, name_en: name, level: m.level, race, element,
       element_level: m.element_level ?? null, size,
-      image_url: `/images/monsters/${id}.gif`,
+      // Not `/images/monsters/${id}.gif`: that was the first version, and
+      // none of the ten sprites exists in public/, so every one of them
+      // rendered a broken image on production until 9 Sep 2026. A monster row
+      // may only carry an image_url for a file this site serves
+      // (scripts/monster-images.ts). No allowed source has these sprites.
+      image_url: null,
       is_mvp: !!m.is_mvp, is_aggressive: null,
     });
   }
