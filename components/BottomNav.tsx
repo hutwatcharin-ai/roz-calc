@@ -15,9 +15,12 @@
 // menu with its own opinions. The top row hides itself at the same width, so
 // nothing is duplicated on screen.
 //
-// Not rendered at all on a wide screen: `display: none` alone would leave a
-// fixed bar in the accessibility tree, and the CSS carries the breakpoint
-// anyway.
+// The icons are game sprites, the same ones the section row uses, mirrored
+// under public/images: a butterfly wing (what a player uses to get home), a
+// magnifier, an encyclopedia, an iron hammer and a creation guide. Chosen for
+// what each means in the game rather than for what it looks like -- and
+// checked at 22px for being distinguishable from one another, which is why
+// the two books are one thick and one flat stack.
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -30,6 +33,14 @@ const SHORT: Record<string, string> = {
   '/drop-finder': 'ค้นดรอป',
   '/database/monsters': 'ฐานข้อมูล',
   '/tools/leveling-spots': 'เครื่องมือ',
+};
+
+const ICONS: Record<string, string> = {
+  '/': '/images/items/602.gif',
+  '/drop-finder': '/images/items/611.gif',
+  '/database/monsters': '/images/items/1564.gif',
+  '/tools/leveling-spots': '/images/items/613.gif',
+  '/guides': '/images/items/7127.gif',
 };
 
 export default function BottomNav() {
@@ -46,7 +57,11 @@ export default function BottomNav() {
             className={active ? 'bottomnav__link bottomnav__link--on' : 'bottomnav__link'}
             aria-current={active ? 'page' : undefined}
           >
-            {SHORT[link.href] ?? link.label}
+            {/* Decorative: the label under it is the name of the
+                destination, so a second copy in alt text would make a screen
+                reader say every button twice. */}
+            <img className="bottomnav__icon" src={ICONS[link.href]} alt="" width={22} height={22} />
+            <span className="bottomnav__label">{SHORT[link.href] ?? link.label}</span>
           </Link>
         );
       })}

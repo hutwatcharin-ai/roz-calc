@@ -16,7 +16,7 @@ import { isCardCategory, itemHref } from '@/lib/item-href';
 import { parseCardSlot } from '@/lib/card-slot';
 import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
-import { cardArtAlt, cardArtUrl, hasCardArt } from '@/lib/card-art';
+import { CardDroppers, CardHero } from './hero';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -128,103 +128,33 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         })}
       />
 
-      {/* A card is read for its effect, so the effect sits in the hero rather
-          than three cards down where the item template kept it. */}
-      <div className="equiphero">
-        {/* The artwork, where the item icon used to be: the icon is one of
-            eight images shared across 313 cards and identified nothing. A
-            card with no artwork of its own gets the card back, and the alt
-            text says which of the two this is. */}
-        <div>
-          <img
-            className={hasCardArt(item.id) ? 'cardart cardart--hero' : 'cardart cardart--hero cardart--none'}
-            src={cardArtUrl(item.id)}
-            alt={cardArtAlt(item.id, item.name_en)}
-            width={150}
-            height={200}
-          />
-          {/* In words as well as in the alt text: a reader looking at the grey
-              card back can otherwise only guess whether that is the card. */}
-          {!hasCardArt(item.id) && (
-            <p className="muted cardart__note">ยังไม่มีรูปการ์ดใบนี้ — ที่เห็นคือหลังการ์ดทั่วไป</p>
-          )}
-        </div>
-        <div>
-          <h1 className="pagehead__title">{item.name_en}</h1>
-          <p className="equiphero__chips">
-            <span className="tag">การ์ด</span>
-            {slot && <span className="tag">ใส่ช่อง {slot}</span>}
-            <span className="tag mono">ID {item.id}</span>
-          </p>
-          {/* Said before the drop table, not after it: the table below lists
-              monsters this card comes from, and for these 42 cards none of
-              those monsters is in the game yet either. */}
-          {release && (
-            <p className="filterstate" style={{ marginTop: 8 }}>
-              <strong>การ์ดใบนี้ยังไม่เปิดในเซิร์ฟโกลบอล</strong> — คาดว่ามาพร้อมแพตช์ {releaseText(release)} (
-              {release.sources.join(' + ')})
-            </p>
-          )}
-          <p className="muted" style={{ marginTop: 6, maxWidth: '65ch' }}>
-            {item.name_en}
-            {slot ? ` เป็นการ์ดที่ใส่ในช่อง ${slot}` : ' เป็นการ์ด'}
-            {item.description_th ? ` ให้ผล ${item.description_th}` : ''}
-            {source?.monsters
-              ? ` ดรอปจาก ${source.monsters.name_en} (Lv.${source.monsters.level ?? '—'}${source.rate != null ? ` อัตรา ${source.rate}%` : ''})`
-              : ''}
-          </p>
-        </div>
-      </div>
+      <CardHero
+        id={item.id}
+        name={item.name_en}
+        slot={slot}
+        effect={thai[0] ?? english[0] ?? null}
+        buyPrice={item.buy_price}
+        sellPrice={item.sell_price}
+        release={release}
+      />
 
-      {(thai.length > 0 || english.length > 0) && (
+      {english.length > 0 && (
         <div className="card card--cyan" style={{ marginTop: 20 }}>
-          <h2 className="section-title">เอฟเฟกต์</h2>
-          <DescriptionLanguageToggle
-            thaiLines={thai.length > 0 ? thai : english}
-            englishLines={english}
-          />
+          <h2 className="section-title">ข้อความเต็มจากในเกม</h2>
+          <DescriptionLanguageToggle thaiLines={thai.length > 0 ? thai : english} englishLines={english} />
         </div>
       )}
 
-      <div className="statgrid" style={{ marginTop: 20 }}>
-        <div className="statgrid__cell">
-          <span className="reward-label">ใส่ช่อง</span>
-          <span className="reward-value">{slot ?? '—'}</span>
-        </div>
-        <div className="statgrid__cell">
-          <span className="reward-label">ราคาซื้อ</span>
-          <span className="reward-value mono">
-            {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
-          </span>
-        </div>
-        <div className="statgrid__cell">
-          <span className="reward-label">ราคาขาย</span>
-          <span className="reward-value mono">
-            {item.sell_price === null ? '—' : item.sell_price.toLocaleString('en-US')}
-          </span>
-        </div>
-      </div>
-
-      <div className="card" style={{ marginTop: 20 }}>
-        <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปการ์ดใบนี้</h2>
-        {droppedByError ? (
-          <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
-        ) : (droppedBy ?? []).length === 0 ? (
-          <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปการ์ดใบนี้</p>
-        ) : (
-          (droppedBy ?? []).map((d: any, i: number) => (
-            <div key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
-              <Link href={`/database/monsters/${d.monsters.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                {d.monsters.image_url && (
-                  <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                )}
-                {d.monsters.name_en}
-              </Link>
-              <span className="mono">{d.rate != null ? `${d.rate}%` : '?'}</span>
-            </div>
-          ))
-        )}
-      </div>
+      <CardDroppers
+        error={Boolean(droppedByError)}
+        rows={rows.map((d: any) => ({
+          id: d.monsters.id,
+          name: d.monsters.name_en,
+          level: d.monsters.level ?? null,
+          image: d.monsters.image_url ?? null,
+          rate: d.rate ?? null,
+        }))}
+      />
 
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="card" entityId={String(item.id)} />
