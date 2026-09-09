@@ -4,7 +4,7 @@
   "why": "ไคลเอนต์บอกค่าของแต่ละชิ้นได้ครบ แต่ไม่บอกว่าชิ้นไหนอัปเป็นชิ้นไหน ใส่คู่กับอะไร หรือเอนแชนต์อย่างไร ไฟล์นี้เก็บเฉพาะส่วนนั้น",
   "source": "roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026) · ชื่อชิ้นทั้ง 44 ตรงกับตาราง items ของเรา และตัวเลข HP/SP/DEF/FLEE ตรงกับคำอธิบายในไคลเอนต์ทั้ง 44 ชิ้น",
   "regenerate": "node scripts/build-memorial-gear.mjs",
-  "generatedAt": "2026-09-09T02:42:11.370Z"
+  "generatedAt": "2026-09-09T03:52:05.102Z"
  },
  "ranks": [
   {
@@ -333,6 +333,155 @@
     "rank": "I",
     "piece": "เกราะ",
     "slot": 2
+   }
+  ],
+  "outcomes": [
+   {
+    "stat": "FLEE",
+    "value": "+3",
+    "armor": 6.03,
+    "garment": 3.48,
+    "shoes": 4.9
+   },
+   {
+    "stat": "คริ",
+    "value": "+1",
+    "armor": 6.03,
+    "garment": 3.48,
+    "shoes": 4.9
+   },
+   {
+    "stat": "DEF",
+    "value": "+15",
+    "armor": 5.17,
+    "garment": 3.48,
+    "shoes": 4.9
+   },
+   {
+    "stat": "MDEF",
+    "value": "+2",
+    "armor": 5.17,
+    "garment": 3.48,
+    "shoes": 4.9
+   },
+   {
+    "stat": "Max HP",
+    "value": "+50",
+    "armor": 6.18,
+    "garment": 10.7,
+    "shoes": 4.9
+   },
+   {
+    "stat": "Max HP",
+    "value": "+100",
+    "armor": 4.31,
+    "garment": 8.91,
+    "shoes": 3.5
+   },
+   {
+    "stat": "Max HP",
+    "value": "+200",
+    "armor": 3.45,
+    "garment": 7.58,
+    "shoes": 2.6
+   },
+   {
+    "stat": "AGI",
+    "value": "+1",
+    "armor": 10.52,
+    "garment": 7.13,
+    "shoes": 7.58
+   },
+   {
+    "stat": "AGI",
+    "value": "+2",
+    "armor": 0.09,
+    "garment": 0.89,
+    "shoes": 3.57
+   },
+   {
+    "stat": "DEX",
+    "value": "+1",
+    "armor": 10.52,
+    "garment": 7.13,
+    "shoes": 7.58
+   },
+   {
+    "stat": "DEX",
+    "value": "+2",
+    "armor": 0.09,
+    "garment": 0.89,
+    "shoes": 3.57
+   },
+   {
+    "stat": "STR",
+    "value": "+1",
+    "armor": 10.52,
+    "garment": 7.13,
+    "shoes": 7.58
+   },
+   {
+    "stat": "STR",
+    "value": "+2",
+    "armor": 0.09,
+    "garment": 0.89,
+    "shoes": 3.57
+   },
+   {
+    "stat": "INT",
+    "value": "+1",
+    "armor": 10.52,
+    "garment": 7.13,
+    "shoes": 7.58
+   },
+   {
+    "stat": "INT",
+    "value": "+2",
+    "armor": 0.09,
+    "garment": 0.89,
+    "shoes": 3.57
+   },
+   {
+    "stat": "VIT",
+    "value": "+1",
+    "armor": 10.52,
+    "garment": 7.13,
+    "shoes": 7.58
+   },
+   {
+    "stat": "VIT",
+    "value": "+2",
+    "armor": 0.09,
+    "garment": 0.89,
+    "shoes": 3.57
+   },
+   {
+    "stat": "LUK",
+    "value": "+1",
+    "armor": 10.52,
+    "garment": 7.13,
+    "shoes": 7.58
+   },
+   {
+    "stat": "LUK",
+    "value": "+2",
+    "armor": 0.09,
+    "garment": 0.89,
+    "shoes": 3.57
+   },
+   {
+    "stat": "Max HP",
+    "value": "+300",
+    "armor": null,
+    "garment": 6.31,
+    "shoes": 1.7
+   },
+   {
+    "stat": "Max HP",
+    "value": "+400",
+    "armor": null,
+    "garment": 4.46,
+    "shoes": 0.8
    }
   ]
  }

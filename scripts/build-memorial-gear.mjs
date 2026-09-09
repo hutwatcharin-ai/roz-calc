@@ -124,8 +124,52 @@ const accessories = gear[12].rows.slice(1).map((row, i) => {
   };
 });
 
-// Enchanting: what it costs and what it risks. The essence itself is an item
-// in our table, so only the rules live here.
+// What an enchant can land on, and how often. Two tables upstream -- one for
+// armour, one that puts garment and shoes side by side -- merged into one row
+// per outcome so a reader compares the three slots in a glance.
+//
+// The three columns each sum to exactly 100.00%, which is the reason these
+// are published as rates rather than as somebody's impression. That sum is
+// asserted in lib/memorial-gear.test.ts, so a bad re-extraction fails loudly.
+const STAT_TH = {
+  'ESQ (Flee)': 'FLEE',
+  'Critique (Critical)': 'คริ',
+  'DÉF (Def)': 'DEF',
+  'DÉF.M (Mdef)': 'MDEF',
+  'Max HP': 'Max HP',
+  AGI: 'AGI',
+  DEX: 'DEX',
+  'FOR (Str)': 'STR',
+  INT: 'INT',
+  VIT: 'VIT',
+  'CHA (Luk)': 'LUK',
+};
+
+/** "6,03 %" -> 6.03 ; a missing cell -> null. */
+function percent(cell) {
+  if (!cell) return null;
+  const n = Number(cell.replace('%', '').replace(',', '.').trim());
+  return Number.isFinite(n) ? n : null;
+}
+
+const outcomeRows = new Map();
+function outcome(stat, value) {
+  const id = `${stat}|${value}`;
+  if (!outcomeRows.has(id)) {
+    outcomeRows.set(id, { stat: STAT_TH[stat] ?? stat, value, armor: null, garment: null, shoes: null });
+  }
+  return outcomeRows.get(id);
+}
+for (const row of enchant[1].rows.slice(1)) outcome(row[0], row[1]).armor = percent(row[2]);
+for (const row of enchant[2].rows.slice(1)) {
+  const o = outcome(row[0], row[1]);
+  o.garment = percent(row[2]);
+  o.shoes = percent(row[3]);
+}
+const enchantOutcomes = [...outcomeRows.values()];
+
+// What enchanting costs and what it risks. The essence itself is an item in
+// our table, so only the rules live here.
 const enchantRules = {
   costs: enchant[0].rows.slice(1).map((row) => ({
     action: ACTION_TH[row[0]] ?? row[0],
@@ -139,6 +183,7 @@ const enchantRules = {
     // "4ᵉ emplacement" -> 4
     slot: Number((/(\d)/.exec(row[3]) ?? [])[1]) || null,
   })),
+  outcomes: enchantOutcomes,
 };
 
 const out = {

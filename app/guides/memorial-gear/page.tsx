@@ -330,6 +330,38 @@ export default async function MemorialGearPage() {
           ตัว Essence เป็นไอเทมในเกม แยกตามอาชีพและมี Lv.1 กับ Lv.2 —{' '}
           <Link href="/database/items?q=Essence+Lv">ดูรายการและผลของแต่ละอัน</Link>
         </p>
+
+        <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>
+        <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
+          หนึ่งครั้งได้หนึ่งอย่างจากตารางนี้ · <strong>+2 ของทุกสเตตัสหายากมาก</strong> ในเกราะอยู่ที่ 0.09% ต่อสเตตัส
+          แต่ในรองเท้าขึ้นไปถึง 3.57% — ถ้าจะลุ้น +2 ลุ้นที่รองเท้าคุ้มกว่าเยอะ
+        </p>
+        <div className="recipe__scroll">
+          <table className="data-table recipe">
+            <thead>
+              <tr>
+                <th>ได้</th>
+                <th className="num">เกราะ</th>
+                <th className="num">ผ้าคลุม</th>
+                <th className="num">รองเท้า</th>
+              </tr>
+            </thead>
+            <tbody>
+              {enchantRules.outcomes.map((o) => (
+                <tr key={`${o.stat}-${o.value}`}>
+                  <td data-label="ได้">{o.stat} {o.value}</td>
+                  <td data-label="เกราะ" className="num">{pct(o.armor)}</td>
+                  <td data-label="ผ้าคลุม" className="num">{pct(o.garment)}</td>
+                  <td data-label="รองเท้า" className="num">{pct(o.shoes)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
+          &quot;—&quot; คือช่องนั้นไม่มีผลแบบนี้ในตารางเลย ไม่ใช่ 0% ·
+          ทั้งสามช่องรวมกันได้ 100.00% พอดี ซึ่งเป็นเหตุผลที่เชื่อว่าเป็นตัวเลขจากเกมจริง ไม่ใช่คนกะเอา
+        </p>
       </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
@@ -346,6 +378,12 @@ export default async function MemorialGearPage() {
       </p>
     </main>
   );
+}
+
+/** A rate as the guide gives it, or a dash when that roll is not on the list.
+ *  Deliberately not "0%": no chance and not listed are different claims. */
+function pct(value: number | null): string {
+  return value === null ? '—' : `${value.toFixed(2)}%`;
 }
 
 /** A material or piece as a linked chip, or plain text when we do not stock it. */

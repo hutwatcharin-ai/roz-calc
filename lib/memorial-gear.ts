@@ -63,8 +63,19 @@ type Raw = Meta & {
   enchantRules: {
     costs: { action: string; cost: string; destroyChance: string }[];
     slotByRank: { rank: string; piece: string; slot: number | null }[];
+    outcomes: EnchantOutcome[];
   };
 };
+
+export interface EnchantOutcome {
+  stat: string;
+  value: string;
+  /** Percent, or null when the slot has no such roll at all. Never 0: a rate
+   *  of zero would read as "cannot happen", which is a different claim. */
+  armor: number | null;
+  garment: number | null;
+  shoes: number | null;
+}
 
 export const memorialGear = file as unknown as Raw;
 
