@@ -84,3 +84,14 @@ for (const file of jsonFiles(SCOPE)) {
 }
 
 console.log(`\n${changedNames} names in ${changedFiles} files${dryRun ? ' (dry run: nothing written)' : ''}`);
+
+// ⚠️ Editing these files is only half the job. The site serves quest text from
+// the quests table's *_th columns, not from this directory -- the files are
+// the source that gets imported. After running this, push the changed batches
+// into the database or the site keeps showing the old names:
+//
+//   set -a; . ./.env.local; set +a
+//   npx tsx scripts/apply-quest-translations.ts data/quest-th/batch-5.json   (and each other changed batch)
+//
+// The page is ISR with a 24h window, so it can still serve the old copy for a
+// while after that; a redeploy is what makes it immediate.
