@@ -1,0 +1,339 @@
+{
+ "_meta": {
+  "what": "สายชุด 4 แรงค์จากดันเจี้ยนความทรงจำ: ลำดับอัปเกรด ชุดที่ใส่คู่กัน วัตถุดิบ และกติกาเอนแชนต์",
+  "why": "ไคลเอนต์บอกค่าของแต่ละชิ้นได้ครบ แต่ไม่บอกว่าชิ้นไหนอัปเป็นชิ้นไหน ใส่คู่กับอะไร หรือเอนแชนต์อย่างไร ไฟล์นี้เก็บเฉพาะส่วนนั้น",
+  "source": "roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026) · ชื่อชิ้นทั้ง 44 ตรงกับตาราง items ของเรา และตัวเลข HP/SP/DEF/FLEE ตรงกับคำอธิบายในไคลเอนต์ทั้ง 44 ชิ้น",
+  "regenerate": "node scripts/build-memorial-gear.mjs",
+  "generatedAt": "2026-09-09T02:42:11.370Z"
+ },
+ "ranks": [
+  {
+   "rank": "IV",
+   "name": "Subjugation",
+   "level": 60,
+   "from": "หีบในดันเจี้ยนความทรงจำโหมดปกติ",
+   "crystal": null,
+   "crystalAmount": 0
+  },
+  {
+   "rank": "III",
+   "name": "Expedition",
+   "level": 70,
+   "from": "อัปจากแรงค์ IV",
+   "crystal": "Faintly Glowing Crystal",
+   "crystalAmount": 50
+  },
+  {
+   "rank": "II",
+   "name": "Contingent",
+   "level": 80,
+   "from": "อัปจากแรงค์ III",
+   "crystal": "Crystal of Blue Light",
+   "crystalAmount": 50
+  },
+  {
+   "rank": "I",
+   "name": "Conqueror",
+   "level": 90,
+   "from": "อัปจากแรงค์ II",
+   "crystal": null,
+   "crystalAmount": 50
+  }
+ ],
+ "sets": [
+  {
+   "rank": "IV",
+   "role": "ทุกอาชีพ",
+   "pieces": [
+    "Subjugation Team's Shoulder Belt",
+    "Subjugation Team's Armor",
+    "Subjugation Team Boots",
+    "Subjugation Team's Ring"
+   ]
+  },
+  {
+   "rank": "III",
+   "role": "สายตี",
+   "pieces": [
+    "Expedition's Armor",
+    "Expedition Manteau",
+    "Expedition Boots",
+    "Expedition Ring"
+   ]
+  },
+  {
+   "rank": "III",
+   "role": "สายเวท",
+   "pieces": [
+    "Expedition's Robe",
+    "Expedition Muffler",
+    "Expedition Shoes",
+    "Expedition Magic Ring"
+   ]
+  },
+  {
+   "rank": "II",
+   "role": "สายตีระยะประชิด",
+   "pieces": [
+    "Contingent Mail",
+    "Contingent Cloak",
+    "Contingent Greaves",
+    "Contingent Ring"
+   ]
+  },
+  {
+   "rank": "II",
+   "role": "สายว่องไว ธนู/มีด",
+   "pieces": [
+    "Contingent Cloth",
+    "Contingent Manteau",
+    "Contingent Boots",
+    "Contingent Glove"
+   ]
+  },
+  {
+   "rank": "II",
+   "role": "สายเวทเน้นร่ายไว",
+   "pieces": [
+    "Contingent Robe",
+    "Contingent Muffler",
+    "Contingent Shoes",
+    "Contingent Magic Ring"
+   ]
+  },
+  {
+   "rank": "II",
+   "role": "สายเวทเน้นอึด",
+   "pieces": [
+    "Contingent Dress",
+    "Contingent Cape",
+    "Contingent Sandal",
+    "Contingent Necklace"
+   ]
+  },
+  {
+   "rank": "I",
+   "role": "สายตีระยะประชิด",
+   "pieces": [
+    "Conqueror's Mail",
+    "Conqueror's Cloak",
+    "Conqueror's Greaves",
+    "Conqueror's Ring"
+   ]
+  },
+  {
+   "rank": "I",
+   "role": "สายว่องไว ธนู/มีด",
+   "pieces": [
+    "Conqueror's Cloth",
+    "Conqueror's Manteau",
+    "Conqueror's Boots",
+    "Conqueror's Glove"
+   ]
+  },
+  {
+   "rank": "I",
+   "role": "สายเวทเน้นร่ายไว",
+   "pieces": [
+    "Conqueror's Robe",
+    "Conqueror's Muffler",
+    "Conqueror's Shoes",
+    "Conqueror's Magic Ring"
+   ]
+  },
+  {
+   "rank": "I",
+   "role": "สายเวทเน้นอึด",
+   "pieces": [
+    "Conqueror's Dress",
+    "Conqueror's Cape",
+    "Conqueror's Magic Shoes",
+    "Conqueror's Necklace"
+   ]
+  }
+ ],
+ "stoneFor": {
+  "Expedition's Armor": [
+   {
+    "stone": "Crimson Jellostone",
+    "amount": 2
+   }
+  ],
+  "Expedition's Robe": [
+   {
+    "stone": "Wind of Verdure Jellostone",
+    "amount": 2
+   }
+  ],
+  "Expedition Boots": [
+   {
+    "stone": "Crimson Jellostone",
+    "amount": 1
+   },
+   {
+    "stone": "Chaos Jellostone",
+    "amount": 1
+   }
+  ],
+  "Contingent Mail": [
+   {
+    "stone": "Crimson Jellostone",
+    "amount": 4
+   }
+  ],
+  "Contingent Robe": [
+   {
+    "stone": "Wind of Verdure Jellostone",
+    "amount": 4
+   }
+  ],
+  "Contingent Ring": [
+   {
+    "stone": "Holy Jellostone",
+    "amount": 6
+   }
+  ],
+  "Conqueror's Mail": [
+   {
+    "stone": "Crimson Jellostone",
+    "amount": 6
+   }
+  ],
+  "Conqueror's Ring": [
+   {
+    "stone": "Holy Jellostone",
+    "amount": 10
+   }
+  ]
+ },
+ "stoneFromFragment": [
+  {
+   "stone": "Crimson Jellostone",
+   "fragment": "Poring Jello Fragment",
+   "amount": 5
+  },
+  {
+   "stone": "Wind of Verdure Jellostone",
+   "fragment": "Poporing Jello Fragment",
+   "amount": 5
+  },
+  {
+   "stone": "Dusk Jellostone",
+   "fragment": "Drops Jello Fragment",
+   "amount": 5
+  },
+  {
+   "stone": "Chaos Jellostone",
+   "fragment": "Deviling Jello Fragment",
+   "amount": 5
+  },
+  {
+   "stone": "Holy Jellostone",
+   "fragment": "Angeling Jello Fragment",
+   "amount": 5
+  }
+ ],
+ "accessories": [
+  {
+   "name": "Cursed Emerald Earring",
+   "side": "ขวา",
+   "materials": [
+    {
+     "item": "Cursed Emerald",
+     "amount": 15
+    },
+    {
+     "item": "Mithril Ore",
+     "amount": 10
+    }
+   ],
+   "dungeon": "ถ้ำออร์ค Geffen"
+  },
+  {
+   "name": "Shimmering Opal Earrings",
+   "side": "ขวา",
+   "materials": [
+    {
+     "item": "Shimmering Opal",
+     "amount": 15
+    },
+    {
+     "item": "Mithril Ore",
+     "amount": 10
+    }
+   ],
+   "dungeon": "ท่อ Prontera"
+  },
+  {
+   "name": "Ring of Blue Oath",
+   "side": "ซ้าย",
+   "materials": [
+    {
+     "item": "Sapphire of the Blue Sea",
+     "amount": 15
+    },
+    {
+     "item": "Mithril Ore",
+     "amount": 10
+    }
+   ],
+   "dungeon": "Izlude"
+  },
+  {
+   "name": "Red Oath Ring",
+   "side": "ซ้าย",
+   "materials": [
+    {
+     "item": "Ruby Soaked in Blood",
+     "amount": 15
+    },
+    {
+     "item": "Mithril Ore",
+     "amount": 10
+    }
+   ],
+   "dungeon": "รังมด"
+  }
+ ],
+ "enchantRules": {
+  "costs": [
+   {
+    "action": "ใส่เอนแชนต์",
+    "cost": "100,000 zeny",
+    "destroyChance": "0%"
+   },
+   {
+    "action": "ถอดเอนแชนต์",
+    "cost": "100,000 zeny",
+    "destroyChance": "30%"
+   },
+   {
+    "action": "ถอดเอนแชนต์",
+    "cost": "1 Zelstar",
+    "destroyChance": "0%"
+   }
+  ],
+  "slotByRank": [
+   {
+    "rank": "IV",
+    "piece": "เกราะ",
+    "slot": 4
+   },
+   {
+    "rank": "III",
+    "piece": "เกราะ",
+    "slot": 4
+   },
+   {
+    "rank": "II",
+    "piece": "เกราะ",
+    "slot": 3
+   },
+   {
+    "rank": "I",
+    "piece": "เกราะ",
+    "slot": 2
+   }
+  ]
+ }
+}

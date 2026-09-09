@@ -48,6 +48,11 @@ const GUIDES = [
     blurb: 'Iron Ore เป็น Iron, Iron เป็น Steel และหินธาตุทั้งสี่ทำจากของดรอปอะไร',
   },
   {
+    href: '/guides/memorial-gear',
+    title: 'ชุดดันเจี้ยนความทรงจำ 4 แรงค์',
+    blurb: 'Subjugation → Expedition → Contingent → Conqueror ครบทุกชิ้น — ชิ้นไหนอัปเป็นชิ้นไหน ใช้อะไรอัป และตอนนี้ใส่ได้แค่แรงค์ไหน',
+  },
+  {
     href: '/guides/codes',
     title: 'โค้ดรับของ',
     blurb: 'โค้ดคูปอง 22 โค้ด แยกว่าอันไหนยังใช้ได้ อันไหนปิดไปแล้ว กรอกที่บัญชี GNJOY ของเข้าเมลในเกม',

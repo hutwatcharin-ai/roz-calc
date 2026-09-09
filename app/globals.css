@@ -1636,6 +1636,23 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
    not read as one of the ones worth trying, so it drops the cyan. */
 .codegrid__item--dead { color: var(--faint); background: transparent; }
 
+/* Gear a player cannot wear yet: shown because it is where the piece they
+   are collecting ends up, dimmed because acting on it today is impossible.
+   Not hidden -- the whole reason the row is on the page is to be read. */
+.gear--locked td { color: var(--faint); }
+.gear--locked .recipe__item { opacity: 0.75; }
+
+.gearstate {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  color: var(--faint);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.gearstate--open { border-color: var(--status-safe); color: var(--status-safe); }
+
 /* Guides hub: one card per page, with a line saying what it answers. Wider
    than an item card because the sentence is the point of the card. */
 .guidecard {
