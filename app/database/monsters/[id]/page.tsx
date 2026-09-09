@@ -3,9 +3,11 @@ import { mobThresholds } from '@/lib/monster-thresholds';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import FormerNameLine from '@/components/FormerNameLine';
+import SameNameLine from '@/components/SameNameLine';
 import { riskySkills, SKILL_RISK_LABELS } from '@/lib/afk-safety';
 import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
 import { supabaseBrowser } from '@/lib/supabase';
+import { stat, unknownIfZero } from '@/lib/unknown-stat';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
 import { cache } from 'react';
@@ -116,6 +118,18 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   const canonical = await getMapCanonical();
   const spawnChips = foldSpawns((spawns ?? []) as SpawnRow[], canonical.byCode);
 
+  // Six display names in this table belong to more than one monster, and the
+  // game is the one shipping them that way. Ask whether this is one of them so
+  // the page can point at the other rather than leaving two identical search
+  // results unexplained.
+  const { data: sameName, error: sameNameError } = await db
+    .from('monsters')
+    .select('id, level')
+    .eq('name_en', monster.name_en)
+    .neq('id', id)
+    .order('level');
+  if (sameNameError) console.error('same-name monster query failed', sameNameError);
+
   const { data: monsterSkills, error: skillsError } = await db
     .from('monster_skills')
     .select('skill_name, skill_lv, rate, cast_time, delay, target, state')
@@ -148,12 +162,12 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   }
   const zeny = farming?.avg_zeny_per_kill;
 
-  // A dash rather than a number wherever the value is unknown. hp and base_exp
-  // of 0 are this database's unknown-value sentinels, not real zeros.
-  const num = (v: number | null | undefined) =>
-    v === null || v === undefined ? '—' : v.toLocaleString('en-US');
-  const sentinel = (v: number | null | undefined) =>
-    v === null || v === undefined || v === 0 ? '—' : v.toLocaleString('en-US');
+  // A dash rather than a number wherever the value is unknown; hp and the two
+  // EXP columns read a 0 as unknown too. Both readings live in
+  // lib/unknown-stat now, because the monster list had its own copy of the
+  // first one and wrote "HP 0" for the monsters this page called "—".
+  const num = stat;
+  const sentinel = unknownIfZero;
 
   // Exhaustive over every distinct value seen in monster_skills.state (attack,
   // chase, idle, angry, walk, loot, follow, dead) -- ordinary descriptive
@@ -215,6 +229,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <h1 className="pagehead__title">{monster.name_en}</h1>
           <ThaiAliasLine kind="monsters" id={monster.id} />
           <FormerNameLine id={monster.id} />
+          <SameNameLine id={monster.id} name={monster.name_en} others={sameName ?? []} />
           <p style={{ color: 'var(--dim)' }}>
             Lv.{monster.level}
             {monster.race ? ` · ${monster.race}` : ''}

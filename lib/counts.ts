@@ -19,7 +19,7 @@
 
 import { cache } from 'react';
 import { supabaseBrowser } from '@/lib/supabase';
-import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 export interface MonsterCounts {
   /** Every row in the table. */
@@ -35,7 +35,8 @@ export interface MonsterCounts {
   /** Of `noChallenge`, how many have no HIT or FLEE threshold in the game
    *  files, so the tool cannot place them. */
   noChallengeMissingHitFlee: number | null;
-  /** Memorial-dungeon variants, named on the toggle that hides them. */
+  /** Instance, event and memorial-dungeon monsters, named on the toggle that
+   *  hides them. */
   mjVariants: number | null;
 }
 
@@ -51,20 +52,23 @@ export const monsterCounts = cache(async (): Promise<MonsterCounts> => {
   const db = supabaseBrowser();
   const [total, listed, noChallenge, missing, mj] = await Promise.all([
     db.from('monsters').select('id', { count: 'exact', head: true }),
-    db
-      .from('monsters')
-      .select('id', { count: 'exact', head: true })
-      .not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE)
-      .not('name_en', 'like', MJ_VARIANT_SQL_NOT_LIKE),
+    INSTANCE_VARIANT_SQL_NOT_LIKE.reduce(
+      (query, pattern) => query.not('name_en', 'like', pattern),
+      db.from('monsters').select('id', { count: 'exact', head: true }).not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE),
+    ),
     db.from('monsters').select('id', { count: 'exact', head: true }).not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE),
     db
       .from('monsters')
       .select('id', { count: 'exact', head: true })
       .not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE)
       .or('hit_100.is.null,flee_95.is.null'),
-    // The same pattern the list filters *out* with, used here to count what
-    // is being hidden. The constant is named for its usual side of that.
-    db.from('monsters').select('id', { count: 'exact', head: true }).like('name_en', MJ_VARIANT_SQL_NOT_LIKE),
+    // The same patterns the list filters *out* with, used here to count what
+    // is being hidden. PostgREST has no OR of LIKEs on one column without the
+    // `or` string form, so the five patterns go in as one.
+    db
+      .from('monsters')
+      .select('id', { count: 'exact', head: true })
+      .or(INSTANCE_VARIANT_SQL_NOT_LIKE.map((pattern) => `name_en.like.${pattern}`).join(',')),
   ]);
   for (const result of [total, listed, noChallenge, missing, mj]) {
     if (result.error) console.error('monster count failed', result.error);

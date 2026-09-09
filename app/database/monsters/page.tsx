@@ -4,6 +4,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
 import { supabaseBrowser } from '@/lib/supabase';
+import { unknownIfZero } from '@/lib/unknown-stat';
 import Pagination from '@/components/Pagination';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -15,7 +16,7 @@ import { aliasIdsFor } from '@/lib/thai-aliases';
 import { formerNameIdsFor } from '@/lib/former-names';
 import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
-import { C_VARIANT_SQL_NOT_LIKE, MJ_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { monsterCounts } from '@/lib/counts';
 
 // The site's most-visited page and its worst-converting entry from search:
@@ -83,9 +84,11 @@ export default async function MonsterListPage({
   // Challenge clones are opt-in: absent param = hidden. Server-side so the
   // result count and pagination stay exact (unlike the CSS hide elsewhere).
   const showC = searchParams.c === '1';
-  // Memorial-dungeon variants, hidden the same way and for the same reason:
-  // "Orc Warrior" and "Orc Warrior Mj" next to each other is one entry the
-  // reader wants and one they have to read past.
+  // Instance, event and memorial-dungeon monsters, hidden the same way and for
+  // the same reason: "Orc Warrior" and "Orc Warrior Mj" next to each other is
+  // one entry the reader wants and one they have to read past. The Mq, Ztw and
+  // B families are worse than that -- no source has a single stat for any of
+  // them, so their rows read "HP — · EXP —".
   const showMj = searchParams.mj === '1';
   // Somebody typed "mvp" into the search box, twice: the flag was in the
   // table and nowhere on the page. 24 monsters carry it.
@@ -136,7 +139,7 @@ export default async function MonsterListPage({
   if (size) query = query.eq('size', size);
   if (aggro) query = query.eq('is_aggressive', aggro === '1');
   if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
-  if (!showMj) query = query.not('name_en', 'like', MJ_VARIANT_SQL_NOT_LIKE);
+  if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) query = query.not('name_en', 'like', pattern);
   if (mvpOnly) query = query.eq('is_mvp', true);
   if (lvmin > 0) query = query.gte('level', lvmin);
   if (lvmax > 0) query = query.lte('level', lvmax);
@@ -293,7 +296,7 @@ export default async function MonsterListPage({
             named so nothing disappears silently. */}
         <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
           <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
-          ซ่อนมอนดันเจี้ยนพิเศษ (Mj) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
+          ซ่อนมอนดันเจี้ยน/อีเวนต์ (Mj Md Mq Ztw B) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
         </Link>
       </form>
 
@@ -342,7 +345,9 @@ export default async function MonsterListPage({
                   Lv {m.level ?? '—'} · {m.race ?? '—'} · {m.element ?? '—'}
                 </span>
                 <span className="moncard__meta">
-                  HP {m.hp != null ? m.hp.toLocaleString('en-US') : '—'} · EXP {m.base_exp != null ? m.base_exp.toLocaleString('en-US') : '—'}
+                  {/* 0 is this table's unknown marker for these two columns,
+                      not a monster with no hit points -- see lib/unknown-stat. */}
+                  HP {unknownIfZero(m.hp)} · EXP {unknownIfZero(m.base_exp)}
                 </span>
                 {(topDrops.get(m.id) ?? []).length > 0 && (
                   <span className="moncard__drops">
