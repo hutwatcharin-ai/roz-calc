@@ -7,6 +7,8 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { isCVariant } from '@/lib/c-variant';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { countText, monsterCounts } from '@/lib/counts';
+import { farmBands, farmPicks, unplaceable, type FarmCandidate, type SpawnPlace } from '@/lib/farm-picks';
+import { BASE_LEVEL_CAP } from '@/lib/level-cap';
 import type { Metadata } from 'next';
 
 // The size is counted, not written: it said 524 while the table held 534
@@ -24,17 +26,14 @@ export const revalidate = 86400;
 
 // SXO audit (1 Sep): Thai SERP for "จุดฟาร์ม ragnarok zero" has no
 // Zero-specific content at all — this page is the narrative layer the raw
-// tool cannot rank as. All numbers come from monster_farming_stats, same
-// ranking as the homepage tool; nothing here is hand-maintained.
-const BRACKETS: [number, number][] = [
-  [1, 15],
-  [16, 30],
-  [31, 45],
-  [46, 60],
-  [61, 75],
-  [76, 90],
-  [91, 127],
-];
+// tool cannot rank as. Everything is computed: the bands come from the level
+// cap and the rows from monster_farming_stats and monster_spawns, so nothing
+// here is hand-maintained and nothing goes stale on its own.
+//
+// The bands used to run to level 127, which put three of seven sections above
+// the cap, and the ranking used to be EXP per HP alone, which recommended a
+// plant with eight of them on its best map and a monster whose map holds one.
+// lib/farm-picks holds both rules and the reasons.
 
 interface FarmRow {
   monster_id: number;
@@ -59,24 +58,37 @@ export default async function FarmGuidePage() {
   );
   if (rowsError) console.error('farm guide stats query failed', rowsError);
   const rows = rowsData ?? [];
-  const { data: spawnsData, error: spawnsError } = await fetchAllRows<{ monster_id: number; map_display_name: string | null }>((from, to) =>
-    db.from('monster_spawns').select('monster_id, map_display_name').order('monster_id').range(from, to),
+  const { data: spawnsData, error: spawnsError } = await fetchAllRows<{
+    monster_id: number;
+    map_display_name: string | null;
+    amount: number | null;
+  }>((from, to) =>
+    db.from('monster_spawns').select('monster_id, map_display_name, amount').order('monster_id').range(from, to),
   );
   if (spawnsError) console.error('farm guide spawns query failed', spawnsError);
-  const spawnByMonster = new Map<number, string>();
-  for (const s of spawnsData ?? []) {
-    if (!spawnByMonster.has(s.monster_id) && s.map_display_name) spawnByMonster.set(s.monster_id, s.map_display_name);
-  }
+  const spawns: SpawnPlace[] = (spawnsData ?? []).map((s) => ({
+    monsterId: s.monster_id,
+    map: s.map_display_name,
+    amount: s.amount,
+  }));
 
-  const clean = rows.filter((r) => !isCVariant(r.name_en) && (r.exp_per_hp ?? 0) > 0);
-  const perBracket = BRACKETS.map(([lo, hi]) => ({
-    lo,
-    hi,
-    top: clean
-      .filter((r) => r.level >= lo && r.level <= hi)
-      .sort((a, b) => (b.exp_per_hp ?? 0) - (a.exp_per_hp ?? 0))
-      .slice(0, 5),
-  })).filter((b) => b.top.length > 0);
+  const clean: FarmCandidate[] = rows
+    .filter((r) => !isCVariant(r.name_en))
+    .map((r) => ({
+      monsterId: r.monster_id,
+      name: r.name_en,
+      level: r.level,
+      hp: r.hp,
+      baseExp: r.base_exp,
+      expPerHp: r.exp_per_hp,
+      isAggressive: r.is_aggressive,
+      imageUrl: r.image_url,
+    }));
+  const bands = farmBands(BASE_LEVEL_CAP);
+  const perBracket = bands
+    .map((band) => ({ lo: band.lo, hi: band.hi, top: farmPicks(clean, spawns, band) }))
+    .filter((b) => b.top.length > 0);
+  const dropped = unplaceable(clean, spawns, BASE_LEVEL_CAP);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -88,8 +100,8 @@ export default async function FarmGuidePage() {
       />
       <h1 className="pagehead__title">จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>
-        มอนที่ EXP ต่อ HP คุ้มสุดในแต่ละช่วงเลเวล คิดจากมอนทั้ง {countText(counts.total)} ตัวในฐานข้อมูล —
-        อยากได้ EXP ต่อชั่วโมงของตัวเองจริงๆ กรอกดาเมจกับ ASPD ที่{' '}
+        เรียงจาก <strong>EXP ต่อ HP คูณจำนวนตัวในแมพที่หนาที่สุด</strong> — ตีคุ้มอย่างเดียวไม่พอ ต้องมีตัวถัดไปให้ตีด้วย ·
+        อยากได้ EXP ต่อชั่วโมงของตัวเอง กรอกดาเมจกับ ASPD ที่{' '}
         <Link href="/tools/leveling-spots">หาจุดเก็บเลเวล</Link>
       </p>
 
@@ -104,25 +116,29 @@ export default async function FarmGuidePage() {
                   <th className="num">Lv</th>
                   <th className="num">HP</th>
                   <th className="num">Base EXP</th>
-                  <th>เจอได้ที่</th>
+                  {/* Both halves of the ranking are on the row, so a reader can
+                      see why it sits where it does. */}
+                  <th>แมพที่มีเยอะสุด</th>
                 </tr>
               </thead>
               <tbody>
                 {top.map((r) => (
-                  <tr key={r.monster_id}>
+                  <tr key={r.monsterId}>
                     <td data-label="">
                       <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                        {r.image_url && (
-                          <img loading="lazy" decoding="async" src={r.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                        {r.imageUrl && (
+                          <img loading="lazy" decoding="async" src={r.imageUrl} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
                         )}
-                        <MonsterLink id={r.monster_id} name={r.name_en} />
-                        <AggroBadge monster={{ is_aggressive: r.is_aggressive, atk_max: null }} />
+                        <MonsterLink id={r.monsterId} name={r.name} />
+                        <AggroBadge monster={{ is_aggressive: r.isAggressive, atk_max: null }} />
                       </span>
                     </td>
                     <td data-label="Lv" className="num">{r.level}</td>
                     <td data-label="HP" className="num">{r.hp && r.hp > 0 ? r.hp.toLocaleString() : '—'}</td>
-                    <td data-label="Base EXP" className="num">{r.base_exp && r.base_exp > 0 ? r.base_exp.toLocaleString() : '—'}</td>
-                    <td data-label="เจอได้ที่">{spawnByMonster.get(r.monster_id) ?? '—'}</td>
+                    <td data-label="Base EXP" className="num">{r.baseExp && r.baseExp > 0 ? r.baseExp.toLocaleString() : '—'}</td>
+                    <td data-label="แมพที่มีเยอะสุด">
+                      {r.bestMap} <span className="muted">{r.amount} ตัว</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -137,7 +153,8 @@ export default async function FarmGuidePage() {
       ))}
 
       <p className="source-note" style={{ marginTop: 16 }}>
-        เรียงด้วย EXP ต่อ HP · ไม่รวมมอน Challenge (C1–C9) · ตัวที่โจมตีก่อนมีป้ายเตือน
+        ช่วงเลเวลหยุดที่ {BASE_LEVEL_CAP} ตามเพดานปัจจุบัน · ไม่รวมมอน Challenge (C1–C9) · ตัวที่โจมตีก่อนมีป้ายเตือน ·{' '}
+        <strong>{dropped} ตัวไม่ได้อยู่ในตาราง</strong>เพราะฐานข้อมูลยังไม่รู้ว่ามันเกิดที่แมพไหน — ไม่เอามาแนะนำทั้งที่บอกไม่ได้ว่าไปตีที่ไหน
       </p>
     </main>
   );
