@@ -217,11 +217,32 @@ async function crossCheck() {
       else rateChecks.differ.push(`${pet.pet}: ไกด์ ${source.rate}% / เรา ${ours}%`);
     }
   }
+  // Four materials the guide names differently from our table. Not guesses:
+  // prontera's item URLs carry the id, and looking those ids up here gives the
+  // name our own table uses. "Tough Vine" is the plural difference only.
+  //
+  //   Feather of Birds  916  -> Bird Feather
+  //   Evil Horn         923  -> Baphomet's Horn
+  //   Kitty Band       2213  -> Cat Headband
+  //
+  // Thirteen others (Down, Turban, Soft Fur, Santa Hat, Spin Glass, Wick,
+  // Petal, Smile, Frame Heart, Oldster Romance, Very Hard Shell and the
+  // Red/Blue Dyestuffs) are in no second source, so they stay unlinked rather
+  // than being matched to whatever looks closest -- "Smile" could be Mr. Smile
+  // or Smile Mask, and picking one would be invention.
+  const MATERIAL_ALIAS = {
+    'Feather of Birds': 'Bird Feather',
+    'Evil Horn': "Baphomet's Horn",
+    'Kitty Band': 'Cat Headband',
+    'Tough Vine': 'Tough Vines',
+  };
+
   // Cosmetics: the crafted item and every material, so the page links out
   // instead of only naming. Zeny is money, not an item, and is left alone.
   let cosmeticsFound = 0;
   const materialMisses = new Set();
   let materialCount = 0;
+  let materialMissRows = 0;
   for (const entry of cosmetics) {
     const made = itemByName.get(squash(entry.item));
     entry.itemId = made?.id ?? null;
@@ -229,13 +250,16 @@ async function crossCheck() {
     for (const material of entry.materials) {
       if (material.item === 'Zeny') { material.itemId = null; continue; }
       materialCount += 1;
-      const found = itemByName.get(squash(material.item));
+      const found = itemByName.get(squash(MATERIAL_ALIAS[material.item] ?? material.item));
       material.itemId = found?.id ?? null;
-      if (!found) materialMisses.add(material.item);
+      if (!found) {
+        materialMisses.add(material.item);
+        materialMissRows += 1;
+      }
     }
   }
 
-  return { eggsFound, tamingFound, rateChecks, cosmeticsFound, materialCount, materialMisses: [...materialMisses] };
+  return { eggsFound, tamingFound, rateChecks, cosmeticsFound, materialCount, materialMissRows, materialMisses: [...materialMisses] };
 }
 
 const check = await crossCheck();
@@ -262,7 +286,10 @@ console.log(`qpets ${qpets.length} · เมืองที่มี NPC ${qpetT
 if (check) {
   console.log(`  ไข่เจอในตารางเรา ${check.eggsFound}/${qpets.length} · ของฝึก ${check.tamingFound}/${qpets.length}`);
   console.log(`  อัตราดรอป: ตรง ${check.rateChecks.agree} · ต่าง ${check.rateChecks.differ.length} · ไม่มีแถวให้เทียบ ${check.rateChecks.noRow} · ไม่รู้จักมอน ${check.rateChecks.noMonster}`);
-  console.log(`  คอสตูมที่หาเจอในตารางเรา ${check.cosmeticsFound}/${cosmetics.length} · วัตถุดิบที่หาไม่เจอ ${check.materialMisses.length} จาก ${check.materialCount}`);
+  // Two different numbers, and reporting the wrong one caused a wrong claim
+  // in a commit message: materialMisses is distinct NAMES, materialMissRows
+  // is how many lines of the tables are affected.
+  console.log(`  คอสตูมที่หาเจอในตารางเรา ${check.cosmeticsFound}/${cosmetics.length} · วัตถุดิบลิงก์ได้ ${check.materialCount - check.materialMissRows}/${check.materialCount} แถว (ชื่อที่หาไม่เจอ ${check.materialMisses.length} ชื่อ)`);
   for (const miss of check.materialMisses) console.log(`    ? ${miss}`);
   for (const d of check.rateChecks.differ) console.log(`    ! ${d}`);
 }

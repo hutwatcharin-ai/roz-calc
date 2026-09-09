@@ -4,7 +4,7 @@
   "source": "roz-global.info (docs/rozglobal-export, ดึง 8 ก.ย. 2026)",
   "gap": "มอนในดันเจี้ยนพวกนี้เกือบทั้งหมดเป็นตัวเฉพาะอินสแตนซ์ และไม่มีในตาราง monsters ของเราเลย จึงลิงก์ไปหน้ามอนไม่ได้ · ชื่อเดียวที่ตรงคือ Orc Skeleton แต่ค่าสถานะในอินสแตนซ์ไม่เท่ากับตัวปกติ (lv60 HP4,458 เทียบกับของเรา lv53 HP3,376) แปลว่าเป็นคนละตัว",
   "regenerate": "node scripts/build-memorial-dungeons.mjs",
-  "generatedAt": "2026-09-09T04:40:53.394Z"
+  "generatedAt": "2026-09-09T05:05:45.542Z"
  },
  "dungeons": [
   {
@@ -15,43 +15,107 @@
    "map": "prt_fild05",
    "x": 145,
    "y": 235,
+   "rewards": {
+    "normal": [
+     "Poring Village Green Onion",
+     "Poring Village Carrot"
+    ],
+    "hard": [],
+    "note": null
+   },
    "party": true,
    "dailyReset": false,
    "monsters": [
     {
      "name": "Fortified Poring",
      "level": 34,
-     "hp": 1023
+     "hp": 1023,
+     "def": 10,
+     "mdef": 12,
+     "size": "เล็ก",
+     "race": null,
+     "element": "ดิน",
+     "elementLevel": 1,
+     "baseExp": 369,
+     "jobExp": 291
     },
     {
      "name": "Fortified Marin",
      "level": 33,
-     "hp": 960
+     "hp": 960,
+     "def": 10,
+     "mdef": 10,
+     "size": "เล็ก",
+     "race": null,
+     "element": "น้ำ",
+     "elementLevel": 1,
+     "baseExp": 358,
+     "jobExp": 279
     },
     {
      "name": "Fortified Poporing",
      "level": 36,
-     "hp": 1167
+     "hp": 1167,
+     "def": 10,
+     "mdef": 12,
+     "size": "เล็ก",
+     "race": null,
+     "element": "ลม",
+     "elementLevel": 1,
+     "baseExp": 384,
+     "jobExp": 309
     },
     {
      "name": "Fortified Drops",
      "level": 35,
-     "hp": 1095
+     "hp": 1095,
+     "def": 10,
+     "mdef": 10,
+     "size": "เล็ก",
+     "race": null,
+     "element": "ไฟ",
+     "elementLevel": 1,
+     "baseExp": 377,
+     "jobExp": 300
     },
     {
      "name": "Amering",
      "level": 35,
-     "hp": 72810
+     "hp": 72810,
+     "def": 10,
+     "mdef": 10,
+     "size": "ใหญ่",
+     "race": null,
+     "element": "พิษ",
+     "elementLevel": 1,
+     "baseExp": 6375,
+     "jobExp": 5524
     },
     {
      "name": "Goldring",
      "level": 35,
-     "hp": 72118
+     "hp": 72118,
+     "def": 10,
+     "mdef": 10,
+     "size": "ใหญ่",
+     "race": null,
+     "element": "ศักดิ์สิทธิ์",
+     "elementLevel": 1,
+     "baseExp": 6327,
+     "jobExp": 5565
     },
     {
      "name": "King Poring",
      "level": 35,
-     "hp": 140000
+     "hp": 140000,
+     "def": 20,
+     "mdef": 20,
+     "size": "ใหญ่",
+     "race": null,
+     "element": "ไร้ธาตุ",
+     "elementLevel": 1,
+     "baseExp": 9580,
+     "jobExp": 8288
     }
    ]
   },
@@ -63,28 +127,81 @@
    "map": null,
    "x": null,
    "y": null,
+   "rewards": {
+    "normal": [
+     "Subjugation Team's Armor",
+     "Subjugation Team's Shoulder Belt",
+     "Faintly Glowing Crystal"
+    ],
+    "hard": [
+     "Cursed Emerald Earring",
+     "Faintly Glowing Crystal",
+     "Cursed Emerald",
+     "Mithril Ore",
+     "Elunium Ore",
+     "Oridecon Ore",
+     "Wind of Verdure",
+     "Red Blood",
+     "Green Live",
+     "Elunium",
+     "Oridecon"
+    ],
+    "note": null
+   },
    "party": true,
    "dailyReset": false,
    "monsters": [
     {
      "name": "Orc Skeleton",
      "level": 60,
-     "hp": 4458
+     "hp": 4458,
+     "def": 82,
+     "mdef": 10,
+     "size": "กลาง",
+     "race": "อันเดด",
+     "element": "อันเดด",
+     "elementLevel": 1,
+     "baseExp": 627,
+     "jobExp": 562
     },
     {
      "name": "Orc Zombie",
      "level": 60,
-     "hp": 4475
+     "hp": 4475,
+     "def": 71,
+     "mdef": 5,
+     "size": "กลาง",
+     "race": "สัตว์",
+     "element": "อันเดด",
+     "elementLevel": 1,
+     "baseExp": 649,
+     "jobExp": 600
     },
     {
      "name": "Shaman's Flower",
      "level": 98,
-     "hp": 5
+     "hp": 5,
+     "def": 160,
+     "mdef": 99,
+     "size": "กลาง",
+     "race": "พืช",
+     "element": "ดิน",
+     "elementLevel": 1,
+     "baseExp": 0,
+     "jobExp": 0
     },
     {
      "name": "Fallen Orc Hero",
      "level": 70,
-     "hp": 2110562
+     "hp": 2110562,
+     "def": 197,
+     "mdef": 70,
+     "size": "ใหญ่",
+     "race": "กึ่งมนุษย์",
+     "element": "ดิน",
+     "elementLevel": 2,
+     "baseExp": 166639,
+     "jobExp": 118717
     }
    ]
   },
@@ -96,28 +213,81 @@
    "map": null,
    "x": null,
    "y": null,
+   "rewards": {
+    "normal": [
+     "Subjugation Team Boots",
+     "Subjugation Team's Ring",
+     "Faintly Glowing Crystal"
+    ],
+    "hard": [
+     "Shimmering Opal Earrings",
+     "Faintly Glowing Crystal",
+     "Shimmering Opal",
+     "Mithril Ore",
+     "Elunium Ore",
+     "Oridecon Ore",
+     "Wind of Verdure",
+     "Red Blood",
+     "Green Live",
+     "Elunium",
+     "Oridecon"
+    ],
+    "note": null
+   },
    "party": true,
    "dailyReset": false,
    "monsters": [
     {
      "name": "Sewer Giant Thief Bug",
      "level": 60,
-     "hp": 3330
+     "hp": 3330,
+     "def": 40,
+     "mdef": 20,
+     "size": "กลาง",
+     "race": "ไร้รูปร่าง",
+     "element": "มืด",
+     "elementLevel": 1,
+     "baseExp": 0,
+     "jobExp": 0
     },
     {
      "name": "Sewer Thief Bug",
      "level": 60,
-     "hp": 200
+     "hp": 200,
+     "def": 24,
+     "mdef": 3,
+     "size": "เล็ก",
+     "race": "แมลง",
+     "element": "ไร้ธาตุ",
+     "elementLevel": 3,
+     "baseExp": 0,
+     "jobExp": 0
     },
     {
      "name": "Ancient Thief Bug Egg",
      "level": 60,
-     "hp": 10
+     "hp": 10,
+     "def": 64,
+     "mdef": 10,
+     "size": "เล็ก",
+     "race": "แมลง",
+     "element": "มืด",
+     "elementLevel": 1,
+     "baseExp": 0,
+     "jobExp": 0
     },
     {
      "name": "Ancient Golden Thief Bug",
      "level": 60,
-     "hp": 1200000
+     "hp": 1200000,
+     "def": 159,
+     "mdef": 81,
+     "size": "ใหญ่",
+     "race": "แมลง",
+     "element": "ไฟ",
+     "elementLevel": 1,
+     "baseExp": 75000,
+     "jobExp": 63000
     }
    ]
   },
@@ -129,33 +299,94 @@
    "map": null,
    "x": null,
    "y": null,
+   "rewards": {
+    "normal": [
+     "Jellopy Fragment Box",
+     "Faintly Glowing Crystal",
+     "Crystal of Blue Light"
+    ],
+    "hard": [
+     "Red Oath Ring",
+     "Faintly Glowing Crystal",
+     "Ruby Soaked in Blood",
+     "Mithril Ore",
+     "Elunium Ore",
+     "Oridecon Ore",
+     "Wind of Verdure",
+     "Red Blood",
+     "Green Live",
+     "Elunium",
+     "Oridecon"
+    ],
+    "note": null
+   },
    "party": true,
    "dailyReset": false,
    "monsters": [
     {
      "name": "Cannibal Deniro",
      "level": 70,
-     "hp": 5000
+     "hp": 5000,
+     "def": 52,
+     "mdef": 16,
+     "size": "เล็ก",
+     "race": "แมลง",
+     "element": "ดิน",
+     "elementLevel": 1,
+     "baseExp": 834,
+     "jobExp": 740
     },
     {
      "name": "Cannibal Vitata",
      "level": 71,
-     "hp": 5000
+     "hp": 5000,
+     "def": 44,
+     "mdef": 12,
+     "size": "เล็ก",
+     "race": "แมลง",
+     "element": "ดิน",
+     "elementLevel": 1,
+     "baseExp": 829,
+     "jobExp": 756
     },
     {
      "name": "Cannibal Andre",
      "level": 70,
-     "hp": 5000
+     "hp": 5000,
+     "def": 55,
+     "mdef": 16,
+     "size": "เล็ก",
+     "race": "แมลง",
+     "element": "ดิน",
+     "elementLevel": 1,
+     "baseExp": 843,
+     "jobExp": 779
     },
     {
      "name": "Cannibal Pierre",
      "level": 70,
-     "hp": 500
+     "hp": 500,
+     "def": 57,
+     "mdef": 16,
+     "size": "เล็ก",
+     "race": "แมลง",
+     "element": "ดิน",
+     "elementLevel": 1,
+     "baseExp": 843,
+     "jobExp": 779
     },
     {
      "name": "Cannibal Maya",
      "level": 70,
-     "hp": 2200000
+     "hp": 2200000,
+     "def": 183,
+     "mdef": 50,
+     "size": "ใหญ่",
+     "race": "แมลง",
+     "element": "ดิน",
+     "elementLevel": 4,
+     "baseExp": 165000,
+     "jobExp": 120000
     }
    ]
   },
@@ -167,33 +398,93 @@
    "map": null,
    "x": null,
    "y": null,
+   "rewards": {
+    "normal": [
+     "Jellopy Fragment Box",
+     "Faintly Glowing Crystal"
+    ],
+    "hard": [
+     "Ring of Blue Oath",
+     "Faintly Glowing Crystal",
+     "Sapphire of the Blue Sea",
+     "Mithril Ore",
+     "Elunium Ore",
+     "Oridecon Ore",
+     "Wind of Verdure",
+     "Red Blood",
+     "Green Live",
+     "Elunium",
+     "Oridecon"
+    ],
+    "note": null
+   },
    "party": true,
    "dailyReset": false,
    "monsters": [
     {
      "name": "Deepsea Merman",
      "level": 80,
-     "hp": 5000
+     "hp": 5000,
+     "def": 62,
+     "mdef": 8,
+     "size": "กลาง",
+     "race": "กึ่งมนุษย์",
+     "element": "น้ำ",
+     "elementLevel": 3,
+     "baseExp": 799,
+     "jobExp": 774
     },
     {
      "name": "Deepsea Obeaune",
      "level": 80,
-     "hp": 5000
+     "hp": 5000,
+     "def": 48,
+     "mdef": 26,
+     "size": "กลาง",
+     "race": "ปลา",
+     "element": "น้ำ",
+     "elementLevel": 2,
+     "baseExp": 799,
+     "jobExp": 774
     },
     {
      "name": "Deepsea Cornutus",
      "level": 80,
-     "hp": 5000
+     "hp": 5000,
+     "def": 42,
+     "mdef": 28,
+     "size": "เล็ก",
+     "race": "ปลา",
+     "element": "น้ำ",
+     "elementLevel": 1,
+     "baseExp": 799,
+     "jobExp": 774
     },
     {
      "name": "Deepsea Marse",
      "level": 80,
-     "hp": 5000
+     "hp": 5000,
+     "def": 38,
+     "mdef": 18,
+     "size": "เล็ก",
+     "race": "ปลา",
+     "element": "น้ำ",
+     "elementLevel": 2,
+     "baseExp": 802,
+     "jobExp": 711
     },
     {
      "name": "Deepsea Coelacanth",
      "level": 80,
-     "hp": 2200000
+     "hp": 2200000,
+     "def": 280,
+     "mdef": 280,
+     "size": "ใหญ่",
+     "race": "ปลา",
+     "element": "น้ำ",
+     "elementLevel": 2,
+     "baseExp": 168000,
+     "jobExp": 114000
     }
    ]
   },
@@ -205,33 +496,102 @@
    "map": null,
    "x": null,
    "y": null,
+   "rewards": {
+    "normal": [
+     "Jellopy Fragment Box",
+     "Faintly Glowing Crystal",
+     "Crystal of Blue Light",
+     "Mithril Ore",
+     "Elunium Ore",
+     "Oridecon Ore",
+     "Wind of Verdure",
+     "Red Blood",
+     "Green Live",
+     "Elunium",
+     "Oridecon"
+    ],
+    "hard": [
+     "Red Oath Ring",
+     "Faintly Glowing Crystal",
+     "Ruby Soaked in Blood",
+     "Mithril Ore",
+     "Elunium Ore",
+     "Oridecon Ore",
+     "Wind of Verdure",
+     "Red Blood",
+     "Green Live",
+     "Elunium",
+     "Oridecon"
+    ],
+    "note": null
+   },
    "party": true,
    "dailyReset": false,
    "monsters": [
     {
      "name": "Stormy Mimic",
      "level": 99,
-     "hp": 100
+     "hp": 100,
+     "def": 63,
+     "mdef": 15,
+     "size": "กลาง",
+     "race": "ไร้รูปร่าง",
+     "element": "ไร้ธาตุ",
+     "elementLevel": 3,
+     "baseExp": 10,
+     "jobExp": 10
     },
     {
      "name": "Stormy Wraith",
      "level": 99,
-     "hp": 19000
+     "hp": 19000,
+     "def": 80,
+     "mdef": 40,
+     "size": "ใหญ่",
+     "race": "ไร้รูปร่าง",
+     "element": "อันเดด",
+     "elementLevel": 4,
+     "baseExp": 0,
+     "jobExp": 0
     },
     {
      "name": "Stormy Pirate Skeleton",
      "level": 99,
-     "hp": 19000
+     "hp": 19000,
+     "def": 53,
+     "mdef": 20,
+     "size": "กลาง",
+     "race": "อันเดด",
+     "element": "อันเดด",
+     "elementLevel": 1,
+     "baseExp": 2100,
+     "jobExp": 1900
     },
     {
      "name": "Stormy Whisper",
      "level": 99,
-     "hp": 19000
+     "hp": 19000,
+     "def": 20,
+     "mdef": 40,
+     "size": "เล็ก",
+     "race": "ปีศาจ",
+     "element": "ไฟ",
+     "elementLevel": 3,
+     "baseExp": 2100,
+     "jobExp": 1900
     },
     {
      "name": "Stormy Drake",
      "level": 99,
-     "hp": 7200000
+     "hp": 7200000,
+     "def": 279,
+     "mdef": 135,
+     "size": "กลาง",
+     "race": "อันเดด",
+     "element": "อันเดด",
+     "elementLevel": 1,
+     "baseExp": 670000,
+     "jobExp": 510000
     }
    ]
   }

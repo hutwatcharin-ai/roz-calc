@@ -17,6 +17,10 @@ import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
+import ItemIcon from '@/components/ItemIcon';
+import { itemHref } from '@/lib/item-href';
+import { supabaseBrowser } from '@/lib/supabase';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
 import file from '@/data/memorial-dungeons.json';
 
 export const revalidate = 86400;
@@ -24,8 +28,22 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'ดันเจี้ยนความทรงจำ Ragnarok Zero — เข้าได้ตอนเลเวลไหน เจออะไรบ้าง',
   description:
-    'ดันเจี้ยนความทรงจำทั้ง 6 แห่งใน Ragnarok Zero Global — เลเวลที่เข้าได้ ต้องไปเป็นกลุ่มไหม รีเซ็ตเมื่อไร และมอนในนั้นแต่ละตัวเลเวลเท่าไร เลือดเท่าไร',
+    'ดันเจี้ยนความทรงจำทั้ง 6 แห่งใน Ragnarok Zero Global — เลเวลที่เข้าได้ รีเซ็ตเมื่อไร มอนในนั้นเลเวล เลือด DEF เผ่า ธาตุ EXP ครบทุกตัว และหีบท้ายดันให้อะไรบ้างแยกโหมดปกติกับโหมดยาก',
 };
+
+interface DungeonMonster {
+  name: string;
+  level: number;
+  hp: number;
+  def: number | null;
+  mdef: number | null;
+  size: string | null;
+  race: string | null;
+  element: string | null;
+  elementLevel: number | null;
+  baseExp: number | null;
+  jobExp: number | null;
+}
 
 interface Dungeon {
   name: string;
@@ -37,7 +55,8 @@ interface Dungeon {
   y: number | null;
   party: boolean;
   dailyReset: boolean;
-  monsters: { name: string; level: number; hp: number }[];
+  rewards: { normal: string[]; hard: string[] };
+  monsters: DungeonMonster[];
 }
 
 const { dungeons } = file as unknown as { dungeons: Dungeon[] };
@@ -47,7 +66,15 @@ function levelText(d: Dungeon): string {
   return d.levelMax ? `${d.level}–${d.levelMax}` : `${d.level}+`;
 }
 
-export default function MemorialDungeonsPage() {
+export default async function MemorialDungeonsPage() {
+  // The reward names are matched to our items table so each one links. Every
+  // name in the file resolved on 9 Sep 2026; one that stops resolving renders
+  // as plain text rather than vanishing.
+  const { data: itemRows } = await fetchAllRows<{ id: number; name_en: string; icon_url: string | null }>(
+    (from, to) => supabaseBrowser().from('items').select('id, name_en, icon_url').order('id').range(from, to),
+  );
+  const items = new Map((itemRows ?? []).map((i) => [i.name_en.toLowerCase(), i]));
+  const reward = (name: string) => items.get(name.toLowerCase()) ?? null;
   // Easiest first: it is the order a player meets them in.
   const ordered = [...dungeons].sort((a, b) => (a.level ?? 999) - (b.level ?? 999));
 
@@ -63,7 +90,8 @@ export default function MemorialDungeonsPage() {
       <PageHeader title="ดันเจี้ยนความทรงจำ — เข้าตอนไหน เจออะไร" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
         ดันเจี้ยนแบบอินสแตนซ์ {dungeons.length} แห่ง · <strong>ทุกแห่งเข้าเป็นกลุ่ม และเข้าได้วันละครั้ง รีเซ็ตตี 4</strong> ·
-        ของที่ได้จากหีบในนี้คือ<Link href="/guides/memorial-gear">ชุดแรงค์ IV</Link>ที่เอาไปอัปต่อได้
+        ของที่ได้จากหีบในนี้คือ<Link href="/guides/memorial-gear">ชุดแรงค์ IV</Link>ที่เอาไปอัปต่อได้ ·
+        โหมดยากให้วัตถุดิบสำหรับทำเครื่องประดับด้วย
       </p>
 
       <div className="card card--cyan">
@@ -108,6 +136,9 @@ export default function MemorialDungeonsPage() {
                   <th>มอน</th>
                   <th className="num">เลเวล</th>
                   <th className="num">HP</th>
+                  <th className="num">DEF / MDEF</th>
+                  <th>เผ่า · ธาตุ · ขนาด</th>
+                  <th className="num">EXP / JEXP</th>
                 </tr>
               </thead>
               <tbody>
@@ -116,11 +147,47 @@ export default function MemorialDungeonsPage() {
                     <td data-label="มอน">{m.name}</td>
                     <td data-label="เลเวล" className="num">{m.level}</td>
                     <td data-label="HP" className="num">{m.hp.toLocaleString('en-US')}</td>
+                    <td data-label="DEF / MDEF" className="num">
+                      {m.def === null ? '—' : `${m.def} / ${m.mdef ?? '—'}`}
+                    </td>
+                    <td data-label="เผ่า · ธาตุ · ขนาด">
+                      {[m.race, m.element && `${m.element}${m.elementLevel ?? ''}`, m.size].filter(Boolean).join(' · ') || '—'}
+                    </td>
+                    <td data-label="EXP / JEXP" className="num">
+                      {m.baseExp === null
+                        ? '—'
+                        : `${m.baseExp.toLocaleString('en-US')} / ${(m.jobExp ?? 0).toLocaleString('en-US')}`}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {(d.rewards.normal.length > 0 || d.rewards.hard.length > 0) && (
+            <div style={{ marginTop: 12 }}>
+              {([['โหมดปกติ', d.rewards.normal], ['โหมดยาก', d.rewards.hard]] as const).map(([label, list]) =>
+                list.length === 0 ? null : (
+                  <p key={label} className="muted" style={{ margin: '6px 0', fontSize: 13 }}>
+                    <strong>{label}:</strong>{' '}
+                    <span className="recipe__list">
+                      {list.map((name) => {
+                        const item = reward(name);
+                        return item ? (
+                          <Link key={name} className="recipe__item" href={itemHref(item.id, null)}>
+                            <ItemIcon iconUrl={item.icon_url} category="Other" size={18} />
+                            <span>{name}</span>
+                          </Link>
+                        ) : (
+                          <span key={name} className="recipe__item">{name}</span>
+                        );
+                      })}
+                    </span>
+                  </p>
+                ),
+              )}
+            </div>
+          )}
         </section>
       ))}
 

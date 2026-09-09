@@ -5,7 +5,7 @@
   "verified": "ไข่ที่หาเจอในตาราง items 24/26 · ของฝึก 26/26 · อัตราดรอปตรงกับ monster_drops 0 คู่ ต่างกัน 0 คู่",
   "npcNote": "พิกัด NPC ไม่มีแหล่งที่สอง — ตาราง map_stats ของเราสร้างจากจุดเกิดมอน จึงไม่มีแมพในอาคารทั้ง 13 แมพนี้",
   "regenerate": "node scripts/build-rozglobal-guides.mjs",
-  "generatedAt": "2026-09-09T04:30:04.724Z"
+  "generatedAt": "2026-09-09T05:12:11.205Z"
  },
  "qpetTowns": [
   {
@@ -478,7 +478,7 @@
     {
      "item": "Feather of Birds",
      "amount": 300,
-     "itemId": null
+     "itemId": 916
     }
    ],
    "itemId": 5018
@@ -559,7 +559,7 @@
     {
      "item": "Kitty Band",
      "amount": 1,
-     "itemId": null
+     "itemId": 2213
     }
    ],
    "itemId": 5033
@@ -655,7 +655,7 @@
     {
      "item": "Tough Vine",
      "amount": 30,
-     "itemId": null
+     "itemId": 7197
     }
    ],
    "itemId": 5062
@@ -703,7 +703,7 @@
     {
      "item": "Feather of Birds",
      "amount": 50,
-     "itemId": null
+     "itemId": 916
     },
     {
      "item": "Soft Fur",
@@ -1123,7 +1123,7 @@
     {
      "item": "Evil Horn",
      "amount": 3,
-     "itemId": null
+     "itemId": 923
     }
    ],
    "itemId": 2284
