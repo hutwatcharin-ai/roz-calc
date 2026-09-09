@@ -10,6 +10,7 @@
 // the grouping belongs on it. /guides/cards now redirects here.
 import Link from 'next/link';
 import { matches } from '@/lib/smart-search';
+import { cardRelease, releaseText } from '@/lib/card-availability';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import PageHeader from '@/components/PageHeader';
@@ -44,12 +45,16 @@ function cardEffect(description: string | null): string | null {
 export default async function CardsPage({
   searchParams,
 }: {
-  searchParams: { q?: string; slot?: string; role?: string; page?: string; sort?: string };
+  searchParams: { q?: string; slot?: string; role?: string; page?: string; sort?: string; live?: string };
 }) {
   const q = searchParams.q ?? '';
   const slot = SLOT_ORDER.includes(searchParams.slot as CardSlot) ? (searchParams.slot as CardSlot) : '';
   const role = ROLE_ORDER.includes(searchParams.role as CardRole) ? (searchParams.role as CardRole) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  // Off by default: a card that arrives in January is still worth reading
+  // about while planning, and hiding rows by default is how a database
+  // quietly stops being one.
+  const hideUnreleased = searchParams.live === '1';
   const SORTS = {
     name: { label: 'ชื่อ A-Z' },
     slot: { label: 'ช่องที่ใส่' },
@@ -124,8 +129,13 @@ export default async function CardsPage({
       // dropper with the card's own name tells the reader nothing they did
       // not already have on the same row.
       dropNote: !(from.length === 1 && squash(from[0].name) === squash(name)),
+      // Null for a card that is in the game. 42 of these rows are content
+      // that has not opened on Global, and without this the page tells a
+      // reader to go and farm something that drops nowhere.
+      release: cardRelease(c.name_en),
     };
   });
+  const unreleased = cards.filter((c) => c.release !== null).length;
 
   // Counts come from the data, so an empty group never shows a chip that
   // leads to an empty page.
@@ -140,6 +150,7 @@ export default async function CardsPage({
 
   const needle = q.trim().toLowerCase();
   const filtered = cards.filter((c) => {
+    if (hideUnreleased && c.release !== null) return false;
     if (slot && c.slot !== slot) return false;
     if (role && !c.roles.includes(role)) return false;
     if (!needle) return true;
@@ -166,7 +177,20 @@ export default async function CardsPage({
     if (slot) params.set('slot', slot);
     if (role) params.set('role', role);
     if (sort !== 'name') params.set('sort', sort);
+    if (hideUnreleased) params.set('live', '1');
     if (targetPage > 1) params.set('page', String(targetPage));
+    const qs = params.toString();
+    return `/database/cards${qs ? `?${qs}` : ''}`;
+  }
+
+  // The same URL with the unreleased-cards switch flipped, back to page 1.
+  function liveHref(next: boolean): string {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (slot) params.set('slot', slot);
+    if (role) params.set('role', role);
+    if (sort !== 'name') params.set('sort', sort);
+    if (next) params.set('live', '1');
     const qs = params.toString();
     return `/database/cards${qs ? `?${qs}` : ''}`;
   }
@@ -179,6 +203,7 @@ export default async function CardsPage({
     if (slot) params.set('slot', slot);
     if (target) params.set('role', target);
     if (sort !== 'name') params.set('sort', sort);
+    if (hideUnreleased) params.set('live', '1');
     const qs = params.toString();
     return `/database/cards${qs ? `?${qs}` : ''}`;
   }
@@ -240,8 +265,18 @@ export default async function CardsPage({
         {/* The role rides along in the form so hitting search does not throw
             away the group the reader is standing in. */}
         {role && <input type="hidden" name="role" value={role} />}
+        {hideUnreleased && <input type="hidden" name="live" value="1" />}
         <button type="submit" className="btn">ค้นหา</button>
       </form>
+
+      {/* Stated, and switchable, rather than either silently listing cards
+          nobody can get or silently hiding them. */}
+      <p className="muted" style={{ marginTop: 8, marginBottom: 10, fontSize: 13 }}>
+        <strong>{unreleased} ใบยังไม่เปิดในเซิร์ฟโกลบอล</strong> — ติดป้ายไว้ในตารางพร้อมเดือนที่คาดว่าจะมา ·{' '}
+        <Link href={liveHref(!hideUnreleased)} scroll={false}>
+          {hideUnreleased ? 'แสดงการ์ดที่ยังไม่เปิดด้วย' : 'ซ่อนการ์ดที่ยังไม่เปิด'}
+        </Link>
+      </p>
 
       <div className="card">
         <table className="data-table">
@@ -265,6 +300,11 @@ export default async function CardsPage({
                   <tr key={c.id}>
                     <td data-label="">
                       <Link className="cardname" href={`/database/cards/${c.id}`}>{c.name}</Link>
+                      {c.release && (
+                        <span className="cardsoon" title={`แหล่งที่บอก: ${c.release.sources.join(' + ')}`}>
+                          ยังไม่เปิด · {releaseText(c.release)}
+                        </span>
+                      )}
                       {/* Where it drops, said only where saying it adds
                           something. 244 of 315 cards drop from the monster
                           they are named after, so printing that in a column

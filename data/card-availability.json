@@ -1,0 +1,503 @@
+{
+  "_meta": {
+    "builtBy": "scripts/build-card-availability.mjs",
+    "guideCards": 267,
+    "rozerodbCards": 262,
+    "coveredByBoth": 246,
+    "conflicts": 0,
+    "note": "Only cards that are NOT in the game yet are listed. Keys are the English card name with everything but letters and digits removed."
+  },
+  "cards": {
+    "abysmalknight": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "alice": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "ancientmummy": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "anolian": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "apocalypse": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "archdam": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "arclouse": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "blazer": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "brilight": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "carat": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "chimera": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "darkframe": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "darkillusion": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "darkpriest": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "diabolic": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "dimik": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "erzsebet": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "evildruid": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "explosion": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "extrajoker": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "gargoyle": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "geographer": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "gig": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "goat": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "grandpeco": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "grizzly": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "grounddeleter": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "harpy": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "hatiibebe": {
+      "when": "DEC 2026",
+      "sortKey": 202612,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "highorc": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "injustice": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "isis": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "jeniffer": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "joker": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "kaho": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "khalitzburg": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "lavagolem": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "majoruros": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "mistress": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "mummy": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "nightmareterror": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "orcarcher": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "orcgeneral": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "owlbaron": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "owlduke": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "penomena": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "phendark": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "raydric": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "raydricarcher": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "rybio": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "sageworm": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "sieglouse": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "skelprisoner": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "skydeleter": {
+      "when": "JUN 2027",
+      "sortKey": 202706,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "sleeper": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "sting": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "venatu": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "verit": {
+      "when": "OCT 2026",
+      "sortKey": 202610,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "vesper": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "roz-global.info"
+      ]
+    },
+    "wanderman": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "windghost": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "wraith": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "zealotus": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    },
+    "zombieprisoner": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "roz-global.info",
+        "rozerodb"
+      ]
+    }
+  }
+}

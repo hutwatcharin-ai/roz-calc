@@ -16,6 +16,7 @@ import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCardCategory, itemHref } from '@/lib/item-href';
 import { parseCardSlot } from '@/lib/card-slot';
 import { isCVariant } from '@/lib/c-variant';
+import { cardRelease, releaseText } from '@/lib/card-availability';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -89,6 +90,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
     : composeThaiDescription(item.description ?? '', dict)
         .map((l) => l.thai ?? l.source)
         .filter((l) => l !== '' && !BOILERPLATE.test(l));
+  const release = cardRelease(item.name_en);
   const rows = (droppedBy ?? []).filter((d: any) => d.monsters && !isCVariant(d.monsters.name_en));
   const source = rows[0] ?? null;
 
@@ -137,6 +139,15 @@ export default async function CardDetailPage({ params }: { params: { id: string 
             {slot && <span className="tag">ใส่ช่อง {slot}</span>}
             <span className="tag mono">ID {item.id}</span>
           </p>
+          {/* Said before the drop table, not after it: the table below lists
+              monsters this card comes from, and for these 42 cards none of
+              those monsters is in the game yet either. */}
+          {release && (
+            <p className="filterstate" style={{ marginTop: 8 }}>
+              <strong>การ์ดใบนี้ยังไม่เปิดในเซิร์ฟโกลบอล</strong> — คาดว่ามาพร้อมแพตช์ {releaseText(release)} (
+              {release.sources.join(' + ')})
+            </p>
+          )}
           <p className="muted" style={{ marginTop: 6, maxWidth: '65ch' }}>
             {item.name_en}
             {slot ? ` เป็นการ์ดที่ใส่ในช่อง ${slot}` : ' เป็นการ์ด'}

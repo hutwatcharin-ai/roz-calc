@@ -380,6 +380,21 @@ a.thsort { text-decoration: none; }
 .cardfrom a { color: var(--faint); }
 .cardfrom a:hover { color: var(--text); }
 
+/* "Not in the game yet" on the 42 cards that are not. Set apart from the
+   drop line under it, because the two say opposite things: one is where to
+   go, the other is that there is nowhere to go. */
+.cardsoon {
+  display: inline-block;
+  margin-inline-start: 8px;
+  padding: 1px 7px;
+  border: 1px solid rgba(255, 229, 61, 0.45);
+  border-radius: 999px;
+  color: var(--yellow);
+  font-size: 11.5px;
+  white-space: nowrap;
+  vertical-align: 2px;
+}
+
 /* "What is it for" comes before the search box: 90 days of logs recorded no
    search on this page at all, and the group names are what a reader who does
    not know card names can actually act on. */
