@@ -11,6 +11,7 @@ import RecentlyViewed from '@/components/RecentlyViewed';
 import Pagination from '@/components/Pagination';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
+import { nameOrIdsFilter } from '@/lib/name-search';
 import { aliasIdsFor } from '@/lib/thai-aliases';
 
 export const metadata = {
@@ -80,8 +81,10 @@ export default async function ItemListPage({
     // players use are resolved to ids first and OR-ed in (lib/thai-aliases).
     const aliasIds = aliasIdsFor('items', q);
     if (aliasIds.length > 0) {
-      const like = searchWords(q).map((w) => `name_en.ilike.%25${escapeLikePattern(w)}%25`);
-      query = query.or([...like, `id.in.(${aliasIds.join(',')})`].join(','));
+      // lib/name-search, because both copies of this were written with a
+      // URL-encoded wildcard and matched nothing by name at all.
+      const filter = nameOrIdsFilter('name_en', q, aliasIds);
+      if (filter) query = query.or(filter);
     } else {
       for (const word of searchWords(q)) {
         query = query.ilike('name_en', `%${escapeLikePattern(word)}%`);
