@@ -11,6 +11,7 @@
 import Link from 'next/link';
 import { matches } from '@/lib/smart-search';
 import { cardRelease, releaseText } from '@/lib/card-availability';
+import { CARDS_WITHOUT_ART, cardArtAlt, cardArtThumbUrl, hasCardArt } from '@/lib/card-art';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import PageHeader from '@/components/PageHeader';
@@ -272,6 +273,9 @@ export default async function CardsPage({
       {/* Stated, and switchable, rather than either silently listing cards
           nobody can get or silently hiding them. */}
       <p className="muted" style={{ marginTop: 8, marginBottom: 10, fontSize: 13 }}>
+        {/* Both numbers are things the page would otherwise leave the reader
+            to work out from what is missing. */}
+        <strong>{CARDS_WITHOUT_ART} ใบยังไม่มีรูปการ์ด</strong> (ขึ้นเป็นรูปหลังการ์ดแทน) ·{' '}
         <strong>{unreleased} ใบยังไม่เปิดในเซิร์ฟโกลบอล</strong> — ติดป้ายไว้ในตารางพร้อมเดือนที่คาดว่าจะมา ·{' '}
         <Link href={liveHref(!hideUnreleased)} scroll={false}>
           {hideUnreleased ? 'แสดงการ์ดที่ยังไม่เปิดด้วย' : 'ซ่อนการ์ดที่ยังไม่เปิด'}
@@ -282,6 +286,10 @@ export default async function CardsPage({
         <table className="data-table">
           <thead>
             <tr>
+              {/* No label on the picture column: the name beside it is the
+                  label, and a header over a 45px column of pictures reads as
+                  a column of its own to a screen reader for nothing. */}
+              <th aria-label="รูปการ์ด" />
               <th>ชื่อ</th>
               <th>ช่องที่ใส่</th>
               <th>เอฟเฟกต์</th>
@@ -290,7 +298,7 @@ export default async function CardsPage({
           <tbody>
             {error ? (
               <tr>
-                <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                   เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
                 </td>
               </tr>
@@ -298,6 +306,20 @@ export default async function CardsPage({
               <>
                 {rows.map((c) => (
                   <tr key={c.id}>
+                    <td data-label="" className="cardart__cell">
+                      <Link href={`/database/cards/${c.id}`} tabIndex={-1} aria-hidden="true">
+                        <img
+                          className={hasCardArt(c.id) ? 'cardart' : 'cardart cardart--none'}
+                          src={cardArtThumbUrl(c.id)}
+                          alt=""
+                          width={45}
+                          height={60}
+                          loading="lazy"
+                          decoding="async"
+                          title={cardArtAlt(c.id, c.name_en)}
+                        />
+                      </Link>
+                    </td>
                     <td data-label="">
                       <Link className="cardname" href={`/database/cards/${c.id}`}>{c.name}</Link>
                       {c.release && (
@@ -338,7 +360,7 @@ export default async function CardsPage({
                 ))}
                 {rows.length === 0 && (
                   <tr>
-                    <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
+                    <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
                       ไม่พบการ์ดที่ตรงเงื่อนไข
                     </td>
                   </tr>

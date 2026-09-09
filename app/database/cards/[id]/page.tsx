@@ -8,7 +8,6 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import RecordVisit from '@/components/RecordVisit';
-import ItemIcon from '@/components/ItemIcon';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
@@ -17,6 +16,7 @@ import { isCardCategory, itemHref } from '@/lib/item-href';
 import { parseCardSlot } from '@/lib/card-slot';
 import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
+import { cardArtAlt, cardArtUrl, hasCardArt } from '@/lib/card-art';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -131,7 +131,24 @@ export default async function CardDetailPage({ params }: { params: { id: string 
       {/* A card is read for its effect, so the effect sits in the hero rather
           than three cards down where the item template kept it. */}
       <div className="equiphero">
-        <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
+        {/* The artwork, where the item icon used to be: the icon is one of
+            eight images shared across 313 cards and identified nothing. A
+            card with no artwork of its own gets the card back, and the alt
+            text says which of the two this is. */}
+        <div>
+          <img
+            className={hasCardArt(item.id) ? 'cardart cardart--hero' : 'cardart cardart--hero cardart--none'}
+            src={cardArtUrl(item.id)}
+            alt={cardArtAlt(item.id, item.name_en)}
+            width={150}
+            height={200}
+          />
+          {/* In words as well as in the alt text: a reader looking at the grey
+              card back can otherwise only guess whether that is the card. */}
+          {!hasCardArt(item.id) && (
+            <p className="muted cardart__note">ยังไม่มีรูปการ์ดใบนี้ — ที่เห็นคือหลังการ์ดทั่วไป</p>
+          )}
+        </div>
         <div>
           <h1 className="pagehead__title">{item.name_en}</h1>
           <p className="equiphero__chips">
