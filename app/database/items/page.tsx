@@ -7,6 +7,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
+import { ROLE_ORDER, ROLE_TH, applyItemRole, isItemRole, type ItemRole } from '@/lib/item-roles';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import Pagination from '@/components/Pagination';
 import { escapeLikePattern } from '@/lib/like-escape';
@@ -35,6 +36,9 @@ const PAGE_SIZE = 50;
 // pages (/database/equipment, /database/cards), rozerodb-style. Legacy
 // category params for those redirect below instead of 404-ing old links.
 const CATEGORIES = [
+  // Ammo was missing until 10 Sep 2026, which left its 14 arrows and bullets
+  // reachable by search but on no list at all.
+  'Ammo',
   'Consumable / Recovery',
   'Enchant Stone',
   'Enchantment',
@@ -54,7 +58,7 @@ const MOVED: Record<string, string> = {
 export default async function ItemListPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; sort?: string; page?: string; use?: string };
 }) {
   const q = searchParams.q ?? '';
   // The default view is the wearable/usable catalog: costumes are a quarter
@@ -69,6 +73,10 @@ export default async function ItemListPage({
   } as const;
   const sort = (searchParams.sort ?? 'id') in SORTS ? ((searchParams.sort ?? 'id') as keyof typeof SORTS) : 'id';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  // "What is it for", the same question the card list answers with chips. Each
+  // group has a source behind it (lib/item-roles); nothing is guessed from a
+  // name.
+  const role = isItemRole(searchParams.use) ? searchParams.use : '';
 
   const db = supabaseBrowser();
   let query = db.from('items').select('id, name_en, category, weapon_type, icon_url', { count: 'exact' });
@@ -97,6 +105,24 @@ export default async function ItemListPage({
     // The default view is this section's whole scope: usable items, not gear.
     query = query.in('category', CATEGORIES);
   }
+  if (role) query = applyItemRole(query, role);
+
+  // One count per chip, head-only, so a chip never leads to an empty page and
+  // the numbers come from the same rules the filter uses.
+  const roleCounts = new Map<ItemRole, number>(
+    await Promise.all(
+      ROLE_ORDER.map(async (r) => {
+        const counted = applyItemRole(
+          db.from('items').select('id', { count: 'exact', head: true }).in('category', CATEGORIES),
+          r,
+        );
+        const { count: n, error: countError } = await counted;
+        if (countError) console.error('item role count failed', r, countError);
+        return [r, n ?? 0] as [ItemRole, number];
+      }),
+    ),
+  );
+  const grouped = ROLE_ORDER.reduce((sum, r) => sum + (roleCounts.get(r) ?? 0), 0);
 
   const from = (page - 1) * PAGE_SIZE;
   const { data: items, count, error } = await query
@@ -110,11 +136,24 @@ export default async function ItemListPage({
 
   const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
 
+  // A chip keeps the search and the category the reader already set, and drops
+  // the page number: page 4 of the old filter is not page 4 of this one.
+  function roleHref(target: ItemRole | ''): string {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (category) params.set('category', category);
+    if (sort !== 'id') params.set('sort', sort);
+    if (target) params.set('use', target);
+    const qs = params.toString();
+    return `/database/items${qs ? `?${qs}` : ''}`;
+  }
+
   function buildHref(targetPage: number) {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (category) params.set('category', category);
     if (sort !== 'id') params.set('sort', sort);
+    if (role) params.set('use', role);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
     return `/database/items${qs ? `?${qs}` : ''}`;
@@ -139,9 +178,43 @@ export default async function ItemListPage({
         filters={[
           { label: 'คำค้น', value: q },
           { label: 'หมวด', value: category },
+          { label: 'เอาไว้', value: role ? ROLE_TH[role].title : '' },
         ]}
         clearHref="/database/items"
       />
+
+      {/* Chips, not another dropdown: the list of uses is itself the thing worth
+          reading. Unlike the card page, where the group is read off the card's
+          own effect, every group here points at a source -- a recipe, the
+          game's category, or a phrase in the game's own description. Items
+          with no such source are not filed anywhere, and the line below says
+          how many that is. */}
+      <section className="rolepick">
+        <h2 className="rolepick__label">เอาไว้ทำอะไร</h2>
+        <div className="chips">
+          <Link className={`chip${role === '' ? ' chip--on' : ''}`} href={roleHref('')}>
+            ทั้งหมด
+          </Link>
+          {ROLE_ORDER.filter((r) => (roleCounts.get(r) ?? 0) > 0).map((r) => (
+            <Link
+              key={r}
+              className={`chip${role === r ? ' chip--on' : ''}`}
+              href={roleHref(r)}
+              title={ROLE_TH[r].asks}
+            >
+              {ROLE_TH[r].title} {roleCounts.get(r)}
+            </Link>
+          ))}
+        </div>
+        {role ? (
+          <p className="rolepick__asks">{ROLE_TH[role].asks}</p>
+        ) : (
+          <p className="rolepick__asks">
+            กลุ่มพวกนี้มาจากสูตรคราฟต์ หมวดในเกม และคำอธิบายในเกมเท่านั้น — ของที่ไม่มีหลักฐานว่าใช้ทำอะไรจะไม่ถูกจัดกลุ่ม
+            (ตอนนี้จัดได้ {grouped} ชิ้นจากทั้งหมด {count ?? 0} ชิ้น นับซ้ำได้ถ้าชิ้นเดียวใช้ได้หลายอย่าง)
+          </p>
+        )}
+      </section>
 
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อไอเทม..." />
@@ -160,6 +233,7 @@ export default async function ItemListPage({
             </option>
           ))}
         </select>
+        {role && <input type="hidden" name="use" value={role} />}
         <button type="submit" className="btn">ค้นหา</button>
         <Link href="/database/equipment" className="btn" style={{ textDecoration: 'none' }}>
           อุปกรณ์
