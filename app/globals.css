@@ -2511,3 +2511,43 @@ a.cashlist__row:hover { background: var(--panel-2); }
 /* The NPC hero sprite. The mirrored GIFs are ~50px tall pixel art, so they
    scale up crisply and sit on the baseline of the name beside them. */
 .npcportrait--hero { margin-inline-end: 0; height: 72px; width: auto; }
+
+/* The cash-shop row on a phone. With the basket stepper beside it the name
+   column fell to about 120px: "Account Death Penalty Buff Box" broke into five
+   lines and the "คุ้มกว่าแบบสั้น" badge landed on top of the price (user
+   screenshot, 10 Sep 2026). The row wraps instead -- name and stepper on the
+   first line, price on its own line under them -- and the badges get their own
+   line rather than sharing one with the name. */
+.cashlist__name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 6px; }
+.cashlist__name .tag { margin-left: 0 !important; }
+
+@media (max-width: 560px) {
+  .cashlist__row { flex-wrap: wrap; align-items: flex-start; gap: 8px 10px; }
+  .cashlist__body { flex: 1 1 60%; }
+  .cashlist__price {
+    flex: 1 1 100%;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-inline-start: 42px; /* clears the 32px icon and its gap */
+  }
+  /* The stepper wraps under the row rather than eating 120px of the name's
+     width -- that squeeze is what broke the name into five lines. */
+  .cashlist__rowwrap { flex-wrap: wrap; align-items: flex-start; }
+  .cashlist__rowwrap > a, .cashlist__rowwrap > .cashlist__row { flex: 1 1 100%; }
+  .cashplan__btns { margin-inline-start: auto; padding-bottom: 8px; }
+  /* The divider belongs under the whole entry, stepper included -- drawn on
+     the row it sat above the stepper and read as the next item's. */
+  .cashlist__row { border-bottom: 0; }
+  .cashlist__rowwrap { border-bottom: 1px solid var(--hair); }
+  .cashlist__rowwrap:last-child { border-bottom: 0; }
+}
+
+/* The basket bar sticks to the bottom of the viewport, where the floating
+   mobile nav already sits. Without this the two share the same 60px and the
+   bar's own numbers are the half that gets covered. */
+@media (max-width: 640px) {
+  .cashplan__bar { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); border-radius: 12px; border: 1px solid var(--yellow); }
+  .cashplan__bar-in { gap: 8px; padding-inline: 10px; font-size: 13px; }
+}
