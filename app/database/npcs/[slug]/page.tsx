@@ -8,7 +8,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
-import PageHeader from '@/components/PageHeader';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { naviCommand } from '@/lib/rozglobal-guides';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -84,13 +83,21 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
         <span className="crumbs__here">{npc.name}</span>
       </nav>
 
-      <PageHeader title={npc.name} />
-
-      {npc.sprite && (
-        // 42 of the 514 could be matched to one of the 84 sprites mirrored
-        // from rozerodb; the rest show no picture rather than someone else's.
-        <img className="npcportrait" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={56} />
-      )}
+      {/* Sprite first, then the name -- the same hero shape the gear pages
+          use, because the picture is how a player recognises who they are
+          looking for in a crowd of townsfolk. 42 of the 624 have one matched
+          to a mirrored sprite; the rest lead with the name alone rather than
+          with someone else's picture. */}
+      <div className="equiphero">
+        {npc.sprite && <img className="npcportrait npcportrait--hero" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={72} />}
+        <div>
+          <h1 className="pagehead__title">{npc.name}</h1>
+          <p className="equiphero__chips">
+            {npc.source === 'rathena' ? <span className="tag">NPC ร้านค้า</span> : <span className="tag">NPC เควส</span>}
+            {npc.mapName && <span className="tag">{npc.mapName}</span>}
+          </p>
+        </div>
+      </div>
 
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">อยู่ที่ไหน</h2>

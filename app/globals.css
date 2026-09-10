@@ -2507,3 +2507,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   vertical-align: middle;
   margin-inline-end: 8px;
 }
+
+/* The NPC hero sprite. The mirrored GIFs are ~50px tall pixel art, so they
+   scale up crisply and sit on the baseline of the name beside them. */
+.npcportrait--hero { margin-inline-end: 0; height: 72px; width: auto; }
