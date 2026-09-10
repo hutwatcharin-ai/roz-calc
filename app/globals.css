@@ -2434,4 +2434,13 @@ a.cashlist__row:hover { background: var(--panel-2); }
   .specrow dd { font-size: 15px; }
 }
 
-
+/* The three steps that turn a Qpet egg into a stat bonus (/database/pets).
+   Numbered because the order is the mechanic: buy the ring, attach the egg,
+   then risk a second egg on level 2. */
+.qpetsteps {
+  margin: 10px 0 0;
+  padding-inline-start: 22px;
+  max-width: 72ch;
+  line-height: 1.9;
+}
+.qpetsteps li + li { margin-top: 4px; }

@@ -16,6 +16,11 @@
 //
 // Eggs do not drop. The percentage on a row is the drop rate of the item you
 // tame the monster with.
+//
+// A Qpet is not a pet you keep and feed. The egg is attached to a Taming Ring
+// in the enchantment window, and "level 2" is a second copy of the same egg at
+// 50% -- see lib/qpet-ring, written after this page shipped a sentence about
+// intimacy that nothing in the source supports.
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -28,13 +33,14 @@ import { itemHref } from '@/lib/item-href';
 import { matches } from '@/lib/smart-search';
 import { supabaseBrowser } from '@/lib/supabase';
 import { naviCommand, qpetFor, rozglobalGuides } from '@/lib/rozglobal-guides';
+import { LEVEL_2_SUCCESS_PERCENT, RING_TABS, TAMING_QUEST, TAMING_RING_PRICE } from '@/lib/qpet-ring';
 
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: 'ฐานข้อมูลสัตว์เลี้ยง Ragnarok Zero — ตัวไหนให้สเตตัสอะไร จับด้วยอะไร',
   description:
-    'สัตว์เลี้ยงทุกตัวใน Ragnarok Zero Global — โบนัสสเตตัสตอนสนิทระดับ 1 และ 2 ใช้ของอะไรจับ ของนั้นดรอปจากมอนตัวไหนกี่เปอร์เซ็นต์ ค้นชื่อได้ พร้อม NPC สัตว์เลี้ยงแต่ละเมือง',
+    'สัตว์เลี้ยง (Qpet) ทุกตัวใน Ragnarok Zero Global — โบนัสสเตตัสตอนใส่ Taming Ring ระดับ 1 และ 2 ใช้ของอะไรจับ ของนั้นดรอปจากมอนตัวไหนกี่เปอร์เซ็นต์ ค้นชื่อได้ พร้อมพิกัดร้านขายแหวนทุกเมือง',
 };
 
 interface PetRow {
@@ -105,7 +111,7 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
 
       <p className="muted" style={{ marginTop: 4, marginBottom: 14, maxWidth: '72ch' }}>
         <strong>ไข่ไม่ได้ดรอปจากมอน</strong> — ตัวเลข % คืออัตราดรอปของ<em>ของที่ใช้จับ</em> ·
-        โบนัสระดับ 2 ต้องเลี้ยงให้สนิทกว่าระดับ 1
+        โบนัสมาจากการเอาไข่ใส่ <strong>Taming Ring</strong> ไม่ใช่การเลี้ยงให้สนิท
         {undocumented > 0 && ` · อีก ${undocumented} ตัวมีไข่ในเกมแต่ยังไม่มีใครลงโบนัสไว้`}
       </p>
 
@@ -120,8 +126,8 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
             <thead>
               <tr>
                 <th>สัตว์เลี้ยง</th>
-                <th>สนิทระดับ 1</th>
-                <th>สนิทระดับ 2</th>
+                <th>ใส่แหวนระดับ 1</th>
+                <th>ระดับ 2 (ไข่ซ้ำ)</th>
                 <th>ของที่ใช้จับ</th>
                 <th>ของฝึกดรอปจาก</th>
               </tr>
@@ -135,8 +141,8 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
                       <span>{pet.name}</span>
                     </Link>
                   </td>
-                  <td data-label="สนิท 1">{pet.level1 ?? <span className="muted">ยังไม่มีข้อมูล</span>}</td>
-                  <td data-label="สนิท 2">{pet.level2 ?? <span className="muted">—</span>}</td>
+                  <td data-label="ระดับ 1">{pet.level1 ?? <span className="muted">ยังไม่มีข้อมูล</span>}</td>
+                  <td data-label="ระดับ 2">{pet.level2 ?? <span className="muted">—</span>}</td>
                   <td data-label="ของที่ใช้จับ">
                     {pet.taming === null ? (
                       <span className="muted">ยังไม่มีข้อมูล</span>
@@ -183,8 +189,41 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
 
       {rows.length === 0 && q && <EmptyState kind="items" what={q} clearHref="/database/pets" />}
 
+      {/* The bonuses above are unreachable without this, and the page shipped
+          without it for a day: a Qpet is an enchantment on a ring, not a pet
+          that follows you. */}
       <section style={{ marginTop: 26 }}>
-        <h2 className="section-title">NPC สัตว์เลี้ยงอยู่เมืองไหน</h2>
+        <h2 className="section-title">โบนัสพวกนี้ได้มายังไง</h2>
+        <ol className="qpetsteps">
+          <li>
+            ซื้อ <strong>Taming Ring</strong> ราคา {TAMING_RING_PRICE.toLocaleString('en-US')} Zeny จาก Taming Merchant
+            (พิกัดข้างล่าง) แล้วสวมไว้
+          </li>
+          <li>
+            เอาไข่ไปใส่ที่<strong>หน้าต่างเอนแชนต์</strong>ของแหวน —{' '}
+            {RING_TABS.map((tab, i) => (
+              <span key={tab.name}>
+                {i > 0 && ' · '}
+                <strong>{tab.name}</strong> {tab.does}
+              </span>
+            ))}
+          </li>
+          <li>
+            ระดับ 2 ต้องใช้<strong>ไข่ตัวเดิมอีกฟอง</strong> และสำเร็จ{' '}
+            <strong>{LEVEL_2_SUCCESS_PERCENT}%</strong> — พลาดคือเสียไข่ฟองที่สอง
+          </li>
+        </ol>
+        <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
+          ไม่มีเงินซื้อของจับ: มีเควสจับสัตว์ที่ {TAMING_QUEST.town} คุยกับ {TAMING_QUEST.npc}{' '}
+          {naviCommand(TAMING_QUEST.map, TAMING_QUEST.x, TAMING_QUEST.y) && (
+            <code className="mono navicmd">{naviCommand(TAMING_QUEST.map, TAMING_QUEST.x, TAMING_QUEST.y)}</code>
+          )}{' '}
+          — {TAMING_QUEST.about}
+        </p>
+      </section>
+
+      <section style={{ marginTop: 26 }}>
+        <h2 className="section-title">ซื้อ Taming Ring ได้ที่ไหน</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
           ก๊อป <code className="mono">/navi</code> ไปวางในแชต แล้วตัวละครจะเดินไปเอง
         </p>
@@ -217,6 +256,7 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
         ไข่และของที่ใช้จับมาจาก<strong>ฐานข้อมูลไอเทมของเว็บนี้</strong> (หมวด Pet) ·
         โบนัสสเตตัสมาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) <strong>เป็นแหล่งเดียว</strong>
         เพราะคำอธิบายไข่ในเกมไม่ได้เขียนโบนัสไว้ ·
+        วิธีใช้แหวนและกติกาไข่ซ้ำ 50% มาจากไกด์เดียวกัน ·
         ส่วน<strong>อัตราดรอปของฝึกตรวจกับตารางดรอปของเราแล้ว ตรงกัน 32 จาก 33 คู่ ไม่มีคู่ไหนขัดกัน</strong>
         (อีกคู่เป็นมอนชื่อ Pirate Swordsman ที่ไม่มีในฐานข้อมูลเรา) · พิกัด NPC ไม่มีแหล่งที่สองให้ตรวจ
       </Caveat>
