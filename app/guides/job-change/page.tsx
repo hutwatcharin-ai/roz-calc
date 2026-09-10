@@ -19,7 +19,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'เปลี่ยนอาชีพ 2 Ragnarok Zero — NPC อยู่ตรงไหน พร้อมพิกัด /navi',
   description:
-    'NPC เปลี่ยนอาชีพ 2 ทั้ง 13 อาชีพใน Ragnarok Zero Global อยู่แมพไหน พิกัดเท่าไร ก๊อป /navi ไปวางในแชตเดินไปได้เลย พร้อมเงื่อนไขเลเวลที่ต้องถึงก่อน',
+    'NPC เปลี่ยนอาชีพ 2 ทั้ง 13 อาชีพใน Ragnarok Zero Global อยู่แมพไหน พิกัดเท่าไร ก๊อป /navi ไปวางในแชตแล้วเดินตามเส้นนำทาง พร้อมเงื่อนไขเลเวลที่ต้องถึงก่อน',
 };
 
 export default function JobChangePage() {
@@ -43,7 +43,7 @@ export default function JobChangePage() {
         {sameForAll && requirement
           ? 'ทุกอาชีพใช้เงื่อนไขเดียวกัน: เป็นอาชีพ 1 และถึงเลเวลฐาน 50 กับเลเวลจ๊อบ 50 · '
           : ''}
-        ก๊อปคำสั่ง <code className="mono">/navi</code> ไปวางในช่องแชตในเกม ตัวละครจะเดินไปเอง
+        ก๊อปคำสั่ง <code className="mono">/navi</code> ไปวางในช่องแชต เกมจะขึ้นเส้นนำทางให้เดินตาม
       </p>
 
       <div className="card">

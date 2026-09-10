@@ -106,7 +106,9 @@ export function qpetFor(petName: string): Qpet | null {
   );
 }
 
-/** The in-game command a player pastes into chat to walk there. */
+/** The in-game command a player pastes into chat. It draws a route line to
+ *  the spot -- the character does not walk there on its own (site owner,
+ *  10 Sep 2026, correcting copy that said it did). */
 export function naviCommand(map: string | null, x: number | null, y: number | null): string | null {
   if (!map || x === null || y === null) return null;
   return `/navi ${map} ${x}/${y}`;

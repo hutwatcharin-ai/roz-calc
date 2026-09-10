@@ -44,7 +44,7 @@ export default function CostumeCraftPage() {
       <PageHeader title="คราฟต์หมวกแฟชั่น — เอาของไปให้ NPC ทำ" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
         หมวกพวกนี้<strong>ไม่มีมอนตัวไหนดรอป</strong> ต้องเก็บของไปให้ NPC ทำให้ · ก๊อป{' '}
-        <code className="mono">/navi</code> ไปวางในแชตแล้วเดินไปได้เลย ·
+        <code className="mono">/navi</code> ไปวางในแชตแล้วเดินตามเส้นนำทาง ·
         อยากได้หมวกที่ดรอปจากมอนดู <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
       </p>
 
