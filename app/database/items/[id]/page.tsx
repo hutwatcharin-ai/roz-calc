@@ -1,5 +1,6 @@
 import { isCVariant } from '@/lib/c-variant';
 import ItemCrafting from '@/components/ItemCrafting';
+import ItemShops from '@/components/ItemShops';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import JsonLd from '@/components/JsonLd';
@@ -286,6 +287,8 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       )}
       {/* Before the drop list: a craftable item is usually made, not farmed,
           and the recipe is the shorter answer. */}
+      <ItemShops itemId={item.id} />
+
       <ItemCrafting itemId={item.id} />
 
       <div className="card" style={{ marginTop: 20 }}>

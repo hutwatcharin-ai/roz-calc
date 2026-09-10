@@ -31,6 +31,7 @@ import fs from 'node:fs';
 
 const COOLIFY_HOST = 'http://207.148.123.125:8000';
 const APP_UUID = 'x130k1pxl928ne421jk9i5ic';
+const APP_NAME = 'roz-calc';
 const ORIGIN_IP = '207.148.123.125';
 const SITE = 'rozerothai.com';
 const POLL_SECONDS = 20;
@@ -104,6 +105,42 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function buildIdAt(path) {
   const match = /buildId\\?"\s*:\s*\\?"([A-Za-z0-9_-]+)/.exec(fetchOrigin(path));
   return match ? match[1] : null;
+}
+
+/**
+ * The deployment Coolify is running for this app, from its own records.
+ *
+ * Without this the script only knew "the build id on the page changed", and a
+ * build someone else's push had already started satisfies that. On 10 Sep 2026
+ * two deploys overlapped: the second reported success off the first one's
+ * build, and only the --expect check caught that the change was not there.
+ * The commit in this record is the thing to wait for.
+ */
+async function coolify(path, token) {
+  try {
+    const response = await fetch(`${COOLIFY_HOST}${path}`, { headers: { Authorization: `Bearer ${token}` } });
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * The deployment record, by its own uuid when the trigger gave us one and by
+ * the running list otherwise. The list only carries deployments that have not
+ * finished, so a finished build disappears from it -- which is why the uuid
+ * path is the one to use whenever it exists.
+ */
+async function deploymentState(token, uuid) {
+  if (uuid) {
+    const row = await coolify(`/api/v1/deployments/${uuid}`, token);
+    if (row && row.status) return { status: row.status, commit: row.commit, uuid };
+  }
+  const rows = await coolify('/api/v1/deployments', token);
+  const mine = (Array.isArray(rows) ? rows : []).filter((row) => row.application_name === APP_NAME);
+  const row = mine[0];
+  return row ? { status: row.status, commit: row.commit, uuid: row.deployment_uuid } : null;
 }
 
 /**
@@ -193,9 +230,49 @@ async function main() {
     console.error(`deploy trigger failed: HTTP ${trigger.status}`);
     process.exit(1);
   }
-  console.log(`triggered ${shortSha} "${subject}"`);
+  // Coolify answers with the deployment it queued. Holding on to that uuid is
+  // what makes the wait below about THIS build rather than about whatever
+  // build happens to finish next.
+  let deploymentUuid = null;
+  try {
+    const body = await trigger.json();
+    deploymentUuid = body?.deployments?.[0]?.deployment_uuid ?? null;
+  } catch {
+    deploymentUuid = null;
+  }
+  console.log(`triggered ${shortSha} "${subject}"${deploymentUuid ? ` (${deploymentUuid})` : ''}`);
 
-  // 3. Wait for a NEW build to be serving, not for Coolify's opinion of it
+  // 3a. Wait for Coolify to finish building THIS commit. A build id that
+  // merely differs is not proof: another push's build finishing looks exactly
+  // the same from outside.
+  {
+    const deadline = Date.now() + MAX_WAIT_MINUTES * 60_000;
+    let seen = null;
+    while (Date.now() < deadline) {
+      const row = await deploymentState(coolifyToken, deploymentUuid);
+      // A record for a different commit is someone else's build: keep waiting
+      // rather than counting it.
+      if (row && (!row.commit || row.commit === local)) {
+        seen = row.status;
+        if (row.status === 'finished') break;
+        if (row.status === 'failed' || row.status === 'cancelled') {
+          console.log(`\nCoolify reports the build ${row.status} for ${shortSha}`);
+          console.log('the CDN was NOT purged.');
+          process.exit(1);
+        }
+      }
+      process.stdout.write(seen === null ? '?' : '.');
+      await sleep(POLL_SECONDS * 1000);
+    }
+    if (seen !== 'finished') {
+      console.log(`\nCoolify never reported a finished build for ${shortSha} (last status: ${seen ?? 'no record'})`);
+      console.log('the CDN was NOT purged.');
+      process.exit(1);
+    }
+    console.log(`\nCoolify built ${shortSha}`);
+  }
+
+  // 3b. Wait for a NEW build to be serving, not for Coolify's opinion of it
   // and not for a string that may predate it. Two separate questions, asked
   // in order: did a new build ship, and does it contain the change.
   let verified = null;

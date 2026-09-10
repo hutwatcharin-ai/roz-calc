@@ -78,12 +78,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="th" className={`${sarabun.variable} ${chakra.variable} ${plexMono.variable}`}>
       {/* Synchronous, ahead of hydration: the gtag stub must exist before the
-          first page_view effect runs, or that view is dropped. */}
-      {GA_ID && (
-        <head>
-          <script dangerouslySetInnerHTML={{ __html: gaBootstrap(GA_ID) }} />
-        </head>
-      )}
+          first page_view effect runs, or that view is dropped.
+          The commit marker rides along in the same head: Coolify sets
+          SOURCE_COMMIT when it builds, so every page states which commit
+          produced it. scripts/deploy.mjs waits for that to equal the commit it
+          pushed -- on 10 Sep 2026 it mistook another build finishing for its
+          own and reported a deploy that had not happened. */}
+      <head>
+        <meta name="x-commit" content={process.env.SOURCE_COMMIT ?? 'dev'} />
+        {GA_ID && <script dangerouslySetInnerHTML={{ __html: gaBootstrap(GA_ID) }} />}
+      </head>
 
       <body>
         {/* The character context wraps the whole app: the aggro badge grades

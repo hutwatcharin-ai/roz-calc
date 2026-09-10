@@ -1,0 +1,2301 @@
+{
+  "_meta": {
+    "built": "2026-09-10",
+    "source": "https://raw.githubusercontent.com/rathena/rathena/master/npc/re/merchants/shops.txt",
+    "how": "node scripts/build-npc-shops.mjs",
+    "caveat": "rAthena's classic-RO shop layout. No Zero source we hold lists shop NPCs, so the NPC and its coordinates are unverified for this server; the goods are filtered to items that exist in our own table.",
+    "shopsInSource": 73,
+    "itemsListed": 81,
+    "rowsKept": 299,
+    "rowsDroppedUnknownItem": 306,
+    "maps": [
+      "alberta",
+      "alberta_in",
+      "alde_alche",
+      "aldeba_in",
+      "comodo",
+      "dewata",
+      "dic_in01",
+      "einbroch",
+      "geffen",
+      "geffen_in",
+      "izlude",
+      "izlude_in",
+      "lhz_in02",
+      "lhz_in03",
+      "lighthalzen",
+      "ma_in01",
+      "malangdo",
+      "malaya",
+      "mid_camp",
+      "moc_ruins",
+      "mora",
+      "morocc",
+      "payon",
+      "payon_in01",
+      "payon_in02",
+      "prontera",
+      "prt_in",
+      "que_ng",
+      "ra_in01",
+      "s_atelier"
+    ]
+  },
+  "items": {
+    "501": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "502": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "503": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "504": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "506": [
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      }
+    ],
+    "512": [
+      {
+        "npc": "Fruit Gardener",
+        "map": "dewata",
+        "x": 145,
+        "y": 267,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "izlude",
+        "x": 124,
+        "y": 165,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "malaya",
+        "x": 150,
+        "y": 261,
+        "price": null
+      }
+    ],
+    "513": [
+      {
+        "npc": "Fruit Gardener",
+        "map": "dewata",
+        "x": 145,
+        "y": 267,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "izlude",
+        "x": 124,
+        "y": 165,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 140,
+        "y": 90,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 140,
+        "y": 90,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 140,
+        "y": 90,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 140,
+        "y": 90,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 140,
+        "y": 90,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 140,
+        "y": 90,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "malaya",
+        "x": 150,
+        "y": 261,
+        "price": null
+      }
+    ],
+    "515": [
+      {
+        "npc": "Fruit Gardener",
+        "map": "dewata",
+        "x": 145,
+        "y": 267,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "izlude",
+        "x": 124,
+        "y": 165,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "malaya",
+        "x": 150,
+        "y": 261,
+        "price": null
+      }
+    ],
+    "516": [
+      {
+        "npc": "Fruit Gardener",
+        "map": "dewata",
+        "x": 145,
+        "y": 267,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "izlude",
+        "x": 124,
+        "y": 165,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "malaya",
+        "x": 150,
+        "y": 261,
+        "price": null
+      }
+    ],
+    "517": [
+      {
+        "npc": "Butcher",
+        "map": "izlude",
+        "x": 160,
+        "y": 186,
+        "price": null
+      },
+      {
+        "npc": "Butcher",
+        "map": "morocc",
+        "x": 156,
+        "y": 76,
+        "price": null
+      }
+    ],
+    "519": [
+      {
+        "npc": "Vendor from Milk Ranch",
+        "map": "izlude",
+        "x": 128,
+        "y": 158,
+        "price": null
+      }
+    ],
+    "528": [
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 171,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 205,
+        "y": 247,
+        "price": null
+      }
+    ],
+    "535": [
+      {
+        "npc": "Fruit Gardener",
+        "map": "dewata",
+        "x": 145,
+        "y": 267,
+        "price": null
+      },
+      {
+        "npc": "Fruit Gardener",
+        "map": "malaya",
+        "x": 150,
+        "y": 261,
+        "price": null
+      }
+    ],
+    "577": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "579": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "580": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "581": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "601": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Peddler",
+        "map": "dic_in01",
+        "x": 238,
+        "y": 107,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "mora",
+        "x": 100,
+        "y": 118,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "602": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Peddler",
+        "map": "dic_in01",
+        "x": 238,
+        "y": 107,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "mora",
+        "x": 100,
+        "y": 118,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "610": [
+      {
+        "npc": "Peddler",
+        "map": "dic_in01",
+        "x": 238,
+        "y": 107,
+        "price": null
+      }
+    ],
+    "611": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Peddler",
+        "map": "dic_in01",
+        "x": 238,
+        "y": 107,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "mora",
+        "x": 100,
+        "y": 118,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "645": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "656": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "713": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      }
+    ],
+    "719": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "720": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "721": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "722": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "723": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "726": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "728": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "729": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "730": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "748": [
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 34,
+        "y": 68,
+        "price": null
+      }
+    ],
+    "911": [
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 171,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 205,
+        "y": 247,
+        "price": null
+      }
+    ],
+    "919": [
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 171,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 205,
+        "y": 247,
+        "price": null
+      }
+    ],
+    "925": [
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 171,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "morocc",
+        "x": 205,
+        "y": 247,
+        "price": null
+      }
+    ],
+    "1065": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "1107": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1116": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1122": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1154": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1207": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1216": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1354": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1407": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1457": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1516": [
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 269,
+        "y": 193,
+        "price": null
+      }
+    ],
+    "1519": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "dewata",
+        "x": 218,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ma_in01",
+        "x": 73,
+        "y": 22,
+        "price": null
+      }
+    ],
+    "1522": [
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 269,
+        "y": 193,
+        "price": null
+      }
+    ],
+    "1750": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "izlude_in",
+        "x": 57,
+        "y": 110,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer Myo",
+        "map": "malangdo",
+        "x": 232,
+        "y": 163,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "2201": [
+      {
+        "npc": "Toy Dealer",
+        "map": "prt_in",
+        "x": 117,
+        "y": 79,
+        "price": null
+      }
+    ],
+    "2211": [
+      {
+        "npc": "Armor Dealer",
+        "map": "dewata",
+        "x": 158,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "ma_in01",
+        "x": 67,
+        "y": 13,
+        "price": null
+      }
+    ],
+    "2212": [
+      {
+        "npc": "Toy Dealer",
+        "map": "prt_in",
+        "x": 117,
+        "y": 79,
+        "price": null
+      }
+    ],
+    "2239": [
+      {
+        "npc": "Tool Dealer",
+        "map": "dewata",
+        "x": 182,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ma_in01",
+        "x": 22,
+        "y": 23,
+        "price": null
+      },
+      {
+        "npc": "Toy Dealer",
+        "map": "prt_in",
+        "x": 117,
+        "y": 79,
+        "price": null
+      }
+    ],
+    "2241": [
+      {
+        "npc": "Toy Dealer",
+        "map": "prt_in",
+        "x": 117,
+        "y": 79,
+        "price": null
+      }
+    ],
+    "2242": [
+      {
+        "npc": "Toy Dealer",
+        "map": "prt_in",
+        "x": 117,
+        "y": 79,
+        "price": null
+      }
+    ],
+    "2243": [
+      {
+        "npc": "Toy Dealer",
+        "map": "prt_in",
+        "x": 117,
+        "y": 79,
+        "price": null
+      }
+    ],
+    "2609": [
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 269,
+        "y": 193,
+        "price": null
+      }
+    ],
+    "2612": [
+      {
+        "npc": "Trader",
+        "map": "morocc",
+        "x": 256,
+        "y": 191,
+        "price": null
+      }
+    ],
+    "2613": [
+      {
+        "npc": "Jeweler",
+        "map": "lhz_in02",
+        "x": 105,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 154,
+        "y": 55,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "morocc",
+        "x": 166,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 110,
+        "y": 105,
+        "price": null
+      },
+      {
+        "npc": "Jeweler",
+        "map": "moc_ruins",
+        "x": 52,
+        "y": 85,
+        "price": null
+      }
+    ],
+    "2627": [
+      {
+        "npc": "Armor Dealer",
+        "map": "dewata",
+        "x": 158,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "ma_in01",
+        "x": 67,
+        "y": 13,
+        "price": null
+      }
+    ],
+    "7140": [
+      {
+        "npc": "Material Seller",
+        "map": "alde_alche",
+        "x": 38,
+        "y": 184,
+        "price": null
+      }
+    ],
+    "7141": [
+      {
+        "npc": "Material Seller",
+        "map": "alde_alche",
+        "x": 38,
+        "y": 184,
+        "price": null
+      }
+    ],
+    "7143": [
+      {
+        "npc": "Material Seller",
+        "map": "alde_alche",
+        "x": 38,
+        "y": 184,
+        "price": null
+      }
+    ],
+    "7452": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "7453": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "7454": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "7455": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "7456": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "7457": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "7472": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      }
+    ],
+    "7473": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      }
+    ],
+    "7474": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      }
+    ],
+    "7475": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      }
+    ],
+    "7476": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      }
+    ],
+    "7482": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "12125": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "12126": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "12127": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ],
+    "12849": [
+      {
+        "npc": "Chef Assistant",
+        "map": "prontera",
+        "x": 156,
+        "y": 212,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "moc_ruins",
+        "x": 115,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "geffen",
+        "x": 196,
+        "y": 111,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "alberta",
+        "x": 167,
+        "y": 135,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "payon",
+        "x": 206,
+        "y": 119,
+        "price": null
+      }
+    ]
+  }
+}

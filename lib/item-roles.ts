@@ -47,7 +47,7 @@ export const ROLE_TH: Record<ItemRole, { title: string; asks: string }> = {
   travel: { title: 'เดินทาง/วาร์ป', asks: 'คำอธิบายในเกมบอกว่าย้ายตัวละคร' },
   enchant: { title: 'เอนแชนต์', asks: 'ของสำหรับใส่เอนแชนต์ให้อุปกรณ์' },
   pet: { title: 'สัตว์เลี้ยง', asks: 'ไข่ ของที่ใช้จับ และของเลี้ยง' },
-  ammo: { title: 'กระสุน', asks: 'ลูกศรและกระสุนสำหรับอาวุธยิง' },
+  ammo: { title: 'ลูกธนู', asks: 'ลูกธนูและกระสุนสำหรับอาวุธยิง' },
 };
 
 /** Chip order: what a player is most likely to be hunting for, first. */
