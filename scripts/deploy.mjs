@@ -177,6 +177,10 @@ async function main() {
   loadEnv();
   const path = sitePath(arg('path'));
   const expect = arg('expect');
+  // The mirror of --expect, for a deploy whose whole point is that a string is
+  // gone. A removal has no new text to look for, and three deploys on 10 Sep
+  // 2026 were refused for want of one.
+  const absent = arg('absent');
   const status = arg('status');
   const started = Date.now();
 
@@ -215,6 +219,15 @@ async function main() {
     console.error(
       `--expect "${expect}" is already on ${path} before this deploy.\n` +
         'It cannot tell the new build from the old one. Pick a string that only the new build has.',
+    );
+    process.exit(1);
+  }
+  // The same rule the other way round: a string that has already gone cannot
+  // show that this build is the one that removed it.
+  if (path && absent && !pageText(path).includes(absent)) {
+    console.error(
+      `--absent "${absent}" is already missing from ${path} before this deploy.\n` +
+        'It cannot tell the new build from the old one. Pick a string the current build still has.',
     );
     process.exit(1);
   }
@@ -293,6 +306,11 @@ async function main() {
     if (!shipped) {
       verified = false;
       console.log(`\ngave up waiting: the origin is still serving build ${buildIdBefore}`);
+    } else if (absent && pageText(path).includes(absent)) {
+      verified = false;
+      console.log(`\na new build is live but ${path} still contains "${absent}"`);
+      console.log('the CDN was NOT purged. check the marker first -- is it really gone from this build?');
+      console.log('then run: npm run purge');
     } else if (expect && !pageText(path).includes(expect)) {
       verified = false;
       console.log(`\na new build is live but ${path} does not contain "${expect}"`);
