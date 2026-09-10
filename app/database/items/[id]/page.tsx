@@ -282,6 +282,9 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         // The dictionary first: it is built against this game's own text. Only
         // when it can translate nothing does the client file get a turn, and
         // the page then says where that Thai came from.
+        // Where the Thai came from stays in the data file's _meta and in
+        // scripts/build-item-descriptions-th.mjs; the reader gets the sentence,
+        // not the provenance (site owner, 10 Sep 2026).
         const composed = composeThaiDescription(item.description, dict);
         const fromDictionary = composed.some((l) => l.thai !== null);
         const fromClient = fromDictionary ? null : clientThaiDescription(item.id);
@@ -292,12 +295,6 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
               thaiLines={fromClient ?? composed.map((l) => l.thai ?? l.source)}
               englishLines={item.description.split('\n').map((l: string) => l.replace(/\^[0-9a-fA-F]{6}/g, '').trim()).filter((l: string) => l !== '')}
             />
-            {fromClient && (
-              <p className="muted" style={{ marginTop: 8, fontSize: 12.5 }}>
-                คำอธิบายไทยชุดนี้มาจากตารางไอเทมของไคลเอนต์ RO ภาษาไทย ไม่ใช่ไคลเอนต์ Zero ·
-                ลงเฉพาะรายการที่ตัวเลขในข้อความไทยตรงกับข้อความอังกฤษของเราทุกตัว
-              </p>
-            )}
           </div>
         );
       })()}
