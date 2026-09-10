@@ -34,6 +34,7 @@ import path from 'node:path';
 const CRAWL = path.join(process.cwd(), 'docs', 'prontera-export', 'data', 'npcs.jsonl');
 const SHOPS = path.join(process.cwd(), 'data', 'npc-shops.json');
 const SPRITES = path.join(process.cwd(), 'data', 'npc-sprites.json');
+const TOWNINFO = path.join(process.cwd(), 'docs', 'client-tables', 'Towninfo.lub');
 const QUEST_SPRITES = path.join(process.cwd(), 'data', 'npc-quests.json');
 const SPRITE_DIR = path.join(process.cwd(), 'public', 'images', 'npcs');
 const DEST = path.join(process.cwd(), 'data', 'npcs.json');
@@ -194,6 +195,58 @@ function main() {
     shopNpcs += 1;
   }
 
+  // The town directory the client itself draws on its town map: Kafra, guides,
+  // inns and the dealers, with coordinates. It is the only source we hold that
+  // knows where a Kafra stands -- rAthena's shop scripts do not list them, and
+  // the Zero crawl is quest NPCs only. Same caveat as the shopkeepers: it is a
+  // non-Zero client, so only towns this game has are kept, and a spot we
+  // already publish a shopkeeper for is left alone.
+  const TOWN_ROLES = {
+    0: 'Tool Dealer',
+    1: 'Weapon Dealer',
+    2: 'Armor Dealer',
+    3: 'Blacksmith',
+    4: 'Guide',
+    5: 'Inn',
+    6: 'Kafra Employee',
+  };
+  let townNpcs = 0;
+  if (fs.existsSync(TOWNINFO)) {
+    const townText = fs.readFileSync(TOWNINFO, 'utf8');
+    const known = new Set(npcs.map((npc) => npc.map).filter(Boolean));
+    const taken = new Set(npcs.filter((npc) => npc.source === 'rathena').map((npc) => `${npc.map}|${npc.x}|${npc.y}`));
+    for (const block of townText.matchAll(/(\w+)\s*=\s*\{([\s\S]*?)\n\t\},/g)) {
+      const map = block[1];
+      if (!known.has(map)) continue;
+      for (const row of block[2].matchAll(/name\s*=\s*\[=\[(.*?)\]=\]\s*,\s*X\s*=\s*(\d+)\s*,\s*Y\s*=\s*(\d+)\s*,\s*TYPE\s*=\s*(\d+)/g)) {
+        const [, name, x, y, type] = row;
+        const role = TOWN_ROLES[Number(type)];
+        // An unknown type code is a role this file has and we cannot name; it
+        // is skipped rather than published as a number.
+        if (!role) continue;
+        const place = `${map}|${x}|${y}`;
+        if (taken.has(place)) continue;
+        taken.add(place);
+        npcs.push({
+          slug: `town-${`${name} ${map} ${x} ${y}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+          name,
+          hasName: true,
+          types: ['town', role],
+          source: 'client',
+          map,
+          mapName: mapNames[map] ?? null,
+          x: Number(x),
+          y: Number(y),
+          quests: [],
+          sells: [],
+          sprite: null,
+          description: null,
+        });
+        townNpcs += 1;
+      }
+    }
+  }
+
   npcs.sort((a, b) => Number(b.hasName) - Number(a.hasName) || a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug));
 
   // A coordinate that failed to resolve is the failure this parser exists to
@@ -223,6 +276,7 @@ function main() {
           maps: Object.keys(mapNames).length,
           withSprite: sprites,
           shopNpcs,
+          townNpcs,
           shopSource: shopFile._meta?.sources ?? null,
         },
         mapNames,
@@ -234,7 +288,7 @@ function main() {
   );
   console.log(`${npcs.length} NPCs, ${npcs.filter((n) => n.hasName).length} with a real name, ${withQuests.length} give quests`);
   console.log(`${placed.length} have a map and coordinates, ${Object.keys(mapNames).length} map codes named`);
-  console.log(`${sprites} have a sprite, ${shopNpcs} are shopkeepers from rAthena`);
+  console.log(`${sprites} have a sprite, ${shopNpcs} are shopkeepers from rAthena, ${townNpcs} come from the client's town directory`);
   if (skipped > 0) console.log(`${skipped} pages carried no NPC record`);
 }
 

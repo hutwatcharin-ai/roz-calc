@@ -5,15 +5,16 @@
     "crawled": "2026-09-03",
     "how": "node scripts/build-npcs.mjs",
     "note": "Zero's own NPC list, from the 3 Sep 2026 crawl. Names the source derived from a sprite id are marked hasName: false.",
-    "npcs": 624,
-    "named": 525,
+    "npcs": 718,
+    "named": 619,
     "withQuests": 241,
     "questLinks": 402,
-    "placed": 618,
+    "placed": 712,
     "pagesWithoutARecord": 0,
     "maps": 112,
     "withSprite": 152,
     "shopNpcs": 110,
+    "townNpcs": 94,
     "shopSource": [
       "https://raw.githubusercontent.com/rathena/rathena/master/npc/merchants/shops.txt",
       "https://raw.githubusercontent.com/rathena/rathena/master/npc/re/merchants/shops.txt",
@@ -3705,6 +3706,690 @@
       "description": null
     },
     {
+      "slug": "town-guide-alberta-120-60",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 120,
+      "y": 60,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-alberta-184-143",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 184,
+      "y": 143,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-alberta-23-238",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 23,
+      "y": 238,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-aldebaran-135-243",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 135,
+      "y": 243,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-aldebaran-139-63",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 139,
+      "y": 63,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-aldebaran-243-143",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 243,
+      "y": 143,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-aldebaran-36-135",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 36,
+      "y": 135,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-amatsu-202-91",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "amatsu",
+      "mapName": null,
+      "x": 202,
+      "y": 91,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-ayothaya-146-86",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "ayothaya",
+      "mapName": null,
+      "x": 146,
+      "y": 86,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-ayothaya-203-169",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "ayothaya",
+      "mapName": null,
+      "x": 203,
+      "y": 169,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-comodo-181-347",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 181,
+      "y": 347,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-comodo-197-149",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 197,
+      "y": 149,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-comodo-322-178",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 322,
+      "y": 178,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-comodo-37-219",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 37,
+      "y": 219,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-geffen-118-62",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 118,
+      "y": 62,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-geffen-123-203",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 123,
+      "y": 203,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-geffen-203-116",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 203,
+      "y": 116,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-geffen-36-123",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 36,
+      "y": 123,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-gonryun-163-60",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "gonryun",
+      "mapName": null,
+      "x": 163,
+      "y": 60,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-izlude-120-206",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "izlude",
+      "mapName": null,
+      "x": 120,
+      "y": 206,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-izlude-129-175",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "izlude",
+      "mapName": null,
+      "x": 129,
+      "y": 175,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-izlude-133-113",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "izlude",
+      "mapName": null,
+      "x": 133,
+      "y": 113,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-louyang-224-104",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "louyang",
+      "mapName": null,
+      "x": 224,
+      "y": 104,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-moc-ruins-159-53",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "moc_ruins",
+      "mapName": "Morroc Ruins",
+      "x": 159,
+      "y": 53,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-moc-ruins-65-44",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "moc_ruins",
+      "mapName": "Morroc Ruins",
+      "x": 65,
+      "y": 44,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-moc-ruins-70-164",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "moc_ruins",
+      "mapName": "Morroc Ruins",
+      "x": 70,
+      "y": 164,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-morocc-153-286",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 153,
+      "y": 286,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-morocc-154-38",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 154,
+      "y": 38,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-morocc-28-170",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 28,
+      "y": 170,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-morocc-296-213",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 296,
+      "y": 213,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-niflheim-201-187",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "niflheim",
+      "mapName": null,
+      "x": 201,
+      "y": 187,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-payon-151-182",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 151,
+      "y": 182,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-payon-160-67",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 160,
+      "y": 67,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-payon-221-85",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 221,
+      "y": 85,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-payon-233-324",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 233,
+      "y": 324,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-umbala-128-94",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "umbala",
+      "mapName": "Utan Tribe's Village, Umbala",
+      "x": 128,
+      "y": 94,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-umbala-99-158",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "umbala",
+      "mapName": "Utan Tribe's Village, Umbala",
+      "x": 99,
+      "y": 158,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-guide-xmas-140-137",
+      "name": "Guide",
+      "hasName": true,
+      "types": [
+        "town",
+        "Guide"
+      ],
+      "source": "client",
+      "map": "xmas",
+      "mapName": "Lutie, the Snow Village",
+      "x": 140,
+      "y": 137,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
       "slug": "guildsman-of-the-assassin-guild",
       "name": "Guildsman of the Assassin Guild",
       "hasName": true,
@@ -4154,6 +4839,96 @@
       "description": null
     },
     {
+      "slug": "town-inn-alberta-65-233",
+      "name": "Inn",
+      "hasName": true,
+      "types": [
+        "town",
+        "Inn"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 65,
+      "y": 233,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-inn-geffen-172-174",
+      "name": "Inn",
+      "hasName": true,
+      "types": [
+        "town",
+        "Inn"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 172,
+      "y": 174,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-inn-morocc-197-66",
+      "name": "Inn",
+      "hasName": true,
+      "types": [
+        "town",
+        "Inn"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 197,
+      "y": 66,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-inn-morocc-273-269",
+      "name": "Inn",
+      "hasName": true,
+      "types": [
+        "town",
+        "Inn"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 273,
+      "y": 269,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-inn-payon-220-117",
+      "name": "Inn",
+      "hasName": true,
+      "types": [
+        "town",
+        "Inn"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 220,
+      "y": 117,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
       "slug": "investigator",
       "name": "Investigator",
       "hasName": true,
@@ -4584,6 +5359,402 @@
       "sells": [],
       "sprite": null,
       "source": "prontera",
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-alb2trea-59-69",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "alb2trea",
+      "mapName": "Island Near the Shipwreck",
+      "x": 59,
+      "y": 69,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-alberta-113-60",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 113,
+      "y": 60,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-alberta-28-229",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 28,
+      "y": 229,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-aldebaran-143-119",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 143,
+      "y": 119,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-amatsu-102-149",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "amatsu",
+      "mapName": null,
+      "x": 102,
+      "y": 149,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-ayothaya-212-169",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "ayothaya",
+      "mapName": null,
+      "x": 212,
+      "y": 169,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-comodo-195-150",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 195,
+      "y": 150,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-geffen-120-62",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 120,
+      "y": 62,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-geffen-203-123",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 203,
+      "y": 123,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-gonryun-159-122",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "gonryun",
+      "mapName": null,
+      "x": 159,
+      "y": 122,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-izlu2dun-106-58",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "izlu2dun",
+      "mapName": "Byalan Island",
+      "x": 106,
+      "y": 58,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-izlude-128-148",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "izlude",
+      "mapName": null,
+      "x": 128,
+      "y": 148,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-louyang-210-104",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "louyang",
+      "mapName": null,
+      "x": 210,
+      "y": 104,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-moc-ruins-59-157",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "moc_ruins",
+      "mapName": "Morroc Ruins",
+      "x": 59,
+      "y": 157,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-morocc-156-97",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 156,
+      "y": 97,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-morocc-160-258",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 160,
+      "y": 258,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-niflheim-202-180",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "niflheim",
+      "mapName": null,
+      "x": 202,
+      "y": 180,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-payon-175-226",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 175,
+      "y": 226,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-payon-181-104",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 181,
+      "y": 104,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-prt-fild05-290-224",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "prt_fild05",
+      "mapName": "Prontera Field 05",
+      "x": 290,
+      "y": 224,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-umbala-87-160",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "umbala",
+      "mapName": "Utan Tribe's Village, Umbala",
+      "x": 87,
+      "y": 160,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-kafra-employee-xmas-148-134",
+      "name": "Kafra Employee",
+      "hasName": true,
+      "types": [
+        "town",
+        "Kafra Employee"
+      ],
+      "source": "client",
+      "map": "xmas",
+      "mapName": "Lutie, the Snow Village",
+      "x": 148,
+      "y": 134,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
       "description": null
     },
     {
@@ -9177,6 +10348,96 @@
       "description": null
     },
     {
+      "slug": "town-smith-alberta-35-41",
+      "name": "Smith",
+      "hasName": true,
+      "types": [
+        "town",
+        "Blacksmith"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 35,
+      "y": 41,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-smith-geffen-182-59",
+      "name": "Smith",
+      "hasName": true,
+      "types": [
+        "town",
+        "Blacksmith"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 182,
+      "y": 59,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-smith-izlude-162-125",
+      "name": "Smith",
+      "hasName": true,
+      "types": [
+        "town",
+        "Blacksmith"
+      ],
+      "source": "client",
+      "map": "izlude",
+      "mapName": null,
+      "x": 162,
+      "y": 125,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-smith-morocc-47-47",
+      "name": "Smith",
+      "hasName": true,
+      "types": [
+        "town",
+        "Blacksmith"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 47,
+      "y": 47,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-smith-payon-144-173",
+      "name": "Smith",
+      "hasName": true,
+      "types": [
+        "town",
+        "Blacksmith"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 144,
+      "y": 173,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
       "slug": "southeastern-trap",
       "name": "Southeastern Trap",
       "hasName": true,
@@ -10926,6 +12187,222 @@
       "description": null
     },
     {
+      "slug": "town-tool-dealer-alberta-98-154",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 98,
+      "y": 154,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-aldebaran-197-70",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 197,
+      "y": 70,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-amatsu-96-118",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "amatsu",
+      "mapName": null,
+      "x": 96,
+      "y": 118,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-ayothaya-131-86",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "ayothaya",
+      "mapName": null,
+      "x": 131,
+      "y": 86,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-comodo-92-128",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 92,
+      "y": 128,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-geffen-44-86",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 44,
+      "y": 86,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-izlude-112-179",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "izlude",
+      "mapName": null,
+      "x": 112,
+      "y": 179,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-louyang-135-98",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "louyang",
+      "mapName": null,
+      "x": 135,
+      "y": 98,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-niflheim-217-196",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "niflheim",
+      "mapName": null,
+      "x": 217,
+      "y": 196,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-payon-144-85",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 144,
+      "y": 85,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-umbala-136-127",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "umbala",
+      "mapName": "Utan Tribe's Village, Umbala",
+      "x": 136,
+      "y": 127,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-tool-dealer-xmas-122-131",
+      "name": "Tool Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Tool Dealer"
+      ],
+      "source": "client",
+      "map": "xmas",
+      "mapName": "Lutie, the Snow Village",
+      "x": 122,
+      "y": 131,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
       "slug": "shop-toy-dealer-prt-in-117-79",
       "name": "Toy Dealer",
       "hasName": true,
@@ -11708,6 +13185,222 @@
         1222
       ],
       "sprite": "1_m_03.png",
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-alberta-117-37",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "alberta",
+      "mapName": "Alberta, the Port City",
+      "x": 117,
+      "y": 37,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-aldebaran-72-197",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "aldebaran",
+      "mapName": null,
+      "x": 72,
+      "y": 197,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-amatsu-129-117",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "amatsu",
+      "mapName": null,
+      "x": 129,
+      "y": 117,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-ayothaya-165-90",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "ayothaya",
+      "mapName": null,
+      "x": 165,
+      "y": 90,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-comodo-266-74",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "comodo",
+      "mapName": "Comodo, the Beach Town",
+      "x": 266,
+      "y": 74,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-geffen-99-140",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "geffen",
+      "mapName": "Geffen, the City of Magic",
+      "x": 99,
+      "y": 140,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-louyang-145-172",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "louyang",
+      "mapName": null,
+      "x": 145,
+      "y": 172,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-morocc-253-56",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "morocc",
+      "mapName": "Morroc, the Desert City",
+      "x": 253,
+      "y": 56,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-niflheim-216-171",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "niflheim",
+      "mapName": null,
+      "x": 216,
+      "y": 171,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-payon-139-159",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "payon",
+      "mapName": null,
+      "x": 139,
+      "y": 159,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-umbala-126-154",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "umbala",
+      "mapName": "Utan Tribe's Village, Umbala",
+      "x": 126,
+      "y": 154,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
+      "description": null
+    },
+    {
+      "slug": "town-weapon-dealer-xmas-171-158",
+      "name": "Weapon Dealer",
+      "hasName": true,
+      "types": [
+        "town",
+        "Weapon Dealer"
+      ],
+      "source": "client",
+      "map": "xmas",
+      "mapName": "Lutie, the Snow Village",
+      "x": 171,
+      "y": 158,
+      "quests": [],
+      "sells": [],
+      "sprite": null,
       "description": null
     },
     {

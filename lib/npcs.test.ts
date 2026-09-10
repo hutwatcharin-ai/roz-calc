@@ -128,13 +128,33 @@ describe('the shopkeepers', () => {
     expect(shopNpcAt('Chef Assistant', 'prontera', 1, 1)).toBeNull();
   });
 
-  it('keeps the two sources apart', () => {
+  it('keeps the three sources apart', () => {
     // Every claim on a page depends on which list the row came from: Zero's
-    // own, or classic RO's.
+    // own crawl, rAthena's shop scripts, or a client's town directory. Only
+    // the first is Zero's, and only the second sells anything.
     for (const npc of ALL_NPCS) {
-      expect(['prontera', 'rathena'], npc.slug).toContain(npc.source);
-      if (npc.source === 'rathena') expect(npc.quests, npc.slug).toEqual([]);
-      else expect(npc.sells, npc.slug).toEqual([]);
+      expect(['prontera', 'rathena', 'client'], npc.slug).toContain(npc.source);
+      if (npc.source === 'prontera') expect(npc.sells, npc.slug).toEqual([]);
+      else expect(npc.quests, npc.slug).toEqual([]);
+      if (npc.source === 'client') expect(npc.sells, npc.slug).toEqual([]);
+    }
+  });
+
+  it('puts a Kafra on the map, which nothing else here could', () => {
+    // rAthena's shop scripts do not list Kafra and the Zero crawl is quest
+    // NPCs only; the client's town directory is the only source that knows.
+    const kafra = ALL_NPCS.filter((npc) => npc.source === 'client' && npc.name.includes('Kafra'));
+    expect(kafra.length).toBeGreaterThan(15);
+    for (const npc of kafra) {
+      expect(npc.map, npc.slug).toBeTruthy();
+      expect(Number.isInteger(npc.x), npc.slug).toBe(true);
+    }
+  });
+
+  it('never places a town fixture where a shopkeeper already stands', () => {
+    const shops = new Set(ALL_NPCS.filter((npc) => npc.source === 'rathena').map((npc) => `${npc.map}|${npc.x}|${npc.y}`));
+    for (const npc of ALL_NPCS.filter((n) => n.source === 'client')) {
+      expect(shops.has(`${npc.map}|${npc.x}|${npc.y}`), npc.slug).toBe(false);
     }
   });
 });

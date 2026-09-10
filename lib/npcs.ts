@@ -35,9 +35,11 @@ export interface Npc {
   /**
    * Where the record comes from, and it changes what may be claimed:
    * 'prontera' is Zero's own NPC list, 'rathena' is a shopkeeper from the
-   * classic scripts, placed where classic RO puts them.
+   * classic scripts, and 'client' is a town fixture -- Kafra, guide, inn --
+   * from a non-Zero client's own town directory, the only source we hold that
+   * knows where a Kafra stands.
    */
-  source: 'prontera' | 'rathena';
+  source: 'prontera' | 'rathena' | 'client';
   /** Map code, which is what /navi takes. */
   map: string | null;
   mapName: string | null;
@@ -117,5 +119,6 @@ export function shopNpcAt(name: string, map: string | null, x: number | null, y:
 
 export const NPCS_WITH_QUESTS = ALL_NPCS.filter((npc) => npc.quests.length > 0).length;
 export const SHOP_NPCS = ALL_NPCS.filter((npc) => npc.source === 'rathena').length;
+export const TOWN_NPCS = ALL_NPCS.filter((npc) => npc.source === 'client').length;
 export const NPCS_WITH_SPRITE = ALL_NPCS.filter((npc) => npc.sprite).length;
 export const NPC_META = data._meta;

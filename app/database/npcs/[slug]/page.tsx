@@ -189,7 +189,12 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
           one it is standing on: a quest NPC comes from Zero's own list, a
           shopkeeper from rAthena's classic scripts. */}
       <p className="source-note" style={{ marginTop: 16 }}>
-        {npc.source === 'rathena' ? (
+        {npc.source === 'client' ? (
+          <>
+            <strong>ยังไม่ได้ยืนยันกับเซิร์ฟนี้:</strong> รายชื่อ NPC ประจำเมือง (Kafra, ไกด์, โรงแรม, ร้านค้า) มาจากไฟล์ไคลเอนต์ RO ซึ่งไม่ใช่ไคลเอนต์ Zero ·
+            ลงเฉพาะเมืองที่เกมนี้มีจริง
+          </>
+        ) : npc.source === 'rathena' ? (
           <>
             <strong>ยังไม่ได้ยืนยันกับเซิร์ฟนี้:</strong> NPC ร้านค้ามาจากสคริปต์ของ rAthena ซึ่งเป็นผังร้านของ RO คลาสสิก ·
             ฝั่ง Zero ไม่มีแหล่งไหนที่เรามีลงข้อมูลร้านค้าเลย · ของที่ขายกรองแล้วว่ามีจริงในเกมนี้

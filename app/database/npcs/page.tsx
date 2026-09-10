@@ -159,6 +159,7 @@ export default function NpcListPage({
                     {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}`} alt="" height={28} />}
                     {npc.hasName ? <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link> : <span className="muted">{npc.name}</span>}
                     {npc.source === 'rathena' && <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>ร้านค้า</span>}
+                    {npc.source === 'client' && <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>{npc.types[1] ?? 'ประจำเมือง'}</span>}
                   </td>
                   <td>
                     {npc.mapName ?? npc.map ?? '—'}
