@@ -26,7 +26,7 @@ export const dynamic = 'force-dynamic';
 // News pages are not nav entries, so they are listed here by hand. One line
 // per page, added the day it ships -- the same "route exists" check the nav
 // tables get from lib/nav-links.test.ts does not cover these, so keep it short.
-export const NEWS_PATHS: string[] = ['/news/patch-2026-09-03'];
+export const NEWS_PATHS: string[] = ['/news/patch-2026-09-03', '/news/battle-pass-summer-2026'];
 
 // Static routes that live outside the nav tables (footer-only pages, news).
 // Exported so sitemap.test.ts can assert STATIC_PATHS is exactly nav + these

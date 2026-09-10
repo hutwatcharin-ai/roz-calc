@@ -39,6 +39,11 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
     text: '410 แถว',
     why: 'unknown-rate drops contributed by midgardhub; verified against the table on 9 Sep 2026 and still exact',
   },
+  {
+    file: 'app/news/battle-pass-summer-2026/page.tsx',
+    text: '30 ตัว',
+    why: 'the kill count a Battle Pass daily mission asks for, quoted from the official event notice -- a rule of the event, not a count of anything in our tables',
+  },
 ];
 
 /** Everything a reader sees: comments removed, strings and JSX kept. */
