@@ -9,7 +9,7 @@
 
 import Link from 'next/link';
 import RecipeTable from '@/components/RecipeTable';
-import { KIND_TITLES, recipesMaking, recipesUsing, type CraftKind } from '@/lib/crafting';
+import { KIND_NEEDS, KIND_TITLES, recipesMaking, recipesUsing, type CraftKind } from '@/lib/crafting';
 
 const GUIDE_OF: Partial<Record<CraftKind, string>> = {
   forge: '/guides/forging',
@@ -34,6 +34,15 @@ export default function ItemCrafting({ itemId }: { itemId: number }) {
       {making.length > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
           <h2 className="section-title">ทำเองได้จาก</h2>
+          {/* The materials alone do not tell a reader where the crafting
+              happens, which is what someone asked about Autumn Red Tea. */}
+          {[...new Set(making.map((r) => r.kind))].map((kind) =>
+            KIND_NEEDS[kind] ? (
+              <p key={kind} className="muted" style={{ marginTop: 0, marginBottom: 10, fontSize: 13 }}>
+                <strong>{KIND_TITLES[kind]}:</strong> {KIND_NEEDS[kind]}
+              </p>
+            ) : null,
+          )}
           <RecipeTable rows={making} />
         </div>
       )}

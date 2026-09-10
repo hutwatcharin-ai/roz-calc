@@ -86,6 +86,24 @@ export const CONFIDENCE_WHY: Record<Confidence, string> = {
   'prontera-only': 'มีเฉพาะในฐานข้อมูล Zero แหล่งเดียว ยังไม่มีตารางฝั่งเซิร์ฟเวอร์ยืนยัน',
 };
 
+/**
+ * What a reader needs before a recipe of this kind is any use to them.
+ *
+ * The item page used to print materials and link to the guide, and a reader
+ * who landed on Autumn Red Tea (10 Sep 2026) still had to ask where cooking
+ * happens. Each line is the requirement its own guide already states, kept
+ * here so the item page and the guide cannot drift apart.
+ */
+export const KIND_NEEDS: Record<CraftKind, string | null> = {
+  forge: 'ต้องเป็น Blacksmith ที่มีสกิลตีของชนิดนั้น (เช่น Smith Sword) พร้อมค้อนกับทั่ง',
+  arrow: 'ต้องเป็น Archer แล้วใช้สกิล Making Arrow',
+  brew: 'ต้องเป็น Alchemist ที่เรียน Potion Research Lv.5 แล้วใช้ Prepare Potion พร้อม Medicine Bowl 1 ชิ้นต่อครั้ง',
+  cook: 'ต้องมีชุดทำอาหารกับตำราระดับที่ตรงกับสูตรติดตัว — ตำราไม่ถูกใช้หมด ใช้ซ้ำได้เรื่อยๆ',
+  ore: 'ต้องเป็น Blacksmith ที่มีสกิลหลอมแร่ (Iron Tempering / Steel Tempering)',
+  quest: 'แลกกับ NPC ไม่ใช่สกิลคราฟต์',
+  other: null,
+};
+
 export function recipesOfKind(kind: CraftKind): Recipe[] {
   return RECIPES.filter((r) => r.kind === kind);
 }
