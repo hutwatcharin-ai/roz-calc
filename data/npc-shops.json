@@ -1,53 +1,207 @@
 {
   "_meta": {
     "built": "2026-09-10",
-    "source": "https://raw.githubusercontent.com/rathena/rathena/master/npc/re/merchants/shops.txt",
+    "sources": [
+      "https://raw.githubusercontent.com/rathena/rathena/master/npc/merchants/shops.txt",
+      "https://raw.githubusercontent.com/rathena/rathena/master/npc/re/merchants/shops.txt",
+      "https://raw.githubusercontent.com/rathena/rathena/master/npc/re/merchants/Dealer_Update.txt"
+    ],
     "how": "node scripts/build-npc-shops.mjs",
-    "caveat": "rAthena's classic-RO shop layout. No Zero source we hold lists shop NPCs, so the NPC and its coordinates are unverified for this server; the goods are filtered to items that exist in our own table.",
-    "shopsInSource": 73,
-    "itemsListed": 81,
-    "rowsKept": 299,
-    "rowsDroppedUnknownItem": 306,
+    "caveat": "rAthena's classic-RO shop layout. No Zero source we hold lists shop NPCs, so the NPC and its coordinates are unverified for this server; the goods are filtered to items that exist in our own table, and the shops to regions this game has.",
+    "shopsInSource": 262,
+    "itemsListed": 167,
+    "rowsKept": 832,
+    "rowsDroppedUnknownItem": 428,
+    "rowsDroppedMapNotInThisGame": 853,
+    "mapsDropped": {
+      "lhz_in02": 93,
+      "ein_in01": 89,
+      "ra_in01": 80,
+      "yuno": 64,
+      "ve_in": 61,
+      "lhz_in03": 56,
+      "yuno_in01": 53,
+      "mosk_in": 51,
+      "hu_in01": 50,
+      "dewata": 40,
+      "ma_in01": 34,
+      "brasilis": 32,
+      "einbroch": 29,
+      "que_ng": 29,
+      "mid_camp": 24,
+      "lighthalzen": 13,
+      "s_atelier": 8,
+      "malangdo": 8,
+      "hugel": 7,
+      "jawaii": 7,
+      "mora": 7,
+      "moscovia": 5,
+      "malaya": 5,
+      "dic_in01": 4,
+      "rachel": 3,
+      "yuno_in03": 1
+    },
     "maps": [
+      "alb2trea",
       "alberta",
       "alberta_in",
       "alde_alche",
       "aldeba_in",
+      "aldebaran",
+      "ama_in01",
+      "amatsu",
+      "ayo_in01",
+      "ayothaya",
+      "cmd_fild07",
+      "cmd_in01",
       "comodo",
-      "dewata",
-      "dic_in01",
-      "einbroch",
       "geffen",
       "geffen_in",
+      "gonryun",
+      "in_moc_16",
       "izlude",
       "izlude_in",
-      "lhz_in02",
-      "lhz_in03",
-      "lighthalzen",
-      "ma_in01",
-      "malangdo",
-      "malaya",
-      "mid_camp",
+      "lou_in02",
+      "louyang",
       "moc_ruins",
-      "mora",
       "morocc",
+      "morocc_in",
+      "nif_in",
+      "niflheim",
       "payon",
       "payon_in01",
       "payon_in02",
       "prontera",
+      "prt_church",
+      "prt_fild05",
       "prt_in",
-      "que_ng",
-      "ra_in01",
-      "s_atelier"
+      "prt_monk",
+      "tur_dun01",
+      "um_in",
+      "umbala",
+      "xmas",
+      "xmas_in"
     ]
   },
   "items": {
     "501": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon",
+        "x": 159,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
         "price": null
       },
       {
@@ -87,18 +241,123 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       }
     ],
     "502": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
         "price": null
       },
       {
@@ -138,18 +397,116 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       }
     ],
     "503": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
         "price": null
       },
       {
@@ -189,18 +546,123 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       }
     ],
     "504": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
         "price": null
       },
       {
@@ -240,13 +702,118 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       }
     ],
     "506": [
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
       {
         "npc": "Tool Dealer",
         "map": "izlude_in",
@@ -274,14 +841,49 @@
         "x": 151,
         "y": 241,
         "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
       }
     ],
     "512": [
       {
         "npc": "Fruit Gardener",
-        "map": "dewata",
-        "x": 145,
-        "y": 267,
+        "map": "prontera",
+        "x": 104,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -289,22 +891,29 @@
         "map": "izlude",
         "x": 124,
         "y": 165,
-        "price": null
-      },
-      {
-        "npc": "Fruit Gardener",
-        "map": "malaya",
-        "x": 150,
-        "y": 261,
         "price": null
       }
     ],
     "513": [
       {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 90,
+        "y": 149,
+        "price": null
+      },
+      {
         "npc": "Fruit Gardener",
-        "map": "dewata",
-        "x": 145,
-        "y": 267,
+        "map": "prontera",
+        "x": 104,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -319,57 +928,22 @@
         "map": "morocc",
         "x": 140,
         "y": 90,
-        "price": null
-      },
-      {
-        "npc": "Trader",
-        "map": "morocc",
-        "x": 140,
-        "y": 90,
-        "price": null
-      },
-      {
-        "npc": "Trader",
-        "map": "morocc",
-        "x": 140,
-        "y": 90,
-        "price": null
-      },
-      {
-        "npc": "Trader",
-        "map": "morocc",
-        "x": 140,
-        "y": 90,
-        "price": null
-      },
-      {
-        "npc": "Trader",
-        "map": "morocc",
-        "x": 140,
-        "y": 90,
-        "price": null
-      },
-      {
-        "npc": "Trader",
-        "map": "morocc",
-        "x": 140,
-        "y": 90,
-        "price": null
-      },
-      {
-        "npc": "Fruit Gardener",
-        "map": "malaya",
-        "x": 150,
-        "y": 261,
         "price": null
       }
     ],
     "515": [
       {
-        "npc": "Fruit Gardener",
-        "map": "dewata",
-        "x": 145,
-        "y": 267,
+        "npc": "Vegetable Gardener",
+        "map": "prontera",
+        "x": 48,
+        "y": 58,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -377,22 +951,22 @@
         "map": "izlude",
         "x": 124,
         "y": 165,
-        "price": null
-      },
-      {
-        "npc": "Fruit Gardener",
-        "map": "malaya",
-        "x": 150,
-        "y": 261,
         "price": null
       }
     ],
     "516": [
       {
-        "npc": "Fruit Gardener",
-        "map": "dewata",
-        "x": 145,
-        "y": 267,
+        "npc": "Vegetable Gardener",
+        "map": "prontera",
+        "x": 48,
+        "y": 58,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -401,16 +975,30 @@
         "x": 124,
         "y": 165,
         "price": null
-      },
-      {
-        "npc": "Fruit Gardener",
-        "map": "malaya",
-        "x": 150,
-        "y": 261,
-        "price": null
       }
     ],
     "517": [
+      {
+        "npc": "Butcher",
+        "map": "moc_ruins",
+        "x": 87,
+        "y": 109,
+        "price": null
+      },
+      {
+        "npc": "Butcher",
+        "map": "prontera",
+        "x": 64,
+        "y": 125,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
       {
         "npc": "Butcher",
         "map": "izlude",
@@ -429,6 +1017,13 @@
     "519": [
       {
         "npc": "Vendor from Milk Ranch",
+        "map": "prontera",
+        "x": 73,
+        "y": 134,
+        "price": null
+      },
+      {
+        "npc": "Vendor from Milk Ranch",
         "map": "izlude",
         "x": 128,
         "y": 158,
@@ -436,6 +1031,41 @@
       }
     ],
     "528": [
+      {
+        "npc": "Item Collector",
+        "map": "alberta_in",
+        "x": 165,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 93,
+        "y": 53,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 81,
+        "y": 113,
+        "price": null
+      },
+      {
+        "npc": "Butcher",
+        "map": "prontera",
+        "x": 64,
+        "y": 125,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
       {
         "npc": "Item Collector",
         "map": "morocc",
@@ -453,21 +1083,72 @@
     ],
     "535": [
       {
-        "npc": "Fruit Gardener",
-        "map": "dewata",
+        "npc": "Tool Dealer",
+        "map": "nif_in",
         "x": 145,
-        "y": 267,
+        "y": 23,
         "price": null
       },
       {
-        "npc": "Fruit Gardener",
-        "map": "malaya",
-        "x": 150,
-        "y": 261,
+        "npc": "Vegetable Gardener",
+        "map": "prontera",
+        "x": 48,
+        "y": 58,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      }
+    ],
+    "537": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       }
     ],
     "577": [
+      {
+        "npc": "Chef Assistant",
+        "map": "umbala",
+        "x": 102,
+        "y": 154,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "louyang",
+        "x": 256,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "ayothaya",
+        "x": 203,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "xmas",
+        "x": 152,
+        "y": 137,
+        "price": null
+      },
       {
         "npc": "Chef Assistant",
         "map": "prontera",
@@ -507,6 +1188,20 @@
     "579": [
       {
         "npc": "Chef Assistant",
+        "map": "comodo",
+        "x": 225,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "amatsu",
+        "x": 206,
+        "y": 150,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
         "map": "prontera",
         "x": 156,
         "y": 212,
@@ -542,6 +1237,20 @@
       }
     ],
     "580": [
+      {
+        "npc": "Chef Assistant",
+        "map": "aldebaran",
+        "x": 165,
+        "y": 107,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "gonryun",
+        "x": 147,
+        "y": 101,
+        "price": null
+      },
       {
         "npc": "Chef Assistant",
         "map": "prontera",
@@ -581,6 +1290,13 @@
     "581": [
       {
         "npc": "Chef Assistant",
+        "map": "niflheim",
+        "x": 209,
+        "y": 180,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
         "map": "prontera",
         "x": 156,
         "y": 212,
@@ -618,16 +1334,121 @@
     "601": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
         "price": null
       },
       {
-        "npc": "Peddler",
-        "map": "dic_in01",
-        "x": 238,
-        "y": 107,
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon",
+        "x": 159,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -635,20 +1456,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer",
-        "map": "mora",
-        "x": 100,
-        "y": 118,
         "price": null
       },
       {
@@ -681,25 +1488,130 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
         "price": null
       }
     ],
     "602": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
         "price": null
       },
       {
-        "npc": "Peddler",
-        "map": "dic_in01",
-        "x": 238,
-        "y": 107,
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon",
+        "x": 159,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -707,20 +1619,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer",
-        "map": "mora",
-        "x": 100,
-        "y": 118,
         "price": null
       },
       {
@@ -753,34 +1651,258 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
         "price": null
       }
     ],
     "610": [
       {
-        "npc": "Peddler",
-        "map": "dic_in01",
-        "x": 238,
-        "y": 107,
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
         "price": null
       }
     ],
     "611": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
         "price": null
       },
       {
-        "npc": "Peddler",
-        "map": "dic_in01",
-        "x": 238,
-        "y": 107,
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
         "price": null
       },
       {
@@ -788,20 +1910,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer",
-        "map": "mora",
-        "x": 100,
-        "y": 118,
         "price": null
       },
       {
@@ -834,18 +1942,151 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       }
     ],
     "645": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon",
+        "x": 159,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -853,13 +2094,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
         "price": null
       },
       {
@@ -888,22 +2122,120 @@
         "map": "morocc",
         "x": 151,
         "y": 241,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
         "price": null
       }
     ],
     "656": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -911,13 +2243,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
         "price": null
       },
       {
@@ -950,25 +2275,130 @@
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
         "price": null
       }
     ],
-    "713": [
+    "657": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
-        "x": 182,
-        "y": 164,
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
         "price": null
       },
       {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
         "price": null
       },
       {
@@ -977,16 +2407,358 @@
         "x": 91,
         "y": 128,
         "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      }
+    ],
+    "712": [
+      {
+        "npc": "Flower Girl",
+        "map": "prontera",
+        "x": 58,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Flower Lady",
+        "map": "prontera",
+        "x": 113,
+        "y": 42,
+        "price": null
+      }
+    ],
+    "713": [
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 171,
+        "y": 123,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      }
+    ],
+    "717": [
+      {
+        "npc": "Magical Item Seller",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 173,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
       }
     ],
     "719": [
-      {
-        "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
       {
         "npc": "Jeweler",
         "map": "morocc",
@@ -1019,13 +2791,6 @@
     "720": [
       {
         "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
-      {
-        "npc": "Jeweler",
         "map": "morocc",
         "x": 154,
         "y": 55,
@@ -1054,13 +2819,6 @@
       }
     ],
     "721": [
-      {
-        "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
       {
         "npc": "Jeweler",
         "map": "morocc",
@@ -1093,13 +2851,6 @@
     "722": [
       {
         "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
-      {
-        "npc": "Jeweler",
         "map": "morocc",
         "x": 154,
         "y": 55,
@@ -1128,13 +2879,6 @@
       }
     ],
     "723": [
-      {
-        "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
       {
         "npc": "Jeweler",
         "map": "morocc",
@@ -1167,13 +2911,6 @@
     "726": [
       {
         "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
-      {
-        "npc": "Jeweler",
         "map": "morocc",
         "x": 154,
         "y": 55,
@@ -1202,13 +2939,6 @@
       }
     ],
     "728": [
-      {
-        "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
       {
         "npc": "Jeweler",
         "map": "morocc",
@@ -1241,13 +2971,6 @@
     "729": [
       {
         "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
-      {
-        "npc": "Jeweler",
         "map": "morocc",
         "x": 154,
         "y": 55,
@@ -1278,13 +3001,6 @@
     "730": [
       {
         "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
-        "price": null
-      },
-      {
-        "npc": "Jeweler",
         "map": "morocc",
         "x": 154,
         "y": 55,
@@ -1312,7 +3028,162 @@
         "price": null
       }
     ],
+    "734": [
+      {
+        "npc": "Gift Merchant",
+        "map": "prontera",
+        "x": 105,
+        "y": 87,
+        "price": null
+      }
+    ],
+    "735": [
+      {
+        "npc": "Gift Merchant",
+        "map": "prontera",
+        "x": 105,
+        "y": 87,
+        "price": null
+      }
+    ],
+    "736": [
+      {
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Gift Merchant",
+        "map": "prontera",
+        "x": 105,
+        "y": 87,
+        "price": null
+      }
+    ],
+    "737": [
+      {
+        "npc": "Gift Merchant",
+        "map": "prontera",
+        "x": 105,
+        "y": 87,
+        "price": null
+      }
+    ],
+    "740": [
+      {
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Doll Supplier",
+        "map": "prontera",
+        "x": 248,
+        "y": 153,
+        "price": null
+      }
+    ],
+    "741": [
+      {
+        "npc": "Doll Supplier",
+        "map": "prontera",
+        "x": 248,
+        "y": 153,
+        "price": null
+      }
+    ],
+    "742": [
+      {
+        "npc": "Doll Supplier",
+        "map": "prontera",
+        "x": 248,
+        "y": 153,
+        "price": null
+      }
+    ],
+    "744": [
+      {
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Flower Girl",
+        "map": "prontera",
+        "x": 58,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Flower Lady",
+        "map": "prontera",
+        "x": 113,
+        "y": 42,
+        "price": null
+      },
+      {
+        "npc": "Wedding Shop Dealer",
+        "map": "prt_in",
+        "x": 211,
+        "y": 169,
+        "price": null
+      }
+    ],
+    "745": [
+      {
+        "npc": "Wedding Shop Dealer",
+        "map": "prt_in",
+        "x": 211,
+        "y": 169,
+        "price": null
+      }
+    ],
+    "746": [
+      {
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Gift Merchant",
+        "map": "prontera",
+        "x": 105,
+        "y": 87,
+        "price": null
+      }
+    ],
+    "747": [
+      {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 113,
+        "y": 126,
+        "price": null
+      }
+    ],
     "748": [
+      {
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 131,
+        "y": 138,
+        "price": null
+      },
       {
         "npc": "Trader",
         "map": "morocc",
@@ -1321,7 +3192,53 @@
         "price": null
       }
     ],
+    "902": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "910": [
+      {
+        "npc": "Trader",
+        "map": "geffen_in",
+        "x": 74,
+        "y": 144,
+        "price": null
+      }
+    ],
     "911": [
+      {
+        "npc": "Item Collector",
+        "map": "alberta_in",
+        "x": 165,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "geffen_in",
+        "x": 74,
+        "y": 144,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 93,
+        "y": 53,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 81,
+        "y": 113,
+        "price": null
+      },
       {
         "npc": "Item Collector",
         "map": "morocc",
@@ -1337,7 +3254,30 @@
         "price": null
       }
     ],
+    "912": [
+      {
+        "npc": "Trader",
+        "map": "geffen_in",
+        "x": 74,
+        "y": 144,
+        "price": null
+      }
+    ],
     "919": [
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 93,
+        "y": 53,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 81,
+        "y": 113,
+        "price": null
+      },
       {
         "npc": "Item Collector",
         "map": "morocc",
@@ -1356,6 +3296,20 @@
     "925": [
       {
         "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 93,
+        "y": 53,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
+        "map": "moc_ruins",
+        "x": 81,
+        "y": 113,
+        "price": null
+      },
+      {
+        "npc": "Item Collector",
         "map": "morocc",
         "x": 171,
         "y": 103,
@@ -1369,12 +3323,113 @@
         "price": null
       }
     ],
+    "934": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "964": [
+      {
+        "npc": "Souvenir Vendor",
+        "map": "comodo",
+        "x": 296,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "965": [
+      {
+        "npc": "Souvenir Vendor",
+        "map": "comodo",
+        "x": 296,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1052": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "1062": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
+        "price": null
+      }
+    ],
     "1065": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
-        "x": 182,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
         "price": null
       },
       {
@@ -1382,13 +3437,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
         "price": null
       },
       {
@@ -1418,160 +3466,1126 @@
         "x": 151,
         "y": 241,
         "price": null
-      },
+      }
+    ],
+    "1092": [
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "geffen_in",
+        "x": 171,
+        "y": 123,
+        "price": null
+      }
+    ],
+    "1093": [
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 171,
+        "y": 123,
+        "price": null
+      }
+    ],
+    "1101": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1104": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
         "price": null
       }
     ],
     "1107": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1110": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1113": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
         "price": null
       }
     ],
     "1116": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1119": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
         "price": null
       }
     ],
     "1122": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1123": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1126": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1129": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1151": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
         "price": null
       }
     ],
     "1154": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      }
+    ],
+    "1157": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      }
+    ],
+    "1160": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      }
+    ],
+    "1201": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1204": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
         "price": null
       }
     ],
     "1207": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1210": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      }
+    ],
+    "1213": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
         "price": null
       }
     ],
     "1216": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      }
+    ],
+    "1219": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      }
+    ],
+    "1222": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "aldeba_in",
+        "x": 28,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "xmas_in",
+        "x": 174,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      }
+    ],
+    "1301": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Axe Dealer",
+        "map": "nif_in",
+        "x": 37,
+        "y": 93,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1351": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Axe Dealer",
+        "map": "nif_in",
+        "x": 37,
+        "y": 93,
         "price": null
       }
     ],
     "1354": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Axe Dealer",
+        "map": "nif_in",
+        "x": 37,
+        "y": 93,
+        "price": null
+      }
+    ],
+    "1357": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Axe Dealer",
+        "map": "nif_in",
+        "x": 37,
+        "y": 93,
+        "price": null
+      }
+    ],
+    "1360": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Axe Dealer",
+        "map": "nif_in",
+        "x": 37,
+        "y": 93,
+        "price": null
+      }
+    ],
+    "1401": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1404": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
         "price": null
       }
     ],
     "1407": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1410": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1451": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1454": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
         "price": null
       }
     ],
     "1457": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1460": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1463": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "cmd_fild07",
+        "x": 250,
+        "y": 98,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 171,
+        "y": 140,
+        "price": null
+      }
+    ],
+    "1501": [
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1504": [
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1507": [
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1510": [
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1513": [
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
         "price": null
       }
     ],
     "1516": [
+      {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 125,
+        "y": 135,
+        "price": null
+      },
       {
         "npc": "Trader",
         "map": "morocc",
@@ -1583,20 +4597,55 @@
     "1519": [
       {
         "npc": "Weapon Dealer",
-        "map": "dewata",
-        "x": 218,
-        "y": 164,
+        "map": "ama_in01",
+        "x": 102,
+        "y": 28,
         "price": null
       },
       {
         "npc": "Weapon Dealer",
-        "map": "ma_in01",
-        "x": 73,
-        "y": 22,
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 192,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "gonryun",
+        "x": 174,
+        "y": 101,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "lou_in02",
+        "x": 130,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
         "price": null
       }
     ],
     "1522": [
+      {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 125,
+        "y": 135,
+        "price": null
+      },
       {
         "npc": "Trader",
         "map": "morocc",
@@ -1608,9 +4657,135 @@
     "1750": [
       {
         "npc": "Tool Dealer",
-        "map": "dewata",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
         "x": 182,
-        "y": 164,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon",
+        "x": 159,
+        "y": 96,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
         "price": null
       },
       {
@@ -1618,13 +4793,6 @@
         "map": "izlude_in",
         "x": 57,
         "y": 110,
-        "price": null
-      },
-      {
-        "npc": "Tool Dealer Myo",
-        "map": "malangdo",
-        "x": 232,
-        "y": 163,
         "price": null
       },
       {
@@ -1654,41 +4822,426 @@
         "x": 151,
         "y": 241,
         "price": null
+      }
+    ],
+    "1751": [
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "alberta_in",
+        "x": 188,
+        "y": 21,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "geffen_in",
+        "x": 30,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "izlude_in",
+        "x": 60,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 67,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "payon_in01",
+        "x": 15,
+        "y": 119,
+        "price": null
       },
       {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 130,
+        "price": null
+      }
+    ],
+    "1752": [
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      }
+    ],
+    "1770": [
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      }
+    ],
+    "1771": [
+      {
+        "npc": "Sepulchral Merchant",
+        "map": "in_moc_16",
         "x": 22,
-        "y": 23,
+        "y": 20,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alb2trea",
+        "x": 87,
+        "y": 65,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "aldeba_in",
+        "x": 94,
+        "y": 56,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ama_in01",
+        "x": 24,
+        "y": 30,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "ayo_in01",
+        "x": 18,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_in01",
+        "x": 79,
+        "y": 182,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "cmd_fild07",
+        "x": 257,
+        "y": 126,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "gonryun",
+        "x": 147,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "lou_in02",
+        "x": 239,
+        "y": 176,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "xmas_in",
+        "x": 40,
+        "y": 38,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in01",
+        "x": 5,
+        "y": 49,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "payon_in02",
+        "x": 87,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_fild05",
+        "x": 290,
+        "y": 221,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "um_in",
+        "x": 104,
+        "y": 124,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 91,
+        "y": 128,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "moc_ruins",
+        "x": 114,
+        "y": 63,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 146,
+        "y": 103,
+        "price": null
+      },
+      {
+        "npc": "Tool Dealer",
+        "map": "morocc",
+        "x": 151,
+        "y": 241,
+        "price": null
+      }
+    ],
+    "1801": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_monk",
+        "x": 135,
+        "y": 263,
+        "price": null
+      }
+    ],
+    "1803": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_monk",
+        "x": 135,
+        "y": 263,
+        "price": null
+      }
+    ],
+    "1805": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "prt_monk",
+        "x": 135,
+        "y": 263,
+        "price": null
+      }
+    ],
+    "1807": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1809": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
+        "price": null
+      }
+    ],
+    "1811": [
+      {
+        "npc": "Weapon Dealer",
+        "map": "um_in",
+        "x": 160,
+        "y": 125,
         "price": null
       }
     ],
     "2201": [
       {
+        "npc": "Armor Dealer",
+        "map": "alberta_in",
+        "x": 180,
+        "y": 15,
+        "price": null
+      },
+      {
         "npc": "Toy Dealer",
         "map": "prt_in",
         "x": 117,
         "y": 79,
+        "price": null
+      }
+    ],
+    "2203": [
+      {
+        "npc": "Armor Dealer",
+        "map": "alberta_in",
+        "x": 180,
+        "y": 15,
+        "price": null
+      }
+    ],
+    "2205": [
+      {
+        "npc": "Armor Dealer",
+        "map": "alberta_in",
+        "x": 180,
+        "y": 15,
+        "price": null
+      }
+    ],
+    "2206": [
+      {
+        "npc": "Wedding Shop Dealer",
+        "map": "prt_in",
+        "x": 211,
+        "y": 169,
+        "price": null
+      }
+    ],
+    "2208": [
+      {
+        "npc": "Armor Dealer",
+        "map": "payon_in01",
+        "x": 7,
+        "y": 119,
         "price": null
       }
     ],
     "2211": [
       {
         "npc": "Armor Dealer",
-        "map": "dewata",
-        "x": 158,
+        "map": "ama_in01",
+        "x": 89,
+        "y": 28,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 160,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "gonryun",
+        "x": 173,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "lou_in02",
+        "x": 121,
         "y": 182,
         "price": null
       },
       {
         "npc": "Armor Dealer",
-        "map": "ma_in01",
-        "x": 67,
-        "y": 13,
+        "map": "payon_in01",
+        "x": 7,
+        "y": 119,
         "price": null
       }
     ],
     "2212": [
+      {
+        "npc": "Armor Dealer",
+        "map": "payon_in01",
+        "x": 7,
+        "y": 119,
+        "price": null
+      },
       {
         "npc": "Toy Dealer",
         "map": "prt_in",
@@ -1697,19 +5250,131 @@
         "price": null
       }
     ],
-    "2239": [
+    "2216": [
       {
-        "npc": "Tool Dealer",
-        "map": "dewata",
-        "x": 182,
-        "y": 164,
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      }
+    ],
+    "2218": [
+      {
+        "npc": "Armor Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 60,
+        "price": null
+      }
+    ],
+    "2220": [
+      {
+        "npc": "Armor Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 132,
+        "price": null
+      }
+    ],
+    "2226": [
+      {
+        "npc": "Armor Dealer",
+        "map": "alberta_in",
+        "x": 180,
+        "y": 15,
         "price": null
       },
       {
+        "npc": "Armor Dealer",
+        "map": "cmd_in01",
+        "x": 117,
+        "y": 165,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "cmd_fild07",
+        "x": 277,
+        "y": 85,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "izlude_in",
+        "x": 70,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 132,
+        "price": null
+      }
+    ],
+    "2228": [
+      {
+        "npc": "Armor Dealer",
+        "map": "aldeba_in",
+        "x": 20,
+        "y": 60,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "cmd_in01",
+        "x": 117,
+        "y": 165,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "cmd_fild07",
+        "x": 277,
+        "y": 85,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "izlude_in",
+        "x": 70,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "xmas_in",
+        "x": 168,
+        "y": 104,
+        "price": null
+      }
+    ],
+    "2230": [
+      {
+        "npc": "Armor Dealer",
+        "map": "geffen_in",
+        "x": 26,
+        "y": 178,
+        "price": null
+      }
+    ],
+    "2232": [
+      {
+        "npc": "Magical Item Seller",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 173,
+        "price": null
+      }
+    ],
+    "2239": [
+      {
         "npc": "Tool Dealer",
-        "map": "ma_in01",
-        "x": 22,
-        "y": 23,
+        "map": "prt_in",
+        "x": 126,
+        "y": 76,
         "price": null
       },
       {
@@ -1722,6 +5387,13 @@
     ],
     "2241": [
       {
+        "npc": "Tool Dealer",
+        "map": "geffen_in",
+        "x": 77,
+        "y": 167,
+        "price": null
+      },
+      {
         "npc": "Toy Dealer",
         "map": "prt_in",
         "x": 117,
@@ -1730,6 +5402,13 @@
       }
     ],
     "2242": [
+      {
+        "npc": "Tool Dealer",
+        "map": "tur_dun01",
+        "x": 158,
+        "y": 54,
+        "price": null
+      },
       {
         "npc": "Toy Dealer",
         "map": "prt_in",
@@ -1740,6 +5419,13 @@
     ],
     "2243": [
       {
+        "npc": "Tool Dealer",
+        "map": "alberta_in",
+        "x": 182,
+        "y": 97,
+        "price": null
+      },
+      {
         "npc": "Toy Dealer",
         "map": "prt_in",
         "x": 117,
@@ -1747,7 +5433,69 @@
         "price": null
       }
     ],
+    "2301": [
+      {
+        "npc": "Armor Dealer",
+        "map": "alberta_in",
+        "x": 180,
+        "y": 15,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "geffen_in",
+        "x": 26,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 60,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "payon_in01",
+        "x": 7,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 132,
+        "price": null
+      }
+    ],
+    "2338": [
+      {
+        "npc": "Wedding Shop Dealer",
+        "map": "prt_in",
+        "x": 211,
+        "y": 169,
+        "price": null
+      }
+    ],
+    "2608": [
+      {
+        "npc": "Nun",
+        "map": "prt_church",
+        "x": 108,
+        "y": 124,
+        "price": null
+      }
+    ],
     "2609": [
+      {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 125,
+        "y": 135,
+        "price": null
+      },
       {
         "npc": "Trader",
         "map": "morocc",
@@ -1758,6 +5506,20 @@
     ],
     "2612": [
       {
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
+        "price": null
+      },
+      {
+        "npc": "Trader",
+        "map": "moc_ruins",
+        "x": 71,
+        "y": 139,
+        "price": null
+      },
+      {
         "npc": "Trader",
         "map": "morocc",
         "x": 256,
@@ -1767,10 +5529,10 @@
     ],
     "2613": [
       {
-        "npc": "Jeweler",
-        "map": "lhz_in02",
-        "x": 105,
-        "y": 21,
+        "npc": "Gift Seller",
+        "map": "xmas_in",
+        "x": 169,
+        "y": 34,
         "price": null
       },
       {
@@ -1805,16 +5567,104 @@
     "2627": [
       {
         "npc": "Armor Dealer",
-        "map": "dewata",
-        "x": 158,
+        "map": "aldeba_in",
+        "x": 20,
+        "y": 60,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "ama_in01",
+        "x": 89,
+        "y": 28,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "ayo_in01",
+        "x": 90,
+        "y": 160,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "gonryun",
+        "x": 173,
+        "y": 84,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "lou_in02",
+        "x": 121,
         "y": 182,
         "price": null
       },
       {
         "npc": "Armor Dealer",
-        "map": "ma_in01",
-        "x": 67,
-        "y": 13,
+        "map": "prt_in",
+        "x": 172,
+        "y": 132,
+        "price": null
+      }
+    ],
+    "2628": [
+      {
+        "npc": "Armor Dealer",
+        "map": "alberta_in",
+        "x": 180,
+        "y": 15,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "aldeba_in",
+        "x": 20,
+        "y": 60,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "geffen_in",
+        "x": 26,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "izlude_in",
+        "x": 70,
+        "y": 127,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "morocc_in",
+        "x": 141,
+        "y": 60,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "payon_in01",
+        "x": 7,
+        "y": 119,
+        "price": null
+      },
+      {
+        "npc": "Armor Dealer",
+        "map": "prt_in",
+        "x": 172,
+        "y": 132,
+        "price": null
+      }
+    ],
+    "7106": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
         "price": null
       }
     ],
@@ -1845,7 +5695,39 @@
         "price": null
       }
     ],
+    "7154": [
+      {
+        "npc": "Tool Dealer",
+        "map": "nif_in",
+        "x": 145,
+        "y": 23,
+        "price": null
+      }
+    ],
+    "7170": [
+      {
+        "npc": "Wedding Shop Dealer",
+        "map": "prt_in",
+        "x": 211,
+        "y": 169,
+        "price": null
+      }
+    ],
     "7452": [
+      {
+        "npc": "Chef Assistant",
+        "map": "aldebaran",
+        "x": 165,
+        "y": 107,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "gonryun",
+        "x": 147,
+        "y": 101,
+        "price": null
+      },
       {
         "npc": "Chef Assistant",
         "map": "prontera",
@@ -1885,6 +5767,20 @@
     "7453": [
       {
         "npc": "Chef Assistant",
+        "map": "comodo",
+        "x": 225,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "amatsu",
+        "x": 206,
+        "y": 150,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
         "map": "prontera",
         "x": 156,
         "y": 212,
@@ -1920,6 +5816,20 @@
       }
     ],
     "7454": [
+      {
+        "npc": "Chef Assistant",
+        "map": "comodo",
+        "x": 225,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "louyang",
+        "x": 256,
+        "y": 123,
+        "price": null
+      },
       {
         "npc": "Chef Assistant",
         "map": "prontera",
@@ -1959,6 +5869,20 @@
     "7455": [
       {
         "npc": "Chef Assistant",
+        "map": "comodo",
+        "x": 225,
+        "y": 164,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "ayothaya",
+        "x": 203,
+        "y": 178,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
         "map": "prontera",
         "x": 156,
         "y": 212,
@@ -1996,6 +5920,20 @@
     "7456": [
       {
         "npc": "Chef Assistant",
+        "map": "aldebaran",
+        "x": 165,
+        "y": 107,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
+        "map": "umbala",
+        "x": 102,
+        "y": 154,
+        "price": null
+      },
+      {
+        "npc": "Chef Assistant",
         "map": "prontera",
         "x": 156,
         "y": 212,
@@ -2031,6 +5969,13 @@
       }
     ],
     "7457": [
+      {
+        "npc": "Chef Assistant",
+        "map": "xmas",
+        "x": 152,
+        "y": 137,
+        "price": null
+      },
       {
         "npc": "Chef Assistant",
         "map": "prontera",

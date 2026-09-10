@@ -12,6 +12,7 @@ import RecordVisit from '@/components/RecordVisit';
 import ItemIcon from '@/components/ItemIcon';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
+import ItemShops from '@/components/ItemShops';
 import RandomOptionsCard from '@/components/RandomOptionsCard';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { randomOptionsFor } from '@/lib/random-options';
@@ -179,6 +180,12 @@ export default function GearDetail({
           <RandomOptionsCard lines={randomOptions} />
         </div>
       )}
+
+      {/* 79 of the 167 items with a seller are weapons and armour, and this
+          page did not show a single one of them: the shop table was wired into
+          the item route only. A player looking up Falchion could see its ATK
+          and not that a Weapon Dealer sells it. */}
+      <ItemShops itemId={item.id} />
 
       {item.description && (
         <div className="card" style={{ marginTop: 20 }}>
