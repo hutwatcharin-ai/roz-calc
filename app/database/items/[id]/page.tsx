@@ -14,6 +14,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
+import { clientThaiDescription } from '@/lib/client-thai-descriptions';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isCardCategory, isEquipmentCategory, itemHref } from '@/lib/item-href';
 import type { Metadata } from 'next';
@@ -277,15 +278,29 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <p className="muted" style={{ marginTop: 10 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
       )}
 
-      {item.description && (
-        <div className="card" style={{ marginTop: 20 }}>
-          <h2 className="section-title">คำอธิบาย</h2>
-          <DescriptionLanguageToggle
-            thaiLines={composeThaiDescription(item.description, dict).map((l) => l.thai ?? l.source)}
-            englishLines={item.description.split('\n').map((l: string) => l.replace(/\^[0-9a-fA-F]{6}/g, '').trim()).filter((l: string) => l !== '')}
-          />
-        </div>
-      )}
+      {item.description && (() => {
+        // The dictionary first: it is built against this game's own text. Only
+        // when it can translate nothing does the client file get a turn, and
+        // the page then says where that Thai came from.
+        const composed = composeThaiDescription(item.description, dict);
+        const fromDictionary = composed.some((l) => l.thai !== null);
+        const fromClient = fromDictionary ? null : clientThaiDescription(item.id);
+        return (
+          <div className="card" style={{ marginTop: 20 }}>
+            <h2 className="section-title">คำอธิบาย</h2>
+            <DescriptionLanguageToggle
+              thaiLines={fromClient ?? composed.map((l) => l.thai ?? l.source)}
+              englishLines={item.description.split('\n').map((l: string) => l.replace(/\^[0-9a-fA-F]{6}/g, '').trim()).filter((l: string) => l !== '')}
+            />
+            {fromClient && (
+              <p className="muted" style={{ marginTop: 8, fontSize: 12.5 }}>
+                คำอธิบายไทยชุดนี้มาจากตารางไอเทมของไคลเอนต์ RO ภาษาไทย ไม่ใช่ไคลเอนต์ Zero ·
+                ลงเฉพาะรายการที่ตัวเลขในข้อความไทยตรงกับข้อความอังกฤษของเราทุกตัว
+              </p>
+            )}
+          </div>
+        );
+      })()}
       {/* Before the drop list: a craftable item is usually made, not farmed,
           and the recipe is the shorter answer. */}
       <ItemShops itemId={item.id} />
