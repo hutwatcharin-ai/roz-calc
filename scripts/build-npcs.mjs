@@ -158,7 +158,12 @@ function main() {
     // The file name, extension included: the mirrored quest sprites are GIFs
     // and the ones decoded out of a client GRF are PNGs, so the page cannot
     // assume either.
-    npc.sprite = code && haveImage.has(code.toLowerCase()) ? haveImage.get(code.toLowerCase()) : null;
+    // A row the source could not name is named after its sprite ("4 F Kafra3"),
+    // so the label itself is the file to look for.
+    const fromLabel = npc.hasName ? null : npc.name.trim().replace(/\s+/g, '_').toLowerCase();
+    const file =
+      (code && haveImage.get(code.toLowerCase())) ?? (fromLabel && haveImage.get(fromLabel)) ?? null;
+    npc.sprite = file;
     if (npc.sprite) sprites += 1;
   }
 
@@ -201,6 +206,11 @@ function main() {
   // the Zero crawl is quest NPCs only. Same caveat as the shopkeepers: it is a
   // non-Zero client, so only towns this game has are kept, and a spot we
   // already publish a shopkeeper for is left alone.
+  const ROLE_SPRITE_FILES = {
+    'Kafra Employee': '4_f_kafra1',
+    Guide: '1_m_jobguider',
+    Blacksmith: '1_m_smith',
+  };
   const TOWN_ROLES = {
     0: 'Tool Dealer',
     1: 'Weapon Dealer',
@@ -227,6 +237,9 @@ function main() {
         const place = `${map}|${x}|${y}`;
         if (taken.has(place)) continue;
         taken.add(place);
+        // The role's own sprite, not this counter's: the directory lists a job,
+        // not a sprite id, so a Kafra page shows a Kafra and claims no more.
+        const roleSprite = ROLE_SPRITE_FILES[role] ?? null;
         npcs.push({
           slug: `town-${`${name} ${map} ${x} ${y}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
           name,
@@ -239,9 +252,10 @@ function main() {
           y: Number(y),
           quests: [],
           sells: [],
-          sprite: null,
+          sprite: roleSprite && haveImage.has(roleSprite) ? haveImage.get(roleSprite) : null,
           description: null,
         });
+        if (roleSprite && haveImage.has(roleSprite)) sprites += 1;
         townNpcs += 1;
       }
     }

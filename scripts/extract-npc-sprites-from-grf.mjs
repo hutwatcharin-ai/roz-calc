@@ -37,6 +37,7 @@ const DRY = argv.includes('--dry-run');
 const OUT = path.join(process.cwd(), 'public', 'images', 'npcs');
 const SHOPS = path.join(process.cwd(), 'data', 'npc-shops.json');
 const DEST = path.join(process.cwd(), 'data', 'npc-sprites.json');
+const NPCS = path.join(process.cwd(), 'data', 'npcs.json');
 
 function archives(clientDir) {
   return fs
@@ -86,6 +87,28 @@ function main() {
   const shops = JSON.parse(fs.readFileSync(SHOPS, 'utf8'));
   const wanted = [...new Set((shops.sellers ?? []).map((seller) => seller.sprite).filter(Number.isInteger))];
   console.log(`${wanted.length} sprite ids used by shop NPCs`);
+
+  // The town fixtures have no sprite id of their own -- the client's town
+  // directory lists a role, not a sprite -- so each role takes the sprite the
+  // game uses for that job. A Kafra page shows a Kafra; it does not claim to
+  // show which of the six Kafra sprites that particular counter uses.
+  const ROLE_SPRITES = { KAFRA: '4_F_KAFRA1', GUIDE: '1_M_JOBGUIDER', BLACKSMITH: '1_M_SMITH' };
+  const constants = new Set(Object.values(ROLE_SPRITES));
+
+  // The crawled NPCs the source could not name are named after their sprite --
+  // "4 F Kafra3", "1 M Innkeeper", "2 Board1" -- so the label IS the lookup.
+  // Read from the last build of data/npcs.json, which is why the order is
+  // build-npcs, then this, then build-npcs again.
+  if (fs.existsSync(NPCS)) {
+    for (const npc of JSON.parse(fs.readFileSync(NPCS, 'utf8')).npcs ?? []) {
+      if (npc.hasName || npc.sprite) continue;
+      constants.add(npc.name.trim().replace(/\s+/g, '_').toUpperCase());
+    }
+  }
+  for (const constant of constants) {
+    const id = [...byId.entries()].find(([, name]) => name === constant)?.[0];
+    if (id !== undefined && !wanted.includes(id)) wanted.push(id);
+  }
 
   if (!DRY) fs.mkdirSync(OUT, { recursive: true });
   const written = {};

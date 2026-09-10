@@ -160,16 +160,25 @@ describe('the shopkeepers', () => {
 });
 
 describe('sprites', () => {
-  it('comes from both sources', () => {
-    // Two different joins, and both have to keep working. A quest NPC gets a
-    // sprite when a rozerodb page describes the same NPC (same coordinates or
-    // the same quest); a shopkeeper gets one because rAthena's script names a
-    // sprite id and a client GRF turns that id into a file.
+  it('comes from all three sources, each by its own join', () => {
+    // A quest NPC gets a sprite when a rozerodb page describes the same NPC
+    // (same coordinates or the same quest); a shopkeeper because rAthena names
+    // a sprite id that a client GRF turns into a file; a town fixture because
+    // its role has a standard sprite.
     const quest = ALL_NPCS.filter((npc) => npc.sprite && npc.source === 'prontera');
     const shop = ALL_NPCS.filter((npc) => npc.sprite && npc.source === 'rathena');
+    const town = ALL_NPCS.filter((npc) => npc.sprite && npc.source === 'client');
     expect(quest.length).toBeGreaterThan(30);
     expect(shop.length).toBeGreaterThan(80);
-    expect(NPCS_WITH_SPRITE).toBe(quest.length + shop.length);
+    expect(town.length).toBeGreaterThan(50);
+    expect(NPCS_WITH_SPRITE).toBe(quest.length + shop.length + town.length);
+  });
+
+  it('gives every Kafra a picture', () => {
+    // The complaint that started this: a Kafra page with no Kafra on it.
+    for (const npc of ALL_NPCS.filter((n) => n.source === 'client' && n.name.includes('Kafra'))) {
+      expect(npc.sprite, npc.slug).toBeTruthy();
+    }
   });
 
   it('names a file that exists, extension included', async () => {
