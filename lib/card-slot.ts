@@ -58,3 +58,34 @@ export function cardSlot(description: string | null | undefined): CardSlot | nul
   if (!raw) return null;
   return SLOT_WORDS[raw.toLowerCase()] ?? null;
 }
+
+/**
+ * The equipment list, filtered to the gear this card can go in.
+ *
+ * The two catalogues name the same places differently -- a card says
+ * "Headgear", the equipment filter says category=Armor&type=Headgear -- so the
+ * translation lives here rather than being spelled out at each call site.
+ */
+export function equipmentHrefForSlot(slot: CardSlot): string {
+  if (slot === 'weapon') return '/database/equipment?category=Weapon';
+  const type = { armor: 'Armor', shield: 'Shield', garment: 'Garment', shoes: 'Shoes', headgear: 'Headgear', accessory: 'Accessory' }[slot];
+  return `/database/equipment?category=Armor&type=${encodeURIComponent(type)}`;
+}
+
+/** The card slot a piece of gear takes, from the type the equipment list uses. */
+export function cardSlotForGearType(type: string | null | undefined): CardSlot | null {
+  if (!type) return null;
+  const direct: Record<string, CardSlot> = {
+    Headgear: 'headgear',
+    Armor: 'armor',
+    Garment: 'garment',
+    Shoes: 'shoes',
+    Shield: 'shield',
+    Accessory: 'accessory',
+  };
+  if (direct[type]) return direct[type];
+  // Everything else in that column is a weapon type, and every weapon takes a
+  // weapon card. Arrows are the exception: they hold no card at all.
+  if (type === 'Arrow') return null;
+  return 'weapon';
+}

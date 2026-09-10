@@ -10,6 +10,8 @@ import MapMonsterTable from '@/components/MapMonsterTable';
 import { isCVariant } from '@/lib/c-variant';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { mapImage } from '@/lib/map-image';
+import { naviCommand } from '@/lib/rozglobal-guides';
+import { ALL_NPCS } from '@/lib/npcs';
 
 export const revalidate = 86400;
 
@@ -93,6 +95,17 @@ export default async function MapDetailPage({ params }: { params: { code: string
   // below disappears rather than leaving a broken image behind.
   const picture = mapImage(code);
 
+  // Who else is standing here, and what there is to do here. A map page listed
+  // its monsters and nothing else, while 78 of them have an NPC on them and 84
+  // carry a quest -- both facts this site already held and never showed.
+  const npcsHere = ALL_NPCS.filter((npc) => npc.map === code && npc.hasName);
+  const { data: questsHere, error: questError } = await supabaseBrowser()
+    .from('quests')
+    .select('id, name, name_th, town_key, type')
+    .eq('map_code', code)
+    .order('id');
+  if (questError) console.error('map quest query failed', questError);
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
@@ -150,6 +163,43 @@ export default async function MapDetailPage({ params }: { params: { code: string
         <MapMonsterTable monsters={monsters} cCount={cCount} />
       </div>
       </div>
+
+      {(questsHere ?? []).length > 0 && (
+        <div className="card" style={{ marginTop: 20 }}>
+          <h2 className="section-title">เควสที่เกิดในแมพนี้ ({questsHere!.length})</h2>
+          <ul className="shoplist">
+            {questsHere!.map((quest) => (
+              <li key={quest.id} className="shoprow">
+                <span className="shoprow__who">
+                  <Link href={`/database/quests/${quest.town_key}#q${quest.id}`}>{quest.name_th ?? quest.name}</Link>
+                  {quest.name_th && <span className="muted" style={{ marginInlineStart: 8, fontSize: 12.5 }}>{quest.name}</span>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {npcsHere.length > 0 && (
+        <div className="card" style={{ marginTop: 20 }}>
+          <h2 className="section-title">NPC ในแมพนี้ ({npcsHere.length})</h2>
+          <ul className="shoplist">
+            {npcsHere.map((npc) => (
+              <li key={npc.slug} className="shoprow">
+                <span className="shoprow__who">
+                  {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={24} />}
+                  <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
+                  {npc.quests.length > 0 && <span className="muted"> · เควส {npc.quests.length}</span>}
+                  {npc.sells.length > 0 && <span className="muted"> · ขายของ {npc.sells.length} ชนิด</span>}
+                </span>
+                {naviCommand(npc.map, npc.x, npc.y) && (
+                  <code className="mono navicmd shoprow__navi">{naviCommand(npc.map, npc.x, npc.y)}</code>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </main>
   );
 }

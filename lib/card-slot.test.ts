@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cardSlot, parseCardSlot } from './card-slot';
+import { SLOT_ORDER, cardSlot, cardSlotForGearType, equipmentHrefForSlot, parseCardSlot } from './card-slot';
 
 describe('parseCardSlot', () => {
   it('reads the slot from the Equipped on line', () => {
@@ -51,5 +51,35 @@ describe('cardSlot', () => {
     expect(cardSlot('Equipped on : c')).toBeNull();
     expect(cardSlot('Type : Card\nWeight : 1')).toBeNull();
     expect(cardSlot(null)).toBeNull();
+  });
+});
+
+describe('the link between cards and gear', () => {
+  it('sends a card to the gear it can go in', () => {
+    expect(equipmentHrefForSlot('headgear')).toBe('/database/equipment?category=Armor&type=Headgear');
+    expect(equipmentHrefForSlot('shield')).toBe('/database/equipment?category=Armor&type=Shield');
+    // A weapon card fits any weapon, so the link stops at the category.
+    expect(equipmentHrefForSlot('weapon')).toBe('/database/equipment?category=Weapon');
+  });
+
+  it('sends a piece of gear to the cards that fit it', () => {
+    expect(cardSlotForGearType('Headgear')).toBe('headgear');
+    expect(cardSlotForGearType('Accessory')).toBe('accessory');
+    // Every weapon type takes a weapon card, so they all fold to one slot.
+    expect(cardSlotForGearType('Two-handed Spear')).toBe('weapon');
+    expect(cardSlotForGearType('Katar')).toBe('weapon');
+  });
+
+  it('offers nothing for a row that holds no card', () => {
+    // Arrows are in the weapon category and have no socket at all.
+    expect(cardSlotForGearType('Arrow')).toBeNull();
+    expect(cardSlotForGearType(null)).toBeNull();
+  });
+
+  it('speaks the value the card list filters on', () => {
+    // The list compares against the folded slot ('headgear'), not the
+    // client's own wording ('Headgear') -- linking the latter matched nothing
+    // and quietly showed all 315 cards.
+    for (const slot of SLOT_ORDER) expect(slot).toBe(slot.toLowerCase());
   });
 });

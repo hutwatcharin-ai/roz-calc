@@ -1,5 +1,21 @@
 // app/guides/elements/page.tsx
 import Link from 'next/link';
+
+// The element column's own values, paired with the Thai the monster list
+// shows. Only the ten a monster can carry -- the table above also has rows
+// for attack elements a monster never is.
+const MONSTER_ELEMENTS: [string, string][] = [
+  ['Neutral', 'ไร้ธาตุ'],
+  ['Water', 'น้ำ'],
+  ['Earth', 'ดิน'],
+  ['Fire', 'ไฟ'],
+  ['Wind', 'ลม'],
+  ['Poison', 'พิษ'],
+  ['Holy', 'ศักดิ์สิทธิ์'],
+  ['Shadow', 'มืด'],
+  ['Ghost', 'ผี'],
+  ['Undead', 'อันเดด'],
+];
 import ElementTable from '@/components/ElementTable';
 import type { ElementLevel } from '@/lib/element-table';
 
@@ -37,9 +53,24 @@ export default function ElementsPage() {
         <ElementTable key={level} level={level} />
       ))}
 
-      <p className="muted" style={{ marginTop: 20 }}>
+      {/* One link per element rather than one link to the list. The table
+          above answers "what beats what"; the next thing a reader wants is
+          the monsters of that element, and until the monster list grew chips
+          there was no URL to send them to. */}
+      <section className="rolepick" style={{ marginTop: 20 }}>
+        <h2 className="rolepick__label">ดูมอนสเตอร์ตามธาตุ</h2>
+        <div className="chips">
+          {MONSTER_ELEMENTS.map(([code, th]) => (
+            <Link key={code} className="chip" href={`/database/monsters?element=${code}`}>
+              {th}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <p className="muted" style={{ marginTop: 16 }}>
         อยากรู้ว่ามอนตัวไหนธาตุอะไร ดูได้ที่ <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link>{' '}
-        ซึ่งกรองตามธาตุได้
+        ซึ่งกรองตามธาตุ เผ่า และขนาดได้
       </p>
     </main>
   );

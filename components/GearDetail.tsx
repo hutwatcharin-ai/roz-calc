@@ -13,9 +13,11 @@ import ItemIcon from '@/components/ItemIcon';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import ItemShops from '@/components/ItemShops';
+import ItemQuests from '@/components/ItemQuests';
 import RandomOptionsCard from '@/components/RandomOptionsCard';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { randomOptionsFor } from '@/lib/random-options';
+import { cardSlotForGearType } from '@/lib/card-slot';
 import type { GearExtras } from '@/lib/gear-detail';
 
 export const CATEGORY_LABELS: Record<string, string> = {
@@ -181,11 +183,28 @@ export default function GearDetail({
         </div>
       )}
 
+      {/* The card catalogue and the gear catalogue are read together and had
+          no link between them: a shield page said nothing about the 30 cards
+          that go in a shield. slots > 0 is the condition -- a piece with no
+          socket takes no card, however many exist for its slot. */}
+      {item.slots > 0 && cardSlotForGearType(item.weapon_type) && (
+        <p className="muted" style={{ marginTop: 16 }}>
+          <Link href={`/database/cards?slot=${cardSlotForGearType(item.weapon_type)}`}>
+            ดูการ์ดที่ใส่ช่องนี้ได้ →
+          </Link>
+        </p>
+      )}
+
       {/* 79 of the 167 items with a seller are weapons and armour, and this
           page did not show a single one of them: the shop table was wired into
           the item route only. A player looking up Falchion could see its ATK
           and not that a Weapon Dealer sells it. */}
       <ItemShops itemId={item.id} />
+
+      {/* The other half of a link that ran one way: quest text names its
+          items by id, so a quest page could point here and this page could
+          not point back. */}
+      <ItemQuests itemId={item.id} />
 
       {item.description && (
         <div className="card" style={{ marginTop: 20 }}>

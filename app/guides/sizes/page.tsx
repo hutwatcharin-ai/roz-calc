@@ -63,9 +63,18 @@ export default function SizesPage() {
         </table>
       </div>
 
-      <p className="muted" style={{ marginTop: 20 }}>
-        อยากรู้ว่ามอนตัวไหนขนาดอะไร เปิด <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link>{' '}
-        แล้วกดเข้าไปดูรายตัว หน้ามอนจะบอกด้วยว่าอาวุธชนิดไหนตีตัวนั้นได้เต็ม
+      <section className="rolepick" style={{ marginTop: 20 }}>
+        <h2 className="rolepick__label">ดูมอนสเตอร์ตามขนาด</h2>
+        <div className="chips">
+          <Link className="chip" href="/database/monsters?size=Small">เล็ก</Link>
+          <Link className="chip" href="/database/monsters?size=Medium">กลาง</Link>
+          <Link className="chip" href="/database/monsters?size=Large">ใหญ่</Link>
+        </div>
+      </section>
+
+      <p className="muted" style={{ marginTop: 16 }}>
+        กดเข้าไปดูรายตัวได้จาก <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link>{' '}
+        หน้ามอนจะบอกด้วยว่าอาวุธชนิดไหนตีตัวนั้นได้เต็ม
       </p>
     </main>
   );

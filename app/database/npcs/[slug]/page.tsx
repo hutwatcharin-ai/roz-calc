@@ -54,6 +54,14 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
 
   const navi = naviCommand(npc.map, npc.x, npc.y);
 
+  // A map page exists only for maps that have monsters on them, which is every
+  // field and dungeon and no town. So the link is offered where there is one
+  // and the code stays plain text where there is not.
+  const { data: mapRow } = npc.map
+    ? await supabaseBrowser().from('map_stats').select('map_code').eq('map_code', npc.map).maybeSingle()
+    : { data: null };
+  const mapHref = mapRow ? `/database/maps/${encodeURIComponent(npc.map as string)}` : null;
+
   // What a shopkeeper sells, with the icons the item pages already use.
   const { data: goods, error: goodsError } = npc.sells.length
     ? await supabaseBrowser().from('items').select('id, name_en, category, icon_url').in('id', npc.sells)
@@ -88,7 +96,12 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
         <h2 className="section-title">อยู่ที่ไหน</h2>
         <table className="stat-table" style={{ marginTop: 8 }}>
           <tbody>
-            <tr><td>แมพ</td><td className="num">{npc.mapName ?? '—'}</td></tr>
+            <tr>
+              <td>แมพ</td>
+              <td className="num">
+                {mapHref ? <Link href={mapHref}>{npc.mapName ?? npc.map}</Link> : npc.mapName ?? '—'}
+              </td>
+            </tr>
             <tr><td>โค้ดแมพ</td><td className="num mono">{npc.map ?? '—'}</td></tr>
             {npc.x !== null && npc.y !== null && (
               <tr><td>พิกัด</td><td className="num mono">{npc.x}/{npc.y}</td></tr>

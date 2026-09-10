@@ -111,6 +111,14 @@ export default async function QuestTownPage({
   // Type chips are derived from what this town actually has, so a filter that
   // would show nothing is never offered. The whole hub stays one page; this
   // narrows it without changing any quest's canonical anchor.
+  // Which of this hub's map codes have a map page. One query, so a quest card
+  // can link a field to its page and a town to the NPCs standing in it.
+  const codesHere = [...new Set(allQuests.map((q) => q.map_code).filter(Boolean))] as string[];
+  const { data: mappedRows } = codesHere.length
+    ? await db.from('map_stats').select('map_code').in('map_code', codesHere)
+    : { data: [] };
+  const mappedCodes = new Set((mappedRows ?? []).map((row) => row.map_code));
+
   const typesHere = [...new Set(allQuests.map((q) => q.type))].sort();
   const typeFilter = typesHere.includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
   const quests = typeFilter ? allQuests.filter((q) => q.type === typeFilter) : allQuests;
@@ -182,7 +190,16 @@ export default async function QuestTownPage({
               ))}
               {quest.map_code && (
                 <>
-                  {' · '}แมพ <span className="mono">{quest.map_code}</span>
+                  {' · '}แมพ{' '}
+                  {/* A field or dungeon has a page of its own; a town does not,
+                      because the map index only holds maps with monsters. The
+                      town still has an NPC list, which is the useful half of
+                      what a town page would have said. */}
+                  {mappedCodes.has(quest.map_code) ? (
+                    <Link className="mono" href={`/database/maps/${encodeURIComponent(quest.map_code)}`}>{quest.map_code}</Link>
+                  ) : (
+                    <Link className="mono" href={`/database/npcs?map=${encodeURIComponent(quest.map_code)}`}>{quest.map_code}</Link>
+                  )}
                   {quest.coord_x !== null && quest.coord_y !== null && (
                     <span className="mono"> ({quest.coord_x}, {quest.coord_y})</span>
                   )}

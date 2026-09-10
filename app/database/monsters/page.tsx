@@ -109,11 +109,21 @@ export default async function MonsterListPage({
 
   const db = supabaseBrowser();
   const counts = await monsterCounts();
-  let query = db
-    .from('monsters')
-    .select('id, name_en, level, race, element, image_url, is_aggressive, atk_max, hp, base_exp', { count: 'exact' });
 
-  if (q) {
+  /**
+   * Everything the list filters on, applied in one place.
+   *
+   * It lives in a function because the facet chips below need the same
+   * filters with one of them left out: the count on the ธาตุ chips has to be
+   * "how many of the monsters you are already looking at are Fire", not "how
+   * many monsters in the game are Fire". Written twice, the two would drift.
+   */
+  function applyFilters<T>(
+    input: T,
+    picked: { race: string; element: string; size: string },
+  ): T {
+    let query = input as any;
+    if (q) {
     // One condition per word, ANDed: "potion red" finds Red Potion, which
     // a single `%potion red%` never could. Words, not the raw string, is
     // the whole difference (7 Sep 2026).
@@ -137,15 +147,42 @@ export default async function MonsterListPage({
       }
     }
   }
-  if (race) query = query.eq('race', race);
-  if (element) query = query.eq('element', element);
-  if (size) query = query.eq('size', size);
-  if (aggro) query = query.eq('is_aggressive', aggro === '1');
-  if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
-  if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) query = query.not('name_en', 'like', pattern);
-  if (mvpOnly) query = query.eq('is_mvp', true);
-  if (lvmin > 0) query = query.gte('level', lvmin);
-  if (lvmax > 0) query = query.lte('level', lvmax);
+    if (picked.race) query = query.eq('race', picked.race);
+    if (picked.element) query = query.eq('element', picked.element);
+    if (picked.size) query = query.eq('size', picked.size);
+    if (aggro) query = query.eq('is_aggressive', aggro === '1');
+    if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+    if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) query = query.not('name_en', 'like', pattern);
+    if (mvpOnly) query = query.eq('is_mvp', true);
+    if (lvmin > 0) query = query.gte('level', lvmin);
+    if (lvmax > 0) query = query.lte('level', lvmax);
+    return query as T;
+  }
+
+  const query = applyFilters(
+    db.from('monsters').select('id, name_en, level, race, element, image_url, is_aggressive, atk_max, hp, base_exp', { count: 'exact' }),
+    { race, element, size },
+  );
+
+  // The facets, counted against everything else the reader has already
+  // chosen. Three queries of at most 2,000 short rows -- the whole monster
+  // table is about 700 -- rather than 23 head-count round trips.
+  const [raceRows, elementRows, sizeRows] = await Promise.all([
+    applyFilters(db.from('monsters').select('race'), { race: '', element, size }).range(0, 1999),
+    applyFilters(db.from('monsters').select('element'), { race, element: '', size }).range(0, 1999),
+    applyFilters(db.from('monsters').select('size'), { race, element, size: '' }).range(0, 1999),
+  ]);
+  const tally = (rows: { data: Record<string, string | null>[] | null }, column: string) => {
+    const out = new Map<string, number>();
+    for (const row of rows.data ?? []) {
+      const value = row[column];
+      if (value) out.set(value, (out.get(value) ?? 0) + 1);
+    }
+    return out;
+  };
+  const raceCounts = tally(raceRows as never, 'race');
+  const elementCounts = tally(elementRows as never, 'element');
+  const sizeCounts = tally(sizeRows as never, 'size');
 
   const from = (page - 1) * PAGE_SIZE;
   const { data: monsters, count, error } = await query
@@ -187,6 +224,33 @@ export default async function MonsterListPage({
   }
 
   const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
+
+  /**
+   * A facet chip keeps every other filter and drops the page number. Chips
+   * rather than another dropdown for the reason the equipment list learned on
+   * 10 Sep: a select renders no link, so "มอนธาตุไฟ" and "มอนเผ่าอันเดด" were
+   * pages this site had and Google could not see. Picking the value that is
+   * already on turns it off, so a chip is its own undo.
+   */
+  function facetHref(next: { race?: string; element?: string; size?: string }): string {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    const nextRace = next.race ?? race;
+    const nextElement = next.element ?? element;
+    const nextSize = next.size ?? size;
+    if (nextRace) params.set('race', nextRace);
+    if (nextElement) params.set('element', nextElement);
+    if (nextSize) params.set('size', nextSize);
+    if (aggro) params.set('aggro', aggro);
+    if (lvmin > 0) params.set('lvmin', String(lvmin));
+    if (lvmax > 0) params.set('lvmax', String(lvmax));
+    if (mvpOnly) params.set('mvp', '1');
+    if (showC) params.set('c', '1');
+    if (showMj) params.set('mj', '1');
+    if (sort !== 'level') params.set('sort', sort);
+    const qs = params.toString();
+    return `/database/monsters${qs ? `?${qs}` : ''}`;
+  }
 
   // Same URL with the Mj switch flipped, always back to page 1: the row
   // count changes, so the page number would stop meaning the same thing.
@@ -238,6 +302,48 @@ export default async function MonsterListPage({
       )}
       <PageHeader title="ฐานข้อมูลมอนสเตอร์ Ragnarok Zero" />
       <RecentlyViewed />
+
+      {/* Three rows of chips, each counted against the other two, so nothing
+          here leads to an empty page. The dropdowns stay: they hold the
+          filters chips cannot express (level band, sort, the C and Mj
+          switches), and a chip row for those would be worse than a select. */}
+      <section className="rolepick">
+        <h2 className="rolepick__label">ธาตุ</h2>
+        <div className="chips">
+          <Link className={`chip${element === '' ? ' chip--on' : ''}`} href={facetHref({ element: '' })}>ทุกธาตุ</Link>
+          {ELEMENTS.filter((e) => (elementCounts.get(e) ?? 0) > 0).map((e) => (
+            <Link key={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
+              {ELEMENT_TH[e] ?? e} <span className="chip__count">{elementCounts.get(e)}</span>
+            </Link>
+          ))}
+        </div>
+        {/* Three rows of chips put the first monster 1,197px down a 390px
+            screen. Element leads because it is the one people filter by, and
+            the other two fold -- open when either is in use, so a filter is
+            never applied out of sight. The links stay in the HTML either way,
+            which is the half that matters to a crawler. */}
+        <details className="shopmore" open={race !== '' || size !== ''}>
+          <summary>เผ่าและขนาด</summary>
+          <h2 className="rolepick__label" style={{ marginTop: 6 }}>เผ่า</h2>
+          <div className="chips">
+            <Link className={`chip${race === '' ? ' chip--on' : ''}`} href={facetHref({ race: '' })}>ทุกเผ่า</Link>
+            {RACES.filter((r) => (raceCounts.get(r) ?? 0) > 0).map((r) => (
+              <Link key={r} className={`chip${race === r ? ' chip--on' : ''}`} href={facetHref({ race: race === r ? '' : r })}>
+                {RACE_TH[r] ?? r} <span className="chip__count">{raceCounts.get(r)}</span>
+              </Link>
+            ))}
+          </div>
+          <h2 className="rolepick__label" style={{ marginTop: 10 }}>ขนาด</h2>
+          <div className="chips">
+            <Link className={`chip${size === '' ? ' chip--on' : ''}`} href={facetHref({ size: '' })}>ทุกขนาด</Link>
+            {SIZES.filter((z) => (sizeCounts.get(z) ?? 0) > 0).map((z) => (
+              <Link key={z} className={`chip${size === z ? ' chip--on' : ''}`} href={facetHref({ size: size === z ? '' : z })}>
+                {SIZE_TH[z] ?? z} <span className="chip__count">{sizeCounts.get(z)}</span>
+              </Link>
+            ))}
+          </div>
+        </details>
+      </section>
 
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อมอนสเตอร์" aria-label="ค้นชื่อมอนสเตอร์" />
@@ -308,8 +414,8 @@ export default async function MonsterListPage({
         unit="ตัว"
         filters={[
           { label: 'คำค้น', value: q },
-          { label: 'เผ่า', value: race },
-          { label: 'ธาตุ', value: element },
+          { label: 'เผ่า', value: race ? `${race} · ${RACE_TH[race] ?? ''}`.trim() : '' },
+          { label: 'ธาตุ', value: element ? `${element} · ${ELEMENT_TH[element] ?? ''}`.trim() : '' },
           // Every filter that is on has to appear here: a filter applied and
           // not named is the reason a reader thinks the database is missing
           // rows.

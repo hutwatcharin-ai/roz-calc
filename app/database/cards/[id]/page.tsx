@@ -13,7 +13,7 @@ import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCardCategory, itemHref } from '@/lib/item-href';
-import { parseCardSlot } from '@/lib/card-slot';
+import { cardSlot, equipmentHrefForSlot, parseCardSlot } from '@/lib/card-slot';
 import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
 import { CardDroppers, CardHero } from './hero';
@@ -101,7 +101,16 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         <span className="crumbs__sep" aria-hidden="true">›</span>
         {slot ? (
           <>
-            <Link href={`/database/cards?slot=${encodeURIComponent(slot)}`}>{slot}</Link>
+            {/* The list filters on the folded value ('headgear'), not on the
+                client's own wording ('Headgear'), so linking the raw string
+                quietly matched nothing and showed all 315 cards. */}
+            <Link href={`/database/cards?slot=${encodeURIComponent(cardSlot(item.description) ?? '')}`}>{slot}</Link>
+            {cardSlot(item.description) && (
+              <>
+                {' · '}
+                <Link href={equipmentHrefForSlot(cardSlot(item.description)!)}>ดูอุปกรณ์ที่ใส่ช่องนี้</Link>
+              </>
+            )}
             <span className="crumbs__sep" aria-hidden="true">›</span>
           </>
         ) : null}

@@ -34,6 +34,20 @@ export default async function WorldMapPage() {
       {(error || countError) && <p className="worldmap-page__warning">โหลดสถิติบางส่วนไม่สำเร็จชั่วคราว แต่ยังค้นหาและเปิดแผนที่ได้</p>}
       <WorldMap tiles={tiles} dungeons={dungeons} regions={WORLD_MAP_REGIONS} totalMaps={count ?? 497} />
       <p className="worldmap-page__foot">World atlas แสดง 102 map IDs และ dungeon หลัก ส่วนรายการฐานข้อมูลครบทั้งหมดอยู่ที่ <Link href="/database/maps">ฐานข้อมูลแมพ →</Link></p>
+
+      {/* Every tile on the atlas, as a plain link. The map itself only reveals
+          a link once a tile is selected, which means a reader without a mouse
+          -- and every crawler -- saw an atlas with no way out of it. */}
+      <section className="card" style={{ marginTop: 20 }}>
+        <h2 className="section-title">แมพทั้งหมดในแผนที่นี้ ({tiles.length + dungeons.length})</h2>
+        <div className="chips" style={{ marginTop: 10 }}>
+          {[...tiles, ...dungeons].map((entry) => (
+            <Link key={entry.key} className="chip" href={`/database/maps/${encodeURIComponent(entry.mapCode)}`}>
+              {entry.nameEn} <span className="chip__count">{entry.monsters.length}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

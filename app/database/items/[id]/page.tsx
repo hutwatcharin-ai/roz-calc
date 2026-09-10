@@ -1,6 +1,7 @@
 import { isCVariant } from '@/lib/c-variant';
 import ItemCrafting from '@/components/ItemCrafting';
 import ItemShops from '@/components/ItemShops';
+import ItemQuests from '@/components/ItemQuests';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import JsonLd from '@/components/JsonLd';
@@ -288,6 +289,11 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       {/* Before the drop list: a craftable item is usually made, not farmed,
           and the recipe is the shorter answer. */}
       <ItemShops itemId={item.id} />
+
+      {/* The other half of a link that ran one way: quest text names its
+          items by id, so a quest page could point here and this page could
+          not point back. */}
+      <ItemQuests itemId={item.id} />
 
       <ItemCrafting itemId={item.id} />
 
