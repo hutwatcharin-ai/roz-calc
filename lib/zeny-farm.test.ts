@@ -3,21 +3,36 @@ import { rankMaps, walkInReason, zenyPerKill, type MonsterValue } from './zeny-f
 
 describe('zenyPerKill', () => {
   it('weighs each drop by its chance', () => {
-    // 5% of a 100z item plus 50% of a 10z one.
+    // 5% of a 100z item plus 50% of a 10z one. The rate column is a percent.
     const { perKill } = zenyPerKill([
-      { itemId: 1, rate: 500, sellPrice: 100 },
-      { itemId: 2, rate: 5000, sellPrice: 10 },
+      { itemId: 1, rate: 5, sellPrice: 100 },
+      { itemId: 2, rate: 50, sellPrice: 10 },
     ]);
     expect(perKill).toBeCloseTo(10, 5);
+  });
+
+  it('reads the rate as the site stores it: a percent', () => {
+    // The real Poring row -- Jellopy 70 at 3z, Sticky Mucus 4 at 35z, Apple
+    // 10 at 7z, Fly Wing 5 at 125z, Knife 1 at 25z -- is about 10.7z a kill.
+    // Read on rAthena's per-10,000 scale it is 0.1z, which is what the first
+    // draft of this page published.
+    const { perKill } = zenyPerKill([
+      { itemId: 909, rate: 70, sellPrice: 3 },
+      { itemId: 938, rate: 4, sellPrice: 35 },
+      { itemId: 512, rate: 10, sellPrice: 7 },
+      { itemId: 601, rate: 5, sellPrice: 125 },
+      { itemId: 1201, rate: 1, sellPrice: 25 },
+    ]);
+    expect(perKill).toBeCloseTo(10.7, 1);
   });
 
   it('counts what it could not price instead of guessing', () => {
     // 3,000 of our items carry no sell price and 410 drop rows no rate. A
     // page that says "at least" needs to know how much it left out.
     const { perKill, unpriced } = zenyPerKill([
-      { itemId: 1, rate: 500, sellPrice: 100 },
+      { itemId: 1, rate: 5, sellPrice: 100 },
       { itemId: 2, rate: null, sellPrice: 50 },
-      { itemId: 3, rate: 1000, sellPrice: null },
+      { itemId: 3, rate: 10, sellPrice: null },
     ]);
     expect(perKill).toBeCloseTo(5, 5);
     expect(unpriced).toBe(2);

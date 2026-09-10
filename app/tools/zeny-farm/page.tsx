@@ -118,7 +118,7 @@ export default async function ZenyFarmPage() {
     const rows = (dropsByMonster.get(id) ?? []).filter((row) => row.rate !== null && row.sellPrice);
     if (rows.length === 0) return null;
     const best = rows.reduce((a, b) => ((a.rate as number) * (a.sellPrice as number) >= (b.rate as number) * (b.sellPrice as number) ? a : b));
-    return { name: itemName.get(best.itemId) ?? `#${best.itemId}`, value: ((best.rate as number) / 10000) * (best.sellPrice as number) };
+    return { name: itemName.get(best.itemId) ?? `#${best.itemId}`, value: ((best.rate as number) / 100) * (best.sellPrice as number) };
   }
 
   return (

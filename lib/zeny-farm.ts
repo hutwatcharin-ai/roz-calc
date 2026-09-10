@@ -14,7 +14,12 @@
 // to invent, and an invented number would carry more weight than the measured
 // ones underneath it.
 
-/** A drop as the table holds it: rate is per-10,000, so 500 is 5%. */
+/**
+ * A drop as the table holds it: rate is a PERCENT, so 70 is 70% (Poring's
+ * Jellopy). rAthena's own scale is per-10,000, and this file was first written
+ * against that -- every zeny figure on the draft page came out a hundred times
+ * too small until the Poring row was checked by hand on 11 Sep 2026.
+ */
 export interface DropRow {
   itemId: number;
   rate: number | null;
@@ -63,7 +68,7 @@ export function zenyPerKill(drops: DropRow[]): { perKill: number; unpriced: numb
       unpriced += 1;
       continue;
     }
-    perKill += (drop.rate / 10000) * drop.sellPrice;
+    perKill += (drop.rate / 100) * drop.sellPrice;
   }
   return { perKill, unpriced };
 }
