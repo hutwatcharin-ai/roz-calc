@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
-import EquipCategoryType from '@/components/EquipCategoryType';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -14,6 +13,8 @@ import { redirect } from 'next/navigation';
 import { ZERO_JOBS } from '@/lib/zero-jobs';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import ItemIcon from '@/components/ItemIcon';
+import { CATEGORY_TH, TYPE_TH, gearCategory, gearType, typesFor } from '@/lib/gear-type';
+import { ROLE_ORDER, ROLE_TH, gearRoles, isGearRole, type GearRole } from '@/lib/gear-roles';
 
 export const revalidate = 86400;
 
@@ -25,42 +26,27 @@ export const metadata = {
 
 const PAGE_SIZE = 50;
 
-// Second-tier filter, rozerodb-style: pick Weapon or Armor first, then the
-// concrete type. Values mirror what actually exists in items.weapon_type
-// after the 2026-08-31 normalisation pass (case duplicates folded, bare
-// "Sword"/"Spear" mapped to their one-handed forms).
-const WEAPON_TYPES = ['Bow', 'Dagger', 'One-handed Sword', 'Two-handed Sword', 'One-handed Axe', 'Two-handed Axe', 'One-handed Spear', 'Two-handed Spear', 'One-handed Staff', 'Two-handed Staff', 'Mace', 'Book', 'Katar', 'Knuckle', 'Whip', 'Instrument', 'Huuma Shuriken', 'Arrow'];
-const ARMOR_TYPES = ['Headgear', 'Armor', 'Garment', 'Shoes', 'Shield', 'Accessory'];
-// Costumes are not listed here: they moved to /database/costumes on 3 Sep 2026,
+// The type lists and their Thai labels live in lib/gear-type, next to the code
+// that fills in the 248 rows whose type our own table does not carry.
+// Costumes are not among them: they moved to /database/costumes on 3 Sep 2026,
 // where 940 cosmetic rows stop crowding out the 875 pieces of real gear.
-const TYPES_BY_CATEGORY: Record<string, readonly string[]> = {
-  Weapon: WEAPON_TYPES,
-  Armor: ARMOR_TYPES,
-};
-const TYPE_PLACEHOLDERS: Record<string, string> = {
-  Weapon: 'ทุกชนิดอาวุธ',
-  Armor: 'ทุกตำแหน่งสวม',
-};
-const CATEGORY_LABELS: Record<string, string> = {
-  Weapon: 'อาวุธ',
-  Armor: 'เกราะ/สวมใส่',
-};
 
 export default async function EquipmentPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; type?: string; job?: string; mylv?: string; slots?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; type?: string; use?: string; job?: string; mylv?: string; slots?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   // Anything still asking this list for costumes -- an old link, a bookmark,
   // the item list's legacy category map -- gets sent to the page that has
   // them, rather than a filter that now matches nothing.
   if ((searchParams.category ?? '') === COSTUME_CATEGORY) redirect('/database/costumes');
-  const category = searchParams.category ?? '';
+  const category = (GEAR_CATEGORIES as readonly string[]).includes(searchParams.category ?? '') ? (searchParams.category as string) : '';
   // Subtype only applies with a kind chosen, and only values from the fixed
   // lists pass -- the param goes into a comparison, never into SQL.
-  const subtypeOptions = TYPES_BY_CATEGORY[category] ?? [];
+  const subtypeOptions = typesFor(category);
   const type = subtypeOptions.includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
+  const role: GearRole | '' = isGearRole(searchParams.use) ? searchParams.use : '';
   const SORTS = {
     name: { label: 'ชื่อ A-Z' },
     atk: { label: 'ATK สูงก่อน' },
@@ -93,6 +79,7 @@ export default async function EquipmentPage({
     icon_url: string | null;
     category: string | null;
     weapon_type: string | null;
+    description: string | null;
     atk: number | null;
     required_level: number | null;
     equippable_classes: string[] | null;
@@ -100,7 +87,7 @@ export default async function EquipmentPage({
   }>((from, to) =>
     db
       .from('items')
-      .select('id, name_en, icon_url, category, weapon_type, atk, required_level, equippable_classes, slots')
+      .select('id, name_en, icon_url, category, weapon_type, description, atk, required_level, equippable_classes, slots')
       .in('category', [...GEAR_CATEGORIES])
       .order('name_en')
       .order('id')
@@ -111,7 +98,15 @@ export default async function EquipmentPage({
     console.error('equipment query failed', error);
   }
 
-  const items = allItems ?? [];
+  // Type, category and role are resolved once per row: the type column is
+  // empty on 248 rows, and both the chips and the card meta line need the
+  // filled-in answer, not the empty column.
+  const items = (allItems ?? []).map((it) => ({
+    ...it,
+    kind: gearType(it),
+    group: gearCategory(it),
+    roles: gearRoles(it.description),
+  }));
 
   // Job dropdown lists all 20 canonical Zero jobs, not just the ones observed
   // directly in equippable_classes -- canJobEquip resolves class-2 jobs
@@ -121,13 +116,33 @@ export default async function EquipmentPage({
   const jobs = ZERO_JOBS;
 
   const needle = q.trim().toLowerCase();
-  const filtered = items.filter((it) => {
-    if (category && it.category !== category) return false;
-    if (type && it.weapon_type !== type) return false;
+  // Everything except the two chip dimensions. The chip counts are taken from
+  // this, so a chip can never lead to an empty page.
+  const base = items.filter((it) => {
     if (slotsParam !== '' && it.slots !== Number(slotsParam)) return false;
     if (mylv > 0 && it.required_level != null && it.required_level > mylv) return false;
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
     if (needle && !matches(it.name_en, needle)) return false;
+    return true;
+  });
+
+  const categoryCounts = new Map<string, number>();
+  const typeCounts = new Map<string, number>();
+  for (const it of base) {
+    if (it.group) categoryCounts.set(it.group, (categoryCounts.get(it.group) ?? 0) + 1);
+    if (it.kind) typeCounts.set(it.kind, (typeCounts.get(it.kind) ?? 0) + 1);
+  }
+  const roleCounts = new Map<GearRole, number>();
+  for (const it of base) {
+    if (category && it.group !== category) continue;
+    if (type && it.kind !== type) continue;
+    for (const r of it.roles) roleCounts.set(r, (roleCounts.get(r) ?? 0) + 1);
+  }
+
+  const filtered = base.filter((it) => {
+    if (category && it.group !== category) return false;
+    if (type && it.kind !== type) return false;
+    if (role && !it.roles.includes(role)) return false;
     return true;
   });
   if (sort === 'atk') {
@@ -145,11 +160,34 @@ export default async function EquipmentPage({
     if (q) params.set('q', q);
     if (category) params.set('category', category);
     if (type) params.set('type', type);
+    if (role) params.set('use', role);
     if (job) params.set('job', job);
     if (mylv > 0) params.set('mylv', String(mylv));
     if (slotsParam !== '') params.set('slots', slotsParam);
     if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
+    const qs = params.toString();
+    return `/database/equipment${qs ? `?${qs}` : ''}`;
+  }
+
+  /**
+   * A chip link keeps every other filter and drops the page number, because
+   * page 4 of the old filter is not page 4 of this one. Picking a kind clears
+   * the type under it: a Bow filter must not survive a switch to armour.
+   */
+  function chipHref(next: { category?: string; type?: string; use?: GearRole | '' }) {
+    const nextCategory = next.category ?? category;
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (nextCategory) params.set('category', nextCategory);
+    const nextType = next.type ?? (nextCategory === category ? type : '');
+    if (nextType) params.set('type', nextType);
+    const nextRole = next.use ?? role;
+    if (nextRole) params.set('use', nextRole);
+    if (job) params.set('job', job);
+    if (mylv > 0) params.set('mylv', String(mylv));
+    if (slotsParam !== '') params.set('slots', slotsParam);
+    if (sort !== 'name') params.set('sort', sort);
     const qs = params.toString();
     return `/database/equipment${qs ? `?${qs}` : ''}`;
   }
@@ -183,8 +221,9 @@ export default async function EquipmentPage({
           unit="ชิ้น"
           filters={[
             { label: 'คำค้น', value: q },
-            { label: 'หมวด', value: CATEGORY_LABELS[category] ?? category },
-            { label: 'ชนิด', value: type },
+            { label: 'หมวด', value: CATEGORY_TH[category] ?? category },
+            { label: 'ชนิด', value: type ? TYPE_TH[type] ?? type : '' },
+            { label: 'เอาไว้', value: role ? ROLE_TH[role].title : '' },
             { label: 'อาชีพ', value: job },
             { label: 'ใส่ได้ที่ Lv', value: mylv > 0 ? String(mylv) : '' },
             { label: 'Slot', value: slotsParam !== '' ? (slotsParam === '0' ? 'ไม่มี Slot' : `${slotsParam} Slot`) : '' },
@@ -193,16 +232,71 @@ export default async function EquipmentPage({
         />
       )}
 
+      {/* Chips rather than the pair of dropdowns this page used until now.
+          Three reasons, in order of how much they matter: a dropdown renders no
+          link, so Google never saw that this site has a page for spears --
+          "หอกมือเดียว ro" was landing on the monster size table instead; the
+          counts are visible before the click, so no chip leads to an empty
+          page; and one control per dimension cannot disagree with itself the
+          way a chip row plus a select would. The kind comes first and the
+          types under it follow, so a phone shows at most 18 chips, not 24. */}
+      <section className="rolepick">
+        <h2 className="rolepick__label">ประเภท</h2>
+        <div className="chips">
+          <Link className={`chip${category === '' ? ' chip--on' : ''}`} href={chipHref({ category: '', type: '' })}>
+            ทั้งหมด
+          </Link>
+          {GEAR_CATEGORIES.filter((c) => (categoryCounts.get(c) ?? 0) > 0).map((c) => (
+            <Link key={c} className={`chip${category === c ? ' chip--on' : ''}`} href={chipHref({ category: c, type: '' })}>
+              {CATEGORY_TH[c] ?? c} <span className="chip__count">{categoryCounts.get(c)}</span>
+            </Link>
+          ))}
+        </div>
+        {category && (
+          <div className="chips" style={{ marginTop: 8 }}>
+            <Link className={`chip${type === '' ? ' chip--on' : ''}`} href={chipHref({ type: '' })}>
+              {category === 'Weapon' ? 'ทุกชนิดอาวุธ' : 'ทุกตำแหน่งสวม'}
+            </Link>
+            {subtypeOptions
+              .filter((t) => (typeCounts.get(t) ?? 0) > 0)
+              .map((t) => (
+                <Link key={t} className={`chip${type === t ? ' chip--on' : ''}`} href={chipHref({ type: t })}>
+                  {TYPE_TH[t] ?? t} <span className="chip__count">{typeCounts.get(t)}</span>
+                </Link>
+              ))}
+          </div>
+        )}
+      </section>
+
+      {/* The second dimension, the one the card and item lists already have:
+          what the piece is FOR. Every group is a wording the client's own
+          effect text uses (lib/gear-roles); a piece serves every group it
+          truly serves, so the counts overlap. */}
+      {roleCounts.size > 0 && (
+        <section className="rolepick">
+          <h2 className="rolepick__label">เอาไว้ทำอะไร</h2>
+          <div className="chips">
+            <Link className={`chip${role === '' ? ' chip--on' : ''}`} href={chipHref({ use: '' })}>
+              ทั้งหมด
+            </Link>
+            {ROLE_ORDER.filter((r) => (roleCounts.get(r) ?? 0) > 0).map((r) => (
+              <Link key={r} className={`chip${role === r ? ' chip--on' : ''}`} href={chipHref({ use: r })} title={ROLE_TH[r].asks}>
+                {ROLE_TH[r].title} <span className="chip__count">{roleCounts.get(r)}</span>
+              </Link>
+            ))}
+          </div>
+          {role && <p className="rolepick__asks">{ROLE_TH[role].asks}</p>}
+        </section>
+      )}
+
       <form className="filterbar">
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่ออุปกรณ์..." />
-        <EquipCategoryType
-          initialCategory={category}
-          initialType={type}
-          categories={GEAR_CATEGORIES}
-          labels={CATEGORY_LABELS}
-          typesByCategory={TYPES_BY_CATEGORY}
-          placeholders={TYPE_PLACEHOLDERS}
-        />
+        {/* The chips own these two, and a GET form drops what it does not
+            carry -- so they ride along hidden rather than being reset by a
+            search. */}
+        {category && <input type="hidden" name="category" value={category} />}
+        {type && <input type="hidden" name="type" value={type} />}
+        {role && <input type="hidden" name="use" value={role} />}
         <select name="job" defaultValue={job}>
           <option value="">ทุกอาชีพ</option>
           {jobs.map((j) => (
@@ -250,7 +344,7 @@ export default async function EquipmentPage({
                   {it.slots != null && it.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{it.slots}]</span>}
                 </span>
                 <span className="itemcard__meta">
-                  {it.weapon_type ?? CATEGORY_LABELS[it.category ?? ''] ?? '—'}
+                  {(it.kind ? TYPE_TH[it.kind] ?? it.kind : null) ?? CATEGORY_TH[it.group ?? ''] ?? '—'}
                   {it.atk != null && it.atk > 0 ? ` · ATK ${it.atk}` : ''}
                   {it.required_level != null && it.required_level > 1 ? ` · Lv ${it.required_level}` : ''}
                 </span>

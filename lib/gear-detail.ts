@@ -5,12 +5,23 @@
 import { cache } from 'react';
 import { supabaseBrowser } from './supabase';
 import { fetchAllRows } from './fetch-all-rows';
+import { gearCategory, gearType } from './gear-type';
 
 // Cached so generateMetadata and the page body cost one query, not two.
 // Returns the raw { data, error } -- each caller keeps its own handling, and a
 // failed query must never be flattened into "no such row".
+//
+// The type is filled in here rather than in each page, because an empty
+// weapon_type costs more than a missing label: randomOptionsFor keys the
+// armour pools off it, so Coat 450320 and every other Zero-renumbered piece
+// showed no random options at all -- a blank where a table belongs.
 export const getGearItem = cache(async (id: number) => {
-  return await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
+  const result = await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
+  if (!result.data) return result;
+  return {
+    ...result,
+    data: { ...result.data, weapon_type: gearType(result.data), category: gearCategory(result.data) },
+  };
 });
 
 export interface GearExtras {

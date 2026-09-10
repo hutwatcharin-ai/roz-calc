@@ -1,0 +1,1032 @@
+{
+  "_meta": {
+    "built": "2026-09-10",
+    "source": "https://raw.githubusercontent.com/rathena/rathena/master/db/re/item_db_equip.yml",
+    "how": "node scripts/build-gear-types.mjs",
+    "why": "items.weapon_type is empty for the rows carrying Zero renumbered ids, which hides most armour from the equipment filter.",
+    "gearRows": 876,
+    "rowsWithNoType": 248,
+    "filled": 243,
+    "byId": 150,
+    "byName": 20,
+    "byIdRange": 65,
+    "byNameWord": 8,
+    "control": {
+      "id-range": {
+        "agree": 268,
+        "disagree": []
+      },
+      "name-word": {
+        "agree": 186,
+        "disagree": []
+      }
+    },
+    "categoryFixed": [
+      "2671 -> Armor",
+      "5039 -> Armor"
+    ],
+    "stillUnknown": [
+      {
+        "id": 15813,
+        "name": "Cat's Eye",
+        "category": "Armor"
+      },
+      {
+        "id": 15814,
+        "name": "Maozui",
+        "category": "Armor"
+      },
+      {
+        "id": 32016,
+        "name": "Shining Window",
+        "category": "Weapon"
+      },
+      {
+        "id": 32201,
+        "name": "Headless Warrior's Gloves",
+        "category": "Armor"
+      },
+      {
+        "id": 630011,
+        "name": "Necromancer's Lance",
+        "category": "Weapon"
+      }
+    ]
+  },
+  "types": {
+    "2118": {
+      "type": "Shield",
+      "how": "id"
+    },
+    "2120": {
+      "type": "Shield",
+      "how": "id"
+    },
+    "2201": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2203": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2205": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2208": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2210": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2211": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2212": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2214": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2215": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2216": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2218": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2220": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2228": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2230": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2232": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2239": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2241": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2242": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2243": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2271": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2273": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2278": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2281": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2283": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2284": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2292": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2293": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "2393": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "2613": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "2628": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "2635": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "2671": {
+      "type": "Accessory",
+      "how": "id",
+      "category": "Armor"
+    },
+    "5000": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "5001": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5004": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5014": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5018": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5024": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5025": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5026": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5028": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5031": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5033": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5034": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5036": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5038": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5039": {
+      "type": "Headgear",
+      "how": "id",
+      "category": "Armor"
+    },
+    "5041": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5043": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5047": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5049": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5052": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5061": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5062": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5063": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5064": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5065": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5067": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5069": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5070": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5073": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5076": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5077": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5082": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5110": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5375": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5438": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5439": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5440": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5441": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5444": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5447": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5475": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "5526": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "15216": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15217": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15218": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15220": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15221": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15222": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15223": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15224": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15225": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15226": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15227": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15228": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15229": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15230": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15251": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15252": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15253": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "15390": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "18668": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "18730": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "19332": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19333": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19334": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19345": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19346": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19356": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19357": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19358": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19359": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19360": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19361": {
+      "type": "Headgear",
+      "how": "name"
+    },
+    "19362": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19363": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19376": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "19388": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "20864": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20865": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20867": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20868": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20869": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20870": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20871": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20872": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20873": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20874": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20875": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20876": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20877": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "20945": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "22146": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22147": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22148": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22150": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22151": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22152": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22153": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22154": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22155": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22156": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22157": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22158": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22159": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22160": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22175": {
+      "type": "Shoes",
+      "how": "word"
+    },
+    "22176": {
+      "type": "Shoes",
+      "how": "word"
+    },
+    "22177": {
+      "type": "Shoes",
+      "how": "word"
+    },
+    "22188": {
+      "type": "Shoes",
+      "how": "name"
+    },
+    "22194": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "22206": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "28539": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28540": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28541": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28542": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28543": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28544": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28545": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28546": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28547": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28548": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28549": {
+      "type": "Accessory",
+      "how": "id"
+    },
+    "28568": {
+      "type": "Accessory",
+      "how": "word"
+    },
+    "28569": {
+      "type": "Accessory",
+      "how": "word"
+    },
+    "28570": {
+      "type": "Accessory",
+      "how": "word"
+    },
+    "28571": {
+      "type": "Accessory",
+      "how": "word"
+    },
+    "28599": {
+      "type": "Accessory",
+      "how": "word"
+    },
+    "28949": {
+      "type": "Shield",
+      "how": "id"
+    },
+    "400004": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "400005": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "400125": {
+      "type": "Headgear",
+      "how": "id"
+    },
+    "401291": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "401341": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "401342": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "401386": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "401509": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "401510": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "410555": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "420762": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "430038": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "430040": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "430041": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "430042": {
+      "type": "Headgear",
+      "how": "range"
+    },
+    "450012": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "450013": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "450014": {
+      "type": "Armor",
+      "how": "id"
+    },
+    "450318": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450319": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450320": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450321": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450322": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450323": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450324": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450325": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450326": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450327": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450328": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450329": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450330": {
+      "type": "Armor",
+      "how": "name"
+    },
+    "450528": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450529": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450530": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450539": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450540": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450541": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450542": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450543": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450544": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450586": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450587": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "450588": {
+      "type": "Armor",
+      "how": "range"
+    },
+    "460058": {
+      "type": "Shield",
+      "how": "name"
+    },
+    "460059": {
+      "type": "Shield",
+      "how": "name"
+    },
+    "460060": {
+      "type": "Shield",
+      "how": "name"
+    },
+    "460061": {
+      "type": "Shield",
+      "how": "name"
+    },
+    "460120": {
+      "type": "Shield",
+      "how": "name"
+    },
+    "460154": {
+      "type": "Shield",
+      "how": "range"
+    },
+    "460155": {
+      "type": "Shield",
+      "how": "range"
+    },
+    "460156": {
+      "type": "Shield",
+      "how": "range"
+    },
+    "460168": {
+      "type": "Shield",
+      "how": "range"
+    },
+    "460169": {
+      "type": "Shield",
+      "how": "range"
+    },
+    "460170": {
+      "type": "Shield",
+      "how": "range"
+    },
+    "470011": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "470012": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "470013": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "470231": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "470232": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "470233": {
+      "type": "Shoes",
+      "how": "id"
+    },
+    "470418": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470419": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470427": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470428": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470429": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470464": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470465": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "470466": {
+      "type": "Shoes",
+      "how": "range"
+    },
+    "480007": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "480008": {
+      "type": "Garment",
+      "how": "id"
+    },
+    "480384": {
+      "type": "Garment",
+      "how": "name"
+    },
+    "480385": {
+      "type": "Garment",
+      "how": "name"
+    },
+    "480386": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "480740": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "480741": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "480793": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "480794": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "480795": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "480824": {
+      "type": "Garment",
+      "how": "range"
+    },
+    "490759": {
+      "type": "Accessory",
+      "how": "range"
+    },
+    "490975": {
+      "type": "Accessory",
+      "how": "range"
+    }
+  }
+}
