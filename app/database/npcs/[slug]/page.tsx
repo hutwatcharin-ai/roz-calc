@@ -12,6 +12,8 @@ import PageHeader from '@/components/PageHeader';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { naviCommand } from '@/lib/rozglobal-guides';
 import { supabaseBrowser } from '@/lib/supabase';
+import ItemIcon from '@/components/ItemIcon';
+import { itemHref } from '@/lib/item-href';
 import { ALL_NPCS, npcBySlug, questKey } from '@/lib/npcs';
 
 export const revalidate = 86400;
@@ -26,11 +28,14 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const npc = npcBySlug(params.slug);
   if (!npc) return { title: 'ไม่พบ NPC ตัวนี้' };
   const place = npc.mapName ?? npc.map ?? '';
+  const shop = npc.source === 'rathena';
   return {
-    title: `${npc.name} — NPC อยู่ที่ไหน ให้เควสอะไร`,
+    title: `${npc.name} — NPC อยู่ที่ไหน ${shop ? 'ขายอะไรบ้าง' : 'ให้เควสอะไร'}`,
     description: `${npc.name} NPC ใน Ragnarok Zero Global${place ? ` ยืนอยู่ที่ ${place}` : ''}${
       npc.x !== null && npc.y !== null ? ` พิกัด ${npc.x}/${npc.y}` : ''
-    }${npc.quests.length ? ` · ให้เควส ${npc.quests.length} เควส` : ''} พร้อมคำสั่ง /navi สำหรับเดินไปหา`,
+    }${npc.quests.length ? ` · ให้เควส ${npc.quests.length} เควส` : ''}${
+      npc.sells.length ? ` · ขายของ ${npc.sells.length} ชนิด` : ''
+    } พร้อมคำสั่ง /navi สำหรับเดินไปหา`,
   };
 }
 
@@ -49,6 +54,13 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
 
   const navi = naviCommand(npc.map, npc.x, npc.y);
 
+  // What a shopkeeper sells, with the icons the item pages already use.
+  const { data: goods, error: goodsError } = npc.sells.length
+    ? await supabaseBrowser().from('items').select('id, name_en, category, icon_url').in('id', npc.sells)
+    : { data: [], error: null };
+  if (goodsError) console.error('npc goods lookup failed', goodsError);
+  const sells = (goods ?? []).sort((a, b) => a.name_en.localeCompare(b.name_en));
+
   return (
     <main className="shell" style={{ paddingBlock: 32, maxWidth: 820 }}>
       <JsonLd
@@ -65,6 +77,12 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
       </nav>
 
       <PageHeader title={npc.name} />
+
+      {npc.sprite && (
+        // 42 of the 514 could be matched to one of the 84 sprites mirrored
+        // from rozerodb; the rest show no picture rather than someone else's.
+        <img className="npcportrait" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={56} />
+      )}
 
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">อยู่ที่ไหน</h2>
@@ -121,6 +139,25 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
         </section>
       )}
 
+      {sells.length > 0 && (
+        <section className="card" style={{ marginTop: 14 }}>
+          <h2 className="section-title">ขายอะไรบ้าง ({sells.length})</h2>
+          <ul className="shoplist">
+            {sells.map((item) => (
+              <li key={item.id} className="shoprow">
+                <span className="shoprow__who" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  <ItemIcon iconUrl={item.icon_url} category={item.category} size={24} />
+                  <Link href={itemHref(item.id, item.category)}>{item.name_en}</Link>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="muted" style={{ marginTop: 10, fontSize: 12.5 }}>
+            ราคาไม่ได้ลงไว้ เพราะสคริปต์ต้นทางให้ร้านคิดราคาซื้อปกติของไอเทมทุกชิ้น — ดูราคาได้ที่หน้าไอเทมนั้น
+          </p>
+        </section>
+      )}
+
       {npc.description && (
         <section className="card" style={{ marginTop: 14 }}>
           <h2 className="section-title">คำอธิบาย</h2>
@@ -128,9 +165,21 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
         </section>
       )}
 
+      {/* Two sources with different standing, and the page has to say which
+          one it is standing on: a quest NPC comes from Zero's own list, a
+          shopkeeper from rAthena's classic scripts. */}
       <p className="source-note" style={{ marginTop: 16 }}>
-        <strong>ที่มา:</strong> ข้อมูล NPC ฝั่ง Zero จาก prontera.info เก็บเมื่อ 3 ก.ย. 2569 ·
-        ตำแหน่งอาจเปลี่ยนได้เมื่อมีแพทช์ใหม่
+        {npc.source === 'rathena' ? (
+          <>
+            <strong>ยังไม่ได้ยืนยันกับเซิร์ฟนี้:</strong> NPC ร้านค้ามาจากสคริปต์ของ rAthena ซึ่งเป็นผังร้านของ RO คลาสสิก ·
+            ฝั่ง Zero ไม่มีแหล่งไหนที่เรามีลงข้อมูลร้านค้าเลย · ของที่ขายกรองแล้วว่ามีจริงในเกมนี้
+          </>
+        ) : (
+          <>
+            <strong>ที่มา:</strong> ข้อมูล NPC ฝั่ง Zero จาก prontera.info เก็บเมื่อ 3 ก.ย. 2569 ·
+            ตำแหน่งอาจเปลี่ยนได้เมื่อมีแพทช์ใหม่
+          </>
+        )}
       </p>
     </main>
   );

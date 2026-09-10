@@ -32,6 +32,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const CRAWL = path.join(process.cwd(), 'docs', 'prontera-export', 'data', 'npcs.jsonl');
+const SHOPS = path.join(process.cwd(), 'data', 'npc-shops.json');
+const QUEST_SPRITES = path.join(process.cwd(), 'data', 'npc-quests.json');
+const SPRITE_DIR = path.join(process.cwd(), 'public', 'images', 'npcs');
 const DEST = path.join(process.cwd(), 'data', 'npcs.json');
 const SOURCE = 'https://roz.prontera.info/npcs';
 
@@ -120,12 +123,66 @@ function main() {
       x: Number.isInteger(npc.x) ? npc.x : null,
       y: Number.isInteger(npc.y) ? npc.y : null,
       quests,
+      sells: [],
+      sprite: null,
+      source: 'prontera',
       description: typeof npc.description === 'string' ? npc.description : null,
     });
   }
 
   // Named first: the index shows people before it shows "1 M Innkeeper", and
   // the first page of a list of 514 should not be all sprite labels.
+  // A sprite, for the few we can prove one for. The 84 images under
+  // public/images/npcs were mirrored from rozerodb, which has 84 NPC pages;
+  // the prontera crawl this file is built from carries no image at all. So a
+  // sprite exists only where the two sources describe the same NPC -- same
+  // spot, or the same quest. That is 42 of 514, and the honest answer for the
+  // rest is no picture rather than someone else's.
+  const spriteAt = new Map();
+  const spriteForQuest = new Map();
+  for (const entry of JSON.parse(fs.readFileSync(QUEST_SPRITES, 'utf8'))) {
+    for (const link of entry.links ?? []) {
+      spriteAt.set(`${link.map}|${link.x}|${link.y}`, entry.code);
+      spriteForQuest.set(link.quest_name.toLowerCase(), entry.code);
+    }
+  }
+  const haveImage = new Set(fs.readdirSync(SPRITE_DIR).map((file) => file.replace(/\.(gif|png)$/, '').toLowerCase()));
+  let sprites = 0;
+  for (const npc of npcs) {
+    const code =
+      spriteAt.get(`${npc.map}|${npc.x}|${npc.y}`) ??
+      npc.quests.map((quest) => spriteForQuest.get(quest.name.toLowerCase())).find(Boolean) ??
+      null;
+    npc.sprite = code && haveImage.has(code.toLowerCase()) ? code.toLowerCase() : null;
+    if (npc.sprite) sprites += 1;
+  }
+
+  // The shopkeepers, from data/npc-shops.json. They come from rAthena's
+  // classic scripts rather than from Zero's own pages, so they carry
+  // source: 'rathena' and every surface that shows one says so. Without them
+  // a shop row on an item page has nobody to link to: the two datasets share
+  // no name and no coordinate.
+  const shopFile = JSON.parse(fs.readFileSync(SHOPS, 'utf8'));
+  let shopNpcs = 0;
+  for (const seller of shopFile.sellers ?? []) {
+    npcs.push({
+      slug: `shop-${seller.slug}`,
+      name: seller.name,
+      hasName: true,
+      types: ['shop'],
+      source: 'rathena',
+      map: seller.map,
+      mapName: mapNames[seller.map] ?? null,
+      x: seller.x,
+      y: seller.y,
+      quests: [],
+      sells: seller.sells,
+      sprite: null,
+      description: null,
+    });
+    shopNpcs += 1;
+  }
+
   npcs.sort((a, b) => Number(b.hasName) - Number(a.hasName) || a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug));
 
   // A coordinate that failed to resolve is the failure this parser exists to
@@ -153,6 +210,9 @@ function main() {
           placed: placed.length,
           pagesWithoutARecord: skipped,
           maps: Object.keys(mapNames).length,
+          withSprite: sprites,
+          shopNpcs,
+          shopSource: shopFile._meta?.sources ?? null,
         },
         mapNames,
         npcs,
@@ -163,6 +223,7 @@ function main() {
   );
   console.log(`${npcs.length} NPCs, ${npcs.filter((n) => n.hasName).length} with a real name, ${withQuests.length} give quests`);
   console.log(`${placed.length} have a map and coordinates, ${Object.keys(mapNames).length} map codes named`);
+  console.log(`${sprites} have a sprite, ${shopNpcs} are shopkeepers from rAthena`);
   if (skipped > 0) console.log(`${skipped} pages carried no NPC record`);
 }
 

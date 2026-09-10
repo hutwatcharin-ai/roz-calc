@@ -29,6 +29,12 @@ describe('npc shops', () => {
     expect(shopsFor(4001)).toEqual([]);
   });
 
+  it('charges the item its own price on every single row', () => {
+    // The reason the page dropped its price column: not one of the 832 rows
+    // carries a number of its own, so the column read "ราคาปกติ" every time.
+    expect(ALL_SHOP_ROWS.every((row) => row.price === null)).toBe(true);
+  });
+
   it('covers a real slice of the catalogue', () => {
     // 167 at the last build. The renewal-only first version reached 81, so a
     // number back down near that means a source stopped being read.

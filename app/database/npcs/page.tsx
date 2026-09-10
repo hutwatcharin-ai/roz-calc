@@ -149,14 +149,16 @@ export default function NpcListPage({
               <tr>
                 <th>NPC</th>
                 <th>อยู่ที่</th>
-                <th className="bptable__qty">เควส</th>
+                <th className="bptable__qty">เควส/ของขาย</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((npc) => (
                 <tr key={npc.slug}>
                   <td>
+                    {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={28} />}
                     {npc.hasName ? <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link> : <span className="muted">{npc.name}</span>}
+                    {npc.source === 'rathena' && <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>ร้านค้า</span>}
                   </td>
                   <td>
                     {npc.mapName ?? npc.map ?? '—'}
@@ -166,7 +168,7 @@ export default function NpcListPage({
                       </span>
                     )}
                   </td>
-                  <td className="bptable__qty">{npc.quests.length || ''}</td>
+                  <td className="bptable__qty">{npc.quests.length || npc.sells.length || ''}</td>
                 </tr>
               ))}
             </tbody>

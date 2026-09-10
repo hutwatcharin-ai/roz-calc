@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_NPCS, NPC_META, NPCS_WITH_QUESTS, mapDisplayName, npcBySlug, npcMaps, npcsForQuest, questKey } from './npcs';
+import { ALL_NPCS, NPCS_WITH_SPRITE, NPC_META, NPCS_WITH_QUESTS, SHOP_NPCS, mapDisplayName, npcBySlug, npcMaps, npcsForQuest, questKey, shopNpcAt } from './npcs';
 
 describe('the NPC list', () => {
   it('holds the whole crawl', () => {
@@ -108,5 +108,49 @@ describe('the published data', () => {
   it('records where it came from', () => {
     expect(NPC_META.source).toBe('https://roz.prontera.info/npcs');
     expect(NPC_META.crawled).toBe('2026-09-03');
+  });
+});
+
+describe('the shopkeepers', () => {
+  it('carries the ones a shop row needs to link to', () => {
+    // The two datasets share no name and no coordinate -- rAthena's Tool
+    // Dealer is not in Zero's crawled NPC list -- so before these records a
+    // shop row on an item page had nobody to point at.
+    expect(SHOP_NPCS).toBeGreaterThan(100);
+    const dealer = shopNpcAt('Chef Assistant', 'prontera', 156, 212);
+    expect(dealer).toBeTruthy();
+    expect(dealer!.source).toBe('rathena');
+    expect(dealer!.sells.length).toBeGreaterThan(0);
+    expect(dealer!.slug.startsWith('shop-')).toBe(true);
+  });
+
+  it('misses cleanly for a spot with no shop', () => {
+    expect(shopNpcAt('Chef Assistant', 'prontera', 1, 1)).toBeNull();
+  });
+
+  it('keeps the two sources apart', () => {
+    // Every claim on a page depends on which list the row came from: Zero's
+    // own, or classic RO's.
+    for (const npc of ALL_NPCS) {
+      expect(['prontera', 'rathena'], npc.slug).toContain(npc.source);
+      if (npc.source === 'rathena') expect(npc.quests, npc.slug).toEqual([]);
+      else expect(npc.sells, npc.slug).toEqual([]);
+    }
+  });
+});
+
+describe('sprites', () => {
+  it('shows one only where two sources describe the same NPC', () => {
+    // 84 images mirrored from rozerodb, 514 NPCs crawled from prontera, and
+    // the crawl carries no image field at all -- so a sprite exists only
+    // where a quest or a coordinate ties the two together.
+    expect(NPCS_WITH_SPRITE).toBeGreaterThan(30);
+    expect(NPCS_WITH_SPRITE).toBeLessThan(100);
+  });
+
+  it('never names an image file we do not have', async () => {
+    const fs = await import('node:fs');
+    const files = new Set(fs.readdirSync('public/images/npcs').map((f) => f.replace(/\.(gif|png)$/, '')));
+    for (const npc of ALL_NPCS) if (npc.sprite) expect(files.has(npc.sprite), `${npc.name} -> ${npc.sprite}`).toBe(true);
   });
 });

@@ -81,8 +81,1953 @@
       "umbala",
       "xmas",
       "xmas_in"
-    ]
+    ],
+    "sellers": 110
   },
+  "sellers": [
+    {
+      "slug": "armor-dealer-alberta-in-180-15",
+      "name": "Armor Dealer",
+      "map": "alberta_in",
+      "x": 180,
+      "y": 15,
+      "sprite": 101,
+      "sells": [
+        2201,
+        2203,
+        2205,
+        2226,
+        2301,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-aldeba-in-20-60",
+      "name": "Armor Dealer",
+      "map": "aldeba_in",
+      "x": 20,
+      "y": 60,
+      "sprite": 101,
+      "sells": [
+        2228,
+        2627,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-ama-in01-89-28",
+      "name": "Armor Dealer",
+      "map": "ama_in01",
+      "x": 89,
+      "y": 28,
+      "sprite": 757,
+      "sells": [
+        2211,
+        2627
+      ]
+    },
+    {
+      "slug": "armor-dealer-ayo-in01-90-160",
+      "name": "Armor Dealer",
+      "map": "ayo_in01",
+      "x": 90,
+      "y": 160,
+      "sprite": 842,
+      "sells": [
+        2211,
+        2627
+      ]
+    },
+    {
+      "slug": "armor-dealer-cmd-fild07-277-85",
+      "name": "Armor Dealer",
+      "map": "cmd_fild07",
+      "x": 277,
+      "y": 85,
+      "sprite": 101,
+      "sells": [
+        2226,
+        2228
+      ]
+    },
+    {
+      "slug": "armor-dealer-cmd-in01-117-165",
+      "name": "Armor Dealer",
+      "map": "cmd_in01",
+      "x": 117,
+      "y": 165,
+      "sprite": 101,
+      "sells": [
+        2226,
+        2228
+      ]
+    },
+    {
+      "slug": "armor-dealer-geffen-in-26-178",
+      "name": "Armor Dealer",
+      "map": "geffen_in",
+      "x": 26,
+      "y": 178,
+      "sprite": 66,
+      "sells": [
+        2230,
+        2301,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-gonryun-173-84",
+      "name": "Armor Dealer",
+      "map": "gonryun",
+      "x": 173,
+      "y": 84,
+      "sprite": 770,
+      "sells": [
+        2211,
+        2627
+      ]
+    },
+    {
+      "slug": "armor-dealer-izlude-in-70-127",
+      "name": "Armor Dealer",
+      "map": "izlude_in",
+      "x": 70,
+      "y": 127,
+      "sprite": 62,
+      "sells": [
+        2226,
+        2228,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-lou-in02-121-182",
+      "name": "Armor Dealer",
+      "map": "lou_in02",
+      "x": 121,
+      "y": 182,
+      "sprite": 818,
+      "sells": [
+        2211,
+        2627
+      ]
+    },
+    {
+      "slug": "armor-dealer-morocc-in-141-60",
+      "name": "Armor Dealer",
+      "map": "morocc_in",
+      "x": 141,
+      "y": 60,
+      "sprite": 58,
+      "sells": [
+        2218,
+        2301,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-payon-in01-7-119",
+      "name": "Armor Dealer",
+      "map": "payon_in01",
+      "x": 7,
+      "y": 119,
+      "sprite": 76,
+      "sells": [
+        2208,
+        2211,
+        2212,
+        2301,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-prt-in-172-132",
+      "name": "Armor Dealer",
+      "map": "prt_in",
+      "x": 172,
+      "y": 132,
+      "sprite": 48,
+      "sells": [
+        2220,
+        2226,
+        2301,
+        2627,
+        2628
+      ]
+    },
+    {
+      "slug": "armor-dealer-xmas-in-168-104",
+      "name": "Armor Dealer",
+      "map": "xmas_in",
+      "x": 168,
+      "y": 104,
+      "sprite": 101,
+      "sells": [
+        2228
+      ]
+    },
+    {
+      "slug": "axe-dealer-nif-in-37-93",
+      "name": "Axe Dealer",
+      "map": "nif_in",
+      "x": 37,
+      "y": 93,
+      "sprite": 801,
+      "sells": [
+        1301,
+        1351,
+        1354,
+        1357,
+        1360
+      ]
+    },
+    {
+      "slug": "butcher-izlude-160-186",
+      "name": "Butcher",
+      "map": "izlude",
+      "x": 160,
+      "y": 186,
+      "sprite": 54,
+      "sells": [
+        517
+      ]
+    },
+    {
+      "slug": "butcher-moc-ruins-87-109",
+      "name": "Butcher",
+      "map": "moc_ruins",
+      "x": 87,
+      "y": 109,
+      "sprite": 58,
+      "sells": [
+        517
+      ]
+    },
+    {
+      "slug": "butcher-morocc-156-76",
+      "name": "Butcher",
+      "map": "morocc",
+      "x": 156,
+      "y": 76,
+      "sprite": 58,
+      "sells": [
+        517
+      ]
+    },
+    {
+      "slug": "butcher-prontera-64-125",
+      "name": "Butcher",
+      "map": "prontera",
+      "x": 64,
+      "y": 125,
+      "sprite": 87,
+      "sells": [
+        517,
+        528
+      ]
+    },
+    {
+      "slug": "chef-assistant-alberta-167-135",
+      "name": "Chef Assistant",
+      "map": "alberta",
+      "x": 167,
+      "y": 135,
+      "sprite": 712,
+      "sells": [
+        577,
+        579,
+        580,
+        581,
+        7452,
+        7453,
+        7454,
+        7455,
+        7456,
+        7457,
+        7482,
+        12125,
+        12126,
+        12127,
+        12849
+      ]
+    },
+    {
+      "slug": "chef-assistant-aldebaran-165-107",
+      "name": "Chef Assistant",
+      "map": "aldebaran",
+      "x": 165,
+      "y": 107,
+      "sprite": 97,
+      "sells": [
+        580,
+        7452,
+        7456
+      ]
+    },
+    {
+      "slug": "chef-assistant-amatsu-206-150",
+      "name": "Chef Assistant",
+      "map": "amatsu",
+      "x": 206,
+      "y": 150,
+      "sprite": 83,
+      "sells": [
+        579,
+        7453
+      ]
+    },
+    {
+      "slug": "chef-assistant-ayothaya-203-178",
+      "name": "Chef Assistant",
+      "map": "ayothaya",
+      "x": 203,
+      "y": 178,
+      "sprite": 83,
+      "sells": [
+        577,
+        7455
+      ]
+    },
+    {
+      "slug": "chef-assistant-comodo-225-164",
+      "name": "Chef Assistant",
+      "map": "comodo",
+      "x": 225,
+      "y": 164,
+      "sprite": 83,
+      "sells": [
+        579,
+        7453,
+        7454,
+        7455
+      ]
+    },
+    {
+      "slug": "chef-assistant-geffen-196-111",
+      "name": "Chef Assistant",
+      "map": "geffen",
+      "x": 196,
+      "y": 111,
+      "sprite": 85,
+      "sells": [
+        577,
+        579,
+        580,
+        581,
+        7452,
+        7453,
+        7454,
+        7455,
+        7456,
+        7457,
+        7482,
+        12125,
+        12126,
+        12127,
+        12849
+      ]
+    },
+    {
+      "slug": "chef-assistant-gonryun-147-101",
+      "name": "Chef Assistant",
+      "map": "gonryun",
+      "x": 147,
+      "y": 101,
+      "sprite": 83,
+      "sells": [
+        580,
+        7452
+      ]
+    },
+    {
+      "slug": "chef-assistant-louyang-256-123",
+      "name": "Chef Assistant",
+      "map": "louyang",
+      "x": 256,
+      "y": 123,
+      "sprite": 820,
+      "sells": [
+        577,
+        7454
+      ]
+    },
+    {
+      "slug": "chef-assistant-moc-ruins-115-123",
+      "name": "Chef Assistant",
+      "map": "moc_ruins",
+      "x": 115,
+      "y": 123,
+      "sprite": 86,
+      "sells": [
+        577,
+        579,
+        580,
+        581,
+        7452,
+        7453,
+        7454,
+        7455,
+        7456,
+        7457,
+        7482,
+        12125,
+        12126,
+        12127,
+        12849
+      ]
+    },
+    {
+      "slug": "chef-assistant-niflheim-209-180",
+      "name": "Chef Assistant",
+      "map": "niflheim",
+      "x": 209,
+      "y": 180,
+      "sprite": 83,
+      "sells": [
+        581
+      ]
+    },
+    {
+      "slug": "chef-assistant-payon-206-119",
+      "name": "Chef Assistant",
+      "map": "payon",
+      "x": 206,
+      "y": 119,
+      "sprite": 89,
+      "sells": [
+        577,
+        579,
+        580,
+        581,
+        7452,
+        7453,
+        7454,
+        7455,
+        7456,
+        7457,
+        7482,
+        12125,
+        12126,
+        12127,
+        12849
+      ]
+    },
+    {
+      "slug": "chef-assistant-prontera-156-212",
+      "name": "Chef Assistant",
+      "map": "prontera",
+      "x": 156,
+      "y": 212,
+      "sprite": 700,
+      "sells": [
+        577,
+        579,
+        580,
+        581,
+        7452,
+        7453,
+        7454,
+        7455,
+        7456,
+        7457,
+        7472,
+        7473,
+        7474,
+        7475,
+        7476,
+        7482,
+        12125,
+        12126,
+        12127,
+        12849
+      ]
+    },
+    {
+      "slug": "chef-assistant-umbala-102-154",
+      "name": "Chef Assistant",
+      "map": "umbala",
+      "x": 102,
+      "y": 154,
+      "sprite": 83,
+      "sells": [
+        577,
+        7456
+      ]
+    },
+    {
+      "slug": "chef-assistant-xmas-152-137",
+      "name": "Chef Assistant",
+      "map": "xmas",
+      "x": 152,
+      "y": 137,
+      "sprite": 83,
+      "sells": [
+        577,
+        7457
+      ]
+    },
+    {
+      "slug": "doll-supplier-prontera-248-153",
+      "name": "Doll Supplier",
+      "map": "prontera",
+      "x": 248,
+      "y": 153,
+      "sprite": 85,
+      "sells": [
+        740,
+        741,
+        742
+      ]
+    },
+    {
+      "slug": "flower-girl-prontera-58-182",
+      "name": "Flower Girl",
+      "map": "prontera",
+      "x": 58,
+      "y": 182,
+      "sprite": 96,
+      "sells": [
+        712,
+        744
+      ]
+    },
+    {
+      "slug": "flower-lady-prontera-113-42",
+      "name": "Flower Lady",
+      "map": "prontera",
+      "x": 113,
+      "y": 42,
+      "sprite": 90,
+      "sells": [
+        712,
+        744
+      ]
+    },
+    {
+      "slug": "fruit-gardener-izlude-124-165",
+      "name": "Fruit Gardener",
+      "map": "izlude",
+      "x": 124,
+      "y": 165,
+      "sprite": 53,
+      "sells": [
+        512,
+        513,
+        515,
+        516
+      ]
+    },
+    {
+      "slug": "fruit-gardener-prontera-104-49",
+      "name": "Fruit Gardener",
+      "map": "prontera",
+      "x": 104,
+      "y": 49,
+      "sprite": 102,
+      "sells": [
+        512,
+        513
+      ]
+    },
+    {
+      "slug": "gift-merchant-prontera-105-87",
+      "name": "Gift Merchant",
+      "map": "prontera",
+      "x": 105,
+      "y": 87,
+      "sprite": 91,
+      "sells": [
+        734,
+        735,
+        736,
+        737,
+        746
+      ]
+    },
+    {
+      "slug": "gift-seller-xmas-in-169-34",
+      "name": "Gift Seller",
+      "map": "xmas_in",
+      "x": 169,
+      "y": 34,
+      "sprite": 702,
+      "sells": [
+        736,
+        740,
+        744,
+        746,
+        748,
+        2612,
+        2613
+      ]
+    },
+    {
+      "slug": "item-collector-alberta-in-165-96",
+      "name": "Item Collector",
+      "map": "alberta_in",
+      "x": 165,
+      "y": 96,
+      "sprite": 74,
+      "sells": [
+        528,
+        911
+      ]
+    },
+    {
+      "slug": "item-collector-moc-ruins-81-113",
+      "name": "Item Collector",
+      "map": "moc_ruins",
+      "x": 81,
+      "y": 113,
+      "sprite": 85,
+      "sells": [
+        528,
+        911,
+        919,
+        925
+      ]
+    },
+    {
+      "slug": "item-collector-moc-ruins-93-53",
+      "name": "Item Collector",
+      "map": "moc_ruins",
+      "x": 93,
+      "y": 53,
+      "sprite": 85,
+      "sells": [
+        528,
+        911,
+        919,
+        925
+      ]
+    },
+    {
+      "slug": "item-collector-morocc-171-103",
+      "name": "Item Collector",
+      "map": "morocc",
+      "x": 171,
+      "y": 103,
+      "sprite": 85,
+      "sells": [
+        528,
+        911,
+        919,
+        925
+      ]
+    },
+    {
+      "slug": "item-collector-morocc-205-247",
+      "name": "Item Collector",
+      "map": "morocc",
+      "x": 205,
+      "y": 247,
+      "sprite": 85,
+      "sells": [
+        528,
+        911,
+        919,
+        925
+      ]
+    },
+    {
+      "slug": "jeweler-moc-ruins-110-105",
+      "name": "Jeweler",
+      "map": "moc_ruins",
+      "x": 110,
+      "y": 105,
+      "sprite": 102,
+      "sells": [
+        719,
+        720,
+        721,
+        722,
+        723,
+        726,
+        728,
+        729,
+        730,
+        2613
+      ]
+    },
+    {
+      "slug": "jeweler-moc-ruins-52-85",
+      "name": "Jeweler",
+      "map": "moc_ruins",
+      "x": 52,
+      "y": 85,
+      "sprite": 99,
+      "sells": [
+        719,
+        720,
+        721,
+        722,
+        723,
+        726,
+        728,
+        729,
+        730,
+        2613
+      ]
+    },
+    {
+      "slug": "jeweler-morocc-154-55",
+      "name": "Jeweler",
+      "map": "morocc",
+      "x": 154,
+      "y": 55,
+      "sprite": 99,
+      "sells": [
+        719,
+        720,
+        721,
+        722,
+        723,
+        726,
+        728,
+        729,
+        730,
+        2613
+      ]
+    },
+    {
+      "slug": "jeweler-morocc-166-54",
+      "name": "Jeweler",
+      "map": "morocc",
+      "x": 166,
+      "y": 54,
+      "sprite": 102,
+      "sells": [
+        719,
+        720,
+        721,
+        722,
+        723,
+        726,
+        728,
+        729,
+        730,
+        2613
+      ]
+    },
+    {
+      "slug": "magical-item-seller-geffen-in-77-173",
+      "name": "Magical Item Seller",
+      "map": "geffen_in",
+      "x": 77,
+      "y": 173,
+      "sprite": 64,
+      "sells": [
+        717,
+        2232
+      ]
+    },
+    {
+      "slug": "material-seller-alde-alche-38-184",
+      "name": "Material Seller",
+      "map": "alde_alche",
+      "x": 38,
+      "y": 184,
+      "sprite": 755,
+      "sells": [
+        7140,
+        7141,
+        7143
+      ]
+    },
+    {
+      "slug": "nun-prt-church-108-124",
+      "name": "Nun",
+      "map": "prt_church",
+      "x": 108,
+      "y": 124,
+      "sprite": 79,
+      "sells": [
+        1501,
+        1504,
+        1507,
+        1510,
+        1513,
+        1519,
+        2216,
+        2608
+      ]
+    },
+    {
+      "slug": "sepulchral-merchant-in-moc-16-22-20",
+      "name": "Sepulchral Merchant",
+      "map": "in_moc_16",
+      "x": 22,
+      "y": 20,
+      "sprite": 880,
+      "sells": [
+        1771
+      ]
+    },
+    {
+      "slug": "souvenir-vendor-comodo-296-125",
+      "name": "Souvenir Vendor",
+      "map": "comodo",
+      "x": 296,
+      "y": 125,
+      "sprite": 101,
+      "sells": [
+        964,
+        965
+      ]
+    },
+    {
+      "slug": "tool-dealer-alb2trea-87-65",
+      "name": "Tool Dealer",
+      "map": "alb2trea",
+      "x": 87,
+      "y": 65,
+      "sprite": 83,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1750,
+        1751,
+        1752,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-alberta-in-182-97",
+      "name": "Tool Dealer",
+      "map": "alberta_in",
+      "x": 182,
+      "y": 97,
+      "sprite": 73,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1750,
+        1771,
+        2243
+      ]
+    },
+    {
+      "slug": "tool-dealer-aldeba-in-94-56",
+      "name": "Tool Dealer",
+      "map": "aldeba_in",
+      "x": 94,
+      "y": 56,
+      "sprite": 83,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-ama-in01-24-30",
+      "name": "Tool Dealer",
+      "map": "ama_in01",
+      "x": 24,
+      "y": 30,
+      "sprite": 763,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1770,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-ayo-in01-18-182",
+      "name": "Tool Dealer",
+      "map": "ayo_in01",
+      "x": 18,
+      "y": 182,
+      "sprite": 840,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1770,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-cmd-fild07-257-126",
+      "name": "Tool Dealer",
+      "map": "cmd_fild07",
+      "x": 257,
+      "y": 126,
+      "sprite": 83,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1770,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-cmd-in01-79-182",
+      "name": "Tool Dealer",
+      "map": "cmd_in01",
+      "x": 79,
+      "y": 182,
+      "sprite": 83,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1770,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-geffen-in-171-123",
+      "name": "Tool Dealer",
+      "map": "geffen_in",
+      "x": 171,
+      "y": 123,
+      "sprite": 64,
+      "sells": [
+        713,
+        1092,
+        1093
+      ]
+    },
+    {
+      "slug": "tool-dealer-geffen-in-77-167",
+      "name": "Tool Dealer",
+      "map": "geffen_in",
+      "x": 77,
+      "y": 167,
+      "sprite": 68,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1750,
+        1771,
+        2241
+      ]
+    },
+    {
+      "slug": "tool-dealer-gonryun-147-84",
+      "name": "Tool Dealer",
+      "map": "gonryun",
+      "x": 147,
+      "y": 84,
+      "sprite": 777,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1770,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-izlude-in-57-110",
+      "name": "Tool Dealer",
+      "map": "izlude_in",
+      "x": 57,
+      "y": 110,
+      "sprite": 47,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        611,
+        645,
+        656,
+        1065,
+        1750
+      ]
+    },
+    {
+      "slug": "tool-dealer-lou-in02-239-176",
+      "name": "Tool Dealer",
+      "map": "lou_in02",
+      "x": 239,
+      "y": 176,
+      "sprite": 818,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1770,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-moc-ruins-114-63",
+      "name": "Tool Dealer",
+      "map": "moc_ruins",
+      "x": 114,
+      "y": 63,
+      "sprite": 99,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-moc-ruins-91-128",
+      "name": "Tool Dealer",
+      "map": "moc_ruins",
+      "x": 91,
+      "y": 128,
+      "sprite": 93,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-morocc-146-103",
+      "name": "Tool Dealer",
+      "map": "morocc",
+      "x": 146,
+      "y": 103,
+      "sprite": 99,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-morocc-151-241",
+      "name": "Tool Dealer",
+      "map": "morocc",
+      "x": 151,
+      "y": 241,
+      "sprite": 93,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-nif-in-145-23",
+      "name": "Tool Dealer",
+      "map": "nif_in",
+      "x": 145,
+      "y": 23,
+      "sprite": 801,
+      "sells": [
+        535,
+        537,
+        902,
+        934,
+        1052,
+        1062,
+        7106,
+        7154
+      ]
+    },
+    {
+      "slug": "tool-dealer-payon-159-96",
+      "name": "Tool Dealer",
+      "map": "payon",
+      "x": 159,
+      "y": 96,
+      "sprite": 88,
+      "sells": [
+        501,
+        601,
+        602,
+        645,
+        1750
+      ]
+    },
+    {
+      "slug": "tool-dealer-payon-in01-5-49",
+      "name": "Tool Dealer",
+      "map": "payon_in01",
+      "x": 5,
+      "y": 49,
+      "sprite": 88,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-payon-in02-87-34",
+      "name": "Tool Dealer",
+      "map": "payon_in02",
+      "x": 87,
+      "y": 34,
+      "sprite": 75,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1751,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-prt-fild05-290-221",
+      "name": "Tool Dealer",
+      "map": "prt_fild05",
+      "x": 290,
+      "y": 221,
+      "sprite": 83,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1750,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-prt-in-126-76",
+      "name": "Tool Dealer",
+      "map": "prt_in",
+      "x": 126,
+      "y": 76,
+      "sprite": 53,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1065,
+        1750,
+        1771,
+        2239
+      ]
+    },
+    {
+      "slug": "tool-dealer-tur-dun01-158-54",
+      "name": "Tool Dealer",
+      "map": "tur_dun01",
+      "x": 158,
+      "y": 54,
+      "sprite": 99,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1750,
+        1771,
+        2242
+      ]
+    },
+    {
+      "slug": "tool-dealer-um-in-104-124",
+      "name": "Tool Dealer",
+      "map": "um_in",
+      "x": 104,
+      "y": 124,
+      "sprite": 788,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        512,
+        513,
+        515,
+        516,
+        517,
+        528,
+        535,
+        537,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1771
+      ]
+    },
+    {
+      "slug": "tool-dealer-xmas-in-40-38",
+      "name": "Tool Dealer",
+      "map": "xmas_in",
+      "x": 40,
+      "y": 38,
+      "sprite": 83,
+      "sells": [
+        501,
+        502,
+        503,
+        504,
+        506,
+        601,
+        602,
+        610,
+        611,
+        645,
+        656,
+        657,
+        713,
+        717,
+        1771
+      ]
+    },
+    {
+      "slug": "toy-dealer-prt-in-117-79",
+      "name": "Toy Dealer",
+      "map": "prt_in",
+      "x": 117,
+      "y": 79,
+      "sprite": 715,
+      "sells": [
+        2201,
+        2212,
+        2239,
+        2241,
+        2242,
+        2243
+      ]
+    },
+    {
+      "slug": "trader-geffen-in-74-144",
+      "name": "Trader",
+      "map": "geffen_in",
+      "x": 74,
+      "y": 144,
+      "sprite": 66,
+      "sells": [
+        910,
+        911,
+        912
+      ]
+    },
+    {
+      "slug": "trader-moc-ruins-113-126",
+      "name": "Trader",
+      "map": "moc_ruins",
+      "x": 113,
+      "y": 126,
+      "sprite": 99,
+      "sells": [
+        747
+      ]
+    },
+    {
+      "slug": "trader-moc-ruins-125-135",
+      "name": "Trader",
+      "map": "moc_ruins",
+      "x": 125,
+      "y": 135,
+      "sprite": 89,
+      "sells": [
+        1516,
+        1522,
+        2609
+      ]
+    },
+    {
+      "slug": "trader-moc-ruins-131-138",
+      "name": "Trader",
+      "map": "moc_ruins",
+      "x": 131,
+      "y": 138,
+      "sprite": 93,
+      "sells": [
+        748
+      ]
+    },
+    {
+      "slug": "trader-moc-ruins-71-139",
+      "name": "Trader",
+      "map": "moc_ruins",
+      "x": 71,
+      "y": 139,
+      "sprite": 93,
+      "sells": [
+        2612
+      ]
+    },
+    {
+      "slug": "trader-moc-ruins-90-149",
+      "name": "Trader",
+      "map": "moc_ruins",
+      "x": 90,
+      "y": 149,
+      "sprite": 99,
+      "sells": [
+        513,
+        513,
+        513,
+        513,
+        513,
+        513
+      ]
+    },
+    {
+      "slug": "trader-morocc-140-90",
+      "name": "Trader",
+      "map": "morocc",
+      "x": 140,
+      "y": 90,
+      "sprite": 99,
+      "sells": [
+        513,
+        513,
+        513,
+        513,
+        513,
+        513
+      ]
+    },
+    {
+      "slug": "trader-morocc-256-191",
+      "name": "Trader",
+      "map": "morocc",
+      "x": 256,
+      "y": 191,
+      "sprite": 93,
+      "sells": [
+        2612
+      ]
+    },
+    {
+      "slug": "trader-morocc-269-193",
+      "name": "Trader",
+      "map": "morocc",
+      "x": 269,
+      "y": 193,
+      "sprite": 89,
+      "sells": [
+        1516,
+        1522,
+        2609
+      ]
+    },
+    {
+      "slug": "trader-morocc-34-68",
+      "name": "Trader",
+      "map": "morocc",
+      "x": 34,
+      "y": 68,
+      "sprite": 93,
+      "sells": [
+        748
+      ]
+    },
+    {
+      "slug": "vegetable-gardener-prontera-48-58",
+      "name": "Vegetable Gardener",
+      "map": "prontera",
+      "x": 48,
+      "y": 58,
+      "sprite": 91,
+      "sells": [
+        515,
+        516,
+        535
+      ]
+    },
+    {
+      "slug": "vendor-from-milk-ranch-izlude-128-158",
+      "name": "Vendor from Milk Ranch",
+      "map": "izlude",
+      "x": 128,
+      "y": 158,
+      "sprite": 90,
+      "sells": [
+        519
+      ]
+    },
+    {
+      "slug": "vendor-from-milk-ranch-prontera-73-134",
+      "name": "Vendor from Milk Ranch",
+      "map": "prontera",
+      "x": 73,
+      "y": 134,
+      "sprite": 90,
+      "sells": [
+        519
+      ]
+    },
+    {
+      "slug": "weapon-dealer-alberta-in-188-21",
+      "name": "Weapon Dealer",
+      "map": "alberta_in",
+      "x": 188,
+      "y": 21,
+      "sprite": 49,
+      "sells": [
+        1101,
+        1104,
+        1107,
+        1201,
+        1204,
+        1207,
+        1301,
+        1351,
+        1354,
+        1357,
+        1360,
+        1750,
+        1751
+      ]
+    },
+    {
+      "slug": "weapon-dealer-aldeba-in-28-54",
+      "name": "Weapon Dealer",
+      "map": "aldeba_in",
+      "x": 28,
+      "y": 54,
+      "sprite": 49,
+      "sells": [
+        1201,
+        1204,
+        1207,
+        1210,
+        1213,
+        1216,
+        1219,
+        1222
+      ]
+    },
+    {
+      "slug": "weapon-dealer-ama-in01-102-28",
+      "name": "Weapon Dealer",
+      "map": "ama_in01",
+      "x": 102,
+      "y": 28,
+      "sprite": 766,
+      "sells": [
+        1107,
+        1116,
+        1122,
+        1154,
+        1207,
+        1216,
+        1354,
+        1407,
+        1457,
+        1519
+      ]
+    },
+    {
+      "slug": "weapon-dealer-ayo-in01-90-192",
+      "name": "Weapon Dealer",
+      "map": "ayo_in01",
+      "x": 90,
+      "y": 192,
+      "sprite": 843,
+      "sells": [
+        1107,
+        1116,
+        1122,
+        1154,
+        1207,
+        1216,
+        1354,
+        1407,
+        1457,
+        1519
+      ]
+    },
+    {
+      "slug": "weapon-dealer-cmd-fild07-250-98",
+      "name": "Weapon Dealer",
+      "map": "cmd_fild07",
+      "x": 250,
+      "y": 98,
+      "sprite": 49,
+      "sells": [
+        1401,
+        1404,
+        1407,
+        1410,
+        1451,
+        1454,
+        1457,
+        1460,
+        1463
+      ]
+    },
+    {
+      "slug": "weapon-dealer-geffen-in-30-178",
+      "name": "Weapon Dealer",
+      "map": "geffen_in",
+      "x": 30,
+      "y": 178,
+      "sprite": 47,
+      "sells": [
+        1101,
+        1201,
+        1204,
+        1207,
+        1210,
+        1213,
+        1216,
+        1750,
+        1751
+      ]
+    },
+    {
+      "slug": "weapon-dealer-gonryun-174-101",
+      "name": "Weapon Dealer",
+      "map": "gonryun",
+      "x": 174,
+      "y": 101,
+      "sprite": 774,
+      "sells": [
+        1107,
+        1116,
+        1122,
+        1154,
+        1207,
+        1216,
+        1354,
+        1407,
+        1457,
+        1519
+      ]
+    },
+    {
+      "slug": "weapon-dealer-izlude-in-60-127",
+      "name": "Weapon Dealer",
+      "map": "izlude_in",
+      "x": 60,
+      "y": 127,
+      "sprite": 72,
+      "sells": [
+        1101,
+        1104,
+        1107,
+        1116,
+        1151,
+        1154,
+        1157,
+        1160,
+        1201,
+        1204,
+        1207,
+        1301,
+        1750,
+        1751
+      ]
+    },
+    {
+      "slug": "weapon-dealer-lou-in02-130-182",
+      "name": "Weapon Dealer",
+      "map": "lou_in02",
+      "x": 130,
+      "y": 182,
+      "sprite": 822,
+      "sells": [
+        1107,
+        1116,
+        1122,
+        1154,
+        1207,
+        1216,
+        1354,
+        1407,
+        1457,
+        1519
+      ]
+    },
+    {
+      "slug": "weapon-dealer-morocc-in-141-67",
+      "name": "Weapon Dealer",
+      "map": "morocc_in",
+      "x": 141,
+      "y": 67,
+      "sprite": 58,
+      "sells": [
+        1201,
+        1204,
+        1207,
+        1210,
+        1213,
+        1216,
+        1219,
+        1222,
+        1750,
+        1751
+      ]
+    },
+    {
+      "slug": "weapon-dealer-payon-in01-15-119",
+      "name": "Weapon Dealer",
+      "map": "payon_in01",
+      "x": 15,
+      "y": 119,
+      "sprite": 77,
+      "sells": [
+        1101,
+        1104,
+        1107,
+        1201,
+        1204,
+        1207,
+        1750,
+        1751
+      ]
+    },
+    {
+      "slug": "weapon-dealer-prt-in-171-140",
+      "name": "Weapon Dealer",
+      "map": "prt_in",
+      "x": 171,
+      "y": 140,
+      "sprite": 47,
+      "sells": [
+        1401,
+        1404,
+        1407,
+        1410,
+        1451,
+        1454,
+        1457,
+        1460,
+        1463
+      ]
+    },
+    {
+      "slug": "weapon-dealer-prt-in-172-130",
+      "name": "Weapon Dealer",
+      "map": "prt_in",
+      "x": 172,
+      "y": 130,
+      "sprite": 54,
+      "sells": [
+        1101,
+        1104,
+        1107,
+        1110,
+        1113,
+        1116,
+        1119,
+        1122,
+        1123,
+        1126,
+        1129,
+        1201,
+        1204,
+        1207,
+        1301,
+        1750,
+        1751
+      ]
+    },
+    {
+      "slug": "weapon-dealer-prt-monk-135-263",
+      "name": "Weapon Dealer",
+      "map": "prt_monk",
+      "x": 135,
+      "y": 263,
+      "sprite": 726,
+      "sells": [
+        1801,
+        1803,
+        1805
+      ]
+    },
+    {
+      "slug": "weapon-dealer-um-in-160-125",
+      "name": "Weapon Dealer",
+      "map": "um_in",
+      "x": 160,
+      "y": 125,
+      "sprite": 789,
+      "sells": [
+        1501,
+        1504,
+        1507,
+        1510,
+        1513,
+        1519,
+        1807,
+        1809,
+        1811
+      ]
+    },
+    {
+      "slug": "weapon-dealer-xmas-in-174-98",
+      "name": "Weapon Dealer",
+      "map": "xmas_in",
+      "x": 174,
+      "y": 98,
+      "sprite": 49,
+      "sells": [
+        1201,
+        1204,
+        1207,
+        1210,
+        1213,
+        1216,
+        1219,
+        1222
+      ]
+    },
+    {
+      "slug": "wedding-shop-dealer-prt-in-211-169",
+      "name": "Wedding Shop Dealer",
+      "map": "prt_in",
+      "x": 211,
+      "y": 169,
+      "sprite": 71,
+      "sells": [
+        744,
+        745,
+        2206,
+        2338,
+        7170
+      ]
+    }
+  ],
   "items": {
     "501": [
       {

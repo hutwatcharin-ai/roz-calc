@@ -2473,3 +2473,37 @@ a.cashlist__row:hover { background: var(--panel-2); }
   .bptable { font-size: 12.5px; }
   .bptable td, .bptable th { padding-inline: 4px; }
 }
+
+/* Shop sellers on an item page. A list, not a table: the row is a name and a
+   /navi command, and the shared table styling turns those two fields into
+   three stacked lines on a phone. */
+.shoplist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.shoprow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--hair);
+}
+.shoprow:last-child { border-bottom: 0; }
+.shoprow__who { font: 500 14px/1.5 var(--font-sarabun), sans-serif; }
+.shoprow__navi { font-size: 12.5px; }
+/* Aloe has 24 sellers. Five stay open and the rest fold away, so the section
+   is a known height on a phone instead of longer than the item's own page. */
+.shopmore { margin-top: 8px; }
+.shopmore summary {
+  cursor: pointer;
+  color: var(--cyan);
+  font: 600 13px/1.6 var(--font-sarabun), sans-serif;
+  padding: 4px 0;
+}
+.shopmore summary::marker { color: var(--faint); }
+.shopmore[open] summary { margin-bottom: 4px; }
+
+/* An NPC's own sprite, when one of our 84 mirrored images matches. */
+.npcportrait {
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-inline-end: 8px;
+}

@@ -81,13 +81,15 @@ function parse(text, source) {
     const name = rawName.split('#')[0].trim();
     const items = [];
     // The first number in the goods list is the NPC sprite id, not an item.
-    const parts = goods.split(',').slice(1);
+    const fields = goods.split(',');
+    const sprite = /^\d+$/.test(fields[0]) ? Number(fields[0]) : null;
+    const parts = fields.slice(1);
     for (const part of parts) {
       const [id, price] = part.split(':');
       if (!/^\d+$/.test(id ?? '')) continue;
       items.push({ id: Number(id), price: Number(price) });
     }
-    if (items.length > 0) shops.push({ name, map, x: Number(x), y: Number(y), items, source });
+    if (items.length > 0) shops.push({ name, map, x: Number(x), y: Number(y), sprite, items, source });
   }
   return shops;
 }
@@ -207,6 +209,31 @@ async function main() {
   }
 
   const sorted = Object.fromEntries(Object.keys(byItem).sort((a, b) => Number(a) - Number(b)).map((id) => [id, byItem[id]]));
+
+  // The shopkeepers themselves. The NPC database is built from a crawl of
+  // Zero's quest NPCs and shares not one name with these, so a shop row on an
+  // item page had nobody to link to. Published here as their own list, with
+  // the same "classic layout, unverified for Zero" label the rows carry.
+  const sellers = new Map();
+  for (const shop of shops) {
+    if (!mapIsInThisGame(shop.map, evidence)) continue;
+    const goods = shop.items.filter((good) => items.has(good.id)).map((good) => good.id);
+    if (goods.length === 0) continue;
+    const slug = `${shop.name} ${shop.map} ${shop.x} ${shop.y}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+    const existing = sellers.get(slug);
+    if (existing) {
+      // The same NPC in two source files: merge the goods rather than
+      // publishing them twice.
+      for (const id of goods) if (!existing.sells.includes(id)) existing.sells.push(id);
+      continue;
+    }
+    sellers.set(slug, { slug, name: shop.name, map: shop.map, x: shop.x, y: shop.y, sprite: shop.sprite, sells: goods });
+  }
+  const sellerList = [...sellers.values()].sort((a, b) => a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug));
+  for (const seller of sellerList) seller.sells.sort((a, b) => a - b);
   fs.writeFileSync(
     DEST,
     `${JSON.stringify(
@@ -224,14 +251,16 @@ async function main() {
           rowsDroppedMapNotInThisGame: droppedMap,
           mapsDropped: Object.fromEntries([...townsDropped].sort((a, b) => b[1] - a[1])),
           maps: [...townsSeen].sort(),
+          sellers: sellerList.length,
         },
+        sellers: sellerList,
         items: sorted,
       },
       null,
       2,
     )}\n`,
   );
-  console.log(`${Object.keys(sorted).length} items have a seller, ${kept} rows`);
+  console.log(`${Object.keys(sorted).length} items have a seller, ${kept} rows, ${sellerList.length} shop NPCs`);
   console.log(`dropped ${droppedItem} rows for items this game does not have`);
   console.log(`dropped ${droppedMap} rows in ${townsDropped.size} places this game does not have: ${[...townsDropped.keys()].sort().join(', ')}`);
   console.log(`${townsSeen.size} maps carry a shop: ${[...townsSeen].sort().join(', ')}`);

@@ -32,16 +32,26 @@ export interface Npc {
   /** False when the source only had a sprite label, not a name in the game. */
   hasName: boolean;
   types: string[];
+  /**
+   * Where the record comes from, and it changes what may be claimed:
+   * 'prontera' is Zero's own NPC list, 'rathena' is a shopkeeper from the
+   * classic scripts, placed where classic RO puts them.
+   */
+  source: 'prontera' | 'rathena';
   /** Map code, which is what /navi takes. */
   map: string | null;
   mapName: string | null;
   x: number | null;
   y: number | null;
   quests: NpcQuestLink[];
+  /** Item ids this NPC sells, for the shopkeepers. */
+  sells: number[];
+  /** File name under public/images/npcs, when a sprite could be matched. */
+  sprite: string | null;
   description: string | null;
 }
 
-const data = file as { _meta: Record<string, number | string>; mapNames: Record<string, string>; npcs: Npc[] };
+const data = file as unknown as { _meta: Record<string, unknown>; mapNames: Record<string, string>; npcs: Npc[] };
 
 export const ALL_NPCS: Npc[] = data.npcs;
 export const NPC_MAP_NAMES: Record<string, string> = data.mapNames;
@@ -96,5 +106,16 @@ export function npcMaps(): { code: string; name: string; count: number }[] {
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
 
+/** The shopkeeper standing at a spot, so a shop row can link to their page. */
+const byPlace = new Map(
+  ALL_NPCS.filter((npc) => npc.source === 'rathena').map((npc) => [`${npc.name}|${npc.map}|${npc.x}|${npc.y}`, npc]),
+);
+
+export function shopNpcAt(name: string, map: string | null, x: number | null, y: number | null): Npc | null {
+  return byPlace.get(`${name}|${map}|${x}|${y}`) ?? null;
+}
+
 export const NPCS_WITH_QUESTS = ALL_NPCS.filter((npc) => npc.quests.length > 0).length;
+export const SHOP_NPCS = ALL_NPCS.filter((npc) => npc.source === 'rathena').length;
+export const NPCS_WITH_SPRITE = ALL_NPCS.filter((npc) => npc.sprite).length;
 export const NPC_META = data._meta;
