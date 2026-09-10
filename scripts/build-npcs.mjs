@@ -33,6 +33,7 @@ import path from 'node:path';
 
 const CRAWL = path.join(process.cwd(), 'docs', 'prontera-export', 'data', 'npcs.jsonl');
 const SHOPS = path.join(process.cwd(), 'data', 'npc-shops.json');
+const SPRITES = path.join(process.cwd(), 'data', 'npc-sprites.json');
 const QUEST_SPRITES = path.join(process.cwd(), 'data', 'npc-quests.json');
 const SPRITE_DIR = path.join(process.cwd(), 'public', 'images', 'npcs');
 const DEST = path.join(process.cwd(), 'data', 'npcs.json');
@@ -146,14 +147,17 @@ function main() {
       spriteForQuest.set(link.quest_name.toLowerCase(), entry.code);
     }
   }
-  const haveImage = new Set(fs.readdirSync(SPRITE_DIR).map((file) => file.replace(/\.(gif|png)$/, '').toLowerCase()));
+  const haveImage = new Map(fs.readdirSync(SPRITE_DIR).map((file) => [file.replace(/\.(gif|png)$/, '').toLowerCase(), file]));
   let sprites = 0;
   for (const npc of npcs) {
     const code =
       spriteAt.get(`${npc.map}|${npc.x}|${npc.y}`) ??
       npc.quests.map((quest) => spriteForQuest.get(quest.name.toLowerCase())).find(Boolean) ??
       null;
-    npc.sprite = code && haveImage.has(code.toLowerCase()) ? code.toLowerCase() : null;
+    // The file name, extension included: the mirrored quest sprites are GIFs
+    // and the ones decoded out of a client GRF are PNGs, so the page cannot
+    // assume either.
+    npc.sprite = code && haveImage.has(code.toLowerCase()) ? haveImage.get(code.toLowerCase()) : null;
     if (npc.sprite) sprites += 1;
   }
 
@@ -163,8 +167,15 @@ function main() {
   // a shop row on an item page has nobody to link to: the two datasets share
   // no name and no coordinate.
   const shopFile = JSON.parse(fs.readFileSync(SHOPS, 'utf8'));
+  // Shopkeepers get their picture the other way round: rAthena's script gives
+  // the NPC a sprite id, and a client GRF turns that id into a file
+  // (scripts/extract-npc-sprites-from-grf.mjs).
+  const bySpriteId = fs.existsSync(SPRITES) ? JSON.parse(fs.readFileSync(SPRITES, 'utf8')).bySpriteId ?? {} : {};
   let shopNpcs = 0;
   for (const seller of shopFile.sellers ?? []) {
+    const constant = bySpriteId[String(seller.sprite)];
+    const shopSprite = constant && haveImage.has(constant) ? haveImage.get(constant) : null;
+    if (shopSprite) sprites += 1;
     npcs.push({
       slug: `shop-${seller.slug}`,
       name: seller.name,
@@ -177,7 +188,7 @@ function main() {
       y: seller.y,
       quests: [],
       sells: seller.sells,
-      sprite: null,
+      sprite: shopSprite,
       description: null,
     });
     shopNpcs += 1;

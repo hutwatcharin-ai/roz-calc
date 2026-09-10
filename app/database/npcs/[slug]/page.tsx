@@ -89,7 +89,7 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
           to a mirrored sprite; the rest lead with the name alone rather than
           with someone else's picture. */}
       <div className="equiphero">
-        {npc.sprite && <img className="npcportrait npcportrait--hero" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={72} />}
+        {npc.sprite && <img className="npcportrait npcportrait--hero" src={`/images/npcs/${npc.sprite}`} alt="" height={72} />}
         <div>
           <h1 className="pagehead__title">{npc.name}</h1>
           <p className="equiphero__chips">

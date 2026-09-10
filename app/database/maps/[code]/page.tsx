@@ -187,7 +187,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
             {npcsHere.map((npc) => (
               <li key={npc.slug} className="shoprow">
                 <span className="shoprow__who">
-                  {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}.gif`} alt="" height={24} />}
+                  {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}`} alt="" height={24} />}
                   <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
                   {npc.quests.length > 0 && <span className="muted"> · เควส {npc.quests.length}</span>}
                   {npc.sells.length > 0 && <span className="muted"> · ขายของ {npc.sells.length} ชนิด</span>}

@@ -140,17 +140,28 @@ describe('the shopkeepers', () => {
 });
 
 describe('sprites', () => {
-  it('shows one only where two sources describe the same NPC', () => {
-    // 84 images mirrored from rozerodb, 514 NPCs crawled from prontera, and
-    // the crawl carries no image field at all -- so a sprite exists only
-    // where a quest or a coordinate ties the two together.
-    expect(NPCS_WITH_SPRITE).toBeGreaterThan(30);
-    expect(NPCS_WITH_SPRITE).toBeLessThan(100);
+  it('comes from both sources', () => {
+    // Two different joins, and both have to keep working. A quest NPC gets a
+    // sprite when a rozerodb page describes the same NPC (same coordinates or
+    // the same quest); a shopkeeper gets one because rAthena's script names a
+    // sprite id and a client GRF turns that id into a file.
+    const quest = ALL_NPCS.filter((npc) => npc.sprite && npc.source === 'prontera');
+    const shop = ALL_NPCS.filter((npc) => npc.sprite && npc.source === 'rathena');
+    expect(quest.length).toBeGreaterThan(30);
+    expect(shop.length).toBeGreaterThan(80);
+    expect(NPCS_WITH_SPRITE).toBe(quest.length + shop.length);
   });
 
-  it('never names an image file we do not have', async () => {
+  it('names a file that exists, extension included', async () => {
+    // The two sources ship different formats -- mirrored GIFs and PNGs decoded
+    // out of a .spr -- so the value carries its own extension and the page
+    // must not append one.
     const fs = await import('node:fs');
-    const files = new Set(fs.readdirSync('public/images/npcs').map((f) => f.replace(/\.(gif|png)$/, '')));
-    for (const npc of ALL_NPCS) if (npc.sprite) expect(files.has(npc.sprite), `${npc.name} -> ${npc.sprite}`).toBe(true);
+    const files = new Set(fs.readdirSync('public/images/npcs'));
+    for (const npc of ALL_NPCS) {
+      if (!npc.sprite) continue;
+      expect(npc.sprite, npc.name).toMatch(/\.(gif|png)$/);
+      expect(files.has(npc.sprite), `${npc.name} -> ${npc.sprite}`).toBe(true);
+    }
   });
 });

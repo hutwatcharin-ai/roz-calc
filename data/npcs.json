@@ -12,7 +12,7 @@
     "placed": 618,
     "pagesWithoutARecord": 0,
     "maps": 112,
-    "withSprite": 42,
+    "withSprite": 152,
     "shopNpcs": 110,
     "shopSource": [
       "https://raw.githubusercontent.com/rathena/rathena/master/npc/merchants/shops.txt",
@@ -296,7 +296,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_dst_grand",
+      "sprite": "4_m_dst_grand.gif",
       "source": "prontera",
       "description": null
     },
@@ -452,7 +452,7 @@
         2301,
         2628
       ],
-      "sprite": null,
+      "sprite": "4w_f_01.png",
       "description": null
     },
     {
@@ -473,7 +473,7 @@
         2627,
         2628
       ],
-      "sprite": null,
+      "sprite": "4w_f_01.png",
       "description": null
     },
     {
@@ -493,7 +493,7 @@
         2211,
         2627
       ],
-      "sprite": null,
+      "sprite": "4_f_jpn2.png",
       "description": null
     },
     {
@@ -513,7 +513,7 @@
         2211,
         2627
       ],
-      "sprite": null,
+      "sprite": "4_m_thaiold.png",
       "description": null
     },
     {
@@ -533,7 +533,7 @@
         2226,
         2228
       ],
-      "sprite": null,
+      "sprite": "4w_f_01.png",
       "description": null
     },
     {
@@ -553,7 +553,7 @@
         2226,
         2228
       ],
-      "sprite": null,
+      "sprite": "4w_f_01.png",
       "description": null
     },
     {
@@ -574,7 +574,7 @@
         2301,
         2628
       ],
-      "sprite": null,
+      "sprite": "1_f_01.png",
       "description": null
     },
     {
@@ -594,7 +594,7 @@
         2211,
         2627
       ],
-      "sprite": null,
+      "sprite": "4_f_twgirl.png",
       "description": null
     },
     {
@@ -615,7 +615,7 @@
         2228,
         2628
       ],
-      "sprite": null,
+      "sprite": "1_m_siz.png",
       "description": null
     },
     {
@@ -635,7 +635,7 @@
         2211,
         2627
       ],
-      "sprite": null,
+      "sprite": "4_f_chnwoman.png",
       "description": null
     },
     {
@@ -656,7 +656,7 @@
         2301,
         2628
       ],
-      "sprite": null,
+      "sprite": "1_m_merchant.png",
       "description": null
     },
     {
@@ -679,7 +679,7 @@
         2301,
         2628
       ],
-      "sprite": null,
+      "sprite": "1_f_orient_02.png",
       "description": null
     },
     {
@@ -702,7 +702,7 @@
         2627,
         2628
       ],
-      "sprite": null,
+      "sprite": "1_m_02.png",
       "description": null
     },
     {
@@ -721,7 +721,7 @@
       "sells": [
         2228
       ],
-      "sprite": null,
+      "sprite": "4w_f_01.png",
       "description": null
     },
     {
@@ -794,7 +794,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_godemom",
+      "sprite": "4_f_godemom.gif",
       "source": "prontera",
       "description": null
     },
@@ -841,7 +841,7 @@
         1357,
         1360
       ],
-      "sprite": null,
+      "sprite": "4_nfcoffin.png",
       "description": null
     },
     {
@@ -1037,7 +1037,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_sura",
+      "sprite": "4_m_sura.gif",
       "source": "prontera",
       "description": null
     },
@@ -1224,7 +1224,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_repair",
+      "sprite": "4_m_repair.gif",
       "source": "prontera",
       "description": null
     },
@@ -1305,7 +1305,7 @@
       "sells": [
         517
       ],
-      "sprite": null,
+      "sprite": "1_m_jobguider.png",
       "description": null
     },
     {
@@ -1324,7 +1324,7 @@
       "sells": [
         517
       ],
-      "sprite": null,
+      "sprite": "1_m_merchant.png",
       "description": null
     },
     {
@@ -1343,7 +1343,7 @@
       "sells": [
         517
       ],
-      "sprite": null,
+      "sprite": "1_m_merchant.png",
       "description": null
     },
     {
@@ -1363,7 +1363,7 @@
         517,
         528
       ],
-      "sprite": null,
+      "sprite": "4_m_barber.png",
       "description": null
     },
     {
@@ -1533,7 +1533,7 @@
         12127,
         12849
       ],
-      "sprite": null,
+      "sprite": "4_m_05.png",
       "description": null
     },
     {
@@ -1554,7 +1554,7 @@
         7452,
         7456
       ],
-      "sprite": null,
+      "sprite": "4w_m_01.png",
       "description": null
     },
     {
@@ -1574,7 +1574,7 @@
         579,
         7453
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -1594,7 +1594,7 @@
         577,
         7455
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -1616,7 +1616,7 @@
         7454,
         7455
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -1649,7 +1649,7 @@
         12127,
         12849
       ],
-      "sprite": null,
+      "sprite": "4_m_03.png",
       "description": null
     },
     {
@@ -1669,7 +1669,7 @@
         580,
         7452
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -1689,7 +1689,7 @@
         577,
         7454
       ],
-      "sprite": null,
+      "sprite": "4_m_chncook.png",
       "description": null
     },
     {
@@ -1722,7 +1722,7 @@
         12127,
         12849
       ],
-      "sprite": null,
+      "sprite": "4_m_04.png",
       "description": null
     },
     {
@@ -1741,7 +1741,7 @@
       "sells": [
         581
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -1774,7 +1774,7 @@
         12127,
         12849
       ],
-      "sprite": null,
+      "sprite": "4_m_orient02.png",
       "description": null
     },
     {
@@ -1812,7 +1812,7 @@
         12127,
         12849
       ],
-      "sprite": null,
+      "sprite": "8_f_girl.png",
       "description": null
     },
     {
@@ -1832,7 +1832,7 @@
         577,
         7456
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -1852,7 +1852,7 @@
         577,
         7457
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -2089,7 +2089,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_sit_novice",
+      "sprite": "4_m_sit_novice.gif",
       "source": "prontera",
       "description": null
     },
@@ -2476,7 +2476,7 @@
         741,
         742
       ],
-      "sprite": null,
+      "sprite": "4_m_03.png",
       "description": null
     },
     {
@@ -2537,7 +2537,7 @@
       "y": 100,
       "quests": [],
       "sells": [],
-      "sprite": "4_ropepile",
+      "sprite": "4_ropepile.gif",
       "source": "prontera",
       "description": null
     },
@@ -2774,7 +2774,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_01",
+      "sprite": "4_f_01.png",
       "source": "prontera",
       "description": null
     },
@@ -2864,7 +2864,7 @@
         712,
         744
       ],
-      "sprite": null,
+      "sprite": "4w_kid.png",
       "description": null
     },
     {
@@ -2884,7 +2884,7 @@
         712,
         744
       ],
-      "sprite": null,
+      "sprite": "4_f_01.png",
       "description": null
     },
     {
@@ -3107,7 +3107,7 @@
         515,
         516
       ],
-      "sprite": null,
+      "sprite": "1_m_innkeeper.png",
       "description": null
     },
     {
@@ -3127,7 +3127,7 @@
         512,
         513
       ],
-      "sprite": null,
+      "sprite": "8_f.png",
       "description": null
     },
     {
@@ -3177,7 +3177,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_aruna_nfm1",
+      "sprite": "4_m_aruna_nfm1.gif",
       "source": "prontera",
       "description": null
     },
@@ -3200,7 +3200,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_ranger",
+      "sprite": "4_f_ranger.gif",
       "source": "prontera",
       "description": null
     },
@@ -3304,7 +3304,7 @@
         737,
         746
       ],
-      "sprite": null,
+      "sprite": "4_f_02.png",
       "description": null
     },
     {
@@ -3329,7 +3329,7 @@
         2612,
         2613
       ],
-      "sprite": null,
+      "sprite": "4_f_gon.png",
       "description": null
     },
     {
@@ -3746,7 +3746,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_twgrandmom",
+      "sprite": "4_f_twgrandmom.gif",
       "source": "prontera",
       "description": null
     },
@@ -3774,7 +3774,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_chncook",
+      "sprite": "4_m_chncook.png",
       "source": "prontera",
       "description": null
     },
@@ -3825,7 +3825,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_seaman",
+      "sprite": "4_m_seaman.gif",
       "source": "prontera",
       "description": null
     },
@@ -3968,7 +3968,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_ruswoman3",
+      "sprite": "4_f_ruswoman3.gif",
       "source": "prontera",
       "description": null
     },
@@ -4172,7 +4172,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_snowman",
+      "sprite": "4_m_snowman.gif",
       "source": "prontera",
       "description": null
     },
@@ -4254,7 +4254,7 @@
         528,
         911
       ],
-      "sprite": null,
+      "sprite": "1_f_merchant_02.png",
       "description": null
     },
     {
@@ -4276,7 +4276,7 @@
         919,
         925
       ],
-      "sprite": null,
+      "sprite": "4_m_03.png",
       "description": null
     },
     {
@@ -4298,7 +4298,7 @@
         919,
         925
       ],
-      "sprite": null,
+      "sprite": "4_m_03.png",
       "description": null
     },
     {
@@ -4320,7 +4320,7 @@
         919,
         925
       ],
-      "sprite": null,
+      "sprite": "4_m_03.png",
       "description": null
     },
     {
@@ -4342,7 +4342,7 @@
         919,
         925
       ],
-      "sprite": null,
+      "sprite": "4_m_03.png",
       "description": null
     },
     {
@@ -4392,7 +4392,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_sitdown",
+      "sprite": "4_m_sitdown.gif",
       "source": "prontera",
       "description": null
     },
@@ -4438,7 +4438,7 @@
         730,
         2613
       ],
-      "sprite": null,
+      "sprite": "8_f.png",
       "description": null
     },
     {
@@ -4466,7 +4466,7 @@
         730,
         2613
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -4494,7 +4494,7 @@
         730,
         2613
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -4522,7 +4522,7 @@
         730,
         2613
       ],
-      "sprite": null,
+      "sprite": "8_f.png",
       "description": null
     },
     {
@@ -4615,7 +4615,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_umchie",
+      "sprite": "4_m_umchie.gif",
       "source": "prontera",
       "description": null
     },
@@ -4724,7 +4724,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_jpnoji",
+      "sprite": "4_m_jpnoji.png",
       "source": "prontera",
       "description": null
     },
@@ -4859,7 +4859,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_einwoman",
+      "sprite": "4_f_einwoman.gif",
       "source": "prontera",
       "description": null
     },
@@ -5066,7 +5066,7 @@
         717,
         2232
       ],
-      "sprite": null,
+      "sprite": "1_m_wizard.png",
       "description": null
     },
     {
@@ -5144,7 +5144,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_cook",
+      "sprite": "4_cook.gif",
       "source": "prontera",
       "description": null
     },
@@ -5261,7 +5261,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_lgtgrand",
+      "sprite": "4_f_lgtgrand.gif",
       "source": "prontera",
       "description": null
     },
@@ -5283,7 +5283,7 @@
         7141,
         7143
       ],
-      "sprite": null,
+      "sprite": "4_m_sage_c.png",
       "description": null
     },
     {
@@ -5372,7 +5372,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_kid01",
+      "sprite": "4_kid01.gif",
       "source": "prontera",
       "description": null
     },
@@ -5441,7 +5441,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_dst_grand",
+      "sprite": "4_m_dst_grand.gif",
       "source": "prontera",
       "description": null
     },
@@ -6073,7 +6073,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_soil",
+      "sprite": "4_soil.gif",
       "source": "prontera",
       "description": null
     },
@@ -6096,7 +6096,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_sit_novice",
+      "sprite": "4_m_sit_novice.gif",
       "source": "prontera",
       "description": null
     },
@@ -6161,7 +6161,7 @@
         2216,
         2608
       ],
-      "sprite": null,
+      "sprite": "1_f_priest.png",
       "description": null
     },
     {
@@ -6307,7 +6307,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_kid1",
+      "sprite": "4_m_kid1.gif",
       "source": "prontera",
       "description": null
     },
@@ -6353,7 +6353,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_nfwisp",
+      "sprite": "4_nfwisp.gif",
       "source": "prontera",
       "description": null
     },
@@ -6656,7 +6656,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_umkid",
+      "sprite": "4_m_umkid.gif",
       "source": "prontera",
       "description": null
     },
@@ -6862,7 +6862,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_umoldwoman",
+      "sprite": "4_f_umoldwoman.gif",
       "source": "prontera",
       "description": null
     },
@@ -6879,7 +6879,7 @@
       "y": 227,
       "quests": [],
       "sells": [],
-      "sprite": "4_m_sura",
+      "sprite": "4_m_sura.gif",
       "source": "prontera",
       "description": null
     },
@@ -8741,7 +8741,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_sage_a",
+      "sprite": "4_m_sage_a.gif",
       "source": "prontera",
       "description": null
     },
@@ -8854,7 +8854,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_alche_a",
+      "sprite": "4_f_alche_a.gif",
       "source": "prontera",
       "description": null
     },
@@ -8874,7 +8874,7 @@
       "sells": [
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_maskman.png",
       "description": null
     },
     {
@@ -8946,7 +8946,7 @@
       "y": 56,
       "quests": [],
       "sells": [],
-      "sprite": "4_lam",
+      "sprite": "4_lam.gif",
       "source": "prontera",
       "description": null
     },
@@ -9195,7 +9195,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_soil",
+      "sprite": "4_soil.gif",
       "source": "prontera",
       "description": null
     },
@@ -9239,7 +9239,7 @@
         964,
         965
       ],
-      "sprite": null,
+      "sprite": "4w_f_01.png",
       "description": null
     },
     {
@@ -9741,7 +9741,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_nfwisp",
+      "sprite": "4_nfwisp.gif",
       "source": "prontera",
       "description": null
     },
@@ -9901,7 +9901,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_yoyorogue",
+      "sprite": "4_m_yoyorogue.gif",
       "source": "prontera",
       "description": null
     },
@@ -10115,7 +10115,7 @@
         1752,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -10150,7 +10150,7 @@
         1771,
         2243
       ],
-      "sprite": null,
+      "sprite": "1_f_merchant_01.png",
       "description": null
     },
     {
@@ -10183,7 +10183,7 @@
         717,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -10219,7 +10219,7 @@
         1770,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_jpn.png",
       "description": null
     },
     {
@@ -10255,7 +10255,7 @@
         1770,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_f_thaishaman.png",
       "description": null
     },
     {
@@ -10290,7 +10290,7 @@
         1770,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -10325,7 +10325,7 @@
         1770,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -10346,7 +10346,7 @@
         1092,
         1093
       ],
-      "sprite": null,
+      "sprite": "1_m_wizard.png",
       "description": null
     },
     {
@@ -10381,7 +10381,7 @@
         1771,
         2241
       ],
-      "sprite": null,
+      "sprite": "1_f_03.png",
       "description": null
     },
     {
@@ -10417,7 +10417,7 @@
         1770,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_twoldman.png",
       "description": null
     },
     {
@@ -10447,7 +10447,7 @@
         1065,
         1750
       ],
-      "sprite": null,
+      "sprite": "1_m_01.png",
       "description": null
     },
     {
@@ -10483,7 +10483,7 @@
         1770,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_f_chnwoman.png",
       "description": null
     },
     {
@@ -10518,7 +10518,7 @@
         1750,
         1771
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -10553,7 +10553,7 @@
         1750,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_f_04.png",
       "description": null
     },
     {
@@ -10588,7 +10588,7 @@
         1750,
         1771
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -10623,7 +10623,7 @@
         1750,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_f_04.png",
       "description": null
     },
     {
@@ -10649,7 +10649,7 @@
         7106,
         7154
       ],
-      "sprite": null,
+      "sprite": "4_nfcoffin.png",
       "description": null
     },
     {
@@ -10672,7 +10672,7 @@
         645,
         1750
       ],
-      "sprite": null,
+      "sprite": "4_m_orient01.png",
       "description": null
     },
     {
@@ -10707,7 +10707,7 @@
         1750,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_orient01.png",
       "description": null
     },
     {
@@ -10743,7 +10743,7 @@
         1751,
         1771
       ],
-      "sprite": null,
+      "sprite": "1_f_orient_01.png",
       "description": null
     },
     {
@@ -10777,7 +10777,7 @@
         1750,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -10813,7 +10813,7 @@
         1771,
         2239
       ],
-      "sprite": null,
+      "sprite": "1_m_innkeeper.png",
       "description": null
     },
     {
@@ -10848,7 +10848,7 @@
         1771,
         2242
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -10889,7 +10889,7 @@
         717,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_umoldman.png",
       "description": null
     },
     {
@@ -10922,7 +10922,7 @@
         717,
         1771
       ],
-      "sprite": null,
+      "sprite": "4_m_01.png",
       "description": null
     },
     {
@@ -10946,7 +10946,7 @@
         2242,
         2243
       ],
-      "sprite": null,
+      "sprite": "4_m_pierrot.png",
       "description": null
     },
     {
@@ -10967,7 +10967,7 @@
         911,
         912
       ],
-      "sprite": null,
+      "sprite": "1_f_01.png",
       "description": null
     },
     {
@@ -10986,7 +10986,7 @@
       "sells": [
         747
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -11007,7 +11007,7 @@
         1522,
         2609
       ],
-      "sprite": null,
+      "sprite": "4_m_orient02.png",
       "description": null
     },
     {
@@ -11026,7 +11026,7 @@
       "sells": [
         748
       ],
-      "sprite": null,
+      "sprite": "4_f_04.png",
       "description": null
     },
     {
@@ -11045,7 +11045,7 @@
       "sells": [
         2612
       ],
-      "sprite": null,
+      "sprite": "4_f_04.png",
       "description": null
     },
     {
@@ -11069,7 +11069,7 @@
         513,
         513
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -11093,7 +11093,7 @@
         513,
         513
       ],
-      "sprite": null,
+      "sprite": "4w_m_03.png",
       "description": null
     },
     {
@@ -11112,7 +11112,7 @@
       "sells": [
         2612
       ],
-      "sprite": null,
+      "sprite": "4_f_04.png",
       "description": null
     },
     {
@@ -11133,7 +11133,7 @@
         1522,
         2609
       ],
-      "sprite": null,
+      "sprite": "4_m_orient02.png",
       "description": null
     },
     {
@@ -11152,7 +11152,7 @@
       "sells": [
         748
       ],
-      "sprite": null,
+      "sprite": "4_f_04.png",
       "description": null
     },
     {
@@ -11201,7 +11201,7 @@
         516,
         535
       ],
-      "sprite": null,
+      "sprite": "4_f_02.png",
       "description": null
     },
     {
@@ -11220,7 +11220,7 @@
       "sells": [
         519
       ],
-      "sprite": null,
+      "sprite": "4_f_01.png",
       "description": null
     },
     {
@@ -11239,7 +11239,7 @@
       "sells": [
         519
       ],
-      "sprite": null,
+      "sprite": "4_f_01.png",
       "description": null
     },
     {
@@ -11293,7 +11293,7 @@
         1750,
         1751
       ],
-      "sprite": null,
+      "sprite": "1_m_03.png",
       "description": null
     },
     {
@@ -11319,7 +11319,7 @@
         1219,
         1222
       ],
-      "sprite": null,
+      "sprite": "1_m_03.png",
       "description": null
     },
     {
@@ -11347,7 +11347,7 @@
         1457,
         1519
       ],
-      "sprite": null,
+      "sprite": "4_m_jpnoji.png",
       "description": null
     },
     {
@@ -11375,7 +11375,7 @@
         1457,
         1519
       ],
-      "sprite": null,
+      "sprite": "4_m_thaiongbak.png",
       "description": null
     },
     {
@@ -11402,7 +11402,7 @@
         1460,
         1463
       ],
-      "sprite": null,
+      "sprite": "1_m_03.png",
       "description": null
     },
     {
@@ -11429,7 +11429,7 @@
         1750,
         1751
       ],
-      "sprite": null,
+      "sprite": "1_m_01.png",
       "description": null
     },
     {
@@ -11457,7 +11457,7 @@
         1457,
         1519
       ],
-      "sprite": null,
+      "sprite": "4_m_twboy.png",
       "description": null
     },
     {
@@ -11489,7 +11489,7 @@
         1750,
         1751
       ],
-      "sprite": null,
+      "sprite": "1_f_maria.png",
       "description": null
     },
     {
@@ -11517,7 +11517,7 @@
         1457,
         1519
       ],
-      "sprite": null,
+      "sprite": "4_m_chnman.png",
       "description": null
     },
     {
@@ -11545,7 +11545,7 @@
         1750,
         1751
       ],
-      "sprite": null,
+      "sprite": "1_m_merchant.png",
       "description": null
     },
     {
@@ -11571,7 +11571,7 @@
         1750,
         1751
       ],
-      "sprite": null,
+      "sprite": "1_f_orient_03.png",
       "description": null
     },
     {
@@ -11598,7 +11598,7 @@
         1460,
         1463
       ],
-      "sprite": null,
+      "sprite": "1_m_01.png",
       "description": null
     },
     {
@@ -11633,7 +11633,7 @@
         1750,
         1751
       ],
-      "sprite": null,
+      "sprite": "1_m_jobguider.png",
       "description": null
     },
     {
@@ -11654,7 +11654,7 @@
         1803,
         1805
       ],
-      "sprite": null,
+      "sprite": "4_f_job_blacksmith.png",
       "description": null
     },
     {
@@ -11681,7 +11681,7 @@
         1809,
         1811
       ],
-      "sprite": null,
+      "sprite": "4_m_umsoldier.png",
       "description": null
     },
     {
@@ -11707,7 +11707,7 @@
         1219,
         1222
       ],
-      "sprite": null,
+      "sprite": "1_m_03.png",
       "description": null
     },
     {
@@ -11730,7 +11730,7 @@
         2338,
         7170
       ],
-      "sprite": null,
+      "sprite": "1_f_librarygirl.png",
       "description": null
     },
     {
@@ -11798,7 +11798,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_soil",
+      "sprite": "4_soil.gif",
       "source": "prontera",
       "description": null
     },
@@ -11821,7 +11821,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_umsoldier",
+      "sprite": "4_m_umsoldier.png",
       "source": "prontera",
       "description": null
     },
@@ -13278,7 +13278,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_middle",
+      "sprite": "4_m_middle.gif",
       "source": "prontera",
       "description": null
     },
@@ -13437,7 +13437,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_dstmandead",
+      "sprite": "4_m_dstmandead.gif",
       "source": "prontera",
       "description": null
     },
@@ -13506,7 +13506,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_f_kid2",
+      "sprite": "4_f_kid2.gif",
       "source": "prontera",
       "description": null
     },
@@ -13569,7 +13569,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_m_sit_novice",
+      "sprite": "4_m_sit_novice.gif",
       "source": "prontera",
       "description": null
     },
@@ -13592,7 +13592,7 @@
         }
       ],
       "sells": [],
-      "sprite": "4_geffen_01",
+      "sprite": "4_geffen_01.gif",
       "source": "prontera",
       "description": null
     }
