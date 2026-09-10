@@ -131,6 +131,7 @@ describe('link tables', () => {
     // Reordered 31 Aug for the section split: hunting flow first, then the
     // catalogs by size, world map added the day it shipped. Pets joined on
     // 9 Sep 2026, moved out of /guides because the page is one row per pet.
+    // NPCs joined on 10 Sep, next to quests: the two are read together.
     expect(SECTION_LINKS.database.map((l) => l.href)).toEqual([
       '/database/monsters',
       '/database/equipment',
@@ -139,6 +140,7 @@ describe('link tables', () => {
       '/database/items',
       '/database/cash-shop',
       '/database/quests',
+      '/database/npcs',
       '/database/maps',
       '/database/world-map',
       '/database/pets',

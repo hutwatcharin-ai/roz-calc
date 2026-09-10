@@ -54,6 +54,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/database/items', label: 'ไอเทม', icon: '/images/items/501.gif', ready: true },
     { href: '/database/cash-shop', label: 'Cash Shop', icon: '/images/items/969.gif', ready: true },
     { href: '/database/quests', label: 'เควส', icon: '/images/items/714.gif', ready: true },
+    { href: '/database/npcs', label: 'NPC', icon: '/images/items/610.gif', ready: true },
     { href: '/database/maps', label: 'แมพ', icon: '/images/items/601.gif', ready: true },
     { href: '/database/world-map', label: 'แผนที่โลก', icon: '/images/items/602.gif', ready: true },
     { href: '/database/pets', label: 'สัตว์เลี้ยง', icon: '/images/items/9001.gif', ready: true },

@@ -7,6 +7,8 @@
 import { linkItemRefs } from '@/lib/quest-item-refs';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { npcsForQuest } from '@/lib/npcs';
+import { naviCommand } from '@/lib/rozglobal-guides';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import JsonLd from '@/components/JsonLd';
@@ -163,6 +165,21 @@ export default async function QuestTownPage({
                   {' · '}NPC <span className="mono">{npcByQuest.get(quest.id)}</span>
                 </>
               )}
+              {/* The sprite code above says which figure to look for; this says
+                  who they are. Two sources, and only the second one has names:
+                  quest_npcs covers 58 quests with a sprite, lib/npcs covers 202
+                  with a name, a town and a coordinate. */}
+              {npcsForQuest(quest.name).filter((npc) => npc.hasName).slice(0, 2).map((npc) => (
+                <span key={npc.slug}>
+                  {' · '}คุยกับ <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
+                  {npc.mapName ? ` ที่ ${npc.mapName}` : ''}
+                  {naviCommand(npc.map, npc.x, npc.y) && (
+                    <span className="mono navicmd" style={{ marginInlineStart: 6, fontSize: 12 }}>
+                      {naviCommand(npc.map, npc.x, npc.y)}
+                    </span>
+                  )}
+                </span>
+              ))}
               {quest.map_code && (
                 <>
                   {' · '}แมพ <span className="mono">{quest.map_code}</span>

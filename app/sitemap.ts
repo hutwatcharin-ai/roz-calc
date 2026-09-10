@@ -3,6 +3,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 import { itemHref } from '@/lib/item-href';
+import { ALL_NPCS } from '@/lib/npcs';
 import { getMapCanonical } from '@/lib/map-canonical';
 
 // Regenerated with the daily ISR window, same as the list pages.
@@ -158,6 +159,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...[...questTowns.entries()].map(([town, lastModified]) => ({
       url: `${SITE_URL}/database/quests/${encodeURIComponent(town)}`,
       lastModified,
+    })),
+    // Only the NPCs with a real name have a page; the rest are rows on the
+    // index (lib/npcs marks the difference), and a sitemap entry for one would
+    // be a 404.
+    ...ALL_NPCS.filter((npc) => npc.hasName).map((npc) => ({
+      url: `${SITE_URL}/database/npcs/${encodeURIComponent(npc.slug)}`,
     })),
   ];
 }

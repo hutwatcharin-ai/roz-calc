@@ -10,6 +10,7 @@
 
 import { naviCommand } from '@/lib/rozglobal-guides';
 import { shopsFor } from '@/lib/npc-shops';
+import { mapDisplayName } from '@/lib/npcs';
 
 export default function ItemShops({ itemId }: { itemId: number }) {
   const shops = shopsFor(itemId);
@@ -33,7 +34,15 @@ export default function ItemShops({ itemId }: { itemId: number }) {
           <tbody>
             {shops.map((shop) => (
               <tr key={`${shop.npc}-${shop.map}-${shop.x}-${shop.y}`}>
-                <td data-label="NPC">{shop.npc}</td>
+                <td data-label="NPC">
+                  {shop.npc}
+                  {/* The town, when something names it. Our map index holds
+                      only maps with monsters in them, so it knows every field
+                      and no town at all; the NPC data names 112 codes. */}
+                  {mapDisplayName(shop.map) && (
+                    <span className="muted" style={{ marginInlineStart: 6, fontSize: 12.5 }}>{mapDisplayName(shop.map)}</span>
+                  )}
+                </td>
                 <td data-label="พิมพ์ในแชต">
                   <code className="mono navicmd">{naviCommand(shop.map, shop.x, shop.y)}</code>
                 </td>
