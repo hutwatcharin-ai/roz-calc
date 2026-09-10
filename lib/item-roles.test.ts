@@ -12,9 +12,13 @@ describe('crafting ids', () => {
     expect(CRAFT_PRODUCT_IDS).toContain(1750);
   });
 
-  it('has enough of both to be worth a chip', () => {
+  it('has enough of both to be worth a chip, counting only doable recipes', () => {
+    // Read through lib/crafting, which drops the 58 recipes whose skill this
+    // game does not have: 366 materials and 244 products in the raw file
+    // become 318 and 190.
     expect(CRAFT_MATERIAL_IDS.length).toBeGreaterThan(300);
-    expect(CRAFT_PRODUCT_IDS.length).toBeGreaterThan(200);
+    expect(CRAFT_PRODUCT_IDS.length).toBeGreaterThan(150);
+    expect(CRAFT_PRODUCT_IDS.length).toBeLessThan(244);
   });
 
   it('holds ids only once and in order', () => {

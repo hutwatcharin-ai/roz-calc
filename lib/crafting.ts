@@ -34,7 +34,34 @@ export interface Recipe {
   sources: string[];
 }
 
-const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes;
+/**
+ * rAthena production tables include recipes for skills this game does not
+ * have. Three of them, found on 10 Sep 2026 when a reader asked where Trunk
+ * is crafted and the answer was "Rotten Bandage x10 + Single Cell x10":
+ *
+ *   2494 GN_CHANGEMATERIAL  Genetic, a third job     56 recipes
+ *   2039 AB_ANCILLA         Arch Bishop, a third job  1 recipe
+ *    407 ASC_CDP            Assassin Cross            1 recipe
+ *
+ * RO Zero Global opened second jobs on 3 Sep 2026 and has no third job at
+ * all. Our own skills table shows it: "Change Material" and "Ancilla" are
+ * there as empty shells -- no class, no type, no description -- while a real
+ * skill like Prepare Potion carries classes: ["Alchemist"]. 418 of its 851
+ * rows are shells like that.
+ *
+ * These recipes are dropped rather than labelled: a recipe nobody can perform
+ * is not a recipe, and leaving it on an item page sends a reader hunting for
+ * materials to make something the game will not let them make.
+ */
+const SKILLS_NOT_IN_THIS_GAME = new Set([2494, 2039, 407]);
+
+const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes.filter(
+  (recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId),
+);
+
+/** How many the filter above removes, for a page that wants to say so. */
+export const RECIPES_HIDDEN_UNAVAILABLE =
+  (file as unknown as { recipes: Recipe[] }).recipes.length - RECIPES.length;
 
 export const KIND_TITLES: Record<CraftKind, string> = {
   forge: 'ตีอาวุธ',

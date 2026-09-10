@@ -23,26 +23,21 @@
 // and its count stays exact.
 
 import type { PostgrestFilterBuilder } from '@supabase/postgrest-js';
-import recipeFile from '@/data/crafting-recipes.json';
+import { ALL_RECIPES } from '@/lib/crafting';
 
 export type ItemRole = 'craft-material' | 'craft-product' | 'heal' | 'buff' | 'travel' | 'enchant' | 'pet' | 'ammo';
 
-interface Recipe {
-  product?: { id?: number | null } | null;
-  materials?: { id?: number | null }[] | null;
-}
+// Read through lib/crafting, not from the JSON: that module drops the 58
+// recipes whose skill does not exist in this game, and a chip that counted
+// them would send a reader to an item page with no recipe on it.
 
-const recipes = (recipeFile as { recipes: Recipe[] }).recipes;
-
-/** Item ids that appear as a material in any published recipe. */
+/** Item ids that appear as a material in a recipe someone can actually do. */
 export const CRAFT_MATERIAL_IDS: number[] = [
-  ...new Set(recipes.flatMap((r) => (r.materials ?? []).map((m) => m?.id).filter((id): id is number => typeof id === 'number'))),
+  ...new Set(ALL_RECIPES.flatMap((r) => r.materials.map((m) => m.id))),
 ].sort((a, b) => a - b);
 
-/** Item ids that a published recipe makes. */
-export const CRAFT_PRODUCT_IDS: number[] = [
-  ...new Set(recipes.map((r) => r.product?.id).filter((id): id is number => typeof id === 'number')),
-].sort((a, b) => a - b);
+/** Item ids that such a recipe makes. */
+export const CRAFT_PRODUCT_IDS: number[] = [...new Set(ALL_RECIPES.map((r) => r.product.id))].sort((a, b) => a - b);
 
 export const ROLE_TH: Record<ItemRole, { title: string; asks: string }> = {
   'craft-material': { title: 'ใช้คราฟต์', asks: 'เป็นวัตถุดิบในสูตรคราฟต์ที่เว็บนี้มี' },
