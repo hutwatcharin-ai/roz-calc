@@ -37,21 +37,28 @@ export default function FarmNumbersBar({
   numbers: PlayerNumbers;
   onNumbers: (next: PlayerNumbers) => void;
 }) {
-  // null = decide from the numbers: open while empty, folded once filled.
-  const [open, setOpen] = useState<boolean | null>(null);
+  // Folded by default, filled or not. Opened, the five boxes took the whole
+  // first screen of a 390px phone and pushed the mode tabs below it (dev
+  // check, 11 Sep 2026) -- a visitor with no numbers saw a form, not an answer.
+  const [expanded, setExpanded] = useState(false);
   const filled = BAR_FIELDS[style].some((field) => numbers[field] !== undefined);
-  const expanded = open ?? !filled;
 
   if (!expanded) {
     return (
       <div className="farmbar">
         <div className="farmbar__summary">
-          <span>ตัวละคร</span>
-          {summary(style, numbers).map((part) => (
-            <strong key={part}>{part}</strong>
-          ))}
-          <button type="button" className="btn farmbar__edit" onClick={() => setOpen(true)}>
-            แก้ตัวเลข
+          {filled ? (
+            <>
+              <span>ตัวละคร</span>
+              {summary(style, numbers).map((part) => (
+                <strong key={part}>{part}</strong>
+              ))}
+            </>
+          ) : (
+            <span>ยังไม่ได้กรอกตัวเลขตัวละคร · ไม่กรอกก็ดูได้</span>
+          )}
+          <button type="button" className="btn farmbar__edit" onClick={() => setExpanded(true)}>
+            {filled ? 'แก้ตัวเลข' : 'กรอกตัวเลข'}
           </button>
         </div>
       </div>
@@ -83,11 +90,9 @@ export default function FarmNumbersBar({
         }}
         note="ทุกช่องไม่บังคับ ใช้ร่วมกันทั้ง 4 โหมด"
       />
-      {filled && (
-        <button type="button" className="btn" style={{ marginTop: 8 }} onClick={() => setOpen(false)}>
-          เสร็จ
-        </button>
-      )}
+      <button type="button" className="btn" style={{ marginTop: 8 }} onClick={() => setExpanded(false)}>
+        เสร็จ
+      </button>
     </div>
   );
 }

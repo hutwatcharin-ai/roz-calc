@@ -119,7 +119,8 @@ Filters for AFK and zeny (both off by default): "เฉพาะแมพที�
 
 **FarmNumbersBar**
 - A style radio, then level · damage · ASPD (or seconds per cast) · HIT (melee only) · FLEE.
-- It shows expanded when every field is empty. Otherwise it shows one line, "สายตี · Lv 45 · ดาเมจ 400 · ASPD 170 · HIT 290 · FLEE 260", with a "แก้" button that expands it.
+- It is folded by default. Filled, it shows one line, "สายตี · Lv 45 · ดาเมจ 400 · ASPD 170 · HIT 290 · FLEE 260", with "แก้ตัวเลข". Empty, it shows "ยังไม่ได้กรอกตัวเลขตัวละคร · ไม่กรอกก็ดูได้" with "กรอกตัวเลข".
+- Changed during implementation: opened while empty, the five boxes filled the whole first screen at 390 px and pushed the mode tabs below it.
 - Values are stored in the existing `roz-calc:tool-numbers` key and the style in `roz-calc:afk-style`.
 
 **Mode line** under the tabs: the blurb plus "ใช้: …". When something is missing it adds "กรอก FLEE เพิ่ม จะได้ตัดแมพที่หลบไม่พ้น".

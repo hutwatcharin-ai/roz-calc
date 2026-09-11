@@ -73,7 +73,6 @@ export default function ZenyView({ data, player, level }: ViewProps) {
       </p>
 
       <MapFilters cleanOnly={cleanOnly} noRiskOnly={noRiskOnly} onClean={setCleanOnly} onNoRisk={setNoRiskOnly} />
-      {gate && <BlockedMaps blocked={blocked} />}
 
       {ranked.length === 0 ? (
         <div className="card farm-state">
@@ -86,6 +85,7 @@ export default function ZenyView({ data, player, level }: ViewProps) {
       ) : (
         <RankedMaps maps={ranked} toCard={toCard} idPrefix="farm-zeny" podiumTitle="3 แมพหาเงินที่คุ้มสุด" />
       )}
+      {gate && <BlockedMaps blocked={blocked} />}
 
       <section className="farm-section" aria-labelledby="farm-earners">
         <h2 id="farm-earners" className="section-title">

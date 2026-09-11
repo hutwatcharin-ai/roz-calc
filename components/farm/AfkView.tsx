@@ -89,7 +89,6 @@ export default function AfkView({ data, player, level }: ViewProps) {
       </p>
 
       <MapFilters cleanOnly={cleanOnly} noRiskOnly={noRiskOnly} onClean={setCleanOnly} onNoRisk={setNoRiskOnly} />
-      {gate && <BlockedMaps blocked={blocked} />}
 
       {ranked.length === 0 ? (
         <div className="card farm-state">
@@ -102,6 +101,9 @@ export default function AfkView({ data, player, level }: ViewProps) {
       ) : (
         <RankedMaps maps={ranked} toCard={toCard} idPrefix="farm-afk" podiumTitle="3 แมพทิ้งบอทเก็บ EXP ที่ดีสุด" />
       )}
+      {/* After the answer, not before it: the maps you cannot use are the
+          explanation, not the result. */}
+      {gate && <BlockedMaps blocked={blocked} />}
 
       <Caveat>
         แมพถูกตัดเมื่อมีมอนชนิดไหนก็ได้ในแมพ (รวม MVP) ตีคุณโดนเกิน {DODGE_CAP_RELAXED}% หรือเกิน {DODGE_CAP_STRICT}% ถ้าแมพมีมอนโจมตีก่อนหรือเป็นสายเวท
