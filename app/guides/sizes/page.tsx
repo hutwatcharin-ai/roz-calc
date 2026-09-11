@@ -46,9 +46,9 @@ export default function SizesPage() {
           <tbody>
             {SIZE_TABLE.map((row) => (
               <tr key={row.weapon}>
-                <th scope="row">
+                <th scope="row" className="sizerow">
                   {row.weapon}
-                  <span className="muted" style={{ fontSize: 12, marginInlineStart: 6 }}>
+                  <span className="muted sizerow__label" style={{ fontSize: 12, marginInlineStart: 6 }}>
                     {row.label}
                   </span>
                 </th>

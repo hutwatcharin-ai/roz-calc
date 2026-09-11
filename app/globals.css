@@ -361,8 +361,18 @@ a.thsort { text-decoration: none; }
     border: 0;
     padding: 2px 0;
     width: auto;
-    flex: 0 0 auto;
+    /* Shrinkable and capped at the card's width, and its contents may wrap.
+       It was 0 0 auto: a cell as wide as its content, so a recipe's material
+       list ran 494px into a 320px card and every guide with a recipe table
+       scrolled sideways, cutting names like "Old Frying Pan" at the edge
+       (owner's report, 11 Sep 2026). Short cells still sit side by side. */
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
   }
+  .data-table td > * { min-width: 0; }
+  .data-table td .recipe__item span { overflow-wrap: anywhere; }
 
   .data-table td::before {
     content: attr(data-label);
@@ -1080,6 +1090,24 @@ a.qcard:hover { background: var(--panel-2); }
     background: var(--panel);
     z-index: 1;
   }
+}
+
+/* The element matrix and the size table on a phone (11 Sep 2026). The element
+   guide's four 11-column tables were 708px wide in a 356px card; they now fit
+   with short Thai names, bare numbers and tight cells, and the size table's
+   weapon column wraps instead of holding its 219px on one line. */
+.el-short, .eltable__phonenote { display: none; }
+.el-short { text-decoration: none; border: 0; }
+@media (max-width: 720px) {
+  .eltable-card { padding-inline: 10px; }
+  .eltable__phonenote { display: block; margin: -4px 0 8px; color: var(--faint); font-size: 12.5px; }
+  .eltable-card .eltable { font-size: 12px; table-layout: fixed; }
+  .eltable-card .eltable th, .eltable-card .eltable td { padding: 4px 1px; letter-spacing: 0; text-align: center; }
+  .eltable-card .eltable th[scope='row'] { width: 44px; text-align: left; padding-inline-start: 3px; }
+  .eltable-card .el-full, .eltable-card .el-pct { display: none; }
+  .eltable-card .el-short { display: inline; }
+  .eltable th.sizerow { white-space: normal; }
+  .sizerow__label { display: block; margin-inline-start: 0 !important; }
 }
 
 /* ---------------------------------------------------------------------------
