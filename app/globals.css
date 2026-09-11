@@ -2551,3 +2551,143 @@ a.cashlist__row:hover { background: var(--panel-2); }
   .cashplan__bar { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); border-radius: 12px; border: 1px solid var(--yellow); }
   .cashplan__bar-in { gap: 8px; padding-inline: 10px; font-size: 13px; }
 }
+
+/* ============================================================
+   Zeny farm draft (app/tools/zeny-farm). Rebuilt 11 Sep 2026 after the
+   owner looked at it on a phone: "only data, no pictures". It was two
+   five-column tables; at 390px the monster column fell to one word per line
+   and the page ran 14,607px. Cards now carry the map picture and the monster
+   sprites the site already serves, and every grid collapses to one column
+   without a breakpoint (min(Npx, 100%) keeps 320px screens from overflowing).
+   ============================================================ */
+.zf-draft {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px dashed var(--yellow);
+  border-radius: 999px;
+  color: var(--yellow);
+  font: 600 12px/1.6 var(--font-sarabun), sans-serif;
+  white-space: nowrap;
+}
+.zf-section { margin-top: 22px; }
+.zf-section__note { margin: -4px 0 10px; color: var(--faint); font: 400 13px/1.5 var(--font-sarabun), sans-serif; }
+
+.zf-podium, .zf-maplist, .zf-mongrid, .zfmob { list-style: none; margin: 0; padding: 0; }
+.zf-podium { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.zf-maplist { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(440px, 100%), 1fr)); }
+
+.zfmap {
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.zfmap--big { flex-direction: column; gap: 0; padding: 0; overflow: hidden; box-shadow: 4px 4px 0 var(--yellow); }
+.zfmap__pic {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: var(--panel-2);
+}
+.zfmap--big .zfmap__pic { width: 100%; height: 150px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; }
+.zfmap__pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.zfmap__nopic { display: grid; place-items: center; height: 100%; padding: 4px; color: var(--faint); font: 400 11px/1.3 var(--font-sarabun), sans-serif; text-align: center; }
+.zfmap__badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  font: 700 14px/1.5 var(--font-chakra), sans-serif;
+}
+.zfmap__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: 6px; min-width: 0; }
+.zfmap--big .zfmap__body { padding: 12px; }
+.zfmap__head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.zfmap__num { flex: none; color: var(--dim); font: 600 13px/1.4 var(--font-mono), ui-monospace, monospace; }
+.zfmap__name, .zfmap__name:visited { color: var(--text); font: 700 15px/1.35 var(--font-sarabun), sans-serif; text-decoration: none; }
+.zfmap--big .zfmap__name { font-size: 18px; }
+.zfmap__name:hover { color: var(--cyan); }
+.zfmap__code { margin-top: -4px; color: var(--faint); font: 400 12px/1.4 var(--font-mono), ui-monospace, monospace; }
+.zfmap__stats { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 0; }
+.zfmap__stats div { display: flex; align-items: baseline; gap: 5px; }
+.zfmap__stats dt { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
+.zfmap__stats dd { margin: 0; color: var(--text); font: 600 14px/1.4 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.zfmap__stats .zf-money { color: var(--yellow); }
+.zf-unit { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
+
+.zfmob { display: flex; flex-wrap: wrap; gap: 6px; }
+.zfmob li { min-width: 0; max-width: 100%; }
+.zfmob a, .zfmob a:visited {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  max-width: 100%;
+  padding: 2px 10px 2px 3px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: 500 12.5px/1.3 var(--font-sarabun), sans-serif;
+  text-decoration: none;
+}
+.zfmob a:hover { border-color: var(--cyan); }
+.zfmob img { flex: none; width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; }
+.zfmap--big .zfmob img { width: 36px; height: 36px; }
+.zfmob__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.zfmob__z { flex: none; color: var(--faint); font: 400 11.5px/1.3 var(--font-mono), ui-monospace, monospace; }
+
+.zf-mongrid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+.zfmon a, .zfmon a:visited {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  text-decoration: none;
+}
+.zfmon a:hover { border-color: var(--cyan); }
+.zfmon__sprite { flex: none; width: 56px; height: 56px; object-fit: contain; image-rendering: pixelated; }
+.zfmon__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.zfmon__name { overflow: hidden; font: 600 14px/1.35 var(--font-sarabun), sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.zfmon__lv { color: var(--faint); font-size: 12px; font-weight: 400; }
+.zfmon__zeny { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.zfmon__zeny small { margin-inline-start: 4px; color: var(--faint); font: 400 11.5px var(--font-sarabun), sans-serif; }
+.zfmon__drop { display: flex; align-items: center; gap: 5px; min-width: 0; color: var(--dim); font: 400 12px/1.35 var(--font-sarabun), sans-serif; }
+.zfmon__drop img { flex: none; image-rendering: pixelated; }
+.zfmon__dropname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.zf-more { margin-top: 10px; }
+.zf-more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 16px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: 600 13.5px/1.4 var(--font-sarabun), sans-serif;
+  list-style: none;
+  cursor: pointer;
+}
+.zf-more > summary::-webkit-details-marker { display: none; }
+.zf-more > summary::after { content: '▾'; color: var(--dim); }
+.zf-more[open] > summary::after { content: '▴'; }
+.zf-more > summary:hover { border-color: var(--cyan); }
+.zf-more > ol, .zf-more > ul { margin-top: 10px; }

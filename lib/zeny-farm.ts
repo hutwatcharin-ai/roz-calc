@@ -48,6 +48,11 @@ export interface MapPick {
   /** Sum over the map's monsters of perKill / HP * amount. */
   score: number;
   mobs: number;
+  /**
+   * Zeny from killing every monster on the map once: the sum of perKill times
+   * amount. The score ranks; this is the number a reader can picture.
+   */
+  roundZeny: number;
   /** The monsters that carry most of the score, best first. */
   top: { id: number; name: string; perKill: number; amount: number }[];
 }
@@ -124,9 +129,10 @@ export function rankMaps(
   const byMap = new Map<string, MapPick>();
   for (const { code, monsterId, amount } of largest.values()) {
     const monster = values.get(monsterId) as MonsterValue;
-    const pick = byMap.get(code) ?? { mapCode: code, score: 0, mobs: 0, top: [] };
+    const pick = byMap.get(code) ?? { mapCode: code, score: 0, mobs: 0, roundZeny: 0, top: [] };
     pick.score += (monster.perKill / (monster.hp as number)) * amount;
     pick.mobs += amount;
+    pick.roundZeny += monster.perKill * amount;
     pick.top.push({ id: monster.id, name: monster.name, perKill: monster.perKill, amount });
     byMap.set(code, pick);
   }

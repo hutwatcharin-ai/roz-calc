@@ -85,6 +85,8 @@ describe('rankMaps', () => {
     );
     expect(picks.map((p) => p.mapCode)).toEqual(['a', 'b']);
     expect(picks[0].score).toBeCloseTo((10 / 100) * 20, 5);
+    // Twenty monsters at 10z a kill: one pass over the map is worth 200z.
+    expect(picks[0].roundZeny).toBeCloseTo(200, 5);
   });
 
   it('folds the channel copies into one map', () => {
@@ -103,6 +105,7 @@ describe('rankMaps', () => {
     // The largest count, not the sum: the two doors lead to the same 20
     // monsters, and adding them made a field look twice as busy as it is.
     expect(picks[0].mobs).toBe(20);
+    expect(picks[0].roundZeny).toBeCloseTo(200, 5);
   });
 
   it('drops the places a walk-in cannot reach', () => {

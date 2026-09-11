@@ -6,16 +6,26 @@
 //
 // The question: kill things, sell what falls -- which map pays best. Same
 // shape of answer as /tools/leveling-spots, which ranks by EXP: value per HP
-// weighted by how many monsters stand there, with the two raw numbers printed
+// weighted by how many monsters stand there, with the raw numbers printed
 // beside it so a reader can check the ranking rather than trust it.
+//
+// Layout rebuilt 11 Sep 2026 after the owner's verdict on a phone: "only data,
+// no pictures". The first version was two five-column tables; at 390px the
+// monster column fell to one word per line and the page ran 14,607px, with the
+// formula text filling the whole first screen before any answer. Now the answer
+// comes first as cards carrying the map picture and monster sprites the site
+// already serves, the long tails fold away, and the method sits at the bottom.
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import Caveat from '@/components/Caveat';
+import ItemIcon from '@/components/ItemIcon';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { getMapCanonical } from '@/lib/map-canonical';
+import { mapImage } from '@/lib/map-image';
 import { isCVariant } from '@/lib/c-variant';
 import { mapDisplayName } from '@/lib/npcs';
-import { rankMaps, walkInReason, zenyPerKill, type MonsterValue } from '@/lib/zeny-farm';
+import { rankMaps, walkInReason, zenyPerKill, type MapPick, type MonsterValue } from '@/lib/zeny-farm';
 
 export const revalidate = 86400;
 
@@ -25,8 +35,17 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
+const PODIUM = 3;
+const MAPS_OPEN = 10;
 const MAPS_SHOWN = 40;
+const MONSTERS_OPEN = 12;
 const MONSTERS_SHOWN = 60;
+
+const whole = (n: number) => Math.round(n).toLocaleString('en-US');
+/** Small amounts keep a decimal so 0.4z does not read as nothing. */
+const zeny = (n: number) => (n >= 100 ? whole(n) : n.toFixed(1));
+
+type ShownMap = { pick: MapPick; name: string; channels: number; fingerprint: string };
 
 export default async function ZenyFarmPage() {
   const db = supabaseBrowser();
@@ -35,11 +54,11 @@ export default async function ZenyFarmPage() {
     fetchAllRows<{ monster_id: number; item_id: number; rate: number | null }>((from, to) =>
       db.from('monster_drops').select('monster_id, item_id, rate').range(from, to),
     ),
-    fetchAllRows<{ id: number; name_en: string; sell_price: number | null }>((from, to) =>
-      db.from('items').select('id, name_en, sell_price').range(from, to),
+    fetchAllRows<{ id: number; name_en: string; sell_price: number | null; icon_url: string | null; category: string | null }>(
+      (from, to) => db.from('items').select('id, name_en, sell_price, icon_url, category').range(from, to),
     ),
-    fetchAllRows<{ id: number; name_en: string; level: number | null; hp: number | null }>((from, to) =>
-      db.from('monsters').select('id, name_en, level, hp').range(from, to),
+    fetchAllRows<{ id: number; name_en: string; level: number | null; hp: number | null; image_url: string | null }>((from, to) =>
+      db.from('monsters').select('id, name_en, level, hp, image_url').range(from, to),
     ),
     fetchAllRows<{ map_code: string; monster_id: number; amount: number | null }>((from, to) =>
       db.from('monster_spawns').select('map_code, monster_id, amount').range(from, to),
@@ -50,14 +69,29 @@ export default async function ZenyFarmPage() {
   const mapNames = await fetchAllRows<{ map_code: string; map_display_name: string | null }>((from, to) =>
     db.from('map_stats').select('map_code, map_display_name').range(from, to),
   );
+
+  // A failed read used to render three empty headings and nothing else --
+  // seen on 11 Sep 2026 when two of the five queries hit "fetch failed". An
+  // empty ranking reads as "no map pays", so say the read failed instead.
+  const failed = [drops, items, monsters, spawns, mapNames].find((result) => result.error);
+  if (failed) {
+    console.error('zeny farm query failed', failed.error);
+    return (
+      <main className="shell" style={{ paddingBlock: 32 }}>
+        <PageHeader title="ฟาร์มเงินที่ไหนดี" />
+        <p className="muted">ดึงข้อมูลไม่สำเร็จ ลองรีเฟรชหน้านี้อีกครั้ง</p>
+      </main>
+    );
+  }
+
   const nameOf = new Map((mapNames.data ?? []).map((row) => [row.map_code, row.map_display_name]));
 
-  const sell = new Map((items.data ?? []).map((item) => [item.id, item.sell_price]));
-  const itemName = new Map((items.data ?? []).map((item) => [item.id, item.name_en]));
+  const itemById = new Map((items.data ?? []).map((item) => [item.id, item]));
+  const spriteOf = new Map((monsters.data ?? []).map((monster) => [monster.id, monster.image_url]));
   const dropsByMonster = new Map<number, { itemId: number; rate: number | null; sellPrice: number | null }[]>();
   for (const drop of drops.data ?? []) {
     const list = dropsByMonster.get(drop.monster_id) ?? [];
-    list.push({ itemId: drop.item_id, rate: drop.rate, sellPrice: sell.get(drop.item_id) ?? null });
+    list.push({ itemId: drop.item_id, rate: drop.rate, sellPrice: itemById.get(drop.item_id)?.sell_price ?? null });
     dropsByMonster.set(drop.monster_id, list);
   }
 
@@ -87,7 +121,7 @@ export default async function ZenyFarmPage() {
   // Channels the canonical rule keeps apart (an event channel holds one extra
   // monster, so it is not strictly a copy) still read as the same place. They
   // are collapsed for display, with the count named.
-  const shown: { pick: (typeof picks)[number]; name: string; channels: number; fingerprint: string }[] = [];
+  const shown: ShownMap[] = [];
   for (const pick of picks) {
     const name = nameOf.get(pick.mapCode) ?? mapDisplayName(pick.mapCode) ?? pick.mapCode;
     // Same monsters in the same numbers with the same score is the same place,
@@ -108,126 +142,198 @@ export default async function ZenyFarmPage() {
     }
     shown.push({ pick, name, channels: 1, fingerprint });
   }
+  const ranked = shown.slice(0, MAPS_SHOWN);
 
   const byKill = [...values.values()].sort((a, b) => b.perKill - a.perKill).slice(0, MONSTERS_SHOWN);
   const pricedItems = (items.data ?? []).filter((item) => item.sell_price && item.sell_price > 0).length;
   const ratedDrops = (drops.data ?? []).filter((drop) => drop.rate !== null).length;
 
-  /** The best-selling drop a monster has, for the "what am I picking up" column. */
-  function bestDrop(id: number): { name: string; value: number } | null {
+  /** The drop that earns a monster most, for the "what am I picking up" line. */
+  function bestDrop(id: number) {
     const rows = (dropsByMonster.get(id) ?? []).filter((row) => row.rate !== null && row.sellPrice);
     if (rows.length === 0) return null;
     const best = rows.reduce((a, b) => ((a.rate as number) * (a.sellPrice as number) >= (b.rate as number) * (b.sellPrice as number) ? a : b));
-    return { name: itemName.get(best.itemId) ?? `#${best.itemId}`, value: ((best.rate as number) / 100) * (best.sellPrice as number) };
+    const item = itemById.get(best.itemId);
+    return {
+      name: item?.name_en ?? `#${best.itemId}`,
+      icon: item?.icon_url ?? null,
+      category: item?.category ?? null,
+      value: ((best.rate as number) / 100) * (best.sellPrice as number),
+    };
+  }
+
+  function MapCard({ row, rank, big }: { row: ShownMap; rank: number; big?: boolean }) {
+    const { pick, name, channels } = row;
+    const href = `/database/maps/${encodeURIComponent(pick.mapCode)}`;
+    const picture = mapImage(pick.mapCode);
+    return (
+      <li className={`zfmap${big ? ' zfmap--big' : ''}`}>
+        {/* The picture repeats the name link beside it, so it is hidden from
+            the keyboard and screen readers rather than announced twice. */}
+        <Link href={href} className="zfmap__pic" tabIndex={-1} aria-hidden="true">
+          {picture ? (
+            <img src={picture.src} alt="" loading={rank === 1 ? 'eager' : 'lazy'} decoding="async" />
+          ) : (
+            <span className="zfmap__nopic">ไม่มีรูปแมพ</span>
+          )}
+          {big && <span className="zfmap__badge">#{rank}</span>}
+        </Link>
+        <div className="zfmap__body">
+          <div className="zfmap__head">
+            {!big && <span className="zfmap__num">#{rank}</span>}
+            <Link href={href} className="zfmap__name">
+              {name}
+            </Link>
+          </div>
+          <div className="zfmap__code">
+            {pick.mapCode}
+            {channels > 1 && ` · ${channels} ช่อง`}
+          </div>
+          <dl className="zfmap__stats">
+            {/* No "≈" inside the number: the mono face draws it as a rupee
+                sign. "ราว" says the same thing in the label's own font. */}
+            <div>
+              <dt>ฆ่าครบ 1 รอบได้ราว</dt>
+              <dd className="zf-money">{whole(pick.roundZeny)}z</dd>
+            </div>
+            <div>
+              <dt>มอน</dt>
+              <dd>
+                {pick.mobs}
+                <span className="zf-unit"> ตัว</span>
+              </dd>
+            </div>
+            <div>
+              <dt>คะแนน</dt>
+              <dd>{pick.score.toFixed(0)}</dd>
+            </div>
+          </dl>
+          <ul className="zfmob" aria-label="ตัวที่ทำเงินให้มากสุดในแมพ">
+            {pick.top.map((mob) => (
+              <li key={mob.id}>
+                <Link href={`/database/monsters/${mob.id}`}>
+                  {spriteOf.get(mob.id) && <img src={spriteOf.get(mob.id) as string} alt="" loading="lazy" decoding="async" />}
+                  <span className="zfmob__name">{mob.name}</span>
+                  <span className="zfmob__z">
+                    {zeny(mob.perKill)}z ×{mob.amount}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    );
+  }
+
+  function MonsterTile({ monster }: { monster: MonsterValue }) {
+    const best = bestDrop(monster.id);
+    const sprite = spriteOf.get(monster.id);
+    return (
+      <li className="zfmon">
+        <Link href={`/database/monsters/${monster.id}`}>
+          {sprite ? (
+            <img className="zfmon__sprite" src={sprite} alt="" loading="lazy" decoding="async" />
+          ) : (
+            <span className="zfmon__sprite" aria-hidden="true" />
+          )}
+          <span className="zfmon__body">
+            <span className="zfmon__name">
+              {monster.name}
+              {monster.level != null && <span className="zfmon__lv"> Lv {monster.level}</span>}
+            </span>
+            <span className="zfmon__zeny">
+              {zeny(monster.perKill)}z<small>ต่อตัว</small>
+            </span>
+            {best && (
+              <span className="zfmon__drop">
+                <ItemIcon iconUrl={best.icon} category={best.category} size={20} />
+                <span className="zfmon__dropname">
+                  {best.name} ≈{zeny(best.value)}z
+                </span>
+              </span>
+            )}
+          </span>
+        </Link>
+      </li>
+    );
   }
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฟาร์มเงินที่ไหนดี" />
-      <p className="card card--yellow" style={{ marginTop: 12 }}>
-        <strong>ฉบับร่าง ยังไม่เผยแพร่</strong> — หน้านี้ไม่มีในเมนู ไม่อยู่ใน sitemap และสั่งไม่ให้ Google เก็บไว้
-        เปิดดูได้จากลิงก์ตรงเท่านั้น
-      </p>
+      <PageHeader title="ฟาร์มเงินที่ไหนดี" lead="ตีมอนแล้วเก็บของที่ดรอปไปขายร้าน NPC — แมพไหนได้เงินมากสุด">
+        <span className="zf-draft">ฉบับร่าง · ลิงก์ลับ</span>
+      </PageHeader>
 
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title">คิดยังไง</h2>
-        <p style={{ marginTop: 8, maxWidth: '70ch', lineHeight: 1.6 }}>
+      <section className="zf-section" aria-labelledby="zf-podium">
+        <h2 id="zf-podium" className="section-title">
+          3 แมพที่คุ้มสุด
+        </h2>
+        <ol className="zf-podium">
+          {ranked.slice(0, PODIUM).map((row, i) => (
+            <MapCard key={row.pick.mapCode} row={row} rank={i + 1} big />
+          ))}
+        </ol>
+      </section>
+
+      <section className="zf-section" aria-labelledby="zf-maps">
+        <h2 id="zf-maps" className="section-title">
+          อันดับ {PODIUM + 1}–{MAPS_OPEN}
+        </h2>
+        <ol className="zf-maplist">
+          {ranked.slice(PODIUM, MAPS_OPEN).map((row, i) => (
+            <MapCard key={row.pick.mapCode} row={row} rank={PODIUM + i + 1} />
+          ))}
+        </ol>
+        {ranked.length > MAPS_OPEN && (
+          <details className="zf-more">
+            <summary>
+              ดูอันดับ {MAPS_OPEN + 1}–{ranked.length}
+            </summary>
+            <ol className="zf-maplist">
+              {ranked.slice(MAPS_OPEN).map((row, i) => (
+                <MapCard key={row.pick.mapCode} row={row} rank={MAPS_OPEN + i + 1} />
+              ))}
+            </ol>
+          </details>
+        )}
+      </section>
+
+      <section className="zf-section" aria-labelledby="zf-monsters">
+        <h2 id="zf-monsters" className="section-title">
+          ซาก 1 ตัวขายได้เท่าไร
+        </h2>
+        <p className="zf-section__note">ค่าเฉลี่ยระยะยาวจากอัตราดรอป × ราคาขายร้าน NPC ของทุกชิ้นที่มันดรอป</p>
+        <ul className="zf-mongrid">
+          {byKill.slice(0, MONSTERS_OPEN).map((monster) => (
+            <MonsterTile key={monster.id} monster={monster} />
+          ))}
+        </ul>
+        {byKill.length > MONSTERS_OPEN && (
+          <details className="zf-more">
+            <summary>ดูอีก {byKill.length - MONSTERS_OPEN} ตัว</summary>
+            <ul className="zf-mongrid">
+              {byKill.slice(MONSTERS_OPEN).map((monster) => (
+                <MonsterTile key={monster.id} monster={monster} />
+              ))}
+            </ul>
+          </details>
+        )}
+      </section>
+
+      <Caveat label="คิดคะแนนยังไง และข้อจำกัดของตัวเลข">
+        <p>
           คะแนน = <strong>มูลค่าของที่ดรอปต่อการฆ่า 1 ตัว ÷ HP ของมัน × จำนวนตัวในแมพ</strong> — สูตรเดียวกับหน้า{' '}
-          <Link href="/tools/leveling-spots">จุดฟาร์ม</Link> แต่เปลี่ยนจาก EXP เป็นเงิน · HP ใช้แทนเวลาที่ใช้ฆ่า
-          จำนวนตัวใช้แทนว่ามีให้ตีต่อเนื่องแค่ไหน
+          <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> แต่เปลี่ยนจาก EXP เป็นเงิน · HP ใช้แทนเวลาที่ใช้ฆ่า
+          จำนวนตัวใช้แทนว่ามีให้ตีต่อเนื่องแค่ไหน · &ldquo;ฆ่าครบ 1 รอบได้&rdquo; คือมูลค่าต่อตัว × จำนวนตัว รวมทุกตัวในแมพ
         </p>
-        <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>
-          ตัวเลขนี้เป็น <strong>อย่างน้อยที่สุด</strong> ไม่ใช่ยอดจริง: ไอเทมในฐานข้อมูลมีราคาขายแค่ {pricedItems.toLocaleString('en-US')} จาก{' '}
+        <p>
+          ตัวเลขเป็น <strong>อย่างน้อยที่สุด</strong> ไม่ใช่ยอดจริง: ไอเทมในฐานข้อมูลมีราคาขายแค่ {pricedItems.toLocaleString('en-US')} จาก{' '}
           {(items.data ?? []).length.toLocaleString('en-US')} ชิ้น และดรอปมีอัตราตกแค่ {ratedDrops.toLocaleString('en-US')} จาก{' '}
-          {(drops.data ?? []).length.toLocaleString('en-US')} แถว ของที่ไม่รู้ราคาหรือไม่รู้อัตราถูกนับเป็นศูนย์ ·
-          ไม่คิดเป็น zeny ต่อชั่วโมง เพราะต้องเดาความเร็วฆ่าซึ่งเราไม่มีข้อมูล · แมพ WoE ห้องสมบัติ ปราสาท และ Memorial Dungeon ตัดออกแล้ว
-          เพราะเดินเข้าไปเฉยๆ ไม่ได้
+          {(drops.data ?? []).length.toLocaleString('en-US')} แถว ของที่ไม่รู้ราคาหรืออัตราถูกนับเป็นศูนย์ · ไม่คิดเป็น zeny ต่อชั่วโมง
+          เพราะต้องเดาความเร็วฆ่า · แมพ WoE ห้องสมบัติ ปราสาท และ Memorial Dungeon ตัดออกแล้ว เพราะเดินเข้าไปเฉยๆ ไม่ได้
         </p>
-      </section>
-
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title">แมพที่คุ้มที่สุด {MAPS_SHOWN} อันดับ</h2>
-        <table className="bptable">
-          <thead>
-            <tr>
-              <th className="bptable__tier">#</th>
-              <th>แมพ</th>
-              <th className="bptable__qty">คะแนน</th>
-              <th className="bptable__qty">จำนวนมอน</th>
-              <th>ตัวที่ทำเงินให้มากสุดในแมพ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shown.slice(0, MAPS_SHOWN).map(({ pick, name, channels }, i) => (
-              <tr key={pick.mapCode}>
-                <td className="bptable__tier">{i + 1}</td>
-                <td>
-                  <Link href={`/database/maps/${encodeURIComponent(pick.mapCode)}`}>{name}</Link>
-                  <span className="muted mono" style={{ marginInlineStart: 6, fontSize: 12 }}>{pick.mapCode}</span>
-                  {channels > 1 && <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>· {channels} ช่อง</span>}
-                </td>
-                <td className="bptable__qty">{pick.score.toFixed(2)}</td>
-                <td className="bptable__qty">{pick.mobs}</td>
-                <td>
-                  {pick.top.map((row, index) => (
-                    <span key={row.id}>
-                      {index > 0 && ' · '}
-                      <Link href={`/database/monsters/${row.id}`}>{row.name}</Link>
-                      <span className="muted"> {row.perKill.toFixed(1)}z ×{row.amount}</span>
-                    </span>
-                  ))}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title">ซาก 1 ตัวขายได้เท่าไร — {MONSTERS_SHOWN} ตัวแรก</h2>
-        <p className="muted" style={{ marginTop: 0, marginBottom: 10, fontSize: 13 }}>
-          คิดจากอัตราดรอปคูณราคาขายร้าน NPC ของทุกชิ้นที่มันดรอป — ไม่ได้แปลว่าฆ่าตัวเดียวได้เท่านี้ทุกครั้ง แต่เป็นค่าเฉลี่ยระยะยาว
-        </p>
-        <table className="bptable">
-          <thead>
-            <tr>
-              <th className="bptable__tier">#</th>
-              <th>มอนสเตอร์</th>
-              <th className="bptable__qty">zeny/ตัว</th>
-              <th className="bptable__qty">HP</th>
-              <th>ของที่ทำเงินให้มากสุด</th>
-            </tr>
-          </thead>
-          <tbody>
-            {byKill.map((monster, i) => {
-              const best = bestDrop(monster.id);
-              return (
-                <tr key={monster.id}>
-                  <td className="bptable__tier">{i + 1}</td>
-                  <td>
-                    <Link href={`/database/monsters/${monster.id}`}>{monster.name}</Link>
-                    {monster.level != null && <span className="muted"> Lv {monster.level}</span>}
-                  </td>
-                  <td className="bptable__qty">{monster.perKill.toFixed(1)}</td>
-                  <td className="bptable__qty">{monster.hp?.toLocaleString('en-US') ?? '—'}</td>
-                  <td>
-                    {best ? (
-                      <>
-                        {best.name} <span className="muted">{best.value.toFixed(1)}z</span>
-                      </>
-                    ) : (
-                      '—'
-                    )}
-                    {monster.unpriced > 0 && (
-                      <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>· อีก {monster.unpriced} ชิ้นไม่รู้ราคา</span>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </section>
+      </Caveat>
     </main>
   );
 }
