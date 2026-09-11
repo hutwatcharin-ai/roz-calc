@@ -156,4 +156,12 @@ describe('collapseChannels', () => {
       ['other', 1],
     ]);
   });
+
+  it('prefers the plain code over a channel copy of the same length or shorter', () => {
+    const out = collapseChannels([
+      { code: 'gef_f10_z', fingerprint: 'x', channels: 1 },
+      { code: 'gef_fild10', fingerprint: 'x', channels: 1 },
+    ]);
+    expect(out[0].code).toBe('gef_fild10');
+  });
 });

@@ -109,9 +109,15 @@ export function steadyPerKill(m: FarmMonster, kills: number, factor: number): nu
   return zeny;
 }
 
+/** Plain codes before channel copies (gef_fild10 over gef_f10_z), then the shorter. */
+function codeOrder(a: string, b: string): number {
+  const channel = (code: string) => (/_[abz]$/.test(code) ? 1 : 0);
+  return channel(a) - channel(b) || a.length - b.length;
+}
+
 /**
  * Channel copies (iz_d02_a/_b/_z) read as one place. Equal fingerprints fold
- * into the first-ranked entry, which takes the shortest code and counts doors.
+ * into the first-ranked entry, which takes the plainest code and counts doors.
  */
 export function collapseChannels<T extends { code: string; fingerprint: string; channels: number }>(list: T[]): T[] {
   const out: T[] = [];
@@ -120,7 +126,7 @@ export function collapseChannels<T extends { code: string; fingerprint: string; 
     const twin = byPrint.get(item.fingerprint);
     if (twin) {
       const channels = twin.channels + item.channels;
-      if (item.code.length < twin.code.length) Object.assign(twin, item);
+      if (codeOrder(item.code, twin.code) < 0) Object.assign(twin, item);
       twin.channels = channels;
       continue;
     }

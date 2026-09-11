@@ -2560,7 +2560,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
    sprites the site already serves, and every grid collapses to one column
    without a breakpoint (min(Npx, 100%) keeps 320px screens from overflowing).
    ============================================================ */
-.zf-draft {
+.farm-draft {
   display: inline-block;
   padding: 2px 10px;
   border: 1px dashed var(--yellow);
@@ -2569,14 +2569,14 @@ a.cashlist__row:hover { background: var(--panel-2); }
   font: 600 12px/1.6 var(--font-sarabun), sans-serif;
   white-space: nowrap;
 }
-.zf-section { margin-top: 22px; }
-.zf-section__note { margin: -4px 0 10px; color: var(--faint); font: 400 13px/1.5 var(--font-sarabun), sans-serif; }
+.farm-section { margin-top: 22px; }
+.farm-section__note { margin: -4px 0 10px; color: var(--faint); font: 400 13px/1.5 var(--font-sarabun), sans-serif; }
 
-.zf-podium, .zf-maplist, .zf-mongrid, .zfmob { list-style: none; margin: 0; padding: 0; }
-.zf-podium { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
-.zf-maplist { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(440px, 100%), 1fr)); }
+.farm-podium, .farm-maplist, .farm-mongrid, .farmmob { list-style: none; margin: 0; padding: 0; }
+.farm-podium { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.farm-maplist { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(440px, 100%), 1fr)); }
 
-.zfmap {
+.farmcard {
   display: flex;
   gap: 12px;
   min-width: 0;
@@ -2585,8 +2585,8 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-radius: var(--radius);
   background: var(--panel);
 }
-.zfmap--big { flex-direction: column; gap: 0; padding: 0; overflow: hidden; box-shadow: 4px 4px 0 var(--yellow); }
-.zfmap__pic {
+.farmcard--big { flex-direction: column; gap: 0; padding: 0; overflow: hidden; box-shadow: 4px 4px 0 var(--yellow); }
+.farmcard__pic {
   position: relative;
   display: block;
   flex: none;
@@ -2597,10 +2597,10 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-radius: 6px;
   background: var(--panel-2);
 }
-.zfmap--big .zfmap__pic { width: 100%; height: 150px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; }
-.zfmap__pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.zfmap__nopic { display: grid; place-items: center; height: 100%; padding: 4px; color: var(--faint); font: 400 11px/1.3 var(--font-sarabun), sans-serif; text-align: center; }
-.zfmap__badge {
+.farmcard--big .farmcard__pic { width: 100%; height: 150px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; }
+.farmcard__pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.farmcard__nopic { display: grid; place-items: center; height: 100%; padding: 4px; color: var(--faint); font: 400 11px/1.3 var(--font-sarabun), sans-serif; text-align: center; }
+.farmcard__badge {
   position: absolute;
   top: 8px;
   left: 8px;
@@ -2610,24 +2610,24 @@ a.cashlist__row:hover { background: var(--panel-2); }
   color: var(--yellow-ink);
   font: 700 14px/1.5 var(--font-chakra), sans-serif;
 }
-.zfmap__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: 6px; min-width: 0; }
-.zfmap--big .zfmap__body { padding: 12px; }
-.zfmap__head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-.zfmap__num { flex: none; color: var(--dim); font: 600 13px/1.4 var(--font-mono), ui-monospace, monospace; }
-.zfmap__name, .zfmap__name:visited { color: var(--text); font: 700 15px/1.35 var(--font-sarabun), sans-serif; text-decoration: none; }
-.zfmap--big .zfmap__name { font-size: 18px; }
-.zfmap__name:hover { color: var(--cyan); }
-.zfmap__code { margin-top: -4px; color: var(--faint); font: 400 12px/1.4 var(--font-mono), ui-monospace, monospace; }
-.zfmap__stats { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 0; }
-.zfmap__stats div { display: flex; align-items: baseline; gap: 5px; }
-.zfmap__stats dt { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
-.zfmap__stats dd { margin: 0; color: var(--text); font: 600 14px/1.4 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-.zfmap__stats .zf-money { color: var(--yellow); }
-.zf-unit { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
+.farmcard__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: 6px; min-width: 0; }
+.farmcard--big .farmcard__body { padding: 12px; }
+.farmcard__head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.farmcard__num { flex: none; color: var(--dim); font: 600 13px/1.4 var(--font-mono), ui-monospace, monospace; }
+.farmcard__name, .farmcard__name:visited { color: var(--text); font: 700 15px/1.35 var(--font-sarabun), sans-serif; text-decoration: none; }
+.farmcard--big .farmcard__name { font-size: 18px; }
+.farmcard__name:hover { color: var(--cyan); }
+.farmcard__code { margin-top: -4px; color: var(--faint); font: 400 12px/1.4 var(--font-mono), ui-monospace, monospace; }
+.farmcard__stats { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 0; }
+.farmcard__stats div { display: flex; align-items: baseline; gap: 5px; }
+.farmcard__stats dt { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
+.farmcard__stats dd { margin: 0; color: var(--text); font: 600 14px/1.4 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.farmcard__stats .farm-money { color: var(--yellow); }
+.farm-unit { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
 
-.zfmob { display: flex; flex-wrap: wrap; gap: 6px; }
-.zfmob li { min-width: 0; max-width: 100%; }
-.zfmob a, .zfmob a:visited {
+.farmmob { display: flex; flex-wrap: wrap; gap: 6px; }
+.farmmob li { min-width: 0; max-width: 100%; }
+.farmmob a, .farmmob a:visited {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -2641,14 +2641,14 @@ a.cashlist__row:hover { background: var(--panel-2); }
   font: 500 12.5px/1.3 var(--font-sarabun), sans-serif;
   text-decoration: none;
 }
-.zfmob a:hover { border-color: var(--cyan); }
-.zfmob img { flex: none; width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; }
-.zfmap--big .zfmob img { width: 36px; height: 36px; }
-.zfmob__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.zfmob__z { flex: none; color: var(--faint); font: 400 11.5px/1.3 var(--font-mono), ui-monospace, monospace; }
+.farmmob a:hover { border-color: var(--cyan); }
+.farmmob img { flex: none; width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; }
+.farmcard--big .farmmob img { width: 36px; height: 36px; }
+.farmmob__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.farmmob__z { flex: none; color: var(--faint); font: 400 11.5px/1.3 var(--font-mono), ui-monospace, monospace; }
 
-.zf-mongrid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
-.zfmon a, .zfmon a:visited {
+.farm-mongrid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+.farmmon a, .farmmon a:visited {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -2660,36 +2660,67 @@ a.cashlist__row:hover { background: var(--panel-2); }
   color: var(--text);
   text-decoration: none;
 }
-.zfmon a:hover { border-color: var(--cyan); }
-.zfmon__sprite { flex: none; width: 56px; height: 56px; object-fit: contain; image-rendering: pixelated; }
-.zfmon__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.zfmon__name { overflow: hidden; font: 600 14px/1.35 var(--font-sarabun), sans-serif; text-overflow: ellipsis; white-space: nowrap; }
-.zfmon__lv { color: var(--faint); font-size: 12px; font-weight: 400; }
-.zfmon__zeny { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-.zfmon__zeny small { margin-inline-end: 5px; color: var(--faint); font: 400 11.5px var(--font-sarabun), sans-serif; }
+.farmmon a:hover { border-color: var(--cyan); }
+.farmmon__sprite { flex: none; width: 56px; height: 56px; object-fit: contain; image-rendering: pixelated; }
+.farmmon__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.farmmon__name { overflow: hidden; font: 600 14px/1.35 var(--font-sarabun), sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.farmmon__lv { color: var(--faint); font-size: 12px; font-weight: 400; }
+.farmmon__zeny { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.farmmon__zeny small { margin-inline-end: 5px; color: var(--faint); font: 400 11.5px var(--font-sarabun), sans-serif; }
 
 /* The zeny mode inside the farm tool: the hour rate is the number people
    came for, so it is the largest thing on the card once numbers are in. */
 /* Its own line: sharing one with the night total, the two wrapped at
    different baselines on a phone and read as one garbled figure. */
-.zfmap__rate { flex-basis: 100%; }
-.zfmap__rate dd { font-size: 18px; }
-.zfmap--big .zfmap__rate dd { font-size: 22px; }
-.zf-summary { margin: 16px 0 0; color: var(--dim); font: 400 14px/1.6 var(--font-sarabun), sans-serif; }
-.zf-summary strong { color: var(--text); }
-.zf-summary__rule { color: var(--faint); font-size: 13px; }
-.zf-state { margin-top: 16px; }
-.zf-state p { margin: 0 0 10px; }
-.zf-state p:last-child { margin-bottom: 0; }
-.zf-blocked { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.zf-blocked li { padding: 8px 10px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); font: 400 13.5px/1.5 var(--font-sarabun), sans-serif; }
-.zf-blocked__why { display: block; color: var(--faint); font-size: 12.5px; }
-.zfmon__drop { display: flex; align-items: center; gap: 5px; min-width: 0; color: var(--dim); font: 400 12px/1.35 var(--font-sarabun), sans-serif; }
-.zfmon__drop img { flex: none; image-rendering: pixelated; }
-.zfmon__dropname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.farmcard__rate { flex-basis: 100%; }
+.farmcard__rate dd { font-size: 18px; }
+.farmcard--big .farmcard__rate dd { font-size: 22px; }
+.farm-summary { margin: 16px 0 0; color: var(--dim); font: 400 14px/1.6 var(--font-sarabun), sans-serif; }
+.farm-summary strong { color: var(--text); }
+.farm-summary__rule { color: var(--faint); font-size: 13px; }
+.farm-state { margin-top: 16px; }
+.farm-state p { margin: 0 0 10px; }
+.farm-state p:last-child { margin-bottom: 0; }
+.farm-blocked { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.farm-blocked li { padding: 8px 10px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); font: 400 13.5px/1.5 var(--font-sarabun), sans-serif; }
+.farm-blocked__why { display: block; color: var(--faint); font-size: 12.5px; }
 
-.zf-more { margin-top: 10px; }
-.zf-more > summary {
+/* Farm tool integration (11 Sep 2026): one input bar, shared tags, plan cards. */
+.farmcard__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.farmbar { margin-bottom: 14px; }
+.farmbar__style { margin-bottom: 8px; }
+.farmbar__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--dim);
+  font: 500 13.5px/1.5 var(--font-sarabun), sans-serif;
+}
+.farmbar__summary strong { color: var(--text); font-family: var(--font-mono), ui-monospace, monospace; font-weight: 600; }
+.farmbar__edit { margin-inline-start: auto; }
+.farm-uses { margin: -8px 0 14px; color: var(--faint); font-size: 12px; }
+.farm-uses strong { color: var(--yellow); font-weight: 600; }
+.farm-filters { margin-top: 12px; }
+.farmplan { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+.farmplan__card { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.farmplan__top { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.farmplan__sprite { flex: none; width: 56px; height: 56px; object-fit: contain; image-rendering: pixelated; }
+.farmplan__name, .farmplan__name:visited { color: var(--text); font: 700 15px/1.35 var(--font-sarabun), sans-serif; }
+.farmplan__lv { margin-inline-start: 6px; color: var(--faint); font-size: 12px; }
+.farmplan__headline { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.farmplan__map { margin: 0; color: var(--dim); font-size: 13px; }
+.farmplan__actions { display: flex; justify-content: flex-end; }
+.farmmon__drop { display: flex; align-items: center; gap: 5px; min-width: 0; color: var(--dim); font: 400 12px/1.35 var(--font-sarabun), sans-serif; }
+.farmmon__drop img { flex: none; image-rendering: pixelated; }
+.farmmon__dropname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.farm-more { margin-top: 10px; }
+.farm-more > summary {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2703,8 +2734,8 @@ a.cashlist__row:hover { background: var(--panel-2); }
   list-style: none;
   cursor: pointer;
 }
-.zf-more > summary::-webkit-details-marker { display: none; }
-.zf-more > summary::after { content: '▾'; color: var(--dim); }
-.zf-more[open] > summary::after { content: '▴'; }
-.zf-more > summary:hover { border-color: var(--cyan); }
-.zf-more > ol, .zf-more > ul { margin-top: 10px; }
+.farm-more > summary::-webkit-details-marker { display: none; }
+.farm-more > summary::after { content: '▾'; color: var(--dim); }
+.farm-more[open] > summary::after { content: '▴'; }
+.farm-more > summary:hover { border-color: var(--cyan); }
+.farm-more > ol, .farm-more > ul { margin-top: 10px; }

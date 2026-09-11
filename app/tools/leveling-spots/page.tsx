@@ -1,17 +1,12 @@
 // app/tools/leveling-spots/page.tsx
 //
-// "Where should I go now?" -- maps ranked for one level. The ranking itself is
-// in lib/leveling-spots.ts; this file only fetches the window of monsters
-// around the level and groups them by map.
+// ฟาร์มที่ไหนดี. Since the farm tool integration (11 Sep 2026) the server sends
+// only the frame and a description of the four modes; every ranking is
+// computed in the browser from one payload (farm-data/route.ts) so the modes
+// can never disagree. Search Console showed 0 impressions for this URL over
+// 90 days, so moving the ranked rows out of the HTML costs no search traffic.
 import PageHeader from '@/components/PageHeader';
-import Caveat from '@/components/Caveat';
-import FarmSpots, { type FarmMode } from '@/components/FarmSpots';
-import { supabaseBrowser } from '@/lib/supabase';
-import { fetchAllRows } from '@/lib/fetch-all-rows';
-import { LEVEL_SPAN, type Spot } from '@/lib/leveling-spots';
-import { isCVariant } from '@/lib/c-variant';
-
-export const revalidate = 86400;
+import FarmTool, { type FarmMode } from '@/components/farm/FarmTool';
 
 export const metadata = {
   title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล หาเงิน จุด AFK และแผนของคุณ',
@@ -24,107 +19,43 @@ function readMode(raw: string | string[] | undefined): FarmMode {
   return value === 'afk' || value === 'plan' || value === 'zeny' ? value : 'level';
 }
 
-const DEFAULT_LEVEL = 50;
-
-function readLevel(raw: string | string[] | undefined): number {
+/** The level a link asked for, or null when it asked for none. */
+function readLevel(raw: string | string[] | undefined): number | null {
   const value = Number(Array.isArray(raw) ? raw[0] : raw);
-  if (!Number.isFinite(value)) return DEFAULT_LEVEL;
+  if (raw === undefined || !Number.isFinite(value)) return null;
   return Math.min(200, Math.max(1, Math.round(value)));
 }
 
-async function getSpots(level: number): Promise<{ spots: Spot[]; failed: boolean }> {
-  const db = supabaseBrowser();
-
-  // The window is the taper's width: a monster outside it scores 0 anyway, so
-  // fetching it would only make the payload bigger.
-  const { data: monsters, error: monstersError } = await db
-    .from('monsters')
-    .select('id, name_en, level, hp, base_exp, hit_100, is_aggressive')
-    .gte('level', level - LEVEL_SPAN)
-    .lte('level', level + LEVEL_SPAN)
-    .order('id');
-
-  if (monstersError) {
-    console.error('leveling spots monster query failed', monstersError);
-    return { spots: [], failed: true };
-  }
-
-  // Challenge clones share their parent's map and stats and would double every
-  // map's population -- the same rule every other monster surface applies.
-  const inWindow = (monsters ?? []).filter((m) => !isCVariant(m.name_en));
-  const byId = new Map(inWindow.map((m) => [m.id, m]));
-  if (byId.size === 0) return { spots: [], failed: false };
-
-  const { data: spawns, error: spawnsError } = await fetchAllRows<{
-    monster_id: number;
-    map_code: string;
-    map_display_name: string | null;
-    amount: number | null;
-  }>((from, to) =>
-    db
-      .from('monster_spawns')
-      .select('monster_id, map_code, map_display_name, amount')
-      .in('monster_id', [...byId.keys()])
-      .order('map_code')
-      .range(from, to),
-  );
-
-  if (spawnsError) {
-    console.error('leveling spots spawn query failed', spawnsError);
-    return { spots: [], failed: true };
-  }
-
-  const spots = new Map<string, Spot>();
-  for (const spawn of spawns ?? []) {
-    const monster = byId.get(spawn.monster_id);
-    if (!monster) continue;
-    const spot =
-      spots.get(spawn.map_code) ??
-      { map_code: spawn.map_code, map_name: spawn.map_display_name ?? spawn.map_code, monsters: [] };
-    spot.monsters.push({
-      monster_id: monster.id,
-      name_en: monster.name_en,
-      level: monster.level,
-      hp: monster.hp,
-      base_exp: monster.base_exp,
-      hit_100: monster.hit_100,
-      is_aggressive: monster.is_aggressive,
-      amount: spawn.amount,
-    });
-    spots.set(spawn.map_code, spot);
-  }
-
-  return { spots: [...spots.values()], failed: false };
-}
-
-export default async function LevelingSpotsPage({
+export default function LevelingSpotsPage({
   searchParams,
 }: {
   searchParams: { level?: string | string[]; mode?: string | string[] };
 }) {
-  const level = readLevel(searchParams.level);
-  const mode = readMode(searchParams.mode);
-  const { spots, failed } = await getSpots(level);
-
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <PageHeader title="ฟาร์มที่ไหนดี" />
-      <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        ไม่กรอกอะไรก็ได้คำตอบ — ใส่ดาเมจกับ ASPD ด้วย อันดับจะเปลี่ยนเป็น EXP หรือเงินต่อชั่วโมงของคุณเอง
-      </p>
+      <PageHeader title="ฟาร์มที่ไหนดี" lead="ไม่กรอกอะไรก็ได้คำตอบ — กรอกตัวเลขตัวละครครั้งเดียว ใช้ได้ทั้ง 4 โหมด" />
 
-      {failed ? (
-        <p className="muted">ดึงข้อมูลไม่สำเร็จ ลองใหม่อีกครั้ง</p>
-      ) : (
-        <FarmSpots spots={spots} level={level} initialMode={mode} />
-      )}
+      <FarmTool initialMode={readMode(searchParams.mode)} initialLevel={readLevel(searchParams.level)} />
 
-      <Caveat>
-        เวลาที่คิดคือเวลาที่ตีอยู่เท่านั้น ไม่รวมเดินหามอนกับรอเกิดใหม่ ของจริงน้อยกว่าเสมอ ·
-        &ldquo;EXP/ชม. เฉลี่ยทั้งแมพ&rdquo; และ &ldquo;z/ชม.&rdquo; ของโหมดหาเงิน คิดว่าคุณตีมอนที่เดินชนตามสัดส่วนจำนวนตัวในแมพ ไม่ใช่ไล่ล่าตัวที่คุ้มสุดตัวเดียว ·
-        จำนวนมอนต่อแมพมาจาก rozerodb (2,725 จาก 3,032 จุดเกิดมีตัวเลข ที่เหลือขึ้น &ldquo;—&rdquo;) ·
-        โอกาสตีโดนมาจากค่า hit_100 ของ midgardhub เทียบกับ HIT ของคุณ
-      </Caveat>
+      <section className="farm-section" aria-labelledby="farm-modes">
+        <h2 id="farm-modes" className="section-title">
+          4 โหมดนี้ต่างกันยังไง
+        </h2>
+        <ul className="muted" style={{ margin: 0, paddingInlineStart: 18, lineHeight: 1.7, maxWidth: '75ch' }}>
+          <li>
+            <strong>เก็บเลเวล</strong> — เล่นเองตอนนี้ แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP หรือ EXP ต่อชั่วโมงของคุณ
+          </li>
+          <li>
+            <strong>ทิ้งบอท AFK</strong> — แมพที่บอทหลบมอนได้ครบทุกตัว เก็บ EXP ข้ามคืนได้โดยไม่ตาย
+          </li>
+          <li>
+            <strong>หาเงิน</strong> — แมพที่ปล่อยบอทเก็บของดรอปไปขายร้าน NPC แล้วได้เงินมากสุด หักดรอปตามช่วงเลเวลให้ด้วย
+          </li>
+          <li>
+            <strong>รายการของฉัน</strong> — เทียบมอนที่กดเพิ่มเข้าแผนไว้ทีละตัว ทั้ง EXP และเงินต่อชั่วโมง
+          </li>
+        </ul>
+      </section>
     </main>
   );
 }
