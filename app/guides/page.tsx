@@ -24,8 +24,8 @@ const GUIDES = [
   },
   {
     href: '/guides/potion-crafting',
-    title: 'วิธีทำยา Alchemist',
-    blurb: 'เตรียมสกิล ตำรา Mortar Bowl และวัตถุดิบให้ครบ พร้อมตารางสูตรยาและไอเทมเคมีที่ใช้บ่อย',
+    title: 'วิธีทำยา Alchemist และขวดพิษ Assassin',
+    blurb: 'เตรียมสกิล ตำรา Mortar Bowl และวัตถุดิบให้ครบ พร้อมตารางสูตรยาและไอเทมเคมีที่ใช้บ่อย · สูตร Poison Bottle ของ Assassin',
   },
   {
     href: '/guides/forging',

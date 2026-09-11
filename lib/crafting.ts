@@ -41,7 +41,6 @@ export interface Recipe {
  *
  *   2494 GN_CHANGEMATERIAL  Genetic, a third job     56 recipes
  *   2039 AB_ANCILLA         Arch Bishop, a third job  1 recipe
- *    407 ASC_CDP            Assassin Cross            1 recipe
  *
  * RO Zero Global opened second jobs on 3 Sep 2026 and has no third job at
  * all. Our own skills table shows it: "Change Material" and "Ancilla" are
@@ -52,8 +51,33 @@ export interface Recipe {
  * These recipes are dropped rather than labelled: a recipe nobody can perform
  * is not a recipe, and leaving it on an item page sends a reader hunting for
  * materials to make something the game will not let them make.
+ *
+ * 407 ASC_CDP (Create Deadly Poison, Poison Bottle) was on this list too, as
+ * an Assassin Cross skill. In Zero it is not: prontera.info lists it as
+ * "Assassin Max Lv 1" and our skills table gives it classes ["Assassin",
+ * "Assassin Cross"]. It came back on 11 Sep 2026 when the owner asked for the
+ * Assassin's recipe on the potion guide and it was found hidden here.
  */
-const SKILLS_NOT_IN_THIS_GAME = new Set([2494, 2039, 407]);
+const SKILLS_NOT_IN_THIS_GAME = new Set([2494, 2039]);
+
+export const CREATE_DEADLY_POISON = 407;
+
+/**
+ * Recipes whose requirement is a specific skill rather than the kind's usual
+ * one. Poison Bottle files under "other" in the source, which has no stated
+ * requirement, so its item page said nothing about who can make it.
+ */
+export const SKILL_NEEDS: Record<number, { title: string; needs: string; guide: string }> = {
+  [CREATE_DEADLY_POISON]: {
+    title: 'ขวดพิษ Assassin',
+    needs: 'ต้องเป็น Assassin ที่เรียน Create Deadly Poison (ต้องมี Envenom Lv 10, Detoxify Lv 1 และ Enchant Poison Lv 5 ก่อน)',
+    guide: '/guides/potion-crafting#assassin',
+  },
+};
+
+export function recipesOfSkill(skillId: number): Recipe[] {
+  return RECIPES.filter((r) => r.skillId === skillId);
+}
 
 const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes.filter(
   (recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId),

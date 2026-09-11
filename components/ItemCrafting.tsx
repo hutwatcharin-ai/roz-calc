@@ -9,7 +9,7 @@
 
 import Link from 'next/link';
 import RecipeTable from '@/components/RecipeTable';
-import { KIND_NEEDS, KIND_TITLES, recipesMaking, recipesUsing, type CraftKind } from '@/lib/crafting';
+import { KIND_NEEDS, KIND_TITLES, SKILL_NEEDS, recipesMaking, recipesUsing, type CraftKind } from '@/lib/crafting';
 
 const GUIDE_OF: Partial<Record<CraftKind, string>> = {
   forge: '/guides/forging',
@@ -25,9 +25,26 @@ export default function ItemCrafting({ itemId }: { itemId: number }) {
   if (making.length === 0 && using.length === 0) return null;
 
   // The guides these recipes live on, so the reader can see the whole set.
-  const guides = [...new Set([...making, ...using].map((r) => r.kind))]
-    .map((kind) => ({ kind, href: GUIDE_OF[kind] }))
-    .filter((g): g is { kind: CraftKind; href: string } => Boolean(g.href));
+  const guides = [
+    ...[...new Set([...making, ...using].map((r) => r.kind))]
+      .map((kind) => ({ title: KIND_TITLES[kind], href: GUIDE_OF[kind] }))
+      .filter((g): g is { title: string; href: string } => Boolean(g.href)),
+    // A skill-specific recipe (Poison Bottle) links to its own section.
+    ...[...new Set([...making, ...using].map((r) => r.skillId))]
+      .filter((id): id is number => id !== null && SKILL_NEEDS[id] !== undefined)
+      .map((id) => ({ title: SKILL_NEEDS[id].title, href: SKILL_NEEDS[id].guide })),
+  ];
+
+  // What the reader needs, per recipe: the skill's own requirement when it
+  // has one, else the kind's.
+  const needs = [
+    ...new Map(
+      making.map((r) => {
+        const skill = r.skillId !== null ? SKILL_NEEDS[r.skillId] : undefined;
+        return skill ? [skill.title, skill.needs] : [KIND_TITLES[r.kind as CraftKind], KIND_NEEDS[r.kind as CraftKind]];
+      }),
+    ),
+  ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   return (
     <>
@@ -36,13 +53,11 @@ export default function ItemCrafting({ itemId }: { itemId: number }) {
           <h2 className="section-title">ทำเองได้จาก</h2>
           {/* The materials alone do not tell a reader where the crafting
               happens, which is what someone asked about Autumn Red Tea. */}
-          {[...new Set(making.map((r) => r.kind))].map((kind) =>
-            KIND_NEEDS[kind] ? (
-              <p key={kind} className="muted" style={{ marginTop: 0, marginBottom: 10, fontSize: 13 }}>
-                <strong>{KIND_TITLES[kind]}:</strong> {KIND_NEEDS[kind]}
-              </p>
-            ) : null,
-          )}
+          {needs.map(([title, text]) => (
+            <p key={title} className="muted" style={{ marginTop: 0, marginBottom: 10, fontSize: 13 }}>
+              <strong>{title}:</strong> {text}
+            </p>
+          ))}
           <RecipeTable rows={making} />
         </div>
       )}
@@ -66,7 +81,7 @@ export default function ItemCrafting({ itemId }: { itemId: number }) {
           ไกด์ที่เกี่ยวข้อง:
           {guides.map((g) => (
             <Link key={g.href} className="chiplink" href={g.href}>
-              {KIND_TITLES[g.kind]}
+              {g.title}
             </Link>
           ))}
         </p>
