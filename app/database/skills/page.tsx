@@ -1,9 +1,14 @@
 // app/database/skills/page.tsx
+import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
-import { ZERO_JOBS, isInGameSkill } from '@/lib/zero-jobs';
+import { FIRST_JOBS, isInGameSkill, jobLine, secondJobsOf } from '@/lib/zero-jobs';
+
+// The type column holds lowercase "active"/"passive" (274 and 65 of the 340
+// in-game skills on 11 Sep 2026); labelled in the words a player uses.
+const TYPE_TH: Record<string, string> = { active: 'กดใช้ (Active)', passive: 'ติดตัว (Passive)' };
 
 export const revalidate = 86400;
 
@@ -122,12 +127,27 @@ export default async function SkillsPage({
   const types = [...new Set(skills.map((s) => s.type).filter(Boolean))].sort();
 
   const needle = q.trim().toLowerCase();
-  const filtered = pool.filter((s) => {
-    if (job && !(s.classes ?? []).includes(job)) return false;
-    if (type && s.type !== type) return false;
-    if (needle && !s.name.toLowerCase().includes(needle)) return false;
-    return true;
-  });
+  const matchesQ = (s: any) => !needle || s.name.toLowerCase().includes(needle);
+  const matchesJob = (s: any) => !job || (s.classes ?? []).includes(job);
+  const matchesType = (s: any) => !type || s.type === type;
+  const filtered = pool.filter((s) => matchesJob(s) && matchesType(s) && matchesQ(s));
+
+  // Chip counts, each counted against the other filters already on -- the
+  // monsters page's rule -- so a chip never leads to an empty page and a
+  // zero-count chip is simply not drawn (11 Sep 2026, owner: "filters like
+  // cards and monsters").
+  const jobCounts = new Map<string, number>();
+  const typeCounts = new Map<string, number>();
+  for (const s of pool) {
+    if (matchesType(s) && matchesQ(s)) for (const c of s.classes ?? []) jobCounts.set(c, (jobCounts.get(c) ?? 0) + 1);
+    if (matchesJob(s) && matchesQ(s) && s.type) typeCounts.set(s.type, (typeCounts.get(s.type) ?? 0) + 1);
+  }
+  // The job row is two tiers: the seven first jobs, then the second jobs of
+  // whichever line is picked. Twenty chips in one row ran five lines deep on a
+  // phone, above the first skill.
+  const line = jobLine(job);
+  const lineHasSkills = (first: string) =>
+    (jobCounts.get(first) ?? 0) > 0 || secondJobsOf(first).some((c) => (jobCounts.get(c) ?? 0) > 0);
 
   // Name is the tiebreak in every order: five skill names repeat and slug is
   // the only unique key, so ties are broken on it to keep paging stable.
@@ -212,23 +232,63 @@ export default async function SkillsPage({
         </p>
       )}
 
+      {!error && (
+        <section className="rolepick">
+          {/* Jobs only exist as a filter on the in-game tab: the other tab is
+              skills of jobs Zero does not have, so no chip here could match. */}
+          {tab === 'ingame' && (
+            <>
+              <h2 className="rolepick__label">อาชีพ</h2>
+              <div className="chips">
+                <Link className={`chip${job === '' ? ' chip--on' : ''}`} href={buildHref(1, { job: '' })}>
+                  ทุกอาชีพ
+                </Link>
+                {FIRST_JOBS.filter(lineHasSkills).map((j) => (
+                  <Link key={j} className={`chip${line === j ? ' chip--on' : ''}`} href={buildHref(1, { job: job === j ? '' : j })}>
+                    {j} <span className="chip__count">{jobCounts.get(j) ?? 0}</span>
+                  </Link>
+                ))}
+              </div>
+              {line && secondJobsOf(line).some((c) => (jobCounts.get(c) ?? 0) > 0) && (
+                <div className="chips" style={{ marginTop: 8 }}>
+                  <span className="rolepick__asks" style={{ margin: 0, alignSelf: 'center' }}>
+                    อาชีพ 2 สาย {line}:
+                  </span>
+                  {secondJobsOf(line)
+                    .filter((c) => (jobCounts.get(c) ?? 0) > 0)
+                    .map((c) => (
+                      <Link key={c} className={`chip${job === c ? ' chip--on' : ''}`} href={buildHref(1, { job: job === c ? line : c })}>
+                        {c} <span className="chip__count">{jobCounts.get(c)}</span>
+                      </Link>
+                    ))}
+                </div>
+              )}
+            </>
+          )}
+          <h2 className="rolepick__label" style={{ marginTop: tab === 'ingame' ? 12 : 0 }}>
+            ชนิด
+          </h2>
+          <div className="chips">
+            <Link className={`chip${type === '' ? ' chip--on' : ''}`} href={buildHref(1, { type: '' })}>
+              ทุกชนิด
+            </Link>
+            {types
+              .filter((t) => (typeCounts.get(t as string) ?? 0) > 0)
+              .map((t) => (
+                <Link key={t as string} className={`chip${type === t ? ' chip--on' : ''}`} href={buildHref(1, { type: type === t ? '' : (t as string) })}>
+                  {TYPE_TH[t as string] ?? (t as string)} <span className="chip__count">{typeCounts.get(t as string)}</span>
+                </Link>
+              ))}
+          </div>
+        </section>
+      )}
+
       <form className="filterbar">
         <input type="hidden" name="tab" value={tab} />
         <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อสกิล..." />
-        {tab === 'ingame' && (
-          <select name="job" defaultValue={job}>
-            <option value="">ทุกอาชีพ</option>
-            {ZERO_JOBS.map((j) => (
-              <option key={j} value={j}>{j}</option>
-            ))}
-          </select>
-        )}
-        <select name="type" defaultValue={type}>
-          <option value="">ทุกชนิด</option>
-          {types.map((t) => (
-            <option key={t} value={t as string}>{t as string}</option>
-          ))}
-        </select>
+        {/* The chips' choices ride along so pressing search keeps them. */}
+        {job && tab === 'ingame' && <input type="hidden" name="job" value={job} />}
+        {type && <input type="hidden" name="type" value={type} />}
         <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
           {Object.entries(SORTS).map(([key, v]) => (
             <option key={key} value={key}>เรียง: {v.label}</option>

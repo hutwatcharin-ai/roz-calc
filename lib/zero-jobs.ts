@@ -47,6 +47,24 @@ export const JOB_PARENT: Readonly<Record<string, string>> = {
   alchemist: 'Merchant',
 };
 
+/** The first jobs, in the order the game's job-change NPCs list them. */
+export const FIRST_JOBS = ['Novice', 'Swordsman', 'Mage', 'Archer', 'Thief', 'Acolyte', 'Merchant'] as const;
+
+/** The second jobs a first job leads to, in ZERO_JOBS order: Thief -> Assassin, Rogue. */
+export function secondJobsOf(firstJob: string): string[] {
+  return ZERO_JOBS.filter((j) => JOB_PARENT[j.toLowerCase()] === firstJob);
+}
+
+/**
+ * The first job at the head of a job's line: Assassin -> Thief, Thief -> Thief.
+ * Empty for anything that is not a Zero job, so a stray URL value selects nothing.
+ */
+export function jobLine(job: string): string {
+  const canonical = ZERO_JOBS.find((j) => j.toLowerCase() === job.trim().toLowerCase());
+  if (!canonical) return '';
+  return JOB_PARENT[canonical.toLowerCase()] ?? canonical;
+}
+
 export function jobAncestry(job: string): string[] {
   const normalized = job.trim().toLowerCase();
   const result: string[] = [];
