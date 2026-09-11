@@ -56,7 +56,8 @@ export interface FarmData {
   monsters: Record<number, FarmMonster>;
   /** Walk-in maps only. */
   maps: FarmMap[];
-  excluded: { mvp: number; solo: number };
+  /** closedMaps: walk-in maps left out because they are not open on Global yet. */
+  excluded: { mvp: number; solo: number; closedMaps: number };
   coverage: { pricedItems: number; totalItems: number; ratedDrops: number; totalDrops: number };
 }
 

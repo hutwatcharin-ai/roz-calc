@@ -20,6 +20,7 @@ function rowTags(row: PlanRow): CardTag[] {
   if (row.m.isMvp) tags.push({ tone: 'warn', text: 'MVP', title: 'ไม่นับในอันดับแมพ' });
   else if (row.m.solo) tags.push({ tone: 'warn', text: 'เกิดทีละตัว', title: 'ทุกจุดเกิดมีตัวเดียว ไม่นับในอันดับแมพ' });
   if (row.m.isAggressive) tags.push({ tone: 'warn', text: 'โจมตีก่อน' });
+  if (!row.homeMap) tags.push({ tone: 'warn', text: 'ยังไม่มีแมพที่เปิดให้ฟาร์ม', title: 'มอนตัวนี้เกิดเฉพาะแมพที่ยังไม่เปิดในเซิร์ฟโกลบอล' });
   if (row.dropTag === 'halved') tags.push({ tone: 'info', text: 'ดรอปหักครึ่ง', title: 'ห่างจากเลเวลคุณเกิน 40 เลเวล' });
   if (row.dropTag === 'unconfirmed') tags.push({ tone: 'warn', text: 'ดรอปช่วงเลเวลนี้ยังไม่ยืนยัน', title: 'ห่าง 20–40 เลเวล ตัวเลขคิดเต็ม' });
   for (const risk of new Set(row.m.risks.map((r) => r.risk))) tags.push({ tone: 'warn', text: SKILL_RISK_LABELS[risk] });

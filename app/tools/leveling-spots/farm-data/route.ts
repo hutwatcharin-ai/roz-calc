@@ -13,6 +13,7 @@ import { isCVariant } from '@/lib/c-variant';
 import { mapDisplayName } from '@/lib/npcs';
 import { riskySkills } from '@/lib/afk-safety';
 import { walkInReason, zenyPerKill } from '@/lib/zeny-farm';
+import { mapRelease } from '@/lib/map-availability';
 import type { FarmData, FarmMonster } from '@/lib/farm-engine/types';
 
 export const dynamic = 'force-dynamic';
@@ -138,10 +139,17 @@ export async function GET() {
   // Walk-in maps with channel copies folded: the largest known count, never
   // the sum (adding gef_f10_a, _b and _z once put 1,848 Lunatics on a field).
   const folded = new Map<string, Map<number, number | null>>();
+  // Maps not open on Global yet never rank (owner, 11 Sep 2026: "show only
+  // what can actually be used now"). See lib/map-availability for the sources.
+  const closedCodes = new Set<string>();
   for (const spawn of spawns.data ?? []) {
     if (!out[spawn.monster_id]) continue;
     const code = canonical.byCode[spawn.map_code] ?? spawn.map_code;
     if (walkInReason(code) || walkInReason(spawn.map_code)) continue;
+    if (mapRelease(code) || mapRelease(spawn.map_code)) {
+      closedCodes.add(code);
+      continue;
+    }
     const byMonster = folded.get(code) ?? new Map<number, number | null>();
     const current = byMonster.get(spawn.monster_id) ?? null;
     const next = spawn.amount === null ? current : Math.max(current ?? 0, spawn.amount);
@@ -164,6 +172,7 @@ export async function GET() {
     excluded: {
       mvp: standing.filter((m) => m.isMvp).length,
       solo: standing.filter((m) => !m.isMvp && m.solo).length,
+      closedMaps: [...closedCodes].filter((code) => !folded.has(code)).length,
     },
     coverage: {
       pricedItems: (items.data ?? []).filter((item) => (item.sell_price ?? 0) > 0).length,

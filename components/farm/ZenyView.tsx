@@ -69,7 +69,10 @@ export default function ZenyView({ data, player, level }: ViewProps) {
           </>
         )}
         {player.level === null && <> · ยังไม่ได้หักดรอปตามเลเวล (กรอกเลเวลด้านบน)</>}
-        <span className="farm-summary__rule"> · ไม่นับ MVP {data.excluded.mvp} ตัว และมอนที่เกิดทีละตัว {data.excluded.solo} ตัว</span>
+        <span className="farm-summary__rule">
+          {' '}
+          · ไม่รวม {data.excluded.closedMaps} แมพที่ยังไม่เปิดในเซิร์ฟ · ไม่นับ MVP {data.excluded.mvp} ตัว และมอนที่เกิดทีละตัว {data.excluded.solo} ตัว
+        </span>
       </p>
 
       <MapFilters cleanOnly={cleanOnly} noRiskOnly={noRiskOnly} onClean={setCleanOnly} onNoRisk={setNoRiskOnly} />

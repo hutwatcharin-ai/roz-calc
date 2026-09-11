@@ -54,6 +54,7 @@ export default function LevelView({ data, player, level, levelGuessed }: ViewPro
           </>
         )}
         {rate ? 'เรียงตาม EXP/ชม. ของคุณ' : 'เรียงตาม EXP ของมอนช่วงเลเวลคุณในแมพ · กรอกดาเมจกับ ASPD แล้วจะได้ EXP/ชม.'}
+        <span className="farm-summary__rule"> · ไม่รวม {data.excluded.closedMaps} แมพที่ยังไม่เปิดในเซิร์ฟ</span>
       </p>
 
       {ranked.length === 0 ? (
