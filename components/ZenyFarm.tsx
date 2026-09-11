@@ -4,8 +4,8 @@
 // for zeny, selling what the monsters drop. It was its own draft page
 // (/tools/zeny-farm) until the owner asked whether it overlapped this tool --
 // it did: the same numbers, the same AFK dodge rule, the same map list -- so it
-// moved in (11 Sep 2026). The tab stays hidden until the owner publishes it;
-// only ?mode=zeny shows it. The arithmetic is lib/zeny-farm.ts.
+// moved in, and the owner opened it to everyone the same day (11 Sep 2026).
+// The arithmetic is lib/zeny-farm.ts.
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';

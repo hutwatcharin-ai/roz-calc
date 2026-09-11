@@ -32,11 +32,6 @@ const MODES: { key: FarmMode; icon: string; label: string; blurb: string }[] = [
   { key: 'plan', icon: '/images/items/512.gif', label: 'รายการของฉัน', blurb: 'เฉพาะมอนที่กดปุ่ม “เพิ่มเข้าแผน” ไว้' },
   { key: 'zeny', icon: '/images/items/909.gif', label: 'หาเงิน', blurb: 'แมพที่ปล่อยบอทเก็บของดรอปไปขายร้าน NPC แล้วได้เงินมากสุด' },
 ];
-
-// Draft until the owner publishes it: the zeny tab only appears for someone
-// who arrived on ?mode=zeny. Deleting this line is the whole launch.
-const HIDDEN_UNLESS_OPENED: FarmMode[] = ['zeny'];
-
 export default function FarmSpots({
   spots,
   level,
@@ -80,7 +75,7 @@ export default function FarmSpots({
   return (
     <>
       <div className="modebar" role="tablist" aria-label="โหมดการค้นหา">
-        {MODES.filter((m) => !HIDDEN_UNLESS_OPENED.includes(m.key) || initialMode === m.key).map((m) => (
+        {MODES.map((m) => (
           <button
             key={m.key}
             type="button"

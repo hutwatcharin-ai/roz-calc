@@ -13,21 +13,15 @@ import { isCVariant } from '@/lib/c-variant';
 
 export const revalidate = 86400;
 
-const BASE_METADATA = {
-  title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล จุด AFK และแผนของคุณ',
+export const metadata = {
+  title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล หาเงิน จุด AFK และแผนของคุณ',
   description:
-    'ใส่เลเวลแล้วดูได้เลยว่าควรไปแมพไหนใน Ragnarok Zero Global · สลับเป็นโหมดหาจุดทิ้งบอท AFK หรือเทียบมอนที่เลือกไว้ · ใส่ดาเมจกับ ASPD เพิ่มเพื่อคิดเป็น EXP ต่อชั่วโมงจริงของคุณ',
+    'ใส่เลเวลแล้วดูได้เลยว่าควรไปแมพไหนใน Ragnarok Zero Global · สลับเป็นโหมดหาเงิน (แมพที่ปล่อยบอทเก็บของไปขายแล้วได้เงินมากสุด) หาจุดทิ้งบอท AFK หรือเทียบมอนที่เลือกไว้ · ใส่ดาเมจกับ ASPD เพิ่มเพื่อคิดเป็น EXP หรือ zeny ต่อชั่วโมงจริงของคุณ',
 };
 
 function readMode(raw: string | string[] | undefined): FarmMode {
   const value = Array.isArray(raw) ? raw[0] : raw;
   return value === 'afk' || value === 'plan' || value === 'zeny' ? value : 'level';
-}
-
-// The zeny mode is a draft reached only by a direct link; its URL is kept out
-// of the index until the owner publishes it.
-export function generateMetadata({ searchParams }: { searchParams: { mode?: string | string[] } }) {
-  return readMode(searchParams.mode) === 'zeny' ? { ...BASE_METADATA, robots: { index: false, follow: false } } : BASE_METADATA;
 }
 
 const DEFAULT_LEVEL = 50;
@@ -116,7 +110,7 @@ export default async function LevelingSpotsPage({
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader title="ฟาร์มที่ไหนดี" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        ใส่แค่เลเวลก็ได้คำตอบ — ใส่ดาเมจกับ ASPD ด้วย อันดับจะเปลี่ยนเป็น EXP ต่อชั่วโมงของคุณเอง
+        ไม่กรอกอะไรก็ได้คำตอบ — ใส่ดาเมจกับ ASPD ด้วย อันดับจะเปลี่ยนเป็น EXP หรือเงินต่อชั่วโมงของคุณเอง
       </p>
 
       {failed ? (
@@ -127,7 +121,7 @@ export default async function LevelingSpotsPage({
 
       <Caveat>
         เวลาที่คิดคือเวลาที่ตีอยู่เท่านั้น ไม่รวมเดินหามอนกับรอเกิดใหม่ ของจริงน้อยกว่าเสมอ ·
-        &ldquo;EXP/ชม. เฉลี่ยทั้งแมพ&rdquo; คิดว่าคุณตีมอนที่เดินชนตามสัดส่วนจำนวนตัวในแมพ ไม่ใช่ไล่ล่าตัวที่คุ้มสุดตัวเดียว ·
+        &ldquo;EXP/ชม. เฉลี่ยทั้งแมพ&rdquo; และ &ldquo;z/ชม.&rdquo; ของโหมดหาเงิน คิดว่าคุณตีมอนที่เดินชนตามสัดส่วนจำนวนตัวในแมพ ไม่ใช่ไล่ล่าตัวที่คุ้มสุดตัวเดียว ·
         จำนวนมอนต่อแมพมาจาก rozerodb (2,725 จาก 3,032 จุดเกิดมีตัวเลข ที่เหลือขึ้น &ldquo;—&rdquo;) ·
         โอกาสตีโดนมาจากค่า hit_100 ของ midgardhub เทียบกับ HIT ของคุณ
       </Caveat>
