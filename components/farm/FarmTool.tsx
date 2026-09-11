@@ -74,7 +74,7 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
 
   return (
     <>
-      <FarmNumbersBar style={style} onStyle={setStyle} numbers={numbers} onNumbers={setNumbers} />
+      <FarmNumbersBar style={style} onStyle={setStyle} numbers={numbers} onNumbers={setNumbers} hints={hints} />
 
       <div className="modebar" role="tablist" aria-label="โหมดการค้นหา">
         {MODES.map((m) => (
@@ -92,17 +92,6 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
         ))}
       </div>
       <p className="modebar__blurb">{MODES.find((m) => m.key === mode)?.blurb}</p>
-      {hints.length > 0 && (
-        <p className="farm-uses">
-          กรอกเพิ่มในแถบด้านบน:{' '}
-          {hints.map((hint, i) => (
-            <span key={hint}>
-              {i > 0 && ' · '}
-              <strong>{hint}</strong>
-            </span>
-          ))}
-        </p>
-      )}
 
       {farm.failed && (
         <div className="card farm-state">

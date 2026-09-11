@@ -1,9 +1,15 @@
 'use client';
 
 // The one input bar for all four modes of the farm tool (decision 2 of the
-// integration spec). Every field is optional. Once anything is filled it folds
-// to a one-line summary, because four boxes sitting above the answer is what
-// got the old character bar removed from the site on 4 Sep 2026.
+// integration spec). Every field is optional.
+//
+// Folded by default, filled or not. Opened, the five boxes took the whole
+// first screen of a 390px phone and pushed the mode tabs below it. Folded, it
+// was first a sentence with a large yellow button wrapped under it, which the
+// owner called ugly on a phone (11 Sep 2026). It is now one tappable row: what
+// it is, what filling it in unlocks for the mode on screen, and a chevron.
+// That row also replaced the separate yellow "กรอกเพิ่ม" line under the tabs,
+// which said the same thing a second time.
 
 import { useState } from 'react';
 import ToolNumbers from '@/components/ToolNumbers';
@@ -31,36 +37,57 @@ export default function FarmNumbersBar({
   onStyle,
   numbers,
   onNumbers,
+  hints,
 }: {
   style: BotStyle;
   onStyle: (style: BotStyle) => void;
   numbers: PlayerNumbers;
   onNumbers: (next: PlayerNumbers) => void;
+  /** What filling in more would unlock in the mode on screen. */
+  hints: string[];
 }) {
-  // Folded by default, filled or not. Opened, the five boxes took the whole
-  // first screen of a 390px phone and pushed the mode tabs below it (dev
-  // check, 11 Sep 2026) -- a visitor with no numbers saw a form, not an answer.
   const [expanded, setExpanded] = useState(false);
   const filled = BAR_FIELDS[style].some((field) => numbers[field] !== undefined);
 
   if (!expanded) {
     return (
       <div className="farmbar">
-        <div className="farmbar__summary">
-          {filled ? (
-            <>
-              <span>ตัวละคร</span>
-              {summary(style, numbers).map((part) => (
-                <strong key={part}>{part}</strong>
-              ))}
-            </>
-          ) : (
-            <span>ยังไม่ได้กรอกตัวเลขตัวละคร · ไม่กรอกก็ดูได้</span>
+        <button
+          type="button"
+          className={`farmbar__prompt${filled ? ' farmbar__prompt--filled' : ''}`}
+          aria-expanded={false}
+          onClick={() => setExpanded(true)}
+        >
+          {!filled && (
+            <span className="farmbar__plus" aria-hidden="true">
+              +
+            </span>
           )}
-          <button type="button" className="btn farmbar__edit" onClick={() => setExpanded(true)}>
-            {filled ? 'แก้ตัวเลข' : 'กรอกตัวเลข'}
-          </button>
-        </div>
+          <span className="farmbar__text">
+            {filled ? (
+              <span className="farmbar__chips">
+                {summary(style, numbers).map((part) => (
+                  <span key={part} className="farmbar__chip">
+                    {part}
+                  </span>
+                ))}
+              </span>
+            ) : (
+              <strong>กรอกตัวเลขตัวละคร</strong>
+            )}
+            {hints.length > 0 ? (
+              <small>
+                {filled ? 'เพิ่มได้: ' : 'ไม่บังคับ · '}
+                {hints.join(' · ')}
+              </small>
+            ) : (
+              !filled && <small>ไม่บังคับ ไม่กรอกก็ดูได้</small>
+            )}
+          </span>
+          <span className="farmbar__chev" aria-hidden="true">
+            {filled ? 'แก้ ›' : '›'}
+          </span>
+        </button>
       </div>
     );
   }

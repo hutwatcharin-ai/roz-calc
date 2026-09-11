@@ -2689,22 +2689,48 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmcard__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
 .farmbar { margin-bottom: 14px; }
 .farmbar__style { margin-bottom: 8px; }
-.farmbar__summary {
+/* Folded bar: one tappable row, not a sentence with a big button under it. */
+.farmbar__prompt {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 6px 10px;
-  padding: 10px 12px;
-  border: 1px solid var(--hair);
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px;
+  border: 1px dashed var(--cyan);
   border-radius: var(--radius);
   background: var(--panel);
-  color: var(--dim);
-  font: 500 13.5px/1.5 var(--font-sarabun), sans-serif;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
-.farmbar__summary strong { color: var(--text); font-family: var(--font-mono), ui-monospace, monospace; font-weight: 600; }
-.farmbar__edit { margin-inline-start: auto; }
-.farm-uses { margin: -8px 0 14px; color: var(--faint); font-size: 12px; }
-.farm-uses strong { color: var(--yellow); font-weight: 600; }
+.farmbar__prompt--filled { border-style: solid; border-color: var(--hair); }
+.farmbar__prompt:hover { border-color: var(--cyan); background: var(--panel-2); }
+.farmbar__plus {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: var(--ground);
+  font: 700 20px/1 var(--font-chakra), sans-serif;
+}
+.farmbar__text { display: flex; flex: 1 1 auto; flex-direction: column; gap: 3px; min-width: 0; }
+.farmbar__text strong { font: 700 15px/1.35 var(--font-sarabun), sans-serif; }
+.farmbar__text small { color: var(--faint); font: 400 12.5px/1.45 var(--font-sarabun), sans-serif; }
+.farmbar__chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.farmbar__chip {
+  padding: 1px 8px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: 600 12.5px/1.6 var(--font-mono), ui-monospace, monospace;
+}
+.farmbar__chev { flex: none; color: var(--cyan); font: 600 15px/1 var(--font-sarabun), sans-serif; white-space: nowrap; }
 .farm-filters { margin-top: 12px; }
 .farmplan { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
 .farmplan__card { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
