@@ -2666,7 +2666,24 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .zfmon__name { overflow: hidden; font: 600 14px/1.35 var(--font-sarabun), sans-serif; text-overflow: ellipsis; white-space: nowrap; }
 .zfmon__lv { color: var(--faint); font-size: 12px; font-weight: 400; }
 .zfmon__zeny { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-.zfmon__zeny small { margin-inline-start: 4px; color: var(--faint); font: 400 11.5px var(--font-sarabun), sans-serif; }
+.zfmon__zeny small { margin-inline-end: 5px; color: var(--faint); font: 400 11.5px var(--font-sarabun), sans-serif; }
+
+/* The zeny mode inside the farm tool: the hour rate is the number people
+   came for, so it is the largest thing on the card once numbers are in. */
+/* Its own line: sharing one with the night total, the two wrapped at
+   different baselines on a phone and read as one garbled figure. */
+.zfmap__rate { flex-basis: 100%; }
+.zfmap__rate dd { font-size: 18px; }
+.zfmap--big .zfmap__rate dd { font-size: 22px; }
+.zf-summary { margin: 16px 0 0; color: var(--dim); font: 400 14px/1.6 var(--font-sarabun), sans-serif; }
+.zf-summary strong { color: var(--text); }
+.zf-summary__rule { color: var(--faint); font-size: 13px; }
+.zf-state { margin-top: 16px; }
+.zf-state p { margin: 0 0 10px; }
+.zf-state p:last-child { margin-bottom: 0; }
+.zf-blocked { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.zf-blocked li { padding: 8px 10px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); font: 400 13.5px/1.5 var(--font-sarabun), sans-serif; }
+.zf-blocked__why { display: block; color: var(--faint); font-size: 12.5px; }
 .zfmon__drop { display: flex; align-items: center; gap: 5px; min-width: 0; color: var(--dim); font: 400 12px/1.35 var(--font-sarabun), sans-serif; }
 .zfmon__drop img { flex: none; image-rendering: pixelated; }
 .zfmon__dropname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

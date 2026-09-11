@@ -13,11 +13,22 @@ import { isCVariant } from '@/lib/c-variant';
 
 export const revalidate = 86400;
 
-export const metadata = {
+const BASE_METADATA = {
   title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล จุด AFK และแผนของคุณ',
   description:
     'ใส่เลเวลแล้วดูได้เลยว่าควรไปแมพไหนใน Ragnarok Zero Global · สลับเป็นโหมดหาจุดทิ้งบอท AFK หรือเทียบมอนที่เลือกไว้ · ใส่ดาเมจกับ ASPD เพิ่มเพื่อคิดเป็น EXP ต่อชั่วโมงจริงของคุณ',
 };
+
+function readMode(raw: string | string[] | undefined): FarmMode {
+  const value = Array.isArray(raw) ? raw[0] : raw;
+  return value === 'afk' || value === 'plan' || value === 'zeny' ? value : 'level';
+}
+
+// The zeny mode is a draft reached only by a direct link; its URL is kept out
+// of the index until the owner publishes it.
+export function generateMetadata({ searchParams }: { searchParams: { mode?: string | string[] } }) {
+  return readMode(searchParams.mode) === 'zeny' ? { ...BASE_METADATA, robots: { index: false, follow: false } } : BASE_METADATA;
+}
 
 const DEFAULT_LEVEL = 50;
 
@@ -98,8 +109,7 @@ export default async function LevelingSpotsPage({
   searchParams: { level?: string | string[]; mode?: string | string[] };
 }) {
   const level = readLevel(searchParams.level);
-  const rawMode = Array.isArray(searchParams.mode) ? searchParams.mode[0] : searchParams.mode;
-  const mode: FarmMode = rawMode === 'afk' || rawMode === 'plan' ? rawMode : 'level';
+  const mode = readMode(searchParams.mode);
   const { spots, failed } = await getSpots(level);
 
   return (

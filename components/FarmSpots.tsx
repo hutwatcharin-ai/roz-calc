@@ -16,11 +16,12 @@ import Link from 'next/link';
 import LevelingSpots from '@/components/LevelingSpots';
 import AfkFinderResults, { type AfkCandidate } from '@/components/AfkFinderResults';
 import FarmPlannerBoard from '@/components/FarmPlannerBoard';
+import ZenyFarm from '@/components/ZenyFarm';
 import CVariantToggle from '@/components/CVariantToggle';
 import { loadAfkCandidates } from '@/lib/afk-candidates';
 import type { Spot } from '@/lib/leveling-spots';
 
-export type FarmMode = 'level' | 'afk' | 'plan';
+export type FarmMode = 'level' | 'afk' | 'plan' | 'zeny';
 
 // Icon + two or three words on the tab, and the sentence only under the tab
 // you are on: three explanations stacked made the row taller than the first
@@ -29,7 +30,12 @@ const MODES: { key: FarmMode; icon: string; label: string; blurb: string }[] = [
   { key: 'level', icon: '/images/items/607.gif', label: 'เก็บเลเวล', blurb: 'แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP ที่เก็บได้' },
   { key: 'afk', icon: '/images/items/610.gif', label: 'ทิ้งบอท AFK', blurb: 'มอนที่คุณหลบได้ ตีโดน และฆ่าได้ในไม่กี่ที' },
   { key: 'plan', icon: '/images/items/512.gif', label: 'รายการของฉัน', blurb: 'เฉพาะมอนที่กดปุ่ม “เพิ่มเข้าแผน” ไว้' },
+  { key: 'zeny', icon: '/images/items/909.gif', label: 'หาเงิน', blurb: 'แมพที่ปล่อยบอทเก็บของดรอปไปขายร้าน NPC แล้วได้เงินมากสุด' },
 ];
+
+// Draft until the owner publishes it: the zeny tab only appears for someone
+// who arrived on ?mode=zeny. Deleting this line is the whole launch.
+const HIDDEN_UNLESS_OPENED: FarmMode[] = ['zeny'];
 
 export default function FarmSpots({
   spots,
@@ -74,7 +80,7 @@ export default function FarmSpots({
   return (
     <>
       <div className="modebar" role="tablist" aria-label="โหมดการค้นหา">
-        {MODES.map((m) => (
+        {MODES.filter((m) => !HIDDEN_UNLESS_OPENED.includes(m.key) || initialMode === m.key).map((m) => (
           <button
             key={m.key}
             type="button"
@@ -112,6 +118,8 @@ export default function FarmSpots({
           <FarmPlannerBoard />
         </>
       )}
+
+      {mode === 'zeny' && <ZenyFarm />}
     </>
   );
 }
