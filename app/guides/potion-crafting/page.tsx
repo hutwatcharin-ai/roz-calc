@@ -80,8 +80,10 @@ export default function PotionCraftingGuidePage() {
         </div>
         <ul className="muted" style={{ marginTop: 12, marginBottom: 0, paddingInlineStart: 22 }}>
           <li>
+            {/* The Job 60 caveat came out on 11 Sep 2026: the owner confirmed in
+                game that an Assassin can already use Enchant Deadly Poison. */}
             <Link href="/database/items/678">Poison Bottle</Link> เป็นของที่ <strong>Enchant Deadly Poison</strong> ใช้ครั้งละ 1 ขวด ·
-            ข้อมูลระบุว่า Assassin เรียนได้ แต่ในไต้หวันสกิลกลุ่มนี้ปลดตอน Job 70 จึงยังไม่ยืนยันว่าเซิร์ฟ Global ใช้ได้ตั้งแต่ Job 60
+            Assassin ในเซิร์ฟ Global ใช้สกิลนี้ได้แล้ว
           </li>
           <li>
             <Link href="/database/items/1771">Venom Knife</Link> ที่สกิล Venom Knife ใช้ ไม่ต้องทำเอง ซื้อจากร้าน NPC ได้ (ดูร้านที่หน้าไอเทม)
