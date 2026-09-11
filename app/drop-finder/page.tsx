@@ -199,7 +199,10 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ค้นของดรอป — ไอเทมดรอปจากมอนตัวไหน</h1>
+      <h1 className="pagehead__title">
+        <span className="nobr">ค้นของดรอป</span> — <span className="nobr">ไอเทมดรอป</span>
+        <span className="nobr">จากมอนตัวไหน</span>
+      </h1>
       {!searched && (
         <p className="muted" style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           ลองค้น:

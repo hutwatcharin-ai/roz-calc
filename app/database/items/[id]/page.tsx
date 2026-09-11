@@ -201,7 +201,11 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           note in memory, plan item 3). Tiles render only for stats the item
           actually has: a potion page shows prices, not a wall of dashes. */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
+        {/* flex: none -- in a flex row beside a long description the 64px icon
+            was squeezed to about 30px on a phone (UX review, 11 Sep 2026). */}
+        <span style={{ flex: 'none', display: 'inline-flex' }}>
+          <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
+        </span>
         <div>
           <h1 className="pagehead__title">
             {item.name_en}

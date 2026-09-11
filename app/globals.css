@@ -242,6 +242,34 @@ table { border-collapse: collapse; width: 100%; }
   }
 }
 
+/* Phone: the section grid folds into one "หมวด: มอนสเตอร์ ▾" row (NavTabs).
+   Open on every page it put the title 303-440px down a 390px screen. */
+.subnavpick { display: none; }
+@media (max-width: 640px) {
+  .subnav--wide { display: none !important; }
+  .subnavpick { display: block; order: 3; flex-basis: 100%; margin-top: 10px; }
+  .subnavpick > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--hair);
+    border-radius: 8px;
+    background: var(--panel-2);
+    color: var(--dim);
+    font: 500 14px/1.4 var(--font-sarabun), sans-serif;
+    list-style: none;
+    cursor: pointer;
+  }
+  .subnavpick > summary::-webkit-details-marker { display: none; }
+  .subnavpick > summary::after { content: '▾'; color: var(--cyan); font-size: 16px; }
+  .subnavpick[open] > summary::after { content: '▴'; }
+  .subnavpick > summary strong { color: var(--text); font-weight: 700; }
+  .subnavpick > summary .subnav__icon { margin-inline: 2px 4px; vertical-align: -3px; opacity: 1; }
+  .subnavpick .subnav { margin-top: 6px; padding-top: 0; border-top: 0; }
+}
+
 /* Shared list-table styling. Every list page uses .data-table so one rule set
    covers all six of them (spec 6.4). */
 .data-table {
@@ -375,6 +403,12 @@ a.thsort { text-decoration: none; }
    cell, where it is honoured. */
 .data-table td.effect { color: var(--dim); }
 .effect__text { display: block; max-width: 68ch; }
+/* Phone: a card's effect runs three lines at most in the list. Full text sat
+   under every row and made the first page of cards 11,454px tall (UX review,
+   11 Sep 2026); the card's own page, one tap on its name, has all of it. */
+@media (max-width: 720px) {
+  .effect__text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
 
 /* Card name, then -- only when it is not the obvious answer -- where it
    drops. 244 of 315 cards come from the monster they are named after, so
@@ -1615,7 +1649,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .toolnumbers__label { font: 500 12px/1.3 var(--font-sarabun), sans-serif; color: var(--dim); }
 .toolnumbers__unlocks { color: var(--faint); }
 .toolnumbers__field input { width: 130px; }
-.toolnumbers__note { margin: 10px 0 0; font-size: 11.5px; color: var(--faint); }
+.toolnumbers__note { margin: 10px 0 0; font-size: 12.5px; color: var(--faint); }
 
 /* Folded caveats. Same content the .ceiling-note boxes used to show open;
    the summary line is what stays visible. */
@@ -1765,8 +1799,8 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .skillcell__bar { height: 3px; border-radius: 2px; background: var(--hair); overflow: hidden; }
 .skillcell__bar > span { display: block; height: 100%; background: var(--cyan); }
 .skillcell__lv { font-size: 12.5px; color: var(--text); min-width: 38px; text-align: center; }
-.skillcell__max { color: var(--faint); font-size: 10.5px; }
-.skillcell__need { font-size: 10.5px; color: var(--faint); margin: 0; line-height: 1.3; }
+.skillcell__max { color: var(--faint); font-size: 12px; }
+.skillcell__need { font-size: 12px; color: var(--faint); margin: 0; line-height: 1.3; }
 .skillcell__row { display: flex; align-items: center; gap: 5px; margin-top: auto; }
 .skillcell__row button {
   flex: 1;
@@ -1853,7 +1887,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.itemcard__meta { color: var(--faint); font: 400 11px/1.4 var(--font-sarabun), sans-serif; }
+.itemcard__meta { color: var(--faint); font: 400 12.5px/1.4 var(--font-sarabun), sans-serif; }
 
 /* Monster browse grid: item-card pattern widened for a sprite plus two stat
    lines (Lv/race/element, HP/EXP) and the aggro badge. */
@@ -1890,7 +1924,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.moncard__meta { color: var(--faint); font: 400 11px/1.4 var(--font-sarabun), sans-serif; }
+.moncard__meta { color: var(--faint); font: 400 12.5px/1.4 var(--font-sarabun), sans-serif; }
 
 /* Cash shop rows: icon, name + description, price block right-aligned. */
 .cashlist { display: flex; flex-direction: column; }
@@ -1916,7 +1950,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 }
 .cashlist__price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
 .cashlist__price b { color: var(--yellow); font-size: 14px; }
-.cashlist__price span { color: var(--faint); font-size: 11px; }
+.cashlist__price span { color: var(--faint); font-size: 12px; }
 
 /* Challenge clones (C1-C9) are opt-in. Rows carry .cvariant server-side and
    stay hidden until CVariantToggle sets data-show-cvariant on <html> — so the
@@ -1961,6 +1995,14 @@ a.cashlist__row:hover { background: var(--panel-2); }
   image-rendering: auto;
   aspect-ratio: 1 / 1;
   object-fit: contain;
+}
+/* Map page on a phone: the monster table first, the picture after it. The
+   picture led, and the list a reader opened the page for started at 923px
+   (UX review, 11 Sep 2026). */
+@media (max-width: 899px) {
+  .maplayout { display: flex; flex-direction: column; }
+  .maplayout .mapimg { order: 2; }
+  .maplayout__table { order: 1; min-width: 0; }
 }
 /* Map page: monster table left, picture right from 900px up. The figure
    is first in the DOM (screen readers hear the map before the table, same
@@ -2064,7 +2106,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cardlink__pop--art { max-width: 340px; }
 .cardlink__art { flex: none; width: 60px; height: 80px; border-radius: 3px; }
 .cardlink__text { min-width: 0; }
-.cardlink__slot { display: block; margin-bottom: 3px; color: var(--faint); font-size: 11.5px; }
+.cardlink__slot { display: block; margin-bottom: 3px; color: var(--faint); font-size: 12.5px; }
 .cardlink__effect { display: block; }
 
 /* The card's own artwork (lib/card-art). 150x200 on the card's page, 45x60
@@ -2077,7 +2119,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   vertical-align: middle;
 }
 .cardart__cell { width: 45px; padding-inline-end: 0; }
-.cardart__note { max-width: 130px; margin: 6px 0 0; font-size: 11.5px; line-height: 1.45; }
+.cardart__note { max-width: 130px; margin: 6px 0 0; font-size: 12.5px; line-height: 1.45; }
 .cardart--hero { width: 120px; height: 160px; }
 /* The card back, shown where a card has no artwork of its own. Dimmed so it
    reads as a placeholder rather than as this card's picture; the title and
@@ -2115,7 +2157,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .searchmiss { margin-top: 20px; padding: 16px 18px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
 .searchmiss__head { margin: 0 0 8px; }
 .searchmiss__line { margin: 6px 0 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.searchmiss__kind { color: var(--faint); font-size: 11px; margin-inline-start: 5px; }
+.searchmiss__kind { color: var(--faint); font-size: 12px; margin-inline-start: 5px; }
 .searchmiss { text-align: left; }
 
 /* Search everything: the header button and its dialog (GlobalSearch). */
@@ -2199,7 +2241,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
     padding: 5px 2px;
     border-radius: 12px;
     color: var(--dim);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
@@ -2350,7 +2392,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-radius: 5px;
 }
 .cardframe__art--none { opacity: 0.45; filter: grayscale(0.4); }
-.cardframe__note { margin: 8px 2px 0; color: var(--faint); font-size: 11.5px; line-height: 1.45; }
+.cardframe__note { margin: 8px 2px 0; color: var(--faint); font-size: 12.5px; line-height: 1.45; }
 
 /* ---------- A: poster ---------- */
 .cardhero {
@@ -2394,7 +2436,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-radius: 8px;
   background: rgba(29, 20, 68, 0.6);
 }
-.specrow dt { margin: 0; color: var(--faint); font-size: 11.5px; }
+.specrow dt { margin: 0; color: var(--faint); font-size: 12.5px; }
 .specrow dd { margin: 2px 0 0; font: 600 17px/1.3 var(--font-chakra), sans-serif; color: var(--text); }
 
 .cardsoon__line {
@@ -2645,7 +2687,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmmob img { flex: none; width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; }
 .farmcard--big .farmmob img { width: 36px; height: 36px; }
 .farmmob__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.farmmob__z { flex: none; color: var(--faint); font: 400 11.5px/1.3 var(--font-mono), ui-monospace, monospace; }
+.farmmob__z { flex: none; color: var(--faint); font: 400 12.5px/1.3 var(--font-mono), ui-monospace, monospace; }
 
 .farm-mongrid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
 .farmmon a, .farmmon a:visited {
@@ -2666,7 +2708,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmmon__name { overflow: hidden; font: 600 14px/1.35 var(--font-sarabun), sans-serif; text-overflow: ellipsis; white-space: nowrap; }
 .farmmon__lv { color: var(--faint); font-size: 12px; font-weight: 400; }
 .farmmon__zeny { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-.farmmon__zeny small { margin-inline-end: 5px; color: var(--faint); font: 400 11.5px var(--font-sarabun), sans-serif; }
+.farmmon__zeny small { margin-inline-end: 5px; color: var(--faint); font: 400 12.5px var(--font-sarabun), sans-serif; }
 
 /* The zeny mode inside the farm tool: the hour rate is the number people
    came for, so it is the largest thing on the card once numbers are in. */
@@ -2741,6 +2783,37 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmplan__headline { color: var(--yellow); font: 700 17px/1.3 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 .farmplan__map { margin: 0; color: var(--dim); font-size: 13px; }
 .farmplan__actions { display: flex; justify-content: flex-end; }
+
+/* UX review, 11 Sep 2026 -------------------------------------------------- */
+
+/* Keep a Thai phrase on one line where a break would split a word the line
+   breaker does not know ("ไอเท / มดรอป" on the drop finder's title). */
+.nobr { white-space: nowrap; }
+
+/* Phone tap targets. Filter chips were 31px tall, sortable table headers
+   16px and checkboxes 16px; 126 targets on the cards list were under 32px.
+   The hit area grows, the type does not. */
+@media (max-width: 640px) {
+  .chip, .chiplink { display: inline-flex; align-items: center; min-height: 40px; }
+  .thsort { min-height: 40px; padding-block: 8px; }
+  .cvtoggle input { width: 20px; height: 20px; }
+  .crumbs a { display: inline-block; padding-block: 10px; }
+  /* The monster hero on a phone: the client's internal names on the
+     same-name line, and the prose summary that repeats the stat line right
+     above it, pushed EXP and zeny to ~650px. Both stay on wide screens and
+     in the HTML. */
+  .aliasline__code { display: none; }
+  .herosummary { display: none; }
+}
+
+/* The 404 page (app/not-found.tsx). */
+.notfound { text-align: left; }
+.notfound__sprite { display: block; image-rendering: pixelated; margin-bottom: 4px; }
+.notfound__code { margin: 0; color: var(--cyan); font: 700 14px/1 var(--font-mono), ui-monospace, monospace; letter-spacing: 0.2em; }
+.notfound__search { margin-top: 16px; }
+.notfound__search .searchbtn { width: auto; height: auto; min-height: 44px; padding: 8px 18px; }
+.notfound__search .searchbtn__label { position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+.notfound__links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .farmmon__drop { display: flex; align-items: center; gap: 5px; min-width: 0; color: var(--dim); font: 400 12px/1.35 var(--font-sarabun), sans-serif; }
 .farmmon__drop img { flex: none; image-rendering: pixelated; }
 .farmmon__dropname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

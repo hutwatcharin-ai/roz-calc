@@ -249,7 +249,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
       {/* Fluent one-liner for crawlers and quick readers (GEO audit): the
           headline facts as a sentence, not table fragments. */}
-      <p className="muted" style={{ marginTop: 10, maxWidth: '70ch' }}>
+      <p className="muted herosummary" style={{ marginTop: 10, maxWidth: '70ch' }}>
         {monster.name_en} มอนสเตอร์เลเวล {monster.level}
         {monster.race ? ` เผ่า ${monster.race}` : ''}
         {monster.element ? ` ธาตุ ${monster.element}${monster.element_level ?? ''}` : ''}

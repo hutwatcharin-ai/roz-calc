@@ -31,10 +31,12 @@ export default function SameNameLine({ id, name, others }: { id: number; name: s
               {name} Lv {other.level ?? '—'}
             </strong>
           </Link>
-          {aegisName(other.id) && <span className="mono"> ({aegisName(other.id)})</span>}
+          {/* The internal names are the tie-breaker for a reader comparing the
+              two pages; on a phone they cost a second line (globals.css). */}
+          {aegisName(other.id) && <span className="mono aliasline__code"> ({aegisName(other.id)})</span>}
         </span>
       ))}
-      {mine && <span> · ตัวนี้คือ <span className="mono">{mine}</span></span>}
+      {mine && <span className="aliasline__code"> · ตัวนี้คือ <span className="mono">{mine}</span></span>}
     </p>
   );
 }
