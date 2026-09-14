@@ -26,8 +26,17 @@ describe('mapRelease', () => {
     expect(mapRelease('gl_knt01')).toMatchObject({ when: 'DEC 2026', sources: ['roadmap', 'rozerodb'] });
   });
 
+  it('closes Izlude Pirate Cave / Undersea on the owner\'s in-game confirmation, not a crawled source', () => {
+    // iz_d has no rozerodb banner and no roadmap line at all -- this is a
+    // manual close, unlike every other entry in this file.
+    expect(mapRelease('iz_dun02')).toMatchObject({ when: 'TBD', area: 'Pirate Cave' });
+    expect(mapRelease('iz_d00_a')?.area).toBe('Pirate Cave');
+  });
+
   it('leaves open the maps nothing marks as closed', () => {
-    for (const code of ['pay_fild02', 'prt_fild08', 'gef_fild04', 'iz_dun02', 'orc_d01_a', 'nrd_fild01', 'um_fild01', 'cmd_fild02']) {
+    // Umbala (um_) was the other ambiguous edge case flagged the same day --
+    // owner confirmed it *is* open, so it must never end up in this list.
+    for (const code of ['pay_fild02', 'prt_fild08', 'gef_fild04', 'orc_d01_a', 'nrd_fild01', 'um_fild01', 'cmd_fild02']) {
       expect(mapRelease(code), code).toBeNull();
     }
   });

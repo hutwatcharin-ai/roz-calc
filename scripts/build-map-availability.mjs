@@ -47,6 +47,14 @@ const ROADMAP = [
 
 const BANNER = /UPCOMING\s*·\s*([A-Z]{3}\s+\d{4})\s+Global\s*·\s*(.+?)\s+\d+\s+monsters/;
 
+// iz_d (Pirate Cave, Izlude) never got a rozerodb banner or a roadmap line --
+// it just isn't on the published calendar at all. Owner confirmed in-game
+// (14 Sep 2026) it is still closed on Global, so this is a manual close, not
+// one either crawled source states. Umbala (um_) was flagged the same way
+// earlier and got the opposite answer -- owner confirmed it *is* open -- so
+// it stays out of this list on purpose.
+const MANUAL_CLOSED = [{ when: 'TBD', area: 'Pirate Cave', test: /^iz_d/, source: 'owner confirmed in-game, 14 Sep 2026' }];
+
 const pages = fs
   .readFileSync(ROZERODB_MAPS, 'utf8')
   .split('\n')
@@ -61,7 +69,8 @@ for (const page of pages) {
   const code = page.slug;
   const banner = BANNER.exec(page.text);
   const roadmap = ROADMAP.find((row) => row.test.test(code));
-  if (!banner && !roadmap) continue;
+  const manual = MANUAL_CLOSED.find((row) => row.test.test(code));
+  if (!banner && !roadmap && !manual) continue;
   const sources = [];
   if (roadmap) {
     sources.push('roadmap');
@@ -71,11 +80,12 @@ for (const page of pages) {
     sources.push('rozerodb');
     fromBanner += 1;
   }
+  if (manual) sources.push(manual.source);
   maps[code] = {
     // The publisher's calendar wins a disagreement (Glast Heim: roadmap DEC
     // 2026, rozerodb JAN 2027); rozerodb fills areas the roadmap never names.
-    when: roadmap?.when ?? banner[1],
-    area: roadmap?.area ?? banner[2],
+    when: roadmap?.when ?? banner?.[1] ?? manual.when,
+    area: roadmap?.area ?? banner?.[2] ?? manual.area,
     sources,
   };
 }

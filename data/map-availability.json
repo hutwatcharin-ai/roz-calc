@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-11",
+  "generated": "2026-09-14",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)"
@@ -962,6 +962,146 @@
       "area": "Sphinx",
       "sources": [
         "roadmap"
+      ]
+    },
+    "iz_d00_a": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d00_b": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d00_z": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d01_a": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d01_b": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d01_z": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d02_a": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d02_b": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d02_z": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d03_a": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d03_b": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d03_z": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d04_a": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d04_b": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_d04_z": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_dun00": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_dun01": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_dun02": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_dun03": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
+      ]
+    },
+    "iz_dun04": {
+      "when": "TBD",
+      "area": "Pirate Cave",
+      "sources": [
+        "owner confirmed in-game, 14 Sep 2026"
       ]
     },
     "lou_d01_a": {
