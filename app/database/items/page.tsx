@@ -42,7 +42,13 @@ const CATEGORIES = [
   'Consumable / Recovery',
   'Enchant Stone',
   'Enchantment',
+  // Material and Package/Box arrived 14 Sep 2026 with the 54 ids a second
+  // database (roz.prontera.info) listed that ours never had -- guild event
+  // flames, cash-shop bundles. Same rule as the three above: a category
+  // nobody can filter to is a category nobody finds.
+  'Material',
   'Other',
+  'Package/Box',
   'Pet',
   'Special',
 ];
