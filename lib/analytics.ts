@@ -75,6 +75,22 @@ export function pageViewPath(pathname: string, search: string | URLSearchParams)
   return query ? `${pathname}?${query}` : pathname;
 }
 
+/**
+ * The page_view event's parameters.
+ *
+ * page_location is built from the cleaned path, not window.location.href, and
+ * no page_path is sent. With both, GA4 stitched the query on twice and the
+ * reports filed "/database/monsters?page=2?page=2" as its own page
+ * (GA4 audit, 14 Sep 2026).
+ */
+export function pageViewParams(pathname: string, search: string | URLSearchParams, origin: string, title: string): EventParams {
+  return {
+    page_location: `${origin}${pageViewPath(pathname, search)}`,
+    page_title: title,
+    content_group: contentGroupFor(pathname),
+  };
+}
+
 const MAX_VALUE = 100;
 
 export function sanitizeParams(params: EventParams): Record<string, string | number | boolean> {

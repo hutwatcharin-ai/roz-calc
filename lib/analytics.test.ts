@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   applyInternalParam,
   contentGroupFor,
+  pageViewParams,
   pageViewPath,
   INTERNAL_KEY,
   reportToolUse,
@@ -93,6 +94,19 @@ describe('applyInternalParam', () => {
     expect(applyInternalParam(null, localStorage)).toBe(true);
     expect(localStorage.getItem(INTERNAL_KEY)).toBe('1');
     expect(calls).toEqual([]);
+  });
+});
+
+describe('pageViewParams', () => {
+  it('sends one clean URL with the query once, and no page_path', () => {
+    // Both page_path and a raw href made GA4 report "?page=2?page=2".
+    const params = pageViewParams('/database/monsters', 'page=2&internal=1', 'https://rozerothai.com', 'Monsters');
+    expect(params).toEqual({
+      page_location: 'https://rozerothai.com/database/monsters?page=2',
+      page_title: 'Monsters',
+      content_group: contentGroupFor('/database/monsters'),
+    });
+    expect(params).not.toHaveProperty('page_path');
   });
 });
 

@@ -23,7 +23,11 @@ export default function TrackSearch({ term, count }: { term: string; count: numb
     track('search', {
       search_term: trimmed,
       result_count: count,
-      source: sourceFromPath(window.location.pathname),
+      // Not "source": gtag reads that name as the traffic source, so every
+      // search started a new session credited to "monsters" or "drop-finder".
+      // That was 1,598 of 5,010 sessions filed as Unassigned in the 28 days
+      // to 13 Sep 2026, and 736 sessions with no landing page.
+      search_page: sourceFromPath(window.location.pathname),
     });
     // count is left out on purpose: the same term can only have one count, and
     // listing it would only add a way for the effect to run twice.

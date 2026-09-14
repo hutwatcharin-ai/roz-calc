@@ -15,7 +15,7 @@
 import { Suspense, useEffect } from 'react';
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { applyInternalParam, contentGroupFor, pageViewPath, track } from '@/lib/analytics';
+import { applyInternalParam, pageViewParams, pageViewPath, track } from '@/lib/analytics';
 
 // The last path actually reported, kept outside the component: a soft
 // navigation can remount this, and a remounted ref would forget and send the
@@ -36,12 +36,7 @@ function PageViews() {
     const path = pageViewPath(pathname, query);
     if (lastReportedPath === path) return;
     lastReportedPath = path;
-    track('page_view', {
-      page_path: path,
-      page_location: window.location.href,
-      page_title: document.title,
-      content_group: contentGroupFor(pathname),
-    });
+    track('page_view', pageViewParams(pathname, query, window.location.origin, document.title));
     // search is derived from query; pathname + query is the whole identity of
     // a page here.
     // eslint-disable-next-line react-hooks/exhaustive-deps

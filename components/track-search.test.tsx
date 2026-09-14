@@ -29,7 +29,17 @@ describe('TrackSearch', () => {
   it('reports the term, the count and where it was searched', () => {
     window.history.replaceState(null, '', '/database/monsters?q=poring');
     act(() => root.render(<TrackSearch term="poring" count={3} />));
-    expect(calls).toEqual([['event', 'search', { search_term: 'poring', result_count: 3, source: 'monsters' }]]);
+    expect(calls).toEqual([['event', 'search', { search_term: 'poring', result_count: 3, search_page: 'monsters' }]]);
+  });
+
+  it('never sends a parameter gtag reads as a traffic source', () => {
+    // "source", "medium" and "campaign" on an event re-attribute the session.
+    window.history.replaceState(null, '', '/drop-finder?q=steel');
+    act(() => root.render(<TrackSearch term="steel" count={4} />));
+    const params = calls[0][2] as Record<string, unknown>;
+    for (const reserved of ['source', 'medium', 'campaign', 'campaign_source', 'campaign_medium']) {
+      expect(params).not.toHaveProperty(reserved);
+    }
   });
 
   it('does not repeat for the same term, and fires again for a new one', () => {
@@ -39,7 +49,7 @@ describe('TrackSearch', () => {
     expect(calls).toHaveLength(1);
     act(() => root.render(<TrackSearch term="oridecon" count={0} />));
     expect(calls).toHaveLength(2);
-    expect(calls[1][2]).toEqual({ search_term: 'oridecon', result_count: 0, source: 'items' });
+    expect(calls[1][2]).toEqual({ search_term: 'oridecon', result_count: 0, search_page: 'items' });
   });
 
   it('stays silent with no term', () => {

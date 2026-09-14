@@ -69,7 +69,14 @@ def main():
     section("sessions by content group", run(c, ["contentGroup"], ["sessions", "screenPageViews"], order="sessions"))
     section("top pages", run(c, ["pagePath"], ["screenPageViews", "activeUsers"], order="screenPageViews", limit=20))
     section("tool_use by tool", run(c, ["customEvent:tool"], ["eventCount", "activeUsers"], event="tool_use", order="eventCount"))
-    section("search terms", run(c, ["customEvent:search_term", "customEvent:source"], ["eventCount"], event="search", order="eventCount", limit=30))
+    # The page a search came from was sent as "source" until 14 Sep 2026, a name
+    # gtag reads as the traffic source. It is "search_page" now, which needs its
+    # own custom dimension registered in GA4; until then fall back to the old one.
+    try:
+        rows = run(c, ["customEvent:search_term", "customEvent:search_page"], ["eventCount"], event="search", order="eventCount", limit=30)
+    except Exception:
+        rows = run(c, ["customEvent:search_term", "customEvent:source"], ["eventCount"], event="search", order="eventCount", limit=30)
+    section("search terms", rows)
     section("events", run(c, ["eventName"], ["eventCount"], order="eventCount"))
 
 
