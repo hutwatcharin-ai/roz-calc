@@ -19,9 +19,7 @@ describe('mapRelease', () => {
     expect(mapRelease('xma_d01_a')?.area).toBe('Lutie');
   });
 
-  it('keeps rozerodb-only closures and prefers the roadmap month on a disagreement', () => {
-    // Pyramid appears only as a rozerodb banner.
-    expect(mapRelease('moc_pryd01')).toMatchObject({ when: 'OCT 2026', sources: ['rozerodb'] });
+  it('prefers the roadmap month when the two sources disagree', () => {
     // Glast Heim: roadmap DEC 2026, rozerodb JAN 2027.
     expect(mapRelease('gl_knt01')).toMatchObject({ when: 'DEC 2026', sources: ['roadmap', 'rozerodb'] });
   });
@@ -31,6 +29,15 @@ describe('mapRelease', () => {
     // manual close, unlike every other entry in this file.
     expect(mapRelease('iz_dun02')).toMatchObject({ when: 'TBD', area: 'Pirate Cave' });
     expect(mapRelease('iz_d00_a')?.area).toBe('Pirate Cave');
+  });
+
+  it('opens Pyramid from the 17 Sep 2026 update even though rozerodb still banners it', () => {
+    // rozerodb said OCT 2026; the publisher's notice put it in the 17 Sep patch.
+    for (const code of ['moc_pryd01', 'moc_pryd06', 'pry_d01_a', 'b_pry_d04']) {
+      expect(mapRelease(code), code).toBeNull();
+    }
+    // The override is scoped to Pyramid: Sphinx next door stays closed.
+    expect(mapRelease('in_sphinx1')?.area).toBe('Sphinx');
   });
 
   it('leaves open the maps nothing marks as closed', () => {

@@ -55,6 +55,12 @@ const BANNER = /UPCOMING\s*·\s*([A-Z]{3}\s+\d{4})\s+Global\s*·\s*(.+?)\s+\d+\s
 // it stays out of this list on purpose.
 const MANUAL_CLOSED = [{ when: 'TBD', area: 'Pirate Cave', test: /^iz_d/, source: 'owner confirmed in-game, 14 Sep 2026' }];
 
+// Areas a crawled source still calls upcoming but a patch has since opened.
+// These win over both sources until the exports are refreshed. Pyramid was
+// bannered "OCT 2026" by rozerodb; the publisher's 16 Sep 2026 notice lists
+// "Pyramid Dungeon and Geffen Dungeon added" in the 17 Sep 2026 update.
+const MANUAL_OPEN = [{ area: 'Pyramid', test: /^(moc_pryd|pry_d|b_pry_d)/, source: 'official notice, 17 Sep 2026 update' }];
+
 const pages = fs
   .readFileSync(ROZERODB_MAPS, 'utf8')
   .split('\n')
@@ -67,6 +73,7 @@ let fromBanner = 0;
 let fromRoadmap = 0;
 for (const page of pages) {
   const code = page.slug;
+  if (MANUAL_OPEN.some((row) => row.test.test(code))) continue;
   const banner = BANNER.exec(page.text);
   const roadmap = ROADMAP.find((row) => row.test.test(code));
   const manual = MANUAL_CLOSED.find((row) => row.test.test(code));

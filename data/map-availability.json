@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-14",
+  "generated": "2026-09-17",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)"
@@ -1422,48 +1422,6 @@
         "roadmap"
       ]
     },
-    "moc_pryd01": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "moc_pryd02": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "moc_pryd03": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "moc_pryd04": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "moc_pryd05": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "moc_pryd06": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
     "nif_f01_a": {
       "when": "FEB 2027",
       "area": "Niflheim",
@@ -1555,132 +1513,6 @@
       "area": "Prontera Labyrinth",
       "sources": [
         "roadmap"
-      ]
-    },
-    "pry_d01_a": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d01_b": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d01_z": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d02_a": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d02_b": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d02_z": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d03_a": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d03_b": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d03_z": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d04_a": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d04_b": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d04_z": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d05_a": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d05_b": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d05_z": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d06_a": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d06_b": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
-      ]
-    },
-    "pry_d06_z": {
-      "when": "OCT 2026",
-      "area": "Pyramid Dungeon Update",
-      "sources": [
-        "rozerodb"
       ]
     },
     "sp_d01_a": {
