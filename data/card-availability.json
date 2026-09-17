@@ -24,14 +24,6 @@
         "rozerodb"
       ]
     },
-    "ancientmummy": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
-      ]
-    },
     "anolian": {
       "when": "JAN 2027",
       "sortKey": 202701,
@@ -52,14 +44,6 @@
       "sortKey": 999999,
       "sources": [
         "roz-global.info"
-      ]
-    },
-    "arclouse": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
       ]
     },
     "blazer": {
@@ -243,14 +227,6 @@
         "rozerodb"
       ]
     },
-    "isis": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
-      ]
-    },
     "jeniffer": {
       "when": "OCT 2026",
       "sortKey": 202610,
@@ -302,14 +278,6 @@
       "sortKey": 999999,
       "sources": [
         "roz-global.info"
-      ]
-    },
-    "mummy": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
       ]
     },
     "nightmareterror": {
@@ -442,14 +410,6 @@
       "sortKey": 999999,
       "sources": [
         "roz-global.info"
-      ]
-    },
-    "verit": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
       ]
     },
     "vesper": {

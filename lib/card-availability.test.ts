@@ -14,6 +14,15 @@ describe('cardRelease', () => {
     expect(cardRelease('Poring Card')).toBeNull();
   });
 
+  it('treats Pyramid cards as available since the 17 Sep 2026 update', () => {
+    // Both sources still said OCT 2026 when crawled; the monsters now spawn.
+    for (const name of ['Mummy Card', 'Ancient Mummy Card', 'Isis Card', 'Verit Card', 'Arclouse Card']) {
+      expect(cardRelease(name), name).toBeNull();
+    }
+    // Only Pyramid was opened: an OCT 2026 card from elsewhere keeps its date.
+    expect(cardRelease('Joker Card')?.when).toBe('OCT 2026');
+  });
+
   it('records which sources back each row', () => {
     const alice = cardRelease('Alice');
     expect(alice?.sources.length).toBeGreaterThanOrEqual(1);

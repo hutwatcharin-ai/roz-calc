@@ -69,6 +69,14 @@ function rozerodbRows() {
   return out;
 }
 
+// Cards both sources still call upcoming but whose monsters a patch has since
+// let loose. The 17 Sep 2026 update opened Pyramid Dungeon (see
+// scripts/build-map-availability.mjs); these five spawn there, and every one
+// of them was listed "OCT 2026" only because Pyramid was.
+const MANUAL_AVAILABLE = new Map(
+  ['ancientmummy', 'arclouse', 'isis', 'mummy', 'verit'].map((key) => [key, 'Pyramid Dungeon, 17 Sep 2026 update']),
+);
+
 function main() {
   const guide = guideRows();
   const rozerodb = rozerodbRows();
@@ -93,6 +101,7 @@ function main() {
     }
     const merged = a ?? b;
     if (merged.available) continue; // Available is the default; only the gaps are stored.
+    if (MANUAL_AVAILABLE.has(key)) continue;
     const when = a?.when ?? b?.when ?? null;
     const month = when ? MONTHS[when.slice(0, 3)] : null;
     const year = when ? Number(when.slice(-4)) : null;
