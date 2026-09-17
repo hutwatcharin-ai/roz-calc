@@ -1,4 +1,4 @@
-// app/guides/update-2026-09-17/page.tsx
+// app/news/patch-2026-09-17/page.tsx
 //
 // The 17 Sep 2026 patch, read against our own tables. The publisher's notice
 // (16 Sep 2026) names what arrived in one line each; this page answers the
@@ -15,14 +15,17 @@ import PageHeader from '@/components/PageHeader';
 import JsonLd from '@/components/JsonLd';
 import MonsterLink from '@/components/MonsterLink';
 import ItemIcon from '@/components/ItemIcon';
-import { breadcrumbJsonLd } from '@/lib/jsonld';
+import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { supabaseBrowser } from '@/lib/supabase';
 
 export const revalidate = 3600;
 
+const PATH = '/news/patch-2026-09-17';
+const PUBLISHED = '2026-09-17T15:00:00+07:00';
+
 export const metadata: Metadata = {
-  title: 'อัปเดต 17 ก.ย. 2569 Ragnarok Zero — MVP ใหม่ 4 ตัว, Pyramid, Geffen Dungeon, WoE',
+  title: 'แพทช์ 17 ก.ย. 2569 Ragnarok Zero — MVP ใหม่ 4 ตัว, Pyramid, Geffen Dungeon, WoE',
   description:
     'สรุปแพตช์ 17 ก.ย. 2569 ของ Ragnarok Zero Global เป็นภาษาไทย — MVP Orc Lord, Osiris, Dracula, Doppelganger ดรอปอะไร เลือดเท่าไร · Pyramid และ Geffen Dungeon แต่ละชั้นมีมอนอะไร · WoE, ช่องตัวละครที่ 6',
 };
@@ -164,7 +167,7 @@ function DungeonTable({ title, codes, spawns }: { title: string; codes: string[]
   );
 }
 
-export default async function Update20260917Page() {
+export default async function Patch20260917Page() {
   const db = supabaseBrowser();
   const [mvps, drops, raidSpawns, dungeonSpawns, beer] = await Promise.all([
     db.from('monsters').select('id, name_en, level, hp, element, element_level, race, size, def, mdef').in('id', MVP_IDS),
@@ -195,19 +198,25 @@ export default async function Update20260917Page() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
-          { name: 'ไกด์', path: '/guides' },
-          { name: 'อัปเดต 17 ก.ย. 2569', path: '/guides/update-2026-09-17' },
+          { name: 'ข่าวแพทช์', path: PATH },
         ])}
+      />
+      <JsonLd
+        data={articleJsonLd({
+          path: PATH,
+          headline: String(metadata.title),
+          description: String(metadata.description),
+          datePublished: PUBLISHED,
+          dateModified: PUBLISHED,
+        })}
       />
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
         <Link href="/">หน้าแรก</Link>
         <span className="crumbs__sep" aria-hidden="true">›</span>
-        <Link href="/guides">ไกด์</Link>
-        <span className="crumbs__sep" aria-hidden="true">›</span>
-        <span className="crumbs__here">อัปเดต 17 ก.ย.</span>
+        <span className="crumbs__here">ข่าวแพทช์</span>
       </nav>
 
-      <PageHeader title="อัปเดต 17 ก.ย. 2569 — มีอะไรใหม่" />
+      <PageHeader title="แพทช์ 17 ก.ย. 2569 — มีอะไรใหม่" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 14, maxWidth: '72ch' }}>
         ปิดปรับปรุง 08:00–12:30 น. (เวลาไทย) · สรุปจากประกาศทางการ แล้วเติมรายละเอียดจากฐานข้อมูลของเว็บนี้ ·
         ค่าพลังและของดรอปมาจากไฟล์เกม ถ้าแพตช์นี้ปรับอะไร ตัวเลขอาจยังไม่ตรง

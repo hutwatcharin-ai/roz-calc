@@ -18,11 +18,6 @@ export const metadata = {
 // Ordered by how often a player opens them, not alphabetically.
 const GUIDES = [
   {
-    href: '/guides/update-2026-09-17',
-    title: 'อัปเดต 17 ก.ย. 2569 — มีอะไรใหม่',
-    blurb: 'MVP Raid ใหม่ 4 ตัวดรอปอะไร · Pyramid และ Geffen Dungeon แต่ละชั้นมีมอนอะไร · WoE, ช่องตัวละครที่ 6, Nordfeld Beer',
-  },
-  {
     href: '/guides/farm-guide',
     title: 'จุดฟาร์มแนะนำ',
     blurb: 'ช่วงเลเวลไหนควรไปตีอะไร ไล่ตั้งแต่ออกจากเมืองใหม่ ๆ จนถึงเลเวลสูงสุด พร้อมเหตุผลว่าทำไมจุดนั้น',

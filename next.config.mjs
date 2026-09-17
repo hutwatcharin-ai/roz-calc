@@ -27,6 +27,9 @@ const nextConfig = {
       // Forging an elemental weapon IS forging: same skill, same recipe, a
       // stone added at the anvil. Two pages described one action (7 Sep 2026).
       { source: '/guides/elemental-weapons', destination: '/guides/forging', permanent: true },
+      // A patch summary is news, not a guide (owner, 17 Sep 2026). It sat
+      // under /guides for under an hour.
+      { source: '/guides/update-2026-09-17', destination: '/news/patch-2026-09-17', permanent: true },
     ];
   },
   async headers() {

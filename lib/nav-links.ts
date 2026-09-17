@@ -76,7 +76,6 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // Pages you read: fixed game tables, and the written guide. Moved here from
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
   guides: [
-    { href: '/guides/update-2026-09-17', label: 'อัปเดต 17 ก.ย.', icon: '/images/items/1009.gif', ready: true },
     { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
     { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true },
     { href: '/guides/forging', label: 'ตีอาวุธ + อาวุธธาตุ', icon: '/images/items/1101.gif', ready: true },
