@@ -66,7 +66,7 @@ export function CardTags({ tags }: { tags: CardTag[] }) {
 export default function MapCard({ rank, big, code, name, image, channels, headline, stats, monsters, tags }: MapCardProps) {
   const href = `/database/maps/${encodeURIComponent(code)}`;
   return (
-    <li className={`farmcard${big ? ' farmcard--big' : ''}`}>
+    <li className={`farmcard${big ? ' farmcard--big' : ''}`} data-rank={rank <= 3 ? rank : undefined}>
       {/* The picture repeats the name link beside it, so it is hidden from
           the keyboard and screen readers rather than announced twice. */}
       <Link href={href} className="farmcard__pic" tabIndex={-1} aria-hidden="true">

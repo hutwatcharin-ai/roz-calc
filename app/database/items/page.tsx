@@ -61,6 +61,19 @@ const MOVED: Record<string, string> = {
   Card: '/database/cards',
 };
 
+/** Five families, so a grid of 2,177 items reads as groups instead of one wall.
+ *  Anything unmapped stays untinted rather than borrowing a colour that means
+ *  something else. */
+function kindOf(category: string | null): string | undefined {
+  if (!category) return undefined;
+  if (category.startsWith('Consumable')) return 'consumable';
+  if (category === 'Material' || category === 'Enchant Stone') return 'material';
+  if (category === 'Package/Box') return 'box';
+  if (category === 'Enchantment' || category === 'Special') return 'enchant';
+  if (category === 'Pet' || category === 'Ammo') return 'gear';
+  return undefined;
+}
+
 export default async function ItemListPage({
   searchParams,
 }: {
@@ -261,7 +274,7 @@ export default async function ItemListPage({
             three-column table stack was (UX audit: item list was 5.7 screens). */}
         <div className="itemgrid">
           {(items ?? []).map((it) => (
-            <Link key={it.id} href={`/database/items/${it.id}`} className="itemcard">
+            <Link key={it.id} href={`/database/items/${it.id}`} className="itemcard" data-kind={kindOf(it.category)}>
               <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />
               <span className="itemcard__name">{it.name_en}</span>
               <span className="itemcard__meta">

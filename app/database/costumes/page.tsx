@@ -287,7 +287,7 @@ export default async function CostumesPage({
               sprite carries the row and the meta line only says where it sits. */}
           <div className="itemgrid">
             {rows.map((it) => (
-              <Link key={it.id} href={`/database/costumes/${it.id}`} className="itemcard">
+              <Link key={it.id} href={`/database/costumes/${it.id}`} className="itemcard" data-kind="costume">
                 <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />
                 <span className="itemcard__name">{it.name_en}</span>
                 <span className="itemcard__meta">

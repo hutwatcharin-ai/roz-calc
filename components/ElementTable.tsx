@@ -53,7 +53,7 @@ export default function ElementTable({ level }: { level: ElementLevel }) {
               <span className="el-short">ตี\รับ</span>
             </th>
             {ELEMENTS.map((defence) => (
-              <th key={defence} scope="col">
+              <th key={defence} scope="col" data-element={defence}>
                 <ElementName element={defence} />
               </th>
             ))}
@@ -62,7 +62,7 @@ export default function ElementTable({ level }: { level: ElementLevel }) {
         <tbody>
           {ELEMENTS.map((attack: Element) => (
             <tr key={attack}>
-              <th scope="row">
+              <th scope="row" data-element={attack}>
                 <ElementName element={attack} />
               </th>
               {ELEMENTS.map((defence) => {
