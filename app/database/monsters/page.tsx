@@ -393,7 +393,7 @@ export default async function MonsterListPage({
         <div className="chips">
           <Link className={`chip${element === '' ? ' chip--on' : ''}`} href={facetHref({ element: '' })}>ทุกธาตุ</Link>
           {ELEMENTS.filter((e) => (elementCounts.get(e) ?? 0) > 0).map((e) => (
-            <Link key={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
+            <Link key={e} data-element={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
               {ELEMENT_TH[e] ?? e} <span className="chip__count">{elementCounts.get(e)}</span>
             </Link>
           ))}
@@ -588,7 +588,7 @@ export default async function MonsterListPage({
             the detail page (spec 3.15.1). */}
         <div className="mongrid">
           {(monsters ?? []).map((m) => (
-            <Link key={m.id} href={`/database/monsters/${m.id}`} className="moncard">
+            <Link key={m.id} href={`/database/monsters/${m.id}`} className="moncard" data-element={m.element ?? undefined}>
               {m.image_url ? (
                 <img className="moncard__sprite" loading="lazy" decoding="async" src={m.image_url} alt="" width={40} height={40} />
               ) : (

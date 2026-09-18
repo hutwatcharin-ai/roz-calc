@@ -12,6 +12,21 @@
   --glow-yellow: rgba(255, 229, 61, 0.45);
   --glow-cyan: rgba(61, 232, 255, 0.45);
   --glow-pink: rgba(255, 61, 154, 0.45);
+
+  /* One colour per element, used for light only -- never for text, and never
+     as the sole carrier of meaning: every chip and card still says the
+     element in words (18 Sep 2026). Picked to match how the game draws each
+     element, and kept dim enough that the tinted border stays a border. */
+  --el-fire: #ff6a3d;
+  --el-water: #3dc8ff;
+  --el-earth: #58d17a;
+  --el-wind: #7bffcf;
+  --el-poison: #c46bff;
+  --el-holy: #ffe53d;
+  --el-shadow: #8f6bff;
+  --el-undead: #9aa88f;
+  --el-ghost: #d7c8ff;
+  --el-neutral: #b3a9e6;
 }
 
 /* ---------- glow ---------- */
@@ -95,4 +110,100 @@ html .ceiling-note { box-shadow: inset 8px 0 18px -16px var(--glow-yellow); }
 
 @media (prefers-reduced-motion: reduce) {
   html *, html *::before, html *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
+
+
+/* ---------- element light (18 Sep 2026) ----------
+   Ten element chips all glowed the same cyan, so the row read as one block of
+   identical pills. Now each carries its own element's colour on the border and
+   in its glow; the label is unchanged, so nothing here is the only way to tell
+   two elements apart (WCAG 1.4.1). Text colour is untouched: contrast stays
+   where the audit put it. */
+html .chip[data-element] { border-color: color-mix(in srgb, var(--el, var(--cyan)) 55%, transparent); }
+html .chip[data-element]:hover,
+html .chip[data-element]:focus-visible {
+  border-color: var(--el, var(--cyan));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--el, var(--cyan)) 45%, transparent);
+}
+/* The chosen chip keeps the site's yellow fill -- one selected style
+   everywhere beats ten. */
+html .chip--on[data-element] { border-color: var(--yellow); }
+
+html [data-element='Fire'] { --el: var(--el-fire); }
+html [data-element='Water'] { --el: var(--el-water); }
+html [data-element='Earth'] { --el: var(--el-earth); }
+html [data-element='Wind'] { --el: var(--el-wind); }
+html [data-element='Poison'] { --el: var(--el-poison); }
+html [data-element='Holy'] { --el: var(--el-holy); }
+html [data-element='Shadow'] { --el: var(--el-shadow); }
+html [data-element='Undead'] { --el: var(--el-undead); }
+html [data-element='Ghost'] { --el: var(--el-ghost); }
+html [data-element='Neutral'] { --el: var(--el-neutral); }
+
+/* A sprite lit by its own element. The halo sits behind the sprite as a
+   background, not a filter: a filter repaints the whole card on a phone. */
+html .moncard[data-element] .moncard__sprite {
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--el) 26%, transparent), transparent 68%);
+}
+html .moncard[data-element]:hover {
+  border-color: var(--el, var(--cyan));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--el, var(--cyan)) 40%, transparent);
+}
+
+/* ---------- a scan line across the row under the pointer ----------
+   Row hover was a flat fill, which in a table forty rows long is easy to lose
+   track of. This is a static gradient (no animation, nothing to disable for
+   reduced motion) that brightens the row from the left, the way a cabinet
+   highlights the selected entry. */
+html .data-table tbody tr:hover td {
+  background-image: linear-gradient(90deg, rgba(61, 232, 255, 0.14), rgba(61, 232, 255, 0.04) 45%, transparent);
+}
+
+/* ---------- section headings as neon tubes ----------
+   A short lit bar before each section title. Decorative only, so it is a
+   pseudo-element a screen reader never reads. */
+html .section-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 0.95em;
+  margin-inline-end: 8px;
+  vertical-align: -0.12em;
+  border-radius: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--glow-cyan);
+}
+html .card--yellow .section-title::before { background: var(--yellow); box-shadow: 0 0 8px var(--glow-yellow); }
+html .card--pink .section-title::before { background: var(--pink); box-shadow: 0 0 8px var(--glow-pink); }
+
+/* ---------- pagination like a level select ---------- */
+html .pager__btn:hover { border-color: var(--cyan); box-shadow: 0 0 10px var(--glow-cyan); }
+html .pager__btn[aria-current='page'] {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  text-shadow: 0 0 10px var(--glow-yellow);
+  box-shadow: inset 0 0 0 1px rgba(255, 229, 61, 0.35), 0 0 12px rgba(255, 229, 61, 0.25);
+}
+
+/* ---------- "no match" as a cabinet panel ----------
+   Same words, same links; the box now looks like part of the machine instead
+   of a paragraph that lost its section. */
+html .emptystate {
+  position: relative;
+  padding: 22px 18px;
+  border: 1px solid rgba(61, 232, 255, 0.35);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(61, 232, 255, 0.08), transparent 70%),
+    var(--panel);
+  box-shadow: inset 0 0 24px rgba(61, 232, 255, 0.06);
+}
+html .emptystate::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  border: 1px solid transparent;
+  border-image: linear-gradient(135deg, rgba(61, 232, 255, 0.5), transparent 30%, transparent 70%, rgba(255, 61, 154, 0.5)) 1;
 }
