@@ -93,8 +93,13 @@ export default async function QuestIndexPage({
       />
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อเควส (ภาษาอังกฤษ)" aria-label="ค้นชื่อเควส" />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อเควส (ภาษาอังกฤษ)</span>
+        <input type="search" name="q" defaultValue={q} placeholder="เช่น Novice Training" />
+          </label>
         <button type="submit" className="btn">ค้นหา</button>
+        </div>
       </form>
 
       <FilterState

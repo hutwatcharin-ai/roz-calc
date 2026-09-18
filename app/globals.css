@@ -1342,6 +1342,16 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 }
 .btn:hover { filter: brightness(1.08); background: var(--yellow); border-color: var(--yellow); }
 
+/* A second button on a filter bar is a link to a sibling list, not the action
+   of the page -- it must not compete with ค้นหา (spec: one dominant action). */
+.btn--quiet {
+  border-color: var(--hair);
+  background: var(--panel-2);
+  color: var(--dim);
+  font-weight: 500;
+}
+.btn--quiet:hover { color: var(--text); border-color: var(--cyan); background: var(--panel-2); }
+
 /* Disabled controls must look unavailable rather than merely quiet. */
 :disabled { opacity: 0.45; cursor: not-allowed; }
 

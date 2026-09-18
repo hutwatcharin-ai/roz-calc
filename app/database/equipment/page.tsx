@@ -1,5 +1,6 @@
 // app/database/equipment/page.tsx
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
@@ -290,24 +291,37 @@ export default async function EquipmentPage({
       )}
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่ออุปกรณ์..." />
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่ออุปกรณ์</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Bastard Sword, ดาบ" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
         {/* The chips own these two, and a GET form drops what it does not
             carry -- so they ride along hidden rather than being reset by a
             search. */}
         {category && <input type="hidden" name="category" value={category} />}
         {type && <input type="hidden" name="type" value={type} />}
         {role && <input type="hidden" name="use" value={role} />}
+        <label className="field">
+          <span className="field__label">อาชีพ</span>
         <select name="job" defaultValue={job}>
           <option value="">ทุกอาชีพ</option>
           {jobs.map((j) => (
             <option key={j} value={j}>{j}</option>
           ))}
         </select>
-        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 var(--font-sarabun), sans-serif' }}>
-          ใส่ได้ที่ Lv{' '}
-          <input className="mono" type="number" name="mylv" defaultValue={mylv > 0 ? mylv : ''} placeholder="เลเวลของคุณ" inputMode="numeric" style={{ width: 104 }} aria-label="เลเวลตัวละครของคุณ" />
         </label>
-        <select name="slots" defaultValue={slotsParam} aria-label="จำนวน Slot">
+        <label className="field">
+          <span className="field__label">ใส่ได้ที่เลเวล</span>
+          <input className="mono" type="number" name="mylv" defaultValue={mylv > 0 ? mylv : ''} placeholder="เลเวลของคุณ" inputMode="numeric" style={{ width: 128 }} />
+        </label>
+        <label className="field">
+          <span className="field__label">Slot</span>
+        <select name="slots" defaultValue={slotsParam}>
           <option value="">ทุก Slot</option>
           <option value="4">4 Slot</option>
           <option value="3">3 Slot</option>
@@ -315,12 +329,16 @@ export default async function EquipmentPage({
           <option value="1">1 Slot</option>
           <option value="0">ไม่มี Slot</option>
         </select>
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, v]) => (
-            <option key={key} value={key}>เรียง: {v.label}</option>
-          ))}
-        </select>
-        <button type="submit" className="btn">ค้นหา</button>
+        </label>
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort}>
+            {Object.entries(SORTS).map(([key, v]) => (
+              <option key={key} value={key}>{v.label}</option>
+            ))}
+          </select>
+        </label>
+        </div>
       </form>
 
       {error ? (

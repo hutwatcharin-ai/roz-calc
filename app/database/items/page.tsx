@@ -1,5 +1,6 @@
 // app/database/items/page.tsx
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
 import { redirect } from 'next/navigation';
@@ -236,7 +237,17 @@ export default async function ItemListPage({
       </section>
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อไอเทม..." />
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อไอเทม</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Red Potion, ยาแดง" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
+        <label className="field">
+          <span className="field__label">หมวด</span>
         <select name="category" defaultValue={category}>
           <option value="">ทุกหมวด</option>
           {CATEGORIES.map((c) => (
@@ -245,21 +256,25 @@ export default async function ItemListPage({
             </option>
           ))}
         </select>
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, s]) => (
-            <option key={key} value={key}>
-              เรียง: {s.label}
-            </option>
-          ))}
-        </select>
+        </label>
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort} data-default="id">
+            {Object.entries(SORTS).map(([key, s]) => (
+              <option key={key} value={key}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </label>
         {role && <input type="hidden" name="use" value={role} />}
-        <button type="submit" className="btn">ค้นหา</button>
-        <Link href="/database/equipment" className="btn" style={{ textDecoration: 'none' }}>
+        <Link href="/database/equipment" className="btn btn--quiet" style={{ textDecoration: 'none' }}>
           อุปกรณ์
         </Link>
-        <Link href="/database/cards" className="btn" style={{ textDecoration: 'none' }}>
+        <Link href="/database/cards" className="btn btn--quiet" style={{ textDecoration: 'none' }}>
           การ์ด
         </Link>
+        </div>
       </form>
 
       {(items ?? []).length === 0 ? (

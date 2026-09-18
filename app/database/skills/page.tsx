@@ -1,5 +1,6 @@
 // app/database/skills/page.tsx
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -284,17 +285,29 @@ export default async function SkillsPage({
       )}
 
       <form className="filterbar">
+        <FilterAutoSubmit />
         <input type="hidden" name="tab" value={tab} />
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อสกิล..." />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อสกิล</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Bash, Heal" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
+
         {/* The chips' choices ride along so pressing search keeps them. */}
         {job && tab === 'ingame' && <input type="hidden" name="job" value={job} />}
         {type && <input type="hidden" name="type" value={type} />}
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, v]) => (
-            <option key={key} value={key}>เรียง: {v.label}</option>
-          ))}
-        </select>
-        <button type="submit" className="btn">ค้นหา</button>
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort}>
+            {Object.entries(SORTS).map(([key, v]) => (
+              <option key={key} value={key}>{v.label}</option>
+            ))}
+          </select>
+        </label>
+        </div>
       </form>
 
       <div className="card">

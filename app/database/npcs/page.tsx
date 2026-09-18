@@ -132,10 +132,15 @@ export default function NpcListPage({
       </section>
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ชื่อ NPC, เมือง หรือชื่อเควส..." />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อ NPC เมือง หรือเควส</span>
+        <input type="search" name="q" defaultValue={q} placeholder="เช่น Kafra, Prontera" />
+          </label>
         {map && <input type="hidden" name="map" value={map} />}
         {questsOnly && <input type="hidden" name="has" value="quest" />}
         <button type="submit" className="btn">ค้นหา</button>
+        </div>
       </form>
 
       {rows.length === 0 ? (

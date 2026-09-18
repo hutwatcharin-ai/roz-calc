@@ -9,6 +9,7 @@
 // lists (owner's request): each row counted against the other filters already
 // on, a zero-count chip not drawn, and a chip that is on turns itself off.
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { isBound } from '@/lib/bound-items';
 import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
@@ -253,17 +254,28 @@ export default async function CostumesPage({
       )}
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อคอสตูม..." />
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, v]) => (
-            <option key={key} value={key}>เรียง: {v.label}</option>
-          ))}
-        </select>
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อคอสตูม</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Poring Hat, หมวก" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort} data-default="name">
+            {Object.entries(SORTS).map(([key, v]) => (
+              <option key={key} value={key}>{v.label}</option>
+            ))}
+          </select>
+        </label>
         {/* The chips' choices ride along so pressing search keeps them. */}
         {type && <input type="hidden" name="type" value={type} />}
         {src && <input type="hidden" name="src" value={src} />}
         {showBound && <input type="hidden" name="bound" value="1" />}
-        <button type="submit" className="btn">ค้นหา</button>
+        </div>
       </form>
 
       <p className="filterbar" style={{ marginTop: 8 }}>

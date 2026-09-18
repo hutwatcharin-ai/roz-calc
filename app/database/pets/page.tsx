@@ -116,8 +116,13 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
       </p>
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ชื่อสัตว์เลี้ยง หรือสเตตัส เช่น LUK" />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อสัตว์เลี้ยงหรือสเตตัส</span>
+        <input type="search" name="q" defaultValue={q} placeholder="เช่น Poring, LUK" />
+          </label>
         <button type="submit" className="btn">ค้นหา</button>
+        </div>
       </form>
 
       <div className="card">

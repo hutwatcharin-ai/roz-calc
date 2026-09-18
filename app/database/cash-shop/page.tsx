@@ -4,6 +4,7 @@
 // shop prices move with events and nothing updates them automatically, so the
 // capture date is stated on the page, not buried in a footnote.
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import ItemIcon from '@/components/ItemIcon';
@@ -104,14 +105,26 @@ export default async function CashShopPage({
       />
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อไอเทม..." />
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อไอเทม</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Bubble Gum, กล่อง" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
+
         {cat && <input type="hidden" name="cat" value={cat} />}
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, s]) => (
-            <option key={key} value={key}>เรียง: {s.label}</option>
-          ))}
-        </select>
-        <button type="submit" className="btn">ค้นหา</button>
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort}>
+            {Object.entries(SORTS).map(([key, s]) => (
+              <option key={key} value={key}>{s.label}</option>
+            ))}
+          </select>
+        </label>
+        </div>
       </form>
 
       <nav className="explorerow" aria-label="กรองตามหมวด" style={{ marginTop: 12 }}>

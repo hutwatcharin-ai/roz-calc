@@ -9,6 +9,7 @@
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
 import { cardRelease, releaseText } from '@/lib/card-availability';
 import { CARDS_WITHOUT_ART, cardArtAlt, cardArtThumbUrl, hasCardArt } from '@/lib/card-art';
@@ -249,7 +250,17 @@ export default async function CardsPage({
         {role && <p className="rolepick__asks">{ROLE_TH[role].asks}</p>}
       </section>
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ชื่อการ์ด หรือเอฟเฟกต์ เช่น LUK" />
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อการ์ดหรือเอฟเฟกต์</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Poring Card, LUK" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
+        <label className="field">
+          <span className="field__label">ช่องที่ใส่</span>
         <select name="slot" defaultValue={slot}>
           <option value="">ทุกช่อง</option>
           {slots.map((s) => (
@@ -258,16 +269,21 @@ export default async function CardsPage({
             </option>
           ))}
         </select>
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, v]) => (
-            <option key={key} value={key}>เรียง: {v.label}</option>
-          ))}
-        </select>
+        </label>
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort} data-default="name">
+            {Object.entries(SORTS).map(([key, v]) => (
+              <option key={key} value={key}>{v.label}</option>
+            ))}
+          </select>
+        </label>
+
         {/* The role rides along in the form so hitting search does not throw
             away the group the reader is standing in. */}
         {role && <input type="hidden" name="role" value={role} />}
         {hideUnreleased && <input type="hidden" name="live" value="1" />}
-        <button type="submit" className="btn">ค้นหา</button>
+        </div>
       </form>
 
       {/* Stated, and switchable, rather than either silently listing cards

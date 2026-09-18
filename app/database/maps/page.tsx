@@ -1,5 +1,6 @@
 // app/database/maps/page.tsx
 import Link from 'next/link';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { mapImage } from '@/lib/map-image';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
@@ -116,13 +117,25 @@ export default async function MapsPage({
 
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อหรือรหัสแมพ..." />
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, v]) => (
-            <option key={key} value={key}>เรียง: {v.label}</option>
-          ))}
-        </select>
-        <button type="submit" className="btn">ค้นหา</button>
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อหรือรหัสแมพ</span>
+            <input type="search" name="q" defaultValue={q} placeholder="เช่น Prontera, prt_fild08" />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+        <div className="filterbar__row">
+
+        <label className="field">
+          <span className="field__label">เรียงตาม</span>
+          <select name="sort" defaultValue={sort}>
+            {Object.entries(SORTS).map(([key, v]) => (
+              <option key={key} value={key}>{v.label}</option>
+            ))}
+          </select>
+        </label>
+        </div>
       </form>
 
       <div className="card">
