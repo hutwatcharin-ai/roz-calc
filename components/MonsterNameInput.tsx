@@ -25,8 +25,7 @@ export default function MonsterNameInput({ names, defaultValue }: { names: strin
         name="q"
         list={listId}
         defaultValue={defaultValue}
-        placeholder="ค้นชื่อมอนสเตอร์"
-        aria-label="ค้นชื่อมอนสเตอร์"
+        placeholder="เช่น Poring, โพริง, Mummy"
         autoComplete="off"
       />
       <datalist id={listId}>

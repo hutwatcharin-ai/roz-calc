@@ -22,6 +22,7 @@ import { monsterCounts } from '@/lib/counts';
 import { isFilteredView } from '@/lib/filtered-view';
 import { cardRelease } from '@/lib/card-availability';
 import MonsterNameInput from '@/components/MonsterNameInput';
+import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 
 // The site's most-visited page and its worst-converting entry from search:
@@ -425,47 +426,106 @@ export default async function MonsterListPage({
         </details>
       </section>
 
+      {/* Three rows, each one question: what are you looking for, narrow it,
+          then how to show it. One wrapping line put the ค้นหา button in the
+          middle of the controls (owner, 18 Sep 2026). Every control carries a
+          visible label now -- the placeholders vanished as soon as a value was
+          picked, so a filtered page could not say what it was filtered by. */}
       <form className="filterbar">
-        <MonsterNameInput names={names} defaultValue={q} />
-        <select name="race" defaultValue={race} aria-label="เผ่า">
-          <option value="">ทุกเผ่า</option>
-          {RACES.map((r) => (
-            <option key={r} value={r}>
-              {r} · {RACE_TH[r]}
-            </option>
-          ))}
-        </select>
-        <select name="element" defaultValue={element} aria-label="ธาตุ">
-          <option value="">ทุกธาตุ</option>
-          {ELEMENTS.map((e) => (
-            <option key={e} value={e}>
-              {e} · {ELEMENT_TH[e]}
-            </option>
-          ))}
-        </select>
-        <select name="size" defaultValue={size} aria-label="ขนาด">
-          <option value="">ทุกขนาด</option>
-          {SIZES.map((z) => (
-            <option key={z} value={z}>
-              {z} · {SIZE_TH[z]}
-            </option>
-          ))}
-        </select>
-        <select name="aggro" defaultValue={aggro} aria-label="โจมตีก่อนหรือไม่">
-          <option value="">โจมตีก่อน/ไม่ ก็ได้</option>
-          <option value="0">ไม่โจมตีก่อน</option>
-          <option value="1">โจมตีก่อน</option>
-        </select>
-        <select name="mvp" defaultValue={mvpOnly ? '1' : ''} aria-label="เฉพาะบอส MVP">
-          <option value="">ทุกตัว</option>
-          <option value="1">เฉพาะบอส MVP</option>
-        </select>
-        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--dim)', font: '500 13px/1.4 var(--font-sarabun), sans-serif' }}>
-          Lv{' '}
-          <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลต่ำสุด" />
-          –
-          <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลสูงสุด" />
-        </label>
+        <FilterAutoSubmit />
+        <div className="filterbar__row filterbar__row--search">
+          <label className="field field--grow">
+            <span className="field__label">ค้นชื่อมอนสเตอร์</span>
+            <MonsterNameInput names={names} defaultValue={q} />
+          </label>
+          <button type="submit" className="btn">ค้นหา</button>
+        </div>
+
+        <div className="filterbar__row">
+          <label className="field">
+            <span className="field__label">เผ่า</span>
+            <select name="race" defaultValue={race}>
+              <option value="">ทุกเผ่า</option>
+              {RACES.map((r) => (
+                <option key={r} value={r}>
+                  {r} · {RACE_TH[r]}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
+            <span className="field__label">ธาตุ</span>
+            <select name="element" defaultValue={element}>
+              <option value="">ทุกธาตุ</option>
+              {ELEMENTS.map((e) => (
+                <option key={e} value={e}>
+                  {e} · {ELEMENT_TH[e]}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
+            <span className="field__label">ขนาด</span>
+            <select name="size" defaultValue={size}>
+              <option value="">ทุกขนาด</option>
+              {SIZES.map((z) => (
+                <option key={z} value={z}>
+                  {z} · {SIZE_TH[z]}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
+            <span className="field__label">พฤติกรรม</span>
+            <select name="aggro" defaultValue={aggro}>
+              <option value="">โจมตีก่อน/ไม่ ก็ได้</option>
+              <option value="0">ไม่โจมตีก่อน</option>
+              <option value="1">โจมตีก่อน</option>
+            </select>
+          </label>
+          <label className="field">
+            <span className="field__label">บอส</span>
+            <select name="mvp" defaultValue={mvpOnly ? '1' : ''}>
+              <option value="">ทุกตัว</option>
+              <option value="1">เฉพาะบอส MVP</option>
+            </select>
+          </label>
+          <div className="field field--pair">
+            <span className="field__label">ช่วงเลเวล</span>
+            <span className="field__pair">
+              <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 84 }} aria-label="เลเวลต่ำสุด" />
+              –
+              <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 84 }} aria-label="เลเวลสูงสุด" />
+            </span>
+          </div>
+        </div>
+
+        <div className="filterbar__row filterbar__row--tail">
+          <label className="field">
+            <span className="field__label">เรียงตาม</span>
+            <select name="sort" defaultValue={sort} data-default="level">
+              {Object.entries(SORTS).map(([key, s]) => (
+                <option key={key} value={key}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          {/* Toggling re-navigates (page reset to 1) so the server filter and
+              count stay honest; the hidden form field keeps ?c=1 across a new
+              text search too. */}
+          {showC && <input type="hidden" name="c" value="1" />}
+          {showMj && <input type="hidden" name="mj" value="1" />}
+          <CVariantToggle mode="nav" navShow={showC} navHrefShow={buildHref(1, true)} navHrefHide={buildHref(1, false)} />
+          {/* Plain link, not the C toggle's remembered checkbox: this one has
+              no reason to follow the reader onto other pages, and the count is
+              named so nothing disappears silently. */}
+          <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
+            <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
+            ซ่อนมอนดันเจี้ยน/อีเวนต์ (Mj Md Mq Ztw B) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
+          </Link>
+        </div>
+
         {/* Folded by default: three rows of controls already put the first
             monster far down a phone screen, and these two are the least used.
             Open when either is in use, so a filter is never applied out of
@@ -475,39 +535,20 @@ export default async function MonsterListPage({
             ตัวกรองเพิ่มเติม{advancedOn > 0 ? ` (${advancedOn})` : ''}
           </summary>
           <div className="advfilter__row">
-            <label className="advfilter__label">
-              HP{' '}
-              <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 96 }} aria-label="เลือดต่ำสุด" />
-              –
-              <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 96 }} aria-label="เลือดสูงสุด" />
-            </label>
+            <div className="field field--pair">
+              <span className="field__label">ช่วงเลือด (HP)</span>
+              <span className="field__pair">
+                <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 104 }} aria-label="เลือดต่ำสุด" />
+                –
+                <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 104 }} aria-label="เลือดสูงสุด" />
+              </span>
+            </div>
             <label className="advfilter__label">
               <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
               เฉพาะตัวที่มีการ์ดที่หาได้ตอนนี้
             </label>
           </div>
         </details>
-        <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
-          {Object.entries(SORTS).map(([key, s]) => (
-            <option key={key} value={key}>
-              เรียง: {s.label}
-            </option>
-          ))}
-        </select>
-        <button type="submit" className="btn">ค้นหา</button>
-        {/* Toggling re-navigates (page reset to 1) so the server filter and
-            count stay honest; the hidden form field keeps ?c=1 across a new
-            text search too. */}
-        {showC && <input type="hidden" name="c" value="1" />}
-        {showMj && <input type="hidden" name="mj" value="1" />}
-        <CVariantToggle mode="nav" navShow={showC} navHrefShow={buildHref(1, true)} navHrefHide={buildHref(1, false)} />
-        {/* Plain link, not the C toggle's remembered checkbox: this one has
-            no reason to follow the reader onto other pages, and the count is
-            named so nothing disappears silently. */}
-        <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
-          <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
-          ซ่อนมอนดันเจี้ยน/อีเวนต์ (Mj Md Mq Ztw B) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
-        </Link>
       </form>
 
       <FilterState
