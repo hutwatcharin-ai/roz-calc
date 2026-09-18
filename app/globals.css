@@ -2571,6 +2571,25 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .shopmore summary::marker { color: var(--faint); }
 .shopmore[open] summary { margin-bottom: 4px; }
 
+/* The folded advanced filters on /database/monsters (18 Sep 2026). It sits
+   inside .filterbar, which is a flex row, so it needs its own full-width line
+   or the summary lands between two selects. */
+.advfilter { flex-basis: 100%; }
+.advfilter__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  padding: 6px 0 2px;
+}
+.advfilter__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dim);
+  font: 500 13px/1.4 var(--font-sarabun), sans-serif;
+}
+
 /* An NPC's own sprite, when one of our 84 mirrored images matches. */
 .npcportrait {
   image-rendering: pixelated;

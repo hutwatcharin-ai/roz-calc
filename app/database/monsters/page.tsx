@@ -19,6 +19,10 @@ import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
 import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { monsterCounts } from '@/lib/counts';
+import { isFilteredView } from '@/lib/filtered-view';
+import { cardRelease } from '@/lib/card-availability';
+import MonsterNameInput from '@/components/MonsterNameInput';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -31,12 +35,22 @@ import { monsterCounts } from '@/lib/counts';
 // "349 ตัว" until 8 Sep 2026, when importing ten monsters made the page list
 // 359 and the title keep claiming 349 -- nothing errored, the title simply
 // became untrue (lib/counts).
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Record<string, string | string[] | undefined>;
+}): Promise<Metadata> {
   const { listed } = await monsterCounts();
+  // A filtered view is the same rows in a different order, and the filters
+  // multiply into more URLs than this site has pages. Only the bare list is
+  // offered to a crawler; the filtered ones stay followable so the facet
+  // chips still pass their links along (owner, 18 Sep 2026).
+  const filtered = isFilteredView(searchParams);
   // No number at all beats a wrong one: if the count did not come back, the
   // title says what the page is without claiming a size.
   const size = listed === null ? '' : ` — ${listed.toLocaleString('en-US')} ตัว`;
   return {
+    ...(filtered ? { robots: { index: false, follow: true } } : {}),
     title: `ข้อมูลมอนสเตอร์ RO Zero${size} ดรอป จุดเกิด ค่าสถานะ`,
     description:
       'มอนสเตอร์ทุกตัวใน Ragnarok Zero Global ภาษาไทย — ค้นชื่อ กรองตามเผ่า ธาตุ ช่วงเลเวล ดูของที่ดรอป แมพที่เจอ HP EXP และ HIT/FLEE ที่ต้องมี',
@@ -73,6 +87,7 @@ export default async function MonsterListPage({
   searchParams: {
     q?: string; race?: string; element?: string; size?: string; aggro?: string;
     lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string; mj?: string; mvp?: string;
+    hpmin?: string; hpmax?: string; card?: string;
   };
 }) {
   const q = searchParams.q ?? '';
@@ -98,6 +113,12 @@ export default async function MonsterListPage({
   // answer "what is around my level". Empty stays empty; junk becomes empty.
   const lvmin = Math.max(0, Number(searchParams.lvmin ?? 0) || 0);
   const lvmax = Math.max(0, Number(searchParams.lvmax ?? 0) || 0);
+  // Advanced filters, folded away until asked for (owner, 18 Sep 2026).
+  const hpmin = Math.max(0, Number(searchParams.hpmin ?? 0) || 0);
+  const hpmax = Math.max(0, Number(searchParams.hpmax ?? 0) || 0);
+  const hpFiltered = hpmin > 0 || hpmax > 0;
+  const cardOnly = searchParams.card === '1';
+  const advancedOn = (hpFiltered ? 1 : 0) + (cardOnly ? 1 : 0);
   // A whitelist, not a passthrough: the sort key goes into the query.
   const SORTS = {
     level: { label: 'เลเวลน้อยก่อน', column: 'level', ascending: true },
@@ -110,6 +131,23 @@ export default async function MonsterListPage({
   const db = supabaseBrowser();
   const counts = await monsterCounts();
 
+  // Monsters that drop a card a player can actually get today. "Has a card"
+  // alone would keep 307 of 355 rows -- no filter at all -- so the 37 whose
+  // card belongs to unopened content are dropped here (lib/card-availability).
+  // Only queried when the filter is on: it is a join the other 99% of visits
+  // do not need.
+  let cardMonsterIds: number[] | null = null;
+  if (searchParams.card === '1') {
+    const { data: cardDrops } = await db
+      .from('monster_drops')
+      .select('monster_id, items!inner(name_en, category)')
+      .eq('items.category', 'Card');
+    const rows = (cardDrops ?? []) as unknown as { monster_id: number; items: { name_en: string } | null }[];
+    cardMonsterIds = [
+      ...new Set(rows.filter((r) => r.items && cardRelease(r.items.name_en) === null).map((r) => r.monster_id)),
+    ];
+  }
+
   /**
    * Everything the list filters on, applied in one place.
    *
@@ -121,6 +159,7 @@ export default async function MonsterListPage({
   function applyFilters<T>(
     input: T,
     picked: { race: string; element: string; size: string },
+    opts: { ignoreHp?: boolean } = {},
   ): T {
     let query = input as any;
     if (q) {
@@ -156,6 +195,15 @@ export default async function MonsterListPage({
     if (mvpOnly) query = query.eq('is_mvp', true);
     if (lvmin > 0) query = query.gte('level', lvmin);
     if (lvmax > 0) query = query.lte('level', lvmax);
+    // 0 in hp means "not published", not "no health" (lib/unknown-stat). A
+    // range filter has to drop those rows or a search for 1-500 HP would
+    // return thirty monsters whose HP nobody knows.
+    if (hpFiltered && !opts.ignoreHp) {
+      query = query.gt('hp', 0);
+      if (hpmin > 0) query = query.gte('hp', hpmin);
+      if (hpmax > 0) query = query.lte('hp', hpmax);
+    }
+    if (cardOnly && cardMonsterIds) query = query.in('id', cardMonsterIds);
     return query as T;
   }
 
@@ -223,6 +271,29 @@ export default async function MonsterListPage({
     console.error('monsters list query failed', error);
   }
 
+  // The suggestion list: every monster the reader could reach with the
+  // C/Mj switches as they are, so the box never suggests a row the list
+  // cannot show.
+  const { data: nameRows } = await fetchAllRows<{ name_en: string }>((from, to) =>
+    applyFilters(db.from('monsters').select('name_en'), { race: '', element: '', size: '' })
+      .order('name_en')
+      .range(from, to),
+  );
+  const names = [...new Set((nameRows ?? []).map((r) => r.name_en))];
+
+  // How many rows the HP range dropped for having no published HP. Shown, not
+  // swallowed: hiding rows without saying so is what makes a reader think the
+  // database is incomplete.
+  let hiddenUnknownHp = 0;
+  if (hpFiltered) {
+    const { count: unknown } = await applyFilters(
+      db.from('monsters').select('id', { count: 'exact', head: true }),
+      { race, element, size },
+      { ignoreHp: true },
+    ).eq('hp', 0);
+    hiddenUnknownHp = unknown ?? 0;
+  }
+
   const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
 
   /**
@@ -244,6 +315,9 @@ export default async function MonsterListPage({
     if (aggro) params.set('aggro', aggro);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
+    if (hpmin > 0) params.set('hpmin', String(hpmin));
+    if (hpmax > 0) params.set('hpmax', String(hpmax));
+    if (cardOnly) params.set('card', '1');
     if (mvpOnly) params.set('mvp', '1');
     if (showC) params.set('c', '1');
     if (showMj) params.set('mj', '1');
@@ -263,6 +337,9 @@ export default async function MonsterListPage({
     if (aggro) params.set('aggro', aggro);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
+    if (hpmin > 0) params.set('hpmin', String(hpmin));
+    if (hpmax > 0) params.set('hpmax', String(hpmax));
+    if (cardOnly) params.set('card', '1');
     if (sort !== 'level') params.set('sort', sort);
     if (showC) params.set('c', '1');
     if (next) params.set('mj', '1');
@@ -280,6 +357,9 @@ export default async function MonsterListPage({
     if (aggro) params.set('aggro', aggro);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
+    if (hpmin > 0) params.set('hpmin', String(hpmin));
+    if (hpmax > 0) params.set('hpmax', String(hpmax));
+    if (cardOnly) params.set('card', '1');
     if (sort !== 'level') params.set('sort', sort);
     if (showCOverride ?? showC) params.set('c', '1');
     if (showMj) params.set('mj', '1');
@@ -346,7 +426,7 @@ export default async function MonsterListPage({
       </section>
 
       <form className="filterbar">
-        <input type="search" name="q" defaultValue={q} placeholder="ค้นชื่อมอนสเตอร์" aria-label="ค้นชื่อมอนสเตอร์" />
+        <MonsterNameInput names={names} defaultValue={q} />
         <select name="race" defaultValue={race} aria-label="เผ่า">
           <option value="">ทุกเผ่า</option>
           {RACES.map((r) => (
@@ -386,6 +466,27 @@ export default async function MonsterListPage({
           –
           <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 74 }} aria-label="เลเวลสูงสุด" />
         </label>
+        {/* Folded by default: three rows of controls already put the first
+            monster far down a phone screen, and these two are the least used.
+            Open when either is in use, so a filter is never applied out of
+            sight -- same rule as the เผ่า/ขนาด chips above. */}
+        <details className="shopmore advfilter" open={advancedOn > 0}>
+          <summary>
+            ตัวกรองเพิ่มเติม{advancedOn > 0 ? ` (${advancedOn})` : ''}
+          </summary>
+          <div className="advfilter__row">
+            <label className="advfilter__label">
+              HP{' '}
+              <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 96 }} aria-label="เลือดต่ำสุด" />
+              –
+              <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 96 }} aria-label="เลือดสูงสุด" />
+            </label>
+            <label className="advfilter__label">
+              <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
+              เฉพาะตัวที่มีการ์ดที่หาได้ตอนนี้
+            </label>
+          </div>
+        </details>
         <select name="sort" defaultValue={sort} aria-label="เรียงตาม">
           {Object.entries(SORTS).map(([key, s]) => (
             <option key={key} value={key}>
@@ -423,9 +524,16 @@ export default async function MonsterListPage({
           { label: 'พฤติกรรม', value: aggro === '1' ? 'โจมตีก่อน' : aggro === '0' ? 'ไม่โจมตีก่อน' : '' },
           { label: 'บอส', value: mvpOnly ? 'เฉพาะ MVP' : '' },
           { label: 'เลเวล', value: lvmin > 0 || lvmax > 0 ? `${lvmin > 0 ? lvmin : '1'}–${lvmax > 0 ? lvmax : 'สูงสุด'}` : '' },
+          { label: 'HP', value: hpFiltered ? `${hpmin > 0 ? hpmin.toLocaleString('en-US') : '1'}–${hpmax > 0 ? hpmax.toLocaleString('en-US') : 'สูงสุด'}` : '' },
+          { label: 'การ์ด', value: cardOnly ? 'เฉพาะตัวที่มีการ์ดที่หาได้ตอนนี้' : '' },
         ]}
         clearHref="/database/monsters"
       />
+      {hiddenUnknownHp > 0 && (
+        <p className="muted" style={{ marginTop: -6, marginBottom: 10, fontSize: 13 }}>
+          ซ่อนมอนที่ยังไม่รู้ค่าเลือดไป {hiddenUnknownHp} ตัว — ตัวกรองเลือดใช้กับตัวที่มีตัวเลขจริงเท่านั้น
+        </p>
+      )}
 
       {(monsters ?? []).length === 0 ? (
         <div className="card">
