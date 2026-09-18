@@ -20,6 +20,9 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveNuxtData } from './prontera-nuxt.mjs';
+
+export { resolveNuxtData };
 
 const OUT = path.join(process.cwd(), 'data', 'raw', 'prontera-gap-items.json');
 const DELAY_MS = 300;
@@ -82,29 +85,6 @@ const SLUGS = [
   'costume-temari-candy-hair-bound-420968',
   'costume-gabriel-s-wings-bound-480859',
 ];
-
-export function resolveNuxtData(data) {
-  const cache = new Map();
-  function resolve(i) {
-    if (cache.has(i)) return cache.get(i);
-    const val = data[i];
-    if (val === null || typeof val !== 'object') return val;
-    if (Array.isArray(val)) {
-      if (val.length === 2 && typeof val[0] === 'string' && (val[0].endsWith('Reactive') || val[0] === 'Ref')) {
-        return resolve(val[1]);
-      }
-      const arr = [];
-      cache.set(i, arr);
-      for (const r of val) arr.push(resolve(r));
-      return arr;
-    }
-    const obj = {};
-    cache.set(i, obj);
-    for (const [k, r] of Object.entries(val)) obj[k] = resolve(r);
-    return obj;
-  }
-  return resolve(1);
-}
 
 export function parseItemPage(html) {
   const m = /<script[^>]*id="__NUXT_DATA__"[^>]*>([\s\S]*?)<\/script>/.exec(html);

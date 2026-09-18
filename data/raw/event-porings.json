@@ -1,0 +1,927 @@
+{
+ "bunny-poring": {
+  "spawns": [
+   {
+    "slug": "ant-hell-1f",
+    "name": "Ant Hell 1F",
+    "count": 3
+   },
+   {
+    "slug": "ant-hell-2f",
+    "name": "Ant Hell 2F",
+    "count": 3
+   },
+   {
+    "slug": "east-cave-mao",
+    "name": "East Cave Mao",
+    "count": 3
+   },
+   {
+    "slug": "fortress-saint-darmain-east-side",
+    "name": "Fortress Saint Darmain, East Side",
+    "count": 3
+   },
+   {
+    "slug": "fortress-saint-darmain-south-side",
+    "name": "Fortress Saint Darmain, South Side",
+    "count": 3
+   },
+   {
+    "slug": "fortress-saint-darmain-west-side",
+    "name": "Fortress Saint Darmain, West Side",
+    "count": 3
+   },
+   {
+    "slug": "geffen-dungeon-b1f",
+    "name": "Geffen Dungeon B1F",
+    "count": 3
+   },
+   {
+    "slug": "geffen-dungeon-b2f",
+    "name": "Geffen Dungeon B2F",
+    "count": 3
+   },
+   {
+    "slug": "geffen-dungeon-b3f",
+    "name": "Geffen Dungeon B3F",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-00",
+    "name": "Geffen Field 00",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-01",
+    "name": "Geffen Field 01",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-02",
+    "name": "Geffen Field 02",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-03",
+    "name": "Geffen Field 03",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-04",
+    "name": "Geffen Field 04",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-06",
+    "name": "Geffen Field 06",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-07",
+    "name": "Geffen Field 07",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-08",
+    "name": "Geffen Field 08",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-09",
+    "name": "Geffen Field 09",
+    "count": 3
+   },
+   {
+    "slug": "geffen-field-11",
+    "name": "Geffen Field 11",
+    "count": 3
+   },
+   {
+    "slug": "gypsy-village",
+    "name": "Gypsy Village",
+    "count": 3
+   },
+   {
+    "slug": "hoomga-jungle-in-umbala",
+    "name": "Hoomga Jungle in Umbala",
+    "count": 3
+   },
+   {
+    "slug": "izlude-shipwreck-1f",
+    "name": "Izlude Shipwreck 1F",
+    "count": 3
+   },
+   {
+    "slug": "izlude-shipwreck-2f",
+    "name": "Izlude Shipwreck 2F",
+    "count": 3
+   },
+   {
+    "slug": "kalala-swamp-in-umbala",
+    "name": "Kalala Swamp in Umbala",
+    "count": 3
+   },
+   {
+    "slug": "kokomo-beach-02",
+    "name": "Kokomo Beach 02",
+    "count": 3
+   },
+   {
+    "slug": "kokomo-beach-04",
+    "name": "Kokomo Beach 04",
+    "count": 3
+   },
+   {
+    "slug": "luluka-forest-in-umbala",
+    "name": "Luluka Forest in Umbala",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-north-side-01",
+    "name": "Mt. Mjolnir North Side 01",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-north-side-02",
+    "name": "Mt. Mjolnir North Side 02",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-north-side-03",
+    "name": "Mt. Mjolnir North Side 03",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-north-side-04",
+    "name": "Mt. Mjolnir North Side 04",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-north-side-05",
+    "name": "Mt. Mjolnir North Side 05",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-northern-foot",
+    "name": "Mt. Mjolnir Northern Foot",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-south-side-06",
+    "name": "Mt. Mjolnir South Side 06",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-south-side-07",
+    "name": "Mt. Mjolnir South Side 07",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-south-side-08",
+    "name": "Mt. Mjolnir South Side 08",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-south-side-10",
+    "name": "Mt. Mjolnir South Side 10",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-south-side-11",
+    "name": "Mt. Mjolnir South Side 11",
+    "count": 3
+   },
+   {
+    "slug": "mt-mjolnir-southern-foot",
+    "name": "Mt. Mjolnir Southern Foot",
+    "count": 3
+   },
+   {
+    "slug": "nordfeld-cave-1f",
+    "name": "Nordfeld Cave 1F",
+    "count": 3
+   },
+   {
+    "slug": "nordfeld-cave-2f",
+    "name": "Nordfeld Cave 2F",
+    "count": 3
+   },
+   {
+    "slug": "nordfeld-hills",
+    "name": "Nordfeld Hills",
+    "count": 3
+   },
+   {
+    "slug": "nordfeld-plains",
+    "name": "Nordfeld Plains",
+    "count": 3
+   },
+   {
+    "slug": "northern-cave-luanda",
+    "name": "Northern Cave Luanda",
+    "count": 3
+   },
+   {
+    "slug": "orc-underground-cave-1f",
+    "name": "Orc Underground Cave 1F",
+    "count": 3
+   },
+   {
+    "slug": "orc-underground-cave-2f",
+    "name": "Orc Underground Cave 2F",
+    "count": 3
+   },
+   {
+    "slug": "orc-village",
+    "name": "Orc Village",
+    "count": 3
+   },
+   {
+    "slug": "papuchicha-forest",
+    "name": "Papuchicha Forest",
+    "count": 3
+   },
+   {
+    "slug": "payon-cave-1f",
+    "name": "Payon Cave 1F",
+    "count": 3
+   },
+   {
+    "slug": "payon-cave-2f",
+    "name": "Payon Cave 2F",
+    "count": 3
+   },
+   {
+    "slug": "payon-cave-3f",
+    "name": "Payon Cave 3F",
+    "count": 3
+   },
+   {
+    "slug": "payon-cave-4f-abandoned-village",
+    "name": "Payon Cave 4F (Abandoned Village)",
+    "count": 3
+   },
+   {
+    "slug": "payon-cave-5f-abandoned-village",
+    "name": "Payon Cave 5F (Abandoned Village)",
+    "count": 3
+   },
+   {
+    "slug": "pharos-lighthouse",
+    "name": "Pharos Lighthouse",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-00",
+    "name": "Prontera Field 00",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-01",
+    "name": "Prontera Field 01",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-02",
+    "name": "Prontera Field 02",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-03",
+    "name": "Prontera Field 03",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-04",
+    "name": "Prontera Field 04",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-05",
+    "name": "Prontera Field 05",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-06",
+    "name": "Prontera Field 06",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-07",
+    "name": "Prontera Field 07",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-08",
+    "name": "Prontera Field 08",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-09",
+    "name": "Prontera Field 09",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-10",
+    "name": "Prontera Field 10",
+    "count": 3
+   },
+   {
+    "slug": "prontera-field-11",
+    "name": "Prontera Field 11",
+    "count": 3
+   },
+   {
+    "slug": "sewer-tunnel-1f",
+    "name": "Sewer Tunnel 1F",
+    "count": 3
+   },
+   {
+    "slug": "sewer-tunnel-2f",
+    "name": "Sewer Tunnel 2F",
+    "count": 3
+   },
+   {
+    "slug": "sewer-tunnel-3f",
+    "name": "Sewer Tunnel 3F",
+    "count": 3
+   },
+   {
+    "slug": "sewer-tunnel-4f",
+    "name": "Sewer Tunnel 4F",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-01",
+    "name": "Sograt Desert 01",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-02",
+    "name": "Sograt Desert 02",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-03",
+    "name": "Sograt Desert 03",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-07",
+    "name": "Sograt Desert 07",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-11",
+    "name": "Sograt Desert 11",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-12",
+    "name": "Sograt Desert 12",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-13",
+    "name": "Sograt Desert 13",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-16",
+    "name": "Sograt Desert 16",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-17",
+    "name": "Sograt Desert 17",
+    "count": 3
+   },
+   {
+    "slug": "sograt-desert-18",
+    "name": "Sograt Desert 18",
+    "count": 3
+   },
+   {
+    "slug": "sunken-ship-1f",
+    "name": "Sunken Ship 1F",
+    "count": 3
+   },
+   {
+    "slug": "sunken-ship-2f",
+    "name": "Sunken Ship 2F",
+    "count": 3
+   },
+   {
+    "slug": "umbala-hoomga-forest",
+    "name": "Umbala Hoomga Forest",
+    "count": 3
+   },
+   {
+    "slug": "undersea-cave-1f",
+    "name": "Undersea Cave 1F",
+    "count": 3
+   },
+   {
+    "slug": "undersea-cave-2f",
+    "name": "Undersea Cave 2F",
+    "count": 3
+   },
+   {
+    "slug": "undersea-cave-3f",
+    "name": "Undersea Cave 3F",
+    "count": 3
+   },
+   {
+    "slug": "zenhai-marsh",
+    "name": "Zenhai Marsh",
+    "count": 3
+   }
+  ]
+ },
+ "gold-poring": {
+  "spawns": [
+   {
+    "slug": "ant-hell-1f",
+    "name": "Ant Hell 1F",
+    "count": 1
+   },
+   {
+    "slug": "ant-hell-2f",
+    "name": "Ant Hell 2F",
+    "count": 1
+   },
+   {
+    "slug": "east-cave-mao",
+    "name": "East Cave Mao",
+    "count": 1
+   },
+   {
+    "slug": "fortress-saint-darmain-east-side",
+    "name": "Fortress Saint Darmain, East Side",
+    "count": 1
+   },
+   {
+    "slug": "fortress-saint-darmain-south-side",
+    "name": "Fortress Saint Darmain, South Side",
+    "count": 1
+   },
+   {
+    "slug": "fortress-saint-darmain-west-side",
+    "name": "Fortress Saint Darmain, West Side",
+    "count": 1
+   },
+   {
+    "slug": "geffen-dungeon-b1f",
+    "name": "Geffen Dungeon B1F",
+    "count": 1
+   },
+   {
+    "slug": "geffen-dungeon-b2f",
+    "name": "Geffen Dungeon B2F",
+    "count": 1
+   },
+   {
+    "slug": "geffen-dungeon-b3f",
+    "name": "Geffen Dungeon B3F",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-00",
+    "name": "Geffen Field 00",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-01",
+    "name": "Geffen Field 01",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-02",
+    "name": "Geffen Field 02",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-03",
+    "name": "Geffen Field 03",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-04",
+    "name": "Geffen Field 04",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-06",
+    "name": "Geffen Field 06",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-07",
+    "name": "Geffen Field 07",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-08",
+    "name": "Geffen Field 08",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-09",
+    "name": "Geffen Field 09",
+    "count": 1
+   },
+   {
+    "slug": "geffen-field-11",
+    "name": "Geffen Field 11",
+    "count": 1
+   },
+   {
+    "slug": "gypsy-village",
+    "name": "Gypsy Village",
+    "count": 1
+   },
+   {
+    "slug": "hoomga-jungle-in-umbala",
+    "name": "Hoomga Jungle in Umbala",
+    "count": 1
+   },
+   {
+    "slug": "izlude-shipwreck-1f",
+    "name": "Izlude Shipwreck 1F",
+    "count": 1
+   },
+   {
+    "slug": "izlude-shipwreck-2f",
+    "name": "Izlude Shipwreck 2F",
+    "count": 1
+   },
+   {
+    "slug": "kalala-swamp-in-umbala",
+    "name": "Kalala Swamp in Umbala",
+    "count": 1
+   },
+   {
+    "slug": "kokomo-beach-02",
+    "name": "Kokomo Beach 02",
+    "count": 1
+   },
+   {
+    "slug": "kokomo-beach-04",
+    "name": "Kokomo Beach 04",
+    "count": 1
+   },
+   {
+    "slug": "luluka-forest-in-umbala",
+    "name": "Luluka Forest in Umbala",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-north-side-01",
+    "name": "Mt. Mjolnir North Side 01",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-north-side-02",
+    "name": "Mt. Mjolnir North Side 02",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-north-side-03",
+    "name": "Mt. Mjolnir North Side 03",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-north-side-04",
+    "name": "Mt. Mjolnir North Side 04",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-north-side-05",
+    "name": "Mt. Mjolnir North Side 05",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-northern-foot",
+    "name": "Mt. Mjolnir Northern Foot",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-south-side-06",
+    "name": "Mt. Mjolnir South Side 06",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-south-side-07",
+    "name": "Mt. Mjolnir South Side 07",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-south-side-08",
+    "name": "Mt. Mjolnir South Side 08",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-south-side-10",
+    "name": "Mt. Mjolnir South Side 10",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-south-side-11",
+    "name": "Mt. Mjolnir South Side 11",
+    "count": 1
+   },
+   {
+    "slug": "mt-mjolnir-southern-foot",
+    "name": "Mt. Mjolnir Southern Foot",
+    "count": 1
+   },
+   {
+    "slug": "nordfeld-cave-1f",
+    "name": "Nordfeld Cave 1F",
+    "count": 1
+   },
+   {
+    "slug": "nordfeld-cave-2f",
+    "name": "Nordfeld Cave 2F",
+    "count": 1
+   },
+   {
+    "slug": "nordfeld-hills",
+    "name": "Nordfeld Hills",
+    "count": 1
+   },
+   {
+    "slug": "nordfeld-plains",
+    "name": "Nordfeld Plains",
+    "count": 1
+   },
+   {
+    "slug": "northern-cave-luanda",
+    "name": "Northern Cave Luanda",
+    "count": 1
+   },
+   {
+    "slug": "orc-underground-cave-1f",
+    "name": "Orc Underground Cave 1F",
+    "count": 1
+   },
+   {
+    "slug": "orc-underground-cave-2f",
+    "name": "Orc Underground Cave 2F",
+    "count": 1
+   },
+   {
+    "slug": "orc-village",
+    "name": "Orc Village",
+    "count": 1
+   },
+   {
+    "slug": "papuchicha-forest",
+    "name": "Papuchicha Forest",
+    "count": 1
+   },
+   {
+    "slug": "payon-cave-1f",
+    "name": "Payon Cave 1F",
+    "count": 1
+   },
+   {
+    "slug": "payon-cave-2f",
+    "name": "Payon Cave 2F",
+    "count": 1
+   },
+   {
+    "slug": "payon-cave-3f",
+    "name": "Payon Cave 3F",
+    "count": 1
+   },
+   {
+    "slug": "payon-cave-4f-abandoned-village",
+    "name": "Payon Cave 4F (Abandoned Village)",
+    "count": 1
+   },
+   {
+    "slug": "payon-cave-5f-abandoned-village",
+    "name": "Payon Cave 5F (Abandoned Village)",
+    "count": 1
+   },
+   {
+    "slug": "pharos-lighthouse",
+    "name": "Pharos Lighthouse",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-00",
+    "name": "Prontera Field 00",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-01",
+    "name": "Prontera Field 01",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-02",
+    "name": "Prontera Field 02",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-03",
+    "name": "Prontera Field 03",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-04",
+    "name": "Prontera Field 04",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-05",
+    "name": "Prontera Field 05",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-06",
+    "name": "Prontera Field 06",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-07",
+    "name": "Prontera Field 07",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-08",
+    "name": "Prontera Field 08",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-09",
+    "name": "Prontera Field 09",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-10",
+    "name": "Prontera Field 10",
+    "count": 1
+   },
+   {
+    "slug": "prontera-field-11",
+    "name": "Prontera Field 11",
+    "count": 1
+   },
+   {
+    "slug": "sewer-tunnel-1f",
+    "name": "Sewer Tunnel 1F",
+    "count": 1
+   },
+   {
+    "slug": "sewer-tunnel-2f",
+    "name": "Sewer Tunnel 2F",
+    "count": 1
+   },
+   {
+    "slug": "sewer-tunnel-3f",
+    "name": "Sewer Tunnel 3F",
+    "count": 1
+   },
+   {
+    "slug": "sewer-tunnel-4f",
+    "name": "Sewer Tunnel 4F",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-01",
+    "name": "Sograt Desert 01",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-02",
+    "name": "Sograt Desert 02",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-03",
+    "name": "Sograt Desert 03",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-07",
+    "name": "Sograt Desert 07",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-11",
+    "name": "Sograt Desert 11",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-12",
+    "name": "Sograt Desert 12",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-13",
+    "name": "Sograt Desert 13",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-16",
+    "name": "Sograt Desert 16",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-17",
+    "name": "Sograt Desert 17",
+    "count": 1
+   },
+   {
+    "slug": "sograt-desert-18",
+    "name": "Sograt Desert 18",
+    "count": 1
+   },
+   {
+    "slug": "sunken-ship-1f",
+    "name": "Sunken Ship 1F",
+    "count": 1
+   },
+   {
+    "slug": "sunken-ship-2f",
+    "name": "Sunken Ship 2F",
+    "count": 1
+   },
+   {
+    "slug": "umbala-hoomga-forest",
+    "name": "Umbala Hoomga Forest",
+    "count": 1
+   },
+   {
+    "slug": "undersea-cave-1f",
+    "name": "Undersea Cave 1F",
+    "count": 1
+   },
+   {
+    "slug": "undersea-cave-2f",
+    "name": "Undersea Cave 2F",
+    "count": 1
+   },
+   {
+    "slug": "undersea-cave-3f",
+    "name": "Undersea Cave 3F",
+    "count": 1
+   },
+   {
+    "slug": "zenhai-marsh",
+    "name": "Zenhai Marsh",
+    "count": 1
+   }
+  ]
+ },
+ "mapCodes": {
+  "geffen-field-00": "gef_fild00",
+  "geffen-field-01": "gef_fild01",
+  "geffen-field-02": "gef_fild02",
+  "geffen-field-03": "gef_fild03",
+  "geffen-field-04": "gef_fild04",
+  "geffen-field-06": "gef_fild06",
+  "geffen-field-07": "gef_fild07",
+  "geffen-field-08": "gef_fild08",
+  "geffen-field-09": "gef_fild09",
+  "geffen-field-11": "gef_fild11",
+  "kokomo-beach-02": "cmd_fild02",
+  "kokomo-beach-04": "cmd_fild04",
+  "mt-mjolnir-north-side-01": "mjolnir_01",
+  "mt-mjolnir-north-side-02": "mjolnir_02",
+  "mt-mjolnir-north-side-03": "mjolnir_03",
+  "mt-mjolnir-north-side-04": "mjolnir_04",
+  "mt-mjolnir-north-side-05": "mjolnir_05",
+  "mt-mjolnir-south-side-06": "mjolnir_06",
+  "mt-mjolnir-south-side-07": "mjolnir_07",
+  "mt-mjolnir-south-side-08": "mjolnir_08",
+  "mt-mjolnir-south-side-10": "mjolnir_10",
+  "mt-mjolnir-south-side-11": "mjolnir_11",
+  "papuchicha-forest": "cmd_fild01",
+  "prontera-field-00": "prt_fild00",
+  "prontera-field-01": "prt_fild01",
+  "prontera-field-02": "prt_fild02",
+  "prontera-field-03": "prt_fild03",
+  "prontera-field-04": "prt_fild04",
+  "prontera-field-05": "prt_fild05",
+  "prontera-field-06": "prt_fild06",
+  "prontera-field-07": "prt_fild07",
+  "prontera-field-08": "prt_fild08",
+  "prontera-field-09": "prt_fild09",
+  "prontera-field-10": "prt_fild10",
+  "prontera-field-11": "prt_fild11",
+  "sograt-desert-01": "moc_fild01",
+  "sograt-desert-02": "moc_fild02",
+  "sograt-desert-03": "moc_fild03",
+  "sograt-desert-07": "moc_fild07",
+  "sograt-desert-11": "moc_fild11",
+  "sograt-desert-12": "moc_fild12",
+  "sograt-desert-13": "moc_fild13",
+  "sograt-desert-16": "moc_fild16",
+  "sograt-desert-17": "moc_fild17",
+  "sograt-desert-18": "moc_fild18"
+ }
+}
