@@ -10,6 +10,15 @@ import JsonLd from '@/components/JsonLd';
 import { websiteJsonLd } from '@/lib/jsonld';
 import { timeAgoTh } from '@/lib/time-ago';
 import { getLastUpdated } from '@/lib/last-updated';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
+// The map behind the heading rides inside the HTML (a few kB) instead of as a
+// request of its own: the browser paints it with the heading, so the largest
+// paint on the page never waits for it.
+const heroArt = (file: string) =>
+  `url(data:image/webp;base64,${readFileSync(path.join(process.cwd(), 'public/images/home', file)).toString('base64')})`;
+const HERO_ART = { prontera: heroArt('hero-prontera.webp'), world: heroArt('hero-world.webp') };
 
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
@@ -85,7 +94,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: { level?: string; range?: string; c?: string };
+  searchParams: { level?: string; range?: string; c?: string; hero?: string };
 }) {
   // The farming finder still lives at "/" (spec 6.2: the link people share in
   // game chat keeps working, params and all). What changed is the default
@@ -117,17 +126,33 @@ export default async function HomePage({
           whitespace and the translation moat; the farm keyword is held by
           /guides/farm-guide. No hardcoded counts here — SiteStats below
           carries the live ones. */}
-      <h1 className="pagehead__title">ฐานข้อมูล Ragnarok Zero Global ภาษาไทย</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล — <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
-        เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
-      </p>
+      {/* Game art over the heading, so a first-time visitor sees at a glance
+          that this is a Ragnarok site (owner, 22 Sep 2026). Decoration only:
+          the heading stays the page's largest paint, the pictures weigh a few
+          kB, and they hold still for anyone who asks for less motion. */}
+      <section
+        className={`homehero homehero--${searchParams.hero === 'world' ? 'world' : 'prontera'}`}
+        style={{ '--hero-art': HERO_ART[searchParams.hero === 'world' ? 'world' : 'prontera'] } as React.CSSProperties}
+      >
+        <div className="homehero__art" aria-hidden="true">
+          <img className="homehero__poring" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />
+          <img className="homehero__walker homehero__walker--1" src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" fetchPriority="low" />
+          <img className="homehero__walker homehero__walker--2" src="/images/monsters/1007.gif" alt="" width={36} height={29} decoding="async" fetchPriority="low" />
+          <img className="homehero__walker homehero__walker--3" src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />
+        </div>
+        <h1 className="pagehead__title">ฐานข้อมูล Ragnarok Zero Global ภาษาไทย</h1>
+        <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
+          มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล — <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
+          เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
+        </p>
+      </section>
 
       <div className="qgrid">
         {/* Card one IS the tool, not a link to it: the embedded form submits
             to this same page, so the regular player still searches from "/"
             in one step, exactly like before the redesign. */}
-        <div className="qcard qcard--yellow">
+        <div className="qcard qcard--yellow qcard--art">
+          <img className="qcard__art" src="/images/items/1101.gif" alt="" width={24} height={24} loading="lazy" />
           <strong>เลเวลนี้ตีอะไรดี</strong>
           <span>จัดอันดับมอนคุ้มสุดในช่วงเลเวล พร้อมเตือนตัวที่โจมตีก่อน</span>
           <form className="qcard__form" action="/#results">
@@ -143,7 +168,8 @@ export default async function HomePage({
           </form>
         </div>
 
-        <div className="qcard qcard--cyan">
+        <div className="qcard qcard--cyan qcard--art">
+          <img className="qcard__art" src="/images/items/909.gif" alt="" width={24} height={24} loading="lazy" />
           <strong>อยากได้ของชิ้นนี้</strong>
           <span>พิมพ์ชื่อไอเทม ดูว่ามอนตัวไหนดรอป อัตราเท่าไร</span>
           <form className="qcard__form" action="/drop-finder">
@@ -159,7 +185,8 @@ export default async function HomePage({
             both are "look something up" tools (drop → monster, item → gear);
             card 4 gets its own colour (pink) because it's a different kind of
             action (leaving a bot unattended), not another lookup. */}
-        <Link href="/database/equipment" className="qcard qcard--cyan">
+        <Link href="/database/equipment" className="qcard qcard--cyan qcard--art">
+          <img className="qcard__art" src="/images/items/2302.gif" alt="" width={24} height={24} loading="lazy" />
           <strong>ของชิ้นนี้ดีไหม ใส่ได้ไหม</strong>
           {/* Counted, not written. This card claimed "กว่า 1,800 ชิ้น" while
               the page it links to lists 876 -- the stat row directly above it
@@ -168,7 +195,9 @@ export default async function HomePage({
           <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
         </Link>
 
-        <Link href="/tools/leveling-spots?mode=afk" className="qcard qcard--pink">
+        <Link href="/tools/leveling-spots?mode=afk" className="qcard qcard--pink qcard--art">
+          <img className="qcard__art qcard__art--sleep" src="/images/monsters/1002.gif" alt="" width={41} height={39} loading="lazy" />
+          <i className="qcard__zz" aria-hidden="true">z<b>z</b></i>
           <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
           <span>มอนที่คุณหลบได้ ตีโดน และฆ่าได้ในไม่กี่ที พร้อมเตือนสกิลอันตราย</span>
           <em className="qcard__go">หาจุด AFK →</em>

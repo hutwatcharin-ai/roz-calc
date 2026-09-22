@@ -13,6 +13,8 @@ export interface SiteStat {
   href: string;
   label: string;
   count: number | null;
+  /** A game icon beside the count (decorative). */
+  icon?: string;
 }
 
 // head: true asks PostgREST for the count header with no rows at all, so six
@@ -40,13 +42,13 @@ export async function getSiteStats(): Promise<SiteStat[]> {
   }
 
   return [
-    { href: '/database/monsters', label: 'มอนสเตอร์', count: monsters.count ?? null },
-    { href: '/database/items', label: 'ไอเทม', count: items.count ?? null },
-    { href: '/database/cards', label: 'การ์ด', count: cards.count ?? null },
-    { href: '/database/equipment', label: 'อุปกรณ์', count: equipment.count ?? null },
-    { href: '/database/costumes', label: 'คอสตูม', count: costumes.count ?? null },
-    { href: '/database/skills', label: 'สกิล', count: skills.count ?? null },
-    { href: '/database/maps', label: 'แมพ', count: maps.count ?? null },
+    { href: '/database/monsters', icon: '/images/monsters/1002.gif', label: 'มอนสเตอร์', count: monsters.count ?? null },
+    { href: '/database/items', icon: '/images/items/501.gif', label: 'ไอเทม', count: items.count ?? null },
+    { href: '/database/cards', icon: '/images/items/4001.gif', label: 'การ์ด', count: cards.count ?? null },
+    { href: '/database/equipment', icon: '/images/items/1101.gif', label: 'อุปกรณ์', count: equipment.count ?? null },
+    { href: '/database/costumes', icon: '/images/items/2220.gif', label: 'คอสตูม', count: costumes.count ?? null },
+    { href: '/database/skills', icon: '/images/items/717.gif', label: 'สกิล', count: skills.count ?? null },
+    { href: '/database/maps', icon: '/images/items/12212.gif', label: 'แมพ', count: maps.count ?? null },
   ];
 }
 
@@ -56,6 +58,7 @@ export default function SiteStats({ stats }: { stats: SiteStat[] }) {
       {stats.map((stat) => (
         <Link key={stat.href} href={stat.href} className="sitestats__item">
           <span className="sitestats__count mono">
+            {stat.icon && <img className="sitestats__icon" src={stat.icon} alt="" width={24} height={24} loading="lazy" />}
             {stat.count === null ? '—' : stat.count.toLocaleString()}
           </span>
           <span className="sitestats__label">{stat.label}</span>
