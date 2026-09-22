@@ -115,7 +115,12 @@ export function parseItemPage(html) {
 async function main() {
   const existing = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : [];
   const have = new Set(existing.map((i) => i.id));
-  const todo = SLUGS.filter((s) => !have.has(Number(s.match(/-(\d+)$/)?.[1])));
+  // --slugs <file.json> swaps in a fresh diff (a JSON array of sitemap slugs)
+  // instead of the 14 Sep list above. Slugs without a trailing id (the
+  // novice-* weapons) are always fetched; their id comes from the page.
+  const slugArg = process.argv.indexOf('--slugs');
+  const source = slugArg > 0 ? JSON.parse(fs.readFileSync(process.argv[slugArg + 1], 'utf8')) : SLUGS;
+  const todo = source.filter((s) => !have.has(Number(s.match(/-(\d+)$/)?.[1])));
   console.log(`${existing.length} already fetched, ${todo.length} to go`);
 
   let failed = 0;
