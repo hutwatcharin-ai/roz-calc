@@ -194,7 +194,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
             decoding="async"
           />
           <figcaption>
-            {picture.kind === 'full' ? 'แผนที่ · ที่มา prontera.info' : 'แผนที่ย่อ · ที่มา ratemyserver.net'}
+            {picture.credit === 'client' ? 'แผนที่ย่อ · จากไฟล์ของตัวเกม' : picture.kind === 'full' ? 'แผนที่ · ที่มา prontera.info' : 'แผนที่ย่อ · ที่มา ratemyserver.net'}
             {picture.fromCode && ` (ไฟล์ชื่อ ${picture.fromCode})`}
           </figcaption>
         </figure>

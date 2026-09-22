@@ -20,11 +20,13 @@ export type MapImage = {
    * 2026, "maps should have a picture like prontera's").
    */
   kind: 'full' | 'mini';
+  /** Who drew it: prontera.info's render, ratemyserver's minimap, or the game client's own minimap. */
+  credit: 'prontera' | 'ratemyserver' | 'client';
   width: number;
   height: number;
 };
 
-type FullIndex = Record<string, { prontera: string; name: string }>;
+type FullIndex = Record<string, { prontera: string; name: string; source?: 'client' }>;
 
 let cache: { codes: Set<string>; source: Record<string, string>; full: FullIndex } | null = null;
 
@@ -66,6 +68,7 @@ export function mapImage(code: string): MapImage | null {
       src: `/images/maps/full/${hit.prontera}.webp`,
       fromCode: hit.prontera === code ? null : hit.prontera,
       kind: 'full',
+      credit: hit.source === 'client' ? 'client' : 'prontera',
       // Renders are 512 px on the long side at most; the box is square so
       // the layout never shifts while the picture loads.
       width: 512,
@@ -73,7 +76,7 @@ export function mapImage(code: string): MapImage | null {
     };
   }
   if (!codes.has(code)) return null;
-  return { src: `/images/maps/${code}.gif`, fromCode: source[code] ?? null, kind: 'mini', width: 205, height: 205 };
+  return { src: `/images/maps/${code}.gif`, fromCode: source[code] ?? null, kind: 'mini', credit: 'ratemyserver', width: 205, height: 205 };
 }
 
 /** For tests and for reporting coverage without touching the filesystem twice. */
