@@ -4,6 +4,7 @@
 // landed on the generic item template, which leads with prices and slots and
 // buries the one line a card is read for. Split out 3 Sep 2026, the same day as
 // gear and costumes; lib/item-href.ts holds the rule all four routes key off.
+import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
@@ -95,7 +96,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
     : composeThaiDescription(item.description ?? '', dict)
         .map((l) => l.thai ?? l.source)
         .filter((l) => l !== '' && !BOILERPLATE.test(l));
-  const release = cardRelease(item.name_en);
+  const release = cardRelease(item.name_en, item.id);
   const rows = (droppedBy ?? []).filter((d: any) => d.monsters && !isCVariant(d.monsters.name_en));
   const source = rows[0] ?? null;
 
@@ -123,6 +124,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
       </nav>
       <RecordVisit kind="card" id={item.id} name={item.name_en} />
       <AbsentFromGameNote id={item.id} />
+      <ItemFormerNameLine id={item.id} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },

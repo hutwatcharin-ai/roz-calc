@@ -10,6 +10,7 @@
 // is the default, so an empty answer here means "nothing says otherwise",
 // never "confirmed available".
 
+import { itemFormerNames } from '@/lib/item-former-names';
 import file from '@/data/card-availability.json';
 
 export interface CardRelease {
@@ -41,8 +42,16 @@ const MONTH_TH: Record<string, string> = {
 
 /** Null when nothing says the card is unreleased. Accepts either "Alice" or
  *  "Alice Card", because callers hold both spellings. */
-export function cardRelease(name: string): CardRelease | null {
-  return cards[squash(name.replace(/card$/i, ''))] ?? null;
+export function cardRelease(name: string, id?: number): CardRelease | null {
+  const hit = cards[squash(name.replace(/card$/i, ''))];
+  if (hit || id === undefined) return hit ?? null;
+  // Items were renamed to the game's own names (22 Sep 2026) and this table
+  // was built against the old ones; a card's former name still finds it.
+  for (const former of itemFormerNames(id)) {
+    const old = cards[squash(former.replace(/card$/i, ''))];
+    if (old) return old;
+  }
+  return null;
 }
 
 /** "JAN 2027" as Thai, or a plain "ยังไม่มีกำหนด" when no source names a date. */

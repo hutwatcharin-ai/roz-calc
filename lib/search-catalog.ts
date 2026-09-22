@@ -10,6 +10,7 @@
 // only -- about 5,700 rows across five kinds, a few hundred kB, and it is
 // only ever fetched when a search returns nothing.
 
+import { itemFormerNames } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
@@ -77,7 +78,7 @@ export async function loadCatalog(): Promise<CatalogEntry[]> {
     // Not in the live client: reachable by URL, not offered in search.
     if (isAbsentFromGame(i.id)) continue;
     out.push({ kind: itemKind(i.category), name: i.name_en, href: itemHref(i.id, i.category) });
-    for (const alias of thaiAliasNames('items', i.id)) {
+    for (const alias of [...thaiAliasNames('items', i.id), ...itemFormerNames(i.id)]) {
       out.push({ kind: itemKind(i.category), name: alias, href: itemHref(i.id, i.category) });
     }
   }

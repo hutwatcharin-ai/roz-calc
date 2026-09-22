@@ -8,6 +8,7 @@
 // columns, two URLs competing for the same search, and two places to fix
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
+import { itemFormerNames } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
@@ -137,7 +138,7 @@ export default async function CardsPage({
       // Null for a card that is in the game. 42 of these rows are content
       // that has not opened on Global, and without this the page tells a
       // reader to go and farm something that drops nowhere.
-      release: cardRelease(c.name_en),
+      release: cardRelease(c.name_en, c.id),
     };
   });
   const unreleased = cards.filter((c) => c.release !== null).length;
@@ -163,7 +164,7 @@ export default async function CardsPage({
     // LUK", not for a card whose name they already know.
     // Name and effect text, Thai and English: the cards page is the one
     // people search by what the card DOES ("agi", "matk", "สัตว์").
-    return matches(`${c.name_en} ${c.effect ?? ''} ${c.effectEn ?? ''}`, needle);
+    return matches(`${c.name_en} ${itemFormerNames(c.id).join(' ')} ${c.effect ?? ''} ${c.effectEn ?? ''}`, needle);
   });
 
   if (sort === 'slot') {

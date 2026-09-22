@@ -13,6 +13,7 @@
 // Whether a rank is reachable is not an opinion either: it is the piece's own
 // required_level against the server's level cap.
 
+import { itemFormerNames } from '@/lib/item-former-names';
 import file from '@/data/memorial-gear.json';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
@@ -118,14 +119,18 @@ export async function loadMemorialGear(): Promise<{ ranks: GearRank[]; items: Ma
 
   const byName = new Map<string, GearPiece>();
   for (const row of data ?? []) {
-    byName.set(key(row.name_en), {
+    const piece = {
       id: row.id,
       name: row.name_en,
       icon: row.icon_url,
       effect: cleanEffect(row.description),
       level: row.required_level,
       slots: row.slots,
-    });
+    };
+    byName.set(key(row.name_en), piece);
+    // The gear file names pieces as this table did before the rename to the
+    // game's own names; the former name still finds the row.
+    for (const former of itemFormerNames(row.id)) if (!byName.has(key(former))) byName.set(key(former), piece);
   }
 
   const piece = (name: string): GearPiece =>

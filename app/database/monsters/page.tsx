@@ -141,11 +141,11 @@ export default async function MonsterListPage({
   if (searchParams.card === '1') {
     const { data: cardDrops } = await db
       .from('monster_drops')
-      .select('monster_id, items!inner(name_en, category)')
+      .select('monster_id, items!inner(id, name_en, category)')
       .eq('items.category', 'Card');
-    const rows = (cardDrops ?? []) as unknown as { monster_id: number; items: { name_en: string } | null }[];
+    const rows = (cardDrops ?? []) as unknown as { monster_id: number; items: { id: number; name_en: string } | null }[];
     cardMonsterIds = [
-      ...new Set(rows.filter((r) => r.items && cardRelease(r.items.name_en) === null).map((r) => r.monster_id)),
+      ...new Set(rows.filter((r) => r.items && cardRelease(r.items.name_en, r.items.id) === null).map((r) => r.monster_id)),
     ];
   }
 

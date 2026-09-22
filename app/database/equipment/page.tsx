@@ -1,4 +1,5 @@
 // app/database/equipment/page.tsx
+import { itemNamesOf } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
@@ -125,7 +126,8 @@ export default async function EquipmentPage({
     if (slotsParam !== '' && it.slots !== Number(slotsParam)) return false;
     if (mylv > 0 && it.required_level != null && it.required_level > mylv) return false;
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
-    if (needle && !matches(it.name_en, needle)) return false;
+    // Former names count: "Orc Trophy" still finds "Horro of Tribe".
+    if (needle && !itemNamesOf(it).some((n) => matches(n, needle))) return false;
     return true;
   });
 

@@ -8,6 +8,7 @@
 // Filters became chip rows on 11 Sep 2026 to match the cards and monsters
 // lists (owner's request): each row counted against the other filters already
 // on, a zero-count chip not drawn, and a chip that is on turns itself off.
+import { itemNamesOf } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
@@ -136,7 +137,8 @@ export default async function CostumesPage({
   const needle = q.trim().toLowerCase();
   const positionOf = (it: { weapon_type: string | null }) => it.weapon_type ?? NO_POSITION;
   const keepBound = (it: { name_en: string }) => showBound || !isBound(it.name_en);
-  const matchesQ = (it: { name_en: string }) => !needle || matches(it.name_en, needle);
+  // Former names count too (lib/item-former-names).
+  const matchesQ = (it: { id: number; name_en: string }) => !needle || itemNamesOf(it).some((n) => matches(n, needle));
   const matchesType = (it: { weapon_type: string | null }) => !type || positionOf(it) === type;
   const matchesSrc = (it: { id: number }) => !src || (sourcesKnown && hasSource(it.id, src));
 

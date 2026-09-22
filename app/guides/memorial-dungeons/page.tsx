@@ -11,6 +11,7 @@
 // and our monsters table holds none of them. Even Orc Skeleton, the one name
 // that matches, is a different creature in here: level 60 with 4,458 HP
 // against the level 53 and 3,376 HP of the one that walks around outside.
+import { itemNamesOf } from '@/lib/item-former-names';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -73,7 +74,7 @@ export default async function MemorialDungeonsPage() {
   const { data: itemRows } = await fetchAllRows<{ id: number; name_en: string; icon_url: string | null }>(
     (from, to) => supabaseBrowser().from('items').select('id, name_en, icon_url').order('id').range(from, to),
   );
-  const items = new Map((itemRows ?? []).map((i) => [i.name_en.toLowerCase(), i]));
+  const items = new Map((itemRows ?? []).flatMap((i) => itemNamesOf(i).map((n) => [n.toLowerCase(), i] as const)));
   const reward = (name: string) => items.get(name.toLowerCase()) ?? null;
   // Easiest first: it is the order a player meets them in.
   const ordered = [...dungeons].sort((a, b) => (a.level ?? 999) - (b.level ?? 999));

@@ -1,4 +1,5 @@
 // app/database/items/page.tsx
+import { itemFormerNameIdsFor } from '@/lib/item-former-names';
 import { absentIdsFilter } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
@@ -108,7 +109,8 @@ export default async function ItemListPage({
     // the whole difference (7 Sep 2026).
     // A Thai search cannot match an English column, so the Thai names
     // players use are resolved to ids first and OR-ed in (lib/thai-aliases).
-    const aliasIds = aliasIdsFor('items', q);
+    // Thai aliases and the names items carried before the rename to the game's own.
+    const aliasIds = [...new Set([...aliasIdsFor('items', q), ...itemFormerNameIdsFor(q)])];
     if (aliasIds.length > 0) {
       // lib/name-search, because both copies of this were written with a
       // URL-encoded wildcard and matched nothing by name at all.

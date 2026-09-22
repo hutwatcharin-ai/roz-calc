@@ -1,3 +1,4 @@
+import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { isCVariant } from '@/lib/c-variant';
@@ -180,6 +181,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       </nav>
       <RecordVisit kind="item" id={item.id} name={item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en} />
       <AbsentFromGameNote id={item.id} />
+      <ItemFormerNameLine id={item.id} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },

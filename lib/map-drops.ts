@@ -85,7 +85,7 @@ export function notableDrops(monsters: MapDropMonster[], drops: MapDropRow[]): N
     // Not in the live client, so not farmable here whatever the drop table says.
     if (isAbsentFromGame(item.id)) continue;
     // A card the game has not released yet cannot be farmed, whatever the table says.
-    if (isCard && cardRelease(item.name_en) !== null) continue;
+    if (isCard && cardRelease(item.name_en, item.id) !== null) continue;
 
     const candidate: NotableDrop = {
       itemId: item.id,

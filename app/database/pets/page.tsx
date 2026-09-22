@@ -21,6 +21,7 @@
 // in the enchantment window, and "level 2" is a second copy of the same egg at
 // 50% -- see lib/qpet-ring, written after this page shipped a sentence about
 // intimacy that nothing in the source supports.
+import { itemFormerNames, itemNamesOf } from '@/lib/item-former-names';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -67,14 +68,16 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
 
   const items = data ?? [];
   const eggs = items.filter((row) => row.name_en.endsWith(' Egg'));
-  const byName = new Map(items.map((row) => [row.name_en.toLowerCase(), row]));
+  const byName = new Map(items.flatMap((row) => itemNamesOf(row).map((n) => [n.toLowerCase(), row] as const)));
 
   const pets: PetRow[] = eggs.map((egg) => {
     // "Poring Egg" -> "Poring", which is how the guide names the pet.
     const name = egg.name_en.replace(/ Egg$/, '');
     // Not a plain name match: two eggs are filed under a name the guide does
     // not use, and qpetFor bridges them through facts already recorded.
-    const entry = qpetFor(name);
+    // Eggs were renamed to the game's own names; the guide may still use the
+    // name this table had before, so try that too.
+    const entry = qpetFor(name) ?? itemFormerNames(egg.id).map((n) => qpetFor(n.replace(/ Egg$/, ''))).find(Boolean);
     const taming = entry ? byName.get(entry.taming.toLowerCase()) : undefined;
     return {
       id: egg.id,
