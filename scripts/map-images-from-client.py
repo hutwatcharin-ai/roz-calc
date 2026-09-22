@@ -11,7 +11,7 @@ full/_index.json with source "client", so the page credits the right place.
 The client paints the area outside the map pure magenta; that becomes the
 site's dark map ground.
 
-Run: python scripts/map-images-from-client.py [path-to-grf-data]
+Run: python scripts/map-images-from-client.py [--towns prontera,geffen,...]
 """
 import json
 import os
@@ -22,7 +22,7 @@ import urllib.request
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = sys.argv[1] if len(sys.argv) > 1 else r'D:\data_grf_extracted\files\data'
+DATA = r'D:\data_grf_extracted\files\data'
 MINI = os.path.join(DATA, 'texture', '유저인터페이스', 'map')
 FULL = os.path.join(ROOT, 'public', 'images', 'maps', 'full')
 INDEX = os.path.join(FULL, '_index.json')
@@ -52,12 +52,29 @@ def base_map(code):
     return found[0].decode().lower() if found else None
 
 
+def client_map_names():
+    names = {}
+    with open(os.path.join(DATA, 'mapnametable_thth.txt'), 'rb') as f:
+        for line in f.read().decode('cp874', 'replace').splitlines():
+            parts = line.split('#')
+            if len(parts) >= 2 and parts[0].endswith('.rsw'):
+                names[parts[0][:-4].lower()] = parts[1].strip()
+    return names
+
+
 def main():
     minis = {f[:-4].lower(): f for f in os.listdir(MINI) if f.lower().endswith('.bmp')}
     index = json.load(open(INDEX, encoding='utf-8'))
     mini_gifs = {f[:-4] for f in os.listdir(os.path.join(ROOT, 'public', 'images', 'maps')) if f.endswith('.gif')}
     added, none = [], []
-    for code, name in sorted(site_map_codes().items()):
+    # --towns a,b,c: maps with no monsters (so not in map_stats) that the
+    # world map's grid view draws as cells of their own.
+    targets = site_map_codes()
+    if '--towns' in sys.argv:
+        names = client_map_names()
+        for code in sys.argv[sys.argv.index('--towns') + 1].split(','):
+            targets.setdefault(code, names.get(code, code))
+    for code, name in sorted(targets.items()):
         if code in index or code in mini_gifs:
             continue
         source = code.lower() if code.lower() in minis else base_map(code)

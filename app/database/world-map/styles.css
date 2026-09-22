@@ -116,3 +116,24 @@
   .worldmap__panel { max-height: min(72vh, 760px); }
 }
 .worldmap__badge--legend { position: static; display: inline-block; }
+
+/* Map-grid view (22 Sep 2026), after ratemyserver's world map: every map is
+   its own picture on a plain ground, towns labelled, dungeon floors in a
+   cluster with a grey line back to the way in. */
+.worldmap__stage.is-grid { background: #122640; border-radius: 6px; }
+.worldmap__gridlines { position: absolute; inset: 0; pointer-events: none; }
+.worldmap__gridlines line { stroke: rgba(200, 210, 230, .55); stroke-width: 4; stroke-linecap: round; }
+.worldmap__cell { position: absolute; z-index: 2; translate: -50% -50%; padding: 0; border: 2px solid rgba(255,255,255,.12); border-radius: 4px; background: #0b0820; overflow: visible; cursor: pointer; transition: box-shadow .15s, filter .15s, opacity .15s; }
+.worldmap__cell > img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 2px; pointer-events: none; }
+.worldmap__cell.is-town { border-color: var(--yellow); }
+.worldmap__cell.is-floor { border-color: rgba(255, 79, 163, .7); }
+.worldmap__cell:hover, .worldmap__cell:focus-visible, .worldmap__cell.is-selected { z-index: 8; outline: none; box-shadow: 0 0 0 3px #fff, 0 0 16px var(--cyan); }
+.worldmap__cell.is-dimmed { opacity: .15; }
+.worldmap__cell.is-match { z-index: 9; box-shadow: 0 0 0 3px var(--yellow), 0 0 18px var(--yellow); }
+.worldmap__cellname { display: flex; align-items: center; justify-content: center; height: 100%; padding: 2px; color: var(--dim); font-size: 8px; line-height: 1.1; text-align: center; }
+.worldmap__celltag { position: absolute; left: 50%; bottom: -3px; translate: -50% 100%; padding: 0 4px; border-radius: 3px; background: rgba(11,8,32,.9); color: var(--yellow); font: 700 8px/13px var(--font-sarabun), sans-serif; white-space: nowrap; pointer-events: none; z-index: 3; }
+.worldmap__views { display: inline-flex; border: 1px solid var(--hair); border-radius: 8px; overflow: hidden; }
+.worldmap__views button { min-height: 36px; padding: 0 12px; border: 0; background: transparent; color: var(--dim); font: 600 13px/1 var(--font-sarabun), sans-serif; cursor: pointer; }
+.worldmap__views button[aria-pressed="true"] { background: var(--yellow); color: var(--yellow-ink); }
+.worldmap__pick select { min-height: 36px; max-width: 200px; }
+@media (prefers-reduced-motion: reduce) { .worldmap__cell { transition: none; } }

@@ -6,19 +6,37 @@ import type { WorldMapEntry, WorldMapRegion } from '@/lib/world-map';
 import { regionBounds, searchWorldMap } from '@/lib/world-map';
 import { clampViewport, focusRegion, resetViewport, zoomAt, type ViewportState } from '@/lib/map-viewport';
 
+export interface WorldGridView {
+  /** Fields, towns and dungeon floors, positioned in grid pixels. */
+  entries: WorldMapEntry[];
+  /** Way in -> first floor, in grid pixels. */
+  lines: { x1: number; y1: number; x2: number; y2: number }[];
+  width: number;
+  height: number;
+}
+
 interface Props {
   tiles: WorldMapEntry[];
   dungeons: WorldMapEntry[];
   regions: WorldMapRegion[];
   totalMaps: number;
+  /** The map-grid view (every map its own picture); opens first when given. */
+  grid?: WorldGridView;
 }
+
+type Mode = 'grid' | 'atlas';
 
 function levelText(entry: WorldMapEntry) {
   if (entry.minLevel == null || entry.maxLevel == null) return '—';
   return entry.minLevel === entry.maxLevel ? `Lv.${entry.minLevel}` : `Lv.${entry.minLevel}–${entry.maxLevel}`;
 }
 
-export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props) {
+export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMaps, grid }: Props) {
+  // Two views of one world (owner's pick, 22 Sep 2026): the grid of map
+  // pictures opens first, the painted atlas stays one tap away.
+  const [mode, setMode] = useState<Mode>(grid ? 'grid' : 'atlas');
+  const tiles = mode === 'grid' && grid ? grid.entries : atlasTiles;
+  const content = useMemo(() => (mode === 'grid' && grid ? { w: grid.width, h: grid.height } : { w: 1280, h: 1024 }), [mode, grid]);
   const viewportRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ id: number; x: number; y: number; originX: number; originY: number } | null>(null);
   const [view, setView] = useState<ViewportState>({ scale: 0.5, x: 0, y: 0 });
@@ -51,8 +69,8 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
 
   const reset = useCallback(() => {
     const { width, height } = dimensions();
-    setView(resetViewport(width, height));
-  }, [dimensions]);
+    setView(resetViewport(width, height, content));
+  }, [dimensions, content]);
 
   useEffect(() => {
     reset();
@@ -63,11 +81,9 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
 
   const focusEntry = useCallback((entry: WorldMapEntry) => {
     const { width, height } = dimensions();
-    const area = entry.kind === 'tile'
-      ? { x: entry.x - entry.width / 2, y: entry.y - entry.height / 2, width: entry.width, height: entry.height }
-      : { x: entry.x - 30, y: entry.y - 20, width: 60, height: 40 };
-    setView((current) => focusRegion(current, area, width, height));
-  }, [dimensions]);
+    const area = { x: entry.x - entry.width / 2, y: entry.y - entry.height / 2, width: entry.width, height: entry.height };
+    setView((current) => focusRegion(current, area, width, height, content));
+  }, [dimensions, content]);
 
   const selectEntry = useCallback((entry: WorldMapEntry | null, push = true) => {
     setSelectedKey(entry?.key ?? null);
@@ -84,7 +100,7 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
     const { width, height } = dimensions();
     setSelectedKey(null);
     setHoveredKey(null);
-    setView((current) => focusRegion(current, bounds, width, height));
+    setView((current) => focusRegion(current, bounds, width, height, content));
     if (push) {
       const url = new URL(window.location.href);
       url.searchParams.delete('map');
@@ -92,7 +108,7 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
       window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
     }
     viewportRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, [dimensions, tiles]);
+  }, [dimensions, tiles, content]);
 
   useEffect(() => {
     const syncFromUrl = () => {
@@ -113,6 +129,27 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
     return () => window.removeEventListener('popstate', syncFromUrl);
   }, [entries, focusEntry, jumpToRegion]);
 
+  // Every dungeon once, for the "dungeon entrance" picker (ratemyserver's
+  // first dropdown): in the grid it jumps to the floors, in the atlas to the
+  // field it opens from.
+  const dungeonChoices = useMemo(() => {
+    const seen = new Map<string, { key: string; name: string; target: WorldMapEntry }>();
+    for (const entry of tiles) {
+      if (mode === 'grid' && entry.kind === 'dungeon' && entry.dungeonKey && !seen.has(entry.dungeonKey)) {
+        seen.set(entry.dungeonKey, { key: entry.dungeonKey, name: entry.dungeonName ?? entry.nameEn, target: entry });
+      }
+      if (mode === 'atlas') for (const d of entry.dungeons ?? []) if (!seen.has(d.key)) seen.set(d.key, { key: d.key, name: d.name, target: entry });
+    }
+    return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+  }, [tiles, mode]);
+
+  function onPickDungeon(key: string) {
+    const choice = dungeonChoices.find((d) => d.key === key);
+    if (!choice) return;
+    selectEntry(choice.target);
+    focusEntry(choice.target);
+  }
+
   function onSearch(value: string) {
     setQuery(value);
     const ids = searchWorldMap(entries, value);
@@ -131,12 +168,12 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
     const drag = dragRef.current;
     if (!drag || drag.id !== event.pointerId) return;
     const { width, height } = dimensions();
-    setView(clampViewport({ ...view, x: drag.originX + event.clientX - drag.x, y: drag.originY + event.clientY - drag.y }, width, height));
+    setView(clampViewport({ ...view, x: drag.originX + event.clientX - drag.x, y: drag.originY + event.clientY - drag.y }, width, height, undefined, content));
   }
 
   function changeZoom(factor: number) {
     const { width, height } = dimensions();
-    setView((current) => zoomAt(current, current.scale * factor, width / 2, height / 2, width, height));
+    setView((current) => zoomAt(current, current.scale * factor, width / 2, height / 2, width, height, content));
   }
 
   function renderTooltip(entry: WorldMapEntry) {
@@ -194,6 +231,19 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
     <section className="worldmap" aria-label="Interactive Ragnarok Zero world map">
       <div className="worldmap__toolbar">
         <label className="worldmap__search"><span className="sr-only">ค้นหาในแผนที่</span><input type="search" value={query} onChange={(event) => onSearch(event.target.value)} placeholder="Search map ID, English name or monster..." /></label>
+        {grid && (
+          <div className="worldmap__views" role="group" aria-label="มุมมอง">
+            <button type="button" aria-pressed={mode === 'grid'} onClick={() => { setMode('grid'); setSelectedKey(null); }}>ตารางแมพ</button>
+            <button type="button" aria-pressed={mode === 'atlas'} onClick={() => { setMode('atlas'); setSelectedKey(null); }}>ภาพโลก</button>
+          </div>
+        )}
+        <label className="worldmap__pick">
+          <span className="sr-only">ไปที่ดันเจี้ยน</span>
+          <select value="" onChange={(event) => onPickDungeon(event.target.value)}>
+            <option value="">ไปที่ดันเจี้ยน…</option>
+            {dungeonChoices.map((d) => <option key={d.key} value={d.key}>{d.name}</option>)}
+          </select>
+        </label>
         <span className="worldmap__match" aria-live="polite">{query ? `${matches.size} matches` : `${tiles.length} plotted · ${Math.max(0, totalMaps - tiles.length)} in full database`}</span>
       </div>
 
@@ -211,26 +261,50 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
           onPointerMove={pointerMove}
           onPointerUp={() => { dragRef.current = null; }}
           onPointerCancel={() => { dragRef.current = null; }}
-          onWheel={(event) => { event.preventDefault(); const rect = event.currentTarget.getBoundingClientRect(); setView((current) => zoomAt(current, current.scale * (event.deltaY < 0 ? 1.18 : 0.85), event.clientX - rect.left, event.clientY - rect.top, rect.width, rect.height)); }}
+          onWheel={(event) => { event.preventDefault(); const rect = event.currentTarget.getBoundingClientRect(); setView((current) => zoomAt(current, current.scale * (event.deltaY < 0 ? 1.18 : 0.85), event.clientX - rect.left, event.clientY - rect.top, rect.width, rect.height, content)); }}
           onClick={(event) => { if (!(event.target as HTMLElement).closest('button, a')) selectEntry(null); }}
         >
-          <div className="worldmap__stage" style={{ transform: `translate3d(${view.x}px, ${view.y}px, 0) scale(${view.scale})` }}>
-            <img src="/images/maps/worldmap.jpg" width="1280" height="1024" alt="Orbis of Midgard world map" draggable={false} />
-            {regions.map((region) => <span key={region.id} className="worldmap__region-label" style={{ left: region.x, top: region.y, color: region.color }}>{region.label}</span>)}
-            {tiles.map((entry) => {
+          <div className={`worldmap__stage${mode === 'grid' ? ' is-grid' : ''}`} style={{ width: content.w, height: content.h, transform: `translate3d(${view.x}px, ${view.y}px, 0) scale(${view.scale})` }}>
+            {mode === 'atlas' && <img src="/images/maps/worldmap.jpg" width="1280" height="1024" alt="Orbis of Midgard world map" draggable={false} />}
+            {mode === 'atlas' && regions.map((region) => <span key={region.id} className="worldmap__region-label" style={{ left: region.x, top: region.y, color: region.color }}>{region.label}</span>)}
+            {mode === 'grid' && grid && (
+              <svg className="worldmap__gridlines" width={grid.width} height={grid.height} aria-hidden="true">
+                {grid.lines.map((l, i) => <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} />)}
+              </svg>
+            )}
+            {mode === 'grid' && tiles.map((entry) => (
+              <button
+                key={entry.key}
+                type="button"
+                className={`worldmap__cell is-${entry.cellKind ?? 'field'}${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`}
+                style={{ left: entry.x, top: entry.y, width: entry.width, height: entry.height }}
+                aria-label={`${entry.nameEn}, ${entry.mapCode}${entry.monsters.length ? `, ${entry.monsters.length} monsters` : ''}`}
+                aria-pressed={selectedKey === entry.key}
+                onPointerEnter={() => setHoveredKey(entry.key)}
+                onPointerLeave={() => setHoveredKey((k) => (k === entry.key ? null : k))}
+                onFocus={() => setHoveredKey(entry.key)}
+                onBlur={() => setHoveredKey((k) => (k === entry.key ? null : k))}
+                onClick={(event) => { event.stopPropagation(); selectEntry(entry); }}
+              >
+                {entry.image ? <img src={entry.image} alt="" loading="lazy" decoding="async" draggable={false} /> : <span className="worldmap__cellname">{entry.nameEn}</span>}
+                {entry.cellKind === 'town' && <span className="worldmap__celltag">{entry.nameEn}</span>}
+                {entry.dungeons?.length ? <span className="worldmap__badge" aria-hidden="true">{entry.dungeons.length}</span> : null}
+              </button>
+            ))}
+            {mode === 'atlas' && tiles.map((entry) => {
               const color = regions.find((region) => region.id === entry.regionId)?.color ?? '#3DE8FF';
               return <button key={entry.key} type="button" className={`worldmap__tile${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`} style={{ left: entry.x, top: entry.y, width: entry.width, height: entry.height, '--region': color } as React.CSSProperties} aria-label={`${entry.nameEn}, ${entry.mapCode}, ${entry.monsters.length} monsters${entry.dungeons?.length ? `, ทางเข้าดันเจี้ยน ${entry.dungeons.length} แห่ง` : ''}`} aria-pressed={selectedKey === entry.key} onPointerEnter={() => setHoveredKey(entry.key)} onPointerLeave={() => setHoveredKey((key) => key === entry.key ? null : key)} onFocus={() => setHoveredKey(entry.key)} onBlur={() => setHoveredKey((key) => key === entry.key ? null : key)} onClick={(event) => { event.stopPropagation(); selectEntry(entry); }}>{entry.dungeons?.length ? <span className="worldmap__badge" aria-hidden="true">{entry.dungeons.length}</span> : null}</button>;
             })}
-            {active && renderTooltip(active)}
+            {active && tiles.includes(active) && renderTooltip(active)}
           </div>
           <div className="worldmap__controls" aria-label="ควบคุมการซูม"><button type="button" onClick={() => changeZoom(1.25)} aria-label="ซูมเข้า">+</button><button type="button" onClick={() => changeZoom(0.8)} aria-label="ซูมออก">−</button><button type="button" onClick={reset}>RESET</button></div>
-          <p className="worldmap__hint">Hover a tile to preview monsters · click for details</p>
+          <p className="worldmap__hint">{mode === 'grid' ? 'ชี้รูปแมพเพื่อดูมอน · กดเพื่อดูรายละเอียด · เส้นเทาคือทางเข้าดันเจี้ยน' : 'Hover a tile to preview monsters · click for details'}</p>
         </div>
 
         <aside className={`worldmap__panel${selected ? ' is-open' : ''}`} aria-live="polite">
           {selected ? <>
             <button className="worldmap__close" type="button" onClick={() => selectEntry(null)} aria-label="ปิดรายละเอียด">×</button>
-            <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? 'DUNGEON' : regions.find((region) => region.id === selected.regionId)?.label}</span>
+            <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? `DUNGEON${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : selected.cellKind === 'town' ? 'TOWN' : regions.find((region) => region.id === selected.regionId)?.label}</span>
             <h2>{selected.nameEn}</h2><p className="mono worldmap__code">{selected.mapCode}</p>
             {/* Touch has no hover, so the panel carries the same picture. */}
             {selected.image && <img key={selected.image} className="worldmap__panel-pic" src={selected.image} alt={`แผนที่ ${selected.nameEn}`} width="240" height="240" decoding="async" />}

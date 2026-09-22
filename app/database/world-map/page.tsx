@@ -19,6 +19,17 @@ import { mapRelease } from '@/lib/map-availability';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { dungeonName, dungeonsByTile, type MapLinksFile } from '@/lib/world-dungeons';
 import mapLinks from '@/data/map-links.json';
+import layout from '@/data/world-map-layout.json';
+import mapPictures from '@/public/images/maps/full/_index.json';
+import { layoutGrid } from '@/lib/world-grid';
+import type { WorldGridView } from '@/components/WorldMap';
+
+// Towns drawn as cells in the grid view: every place players walk out of onto
+// an atlas field that has a picture in the client. Guild castles and indoor
+// rooms are left out; dungeons get their own clusters.
+const GRID_TOWNS = ['prontera', 'geffen', 'payon', 'morocc', 'alberta', 'izlude', 'aldebaran', 'umbala', 'xmas', 'prt_monk'];
+const CELL = 64;
+const PITCH = 70;
 
 export const revalidate = 86400;
 
@@ -93,6 +104,65 @@ export default async function WorldMapPage() {
     })).filter((dungeon) => dungeon.floors.length > 0),
   });
   const tiles = built.tiles.map(withExtras);
+
+  // The grid view: the same fields, plus towns and every dungeon floor, each
+  // map in a cell of its own (lib/world-grid).
+  const links = (mapLinks as unknown as MapLinksFile).links;
+  const fieldCodes = new Set(tiles.map((t) => t.mapCode));
+  const towns = GRID_TOWNS.map((code) => ({
+    code,
+    fields: [...new Set(links.filter(([from, , , to, kind]) => from === code && kind === 200 && fieldCodes.has(to)).map((l) => l[3]))],
+  })).filter((t) => t.fields.length > 0);
+  const gridDungeons = new Map<string, { key: string; entranceMap: string; fallbackTile: string; floors: string[] }>();
+  for (const tile of tiles) {
+    for (const d of tile.dungeons ?? []) {
+      if (!gridDungeons.has(d.key)) gridDungeons.set(d.key, { key: d.key, entranceMap: d.entrance.map, fallbackTile: tile.mapCode, floors: d.floors.map((f) => f.code) });
+    }
+  }
+  const rawTiles = (layout as { tiles: Record<string, { x: number; y: number }> }).tiles;
+  const laid = layoutGrid({
+    tiles: tiles.map((t) => ({ code: t.mapCode, x: rawTiles[t.mapCode]?.x ?? t.x, y: rawTiles[t.mapCode]?.y ?? t.y })),
+    towns,
+    dungeons: [...gridDungeons.values()],
+  });
+  const centre = (col: number, row: number) => ({ x: col * PITCH + PITCH / 2, y: row * PITCH + PITCH / 2 });
+  const tileByCode = new Map(tiles.map((t) => [t.mapCode, t]));
+  const regionOf = new Map(tiles.map((t) => [t.mapCode, t.regionId]));
+  const pictures = mapPictures as Record<string, { name?: string }>;
+  const gridEntries: WorldMapEntry[] = laid.cells.map((cell) => {
+    const at = centre(cell.col, cell.row);
+    const box = { x: at.x, y: at.y, width: CELL, height: CELL, cellKind: cell.kind };
+    if (cell.kind === 'field') {
+      const tile = tileByCode.get(cell.code)!;
+      return { ...tile, ...box };
+    }
+    if (cell.kind === 'town') {
+      const town = towns.find((t) => t.code === cell.code)!;
+      return {
+        key: `town:${cell.code}`, mapCode: cell.code, mapCodes: [cell.code], nameEn: pictures[cell.code]?.name ?? cell.code,
+        regionId: regionOf.get(town.fields[0]) ?? '', kind: 'tile' as const, ...box,
+        monsters: [], minLevel: null, maxLevel: null, aggressiveCount: 0, image: mapImage(cell.code)?.src ?? null,
+      };
+    }
+    const dungeon = gridDungeons.get(cell.dungeon!)!;
+    const monsters = monstersFor([cell.code], rows);
+    return {
+      key: `floor:${cell.code}`, mapCode: cell.code, mapCodes: [cell.code], nameEn: mapNames.get(cell.code) ?? cell.code,
+      regionId: regionOf.get(dungeon.fallbackTile) ?? '', kind: 'dungeon' as const, ...box,
+      ...stats(monsters), image: mapImage(cell.code)?.src ?? null,
+      dungeonKey: dungeon.key, dungeonName: dungeonName(mapNames.get(dungeon.key) ?? dungeon.key),
+    };
+  });
+  const gridView: WorldGridView = {
+    entries: gridEntries,
+    lines: laid.lines.map((l) => {
+      const a = centre(l.from.col, l.from.row);
+      const b = centre(l.to.col, l.to.row);
+      return { x1: a.x, y1: a.y, x2: b.x, y2: b.y };
+    }),
+    width: laid.cols * PITCH,
+    height: laid.rows * PITCH,
+  };
   const dungeonCount = new Set([...byTile.values()].flat().map((d) => d.key)).size;
 
   return (
@@ -102,7 +172,7 @@ export default async function WorldMapPage() {
       </nav>
       <PageHeader title="แผนที่โลก Ragnarok Zero — Interactive World Map" lead="ชี้แต่ละช่องเพื่อดูมอนสเตอร์ทันที ช่องที่มีเลขสีเหลืองที่มุม คือมีทางเข้าดันเจี้ยน กดเพื่อดูทุกชั้น" />
       {(error || mapsError) && <p className="worldmap-page__warning">โหลดสถิติบางส่วนไม่สำเร็จชั่วคราว แต่ยังค้นหาและเปิดแผนที่ได้</p>}
-      <WorldMap tiles={tiles} dungeons={[]} regions={WORLD_MAP_REGIONS} totalMaps={mapNames.size || 497} />
+      <WorldMap tiles={tiles} dungeons={[]} regions={WORLD_MAP_REGIONS} totalMaps={mapNames.size || 497} grid={gridView} />
       <p className="worldmap-page__foot">World atlas แสดง {tiles.length} ช่องแมพ และดันเจี้ยน {dungeonCount} แห่งจากตารางวาร์ปของตัวเกม ส่วนรายการฐานข้อมูลครบทั้งหมดอยู่ที่ <Link href="/database/maps">ฐานข้อมูลแมพ →</Link></p>
 
       {/* Every tile and every dungeon floor, as plain links: the atlas only
