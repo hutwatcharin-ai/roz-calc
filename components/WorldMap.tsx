@@ -239,7 +239,7 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
         <div className="worldmap__tooltip-icons">
           {icons.map((monster) => <img key={monster.id} src={monster.imageUrl ?? ''} alt={monster.nameEn} title={`${monster.nameEn} · Lv.${monster.level}`} width="28" height="28" loading="lazy" />)}
           {remaining > 0 && <span>+{remaining}</span>}
-          {!entry.monsters.length && <em>{entry.cellKind === 'town' ? 'เมือง · ชี้เพื่อดูทางเข้าดันเจี้ยน' : entry.cellKind === 'passage' ? `ทางผ่านไป ${entry.dungeonName ?? 'ดันเจี้ยน'}` : 'No monsters recorded'}</em>}
+          {!entry.monsters.length && <em>{entry.note ?? (entry.cellKind === 'town' ? 'เมือง · ชี้เพื่อดูทางเข้าดันเจี้ยน' : entry.cellKind === 'passage' ? `ทางผ่านไป ${entry.dungeonName ?? 'ดันเจี้ยน'}` : 'No monsters recorded')}</em>}
         </div>
         {entry.monsters.length > 0 && <small>{levelText(entry)} · {entry.monsters.length} monsters{entry.aggressiveCount ? ` · ⚠ ${entry.aggressiveCount} aggressive` : ''}</small>}
         {entry.dungeons?.length ? <small className="worldmap__tooltip-dungeons">ดันเจี้ยน: {entry.dungeons.map((d) => `${d.name} (${d.floors.length} ชั้น)`).join(' · ')}</small> : null}
@@ -335,6 +335,7 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
             <button className="worldmap__close" type="button" onClick={() => selectEntry(null)} aria-label="ปิดรายละเอียด">×</button>
             <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? `DUNGEON${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : selected.cellKind === 'town' ? 'TOWN' : selected.cellKind === 'passage' ? `ทางผ่าน${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : regions.find((region) => region.id === selected.regionId)?.label}</span>
             <h2>{selected.nameEn}</h2><p className="mono worldmap__code">{selected.mapCode}</p>
+            {selected.note && <p className="worldmap__note">{selected.note}</p>}
             {/* Touch has no hover, so the panel carries the same picture. */}
             {selected.image && <img key={selected.image} className="worldmap__panel-pic" src={selected.image} alt={`แผนที่ ${selected.nameEn}`} width="240" height="240" decoding="async" />}
             <dl className="worldmap__stats"><div><dt>Map IDs</dt><dd>{selected.mapCodes.length}</dd></div><div><dt>Monster level</dt><dd>{levelText(selected)}</dd></div><div><dt>Monsters</dt><dd>{selected.monsters.length || '—'}</dd></div><div><dt>Aggressive</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount}` : '—'}</dd></div></dl>

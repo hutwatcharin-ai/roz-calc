@@ -48,4 +48,15 @@ describe('layoutGrid', () => {
     const codes = line.points.map((p) => all.find((c) => c.col === p.col && c.row === p.row)?.code);
     expect(codes).toEqual(['town', 'lobby', 'd1']);
   });
+
+  it('puts a town reached by warp NPC near the town it is reached from, with a path', () => {
+    const { cells: all, lines } = layoutGrid({ ...input, outposts: [{ code: 'far', from: 'town' }] });
+    const far = all.find((c) => c.code === 'far')!;
+    const town = all.find((c) => c.code === 'town')!;
+    expect(far.kind).toBe('town');
+    expect(Math.max(Math.abs(far.col - town.col), Math.abs(far.row - town.row))).toBeLessThanOrEqual(3);
+    const line = lines.find((l) => l.dungeon === 'far')!;
+    expect(line.anchor).toBe('town');
+    expect(line.points).toEqual([{ col: town.col, row: town.row }, { col: far.col, row: far.row }]);
+  });
 });

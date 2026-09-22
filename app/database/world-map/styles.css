@@ -55,6 +55,7 @@
 .worldmap__eyebrow { color: var(--cyan); font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; }
 .worldmap__panel h2 { margin-top: 7px; padding-right: 28px; font: 700 25px/1.2 "Chakra Petch", sans-serif; }
 .worldmap__code { margin-top: 4px; color: var(--faint); font-size: 12px; }
+.worldmap__note { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--dim); }
 .worldmap__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 18px 0; background: var(--hair); }
 .worldmap__stats div { padding: 10px; background: var(--panel-2); }
 .worldmap__stats dt { color: var(--faint); font-size: 11px; }

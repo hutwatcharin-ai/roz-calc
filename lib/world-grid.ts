@@ -32,6 +32,9 @@ export interface GridInput {
   towns: { code: string; fields: string[] }[];
   /** Each dungeon once: where its way in is, and its floors in order. */
   dungeons: { key: string; entranceMap: string; fallbackTile: string; floors: string[]; via?: string[] }[];
+  /** Towns with no field of their own, reached by a warp NPC in another
+   *  town (Nordfeld, from Alberta): a cell near that town, and a path to it. */
+  outposts?: { code: string; from: string }[];
 }
 
 const STEP_X = 58.5;
@@ -116,6 +119,14 @@ export function layoutGrid(input: GridInput): { cells: GridCell[]; lines: GridLi
   // chained through free cells steered away from the fields. Each dungeon
   // keeps its whole way in as one path, anchor to first floor.
   const lines: GridLine[] = [];
+  for (const outpost of input.outposts ?? []) {
+    const from = where.get(outpost.from);
+    if (!from || where.has(outpost.code)) continue;
+    const spot = nearestFree(from.col, from.row, [], true);
+    place({ code: outpost.code, kind: 'town', ...spot });
+    where.set(outpost.code, spot);
+    lines.push({ dungeon: outpost.code, anchor: outpost.from, points: [from, spot] });
+  }
   for (const dungeon of input.dungeons) {
     const anchorCode = where.has(dungeon.entranceMap) ? dungeon.entranceMap
       : dungeon.via?.find((code) => where.has(code) && taken.get(key(where.get(code)!.col, where.get(code)!.row))?.kind === 'town')

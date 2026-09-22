@@ -33,6 +33,8 @@ export interface WorldMapEntry {
   cellKind?: 'field' | 'town' | 'floor' | 'passage';
   dungeonKey?: string;
   dungeonName?: string;
+  /** Grid view: how to get there, when the warp table cannot say (Nordfeld). */
+  note?: string;
 }
 
 export interface WorldDungeonFloor {

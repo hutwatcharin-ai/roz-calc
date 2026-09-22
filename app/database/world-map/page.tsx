@@ -27,7 +27,21 @@ import type { WorldGridView } from '@/components/WorldMap';
 // Towns drawn as cells in the grid view: every place players walk out of onto
 // an atlas field that has a picture in the client. Guild castles and indoor
 // rooms are left out; dungeons get their own clusters.
-const GRID_TOWNS = ['prontera', 'geffen', 'payon', 'morocc', 'alberta', 'izlude', 'aldebaran', 'umbala', 'xmas', 'prt_monk'];
+const GRID_TOWNS = ['prontera', 'geffen', 'payon', 'morocc', 'alberta', 'izlude', 'aldebaran', 'umbala', 'xmas', 'prt_monk', 'comodo'];
+// Comodo has no portal onto a field in the warp table: players come in through
+// the caves from Comodo Field (owner, 22 Sep 2026: the town was missing).
+const TOWN_FIELDS_BY_HAND: Record<string, string[]> = { comodo: ['cmd_fild01', 'cmd_fild02'] };
+// Ways in the owner corrected by hand (22 Sep 2026), map by map from where the
+// path starts: the warp table's shortest walk reached these from the wrong side.
+const WAY_IN_BY_HAND: Record<string, string[]> = {
+  prt_ca01: ['prt_fild05', 'prt_cas'],
+  pay_dun00: ['payon', 'pay_arche'],
+};
+// Towns off the world map, reached only by a warp NPC in another town.
+// Nordfeld: a quest from the NPC in north Prontera sends you to one in Alberta,
+// who takes you there; its fields are not in the client files we hold
+// (youtube.com/watch?v=QIPSG6aKCDI, 4:00-4:48).
+const OUTPOSTS = [{ code: 'nordfeld', from: 'alberta', name: 'Nordfeld', note: 'เมืองนอกแผนที่ · ไปได้จาก NPC ในเมือง Alberta (รับเควสจาก NPC ทางเหนือของ Prontera ก่อน) · ไม่มีวาร์ปไปแมพอื่น' }];
 const CELL = 64;
 const PITCH = 70;
 
@@ -114,7 +128,8 @@ export default async function WorldMapPage() {
   const fieldCodes = new Set(tiles.map((t) => t.mapCode));
   const towns = GRID_TOWNS.map((code) => ({
     code,
-    fields: [...new Set(links.filter(([from, , , to, kind]) => from === code && kind === 200 && fieldCodes.has(to)).map((l) => l[3]))],
+    fields: TOWN_FIELDS_BY_HAND[code]?.filter((f) => fieldCodes.has(f))
+      ?? [...new Set(links.filter(([from, , , to, kind]) => from === code && kind === 200 && fieldCodes.has(to)).map((l) => l[3]))],
   })).filter((t) => t.fields.length > 0);
   const gridDungeons = new Map<string, { key: string; entranceMap: string; fallbackTile: string; floors: string[]; via: string[] }>();
   for (const tile of tiles) {
@@ -122,11 +137,18 @@ export default async function WorldMapPage() {
       if (!gridDungeons.has(d.key)) gridDungeons.set(d.key, { key: d.key, entranceMap: d.entrance.map, fallbackTile: tile.mapCode, floors: d.floors.map((f) => f.code), via: viaOf.get(`${tile.mapCode}|${d.key}`) ?? [] });
     }
   }
+  for (const [key, path] of Object.entries(WAY_IN_BY_HAND)) {
+    const dungeon = gridDungeons.get(key);
+    if (!dungeon) continue;
+    // The path's first map is the anchor (a field, or a town cell), the rest passages.
+    Object.assign(dungeon, { entranceMap: path[path.length - 1], fallbackTile: fieldCodes.has(path[0]) ? path[0] : dungeon.fallbackTile, via: path });
+  }
   const rawTiles = (layout as { tiles: Record<string, { x: number; y: number }> }).tiles;
   const laid = layoutGrid({
     tiles: tiles.map((t) => ({ code: t.mapCode, x: rawTiles[t.mapCode]?.x ?? t.x, y: rawTiles[t.mapCode]?.y ?? t.y })),
     towns,
     dungeons: [...gridDungeons.values()],
+    outposts: OUTPOSTS,
   });
   const centre = (col: number, row: number) => ({ x: col * PITCH + PITCH / 2, y: row * PITCH + PITCH / 2 });
   const tileByCode = new Map(tiles.map((t) => [t.mapCode, t]));
@@ -138,6 +160,16 @@ export default async function WorldMapPage() {
     if (cell.kind === 'field') {
       const tile = tileByCode.get(cell.code)!;
       return { ...tile, ...box };
+    }
+    const outpost = OUTPOSTS.find((o) => o.code === cell.code);
+    if (outpost) {
+      const from = towns.find((t) => t.code === outpost.from);
+      return {
+        key: `town:${cell.code}`, mapCode: cell.code, mapCodes: [cell.code], nameEn: outpost.name,
+        regionId: regionOf.get(from?.fields[0] ?? '') ?? '', kind: 'tile' as const, ...box,
+        monsters: [], minLevel: null, maxLevel: null, aggressiveCount: 0, image: mapImage(cell.code)?.src ?? null,
+        dungeonKey: cell.code, note: outpost.note,
+      };
     }
     if (cell.kind === 'town') {
       const town = towns.find((t) => t.code === cell.code)!;
@@ -168,7 +200,7 @@ export default async function WorldMapPage() {
   const gridView: WorldGridView = {
     entries: gridEntries,
     lines: laid.lines.map((l) => ({ dungeon: l.dungeon, anchor: l.anchor, points: l.points.map((p) => centre(p.col, p.row)) })),
-    labels: laid.lines.map((l) => {
+    labels: laid.lines.filter((l) => gridDungeons.has(l.dungeon)).map((l) => {
       const first = l.points[l.points.length - 1];
       const at = centre(first.col, first.row);
       const d = gridDungeons.get(l.dungeon)!;
