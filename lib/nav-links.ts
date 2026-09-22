@@ -19,7 +19,16 @@ export interface NavLink {
   // href to a page that 404s. A Wave 2 task flips this to true the day the
   // route ships, one flag per page (spec 6.1 fix, whole-branch review #1).
   ready: boolean;
+  // Which heading the link sits under. Only the guides row uses it: 17 guides
+  // in one run of buttons was something to scan, not choose from.
+  group?: string;
 }
+
+// Grouped by what the player is doing, then ordered inside each group by
+// GA4 page views over the 30 days to 22 Sep 2026 (owner's pick). The codes
+// page ranked 4th of 16 by views, so it leads with the starting-out pages
+// rather than sinking into a catch-all group at the end.
+export const GUIDE_GROUPS = ['เริ่มเล่น', 'คราฟต์', 'ดันเจี้ยน', 'ตารางอ้างอิง', 'ระบบในเกม'] as const;
 
 export const PRIMARY_LINKS: NavLink[] = [
   // Renamed from "หาจุดตี" when the homepage became the intent-card landing:
@@ -76,23 +85,23 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // Pages you read: fixed game tables, and the written guide. Moved here from
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
   guides: [
-    { href: '/guides/classes', label: 'ไกด์อาชีพ', icon: '/images/jobs/priest.png', ready: true },
-    { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true },
-    { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true },
-    { href: '/guides/forging', label: 'ตีอาวุธ + อาวุธธาตุ', icon: '/images/items/1101.gif', ready: true },
-    { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true },
-    { href: '/guides/cooking', label: 'ทำอาหาร', icon: '/images/items/517.gif', ready: true },
-    { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true },
-    { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true },
-    { href: '/guides/memorial-dungeons', label: 'ดันเจี้ยนความทรงจำ', icon: '/images/items/7126.gif', ready: true },
-    { href: '/guides/job-change', label: 'เปลี่ยนอาชีพ 2', icon: '/images/items/1201.gif', ready: true },
-    { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true },
-    { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/items/1101.gif', ready: true },
-    { href: '/guides/codes', label: 'โค้ดรับของ', icon: '/images/items/714.gif', ready: true },
-    { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true },
-    { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true },
-    { href: '/guides/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true },
-    { href: '/guides/social', label: 'รีเซ็ตสเตตัส แคลน แต่งงาน', icon: '/images/items/2635.gif', ready: true },
+    { href: '/guides/classes', label: 'ไกด์อาชีพ', icon: '/images/jobs/priest.png', ready: true, group: 'เริ่มเล่น' },
+    { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true, group: 'เริ่มเล่น' },
+    { href: '/guides/codes', label: 'โค้ดรับของ', icon: '/images/items/714.gif', ready: true, group: 'เริ่มเล่น' },
+    { href: '/guides/exp', label: 'EXP ต่อเลเวล', icon: '/images/items/607.gif', ready: true, group: 'เริ่มเล่น' },
+    { href: '/guides/job-change', label: 'เปลี่ยนอาชีพ 2', icon: '/images/items/1201.gif', ready: true, group: 'เริ่มเล่น' },
+    { href: '/guides/forging', label: 'ตีอาวุธ + อาวุธธาตุ', icon: '/images/items/1101.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/cooking', label: 'ทำอาหาร', icon: '/images/items/517.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/items/1101.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true, group: 'ดันเจี้ยน' },
+    { href: '/guides/memorial-dungeons', label: 'ดันเจี้ยนความทรงจำ', icon: '/images/items/7126.gif', ready: true, group: 'ดันเจี้ยน' },
+    { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true, group: 'ตารางอ้างอิง' },
+    { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true, group: 'ตารางอ้างอิง' },
+    { href: '/guides/social', label: 'รีเซ็ตสเตตัส แคลน แต่งงาน', icon: '/images/items/2635.gif', ready: true, group: 'ระบบในเกม' },
   ],
 };
 

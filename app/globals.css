@@ -3123,3 +3123,21 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cguide__kin { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0 12px; font-size: 13.5px; }
 .cguide__kin .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; }
 .cguide__kin img { image-rendering: pixelated; }
+
+/* Guide groups (22 Sep 2026). In the wide button row a group change is a thin
+   divider only -- the row has room for two lines and no more. In the phone
+   grid it is a small full-width heading, because 17 buttons in one grid were
+   something to scan rather than choose from. On /guides each group is a
+   titled section. */
+.subnav__group { display: inline-flex; align-self: stretch; align-items: center; margin-inline: 4px; }
+.subnav__group:first-child { display: none; }
+.subnav__grouplabel { display: none; }
+.subnav--wide .subnav__group::before { content: ""; width: 1px; height: 22px; background: var(--hair); }
+@media (max-width: 640px) {
+  .subnav--phone .subnav__group { display: block; grid-column: 1 / -1; margin: 6px 2px 0; }
+  .subnav--phone .subnav__group:first-child { display: block; margin-top: 0; }
+  .subnav--phone .subnav__grouplabel { display: block; color: var(--faint); font: 700 12px/1.6 var(--font-sarabun), sans-serif; letter-spacing: .02em; }
+}
+.guidegroup { margin-top: 22px; }
+.guidegroup:first-of-type { margin-top: 6px; }
+.guidegroup .itemgrid { margin-top: 10px; }

@@ -28,7 +28,15 @@ type SectionLink = (typeof SECTION_LINKS)[keyof typeof SECTION_LINKS][number];
 function SectionRow({ links, pathname, className, onPick }: { links: readonly SectionLink[]; pathname: string; className: string; onPick?: () => void }) {
   return (
     <nav className={className} aria-label="เมนูย่อย">
-      {links.map((link) =>
+      {links.map((link, i) => [
+        // A group change gets a marker: a heading in the phone grid, a thin
+        // divider in the wide row (owner's pick, 22 Sep 2026). Only the
+        // guides row has groups; the other rows render exactly as before.
+        link.group && link.group !== links[i - 1]?.group ? (
+          <span key={`g-${link.group}`} className="subnav__group" role="presentation">
+            <span className="subnav__grouplabel">{link.group}</span>
+          </span>
+        ) : null,
         link.ready ? (
           <Link
             key={link.href}
@@ -48,7 +56,7 @@ function SectionRow({ links, pathname, className, onPick }: { links: readonly Se
             {link.label}
           </span>
         ),
-      )}
+      ])}
     </nav>
   );
 }
