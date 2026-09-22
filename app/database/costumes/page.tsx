@@ -8,6 +8,7 @@
 // Filters became chip rows on 11 Sep 2026 to match the cards and monsters
 // lists (owner's request): each row counted against the other filters already
 // on, a zero-count chip not drawn, and a chip that is on turns itself off.
+import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { isBound } from '@/lib/bound-items';
@@ -125,7 +126,8 @@ export default async function CostumesPage({
   const cashIds = new Set((cash.data ?? []).map((row) => row.item_id));
   const hasSource = (id: number, source: Source) => (source === 'drop' ? dropIds.has(id) : cashIds.has(id));
 
-  const items = allItems ?? [];
+  // Items the live client does not know stay out of the list (lib/game-absent).
+  const items = (allItems ?? []).filter((it) => !isAbsentFromGame(it.id));
   // Most bound rows are the account-bound copy of a costume already in the
   // list, so they are hidden unless asked for (?bound=1). The count is shown
   // next to the checkbox: hiding rows silently is how the whole set came to

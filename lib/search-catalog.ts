@@ -10,6 +10,7 @@
 // only -- about 5,700 rows across five kinds, a few hundred kB, and it is
 // only ever fetched when a search returns nothing.
 
+import { isAbsentFromGame } from '@/lib/game-absent';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isCVariant } from '@/lib/c-variant';
@@ -73,6 +74,8 @@ export async function loadCatalog(): Promise<CatalogEntry[]> {
   }>((from, to) => db.from('items').select('id, name_en, category').order('id').range(from, to));
   if (itemsError) console.error('search catalog: items failed', itemsError);
   for (const i of items ?? []) {
+    // Not in the live client: reachable by URL, not offered in search.
+    if (isAbsentFromGame(i.id)) continue;
     out.push({ kind: itemKind(i.category), name: i.name_en, href: itemHref(i.id, i.category) });
     for (const alias of thaiAliasNames('items', i.id)) {
       out.push({ kind: itemKind(i.category), name: alias, href: itemHref(i.id, i.category) });

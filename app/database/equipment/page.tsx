@@ -1,4 +1,5 @@
 // app/database/equipment/page.tsx
+import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
@@ -102,7 +103,8 @@ export default async function EquipmentPage({
   // Type, category and role are resolved once per row: the type column is
   // empty on 248 rows, and both the chips and the card meta line need the
   // filled-in answer, not the empty column.
-  const items = (allItems ?? []).map((it) => ({
+  // Items the live client does not know stay out of the list (lib/game-absent).
+  const items = (allItems ?? []).filter((it) => !isAbsentFromGame(it.id)).map((it) => ({
     ...it,
     kind: gearType(it),
     group: gearCategory(it),

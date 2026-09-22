@@ -14,6 +14,7 @@
 // player opts in, and their drops would appear to belong to the plain map.
 import { cardRelease } from '@/lib/card-availability';
 import { isCVariant } from '@/lib/c-variant';
+import { isAbsentFromGame } from '@/lib/game-absent';
 import { CARD_CATEGORY, GEAR_CATEGORIES } from '@/lib/item-href';
 
 export const DROPS_PER_GROUP = 6;
@@ -81,6 +82,8 @@ export function notableDrops(monsters: MapDropMonster[], drops: MapDropRow[]): N
     const isCard = item.category === CARD_CATEGORY;
     const isGear = (GEAR_CATEGORIES as readonly string[]).includes(item.category);
     if (!isCard && !isGear) continue;
+    // Not in the live client, so not farmable here whatever the drop table says.
+    if (isAbsentFromGame(item.id)) continue;
     // A card the game has not released yet cannot be farmed, whatever the table says.
     if (isCard && cardRelease(item.name_en) !== null) continue;
 

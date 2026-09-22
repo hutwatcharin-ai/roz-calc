@@ -1,3 +1,4 @@
+import { isAbsentFromGame } from '@/lib/game-absent';
 import type { MetadataRoute } from 'next';
 import { supabaseBrowser } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
@@ -150,7 +151,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
     ...CLASS_GUIDE_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
     ...monsterIds.map((row) => ({ url: `${SITE_URL}/database/monsters/${row.id}`, lastModified: row.updated_at })),
-    ...itemIds.map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
+    // Items the live client does not know are noindex on their page; keep them
+    // out of the sitemap too so the two signals agree.
+    ...itemIds.filter((row) => !isAbsentFromGame(row.id)).map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but

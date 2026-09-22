@@ -8,6 +8,7 @@
 // columns, two URLs competing for the same search, and two places to fix
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
+import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
@@ -107,7 +108,9 @@ export default async function CardsPage({
   }
 
   const squash = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
-  const cards = (allCards ?? []).map((c) => {
+  // Cards the live client does not know (Amatsu, Louyang, Moscovia...) stay
+  // out; cards it knows but has not released keep their release label.
+  const cards = (allCards ?? []).filter((c) => !isAbsentFromGame(c.id)).map((c) => {
     const from = (droppers.get(c.id) ?? []).sort((a, b) => b.rate - a.rate);
     // Every one of these is called "<something> Card" on a page headed
     // "ฐานข้อมูลการ์ด", so the word is printed 315 times and distinguishes

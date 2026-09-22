@@ -3150,3 +3150,5 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .gametext__gap { height: 8px; }
 .gametext__muted { color: var(--text); font-weight: 600; }
 .gametext__accent { color: var(--cyan); }
+.absentnote { margin: 12px 0 0; padding: 10px 14px; border: 1px solid rgba(255,107,139,.4); border-radius: 10px; background: rgba(255,107,139,.08); color: var(--dim); font-size: 14px; line-height: 1.6; }
+.absentnote strong { color: #FF8FA8; margin-inline-end: 6px; }

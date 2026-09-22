@@ -6,6 +6,7 @@
 // wearable rows and buried everything a player fights in. lib/item-href.ts
 // holds the rule all three routes key off; a row landing on the wrong one is
 // redirected, so it keeps exactly one canonical URL.
+import { isAbsentFromGame } from '@/lib/game-absent';
 import GearDetail, { CATEGORY_LABELS, type GearSection } from '@/components/GearDetail';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isGearCategory, itemHref } from '@/lib/item-href';
@@ -46,6 +47,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   if (item.required_level !== null) parts.push(`ใช้ได้ที่เลเวล ${item.required_level}`);
 
   return {
+    // Not in the live client: the page stays, search engines are asked to skip it.
+    ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
     title: `${item.name_en}${item.slots > 0 ? ` [${item.slots}]` : ''} — ค่าพลังและออปชั่นสุ่ม`,
     description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ${CATEGORY_LABELS[item.category ?? ''] ?? 'อุปกรณ์'} อาชีพที่ใส่ได้ ออปชั่นสุ่มที่ทอยได้ และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
   };

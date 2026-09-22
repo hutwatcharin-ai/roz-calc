@@ -1,3 +1,5 @@
+import AbsentFromGameNote from '@/components/AbsentFromGameNote';
+import { isAbsentFromGame } from '@/lib/game-absent';
 import { isCVariant } from '@/lib/c-variant';
 import ItemCrafting from '@/components/ItemCrafting';
 import ItemShops from '@/components/ItemShops';
@@ -77,6 +79,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     : 'ดรอปจากมอนตัวไหน';
 
   return {
+    // Not in the live client: the page stays, search engines are asked to skip it.
+    ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
     title: `${item.name_en}${slotPart}${thaiPart} — ${angle}`,
     description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${parts.length ? ` ${parts.join(' ')}` : ''}${buyable ? ` ซื้อจาก NPC ${item.buy_price.toLocaleString('en-US')}z` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน RO Zero Thai`,
   };
@@ -175,6 +179,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <span className="crumbs__here">{item.name_en}</span>
       </nav>
       <RecordVisit kind="item" id={item.id} name={item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en} />
+      <AbsentFromGameNote id={item.id} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },

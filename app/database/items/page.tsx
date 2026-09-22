@@ -1,4 +1,5 @@
 // app/database/items/page.tsx
+import { absentIdsFilter } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import JsonLd from '@/components/JsonLd';
@@ -126,6 +127,8 @@ export default async function ItemListPage({
     query = query.in('category', CATEGORIES);
   }
   if (role) query = applyItemRole(query, role);
+  // Items the live client does not know stay out of the list (lib/game-absent).
+  query = query.not('id', 'in', absentIdsFilter(category ? [category] : CATEGORIES));
 
   // One count per chip, head-only, so a chip never leads to an empty page and
   // the numbers come from the same rules the filter uses.
@@ -133,7 +136,7 @@ export default async function ItemListPage({
     await Promise.all(
       ROLE_ORDER.map(async (r) => {
         const counted = applyItemRole(
-          db.from('items').select('id', { count: 'exact', head: true }).in('category', CATEGORIES),
+          db.from('items').select('id', { count: 'exact', head: true }).in('category', CATEGORIES).not('id', 'in', absentIdsFilter(CATEGORIES)),
           r,
         );
         const { count: n, error: countError } = await counted;

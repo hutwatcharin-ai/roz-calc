@@ -1,4 +1,5 @@
 // app/drop-finder/page.tsx
+import { isAbsentFromGame } from '@/lib/game-absent';
 import { supabaseBrowser } from '@/lib/supabase';
 import DropSearch from '@/components/DropSearch';
 import { escapeLikePattern } from '@/lib/like-escape';
@@ -176,7 +177,7 @@ async function starterList(): Promise<StarterItem[]> {
   const count = new Map<number, number>();
   for (const d of drops) count.set(d.item_id, (count.get(d.item_id) ?? 0) + 1);
   return items
-    .filter((i) => count.has(i.id))
+    .filter((i) => count.has(i.id) && !isAbsentFromGame(i.id))
     .map((i) => ({ ...i, dropCount: count.get(i.id) as number }))
     .sort((a, b) => b.sell_price - a.sell_price || a.name_en.localeCompare(b.name_en));
 }

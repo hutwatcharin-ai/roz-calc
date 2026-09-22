@@ -4,6 +4,8 @@
 // landed on the generic item template, which leads with prices and slots and
 // buries the one line a card is read for. Split out 3 Sep 2026, the same day as
 // gear and costumes; lib/item-href.ts holds the rule all four routes key off.
+import AbsentFromGameNote from '@/components/AbsentFromGameNote';
+import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -53,6 +55,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const effect = item.description_th ?? effectLines(item.description).join(' ');
 
   return {
+    // Not in the live client: the page stays, search engines are asked to skip it.
+    ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
     title: `${item.name_en} — เอฟเฟกต์และมอนที่ดรอป`,
     description: `${item.name_en}${slot ? ` ใส่ช่อง ${slot}` : ''}${effect ? ` — ${effect}` : ''} ดูมอนสเตอร์ที่ดรอปและอัตราดรอปใน RO Zero Thai`,
   };
@@ -118,6 +122,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         <span className="crumbs__here">{item.name_en}</span>
       </nav>
       <RecordVisit kind="card" id={item.id} name={item.name_en} />
+      <AbsentFromGameNote id={item.id} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },

@@ -3,6 +3,7 @@
 // under -- same row, same tiles, same drop list -- so the markup lives here and
 // each route passes its own section rather than keeping a second copy in sync.
 
+import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import Link from 'next/link';
 import ItemCrafting from '@/components/ItemCrafting';
 import { isCVariant } from '@/lib/c-variant';
@@ -76,6 +77,7 @@ export default function GearDetail({
         <span className="crumbs__here">{item.name_en}</span>
       </nav>
       <RecordVisit kind={section.recentKind} id={item.id} name={displayName} />
+      <AbsentFromGameNote id={item.id} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
