@@ -21,7 +21,10 @@ const heroArt = (file: string) =>
 const HERO_ART: Record<string, string> = { keyart: heroArt('hero-keyart.webp') };
 // Previews for the owner to pick from (?hero=keyart|party|cards); the one
 // chosen stays, the others go.
-const HERO_KINDS = ['keyart', 'party', 'cards'] as const;
+const HERO_KINDS = ['select', 'stage', 'keyart', 'party', 'cards'] as const;
+// Neon arcade takes (owner, 22 Sep 2026): the site's own neon grid and glow
+// around the game's sprites, drawn in CSS so they cost no download.
+const ARCADE_JOBS = ['swordsman', 'mage', 'archer', 'acolyte', 'merchant', 'thief'];
 const HERO_CARDS = [4054, 4047, 4001, 4035, 4123];
 
 export const metadata = {
@@ -106,7 +109,7 @@ export default async function HomePage({
   // search -- a first-time visitor sees what the site can do, not a table
   // computed for a level they never chose.
   const searched = searchParams.level !== undefined;
-  const hero = (HERO_KINDS as readonly string[]).includes(searchParams.hero ?? '') ? searchParams.hero! : 'keyart';
+  const hero = (HERO_KINDS as readonly string[]).includes(searchParams.hero ?? '') ? searchParams.hero! : 'select';
   const level = Number(searchParams.level ?? 50);
   const range = Number(searchParams.range ?? 10);
   const showC = searchParams.c === '1';
@@ -144,6 +147,34 @@ export default async function HomePage({
           {hero === 'cards' && (
             <div className="homehero__cards">
               {HERO_CARDS.map((id) => <img key={id} src={`/images/home/card-${id}.webp`} alt="" width={135} height={180} decoding="async" />)}
+            </div>
+          )}
+          {hero === 'select' && (
+            <div className="arcade arcade--select">
+              <span className="arcade__floor"><i /></span>
+              <span className="arcade__title">SELECT YOUR JOB</span>
+              <div className="arcade__roster">
+                {ARCADE_JOBS.map((job, i) => (
+                  <span key={job} className="arcade__slot" style={{ animationDelay: `${i - ARCADE_JOBS.length}s` }}>
+                    <img src={`/images/jobs/${job}.png`} alt="" width={104} height={104} decoding="async" />
+                    <b>{job.toUpperCase()}</b>
+                  </span>
+                ))}
+              </div>
+              <span className="arcade__start">PRESS START</span>
+            </div>
+          )}
+          {hero === 'stage' && (
+            <div className="arcade arcade--stage">
+              <span className="arcade__sun" />
+              <span className="arcade__floor"><i /></span>
+              <span className="arcade__hud"><b>1P SWORDSMAN</b><span className="arcade__bar"><i /></span></span>
+              <span className="arcade__hud arcade__hud--right"><b>STAGE 1</b>PRONTERA FIELD</span>
+              <img className="arcade__fighter" src="/images/jobs/swordsman.png" alt="" width={104} height={104} decoding="async" />
+              <img className="arcade__foe arcade__foe--1" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" />
+              <img className="arcade__foe arcade__foe--2" src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" />
+              <img className="arcade__foe arcade__foe--3" src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" />
+              <span className="arcade__start">INSERT COIN</span>
             </div>
           )}
           {hero === 'keyart' && <img className="homehero__poring" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />}
