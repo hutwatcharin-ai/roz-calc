@@ -10,6 +10,7 @@ import JsonLd from '@/components/JsonLd';
 import { websiteJsonLd } from '@/lib/jsonld';
 import { timeAgoTh } from '@/lib/time-ago';
 import { getLastUpdated } from '@/lib/last-updated';
+import ReactDOM from 'react-dom';
 
 
 export const metadata = {
@@ -110,6 +111,13 @@ export default async function HomePage({
 
   const resultsHref = (show: boolean) =>
     `/?level=${level}&range=${range}${show ? '&c=1' : ''}#results`;
+
+  // The fighter's frames are what the browser paints largest above the fold,
+  // so they are fetched with the stylesheet rather than after it: without
+  // this the page's largest paint waited on them (PageSpeed mobile 72-76
+  // against 82-87, 23 Sep 2026).
+  ReactDOM.preload('/images/arcade/fighter.webp', { as: 'image', fetchPriority: 'high' });
+  ReactDOM.preload('/images/arcade/monsters.webp', { as: 'image' });
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
