@@ -8,6 +8,7 @@
 // the browser and switching costs nothing.
 
 import { useEffect, useState } from 'react';
+import { isSpacerLine, segments } from '@/lib/color-codes';
 
 const STORAGE_KEY = 'roz-calc:description-language';
 
@@ -51,7 +52,21 @@ export default function DescriptionLanguageToggle({
           English
         </button>
       </div>
-      <p style={{ whiteSpace: 'pre-line', color: 'var(--dim)' }}>{lines.join('\n')}</p>
+      {/* Lines may carry the client's ^RRGGBB codes (the game's own Thai
+          text does); they render as tones, never as raw codes. */}
+      <div className="gametext">
+        {lines.map((line, i) =>
+          isSpacerLine(line) ? (
+            <div key={i} className="gametext__gap" aria-hidden="true" />
+          ) : (
+            <p key={i}>
+              {segments(line).map((seg, j) => (
+                <span key={j} className={seg.tone === 'default' ? undefined : `gametext__${seg.tone}`}>{seg.text}</span>
+              ))}
+            </p>
+          ),
+        )}
+      </div>
     </>
   );
 }

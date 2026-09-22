@@ -11,6 +11,7 @@ import RecordVisit from '@/components/RecordVisit';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
+import { gameThaiDescription } from '@/lib/game-items';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCardCategory, itemHref } from '@/lib/item-href';
 import { cardSlot, equipmentHrefForSlot, parseCardSlot } from '@/lib/card-slot';
@@ -150,7 +151,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
       {english.length > 0 && (
         <div className="card card--cyan" style={{ marginTop: 20 }}>
           <h2 className="section-title">ข้อความเต็มจากในเกม</h2>
-          <DescriptionLanguageToggle thaiLines={thai.length > 0 ? thai : english} englishLines={english} />
+          <DescriptionLanguageToggle thaiLines={gameThaiDescription(item.id) ?? (thai.length > 0 ? thai : english)} englishLines={english} />
         </div>
       )}
 

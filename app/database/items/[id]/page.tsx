@@ -15,6 +15,7 @@ import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { clientThaiDescription } from '@/lib/client-thai-descriptions';
+import { gameThaiDescription } from '@/lib/game-items';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isCardCategory, isEquipmentCategory, itemHref } from '@/lib/item-href';
 import type { Metadata } from 'next';
@@ -289,9 +290,12 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         // Where the Thai came from stays in the data file's _meta and in
         // scripts/build-item-descriptions-th.mjs; the reader gets the sentence,
         // not the provenance (site owner, 10 Sep 2026).
+        // The game's own Thai text wins outright when the live client has it
+        // (owner's pick, 22 Sep 2026): it is what the player reads in game.
+        const fromGame = gameThaiDescription(item.id);
         const composed = composeThaiDescription(item.description, dict);
         const fromDictionary = composed.some((l) => l.thai !== null);
-        const fromClient = fromDictionary ? null : clientThaiDescription(item.id);
+        const fromClient = fromGame ?? (fromDictionary ? null : clientThaiDescription(item.id));
         return (
           <div className="card" style={{ marginTop: 20 }}>
             <h2 className="section-title">คำอธิบาย</h2>

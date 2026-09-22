@@ -16,6 +16,7 @@ import ItemShops from '@/components/ItemShops';
 import ItemQuests from '@/components/ItemQuests';
 import RandomOptionsCard from '@/components/RandomOptionsCard';
 import { composeThaiDescription } from '@/lib/item-description-th';
+import { gameThaiDescription } from '@/lib/game-items';
 import { randomOptionsFor } from '@/lib/random-options';
 import { cardSlotForGearType } from '@/lib/card-slot';
 import type { GearExtras } from '@/lib/gear-detail';
@@ -210,7 +211,7 @@ export default function GearDetail({
         <div className="card" style={{ marginTop: 20 }}>
           <h2 className="section-title">คำอธิบาย</h2>
           <DescriptionLanguageToggle
-            thaiLines={composeThaiDescription(item.description, dict).map((l) => l.thai ?? l.source)}
+            thaiLines={gameThaiDescription(item.id) ?? composeThaiDescription(item.description, dict).map((l) => l.thai ?? l.source)}
             englishLines={item.description.split('\n').map((l: string) => l.replace(/\^[0-9a-fA-F]{6}/g, '').trim()).filter((l: string) => l !== '')}
           />
         </div>

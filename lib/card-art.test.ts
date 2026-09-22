@@ -37,8 +37,8 @@ describe('card art', () => {
   });
 
   it('falls back to the card back, and says so in the alt text', () => {
-    expect(cardArtThumbUrl(300938)).toBe('/images/cards/thumb/back.webp');
-    expect(cardArtAlt(300938, 'Gem Poring Card')).toBe('ยังไม่มีรูปการ์ด Gem Poring Card');
+    expect(cardArtThumbUrl(4545)).toBe('/images/cards/thumb/back.webp');
+    expect(cardArtAlt(4545, 'Picky Poring Card')).toBe('ยังไม่มีรูปการ์ด Picky Poring Card');
     expect(cardArtAlt(4001, 'Poring Card')).toBe('รูปการ์ด Poring Card');
   });
 

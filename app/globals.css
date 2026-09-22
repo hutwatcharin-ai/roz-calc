@@ -3141,3 +3141,12 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .guidegroup { margin-top: 22px; }
 .guidegroup:first-of-type { margin-top: 6px; }
 .guidegroup .itemgrid { margin-top: 10px; }
+
+/* Item text from the game client (22 Sep 2026). The client's colour codes
+   become tones: grey values, highlighted effects, a small gap for its blank
+   spacer line. */
+.gametext { color: var(--dim); line-height: 1.7; }
+.gametext p { margin: 0; }
+.gametext__gap { height: 8px; }
+.gametext__muted { color: var(--text); font-weight: 600; }
+.gametext__accent { color: var(--cyan); }
