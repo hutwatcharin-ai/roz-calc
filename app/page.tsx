@@ -18,7 +18,11 @@ import path from 'node:path';
 // paint on the page never waits for it.
 const heroArt = (file: string) =>
   `url(data:image/webp;base64,${readFileSync(path.join(process.cwd(), 'public/images/home', file)).toString('base64')})`;
-const HERO_ART = { prontera: heroArt('hero-prontera.webp'), world: heroArt('hero-world.webp') };
+const HERO_ART: Record<string, string> = { keyart: heroArt('hero-keyart.webp') };
+// Previews for the owner to pick from (?hero=keyart|party|cards); the one
+// chosen stays, the others go.
+const HERO_KINDS = ['keyart', 'party', 'cards'] as const;
+const HERO_CARDS = [4054, 4047, 4001, 4035, 4123];
 
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
@@ -102,6 +106,7 @@ export default async function HomePage({
   // search -- a first-time visitor sees what the site can do, not a table
   // computed for a level they never chose.
   const searched = searchParams.level !== undefined;
+  const hero = (HERO_KINDS as readonly string[]).includes(searchParams.hero ?? '') ? searchParams.hero! : 'keyart';
   const level = Number(searchParams.level ?? 50);
   const range = Number(searchParams.range ?? 10);
   const showC = searchParams.c === '1';
@@ -131,11 +136,17 @@ export default async function HomePage({
           the heading stays the page's largest paint, the pictures weigh a few
           kB, and they hold still for anyone who asks for less motion. */}
       <section
-        className={`homehero homehero--${searchParams.hero === 'world' ? 'world' : 'prontera'}`}
-        style={{ '--hero-art': HERO_ART[searchParams.hero === 'world' ? 'world' : 'prontera'] } as React.CSSProperties}
+        className={`homehero homehero--${hero}`}
+        style={HERO_ART[hero] ? ({ '--hero-art': HERO_ART[hero] } as React.CSSProperties) : undefined}
       >
         <div className="homehero__art" aria-hidden="true">
-          <img className="homehero__poring" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />
+          {hero === 'party' && <img className="homehero__party" src="/images/home/hero-party.webp" alt="" width={247} height={93} decoding="async" />}
+          {hero === 'cards' && (
+            <div className="homehero__cards">
+              {HERO_CARDS.map((id) => <img key={id} src={`/images/home/card-${id}.webp`} alt="" width={135} height={180} decoding="async" />)}
+            </div>
+          )}
+          {hero === 'keyart' && <img className="homehero__poring" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />}
           <img className="homehero__walker homehero__walker--1" src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" fetchPriority="low" />
           <img className="homehero__walker homehero__walker--2" src="/images/monsters/1007.gif" alt="" width={36} height={29} decoding="async" fetchPriority="low" />
           <img className="homehero__walker homehero__walker--3" src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />

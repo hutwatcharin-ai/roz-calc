@@ -3179,8 +3179,16 @@ a.cashlist__row:hover { background: var(--panel-2); }
   background-size: 62% auto;
   opacity: .42;
 }
-.homehero--prontera::before { background-size: auto 150%; background-position: right -40px center; }
-.homehero--world::before { background-size: cover; opacity: .34; }
+.homehero--keyart::before { background-size: cover; background-position: right center; opacity: .75; left: auto; width: min(300px, 42%); -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%); mask-image: linear-gradient(90deg, transparent, #000 45%); }
+.homehero--party::before, .homehero--cards::before { display: none; }
+.homehero__party { right: 22px; bottom: 16px; height: 128px; width: auto; }
+.homehero__cards { position: absolute; right: 36px; top: 50%; width: 260px; height: 150px; translate: 0 -50%; }
+.homehero__cards img { width: 84px; height: 112px; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,.55); image-rendering: auto; transform-origin: 50% 120%; transition: transform .25s; }
+.homehero__cards img:nth-child(1) { left: 0; top: 18px; transform: rotate(-16deg); }
+.homehero__cards img:nth-child(2) { left: 40px; top: 6px; transform: rotate(-8deg); }
+.homehero__cards img:nth-child(3) { left: 84px; top: 0; transform: rotate(0deg); z-index: 1; }
+.homehero__cards img:nth-child(4) { left: 128px; top: 6px; transform: rotate(8deg); }
+.homehero__cards img:nth-child(5) { left: 172px; top: 18px; transform: rotate(16deg); }
 /* Keeps the heading on a dark ground: the picture only shows at the right. */
 .homehero::after {
   content: '';
@@ -3218,7 +3226,14 @@ a.cashlist__row:hover { background: var(--panel-2); }
 
 @media (max-width: 640px) {
   .homehero { padding: 20px 16px 54px; }
-  .homehero--prontera::before { background-size: auto 115%; background-position: right -90px center; opacity: .3; }
+  .homehero--keyart::before { background-position: right -80px center; opacity: .45; }
+  .homehero--keyart::before { width: 60%; }
+  /* The party and the cards need the width the heading takes on a phone, so
+     they stand in a strip under it instead. */
+  .homehero--party, .homehero--cards { padding-bottom: 104px; }
+  .homehero--party .homehero__walker, .homehero--cards .homehero__walker { display: none; }
+  .homehero__party { height: 80px; right: auto; left: 50%; translate: -50% 0; bottom: 12px; }
+  .homehero__cards { top: auto; bottom: 8px; right: 50%; translate: 50% 0; transform: scale(.58); transform-origin: 50% 100%; }
   .homehero::after { background: linear-gradient(90deg, var(--panel) 45%, color-mix(in srgb, var(--panel) 60%, transparent)); }
   .homehero__poring { right: 16px; top: auto; bottom: 8px; width: 62px; height: 59px; }
   .homehero__walker--2, .homehero__walker--3 { display: none; }
