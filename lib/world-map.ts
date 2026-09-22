@@ -27,6 +27,26 @@ export interface WorldMapEntry {
   aggressiveCount: number;
   /** Map picture for the hover card and the panel; absent when none is mirrored. */
   image?: string | null;
+  /** Dungeons that open from this tile (lib/world-dungeons), floor by floor. */
+  dungeons?: WorldDungeon[];
+}
+
+export interface WorldDungeonFloor {
+  code: string;
+  name: string;
+  image: string | null;
+  minLevel: number | null;
+  maxLevel: number | null;
+  monsters: WorldMapMonster[];
+  /** Set when the floor is not open yet (lib/map-availability), as display text. */
+  closed: string | null;
+}
+
+export interface WorldDungeon {
+  key: string;
+  name: string;
+  entrance: { map: string; x: number; y: number };
+  floors: WorldDungeonFloor[];
 }
 
 export interface WorldMapRegion {
@@ -50,30 +70,21 @@ export interface WorldMapSpawnRow {
 }
 
 type RawTile = { x: number; y: number; region: string; w: number; h: number };
-type RawDungeon = { slug: string; name: string; parent: string; parentX: number; parentY: number; x: number; y: number };
 
 export const WORLD_MAP_REGIONS: WorldMapRegion[] = Object.entries(layout.regions).map(([id, region]) => ({ id, ...region }));
 
 const rawTiles = layout.tiles as Record<string, RawTile>;
-const rawDungeons = layout.dungeons as RawDungeon[];
 
-export const DUNGEON_MAP_CODES: Record<string, string[]> = {
-  gef_dun00: ['gef_dun00', 'gef_dun01', 'gef_dun02', 'gef_dun03'],
-  orcsdun01: ['orcsdun01', 'orcsdun02'],
-  c_tower1: ['c_tower1', 'c_tower2', 'c_tower3', 'c_tower4'],
-  prt_maze01: ['prt_maze01', 'prt_maze02', 'prt_maze03'],
-  mjo_dun01: ['mjo_dun01', 'mjo_dun02', 'mjo_dun03'],
-  in_sphinx1: ['in_sphinx1', 'in_sphinx2', 'in_sphinx3', 'in_sphinx4', 'in_sphinx5'],
-  moc_pryd01: ['moc_pryd01', 'moc_pryd02', 'moc_pryd03', 'moc_pryd04', 'moc_pryd05', 'moc_pryd06'],
-  pay_dun00: ['pay_dun00', 'pay_dun01', 'pay_dun02', 'pay_dun03', 'pay_dun04'],
-};
+// Atlas tiles only. Dungeons are no longer drawn on the atlas: they hang off
+// the tile they open from (lib/world-dungeons), found from the game's warps.
+// The layout also placed some dungeon floors as tiles (Prontera Sewer, Ant
+// Hell, Byalan...), on top of the fields around them. Those now reach the
+// atlas the same way every other dungeon does, through their entrance tile.
+export const WORLD_TILE_PATTERN = /fild|_f\d|mjolnir/i;
+const atlasTiles = Object.fromEntries(Object.entries(rawTiles).filter(([code]) => WORLD_TILE_PATTERN.test(code)));
+export const WORLD_MAP_CODES = Object.keys(atlasTiles);
 
-export const WORLD_MAP_CODES = [...new Set([
-  ...Object.keys(rawTiles),
-  ...Object.values(DUNGEON_MAP_CODES).flat(),
-])];
-
-function monstersFor(codes: string[], rows: WorldMapSpawnRow[]): WorldMapMonster[] {
+export function monstersFor(codes: string[], rows: WorldMapSpawnRow[]): WorldMapMonster[] {
   const unique = new Map<number, WorldMapMonster>();
   for (const row of rows) {
     if (!codes.includes(row.map_code) || !row.monsters) continue;
@@ -88,7 +99,7 @@ function monstersFor(codes: string[], rows: WorldMapSpawnRow[]): WorldMapMonster
   return [...unique.values()].sort((a, b) => a.level - b.level || a.nameEn.localeCompare(b.nameEn));
 }
 
-function stats(monsters: WorldMapMonster[]) {
+export function stats(monsters: WorldMapMonster[]) {
   return {
     monsters,
     minLevel: monsters.length ? Math.min(...monsters.map((monster) => monster.level)) : null,
@@ -98,7 +109,7 @@ function stats(monsters: WorldMapMonster[]) {
 }
 
 export function buildWorldMapEntries(rows: WorldMapSpawnRow[]) {
-  const tiles: WorldMapEntry[] = Object.entries(rawTiles).map(([mapCode, tile]) => {
+  const tiles: WorldMapEntry[] = Object.entries(atlasTiles).map(([mapCode, tile]) => {
     const mapRows = rows.filter((row) => row.map_code === mapCode);
     const monsters = monstersFor([mapCode], mapRows);
     return {
@@ -116,24 +127,7 @@ export function buildWorldMapEntries(rows: WorldMapSpawnRow[]) {
     };
   });
 
-  const dungeons: WorldMapEntry[] = rawDungeons.map((dungeon) => {
-    const mapCodes = DUNGEON_MAP_CODES[dungeon.slug] ?? [dungeon.slug];
-    return {
-      key: dungeon.slug,
-      mapCode: dungeon.slug,
-      mapCodes,
-      nameEn: dungeon.name,
-      regionId: rawTiles[dungeon.parent]?.region ?? dungeon.parent,
-      kind: 'dungeon',
-      x: dungeon.x,
-      y: dungeon.y,
-      width: 1,
-      height: 1,
-      parentX: dungeon.parentX,
-      parentY: dungeon.parentY,
-      ...stats(monstersFor(mapCodes, rows)),
-    };
-  });
+  const dungeons: WorldMapEntry[] = [];
 
   return { tiles, dungeons };
 }
@@ -142,7 +136,10 @@ export function searchWorldMap(entries: WorldMapEntry[], query: string): string[
   const needle = query.trim().toLocaleLowerCase();
   if (!needle) return entries.map((entry) => entry.key);
   return entries
-    .filter((entry) => [entry.nameEn, ...entry.mapCodes, ...entry.monsters.map((monster) => monster.nameEn)]
+    // Dungeon names and floor codes count too, so "pyramid" finds the tile
+    // the Pyramids open from.
+    .filter((entry) => [entry.nameEn, ...entry.mapCodes, ...entry.monsters.map((monster) => monster.nameEn),
+      ...(entry.dungeons ?? []).flatMap((d) => [d.name, ...d.floors.map((f) => f.code)])]
       .some((value) => value.toLocaleLowerCase().includes(needle)))
     .map((entry) => entry.key);
 }

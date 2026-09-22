@@ -184,6 +184,7 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
           {!entry.monsters.length && <em>No monsters recorded</em>}
         </div>
         <small>{levelText(entry)} · {entry.monsters.length} monsters{entry.aggressiveCount ? ` · ⚠ ${entry.aggressiveCount} aggressive` : ''}</small>
+        {entry.dungeons?.length ? <small className="worldmap__tooltip-dungeons">ดันเจี้ยน: {entry.dungeons.map((d) => `${d.name} (${d.floors.length} ชั้น)`).join(' · ')}</small> : null}
         {selectedKey === entry.key && <Link href={`/database/maps/${encodeURIComponent(entry.mapCode)}`}>Open full map page →</Link>}
       </div>
     );
@@ -199,7 +200,7 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
       <div className="worldmap__jump" aria-label="Jump to Region">
         <strong>JUMP TO REGION</strong>
         <div>{regions.map((region) => <button key={region.id} type="button" style={{ '--region': region.color } as React.CSSProperties} onClick={() => jumpToRegion(region.id)}>{region.label}</button>)}</div>
-        <span className="worldmap__legend"><i />Field tile <i className="is-dungeon" />Dungeon</span>
+        <span className="worldmap__legend"><i />Field tile <b className="worldmap__badge worldmap__badge--legend" aria-hidden="true">1</b> ทางเข้าดันเจี้ยน</span>
       </div>
 
       <div className="worldmap__layout">
@@ -218,10 +219,8 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
             {regions.map((region) => <span key={region.id} className="worldmap__region-label" style={{ left: region.x, top: region.y, color: region.color }}>{region.label}</span>)}
             {tiles.map((entry) => {
               const color = regions.find((region) => region.id === entry.regionId)?.color ?? '#3DE8FF';
-              return <button key={entry.key} type="button" className={`worldmap__tile${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`} style={{ left: entry.x, top: entry.y, width: entry.width, height: entry.height, '--region': color } as React.CSSProperties} aria-label={`${entry.nameEn}, ${entry.mapCode}, ${entry.monsters.length} monsters`} aria-pressed={selectedKey === entry.key} onPointerEnter={() => setHoveredKey(entry.key)} onPointerLeave={() => setHoveredKey((key) => key === entry.key ? null : key)} onFocus={() => setHoveredKey(entry.key)} onBlur={() => setHoveredKey((key) => key === entry.key ? null : key)} onClick={(event) => { event.stopPropagation(); selectEntry(entry); }} />;
+              return <button key={entry.key} type="button" className={`worldmap__tile${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`} style={{ left: entry.x, top: entry.y, width: entry.width, height: entry.height, '--region': color } as React.CSSProperties} aria-label={`${entry.nameEn}, ${entry.mapCode}, ${entry.monsters.length} monsters${entry.dungeons?.length ? `, ทางเข้าดันเจี้ยน ${entry.dungeons.length} แห่ง` : ''}`} aria-pressed={selectedKey === entry.key} onPointerEnter={() => setHoveredKey(entry.key)} onPointerLeave={() => setHoveredKey((key) => key === entry.key ? null : key)} onFocus={() => setHoveredKey(entry.key)} onBlur={() => setHoveredKey((key) => key === entry.key ? null : key)} onClick={(event) => { event.stopPropagation(); selectEntry(entry); }}>{entry.dungeons?.length ? <span className="worldmap__badge" aria-hidden="true">{entry.dungeons.length}</span> : null}</button>;
             })}
-            <svg className="worldmap__routes" viewBox="0 0 1280 1024" aria-hidden="true">{dungeons.map((entry) => <line key={entry.key} x1={entry.parentX} y1={entry.parentY} x2={entry.x} y2={entry.y} />)}</svg>
-            {dungeons.map((entry) => <button key={entry.key} type="button" className={`worldmap__dungeon${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`} style={{ left: entry.x, top: entry.y }} aria-label={`${entry.nameEn}, ${entry.mapCodes.length} floors, ${entry.monsters.length} monsters`} aria-pressed={selectedKey === entry.key} onPointerEnter={() => setHoveredKey(entry.key)} onPointerLeave={() => setHoveredKey((key) => key === entry.key ? null : key)} onFocus={() => setHoveredKey(entry.key)} onBlur={() => setHoveredKey((key) => key === entry.key ? null : key)} onClick={(event) => { event.stopPropagation(); selectEntry(entry); }}>{entry.nameEn}</button>)}
             {active && renderTooltip(active)}
           </div>
           <div className="worldmap__controls" aria-label="ควบคุมการซูม"><button type="button" onClick={() => changeZoom(1.25)} aria-label="ซูมเข้า">+</button><button type="button" onClick={() => changeZoom(0.8)} aria-label="ซูมออก">−</button><button type="button" onClick={reset}>RESET</button></div>
@@ -238,6 +237,40 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
             <dl className="worldmap__stats"><div><dt>Map IDs</dt><dd>{selected.mapCodes.length}</dd></div><div><dt>Monster level</dt><dd>{levelText(selected)}</dd></div><div><dt>Monsters</dt><dd>{selected.monsters.length || '—'}</dd></div><div><dt>Aggressive</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount}` : '—'}</dd></div></dl>
             <h3>Monsters on this map</h3>
             <ul className="worldmap__monsters">{selected.monsters.map((monster) => <li key={monster.id}><Link href={`/database/monsters/${monster.id}`}>{monster.imageUrl && <img src={monster.imageUrl} alt="" width="32" height="32" loading="lazy" />}<span><strong>{monster.nameEn}</strong><small>Lv.{monster.level}{monster.isAggressive ? ' · ⚠ Aggressive' : ''}</small></span></Link></li>)}{!selected.monsters.length && <li className="worldmap__none">No monsters recorded</li>}</ul>
+            {selected.dungeons?.length ? (
+              <section className="worldmap__dungeons" aria-label="ดันเจี้ยนจากแมพนี้">
+                <h3>ดันเจี้ยนจากแมพนี้</h3>
+                {selected.dungeons.map((dungeon) => (
+                  <div key={dungeon.key} className="wmdungeon">
+                    <strong>{dungeon.name} <span className="muted">· {dungeon.floors.length} ชั้น</span></strong>
+                    {/* The portal into the dungeon, which may stand in a town or
+                        a ruin next to this field rather than on it. */}
+                    <code className="mono navicmd wmdungeon__navi">/navi {dungeon.entrance.map} {dungeon.entrance.x}/{dungeon.entrance.y}</code>
+                    <ul className="wmdungeon__floors">
+                      {dungeon.floors.map((floor) => (
+                        <li key={floor.code}>
+                          <Link href={`/database/maps/${encodeURIComponent(floor.code)}`} className="wmfloor">
+                            {floor.image ? <img src={floor.image} alt="" width="48" height="48" loading="lazy" /> : <span className="wmfloor__blank" aria-hidden="true" />}
+                            <span className="wmfloor__body">
+                              <span className="wmfloor__name">{floor.name}</span>
+                              <span className="wmfloor__meta mono">
+                                {floor.minLevel == null ? 'ไม่มีข้อมูลมอน' : floor.minLevel === floor.maxLevel ? `Lv.${floor.minLevel}` : `Lv.${floor.minLevel}–${floor.maxLevel}`}
+                                {floor.closed && <span className="wmfloor__closed"> · {floor.closed}</span>}
+                              </span>
+                              {floor.monsters.length > 0 && (
+                                <span className="wmfloor__mobs">
+                                  {floor.monsters.map((monster) => <img key={monster.id} src={monster.imageUrl ?? ''} alt={monster.nameEn} title={`${monster.nameEn} · Lv.${monster.level}`} width="24" height="24" loading="lazy" />)}
+                                </span>
+                              )}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </section>
+            ) : null}
             <Link className="btn worldmap__open" href={`/database/maps/${encodeURIComponent(selected.mapCode)}`}>Open full map page →</Link>
           </> : <div className="worldmap__empty"><strong>Hover any map tile</strong><p>ดูมอนสเตอร์ทันที หรือคลิกช่องเพื่อเปิดรายละเอียดและรายชื่อเต็ม</p></div>}
         </aside>
