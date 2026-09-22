@@ -2988,3 +2988,45 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .mapdrops__title { margin: 14px 0 4px; font: 700 14px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); }
 .mapdrops__icon { vertical-align: middle; margin-inline-end: 6px; }
 .mapdrops__rate { margin-inline-start: auto; font-size: 13px; color: var(--cyan); }
+
+/* Class build guides (/guides/classes/[job], 22 Sep 2026). Citation chips are
+   quiet on purpose: they sit after almost every line, and loud ones would
+   drown the advice they back. */
+.cguide__facts { list-style: none; margin: 4px 0 18px; padding: 0; display: grid; gap: 6px; }
+.cguide__facts li { padding: 8px 12px; border: 1px solid var(--hair); border-inline-start: 3px solid var(--cyan); border-radius: 8px; background: var(--panel); font-size: 14.5px; }
+.cguide__cites { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
+.cguide__cite { font: 500 11.5px/1.6 "IBM Plex Mono", monospace; padding: 0 6px; border: 1px solid var(--hair); border-radius: 999px; color: var(--faint); text-decoration: none; white-space: nowrap; }
+a.cguide__cite:hover, a.cguide__cite:focus-visible { color: var(--cyan); border-color: var(--cyan); }
+.cguide__picker { margin-bottom: 18px; }
+.cguide__picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 10px; }
+.cguide__pick { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border: 1px solid var(--hair); border-radius: 10px; background: var(--panel); color: var(--text); text-decoration: none; min-height: 44px; }
+.cguide__pick:hover, .cguide__pick:focus-visible { border-color: var(--cyan); }
+.cguide__pick span { color: var(--dim); font-size: 13.5px; }
+.cguide__pick em { color: var(--faint); font-size: 12.5px; font-style: normal; }
+.cguide__pick.is-thin { opacity: .75; }
+.cguide__tag { display: inline-block; margin-inline-start: 8px; padding: 1px 8px; border-radius: 999px; background: var(--yellow, #FFE14D); color: #1a1030; font: 700 11.5px/1.6 var(--font-sarabun), sans-serif; vertical-align: middle; }
+.cguide__pick .cguide__tag { margin: 0; align-self: flex-start; color: #1a1030; }
+.cguide__pros { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.cguide__build { margin-top: 20px; scroll-margin-top: 90px; }
+.cguide__idea { margin-top: 8px; color: var(--dim); }
+.cguide__missing { margin-top: 10px; padding: 10px 12px; border: 1px dashed var(--hair); border-radius: 8px; color: var(--dim); }
+.cguide__h3 { margin: 18px 0 8px; font: 700 15px/1.4 var(--font-sarabun), sans-serif; color: var(--text); }
+.cguide__lines { margin: 6px 0 0; padding-inline-start: 20px; display: grid; gap: 6px; }
+.cguide__skills { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 6px; }
+.cguide__skill { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border: 1px solid var(--hair); border-radius: 8px; counter-increment: step; }
+.cguide__skill::before { content: counter(step); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--panel-2); color: var(--cyan); font: 700 12px/22px "IBM Plex Mono", monospace; text-align: center; }
+.cguide__skill img, .cguide__skill-blank { flex: none; width: 24px; height: 24px; }
+.cguide__skill-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.cguide__skill-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-weight: 600; }
+.cguide__lv { color: var(--cyan); font-size: 13px; }
+.cguide__why { color: var(--dim); font-size: 13.5px; }
+.cguide__gear { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cguide__gear li { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--hair); }
+.cguide__gear li:last-child { border-bottom: 0; }
+.cguide__slot { color: var(--faint); font-size: 13.5px; font-weight: 600; }
+.cguide__gear-body { display: flex; flex-direction: column; gap: 6px; }
+.cguide__items { display: flex; flex-wrap: wrap; gap: 6px; }
+.cguide__items .chip img { margin-inline-end: 4px; vertical-align: middle; }
+@media (max-width: 520px) {
+  .cguide__gear li { grid-template-columns: 1fr; gap: 2px; }
+}
