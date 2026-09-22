@@ -10,22 +10,7 @@ import JsonLd from '@/components/JsonLd';
 import { websiteJsonLd } from '@/lib/jsonld';
 import { timeAgoTh } from '@/lib/time-ago';
 import { getLastUpdated } from '@/lib/last-updated';
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
 
-// The map behind the heading rides inside the HTML (a few kB) instead of as a
-// request of its own: the browser paints it with the heading, so the largest
-// paint on the page never waits for it.
-const heroArt = (file: string) =>
-  `url(data:image/webp;base64,${readFileSync(path.join(process.cwd(), 'public/images/home', file)).toString('base64')})`;
-const HERO_ART: Record<string, string> = { keyart: heroArt('hero-keyart.webp') };
-// Previews for the owner to pick from (?hero=keyart|party|cards); the one
-// chosen stays, the others go.
-const HERO_KINDS = ['select', 'stage', 'keyart', 'party', 'cards'] as const;
-// Neon arcade takes (owner, 22 Sep 2026): the site's own neon grid and glow
-// around the game's sprites, drawn in CSS so they cost no download.
-const ARCADE_JOBS = ['swordsman', 'mage', 'archer', 'acolyte', 'merchant', 'thief'];
-const HERO_CARDS = [4054, 4047, 4001, 4035, 4123];
 
 export const metadata = {
   // Root page shares the root layout's segment, so the "| RO Zero Thai"
@@ -101,7 +86,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: { level?: string; range?: string; c?: string; hero?: string };
+  searchParams: { level?: string; range?: string; c?: string };
 }) {
   // The farming finder still lives at "/" (spec 6.2: the link people share in
   // game chat keeps working, params and all). What changed is the default
@@ -109,7 +94,6 @@ export default async function HomePage({
   // search -- a first-time visitor sees what the site can do, not a table
   // computed for a level they never chose.
   const searched = searchParams.level !== undefined;
-  const hero = (HERO_KINDS as readonly string[]).includes(searchParams.hero ?? '') ? searchParams.hero! : 'select';
   const level = Number(searchParams.level ?? 50);
   const range = Number(searchParams.range ?? 10);
   const showC = searchParams.c === '1';
@@ -134,53 +118,26 @@ export default async function HomePage({
           whitespace and the translation moat; the farm keyword is held by
           /guides/farm-guide. No hardcoded counts here — SiteStats below
           carries the live ones. */}
-      {/* Game art over the heading, so a first-time visitor sees at a glance
-          that this is a Ragnarok site (owner, 22 Sep 2026). Decoration only:
-          the heading stays the page's largest paint, the pictures weigh a few
-          kB, and they hold still for anyone who asks for less motion. */}
-      <section
-        className={`homehero homehero--${hero}`}
-        style={HERO_ART[hero] ? ({ '--hero-art': HERO_ART[hero] } as React.CSSProperties) : undefined}
-      >
-        <div className="homehero__art" aria-hidden="true">
-          {hero === 'party' && <img className="homehero__party" src="/images/home/hero-party.webp" alt="" width={247} height={93} decoding="async" />}
-          {hero === 'cards' && (
-            <div className="homehero__cards">
-              {HERO_CARDS.map((id) => <img key={id} src={`/images/home/card-${id}.webp`} alt="" width={135} height={180} decoding="async" />)}
-            </div>
-          )}
-          {hero === 'select' && (
-            <div className="arcade arcade--select">
-              <span className="arcade__floor"><i /></span>
-              <span className="arcade__title">SELECT YOUR JOB</span>
-              <div className="arcade__roster">
-                {ARCADE_JOBS.map((job, i) => (
-                  <span key={job} className="arcade__slot" style={{ animationDelay: `${i - ARCADE_JOBS.length}s` }}>
-                    <img src={`/images/jobs/${job}.png`} alt="" width={104} height={104} decoding="async" />
-                    <b>{job.toUpperCase()}</b>
-                  </span>
-                ))}
-              </div>
-              <span className="arcade__start">PRESS START</span>
-            </div>
-          )}
-          {hero === 'stage' && (
-            <div className="arcade arcade--stage">
-              <span className="arcade__sun" />
-              <span className="arcade__floor"><i /></span>
-              <span className="arcade__hud"><b>1P SWORDSMAN</b><span className="arcade__bar"><i /></span></span>
-              <span className="arcade__hud arcade__hud--right"><b>STAGE 1</b>PRONTERA FIELD</span>
-              <img className="arcade__fighter" src="/images/jobs/swordsman.png" alt="" width={104} height={104} decoding="async" />
-              <img className="arcade__foe arcade__foe--1" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" />
-              <img className="arcade__foe arcade__foe--2" src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" />
-              <img className="arcade__foe arcade__foe--3" src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" />
-              <span className="arcade__start">INSERT COIN</span>
-            </div>
-          )}
-          {hero === 'keyart' && <img className="homehero__poring" src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />}
-          <img className="homehero__walker homehero__walker--1" src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" fetchPriority="low" />
-          <img className="homehero__walker homehero__walker--2" src="/images/monsters/1007.gif" alt="" width={36} height={29} decoding="async" fetchPriority="low" />
-          <img className="homehero__walker homehero__walker--3" src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" fetchPriority="low" />
+      {/* An arcade stage over the heading (owner, 22 Sep 2026): a Swordsman
+          cutting down Porings, Lunatics and Drops in turn, on the site's own
+          neon grid, so a first-time visitor sees at a glance that this is a
+          Ragnarok site. Decoration only: CSS over the site's own 2-5 kB
+          sprites, the heading stays the page's largest paint, and it all
+          holds still for anyone who asks for less motion. */}
+      <section className="homehero">
+        <div className="arcade" aria-hidden="true">
+          <span className="arcade__sun" />
+          <span className="arcade__floor"><i /></span>
+          <span className="arcade__hud"><b>1P SWORDSMAN</b><span className="arcade__bar"><i /></span></span>
+          <span className="arcade__hud arcade__hud--right"><b>STAGE 1</b>PRONTERA FIELD</span>
+          <span className="arcade__fighter"><img src="/images/jobs/swordsman.png" alt="" width={104} height={104} decoding="async" /></span>
+          <span className="arcade__slash" />
+          <span className="arcade__foe arcade__foe--1"><img src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" /></span>
+          <span className="arcade__foe arcade__foe--2"><img src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" /></span>
+          <span className="arcade__foe arcade__foe--3"><img src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" /></span>
+          <span className="arcade__dmg">57</span>
+          <span className="arcade__dmg arcade__dmg--crit">124</span>
+          <span className="arcade__start">INSERT COIN</span>
         </div>
         <h1 className="pagehead__title">ฐานข้อมูล Ragnarok Zero Global ภาษาไทย</h1>
         <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
