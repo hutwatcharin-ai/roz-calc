@@ -2982,3 +2982,9 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farm-more[open] > summary::after { content: '▴'; }
 .farm-more > summary:hover { border-color: var(--cyan); }
 .farm-more > ol, .farm-more > ul { margin-top: 10px; }
+
+/* Notable drops on a map page (22 Sep 2026): the rate sits at the row's end
+   so a column of percentages reads down the right edge. */
+.mapdrops__title { margin: 14px 0 4px; font: 700 14px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); }
+.mapdrops__icon { vertical-align: middle; margin-inline-end: 6px; }
+.mapdrops__rate { margin-inline-start: auto; font-size: 13px; color: var(--cyan); }

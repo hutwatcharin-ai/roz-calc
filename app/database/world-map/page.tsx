@@ -2,8 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
 import WorldMap from '@/components/WorldMap';
-import { buildWorldMapEntries, WORLD_MAP_CODES, WORLD_MAP_REGIONS, type WorldMapSpawnRow } from '@/lib/world-map';
+import { buildWorldMapEntries, WORLD_MAP_CODES, WORLD_MAP_REGIONS, type WorldMapEntry, type WorldMapSpawnRow } from '@/lib/world-map';
 import { supabaseBrowser } from '@/lib/supabase';
+import { mapImage } from '@/lib/map-image';
 
 export const revalidate = 86400;
 
@@ -23,7 +24,15 @@ export default async function WorldMapPage() {
 
   if (error) console.error('world map spawn query failed', error);
   if (countError) console.error('world map count query failed', countError);
-  const { tiles, dungeons } = buildWorldMapEntries((data ?? []) as unknown as WorldMapSpawnRow[]);
+  const built = buildWorldMapEntries((data ?? []) as unknown as WorldMapSpawnRow[]);
+  // Resolved here, not in the client: mapImage reads the mirror off disk. A
+  // dungeon shows its first floor that has a picture.
+  const withImage = (entry: WorldMapEntry) => ({
+    ...entry,
+    image: entry.mapCodes.map((code) => mapImage(code)?.src).find(Boolean) ?? mapImage(entry.mapCode)?.src ?? null,
+  });
+  const tiles = built.tiles.map(withImage);
+  const dungeons = built.dungeons.map(withImage);
 
   return (
     <main className="shell worldmap-page">

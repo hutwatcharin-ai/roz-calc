@@ -143,6 +143,9 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
         onClick={(event) => event.stopPropagation()}
       >
         <span className="worldmap__tooltip-region" style={{ color: regions.find((region) => region.id === entry.regionId)?.color }}>{regions.find((region) => region.id === entry.regionId)?.label ?? (entry.kind === 'dungeon' ? 'Dungeon' : '')}</span>
+        {/* Decorative: the name under it says which map this is. Keyed so a
+            new tile never flashes the previous tile's picture while loading. */}
+        {entry.image && <img key={entry.image} className="worldmap__tooltip-pic" src={entry.image} alt="" width="200" height="200" decoding="async" />}
         <strong>{entry.nameEn}</strong>
         <code>{entry.mapCodes.length > 1 ? `${entry.mapCode} +${entry.mapCodes.length - 1}` : entry.mapCode}</code>
         <div className="worldmap__tooltip-icons">
@@ -200,6 +203,8 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
             <button className="worldmap__close" type="button" onClick={() => selectEntry(null)} aria-label="ปิดรายละเอียด">×</button>
             <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? 'DUNGEON' : regions.find((region) => region.id === selected.regionId)?.label}</span>
             <h2>{selected.nameEn}</h2><p className="mono worldmap__code">{selected.mapCode}</p>
+            {/* Touch has no hover, so the panel carries the same picture. */}
+            {selected.image && <img key={selected.image} className="worldmap__panel-pic" src={selected.image} alt={`แผนที่ ${selected.nameEn}`} width="240" height="240" decoding="async" />}
             <dl className="worldmap__stats"><div><dt>Map IDs</dt><dd>{selected.mapCodes.length}</dd></div><div><dt>Monster level</dt><dd>{levelText(selected)}</dd></div><div><dt>Monsters</dt><dd>{selected.monsters.length || '—'}</dd></div><div><dt>Aggressive</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount}` : '—'}</dd></div></dl>
             <h3>Monsters on this map</h3>
             <ul className="worldmap__monsters">{selected.monsters.map((monster) => <li key={monster.id}><Link href={`/database/monsters/${monster.id}`}>{monster.imageUrl && <img src={monster.imageUrl} alt="" width="32" height="32" loading="lazy" />}<span><strong>{monster.nameEn}</strong><small>Lv.{monster.level}{monster.isAggressive ? ' · ⚠ Aggressive' : ''}</small></span></Link></li>)}{!selected.monsters.length && <li className="worldmap__none">No monsters recorded</li>}</ul>

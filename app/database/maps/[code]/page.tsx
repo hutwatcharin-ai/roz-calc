@@ -12,6 +12,9 @@ import { getMapCanonical } from '@/lib/map-canonical';
 import { mapImage } from '@/lib/map-image';
 import { naviCommand } from '@/lib/rozglobal-guides';
 import { ALL_NPCS } from '@/lib/npcs';
+import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { itemHref } from '@/lib/item-href';
+import { notableDrops, type MapDropRow, type NotableDrop } from '@/lib/map-drops';
 
 export const revalidate = 86400;
 
@@ -28,7 +31,7 @@ export async function generateStaticParams() {
 const getMapSpawns = cache(async (code: string) => {
   return await supabaseBrowser()
     .from('monster_spawns')
-    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, atk_max, hit_100, flee_95)')
+    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, is_mvp, atk_max, hit_100, flee_95)')
     .eq('map_code', code);
 });
 
@@ -106,6 +109,43 @@ export default async function MapDetailPage({ params }: { params: { code: string
     .order('id');
   if (questError) console.error('map quest query failed', questError);
 
+  // What the map is worth farming for. Two reads keyed on this map's monsters:
+  // their drops, and every spawn count they have anywhere (the boss test needs
+  // the largest, not just this map's). A failure hides the section rather
+  // than showing a list that is quietly missing half its rows.
+  const monsterIds = [...new Set(monsters.map((m: any) => m.id as number))];
+  const [dropsRead, countsRead] = await Promise.all([
+    fetchAllRows<any>((from, to) =>
+      supabaseBrowser()
+        .from('monster_drops')
+        .select('id, monster_id, rate, items(id, name_en, icon_url, category)')
+        .in('monster_id', monsterIds)
+        .order('id')
+        .range(from, to),
+    ),
+    fetchAllRows<{ id: number; monster_id: number; amount: number | null }>((from, to) =>
+      supabaseBrowser()
+        .from('monster_spawns')
+        .select('id, monster_id, amount')
+        .in('monster_id', monsterIds)
+        .order('id')
+        .range(from, to),
+    ),
+  ]);
+  if (dropsRead.error) console.error('map drops query failed', dropsRead.error);
+  if (countsRead.error) console.error('map spawn count query failed', countsRead.error);
+  const largest = new Map<number, number>();
+  for (const row of countsRead.data ?? []) {
+    if (row.amount === null) continue;
+    largest.set(row.monster_id, Math.max(largest.get(row.monster_id) ?? 0, row.amount));
+  }
+  const drops = dropsRead.error || countsRead.error
+    ? null
+    : notableDrops(
+        monsters.map((m: any) => ({ id: m.id, name_en: m.name_en, is_mvp: m.is_mvp, largestSpawn: largest.get(m.id) ?? null })),
+        (dropsRead.data ?? []) as MapDropRow[],
+      );
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
@@ -164,6 +204,28 @@ export default async function MapDetailPage({ params }: { params: { code: string
       </div>
       </div>
 
+      {drops && (drops.cards.length > 0 || drops.gear.length > 0) && (
+        <div className="card" style={{ marginTop: 20 }}>
+          <h2 className="section-title">ไอเทมเด่นที่ดรอปในแมพนี้</h2>
+          <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>
+            การ์ดที่หาได้ในเกมตอนนี้ และอาวุธกับเกราะ เรียงตามโอกาสดรอป · นับเฉพาะมอนธรรมดา
+          </p>
+          {drops.cards.length > 0 && <DropGroup title="การ์ด" rows={drops.cards} />}
+          {drops.gear.length > 0 && <DropGroup title="อาวุธและเกราะ" rows={drops.gear} />}
+          {drops.bosses.length > 0 && (
+            <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
+              ไม่นับของจากบอส ดูที่หน้าบอสแต่ละตัว:{' '}
+              {drops.bosses.map((boss, i) => (
+                <span key={boss.id}>
+                  {i > 0 && ', '}
+                  <Link href={`/database/monsters/${boss.id}`}>{boss.name}</Link>
+                </span>
+              ))}
+            </p>
+          )}
+        </div>
+      )}
+
       {(questsHere ?? []).length > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
           <h2 className="section-title">เควสที่เกิดในแมพนี้ ({questsHere!.length})</h2>
@@ -201,5 +263,28 @@ export default async function MapDetailPage({ params }: { params: { code: string
         </div>
       )}
     </main>
+  );
+}
+
+function DropGroup({ title, rows }: { title: string; rows: NotableDrop[] }) {
+  return (
+    <>
+      <h3 className="mapdrops__title">{title}</h3>
+      <ul className="shoplist">
+        {rows.map((row) => (
+          <li key={row.itemId} className="shoprow">
+            <span className="shoprow__who">
+              {row.icon && <img className="mapdrops__icon" src={row.icon} alt="" width={24} height={24} loading="lazy" />}
+              <Link href={itemHref(row.itemId, row.category)}>{row.name}</Link>
+              <span className="muted">
+                {' '}· จาก <Link href={`/database/monsters/${row.monsterId}`}>{row.monsterName}</Link>
+                {row.sources > 1 && ` และอีก ${row.sources - 1} ตัว`}
+              </span>
+            </span>
+            <span className="mono mapdrops__rate">{row.rate === null ? '?' : `${row.rate}%`}</span>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

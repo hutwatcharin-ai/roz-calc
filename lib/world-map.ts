@@ -25,6 +25,8 @@ export interface WorldMapEntry {
   minLevel: number | null;
   maxLevel: number | null;
   aggressiveCount: number;
+  /** Map picture for the hover card and the panel; absent when none is mirrored. */
+  image?: string | null;
 }
 
 export interface WorldMapRegion {

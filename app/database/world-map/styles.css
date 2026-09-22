@@ -84,3 +84,9 @@
   .worldmap__tooltip { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .worldmap__tile, .worldmap__dungeon { transition: none; } }
+
+/* Map picture on the hover card and in the panel (22 Sep 2026). Square box so
+   the card never jumps while the picture loads; contain, because the renders
+   are not all square. */
+.worldmap__tooltip-pic { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; margin: 2px 0 8px; border-radius: 6px; background: #0b0820; border: 1px solid rgba(61,232,255,.22); }
+.worldmap__panel-pic { display: block; width: 100%; max-width: 240px; height: auto; aspect-ratio: 1; object-fit: contain; margin: 10px 0 4px; border-radius: 8px; background: #0b0820; border: 1px solid rgba(61,232,255,.22); }
