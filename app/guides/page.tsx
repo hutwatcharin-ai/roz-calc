@@ -18,6 +18,11 @@ export const metadata = {
 // Ordered by how often a player opens them, not alphabetically.
 const GUIDES = [
   {
+    href: '/guides/classes',
+    title: 'ไกด์อาชีพ ครบ 19 อาชีพ',
+    blurb: 'สายการเล่นของแต่ละอาชีพ แผนอัพสกิลครบทุกแต้ม การแจกสเตตัส เส้นทางเก็บเลเวล และของที่ควรใส่ ทุกข้อลิงก์ไปคลิปต้นทาง',
+  },
+  {
     href: '/guides/farm-guide',
     title: 'จุดฟาร์มแนะนำ',
     blurb: 'ช่วงเลเวลไหนควรไปตีอะไร ไล่ตั้งแต่ออกจากเมืองใหม่ ๆ จนถึงเลเวลสูงสุด พร้อมเหตุผลว่าทำไมจุดนั้น',

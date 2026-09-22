@@ -5,6 +5,7 @@ import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 import { itemHref } from '@/lib/item-href';
 import { ALL_NPCS } from '@/lib/npcs';
 import { getMapCanonical } from '@/lib/map-canonical';
+import { CLASS_GUIDES } from '@/lib/class-guides';
 
 // Regenerated with the daily ISR window, same as the list pages.
 export const revalidate = 86400;
@@ -32,6 +33,11 @@ export const NEWS_PATHS: string[] = ['/news/patch-2026-09-17', '/news/patch-2026
 // Static routes that live outside the nav tables (footer-only pages, news).
 // Exported so sitemap.test.ts can assert STATIC_PATHS is exactly nav + these
 // and nothing else has crept in.
+// One page per class guide, all served by the one [job] route, so they are
+// listed from the guide data rather than checked as page files. The index
+// page itself comes in through the nav.
+export const CLASS_GUIDE_PATHS: string[] = CLASS_GUIDES.map((guide) => `/guides/classes/${guide.slug}`);
+
 export const EXTRA_STATIC_PATHS: string[] = ['/about', ...NEWS_PATHS];
 
 export const STATIC_PATHS: string[] = [
@@ -142,6 +148,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
+    ...CLASS_GUIDE_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
     ...monsterIds.map((row) => ({ url: `${SITE_URL}/database/monsters/${row.id}`, lastModified: row.updated_at })),
     ...itemIds.map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
