@@ -391,12 +391,15 @@ export default async function ClassGuidePage({ params }: { params: { job: string
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
         <Link href="/guides">ไกด์</Link>
         <span className="crumbs__sep" aria-hidden="true">›</span>
+        <Link href="/guides/classes">อาชีพ</Link>
+        <span className="crumbs__sep" aria-hidden="true">›</span>
         <span className="crumbs__here">{guide.job}</span>
       </nav>
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
           { name: 'ไกด์', path: '/guides' },
+          { name: 'อาชีพ', path: '/guides/classes' },
           { name: guide.job, path: `/guides/classes/${guide.slug}` },
         ])}
       />
@@ -409,6 +412,24 @@ export default async function ClassGuidePage({ params }: { params: { job: string
           source={`รวบรวมจากคลิปผู้เล่นและเว็บ ${Object.values(guide.sources).filter((s) => s.url).length} แหล่ง · อัปเดต ${guide.gathered}`}
         />
       </div>
+
+      {(() => {
+        // The rest of this job's family, so a Priest reader can reach the
+        // Acolyte route and an Acolyte reader can see where it leads.
+        const family = CLASS_GUIDES.filter((g) => g.path[0] === guide.path[0] && g.slug !== guide.slug);
+        if (!family.length) return null;
+        return (
+          <nav className="cguide__kin" aria-label="อาชีพในสายเดียวกัน">
+            <span className="muted">สายเดียวกัน</span>
+            {family.map((g) => (
+              <Link key={g.slug} href={`/guides/classes/${g.slug}`} className="chip">
+                <img src={`/images/jobs/${g.slug}.png`} alt="" width={28} height={28} />
+                {g.job}{g.path.length === 1 ? ' (อาชีพแรก)' : ''}
+              </Link>
+            ))}
+          </nav>
+        );
+      })()}
 
       <div className="cguide__layout">
         <aside className="cguide__toc">
