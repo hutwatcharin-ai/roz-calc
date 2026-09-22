@@ -121,20 +121,18 @@ export default async function HomePage({
       {/* An arcade stage over the heading (owner, 22 Sep 2026): a Swordsman
           cutting down Porings, Lunatics and Drops in turn, on the site's own
           neon grid, so a first-time visitor sees at a glance that this is a
-          Ragnarok site. Decoration only: CSS over the site's own 2-5 kB
-          sprites, the heading stays the page's largest paint, and it all
-          holds still for anyone who asks for less motion. */}
+          Ragnarok site. The swing, the hits and the deaths are the game's own
+          frames (scripts/build-arcade-sprites.py, 25 kB for all of them).
+          Decoration only: the heading stays the page's largest paint, and it
+          all holds still for anyone who asks for less motion. */}
       <section className="homehero">
         <div className="arcade" aria-hidden="true">
           <span className="arcade__sun" />
           <span className="arcade__floor"><i /></span>
           <span className="arcade__hud"><b>1P SWORDSMAN</b><span className="arcade__bar"><i /></span></span>
           <span className="arcade__hud arcade__hud--right"><b>STAGE 1</b>PRONTERA FIELD</span>
-          <span className="arcade__fighter"><img src="/images/jobs/swordsman.png" alt="" width={104} height={104} decoding="async" /></span>
-          <span className="arcade__slash" />
-          <span className="arcade__foe arcade__foe--1"><img src="/images/monsters/1002.gif" alt="" width={41} height={39} decoding="async" /></span>
-          <span className="arcade__foe arcade__foe--2"><img src="/images/monsters/1063.gif" alt="" width={35} height={28} decoding="async" /></span>
-          <span className="arcade__foe arcade__foe--3"><img src="/images/monsters/1113.gif" alt="" width={41} height={39} decoding="async" /></span>
+          <span className="arcade__fighter" />
+          <span className="arcade__foe"><i /></span>
           <span className="arcade__dmg">57</span>
           <span className="arcade__dmg arcade__dmg--crit">124</span>
           <span className="arcade__start">INSERT COIN</span>
