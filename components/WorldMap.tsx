@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { WorldMapEntry, WorldMapRegion } from '@/lib/world-map';
 import { regionBounds, searchWorldMap } from '@/lib/world-map';
 import { clampViewport, focusRegion, resetViewport, zoomAt, type ViewportState } from '@/lib/map-viewport';
@@ -29,6 +29,20 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
   const matches = useMemo(() => new Set(searchWorldMap(entries, query)), [entries, query]);
   const selected = entries.find((entry) => entry.key === selectedKey) ?? null;
   const active = selected ?? entries.find((entry) => entry.key === hoveredKey) ?? null;
+  const tipRef = useRef<HTMLDivElement>(null);
+  // Measured, not guessed: the card grew a map picture (22 Sep 2026) and a
+  // fixed height guess let it hang off the bottom of the viewport.
+  const [tipSize, setTipSize] = useState({ width: 226, height: 380 });
+  useLayoutEffect(() => {
+    const el = tipRef.current;
+    if (!el) return;
+    const measure = () => setTipSize((size) => (size.width === el.offsetWidth && size.height === el.offsetHeight ? size : { width: el.offsetWidth, height: el.offsetHeight }));
+    measure();
+    // The picture loads after the first paint and changes the height.
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [active?.key]);
 
   const dimensions = useCallback(() => {
     const rect = viewportRef.current?.getBoundingClientRect();
@@ -128,15 +142,31 @@ export default function WorldMap({ tiles, dungeons, regions, totalMaps }: Props)
   function renderTooltip(entry: WorldMapEntry) {
     const icons = entry.monsters.filter((monster) => monster.imageUrl).slice(0, 6);
     const remaining = entry.monsters.length - icons.length;
-    const rightEdge = entry.x > 1020;
-    const bottomEdge = entry.y > 850;
+    // Placed against the part of the world the reader can see, not the whole
+    // 1280x1024 image: after a pan or zoom a tile near the viewport's bottom
+    // edge can sit mid-image, and the card used to drop out of sight below it.
+    const { width: viewW, height: viewH } = dimensions();
+    const gap = 8;
+    const screenX = view.x + entry.x * view.scale;
+    const screenY = view.y + entry.y * view.scale;
+    const dx = screenX + 14 + tipSize.width > viewW - gap ? -(tipSize.width + 14) : 14;
+    let dy = -10;
+    if (screenY + dy + tipSize.height > viewH - gap) {
+      dy = screenY - tipSize.height - 10 >= gap
+        ? -(tipSize.height + 10)
+        // Fits neither below nor above: pin it inside the viewport instead.
+        : Math.max(gap - screenY, viewH - gap - tipSize.height - screenY);
+    }
     return (
       <div
+        ref={tipRef}
         className={`worldmap__tooltip${selectedKey === entry.key ? ' is-pinned' : ''}`}
         style={{
           left: entry.x,
           top: entry.y,
-          transform: `translate(${rightEdge ? 'calc(-100% - 14px)' : '14px'}, ${bottomEdge ? 'calc(-100% - 10px)' : '-10px'}) scale(${1 / view.scale})`,
+          // Offsets are screen pixels; the card is counter-scaled, so they are
+          // divided by the stage scale to land where they are meant to.
+          transform: `translate(${dx / view.scale}px, ${dy / view.scale}px) scale(${1 / view.scale})`,
         }}
         onPointerEnter={() => setHoveredKey(entry.key)}
         onPointerLeave={() => setHoveredKey((key) => key === entry.key ? null : key)}
