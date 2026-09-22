@@ -9,8 +9,10 @@ import { clampViewport, focusRegion, resetViewport, zoomAt, type ViewportState }
 export interface WorldGridView {
   /** Fields, towns and dungeon floors, positioned in grid pixels. */
   entries: WorldMapEntry[];
-  /** Way in -> first floor, in grid pixels. */
-  lines: { x1: number; y1: number; x2: number; y2: number }[];
+  /** Each dungeon's way in, anchor to first floor, in grid pixels. */
+  lines: { dungeon: string; anchor: string; points: { x: number; y: number }[] }[];
+  /** A name over each dungeon cluster. */
+  labels: { dungeon: string; x: number; y: number; text: string }[];
   width: number;
   height: number;
 }
@@ -143,6 +145,25 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
     return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
   }, [tiles, mode]);
 
+  // The ways in are drawn only for what is in focus: the dungeon under the
+  // pointer or selected, or every dungeon that opens off the hovered map.
+  // Twenty grey lines at once could not be told apart (owner, 22 Sep 2026).
+  const traced = useMemo(() => {
+    if (mode !== 'grid' || !grid || !active) return new Set<string>();
+    const keys = new Set<string>();
+    if (active.dungeonKey) keys.add(active.dungeonKey);
+    for (const line of grid.lines) if (line.anchor === active.mapCode) keys.add(line.dungeon);
+    for (const d of active.dungeons ?? []) keys.add(d.key);
+    return keys;
+  }, [mode, grid, active]);
+  const tracedCodes = useMemo(() => {
+    const codes = new Set<string>();
+    if (!grid) return codes;
+    for (const line of grid.lines) if (traced.has(line.dungeon)) codes.add(line.anchor);
+    for (const entry of grid.entries) if (entry.dungeonKey && traced.has(entry.dungeonKey)) codes.add(entry.mapCode);
+    return codes;
+  }, [grid, traced]);
+
   function onPickDungeon(key: string) {
     const choice = dungeonChoices.find((d) => d.key === key);
     if (!choice) return;
@@ -218,9 +239,9 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
         <div className="worldmap__tooltip-icons">
           {icons.map((monster) => <img key={monster.id} src={monster.imageUrl ?? ''} alt={monster.nameEn} title={`${monster.nameEn} · Lv.${monster.level}`} width="28" height="28" loading="lazy" />)}
           {remaining > 0 && <span>+{remaining}</span>}
-          {!entry.monsters.length && <em>No monsters recorded</em>}
+          {!entry.monsters.length && <em>{entry.cellKind === 'town' ? 'เมือง · ชี้เพื่อดูทางเข้าดันเจี้ยน' : entry.cellKind === 'passage' ? `ทางผ่านไป ${entry.dungeonName ?? 'ดันเจี้ยน'}` : 'No monsters recorded'}</em>}
         </div>
-        <small>{levelText(entry)} · {entry.monsters.length} monsters{entry.aggressiveCount ? ` · ⚠ ${entry.aggressiveCount} aggressive` : ''}</small>
+        {entry.monsters.length > 0 && <small>{levelText(entry)} · {entry.monsters.length} monsters{entry.aggressiveCount ? ` · ⚠ ${entry.aggressiveCount} aggressive` : ''}</small>}
         {entry.dungeons?.length ? <small className="worldmap__tooltip-dungeons">ดันเจี้ยน: {entry.dungeons.map((d) => `${d.name} (${d.floors.length} ชั้น)`).join(' · ')}</small> : null}
         {selectedKey === entry.key && <Link href={`/database/maps/${encodeURIComponent(entry.mapCode)}`}>Open full map page →</Link>}
       </div>
@@ -269,14 +290,22 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
             {mode === 'atlas' && regions.map((region) => <span key={region.id} className="worldmap__region-label" style={{ left: region.x, top: region.y, color: region.color }}>{region.label}</span>)}
             {mode === 'grid' && grid && (
               <svg className="worldmap__gridlines" width={grid.width} height={grid.height} aria-hidden="true">
-                {grid.lines.map((l, i) => <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} />)}
+                {grid.lines.filter((l) => traced.has(l.dungeon)).map((l) => (
+                  <polyline key={l.dungeon} points={l.points.map((p) => `${p.x},${p.y}`).join(' ')} />
+                ))}
               </svg>
+            )}
+            {mode === 'grid' && grid && grid.labels.map((label) => (
+              <span key={label.dungeon} className={`worldmap__grouplabel${traced.has(label.dungeon) ? ' is-traced' : ''}`} style={{ left: label.x, top: label.y }}>{label.text}</span>
+            ))}
+            {mode === 'grid' && grid && traced.size > 0 && (
+              <span className="sr-only" aria-live="polite">กำลังแสดงทางเข้าดันเจี้ยน</span>
             )}
             {mode === 'grid' && tiles.map((entry) => (
               <button
                 key={entry.key}
                 type="button"
-                className={`worldmap__cell is-${entry.cellKind ?? 'field'}${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`}
+                className={`worldmap__cell is-${entry.cellKind ?? 'field'}${traced.size && tracedCodes.has(entry.mapCode) ? ' is-traced' : ''}${traced.size && !tracedCodes.has(entry.mapCode) && hoveredKey !== entry.key && selectedKey !== entry.key ? ' is-faded' : ''}${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`}
                 style={{ left: entry.x, top: entry.y, width: entry.width, height: entry.height }}
                 aria-label={`${entry.nameEn}, ${entry.mapCode}${entry.monsters.length ? `, ${entry.monsters.length} monsters` : ''}`}
                 aria-pressed={selectedKey === entry.key}
@@ -298,13 +327,13 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
             {active && tiles.includes(active) && renderTooltip(active)}
           </div>
           <div className="worldmap__controls" aria-label="ควบคุมการซูม"><button type="button" onClick={() => changeZoom(1.25)} aria-label="ซูมเข้า">+</button><button type="button" onClick={() => changeZoom(0.8)} aria-label="ซูมออก">−</button><button type="button" onClick={reset}>RESET</button></div>
-          <p className="worldmap__hint">{mode === 'grid' ? 'ชี้รูปแมพเพื่อดูมอน · กดเพื่อดูรายละเอียด · เส้นเทาคือทางเข้าดันเจี้ยน' : 'Hover a tile to preview monsters · click for details'}</p>
+          <p className="worldmap__hint">{mode === 'grid' ? 'ชี้รูปแมพเพื่อดูมอนและทางเข้าดันเจี้ยน · กดเพื่อดูรายละเอียด' : 'Hover a tile to preview monsters · click for details'}</p>
         </div>
 
         <aside className={`worldmap__panel${selected ? ' is-open' : ''}`} aria-live="polite">
           {selected ? <>
             <button className="worldmap__close" type="button" onClick={() => selectEntry(null)} aria-label="ปิดรายละเอียด">×</button>
-            <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? `DUNGEON${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : selected.cellKind === 'town' ? 'TOWN' : regions.find((region) => region.id === selected.regionId)?.label}</span>
+            <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? `DUNGEON${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : selected.cellKind === 'town' ? 'TOWN' : selected.cellKind === 'passage' ? `ทางผ่าน${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : regions.find((region) => region.id === selected.regionId)?.label}</span>
             <h2>{selected.nameEn}</h2><p className="mono worldmap__code">{selected.mapCode}</p>
             {/* Touch has no hover, so the panel carries the same picture. */}
             {selected.image && <img key={selected.image} className="worldmap__panel-pic" src={selected.image} alt={`แผนที่ ${selected.nameEn}`} width="240" height="240" decoding="async" />}

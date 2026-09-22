@@ -65,3 +65,10 @@ describe('dungeonName', () => {
     expect(dungeonName('Glast Heim')).toBe('Glast Heim');
   });
 });
+
+describe('the way in', () => {
+  it('records the maps walked through before the first floor', () => {
+    const [pyramid] = dungeonsByTile(file, tiles, withMonsters).get('moc_fild19')!;
+    expect(pyramid.via).toEqual(['moc_ruins']);
+  });
+});

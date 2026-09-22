@@ -105,6 +105,9 @@ export default async function WorldMapPage() {
   });
   const tiles = built.tiles.map(withExtras);
 
+  const viaOf = new Map<string, string[]>();
+  for (const [tile, list] of byTile) for (const d of list) viaOf.set(`${tile}|${d.key}`, d.via);
+
   // The grid view: the same fields, plus towns and every dungeon floor, each
   // map in a cell of its own (lib/world-grid).
   const links = (mapLinks as unknown as MapLinksFile).links;
@@ -113,10 +116,10 @@ export default async function WorldMapPage() {
     code,
     fields: [...new Set(links.filter(([from, , , to, kind]) => from === code && kind === 200 && fieldCodes.has(to)).map((l) => l[3]))],
   })).filter((t) => t.fields.length > 0);
-  const gridDungeons = new Map<string, { key: string; entranceMap: string; fallbackTile: string; floors: string[] }>();
+  const gridDungeons = new Map<string, { key: string; entranceMap: string; fallbackTile: string; floors: string[]; via: string[] }>();
   for (const tile of tiles) {
     for (const d of tile.dungeons ?? []) {
-      if (!gridDungeons.has(d.key)) gridDungeons.set(d.key, { key: d.key, entranceMap: d.entrance.map, fallbackTile: tile.mapCode, floors: d.floors.map((f) => f.code) });
+      if (!gridDungeons.has(d.key)) gridDungeons.set(d.key, { key: d.key, entranceMap: d.entrance.map, fallbackTile: tile.mapCode, floors: d.floors.map((f) => f.code), via: viaOf.get(`${tile.mapCode}|${d.key}`) ?? [] });
     }
   }
   const rawTiles = (layout as { tiles: Record<string, { x: number; y: number }> }).tiles;
@@ -145,6 +148,15 @@ export default async function WorldMapPage() {
       };
     }
     const dungeon = gridDungeons.get(cell.dungeon!)!;
+    if (cell.kind === 'passage') {
+      // A dock or lobby on the way in: half a cell, its own picture, no monsters.
+      return {
+        key: `via:${cell.code}`, mapCode: cell.code, mapCodes: [cell.code], nameEn: pictures[cell.code]?.name ?? cell.code,
+        regionId: regionOf.get(dungeon.fallbackTile) ?? '', kind: 'tile' as const, ...box, width: CELL / 2, height: CELL / 2,
+        monsters: [], minLevel: null, maxLevel: null, aggressiveCount: 0, image: mapImage(cell.code)?.src ?? null,
+        dungeonKey: dungeon.key, dungeonName: dungeonName(mapNames.get(dungeon.key) ?? dungeon.key),
+      };
+    }
     const monsters = monstersFor([cell.code], rows);
     return {
       key: `floor:${cell.code}`, mapCode: cell.code, mapCodes: [cell.code], nameEn: mapNames.get(cell.code) ?? cell.code,
@@ -155,10 +167,12 @@ export default async function WorldMapPage() {
   });
   const gridView: WorldGridView = {
     entries: gridEntries,
-    lines: laid.lines.map((l) => {
-      const a = centre(l.from.col, l.from.row);
-      const b = centre(l.to.col, l.to.row);
-      return { x1: a.x, y1: a.y, x2: b.x, y2: b.y };
+    lines: laid.lines.map((l) => ({ dungeon: l.dungeon, anchor: l.anchor, points: l.points.map((p) => centre(p.col, p.row)) })),
+    labels: laid.lines.map((l) => {
+      const first = l.points[l.points.length - 1];
+      const at = centre(first.col, first.row);
+      const d = gridDungeons.get(l.dungeon)!;
+      return { dungeon: l.dungeon, x: at.x, y: at.y - CELL / 2 - 4, text: `${dungeonName(mapNames.get(d.key) ?? d.key)} · ${d.floors.length} ชั้น` };
     }),
     width: laid.cols * PITCH,
     height: laid.rows * PITCH,

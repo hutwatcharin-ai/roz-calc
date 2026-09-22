@@ -137,3 +137,14 @@
 .worldmap__views button[aria-pressed="true"] { background: var(--yellow); color: var(--yellow-ink); }
 .worldmap__pick select { min-height: 36px; max-width: 200px; }
 @media (prefers-reduced-motion: reduce) { .worldmap__cell { transition: none; } }
+/* Ways in, drawn one dungeon at a time (22 Sep 2026): a bright path through
+   the passage maps, the rest of the grid faded back so the path reads. */
+.worldmap__gridlines polyline { fill: none; stroke: var(--yellow); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 10 8; filter: drop-shadow(0 0 4px rgba(0,0,0,.8)); }
+.worldmap__cell.is-passage { border: 2px dashed rgba(255,229,61,.75); border-radius: 50%; overflow: hidden; }
+.worldmap__cell.is-passage > img { border-radius: 50%; }
+.worldmap__cell.is-passage .worldmap__cellname { font-size: 6px; }
+.worldmap__cell.is-faded { opacity: .28; }
+.worldmap__cell.is-traced { z-index: 7; box-shadow: 0 0 0 2px var(--yellow); }
+.worldmap__gridlines { z-index: 6; }
+.worldmap__grouplabel { position: absolute; z-index: 5; translate: -50% -100%; padding: 1px 6px; border-radius: 4px; background: rgba(11,8,32,.85); color: #FF9AC8; font: 700 9px/14px var(--font-sarabun), sans-serif; white-space: nowrap; pointer-events: none; }
+.worldmap__grouplabel.is-traced { color: var(--yellow); z-index: 9; }

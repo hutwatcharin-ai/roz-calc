@@ -42,6 +42,11 @@ export interface TileDungeon {
   floors: DungeonFloor[];
   /** The portal into the first floor: map and cell, for a /navi line. */
   entrance: { map: string; x: number; y: number };
+  /**
+   * Maps walked through between the tile and the first floor, in order
+   * (a town, a dock, a tower lobby). Empty when the tile opens straight in.
+   */
+  via: string[];
 }
 
 const FIELD = /fild|_f\d/i;
@@ -88,6 +93,7 @@ export function dungeonsByTile(
     // Walk out through passage maps, noting each portal into a floor.
     const starts = new Map<string, { map: string; x: number; y: number }>();
     const visited = new Set<string>([tile]);
+    const cameFrom = new Map<string, string>();
     let frontier = [tile];
     for (let hop = 0; hop <= MAX_PASSAGE && frontier.length; hop++) {
       const nextFrontier: string[] = [];
@@ -97,6 +103,7 @@ export function dungeonsByTile(
             if (!starts.has(edge.to)) starts.set(edge.to, { map: at, x: edge.x, y: edge.y });
           } else if (isPassage(edge.to) && !visited.has(edge.to) && (edge.walk || at === tile || isLobby(edge.to)) && OPEN_TILE.test(tile)) {
             visited.add(edge.to);
+            cameFrom.set(edge.to, at);
             nextFrontier.push(edge.to);
           }
         }
@@ -135,7 +142,9 @@ export function dungeonsByTile(
         // Listed in code order (moc_pryd01..06), which is how the game numbers
         // floors; warp distance would put a basement between 1F and 3F.
         .sort((a, b) => a.code.localeCompare(b.code, 'en', { numeric: true }));
-      dungeons.push({ key: floors[0].code, floors, entrance });
+      const via: string[] = [];
+      for (let at = entrance.map; at !== tile && at; at = cameFrom.get(at)!) via.unshift(at);
+      dungeons.push({ key: floors[0].code, floors, entrance, via });
     }
     if (dungeons.length) result.set(tile, dungeons);
   }

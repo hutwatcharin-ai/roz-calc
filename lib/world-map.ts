@@ -30,7 +30,7 @@ export interface WorldMapEntry {
   /** Dungeons that open from this tile (lib/world-dungeons), floor by floor. */
   dungeons?: WorldDungeon[];
   /** Grid view only: what the cell is, and for a floor, its dungeon. */
-  cellKind?: 'field' | 'town' | 'floor';
+  cellKind?: 'field' | 'town' | 'floor' | 'passage';
   dungeonKey?: string;
   dungeonName?: string;
 }

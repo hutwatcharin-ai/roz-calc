@@ -9,7 +9,7 @@ const input = {
   ],
   towns: [{ code: 'town', fields: ['f_west', 'f_east', 'f_south'] }],
   dungeons: [
-    { key: 'd1', entranceMap: 'town', fallbackTile: 'f_west', floors: ['d1', 'd2', 'd3'] },
+    { key: 'd1', entranceMap: 'lobby', fallbackTile: 'f_west', floors: ['d1', 'd2', 'd3'], via: ['town', 'lobby'] },
   ],
 };
 
@@ -32,11 +32,20 @@ describe('layoutGrid', () => {
   });
 
   it('lays every floor of a dungeon out, next to one another', () => {
-    const floors = cells.filter((c) => c.dungeon === 'd1');
+    const floors = cells.filter((c) => c.dungeon === 'd1' && c.kind === 'floor');
     expect(floors.map((c) => c.code)).toEqual(['d1', 'd2', 'd3']);
     for (let i = 1; i < floors.length; i++) {
       const gap = Math.abs(floors[i].col - floors[i - 1].col) + Math.abs(floors[i].row - floors[i - 1].row);
       expect(gap).toBeLessThanOrEqual(2);
     }
+  });
+
+  it('puts the passage map on the way in, and draws one path through it', () => {
+    const { cells: all, lines } = layoutGrid(input);
+    expect(all.find((c) => c.code === 'lobby')?.kind).toBe('passage');
+    const line = lines.find((l) => l.dungeon === 'd1')!;
+    expect(line.anchor).toBe('town');
+    const codes = line.points.map((p) => all.find((c) => c.col === p.col && c.row === p.row)?.code);
+    expect(codes).toEqual(['town', 'lobby', 'd1']);
   });
 });

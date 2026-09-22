@@ -9,16 +9,20 @@
 
 export interface GridCell {
   code: string;
-  kind: 'field' | 'town' | 'floor';
+  /** 'passage': a map walked through on the way in (a dock, a tower lobby). */
+  kind: 'field' | 'town' | 'floor' | 'passage';
   col: number;
   row: number;
   /** For a floor: the dungeon it belongs to (its first floor's code). */
   dungeon?: string;
 }
 
+/** The way into one dungeon: from the map it opens off, through any passage
+ *  maps, to its first floor. Drawn only while that dungeon is in focus. */
 export interface GridLine {
-  from: { col: number; row: number };
-  to: { col: number; row: number };
+  dungeon: string;
+  anchor: string;
+  points: { col: number; row: number }[];
 }
 
 export interface GridInput {
@@ -27,7 +31,7 @@ export interface GridInput {
   /** Towns and the field tiles they open onto by walking. */
   towns: { code: string; fields: string[] }[];
   /** Each dungeon once: where its way in is, and its floors in order. */
-  dungeons: { key: string; entranceMap: string; fallbackTile: string; floors: string[] }[];
+  dungeons: { key: string; entranceMap: string; fallbackTile: string; floors: string[]; via?: string[] }[];
 }
 
 const STEP_X = 58.5;
@@ -35,6 +39,8 @@ const STEP_Y = 58;
 const key = (col: number, row: number) => `${col},${row}`;
 
 export function layoutGrid(input: GridInput): { cells: GridCell[]; lines: GridLine[]; cols: number; rows: number } {
+  // Codes already on the grid are never placed twice; a later dungeon that
+  // passes the same dock reuses its cell.
   const taken = new Map<string, GridCell>();
   const place = (cell: GridCell) => taken.set(key(cell.col, cell.row), cell);
   const free = (col: number, row: number) => !taken.has(key(col, row));
@@ -106,22 +112,40 @@ export function layoutGrid(input: GridInput): { cells: GridCell[]; lines: GridLi
     where.set(town.code, spot);
   }
 
-  // Dungeons: floors chained through the nearest free cells, starting beside
-  // the way in; one line from the way in to the first floor.
+  // Dungeons: the passage maps first (a dock, a lobby), then the floors,
+  // chained through free cells steered away from the fields. Each dungeon
+  // keeps its whole way in as one path, anchor to first floor.
   const lines: GridLine[] = [];
   for (const dungeon of input.dungeons) {
-    const anchor = where.get(dungeon.entranceMap) ?? where.get(dungeon.fallbackTile);
+    const anchorCode = where.has(dungeon.entranceMap) ? dungeon.entranceMap
+      : dungeon.via?.find((code) => where.has(code) && taken.get(key(where.get(code)!.col, where.get(code)!.row))?.kind === 'town')
+        ?? dungeon.fallbackTile;
+    const anchor = where.get(anchorCode);
     if (!anchor) continue;
+    const via = dungeon.via ?? [];
+    const passages = via.slice(via.indexOf(anchorCode) + 1);
+    const points = [anchor];
     let prev = anchor;
     const cluster: { col: number; row: number }[] = [];
+    for (const code of passages) {
+      const spot = where.get(code) ?? nearestFree(prev.col, prev.row, [anchor, ...cluster], true);
+      if (!where.has(code)) {
+        place({ code, kind: 'passage', dungeon: dungeon.key, ...spot });
+        where.set(code, spot);
+      }
+      points.push(spot);
+      cluster.push(spot);
+      prev = spot;
+    }
     dungeon.floors.forEach((floor, i) => {
       const spot = nearestFree(prev.col, prev.row, [anchor, ...cluster], true);
       place({ code: floor, kind: 'floor', dungeon: dungeon.key, ...spot });
       where.set(floor, spot);
       cluster.push(spot);
-      if (i === 0 && Math.max(Math.abs(spot.col - anchor.col), Math.abs(spot.row - anchor.row)) > 1) lines.push({ from: anchor, to: spot });
+      if (i === 0) points.push(spot);
       prev = spot;
     });
+    lines.push({ dungeon: dungeon.key, anchor: anchorCode, points });
   }
 
   // Shift everything so the grid starts at 0,0.
@@ -129,10 +153,7 @@ export function layoutGrid(input: GridInput): { cells: GridCell[]; lines: GridLi
   const c0 = Math.min(...cells.map((c) => c.col));
   const r0 = Math.min(...cells.map((c) => c.row));
   for (const c of cells) { c.col -= c0; c.row -= r0; }
-  for (const l of lines) {
-    l.from = { col: l.from.col - c0, row: l.from.row - r0 };
-    l.to = { col: l.to.col - c0, row: l.to.row - r0 };
-  }
+  for (const l of lines) l.points = l.points.map((p) => ({ col: p.col - c0, row: p.row - r0 }));
   return {
     cells,
     lines,
