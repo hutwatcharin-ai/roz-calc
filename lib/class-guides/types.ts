@@ -52,6 +52,30 @@ export interface GearRow {
   cites: Cite[];
 }
 
+/**
+ * The skills a build wants, per job slug of data/skill-trees.json. The page
+ * runs these through lib/skill-plan.ts, which adds every prerequisite and
+ * counts the points, so the plan is complete and its sums are checked rather
+ * than typed in.
+ */
+export interface SkillPlan {
+  picks: Record<string, Record<string, number>>;
+  /** Where the picks come from. */
+  basis: CitedLine;
+  /** What to do with points the picks leave over, if a source says. */
+  leftover?: CitedLine;
+}
+
+export interface RouteStep {
+  range: string;
+  text: string;
+  /** Map codes, linked to their map pages. */
+  maps?: string[];
+  /** Monster ids, shown with their sprite. */
+  monsters?: number[];
+  cites: Cite[];
+}
+
 export interface ClassBuild {
   id: string;
   name: string;
@@ -64,6 +88,7 @@ export interface ClassBuild {
   statNotes?: CitedLine[];
   skills?: SkillStep[];
   skillNotes?: CitedLine[];
+  plan?: SkillPlan;
   gear?: GearRow[];
   play?: CitedLine[];
   maps?: CitedLine[];
@@ -81,6 +106,13 @@ export interface ClassGuide {
   gathered: string;
   summary: string;
   facts: CitedLine[];
+  /** Job slugs from 1st job to this one, as in data/skill-trees.json. */
+  path: string[];
+  /** Job name as the equipment page's job filter spells it. */
+  equipJob: string;
+  route?: RouteStep[];
+  routeNotes?: CitedLine[];
+  gearByLevel?: (GearRow & { range: string })[];
   strengths: CitedLine[];
   weaknesses: CitedLine[];
   builds: ClassBuild[];

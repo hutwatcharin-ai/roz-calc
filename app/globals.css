@@ -3030,3 +3030,22 @@ a.cguide__cite:hover, a.cguide__cite:focus-visible { color: var(--cyan); border-
 @media (max-width: 520px) {
   .cguide__gear li { grid-template-columns: 1fr; gap: 2px; }
 }
+.cguide__jumps { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 14px; }
+.cguide__plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.cguide__planjob { border: 1px solid var(--hair); border-radius: 10px; padding: 10px 12px; }
+.cguide__planjob h4 { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 8px; font: 700 14.5px/1.4 var(--font-sarabun), sans-serif; }
+.cguide__points { color: var(--cyan); font-size: 12.5px; font-weight: 500; }
+.cguide__points.is-over { color: var(--pink, #FF4FA3); }
+.cguide__planjob ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cguide__planjob li { display: grid; grid-template-columns: 20px 1fr auto; column-gap: 8px; align-items: center; font-size: 13.5px; }
+.cguide__planjob li.is-prereq .cguide__planname { color: var(--faint); }
+.cguide__planjob li img, .cguide__planjob .cguide__skill-blank { width: 20px; height: 20px; }
+.cguide__via { grid-column: 2 / -1; color: var(--faint); font-size: 12px; }
+.cguide__route { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cguide__route li { display: grid; grid-template-columns: 78px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--hair); }
+.cguide__route li:last-child { border-bottom: 0; }
+.cguide__range { color: var(--yellow); font-size: 13px; font-weight: 600; }
+.cguide__items .chip .muted { font-size: 11px; margin-inline-start: 4px; }
+@media (max-width: 520px) {
+  .cguide__route li { grid-template-columns: 1fr; gap: 2px; }
+}

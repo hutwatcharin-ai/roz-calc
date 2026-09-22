@@ -17,6 +17,8 @@ import { supabaseBrowser } from '@/lib/supabase';
 import { itemHref } from '@/lib/item-href';
 import { CLASS_GUIDES, citeHref, classGuide } from '@/lib/class-guides';
 import type { Cite, CitedLine, ClassBuild, ClassGuide } from '@/lib/class-guides/types';
+import { buildPlan, type JobPlan } from '@/lib/skill-plan';
+import trees from '@/data/skill-trees.json';
 
 export const revalidate = 86400;
 
@@ -35,6 +37,62 @@ export function generateMetadata({ params }: { params: { job: string } }): Metad
 
 type SkillInfo = { name: string; icon_url: string | null; max_level: number | null };
 type ItemInfo = { id: number; name_en: string; icon_url: string | null; category: string | null };
+type MonsterInfo = { id: number; name_en: string; level: number; image_url: string | null };
+
+const JOB_NAMES: Record<string, string> = Object.fromEntries(
+  Object.entries((trees as { jobs: Record<string, { name: string }> }).jobs).map(([slug, job]) => [slug, job.name]),
+);
+
+function ItemChips({ ids, items }: { ids?: number[]; items: Map<number, ItemInfo> }) {
+  if (!ids?.length) return null;
+  return (
+    <span className="cguide__items">
+      {ids.map((id) => {
+        const item = items.get(id);
+        if (!item) return null;
+        return (
+          <Link key={id} className="chip" href={itemHref(id, item.category)}>
+            {item.icon_url && <img src={item.icon_url} alt="" width={20} height={20} loading="lazy" />}
+            {item.name_en}
+          </Link>
+        );
+      })}
+    </span>
+  );
+}
+
+// The full point plan: every prerequisite in, every point counted. Worked out
+// by lib/skill-plan.ts from the build's picks, never typed in, so the sums on
+// the page cannot drift from the skills listed under them.
+function PlanView({ plans, skills }: { plans: JobPlan[]; skills: Map<string, SkillInfo> }) {
+  return (
+    <div className="cguide__plan">
+      {plans.map((plan) => (
+        <div key={plan.job} className="cguide__planjob">
+          <h4>
+            {JOB_NAMES[plan.job] ?? plan.job}
+            <span className={`mono cguide__points${plan.used > plan.budget ? ' is-over' : ''}`}>
+              {plan.used}/{plan.budget} แต้ม{plan.budget - plan.used > 0 ? ` · เหลือ ${plan.budget - plan.used}` : ''}
+            </span>
+          </h4>
+          <ul>
+            {plan.rows.map((row) => {
+              const icon = skills.get(row.name)?.icon_url;
+              return (
+                <li key={row.name} className={row.reason === 'prereq' ? 'is-prereq' : undefined}>
+                  {icon ? <img src={icon} alt="" width={20} height={20} loading="lazy" /> : <span className="cguide__skill-blank" aria-hidden="true" />}
+                  <span className="cguide__planname">{row.name}</span>
+                  <span className="mono cguide__lv">{row.free ? 'ฟรี' : `${row.level}/${row.max}`}</span>
+                  {row.reason === 'prereq' && <span className="cguide__via">ทางผ่านของ {row.neededBy.join(', ')}</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function Cites({ cites, guide }: { cites: Cite[]; guide: ClassGuide }) {
   return (
@@ -70,7 +128,7 @@ function Lines({ lines, guide }: { lines: CitedLine[]; guide: ClassGuide }) {
 
 const STAT_KEYS = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
 
-function BuildSection({ build, guide, skills, items }: { build: ClassBuild; guide: ClassGuide; skills: Map<string, SkillInfo>; items: Map<number, ItemInfo> }) {
+function BuildSection({ build, guide, skills, items, plans }: { build: ClassBuild; guide: ClassGuide; skills: Map<string, SkillInfo>; items: Map<number, ItemInfo>; plans: JobPlan[] | null }) {
   return (
     <section id={build.id} className="card cguide__build">
       <h2 className="section-title">
@@ -139,6 +197,17 @@ function BuildSection({ build, guide, skills, items }: { build: ClassBuild; guid
         </>
       )}
 
+      {build.plan && plans && (
+        <>
+          <h3 className="cguide__h3">แผนแต้มสกิลครบทุกตัว</h3>
+          <p className="cguide__idea">
+            {build.plan.basis.text} <Cites cites={build.plan.basis.cites} guide={guide} /> · สกิลสีจางคือทางผ่านที่ต้องลงก่อนถึงจะเปิดสกิลที่เลือกได้ นับตามผังสกิลของ roz.prontera.info
+          </p>
+          <PlanView plans={plans} skills={skills} />
+          {build.plan.leftover && <Lines lines={[build.plan.leftover]} guide={guide} />}
+        </>
+      )}
+
       {build.gear && build.gear.length > 0 && (
         <>
           <h3 className="cguide__h3">ของสวมใส่</h3>
@@ -148,20 +217,7 @@ function BuildSection({ build, guide, skills, items }: { build: ClassBuild; guid
                 <span className="cguide__slot">{row.slot}</span>
                 <span className="cguide__gear-body">
                   {row.text}
-                  {row.items && row.items.length > 0 && (
-                    <span className="cguide__items">
-                      {row.items.map((id) => {
-                        const item = items.get(id);
-                        if (!item) return null;
-                        return (
-                          <Link key={id} className="chip" href={itemHref(id, item.category)}>
-                            {item.icon_url && <img src={item.icon_url} alt="" width={20} height={20} loading="lazy" />}
-                            {item.name_en}
-                          </Link>
-                        );
-                      })}
-                    </span>
-                  )}
+                  <ItemChips ids={row.items} items={items} />
                   <Cites cites={row.cites} guide={guide} />
                 </span>
               </li>
@@ -183,17 +239,35 @@ export default async function ClassGuidePage({ params }: { params: { job: string
 
   // Icons and exact names from the database, so a renamed item or skill shows
   // up here as a missing chip instead of a confident wrong name.
-  const skillNames = [...new Set(guide.builds.flatMap((b) => (b.skills ?? []).map((s) => s.skill)))];
-  const itemIds = [...new Set(guide.builds.flatMap((b) => (b.gear ?? []).flatMap((g) => g.items ?? [])))];
+  const plans = new Map(guide.builds.filter((b) => b.plan).map((b) => [b.id, buildPlan(guide.path, b.plan!.picks).jobs]));
+  const skillNames = [...new Set([
+    ...guide.builds.flatMap((b) => (b.skills ?? []).map((s) => s.skill)),
+    ...[...plans.values()].flatMap((jobs) => jobs.flatMap((j) => j.rows.map((r) => r.name))),
+  ])];
+  const itemIds = [...new Set([
+    ...guide.builds.flatMap((b) => (b.gear ?? []).flatMap((g) => g.items ?? [])),
+    ...(guide.gearByLevel ?? []).flatMap((g) => g.items ?? []),
+  ])];
+  const monsterIds = [...new Set((guide.route ?? []).flatMap((step) => step.monsters ?? []))];
+  const mapCodes = [...new Set((guide.route ?? []).flatMap((step) => step.maps ?? []))];
   const db = supabaseBrowser();
-  const [skillRead, itemRead] = await Promise.all([
-    skillNames.length ? db.from('skills').select('name, icon_url, max_level').in('name', skillNames) : Promise.resolve({ data: [], error: null }),
-    itemIds.length ? db.from('items').select('id, name_en, icon_url, category').in('id', itemIds) : Promise.resolve({ data: [], error: null }),
+  const none = Promise.resolve({ data: [], error: null });
+  const [skillRead, itemRead, monsterRead, mapRead] = await Promise.all([
+    skillNames.length ? db.from('skills').select('name, icon_url, max_level').in('name', skillNames) : none,
+    itemIds.length ? db.from('items').select('id, name_en, icon_url, category').in('id', itemIds) : none,
+    monsterIds.length ? db.from('monsters').select('id, name_en, level, image_url').in('id', monsterIds) : none,
+    mapCodes.length ? db.from('monster_spawns').select('map_code, map_display_name').in('map_code', mapCodes) : none,
   ]);
-  if (skillRead.error) console.error('class guide skills query failed', skillRead.error);
-  if (itemRead.error) console.error('class guide items query failed', itemRead.error);
+  for (const [what, read] of [['skills', skillRead], ['items', itemRead], ['monsters', monsterRead], ['maps', mapRead]] as const) {
+    if (read.error) console.error(`class guide ${what} query failed`, read.error);
+  }
   const skills = new Map(((skillRead.data ?? []) as SkillInfo[]).map((s) => [s.name, s]));
   const items = new Map(((itemRead.data ?? []) as ItemInfo[]).map((i) => [i.id, i]));
+  const monsters = new Map(((monsterRead.data ?? []) as MonsterInfo[]).map((m) => [m.id, m]));
+  const mapNames = new Map<string, string>();
+  for (const row of (mapRead.data ?? []) as { map_code: string; map_display_name: string | null }[]) {
+    if (row.map_display_name && !mapNames.has(row.map_code)) mapNames.set(row.map_code, row.map_display_name);
+  }
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -233,6 +307,10 @@ export default async function ClassGuidePage({ params }: { params: { job: string
             </a>
           ))}
         </div>
+        <p className="cguide__jumps">
+          {guide.route && <a href="#route">เส้นทางเก็บเลเวล</a>}
+          {guide.gearByLevel && <a href="#gear">ของตามช่วงเลเวล</a>}
+        </p>
       </nav>
 
       <div className="cguide__pros">
@@ -247,8 +325,66 @@ export default async function ClassGuidePage({ params }: { params: { job: string
       </div>
 
       {guide.builds.map((build) => (
-        <BuildSection key={build.id} build={build} guide={guide} skills={skills} items={items} />
+        <BuildSection key={build.id} build={build} guide={guide} skills={skills} items={items} plans={plans.get(build.id) ?? null} />
       ))}
+
+      {guide.route && guide.route.length > 0 && (
+        <section id="route" className="card cguide__build">
+          <h2 className="section-title">เส้นทางเก็บเลเวล {guide.from} ถึง {guide.job}</h2>
+          <ol className="cguide__route">
+            {guide.route.map((step, i) => (
+              <li key={i}>
+                <span className="cguide__range mono">Lv {step.range}</span>
+                <span className="cguide__gear-body">
+                  <span>{step.text} <Cites cites={step.cites} guide={guide} /></span>
+                  {(step.maps?.length || step.monsters?.length) ? (
+                    <span className="cguide__items">
+                      {(step.maps ?? []).map((code) => (
+                        <Link key={code} className="chip" href={`/database/maps/${encodeURIComponent(code)}`}>
+                          {mapNames.get(code) ?? code} <span className="mono muted">{code}</span>
+                        </Link>
+                      ))}
+                      {(step.monsters ?? []).map((id) => {
+                        const monster = monsters.get(id);
+                        if (!monster) return null;
+                        return (
+                          <Link key={id} className="chip" href={`/database/monsters/${id}`}>
+                            {monster.image_url && <img src={monster.image_url} alt="" width={20} height={20} loading="lazy" />}
+                            {monster.name_en} <span className="mono muted">Lv {monster.level}</span>
+                          </Link>
+                        );
+                      })}
+                    </span>
+                  ) : null}
+                </span>
+              </li>
+            ))}
+          </ol>
+          {guide.routeNotes && <Lines lines={guide.routeNotes} guide={guide} />}
+        </section>
+      )}
+
+      {guide.gearByLevel && guide.gearByLevel.length > 0 && (
+        <section id="gear" className="card cguide__build">
+          <h2 className="section-title">ของสวมใส่ตามช่วงเลเวล</h2>
+          <ul className="cguide__gear">
+            {guide.gearByLevel.map((row, i) => (
+              <li key={i}>
+                <span className="cguide__slot"><span className="mono">Lv {row.range}</span><br />{row.slot}</span>
+                <span className="cguide__gear-body">
+                  {row.text}
+                  <ItemChips ids={row.items} items={items} />
+                  <Cites cites={row.cites} guide={guide} />
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="cguide__idea">
+            ดูของทั้งหมดที่ {guide.job} ใส่ได้ ตามเลเวลของคุณ:{' '}
+            <Link href={`/database/equipment?job=${encodeURIComponent(guide.equipJob)}`}>ค้นอุปกรณ์ที่ {guide.job} ใส่ได้ →</Link>
+          </p>
+        </section>
+      )}
 
       <Caveat label="เชื่อได้แค่ไหน">
         ไกด์นี้รวมจากคลิปและเว็บของผู้เล่น ไม่ใช่ข้อมูลทางการ · คลิปส่วนใหญ่อัดตอนเลเวลตันที่ 60 และ Job 60
