@@ -37,7 +37,12 @@ const FIXES = [
   [1033, 'Elder Wilow', 'Elder Willow'],
   [1165, 'Sand Man', 'Sandman'],
   [1037, 'Side Winder', 'Sidewinder'],
-  [1262, 'Mutant Dragon', 'Mutant Dragonoid'],
+  // 1262 was renamed to 'Mutant Dragonoid' here on 7 Sep 2026 because its
+  // card is called "Mutant Dragonoid Card". The owner checked the game on
+  // 23 Sep 2026: the monster itself is displayed as "Mutant Dragon", and the
+  // client's sprite name (Mutant_Dragon) agrees. The card keeps the longer
+  // name; the monster is back to the short one, so this fix is retired.
+  // [1262, 'Mutant Dragon', 'Mutant Dragonoid'],
   [1188, 'Bon Gun', 'Bongun'],
   [1281, 'Sageworm', 'Sage Worm'],
   [1074, 'Shellfish', 'Shell Fish'],
