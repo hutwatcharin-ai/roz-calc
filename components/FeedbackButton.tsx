@@ -2,7 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import { supabaseBrowser } from '@/lib/supabase';
 
 export default function FeedbackButton({ pageType, entityId }: { pageType: string; entityId: string }) {
   const [open, setOpen] = useState(false);
@@ -12,6 +11,8 @@ export default function FeedbackButton({ pageType, entityId }: { pageType: strin
 
   async function submit() {
     setFailed(false);
+    // Imported on submit so the client is not in the page's first load.
+    const { supabaseBrowser } = await import('@/lib/supabase');
     const db = supabaseBrowser();
     const { error } = await db.from('feedback_reports').insert({ page_type: pageType, entity_id: entityId, message });
     if (error) {

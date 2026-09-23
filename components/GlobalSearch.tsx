@@ -14,7 +14,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { supabaseBrowser } from '@/lib/supabase';
 import { mergeSearchResults, SEARCH_TYPE_LABELS, type SearchResult } from '@/lib/search';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { matchScore, searchWords } from '@/lib/smart-search';
@@ -60,6 +59,11 @@ export default function GlobalSearch() {
 
     setLoading(true);
     const timer = setTimeout(async () => {
+      // Loaded here, not at the top: this component sits in the site's nav,
+      // so importing supabase-js normally shipped 49 kB of it to every page
+      // for a client that only runs once someone types (Lighthouse, 23 Sep
+      // 2026: 46 kB of it unused).
+      const { supabaseBrowser } = await import('@/lib/supabase');
       const db = supabaseBrowser();
       const words = searchWords(query);
       // Every word has to appear, in any order: "card poring" finds Poring
