@@ -1,5 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import { mobThresholds } from '@/lib/monster-thresholds';
+import AdsensePreview from '@/components/AdsensePreview';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import FormerNameLine from '@/components/FormerNameLine';
@@ -455,6 +456,8 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           })()}
         </div>
       </div>
+
+      <AdsensePreview size="rectangle" where="ท้ายหน้ารายละเอียดมอน (หน้ารายละเอียดรวมกัน ~66,000 ครั้ง/เดือน)" />
 
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="monster" entityId={String(monster.id)} />

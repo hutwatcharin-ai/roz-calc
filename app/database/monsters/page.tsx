@@ -1,5 +1,7 @@
 // app/database/monsters/page.tsx
 import type { Metadata } from 'next';
+import { Fragment } from 'react';
+import AdsensePreview from '@/components/AdsensePreview';
 import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -592,8 +594,10 @@ export default async function MonsterListPage({
             aggro flag, which rides with the monster on every surface, not just
             the detail page (spec 3.15.1). */}
         <div className="mongrid">
-          {(monsters ?? []).map((m) => (
-            <Link key={m.id} href={`/database/monsters/${m.id}`} className="moncard" data-element={m.element ?? undefined}>
+          {(monsters ?? []).map((m, index) => (
+            <Fragment key={`row-${m.id}`}>
+            {index === 12 && <AdsensePreview size="banner" where="แทรกกลางรายการ หลังการ์ดใบที่ 12 (หน้ารายการรวม ~55,000 ครั้ง/เดือน)" />}
+            <Link href={`/database/monsters/${m.id}`} className="moncard" data-element={m.element ?? undefined}>
               {m.image_url ? (
                 <img className="moncard__sprite" loading="lazy" decoding="async" src={m.image_url} alt="" width={40} height={40} />
               ) : (
@@ -626,6 +630,7 @@ export default async function MonsterListPage({
                 )}
               </span>
             </Link>
+            </Fragment>
           ))}
         </div>
       </div>
