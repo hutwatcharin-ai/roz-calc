@@ -3422,3 +3422,18 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .roadmap__items { font-size: 13.5px; line-height: 1.7; }
 .roadmap__done { color: var(--cyan); }
 @media (max-width: 560px) { .roadmap__row { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* ---------- /tools/enchant ---------- */
+.enchcalc { margin-top: 14px; }
+.enchcalc__controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.enchcalc__controls label { display: grid; gap: 4px; font-size: 13px; color: var(--dim); }
+.enchcalc__controls select, .enchcalc__controls input { min-height: 44px; padding: 0 10px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); color: var(--text); font: 400 14px/1.4 var(--font-sarabun), sans-serif; }
+.enchcalc__out { margin-top: 16px; }
+.enchcalc__big { display: grid; gap: 2px; padding: 14px; border: 1px solid var(--cyan); border-radius: var(--radius); background: color-mix(in srgb, var(--cyan) 8%, transparent); }
+.enchcalc__big strong { font: 700 30px/1.1 var(--font-mono), monospace; color: var(--cyan); }
+.enchcalc__label { font-size: 13px; color: var(--dim); }
+.enchcalc__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 12px 0 0; }
+.enchcalc__grid > div { padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }
+.enchcalc__grid dt { font-size: 12.5px; color: var(--dim); }
+.enchcalc__grid dd { margin: 2px 0 0; font: 700 16px/1.2 var(--font-mono), monospace; color: var(--text); }
+@media (max-width: 720px) { .enchcalc__controls, .enchcalc__grid { grid-template-columns: minmax(0, 1fr); } }
