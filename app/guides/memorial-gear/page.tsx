@@ -101,7 +101,7 @@ export default async function MemorialGearPage() {
       />
       <PageHeader title="ชุดดันเจี้ยนความทรงจำ — 4 แรงค์" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
-        <strong>อัปต่อกันเป็นทอด</strong> ไม่ได้หาทีละชิ้น — เก็บแรงค์ IV แล้วอัปขึ้นไป ·
+        <strong>อัปต่อกันเป็นทอด</strong> ไม่ได้หาทีละชิ้น เก็บแรงค์ IV แล้วอัปขึ้นไป ·
         เพดานเลเวล {LEVEL_CAP} จึงใส่ได้จริงแรงค์เดียว ที่เหลือคือปลายทางของชิ้นที่เก็บอยู่
       </p>
 
@@ -111,7 +111,7 @@ export default async function MemorialGearPage() {
           English, so this is the wording a player sees on the item in game.
           Translating it would make the page and the item window disagree. */}
       <p className="muted" style={{ fontSize: 13, marginTop: 0 }}>
-        ช่อง &quot;ผลจากในเกม&quot; คือข้อความบนไอเทมในเกมตรงๆ ไม่ได้แปล — จะได้ตรงกับที่เห็นตอนกดดูของ
+        ช่อง &quot;ผลจากในเกม&quot; คือข้อความบนไอเทมในเกมตรงๆ ไม่ได้แปล จะได้ตรงกับที่เห็นตอนกดดูของ
       </p>
 
       <section className="card card--cyan">
@@ -152,7 +152,7 @@ export default async function MemorialGearPage() {
           </table>
         </div>
         <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
-          ทุกขั้นใช้ของแรงค์ก่อนหน้า 1 ชิ้น + คริสตัล 50 ก้อน + Jellostone ตามชิ้น — ของเดิมหายไปกลายเป็นชิ้นใหม่
+          ทุกขั้นใช้ของแรงค์ก่อนหน้า 1 ชิ้น + คริสตัล 50 ก้อน + Jellostone ตามชิ้น ของเดิมหายไปกลายเป็นชิ้นใหม่
         </p>
       </section>
 
@@ -162,7 +162,7 @@ export default async function MemorialGearPage() {
             แรงค์ {r.rank} · {r.name} <span className="muted" style={{ fontWeight: 400 }}>· ใส่ได้ตอนนี้</span>
           </h2>
           <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
-            ได้จากหีบในดันเจี้ยนความทรงจำโหมดปกติ — <Link href="/database/maps/prt_sewb1">ท่อ Prontera</Link> และ{' '}
+            ได้จากหีบในดันเจี้ยนความทรงจำโหมดปกติ ที่<Link href="/database/maps/prt_sewb1">ท่อ Prontera</Link> และ{' '}
             <Link href="/database/maps/orcsdun01">ถ้ำออร์ค Geffen</Link>
           </p>
           {r.sets.map((s) => (
@@ -194,7 +194,7 @@ export default async function MemorialGearPage() {
       <section style={{ marginTop: 30 }}>
         <h2 className="section-title">Jellostone ทำจากอะไร</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
-          หินก้อนหนึ่งใช้เศษ 5 ชิ้น — เศษดรอปจากมอนที่ชื่อตรงกับหิน
+          หินก้อนหนึ่งใช้เศษ 5 ชิ้น เศษดรอปจากมอนที่ชื่อตรงกับหิน
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">
@@ -219,7 +219,7 @@ export default async function MemorialGearPage() {
 
         <h3 className="section-title" style={{ fontSize: 15, marginTop: 20 }}>ชิ้นไหนใช้หินอะไร</h3>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
-          แหล่งที่มาลงไว้ {Object.keys(stoneFor).length} ชิ้นจาก {pieceCount} ชิ้น ที่เหลือเขาไม่ได้ลงตาราง — <strong>ไม่ใช่ว่าไม่ต้องใช้</strong>
+          แหล่งที่มาลงไว้ {Object.keys(stoneFor).length} ชิ้นจาก {pieceCount} ชิ้น ที่เหลือเขาไม่ได้ลงตาราง <strong>ไม่ใช่ว่าไม่ต้องใช้</strong>
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">
@@ -250,7 +250,7 @@ export default async function MemorialGearPage() {
       </section>
 
       <section style={{ marginTop: 30 }}>
-        <h2 className="section-title">เครื่องประดับ 4 ชิ้น — คนละสายกับชุด</h2>
+        <h2 className="section-title">เครื่องประดับ 4 ชิ้น คนละสายกับชุด</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
           ไม่ได้อยู่ในสายอัปเกรด ทำเองจากอัญมณีที่ดรอปในดันเจี้ยนโหมดยาก ดันเจี้ยนละชิ้น
         </p>
@@ -339,7 +339,7 @@ export default async function MemorialGearPage() {
   
           <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>
           <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
-            หนึ่งครั้งได้หนึ่งอย่าง · <strong>+2 หายากมาก</strong> — เกราะ 0.09% ต่อสเตตัส แต่รองเท้า 3.57% จะลุ้นให้ลุ้นที่รองเท้า
+            หนึ่งครั้งได้หนึ่งอย่าง · <strong>+2 หายากมาก</strong> เกราะ 0.09% ต่อสเตตัส แต่รองเท้า 3.57% จะลุ้นให้ลุ้นที่รองเท้า
           </p>
           <div className="recipe__scroll">
             <table className="data-table recipe">
@@ -372,7 +372,7 @@ export default async function MemorialGearPage() {
       <Caveat label="เชื่อได้แค่ไหน">
         ค่าของแต่ละชิ้นในตารางด้านบนเป็น<strong>ข้อความจากในเกม</strong>ที่เก็บไว้ในฐานข้อมูลเว็บนี้ ไม่ได้แปลหรือสรุปใหม่ ·
         ส่วนสายอัปเกรดและวัตถุดิบมาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026)
-        ซึ่งเป็นข้อมูลที่ไคลเอนต์ไม่ได้บอก — ตรวจแล้วว่าชื่อชิ้นทั้ง {pieceCount} ชิ้นตรงกับฐานข้อมูลเรา และตัวเลข HP/SP/DEF/FLEE ตรงกับในเกมทุกชิ้น ·
+        ซึ่งเป็นข้อมูลที่ไคลเอนต์ไม่ได้บอก ตรวจแล้วว่าชื่อชิ้นทั้ง {pieceCount} ชิ้นตรงกับฐานข้อมูลเรา และตัวเลข HP/SP/DEF/FLEE ตรงกับในเกมทุกชิ้น ·
         <strong>แรงค์ III ขึ้นไปยังไม่มีใครในเซิร์ฟโกลบอลทดสอบได้</strong> เพราะเลเวลยังไม่ถึง ถ้าเปิดแล้วตัวเลขไม่ตรง บอกได้เลย
       </Caveat>
 

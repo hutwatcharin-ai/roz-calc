@@ -575,7 +575,7 @@ export default async function MonsterListPage({
       />
       {hiddenUnknownHp > 0 && (
         <p className="muted" style={{ marginTop: -6, marginBottom: 10, fontSize: 13 }}>
-          ซ่อนมอนที่ยังไม่รู้ค่าเลือดไป {hiddenUnknownHp} ตัว — ตัวกรองเลือดใช้กับตัวที่มีตัวเลขจริงเท่านั้น
+          ซ่อนมอนที่ยังไม่รู้ค่าเลือดไป {hiddenUnknownHp} ตัว ตัวกรองเลือดใช้กับตัวที่มีตัวเลขจริงเท่านั้น
         </p>
       )}
 

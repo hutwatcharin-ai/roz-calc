@@ -90,7 +90,7 @@ export default function RoadmapPage() {
       <AdSlot slot="inline" />
 
       <section className="card card--yellow" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>แผนปีแรก — อ่านเป็นแผน ไม่ใช่กำหนดการ</h2>
+        <h2 className="section-title" style={{ marginTop: 0 }}>แผนปีแรก อ่านเป็นแผน ไม่ใช่กำหนดการ</h2>
         <ul style={{ margin: '8px 0 0', paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
           <li>แผนนี้ระบุ<strong>เดือน</strong> ไม่เคยระบุวัน</li>
           <li>เป็นแผนฝั่ง Global <strong>ฝั่งไทยอาจไม่ตรงกัน</strong> และแหล่งที่รายงานไม่ได้บอกว่าแผนเปลี่ยนได้หรือไม่</li>
@@ -106,7 +106,7 @@ export default function RoadmapPage() {
               <span className="roadmap__month">{row.label}</span>
               <span className="roadmap__items">
                 {row.items.join(' · ')}
-                {DONE_MONTHS.has(row.month) && <strong className="roadmap__done"> — ลงแล้ว</strong>}
+                {DONE_MONTHS.has(row.month) && <strong className="roadmap__done"> ลงแล้ว</strong>}
               </span>
             </li>
           ))}
@@ -127,9 +127,9 @@ export default function RoadmapPage() {
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title" style={{ marginTop: 0 }}>หน้าที่เกี่ยวข้อง</h2>
         <ul style={{ margin: '8px 0 0', paddingInlineStart: 20, lineHeight: 2 }}>
-          <li><Link href="/guides/woe">สงครามกิลด์ (WoE)</Link> — ลงเซิร์ฟแล้วเดือนกันยายน</li>
-          <li><Link href="/guides/job-change">เปลี่ยนอาชีพขั้น 2</Link> — เปิดพร้อมแพตช์ 3 ก.ย.</li>
-          <li><Link href="/tools/leveling-spots">จุดเก็บเลเวล</Link> และ <Link href="/drop-finder">ค้นของดรอป</Link> — อัปเดตตามแมพที่เปิดใหม่ทุกแพตช์</li>
+          <li><Link href="/guides/woe">สงครามกิลด์ (WoE)</Link> ลงเซิร์ฟแล้วเดือนกันยายน</li>
+          <li><Link href="/guides/job-change">เปลี่ยนอาชีพขั้น 2</Link> เปิดพร้อมแพตช์ 3 ก.ย.</li>
+          <li><Link href="/tools/leveling-spots">จุดเก็บเลเวล</Link> และ <Link href="/drop-finder">ค้นของดรอป</Link> อัปเดตตามแมพที่เปิดใหม่ทุกแพตช์</li>
         </ul>
       </section>
     </main>

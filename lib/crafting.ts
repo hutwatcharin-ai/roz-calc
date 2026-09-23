@@ -122,7 +122,7 @@ export const KIND_NEEDS: Record<CraftKind, string | null> = {
   forge: 'ต้องเป็น Blacksmith ที่มีสกิลตีของชนิดนั้น (เช่น Smith Sword) พร้อมค้อนกับทั่ง',
   arrow: 'ต้องเป็น Archer แล้วใช้สกิล Making Arrow',
   brew: 'ต้องเป็น Alchemist ที่เรียน Potion Research Lv.5 แล้วใช้ Prepare Potion พร้อม Medicine Bowl 1 ชิ้นต่อครั้ง',
-  cook: 'ต้องมีชุดทำอาหารกับตำราระดับที่ตรงกับสูตรติดตัว — ตำราไม่ถูกใช้หมด ใช้ซ้ำได้เรื่อยๆ',
+  cook: 'ต้องมีชุดทำอาหารกับตำราระดับที่ตรงกับสูตรติดตัว ตำราไม่ถูกใช้หมด ใช้ซ้ำได้เรื่อยๆ',
   ore: 'ต้องเป็น Blacksmith ที่มีสกิลหลอมแร่ (Iron Tempering / Steel Tempering)',
   quest: 'แลกกับ NPC ไม่ใช่สกิลคราฟต์',
   other: null,

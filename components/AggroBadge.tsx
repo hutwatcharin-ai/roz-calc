@@ -40,7 +40,7 @@ export default function AggroBadge({ monster }: { monster: AggroMonster }) {
   const percent = Math.round(DANGER_ATK_RATIO * 100);
   const title =
     level === 'unknown'
-      ? 'ยังไม่มีข้อมูลว่าเข้าโจมตีก่อนหรือไม่ — อย่าเพิ่งปล่อยทิ้งไว้'
+      ? 'ยังไม่มีข้อมูลว่าเข้าโจมตีก่อนหรือไม่ อย่าเพิ่งปล่อยทิ้งไว้'
       : level === 'safe'
       ? 'ไม่เข้าโจมตีก่อน'
       : playerMaxHp === null || monster.atk_max === null

@@ -225,7 +225,7 @@ export default async function Patch20260917Page() {
       <div className="card card--cyan">
         <h2 className="section-title" style={{ marginTop: 0 }}>สรุปสั้น</h2>
         <ul style={{ margin: 0, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <li><a href="#mvp"><strong>MVP Raid ใหม่ 4 ตัว</strong></a> — Orc Lord, Dracula, Doppelganger, Osiris</li>
+          <li><a href="#mvp"><strong>MVP Raid ใหม่ 4 ตัว</strong></a> Orc Lord, Dracula, Doppelganger, Osiris</li>
           <li><a href="#dungeons"><strong>เปิด Pyramid และ Geffen Dungeon</strong></a> พร้อมเควสรายวันของทั้งสองที่</li>
           <li><strong>WoE (War of Emperium)</strong> ปรับระบบสงครามกิลด์</li>
           <li><a href="#beer"><strong>Nordfeld Beer</strong></a> ใส่ในระบบล่าอัตโนมัติ (Auto-Hunting) ได้แล้ว</li>
@@ -291,14 +291,14 @@ export default async function Patch20260917Page() {
       </section>
 
       <section id="dungeons" style={{ marginTop: 26 }}>
-        <h2 className="section-title">Pyramid — 6 ชั้น</h2>
+        <h2 className="section-title">Pyramid 6 ชั้น</h2>
         <p className="muted" style={{ marginTop: 2, fontSize: 13 }}>
           ชั้นล่าง B2F มี Arclouse (Lv107) กับ Ancient Mummy (Lv114) · การ์ด Mummy, Isis, Verit, Arclouse และ Ancient Mummy
           หาได้แล้วตั้งแต่แพตช์นี้ · ดูว่าตีโดนไหมที่<Link href="/tools/leveling-spots">หาที่เก็บเลเวล</Link>
         </p>
         <DungeonTable title="ชั้น" codes={PYRAMID} spawns={spawnRows} />
 
-        <h2 className="section-title" style={{ marginTop: 22 }}>Geffen Dungeon — 3 ชั้น</h2>
+        <h2 className="section-title" style={{ marginTop: 22 }}>Geffen Dungeon 3 ชั้น</h2>
         <p className="muted" style={{ marginTop: 2, fontSize: 13 }}>
           B3F มี Deviruchi (Lv93) กับ Marionette (Lv90) เป็นตัวหลัก
         </p>

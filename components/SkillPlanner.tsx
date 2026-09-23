@@ -61,7 +61,7 @@ function SkillCell({
   const locked = blocking.length > 0 && level === 0;
   // Conditions on one line, the same set the browser tooltip used to carry.
   const conditions = [
-    skill.free ? 'สกิลเควส — ไม่กินแต้ม' : null,
+    skill.free ? 'สกิลเควส ไม่กินแต้ม' : null,
     skill.required_job_level !== null ? `ต้อง Job Lv ${skill.required_job_level}` : null,
     locked ? `ต้องมี ${blocking.map((b) => `${b.name} Lv ${b.level}`).join(' + ')} ก่อน` : null,
   ].filter(Boolean) as string[];
@@ -219,7 +219,7 @@ export default function SkillPlanner({
 
       {anyOver && (
         <p className="planwarn">
-          ใส่แต้มเกินที่อาชีพนั้นมี — เตือนไว้เฉย ๆ ไม่ได้ล็อก
+          ใส่แต้มเกินที่อาชีพนั้นมี เตือนไว้เฉย ๆ ไม่ได้ล็อก
         </p>
       )}
 

@@ -158,34 +158,34 @@ export default async function BattlePassSummerPage() {
         <h2 className="section-title">เล่นยังไง</h2>
         <ol style={{ marginTop: 8, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
           <li>
-            <strong>สาย Free เปิดฟรี</strong> — คุยกับ NPC ชื่อ <strong>Readword</strong> ไม่ต้องซื้ออะไรเลย ไต่ได้ถึง Tier {FREE_TRACK.length}
+            <strong>สาย Free เปิดฟรี</strong> คุยกับ NPC ชื่อ <strong>Readword</strong> ไม่ต้องซื้ออะไรเลย ไต่ได้ถึง Tier {FREE_TRACK.length}
           </li>
           <li>
-            <strong>สาย Paid ต้องมีตั๋ว</strong> — ซื้อ{' '}
+            <strong>สาย Paid ต้องมีตั๋ว</strong> ซื้อ{' '}
             <Link href={itemHref(ZELSTAR.box4, icons.get(ZELSTAR.box4)?.category)}>Zelstar 4ea Box</Link> (700 KP) หรือ{' '}
             <Link href={itemHref(ZELSTAR.box40, icons.get(ZELSTAR.box40)?.category)}>Zelstar 40ea Box</Link> (7,000 KP) จาก Kafra Shop
             แล้วเอา Zelstar {ZELSTAR_PER_TICKET} ดวงไปแลกตั๋วกับ <strong>Ticketling</strong>
           </li>
           <li>
-            <strong>เปิดสาย Paid</strong> — เอา{' '}
+            <strong>เปิดสาย Paid</strong> เอา{' '}
             <Link href={itemHref(BATTLE_PASS_ITEM_ID, icons.get(BATTLE_PASS_ITEM_ID)?.category)}>Battle Pass (Summer)</Link>{' '}
             ไปให้ <strong>Rideword</strong> ที่เมือง Izlude
           </li>
           <li>
-            <strong>ทำเควสรายวัน</strong> — เควส 1 อันจบ = ขึ้น 1 Tier ได้รางวัลของ Tier นั้นทันที ตัวอย่างเควสที่ประกาศโชว์ไว้คือฆ่ามอนธาตุน้ำ 30 ตัว และฆ่ามอนเผ่าพืช 30 ตัว
+            <strong>ทำเควสรายวัน</strong> เควส 1 อันจบ = ขึ้น 1 Tier ได้รางวัลของ Tier นั้นทันที ตัวอย่างเควสที่ประกาศโชว์ไว้คือฆ่ามอนธาตุน้ำ 30 ตัว และฆ่ามอนเผ่าพืช 30 ตัว
           </li>
           <li>
-            <strong>Tier 51-70 ไม่มีเควสให้ทำ</strong> — เฉพาะสาย Paid เท่านั้นที่ไปต่อได้ โดยจ่าย Zelstar {ZELSTAR_PER_TIER} ดวงต่อ 1 Tier
+            <strong>Tier 51-70 ไม่มีเควสให้ทำ</strong> เฉพาะสาย Paid เท่านั้นที่ไปต่อได้ โดยจ่าย Zelstar {ZELSTAR_PER_TIER} ดวงต่อ 1 Tier
             (25 ดวง = 5 Tier, 50 ดวง = 10 Tier) คุยกับ Rideword หลังถึง Tier {FREE_TRACK.length}
           </li>
         </ol>
         <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-          ประกาศเรียกของชิ้นที่ใช้เปิดสาย Paid ทั้งคำว่า &ldquo;ตั๋ว&rdquo; และชื่อไอเทม Battle Pass (Summer) — หน้านี้ยกมาตามที่เขียนไว้ ไม่ได้สรุปเองว่าเป็นชิ้นเดียวกัน
+          ประกาศเรียกของชิ้นที่ใช้เปิดสาย Paid ทั้งคำว่า &ldquo;ตั๋ว&rdquo; และชื่อไอเทม Battle Pass (Summer) หน้านี้ยกมาตามที่เขียนไว้ ไม่ได้สรุปเองว่าเป็นชิ้นเดียวกัน
         </p>
       </section>
 
       <section className="card card--yellow" style={{ marginTop: 14 }}>
-        <h2 className="section-title">ข้อควรระวัง — สองสายนับแยกกัน</h2>
+        <h2 className="section-title">ข้อควรระวัง สองสายนับแยกกัน</h2>
         <p style={{ marginTop: 8 }}>
           ความคืบหน้าของสาย Free กับสาย Paid <strong>ไม่โอนหากัน</strong> ถ้าดันสาย Free ไป 3 Tier แล้วค่อยซื้อตั๋วทีหลัง
           สาย Paid จะเริ่มนับที่ Tier 0 ใหม่ ไม่ได้ต่อจาก 3
@@ -223,7 +223,7 @@ export default async function BattlePassSummerPage() {
           </tbody>
         </table>
         <p className="muted" style={{ marginTop: 10, fontSize: 12.5 }}>
-          ฐานข้อมูลเรามีคอสตูมชุดนี้ทั้งแบบธรรมดาและแบบ (Bound) — ลิงก์ข้างบนชี้ไปตัวที่ชื่อตรงกับหน้าร้านในประกาศ
+          ฐานข้อมูลเรามีคอสตูมชุดนี้ทั้งแบบธรรมดาและแบบ (Bound) ลิงก์ข้างบนชี้ไปตัวที่ชื่อตรงกับหน้าร้านในประกาศ
         </p>
       </section>
 
@@ -244,9 +244,9 @@ export default async function BattlePassSummerPage() {
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">ใช้เว็บนี้ทำอะไรต่อได้</h2>
         <ul style={{ marginTop: 8, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <li>เควสรายวันสั่งฆ่ามอนตามธาตุ — เปิด <Link href="/database/monsters">ฐานข้อมูลมอนสเตอร์</Link> กรองธาตุแล้วดูว่าตัวไหนอยู่แมพไหน</li>
-          <li>อยากรู้ว่าตีมอนธาตุนั้นใช้อะไรคุ้ม — <Link href="/guides/elements">ตารางธาตุ</Link></li>
-          <li>คอสตูมที่แลกมาแล้วอยากดูชิ้นอื่นในชุด — <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link></li>
+          <li>เควสรายวันสั่งฆ่ามอนตามธาตุ เปิด <Link href="/database/monsters">ฐานข้อมูลมอนสเตอร์</Link> กรองธาตุแล้วดูว่าตัวไหนอยู่แมพไหน</li>
+          <li>อยากรู้ว่าตีมอนธาตุนั้นใช้อะไรคุ้ม <Link href="/guides/elements">ตารางธาตุ</Link></li>
+          <li>คอสตูมที่แลกมาแล้วอยากดูชิ้นอื่นในชุด <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link></li>
         </ul>
       </section>
 

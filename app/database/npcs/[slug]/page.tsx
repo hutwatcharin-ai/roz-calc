@@ -153,7 +153,7 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
           </table>
           {npc.quests.some((quest) => !ours.has(questKey(quest.name))) && (
             <p className="muted" style={{ marginTop: 10, fontSize: 12.5 }}>
-              เควสที่ไม่มีลิงก์คือเควสที่ฐานข้อมูลเควสของเรายังไม่มี — ชื่อยังใช้ค้นในเกมได้
+              เควสที่ไม่มีลิงก์คือเควสที่ฐานข้อมูลเควสของเรายังไม่มี ชื่อยังใช้ค้นในเกมได้
             </p>
           )}
         </section>
@@ -173,7 +173,7 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
             ))}
           </ul>
           <p className="muted" style={{ marginTop: 10, fontSize: 12.5 }}>
-            ราคาไม่ได้ลงไว้ เพราะสคริปต์ต้นทางให้ร้านคิดราคาซื้อปกติของไอเทมทุกชิ้น — ดูราคาได้ที่หน้าไอเทมนั้น
+            ราคาไม่ได้ลงไว้ เพราะสคริปต์ต้นทางให้ร้านคิดราคาซื้อปกติของไอเทมทุกชิ้น ดูราคาได้ที่หน้าไอเทมนั้น
           </p>
         </section>
       )}

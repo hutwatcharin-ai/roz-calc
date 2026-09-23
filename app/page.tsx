@@ -147,7 +147,7 @@ export default async function HomePage({
         </div>
         <h1 className="pagehead__title">ฐานข้อมูล Ragnarok Zero Global ภาษาไทย</h1>
         <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-          มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล — <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
+          มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
           เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
         </p>
       </section>
@@ -242,19 +242,19 @@ export default async function HomePage({
             could not find it among twelve chips. */}
         <Link href="/news/roadmap" className="chiplink chiplink--patch">
           <span className="chiplink__dot" aria-hidden="true" />
-          ไทม์ไลน์อัปเดต — มาแล้วอะไร เดือนหน้ามีอะไร
+          ไทม์ไลน์อัปเดต มาแล้วอะไร เดือนหน้ามีอะไร
         </Link>
         {/* Time-boxed: the patch chip leads while the patch is news, then
             drops back out of the row (see docs/PATCH-2026-09-03.md). */}
         <Link href="/news/patch-2026-09-17" className="chiplink">
           <span className="chiplink__dot" aria-hidden="true" />
-          แพทช์ 17 ก.ย. — MVP ใหม่ 4 ตัว / Pyramid
+          แพทช์ 17 ก.ย. มี MVP ใหม่ 4 ตัว กับ Pyramid
         </Link>
         <Link href="/news/battle-pass-summer-2026" className="chiplink">
           <span className="chiplink__dot" aria-hidden="true" />
-          Battle Pass ฤดูร้อน — รางวัลทุก Tier
+          Battle Pass ฤดูร้อน มีรางวัลทุก Tier
         </Link>
-        <Link href="/news/patch-2026-09-03" className="chiplink">แพทช์ 3 ก.ย. — เลเวล 60 / อาชีพ 2</Link>
+        <Link href="/news/patch-2026-09-03" className="chiplink">แพทช์ 3 ก.ย. เปิดเลเวล 60 กับอาชีพ 2</Link>
         <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>

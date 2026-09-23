@@ -59,7 +59,7 @@ export default function PatchNotePage() {
 
       <h1 className="pagehead__title">แพทช์ 3 ก.ย. 2569 Ragnarok Zero — เลเวล 60, อาชีพ 2, ดันเจี้ยนใหม่</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        สรุปประกาศทางการเป็นภาษาไทย (ประกาศ 2 ก.ย. 2569) — เป็นแพทช์ใหญ่ที่สุดตั้งแต่เปิดเซิร์ฟ
+        สรุปประกาศทางการเป็นภาษาไทย (ประกาศ 2 ก.ย. 2569) เป็นแพทช์ใหญ่ที่สุดตั้งแต่เปิดเซิร์ฟ
       </p>
 
 
@@ -94,16 +94,16 @@ export default function PatchNotePage() {
           ))}
         </ol>
         <p style={{ marginTop: 12 }}>
-          <strong>อีเวนต์:</strong> Clash! Selecting the Strongest Guild — เริ่ม Pre-Season
+          <strong>อีเวนต์:</strong> Clash! Selecting the Strongest Guild เริ่ม Pre-Season
         </p>
       </section>
 
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">ใช้เว็บนี้ทำอะไรได้ตอนนี้</h2>
         <ul style={{ marginTop: 8, paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <li>ดันไป 60 — ช่วง 46–60 ตีอะไรคุ้มดูที่ <Link href="/guides/farm-guide">จุดฟาร์มแนะนำ</Link> (มอนเก่า ข้อมูลครบอยู่แล้ว)</li>
-          <li>เปลี่ยนอาชีพ 2 แล้ว — เช็คว่าอุปกรณ์ที่ถืออยู่ยังใส่ได้ไหมที่ <Link href="/database/equipment">ฐานข้อมูลอุปกรณ์</Link> (กรองตามอาชีพได้)</li>
-          <li>เลือกที่ฟาร์มช่วงใหม่ — ใส่เลเวลที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> แล้วดูว่าแมพไหนคุ้มสุด</li>
+          <li>ดันไป 60 ช่วง 46–60 ตีอะไรคุ้มดูที่ <Link href="/guides/farm-guide">จุดฟาร์มแนะนำ</Link> (มอนเก่า ข้อมูลครบอยู่แล้ว)</li>
+          <li>เปลี่ยนอาชีพ 2 แล้ว เช็คว่าอุปกรณ์ที่ถืออยู่ยังใส่ได้ไหมที่ <Link href="/database/equipment">ฐานข้อมูลอุปกรณ์</Link> (กรองตามอาชีพได้)</li>
+          <li>เลือกที่ฟาร์มช่วงใหม่ ใส่เลเวลที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> แล้วดูว่าแมพไหนคุ้มสุด</li>
         </ul>
       </section>
 

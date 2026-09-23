@@ -180,7 +180,7 @@ export default function MonsterDamageCalculator({
           </label>
         </div>
         <p className="toolnumbers__note">
-          ATK สองช่องอยู่ในหน้าต่างสเตตัส (Alt+A) — ตัวเลขคู่ &ldquo;ATK 200 + 150&rdquo; คือตัวละคร + อาวุธ ·
+          ATK สองช่องอยู่ในหน้าต่างสเตตัส (Alt+A) ตัวเลขคู่ &ldquo;ATK 200 + 150&rdquo; คือตัวละคร + อาวุธ ·
           ค่าเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น
         </p>
       </div>

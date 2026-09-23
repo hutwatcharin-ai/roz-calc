@@ -33,7 +33,7 @@ export default function CraftGuide({
       {children}
 
       <Caveat label="ที่มาของสูตร">
-        <strong>ที่มาของสูตร:</strong> ทานกัน 2 แหล่ง — ตารางการผลิตฝั่งเซิร์ฟเวอร์ของ{' '}
+        <strong>ที่มาของสูตร:</strong> ทานกัน 2 แหล่ง ตารางการผลิตฝั่งเซิร์ฟเวอร์ของ{' '}
         <a href="https://github.com/rathena/rathena" rel="noopener nofollow" target="_blank">rAthena</a>{' '}
         (RO คลาสสิก) กับฐานข้อมูล Zero ของ prontera.info · เอาเฉพาะสูตรที่ทั้งของที่ได้และวัตถุดิบทุกตัว
         มีจริงในฐานข้อมูลไอเทม {' '}
@@ -56,7 +56,7 @@ export default function CraftGuide({
           </summary>
           <div className="disclose__body">
             <p className="muted" style={{ marginTop: 0 }}>
-              มีอยู่ในแหล่งเดียว — อาจใช้ได้จริงใน Zero หรืออาจเป็นสูตรของ RO เวอร์ชันอื่น
+              มีอยู่ในแหล่งเดียว อาจใช้ได้จริงใน Zero หรืออาจเป็นสูตรของ RO เวอร์ชันอื่น
               ชี้เมาส์ที่ป้ายเพื่อดูว่ามาจากไหน
             </p>
             <RecipeTable rows={unconfirmed} materialFirst={sortBy === 'material'} />

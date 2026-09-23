@@ -100,7 +100,7 @@ export default async function FarmGuidePage() {
       />
       <h1 className="pagehead__title">จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>
-        เรียงจาก <strong>EXP ต่อ HP คูณจำนวนตัวในแมพที่หนาที่สุด</strong> — ตีคุ้มอย่างเดียวไม่พอ ต้องมีตัวถัดไปให้ตีด้วย ·
+        เรียงจาก <strong>EXP ต่อ HP คูณจำนวนตัวในแมพที่หนาที่สุด</strong> ตีคุ้มอย่างเดียวไม่พอ ต้องมีตัวถัดไปให้ตีด้วย ·
         อยากได้ EXP ต่อชั่วโมงของตัวเอง กรอกดาเมจกับ ASPD ที่{' '}
         <Link href="/tools/leveling-spots">หาจุดเก็บเลเวล</Link>
       </p>
@@ -154,7 +154,7 @@ export default async function FarmGuidePage() {
 
       <p className="source-note" style={{ marginTop: 16 }}>
         ช่วงเลเวลหยุดที่ {BASE_LEVEL_CAP} ตามเพดานปัจจุบัน · ไม่รวมมอน Challenge (C1–C9) · ตัวที่โจมตีก่อนมีป้ายเตือน ·{' '}
-        <strong>{dropped} ตัวไม่ได้อยู่ในตาราง</strong>เพราะฐานข้อมูลยังไม่รู้ว่ามันเกิดที่แมพไหน — ไม่เอามาแนะนำทั้งที่บอกไม่ได้ว่าไปตีที่ไหน
+        <strong>{dropped} ตัวไม่ได้อยู่ในตาราง</strong>เพราะฐานข้อมูลยังไม่รู้ว่ามันเกิดที่แมพไหน ไม่เอามาแนะนำทั้งที่บอกไม่ได้ว่าไปตีที่ไหน
       </p>
     </main>
   );

@@ -186,7 +186,7 @@ export default function GlobalSearch() {
                 </p>
               )}
               {!loading && !query.trim() && (
-                <p className="searchmodal__note">ค้นได้ทุกหมวดพร้อมกัน — มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ คอสตูม สกิล แมพ</p>
+                <p className="searchmodal__note">ค้นได้ทุกหมวดพร้อมกัน มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ คอสตูม สกิล แมพ</p>
               )}
               {results.map((r) => (
                 <Link key={`${r.type}-${r.id}`} href={r.href} onClick={() => setOpen(false)} className="searchmodal__row">

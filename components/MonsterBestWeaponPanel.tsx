@@ -76,10 +76,10 @@ export default function MonsterBestWeaponPanel({
         <dd>
           {SIZE_LABELS[parsedSize]}
           {reduced.length === 0 ? (
-            <span className="muted"> — ทุกชนิดอาวุธตีเต็ม</span>
+            <span className="muted"> ทุกชนิดอาวุธตีเต็ม</span>
           ) : nameFull ? (
             <>
-              <span className="muted"> — ตีเต็มเฉพาะ </span>
+              <span className="muted"> ตีเต็มเฉพาะ </span>
               {few(full!.labels)}
               {reduced.map((g) => (
                 <span key={g.pct} className="advice__avoid"> · {reduced.length === 1 ? 'ที่เหลือ' : few(g.labels)} {g.pct}%</span>
@@ -87,7 +87,7 @@ export default function MonsterBestWeaponPanel({
             </>
           ) : (
             <>
-              <span className="muted"> — อาวุธส่วนใหญ่ตีเต็ม</span>
+              <span className="muted"> อาวุธส่วนใหญ่ตีเต็ม</span>
               {reduced.map((g) => (
                 <span key={g.pct} className="advice__avoid"> · {few(g.labels)} {g.pct}%</span>
               ))}

@@ -31,7 +31,7 @@ export default function NotFound() {
       <p className="notfound__code">404</p>
       <h1 className="pagehead__title">ไม่พบหน้านี้</h1>
       <p className="muted" style={{ maxWidth: '52ch' }}>
-        ลิงก์อาจเก่าหรือพิมพ์ผิด หน้านี้อาจถูกย้ายไปแล้ว — ลองค้นชื่อมอน ไอเทม การ์ด สกิล หรือแมพที่ต้องการได้เลย
+        ลิงก์อาจเก่าหรือพิมพ์ผิด หน้านี้อาจถูกย้ายไปแล้ว ลองค้นชื่อมอน ไอเทม การ์ด สกิล หรือแมพที่ต้องการได้เลย
       </p>
       <div className="notfound__search">
         <GlobalSearch />

@@ -49,7 +49,7 @@ export default function ForgingPage() {
       />
       <h1 className="pagehead__title">ตีอาวุธเอง — สูตรทั้งหมด และวิธีทำอาวุธธาตุ</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '68ch' }}>
-        Blacksmith ตีอาวุธเองได้ {counts.forge?.total ?? 0} แบบ · <strong>อาวุธธาตุไม่ใช่สูตรแยก</strong> —
+        Blacksmith ตีอาวุธเองได้ {counts.forge?.total ?? 0} แบบ <strong>อาวุธธาตุไม่ใช่สูตรแยก</strong>
         ใช้สูตรเดียวกันนี้แหละ แล้วใส่หินธาตุ 1 ก้อนตอนกดตี อาวุธที่ออกมาจะเป็นธาตุของหินก้อนนั้น
         แลกกับโอกาสสำเร็จที่ลดลง
       </p>
@@ -59,7 +59,7 @@ export default function ForgingPage() {
         <ol style={{ margin: 0, paddingInlineStart: 22, lineHeight: 1.9 }}>
           <li>Blacksmith ที่มีสกิลตีอาวุธชนิดนั้น เช่น Smith Sword, Smith Dagger หรือ Smith Axe</li>
           <li>วัตถุดิบตามสูตรในตารางด้านล่าง</li>
-          <li>ค้อนตีเหล็กและทั่ง (Anvil) — ทั่งที่ดีกว่าเพิ่มโอกาสสำเร็จ</li>
+          <li>ค้อนตีเหล็กและทั่ง (Anvil) โดยทั่งที่ดีกว่าจะเพิ่มโอกาสสำเร็จ</li>
           <li>ถ้าจะทำอาวุธธาตุ เตรียมหินธาตุ 1 ก้อนไปด้วย</li>
           <li>ช่องเก็บของและน้ำหนักเหลือพอ เพราะถ้าสำเร็จจะได้อาวุธทันที</li>
         </ol>
@@ -72,7 +72,7 @@ export default function ForgingPage() {
             <section className="card" style={{ marginTop: 20 }}>
               <h2 className="section-title">ทำให้เป็นอาวุธธาตุ</h2>
               <p className="muted" style={{ marginTop: 0, maxWidth: '68ch' }}>
-                ใส่หินธาตุ 1 ก้อนในหน้าต่างตอนกดตี — สูตรอาวุธไม่เปลี่ยน วัตถุดิบเท่าเดิม
+                ใส่หินธาตุ 1 ก้อนในหน้าต่างตอนกดตี สูตรอาวุธไม่เปลี่ยน วัตถุดิบเท่าเดิม
                 สิ่งที่เปลี่ยนคือธาตุของอาวุธที่ได้ กับโอกาสสำเร็จที่ลดลงราว 25%
               </p>
               <div className="recipe__scroll">
@@ -99,7 +99,7 @@ export default function ForgingPage() {
                 </table>
               </div>
               <p className="muted" style={{ marginTop: 12 }}>
-                <strong>อย่าใส่ Star Crumb โดยไม่ตั้งใจ</strong> — มันเพิ่มความแรงก็จริง แต่ลดโอกาสสำเร็จอีก
+                <strong>อย่าใส่ Star Crumb โดยไม่ตั้งใจ</strong> มันเพิ่มความแรงก็จริง แต่ลดโอกาสสำเร็จอีก
                 ก้อนละ 15% และไม่เกี่ยวกับการทำให้อาวุธมีธาตุเลย
               </p>
             </section>
@@ -107,7 +107,7 @@ export default function ForgingPage() {
             <section style={{ marginTop: 24 }}>
               <h2 className="section-title">หินธาตุทำจากอะไร</h2>
               <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
-                หลอมเองได้จากของที่มอนธาตุนั้นดรอป · ดูครบที่{' '}
+                หลอมเองได้จากของที่มอนธาตุนั้นดรอป ดูครบที่{' '}
                 <Link href="/guides/ore-refining">หลอมแร่และหินธาตุ</Link>
               </p>
               <CraftGuide kind="ore">
@@ -118,21 +118,21 @@ export default function ForgingPage() {
             <section className="card card--yellow" style={{ marginTop: 20 }}>
               <h2 className="section-title">อยากให้ตีติดบ่อยขึ้น</h2>
               <ul style={{ marginTop: 8, paddingInlineStart: 20, lineHeight: 1.9 }}>
-                <li><strong>Job level, DEX, LUK</strong> — สามตัวนี้เป็นฐานของอัตราสำเร็จ</li>
-                <li><strong>ระดับอาวุธ</strong> — อาวุธระดับ 1-3 ได้โบนัส ระดับ 4 ไม่ได้</li>
-                <li><strong>สกิล</strong> — Smith สายนั้น +5% ต่อเลเวล · Weaponry Research +1% ต่อเลเวล · Enchanted Stone Craft ใช้หลอมหินธาตุ</li>
-                <li><strong>ทั่ง</strong> — ทั่งธรรมดา +0% · Oridecon +2.5% · ทอง +5% · Emperium +10%</li>
-                <li><strong>ของที่ทำให้ยากขึ้น</strong> — หินธาตุ −25% · Star Crumb ก้อนละ −15%</li>
+                <li><strong>Job level, DEX, LUK</strong> สามตัวนี้เป็นฐานของอัตราสำเร็จ</li>
+                <li><strong>ระดับอาวุธ</strong> อาวุธระดับ 1-3 ได้โบนัส ระดับ 4 ไม่ได้</li>
+                <li><strong>สกิล</strong> Smith สายนั้นให้ +5% ต่อเลเวล Weaponry Research ให้ +1% ต่อเลเวล ส่วน Enchanted Stone Craft ใช้หลอมหินธาตุ</li>
+                <li><strong>ทั่ง</strong> ทั่งธรรมดา +0% · Oridecon +2.5% · ทอง +5% · Emperium +10%</li>
+                <li><strong>ของที่ทำให้ยากขึ้น</strong> หินธาตุ −25% · Star Crumb ก้อนละ −15%</li>
               </ul>
               <p className="muted" style={{ marginTop: 10 }}>
-                เซิร์ฟเวอร์สุ่มโบนัสบวกเข้าไปในอัตราสำเร็จทุกครั้งที่ตี อัตราจึงไม่ใช่ตัวเลขเดียวคงที่ —
+                เซิร์ฟเวอร์สุ่มโบนัสบวกเข้าไปในอัตราสำเร็จทุกครั้งที่ตี อัตราจึงไม่ใช่ตัวเลขเดียวคงที่
                 ตัวละครเดิม ตีรอบนี้กับรอบหน้าโอกาสไม่เท่ากัน เตรียมวัตถุดิบเผื่อแตกไว้เสมอ
               </p>
             </section>
 
             <p className="source-note" style={{ marginTop: 16 }}>
               <strong>ที่มา:</strong> ปัจจัยโอกาสสำเร็จเทียบกับสูตรที่ prontera.info เผยแพร่ ซึ่งระบุเองว่าอ้างอิง TWRO
-              จึงไม่นำเปอร์เซ็นต์ตายตัวมาอ้างเป็นค่าทางการของ RO Zero Global · รายละเอียดสกิลจากข้อมูลไคลเอนต์ในฐานข้อมูลของเว็บนี้
+              จึงไม่นำเปอร์เซ็นต์ตายตัวมาอ้างเป็นค่าทางการของ RO Zero Global ส่วนรายละเอียดสกิลมาจากข้อมูลไคลเอนต์ในฐานข้อมูลของเว็บนี้
             </p>
             <p className="muted" style={{ marginTop: 12 }}>
               ตีเสร็จแล้วเอาไปใช้กับมอนธาตุไหน ดู <Link href="/guides/elements">ตารางธาตุ</Link> หรือเทียบดาเมจที่{' '}

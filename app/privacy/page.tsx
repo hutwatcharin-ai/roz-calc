@@ -72,11 +72,11 @@ export default function PrivacyPage() {
         </p>
         <ul className="adpage__list">
           <li>
-            <strong>แบนเนอร์ที่ขายตรง</strong> — เป็นภาพนิ่งที่เราวางเอง เมื่อคุณคลิก ลิงก์จะผ่านเว็บเราเพื่อนับจำนวนคลิกก่อนพาไปเว็บปลายทาง
+            <strong>แบนเนอร์ที่ขายตรง</strong> เป็นภาพนิ่งที่เราวางเอง เมื่อคุณคลิก ลิงก์จะผ่านเว็บเราเพื่อนับจำนวนคลิกก่อนพาไปเว็บปลายทาง
             เรานับแค่จำนวนครั้ง ไม่ได้เก็บว่าใครเป็นคนคลิก
           </li>
           <li>
-            <strong>Google AdSense</strong> — Google และพาร์ตเนอร์อาจใช้คุกกี้เพื่อเลือกโฆษณาให้เหมาะกับคุณ
+            <strong>Google AdSense</strong> Google และพาร์ตเนอร์อาจใช้คุกกี้เพื่อเลือกโฆษณาให้เหมาะกับคุณ
             ปิดโฆษณาที่ปรับตามความสนใจได้ที่{' '}
             <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">myadcenter.google.com</a>{' '}
             และดูรายละเอียดการใช้ข้อมูลของ Google ได้ที่{' '}
@@ -91,9 +91,9 @@ export default function PrivacyPage() {
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">ผู้ให้บริการที่เราใช้</h2>
         <ul className="adpage__list">
-          <li><strong>Cloudflare</strong> — ตัวกลางส่งหน้าเว็บและกันการโจมตี เห็นข้อมูลการเชื่อมต่อตามปกติของการเปิดเว็บ</li>
-          <li><strong>Supabase</strong> — ฐานข้อมูลของเว็บ เก็บข้อมูลเกม ไม่ได้เก็บข้อมูลผู้อ่าน</li>
-          <li><strong>Google Analytics และ Google AdSense</strong> — ตามที่อธิบายไว้ด้านบน</li>
+          <li><strong>Cloudflare</strong> ตัวกลางส่งหน้าเว็บและกันการโจมตี เห็นข้อมูลการเชื่อมต่อตามปกติของการเปิดเว็บ</li>
+          <li><strong>Supabase</strong> ฐานข้อมูลของเว็บ เก็บข้อมูลเกม ไม่ได้เก็บข้อมูลผู้อ่าน</li>
+          <li><strong>Google Analytics และ Google AdSense</strong> ตามที่อธิบายไว้ด้านบน</li>
         </ul>
       </section>
 

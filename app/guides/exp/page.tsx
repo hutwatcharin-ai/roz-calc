@@ -56,11 +56,11 @@ export default function ExpPage() {
           เพดานเลเวลตอนนี้คือ {BASE_LEVEL_CAP} (ตั้งแต่ {BASE_LEVEL_CAP_SINCE}) แต่ตารางที่เผยแพร่มีถึงเลเวล{' '}
           {MAX_PUBLISHED_BASE_LEVEL}
         </strong>{' '}
-        — เลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} ยังไม่มีใครลงตัวเลขไว้ ที่นี่จึงไม่เดาให้
+        ส่วนเลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} ยังไม่มีใครลงตัวเลขไว้ ที่นี่จึงไม่เดาให้
       </p>
 
       <Caveat label="วิธีอ่านตาราง">
-        แถว N = EXP ที่ต้องเก็บเพื่อขึ้นถึงเลเวล N — แถบรีเซ็ตทุกครั้งที่ขึ้นเลเวล
+        แถว N = EXP ที่ต้องเก็บเพื่อขึ้นถึงเลเวล N แถบรีเซ็ตทุกครั้งที่ขึ้นเลเวล
       </Caveat>
 
       <ExpRangeCalculator />
@@ -122,7 +122,7 @@ export default function ExpPage() {
         </div>
 
         <div>
-          <h2 className="section-title">Job EXP — อาชีพขั้นที่ 1</h2>
+          <h2 className="section-title">Job EXP อาชีพขั้นที่ 1</h2>
           <p className="muted">Swordman, Mage, Archer, Merchant, Thief, Acolyte</p>
           <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
             <table className="stat-table">
@@ -154,7 +154,7 @@ export default function ExpPage() {
         เข้าปาร์ตี้แล้ว EXP เป็นยังไง
       </h2>
       <p className="muted" style={{ marginTop: 6, marginBottom: 12, maxWidth: '68ch' }}>
-        ปาร์ตี้ได้ EXP รวมมากกว่า แต่ต้องหารกัน — <strong>ต่อหัวน้อยลงตั้งแต่คนที่สอง</strong>{' '}
+        ปาร์ตี้ได้ EXP รวมมากกว่า แต่ต้องหารกัน <strong>ต่อหัวน้อยลงตั้งแต่คนที่สอง</strong>{' '}
         สิ่งที่ซื้อคือความเร็ว ไม่ใช่ EXP ต่อหัว
       </p>
       <div className="card" style={{ overflowX: 'auto' }}>

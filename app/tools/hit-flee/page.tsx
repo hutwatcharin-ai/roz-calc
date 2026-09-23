@@ -120,7 +120,7 @@ export default async function HitFleePage({
         <div className="card" style={{ marginTop: 16, overflowX: 'auto' }}>
           <HitFleeTable monsters={(monsters ?? []) as HitFleeRow[]} myHit={myHit} myFlee={myFlee} />
           <p className="source-note">
-            มอนที่ขึ้น — คือตัวที่ไม่มีค่า HIT/FLEE ในไฟล์เกม ({countText(counts.noChallengeMissingHitFlee)} จาก {countText(counts.noChallenge)} ตัว) · มอน Challenge ไม่รวมในตารางนี้
+            มอนที่ขึ้น คือตัวที่ไม่มีค่า HIT/FLEE ในไฟล์เกม ({countText(counts.noChallengeMissingHitFlee)} จาก {countText(counts.noChallenge)} ตัว) · มอน Challenge ไม่รวมในตารางนี้
           </p>
         </div>
       )}

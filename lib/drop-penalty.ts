@@ -33,12 +33,12 @@ export function dropPenaltyDetail(playerLevel: number, monsterLevel: number): st
   const gap = Math.abs(playerLevel - monsterLevel);
   switch (dropPenalty(playerLevel, monsterLevel)) {
     case 'none':
-      return `ห่างกัน ${gap} เลเวล — ในช่วง ±${NO_PENALTY_GAP} ไม่มีบทลงโทษดรอป`;
+      return `ห่างกัน ${gap} เลเวล ในช่วง ±${NO_PENALTY_GAP} ไม่มีบทลงโทษดรอป`;
     case 'halved':
-      return `ห่างกัน ${gap} เลเวล — เกิน ±${HALVED_GAP} อัตราดรอปเหลือครึ่งเดียว`;
+      return `ห่างกัน ${gap} เลเวล เกิน ±${HALVED_GAP} อัตราดรอปเหลือครึ่งเดียว`;
     default:
       return (
-        `ห่างกัน ${gap} เลเวล — อยู่ระหว่าง ±${NO_PENALTY_GAP} กับ ±${HALVED_GAP} ` +
+        `ห่างกัน ${gap} เลเวล อยู่ระหว่าง ±${NO_PENALTY_GAP} กับ ±${HALVED_GAP} ` +
         'ซึ่งยังไม่มีใครยืนยันว่าหักเท่าไร เว็บนี้จึงไม่เดาให้'
       );
   }

@@ -113,8 +113,8 @@ export default async function WoeGuidePage() {
       <section className="card card--yellow" style={{ marginTop: 14 }}>
         <h2 className="section-title" style={{ marginTop: 0 }}>สองข้อที่หน้านี้ยังตอบไม่ได้</h2>
         <ul style={{ margin: '8px 0 0', paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <li><strong>เวลาเปิดสงครามกิลด์</strong> วันไหน กี่โมง ยาวกี่ชั่วโมง — ไม่มีในข้อมูลที่เว็บนี้มี</li>
-          <li><strong>ปราสาทที่เปิดจริงในเซิร์ฟนี้</strong> — <a href="#castles">รายชื่อปราสาทในไคลเอนต์อยู่ด้านล่าง</a> แต่ไฟล์ที่มีอยู่ไม่ได้แปลว่าเซิร์ฟเปิดสงครามที่นั่นครบทุกหลัง</li>
+          <li><strong>เวลาเปิดสงครามกิลด์</strong> วันไหน กี่โมง ยาวกี่ชั่วโมง ยังไม่มีในข้อมูลที่เว็บนี้มี</li>
+          <li><strong>ปราสาทที่เปิดจริงในเซิร์ฟนี้</strong> <a href="#castles">รายชื่อปราสาทในไคลเอนต์อยู่ด้านล่าง</a> แต่ไฟล์ที่มีอยู่ไม่ได้แปลว่าเซิร์ฟเปิดสงครามที่นั่นครบทุกหลัง</li>
         </ul>
         <p className="muted" style={{ marginTop: 10 }}>
           สองข้อนี้ต้องดูจากประกาศในเกมหรือหน้าประกาศทางการ ถ้าใครมีภาพหน้าประกาศเวลา WoE ส่งมาได้ จะใส่ให้พร้อมบอกที่มา
@@ -173,7 +173,7 @@ export default async function WoeGuidePage() {
         </p>
         <div className="woe__cols">
           <div>
-            <h3 className="woe__sub">Force — เพิ่มดาเมจสกิลตัวเอง</h3>
+            <h3 className="woe__sub">Force เพิ่มดาเมจสกิลตัวเอง</h3>
             <ul className="woe__list woe__list--tight">
               {FORCE.map((s) => (
                 <li key={s.id}>
@@ -184,7 +184,7 @@ export default async function WoeGuidePage() {
             </ul>
           </div>
           <div>
-            <h3 className="woe__sub">Resist — ลดดาเมจที่โดนจากสกิลนั้น</h3>
+            <h3 className="woe__sub">Resist ลดดาเมจที่โดนจากสกิลนั้น</h3>
             <ul className="woe__list woe__list--tight">
               {RESIST.map((s) => (
                 <li key={s.id}>
@@ -195,16 +195,16 @@ export default async function WoeGuidePage() {
             </ul>
           </div>
         </div>
-        <Src>คำอธิบายไอเทมในไคลเอนต์ภาษาไทย · ยังไม่ทราบว่าสกรอลเหล่านี้ได้มาจากไหนในเซิร์ฟนี้</Src>
+        <Src>คำอธิบายไอเทมในไคลเอนต์ภาษาไทย ส่วนที่ยังไม่ทราบคือสกรอลเหล่านี้ได้มาจากไหนในเซิร์ฟนี้</Src>
       </section>
 
       <AdSlot slot="inline" />
 
       <section className="card" id="gear" style={{ marginTop: 14 }}>
-        <h2 className="section-title">ชุดสมาชิกกิลด์ {GEAR.length} ชิ้น — ค่าโผล่เฉพาะในเขตสงคราม</h2>
+        <h2 className="section-title">ชุดสมาชิกกิลด์ {GEAR.length} ชิ้น ค่าโผล่เฉพาะในเขตสงคราม</h2>
         <p style={{ marginTop: 8 }}>
           ของชุดนี้เขียนไว้เองว่า <strong>ออปชันเพิ่มเติมในพื้นที่สงครามกิลด์</strong> และบางชิ้นเติมอีกบรรทัดว่า
-          จะไม่แสดงผลออปชันในพื้นที่ที่ไม่ใช่สงครามกิลด์ — เอาไปฟาร์มมอนไม่ได้ผล ทุกชิ้นใช้ที่เลเวล 70
+          จะไม่แสดงผลออปชันในพื้นที่ที่ไม่ใช่สงครามกิลด์ เอาไปฟาร์มมอนจึงไม่ได้ผล ทุกชิ้นใช้ที่เลเวล 70
           และตัวเลขทั้งหมดเป็นค่าที่ทำกับ <strong>ผู้เล่น</strong> ไม่ใช่มอนสเตอร์
         </p>
         <div className="woe__cols">
@@ -243,10 +243,10 @@ export default async function WoeGuidePage() {
         <p style={{ marginTop: 8 }}>
           ไคลเอนต์มีตารางปราสาทของตัวเอง แบ่งเป็น {REGIONS.length} โซน โซนละ {CASTLES.length / REGIONS.length} หลัง
           พร้อมชื่อปราสาทและค่าวาร์ปของคาฟรา: ปกติ <strong>{WARP.normal}z</strong> แต่ช่วงเวลาสงคราม
-          <strong> {WARP.siege.toLocaleString('en-US')}z</strong> — แพงขึ้น {WARP.siege / WARP.normal} เท่า
+          <strong> {WARP.siege.toLocaleString('en-US')}z</strong> แพงขึ้น {WARP.siege / WARP.normal} เท่า
         </p>
         <p className="guildp__warn">
-          <strong>ไฟล์มี ไม่ได้แปลว่าเปิด</strong> — ตารางนี้คือสิ่งที่ไคลเอนต์ติดตั้งมา ไม่ใช่ประกาศว่าเซิร์ฟเปิดสงครามครบทุกหลัง
+          <strong>ไฟล์มี ไม่ได้แปลว่าเปิด</strong> ตารางนี้คือสิ่งที่ไคลเอนต์ติดตั้งมา ไม่ใช่ประกาศว่าเซิร์ฟเปิดสงครามครบทุกหลัง
           ยึดประกาศในเกมเป็นหลัก
         </p>
         <div className="woe__castles">
@@ -274,7 +274,7 @@ export default async function WoeGuidePage() {
           <div>
             <strong><Link href={href(EMPERIUM)}>Emperium</Link></strong>
             <p className="muted">
-              คำอธิบายในเกมเป็นข้อความบรรยายล้วน ไม่ได้บอกกติกาสงคราม — เขียนว่าเป็นโลหะที่จะปรากฏต่อผู้ที่เปลี่ยนชะตากรรมของโลกได้
+              คำอธิบายในเกมเป็นข้อความบรรยายล้วน ไม่ได้บอกกติกาสงคราม เขียนไว้แค่ว่าเป็นโลหะที่จะปรากฏต่อผู้ที่เปลี่ยนชะตากรรมของโลกได้
               เว็บนี้จึงไม่เขียนกติกาการทุบแทนเกม
             </p>
           </div>
@@ -291,8 +291,8 @@ export default async function WoeGuidePage() {
       </section>
 
       <p className="muted" style={{ marginTop: 16 }}>
-        รวมทั้งหมด {woe._meta.total} ไอเทมในไคลเอนต์ที่เอ่ยถึงสงครามกิลด์ · สร้างจากไฟล์เกมวันที่ {woe._meta.source.built} ·
-        หน้านี้จะอัปเดตเมื่อไคลเอนต์เปลี่ยน
+        รวมทั้งหมด {woe._meta.total} ไอเทมในไคลเอนต์ที่เอ่ยถึงสงครามกิลด์ สร้างจากไฟล์เกมวันที่ {woe._meta.source.built}
+        และจะอัปเดตเมื่อไคลเอนต์เปลี่ยน
       </p>
     </main>
   );

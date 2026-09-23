@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   // without touching each generateMetadata (audit Critical #1).
   alternates: { canonical: './' },
   title: {
-    default: 'RO Zero Thai — ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย',
+    default: 'RO Zero Thai ฐานข้อมูลและเครื่องมือ Ragnarok Zero Global ภาษาไทย',
     // Every page that sets its own title gets the site name appended.
     template: '%s | RO Zero Thai',
   },

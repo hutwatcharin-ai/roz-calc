@@ -97,7 +97,7 @@ export default function AfkView({ data, player, level }: ViewProps) {
         <div className="card farm-state">
           <p>
             {gate && blocker
-              ? `ไม่มีแมพไหนที่หลบได้ครบทุกตัวด้วย FLEE ${player.flee} — ติดบ่อยสุดที่ ${blocker} ลองเช็คค่า FLEE หรือเปิดดูแมพที่ถูกตัด`
+              ? `ไม่มีแมพไหนที่หลบได้ครบทุกตัวด้วย FLEE ${player.flee} ติดบ่อยสุดที่ ${blocker} ลองเช็คค่า FLEE หรือเปิดดูแมพที่ถูกตัด`
               : 'ไม่มีแมพที่ผ่านตัวกรองที่ติ๊กไว้ ลองเอาติ๊กออก'}
           </p>
         </div>

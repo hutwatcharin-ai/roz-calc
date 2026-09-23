@@ -74,8 +74,8 @@ export default function ItemShops({ itemId }: { itemId: number }) {
         </details>
       )}
       <p className="muted" style={{ marginTop: 10, fontSize: 12.5 }}>
-        <strong>ยังไม่ได้ยืนยันกับเซิร์ฟนี้</strong> — ผังร้านมาจากสคริปต์ NPC ของ rAthena ซึ่งเป็น RO คลาสสิก ·
-        ฝั่ง Zero ไม่มีแหล่งไหนที่เรามีลงข้อมูลร้านค้าเลย — หน้า NPC ของทั้ง prontera และ rozerodb เป็น NPC เควสล้วน ·
+        <strong>ยังไม่ได้ยืนยันกับเซิร์ฟนี้</strong> ผังร้านมาจากสคริปต์ NPC ของ rAthena ซึ่งเป็น RO คลาสสิก ·
+        ฝั่ง Zero ไม่มีแหล่งไหนที่เรามีลงข้อมูลร้านค้าเลย หน้า NPC ของทั้ง prontera และ rozerodb เป็น NPC เควสล้วน ·
         ของที่ขายกรองแล้วว่ามีอยู่จริงในฐานข้อมูลไอเทมของเกมนี้ และร้านในเมืองที่เกมนี้ยังไม่เปิดถูกตัดออกแล้ว
       </p>
     </div>

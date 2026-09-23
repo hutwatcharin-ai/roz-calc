@@ -257,7 +257,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         {monster.size ? ` ขนาด ${monster.size}` : ''}
         {(() => {
           const top = (drops ?? []).find((d: any) => d.items?.name_en && d.rate != null);
-          return top ? ` — ดรอปเด่น: ${(top.items as any).name_en} ${top.rate}%` : '';
+          return top ? ` ดรอปเด่น: ${(top.items as any).name_en} ${top.rate}%` : '';
         })()}
       </p>
 

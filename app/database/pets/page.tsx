@@ -113,7 +113,7 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
       )}
 
       <p className="muted" style={{ marginTop: 4, marginBottom: 14, maxWidth: '72ch' }}>
-        <strong>ไข่ไม่ได้ดรอปจากมอน</strong> — ตัวเลข % คืออัตราดรอปของ<em>ของที่ใช้จับ</em> ·
+        <strong>ไข่ไม่ได้ดรอปจากมอน</strong> ตัวเลข % คืออัตราดรอปของ<em>ของที่ใช้จับ</em> ·
         โบนัสมาจากการเอาไข่ใส่ <strong>Taming Ring</strong> ไม่ใช่การเลี้ยงให้สนิท
         {undocumented > 0 && ` · อีก ${undocumented} ตัวมีไข่ในเกมแต่ยังไม่มีใครลงโบนัสไว้`}
       </p>
@@ -218,7 +218,7 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
           </li>
           <li>
             ระดับ 2 ต้องใช้<strong>ไข่ตัวเดิมอีกฟอง</strong> และสำเร็จ{' '}
-            <strong>{LEVEL_2_SUCCESS_PERCENT}%</strong> — พลาดคือเสียไข่ฟองที่สอง
+            <strong>{LEVEL_2_SUCCESS_PERCENT}%</strong> พลาดคือเสียไข่ฟองที่สอง
           </li>
         </ol>
         <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
@@ -233,7 +233,7 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
       <section style={{ marginTop: 26 }}>
         <h2 className="section-title">ซื้อ Taming Ring ได้ที่ไหน</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
-          ก๊อป <code className="mono">/navi</code> ไปวางในแชต เกมจะขึ้นเส้นนำทางให้ — เดินตามเส้นเอง ตัวละครไม่ได้เดินให้
+          ก๊อป <code className="mono">/navi</code> ไปวางในแชต เกมจะขึ้นเส้นนำทางให้ เดินตามเส้นเอง ตัวละครไม่ได้เดินให้
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">

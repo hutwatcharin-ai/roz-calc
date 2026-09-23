@@ -46,7 +46,7 @@ export default function ElementsPage() {
       </p>
 
       <p className="muted" style={{ marginTop: 12, maxWidth: '65ch' }}>
-        คู่มือเรียกธาตุ Ghost ว่า <strong>Ninja Aura</strong> — เว็บนี้ใช้ชื่อ Ghost ตามตัวเกม
+        คู่มือเรียกธาตุ Ghost ว่า <strong>Ninja Aura</strong> เว็บนี้ใช้ชื่อ Ghost ตามตัวเกม
       </p>
 
       {LEVELS.map((level) => (

@@ -38,7 +38,7 @@ export default function AboutPage() {
         <p style={{ marginTop: 8 }}>
           ฐานข้อมูลและเครื่องมือสำหรับ <strong>Ragnarok Zero Global</strong> ภาษาไทย
           ทำโดยผู้เล่นคนไทยคนหนึ่ง ไม่ใช่เว็บทางการ และไม่ได้เกี่ยวข้องกับ Gravity
-          หรือผู้ให้บริการเกม — ทำเพราะอยากได้ฐานข้อมูลภาษาไทยที่เช็คได้ว่าตัวเลขมาจากไหน
+          หรือผู้ให้บริการเกม ทำเพราะอยากได้ฐานข้อมูลภาษาไทยที่เช็คได้ว่าตัวเลขมาจากไหน
         </p>
       </section>
 
@@ -95,7 +95,7 @@ export default function AboutPage() {
         <h2 className="section-title">ที่ควรรู้ก่อนเชื่อ</h2>
         <ul className="sourcelist__caveats">
           <li>ตัวเลขไหนยังไม่ยืนยัน จะเขียนกำกับไว้ตรงจุดที่ตัวเลขโชว์เสมอ ไม่ใส่เลขมั่ว</li>
-          <li>ค่าที่คิดจากตัวละครเป็นเพดานบน — ไม่รวมเวลาเดินและรอมอนเกิด</li>
+          <li>ค่าที่คิดจากตัวละครเป็นเพดานบน ไม่รวมเวลาเดินและรอมอนเกิด</li>
         </ul>
       </section>
 
@@ -106,7 +106,7 @@ export default function AboutPage() {
           <a href="https://github.com/hutwatcharin-ai/roz-calc/issues" target="_blank" rel="noopener noreferrer">
             GitHub Issues ของโปรเจกต์
           </a>{' '}
-          — บอกชื่อมอน/ไอเทมกับเลขที่เห็นในเกมมาด้วย จะได้ตามแก้ถูกตัว
+          บอกชื่อมอน/ไอเทมกับเลขที่เห็นในเกมมาด้วย จะได้ตามแก้ถูกตัว
         </p>
       </section>
 

@@ -70,7 +70,7 @@ export default function CodesPage() {
       </p>
 
       <div className="card card--cyan">
-        <h2 className="section-title">ยังใช้ได้ — ลองชุดนี้ก่อน</h2>
+        <h2 className="section-title">ยังใช้ได้ ลองชุดนี้ก่อน</h2>
         <div className="codegrid" style={{ marginTop: 10 }}>
           {LIVE_CODES.map((code) => (
             <code key={code} className="codegrid__item mono">{code}</code>
@@ -89,14 +89,14 @@ export default function CodesPage() {
           ))}
         </div>
         <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
-          {EXPIRED_CODES.length} โค้ด · เก็บไว้ให้ดูเฉย ๆ — ถ้าไปเจอโค้ดพวกนี้ที่อื่นจะได้รู้ว่าหมดแล้ว ไม่ใช่เราตกหล่น
+          {EXPIRED_CODES.length} โค้ด · เก็บไว้ให้ดูเฉย ๆ ถ้าไปเจอโค้ดพวกนี้ที่อื่นจะได้รู้ว่าหมดแล้ว ไม่ใช่เราตกหล่น
         </p>
       </div>
 
       <Caveat label="เชื่อได้แค่ไหน">
         ตัวโค้ดมาจากสามทาง และตรงกันตรงที่ทับซ้อน: ไกด์ภาษาอังกฤษของผู้เล่น (Ragnarok Zero Guide โดย Lymd ฉบับ 1.2 · 31 ส.ค. 2026),
         ผู้เล่นไทยส่งมาให้ 4 ก.ย. 2026 และไกด์ภาษาฝรั่งเศส roz-global.info ที่อ่านเมื่อ 8 ก.ย. 2026 ·
-        <strong>ส่วนวันหมดอายุมาจากแหล่งเดียว</strong> คือไกด์ฝรั่งเศส ซึ่งลงวันเริ่มและวันจบไว้ทุกโค้ด — เว็บนี้ไม่ได้กรอกทดสอบเอง
+        <strong>ส่วนวันหมดอายุมาจากแหล่งเดียว</strong> คือไกด์ฝรั่งเศส ซึ่งลงวันเริ่มและวันจบไว้ทุกโค้ด เว็บนี้ไม่ได้กรอกทดสอบเอง
         ถ้าโค้ดในชุดบนใช้ไม่ได้แล้วหรือชุดล่างยังใช้ได้อยู่ บอกมาได้ · ของที่ได้ต่อโค้ดไม่มีใครประกาศไว้ครบ เราจึงไม่ระบุ
       </Caveat>
 

@@ -137,7 +137,7 @@ export default function DamagePicker({
             <td>
               <strong>คูณกันแล้ว</strong>
               <span className="muted" style={{ display: 'block', fontSize: 12 }}>
-                {mine.element} × {mine.size} ÷ 100 — คูณกัน ไม่ใช่บวกกัน
+                {mine.element} × {mine.size} ÷ 100 คูณกัน ไม่ใช่บวกกัน
               </span>
             </td>
             <td className={`num el ${band(mine.total)}`}>

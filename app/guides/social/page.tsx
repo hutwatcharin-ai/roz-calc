@@ -50,14 +50,14 @@ export default function SocialGuidePage() {
       />
       <PageHeader title="รีเซ็ตสเตตัส แคลน และแต่งงาน" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 18, maxWidth: '70ch' }}>
-        โบนัสถาวรเล็กๆ ที่ไม่ได้มาจากของสวมใส่ — ตัดสินใจครั้งเดียวแล้วติดตัวไป
+        โบนัสถาวรเล็กๆ ที่ไม่ได้มาจากของสวมใส่ ตัดสินใจครั้งเดียวแล้วติดตัวไป
       </p>
 
       <section className="card card--yellow">
         <h2 className="section-title">รีเซ็ตสเตตัสกับสกิล เสียเท่าไหร่</h2>
         <p style={{ marginTop: 6, maxWidth: '70ch' }}>
           <strong>ฟรีจนถึงเลเวล {FREE_RESET_MAX_LEVEL}</strong> · เกินจากนั้นคิด{' '}
-          <strong>เลเวลละ 1 Zelstar</strong> (Zelstar ซื้อในร้านค้าออนไลน์) — คุยกับ NPC <strong>Hypnotist</strong>
+          <strong>เลเวลละ 1 Zelstar</strong> (Zelstar ซื้อในร้านค้าออนไลน์) คุยกับ NPC <strong>Hypnotist</strong>
         </p>
         <div className="recipe__scroll" style={{ marginTop: 12 }}>
           <table className="data-table recipe">
@@ -85,7 +85,7 @@ export default function SocialGuidePage() {
       </section>
 
       <section style={{ marginTop: 26 }}>
-        <h2 className="section-title">แคลน — เข้าแล้วได้สเตตัสเพิ่ม</h2>
+        <h2 className="section-title">แคลน เข้าแล้วได้สเตตัสเพิ่ม</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch' }}>
           หัวหน้าแคลนทั้งสี่ยืนอยู่จุดเดียวกันใน Prontera{' '}
           {navi && <code className="mono navicmd">{navi}</code>} · แคลนละ {CLAN_CAPACITY} คน ·{' '}
@@ -116,7 +116,7 @@ export default function SocialGuidePage() {
       <section style={{ marginTop: 26 }}>
         <h2 className="section-title">แต่งงาน</h2>
         <p className="filterstate" style={{ marginTop: 2 }}>
-          <strong>ยังไม่เปิดในเซิร์ฟโกลบอล</strong> — โรดแมประบุ ก.พ. 2027 · ข้างล่างคือระบบในเซิร์ฟเวอร์เวอร์ชันอื่น
+          <strong>ยังไม่เปิดในเซิร์ฟโกลบอล</strong> โรดแมประบุ ก.พ. 2027 · ข้างล่างคือระบบในเซิร์ฟเวอร์เวอร์ชันอื่น
         </p>
         <p className="muted" style={{ marginTop: 10, marginBottom: 10, maxWidth: '70ch' }}>
           เลเวลฐาน {MARRIAGE_MIN_LEVEL} ขึ้นไปทั้งคู่ · ตั้งปาร์ตี้ (ชาย-หญิง) ไปหา Wedding Assistant แล้วไป Bishop Bomars ที่โบสถ์ ·
@@ -151,13 +151,13 @@ export default function SocialGuidePage() {
             <strong>ซ้อนกับยา Growth Elixir ไม่ได้</strong>
           </li>
           <li>
-            <strong>ธนาคาร Zeny ใช้ร่วมกันทั้งบัญชี</strong> เปิดด้วย CTRL+B — ย้ายเงินข้ามตัวละครได้โดยไม่ต้องฝากผ่านใคร
+            <strong>ธนาคาร Zeny ใช้ร่วมกันทั้งบัญชี</strong> เปิดด้วย CTRL+B ย้ายเงินข้ามตัวละครได้โดยไม่ต้องฝากผ่านใคร
           </li>
         </ul>
       </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
-        <strong>สองแหล่งตรงกัน:</strong> ชื่อแคลน หัวหน้า โบนัส และสกิลแต่งงานทั้งสาม — roz-global.info (8 ก.ย. 2026)
+        <strong>สองแหล่งตรงกัน:</strong> ชื่อแคลน หัวหน้า โบนัส และสกิลแต่งงานทั้งสาม มาจาก roz-global.info (8 ก.ย. 2026)
         กับข้อมูล rAthena เอง (9 ก.ย. 2026) ·{' '}
         <strong>แหล่งเดียว:</strong> ค่ารีเซ็ตสเตตัส โบนัสโรงแรม ธนาคาร ·
         rAthena เป็นโค้ดเบส Ragnarok ทั่วไป ถ้าขัดกับ Zero ให้ยึด Zero

@@ -93,7 +93,7 @@ export default async function SkillPlannerPage() {
     <main className="shell" style={{ paddingBlock: 32 }}>
       <PageHeader title="วางแผนสกิล Ragnarok Zero" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        กด + ใส่แต้ม — สกิลที่ยังไม่ปลดจะไล่ใส่ให้เอง · ลิงก์บนแถบที่อยู่คือบิลด์
+        กด + ใส่แต้ม สกิลที่ยังไม่ปลดจะไล่ใส่ให้เอง · ลิงก์บนแถบที่อยู่คือบิลด์
       </p>
       {/* useSearchParams needs a Suspense boundary or the whole route opts out
           of static rendering. */}

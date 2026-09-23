@@ -50,7 +50,7 @@ const FLAMES = [
 const HONOR = [
   { id: 107810, name: "Guild's Honor (Iron)", points: '1 แต้ม', from: 'ดรอปจากโพริ่งอีเวนต์' },
   { id: 107811, name: "Guild's Honor (Bronze)", points: '30 แต้ม', from: 'รางวัลเควสประจำวันของอีเวนต์' },
-  { id: 107812, name: "Guild's Honor (MVP)", points: '500 แต้ม', from: 'ชื่อไอเทมบอกว่าเกี่ยวกับ MVP — ยังไม่ยืนยัน' },
+  { id: 107812, name: "Guild's Honor (MVP)", points: '500 แต้ม', from: 'ชื่อไอเทมบอกว่าเกี่ยวกับ MVP ยังไม่ยืนยัน' },
 ];
 
 const UNITY = [
@@ -111,7 +111,7 @@ export default async function GuildGuidePage() {
       </nav>
 
       <section className="card card--yellow" id="parma" style={{ marginTop: 14 }}>
-        <h2 className="section-title">โล่ Guild Parma — ของอีเวนต์ที่คุ้มที่สุดตอนนี้</h2>
+        <h2 className="section-title">โล่ Guild Parma ของอีเวนต์ที่คุ้มที่สุดตอนนี้</h2>
         <div className="guildp__hero">
           {icon(1270260) && <img src={icon(1270260)!} alt="" width={40} height={40} className="guildp__icon" />}
           <div>
@@ -127,7 +127,7 @@ export default async function GuildGuidePage() {
           <li><strong>ทำเควสประจำวันต่อได้</strong> ใช้ไฟอย่างละ 1 ชิ้นเหมือนกัน และได้แต้มกิลด์เพิ่ม</li>
         </ol>
         <p className="guildp__warn">
-          <strong>ของอีเวนต์</strong> — คำอธิบายในเกมเขียนไว้เองว่า ไอเทมนี้จะถูกลบเมื่ออีเวนต์จบ ทั้งโล่และไฟทั้ง 4 สี
+          <strong>ของอีเวนต์</strong> คำอธิบายในเกมเขียนไว้เองว่า ไอเทมนี้จะถูกลบเมื่ออีเวนต์จบ ทั้งโล่และไฟทั้ง 4 สี
         </p>
         <Src>คำอธิบายไอเทมในเกม (ฐานข้อมูลของเว็บนี้) · ขั้นตอนเควสจากคลิป <a href="https://www.youtube.com/watch?v=7M9kzc4PCMs" target="_blank" rel="noopener noreferrer">Big GUILD EVENT in Ragnarok Zero Global</a> (3 ก.ย. 2569)</Src>
         <p className="muted" style={{ marginTop: 6 }}>

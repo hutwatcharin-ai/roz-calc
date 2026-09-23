@@ -44,7 +44,7 @@ export default function PlanView({ data, player }: ViewProps) {
     return (
       <div className="card farm-state">
         <p>
-          ยังไม่มีมอนสเตอร์ในแผน — เปิด <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link> แล้วกด &ldquo;เพิ่มเข้าแผน&rdquo; ที่ตัวที่สนใจ
+          ยังไม่มีมอนสเตอร์ในแผน เปิด <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link> แล้วกด &ldquo;เพิ่มเข้าแผน&rdquo; ที่ตัวที่สนใจ
         </p>
       </div>
     );
@@ -74,7 +74,7 @@ export default function PlanView({ data, player }: ViewProps) {
         )}
         {result.missing.length > 0 && <> · มี {result.missing.length} ตัวในแผนที่ไม่มีในข้อมูลแล้ว</>}
       </p>
-      {!persisted && <p className="charbar__error">เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) — แผนใช้ได้ระหว่างเปิดแท็บนี้ แต่ปิดแล้วจะหาย</p>}
+      {!persisted && <p className="charbar__error">เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) แผนใช้ได้ระหว่างเปิดแท็บนี้ แต่ปิดแล้วจะหาย</p>}
 
       <ul className="farmplan">
         {result.rows.map((row) => {

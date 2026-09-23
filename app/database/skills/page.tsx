@@ -225,7 +225,7 @@ export default async function SkillsPage({
 
       {tab === 'unreleased' && !error && (
         <p style={{ color: 'var(--faint)', marginTop: 12, fontSize: 13 }}>
-          สกิลกลุ่มนี้แบ่งเป็นสองกลุ่ม — {unreleasedNoClass.length} สกิลไม่มีอาชีพระบุไว้ในข้อมูลต้นทางเลย
+          สกิลกลุ่มนี้แบ่งเป็นสองกลุ่ม {unreleasedNoClass.length} สกิลไม่มีอาชีพระบุไว้ในข้อมูลต้นทางเลย
           เราไม่ทราบว่าเป็นเพราะยังไม่เปิดใน Global หรือเป็นช่องว่างของข้อมูลที่เก็บมา
           และอีก {unreleasedNonZeroJob.length} สกิลระบุอาชีพที่ Zero ยังไม่มีในเกม
           {nonZeroJobExamples.length > 0 && <> เช่น {nonZeroJobExamples[0]} กับ {nonZeroJobExamples[1] ?? nonZeroJobExamples[0]}</>}
@@ -430,7 +430,7 @@ export default async function SkillsPage({
       <Pagination page={safePage} totalPages={totalPages} buildHref={(p) => buildHref(p)} total={filtered.length} pageSize={PAGE_SIZE} />
 
       <p style={{ color: 'var(--faint)', marginTop: 24, fontSize: 13 }}>
-        หน้านี้คือรายการสกิล — ตัววางแผนบิลด์ยังไม่มี (ต้องใช้ข้อมูลเงื่อนไขสกิลที่ยังไม่มีในฐาน)
+        หน้านี้คือรายการสกิล ตัววางแผนบิลด์ยังไม่มี (ต้องใช้ข้อมูลเงื่อนไขสกิลที่ยังไม่มีในฐาน)
       </p>
     </main>
   );

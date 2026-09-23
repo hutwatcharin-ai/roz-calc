@@ -26,7 +26,7 @@ export default function CookingPage() {
         kind="cook"
         extra={
           <p className="muted" style={{ marginTop: 16 }}>
-            อาหารเพิ่มสเตตัสตัวไหนคุ้มกับที่จะทำ ขึ้นกับว่าจะเอาไปสู้อะไร — ลองดูที่{' '}
+            อาหารเพิ่มสเตตัสตัวไหนคุ้มกับที่จะทำ ขึ้นกับว่าจะเอาไปสู้อะไร ลองดูที่{' '}
             <Link href="/tools/damage">ตีมอนด้วยอะไรดี</Link> ก่อนก็ได้
           </p>
         }

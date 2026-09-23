@@ -296,7 +296,7 @@ export default async function CardsPage({
         {/* Both numbers are things the page would otherwise leave the reader
             to work out from what is missing. */}
         <strong>{CARDS_WITHOUT_ART} ใบยังไม่มีรูปการ์ด</strong> (ขึ้นเป็นรูปหลังการ์ดแทน) ·{' '}
-        <strong>{unreleased} ใบยังไม่เปิดในเซิร์ฟโกลบอล</strong> — ติดป้ายไว้ในตารางพร้อมเดือนที่คาดว่าจะมา ·{' '}
+        <strong>{unreleased} ใบยังไม่เปิดในเซิร์ฟโกลบอล</strong> ติดป้ายไว้ในตารางพร้อมเดือนที่คาดว่าจะมา ·{' '}
         <Link href={liveHref(!hideUnreleased)} scroll={false}>
           {hideUnreleased ? 'แสดงการ์ดที่ยังไม่เปิดด้วย' : 'ซ่อนการ์ดที่ยังไม่เปิด'}
         </Link>

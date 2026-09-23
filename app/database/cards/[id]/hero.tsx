@@ -33,7 +33,7 @@ function Art({ id, name }: { id: number; name: string }) {
         width={150}
         height={200}
       />
-      {!art && <figcaption className="cardframe__note">ยังไม่มีรูปการ์ดใบนี้ — ที่เห็นคือหลังการ์ดทั่วไป</figcaption>}
+      {!art && <figcaption className="cardframe__note">ยังไม่มีรูปการ์ดใบนี้ ที่เห็นคือหลังการ์ดทั่วไป</figcaption>}
     </figure>
   );
 }
@@ -41,7 +41,7 @@ function Art({ id, name }: { id: number; name: string }) {
 function ReleaseLine({ release }: { release: CardRelease }) {
   return (
     <p className="cardsoon__line">
-      <strong>ยังไม่เปิดในเซิร์ฟโกลบอล</strong> — คาดว่ามาพร้อมแพตช์ {releaseText(release)} ({release.sources.join(' + ')})
+      <strong>ยังไม่เปิดในเซิร์ฟโกลบอล</strong> คาดว่ามาพร้อมแพตช์ {releaseText(release)} ({release.sources.join(' + ')})
     </p>
   );
 }

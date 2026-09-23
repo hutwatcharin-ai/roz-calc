@@ -21,7 +21,7 @@ export default function RandomOptionsCard({ lines }: { lines: ResolvedPoolLine[]
       </summary>
       <div className="rndopt__body">
         <p className="muted" style={{ marginTop: 0 }}>
-          ดรอปจากมอนสเตอร์ทั่วไป — แต่ละบรรทัดทอยได้ตัวเลือกเดียวจากรายการของบรรทัดนั้น
+          ดรอปจากมอนสเตอร์ทั่วไป แต่ละบรรทัดทอยได้ตัวเลือกเดียวจากรายการของบรรทัดนั้น
           ชิ้นหนึ่งจึงติดออปชั่นได้ {lines.length} ออปชั่น
         </p>
         {/* The halo tells you how many options a piece rolled before you pick
