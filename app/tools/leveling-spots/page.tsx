@@ -8,6 +8,7 @@
 import PageHeader from '@/components/PageHeader';
 import AdSlot from '@/components/AdSlot';
 import FarmTool, { type FarmMode } from '@/components/farm/FarmTool';
+import { FARM_DATA_URL } from '@/lib/farm-data-url';
 
 export const metadata = {
   title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล หาเงิน จุด AFK และแผนของคุณ',
@@ -27,6 +28,9 @@ function readLevel(raw: string | string[] | undefined): number | null {
   return Math.min(200, Math.max(1, Math.round(value)));
 }
 
+// The rankings cannot be drawn before their payload arrives, and the browser
+// only learned about it after hydration -- HTML, then JS, then fetch. Asking
+// for it with the HTML removes a whole step from that queue (23 Sep 2026).
 export default function LevelingSpotsPage({
   searchParams,
 }: {
@@ -34,6 +38,16 @@ export default function LevelingSpotsPage({
 }) {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      {/* Starts the payload while the HTML is still being read, instead of
+          after hydration: HTML, then JS, then fetch was a queue three steps
+          long before anything could be ranked. The hook picks this promise up
+          (lib/use-farm-data). react-dom's preload refuses as:"fetch" without
+          CORS, which would have meant downloading it twice. */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.__farmData=fetch(${JSON.stringify(FARM_DATA_URL)}).then(function(r){return r.ok?r.json():Promise.reject(new Error('HTTP '+r.status))});`,
+        }}
+      />
       <PageHeader title="ฟาร์มที่ไหนดี" lead="ไม่กรอกอะไรก็ได้คำตอบ — กรอกตัวเลขตัวละครครั้งเดียว ใช้ได้ทั้ง 4 โหมด" />
 
       <FarmTool initialMode={readMode(searchParams.mode)} initialLevel={readLevel(searchParams.level)} />

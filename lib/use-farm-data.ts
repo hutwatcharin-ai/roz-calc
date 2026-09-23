@@ -5,8 +5,9 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import type { FarmData } from './farm-engine/types';
+import { FARM_DATA_URL } from './farm-data-url';
 
-export const FARM_DATA_URL = '/tools/leveling-spots/farm-data';
+export { FARM_DATA_URL } from './farm-data-url';
 
 export function useFarmData(): { data: FarmData | null; failed: boolean; retry: () => void } {
   const [data, setData] = useState<FarmData | null>(null);
@@ -16,8 +17,10 @@ export function useFarmData(): { data: FarmData | null; failed: boolean; retry: 
   useEffect(() => {
     let live = true;
     setFailed(false);
-    fetch(FARM_DATA_URL)
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
+    // The page starts this fetch in an inline script before hydration; take
+    // that promise when it exists rather than asking for the file twice.
+    const started = (window as unknown as { __farmData?: Promise<FarmData> }).__farmData;
+    (started ?? fetch(FARM_DATA_URL).then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`)))))
       .then((json: FarmData) => {
         if (live) setData(json);
       })
