@@ -48,7 +48,13 @@ function PageViews() {
 export default function Analytics({ gaId }: { gaId: string }) {
   return (
     <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+      {/* lazyOnload, not afterInteractive: gtag.js is the heaviest script on
+          the site (159 kB) and it ran while the page was still settling --
+          429 ms of main-thread work and two long tasks inside the window
+          Lighthouse measures (23 Sep 2026). Nothing is lost by waiting: the
+          stub in the layout head queues every event, and gtag sends the
+          queue when it arrives. */}
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="lazyOnload" />
       {/* useSearchParams needs a Suspense boundary or the whole tree bails out
           of static rendering at build time. */}
       <Suspense fallback={null}>
