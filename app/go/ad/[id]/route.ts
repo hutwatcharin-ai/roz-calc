@@ -10,13 +10,17 @@
 
 import { NextResponse } from 'next/server';
 import { adsFor } from '@/lib/ads';
+import { SITE_URL } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(_request: Request, { params }: { params: { id: string } }) {
   const today = new Date().toISOString().slice(0, 10);
   const ad = [...adsFor('top', today), ...adsFor('inline', today)].find((a) => a.id === params.id);
-  if (!ad) return NextResponse.redirect(new URL('/advertise', request.url), 302);
+  // SITE_URL, not request.url: behind the proxy the request carries the
+  // container's own host, and the fallback sent readers to localhost:3000
+  // (seen on production, 23 Sep 2026).
+  if (!ad) return NextResponse.redirect(new URL('/advertise', SITE_URL), 302);
 
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const secret = process.env.GA4_API_SECRET;

@@ -25,10 +25,10 @@ const baht = (n: number) => n.toLocaleString('en-US');
 const thaiDate = (iso: string) =>
   new Date(iso).toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' });
 
+// Two lines came off this list on the owner's call (23 Sep 2026): game-account
+// and in-game-currency shops, and private servers.
 const NOT_ACCEPTED = [
   'เว็บพนันทุกชนิด รวมถึงเว็บที่แจกเครดิตหรือลิงก์ต่อไปยังเว็บพนัน',
-  'ร้านขายไอดีและขายเงินในเกม เพราะผิดกติกาของผู้ให้บริการเกม',
-  'เซิร์ฟเวอร์เถื่อนและเว็บที่ละเมิดลิขสิทธิ์',
   'สินค้าผิดกฎหมาย ของปลอม และโฆษณาที่อ้างผลลัพธ์เกินจริง',
 ];
 
@@ -150,7 +150,6 @@ export default function AdvertisePage() {
         {seats > 0 && (
           <p className="adpage__intro">
             <strong>ราคาเปิดตัว</strong> — {seats} รายแรกที่จองได้ล็อกราคานี้ไว้ 6 เดือน แม้ยอดผู้อ่านจะโตขึ้นก็ไม่ปรับ
-            (ยอดเปิดหน้า 7 วันล่าสุดคิดเป็นครึ่งหนึ่งของทั้งเดือน)
           </p>
         )}
       </section>
@@ -170,9 +169,6 @@ export default function AdvertisePage() {
         <ul className="adpage__list adpage__list--no">
           {NOT_ACCEPTED.map((line) => <li key={line}>{line}</li>)}
         </ul>
-        <p className="muted adpage__note">
-          ข้อนี้ไม่ยืดหยุ่น เพราะเป็นเหตุผลเดียวที่ทำให้แบนเนอร์ของคุณไม่ไปอยู่ข้างโฆษณาที่ผู้อ่านไม่ไว้ใจ
-        </p>
       </section>
 
       <section className="card" aria-labelledby="ad-steps" style={{ marginTop: 14 }}>

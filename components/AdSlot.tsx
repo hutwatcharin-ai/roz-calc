@@ -7,7 +7,7 @@
 // PageSpeed and CLS 0; keep it that way).
 
 import Link from 'next/link';
-import { AD_SIZES, adToShow, AD_PRICES, type AdSlot as Slot } from '@/lib/ads';
+import { AD_SIZES, adToShow, type AdSlot as Slot } from '@/lib/ads';
 import AdImpression from './AdImpression';
 
 export default function AdSlot({ slot }: { slot: Slot }) {
@@ -22,13 +22,13 @@ export default function AdSlot({ slot }: { slot: Slot }) {
   } as React.CSSProperties;
 
   if (!ad) {
-    const price = slot === 'top' ? AD_PRICES.top : AD_PRICES.inline;
     return (
       <aside className={`adslot adslot--${slot} adslot--house`} style={style} aria-label="พื้นที่โฆษณา">
         <span className="adslot__tag">พื้นที่โฆษณา</span>
         <Link href="/advertise" className="adslot__house">
           <strong>ลงโฆษณาตรงนี้</strong>
-          <span>ถึงคนเล่น Ragnarok Zero ไทย · เริ่มต้น {price.toLocaleString('en-US')} บาท/เดือน</span>
+          {/* No price here on the owner's call (23 Sep 2026); the page has it. */}
+          <span>ถึงคนเล่น Ragnarok Zero ไทย</span>
           <em>ดูตำแหน่งและราคา →</em>
         </Link>
       </aside>
