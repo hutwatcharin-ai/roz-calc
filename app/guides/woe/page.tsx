@@ -18,6 +18,7 @@ import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import AdSlot from '@/components/AdSlot';
 import woe from '@/data/woe-items.json';
+import castleFile from '@/data/woe-castles.json';
 import { itemHref } from '@/lib/item-href';
 import { supabaseBrowser } from '@/lib/supabase';
 
@@ -39,6 +40,12 @@ const GEAR = woe.gear as Gear[];
 const SCROLLS = woe.force as Scroll[];
 const CARDS = woe.cards as Row[];
 const OTHER = woe.other as Row[];
+
+type Castle = { code: string; number: number; name: string; region: string; warpZeny: number; warpZenySiege: number };
+const CASTLES = castleFile.castles as Castle[];
+const REGIONS = [...new Set(CASTLES.map((c) => c.region))];
+// One pair of numbers for all thirty, so the sentence can quote it as a rule.
+const WARP = { normal: CASTLES[0].warpZeny, siege: CASTLES[0].warpZenySiege };
 
 const LESSER = GEAR.filter((g) => g.tier === 'lesser');
 const ADVANCED = GEAR.filter((g) => g.tier === 'advanced');
@@ -107,7 +114,7 @@ export default async function WoeGuidePage() {
         <h2 className="section-title" style={{ marginTop: 0 }}>สองข้อที่หน้านี้ยังตอบไม่ได้</h2>
         <ul style={{ margin: '8px 0 0', paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
           <li><strong>เวลาเปิดสงครามกิลด์</strong> วันไหน กี่โมง ยาวกี่ชั่วโมง — ไม่มีในข้อมูลที่เว็บนี้มี</li>
-          <li><strong>ปราสาทที่เปิดในเซิร์ฟนี้</strong> มีกี่หลัง อยู่เมืองไหน — ไฟล์แมพปราสาทมีอยู่ในไคลเอนต์ แต่ไฟล์ที่มีอยู่ไม่ได้แปลว่าเซิร์ฟเปิดใช้จริง จึงไม่เขียนรายชื่อ</li>
+          <li><strong>ปราสาทที่เปิดจริงในเซิร์ฟนี้</strong> — <a href="#castles">รายชื่อปราสาทในไคลเอนต์อยู่ด้านล่าง</a> แต่ไฟล์ที่มีอยู่ไม่ได้แปลว่าเซิร์ฟเปิดสงครามที่นั่นครบทุกหลัง</li>
         </ul>
         <p className="muted" style={{ marginTop: 10 }}>
           สองข้อนี้ต้องดูจากประกาศในเกมหรือหน้าประกาศทางการ ถ้าใครมีภาพหน้าประกาศเวลา WoE ส่งมาได้ จะใส่ให้พร้อมบอกที่มา
@@ -119,6 +126,7 @@ export default async function WoeGuidePage() {
         <a href="#only">ยาเฉพาะ WoE</a>
         <a href="#scrolls">สกรอล Force / Resist</a>
         <a href="#gear">ชุดกิลด์</a>
+        <a href="#castles">ปราสาท</a>
         <a href="#misc">Emperium และของอื่น</a>
       </nav>
 
@@ -227,6 +235,36 @@ export default async function WoeGuidePage() {
           กดชื่อชิ้นไหนก็ได้เพื่อดูคำอธิบายเต็ม รวมถึงโบนัสตอนตีบวกถึงขั้น 7 / 9 / 10 และเงื่อนไขใส่ครบเซ็ต
         </p>
         <Src>คำอธิบายไอเทมในไคลเอนต์ภาษาไทย · <Link href="/guides/guild">ไอเทมกิลด์อีกชุด (โล่อีเวนต์ แต้มกิลด์ เหรียญดันเจี้ยน) อยู่หน้านี้</Link></Src>
+      </section>
+
+
+      <section className="card" id="castles" style={{ marginTop: 14 }}>
+        <h2 className="section-title">ปราสาทในไฟล์ไคลเอนต์ ({CASTLES.length} หลัง)</h2>
+        <p style={{ marginTop: 8 }}>
+          ไคลเอนต์มีตารางปราสาทของตัวเอง แบ่งเป็น {REGIONS.length} โซน โซนละ {CASTLES.length / REGIONS.length} หลัง
+          พร้อมชื่อปราสาทและค่าวาร์ปของคาฟรา: ปกติ <strong>{WARP.normal}z</strong> แต่ช่วงเวลาสงคราม
+          <strong> {WARP.siege.toLocaleString('en-US')}z</strong> — แพงขึ้น {WARP.siege / WARP.normal} เท่า
+        </p>
+        <p className="guildp__warn">
+          <strong>ไฟล์มี ไม่ได้แปลว่าเปิด</strong> — ตารางนี้คือสิ่งที่ไคลเอนต์ติดตั้งมา ไม่ใช่ประกาศว่าเซิร์ฟเปิดสงครามครบทุกหลัง
+          ยึดประกาศในเกมเป็นหลัก
+        </p>
+        <div className="woe__castles">
+          {REGIONS.map((region) => (
+            <div key={region} className="woe__castleblock">
+              <h3 className="woe__sub">{region}</h3>
+              <ul className="woe__list woe__list--tight">
+                {CASTLES.filter((c) => c.region === region).map((c) => (
+                  <li key={c.code}>
+                    <strong>{c.name}</strong>
+                    <span className="muted mono">{c.code}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <Src>ตารางปราสาทในไคลเอนต์ (data/luafiles514/lua files/agit/agitconfig*.lub) ชื่อตามที่ไคลเอนต์ไทยใช้</Src>
       </section>
 
       <section className="card" id="misc" style={{ marginTop: 14 }}>

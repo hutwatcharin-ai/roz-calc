@@ -247,6 +247,9 @@ export default async function HomePage({
           Battle Pass ฤดูร้อน — รางวัลทุก Tier
         </Link>
         <Link href="/news/patch-2026-09-03" className="chiplink">แพทช์ 3 ก.ย. — เลเวล 60 / อาชีพ 2</Link>
+        {/* Unlike the patch chips this one does not time out: it is the page
+            that answers "what is coming", and it keeps working as patches age. */}
+        <Link href="/news/roadmap" className="chiplink">ไทม์ไลน์อัปเดต — เดือนหน้ามีอะไร</Link>
         <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>

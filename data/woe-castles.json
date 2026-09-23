@@ -1,0 +1,251 @@
+{
+  "_meta": {
+    "what": "Castles the live client's own agitconfig lists, with the Kafra warp cost.",
+    "caution": "A castle in the client config is not proof the server runs a siege on it.",
+    "source": "RO Zero Global client, data/luafiles514/lua files/agit/agitconfig*.lub",
+    "regenerate": "python scripts/build-woe-castles.py",
+    "total": 30
+  },
+  "castles": [
+    {
+      "code": "prtg_cas01",
+      "number": 1,
+      "name": "Kriemhild",
+      "region": "Prontera",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "prtg_cas02",
+      "number": 2,
+      "name": "Swanhild",
+      "region": "Prontera",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "prtg_cas03",
+      "number": 3,
+      "name": "Lazreagues",
+      "region": "Prontera",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "prtg_cas04",
+      "number": 4,
+      "name": "Skoegul",
+      "region": "Prontera",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "prtg_cas05",
+      "number": 5,
+      "name": "Kendul",
+      "region": "Prontera",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "aldeg_cas01",
+      "number": 6,
+      "name": "Neuschwanstein",
+      "region": "Al De Baran",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "aldeg_cas02",
+      "number": 7,
+      "name": "Hohenschwangau",
+      "region": "Al De Baran",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "aldeg_cas03",
+      "number": 8,
+      "name": "Nuernberg",
+      "region": "Al De Baran",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "aldeg_cas04",
+      "number": 9,
+      "name": "Wurzburg",
+      "region": "Al De Baran",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "aldeg_cas05",
+      "number": 10,
+      "name": "Rothenburg",
+      "region": "Al De Baran",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "gefg_cas01",
+      "number": 11,
+      "name": "Leprion",
+      "region": "Geffen",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "gefg_cas02",
+      "number": 12,
+      "name": "Jyolbriger",
+      "region": "Geffen",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "gefg_cas03",
+      "number": 13,
+      "name": "Yssnelf",
+      "region": "Geffen",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "gefg_cas04",
+      "number": 14,
+      "name": "Bergel",
+      "region": "Geffen",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "gefg_cas05",
+      "number": 15,
+      "name": "Melcedez",
+      "region": "Geffen",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "payg_cas01",
+      "number": 16,
+      "name": "Arbor of Light",
+      "region": "Payon",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "payg_cas02",
+      "number": 17,
+      "name": "Garden of Heaven",
+      "region": "Payon",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "payg_cas03",
+      "number": 18,
+      "name": "Shadow of Buddha",
+      "region": "Payon",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "payg_cas04",
+      "number": 19,
+      "name": "Red Palace",
+      "region": "Payon",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "payg_cas05",
+      "number": 20,
+      "name": "Bamboo Forest Hermitage",
+      "region": "Payon",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "arug_cas01",
+      "number": 21,
+      "name": "Mardol",
+      "region": "Arunafeltz",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "arug_cas02",
+      "number": 22,
+      "name": "Scheit",
+      "region": "Arunafeltz",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "arug_cas03",
+      "number": 23,
+      "name": "Horn",
+      "region": "Arunafeltz",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "arug_cas04",
+      "number": 24,
+      "name": "Gepun",
+      "region": "Arunafeltz",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "arug_cas05",
+      "number": 25,
+      "name": "Banadis",
+      "region": "Arunafeltz",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "schg_cas01",
+      "number": 26,
+      "name": "Heemin",
+      "region": "Schwaltzvalt",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "schg_cas02",
+      "number": 27,
+      "name": "Andlerangh",
+      "region": "Schwaltzvalt",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "schg_cas03",
+      "number": 28,
+      "name": "Bidblind",
+      "region": "Schwaltzvalt",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "schg_cas04",
+      "number": 29,
+      "name": "Hljod",
+      "region": "Schwaltzvalt",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    },
+    {
+      "code": "schg_cas05",
+      "number": 30,
+      "name": "Schatirnil",
+      "region": "Schwaltzvalt",
+      "warpZeny": 100,
+      "warpZenySiege": 100000
+    }
+  ]
+}
