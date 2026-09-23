@@ -3367,3 +3367,27 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farm-skeleton__row--tall { height: 320px; }
 @keyframes farm-skeleton { from { background-position: 100% 0; } to { background-position: 0 0; } }
 @media (prefers-reduced-motion: reduce) { .farm-skeleton__row { animation: none; } }
+
+/* ---------- /guides/guild ---------- */
+.guildp { padding-block: 28px 40px; }
+.guildp__toc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.guildp__toc a { padding: 4px 12px; border: 1px solid var(--hair); border-radius: 999px; background: var(--panel-2); font-size: 13px; color: var(--text); text-decoration: none; }
+.guildp__toc a:hover { border-color: var(--cyan); color: var(--cyan); }
+.guildp__hero { display: flex; gap: 14px; align-items: flex-start; margin-top: 10px; }
+.guildp__icon { image-rendering: pixelated; flex: none; }
+.guildp__stats { margin: 4px 0 2px; font: 700 15px/1.4 var(--font-mono), monospace; color: var(--yellow); }
+.guildp__steps { margin: 14px 0 0; padding-inline-start: 20px; line-height: 1.9; font-size: 14px; }
+.guildp__warn { margin-top: 12px; padding: 10px 14px; border: 1px solid var(--pink); border-radius: var(--radius); background: color-mix(in srgb, var(--pink) 10%, transparent); font-size: 13.5px; }
+.guildp__src { margin-top: 10px; color: var(--faint); font-size: 12.5px; line-height: 1.6; }
+.guildp__src a { color: var(--cyan); }
+.guildp__flames { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.guildp__flame { display: grid; justify-items: center; gap: 2px; padding: 12px 8px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); text-align: center; font-size: 13px; }
+.guildp__flamedot { width: 26px; height: 26px; border-radius: 50% 50% 50% 0; rotate: -45deg; margin-bottom: 8px; box-shadow: 0 0 14px currentColor; }
+.guildp__table { width: 100%; margin-top: 10px; }
+.guildp__rowicon { image-rendering: pixelated; vertical-align: -6px; margin-inline-end: 8px; }
+.guildp__rows { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.guildp__row { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }
+.guildp__row img { image-rendering: pixelated; }
+.guildp__row strong { font-size: 14px; }
+.guildp__row p { margin: 2px 0 0; font-size: 13px; line-height: 1.6; }
+@media (max-width: 720px) { .guildp__flames { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

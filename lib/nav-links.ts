@@ -102,6 +102,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/social', label: 'รีเซ็ตสเตตัส แคลน แต่งงาน', icon: '/images/items/2635.gif', ready: true, group: 'ระบบในเกม' },
+    { href: '/guides/guild', label: 'ไอเทมกิลด์', icon: '/images/items/25630.gif', ready: true, group: 'ระบบในเกม' },
   ],
 };
 

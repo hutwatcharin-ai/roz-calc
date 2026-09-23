@@ -25,6 +25,16 @@ const CLAIM = new RegExp(String.raw`\d[\d,]{1,}\s*(?:${UNITS.join('|')})`, 'g');
  */
 const ALLOWED: { file: string; text: string; why: string }[] = [
   {
+    file: 'app/guides/guild/page.tsx',
+    text: '20 ชิ้น',
+    why: 'what one player got in a day of farming, quoted from the video named beside it -- an observation about drop rates, not a count of anything this site holds',
+  },
+  {
+    file: 'app/guides/guild/page.tsx',
+    text: '10 ชิ้น',
+    why: 'the contents of the event participation reward as the video reports them; the reward is not in our data at all',
+  },
+  {
     file: 'app/about/page.tsx',
     text: '1,200 ชิ้น',
     why: 'what rozerodb contributed at import time, not a count of the items table now',
