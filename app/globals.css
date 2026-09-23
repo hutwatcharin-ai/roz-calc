@@ -90,7 +90,7 @@ table { border-collapse: collapse; width: 100%; }
   padding: 9px 13px;
 }
 .subnav .soon {
-  font: 500 13px/1.6 var(--font-sarabun), sans-serif;
+  font: 400 13px/1.6 var(--font-sarabun), sans-serif;
   padding: 5px 9px;
 }
 
@@ -183,7 +183,7 @@ table { border-collapse: collapse; width: 100%; }
   gap: 6px;
   padding: 7px 11px;
   border-radius: 8px;
-  font: 500 13px/1.6 var(--font-sarabun), sans-serif;
+  font: 400 13px/1.6 var(--font-sarabun), sans-serif;
   color: var(--dim);
   text-decoration: none;
   white-space: nowrap;
@@ -264,7 +264,7 @@ table { border-collapse: collapse; width: 100%; }
     border-radius: 8px;
     background: var(--panel-2);
     color: var(--dim);
-    font: 500 14px/1.4 var(--font-sarabun), sans-serif;
+    font: 400 14px/1.4 var(--font-sarabun), sans-serif;
     list-style: none;
     cursor: pointer;
   }
@@ -521,7 +521,7 @@ a.thsort { text-decoration: none; }
   border-radius: 999px;
   background: var(--panel-2);
   color: var(--dim);
-  font: 500 13px/1.6 var(--font-sarabun), sans-serif;
+  font: 400 13px/1.6 var(--font-sarabun), sans-serif;
   text-decoration: none;
 }
 
@@ -843,13 +843,13 @@ a.qcard:hover { background: var(--panel-2); }
   margin-top: auto;
   padding-top: 10px;
 }
-.qcard__form label { font: 500 13px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); white-space: nowrap; }
+.qcard__form label { font: 400 13px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); white-space: nowrap; }
 .qcard__form input {
   background: var(--panel-2);
   border: 1px solid var(--hair);
   border-radius: 6px;
   color: var(--text);
-  font: 500 14px/1.4 var(--font-sarabun), sans-serif;
+  font: 400 14px/1.4 var(--font-sarabun), sans-serif;
   padding: 8px 10px;
   min-height: 40px;
 }
@@ -921,7 +921,7 @@ a.qcard:hover { background: var(--panel-2); }
 }
 .cashplan__bar-in {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-  padding-block: 10px; font: 500 14px/1.5 var(--font-sarabun), sans-serif;
+  padding-block: 10px; font: 400 14px/1.5 var(--font-sarabun), sans-serif;
 }
 .cashplan__plan { color: var(--dim); }
 .cashplan__clear {
@@ -1133,7 +1133,7 @@ a.qcard:hover { background: var(--panel-2); }
 .disclose > summary {
   cursor: pointer;
   padding: 13px 14px;
-  font: 600 15px/1.4 var(--font-chakra), sans-serif;
+  font: 700 15px/1.4 var(--font-chakra), sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1348,7 +1348,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
   border-color: var(--hair);
   background: var(--panel-2);
   color: var(--dim);
-  font-weight: 500;
+  font-weight: 400;
 }
 .btn--quiet:hover { color: var(--text); border-color: var(--cyan); background: var(--panel-2); }
 
@@ -1405,7 +1405,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 }
 .field__label {
   color: var(--dim);
-  font: 500 12px/1.3 var(--font-sarabun), sans-serif;
+  font: 400 12px/1.3 var(--font-sarabun), sans-serif;
 }
 .field--grow { flex: 1 1 220px; }
 .field--pair { flex-direction: column; }
@@ -1511,7 +1511,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
 }
 .sitefooter__h {
   margin: 0 0 10px;
-  font: 600 13px/1.4 var(--font-chakra), sans-serif;
+  font: 700 13px/1.4 var(--font-chakra), sans-serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text);
@@ -1658,7 +1658,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
   border-radius: var(--radius);
   color: var(--dim);
   text-decoration: none;
-  font: 500 14px/1 var(--font-mono), ui-monospace, monospace;
+  font: 400 14px/1 var(--font-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }
 a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
@@ -1713,7 +1713,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   border-radius: 4px;
   background: var(--panel-2);
   color: var(--faint);
-  font: 600 10px/1 var(--font-mono), ui-monospace, monospace;
+  font: 700 10px/1 var(--font-mono), ui-monospace, monospace;
 }
 
 /* Labelled stat tiles on a detail page. Tiles only render for stats the item
@@ -1771,7 +1771,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 }
 .toolnumbers__row { display: flex; flex-wrap: wrap; gap: 12px; }
 .toolnumbers__field { display: flex; flex-direction: column; gap: 4px; }
-.toolnumbers__label { font: 500 12px/1.3 var(--font-sarabun), sans-serif; color: var(--dim); }
+.toolnumbers__label { font: 400 12px/1.3 var(--font-sarabun), sans-serif; color: var(--dim); }
 .toolnumbers__unlocks { color: var(--faint); }
 .toolnumbers__field input { width: 130px; }
 .toolnumbers__note { margin: 10px 0 0; font-size: 12.5px; color: var(--faint); }
@@ -1788,7 +1788,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .caveat > summary {
   cursor: pointer;
   padding: 8px 12px;
-  font: 500 12.5px/1.3 var(--font-sarabun), sans-serif;
+  font: 400 12.5px/1.3 var(--font-sarabun), sans-serif;
   color: var(--faint);
   list-style: none;
 }
@@ -1964,14 +1964,14 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   gap: 10px;
   padding: 14px 18px;
   cursor: pointer;
-  font: 600 15px/1.3 var(--font-chakra), sans-serif;
+  font: 700 15px/1.3 var(--font-chakra), sans-serif;
   color: var(--text);
   list-style: none;
 }
 .rndopt__summary::-webkit-details-marker { display: none; }
 .rndopt__summary::after {
   content: 'ดูออปชั่น ▾';
-  font: 500 12px/1 var(--font-sarabun), sans-serif;
+  font: 400 12px/1 var(--font-sarabun), sans-serif;
   color: var(--cyan);
   white-space: nowrap;
 }
@@ -2006,7 +2006,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .itemcard > :first-child { grid-row: 1 / 3; }
 .itemcard__name {
   color: var(--text);
-  font: 500 13px/1.35 var(--font-sarabun), sans-serif;
+  font: 400 13px/1.35 var(--font-sarabun), sans-serif;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -2044,7 +2044,7 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .moncard__top { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .moncard__name {
   color: var(--text);
-  font: 500 13px/1.35 var(--font-sarabun), sans-serif;
+  font: 400 13px/1.35 var(--font-sarabun), sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2159,7 +2159,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 
 /* Spawn count inside a map chip on the monster page: the number a player
    actually compares maps by, kept quiet next to the name. */
-.chip__count { margin-left: 6px; font: 500 12px/1 var(--font-mono), monospace; color: var(--faint); }
+.chip__count { margin-left: 6px; font: 400 12px/1 var(--font-mono), monospace; color: var(--faint); }
 
 /* Monster name with a sprite that pops up on hover (components/MonsterLink).
    Hidden with display:none so the image is not fetched until first shown.
@@ -2291,7 +2291,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   display: inline-flex; align-items: center; gap: 7px;
   padding: 8px 14px; min-height: 36px;
   background: var(--panel); border: 1px solid var(--hair); border-radius: 999px;
-  color: var(--dim); font: 500 13px/1 var(--font-sarabun), sans-serif; cursor: pointer;
+  color: var(--dim); font: 400 13px/1 var(--font-sarabun), sans-serif; cursor: pointer;
 }
 .searchbtn:hover { color: var(--text); border-color: var(--cyan); box-shadow: 0 0 12px var(--glow-cyan); }
 .monster-picker__selected { margin: 10px 0 0; color: var(--dim); font-size: 13px; }
@@ -2450,7 +2450,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   font: 600 13px/1.4 var(--font-sarabun), sans-serif;
   display: flex; align-items: baseline; gap: 8px; justify-content: space-between;
 }
-.skilltip__lv { color: var(--yellow); font: 500 12px/1 var(--font-mono), monospace; flex: none; }
+.skilltip__lv { color: var(--yellow); font: 400 12px/1 var(--font-mono), monospace; flex: none; }
 .skilltip__row { margin: 2px 0; font-size: 13px; display: flex; gap: 8px; }
 .skilltip__label { color: var(--faint); flex: none; min-width: 34px; }
 .skilltip__desc {
@@ -2562,7 +2562,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   background: rgba(29, 20, 68, 0.6);
 }
 .specrow dt { margin: 0; color: var(--faint); font-size: 12.5px; }
-.specrow dd { margin: 2px 0 0; font: 600 17px/1.3 var(--font-chakra), sans-serif; color: var(--text); }
+.specrow dd { margin: 2px 0 0; font: 700 17px/1.3 var(--font-chakra), sans-serif; color: var(--text); }
 
 .cardsoon__line {
   margin: 12px 0 0;
@@ -2617,7 +2617,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
    the page 25,495px tall on a 390px screen. These rows are three short fields,
    two of them numbers, so they stay a real table at every width and the whole
    track reads as a list. */
-.bptable { width: 100%; border-collapse: collapse; font: 500 13.5px/1.5 var(--font-sarabun), sans-serif; }
+.bptable { width: 100%; border-collapse: collapse; font: 400 13.5px/1.5 var(--font-sarabun), sans-serif; }
 .bptable th {
   text-align: left;
   padding: 6px 8px;
@@ -2654,7 +2654,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-bottom: 1px solid var(--hair);
 }
 .shoprow:last-child { border-bottom: 0; }
-.shoprow__who { font: 500 14px/1.5 var(--font-sarabun), sans-serif; }
+.shoprow__who { font: 400 14px/1.5 var(--font-sarabun), sans-serif; }
 .shoprow__navi { font-size: 12.5px; }
 /* Aloe has 24 sellers. Five stay open and the rest fold away, so the section
    is a known height on a phone instead of longer than the item's own page. */
@@ -2684,7 +2684,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   align-items: center;
   gap: 6px;
   color: var(--dim);
-  font: 500 13px/1.4 var(--font-sarabun), sans-serif;
+  font: 400 13px/1.4 var(--font-sarabun), sans-serif;
 }
 
 /* An NPC's own sprite, when one of our 84 mirrored images matches. */
@@ -2799,7 +2799,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmcard__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: 6px; min-width: 0; }
 .farmcard--big .farmcard__body { padding: 12px; }
 .farmcard__head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-.farmcard__num { flex: none; color: var(--dim); font: 600 13px/1.4 var(--font-mono), ui-monospace, monospace; }
+.farmcard__num { flex: none; color: var(--dim); font: 700 13px/1.4 var(--font-mono), ui-monospace, monospace; }
 .farmcard__name, .farmcard__name:visited { color: var(--text); font: 700 15px/1.35 var(--font-sarabun), sans-serif; text-decoration: none; }
 .farmcard--big .farmcard__name { font-size: 18px; }
 .farmcard__name:hover { color: var(--cyan); }
@@ -2807,7 +2807,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmcard__stats { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 0; }
 .farmcard__stats div { display: flex; align-items: baseline; gap: 5px; }
 .farmcard__stats dt { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
-.farmcard__stats dd { margin: 0; color: var(--text); font: 600 14px/1.4 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.farmcard__stats dd { margin: 0; color: var(--text); font: 700 14px/1.4 var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 .farmcard__stats .farm-money { color: var(--yellow); }
 .farm-unit { color: var(--faint); font: 400 12px/1.4 var(--font-sarabun), sans-serif; }
 
@@ -2824,7 +2824,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-radius: 999px;
   background: var(--panel-2);
   color: var(--text);
-  font: 500 12.5px/1.3 var(--font-sarabun), sans-serif;
+  font: 400 12.5px/1.3 var(--font-sarabun), sans-serif;
   text-decoration: none;
 }
 .farmmob a:hover { border-color: var(--cyan); }
@@ -2914,7 +2914,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border-radius: 999px;
   background: var(--panel-2);
   color: var(--text);
-  font: 600 12.5px/1.6 var(--font-mono), ui-monospace, monospace;
+  font: 700 12.5px/1.6 var(--font-mono), ui-monospace, monospace;
 }
 .farmbar__chev { flex: none; color: var(--cyan); font: 600 15px/1 var(--font-sarabun), sans-serif; white-space: nowrap; }
 .farm-filters { margin-top: 12px; }
@@ -3029,7 +3029,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cguide__tag { display: inline-block; margin-inline-start: 8px; padding: 1px 9px; border-radius: 999px; background: var(--yellow); color: var(--yellow-ink); font: 700 12px/1.7 var(--font-sarabun), sans-serif; vertical-align: middle; }
 .cguide__pick .cguide__tag { margin: 0; align-self: flex-start; }
 .cguide__build { margin-top: 20px; }
-.cguide__buildtitle { margin: 0 0 6px; font: 800 20px/1.35 var(--font-sarabun), sans-serif; color: var(--text); }
+.cguide__buildtitle { margin: 0 0 6px; font: 700 20px/1.35 var(--font-sarabun), sans-serif; color: var(--text); }
 .cguide__lead { margin: 0; font-size: 15.5px; line-height: 1.7; }
 .cguide__missing { margin-top: 12px; padding: 10px 12px; border: 1px dashed var(--hair); border-radius: 10px; color: var(--dim); }
 .cguide__glance { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: linear-gradient(135deg, rgba(61,232,255,.10), rgba(255,229,61,.06)); border: 1px solid rgba(61,232,255,.28); display: grid; gap: 10px; }
@@ -3057,7 +3057,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cguide__val { position: relative; padding-inline-start: 8px; font-size: 12.5px; line-height: 22px; color: var(--text); font-weight: 600; }
 .cguide__skills { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 8px; }
 .cguide__skill { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--hair); border-radius: 12px; background: var(--panel); counter-increment: step; }
-.cguide__skill::before { content: counter(step); flex: none; width: 24px; height: 24px; margin-top: 4px; border-radius: 50%; background: var(--panel-2); color: var(--cyan); font: 700 12px/24px "IBM Plex Mono", monospace; text-align: center; }
+.cguide__skill::before { content: counter(step); flex: none; width: 24px; height: 24px; margin-top: 4px; border-radius: 50%; background: var(--panel-2); color: var(--cyan); font: 700 12px/24px var(--font-mono), monospace; text-align: center; }
 .cguide__skill > img, .cguide__skill > .cguide__skill-blank { flex: none; }
 .cguide__skill-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .cguide__skill-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-weight: 700; font-size: 15px; }
@@ -3066,11 +3066,11 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cguide__skill-blank { display: inline-block; border-radius: 6px; background: var(--panel-2); }
 .cguide__plandetails { margin-top: 12px; border: 1px solid var(--hair); border-radius: 12px; padding: 10px 14px; }
 .cguide__plandetails summary { cursor: pointer; color: var(--cyan); font-weight: 700; min-height: 32px; line-height: 32px; }
-.cguide__plandetails summary .muted { font-size: 12.5px; font-weight: 500; }
+.cguide__plandetails summary .muted { font-size: 12.5px; font-weight: 400; }
 .cguide__plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 10px; }
 .cguide__planjob { border: 1px solid var(--hair); border-radius: 10px; padding: 10px 12px; }
 .cguide__planjob h4 { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 8px; font: 700 14.5px/1.4 var(--font-sarabun), sans-serif; }
-.cguide__points { color: var(--cyan); font-size: 12.5px; font-weight: 500; }
+.cguide__points { color: var(--cyan); font-size: 12.5px; font-weight: 400; }
 .cguide__points.is-over { color: #FF6B8B; }
 .cguide__planjob ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .cguide__planjob li { display: grid; grid-template-columns: 20px 1fr auto; column-gap: 8px; align-items: center; font-size: 13.5px; }
@@ -3222,7 +3222,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   47.2%, 49.4%, 72.2%, 74.4% { filter: brightness(2.6) drop-shadow(0 0 10px #fff); }
 }
 /* Damage numbers float off the monster, the way the game shows them. */
-.arcade__dmg { position: absolute; z-index: 4; left: calc(var(--fx) + 104px); bottom: 70px; font: 800 18px/1 var(--font-chakra), sans-serif; letter-spacing: 0; color: #fff; text-shadow: 0 0 2px #000, 0 0 8px var(--cyan); opacity: 0; animation: arcade-dmg 3.6s linear infinite; }
+.arcade__dmg { position: absolute; z-index: 4; left: calc(var(--fx) + 104px); bottom: 70px; font: 700 18px/1 var(--font-chakra), sans-serif; letter-spacing: 0; color: #fff; text-shadow: 0 0 2px #000, 0 0 8px var(--cyan); opacity: 0; animation: arcade-dmg 3.6s linear infinite; }
 .arcade__dmg--crit { left: calc(var(--fx) + 118px); font-size: 22px; color: var(--yellow); text-shadow: 0 0 2px #000, 0 0 10px var(--yellow); animation-name: arcade-crit; }
 @keyframes arcade-dmg {
   0%, 47.1% { opacity: 0; transform: translateY(0) scale(1); }

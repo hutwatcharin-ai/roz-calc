@@ -15,10 +15,14 @@ import { GA_DEBUG, gaBootstrap } from '@/lib/analytics';
 // fonts.googleapis.com and the build died on it, so the deploy failed on a
 // change that had nothing to do with fonts. Now the build needs no network.
 // CSS refers to the families through these variables.
+//
+// Six files, not ten (23 Sep 2026): every page preloads every weight, so the
+// four the design leaned on least -- Sarabun 500, Chakra Petch 600, IBM Plex
+// Mono 500 and 600 -- cost 56 kB on every first view. The rules that asked
+// for them now ask for a weight that ships.
 const sarabun = localFont({
   src: [
     { path: '../assets/fonts/web/Sarabun-Regular.woff2', weight: '400', style: 'normal' },
-    { path: '../assets/fonts/web/Sarabun-Medium.woff2', weight: '500', style: 'normal' },
     { path: '../assets/fonts/web/Sarabun-SemiBold.woff2', weight: '600', style: 'normal' },
     { path: '../assets/fonts/web/Sarabun-Bold.woff2', weight: '700', style: 'normal' },
   ],
@@ -27,7 +31,6 @@ const sarabun = localFont({
 });
 const chakra = localFont({
   src: [
-    { path: '../assets/fonts/web/ChakraPetch-SemiBold.woff2', weight: '600', style: 'normal' },
     { path: '../assets/fonts/web/ChakraPetch-Bold.woff2', weight: '700', style: 'normal' },
   ],
   variable: '--font-chakra',
@@ -36,8 +39,6 @@ const chakra = localFont({
 const plexMono = localFont({
   src: [
     { path: '../assets/fonts/web/IBMPlexMono-Regular.woff2', weight: '400', style: 'normal' },
-    { path: '../assets/fonts/web/IBMPlexMono-Medium.woff2', weight: '500', style: 'normal' },
-    { path: '../assets/fonts/web/IBMPlexMono-SemiBold.woff2', weight: '600', style: 'normal' },
     { path: '../assets/fonts/web/IBMPlexMono-Bold.woff2', weight: '700', style: 'normal' },
   ],
   variable: '--font-mono',
