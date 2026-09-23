@@ -28,7 +28,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
           // No cookie is read here, so each click is its own anonymous client:
           // the number of clicks is what the report needs, not who made them.
           client_id: `${Date.now()}.${Math.floor(Math.random() * 1e9)}`,
-          events: [{ name: 'ad_click', params: { ad_id: ad.id, ad_slot: ad.slot, advertiser: ad.advertiser } }],
+          events: [{ name: 'banner_click', params: { ad_id: ad.id, ad_slot: ad.slot, advertiser: ad.advertiser } }],
         }),
       });
     } catch (error) {

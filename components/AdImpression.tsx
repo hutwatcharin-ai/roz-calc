@@ -11,6 +11,10 @@
 import { useEffect, useRef } from 'react';
 import { track } from '@/lib/analytics';
 
+// banner_, not ad_: GA4 keeps ad_impression and ad_click for itself and
+// rejects them from the Measurement Protocol (NAME_RESERVED, checked
+// 23 Sep 2026).
+
 export default function AdImpression({ id, slot, advertiser }: { id: string; slot: string; advertiser: string }) {
   const marker = useRef<HTMLSpanElement>(null);
   const sent = useRef(false);
@@ -20,14 +24,14 @@ export default function AdImpression({ id, slot, advertiser }: { id: string; slo
     if (!node || sent.current) return;
     if (typeof IntersectionObserver !== 'function') {
       sent.current = true;
-      track('ad_impression', { ad_id: id, ad_slot: slot, advertiser });
+      track('banner_impression', { ad_id: id, ad_slot: slot, advertiser });
       return;
     }
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting || sent.current) continue;
         sent.current = true;
-        track('ad_impression', { ad_id: id, ad_slot: slot, advertiser });
+        track('banner_impression', { ad_id: id, ad_slot: slot, advertiser });
         observer.disconnect();
       }
     }, { threshold: 0.5 });
