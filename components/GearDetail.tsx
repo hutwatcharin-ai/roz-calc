@@ -4,7 +4,7 @@
 // each route passes its own section rather than keeping a second copy in sync.
 
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
-import AdsenseUnit from '@/components/AdsenseUnit';
+import AdSlot from '@/components/AdSlot';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import Link from 'next/link';
 import ItemCrafting from '@/components/ItemCrafting';
@@ -248,7 +248,7 @@ export default function GearDetail({
       </div>
 
       <div style={{ marginTop: 20 }}>
-        <AdsenseUnit slot="detail" />
+        <AdSlot slot="detail" />
         <FeedbackButton pageType={section.feedbackPageType} entityId={String(item.id)} />
       </div>
     </main>

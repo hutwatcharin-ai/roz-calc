@@ -1,6 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import { mobThresholds } from '@/lib/monster-thresholds';
-import AdsenseUnit from '@/components/AdsenseUnit';
+import AdSlot from '@/components/AdSlot';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import FormerNameLine from '@/components/FormerNameLine';
@@ -457,7 +457,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         </div>
       </div>
 
-      <AdsenseUnit slot="detail" />
+      <AdSlot slot="detail" />
 
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="monster" entityId={String(monster.id)} />

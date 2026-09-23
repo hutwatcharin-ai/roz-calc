@@ -73,6 +73,13 @@ export default function AdvertisePage() {
       views: AD_STATS.inlineSlotViews,
       price: AD_PRICES.inline,
     },
+    {
+      key: 'detail' as const,
+      name: 'แบนเนอร์ท้ายหน้ารายละเอียด',
+      where: 'ท้ายหน้ามอนรายตัว อุปกรณ์ คอสตูม และการ์ดรายชิ้น',
+      views: AD_STATS.detailSlotViews,
+      price: AD_PRICES.detail,
+    },
   ];
 
   return (
@@ -130,7 +137,7 @@ export default function AdvertisePage() {
         <h3 className="adpage__h3">จองยาวได้ส่วนลด</h3>
         <table className="stat-table adpage__table">
           <thead>
-            <tr><th scope="col">ระยะเวลา</th><th scope="col">ส่วนลด</th><th scope="col">บนสุด รวม</th><th scope="col">แทรกเนื้อหา รวม</th></tr>
+            <tr><th scope="col">ระยะเวลา</th><th scope="col">ส่วนลด</th><th scope="col">บนสุด รวม</th><th scope="col">แทรกเนื้อหา รวม</th><th scope="col">ท้ายรายละเอียด รวม</th></tr>
           </thead>
           <tbody>
             {[1, 3, 6].map((months) => {
@@ -141,6 +148,7 @@ export default function AdvertisePage() {
                   <td>{discount ? `${discount.percent}%` : '—'}</td>
                   <td className="num">{baht(priceFor('top', months))} บาท</td>
                   <td className="num">{baht(priceFor('inline', months))} บาท</td>
+                  <td className="num">{baht(priceFor('detail', months))} บาท</td>
                 </tr>
               );
             })}

@@ -781,6 +781,7 @@ a.thsort { text-decoration: none; }
 .planbtn--on { border-color: var(--status-safe); color: var(--status-safe); }
 .planbtn--compact { padding: 2px 9px; font-size: 12px; }
 .planbtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.planbtn--waiting { visibility: hidden; }
 
 /* Home page stat row (spec 6.2). Each figure is a live count and a link to the
    page it counts, so the row doubles as the shortest path into the database. */
@@ -3359,3 +3360,10 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .mongrid > .adslot, .itemgrid > .adslot { grid-column: 1 / -1; }
 .sitefooter__privacy { display: inline-block; margin-top: 10px; color: var(--faint); font-size: 12.5px; }
 .sitefooter__privacy:hover { color: var(--cyan); }
+
+/* Reserved space for the farming answers while their data loads. */
+.farm-skeleton { display: grid; gap: 12px; margin-top: 18px; }
+.farm-skeleton__row { display: block; height: 180px; border: 1px solid var(--hair); border-radius: var(--radius); background: linear-gradient(100deg, var(--panel) 30%, var(--panel-2) 50%, var(--panel) 70%); background-size: 300% 100%; animation: farm-skeleton 1.4s linear infinite; }
+.farm-skeleton__row--tall { height: 320px; }
+@keyframes farm-skeleton { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .farm-skeleton__row { animation: none; } }

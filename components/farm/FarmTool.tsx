@@ -101,7 +101,19 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
           </button>
         </div>
       )}
-      {!farm.failed && !viewProps && <p className="muted farm-state">กำลังโหลดแมพกับมอน…</p>}
+      {/* A skeleton the size of a screenful of results, not a line of text:
+          the answers arrive after the data does, and a one-line placeholder
+          let them shove the explanation below down the page (CLS 0.24 on this
+          page, 23 Sep 2026). The reserve cannot match every mode exactly, but
+          it takes most of the movement out. */}
+      {!farm.failed && !viewProps && (
+        <div className="farm-skeleton" aria-hidden="true">
+          <p className="muted farm-state">กำลังโหลดแมพกับมอน…</p>
+          <span className="farm-skeleton__row farm-skeleton__row--tall" />
+          <span className="farm-skeleton__row" />
+          <span className="farm-skeleton__row" />
+        </div>
+      )}
 
       {viewProps && mode === 'level' && <LevelView {...viewProps} />}
       {viewProps && mode === 'afk' && <AfkView {...viewProps} />}

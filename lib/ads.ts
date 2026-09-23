@@ -10,7 +10,7 @@
 
 import file from '@/data/ads.json';
 
-export type AdSlot = 'top' | 'inline';
+export type AdSlot = 'top' | 'inline' | 'detail';
 
 export interface Ad {
   id: string;
@@ -31,6 +31,7 @@ export interface Ad {
 export interface AdPrices {
   top: number;
   inline: number;
+  detail: number;
   introSeats: number;
   introSeatsTaken: number;
   discounts: { months: number; percent: number }[];
@@ -48,6 +49,7 @@ export interface AdStats {
   thaiShare: number;
   topSlotViews: number;
   inlineSlotViews: number;
+  detailSlotViews: number;
 }
 
 interface AdsFile {
@@ -66,6 +68,7 @@ export const AD_STATS: AdStats = data.stats;
 export const AD_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number, number] }> = {
   top: { wide: [970, 250], narrow: [320, 100] },
   inline: { wide: [336, 280], narrow: [336, 280] },
+  detail: { wide: [336, 280], narrow: [300, 250] },
 };
 
 /** The pages that carry the inline slot, the three most-read ones. */
@@ -86,7 +89,7 @@ export function adToShow(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad 
 
 /** Price after the length discount, rounded to the baht. */
 export function priceFor(slot: AdSlot, months: number, prices: AdPrices = data.prices): number {
-  const rate = slot === 'top' ? prices.top : prices.inline;
+  const rate = prices[slot];
   const discount = [...prices.discounts].sort((a, b) => b.months - a.months).find((d) => months >= d.months);
   const total = rate * months * (1 - (discount?.percent ?? 0) / 100);
   return Math.round(total);

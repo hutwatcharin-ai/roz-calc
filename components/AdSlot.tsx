@@ -9,6 +9,7 @@
 import Link from 'next/link';
 import { AD_SIZES, adToShow, type AdSlot as Slot } from '@/lib/ads';
 import AdImpression from './AdImpression';
+import AdsenseUnit from './AdsenseUnit';
 
 export default function AdSlot({ slot }: { slot: Slot }) {
   const today = new Date().toISOString().slice(0, 10);
@@ -20,6 +21,13 @@ export default function AdSlot({ slot }: { slot: Slot }) {
     '--ad-narrow-w': `${size.narrow[0]}px`,
     '--ad-narrow-h': `${size.narrow[1]}px`,
   } as React.CSSProperties;
+
+  if (!ad && slot !== 'top') {
+    // Nothing sold here: AdSense fills it rather than the space earning
+    // nothing (owner, 23 Sep 2026). The top slot keeps its house ad, which is
+    // how the other slots get sold in the first place.
+    return <AdsenseUnit slot={slot === 'detail' ? 'detail' : 'list'} />;
+  }
 
   if (!ad) {
     return (
