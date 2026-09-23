@@ -113,7 +113,7 @@ export default function AboutPage() {
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title">ลงโฆษณา / ติดต่อธุรกิจ</h2>
         <p style={{ marginTop: 8 }}>
-          ทักมาได้ที่{' '}
+          ตำแหน่ง ขนาด ราคา และเงื่อนไขทั้งหมดอยู่ที่ <Link href="/advertise">หน้าลงโฆษณา</Link> หรือทักมาที่{' '}
           <a href="mailto:kidkrob@gmail.com?subject=สอบถามลงโฆษณา%20rozerothai.com">kidkrob@gmail.com</a>
         </p>
       </section>

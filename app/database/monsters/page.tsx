@@ -1,5 +1,6 @@
 // app/database/monsters/page.tsx
 import type { Metadata } from 'next';
+import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
@@ -575,6 +576,10 @@ export default async function MonsterListPage({
           ซ่อนมอนที่ยังไม่รู้ค่าเลือดไป {hiddenUnknownHp} ตัว — ตัวกรองเลือดใช้กับตัวที่มีตัวเลขจริงเท่านั้น
         </p>
       )}
+
+      {/* Sold space, between the filters and the list: the reader has
+          chosen what they want and is about to scan results. */}
+      <AdSlot slot="inline" />
 
       {(monsters ?? []).length === 0 ? (
         <div className="card">

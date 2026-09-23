@@ -6,6 +6,7 @@ import { FarmPlanProvider } from '@/components/FarmPlanProvider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Analytics from '@/components/Analytics';
+import AdSlot from '@/components/AdSlot';
 import { SITE_URL } from '@/lib/site';
 import { GA_DEBUG, gaBootstrap } from '@/lib/analytics';
 
@@ -100,6 +101,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               whole feature silently renders nothing (shipped broken once). */}
           <FarmPlanProvider>
             <Nav />
+            {/* Sold space, top of every page (lib/ads). It reserves its
+                pixels whether or not a banner is sold, so nothing below it
+                moves once the picture arrives. */}
+            <AdSlot slot="top" />
             {children}
             <SiteFooter />
             {/* Phone only (CSS breakpoint): the five primary links move down

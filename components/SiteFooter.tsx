@@ -81,12 +81,11 @@ export default async function SiteFooter() {
                 </a>
               </li>
             </ul>
-            <a
-              className="sitefooter__adlink"
-              href="mailto:kidkrob@gmail.com?subject=สอบถามลงโฆษณา%20rozerothai.com"
-            >
+            {/* The media kit, not a bare mailto: a price list answers most of
+                what someone writing that email would have asked. */}
+            <Link className="sitefooter__adlink" href="/advertise">
               ลงโฆษณา / ติดต่อธุรกิจ →
-            </a>
+            </Link>
           </FooterSection>
         </div>
 

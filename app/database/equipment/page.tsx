@@ -1,5 +1,6 @@
 // app/database/equipment/page.tsx
 import { itemNamesOf } from '@/lib/item-former-names';
+import AdSlot from '@/components/AdSlot';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
@@ -357,6 +358,7 @@ export default async function EquipmentPage({
         <div className="card">
           {/* Same recognition-first grid as the item list; the meta line carries
               what a player scans equipment by (type, ATK, level). */}
+          <AdSlot slot="inline" />
           <div className="itemgrid">
             {rows.map((it) => (
               <Link key={it.id} href={`/database/equipment/${it.id}`} className="itemcard" data-kind={it.category === 'Weapon' ? 'weapon' : 'armor'}>

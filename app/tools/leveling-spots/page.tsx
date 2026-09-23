@@ -6,6 +6,7 @@
 // can never disagree. Search Console showed 0 impressions for this URL over
 // 90 days, so moving the ranked rows out of the HTML costs no search traffic.
 import PageHeader from '@/components/PageHeader';
+import AdSlot from '@/components/AdSlot';
 import FarmTool, { type FarmMode } from '@/components/farm/FarmTool';
 
 export const metadata = {
@@ -36,6 +37,9 @@ export default function LevelingSpotsPage({
       <PageHeader title="ฟาร์มที่ไหนดี" lead="ไม่กรอกอะไรก็ได้คำตอบ — กรอกตัวเลขตัวละครครั้งเดียว ใช้ได้ทั้ง 4 โหมด" />
 
       <FarmTool initialMode={readMode(searchParams.mode)} initialLevel={readLevel(searchParams.level)} />
+
+      {/* Below the tool's own answer, above the explanation. */}
+      <AdSlot slot="inline" />
 
       <section className="farm-section" aria-labelledby="farm-modes">
         <h2 id="farm-modes" className="section-title">
