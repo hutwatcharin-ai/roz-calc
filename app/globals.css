@@ -3356,3 +3356,5 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .adslot__adsense em { color: var(--faint); font-size: 11px; font-weight: 600; }
 /* An ad inside a card grid takes a whole row, never one card's cell. */
 .mongrid > .adslot, .itemgrid > .adslot { grid-column: 1 / -1; }
+.sitefooter__privacy { display: inline-block; margin-top: 10px; color: var(--faint); font-size: 12.5px; }
+.sitefooter__privacy:hover { color: var(--cyan); }

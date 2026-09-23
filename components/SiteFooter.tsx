@@ -86,6 +86,9 @@ export default async function SiteFooter() {
             <Link className="sitefooter__adlink" href="/advertise">
               ลงโฆษณา / ติดต่อธุรกิจ →
             </Link>
+            {/* AdSense requires a reachable privacy policy; the footer is
+                where readers look for one. */}
+            <Link className="sitefooter__privacy" href="/privacy">นโยบายความเป็นส่วนตัว</Link>
           </FooterSection>
         </div>
 

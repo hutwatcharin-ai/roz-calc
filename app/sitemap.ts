@@ -39,7 +39,7 @@ export const NEWS_PATHS: string[] = ['/news/patch-2026-09-17', '/news/patch-2026
 // page itself comes in through the nav.
 export const CLASS_GUIDE_PATHS: string[] = CLASS_GUIDES.map((guide) => `/guides/classes/${guide.slug}`);
 
-export const EXTRA_STATIC_PATHS: string[] = ['/about', '/advertise', ...NEWS_PATHS];
+export const EXTRA_STATIC_PATHS: string[] = ['/about', '/advertise', '/privacy', ...NEWS_PATHS];
 
 export const STATIC_PATHS: string[] = [
   ...new Set([...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools, ...SECTION_LINKS.guides]
