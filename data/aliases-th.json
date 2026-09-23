@@ -2,7 +2,7 @@
   "_meta": {
     "what": "Thai names players use for monsters and items. Used for on-site search, and shown on the entity page as 'เรียกอีกชื่อ'.",
     "rule": "Every entry must come from a search someone really ran, not from translating a name. `source` says which log it came from: `gsc` carries the impressions and the position Google put us at, `site-search` carries how many times it was typed into the site's own box (GA4, which has no position to report). Two kinds of name appear: a Thai spelling of the English name (คาราเมล for Caramel) and a nickname for what the thing looks like or does (หมาฟ้า, 'blue dog', for Wolf; การ์ดเทเลพอต, 'teleport card', for Creamy Card, which grants Teleport).",
-    "source": "Google Search Console, sc-domain:rozerothai.com, 90 days to 7 Sep 2026. Each pair is a query whose Thai text Google itself matched to that page. · บางคำมาจากช่องค้นในเว็บเอง (GA4 event search) ซึ่งบอกได้ว่าคนพิมพ์อะไรแล้วไม่เจอ",
+    "source": "Google Search Console, sc-domain:rozerothai.com. First round: 90 days to 7 Sep 2026. Second round: 90 days to 23 Sep 2026. Each pair is a query whose Thai text Google itself matched to that page. · บางคำมาจากช่องค้นในเว็บเอง (GA4 event search) ซึ่งบอกได้ว่าคนพิมพ์อะไรแล้วไม่เจอ",
     "regenerate": "node scripts/mine-thai-aliases.mjs  (proposes new pairs from the latest Search Console data; a human confirms before they land here)"
   },
   "monsters": {
@@ -75,6 +75,16 @@
         "source": "gsc"
       }
     ],
+    "1101": [
+      {
+        "name": "บาโฟ",
+        "why": "ชื่อย่อ: Baphomet",
+        "query": "บาโฟ ro",
+        "impressions": 1,
+        "position": 29.0,
+        "source": "gsc"
+      }
+    ],
     "1103": [
       {
         "name": "คาราเมล",
@@ -85,6 +95,26 @@
         "source": "gsc"
       }
     ],
+    "1107": [
+      {
+        "name": "หมาน้ำตาล",
+        "why": "ชื่อเล่น: Baby Desert Wolf ตัวสีน้ำตาล",
+        "query": "หมาน้ำตาล ro",
+        "impressions": 1,
+        "position": 30.0,
+        "source": "gsc"
+      }
+    ],
+    "1147": [
+      {
+        "name": "มายา",
+        "why": "ทับศัพท์ Maya",
+        "query": "มายา ro",
+        "impressions": 1,
+        "position": 10.0,
+        "source": "gsc"
+      }
+    ],
     "1155": [
       {
         "name": "มังกรเขียว",
@@ -92,6 +122,16 @@
         "query": "มังกรเขียว ro",
         "impressions": 3,
         "position": 47.0,
+        "source": "gsc"
+      }
+    ],
+    "1165": [
+      {
+        "name": "แซนแมน",
+        "why": "ทับศัพท์ Sandman",
+        "query": "แซ น แมน ro",
+        "impressions": 1,
+        "position": 43.0,
         "source": "gsc"
       }
     ],
@@ -125,6 +165,16 @@
         "source": "gsc"
       }
     ],
+    "1189": [
+      {
+        "name": "ออคอาเชอร์",
+        "why": "ทับศัพท์ Orc Archer",
+        "query": "ออคอาเชอร์ ro",
+        "impressions": 1,
+        "position": 7.0,
+        "source": "gsc"
+      }
+    ],
     "1265": [
       {
         "name": "คุกกี้",
@@ -144,9 +194,57 @@
         "position": 16.0,
         "source": "gsc"
       }
+    ],
+    "1275": [
+      {
+        "name": "อลิส",
+        "why": "ทับศัพท์ Alice",
+        "query": "อลิส ro",
+        "impressions": 2,
+        "position": 3.5,
+        "source": "gsc"
+      }
     ]
   },
   "items": {
+    "1126": [
+      {
+        "name": "เซเบอร์",
+        "why": "ทับศัพท์ Saber",
+        "query": "เซเบอร์ ro",
+        "impressions": 1,
+        "position": 7.0,
+        "source": "gsc"
+      }
+    ],
+    "1519": [
+      {
+        "name": "เชน",
+        "why": "ทับศัพท์ Chain",
+        "query": "เชน ro",
+        "impressions": 9,
+        "position": 7.6,
+        "source": "gsc"
+      }
+    ],
+    "2407": [
+      {
+        "name": "รองเท้าแก้ว",
+        "why": "ชื่อเล่น: Crystal Pumps รองเท้าคริสตัล",
+        "query": "รองเท้าแก้ว ro",
+        "impressions": 22,
+        "position": 6.0,
+        "source": "gsc"
+      },
+      {
+        "name": "เท้าแก้ว",
+        "why": "ชื่อเล่นแบบสั้นของ Crystal Pumps",
+        "query": "เท้าแก้ว ro",
+        "impressions": 16,
+        "position": 8.3,
+        "source": "gsc"
+      }
+    ],
     "4040": [
       {
         "name": "การ์ดเทเลพอต",
@@ -154,6 +252,34 @@
         "query": "การ์ดเทเลพอต ro",
         "impressions": 1,
         "position": 8.0,
+        "source": "gsc"
+      },
+      {
+        "name": "การ์ดเทเล",
+        "why": "ชื่อเล่นแบบสั้นของการ์ดที่ให้สกิล Teleport",
+        "query": "การ์ดเทเล ro",
+        "impressions": 1,
+        "position": 7.0,
+        "source": "gsc"
+      }
+    ],
+    "5017": [
+      {
+        "name": "โบนเฮม",
+        "why": "ทับศัพท์ Bone Helm",
+        "query": "โบนเฮม ro",
+        "impressions": 5,
+        "position": 9.8,
+        "source": "gsc"
+      }
+    ],
+    "5160": [
+      {
+        "name": "แพะ",
+        "why": "ชื่อเล่น: Majestic Goat หมวกแพะ",
+        "query": "แพะ ro",
+        "impressions": 1,
+        "position": 48.0,
         "source": "gsc"
       }
     ],
@@ -164,6 +290,16 @@
         "query": "เห็ดม่วง ro",
         "impressions": 1,
         "position": 34.0,
+        "source": "gsc"
+      }
+    ],
+    "19735": [
+      {
+        "name": "ฟินเฮม",
+        "why": "ทับศัพท์ Costume Fin Helm",
+        "query": "ฟินเฮม ro",
+        "impressions": 2,
+        "position": 12.0,
         "source": "gsc"
       }
     ]

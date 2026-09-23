@@ -10,6 +10,7 @@ import { isAbsentFromGame } from '@/lib/game-absent';
 import GearDetail, { CATEGORY_LABELS, type GearSection } from '@/components/GearDetail';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isGearCategory, itemHref } from '@/lib/item-href';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -46,11 +47,17 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   if (item.atk !== null) parts.push(`ATK ${item.atk}`);
   if (item.required_level !== null) parts.push(`ใช้ได้ที่เลเวล ${item.required_level}`);
 
+  // The Thai name players search under. Without it the title is English only,
+  // and "รองเท้าแก้ว ro" sat at position 6 for 22 impressions and no click
+  // (Search Console, 90 days to 23 Sep 2026).
+  const thai = thaiAliasNames('items', item.id);
+  const thaiPart = thai.length > 0 ? ` (${thai.join(' / ')})` : '';
+
   return {
     // Not in the live client: the page stays, search engines are asked to skip it.
     ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
-    title: `${item.name_en}${item.slots > 0 ? ` [${item.slots}]` : ''} — ค่าพลังและออปชั่นสุ่ม`,
-    description: `${item.name_en}${parts.length ? ` ${parts.join(' ')}` : ''} — ${CATEGORY_LABELS[item.category ?? ''] ?? 'อุปกรณ์'} อาชีพที่ใส่ได้ ออปชั่นสุ่มที่ทอยได้ และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
+    title: `${item.name_en}${item.slots > 0 ? ` [${item.slots}]` : ''}${thaiPart} — ค่าพลังและออปชั่นสุ่ม`,
+    description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${parts.length ? ` ${parts.join(' ')}` : ''} — ${CATEGORY_LABELS[item.category ?? ''] ?? 'อุปกรณ์'} อาชีพที่ใส่ได้ ออปชั่นสุ่มที่ทอยได้ และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
   };
 }
 

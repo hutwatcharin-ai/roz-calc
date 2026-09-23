@@ -4,6 +4,7 @@
 // each route passes its own section rather than keeping a second copy in sync.
 
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
+import ThaiAliasLine from '@/components/ThaiAliasLine';
 import AdSlot from '@/components/AdSlot';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import Link from 'next/link';
@@ -114,6 +115,11 @@ export default function GearDetail({
             {item.name_en}
             {item.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{item.slots}]</span>}
           </h1>
+          {/* The name players type. "รองเท้าแก้ว ro" put this route at
+              position 6 for 22 impressions and no click, under a title that
+              said only "Crystal Pumps" (Search Console, 90 days to 23 Sep
+              2026). data/aliases-th.json holds the query behind each one. */}
+          <ThaiAliasLine kind="items" id={item.id} />
           <p className="equiphero__chips">
             <span className="tag">{categoryLabel}</span>
             {item.weapon_type && <span className="tag">{item.weapon_type}</span>}

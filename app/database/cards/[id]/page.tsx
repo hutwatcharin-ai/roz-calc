@@ -17,6 +17,7 @@ import { composeThaiDescription } from '@/lib/item-description-th';
 import { gameThaiDescription } from '@/lib/game-items';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCardCategory, itemHref } from '@/lib/item-href';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 import { cardSlot, equipmentHrefForSlot, parseCardSlot } from '@/lib/card-slot';
 import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
@@ -55,11 +56,16 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const slot = parseCardSlot(item.description);
   const effect = item.description_th ?? effectLines(item.description).join(' ');
 
+  // Cards get nicknamed after what they do, not what they are called:
+  // "การ์ดเทเล" is the Creamy Card, which grants Teleport.
+  const thai = thaiAliasNames('items', item.id);
+  const thaiPart = thai.length > 0 ? ` (${thai.join(' / ')})` : '';
+
   return {
     // Not in the live client: the page stays, search engines are asked to skip it.
     ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
-    title: `${item.name_en} — เอฟเฟกต์และมอนที่ดรอป`,
-    description: `${item.name_en}${slot ? ` ใส่ช่อง ${slot}` : ''}${effect ? ` — ${effect}` : ''} ดูมอนสเตอร์ที่ดรอปและอัตราดรอปใน RO Zero Thai`,
+    title: `${item.name_en}${thaiPart} — เอฟเฟกต์และมอนที่ดรอป`,
+    description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${slot ? ` ใส่ช่อง ${slot}` : ''}${effect ? ` — ${effect}` : ''} ดูมอนสเตอร์ที่ดรอปและอัตราดรอปใน RO Zero Thai`,
   };
 }
 

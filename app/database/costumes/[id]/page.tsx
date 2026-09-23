@@ -8,6 +8,7 @@
 import GearDetail, { type GearSection } from '@/components/GearDetail';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCostumeCategory, itemHref } from '@/lib/item-href';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -36,9 +37,13 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   if (!item) return { title: 'ไม่พบคอสตูมชิ้นนี้' };
 
+  // Same reason as the equipment route: the Thai name is what gets typed.
+  const thai = thaiAliasNames('items', item.id);
+  const thaiPart = thai.length > 0 ? ` (${thai.join(' / ')})` : '';
+
   return {
-    title: `${item.name_en} — คอสตูม ใส่ตำแหน่งไหน`,
-    description: `${item.name_en}${item.weapon_type ? ` คอสตูมตำแหน่ง ${item.weapon_type}` : ''} — อาชีพที่ใส่ได้ ราคาขาย และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
+    title: `${item.name_en}${thaiPart} — คอสตูม ใส่ตำแหน่งไหน`,
+    description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${item.weapon_type ? ` คอสตูมตำแหน่ง ${item.weapon_type}` : ''} — อาชีพที่ใส่ได้ ราคาขาย และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
   };
 }
 
