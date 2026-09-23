@@ -9,16 +9,24 @@ describe('robots.txt', () => {
     expect(robots().sitemap).toBe(`${SITE_URL}/sitemap.xml`);
   });
 
-  it('allows everything, and disallows nothing', () => {
-    // Every route is a public reference page. A Disallow added "just in case"
-    // is how a site quietly loses pages it meant to have indexed, and this
-    // asserts none has crept in.
+  // Pages parked on purpose, each with the reason. A Disallow added "just in
+  // case" is how a site quietly loses pages it meant to have indexed, so a new
+  // path has to be added here before robots.ts may refuse it.
+  const PARKED = [
+    {
+      path: '/tools/enchant',
+      why: 'enchanting is not in the live game yet (owner, 24 Sep 2026); unpark with the noindex on the page and its nav entry',
+    },
+  ];
+
+  it('allows everything except the paths parked on purpose', () => {
     const rules = Array.isArray(robots().rules) ? robots().rules : [robots().rules];
     expect(rules).toHaveLength(1);
     for (const rule of rules as { userAgent?: string | string[]; allow?: string | string[]; disallow?: string | string[] }[]) {
       expect(rule.userAgent).toBe('*');
       expect(rule.allow).toBe('/');
-      expect(rule.disallow).toBeUndefined();
+      const disallow = rule.disallow === undefined ? [] : [rule.disallow].flat();
+      expect(disallow).toEqual(PARKED.map((p) => p.path));
     }
   });
 

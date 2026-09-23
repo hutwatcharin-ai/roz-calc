@@ -236,9 +236,17 @@ export default async function HomePage({
       <div className="explorerow">
         {/* No counts here: the live numbers sit in SiteStats right above, and
             hardcoded copies drift the day the data changes. */}
+        {/* The timeline leads the row. Unlike the patch chips it does not time
+            out -- it answers "what has landed and what is coming" and keeps
+            working as each patch ages. Put fourth on 24 Sep 2026 and the owner
+            could not find it among twelve chips. */}
+        <Link href="/news/roadmap" className="chiplink chiplink--patch">
+          <span className="chiplink__dot" aria-hidden="true" />
+          ไทม์ไลน์อัปเดต — มาแล้วอะไร เดือนหน้ามีอะไร
+        </Link>
         {/* Time-boxed: the patch chip leads while the patch is news, then
             drops back out of the row (see docs/PATCH-2026-09-03.md). */}
-        <Link href="/news/patch-2026-09-17" className="chiplink chiplink--patch">
+        <Link href="/news/patch-2026-09-17" className="chiplink">
           <span className="chiplink__dot" aria-hidden="true" />
           แพทช์ 17 ก.ย. — MVP ใหม่ 4 ตัว / Pyramid
         </Link>
@@ -247,9 +255,6 @@ export default async function HomePage({
           Battle Pass ฤดูร้อน — รางวัลทุก Tier
         </Link>
         <Link href="/news/patch-2026-09-03" className="chiplink">แพทช์ 3 ก.ย. — เลเวล 60 / อาชีพ 2</Link>
-        {/* Unlike the patch chips this one does not time out: it is the page
-            that answers "what is coming", and it keeps working as patches age. */}
-        <Link href="/news/roadmap" className="chiplink">ไทม์ไลน์อัปเดต — เดือนหน้ามีอะไร</Link>
         <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>

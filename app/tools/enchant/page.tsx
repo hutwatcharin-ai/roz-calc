@@ -18,6 +18,12 @@ import { memorialGear } from '@/lib/memorial-gear';
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
+  // PARKED 24 Sep 2026, owner's call: enchanting is not in the live game yet.
+  // The page stays so the work is not lost, but it is out of the menu, out of
+  // the sitemap and asked not to be indexed. Reverse all three when the system
+  // ships -- the noindex here, the nav entry in lib/nav-links.ts, and the
+  // Disallow in app/robots.ts.
+  robots: { index: false, follow: false },
   title: 'คำนวณเอนแชนต์ Ragnarok Zero — ลุ้นกี่ครั้ง เสียกี่เงิน',
   description:
     'เอนแชนต์ชุดดันเจี้ยนความทรงจำใน Ragnarok Zero Global — เลือกว่าจะใส่ที่เกราะ ผ้าคลุม หรือรองเท้า แล้วบอกโอกาสต่อครั้ง จำนวนครั้งเฉลี่ย ค่าเอนแชนต์รวม และโอกาสสะสมเมื่อลองหลายครั้ง อัตราจากคู่มือทางการ',

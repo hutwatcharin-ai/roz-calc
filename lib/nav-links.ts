@@ -81,7 +81,6 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/tools/hit-flee', label: 'คำนวณ Hit/Flee', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
-    { href: '/tools/enchant', label: 'คำนวณเอนแชนต์', icon: '/images/items/7619.gif', ready: true },
   ],
   // Pages you read: fixed game tables, and the written guide. Moved here from
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
