@@ -3350,10 +3350,11 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .adpage__stepno { flex: none; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--cyan); color: #06121a; font: 700 12px/1 var(--font-mono), monospace; }
 .adpage__contact a { color: var(--cyan); }
 
-/* AdSense positions, drawn only in the local preview (NEXT_PUBLIC_ADS_PREVIEW). */
-.adslot--adsense .adslot__house { border-color: color-mix(in srgb, var(--pink) 55%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--pink) 8%, var(--panel)), var(--panel)); cursor: default; }
-.adslot__adsense strong { color: var(--pink); }
-.adslot__adsense em { color: var(--faint); font-size: 11px; font-weight: 600; }
+/* AdSense units. Google picks the width; the height is reserved here so the
+   page does not move when the ad lands. */
+.adslot--unit { display: flex; justify-content: center; width: 100%; }
+.adslot--unit .adslot__ins { display: inline-block; width: var(--ad-w); height: var(--ad-h); max-width: 100%; overflow: hidden; }
+@media (max-width: 700px) { .adslot--unit .adslot__ins { width: var(--ad-narrow-w); height: var(--ad-narrow-h); } }
 /* An ad inside a card grid takes a whole row, never one card's cell. */
 .mongrid > .adslot, .itemgrid > .adslot { grid-column: 1 / -1; }
 .sitefooter__privacy { display: inline-block; margin-top: 10px; color: var(--faint); font-size: 12.5px; }

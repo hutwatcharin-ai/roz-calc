@@ -13,7 +13,7 @@
 //   the middle of the sentence, and still open the clip at the second.
 // Nearly all of it comes from players' videos, so every line keeps its source.
 import Link from 'next/link';
-import AdsensePreview from '@/components/AdsensePreview';
+import AdsenseUnit from '@/components/AdsenseUnit';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
@@ -582,7 +582,7 @@ export default async function ClassGuidePage({ params }: { params: { job: string
             <ul className="cguide__lines">{guide.gaps.map((gap, i) => <li key={i}>{gap}</li>)}</ul>
           </section>
 
-          <AdsensePreview size="rectangle" where="ท้ายไกด์อาชีพ ก่อนแหล่งอ้างอิง (หน้าไกด์รวม ~7,000 ครั้ง/เดือน)" />
+          <AdsenseUnit slot="guide" />
 
           <section id="sources" className="card cguide__build">
             <h2 className="cguide__buildtitle">คลิปและแหล่งที่มา</h2>

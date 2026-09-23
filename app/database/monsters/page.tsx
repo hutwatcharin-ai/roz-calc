@@ -1,7 +1,7 @@
 // app/database/monsters/page.tsx
 import type { Metadata } from 'next';
 import { Fragment } from 'react';
-import AdsensePreview from '@/components/AdsensePreview';
+import AdsenseUnit from '@/components/AdsenseUnit';
 import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -596,7 +596,7 @@ export default async function MonsterListPage({
         <div className="mongrid">
           {(monsters ?? []).map((m, index) => (
             <Fragment key={`row-${m.id}`}>
-            {index === 12 && <AdsensePreview size="banner" where="แทรกกลางรายการ หลังการ์ดใบที่ 12 (หน้ารายการรวม ~55,000 ครั้ง/เดือน)" />}
+            {index === 12 && <AdsenseUnit slot="list" />}
             <Link href={`/database/monsters/${m.id}`} className="moncard" data-element={m.element ?? undefined}>
               {m.image_url ? (
                 <img className="moncard__sprite" loading="lazy" decoding="async" src={m.image_url} alt="" width={40} height={40} />

@@ -97,3 +97,30 @@ export function priceFor(slot: AdSlot, months: number, prices: AdPrices = data.p
 export function introSeatsLeft(prices: AdPrices = data.prices): number {
   return Math.max(0, prices.introSeats - prices.introSeatsTaken);
 }
+
+/** AdSense fills the space the direct banners do not (owner, 23 Sep 2026).
+ *  The publisher id is public -- it is in /ads.txt -- so it lives here rather
+ *  than in an environment variable the build would have to carry. */
+export const ADSENSE_CLIENT = 'ca-pub-4069644007778714';
+export const ADSENSE_SLOTS = {
+  /** End of a monster, gear, costume or card page. */
+  detail: '5317808182',
+  /** A full row inside a card grid. */
+  list: '5116743616',
+  /** End of a class guide. */
+  guide: '4096225854',
+} as const;
+export type AdsenseSlot = keyof typeof ADSENSE_SLOTS;
+/** Fixed sizes, the ones the slots are sold at: a responsive unit resizes
+ *  itself after the script loads and shoves the page down. */
+export const ADSENSE_WIDTH: Record<AdsenseSlot, { wide: number; narrow: number }> = {
+  detail: { wide: 336, narrow: 300 },
+  list: { wide: 728, narrow: 320 },
+  guide: { wide: 336, narrow: 300 },
+};
+/** Height reserved before the ad arrives, so nothing moves when it does. */
+export const ADSENSE_HEIGHT: Record<AdsenseSlot, { wide: number; narrow: number }> = {
+  detail: { wide: 280, narrow: 250 },
+  list: { wide: 90, narrow: 100 },
+  guide: { wide: 280, narrow: 250 },
+};

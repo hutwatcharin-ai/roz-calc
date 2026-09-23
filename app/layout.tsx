@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Analytics from '@/components/Analytics';
 import AdSlot from '@/components/AdSlot';
+import AdsenseScript from '@/components/AdsenseScript';
 import { SITE_URL } from '@/lib/site';
 import { GA_DEBUG, gaBootstrap } from '@/lib/analytics';
 
@@ -113,6 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <BottomNav />
           </FarmPlanProvider>
         {GA_ID && <Analytics gaId={GA_ID} />}
+        <AdsenseScript />
       </body>
     </html>
   );
