@@ -23,12 +23,18 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { LEVEL_CAP, loadMemorialGear, lookup, memorialGear, type GearPiece } from '@/lib/memorial-gear';
 
+// Enchanting is not in the live game yet (owner, 24 Sep 2026). The rates came
+// from the official guide and are kept here with the rest of the gear data, but
+// the section stays hidden until the system ships, along with /tools/enchant.
+// Flip this back to true and the section returns exactly as it was.
+const SHOW_ENCHANT = false;
+
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'ชุดดันเจี้ยนความทรงจำ Ragnarok Zero — 4 แรงค์ อัปเกรด และเอนแชนต์',
+  title: 'ชุดดันเจี้ยนความทรงจำ Ragnarok Zero — 4 แรงค์ อัปเกรด และวัตถุดิบ',
   description:
-    'ชุด Subjugation → Expedition → Contingent → Conqueror ใน Ragnarok Zero Global ครบทุกชิ้น บอกค่าจากในเกม ชิ้นไหนอัปเป็นชิ้นไหน ใช้คริสตัลกี่ก้อน ใส่คู่กับอะไร และเอนแชนต์เสียเท่าไร เสี่ยงของหายไหม',
+    'ชุด Subjugation → Expedition → Contingent → Conqueror ใน Ragnarok Zero Global ครบทุกชิ้น บอกค่าจากในเกม ชิ้นไหนอัปเป็นชิ้นไหน ใช้คริสตัลกี่ก้อน และใส่คู่กับอะไร',
 };
 
 /** A piece: sprite, name, link, and what the game says it does. */
@@ -280,90 +286,92 @@ export default async function MemorialGearPage() {
         </div>
       </section>
 
+      {SHOW_ENCHANT && (
       <section style={{ marginTop: 30 }}>
-        <h2 className="section-title">เอนแชนต์</h2>
-        <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
-          ใส่ได้เฉพาะเกราะ และลงในสล็อตที่ต่างกันตามแรงค์ · <strong>ใส่ไม่มีความเสี่ยง แต่ถอดด้วยเงินมีโอกาสของหาย 30%</strong>
-        </p>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>ทำอะไร</th>
-                <th>เสีย</th>
-                <th>โอกาสของหาย</th>
-              </tr>
-            </thead>
-            <tbody>
-              {enchantRules.costs.map((c, i) => (
-                <tr key={`${c.action}-${i}`}>
-                  <td data-label="ทำอะไร">{c.action}</td>
-                  <td data-label="เสีย">{c.cost}</td>
-                  <td data-label="โอกาสของหาย">{c.destroyChance}</td>
+          <h2 className="section-title">เอนแชนต์</h2>
+          <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
+            ใส่ได้เฉพาะเกราะ และลงในสล็อตที่ต่างกันตามแรงค์ · <strong>ใส่ไม่มีความเสี่ยง แต่ถอดด้วยเงินมีโอกาสของหาย 30%</strong>
+          </p>
+          <div className="recipe__scroll">
+            <table className="data-table recipe">
+              <thead>
+                <tr>
+                  <th>ทำอะไร</th>
+                  <th>เสีย</th>
+                  <th>โอกาสของหาย</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="recipe__scroll" style={{ marginTop: 14 }}>
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>แรงค์</th>
-                <th>ใส่ที่</th>
-                <th className="num">สล็อตที่</th>
-              </tr>
-            </thead>
-            <tbody>
-              {enchantRules.slotByRank.map((s) => (
-                <tr key={s.rank}>
-                  <td data-label="แรงค์">{s.rank}</td>
-                  <td data-label="ใส่ที่">{s.piece}</td>
-                  <td data-label="สล็อต" className="num">{s.slot ?? '—'}</td>
+              </thead>
+              <tbody>
+                {enchantRules.costs.map((c, i) => (
+                  <tr key={`${c.action}-${i}`}>
+                    <td data-label="ทำอะไร">{c.action}</td>
+                    <td data-label="เสีย">{c.cost}</td>
+                    <td data-label="โอกาสของหาย">{c.destroyChance}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="recipe__scroll" style={{ marginTop: 14 }}>
+            <table className="data-table recipe">
+              <thead>
+                <tr>
+                  <th>แรงค์</th>
+                  <th>ใส่ที่</th>
+                  <th className="num">สล็อตที่</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
-          ตัว Essence เป็นไอเทมในเกม แยกตามอาชีพและมี Lv.1 กับ Lv.2 —{' '}
-          <Link href="/database/items?q=Essence+Lv">ดูรายการและผลของแต่ละอัน</Link>
-        </p>
-
-        <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>
-        <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
-          หนึ่งครั้งได้หนึ่งอย่าง · <strong>+2 หายากมาก</strong> — เกราะ 0.09% ต่อสเตตัส แต่รองเท้า 3.57% จะลุ้นให้ลุ้นที่รองเท้า
-        </p>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>ได้</th>
-                <th className="num">เกราะ</th>
-                <th className="num">ผ้าคลุม</th>
-                <th className="num">รองเท้า</th>
-              </tr>
-            </thead>
-            <tbody>
-              {enchantRules.outcomes.map((o) => (
-                <tr key={`${o.stat}-${o.value}`}>
-                  <td data-label="ได้">{o.stat} {o.value}</td>
-                  <td data-label="เกราะ" className="num">{pct(o.armor)}</td>
-                  <td data-label="ผ้าคลุม" className="num">{pct(o.garment)}</td>
-                  <td data-label="รองเท้า" className="num">{pct(o.shoes)}</td>
+              </thead>
+              <tbody>
+                {enchantRules.slotByRank.map((s) => (
+                  <tr key={s.rank}>
+                    <td data-label="แรงค์">{s.rank}</td>
+                    <td data-label="ใส่ที่">{s.piece}</td>
+                    <td data-label="สล็อต" className="num">{s.slot ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
+            ตัว Essence เป็นไอเทมในเกม แยกตามอาชีพและมี Lv.1 กับ Lv.2 —{' '}
+            <Link href="/database/items?q=Essence+Lv">ดูรายการและผลของแต่ละอัน</Link>
+          </p>
+  
+          <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>
+          <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
+            หนึ่งครั้งได้หนึ่งอย่าง · <strong>+2 หายากมาก</strong> — เกราะ 0.09% ต่อสเตตัส แต่รองเท้า 3.57% จะลุ้นให้ลุ้นที่รองเท้า
+          </p>
+          <div className="recipe__scroll">
+            <table className="data-table recipe">
+              <thead>
+                <tr>
+                  <th>ได้</th>
+                  <th className="num">เกราะ</th>
+                  <th className="num">ผ้าคลุม</th>
+                  <th className="num">รองเท้า</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-          &quot;—&quot; คือไม่มีผลแบบนี้ในตาราง ไม่ใช่ 0% · ทั้งสามช่องรวมกันได้ 100.00% พอดี จึงเชื่อว่าเป็นตัวเลขจากเกม
-        </p>
-      </section>
+              </thead>
+              <tbody>
+                {enchantRules.outcomes.map((o) => (
+                  <tr key={`${o.stat}-${o.value}`}>
+                    <td data-label="ได้">{o.stat} {o.value}</td>
+                    <td data-label="เกราะ" className="num">{pct(o.armor)}</td>
+                    <td data-label="ผ้าคลุม" className="num">{pct(o.garment)}</td>
+                    <td data-label="รองเท้า" className="num">{pct(o.shoes)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
+            &quot;—&quot; คือไม่มีผลแบบนี้ในตาราง ไม่ใช่ 0% · ทั้งสามช่องรวมกันได้ 100.00% พอดี จึงเชื่อว่าเป็นตัวเลขจากเกม
+          </p>
+        </section>
+      )}
 
       <Caveat label="เชื่อได้แค่ไหน">
         ค่าของแต่ละชิ้นในตารางด้านบนเป็น<strong>ข้อความจากในเกม</strong>ที่เก็บไว้ในฐานข้อมูลเว็บนี้ ไม่ได้แปลหรือสรุปใหม่ ·
-        ส่วนสายอัปเกรด วัตถุดิบ และกติกาเอนแชนต์มาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026)
+        ส่วนสายอัปเกรดและวัตถุดิบมาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026)
         ซึ่งเป็นข้อมูลที่ไคลเอนต์ไม่ได้บอก — ตรวจแล้วว่าชื่อชิ้นทั้ง {pieceCount} ชิ้นตรงกับฐานข้อมูลเรา และตัวเลข HP/SP/DEF/FLEE ตรงกับในเกมทุกชิ้น ·
         <strong>แรงค์ III ขึ้นไปยังไม่มีใครในเซิร์ฟโกลบอลทดสอบได้</strong> เพราะเลเวลยังไม่ถึง ถ้าเปิดแล้วตัวเลขไม่ตรง บอกได้เลย
       </Caveat>
