@@ -1,0 +1,877 @@
+{
+  "_meta": {
+    "what": "Every item whose own Thai description names สงครามกิลด์ / WoE / GvG.",
+    "why": "The WoE guide quotes the game, not a player's summary. Counts on the page are lengths of these lists, so they cannot drift from the client.",
+    "source": {
+      "source": "RO Zero Global client System/iteminfo_thTH.lub + itemInfo_data.lub (_patch_glob_roz_live)",
+      "built": "2026-09-22",
+      "items": 4070
+    },
+    "regenerate": "python scripts/build-woe-items.py",
+    "total": 118
+  },
+  "force": [
+    {
+      "id": 310026,
+      "name": "Force: Storm Gust Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Storm Gust 7%"
+    },
+    {
+      "id": 310027,
+      "name": "Force: Meteor Storm Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Meteor Storm 7%"
+    },
+    {
+      "id": 310028,
+      "name": "Force: Lord of Vermilion Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Lord of Vermilion 7%"
+    },
+    {
+      "id": 310029,
+      "name": "Force: Magnus Exorcismus Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Magnus Exorcismus 7%"
+    },
+    {
+      "id": 310030,
+      "name": "Force: Meteor Assault Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Meteor Assault 7%"
+    },
+    {
+      "id": 310031,
+      "name": "Force: Clashing Spiral Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Clashing Spiral 7%"
+    },
+    {
+      "id": 310032,
+      "name": "Force: Acid Demonstration Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Acid Demonstration 7%"
+    },
+    {
+      "id": 310033,
+      "name": "Force: Pierce Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Pierce 7%"
+    },
+    {
+      "id": 310034,
+      "name": "Force: Bowling Bash Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Bash 7%"
+    },
+    {
+      "id": 310035,
+      "name": "Force: Water Ball Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Water Ball 7%"
+    },
+    {
+      "id": 310036,
+      "name": "Force: Sonic Blow Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Sonic Blow 7%"
+    },
+    {
+      "id": 310037,
+      "name": "Force: Shield Chain Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Shield Chain 7%"
+    },
+    {
+      "id": 310038,
+      "name": "Force: Shield Boomerang Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Shield Boomerang 7%"
+    },
+    {
+      "id": 310039,
+      "name": "Force: Holy Cross Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Holy Cross 7%"
+    },
+    {
+      "id": 310040,
+      "name": "Force: Falcon Assault Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Falcon Assault 7%"
+    },
+    {
+      "id": 310041,
+      "name": "Force: Blitz Beat Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Blitz Beat 7%"
+    },
+    {
+      "id": 310042,
+      "name": "Force: Asura Strike Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Asura Strike 7%"
+    },
+    {
+      "id": 310043,
+      "name": "Force: Infiltration Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Infiltration 7%"
+    },
+    {
+      "id": 310044,
+      "name": "Force: Arrow Vulcan Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Arrow Vulcan 7%"
+    },
+    {
+      "id": 310045,
+      "name": "Force: Double Strafe Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Double Strafe 7%"
+    },
+    {
+      "id": 310047,
+      "name": "Force: Focused Arrow Strike Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Focused Arrow Strike 7%"
+    },
+    {
+      "id": 310048,
+      "name": "Force: Napalm Vulcan Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Napalm Vulcan 7%"
+    },
+    {
+      "id": 310049,
+      "name": "Force: Gravitational Field Lv.1",
+      "kind": "force",
+      "effect": "เพิ่ม Damage ของสกิล Gravitational Field 7%"
+    },
+    {
+      "id": 310050,
+      "name": "Resist: Storm Gust Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Storm Gust 15%"
+    },
+    {
+      "id": 310051,
+      "name": "Resist: Meteor Storm Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Meteor Storm 15%"
+    },
+    {
+      "id": 310052,
+      "name": "Resist: Lord of Vermilion Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Lord of Vermilion 15%"
+    },
+    {
+      "id": 310053,
+      "name": "Resist: Magnus Exorcismus Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Magnus Exorcismus 15%"
+    },
+    {
+      "id": 310054,
+      "name": "Resist: Meteor Assault Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Meteor Assault 15%"
+    },
+    {
+      "id": 310055,
+      "name": "Resist: Clashing Spiral Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Clashing Spiral 15%"
+    },
+    {
+      "id": 310056,
+      "name": "Resist: Acid Demonstration Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Acid Demonstration 15%"
+    },
+    {
+      "id": 310057,
+      "name": "Resist: Pierce Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Pierce 15%"
+    },
+    {
+      "id": 310058,
+      "name": "Resist: Bowling Bash Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Bowling Bash 15%"
+    },
+    {
+      "id": 310059,
+      "name": "Resist: Water Ball Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Water Ball 15%"
+    },
+    {
+      "id": 310060,
+      "name": "Resist: Sonic Blow Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Sonic Blow 15%"
+    },
+    {
+      "id": 310061,
+      "name": "Resist: Shield Chain Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Shield Chain 15%"
+    },
+    {
+      "id": 310062,
+      "name": "Resist: Shield Boomerang Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Shield Boomerang 15%"
+    },
+    {
+      "id": 310063,
+      "name": "Resist: Holy Cross Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Holy Cross 15%"
+    },
+    {
+      "id": 310064,
+      "name": "Resist: Falcon Assault Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Falcon Assault 15%"
+    },
+    {
+      "id": 310065,
+      "name": "Resist: Blitz Beat Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Blitz Beat 15%"
+    },
+    {
+      "id": 310066,
+      "name": "Resist: Asura Strike Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Asura Strike 15%"
+    },
+    {
+      "id": 310067,
+      "name": "Resist: Infiltration Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Infiltration 15%"
+    },
+    {
+      "id": 310068,
+      "name": "Resist: Arrow Vulcan Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Arrow Vulcan 15%"
+    },
+    {
+      "id": 310069,
+      "name": "Resist: Double Strafe Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Double Strafe 15%"
+    },
+    {
+      "id": 310071,
+      "name": "Resist: Focused Arrow Strike Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Focused Arrow Strike 15%"
+    },
+    {
+      "id": 310072,
+      "name": "Resist: Napalm Vulcan Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Napalm Vulcan 15%"
+    },
+    {
+      "id": 310073,
+      "name": "Resist: Gravitational Field Lv.1",
+      "kind": "resist",
+      "effect": "ลด Damage ที่ได้รับจากสกิล Gravitational Field 15%"
+    },
+    {
+      "id": 310074,
+      "name": "Resist: Critical Lv.1",
+      "kind": "resist",
+      "effect": "ลด Critical Damage ที่ได้รับการโจมตีปกติของ Player 15%"
+    }
+  ],
+  "gear": [
+    {
+      "id": 1329,
+      "name": "Lesser Guild Member's Cleaver",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพต่อ Player 20% เพิกเฉยต่อพลังป้องกันทาง กายภาพของ Player 5% ไม่สามารถเสียหายได้ ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกันของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, ขณะใช้สกิล Acid Terror หรือ Mammonite มีโอกาสทำให้ศัตรูติดสถานะ Fatal Wound Lv.1",
+      "hiddenOutside": false
+    },
+    {
+      "id": 1859,
+      "name": "Lesser Guild Member's Fist",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพต่อ Player 25%",
+      "effect": "เพิ่ม Damage ทางกายภาพต่อ Player 25% เพิกเฉยต่อพลังป้องกันทาง กายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกันของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, ลดระยะเวลาร่ายแบบคงที่ของ สกิล Asura Strike 30%, และเมื่อใช้สกิล Vigor Explosion จะได้รับ ATK +30 เป็นเวลา 20 วินาที และเพิ่ม ATK ตามขั้น การอัปเกรด",
+      "hiddenOutside": false
+    },
+    {
+      "id": 2052,
+      "name": "Lesser Guild Member's Destruction Staff",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางเวทมนตร์ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางเวทมนตร์ต่อ Player 15% เพิกเฉยต่อพลังป้องกันทาง เวทมนตร์ของ Player 10% ไม่สามารถเสียหายได้ ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางเวทมนตร์ ต่อ Player 1% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ของสกิล Meteor Storm และ Storm Gust 3%, MaxHP -2% ทุกการอัปเกรด 2 ขั้น, MATK +5 เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกันทาง เวทมนตร์ของ Player 10% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางเวทมนตร์ ต่อ Player 5% MATK +180",
+      "hiddenOutside": false
+    },
+    {
+      "id": 13490,
+      "name": "Lesser Guild Member's Flamberge",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพต่อ Player 20% เพิกเฉยต่อพลังป้องกันทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Devotion สำเร็จ จะได้รับ MaxHP +1000 เป็นเวลา 30 วินาที และ MaxHP +50 ต่อทุกขั้น การอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 15216,
+      "name": "Basic Guild Robe",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +700, MaxSP +50, MDEF +5, ลด Damage ที่ได้รับจาก Player 2%",
+      "effect": "เสื้อคลุมยาวที่ออกแบบมาให้มือใหม่ ก็สามารถสวมใส่ได้อย่างง่ายดาย MaxHP +700, MaxSP +50, MDEF +5, ลด Damage ที่ได้รับจาก Player 2% เมื่อสวมใส่ร่วมกับ Lesser Guild Member's Shoes/Muffler เมื่อค่าอัปเกรดรวมตั้งแต่ 21 ขึ้นไป MaxHP +700, ลด Damage ที่ได้รับจาก Player 6%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 15217,
+      "name": "Lesser Guild Member's Suit",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +800, MDEF +5, ลด Damage ที่ได้รับจาก Player 3%",
+      "effect": "ชุดเกราะที่ออกแบบมาให้มือใหม่ ก็สามารถสวมใส่ได้อย่างง่ายดาย MaxHP +800, MDEF +5, ลด Damage ที่ได้รับจาก Player 3% เมื่อสวมใส่ร่วมกับ Lesser Guild Member's Boots/Manteau เมื่อค่าอัปเกรดรวมตั้งแต่ 21 ขึ้นไป MaxHP +800, ลด Damage ที่ได้รับจาก Player 7%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 15218,
+      "name": "Lesser Guild Member's Plate",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +900, ลด Damage ที่ได้รับจาก Player 4%",
+      "effect": "ชุดเกราะที่ออกแบบมาให้มือใหม่ ก็สามารถสวมใส่ได้อย่างง่ายดาย MaxHP +900, ลด Damage ที่ได้รับจาก Player 4% เมื่อสวมใส่ร่วมกับ Lesser Guild Member's Greaves/Manteau เมื่อค่าอัปเกรดรวมตั้งแต่ 21 ขึ้นไป, MaxHP +900, ลด Damage ที่ได้รับจาก Player 8%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 16085,
+      "name": "Lesser Guild Member's Morning Star",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพต่อ Player 20% เพิกเฉยต่อพลังป้องกันทางกายภาพของ Player 5% ไม่สามารถเสียหายได้ ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, การโจมตีปกติทางกายภาพ มีโอกาสทำให้ศัตรูติดสถานะ Stun, ASPD +10% และเพิ่มโอกาสติด สถานะ Stun ขึ้นอีกตามเลเวล สกิล Mace Mastery",
+      "hiddenOutside": false
+    },
+    {
+      "id": 18175,
+      "name": "Lesser Guild Member's Hunter Bow",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Improve Concentration จะเพิ่ม Damage ของสกิล Double Strafe 20% เป็นเวลา 10 วินาที และ HIT +20 เพิ่ม HIT และ Damage ของสกิล Double Strafe ตามขั้น การอัปเกรดของอุปกรณ์ชิ้นนี้",
+      "hiddenOutside": false
+    },
+    {
+      "id": 20864,
+      "name": "Lesser Guild Member's Manteau",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +250, MDEF +1, ลด Damage ที่ได้รับจาก Player 2%",
+      "effect": "ผ้าคลุมที่ออกแบบมาให้มือใหม่ สามารถสวมใส่ได้อย่างง่ายดาย สงครามกิลด์ ที่ไม่ใช่สงครามกิลด์ MaxHP +250, MDEF +1, ลด Damage ที่ได้รับจาก Player 2%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 20865,
+      "name": "Lesser Guild Member's Muffler",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +150, MDEF +1, ลด Damage ที่ได้รับจาก Player 1%",
+      "effect": "ผ้าพันคอที่ออกแบบมาให้มือใหม่ สามารถสวมใส่ได้อย่างง่ายดาย สงครามกิลด์ ที่ไม่ใช่สงครามกิลด์ MaxHP +150, MDEF +1, ลด Damage ที่ได้รับจาก Player 1%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 21044,
+      "name": "Lesser Guild Member's Claymore",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "สงครามกิลด์ เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกันทางกายภาพ ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อโจมตีทางกายภาพ จะมีโอกาสเพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% เป็นเวลา 7 วินาที และมีโอกาสเพิ่มขึ้นอีก 1% ตามระดับขั้นการอัปเกรดอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 22146,
+      "name": "Lesser Guild Member's Shoes",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +250, MDEF +5, ลด Damage ที่ได้รับจาก Player 1%",
+      "effect": "รองเท้าที่ออกแบบมาให้มือใหม่ สามารถสวมใส่ได้อย่างง่ายดาย MaxHP +250, MDEF +5, ลด Damage ที่ได้รับจาก Player 1%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 22147,
+      "name": "Lesser Guild Member's Boots",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +400, MDEF +3, ลด Damage ที่ได้รับจาก Player 2%",
+      "effect": "รองเท้าที่ออกแบบมาให้มือใหม่ สามารถสวมใส่ได้อย่างง่ายดาย MaxHP +400, MDEF +3, ลด Damage ที่ได้รับจาก Player 2%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 22148,
+      "name": "Lesser Guild Member's Greaves",
+      "tier": "lesser",
+      "slots": 1,
+      "headline": "MaxHP +500, MDEF +1, ลด Damage ที่ได้รับจาก Player 3%",
+      "effect": "รองเท้าที่ออกแบบมาให้มือใหม่ สามารถสวมใส่ได้อย่างง่ายดาย MaxHP +500, MDEF +1, ลด Damage ที่ได้รับจาก Player 3%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 26019,
+      "name": "Lesser Guild Member's Lance",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Pierce มีโอกาส ทำให้ศัตรูติดสถานะ Stun และเพิ่มโอกาสติดสถานะ Stun ตามขั้นการอัปเกรด เมื่อใช้สกิล Holy Cross มีโอกาส ทำให้ศัตรูติดสถานะ Silence และเพิ่มโอกาสติดสถานะ Silence ตามขั้นการอัปเกรด",
+      "hiddenOutside": false
+    },
+    {
+      "id": 26146,
+      "name": "Lesser Guild Member's Healing Staff",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่มผลของสกิล Heal 1%",
+      "effect": "เพิ่มปริมาณการฟื้นฟู ของสกิล Heal 10% ลด Delay หลังใช้สกิล 5% ไม่สามารถเสียหายได้ ทุกการอัปเกรด 1 ขั้น, เพิ่มผลของสกิล Heal 1%, AGI + 1 และลดการใช้ SP ของสกิล Blessing 2% เมื่ออัปเกรดถึงขั้น 7, เพิ่มผลของสกิล Heal 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่มผลของสกิล Heal 10% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Heal มีโอกาสเพิ่มผลของสกิล Heal 25% เป็นเวลา 20 วินาที และเพิ่ม 1% ต่อขั้นการอัปเกรด MATK + 125",
+      "hiddenOutside": false
+    },
+    {
+      "id": 26147,
+      "name": "Lesser Guild Member's Arc Wand",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางเวทมนตร์ ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางเวทมนตร์ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน ทางเวทมนตร์ของ Player 10% ไม่สามารถเสียหายได้ ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางเวทมนตร์ ต่อ Player 1% ทุกการอัปเกรด 2 ขั้น, MATK +5 เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ทางเวทมนตร์ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางเวทมนตร์ ต่อ Player 5% เมื่ออัปเกรดถึงขั้น 10, ลดระยะเวลาร่ายแบบแปรผัน ของสกิล Land Protector 30% และเมื่อใช้สกิล Deluge, Violent Gale, Volcano จะลดการใช้ Gemstone ของเวทมนตร์ทั้งหมดลง 1 ชิ้น เป็นเวลา 10 วินาที MATK +115",
+      "hiddenOutside": false
+    },
+    {
+      "id": 26210,
+      "name": "Lesser Guild Member's Lariat",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% เมื่ออัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Extemporaneousness จะเพิ่ม Damage ของสกิล Dart Arrow 30% เป็นเวลา 60 วินาที, HIT + 20 และ ลดระยะเวลาร่ายแบบแปรผัน 30% เพิ่ม HIT และ Damage ของสกิล Dart Arrow ขึ้นอีกตามขั้นการอัปเกรด",
+      "hiddenOutside": false
+    },
+    {
+      "id": 28036,
+      "name": "Lesser Guild Member's Jamadhar",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกันทางกายภาพ ของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อโจมตีปกติทางกายภาพ มีโอกาส Critical Damage เพิ่มขึ้น 20% เป็นเวลา 7 วินาที และเพิ่มขึ้นอีก 2% ต่อขั้น การอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 28133,
+      "name": "Lesser Guild Member's Two-Handed Axe",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ไม่สามารถเสียหายได้ ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15%, เมื่อโจมตีปกติทางกายภาพ มีโอกาสทำให้ศัตรูติด สถานะ Fatal Wound และ ASPD +10% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Power Thrust จะทำให้การโจมตีทางกายภาพ มีโอกาสทำลายอาวุธของศัตรู เป็นเวลา 20 วินาที และเพิ่มโอกาสทำลาย ตามขั้นการอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 28751,
+      "name": "Lesser Guild Member's Gladius",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Hiding เพิ่ม Damage ของสกิล Raid 50% เป็นเวลา 20 วินาที, HIT + 30",
+      "hiddenOutside": false
+    },
+    {
+      "id": 32015,
+      "name": "Lesser Guild Member's Pike",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, หาก Provoke เป้าหมายสำเร็จ จะเพิ่ม Damage ของสกิล Pierce 20% เป็นเวลา 10 วินาที และเมื่อใช้สกิล Pierce มีโอกาสทำให้ศัตรูติดสถานะ Stun และ Blind โดยจะเพิ่ม Damage ของสกิล Pierce พร้อมทั้งเพิ่ม โอกาสติดสถานะ Stun และ Blind ตามเลเวลสกิล Spear Mastery",
+      "hiddenOutside": false
+    },
+    {
+      "id": 32103,
+      "name": "Lesser Guild Member's Guitar",
+      "tier": "lesser",
+      "slots": 0,
+      "headline": "เพิ่ม Damage ทางกายภาพต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางกายภาพต่อ Player 15% เพิกเฉยต่อพลังป้องกันทางกายภาพของ Player 5% ทุกครั้งที่อัปเกรด เพิ่ม Damage ทางกายภาพต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7 เพิกเฉยต่อพลังป้องกันของ Player ขึ้นอีก 5% เมื่ออัปเกรดถึงขั้น 9 เพิ่ม Damage ทางกายภาพต่อ Player ขึ้นอีก 15% เมื่ออัปเกรดถึงขั้น 10 เมื่อใช้สกิล Formless Spell จะเพิ่ม Damage ของสกิล Musical Strike 30% เป็นเวลา 60 วินาที, HIT + 20 และลดระยะเวลาร่ายแบบแปรผัน 30% เพิ่ม HIT และ Damage ของสกิล Musical Strike ตามขั้นการอัปเกรด",
+      "hiddenOutside": false
+    },
+    {
+      "id": 450012,
+      "name": "Advanced Guild Member's Robe",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +1050, MaxSP +150, MDEF +5, ลด Damage ที่ได้รับจาก Player 3%",
+      "effect": "เสื้อคลุมยาวที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +1050, MaxSP +150, MDEF +5, ลด Damage ที่ได้รับจาก Player 3% เมื่ออัปเกรดถึงขั้น 7, MATK +5% เมื่อสวมใส่ร่วมกับ Advanced Guild Member's Shoes/Muffler เมื่อค่าอัปเกรดรวมตั้งแต่ 21 ขึ้นไป MaxHP +1600, ลด Damage ที่ได้รับจาก Player 7%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 450013,
+      "name": "Advanced Guild Member's Suit",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +1150, MaxSP +100, MDEF +5, ลด Damage ที่ได้รับจาก Player 4%",
+      "effect": "ชุดเกราะที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +1150, MaxSP +100, MDEF +5, ลด Damage ที่ได้รับจาก Player 4% เมื่ออัปเกรดถึงขั้น 7, ATK +5% เมื่อสวมใส่ร่วมกับ Advanced Guild Member's Boots/Manteau เมื่อค่าอัปเกรดรวมตั้งแต่ 21 ขึ้นไป MaxHP +1800, ลด Damage ที่ได้รับจาก Player 8%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 450014,
+      "name": "Advanced Guild Member's Plate",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +1250, MaxSP +50, ลด Damage ที่ได้รับจาก Player 5%",
+      "effect": "ชุดเกราะเหล็กที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +1250, MaxSP +50, ลด Damage ที่ได้รับจาก Player 5% เมื่ออัปเกรดถึงขั้น 7, ลด Damage ที่ได้รับจาก Player 2% เมื่อสวมใส่ร่วมกับ Advanced Guild Member's Greaves/Manteau เมื่อค่าอัปเกรดรวมตั้งแต่ 21 ขึ้นไป MaxHP +2000, ลด Damage ที่ได้รับจาก Player 9%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 470011,
+      "name": "Advanced Guild Member's Shoes",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +350, MDEF +7, ลด Damage ที่ได้รับจาก Player 1%",
+      "effect": "รองเท้าที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +350, MDEF +7, ลด Damage ที่ได้รับจาก Player 1% เมื่ออัปเกรดถึงขั้น 7, MaxHP +10%, ลด Damage ที่ได้รับจาก Player 1%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 470012,
+      "name": "Advanced Guild Member's Boots",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +550, MDEF +4, ลด Damage ที่ได้รับจาก Player 2%",
+      "effect": "รองเท้าบูทที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +550, MDEF +4, ลด Damage ที่ได้รับจาก Player 2% เมื่ออัปเกรดถึงขั้น 7, MaxHP +10%, ลด Damage ที่ได้รับจาก Player 1%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 470013,
+      "name": "Advanced Guild Member's Greaves",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +750, MDEF +2, ลด Damage ที่ได้รับจาก Player 3%",
+      "effect": "สนับแข้งที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +750, MDEF +2, ลด Damage ที่ได้รับจาก Player 3% เมื่ออัปเกรดถึงขั้น 7, MaxHP +10%, ลด Damage ที่ได้รับจาก Player 1%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 480007,
+      "name": "Advanced Guild Member's Muffler",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +250, MDEF +2, ลด Damage ที่ได้รับจาก Player 3%",
+      "effect": "ผ้าพันคอที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +250, MDEF +2, ลด Damage ที่ได้รับจาก Player 3% เมื่ออัปเกรดถึงขั้น 7, ATK/MATK +35",
+      "hiddenOutside": true
+    },
+    {
+      "id": 480008,
+      "name": "Advanced Guild Member's Manteau",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "MaxHP +350, MDEF +2, ลด Damage ที่ได้รับจาก Player 3%",
+      "effect": "ผ้าคลุมที่ออกแบบมาสำหรับสมาชิกกิลด์ระดับชำนาญ MaxHP +350, MDEF +2, ลด Damage ที่ได้รับจาก Player 3% เมื่ออัปเกรดถึงขั้น 7, ลด Damage ที่ได้รับจาก Player 2%",
+      "hiddenOutside": true
+    },
+    {
+      "id": 500006,
+      "name": "Advanced Guild Member's Flamberge",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, หากใช้สกิล Devotion สำเร็จ จะเพิ่ม MaxHP +1000 เป็นเวลา 30 วินาที และ เพิ่ม MaxHP +50 ตามขั้นการอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 510005,
+      "name": "Advanced Guild Member's Gladius",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Hiding จะเพิ่ม Damage ของสกิล Raid 50% เป็นเวลา 20 วินาที และ HIT +30",
+      "hiddenOutside": false
+    },
+    {
+      "id": 520001,
+      "name": "Advanced Guild Member's Cleaver",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "ไม่สามารถเสียหายได้ เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Acid Terror หรือ Mammonite มีโอกาสทำให้ศัตรูติดสถานะ Fatal Wound Lv.1",
+      "hiddenOutside": false
+    },
+    {
+      "id": 530001,
+      "name": "Advanced Guild Member's Pike",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อ Provoke สำเร็จ จะเพิ่ม Damage ของ สกิล Pierce 20% เป็นเวลา 10 วินาที และเมื่อใช้สกิล Pierce มีโอกาสทำให้ศัตรูติดสถานะ Stun และ Blind และเพิ่ม Damage ของสกิล Pierce พร้อมทั้งเพิ่มโอกาสติดสถานะ Stun และ Blind ตามเลเวลสกิล Spear Mastery",
+      "hiddenOutside": false
+    },
+    {
+      "id": 550004,
+      "name": "Advanced Guild Member's Healing Staff",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่มผลของสกิล Heal 10%",
+      "effect": "ไม่สามารถเสียหายได้ เพิ่มผลของสกิล Heal 10% ลด Delay หลังใช้สกิล 5% ทุกการอัปเกรด 1 ขั้น, เพิ่มผลของสกิล Heal 1%, เพิ่ม AGI และลดการใช้ SP ของสกิล Blessing ลง 2% เมื่ออัปเกรดถึงขั้น 7, เพิ่มผลของสกิล Heal 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่มผลของสกิล Heal 10% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Heal มีโอกาส เพิ่มผลของสกิล Heal 25% เป็นเวลา 10 วินาที และเพิ่มขึ้นอีก 1% ตามขั้นการอัปเกรดของอาวุธ MATK + 145",
+      "hiddenOutside": false
+    },
+    {
+      "id": 550005,
+      "name": "Advanced Guild Member's Arc Wand",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage เวทมนตร์ ต่อ Player 15%",
+      "effect": "ไม่สามารถเสียหายได้ เพิ่ม Damage เวทมนตร์ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน เวทมนตร์ของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage เวทมนตร์ ต่อ Player 1% ทุกการอัปเกรด 2 ขั้น, MATK + 5 เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกันเวทมนตร์ ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage เวทมนตร์ ต่อ Player 5% เมื่ออัปเกรดถึงขั้น 10, ลดระยะเวลาร่ายแบบแปรผัน ของสกิล Land Protector 30% และเมื่อใช้สกิล Deluge, Violent Gale, Volcano จะไม่ใช้ Gemstone 1 ชิ้น กับเวทมนตร์ทั้งหมด เป็นเวลา 10 วินาที MATK +140",
+      "hiddenOutside": false
+    },
+    {
+      "id": 560003,
+      "name": "Advanced Guild Member's Fist",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, ลดระยะเวลาร่ายแบบคงที่ ของสกิล Asura Strike 30% และเมื่อใช้สกิล Vigor Explosion จะ ATK +30 เป็นเวลา 20 วินาที และเพิ่ม ATK ขึ้นอีกตาม ขั้นการอัปเกรด",
+      "hiddenOutside": false
+    },
+    {
+      "id": 570003,
+      "name": "Advanced Guild Member's Guitar",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Extemporaneousness จะเพิ่ม Damage ของสกิล Musical Strike 30% เป็นเวลา 60 วินาที, HIT +20 และ ลดระยะเวลาร่ายแบบแปรผัน 30% เพิ่ม HIT และ Damage ของ สกิล Musical Strike ตามขั้นการอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 580003,
+      "name": "Advanced Guild Member's Lariat Whip",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Extemporaneousness จะเพิ่ม Damage ของ สกิล Dart Arrow 30% เป็นเวลา 60 วินาที, HIT +20 และ ลดระยะเวลาร่ายแบบแปรผัน 30% เพิ่ม HIT และ Damage ของสกิล Dart Arrow ตามขั้นการอัปเกรด",
+      "hiddenOutside": false
+    },
+    {
+      "id": 590004,
+      "name": "Advanced Guild Member's Morning Star",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "ไม่สามารถเสียหายได้ เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, การโจมตีปกติทางกายภาพมีโอกาส ทำให้ศัตรูติดสถานะ Stun, ASPD +10% และเพิ่มโอกาสติด สถานะ Stun ตามเลเวลสกิล Mace Mastery",
+      "hiddenOutside": false
+    },
+    {
+      "id": 600005,
+      "name": "Advanced Guild Member's Claymore",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกันทางกายภาพ ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, การโจมตีปกติทางกายภาพ มีโอกาสทำให้เพิกเฉยต่อ พลังป้องกันทางกายภาพ ของ Player 10% เป็นเวลา 7 วินาที และมีโอกาสเพิ่มขึ้นอีก 1% ตามขั้นการอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 610004,
+      "name": "Advanced Guild Member's Jamadhar",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player ขึ้นอีก 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, การโจมตีปกติทางกายภาพ มีโอกาสเพิ่ม Critical Damage 20% เป็นเวลา 7 วินาที และ มีโอกาสเพิ่มขึ้นอีก 2% ตามขั้นการอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 620001,
+      "name": "Advanced Guild Member's Two-Handed Axe",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "ไม่สามารถเสียหายได้ เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15%, การโจมตีปกติทางกายภาพ มีโอกาสทำให้เกิดสถานะ Fatal Wound, ASPD +10% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Power Thrust จะทำให้การโจมตีทางกายภาพ มีโอกาสต่ำในการทำลายอาวุธของศัตรู เป็นเวลา 20 วินาที และเพิ่มโอกาสทำลายตามขั้น การอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 630001,
+      "name": "Advanced Guild Member's Lance",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 25% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Pierce มีโอกาส ทำให้ศัตรูติดสถานะ Stun และเพิ่มโอกาสติดสถานะตาม ขั้นการอัปเกรดของอาวุธ เมื่อใช้สกิล Holy Cross มีโอกาสทำให้ศัตรูติดสถานะ Silence และเพิ่มโอกาสติดสถานะตาม ขั้นการอัปเกรดของอาวุธ",
+      "hiddenOutside": false
+    },
+    {
+      "id": 640001,
+      "name": "Advanced Guild Member's Destruction Staff",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage เวทมนตร์ ต่อ Player 15%",
+      "effect": "ไม่สามารถเสียหายได้ เพิ่ม Damage เวทมนตร์ ต่อ Player 15% เพิกเฉยต่อพลังป้องกัน เวทมนตร์ของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage เวทมนตร์ ต่อ Player 1% เพิ่ม Damage ของสกิล Meteor Storm และ Storm Gust 3%, MaxHP -2% ทุกการอัปเกรด 2 ขั้น, MATK +5 เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน เวทมนตร์ของ Player 10% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage เวทมนตร์ ต่อ Player 5% MATK +200",
+      "hiddenOutside": false
+    },
+    {
+      "id": 700005,
+      "name": "Advanced Guild Member's Hunter Bow",
+      "tier": "advanced",
+      "slots": 1,
+      "headline": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20%",
+      "effect": "เพิ่ม Damage ทางกายภาพ ต่อ Player 20% เพิกเฉยต่อพลังป้องกัน ทางกายภาพของ Player 10% ทุกการอัปเกรด 1 ขั้น, เพิ่ม Damage ทางกายภาพ ต่อ Player 1% เมื่ออัปเกรดถึงขั้น 7, เพิกเฉยต่อพลังป้องกัน ของ Player 5% เมื่ออัปเกรดถึงขั้น 9, เพิ่ม Damage ทางกายภาพ ต่อ Player 15% เมื่ออัปเกรดถึงขั้น 10, เมื่อใช้สกิล Improve Concentration จะเพิ่ม Damage ของสกิล Double Strafe 20% เป็นเวลา 10 วินาที และ HIT +20 เพิ่ม HIT และ Damage ของ สกิล Double Strafe ตามขั้นการอัปเกรด",
+      "hiddenOutside": false
+    }
+  ],
+  "consumableOnly": [
+    {
+      "id": 11547,
+      "name": "WoE Violet Potion",
+      "note": "WoE และในเมืองเท่านั้น",
+      "full": "สามารถใช้งานได้เฉพาะ PVP, WoE และในเมืองเท่านั้น มีรสชาติที่ผสมผสานระหว่าง Red Potion กับ Blue Potion และชวนให้นึกถึง Savage แห่งเทือกเขา Mjolnir… ฟื้นฟู HP 500 และ SP 60 เป็นอย่างต่ำ"
+    },
+    {
+      "id": 11548,
+      "name": "WoE White Potion",
+      "note": "WoE และในเมืองเท่านั้น",
+      "full": "สามารถใช้งานได้เฉพาะ PVP, WoE และในเมืองเท่านั้น White Potion รสสดชื่นที่ผลิต จากยอดอ่อนของ White Herb ฟื้นฟู HP 10% โดยประมาณ"
+    },
+    {
+      "id": 11549,
+      "name": "WoE Blue Potion",
+      "note": "WoE และในเมืองเท่านั้น",
+      "full": "สามารถใช้งานได้เฉพาะ PVP, WoE และในเมืองเท่านั้น Blue Potion รสสดชื่นที่ผลิต จากยอดอ่อนของ Blue Herb ฟื้นฟู SP 10% โดยประมาณ"
+    },
+    {
+      "id": 12676,
+      "name": "50 WoE Violet Potion Box",
+      "note": "กล่องที่บรรจุ WoE Violet · เขต PVP, WoE หรือภายในเมือง)",
+      "full": "กล่องที่บรรจุ WoE Violet Potion 50 ชิ้น (*คำเตือน* ไม่มีผลในพื้นที่ที่ไม่ใช่ เขต PVP, WoE หรือภายในเมือง)"
+    },
+    {
+      "id": 12679,
+      "name": "30 WoE White Potion Box",
+      "note": "กล่องที่บรรจุ WoE White · เขต PVP, WoE หรือภายในเมือง)",
+      "full": "กล่องที่บรรจุ WoE White Potion 30 ชิ้น (*คำเตือน* ไม่มีผลในพื้นที่ที่ไม่ใช่ เขต PVP, WoE หรือภายในเมือง)"
+    },
+    {
+      "id": 12680,
+      "name": "10 WoE Blue Potion Box",
+      "note": "กล่องที่บรรจุ WoE Blue · เขต PVP, WoE หรือภายในเมือง)",
+      "full": "กล่องที่บรรจุ WoE Blue Potion 10 ชิ้น (*คำเตือน* ไม่มีผลในพื้นที่ที่ไม่ใช่ เขต PVP, WoE หรือภายในเมือง)"
+    },
+    {
+      "id": 12683,
+      "name": "200 WoE Violet Potion Box",
+      "note": "กล่องที่บรรจุ WoE Violet · เขต PVP, WoE หรือภายในเมือง)_",
+      "full": "กล่องที่บรรจุ WoE Violet Potion 200 ชิ้น (*คำเตือน* ไม่มีผลในพื้นที่ที่ไม่ใช่ เขต PVP, WoE หรือภายในเมือง)_"
+    },
+    {
+      "id": 103014,
+      "name": "Large WoE Violet Potion Box",
+      "note": "กล่องที่บรรจุ WoE Violet · เขต PVP, WoE หรือภายในเมือง)",
+      "full": "กล่องที่บรรจุ WoE Violet Potion จำนวน 50 ชิ้น (*คำเตือน* ไม่มีผลในพื้นที่ที่ไม่ใช่ เขต PVP, WoE หรือภายในเมือง)"
+    },
+    {
+      "id": 1100001,
+      "name": "Large Siege Purple Potion",
+      "note": "สามารถใช้ได้เฉพาะ WoE, PVP และในเมืองเท่านั้น",
+      "full": "สามารถใช้ได้เฉพาะ WoE, PVP และในเมืองเท่านั้น มีรสชาติที่ผสมผสานระหว่าง Red Potion กับ Blue Potion และชวนให้นึกถึง Savage แห่งเทือกเขา Mjolnir… ปริมาณเพิ่มขึ้นจากเดิมถึง 50% ฟื้นฟู HP ประมาณ 750, ฟื้นฟู SP ประมาณ 100"
+    }
+  ],
+  "consumableBlocked": [
+    {
+      "id": 22817,
+      "name": "Small Healing Potion",
+      "note": "ของไอเทมได้ในสงครามกิลด์",
+      "full": "ขวดใบเล็กที่บรรจุน้ำยางจากต้น Yggdrasil ว่ากันว่ามีสรรพคุณ ช่วยสมานบาดแผลได้ เมื่อใช้จะฟื้นฟู MaxHP 5% ทุก 5 วินาที เป็นเวลา 30 นาที ไม่สามารถใช้งานได้เมื่อ ตกอยู่ในสถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทม จะหายไป ไม่สามารถใช้หรือรับเอฟเฟกต์ ของไอเทมได้ในสงครามกิลด์"
+    },
+    {
+      "id": 25177,
+      "name": "Shadow Effect (Middle)",
+      "note": "ไม่มีผลในพื้นที่ WoE และ PvP",
+      "full": "ใช้ Enchant ในช่องที่ 4 ของ Costume ส่วน Middle เพื่อรับเอฟเฟกต์ต่อไปนี้ Shadow ไม่มีผลในพื้นที่ WoE และ PvP <NAVI>[Gruzio Gurmani]<INFO>mal_in01,24,121,0,100,0,0</INFO></NAVI>"
+    },
+    {
+      "id": 100005,
+      "name": "Small Mana Potion",
+      "note": "ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน",
+      "full": "ขวดขนาดเล็กที่บรรจุยางไม้จาก กลีบดอกของต้น Yggdrasil ว่ากันว่ามีสรรพคุณช่วยฟื้นฟูมานา เมื่อใช้งาน จะฟื้นฟู MaxSP 5% ทุก ๆ 5 วินาที เป็นเวลา 30 นาที เอฟเฟกต์จะไม่ทำงานขณะอยู่ใน สถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทมจะหายไป ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน"
+    },
+    {
+      "id": 107046,
+      "name": "Small Healing Potion",
+      "note": "ของไอเทมได้ในสงครามกิลด์",
+      "full": "ขวดใบเล็กที่บรรจุน้ำยางจากต้น Yggdrasil ว่ากันว่ามีสรรพคุณ ช่วยสมานบาดแผลได้ เมื่อใช้จะฟื้นฟู MaxHP 5% ทุก 5 วินาที เป็นเวลา 30 นาที ไม่สามารถใช้งานได้เมื่อ ตกอยู่ในสถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทม จะหายไป ไม่สามารถใช้หรือรับเอฟเฟกต์ ของไอเทมได้ในสงครามกิลด์"
+    },
+    {
+      "id": 107047,
+      "name": "Small Mana Potion",
+      "note": "ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน",
+      "full": "ขวดขนาดเล็กที่บรรจุยางไม้จาก กลีบดอกของต้น Yggdrasil ว่ากันว่ามีสรรพคุณช่วยฟื้นฟูมานา เมื่อใช้งาน จะฟื้นฟู MaxSP 5% ทุก ๆ 5 วินาที เป็นเวลา 30 นาที เอฟเฟกต์จะไม่ทำงานขณะอยู่ใน สถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทมจะหายไป ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน"
+    },
+    {
+      "id": 107336,
+      "name": "[Event] Small Mana Potion",
+      "note": "ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน",
+      "full": "ขวดขนาดเล็กที่บรรจุยางไม้จาก กลีบดอกของต้น Yggdrasil ว่ากันว่ามีสรรพคุณช่วยฟื้นฟูมานา เมื่อใช้งาน จะฟื้นฟู MaxSP 5% ทุก ๆ 5 วินาที เป็นเวลา 30 นาที เอฟเฟกต์จะไม่ทำงานขณะอยู่ใน สถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทมจะหายไป ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน"
+    },
+    {
+      "id": 107337,
+      "name": "[Event] Small Healing Potion",
+      "note": "ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน",
+      "full": "ขวดเล็กที่บรรจุน้ำยางจากต้น Yggdrasil ว่ากันว่ามีสรรพคุณช่วย ฟื้นฟูบาดแผล เมื่อใช้งาน จะฟื้นฟู MaxHP 5% ทุก ๆ 5 วินาที เป็นเวลา 30 นาที เอฟเฟกต์จะไม่ทำงานขณะอยู่ใน สถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทมจะหายไป ไม่สามารถใช้ได้ในสงครามกิลด์ และเอฟเฟกต์จะไม่ทำงาน"
+    },
+    {
+      "id": 200890,
+      "name": "10 Small Healing Potion Box",
+      "note": "ของไอเทมได้ในสงครามกิลด์",
+      "full": "กล่องที่บรรจุ Small Healing Potion จำนวน 10 ชิ้น เมื่อใช้จะฟื้นฟู MaxHP 5% ทุก 5 วินาที เป็นเวลา 30 นาที ไม่สามารถใช้งานได้เมื่อ ตกอยู่ในสถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทม จะหายไป ไม่สามารถใช้หรือรับเอฟเฟกต์ ของไอเทมได้ในสงครามกิลด์"
+    },
+    {
+      "id": 200891,
+      "name": "10 Small Mana Potion Box",
+      "note": "ของไอเทมได้ในสงครามกิลด์",
+      "full": "กล่องที่บรรจุ Small Mana Potion จำนวน 10 ชิ้น เมื่อใช้จะฟื้นฟู MaxSP 5% ทุก 5 วินาที เป็นเวลา 30 นาที ไม่สามารถใช้งานได้เมื่อ ตกอยู่ในสถานะ Berserk เมื่อเสียชีวิต เอฟเฟกต์ของไอเทม จะหายไป ไม่สามารถใช้หรือรับเอฟเฟกต์ ของไอเทมได้ในสงครามกิลด์"
+    }
+  ],
+  "cards": [
+    {
+      "id": 4251,
+      "name": "Elder Card",
+      "note": "ในช่วงสงครามกิลด์",
+      "full": "เพิ่ม Damage ทางกายภาพ ต่อ Guardian 40% ในช่วงสงครามกิลด์"
+    }
+  ],
+  "other": [
+    {
+      "id": 19740,
+      "name": "Costume Guild Member Wanted Hat",
+      "note": "สงครามกิลด์ไปด้วยกันไหม?",
+      "full": "หมวกทรงป้ายประกาศที่เขียนว่า “รับสมัครสมาชิกกิลด์!” มาร่วมลุย สงครามกิลด์ไปด้วยกันไหม?"
+    },
+    {
+      "id": 25464,
+      "name": "World Moving Ticket",
+      "note": "รวมถึงแผนที่สงครามกิลด์",
+      "full": "สามารถค้นหาสถานที่ที่ต้องการใน Navigation เพื่อเคลื่อนย้ายไปยังตำแหน่งนั้นได้ \"ข้อควรระวัง - เมื่อค้นหา NPC จะถูกย้ายไปยังตำแหน่งแบบสุ่ม ภายในแผนที่ที่ NPC นั้นอยู่ และแผนที่ภายในบางแห่ง รวมถึงแผนที่สงครามกิลด์ จะไม่สามารถเคลื่อนย้ายได้\""
+    },
+    {
+      "id": 401080,
+      "name": "Costume Guild Member Wanted Hat (Bound)",
+      "note": "สงครามกิลด์ไปด้วยกันไหม?",
+      "full": "หมวกทรงป้ายประกาศที่เขียนว่า “รับสมัครสมาชิกกิลด์!” มาร่วมลุย สงครามกิลด์ไปด้วยกันไหม?"
+    },
+    {
+      "id": 700090,
+      "name": "Ballista",
+      "note": "ธนูขนาดใหญ่ที่ใช้ในสงครามกิลด์",
+      "full": "ธนูขนาดใหญ่ที่ใช้ในสงครามกิลด์ เดิมทีถูกสร้างขึ้นเพื่อทำลายกำแพง และประตูปราสาท แต่ได้รับ การปรับลดขนาดและ พลังลงจนสามารถสวมใส่ใช้งานได้"
+    }
+  ]
+}
