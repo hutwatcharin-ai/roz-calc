@@ -3468,3 +3468,20 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .homun__evolved img { image-rendering: pixelated; width: auto; height: 96px; object-fit: contain; }
 @media (max-width: 720px) { .homun__mats, .homun__skills { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 480px) { .homun__head { gap: 12px; } .homun__portrait { height: 88px; } }
+.homun__h3 { margin: 0; font: 700 17px/1.4 var(--font-sarabun), sans-serif; color: var(--cyan); }
+.homun__warn { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--yellow); border-radius: var(--radius); background: color-mix(in srgb, var(--yellow) 8%, transparent); }
+.homun__warn p { margin: 0; font-size: 13.5px; line-height: 1.8; }
+.homun__mats--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.homun__mats--four li { flex-direction: column; align-items: flex-start; gap: 4px; }
+.homun__who { font: 700 12px/1 var(--font-mono), monospace; color: var(--cyan); }
+.homun__feed { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.homun__feed li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }
+.homun__feed--both { border-color: var(--cyan); }
+.homun__range { font: 700 13px/1.5 var(--font-mono), monospace; color: var(--yellow); }
+.homun__feed strong { display: block; font-size: 14px; }
+.homun__feed .homun__detail { margin-top: 2px; display: block; font-size: 13px; }
+.homun__conflict { margin-top: 14px; padding: 12px 14px; border: 1px dashed var(--hair); border-radius: var(--radius); }
+.homun__conflict p { margin: 0 0 6px; font-size: 13.5px; line-height: 1.8; }
+.homun__conflict p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) { .homun__mats--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .homun__mats--four { grid-template-columns: minmax(0, 1fr); } .homun__feed li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

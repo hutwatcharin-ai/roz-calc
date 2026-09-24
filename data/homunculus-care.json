@@ -1,0 +1,59 @@
+{
+ "_meta": {
+  "what": "การเลี้ยงโฮมุน: อาหาร ความสนิท ร่าง 2 และ EXP",
+  "read": "2026-09-24",
+  "warning": "ทุกข้อในไฟล์นี้มาจากแหล่งที่เขียนไว้สำหรับ RO รุ่นเดิม ไม่มีแหล่งไหนยืนยันกับ Ragnarok Zero — หน้าเว็บต้องติดป้ายกำกับเสมอ ต่างจาก data/homunculus.json ที่เป็นข้อความของไคลเอนต์ Zero เอง",
+  "sources": {
+   "rathena": {
+    "label": "rAthena (อีมูเลเตอร์โอเพนซอร์ส)",
+    "url": "https://github.com/rathena/rathena",
+    "note": "อ่านจาก db/pre-re/homunculus_db.yml, src/map/homunculus.cpp และ conf/battle/homunc.conf"
+   },
+   "homunkung": {
+    "label": "homunkung (ไกด์โฮมุนภาษาไทย)",
+    "url": "https://homunkung.blogspot.com/p/home.html",
+    "note": "บทความปี 2013-2021 เขียนสำหรับ RO ทั่วไป ไม่ได้ระบุว่าเป็น Zero"
+   }
+  }
+ },
+ "food": [
+  { "key": "lif", "name": "Lif", "itemId": 537, "itemName": "Pet Food", "agree": ["rathena", "homunkung"] },
+  { "key": "amistr", "name": "Amistr", "itemId": 912, "itemName": "Zargon", "agree": ["rathena", "homunkung"] },
+  { "key": "filir", "name": "Filir", "itemId": 910, "itemName": "Garlet", "agree": ["rathena", "homunkung"] },
+  { "key": "vanilmirth", "name": "Vanilmirth", "itemId": 911, "itemName": "Scell", "agree": ["rathena", "homunkung"] }
+ ],
+ "feeding": [
+  { "hunger": "11-25", "effect": "ได้ความสนิทมากที่สุด", "detail": "ไกด์ไทยเขียนว่า +1.00 แต้ม ส่วน rAthena เก็บเป็น +100 หน่วยภายใน ซึ่งเป็นเลขเดียวกันคนละสเกล", "agree": ["rathena", "homunkung"] },
+  { "hunger": "26-75", "effect": "ได้ความสนิทรองลงมา", "detail": "ไกด์ไทย +0.75 แต้ม · rAthena +75 หน่วยภายใน", "agree": ["rathena", "homunkung"] },
+  { "hunger": "76-90", "effect": "เสียความสนิทเล็กน้อย", "detail": "rAthena หัก 5 หน่วย ส่วนไกด์ไทยรวมช่วงนี้เข้ากับช่วงอิ่มจัด", "agree": ["rathena"] },
+  { "hunger": "91 ขึ้นไป", "effect": "เสียความสนิทหนัก", "detail": "อิ่มอยู่แล้วแต่ยังป้อน · rAthena หัก 50 หน่วย ไกด์ไทยว่าหัก 0.50 แต้ม ซึ่งเท่ากัน", "agree": ["rathena", "homunkung"] }
+ ],
+ "conflict": {
+  "topic": "ป้อนตอนหิวจัด (ต่ำกว่า 10)",
+  "rathena": "ได้ความสนิท +50 หน่วย คือยังเป็นบวก แค่ไม่คุ้มเท่าช่วง 11-25",
+  "homunkung": "เสียความสนิท 0.50 แต้ม และถ้าปล่อยจนหิวเป็น 0 โฮมุนจะหนีไป"
+ },
+ "intimacyScale": {
+  "display": "911-1000",
+  "internal": "91,100-100,000",
+  "note": "ไกด์ไทยบอกว่าระดับ Loyal เริ่มที่ 911 ส่วน rAthena เก็บค่าเดียวกันเป็น 91,100 คือสเกลเดียวกันหาร 100 พอดี ความตรงกันนี้เป็นเหตุผลหลักที่หน้าเว็บกล้าขึ้นตัวเลขชุดนี้"
+ },
+ "evolution": {
+  "itemId": 12040,
+  "itemName": "Stone of Sage",
+  "needs": "โฮมุนต้องมีความสนิทถึงระดับ Loyal คือ 911 ขึ้นไปจากเต็ม 1,000",
+  "effects": [
+   "เปลี่ยนเป็นร่างที่สอง ตัวใหญ่ขึ้น",
+   "MaxHP MaxSP และสเตตัสเพิ่มขึ้นมาก",
+   "ปลดสกิลตัวที่สี่ของสายนั้น ซึ่งเรียนไม่ได้ก่อนวิวัฒน์"
+  ],
+  "cost": "ความสนิทถูกรีเซ็ตลงล่างสุดทันทีหลังวิวัฒน์ ต้องป้อนอาหารไต่ขึ้นใหม่",
+  "agree": ["rathena", "homunkung"]
+ },
+ "exp": {
+  "how": "โฮมุนได้ EXP ตามเจ้าของ ทั้งตอนฆ่ามอนและตอนส่งเควส",
+  "condition": "ต้องเรียกโฮมุนออกมายืนอยู่ข้าง ๆ ถ้าพักไว้ด้วย Rest จะไม่ได้ EXP เลย",
+  "unknown": "อัตราจริงว่าได้กี่เปอร์เซ็นต์ของเจ้าของ และโฮมุนขึ้นเลเวลแล้วสเตตัสเพิ่มเท่าไร ยังไม่มีแหล่งที่ยืนยันกับ Zero",
+  "agree": ["homunkung"]
+ }
+}

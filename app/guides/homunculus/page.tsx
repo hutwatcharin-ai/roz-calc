@@ -12,10 +12,17 @@
 // created straight from the skill. Guides copied from classic RO all say a
 // quest is required, so the page states the difference rather than hiding it.
 //
-// What is deliberately NOT here: base stats, growth per level, hunger and
-// intimacy numbers, and evolution. Those exist only as rAthena values for
-// classic RO. Printing them behind a label would still put numbers on the
-// page that readers would quote, so the page says they are unknown instead.
+// Care, feeding and evolution came later, from data/homunculus-care.json.
+// They are NOT client facts: rAthena and the Thai guide at homunkung both
+// describe classic RO. The owner's call on 24 Sep 2026 was to publish them
+// with the label, because the two sources are independent and agree -- their
+// intimacy scales are the same numbers a hundred apart (Loyal at 911 vs
+// 91,100), which is hard to get by coincidence -- and because every item they
+// name is already in the Zero client. Where they disagree, the page prints
+// both and picks neither.
+//
+// What is still deliberately NOT here: base stats, growth per level, the EXP
+// rate, and the level cap. Those have no agreeing pair of sources.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -24,6 +31,7 @@ import AdSlot from '@/components/AdSlot';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import homun from '@/data/homunculus.json';
+import care from '@/data/homunculus-care.json';
 import { itemHref } from '@/lib/item-href';
 import { supabaseBrowser } from '@/lib/supabase';
 
@@ -52,6 +60,9 @@ type Creature = { key: string; name: string; sprite: string; evolvedSprite: stri
 const ALCHEMIST = homun.alchemist as Skill[];
 const HOMUNCULI = homun.homunculus as Creature[];
 const ITEMS = homun.items as { id: number; name: string; text: string }[];
+// Everything in data/homunculus-care.json is from sources written for classic
+// RO, so the section that uses it carries a warning of its own.
+const CARE = care;
 const SKILL_COUNT = HOMUNCULI.reduce((sum, h) => sum + h.skills.length, 0);
 
 // The Embryo recipe: what Pharmacy consumes per attempt. The guide book is
@@ -112,7 +123,12 @@ async function itemMeta(ids: number[]) {
 }
 
 export default async function HomunculusGuidePage() {
-  const meta = await itemMeta([...ITEMS.map((i) => i.id), MEDICINE_BOWL]);
+  const meta = await itemMeta([
+    ...ITEMS.map((i) => i.id),
+    MEDICINE_BOWL,
+    ...CARE.food.map((f) => f.itemId),
+    CARE.evolution.itemId,
+  ]);
   const href = (id: number) => itemHref(id, (meta.get(id)?.category as string) ?? null);
   const icon = (id: number) => (meta.get(id)?.icon_url as string) ?? null;
   const price = (id: number) => (meta.get(id)?.buy_price as number) ?? 0;
@@ -262,33 +278,121 @@ export default async function HomunculusGuidePage() {
         </p>
       </section>
 
+      <section style={{ marginTop: 18 }}>
+        <h2 className="section-title">อาหาร ความสนิท และร่างที่สอง</h2>
+        <div className="homun__warn">
+          <p>
+            <strong>อ่านตรงนี้ก่อน</strong> ทุกอย่างในหัวข้อนี้มาจากสองแหล่งที่เขียนไว้สำหรับ RO รุ่นเดิม
+            ไม่ใช่เอกสารของ Zero และยังไม่มีใครยืนยันในเซิร์ฟนี้ ที่กล้าขึ้นเพราะสองแหล่งนี้เป็นอิสระต่อกันแต่ให้ตัวเลขตรงกัน
+            และไอเทมทุกชิ้นที่พูดถึงมีอยู่จริงในไคลเอนต์ Zero แล้ว จุดที่สองแหล่งขัดกันเขียนไว้ให้เห็นด้วย
+          </p>
+        </div>
+
+        <section className="card" style={{ marginTop: 14 }}>
+          <h3 className="homun__h3">ตัวไหนกินอะไร</h3>
+          <ul className="homun__mats homun__mats--four">
+            {CARE.food.map((row) => (
+              <li key={row.key}>
+                <span className="homun__who">{row.name}</span>
+                <ItemLink id={row.itemId} />
+                <span className="homun__price">{price(row.itemId) ? `${price(row.itemId).toLocaleString('th-TH')}z` : 'ไม่ทราบราคา'}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="homun__note">
+            Zargon Garlet และ Scell เป็นของดรอปทั่วไป กดเข้าไปในหน้าไอเทมจะเห็นว่ามอนตัวไหนดรอปบ้าง
+            ส่วน Pet Food ซื้อจากร้านอย่างเดียว ราคาทั้งหมดอ่านสดจากฐานข้อมูลของเว็บนี้
+          </p>
+        </section>
+
+        <section className="card" style={{ marginTop: 14 }}>
+          <h3 className="homun__h3">ป้อนตอนไหนถึงคุ้ม</h3>
+          <p className="muted" style={{ marginTop: 2 }}>
+            ผลของการให้อาหารขึ้นกับว่าตอนนั้นโฮมุนหิวแค่ไหน ป้อนตอนอิ่มอยู่แล้วคือเสียความสนิทฟรี
+          </p>
+          <ul className="homun__feed">
+            {CARE.feeding.map((row) => (
+              <li key={row.hunger} className={row.agree.length > 1 ? 'homun__feed--both' : undefined}>
+                <span className="homun__range">หิว {row.hunger}</span>
+                <span>
+                  <strong>{row.effect}</strong>
+                  <span className="homun__detail">{row.detail}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="homun__conflict">
+            <p><strong>จุดที่สองแหล่งขัดกัน: {CARE.conflict.topic}</strong></p>
+            <p>rAthena ว่า {CARE.conflict.rathena}</p>
+            <p>ไกด์ไทย homunkung ว่า {CARE.conflict.homunkung}</p>
+            <p className="muted">หน้านี้ไม่เลือกข้าง ทางปลอดภัยคือป้อนตอนหิวอยู่ในช่วง 11-25 ซึ่งสองแหล่งตรงกันว่าดีที่สุด</p>
+          </div>
+        </section>
+
+        <section className="card" style={{ marginTop: 14 }}>
+          <h3 className="homun__h3">ร่างที่สอง</h3>
+          <p className="homun__detail" style={{ marginTop: 6 }}>
+            พก <ItemLink id={CARE.evolution.itemId} /> ไว้หนึ่งชิ้น
+            {price(CARE.evolution.itemId) ? ` ราคาร้าน ${price(CARE.evolution.itemId).toLocaleString('th-TH')}z` : ''} และ{' '}
+            {CARE.evolution.needs}
+          </p>
+          <ul className="homun__unknown" style={{ marginTop: 10 }}>
+            {CARE.evolution.effects.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <p className="homun__note"><strong>ราคาที่ต้องจ่าย</strong> {CARE.evolution.cost}</p>
+          <div className="homun__evolved">
+            {HOMUNCULI.map((creature) => (
+              <img
+                key={creature.key}
+                src={creature.evolvedSprite}
+                alt={`ร่างที่สองของ ${creature.name}`}
+                loading="lazy"
+                width={96}
+                height={96}
+              />
+            ))}
+          </div>
+          <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>ร่างที่สองของทั้งสี่ตัว ภาพจากไฟล์ไคลเอนต์</p>
+        </section>
+
+        <section className="card" style={{ marginTop: 14 }}>
+          <h3 className="homun__h3">โฮมุนขึ้นเลเวลยังไง</h3>
+          <p className="homun__detail" style={{ marginTop: 6 }}>{CARE.exp.how}</p>
+          <p className="homun__note"><strong>เงื่อนไขที่คนพลาดบ่อย</strong> {CARE.exp.condition}</p>
+        </section>
+
+        <p className="guildp__src">
+          ที่มา: {CARE._meta.sources.rathena.label} และ{' '}
+          <a href={CARE._meta.sources.homunkung.url} rel="nofollow noopener" target="_blank">
+            {CARE._meta.sources.homunkung.label}
+          </a>{' '}
+          อ่านเมื่อ {CARE._meta.read} ทั้งสองแหล่งเขียนไว้สำหรับ RO รุ่นเดิม ไม่ได้ระบุว่าเป็น Ragnarok Zero
+        </p>
+      </section>
+
       <section className="card card--yellow" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>สี่ข้อที่หน้านี้ยังตอบไม่ได้</h2>
+        <h2 className="section-title" style={{ marginTop: 0 }}>ที่ยังตอบไม่ได้</h2>
         <ul className="homun__unknown">
-          <li><strong>ความสนิทกับความหิวคิดยังไง</strong> ให้อาหารตอนไหนถึงได้ผลดีที่สุด แต่ละตัวกินอะไร และปล่อยหิวแล้วเสียเท่าไร</li>
-          <li><strong>โฮมุนโตยังไง</strong> ได้ EXP จากไหน และขึ้นเลเวลแล้วสเตตัสเพิ่มเท่าไร</li>
-          <li><strong>ร่างวิวัฒน์มีในเซิร์ฟนี้ไหม</strong> ไคลเอนต์มีภาพร่างที่สองของทั้งสี่ตัวอยู่จริง แต่ไฟล์มีไม่ได้แปลว่าเกมเปิด และยังไม่เจอว่าต้องใช้อะไร</li>
+          <li><strong>ขึ้นเลเวลแล้วสเตตัสเพิ่มเท่าไร</strong> และโฮมุนได้ EXP กี่เปอร์เซ็นต์ของเจ้าของ ตัวเลขที่มีเป็นของ RO รุ่นเดิมและไม่ตรงกันระหว่างรุ่น จึงยังไม่ขึ้นหน้านี้</li>
+          <li><strong>เลเวลสูงสุดของโฮมุน</strong> มีแหล่งเดียวที่พูดถึง ยังไม่พอจะเขียน</li>
           <li><strong>ตายแล้วเสียความสนิทไหม</strong> ยังไม่มีแหล่งที่เชื่อถือได้พอจะเขียนทั้งสองทาง</li>
+          <li><strong>Zero แก้อะไรจาก RO เดิมบ้าง</strong> ยังไม่เจอประกาศหรือเอกสารฝั่ง Zero ที่พูดถึงระบบโฮมุนเลยสักฉบับ</li>
         </ul>
         <p className="homun__note">
-          สี่ข้อนี้มีตัวเลขอยู่ในฐานข้อมูลของอีมูเลเตอร์ที่ทำไว้สำหรับ RO รุ่นเดิม ไม่ใช่เซิร์ฟนี้ หน้านี้เลือกจะไม่พิมพ์ลงไป
-          เพราะตัวเลขที่ขึ้นหน้าเว็บแล้วมีคนเอาไปใช้ต่อเสมอ ถ้าใครมีภาพหน้าต่างโฮมุนในเกมที่เห็นค่าความสนิทหรือความหิว ส่งมาได้ จะใส่ให้พร้อมบอกที่มา
+          ถ้าใครมีภาพหน้าต่างโฮมุนในเกมที่เห็นค่าความสนิทหรือความหิว หรือลองป้อนอาหารแล้วรู้ผลจริง ส่งมาได้ จะใส่ให้พร้อมบอกที่มา
         </p>
-        <div className="homun__evolved">
-          {HOMUNCULI.map((creature) => (
-            <img
-              key={creature.key}
-              src={creature.evolvedSprite}
-              alt={`ร่างที่สองของ ${creature.name} ในไฟล์ไคลเอนต์`}
-              loading="lazy"
-              width={96}
-              height={96}
-            />
-          ))}
-        </div>
-        <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>
-          ภาพร่างที่สองของทั้งสี่ตัว ที่มีอยู่ในไฟล์ไคลเอนต์
-        </p>
+      </section>
+
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>คำสั่งที่ใช้คุมโฮมุน</h2>
+        <ul className="homun__unknown">
+          <li><strong>หน้าต่างข้อมูลโฮมุน</strong> เปิดปิดได้จากปุ่มลัดในเมนูตั้งค่าคีย์ ชื่อในเกมคือ &quot;ข้อมูล Homunculus ON/OFF&quot;</li>
+          <li><strong>สั่งให้หยุดตาม</strong> มีปุ่มลัดชื่อ &quot;คำสั่ง Homunculus Standby&quot; ให้โฮมุนอยู่กับที่แทนที่จะวิ่งตาม</li>
+          <li><strong>AI แบบกำหนดเอง</strong> พิมพ์ <code>/hoai</code> ในช่องแชตเพื่อสลับระหว่าง AI มาตรฐานกับ AI ที่ผู้เล่นเขียนเอง</li>
+        </ul>
+        <p className="guildp__src">ที่มา: ตารางข้อความในไคลเอนต์ Ragnarok Zero Global อ่านเมื่อ {homun._meta.read}</p>
       </section>
     </main>
   );
