@@ -16,6 +16,13 @@ import { gearCategory, gearType } from './gear-type';
 // armour pools off it, so Coat 450320 and every other Zero-renumbered piece
 // showed no random options at all -- a blank where a table belongs.
 export const getGearItem = cache(async (id: number) => {
+  // A non-numeric URL segment (/database/equipment/abc) makes id NaN. Postgres
+  // rejects NaN against an integer column as a genuine query error, which the
+  // callers below correctly turn into a 500 -- right for a real backend
+  // failure, wrong for a malformed path that was never going to match a row.
+  // Short-circuit to the same shape a clean "not found" query already
+  // returns, so it 404s through the existing !data check instead.
+  if (Number.isNaN(id)) return { data: null, error: null } as const;
   const result = await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
   if (!result.data) return result;
   return {

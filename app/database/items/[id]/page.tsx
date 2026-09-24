@@ -45,6 +45,13 @@ export async function generateStaticParams() {
 // the raw { data, error } so each caller keeps its own error handling; this
 // helper must not swallow the error itself.
 const getItem = cache(async (id: number) => {
+  // A non-numeric URL segment (/database/items/abc) makes id NaN. Postgres
+  // rejects NaN against an integer column as a genuine query error, which the
+  // callers below correctly turn into a 500 -- right for a real backend
+  // failure, wrong for a malformed path that was never going to match a row.
+  // Short-circuit to the same shape a clean "not found" query already
+  // returns, so it 404s through the existing !item check instead.
+  if (Number.isNaN(id)) return { data: null, error: null } as const;
   return await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
 });
 
