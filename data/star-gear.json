@@ -1,0 +1,1577 @@
+{
+ "_meta": {
+  "read": "2026-09-24",
+  "source": "ไคลเอนต์ Ragnarok Zero Global (System/iteminfo_thTH.lub) และฐานข้อมูลไอเทมของเว็บนี้",
+  "note": "แถวที่ lang เป็น th คือข้อความไทยจากไคลเอนต์ ส่วน en คือข้อความอังกฤษจากฐานข้อมูล เพราะไคลเอนต์ยังไม่มีไทยของชิ้นนั้น"
+ },
+ "npc": {
+  "name": "Nagging Old Man",
+  "map": "prontera",
+  "x": 272,
+  "y": 260
+ },
+ "items": [
+  {
+   "id": 600070,
+   "name": "★ Bastard Sword",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/600070.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "ดาบสองมืออเนกประสงค์ที่ถูก\nออกแบบมาให้ใช้งานได้อย่าง\nเหมาะสมในทุกสถานการณ์\nATK +20, MDEF -20",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MDEF +1, HIT +10"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MDEF +3, HIT +15"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MDEF +6, HIT +20"
+    }
+   ],
+   "footer": {
+    "type": "Two-Handed Sword",
+    "atk": "190",
+    "weight": "160",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Swordman Class"
+   }
+  },
+  {
+   "id": 540118,
+   "name": "★ Book",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/540118.gif",
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "th",
+   "base": "เมื่อสวมใส่\nระยะโจมตีเพิ่มเป็น 3 ช่อง\nMATK +125,\nเพิ่มระยะเวลาร่ายแบบแปรผัน 30%",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 3%,\nASPD +3%"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดระยะเวลาร่ายแบบแปรผันลง 7%,\nASPD +7%"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดระยะเวลาร่ายแบบแปรผันลง 10%,\nASPD + 15%, ASPD +2"
+    }
+   ],
+   "footer": {
+    "type": "Book",
+    "atk": "85",
+    "weight": "60",
+    "weaponLevel": "2",
+    "requiredLevel": "14",
+    "jobs": "Mage Class, Acolyte Class"
+   }
+  },
+  {
+   "id": 470418,
+   "name": "★ Boots",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "The boots are a bit high, take them off to attack in an emergency. ! MaxHP+100, HP natural recovery speed +5%.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +200, and HP natural recovery speed will be +5%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +350, and HP natural recovery speed will be +10%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP +8%, healing amount +10%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 590098,
+   "name": "★ Chain",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/590098.gif",
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "th",
+   "base": "กระบองที่ประกอบขึ้นจาก\nโซ่หลายเส้น เมื่อฟาดใส่จะสร้าง\nแรงกระแทกอย่างรุนแรงและ\nให้ความรู้สึกสะใจ\nไม่สามารถเสียหายได้\nATK +18, DEF -90",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "DEF +10, ASPD +3%"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "DEF +20, ASPD +7%"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "DEF +35, ASPD +15%"
+    }
+   ],
+   "footer": {
+    "type": "Mace",
+    "atk": "140",
+    "weight": "80",
+    "weaponLevel": "2",
+    "requiredLevel": "14",
+    "jobs": "Swordman Class, Merchant Class, Acolyte Class"
+   }
+  },
+  {
+   "id": 700118,
+   "name": "★ Crossbow",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/700118.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "หน้าไม้รูปกางเขนที่โดดเด่นด้วย\nการยิงรัวรวดเร็วแ\nละพลังทำลายล้างสูง\nATK +20, MATK +100, MaxHP -350",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP +25, LUK +3"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP +75, LUK +7"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP +100, LUK +20"
+    }
+   ],
+   "footer": {
+    "type": "Bow",
+    "atk": "125",
+    "weight": "90",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Thief Class, Archer Class"
+   }
+  },
+  {
+   "id": 700123,
+   "name": "★ Great Bow",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/700123.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +20,\nปริมาณการใช้ SP เพิ่มขึ้น 50%",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดปริมาณการใช้ SP 3%,\nINT +3, FLEE +3"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดปริมาณการใช้ SP 7%,\nINT +7, FLEE +7"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดปริมาณการใช้ SP 20%,\nINT +20, FLEE +15"
+    }
+   ],
+   "footer": {
+    "type": "Bow",
+    "atk": "125",
+    "weight": "100",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Archer Class"
+   }
+  },
+  {
+   "id": 630065,
+   "name": "★ Guisarme",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/630065.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +20, VIT -10",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nHIT +5"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nHIT +10"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 6%, HIT +20"
+    }
+   ],
+   "footer": {
+    "type": "Two-Handed Spear",
+    "atk": "160",
+    "weight": "100",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Swordman Class"
+   }
+  },
+  {
+   "id": 620053,
+   "name": "★ Hammer",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/620053.gif",
+   "requiredLevel": 16,
+   "slots": 3,
+   "lang": "th",
+   "base": "ค้อนยักษ์ที่ทรงพลัง\nในการฟาดลงอย่างรุนแรง\nไม่สามารถเสียหายได้\nATK +30, DEF -90",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "DEF +10, CRI +3"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "DEF +20, CRI +7"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "DEF +35, CRI +15"
+    }
+   ],
+   "footer": {
+    "type": "Two-Handed Axe",
+    "atk": "215",
+    "weight": "200",
+    "weaponLevel": "2",
+    "requiredLevel": "16",
+    "jobs": "Swordman Class, Merchant Class"
+   }
+  },
+  {
+   "id": 480740,
+   "name": "★ Hood",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "A shawl with more beautiful patterns MaxHP +100, HP natural recovery speed +20%.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +200 and MaxHP +1%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +250 and MaxHP will be +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP will be +450 and MaxHP will be +4%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 560087,
+   "name": "★ Hora",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/560087.gif",
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +40, MDEF -20,\nMaxHP -300",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "เพิ่ม ASPD 5%,\nลดปริมาณการใช้ SP 5%"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "เพิ่ม ASPD 10%,\nลดปริมาณการใช้ SP 10%"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "เพิ่ม ASPD 20%,\nลดปริมาณการใช้ SP 25%"
+    }
+   ],
+   "footer": {
+    "type": "Knuckle",
+    "atk": "120",
+    "weight": "45",
+    "weaponLevel": "2",
+    "requiredLevel": "12",
+    "jobs": "Monk Class"
+   }
+  },
+  {
+   "id": 460168,
+   "name": "★ Improved Wrist Guard",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 50,
+   "slots": 1,
+   "lang": "en",
+   "base": "A ninja series wrist guard. The genius craftsman sacrificed its intended defense to instead grant it resistance to magic. MDEF +5, ATK +10, FLEE -60.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "STR +3."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "additional ATK +15."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ATK +3%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 610092,
+   "name": "★ Jur",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/610092.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +30, HIT -40, FLEE -70",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "CRI +2, ASPD +5%"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "CRI +3, ASPD +10%"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "CRI +5, ASPD +15%"
+    }
+   ],
+   "footer": {
+    "type": "Katar",
+    "atk": "155",
+    "weight": "80",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Assassin Class"
+   }
+  },
+  {
+   "id": 450530,
+   "name": "★ Leather Jacket",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "A leather jacket made of Milos leather instead of ordinary leather MaxHP+250, MaxSP+20, FLEE+5. Every +2 refining, MaxHP +100.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +50 and FLEE +3."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +150 and FLEE will be +5."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP will be +350 and FLEE will be +12."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 450529,
+   "name": "★ Long Coat",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "Warm long coat made of the highest quality fabrics MaxHP+150, MaxSP+50, DEF+40, MDEF+5. Every +2 refining, MaxHP +200, MDEF +2.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +100 and MaxSP will be +20."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +200 and MaxSP will be +25."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP will be +400, MaxSP will be +35, and MaxSP will be +5%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 570092,
+   "name": "★ Lute",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/570092.gif",
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +20, HIT -60, DEF -40",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nMaxHP +75"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nMaxHP +125"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 6%,\nMaxHP +200"
+    }
+   ],
+   "footer": {
+    "type": "Instrument",
+    "atk": "125",
+    "weight": "50",
+    "weaponLevel": "2",
+    "requiredLevel": "14",
+    "jobs": "Bard Class"
+   }
+  },
+  {
+   "id": 480741,
+   "name": "★ Muffler",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "Made of better fabric than the original Muffler, it has a strong sense of warmth. MaxHP +100, SP natural recovery speed +20%.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +200 and MaxSP +1%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +250 and MaxSP will be +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP will be +450 and MaxSP will be +4%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 500124,
+   "name": "★ Ring Pommel Saber",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/500124.gif",
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +25, CRI -30",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "HIT +10, MaxHP +100"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "HIT +15, MaxHP +150"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "HIT +20, MaxHP +200,\nMaxHP +3%"
+    }
+   ],
+   "footer": {
+    "type": "Sword",
+    "atk": "125",
+    "weight": "90",
+    "weaponLevel": "2",
+    "requiredLevel": "14",
+    "jobs": "Swordman Class, Merchant Class, Thief Class"
+   }
+  },
+  {
+   "id": 470419,
+   "name": "★ Sandals",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "Re-processed lightweight shoes, the red color looks more vivid and beautiful. MaxHP +100, SP natural recovery speed +5%.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +200, and SP natural recovery speed will be +5%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +350, and SP natural recovery speed will be +10%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP +8%, healing amount +10%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 530080,
+   "name": "★ Short Spear",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/530080.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +30, CRI -20",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nMATK +20"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nMATK +30"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 6%,\nMATK +50"
+    }
+   ],
+   "footer": {
+    "type": "One-Handed Spear",
+    "atk": "150",
+    "weight": "85",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Crusader Class"
+   }
+  },
+  {
+   "id": 600074,
+   "name": "★ Slayer",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/600074.gif",
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +20, HIT -30, FLEE -60",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "CRI +3, ASPD +3%"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "CRI +5, ASPD +7%"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "CRI +7, ASPD +15%"
+    }
+   ],
+   "footer": {
+    "type": "Two-Handed Sword",
+    "atk": "190",
+    "weight": "130",
+    "weaponLevel": "2",
+    "requiredLevel": "18",
+    "jobs": "Swordman Class"
+   }
+  },
+  {
+   "id": 590110,
+   "name": "★ Smasher",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/590110.gif",
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +20, HIT -60",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "HIT +3, INT +1, DEX +1"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "HIT +7, INT +1, DEX +1, LUK +1"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "HIT +10, INT +1, DEX +2, LUK +2"
+    }
+   ],
+   "footer": {
+    "type": "Mace",
+    "atk": "100",
+    "weight": "100",
+    "weaponLevel": "2",
+    "requiredLevel": "14",
+    "jobs": "Merchant Class"
+   }
+  },
+  {
+   "id": 450528,
+   "name": "★ Steel Chainmail",
+   "stars": 1,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 1,
+   "slots": 1,
+   "lang": "en",
+   "base": "Forge existing steel chain armor to create more sophisticated equipment. MaxHP+300, DEF+40, MDEF+2. Every +2 refining, MaxHP +200, DEF +5.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "MaxHP will be +200 and DEF will be +30."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "MaxHP will be +450 and DEF will be +40."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MaxHP will be +1000, MaxHP will be +7%, and DEF will be +70."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 510183,
+   "name": "★ Stiletto",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/510183.gif",
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "th",
+   "base": "มีดสั้นที่โดดเด่นด้วยใบมีดที่\nถูกสร้างขึ้นอย่างประณีต\nATK +20, MATK +60, FLEE -50",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "FLEE +3, CRI +3"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "FLEE +7, CRI +7"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "FLEE +10, CRI +15"
+    }
+   ],
+   "footer": {
+    "type": "Dagger",
+    "atk": "143",
+    "weight": "70",
+    "weaponLevel": "2",
+    "requiredLevel": "12",
+    "jobs": "Novice Class, Swordman Class, Archer Class, Thief Class, Mage Class, Merchant Class, Ninja Class, Soul Linker Class"
+   }
+  },
+  {
+   "id": 550175,
+   "name": "★ Wand",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/550175.gif",
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "th",
+   "base": "ไม้เท้าที่มีพลังเวทสถิตอยู่\nไม่สามารถเสียหายได้\nMATK +125,\nเพิ่มปริมาณการใช้ SP 20%",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดปริมาณการใช้ SP 1%,\nเพิ่มประสิทธิภาพการฟื้นฟู\nของสกิล Heal 1%"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดปริมาณการใช้ SP 3%,\nเพิ่มประสิทธิภาพการฟื้นฟู\nของสกิล Heal 3%"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดปริมาณการใช้ SP 6%,\nเพิ่มประสิทธิภาพการฟื้นฟู\nของสกิล Heal 6%"
+    }
+   ],
+   "footer": {
+    "type": "One-Handed Staff",
+    "atk": "25",
+    "weight": "40",
+    "weaponLevel": "2",
+    "requiredLevel": "12",
+    "jobs": "Novice Class, Mage Class, Acolyte Class"
+   }
+  },
+  {
+   "id": 580092,
+   "name": "★ Wire Whip",
+   "stars": 1,
+   "category": "Weapon",
+   "icon": "/images/items/580092.gif",
+   "requiredLevel": 16,
+   "slots": 3,
+   "lang": "th",
+   "base": "ATK +20, HIT -40, DEF -60",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 3,
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน 2%,\nMaxHP +75"
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "ลดระยะเวลาร่ายแบบแปรผันลง 2%,\nMaxHP +125"
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ลดระยะเวลาร่ายแบบแปรผันลง 6%,\nMaxHP +200"
+    }
+   ],
+   "footer": {
+    "type": "Whip",
+    "atk": "115",
+    "weight": "100",
+    "weaponLevel": "2",
+    "requiredLevel": "16",
+    "jobs": "Dancer Class"
+   }
+  },
+  {
+   "id": 530081,
+   "name": "★★ Broken Blade Halberd",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "MATK+40, CRI-90",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "MATK+2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "variable chanting -10%, MATK +30."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "variable chanting will be further -15%, and MATK will be further +50. When you learn Holy Cross Judgment Lv.10, MATK+100. Casting Holy Cross Judgment will restore HP2500 every 1 second for 3 seconds. When you learn God's Pressure Lv5, MATK+8%."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "the CRI will be +18, and for each refined +2, the CRI will be further +18."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 700130,
+   "name": "★★ Crossbow",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "ATK+40, CRI-60",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "LUK+10."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "the attack speed increases (the delay after attack is reduced by 15%)."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "the attack speed will be increased (the delay after attack is reduced by 20%), ASPD +2, Learn Lightning Shock Lv5, and when using long-distance normal attacks, there is a certain chance to cast Lightning Shock Lv5 on the enemy."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "the CRI will be +12, and for each refined +2, the CRI will be further +12."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 460169,
+   "name": "★★ Improved Wrist Guard - Sun",
+   "stars": 2,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 50,
+   "slots": 1,
+   "lang": "en",
+   "base": "A ninja series wrist guard. The genius craftsman sacrificed its intended defense to instead grant it resistance to magic. MDEF +5, ATK +10, STR +5, FLEE -120.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK +5 and physical damage to Earth/Fire/Wind/Water property enemies +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "additional physical damage to Earth/Fire/Wind/Water property enemies +5%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "ATK +5% and ranged physical damage +7%, and if Ninja Training, Throwing Knife Mastery, Shuriken, Kunai, and Fuuma Shuriken combined reach Lv 40, SP consumption of throwing skills -50%."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "FLEE +24; every additional +2 refine, FLEE +24 more. (Throwing skills include Shuriken, Kunai, and Throw Coin)"
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 610096,
+   "name": "★★ Jur",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "A weapon mounted on the hand or wrist, allowing for a wide range of movements. ATK +60, HIT -100, ranged physical damage -40%.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK +5, close-range physical damage +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "CRIT +7, attack speed increased (delay after attack reduced by 14%), FLEE +5."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "additional CRIT +14, attack speed increased further (delay after attack reduced by 28%), FLEE +10, and if Jur Mastery, Advanced Jur Mastery, and Venom Splasher combined reach Lv 20, can use [Double Slash] Lv 1 (proc chance depends on your learned Double Slash skill level)."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "HIT +20, ranged physical damage +8%; every additional +2 refine, HIT +20 and ranged physical damage +8% more."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 550209,
+   "name": "★★ Oak Wand",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "en",
+   "base": "A wand imbued with magical power. Indestructible. MATK +170, SP consumption +60%, MaxHP -1000.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "MATK +1%, MaxSP +2%, FLEE +5."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "SP consumption -10%, Variable Casting Time -3%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "additional SP consumption -20%, Variable Casting Time -7% more, and if Soul Drain reaches Lv 10, Fixed Casting Time -15%."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "SP consumption -12% more, MHP +200; every additional +2 refine, SP consumption -12% and MHP +200 more."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 500137,
+   "name": "★★ Ring Pommel Saber",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "en",
+   "base": "ATK+45, DEF-60",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK+5, long-distance physical attack +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "HIT +20, variable chant -8%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "HIT will be +35, and change chant will be -12%. When you learn strong acid fire smoke bottle throwing level 10, you can cast strong acid fire smoke bottle throwing, and kill monsters with a certain chance to drop hydrochloric acid bottles and fire smoke bottles."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "DEF +12, and for each refined +2, DEF will be +12 again."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 560089,
+   "name": "★★ Studded Knuckles",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "en",
+   "base": "ATK+80, MDEF-20, MaxSP-30%",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK+5, close physical damage +5%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "the attack speed increases (delay after attack reduced by 15%)."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "the attack speed increases further (delay after attack reduced by 20%, ASPD+2). When Triple Attack, Chain Combo, and Combo Finish reach Level 20, close-range normal attacks have a chance to cast Ki Charge Lv5."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "MDEF+4 and MaxSP+6%. For every additional +2 refine, MDEF+4 and MaxSP+6%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 600077,
+   "name": "★★ Two Handed Sword",
+   "stars": 2,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "A two-handed sword that works well for subduing enemies. ATK +40, HIT -100, FLEE -40.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK +5, close-range physical damage +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "CRIT +10, attack speed increased (delay after attack reduced by 10%), critical damage +10%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "additional CRIT +20, attack speed increased further (delay after attack reduced by 15%), critical damage +30% more, and if Two-Handed Sword Speed, Dual Blade Parrying, and Two-Handed Sword Mastery combined reach Lv 30, learn Double Slash Lv 5."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "HIT +20, FLEE +8; every additional +2 refine, HIT +20 and FLEE +8 more."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 530082,
+   "name": "★★★ Broken Blade Halberd",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "ATK+60, CRI-90",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK+5, long-distance physical damage +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "HIT +20, MaxHP +250."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "HIT will be +35, MaxHP will be +400, and MaxHP will be +6%. When continuous shield attack level 5 is learned, variable chanting will be -15%."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "the CRI will be +18, and for each refined +2, the CRI will be further +18."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 700131,
+   "name": "★★★ Crossbow",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "MATK+120, MaxHP-500, FLEE-60. For every +2 refining, MATK+5.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "the attack speed increases (the delay after attack is reduced by 15%)."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "the attack speed will be increased (the delay after attack is reduced by 20%), ASPD +2"
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "MaxHP +100, FLEE +12, every refined +2, MaxHP will be +100, FLEE will be +12."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 460170,
+   "name": "★★★ Improved Wrist Guard - Moon",
+   "stars": 3,
+   "category": "Armor",
+   "icon": null,
+   "requiredLevel": 50,
+   "slots": 1,
+   "lang": "en",
+   "base": "A ninja series wrist guard. The genius craftsman sacrificed its intended defense to instead grant it resistance to magic. MDEF +5, MATK +10, INT +5, FLEE -120.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "MATK +5 and magic damage to Earth/Fire/Wind/Water property enemies +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "additional magic damage to Earth/Fire/Wind/Water property enemies +5%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "MATK +5% and all-property magic damage +7%, and if Ninja Training and Cicada Skin Molt combined reach Lv 15, SP consumption of ninjutsu skills -50%."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "FLEE +24; every additional +2 refine, FLEE +24 more. (Ninjutsu skills include Fire Blossom, Fire Formation, Blazing Dragon, Ice Bolt Spear, Water Blunt, Freezing Frost, Wind Blade, Thunder Strike, and North Wind)"
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 610097,
+   "name": "★★★ Jur",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "A weapon mounted on the hand or wrist, allowing for a wide range of movements. ATK +60, HIT -200, ranged physical damage -100%.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK +6, close-range physical damage +3%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "CRIT +8, attack speed increased (delay after attack reduced by 11%), critical damage +5%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "additional CRIT +16, attack speed increased further (delay after attack reduced by 22%), critical damage +10%, and if Jur Mastery, Advanced Jur Mastery, and Venom Splasher combined reach Lv 20, can use [Double Slash] Lv 1 (proc chance depends on your learned Double Slash skill level)."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "HIT +20, ranged physical damage +10%; every additional +2 refine, HIT +20 and ranged physical damage +10% more."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 550210,
+   "name": "★★★ Oak Wand",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "en",
+   "base": "A wand imbued with magical power. Indestructible. MATK +140, SP consumption +120%, Variable Casting Time +50%.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "INT +1, all-property magic damage +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "SP consumption -5%, Variable Casting Time -5%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "additional SP consumption -10%, Variable Casting Time -10% more, and if Storm Gust, Meteor Storm, Lord of Vermilion, Gravitational Field, and Jack Frost combined reach Lv 45, MATK +12%."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "SP consumption -12% more, Variable Casting Time -5% more; every additional +2 refine, SP consumption -12% and Variable Casting Time -5% more."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 500138,
+   "name": "★★★ Ring Pommel Saber",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 14,
+   "slots": 3,
+   "lang": "en",
+   "base": "ATK+25, HIT-90 Every time you refine it by 2, DEF+20, MDEF+2.",
+   "tiers": [
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "FLEE+10, MaxHP+300."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "FLEE+20, MaxHP+450, MaxHP+6%, And when the learned potion is thrown at Lv5, there is a certain chance of recovering HP150 every 1 second for 3 seconds when receiving physical attacks. When refining +11 or above, HIT +18, and for every refining +2, HIT +18."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 560090,
+   "name": "★★★ Studded Knuckles",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 12,
+   "slots": 3,
+   "lang": "en",
+   "base": "ATK+80, MDEF-20, MaxSP-30%",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK+5, long-distance physical damage +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "SP consumption -15%, ATK +2%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "SP consumption -25%, ATK +6%. When you acquire level 5 of the magical power of snapping your fingers, you will have a certain chance to recover SP6 every 1 second for 3 seconds when attacking."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "MDEF +4 and MaxSP +6%. Every time refined to +2, MDEF +4 and MaxSP +6%."
+    }
+   ],
+   "footer": {}
+  },
+  {
+   "id": 600078,
+   "name": "★★★ Two Handed Sword",
+   "stars": 3,
+   "category": "Weapon",
+   "icon": null,
+   "requiredLevel": 18,
+   "slots": 3,
+   "lang": "en",
+   "base": "A two-handed sword that works well for subduing enemies. ATK +60, HIT -150, FLEE -90, MaxHP -10%.",
+   "tiers": [
+    {
+     "kind": "every",
+     "refine": 2,
+     "text": "ATK +5, close-range physical damage +3%."
+    },
+    {
+     "kind": "at",
+     "refine": 7,
+     "text": "CRIT +15, attack speed increased (delay after attack reduced by 25%), critical damage +20%."
+    },
+    {
+     "kind": "at",
+     "refine": 9,
+     "text": "additional CRIT +25, ASPD +2, critical damage +40% more, and if Two-Handed Sword Speed, Dual Blade Parrying, and Two-Handed Sword Mastery combined reach Lv 30, learn Double Slash Lv 7."
+    },
+    {
+     "kind": "at",
+     "refine": 11,
+     "text": "HIT +30, FLEE +18, MaxHP +2%; every additional +2 refine, HIT +30, FLEE +18, and MaxHP +2% more."
+    }
+   ],
+   "footer": {}
+  }
+ ],
+ "tokens": [
+  {
+   "id": 1002315,
+   "name": "★ Bastard Sword Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002315.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": false
+  },
+  {
+   "id": 1002453,
+   "name": "★ Book Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002453.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002312,
+   "name": "★ Chain Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002312.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": false
+  },
+  {
+   "id": 1002314,
+   "name": "★ Crossbow Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002314.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": false
+  },
+  {
+   "id": 1002456,
+   "name": "★ Great Bow Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002456.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002540,
+   "name": "★ Guisarme Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002540.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002316,
+   "name": "★ Hammer Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002316.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": false
+  },
+  {
+   "id": 1002537,
+   "name": "★ Jur Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002537.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002538,
+   "name": "★ Lute Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002538.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002455,
+   "name": "★ Ring Pommel Saber Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002455.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002546,
+   "name": "★ Short Spear Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002546.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002454,
+   "name": "★ Slayer Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002454.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002457,
+   "name": "★ Smasher Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002457.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002313,
+   "name": "★ Stiletto Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002313.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": false
+  },
+  {
+   "id": 1002542,
+   "name": "★ Studded Knuckles Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002542.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  },
+  {
+   "id": 1002317,
+   "name": "★ Wand Forging Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002317.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": false
+  },
+  {
+   "id": 1002539,
+   "name": "★ Wire Whip Crafting Token",
+   "stars": 1,
+   "category": "Other",
+   "icon": "/images/items/1002539.gif",
+   "requiredLevel": 0,
+   "slots": null,
+   "lang": "th",
+   "namesNpc": true
+  }
+ ]
+}

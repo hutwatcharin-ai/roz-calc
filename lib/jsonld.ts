@@ -119,6 +119,22 @@ export function entityJsonLd(opts: {
   };
 }
 
+/** A page's own question-and-answer block, marked up so search engines can
+ *  show it. Only pass questions the page actually answers in its visible text:
+ *  an answer that exists only in the markup is the kind of thing Google drops
+ *  the whole block for. */
+export function faqJsonLd(entries: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: entries.map((e) => ({
+      '@type': 'Question',
+      name: e.question,
+      acceptedAnswer: { '@type': 'Answer', text: e.answer },
+    })),
+  };
+}
+
 /** Serialize for a <script type="application/ld+json"> body. `<` is escaped so
  *  data can never close the script tag early. */
 export function jsonLdString(data: object): string {
