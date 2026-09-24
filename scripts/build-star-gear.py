@@ -200,10 +200,23 @@ for row in sorted(rows, key=lambda r: r['name_en']):
     if hit and npc is None:
         npc = {'name': hit.group(1), 'map': hit.group(2), 'x': int(hit.group(3)), 'y': int(hit.group(4))}
     stars = len(re.match(r'★*', row['name_en']).group(0))
+    # ★★ and ★★★ are NOT two tiers. The mirrored guide lists both under one
+    # heading, "armes de 2ᵉ palier ★★", telling them apart by a suffix on the
+    # name (Soleil / Lune) where our English client uses a third star instead.
+    # Checked 24 Sep 2026 by matching stat lines: the guide's "Arbalète —
+    # Esprit" (ATK+40, CRI-60) is our ★★ Crossbow and its "— Résonance"
+    # (MATK+120) is our ★★★ Crossbow. So the second tier offers a choice of
+    # two, and calling ★★★ an upgrade of ★★ is wrong -- two of the pairs even
+    # have the ★★★ weaker on its headline stat.
+    tier = 1 if stars <= 1 else 2
+    # The wrist guards carry their variant in the name, after " - ".
+    kin = PLAIN.sub('', row['name_en']).split(' - ')[0].strip()
     entry = {
         'id': iid,
         'name': row['name_en'],
         'stars': stars,
+        'tier': tier,
+        'family': kin,
         'category': row['category'],
         'icon': row['icon_url'],
         'requiredLevel': row['required_level'],
@@ -256,8 +269,19 @@ print(f'{len(items)} pieces ({thai_count} in Thai), {len(tokens)} tokens '
       f"({sum(1 for t in tokens if t['namesNpc'])} of them name the NPC)")
 paired = [i for i in items if i['plain']]
 print(f'{len(paired)} of {len(items)} pieces have an ordinary twin to compare against')
-for stars in (1, 2, 3):
-    group = [i for i in items if i['stars'] == stars]
-    print(f"  {'★' * stars}: {len(group)} pieces, tier counts {sorted({len(i['tiers']) for i in group})}")
+for tier in (1, 2):
+    group = [i for i in items if i['tier'] == tier]
+    print(f"  tier {tier}: {len(group)} pieces, bonus-step counts {sorted({len(i['tiers']) for i in group})}")
+
+# The second tier comes in pairs, one per variant. If a family ever has one
+# member or three, the reading above is wrong and the page must not claim it.
+second = {}
+for item in items:
+    if item['tier'] == 2:
+        second.setdefault(item['family'], []).append(item['name'])
+odd = {k: v for k, v in second.items() if len(v) != 2}
+print(f'  second tier: {len(second)} families, each offering a choice of two')
+if odd:
+    raise SystemExit(f'expected exactly two variants per family, got {odd}')
 if no_tiers:
     print(f'NO TIERS PARSED for {len(no_tiers)}: {no_tiers}')

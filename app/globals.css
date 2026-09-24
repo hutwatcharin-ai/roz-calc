@@ -3524,3 +3524,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .star__detail { margin: 4px 0 0; font-size: 13.5px; line-height: 1.8; color: var(--dim); }
 .star__gain { margin: 8px 0 0; font-size: 13px; line-height: 1.7; color: var(--yellow); }
 .star__group { margin: 0; font: 700 18px/1.4 var(--font-sarabun), sans-serif; }
+.star__proof { margin: 12px 0 0; padding: 11px 13px; border: 1px dashed var(--hair); border-radius: var(--radius); font-size: 13px; line-height: 1.85; color: var(--dim); max-width: 78ch; }
+.star__proof strong { color: var(--text); }
+.star__pair { margin-top: 18px; padding-inline-start: 12px; border-inline-start: 2px solid var(--hair); }
+.star__pairname { margin: 0 0 4px; font: 700 16px/1.4 var(--font-sarabun), sans-serif; color: var(--yellow); }

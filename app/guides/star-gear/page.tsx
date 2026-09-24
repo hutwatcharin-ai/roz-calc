@@ -49,6 +49,8 @@ type Piece = {
   id: number;
   name: string;
   stars: number;
+  tier: number;
+  family: string;
   category: string | null;
   icon: string | null;
   requiredLevel: number | null;
@@ -66,18 +68,34 @@ const PIECES = star.items as Piece[];
 const TOKENS = star.tokens as Token[];
 const TH = effectsTh.items as Record<string, Record<string, string>>;
 
-const LEVELS = [1, 2, 3].map((stars) => ({ stars, pieces: PIECES.filter((p) => p.stars === stars) }));
+// Two tiers, not three. ★★ and ★★★ are the second tier's two variants: the
+// mirrored guide lists both under "armes de 2ᵉ palier ★★" and separates them
+// by a suffix, and two of the pairs have the ★★★ weaker on its headline stat,
+// which no upgrade ever is. app/star-gear-tiers.test.ts holds this.
+const FIRST = PIECES.filter((p) => p.tier === 1);
+const SECOND = PIECES.filter((p) => p.tier === 2);
+const FAMILIES = [...new Set(SECOND.map((p) => p.family))].sort().map((family) => ({
+  family,
+  variants: SECOND.filter((p) => p.family === family).sort((a, b) => a.stars - b.stars),
+}));
 const PAIRED = PIECES.filter((p) => p.plain);
 
-/** How a star level's bonuses are laid out, written from the parsed tiers so
- *  the sentence cannot drift from the data. */
+/** How a tier's bonuses are laid out, written from the parsed steps so the
+ *  sentence cannot drift from the data. */
 function tierShape(pieces: Piece[]): string {
   const every = pieces.filter((p) => p.tiers.some((t) => t.kind === 'every'));
   const steps = [...new Set(pieces.flatMap((p) => p.tiers.filter((t) => t.kind === 'at').map((t) => t.refine)))].sort(
     (a, b) => a - b,
   );
   const list = steps.map((s) => `+${s}`).join(' ');
-  return every.length === pieces.length ? `ได้ทุก +2 และมีก้อนพิเศษที่ ${list}` : `ได้เป็นก้อนที่ ${list}`;
+  return every.length ? `ได้ทุก +2 และมีก้อนพิเศษที่ ${list}` : `ได้เป็นก้อนที่ ${list}`;
+}
+
+/** The headline ATK or MATK a piece's own text opens with, for telling two
+ *  variants apart at a glance. */
+function headline(piece: Piece): string | null {
+  const hit = piece.base.match(/\b(M?ATK)\s*\+\s*(\d+)/);
+  return hit ? `${hit[1]} +${hit[2]}` : null;
 }
 
 /** Thai for a piece: the client's own where it has it, our translation where
@@ -115,11 +133,15 @@ const NPCS = [
   },
 ];
 
+// The guide's own table. Its rows name the tier being produced, and the ★★
+// token in the second row is the one made by trading in an already-activated
+// weapon -- which is why the second tier needs so few of them and the first
+// needs a hundred.
 const ACTIVATION = [
-  { what: 'อาวุธ ★★', refine: '−3', materials: 'โทเคน ★★ ของชิ้นนั้น 3 อัน + Goblin Coin Shard 30' },
-  { what: 'อาวุธ ★', refine: '−7', materials: 'โทเคน ★ ของชิ้นนั้น 100 อัน + Goblin Coin Shard 8' },
-  { what: 'ชุดธรรมดา แบบ "นิ่ง"', refine: '−3', materials: 'โทเคน ★ ของชิ้นนั้น 100 อัน + Goblin Coin Shard 30' },
-  { what: 'ชุดธรรมดา แบบ "แรง"', refine: '−7', materials: 'โทเคน ★ ของชิ้นนั้น 10 อัน + Goblin Coin Shard 3' },
+  { what: 'อาวุธ ขั้นที่ 1 (★)', refine: '−7', materials: 'โทเคน ★ ของชิ้นนั้น 100 อัน + Goblin Coin Shard 8' },
+  { what: 'อาวุธ ขั้นที่ 2 (★★ หรือ ★★★)', refine: '−3', materials: 'โทเคน ★★ ของชิ้นนั้น 3 อัน + Goblin Coin Shard 30' },
+  { what: 'ชุด แบบ "นิ่ง"', refine: '−3', materials: 'โทเคน ★ ของชิ้นนั้น 100 อัน + Goblin Coin Shard 30' },
+  { what: 'ชุด แบบ "แรง"', refine: '−7', materials: 'โทเคน ★ ของชิ้นนั้น 10 อัน + Goblin Coin Shard 3' },
 ];
 
 const FAQ = [
@@ -136,8 +158,8 @@ const FAQ = [
     answer: 'เสียขั้นตีบวก 3 หรือ 7 ขั้นแล้วแต่แบบที่เลือก การ์ด เอนแชนต์ และความสามารถเสริมไม่หาย ของ +10 ที่เสีย 7 ขั้นจะเหลือ +3 จึงควรตีบวกให้สูงไว้ก่อนแล้วค่อยปลุก',
   },
   {
-    question: '★ กับ ★★ ต่างกันยังไง',
-    answer: '★ ได้โบนัสเป็นก้อนที่ +3 +7 และ +9 ส่วน ★★ กับ ★★★ ได้โบนัสทุก ๆ 2 ขั้นที่ตีบวก และยังมีก้อนพิเศษที่ +7 +9 และ +11 จึงคุ้มกับการตีบวกสูง',
+    question: '★ กับ ★★ และ ★★★ ต่างกันยังไง',
+    answer: '★ คือขั้นที่ 1 ได้โบนัสเป็นก้อนที่ +3 +7 และ +9 ส่วน ★★ กับ ★★★ เป็นขั้นที่ 2 ด้วยกันทั้งคู่ ไม่ใช่คนละขั้น เป็นสองแบบให้เลือกของชิ้นเดียวกัน ขั้นที่ 2 ได้โบนัสทุก ๆ 2 ขั้นที่ตีบวก และมีก้อนพิเศษที่ +7 +9 และ +11',
   },
 ];
 
@@ -215,7 +237,8 @@ export default async function StarGearPage() {
       <nav className="jumpbar" aria-label="หัวข้อในหน้านี้">
         <a href="#sec-prep">เตรียมอะไรไว้</a>
         <a href="#sec-how">ขั้นตอนตอนเปิด</a>
-        <a href="#sec-levels">★ มีกี่ระดับ</a>
+        <a href="#sec-levels">มีกี่ขั้น</a>
+        <a href="#sec-choice">ขั้น 2 เลือก 2 แบบ</a>
         <a href="#sec-list">ของทุกชิ้น</a>
         <a href="#sec-token">โทเคน</a>
         <a href="#sec-faq">คำถามที่เจอบ่อย</a>
@@ -294,8 +317,12 @@ export default async function StarGearPage() {
             </tbody>
           </table>
         </div>
-        <p className="muted" style={{ marginTop: 12, fontSize: 13, maxWidth: '72ch' }}>
+        <p className="muted" style={{ marginTop: 12, fontSize: 13, maxWidth: '74ch' }}>
           <strong>การ์ด เอนแชนต์ และความสามารถเสริมไม่หาย</strong> ที่หายคือขั้นตีบวกเท่านั้น
+        </p>
+        <p className="muted" style={{ marginTop: 10, fontSize: 13, maxWidth: '74ch' }}>
+          <strong>สังเกตว่ามันเป็นลูกโซ่</strong> โทเคน ★ ได้จากของที่มอนดรอป จึงต้องใช้ถึง 100 อัน ส่วนโทเคน ★★
+          ได้จากการเอา<strong>อาวุธที่ปลุกขั้นที่ 1 แล้ว</strong>ไปแลก จึงใช้แค่ 3 อัน แต่ 3 อันนั้นแปลว่าต้องมีอาวุธขั้นที่ 1 สามเล่มก่อน
         </p>
         <p className="guildp__src">
           ที่มา: ชื่อ NPC พิกัด กติกาแลกโทเคน และตารางนี้มาจากไกด์ roz-global.info (อ่าน 8 ก.ย. 2026) ซึ่งอธิบายเซิร์ฟไต้หวัน
@@ -306,51 +333,116 @@ export default async function StarGearPage() {
       <AdSlot slot="inline" />
 
       <section className="card" id="sec-levels">
-        <h2 className="section-title" style={{ marginTop: 0 }}>★ มีกี่ระดับ</h2>
-        <p className="muted" style={{ marginTop: 2, maxWidth: '72ch' }}>
-          จำนวนดาวหน้าชื่อบอกว่าเป็นของระดับไหน ยิ่งดาวเยอะ โบนัสยิ่งไล่ตามขั้นตีบวกถี่ขึ้น
+        <h2 className="section-title" style={{ marginTop: 0 }}>มีสองขั้น ไม่ใช่สามขั้น</h2>
+        <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+          จำนวนดาวหน้าชื่อทำให้เข้าใจผิดง่ายที่สุดในระบบนี้ ★★ กับ ★★★ <strong>ไม่ใช่คนละขั้น</strong> แต่เป็น
+          ขั้นเดียวกันที่ให้เลือกสองแบบ ไคลเอนต์อังกฤษตั้งชื่อแยกด้วยจำนวนดาว ส่วนไกด์ต้นทางเรียกทั้งคู่ว่า ★★ แล้วแยกด้วยคำต่อท้ายชื่อแทน
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">
             <thead>
               <tr>
-                <th>ระดับ</th>
+                <th>ขั้น</th>
                 <th className="num">อาวุธ</th>
                 <th className="num">ชุด</th>
                 <th>โบนัสมายังไง</th>
               </tr>
             </thead>
             <tbody>
-              {LEVELS.map((level) => (
-                <tr key={level.stars}>
-                  <td data-label="ระดับ"><strong className="star__stars">{'★'.repeat(level.stars)}</strong></td>
-                  <td data-label="อาวุธ" className="num">{level.pieces.filter((p) => p.category === 'Weapon').length}</td>
-                  <td data-label="ชุด" className="num">{level.pieces.filter((p) => p.category === 'Armor').length}</td>
-                  <td data-label="โบนัส">{tierShape(level.pieces)}</td>
+              <tr>
+                <td data-label="ขั้น"><strong className="star__stars">★</strong> ขั้นที่ 1</td>
+                <td data-label="อาวุธ" className="num">{FIRST.filter((p) => p.category === 'Weapon').length}</td>
+                <td data-label="ชุด" className="num">{FIRST.filter((p) => p.category === 'Armor').length}</td>
+                <td data-label="โบนัส">{tierShape(FIRST)}</td>
+              </tr>
+              <tr>
+                <td data-label="ขั้น"><strong className="star__stars">★★ / ★★★</strong> ขั้นที่ 2</td>
+                <td data-label="อาวุธ" className="num">{SECOND.filter((p) => p.category === 'Weapon').length}</td>
+                <td data-label="ชุด" className="num">{SECOND.filter((p) => p.category === 'Armor').length}</td>
+                <td data-label="โบนัส">{tierShape(SECOND)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="star__proof">
+          <strong>ที่รู้ว่าไม่ใช่คนละขั้นเพราะสามอย่าง</strong> ทุกชื่อในขั้นที่ 2 มีครบคู่เสมอ {FAMILIES.length} ชื่อ ชื่อละสองแบบ
+          ไม่มีชื่อไหนมีแบบเดียว · โบนัสมาที่ขั้นตีบวกเดียวกันทั้งคู่ ไม่มีฝั่งไหนถี่กว่า ·
+          และบางคู่ฝั่ง ★★★ <strong>อ่อนกว่า</strong> เช่น Oak Wand MATK 170 เหลือ 140 กับ Ring Pommel Saber ATK 45 เหลือ 25
+          ของที่เป็นขั้นสูงกว่าไม่มีทางอ่อนกว่า
+        </p>
+      </section>
+
+      <section className="card" id="sec-choice">
+        <h2 className="section-title" style={{ marginTop: 0 }}>ขั้นที่ 2 เลือกได้สองแบบ</h2>
+        <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+          พอปลุกเป็นขั้นที่ 2 ต้องเลือกว่าจะเอาแบบไหน เลือกแล้วคือคนละชิ้นกันเลย บางคู่ต่างกันถึงขั้นเปลี่ยนสายจากกายภาพเป็นเวท
+        </p>
+        <div className="recipe__scroll">
+          <table className="data-table recipe">
+            <thead>
+              <tr>
+                <th>ของชิ้นเดียวกัน</th>
+                <th>แบบ ★★</th>
+                <th>แบบ ★★★</th>
+              </tr>
+            </thead>
+            <tbody>
+              {FAMILIES.map(({ family, variants }) => (
+                <tr key={family}>
+                  <td data-label="ของชิ้นเดียวกัน">{family}</td>
+                  {variants.map((piece) => (
+                    <td key={piece.id} data-label={`${'★'.repeat(piece.stars)}`}>
+                      <Link className="recipe__item" href={itemHref(piece.id, piece.category)}>
+                        <ItemIcon iconUrl={piece.icon} category={piece.category} size={20} />
+                        <span>{headline(piece) ?? piece.name}</span>
+                      </Link>
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <p className="muted" style={{ marginTop: 12, fontSize: 13, maxWidth: '74ch' }}>
+          ช่องในตารางคือค่าโจมตีตั้งต้นของแต่ละแบบ กดเข้าไปดูผลเต็มได้ · ดูรายละเอียดทุกขั้นตีบวกของทั้งคู่ได้ที่{' '}
+          <a href="#sec-list">หัวข้อของทุกชิ้น</a>
+        </p>
       </section>
 
       <section id="sec-list" style={{ marginTop: 26 }}>
         <h2 className="section-title">ของทุกชิ้นว่าติดดาวแล้วได้อะไร</h2>
-        <p className="muted" style={{ marginTop: 2, maxWidth: '72ch' }}>
-          ครบทุกชิ้นที่มีในไคลเอนต์ แยกตามระดับดาว แต่ละใบบอกผลตอนใส่เฉย ๆ แล้วไล่ทีละขั้นตีบวก ชิ้นที่หาตัวธรรมดามาเทียบได้
+        <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+          ครบทุกชิ้นที่มีในไคลเอนต์ แต่ละใบบอกผลตอนใส่เฉย ๆ แล้วไล่ทีละขั้นตีบวก ชิ้นที่หาตัวธรรมดามาเทียบได้
           ({PAIRED.length} จาก {PIECES.length}) จะมีบรรทัดบอกว่าติดดาวแล้ว ATK กับ Slot ขยับเท่าไร
         </p>
-        {LEVELS.map((level) => (
-          <section key={level.stars} id={`sec-star-${level.stars}`} style={{ marginTop: 18 }}>
-            <h3 className="star__group">
-              <span className="star__stars">{'★'.repeat(level.stars)}</span>{' '}
-              <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}>{level.pieces.length} ชิ้น</span>
-            </h3>
-            {level.pieces.map((piece) => (
-              <PieceCard key={piece.id} piece={piece} />
-            ))}
-          </section>
-        ))}
+
+        <section id="sec-tier-1" style={{ marginTop: 18 }}>
+          <h3 className="star__group">
+            <span className="star__stars">★</span> ขั้นที่ 1{' '}
+            <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}>{FIRST.length} ชิ้น</span>
+          </h3>
+          {FIRST.map((piece) => (
+            <PieceCard key={piece.id} piece={piece} />
+          ))}
+        </section>
+
+        <section id="sec-tier-2" style={{ marginTop: 22 }}>
+          <h3 className="star__group">
+            <span className="star__stars">★★ / ★★★</span> ขั้นที่ 2{' '}
+            <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}>{FAMILIES.length} ชื่อ ชื่อละสองแบบ</span>
+          </h3>
+          <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+            วางคู่กันไว้ให้เทียบ เพราะตอนปลุกต้องเลือกแบบใดแบบหนึ่ง
+          </p>
+          {FAMILIES.map(({ family, variants }) => (
+            <div key={family} className="star__pair">
+              <h4 className="star__pairname">{family}</h4>
+              {variants.map((piece) => (
+                <PieceCard key={piece.id} piece={piece} />
+              ))}
+            </div>
+          ))}
+        </section>
       </section>
 
       <section id="sec-token" style={{ marginTop: 26 }}>
