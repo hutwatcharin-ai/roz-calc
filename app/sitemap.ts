@@ -31,6 +31,15 @@ export const dynamic = 'force-dynamic';
 // tables get from lib/nav-links.test.ts does not cover these, so keep it short.
 export const NEWS_PATHS: string[] = ['/news/roadmap', '/news/patch-2026-09-17', '/news/patch-2026-09-03', '/news/battle-pass-summer-2026'];
 
+// data/npcs.json has no per-row timestamp -- it's a static import, not a
+// table with a write path that stamps updated_at. Its own last real change
+// is git's commit date for the file (`git log -1 --format=%ad -- data/npcs.json`,
+// checked 24 Sep 2026: 10 Sep 2026). That is a true fact, not a guess, so it
+// is usable as lastmod for every NPC page; it is a hand-set constant rather
+// than read from git at request time because a Coolify container is not
+// guaranteed to ship .git. Bump this the day npcs.json next changes.
+const NPCS_DATA_LAST_MODIFIED = '2026-09-10T23:48:03+07:00';
+
 // Static routes that live outside the nav tables (footer-only pages, news).
 // Exported so sitemap.test.ts can assert STATIC_PATHS is exactly nav + these
 // and nothing else has crept in.
@@ -161,6 +170,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Channel copies redirect to their canonical map, so listing them here
     // would fill the sitemap with URLs that 308 -- the same soft-redirect
     // report the equipment split had to avoid.
+    //
+    // No lastmod on purpose, not an oversight (flagged as a bug by the 24 Sep
+    // SEO audit before this comment existed): map_stats and monster_spawns,
+    // the two tables a map page's content is built from, have no updated_at
+    // column at all -- checked directly against the schema. Unlike npcs.json,
+    // there is also no static file whose git history could stand in for one.
+    // Inventing a date here is exactly the thing allIds()'s comment above
+    // refuses to do for the same reason. Add lastmod only once one of those
+    // tables actually gets a maintained timestamp column.
     ...mapCodes
       .filter((code) => !mapCanonical.byCode[code])
       .map((code) => ({
@@ -175,6 +193,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // be a 404.
     ...ALL_NPCS.filter((npc) => npc.hasName).map((npc) => ({
       url: `${SITE_URL}/database/npcs/${encodeURIComponent(npc.slug)}`,
+      lastModified: NPCS_DATA_LAST_MODIFIED,
     })),
   ];
 }

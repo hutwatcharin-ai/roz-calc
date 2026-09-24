@@ -9,6 +9,8 @@ import { Fragment } from 'react';
 import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
 import RefineCalculator from '@/components/RefineCalculator';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 import {
   ARMOUR_DEF,
   GEAR_LABELS,
@@ -40,6 +42,10 @@ function band(chance: number): string {
 export default function RefinePage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'ตีบวก', path: '/tools/refine' },
+      ])} />
       <PageHeader
         title="อัตราตีบวก Ragnarok Zero"
         lead={

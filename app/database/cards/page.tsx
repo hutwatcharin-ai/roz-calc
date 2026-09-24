@@ -22,6 +22,8 @@ import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import { cardSlot, SLOT_ORDER, SLOT_TH, type CardSlot } from '@/lib/card-slot';
 import { ROLE_ORDER, ROLE_TH, cardRoles, type CardRole } from '@/lib/card-roles';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, itemListJsonLd } from '@/lib/jsonld';
 
 export const revalidate = 86400;
 
@@ -216,6 +218,22 @@ export default async function CardsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'ฐานข้อมูล', path: '/database/monsters' },
+          { name: 'การ์ด', path: '/database/cards' },
+        ])}
+      />
+      {!error && rows.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd({
+            path: '/database/cards',
+            rows: rows.map((c) => ({ id: c.id, name: c.name })),
+            detailPath: (id) => `/database/cards/${id}`,
+          })}
+        />
+      )}
       <PageHeader title="ฐานข้อมูลการ์ด Ragnarok Zero" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no cards", which is

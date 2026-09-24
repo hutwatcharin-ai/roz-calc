@@ -13,6 +13,8 @@ import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isCVariant } from '@/lib/c-variant';
 import { ELEMENTS } from '@/lib/element-table';
 import { SIZE_LABELS, SIZES, SIZE_TABLE } from '@/lib/size-table';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
   title: 'ตีด้วยอะไรดี — คำนวณดาเมจธาตุ',
@@ -51,6 +53,10 @@ export default async function DamagePage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'ตีมอนด้วยอะไรดี', path: '/tools/damage' },
+      ])} />
       <h1 className="pagehead__title">ตีตัวนี้ด้วยอะไรดี — ธาตุและอาวุธที่คูณแรงสุด</h1>
       <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
         ธาตุกับขนาดเป็นตัวคูณคนละตัวที่<strong>คูณกัน</strong> คนส่วนใหญ่ดูทีละตาราง —

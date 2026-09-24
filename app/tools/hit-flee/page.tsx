@@ -10,6 +10,8 @@ import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import { playerFlee, playerHit } from '@/lib/hit-flee';
 import { countText, monsterCounts } from '@/lib/counts';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
   title: 'คำนวณ HIT/FLEE Ragnarok Zero',
@@ -63,6 +65,10 @@ export default async function HitFleePage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'คำนวณ Hit/Flee', path: '/tools/hit-flee' },
+      ])} />
       <PageHeader
         title="คำนวณ HIT / FLEE — ตีโดนไหม หลบพ้นไหม"
         lead="กรอก HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วดูเป็นเปอร์เซ็นต์: คุณตีมอนโดนแค่ไหน และมอนตีคุณโดนแค่ไหน"

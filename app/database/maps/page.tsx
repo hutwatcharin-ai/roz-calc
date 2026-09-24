@@ -8,6 +8,8 @@ import { getMapCanonical } from '@/lib/map-canonical';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, itemListJsonLd } from '@/lib/jsonld';
 
 export const revalidate = 86400;
 
@@ -97,6 +99,22 @@ export default async function MapsPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'ฐานข้อมูล', path: '/database/monsters' },
+          { name: 'แมพ', path: '/database/maps' },
+        ])}
+      />
+      {!error && maps.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd({
+            path: '/database/maps',
+            rows: maps.map((m) => ({ id: m.map_code, name: m.map_display_name ?? m.map_code })),
+            detailPath: (id) => `/database/maps/${encodeURIComponent(String(id))}`,
+          })}
+        />
+      )}
       <PageHeader title="ฐานข้อมูลแมพ Ragnarok Zero" />
       {/* A query error and a genuine zero-result search must read differently --
           otherwise an outage looks identical to "there are no maps", which is

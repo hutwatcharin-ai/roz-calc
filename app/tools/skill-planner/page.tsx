@@ -6,6 +6,8 @@ import SkillPlanner from '@/components/SkillPlanner';
 import { supabaseBrowser } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import type { SkillLevelMap } from '@/lib/skill-details';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const revalidate = 86400;
 
@@ -91,6 +93,10 @@ export default async function SkillPlannerPage() {
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'วางแผนสกิล', path: '/tools/skill-planner' },
+      ])} />
       <PageHeader title="วางแผนสกิล Ragnarok Zero" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
         กด + ใส่แต้ม สกิลที่ยังไม่ปลดจะไล่ใส่ให้เอง · ลิงก์บนแถบที่อยู่คือบิลด์

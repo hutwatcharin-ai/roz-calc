@@ -9,6 +9,8 @@ import PageHeader from '@/components/PageHeader';
 import AdSlot from '@/components/AdSlot';
 import FarmTool, { type FarmMode } from '@/components/farm/FarmTool';
 import { FARM_DATA_URL } from '@/lib/farm-data-url';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
   title: 'ฟาร์มที่ไหนดี — แมพเก็บเลเวล หาเงิน จุด AFK และแผนของคุณ',
@@ -38,6 +40,10 @@ export default function LevelingSpotsPage({
 }) {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'ฟาร์มที่ไหนดี', path: '/tools/leveling-spots' },
+      ])} />
       {/* Starts the payload while the HTML is still being read, instead of
           after hydration: HTML, then JS, then fetch was a queue three steps
           long before anything could be ranked. The hook picks this promise up

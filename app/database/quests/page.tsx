@@ -10,6 +10,8 @@ import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { hubLabel, hubOrder } from '@/lib/quest-towns';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, itemListJsonLd } from '@/lib/jsonld';
 
 export const metadata = {
   title: 'เควส Ragnarok Zero',
@@ -81,6 +83,22 @@ export default async function QuestIndexPage({
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'ฐานข้อมูล', path: '/database/monsters' },
+          { name: 'เควส', path: '/database/quests' },
+        ])}
+      />
+      {hubList.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd({
+            path: '/database/quests',
+            rows: hubList.map(([key, hub]) => ({ id: key, name: hub.label })),
+            detailPath: (id) => `/database/quests/${id}`,
+          })}
+        />
+      )}
       <PageHeader
         title="เควส Ragnarok Zero Global แยกตามเมือง"
         lead="เริ่มจากสายเนื้อเรื่องหลัก หรือเปิดเมืองที่กำลังเล่นอยู่ — เควสทุกตัวของเมืองนั้นอยู่หน้าเดียวกัน เรียงตามเส้นทางที่ผู้เล่นใหม่เจอจริง"

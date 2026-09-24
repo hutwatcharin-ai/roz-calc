@@ -20,9 +20,18 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import AdSlot from '@/components/AdSlot';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, articleJsonLd } from '@/lib/jsonld';
 import roadmap from '@/data/roadmap.json';
 
 export const revalidate = 86400;
+
+const PATH = '/news/roadmap';
+// This page's own last real edit, not the landed-patches' dates or the
+// roadmap source's "read" date -- those are cited inline in the body, this
+// is dateModified for the page as a whole. Bump the day this file's content
+// next changes (new LANDED entry, new DONE_MONTHS, etc).
+const PUBLISHED = '2026-09-24';
 
 export const metadata: Metadata = {
   title: 'ไทม์ไลน์อัปเดต Ragnarok Zero Global — มาแล้วอะไร กำลังจะมาอะไร',
@@ -61,6 +70,17 @@ const DONE_MONTHS = new Set(['2026-08', '2026-09']);
 export default function RoadmapPage() {
   return (
     <main className="shell guildp">
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'ไทม์ไลน์อัปเดต', path: PATH },
+      ])} />
+      <JsonLd data={articleJsonLd({
+        path: PATH,
+        headline: String(metadata.title),
+        description: String(metadata.description),
+        datePublished: PUBLISHED,
+        dateModified: PUBLISHED,
+      })} />
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
         <Link href="/">หน้าแรก</Link><span className="crumbs__sep" aria-hidden="true">›</span>
         <span className="crumbs__here">ไทม์ไลน์อัปเดต</span>

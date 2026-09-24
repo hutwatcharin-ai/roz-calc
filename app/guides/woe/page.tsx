@@ -21,6 +21,8 @@ import woe from '@/data/woe-items.json';
 import castleFile from '@/data/woe-castles.json';
 import { itemHref } from '@/lib/item-href';
 import { supabaseBrowser } from '@/lib/supabase';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const revalidate = 86400;
 
@@ -99,6 +101,13 @@ export default async function WoeGuidePage() {
 
   return (
     <main className="shell guildp woe">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'ไกด์', path: '/guides' },
+          { name: 'สงครามกิลด์ (WoE)', path: '/guides/woe' },
+        ])}
+      />
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
         <Link href="/">หน้าแรก</Link><span className="crumbs__sep" aria-hidden="true">›</span>
         <Link href="/guides">ไกด์</Link><span className="crumbs__sep" aria-hidden="true">›</span>
