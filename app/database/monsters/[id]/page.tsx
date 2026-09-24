@@ -94,6 +94,28 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // maybeSingle (not single): a missing id must come back as data:null with no
   // error, so a genuine 404 stays distinguishable from a real query failure.
   const { data: monster, error } = await getMonster(id);
+
+  // Checked here, immediately, not after the queries below: the sameName
+  // query further down reads monster.name_en, and an id that simply doesn't
+  // exist (/database/monsters/1003, or any deleted/renumbered id) used to
+  // reach that line with monster === null and crash with a 500 instead of a
+  // 404 -- caught in the 24 Sep SEO audit, curl-verified against production.
+  // A failed query must not read as "this monster does not exist".
+  if (error) {
+    console.error('monster detail query failed', error);
+    // Thrown, not rendered: these pages are ISR (revalidate 86400), and a
+    // rendered "error, try again" is a successful render that gets cached for
+    // a day. Seen 7 Sep 2026 on a transient Supabase timeout. A throw goes to
+    // app/error.tsx and is never cached.
+    throw new Error(`monster detail query failed: ${error.message}`);
+  }
+  // A clean query that found no row is a genuine 404 -- unlike the error
+  // branch above, which must keep rendering its neutral message and never
+  // become a 404 for a query we simply failed to run.
+  if (!monster) {
+    notFound();
+  }
+
   // Drops are the reason most players open this page, and a failed query
   // here must not read as "this monster drops nothing" -- the same failure
   // class the spawns/skills/farming queries below were already fixed for.
@@ -145,22 +167,6 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     .maybeSingle();
   if (farmingError) console.error('monster farming stats query failed', farmingError);
 
-  // A failed query must not read as "this monster does not exist".
-  if (error) {
-    console.error('monster detail query failed', error);
-    // Thrown, not rendered: these pages are ISR (revalidate 86400), and a
-    // rendered "error, try again" is a successful render that gets cached for
-    // a day. Seen 7 Sep 2026 on a transient Supabase timeout. A throw goes to
-    // app/error.tsx and is never cached.
-    throw new Error(`monster detail query failed: ${error.message}`);
-  }
-
-  // A clean query that found no row is a genuine 404 -- unlike the error
-  // branch above, which must keep rendering its neutral message and never
-  // become a 404 for a query we simply failed to run.
-  if (!monster) {
-    notFound();
-  }
   const zeny = farming?.avg_zeny_per_kill;
 
   // A dash rather than a number wherever the value is unknown; hp and the two
