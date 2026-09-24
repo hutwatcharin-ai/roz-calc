@@ -97,4 +97,9 @@ export const GUIDES = [
     title: 'สงครามกิลด์ (WoE)',
     blurb: 'ยาที่ใช้ไม่ได้ในเขตสงคราม · ยาเฉพาะ WoE · สกรอล Force/Resist · ชุดสมาชิกกิลด์ที่ค่าโผล่เฉพาะในเขต WoE',
   },
+  {
+    href: '/guides/homunculus',
+    title: 'โฮมุนคูลัส',
+    blurb: 'สายสกิลที่ต้องเรียน · วิธีทำ Embryo และราคาวัตถุดิบ · สกิลของ Lif Amistr Filir Vanilmirth ครบทุกเลเวล',
+  },
 ] as const;
