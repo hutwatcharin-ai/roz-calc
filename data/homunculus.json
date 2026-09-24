@@ -1,0 +1,551 @@
+{
+ "_meta": {
+  "source": "ไคลเอนต์ Ragnarok Zero Global (data/luafiles514 + System)",
+  "read": "2026-09-24",
+  "note": "ข้อความทุกบรรทัดเป็นของไคลเอนต์เอง ตัดเฉพาะรหัสสี ^RRGGBB ออก"
+ },
+ "alchemist": [
+  {
+   "code": "AM_BIOETHICS",
+   "id": 238,
+   "name": "Bioethics",
+   "levels": [],
+   "requires": "สำเร็จเควสต์",
+   "kind": "Passive",
+   "detail": "สกิลนี้ไม่มีผลใด ๆ เป็นเพียงจุดเริ่มต้นของสายสกิลสำหรับการกำเนิด Homunculus เท่านั้น แต่สำหรับผู้ที่เกี่ยวข้องกับการดูแลชีวิตอันล้ำค่าแล้ว จริยธรรมของชีวิตเป็นสิ่งสำคัญมาก"
+  },
+  {
+   "code": "AM_REST",
+   "id": 244,
+   "name": "Rest",
+   "levels": [],
+   "maxLevel": 1,
+   "requires": "Bioethics Lv.1",
+   "kind": "Active",
+   "role": "Support",
+   "target": "ร่ายทันที",
+   "detail": "ทำให้ Homunculus ของผู้ร่าย เข้าสู่สถานะพักผ่อน สามารถใช้สกิลนี้ได้เมื่อ Homunculus ที่กำลังใช้งานอยู่ มี HP อย่างน้อย 80% ของ Max HP Homunculus ที่อยู่ในสถานะพักผ่อน สามารถเรียกกลับมาได้อีกครั้งด้วยสกิล Call Homunculus"
+  },
+  {
+   "code": "AM_CALLHOMUN",
+   "id": 243,
+   "name": "Call Homunculus",
+   "levels": [],
+   "maxLevel": 1,
+   "requires": "Rest Lv.1",
+   "kind": "Active",
+   "role": "Support",
+   "target": "ร่ายทันที",
+   "detail": "เรียก Homunculus ของผู้ร่ายออกมา หรือสร้าง Homunculus ใหม่ การเรียก Homunculus จะสามารถทำได้ก็ต่อเมื่อ ผู้ร่ายเคยสร้าง Homunculus มาก่อน และ Homunculus อยู่ในสถานะพักผ่อนผ่านสกิล Rest หากต้องการสร้าง Homunculus ใหม่ จะต้องใช้ไอเทม Embryo"
+  },
+  {
+   "code": "AM_HEALHOMUN",
+   "id": 246,
+   "name": "Heal Homunculus",
+   "levels": [],
+   "kind": "Support",
+   "target": "Homunculus",
+   "detail": "ฟื้นฟู HP ให้กับสิ่งมีชีวิตประเภท Homunculus ปริมาณการฟื้นฟูจะเท่ากับสกิล Heal ของ Acolyte"
+  },
+  {
+   "code": "AM_RESURRECTHOMUN",
+   "id": 247,
+   "name": "Resurrection Homunculus",
+   "levels": [
+    {
+     "level": 1,
+     "text": "คืนชีพด้วย HP 20%"
+    },
+    {
+     "level": 2,
+     "text": "คืนชีพด้วย HP 40%"
+    },
+    {
+     "level": 3,
+     "text": "คืนชีพด้วย HP 60%"
+    },
+    {
+     "level": 4,
+     "text": "คืนชีพด้วย HP 80%"
+    },
+    {
+     "level": 5,
+     "text": "คืนชีพด้วย HP 100%"
+    }
+   ],
+   "maxLevel": 5,
+   "requires": "Call Homunculus Lv.1",
+   "kind": "Active",
+   "role": "Recovery",
+   "target": "ร่ายทันที",
+   "detail": "คืนชีพ Homunculus ที่หายไป เนื่องจากอยู่ในสถานะต่อสู้ไม่ได้"
+  }
+ ],
+ "homunculus": [
+  {
+   "key": "lif",
+   "name": "Lif",
+   "sprite": "/images/homun/lif.webp",
+   "evolvedSprite": "/images/homun/lif_h.webp",
+   "skills": [
+    {
+     "code": "HLIF_HEAL",
+     "id": 8001,
+     "name": "Healing Hands",
+     "levels": [],
+     "maxLevel": 5,
+     "detail": "ฟื้นฟู HP ให้กับ Player เป้าหมาย มีประสิทธิภาพเช่นเดียวกับสกิล Heal ของ Acolyte เมื่อใช้สกิลจะใช้ Red Slim Potion 1 ขวด ฟื้นฟู HP ให้กับ Player ที่เลือก โดยปริมาณการฟื้นฟูจะเพิ่มขึ้นตามเลเวลและ INT ของผู้ร่าย นอกเหนือจากค่าฟื้นฟูพื้นฐานตามเลเวลสกิล"
+    },
+    {
+     "code": "HLIF_AVOID",
+     "id": 8002,
+     "name": "Urgent Escape",
+     "levels": [
+      {
+       "level": 1,
+       "text": "ความเร็วในการเคลื่อนที่ +10% / ระยะเวลา 40 วินาที"
+      },
+      {
+       "level": 2,
+       "text": "ความเร็วในการเคลื่อนที่ +20% / ระยะเวลา 35 วินาที"
+      },
+      {
+       "level": 3,
+       "text": "ความเร็วในการเคลื่อนที่ +30% / ระยะเวลา 30 วินาที"
+      },
+      {
+       "level": 4,
+       "text": "ความเร็วในการเคลื่อนที่ +40% / ระยะเวลา 25 วินาที"
+      },
+      {
+       "level": 5,
+       "text": "ความเร็วในการเคลื่อนที่ +50% / ระยะเวลา 20 วินาที"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "เพิ่มความเร็วเคลื่อนที่ของ Player และ Homunculus ชั่วคราว เพื่อช่วยหลบหลีกจากสถานการณ์คับขัน"
+    },
+    {
+     "code": "HLIF_BRAIN",
+     "id": 8003,
+     "name": "Brain Surgery",
+     "levels": [
+      {
+       "level": 1,
+       "text": "Max SP +1% / อัตราฟื้นฟู SP +3% / Healing Hands +2%"
+      },
+      {
+       "level": 2,
+       "text": "Max SP +2% / อัตราฟื้นฟู SP +6% / Healing Hands +4%"
+      },
+      {
+       "level": 3,
+       "text": "Max SP +3% / อัตราฟื้นฟู SP +9% / Healing Hands +6%"
+      },
+      {
+       "level": 4,
+       "text": "Max SP +4% / อัตราฟื้นฟู SP +12% / Healing Hands +8%"
+      },
+      {
+       "level": 5,
+       "text": "Max SP +5% / อัตราฟื้นฟู SP +15% / Healing Hands +10%"
+      }
+     ],
+     "maxLevel": 5,
+     "kind": "Passive",
+     "detail": "เพิ่มความจุสมองผ่านการผ่าตัด ทำให้ MaxSP และอัตราการฟื้นฟู SP ของ Homunculus Lif เพิ่มขึ้น นอกจากนี้ยังเพิ่มปริมาณการฟื้นฟูของสกิล Healing Hands อีกด้วย"
+    },
+    {
+     "code": "HLIF_CHANGE",
+     "id": 8004,
+     "name": "Mental Change",
+     "levels": [
+      {
+       "level": 1,
+       "text": "ระยะเวลา : 1 นาที / VIT +30 / INT +20 / Cooldown : 10 นาที"
+      },
+      {
+       "level": 2,
+       "text": "ระยะเวลา : 3 นาที / VIT +60 / INT +40 / Cooldown : 15 นาที"
+      },
+      {
+       "level": 3,
+       "text": "ระยะเวลา : 5 นาที / VIT +90 / INT +60 / Cooldown : 20 นาที"
+      }
+     ],
+     "maxLevel": 3,
+     "detail": "เพิ่ม INT และ VIT ของ Homunculus และเปลี่ยนการโจมตีปกติให้คำนวณ Damage จาก MATK เอฟเฟกต์จะคงอยู่ได้สูงสุด 5 นาที เมื่อเอฟเฟกต์สิ้นสุดลง ค่า HP และ SP จะเหลือ 10 ทันที"
+    }
+   ]
+  },
+  {
+   "key": "amistr",
+   "name": "Amistr",
+   "sprite": "/images/homun/amistr.webp",
+   "evolvedSprite": "/images/homun/amistr_h.webp",
+   "skills": [
+    {
+     "code": "HAMI_CASTLE",
+     "id": 8005,
+     "name": "Castling",
+     "levels": [
+      {
+       "level": 1,
+       "text": "อัตราสำเร็จ : 20%"
+      },
+      {
+       "level": 2,
+       "text": "อัตราสำเร็จ : 40%"
+      },
+      {
+       "level": 3,
+       "text": "อัตราสำเร็จ : 60%"
+      },
+      {
+       "level": 4,
+       "text": "อัตราสำเร็จ : 80%"
+      },
+      {
+       "level": 5,
+       "text": "อัตราสำเร็จ : 100%"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "สลับตำแหน่งของ Player และ Homunculus ทันที มอนสเตอร์ที่กำลังโจมตี Player จะเปลี่ยนไปโจมตี Homunculus แทน"
+    },
+    {
+     "code": "HAMI_DEFENCE",
+     "id": 8006,
+     "name": "Amistr Bulwark",
+     "levels": [
+      {
+       "level": 1,
+       "text": "Player DEF +5 / Homunculus DEF +10 / ระยะเวลา : 40 วินาที"
+      },
+      {
+       "level": 2,
+       "text": "Player DEF +7 / Homunculus DEF +15 / ระยะเวลา : 35 วินาที"
+      },
+      {
+       "level": 3,
+       "text": "Player DEF +10 / Homunculus DEF +20 / ระยะเวลา : 30 วินาที"
+      },
+      {
+       "level": 4,
+       "text": "Player DEF +12 / Homunculus DEF +25 / ระยะเวลา : 25 วินาที"
+      },
+      {
+       "level": 5,
+       "text": "Player DEF +15 / Homunculus DEF +30 / ระยะเวลา : 20 วินาที"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "เพิ่ม DEF ของ Player และ Homunculus ชั่วคราว"
+    },
+    {
+     "code": "HAMI_SKIN",
+     "id": 8007,
+     "name": "Adamantium Skin",
+     "levels": [
+      {
+       "level": 1,
+       "text": "Max HP +2% / อัตราฟื้นฟู HP +5% / DEF +4"
+      },
+      {
+       "level": 2,
+       "text": "Max HP +4% / อัตราฟื้นฟู HP +10% / DEF +8"
+      },
+      {
+       "level": 3,
+       "text": "Max HP +6% / อัตราฟื้นฟู HP +15% / DEF +12"
+      },
+      {
+       "level": 4,
+       "text": "Max HP +8% / อัตราฟื้นฟู HP +20% / DEF +16"
+      },
+      {
+       "level": 5,
+       "text": "Max HP +10% / อัตราฟื้นฟู HP +25% / DEF +20"
+      }
+     ],
+     "maxLevel": 5,
+     "kind": "Passive",
+     "detail": "เพิ่ม DEF ของ Homunculus ถาวร พร้อมเพิ่ม MaxHP และอัตราการฟื้นฟู HP"
+    },
+    {
+     "code": "HAMI_BLOODLUST",
+     "id": 8008,
+     "name": "Blood Lust",
+     "levels": [
+      {
+       "level": 1,
+       "text": "ระยะเวลา : 1 นาที / ATK +130% / โอกาสฟื้นฟู : 3% / Cooldown : 5 นาที"
+      },
+      {
+       "level": 2,
+       "text": "ระยะเวลา : 3 นาที / ATK  +140% / โอกาสฟื้นฟู : 6% / Cooldown : 10 นาที"
+      },
+      {
+       "level": 3,
+       "text": "ระยะเวลา : 5 นาที / ATK  +150% / โอกาสฟื้นฟู : 9% / Cooldown : 15 นาที"
+      }
+     ],
+     "maxLevel": 3,
+     "detail": "เพิ่ม ATK ของ Homunculus ชั่วคราว (สูงสุด 1.5 เท่า) และมีโอกาสฟื้นฟู HP ของ Homunculus เป็นจำนวนเท่ากับ 20% ของ Damage ที่สร้างให้ศัตรู"
+    }
+   ]
+  },
+  {
+   "key": "filir",
+   "name": "Filir",
+   "sprite": "/images/homun/filir.webp",
+   "evolvedSprite": "/images/homun/filir_h.webp",
+   "skills": [
+    {
+     "code": "HFLI_MOON",
+     "id": 8009,
+     "name": "Moonlight",
+     "levels": [
+      {
+       "level": 1,
+       "text": "จำนวนการโจมตี : 1 ครั้ง / Damage 220%"
+      },
+      {
+       "level": 2,
+       "text": "จำนวนการโจมตี : 2 ครั้ง / Damage 330%"
+      },
+      {
+       "level": 3,
+       "text": "จำนวนการโจมตี : 2 ครั้ง / Damage 440%"
+      },
+      {
+       "level": 4,
+       "text": "จำนวนการโจมตี : 2 ครั้ง / Damage 550%"
+      },
+      {
+       "level": 5,
+       "text": "จำนวนการโจมตี : 3 ครั้ง / Damage 660%"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "Homunculus Filir โจมตีเป้าหมายระยะใกล้ด้วยจะงอยปากอย่างต่อเนื่อง"
+    },
+    {
+     "code": "HFLI_FLEET",
+     "id": 8010,
+     "name": "Flitting",
+     "levels": [
+      {
+       "level": 1,
+       "text": "ASPD +3 / Damage 110% / ระยะเวลา : 60 วินาที / Cooldown : 60 วินาที"
+      },
+      {
+       "level": 2,
+       "text": "ASPD +6 / Damage 115% / ระยะเวลา : 55 วินาที / Cooldown : 75 วินาที"
+      },
+      {
+       "level": 3,
+       "text": "ASPD +9 / Damage 120% / ระยะเวลา : 50 วินาที / Cooldown : 90 วินาที"
+      },
+      {
+       "level": 4,
+       "text": "ASPD +12 / Damage 125% / ระยะเวลา : 45 วินาที / Cooldown : 105 วินาที"
+      },
+      {
+       "level": 5,
+       "text": "ASPD +15 / Damage 130% / ระยะเวลา : 40 วินาที / Cooldown : 120 วินาที"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "เพิ่ม ASPD และ Damage ของ Homunculus Filir ชั่วคราว"
+    },
+    {
+     "code": "HFLI_SPEED",
+     "id": 8011,
+     "name": "Accelerated Flight",
+     "levels": [
+      {
+       "level": 1,
+       "text": "Flee +20 / ระยะเวลา : 60 วินาที / Cooldown : 60 วินาที"
+      },
+      {
+       "level": 2,
+       "text": "Flee +30 / ระยะเวลา : 55 วินาที / Cooldown : 75 วินาที"
+      },
+      {
+       "level": 3,
+       "text": "Flee +40 / ระยะเวลา : 50 วินาที / Cooldown : 90 วินาที"
+      },
+      {
+       "level": 4,
+       "text": "Flee +50 / ระยะเวลา : 45 วินาที / Cooldown : 105 วินาที"
+      },
+      {
+       "level": 5,
+       "text": "Flee +60 / ระยะเวลา : 40 วินาที / Cooldown : 120 วินาที"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "เพิ่ม Flee ของ Homunculus ชั่วคราว"
+    },
+    {
+     "code": "HFLI_SBR44",
+     "id": 8012,
+     "name": "S.B.R.44",
+     "levels": [],
+     "maxLevel": 3,
+     "detail": "เสียสละค่าความสนิทสนมปัจจุบันของ Homunculus เพื่อสร้าง Damage จำนวนมากแก่ศัตรู"
+    }
+   ]
+  },
+  {
+   "key": "vanilmirth",
+   "name": "Vanilmirth",
+   "sprite": "/images/homun/vanilmirth.webp",
+   "evolvedSprite": "/images/homun/vanilmirth_h.webp",
+   "skills": [
+    {
+     "code": "HVAN_CAPRICE",
+     "id": 8013,
+     "name": "Caprice",
+     "levels": [
+      {
+       "level": 1,
+       "text": "ใช้สกิล Bolt Lv.1"
+      },
+      {
+       "level": 2,
+       "text": "ใช้สกิล Bolt Lv.2"
+      },
+      {
+       "level": 3,
+       "text": "ใช้สกิล Bolt Lv.3"
+      },
+      {
+       "level": 4,
+       "text": "ใช้สกิล Bolt Lv.4"
+      },
+      {
+       "level": 5,
+       "text": "ใช้สกิล Bolt Lv.5"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "สุ่มใช้สกิล Bolt หนึ่งสกิล โดยเลเวลของ Bolt ที่ถูกใช้จะขึ้นอยู่กับเลเวลสกิล Caprice ของ Homunculus"
+    },
+    {
+     "code": "HVAN_CHAOTIC",
+     "id": 8014,
+     "name": "Chaotic Blessings",
+     "levels": [
+      {
+       "level": 1,
+       "text": "Heal Lv.1 / ศัตรู : 50% / Homunculus : 20% / Player : 30%"
+      },
+      {
+       "level": 2,
+       "text": "Heal Lv.1~2 / ศัตรู : 40% / Homunculus : 50% / Player : 10%"
+      },
+      {
+       "level": 3,
+       "text": "Heal Lv.1~3 / ศัตรู : 25% / Homunculus : 25% / Player : 50%"
+      },
+      {
+       "level": 4,
+       "text": "Heal Lv.1~4 / ศัตรู : 36% / Homunculus : 60% / Player : 4%"
+      },
+      {
+       "level": 5,
+       "text": "Heal Lv.1~5 / ศัตรู : 33% / Homunculus : 34% / Player : 33%"
+      }
+     ],
+     "maxLevel": 5,
+     "detail": "สุ่มใช้สกิล Heal ใส่หนึ่งในสามเป้าหมาย ได้แก่ ศัตรูของเจ้าของ, Homunculus เอง หรือ Player เจ้าของ โดยโอกาสในการเลือกเป้าหมายจะเป็นไปตามอัตราดังต่อไปนี้"
+    },
+    {
+     "code": "HVAN_INSTRUCT",
+     "id": 8015,
+     "name": "Instruction Change",
+     "levels": [
+      {
+       "level": 1,
+       "text": "INT +1 / STR +1"
+      },
+      {
+       "level": 2,
+       "text": "INT +2 / STR +1"
+      },
+      {
+       "level": 3,
+       "text": "INT +2 / STR +3"
+      },
+      {
+       "level": 4,
+       "text": "INT +4 / STR +4"
+      },
+      {
+       "level": 5,
+       "text": "INT +5 / STR +4"
+      }
+     ],
+     "maxLevel": 5,
+     "kind": "Passive",
+     "detail": "เพิ่ม INT และ STR ของ Homunculus"
+    },
+    {
+     "code": "HVAN_EXPLOSION",
+     "id": 8016,
+     "name": "Self-Destruction",
+     "levels": [
+      {
+       "level": 1,
+       "text": "Damage : MaxHP x1"
+      },
+      {
+       "level": 2,
+       "text": "Damage : MaxHP x1.5"
+      },
+      {
+       "level": 3,
+       "text": "Damage : MaxHP x2"
+      }
+     ],
+     "maxLevel": 3,
+     "detail": "สร้าง Damage ตามค่า MaxHP ของ Homunculus แก่ศัตรูรอบตัวในพื้นที่สูงสุด 9x9 ช่อง จากนั้น Homunculus จะระเบิดตัวเอง ความเสียหายนี้จะไม่สนใจพลังป้องกัน และเมื่อระเบิดแล้วค่าความสนิทสนมจะลดเหลือ 1"
+    }
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": 7142,
+   "name": "Embryo",
+   "text": "ตัวอ่อนของสิ่งมีชีวิต"
+  },
+  {
+   "id": 7140,
+   "name": "Seed of Life",
+   "text": "เมล็ดพันธุ์อันน่าอัศจรรย์ที่เพียงมองก็สัมผัสได้ถึงพลังชีวิตอันเปี่ยมล้น"
+  },
+  {
+   "id": 7141,
+   "name": "Morning Dew of Yggdrasil",
+   "text": "หยาดน้ำค้างยามรุ่งสางที่เกาะอยู่บนผลของ Yggdrasil"
+  },
+  {
+   "id": 7143,
+   "name": "Glass Tube",
+   "text": "สามารถคงชีวิตผู้ที่ใกล้สิ้นลมหายใจไว้ได้ และยังช่วยให้ตัวอ่อนเติบโตขึ้น"
+  },
+  {
+   "id": 7144,
+   "name": "Potion Creation Guide",
+   "text": "คู่มือที่บันทึกวิธีการผลิต Potion ทั่วไป"
+  },
+  {
+   "id": 100371,
+   "name": "Homunculus Tablet",
+   "text": "ยาบำรุงที่ Homunculus โปรดปราน\nเมื่อใช้แล้ว จะเพิ่มค่าความสนิทสนมกับ Homunculus"
+  }
+ ]
+}
