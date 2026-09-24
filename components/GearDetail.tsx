@@ -23,6 +23,7 @@ import { composeThaiDescription } from '@/lib/item-description-th';
 import { gameThaiDescription } from '@/lib/game-items';
 import { randomOptionsFor } from '@/lib/random-options';
 import { cardSlotForGearType } from '@/lib/card-slot';
+import ItemGuideRefs from '@/components/ItemGuideRefs';
 import type { GearExtras } from '@/lib/gear-detail';
 
 export const CATEGORY_LABELS: Record<string, string> = {
@@ -143,6 +144,7 @@ export default function GearDetail({
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 12 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
       )}
+      <ItemGuideRefs itemId={item.id} />
 
       <div className="statgrid" style={{ marginTop: 16 }}>
         {item.atk !== null && (

@@ -22,6 +22,7 @@ import { cardSlot, equipmentHrefForSlot, parseCardSlot } from '@/lib/card-slot';
 import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
 import { CardDroppers, CardHero } from './hero';
+import ItemGuideRefs from '@/components/ItemGuideRefs';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -160,6 +161,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         sellPrice={item.sell_price}
         release={release}
       />
+      <ItemGuideRefs itemId={item.id} />
 
       {english.length > 0 && (
         <div className="card card--cyan" style={{ marginTop: 20 }}>

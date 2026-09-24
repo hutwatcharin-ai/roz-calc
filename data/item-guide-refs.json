@@ -1,0 +1,1125 @@
+{
+  "_meta": {
+    "what": "Reverse index from an item id to the guide pages that feature it, for backlinks on item/equipment/card detail pages.",
+    "sources": [
+      "data/star-gear.json",
+      "data/woe-items.json",
+      "data/memorial-gear.json"
+    ],
+    "regenerate": "set -a; . ./.env.local; set +a; node scripts/build-item-guide-refs.mjs",
+    "built": "2026-09-24",
+    "itemCount": 185
+  },
+  "refs": {
+    "1329": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "1859": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "2052": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "4251": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "13490": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "15216": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "15217": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "15218": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "15220": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15221": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15222": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15223": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15224": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15225": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15226": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15227": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15228": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15229": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "15230": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "16085": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "18175": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "19740": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "20864": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "20865": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "20867": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20868": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20869": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20870": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20871": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20872": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20873": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20874": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20875": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20876": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "20877": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "21044": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "22146": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "22147": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "22148": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "22150": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22151": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22152": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22153": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22154": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22155": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22156": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22157": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22158": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22159": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "22160": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "25464": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "26019": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "26146": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "26147": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "26210": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "28036": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "28133": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "28539": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28540": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28541": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28542": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28543": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28544": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28545": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28546": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28547": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28548": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28549": [
+      {
+        "href": "/guides/memorial-gear",
+        "label": "อุปกรณ์ดันเจี้ยนความทรงจำ"
+      }
+    ],
+    "28751": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "32015": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "32103": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310026": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310027": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310028": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310029": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310030": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310031": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310032": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310033": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310034": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310035": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310036": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310037": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310038": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310039": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310040": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310041": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310042": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310043": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310044": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310045": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310047": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310048": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310049": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310050": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310051": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310052": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310053": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310054": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310055": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310056": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310057": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310058": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310059": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310060": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310061": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310062": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310063": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310064": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310065": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310066": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310067": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310068": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310069": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310071": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310072": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310073": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "310074": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "401080": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "450012": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "450013": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "450014": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "450528": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "450529": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "450530": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "460168": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "460169": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "460170": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "470011": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "470012": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "470013": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "470418": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "470419": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "480007": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "480008": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "480740": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "480741": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "500006": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "500124": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "500137": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "500138": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "510005": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "510183": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "520001": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "530001": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "530080": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "530081": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "530082": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "540118": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "550004": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "550005": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "550175": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "550209": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "550210": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "560003": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "560087": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "560089": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "560090": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "570003": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "570092": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "580003": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "580092": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "590004": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "590098": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "590110": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "600005": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "600070": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "600074": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "600077": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "600078": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "610004": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "610092": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "610096": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "610097": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "620001": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "620053": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "630001": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "630065": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "640001": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "700005": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "700090": [
+      {
+        "href": "/guides/woe",
+        "label": "สงครามกิลด์ (WoE)"
+      }
+    ],
+    "700118": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "700123": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "700130": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ],
+    "700131": [
+      {
+        "href": "/guides/star-gear",
+        "label": "ติดดาว"
+      }
+    ]
+  }
+}
