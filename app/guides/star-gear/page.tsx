@@ -62,10 +62,13 @@ type Piece = {
   plain: Plain | null;
   starAtk: number | null;
 };
-type Token = { id: number; name: string; icon: string | null; category: string | null };
+type Token = { id: number; name: string; icon: string | null; category: string | null; namesNpc: boolean };
 
 const PIECES = star.items as Piece[];
 const TOKENS = star.tokens as Token[];
+// How many of the client's own token descriptions carry the <NAVI> waypoint
+// to the step-2 NPC -- the evidence for that name, counted rather than typed.
+const NPC_CONFIRMED_BY = TOKENS.filter((t) => t.namesNpc).length;
 const TH = effectsTh.items as Record<string, Record<string, string>>;
 
 // Two tiers, not three. ★★ and ★★★ are the second tier's two variants: the
@@ -79,17 +82,6 @@ const FAMILIES = [...new Set(SECOND.map((p) => p.family))].sort().map((family) =
   variants: SECOND.filter((p) => p.family === family).sort((a, b) => a.stars - b.stars),
 }));
 const PAIRED = PIECES.filter((p) => p.plain);
-
-/** How a tier's bonuses are laid out, written from the parsed steps so the
- *  sentence cannot drift from the data. */
-function tierShape(pieces: Piece[]): string {
-  const every = pieces.filter((p) => p.tiers.some((t) => t.kind === 'every'));
-  const steps = [...new Set(pieces.flatMap((p) => p.tiers.filter((t) => t.kind === 'at').map((t) => t.refine)))].sort(
-    (a, b) => a - b,
-  );
-  const list = steps.map((s) => `+${s}`).join(' ');
-  return every.length ? `ได้ทุก +2 และมีก้อนพิเศษที่ ${list}` : `ได้เป็นก้อนที่ ${list}`;
-}
 
 /** The headline ATK or MATK a piece's own text opens with, for telling two
  *  variants apart at a glance. */
@@ -116,20 +108,28 @@ function thai(piece: Piece): { base: string; tiers: { key: string; label: string
   };
 }
 
-// From the mirrored guide (roz-global.info, docs/rozglobal-export, read
-// 8 Sep 2026). It documents the Taiwanese server, where this is already live.
+// Two different levels of evidence, on purpose. Step 2's name comes from our
+// own client: 11 item descriptions carry a <NAVI> waypoint to "Nagging Old
+// Man" at prontera,272,260, all agreeing on the coordinates (checked 24 Sep
+// 2026) -- independent of the mirrored guide entirely. Step 1's NPC has no
+// trace in any client data we hold; its name and location are the mirrored
+// guide's alone (roz-global.info, docs/rozglobal-export, read 8 Sep 2026,
+// documenting the Taiwanese server), so the page says that plainly instead of
+// presenting it with the same confidence as step 2.
 const NPCS = [
   {
     step: 'ขั้นที่ 1',
     name: 'Apprenti d’atelier Mingjia',
     where: 'prontera 272,264',
+    confirmed: false,
     what: 'เอาของไปแลกเป็นโทเคน ของที่มอนดรอป 1 ชิ้นแลกโทเคน ★ ได้ 1 อัน ส่วนอาวุธที่ปลุกแล้ว 1 ชิ้นแลกโทเคน ★★ ได้ 1 อัน',
   },
   {
     step: 'ขั้นที่ 2',
-    name: 'Papi Daodao',
+    name: 'Nagging Old Man',
     where: 'prontera 272,260',
-    what: 'พอมีโทเคนครบกับ Goblin Coin Shard แล้ว ตัวนี้เป็นคนเปิดหน้าต่างปลุกให้ ในไคลเอนต์อังกฤษชื่อ Nagging Old Man',
+    confirmed: true,
+    what: 'พอมีโทเคนครบกับ Goblin Coin Shard แล้ว ตัวนี้เป็นคนเปิดหน้าต่างปลุกให้',
   },
 ];
 
@@ -237,7 +237,6 @@ export default async function StarGearPage() {
       <nav className="jumpbar" aria-label="หัวข้อในหน้านี้">
         <a href="#sec-prep">เตรียมอะไรไว้</a>
         <a href="#sec-how">ขั้นตอนตอนเปิด</a>
-        <a href="#sec-levels">มีกี่ขั้น</a>
         <a href="#sec-choice">ขั้น 2 เลือก 2 แบบ</a>
         <a href="#sec-list">ของทุกชิ้น</a>
         <a href="#sec-token">โทเคน</a>
@@ -289,12 +288,19 @@ export default async function StarGearPage() {
             <li key={npc.name}>
               <span className="star__step">{npc.step}</span>
               <div>
-                <p className="star__npcname">{npc.name} <span className="star__where">{npc.where}</span></p>
+                <p className="star__npcname">
+                  {npc.name} <span className="star__where">{npc.where}</span>
+                  {!npc.confirmed && <span className="star__unconfirmed">ชื่อนี้มาจากไกด์อย่างเดียว ไม่มีในข้อมูลไคลเอนต์ที่เรามี</span>}
+                </p>
                 <p className="star__detail">{npc.what}</p>
               </div>
             </li>
           ))}
         </ol>
+        <p className="muted" style={{ marginTop: 10, fontSize: 13, maxWidth: '74ch' }}>
+          ชื่อของ NPC ขั้นที่ 2 ยืนยันได้จากคำบรรยายไอเทมในเกมเอง {NPC_CONFIRMED_BY} ชิ้น ทุกชิ้นให้พิกัดตรงกัน ส่วน NPC ขั้นที่ 1 ยังไม่เจอในไคลเอนต์ของเราเลย
+          ชื่อและพิกัดจึงมาจากไกด์ฝรั่งเศสแหล่งเดียว
+        </p>
 
         <h3 className="star__h3" style={{ marginTop: 18 }}>ปลุกแล้วเสียอะไร</h3>
         <div className="recipe__scroll">
@@ -325,57 +331,20 @@ export default async function StarGearPage() {
           ได้จากการเอา<strong>อาวุธที่ปลุกขั้นที่ 1 แล้ว</strong>ไปแลก จึงใช้แค่ 3 อัน แต่ 3 อันนั้นแปลว่าต้องมีอาวุธขั้นที่ 1 สามเล่มก่อน
         </p>
         <p className="guildp__src">
-          ที่มา: ชื่อ NPC พิกัด กติกาแลกโทเคน และตารางนี้มาจากไกด์ roz-global.info (อ่าน 8 ก.ย. 2026) ซึ่งอธิบายเซิร์ฟไต้หวัน
-          เป็นแหล่งเดียว ยังไม่มีที่สองให้ตรวจ และยังตรวจกับเซิร์ฟเราไม่ได้เพราะระบบยังไม่เปิด
+          ที่มา: ชื่อและพิกัด NPC ขั้นที่ 2 ตรวจกับข้อมูลไคลเอนต์ของเราเองแล้ว ส่วนของขั้นที่ 1 กับกติกาแลกโทเคนและตารางปลุก
+          มาจากไกด์ roz-global.info (อ่าน 8 ก.ย. 2026) ซึ่งอธิบายเซิร์ฟไต้หวัน เป็นแหล่งเดียว ยังไม่มีที่สองให้ตรวจ
+          และยังตรวจกับเซิร์ฟเราไม่ได้เพราะระบบยังไม่เปิด
         </p>
       </section>
 
       <AdSlot slot="inline" />
 
-      <section className="card" id="sec-levels">
-        <h2 className="section-title" style={{ marginTop: 0 }}>มีสองขั้น ไม่ใช่สามขั้น</h2>
-        <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
-          จำนวนดาวหน้าชื่อทำให้เข้าใจผิดง่ายที่สุดในระบบนี้ ★★ กับ ★★★ <strong>ไม่ใช่คนละขั้น</strong> แต่เป็น
-          ขั้นเดียวกันที่ให้เลือกสองแบบ ไคลเอนต์อังกฤษตั้งชื่อแยกด้วยจำนวนดาว ส่วนไกด์ต้นทางเรียกทั้งคู่ว่า ★★ แล้วแยกด้วยคำต่อท้ายชื่อแทน
-        </p>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>ขั้น</th>
-                <th className="num">อาวุธ</th>
-                <th className="num">ชุด</th>
-                <th>โบนัสมายังไง</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-label="ขั้น"><strong className="star__stars">★</strong> ขั้นที่ 1</td>
-                <td data-label="อาวุธ" className="num">{FIRST.filter((p) => p.category === 'Weapon').length}</td>
-                <td data-label="ชุด" className="num">{FIRST.filter((p) => p.category === 'Armor').length}</td>
-                <td data-label="โบนัส">{tierShape(FIRST)}</td>
-              </tr>
-              <tr>
-                <td data-label="ขั้น"><strong className="star__stars">★★ / ★★★</strong> ขั้นที่ 2</td>
-                <td data-label="อาวุธ" className="num">{SECOND.filter((p) => p.category === 'Weapon').length}</td>
-                <td data-label="ชุด" className="num">{SECOND.filter((p) => p.category === 'Armor').length}</td>
-                <td data-label="โบนัส">{tierShape(SECOND)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p className="star__proof">
-          <strong>ที่รู้ว่าไม่ใช่คนละขั้นเพราะสามอย่าง</strong> ทุกชื่อในขั้นที่ 2 มีครบคู่เสมอ {FAMILIES.length} ชื่อ ชื่อละสองแบบ
-          ไม่มีชื่อไหนมีแบบเดียว · โบนัสมาที่ขั้นตีบวกเดียวกันทั้งคู่ ไม่มีฝั่งไหนถี่กว่า ·
-          และบางคู่ฝั่ง ★★★ <strong>อ่อนกว่า</strong> เช่น Oak Wand MATK 170 เหลือ 140 กับ Ring Pommel Saber ATK 45 เหลือ 25
-          ของที่เป็นขั้นสูงกว่าไม่มีทางอ่อนกว่า
-        </p>
-      </section>
-
       <section className="card" id="sec-choice">
         <h2 className="section-title" style={{ marginTop: 0 }}>ขั้นที่ 2 เลือกได้สองแบบ</h2>
         <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
-          พอปลุกเป็นขั้นที่ 2 ต้องเลือกว่าจะเอาแบบไหน เลือกแล้วคือคนละชิ้นกันเลย บางคู่ต่างกันถึงขั้นเปลี่ยนสายจากกายภาพเป็นเวท
+          ปลุกมีสองขั้น ไม่ใช่สามขั้นตามจำนวนดาว ★ คือขั้นที่ 1 ส่วน ★★ กับ ★★★ เป็น<strong>ขั้นเดียวกัน</strong>ที่ให้เลือกสองแบบ
+          ไคลเอนต์อังกฤษแยกด้วยจำนวนดาว ไกด์ต้นทางเรียกทั้งคู่ว่า ★★ แล้วแยกด้วยคำต่อท้ายชื่อแทน พอปลุกเป็นขั้นที่ 2 ต้องเลือกว่าจะเอาแบบไหน
+          เลือกแล้วคือคนละชิ้นกันเลย บางคู่ต่างกันถึงขั้นเปลี่ยนสายจากกายภาพเป็นเวท
         </p>
         <div className="recipe__scroll">
           <table className="data-table recipe">
@@ -480,7 +449,8 @@ export default async function StarGearPage() {
         ผลของแต่ละชิ้น ชื่อโทเคน และค่าสถานะทุกบรรทัด<strong>มาจากข้อมูลไอเทมในเกม</strong> อ่านเมื่อ {star._meta.read} ·
         ชิ้นที่ไคลเอนต์มีข้อความไทยอยู่แล้วใช้ของไคลเอนต์ตรง ๆ ส่วนที่เหลือเราแปลเอง
         โดยมีเทสต์บังคับว่าตัวเลขทุกตัวและชื่อค่าสถานะทุกตัวต้องตรงกับต้นฉบับ ไม่ได้สรุปใหม่ ·
-        <strong>ชื่อ NPC พิกัด กติกาแลกโทเคน และค่าใช้จ่ายในการปลุก มาจากไกด์ roz-global.info</strong> (อ่าน 8 ก.ย. 2026)
+ชื่อ NPC ขั้นที่ 2 คือ Nagging Old Man ตรวจกับคำบรรยายไอเทมในเกมของเราเองแล้ว ({NPC_CONFIRMED_BY} ชิ้น พิกัดตรงกันหมด) ·{' '}
+        <strong>ส่วน NPC ขั้นที่ 1 พิกัด กติกาแลกโทเคน และค่าใช้จ่ายในการปลุก มาจากไกด์ roz-global.info</strong> (อ่าน 8 ก.ย. 2026)
         ซึ่งอธิบายเซิร์ฟไต้หวัน เป็นแหล่งเดียวและยังตรวจกับเซิร์ฟเราไม่ได้ ·
         ข้อความอังกฤษต้นทางของบางชิ้นเป็นการแปลจากภาษาจีนมาอีกทอด ชื่อสกิลบางตัวจึงอ่านแปลก ๆ ตั้งแต่ต้นฉบับ
       </Caveat>
