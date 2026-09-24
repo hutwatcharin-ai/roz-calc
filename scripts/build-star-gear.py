@@ -20,6 +20,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -91,21 +92,40 @@ def client_items():
     return out
 
 
-def db_items():
-    """Our own table, which has every ★ row but only in English."""
+def env_file():
     env = {}
     for line in open(os.path.join(os.path.dirname(__file__), '..', '.env.local'), encoding='utf-8'):
         if '=' in line:
             k, _, v = line.partition('=')
             env[k.strip()] = v.strip()
-    url = (f"{env['NEXT_PUBLIC_SUPABASE_URL']}/rest/v1/items"
-           '?select=id,name_en,icon_url,category,required_level,description,slots&name_en=like.%E2%98%85*')
-    request = urllib.request.Request(url, headers={
+    return env
+
+
+def rest(query):
+    env = env_file()
+    request = urllib.request.Request(f"{env['NEXT_PUBLIC_SUPABASE_URL']}/rest/v1/{query}", headers={
         'apikey': env['SUPABASE_SERVICE_ROLE_KEY'],
         'Authorization': f"Bearer {env['SUPABASE_SERVICE_ROLE_KEY']}",
     })
     with urllib.request.urlopen(request, timeout=30) as response:
         return json.load(response)
+
+
+def db_items():
+    """Our own table, which has every ★ row but only in English."""
+    return rest('items?select=id,name_en,icon_url,category,required_level,description,slots,atk'
+                '&name_en=like.%E2%98%85*')
+
+
+def plain_twins(names):
+    """The ordinary item each ★ piece is made from, matched by the name with
+    the stars removed. Not every one is there: a few ★ pieces have no
+    same-named ordinary row in our table, and the page says so rather than
+    inventing a pair."""
+    quoted = ','.join('"' + n.replace('"', '') + '"' for n in sorted(set(names)))
+    rows = rest('items?select=id,name_en,category,required_level,slots,atk&name_en=in.'
+                + urllib.parse.quote(f'({quoted})', safe=''))
+    return {row['name_en']: row for row in rows}
 
 
 def split_thai(description):
@@ -165,6 +185,8 @@ def split_effect(description, thai):
 
 client = client_items()
 rows = db_items()
+PLAIN = re.compile(r'^★+\s*')
+twins = plain_twins([PLAIN.sub('', r['name_en']) for r in rows if r['category'] != 'Other'])
 print(f'{len(rows)} ★ rows in our database, {len(client)} of them have Thai text in the client')
 
 items, tokens = [], []
@@ -194,6 +216,19 @@ for row in sorted(rows, key=lambda r: r['name_en']):
         continue
     base, tiers, footer = split_effect(description, thai)
     entry.update({'base': base, 'tiers': tiers, 'footer': footer})
+    # What the ordinary version of the same piece looks like, so the page can
+    # answer "what does the star actually buy me" instead of only "what does
+    # the star version do".
+    twin = twins.get(PLAIN.sub('', row['name_en']))
+    star_atk = int(footer['atk']) if footer.get('atk', '').isdigit() else row.get('atk')
+    entry['plain'] = None if twin is None else {
+        'id': twin['id'],
+        'category': twin['category'],
+        'atk': twin['atk'],
+        'slots': twin['slots'],
+        'requiredLevel': twin['required_level'],
+    }
+    entry['starAtk'] = star_atk
     if not tiers:
         no_tiers.append(row['name_en'])
     items.append(entry)
@@ -219,6 +254,8 @@ thai_count = sum(1 for i in items if i['lang'] == 'th')
 print(f"npc: {npc['name']} at {npc['map']} {npc['x']},{npc['y']}")
 print(f'{len(items)} pieces ({thai_count} in Thai), {len(tokens)} tokens '
       f"({sum(1 for t in tokens if t['namesNpc'])} of them name the NPC)")
+paired = [i for i in items if i['plain']]
+print(f'{len(paired)} of {len(items)} pieces have an ordinary twin to compare against')
 for stars in (1, 2, 3):
     group = [i for i in items if i['stars'] == stars]
     print(f"  {'★' * stars}: {len(group)} pieces, tier counts {sorted({len(i['tiers']) for i in group})}")

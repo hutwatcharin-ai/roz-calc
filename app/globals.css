@@ -3511,3 +3511,12 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .star__faq dd { margin: 4px 0 0; font-size: 13.5px; line-height: 1.8; color: var(--dim); }
 @media (max-width: 900px) { .star__tokens { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .star__tokens { grid-template-columns: minmax(0, 1fr); } .star__tiers > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+.star__status { margin: 8px 0 0; font-size: 14px; line-height: 1.85; max-width: 74ch; }
+.star__prep { margin: 10px 0 0; padding-inline-start: 22px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; line-height: 1.8; }
+.star__npcs { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.star__npcs li { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }
+.star__step { font: 700 12px/1.6 var(--font-mono), monospace; color: var(--yellow); }
+.star__npcname { margin: 0; font: 700 15px/1.5 var(--font-sarabun), sans-serif; color: var(--cyan); }
+.star__detail { margin: 4px 0 0; font-size: 13.5px; line-height: 1.8; color: var(--dim); }
+.star__gain { margin: 8px 0 0; font-size: 13px; line-height: 1.7; color: var(--yellow); }
+.star__group { margin: 0; font: 700 18px/1.4 var(--font-sarabun), sans-serif; }

@@ -45,7 +45,15 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Swordman Class"
-   }
+   },
+   "plain": {
+    "id": 600051,
+    "category": "Weapon",
+    "atk": 115,
+    "slots": 2,
+    "requiredLevel": 18
+   },
+   "starAtk": 190
   },
   {
    "id": 540118,
@@ -81,7 +89,15 @@
     "weaponLevel": "2",
     "requiredLevel": "14",
     "jobs": "Mage Class, Acolyte Class"
-   }
+   },
+   "plain": {
+    "id": 540084,
+    "category": "Weapon",
+    "atk": 85,
+    "slots": 2,
+    "requiredLevel": 14
+   },
+   "starAtk": 85
   },
   {
    "id": 470418,
@@ -110,7 +126,15 @@
      "text": "MaxHP +8%, healing amount +10%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 470233,
+    "category": "Armor",
+    "atk": null,
+    "slots": 0,
+    "requiredLevel": 1
+   },
+   "starAtk": null
   },
   {
    "id": 590098,
@@ -146,7 +170,15 @@
     "weaponLevel": "2",
     "requiredLevel": "14",
     "jobs": "Swordman Class, Merchant Class, Acolyte Class"
-   }
+   },
+   "plain": {
+    "id": 590075,
+    "category": "Weapon",
+    "atk": 84,
+    "slots": 2,
+    "requiredLevel": 14
+   },
+   "starAtk": 140
   },
   {
    "id": 700118,
@@ -182,7 +214,9 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Thief Class, Archer Class"
-   }
+   },
+   "plain": null,
+   "starAtk": 125
   },
   {
    "id": 700123,
@@ -218,7 +252,15 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Archer Class"
-   }
+   },
+   "plain": {
+    "id": 700083,
+    "category": "Weapon",
+    "atk": 50,
+    "slots": 3,
+    "requiredLevel": 18
+   },
+   "starAtk": 125
   },
   {
    "id": 630065,
@@ -254,7 +296,15 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Swordman Class"
-   }
+   },
+   "plain": {
+    "id": 1451,
+    "category": "Weapon",
+    "atk": 84,
+    "slots": 2,
+    "requiredLevel": 18
+   },
+   "starAtk": 160
   },
   {
    "id": 620053,
@@ -290,7 +340,15 @@
     "weaponLevel": "2",
     "requiredLevel": "16",
     "jobs": "Swordman Class, Merchant Class"
-   }
+   },
+   "plain": {
+    "id": 620049,
+    "category": "Weapon",
+    "atk": 120,
+    "slots": 3,
+    "requiredLevel": 16
+   },
+   "starAtk": 215
   },
   {
    "id": 480740,
@@ -319,7 +377,15 @@
      "text": "MaxHP will be +450 and MaxHP will be +4%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 480384,
+    "category": "Armor",
+    "atk": null,
+    "slots": 0,
+    "requiredLevel": 1
+   },
+   "starAtk": null
   },
   {
    "id": 560087,
@@ -355,7 +421,9 @@
     "weaponLevel": "2",
     "requiredLevel": "12",
     "jobs": "Monk Class"
-   }
+   },
+   "plain": null,
+   "starAtk": 120
   },
   {
    "id": 460168,
@@ -384,7 +452,9 @@
      "text": "ATK +3%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": null
   },
   {
    "id": 610092,
@@ -420,7 +490,15 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Assassin Class"
-   }
+   },
+   "plain": {
+    "id": 610061,
+    "category": "Weapon",
+    "atk": 125,
+    "slots": 2,
+    "requiredLevel": 18
+   },
+   "starAtk": 155
   },
   {
    "id": 450530,
@@ -449,7 +527,9 @@
      "text": "MaxHP will be +350 and FLEE will be +12."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": null
   },
   {
    "id": 450529,
@@ -478,7 +558,9 @@
      "text": "MaxHP will be +400, MaxSP will be +35, and MaxSP will be +5%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": null
   },
   {
    "id": 570092,
@@ -514,7 +596,15 @@
     "weaponLevel": "2",
     "requiredLevel": "14",
     "jobs": "Bard Class"
-   }
+   },
+   "plain": {
+    "id": 570058,
+    "category": "Weapon",
+    "atk": 105,
+    "slots": 2,
+    "requiredLevel": 14
+   },
+   "starAtk": 125
   },
   {
    "id": 480741,
@@ -543,7 +633,15 @@
      "text": "MaxHP will be +450 and MaxSP will be +4%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 480378,
+    "category": "Armor",
+    "atk": null,
+    "slots": 1,
+    "requiredLevel": 1
+   },
+   "starAtk": null
   },
   {
    "id": 500124,
@@ -579,7 +677,15 @@
     "weaponLevel": "2",
     "requiredLevel": "14",
     "jobs": "Swordman Class, Merchant Class, Thief Class"
-   }
+   },
+   "plain": {
+    "id": 500112,
+    "category": "Weapon",
+    "atk": 100,
+    "slots": 3,
+    "requiredLevel": 14
+   },
+   "starAtk": 125
   },
   {
    "id": 470419,
@@ -608,7 +714,15 @@
      "text": "MaxHP +8%, healing amount +10%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 470231,
+    "category": "Armor",
+    "atk": null,
+    "slots": 0,
+    "requiredLevel": 1
+   },
+   "starAtk": null
   },
   {
    "id": 530080,
@@ -644,7 +758,15 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Crusader Class"
-   }
+   },
+   "plain": {
+    "id": 530079,
+    "category": "Weapon",
+    "atk": 100,
+    "slots": 3,
+    "requiredLevel": 18
+   },
+   "starAtk": 150
   },
   {
    "id": 600074,
@@ -680,7 +802,15 @@
     "weaponLevel": "2",
     "requiredLevel": "18",
     "jobs": "Swordman Class"
-   }
+   },
+   "plain": {
+    "id": 600058,
+    "category": "Weapon",
+    "atk": 90,
+    "slots": 3,
+    "requiredLevel": 18
+   },
+   "starAtk": 190
   },
   {
    "id": 590110,
@@ -716,7 +846,15 @@
     "weaponLevel": "2",
     "requiredLevel": "14",
     "jobs": "Merchant Class"
-   }
+   },
+   "plain": {
+    "id": 590083,
+    "category": "Weapon",
+    "atk": 54,
+    "slots": 3,
+    "requiredLevel": 14
+   },
+   "starAtk": 100
   },
   {
    "id": 450528,
@@ -745,7 +883,9 @@
      "text": "MaxHP will be +1000, MaxHP will be +7%, and DEF will be +70."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": null
   },
   {
    "id": 510183,
@@ -781,7 +921,15 @@
     "weaponLevel": "2",
     "requiredLevel": "12",
     "jobs": "Novice Class, Swordman Class, Archer Class, Thief Class, Mage Class, Merchant Class, Ninja Class, Soul Linker Class"
-   }
+   },
+   "plain": {
+    "id": 510135,
+    "category": "Weapon",
+    "atk": 87,
+    "slots": 2,
+    "requiredLevel": 12
+   },
+   "starAtk": 143
   },
   {
    "id": 550175,
@@ -817,7 +965,15 @@
     "weaponLevel": "2",
     "requiredLevel": "12",
     "jobs": "Novice Class, Mage Class, Acolyte Class"
-   }
+   },
+   "plain": {
+    "id": 550138,
+    "category": "Weapon",
+    "atk": 25,
+    "slots": 3,
+    "requiredLevel": 12
+   },
+   "starAtk": 25
   },
   {
    "id": 580092,
@@ -853,7 +1009,15 @@
     "weaponLevel": "2",
     "requiredLevel": "16",
     "jobs": "Dancer Class"
-   }
+   },
+   "plain": {
+    "id": 580057,
+    "category": "Weapon",
+    "atk": 95,
+    "slots": 2,
+    "requiredLevel": 16
+   },
+   "starAtk": 115
   },
   {
    "id": 530081,
@@ -887,7 +1051,9 @@
      "text": "the CRI will be +18, and for each refined +2, the CRI will be further +18."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 160
   },
   {
    "id": 700130,
@@ -921,7 +1087,9 @@
      "text": "the CRI will be +12, and for each refined +2, the CRI will be further +12."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 135
   },
   {
    "id": 460169,
@@ -955,7 +1123,9 @@
      "text": "FLEE +24; every additional +2 refine, FLEE +24 more. (Throwing skills include Shuriken, Kunai, and Throw Coin)"
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": null
   },
   {
    "id": 610096,
@@ -989,7 +1159,15 @@
      "text": "HIT +20, ranged physical damage +8%; every additional +2 refine, HIT +20 and ranged physical damage +8% more."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 610061,
+    "category": "Weapon",
+    "atk": 125,
+    "slots": 2,
+    "requiredLevel": 18
+   },
+   "starAtk": 155
   },
   {
    "id": 550209,
@@ -1023,7 +1201,9 @@
      "text": "SP consumption -12% more, MHP +200; every additional +2 refine, SP consumption -12% and MHP +200 more."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 25
   },
   {
    "id": 500137,
@@ -1057,7 +1237,15 @@
      "text": "DEF +12, and for each refined +2, DEF will be +12 again."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 500112,
+    "category": "Weapon",
+    "atk": 100,
+    "slots": 3,
+    "requiredLevel": 14
+   },
+   "starAtk": 135
   },
   {
    "id": 560089,
@@ -1091,7 +1279,15 @@
      "text": "MDEF+4 and MaxSP+6%. For every additional +2 refine, MDEF+4 and MaxSP+6%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 560056,
+    "category": "Weapon",
+    "atk": 65,
+    "slots": 2,
+    "requiredLevel": 12
+   },
+   "starAtk": 130
   },
   {
    "id": 600077,
@@ -1125,7 +1321,9 @@
      "text": "HIT +20, FLEE +8; every additional +2 refine, HIT +20 and FLEE +8 more."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 210
   },
   {
    "id": 530082,
@@ -1159,7 +1357,9 @@
      "text": "the CRI will be +18, and for each refined +2, the CRI will be further +18."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 160
   },
   {
    "id": 700131,
@@ -1188,7 +1388,9 @@
      "text": "MaxHP +100, FLEE +12, every refined +2, MaxHP will be +100, FLEE will be +12."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 135
   },
   {
    "id": 460170,
@@ -1222,7 +1424,9 @@
      "text": "FLEE +24; every additional +2 refine, FLEE +24 more. (Ninjutsu skills include Fire Blossom, Fire Formation, Blazing Dragon, Ice Bolt Spear, Water Blunt, Freezing Frost, Wind Blade, Thunder Strike, and North Wind)"
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": null
   },
   {
    "id": 610097,
@@ -1256,7 +1460,15 @@
      "text": "HIT +20, ranged physical damage +10%; every additional +2 refine, HIT +20 and ranged physical damage +10% more."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 610061,
+    "category": "Weapon",
+    "atk": 125,
+    "slots": 2,
+    "requiredLevel": 18
+   },
+   "starAtk": 155
   },
   {
    "id": 550210,
@@ -1290,7 +1502,9 @@
      "text": "SP consumption -12% more, Variable Casting Time -5% more; every additional +2 refine, SP consumption -12% and Variable Casting Time -5% more."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 25
   },
   {
    "id": 500138,
@@ -1314,7 +1528,15 @@
      "text": "FLEE+20, MaxHP+450, MaxHP+6%, And when the learned potion is thrown at Lv5, there is a certain chance of recovering HP150 every 1 second for 3 seconds when receiving physical attacks. When refining +11 or above, HIT +18, and for every refining +2, HIT +18."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 500112,
+    "category": "Weapon",
+    "atk": 100,
+    "slots": 3,
+    "requiredLevel": 14
+   },
+   "starAtk": 135
   },
   {
    "id": 560090,
@@ -1348,7 +1570,15 @@
      "text": "MDEF +4 and MaxSP +6%. Every time refined to +2, MDEF +4 and MaxSP +6%."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": {
+    "id": 560056,
+    "category": "Weapon",
+    "atk": 65,
+    "slots": 2,
+    "requiredLevel": 12
+   },
+   "starAtk": 130
   },
   {
    "id": 600078,
@@ -1382,7 +1612,9 @@
      "text": "HIT +30, FLEE +18, MaxHP +2%; every additional +2 refine, HIT +30, FLEE +18, and MaxHP +2% more."
     }
    ],
-   "footer": {}
+   "footer": {},
+   "plain": null,
+   "starAtk": 210
   }
  ],
  "tokens": [
