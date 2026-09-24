@@ -3,6 +3,7 @@
 // Product/Offer (misrepresenting virtual goods as purchasable risks a manual
 // action). No HowTo, no new FAQPage.
 import { SITE_URL } from '@/lib/site';
+import { stripCodes } from '@/lib/color-codes';
 
 export function websiteJsonLd() {
   return {
@@ -104,33 +105,21 @@ export function entityJsonLd(opts: {
   description?: string | null;
   properties: { name: string; value: string | number; unitText?: string }[];
 }) {
+  // Item descriptions come from the game client and carry its markup: colour
+  // codes and <NAVI> waypoints. The page renders those as tones and links, but
+  // the structured data was shipping them raw to search engines.
+  const description = opts.description ? stripCodes(opts.description) : null;
   return {
     '@context': 'https://schema.org',
     '@type': 'Thing',
     '@id': `${SITE_URL}${opts.path}#entity`,
     name: opts.name,
-    ...(opts.description ? { description: opts.description } : {}),
+    ...(description ? { description } : {}),
     additionalProperty: opts.properties.map((p) => ({
       '@type': 'PropertyValue',
       name: p.name,
       value: p.value,
       ...(p.unitText ? { unitText: p.unitText } : {}),
-    })),
-  };
-}
-
-/** A page's own question-and-answer block, marked up so search engines can
- *  show it. Only pass questions the page actually answers in its visible text:
- *  an answer that exists only in the markup is the kind of thing Google drops
- *  the whole block for. */
-export function faqJsonLd(entries: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: entries.map((e) => ({
-      '@type': 'Question',
-      name: e.question,
-      acceptedAnswer: { '@type': 'Answer', text: e.answer },
     })),
   };
 }

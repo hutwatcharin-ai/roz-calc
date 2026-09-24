@@ -30,7 +30,7 @@ import Caveat from '@/components/Caveat';
 import ItemIcon from '@/components/ItemIcon';
 import JsonLd from '@/components/JsonLd';
 import AdSlot from '@/components/AdSlot';
-import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import star from '@/data/star-gear.json';
 import effectsTh from '@/data/star-effects-th.json';
@@ -206,7 +206,6 @@ export default async function StarGearPage() {
           { name: 'ของติดดาว', path: '/guides/star-gear' },
         ])}
       />
-      <JsonLd data={faqJsonLd(FAQ)} />
 
       <PageHeader
         title="ของติดดาว ★ — ยังไม่เปิด แต่เตรียมของรอไว้ได้"

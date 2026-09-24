@@ -3151,6 +3151,10 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .gametext__gap { height: 8px; }
 .gametext__muted { color: var(--text); font-weight: 600; }
 .gametext__accent { color: var(--cyan); }
+/* The client's waypoint, rewritten into "Name (map x,y)" and linked to the
+   map page. It used to print as raw <NAVI> markup on 147 items. */
+.gametext__navi { color: var(--yellow); text-decoration: underline; text-underline-offset: 3px; }
+.gametext__navi:hover { color: var(--text); }
 .absentnote { margin: 12px 0 0; padding: 10px 14px; border: 1px solid rgba(255,107,139,.4); border-radius: 10px; background: rgba(255,107,139,.08); color: var(--dim); font-size: 14px; line-height: 1.6; }
 .absentnote strong { color: #FF8FA8; margin-inline-end: 6px; }
 

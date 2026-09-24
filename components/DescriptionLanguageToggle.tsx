@@ -60,9 +60,13 @@ export default function DescriptionLanguageToggle({
             <div key={i} className="gametext__gap" aria-hidden="true" />
           ) : (
             <p key={i}>
-              {segments(line).map((seg, j) => (
-                <span key={j} className={seg.tone === 'default' ? undefined : `gametext__${seg.tone}`}>{seg.text}</span>
-              ))}
+              {segments(line).map((seg, j) =>
+                seg.href ? (
+                  <a key={j} href={seg.href} className="gametext__navi">{seg.text}</a>
+                ) : (
+                  <span key={j} className={seg.tone === 'default' ? undefined : `gametext__${seg.tone}`}>{seg.text}</span>
+                ),
+              )}
             </p>
           ),
         )}
