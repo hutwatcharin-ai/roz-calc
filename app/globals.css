@@ -3485,3 +3485,5 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .homun__conflict p:last-child { margin-bottom: 0; }
 @media (max-width: 900px) { .homun__mats--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .homun__mats--four { grid-template-columns: minmax(0, 1fr); } .homun__feed li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+.homun > section { margin-top: 14px; }
+.homun .jumpbar { margin-top: 10px; }
