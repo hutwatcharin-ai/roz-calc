@@ -92,6 +92,33 @@ def client_items():
     return out
 
 
+def client_has_plain_version(family_names):
+    """Which of these names (already ★-stripped, lower-cased) the client has
+    with NO star at all in front of them anywhere in its item tables --
+    distinguishes "our table just doesn't have the ordinary version" from
+    "the game doesn't have one". Checked 24 Sep 2026: ★ Crossbow, ★ Hora,
+    ★ Improved Wrist Guard, ★ Leather Jacket, ★ Long Coat,
+    ★ Steel Chainmail, ★★ Broken Blade Halberd, ★★ Oak Wand,
+    ★★ Two Handed Sword all come back false -- the ★ piece is the only
+    tier of that item that exists at all, in the client or in our table."""
+    L = lub.runtime()
+    L.execute(b'function C_MsgString(a,b) return tostring(b or a) end')
+    for f in ('iteminfo_thTH.lub', 'itemInfo_data.lub'):
+        lub.load(L, SYSTEM + f)
+    g = L.globals()
+    plain_names = set()
+    for table in (b'tbl_string', b'tbl_data'):
+        tbl = g[table]
+        if tbl is None:
+            continue
+        for _, value in tbl.items():
+            row = lub.to_py(value)
+            name = clean(str(row.get('identifiedDisplayName') or '')).strip()
+            if name and not name.startswith('★'):
+                plain_names.add(name.lower())
+    return {n: (n.lower() in plain_names) for n in family_names}
+
+
 def env_file():
     env = {}
     for line in open(os.path.join(os.path.dirname(__file__), '..', '.env.local'), encoding='utf-8'):
@@ -113,7 +140,7 @@ def rest(query):
 
 def db_items():
     """Our own table, which has every ★ row but only in English."""
-    return rest('items?select=id,name_en,icon_url,category,required_level,description,slots,atk'
+    return rest('items?select=id,name_en,icon_url,category,required_level,description,slots,atk,weapon_type,equippable_classes'
                 '&name_en=like.%E2%98%85*')
 
 
@@ -186,7 +213,12 @@ def split_effect(description, thai):
 client = client_items()
 rows = db_items()
 PLAIN = re.compile(r'^★+\s*')
-twins = plain_twins([PLAIN.sub('', r['name_en']) for r in rows if r['category'] != 'Other'])
+plain_names = [PLAIN.sub('', r['name_en']) for r in rows if r['category'] != 'Other']
+twins = plain_twins(plain_names)
+# Only ask the client about the families we actually failed to find in our
+# own table -- no point re-checking the 25 that already resolved.
+unresolved = sorted({n for n in plain_names if n not in twins})
+in_client = client_has_plain_version(unresolved)
 print(f'{len(rows)} ★ rows in our database, {len(client)} of them have Thai text in the client')
 
 items, tokens = [], []
@@ -228,12 +260,26 @@ for row in sorted(rows, key=lambda r: r['name_en']):
         tokens.append(entry)
         continue
     base, tiers, footer = split_effect(description, thai)
+    # The Thai tooltip's trailing block (type/jobs/weight/...) has no English
+    # equivalent to parse -- but type and jobs are their own columns in our
+    # table regardless of language, so an English row still gets them instead
+    # of leaving the page's facts line silently short two fields.
+    if not footer.get('type') and row.get('weapon_type'):
+        footer['type'] = row['weapon_type']
+    if not footer.get('jobs') and row.get('equippable_classes'):
+        footer['jobs'] = ', '.join(c if c.endswith('Class') else f'{c} Class' for c in row['equippable_classes'])
     entry.update({'base': base, 'tiers': tiers, 'footer': footer})
     # What the ordinary version of the same piece looks like, so the page can
     # answer "what does the star actually buy me" instead of only "what does
     # the star version do".
-    twin = twins.get(PLAIN.sub('', row['name_en']))
+    plain_name = PLAIN.sub('', row['name_en'])
+    twin = twins.get(plain_name)
     star_atk = int(footer['atk']) if footer.get('atk', '').isdigit() else row.get('atk')
+    # When there's no twin, say why: either the client genuinely has no
+    # ordinary tier of this item (checked directly, see
+    # client_has_plain_version), or it does and our own table is just
+    # missing that row -- two different findings, not one blank space.
+    entry['plainExistsInGame'] = None if twin is not None else in_client.get(plain_name)
     entry['plain'] = None if twin is None else {
         'id': twin['id'],
         'category': twin['category'],

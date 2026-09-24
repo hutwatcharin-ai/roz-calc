@@ -48,6 +48,7 @@
     "requiredLevel": "18",
     "jobs": "Swordman Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 600051,
     "category": "Weapon",
@@ -94,6 +95,7 @@
     "requiredLevel": "14",
     "jobs": "Mage Class, Acolyte Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 540084,
     "category": "Weapon",
@@ -110,7 +112,7 @@
    "tier": 1,
    "family": "Boots",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/470418.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -132,7 +134,10 @@
      "text": "MaxHP +8%, healing amount +10%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 470233,
     "category": "Armor",
@@ -179,6 +184,7 @@
     "requiredLevel": "14",
     "jobs": "Swordman Class, Merchant Class, Acolyte Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 590075,
     "category": "Weapon",
@@ -225,6 +231,7 @@
     "requiredLevel": "18",
     "jobs": "Thief Class, Archer Class"
    },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 125
   },
@@ -265,6 +272,7 @@
     "requiredLevel": "18",
     "jobs": "Archer Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 700083,
     "category": "Weapon",
@@ -311,6 +319,7 @@
     "requiredLevel": "18",
     "jobs": "Swordman Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 1451,
     "category": "Weapon",
@@ -357,6 +366,7 @@
     "requiredLevel": "16",
     "jobs": "Swordman Class, Merchant Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 620049,
     "category": "Weapon",
@@ -373,7 +383,7 @@
    "tier": 1,
    "family": "Hood",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/480740.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -395,7 +405,10 @@
      "text": "MaxHP will be +450 and MaxHP will be +4%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 480384,
     "category": "Armor",
@@ -442,6 +455,7 @@
     "requiredLevel": "12",
     "jobs": "Monk Class"
    },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 120
   },
@@ -452,7 +466,7 @@
    "tier": 1,
    "family": "Improved Wrist Guard",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/460168.png",
    "requiredLevel": 50,
    "slots": 1,
    "lang": "en",
@@ -474,7 +488,10 @@
      "text": "ATK +3%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "Ninja Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": null
   },
@@ -515,6 +532,7 @@
     "requiredLevel": "18",
     "jobs": "Assassin Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 610061,
     "category": "Weapon",
@@ -531,7 +549,7 @@
    "tier": 1,
    "family": "Leather Jacket",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/450530.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -553,7 +571,10 @@
      "text": "MaxHP will be +350 and FLEE will be +12."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": null
   },
@@ -564,7 +585,7 @@
    "tier": 1,
    "family": "Long Coat",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/450529.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -586,7 +607,10 @@
      "text": "MaxHP will be +400, MaxSP will be +35, and MaxSP will be +5%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": null
   },
@@ -627,6 +651,7 @@
     "requiredLevel": "14",
     "jobs": "Bard Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 570058,
     "category": "Weapon",
@@ -643,7 +668,7 @@
    "tier": 1,
    "family": "Muffler",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/480741.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -665,7 +690,10 @@
      "text": "MaxHP will be +450 and MaxSP will be +4%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 480378,
     "category": "Armor",
@@ -712,6 +740,7 @@
     "requiredLevel": "14",
     "jobs": "Swordman Class, Merchant Class, Thief Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 500112,
     "category": "Weapon",
@@ -728,7 +757,7 @@
    "tier": 1,
    "family": "Sandals",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/470419.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -750,7 +779,10 @@
      "text": "MaxHP +8%, healing amount +10%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 470231,
     "category": "Armor",
@@ -797,6 +829,7 @@
     "requiredLevel": "18",
     "jobs": "Crusader Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 530079,
     "category": "Weapon",
@@ -843,6 +876,7 @@
     "requiredLevel": "18",
     "jobs": "Swordman Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 600058,
     "category": "Weapon",
@@ -889,6 +923,7 @@
     "requiredLevel": "14",
     "jobs": "Merchant Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 590083,
     "category": "Weapon",
@@ -905,7 +940,7 @@
    "tier": 1,
    "family": "Steel Chainmail",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/450528.png",
    "requiredLevel": 1,
    "slots": 1,
    "lang": "en",
@@ -927,7 +962,10 @@
      "text": "MaxHP will be +1000, MaxHP will be +7%, and DEF will be +70."
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "All Classes Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": null
   },
@@ -968,6 +1006,7 @@
     "requiredLevel": "12",
     "jobs": "Novice Class, Swordman Class, Archer Class, Thief Class, Mage Class, Merchant Class, Ninja Class, Soul Linker Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 510135,
     "category": "Weapon",
@@ -1014,6 +1053,7 @@
     "requiredLevel": "12",
     "jobs": "Novice Class, Mage Class, Acolyte Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 550138,
     "category": "Weapon",
@@ -1060,6 +1100,7 @@
     "requiredLevel": "16",
     "jobs": "Dancer Class"
    },
+   "plainExistsInGame": null,
    "plain": {
     "id": 580057,
     "category": "Weapon",
@@ -1076,7 +1117,7 @@
    "tier": 2,
    "family": "Broken Blade Halberd",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/530081.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1103,7 +1144,11 @@
      "text": "the CRI will be +18, and for each refined +2, the CRI will be further +18."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "One-handed Spear",
+    "jobs": "Crusader Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 160
   },
@@ -1114,7 +1159,7 @@
    "tier": 2,
    "family": "Crossbow",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/700130.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1141,7 +1186,11 @@
      "text": "the CRI will be +12, and for each refined +2, the CRI will be further +12."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Bow",
+    "jobs": "Hunter Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 135
   },
@@ -1152,7 +1201,7 @@
    "tier": 2,
    "family": "Improved Wrist Guard",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/460169.png",
    "requiredLevel": 50,
    "slots": 1,
    "lang": "en",
@@ -1179,7 +1228,10 @@
      "text": "FLEE +24; every additional +2 refine, FLEE +24 more. (Throwing skills include Shuriken, Kunai, and Throw Coin)"
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "Ninja Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": null
   },
@@ -1190,7 +1242,7 @@
    "tier": 2,
    "family": "Jur",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/610096.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1217,7 +1269,11 @@
      "text": "HIT +20, ranged physical damage +8%; every additional +2 refine, HIT +20 and ranged physical damage +8% more."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Katar",
+    "jobs": "Assassin Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 610061,
     "category": "Weapon",
@@ -1234,7 +1290,7 @@
    "tier": 2,
    "family": "Oak Wand",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/550209.png",
    "requiredLevel": 12,
    "slots": 3,
    "lang": "en",
@@ -1261,7 +1317,11 @@
      "text": "SP consumption -12% more, MHP +200; every additional +2 refine, SP consumption -12% and MHP +200 more."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "One-handed Staff",
+    "jobs": "Wizard Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 25
   },
@@ -1272,7 +1332,7 @@
    "tier": 2,
    "family": "Ring Pommel Saber",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/500137.png",
    "requiredLevel": 14,
    "slots": 3,
    "lang": "en",
@@ -1299,7 +1359,11 @@
      "text": "DEF +12, and for each refined +2, DEF will be +12 again."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "One-handed Sword",
+    "jobs": "Alchemist Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 500112,
     "category": "Weapon",
@@ -1316,7 +1380,7 @@
    "tier": 2,
    "family": "Studded Knuckles",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/560089.png",
    "requiredLevel": 12,
    "slots": 3,
    "lang": "en",
@@ -1343,7 +1407,11 @@
      "text": "MDEF+4 and MaxSP+6%. For every additional +2 refine, MDEF+4 and MaxSP+6%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Knuckle",
+    "jobs": "Monk Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 560056,
     "category": "Weapon",
@@ -1360,7 +1428,7 @@
    "tier": 2,
    "family": "Two Handed Sword",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/600077.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1387,7 +1455,11 @@
      "text": "HIT +20, FLEE +8; every additional +2 refine, HIT +20 and FLEE +8 more."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Two-handed Sword",
+    "jobs": "Knight Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 210
   },
@@ -1398,7 +1470,7 @@
    "tier": 2,
    "family": "Broken Blade Halberd",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/530082.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1425,7 +1497,11 @@
      "text": "the CRI will be +18, and for each refined +2, the CRI will be further +18."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "One-handed Spear",
+    "jobs": "Crusader Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 160
   },
@@ -1436,7 +1512,7 @@
    "tier": 2,
    "family": "Crossbow",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/700131.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1458,7 +1534,11 @@
      "text": "MaxHP +100, FLEE +12, every refined +2, MaxHP will be +100, FLEE will be +12."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Bow",
+    "jobs": "Rogue Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 135
   },
@@ -1469,7 +1549,7 @@
    "tier": 2,
    "family": "Improved Wrist Guard",
    "category": "Armor",
-   "icon": null,
+   "icon": "/images/items/460170.png",
    "requiredLevel": 50,
    "slots": 1,
    "lang": "en",
@@ -1496,7 +1576,10 @@
      "text": "FLEE +24; every additional +2 refine, FLEE +24 more. (Ninjutsu skills include Fire Blossom, Fire Formation, Blazing Dragon, Ice Bolt Spear, Water Blunt, Freezing Frost, Wind Blade, Thunder Strike, and North Wind)"
     }
    ],
-   "footer": {},
+   "footer": {
+    "jobs": "Ninja Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": null
   },
@@ -1507,7 +1590,7 @@
    "tier": 2,
    "family": "Jur",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/610097.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1534,7 +1617,11 @@
      "text": "HIT +20, ranged physical damage +10%; every additional +2 refine, HIT +20 and ranged physical damage +10% more."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Katar",
+    "jobs": "Assassin Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 610061,
     "category": "Weapon",
@@ -1551,7 +1638,7 @@
    "tier": 2,
    "family": "Oak Wand",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/550210.png",
    "requiredLevel": 12,
    "slots": 3,
    "lang": "en",
@@ -1578,7 +1665,11 @@
      "text": "SP consumption -12% more, Variable Casting Time -5% more; every additional +2 refine, SP consumption -12% and Variable Casting Time -5% more."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "One-handed Staff",
+    "jobs": "Wizard Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 25
   },
@@ -1589,7 +1680,7 @@
    "tier": 2,
    "family": "Ring Pommel Saber",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/500138.png",
    "requiredLevel": 14,
    "slots": 3,
    "lang": "en",
@@ -1606,7 +1697,11 @@
      "text": "FLEE+20, MaxHP+450, MaxHP+6%, And when the learned potion is thrown at Lv5, there is a certain chance of recovering HP150 every 1 second for 3 seconds when receiving physical attacks. When refining +11 or above, HIT +18, and for every refining +2, HIT +18."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "One-handed Sword",
+    "jobs": "Alchemist Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 500112,
     "category": "Weapon",
@@ -1623,7 +1718,7 @@
    "tier": 2,
    "family": "Studded Knuckles",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/560090.png",
    "requiredLevel": 12,
    "slots": 3,
    "lang": "en",
@@ -1650,7 +1745,11 @@
      "text": "MDEF +4 and MaxSP +6%. Every time refined to +2, MDEF +4 and MaxSP +6%."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Knuckle",
+    "jobs": "Monk Class"
+   },
+   "plainExistsInGame": null,
    "plain": {
     "id": 560056,
     "category": "Weapon",
@@ -1667,7 +1766,7 @@
    "tier": 2,
    "family": "Two Handed Sword",
    "category": "Weapon",
-   "icon": null,
+   "icon": "/images/items/600078.png",
    "requiredLevel": 18,
    "slots": 3,
    "lang": "en",
@@ -1694,7 +1793,11 @@
      "text": "HIT +30, FLEE +18, MaxHP +2%; every additional +2 refine, HIT +30, FLEE +18, and MaxHP +2% more."
     }
    ],
-   "footer": {},
+   "footer": {
+    "type": "Two-handed Sword",
+    "jobs": "Knight Class"
+   },
+   "plainExistsInGame": false,
    "plain": null,
    "starAtk": 210
   }

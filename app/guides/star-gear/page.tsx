@@ -60,6 +60,7 @@ type Piece = {
   tiers: Tier[];
   footer: Record<string, string>;
   plain: Plain | null;
+  plainExistsInGame: boolean | null;
   starAtk: number | null;
 };
 type Token = { id: number; name: string; icon: string | null; category: string | null; namesNpc: boolean };
@@ -82,6 +83,11 @@ const FAMILIES = [...new Set(SECOND.map((p) => p.family))].sort().map((family) =
   variants: SECOND.filter((p) => p.family === family).sort((a, b) => a.stars - b.stars),
 }));
 const PAIRED = PIECES.filter((p) => p.plain);
+const NO_PLAIN = PIECES.filter((p) => !p.plain);
+// The pieces the client itself has no data for at all -- no Thai text, no
+// icon resource, no footer block. Those got a mirrored icon from
+// divine-pride instead of the client (see build-star-gear.py).
+const CLIENT_UNKNOWN = PIECES.filter((p) => p.lang === 'en');
 
 /** The headline ATK or MATK a piece's own text opens with, for telling two
  *  variants apart at a glance. */
@@ -198,6 +204,9 @@ function PieceCard({ piece }: { piece: Piece }) {
           เทียบกับตัวธรรมดา: {gained.join(' · ')}
           {plain && <> · <Link href={itemHref(plain.id, plain.category)}>ดูตัวธรรมดา</Link></>}
         </p>
+      )}
+      {!plain && piece.plainExistsInGame === false && (
+        <p className="star__noplain">ชิ้นนี้ไม่มีรุ่นธรรมดาให้เทียบ — ตรวจในไคลเอนต์แล้วว่าไม่มีเวอร์ชันที่ไม่ติดดาวของชิ้นนี้เลย มีแต่รุ่นติดดาวรุ่นเดียว</p>
       )}
       <dl className="star__tiers">
         <div>
@@ -382,7 +391,8 @@ export default async function StarGearPage() {
         <h2 className="section-title">ของทุกชิ้นว่าติดดาวแล้วได้อะไร</h2>
         <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
           ครบทุกชิ้นที่มีในไคลเอนต์ แต่ละใบบอกผลตอนใส่เฉย ๆ แล้วไล่ทีละขั้นตีบวก ชิ้นที่หาตัวธรรมดามาเทียบได้
-          ({PAIRED.length} จาก {PIECES.length}) จะมีบรรทัดบอกว่าติดดาวแล้ว ATK กับ Slot ขยับเท่าไร
+          ({PAIRED.length} จาก {PIECES.length}) จะมีบรรทัดบอกว่าติดดาวแล้ว ATK กับ Slot ขยับเท่าไร ส่วนอีก {NO_PLAIN.length} ชิ้นที่เหลือ
+          ตรวจกับไคลเอนต์แล้วว่าไม่มีรุ่นธรรมดาอยู่จริง ไม่ใช่ข้อมูลเราขาด
         </p>
 
         <section id="sec-tier-1" style={{ marginTop: 18 }}>
@@ -452,7 +462,9 @@ export default async function StarGearPage() {
 ชื่อ NPC ขั้นที่ 2 คือ Nagging Old Man ตรวจกับคำบรรยายไอเทมในเกมของเราเองแล้ว ({NPC_CONFIRMED_BY} ชิ้น พิกัดตรงกันหมด) ·{' '}
         <strong>ส่วน NPC ขั้นที่ 1 พิกัด กติกาแลกโทเคน และค่าใช้จ่ายในการปลุก มาจากไกด์ roz-global.info</strong> (อ่าน 8 ก.ย. 2026)
         ซึ่งอธิบายเซิร์ฟไต้หวัน เป็นแหล่งเดียวและยังตรวจกับเซิร์ฟเราไม่ได้ ·
-        ข้อความอังกฤษต้นทางของบางชิ้นเป็นการแปลจากภาษาจีนมาอีกทอด ชื่อสกิลบางตัวจึงอ่านแปลก ๆ ตั้งแต่ต้นฉบับ
+        ข้อความอังกฤษต้นทางของบางชิ้นเป็นการแปลจากภาษาจีนมาอีกทอด ชื่อสกิลบางตัวจึงอ่านแปลก ๆ ตั้งแต่ต้นฉบับ ·
+        <strong>ไอคอน {CLIENT_UNKNOWN.length} ชิ้นที่ไคลเอนต์ไม่มีข้อมูลให้เลย ดึงมาจาก static.divine-pride.net</strong> ตรวจแล้วว่าไม่ใช่ภาพ &quot;ไม่พบ&quot; ของเว็บนั้นก่อนบันทึกทุกไฟล์ ·
+        {NO_PLAIN.length} ชิ้นที่ไม่มีบรรทัดเทียบกับตัวธรรมดา ตรวจกับตารางไอเทมทั้งหมดในไคลเอนต์แล้วว่าไม่มีรุ่นธรรมดาอยู่จริง ไม่ใช่ฐานข้อมูลเราตกหล่น
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>

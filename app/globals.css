@@ -3523,6 +3523,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .star__npcname { margin: 0; font: 700 15px/1.5 var(--font-sarabun), sans-serif; color: var(--cyan); }
 .star__detail { margin: 4px 0 0; font-size: 13.5px; line-height: 1.8; color: var(--dim); }
 .star__gain { margin: 8px 0 0; font-size: 13px; line-height: 1.7; color: var(--yellow); }
+.star__noplain { margin: 8px 0 0; font-size: 13px; line-height: 1.7; color: var(--dim); font-style: italic; }
 .star__group { margin: 0; font: 700 18px/1.4 var(--font-sarabun), sans-serif; }
 .star__unconfirmed { display: block; margin-top: 3px; font-size: 12px; color: var(--dim); font-weight: 400; }
 .star__pair { margin-top: 18px; padding-inline-start: 12px; border-inline-start: 2px solid var(--hair); }
