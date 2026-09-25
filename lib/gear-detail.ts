@@ -6,6 +6,7 @@ import { cache } from 'react';
 import { supabaseBrowser } from './supabase';
 import { fetchAllRows } from './fetch-all-rows';
 import { gearCategory, gearType } from './gear-type';
+import { isAbsentFromGame } from './game-absent';
 
 // Cached so generateMetadata and the page body cost one query, not two.
 // Returns the raw { data, error } -- each caller keeps its own handling, and a
@@ -34,14 +35,22 @@ export const getGearItem = cache(async (id: number) => {
 export interface GearExtras {
   droppedBy: any[] | null;
   droppedByError: boolean;
+  /** Other wearables with exactly this name: the client holds 39 weapons
+   *  twice (classic id + Zero re-id, identical text and stats). */
+  sameName: { id: number; slots: number | null; category: string | null }[];
   dict: {
     lines: Map<string, string>;
     terms: Map<string, string | null>;
   };
 }
 
-export async function loadGearExtras(id: number): Promise<GearExtras> {
+export async function loadGearExtras(id: number, name?: string): Promise<GearExtras> {
   const db = supabaseBrowser();
+
+  const { data: sameName, error: sameNameError } = name
+    ? await db.from('items').select('id, slots, category').eq('name_en', name).neq('id', id).in('category', ['Weapon', 'Armor', 'Costume Equipment']).order('id')
+    : { data: [], error: null };
+  if (sameNameError) console.error('gear same-name query failed', sameNameError);
 
   const { data: droppedBy, error: droppedByError } = await db
     .from('monster_drops')
@@ -79,6 +88,7 @@ export async function loadGearExtras(id: number): Promise<GearExtras> {
   return {
     droppedBy: droppedBy ?? null,
     droppedByError: Boolean(droppedByError),
+    sameName: (sameName ?? []).filter((row) => !isAbsentFromGame(row.id)),
     dict: {
       lines: new Map((lineRows ?? []).map((r) => [r.source_line, r.thai_line])),
       terms: new Map((termRows ?? []).map((r) => [r.source_term, r.thai_term])),

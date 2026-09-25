@@ -162,6 +162,11 @@ export default async function EquipmentPage({
     filtered.sort((a, b) => (a.required_level ?? 999) - (b.required_level ?? 999) || a.id - b.id);
   }
 
+  const twinCount = new Map<string, number>();
+  for (const it of filtered) {
+    const key = `${it.name_en}|${it.slots}`;
+    twinCount.set(key, (twinCount.get(key) ?? 0) + 1);
+  }
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const rows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
@@ -364,6 +369,11 @@ export default async function EquipmentPage({
         </div>
       </form>
 
+      {/* 39 weapons exist twice in the client under the same name and slot
+          count -- a classic id (1354 Hammer) and a Zero re-id (620035) with
+          identical text and stats, both referenced by drop tables. Neither
+          can be hidden, so a card whose name+slots is shared shows its id,
+          which is the only thing that tells the two apart. */}
       {error ? (
         <div className="card">
           <p style={{ color: 'var(--faint)', margin: 0 }}>เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง</p>
@@ -384,6 +394,9 @@ export default async function EquipmentPage({
                 <span className="itemcard__name">
                   {it.name_en}
                   {it.slots != null && it.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{it.slots}]</span>}
+                  {twinCount.get(`${it.name_en}|${it.slots}`)! > 1 && (
+                    <span className="mono itemcard__id" title="มีของชื่อนี้ slot เท่ากันมากกว่าหนึ่งชิ้นในเกม รหัสคือสิ่งเดียวที่ต่าง"> รหัส {it.id}</span>
+                  )}
                 </span>
                 <span className="itemcard__meta">
                   {(it.kind ? TYPE_TH[it.kind] ?? it.kind : null) ?? CATEGORY_TH[it.group ?? ''] ?? '—'}

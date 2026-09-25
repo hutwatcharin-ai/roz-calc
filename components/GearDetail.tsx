@@ -8,6 +8,7 @@ import ThaiAliasLine from '@/components/ThaiAliasLine';
 import AdSlot from '@/components/AdSlot';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import Link from 'next/link';
+import { itemHref } from '@/lib/item-href';
 import ItemCrafting from '@/components/ItemCrafting';
 import { isCVariant } from '@/lib/c-variant';
 import JsonLd from '@/components/JsonLd';
@@ -57,7 +58,7 @@ export default function GearDetail({
   extras: GearExtras;
   section: GearSection;
 }) {
-  const { droppedBy, droppedByError, dict } = extras;
+  const { droppedBy, droppedByError, dict, sameName } = extras;
   const displayName = item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en;
   const categoryLabel = CATEGORY_LABELS[item.category ?? ''] ?? item.category ?? section.label;
   const randomOptions = randomOptionsFor(item.category, item.weapon_type, item.weapon_level);
@@ -121,6 +122,22 @@ export default function GearDetail({
               said only "Crystal Pumps" (Search Console, 90 days to 23 Sep
               2026). data/aliases-th.json holds the query behind each one. */}
           <ThaiAliasLine kind="items" id={item.id} />
+          {sameName.length > 0 && (
+            <p className="aliasline">
+              มีของชื่อเดียวกันอีก {sameName.length} ชิ้นในเกม:{' '}
+              {sameName.map((other, i) => (
+                <span key={other.id}>
+                  {i > 0 && ' · '}
+                  <Link href={itemHref(other.id, other.category)}>
+                    <strong>{item.name_en}{other.slots ? ` [${other.slots}]` : ''}</strong>
+                  </Link>
+                  <span className="mono aliasline__code"> (รหัส {other.id})</span>
+                </span>
+              ))}
+              <span className="aliasline__code"> · ชิ้นนี้รหัส <span className="mono">{item.id}</span></span>
+              {sameName.some((o) => o.slots === item.slots) && ' · ข้อความและค่าพลังเหมือนกัน ต่างกันแค่รหัส เกมมีทั้งสองชิ้น'}
+            </p>
+          )}
           <p className="equiphero__chips">
             <span className="tag">{categoryLabel}</span>
             {item.weapon_type && <span className="tag">{item.weapon_type}</span>}

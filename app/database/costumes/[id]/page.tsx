@@ -68,7 +68,7 @@ export default async function CostumeDetailPage({ params }: { params: { id: stri
     permanentRedirect(itemHref(id, item.category));
   }
 
-  const extras = await loadGearExtras(id);
+  const extras = await loadGearExtras(id, item.name_en);
 
   return <GearDetail item={item} extras={extras} section={SECTION} />;
 }

@@ -84,7 +84,7 @@ export default async function EquipmentDetailPage({ params }: { params: { id: st
     permanentRedirect(itemHref(id, item.category));
   }
 
-  const extras = await loadGearExtras(id);
+  const extras = await loadGearExtras(id, item.name_en);
 
   return <GearDetail item={item} extras={extras} section={SECTION} />;
 }

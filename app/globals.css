@@ -2411,6 +2411,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 }
 
 /* "เรียกอีกชื่อ" under an entity name (components/ThaiAliasLine). */
+.itemcard__id { display: block; font-size: 11px; color: var(--faint); font-weight: 400; }
 .aliasline { margin: 4px 0 0; color: var(--dim); font-size: 14px; }
 .aliasline strong { color: var(--cyan); font-weight: 600; }
 .aboutjump { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
