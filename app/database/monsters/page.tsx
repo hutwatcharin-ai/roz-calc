@@ -27,7 +27,7 @@ import { cardRelease } from '@/lib/card-availability';
 import MonsterNameInput from '@/components/MonsterNameInput';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
-import { MODE_FILTERS, aggroFallbackIds, isModeFilter, monsterIdsWithMode, type ModeFilter } from '@/lib/monster-modes';
+import { MODE_BADGE_CLASS, MODE_FILTERS, MODE_GUIDE, aggroFallbackIds, isModeFilter, monsterIdsWithMode, modesMeta, type ModeFilter } from '@/lib/monster-modes';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -594,6 +594,38 @@ export default async function MonsterListPage({
         ]}
         clearHref="/database/monsters"
       />
+      {/* The six behaviour words explained where the filter for them is,
+          not on a guide page of their own (owner, 25 Sep 2026). Each row
+          links to the filtered list; open by default when a นิสัย filter is on. */}
+      <details className="shopmore advfilter" id="behaviour" open={mode !== ''} style={{ marginTop: 10 }}>
+        <summary>นิสัยมอนแต่ละคำแปลว่าอะไร</summary>
+        <div className="recipe__scroll">
+          <table className="data-table recipe">
+            <thead>
+              <tr>
+                <th>นิสัย</th>
+                <th>หมายความว่า</th>
+                <th>ทำยังไงกับมัน</th>
+                <th>ตัวไหนบ้าง</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(Object.keys(MODE_FILTERS) as ModeFilter[]).map((key) => (
+                <tr key={key}>
+                  <td data-label="นิสัย"><span className={`tag tag--behaviour ${MODE_BADGE_CLASS[key]}`}>{MODE_FILTERS[key]}</span></td>
+                  <td data-label="หมายความว่า">{MODE_GUIDE[key].meaning}</td>
+                  <td data-label="ทำยังไง" className="muted">{MODE_GUIDE[key].why}</td>
+                  <td data-label="ตัวไหนบ้าง"><Link href={`/database/monsters?mode=${key}`}>ดูรายชื่อ</Link></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="guildp__src">
+          ที่มา: รุม / ไวต่อเวท / มองมุด / ตีทีละ 1 จากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero — บนข้อมูลที่ทั้งสองแหล่งมี (โจมตีก่อน) ตรงกับ rozerodb {modesMeta.rathena.agree} จาก {modesMeta.rathena.agree + modesMeta.rathena.disagree} ตัว ·
+          ขยับไม่ได้ / มินิบอส / โจมตีก่อน จาก rozerodb · คำเรียกตามที่ผู้เล่นใช้กันในเกม
+        </p>
+      </details>
       {hiddenUnknownHp > 0 && (
         <p className="muted" style={{ marginTop: -6, marginBottom: 10, fontSize: 13 }}>
           ซ่อนมอนที่ยังไม่รู้ค่าเลือดไป {hiddenUnknownHp} ตัว ตัวกรองเลือดใช้กับตัวที่มีตัวเลขจริงเท่านั้น

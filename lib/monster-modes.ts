@@ -42,6 +42,22 @@ export const MODE_FILTERS = {
 } as const;
 export type ModeFilter = keyof typeof MODE_FILTERS;
 
+/** What each flag means and what a player does about it -- shown on the
+ *  monster list next to the นิสัย filter (it was a guide page for a day;
+ *  the owner wanted it where the monsters are). */
+export const MODE_GUIDE: Record<ModeFilter, { meaning: string; why: string }> = {
+  assist: { meaning: BEHAVIOUR_LABELS.assist.title, why: 'ตีตัวเดียวแล้วโดนทั้งฝูง เลือกจุดที่ตัวอื่นอยู่ห่าง หรือเตรียมรับหลายตัว' },
+  castSensor: { meaning: BEHAVIOUR_LABELS.castSensor.title, why: 'สายเวทเจอตัวพวกนี้ต้องยืนให้ไกลกว่าระยะที่มันเห็น หรือฆ่าให้ทันก่อนมันถึงตัว' },
+  detector: { meaning: BEHAVIOUR_LABELS.detector.title, why: 'Hiding / Cloaking หนีตัวพวกนี้ไม่ได้ อย่าพึ่งสกิลซ่อนตัวใกล้มัน' },
+  plant: { meaning: BEHAVIOUR_LABELS.plant.title, why: 'ดาเมจไม่มีผล ใช้อาวุธเร็ว ๆ หรือสกิลที่ตีหลายครั้ง แทนสกิลตีแรงครั้งเดียว' },
+  rooted: { meaning: 'ยืนอยู่กับที่ ไม่เดินตาม ตีจากระยะไกลได้โดยไม่โดนไล่', why: 'เหมาะกับสายระยะไกลและสายเวท ยืนตีจากนอกระยะได้เรื่อย ๆ' },
+  mini: { meaning: 'บอสตัวเล็ก ดรอปดีกว่ามอนธรรมดา แต่ไม่ใช่ MVP', why: 'ตีได้เหมือนมอนปกติแต่แข็งกว่า ไม่มีกติกาแย่ง MVP' },
+};
+/** The class the badge uses for its colour, per filter key. */
+export const MODE_BADGE_CLASS: Record<ModeFilter, string> = {
+  assist: 'tag--assist', castSensor: 'tag--castSensor', detector: 'tag--detector', plant: 'tag--plant', rooted: 'tag--rooted', mini: 'tag--mini',
+};
+
 export function isModeFilter(value: string | undefined): value is ModeFilter {
   return value !== undefined && value in MODE_FILTERS;
 }
