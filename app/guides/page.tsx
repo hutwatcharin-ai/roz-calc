@@ -32,7 +32,8 @@ export default function GuidesPage() {
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
         หน้าพวกนี้เปิดอ่านได้เลย ไม่ต้องกรอกอะไร ส่วนที่ต้องใส่ตัวเลขของตัวเองแล้วให้เว็บคำนวณ อยู่ใน{' '}
         <Link href="/tools/leveling-spots">เครื่องมือ</Link> · ส่วนอัปเดตของเกมว่ามาแล้วอะไรและเดือนหน้ามีอะไร อยู่ที่{' '}
-        <Link href="/news/roadmap">ไทม์ไลน์อัปเดต</Link>
+        <Link href="/news/roadmap">ไทม์ไลน์อัปเดต</Link> · วิธีได้สัตว์เลี้ยง (Qpet) อยู่ที่{' '}
+        <Link href="/database/pets">ฐานข้อมูลสัตว์เลี้ยง</Link>
       </p>
 
       {GUIDE_GROUPS.map((group) => {

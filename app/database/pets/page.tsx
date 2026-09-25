@@ -39,9 +39,9 @@ import { LEVEL_2_SUCCESS_PERCENT, RING_TABS, TAMING_QUEST, TAMING_RING_PRICE } f
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'ฐานข้อมูลสัตว์เลี้ยง Ragnarok Zero — ตัวไหนให้สเตตัสอะไร จับด้วยอะไร',
+  title: 'สัตว์เลี้ยง Ragnarok Zero — วิธีได้โบนัส ตัวไหนให้สเตตัสอะไร จับด้วยอะไร',
   description:
-    'สัตว์เลี้ยง (Qpet) ทุกตัวใน Ragnarok Zero Global — โบนัสสเตตัสตอนใส่ Taming Ring ระดับ 1 และ 2 ใช้ของอะไรจับ ของนั้นดรอปจากมอนตัวไหนกี่เปอร์เซ็นต์ ค้นชื่อได้ พร้อมพิกัดร้านขายแหวนทุกเมือง',
+    'สัตว์เลี้ยง (Qpet) ใน Ragnarok Zero Global ได้มายังไง: ซื้อ Taming Ring ใส่ไข่ที่หน้าต่างเอนแชนต์ ระดับ 2 ใช้ไข่ซ้ำ · ตารางโบนัสสเตตัสทุกตัว ใช้ของอะไรจับ ของนั้นดรอปจากมอนตัวไหนกี่เปอร์เซ็นต์ พร้อมพิกัดร้านขายแหวนทุกเมือง',
 };
 
 interface PetRow {
@@ -104,7 +104,73 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
           { name: 'สัตว์เลี้ยง', path: '/database/pets' },
         ])}
       />
-      <PageHeader title="ฐานข้อมูลสัตว์เลี้ยง" />
+      <PageHeader
+        title="สัตว์เลี้ยง (Qpet) — ได้โบนัสยังไง และตัวไหนให้อะไร"
+        lead="สัตว์เลี้ยงในเกมนี้คือโบนัสสเตตัสที่ใส่ผ่านแหวน ไม่ใช่ตัวที่เดินตามและต้องป้อนอาหาร อ่าน 3 ขั้นด้านล่างก่อน แล้วค่อยเลือกตัวจากตาราง"
+      />
+
+      {/* A Qpet is an enchantment on a ring, not a pet that follows you, and
+          the bonuses in the table are unreachable without these steps. They
+          sit above the table because "how do I get one" is the question that
+          brings most readers here; the table answers the follow-up. */}
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>ได้โบนัสสัตว์เลี้ยงยังไง</h2>
+        <ol className="qpetsteps">
+          <li>
+            ซื้อ <strong>Taming Ring</strong> ราคา {TAMING_RING_PRICE.toLocaleString('en-US')} Zeny จาก Taming Merchant
+            แล้วสวมไว้
+            <details style={{ marginTop: 6 }}>
+              <summary>พิกัดร้านแหวนทั้ง {rozglobalGuides.qpetTowns.length} เมือง</summary>
+              <p className="muted" style={{ margin: '6px 0 8px', fontSize: 13 }}>
+                ก๊อป <code className="mono">/navi</code> ไปวางในแชต เกมจะขึ้นเส้นนำทางให้ เดินตามเส้นเอง ตัวละครไม่ได้เดินให้
+              </p>
+              <div className="recipe__scroll">
+                <table className="data-table recipe">
+                  <thead>
+                    <tr>
+                      <th>เมือง</th>
+                      <th>พิมพ์ในแชต</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rozglobalGuides.qpetTowns.map((town) => {
+                      const navi = naviCommand(town.map, town.x, town.y);
+                      return (
+                        <tr key={town.town}>
+                          <td data-label="เมือง">{town.town}</td>
+                          <td data-label="พิมพ์ในแชต">
+                            {navi ? <code className="mono navicmd">{navi}</code> : <span className="muted">ไม่ทราบพิกัด</span>}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </li>
+          <li>
+            เอาไข่ไปใส่ที่<strong>หน้าต่างเอนแชนต์</strong>ของแหวน —{' '}
+            {RING_TABS.map((tab, i) => (
+              <span key={tab.name}>
+                {i > 0 && ' · '}
+                <strong>{tab.name}</strong> {tab.does}
+              </span>
+            ))}
+          </li>
+          <li>
+            ระดับ 2 ต้องใช้<strong>ไข่ตัวเดิมอีกฟอง</strong> และสำเร็จ{' '}
+            <strong>{LEVEL_2_SUCCESS_PERCENT}%</strong> พลาดคือเสียไข่ฟองที่สอง
+          </li>
+        </ol>
+        <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
+          ไม่มีเงินซื้อของจับ: มีเควสจับสัตว์ที่ {TAMING_QUEST.town} คุยกับ {TAMING_QUEST.npc}{' '}
+          {naviCommand(TAMING_QUEST.map, TAMING_QUEST.x, TAMING_QUEST.y) && (
+            <code className="mono navicmd">{naviCommand(TAMING_QUEST.map, TAMING_QUEST.x, TAMING_QUEST.y)}</code>
+          )}{' '}
+          — {TAMING_QUEST.about}
+        </p>
+      </section>
 
       {error ? (
         <p className="filterstate">โหลดข้อมูลสัตว์เลี้ยงไม่สำเร็จ</p>
@@ -196,69 +262,6 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
       </div>
 
       {rows.length === 0 && q && <EmptyState kind="items" what={q} clearHref="/database/pets" />}
-
-      {/* The bonuses above are unreachable without this, and the page shipped
-          without it for a day: a Qpet is an enchantment on a ring, not a pet
-          that follows you. */}
-      <section style={{ marginTop: 26 }}>
-        <h2 className="section-title">โบนัสพวกนี้ได้มายังไง</h2>
-        <ol className="qpetsteps">
-          <li>
-            ซื้อ <strong>Taming Ring</strong> ราคา {TAMING_RING_PRICE.toLocaleString('en-US')} Zeny จาก Taming Merchant
-            (พิกัดข้างล่าง) แล้วสวมไว้
-          </li>
-          <li>
-            เอาไข่ไปใส่ที่<strong>หน้าต่างเอนแชนต์</strong>ของแหวน —{' '}
-            {RING_TABS.map((tab, i) => (
-              <span key={tab.name}>
-                {i > 0 && ' · '}
-                <strong>{tab.name}</strong> {tab.does}
-              </span>
-            ))}
-          </li>
-          <li>
-            ระดับ 2 ต้องใช้<strong>ไข่ตัวเดิมอีกฟอง</strong> และสำเร็จ{' '}
-            <strong>{LEVEL_2_SUCCESS_PERCENT}%</strong> พลาดคือเสียไข่ฟองที่สอง
-          </li>
-        </ol>
-        <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
-          ไม่มีเงินซื้อของจับ: มีเควสจับสัตว์ที่ {TAMING_QUEST.town} คุยกับ {TAMING_QUEST.npc}{' '}
-          {naviCommand(TAMING_QUEST.map, TAMING_QUEST.x, TAMING_QUEST.y) && (
-            <code className="mono navicmd">{naviCommand(TAMING_QUEST.map, TAMING_QUEST.x, TAMING_QUEST.y)}</code>
-          )}{' '}
-          — {TAMING_QUEST.about}
-        </p>
-      </section>
-
-      <section style={{ marginTop: 26 }}>
-        <h2 className="section-title">ซื้อ Taming Ring ได้ที่ไหน</h2>
-        <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
-          ก๊อป <code className="mono">/navi</code> ไปวางในแชต เกมจะขึ้นเส้นนำทางให้ เดินตามเส้นเอง ตัวละครไม่ได้เดินให้
-        </p>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>เมือง</th>
-                <th>พิมพ์ในแชต</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rozglobalGuides.qpetTowns.map((town) => {
-                const navi = naviCommand(town.map, town.x, town.y);
-                return (
-                  <tr key={town.town}>
-                    <td data-label="เมือง">{town.town}</td>
-                    <td data-label="พิมพ์ในแชต">
-                      {navi ? <code className="mono navicmd">{navi}</code> : <span className="muted">ไม่ทราบพิกัด</span>}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
         ไข่และของที่ใช้จับมาจาก<strong>ฐานข้อมูลไอเทมของเว็บนี้</strong> (หมวด Pet) ·

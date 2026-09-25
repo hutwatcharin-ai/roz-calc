@@ -110,7 +110,7 @@ export default function CostumeCraftPage() {
 
       <p className="muted" style={{ marginTop: 16 }}>
         ดูต่อ: <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link> ·{' '}
-        <Link href="/guides/pets">สัตว์เลี้ยง</Link> ·{' '}
+        <Link href="/database/pets">สัตว์เลี้ยง</Link> ·{' '}
         <Link href="/drop-finder">ค้นของดรอป</Link>
       </p>
     </main>
