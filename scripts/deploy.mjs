@@ -116,9 +116,15 @@ function buildIdAt(path) {
  * build, and only the --expect check caught that the change was not there.
  * The commit in this record is the thing to wait for.
  */
+// A token with only the `deploy` permission can trigger a build but is refused
+// (401/403) on every status read. That is a different answer from "no record
+// yet", so it is reported as such instead of being polled for twenty minutes.
+const FORBIDDEN = Symbol('forbidden');
+
 async function coolify(path, token) {
   try {
     const response = await fetch(`${COOLIFY_HOST}${path}`, { headers: { Authorization: `Bearer ${token}` } });
+    if (response.status === 401 || response.status === 403) return FORBIDDEN;
     if (!response.ok) return null;
     return await response.json();
   } catch {
@@ -135,9 +141,11 @@ async function coolify(path, token) {
 async function deploymentState(token, uuid) {
   if (uuid) {
     const row = await coolify(`/api/v1/deployments/${uuid}`, token);
+    if (row === FORBIDDEN) return FORBIDDEN;
     if (row && row.status) return { status: row.status, commit: row.commit, uuid };
   }
   const rows = await coolify('/api/v1/deployments', token);
+  if (rows === FORBIDDEN) return FORBIDDEN;
   const mine = (Array.isArray(rows) ? rows : []).filter((row) => row.application_name === APP_NAME);
   const row = mine[0];
   return row ? { status: row.status, commit: row.commit, uuid: row.deployment_uuid } : null;
@@ -263,6 +271,16 @@ async function main() {
     let seen = null;
     while (Date.now() < deadline) {
       const row = await deploymentState(coolifyToken, deploymentUuid);
+      // Without `read` on the token there is no record to wait for. The
+      // origin check below (a new build id AND the --expect marker) is the
+      // signal this file trusts anyway; only the overlapping-deploys guard
+      // is lost, so say so and move on rather than fail a deploy that worked.
+      if (row === FORBIDDEN) {
+        seen = 'unwatched';
+        console.log('\nCOOLIFY_TOKEN has no `read` permission: cannot watch the build record, relying on the origin check only');
+        console.log('(make a token with deploy + read at Keys & Tokens > API Tokens to get the overlapping-deploy guard back)');
+        break;
+      }
       // A record for a different commit is someone else's build: keep waiting
       // rather than counting it.
       if (row && (!row.commit || row.commit === local)) {
@@ -277,12 +295,12 @@ async function main() {
       process.stdout.write(seen === null ? '?' : '.');
       await sleep(POLL_SECONDS * 1000);
     }
-    if (seen !== 'finished') {
+    if (seen !== 'finished' && seen !== 'unwatched') {
       console.log(`\nCoolify never reported a finished build for ${shortSha} (last status: ${seen ?? 'no record'})`);
       console.log('the CDN was NOT purged.');
       process.exit(1);
     }
-    console.log(`\nCoolify built ${shortSha}`);
+    if (seen === 'finished') console.log(`\nCoolify built ${shortSha}`);
   }
 
   // 3b. Wait for a NEW build to be serving, not for Coolify's opinion of it
