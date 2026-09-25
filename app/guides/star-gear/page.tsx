@@ -34,6 +34,8 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import star from '@/data/star-gear.json';
 import effectsTh from '@/data/star-effects-th.json';
+import chainFile from '@/data/star-chain.json';
+import guideOnly from '@/data/star-guide-only.json';
 
 export const revalidate = 86400;
 
@@ -88,6 +90,20 @@ const NO_PLAIN = PIECES.filter((p) => !p.plain);
 // icon resource, no footer block. Those got a mirrored icon from
 // divine-pride instead of the client (see build-star-gear.py).
 const CLIENT_UNKNOWN = PIECES.filter((p) => p.lang === 'en');
+const BY_ID = new Map(PIECES.map((p) => [p.id, p]));
+// Which ★ piece each ★★/★★★ pair is made from. Hand-matched in
+// data/star-chain.json because the English client renames four of them
+// between tiers; app/star-chain.test.ts checks every link against the
+// client's own type, level and ATK.
+const CHAINS = chainFile.chains.map((c) => ({
+  first: BY_ID.get(c.first)!,
+  second: c.second.map((id) => BY_ID.get(id)!),
+  renamed: c.renamed,
+}));
+const RENAMED = CHAINS.filter((c) => c.renamed);
+// ★ pieces the guide gives a second tier for that our client does not have.
+const GUIDE_ONLY = guideOnly.pieces.map((g) => ({ ...g, first: BY_ID.get(g.firstTierId)! }));
+const baseName = (name: string) => name.replace(/^★+ /, '').replace(/ - (Sun|Moon)$/, '');
 
 /** The headline ATK or MATK a piece's own text opens with, for telling two
  *  variants apart at a glance. */
@@ -143,12 +159,42 @@ const NPCS = [
 // token in the second row is the one made by trading in an already-activated
 // weapon -- which is why the second tier needs so few of them and the first
 // needs a hundred.
+// The numbers live here once; the table, the plain-words walkthrough and the
+// worked example below all read them, so they cannot drift apart. Confirmed
+// by two independent sources: the mirrored French guide and the TWROZ patch
+// notes of 28 Aug 2025 as relayed on Bahamut (forum.gamer.com.tw, bsn 83142),
+// which print the same 100 / 8 / −7 and 3 / 30 / −3.
+const WEAPON_TIER1 = { tokens: 100, shards: 8, refine: 7 };
+const WEAPON_TIER2 = { tokens: 3, shards: 30, refine: 3 };
+const ARMOR_STABLE = { tokens: 100, shards: 30, refine: 3 };
+const ARMOR_STRONG = { tokens: 10, shards: 3, refine: 7 };
 const ACTIVATION = [
-  { what: 'อาวุธ ขั้นที่ 1 (★)', refine: '−7', materials: 'โทเคน ★ ของชิ้นนั้น 100 อัน + Goblin Coin Shard 8' },
-  { what: 'อาวุธ ขั้นที่ 2 (★★ หรือ ★★★)', refine: '−3', materials: 'โทเคน ★★ ของชิ้นนั้น 3 อัน + Goblin Coin Shard 30' },
-  { what: 'ชุด แบบ "นิ่ง"', refine: '−3', materials: 'โทเคน ★ ของชิ้นนั้น 100 อัน + Goblin Coin Shard 30' },
-  { what: 'ชุด แบบ "แรง"', refine: '−7', materials: 'โทเคน ★ ของชิ้นนั้น 10 อัน + Goblin Coin Shard 3' },
+  { what: 'อาวุธ ขั้นที่ 1 (★)', refine: `−${WEAPON_TIER1.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${WEAPON_TIER1.tokens} อัน + Goblin Coin Shard ${WEAPON_TIER1.shards}` },
+  { what: 'อาวุธ ขั้นที่ 2 (★★ หรือ ★★★)', refine: `−${WEAPON_TIER2.refine}`, materials: `โทเคน ★★ ของชิ้นนั้น ${WEAPON_TIER2.tokens} อัน + Goblin Coin Shard ${WEAPON_TIER2.shards}` },
+  { what: 'ชุด แบบ "นิ่ง"', refine: `−${ARMOR_STABLE.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${ARMOR_STABLE.tokens} อัน + Goblin Coin Shard ${ARMOR_STABLE.shards}` },
+  { what: 'ชุด แบบ "แรง"', refine: `−${ARMOR_STRONG.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${ARMOR_STRONG.tokens} อัน + Goblin Coin Shard ${ARMOR_STRONG.shards}` },
 ];
+
+// A worked example for the plain-words section: one tier-2 weapon, counted
+// all the way back to monster drops. The three ★ weapons traded in for ★★
+// tokens are on top of the one being activated.
+const EXAMPLE = {
+  dropsPerStar: WEAPON_TIER1.tokens,
+  starWeaponsForTokens: WEAPON_TIER2.tokens,
+  dropsTotal: WEAPON_TIER1.tokens * (WEAPON_TIER2.tokens + 1),
+  shardsTotal: WEAPON_TIER1.shards * (WEAPON_TIER2.tokens + 1) + WEAPON_TIER2.shards,
+};
+
+// Where Goblin Coin Shards come from, per the TWROZ notes relayed on Bahamut
+// (28 Aug 2025): an exchange NPC in Prontera. Single source, Taiwanese
+// server; our client has the three items (ids below) but no NPC text for it.
+const SHARD_ITEM = { id: 1002346, name: 'Goblin Coin Shard' };
+const SHARD_SOURCES = [
+  { give: { id: 105212, name: 'Goblin Coin' }, amount: 1, shards: '1' },
+  { give: { id: 105213, name: 'Goblin Silver Coin' }, amount: 1, shards: '10' },
+  { give: null, amount: 0, shards: '1–3 (สุ่ม)', zeny: '180,000–400,000 (สุ่ม)' },
+];
+const SHARD_NPC = { name: '想飛的魔像 (โกเลมที่อยากบิน)', where: 'prontera 284,253' };
 
 const FAQ = [
   {
@@ -162,6 +208,14 @@ const FAQ = [
   {
     question: 'ปลุกแล้วเสียอะไร',
     answer: 'เสียขั้นตีบวก 3 หรือ 7 ขั้นแล้วแต่แบบที่เลือก การ์ด เอนแชนต์ และความสามารถเสริมไม่หาย ของ +10 ที่เสีย 7 ขั้นจะเหลือ +3 จึงควรตีบวกให้สูงไว้ก่อนแล้วค่อยปลุก',
+  },
+  {
+    question: 'ซื้ออาวุธจากร้าน NPC มาแลกโทเคนได้ไหม',
+    answer: 'ไม่ได้ ประกาศฝั่งไต้หวันเขียนตรง ๆ ว่าของซื้อร้านใช้ทำไม่ได้ ต้องเป็นชิ้นที่มอนสเตอร์ดรอปเท่านั้น',
+  },
+  {
+    question: 'Goblin Coin Shard หาจากไหน',
+    answer: `มี NPC แลกที่ Prontera เอา Goblin Coin หรือ Goblin Silver Coin ไปแลก หรือจ่าย Zeny แลกแบบสุ่ม รายละเอียดอยู่ในหัวข้อวิธีทำแบบง่าย ข้อมูลนี้มาจากฝั่งไต้หวันเท่านั้น ไคลเอนต์เรามีไอเทมทั้งสามชิ้นแล้วแต่ยังไม่มี NPC`,
   },
   {
     question: '★ กับ ★★ และ ★★★ ต่างกันยังไง',
@@ -244,8 +298,10 @@ export default async function StarGearPage() {
       />
 
       <nav className="jumpbar" aria-label="หัวข้อในหน้านี้">
+        <a href="#sec-simple">วิธีทำแบบง่าย</a>
         <a href="#sec-prep">เตรียมอะไรไว้</a>
         <a href="#sec-how">ขั้นตอนตอนเปิด</a>
+        <a href="#sec-chain">สายอัปเกรด</a>
         <a href="#sec-choice">ขั้น 2 เลือก 2 แบบ</a>
         <a href="#sec-list">ของทุกชิ้น</a>
         <a href="#sec-token">โทเคน</a>
@@ -262,6 +318,64 @@ export default async function StarGearPage() {
         <p className="star__status">
           หน้านี้จึงมีไว้ให้<strong>เตรียมของรอ</strong> ไม่ใช่ให้ไปทำตอนนี้ เพราะของที่ต้องใช้ต้องสะสมนานมาก
           ถ้าขายทิ้งไปก่อนก็ต้องเริ่มนับหนึ่งใหม่ตอนระบบมา
+        </p>
+      </section>
+
+      <section className="card" id="sec-simple">
+        <h2 className="section-title" style={{ marginTop: 0 }}>วิธีทำแบบง่ายที่สุด</h2>
+        <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+          คิดง่าย ๆ ว่ามันคือ<strong>การเอาของดรอปชิ้นเดียวกันซ้ำ ๆ ไปแลกเป็นใบรับรอง</strong> แล้วเอาใบรับรองกับเศษเหรียญ Goblin ไปให้ตาแก่ปลุกอาวุธของเรา
+          ปลุกแล้วอาวุธเล่มเดิมกลายเป็นรุ่นติดดาว ค่าโจมตีขยับขึ้นและมีโบนัสเพิ่มตามขั้นตีบวก
+        </p>
+        <ol className="star__prep">
+          <li>
+            <strong>เลือกอาวุธที่จะปลุก</strong> ต้องเป็นชิ้นที่มีรุ่นติดดาว (ดูตาราง<a href="#sec-chain">สายอัปเกรด</a>) แล้วตีบวกให้สูงไว้ก่อน
+            เพราะปลุกแล้วขั้นตีบวกหายไป {WEAPON_TIER1.refine} ขั้น ตัวอย่างในประกาศไต้หวันคือเอาเล่ม +{WEAPON_TIER1.refine} ไปปลุก ออกมาเป็น ★ +0
+          </li>
+          <li>
+            <strong>เก็บอาวุธชนิดเดียวกันที่มอนดรอปให้ได้ {WEAPON_TIER1.tokens} ชิ้น</strong> (ของซื้อจากร้านใช้ไม่ได้) เอาไปแลกกับ NPC ตัวแรกที่ Prontera
+            ได้โทเคน ★ ของชิ้นนั้น {WEAPON_TIER1.tokens} อัน ชิ้นละอัน
+          </li>
+          <li>
+            <strong>หา <Link href={itemHref(SHARD_ITEM.id, null)}>{SHARD_ITEM.name}</Link> {WEAPON_TIER1.shards} อัน</strong> จาก NPC แลกที่ {SHARD_NPC.where} ({SHARD_NPC.name})
+            <ul className="star__shards">
+              {SHARD_SOURCES.map((row) => (
+                <li key={row.shards}>
+                  {row.give ? (
+                    <>
+                      <Link href={itemHref(row.give.id, null)}>{row.give.name}</Link> {row.amount} เหรียญ
+                    </>
+                  ) : (
+                    <>Zeny {row.zeny}</>
+                  )}{' '}
+                  → เศษ {row.shards} อัน
+                </li>
+              ))}
+            </ul>
+          </li>
+          <li>
+            <strong>เอาอาวุธ + โทเคน + เศษเหรียญไปหา NPC ตัวที่สอง</strong> (Nagging Old Man ข้าง ๆ กัน) กดปลุก ได้อาวุธ ★
+            การ์ดกับเอนแชนต์ที่ใส่ไว้ยังอยู่ครบ
+          </li>
+          <li>
+            <strong>อยากได้ขั้นที่ 2 (★★ หรือ ★★★)</strong> เอาอาวุธ ★ ที่ปลุกแล้ว {WEAPON_TIER2.tokens} เล่มไปแลกเป็นโทเคน ★★ {WEAPON_TIER2.tokens} อัน (เล่มละอัน)
+            บวกเศษเหรียญอีก {WEAPON_TIER2.shards} อัน แล้วปลุกอีกเล่ม ตอนนี้จะได้เลือกว่าเอาแบบ ★★ หรือ ★★★ ตีบวกหายไป {WEAPON_TIER2.refine} ขั้น
+          </li>
+        </ol>
+        <div className="star__example">
+          <p className="star__example-title">ตัวอย่างนับของทั้งหมด ถ้าอยากได้ ★★ Crossbow หนึ่งเล่ม</p>
+          <ul>
+            <li>อาวุธ ★ {EXAMPLE.starWeaponsForTokens} เล่มสำหรับแลกโทเคน ★★ + อีก 1 เล่มที่จะปลุก = ต้องปลุกขั้นที่ 1 ทั้งหมด {EXAMPLE.starWeaponsForTokens + 1} เล่ม</li>
+            <li>Crossbow ที่มอนดรอป: {EXAMPLE.dropsPerStar} × {EXAMPLE.starWeaponsForTokens + 1} = <strong>{EXAMPLE.dropsTotal.toLocaleString('en-US')} ชิ้น</strong></li>
+            <li>Goblin Coin Shard: {WEAPON_TIER1.shards} × {EXAMPLE.starWeaponsForTokens + 1} + {WEAPON_TIER2.shards} = <strong>{EXAMPLE.shardsTotal} อัน</strong></li>
+          </ul>
+          <p className="muted" style={{ margin: '6px 0 0', fontSize: 13 }}>
+            นับแบบนี้ถ้าเล่มที่ปลุกขั้นที่ 2 ต้องเป็นอาวุธ ★ อยู่ก่อน ซึ่งไกด์ทั้งสองแหล่งไม่ได้เขียนไว้ตรง ๆ ถ้าปลุกจากเล่มธรรมดาได้ ก็ลดไป {EXAMPLE.dropsPerStar} ชิ้นกับ {WEAPON_TIER1.shards} อัน
+          </p>
+        </div>
+        <p className="guildp__src">
+          ที่มา: ตัวเลขทั้งหมดตรงกันสองแหล่ง คือไกด์ roz-global.info กับประกาศแพตช์เซิร์ฟไต้หวัน 28 ส.ค. 2025 ที่ผู้เล่นคัดลอกไว้บนบอร์ด Bahamut ·
+          NPC แลกเศษเหรียญและอัตราแลก มาจากบอร์ด Bahamut แหล่งเดียว · ทั้งหมดเป็นของเซิร์ฟไต้หวัน ยังตรวจกับเซิร์ฟเราไม่ได้
         </p>
       </section>
 
@@ -340,13 +454,65 @@ export default async function StarGearPage() {
           ได้จากการเอา<strong>อาวุธที่ปลุกขั้นที่ 1 แล้ว</strong>ไปแลก จึงใช้แค่ 3 อัน แต่ 3 อันนั้นแปลว่าต้องมีอาวุธขั้นที่ 1 สามเล่มก่อน
         </p>
         <p className="guildp__src">
-          ที่มา: ชื่อและพิกัด NPC ขั้นที่ 2 ตรวจกับข้อมูลไคลเอนต์ของเราเองแล้ว ส่วนของขั้นที่ 1 กับกติกาแลกโทเคนและตารางปลุก
-          มาจากไกด์ roz-global.info (อ่าน 8 ก.ย. 2026) ซึ่งอธิบายเซิร์ฟไต้หวัน เป็นแหล่งเดียว ยังไม่มีที่สองให้ตรวจ
-          และยังตรวจกับเซิร์ฟเราไม่ได้เพราะระบบยังไม่เปิด
+          ที่มา: ชื่อและพิกัด NPC ขั้นที่ 2 ตรวจกับข้อมูลไคลเอนต์ของเราเองแล้ว ส่วนของขั้นที่ 1 (ชื่อจีน 工坊學徒 鳴家) กติกาแลกโทเคน
+          และตารางปลุก ตรงกันสองแหล่ง คือไกด์ roz-global.info (อ่าน 8 ก.ย. 2026) กับประกาศแพตช์เซิร์ฟไต้หวัน 28 ส.ค. 2025 บนบอร์ด Bahamut (อ่าน 25 ก.ย. 2026)
+          ทั้งคู่อธิบายเซิร์ฟไต้หวัน ยังตรวจกับเซิร์ฟเราไม่ได้เพราะระบบยังไม่เปิด
         </p>
       </section>
 
       <AdSlot slot="inline" />
+
+      <section className="card" id="sec-chain">
+        <h2 className="section-title" style={{ marginTop: 0 }}>สายอัปเกรด ของธรรมดา → ★ → ★★ หรือ ★★★</h2>
+        <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+          ขั้นที่ 2 ทำจากอาวุธ ★ ของสายเดียวกัน แต่<strong>ชื่ออังกฤษในเกมเปลี่ยนไประหว่างขั้น {RENAMED.length} สาย</strong> เช่น ★ Slayer
+          ปลุกต่อแล้วกลายเป็น ★★ Two Handed Sword ถ้าดูแค่ชื่อจะนึกว่าเป็นคนละอาวุธ (และจะนึกว่ามาจาก Bastard Sword ซึ่งผิด)
+          ตารางนี้จับคู่ด้วยรหัสทรัพยากรของไอเทม ซึ่งขั้นที่ 2 ใช้รหัสเดียวกับขั้นที่ 1 ต่อท้ายด้วย RFP1/RFP2
+        </p>
+        <div className="recipe__scroll">
+          <table className="data-table recipe">
+            <thead>
+              <tr>
+                <th>ขั้นที่ 1 ★</th>
+                <th>ใครใส่</th>
+                <th>ขั้นที่ 2 แบบ ★★</th>
+                <th>ขั้นที่ 2 แบบ ★★★</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CHAINS.map(({ first, second, renamed }) => (
+                <tr key={first.id}>
+                  <td data-label="ขั้นที่ 1">
+                    <Link className="recipe__item" href={itemHref(first.id, first.category)}>
+                      <ItemIcon iconUrl={first.icon} category={first.category} size={20} />
+                      <span>{first.name}</span>
+                    </Link>
+                    {renamed && <span className="star__renamed">ชื่อเปลี่ยนตอนขึ้นขั้น 2</span>}
+                  </td>
+                  <td data-label="ใครใส่" className="muted" style={{ fontSize: 13 }}>{first.footer.jobs?.replace(/ Class/g, '')}</td>
+                  {second.map((piece) => (
+                    <td key={piece.id} data-label={'★'.repeat(piece.stars)}>
+                      <Link className="recipe__item" href={itemHref(piece.id, piece.category)}>
+                        <ItemIcon iconUrl={piece.icon} category={piece.category} size={20} />
+                        <span>{baseName(piece.name)}</span>
+                      </Link>
+                      <span className="muted" style={{ display: 'block', fontSize: 12.5 }}>
+                        {[headline(piece), piece.footer.jobs?.replace(/ Class/g, '')].filter(Boolean).join(' · ')}
+                      </span>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="muted" style={{ marginTop: 12, fontSize: 13, maxWidth: '74ch' }}>
+          สังเกตว่าขั้นที่ 2 เป็นของ<strong>อาชีพขั้นที่ 2</strong> เช่น ★ Crossbow ใส่ได้ตั้งแต่ Thief/Archer แต่ ★★ Crossbow เป็นของ Hunter
+          และ ★★★ Crossbow เป็นของ Rogue เลือกแบบตามอาชีพที่เล่นอยู่ก่อน แล้วค่อยดูผล ·
+          อีก {PIECES.filter((p) => p.tier === 1 && p.footer.type && !CHAINS.some((c) => c.first.id === p.id)).length} อาวุธ ★
+          ที่เหลือยังไม่มีขั้นที่ 2 ในไคลเอนต์ ({GUIDE_ONLY.length} ในนั้นไกด์ไต้หวันมีข้อมูลแล้ว ดูท้ายหัวข้อของทุกชิ้น)
+        </p>
+      </section>
 
       <section className="card" id="sec-choice">
         <h2 className="section-title" style={{ marginTop: 0 }}>ขั้นที่ 2 เลือกได้สองแบบ</h2>
@@ -422,6 +588,45 @@ export default async function StarGearPage() {
             </div>
           ))}
         </section>
+
+        <section id="sec-guide-only" style={{ marginTop: 22 }}>
+          <h3 className="star__group">
+            <span className="star__stars">★★</span> ประกาศแล้วที่ไต้หวัน แต่ยังไม่มีในไคลเอนต์เรา{' '}
+            <span className="muted" style={{ fontWeight: 400, fontSize: 14 }}>{GUIDE_ONLY.length} สาย</span>
+          </h3>
+          <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
+            ไกด์ที่เราอ้างอิงมีขั้นที่ 2 ของสองสายนี้ด้วย แต่ไฟล์เกมของเรายังไม่มีไอเทมพวกนี้เลย จึงยังกดดูในฐานข้อมูลไม่ได้
+            ตัวเลขข้างล่างแปลจากไกด์ตรง ๆ เป็นแหล่งเดียว และอาจต่างจากตอนเข้าเซิร์ฟเรา
+          </p>
+          {GUIDE_ONLY.map((g) => (
+            <div key={g.family} className="star__pair">
+              <h4 className="star__pairname">
+                {g.family}{' '}
+                <span className="muted" style={{ fontWeight: 400, fontSize: 13 }}>
+                  ทำจาก <Link href={itemHref(g.first.id, g.first.category)}>{g.first.name}</Link>
+                </span>
+              </h4>
+              {g.variants.map((v) => (
+                <section key={v.name} className="card star__card">
+                  <h3 className="star__name">{v.name}</h3>
+                  <dl className="star__tiers">
+                    <div>
+                      <dt>ใส่เฉย ๆ</dt>
+                      <dd><span className="star__effect">{v.base}</span></dd>
+                    </div>
+                    {v.tiers.map((tier) => (
+                      <div key={tier.label}>
+                        <dt>{tier.label}</dt>
+                        <dd><span className="star__effect">{tier.text}</span></dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p className="star__lang">แปลจากไกด์ roz-global.info (เซิร์ฟไต้หวัน) ยังไม่มีในไฟล์เกมของเรา</p>
+                </section>
+              ))}
+            </div>
+          ))}
+        </section>
       </section>
 
       <section id="sec-token" style={{ marginTop: 26 }}>
@@ -460,8 +665,10 @@ export default async function StarGearPage() {
         ชิ้นที่ไคลเอนต์มีข้อความไทยอยู่แล้วใช้ของไคลเอนต์ตรง ๆ ส่วนที่เหลือเราแปลเอง
         โดยมีเทสต์บังคับว่าตัวเลขทุกตัวและชื่อค่าสถานะทุกตัวต้องตรงกับต้นฉบับ ไม่ได้สรุปใหม่ ·
 ชื่อ NPC ขั้นที่ 2 คือ Nagging Old Man ตรวจกับคำบรรยายไอเทมในเกมของเราเองแล้ว ({NPC_CONFIRMED_BY} ชิ้น พิกัดตรงกันหมด) ·{' '}
-        <strong>ส่วน NPC ขั้นที่ 1 พิกัด กติกาแลกโทเคน และค่าใช้จ่ายในการปลุก มาจากไกด์ roz-global.info</strong> (อ่าน 8 ก.ย. 2026)
-        ซึ่งอธิบายเซิร์ฟไต้หวัน เป็นแหล่งเดียวและยังตรวจกับเซิร์ฟเราไม่ได้ ·
+        <strong>ส่วน NPC ขั้นที่ 1 พิกัด กติกาแลกโทเคน และค่าใช้จ่ายในการปลุก ตรงกันสองแหล่ง</strong> คือไกด์ roz-global.info (อ่าน 8 ก.ย. 2026)
+        กับประกาศแพตช์เซิร์ฟไต้หวัน 28 ส.ค. 2025 ที่คัดลอกไว้บนบอร์ด Bahamut (อ่าน 25 ก.ย. 2026) ทั้งคู่เป็นเซิร์ฟไต้หวัน ยังตรวจกับเซิร์ฟเราไม่ได้ ·
+        NPC แลก Goblin Coin Shard และอัตราแลก มาจากบอร์ด Bahamut แหล่งเดียว ·
+        สายอัปเกรด ★ → ★★ จับคู่ด้วยรหัสทรัพยากรไอเทมจาก divine-pride.net (ขั้นที่ 2 คือรหัสขั้นที่ 1 ต่อท้าย RFP1/RFP2) ไม่ใช่ด้วยชื่อ เพราะชื่ออังกฤษเปลี่ยน {RENAMED.length} สาย ·
         ข้อความอังกฤษต้นทางของบางชิ้นเป็นการแปลจากภาษาจีนมาอีกทอด ชื่อสกิลบางตัวจึงอ่านแปลก ๆ ตั้งแต่ต้นฉบับ ·
         <strong>ไอคอน {CLIENT_UNKNOWN.length} ชิ้นที่ไคลเอนต์ไม่มีข้อมูลให้เลย ดึงมาจาก static.divine-pride.net</strong> ตรวจแล้วว่าไม่ใช่ภาพ &quot;ไม่พบ&quot; ของเว็บนั้นก่อนบันทึกทุกไฟล์ ·
         {NO_PLAIN.length} ชิ้นที่ไม่มีบรรทัดเทียบกับตัวธรรมดา ตรวจกับตารางไอเทมทั้งหมดในไคลเอนต์แล้วว่าไม่มีรุ่นธรรมดาอยู่จริง ไม่ใช่ฐานข้อมูลเราตกหล่น

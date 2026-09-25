@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "what": "Which first-tier ★ piece each second-tier ★★/★★★ pair is made from. The English client renames four of them between tiers (Slayer -> Two Handed Sword, Wand -> Oak Wand, Short Spear -> Broken Blade Halberd, Hora -> Studded Knuckles), so the link cannot be read off the names.",
+    "how": "Settled by the aegis resource names on divine-pride.net (tier-1 is <base>_RF, tier-2 is <base>_RFP1 / _RFP2: 600077 is Z_Slaye_RFP1, from 600074 Z_Slaye_RF -- NOT from 600070 Z_Bastard_Sword_RF, which a name-only match against the French guide first suggested; checked 25 Sep 2026). Then checked against the client: same weapon type, same required level, tier-2 base ATK never below tier-1, and the ids sit next to each other (530080 -> 530081/530082). Tokens are named after the tier-1 piece, except '★ Studded Knuckles Crafting Token', which is the token for ★ Hora -- the client's own link between those two names. app/star-chain.test.ts holds these checks.",
+    "read": "2026-09-25",
+    "clientMissing": "The guide's ★★ pairs for Wire Whip (Entrave / Dispersion) and Lute (Chant / Résonance) have no item in our client yet, so those two chains stop at tier 1 here."
+  },
+  "chains": [
+    { "first": 600074, "second": [600077, 600078], "renamed": true },
+    { "first": 550175, "second": [550209, 550210], "renamed": true },
+    { "first": 530080, "second": [530081, 530082], "renamed": true },
+    { "first": 560087, "second": [560089, 560090], "renamed": true },
+    { "first": 700118, "second": [700130, 700131], "renamed": false },
+    { "first": 610092, "second": [610096, 610097], "renamed": false },
+    { "first": 500124, "second": [500137, 500138], "renamed": false },
+    { "first": 460168, "second": [460169, 460170], "renamed": false }
+  ]
+}

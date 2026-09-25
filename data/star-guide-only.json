@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "what": "Second-tier ★★ pieces the mirrored guide lists for the Taiwanese server that have NO item in our client yet. Kept apart from data/star-gear.json, which is client-only, so the page can say which pieces are real in our files and which are only announced.",
+    "source": "roz-global.info guide (docs/rozglobal-export/pages/guide-armes-armures-etoiles.html), citing the TWROZ announcement of 28 Aug 2025; read 2026-09-25. French text translated by hand; every number copied as printed.",
+    "note": "The guide prints the same effect text for ★★ Lute — Résonance and ★★ Wire Whip — Dispersion; that is what the source says, not a copy error here."
+  },
+  "pieces": [
+    {
+      "family": "Wire Whip",
+      "firstTierId": 580092,
+      "variants": [
+        {
+          "name": "★★ Wire Whip — Entrave",
+          "base": "ATK +50, FLEE −40, DEF −80",
+          "tiers": [
+            { "label": "ทุก +2", "text": "ATK +5, ดาเมจกายภาพระยะไกล +2%" },
+            { "label": "ถึง +7", "text": "หน่วงหลังโจมตี −10%, MHP +200" },
+            { "label": "ถึง +9", "text": "หน่วงหลังโจมตี −15% (เพิ่ม), MHP +300 (เพิ่ม), โจมตีระยะประชิดมีโอกาสใช้ Chaotic Arrow Dance Lv.1" },
+            { "label": "ทุก +2 หลัง +11", "text": "FLEE +8, DEF +16 (เพิ่มทุกขั้น)" }
+          ]
+        },
+        {
+          "name": "★★ Wire Whip — Dispersion",
+          "base": "ATK +50, FLEE −80, DEF −40",
+          "tiers": [
+            { "label": "ทุก +2", "text": "ATK +5, ดาเมจกายภาพระยะไกล +3%" },
+            { "label": "ถึง +7", "text": "MDEF +10, MHP +2%" },
+            { "label": "ถึง +9", "text": "MDEF +15 (เพิ่ม), MHP +3% (เพิ่ม), โดนโจมตีกายภาพมีโอกาสใช้ Chaotic Arrow Dance Lv.1 ใส่ผู้โจมตี" },
+            { "label": "ทุก +2 หลัง +11", "text": "FLEE +16, DEF +8 (เพิ่มทุกขั้น)" }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "Lute",
+      "firstTierId": 570092,
+      "variants": [
+        {
+          "name": "★★ Lute — Chant",
+          "base": "ATK +50, FLEE −40, DEF −80",
+          "tiers": [
+            { "label": "ทุก +2", "text": "ATK +5, ดาเมจกายภาพระยะไกล +2%" },
+            { "label": "ถึง +7", "text": "หน่วงหลังโจมตี −10%, MHP +200" },
+            { "label": "ถึง +9", "text": "หน่วงหลังโจมตี −15% (เพิ่ม), MHP +300 (เพิ่ม), โจมตีระยะประชิดมีโอกาสใช้ Chaotic Arrow Dance Lv.1" },
+            { "label": "ทุก +2 หลัง +11", "text": "FLEE +8, DEF +16 (เพิ่มทุกขั้น)" }
+          ]
+        },
+        {
+          "name": "★★ Lute — Résonance",
+          "base": "ATK +50, FLEE −80, DEF −40",
+          "tiers": [
+            { "label": "ทุก +2", "text": "ATK +5, ดาเมจกายภาพระยะไกล +3%" },
+            { "label": "ถึง +7", "text": "MDEF +10, MHP +2%" },
+            { "label": "ถึง +9", "text": "MDEF +15 (เพิ่ม), MHP +3% (เพิ่ม), โดนโจมตีกายภาพมีโอกาสใช้ Chaotic Arrow Dance Lv.1 ใส่ผู้โจมตี" },
+            { "label": "ทุก +2 หลัง +11", "text": "FLEE +16, DEF +8 (เพิ่มทุกขั้น)" }
+          ]
+        }
+      ]
+    }
+  ]
+}

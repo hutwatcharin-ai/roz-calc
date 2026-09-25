@@ -3526,5 +3526,10 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .star__noplain { margin: 8px 0 0; font-size: 13px; line-height: 1.7; color: var(--dim); font-style: italic; }
 .star__group { margin: 0; font: 700 18px/1.4 var(--font-sarabun), sans-serif; }
 .star__unconfirmed { display: block; margin-top: 3px; font-size: 12px; color: var(--dim); font-weight: 400; }
+.star__shards { margin: 6px 0 0; padding-inline-start: 18px; font-size: 13.5px; line-height: 1.8; }
+.star__example { margin-top: 14px; padding: 12px 14px; border: 1px dashed var(--hair); border-radius: 10px; }
+.star__example-title { margin: 0 0 6px; font-weight: 600; }
+.star__example ul { margin: 0; padding-inline-start: 18px; line-height: 1.8; }
+.star__renamed { display: inline-block; margin-top: 4px; padding: 1px 7px; border: 1px solid var(--yellow); border-radius: 999px; font-size: 11.5px; color: var(--yellow); }
 .star__pair { margin-top: 18px; padding-inline-start: 12px; border-inline-start: 2px solid var(--hair); }
 .star__pairname { margin: 0 0 4px; font: 700 16px/1.4 var(--font-sarabun), sans-serif; color: var(--yellow); }
