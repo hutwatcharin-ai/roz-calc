@@ -567,7 +567,16 @@ a.thsort { text-decoration: none; }
    The character context is wired in now, so the graded levels do render: a
    genuine "danger" badge has to stay visually distinct from "MVP" rather than
    collide with it. These are classifications, not warnings. */
-.tag--behaviour { border-color: var(--cyan); color: var(--cyan); background: transparent; }
+/* One colour per behaviour, on top of the word -- the word is the signal,
+   the colour is the shortcut, so nothing here is colour-only (WCAG 1.4.1). */
+.tag--behaviour { background: transparent; border-width: 1.5px; }
+.tag--assist { border-color: #FF9F3D; color: #FF9F3D; }
+.tag--castSensor { border-color: #C58CFF; color: #C58CFF; }
+.tag--detector { border-color: var(--cyan); color: var(--cyan); }
+.tag--plant { border-color: var(--status-safe); color: var(--status-safe); }
+.tag--rooted { border-color: #8FA3C7; color: #8FA3C7; }
+.tag--mini { border-color: var(--yellow); color: var(--yellow); }
+.tag--mvp { border-color: var(--pink); color: var(--pink); }
 .tag--quiet { background: transparent; border: 1px dashed var(--hair); color: var(--faint); }
 .tag {
   display: inline-flex;

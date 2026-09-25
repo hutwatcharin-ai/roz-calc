@@ -272,9 +272,9 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             return (
               <>
                 <AggroBadge monster={{ is_aggressive: aggro, atk_max: monster.atk_max }} />
-                {monster.is_mvp && <span className="tag">MVP</span>}
-                {modes?.known && modes.mini && <span className="tag">มินิบอส</span>}
-                {modes?.known && !modes.canMove && <span className="tag" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
+                {monster.is_mvp && <span className="tag tag--behaviour tag--mvp">MVP</span>}
+                {modes?.known && modes.mini && <span className="tag tag--behaviour tag--mini">มินิบอส</span>}
+                {modes?.known && !modes.canMove && <span className="tag tag--behaviour tag--rooted" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
               </>
             );
           })()}
@@ -288,7 +288,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             return (Object.keys(BEHAVIOUR_LABELS) as (keyof typeof BEHAVIOUR_LABELS)[])
               .filter((key) => b[key])
               .map((key) => (
-                <span key={key} className="tag tag--behaviour" title={BEHAVIOUR_LABELS[key].title}>
+                <span key={key} className={`tag tag--behaviour tag--${key}`} title={BEHAVIOUR_LABELS[key].title}>
                   {BEHAVIOUR_LABELS[key].label}
                 </span>
               ));
