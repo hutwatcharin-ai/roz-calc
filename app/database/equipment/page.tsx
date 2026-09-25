@@ -38,7 +38,7 @@ const PAGE_SIZE = 50;
 export default async function EquipmentPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; type?: string; use?: string; job?: string; mylv?: string; slots?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; type?: string; use?: string; job?: string; mylv?: string; slots?: string; wlv?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   // Anything still asking this list for costumes -- an old link, a bookmark,
@@ -66,6 +66,9 @@ export default async function EquipmentPage({
   const mylv = Math.max(0, Number(searchParams.mylv ?? 0) || 0);
   // Slot filter: '' = any, '0'..'4' exact. Values outside that are ignored.
   const slotsParam = ['0', '1', '2', '3', '4'].includes(searchParams.slots ?? '') ? (searchParams.slots as string) : '';
+  // Weapon level filter: '' = any, '1'..'4' exact. Armour has no weapon
+  // level, so a set value narrows the list to weapons by itself.
+  const wlvParam = ['1', '2', '3', '4'].includes(searchParams.wlv ?? '') ? (searchParams.wlv as string) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
   const db = supabaseBrowser();
@@ -88,10 +91,11 @@ export default async function EquipmentPage({
     required_level: number | null;
     equippable_classes: string[] | null;
     slots: number | null;
+    weapon_level: number | null;
   }>((from, to) =>
     db
       .from('items')
-      .select('id, name_en, icon_url, category, weapon_type, description, atk, required_level, equippable_classes, slots')
+      .select('id, name_en, icon_url, category, weapon_type, description, atk, required_level, equippable_classes, slots, weapon_level')
       .in('category', [...GEAR_CATEGORIES])
       .order('name_en')
       .order('id')
@@ -125,6 +129,7 @@ export default async function EquipmentPage({
   // this, so a chip can never lead to an empty page.
   const base = items.filter((it) => {
     if (slotsParam !== '' && it.slots !== Number(slotsParam)) return false;
+    if (wlvParam !== '' && it.weapon_level !== Number(wlvParam)) return false;
     if (mylv > 0 && it.required_level != null && it.required_level > mylv) return false;
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
     // Former names count: "Orc Trophy" still finds "Horro of Tribe".
@@ -170,6 +175,7 @@ export default async function EquipmentPage({
     if (job) params.set('job', job);
     if (mylv > 0) params.set('mylv', String(mylv));
     if (slotsParam !== '') params.set('slots', slotsParam);
+    if (wlvParam !== '') params.set('wlv', wlvParam);
     if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
@@ -193,6 +199,7 @@ export default async function EquipmentPage({
     if (job) params.set('job', job);
     if (mylv > 0) params.set('mylv', String(mylv));
     if (slotsParam !== '') params.set('slots', slotsParam);
+    if (wlvParam !== '') params.set('wlv', wlvParam);
     if (sort !== 'name') params.set('sort', sort);
     const qs = params.toString();
     return `/database/equipment${qs ? `?${qs}` : ''}`;
@@ -233,6 +240,7 @@ export default async function EquipmentPage({
             { label: 'อาชีพ', value: job },
             { label: 'ใส่ได้ที่ Lv', value: mylv > 0 ? String(mylv) : '' },
             { label: 'Slot', value: slotsParam !== '' ? (slotsParam === '0' ? 'ไม่มี Slot' : `${slotsParam} Slot`) : '' },
+            { label: 'เลเวลอาวุธ', value: wlvParam !== '' ? `Lv ${wlvParam}` : '' },
           ]}
           clearHref="/database/equipment"
         />
@@ -334,6 +342,16 @@ export default async function EquipmentPage({
           <option value="1">1 Slot</option>
           <option value="0">ไม่มี Slot</option>
         </select>
+        </label>
+        <label className="field">
+          <span className="field__label">เลเวลอาวุธ</span>
+          <select name="wlv" defaultValue={wlvParam}>
+            <option value="">ทุกเลเวล</option>
+            <option value="1">Lv 1</option>
+            <option value="2">Lv 2</option>
+            <option value="3">Lv 3</option>
+            <option value="4">Lv 4</option>
+          </select>
         </label>
         <label className="field">
           <span className="field__label">เรียงตาม</span>
