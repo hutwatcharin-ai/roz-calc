@@ -255,20 +255,22 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         {/* The badge sits in the header, not buried below: it is the reason a
             player opened this page and no competing site shows it. */}
         <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
-          <AggroBadge monster={{ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }} />
-          {monster.is_mvp && <span className="tag">MVP</span>}
           {/* Mini-boss and "rooted" come from the same export as the aggro
               flag but had no column; lib/monster-modes carries them. A row
-              the export says nothing about shows that, rather than showing
-              nothing and reading as "an ordinary monster". */}
+              the export says nothing about gets ONE "no data" badge covering
+              aggro too (same source, same gap), rather than two, and rather
+              than nothing, which would read as "an ordinary monster". */}
           {(() => {
             const modes = monsterModes(monster.id);
-            if (!modes) return null;
-            if (!modes.known) return <span className="tag tag--quiet" title="rozerodb ไม่มีข้อมูลนิสัยของตัวนี้">นิสัย: ไม่มีข้อมูล</span>;
+            if (modes && !modes.known) {
+              return <span className="tag tag--quiet" title="rozerodb ไม่มีข้อมูลนิสัยของตัวนี้ รวมถึงว่าโจมตีก่อนหรือไม่">นิสัย: ไม่มีข้อมูล</span>;
+            }
             return (
               <>
-                {modes.mini && <span className="tag">มินิบอส</span>}
-                {!modes.canMove && <span className="tag" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
+                <AggroBadge monster={{ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }} />
+                {monster.is_mvp && <span className="tag">MVP</span>}
+                {modes?.known && modes.mini && <span className="tag">มินิบอส</span>}
+                {modes?.known && !modes.canMove && <span className="tag" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
               </>
             );
           })()}
