@@ -115,8 +115,8 @@ def client_has_plain_version(family_names):
             row = lub.to_py(value)
             name = clean(str(row.get('identifiedDisplayName') or '')).strip()
             if name and not name.startswith('★'):
-                plain_names.add(name.lower())
-    return {n: (n.lower() in plain_names) for n in family_names}
+                plain_names.add(squash(name))
+    return {n: (squash(n) in plain_names) for n in family_names}
 
 
 def env_file():
@@ -144,15 +144,36 @@ def db_items():
                 '&name_en=like.%E2%98%85*')
 
 
+def squash(name):
+    """Spelling-insensitive key: the client writes the ordinary bow as
+    "Cross Bow" and its ★ version as "★ Crossbow", so an exact-name match
+    called the plain one absent (caught 25 Sep 2026 when the token list
+    could not link it). Case, spaces and hyphens are dropped."""
+    return re.sub(r'[^a-z0-9]', '', name.lower())
+
+
 def plain_twins(names):
     """The ordinary item each ★ piece is made from, matched by the name with
-    the stars removed. Not every one is there: a few ★ pieces have no
-    same-named ordinary row in our table, and the page says so rather than
-    inventing a pair."""
-    quoted = ','.join('"' + n.replace('"', '') + '"' for n in sorted(set(names)))
-    rows = rest('items?select=id,name_en,category,required_level,slots,atk&name_en=in.'
-                + urllib.parse.quote(f'({quoted})', safe=''))
-    return {row['name_en']: row for row in rows}
+    the stars removed, spelling-insensitively (see squash). Not every one is
+    there: a few ★ pieces have no same-named ordinary row in our table, and
+    the page says so rather than inventing a pair. When the table holds the
+    same name twice (Zero re-ids), the lowest id is taken."""
+    wanted = {squash(n): n for n in names}
+    rows = []
+    for start in range(0, 20000, 1000):
+        page = rest(f'items?select=id,name_en,category,required_level,slots,atk&category=neq.Other'
+                    f'&order=id&offset={start}&limit=1000')
+        rows.extend(page)
+        if len(page) < 1000:
+            break
+    twins = {}
+    for row in rows:
+        if row['name_en'].startswith('★'):
+            continue
+        key = squash(row['name_en'])
+        if key in wanted and wanted[key] not in twins:
+            twins[wanted[key]] = row
+    return twins
 
 
 def split_thai(description):
@@ -274,6 +295,12 @@ for row in sorted(rows, key=lambda r: r['name_en']):
     # the star version do".
     plain_name = PLAIN.sub('', row['name_en'])
     twin = twins.get(plain_name)
+    # Same name is not enough: the classic Two-Handed Sword (lv 33) shares a
+    # name with ★★ Two Handed Sword (lv 18), which is really ★ Slayer's second
+    # tier. A twin must sit at the same required level, or it is not the
+    # piece this one was made from.
+    if twin is not None and twin['required_level'] != row['required_level']:
+        twin = None
     star_atk = int(footer['atk']) if footer.get('atk', '').isdigit() else row.get('atk')
     # When there's no twin, say why: either the client genuinely has no
     # ordinary tier of this item (checked directly, see

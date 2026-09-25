@@ -47,4 +47,16 @@ describe('star chain', () => {
       }
     }
   });
+
+  it('every token resolves to exactly one ★ piece (by tier-1 name, or by tier-2 name for Hora)', () => {
+    const first = PIECES.filter((p) => p.tier === 1);
+    for (const token of TOKENS) {
+      const name = token.name.replace(/^★ (.*) (Forging|Crafting) Token$/, '$1');
+      const byFirst = first.filter((p) => base(p.name) === name);
+      const byChain = chain.chains.filter((c) => base(byId.get(c.second[0])!.name) === name);
+      // Prefer the tier-1 name; an unrenamed chain matches both, which is fine.
+      expect(byFirst.length, token.name).toBeLessThanOrEqual(1);
+      expect(byFirst.length === 1 || byChain.length === 1, token.name).toBe(true);
+    }
+  });
 });

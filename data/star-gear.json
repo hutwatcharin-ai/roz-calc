@@ -50,7 +50,7 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 600051,
+    "id": 1154,
     "category": "Weapon",
     "atk": 115,
     "slots": 2,
@@ -139,10 +139,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 470233,
+    "id": 470230,
     "category": "Armor",
     "atk": null,
-    "slots": 0,
+    "slots": 1,
     "requiredLevel": 1
    },
    "starAtk": null
@@ -186,7 +186,7 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 590075,
+    "id": 1519,
     "category": "Weapon",
     "atk": 84,
     "slots": 2,
@@ -231,8 +231,14 @@
     "requiredLevel": "18",
     "jobs": "Thief Class, Archer Class"
    },
-   "plainExistsInGame": false,
-   "plain": null,
+   "plainExistsInGame": null,
+   "plain": {
+    "id": 700086,
+    "category": "Weapon",
+    "atk": 65,
+    "slots": 2,
+    "requiredLevel": 18
+   },
    "starAtk": 125
   },
   {
@@ -368,10 +374,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 620049,
+    "id": 1354,
     "category": "Weapon",
     "atk": 120,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 16
    },
    "starAtk": 215
@@ -653,10 +659,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 570058,
+    "id": 570056,
     "category": "Weapon",
     "atk": 105,
-    "slots": 2,
+    "slots": 3,
     "requiredLevel": 14
    },
    "starAtk": 125
@@ -742,10 +748,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 500112,
+    "id": 1122,
     "category": "Weapon",
     "atk": 100,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 14
    },
    "starAtk": 125
@@ -831,10 +837,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 530079,
+    "id": 530078,
     "category": "Weapon",
     "atk": 100,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 18
    },
    "starAtk": 150
@@ -878,10 +884,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 600058,
+    "id": 1151,
     "category": "Weapon",
     "atk": 90,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 18
    },
    "starAtk": 190
@@ -925,10 +931,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 590083,
+    "id": 1507,
     "category": "Weapon",
     "atk": 54,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 14
    },
    "starAtk": 100
@@ -1008,7 +1014,7 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 510135,
+    "id": 1216,
     "category": "Weapon",
     "atk": 87,
     "slots": 2,
@@ -1055,10 +1061,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 550138,
+    "id": 550125,
     "category": "Weapon",
     "atk": 25,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 12
    },
    "starAtk": 25
@@ -1190,8 +1196,14 @@
     "type": "Bow",
     "jobs": "Hunter Class"
    },
-   "plainExistsInGame": false,
-   "plain": null,
+   "plainExistsInGame": null,
+   "plain": {
+    "id": 700086,
+    "category": "Weapon",
+    "atk": 65,
+    "slots": 2,
+    "requiredLevel": 18
+   },
    "starAtk": 135
   },
   {
@@ -1365,10 +1377,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 500112,
+    "id": 1122,
     "category": "Weapon",
     "atk": 100,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 14
    },
    "starAtk": 135
@@ -1413,7 +1425,7 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 560056,
+    "id": 1805,
     "category": "Weapon",
     "atk": 65,
     "slots": 2,
@@ -1459,7 +1471,7 @@
     "type": "Two-handed Sword",
     "jobs": "Knight Class"
    },
-   "plainExistsInGame": false,
+   "plainExistsInGame": null,
    "plain": null,
    "starAtk": 210
   },
@@ -1538,8 +1550,14 @@
     "type": "Bow",
     "jobs": "Rogue Class"
    },
-   "plainExistsInGame": false,
-   "plain": null,
+   "plainExistsInGame": null,
+   "plain": {
+    "id": 700086,
+    "category": "Weapon",
+    "atk": 65,
+    "slots": 2,
+    "requiredLevel": 18
+   },
    "starAtk": 135
   },
   {
@@ -1703,10 +1721,10 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 500112,
+    "id": 1122,
     "category": "Weapon",
     "atk": 100,
-    "slots": 3,
+    "slots": 2,
     "requiredLevel": 14
    },
    "starAtk": 135
@@ -1751,7 +1769,7 @@
    },
    "plainExistsInGame": null,
    "plain": {
-    "id": 560056,
+    "id": 1805,
     "category": "Weapon",
     "atk": 65,
     "slots": 2,
@@ -1797,7 +1815,7 @@
     "type": "Two-handed Sword",
     "jobs": "Knight Class"
    },
-   "plainExistsInGame": false,
+   "plainExistsInGame": null,
    "plain": null,
    "starAtk": 210
   }

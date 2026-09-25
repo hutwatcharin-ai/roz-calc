@@ -232,7 +232,16 @@ const FAQ = [
 
 function PieceCard({ piece }: { piece: Piece }) {
   const text = thai(piece);
-  const plain = piece.plain;
+  // A second-tier piece is made from its ★ piece, so that is what it is
+  // compared against (the ordinary item is two steps back, and for the
+  // renamed chains a same-named ordinary item is a different weapon).
+  const madeFrom = piece.tier === 2 ? chainFile.chains.find((c) => c.second.includes(piece.id)) : undefined;
+  const first = madeFrom ? BY_ID.get(madeFrom.first) : undefined;
+  const plain = first
+    ? { id: first.id, category: first.category, atk: first.starAtk, slots: first.slots, requiredLevel: first.requiredLevel, label: first.name, href: `#item-${first.id}` }
+    : piece.plain
+      ? { ...piece.plain, label: 'ตัวธรรมดา', href: itemHref(piece.plain.id, piece.plain.category) }
+      : null;
   const gained = [
     plain && piece.starAtk != null && plain.atk != null && piece.starAtk !== plain.atk
       ? `ATK ${plain.atk} เป็น ${piece.starAtk}`
@@ -260,10 +269,9 @@ function PieceCard({ piece }: { piece: Piece }) {
           .filter(Boolean)
           .join(' · ')}
       </p>
-      {gained.length > 0 && (
+      {gained.length > 0 && plain && (
         <p className="star__gain">
-          เทียบกับตัวธรรมดา: {gained.join(' · ')}
-          {plain && <> · <Link href={itemHref(plain.id, plain.category)}>ดูตัวธรรมดา</Link></>}
+          เทียบกับ{first ? first.name : 'ตัวธรรมดา'}: {gained.join(' · ')} · {first ? <a href={plain.href}>ดู {first.name}</a> : <Link href={plain.href}>ดูตัวธรรมดา</Link>}
         </p>
       )}
       {!plain && piece.plainExistsInGame === false && (
@@ -299,6 +307,15 @@ const WEAR_CHAINS = CHAINS.filter((c) => c.first.category !== 'Weapon');
 const WEAR_FIRST = FIRST.filter((p) => p.category !== 'Weapon' && !WEAR_CHAINS.some((c) => c.first.id === p.id));
 const WEAPON_NO_TIER2 = WEAPON_FIRST.filter((p) => !WEAPON_CHAINS.some((c) => c.first.id === p.id) && !GUIDE_ONLY.some((g) => g.firstTierId === p.id));
 const jobs = (piece: Piece) => piece.footer.jobs?.replace(/ Class/g, '') ?? '';
+// The ★ piece a token belongs to: the token carries the tier-1 name, except
+// Hora's, which is named after its tier-2 piece (see data/star-chain.json).
+function tokenSource(token: Token): Piece | undefined {
+  const name = token.name.replace(/^★ (.*) (Forging|Crafting) Token$/, '$1');
+  return (
+    FIRST.find((p) => baseName(p.name) === name) ??
+    CHAINS.find((c) => baseName(c.second[0].name) === name)?.first
+  );
+}
 
 function ChainTable({ chains }: { chains: typeof CHAINS }) {
   return (
@@ -644,19 +661,36 @@ export default async function StarGearPage() {
         <h2 className="section-title">
           โทเคนสำหรับปลุก <span className="muted" style={{ fontWeight: 400 }}>· {TOKENS.length} แบบ</span>
         </h2>
-        <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '72ch' }}>
+        <p className="star__status" style={{ marginTop: 2 }}>
+          <strong>ได้มายังไง:</strong> เอาอาวุธชิ้นนั้นที่มอนดรอปไปแลกกับ NPC ตัวแรก ({NPCS[0].where}) ของดรอป 1 ชิ้น = โทเคน 1 อัน
+          ของซื้อจากร้าน NPC ใช้แลกไม่ได้ อาวุธ ★ ต้องใช้ {WEAPON_TIER1.tokens} อัน แปลว่าต้องหาของดรอปชิ้นเดียวกัน {WEAPON_TIER1.tokens} ชิ้น
+        </p>
+        <p className="muted" style={{ marginTop: 6, marginBottom: 10, maxWidth: '72ch' }}>
           ในเกมเรียกว่า Forging Token / Crafting Token โทเคนของชิ้นไหนใช้ปลุกได้เฉพาะชิ้นนั้น ชื่อโทเคนตั้งตามชื่ออาวุธขั้นที่ 1
-          ยกเว้น Studded Knuckles ที่เป็นโทเคนของ ★ Hora · ชุดกับผ้าคลุมยังไม่มีไอเทมโทเคนในไคลเอนต์
+          ยกเว้น Studded Knuckles ที่เป็นโทเคนของ ★ Hora · ชุดกับผ้าคลุมยังไม่มีไอเทมโทเคนในไคลเอนต์ · ส่วนโทเคน ★★ ไม่มีไอเทมแยก ได้จากเอาอาวุธ ★ ไปแลกที่ NPC เดียวกัน
         </p>
         <ul className="star__tokens">
-          {TOKENS.map((token) => (
-            <li key={token.id}>
-              <Link className="recipe__item" href={itemHref(token.id, token.category)}>
-                <ItemIcon iconUrl={token.icon} category={token.category} size={20} />
-                <span>{token.name}</span>
-              </Link>
-            </li>
-          ))}
+          {TOKENS.map((token) => {
+            const source = tokenSource(token);
+            return (
+              <li key={token.id}>
+                <Link className="recipe__item" href={itemHref(token.id, token.category)}>
+                  <ItemIcon iconUrl={token.icon} category={token.category} size={20} />
+                  <span>{token.name}</span>
+                </Link>
+                <span className="star__tokensrc">
+                  แลกจาก{' '}
+                  {source?.plain ? (
+                    <Link href={itemHref(source.plain.id, source.plain.category)}>{baseName(source.name)}</Link>
+                  ) : (
+                    <span>{source ? baseName(source.name) : token.name.replace(/^★ (.*) (Forging|Crafting) Token$/, '$1')}</span>
+                  )}{' '}
+                  ที่มอนดรอป 1 ชิ้น
+                  {source && <> · ใช้ปลุก <a href={`#item-${source.id}`}>{source.name}</a></>}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
