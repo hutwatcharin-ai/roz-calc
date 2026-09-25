@@ -140,7 +140,7 @@ def rest(query):
 
 def db_items():
     """Our own table, which has every ★ row but only in English."""
-    return rest('items?select=id,name_en,icon_url,category,required_level,description,slots,atk,weapon_type,equippable_classes'
+    return rest('items?select=id,name_en,icon_url,category,required_level,description,slots,atk,weapon_type,equippable_classes,weapon_level,sell_price'
                 '&name_en=like.%E2%98%85*')
 
 
@@ -315,6 +315,19 @@ for row in sorted(rows, key=lambda r: r['name_en']):
         'requiredLevel': twin['required_level'],
     }
     entry['starAtk'] = star_atk
+    # The stat tiles the page shows, the same set an item page shows. Weight
+    # and DEF exist only in the client's Thai footer, so they are None for
+    # the rows the client has no text for -- the page then leaves that tile
+    # out rather than printing a guess.
+    entry['stats'] = {
+        'atk': star_atk,
+        'def': int(footer['def']) if footer.get('def', '').isdigit() else None,
+        'slots': row['slots'],
+        'weight': int(footer['weight']) if footer.get('weight', '').isdigit() else None,
+        'requiredLevel': row['required_level'],
+        'weaponLevel': row.get('weapon_level'),
+        'sellPrice': row.get('sell_price'),
+    }
     if not tiers:
         no_tiers.append(row['name_en'])
     items.append(entry)

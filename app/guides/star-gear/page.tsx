@@ -64,6 +64,7 @@ type Piece = {
   plain: Plain | null;
   plainExistsInGame: boolean | null;
   starAtk: number | null;
+  stats: { atk: number | null; def: number | null; slots: number | null; weight: number | null; requiredLevel: number | null; weaponLevel: number | null; sellPrice: number | null };
 };
 type Token = { id: number; name: string; icon: string | null; category: string | null; namesNpc: boolean };
 
@@ -166,8 +167,8 @@ const ARMOR_STRONG = { tokens: 10, shards: 3, refine: 7 };
 const ACTIVATION = [
   { what: 'อาวุธ ขั้นที่ 1 (★)', refine: `−${WEAPON_TIER1.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${WEAPON_TIER1.tokens} อัน + Goblin Coin Shard ${WEAPON_TIER1.shards}` },
   { what: 'อาวุธ ขั้นที่ 2 (★★ หรือ ★★★)', refine: `−${WEAPON_TIER2.refine}`, materials: `โทเคน ★★ ของชิ้นนั้น ${WEAPON_TIER2.tokens} อัน + Goblin Coin Shard ${WEAPON_TIER2.shards}` },
-  { what: 'ชุด แบบ "นิ่ง"', refine: `−${ARMOR_STABLE.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${ARMOR_STABLE.tokens} อัน + Goblin Coin Shard ${ARMOR_STABLE.shards}` },
-  { what: 'ชุด แบบ "แรง"', refine: `−${ARMOR_STRONG.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${ARMOR_STRONG.tokens} อัน + Goblin Coin Shard ${ARMOR_STRONG.shards}` },
+  { what: 'ชุด ทางที่ 1 ประหยัดตีบวก', refine: `−${ARMOR_STABLE.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${ARMOR_STABLE.tokens} อัน (= ของดรอป ${ARMOR_STABLE.tokens} ชิ้น) + Goblin Coin Shard ${ARMOR_STABLE.shards}` },
+  { what: 'ชุด ทางที่ 2 ประหยัดของดรอป', refine: `−${ARMOR_STRONG.refine}`, materials: `โทเคน ★ ของชิ้นนั้น ${ARMOR_STRONG.tokens} อัน (= ของดรอป ${ARMOR_STRONG.tokens} ชิ้น) + Goblin Coin Shard ${ARMOR_STRONG.shards}` },
 ];
 
 // A worked example for the plain-words section: one tier-2 weapon, counted
@@ -218,7 +219,7 @@ const FAQ = [
   },
   {
     question: 'ชุด ผ้าคลุม รองเท้า มีขั้นที่ 2 ไหม',
-    answer: 'ไม่มี ของสวมใส่ปลุกได้ขั้นเดียวเป็น ★ แต่เลือกวิธีปลุกได้สองแบบ (นิ่ง/แรง) ข้อยกเว้นเดียวคือโล่ Improved Wrist Guard ของ Ninja ที่เกมจัดกติกาแบบอาวุธ จึงมี ★★ Sun กับ ★★★ Moon',
+    answer: `ไม่มี ของสวมใส่ปลุกได้ขั้นเดียวเป็น ★ แต่เลือกจ่ายได้สองทาง (ของดรอป ${ARMOR_STABLE.tokens} ชิ้นเสียตีบวก ${ARMOR_STABLE.refine} ขั้น หรือของดรอป ${ARMOR_STRONG.tokens} ชิ้นเสียตีบวก ${ARMOR_STRONG.refine} ขั้น) ข้อยกเว้นเดียวคือโล่ Improved Wrist Guard ของ Ninja ที่เกมจัดกติกาแบบอาวุธ จึงมี ★★ Sun กับ ★★★ Moon`,
   },
   {
     question: 'อาวุธที่ติดดาวได้มีแค่นี้เองหรือ',
@@ -259,15 +260,17 @@ function PieceCard({ piece }: { piece: Piece }) {
           <span>{piece.name}</span>
         </Link>
       </h3>
+      <div className="statgrid star__stats">
+        {piece.stats.atk != null && <div className="statgrid__cell"><span className="reward-label">ATK</span><span className="reward-value mono">{piece.stats.atk}</span></div>}
+        {piece.stats.def != null && <div className="statgrid__cell"><span className="reward-label">DEF</span><span className="reward-value mono">{piece.stats.def}</span></div>}
+        {piece.stats.slots != null && <div className="statgrid__cell"><span className="reward-label">Slot</span><span className="reward-value mono">{piece.stats.slots > 0 ? `[${piece.stats.slots}]` : 'ไม่มี'}</span></div>}
+        {piece.stats.weight != null && <div className="statgrid__cell"><span className="reward-label">น้ำหนัก</span><span className="reward-value mono">{piece.stats.weight}</span></div>}
+        {piece.stats.requiredLevel != null && <div className="statgrid__cell"><span className="reward-label">ใช้ได้ที่เลเวล</span><span className="reward-value mono">{piece.stats.requiredLevel}</span></div>}
+        {piece.stats.weaponLevel != null && <div className="statgrid__cell"><span className="reward-label">Weapon Lv</span><span className="reward-value mono">{piece.stats.weaponLevel}</span></div>}
+        {piece.stats.sellPrice != null && <div className="statgrid__cell"><span className="reward-label">ราคาขาย</span><span className="reward-value mono">{piece.stats.sellPrice.toLocaleString('en-US')} z</span></div>}
+      </div>
       <p className="star__facts">
-        {[
-          piece.footer.type,
-          piece.requiredLevel ? `เลเวล ${piece.requiredLevel}` : null,
-          piece.slots ? `${piece.slots} Slot` : null,
-          piece.footer.jobs,
-        ]
-          .filter(Boolean)
-          .join(' · ')}
+        {[piece.footer.type ? `ช่อง: ${piece.footer.type}` : null, piece.footer.jobs ? `ใส่ได้: ${piece.footer.jobs.replace(/ Class/g, '')}` : null].filter(Boolean).join(' · ')}
       </p>
       {gained.length > 0 && plain && (
         <p className="star__gain">
@@ -421,7 +424,7 @@ export default async function StarGearPage() {
         <h2 className="section-title" style={{ marginTop: 0 }}>ภาพรวมใน 4 บรรทัด</h2>
         <ul className="star__prep" style={{ listStyle: 'disc' }}>
           <li><strong>มีของ 2 กลุ่ม</strong> <a href="#sec-weapons">อาวุธ</a> {WEAPON_FIRST.length} ชิ้น กับ <a href="#sec-wear">ของสวมใส่</a> {WEAR_FIRST.length + WEAR_CHAINS.length} ชิ้น กติกาคนละแบบ</li>
-          <li><strong>อาวุธมี 2 ขั้น</strong> ★ แล้วปลุกต่อเป็น ★★ หรือ ★★★ (เลือกอย่างใดอย่างหนึ่ง) ส่วน<strong>ของสวมใส่มีขั้นเดียว</strong> แต่เลือกวิธีปลุกได้ 2 แบบ</li>
+          <li><strong>อาวุธมี 2 ขั้น</strong> ★ แล้วปลุกต่อเป็น ★★ หรือ ★★★ (เลือกอย่างใดอย่างหนึ่ง) ส่วน<strong>ของสวมใส่มีขั้นเดียว</strong> แต่เลือกจ่ายได้ 2 ทาง (ของดรอปเยอะ หรือเสียตีบวกเยอะ)</li>
           <li><strong>ทุกอย่างใช้ของ 2 อย่าง</strong> โทเคนของชิ้นนั้น (ได้จากเอาของดรอปชิ้นเดียวกันไปแลก) กับ Goblin Coin Shard</li>
           <li><strong>ปลุกแล้วเสียขั้นตีบวก</strong> 3 หรือ 7 ขั้น การ์ดกับเอนแชนต์ไม่หาย</li>
         </ul>
@@ -617,14 +620,25 @@ export default async function StarGearPage() {
 
         <section className="card">
           <h3 className="star__h3" style={{ marginTop: 0 }}>ของสวมใส่ใช้อะไร เสียอะไร</h3>
-          <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
-            <strong>ของสวมใส่ไม่มีขั้นที่ 2</strong> ปลุกครั้งเดียวได้ ★ แล้วจบ แต่ตอนปลุกเลือกได้ 2 แบบ ผลที่ได้เหมือนกัน ต่างกันที่จ่ายอะไร:
-            แบบ &quot;นิ่ง&quot; ใช้โทเคนเยอะแต่เสียตีบวกน้อย แบบ &quot;แรง&quot; ใช้โทเคนน้อยแต่เสียตีบวกมาก
+          <p className="star__status" style={{ marginTop: 2 }}>
+            <strong>ของสวมใส่ไม่มีขั้นที่ 2</strong> ปลุกครั้งเดียวได้ ★ แล้วจบ
           </p>
+          <p className="muted" style={{ marginTop: 6, maxWidth: '74ch' }}>
+            แต่ตอนปลุกมี<strong>ให้เลือก 2 ทาง</strong> ได้ชุด ★ ชิ้นเดียวกัน ต่างกันแค่ว่าจะจ่ายด้วยของดรอป หรือจ่ายด้วยขั้นตีบวก:
+          </p>
+          <ul className="star__prep" style={{ listStyle: 'disc', marginTop: 8 }}>
+            <li><strong>ทางที่ 1 ประหยัดตีบวก</strong> ใช้ของดรอปชิ้นเดียวกัน {ARMOR_STABLE.tokens} ชิ้น + เศษเหรียญ {ARMOR_STABLE.shards} อัน เสียตีบวกแค่ {ARMOR_STABLE.refine} ขั้น</li>
+            <li><strong>ทางที่ 2 ประหยัดของดรอป</strong> ใช้ของดรอปแค่ {ARMOR_STRONG.tokens} ชิ้น + เศษเหรียญ {ARMOR_STRONG.shards} อัน แต่เสียตีบวก {ARMOR_STRONG.refine} ขั้น</li>
+          </ul>
           <CostTable rows={ACTIVATION.slice(2)} />
-          <p className="muted" style={{ marginTop: 10, fontSize: 13, maxWidth: '74ch' }}>
-            ตัวอย่าง: ชุด +{ARMOR_STRONG.refine} ปลุกแบบแรงด้วยของดรอป {ARMOR_STRONG.tokens} ชิ้น ออกมาเป็น ★ +0 · ชุด +{ARMOR_STABLE.refine} ปลุกแบบนิ่งด้วยของดรอป {ARMOR_STABLE.tokens} ชิ้น ก็ออกมาเป็น ★ +0 เหมือนกัน
-          </p>
+          <div className="star__example">
+            <p className="star__example-title">ตัวอย่าง: มี Boots +10 อยู่หนึ่งคู่ อยากปลุก</p>
+            <ul>
+              <li>ทางที่ 1: หา Boots ดรอปอีก {ARMOR_STABLE.tokens} คู่ ปลุกแล้วได้ ★ Boots <strong>+{10 - ARMOR_STABLE.refine}</strong></li>
+              <li>ทางที่ 2: หา Boots ดรอปแค่ {ARMOR_STRONG.tokens} คู่ ปลุกแล้วได้ ★ Boots <strong>+{10 - ARMOR_STRONG.refine}</strong> แล้วค่อยตีบวกกลับขึ้นไปเอง</li>
+              <li className="muted">เลือกตามว่าอะไรหายากกว่าสำหรับคุณ ของดรอป {ARMOR_STABLE.tokens - ARMOR_STRONG.tokens} ชิ้น หรือการตีบวกกลับ {ARMOR_STRONG.refine - ARMOR_STABLE.refine} ขั้น</li>
+            </ul>
+          </div>
         </section>
 
         <h3 className="star__group" style={{ marginTop: 22 }}>

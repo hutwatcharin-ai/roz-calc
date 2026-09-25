@@ -3501,6 +3501,8 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .star__where { font: 700 14px/1.4 var(--font-mono), monospace; color: var(--yellow); }
 .star__card { margin-top: 14px; }
 .star__name { margin: 0; font: 700 16px/1.4 var(--font-sarabun), sans-serif; }
+.star__stats { margin-top: 10px; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+.star__stats .reward-value { font-size: 15px; }
 .star__facts { margin: 6px 0 0; font: 700 12px/1.7 var(--font-mono), monospace; color: var(--dim); }
 .star__tiers { margin: 12px 0 0; display: grid; gap: 8px; }
 .star__tiers > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 9px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }

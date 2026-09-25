@@ -56,7 +56,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 190
+   "starAtk": 190,
+   "stats": {
+    "atk": 190,
+    "def": null,
+    "slots": 3,
+    "weight": 160,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 540118,
@@ -103,7 +112,16 @@
     "slots": 2,
     "requiredLevel": 14
    },
-   "starAtk": 85
+   "starAtk": 85,
+   "stats": {
+    "atk": 85,
+    "def": null,
+    "slots": 3,
+    "weight": 60,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 470418,
@@ -145,7 +163,16 @@
     "slots": 1,
     "requiredLevel": 1
    },
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 590098,
@@ -192,7 +219,16 @@
     "slots": 2,
     "requiredLevel": 14
    },
-   "starAtk": 140
+   "starAtk": 140,
+   "stats": {
+    "atk": 140,
+    "def": null,
+    "slots": 3,
+    "weight": 80,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 700118,
@@ -239,7 +275,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 125
+   "starAtk": 125,
+   "stats": {
+    "atk": 125,
+    "def": null,
+    "slots": 3,
+    "weight": 90,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 700123,
@@ -286,7 +331,16 @@
     "slots": 3,
     "requiredLevel": 18
    },
-   "starAtk": 125
+   "starAtk": 125,
+   "stats": {
+    "atk": 125,
+    "def": null,
+    "slots": 3,
+    "weight": 100,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 630065,
@@ -333,7 +387,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 160
+   "starAtk": 160,
+   "stats": {
+    "atk": 160,
+    "def": null,
+    "slots": 3,
+    "weight": 100,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 620053,
@@ -380,7 +443,16 @@
     "slots": 2,
     "requiredLevel": 16
    },
-   "starAtk": 215
+   "starAtk": 215,
+   "stats": {
+    "atk": 215,
+    "def": null,
+    "slots": 3,
+    "weight": 200,
+    "requiredLevel": 16,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 480740,
@@ -422,7 +494,16 @@
     "slots": 0,
     "requiredLevel": 1
    },
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 560087,
@@ -463,7 +544,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": 120
+   "starAtk": 120,
+   "stats": {
+    "atk": 120,
+    "def": null,
+    "slots": 3,
+    "weight": 45,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 460168,
@@ -499,7 +589,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 50,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 610092,
@@ -546,7 +645,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 155
+   "starAtk": 155,
+   "stats": {
+    "atk": 155,
+    "def": null,
+    "slots": 3,
+    "weight": 80,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 450530,
@@ -582,7 +690,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 450529,
@@ -618,7 +735,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 570092,
@@ -665,7 +791,16 @@
     "slots": 3,
     "requiredLevel": 14
    },
-   "starAtk": 125
+   "starAtk": 125,
+   "stats": {
+    "atk": 125,
+    "def": null,
+    "slots": 3,
+    "weight": 50,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 480741,
@@ -707,7 +842,16 @@
     "slots": 1,
     "requiredLevel": 1
    },
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 500124,
@@ -754,7 +898,16 @@
     "slots": 2,
     "requiredLevel": 14
    },
-   "starAtk": 125
+   "starAtk": 125,
+   "stats": {
+    "atk": 125,
+    "def": null,
+    "slots": 3,
+    "weight": 90,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 470419,
@@ -796,7 +949,16 @@
     "slots": 0,
     "requiredLevel": 1
    },
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 530080,
@@ -843,7 +1005,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 150
+   "starAtk": 150,
+   "stats": {
+    "atk": 150,
+    "def": null,
+    "slots": 3,
+    "weight": 85,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 600074,
@@ -890,7 +1061,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 190
+   "starAtk": 190,
+   "stats": {
+    "atk": 190,
+    "def": null,
+    "slots": 3,
+    "weight": 130,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 590110,
@@ -937,7 +1117,16 @@
     "slots": 2,
     "requiredLevel": 14
    },
-   "starAtk": 100
+   "starAtk": 100,
+   "stats": {
+    "atk": 100,
+    "def": null,
+    "slots": 3,
+    "weight": 100,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 450528,
@@ -973,7 +1162,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 1,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 510183,
@@ -1020,7 +1218,16 @@
     "slots": 2,
     "requiredLevel": 12
    },
-   "starAtk": 143
+   "starAtk": 143,
+   "stats": {
+    "atk": 143,
+    "def": null,
+    "slots": 3,
+    "weight": 70,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 550175,
@@ -1067,7 +1274,16 @@
     "slots": 2,
     "requiredLevel": 12
    },
-   "starAtk": 25
+   "starAtk": 25,
+   "stats": {
+    "atk": 25,
+    "def": null,
+    "slots": 3,
+    "weight": 40,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 580092,
@@ -1114,7 +1330,16 @@
     "slots": 2,
     "requiredLevel": 16
    },
-   "starAtk": 115
+   "starAtk": 115,
+   "stats": {
+    "atk": 115,
+    "def": null,
+    "slots": 3,
+    "weight": 100,
+    "requiredLevel": 16,
+    "weaponLevel": 2,
+    "sellPrice": 0
+   }
   },
   {
    "id": 530081,
@@ -1156,7 +1381,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": 160
+   "starAtk": 160,
+   "stats": {
+    "atk": 160,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 700130,
@@ -1204,7 +1438,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 135
+   "starAtk": 135,
+   "stats": {
+    "atk": 135,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 460169,
@@ -1245,7 +1488,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 50,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 610096,
@@ -1293,7 +1545,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 155
+   "starAtk": 155,
+   "stats": {
+    "atk": 155,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 550209,
@@ -1335,7 +1596,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": 25
+   "starAtk": 25,
+   "stats": {
+    "atk": 25,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 500137,
@@ -1383,7 +1653,16 @@
     "slots": 2,
     "requiredLevel": 14
    },
-   "starAtk": 135
+   "starAtk": 135,
+   "stats": {
+    "atk": 135,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 560089,
@@ -1431,7 +1710,16 @@
     "slots": 2,
     "requiredLevel": 12
    },
-   "starAtk": 130
+   "starAtk": 130,
+   "stats": {
+    "atk": 130,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 600077,
@@ -1473,7 +1761,16 @@
    },
    "plainExistsInGame": null,
    "plain": null,
-   "starAtk": 210
+   "starAtk": 210,
+   "stats": {
+    "atk": 210,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 530082,
@@ -1515,7 +1812,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": 160
+   "starAtk": 160,
+   "stats": {
+    "atk": 160,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 700131,
@@ -1558,7 +1864,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 135
+   "starAtk": 135,
+   "stats": {
+    "atk": 135,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 460170,
@@ -1599,7 +1914,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": null
+   "starAtk": null,
+   "stats": {
+    "atk": null,
+    "def": null,
+    "slots": 1,
+    "weight": null,
+    "requiredLevel": 50,
+    "weaponLevel": null,
+    "sellPrice": null
+   }
   },
   {
    "id": 610097,
@@ -1647,7 +1971,16 @@
     "slots": 2,
     "requiredLevel": 18
    },
-   "starAtk": 155
+   "starAtk": 155,
+   "stats": {
+    "atk": 155,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 550210,
@@ -1689,7 +2022,16 @@
    },
    "plainExistsInGame": false,
    "plain": null,
-   "starAtk": 25
+   "starAtk": 25,
+   "stats": {
+    "atk": 25,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 500138,
@@ -1727,7 +2069,16 @@
     "slots": 2,
     "requiredLevel": 14
    },
-   "starAtk": 135
+   "starAtk": 135,
+   "stats": {
+    "atk": 135,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 14,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 560090,
@@ -1775,7 +2126,16 @@
     "slots": 2,
     "requiredLevel": 12
    },
-   "starAtk": 130
+   "starAtk": 130,
+   "stats": {
+    "atk": 130,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 12,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   },
   {
    "id": 600078,
@@ -1817,7 +2177,16 @@
    },
    "plainExistsInGame": null,
    "plain": null,
-   "starAtk": 210
+   "starAtk": 210,
+   "stats": {
+    "atk": 210,
+    "def": null,
+    "slots": 3,
+    "weight": null,
+    "requiredLevel": 18,
+    "weaponLevel": 2,
+    "sellPrice": null
+   }
   }
  ],
  "tokens": [
