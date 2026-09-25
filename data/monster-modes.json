@@ -1,0 +1,2578 @@
+{
+  "_meta": {
+    "what": "Behaviour flags per monster id from the rozerodb export: canMove (false = rooted in place), mini (mini-boss). known:false = the export carries no specialStatus for that row at all, so nothing can be said either way.",
+    "source": "data/raw/monsters.json (ragnarokZero.specialStatus)",
+    "regenerate": "node scripts/build-monster-modes.mjs",
+    "built": "2026-09-25",
+    "rows": 524,
+    "known": 466,
+    "rooted": 15,
+    "mini": 19,
+    "unknownIds": [
+      1008,
+      1047,
+      1048,
+      1062,
+      1078,
+      1079,
+      1080,
+      1081,
+      1082,
+      1083,
+      1084,
+      1085,
+      1097,
+      1142,
+      1185,
+      1244,
+      1245,
+      1324,
+      1325,
+      1363,
+      1588,
+      2210,
+      2380,
+      3032,
+      3948,
+      3949,
+      3950,
+      3951,
+      3952,
+      3953,
+      3954,
+      3965,
+      3966,
+      3967,
+      3968,
+      3973,
+      20168,
+      20169,
+      20170,
+      20175,
+      20176,
+      20177,
+      20178,
+      20179,
+      22336,
+      22337,
+      22338,
+      22339,
+      22340,
+      25128,
+      25129,
+      25143,
+      25187,
+      25188,
+      25237,
+      25239,
+      25253,
+      25255
+    ]
+  },
+  "modes": {
+    "1001": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1002": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1004": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1005": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1007": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1008": {
+      "known": false
+    },
+    "1009": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1010": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1011": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1012": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1013": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1014": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1015": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1016": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1018": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1019": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1020": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1023": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1024": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1025": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1026": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1028": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1029": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1031": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1032": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1033": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1034": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1035": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1036": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1037": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1038": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1039": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1040": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1041": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1042": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1044": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1045": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1046": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1047": {
+      "known": false
+    },
+    "1048": {
+      "known": false
+    },
+    "1049": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1050": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1051": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1052": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1053": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1054": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1055": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1056": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1057": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1058": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1060": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1061": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1062": {
+      "known": false
+    },
+    "1063": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1064": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1065": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1066": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1067": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1068": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1069": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1070": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1071": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1073": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1074": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1076": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1077": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1078": {
+      "known": false
+    },
+    "1079": {
+      "known": false
+    },
+    "1080": {
+      "known": false
+    },
+    "1081": {
+      "known": false
+    },
+    "1082": {
+      "known": false
+    },
+    "1083": {
+      "known": false
+    },
+    "1084": {
+      "known": false
+    },
+    "1085": {
+      "known": false
+    },
+    "1086": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1087": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1088": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1089": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1090": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1091": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1092": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1093": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1094": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1095": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1096": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1097": {
+      "known": false
+    },
+    "1098": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1099": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1100": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1101": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1102": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1103": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1104": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1105": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1107": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1108": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1109": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1110": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1111": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1112": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1113": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1114": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1115": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1116": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1117": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1118": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1119": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1120": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1121": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1122": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1123": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1124": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1125": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1126": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1127": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1128": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1129": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1130": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1131": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1132": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1138": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1139": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1140": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1141": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1142": {
+      "known": false
+    },
+    "1143": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1144": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1145": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1146": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1147": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1148": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1149": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1150": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1151": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1152": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1153": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1154": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1155": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1156": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1157": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1158": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1159": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1160": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1161": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1163": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1164": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1165": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1166": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1167": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1169": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1170": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1174": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1175": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1176": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1177": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1178": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1179": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1180": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1185": {
+      "known": false
+    },
+    "1188": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1189": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1190": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1191": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1192": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1193": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1194": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1195": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1196": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1197": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1198": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1199": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1200": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1201": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1202": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1206": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1207": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1208": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1209": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1211": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1213": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1214": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1216": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1219": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1242": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1243": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1244": {
+      "known": false
+    },
+    "1245": {
+      "known": false
+    },
+    "1246": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1247": {
+      "known": true,
+      "canMove": false,
+      "mini": true
+    },
+    "1248": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1249": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1251": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1252": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1253": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1254": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1255": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1256": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1257": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1258": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1260": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1261": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1262": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1263": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1264": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1265": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1266": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1267": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1268": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1269": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1270": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1271": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1272": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1273": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1274": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1275": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1276": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1277": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1278": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1279": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1280": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1281": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1283": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1285": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1286": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1287": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1288": {
+      "known": true,
+      "canMove": false,
+      "mini": true
+    },
+    "1291": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1293": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1295": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1297": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1298": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1299": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1300": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1302": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1303": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1305": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1306": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1308": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1310": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1311": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1312": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1313": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1314": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1315": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1316": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1317": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1318": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1319": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1320": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1321": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1322": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1323": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1324": {
+      "known": false
+    },
+    "1325": {
+      "known": false
+    },
+    "1363": {
+      "known": false
+    },
+    "1373": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1375": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1377": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1380": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1389": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1391": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1392": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1400": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1401": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1402": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1403": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1404": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1405": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1406": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1408": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1409": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1410": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1412": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1413": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1415": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1416": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1417": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1418": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1492": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1493": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1494": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1495": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1497": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1498": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1499": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1500": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1503": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1504": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1505": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1506": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1507": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1508": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1509": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1510": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1511": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1512": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1513": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1514": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1515": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1516": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1517": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1582": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "1583": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1584": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1586": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1587": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1588": {
+      "known": false
+    },
+    "1630": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1631": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1686": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1687": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "1688": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "1960": {
+      "known": true,
+      "canMove": false,
+      "mini": true
+    },
+    "2210": {
+      "known": false
+    },
+    "2288": {
+      "known": true,
+      "canMove": false,
+      "mini": true
+    },
+    "2380": {
+      "known": false
+    },
+    "2398": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2404": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2405": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2406": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2450": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2604": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2605": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2606": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2608": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2610": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2611": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2613": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2615": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2616": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2617": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2618": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2620": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2628": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2632": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2633": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2634": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2635": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2638": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2639": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2640": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2642": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2644": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2645": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2646": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2647": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2648": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2649": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2651": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2653": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2654": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2660": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2663": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2664": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2668": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2670": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2671": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2673": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2674": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2678": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2679": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2680": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2682": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2683": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2687": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2691": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2694": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2696": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2697": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2698": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2699": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2703": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2704": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2705": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2707": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2712": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2713": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2714": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2715": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2717": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2718": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2719": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2720": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "2721": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2722": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2723": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2724": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2725": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2737": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2739": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2740": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2741": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2746": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2748": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2749": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2753": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2754": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2757": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2759": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2760": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2761": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2763": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2765": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "2767": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2768": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2770": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2771": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2772": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2774": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2775": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2778": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2780": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2781": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2787": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2789": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2790": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2793": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2796": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2797": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2798": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2800": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2802": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2805": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2808": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2809": {
+      "known": true,
+      "canMove": false,
+      "mini": false
+    },
+    "2812": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2813": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2814": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2821": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2823": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2827": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2829": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2831": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2833": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2835": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2836": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2838": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2839": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2840": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2842": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2843": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2845": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2846": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2847": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2848": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2851": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2852": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2854": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2855": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2856": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2857": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2861": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2862": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2863": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2864": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2865": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2868": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2869": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2871": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2872": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2876": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2877": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2878": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2883": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2884": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2885": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2889": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2890": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2891": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2892": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2894": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2899": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2902": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2905": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2907": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "2910": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "3032": {
+      "known": false
+    },
+    "3810": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "3811": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "3812": {
+      "known": true,
+      "canMove": true,
+      "mini": true
+    },
+    "3813": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "3814": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "3815": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "3816": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "3948": {
+      "known": false
+    },
+    "3949": {
+      "known": false
+    },
+    "3950": {
+      "known": false
+    },
+    "3951": {
+      "known": false
+    },
+    "3952": {
+      "known": false
+    },
+    "3953": {
+      "known": false
+    },
+    "3954": {
+      "known": false
+    },
+    "3965": {
+      "known": false
+    },
+    "3966": {
+      "known": false
+    },
+    "3967": {
+      "known": false
+    },
+    "3968": {
+      "known": false
+    },
+    "3973": {
+      "known": false
+    },
+    "20168": {
+      "known": false
+    },
+    "20169": {
+      "known": false
+    },
+    "20170": {
+      "known": false
+    },
+    "20175": {
+      "known": false
+    },
+    "20176": {
+      "known": false
+    },
+    "20177": {
+      "known": false
+    },
+    "20178": {
+      "known": false
+    },
+    "20179": {
+      "known": false
+    },
+    "20367": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "20368": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "20370": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "20371": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "20379": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "20380": {
+      "known": true,
+      "canMove": true,
+      "mini": false
+    },
+    "22336": {
+      "known": false
+    },
+    "22337": {
+      "known": false
+    },
+    "22338": {
+      "known": false
+    },
+    "22339": {
+      "known": false
+    },
+    "22340": {
+      "known": false
+    },
+    "25128": {
+      "known": false
+    },
+    "25129": {
+      "known": false
+    },
+    "25143": {
+      "known": false
+    },
+    "25187": {
+      "known": false
+    },
+    "25188": {
+      "known": false
+    },
+    "25237": {
+      "known": false
+    },
+    "25239": {
+      "known": false
+    },
+    "25253": {
+      "known": false
+    },
+    "25255": {
+      "known": false
+    }
+  }
+}

@@ -15,6 +15,7 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
+import { monsterModes } from '@/lib/monster-modes';
 import AddToPlanButton from '@/components/AddToPlanButton';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -256,7 +257,22 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
           <AggroBadge monster={{ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }} />
           {monster.is_mvp && <span className="tag">MVP</span>}
-          {monster.loots_items && <span className="tag">เก็บของ</span>}
+          {/* Mini-boss and "rooted" come from the same export as the aggro
+              flag but had no column; lib/monster-modes carries them. A row
+              the export says nothing about shows that, rather than showing
+              nothing and reading as "an ordinary monster". */}
+          {(() => {
+            const modes = monsterModes(monster.id);
+            if (!modes) return null;
+            if (!modes.known) return <span className="tag tag--quiet" title="rozerodb ไม่มีข้อมูลนิสัยของตัวนี้">นิสัย: ไม่มีข้อมูล</span>;
+            return (
+              <>
+                {modes.mini && <span className="tag">มินิบอส</span>}
+                {!modes.canMove && <span className="tag" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
+              </>
+            );
+          })()}
+          {monster.loots_items && <span className="tag" title="เก็บของที่ตกบนพื้น">เก็บของตก</span>}
           <AddToPlanButton monsterId={monster.id} />
         </div>
       </div>
@@ -268,6 +284,17 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         {monster.race ? ` เผ่า ${monster.race}` : ''}
         {monster.element ? ` ธาตุ ${monster.element}${monster.element_level ?? ''}` : ''}
         {monster.size ? ` ขนาด ${monster.size}` : ''}
+        {(() => {
+          const modes = monsterModes(monster.id);
+          const traits = [
+            monster.is_aggressive === true ? 'เข้าโจมตีก่อน' : monster.is_aggressive === false ? 'ไม่โจมตีก่อน' : null,
+            modes?.known && modes.mini ? 'มินิบอส' : null,
+            monster.is_mvp ? 'MVP' : null,
+            modes?.known && !modes.canMove ? 'ยืนอยู่กับที่' : null,
+            monster.loots_items ? 'เก็บของตก' : null,
+          ].filter(Boolean);
+          return traits.length ? ` นิสัย: ${traits.join(' ')}` : '';
+        })()}
         {(() => {
           const top = (drops ?? []).find((d: any) => d.items?.name_en && d.rate != null);
           return top ? ` ดรอปเด่น: ${(top.items as any).name_en} ${top.rate}%` : '';

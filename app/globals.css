@@ -567,6 +567,7 @@ a.thsort { text-decoration: none; }
    The character context is wired in now, so the graded levels do render: a
    genuine "danger" badge has to stay visually distinct from "MVP" rather than
    collide with it. These are classifications, not warnings. */
+.tag--quiet { background: transparent; border: 1px dashed var(--hair); color: var(--faint); }
 .tag {
   display: inline-flex;
   align-items: center;

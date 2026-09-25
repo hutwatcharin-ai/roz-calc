@@ -26,7 +26,7 @@ describe('transformMonster', () => {
       base_exp: 338,
       job_exp: 75,
       image_url: '/images/monsters/1001.gif',
-      is_aggressive: false,
+      is_aggressive: null,
       is_mvp: false,
       loots_items: false,
       matk_min: null,
@@ -76,7 +76,7 @@ describe('transformMonster', () => {
       base_exp: 0,
       job_exp: 0,
       image_url: '/images/monsters/1185.gif',
-      is_aggressive: false,
+      is_aggressive: null,
       is_mvp: false,
       loots_items: false,
       matk_min: null,
@@ -214,9 +214,9 @@ describe('transformMonster special status and stats', () => {
     expect(row.is_aggressive).toBe(false);
   });
 
-  it('defaults every flag to false when specialStatus is missing', () => {
+  it('leaves aggro unknown (null) and the other flags false when specialStatus is missing', () => {
     const row = transformMonster(base);
-    expect(row.is_aggressive).toBe(false);
+    expect(row.is_aggressive).toBe(null);
     expect(row.is_mvp).toBe(false);
     expect(row.loots_items).toBe(false);
   });

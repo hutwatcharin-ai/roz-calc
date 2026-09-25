@@ -19,7 +19,7 @@ export interface MonsterRow {
   base_exp: number;
   job_exp: number;
   image_url: string | null;
-  is_aggressive: boolean;
+  is_aggressive: boolean | null;
   is_mvp: boolean;
   loots_items: boolean;
   matk_min: number | null;
@@ -78,6 +78,16 @@ function hasSpecialStatus(raw: any, label: string): boolean {
   return list.some((s: any) => s?.raw === label);
 }
 
+// A row with no specialStatus at all (58 of 524: Poring, the eggs and plants,
+// every event copy, Whisper) says nothing either way. Reading it as "not
+// aggressive" printed "ไม่โจมตีก่อน" for Whisper; the column is nullable
+// precisely so this can stay unknown (fixed 25 Sep 2026).
+function specialStatusOrNull(raw: any, label: string): boolean | null {
+  const list = raw?.ragnarokZero?.specialStatus;
+  const known = Array.isArray(list) && list.some((s: any) => s?.raw);
+  return known ? hasSpecialStatus(raw, label) : null;
+}
+
 export function transformMonster(raw: any): MonsterRow {
   const rz = raw.ragnarokZero;
   return {
@@ -103,7 +113,7 @@ export function transformMonster(raw: any): MonsterRow {
     base_exp: toNumberOrNull(rz.baseExp) ?? 0,
     job_exp: toNumberOrNull(rz.jobExp) ?? 0,
     image_url: raw.imageUrl ?? null,
-    is_aggressive: hasSpecialStatus(raw, 'Aggressive'),
+    is_aggressive: specialStatusOrNull(raw, 'Aggressive'),
     is_mvp: hasSpecialStatus(raw, 'MVP'),
     loots_items: hasSpecialStatus(raw, 'Loots items'),
     matk_min: toNumberOrNull(rz.magicAtkMin),
