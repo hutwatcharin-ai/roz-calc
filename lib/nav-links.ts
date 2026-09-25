@@ -92,7 +92,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/job-change', label: 'เปลี่ยนอาชีพ 2', icon: '/images/items/1201.gif', ready: true, group: 'เริ่มเล่น' },
     { href: '/guides/forging', label: 'ตีอาวุธ + อาวุธธาตุ', icon: '/images/items/1101.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/cooking', label: 'ทำอาหาร', icon: '/images/items/517.gif', ready: true, group: 'คราฟต์' },
-    { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/items/1101.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/nav/star.png', ready: true, group: 'คราฟต์' },
     { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true, group: 'คราฟต์' },
