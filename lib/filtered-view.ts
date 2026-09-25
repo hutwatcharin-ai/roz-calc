@@ -27,6 +27,7 @@ export const LIST_FILTER_PARAMS = [
   'hpmin',
   'hpmax',
   'card',
+  'mode',
   'page',
   'sort',
 ] as const;

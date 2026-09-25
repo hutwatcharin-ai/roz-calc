@@ -330,7 +330,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
       </p>
       {monsterModes(monster.id)?.behaviour && (
         <p className="muted" style={{ marginTop: 4, fontSize: 12.5, maxWidth: '70ch' }}>
-          ลุม / ไวต่อเวท / มองมุด / ตีทีละ 1{monster.is_aggressive === null ? ' และโจมตีก่อน/ไม่โจมตีก่อนของตัวนี้' : ''} มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
+          รุม / ไวต่อเวท / มองมุด / ตีทีละ 1{monster.is_aggressive === null ? ' และโจมตีก่อน/ไม่โจมตีก่อนของตัวนี้' : ''} มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
           เชื่อได้แค่ไหน: บนข้อมูลที่ทั้งสองแหล่งมี (โจมตีก่อน) rAthena ตรงกับ rozerodb {modesMeta.rathena.agree} จาก {modesMeta.rathena.agree + modesMeta.rathena.disagree} ตัว
         </p>
       )}

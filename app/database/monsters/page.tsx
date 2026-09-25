@@ -27,6 +27,7 @@ import { cardRelease } from '@/lib/card-availability';
 import MonsterNameInput from '@/components/MonsterNameInput';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
+import { MODE_FILTERS, aggroFallbackIds, isModeFilter, monsterIdsWithMode, type ModeFilter } from '@/lib/monster-modes';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -91,7 +92,7 @@ export default async function MonsterListPage({
   searchParams: {
     q?: string; race?: string; element?: string; size?: string; aggro?: string;
     lvmin?: string; lvmax?: string; sort?: string; page?: string; c?: string; mj?: string; mvp?: string;
-    hpmin?: string; hpmax?: string; card?: string;
+    hpmin?: string; hpmax?: string; card?: string; mode?: string;
   };
 }) {
   const q = searchParams.q ?? '';
@@ -122,6 +123,8 @@ export default async function MonsterListPage({
   const hpmax = Math.max(0, Number(searchParams.hpmax ?? 0) || 0);
   const hpFiltered = hpmin > 0 || hpmax > 0;
   const cardOnly = searchParams.card === '1';
+  const mode: ModeFilter | '' = isModeFilter(searchParams.mode) ? searchParams.mode : '';
+  const modeIds = mode ? monsterIdsWithMode(mode) : null;
   const advancedOn = (hpFiltered ? 1 : 0) + (cardOnly ? 1 : 0);
   // A whitelist, not a passthrough: the sort key goes into the query.
   const SORTS = {
@@ -193,7 +196,15 @@ export default async function MonsterListPage({
     if (picked.race) query = query.eq('race', picked.race);
     if (picked.element) query = query.eq('element', picked.element);
     if (picked.size) query = query.eq('size', picked.size);
-    if (aggro) query = query.eq('is_aggressive', aggro === '1');
+    // The 58 rows rozerodb has no flag for (Poring, the plants...) carry
+    // rAthena's value instead, the same fallback the detail page shows.
+    if (aggro) {
+      const fallback = aggroFallbackIds(aggro === '1');
+      query = fallback.length
+        ? query.or(`is_aggressive.eq.${aggro === '1'},id.in.(${fallback.join(',')})`)
+        : query.eq('is_aggressive', aggro === '1');
+    }
+    if (modeIds) query = query.in('id', modeIds);
     if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
     if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) query = query.not('name_en', 'like', pattern);
     if (mvpOnly) query = query.eq('is_mvp', true);
@@ -487,6 +498,15 @@ export default async function MonsterListPage({
             </select>
           </label>
           <label className="field">
+            <span className="field__label">นิสัย</span>
+            <select name="mode" defaultValue={mode}>
+              <option value="">ทุกแบบ</option>
+              {(Object.keys(MODE_FILTERS) as ModeFilter[]).map((key) => (
+                <option key={key} value={key}>{MODE_FILTERS[key]}</option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
             <span className="field__label">บอส</span>
             <select name="mvp" defaultValue={mvpOnly ? '1' : ''}>
               <option value="">ทุกตัว</option>
@@ -566,6 +586,7 @@ export default async function MonsterListPage({
           // rows.
           { label: 'ขนาด', value: size ? `${size} · ${SIZE_TH[size]}` : '' },
           { label: 'พฤติกรรม', value: aggro === '1' ? 'โจมตีก่อน' : aggro === '0' ? 'ไม่โจมตีก่อน' : '' },
+          { label: 'นิสัย', value: mode ? MODE_FILTERS[mode] : '' },
           { label: 'บอส', value: mvpOnly ? 'เฉพาะ MVP' : '' },
           { label: 'เลเวล', value: lvmin > 0 || lvmax > 0 ? `${lvmin > 0 ? lvmin : '1'}–${lvmax > 0 ? lvmax : 'สูงสุด'}` : '' },
           { label: 'HP', value: hpFiltered ? `${hpmin > 0 ? hpmin.toLocaleString('en-US') : '1'}–${hpmax > 0 ? hpmax.toLocaleString('en-US') : 'สูงสุด'}` : '' },
