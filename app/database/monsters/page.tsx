@@ -596,8 +596,9 @@ export default async function MonsterListPage({
       />
       {/* The six behaviour words explained where the filter for them is,
           not on a guide page of their own (owner, 25 Sep 2026). Each row
-          links to the filtered list; open by default when a นิสัย filter is on. */}
-      <details className="shopmore advfilter" id="behaviour" open={mode !== ''} style={{ marginTop: 10 }}>
+          links to the filtered list; always collapsed -- the owner called the
+          page version clutter, so this stays one line until asked. */}
+      <details className="shopmore advfilter" id="behaviour" style={{ marginTop: 10 }}>
         <summary>นิสัยมอนแต่ละคำแปลว่าอะไร</summary>
         <div className="recipe__scroll">
           <table className="data-table recipe">
