@@ -227,7 +227,8 @@ export default function RefinePage() {
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
-        ดูต่อ: <Link href="/guides/elements">ตารางธาตุ</Link> ·{' '}
+        ดูต่อ: <Link href="/guides/ore-refining">หลอมแร่ (แร่ที่ใช้ตีบวกมาจากไหน)</Link> ·{' '}
+        <Link href="/guides/elements">ตารางธาตุ</Link> ·{' '}
         <Link href="/guides/sizes">ตารางขนาด</Link>
       </p>
     </main>

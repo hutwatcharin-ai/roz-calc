@@ -39,8 +39,13 @@ export default function CardLink({
       {name}
       {(effect || art) && (
         <span className={art ? 'cardlink__pop cardlink__pop--art' : 'cardlink__pop'} aria-hidden="true">
+          {/* Not lazy: the popover is display:none until hover, and a lazy
+              image inside a hidden box only starts loading when the box
+              appears, so the art showed up a beat after the text or not at
+              all (24 Sep 2026 audit). The thumb is small; loading it up
+              front is cheaper than an empty popover. */}
           {art && (
-            <img className="cardlink__art" src={cardArtThumbUrl(id)} alt="" width={60} height={80} loading="lazy" decoding="async" />
+            <img className="cardlink__art" src={cardArtThumbUrl(id)} alt="" width={60} height={80} decoding="async" />
           )}
           <span className="cardlink__text">
             {slot && <span className="cardlink__slot">ใส่ช่อง{slot}</span>}
