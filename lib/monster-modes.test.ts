@@ -27,7 +27,7 @@ describe('monster modes', () => {
       const b = monsterModes(row.id)!.behaviour;
       const src = ra.modes[String(row.id)];
       if (!src) expect(b, row.name).toBeNull();
-      else expect(b, row.name).toEqual({ assist: src.assist, castSensor: src.castSensor, detector: src.detector, plant: src.plant });
+      else expect(b, row.name).toEqual({ aggressive: src.aggressive, assist: src.assist, castSensor: src.castSensor, detector: src.detector, plant: src.plant });
     }
     // The trust argument for using kRO data: it must still match rozerodb on
     // the one flag both have. If this drops, rebuild before shipping.

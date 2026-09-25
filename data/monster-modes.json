@@ -80,6 +80,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -91,6 +92,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -102,6 +104,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -113,6 +116,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -124,6 +128,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -133,6 +138,7 @@
     "1008": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -144,6 +150,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -155,6 +162,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -166,6 +174,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -177,6 +186,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -188,6 +198,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -199,6 +210,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -210,6 +222,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -221,6 +234,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -232,6 +246,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -243,6 +258,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -254,6 +270,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -265,6 +282,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -276,6 +294,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -287,6 +306,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -298,6 +318,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -309,6 +330,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -320,6 +342,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -331,6 +354,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -342,6 +366,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -353,6 +378,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -364,6 +390,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -375,6 +402,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -386,6 +414,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -397,6 +426,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -408,6 +438,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -419,6 +450,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -430,6 +462,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -441,6 +474,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -452,6 +486,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -463,6 +498,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -474,6 +510,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -485,6 +522,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -494,6 +532,7 @@
     "1047": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -503,6 +542,7 @@
     "1048": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -514,6 +554,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -525,6 +566,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -536,6 +578,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -547,6 +590,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -558,6 +602,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -569,6 +614,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -580,6 +626,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -591,6 +638,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -602,6 +650,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -613,6 +662,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -624,6 +674,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -635,6 +686,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -644,6 +696,7 @@
     "1062": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -655,6 +708,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -666,6 +720,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -677,6 +732,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -688,6 +744,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -699,6 +756,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -710,6 +768,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -721,6 +780,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -732,6 +792,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -743,6 +804,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -754,6 +816,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -765,6 +828,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -776,6 +840,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -787,6 +852,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -796,6 +862,7 @@
     "1078": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -805,6 +872,7 @@
     "1079": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -814,6 +882,7 @@
     "1080": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -823,6 +892,7 @@
     "1081": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -832,6 +902,7 @@
     "1082": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -841,6 +912,7 @@
     "1083": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -850,6 +922,7 @@
     "1084": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -859,6 +932,7 @@
     "1085": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -870,6 +944,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -881,6 +956,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -892,6 +968,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -903,6 +980,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -914,6 +992,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -925,6 +1004,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -936,6 +1016,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -947,6 +1028,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -958,6 +1040,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -969,6 +1052,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -980,6 +1064,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -989,6 +1074,7 @@
     "1097": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1000,6 +1086,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1011,6 +1098,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1022,6 +1110,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1033,6 +1122,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1044,6 +1134,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1055,6 +1146,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1066,6 +1158,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1077,6 +1170,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -1088,6 +1182,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1099,6 +1194,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1110,6 +1206,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1121,6 +1218,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1132,6 +1230,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1143,6 +1242,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1154,6 +1254,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1165,6 +1266,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1176,6 +1278,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1187,6 +1290,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1198,6 +1302,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1209,6 +1314,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1220,6 +1326,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1231,6 +1338,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1242,6 +1350,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1253,6 +1362,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1264,6 +1374,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1275,6 +1386,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1286,6 +1398,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1297,6 +1410,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1308,6 +1422,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1319,6 +1434,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1330,6 +1446,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1341,6 +1458,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1352,6 +1470,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1363,6 +1482,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1374,6 +1494,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -1385,6 +1506,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1396,6 +1518,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1407,6 +1530,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1416,6 +1540,7 @@
     "1142": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1427,6 +1552,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1438,6 +1564,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1449,6 +1576,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1460,6 +1588,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1471,6 +1600,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1482,6 +1612,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1493,6 +1624,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1504,6 +1636,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1515,6 +1648,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1526,6 +1660,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1537,6 +1672,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1548,6 +1684,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1559,6 +1696,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1570,6 +1708,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1581,6 +1720,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1592,6 +1732,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1603,6 +1744,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1614,6 +1756,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -1625,6 +1768,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1636,6 +1780,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1647,6 +1792,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1658,6 +1804,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1669,6 +1816,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1680,6 +1828,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1691,6 +1840,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1702,6 +1852,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1713,6 +1864,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1724,6 +1876,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1735,6 +1888,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1746,6 +1900,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1757,6 +1912,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1768,6 +1924,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1779,6 +1936,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1788,6 +1946,7 @@
     "1185": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -1799,6 +1958,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1810,6 +1970,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1821,6 +1982,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1832,6 +1994,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1843,6 +2006,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1854,6 +2018,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1865,6 +2030,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1876,6 +2042,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1887,6 +2054,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1898,6 +2066,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1909,6 +2078,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -1920,6 +2090,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1931,6 +2102,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1942,6 +2114,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -1953,6 +2126,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -1964,6 +2138,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1975,6 +2150,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -1986,6 +2162,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -1997,6 +2174,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2008,6 +2186,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2019,6 +2198,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2030,6 +2210,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2041,6 +2222,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2052,6 +2234,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2063,6 +2246,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2074,6 +2258,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2083,6 +2268,7 @@
     "1244": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2092,6 +2278,7 @@
     "1245": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2103,6 +2290,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -2114,6 +2302,7 @@
       "canMove": false,
       "mini": true,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -2125,6 +2314,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2136,6 +2326,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2147,6 +2338,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2158,6 +2350,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2169,6 +2362,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -2180,6 +2374,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2191,6 +2386,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2202,6 +2398,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2213,6 +2410,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2224,6 +2422,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2235,6 +2434,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2246,6 +2446,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2257,6 +2458,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2268,6 +2470,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2279,6 +2482,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2290,6 +2494,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2301,6 +2506,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2312,6 +2518,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2323,6 +2530,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2334,6 +2542,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2345,6 +2554,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2356,6 +2566,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2367,6 +2578,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2378,6 +2590,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2389,6 +2602,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2400,6 +2614,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2411,6 +2626,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -2422,6 +2638,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2433,6 +2650,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2444,6 +2662,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2455,6 +2674,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2466,6 +2686,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2477,6 +2698,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2488,6 +2710,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2499,6 +2722,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2510,6 +2734,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2521,6 +2746,7 @@
       "canMove": false,
       "mini": true,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -2532,6 +2758,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2543,6 +2770,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2554,6 +2782,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2565,6 +2794,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2576,6 +2806,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2587,6 +2818,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2598,6 +2830,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2609,6 +2842,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2620,6 +2854,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2631,6 +2866,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2642,6 +2878,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2653,6 +2890,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2664,6 +2902,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2675,6 +2914,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2686,6 +2926,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2697,6 +2938,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2708,6 +2950,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2719,6 +2962,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2730,6 +2974,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2741,6 +2986,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2752,6 +2998,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2763,6 +3010,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2774,6 +3022,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2785,6 +3034,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2796,6 +3046,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2807,6 +3058,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2816,6 +3068,7 @@
     "1324": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2825,6 +3078,7 @@
     "1325": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2834,6 +3088,7 @@
     "1363": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2845,6 +3100,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2856,6 +3112,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2867,6 +3124,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2878,6 +3136,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2889,6 +3148,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2900,6 +3160,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -2911,6 +3172,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2922,6 +3184,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2933,6 +3196,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -2944,6 +3208,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2955,6 +3220,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2966,6 +3232,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -2977,6 +3244,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -2988,6 +3256,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -2999,6 +3268,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -3010,6 +3280,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3021,6 +3292,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3032,6 +3304,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3043,6 +3316,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3054,6 +3328,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3065,6 +3340,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3076,6 +3352,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3087,6 +3364,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3098,6 +3376,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3109,6 +3388,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3120,6 +3400,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -3131,6 +3412,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3142,6 +3424,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3153,6 +3436,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3164,6 +3448,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3175,6 +3460,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3186,6 +3472,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3197,6 +3484,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3208,6 +3496,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3219,6 +3508,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3230,6 +3520,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3241,6 +3532,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3252,6 +3544,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3263,6 +3556,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3274,6 +3568,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3285,6 +3580,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3296,6 +3592,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3307,6 +3604,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3318,6 +3616,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3329,6 +3628,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3340,6 +3640,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3351,6 +3652,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3362,6 +3664,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3373,6 +3676,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -3384,6 +3688,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3395,6 +3700,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3404,6 +3710,7 @@
     "1588": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3415,6 +3722,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3426,6 +3734,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3437,6 +3746,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3448,6 +3758,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3459,6 +3770,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3470,6 +3782,7 @@
       "canMove": false,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3479,6 +3792,7 @@
     "2210": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3490,6 +3804,7 @@
       "canMove": false,
       "mini": true,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3499,6 +3814,7 @@
     "2380": {
       "known": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3510,6 +3826,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3521,6 +3838,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3532,6 +3850,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3543,6 +3862,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3554,6 +3874,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3565,6 +3886,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -3576,6 +3898,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3587,6 +3910,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3598,6 +3922,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -3609,6 +3934,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3620,6 +3946,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3631,6 +3958,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -3642,6 +3970,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3653,6 +3982,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3664,6 +3994,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3675,6 +4006,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3686,6 +4018,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3697,6 +4030,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3708,6 +4042,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3719,6 +4054,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3730,6 +4066,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3741,6 +4078,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3752,6 +4090,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3763,6 +4102,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -3774,6 +4114,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3785,6 +4126,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -3796,6 +4138,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3807,6 +4150,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3818,6 +4162,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3829,6 +4174,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3840,6 +4186,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3851,6 +4198,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3862,6 +4210,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -3873,6 +4222,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3884,6 +4234,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3895,6 +4246,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3906,6 +4258,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3917,6 +4270,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3928,6 +4282,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3939,6 +4294,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -3950,6 +4306,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3961,6 +4318,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -3972,6 +4330,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3983,6 +4342,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -3994,6 +4354,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4005,6 +4366,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4016,6 +4378,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4027,6 +4390,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4038,6 +4402,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4049,6 +4414,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4060,6 +4426,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4071,6 +4438,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4082,6 +4450,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4093,6 +4462,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4104,6 +4474,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4115,6 +4486,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4126,6 +4498,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4137,6 +4510,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4148,6 +4522,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4159,6 +4534,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4170,6 +4546,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4181,6 +4558,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4192,6 +4570,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4203,6 +4582,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4214,6 +4594,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -4225,6 +4606,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4236,6 +4618,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4247,6 +4630,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4258,6 +4642,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4269,6 +4654,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4280,6 +4666,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4291,6 +4678,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4302,6 +4690,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4313,6 +4702,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4324,6 +4714,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4335,6 +4726,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4346,6 +4738,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4357,6 +4750,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4368,6 +4762,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4379,6 +4774,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4390,6 +4786,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -4401,6 +4798,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4412,6 +4810,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4423,6 +4822,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4434,6 +4834,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4445,6 +4846,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4456,6 +4858,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4467,6 +4870,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4478,6 +4882,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4489,6 +4894,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4500,6 +4906,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4511,6 +4918,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4522,6 +4930,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4533,6 +4942,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4544,6 +4954,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4555,6 +4966,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4566,6 +4978,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4577,6 +4990,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -4588,6 +5002,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4599,6 +5014,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4610,6 +5026,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4621,6 +5038,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4632,6 +5050,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4643,6 +5062,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4654,6 +5074,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4665,6 +5086,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4676,6 +5098,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4687,6 +5110,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4698,6 +5122,7 @@
       "canMove": false,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4709,6 +5134,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4720,6 +5146,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4731,6 +5158,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4742,6 +5170,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4753,6 +5182,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4764,6 +5194,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4775,6 +5206,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4786,6 +5218,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4797,6 +5230,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4808,6 +5242,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4819,6 +5254,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4830,6 +5266,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4841,6 +5278,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4852,6 +5290,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4863,6 +5302,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4874,6 +5314,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4885,6 +5326,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4896,6 +5338,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -4907,6 +5350,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -4918,6 +5362,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4929,6 +5374,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4940,6 +5386,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4951,6 +5398,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -4962,6 +5410,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -4973,6 +5422,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": false,
@@ -4984,6 +5434,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -4995,6 +5446,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -5006,6 +5458,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5017,6 +5470,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -5028,6 +5482,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5039,6 +5494,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5050,6 +5506,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5061,6 +5518,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5072,6 +5530,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5083,6 +5542,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -5094,6 +5554,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5105,6 +5566,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5116,6 +5578,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5127,6 +5590,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": true,
         "castSensor": false,
         "detector": true,
@@ -5138,6 +5602,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5149,6 +5614,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5160,6 +5626,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5171,6 +5638,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5182,6 +5650,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5193,6 +5662,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5204,6 +5674,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5215,6 +5686,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5226,6 +5698,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": true,
@@ -5237,6 +5710,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5248,6 +5722,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5259,6 +5734,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5274,6 +5750,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5285,6 +5762,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5296,6 +5774,7 @@
       "canMove": true,
       "mini": true,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5307,6 +5786,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5318,6 +5798,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5329,6 +5810,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5340,6 +5822,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": false,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5431,6 +5914,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5442,6 +5926,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5453,6 +5938,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": false,
@@ -5464,6 +5950,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": false,
         "detector": false,
@@ -5475,6 +5962,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,
@@ -5486,6 +5974,7 @@
       "canMove": true,
       "mini": false,
       "behaviour": {
+        "aggressive": true,
         "assist": false,
         "castSensor": true,
         "detector": true,

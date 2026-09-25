@@ -39,7 +39,9 @@ for (const row of rows) {
   const labels = new Set((row.ragnarokZero?.specialStatus ?? []).map((s) => s?.raw).filter(Boolean));
   const ra = rathena.modes[String(row.id)];
   // null = no rAthena row for this id (Zero-only event copies), not "no".
-  const behaviour = ra ? { assist: ra.assist, castSensor: ra.castSensor, detector: ra.detector, plant: ra.plant } : null;
+  // aggressive rides along so a row rozerodb says nothing about (58 of them,
+  // Poring and the plants among them) can still show it, marked as rAthena's.
+  const behaviour = ra ? { aggressive: ra.aggressive, assist: ra.assist, castSensor: ra.castSensor, detector: ra.detector, plant: ra.plant } : null;
   if (labels.size === 0) {
     modes[row.id] = { known: false, behaviour };
     unknownIds.push(row.id);

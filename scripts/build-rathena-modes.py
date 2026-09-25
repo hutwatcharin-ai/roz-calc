@@ -100,7 +100,7 @@ for row in rows:
     if not m:
         missing.append(row['id'])
         continue
-    out[str(row['id'])] = {k: m[k] for k in ('assist', 'castSensor', 'detector', 'plant', 'ai')} | {'rathenaName': m['name']}
+    out[str(row['id'])] = {k: m[k] for k in ('aggressive', 'assist', 'castSensor', 'detector', 'plant', 'ai')} | {'rathenaName': m['name']}
     labels = {s.get('raw') for s in (row.get('ragnarokZero') or {}).get('specialStatus') or [] if s.get('raw')}
     if labels:
         if ('Aggressive' in labels) == m['aggressive']:
@@ -118,7 +118,7 @@ if disagree > 0:
 json.dump(
     {
         '_meta': {
-            'what': 'assist / castSensor / detector / plant per monster id, derived from rAthena mob_db.yml Ai types and Modes; ids with no rAthena row are absent.',
+            'what': 'aggressive / assist / castSensor / detector / plant per monster id, derived from rAthena mob_db.yml Ai types and Modes; ids with no rAthena row are absent.',
             'source': MOB_DB,
             'regenerate': 'python scripts/build-rathena-modes.py',
             'aggressiveCheck': {'compared': agree + disagree, 'agree': agree, 'disagree': disagree},

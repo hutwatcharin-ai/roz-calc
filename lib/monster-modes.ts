@@ -6,13 +6,13 @@ import file from '@/data/monster-modes.json';
 
 /** The four flags rozerodb lacks, from rAthena (see scripts/build-rathena-modes.py);
  *  null when that id has no rAthena row. */
-export type Behaviour = { assist: boolean; castSensor: boolean; detector: boolean; plant: boolean } | null;
+export type Behaviour = { aggressive: boolean; assist: boolean; castSensor: boolean; detector: boolean; plant: boolean } | null;
 export type MonsterModes =
   | { known: true; canMove: boolean; mini: boolean; behaviour: Behaviour }
   | { known: false; behaviour: Behaviour };
 
 /** The in-game slang for each flag, the words players actually use. */
-export const BEHAVIOUR_LABELS: Record<keyof NonNullable<Behaviour>, { label: string; title: string }> = {
+export const BEHAVIOUR_LABELS: Record<Exclude<keyof NonNullable<Behaviour>, 'aggressive'>, { label: string; title: string }> = {
   assist: { label: 'ลุม', title: 'ตีตัวหนึ่ง ตัวข้าง ๆ ชนิดเดียวกันมาช่วยรุม' },
   castSensor: { label: 'ไวต่อเวท', title: 'ร่ายเวทใกล้ ๆ แล้วมันจะเข้ามาตี แม้ปกติจะไม่โจมตีก่อน' },
   detector: { label: 'มองมุด', title: 'เห็นตัวที่ Hiding / Cloaking' },

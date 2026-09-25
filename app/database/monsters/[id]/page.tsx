@@ -262,12 +262,16 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
               than nothing, which would read as "an ordinary monster". */}
           {(() => {
             const modes = monsterModes(monster.id);
-            if (modes && !modes.known) {
-              return <span className="tag tag--quiet" title="rozerodb ไม่มีข้อมูลนิสัยของตัวนี้ รวมถึงว่าโจมตีก่อนหรือไม่">นิสัย: ไม่มีข้อมูล</span>;
+            // rozerodb says nothing about this row. rAthena's aggro flag
+            // stands in when there is one (it agreed with rozerodb on every
+            // row both had); otherwise say so rather than show nothing.
+            if (modes && !modes.known && !modes.behaviour) {
+              return <span className="tag tag--quiet" title="ไม่มีแหล่งไหนของเรามีข้อมูลนิสัยของตัวนี้ รวมถึงว่าโจมตีก่อนหรือไม่">นิสัย: ไม่มีข้อมูล</span>;
             }
+            const aggro = monster.is_aggressive ?? modes?.behaviour?.aggressive ?? null;
             return (
               <>
-                <AggroBadge monster={{ is_aggressive: monster.is_aggressive, atk_max: monster.atk_max }} />
+                <AggroBadge monster={{ is_aggressive: aggro, atk_max: monster.atk_max }} />
                 {monster.is_mvp && <span className="tag">MVP</span>}
                 {modes?.known && modes.mini && <span className="tag">มินิบอส</span>}
                 {modes?.known && !modes.canMove && <span className="tag" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
@@ -304,7 +308,11 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         {(() => {
           const modes = monsterModes(monster.id);
           const traits = [
-            monster.is_aggressive === true ? 'เข้าโจมตีก่อน' : monster.is_aggressive === false ? 'ไม่โจมตีก่อน' : null,
+            (monster.is_aggressive ?? modes?.behaviour?.aggressive) === true
+              ? 'เข้าโจมตีก่อน'
+              : (monster.is_aggressive ?? modes?.behaviour?.aggressive) === false
+                ? 'ไม่โจมตีก่อน'
+                : null,
             modes?.known && modes.mini ? 'มินิบอส' : null,
             monster.is_mvp ? 'MVP' : null,
             modes?.known && !modes.canMove ? 'ยืนอยู่กับที่' : null,
@@ -322,7 +330,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
       </p>
       {monsterModes(monster.id)?.behaviour && (
         <p className="muted" style={{ marginTop: 4, fontSize: 12.5, maxWidth: '70ch' }}>
-          ลุม / ไวต่อเวท / มองมุด / ตีทีละ 1 มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
+          ลุม / ไวต่อเวท / มองมุด / ตีทีละ 1{monster.is_aggressive === null ? ' และโจมตีก่อน/ไม่โจมตีก่อนของตัวนี้' : ''} มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
           เชื่อได้แค่ไหน: บนข้อมูลที่ทั้งสองแหล่งมี (โจมตีก่อน) rAthena ตรงกับ rozerodb {modesMeta.rathena.agree} จาก {modesMeta.rathena.agree + modesMeta.rathena.disagree} ตัว
         </p>
       )}

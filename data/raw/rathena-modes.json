@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "what": "assist / castSensor / detector / plant per monster id, derived from rAthena mob_db.yml Ai types and Modes; ids with no rAthena row are absent.",
+  "what": "aggressive / assist / castSensor / detector / plant per monster id, derived from rAthena mob_db.yml Ai types and Modes; ids with no rAthena row are absent.",
   "source": "https://raw.githubusercontent.com/rathena/rathena/master/db/re/mob_db.yml",
   "regenerate": "python scripts/build-rathena-modes.py",
   "aggressiveCheck": {
@@ -49,6 +49,7 @@
  },
  "modes": {
   "1001": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -57,6 +58,7 @@
    "rathenaName": "Scorpion"
   },
   "1002": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -65,6 +67,7 @@
    "rathenaName": "Poring"
   },
   "1004": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -73,6 +76,7 @@
    "rathenaName": "Hornet"
   },
   "1005": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -81,6 +85,7 @@
    "rathenaName": "Familiar"
   },
   "1007": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -89,6 +94,7 @@
    "rathenaName": "Fabre"
   },
   "1008": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -97,6 +103,7 @@
    "rathenaName": "Pupa"
   },
   "1009": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -105,6 +112,7 @@
    "rathenaName": "Condor"
   },
   "1010": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -113,6 +121,7 @@
    "rathenaName": "Willow"
   },
   "1011": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -121,6 +130,7 @@
    "rathenaName": "Chonchon"
   },
   "1012": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -129,6 +139,7 @@
    "rathenaName": "Roda Frog"
   },
   "1013": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -137,6 +148,7 @@
    "rathenaName": "Wolf"
   },
   "1014": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -145,6 +157,7 @@
    "rathenaName": "Spore"
   },
   "1015": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -153,6 +166,7 @@
    "rathenaName": "Zombie"
   },
   "1016": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -161,6 +175,7 @@
    "rathenaName": "Archer Skeleton"
   },
   "1018": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -169,6 +184,7 @@
    "rathenaName": "Creamy"
   },
   "1019": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -177,6 +193,7 @@
    "rathenaName": "Peco Peco"
   },
   "1020": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -185,6 +202,7 @@
    "rathenaName": "Mandragora"
   },
   "1023": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -193,6 +211,7 @@
    "rathenaName": "Orc Warrior"
   },
   "1024": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -201,6 +220,7 @@
    "rathenaName": "Wormtail"
   },
   "1025": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -209,6 +229,7 @@
    "rathenaName": "Boa"
   },
   "1026": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -217,6 +238,7 @@
    "rathenaName": "Munak"
   },
   "1028": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -225,6 +247,7 @@
    "rathenaName": "Soldier Skeleton"
   },
   "1029": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -233,6 +256,7 @@
    "rathenaName": "Isis"
   },
   "1031": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -241,6 +265,7 @@
    "rathenaName": "Poporing"
   },
   "1032": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -249,6 +274,7 @@
    "rathenaName": "Verit"
   },
   "1033": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -257,6 +283,7 @@
    "rathenaName": "Elder Willow"
   },
   "1034": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -265,6 +292,7 @@
    "rathenaName": "Thara Frog"
   },
   "1035": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -273,6 +301,7 @@
    "rathenaName": "Hunter Fly"
   },
   "1036": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -281,6 +310,7 @@
    "rathenaName": "Ghoul"
   },
   "1037": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -289,6 +319,7 @@
    "rathenaName": "Side Winder"
   },
   "1038": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -297,6 +328,7 @@
    "rathenaName": "Osiris"
   },
   "1039": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -305,6 +337,7 @@
    "rathenaName": "Baphomet"
   },
   "1040": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -313,6 +346,7 @@
    "rathenaName": "Golem"
   },
   "1041": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -321,6 +355,7 @@
    "rathenaName": "Mummy"
   },
   "1042": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -329,6 +364,7 @@
    "rathenaName": "Steel Chonchon"
   },
   "1044": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -337,6 +373,7 @@
    "rathenaName": "Obeaune"
   },
   "1045": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -345,6 +382,7 @@
    "rathenaName": "Marc"
   },
   "1046": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -353,6 +391,7 @@
    "rathenaName": "Doppelganger"
   },
   "1047": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -361,6 +400,7 @@
    "rathenaName": "Peco Peco Egg"
   },
   "1048": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -369,6 +409,7 @@
    "rathenaName": "Thief Bug Egg"
   },
   "1049": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -377,6 +418,7 @@
    "rathenaName": "Picky"
   },
   "1050": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -385,6 +427,7 @@
    "rathenaName": "Picky"
   },
   "1051": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -393,6 +436,7 @@
    "rathenaName": "Thief Bug"
   },
   "1052": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -401,6 +445,7 @@
    "rathenaName": "Rocker"
   },
   "1053": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -409,6 +454,7 @@
    "rathenaName": "Thief Bug Female"
   },
   "1054": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -417,6 +463,7 @@
    "rathenaName": "Thief Bug Male"
   },
   "1055": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -425,6 +472,7 @@
    "rathenaName": "Muka"
   },
   "1056": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -433,6 +481,7 @@
    "rathenaName": "Smokie"
   },
   "1057": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -441,6 +490,7 @@
    "rathenaName": "Yoyo"
   },
   "1058": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -449,6 +499,7 @@
    "rathenaName": "Metaller"
   },
   "1060": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -457,6 +508,7 @@
    "rathenaName": "Bigfoot"
   },
   "1061": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -465,6 +517,7 @@
    "rathenaName": "Nightmare"
   },
   "1062": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -473,6 +526,7 @@
    "rathenaName": "Santa Poring"
   },
   "1063": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -481,6 +535,7 @@
    "rathenaName": "Lunatic"
   },
   "1064": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -489,6 +544,7 @@
    "rathenaName": "Megalodon"
   },
   "1065": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -497,6 +553,7 @@
    "rathenaName": "Strouf"
   },
   "1066": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -505,6 +562,7 @@
    "rathenaName": "Vadon"
   },
   "1067": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -513,6 +571,7 @@
    "rathenaName": "Cornutus"
   },
   "1068": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -521,6 +580,7 @@
    "rathenaName": "Hydra"
   },
   "1069": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -529,6 +589,7 @@
    "rathenaName": "Swordfish"
   },
   "1070": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -537,6 +598,7 @@
    "rathenaName": "Kukre"
   },
   "1071": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -545,6 +607,7 @@
    "rathenaName": "Pirate Skeleton"
   },
   "1073": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -553,6 +616,7 @@
    "rathenaName": "Crab"
   },
   "1074": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -561,6 +625,7 @@
    "rathenaName": "Shellfish"
   },
   "1076": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -569,6 +634,7 @@
    "rathenaName": "Skeleton"
   },
   "1077": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -577,6 +643,7 @@
    "rathenaName": "Poison Spore"
   },
   "1078": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -585,6 +652,7 @@
    "rathenaName": "Red Plant"
   },
   "1079": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -593,6 +661,7 @@
    "rathenaName": "Blue Plant"
   },
   "1080": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -601,6 +670,7 @@
    "rathenaName": "Green Plant"
   },
   "1081": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -609,6 +679,7 @@
    "rathenaName": "Yellow Plant"
   },
   "1082": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -617,6 +688,7 @@
    "rathenaName": "White Plant"
   },
   "1083": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -625,6 +697,7 @@
    "rathenaName": "Shining Plant"
   },
   "1084": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -633,6 +706,7 @@
    "rathenaName": "Black Mushroom"
   },
   "1085": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -641,6 +715,7 @@
    "rathenaName": "Red Mushroom"
   },
   "1086": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -649,6 +724,7 @@
    "rathenaName": "Golden Thief Bug"
   },
   "1087": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -657,6 +733,7 @@
    "rathenaName": "Orc Hero"
   },
   "1088": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -665,6 +742,7 @@
    "rathenaName": "Vocal"
   },
   "1089": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -673,6 +751,7 @@
    "rathenaName": "Toad"
   },
   "1090": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -681,6 +760,7 @@
    "rathenaName": "Mastering"
   },
   "1091": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -689,6 +769,7 @@
    "rathenaName": "Dragon Fly"
   },
   "1092": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -697,6 +778,7 @@
    "rathenaName": "Vagabond Wolf"
   },
   "1093": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -705,6 +787,7 @@
    "rathenaName": "Eclipse"
   },
   "1094": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -713,6 +796,7 @@
    "rathenaName": "Ambernite"
   },
   "1095": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -721,6 +805,7 @@
    "rathenaName": "Andre"
   },
   "1096": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -729,6 +814,7 @@
    "rathenaName": "Angeling"
   },
   "1097": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -737,6 +823,7 @@
    "rathenaName": "Ant Egg"
   },
   "1098": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -745,6 +832,7 @@
    "rathenaName": "Anubis"
   },
   "1099": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -753,6 +841,7 @@
    "rathenaName": "Argiope"
   },
   "1100": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -761,6 +850,7 @@
    "rathenaName": "Argos"
   },
   "1101": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -769,6 +859,7 @@
    "rathenaName": "Baphomet Jr."
   },
   "1102": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -777,6 +868,7 @@
    "rathenaName": "Bathory"
   },
   "1103": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -785,6 +877,7 @@
    "rathenaName": "Caramel"
   },
   "1104": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -793,6 +886,7 @@
    "rathenaName": "Coco"
   },
   "1105": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -801,6 +895,7 @@
    "rathenaName": "Deniro"
   },
   "1107": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -809,6 +904,7 @@
    "rathenaName": "Baby Desert Wolf"
   },
   "1108": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -817,6 +913,7 @@
    "rathenaName": "Deviace"
   },
   "1109": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -825,6 +922,7 @@
    "rathenaName": "Deviruchi"
   },
   "1110": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -833,6 +931,7 @@
    "rathenaName": "Dokebi"
   },
   "1111": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -841,6 +940,7 @@
    "rathenaName": "Drainliar"
   },
   "1112": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -849,6 +949,7 @@
    "rathenaName": "Drake"
   },
   "1113": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -857,6 +958,7 @@
    "rathenaName": "Drops"
   },
   "1114": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -865,6 +967,7 @@
    "rathenaName": "Dustiness"
   },
   "1115": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -873,6 +976,7 @@
    "rathenaName": "Eddga"
   },
   "1116": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -881,6 +985,7 @@
    "rathenaName": "Eggyra"
   },
   "1117": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -889,6 +994,7 @@
    "rathenaName": "Evil Druid"
   },
   "1118": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -897,6 +1003,7 @@
    "rathenaName": "Flora"
   },
   "1119": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -905,6 +1012,7 @@
    "rathenaName": "Frilldora"
   },
   "1120": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -913,6 +1021,7 @@
    "rathenaName": "Ghostring"
   },
   "1121": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -921,6 +1030,7 @@
    "rathenaName": "Giearth"
   },
   "1122": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -929,6 +1039,7 @@
    "rathenaName": "Goblin"
   },
   "1123": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -937,6 +1048,7 @@
    "rathenaName": "Goblin"
   },
   "1124": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -945,6 +1057,7 @@
    "rathenaName": "Goblin"
   },
   "1125": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -953,6 +1066,7 @@
    "rathenaName": "Goblin"
   },
   "1126": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -961,6 +1075,7 @@
    "rathenaName": "Goblin"
   },
   "1127": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -969,6 +1084,7 @@
    "rathenaName": "Hode"
   },
   "1128": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -977,6 +1093,7 @@
    "rathenaName": "Horn"
   },
   "1129": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -985,6 +1102,7 @@
    "rathenaName": "Horong"
   },
   "1130": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -993,6 +1111,7 @@
    "rathenaName": "Jakk"
   },
   "1131": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1001,6 +1120,7 @@
    "rathenaName": "Joker"
   },
   "1132": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1009,6 +1129,7 @@
    "rathenaName": "Khalitzburg"
   },
   "1138": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -1017,6 +1138,7 @@
    "rathenaName": "Magnolia"
   },
   "1139": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1025,6 +1147,7 @@
    "rathenaName": "Mantis"
   },
   "1140": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1033,6 +1156,7 @@
    "rathenaName": "Marduk"
   },
   "1141": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1041,6 +1165,7 @@
    "rathenaName": "Marina"
   },
   "1142": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1049,6 +1174,7 @@
    "rathenaName": "Marine Sphere"
   },
   "1143": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1057,6 +1183,7 @@
    "rathenaName": "Marionette"
   },
   "1144": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1065,6 +1192,7 @@
    "rathenaName": "Marse"
   },
   "1145": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1073,6 +1201,7 @@
    "rathenaName": "Martin"
   },
   "1146": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1081,6 +1210,7 @@
    "rathenaName": "Matyr"
   },
   "1147": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1089,6 +1219,7 @@
    "rathenaName": "Maya"
   },
   "1148": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1097,6 +1228,7 @@
    "rathenaName": "Medusa"
   },
   "1149": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1105,6 +1237,7 @@
    "rathenaName": "Minorous"
   },
   "1150": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1113,6 +1246,7 @@
    "rathenaName": "Moonlight Flower"
   },
   "1151": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1121,6 +1255,7 @@
    "rathenaName": "Myst"
   },
   "1152": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1129,6 +1264,7 @@
    "rathenaName": "Orc Skeleton"
   },
   "1153": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1137,6 +1273,7 @@
    "rathenaName": "Orc Zombie"
   },
   "1154": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1145,6 +1282,7 @@
    "rathenaName": "Pasana"
   },
   "1155": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1153,6 +1291,7 @@
    "rathenaName": "Petite"
   },
   "1156": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1161,6 +1300,7 @@
    "rathenaName": "Petite"
   },
   "1157": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1169,6 +1309,7 @@
    "rathenaName": "Pharaoh"
   },
   "1158": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1177,6 +1318,7 @@
    "rathenaName": "Phen"
   },
   "1159": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1185,6 +1327,7 @@
    "rathenaName": "Phreeoni"
   },
   "1160": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -1193,6 +1336,7 @@
    "rathenaName": "Piere"
   },
   "1161": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1201,6 +1345,7 @@
    "rathenaName": "Plankton"
   },
   "1163": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1209,6 +1354,7 @@
    "rathenaName": "Raydric"
   },
   "1164": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1217,6 +1363,7 @@
    "rathenaName": "Requiem"
   },
   "1165": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1225,6 +1372,7 @@
    "rathenaName": "Sandman"
   },
   "1166": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1233,6 +1381,7 @@
    "rathenaName": "Savage"
   },
   "1167": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1241,6 +1390,7 @@
    "rathenaName": "Savage Babe"
   },
   "1169": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1249,6 +1399,7 @@
    "rathenaName": "Skeleton Worker"
   },
   "1170": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1257,6 +1408,7 @@
    "rathenaName": "Sohee"
   },
   "1174": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1265,6 +1417,7 @@
    "rathenaName": "Stainer"
   },
   "1175": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1273,6 +1426,7 @@
    "rathenaName": "Tarou"
   },
   "1176": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1281,6 +1435,7 @@
    "rathenaName": "Vitata"
   },
   "1177": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1289,6 +1444,7 @@
    "rathenaName": "Zenorc"
   },
   "1178": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1297,6 +1453,7 @@
    "rathenaName": "Zerom"
   },
   "1179": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1305,6 +1462,7 @@
    "rathenaName": "Whisper"
   },
   "1180": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1313,6 +1471,7 @@
    "rathenaName": "Nine Tail"
   },
   "1185": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1321,6 +1480,7 @@
    "rathenaName": "Whisper"
   },
   "1188": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1329,6 +1489,7 @@
    "rathenaName": "Bongun"
   },
   "1189": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1337,6 +1498,7 @@
    "rathenaName": "Orc Archer"
   },
   "1190": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1345,6 +1507,7 @@
    "rathenaName": "Orc Lord"
   },
   "1191": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1353,6 +1516,7 @@
    "rathenaName": "Mimic"
   },
   "1192": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1361,6 +1525,7 @@
    "rathenaName": "Wraith"
   },
   "1193": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1369,6 +1534,7 @@
    "rathenaName": "Alarm"
   },
   "1194": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1377,6 +1543,7 @@
    "rathenaName": "Arclouze"
   },
   "1195": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1385,6 +1552,7 @@
    "rathenaName": "Rideword"
   },
   "1196": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -1393,6 +1561,7 @@
    "rathenaName": "Skeleton Prisoner"
   },
   "1197": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -1401,6 +1570,7 @@
    "rathenaName": "Zombie Prisoner"
   },
   "1198": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -1409,6 +1579,7 @@
    "rathenaName": "Dark Priest"
   },
   "1199": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1417,6 +1588,7 @@
    "rathenaName": "Punk"
   },
   "1200": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -1425,6 +1597,7 @@
    "rathenaName": "Zealotus"
   },
   "1201": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -1433,6 +1606,7 @@
    "rathenaName": "Rybio"
   },
   "1202": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -1441,6 +1615,7 @@
    "rathenaName": "Phendark"
   },
   "1206": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1449,6 +1624,7 @@
    "rathenaName": "Anolian"
   },
   "1207": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1457,6 +1633,7 @@
    "rathenaName": "Sting"
   },
   "1208": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1465,6 +1642,7 @@
    "rathenaName": "Wanderer"
   },
   "1209": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1473,6 +1651,7 @@
    "rathenaName": "Cramp"
   },
   "1211": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1481,6 +1660,7 @@
    "rathenaName": "Brilight"
   },
   "1213": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1489,6 +1669,7 @@
    "rathenaName": "High Orc"
   },
   "1214": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1497,6 +1678,7 @@
    "rathenaName": "Choco"
   },
   "1216": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1505,6 +1687,7 @@
    "rathenaName": "Penomena"
   },
   "1219": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1513,6 +1696,7 @@
    "rathenaName": "Abysmal Knight"
   },
   "1242": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1521,6 +1705,7 @@
    "rathenaName": "Marin"
   },
   "1243": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1529,6 +1714,7 @@
    "rathenaName": "Sasquatch"
   },
   "1244": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1537,6 +1723,7 @@
    "rathenaName": "Christmas Jakk"
   },
   "1245": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1545,6 +1732,7 @@
    "rathenaName": "Christmas Goblin"
   },
   "1246": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -1553,6 +1741,7 @@
    "rathenaName": "Christmas Cookie"
   },
   "1247": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -1561,6 +1750,7 @@
    "rathenaName": "Antonio"
   },
   "1248": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1569,6 +1759,7 @@
    "rathenaName": "Cruiser"
   },
   "1249": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1577,6 +1768,7 @@
    "rathenaName": "Myst Case"
   },
   "1251": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1585,6 +1777,7 @@
    "rathenaName": "Stormy Knight"
   },
   "1252": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1593,6 +1786,7 @@
    "rathenaName": "Hatii"
   },
   "1253": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -1601,6 +1795,7 @@
    "rathenaName": "Gargoyle"
   },
   "1254": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1609,6 +1804,7 @@
    "rathenaName": "Raggler"
   },
   "1255": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1617,6 +1813,7 @@
    "rathenaName": "Nereid"
   },
   "1256": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1625,6 +1822,7 @@
    "rathenaName": "Pest"
   },
   "1257": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1633,6 +1831,7 @@
    "rathenaName": "Injustice"
   },
   "1258": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1641,6 +1840,7 @@
    "rathenaName": "Goblin Archer"
   },
   "1260": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1649,6 +1849,7 @@
    "rathenaName": "Dark Frame"
   },
   "1261": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1657,6 +1858,7 @@
    "rathenaName": "Wild Rose"
   },
   "1262": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1665,6 +1867,7 @@
    "rathenaName": "Mutant Dragonoid"
   },
   "1263": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1673,6 +1876,7 @@
    "rathenaName": "Wind Ghost"
   },
   "1264": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1681,6 +1885,7 @@
    "rathenaName": "Merman"
   },
   "1265": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1689,6 +1894,7 @@
    "rathenaName": "Cookie"
   },
   "1266": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1697,6 +1903,7 @@
    "rathenaName": "Aster"
   },
   "1267": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1705,6 +1912,7 @@
    "rathenaName": "Carat"
   },
   "1268": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1713,6 +1921,7 @@
    "rathenaName": "Bloody Knight"
   },
   "1269": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1721,6 +1930,7 @@
    "rathenaName": "Clock"
   },
   "1270": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1729,6 +1939,7 @@
    "rathenaName": "Clock Tower Manager"
   },
   "1271": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1737,6 +1948,7 @@
    "rathenaName": "Alligator"
   },
   "1272": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1745,6 +1957,7 @@
    "rathenaName": "Dark Lord"
   },
   "1273": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1753,6 +1966,7 @@
    "rathenaName": "Orc Lady"
   },
   "1274": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1761,6 +1975,7 @@
    "rathenaName": "Megalith"
   },
   "1275": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1769,6 +1984,7 @@
    "rathenaName": "Alice"
   },
   "1276": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -1777,6 +1993,7 @@
    "rathenaName": "Raydric Archer"
   },
   "1277": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1785,6 +2002,7 @@
    "rathenaName": "Greatest General"
   },
   "1278": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1793,6 +2011,7 @@
    "rathenaName": "Stalactic Golem"
   },
   "1279": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1801,6 +2020,7 @@
    "rathenaName": "Tri Joint"
   },
   "1280": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1809,6 +2029,7 @@
    "rathenaName": "Goblin Steamrider"
   },
   "1281": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1817,6 +2038,7 @@
    "rathenaName": "Sage Worm"
   },
   "1283": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1825,6 +2047,7 @@
    "rathenaName": "Chimera"
   },
   "1285": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1833,6 +2056,7 @@
    "rathenaName": "Archer Guardian"
   },
   "1286": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1841,6 +2065,7 @@
    "rathenaName": "Knight Guardian"
   },
   "1287": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -1849,6 +2074,7 @@
    "rathenaName": "Soldier Guardian"
   },
   "1288": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -1857,6 +2083,7 @@
    "rathenaName": "Emperium"
   },
   "1291": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1865,6 +2092,7 @@
    "rathenaName": "Wraith Dead"
   },
   "1293": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1873,6 +2101,7 @@
    "rathenaName": "Creamy Fear"
   },
   "1295": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1881,6 +2110,7 @@
    "rathenaName": "Owl Baron"
   },
   "1297": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1889,6 +2119,7 @@
    "rathenaName": "Ancient Mummy"
   },
   "1298": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1897,6 +2128,7 @@
    "rathenaName": "Zombie Master"
   },
   "1299": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1905,6 +2137,7 @@
    "rathenaName": "Goblin Leader"
   },
   "1300": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1913,6 +2146,7 @@
    "rathenaName": "Caterpillar"
   },
   "1302": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1921,6 +2155,7 @@
    "rathenaName": "Dark Illusion"
   },
   "1303": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1929,6 +2164,7 @@
    "rathenaName": "Giant Hornet"
   },
   "1305": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1937,6 +2173,7 @@
    "rathenaName": "Ancient Worm"
   },
   "1306": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1945,6 +2182,7 @@
    "rathenaName": "Leib Olmai"
   },
   "1308": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1953,6 +2191,7 @@
    "rathenaName": "Panzer Goblin"
   },
   "1310": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1961,6 +2200,7 @@
    "rathenaName": "Majoruros"
   },
   "1311": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1969,6 +2209,7 @@
    "rathenaName": "Gullinbursti"
   },
   "1312": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -1977,6 +2218,7 @@
    "rathenaName": "Turtle General"
   },
   "1313": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1985,6 +2227,7 @@
    "rathenaName": "Mobster"
   },
   "1314": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -1993,6 +2236,7 @@
    "rathenaName": "Permeter"
   },
   "1315": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2001,6 +2245,7 @@
    "rathenaName": "Assaulter"
   },
   "1316": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2009,6 +2254,7 @@
    "rathenaName": "Solider"
   },
   "1317": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2017,6 +2263,7 @@
    "rathenaName": "Seal"
   },
   "1318": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2025,6 +2272,7 @@
    "rathenaName": "Heater"
   },
   "1319": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2033,6 +2281,7 @@
    "rathenaName": "Freezer"
   },
   "1320": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2041,6 +2290,7 @@
    "rathenaName": "Owl Duke"
   },
   "1321": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2049,6 +2299,7 @@
    "rathenaName": "Dragon Tail"
   },
   "1322": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2057,6 +2308,7 @@
    "rathenaName": "Spring Rabbit"
   },
   "1323": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2065,6 +2317,7 @@
    "rathenaName": "Sea Otter"
   },
   "1324": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2073,6 +2326,7 @@
    "rathenaName": "Treasure Chest"
   },
   "1325": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2081,6 +2335,7 @@
    "rathenaName": "Treasure Chest"
   },
   "1363": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2089,6 +2344,7 @@
    "rathenaName": "Treasure Chest"
   },
   "1373": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2097,6 +2353,7 @@
    "rathenaName": "Lord of the Dead"
   },
   "1375": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2105,6 +2362,7 @@
    "rathenaName": "The Paper"
   },
   "1377": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2113,6 +2371,7 @@
    "rathenaName": "Elder"
   },
   "1380": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2121,6 +2380,7 @@
    "rathenaName": "Driller"
   },
   "1389": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2129,6 +2389,7 @@
    "rathenaName": "Dracula"
   },
   "1391": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -2137,6 +2398,7 @@
    "rathenaName": "Galapago"
   },
   "1392": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2145,6 +2407,7 @@
    "rathenaName": "Rotar Zairo"
   },
   "1400": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2153,6 +2416,7 @@
    "rathenaName": "Karakasa"
   },
   "1401": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2161,6 +2425,7 @@
    "rathenaName": "Shinobi"
   },
   "1402": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2169,6 +2434,7 @@
    "rathenaName": "Poisonous Toad"
   },
   "1403": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2177,6 +2443,7 @@
    "rathenaName": "Firelock Soldier"
   },
   "1404": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2185,6 +2452,7 @@
    "rathenaName": "Miyabi Doll"
   },
   "1405": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2193,6 +2461,7 @@
    "rathenaName": "Tengu"
   },
   "1406": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2201,6 +2470,7 @@
    "rathenaName": "Kapha"
   },
   "1408": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -2209,6 +2479,7 @@
    "rathenaName": "Bloody Butterfly"
   },
   "1409": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2217,6 +2488,7 @@
    "rathenaName": "Dumpling Child"
   },
   "1410": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2225,6 +2497,7 @@
    "rathenaName": "Enchanted Peach Tree"
   },
   "1412": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2233,6 +2506,7 @@
    "rathenaName": "Taoist Hermit"
   },
   "1413": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2241,6 +2515,7 @@
    "rathenaName": "Hermit Plant"
   },
   "1415": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2249,6 +2524,7 @@
    "rathenaName": "Baby Leopard"
   },
   "1416": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2257,6 +2533,7 @@
    "rathenaName": "Evil Nymph"
   },
   "1417": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2265,6 +2542,7 @@
    "rathenaName": "Zipper Bear"
   },
   "1418": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2273,6 +2551,7 @@
    "rathenaName": "Evil Snake Lord"
   },
   "1492": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2281,6 +2560,7 @@
    "rathenaName": "Samurai Specter"
   },
   "1493": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2289,6 +2569,7 @@
    "rathenaName": "Dryad"
   },
   "1494": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -2297,6 +2578,7 @@
    "rathenaName": "Beetle King"
   },
   "1495": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2305,6 +2587,7 @@
    "rathenaName": "Stone Shooter"
   },
   "1497": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2313,6 +2596,7 @@
    "rathenaName": "Wooden Golem"
   },
   "1498": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2321,6 +2605,7 @@
    "rathenaName": "Wootan Shooter"
   },
   "1499": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2329,6 +2614,7 @@
    "rathenaName": "Wootan Fighter"
   },
   "1500": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2337,6 +2623,7 @@
    "rathenaName": "Parasite"
   },
   "1503": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2345,6 +2632,7 @@
    "rathenaName": "Gibbet"
   },
   "1504": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2353,6 +2641,7 @@
    "rathenaName": "Dullahan"
   },
   "1505": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2361,6 +2650,7 @@
    "rathenaName": "Loli Ruri"
   },
   "1506": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2369,6 +2659,7 @@
    "rathenaName": "Disguise"
   },
   "1507": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2377,6 +2668,7 @@
    "rathenaName": "Bloody Murderer"
   },
   "1508": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2385,6 +2677,7 @@
    "rathenaName": "Quve"
   },
   "1509": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2393,6 +2686,7 @@
    "rathenaName": "Lude"
   },
   "1510": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2401,6 +2695,7 @@
    "rathenaName": "Heirozoist"
   },
   "1511": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2409,6 +2704,7 @@
    "rathenaName": "Amon Ra"
   },
   "1512": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2417,6 +2713,7 @@
    "rathenaName": "Yao Jun"
   },
   "1513": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2425,6 +2722,7 @@
    "rathenaName": "Mao Guai"
   },
   "1514": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2433,6 +2731,7 @@
    "rathenaName": "Zhu Po Long"
   },
   "1515": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2441,6 +2740,7 @@
    "rathenaName": "Baby Hatii"
   },
   "1516": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2449,6 +2749,7 @@
    "rathenaName": "Mi Gao"
   },
   "1517": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2457,6 +2758,7 @@
    "rathenaName": "Jing Guai"
   },
   "1582": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2465,6 +2767,7 @@
    "rathenaName": "Deviling"
   },
   "1583": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2473,6 +2776,7 @@
    "rathenaName": "Tao Gunka"
   },
   "1584": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -2481,6 +2785,7 @@
    "rathenaName": "Tamruan"
   },
   "1586": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2489,6 +2794,7 @@
    "rathenaName": "Leaf Cat"
   },
   "1587": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2497,6 +2803,7 @@
    "rathenaName": "Kraben"
   },
   "1588": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2505,6 +2812,7 @@
    "rathenaName": "Christmas Orc"
   },
   "1630": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2513,6 +2821,7 @@
    "rathenaName": "White Lady"
   },
   "1631": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2521,6 +2830,7 @@
    "rathenaName": "Green Maiden"
   },
   "1686": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2529,6 +2839,7 @@
    "rathenaName": "Orc Baby"
   },
   "1687": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2537,6 +2848,7 @@
    "rathenaName": "Grove"
   },
   "1688": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2545,6 +2857,7 @@
    "rathenaName": "Lady Tanee"
   },
   "1960": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2553,6 +2866,7 @@
    "rathenaName": "Thorn of Magic"
   },
   "2210": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2561,6 +2875,7 @@
    "rathenaName": "Christmas Snow Rabbit"
   },
   "2288": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2569,6 +2884,7 @@
    "rathenaName": "Treasure Chest"
   },
   "2380": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2577,6 +2893,7 @@
    "rathenaName": "Gift Stealing Raccoon"
   },
   "2398": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2585,6 +2902,7 @@
    "rathenaName": "Little Poring"
   },
   "2404": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2593,6 +2911,7 @@
    "rathenaName": "Dead Plankton"
   },
   "2405": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2601,6 +2920,7 @@
    "rathenaName": "Weak Skeleton"
   },
   "2406": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2609,6 +2929,7 @@
    "rathenaName": "Weak Soldier Skeleton"
   },
   "2450": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2617,6 +2938,7 @@
    "rathenaName": "Thief Poring"
   },
   "2604": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -2625,6 +2947,7 @@
    "rathenaName": "Solid Zombie Prisoner"
   },
   "2605": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2633,6 +2956,7 @@
    "rathenaName": "Zombie Master Ringleader"
   },
   "2606": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2641,6 +2965,7 @@
    "rathenaName": "Furious Zombie"
   },
   "2608": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -2649,6 +2974,7 @@
    "rathenaName": "Swift Yoyo"
   },
   "2610": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2657,6 +2983,7 @@
    "rathenaName": "Wormtail Ringleader"
   },
   "2611": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2665,6 +2992,7 @@
    "rathenaName": "Furious Wootan Fighter"
   },
   "2613": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -2673,6 +3001,7 @@
    "rathenaName": "Swift Wolf"
   },
   "2615": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2681,6 +3010,7 @@
    "rathenaName": "Willow Ringleader"
   },
   "2616": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2689,6 +3019,7 @@
    "rathenaName": "Furious Wild Rose"
   },
   "2617": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2697,6 +3028,7 @@
    "rathenaName": "Elusive Evil Nymph"
   },
   "2618": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2705,6 +3037,7 @@
    "rathenaName": "Solid Whisper"
   },
   "2620": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2713,6 +3046,7 @@
    "rathenaName": "Furious Wanderer"
   },
   "2628": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2721,6 +3055,7 @@
    "rathenaName": "Solid Vadon"
   },
   "2632": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2729,6 +3064,7 @@
    "rathenaName": "Solid Thief Bug"
   },
   "2633": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2737,6 +3073,7 @@
    "rathenaName": "Thief Bug Ringleader"
   },
   "2634": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2745,6 +3082,7 @@
    "rathenaName": "Furious Thief Bug"
   },
   "2635": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2753,6 +3091,7 @@
    "rathenaName": "Elusive Thara Frog"
   },
   "2638": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2761,6 +3100,7 @@
    "rathenaName": "Tarou Ringleader"
   },
   "2639": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -2769,6 +3109,7 @@
    "rathenaName": "Furious Tamruan"
   },
   "2640": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2777,6 +3118,7 @@
    "rathenaName": "Elusive Sting"
   },
   "2642": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -2785,6 +3127,7 @@
    "rathenaName": "Solid Steel Chonchon"
   },
   "2644": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2793,6 +3136,7 @@
    "rathenaName": "Furious Stalactic Golem"
   },
   "2645": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2801,6 +3145,7 @@
    "rathenaName": "Elusive Stainer"
   },
   "2646": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2809,6 +3154,7 @@
    "rathenaName": "Swift Spore"
   },
   "2647": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2817,6 +3163,7 @@
    "rathenaName": "Solid Solider"
   },
   "2648": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2825,6 +3172,7 @@
    "rathenaName": "Soldier Skeleton Ringlea"
   },
   "2649": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2833,6 +3181,7 @@
    "rathenaName": "Furious Soldier Skeleton"
   },
   "2651": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -2841,6 +3190,7 @@
    "rathenaName": "Swift Sohee"
   },
   "2653": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2849,6 +3199,7 @@
    "rathenaName": "Boa Ringleader"
   },
   "2654": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2857,6 +3208,7 @@
    "rathenaName": "Furious Smokie"
   },
   "2660": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2865,6 +3217,7 @@
    "rathenaName": "Elusive Skeleton Worker"
   },
   "2663": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2873,6 +3226,7 @@
    "rathenaName": "Side Winder Ringleader"
   },
   "2664": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2881,6 +3235,7 @@
    "rathenaName": "Furious Shinobi"
   },
   "2668": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2889,6 +3244,7 @@
    "rathenaName": "Sea Otter Ringleader"
   },
   "2670": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2897,6 +3253,7 @@
    "rathenaName": "Elusive Scorpion"
   },
   "2671": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2905,6 +3262,7 @@
    "rathenaName": "Swift Savage Babe"
   },
   "2673": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2913,6 +3271,7 @@
    "rathenaName": "Savage Ringleader"
   },
   "2674": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2921,6 +3280,7 @@
    "rathenaName": "Furious Sandman"
   },
   "2678": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2929,6 +3289,7 @@
    "rathenaName": "Roda Frog Ringleader"
   },
   "2679": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2937,6 +3298,7 @@
    "rathenaName": "Furious Roda Frog"
   },
   "2680": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -2945,6 +3307,7 @@
    "rathenaName": "Elusive Rocker"
   },
   "2682": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2953,6 +3316,7 @@
    "rathenaName": "Solid Rideword"
   },
   "2683": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2961,6 +3325,7 @@
    "rathenaName": "Dumpling Child Ringleade"
   },
   "2687": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2969,6 +3334,7 @@
    "rathenaName": "Solid Requiem"
   },
   "2691": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2977,6 +3343,7 @@
    "rathenaName": "Solid Raydric"
   },
   "2694": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -2985,6 +3352,7 @@
    "rathenaName": "Elusive Raggler"
   },
   "2696": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -2993,6 +3361,7 @@
    "rathenaName": "Poring Ringleader"
   },
   "2697": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3001,6 +3370,7 @@
    "rathenaName": "Furious Poring"
   },
   "2698": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3009,6 +3379,7 @@
    "rathenaName": "Elusive Poring"
   },
   "2699": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3017,6 +3388,7 @@
    "rathenaName": "Swift Poring"
   },
   "2703": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3025,6 +3397,7 @@
    "rathenaName": "Elusive Poporing"
   },
   "2704": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3033,6 +3406,7 @@
    "rathenaName": "Swift Poison Toad"
   },
   "2705": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3041,6 +3415,7 @@
    "rathenaName": "Solid Poison Spore"
   },
   "2707": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3049,6 +3424,7 @@
    "rathenaName": "Furious Plankton"
   },
   "2712": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3057,6 +3433,7 @@
    "rathenaName": "Furious Picky"
   },
   "2713": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3065,6 +3442,7 @@
    "rathenaName": "Elusive Phen"
   },
   "2714": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3073,6 +3451,7 @@
    "rathenaName": "Swift Petite"
   },
   "2715": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3081,6 +3460,7 @@
    "rathenaName": "Solid Petite"
   },
   "2717": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3089,6 +3469,7 @@
    "rathenaName": "Furious Penomena"
   },
   "2718": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -3097,6 +3478,7 @@
    "rathenaName": "Elusive Peco Peco"
   },
   "2719": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3105,6 +3487,7 @@
    "rathenaName": "Swift Pasana"
   },
   "2720": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3113,6 +3496,7 @@
    "rathenaName": "Solid Parasite"
   },
   "2721": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3121,6 +3505,7 @@
    "rathenaName": "Owl Duke Ringleader"
   },
   "2722": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3129,6 +3514,7 @@
    "rathenaName": "Furious Orc Warrior"
   },
   "2723": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3137,6 +3523,7 @@
    "rathenaName": "Elusive Orc Zombie"
   },
   "2724": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3145,6 +3532,7 @@
    "rathenaName": "Swift Orc Skeleton"
   },
   "2725": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3153,6 +3541,7 @@
    "rathenaName": "Solid Orc Lady"
   },
   "2737": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3161,6 +3550,7 @@
    "rathenaName": "Furious Myst Case"
   },
   "2739": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3169,6 +3559,7 @@
    "rathenaName": "Swift Mummy"
   },
   "2740": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3177,6 +3568,7 @@
    "rathenaName": "Solid Mummy"
   },
   "2741": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3185,6 +3577,7 @@
    "rathenaName": "Muka Ringleader"
   },
   "2746": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3193,6 +3586,7 @@
    "rathenaName": "Miyabi Doll Ringleader"
   },
   "2748": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3201,6 +3595,7 @@
    "rathenaName": "Elusive Minorous"
   },
   "2749": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3209,6 +3604,7 @@
    "rathenaName": "Swift Minorous"
   },
   "2753": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3217,6 +3613,7 @@
    "rathenaName": "Elusive Mimic"
   },
   "2754": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -3225,6 +3622,7 @@
    "rathenaName": "Swift Metaller"
   },
   "2757": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3233,6 +3631,7 @@
    "rathenaName": "Furious Merman"
   },
   "2759": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3241,6 +3640,7 @@
    "rathenaName": "Swift Medusa"
   },
   "2760": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3249,6 +3649,7 @@
    "rathenaName": "Solid Martin"
   },
   "2761": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3257,6 +3658,7 @@
    "rathenaName": "Marionette Ringleader"
   },
   "2763": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3265,6 +3667,7 @@
    "rathenaName": "Elusive Marduk"
   },
   "2765": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3273,6 +3676,7 @@
    "rathenaName": "Solid Mandragora"
   },
   "2767": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3281,6 +3685,7 @@
    "rathenaName": "Furious Majoruros"
   },
   "2768": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3289,6 +3694,7 @@
    "rathenaName": "Elusive Magnolia"
   },
   "2770": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3297,6 +3703,7 @@
    "rathenaName": "Solid Lunatic"
   },
   "2771": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3305,6 +3712,7 @@
    "rathenaName": "Lunatic Ringleader"
   },
   "2772": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3313,6 +3721,7 @@
    "rathenaName": "Furious Lude"
   },
   "2774": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3321,6 +3730,7 @@
    "rathenaName": "Swift Loli Ruri"
   },
   "2775": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3329,6 +3739,7 @@
    "rathenaName": "Solid Enchanted Peach Tr"
   },
   "2778": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3337,6 +3748,7 @@
    "rathenaName": "Elusive Jing Guai"
   },
   "2780": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3345,6 +3757,7 @@
    "rathenaName": "Solid Leib Olmai"
   },
   "2781": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3353,6 +3766,7 @@
    "rathenaName": "Leaf Cat Ringleader"
   },
   "2787": {
+   "aggressive": false,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -3361,6 +3775,7 @@
    "rathenaName": "Furious Beetle King"
   },
   "2789": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3369,6 +3784,7 @@
    "rathenaName": "Swift Karakasa"
   },
   "2790": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3377,6 +3793,7 @@
    "rathenaName": "Solid Isis"
   },
   "2793": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3385,6 +3802,7 @@
    "rathenaName": "Elusive Mi Gao"
   },
   "2796": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3393,6 +3811,7 @@
    "rathenaName": "Yao Jun Ringleader"
   },
   "2797": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3401,6 +3820,7 @@
    "rathenaName": "Furious Hunter Fly"
   },
   "2798": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3409,6 +3829,7 @@
    "rathenaName": "Elusive Hornet"
   },
   "2800": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3417,6 +3838,7 @@
    "rathenaName": "Solid Horn"
   },
   "2802": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3425,6 +3847,7 @@
    "rathenaName": "Furious Hode"
   },
   "2805": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3433,6 +3856,7 @@
    "rathenaName": "Solid High Orc"
   },
   "2808": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3441,6 +3865,7 @@
    "rathenaName": "Elusive Grove"
   },
   "2809": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3449,6 +3874,7 @@
    "rathenaName": "Swift Greatest General"
   },
   "2812": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3457,6 +3883,7 @@
    "rathenaName": "Furious Golem"
   },
   "2813": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3465,6 +3892,7 @@
    "rathenaName": "Elusive Goblin"
   },
   "2814": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3473,6 +3901,7 @@
    "rathenaName": "Swift Goblin"
   },
   "2821": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3481,6 +3910,7 @@
    "rathenaName": "Giant Hornet Ringleader"
   },
   "2823": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3489,6 +3919,7 @@
    "rathenaName": "Elusive Ghoul"
   },
   "2827": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3497,6 +3928,7 @@
    "rathenaName": "Furious Gargoyle"
   },
   "2829": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3505,6 +3937,7 @@
    "rathenaName": "Swift Seal"
   },
   "2831": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3513,6 +3946,7 @@
    "rathenaName": "Freezer Ringleader"
   },
   "2833": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3521,6 +3955,7 @@
    "rathenaName": "Elusive Familiar"
   },
   "2835": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3529,6 +3964,7 @@
    "rathenaName": "Solid Fabre"
   },
   "2836": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3537,6 +3973,7 @@
    "rathenaName": "Fabre Ringleader"
   },
   "2838": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3545,6 +3982,7 @@
    "rathenaName": "Elusive Evil Druid"
   },
   "2839": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3553,6 +3991,7 @@
    "rathenaName": "Swift Elder Willow"
   },
   "2840": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3561,6 +4000,7 @@
    "rathenaName": "Solid Elder Willow"
   },
   "2842": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3569,6 +4009,7 @@
    "rathenaName": "Furious Dustiness"
   },
   "2843": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3577,6 +4018,7 @@
    "rathenaName": "Swift Dryad"
   },
   "2845": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3585,6 +4027,7 @@
    "rathenaName": "Drops Ringleader"
   },
   "2846": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3593,6 +4036,7 @@
    "rathenaName": "Furious Driller"
   },
   "2847": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3601,6 +4045,7 @@
    "rathenaName": "Elusive Drainliar"
   },
   "2848": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3609,6 +4054,7 @@
    "rathenaName": "Swift Dragon Tail"
   },
   "2851": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3617,6 +4063,7 @@
    "rathenaName": "Furious Dokebi"
   },
   "2852": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3625,6 +4072,7 @@
    "rathenaName": "Elusive Disguise"
   },
   "2854": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3633,6 +4081,7 @@
    "rathenaName": "Solid Deviruchi"
   },
   "2855": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -3641,6 +4090,7 @@
    "rathenaName": "Baby Desert Wolf Ringlea"
   },
   "2856": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": false,
@@ -3649,6 +4099,7 @@
    "rathenaName": "Furious Baby Desert Wolf"
   },
   "2857": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3657,6 +4108,7 @@
    "rathenaName": "Elusive Deniro"
   },
   "2861": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -3665,6 +4117,7 @@
    "rathenaName": "Furious Dark Priest"
   },
   "2862": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3673,6 +4126,7 @@
    "rathenaName": "Elusive Zhu Po Long"
   },
   "2863": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3681,6 +4135,7 @@
    "rathenaName": "Swift Creamy"
   },
   "2864": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3689,6 +4144,7 @@
    "rathenaName": "Solid Cornutus"
   },
   "2865": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3697,6 +4153,7 @@
    "rathenaName": "Cookie Ringleader"
   },
   "2868": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3705,6 +4162,7 @@
    "rathenaName": "Swift Coco"
   },
   "2869": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3713,6 +4171,7 @@
    "rathenaName": "Solid Coco"
   },
   "2871": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3721,6 +4180,7 @@
    "rathenaName": "Furious Clock"
   },
   "2872": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3729,6 +4189,7 @@
    "rathenaName": "Elusive Chonchon"
   },
   "2876": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3737,6 +4198,7 @@
    "rathenaName": "Furious Caterpillar"
   },
   "2877": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3745,6 +4207,7 @@
    "rathenaName": "Elusive Carat"
   },
   "2878": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3753,6 +4216,7 @@
    "rathenaName": "Swift Caramel"
   },
   "2883": {
+   "aggressive": true,
    "assist": true,
    "castSensor": false,
    "detector": true,
@@ -3761,6 +4225,7 @@
    "rathenaName": "Swift Bloody Butterfly"
   },
   "2884": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3769,6 +4234,7 @@
    "rathenaName": "Bigfoot Ringleader"
   },
   "2885": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3777,6 +4243,7 @@
    "rathenaName": "Furious Bathory"
   },
   "2889": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3785,6 +4252,7 @@
    "rathenaName": "Assaulter Ringleader"
   },
   "2890": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3793,6 +4261,7 @@
    "rathenaName": "Furious Argos"
   },
   "2891": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3801,6 +4270,7 @@
    "rathenaName": "Elusive Argiope"
   },
   "2892": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3809,6 +4279,7 @@
    "rathenaName": "Swift Argiope"
   },
   "2894": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3817,6 +4288,7 @@
    "rathenaName": "Arclouze Ringleader"
   },
   "2899": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3825,6 +4297,7 @@
    "rathenaName": "Furious Anolian"
   },
   "2902": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": true,
@@ -3833,6 +4306,7 @@
    "rathenaName": "Solid Andre"
   },
   "2905": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3841,6 +4315,7 @@
    "rathenaName": "Elusive Ambernite"
   },
   "2907": {
+   "aggressive": false,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3849,6 +4324,7 @@
    "rathenaName": "Solid Alligator"
   },
   "2910": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3857,6 +4333,7 @@
    "rathenaName": "Elusive Alarm"
   },
   "3810": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3865,6 +4342,7 @@
    "rathenaName": "King Poring"
   },
   "3811": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3873,6 +4351,7 @@
    "rathenaName": "Hugh Goldling"
   },
   "3812": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3881,6 +4360,7 @@
    "rathenaName": "Huge Amering"
   },
   "3813": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3889,6 +4369,7 @@
    "rathenaName": "Enriched Drops"
   },
   "3814": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3897,6 +4378,7 @@
    "rathenaName": "Enriched Poporing"
   },
   "3815": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3905,6 +4387,7 @@
    "rathenaName": "Enriched Poring"
   },
   "3816": {
+   "aggressive": false,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3913,6 +4396,7 @@
    "rathenaName": "Enriched Marin"
   },
   "20367": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3921,6 +4405,7 @@
    "rathenaName": "Contaminated Raydric"
   },
   "20368": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3929,6 +4414,7 @@
    "rathenaName": "Contaminated Raydric Ar"
   },
   "20370": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": false,
@@ -3937,6 +4423,7 @@
    "rathenaName": "Contaminated Sting"
   },
   "20371": {
+   "aggressive": true,
    "assist": false,
    "castSensor": false,
    "detector": false,
@@ -3945,6 +4432,7 @@
    "rathenaName": "Prison Breaker"
   },
   "20379": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
@@ -3953,6 +4441,7 @@
    "rathenaName": "Ice Ghost"
   },
   "20380": {
+   "aggressive": true,
    "assist": false,
    "castSensor": true,
    "detector": true,
