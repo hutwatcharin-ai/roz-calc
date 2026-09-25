@@ -270,7 +270,7 @@ function PieceCard({ piece }: { piece: Piece }) {
         {piece.stats.sellPrice != null && <div className="statgrid__cell"><span className="reward-label">ราคาขาย</span><span className="reward-value mono">{piece.stats.sellPrice.toLocaleString('en-US')} z</span></div>}
       </div>
       <p className="star__facts">
-        {[piece.footer.type ? `ช่อง: ${piece.footer.type}` : null, piece.footer.jobs ? `ใส่ได้: ${piece.footer.jobs.replace(/ Class/g, '')}` : null].filter(Boolean).join(' · ')}
+        {[piece.footer.type ? `ช่อง: ${piece.footer.type}` : null, piece.footer.jobs ? `ใส่ได้: ${jobs(piece)}` : null].filter(Boolean).join(' · ')}
       </p>
       {gained.length > 0 && plain && (
         <p className="star__gain">
@@ -309,7 +309,16 @@ const WEAPON_CHAINS = CHAINS.filter((c) => c.first.category === 'Weapon');
 const WEAR_CHAINS = CHAINS.filter((c) => c.first.category !== 'Weapon');
 const WEAR_FIRST = FIRST.filter((p) => p.category !== 'Weapon' && !WEAR_CHAINS.some((c) => c.first.id === p.id));
 const WEAPON_NO_TIER2 = WEAPON_FIRST.filter((p) => !WEAPON_CHAINS.some((c) => c.first.id === p.id) && !GUIDE_ONLY.some((g) => g.firstTierId === p.id));
-const jobs = (piece: Piece) => piece.footer.jobs?.replace(/ Class/g, '') ?? '';
+// "All Classes Class" minus every " Class" is "Alles" -- strip one suffix
+// per job, and say ทุกอาชีพ for the catch-all.
+function jobs(piece: Piece): string {
+  return (piece.footer.jobs ?? '')
+    .split(', ')
+    .filter(Boolean)
+    .map((j) => j.replace(/ Class$/, ''))
+    .map((j) => (j === 'All Classes' ? 'ทุกอาชีพ' : j))
+    .join(', ');
+}
 // The ★ piece a token belongs to: the token carries the tier-1 name, except
 // Hora's, which is named after its tier-2 piece (see data/star-chain.json).
 function tokenSource(token: Token): Piece | undefined {
