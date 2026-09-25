@@ -1,0 +1,3964 @@
+{
+ "_meta": {
+  "what": "assist / castSensor / detector / plant per monster id, derived from rAthena mob_db.yml Ai types and Modes; ids with no rAthena row are absent.",
+  "source": "https://raw.githubusercontent.com/rathena/rathena/master/db/re/mob_db.yml",
+  "regenerate": "python scripts/build-rathena-modes.py",
+  "aggressiveCheck": {
+   "compared": 466,
+   "agree": 466,
+   "disagree": 0
+  },
+  "matched": 489,
+  "missingIds": [
+   3032,
+   3948,
+   3949,
+   3950,
+   3951,
+   3952,
+   3953,
+   3954,
+   3965,
+   3966,
+   3967,
+   3968,
+   3973,
+   20168,
+   20169,
+   20170,
+   20175,
+   20176,
+   20177,
+   20178,
+   20179,
+   22336,
+   22337,
+   22338,
+   22339,
+   22340,
+   25128,
+   25129,
+   25143,
+   25187,
+   25188,
+   25237,
+   25239,
+   25253,
+   25255
+  ]
+ },
+ "modes": {
+  "1001": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Scorpion"
+  },
+  "1002": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Poring"
+  },
+  "1004": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Hornet"
+  },
+  "1005": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Familiar"
+  },
+  "1007": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Fabre"
+  },
+  "1008": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Pupa"
+  },
+  "1009": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Condor"
+  },
+  "1010": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Willow"
+  },
+  "1011": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Chonchon"
+  },
+  "1012": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Roda Frog"
+  },
+  "1013": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Wolf"
+  },
+  "1014": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Spore"
+  },
+  "1015": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Zombie"
+  },
+  "1016": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Archer Skeleton"
+  },
+  "1018": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Creamy"
+  },
+  "1019": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Peco Peco"
+  },
+  "1020": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Mandragora"
+  },
+  "1023": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Orc Warrior"
+  },
+  "1024": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Wormtail"
+  },
+  "1025": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Boa"
+  },
+  "1026": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Munak"
+  },
+  "1028": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Soldier Skeleton"
+  },
+  "1029": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Isis"
+  },
+  "1031": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Poporing"
+  },
+  "1032": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Verit"
+  },
+  "1033": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Elder Willow"
+  },
+  "1034": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Thara Frog"
+  },
+  "1035": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Hunter Fly"
+  },
+  "1036": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Ghoul"
+  },
+  "1037": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Side Winder"
+  },
+  "1038": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Osiris"
+  },
+  "1039": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Baphomet"
+  },
+  "1040": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Golem"
+  },
+  "1041": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Mummy"
+  },
+  "1042": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Steel Chonchon"
+  },
+  "1044": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Obeaune"
+  },
+  "1045": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Marc"
+  },
+  "1046": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Doppelganger"
+  },
+  "1047": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Peco Peco Egg"
+  },
+  "1048": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Thief Bug Egg"
+  },
+  "1049": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Picky"
+  },
+  "1050": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Picky"
+  },
+  "1051": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Thief Bug"
+  },
+  "1052": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Rocker"
+  },
+  "1053": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Thief Bug Female"
+  },
+  "1054": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Thief Bug Male"
+  },
+  "1055": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Muka"
+  },
+  "1056": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Smokie"
+  },
+  "1057": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Yoyo"
+  },
+  "1058": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Metaller"
+  },
+  "1060": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Bigfoot"
+  },
+  "1061": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "20",
+   "rathenaName": "Nightmare"
+  },
+  "1062": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Santa Poring"
+  },
+  "1063": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Lunatic"
+  },
+  "1064": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Megalodon"
+  },
+  "1065": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Strouf"
+  },
+  "1066": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Vadon"
+  },
+  "1067": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Cornutus"
+  },
+  "1068": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Hydra"
+  },
+  "1069": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Swordfish"
+  },
+  "1070": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Kukre"
+  },
+  "1071": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Pirate Skeleton"
+  },
+  "1073": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Crab"
+  },
+  "1074": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Shellfish"
+  },
+  "1076": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Skeleton"
+  },
+  "1077": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Poison Spore"
+  },
+  "1078": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Red Plant"
+  },
+  "1079": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Blue Plant"
+  },
+  "1080": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Green Plant"
+  },
+  "1081": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Yellow Plant"
+  },
+  "1082": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "White Plant"
+  },
+  "1083": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Shining Plant"
+  },
+  "1084": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Black Mushroom"
+  },
+  "1085": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Red Mushroom"
+  },
+  "1086": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Golden Thief Bug"
+  },
+  "1087": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Orc Hero"
+  },
+  "1088": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Vocal"
+  },
+  "1089": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Toad"
+  },
+  "1090": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Mastering"
+  },
+  "1091": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Dragon Fly"
+  },
+  "1092": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Vagabond Wolf"
+  },
+  "1093": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Eclipse"
+  },
+  "1094": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Ambernite"
+  },
+  "1095": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Andre"
+  },
+  "1096": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Angeling"
+  },
+  "1097": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Ant Egg"
+  },
+  "1098": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Anubis"
+  },
+  "1099": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Argiope"
+  },
+  "1100": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Argos"
+  },
+  "1101": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Baphomet Jr."
+  },
+  "1102": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Bathory"
+  },
+  "1103": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Caramel"
+  },
+  "1104": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Coco"
+  },
+  "1105": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Deniro"
+  },
+  "1107": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Baby Desert Wolf"
+  },
+  "1108": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Deviace"
+  },
+  "1109": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Deviruchi"
+  },
+  "1110": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Dokebi"
+  },
+  "1111": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Drainliar"
+  },
+  "1112": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Drake"
+  },
+  "1113": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Drops"
+  },
+  "1114": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Dustiness"
+  },
+  "1115": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Eddga"
+  },
+  "1116": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Eggyra"
+  },
+  "1117": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Evil Druid"
+  },
+  "1118": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Flora"
+  },
+  "1119": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Frilldora"
+  },
+  "1120": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Ghostring"
+  },
+  "1121": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Giearth"
+  },
+  "1122": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Goblin"
+  },
+  "1123": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Goblin"
+  },
+  "1124": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Goblin"
+  },
+  "1125": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Goblin"
+  },
+  "1126": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Goblin"
+  },
+  "1127": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Hode"
+  },
+  "1128": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Horn"
+  },
+  "1129": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Horong"
+  },
+  "1130": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Jakk"
+  },
+  "1131": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Joker"
+  },
+  "1132": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Khalitzburg"
+  },
+  "1138": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Magnolia"
+  },
+  "1139": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Mantis"
+  },
+  "1140": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Marduk"
+  },
+  "1141": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Marina"
+  },
+  "1142": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Marine Sphere"
+  },
+  "1143": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Marionette"
+  },
+  "1144": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Marse"
+  },
+  "1145": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Martin"
+  },
+  "1146": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Matyr"
+  },
+  "1147": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Maya"
+  },
+  "1148": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Medusa"
+  },
+  "1149": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Minorous"
+  },
+  "1150": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Moonlight Flower"
+  },
+  "1151": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Myst"
+  },
+  "1152": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Orc Skeleton"
+  },
+  "1153": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Orc Zombie"
+  },
+  "1154": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Pasana"
+  },
+  "1155": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Petite"
+  },
+  "1156": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Petite"
+  },
+  "1157": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Pharaoh"
+  },
+  "1158": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Phen"
+  },
+  "1159": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Phreeoni"
+  },
+  "1160": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Piere"
+  },
+  "1161": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Plankton"
+  },
+  "1163": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Raydric"
+  },
+  "1164": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Requiem"
+  },
+  "1165": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Sandman"
+  },
+  "1166": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Savage"
+  },
+  "1167": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Savage Babe"
+  },
+  "1169": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Skeleton Worker"
+  },
+  "1170": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Sohee"
+  },
+  "1174": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Stainer"
+  },
+  "1175": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Tarou"
+  },
+  "1176": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Vitata"
+  },
+  "1177": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Zenorc"
+  },
+  "1178": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Zerom"
+  },
+  "1179": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Whisper"
+  },
+  "1180": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Nine Tail"
+  },
+  "1185": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Whisper"
+  },
+  "1188": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Bongun"
+  },
+  "1189": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Orc Archer"
+  },
+  "1190": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Orc Lord"
+  },
+  "1191": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Mimic"
+  },
+  "1192": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Wraith"
+  },
+  "1193": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Alarm"
+  },
+  "1194": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Arclouze"
+  },
+  "1195": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Rideword"
+  },
+  "1196": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Skeleton Prisoner"
+  },
+  "1197": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Zombie Prisoner"
+  },
+  "1198": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Dark Priest"
+  },
+  "1199": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Punk"
+  },
+  "1200": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Zealotus"
+  },
+  "1201": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Rybio"
+  },
+  "1202": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Phendark"
+  },
+  "1206": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Anolian"
+  },
+  "1207": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Sting"
+  },
+  "1208": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Wanderer"
+  },
+  "1209": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Cramp"
+  },
+  "1211": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Brilight"
+  },
+  "1213": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "High Orc"
+  },
+  "1214": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Choco"
+  },
+  "1216": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Penomena"
+  },
+  "1219": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Abysmal Knight"
+  },
+  "1242": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Marin"
+  },
+  "1243": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Sasquatch"
+  },
+  "1244": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Christmas Jakk"
+  },
+  "1245": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Christmas Goblin"
+  },
+  "1246": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Christmas Cookie"
+  },
+  "1247": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": true,
+   "ai": "01",
+   "rathenaName": "Antonio"
+  },
+  "1248": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Cruiser"
+  },
+  "1249": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Myst Case"
+  },
+  "1251": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Stormy Knight"
+  },
+  "1252": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Hatii"
+  },
+  "1253": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Gargoyle"
+  },
+  "1254": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Raggler"
+  },
+  "1255": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Nereid"
+  },
+  "1256": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Pest"
+  },
+  "1257": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Injustice"
+  },
+  "1258": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Goblin Archer"
+  },
+  "1260": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Dark Frame"
+  },
+  "1261": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Wild Rose"
+  },
+  "1262": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Mutant Dragonoid"
+  },
+  "1263": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Wind Ghost"
+  },
+  "1264": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Merman"
+  },
+  "1265": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Cookie"
+  },
+  "1266": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Aster"
+  },
+  "1267": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Carat"
+  },
+  "1268": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Bloody Knight"
+  },
+  "1269": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Clock"
+  },
+  "1270": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Clock Tower Manager"
+  },
+  "1271": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Alligator"
+  },
+  "1272": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Dark Lord"
+  },
+  "1273": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Orc Lady"
+  },
+  "1274": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Megalith"
+  },
+  "1275": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Alice"
+  },
+  "1276": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Raydric Archer"
+  },
+  "1277": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Greatest General"
+  },
+  "1278": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Stalactic Golem"
+  },
+  "1279": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Tri Joint"
+  },
+  "1280": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Goblin Steamrider"
+  },
+  "1281": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Sage Worm"
+  },
+  "1283": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Chimera"
+  },
+  "1285": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "12",
+   "rathenaName": "Archer Guardian"
+  },
+  "1286": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "12",
+   "rathenaName": "Knight Guardian"
+  },
+  "1287": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "12",
+   "rathenaName": "Soldier Guardian"
+  },
+  "1288": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Emperium"
+  },
+  "1291": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Wraith Dead"
+  },
+  "1293": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Creamy Fear"
+  },
+  "1295": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Owl Baron"
+  },
+  "1297": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Ancient Mummy"
+  },
+  "1298": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Zombie Master"
+  },
+  "1299": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Goblin Leader"
+  },
+  "1300": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Caterpillar"
+  },
+  "1302": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Dark Illusion"
+  },
+  "1303": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Giant Hornet"
+  },
+  "1305": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Ancient Worm"
+  },
+  "1306": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Leib Olmai"
+  },
+  "1308": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Panzer Goblin"
+  },
+  "1310": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Majoruros"
+  },
+  "1311": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Gullinbursti"
+  },
+  "1312": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Turtle General"
+  },
+  "1313": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Mobster"
+  },
+  "1314": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Permeter"
+  },
+  "1315": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Assaulter"
+  },
+  "1316": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solider"
+  },
+  "1317": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Seal"
+  },
+  "1318": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Heater"
+  },
+  "1319": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Freezer"
+  },
+  "1320": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Owl Duke"
+  },
+  "1321": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Dragon Tail"
+  },
+  "1322": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Spring Rabbit"
+  },
+  "1323": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Sea Otter"
+  },
+  "1324": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Treasure Chest"
+  },
+  "1325": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Treasure Chest"
+  },
+  "1363": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "06",
+   "rathenaName": "Treasure Chest"
+  },
+  "1373": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Lord of the Dead"
+  },
+  "1375": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "The Paper"
+  },
+  "1377": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Elder"
+  },
+  "1380": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Driller"
+  },
+  "1389": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Dracula"
+  },
+  "1391": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Galapago"
+  },
+  "1392": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Rotar Zairo"
+  },
+  "1400": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Karakasa"
+  },
+  "1401": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Shinobi"
+  },
+  "1402": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Poisonous Toad"
+  },
+  "1403": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Firelock Soldier"
+  },
+  "1404": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Miyabi Doll"
+  },
+  "1405": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Tengu"
+  },
+  "1406": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Kapha"
+  },
+  "1408": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Bloody Butterfly"
+  },
+  "1409": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Dumpling Child"
+  },
+  "1410": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Enchanted Peach Tree"
+  },
+  "1412": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Taoist Hermit"
+  },
+  "1413": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Hermit Plant"
+  },
+  "1415": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Baby Leopard"
+  },
+  "1416": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Evil Nymph"
+  },
+  "1417": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Zipper Bear"
+  },
+  "1418": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Evil Snake Lord"
+  },
+  "1492": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Samurai Specter"
+  },
+  "1493": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Dryad"
+  },
+  "1494": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Beetle King"
+  },
+  "1495": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Stone Shooter"
+  },
+  "1497": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Wooden Golem"
+  },
+  "1498": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Wootan Shooter"
+  },
+  "1499": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Wootan Fighter"
+  },
+  "1500": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Parasite"
+  },
+  "1503": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Gibbet"
+  },
+  "1504": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Dullahan"
+  },
+  "1505": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Loli Ruri"
+  },
+  "1506": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Disguise"
+  },
+  "1507": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Bloody Murderer"
+  },
+  "1508": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Quve"
+  },
+  "1509": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Lude"
+  },
+  "1510": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Heirozoist"
+  },
+  "1511": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Amon Ra"
+  },
+  "1512": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Yao Jun"
+  },
+  "1513": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Mao Guai"
+  },
+  "1514": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Zhu Po Long"
+  },
+  "1515": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Baby Hatii"
+  },
+  "1516": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Mi Gao"
+  },
+  "1517": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Jing Guai"
+  },
+  "1582": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Deviling"
+  },
+  "1583": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Tao Gunka"
+  },
+  "1584": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Tamruan"
+  },
+  "1586": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Leaf Cat"
+  },
+  "1587": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Kraben"
+  },
+  "1588": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Christmas Orc"
+  },
+  "1630": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "White Lady"
+  },
+  "1631": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Green Maiden"
+  },
+  "1686": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Orc Baby"
+  },
+  "1687": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Grove"
+  },
+  "1688": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Lady Tanee"
+  },
+  "1960": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "27",
+   "rathenaName": "Thorn of Magic"
+  },
+  "2210": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Christmas Snow Rabbit"
+  },
+  "2288": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": true,
+   "ai": "06",
+   "rathenaName": "Treasure Chest"
+  },
+  "2380": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "01",
+   "rathenaName": "Gift Stealing Raccoon"
+  },
+  "2398": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Little Poring"
+  },
+  "2404": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Dead Plankton"
+  },
+  "2405": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Weak Skeleton"
+  },
+  "2406": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Weak Soldier Skeleton"
+  },
+  "2450": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": true,
+   "ai": "01",
+   "rathenaName": "Thief Poring"
+  },
+  "2604": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Solid Zombie Prisoner"
+  },
+  "2605": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Zombie Master Ringleader"
+  },
+  "2606": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Zombie"
+  },
+  "2608": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Swift Yoyo"
+  },
+  "2610": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Wormtail Ringleader"
+  },
+  "2611": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Wootan Fighter"
+  },
+  "2613": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Swift Wolf"
+  },
+  "2615": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Willow Ringleader"
+  },
+  "2616": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Furious Wild Rose"
+  },
+  "2617": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Evil Nymph"
+  },
+  "2618": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Solid Whisper"
+  },
+  "2620": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Wanderer"
+  },
+  "2628": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solid Vadon"
+  },
+  "2632": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Solid Thief Bug"
+  },
+  "2633": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Thief Bug Ringleader"
+  },
+  "2634": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Furious Thief Bug"
+  },
+  "2635": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Thara Frog"
+  },
+  "2638": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Tarou Ringleader"
+  },
+  "2639": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Furious Tamruan"
+  },
+  "2640": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Sting"
+  },
+  "2642": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Solid Steel Chonchon"
+  },
+  "2644": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Stalactic Golem"
+  },
+  "2645": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Elusive Stainer"
+  },
+  "2646": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Swift Spore"
+  },
+  "2647": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solid Solider"
+  },
+  "2648": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Soldier Skeleton Ringlea"
+  },
+  "2649": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Soldier Skeleton"
+  },
+  "2651": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Swift Sohee"
+  },
+  "2653": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Boa Ringleader"
+  },
+  "2654": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Smokie"
+  },
+  "2660": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Elusive Skeleton Worker"
+  },
+  "2663": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Side Winder Ringleader"
+  },
+  "2664": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Shinobi"
+  },
+  "2668": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Sea Otter Ringleader"
+  },
+  "2670": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Scorpion"
+  },
+  "2671": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Swift Savage Babe"
+  },
+  "2673": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Savage Ringleader"
+  },
+  "2674": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Sandman"
+  },
+  "2678": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Roda Frog Ringleader"
+  },
+  "2679": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Furious Roda Frog"
+  },
+  "2680": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Rocker"
+  },
+  "2682": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Solid Rideword"
+  },
+  "2683": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Dumpling Child Ringleade"
+  },
+  "2687": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Solid Requiem"
+  },
+  "2691": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Solid Raydric"
+  },
+  "2694": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Raggler"
+  },
+  "2696": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Poring Ringleader"
+  },
+  "2697": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Furious Poring"
+  },
+  "2698": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Elusive Poring"
+  },
+  "2699": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Swift Poring"
+  },
+  "2703": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Elusive Poporing"
+  },
+  "2704": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Swift Poison Toad"
+  },
+  "2705": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Solid Poison Spore"
+  },
+  "2707": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Furious Plankton"
+  },
+  "2712": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Furious Picky"
+  },
+  "2713": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Elusive Phen"
+  },
+  "2714": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Swift Petite"
+  },
+  "2715": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Solid Petite"
+  },
+  "2717": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Penomena"
+  },
+  "2718": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Elusive Peco Peco"
+  },
+  "2719": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Swift Pasana"
+  },
+  "2720": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Solid Parasite"
+  },
+  "2721": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Owl Duke Ringleader"
+  },
+  "2722": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Orc Warrior"
+  },
+  "2723": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Elusive Orc Zombie"
+  },
+  "2724": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Swift Orc Skeleton"
+  },
+  "2725": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Solid Orc Lady"
+  },
+  "2737": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Myst Case"
+  },
+  "2739": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Swift Mummy"
+  },
+  "2740": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Solid Mummy"
+  },
+  "2741": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Muka Ringleader"
+  },
+  "2746": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Miyabi Doll Ringleader"
+  },
+  "2748": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Elusive Minorous"
+  },
+  "2749": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Swift Minorous"
+  },
+  "2753": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Elusive Mimic"
+  },
+  "2754": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "07",
+   "rathenaName": "Swift Metaller"
+  },
+  "2757": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Merman"
+  },
+  "2759": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Swift Medusa"
+  },
+  "2760": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Solid Martin"
+  },
+  "2761": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Marionette Ringleader"
+  },
+  "2763": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Elusive Marduk"
+  },
+  "2765": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Solid Mandragora"
+  },
+  "2767": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Majoruros"
+  },
+  "2768": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Elusive Magnolia"
+  },
+  "2770": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Solid Lunatic"
+  },
+  "2771": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Lunatic Ringleader"
+  },
+  "2772": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Lude"
+  },
+  "2774": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Swift Loli Ruri"
+  },
+  "2775": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Solid Enchanted Peach Tr"
+  },
+  "2778": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Elusive Jing Guai"
+  },
+  "2780": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Solid Leib Olmai"
+  },
+  "2781": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Leaf Cat Ringleader"
+  },
+  "2787": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "03",
+   "rathenaName": "Furious Beetle King"
+  },
+  "2789": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Swift Karakasa"
+  },
+  "2790": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Solid Isis"
+  },
+  "2793": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Elusive Mi Gao"
+  },
+  "2796": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Yao Jun Ringleader"
+  },
+  "2797": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Hunter Fly"
+  },
+  "2798": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Hornet"
+  },
+  "2800": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solid Horn"
+  },
+  "2802": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Furious Hode"
+  },
+  "2805": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Solid High Orc"
+  },
+  "2808": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Elusive Grove"
+  },
+  "2809": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "10",
+   "rathenaName": "Swift Greatest General"
+  },
+  "2812": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Golem"
+  },
+  "2813": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Goblin"
+  },
+  "2814": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Swift Goblin"
+  },
+  "2821": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Giant Hornet Ringleader"
+  },
+  "2823": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Elusive Ghoul"
+  },
+  "2827": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Furious Gargoyle"
+  },
+  "2829": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Swift Seal"
+  },
+  "2831": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Freezer Ringleader"
+  },
+  "2833": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Familiar"
+  },
+  "2835": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Solid Fabre"
+  },
+  "2836": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Fabre Ringleader"
+  },
+  "2838": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Evil Druid"
+  },
+  "2839": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Swift Elder Willow"
+  },
+  "2840": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Solid Elder Willow"
+  },
+  "2842": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Dustiness"
+  },
+  "2843": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Swift Dryad"
+  },
+  "2845": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Drops Ringleader"
+  },
+  "2846": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Furious Driller"
+  },
+  "2847": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Elusive Drainliar"
+  },
+  "2848": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Swift Dragon Tail"
+  },
+  "2851": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Dokebi"
+  },
+  "2852": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "04",
+   "rathenaName": "Elusive Disguise"
+  },
+  "2854": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Solid Deviruchi"
+  },
+  "2855": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Baby Desert Wolf Ringlea"
+  },
+  "2856": {
+   "assist": true,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Furious Baby Desert Wolf"
+  },
+  "2857": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Deniro"
+  },
+  "2861": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Furious Dark Priest"
+  },
+  "2862": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Elusive Zhu Po Long"
+  },
+  "2863": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Swift Creamy"
+  },
+  "2864": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solid Cornutus"
+  },
+  "2865": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Cookie Ringleader"
+  },
+  "2868": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Swift Coco"
+  },
+  "2869": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solid Coco"
+  },
+  "2871": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Furious Clock"
+  },
+  "2872": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Elusive Chonchon"
+  },
+  "2876": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Caterpillar"
+  },
+  "2877": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Carat"
+  },
+  "2878": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Swift Caramel"
+  },
+  "2883": {
+   "assist": true,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "13",
+   "rathenaName": "Swift Bloody Butterfly"
+  },
+  "2884": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Bigfoot Ringleader"
+  },
+  "2885": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Bathory"
+  },
+  "2889": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Assaulter Ringleader"
+  },
+  "2890": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Furious Argos"
+  },
+  "2891": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Argiope"
+  },
+  "2892": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Swift Argiope"
+  },
+  "2894": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "19",
+   "rathenaName": "Arclouze Ringleader"
+  },
+  "2899": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Furious Anolian"
+  },
+  "2902": {
+   "assist": false,
+   "castSensor": false,
+   "detector": true,
+   "plant": false,
+   "ai": "01",
+   "rathenaName": "Solid Andre"
+  },
+  "2905": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Elusive Ambernite"
+  },
+  "2907": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "17",
+   "rathenaName": "Solid Alligator"
+  },
+  "2910": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Elusive Alarm"
+  },
+  "3810": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "King Poring"
+  },
+  "3811": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Hugh Goldling"
+  },
+  "3812": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Huge Amering"
+  },
+  "3813": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Enriched Drops"
+  },
+  "3814": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Enriched Poporing"
+  },
+  "3815": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Enriched Poring"
+  },
+  "3816": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "02",
+   "rathenaName": "Enriched Marin"
+  },
+  "20367": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Contaminated Raydric"
+  },
+  "20368": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Contaminated Raydric Ar"
+  },
+  "20370": {
+   "assist": false,
+   "castSensor": true,
+   "detector": false,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Contaminated Sting"
+  },
+  "20371": {
+   "assist": false,
+   "castSensor": false,
+   "detector": false,
+   "plant": false,
+   "ai": "05",
+   "rathenaName": "Prison Breaker"
+  },
+  "20379": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Ice Ghost"
+  },
+  "20380": {
+   "assist": false,
+   "castSensor": true,
+   "detector": true,
+   "plant": false,
+   "ai": "21",
+   "rathenaName": "Flame Ghost"
+  }
+ }
+}

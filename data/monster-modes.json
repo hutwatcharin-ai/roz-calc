@@ -1,7 +1,12 @@
 {
   "_meta": {
-    "what": "Behaviour flags per monster id from the rozerodb export: canMove (false = rooted in place), mini (mini-boss). known:false = the export carries no specialStatus for that row at all, so nothing can be said either way.",
-    "source": "data/raw/monsters.json (ragnarokZero.specialStatus)",
+    "what": "Behaviour flags per monster id. From the rozerodb export: canMove (false = rooted in place), mini (mini-boss); known:false = the export carries no specialStatus for that row at all. behaviour {assist, castSensor, detector, plant} is from rAthena (data/raw/rathena-modes.json); behaviour:null = no rAthena row for that id.",
+    "source": "data/raw/monsters.json (ragnarokZero.specialStatus) + data/raw/rathena-modes.json",
+    "rathena": {
+      "compared": 466,
+      "agree": 466,
+      "disagree": 0
+    },
     "regenerate": "node scripts/build-monster-modes.mjs",
     "built": "2026-09-25",
     "rows": 524,
@@ -73,2506 +78,5475 @@
     "1001": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1002": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1004": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1005": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1007": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1008": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1009": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1010": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1011": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1012": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1013": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1014": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1015": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1016": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1018": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1019": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1020": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1023": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1024": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1025": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1026": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1028": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1029": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1031": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1032": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1033": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1034": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1035": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1036": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1037": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1038": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1039": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1040": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1041": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1042": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1044": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1045": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1046": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1047": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1048": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1049": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1050": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1051": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1052": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1053": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1054": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1055": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1056": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1057": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1058": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1060": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1061": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1062": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1063": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1064": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1065": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1066": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1067": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1068": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1069": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1070": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1071": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1073": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1074": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1076": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1077": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1078": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1079": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1080": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1081": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1082": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1083": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1084": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1085": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "1086": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1087": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1088": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1089": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1090": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1091": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1092": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1093": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1094": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1095": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1096": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1097": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1098": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1099": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1100": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1101": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1102": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1103": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1104": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1105": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1107": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1108": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1109": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1110": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1111": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1112": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1113": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1114": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1115": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1116": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1117": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1118": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1119": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1120": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1121": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1122": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1123": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1124": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1125": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1126": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1127": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1128": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1129": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1130": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1131": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1132": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1138": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1139": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1140": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1141": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1142": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1143": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1144": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1145": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1146": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1147": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1148": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1149": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1150": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1151": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1152": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1153": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1154": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1155": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1156": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1157": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1158": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1159": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1160": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1161": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1163": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1164": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1165": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1166": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1167": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1169": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1170": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1174": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1175": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1176": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1177": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1178": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1179": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1180": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1185": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1188": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1189": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1190": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1191": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1192": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1193": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1194": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1195": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1196": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1197": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1198": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1199": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1200": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1201": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1202": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1206": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1207": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1208": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1209": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1211": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1213": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1214": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1216": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1219": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1242": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1243": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1244": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1245": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1246": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1247": {
       "known": true,
       "canMove": false,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": true
+      }
     },
     "1248": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1249": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1251": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1252": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1253": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1254": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1255": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1256": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1257": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1258": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1260": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1261": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1262": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1263": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1264": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1265": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1266": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1267": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1268": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1269": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1270": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1271": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1272": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1273": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1274": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1275": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1276": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1277": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1278": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1279": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1280": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1281": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1283": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1285": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1286": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1287": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1288": {
       "known": true,
       "canMove": false,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": true
+      }
     },
     "1291": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1293": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1295": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1297": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1298": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1299": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1300": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1302": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1303": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1305": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1306": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1308": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1310": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1311": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1312": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1313": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1314": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1315": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1316": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1317": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1318": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1319": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1320": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1321": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1322": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1323": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1324": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1325": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1363": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1373": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1375": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1377": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1380": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1389": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1391": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1392": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1400": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1401": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1402": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1403": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1404": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1405": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1406": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1408": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1409": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1410": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1412": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1413": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1415": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1416": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1417": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1418": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1492": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1493": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1494": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1495": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1497": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1498": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1499": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1500": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1503": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1504": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1505": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1506": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1507": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1508": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1509": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1510": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1511": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1512": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1513": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1514": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1515": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1516": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1517": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1582": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1583": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1584": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1586": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1587": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1588": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1630": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "1631": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "1686": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1687": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "1688": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "1960": {
       "known": true,
       "canMove": false,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2210": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2288": {
       "known": true,
       "canMove": false,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": true
+      }
     },
     "2380": {
-      "known": false
+      "known": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "2398": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2404": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2405": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2406": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2450": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": true
+      }
     },
     "2604": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2605": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2606": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2608": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2610": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2611": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2613": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2615": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2616": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2617": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2618": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2620": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2628": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2632": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2633": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2634": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2635": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2638": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2639": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2640": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2642": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2644": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2645": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2646": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2647": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2648": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2649": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2651": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2653": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2654": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2660": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2663": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2664": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2668": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2670": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2671": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2673": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2674": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2678": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2679": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2680": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2682": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2683": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2687": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2691": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2694": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2696": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2697": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2698": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2699": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2703": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2704": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2705": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2707": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2712": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2713": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2714": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2715": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2717": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2718": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2719": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2720": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2721": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2722": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2723": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2724": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2725": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2737": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2739": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2740": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2741": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2746": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2748": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2749": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2753": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2754": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2757": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2759": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2760": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2761": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2763": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2765": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2767": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2768": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2770": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2771": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2772": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2774": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2775": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2778": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2780": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2781": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2787": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2789": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2790": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2793": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2796": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2797": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2798": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2800": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2802": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2805": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2808": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2809": {
       "known": true,
       "canMove": false,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2812": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2813": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2814": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2821": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2823": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2827": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2829": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2831": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2833": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2835": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2836": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2838": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2839": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2840": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2842": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2843": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2845": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2846": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2847": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2848": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2851": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2852": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2854": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2855": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2856": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2857": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2861": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2862": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "2863": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2864": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2865": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2868": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2869": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2871": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2872": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2876": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2877": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2878": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2883": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": true,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2884": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2885": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2889": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2890": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2891": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2892": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2894": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2899": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2902": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": true,
+        "plant": false
+      }
     },
     "2905": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "2907": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "2910": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "3032": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3810": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "3811": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "3812": {
       "known": true,
       "canMove": true,
-      "mini": true
+      "mini": true,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "3813": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "3814": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "3815": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "3816": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "3948": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3949": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3950": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3951": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3952": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3953": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3954": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3965": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3966": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3967": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3968": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "3973": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20168": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20169": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20170": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20175": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20176": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20177": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20178": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20179": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "20367": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "20368": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "20370": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": false,
+        "plant": false
+      }
     },
     "20371": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": false,
+        "detector": false,
+        "plant": false
+      }
     },
     "20379": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "20380": {
       "known": true,
       "canMove": true,
-      "mini": false
+      "mini": false,
+      "behaviour": {
+        "assist": false,
+        "castSensor": true,
+        "detector": true,
+        "plant": false
+      }
     },
     "22336": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "22337": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "22338": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "22339": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "22340": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25128": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25129": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25143": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25187": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25188": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25237": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25239": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25253": {
-      "known": false
+      "known": false,
+      "behaviour": null
     },
     "25255": {
-      "known": false
+      "known": false,
+      "behaviour": null
     }
   }
 }

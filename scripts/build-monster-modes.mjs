@@ -21,10 +21,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const SRC = path.join(process.cwd(), 'data', 'raw', 'monsters.json');
+// The four flags rozerodb lacks (assist / castSensor / detector / plant),
+// from scripts/build-rathena-modes.py. Merged here so the page reads one file.
+const RATHENA = path.join(process.cwd(), 'data', 'raw', 'rathena-modes.json');
 const DEST = path.join(process.cwd(), 'data', 'monster-modes.json');
 
 const raw = JSON.parse(fs.readFileSync(SRC, 'utf-8'));
 const rows = raw.monsters ?? raw.rows ?? raw;
+const rathena = JSON.parse(fs.readFileSync(RATHENA, 'utf-8'));
 
 const modes = {};
 let known = 0;
@@ -33,12 +37,15 @@ let mini = 0;
 const unknownIds = [];
 for (const row of rows) {
   const labels = new Set((row.ragnarokZero?.specialStatus ?? []).map((s) => s?.raw).filter(Boolean));
+  const ra = rathena.modes[String(row.id)];
+  // null = no rAthena row for this id (Zero-only event copies), not "no".
+  const behaviour = ra ? { assist: ra.assist, castSensor: ra.castSensor, detector: ra.detector, plant: ra.plant } : null;
   if (labels.size === 0) {
-    modes[row.id] = { known: false };
+    modes[row.id] = { known: false, behaviour };
     unknownIds.push(row.id);
     continue;
   }
-  const entry = { known: true, canMove: labels.has('Can move'), mini: labels.has('mini') };
+  const entry = { known: true, canMove: labels.has('Can move'), mini: labels.has('mini'), behaviour };
   modes[row.id] = entry;
   known += 1;
   if (!entry.canMove) rooted += 1;
@@ -47,8 +54,9 @@ for (const row of rows) {
 
 const out = {
   _meta: {
-    what: 'Behaviour flags per monster id from the rozerodb export: canMove (false = rooted in place), mini (mini-boss). known:false = the export carries no specialStatus for that row at all, so nothing can be said either way.',
-    source: 'data/raw/monsters.json (ragnarokZero.specialStatus)',
+    what: 'Behaviour flags per monster id. From the rozerodb export: canMove (false = rooted in place), mini (mini-boss); known:false = the export carries no specialStatus for that row at all. behaviour {assist, castSensor, detector, plant} is from rAthena (data/raw/rathena-modes.json); behaviour:null = no rAthena row for that id.',
+    source: 'data/raw/monsters.json (ragnarokZero.specialStatus) + data/raw/rathena-modes.json',
+    rathena: rathena._meta.aggressiveCheck,
     regenerate: 'node scripts/build-monster-modes.mjs',
     built: new Date().toISOString().slice(0, 10),
     rows: rows.length,

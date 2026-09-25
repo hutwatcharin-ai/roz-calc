@@ -15,7 +15,7 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
-import { monsterModes } from '@/lib/monster-modes';
+import { BEHAVIOUR_LABELS, modesMeta, monsterModes } from '@/lib/monster-modes';
 import AddToPlanButton from '@/components/AddToPlanButton';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -274,6 +274,21 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
               </>
             );
           })()}
+          {/* The four flags players ask about by their slang names. rAthena
+              data, not measured in Zero -- the source line under the
+              summary says so; a monster with no rAthena row shows nothing
+              here rather than "none of these". */}
+          {(() => {
+            const b = monsterModes(monster.id)?.behaviour;
+            if (!b) return null;
+            return (Object.keys(BEHAVIOUR_LABELS) as (keyof typeof BEHAVIOUR_LABELS)[])
+              .filter((key) => b[key])
+              .map((key) => (
+                <span key={key} className="tag tag--behaviour" title={BEHAVIOUR_LABELS[key].title}>
+                  {BEHAVIOUR_LABELS[key].label}
+                </span>
+              ));
+          })()}
           {monster.loots_items && <span className="tag" title="เก็บของที่ตกบนพื้น">เก็บของตก</span>}
           <AddToPlanButton monsterId={monster.id} />
         </div>
@@ -294,6 +309,9 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             monster.is_mvp ? 'MVP' : null,
             modes?.known && !modes.canMove ? 'ยืนอยู่กับที่' : null,
             monster.loots_items ? 'เก็บของตก' : null,
+            ...(modes?.behaviour
+              ? (Object.keys(BEHAVIOUR_LABELS) as (keyof typeof BEHAVIOUR_LABELS)[]).filter((k) => modes.behaviour![k]).map((k) => BEHAVIOUR_LABELS[k].label)
+              : []),
           ].filter(Boolean);
           return traits.length ? ` นิสัย: ${traits.join(' ')}` : '';
         })()}
@@ -302,6 +320,12 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           return top ? ` ดรอปเด่น: ${(top.items as any).name_en} ${top.rate}%` : '';
         })()}
       </p>
+      {monsterModes(monster.id)?.behaviour && (
+        <p className="muted" style={{ marginTop: 4, fontSize: 12.5, maxWidth: '70ch' }}>
+          ลุม / ไวต่อเวท / มองมุด / ตีทีละ 1 มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
+          เชื่อได้แค่ไหน: บนข้อมูลที่ทั้งสองแหล่งมี (โจมตีก่อน) rAthena ตรงกับ rozerodb {modesMeta.rathena.agree} จาก {modesMeta.rathena.agree + modesMeta.rathena.disagree} ตัว
+        </p>
+      )}
 
       <div className="card card--yellow" style={{ marginTop: 20 }}>
         <div className="reward-row">
