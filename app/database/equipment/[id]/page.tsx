@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     // Not in the live client: the page stays, search engines are asked to skip it.
     ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
     title: `${item.name_en}${item.slots > 0 ? ` [${item.slots}]` : ''}${thaiPart} — ค่าพลังและออปชั่นสุ่ม`,
-    description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${parts.length ? ` ${parts.join(' ')}` : ''} — ${CATEGORY_LABELS[item.category ?? ''] ?? 'อุปกรณ์'} อาชีพที่ใส่ได้ ออปชั่นสุ่มที่ทอยได้ และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
+    description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${parts.length ? ` ${parts.join(' ')}` : ''} — ${CATEGORY_LABELS[item.category ?? ''] ?? 'อุปกรณ์'} อาชีพที่ใส่ได้ ออปชั่นสุ่มที่ออกได้ และมอนสเตอร์ที่ดรอปใน RO Zero Thai`,
   };
 }
 
