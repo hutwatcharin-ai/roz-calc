@@ -2,6 +2,8 @@
 
 ฐานข้อมูล + เครื่องมือ Ragnarok Zero Global ภาษาไทย · Next.js 14 (App Router) + Supabase + Coolify (VPS 207.148.123.125, app uuid `x130k1pxl928ne421jk9i5ic`) · repo GitHub **สาธารณะ** `hutwatcharin-ai/roz-calc`
 
+> **อ่าน `docs/GAME_MODEL.md` ก่อนทำงานที่แตะกติกาเกม เนื้อหาไกด์ หรือเครื่องมือ** — ภาพเกมที่เล่นจริง (ของใส่ ออปชัน ตลาด อาชีพ) · ทุกครั้งที่เจ้าของเว็บแก้ความเข้าใจผิดเรื่องเกม ให้เพิ่มหนึ่งบรรทัดในหัวข้อ 8 ของไฟล์นั้นทันที
+
 ## คำสั่งหลัก
 
 - เทสต์: `npx vitest run` (~476 เทสต์) · typecheck: `npx tsc --noEmit` · build: `npx next build`
