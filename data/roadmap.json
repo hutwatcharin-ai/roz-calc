@@ -3,9 +3,14 @@
     "what": "Gravity's year-one content plan for Ragnarok Zero Global, month by month.",
     "rule": "A plan, not a promise. It names months, never dates, and the months are the ones the source printed. Nothing here is moved, merged or translated into a guess; an item only leaves the plan list when one of our own patch pages shows it live.",
     "source": "UnGeek, 'Gravity reveals Ragnarok Zero Global year one roadmap ahead of its official launch', 14 Aug 2026 — https://www.ungeek.ph/2026/08/gravity-reveals-ragnarok-zero-global-year-one-roadmap-ahead-of-its-official-launch/",
-    "read": "2026-09-24",
+    "read": "2026-09-26",
     "caution": "The source does not say whether the plan may change, and it reports a global roadmap; the Thai service can differ.",
-    "years": "ปีในตารางแปลงเป็น พ.ศ. ให้ตรงกับหน้าอื่นในเว็บ (ค.ศ. 2026 = พ.ศ. 2569) รายการและเดือนไม่ถูกแตะ"
+    "years": "ปีในตารางแปลงเป็น พ.ศ. ให้ตรงกับหน้าอื่นในเว็บ (ค.ศ. 2026 = พ.ศ. 2569) รายการและเดือนไม่ถูกแตะ",
+    "update": {
+      "source": "rozerodb.com/guides/roadmap-update (read 2026-09-26), matching a player-shared image of the official Global roadmap dated 24 Sep 2026",
+      "changes": "Lutie moved from Dec 2026 to Jan 2027; Oct 2026 level cap given as 70. Every other month unchanged from the UnGeek list.",
+      "label": "อัปเดต 24 ก.ย. 2569: Lutie เลื่อนจาก ธ.ค. เป็น ม.ค. 2570 · ต.ค. ระบุเพดานเลเวล 70"
+    }
   },
   "plan": [
     {
@@ -28,7 +33,7 @@
       "month": "2026-10",
       "label": "ต.ค. 2569",
       "items": [
-        "ขยายเพดานเลเวล",
+        "ขยายเพดานเลเวลเป็น 70",
         "ดันเจี้ยน Clock Tower"
       ]
     },
@@ -44,15 +49,15 @@
       "month": "2026-12",
       "label": "ธ.ค. 2569",
       "items": [
-        "ดันเจี้ยน Glast Heim",
-        "โซนใหม่: Lutie"
+        "ดันเจี้ยน Glast Heim"
       ]
     },
     {
       "month": "2027-01",
       "label": "ม.ค. 2570",
       "items": [
-        "ขยายเพดานเลเวล"
+        "ขยายเพดานเลเวล",
+        "โซนใหม่: Lutie"
       ]
     },
     {

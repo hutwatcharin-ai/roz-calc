@@ -31,7 +31,7 @@ const PATH = '/news/roadmap';
 // roadmap source's "read" date -- those are cited inline in the body, this
 // is dateModified for the page as a whole. Bump the day this file's content
 // next changes (new LANDED entry, new DONE_MONTHS, etc).
-const PUBLISHED = '2026-09-24';
+const PUBLISHED = '2026-09-26';
 
 export const metadata: Metadata = {
   title: 'ไทม์ไลน์อัปเดต Ragnarok Zero Global — มาแล้วอะไร กำลังจะมาอะไร',
@@ -141,6 +141,8 @@ export default function RoadmapPage() {
             UnGeek
           </a>{' '}
           (14 ส.ค. 2026) · อ่านเมื่อ {roadmap._meta.read} · ชื่อเดือนและรายการตามที่แหล่งพิมพ์ไว้ ไม่ได้ย้ายหรือรวมรายการเอง
+          <br />
+          <strong>{roadmap._meta.update.label}</strong> ตามแผนทางการฉบับ 24 ก.ย. (สรุปโดย rozerodb และภาพที่ผู้เล่นแชร์) เดือนอื่นเหมือนเดิม
         </p>
       </section>
 

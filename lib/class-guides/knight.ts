@@ -47,6 +47,7 @@ export const knight: ClassGuide = {
     { range: '20-30', slot: 'ประดับ', text: 'Creamy Card ใช้ Teleport ได้ ดรอปจาก Creamy', items: [4040], cites: [['ncz', '05:20'], ['ncz', '06:22']] },
     { range: '30-35', slot: 'หมวก / รองเท้า', text: 'Hood กับรองเท้าแดงจาก Coco', items: [480414], cites: [['ncz', '06:51']] },
     { range: '~40', slot: 'อาวุธ', text: 'Guisarme จาก Horn และ Partizan จาก Elder Willow หอกสองมือสำหรับสายหอก', items: [630044, 630035], cites: [['ryanFarm', '00:38']] },
+    { range: '33+', slot: 'อาวุธ', text: 'Trident (หอกสองมือ) คืออาวุธ Knight ที่เห็นขายมากที่สุดในกลุ่มซื้อขายไทย มักตีบวก +9 ใส่การ์ดตีมังกร และหาออปชั่น ATK/ทะลุป้องกัน', items: [630042, 630037, 1460], cites: [['fbmarket']] },
     { range: '50+', slot: 'หมวก', text: 'Nordfeld Platinum Helm ทั้งสองคลิปของ Ryan Geldun ใส่ตัวนี้ แล้วเลือกเอนชานต์ตามสาย (SP/STR หรือ AGI)', items: [401510], cites: [['ryan', '04:59'], ['crit', '03:03']] },
   ],
   strengths: [
@@ -275,6 +276,7 @@ export const knight: ClassGuide = {
     'แมพเก็บเลเวลหลัง Lv 60 ยังไม่มี',
   ],
   sources: {
+    fbmarket: { label: 'กลุ่มซื้อขาย RO Zero Global (Facebook)', title: 'โพสต์ขายของ/ไอดี Knight ที่อ่านเมื่อ 25–26 ก.ย. 2569 (9 โพสต์)', url: 'https://www.facebook.com/groups/roggtlandverse', kind: 'web' },
     ryan: { label: 'Ryan Geldun', title: 'My knight build in Ragnarok Zero Global', url: 'https://www.youtube.com/watch?v=jM7uBvSd66k', kind: 'clip', lang: 'en' },
     crit: { label: 'Ryan Geldun', title: 'Crit-Agi knight build - Ragnarok Zero Global', url: 'https://www.youtube.com/watch?v=hG5zNfxtQQI', kind: 'clip', lang: 'en' },
     ryanFarm: { label: 'Ryan Geldun', title: 'Chill Zeny and Exp farming spot you FORGOT about', url: 'https://www.youtube.com/watch?v=oEPSeeOEGVk', kind: 'clip', lang: 'en' },
