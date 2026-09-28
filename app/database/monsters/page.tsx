@@ -318,7 +318,7 @@ export default async function MonsterListPage({
    * pages this site had and Google could not see. Picking the value that is
    * already on turns it off, so a chip is its own undo.
    */
-  function facetHref(next: { race?: string; element?: string; size?: string }): string {
+  function facetHref(next: { race?: string; element?: string; size?: string; aggro?: string; mode?: string }): string {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     const nextRace = next.race ?? race;
@@ -327,7 +327,10 @@ export default async function MonsterListPage({
     if (nextRace) params.set('race', nextRace);
     if (nextElement) params.set('element', nextElement);
     if (nextSize) params.set('size', nextSize);
-    if (aggro) params.set('aggro', aggro);
+    const nextAggro = next.aggro ?? aggro;
+    const nextMode = next.mode ?? mode;
+    if (nextAggro) params.set('aggro', nextAggro);
+    if (nextMode) params.set('mode', nextMode);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
     if (hpmin > 0) params.set('hpmin', String(hpmin));
@@ -350,6 +353,7 @@ export default async function MonsterListPage({
     if (element) params.set('element', element);
     if (size) params.set('size', size);
     if (aggro) params.set('aggro', aggro);
+    if (mode) params.set('mode', mode);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
     if (hpmin > 0) params.set('hpmin', String(hpmin));
@@ -370,6 +374,7 @@ export default async function MonsterListPage({
     if (element) params.set('element', element);
     if (size) params.set('size', size);
     if (aggro) params.set('aggro', aggro);
+    if (mode) params.set('mode', mode);
     if (lvmin > 0) params.set('lvmin', String(lvmin));
     if (lvmax > 0) params.set('lvmax', String(lvmax));
     if (hpmin > 0) params.set('hpmin', String(hpmin));
@@ -398,53 +403,13 @@ export default async function MonsterListPage({
       <PageHeader title="ฐานข้อมูลมอนสเตอร์ Ragnarok Zero" />
       <RecentlyViewed />
 
-      {/* Three rows of chips, each counted against the other two, so nothing
-          here leads to an empty page. The dropdowns stay: they hold the
-          filters chips cannot express (level band, sort, the C and Mj
-          switches), and a chip row for those would be worse than a select. */}
-      <section className="rolepick">
-        <h2 className="rolepick__label">ธาตุ</h2>
-        <div className="chips">
-          <Link className={`chip${element === '' ? ' chip--on' : ''}`} href={facetHref({ element: '' })}>ทุกธาตุ</Link>
-          {ELEMENTS.filter((e) => (elementCounts.get(e) ?? 0) > 0).map((e) => (
-            <Link key={e} data-element={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
-              {ELEMENT_TH[e] ?? e} <span className="chip__count">{elementCounts.get(e)}</span>
-            </Link>
-          ))}
-        </div>
-        {/* Three rows of chips put the first monster 1,197px down a 390px
-            screen. Element leads because it is the one people filter by, and
-            the other two fold -- open when either is in use, so a filter is
-            never applied out of sight. The links stay in the HTML either way,
-            which is the half that matters to a crawler. */}
-        {/* Always open (owner, 28 Sep 2026): race and size are how people
-            pick a monster, not a detail to fold away. */}
-        <h2 className="rolepick__label" style={{ marginTop: 10 }}>เผ่า</h2>
-          <div className="chips">
-            <Link className={`chip${race === '' ? ' chip--on' : ''}`} href={facetHref({ race: '' })}>ทุกเผ่า</Link>
-            {RACES.filter((r) => (raceCounts.get(r) ?? 0) > 0).map((r) => (
-              <Link key={r} className={`chip${race === r ? ' chip--on' : ''}`} href={facetHref({ race: race === r ? '' : r })}>
-                {RACE_TH[r] ?? r} <span className="chip__count">{raceCounts.get(r)}</span>
-              </Link>
-            ))}
-          </div>
-          <h2 className="rolepick__label" style={{ marginTop: 10 }}>ขนาด</h2>
-          <div className="chips">
-            <Link className={`chip${size === '' ? ' chip--on' : ''}`} href={facetHref({ size: '' })}>ทุกขนาด</Link>
-            {SIZES.filter((z) => (sizeCounts.get(z) ?? 0) > 0).map((z) => (
-              <Link key={z} className={`chip${size === z ? ' chip--on' : ''}`} href={facetHref({ size: size === z ? '' : z })}>
-                {SIZE_TH[z] ?? z} <span className="chip__count">{sizeCounts.get(z)}</span>
-              </Link>
-            ))}
-          </div>
-      </section>
-
-      {/* Three rows, each one question: what are you looking for, narrow it,
-          then how to show it. One wrapping line put the ค้นหา button in the
-          middle of the controls (owner, 18 Sep 2026). Every control carries a
-          visible label now -- the placeholders vanished as soon as a value was
-          picked, so a filtered page could not say what it was filtered by. */}
-      <form className="filterbar">
+      {/* The owner's pick C (28 Sep 2026, out of five mock-ups): search first,
+          then three boxes, one question each -- what kind of monster, how it
+          behaves, which numbers -- then a display row for sort and the hide
+          switches. Chip rows are links, each counted against the others so
+          nothing leads to an empty page; the number fields and the two
+          switches submit the form. */}
+      <form className="filterbar monc">
         <FilterAutoSubmit />
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
@@ -453,61 +418,101 @@ export default async function MonsterListPage({
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>
+        {race && <input type="hidden" name="race" value={race} />}
+        {element && <input type="hidden" name="element" value={element} />}
+        {size && <input type="hidden" name="size" value={size} />}
+        {aggro && <input type="hidden" name="aggro" value={aggro} />}
+        {mode && <input type="hidden" name="mode" value={mode} />}
 
-        {/* Owner, 28 Sep 2026: one even grid for every filter (the HP range
-            and card switch were folded away under "ตัวกรองเพิ่มเติม"), then a
-            separate display row for sort and the two hide switches. */}
-        <div className="filterbar__row monfilter">
-          {/* เผ่า / ธาตุ / ขนาด are the chip rows above -- the same three were
-              here again as dropdowns (UX pass 28 Sep 2026). Hidden fields keep
-              a chip choice alive when this form is submitted. */}
-          {race && <input type="hidden" name="race" value={race} />}
-          {element && <input type="hidden" name="element" value={element} />}
-          {size && <input type="hidden" name="size" value={size} />}
-          <label className="field">
-            <span className="field__label">พฤติกรรม</span>
-            <select name="aggro" defaultValue={aggro}>
-              <option value="">โจมตีก่อน/ไม่ ก็ได้</option>
-              <option value="0">ไม่โจมตีก่อน</option>
-              <option value="1">โจมตีก่อน</option>
-            </select>
-          </label>
-          <label className="field">
-            <span className="field__label">นิสัย</span>
-            <select name="mode" defaultValue={mode}>
-              <option value="">ทุกแบบ</option>
-              {(Object.keys(MODE_FILTERS) as ModeFilter[]).map((key) => (
-                <option key={key} value={key}>{MODE_FILTERS[key]}</option>
-              ))}
-            </select>
-          </label>
-          <label className="field">
-            <span className="field__label">บอส</span>
-            <select name="mvp" defaultValue={mvpOnly ? '1' : ''}>
-              <option value="">ทุกตัว</option>
-              <option value="1">เฉพาะบอส MVP</option>
-            </select>
-          </label>
-          <div className="field field--pair">
-            <span className="field__label">ช่วงเลเวล</span>
-            <span className="field__pair">
-              <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลเวลต่ำสุด" />
-              –
-              <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลเวลสูงสุด" />
-            </span>
-          </div>
-          <div className="field field--pair">
-            <span className="field__label">ช่วงเลือด (HP)</span>
-            <span className="field__pair">
-              <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลือดต่ำสุด" />
-              –
-              <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลือดสูงสุด" />
-            </span>
-          </div>
-          <label className="advfilter__label monfilter__check">
-            <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
-            มีการ์ดที่หาได้ตอนนี้
-          </label>
+        <div className="filterbar__row monc__cards">
+          <section className="monc__card" aria-labelledby="monc-kind">
+            <h2 id="monc-kind" className="monc__title"><i>1</i>มอนชนิดไหน</h2>
+            <div>
+              <h3 className="rolepick__label">ธาตุ</h3>
+              <div className="chips">
+                <Link className={`chip${element === '' ? ' chip--on' : ''}`} href={facetHref({ element: '' })}>ทุกธาตุ</Link>
+                {ELEMENTS.filter((e) => (elementCounts.get(e) ?? 0) > 0).map((e) => (
+                  <Link key={e} data-element={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
+                    {ELEMENT_TH[e] ?? e} <span className="chip__count">{elementCounts.get(e)}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="rolepick__label">เผ่า</h3>
+              <div className="chips">
+                <Link className={`chip${race === '' ? ' chip--on' : ''}`} href={facetHref({ race: '' })}>ทุกเผ่า</Link>
+                {RACES.filter((r) => (raceCounts.get(r) ?? 0) > 0).map((r) => (
+                  <Link key={r} className={`chip${race === r ? ' chip--on' : ''}`} href={facetHref({ race: race === r ? '' : r })}>
+                    {RACE_TH[r] ?? r} <span className="chip__count">{raceCounts.get(r)}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="rolepick__label">ขนาด</h3>
+              <div className="chips">
+                <Link className={`chip${size === '' ? ' chip--on' : ''}`} href={facetHref({ size: '' })}>ทุกขนาด</Link>
+                {SIZES.filter((z) => (sizeCounts.get(z) ?? 0) > 0).map((z) => (
+                  <Link key={z} className={`chip${size === z ? ' chip--on' : ''}`} href={facetHref({ size: size === z ? '' : z })}>
+                    {SIZE_TH[z] ?? z} <span className="chip__count">{sizeCounts.get(z)}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="monc__card" aria-labelledby="monc-behave">
+            <h2 id="monc-behave" className="monc__title"><i>2</i>นิสัยยังไง</h2>
+            <div>
+              <h3 className="rolepick__label">โจมตีก่อนไหม</h3>
+              <div className="chips">
+                <Link className={`chip${aggro === '' ? ' chip--on' : ''}`} href={facetHref({ aggro: '' })}>ทั้งหมด</Link>
+                <Link className={`chip${aggro === '0' ? ' chip--on' : ''}`} href={facetHref({ aggro: aggro === '0' ? '' : '0' })}>ไม่โจมตีก่อน</Link>
+                <Link className={`chip${aggro === '1' ? ' chip--on' : ''}`} href={facetHref({ aggro: aggro === '1' ? '' : '1' })}>โจมตีก่อน</Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="rolepick__label">นิสัย <a className="monc__help" href="#behaviour">แปลว่าอะไร</a></h3>
+              <div className="chips">
+                <Link className={`chip${mode === '' ? ' chip--on' : ''}`} href={facetHref({ mode: '' })}>ทุกแบบ</Link>
+                {(Object.keys(MODE_FILTERS) as ModeFilter[]).map((key) => (
+                  <Link key={key} className={`chip${mode === key ? ' chip--on' : ''}`} href={facetHref({ mode: mode === key ? '' : key })}>
+                    {MODE_FILTERS[key]}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <label className="advfilter__label monfilter__check">
+              <input type="checkbox" name="mvp" value="1" defaultChecked={mvpOnly} />
+              เฉพาะบอส MVP
+            </label>
+          </section>
+
+          <section className="monc__card" aria-labelledby="monc-num">
+            <h2 id="monc-num" className="monc__title"><i>3</i>ตัวเลข</h2>
+            <div className="field field--pair">
+              <span className="field__label">ช่วงเลเวล</span>
+              <span className="field__pair">
+                <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลเวลต่ำสุด" />
+                –
+                <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลเวลสูงสุด" />
+              </span>
+            </div>
+            <div className="field field--pair">
+              <span className="field__label">ช่วงเลือด (HP)</span>
+              <span className="field__pair">
+                <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลือดต่ำสุด" />
+                –
+                <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลือดสูงสุด" />
+              </span>
+            </div>
+            <label className="advfilter__label monfilter__check">
+              <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
+              มีการ์ดที่หาได้ตอนนี้
+            </label>
+            <button type="submit" className="btn monc__apply">ใช้ช่วงตัวเลข</button>
+          </section>
         </div>
 
         <div className="filterbar__row monfilter__view">

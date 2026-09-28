@@ -3589,14 +3589,20 @@ html.cguide-showsrc .cguide__src { display: block; }
 .cguide__fold[open] > summary .cguide__buildtitle::before { content: '▾ '; }
 .cguide__foldhint { display: block; color: var(--dim); font-size: 14px; line-height: 1.6; }
 .cguide__fold[open] .cguide__foldhint { display: none; }
-/* /database/monsters filters (owner, 28 Sep 2026: "จัดระเบียบใหม่"): every
-   filter in one even grid -- same width, same 44px height -- then a display
-   row (sort + the two hide switches) set apart by a hairline. */
-.monfilter { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px 14px; align-items: end; }
-.monfilter .field, .monfilter select { width: 100%; }
-.monfilter select, .monfilter input[type='number'] { min-height: 44px; }
-.monfilter .field__pair input { flex: 1 1 0; }
-.monfilter__check { min-height: 44px; align-self: end; }
+/* /database/monsters filters, layout C (owner's pick, 28 Sep 2026): three
+   boxes side by side on a wide screen, stacked on a phone. Box 1 (kind) is
+   wider because it holds the most chips. */
+.monc__cards { display: grid; grid-template-columns: 1.35fr 1fr 0.9fr; gap: 12px; align-items: stretch; }
+.monc__card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 14px; border: 1px solid var(--hair); border-radius: 12px; background: var(--panel); }
+.monc__title { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 15px/1.4 var(--font-sarabun), sans-serif; color: var(--text); }
+.monc__title i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--panel-2); color: var(--yellow); font: 700 13px/1 var(--font-chakra), sans-serif; font-style: normal; }
+.monc__card .rolepick__label { margin: 0 0 6px; }
+.monc__help { margin-inline-start: 6px; font-weight: 400; font-size: 12.5px; color: var(--cyan); }
+.monc__card .field__pair input { flex: 1 1 0; min-width: 0; min-height: 44px; }
+.monc__card .field__label { font-size: 13px; }
+.monc__apply { align-self: flex-start; margin-top: auto; }
+.monfilter__check { min-height: 44px; }
 .monfilter__check input { width: 20px; height: 20px; accent-color: var(--cyan); }
 .monfilter__view { align-items: flex-end; gap: 12px 24px; padding-top: 14px; margin-top: 4px; border-top: 1px solid var(--hair); }
 .monfilter__view .cvtoggle { min-height: 44px; }
+@media (max-width: 900px) { .monc__cards { grid-template-columns: 1fr; } }
