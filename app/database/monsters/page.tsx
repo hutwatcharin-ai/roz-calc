@@ -26,6 +26,7 @@ import { isFilteredView } from '@/lib/filtered-view';
 import { cardRelease } from '@/lib/card-availability';
 import MonsterNameInput from '@/components/MonsterNameInput';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
+import FilterPanel from '@/components/FilterPanel';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { MODE_BADGE_CLASS, MODE_FILTERS, MODE_GUIDE, aggroFallbackIds, isModeFilter, monsterIdsWithMode, modesMeta, type ModeFilter } from '@/lib/monster-modes';
 
@@ -403,13 +404,13 @@ export default async function MonsterListPage({
       <PageHeader title="ฐานข้อมูลมอนสเตอร์ Ragnarok Zero" />
       <RecentlyViewed />
 
-      {/* The owner's pick C (28 Sep 2026, out of five mock-ups): search first,
-          then three boxes, one question each -- what kind of monster, how it
-          behaves, which numbers -- then a display row for sort and the hide
-          switches. Chip rows are links, each counted against the others so
-          nothing leads to an empty page; the number fields and the two
-          switches submit the form. */}
-      <form className="filterbar monc">
+      {/* The owner's pick B (28 Sep 2026, after C read too long): search, then
+          a filter sidebar beside the results on a wide screen; on a phone the
+          results come first and the same filters open as a bottom sheet
+          (components/FilterPanel). Chip rows are links counted against each
+          other; number fields and switches submit this form, which wraps the
+          whole list so the sidebar's inputs belong to it. */}
+      <form className="filterbar monb__form">
         <FilterAutoSubmit />
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
@@ -424,123 +425,127 @@ export default async function MonsterListPage({
         {aggro && <input type="hidden" name="aggro" value={aggro} />}
         {mode && <input type="hidden" name="mode" value={mode} />}
 
-        <div className="filterbar__row monc__cards">
-          <section className="monc__card" aria-labelledby="monc-kind">
-            <h2 id="monc-kind" className="monc__title"><i>1</i>มอนชนิดไหน</h2>
-            <div>
-              <h3 className="rolepick__label">ธาตุ</h3>
-              <div className="chips">
-                <Link className={`chip${element === '' ? ' chip--on' : ''}`} href={facetHref({ element: '' })}>ทุกธาตุ</Link>
-                {ELEMENTS.filter((e) => (elementCounts.get(e) ?? 0) > 0).map((e) => (
-                  <Link key={e} data-element={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
-                    {ELEMENT_TH[e] ?? e} <span className="chip__count">{elementCounts.get(e)}</span>
-                  </Link>
-                ))}
+        <div className="monb">
+          <FilterPanel active={[race, element, size, aggro, mode, mvpOnly ? '1' : '', lvmin > 0 || lvmax > 0 ? '1' : '', hpFiltered ? '1' : '', cardOnly ? '1' : ''].filter(Boolean).length} resultCount={count ?? 0}>
+            <section className="fpanel__sec" aria-labelledby="monc-kind">
+              <h2 id="monc-kind" className="fpanel__title">มอนชนิดไหน</h2>
+              <div>
+                <h3 className="rolepick__label">ธาตุ</h3>
+                <div className="chips">
+                  <Link className={`chip${element === '' ? ' chip--on' : ''}`} href={facetHref({ element: '' })}>ทุกธาตุ</Link>
+                  {ELEMENTS.filter((e) => (elementCounts.get(e) ?? 0) > 0).map((e) => (
+                    <Link key={e} data-element={e} className={`chip${element === e ? ' chip--on' : ''}`} href={facetHref({ element: element === e ? '' : e })}>
+                      {ELEMENT_TH[e] ?? e} <span className="chip__count">{elementCounts.get(e)}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="rolepick__label">เผ่า</h3>
-              <div className="chips">
-                <Link className={`chip${race === '' ? ' chip--on' : ''}`} href={facetHref({ race: '' })}>ทุกเผ่า</Link>
-                {RACES.filter((r) => (raceCounts.get(r) ?? 0) > 0).map((r) => (
-                  <Link key={r} className={`chip${race === r ? ' chip--on' : ''}`} href={facetHref({ race: race === r ? '' : r })}>
-                    {RACE_TH[r] ?? r} <span className="chip__count">{raceCounts.get(r)}</span>
-                  </Link>
-                ))}
+              <div>
+                <h3 className="rolepick__label">เผ่า</h3>
+                <div className="chips">
+                  <Link className={`chip${race === '' ? ' chip--on' : ''}`} href={facetHref({ race: '' })}>ทุกเผ่า</Link>
+                  {RACES.filter((r) => (raceCounts.get(r) ?? 0) > 0).map((r) => (
+                    <Link key={r} className={`chip${race === r ? ' chip--on' : ''}`} href={facetHref({ race: race === r ? '' : r })}>
+                      {RACE_TH[r] ?? r} <span className="chip__count">{raceCounts.get(r)}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="rolepick__label">ขนาด</h3>
-              <div className="chips">
-                <Link className={`chip${size === '' ? ' chip--on' : ''}`} href={facetHref({ size: '' })}>ทุกขนาด</Link>
-                {SIZES.filter((z) => (sizeCounts.get(z) ?? 0) > 0).map((z) => (
-                  <Link key={z} className={`chip${size === z ? ' chip--on' : ''}`} href={facetHref({ size: size === z ? '' : z })}>
-                    {SIZE_TH[z] ?? z} <span className="chip__count">{sizeCounts.get(z)}</span>
-                  </Link>
-                ))}
+              <div>
+                <h3 className="rolepick__label">ขนาด</h3>
+                <div className="chips">
+                  <Link className={`chip${size === '' ? ' chip--on' : ''}`} href={facetHref({ size: '' })}>ทุกขนาด</Link>
+                  {SIZES.filter((z) => (sizeCounts.get(z) ?? 0) > 0).map((z) => (
+                    <Link key={z} className={`chip${size === z ? ' chip--on' : ''}`} href={facetHref({ size: size === z ? '' : z })}>
+                      {SIZE_TH[z] ?? z} <span className="chip__count">{sizeCounts.get(z)}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <section className="monc__card" aria-labelledby="monc-behave">
-            <h2 id="monc-behave" className="monc__title"><i>2</i>นิสัยยังไง</h2>
-            <div>
-              <h3 className="rolepick__label">โจมตีก่อนไหม</h3>
-              <div className="chips">
-                <Link className={`chip${aggro === '' ? ' chip--on' : ''}`} href={facetHref({ aggro: '' })}>ทั้งหมด</Link>
-                <Link className={`chip${aggro === '0' ? ' chip--on' : ''}`} href={facetHref({ aggro: aggro === '0' ? '' : '0' })}>ไม่โจมตีก่อน</Link>
-                <Link className={`chip${aggro === '1' ? ' chip--on' : ''}`} href={facetHref({ aggro: aggro === '1' ? '' : '1' })}>โจมตีก่อน</Link>
+            <section className="fpanel__sec" aria-labelledby="monc-behave">
+              <h2 id="monc-behave" className="fpanel__title">นิสัยยังไง</h2>
+              <div>
+                <h3 className="rolepick__label">โจมตีก่อนไหม</h3>
+                <div className="chips">
+                  <Link className={`chip${aggro === '' ? ' chip--on' : ''}`} href={facetHref({ aggro: '' })}>ทั้งหมด</Link>
+                  <Link className={`chip${aggro === '0' ? ' chip--on' : ''}`} href={facetHref({ aggro: aggro === '0' ? '' : '0' })}>ไม่โจมตีก่อน</Link>
+                  <Link className={`chip${aggro === '1' ? ' chip--on' : ''}`} href={facetHref({ aggro: aggro === '1' ? '' : '1' })}>โจมตีก่อน</Link>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="rolepick__label">นิสัย <a className="monc__help" href="#behaviour">แปลว่าอะไร</a></h3>
-              <div className="chips">
-                <Link className={`chip${mode === '' ? ' chip--on' : ''}`} href={facetHref({ mode: '' })}>ทุกแบบ</Link>
-                {(Object.keys(MODE_FILTERS) as ModeFilter[]).map((key) => (
-                  <Link key={key} className={`chip${mode === key ? ' chip--on' : ''}`} href={facetHref({ mode: mode === key ? '' : key })}>
-                    {MODE_FILTERS[key]}
-                  </Link>
-                ))}
+              <div>
+                <h3 className="rolepick__label">นิสัย <a className="monc__help" href="#behaviour">แปลว่าอะไร</a></h3>
+                <div className="chips">
+                  <Link className={`chip${mode === '' ? ' chip--on' : ''}`} href={facetHref({ mode: '' })}>ทุกแบบ</Link>
+                  {(Object.keys(MODE_FILTERS) as ModeFilter[]).map((key) => (
+                    <Link key={key} className={`chip${mode === key ? ' chip--on' : ''}`} href={facetHref({ mode: mode === key ? '' : key })}>
+                      {MODE_FILTERS[key]}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-            <label className="advfilter__label monfilter__check">
-              <input type="checkbox" name="mvp" value="1" defaultChecked={mvpOnly} />
-              เฉพาะบอส MVP
-            </label>
-          </section>
+              <label className="advfilter__label monfilter__check">
+                <input type="checkbox" name="mvp" value="1" defaultChecked={mvpOnly} />
+                เฉพาะบอส MVP
+              </label>
+            </section>
 
-          <section className="monc__card" aria-labelledby="monc-num">
-            <h2 id="monc-num" className="monc__title"><i>3</i>ตัวเลข</h2>
-            <div className="field field--pair">
-              <span className="field__label">ช่วงเลเวล</span>
-              <span className="field__pair">
-                <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลเวลต่ำสุด" />
-                –
-                <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลเวลสูงสุด" />
-              </span>
-            </div>
-            <div className="field field--pair">
-              <span className="field__label">ช่วงเลือด (HP)</span>
-              <span className="field__pair">
-                <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลือดต่ำสุด" />
-                –
-                <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลือดสูงสุด" />
-              </span>
-            </div>
-            <label className="advfilter__label monfilter__check">
-              <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
-              มีการ์ดที่หาได้ตอนนี้
-            </label>
-            <button type="submit" className="btn monc__apply">ใช้ช่วงตัวเลข</button>
-          </section>
-        </div>
+            <section className="fpanel__sec" aria-labelledby="monc-num">
+              <h2 id="monc-num" className="fpanel__title">ตัวเลข</h2>
+              <div className="field field--pair">
+                <span className="field__label">ช่วงเลเวล</span>
+                <span className="field__pair">
+                  <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลเวลต่ำสุด" />
+                  –
+                  <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลเวลสูงสุด" />
+                </span>
+              </div>
+              <div className="field field--pair">
+                <span className="field__label">ช่วงเลือด (HP)</span>
+                <span className="field__pair">
+                  <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลือดต่ำสุด" />
+                  –
+                  <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลือดสูงสุด" />
+                </span>
+              </div>
+              <label className="advfilter__label monfilter__check">
+                <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
+                มีการ์ดที่หาได้ตอนนี้
+              </label>
+              <button type="submit" className="btn fpanel__apply">ใช้ช่วงตัวเลข</button>
+            </section>
+            <section className="fpanel__sec" aria-label="การแสดงผล">
+              <h2 className="fpanel__title">การแสดงผล</h2>
+              {/* Toggling re-navigates (page reset to 1) so the server filter and
+                  count stay honest; the hidden form field keeps ?c=1 across a new
+                  text search too. */}
+              {showC && <input type="hidden" name="c" value="1" />}
+              {showMj && <input type="hidden" name="mj" value="1" />}
+              <CVariantToggle mode="nav" navShow={showC} navHrefShow={buildHref(1, true)} navHrefHide={buildHref(1, false)} />
+              {/* Plain link, not the C toggle's remembered checkbox: this one has
+                  no reason to follow the reader onto other pages, and the count is
+                  named so nothing disappears silently. */}
+              <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
+                <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
+                ซ่อนมอนดันเจี้ยน/อีเวนต์ (Mj Md Mq Ztw B) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
+              </Link>
+            </section>
+          </FilterPanel>
 
-        <div className="filterbar__row monfilter__view">
-          <label className="field">
-            <span className="field__label">เรียงตาม</span>
-            <select name="sort" defaultValue={sort} data-default="level">
-              {Object.entries(SORTS).map(([key, s]) => (
-                <option key={key} value={key}>
-                  {s.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          {/* Toggling re-navigates (page reset to 1) so the server filter and
-              count stay honest; the hidden form field keeps ?c=1 across a new
-              text search too. */}
-          {showC && <input type="hidden" name="c" value="1" />}
-          {showMj && <input type="hidden" name="mj" value="1" />}
-          <CVariantToggle mode="nav" navShow={showC} navHrefShow={buildHref(1, true)} navHrefHide={buildHref(1, false)} />
-          {/* Plain link, not the C toggle's remembered checkbox: this one has
-              no reason to follow the reader onto other pages, and the count is
-              named so nothing disappears silently. */}
-          <Link className="cvtoggle" href={mjHref(!showMj)} scroll={false}>
-            <input type="checkbox" checked={!showMj} readOnly tabIndex={-1} aria-hidden="true" />
-            ซ่อนมอนดันเจี้ยน/อีเวนต์ (Mj Md Mq Ztw B) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
-          </Link>
-        </div>
-      </form>
+          <div className="monb__main">
+            <div className="monb__bar">
+              <label className="field">
+                <span className="field__label">เรียงตาม</span>
+                <select name="sort" defaultValue={sort} data-default="level">
+                  {Object.entries(SORTS).map(([key, s]) => (
+                    <option key={key} value={key}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
 
       <FilterState
         count={count ?? 0}
@@ -659,6 +664,9 @@ export default async function MonsterListPage({
       )}
 
       <Pagination page={page} totalPages={totalPages} buildHref={buildHref} total={count ?? 0} pageSize={PAGE_SIZE} />
+          </div>
+        </div>
+      </form>
     </main>
   );
 }
