@@ -3576,3 +3576,16 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .siteupd__title { margin: 0 0 6px; font: 700 16px/1.5 var(--font-sarabun), sans-serif; color: var(--yellow); }
 .siteupd__list { margin: 0; padding-inline-start: 18px; display: flex; flex-direction: column; gap: 2px; line-height: 1.6; font-size: 14px; }
 .siteupd__list a { display: inline-block; padding-block: 8px; margin-block: -8px; }
+/* Class guides: per-line sources start hidden, SourceToggle brings them back
+   (UX pass 28 Sep 2026). The sources list at the foot is always shown. */
+.cguide__src { display: none; }
+html.cguide-showsrc .cguide__src { display: block; }
+.cguide__srcbar { margin: 4px 0 0; }
+.srctoggle { min-height: 44px; padding: 0 14px; border: 1px solid var(--hair); border-radius: 999px; background: var(--panel); color: var(--dim); font: 600 13px/1 var(--font-sarabun), sans-serif; cursor: pointer; }
+.srctoggle[aria-pressed='true'] { border-color: var(--cyan); color: var(--cyan); }
+.cguide__fold > summary { cursor: pointer; list-style: none; min-height: 44px; }
+.cguide__fold > summary::-webkit-details-marker { display: none; }
+.cguide__fold > summary .cguide__buildtitle::before { content: '▸ '; color: var(--cyan); }
+.cguide__fold[open] > summary .cguide__buildtitle::before { content: '▾ '; }
+.cguide__foldhint { display: block; color: var(--dim); font-size: 14px; line-height: 1.6; }
+.cguide__fold[open] .cguide__foldhint { display: none; }

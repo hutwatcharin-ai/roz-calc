@@ -26,6 +26,8 @@ import { CLASS_GUIDES, citeHref, classGuide } from '@/lib/class-guides';
 import type { Cite, CitedLine, ClassBuild, ClassGuide, StatRow } from '@/lib/class-guides/types';
 import { buildPlan, type JobPlan } from '@/lib/skill-plan';
 import trees from '@/data/skill-trees.json';
+import SourceToggle from '@/components/SourceToggle';
+import OpenOnHash from '@/components/OpenOnHash';
 
 export const revalidate = 86400;
 
@@ -196,19 +198,21 @@ function planSummary(plans: JobPlan[]): string {
   return plans.map((p) => `${JOB_NAMES[p.job] ?? p.job} ${p.used}/${p.budget}`).join(' · ');
 }
 
-function BuildSection({ build, look, plans }: { build: ClassBuild; look: Lookups; plans: JobPlan[] | null }) {
+function BuildSection({ build, look, plans, folded = false }: { build: ClassBuild; look: Lookups; plans: JobPlan[] | null; folded?: boolean }) {
   const { guide, skills, items } = look;
   const keyItems = [...new Set((build.gear ?? []).flatMap((g) => g.items ?? []))].slice(0, 6);
   const topStats = build.stats?.find((row) => STAT_KEYS.some((k) => row[k]));
   let step = 0;
   const h = (title: string) => <h3 className="cguide__h3"><span className="cguide__num mono">{++step}</span>{title}</h3>;
 
-  return (
-    <section id={build.id} className="card cguide__build">
-      <h2 className="cguide__buildtitle">
-        {build.name}
-        {build.tag && <span className="cguide__tag">{build.tag}</span>}
-      </h2>
+  const title = (
+    <h2 className="cguide__buildtitle">
+      {build.name}
+      {build.tag && <span className="cguide__tag">{build.tag}</span>}
+    </h2>
+  );
+  const body = (
+    <>
       <p className="cguide__lead">{build.idea.text}</p>
       <Src cites={build.idea.cites} guide={guide} />
 
@@ -335,6 +339,27 @@ function BuildSection({ build, look, plans }: { build: ClassBuild; look: Lookups
           <Lines lines={build.cautions} guide={guide} />
         </div>
       )}
+    </>
+  );
+
+  // Builds after the first fold to one line (UX pass 28 Sep 2026: the Knight
+  // guide was 27 phone screens). The picker above links to each; OpenOnHash
+  // opens the one it points at.
+  if (folded) {
+    return (
+      <details id={build.id} className="card cguide__build cguide__fold">
+        <summary>
+          {title}
+          <span className="cguide__foldhint">{build.pickIf} · กดเพื่อเปิด</span>
+        </summary>
+        {body}
+      </details>
+    );
+  }
+  return (
+    <section id={build.id} className="card cguide__build">
+      {title}
+      {body}
     </section>
   );
 }
@@ -432,6 +457,9 @@ export default async function ClassGuidePage({ params }: { params: { job: string
         );
       })()}
 
+      <OpenOnHash />
+      <p className="cguide__srcbar"><SourceToggle /></p>
+
       <div className="cguide__layout">
         <aside className="cguide__toc">
           <details open>
@@ -496,8 +524,8 @@ export default async function ClassGuidePage({ params }: { params: { job: string
             </div>
           </nav>
 
-          {guide.builds.map((build) => (
-            <BuildSection key={build.id} build={build} look={look} plans={plans.get(build.id) ?? null} />
+          {guide.builds.map((build, i) => (
+            <BuildSection key={build.id} build={build} look={look} plans={plans.get(build.id) ?? null} folded={i > 0} />
           ))}
 
           {guide.route && guide.route.length > 0 && (
