@@ -98,10 +98,11 @@ export default async function GuildGuidePage() {
 
       <PageHeader
         title="ไอเทมกิลด์ Ragnarok Zero — ได้จากไหน ใช้ทำอะไร"
-        lead="ของที่ต้องมีกิลด์ถึงจะได้: โล่จากอีเวนต์, แต้มเกียรติยศกิลด์, รูปปั้นอัปเลเวลกิลด์, เหรียญดันเจี้ยนกิลด์ และอุปกรณ์สาย GvG"
+        lead="วิธีสร้างกิลด์ อัปเลเวลกิลด์ และของที่ต้องมีกิลด์ถึงจะได้: โล่จากอีเวนต์, แต้มเกียรติยศกิลด์, รูปปั้นอัปเลเวลกิลด์, เหรียญดันเจี้ยนกิลด์ และอุปกรณ์สาย GvG"
       />
 
       <nav className="guildp__toc" aria-label="สารบัญ">
+        <a href="#start">สร้างกิลด์</a>
         <a href="#parma">โล่ Guild Parma</a>
         <a href="#flames">ไฟกิลด์ 4 สี</a>
         <a href="#honor">แต้มเกียรติยศ</a>
@@ -109,6 +110,23 @@ export default async function GuildGuidePage() {
         <a href="#coins">เหรียญดันเจี้ยนกิลด์</a>
         <a href="#gear">อุปกรณ์ GvG</a>
       </nav>
+
+      <section className="card" id="start" style={{ marginTop: 14 }}>
+        <h2 className="section-title">สร้างกิลด์</h2>
+        <ol className="guildp__steps">
+          <li><strong>มีหินกิลด์ 1 ก้อนติดตัว</strong> แล้วพิมพ์ <strong>/guild</strong> ตามด้วยชื่อกิลด์ในช่องแชท</li>
+          <li><strong>ชวนคนเข้า</strong> กิลด์ที่เพิ่งสร้างรับได้ <strong>16 คน</strong></li>
+          <li><strong>ไม่มีภาษีกิลด์แล้ว</strong> แท็บเก็บภาษีหายไป เลเวลกิลด์ขึ้นจากเควสกิลด์ประจำวันแทน (ดู<a href="#level">อัปเลเวลกิลด์</a>)</li>
+          <li><strong>ยังไม่มีกิลด์ก็เข้าแคลนได้</strong> ที่อาคารแคลนใน Prontera</li>
+        </ol>
+        <p className="muted" style={{ marginTop: 10 }}>
+          ช่วงนี้คนตั้งกิลด์กันเยอะเพราะโล่ Guild Parma ข้างล่าง ต้องอยู่ในกิลด์ถึงจะทำเควสได้
+        </p>
+        <Src>
+          วิธีสร้างและจำนวนคนจากคลิป <a href="https://www.youtube.com/watch?v=JuGwHRokT34" target="_blank" rel="noopener noreferrer">แชงค์888: วิธีเอาหินกิลมาสร้างกิล</a> ·
+          ภาษีกับแคลนจากคลิป <a href="https://www.youtube.com/watch?v=kdVXN81woJE" target="_blank" rel="noopener noreferrer">Ryan Geldun: How to level a guild</a>
+        </Src>
+      </section>
 
       <section className="card card--yellow" id="parma" style={{ marginTop: 14 }}>
         <h2 className="section-title">โล่ Guild Parma ของอีเวนต์ที่คุ้มที่สุดตอนนี้</h2>
@@ -200,7 +218,17 @@ export default async function GuildGuidePage() {
         <p className="muted" style={{ marginTop: 10 }}>
           ระดับ MVP คำอธิบายในเกมบอกตรง ๆ ว่าได้จากการล้ม MVP ส่วนระดับอื่นมาจากเควสกิลด์ประจำวัน
         </p>
-        <Src>คำอธิบายไอเทมในเกมทั้งหมด</Src>
+        <h3 style={{ margin: '16px 0 6px', fontSize: 15 }}>เควสกิลด์ประจำวัน</h3>
+        <ul className="guildp__steps" style={{ marginTop: 4 }}>
+          <li><strong>รับที่อาคารแคลนใน Prontera</strong> NPC ตัวเล็กชาว Lutie</li>
+          <li><strong>เป็นเควสฆ่ามอนตามช่วงเลเวล</strong> ตัวอย่างช่วง Lv 30+: ฆ่ามอนตัวใหญ่เลเวล 30 ขึ้นไป 50 ตัว</li>
+          <li><strong>ได้ Guild&apos;s Unity</strong> ช่วง 30+ ได้ระดับ Bronze (EXP กิลด์ 5,000 – 15,000 สุ่ม) ช่วงอื่นได้ระดับไหนยังไม่มีข้อมูล</li>
+          <li><strong>สมาชิกทุกคนทำได้</strong> ไม่ใช่แค่หัวกิลด์ ยิ่งคนทำเยอะกิลด์ยิ่งขึ้นเร็ว</li>
+        </ul>
+        <Src>
+          ระดับและ EXP ของ Guild&apos;s Unity จากคำอธิบายไอเทมในเกม · NPC เควสและตัวอย่างช่วง 30+ จากคลิป{' '}
+          <a href="https://www.youtube.com/watch?v=kdVXN81woJE" target="_blank" rel="noopener noreferrer">Ryan Geldun: How to level a guild</a> (แหล่งเดียว)
+        </Src>
       </section>
 
       <section className="card" id="coins" style={{ marginTop: 14 }}>
