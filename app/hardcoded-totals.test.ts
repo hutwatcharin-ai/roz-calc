@@ -31,6 +31,11 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
   },
   {
     file: 'app/guides/guild/page.tsx',
+    text: '50 ตัว',
+    why: 'the kill target of one daily guild quest as the video shows it (30+ bracket); a quest requirement, not a count of anything this site holds',
+  },
+  {
+    file: 'app/guides/guild/page.tsx',
     text: '10 ชิ้น',
     why: 'the contents of the event participation reward as the video reports them; the reward is not in our data at all',
   },
