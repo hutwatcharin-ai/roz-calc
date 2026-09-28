@@ -36,6 +36,7 @@ import star from '@/data/star-gear.json';
 import effectsTh from '@/data/star-effects-th.json';
 import chainFile from '@/data/star-chain.json';
 import guideOnly from '@/data/star-guide-only.json';
+import droppersFile from '@/data/star-droppers.json';
 
 export const revalidate = 86400;
 
@@ -81,7 +82,15 @@ const TH = effectsTh.items as Record<string, Record<string, string>>;
 // which no upgrade ever is. app/star-gear-tiers.test.ts holds this.
 const FIRST = PIECES.filter((p) => p.tier === 1);
 const PAIRED = PIECES.filter((p) => p.plain);
-const NO_PLAIN = PIECES.filter((p) => !p.plain);
+// Five first-tier pieces have an ordinary twin under a different name
+// (Cross Bow, Studded Knuckles, Jacket, Coat, Chain Mail -- see
+// scripts/build-star-droppers.mjs), so "no same-named twin" is not "no twin".
+const PLAIN_ELSEWHERE = new Set(
+  Object.entries(droppersFile.pieces as Record<string, { plainIds: number[] }>)
+    .filter(([id, row]) => row.plainIds.length > 0 && !PIECES.find((p) => p.id === Number(id))?.plain)
+    .map(([id]) => Number(id)),
+);
+const NO_PLAIN = PIECES.filter((p) => !p.plain && !PLAIN_ELSEWHERE.has(p.id));
 // The pieces the client itself has no data for at all -- no Thai text, no
 // icon resource, no footer block. Those got a mirrored icon from
 // divine-pride instead of the client (see build-star-gear.py).
@@ -99,6 +108,24 @@ const CHAINS = chainFile.chains.map((c) => ({
 const RENAMED = CHAINS.filter((c) => c.renamed);
 // ★ pieces the guide gives a second tier for that our client does not have.
 const GUIDE_ONLY = guideOnly.pieces.map((g) => ({ ...g, first: BY_ID.get(g.firstTierId)! }));
+// Who drops the ordinary twin of each first-tier piece, built by
+// scripts/build-star-droppers.mjs (five pieces map to a differently named
+// ordinary item; the script says why for each). Rates are null where no
+// source has one -- midgardhub shows ??? for the same drops.
+type Dropper = { id: number; name: string; level: number | null; rate: number | null; status: 'open' | 'closed' | 'nospawn'; when: string | null };
+const DROPPERS = droppersFile.pieces as unknown as Record<string, { plainName: string; plainIds: number[]; droppers: Dropper[] }>;
+const DROPPERS_SHOWN = 5;
+const CLOSED_SHOWN = 3;
+const TH_MONTH: Record<string, string> = { JAN: 'ม.ค.', FEB: 'ก.พ.', MAR: 'มี.ค.', APR: 'เม.ย.', MAY: 'พ.ค.', JUN: 'มิ.ย.', JUL: 'ก.ค.', AUG: 'ส.ค.', SEP: 'ก.ย.', OCT: 'ต.ค.', NOV: 'พ.ย.', DEC: 'ธ.ค.' };
+/** "DEC 2026, TBD" -> "ธ.ค. 2569"; TBD alone -> null (no month announced). */
+function thaiWhen(when: string | null): string | null {
+  const parts = (when ?? '').split(', ').map((w) => {
+    const m = w.match(/^([A-Z]{3}) (\d{4})$/);
+    return m && TH_MONTH[m[1]] ? `${TH_MONTH[m[1]]} ${Number(m[2]) + 543}` : null;
+  }).filter(Boolean);
+  return parts.length ? parts.join(', ') : null;
+}
+
 const baseName = (name: string) => name.replace(/^★+ /, '').replace(/ - (Sun|Moon)$/, '');
 
 /** The headline ATK or MATK a piece's own text opens with, for telling two
@@ -277,7 +304,7 @@ function PieceCard({ piece }: { piece: Piece }) {
           เทียบกับ{first ? first.name : 'ตัวธรรมดา'}: {gained.join(' · ')} · {first ? <a href={plain.href}>ดู {first.name}</a> : <Link href={plain.href}>ดูตัวธรรมดา</Link>}
         </p>
       )}
-      {!plain && piece.plainExistsInGame === false && (
+      {!plain && piece.plainExistsInGame === false && !PLAIN_ELSEWHERE.has(piece.id) && (
         <p className="star__noplain">ชิ้นนี้ไม่มีรุ่นธรรมดาให้เทียบ — ตรวจในไคลเอนต์แล้วว่าไม่มีเวอร์ชันที่ไม่ติดดาวของชิ้นนี้เลย มีแต่รุ่นติดดาวรุ่นเดียว</p>
       )}
       <dl className="star__tiers">
@@ -292,10 +319,61 @@ function PieceCard({ piece }: { piece: Piece }) {
           </div>
         ))}
       </dl>
+      {piece.tier === 1 && <DropDrawer piece={piece} />}
       <p className="star__lang">
         {piece.lang === 'th' ? 'ข้อความไทยจากในเกม' : 'แปลจากข้อความอังกฤษของไอเทม ตัวเลขทุกตัวถูกเทสต์ว่าตรงกับต้นฉบับ'}
       </p>
     </section>
+  );
+}
+
+function DropperRow({ d }: { d: Dropper }) {
+  return (
+    <li className={d.status === 'open' ? undefined : 'star__drop--off'}>
+      <Link href={`/database/monsters/${d.id}`}>{d.name}</Link>
+      <span className="muted"> Lv {d.level ?? '—'}</span>
+      <span className="mono star__droprate">{d.rate == null ? 'ไม่ทราบ %' : `${d.rate}%`}</span>
+      {d.status === 'closed' && <span className="star__dropnote">ยังไม่มีในเกม{thaiWhen(d.when) ? ` (แมพเปิดตามแผน ${thaiWhen(d.when)})` : ' (ยังไม่ประกาศเดือน)'}</span>}
+      {d.status === 'nospawn' && <span className="star__dropnote">ไม่มีจุดเกิดในข้อมูล</span>}
+    </li>
+  );
+}
+
+function DropDrawer({ piece }: { piece: Piece }) {
+  const row = DROPPERS[String(piece.id)];
+  if (!row) return null;
+  const open = row.droppers.filter((d) => d.status === 'open');
+  const rest = row.droppers.filter((d) => d.status !== 'open');
+  const restShown = rest.slice(0, CLOSED_SHOWN);
+  const shown = open.slice(0, DROPPERS_SHOWN);
+  const more = open.length - shown.length;
+  const plainId = row.plainIds[0];
+  return (
+    <details className="star__drops">
+      <summary>
+        ตัวธรรมดาดรอปจากไหน{' '}
+        <span className="muted">({row.droppers.length ? `${open.length} ตัวที่ตีได้ตอนนี้` : 'ยังไม่มีในเกม'})</span>
+      </summary>
+      {row.droppers.length === 0 ? (
+        <p className="muted" style={{ margin: '6px 0 0' }}>ไม่มีรุ่นธรรมดาของชิ้นนี้ในข้อมูลเกม อาชีพที่ใส่ยังไม่เปิด</p>
+      ) : (
+        <>
+          {row.plainName !== baseName(piece.name) && (
+            <p className="muted" style={{ margin: '6px 0 0', fontSize: 13 }}>ตัวธรรมดาของชิ้นนี้ในเกมชื่อ <strong>{row.plainName}</strong></p>
+          )}
+          <ul className="star__droplist">
+            {shown.map((d) => <DropperRow key={d.id} d={d} />)}
+            {restShown.map((d) => <DropperRow key={d.id} d={d} />)}
+          </ul>
+          <p className="muted" style={{ margin: '6px 0 0', fontSize: 13 }}>
+            {more > 0 && <>อีก {more} ตัวที่ตีได้ · </>}
+            {rest.length > restShown.length && <>อีก {rest.length - restShown.length} ตัวที่ยังไม่มีในเกม · </>}
+            {plainId && <Link href={itemHref(plainId, piece.category)}>ดูรายชื่อเต็มที่หน้า {row.plainName}</Link>}
+            {' '}· เปอร์เซ็นต์ที่ไม่ทราบ ไม่มีแหล่งไหนเปิดเผย · มอนเลเวลห่างจากเราเกิน ~19 ดรอปโดนหัก
+          </p>
+        </>
+      )}
+    </details>
   );
 }
 
@@ -566,7 +644,7 @@ export default async function StarGearPage() {
         </h3>
         <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
           แต่ละใบบอกผลตอนใส่เฉย ๆ แล้วไล่ทีละขั้นตีบวก ชิ้นที่หาตัวธรรมดามาเทียบได้จะมีบรรทัดบอกว่าติดดาวแล้ว ATK กับ Slot ขยับเท่าไร
-          ชิ้นที่ไม่มีบรรทัดนั้น ตรวจกับไคลเอนต์แล้วว่าไม่มีรุ่นธรรมดาอยู่จริง
+          ชิ้นที่ไม่มีบรรทัดนั้นคือไม่มีรุ่นธรรมดาชื่อเดียวกัน บางชิ้นมีตัวธรรมดาแต่ชื่อต่างออกไป ดูได้ในแถบ &quot;ตัวธรรมดาดรอปจากไหน&quot;
         </p>
         {WEAPON_FIRST.map((piece) => (
           <PieceCard key={piece.id} piece={piece} />
@@ -745,7 +823,7 @@ export default async function StarGearPage() {
         สายอัปเกรด ★ → ★★ จับคู่ด้วยรหัสทรัพยากรไอเทมจาก divine-pride.net (ขั้นที่ 2 คือรหัสขั้นที่ 1 ต่อท้าย RFP1/RFP2) ไม่ใช่ด้วยชื่อ เพราะชื่ออังกฤษเปลี่ยน {RENAMED.length} สาย ·
         ข้อความอังกฤษต้นทางของบางชิ้นเป็นการแปลจากภาษาจีนมาอีกทอด ชื่อสกิลบางตัวจึงอ่านแปลก ๆ ตั้งแต่ต้นฉบับ ·
         <strong>ไอคอน {CLIENT_UNKNOWN.length} ชิ้นที่ไคลเอนต์ไม่มีข้อมูลให้เลย ดึงมาจาก static.divine-pride.net</strong> ตรวจแล้วว่าไม่ใช่ภาพ &quot;ไม่พบ&quot; ของเว็บนั้นก่อนบันทึกทุกไฟล์ ·
-        {NO_PLAIN.length} ชิ้นที่ไม่มีบรรทัดเทียบกับตัวธรรมดา ตรวจกับตารางไอเทมทั้งหมดในไคลเอนต์แล้วว่าไม่มีรุ่นธรรมดาอยู่จริง ไม่ใช่ฐานข้อมูลเราตกหล่น
+        {NO_PLAIN.length} ชิ้นที่ไม่มีบรรทัดเทียบกับตัวธรรมดา ตรวจกับตารางไอเทมทั้งหมดในไคลเอนต์แล้วว่าไม่มีรุ่นธรรมดาอยู่จริง ไม่ใช่ฐานข้อมูลเราตกหล่น · อีก {PLAIN_ELSEWHERE.size} ชิ้นมีตัวธรรมดาแต่ชื่อต่าง (เช่น ★ Crossbow มาจาก Cross Bow) จับคู่ด้วยคำบรรยายไอเทมและเลเวลที่ใส่ได้ · รายชื่อมอนที่ดรอปมาจากฐานข้อมูลมอนของเว็บนี้ เปอร์เซ็นต์ที่เขียนว่าไม่ทราบคือไม่มีแหล่งไหนเปิดเผย (midgardhub ก็ขึ้น ???)
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
