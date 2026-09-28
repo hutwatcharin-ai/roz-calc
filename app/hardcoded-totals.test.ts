@@ -36,8 +36,8 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
   },
   {
     file: 'app/guides/social/page.tsx',
-    text: '20 ชิ้น',
-    why: 'worked example: level 60 needs 20 reset items at one per level above 40; arithmetic on the stated rule, not a database count',
+    text: '20 อัน',
+    why: 'worked example: level 60 needs 20 Zelstar at one per level above 40; arithmetic on the stated rule, not a database count',
   },
   {
     file: 'app/guides/nordfeld-helm/page.tsx',

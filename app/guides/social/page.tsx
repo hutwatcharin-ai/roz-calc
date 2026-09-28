@@ -89,9 +89,8 @@ export default function SocialGuidePage() {
             <strong>ห้อง &quot;แว่นดำ&quot; ที่ Payon</strong> เดินขึ้นไปคุย NPC แล้วจะวาร์ปเข้าห้อง ห้องเดียวกับที่ใช้บัตร Gym เพิ่มน้ำหนัก
           </li>
           <li>
-            <strong>เกินเลเวล 40 ใช้ไอเทมจาก Cash Shop</strong> คุยกับ NPC ก่อนจะบอกว่าเลเวลเราต้องใช้กี่ชิ้น ยิ่งเลเวลสูงยิ่งหลายชิ้น ·
-            คลิปบอกว่า <strong>700 แคชได้ 4 ชิ้น</strong> ถ้าเป็นแบบ 1 ชิ้นต่อเลเวลตามตารางข้างบน ตัวเลเวล 60 ใช้ 20 ชิ้น = 3,500 แคช
-            <span className="muted"> (ชื่อไอเทมในคลิปไม่ชัด เราคิดว่าเป็น Zelstar ยังไม่ได้ยืนยัน)</span>
+            <strong>เกินเลเวล 40 ใช้ Zelstar จาก Cash Shop</strong> คุยกับ NPC ก่อนจะบอกว่าเลเวลเราต้องใช้กี่อัน ยิ่งเลเวลสูงยิ่งหลายอัน ·
+            <strong>700 แคชได้ 4 อัน</strong> ตามตารางข้างบน ตัวเลเวล 60 ใช้ 20 อัน = 3,500 แคช
           </li>
           <li>
             <strong>บางแพตช์ให้รีเซ็ตฟรีไม่จำกัด</strong> เช่นช่วง 7 วันหลังเปิดอาชีพ 2 (3 ก.ย. 2569) ถึงปิดปรับปรุงครั้งถัดไป ถ้าจะเปลี่ยนบิลด์ รอจังหวะนี้ประหยัดกว่า
@@ -103,7 +102,7 @@ export default function SocialGuidePage() {
         <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
           ที่มา: คลิป{' '}
           <a href="https://www.youtube.com/watch?v=-QXQeeq474U" target="_blank" rel="noopener noreferrer">สานฝันวัยเด็ก: Gym Membership Card (EP.7)</a>{' '}
-          (ห้อง แคช 700 = 4 ชิ้น บัตร Gym) ·{' '}
+          (ห้อง แคช 700 = 4 อัน บัตร Gym) · ไอเทมคือ Zelstar ยืนยันโดยเจ้าของเว็บ ·{' '}
           <a href="https://www.youtube.com/watch?v=_P5uiQ81jME" target="_blank" rel="noopener noreferrer">KamonWay: Mage ไฟ</a>{' '}
           (รีสกิลฟรีในห้องแว่นดำ) · รีเซ็ตฟรี 7 วันจากคลิป Ryan Geldun ช่วงแพตช์ 3 ก.ย.
         </p>
