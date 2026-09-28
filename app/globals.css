@@ -3627,3 +3627,24 @@ html.cguide-showsrc .cguide__src { display: block; }
   .fpanel .chip { padding: 8px 12px; font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .fpanel, .fpanel.is-open { transition: none; } }
+/* /guides/sp-recovery (28 Sep 2026) */
+.spr__picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 10px; }
+.spr__pick { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.spr__pick img, .spr__icon, .spr__special img { image-rendering: pixelated; flex: none; }
+.spr__pick strong { display: block; font-size: 15px; }
+.spr__pick span { display: block; color: var(--dim); font-size: 13.5px; line-height: 1.5; }
+.spr__list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.spr__row { display: flex; gap: 10px; align-items: flex-start; padding: 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.spr__rank { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--panel-2); color: var(--yellow); font-weight: 700; font-size: 13px; }
+.spr__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.spr__head strong { font-size: 16px; }
+.spr__nums { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 14px; }
+.spr__nums b { color: var(--yellow); }
+.spr__bar { height: 8px; border-radius: 999px; background: var(--panel-2); overflow: hidden; }
+.spr__bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--cyan), var(--yellow)); }
+.spr__extra { margin: 0; color: var(--dim); font-size: 13px; }
+.spr__from { margin: 2px 0 0; font-size: 13.5px; line-height: 1.7; }
+.spr__special { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.spr__special li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.spr__special strong, .spr__special span { display: block; }
+.spr__special span { font-size: 13.5px; line-height: 1.5; }
