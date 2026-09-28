@@ -14,11 +14,13 @@
         450310,
         450323
       ],
+      "plainIcon": "/images/items/450310.gif",
       "droppers": [
         {
           "id": 2648,
           "name": "C3 Soldier Skeleton",
           "level": 34,
+          "image": "/images/monsters/2648.gif",
           "rate": 0.05,
           "status": "open",
           "when": null
@@ -27,6 +29,7 @@
           "id": 2649,
           "name": "C4 Soldier Skeleton",
           "level": 34,
+          "image": "/images/monsters/2649.gif",
           "rate": 0.05,
           "status": "open",
           "when": null
@@ -35,6 +38,7 @@
           "id": 1028,
           "name": "Soldier Skeleton",
           "level": 34,
+          "image": "/images/monsters/1028.gif",
           "rate": 0.01,
           "status": "open",
           "when": null
@@ -43,6 +47,7 @@
           "id": 2406,
           "name": "Weak Skel Soldier",
           "level": 23,
+          "image": "/images/monsters/2406.gif",
           "rate": 0.01,
           "status": "closed",
           "when": "MAR 2027"
@@ -51,6 +56,7 @@
           "id": 1065,
           "name": "Strouf",
           "level": 61,
+          "image": "/images/monsters/1065.gif",
           "rate": 0.01,
           "status": "closed",
           "when": "TBD"
@@ -59,6 +65,7 @@
           "id": 1276,
           "name": "Raydric Archer",
           "level": 82,
+          "image": "/images/monsters/1276.gif",
           "rate": 0.01,
           "status": "closed",
           "when": "DEC 2026"
@@ -67,6 +74,7 @@
           "id": 2691,
           "name": "C2 Raydric",
           "level": 85,
+          "image": "/images/monsters/2691.gif",
           "rate": 0.05,
           "status": "closed",
           "when": "DEC 2026"
@@ -75,6 +83,7 @@
           "id": 1163,
           "name": "Raydric",
           "level": 85,
+          "image": "/images/monsters/1163.gif",
           "rate": 0.01,
           "status": "closed",
           "when": "DEC 2026"
@@ -83,6 +92,7 @@
           "id": 1213,
           "name": "High Orc",
           "level": 85,
+          "image": "/images/monsters/1213.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026"
@@ -91,6 +101,7 @@
           "id": 2639,
           "name": "C4 Tamruan",
           "level": 109,
+          "image": "/images/monsters/2639.gif",
           "rate": 0.1,
           "status": "closed",
           "when": "APR 2027"
@@ -99,6 +110,7 @@
           "id": 1584,
           "name": "Tamruan",
           "level": 109,
+          "image": "/images/monsters/1584.gif",
           "rate": 0.02,
           "status": "closed",
           "when": "APR 2027"
@@ -112,11 +124,13 @@
         450320,
         450346
       ],
+      "plainIcon": "/images/items/450320.gif",
       "droppers": [
         {
           "id": 2878,
           "name": "C1 Caramel",
           "level": 27,
+          "image": "/images/monsters/2878.gif",
           "rate": 0.15,
           "status": "open",
           "when": null
@@ -125,6 +139,7 @@
           "id": 1103,
           "name": "Caramel",
           "level": 27,
+          "image": "/images/monsters/1103.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -133,6 +148,7 @@
           "id": 2829,
           "name": "C1 Fur Seal",
           "level": 56,
+          "image": "/images/monsters/2829.gif",
           "rate": 0.15,
           "status": "open",
           "when": null
@@ -141,6 +157,7 @@
           "id": 1317,
           "name": "Fur Seal",
           "level": 56,
+          "image": "/images/monsters/1317.gif",
           "rate": 0.03,
           "status": "open",
           "when": null
@@ -153,11 +170,13 @@
       "plainIds": [
         450347
       ],
+      "plainIcon": "/images/items/450347.gif",
       "droppers": [
         {
           "id": 2632,
           "name": "C2 Thief Bug",
           "level": 23,
+          "image": "/images/monsters/2632.gif",
           "rate": 3,
           "status": "open",
           "when": null
@@ -166,6 +185,7 @@
           "id": 2633,
           "name": "C3 Thief Bug",
           "level": 23,
+          "image": "/images/monsters/2633.gif",
           "rate": 3,
           "status": "open",
           "when": null
@@ -174,6 +194,7 @@
           "id": 2634,
           "name": "C4 Thief Bug",
           "level": 23,
+          "image": "/images/monsters/2634.gif",
           "rate": 3,
           "status": "open",
           "when": null
@@ -182,6 +203,7 @@
           "id": 1051,
           "name": "Thief Bug",
           "level": 23,
+          "image": "/images/monsters/1051.gif",
           "rate": 0.6,
           "status": "open",
           "when": null
@@ -190,6 +212,7 @@
           "id": 1054,
           "name": "ThiefBug",
           "level": 30,
+          "image": "/images/monsters/1054.gif",
           "rate": 0.6,
           "status": "open",
           "when": null
@@ -200,6 +223,7 @@
       "star": "★ Improved Wrist Guard",
       "plainName": "Improved Wrist Guard",
       "plainIds": [],
+      "plainIcon": null,
       "droppers": []
     },
     "470418": {
@@ -209,11 +233,13 @@
         470230,
         470233
       ],
+      "plainIcon": "/images/items/470230.gif",
       "droppers": [
         {
           "id": 2891,
           "name": "C5 Argiope",
           "level": 97,
+          "image": "/images/monsters/2891.gif",
           "rate": 0.15,
           "status": "open",
           "when": null
@@ -222,6 +248,7 @@
           "id": 2892,
           "name": "C1 Argiope",
           "level": 97,
+          "image": "/images/monsters/2892.gif",
           "rate": 0.15,
           "status": "open",
           "when": null
@@ -230,6 +257,7 @@
           "id": 1099,
           "name": "Argiope",
           "level": 97,
+          "image": "/images/monsters/1099.gif",
           "rate": 0.03,
           "status": "open",
           "when": null
@@ -238,6 +266,7 @@
           "id": 1305,
           "name": "Ancient Worm",
           "level": 121,
+          "image": "/images/monsters/1305.gif",
           "rate": 0.05,
           "status": "open",
           "when": null
@@ -246,6 +275,7 @@
           "id": 1265,
           "name": "Cookie",
           "level": 70,
+          "image": "/images/monsters/1265.gif",
           "rate": null,
           "status": "closed",
           "when": "JAN 2027"
@@ -254,6 +284,7 @@
           "id": 1216,
           "name": "Penomena",
           "level": 86,
+          "image": "/images/monsters/1216.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026"
@@ -262,6 +293,7 @@
           "id": 1101,
           "name": "Baphomet",
           "level": 90,
+          "image": "/images/monsters/1101.gif",
           "rate": 0.25,
           "status": "closed",
           "when": "OCT 2026"
@@ -270,6 +302,7 @@
           "id": 2796,
           "name": "C3 Hyegun",
           "level": 113,
+          "image": "/images/monsters/2796.gif",
           "rate": 0.05,
           "status": "closed",
           "when": "APR 2027"
@@ -278,6 +311,7 @@
           "id": 1512,
           "name": "Hyegun",
           "level": 113,
+          "image": "/images/monsters/1512.gif",
           "rate": 0.01,
           "status": "closed",
           "when": "APR 2027"
@@ -291,11 +325,13 @@
         470257,
         470231
       ],
+      "plainIcon": "/images/items/470257.gif",
       "droppers": [
         {
           "id": 2718,
           "name": "C5 Pecopeco",
           "level": 27,
+          "image": "/images/monsters/2718.gif",
           "rate": 0.5,
           "status": "open",
           "when": null
@@ -304,6 +340,7 @@
           "id": 1019,
           "name": "Peco Peco",
           "level": 27,
+          "image": "/images/monsters/1019.gif",
           "rate": 0.1,
           "status": "open",
           "when": null
@@ -312,6 +349,7 @@
           "id": 2868,
           "name": "C1 Coco",
           "level": 41,
+          "image": "/images/monsters/2868.gif",
           "rate": 0.65,
           "status": "open",
           "when": null
@@ -320,6 +358,7 @@
           "id": 2869,
           "name": "C2 Coco",
           "level": 41,
+          "image": "/images/monsters/2869.gif",
           "rate": 0.65,
           "status": "open",
           "when": null
@@ -328,6 +367,7 @@
           "id": 1104,
           "name": "Coco",
           "level": 41,
+          "image": "/images/monsters/1104.gif",
           "rate": 0.13,
           "status": "open",
           "when": null
@@ -336,6 +376,7 @@
           "id": 2865,
           "name": "C3 Cookie",
           "level": 70,
+          "image": "/images/monsters/2865.gif",
           "rate": 0.75,
           "status": "closed",
           "when": "JAN 2027"
@@ -344,6 +385,7 @@
           "id": 1265,
           "name": "Cookie",
           "level": 70,
+          "image": "/images/monsters/1265.gif",
           "rate": 0.15,
           "status": "closed",
           "when": "JAN 2027"
@@ -357,11 +399,13 @@
         480414,
         480384
       ],
+      "plainIcon": "/images/items/480414.gif",
       "droppers": [
         {
           "id": 2868,
           "name": "C1 Coco",
           "level": 41,
+          "image": "/images/monsters/2868.gif",
           "rate": 0.5,
           "status": "open",
           "when": null
@@ -370,6 +414,7 @@
           "id": 2869,
           "name": "C2 Coco",
           "level": 41,
+          "image": "/images/monsters/2869.gif",
           "rate": 0.5,
           "status": "open",
           "when": null
@@ -378,6 +423,7 @@
           "id": 1104,
           "name": "Coco",
           "level": 41,
+          "image": "/images/monsters/1104.gif",
           "rate": 0.1,
           "status": "open",
           "when": null
@@ -386,6 +432,7 @@
           "id": 1246,
           "name": "Christmas Cookie",
           "level": 74,
+          "image": "/images/monsters/1246.gif",
           "rate": 0.13,
           "status": "closed",
           "when": "JAN 2027"
@@ -394,6 +441,7 @@
           "id": 1199,
           "name": "Punk",
           "level": 82,
+          "image": "/images/monsters/1199.gif",
           "rate": 0.08,
           "status": "closed",
           "when": "OCT 2026"
@@ -407,11 +455,13 @@
         480385,
         480378
       ],
+      "plainIcon": "/images/items/480385.gif",
       "droppers": [
         {
           "id": 2651,
           "name": "C1 Sohee",
           "level": 64,
+          "image": "/images/monsters/2651.gif",
           "rate": 0.15,
           "status": "open",
           "when": null
@@ -420,6 +470,7 @@
           "id": 1170,
           "name": "Sohee",
           "level": 64,
+          "image": "/images/monsters/1170.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -428,6 +479,7 @@
           "id": 2852,
           "name": "C5 Disguise",
           "level": 103,
+          "image": "/images/monsters/2852.gif",
           "rate": 0.05,
           "status": "closed",
           "when": "FEB 2027"
@@ -436,6 +488,7 @@
           "id": 1506,
           "name": "Disguise",
           "level": 103,
+          "image": "/images/monsters/1506.gif",
           "rate": 0.01,
           "status": "closed",
           "when": "FEB 2027"
@@ -444,6 +497,7 @@
           "id": 1516,
           "name": "Increase Soil",
           "level": 103,
+          "image": "/images/monsters/1516.gif",
           "rate": null,
           "status": "closed",
           "when": "APR 2027"
@@ -458,11 +512,13 @@
         500087,
         500112
       ],
+      "plainIcon": "/images/items/1122.gif",
       "droppers": [
         {
           "id": 1105,
           "name": "Deniro",
           "level": 34,
+          "image": "/images/monsters/1105.gif",
           "rate": 1,
           "status": "open",
           "when": null
@@ -471,6 +527,7 @@
           "id": 1057,
           "name": "Yoyo",
           "level": 41,
+          "image": "/images/monsters/1057.gif",
           "rate": 1,
           "status": "open",
           "when": null
@@ -479,6 +536,7 @@
           "id": 1273,
           "name": "Orc Lady",
           "level": 54,
+          "image": "/images/monsters/1273.gif",
           "rate": 0.01,
           "status": "open",
           "when": null
@@ -487,6 +545,7 @@
           "id": 1069,
           "name": "Swordfish",
           "level": 57,
+          "image": "/images/monsters/1069.gif",
           "rate": null,
           "status": "closed",
           "when": "TBD"
@@ -495,6 +554,7 @@
           "id": 1209,
           "name": "Cramp",
           "level": 82,
+          "image": "/images/monsters/1209.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026, DEC 2026"
@@ -503,6 +563,7 @@
           "id": 1586,
           "name": "Leaf Cat",
           "level": 96,
+          "image": "/images/monsters/1586.gif",
           "rate": null,
           "status": "closed",
           "when": "APR 2027"
@@ -511,6 +572,7 @@
           "id": 1151,
           "name": "Myst",
           "level": 98,
+          "image": "/images/monsters/1151.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026"
@@ -525,11 +587,13 @@
         1216,
         510135
       ],
+      "plainIcon": "/images/items/510131.gif",
       "droppers": [
         {
           "id": 1056,
           "name": "Smokie",
           "level": 31,
+          "image": "/images/monsters/1056.gif",
           "rate": 1,
           "status": "open",
           "when": null
@@ -538,6 +602,7 @@
           "id": 2648,
           "name": "C3 Soldier Skeleton",
           "level": 34,
+          "image": "/images/monsters/2648.gif",
           "rate": 1.25,
           "status": "open",
           "when": null
@@ -546,6 +611,7 @@
           "id": 2649,
           "name": "C4 Soldier Skeleton",
           "level": 34,
+          "image": "/images/monsters/2649.gif",
           "rate": 1.25,
           "status": "open",
           "when": null
@@ -554,6 +620,7 @@
           "id": 1028,
           "name": "Soldier Skeleton",
           "level": 34,
+          "image": "/images/monsters/1028.gif",
           "rate": 0.25,
           "status": "open",
           "when": null
@@ -562,6 +629,7 @@
           "id": 2651,
           "name": "C1 Sohee",
           "level": 64,
+          "image": "/images/monsters/2651.gif",
           "rate": 0.15,
           "status": "open",
           "when": null
@@ -570,6 +638,7 @@
           "id": 1170,
           "name": "Sohee",
           "level": 64,
+          "image": "/images/monsters/1170.gif",
           "rate": 0.03,
           "status": "open",
           "when": null
@@ -578,6 +647,7 @@
           "id": 1139,
           "name": "Mantis",
           "level": 84,
+          "image": "/images/monsters/1139.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -586,6 +656,7 @@
           "id": 2406,
           "name": "Weak Skel Soldier",
           "level": 23,
+          "image": "/images/monsters/2406.gif",
           "rate": 0.1,
           "status": "closed",
           "when": "MAR 2027"
@@ -594,6 +665,7 @@
           "id": 1176,
           "name": "Vitata",
           "level": 35,
+          "image": "/images/monsters/1176.gif",
           "rate": 1,
           "status": "closed",
           "when": "NOV 2026"
@@ -602,6 +674,7 @@
           "id": 1516,
           "name": "Increase Soil",
           "level": 103,
+          "image": "/images/monsters/1516.gif",
           "rate": null,
           "status": "closed",
           "when": "APR 2027"
@@ -615,11 +688,13 @@
         530078,
         530079
       ],
+      "plainIcon": "/images/items/530078.gif",
       "droppers": [
         {
           "id": 1023,
           "name": "Orc Warrior",
           "level": 52,
+          "image": "/images/monsters/1023.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -628,6 +703,7 @@
           "id": 1154,
           "name": "Pasana",
           "level": 118,
+          "image": "/images/monsters/1154.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026"
@@ -641,11 +717,13 @@
         540106,
         540084
       ],
+      "plainIcon": "/images/items/540106.gif",
       "droppers": [
         {
           "id": 1191,
           "name": "Mimic",
           "level": 56,
+          "image": "/images/monsters/1191.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -654,6 +732,7 @@
           "id": 1195,
           "name": "Rideword",
           "level": 74,
+          "image": "/images/monsters/1195.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026, DEC 2026"
@@ -662,6 +741,7 @@
           "id": 1515,
           "name": "Hatii Bebe",
           "level": 94,
+          "image": "/images/monsters/1515.gif",
           "rate": null,
           "status": "closed",
           "when": "JAN 2027"
@@ -670,6 +750,7 @@
           "id": 1509,
           "name": "Lude",
           "level": 101,
+          "image": "/images/monsters/1509.gif",
           "rate": null,
           "status": "closed",
           "when": "FEB 2027"
@@ -683,11 +764,13 @@
         550125,
         550138
       ],
+      "plainIcon": "/images/items/550125.gif",
       "droppers": [
         {
           "id": 2718,
           "name": "C5 Pecopeco",
           "level": 27,
+          "image": "/images/monsters/2718.gif",
           "rate": 2.5,
           "status": "open",
           "when": null
@@ -696,6 +779,7 @@
           "id": 1019,
           "name": "Peco Peco",
           "level": 27,
+          "image": "/images/monsters/1019.gif",
           "rate": 0.5,
           "status": "open",
           "when": null
@@ -704,6 +788,7 @@
           "id": 1060,
           "name": "Bigfoot",
           "level": 31,
+          "image": "/images/monsters/1060.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -712,6 +797,7 @@
           "id": 1242,
           "name": "Marin",
           "level": 40,
+          "image": "/images/monsters/1242.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -720,6 +806,7 @@
           "id": 1126,
           "name": "Goblin 5",
           "level": 67,
+          "image": "/images/monsters/1126.gif",
           "rate": 0.08,
           "status": "open",
           "when": null
@@ -728,6 +815,7 @@
           "id": 1045,
           "name": "Marc",
           "level": 56,
+          "image": "/images/monsters/1045.gif",
           "rate": null,
           "status": "closed",
           "when": "TBD"
@@ -742,11 +830,13 @@
         560053,
         560056
       ],
+      "plainIcon": "/images/items/1805.gif",
       "droppers": [
         {
           "id": 1153,
           "name": "Orc Zombie",
           "level": 51,
+          "image": "/images/monsters/1153.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -755,6 +845,7 @@
           "id": 1276,
           "name": "Raydric Archer",
           "level": 82,
+          "image": "/images/monsters/1276.gif",
           "rate": null,
           "status": "closed",
           "when": "DEC 2026"
@@ -763,6 +854,7 @@
           "id": 1631,
           "name": "Chung E",
           "level": 106,
+          "image": "/images/monsters/1631.gif",
           "rate": null,
           "status": "closed",
           "when": "APR 2027"
@@ -776,11 +868,13 @@
         570056,
         570058
       ],
+      "plainIcon": "/images/items/570056.gif",
       "droppers": [
         {
           "id": 1380,
           "name": "Driller",
           "level": 84,
+          "image": "/images/monsters/1380.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -789,6 +883,7 @@
           "id": 1267,
           "name": "Carat",
           "level": 103,
+          "image": "/images/monsters/1267.gif",
           "rate": null,
           "status": "closed",
           "when": "DEC 2026"
@@ -802,11 +897,13 @@
         580063,
         580057
       ],
+      "plainIcon": "/images/items/580063.gif",
       "droppers": [
         {
           "id": 1271,
           "name": "Alligator",
           "level": 68,
+          "image": "/images/monsters/1271.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -815,6 +912,7 @@
           "id": 1253,
           "name": "Gargoyle",
           "level": 100,
+          "image": "/images/monsters/1253.gif",
           "rate": null,
           "status": "closed",
           "when": "DEC 2026"
@@ -829,11 +927,13 @@
         1519,
         590075
       ],
+      "plainIcon": "/images/items/590071.gif",
       "droppers": [
         {
           "id": 1160,
           "name": "Piere",
           "level": 35,
+          "image": "/images/monsters/1160.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -842,6 +942,7 @@
           "id": 1034,
           "name": "Thara Frog",
           "level": 40,
+          "image": "/images/monsters/1034.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -850,6 +951,7 @@
           "id": 1280,
           "name": "Goblin Steamrider",
           "level": 66,
+          "image": "/images/monsters/1280.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -858,6 +960,7 @@
           "id": 1142,
           "name": "Marine Sphere",
           "level": 51,
+          "image": "/images/monsters/1142.gif",
           "rate": null,
           "status": "closed",
           "when": "TBD"
@@ -866,6 +969,7 @@
           "id": 1045,
           "name": "Marc",
           "level": 56,
+          "image": "/images/monsters/1045.gif",
           "rate": null,
           "status": "closed",
           "when": "TBD"
@@ -880,11 +984,13 @@
         590074,
         590083
       ],
+      "plainIcon": "/images/items/1507.gif",
       "droppers": [
         {
           "id": 1155,
           "name": "Petit",
           "level": 86,
+          "image": "/images/monsters/1155.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -893,6 +999,7 @@
           "id": 1156,
           "name": "Petit",
           "level": 86,
+          "image": "/images/monsters/1156.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -907,11 +1014,13 @@
         1154,
         600051
       ],
+      "plainIcon": "/images/items/600049.gif",
       "droppers": [
         {
           "id": 1095,
           "name": "Andre",
           "level": 36,
+          "image": "/images/monsters/1095.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -920,6 +1029,7 @@
           "id": 1209,
           "name": "Cramp",
           "level": 82,
+          "image": "/images/monsters/1209.gif",
           "rate": null,
           "status": "closed",
           "when": "OCT 2026, DEC 2026"
@@ -928,6 +1038,7 @@
           "id": 1584,
           "name": "Tamruan",
           "level": 109,
+          "image": "/images/monsters/1584.gif",
           "rate": null,
           "status": "closed",
           "when": "APR 2027"
@@ -941,11 +1052,13 @@
         1151,
         600058
       ],
+      "plainIcon": "/images/items/1151.gif",
       "droppers": [
         {
           "id": 1103,
           "name": "Caramel",
           "level": 27,
+          "image": "/images/monsters/1103.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -954,6 +1067,7 @@
           "id": 1054,
           "name": "ThiefBug",
           "level": 30,
+          "image": "/images/monsters/1054.gif",
           "rate": 0.05,
           "status": "open",
           "when": null
@@ -962,6 +1076,7 @@
           "id": 1153,
           "name": "Orc Zombie",
           "level": 51,
+          "image": "/images/monsters/1153.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -970,6 +1085,7 @@
           "id": 1499,
           "name": "Utan Fighter",
           "level": 87,
+          "image": "/images/monsters/1499.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -983,11 +1099,13 @@
         610066,
         610061
       ],
+      "plainIcon": "/images/items/610066.gif",
       "droppers": [
         {
           "id": 1281,
           "name": "Sage Worm",
           "level": 70,
+          "image": "/images/monsters/1281.gif",
           "rate": null,
           "status": "closed",
           "when": "DEC 2026"
@@ -996,6 +1114,7 @@
           "id": 2760,
           "name": "C2 Martin",
           "level": 78,
+          "image": "/images/monsters/2760.gif",
           "rate": 0.25,
           "status": "closed",
           "when": "OCT 2026"
@@ -1004,6 +1123,7 @@
           "id": 1145,
           "name": "Martin",
           "level": 78,
+          "image": "/images/monsters/1145.gif",
           "rate": 0.05,
           "status": "closed",
           "when": "OCT 2026"
@@ -1018,11 +1138,13 @@
         620035,
         620049
       ],
+      "plainIcon": "/images/items/1354.gif",
       "droppers": [
         {
           "id": 1016,
           "name": "Archer Skeleton",
           "level": 50,
+          "image": "/images/monsters/1016.gif",
           "rate": 1,
           "status": "open",
           "when": null
@@ -1031,6 +1153,7 @@
           "id": 1013,
           "name": "Wolf",
           "level": 54,
+          "image": "/images/monsters/1013.gif",
           "rate": 1,
           "status": "open",
           "when": null
@@ -1039,6 +1162,7 @@
           "id": 1146,
           "name": "Matyr",
           "level": 58,
+          "image": "/images/monsters/1146.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -1047,6 +1171,7 @@
           "id": 1498,
           "name": "Utan Shooter",
           "level": 87,
+          "image": "/images/monsters/1498.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -1055,6 +1180,7 @@
           "id": 1263,
           "name": "Wind Ghost",
           "level": 97,
+          "image": "/images/monsters/1263.gif",
           "rate": null,
           "status": "closed",
           "when": "DEC 2026"
@@ -1068,11 +1194,13 @@
         630044,
         1451
       ],
+      "plainIcon": "/images/items/630044.gif",
       "droppers": [
         {
           "id": 2741,
           "name": "C3 Muka",
           "level": 25,
+          "image": "/images/monsters/2741.gif",
           "rate": 1.25,
           "status": "open",
           "when": null
@@ -1081,6 +1209,7 @@
           "id": 1055,
           "name": "Muka",
           "level": 25,
+          "image": "/images/monsters/1055.gif",
           "rate": 0.25,
           "status": "open",
           "when": null
@@ -1089,6 +1218,7 @@
           "id": 1019,
           "name": "Peco Peco",
           "level": 27,
+          "image": "/images/monsters/1019.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -1097,6 +1227,7 @@
           "id": 2800,
           "name": "C2 Horn",
           "level": 35,
+          "image": "/images/monsters/2800.gif",
           "rate": 0.4,
           "status": "open",
           "when": null
@@ -1105,6 +1236,7 @@
           "id": 1128,
           "name": "Horn",
           "level": 35,
+          "image": "/images/monsters/1128.gif",
           "rate": 0.08,
           "status": "open",
           "when": null
@@ -1113,6 +1245,7 @@
           "id": 2829,
           "name": "C1 Fur Seal",
           "level": 56,
+          "image": "/images/monsters/2829.gif",
           "rate": 0.05,
           "status": "open",
           "when": null
@@ -1121,6 +1254,7 @@
           "id": 1317,
           "name": "Fur Seal",
           "level": 56,
+          "image": "/images/monsters/1317.gif",
           "rate": 0.01,
           "status": "open",
           "when": null
@@ -1129,6 +1263,7 @@
           "id": 1278,
           "name": "Stalactic Golem",
           "level": 68,
+          "image": "/images/monsters/1278.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -1137,6 +1272,7 @@
           "id": 1118,
           "name": "Flora",
           "level": 70,
+          "image": "/images/monsters/1118.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -1150,11 +1286,13 @@
         700116,
         700086
       ],
+      "plainIcon": "/images/items/700116.gif",
       "droppers": [
         {
           "id": 1073,
           "name": "Crab",
           "level": 51,
+          "image": "/images/monsters/1073.gif",
           "rate": null,
           "status": "open",
           "when": null
@@ -1163,6 +1301,7 @@
           "id": 1246,
           "name": "Christmas Cookie",
           "level": 74,
+          "image": "/images/monsters/1246.gif",
           "rate": null,
           "status": "closed",
           "when": "JAN 2027"
@@ -1171,6 +1310,7 @@
           "id": 1515,
           "name": "Hatii Bebe",
           "level": 94,
+          "image": "/images/monsters/1515.gif",
           "rate": null,
           "status": "closed",
           "when": "JAN 2027"
@@ -1183,11 +1323,13 @@
       "plainIds": [
         700083
       ],
+      "plainIcon": "/images/items/700083.gif",
       "droppers": [
         {
           "id": 1016,
           "name": "Archer Skeleton",
           "level": 50,
+          "image": "/images/monsters/1016.gif",
           "rate": 0.18,
           "status": "open",
           "when": null
@@ -1196,6 +1338,7 @@
           "id": 1032,
           "name": "Verit",
           "level": 52,
+          "image": "/images/monsters/1032.gif",
           "rate": null,
           "status": "open",
           "when": null

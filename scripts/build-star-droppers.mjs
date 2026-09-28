@@ -57,14 +57,14 @@ const out = {};
 for (const piece of star.items.filter((p) => p.tier === 1)) {
   const own = baseName(piece.name);
   const plainName = BASE_OVERRIDES[own] ?? own;
-  const { data: items, error } = await db.from('items').select('id, name_en, category').eq('name_en', plainName);
+  const { data: items, error } = await db.from('items').select('id, name_en, category, icon_url').eq('name_en', plainName);
   if (error) throw error;
   const ids = (items ?? []).map((r) => r.id);
   let droppers = [];
   if (ids.length) {
     const { data: drops, error: dErr } = await db
       .from('monster_drops')
-      .select('item_id, rate, monsters(id, name_en, level)')
+      .select('item_id, rate, monsters(id, name_en, level, image_url)')
       .in('item_id', ids);
     if (dErr) throw dErr;
     const monsterIds = [...new Set((drops ?? []).map((d) => d.monsters?.id).filter(Boolean))];
@@ -89,7 +89,7 @@ for (const piece of star.items.filter((p) => p.tier === 1)) {
         const open = maps.filter((c) => !closedMaps[c]);
         const status = maps.length === 0 ? 'nospawn' : open.length ? 'open' : 'closed';
         const when = status === 'closed' ? [...new Set(maps.map((c) => closedMaps[c].when))].join(', ') : null;
-        byMonster.set(m.id, { id: m.id, name: m.name_en, level: m.level, rate, status, when });
+        byMonster.set(m.id, { id: m.id, name: m.name_en, level: m.level, image: m.image_url ?? null, rate, status, when });
       }
     }
     const order = { open: 0, closed: 1, nospawn: 2 };
@@ -97,7 +97,9 @@ for (const piece of star.items.filter((p) => p.tier === 1)) {
       (a, b) => order[a.status] - order[b.status] || (a.level ?? 999) - (b.level ?? 999) || (b.rate ?? -1) - (a.rate ?? -1),
     );
   }
-  out[piece.id] = { star: piece.name, plainName, plainIds: ids, droppers };
+  // The icon of the id monsters actually drop, else any id's.
+  const dropped = (items ?? []).find((r) => droppers.length && r.icon_url) ?? (items ?? []).find((r) => r.icon_url);
+  out[piece.id] = { star: piece.name, plainName, plainIds: ids, plainIcon: dropped?.icon_url ?? null, droppers };
 }
 
 const file = {

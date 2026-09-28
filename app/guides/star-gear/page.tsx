@@ -112,10 +112,8 @@ const GUIDE_ONLY = guideOnly.pieces.map((g) => ({ ...g, first: BY_ID.get(g.first
 // scripts/build-star-droppers.mjs (five pieces map to a differently named
 // ordinary item; the script says why for each). Rates are null where no
 // source has one -- midgardhub shows ??? for the same drops.
-type Dropper = { id: number; name: string; level: number | null; rate: number | null; status: 'open' | 'closed' | 'nospawn'; when: string | null };
-const DROPPERS = droppersFile.pieces as unknown as Record<string, { plainName: string; plainIds: number[]; droppers: Dropper[] }>;
-const DROPPERS_SHOWN = 5;
-const CLOSED_SHOWN = 3;
+type Dropper = { id: number; name: string; level: number | null; image: string | null; rate: number | null; status: 'open' | 'closed' | 'nospawn'; when: string | null };
+const DROPPERS = droppersFile.pieces as unknown as Record<string, { plainName: string; plainIds: number[]; plainIcon: string | null; droppers: Dropper[] }>;
 const TH_MONTH: Record<string, string> = { JAN: 'ม.ค.', FEB: 'ก.พ.', MAR: 'มี.ค.', APR: 'เม.ย.', MAY: 'พ.ค.', JUN: 'มิ.ย.', JUL: 'ก.ค.', AUG: 'ส.ค.', SEP: 'ก.ย.', OCT: 'ต.ค.', NOV: 'พ.ย.', DEC: 'ธ.ค.' };
 /** "DEC 2026, TBD" -> "ธ.ค. 2569"; TBD alone -> null (no month announced). */
 function thaiWhen(when: string | null): string | null {
@@ -319,7 +317,6 @@ function PieceCard({ piece }: { piece: Piece }) {
           </div>
         ))}
       </dl>
-      {piece.tier === 1 && <DropDrawer piece={piece} />}
       <p className="star__lang">
         {piece.lang === 'th' ? 'ข้อความไทยจากในเกม' : 'แปลจากข้อความอังกฤษของไอเทม ตัวเลขทุกตัวถูกเทสต์ว่าตรงกับต้นฉบับ'}
       </p>
@@ -327,53 +324,51 @@ function PieceCard({ piece }: { piece: Piece }) {
   );
 }
 
-function DropperRow({ d }: { d: Dropper }) {
+function MonsterChip({ d }: { d: Dropper }) {
+  const note = d.status === 'closed'
+    ? `ยังไม่มีในเกม${thaiWhen(d.when) ? ` · มา ${thaiWhen(d.when)}` : ''}`
+    : d.status === 'nospawn' ? 'ไม่มีจุดเกิดในข้อมูล' : null;
   return (
-    <li className={d.status === 'open' ? undefined : 'star__drop--off'}>
-      <Link href={`/database/monsters/${d.id}`}>{d.name}</Link>
-      <span className="muted"> Lv {d.level ?? '—'}</span>
-      <span className="mono star__droprate">{d.rate == null ? 'ไม่ทราบ %' : `${d.rate}%`}</span>
-      {d.status === 'closed' && <span className="star__dropnote">ยังไม่มีในเกม{thaiWhen(d.when) ? ` (แมพเปิดตามแผน ${thaiWhen(d.when)})` : ' (ยังไม่ประกาศเดือน)'}</span>}
-      {d.status === 'nospawn' && <span className="star__dropnote">ไม่มีจุดเกิดในข้อมูล</span>}
-    </li>
+    <Link href={`/database/monsters/${d.id}`} className={d.status === 'open' ? 'stardrop__mon' : 'stardrop__mon stardrop__mon--off'}>
+      {d.image ? <img src={d.image} alt="" width={44} height={44} loading="lazy" className="stardrop__img" /> : <span className="stardrop__img stardrop__img--none" aria-hidden="true" />}
+      <span className="stardrop__monname">{d.name}</span>
+      <span className="muted stardrop__lv">Lv {d.level ?? '—'}</span>
+      <span className={d.rate == null ? 'stardrop__rate stardrop__rate--unknown' : 'stardrop__rate'}>{d.rate == null ? 'ไม่ทราบ %' : `${d.rate}%`}</span>
+      {note && <span className="stardrop__note">{note}</span>}
+    </Link>
   );
 }
 
-function DropDrawer({ piece }: { piece: Piece }) {
-  const row = DROPPERS[String(piece.id)];
-  if (!row) return null;
-  const open = row.droppers.filter((d) => d.status === 'open');
-  const rest = row.droppers.filter((d) => d.status !== 'open');
-  const restShown = rest.slice(0, CLOSED_SHOWN);
-  const shown = open.slice(0, DROPPERS_SHOWN);
-  const more = open.length - shown.length;
-  const plainId = row.plainIds[0];
+/** One block per first-tier piece: its ordinary item, then every monster that
+ *  drops it as a picture tile -- the owner asked for "item A: monster a 10%,
+ *  monster b 5%" laid out on its own, not tucked inside the cards. */
+function DropsSection({ pieces }: { pieces: Piece[] }) {
   return (
-    <details className="star__drops">
-      <summary>
-        ตัวธรรมดาดรอปจากไหน{' '}
-        <span className="muted">({row.droppers.length ? `${open.length} ตัวที่ตีได้ตอนนี้` : 'ยังไม่มีในเกม'})</span>
-      </summary>
-      {row.droppers.length === 0 ? (
-        <p className="muted" style={{ margin: '6px 0 0' }}>ไม่มีรุ่นธรรมดาของชิ้นนี้ในข้อมูลเกม อาชีพที่ใส่ยังไม่เปิด</p>
-      ) : (
-        <>
-          {row.plainName !== baseName(piece.name) && (
-            <p className="muted" style={{ margin: '6px 0 0', fontSize: 13 }}>ตัวธรรมดาของชิ้นนี้ในเกมชื่อ <strong>{row.plainName}</strong></p>
-          )}
-          <ul className="star__droplist">
-            {shown.map((d) => <DropperRow key={d.id} d={d} />)}
-            {restShown.map((d) => <DropperRow key={d.id} d={d} />)}
-          </ul>
-          <p className="muted" style={{ margin: '6px 0 0', fontSize: 13 }}>
-            {more > 0 && <>อีก {more} ตัวที่ตีได้ · </>}
-            {rest.length > restShown.length && <>อีก {rest.length - restShown.length} ตัวที่ยังไม่มีในเกม · </>}
-            {plainId && <Link href={itemHref(plainId, piece.category)}>ดูรายชื่อเต็มที่หน้า {row.plainName}</Link>}
-            {' '}· เปอร์เซ็นต์ที่ไม่ทราบ ไม่มีแหล่งไหนเปิดเผย · มอนเลเวลห่างจากเราเกิน ~19 ดรอปโดนหัก
-          </p>
-        </>
-      )}
-    </details>
+    <div className="stardrop">
+      {pieces.map((piece) => {
+        const row = DROPPERS[String(piece.id)];
+        if (!row) return null;
+        const plainId = row.plainIds[0];
+        return (
+          <article key={piece.id} className="stardrop__item" id={`drops-${piece.id}`}>
+            <h4 className="stardrop__head">
+              <ItemIcon iconUrl={row.plainIcon ?? piece.icon} category={piece.category} size={32} />
+              <span>
+                {plainId ? <Link href={itemHref(plainId, piece.category)}>{row.plainName}</Link> : row.plainName}
+                <span className="muted stardrop__to"> → <a href={`#item-${piece.id}`}>{piece.name}</a></span>
+              </span>
+            </h4>
+            {row.droppers.length === 0 ? (
+              <p className="muted" style={{ margin: '4px 0 0' }}>ยังไม่มีในเกม ไม่มีรุ่นธรรมดาในข้อมูล (อาชีพที่ใส่ยังไม่เปิด)</p>
+            ) : (
+              <div className="stardrop__grid">
+                {row.droppers.map((d) => <MonsterChip key={d.id} d={d} />)}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
   );
 }
 
@@ -492,6 +487,7 @@ export default async function StarGearPage() {
 
       <nav className="jumpbar" aria-label="หัวข้อในหน้านี้">
         <a href="#sec-how">วิธีทำ</a>
+        <a href="#sec-drops">ตีตัวไหน</a>
         <a href="#sec-weapons">อาวุธ</a>
         <a href="#sec-wear">ของสวมใส่</a>
         <a href="#sec-token">โทเคน</a>
@@ -590,6 +586,23 @@ export default async function StarGearPage() {
         </p>
       </section>
 
+      <section className="card" id="sec-drops" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>ของดรอปที่ต้องเก็บ ตีตัวไหนได้บ้าง</h2>
+        <p className="muted" style={{ marginTop: 4, maxWidth: '74ch' }}>
+          ของติดดาวแต่ละชิ้นทำจากตัวธรรมดาที่มอนดรอป ข้างล่างคือตัวธรรมดาของทุกชิ้น กับมอนที่ดรอปและเปอร์เซ็นต์
+          มอนที่ตีได้ตอนนี้ขึ้นก่อน เรียงตามเลเวล ตัวสีจางคือมอนที่ยังไม่มีในเกม · มอนเลเวลห่างจากเราเกิน ~19 ดรอปโดนหัก
+        </p>
+        <h3 className="star__h3" style={{ marginTop: 14 }}>อาวุธ</h3>
+        <DropsSection pieces={WEAPON_FIRST} />
+        <h3 className="star__h3" style={{ marginTop: 18 }}>ของสวมใส่</h3>
+        <DropsSection pieces={FIRST.filter((p) => p.category !== 'Weapon')} />
+        <p className="guildp__src">
+          ที่มา: ฐานข้อมูลมอนและของดรอปของเว็บนี้ · &quot;ไม่ทราบ %&quot; คือไม่มีแหล่งไหนเปิดเผย (midgardhub ก็ขึ้น ???) ·
+          5 ชิ้นมีตัวธรรมดาชื่อต่าง (★ Crossbow มาจาก Cross Bow, ★ Hora จาก Studded Knuckles, ★ Leather Jacket จาก Jacket, ★ Long Coat จาก Coat, ★ Steel Chainmail จาก Chain Mail) จับคู่ด้วยคำบรรยายไอเทมและเลเวลที่ใส่ได้ ·
+          มอนที่ยังไม่มีในเกมดูจากแมพที่มันเกิดว่ายังไม่เปิดตามแผน
+        </p>
+      </section>
+
       <AdSlot slot="inline" />
 
       <section id="sec-weapons" style={{ marginTop: 26 }}>
@@ -644,7 +657,7 @@ export default async function StarGearPage() {
         </h3>
         <p className="muted" style={{ marginTop: 2, maxWidth: '74ch' }}>
           แต่ละใบบอกผลตอนใส่เฉย ๆ แล้วไล่ทีละขั้นตีบวก ชิ้นที่หาตัวธรรมดามาเทียบได้จะมีบรรทัดบอกว่าติดดาวแล้ว ATK กับ Slot ขยับเท่าไร
-          ชิ้นที่ไม่มีบรรทัดนั้นคือไม่มีรุ่นธรรมดาชื่อเดียวกัน บางชิ้นมีตัวธรรมดาแต่ชื่อต่างออกไป ดูได้ในแถบ &quot;ตัวธรรมดาดรอปจากไหน&quot;
+          ชิ้นที่ไม่มีบรรทัดนั้นคือไม่มีรุ่นธรรมดาชื่อเดียวกัน บางชิ้นมีตัวธรรมดาแต่ชื่อต่างออกไป ดูได้ในหัวข้อ &quot;ของดรอปที่ต้องเก็บ&quot;
         </p>
         {WEAPON_FIRST.map((piece) => (
           <PieceCard key={piece.id} piece={piece} />
