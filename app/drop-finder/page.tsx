@@ -204,8 +204,11 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
         <span className="nobr">ค้นของดรอป</span> <span className="nobr">ไอเทมดรอป</span>
         <span className="nobr">จากมอนตัวไหน</span>
       </h1>
+      <div className="panel" style={{ marginTop: 14 }}>
+        <DropSearch query={query || resolvedInputName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
+      </div>
       {!searched && (
-        <p className="muted" style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+        <p className="muted" style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           ลองค้น:
           {SAMPLE_SEARCHES.map((name) => (
             <a key={name} className="chiplink" href={`/drop-finder?q=${encodeURIComponent(name)}`}>
@@ -214,9 +217,6 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
           ))}
         </p>
       )}
-      <div className="panel" style={{ marginTop: 20 }}>
-        <DropSearch query={query || resolvedInputName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
-      </div>
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>
           <h2 style={{ font: '700 16px/1.6 var(--font-sarabun), sans-serif' }}>ของขายได้ราคาที่ฟาร์มได้</h2>

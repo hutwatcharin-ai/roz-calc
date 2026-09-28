@@ -2677,7 +2677,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   cursor: pointer;
   color: var(--cyan);
   font: 600 13px/1.6 var(--font-sarabun), sans-serif;
-  padding: 4px 0;
+  padding: 12px 0; /* 44px to tap, UX pass 28 Sep 2026 */
 }
 .shopmore summary::marker { color: var(--faint); }
 .shopmore[open] summary { margin-bottom: 4px; }
@@ -3041,7 +3041,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cguide__pick em { color: var(--faint); font-size: 12.5px; font-style: normal; }
 .cguide__pick.is-thin { opacity: .7; }
 .cguide__tag { display: inline-block; margin-inline-start: 8px; padding: 1px 9px; border-radius: 999px; background: var(--yellow); color: var(--yellow-ink); font: 700 12px/1.7 var(--font-sarabun), sans-serif; vertical-align: middle; }
-.cguide__pick .cguide__tag { margin: 0; align-self: flex-start; }
+.cguide__pick .cguide__tag, .cguide__pick-body > .cguide__tag { margin: 0; align-self: flex-start; color: var(--yellow-ink); }
 .cguide__build { margin-top: 20px; }
 .cguide__buildtitle { margin: 0 0 6px; font: 700 20px/1.35 var(--font-sarabun), sans-serif; color: var(--text); }
 .cguide__lead { margin: 0; font-size: 15.5px; line-height: 1.7; }
@@ -3565,3 +3565,14 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .stardrop__rate { font-family: var(--mono, monospace); font-size: 15px; font-weight: 700; color: var(--yellow); }
 .stardrop__rate--unknown { font-size: 12px; font-weight: 400; color: var(--dim); }
 .stardrop__note { font-size: 11px; color: var(--dim); line-height: 1.3; }
+.startwin { display: flex; gap: 8px; align-items: flex-start; margin: 10px 0 4px; padding: 10px 12px; border: 1px solid var(--yellow); border-radius: var(--radius); background: color-mix(in srgb, var(--yellow) 8%, transparent); font-size: 14px; line-height: 1.6; }
+.startwin__star { color: var(--yellow); font-size: 18px; line-height: 1.3; }
+/* Name links in data tables were 16-24px tall on a phone -- too small to hit
+   with a thumb. Padding grows the tap area; the matching negative margin
+   keeps every row exactly as tall as before (UX pass 28 Sep 2026). */
+.data-table td a { display: inline-block; padding-block: 10px; margin-block: -10px; }
+.homehero__faq { display: inline-flex; align-items: center; min-height: 44px; color: var(--cyan); font-weight: 600; }
+.siteupd { margin-top: 20px; padding: 14px 16px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.siteupd__title { margin: 0 0 6px; font: 700 16px/1.5 var(--font-sarabun), sans-serif; color: var(--yellow); }
+.siteupd__list { margin: 0; padding-inline-start: 18px; display: flex; flex-direction: column; gap: 2px; line-height: 1.6; font-size: 14px; }
+.siteupd__list a { display: inline-block; padding-block: 8px; margin-block: -8px; }

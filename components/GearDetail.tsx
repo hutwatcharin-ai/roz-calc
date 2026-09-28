@@ -25,6 +25,7 @@ import { gameThaiDescription } from '@/lib/game-items';
 import { randomOptionsFor } from '@/lib/random-options';
 import { cardSlotForGearType } from '@/lib/card-slot';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
+import { starTwinOf } from '@/lib/star-twins';
 import type { GearExtras } from '@/lib/gear-detail';
 
 export const CATEGORY_LABELS: Record<string, string> = {
@@ -138,6 +139,20 @@ export default function GearDetail({
               {sameName.some((o) => o.slots === item.slots) && ' · ข้อความและค่าพลังเหมือนกัน ต่างกันแค่รหัส เกมมีทั้งสองชิ้น'}
             </p>
           )}
+          {(() => {
+            const twin = starTwinOf(item.id);
+            if (!twin) return null;
+            return (
+              <p className="startwin">
+                <span className="startwin__star" aria-hidden="true">★</span>{' '}
+                <span>
+                  ชิ้นนี้ปลุกเป็น <Link href={`/guides/star-gear#item-${twin.starId}`}><strong>{twin.starName}</strong></Link> ได้
+                  {' '}· ของดรอป 1 ชิ้นแลกโทเคนได้ 1 อัน อย่าเพิ่งขายทิ้ง ·{' '}
+                  <Link href={`/guides/star-gear#drops-${twin.starId}`}>ดูว่าได้อะไรและตีตัวไหน</Link>
+                </span>
+              </p>
+            );
+          })()}
           <p className="equiphero__chips">
             <span className="tag">{categoryLabel}</span>
             {item.weapon_type && <span className="tag">{item.weapon_type}</span>}

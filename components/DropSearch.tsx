@@ -35,7 +35,7 @@ export default function DropSearch({
       {/* An unresolved item is a search with no result, whatever rows says. */}
       <TrackSearch term={query} count={resolvedName ? rows.length : 0} />
       <form>
-        <input className="mono" type="text" name="q" defaultValue={query} placeholder="ชื่อไอเทม เช่น Elunium Ore" />
+        <input className="mono" type="search" name="q" defaultValue={query} placeholder="เช่น Elunium" aria-label="ชื่อไอเทมที่อยากหา" enterKeyHint="search" autoComplete="off" />
         <button type="submit">ค้นหา</button>
       </form>
       {query && !resolvedName && <p style={{ color: 'var(--faint)' }}>ไม่พบไอเทมนี้</p>}

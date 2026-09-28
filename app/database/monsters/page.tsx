@@ -456,39 +456,12 @@ export default async function MonsterListPage({
         </div>
 
         <div className="filterbar__row">
-          <label className="field">
-            <span className="field__label">เผ่า</span>
-            <select name="race" defaultValue={race}>
-              <option value="">ทุกเผ่า</option>
-              {RACES.map((r) => (
-                <option key={r} value={r}>
-                  {r} · {RACE_TH[r]}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="field">
-            <span className="field__label">ธาตุ</span>
-            <select name="element" defaultValue={element}>
-              <option value="">ทุกธาตุ</option>
-              {ELEMENTS.map((e) => (
-                <option key={e} value={e}>
-                  {e} · {ELEMENT_TH[e]}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="field">
-            <span className="field__label">ขนาด</span>
-            <select name="size" defaultValue={size}>
-              <option value="">ทุกขนาด</option>
-              {SIZES.map((z) => (
-                <option key={z} value={z}>
-                  {z} · {SIZE_TH[z]}
-                </option>
-              ))}
-            </select>
-          </label>
+          {/* เผ่า / ธาตุ / ขนาด are the chip rows above -- the same three were
+              here again as dropdowns (UX pass 28 Sep 2026). Hidden fields keep
+              a chip choice alive when this form is submitted. */}
+          {race && <input type="hidden" name="race" value={race} />}
+          {element && <input type="hidden" name="element" value={element} />}
+          {size && <input type="hidden" name="size" value={size} />}
           <label className="field">
             <span className="field__label">พฤติกรรม</span>
             <select name="aggro" defaultValue={aggro}>

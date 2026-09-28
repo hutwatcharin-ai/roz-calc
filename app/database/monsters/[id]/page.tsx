@@ -328,12 +328,6 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           return top ? ` ดรอปเด่น: ${(top.items as any).name_en} ${top.rate}%` : '';
         })()}
       </p>
-      {monsterModes(monster.id)?.behaviour && (
-        <p className="muted" style={{ marginTop: 4, fontSize: 12.5, maxWidth: '70ch' }}>
-          รุม / ไวต่อเวท / มองมุด / ตีทีละ 1{monster.is_aggressive === null ? ' และโจมตีก่อน/ไม่โจมตีก่อนของตัวนี้' : ''} มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
-          เชื่อได้แค่ไหน: บนข้อมูลที่ทั้งสองแหล่งมี (โจมตีก่อน) rAthena ตรงกับ rozerodb {modesMeta.rathena.agree} จาก {modesMeta.rathena.agree + modesMeta.rathena.disagree} ตัว
-        </p>
-      )}
 
       <div className="card card--yellow" style={{ marginTop: 20 }}>
         <div className="reward-row">
@@ -530,6 +524,23 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           })()}
         </div>
       </div>
+
+      {(() => {
+        // Moved to the foot of the page (UX pass 28 Sep 2026): players read
+        // the badges, not the provenance, and it used to show under every
+        // monster with an rAthena row even when no rAthena flag was shown.
+        const b = monsterModes(monster.id)?.behaviour;
+        if (!b) return null;
+        const flagged = (Object.keys(BEHAVIOUR_LABELS) as (keyof typeof BEHAVIOUR_LABELS)[]).some((k) => b[k]);
+        const aggroFromRathena = monster.is_aggressive === null;
+        if (!flagged && !aggroFromRathena) return null;
+        return (
+          <p className="muted" style={{ marginTop: 20, fontSize: 12.5, maxWidth: '70ch' }}>
+            เชื่อได้แค่ไหน: {flagged ? 'ป้ายรุม / ไวต่อเวท / มองมุด / ตีทีละ 1' : ''}{flagged && aggroFromRathena ? ' และ' : ''}{aggroFromRathena ? 'โจมตีก่อน/ไม่โจมตีก่อนของตัวนี้' : ''} มาจากตาราง AI ของ rAthena (kRO) ยังไม่ได้วัดในเซิร์ฟ Zero ·
+            บนข้อมูลที่ทั้งสองแหล่งมี (โจมตีก่อน) rAthena ตรงกับ rozerodb {modesMeta.rathena.agree} จาก {modesMeta.rathena.agree + modesMeta.rathena.disagree} ตัว
+          </p>
+        );
+      })()}
 
       <AdSlot slot="detail" />
 

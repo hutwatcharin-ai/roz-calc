@@ -1,3 +1,4 @@
+import siteUpdates from '@/data/site-updates.json';
 import { supabaseBrowser } from '@/lib/supabase';
 import FarmingTable from '@/components/FarmingTable';
 import Link from 'next/link';
@@ -150,6 +151,9 @@ export default async function HomePage({
           มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
           เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
         </p>
+        <p style={{ marginTop: 6 }}>
+          <Link href="/guides/faq" className="homehero__faq">เล่นใหม่? เริ่มที่คำถามที่ถามบ่อย →</Link>
+        </p>
       </section>
 
       <div className="qgrid">
@@ -208,6 +212,21 @@ export default async function HomePage({
           <em className="qcard__go">หาจุด AFK →</em>
         </Link>
       </div>
+
+      {/* What the site added lately (UX pass 28 Sep 2026): returning players
+          had no way to see new pages -- the patch chips below are game news,
+          not site news. Rows live in data/site-updates.json. */}
+      <section className="siteupd" aria-labelledby="siteupd-h">
+        <h2 id="siteupd-h" className="siteupd__title">ใหม่ในเว็บ</h2>
+        <ul className="siteupd__list">
+          {(siteUpdates.items as { date: string; href: string; title: string; note: string }[]).slice(0, 5).map((u) => (
+            <li key={u.href}>
+              <Link href={u.href}><strong>{u.title}</strong></Link>
+              <span className="muted"> · {u.note}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {searched && (
         <div className="panel" id="results" style={{ marginTop: 24 }}>

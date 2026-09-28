@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "what": "What changed on the site itself, newest first, for the homepage 'ใหม่ในเว็บ' box. Add a row whenever a player-visible page or section ships; the homepage shows the first five.",
+    "added": "2026-09-28"
+  },
+  "items": [
+    { "date": "2026-09-28", "href": "/guides/faq", "title": "คำถามที่ถามบ่อย", "note": "ค่าเล่น บอท รีเซ็ต ตั้งร้าน ตีบวก เวลาเซิร์ฟ รวมจากคำถามในกลุ่ม" },
+    { "date": "2026-09-28", "href": "/guides/nordfeld-helm", "title": "หมวก Nordfeld", "note": "แลกยังไง ใบสุ่มออปได้จากไหน ถ้ำชั้น 2 เตรียมตัวยังไง" },
+    { "date": "2026-09-28", "href": "/guides/star-gear#sec-drops", "title": "ของติดดาว: ตีตัวไหนได้ของ", "note": "มอนที่ดรอปตัวธรรมดาของทุกชิ้น พร้อมเปอร์เซ็นต์" },
+    { "date": "2026-09-28", "href": "/tools/leveling-spots#farm-players", "title": "จุดฟาร์มที่ผู้เล่นใช้จริง", "note": "Horn / Elder Willow, หมู่บ้าน Goblin, ท่อ Prontera ชั้น 2" },
+    { "date": "2026-09-28", "href": "/guides/guild#start", "title": "สร้างกิลด์ + เควสกิลด์", "note": "ไม่มีภาษีแล้ว อัปเลเวลกิลด์จากเควสประจำวัน" },
+    { "date": "2026-09-28", "href": "/news/roadmap", "title": "ไทม์ไลน์อัปเดต", "note": "Lutie เลื่อนไป ม.ค. 2570 · ต.ค. เลเวล 70" }
+  ]
+}
