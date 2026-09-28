@@ -25,6 +25,26 @@ const CLAIM = new RegExp(String.raw`\d[\d,]{1,}\s*(?:${UNITS.join('|')})`, 'g');
  */
 const ALLOWED: { file: string; text: string; why: string }[] = [
   {
+    file: 'app/guides/faq/page.tsx',
+    text: '10 ใบ',
+    why: 'the Gym card cap (10 cards, +2,000 weight) as the clip shows it; a game rule, not a count of anything this site holds',
+  },
+  {
+    file: 'app/guides/social/page.tsx',
+    text: '10 ใบ',
+    why: 'the Gym card cap (10 cards, +2,000 weight) as the clip shows it; a game rule, not a count of anything this site holds',
+  },
+  {
+    file: 'app/guides/social/page.tsx',
+    text: '20 ชิ้น',
+    why: 'worked example: level 60 needs 20 reset items at one per level above 40; arithmetic on the stated rule, not a database count',
+  },
+  {
+    file: 'app/guides/nordfeld-helm/page.tsx',
+    text: '100 ชิ้น',
+    why: 'the helm price one clip mentions in passing, quoted only to say the two on-screen clips show 300; not a count of anything this site holds',
+  },
+  {
     file: 'app/guides/guild/page.tsx',
     text: '20 ชิ้น',
     why: 'what one player got in a day of farming, quoted from the video named beside it -- an observation about drop rates, not a count of anything this site holds',

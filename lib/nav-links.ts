@@ -85,6 +85,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // Pages you read: fixed game tables, and the written guide. Moved here from
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
   guides: [
+    { href: '/guides/faq', label: 'คำถามที่ถามบ่อย', icon: '/images/items/602.gif', ready: true, group: 'เริ่มเล่น' },
     { href: '/guides/classes', label: 'ไกด์อาชีพ', icon: '/images/jobs/priest.png', ready: true, group: 'เริ่มเล่น' },
     { href: '/guides/farm-guide', label: 'จุดฟาร์มแนะนำ', icon: '/images/items/601.gif', ready: true, group: 'เริ่มเล่น' },
     { href: '/guides/codes', label: 'โค้ดรับของ', icon: '/images/items/714.gif', ready: true, group: 'เริ่มเล่น' },
@@ -99,6 +100,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true, group: 'ดันเจี้ยน' },
     { href: '/guides/memorial-dungeons', label: 'ดันเจี้ยนความทรงจำ', icon: '/images/items/7126.gif', ready: true, group: 'ดันเจี้ยน' },
+    { href: '/guides/nordfeld-helm', label: 'หมวก Nordfeld', icon: '/images/items/401510.png', ready: true, group: 'ดันเจี้ยน' },
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/social', label: 'รีเซ็ตสเตตัส แคลน แต่งงาน', icon: '/images/items/2635.gif', ready: true, group: 'ระบบในเกม' },
