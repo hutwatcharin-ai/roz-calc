@@ -125,7 +125,7 @@ export default async function MonsterListPage({
   const cardOnly = searchParams.card === '1';
   const mode: ModeFilter | '' = isModeFilter(searchParams.mode) ? searchParams.mode : '';
   const modeIds = mode ? monsterIdsWithMode(mode) : null;
-  const advancedOn = (hpFiltered ? 1 : 0) + (cardOnly ? 1 : 0);
+
   // A whitelist, not a passthrough: the sort key goes into the query.
   const SORTS = {
     level: { label: 'เลเวลน้อยก่อน', column: 'level', ascending: true },
@@ -417,9 +417,9 @@ export default async function MonsterListPage({
             the other two fold -- open when either is in use, so a filter is
             never applied out of sight. The links stay in the HTML either way,
             which is the half that matters to a crawler. */}
-        <details className="shopmore" open={race !== '' || size !== ''}>
-          <summary>เผ่าและขนาด</summary>
-          <h2 className="rolepick__label" style={{ marginTop: 6 }}>เผ่า</h2>
+        {/* Always open (owner, 28 Sep 2026): race and size are how people
+            pick a monster, not a detail to fold away. */}
+        <h2 className="rolepick__label" style={{ marginTop: 10 }}>เผ่า</h2>
           <div className="chips">
             <Link className={`chip${race === '' ? ' chip--on' : ''}`} href={facetHref({ race: '' })}>ทุกเผ่า</Link>
             {RACES.filter((r) => (raceCounts.get(r) ?? 0) > 0).map((r) => (
@@ -437,7 +437,6 @@ export default async function MonsterListPage({
               </Link>
             ))}
           </div>
-        </details>
       </section>
 
       {/* Three rows, each one question: what are you looking for, narrow it,
@@ -455,7 +454,10 @@ export default async function MonsterListPage({
           <button type="submit" className="btn">ค้นหา</button>
         </div>
 
-        <div className="filterbar__row">
+        {/* Owner, 28 Sep 2026: one even grid for every filter (the HP range
+            and card switch were folded away under "ตัวกรองเพิ่มเติม"), then a
+            separate display row for sort and the two hide switches. */}
+        <div className="filterbar__row monfilter">
           {/* เผ่า / ธาตุ / ขนาด are the chip rows above -- the same three were
               here again as dropdowns (UX pass 28 Sep 2026). Hidden fields keep
               a chip choice alive when this form is submitted. */}
@@ -489,14 +491,26 @@ export default async function MonsterListPage({
           <div className="field field--pair">
             <span className="field__label">ช่วงเลเวล</span>
             <span className="field__pair">
-              <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 84 }} aria-label="เลเวลต่ำสุด" />
+              <input className="mono" type="number" name="lvmin" defaultValue={lvmin > 0 ? lvmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลเวลต่ำสุด" />
               –
-              <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 84 }} aria-label="เลเวลสูงสุด" />
+              <input className="mono" type="number" name="lvmax" defaultValue={lvmax > 0 ? lvmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลเวลสูงสุด" />
             </span>
           </div>
+          <div className="field field--pair">
+            <span className="field__label">ช่วงเลือด (HP)</span>
+            <span className="field__pair">
+              <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" aria-label="เลือดต่ำสุด" />
+              –
+              <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" aria-label="เลือดสูงสุด" />
+            </span>
+          </div>
+          <label className="advfilter__label monfilter__check">
+            <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
+            มีการ์ดที่หาได้ตอนนี้
+          </label>
         </div>
 
-        <div className="filterbar__row filterbar__row--tail">
+        <div className="filterbar__row monfilter__view">
           <label className="field">
             <span className="field__label">เรียงตาม</span>
             <select name="sort" defaultValue={sort} data-default="level">
@@ -521,30 +535,6 @@ export default async function MonsterListPage({
             ซ่อนมอนดันเจี้ยน/อีเวนต์ (Mj Md Mq Ztw B) {counts.mjVariants === null ? '' : `${counts.mjVariants} ตัว`}
           </Link>
         </div>
-
-        {/* Folded by default: three rows of controls already put the first
-            monster far down a phone screen, and these two are the least used.
-            Open when either is in use, so a filter is never applied out of
-            sight -- same rule as the เผ่า/ขนาด chips above. */}
-        <details className="shopmore advfilter" open={advancedOn > 0}>
-          <summary>
-            ตัวกรองเพิ่มเติม{advancedOn > 0 ? ` (${advancedOn})` : ''}
-          </summary>
-          <div className="advfilter__row">
-            <div className="field field--pair">
-              <span className="field__label">ช่วงเลือด (HP)</span>
-              <span className="field__pair">
-                <input className="mono" type="number" name="hpmin" defaultValue={hpmin > 0 ? hpmin : ''} placeholder="ต่ำสุด" inputMode="numeric" style={{ width: 104 }} aria-label="เลือดต่ำสุด" />
-                –
-                <input className="mono" type="number" name="hpmax" defaultValue={hpmax > 0 ? hpmax : ''} placeholder="สูงสุด" inputMode="numeric" style={{ width: 104 }} aria-label="เลือดสูงสุด" />
-              </span>
-            </div>
-            <label className="advfilter__label">
-              <input type="checkbox" name="card" value="1" defaultChecked={cardOnly} />
-              เฉพาะตัวที่มีการ์ดที่หาได้ตอนนี้
-            </label>
-          </div>
-        </details>
       </form>
 
       <FilterState

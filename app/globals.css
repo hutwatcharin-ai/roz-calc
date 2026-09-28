@@ -3589,3 +3589,14 @@ html.cguide-showsrc .cguide__src { display: block; }
 .cguide__fold[open] > summary .cguide__buildtitle::before { content: '▾ '; }
 .cguide__foldhint { display: block; color: var(--dim); font-size: 14px; line-height: 1.6; }
 .cguide__fold[open] .cguide__foldhint { display: none; }
+/* /database/monsters filters (owner, 28 Sep 2026: "จัดระเบียบใหม่"): every
+   filter in one even grid -- same width, same 44px height -- then a display
+   row (sort + the two hide switches) set apart by a hairline. */
+.monfilter { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px 14px; align-items: end; }
+.monfilter .field, .monfilter select { width: 100%; }
+.monfilter select, .monfilter input[type='number'] { min-height: 44px; }
+.monfilter .field__pair input { flex: 1 1 0; }
+.monfilter__check { min-height: 44px; align-self: end; }
+.monfilter__check input { width: 20px; height: 20px; accent-color: var(--cyan); }
+.monfilter__view { align-items: flex-end; gap: 12px 24px; padding-top: 14px; margin-top: 4px; border-top: 1px solid var(--hair); }
+.monfilter__view .cvtoggle { min-height: 44px; }
