@@ -13,12 +13,12 @@ export default function ItemSetCard({ set, current }: { set: ItemSet; current?: 
         {set.pieces.map((p) =>
           p.id === current ? (
             <span key={p.id} className="recipe__item iset__here">
-              <img src={`/images/items/${p.id}.gif`} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} loading="lazy" />
+              <img src={p.icon} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} loading="lazy" />
               <span>{p.name} (ชิ้นนี้)</span>
             </span>
           ) : (
             <Link key={p.id} className="recipe__item" href={itemHref(p.id, p.category)}>
-              <img src={`/images/items/${p.id}.gif`} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} loading="lazy" />
+              <img src={p.icon} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} loading="lazy" />
               <span>{p.name}</span>
             </Link>
           ),

@@ -117,14 +117,14 @@ function kindOf(pieces) {
 
 const sets = [...parseRozerodb(), ...EXTRA];
 const allIds = [...new Set(sets.flatMap((s) => s.ids))];
-const { data, error } = await db.from('items').select('id, name_en, category').in('id', allIds);
+const { data, error } = await db.from('items').select('id, name_en, category, icon_url').in('id', allIds);
 if (error) throw error;
 const byId = new Map(data.map((r) => [r.id, r]));
 const missing = allIds.filter((id) => !byId.has(id));
 if (missing.length) throw new Error(`piece ids not in items: ${missing.join(', ')}`);
 
 const out = sets.map((s) => {
-  const pieces = s.ids.map((id) => ({ id, name: byId.get(id).name_en, category: byId.get(id).category }));
+  const pieces = s.ids.map((id) => ({ id, name: byId.get(id).name_en, category: byId.get(id).category, icon: byId.get(id).icon_url ?? `/images/items/${id}.gif` }));
   return { name: s.name, kind: kindOf(pieces), pieces, bonus: s.bonus_th, sources: s.sources };
 }).sort((a, b) => a.name.localeCompare(b.name));
 

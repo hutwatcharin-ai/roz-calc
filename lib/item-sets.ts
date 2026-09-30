@@ -3,7 +3,7 @@
 import file from '@/data/item-sets.json';
 
 export type SetKind = 'gear' | 'card' | 'stone' | 'pet';
-export interface SetPiece { id: number; name: string; category: string }
+export interface SetPiece { id: number; name: string; category: string; icon: string }
 export interface ItemSet { name: string; kind: SetKind; pieces: SetPiece[]; bonus: string; sources: string[] }
 
 export const ITEM_SETS = (file as unknown as { sets: ItemSet[] }).sets;
