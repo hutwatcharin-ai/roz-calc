@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-09-30", "href": "/guides/costume-enchant", "title": "หินเอนแชนต์คอสตูม", "note": "หินทุกแบบ ใส่ช่องไหน ได้อะไร สุ่มจากกล่องไหน และโบนัสใส่ครบชุด" },
     { "date": "2026-09-30", "href": "/guides/mvp", "title": "ล่า MVP + แมพ PVP", "note": "เข้า MVP Raid ยังไง MVP ตัวไหนเปิดแล้ว ได้อะไร และแมพ PVP Hidden Realm" },
     { "date": "2026-09-30", "href": "/guides/potion-crafting#alchemy-lab", "title": "ทำน้ำยาและสีย้อมกับ NPC", "note": "Counteragent Mixture สีย้อม 8 สี และบอกว่าสีไหนเอาไปทำหมวกอะไร" },
     { "date": "2026-09-30", "href": "/guides/memorial-dungeons", "title": "ดันเจี้ยนความทรงจำ: จุดสำคัญแต่ละด่าน", "note": "บอกว่าด่านไหนยังไม่เปิด และต้องทำอะไรก่อนสู้บอส" },

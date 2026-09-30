@@ -96,6 +96,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/sp-recovery', label: 'ของฟื้น SP', icon: '/images/items/578.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/nav/star.png', ready: true, group: 'คราฟต์' },
     { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/costume-enchant', label: 'หินเอนแชนต์คอสตูม', icon: '/images/items/6636.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true, group: 'คราฟต์' },
