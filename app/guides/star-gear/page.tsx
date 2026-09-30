@@ -732,7 +732,7 @@ export default async function StarGearPage() {
           </p>
           <ul className="star__prep" style={{ listStyle: 'disc', marginTop: 8 }}>
             <li><strong>ทางที่ 1 ประหยัดตีบวก</strong> ใช้ของดรอปชิ้นเดียวกัน {ARMOR_STABLE.tokens} ชิ้น + เศษเหรียญ {ARMOR_STABLE.shards} อัน เสียตีบวกแค่ {ARMOR_STABLE.refine} ขั้น</li>
-            <li><strong>ทางที่ 2 ประหยัดของดรอป</strong> ใช้ของดรอปแค่ {ARMOR_STRONG.tokens} ชิ้น + เศษเหรียญ {ARMOR_STRONG.shards} อัน แต่เสียตีบวก {ARMOR_STRONG.refine} ขั้น</li>
+            <li><strong>ทางที่ 2 ประหยัดของดรอป</strong> ใช้ของดรอปแค่ {ARMOR_STRONG.tokens} ชิ้น + เศษเหรียญ {ARMOR_STRONG.shards} อัน แต่เสียตีบวก {ARMOR_STRONG.refine} ขั้น · ถ้าตีบวกไม่ถึง +{ARMOR_STRONG.refine} จะเหลือ +0 ควรตีถึง +9 ก่อนเลือกแบบนี้</li>
           </ul>
           <CostTable rows={ACTIVATION.slice(2)} />
           <div className="star__example">

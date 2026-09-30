@@ -62,6 +62,21 @@ interface Dungeon {
 
 const { dungeons } = file as unknown as { dungeons: Dungeon[] };
 
+// Not open on Global yet (owner, 30 Sep 2026: say "not open", no month --
+// the only dates come from one fan guide and would read as a promise).
+const NOT_OPEN = new Set(['Ant Hell 1F', 'Izlude 2F', 'Sunken Ship']);
+
+// The one thing per dungeon that decides a run, from the same French guide
+// (roz-global.info, re-read 30 Sep 2026). Rewritten, not quoted.
+const TIPS: Record<string, string> = {
+  'Poring Village': 'เสาสีฟ้าให้บัฟ ATK ชั่วคราวก่อนคลื่นถัดไป · เก็บยาไว้ใช้กับบอสสามตัวสุดท้าย King Poring HP เยอะกว่าอีกสองตัวรวมกัน',
+  "Orc's Memory": 'ฆ่า Shaman\'s Flower ก่อน มันบัฟบอสตราบที่ยังอยู่ HP แค่ 5 แต่ DEF สูง',
+  'Prontera Culvert': 'ทุบไข่แมลงให้หมดบอสถึงจะออก · ทุบไข่รอบตัวบอสให้หมดก่อนบอสตาย จะได้หีบโบนัสอีกใบ',
+  'Ant Hell 1F': 'ต้องอุดบ่อพิษที่มีจุดแดงให้ครบก่อนสู้บอส',
+  'Izlude 2F': 'ยิ่งฆ่ามอนไปมาก ตัวที่เหลือยิ่งแข็งขึ้น เดินเคลียร์ทีละกลุ่ม อย่าดึงมอนกระจาย · บอส DEF/MDEF สูง ใช้ทั้งตีกายภาพและเวทจะเร็วกว่า',
+  'Sunken Ship': 'มี Mimic ปนอยู่กับมอนธรรมดา ฆ่าให้ครบได้หีบโบนัส · บอสแข็งขึ้นตามสิ่งที่ทำระหว่างทาง บอสอึดที่สุดในทุกดัน เตรียมยาและบัฟให้พอ',
+};
+
 function levelText(d: Dungeon): string {
   if (d.level === null) return 'ไม่ระบุ';
   return d.levelMax ? `${d.level}–${d.levelMax}` : `${d.level}+`;
@@ -77,7 +92,10 @@ export default async function MemorialDungeonsPage() {
   const items = new Map((itemRows ?? []).flatMap((i) => itemNamesOf(i).map((n) => [n.toLowerCase(), i] as const)));
   const reward = (name: string) => items.get(name.toLowerCase()) ?? null;
   // Easiest first: it is the order a player meets them in.
-  const ordered = [...dungeons].sort((a, b) => (a.level ?? 999) - (b.level ?? 999));
+  // Open ones first, then the ones not out on Global yet.
+  const ordered = [...dungeons].sort(
+    (a, b) => Number(NOT_OPEN.has(a.name)) - Number(NOT_OPEN.has(b.name)) || (a.level ?? 999) - (b.level ?? 999),
+  );
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -92,7 +110,7 @@ export default async function MemorialDungeonsPage() {
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
         ดันเจี้ยนแบบอินสแตนซ์ {dungeons.length} แห่ง · <strong>ทุกแห่งเข้าเป็นกลุ่ม และเข้าได้วันละครั้ง รีเซ็ตตี 4</strong> ·
         ของที่ได้จากหีบในนี้คือ<Link href="/guides/memorial-gear">ชุดแรงค์ IV</Link>ที่เอาไปอัปต่อได้ ·
-        โหมดยากให้วัตถุดิบสำหรับทำเครื่องประดับด้วย
+        โหมดยากให้วัตถุดิบสำหรับทำเครื่องประดับด้วย · <strong>ปาร์ตี้ 7 คนขึ้นไปได้ของเพิ่ม</strong>
       </p>
 
       <div className="card card--cyan">
@@ -110,6 +128,7 @@ export default async function MemorialDungeonsPage() {
                 <tr key={d.name}>
                   <td data-label="ดันเจี้ยน">
                     <strong>{d.name}</strong> <span className="muted">{d.th}</span>
+                    {NOT_OPEN.has(d.name) && <> <span className="tag tag--unknown">ยังไม่เปิด</span></>}
                   </td>
                   <td data-label="เลเวล" className="num">{levelText(d)}</td>
                   <td data-label="มอน" className="num">{d.monsters.length}</td>
@@ -124,10 +143,16 @@ export default async function MemorialDungeonsPage() {
         <section key={d.name} style={{ marginTop: 26 }}>
           <h2 className="section-title">
             {d.name} <span className="muted" style={{ fontWeight: 400 }}>· {d.th} · เลเวล {levelText(d)}</span>
+            {NOT_OPEN.has(d.name) && <> <span className="tag tag--unknown">ยังไม่เปิด</span></>}
           </h2>
           {d.map && d.x !== null && d.y !== null && (
             <p className="muted" style={{ marginTop: 2, marginBottom: 8, fontSize: 13 }}>
               คุยกับ NPC ที่ <code className="mono navicmd">/navi {d.map} {d.x}/{d.y}</code>
+            </p>
+          )}
+          {TIPS[d.name] && (
+            <p style={{ marginTop: 2, marginBottom: 8, fontSize: 14 }}>
+              <strong>จุดสำคัญ:</strong> {TIPS[d.name]}
             </p>
           )}
           <div className="recipe__scroll">
@@ -193,7 +218,7 @@ export default async function MemorialDungeonsPage() {
       ))}
 
       <Caveat label="เชื่อได้แค่ไหน">
-        ทั้งหน้ามาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) และ<strong>ตรวจกับข้อมูลเราไม่ได้เลย</strong> —
+        ทั้งหน้ามาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. และอ่านซ้ำ 30 ก.ย. 2026) และ<strong>ตรวจกับข้อมูลเราไม่ได้เลย</strong> —
         มอนในดันเจี้ยนพวกนี้เป็นตัวเฉพาะอินสแตนซ์ (Cannibal Deniro, Deepsea Merman, Stormy Wraith ฯลฯ) ซึ่งไม่มีในตารางมอนของเราสักตัว ·
         ชื่อเดียวที่ตรงกันคือ Orc Skeleton แต่ในอินสแตนซ์เป็น <strong>lv60 HP 4,458</strong> ส่วนตัวข้างนอกที่เรามีคือ lv53 HP 3,376 —
         คนละตัวกัน · เป็นช่องว่างของฐานข้อมูลเรา ไม่ใช่ข้อผิดของไกด์ ชื่อมอนในหน้านี้จึงไม่มีลิงก์
