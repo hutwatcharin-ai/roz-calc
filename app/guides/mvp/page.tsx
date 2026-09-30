@@ -33,7 +33,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'ล่า MVP Ragnarok Zero — เข้า MVP Raid ยังไง ได้อะไร + แมพ PVP Hidden Realm',
   description:
-    'วิธีเข้า MVP Raid ใน Ragnarok Zero Global รับเควสที่ Eden Group เข้าประตูแดง ใครตีโดนก็ได้กล่อง · รายชื่อ MVP ที่เปิดแล้ว · กล่อง Subjugation, Energy Fragment, Blacksmith Blessing · แมพ PVP Hidden Realm ใช้กุญแจ EXP +10%',
+    'วิธีเข้า MVP Raid ใน Ragnarok Zero Global รับเควสที่ Eden Group เข้าประตูแดง ใครตีโดนก็ได้กล่อง · รายชื่อ MVP ที่เปิดแล้ว · กล่อง Subjugation, Energy Fragment, Blacksmith Blessing · แมพ PVP Hidden Realm ใช้กุญแจจาก Cash Shop EXP และดรอป +10%',
 };
 
 const CLOSED = (availability as { maps: Record<string, { when: string }> }).maps;
@@ -170,15 +170,18 @@ export default async function MvpGuidePage() {
       <section id="pvp" style={{ marginTop: 28, scrollMarginTop: 90 }}>
         <h2 className="section-title">แมพ PVP Hidden Realm</h2>
         <p style={{ marginTop: 6, maxWidth: '70ch' }}>
-          แมพเวอร์ชันเปิด PvP ของแมพปกติ {pvpCount} แมพ ต้องมี <strong>Hidden Realm Key</strong> แล้วคุยกับ{' '}
+          แมพเวอร์ชันเปิด PvP ของแมพปกติ {pvpCount} แมพ ต้องมี<strong>กุญแจ Key to the Hidden World</strong> ติดตัว แล้วคุยกับ{' '}
           <strong>Mysterious Guide</strong> (NPC ใส่หน้ากากยิ้ม ค้นชื่อใน Navigator ได้)
         </p>
         <ul style={{ margin: '8px 0 0', paddingInlineStart: 22 }}>
-          <li>ได้บัฟ <strong>EXP +10%</strong> อยู่ได้ 12 ชั่วโมง แต่ใช้ได้เฉพาะตอนอยู่ในแมพนี้ ออกจากแมพแล้วหาย</li>
+          <li>
+            <strong>กุญแจได้จาก Cash Shop</strong>{' '}
+            <Link href="/database/items/200888">Hidden World Key Gift Box</Link> 4,000 KP · ในกล่องเป็นกุญแจใช้ได้ 30 วัน ผูกกับตัวละคร
+          </li>
+          <li>กดใช้กุญแจได้บัฟ <strong>EXP +10% และดรอป +10%</strong> อยู่ได้ 12 ชั่วโมง แต่ใช้ได้เฉพาะตอนอยู่ในแมพนี้ ออกจากแมพแล้วหาย</li>
           <li>มอนเยอะขึ้นและเกิดเร็วขึ้น 1.5 เท่าของแมพปกติ</li>
           <li><strong>ทุกคนที่ไม่ใช่ปาร์ตี้ กิลด์ หรือพันธมิตรเป็นศัตรู</strong></li>
           <li>รีเซ็ตทุกวัน ทุกคนถูกส่งกลับแมพปกติ · หลุดหรือออกเกมแล้วเข้าใหม่จะกลับมาจุดเซฟ</li>
-          <li className="muted">ยังไม่รู้ว่ากุญแจได้จากไหน</li>
         </ul>
         {PVP_MAPS.map((g) => (
           <p key={g.group} style={{ marginTop: 10, marginBottom: 0, fontSize: 14 }}>
@@ -190,7 +193,7 @@ export default async function MvpGuidePage() {
 
       <Caveat label="เชื่อได้แค่ไหน">
         ขั้นตอนเข้า MVP Raid ประตูแดง ประตูเหลือง และใครได้กล่อง มาจากคลิปผู้เล่นเซิร์ฟ Global ·
-        รายชื่อ MVP และชื่อกล่องมาจากข้อมูลเกมในฐานข้อมูลเรา · แมพ PVP และส่วนที่เขียนว่ามาจากไต้หวัน
+        รายชื่อ MVP และชื่อกล่องมาจากข้อมูลเกมในฐานข้อมูลเรา · กุญแจและบัฟมาจากคำอธิบายไอเทมใน Cash Shop · รายชื่อแมพ PVP และส่วนที่เขียนว่ามาจากไต้หวัน
         มาจากไกด์ของ midgardhub ที่แปลจากแพตช์ไต้หวันเอง (อ่าน 30 ก.ย. 2026) · ถ้าในเกมไม่ตรงบอกได้
       </Caveat>
 

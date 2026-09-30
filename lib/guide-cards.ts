@@ -120,7 +120,7 @@ export const GUIDES = [
   {
     href: '/guides/mvp',
     title: 'ล่า MVP + แมพ PVP',
-    blurb: 'รับเควสที่ Eden Group เข้าประตูแดง ตีโดนนิดเดียวก็ได้กล่อง · MVP ที่เปิดแล้ว · ของที่ได้ · แมพ PVP Hidden Realm ใช้กุญแจ EXP +10%',
+    blurb: 'รับเควสที่ Eden Group เข้าประตูแดง ตีโดนนิดเดียวก็ได้กล่อง · MVP ที่เปิดแล้ว · ของที่ได้ · แมพ PVP Hidden Realm กุญแจจาก Cash Shop EXP และดรอป +10%',
   },
   {
     href: '/guides/woe',
