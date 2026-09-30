@@ -1,8 +1,10 @@
 // app/guides/item-sets/page.tsx
 //
-// Every item set and its bonus (owner, 30 Sep 2026). The same sets also show
-// on each piece's own page (components/InSetBox), which is where most
-// players meet a set; this page is for browsing and search.
+// Every item set and its bonus. Renamed "ไอเทมเซ็ต" by the owner on 30 Sep
+// 2026 (the word players use), and redesigned the same day: bonus first and
+// big, pieces one per line, kind chips instead of jump links. The same sets
+// also show on each piece's own page (components/InSetBox), which is where
+// most players meet a set; this page is for browsing and search.
 // Data: data/item-sets.json, see scripts/build-item-sets.mjs for sources.
 
 import type { Metadata } from 'next';
@@ -16,53 +18,43 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { ITEM_SETS, SET_KINDS } from '@/lib/item-sets';
 
 export const metadata: Metadata = {
-  title: 'ชุดไอเทม Ragnarok Zero — ใส่ครบชุดได้โบนัสอะไร (การ์ดคู่ ชุดกิลด์ ชุดดัน)',
+  title: 'ไอเทมเซ็ต Ragnarok Zero — ใส่ครบเซ็ตได้โบนัสอะไร (การ์ดคู่ เซ็ตกิลด์ เซ็ตดัน)',
   description:
-    'รวมชุดไอเทมและการ์ดคู่ใน Ragnarok Zero Global ใส่ครบแล้วได้โบนัสอะไร เช่น Wolf + Vagabond Wolf FLEE +18, ชุด Expedition, ชุดกิลด์, การ์ด Shibasays คู่ไข่สัตว์เลี้ยง และหินคอสตูม ค้นหาได้',
+    'รวมไอเทมเซ็ตและการ์ดคู่ใน Ragnarok Zero Global ใส่ครบแล้วได้โบนัสอะไร เช่น Wolf + Vagabond Wolf FLEE +18, เซ็ต Expedition, เซ็ตกิลด์, การ์ด Shibasays คู่ไข่สัตว์เลี้ยง และหินคอสตูม ค้นหาได้',
 };
 
 export default function ItemSetsPage() {
+  const groups = SET_KINDS.map((k) => ({ ...k, sets: ITEM_SETS.filter((s) => s.kind === k.kind) })).filter((g) => g.sets.length > 0);
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
           { name: 'ไกด์', path: '/guides' },
-          { name: 'ชุดไอเทม', path: '/guides/item-sets' },
+          { name: 'ไอเทมเซ็ต', path: '/guides/item-sets' },
         ])}
       />
-      <PageHeader title="ชุดไอเทม ใส่ครบได้อะไร" />
+      <PageHeader title="ไอเทมเซ็ต ใส่ครบได้อะไร" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 14, maxWidth: '70ch' }}>
-        {ITEM_SETS.length} ชุด · ใส่ของหรือการ์ดครบทุกชิ้นในชุดพร้อมกัน จะได้โบนัสเพิ่มจากผลของแต่ละชิ้น ·
-        หน้าของแต่ละชิ้นก็บอกด้วยว่าอยู่ในชุดไหน
-      </p>
-      <SetFilter />
-      <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-        ข้ามไป:{' '}
-        {SET_KINDS.map((k, i) => (
-          <span key={k.kind}>
-            {i > 0 && ' · '}
-            <a href={`#${k.kind}`}>{k.label}</a>
-          </span>
-        ))}
+        {ITEM_SETS.length} เซ็ต · ใส่ของหรือการ์ดให้ครบทุกชิ้นในเซ็ตพร้อมกัน จะได้โบนัสเพิ่มจากผลของแต่ละชิ้น ·
+        หน้าของแต่ละชิ้นก็บอกด้วยว่าอยู่ในเซ็ตไหน
       </p>
 
-      {SET_KINDS.map((k) => {
-        const sets = ITEM_SETS.filter((s) => s.kind === k.kind);
-        if (sets.length === 0) return null;
-        return (
-          <section key={k.kind} id={k.kind} className="isetgroup" style={{ marginTop: 24, scrollMarginTop: 90 }}>
-            <h2 className="section-title">{k.label} <span className="muted" style={{ fontWeight: 400 }}>· {sets.length} ชุด</span></h2>
-            <div className="isetgrid">
-              {sets.map((s) => <ItemSetCard key={s.name} set={s} />)}
-            </div>
-          </section>
-        );
-      })}
+      <SetFilter kinds={groups.map((g) => ({ kind: g.kind, label: g.label, count: g.sets.length }))} />
+
+      {groups.map((g) => (
+        <section key={g.kind} id={g.kind} className="isetgroup" style={{ marginTop: 20, scrollMarginTop: 90 }}>
+          <h2 className="section-title">{g.label} <span className="muted" style={{ fontWeight: 400 }}>· {g.sets.length} เซ็ต</span></h2>
+          <div className="isetgrid">
+            {g.sets.map((s) => <ItemSetCard key={s.name} set={s} />)}
+          </div>
+        </section>
+      ))}
 
       <Caveat label="เชื่อได้แค่ไหน">
-        รายชื่อชุดและชิ้นในชุดมาจาก rozerodb กับ prontera ซึ่งตรงกันทุกชุดที่ซ้อนกัน · สองชุดหมวก Nordfeld มีแค่ prontera
-        แต่คำอธิบายของ Gem Poring Card ในเกมเขียนโบนัสไว้เอง · ชุดหิน DEF กับ MDEF มาจากคำอธิบายหินในเกม ·
+        รายชื่อเซ็ตและชิ้นในเซ็ตมาจาก rozerodb กับ prontera ซึ่งตรงกันทุกเซ็ตที่ซ้อนกัน · สองเซ็ตหมวก Nordfeld มีแค่ prontera
+        แต่คำอธิบายของ Gem Poring Card ในเกมเขียนโบนัสไว้เอง · เซ็ตหิน DEF กับ MDEF มาจากคำอธิบายหินในเกม ·
         โบนัสเขียนเป็นภาษาไทยจากข้อความภาษาอังกฤษ ถ้าในเกมไม่ตรงบอกได้
       </Caveat>
 

@@ -1,13 +1,14 @@
 'use client';
 
-// Filters the set cards on /guides/item-sets as you type, by set name, piece
-// name or bonus. Hides cards with the `hidden` attribute; a group whose cards
-// are all hidden hides too.
+// Search box plus kind chips for /guides/item-sets. Both filter the server-
+// rendered cards in place (the `hidden` attribute), so the page works and is
+// crawlable without JavaScript; this only narrows it.
 
 import { useEffect, useState } from 'react';
 
-export default function SetFilter() {
+export default function SetFilter({ kinds }: { kinds: { kind: string; label: string; count: number }[] }) {
   const [q, setQ] = useState('');
+  const [kind, setKind] = useState<string>('all');
   const [shown, setShown] = useState<number | null>(null);
 
   useEffect(() => {
@@ -16,20 +17,35 @@ export default function SetFilter() {
     document.querySelectorAll<HTMLElement>('.isetgroup').forEach((group) => {
       let any = false;
       group.querySelectorAll<HTMLElement>('.iset').forEach((card) => {
-        const hit = !needle || (card.dataset.q ?? '').includes(needle);
+        const hit = (kind === 'all' || card.dataset.kind === kind) && (!needle || (card.dataset.q ?? '').includes(needle));
         card.hidden = !hit;
         if (hit) { any = true; n += 1; }
       });
       group.hidden = !any;
     });
-    setShown(needle ? n : null);
-  }, [q]);
+    setShown(needle || kind !== 'all' ? n : null);
+  }, [q, kind]);
+
+  const total = kinds.reduce((a, k) => a + k.count, 0);
 
   return (
-    <div className="field" style={{ maxWidth: 420 }}>
-      <label className="field__label" htmlFor="setq">ค้นชื่อชุด ชื่อการ์ด หรือโบนัส</label>
+    <div className="setfilter">
+      <label className="field__label" htmlFor="setq">ค้นชื่อไอเทม ชื่อการ์ด หรือค่าที่อยากได้</label>
       <input id="setq" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="เช่น Wolf Card หรือ FLEE" autoComplete="off" />
-      {shown !== null && <p className="muted" style={{ margin: '6px 0 0', fontSize: 13 }} aria-live="polite">เจอ {shown} ชุด</p>}
+      <div className="chips setfilter__chips" role="group" aria-label="เลือกหมวด">
+        {[{ kind: 'all', label: 'ทั้งหมด', count: total }, ...kinds].map((k) => (
+          <button
+            key={k.kind}
+            type="button"
+            className={'chip' + (kind === k.kind ? ' chip--on' : '')}
+            aria-pressed={kind === k.kind}
+            onClick={() => setKind(k.kind)}
+          >
+            {k.label} <span className="chip__count">{k.count}</span>
+          </button>
+        ))}
+      </div>
+      <p className="muted setfilter__count" aria-live="polite">{shown !== null ? (shown ? `เจอ ${shown} เซ็ต` : 'ไม่เจอเซ็ตที่ตรง ลองคำอื่น') : ' '}</p>
     </div>
   );
 }

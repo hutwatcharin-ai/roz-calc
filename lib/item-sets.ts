@@ -9,10 +9,10 @@ export interface ItemSet { name: string; kind: SetKind; pieces: SetPiece[]; bonu
 export const ITEM_SETS = (file as unknown as { sets: ItemSet[] }).sets;
 
 export const SET_KINDS: { kind: SetKind; label: string }[] = [
-  { kind: 'gear', label: 'ชุดอุปกรณ์' },
-  { kind: 'card', label: 'ชุดการ์ด' },
+  { kind: 'gear', label: 'เซ็ตอุปกรณ์' },
+  { kind: 'card', label: 'การ์ดคู่' },
   { kind: 'pet', label: 'การ์ดคู่ไข่สัตว์เลี้ยง' },
-  { kind: 'stone', label: 'ชุดหินคอสตูม' },
+  { kind: 'stone', label: 'เซ็ตหินคอสตูม' },
 ];
 
 const byPiece = new Map<number, ItemSet[]>();
