@@ -1,4 +1,5 @@
 // app/database/monsters/[id]/page.tsx
+import MonsterRing from '@/components/MonsterRing';
 import { mobThresholds } from '@/lib/monster-thresholds';
 import AdSlot from '@/components/AdSlot';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
@@ -236,9 +237,9 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         })}
       />
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+      <div className="monhead">
         {monster.image_url && (
-          <img src={monster.image_url} alt="" width={64} height={64} style={{ imageRendering: 'pixelated' }} />
+          <MonsterRing src={monster.image_url} element={monster.element} elementLevel={monster.element_level} />
         )}
         <div>
           <h1 className="pagehead__title">{monster.name_en}</h1>
