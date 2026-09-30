@@ -342,17 +342,25 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         ) : (droppedBy ?? []).length === 0 ? (
           <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปไอเทมนี้</p>
         ) : (
-          (droppedBy ?? []).map((d: any, i: number) => (
-            <div key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
-              <Link href={`/database/monsters/${d.monsters.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                {d.monsters.image_url && (
-                  <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                )}
-                {d.monsters.name_en}
-              </Link>
-              <span className="mono">{d.rate != null ? `${d.rate}%` : '?'}</span>
-            </div>
-          ))
+          // Cards with the sprite at its own shape and the rate as the big
+          // number (owner, 30 Sep 2026), the same read as the star-gear
+          // droppers; the old rows drew every sprite in a 20px square.
+          <ul className="dropgrid">
+            {(droppedBy ?? []).map((d: any, i: number) => (
+              <li key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined}>
+                <Link href={`/database/monsters/${d.monsters.id}`} className="dropcard">
+                  <span className="dropcard__art">
+                    {d.monsters.image_url && <img src={d.monsters.image_url} alt="" loading="lazy" />}
+                  </span>
+                  <span className="dropcard__name">
+                    {d.monsters.name_en}
+                    {d.monsters.level != null && <span className="dropcard__lv">Lv {d.monsters.level}</span>}
+                  </span>
+                  <span className="dropcard__rate">{d.rate != null ? `${d.rate}%` : '?'}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
       <div style={{ marginTop: 20 }}>

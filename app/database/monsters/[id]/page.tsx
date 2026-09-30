@@ -1,5 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import MonsterRing from '@/components/MonsterRing';
+import SpawnCards from '@/components/SpawnCards';
 import { mobThresholds } from '@/lib/monster-thresholds';
 import AdSlot from '@/components/AdSlot';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
@@ -456,21 +457,12 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             ) : (spawns ?? []).length === 0 ? (
               <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลจุดเกิด</p>
             ) : (
-              <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {spawnChips.map((c) => (
-                  <li key={c.code}>
-                    <Link
-                      href={`/database/maps/${encodeURIComponent(c.code)}`}
-                      className="chip"
-                      title={`${c.code}${c.channels > 0 ? ` · อีก ${c.channels} ช่อง` : ''}`}
-                    >
-                      {c.label}
-                      {c.amount != null && <span className="chip__count">×{c.amount}</span>}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <SpawnCards chips={spawnChips} />
             )}
+            <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 14 }}>
+              หาจุดฟาร์มอื่นที่เลเวลใกล้กัน:{' '}
+              <Link href={`/tools/leveling-spots?level=${monster.level}`}>ฟาร์มที่ไหนดี เลเวล {monster.level}</Link>
+            </p>
           </div>
 
           {/* Skills are the secondary read (user, 7 Sep). Folded unless one
