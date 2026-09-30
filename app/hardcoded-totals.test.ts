@@ -24,6 +24,7 @@ const CLAIM = new RegExp(String.raw`\d[\d,]{1,}\s*(?:${UNITS.join('|')})`, 'g');
  * describes what is in the database now, it belongs in lib/counts.
  */
 const ALLOWED: { file: string; text: string; why: string }[] = [
+  { file: 'app/guides/memorial-dungeons/page.tsx', text: '50 ชิ้น', why: 'Jellopy cost of one headgear enchant, a game price quoted from the guide' },
   {
     file: 'app/guides/faq/page.tsx',
     text: '10 ใบ',
