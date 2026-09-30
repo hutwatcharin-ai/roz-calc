@@ -8,8 +8,96 @@ import { CREATE_DEADLY_POISON, recipesOfSkill } from '@/lib/crafting';
 export const metadata = {
   title: 'วิธีทำยา Alchemist และขวดพิษ Assassin — สูตร Ragnarok Zero',
   description:
-    'วิธีปรุงยา Alchemist ด้วย Prepare Potion ใน Ragnarok Zero Global เตรียม Mortar Bowl ตำรา และวัตถุดิบ พร้อมสูตรยาฟื้น ไอเทมเคมี Slim Potion ยาต้านธาตุ และสูตร Poison Bottle ของ Assassin (Create Deadly Poison)',
+    'วิธีปรุงยา Alchemist ด้วย Prepare Potion ใน Ragnarok Zero Global เตรียม Mortar Bowl ตำรา และวัตถุดิบ พร้อมสูตรยาฟื้น ไอเทมเคมี Slim Potion ยาต้านธาตุ และสูตร Poison Bottle ของ Assassin (Create Deadly Poison) · ทำ Counteragent Mixture และสีย้อม 8 สีกับ NPC',
 };
+
+// The NPC-made solutions and dyes (owner, 30 Sep 2026). Steps and amounts
+// from rozerodb's Alchemy Lab guide, which says its numbers follow the classic
+// RateMyServer quest pages and its NPC screenshots are from Global -- so the
+// NPCs are seen on Global and the amounts are classic RO's. Rewritten here,
+// not quoted. The "made into" column is ours: the hat quests that take each
+// dye, from data/crafting-recipes.json.
+type Mat = { id: number; name: string; amount: number };
+const I = (id: number, name: string, amount = 1): Mat => ({ id, name, amount });
+const ALCOHOL = I(970, 'Alcohol');
+const BOTTLE = I(713, 'Empty Bottle');
+const COUNTER = I(973, 'Counteragent');
+const MIXTURE = I(974, 'Mixture');
+
+const UNLOCK = [
+  { who: 'Merchant Louitz', map: 'alberta_in', x: 130, y: 54, what: 'บ้านหลังใหญ่ทางเหนือของ Alberta ชั้นบน ห้องสุดทางเดิน · ต้องพก Alcohol, Detrimindexta และ Karvodailnirol อย่างละ 1 ติดตัว (ไม่ถูกใช้) เขาจะส่งไปหาคนต่อไป' },
+  { who: 'Aure Dupon', map: 'geffen', x: 181, y: 114, what: 'ฝั่งตะวันออกของ Geffen ใต้เสาไฟ · ถามเรื่อง Morgenstein' },
+  { who: 'Morgenstein', map: 'geffen_in', x: 141, y: 140, what: 'ชั้น 2 ตึกกิลด์ช่างตีเหล็กเก่า · ถามเรื่องงานวิจัยก่อน แล้วคุยอีกครั้งเพื่อทำน้ำยา' },
+];
+
+const SOLUTIONS = [
+  { out: COUNTER, zeny: 3000, mats: [ALCOHOL, I(971, 'Detrimindexta'), BOTTLE] },
+  { out: MIXTURE, zeny: 4000, mats: [ALCOHOL, I(972, 'Karvodailnirol'), BOTTLE] },
+];
+
+const RED = 507, YELLOW = 508, WHITE = 509, BLUE = 510, GREEN = 511;
+const HATS: Record<number, { id: number; name: string }[]> = {
+  975: [{ id: 5047, name: 'Fashionable Glasses' }, { id: 5444, name: 'Hair Brush' }, { id: 5039, name: 'Rainbow Eggshell' }, { id: 5077, name: 'Tulip Hairpin' }],
+  976: [{ id: 5039, name: 'Rainbow Eggshell' }],
+  978: [{ id: 5052, name: 'Blue Hairband' }, { id: 5039, name: 'Rainbow Eggshell' }, { id: 5049, name: 'Striped Hairband' }],
+  982: [{ id: 5026, name: 'Chef Hat' }],
+};
+const DYES = [
+  { out: I(975, 'Scarlet Dyestuffs'), zeny: 3000, mats: [I(RED, 'Red Herb', 30), COUNTER, BOTTLE] },
+  { out: I(976, 'Lemon Dyestuffs'), zeny: 3000, mats: [I(YELLOW, 'Yellow Herb', 30), COUNTER, BOTTLE] },
+  { out: I(978, 'Cobaltblue Dyestuffs'), zeny: 3500, mats: [I(BLUE, 'Blue Herb', 20), COUNTER, BOTTLE] },
+  { out: I(982, 'White Dyestuffs'), zeny: 3000, mats: [I(WHITE, 'White Herb', 30), COUNTER, BOTTLE] },
+  { out: I(979, 'Darkgreen Dyestuffs'), zeny: 5000, mats: [I(BLUE, 'Blue Herb', 5), I(GREEN, 'Green Herb', 20), I(YELLOW, 'Yellow Herb', 20), COUNTER, MIXTURE, BOTTLE] },
+  { out: I(980, 'Orange Dyestuffs'), zeny: 5000, mats: [I(RED, 'Red Herb', 20), I(YELLOW, 'Yellow Herb', 20), COUNTER, MIXTURE, BOTTLE] },
+  { out: I(981, 'Violet Dyestuffs'), zeny: 5000, mats: [I(BLUE, 'Blue Herb', 10), I(RED, 'Red Herb', 30), COUNTER, MIXTURE, BOTTLE] },
+  { out: I(983, 'Black Dyestuffs'), zeny: 7000, mats: [I(RED, 'Red Herb', 30), I(YELLOW, 'Yellow Herb', 30), I(GREEN, 'Green Herb', 30), I(BLUE, 'Blue Herb', 5), COUNTER, MIXTURE, BOTTLE] },
+];
+
+function ItemChip({ m, href }: { m: Mat; href?: string }) {
+  return (
+    <Link className="recipe__item" href={href ?? `/database/items/${m.id}`}>
+      <img src={`/images/items/${m.id}.gif`} alt="" width={18} height={18} style={{ imageRendering: 'pixelated' }} />
+      <span>{m.amount > 1 ? `${m.name} ×${m.amount}` : m.name}</span>
+    </Link>
+  );
+}
+
+function CraftTable({ rows, withHats }: { rows: { out: Mat; zeny: number; mats: Mat[] }[]; withHats?: boolean }) {
+  return (
+    <div className="recipe__scroll">
+      <table className="data-table recipe">
+        <thead>
+          <tr>
+            <th>ได้</th>
+            <th>ใช้</th>
+            <th className="num">ค่าทำ</th>
+            {withHats && <th>เอาไปทำหมวก</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.out.id}>
+              <td data-label="ได้"><ItemChip m={r.out} /></td>
+              <td data-label="ใช้"><span className="recipe__list">{r.mats.map((m) => <ItemChip key={m.id} m={m} />)}</span></td>
+              <td data-label="ค่าทำ" className="num">{r.zeny.toLocaleString('en-US')}z</td>
+              {withHats && (
+                <td data-label="เอาไปทำหมวก">
+                  {HATS[r.out.id] ? (
+                    <span className="recipe__list">
+                      {HATS[r.out.id].map((h) => <ItemChip key={h.id} m={{ ...h, amount: 1 }} href={`/database/equipment/${h.id}`} />)}
+                    </span>
+                  ) : (
+                    <span className="muted">—</span>
+                  )}
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export default function PotionCraftingGuidePage() {
   return (
@@ -90,6 +178,37 @@ export default function PotionCraftingGuidePage() {
           </li>
           <li>ยังไม่มีข้อมูลอัตราสำเร็จของ Create Deadly Poison ในเซิร์ฟนี้ ลองทำจำนวนน้อยก่อนเตรียมวัตถุดิบล็อตใหญ่</li>
         </ul>
+      </section>
+
+      <section id="alchemy-lab" style={{ marginTop: 28, scrollMarginTop: 90 }}>
+        <h2 className="section-title">น้ำยาและสีย้อม ทำกับ NPC ไม่ต้องมีสกิล</h2>
+        <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
+          อาชีพไหนก็ทำได้ · <strong>Counteragent</strong> กับ <strong>Mixture</strong> เป็นน้ำยาที่ใช้ทำสีย้อมและเควสหมวกบางใบ ·
+          สีย้อมเอาไปแลกหมวกได้ ดูคอลัมน์ขวาสุด
+        </p>
+
+        <h3 className="section-title" style={{ fontSize: 15, marginTop: 14 }}>1. ปลดทำน้ำยา (ทำครั้งเดียว)</h3>
+        <ol style={{ margin: 0, paddingInlineStart: 22 }}>
+          {UNLOCK.map((u) => (
+            <li key={u.who} style={{ marginBottom: 6 }}>
+              <strong>{u.who}</strong> <code className="mono navicmd">/navi {u.map} {u.x}/{u.y}</code>
+              <br />
+              <span className="muted">{u.what}</span>
+            </li>
+          ))}
+        </ol>
+
+        <h3 className="section-title" style={{ fontSize: 15, marginTop: 16 }}>2. ทำน้ำยากับ Morgenstein</h3>
+        <CraftTable rows={SOLUTIONS} />
+
+        <h3 className="section-title" style={{ fontSize: 15, marginTop: 16 }}>3. ทำสีย้อมกับ JavaDullihan</h3>
+        <p className="muted" style={{ marginTop: 4 }}>
+          อยู่ในตึกมุมขวาบนของ Morroc ห้องทางขวา <code className="mono navicmd">/navi morocc_in 146/99</code> · ไม่ต้องปลดก่อน แต่สีส่วนใหญ่ต้องใช้น้ำยาจากข้อ 2
+        </p>
+        <CraftTable rows={DYES} withHats />
+        <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
+          NPC ทั้งหมดมีในเซิร์ฟ Global · จำนวนวัตถุดิบและค่าทำเป็นตัวเลขของ RO คลาสสิก ยังไม่มีใครยืนยันกับเซิร์ฟนี้ ถ้าในเกมไม่ตรงบอกได้
+        </p>
       </section>
 
       <p className="source-note" style={{ marginTop: 16 }}>

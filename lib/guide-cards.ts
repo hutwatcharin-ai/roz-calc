@@ -15,7 +15,7 @@ export const GUIDES = [
   {
     href: '/guides/potion-crafting',
     title: 'วิธีทำยา Alchemist และขวดพิษ Assassin',
-    blurb: 'เตรียมสกิล ตำรา Mortar Bowl และวัตถุดิบให้ครบ พร้อมตารางสูตรยาและไอเทมเคมีที่ใช้บ่อย · สูตร Poison Bottle ของ Assassin',
+    blurb: 'เตรียมสกิล ตำรา Mortar Bowl และวัตถุดิบให้ครบ พร้อมตารางสูตรยาและไอเทมเคมีที่ใช้บ่อย · สูตร Poison Bottle ของ Assassin · ทำน้ำยาและสีย้อมกับ NPC',
   },
   {
     href: '/guides/forging',
