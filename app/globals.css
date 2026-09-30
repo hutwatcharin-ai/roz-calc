@@ -3700,3 +3700,7 @@ a.iset__piece:hover, a.iset__piece:focus-visible { background: color-mix(in srgb
 .mddays p { margin: 0; font-size: 14px; }
 .mdmobs { margin-top: 14px; }
 .mdmobs > summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; color: var(--cyan); font-weight: 600; }
+
+/* /guides/vending steps. */
+.vendsteps { margin: 0; padding-inline-start: 22px; font-size: 15px; line-height: 1.65; }
+.vendsteps li + li { margin-top: 8px; }
