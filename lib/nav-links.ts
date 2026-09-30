@@ -106,6 +106,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/social', label: 'รีเซ็ตสเตตัส แคลน แต่งงาน', icon: '/images/items/2635.gif', ready: true, group: 'ระบบในเกม' },
     { href: '/guides/guild', label: 'ไอเทมกิลด์', icon: '/images/items/25630.gif', ready: true, group: 'ระบบในเกม' },
+    { href: '/guides/mvp', label: 'ล่า MVP + แมพ PVP', icon: '/images/items/7020.gif', ready: true, group: 'ระบบในเกม' },
     { href: '/guides/woe', label: 'สงครามกิลด์ (WoE)', icon: '/images/items/714.gif', ready: true, group: 'ระบบในเกม' },
     { href: '/guides/homunculus', label: 'โฮมุนคูลัส', icon: '/images/items/7142.gif', ready: true, group: 'ระบบในเกม' },
   ],

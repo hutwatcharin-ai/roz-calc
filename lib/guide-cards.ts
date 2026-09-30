@@ -108,6 +108,11 @@ export const GUIDES = [
     blurb: 'โล่ Guild Parma จากอีเวนต์ (ATK/MATK/EXP +5%) · ไฟกิลด์ 4 สี · แต้มเกียรติยศ · รูปปั้นอัปเลเวลกิลด์ · เหรียญดันเจี้ยนกิลด์',
   },
   {
+    href: '/guides/mvp',
+    title: 'ล่า MVP + แมพ PVP',
+    blurb: 'รับเควสที่ Eden Group เข้าประตูแดง ตีโดนนิดเดียวก็ได้กล่อง · MVP ที่เปิดแล้ว · ของที่ได้ · แมพ PVP Hidden Realm ใช้กุญแจ EXP +10%',
+  },
+  {
     href: '/guides/woe',
     title: 'สงครามกิลด์ (WoE)',
     blurb: 'ยาที่ใช้ไม่ได้ในเขตสงคราม · ยาเฉพาะ WoE · สกรอล Force/Resist · ชุดสมาชิกกิลด์ที่ค่าโผล่เฉพาะในเขต WoE',
