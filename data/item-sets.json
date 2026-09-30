@@ -1,0 +1,1268 @@
+{
+  "_meta": {
+    "what": "Item sets: wear every piece to get the bonus. Thai bonus lines written in scripts/build-item-sets.mjs.",
+    "sources": "rozerodb Item Sets (docs/rozerodb-export) + prontera Item Sets (read 2026-09-30) + item text for the Gem Poring Card and MDEF Stone (Lower)",
+    "regenerate": "node scripts/build-item-sets.mjs"
+  },
+  "sets": [
+    {
+      "name": "Advanced Guild Set (Plate Armor)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 450014,
+          "name": "Advanced Guild Member's Plate",
+          "category": "Armor"
+        },
+        {
+          "id": 480008,
+          "name": "Advanced Guild Member's Manteau",
+          "category": "Armor"
+        },
+        {
+          "id": 470013,
+          "name": "Advanced Guild Member's Greaves",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ในเขตสงครามกิลด์: HP +2000 · รับดาเมจจากผู้เล่น −9%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Advanced Guild Set (Robe)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 470011,
+          "name": "Advanced Guild Member's Shoes",
+          "category": "Armor"
+        },
+        {
+          "id": 450012,
+          "name": "Advanced Guild Member's Robe",
+          "category": "Armor"
+        },
+        {
+          "id": 480007,
+          "name": "Advanced Guild Member's Muffler",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ในเขตสงครามกิลด์: HP +1600 · รับดาเมจจากผู้เล่น −7%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Advanced Guild Set (Suit)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 480008,
+          "name": "Advanced Guild Member's Manteau",
+          "category": "Armor"
+        },
+        {
+          "id": 450013,
+          "name": "Advanced Guild Member's Suit",
+          "category": "Armor"
+        },
+        {
+          "id": 470012,
+          "name": "Advanced Guild Member's Boots",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ในเขตสงครามกิลด์: HP +1800 · รับดาเมจจากผู้เล่น −8%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Ancient Mummy & Mummy Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4248,
+          "name": "Ancient Mummy Card",
+          "category": "Card"
+        },
+        {
+          "id": 4106,
+          "name": "Mummy Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "Perfect Hit +20",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Basic Guild Set (Plate Armor)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 22148,
+          "name": "Lesser Guild Member's Greaves",
+          "category": "Armor"
+        },
+        {
+          "id": 20864,
+          "name": "Lesser Guild Member's Manteau",
+          "category": "Armor"
+        },
+        {
+          "id": 15218,
+          "name": "Lesser Guild Member's Plate",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ในเขตสงครามกิลด์: HP +900 · รับดาเมจจากผู้เล่น −8%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Basic Guild Set (Robe)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 22146,
+          "name": "Lesser Guild Member's Shoes",
+          "category": "Armor"
+        },
+        {
+          "id": 20865,
+          "name": "Lesser Guild Member's Muffler",
+          "category": "Armor"
+        },
+        {
+          "id": 15216,
+          "name": "Basic Guild Robe",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ในเขตสงครามกิลด์: HP +700 · รับดาเมจจากผู้เล่น −6%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Basic Guild Set (Suit)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 20864,
+          "name": "Lesser Guild Member's Manteau",
+          "category": "Armor"
+        },
+        {
+          "id": 22147,
+          "name": "Lesser Guild Member's Boots",
+          "category": "Armor"
+        },
+        {
+          "id": 15217,
+          "name": "Lesser Guild Member's Suit",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ในเขตสงครามกิลด์: HP +800 · รับดาเมจจากผู้เล่น −7%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Cramp & Tarou Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4296,
+          "name": "Cramp Card",
+          "category": "Card"
+        },
+        {
+          "id": 4028,
+          "name": "Tarou Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "STR +3",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Critical Stones (Upper, Middle & Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25060,
+          "name": "Critical Stone (Middle)",
+          "category": "Enchantment"
+        },
+        {
+          "id": 25304,
+          "name": "Critical Stone (Upper)",
+          "category": "Special"
+        },
+        {
+          "id": 25305,
+          "name": "Critical Stone (Lower)",
+          "category": "Special"
+        }
+      ],
+      "bonus": "ดาเมจคริ +6%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Critical Stones (Upper, Middle, Lower & Garment)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25304,
+          "name": "Critical Stone (Upper)",
+          "category": "Special"
+        },
+        {
+          "id": 25303,
+          "name": "Critical Stone (Garment)",
+          "category": "Enchantment"
+        },
+        {
+          "id": 25305,
+          "name": "Critical Stone (Lower)",
+          "category": "Special"
+        },
+        {
+          "id": 25060,
+          "name": "Critical Stone (Middle)",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "CRIT +10",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Dark Lord & Dark Illusion Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4169,
+          "name": "Dark Illusion Card",
+          "category": "Card"
+        },
+        {
+          "id": 4168,
+          "name": "Dark Lord Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "MaxHP +20% · MaxSP +20%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "DEF Stone (Middle) & MDEF Stone (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25001,
+          "name": "DEF Stone (Middle)",
+          "category": "Enchantment"
+        },
+        {
+          "id": 25014,
+          "name": "MDEF Stone (Lower)",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "HIT +5 · FLEE +5",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Dragon Fly & Chonchon Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4179,
+          "name": "Dragon Fly Card",
+          "category": "Card"
+        },
+        {
+          "id": 4009,
+          "name": "Chonchon Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "FLEE +18",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Eclipse & Lunatic Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4266,
+          "name": "Eclipse Card",
+          "category": "Card"
+        },
+        {
+          "id": 4006,
+          "name": "Lunatic Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "FLEE +18",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Erzsebet & Bathory Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 27271,
+          "name": "Erzsebet Card",
+          "category": "Card"
+        },
+        {
+          "id": 4119,
+          "name": "Bathory Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "INT +1 ต่อขั้นตีบวก",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Expedition Set (Magic)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 22152,
+          "name": "Expedition's Shoes",
+          "category": "Armor"
+        },
+        {
+          "id": 28541,
+          "name": "Expedition's Magic Ring",
+          "category": "Armor"
+        },
+        {
+          "id": 20869,
+          "name": "Expedition's Muffler",
+          "category": "Armor"
+        },
+        {
+          "id": 15222,
+          "name": "Expedition's Robe",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "MATK +20 · ร่ายแปรผัน −5% · ร่ายคงที่ −5%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Expedition Set (Physical)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 20868,
+          "name": "Expedition's Manteau",
+          "category": "Armor"
+        },
+        {
+          "id": 15221,
+          "name": "Expedition's Armor",
+          "category": "Armor"
+        },
+        {
+          "id": 28540,
+          "name": "Expedition's Ring",
+          "category": "Armor"
+        },
+        {
+          "id": 22151,
+          "name": "Expedition's Boots",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ATK +20 · ร่ายคงที่ −5% · ดีเลย์หลังโจมตี −5%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Extra Joker & Joker Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4139,
+          "name": "Joker Card",
+          "category": "Card"
+        },
+        {
+          "id": 27270,
+          "name": "Extra Joker Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีหรือร่ายเวทมีโอกาสแปลงร่างเป็น Joker 7 วินาที ระหว่างนั้น ATK +70 MATK +70 แต่เสีย HP 77 และ SP 7 ทุกวินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Fei-chai & Morroc Card + Fei-chai Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314784,
+          "name": "Fei-Chai Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300550,
+          "name": "Fei-Chai & Morroc Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ดีเลย์หลังโจมตี −5%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Fei-chai & Morroc Card + Fei-chai Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300550,
+          "name": "Fei-Chai & Morroc Card",
+          "category": "Card"
+        },
+        {
+          "id": 300735,
+          "name": "Fei-Chai Egg Lv.2",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "ดีเลย์หลังโจมตี −10%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Injustice & Zealotus Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4277,
+          "name": "Zealotus Card",
+          "category": "Card"
+        },
+        {
+          "id": 4268,
+          "name": "Injustice Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ATK +20 · LUK +3",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Jeniffer & Penomena Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4314,
+          "name": "Penomena Card",
+          "category": "Card"
+        },
+        {
+          "id": 27272,
+          "name": "Jennifer Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ASPD +1 ทุก 2 ขั้นตีบวก",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Mastering & Poring Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4197,
+          "name": "Mastering Card",
+          "category": "Card"
+        },
+        {
+          "id": 4001,
+          "name": "Poring Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "FLEE +18",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Merman, Cruiser, Anolian, Alligator & Dragon Tail Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4252,
+          "name": "Alligator Card",
+          "category": "Card"
+        },
+        {
+          "id": 4178,
+          "name": "Dragon Tail Card",
+          "category": "Card"
+        },
+        {
+          "id": 4199,
+          "name": "Merman Card",
+          "category": "Card"
+        },
+        {
+          "id": 4234,
+          "name": "Anolian Card",
+          "category": "Card"
+        },
+        {
+          "id": 4297,
+          "name": "Cruiser Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "DEX +3 · AGI +5 · ดาเมจระยะไกล +20% · Perfect Hit +20 · Bard: ตีกายภาพมีโอกาสทำให้มอนเผ่า Brute โคม่า · Sniper: EXP +5% จากมอนเผ่า Brute",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Nordfeld Onyx Helm & Gem Poring Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 401509,
+          "name": "Nordfeld Onyx Helm",
+          "category": "Armor"
+        },
+        {
+          "id": 300938,
+          "name": "Gem Poring Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ATK +1 และ MATK +1 ต่อขั้นตีบวกของหมวก",
+      "sources": [
+        "prontera",
+        "item text"
+      ]
+    },
+    {
+      "name": "Nordfeld Platinum Helm & Gem Poring Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 401510,
+          "name": "Nordfeld Platinum Helm",
+          "category": "Armor"
+        },
+        {
+          "id": 300938,
+          "name": "Gem Poring Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ATK +1 และ MATK +1 ต่อขั้นตีบวกของหมวก",
+      "sources": [
+        "prontera",
+        "item text"
+      ]
+    },
+    {
+      "name": "Orc Archer Bow & Steel Arrow",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 1734,
+          "name": "Orc Archer Bow",
+          "category": "Weapon"
+        },
+        {
+          "id": 1753,
+          "name": "Steel Arrow",
+          "category": "Weapon"
+        }
+      ],
+      "bonus": "ดาเมจระยะไกล +50%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Orc General & High Orc Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4322,
+          "name": "High Orc Card",
+          "category": "Card"
+        },
+        {
+          "id": 27273,
+          "name": "Orc General Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ASPD +2 · ATK +25",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Owl Duke & Owl Baron Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4237,
+          "name": "Owl Duke Card",
+          "category": "Card"
+        },
+        {
+          "id": 4238,
+          "name": "Owl Baron Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีกายภาพมีโอกาสร่าย Lightning Bolt Lv 5 เอง",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Picky Poring Card & Criatura Academy Hat",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 18730,
+          "name": "Criatura Academy Hat",
+          "category": "Armor"
+        },
+        {
+          "id": 4545,
+          "name": "Novice Poring Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ATK +5 · MATK +5",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Pocket Watch Headgear & Alarm Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 4244,
+          "name": "Alarm Card",
+          "category": "Card"
+        },
+        {
+          "id": 19334,
+          "name": "Pocket Watch Ornament",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "MaxHP +1000",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Pocket Watch Headgear & Clock Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 19334,
+          "name": "Pocket Watch Ornament",
+          "category": "Armor"
+        },
+        {
+          "id": 4299,
+          "name": "Clock Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "MaxSP +100 · DEF +20",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Prisoner's Diary & Prisoner's Uniform",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 28619,
+          "name": "Prisoner's Diary",
+          "category": "Weapon"
+        },
+        {
+          "id": 15040,
+          "name": "Prison Uniform",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ตีปกติมีโอกาสเล็กน้อยได้ CRIT +30% นาน 6 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Beach City Card + Fei-chai Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314784,
+          "name": "Fei-Chai Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300741,
+          "name": "Shibasays × Beach City Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "Blitz Beat มีโอกาสต่ำได้ LUK +60 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Beach City Card + Fei-chai Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300741,
+          "name": "Shibasays × Beach City Card",
+          "category": "Card"
+        },
+        {
+          "id": 300735,
+          "name": "Fei-Chai Egg Lv.2",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "Blitz Beat มีโอกาสสูงได้ LUK +60 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Beach City Card + Tai-zi Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314783,
+          "name": "Tai-zi Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300741,
+          "name": "Shibasays × Beach City Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "Blitz Beat มีโอกาสต่ำได้ LUK +60 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Beach City Card + Tai-zi Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300741,
+          "name": "Shibasays × Beach City Card",
+          "category": "Card"
+        },
+        {
+          "id": 314785,
+          "name": "Tai-Zi Egg Lv.2",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "Blitz Beat มีโอกาสสูงได้ LUK +60 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Border City Card + Fei-chai Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314784,
+          "name": "Fei-Chai Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300740,
+          "name": "Shibasays × Border City Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีกายภาพมีโอกาสต่ำได้ ATK +60 นาน 3 วินาที แต่เสีย HP 50 ต่อวินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Border City Card + Fei-chai Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300735,
+          "name": "Fei-Chai Egg Lv.2",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300740,
+          "name": "Shibasays × Border City Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีกายภาพมีโอกาสสูงได้ ATK +60 นาน 3 วินาที แต่เสีย HP 50 ต่อวินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Border City Card + Tai-zi Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314783,
+          "name": "Tai-zi Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300740,
+          "name": "Shibasays × Border City Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีกายภาพมีโอกาสต่ำได้ ATK +60 นาน 3 วินาที แต่เสีย HP 50 ต่อวินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Border City Card + Tai-zi Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314785,
+          "name": "Tai-Zi Egg Lv.2",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300740,
+          "name": "Shibasays × Border City Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีกายภาพมีโอกาสสูงได้ ATK +60 นาน 3 วินาที แต่เสีย HP 50 ต่อวินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Glast Heim Card + Fei-chai Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314784,
+          "name": "Fei-Chai Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300742,
+          "name": "Shibasays × Glast Heim Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีหรือร่ายเวทมีโอกาสต่ำได้ ATK +40 และ MATK +40 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Glast Heim Card + Fei-chai Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300735,
+          "name": "Fei-Chai Egg Lv.2",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300742,
+          "name": "Shibasays × Glast Heim Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีหรือร่ายเวทมีโอกาสสูงได้ ATK +40 และ MATK +40 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Glast Heim Card + Tai-zi Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 314783,
+          "name": "Tai-zi Egg Lv.1",
+          "category": "Enchantment"
+        },
+        {
+          "id": 300742,
+          "name": "Shibasays × Glast Heim Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "ตีหรือร่ายเวทมีโอกาสต่ำได้ ATK +40 และ MATK +40 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Glast Heim Card + Tai-zi Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300742,
+          "name": "Shibasays × Glast Heim Card",
+          "category": "Card"
+        },
+        {
+          "id": 314785,
+          "name": "Tai-Zi Egg Lv.2",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "ตีหรือร่ายเวทมีโอกาสสูงได้ ATK +40 และ MATK +40 นาน 3 วินาที",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Mountain City Card + Tai-zi Egg Lv.1",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300737,
+          "name": "Shibasays × Mountain City Card",
+          "category": "Card"
+        },
+        {
+          "id": 314783,
+          "name": "Tai-zi Egg Lv.1",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "ดาเมจคริ +9%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Shibasays × Mountain City Card + Tai-zi Egg Lv.2",
+      "kind": "pet",
+      "pieces": [
+        {
+          "id": 300737,
+          "name": "Shibasays × Mountain City Card",
+          "category": "Card"
+        },
+        {
+          "id": 314785,
+          "name": "Tai-Zi Egg Lv.2",
+          "category": "Enchantment"
+        }
+      ],
+      "bonus": "ดาเมจคริ +18%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Sieglouse & Arclouse Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 27274,
+          "name": "Sieglouse Card",
+          "category": "Card"
+        },
+        {
+          "id": 4240,
+          "name": "Arclouse Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "FLEE +2 ต่อขั้นตีบวก",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Skel Prisoner & Skeleton Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4222,
+          "name": "Skel Prisoner Card",
+          "category": "Card"
+        },
+        {
+          "id": 4025,
+          "name": "Skeleton Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "โดนตีกายภาพแล้วมีโอกาสทำให้ศัตรูหลับสูงขึ้นมาก",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Subjugation Team's Set",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 20867,
+          "name": "Subjugation Team’s Shoulder Belt",
+          "category": "Armor"
+        },
+        {
+          "id": 28539,
+          "name": "Subjugation Team's Ring",
+          "category": "Armor"
+        },
+        {
+          "id": 22150,
+          "name": "Subjugation Team's Boots",
+          "category": "Armor"
+        },
+        {
+          "id": 15220,
+          "name": "Subjugation Team's Armor",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ATK +15 · MATK +15 · ดีเลย์หลังโจมตี −3% · ร่ายแปรผัน −5%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Tower Keeper, Alarm, Clock & Punk Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4299,
+          "name": "Clock Card",
+          "category": "Card"
+        },
+        {
+          "id": 4229,
+          "name": "Tower Keeper Card",
+          "category": "Card"
+        },
+        {
+          "id": 4313,
+          "name": "Punk Card",
+          "category": "Card"
+        },
+        {
+          "id": 4244,
+          "name": "Alarm Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "DEF +3 · MDEF +3",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Tower Keeper's Income & Tower Keeper Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 4229,
+          "name": "Tower Keeper Card",
+          "category": "Card"
+        },
+        {
+          "id": 19333,
+          "name": "Clock Tower Manager Hat",
+          "category": "Armor"
+        }
+      ],
+      "bonus": "ร่ายแปรผัน −15%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Vagabond Wolf & Wolf Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4029,
+          "name": "Wolf Card",
+          "category": "Card"
+        },
+        {
+          "id": 4183,
+          "name": "Vagabond Wolf Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "FLEE +18",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Variable Casting Stones (Upper, Middle & Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25173,
+          "name": "Variable Casting Stone (Middle)",
+          "category": "Special"
+        },
+        {
+          "id": 25172,
+          "name": "Variable Casting Stone (Upper)",
+          "category": "Special"
+        },
+        {
+          "id": 25174,
+          "name": "Variable Casting Stone (Lower)",
+          "category": "Special"
+        }
+      ],
+      "bonus": "ร่ายแปรผัน −6%",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    },
+    {
+      "name": "Vocal & Rocker Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4021,
+          "name": "Rocker Card",
+          "category": "Card"
+        },
+        {
+          "id": 4211,
+          "name": "Vocal Card",
+          "category": "Card"
+        }
+      ],
+      "bonus": "FLEE +18",
+      "sources": [
+        "rozerodb",
+        "prontera"
+      ]
+    }
+  ]
+}

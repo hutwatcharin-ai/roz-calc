@@ -25,6 +25,7 @@ import { gameThaiDescription } from '@/lib/game-items';
 import { randomOptionsFor } from '@/lib/random-options';
 import { cardSlotForGearType } from '@/lib/card-slot';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
+import InSetBox from '@/components/InSetBox';
 import { starTwinOf } from '@/lib/star-twins';
 import type { GearExtras } from '@/lib/gear-detail';
 
@@ -176,6 +177,7 @@ export default function GearDetail({
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 12 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
       )}
+      <InSetBox itemId={item.id} />
       <ItemGuideRefs itemId={item.id} />
 
       <div className="statgrid" style={{ marginTop: 16 }}>

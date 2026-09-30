@@ -3648,3 +3648,14 @@ html.cguide-showsrc .cguide__src { display: block; }
 .spr__special li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
 .spr__special strong, .spr__special span { display: block; }
 .spr__special span { font-size: 13.5px; line-height: 1.5; }
+
+/* Item sets (/guides/item-sets and the InSetBox on item pages). */
+.isetgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; margin-top: 10px; }
+.iset { padding: 10px 12px; border: 1px solid var(--hair); border-radius: 10px; background: var(--panel); }
+.iset[hidden], .isetgroup[hidden] { display: none; }
+.card .iset + .iset { margin-top: 8px; }
+.iset__name { margin: 0 0 6px; font-weight: 700; color: var(--text); }
+.iset__bonus { margin: 8px 0 0; font-size: 14px; color: var(--dim); }
+.iset__bonus strong { color: var(--text); }
+.iset__here { opacity: 0.75; }
+@media (max-width: 400px) { .isetgrid { grid-template-columns: 1fr; } }

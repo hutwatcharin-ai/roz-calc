@@ -6,6 +6,7 @@ import ItemCrafting from '@/components/ItemCrafting';
 import ItemShops from '@/components/ItemShops';
 import ItemQuests from '@/components/ItemQuests';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
+import InSetBox from '@/components/InSetBox';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import JsonLd from '@/components/JsonLd';
@@ -297,6 +298,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 10 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
       )}
+      <InSetBox itemId={item.id} />
       <ItemGuideRefs itemId={item.id} />
 
       {item.description && (() => {
