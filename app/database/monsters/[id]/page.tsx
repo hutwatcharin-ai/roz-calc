@@ -459,10 +459,6 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
             ) : (
               <SpawnCards chips={spawnChips} />
             )}
-            <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 14 }}>
-              หาจุดฟาร์มอื่นที่เลเวลใกล้กัน:{' '}
-              <Link href={`/tools/leveling-spots?level=${monster.level}`}>ฟาร์มที่ไหนดี เลเวล {monster.level}</Link>
-            </p>
           </div>
 
           {/* Skills are the secondary read (user, 7 Sep). Folded unless one
