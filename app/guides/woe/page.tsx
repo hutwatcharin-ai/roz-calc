@@ -27,9 +27,9 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'สงครามกิลด์ WoE Ragnarok Zero — เวลาวอร์ (อาทิตย์ 21:00 น.) ของที่ใช้ได้ ใช้ไม่ได้ และชุดกิลด์',
+  title: 'สงครามกิลด์ WoE Ragnarok Zero — เวลาวอร์ (พุธ อาทิตย์ 21:00 น.) ของที่ใช้ได้ ใช้ไม่ได้ และชุดกิลด์',
   description:
-    'War of Emperium ใน Ragnarok Zero Global — เปิดวันอาทิตย์ 21:00–22:00 น. เวลาไทย (เซิร์ฟ SEA) ปราสาท 10 หลัง · ยาที่ใช้ไม่ได้ในเขตสงครามกิลด์, ยาเฉพาะ WoE, สกรอล Force/Resist, ชุดสมาชิกกิลด์ 2 ระดับที่ค่าทำงานเฉพาะในเขต WoE และ Emperium ทุกบรรทัดยกมาจากคำอธิบายไอเทมในเกม',
+    'War of Emperium ใน Ragnarok Zero Global — เปิดวันพุธและวันอาทิตย์ 21:00–22:00 น. เวลาไทย (เซิร์ฟ SEA) ปราสาท 10 หลัง · ยาที่ใช้ไม่ได้ในเขตสงครามกิลด์, ยาเฉพาะ WoE, สกรอล Force/Resist, ชุดสมาชิกกิลด์ 2 ระดับที่ค่าทำงานเฉพาะในเขต WoE และ Emperium ทุกบรรทัดยกมาจากคำอธิบายไอเทมในเกม',
 };
 
 type Row = { id: number; name: string; note: string; full: string };
@@ -121,29 +121,26 @@ export default async function WoeGuidePage() {
         lead="War of Emperium อยู่ในเซิร์ฟแล้ว หน้านี้รวมเฉพาะสิ่งที่เกมเขียนไว้เอง: ยาที่ถูกปิดในเขตสงคราม ยาที่ใช้ได้เฉพาะที่นั่น สกรอลเฉพาะสงคราม และชุดกิลด์ที่ค่าโผล่เฉพาะในเขต WoE"
       />
 
-      {/* Times from prontera.info's raid planner (owner's screenshot, 1 Oct
-          2026), shown there in Asia/Bangkok time; the SEA hour matches the
-          Thai clip in docs/GAME_MODEL.md (21:00-22:00, one hour). prontera's
-          header also says "Sunday and Wednesday" but lists only the Sunday
-          sessions, so Wednesday is mentioned, not tabled. */}
+      {/* WoE schedule (owner, 1 Oct 2026: state it plainly, no source line).
+          From prontera.info's raid planner: Sunday and Wednesday, SEA
+          14:00-15:00 UTC and EU 19:00-20:00 UTC, the same both days; shown
+          here in Thai time. */}
       <section className="card card--yellow" id="time" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>เวลาสงครามกิลด์ (เวลาไทย)</h2>
+        <h2 className="section-title" style={{ marginTop: 0 }}>เวลากิลด์วอร์ (เวลาไทย)</h2>
         <div className="woe__times">
           <div className="woe__time">
             <span className="woe__srv">เซิร์ฟ SEA</span>
-            <strong>วันอาทิตย์ 21:00–22:00 น.</strong>
+            <strong>วันพุธ และ วันอาทิตย์</strong>
+            <strong>21:00–22:00 น.</strong>
           </div>
           <div className="woe__time">
             <span className="woe__srv">เซิร์ฟ EU</span>
-            <strong>วันจันทร์ 02:00–03:00 น.</strong>
-            <span className="muted" style={{ fontSize: 13 }}>คืนวันอาทิตย์ต่อเช้าวันจันทร์</span>
+            <strong>วันพฤหัส และ วันจันทร์</strong>
+            <strong>02:00–03:00 น.</strong>
+            <span className="muted" style={{ fontSize: 13 }}>คือคืนวันพุธกับคืนวันอาทิตย์ตามเวลายุโรป</span>
           </div>
         </div>
-        <ul style={{ margin: '10px 0 0', paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 4, fontSize: 14 }}>
-          <li>รอบละ 1 ชั่วโมง · ตีปราสาท 10 หลังใน Al De Baran, Prontera, Geffen และ Payon</li>
-          <li className="muted">prontera.info เขียนว่ามีวันอาทิตย์และวันพุธ แต่บอกเวลาไว้แค่รอบวันอาทิตย์ ยังไม่รู้เวลาของวันพุธ</li>
-        </ul>
-        <Src>ตารางวอร์ของ prontera.info (ดู 1 ต.ค. 2569) ตรงกับคลิปผู้เล่นไทยที่บอก 21:00–22:00 น.</Src>
+        <p style={{ margin: '10px 0 0', fontSize: 14 }}>รอบละ 1 ชั่วโมง · ชิงปราสาท 10 หลังใน Al De Baran, Prontera, Geffen และ Payon</p>
       </section>
 
       <nav className="guildp__toc" aria-label="สารบัญ">
