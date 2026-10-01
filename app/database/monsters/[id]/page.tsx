@@ -469,14 +469,16 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <div className="card">
             <h2 className="section-title" id="sec-stats">ค่าสถานะ</h2>
             <div className="statgrid statgrid--five">
-              <div className="statgrid__cell"><span className="reward-label">HP</span><span className="reward-value mono">{sentinel(monster.hp)}</span>{bar(seg('hp'))}</div>
+              <div className="statgrid__cell statgrid__cell--hp"><span className="reward-label">HP</span><span className="reward-value mono">{sentinel(monster.hp)}</span>{bar(seg('hp'))}</div>
               <div className="statgrid__cell"><span className="reward-label">ATK</span><span className="reward-value mono">{num(monster.atk_min)}–{num(monster.atk_max)}</span>{bar(seg('atk_max'))}</div>
               <div className="statgrid__cell"><span className="reward-label">MATK</span><span className="reward-value mono">{num(monster.matk_min)}–{num(monster.matk_max)}</span>{bar(seg('matk_max'))}</div>
               <div className="statgrid__cell"><span className="reward-label">DEF</span><span className="reward-value mono">{num(monster.def)}</span>{bar(seg('def'))}</div>
               <div className="statgrid__cell"><span className="reward-label">MDEF</span><span className="reward-value mono">{num(monster.mdef)}</span>{bar(seg('mdef'))}</div>
             </div>
             <p className="statbar__note">แถบ = เทียบกับมอนธรรมดาเลเวล {Math.max(1, monster.level - STAT_BAND)}–{monster.level + STAT_BAND} เต็ม 10 ช่องคือสูงกว่าทุกตัว</p>
-            <div className="statgrid statgrid--two" style={{ marginTop: 10 }}>
+            {/* The two numbers a player builds toward (owner, 1 Oct 2026:
+                make them stand out): lit target panels. */}
+            <div className="statgrid statgrid--two statgrid--target" style={{ marginTop: 10 }}>
               {(() => {
                 // hit_100/flee_95 are midgardhub's player-facing thresholds --
                 // they already ARE the targets to show. The old code treated
@@ -486,15 +488,17 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 return (
                   <>
                     {hit100 !== null && (
-                      <div className="statgrid__cell" title="HIT ที่ต้องมีเพื่อตีมอนตัวนี้โดน 100%">
+                      <div className="statgrid__cell target target--hit" title="HIT ที่ต้องมีเพื่อตีมอนตัวนี้โดน 100%">
+                        <span className="target__tag">TARGET · HIT</span>
                         <span className="reward-label">ตีโดน 100% ต้องมี HIT</span>
-                        <span className="reward-value mono" style={{ color: 'var(--yellow)' }}>{hit100}</span>
+                        <span className="reward-value mono">{hit100}</span>
                       </div>
                     )}
                     {flee95 !== null && (
-                      <div className="statgrid__cell" title="FLEE ที่ต้องมีเพื่อหลบมอนตัวนี้ 95%">
+                      <div className="statgrid__cell target target--flee" title="FLEE ที่ต้องมีเพื่อหลบมอนตัวนี้ 95%">
+                        <span className="target__tag">TARGET · FLEE</span>
                         <span className="reward-label">หลบ 95% ต้องมี FLEE</span>
-                        <span className="reward-value mono" style={{ color: 'var(--cyan)' }}>{flee95}</span>
+                        <span className="reward-value mono">{flee95}</span>
                       </div>
                     )}
                   </>
