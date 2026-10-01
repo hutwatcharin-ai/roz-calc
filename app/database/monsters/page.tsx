@@ -16,9 +16,7 @@ import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
 import { nameOrIdsFilter } from '@/lib/name-search';
-import { aliasIdsFor, thaiAliasNames } from '@/lib/thai-aliases';
-import { monsterLabel } from '@/lib/monster-known-as';
-import type { SuggestEntry } from '@/lib/suggest';
+import { aliasIdsFor } from '@/lib/thai-aliases';
 import { formerNameIdsFor } from '@/lib/former-names';
 import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
@@ -27,10 +25,11 @@ import { monsterCounts } from '@/lib/counts';
 import { isFilteredView } from '@/lib/filtered-view';
 import { cardRelease } from '@/lib/card-availability';
 import SuggestInput from '@/components/SuggestInput';
+import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import FilterPanel from '@/components/FilterPanel';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
-import { monsterModes, MODE_BADGE_CLASS, MODE_FILTERS, MODE_GUIDE, aggroFallbackIds, isModeFilter, monsterIdsWithMode, modesMeta, type ModeFilter } from '@/lib/monster-modes';
+import { MODE_BADGE_CLASS, MODE_FILTERS, MODE_GUIDE, aggroFallbackIds, isModeFilter, monsterIdsWithMode, modesMeta, type ModeFilter } from '@/lib/monster-modes';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -79,14 +78,6 @@ const SIZES = ['Small', 'Medium', 'Large'];
 // shows -- but the dropdown says it in Thai as well. Someone searched
 // "เผ่า plant" on Google and landed here (Search Console, 90 days), which is
 // a person reading the word in Thai and the list only offering it in English.
-const RACE_TH: Record<string, string> = {
-  Angel: 'เทวดา', Brute: 'สัตว์', 'Demi-Human': 'กึ่งมนุษย์', Demon: 'ปีศาจ', Dragon: 'มังกร',
-  Fish: 'ปลา', Formless: 'ไร้รูปร่าง', Insect: 'แมลง', Plant: 'พืช', Undead: 'อันเดด',
-};
-const ELEMENT_TH: Record<string, string> = {
-  Earth: 'ดิน', Fire: 'ไฟ', Ghost: 'ผี', Holy: 'ศักดิ์สิทธิ์', Neutral: 'ไร้ธาตุ',
-  Poison: 'พิษ', Shadow: 'มืด', Undead: 'อันเดด', Water: 'น้ำ', Wind: 'ลม',
-};
 const SIZE_TH: Record<string, string> = { Small: 'เล็ก', Medium: 'กลาง', Large: 'ใหญ่' };
 
 export default async function MonsterListPage({
@@ -289,33 +280,6 @@ export default async function MonsterListPage({
     console.error('monsters list query failed', error);
   }
 
-  // The suggestion list: every monster, minus the C/Mj variants unless their
-  // switch is on. Not narrowed by the other filters or the typed word: a
-  // picked row opens the monster's own page, so what the list below shows
-  // does not limit it (owner, 1 Oct 2026).
-  type NameRow = { id: number; name_en: string; level: number; is_mvp: boolean | null; race: string | null; element: string | null; image_url: string | null };
-  const { data: nameRows } = await fetchAllRows<NameRow>((from, to) => {
-    let nq = db.from('monsters').select('id, name_en, level, is_mvp, race, element, image_url') as any;
-    if (!showC) nq = nq.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
-    if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) nq = nq.not('name_en', 'like', pattern);
-    return nq.order('id').range(from, to);
-  });
-  const isMini = (id: number) => {
-    const mm = monsterModes(id);
-    return !!(mm && mm.known && mm.mini);
-  };
-  const suggestMonsters: SuggestEntry[] = (nameRows ?? []).map((r) => ({
-    id: r.id,
-    href: `/database/monsters/${r.id}`,
-    name: r.name_en,
-    label: monsterLabel(r.id, r.name_en),
-    sub: [r.race ? RACE_TH[r.race] ?? r.race : '', r.element ? ELEMENT_TH[r.element] ?? r.element : ''].filter(Boolean).join(' · '),
-    aliases: thaiAliasNames('monsters', r.id),
-    sprite: r.image_url,
-    el: r.element ?? '',
-    lv: r.level,
-    tag: r.is_mvp ? 'mvp' : isMini(r.id) ? 'mini' : null,
-  }));
 
   // How many rows the HP range dropped for having no published HP. Shown, not
   // swallowed: hiding rows without saying so is what makes a reader think the
@@ -436,7 +400,7 @@ export default async function MonsterListPage({
           <label className="field field--grow">
             <span className="field__label">ค้นชื่อมอนสเตอร์</span>
             <SuggestInput
-              entries={suggestMonsters}
+              src="/suggest/monsters"
               heading="SELECT MONSTER"
               listLabel="มอนสเตอร์ที่ตรงกับคำค้น"
               placeholder="เช่น Poring, บาโฟ, Mummy"

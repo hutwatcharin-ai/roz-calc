@@ -16,6 +16,10 @@ import { POSITION_LABELS } from '@/lib/costume-position';
 import { TYPE_TH, gearType } from '@/lib/gear-type';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import type { SuggestEntry } from '@/lib/suggest';
+import { monsterLabel } from '@/lib/monster-known-as';
+import { monsterModes } from '@/lib/monster-modes';
+import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
+import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { cardArtThumbUrl, hasCardArt } from '@/lib/card-art';
 import { cardSlot, SLOT_TH } from '@/lib/card-slot';
 
@@ -31,8 +35,50 @@ const KINDS = {
 type Kind = keyof typeof KINDS;
 
 export function generateStaticParams() {
-  return Object.keys(KINDS).map((kind) => ({ kind }));
+  return [...Object.keys(KINDS), 'monsters'].map((kind) => ({ kind }));
 }
+
+interface MonsterRow {
+  id: number;
+  name_en: string;
+  level: number;
+  is_mvp: boolean | null;
+  race: string | null;
+  element: string | null;
+  image_url: string | null;
+}
+
+// Monsters moved here from the list page's own payload on 1 Oct 2026: 340
+// rows inside every page view cost the page's hydration (PageSpeed mobile
+// TBT 790 ms on /database/monsters). The C and Mj copies are left out; the
+// list's own switches still show them after Enter.
+async function monsterEntries(): Promise<SuggestEntry[]> {
+  const db = supabaseBrowser();
+  const { data, error } = await fetchAllRows<MonsterRow>((from, to) => {
+    let q = db.from('monsters').select('id, name_en, level, is_mvp, race, element, image_url').not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+    for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) q = q.not('name_en', 'like', pattern);
+    return q.order('id').range(from, to);
+  });
+  if (error) throw new Error(`suggest/monsters: ${error.message}`);
+  return (data ?? []).map((r) => {
+    const modes = monsterModes(r.id);
+    const mini = !!(modes && modes.known && modes.mini);
+    return {
+      id: r.id,
+      href: `/database/monsters/${r.id}`,
+      name: r.name_en,
+      label: monsterLabel(r.id, r.name_en),
+      sub: [r.race ? RACE_TH[r.race] ?? r.race : '', r.element ? ELEMENT_TH[r.element] ?? r.element : ''].filter(Boolean).join(' · '),
+      aliases: thaiAliasNames('monsters', r.id),
+      sprite: r.image_url,
+      el: r.element ?? '',
+      lv: r.level,
+      tag: r.is_mvp ? 'mvp' : mini ? 'mini' : null,
+    };
+  });
+}
+
+const HEADERS = { 'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=3600' };
 
 interface Row {
   id: number;
@@ -60,6 +106,7 @@ function sub(kind: Kind, row: Row): string {
 }
 
 export async function GET(_request: Request, { params }: { params: { kind: string } }) {
+  if (params.kind === 'monsters') return NextResponse.json(await monsterEntries(), { headers: HEADERS });
   if (!(params.kind in KINDS)) return NextResponse.json([], { status: 404 });
   const kind = params.kind as Kind;
   const db = supabaseBrowser();
@@ -93,7 +140,5 @@ export async function GET(_request: Request, { params }: { params: { kind: strin
         tag: null,
       };
     });
-  return NextResponse.json(rows, {
-    headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=3600' },
-  });
+  return NextResponse.json(rows, { headers: HEADERS });
 }
