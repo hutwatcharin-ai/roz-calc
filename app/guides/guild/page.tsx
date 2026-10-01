@@ -103,6 +103,7 @@ export default async function GuildGuidePage() {
       />
 
       <nav className="guildp__toc" aria-label="สารบัญ">
+        <a href="#season1">Guild Event S1</a>
         <a href="#start">สร้างกิลด์</a>
         <a href="#parma">โล่ Guild Parma</a>
         <a href="#flames">ไฟกิลด์ 4 สี</a>
@@ -111,6 +112,38 @@ export default async function GuildGuidePage() {
         <a href="#coins">เหรียญดันเจี้ยนกิลด์</a>
         <a href="#gear">อุปกรณ์ GvG</a>
       </nav>
+
+      {/* From the 1 Oct 2026 client: itemmoveinfov5 files these under
+          "1015 Guild Event S1"; every number is the item's own Thai
+          description. No notice yet: not-open tag, no date. */}
+      <section className="card card--cyan" id="season1" style={{ marginTop: 14 }}>
+        <h2 className="section-title">
+          Guild Event Season 1 <span className="tag tag--unknown">ยังไม่เปิด</span>
+        </h2>
+        <p style={{ marginTop: 6 }}>ไคลเอนต์แพทช์ 1 ต.ค. เพิ่มของกิจกรรมกิลด์ซีซั่น 1 ไว้แล้ว ของทุกชิ้นถูกลบเมื่อกิจกรรมจบ</p>
+        <h3 className="guildp__sub" style={{ marginTop: 12 }}>ตั๋วกิลด์ (สุ่ม 1 จาก 4 ใน <Link href="/database/items/108202">[Event] Guild Ticket Box</Link>)</h3>
+        <ul style={{ margin: '4px 0 0', paddingInlineStart: 22 }}>
+          <li><Link href="/database/items/108172">Passion Guild Ticket</Link> — ATK +3%</li>
+          <li><Link href="/database/items/108175">Calm Guild Ticket</Link> — MATK +2%</li>
+          <li><Link href="/database/items/108173">Embrace Guild Ticket</Link> — DEF +3, MDEF +1</li>
+          <li><Link href="/database/items/108203">Wisdom Guild Ticket</Link> — MHP +50, MSP +20</li>
+        </ul>
+        <h3 className="guildp__sub" style={{ marginTop: 12 }}>โล่กิลด์ (Shadow · ช่องโล่ · ทุกอาชีพ)</h3>
+        <ul style={{ margin: '4px 0 0', paddingInlineStart: 22 }}>
+          <li><Link href="/database/costumes/1270291">Guild&apos;s Shield (Passion)</Link> — ATK +10%, EXP จากมอน +5%</li>
+          <li><Link href="/database/costumes/1270292">Guild&apos;s Shield (Calm)</Link> — MATK +5%, EXP จากมอน +5%</li>
+          <li><Link href="/database/costumes/1270293">Guild&apos;s Shield (Embrace)</Link> — DEF +10, MDEF +2, EXP จากมอน +5%</li>
+          <li><Link href="/database/costumes/1270294">Guild&apos;s Shield (Wisdom)</Link> — MHP +100, MSP +75, EXP จากมอน +5%</li>
+        </ul>
+        <h3 className="guildp__sub" style={{ marginTop: 12 }}>คอสตูมปีก</h3>
+        <p style={{ margin: '4px 0 0' }}>
+          <Link href="/database/costumes/480055">Fluffy Red Angel Wings</Link> · <Link href="/database/costumes/480057">Fluffy Vermilion Wings</Link> ·{' '}
+          <Link href="/database/costumes/480060">Fluffy Nature Wings</Link> (มีแบบ Bound ด้วย)
+        </p>
+        <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
+          ยังไม่มีประกาศว่ากิจกรรมเริ่มเมื่อไร เล่นยังไง และได้ของพวกนี้จากอะไร · ในไฟล์ยังมีรางวัลอันดับ 1–3 และรางวัลคะแนน 70/100 ที่ยังไม่มีชื่อในเกม
+        </p>
+      </section>
 
       <section className="card" id="start" style={{ marginTop: 14 }}>
         <h2 className="section-title">สร้างกิลด์</h2>

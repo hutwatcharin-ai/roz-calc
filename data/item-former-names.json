@@ -2090,6 +2090,10 @@
    {
     "name": "[Costume] Sun God's Hat",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Helm of Sun",
+    "until": "2026-10-01"
    }
   ],
   "19842": [
@@ -2726,6 +2730,10 @@
    {
     "name": "[Costume] Neti Heart Bubblegum",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Netty Heart Bubble Gum",
+    "until": "2026-10-01"
    }
   ],
   "20315": [
@@ -3758,60 +3766,100 @@
    {
     "name": "[Costume] Hair Buns - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Red)",
+    "until": "2026-10-01"
    }
   ],
   "31065": [
    {
     "name": "[Costume] Hair Buns - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Yellow)",
+    "until": "2026-10-01"
    }
   ],
   "31066": [
    {
     "name": "[Costume] Hair Buns - Green",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Green)",
+    "until": "2026-10-01"
    }
   ],
   "31067": [
    {
     "name": "[Costume] Hair Buns - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Black)",
+    "until": "2026-10-01"
    }
   ],
   "31068": [
    {
     "name": "[Costume] Hair Buns - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (White)",
+    "until": "2026-10-01"
    }
   ],
   "31069": [
    {
     "name": "[Costume] Hair Buns - Brown",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Brown)",
+    "until": "2026-10-01"
    }
   ],
   "31070": [
    {
     "name": "[Costume] Hair Buns - Purple",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Purple)",
+    "until": "2026-10-01"
    }
   ],
   "31080": [
    {
     "name": "[Costume] Long Ponytail - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Pony (Red)",
+    "until": "2026-10-01"
    }
   ],
   "31081": [
    {
     "name": "[Costume] Long Ponytail - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Pony (Yellow)",
+    "until": "2026-10-01"
    }
   ],
   "31083": [
    {
     "name": "[Costume] Long Ponytail - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Pony (Black)",
+    "until": "2026-10-01"
    }
   ],
   "31087": [
@@ -3914,30 +3962,50 @@
    {
     "name": "[Costume] Side Big Tail - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Yellow)",
+    "until": "2026-10-01"
    }
   ],
   "31214": [
    {
     "name": "[Costume] Side Big Tail - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Black)",
+    "until": "2026-10-01"
    }
   ],
   "31215": [
    {
     "name": "[Costume] Side Big Tail - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (White)",
+    "until": "2026-10-01"
    }
   ],
   "31216": [
    {
     "name": "[Costume] Side Big Tail - Brown",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Brown)",
+    "until": "2026-10-01"
    }
   ],
   "31217": [
    {
     "name": "[Costume] Side Big Tail - Purple",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Purple)",
+    "until": "2026-10-01"
    }
   ],
   "31234": [
@@ -4004,24 +4072,40 @@
    {
     "name": "[Costume] Low Ponytail - Black (Mid)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (Black) (Middle)",
+    "until": "2026-10-01"
    }
   ],
   "31346": [
    {
     "name": "[Costume] Low Ponytail - White (Mid)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (White) (Middle)",
+    "until": "2026-10-01"
    }
   ],
   "31347": [
    {
     "name": "[Costume] Low Ponytail - Brown (Mid)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (Brown) (Middle)",
+    "until": "2026-10-01"
    }
   ],
   "31348": [
    {
     "name": "[Costume] Low Ponytail - Purple (Mid)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (Purple) (Middle)",
+    "until": "2026-10-01"
    }
   ],
   "31375": [
@@ -4040,6 +4124,12 @@
    {
     "name": "[Costume] Book of Magic",
     "until": "2026-09-22"
+   }
+  ],
+  "31396": [
+   {
+    "name": "Costume Sorcerer Hood",
+    "until": "2026-10-01"
    }
   ],
   "31400": [
@@ -4076,6 +4166,10 @@
    {
     "name": "[Costume] Teddy Bear Balloon",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cute Bear Bear Balloon (Brown)",
+    "until": "2026-10-01"
    }
   ],
   "31425": [
@@ -4268,36 +4362,60 @@
    {
     "name": "[Costume] Fairy Long Hair - Silver",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Flowing Long (Silver)",
+    "until": "2026-10-01"
    }
   ],
   "31637": [
    {
     "name": "[Costume] Straight Long - Blue",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Blue)",
+    "until": "2026-10-01"
    }
   ],
   "31639": [
    {
     "name": "[Costume] Straight Long - Blonde",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Blonde)",
+    "until": "2026-10-01"
    }
   ],
   "31640": [
    {
     "name": "[Costume] Straight Long - Green",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Green)",
+    "until": "2026-10-01"
    }
   ],
   "31641": [
    {
     "name": "[Costume] Straight Long - Jet Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Jet Black)",
+    "until": "2026-10-01"
    }
   ],
   "31643": [
    {
     "name": "[Costume] Straight Long - Orange",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Orange)",
+    "until": "2026-10-01"
    }
   ],
   "31667": [
@@ -4430,6 +4548,10 @@
    {
     "name": "[Costume] Chignon Princess Wave - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Sailor Hairstyle (Cream)",
+    "until": "2026-10-01"
    }
   ],
   "31885": [
@@ -4460,6 +4582,10 @@
    {
     "name": "[Costume] Fairy Long Hair - Light Pink",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Choa Hairstyle (Peach)",
+    "until": "2026-10-01"
    }
   ],
   "31927": [
@@ -4502,66 +4628,110 @@
    {
     "name": "[Costume] Wave Perm Hair - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Black)",
+    "until": "2026-10-01"
    }
   ],
   "31960": [
    {
     "name": "[Costume] Wave Perm Hair - Blue",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Blue)",
+    "until": "2026-10-01"
    }
   ],
   "31961": [
    {
     "name": "[Costume] Wave Perm Hair - Green",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Green)",
+    "until": "2026-10-01"
    }
   ],
   "31962": [
    {
     "name": "[Costume] Wave Perm Hair - Brown",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Brown)",
+    "until": "2026-10-01"
    }
   ],
   "31963": [
    {
     "name": "[Costume] Wave Perm Hair - Pink",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Pink)",
+    "until": "2026-10-01"
    }
   ],
   "31964": [
    {
     "name": "[Costume] Wave Perm Hair - Purple",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Purple)",
+    "until": "2026-10-01"
    }
   ],
   "31965": [
    {
     "name": "[Costume] Wave Perm Hair - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Red)",
+    "until": "2026-10-01"
    }
   ],
   "31966": [
    {
     "name": "[Costume] Wave Perm Hair - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (White)",
+    "until": "2026-10-01"
    }
   ],
   "31967": [
    {
     "name": "[Costume] Wave Perm Hair - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Cream)",
+    "until": "2026-10-01"
    }
   ],
   "31968": [
    {
     "name": "[Costume] Ponytail Hair - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ponytail Hair (Black)",
+    "until": "2026-10-01"
    }
   ],
   "31969": [
    {
     "name": "[Costume] Ponytail Hair (Light Purple)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ponytail Hair (Light Purple)",
+    "until": "2026-10-01"
    }
   ],
   "32015": [
@@ -4850,6 +5020,10 @@
    {
     "name": "Costume Enchant Stone (Upper) Box A",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Costume] Enchant Stone (Upper) Box A",
+    "until": "2026-10-01"
    }
   ],
   "105910": [
@@ -4868,6 +5042,10 @@
    {
     "name": "Costume Enchant Stone (Garment) Box A",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Costume] Enchant Stone (Garment) Box A",
+    "until": "2026-10-01"
    }
   ],
   "106057": [
@@ -6122,6 +6300,10 @@
    {
     "name": "[Costume] Yellow Hat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Yellow Hat",
+    "until": "2026-10-01"
    }
   ],
   "400897": [
@@ -6892,6 +7074,12 @@
     "until": "2026-09-22"
    }
   ],
+  "401182": [
+   {
+    "name": "[Costume] Wizard Hooded Cape [Bound]",
+    "until": "2026-10-01"
+   }
+  ],
   "401234": [
    {
     "name": "[Costume] Ice Cream Hat (Bound)",
@@ -7070,36 +7258,60 @@
    {
     "name": "[Costume] Intake - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Red)",
+    "until": "2026-10-01"
    }
   ],
   "410113": [
    {
     "name": "[Costume] Intake - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Cream)",
+    "until": "2026-10-01"
    }
   ],
   "410116": [
    {
     "name": "[Costume] Intake - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (White)",
+    "until": "2026-10-01"
    }
   ],
   "410118": [
    {
     "name": "[Costume] Intake - Purple",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Purple)",
+    "until": "2026-10-01"
    }
   ],
   "410131": [
    {
     "name": "[Costume] Tiger - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Tiger (White)",
+    "until": "2026-10-01"
    }
   ],
   "410132": [
    {
     "name": "[Costume] Tiger - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Tiger (Black)",
+    "until": "2026-10-01"
    }
   ],
   "410160": [
@@ -7136,12 +7348,20 @@
    {
     "name": "[Costume] Alien Sunglasses - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Alien Sunglasses (Red)",
+    "until": "2026-10-01"
    }
   ],
   "410253": [
    {
     "name": "[Costume] Alien Sunglasses - Green",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Alien Sunglasses (Green)",
+    "until": "2026-10-01"
    }
   ],
   "410277": [
@@ -7244,30 +7464,50 @@
    {
     "name": "[Costume] Mini Scout Drone (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Flying Drone",
+    "until": "2026-10-01"
    }
   ],
   "410408": [
    {
     "name": "[Costume] Poring Water Jar (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Clay Poring Jar",
+    "until": "2026-10-01"
    }
   ],
   "410409": [
    {
     "name": "[Costume] Little Aquarium (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Little Aquarium",
+    "until": "2026-10-01"
    }
   ],
   "410410": [
    {
     "name": "[Costume] Ice Wing Ears (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ice Wing Ear",
+    "until": "2026-10-01"
    }
   ],
   "410411": [
    {
     "name": "[Costume] Little Deviling (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Little Deviling",
+    "until": "2026-10-01"
    }
   ],
   "410412": [
@@ -7280,30 +7520,50 @@
    {
     "name": "[Costume] Tiger (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Tiger",
+    "until": "2026-10-01"
    }
   ],
   "410414": [
    {
     "name": "[Costume] Shiba Inu (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Shiba Inu",
+    "until": "2026-10-01"
    }
   ],
   "410415": [
    {
     "name": "[Costume] Baby Penguin (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Baby Penguin",
+    "until": "2026-10-01"
    }
   ],
   "410416": [
    {
     "name": "[Costume] American Shorthair Cat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume American Shorthair Cat",
+    "until": "2026-10-01"
    }
   ],
   "410417": [
    {
     "name": "[Costume] Angel Wing Ears (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Angel Wing Ears",
+    "until": "2026-10-01"
    }
   ],
   "410418": [
@@ -7316,48 +7576,80 @@
    {
     "name": "[Costume] Fallen Angel's Blessing (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Fallen Angel's Blessing",
+    "until": "2026-10-01"
    }
   ],
   "410420": [
    {
     "name": "[Costume] Katashiro Flying (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Katashiro Flying",
+    "until": "2026-10-01"
    }
   ],
   "410421": [
    {
     "name": "[Costume] Tiger - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Tiger (White)",
+    "until": "2026-10-01"
    }
   ],
   "410422": [
    {
     "name": "[Costume] Tiger - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Tiger (Black)",
+    "until": "2026-10-01"
    }
   ],
   "410423": [
    {
     "name": "[Costume] Black Rabbit (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Black Rabbit",
+    "until": "2026-10-01"
    }
   ],
   "410424": [
    {
     "name": "[Costume] Black Shiba Inu (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Black Shiba Inu",
+    "until": "2026-10-01"
    }
   ],
   "410425": [
    {
     "name": "[Costume] Black Cat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Black Cat",
+    "until": "2026-10-01"
    }
   ],
   "410426": [
    {
     "name": "[Costume] Brown Tabby Cat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Orange Tabby Cat",
+    "until": "2026-10-01"
    }
   ],
   "410427": [
@@ -7388,6 +7680,10 @@
    {
     "name": "[Costume] Blinking Eyes (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Blinking Eyes",
+    "until": "2026-10-01"
    }
   ],
   "410445": [
@@ -7418,18 +7714,30 @@
    {
     "name": "[Costume] Black Glasses (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Black Glasses",
+    "until": "2026-10-01"
    }
   ],
   "410453": [
    {
     "name": "[Costume] Robo Eye (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Sirt Evil Eye",
+    "until": "2026-10-01"
    }
   ],
   "410454": [
    {
     "name": "[Costume] Little Chickling (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Little Duckling",
+    "until": "2026-10-01"
    }
   ],
   "410455": [
@@ -7442,12 +7750,20 @@
    {
     "name": "[Costume] Alien Sunglasses - Green (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Alien Sunglasses (Green) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410460": [
    {
     "name": "[Costume] Alien Sunglasses - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Alien Sunglasses (Red) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410461": [
@@ -7472,24 +7788,40 @@
    {
     "name": "[Costume] Low Ponytail - Black (Mid) (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (Black) (Middle) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410466": [
    {
     "name": "[Costume] Low Ponytail - Purple (Mid) (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (Purple) (Middle) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410467": [
    {
     "name": "[Costume] Low Ponytail - White (Mid) (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (White) (Middle) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410468": [
    {
     "name": "[Costume] Low Ponytail - Brown (Mid) (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Low Pony (Brown) (Middle) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410472": [
@@ -7508,12 +7840,20 @@
    {
     "name": "[Costume] Intake - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Cream) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410476": [
    {
     "name": "[Costume] Intake - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Yellow)",
+    "until": "2026-10-01"
    }
   ],
   "410477": [
@@ -7526,12 +7866,20 @@
    {
     "name": "[Costume] Intake - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Red) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410479": [
    {
     "name": "[Costume] Intake - Purple (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Intake (Purple) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "410480": [
@@ -7622,6 +7970,10 @@
    {
     "name": "[Costume] Magic Celestial Globe (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Magic Celestial Globe",
+    "until": "2026-10-01"
    }
   ],
   "410511": [
@@ -7820,6 +8172,10 @@
    {
     "name": "[Costume] Ponytail Hair - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ponytail Hair (Red)",
+    "until": "2026-10-01"
    }
   ],
   "420067": [
@@ -7832,6 +8188,10 @@
    {
     "name": "[Costume] Half-Braided Hair - Blonde",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Kururinpa Hair (Blonde)",
+    "until": "2026-10-01"
    }
   ],
   "420088": [
@@ -7844,30 +8204,50 @@
    {
     "name": "[Costume] Braided Half Up - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (White)",
+    "until": "2026-10-01"
    }
   ],
   "420098": [
    {
     "name": "[Costume] Braided Half Up - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Black)",
+    "until": "2026-10-01"
    }
   ],
   "420099": [
    {
     "name": "[Costume] Braided Half Up - Blue",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Blue)",
+    "until": "2026-10-01"
    }
   ],
   "420100": [
    {
     "name": "[Costume] Braided Half Up - Yellow",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Cream)",
+    "until": "2026-10-01"
    }
   ],
   "420101": [
    {
     "name": "[Costume] Braided Half Up - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Red)",
+    "until": "2026-10-01"
    }
   ],
   "420133": [
@@ -7892,6 +8272,10 @@
    {
     "name": "[Costume] Protect Cloth - Black",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Protect Cloth (Black)",
+    "until": "2026-10-01"
    }
   ],
   "420171": [
@@ -7922,6 +8306,10 @@
    {
     "name": "[Costume] Protect Cloth - Red",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Protect Cloth (Red)",
+    "until": "2026-10-01"
    }
   ],
   "420224": [
@@ -7970,18 +8358,30 @@
    {
     "name": "[Costume] Rose Wave - Blonde",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rose Wave (Blonde)",
+    "until": "2026-10-01"
    }
   ],
   "420274": [
    {
     "name": "[Costume] Rose Wave - Blonde Pink",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rose Wave (Blonde Pink)",
+    "until": "2026-10-01"
    }
   ],
   "420275": [
    {
     "name": "[Costume] Rose Wave - Silver",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rose Wave (Silver)",
+    "until": "2026-10-01"
    }
   ],
   "420325": [
@@ -8048,12 +8448,20 @@
    {
     "name": "[Costume] Ink Painting - Day",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ink Painting (Day)",
+    "until": "2026-10-01"
    }
   ],
   "420424": [
    {
     "name": "[Costume] Ink Painting - Night",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ink Painting (Night)",
+    "until": "2026-10-01"
    }
   ],
   "420429": [
@@ -8132,6 +8540,10 @@
    {
     "name": "[Costume] Whistle",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Whistle",
+    "until": "2026-10-01"
    }
   ],
   "420464": [
@@ -8144,12 +8556,20 @@
    {
     "name": "[Costume] Master of Earth (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cons of Earth",
+    "until": "2026-10-01"
    }
   ],
   "420466": [
    {
     "name": "[Costume] Master of Water (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cons of Water",
+    "until": "2026-10-01"
    }
   ],
   "420467": [
@@ -8162,198 +8582,330 @@
    {
     "name": "[Costume] Master of Flame (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cons of Fire",
+    "until": "2026-10-01"
    }
   ],
   "420469": [
    {
     "name": "[Costume] Master of Wind (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Aura of Tornado",
+    "until": "2026-10-01"
    }
   ],
   "420470": [
    {
     "name": "[Costume] Master of Darkness (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cons of Darkness",
+    "until": "2026-10-01"
    }
   ],
   "420471": [
    {
     "name": "[Costume] Tiger Muffler (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Tiger Muffler",
+    "until": "2026-10-01"
    }
   ],
   "420472": [
    {
     "name": "[Costume] Fallen Angel Beret (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Fallen Angel Valletta",
+    "until": "2026-10-01"
    }
   ],
   "420473": [
    {
     "name": "[Costume] Fluttering Blossom (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Blossom Fluttering (ฺBound)",
+    "until": "2026-10-01"
    }
   ],
   "420474": [
    {
     "name": "[Costume] Cat's Mouth (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cat Mouth",
+    "until": "2026-10-01"
    }
   ],
   "420475": [
    {
     "name": "[Costume] Ponytail Hair - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ponytail Hair (Red)",
+    "until": "2026-10-01"
    }
   ],
   "420476": [
    {
     "name": "[Costume] Ponytail Hair - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ponytail Hair (Black)",
+    "until": "2026-10-01"
    }
   ],
   "420477": [
    {
     "name": "[Costume] Rose Wave - Blonde (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rose Wave (Blonde)",
+    "until": "2026-10-01"
    }
   ],
   "420478": [
    {
     "name": "[Costume] Hair Buns - Purple (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Purple)",
+    "until": "2026-10-01"
    }
   ],
   "420479": [
    {
     "name": "[Costume] Hair Buns - Brown (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Brown)",
+    "until": "2026-10-01"
    }
   ],
   "420480": [
    {
     "name": "[Costume] Rose Wave - Blonde Pink (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rose Wave (Blonde Pink)",
+    "until": "2026-10-01"
    }
   ],
   "420481": [
    {
     "name": "[Costume] Long Ponytail - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Pony (Red)",
+    "until": "2026-10-01"
    }
   ],
   "420482": [
    {
     "name": "[Costume] Long Ponytail - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Pony (Black)",
+    "until": "2026-10-01"
    }
   ],
   "420483": [
    {
     "name": "[Costume] Rose Wave - Silver (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rose Wave (Silver)",
+    "until": "2026-10-01"
    }
   ],
   "420484": [
    {
     "name": "[Costume] Side Big Tail - Brown (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Brown)",
+    "until": "2026-10-01"
    }
   ],
   "420485": [
    {
     "name": "[Costume] Side Big Tail - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Black)",
+    "until": "2026-10-01"
    }
   ],
   "420486": [
    {
     "name": "[Costume] Fairy Long Hair - Silver (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Flowing Long (Silver)",
+    "until": "2026-10-01"
    }
   ],
   "420487": [
    {
     "name": "[Costume] Master of Light and Darkness (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cons of Light and Dark",
+    "until": "2026-10-01"
    }
   ],
   "420488": [
    {
     "name": "[Costume] Chignon Princess Wave - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Sailor Hairstyle (Cream)",
+    "until": "2026-10-01"
    }
   ],
   "420489": [
    {
     "name": "[Costume] Half-Braided Hair - Blonde (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Kururinpa Hair (Blonde)",
+    "until": "2026-10-01"
    }
   ],
   "420490": [
    {
     "name": "[Costume] Dreamy Rose Long (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Dreaming Rose",
+    "until": "2026-10-01"
    }
   ],
   "420491": [
    {
     "name": "[Costume] Fairy Long Hair - Light Pink (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Choa Hairstyle (Peach)",
+    "until": "2026-10-01"
    }
   ],
   "420492": [
    {
     "name": "[Costume] Side Big Tail - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Yellow)",
+    "until": "2026-10-01"
    }
   ],
   "420493": [
    {
     "name": "[Costume] Dripping Venom (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cons of Poison",
+    "until": "2026-10-01"
    }
   ],
   "420494": [
    {
     "name": "[Costume] Ponytail Hair - Light Purple (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ponytail Hair (Light Purple)",
+    "until": "2026-10-01"
    }
   ],
   "420495": [
    {
     "name": "[Costume] Long Ponytail - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Pony (Yellow)",
+    "until": "2026-10-01"
    }
   ],
   "420496": [
    {
     "name": "[Costume] Hair Buns - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (White)",
+    "until": "2026-10-01"
    }
   ],
   "420497": [
    {
     "name": "[Costume] Analyze Eye (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Analyze Eye",
+    "until": "2026-10-01"
    }
   ],
   "420498": [
    {
     "name": "[Costume] Ocean Color Long Hair (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ocean Long Wig",
+    "until": "2026-10-01"
    }
   ],
   "420505": [
    {
     "name": "[Costume] Power Release (Lower) (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Power Release (Lower)",
+    "until": "2026-10-01"
    }
   ],
   "420506": [
    {
     "name": "[Costume] Sweet Coronet (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Sweet Coronet",
+    "until": "2026-10-01"
    }
   ],
   "420511": [
@@ -8384,12 +8936,20 @@
    {
     "name": "[Costume] Short Haired Cat Ears - White",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cat Ear Short (White)",
+    "until": "2026-10-01"
    }
   ],
   "420528": [
    {
     "name": "[Costume] Long Haired Cat Ears - Blue",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Haired Cat Ears (Blue)",
+    "until": "2026-10-01"
    }
   ],
   "420529": [
@@ -8408,6 +8968,10 @@
    {
     "name": "[Costume] Lincoln Beard (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Lincoln Moustache",
+    "until": "2026-10-01"
    }
   ],
   "420533": [
@@ -8438,24 +9002,40 @@
    {
     "name": "[Costume] Ink Painting - Day (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ink Painting (Day) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420539": [
    {
     "name": "[Costume] Ink Painting - Night (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Ink Painting (Night) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420542": [
    {
     "name": "[Costume] Captain's Pipe (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Gentleman's Pipe",
+    "until": "2026-10-01"
    }
   ],
   "420543": [
    {
     "name": "[Costume] Green Sunbed (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Green Sunbed",
+    "until": "2026-10-01"
    }
   ],
   "420544": [
@@ -8468,6 +9048,10 @@
    {
     "name": "[Costume] Short Haired Cat Ears - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cat Ear Short (White) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420549": [
@@ -8498,6 +9082,10 @@
    {
     "name": "[Costume] Long Haired Cat Ears - Blue (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Long Haired Cat Ears (Blue) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420558": [
@@ -8516,6 +9104,10 @@
    {
     "name": "[Costume] Side Big Tail - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (White) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420561": [
@@ -8528,6 +9120,10 @@
    {
     "name": "[Costume] Neti Heart Bubblegum (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Netty Heart Bubble Gum (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420563": [
@@ -8552,6 +9148,10 @@
    {
     "name": "[Costume] Side Big Tail - Purple (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Side Pigtail (Purple) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420572": [
@@ -8582,12 +9182,20 @@
    {
     "name": "[Costume] Wave Perm Hair - Purple (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Purple) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420579": [
    {
     "name": "[Costume] Wave Perm Hair - Green (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Green) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420580": [
@@ -8600,36 +9208,60 @@
    {
     "name": "[Costume] Hair Buns - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Red) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420582": [
    {
     "name": "[Costume] Hair Buns - Green (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Green) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420583": [
    {
     "name": "[Costume] Wave Perm Hair - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (White) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420584": [
    {
     "name": "[Costume] Wave Perm Hair - Brown (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Brown) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420585": [
    {
     "name": "[Costume] Hair Buns - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Black) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420586": [
    {
     "name": "[Costume] Hair Buns - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hair Bun (Yellow) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420588": [
@@ -8714,6 +9346,10 @@
    {
     "name": "[Costume] Teddy Bear Balloon (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Cute Bear Bear Balloon (Brown) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420626": [
@@ -8756,30 +9392,50 @@
    {
     "name": "[Costume] Braided Half Up - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Black) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420635": [
    {
     "name": "[Costume] Braided Half Up - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Cream) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420636": [
    {
     "name": "[Costume] Braided Half Up - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Red) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420637": [
    {
     "name": "[Costume] Braided Half Up - White (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (White) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420638": [
    {
     "name": "[Costume] Braided Half Up - Blue (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Pigtails Half Up (Blue) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420639": [
@@ -8792,12 +9448,20 @@
    {
     "name": "[Costume] Protect Cloth - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Protect Cloth (Red) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420641": [
    {
     "name": "[Costume] Protect Cloth - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Protect Cloth (Black) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420643": [
@@ -8822,30 +9486,50 @@
    {
     "name": "[Costume] Wave Perm Hair - Red (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Red) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420676": [
    {
     "name": "[Costume] Wave Perm Hair - Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Black) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420677": [
    {
     "name": "[Costume] Wave Perm Hair - Blue (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Blue) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420678": [
    {
     "name": "[Costume] Wave Perm Hair - Pink (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Pink) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420679": [
    {
     "name": "[Costume] Wave Perm Hair - Yellow (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wave Perm (Cream) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420680": [
@@ -8858,30 +9542,50 @@
    {
     "name": "[Costume] Straight Long - Green (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Green)",
+    "until": "2026-10-01"
    }
   ],
   "420684": [
    {
     "name": "[Costume] Straight Long - Orange (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Orange) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420685": [
    {
     "name": "[Costume] Straight Long - Blue (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Blue) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420686": [
    {
     "name": "[Costume] Straight Long - Jet Black (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Jet Black)",
+    "until": "2026-10-01"
    }
   ],
   "420687": [
    {
     "name": "[Costume] Straight Long - Blonde (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Straight Long (Blonde) (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "420688": [
@@ -9158,6 +9862,10 @@
    {
     "name": "[Costume] Sun God's Hat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Helm of Sun (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "430018": [
@@ -9242,12 +9950,20 @@
    {
     "name": "[Costume] Black Wind Black Tiger (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Hwa Ho Jom Jong",
+    "until": "2026-10-01"
    }
   ],
   "436019": [
    {
     "name": "[Costume] Scratching Cat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Scratching Cat",
+    "until": "2026-10-01"
    }
   ],
   "436020": [
@@ -9578,6 +10294,10 @@
    {
     "name": "[Costume] Phen’s Electric Guitar",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Electric Guitar of Phen",
+    "until": "2026-10-01"
    }
   ],
   "480573": [
@@ -9590,42 +10310,70 @@
    {
     "name": "[Costume] Archangel Wings (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Archangel Wing",
+    "until": "2026-10-01"
    }
   ],
   "480575": [
    {
     "name": "[Costume] Valkyrie Curse Bright (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Valkyrie Curse Bright",
+    "until": "2026-10-01"
    }
   ],
   "480576": [
    {
     "name": "[Costume] Muramasa Blade (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Muramasa Blade",
+    "until": "2026-10-01"
    }
   ],
   "480577": [
    {
     "name": "[Costume] Giant Cat Bag (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Giant Cat Bag",
+    "until": "2026-10-01"
    }
   ],
   "480578": [
    {
     "name": "[Costume] Fairy of Eden (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume New Year Fairy of Eden",
+    "until": "2026-10-01"
    }
   ],
   "480579": [
    {
     "name": "[Costume] Swirling Flame (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Swirling Flame",
+    "until": "2026-10-01"
    }
   ],
   "480580": [
    {
     "name": "[Costume] Giant Black Cat (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Big Black Cat",
+    "until": "2026-10-01"
    }
   ],
   "480582": [
@@ -9638,18 +10386,30 @@
    {
     "name": "[Costume] Rudra Wing (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Rudra Wing",
+    "until": "2026-10-01"
    }
   ],
   "480588": [
    {
     "name": "[Costume] Brilliant Golden Wings (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Brilliant Golden Wings",
+    "until": "2026-10-01"
    }
   ],
   "480589": [
    {
     "name": "[Costume] Wing of Raguel (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Wing of Raguel",
+    "until": "2026-10-01"
    }
   ],
   "480595": [
@@ -9692,6 +10452,10 @@
    {
     "name": "[Costume] Heart Choco Bag (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Heart Chocolate Bag",
+    "until": "2026-10-01"
    }
   ],
   "480625": [
@@ -9764,6 +10528,10 @@
    {
     "name": "Double Ten Day Guardian Shield (Bound)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Double Ten Day Auto Guardian Shield (Bound)",
+    "until": "2026-10-01"
    }
   ],
   "480654": [

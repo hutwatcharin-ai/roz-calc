@@ -183,6 +183,33 @@ export default async function MvpGuidePage() {
         </ul>
       </section>
 
+      {/* From the 1 Oct 2026 client: itemmoveinfov5 lists these six boxes
+          under "1015 MVP", and their own descriptions name the NPC. No
+          notice yet, so they carry the not-open tag and no date. */}
+      <section className="card card--yellow" id="dolls" style={{ marginTop: 24, scrollMarginTop: 90 }}>
+        <h2 className="section-title">
+          รางวัลตุ๊กตา Baphomet กับ Amon Ra <span className="tag tag--unknown">ยังไม่เปิด</span>
+        </h2>
+        <p style={{ marginTop: 6 }}>
+          ไคลเอนต์แพทช์ 1 ต.ค. เพิ่มกล่องรางวัลตุ๊กตาของ MVP สองตัวนี้ไว้แล้ว ตัวละ 3 ระดับ · คำอธิบายในเกมบอกว่าเป็นของขวัญจาก
+          <strong> Wolhwa</strong> สำหรับคนที่นำตุ๊กตาไปให้ และนำไปให้ทุกวันจะได้อีก
+        </p>
+        <ul style={{ margin: '6px 0 0', paddingInlineStart: 22 }}>
+          <li>
+            <Link href="/database/items/108227">[Baphomet] Doll Reward (Low Grade)</Link> ·{' '}
+            <Link href="/database/items/108228">(Mid Grade)</Link> · <Link href="/database/items/108229">(High Grade)</Link>
+          </li>
+          <li>
+            <Link href="/database/items/108230">[Amon Ra] Doll Reward (Low Grade)</Link> ·{' '}
+            <Link href="/database/items/108231">(Mid Grade)</Link> · <Link href="/database/items/108232">(High Grade)</Link>
+          </li>
+        </ul>
+        <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
+          Wolhwa: <code>/navi moc_para01 18/35</code> (ระดับต่ำ–กลาง) และ <code>/navi prontera 260/268</code> (ระดับสูง) ตามที่ระบุในคำอธิบายกล่อง ·
+          ยังไม่มีประกาศว่าเปิดเมื่อไรและได้อะไรข้างใน
+        </p>
+      </section>
+
       <section id="pvp" style={{ marginTop: 28, scrollMarginTop: 90 }}>
         <h2 className="section-title">แมพ PVP Hidden Realm</h2>
         <p style={{ marginTop: 6, maxWidth: '70ch' }}>

@@ -7,3 +7,4 @@
 .guildp__row img { image-rendering: pixelated; }
 .guildp__row strong { font-size: 14px; }
 .guildp__row p { margin: 2px 0 0; font-size: 13px; line-height: 1.6; }
+.guildp__sub { margin: 0 0 4px; font: 700 15px/1.4 var(--font-sarabun), sans-serif; color: var(--cyan); }

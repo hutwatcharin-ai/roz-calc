@@ -139,7 +139,8 @@ export default function Events202610() {
           <li>Raymond ยกหมวกเขาประจำตระกูลให้ (ตัวสัญญา) จบเควสหลัก</li>
         </ol>
         <div className="evreward">
-          <span className="evreward__tag">REWARD</span> [Costume] Golden Majestic Goat (Bound) — ตามประกาศ
+          <span className="evreward__tag">REWARD</span>{' '}
+          <Link href="/database/costumes/401571">[Costume] Golden Majestic Goat (Bound)</Link> — หมวกช่องบน ทุกอาชีพ
         </div>
 
         <h3 className="evh">เควสรายวัน (กับ Priest Raymond)</h3>
@@ -156,7 +157,7 @@ export default function Events202610() {
           </div>
         </div>
         <div className="evreward">
-          <span className="evreward__tag">DAILY</span> Royal Jelly ×5 (ตามประกาศ) + บัฟ 4 ชั่วโมง
+          <span className="evreward__tag">DAILY</span> <Link href="/database/items/526">Royal Jelly</Link> ×5 (ตามประกาศ) + บัฟ 4 ชั่วโมง
         </div>
         <Buff name="Blessing of Exorcism" hours={4} lines={['Damage ที่ได้รับจากมอนสเตอร์เผ่า Demon ลดลง 30%']} />
         <p className="evnote">
@@ -189,7 +190,8 @@ export default function Events202610() {
           <li>กลับไปหา Al Noma ฟังตำนาน… แล้วเขาเผยตัวว่าคือ <b>Amon Ra</b> ที่คุณเพิ่งปลดผนึกให้</li>
         </ol>
         <div className="evreward">
-          <span className="evreward__tag">REWARD</span> [Costume] Sun God&apos;s Hat (Bound) — ตามประกาศ
+          <span className="evreward__tag">REWARD</span>{' '}
+          <Link href="/database/costumes/430017">[Costume] Sun God&apos;s Hat (Bound)</Link> — หมวกช่องบนและกลาง ทุกอาชีพ
         </div>
 
         <h3 className="evh">เควสรายวัน (กับ Apep)</h3>
@@ -206,7 +208,7 @@ export default function Events202610() {
           </div>
         </div>
         <div className="evreward">
-          <span className="evreward__tag">DAILY</span> Aloe Leaflet ×5 (ตามประกาศ) + บัฟ 4 ชั่วโมง
+          <span className="evreward__tag">DAILY</span> <Link href="/database/items/521">Aloe Leaflet</Link> ×5 (ตามประกาศ) + บัฟ 4 ชั่วโมง
         </div>
         <Buff name="Power of Amon Ra" hours={4} lines={['เพิ่มความต้านทานต่อการโจมตีธาตุ Fire 30%', 'DEF + 8, MDEF + 8']} />
       </section>
@@ -244,7 +246,8 @@ export default function Events202610() {
           <p className="muted">เก็บพลาดแค่เริ่มใหม่ ไม่เสียของ</p>
         </div>
         <div className="evreward">
-          <span className="evreward__tag">REWARD</span> ครั้งแรก: [Costume] Kumamon Mask (หนึ่งชิ้นต่อบัญชี) · ครั้งต่อไป: Kumamoto Watermelon ×2 + Kumamoto Tomato ×2
+          <span className="evreward__tag">REWARD</span> ครั้งแรก: <Link href="/database/costumes/400799">[Costume] Kumamon Mask</Link> (หนึ่งชิ้นต่อบัญชี · ช่วงกิจกรรมได้ EXP จากมอน +5%) · ครั้งต่อไป:{' '}
+          <Link href="/database/items/106885">Kumamoto-grown Watermelon</Link> ×2 + <Link href="/database/items/106886">Kumamoto-grown Tomato</Link> ×2
         </div>
 
         <h3 className="evh">เควสลับ: Watermelon Poring</h3>
@@ -258,19 +261,19 @@ export default function Events202610() {
           <div className="evfood__it">
             <img src={`${IMG}/kumamoto-watermelon.png`} alt="" width={24} height={24} />
             <div>
-              <b>Kumamoto Watermelon</b> → <i>Delicious Buff</i>
-              <p>เพิ่ม Damage กายภาพ/เวทมนตร์ต่อมอนสเตอร์ทั่วไป และต่อมอนสเตอร์ประเภท Boss</p>
+              <Link href="/database/items/106885"><b>Kumamoto-grown Watermelon</b></Link> → <i>Delicious Buff</i>
+              <p>เพิ่ม Damage กายภาพ/เวทมนตร์ต่อมอนสเตอร์ทั่วไปและประเภท Boss <b>10%</b> นาน <b>30 นาที</b> · ใช้ได้ตั้งแต่เลเวล 10</p>
             </div>
           </div>
           <div className="evfood__it">
             <img src={`${IMG}/kumamoto-tomato.png`} alt="" width={24} height={24} />
             <div>
-              <b>Kumamoto Tomato</b> → <i>Fresh Buff</i>
-              <p>เพิ่ม Damage กายภาพ/เวทมนตร์ต่อมอนสเตอร์ทุกเผ่า (ไม่รวมผู้เล่น)</p>
+              <Link href="/database/items/106886"><b>Kumamoto-grown Tomato</b></Link> → <i>Fresh Buff</i>
+              <p>เพิ่ม Damage กายภาพ/เวทมนตร์ต่อมอนสเตอร์ทุกเผ่า <b>10%</b> นาน <b>30 นาที</b> (ไม่รวมผู้เล่น) · ใช้ได้ตั้งแต่เลเวล 10</p>
             </div>
           </div>
         </div>
-        <p className="evnote">คำบรรยายบัฟในเกมไม่ระบุเปอร์เซ็นต์ และตัวเลขในภาพประกาศเล็กเกินจะอ่าน · ของสองอย่างนี้ถูกลบเมื่อกิจกรรมจบ</p>
+        <p className="evnote">ตัวเลขจากคำอธิบายไอเทมในเกม · ของสองอย่างนี้ถูกลบเมื่อกิจกรรมจบ</p>
 
         <h3 className="evh">แผนที่ฟาร์ม</h3>
         <figure className="evmap">
@@ -293,16 +296,17 @@ export default function Events202610() {
         <h3 className="evh">แพ็กเกจใน Cash Shop (1–29 ต.ค.)</h3>
         <div className="evshop">
           <div>
-            <b>Kumamon Refinement Package</b> · 35,000 KP
+            <Link href="/database/items/200860"><b>Kumamon Refinement Package</b></Link> · 35,000 KP
             <p>[Costume] Kumamon Doll ×1 พร้อมแร่ตีบวก Enriched Elunium และ Enriched Oridecon</p>
           </div>
           <div>
-            <b>Kumamon Growth Package</b> · 35,000 KP
+            <Link href="/database/items/200861"><b>Kumamon Growth Package</b></Link> · 35,000 KP
             <p>[Costume] Kumamon Doll ×1 พร้อมของเก็บเวล (Growth Elixir, Bubble Gum และยา)</p>
           </div>
         </div>
         <p className="evnote">
-          [Costume] Kumamon Doll เป็นผ้าคลุม (Garment) ใส่ได้ทุกอาชีพ มีออปชันเฉพาะช่วงกิจกรรม: ได้ EXP จากมอนเพิ่ม และถ้าใส่คู่ Kumamon Mask อัตราดรอปไอเทมเพิ่ม · ออปชันหายเมื่อจบกิจกรรม · จำนวนของในแพ็กเกจและเปอร์เซ็นต์ในภาพประกาศเล็กเกินจะอ่านให้แน่ จึงไม่ได้ใส่ตัวเลข
+          <Link href="/database/costumes/480559">[Costume] Kumamon Doll</Link> เป็นผ้าคลุม (Garment) ใส่ได้ทุกอาชีพ ออปชันช่วงกิจกรรม: EXP จากมอน <b>+5%</b> และถ้าใส่คู่ Kumamon Mask อัตราดรอปไอเทม <b>+5%</b> · ออปชันหายเมื่อจบกิจกรรม ·
+          จำนวนของอื่นในแพ็กเกจอ่านจากภาพประกาศไม่ชัด จึงไม่ได้ใส่ตัวเลข
         </p>
       </section>
 
