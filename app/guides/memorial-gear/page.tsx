@@ -111,7 +111,7 @@ export default async function MemorialGearPage() {
           item text (lib/memorial-gear thaiEffect), English only where the
           client has no Thai line for that piece. */}
       <p className="muted" style={{ fontSize: 13, marginTop: 0 }}>
-        ช่อง &quot;ผลจากในเกม&quot; คือข้อความภาษาไทยบนไอเทมในไคลเอนต์เกม ตัดบรรทัดเกริ่นกับบรรทัดน้ำหนัก/เลเวลออก
+        ช่อง &quot;ผลจากในเกม&quot; แรงค์ IV และ III คือข้อความภาษาไทยบนไอเทมในไคลเอนต์เกม · แรงค์ II และ I ยังไม่ลงเซิร์ฟ ไคลเอนต์ยังไม่มีภาษาไทย เว็บนี้แปลเองจากข้อความภาษาอังกฤษ
       </p>
 
       <section className="card card--cyan">

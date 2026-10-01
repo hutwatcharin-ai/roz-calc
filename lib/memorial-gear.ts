@@ -14,6 +14,7 @@
 // required_level against the server's level cap.
 
 import { gameThaiDescription } from '@/lib/game-items';
+import handThai from '@/data/memorial-gear-th.json';
 import { itemFormerNames } from '@/lib/item-former-names';
 import file from '@/data/memorial-gear.json';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -98,7 +99,8 @@ function cleanEffect(description: string | null): string | null {
  */
 export function thaiEffect(id: number): string | null {
   const lines = gameThaiDescription(id);
-  if (!lines) return null;
+  // Ranks II and I are not in the Thai client yet: our own translation.
+  if (!lines) return (handThai as { items: Record<string, string> }).items[String(id)] ?? null;
   const clean = lines.map((l) => l.replace(/\^[0-9A-Fa-f]{6}_?/g, '').trim()).filter((l) => l && l !== '_');
   const end = clean.findIndex((l) => /^ประเภท\s*:/.test(l));
   const body = end === -1 ? clean : clean.slice(0, end);
