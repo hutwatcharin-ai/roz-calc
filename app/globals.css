@@ -3693,7 +3693,14 @@ html .cardeffect .cardhero__effect { margin: 0; padding: 0; border: 0; max-width
    (the LCP element on many pages) paints when it always did, and the two
    moving parts -- the light along the rainbow strip and the joystick ball --
    run on the compositor. */
-html .topbar { background: linear-gradient(180deg, #160d3a, var(--ground)); border-bottom: 0; overflow-x: clip; }
+html .topbar { background: linear-gradient(180deg, #160d3a, var(--ground)); border-bottom: 0; }
+/* The running light travels past the right edge; the topbar clips it. On a
+   phone the topbar is position: static (not sticky, see the 640px block),
+   which made the light's containing block the page and let it widen the
+   page to ~490px mid-sweep on a 390px screen (measured 1 Oct 2026). Relative
+   there keeps the light inside the bar without pinning it. */
+html .topbar { overflow-x: clip; }
+@media (max-width: 640px) { html .topbar { position: relative; } }
 html .topbar::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; pointer-events: none;
   background: linear-gradient(90deg, var(--pink), var(--yellow), var(--cyan), #B47CFF, var(--pink));
@@ -3707,6 +3714,9 @@ html .topbar::before {
 /* Chrome logo. */
 html .brand__mark {
   font-style: italic; font-size: 25px; color: transparent; text-shadow: none;
+  /* Italic glyphs lean past their box; background-clip: text would cut the
+     last letter's top-right off without this room. */
+  padding-inline-end: 0.18em;
   background: linear-gradient(180deg, #fff 0%, #cfe9ff 42%, #3a2a7a 48%, #ff7ad0 54%, #ffe53d 100%);
   -webkit-background-clip: text; background-clip: text;
   filter: drop-shadow(0 2px 0 #000) drop-shadow(0 0 8px rgba(255, 61, 154, 0.5));

@@ -272,6 +272,10 @@ export default async function HomePage({
           <span className="chiplink__dot" aria-hidden="true" />
           แพทช์ 1 ต.ค. เลเวล 70 กับดันใหม่ 3 ที่
         </Link>
+        <Link href="/news/events-2026-10" className="chiplink">
+          <span className="chiplink__dot" aria-hidden="true" />
+          กิจกรรม ต.ค. Baphomet Cult · Amon Ra · Kumamon
+        </Link>
         <Link href="/news/battle-pass-summer-2026" className="chiplink">
           <span className="chiplink__dot" aria-hidden="true" />
           Battle Pass ฤดูร้อน มีรางวัลทุก Tier

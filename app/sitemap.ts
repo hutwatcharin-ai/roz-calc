@@ -29,7 +29,7 @@ export const dynamic = 'force-dynamic';
 // News pages are not nav entries, so they are listed here by hand. One line
 // per page, added the day it ships -- the same "route exists" check the nav
 // tables get from lib/nav-links.test.ts does not cover these, so keep it short.
-export const NEWS_PATHS: string[] = ['/news/roadmap', '/news/patch-2026-10-01', '/news/patch-2026-09-17', '/news/patch-2026-09-03', '/news/battle-pass-summer-2026'];
+export const NEWS_PATHS: string[] = ['/news/roadmap', '/news/events-2026-10', '/news/patch-2026-10-01', '/news/patch-2026-09-17', '/news/patch-2026-09-03', '/news/battle-pass-summer-2026'];
 
 // data/npcs.json has no per-row timestamp -- it's a static import, not a
 // table with a write path that stamps updated_at. Its own last real change

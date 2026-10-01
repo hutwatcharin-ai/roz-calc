@@ -71,7 +71,7 @@ const HIGHLIGHTS = [
   { big: '70', title: 'เพดานเลเวลใหม่', body: 'Base Level และ Job Level สูงสุดเป็น 70', href: '/guides/exp', link: 'ดูตาราง EXP' },
   { big: '3', title: 'ดันเจี้ยนใหม่', body: 'Labyrinth Forest, Sphinx, Mjolnir Abandoned Mine', href: '#dungeons', link: 'ดูมอนแต่ละชั้น' },
   { big: '60–70', title: 'เควสรายวันใหม่', body: 'สำหรับตัวละครเลเวล 60 ถึง 70' },
-  { big: '2', title: 'เควสอีเวนต์ใหม่', body: 'The Legend of Amon Ra และ The Baphomet Cult มีเฉพาะ Global' },
+  { big: '2', title: 'เควสอีเวนต์ใหม่', body: 'The Legend of Amon Ra และ The Baphomet Cult มีเฉพาะ Global', href: '/news/events-2026-10', link: 'วิธีทำเควสทั้ง 3 กิจกรรม' },
   { big: 'IV·III', title: 'ชุดดันใส่ได้เพิ่ม', body: 'ชุด Expedition (Lv 70) ใส่ได้แล้วตามเพดานใหม่', href: '/guides/memorial-gear', link: 'ดูชุดดัน' },
   { big: 'Shop', title: 'Kafra Shop และคอลแลบ', body: 'เริ่ม Kumamon · จบ Baby Shark · ของใหม่ Gacha Scroll, คอสตูม, แพ็กเกจผูกบัญชี' },
 ];
