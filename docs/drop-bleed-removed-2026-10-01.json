@@ -1,0 +1,194 @@
+[
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 1202,
+  "itemName": "Knife",
+  "rate": 1,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 4001,
+  "itemName": "Poring Card",
+  "rate": 0.2,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 12846,
+  "itemName": "Unripe Green Apple",
+  "rate": 0.2,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 512,
+  "itemName": "Apple",
+  "rate": 10,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 601,
+  "itemName": "Fly Wing",
+  "rate": 5,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 619,
+  "itemName": "Unripe Apple",
+  "rate": 0.2,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 909,
+  "itemName": "Jellopy",
+  "rate": 70,
+  "twin": 1002
+ },
+ {
+  "monster": 1062,
+  "name": "Poring",
+  "item": 938,
+  "itemName": "Sticky Mucus",
+  "rate": 4,
+  "twin": 1002
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 1476,
+  "itemName": "Crescent Scythe",
+  "rate": 0.25,
+  "twin": 1039
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 1466,
+  "itemName": "Crescent Scythe",
+  "rate": 2,
+  "twin": 1039
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 5160,
+  "itemName": "Majestic Goat",
+  "rate": 0.05,
+  "twin": 1039
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 2256,
+  "itemName": "Majestic Goat",
+  "rate": 1.5,
+  "twin": 1039
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 4147,
+  "itemName": "Baphomet Card",
+  "rate": 0.01,
+  "twin": 1039
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 714,
+  "itemName": "Emperium",
+  "rate": 2.5,
+  "twin": 1039
+ },
+ {
+  "monster": 1101,
+  "name": "Baphomet",
+  "item": 985,
+  "itemName": "Elunium",
+  "rate": 27.16,
+  "twin": 1039
+ },
+ {
+  "monster": 1050,
+  "name": "Picky",
+  "item": 2302,
+  "itemName": "Cotton Shirts",
+  "rate": 2,
+  "twin": 1049
+ },
+ {
+  "monster": 1050,
+  "name": "Picky",
+  "item": 4008,
+  "itemName": "Picky Card",
+  "rate": 0.2,
+  "twin": 1049
+ },
+ {
+  "monster": 1156,
+  "name": "Petit",
+  "item": 4118,
+  "itemName": "Earth Petite Card",
+  "rate": 0.01,
+  "twin": 1155
+ },
+ {
+  "monster": 1156,
+  "name": "Petit",
+  "item": 1035,
+  "itemName": "Dragon Canine",
+  "rate": 26.68,
+  "twin": 1155
+ },
+ {
+  "monster": 1156,
+  "name": "Petit",
+  "item": 6260,
+  "itemName": "Petite's Tail",
+  "rate": 0.5,
+  "twin": 1155
+ },
+ {
+  "monster": 1156,
+  "name": "Petit",
+  "item": 756,
+  "itemName": "Rough Oridecon",
+  "rate": 0.7,
+  "twin": 1155
+ },
+ {
+  "monster": 1185,
+  "name": "Whisper",
+  "item": 2282,
+  "itemName": "Halo",
+  "rate": 0.01,
+  "twin": 1179
+ },
+ {
+  "monster": 1185,
+  "name": "Whisper",
+  "item": 4102,
+  "itemName": "Whisper Card",
+  "rate": 0.01,
+  "twin": 1179
+ },
+ {
+  "monster": 1185,
+  "name": "Whisper",
+  "item": 601,
+  "itemName": "Fly Wing",
+  "rate": 5,
+  "twin": 1179
+ }
+]

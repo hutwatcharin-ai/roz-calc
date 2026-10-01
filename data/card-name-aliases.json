@@ -5,7 +5,7 @@
   "claim": "ไม่ได้แปลว่าการ์ดชื่อนี้คือชื่ออีกชื่อของมอน แต่แปลว่าการ์ดชื่อนี้ดรอปจากมอนตัวนี้ ซึ่งเป็นแถวใน monster_drops ของเราเอง",
   "rule": "เก็บเฉพาะคู่ที่ชื่อการ์ดไม่ซ้ำกับชื่อมอนตัวใด และการ์ดมีมอนดรอปตัวเดียว และค้นด้วยชื่อการ์ดแล้วยังไม่เจอ",
   "regenerate": "node scripts/build-card-name-aliases.mjs",
-  "generatedAt": "2026-09-09T04:12:25.419Z"
+  "generatedAt": "2026-10-01T01:47:30.845Z"
  },
  "aliases": [
   {
@@ -35,13 +35,6 @@
    "monsterName": "Baphomet",
    "card": 4129,
    "cardName": "Baphomet Jr. Card"
-  },
-  {
-   "alias": "Beetle King",
-   "monster": 1494,
-   "monsterName": "Kind Of Beetle",
-   "card": 4307,
-   "cardName": "Beetle King Card"
   },
   {
    "alias": "Bloody Butterfly",
@@ -79,6 +72,13 @@
    "cardName": "Dumpling Child Card"
   },
   {
+   "alias": "Earth Petite",
+   "monster": 1155,
+   "monsterName": "Petit",
+   "card": 4118,
+   "cardName": "Earth Petite Card"
+  },
+  {
    "alias": "Enchanted Peach Tree",
    "monster": 1410,
    "monsterName": "Live Peach Tree",
@@ -100,11 +100,11 @@
    "cardName": "Evil Snake Lord Card"
   },
   {
-   "alias": "Female ThiefBug",
+   "alias": "Female Thief Bug",
    "monster": 1053,
    "monsterName": "Thief Bug",
    "card": 4026,
-   "cardName": "Female ThiefBug Card"
+   "cardName": "Female Thief Bug Card"
   },
   {
    "alias": "Firelock Soldier",
@@ -121,6 +121,13 @@
    "cardName": "Frozen Knight Card"
   },
   {
+   "alias": "Giant Hornet",
+   "monster": 1303,
+   "monsterName": "Giant Honet",
+   "card": 4271,
+   "cardName": "Giant Hornet Card"
+  },
+  {
    "alias": "Golden Thief Bug",
    "monster": 1086,
    "monsterName": "Golden Bug",
@@ -133,6 +140,13 @@
    "monsterName": "Chung E",
    "card": 4373,
    "cardName": "Green Maiden Card"
+  },
+  {
+   "alias": "Grobe",
+   "monster": 1687,
+   "monsterName": "Grove",
+   "card": 4377,
+   "cardName": "Grobe Card"
   },
   {
    "alias": "Hatii",
@@ -149,6 +163,13 @@
    "cardName": "Hermit Plant Card"
   },
   {
+   "alias": "Jennifer",
+   "monster": 20177,
+   "monsterName": "Jeniffer",
+   "card": 27272,
+   "cardName": "Jennifer Card"
+  },
+  {
    "alias": "Jing Guai",
    "monster": 1517,
    "monsterName": "Li Me Mang Ryang",
@@ -163,11 +184,11 @@
    "cardName": "Lord of The Dead Card"
   },
   {
-   "alias": "Male ThiefBug",
+   "alias": "Male Thief Bug",
    "monster": 1054,
    "monsterName": "ThiefBug",
    "card": 4050,
-   "cardName": "Male ThiefBug Card"
+   "cardName": "Male Thief Bug Card"
   },
   {
    "alias": "Mao Guai",
@@ -191,6 +212,20 @@
    "cardName": "Miyabi Doll Card"
   },
   {
+   "alias": "Mutant Dragonoid",
+   "monster": 1262,
+   "monsterName": "Mutant Dragon",
+   "card": 4203,
+   "cardName": "Mutant Dragonoid Card"
+  },
+  {
+   "alias": "Novice Poring",
+   "monster": 2398,
+   "monsterName": "Little Poring",
+   "card": 4545,
+   "cardName": "Novice Poring Card"
+  },
+  {
    "alias": "Pickaxe Boulder Dwarf",
    "monster": 25325,
    "monsterName": "Boulder Dwarf Pick",
@@ -203,13 +238,6 @@
    "monsterName": "Picky",
    "card": 4011,
    "cardName": "Picky Egg Card"
-  },
-  {
-   "alias": "Picky Poring",
-   "monster": 2398,
-   "monsterName": "Little Poring",
-   "card": 4545,
-   "cardName": "Picky Poring Card"
   },
   {
    "alias": "Pirate Skeleton",
@@ -247,18 +275,25 @@
    "cardName": "Tower Keeper Card"
   },
   {
-   "alias": "Wanderer",
-   "monster": 1208,
-   "monsterName": "Wander Man",
-   "card": 4210,
-   "cardName": "Wanderer Card"
-  },
-  {
    "alias": "White Lady",
    "monster": 1630,
    "monsterName": "Bacsojin",
    "card": 4372,
    "cardName": "White Lady Card"
+  },
+  {
+   "alias": "Wootan Fighter",
+   "monster": 1499,
+   "monsterName": "Utan Fighter",
+   "card": 4261,
+   "cardName": "Wootan Fighter Card"
+  },
+  {
+   "alias": "Wootan Shooter",
+   "monster": 1498,
+   "monsterName": "Utan Shooter",
+   "card": 4260,
+   "cardName": "Wootan Shooter Card"
   },
   {
    "alias": "Yao Jun",
