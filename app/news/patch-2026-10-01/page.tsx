@@ -24,6 +24,9 @@ import { monsterLabel } from '@/lib/monster-known-as';
 import ItemSetCard from '@/components/ItemSetCard';
 import { ITEM_SETS } from '@/lib/item-sets';
 import starDroppers from '@/data/star-droppers.json';
+import { monsterModes } from '@/lib/monster-modes';
+
+const isMini = (id: number) => { const m = monsterModes(id); return Boolean(m?.known && m.mini); };
 
 export const revalidate = 3600;
 
@@ -135,10 +138,11 @@ export default async function Patch20261001Page() {
   const zeny = new Map(((zenyRes.data ?? []) as { monster_id: number; avg_zeny_per_kill: number | null }[]).map((z) => [z.monster_id, z.avg_zeny_per_kill]));
   const mvps = (mvpRes.data ?? []) as { id: number; name_en: string; level: number }[];
   const monsterName = new Map(spawns.filter((s) => s.monsters).map((s) => [s.monsters!.id, s.monsters!]));
-  // Mini-bosses in Labyrinth: one of each per floor.
+  // Mini-bosses in Labyrinth, by the game's own mini-boss flag (a monster that
+  // merely spawns once on a floor, like Creamy, is not one).
   const minis = [...new Map(
     spawns
-      .filter((s) => LABYRINTH_CODES.includes(s.map_code) && s.amount === 1 && s.monsters && !/^C\d /.test(s.monsters.name_en))
+      .filter((s) => LABYRINTH_CODES.includes(s.map_code) && s.monsters && isMini(s.monsters.id) && !/^C\d /.test(s.monsters.name_en))
       .map((s) => [s.monsters!.id, s.monsters!]),
   ).values()].sort((a, b) => (zeny.get(b.id) ?? 0) - (zeny.get(a.id) ?? 0));
 
@@ -256,7 +260,7 @@ export default async function Patch20261001Page() {
         </ul>
 
         <h3 className="pxh">มินิบอสใน Labyrinth Forest</h3>
-        <p className="muted pxp">เกิดชั้นละตัว ตายแล้วเกิดใหม่ช้า แต่ให้ซีนี่ต่อตัวสูงและการ์ดดี · ซีนี่คิดจากราคาขายของที่ดรอปคูณอัตราดรอป</p>
+        <p className="muted pxp">มินิบอสเกิดชั้นละตัว ให้ซีนี่ต่อตัวสูงและการ์ดดี · ซีนี่คิดจากราคาขายของที่ดรอปคูณอัตราดรอป</p>
         <ul className="pmobs">
           {minis.map((m) => (
             <li key={m.id}>
