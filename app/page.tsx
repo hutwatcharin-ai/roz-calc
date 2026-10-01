@@ -265,9 +265,9 @@ export default async function HomePage({
         </Link>
         {/* Time-boxed: the patch chip leads while the patch is news, then
             drops back out of the row (see docs/PATCH-2026-09-03.md). */}
-        <Link href="/news/patch-2026-09-17" className="chiplink">
+        <Link href="/news/patch-2026-10-01" className="chiplink">
           <span className="chiplink__dot" aria-hidden="true" />
-          แพทช์ 17 ก.ย. มี MVP ใหม่ 4 ตัว กับ Pyramid
+          แพทช์ 1 ต.ค. เลเวล 70 กับดันใหม่ 3 ที่
         </Link>
         <Link href="/news/battle-pass-summer-2026" className="chiplink">
           <span className="chiplink__dot" aria-hidden="true" />

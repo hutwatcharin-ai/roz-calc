@@ -45,6 +45,12 @@ const PLAN = roadmap.plan as Plan[];
 // Our own patch pages: the half of this page that is not somebody's plan.
 const LANDED = [
   {
+    href: '/news/patch-2026-10-01',
+    when: '1 ต.ค. 2569',
+    title: 'เลเวล 70, Labyrinth Forest, Sphinx, Mjolnir',
+    body: 'Base/Job Level สูงสุด 70 · ดันใหม่ Labyrinth Forest, Sphinx, Mjolnir Abandoned Mine · เควสรายวันเลเวล 60–70 · อีเวนต์ Amon Ra และ Baphomet Cult · เริ่ม Kumamon จบ Baby Shark · Clock Tower ที่แผนบอกว่าเดือนนี้ ไม่อยู่ในประกาศ',
+  },
+  {
     href: '/news/patch-2026-09-17',
     when: '17 ก.ย. 2569',
     title: 'MVP ใหม่ 4 ตัว, Pyramid, Geffen Dungeon, WoE',
