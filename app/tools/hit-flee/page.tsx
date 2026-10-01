@@ -99,7 +99,7 @@ export default async function HitFleePage({
       </form>
 
       {filled && myHit !== null && myFlee !== null && (
-        <div className="statgrid" style={{ marginTop: 16 }}>
+        <div className="statgrid statgrid--score" style={{ marginTop: 16 }}>
           <div className="statgrid__cell">
             <span className="reward-label">HIT ของคุณ</span>
             <span className="reward-value mono">{myHit}</span>

@@ -1,5 +1,7 @@
 import './globals.css';
 import Nav from '@/components/Nav';
+import NavProgress from '@/components/NavProgress';
+import { Suspense } from 'react';
 import SiteFooter from '@/components/SiteFooter';
 import BottomNav from '@/components/BottomNav';
 import { FarmPlanProvider } from '@/components/FarmPlanProvider';
@@ -101,6 +103,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               this wrapper every consumer gets the default context and the
               whole feature silently renders nothing (shipped broken once). */}
           <FarmPlanProvider>
+            {/* Suspense because it reads the search params. */}
+            <Suspense fallback={null}>
+              <NavProgress />
+            </Suspense>
             <Nav />
             {/* Sold space, top of every page (lib/ads). It reserves its
                 pixels whether or not a banner is sold, so nothing below it

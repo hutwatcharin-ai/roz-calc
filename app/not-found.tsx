@@ -24,31 +24,41 @@ const WHERE_TO = [
   { href: '/guides', label: 'ไกด์', icon: '/images/items/7134.gif' },
 ];
 
+// The arcade "GAME OVER / CONTINUE?" screen (owner, 1 Oct 2026: neon arcade
+// across the site). The h1 stays plain Thai so the page still says what
+// happened to a screen reader and in the tab title.
 export default function NotFound() {
   return (
     <main className="shell notfound" style={{ paddingBlock: 40 }}>
-      <img className="notfound__sprite" src="/images/monsters/1002.gif" alt="" width={72} height={72} />
-      <p className="notfound__code">404</p>
-      <h1 className="pagehead__title">ไม่พบหน้านี้</h1>
-      <p className="muted" style={{ maxWidth: '52ch' }}>
-        ลิงก์อาจเก่าหรือพิมพ์ผิด หน้านี้อาจถูกย้ายไปแล้ว ลองค้นชื่อมอน ไอเทม การ์ด สกิล หรือแมพที่ต้องการได้เลย
-      </p>
-      <div className="notfound__search">
-        <GlobalSearch />
-      </div>
-      <h2 className="section-title" style={{ marginTop: 24 }}>
-        หรือไปที่
-      </h2>
-      <div className="notfound__links">
-        {WHERE_TO.map((link) => (
-          <Link key={link.href} href={link.href} className="chiplink">
-            <img src={link.icon} alt="" width={18} height={18} style={{ imageRendering: 'pixelated' }} /> {link.label}
-          </Link>
-        ))}
-      </div>
-      <p style={{ marginTop: 24 }}>
-        <Link href="/">← กลับหน้าแรก</Link>
-      </p>
+      <section className="gameover">
+        <img className="gameover__sprite" src="/images/monsters/1002.gif" alt="" width={96} height={96} />
+        <p className="gameover__big" aria-hidden="true">GAME OVER</p>
+        <p className="notfound__code">ERROR 404</p>
+        <h1 className="pagehead__title gameover__title">ไม่พบหน้านี้</h1>
+        <p className="muted" style={{ maxWidth: '52ch', marginInline: 'auto' }}>
+          ลิงก์อาจเก่าหรือพิมพ์ผิด หน้านี้อาจถูกย้ายไปแล้ว ลองค้นชื่อมอน ไอเทม การ์ด สกิล หรือแมพที่ต้องการได้เลย
+        </p>
+        <div className="notfound__search">
+          <GlobalSearch />
+        </div>
+        <h2 className="gameover__continue">
+          CONTINUE? <span>เลือกไปต่อ</span>
+        </h2>
+        <ul className="gameover__menu">
+          {WHERE_TO.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href}>
+                <span className="gameover__cur" aria-hidden="true">▶</span>
+                <img src={link.icon} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p style={{ marginTop: 20 }}>
+          <Link href="/">← กลับหน้าแรก</Link>
+        </p>
+      </section>
     </main>
   );
 }

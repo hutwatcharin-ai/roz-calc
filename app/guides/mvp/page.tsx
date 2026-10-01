@@ -19,6 +19,7 @@
 // No respawn times: no source has Global numbers (checked 30 Sep 2026), and
 // the owner cut the "not known yet" section rather than show it.
 
+import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
@@ -47,33 +48,47 @@ const PVP_MAPS: { group: string; codes: string[] }[] = [
   { group: 'ทุ่ง', codes: ['gef_fild04', 'gef_fild05', 'gef_fild10', 'gef_fild11', 'pay_fild01', 'pay_fild03', 'pay_fild04', 'pay_fild08', 'prt_fild02', 'prt_fild07', 'prt_fild08', 'prt_fild11', 'moc_fild12', 'moc_fild16', 'moc_fild18', 'cmd_fild02'] },
 ];
 
-type Mvp = { id: number; name: string; level: number; image: string | null; open: boolean };
+type Mvp = { id: number; name: string; level: number; image: string | null; element: string | null; open: boolean };
 
 async function loadMvps(): Promise<Mvp[]> {
   const { data } = await supabaseBrowser()
     .from('monsters')
-    .select('id, name_en, level, image_url, monster_spawns(map_code)')
+    .select('id, name_en, level, image_url, element, monster_spawns(map_code)')
     .eq('is_mvp', true)
     .order('level');
-  return ((data ?? []) as unknown as { id: number; name_en: string; level: number; image_url: string | null; monster_spawns: { map_code: string }[] }[])
+  return ((data ?? []) as unknown as { id: number; name_en: string; level: number; image_url: string | null; element: string | null; monster_spawns: { map_code: string }[] }[])
     .filter((m) => m.monster_spawns.length > 0) // no habitat map at all: not in the game yet
     .map((m) => ({
       id: m.id,
       name: m.name_en,
       level: m.level,
       image: m.image_url,
+      element: m.element,
       open: m.monster_spawns.some((s) => !CLOSED[s.map_code]),
     }));
 }
 
+// An arcade boss card: a hazard-stripe "WARNING" band, the sprite in its
+// element's colour, and the level as a boss readout (owner, 1 Oct 2026:
+// neon arcade across the site). A boss whose map is not open yet is drawn
+// dimmed and says so in words, not only by colour.
 function MvpCard({ m }: { m: Mvp }) {
   return (
-    <Link href={`/database/monsters/${m.id}`} className="chiplink" style={{ opacity: m.open ? 1 : 0.7 }}>
-      <img src={m.image ?? `/images/monsters/${m.id}.gif`} alt="" width={32} height={32} style={{ imageRendering: 'pixelated', objectFit: 'contain' }} loading="lazy" />
-      <span>
-        {m.name} <span className="muted">Lv {m.level}</span>
-      </span>
-    </Link>
+    <li>
+      <Link
+        href={`/database/monsters/${m.id}`}
+        className={'bosscard' + (m.open ? '' : ' bosscard--locked')}
+        style={{ ['--el' as string]: (m.element && ELEMENT_COLOUR[m.element]) || ELEMENT_COLOUR_UNKNOWN }}
+      >
+        <span className="bosscard__warn" aria-hidden="true"><b>{m.open ? 'WARNING · BOSS' : 'LOCKED'}</b></span>
+        <span className="bosscard__art">
+          <img src={m.image ?? `/images/monsters/${m.id}.gif`} alt="" loading="lazy" />
+        </span>
+        <span className="bosscard__name">{m.name}</span>
+        <span className="bosscard__lv">MVP · LV {m.level}</span>
+        {!m.open && <span className="tag tag--unknown">ยังไม่เปิด</span>}
+      </Link>
+    </li>
   );
 }
 
@@ -122,18 +137,18 @@ export default async function MvpGuidePage() {
       <section style={{ marginTop: 24 }}>
         <h2 className="section-title">MVP ที่มีตอนนี้ ({open.length} ตัว)</h2>
         <p className="muted" style={{ marginTop: 4 }}>กดดูค่าสถานะ ธาตุ และของดรอปของแต่ละตัว</p>
-        <div className="chips" style={{ marginTop: 10, gap: 8 }}>
+        <ul className="bossgrid">
           {open.map((m) => <MvpCard key={m.id} m={m} />)}
-        </div>
+        </ul>
         {later.length > 0 && (
           <>
             <h3 className="section-title" style={{ fontSize: 15, marginTop: 18 }}>
               ยังไม่เปิด ({later.length} ตัว) <span className="tag tag--unknown">ยังไม่เปิด</span>
             </h3>
             <p className="muted" style={{ marginTop: 4 }}>แมพของตัวเหล่านี้ยังไม่เปิดบน Global</p>
-            <div className="chips" style={{ marginTop: 10, gap: 8 }}>
+            <ul className="bossgrid">
               {later.map((m) => <MvpCard key={m.id} m={m} />)}
-            </div>
+            </ul>
           </>
         )}
       </section>

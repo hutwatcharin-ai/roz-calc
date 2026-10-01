@@ -101,6 +101,8 @@ export async function EmptyState({
   const miss = what && kind ? searchMiss(await loadCatalog(), what, kind) : null;
   return (
     <div className="emptystate">
+      {/* Arcade "NO MATCH" title (owner, 1 Oct 2026); the sentence under it says it in Thai. */}
+      <p className="emptystate__hd" aria-hidden="true">NO MATCH</p>
       {what && miss ? (
         // The miss block already names the query and what to try; repeating
         // "nothing matched X" under it says it twice.

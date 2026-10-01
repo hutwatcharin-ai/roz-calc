@@ -229,7 +229,7 @@ export default function MonsterDamageCalculator({
           </h2>
 
           {damage ? (
-            <div className="statgrid" style={{ marginTop: 12 }}>
+            <div className="statgrid statgrid--score" style={{ marginTop: 12 }}>
               <div className="statgrid__cell">
                 <span className="reward-label">ดาเมจต่อหมัด</span>
                 <span className="reward-value mono">{damage.damage.toLocaleString()}</span>
@@ -277,7 +277,7 @@ export default function MonsterDamageCalculator({
           </div>
 
           {rate && ready ? (
-            <div className="statgrid">
+            <div className="statgrid statgrid--score">
               <div className="statgrid__cell">
                 <span className="reward-label">เวลาต่อตัว</span>
                 <span className="reward-value mono">{formatKillTime(rate.secondsToKill)}</span>
