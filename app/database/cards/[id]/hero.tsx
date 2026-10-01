@@ -4,6 +4,7 @@
 // screenshotted side by side (9 Sep 2026); the cabinet layout lost and is
 // gone. What is left is the one that shipped: artwork beside the answer.
 import Link from 'next/link';
+import CardSlab from '@/components/CardSlab';
 import { cardArtAlt, cardArtUrl, hasCardArt } from '@/lib/card-art';
 import type { CardRelease } from '@/lib/card-availability';
 import { releaseText } from '@/lib/card-availability';
@@ -22,9 +23,9 @@ function price(value: number | null): string {
   return value === null ? '—' : value.toLocaleString('en-US');
 }
 
-function Art({ id, name }: { id: number; name: string }) {
+function Art({ id, name, slot }: { id: number; name: string; slot: string | null }) {
   const art = hasCardArt(id);
-  return (
+  const figure = (
     <figure className="cardframe">
       {/* Foil shine over real card art (1 Oct 2026). Its own element:
           the figure's ::before/::after already draw the corner brackets. */}
@@ -43,6 +44,13 @@ function Art({ id, name }: { id: number; name: string }) {
       {!art && <figcaption className="cardframe__note">ยังไม่มีรูปการ์ดใบนี้ ที่เห็นคือหลังการ์ดทั่วไป</figcaption>}
     </figure>
   );
+  // Only real art opens the slab; the generic card back has nothing to see.
+  if (!art) return figure;
+  return (
+    <CardSlab id={id} name={name} src={cardArtUrl(id)} alt={cardArtAlt(id, name)} slot={slot}>
+      {figure}
+    </CardSlab>
+  );
 }
 
 function ReleaseLine({ release }: { release: CardRelease }) {
@@ -58,7 +66,7 @@ export function CardHero(props: CardHeroProps) {
   const { id, name, slot, effect, buyPrice, sellPrice, release } = props;
   return (
     <section className="cardhero">
-      <Art id={id} name={name} />
+      <Art id={id} name={name} slot={slot} />
       <div className="cardhero__body">
         <p className="cardhero__kicker">
           การ์ด{slot && <> · ใส่ช่อง {slot}</>} · <span className="mono">ID {id}</span>
