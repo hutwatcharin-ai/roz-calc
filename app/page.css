@@ -43,3 +43,17 @@ a.qcard:hover { background: var(--panel-2); }
 .siteupd__title { margin: 0 0 6px; font: 700 16px/1.5 var(--font-sarabun), sans-serif; color: var(--yellow); }
 .siteupd__list { margin: 0; padding-inline-start: 18px; display: flex; flex-direction: column; gap: 2px; line-height: 1.6; font-size: 14px; }
 .siteupd__list a { display: inline-block; padding-block: 8px; margin-block: -8px; }
+/* Arcade pass 3 (owner, 1 Oct 2026): each tool card reads as a game mode.
+   A counter, so the markup is untouched. Titles lit in their card's colour. */
+.qgrid { counter-reset: qmode; }
+.qcard > strong::before {
+  counter-increment: qmode; content: 'MODE 0' counter(qmode); display: block; margin-bottom: 4px;
+  font: 700 10px/1 var(--font-chakra), sans-serif; letter-spacing: 0.22em; color: var(--qc, var(--cyan));
+  text-shadow: 0 0 8px var(--qc, var(--cyan));
+}
+.qcard--yellow { --qc: var(--yellow); }
+.qcard--cyan { --qc: var(--cyan); }
+.qcard--pink { --qc: var(--pink); }
+html .qcard > strong { font-size: 17px; text-shadow: 0 0 12px color-mix(in srgb, var(--qc, var(--cyan)) 55%, transparent); }
+html .qcard__go { text-shadow: 0 0 8px var(--glow-yellow); }
+a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }
