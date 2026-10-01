@@ -69,7 +69,16 @@ export function CardHero(props: CardHeroProps) {
           การ์ด{slot && <> · ใส่ช่อง {slot}</>} · <span className="mono">ID {id}</span>
         </p>
         <h1 className="cardhero__name">{name}</h1>
-        {effect && <p className="cardhero__effect">{effect}</p>}
+        {/* Labelled and boxed (owner, 1 Oct 2026): as a bare line under the
+            name it did not read as "this is what the card does". */}
+        {effect && (
+          <div className="cardeffect">
+            <p className="cardeffect__hd">
+              <span className="cardeffect__tag" aria-hidden="true">EFFECT</span> คุณสมบัติการ์ด
+            </p>
+            <p className="cardhero__effect">{effect}</p>
+          </div>
+        )}
         {release && <ReleaseLine release={release} />}
         <dl className="specrow">
           <div className="specrow__cell">

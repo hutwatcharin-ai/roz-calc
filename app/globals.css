@@ -3676,3 +3676,14 @@ html .btn:active { transform: translateY(3px); box-shadow: 0 0 0 #A8960F, 0 0 18
 .slabopen:hover .cardframe__foil span { animation-duration: 1.6s; }
 @media (max-width: 560px) { .slab--mini { width: 150px; } .slab--mini .slab__name { font-size: 10px; } .slab--mini .slab__gradenum { font-size: 17px; } }
 .slab__left { text-align: left; }
+
+/* The card's effect as its own lit panel with a label (1 Oct 2026). */
+.cardeffect {
+  margin-top: 12px; max-width: 52ch; padding: 10px 14px 12px; border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255, 229, 61, 0.12), rgba(255, 229, 61, 0.03));
+  border: 1px solid rgba(255, 229, 61, 0.55); border-inline-start: 4px solid var(--yellow);
+  box-shadow: 0 0 16px rgba(255, 229, 61, 0.18);
+}
+.cardeffect__hd { margin: 0 0 4px; display: flex; align-items: center; gap: 8px; color: var(--dim); font: 600 13px var(--font-sarabun), sans-serif; }
+.cardeffect__tag { padding: 0 6px; border-radius: 2px; background: var(--yellow); color: #241E00; font: 700 10px/1.6 var(--font-chakra), sans-serif; letter-spacing: 0.14em; }
+html .cardeffect .cardhero__effect { margin: 0; padding: 0; border: 0; max-width: none; color: var(--yellow); font-size: clamp(18px, 2.2vw, 22px); text-shadow: 0 0 10px rgba(255, 229, 61, 0.35); }
