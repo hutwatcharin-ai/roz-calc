@@ -1,6 +1,7 @@
 // app/database/monsters/[id]/page.tsx
 import MonsterRing from '@/components/MonsterRing';
 import SpawnCards from '@/components/SpawnCards';
+import { knownAs } from '@/lib/monster-known-as';
 import { mobThresholds } from '@/lib/monster-thresholds';
 import AdSlot from '@/components/AdSlot';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
@@ -92,7 +93,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const thaiPart = thai.length > 0 ? ` (${thai.join(' / ')})` : '';
 
   return {
-    title: `${monster.name_en}${thaiPart} (Lv.${monster.level}) — ดรอป จุดเกิด ค่าสถานะ`,
+    title: `${knownAs(monster.id) ? `${knownAs(monster.id)} (${monster.name_en})` : monster.name_en}${thaiPart} (Lv.${monster.level}) — ดรอป จุดเกิด ค่าสถานะ`,
     description: `${monster.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''} ${parts.join(' ')} — ดูของที่ดรอป อัตราดรอป แมพที่เจอ และค่าสถานะครบใน RO Zero Thai`,
   };
 }
@@ -243,7 +244,10 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <MonsterRing src={monster.image_url} element={monster.element} elementLevel={monster.element_level} />
         )}
         <div>
-          <h1 className="pagehead__title">{monster.name_en}</h1>
+          <h1 className="pagehead__title">
+            {monster.name_en}
+            {knownAs(monster.id) && <span className="pagehead__known"> {knownAs(monster.id)}</span>}
+          </h1>
           <ThaiAliasLine kind="monsters" id={monster.id} />
           <FormerNameLine id={monster.id} />
           <SameNameLine id={monster.id} name={monster.name_en} others={sameName ?? []} />

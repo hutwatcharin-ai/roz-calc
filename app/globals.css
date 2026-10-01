@@ -3779,3 +3779,7 @@ a.iset__piece:hover, a.iset__piece:focus-visible { background: color-mix(in srgb
 .pmob__aggro { display: block; margin-top: 2px; color: var(--status-danger, #FF5A5A); font-weight: 700; }
 .pnote { margin-top: 22px; padding: 12px 14px; border-left: 3px solid var(--yellow); border-radius: 0 10px 10px 0; background: color-mix(in srgb, var(--yellow) 8%, transparent); font-size: 14.5px; line-height: 1.6; }
 @media (max-width: 520px) { .pdun__map { width: 84px; height: 84px; } .phero { padding: 22px 18px; } .phl__tile { padding: 12px; } .phl__big { font-size: 24px; } .pdun { padding: 14px; } }
+
+/* Players' name beside a shared client name (lib/monster-known-as). */
+.pagehead__known { font-size: 0.55em; color: var(--yellow); vertical-align: middle; }
+.aliasline__known strong { color: var(--yellow); }

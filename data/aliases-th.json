@@ -36,6 +36,16 @@
         "source": "gsc"
       }
     ],
+    "1039": [
+      {
+        "name": "บาโฟ",
+        "why": "ชื่อย่อ: Baphomet (MVP) · Google เคยส่งคำนี้ไปหน้า #1101 ซึ่งคือ Baphomet Jr. ย้ายมาที่ MVP เมื่อ 1 ต.ค. 2026 (เจ้าของเว็บชี้)",
+        "query": "บาโฟ ro",
+        "impressions": 1,
+        "position": 29.0,
+        "source": "gsc"
+      }
+    ],
     "1077": [
       {
         "name": "เห็ดม่วง",
@@ -72,16 +82,6 @@
         "query": "หมาฟ้า ro",
         "impressions": 3,
         "position": 66.5,
-        "source": "gsc"
-      }
-    ],
-    "1101": [
-      {
-        "name": "บาโฟ",
-        "why": "ชื่อย่อ: Baphomet",
-        "query": "บาโฟ ro",
-        "impressions": 1,
-        "position": 29.0,
         "source": "gsc"
       }
     ],

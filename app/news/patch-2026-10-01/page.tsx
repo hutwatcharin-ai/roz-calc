@@ -20,6 +20,7 @@ import JsonLd from '@/components/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { supabaseBrowser } from '@/lib/supabase';
 import { mapImage } from '@/lib/map-image';
+import { monsterLabel } from '@/lib/monster-known-as';
 
 export const revalidate = 3600;
 
@@ -84,7 +85,7 @@ function floorMobs(rows: Spawn[]): Mob[] {
     const m = row.monsters;
     if (!m || /^C\d /.test(m.name_en) || !row.amount) continue;
     const prev = seen.get(m.id);
-    seen.set(m.id, { id: m.id, name: m.name_en, level: m.level, amount: (prev?.amount ?? 0) + row.amount, aggressive: m.is_aggressive });
+    seen.set(m.id, { id: m.id, name: monsterLabel(m.id, m.name_en), level: m.level, amount: (prev?.amount ?? 0) + row.amount, aggressive: m.is_aggressive });
   }
   return [...seen.values()].sort((a, b) => b.amount - a.amount);
 }

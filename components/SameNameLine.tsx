@@ -9,6 +9,7 @@
 
 import Link from 'next/link';
 import { aegisName } from '@/lib/aegis-names';
+import { knownAs } from '@/lib/monster-known-as';
 
 export interface SameNameMonster {
   id: number;
@@ -28,7 +29,7 @@ export default function SameNameLine({ id, name, others }: { id: number; name: s
               destination anyone can read out of context. */}
           <Link href={`/database/monsters/${other.id}`}>
             <strong>
-              {name} Lv {other.level ?? '—'}
+              {knownAs(other.id) ?? name} Lv {other.level ?? '—'}
             </strong>
           </Link>
           {/* The internal names are the tie-breaker for a reader comparing the
@@ -37,6 +38,11 @@ export default function SameNameLine({ id, name, others }: { id: number; name: s
         </span>
       ))}
       {mine && <span className="aliasline__code"> · ตัวนี้คือ <span className="mono">{mine}</span></span>}
+      {knownAs(id) && (
+        <span className="aliasline__known">
+          {' '}· ผู้เล่นเรียกตัวนี้ว่า <strong>{knownAs(id)}</strong> ไม่ใช่ MVP
+        </span>
+      )}
     </p>
   );
 }
