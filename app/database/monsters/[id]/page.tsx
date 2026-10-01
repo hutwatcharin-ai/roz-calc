@@ -6,7 +6,7 @@ import { BossStage, MonsterCard } from '@/components/MonsterCard';
 import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import SpawnCards from '@/components/SpawnCards';
-import { knownAs } from '@/lib/monster-known-as';
+import { knownAs, monsterLabel } from '@/lib/monster-known-as';
 import { mobThresholds } from '@/lib/monster-thresholds';
 import AdSlot from '@/components/AdSlot';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
@@ -369,8 +369,8 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
 
       {/* Fluent one-liner for crawlers and quick readers (GEO audit): the
           headline facts as a sentence, not table fragments. */}
-      <p className="muted herosummary" style={{ marginTop: 10, maxWidth: '70ch' }}>
-        {monster.name_en} มอนสเตอร์เลเวล {monster.level}
+      <p className="muted herosummary" style={{ marginTop: 10 }}>
+        {monsterLabel(monster.id, monster.name_en)} มอนสเตอร์เลเวล {monster.level}
         {monster.race ? ` เผ่า ${monster.race}` : ''}
         {monster.element ? ` ธาตุ ${monster.element}${monster.element_level ?? ''}` : ''}
         {monster.size ? ` ขนาด ${monster.size}` : ''}
