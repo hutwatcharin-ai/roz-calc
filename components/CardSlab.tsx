@@ -9,6 +9,7 @@
 // 150x200, so the slab shows it at 2x and no more before it goes soft.
 
 import { useRef } from 'react';
+import SlabBody from '@/components/SlabBody';
 
 export default function CardSlab({
   id,
@@ -43,27 +44,7 @@ export default function CardSlab({
           if (event.target === event.currentTarget) close();
         }}
       >
-        <div className="slab">
-          <div className="slab__label">
-            <div className="slab__left">
-              <span className="slab__brand">RO ZERO THAI · CARD</span>
-              <span className="slab__name">{name}</span>
-              <span className="slab__meta">
-                #{id}
-                {slot ? ` · ${slot}` : ''}
-              </span>
-            </div>
-            <div className="slab__grade">
-              <span className="slab__gradeword">GEM MT</span>
-              <span className="slab__gradenum">10</span>
-            </div>
-            <span className="slab__barcode" aria-hidden="true" />
-          </div>
-          <div className="slab__window">
-            <img className="slab__art" src={src} alt={alt} width={300} height={400} />
-            <span className="slab__glare" aria-hidden="true" />
-          </div>
-        </div>
+        <SlabBody id={id} name={name} slot={slot} src={src} alt={alt} />
         <button type="button" className="slabdlg__close" onClick={close} aria-label="ปิด">
           ✕
         </button>

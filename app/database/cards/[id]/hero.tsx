@@ -5,6 +5,7 @@
 // gone. What is left is the one that shipped: artwork beside the answer.
 import Link from 'next/link';
 import CardSlab from '@/components/CardSlab';
+import SlabBody from '@/components/SlabBody';
 import { cardArtAlt, cardArtUrl, hasCardArt } from '@/lib/card-art';
 import type { CardRelease } from '@/lib/card-availability';
 import { releaseText } from '@/lib/card-availability';
@@ -27,13 +28,6 @@ function Art({ id, name, slot }: { id: number; name: string; slot: string | null
   const art = hasCardArt(id);
   const figure = (
     <figure className="cardframe">
-      {/* Foil shine over real card art (1 Oct 2026). Its own element:
-          the figure's ::before/::after already draw the corner brackets. */}
-      {art && (
-        <span className="cardframe__foil" aria-hidden="true">
-          <span />
-        </span>
-      )}
       <img
         className={art ? 'cardframe__art' : 'cardframe__art cardframe__art--none'}
         src={cardArtUrl(id)}
@@ -45,10 +39,13 @@ function Art({ id, name, slot }: { id: number; name: string; slot: string | null
     </figure>
   );
   // Only real art opens the slab; the generic card back has nothing to see.
+  // Real art sits in a small slab on the page too (owner, 1 Oct 2026).
   if (!art) return figure;
+  const src = cardArtUrl(id);
+  const alt = cardArtAlt(id, name);
   return (
-    <CardSlab id={id} name={name} src={cardArtUrl(id)} alt={cardArtAlt(id, name)} slot={slot}>
-      {figure}
+    <CardSlab id={id} name={name} src={src} alt={alt} slot={slot}>
+      <SlabBody id={id} name={name} slot={slot} src={src} alt={alt} mini />
     </CardSlab>
   );
 }

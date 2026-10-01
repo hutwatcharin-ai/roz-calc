@@ -3659,3 +3659,20 @@ html .btn:active { transform: translateY(3px); box-shadow: 0 0 0 #A8960F, 0 0 18
 }
 @media (max-width: 400px) { .slabdlg__close { top: -18px; right: -4px; } }
 @media (prefers-reduced-motion: reduce) { .slabdlg[open] { animation: none; } }
+
+/* The slab drawn small in place of the plain frame on the card page. */
+.slab--mini { width: 196px; padding: 7px; border-radius: 11px; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.08), inset 0 0 16px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 22px rgba(61, 232, 255, 0.3), 0 10px 24px rgba(0, 0, 0, 0.5); }
+.slab--mini .slab__label { padding: 5px 6px 4px; margin-bottom: 6px; border-width: 2px; border-radius: 4px; gap: 1px 6px; }
+.slab--mini .slab__brand { font-size: 6.5px; letter-spacing: 0.12em; }
+.slab--mini .slab__name { font-size: 11px; }
+.slab--mini .slab__meta { font-size: 9px; }
+.slab--mini .slab__gradeword { font-size: 7px; }
+.slab--mini .slab__gradenum { font-size: 20px; }
+.slab--mini .slab__barcode { height: 9px; margin-top: 2px; }
+.slab--mini .slab__window { padding: 8px; border-radius: 6px; }
+.slab--mini .slab__art { border-radius: 5px; }
+.slab--mini .cardframe__foil { inset: 8px; }
+.slabopen:hover .slab--mini { box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 30px rgba(61, 232, 255, 0.5), 0 10px 24px rgba(0, 0, 0, 0.5); }
+.slabopen:hover .cardframe__foil span { animation-duration: 1.6s; }
+@media (max-width: 560px) { .slab--mini { width: 150px; } .slab--mini .slab__name { font-size: 10px; } .slab--mini .slab__gradenum { font-size: 17px; } }
+.slab__left { text-align: left; }
