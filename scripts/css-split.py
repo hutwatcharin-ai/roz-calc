@@ -4,7 +4,7 @@
 # classes appears in a rule that stays global (an @media block, a mixed
 # selector) -- otherwise the cascade order between them would change.
 import re, os, io, collections, sys
-os.chdir(r'D:\Web\roz-calc')
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 WRITE = '--write' in sys.argv
 raw = io.open('app/globals.css', encoding='utf-8', newline='').read()
 nl = '\r\n' if '\r\n' in raw else '\n'
