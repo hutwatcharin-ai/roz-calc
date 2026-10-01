@@ -179,8 +179,25 @@ export default async function Patch20261001Page() {
           Labyrinth Forest, Sphinx และ Mjolnir Abandoned Mine เปิดให้เข้าแล้ว · เควสรายวันใหม่สำหรับเลเวล 60–70 · อีเวนต์ Amon Ra กับ Baphomet Cult
         </p>
         <p className="phero__pill">ปิดปรับปรุง 08:00–14:00 น. เวลาไทย</p>{' '}
-        <a className="phero__pill phero__pill--link" href="#hidden">การ์ดใหม่ {cardRows.length} ใบ และสิ่งที่ประกาศไม่ได้บอก ↓</a>
+        <a className="phero__pill phero__pill--link" href="#hidden">การ์ดใหม่ {cardRows.length} ใบ และสิ่งที่ประกาศไม่ได้บอก ↓</a>{' '}
+        <Link className="phero__pill phero__pill--link" href="/news/events-2026-10">กิจกรรม 3 อย่างของเดือนนี้ →</Link>
       </header>
+
+      {/* The three October events have their own page (owner, 1 Oct 2026):
+          a banner straight under the hero so nobody has to find the tile. */}
+      <Link href="/news/events-2026-10" className="pevents">
+        <span className="pevents__tag">EVENT · 1–29 ต.ค.</span>
+        <span className="pevents__body">
+          <strong>กิจกรรมเดือนตุลาคม วิธีทำเควสครบ</strong>
+          <small>Baphomet Cult · The Legend of Amon Ra · Kumamon Collab — พิกัด NPC ของที่ต้องเตรียม รางวัล และบัฟ</small>
+        </span>
+        <span className="pevents__npcs" aria-hidden="true">
+          <img src="/images/events/2026-10/raymond.png" alt="" width={34} />
+          <img src="/images/events/2026-10/amon-ra.png" alt="" width={50} />
+          <img src="/images/events/2026-10/kumamon.png" alt="" width={40} />
+        </span>
+        <span className="pevents__go" aria-hidden="true">▶</span>
+      </Link>
 
       <section className="phl" aria-label="สรุปแพทช์">
         {HIGHLIGHTS.map((h) => (

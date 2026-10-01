@@ -45,3 +45,18 @@
   border-block: 2px solid var(--pink); box-shadow: 0 0 14px rgba(255, 61, 154, 0.35), inset 0 0 14px rgba(255, 61, 154, 0.2);
   background: linear-gradient(90deg, transparent, rgba(255, 61, 154, 0.18), transparent);
 }
+/* Banner to the October events page (1 Oct 2026). */
+.pevents {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; padding: 12px 16px; border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255, 61, 154, 0.16), rgba(61, 232, 255, 0.1)); border: 2px solid var(--pink);
+  box-shadow: 4px 4px 0 var(--pink), 0 0 18px rgba(255, 61, 154, 0.3); color: var(--text); text-decoration: none; transition: transform 0.15s;
+}
+.pevents:hover { transform: translate(-2px, -2px); text-decoration: none; }
+.pevents__tag { padding: 1px 8px; background: var(--pink); color: #0B0820; font: 700 11px/1.6 var(--font-chakra), sans-serif; letter-spacing: 0.16em; }
+.pevents__body { display: flex; flex-direction: column; flex: 1 1 260px; gap: 2px; }
+.pevents__body strong { font: 700 17px var(--font-chakra), var(--font-sarabun), sans-serif; }
+.pevents__body small { color: var(--dim); font-size: 13px; }
+.pevents__npcs { display: flex; align-items: flex-end; gap: 8px; height: 56px; }
+.pevents__npcs img { max-height: 56px; width: auto; image-rendering: pixelated; }
+.pevents__go { color: var(--yellow); font-size: 18px; text-shadow: 0 0 8px var(--glow-yellow); }
+@media (prefers-reduced-motion: reduce) { .pevents { transition: none; } }
