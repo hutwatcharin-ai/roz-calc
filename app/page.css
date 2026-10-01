@@ -46,14 +46,23 @@ a.qcard:hover { background: var(--panel-2); }
 /* Arcade pass 3 (owner, 1 Oct 2026): each tool card reads as a game mode.
    A counter, so the markup is untouched. Titles lit in their card's colour. */
 .qgrid { counter-reset: qmode; }
+/* MODE as a lit block, scanlines behind, the art bobbing, a lift on hover
+   (owner's pick B, 1 Oct 2026). */
 .qcard > strong::before {
-  counter-increment: qmode; content: 'MODE 0' counter(qmode); display: block; margin-bottom: 4px;
-  font: 700 10px/1 var(--font-chakra), sans-serif; letter-spacing: 0.22em; color: var(--qc, var(--cyan));
-  text-shadow: 0 0 8px var(--qc, var(--cyan));
+  counter-increment: qmode; content: 'MODE 0' counter(qmode); display: block; width: max-content; margin-bottom: 6px; padding: 1px 7px;
+  font: 700 10px/1.5 var(--font-chakra), sans-serif; letter-spacing: 0.22em; color: #0B0820; background: var(--qc, var(--cyan));
 }
+html .qcard {
+  background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 3px);
+  transition: transform 0.15s;
+}
+html a.qcard:hover { transform: translate(-3px, -3px); }
+html .qcard__art:not(.qcard__art--sleep) { animation: qcard-bob 1.6s ease-in-out infinite alternate; }
+@keyframes qcard-bob { to { transform: translateY(-5px); } }
+@media (prefers-reduced-motion: reduce) { html .qcard__art { animation: none; } html .qcard { transition: none; } }
 .qcard--yellow { --qc: var(--yellow); }
 .qcard--cyan { --qc: var(--cyan); }
 .qcard--pink { --qc: var(--pink); }
-html .qcard > strong { font-size: 17px; text-shadow: 0 0 12px color-mix(in srgb, var(--qc, var(--cyan)) 55%, transparent); }
+html .qcard > strong { font-size: 17px; }
 html .qcard__go { text-shadow: 0 0 8px var(--glow-yellow); }
 a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }

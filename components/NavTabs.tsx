@@ -23,6 +23,16 @@ import {
   isActivePrimaryLink,
 } from '@/lib/nav-links';
 
+// Each primary tab is its own coloured arcade button (owner's pick B2,
+// 1 Oct 2026, public/draft/arcade-header); the colour lives in CSS.
+const TAB_COLOUR: Record<string, string> = {
+  '/': 'home',
+  '/drop-finder': 'drop',
+  '/database/monsters': 'db',
+  '/tools/leveling-spots': 'tool',
+  '/guides': 'guide',
+};
+
 type SectionLink = (typeof SECTION_LINKS)[keyof typeof SECTION_LINKS][number];
 
 function SectionRow({ links, pathname, className, onPick }: { links: readonly SectionLink[]; pathname: string; className: string; onPick?: () => void }) {
@@ -81,6 +91,7 @@ export default function NavTabs() {
               href={link.href}
               className={isActivePrimaryLink(link.href, pathname) ? 'on' : undefined}
               aria-current={isActivePrimaryLink(link.href, pathname) ? 'page' : undefined}
+              data-k={TAB_COLOUR[link.href]}
             >
               {link.label}
             </Link>
