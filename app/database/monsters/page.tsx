@@ -1,4 +1,6 @@
 // app/database/monsters/page.tsx
+import { spriteSize } from '@/lib/sprite-scale';
+import { monsterLabel } from '@/lib/monster-known-as';
 import './page.css';
 import type { Metadata } from 'next';
 import { Fragment } from 'react';
@@ -615,38 +617,53 @@ export default async function MonsterListPage({
           {(monsters ?? []).map((m, index) => (
             <Fragment key={`row-${m.id}`}>
             {index === 12 && <AdsenseUnit slot="list" />}
-            <Link href={`/database/monsters/${m.id}`} className="moncard" data-element={m.element ?? undefined}>
-              {m.image_url ? (
-                <img className="moncard__sprite" loading="lazy" decoding="async" src={m.image_url} alt="" width={40} height={40} />
-              ) : (
-                <span className="moncard__sprite" aria-hidden="true" />
-              )}
-              <span className="moncard__body">
-                <span className="moncard__top">
-                  <span className="moncard__name">{m.name_en}</span>
-                  <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
-                </span>
-                <span className="moncard__meta">
-                  Lv {m.level ?? '—'} · {m.race ?? '—'} · {m.element ?? '—'}
-                </span>
-                <span className="moncard__meta">
-                  {/* 0 is this table's unknown marker for these two columns,
-                      not a monster with no hit points -- see lib/unknown-stat. */}
-                  HP {unknownIfZero(m.hp)} · EXP {unknownIfZero(m.base_exp)}
-                </span>
-                {(topDrops.get(m.id) ?? []).length > 0 && (
-                  <span className="moncard__drops">
-                    ดรอป:{' '}
-                    {(topDrops.get(m.id) ?? []).map((d, i) => (
-                      <span key={d.id}>
-                        {i > 0 && ' · '}
-                        {d.name}
-                        {d.rate != null && <span className="moncard__rate"> {d.rate}%</span>}
-                      </span>
-                    ))}
-                  </span>
+            {/* Character-select tile (owner's pick L1, 1 Oct 2026, from
+                public/draft/monster-arcade): the sprite large in its
+                element's light, level and element on the top strip, the
+                aggro badge in the corner, the drop it is hunted for below. */}
+            <Link href={`/database/monsters/${m.id}`} className="moncard moncard--l1" data-element={m.element ?? undefined}>
+              <span className="moncard__bar">
+                <span>LV {m.level ?? '—'}</span>
+                <span>{m.element ?? '—'}</span>
+              </span>
+              <span className="moncard__badge">
+                <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
+              </span>
+              <span className="moncard__cur" aria-hidden="true">▶</span>
+              <span className="moncard__art">
+                {m.image_url ? (
+                  (() => {
+                    const sz = spriteSize(m.image_url, 84);
+                    return (
+                      <img
+                        className="moncard__sprite"
+                        loading="lazy"
+                        decoding="async"
+                        src={m.image_url}
+                        alt=""
+                        data-scaled={sz ? '' : undefined}
+                        style={sz ? ({ ['--w' as string]: `${sz.width}px`, ['--h' as string]: `${sz.height}px` }) : undefined}
+                      />
+                    );
+                  })()
+                ) : (
+                  <span className="moncard__sprite" aria-hidden="true" />
                 )}
               </span>
+              <span className="moncard__name">{monsterLabel(m.id, m.name_en)}</span>
+              <span className="moncard__meta">
+                {m.race ? RACE_TH[m.race] ?? m.race : '—'} · HP {unknownIfZero(m.hp)} · EXP {unknownIfZero(m.base_exp)}
+              </span>
+              {(topDrops.get(m.id) ?? []).length > 0 && (
+                <span className="moncard__drops">
+                  {(topDrops.get(m.id) ?? []).slice(0, 1).map((d) => (
+                    <span key={d.id}>
+                      {d.name}
+                      {d.rate != null && <span className="moncard__rate"> {d.rate}%</span>}
+                    </span>
+                  ))}
+                </span>
+              )}
             </Link>
             </Fragment>
           ))}

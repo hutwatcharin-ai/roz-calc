@@ -2,7 +2,9 @@
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { STAT_BAND, statSegments } from '@/lib/stat-rank';
 import '../page.css';
-import MonsterRing from '@/components/MonsterRing';
+import { BossStage, MonsterCard } from '@/components/MonsterCard';
+import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
+import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import SpawnCards from '@/components/SpawnCards';
 import { knownAs } from '@/lib/monster-known-as';
 import { mobThresholds } from '@/lib/monster-thresholds';
@@ -100,6 +102,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     description: `${monster.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''} ${parts.join(' ')} — ดูของที่ดรอป อัตราดรอป แมพที่เจอ และค่าสถานะครบใน RO Zero Thai`,
   };
 }
+
+
+const SIZE_TH: Record<string, string> = { Small: 'เล็ก', Medium: 'กลาง', Large: 'ใหญ่' };
 
 export default async function MonsterDetailPage({ params }: { params: { id: string } }) {
   const db = supabaseBrowser();
@@ -258,28 +263,64 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
         })}
       />
 
-      <div className="monhead">
-        {monster.image_url && (
-          <MonsterRing src={monster.image_url} element={monster.element} elementLevel={monster.element_level} />
+      {/* Owner's picks (1 Oct 2026, public/draft/monster-arcade): a boss
+          (MVP or mini-boss) gets the "boss intro" stage, an ordinary monster
+          a collectible card framed in its element's colour. Either way the
+          name sits beside it in chrome with the facts as arcade chips. */}
+      {(() => {
+        const modes = monsterModes(monster.id);
+        const boss = !!monster.is_mvp || !!(modes?.known && modes.mini);
+        const aggressive = (monster.is_aggressive ?? modes?.behaviour?.aggressive) === true;
+        return (
+      <div className={boss ? 'monhead monhead--boss' : 'monhead monhead--card'} style={{ ['--el' as string]: (monster.element && ELEMENT_COLOUR[monster.element]) || ELEMENT_COLOUR_UNKNOWN }}>
+        {boss ? (
+          <BossStage
+            src={monster.image_url}
+            element={monster.element}
+            elementLevel={monster.element_level}
+            aggressive={aggressive}
+            label={monster.is_mvp ? 'MVP' : 'MINI BOSS'}
+          />
+        ) : (
+          <MonsterCard
+            name={knownAs(monster.id) ?? monster.name_en}
+            level={monster.level}
+            src={monster.image_url}
+            element={monster.element}
+            elementLevel={monster.element_level}
+            typeLine={[monster.race, monster.size].filter(Boolean).join(' · ')}
+            hp={monster.hp}
+            atk={monster.atk_max}
+            def={monster.def}
+            aggressive={aggressive}
+          />
         )}
-        <div>
-          <h1 className="pagehead__title">
+        <div className="monhead__info">
+          <p className="monhead__kicker">{monster.is_mvp ? 'MVP' : boss ? 'MINI BOSS' : 'MONSTER'} · LV {monster.level}</p>
+          <h1 className="pagehead__title monhead__name">
             {monster.name_en}
             {knownAs(monster.id) && <span className="pagehead__known"> {knownAs(monster.id)}</span>}
           </h1>
           <ThaiAliasLine kind="monsters" id={monster.id} />
           <FormerNameLine id={monster.id} />
           <SameNameLine id={monster.id} name={monster.name_en} others={sameName ?? []} />
-          <p style={{ color: 'var(--dim)' }}>
-            Lv.{monster.level}
-            {monster.race ? ` · ${monster.race}` : ''}
-            {monster.element ? ` · ${monster.element}${monster.element_level ?? ''}` : ''}
-            {monster.size ? ` · ${monster.size}` : ''}
+          <p className="monhead__chips">
+            {monster.element && (
+              <span className="monchip monchip--el">◆ {monster.element} {monster.element_level ?? ''}{ELEMENT_TH[monster.element] ? ` · ${ELEMENT_TH[monster.element]}` : ''}</span>
+            )}
+            {monster.race && <span className="monchip monchip--race">{monster.race}{RACE_TH[monster.race] ? ` · ${RACE_TH[monster.race]}` : ''}</span>}
+            {monster.size && <span className="monchip monchip--size">{monster.size}{SIZE_TH[monster.size] ? ` · ${SIZE_TH[monster.size]}` : ''}</span>}
           </p>
-        </div>
+          {boss && (
+            <div className="bosshp" aria-label={`HP ${monster.hp ?? 'ไม่ทราบ'}`}>
+              <i aria-hidden="true" />
+              <b>HP</b>
+              <span>{monster.hp && monster.hp > 0 ? monster.hp.toLocaleString('en-US') : '—'}</span>
+            </div>
+          )}
         {/* The badge sits in the header, not buried below: it is the reason a
             player opened this page and no competing site shows it. */}
-        <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
+        <div className="monhead__tags">
           {/* Mini-boss and "rooted" come from the same export as the aggro
               flag but had no column; lib/monster-modes carries them. A row
               the export says nothing about gets ONE "no data" badge covering
@@ -321,7 +362,10 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           {monster.loots_items && <span className="tag" title="เก็บของที่ตกบนพื้น">เก็บของตก</span>}
           <AddToPlanButton monsterId={monster.id} />
         </div>
+        </div>
       </div>
+        );
+      })()}
 
       {/* Fluent one-liner for crawlers and quick readers (GEO audit): the
           headline facts as a sentence, not table fragments. */}

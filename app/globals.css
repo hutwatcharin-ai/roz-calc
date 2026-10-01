@@ -3760,3 +3760,14 @@ html .searchbtn:hover { border-color: var(--cyan); box-shadow: 0 0 18px var(--gl
   html .topbar::before { animation: none; display: none; }
   html .topnav a { transition: none; }
 }
+
+/* Loot tiers in the monster drop table (lib/drop-tier, 1 Oct 2026). */
+tr[data-tier='common'] { --t: #8f86c4; }
+tr[data-tier='uncommon'] { --t: #5CFF8A; }
+tr[data-tier='rare'] { --t: #3d9bff; }
+tr[data-tier='epic'] { --t: #b47cff; }
+tr[data-tier='card'] { --t: var(--yellow); }
+html tr[data-tier] td:first-child { box-shadow: inset 4px 0 0 var(--t), inset 34px 0 30px -30px var(--t); }
+html tr[data-tier='card'] td { background: linear-gradient(90deg, rgba(255, 229, 61, 0.1), transparent 70%); }
+tr[data-tier] .droprate { font: 700 15px var(--font-chakra), sans-serif; color: var(--t); }
+.droptier { display: block; font: 700 9.5px var(--font-chakra), sans-serif; letter-spacing: 0.14em; color: var(--t); opacity: 0.85; }

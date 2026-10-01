@@ -6,6 +6,7 @@
 // is worth picking up", and rate alone does not answer it. Equipment prices
 // are shown as-is; they are the rozerodb-synced NPC price.
 
+import { dropTier, TIER_LABEL } from '@/lib/drop-tier';
 import Link from 'next/link';
 import { itemHref } from '@/lib/item-href';
 import CardLink from '@/components/CardLink';
@@ -66,7 +67,7 @@ export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDro
           <tr><td colSpan={3} data-label="" style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลของที่ดรอป</td></tr>
         ) : (
           rows.map((d, i) => (
-            <tr key={d.items?.id ?? i}>
+            <tr key={d.items?.id ?? i} data-tier={dropTier(d.rate, d.items?.category === 'Card') ?? undefined}>
               <td data-label="">
                 {/* A card in a drop list is a name and nothing else -- the
                     reader has to open it to learn whether it is worth the
@@ -96,14 +97,13 @@ export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDro
                 )}
               </td>
               <td data-label="อัตราดรอป" className="num">
-                {/* Arcade loot tags (1 Oct 2026): a card, or anything under
-                    1%, is the drop people farm a monster for. */}
-                {d.items?.category === 'Card' ? (
-                  <span className="loottag loottag--card">CARD</span>
-                ) : d.rate != null && d.rate < 1 ? (
-                  <span className="loottag">RARE</span>
-                ) : null}
-                {d.rate != null ? `${d.rate}%` : 'ไม่ทราบอัตรา'}
+                {/* Loot tier (1 Oct 2026, lib/drop-tier): the row's colour
+                    and this label, like an RPG's item rarity. */}
+                <span className="droprate">{d.rate != null ? `${d.rate}%` : 'ไม่ทราบอัตรา'}</span>
+                {(() => {
+                  const t = dropTier(d.rate, d.items?.category === 'Card');
+                  return t ? <span className="droptier">{TIER_LABEL[t]}</span> : null;
+                })()}
               </td>
               <td data-label="ขายร้าน" className="num mono">
                 {d.items?.sell_price && d.items.sell_price > 0 ? `${d.items.sell_price.toLocaleString('en-US')}z` : '—'}
