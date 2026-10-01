@@ -1,4 +1,5 @@
 import '../page.css';
+import DropperGrid, { type Dropper } from '@/components/DropperGrid';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import { isAbsentFromGame } from '@/lib/game-absent';
@@ -218,14 +219,15 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           they scan a stat window in game, not as a sentence (competitor-gap
           note in memory, plan item 3). Tiles render only for stats the item
           actually has: a potion page shows prices, not a wall of dashes. */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <div className="archero">
         {/* flex: none -- in a flex row beside a long description the 64px icon
             was squeezed to about 30px on a phone (UX review, 11 Sep 2026). */}
-        <span className="itemframe">
+        <span className="itemframe" data-kind="item">
           <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
         </span>
         <div>
-          <h1 className="pagehead__title">
+          <p className="arckicker">ITEM · {item.category ?? 'Other'} · ID {item.id}</p>
+          <h1 className="pagehead__title arcname">
             {item.name_en}
             {item.slots > 0 && (
               <span className="slotbadge" title={`ใส่การ์ดได้ ${item.slots} ช่อง`}>
@@ -243,7 +245,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
               ? rows.reduce((a: any, b: any) => ((b.monsters.level ?? 999) < (a.monsters.level ?? 999) ? b : a))
               : null;
             return (
-              <p className="muted" style={{ marginTop: 6, maxWidth: '65ch' }}>
+              <p className="muted" style={{ marginTop: 6 }}>
                 {item.name_en}
                 {item.category ? ` เป็นไอเทมหมวด ${item.category}` : ''}
                 {item.sell_price ? ` ขายร้าน NPC ได้ ${item.sell_price.toLocaleString()} Zeny` : ''}
@@ -351,22 +353,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           // Cards with the sprite at its own shape and the rate as the big
           // number (owner, 30 Sep 2026), the same read as the star-gear
           // droppers; the old rows drew every sprite in a 20px square.
-          <ul className="dropgrid">
-            {(droppedBy ?? []).map((d: any, i: number) => (
-              <li key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined}>
-                <Link href={`/database/monsters/${d.monsters.id}`} className="dropcard">
-                  <span className="dropcard__art">
-                    {d.monsters.image_url && <img src={d.monsters.image_url} alt="" loading="lazy" />}
-                  </span>
-                  <span className="dropcard__name">
-                    {d.monsters.name_en}
-                    {d.monsters.level != null && <span className="dropcard__lv">Lv {d.monsters.level}</span>}
-                  </span>
-                  <span className="dropcard__rate">{d.rate != null ? `${d.rate}%` : '?'}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <DropperGrid droppers={(droppedBy ?? []) as unknown as Dropper[]} />
         )}
       </div>
       <div style={{ marginTop: 20 }}>

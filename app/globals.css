@@ -3843,3 +3843,33 @@ html .fpanel .chip--on, html .fpanel .chip--on[data-element] {
 html .fpanel .chip--on::before { content: '▶'; font-size: 9px; margin-right: 2px; }
 html .fpanel .chip--on .chip__count { color: var(--yellow-ink); }
 @media (max-width: 640px) { html .fpanel .chips { grid-template-columns: repeat(3, minmax(0, 1fr)); } html .fpanel .chip { min-height: 44px; } }
+
+/* ---- Site-wide arcade standard, taken from the monster page (1 Oct 2026) ---- */
+/* Detail-page names in chrome, with a small kicker line above. */
+.arckicker { margin: 0 0 2px; font: 700 12px var(--font-chakra), sans-serif; letter-spacing: 0.2em; color: var(--pink); text-shadow: 0 0 8px var(--pink); text-transform: uppercase; }
+html .arcname, html .cardhero__name {
+  font-style: italic; color: transparent; text-shadow: none; padding-inline-end: 0.15em;
+  background: linear-gradient(180deg, #fff 0%, #cfe9ff 42%, #3a2a7a 48%, #ff7ad0 54%, #ffe53d 100%);
+  -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 3px 0 #000) drop-shadow(0 0 10px rgba(255, 61, 154, 0.45));
+}
+html .arcname .slotbadge { -webkit-text-fill-color: var(--cyan); font-style: normal; }
+.archero { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+/* The item frame takes the colour of what it is. */
+.itemframe[data-kind='weapon'] { --fk: var(--cyan); }
+.itemframe[data-kind='armor'] { --fk: var(--yellow); }
+.itemframe[data-kind='costume'] { --fk: var(--pink); }
+.itemframe[data-kind='item'] { --fk: #5CFF8A; }
+html .itemframe[data-kind] { border-color: var(--fk); box-shadow: 0 0 0 3px #0B0820, 0 0 0 5px color-mix(in srgb, var(--fk) 60%, transparent), 0 0 20px color-mix(in srgb, var(--fk) 40%, transparent); background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--fk) 22%, transparent), #08051a 70%); }
+
+/* Droppers as sprite cards, coloured by loot tier (components/DropperGrid). */
+.dropgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+.dropcard { --t: var(--cyan); display: flex; align-items: center; gap: 12px; min-height: 72px; padding: 6px 14px 6px 6px; border: 1px solid var(--hair); border-radius: 4px; background: #0d0824; color: var(--text); text-decoration: none; box-shadow: inset 4px 0 0 var(--t), inset 40px 0 40px -40px var(--t); }
+.dropcard:hover, .dropcard:focus-visible { border-color: var(--t); box-shadow: inset 4px 0 0 var(--t), 0 0 12px color-mix(in srgb, var(--t) 40%, transparent); text-decoration: none; }
+.dropcard[data-tier='common'] { --t: #8f86c4; } .dropcard[data-tier='uncommon'] { --t: #5CFF8A; } .dropcard[data-tier='rare'] { --t: #3d9bff; } .dropcard[data-tier='epic'] { --t: #b47cff; } .dropcard[data-tier='card'] { --t: var(--yellow); }
+.dropcard__art { flex: none; width: 60px; height: 60px; display: flex; align-items: flex-end; justify-content: center; border-radius: 4px; background: radial-gradient(circle at 50% 70%, color-mix(in srgb, var(--t) 18%, transparent), transparent 70%); }
+.dropcard__art img { max-width: 60px; max-height: 60px; image-rendering: pixelated; object-fit: contain; }
+.dropcard__name { min-width: 0; font: 600 15px/1.3 var(--font-sarabun), sans-serif; }
+.dropcard__lv { display: block; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: 0.08em; color: var(--faint); }
+.dropcard__rate { margin-left: auto; text-align: right; font: 700 18px var(--font-chakra), sans-serif; color: var(--t); white-space: nowrap; }
+.dropcard__rate small { display: block; font-size: 9.5px; letter-spacing: 0.14em; opacity: 0.85; }

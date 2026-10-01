@@ -5,6 +5,7 @@
 // gone. What is left is the one that shipped: artwork beside the answer.
 import Link from 'next/link';
 import CardSlab from '@/components/CardSlab';
+import DropperGrid from '@/components/DropperGrid';
 import SlabBody from '@/components/SlabBody';
 import { cardArtAlt, cardArtUrl, hasCardArt } from '@/lib/card-art';
 import type { CardRelease } from '@/lib/card-availability';
@@ -109,10 +110,6 @@ export interface DropRow {
 
 /** The drop list as rows with a rate bar. */
 export function CardDroppers({ rows, error }: { rows: DropRow[]; error: boolean }) {
-  // The bar is a shape for comparing rows at a glance; the number beside it is
-  // the fact. Square-rooted because 0.01% and 0.2% are both "rare" and a
-  // linear bar would render every card's droppers as an empty strip.
-  const widest = Math.max(...rows.map((r) => Math.sqrt(r.rate ?? 0)), 0.0001);
   return (
     <section className="droplist">
       <h2 className="section-title">มอนสเตอร์ที่ดรอปการ์ดใบนี้</h2>
@@ -121,31 +118,12 @@ export function CardDroppers({ rows, error }: { rows: DropRow[]; error: boolean 
       ) : rows.length === 0 ? (
         <p className="muted">ไม่มีข้อมูลมอนสเตอร์ที่ดรอปการ์ดใบนี้</p>
       ) : (
-        <ul className="droplist__rows">
-          {rows.map((row) => (
-            <li key={row.id} className="droprow">
-              <Link className="droprow__who" href={`/database/monsters/${row.id}`}>
-                {row.image ? (
-                  <img className="droprow__sprite" src={row.image} alt="" width={28} height={28} />
-                ) : (
-                  <span className="droprow__sprite droprow__sprite--none" aria-hidden="true" />
-                )}
-                <span className="droprow__name">{row.name}</span>
-                {/* Two monsters share a name often enough that the level is
-                    what tells the reader which row is which. */}
-                <span className="droprow__level">Lv {row.level ?? '—'}</span>
-              </Link>
-              <span className="droprow__rate">
-                <span
-                  className="droprow__bar"
-                  style={{ width: `${Math.max(6, (Math.sqrt(row.rate ?? 0) / widest) * 100)}%` }}
-                  aria-hidden="true"
-                />
-                <span className="droprow__num mono">{row.rate != null ? `${row.rate}%` : '?'}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        // Same sprite cards as the item and gear pages (1 Oct 2026, arcade
+        // standard); every dropper of a card is CARD tier, gold.
+        <DropperGrid
+          isCard
+          droppers={rows.map((r) => ({ rate: r.rate, monsters: { id: r.id, name_en: r.name, image_url: r.image, level: r.level } }))}
+        />
       )}
     </section>
   );

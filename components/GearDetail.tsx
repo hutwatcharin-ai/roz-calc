@@ -3,6 +3,7 @@
 // under -- same row, same tiles, same drop list -- so the markup lives here and
 // each route passes its own section rather than keeping a second copy in sync.
 
+import DropperGrid, { type Dropper } from '@/components/DropperGrid';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import AdSlot from '@/components/AdSlot';
@@ -114,11 +115,12 @@ export default function GearDetail({
           the question a player asks before any number on the page matters. */}
       <div className="equiphero">
         {/* Arcade frame (1 Oct 2026), the item counterpart of the monster ring. */}
-        <span className="itemframe">
+        <span className="itemframe" data-kind={section.recentKind === 'costume' ? 'costume' : item.category === 'Weapon' ? 'weapon' : 'armor'}>
           <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
         </span>
         <div>
-          <h1 className="pagehead__title">
+          <p className="arckicker">{section.recentKind === 'costume' ? 'COSTUME' : item.category === 'Weapon' ? 'WEAPON' : 'ARMOR'} · ID {item.id}</p>
+          <h1 className="pagehead__title arcname">
             {item.name_en}
             {item.slots > 0 && (
               <span className="slotbadge" title={`ใส่การ์ดได้ ${item.slots} ช่อง`}>
@@ -283,17 +285,7 @@ export default function GearDetail({
         ) : (droppedBy ?? []).length === 0 ? (
           <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปชิ้นนี้</p>
         ) : (
-          (droppedBy ?? []).map((d: any, i: number) => (
-            <div key={i} className={isCVariant(d.monsters.name_en) ? 'cvariant' : undefined} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0' }}>
-              <Link href={`/database/monsters/${d.monsters.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                {d.monsters.image_url && (
-                  <img src={d.monsters.image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                )}
-                {d.monsters.name_en}
-              </Link>
-              <span className="mono">{d.rate != null ? `${d.rate}%` : '?'}</span>
-            </div>
-          ))
+          <DropperGrid droppers={(droppedBy ?? []) as unknown as Dropper[]} />
         )}
       </div>
 
