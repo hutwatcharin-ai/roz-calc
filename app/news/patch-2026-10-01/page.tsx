@@ -200,6 +200,62 @@ export default async function Patch20261001Page() {
         </p>
       )}
 
+      <section id="dungeons" style={{ marginTop: 34, scrollMarginTop: 90 }}>
+        <h2 className="section-title">ดันเจี้ยนใหม่ เจออะไรบ้าง</h2>
+        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>มอนเรียงจากที่เกิดเยอะสุด · กดรูปมอนดูของดรอป · ป้ายแดงคือมอนที่ตีก่อน</p>
+
+        {DUNGEONS.map((d) => {
+          const pic = mapImage(d.codes[0]);
+          return (
+            <article key={d.key} id={d.key} className="pdun">
+              <div className="pdun__head">
+                {pic && <img className="pdun__map" src={pic.src} alt="" width={120} height={120} loading="lazy" />}
+                <div>
+                  <h3 className="pdun__name">{d.name} <span className="muted">{d.th}</span></h3>
+                  <p className="pdun__where">{d.where} · {d.codes.length} ชั้น</p>
+                  <p className="pdun__note">{d.note}</p>
+                </div>
+              </div>
+              {d.codes.map((code, i) => {
+                const rows = spawns.filter((s) => s.map_code === code);
+                const mobs = floorMobs(rows);
+                const levels = mobs.map((m) => m.level);
+                return (
+                  <div key={code} className="pfloor">
+                    <p className="pfloor__label">
+                      <Link href={`/database/maps/${code}`}>ชั้น {i + 1}</Link>
+                      {levels.length > 0 && <span className="muted"> · Lv {Math.min(...levels)}–{Math.max(...levels)}</span>}
+                    </p>
+                    {mobs.length === 0 ? (
+                      <p className="muted" style={{ margin: 0, fontSize: 13 }}>ไม่มีข้อมูลมอน</p>
+                    ) : (
+                      <ul className="pmobs">
+                        {mobs.slice(0, 8).map((m) => (
+                          <li key={m.id}>
+                            <Link href={`/database/monsters/${m.id}`} className="pmob">
+                              <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
+                              <span className="pmob__name">{m.name}</span>
+                              <span className="pmob__meta">
+                                Lv {m.level} · ×{m.amount}
+                                {m.aggressive && <span className="pmob__aggro">ตีก่อน</span>}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
+            </article>
+          );
+        })}
+        <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
+          เควสรายวันเลเวล 60–70 และเควสอีเวนต์ยังไม่มีในฐานข้อมูลของเรา ·
+          อยากรู้ว่าตีไหวไหม ดูที่<Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
+        </p>
+      </section>
+
       <section id="hidden" style={{ marginTop: 34, scrollMarginTop: 90 }}>
         <h2 className="section-title">สิ่งที่ประกาศไม่ได้บอก</h2>
         <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
@@ -289,62 +345,6 @@ export default async function Patch20261001Page() {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section id="dungeons" style={{ marginTop: 34, scrollMarginTop: 90 }}>
-        <h2 className="section-title">ดันเจี้ยนใหม่ เจออะไรบ้าง</h2>
-        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>มอนเรียงจากที่เกิดเยอะสุด · กดรูปมอนดูของดรอป · ป้ายแดงคือมอนที่ตีก่อน</p>
-
-        {DUNGEONS.map((d) => {
-          const pic = mapImage(d.codes[0]);
-          return (
-            <article key={d.key} id={d.key} className="pdun">
-              <div className="pdun__head">
-                {pic && <img className="pdun__map" src={pic.src} alt="" width={120} height={120} loading="lazy" />}
-                <div>
-                  <h3 className="pdun__name">{d.name} <span className="muted">{d.th}</span></h3>
-                  <p className="pdun__where">{d.where} · {d.codes.length} ชั้น</p>
-                  <p className="pdun__note">{d.note}</p>
-                </div>
-              </div>
-              {d.codes.map((code, i) => {
-                const rows = spawns.filter((s) => s.map_code === code);
-                const mobs = floorMobs(rows);
-                const levels = mobs.map((m) => m.level);
-                return (
-                  <div key={code} className="pfloor">
-                    <p className="pfloor__label">
-                      <Link href={`/database/maps/${code}`}>ชั้น {i + 1}</Link>
-                      {levels.length > 0 && <span className="muted"> · Lv {Math.min(...levels)}–{Math.max(...levels)}</span>}
-                    </p>
-                    {mobs.length === 0 ? (
-                      <p className="muted" style={{ margin: 0, fontSize: 13 }}>ไม่มีข้อมูลมอน</p>
-                    ) : (
-                      <ul className="pmobs">
-                        {mobs.slice(0, 8).map((m) => (
-                          <li key={m.id}>
-                            <Link href={`/database/monsters/${m.id}`} className="pmob">
-                              <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
-                              <span className="pmob__name">{m.name}</span>
-                              <span className="pmob__meta">
-                                Lv {m.level} · ×{m.amount}
-                                {m.aggressive && <span className="pmob__aggro">ตีก่อน</span>}
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                );
-              })}
-            </article>
-          );
-        })}
-        <p className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-          เควสรายวันเลเวล 60–70 และเควสอีเวนต์ยังไม่มีในฐานข้อมูลของเรา ·
-          อยากรู้ว่าตีไหวไหม ดูที่<Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
-        </p>
       </section>
 
       <aside className="pnote">
