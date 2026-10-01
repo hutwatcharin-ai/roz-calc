@@ -7,11 +7,9 @@
 //
 // Every claim below is the client's own Thai item text, collected into
 // data/woe-items.json by scripts/build-woe-items.py, and every count on the
-// page is that file's length rather than a number somebody typed. The two
-// questions players ask most -- what time does WoE run, and which castles are
-// open -- are NOT in any data we hold, so the page says so in a box near the
-// top instead of guessing. The official portal is a domain we may not fetch,
-// so there is no second-hand answer to copy either.
+// page is that file's length rather than a number somebody typed. The time,
+// the open castles and the twelve rules were added on 1 Oct 2026 from the
+// official Thai notice the owner sent as a screenshot.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -29,7 +27,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'สงครามกิลด์ WoE Ragnarok Zero — เวลาวอร์ (พุธ อาทิตย์ 21:00 น.) ของที่ใช้ได้ ใช้ไม่ได้ และชุดกิลด์',
   description:
-    'War of Emperium ใน Ragnarok Zero Global — เปิดวันพุธและวันอาทิตย์ 21:00–22:00 น. เวลาไทย (เซิร์ฟ SEA) ปราสาท 10 หลัง · ยาที่ใช้ไม่ได้ในเขตสงครามกิลด์, ยาเฉพาะ WoE, สกรอล Force/Resist, ชุดสมาชิกกิลด์ 2 ระดับที่ค่าทำงานเฉพาะในเขต WoE และ Emperium ทุกบรรทัดยกมาจากคำอธิบายไอเทมในเกม',
+    'War of Emperium ใน Ragnarok Zero Global — เปิดวันพุธและวันอาทิตย์ 21:00–22:00 น. เวลาไทย (เซิร์ฟ SEA) ชิงปราสาท 10 หลังใน Payon และ Prontera · กติกาในเขตสงคราม 12 ข้อ · ยาที่ใช้ไม่ได้ในเขตสงครามกิลด์, ยาเฉพาะ WoE, สกรอล Force/Resist, ชุดสมาชิกกิลด์ 2 ระดับที่ค่าทำงานเฉพาะในเขต WoE และ Emperium ทุกบรรทัดยกมาจากคำอธิบายไอเทมในเกม',
 };
 
 type Row = { id: number; name: string; note: string; full: string };
@@ -45,8 +43,28 @@ const OTHER = woe.other as Row[];
 
 type Castle = { code: string; number: number; name: string; region: string; warpZeny: number; warpZenySiege: number };
 const CASTLES = castleFile.castles as Castle[];
-// The four towns prontera.info says the ten sieged castles are in (1 Oct 2026).
-const WAR_TOWNS = new Set(['Al De Baran', 'Prontera', 'Geffen', 'Payon']);
+// The official Thai notice (owner's screenshot, 1 Oct 2026) lists only two
+// war zones: Payon - Greenwood Lake and Prontera - Valkyrie Realm, five castles
+// each. The notice spells some castle names differently from the client
+// (Bright Arbor = Arbor of Light); the client's names stay on this page.
+const WAR_TOWNS = new Set(['Prontera', 'Payon']);
+const WAR_ZONE_NAME: Record<string, string> = { Payon: 'Greenwood Lake', Prontera: 'Valkyrie Realm' };
+
+// The notice's twelve WoE rules, in its order and wording.
+const RULES = [
+  'ไม่แสดงตัวเลขความเสียหาย (Damage)',
+  'ลดการแสดงผลเอฟเฟกต์ระหว่างการต่อสู้',
+  'แสดง Guild Emblem เหนือตัวละครสมาชิกกิลด์',
+  'สกิล Endure ไม่มีผล รวมถึงเอฟเฟกต์แบบเดียวกันที่ได้จากไอเทม',
+  'ตายแล้วกลับไปเมืองที่เซฟไว้ ไม่เสีย EXP',
+  'ใช้สกิล Ice Wall ไม่ได้',
+  'Knockback ไม่ทำให้ตัวละครกระเด็นถอยหลัง',
+  'ใช้ Teleport และ Fly Wing ไม่ได้',
+  'Butterfly Wing ยังใช้ได้ตามปกติ',
+  'เอฟเฟกต์กันร่ายเวทโดนขัดจังหวะไม่มีผล',
+  'เวทฟื้นฟูและเวทสนับสนุนไม่มีผลกับ Emperium',
+  'ตีกายภาพหรือเวทใส่ Emperium ตรงๆ ได้แค่ 1 ดาเมจต่อครั้ง',
+];
 const REGIONS = [...new Set(CASTLES.map((c) => c.region))];
 // One pair of numbers for all thirty, so the sentence can quote it as a rule.
 const WARP = { normal: CASTLES[0].warpZeny, siege: CASTLES[0].warpZenySiege };
@@ -140,10 +158,21 @@ export default async function WoeGuidePage() {
             <span className="muted" style={{ fontSize: 13 }}>คือคืนวันพุธกับคืนวันอาทิตย์ตามเวลายุโรป</span>
           </div>
         </div>
-        <p style={{ margin: '10px 0 0', fontSize: 14 }}>รอบละ 1 ชั่วโมง · ชิงปราสาท 10 หลังใน Al De Baran, Prontera, Geffen และ Payon</p>
+        <p style={{ margin: '10px 0 0', fontSize: 14 }}>
+          รอบละ 1 ชั่วโมง · ชิงปราสาท {CASTLES.filter((c) => WAR_TOWNS.has(c.region)).length} หลังใน 2 โซน:
+          Payon – Greenwood Lake และ Prontera – Valkyrie Realm · <a href="#castles">ดูรายชื่อปราสาท</a>
+        </p>
+      </section>
+
+      <section className="card" id="rules" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>กติกาในเขตสงคราม</h2>
+        <ol className="woe__rules">
+          {RULES.map((rule) => <li key={rule}>{rule}</li>)}
+        </ol>
       </section>
 
       <nav className="guildp__toc" aria-label="สารบัญ">
+        <a href="#rules">กติกา</a>
         <a href="#blocked">ของที่ใช้ไม่ได้</a>
         <a href="#only">ยาเฉพาะ WoE</a>
         <a href="#scrolls">สกรอล Force / Resist</a>
@@ -268,14 +297,13 @@ export default async function WoeGuidePage() {
           <strong> {WARP.siege.toLocaleString('en-US')}z</strong> แพงขึ้น {WARP.siege / WARP.normal} เท่า
         </p>
         <p className="guildp__warn">
-          <strong>ไฟล์มี ไม่ได้แปลว่าเปิด</strong> ตารางนี้คือสิ่งที่ไคลเอนต์ติดตั้งมา ไม่ใช่ประกาศว่าเซิร์ฟเปิดสงครามครบทุกหลัง
-          ยึดประกาศในเกมเป็นหลัก
+          <strong>เปิดสงครามแค่ Payon กับ Prontera</strong> ปราสาทเมืองอื่นมีในไฟล์เกมแต่ยังไม่เปิดชิง
         </p>
         <div className="woe__castles">
           {REGIONS.map((region) => (
             <div key={region} className={'woe__castleblock' + (WAR_TOWNS.has(region) ? '' : ' woe__castleblock--off')}>
               <h3 className="woe__sub">
-                {region}
+                {region}{WAR_ZONE_NAME[region] ? ` – ${WAR_ZONE_NAME[region]}` : ''}
                 {!WAR_TOWNS.has(region) && <> <span className="tag tag--unknown">ยังไม่เปิดสงคราม</span></>}
               </h3>
               <ul className="woe__list woe__list--tight">

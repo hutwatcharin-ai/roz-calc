@@ -3801,6 +3801,8 @@ a.iset__piece:hover, a.iset__piece:focus-visible { background: color-mix(in srgb
 .phero__pill--link { margin-left: 6px; border-color: color-mix(in srgb, var(--yellow) 55%, transparent); color: var(--yellow); text-decoration: none; }
 
 /* WoE time box. */
+.woe__rules { margin: 8px 0 0; padding-inline-start: 22px; display: grid; gap: 6px; line-height: 1.5; }
+.woe__rules li::marker { color: var(--muted); font-weight: 600; }
 .woe__times { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 8px; }
 .woe__time { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border: 1px solid var(--hair); border-radius: 12px; background: rgba(11, 8, 32, 0.45); }
 .woe__time strong { font: 700 20px/1.3 var(--font-sarabun), sans-serif; color: var(--yellow); }
