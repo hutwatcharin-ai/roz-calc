@@ -3859,3 +3859,54 @@ a.iset__piece:hover, a.iset__piece:focus-visible { background: color-mix(in srgb
 @media (prefers-reduced-motion: reduce) {
   .msug__it.is-on .msug__cur, .msug__tag { animation: none; }
 }
+/* Item icons are 24px; drawn at 40 so the frame is not mostly empty. */
+.msug--icon .msug__sprite img { width: 40px; height: 40px; object-fit: contain; }
+.msug--art .msug__sprite img { width: auto; height: 48px; max-width: 100%; object-fit: contain; image-rendering: auto; }
+.msug__none { font: 700 18px var(--font-chakra), sans-serif; color: var(--faint); }
+
+/* The header search dialog in the same arcade look as the list boxes
+   (owner, 1 Oct 2026). `html` prefix to outrank neon.css's bezel. */
+html .searchmodal__box {
+  border-radius: 4px; background: #0d0824; border: 2px solid var(--cyan);
+  box-shadow: 0 0 0 4px #0d0824, 0 0 0 6px var(--pink), 0 0 34px rgba(255, 61, 154, 0.45), 0 24px 48px rgba(0, 0, 0, 0.6);
+}
+html .searchmodal__box::after {
+  inset: 0; border: 0; border-image: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0 1px, transparent 1px 3px);
+}
+html .searchmodal__input { font-size: 17px; border-bottom: 1px solid rgba(61, 232, 255, 0.3); caret-color: var(--cyan); }
+.searchmodal__hd { margin: 10px 14px 4px; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: 0.2em; color: var(--pink); text-shadow: 0 0 8px var(--pink); }
+html .searchmodal__list { padding: 0 8px 8px; }
+html .searchmodal__row {
+  display: grid; grid-template-columns: 14px 40px 1fr auto; justify-content: initial; gap: 10px;
+  padding: 5px 8px; border: 0; border-radius: 3px; min-height: 48px;
+}
+html .searchmodal__row:hover { background: none; }
+html .searchmodal__row.is-on { background: linear-gradient(90deg, rgba(255, 229, 61, 0.16), rgba(255, 229, 61, 0) 80%); outline: 1px solid rgba(255, 229, 61, 0.45); }
+.searchmodal__cur { color: var(--yellow); font: 700 13px var(--font-chakra), sans-serif; opacity: 0; text-shadow: 0 0 8px var(--yellow); }
+.searchmodal__row.is-on .searchmodal__cur { opacity: 1; animation: msug-blink 0.8s steps(1) infinite; }
+.searchmodal__pic {
+  display: grid; place-items: center; width: 40px; height: 40px; overflow: hidden;
+  background: #08051a; border: 2px solid var(--kind, var(--cyan)); box-shadow: 0 0 8px var(--kind, var(--cyan));
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+}
+.searchmodal__pic img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; }
+.searchmodal__pic--sprite img { width: auto; height: auto; max-width: 100%; max-height: 100%; }
+html .searchmodal__name { display: block; min-width: 0; font: 600 16px var(--font-chakra), var(--font-sarabun), sans-serif; overflow-wrap: anywhere; }
+.searchmodal__name mark { background: none; color: var(--cyan); }
+html .searchmodal__badge {
+  font: 700 10px var(--font-chakra), sans-serif; letter-spacing: 0.12em; color: var(--kind, var(--faint));
+  border: 1px solid currentColor; border-radius: 3px; padding: 2px 6px; text-shadow: 0 0 6px currentColor;
+}
+.searchmodal__row[data-kind='monster'] { --kind: var(--pink); }
+.searchmodal__row[data-kind='item'] { --kind: var(--el-earth); }
+.searchmodal__row[data-kind='card'] { --kind: var(--yellow); }
+.searchmodal__row[data-kind='equipment'] { --kind: var(--cyan); }
+.searchmodal__row[data-kind='costume'] { --kind: var(--el-poison); }
+.searchmodal__row[data-kind='skill'] { --kind: var(--el-water); }
+.searchmodal__row[data-kind='map'] { --kind: var(--el-wind); }
+.searchmodal__note--loading { font: 700 12px var(--font-chakra), var(--font-sarabun), sans-serif; letter-spacing: 0.08em; color: var(--cyan); }
+.searchmodal__note--loading span { animation: msug-blink 0.8s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .searchmodal__row.is-on .searchmodal__cur, .searchmodal__note--loading span { animation: none; }
+}

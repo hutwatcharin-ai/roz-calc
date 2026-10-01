@@ -8,6 +8,7 @@
 // columns, two URLs competing for the same search, and two places to fix
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
+import SuggestInput from '@/components/SuggestInput';
 import { itemFormerNames } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
@@ -276,7 +277,7 @@ export default async function CardsPage({
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
             <span className="field__label">ค้นชื่อการ์ดหรือเอฟเฟกต์</span>
-            <input type="search" name="q" defaultValue={q} placeholder="เช่น Poring Card, LUK" />
+            <SuggestInput src="/suggest/cards" look="art" heading="SELECT CARD" listLabel="การ์ดที่ตรงกับคำค้น" placeholder="เช่น Poring Card, LUK" defaultValue={q} />
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>

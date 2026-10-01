@@ -1,4 +1,6 @@
 // app/database/items/page.tsx
+import SuggestInput from '@/components/SuggestInput';
+import { ITEM_LIST_CATEGORIES } from '@/lib/item-list-categories';
 import { itemFormerNameIdsFor } from '@/lib/item-former-names';
 import { absentIdsFilter } from '@/lib/game-absent';
 import Link from 'next/link';
@@ -35,26 +37,7 @@ const PAGE_SIZE = 50;
 // category nobody can filter to is a category nobody finds.
 // scripts/import-rozerodb-items.ts prints any category word it could not map,
 // which is how these three were noticed.
-// Consumables and materials only: equipment and cards moved to their own
-// pages (/database/equipment, /database/cards), rozerodb-style. Legacy
-// category params for those redirect below instead of 404-ing old links.
-const CATEGORIES = [
-  // Ammo was missing until 10 Sep 2026, which left its 14 arrows and bullets
-  // reachable by search but on no list at all.
-  'Ammo',
-  'Consumable / Recovery',
-  'Enchant Stone',
-  'Enchantment',
-  // Material and Package/Box arrived 14 Sep 2026 with the 54 ids a second
-  // database (roz.prontera.info) listed that ours never had -- guild event
-  // flames, cash-shop bundles. Same rule as the three above: a category
-  // nobody can filter to is a category nobody finds.
-  'Material',
-  'Other',
-  'Package/Box',
-  'Pet',
-  'Special',
-];
+const CATEGORIES = ITEM_LIST_CATEGORIES;
 const MOVED: Record<string, string> = {
   Weapon: '/database/equipment?category=Weapon',
   Armor: '/database/equipment?category=Armor',
@@ -246,7 +229,7 @@ export default async function ItemListPage({
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
             <span className="field__label">ค้นชื่อไอเทม</span>
-            <input type="search" name="q" defaultValue={q} placeholder="เช่น Red Potion, ยาแดง" />
+            <SuggestInput src="/suggest/items" look="icon" heading="SELECT ITEM" listLabel="ไอเทมที่ตรงกับคำค้น" placeholder="เช่น Red Potion, ยาแดง" defaultValue={q} />
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>

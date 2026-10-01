@@ -18,7 +18,7 @@ import { searchWords } from '@/lib/smart-search';
 import { nameOrIdsFilter } from '@/lib/name-search';
 import { aliasIdsFor, thaiAliasNames } from '@/lib/thai-aliases';
 import { monsterLabel } from '@/lib/monster-known-as';
-import type { SuggestMonster } from '@/lib/monster-suggest';
+import type { SuggestEntry } from '@/lib/suggest';
 import { formerNameIdsFor } from '@/lib/former-names';
 import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
@@ -26,7 +26,7 @@ import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-v
 import { monsterCounts } from '@/lib/counts';
 import { isFilteredView } from '@/lib/filtered-view';
 import { cardRelease } from '@/lib/card-availability';
-import MonsterNameInput from '@/components/MonsterNameInput';
+import SuggestInput from '@/components/SuggestInput';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import FilterPanel from '@/components/FilterPanel';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
@@ -300,18 +300,21 @@ export default async function MonsterListPage({
     if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) nq = nq.not('name_en', 'like', pattern);
     return nq.order('id').range(from, to);
   });
-  const suggestMonsters: SuggestMonster[] = (nameRows ?? []).map((r) => ({
+  const isMini = (id: number) => {
+    const mm = monsterModes(id);
+    return !!(mm && mm.known && mm.mini);
+  };
+  const suggestMonsters: SuggestEntry[] = (nameRows ?? []).map((r) => ({
     id: r.id,
+    href: `/database/monsters/${r.id}`,
     name: r.name_en,
     label: monsterLabel(r.id, r.name_en),
-    level: r.level,
-    mvp: !!r.is_mvp,
-    mini: (() => { const mm = monsterModes(r.id); return !!(mm && mm.known && mm.mini); })(),
-    race: r.race ? RACE_TH[r.race] ?? r.race : '',
-    element: r.element ? ELEMENT_TH[r.element] ?? r.element : '',
-    elementKey: r.element ?? '',
-    sprite: r.image_url,
+    sub: [r.race ? RACE_TH[r.race] ?? r.race : '', r.element ? ELEMENT_TH[r.element] ?? r.element : ''].filter(Boolean).join(' · '),
     aliases: thaiAliasNames('monsters', r.id),
+    sprite: r.image_url,
+    el: r.element ?? '',
+    lv: r.level,
+    tag: r.is_mvp ? 'mvp' : isMini(r.id) ? 'mini' : null,
   }));
 
   // How many rows the HP range dropped for having no published HP. Shown, not
@@ -432,7 +435,13 @@ export default async function MonsterListPage({
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
             <span className="field__label">ค้นชื่อมอนสเตอร์</span>
-            <MonsterNameInput monsters={suggestMonsters} defaultValue={q} />
+            <SuggestInput
+              entries={suggestMonsters}
+              heading="SELECT MONSTER"
+              listLabel="มอนสเตอร์ที่ตรงกับคำค้น"
+              placeholder="เช่น Poring, บาโฟ, Mummy"
+              defaultValue={q}
+            />
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>

@@ -1,35 +1,35 @@
 import { describe, expect, it } from 'vitest';
-import { highlightParts, rankSuggestions, type SuggestMonster } from './monster-suggest';
+import { highlightParts, rankSuggestions, type SuggestEntry } from './suggest';
 
-const m = (id: number, name: string, level: number, extra: Partial<SuggestMonster> = {}): SuggestMonster => ({
-  id, name, label: name, level, mvp: false, mini: false, race: '', element: '', elementKey: 'Neutral', sprite: null, aliases: [], ...extra,
+const m = (id: number, name: string, lv: number, extra: Partial<SuggestEntry> = {}): SuggestEntry => ({
+  id, href: `/x/${id}`, name, label: name, sub: '', lv, tag: null, el: '', sprite: null, aliases: [], ...extra,
 });
 
 const LIST = [
   m(1297, 'Ancient Mummy', 114),
   m(1041, 'Mummy', 55),
-  m(1039, 'Baphomet', 105, { mvp: true, aliases: ['บาโฟ'] }),
+  m(1039, 'Baphomet', 105, { tag: 'mvp', aliases: ['บาโฟ'] }),
   m(1101, 'Baphomet', 90, { label: 'Baphomet Jr.' }),
   m(1002, 'Poring', 1),
 ];
 
 describe('rankSuggestions', () => {
   it('puts the exact name first, then the longer one', () => {
-    expect(rankSuggestions(LIST, 'mummy').map((h) => h.monster.id)).toEqual([1041, 1297]);
+    expect(rankSuggestions(LIST, 'mummy').map((h) => h.entry.id)).toEqual([1041, 1297]);
   });
 
   it('ranks same-score rows by level, so Baphomet Jr. comes before the MVP', () => {
-    expect(rankSuggestions(LIST, 'baph').map((h) => h.monster.id)).toEqual([1101, 1039]);
+    expect(rankSuggestions(LIST, 'baph').map((h) => h.entry.id)).toEqual([1101, 1039]);
   });
 
   it('finds a monster by its Thai name and says which name matched', () => {
     const hits = rankSuggestions(LIST, 'บาโฟ');
-    expect(hits.map((h) => h.monster.id)).toEqual([1039]);
+    expect(hits.map((h) => h.entry.id)).toEqual([1039]);
     expect(hits[0].via).toBe('บาโฟ');
   });
 
   it('matches the players’ label too', () => {
-    expect(rankSuggestions(LIST, 'jr').map((h) => h.monster.id)).toEqual([1101]);
+    expect(rankSuggestions(LIST, 'jr').map((h) => h.entry.id)).toEqual([1101]);
   });
 
   it('returns nothing for an empty query or no match', () => {

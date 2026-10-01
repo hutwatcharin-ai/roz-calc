@@ -1,4 +1,5 @@
 // app/database/equipment/page.tsx
+import SuggestInput from '@/components/SuggestInput';
 import { itemNamesOf } from '@/lib/item-former-names';
 import AdSlot from '@/components/AdSlot';
 import { isAbsentFromGame } from '@/lib/game-absent';
@@ -313,7 +314,7 @@ export default async function EquipmentPage({
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
             <span className="field__label">ค้นชื่ออุปกรณ์</span>
-            <input type="search" name="q" defaultValue={q} placeholder="เช่น Bastard Sword, ดาบ" />
+            <SuggestInput src="/suggest/equipment" look="icon" heading="SELECT GEAR" listLabel="อุปกรณ์ที่ตรงกับคำค้น" placeholder="เช่น Bastard Sword, ดาบ" defaultValue={q} />
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>

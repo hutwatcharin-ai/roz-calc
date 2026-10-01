@@ -8,6 +8,8 @@
 // Filters became chip rows on 11 Sep 2026 to match the cards and monsters
 // lists (owner's request): each row counted against the other filters already
 // on, a zero-count chip not drawn, and a chip that is on turns itself off.
+import SuggestInput from '@/components/SuggestInput';
+import { NO_POSITION, POSITIONS, POSITION_LABELS } from '@/lib/costume-position';
 import { itemNamesOf } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
@@ -34,34 +36,6 @@ export const metadata = {
 
 const PAGE_SIZE = 50;
 
-// Costume positions crawled from rozerodb item pages (2 Sep) -- these are the
-// values items.weapon_type actually holds for Costume Equipment rows, ordered
-// by how many rows carry each.
-const POSITIONS = [
-  'Upper Head',
-  'Lower Head',
-  'Mid Head',
-  'Garment',
-  'Upper/Mid Head',
-  'Mid/Lower Head',
-  'All Head Slots',
-  'Upper/Lower Head',
-] as const;
-
-/** 281 costumes carry no position at all; they get a chip of their own rather than vanishing from every position. */
-const NO_POSITION = 'none';
-
-const POSITION_LABELS: Record<string, string> = {
-  'Upper Head': 'หัวบน',
-  'Mid Head': 'หัวกลาง',
-  'Lower Head': 'หัวล่าง',
-  'Upper/Mid Head': 'หัวบน+กลาง',
-  'Mid/Lower Head': 'หัวกลาง+ล่าง',
-  'Upper/Lower Head': 'หัวบน+ล่าง',
-  'All Head Slots': 'ครบทุกช่องหัว',
-  Garment: 'ผ้าคลุม',
-  [NO_POSITION]: 'ไม่ระบุตำแหน่ง',
-};
 
 // Where a costume comes from, as far as the data can say. A costume can be
 // both; one with neither is not "unobtainable", only unrecorded.
@@ -262,7 +236,7 @@ export default async function CostumesPage({
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
             <span className="field__label">ค้นชื่อคอสตูม</span>
-            <input type="search" name="q" defaultValue={q} placeholder="เช่น Poring Hat, หมวก" />
+            <SuggestInput src="/suggest/costumes" look="icon" heading="SELECT COSTUME" listLabel="คอสตูมที่ตรงกับคำค้น" placeholder="เช่น Poring Hat, หมวก" defaultValue={q} />
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>

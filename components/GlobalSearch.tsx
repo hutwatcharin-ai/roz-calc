@@ -14,11 +14,38 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { highlightParts } from '@/lib/suggest';
+import { monsterLabel } from '@/lib/monster-known-as';
 import { mergeSearchResults, SEARCH_TYPE_LABELS, type SearchResult } from '@/lib/search';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { matchScore, searchWords } from '@/lib/smart-search';
 
 const LIMIT_PER_KIND = 5;
+
+// The arcade tag per kind (owner, 1 Oct 2026: the header search in the same
+// "SELECT ..." look as the list boxes). English caps like a cabinet's menu;
+// the Thai word stays in the row's accessible name through SEARCH_TYPE_LABELS.
+const ARCADE_TAG: Record<string, string> = {
+  monster: 'MONSTER',
+  item: 'ITEM',
+  card: 'CARD',
+  equipment: 'GEAR',
+  costume: 'COSTUME',
+  skill: 'SKILL',
+  map: 'MAP',
+};
+
+function Marked({ text, query }: { text: string; query: string }) {
+  const [before, hit, after] = highlightParts(text, query);
+  return (
+    <>
+      {before}
+      {hit && <mark>{hit}</mark>}
+      {after}
+    </>
+  );
+}
 
 export default function GlobalSearch() {
   const [open, setOpen] = useState(false);
@@ -32,6 +59,8 @@ export default function GlobalSearch() {
   // no match.
   const [hasError, setHasError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [active, setActive] = useState(-1);
+  const router = useRouter();
 
   useEffect(() => {
     if (!open) {
@@ -49,6 +78,8 @@ export default function GlobalSearch() {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open]);
+
+  useEffect(() => setActive(-1), [results]);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -135,7 +166,10 @@ export default function GlobalSearch() {
       const seen = new Set<string>();
       setResults(
         merged.filter((r) => {
-          const key = `${r.type}:${r.name.toLowerCase()}`;
+          // Monsters by the label players use, so Baphomet Jr. is not folded
+          // into the MVP that shares its client name.
+          const shown = r.type === 'monster' ? monsterLabel(Number(r.id), r.name) : r.name;
+          const key = `${r.type}:${shown.toLowerCase()}`;
           if (seen.has(key)) return false;
           seen.add(key);
           return true;
@@ -167,11 +201,29 @@ export default function GlobalSearch() {
               className="searchmodal__input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowDown' && results.length) {
+                  e.preventDefault();
+                  setActive((i) => Math.min(i + 1, results.length - 1));
+                } else if (e.key === 'ArrowUp' && results.length) {
+                  e.preventDefault();
+                  setActive((i) => Math.max(i - 1, 0));
+                } else if (e.key === 'Enter') {
+                  const pick = results[active >= 0 ? active : 0];
+                  if (pick) {
+                    e.preventDefault();
+                    setOpen(false);
+                    router.push(pick.href);
+                  }
+                }
+              }}
               placeholder="พิมพ์ชื่อมอน ไอเทม การ์ด สกิล หรือแมพ..."
+              aria-label="ค้นหาทุกอย่าง"
             />
+            <p className="searchmodal__hd" aria-hidden="true">SELECT ANYTHING</p>
 
             <div className="searchmodal__list">
-              {loading && <p className="searchmodal__note">กำลังค้นหา...</p>}
+              {loading && <p className="searchmodal__note searchmodal__note--loading">LOADING<span aria-hidden="true">...</span> กำลังค้นหา</p>}
               {/* A failed category must not read as "nothing there" -- results
                   from the categories that succeeded are still shown below,
                   but the list is flagged as incomplete rather than complete. */}
@@ -188,15 +240,24 @@ export default function GlobalSearch() {
               {!loading && !query.trim() && (
                 <p className="searchmodal__note">ค้นได้ทุกหมวดพร้อมกัน มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ คอสตูม สกิล แมพ</p>
               )}
-              {results.map((r) => (
-                <Link key={`${r.type}-${r.id}`} href={r.href} onClick={() => setOpen(false)} className="searchmodal__row">
-                  <span className="searchmodal__name">
-                    {r.iconUrl && (
-                      <img src={r.iconUrl} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {r.name}
+              {results.map((r, i) => (
+                <Link
+                  key={`${r.type}-${r.id}`}
+                  href={r.href}
+                  onClick={() => setOpen(false)}
+                  onMouseEnter={() => setActive(i)}
+                  className={'searchmodal__row' + (i === active ? ' is-on' : '')}
+                  data-kind={r.type}
+                  aria-label={`${r.type === 'monster' ? monsterLabel(Number(r.id), r.name) : r.name} (${SEARCH_TYPE_LABELS[r.type]})`}
+                >
+                  <span className="searchmodal__cur" aria-hidden="true">▶</span>
+                  <span className={'searchmodal__pic' + (r.type === 'monster' ? ' searchmodal__pic--sprite' : '')}>
+                    {r.iconUrl && <img src={r.iconUrl} alt="" loading="lazy" />}
                   </span>
-                  <span className="mono searchmodal__badge">{SEARCH_TYPE_LABELS[r.type]}</span>
+                  <span className="searchmodal__name">
+                    <Marked text={r.type === 'monster' ? monsterLabel(Number(r.id), r.name) : r.name} query={query} />
+                  </span>
+                  <span className="searchmodal__badge" aria-hidden="true">{ARCADE_TAG[r.type] ?? SEARCH_TYPE_LABELS[r.type]}</span>
                 </Link>
               ))}
             </div>
