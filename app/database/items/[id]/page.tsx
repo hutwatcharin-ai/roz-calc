@@ -221,13 +221,18 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
         {/* flex: none -- in a flex row beside a long description the 64px icon
             was squeezed to about 30px on a phone (UX review, 11 Sep 2026). */}
-        <span style={{ flex: 'none', display: 'inline-flex' }}>
+        <span className="itemframe">
           <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
         </span>
         <div>
           <h1 className="pagehead__title">
             {item.name_en}
-            {item.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{item.slots}]</span>}
+            {item.slots > 0 && (
+              <span className="slotbadge" title={`ใส่การ์ดได้ ${item.slots} ช่อง`}>
+                [{item.slots}]
+                <span aria-hidden="true">{Array.from({ length: item.slots }, (_, i) => <i key={i} />)}</span>
+              </span>
+            )}
           </h1>
           <ThaiAliasLine kind="items" id={item.id} />
           {/* One fluent sentence a crawler or reader can lift whole (GEO

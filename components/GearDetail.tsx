@@ -113,11 +113,19 @@ export default function GearDetail({
       {/* Hero: sprite, name, and the chips that say what slot this fills --
           the question a player asks before any number on the page matters. */}
       <div className="equiphero">
-        <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
+        {/* Arcade frame (1 Oct 2026), the item counterpart of the monster ring. */}
+        <span className="itemframe">
+          <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
+        </span>
         <div>
           <h1 className="pagehead__title">
             {item.name_en}
-            {item.slots > 0 && <span className="mono" style={{ color: 'var(--cyan)' }}> [{item.slots}]</span>}
+            {item.slots > 0 && (
+              <span className="slotbadge" title={`ใส่การ์ดได้ ${item.slots} ช่อง`}>
+                [{item.slots}]
+                <span aria-hidden="true">{Array.from({ length: item.slots }, (_, i) => <i key={i} />)}</span>
+              </span>
+            )}
           </h1>
           {/* The name players type. "รองเท้าแก้ว ro" put this route at
               position 6 for 22 impressions and no click, under a title that

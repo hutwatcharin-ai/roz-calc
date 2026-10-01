@@ -89,7 +89,18 @@ export default function DropSearch({
               {/* Drops are what this page is about, so the level-gap penalty
                   belongs here more than anywhere (spec 3.9). */}
             </span>
-            <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate != null ? `${row.rate}%` : '?'}</span>
+            <span className="dropgauge">
+              {/* Arcade gauge (1 Oct 2026). Log scale, 0.01% to 100%: on a
+                  straight line every card-rate drop would be an empty bar. */}
+              {row.rate != null && (
+                <span
+                  className="dropgauge__bar"
+                  style={{ ['--fill' as string]: Math.min(1, Math.max(0.04, (Math.log10(row.rate) + 2) / 4)) }}
+                  aria-hidden="true"
+                />
+              )}
+              <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate != null ? `${row.rate}%` : '?'}</span>
+            </span>
           </div>
         ))}
       </div>

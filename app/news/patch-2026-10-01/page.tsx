@@ -209,6 +209,8 @@ export default async function Patch20261001Page() {
           const pic = mapImage(d.codes[0]);
           return (
             <article key={d.key} id={d.key} className="pdun">
+              {/* Arcade banner (1 Oct 2026); the h3 below names the dungeon. */}
+              <p className="stagebanner" aria-hidden="true">NEW STAGE UNLOCKED</p>
               <div className="pdun__head">
                 {pic && <img className="pdun__map" src={pic.src} alt="" width={120} height={120} loading="lazy" />}
                 <div>

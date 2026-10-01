@@ -25,7 +25,7 @@ function price(value: number | null): string {
 function Art({ id, name }: { id: number; name: string }) {
   const art = hasCardArt(id);
   return (
-    <figure className="cardframe">
+    <figure className={art ? 'cardframe cardframe--foil' : 'cardframe'}>
       <img
         className={art ? 'cardframe__art' : 'cardframe__art cardframe__art--none'}
         src={cardArtUrl(id)}

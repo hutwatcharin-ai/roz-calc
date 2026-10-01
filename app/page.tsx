@@ -222,6 +222,8 @@ export default async function HomePage({
         <ul className="siteupd__list">
           {(siteUpdates.items as { date: string; href: string; title: string; note: string }[]).slice(0, 5).map((u) => (
             <li key={u.href}>
+              {/* NEW! for the last three days (1 Oct 2026, arcade pass). */}
+              {Date.now() - Date.parse(`${u.date}T00:00:00+07:00`) < 3 * 86400000 && <span className="newbadge">NEW!</span>}
               <Link href={u.href}><strong>{u.title}</strong></Link>
               <span className="muted"> · {u.note}</span>
             </li>

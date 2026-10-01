@@ -92,6 +92,10 @@ export default async function SiteFooter() {
           </FooterSection>
         </div>
 
+        {/* Cabinet credit line (1 Oct 2026, arcade pass): decoration only. */}
+        <p className="sitefooter__coin" aria-hidden="true">
+          INSERT COIN <span>·</span> CREDIT 00 <span>·</span> PRESS START
+        </p>
         <div className="sitefooter__bottom">
           <span>© {new Date().getFullYear()} RO Zero Thai · rozerothai.com</span>
           <span className="sitefooter__credit">

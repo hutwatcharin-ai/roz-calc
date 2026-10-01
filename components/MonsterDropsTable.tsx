@@ -95,7 +95,16 @@ export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDro
                   <span>{d.items?.name_en ?? '—'}</span>
                 )}
               </td>
-              <td data-label="อัตราดรอป" className="num">{d.rate != null ? `${d.rate}%` : 'ไม่ทราบอัตรา'}</td>
+              <td data-label="อัตราดรอป" className="num">
+                {/* Arcade loot tags (1 Oct 2026): a card, or anything under
+                    1%, is the drop people farm a monster for. */}
+                {d.items?.category === 'Card' ? (
+                  <span className="loottag loottag--card">CARD</span>
+                ) : d.rate != null && d.rate < 1 ? (
+                  <span className="loottag">RARE</span>
+                ) : null}
+                {d.rate != null ? `${d.rate}%` : 'ไม่ทราบอัตรา'}
+              </td>
               <td data-label="ขายร้าน" className="num mono">
                 {d.items?.sell_price && d.items.sell_price > 0 ? `${d.items.sell_price.toLocaleString('en-US')}z` : '—'}
               </td>

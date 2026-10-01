@@ -1,4 +1,6 @@
 // app/database/monsters/[id]/page.tsx
+import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { STAT_BAND, statSegments } from '@/lib/stat-rank';
 import '../page.css';
 import MonsterRing from '@/components/MonsterRing';
 import SpawnCards from '@/components/SpawnCards';
@@ -127,6 +129,22 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   if (!monster) {
     notFound();
   }
+
+  // Peers for the stat bars: ordinary monsters within STAT_BAND levels. A
+  // failed read only drops the bars, never the numbers.
+  const { data: peerRows } = await db
+    .from('monsters')
+    .select('id, level, hp, atk_max, matk_max, def, mdef')
+    .eq('is_mvp', false)
+    .not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE)
+    .gte('level', monster.level - STAT_BAND)
+    .lte('level', monster.level + STAT_BAND)
+    .range(0, 999);
+  const peers = (peerRows ?? []) as { id: number; level: number; hp: number | null; atk_max: number | null; matk_max: number | null; def: number | null; mdef: number | null }[];
+  const seg = (key: 'hp' | 'atk_max' | 'matk_max' | 'def' | 'mdef') =>
+    statSegments(monster[key] as number | null, monster.level, peers.map((p) => ({ id: p.id, level: p.level, value: p[key] })), monster.id);
+  const bar = (n: number | null) =>
+    n == null ? null : <span className="statbar" style={{ ['--seg' as string]: n }} aria-hidden="true" />;
 
   // Drops are the reason most players open this page, and a failed query
   // here must not read as "this monster drops nothing" -- the same failure
@@ -407,12 +425,13 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <div className="card">
             <h2 className="section-title" id="sec-stats">ค่าสถานะ</h2>
             <div className="statgrid statgrid--five">
-              <div className="statgrid__cell"><span className="reward-label">HP</span><span className="reward-value mono">{sentinel(monster.hp)}</span></div>
-              <div className="statgrid__cell"><span className="reward-label">ATK</span><span className="reward-value mono">{num(monster.atk_min)}–{num(monster.atk_max)}</span></div>
-              <div className="statgrid__cell"><span className="reward-label">MATK</span><span className="reward-value mono">{num(monster.matk_min)}–{num(monster.matk_max)}</span></div>
-              <div className="statgrid__cell"><span className="reward-label">DEF</span><span className="reward-value mono">{num(monster.def)}</span></div>
-              <div className="statgrid__cell"><span className="reward-label">MDEF</span><span className="reward-value mono">{num(monster.mdef)}</span></div>
+              <div className="statgrid__cell"><span className="reward-label">HP</span><span className="reward-value mono">{sentinel(monster.hp)}</span>{bar(seg('hp'))}</div>
+              <div className="statgrid__cell"><span className="reward-label">ATK</span><span className="reward-value mono">{num(monster.atk_min)}–{num(monster.atk_max)}</span>{bar(seg('atk_max'))}</div>
+              <div className="statgrid__cell"><span className="reward-label">MATK</span><span className="reward-value mono">{num(monster.matk_min)}–{num(monster.matk_max)}</span>{bar(seg('matk_max'))}</div>
+              <div className="statgrid__cell"><span className="reward-label">DEF</span><span className="reward-value mono">{num(monster.def)}</span>{bar(seg('def'))}</div>
+              <div className="statgrid__cell"><span className="reward-label">MDEF</span><span className="reward-value mono">{num(monster.mdef)}</span>{bar(seg('mdef'))}</div>
             </div>
+            <p className="statbar__note">แถบ = เทียบกับมอนธรรมดาเลเวล {Math.max(1, monster.level - STAT_BAND)}–{monster.level + STAT_BAND} เต็ม 10 ช่องคือสูงกว่าทุกตัว</p>
             <div className="statgrid statgrid--two" style={{ marginTop: 10 }}>
               {(() => {
                 // hit_100/flee_95 are midgardhub's player-facing thresholds --

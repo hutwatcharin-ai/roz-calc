@@ -37,3 +37,11 @@
 .pstar__row img { flex: none; image-rendering: pixelated; }
 .pstar__from { display: block; font-size: 13px; color: var(--dim); }
 .phero__pill--link { margin-left: 6px; border-color: color-mix(in srgb, var(--yellow) 55%, transparent); color: var(--yellow); text-decoration: none; }
+/* "NEW STAGE UNLOCKED" over each newly opened dungeon (1 Oct 2026). */
+.stagebanner {
+  margin: -2px 0 10px; padding: 4px 10px; text-align: center;
+  font: 700 13px var(--font-chakra), sans-serif; letter-spacing: 0.24em; color: var(--yellow);
+  text-shadow: 0 0 10px var(--glow-yellow);
+  border-block: 2px solid var(--pink); box-shadow: 0 0 14px rgba(255, 61, 154, 0.35), inset 0 0 14px rgba(255, 61, 154, 0.2);
+  background: linear-gradient(90deg, transparent, rgba(255, 61, 154, 0.18), transparent);
+}

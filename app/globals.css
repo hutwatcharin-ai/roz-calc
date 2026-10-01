@@ -3511,3 +3511,96 @@ html .enchcalc__big strong { font-family: var(--font-chakra), sans-serif; text-s
 @keyframes navprog-run { to { background-position: 48px 0; } }
 @media (prefers-reduced-motion: reduce) { .navprog__bar, .navprog__word > span[aria-hidden] { animation: none; } }
 .gameover .notfound__search .searchbtn { margin-inline: auto; }
+
+/* Loot tags in drop tables (1 Oct 2026). */
+.loottag {
+  display: inline-block; margin-inline-end: 6px; padding: 0 5px; vertical-align: 1px;
+  font: 700 10px/1.5 var(--font-chakra), sans-serif; letter-spacing: 0.12em;
+  color: #FFD27A; border: 1px solid currentColor; border-radius: 3px; text-shadow: 0 0 6px rgba(255, 210, 122, 0.8);
+  box-shadow: 0 0 8px rgba(255, 210, 122, 0.35);
+}
+.loottag--card { color: var(--yellow); text-shadow: 0 0 6px var(--glow-yellow); box-shadow: 0 0 8px var(--glow-yellow); }
+
+/* Monster stat bars: ten segments, lit by rank among peers (1 Oct 2026). */
+.statbar {
+  display: block; height: 7px; margin-top: 6px; width: 100%;
+  background:
+    linear-gradient(90deg, var(--cyan) calc(var(--seg) * 10%), transparent 0) ,
+    rgba(61, 232, 255, 0.12);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 2px), transparent calc(10% - 2px) 10%);
+          mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 2px), transparent calc(10% - 2px) 10%);
+  filter: none; box-shadow: none;
+}
+.statbar__note { margin: 6px 0 0; color: var(--faint); font-size: 12px; }
+
+/* Item and gear page header: the icon in an arcade frame, card slots as
+   pixel sockets (1 Oct 2026). */
+.itemframe {
+  flex: none; display: inline-grid; place-items: center; width: 92px; height: 92px;
+  background: radial-gradient(circle at 50% 55%, rgba(61, 232, 255, 0.18), #08051a 70%);
+  border: 2px solid var(--cyan); border-radius: 4px; box-shadow: 0 0 0 3px #0B0820, 0 0 0 5px var(--pink), 0 0 18px rgba(255, 61, 154, 0.35);
+}
+.itemframe img { image-rendering: pixelated; }
+.slotbadge { display: inline-flex; align-items: center; gap: 6px; margin-inline-start: 6px; color: var(--cyan); font: 700 0.7em var(--font-chakra), sans-serif; vertical-align: middle; }
+.slotbadge > span { display: inline-flex; gap: 3px; }
+.slotbadge i { width: 10px; height: 10px; border: 2px solid var(--cyan); background: #08051a; box-shadow: 0 0 6px var(--glow-cyan); }
+
+/* A card with its own art shines like a foil rare when pointed at
+   (1 Oct 2026). One gradient moved by transform; nothing on a phone. */
+html .cardframe--foil { position: relative; overflow: hidden; }
+html .cardframe--foil::after {
+  content: ''; position: absolute; inset: -40% -60%; pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 61, 154, 0.35) 44%, rgba(255, 229, 61, 0.45) 50%, rgba(61, 232, 255, 0.35) 56%, transparent 65%);
+  transform: translateX(-40%); transition: transform 0.7s ease, opacity 0.2s;
+}
+@media (hover: hover) {
+  html .cardframe--foil:hover::after { opacity: 1; transform: translateX(40%); }
+}
+@media (prefers-reduced-motion: reduce) { html .cardframe--foil::after { transition: none; } }
+
+/* Arcade push buttons (1 Oct 2026): a lip under the yellow button that the
+   press sinks into. Shadow and transform only, so nothing around it moves. */
+html .btn { box-shadow: 0 3px 0 #A8960F, 0 0 12px rgba(255, 229, 61, 0.25); transition: transform 0.06s, box-shadow 0.06s; }
+html .btn:active { transform: translateY(3px); box-shadow: 0 0 0 #A8960F, 0 0 18px rgba(255, 229, 61, 0.45); }
+
+/* Keyboard focus as a neon ring everywhere: the outline stays (it is what
+   forced-colours mode keeps), the glow is added. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  box-shadow: 0 0 0 4px rgba(61, 232, 255, 0.22), 0 0 14px rgba(61, 232, 255, 0.55);
+}
+
+/* Phone bottom bar: a player marker over the tab you are on. */
+@media (max-width: 640px) {
+  html .bottomnav__link--on { position: relative; }
+  html .bottomnav__link--on::before {
+    content: '▼'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; line-height: 1; color: var(--pink); text-shadow: 0 0 6px var(--pink);
+    animation: navmark 1s ease-in-out infinite alternate;
+  }
+}
+@keyframes navmark { to { transform: translate(-50%, -3px); } }
+@media (prefers-reduced-motion: reduce) {
+  html .btn, html .btn:active { transition: none; transform: none; }
+  html .bottomnav__link--on::before { animation: none; }
+}
+
+/* "NEW!" pixel badge (1 Oct 2026). */
+.newbadge {
+  display: inline-block; margin-inline-end: 6px; padding: 0 5px; vertical-align: 1px;
+  font: 700 10px/1.6 var(--font-chakra), sans-serif; letter-spacing: 0.1em; color: #0B0820;
+  background: var(--pink); border-radius: 2px; box-shadow: 0 0 8px var(--glow-pink);
+  animation: msug-pulse 1.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .newbadge { animation: none; } }
+
+/* Drop-rate gauge on the drop finder (1 Oct 2026). */
+.dropgauge { display: inline-flex; align-items: center; gap: 8px; }
+.dropgauge__bar {
+  width: 72px; height: 8px; border: 1px solid rgba(255, 61, 154, 0.5); background: #08051a;
+  background-image: linear-gradient(90deg, var(--pink) calc(var(--fill) * 100%), transparent 0);
+  box-shadow: 0 0 6px rgba(255, 61, 154, 0.3);
+}
+
+/* Footer cabinet line (1 Oct 2026). */
+.sitefooter__coin { margin: 18px 0 0; text-align: center; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: 0.3em; color: var(--yellow); text-shadow: 0 0 8px var(--glow-yellow); }
+.sitefooter__coin span { color: var(--pink); text-shadow: 0 0 8px var(--glow-pink); }
