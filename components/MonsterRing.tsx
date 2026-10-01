@@ -4,7 +4,7 @@
 // that squashed every sprite that was not square.
 
 import { spriteSize } from '@/lib/sprite-scale';
-import { ELEMENT_COLOUR } from '@/lib/element-colour';
+import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
 
 
 export default function MonsterRing({
@@ -17,7 +17,7 @@ export default function MonsterRing({
   elementLevel: number | null;
 }) {
   const size = spriteSize(src);
-  const colour = (element && ELEMENT_COLOUR[element]) || '#8F86C4';
+  const colour = (element && ELEMENT_COLOUR[element]) || ELEMENT_COLOUR_UNKNOWN;
   return (
     <div className="monring" style={{ ['--el' as string]: colour }}>
       <img

@@ -1,16 +1,21 @@
-// One colour per element, shared by the monster page's sprite ring and the
-// monster-name suggestions so the same element always reads the same.
+// One colour per element, for inline `--el` values (the monster page's sprite
+// ring, the monster-name suggestions).
+//
+// These point at the --el-* tokens in app/neon.css rather than holding hex
+// values of their own. Until 1 Oct 2026 this file had its own palette, and
+// the two disagreed: Poison was purple on the chips and green on the ring,
+// Earth green on one and ochre on the other. One palette, kept in neon.css.
 export const ELEMENT_COLOUR: Record<string, string> = {
-  Neutral: '#C9C3E8',
-  Water: '#3D9BFF',
-  Earth: '#E0A64B',
-  Fire: '#FF6A3D',
-  Wind: '#5CFFB0',
-  Poison: '#9BE34B',
-  Holy: '#FFE9A3',
-  Shadow: '#8A6BFF',
-  Ghost: '#D7B8FF',
-  Undead: '#B07CFF',
+  Neutral: 'var(--el-neutral)',
+  Water: 'var(--el-water)',
+  Earth: 'var(--el-earth)',
+  Fire: 'var(--el-fire)',
+  Wind: 'var(--el-wind)',
+  Poison: 'var(--el-poison)',
+  Holy: 'var(--el-holy)',
+  Shadow: 'var(--el-shadow)',
+  Ghost: 'var(--el-ghost)',
+  Undead: 'var(--el-undead)',
 };
 
-export const ELEMENT_COLOUR_UNKNOWN = '#8F86C4';
+export const ELEMENT_COLOUR_UNKNOWN = 'var(--faint)';
