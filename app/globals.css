@@ -3808,3 +3808,54 @@ a.iset__piece:hover, a.iset__piece:focus-visible { background: color-mix(in srgb
 .woe__time strong { font: 700 20px/1.3 var(--font-sarabun), sans-serif; color: var(--yellow); }
 .woe__srv { font-size: 12.5px; color: var(--faint); letter-spacing: 0.04em; }
 .woe__castleblock--off { opacity: 0.6; }
+
+/* Monster-name suggestions on /database/monsters: the arcade "select
+   monster" panel (owner's pick B, 1 Oct 2026, public/draft/monster-suggest). */
+.msug { position: relative; display: flex; }
+.msug input[type='search'] { flex: 1 1 auto; width: 100%; }
+.msug__panel {
+  position: absolute; left: 0; right: 0; top: calc(100% + 10px); z-index: 40;
+  padding: 10px 8px 8px; border-radius: 4px; overflow: hidden;
+  background: #0d0824; border: 2px solid var(--cyan);
+  box-shadow: 0 0 0 4px #0d0824, 0 0 0 6px var(--pink), 0 0 30px rgba(255, 61, 154, 0.45), 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+.msug__panel::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
+}
+.msug__hd { margin: 0 6px 6px; font: 700 11px var(--font-chakra, 'Chakra Petch'), sans-serif; letter-spacing: 0.2em; color: var(--pink); text-shadow: 0 0 8px var(--pink); }
+.msug__list { list-style: none; margin: 0; padding: 0; }
+.msug__it {
+  position: relative; display: grid; grid-template-columns: 16px 52px 1fr auto; align-items: center; gap: 10px;
+  padding: 6px 8px; border-radius: 3px; color: var(--text); text-decoration: none; min-height: 44px;
+}
+.msug__it:hover { text-decoration: none; }
+.msug__cur { color: var(--yellow); font: 700 14px var(--font-chakra, 'Chakra Petch'), sans-serif; opacity: 0; text-shadow: 0 0 8px var(--yellow); }
+.msug__it.is-on { background: linear-gradient(90deg, rgba(255, 229, 61, 0.16), rgba(255, 229, 61, 0) 80%); outline: 1px solid rgba(255, 229, 61, 0.45); }
+.msug__it.is-on .msug__cur { opacity: 1; animation: msug-blink 0.8s steps(1) infinite; }
+.msug__sprite {
+  display: grid; place-items: center; width: 52px; height: 52px; overflow: hidden;
+  background: #08051a; border: 2px solid var(--el, var(--cyan));
+  box-shadow: 0 0 10px var(--el, var(--cyan)), inset 0 0 12px rgba(0, 0, 0, 0.8);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+.msug__sprite img { max-width: 100%; max-height: 100%; image-rendering: pixelated; }
+.msug__nm { min-width: 0; font: 600 17px var(--font-chakra, 'Chakra Petch'), var(--font-sarabun), sans-serif; letter-spacing: 0.02em; overflow-wrap: anywhere; }
+.msug__nm small { display: block; font: 400 12.5px var(--font-sarabun), sans-serif; color: var(--faint); letter-spacing: 0; }
+.msug mark { background: none; color: var(--cyan); }
+.msug__side { text-align: right; white-space: nowrap; }
+.msug__lv { display: block; font: 700 14px var(--font-chakra, 'Chakra Petch'), sans-serif; color: var(--cyan); text-shadow: 0 0 8px rgba(61, 232, 255, 0.7); }
+.msug__lv i { font-style: normal; font-size: 10px; color: var(--faint); margin-right: 3px; }
+.msug__tag { display: inline-block; margin-top: 2px; font: 700 11px var(--font-chakra, 'Chakra Petch'), sans-serif; color: var(--yellow); letter-spacing: 0.12em; text-shadow: 0 0 8px var(--yellow); animation: msug-pulse 1.4s ease-in-out infinite; }
+.msug__tag--mini { color: var(--pink); text-shadow: 0 0 8px var(--pink); animation: none; letter-spacing: 0.06em; }
+.msug__all {
+  position: relative; z-index: 1; display: block; width: 100%; margin: 8px 0 0; padding: 6px; border: 0; background: none; text-align: left; cursor: pointer;
+  font: 600 12px var(--font-chakra, 'Chakra Petch'), var(--font-sarabun), sans-serif; color: var(--dim); letter-spacing: 0.06em;
+}
+.msug__all b { color: var(--yellow); }
+.msug__all:hover { color: var(--text); }
+@keyframes msug-blink { 50% { opacity: 0; } }
+@keyframes msug-pulse { 50% { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) {
+  .msug__it.is-on .msug__cur, .msug__tag { animation: none; }
+}

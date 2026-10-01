@@ -7,6 +7,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { hrefFor, readRecent, type RecentEntry } from '@/lib/recent';
+import { monsterLabel } from '@/lib/monster-known-as';
 
 export default function RecentlyViewed() {
   const [entries, setEntries] = useState<RecentEntry[] | null>(null);
@@ -28,7 +29,9 @@ export default function RecentlyViewed() {
       <span className="jumpbar__label">เพิ่งดู</span>
       {entries.map((e) => (
         <Link key={`${e.kind}-${e.id}`} href={hrefFor(e)}>
-          {e.name}
+          {/* Labelled at display time so entries stored before the label existed
+              stop showing two plain "Baphomet" links. */}
+          {e.kind === 'monster' ? monsterLabel(e.id, e.name) : e.name}
         </Link>
       ))}
     </nav>

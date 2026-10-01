@@ -16,7 +16,9 @@ import AggroBadge from '@/components/AggroBadge';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
 import { nameOrIdsFilter } from '@/lib/name-search';
-import { aliasIdsFor } from '@/lib/thai-aliases';
+import { aliasIdsFor, thaiAliasNames } from '@/lib/thai-aliases';
+import { monsterLabel } from '@/lib/monster-known-as';
+import type { SuggestMonster } from '@/lib/monster-suggest';
 import { formerNameIdsFor } from '@/lib/former-names';
 import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
@@ -28,7 +30,7 @@ import MonsterNameInput from '@/components/MonsterNameInput';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import FilterPanel from '@/components/FilterPanel';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
-import { MODE_BADGE_CLASS, MODE_FILTERS, MODE_GUIDE, aggroFallbackIds, isModeFilter, monsterIdsWithMode, modesMeta, type ModeFilter } from '@/lib/monster-modes';
+import { monsterModes, MODE_BADGE_CLASS, MODE_FILTERS, MODE_GUIDE, aggroFallbackIds, isModeFilter, monsterIdsWithMode, modesMeta, type ModeFilter } from '@/lib/monster-modes';
 
 // The site's most-visited page and its worst-converting entry from search:
 // "ข้อมูลมอนสเตอร์ ro zero" put us at position 4.7 for 82 impressions and
@@ -287,15 +289,30 @@ export default async function MonsterListPage({
     console.error('monsters list query failed', error);
   }
 
-  // The suggestion list: every monster the reader could reach with the
-  // C/Mj switches as they are, so the box never suggests a row the list
-  // cannot show.
-  const { data: nameRows } = await fetchAllRows<{ name_en: string }>((from, to) =>
-    applyFilters(db.from('monsters').select('name_en'), { race: '', element: '', size: '' })
-      .order('name_en')
-      .range(from, to),
-  );
-  const names = [...new Set((nameRows ?? []).map((r) => r.name_en))];
+  // The suggestion list: every monster, minus the C/Mj variants unless their
+  // switch is on. Not narrowed by the other filters or the typed word: a
+  // picked row opens the monster's own page, so what the list below shows
+  // does not limit it (owner, 1 Oct 2026).
+  type NameRow = { id: number; name_en: string; level: number; is_mvp: boolean | null; race: string | null; element: string | null; image_url: string | null };
+  const { data: nameRows } = await fetchAllRows<NameRow>((from, to) => {
+    let nq = db.from('monsters').select('id, name_en, level, is_mvp, race, element, image_url') as any;
+    if (!showC) nq = nq.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+    if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) nq = nq.not('name_en', 'like', pattern);
+    return nq.order('id').range(from, to);
+  });
+  const suggestMonsters: SuggestMonster[] = (nameRows ?? []).map((r) => ({
+    id: r.id,
+    name: r.name_en,
+    label: monsterLabel(r.id, r.name_en),
+    level: r.level,
+    mvp: !!r.is_mvp,
+    mini: (() => { const mm = monsterModes(r.id); return !!(mm && mm.known && mm.mini); })(),
+    race: r.race ? RACE_TH[r.race] ?? r.race : '',
+    element: r.element ? ELEMENT_TH[r.element] ?? r.element : '',
+    elementKey: r.element ?? '',
+    sprite: r.image_url,
+    aliases: thaiAliasNames('monsters', r.id),
+  }));
 
   // How many rows the HP range dropped for having no published HP. Shown, not
   // swallowed: hiding rows without saying so is what makes a reader think the
@@ -415,7 +432,7 @@ export default async function MonsterListPage({
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
             <span className="field__label">ค้นชื่อมอนสเตอร์</span>
-            <MonsterNameInput names={names} defaultValue={q} />
+            <MonsterNameInput monsters={suggestMonsters} defaultValue={q} />
           </label>
           <button type="submit" className="btn">ค้นหา</button>
         </div>
