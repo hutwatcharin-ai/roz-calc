@@ -167,13 +167,19 @@ export default async function MapsPage({
           <p className="muted" style={{ margin: 0 }}>ไม่พบแมพที่ตรงเงื่อนไข</p>
         ) : (
           <ul className="mapgrid">
-            {(maps ?? []).map((m) => {
+            {(maps ?? []).map((m, index) => {
               const pic = mapImage(m.map_code);
+              // The first row is on screen at load and the largest paint:
+              // fetch it now, the rest when scrolled to (PSI 1 Oct 2026:
+              // LCP 4.5 s with every tile lazy).
+              const eager = index < 6;
               return (
                 <li key={m.map_code}>
                   <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`} className="maptile">
                     <span className="maptile__pic">
-                      {pic ? <img src={pic.src} alt="" loading="lazy" decoding="async" /> : <span className="maptile__none" aria-hidden="true">NO MAP</span>}
+                      {pic ? (
+                        <img src={pic.src} alt="" width={pic.width} height={pic.height} loading={eager ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : undefined} decoding="async" />
+                      ) : <span className="maptile__none" aria-hidden="true">NO MAP</span>}
                       <b className="maptile__count">×{m.monster_count}</b>
                     </span>
                     <span className="maptile__name">{m.map_display_name ?? m.map_code}</span>
