@@ -322,93 +322,66 @@ export default async function CardsPage({
         </Link>
       </p>
 
+      {/* The card list as a collector's album (1 Oct 2026, arcade
+          standard): the art leads, then the name, slot and effect. Was a
+          four-column table with a 45px thumbnail. */}
       <div className="card">
-        <table className="data-table">
-          <thead>
-            <tr>
-              {/* No label on the picture column: the name beside it is the
-                  label, and a header over a 45px column of pictures reads as
-                  a column of its own to a screen reader for nothing. */}
-              <th aria-label="รูปการ์ด" />
-              <th>ชื่อ</th>
-              <th>ช่องที่ใส่</th>
-              <th>เอฟเฟกต์</th>
-            </tr>
-          </thead>
-          <tbody>
-            {error ? (
-              <tr>
-                <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
-                </td>
-              </tr>
-            ) : (
-              <>
-                {rows.map((c) => (
-                  <tr key={c.id}>
-                    <td data-label="" className="cardart__cell">
-                      <Link href={`/database/cards/${c.id}`} tabIndex={-1} aria-hidden="true">
-                        <img
-                          className={hasCardArt(c.id) ? 'cardart' : 'cardart cardart--none'}
-                          src={cardArtThumbUrl(c.id)}
-                          alt=""
-                          width={45}
-                          height={60}
-                          loading="lazy"
-                          decoding="async"
-                          title={cardArtAlt(c.id, c.name_en)}
-                        />
-                      </Link>
-                    </td>
-                    <td data-label="">
-                      <Link className="cardname" href={`/database/cards/${c.id}`}>{c.name}</Link>
-                      {c.release && (
-                        <span className="cardsoon" title={`แหล่งที่บอก: ${c.release.sources.join(' + ')}`}>
-                          ยังไม่เปิด · {releaseText(c.release)}
-                        </span>
+        {error ? (
+          <p className="muted" style={{ margin: 0 }}>เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง</p>
+        ) : rows.length === 0 ? (
+          <p className="muted" style={{ margin: 0 }}>ไม่พบการ์ดที่ตรงเงื่อนไข</p>
+        ) : (
+          <ul className="cardalbum">
+            {rows.map((c) => (
+              <li key={c.id} className="cardtile">
+                <Link href={`/database/cards/${c.id}`} tabIndex={-1} aria-hidden="true" className="cardtile__art">
+                  <img
+                    className={hasCardArt(c.id) ? 'cardart' : 'cardart cardart--none'}
+                    src={cardArtThumbUrl(c.id)}
+                    alt=""
+                    width={66}
+                    height={88}
+                    loading="lazy"
+                    decoding="async"
+                    title={cardArtAlt(c.id, c.name_en)}
+                  />
+                </Link>
+                <div className="cardtile__body">
+                  <Link className="cardname" href={`/database/cards/${c.id}`}>{c.name}</Link>
+                  <span className="cardtile__meta">
+                    {c.slot && <span className="cardtile__slot">{SLOT_TH[c.slot]}</span>}
+                    {c.release && (
+                      <span className="cardsoon" title={`แหล่งที่บอก: ${c.release.sources.join(' + ')}`}>
+                        ยังไม่เปิด · {releaseText(c.release)}
+                      </span>
+                    )}
+                  </span>
+                  <span className="cardtile__effect">{c.effect ?? '—'}</span>
+                  {/* Where it drops, only where that is not the monster the
+                      card is named after (244 of 315 are). */}
+                  {dropsKnown && c.dropNote && (
+                    <span className="cardfrom">
+                      {c.from.length === 0 ? (
+                        'ยังไม่รู้ว่าดรอปจากอะไร'
+                      ) : (
+                        <>
+                          ดรอปจาก{' '}
+                          {c.from.slice(0, 2).map((m, i) => (
+                            <span key={m.id}>
+                              {i > 0 && ', '}
+                              <Link href={`/database/monsters/${m.id}`}>{m.name}</Link>
+                            </span>
+                          ))}
+                          {c.from.length > 2 && ` +${c.from.length - 2}`}
+                        </>
                       )}
-                      {/* Where it drops, said only where saying it adds
-                          something. 244 of 315 cards drop from the monster
-                          they are named after, so printing that in a column
-                          of its own made three quarters of the page repeat
-                          itself and buried the 55 rows where the answer is
-                          not the obvious one. */}
-                      {dropsKnown && c.dropNote && (
-                        <span className="cardfrom">
-                          {c.from.length === 0 ? (
-                            'ยังไม่รู้ว่าดรอปจากอะไร'
-                          ) : (
-                            <>
-                              ดรอปจาก{' '}
-                              {c.from.slice(0, 2).map((m, i) => (
-                                <span key={m.id}>
-                                  {i > 0 && ', '}
-                                  <Link href={`/database/monsters/${m.id}`}>{m.name}</Link>
-                                </span>
-                              ))}
-                              {c.from.length > 2 && ` +${c.from.length - 2}`}
-                            </>
-                          )}
-                        </span>
-                      )}
-                    </td>
-                    <td data-label="ช่องที่ใส่">{c.slot ? SLOT_TH[c.slot] : '—'}</td>
-                    <td data-label="เอฟเฟกต์" className="effect">
-                      <span className="effect__text">{c.effect ?? '—'}</span>
-                    </td>
-                  </tr>
-                ))}
-                {rows.length === 0 && (
-                  <tr>
-                    <td colSpan={4} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                      ไม่พบการ์ดที่ตรงเงื่อนไข
-                    </td>
-                  </tr>
-                )}
-              </>
-            )}
-          </tbody>
-        </table>
+                    </span>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       {rows.length === 0 && q && <EmptyState kind="cards" what={q} clearHref="/database/cards" />}

@@ -157,63 +157,33 @@ export default async function MapsPage({
         </div>
       </form>
 
+      {/* Map cards (1 Oct 2026, arcade standard): the map picture is what
+          tells two fields apart, so it leads, with the monster count as the
+          badge. Was a three-column table with a 40px thumbnail. */}
       <div className="card">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>แมพ</th>
-              <th>รหัส</th>
-              <th className="num">จำนวนมอน</th>
-            </tr>
-          </thead>
-          <tbody>
-            {error ? (
-              <tr>
-                <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
-                </td>
-              </tr>
-            ) : (
-              <>
-                {(maps ?? []).map((m) => (
-                  <tr key={m.map_code}>
-                    <td data-label="">
-                      <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`} className="maprow">
-                        {/* Thumbnail of the same picture the map page shows;
-                            a blank square keeps rows aligned for the 134 maps
-                            without one. Lazy: 50 rows a page, most below
-                            the fold. */}
-                        {(() => {
-                          const pic = mapImage(m.map_code);
-                          return pic ? (
-                            <img className="maprow__thumb" src={pic.src} alt="" width={40} height={40} loading="lazy" decoding="async" />
-                          ) : (
-                            <span className="maprow__thumb maprow__thumb--none" aria-hidden="true" />
-                          );
-                        })()}
-                        {/* map_display_name is populated for every row today --
-                            111 of 497 just repeat their own map_code, which is
-                            handled above by showing the code either way. This
-                            fallback guards a null the column's type still
-                            allows, not a shape the current data exercises. */}
-                        {m.map_display_name ?? m.map_code}
-                      </Link>
-                    </td>
-                    <td data-label="รหัส" className="mono">{m.map_code}</td>
-                    <td data-label="จำนวนมอน" className="num">{m.monster_count}</td>
-                  </tr>
-                ))}
-                {(maps ?? []).length === 0 && (
-                  <tr>
-                    <td colSpan={3} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                      ไม่พบแมพที่ตรงเงื่อนไข
-                    </td>
-                  </tr>
-                )}
-              </>
-            )}
-          </tbody>
-        </table>
+        {error ? (
+          <p className="muted" style={{ margin: 0 }}>เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง</p>
+        ) : (maps ?? []).length === 0 ? (
+          <p className="muted" style={{ margin: 0 }}>ไม่พบแมพที่ตรงเงื่อนไข</p>
+        ) : (
+          <ul className="mapgrid">
+            {(maps ?? []).map((m) => {
+              const pic = mapImage(m.map_code);
+              return (
+                <li key={m.map_code}>
+                  <Link href={`/database/maps/${encodeURIComponent(m.map_code)}`} className="maptile">
+                    <span className="maptile__pic">
+                      {pic ? <img src={pic.src} alt="" loading="lazy" decoding="async" /> : <span className="maptile__none" aria-hidden="true">NO MAP</span>}
+                      <b className="maptile__count">×{m.monster_count}</b>
+                    </span>
+                    <span className="maptile__name">{m.map_display_name ?? m.map_code}</span>
+                    <code className="maptile__code">{m.map_code}</code>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       <Pagination page={safePage} totalPages={totalPages} buildHref={buildHref} total={count ?? 0} pageSize={PAGE_SIZE} />

@@ -3900,3 +3900,56 @@ html .itemcard__name { max-width: 100%; font: 700 13.5px/1.3 var(--font-chakra),
 html .itemcard__meta { font-size: 11.5px; }
 @media (max-width: 560px) { html .itemgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { html .itemcard { transition: none; } }
+
+/* Map list as picture cards (1 Oct 2026, arcade standard). */
+.mapgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.maptile { display: flex; flex-direction: column; gap: 3px; height: 100%; padding: 6px 6px 10px; border-radius: 4px; background: #0d0824; border: 2px solid rgba(61, 232, 255, 0.35); color: var(--text); text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+.maptile:hover { transform: translateY(-3px); border-color: var(--cyan); box-shadow: 0 0 18px var(--glow-cyan); text-decoration: none; }
+.maptile__pic { position: relative; display: block; aspect-ratio: 1; overflow: hidden; border-radius: 3px; background: #08051a; }
+.maptile__pic img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+.maptile__none { display: grid; place-items: center; height: 100%; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: 0.2em; color: var(--faint); }
+.maptile__count { position: absolute; right: 4px; bottom: 4px; padding: 0 6px; border-radius: 3px; background: rgba(11, 8, 32, 0.85); color: var(--yellow); font: 700 13px var(--font-chakra), sans-serif; box-shadow: 0 0 8px rgba(255, 229, 61, 0.3); }
+.maptile__name { padding: 0 2px; font: 700 14px/1.3 var(--font-chakra), var(--font-sarabun), sans-serif; }
+.maptile__code { padding: 0 2px; font: 600 11.5px var(--font-mono), monospace; color: var(--cyan); }
+@media (max-width: 560px) { .mapgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } }
+@media (prefers-reduced-motion: reduce) { .maptile { transition: none; } }
+
+/* Tables site-wide in the arcade standard (1 Oct 2026): a lit header strip,
+   faint row banding, the row under the pointer highlighted like a selected
+   menu entry with a yellow edge. Mobile keeps its stacked-card layout,
+   which gets the same edge. Light and colour only. */
+html .data-table th { color: var(--cyan); font: 700 11px/1.6 var(--font-chakra), var(--font-sarabun), sans-serif; letter-spacing: 0.12em; border-bottom: 2px solid rgba(61, 232, 255, 0.45); background: linear-gradient(180deg, transparent, rgba(61, 232, 255, 0.08)); }
+html .data-table tbody tr:nth-child(even) td { background-color: rgba(255, 255, 255, 0.018); }
+html .data-table tbody tr:hover td { background-color: transparent; background-image: linear-gradient(90deg, rgba(255, 229, 61, 0.12), rgba(255, 229, 61, 0.02) 60%, transparent); }
+html .data-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--yellow); }
+html .data-table td img { image-rendering: pixelated; }
+@media (max-width: 720px) {
+  html .data-table tr { border-radius: 4px; background: #0d0824; box-shadow: inset 3px 0 0 rgba(61, 232, 255, 0.5); }
+  html .data-table tbody tr:hover td:first-child { box-shadow: none; }
+  html .data-table tbody tr:nth-child(even) td { background-color: transparent; }
+}
+
+/* Card list as a collector's album (1 Oct 2026, arcade standard). */
+.cardalbum { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+.cardtile { display: flex; gap: 12px; padding: 8px; border-radius: 4px; background: #0d0824; border: 1px solid rgba(255, 229, 61, 0.28); transition: border-color 0.15s, box-shadow 0.15s; }
+.cardtile:hover { border-color: var(--yellow); box-shadow: 0 0 14px rgba(255, 229, 61, 0.3); }
+.cardtile__art { flex: none; }
+.cardtile__art .cardart { width: 66px; height: 88px; border-radius: 4px; border: 2px solid rgba(255, 229, 61, 0.55); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6); }
+.cardtile__body { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.cardtile .cardname { font: 700 15px var(--font-chakra), var(--font-sarabun), sans-serif; }
+.cardtile__meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.cardtile__slot { padding: 0 6px; border-radius: 3px; background: rgba(61, 232, 255, 0.12); border: 1px solid rgba(61, 232, 255, 0.5); color: var(--cyan); font: 700 11.5px var(--font-sarabun), sans-serif; }
+.cardtile__effect { color: var(--yellow); font: 600 13px/1.45 var(--font-sarabun), sans-serif; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.cardtile .cardfrom { font-size: 12px; }
+@media (max-width: 560px) { .cardalbum { grid-template-columns: 1fr; } }
+
+/* Tools in the arcade standard (1 Oct 2026): the controls sit on a dark
+   console panel, result tables read like a status screen, and the NPC
+   table's header matches every other table. */
+html .controlrow { padding: 12px; border-radius: 4px; background: #0d0824; border: 1px solid rgba(61, 232, 255, 0.3); box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.6); }
+html .stat-table td { border-bottom-color: rgba(61, 232, 255, 0.12); }
+html .stat-table td.num { font-family: var(--font-chakra), sans-serif; font-weight: 700; font-size: 15px; }
+html .stat-table tbody tr:hover td { background: linear-gradient(90deg, rgba(255, 229, 61, 0.1), transparent 70%); }
+html .stat-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--yellow); }
+html .bptable th { color: var(--cyan); font: 700 11px/1.6 var(--font-chakra), var(--font-sarabun), sans-serif; letter-spacing: 0.12em; border-bottom: 2px solid rgba(61, 232, 255, 0.45); }
+html .bptable tbody tr:hover td { background: linear-gradient(90deg, rgba(255, 229, 61, 0.12), transparent 60%); }
