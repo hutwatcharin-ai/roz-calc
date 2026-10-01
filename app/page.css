@@ -1,0 +1,45 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* Entry cards at the foot of the home page. Capped at four by spec 6.2 so the
+   page stays a tool with context around it rather than a link menu. */
+/* Homepage intent cards (2026-08-31 redesign, "แบบ 3+1"): four questions a
+   player actually has, first card embeds the working farming-finder form.
+   Neon drop shadows reuse the existing card accent trio. */
+.qgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+.qcard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 16px;
+  text-decoration: none;
+}
+.qcard--yellow { box-shadow: 4px 4px 0 var(--yellow); }
+.qcard--cyan { box-shadow: 4px 4px 0 var(--cyan); }
+.qcard--pink { box-shadow: 4px 4px 0 var(--pink); }
+a.qcard:hover { background: var(--panel-2); }
+.qcard strong { font: 700 16px/1.35 var(--font-chakra), sans-serif; color: var(--text); }
+.qcard span { font: 400 13px/1.6 var(--font-sarabun), sans-serif; color: var(--faint); }
+.qcard__go { font: 600 13px/1 var(--font-sarabun), sans-serif; font-style: normal; color: var(--yellow); margin-top: auto; padding-top: 8px; }
+.arcade__sun { position: absolute; left: 58%; bottom: 40%; width: 120px; height: 120px; translate: -50% 50%; border-radius: 50%; background: linear-gradient(var(--yellow), var(--pink)); box-shadow: 0 0 40px color-mix(in srgb, var(--pink) 70%, transparent); -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 9px, transparent 9px 12px); mask-image: repeating-linear-gradient(180deg, #000 0 9px, transparent 9px 12px); opacity: .85; }
+.arcade__bar { display: block; width: 90px; height: 6px; border: 1px solid var(--cyan); }
+.arcade__bar i { display: block; height: 100%; width: 78%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+
+.qcard--art { position: relative; }
+.qcard--art > strong, .qcard--art > span { padding-right: 58px; }
+.qcard__art { position: absolute; top: 12px; right: 14px; width: 48px; height: 48px; object-fit: contain; image-rendering: pixelated; }
+.qcard__art--sleep { width: 60px; height: 57px; top: 8px; right: 10px; animation: qcard-breathe 3.2s ease-in-out infinite; }
+.qcard__zz { position: absolute; top: 4px; right: 12px; font: 700 12px/1 var(--font-mono), monospace; font-style: normal; color: var(--pink); animation: qcard-zz 3.2s ease-in-out infinite; }
+.qcard__zz b { font-size: 9px; margin-left: 2px; }
+.homehero__faq { display: inline-flex; align-items: center; min-height: 44px; color: var(--cyan); font-weight: 600; }
+.siteupd { margin-top: 20px; padding: 14px 16px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.siteupd__title { margin: 0 0 6px; font: 700 16px/1.5 var(--font-sarabun), sans-serif; color: var(--yellow); }
+.siteupd__list { margin: 0; padding-inline-start: 18px; display: flex; flex-direction: column; gap: 2px; line-height: 1.6; font-size: 14px; }
+.siteupd__list a { display: inline-block; padding-block: 8px; margin-block: -8px; }

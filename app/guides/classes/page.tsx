@@ -3,6 +3,7 @@
 // The way into the class guides: every job with a guide, grouped under its
 // 1st job, each with its sprite and its builds, so a player finds "their" job
 // by sight before reading a word.
+import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';

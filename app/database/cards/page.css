@@ -1,0 +1,73 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* Card name, then -- only when it is not the obvious answer -- where it
+   drops. 244 of 315 cards come from the monster they are named after, so
+   this line appears on the 71 rows where it earns its space. */
+.cardname { font-weight: 600; }
+.cardfrom {
+  display: block;
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 12.5px;
+}
+.cardfrom a { color: var(--faint); }
+.cardfrom a:hover { color: var(--text); }
+
+/* "Not in the game yet" on the 42 cards that are not. Set apart from the
+   drop line under it, because the two say opposite things: one is where to
+   go, the other is that there is nowhere to go. */
+.cardsoon {
+  display: inline-block;
+  margin-inline-start: 8px;
+  padding: 1px 7px;
+  border: 1px solid rgba(255, 229, 61, 0.45);
+  border-radius: 999px;
+  color: var(--yellow);
+  font-size: 11.5px;
+  white-space: nowrap;
+  vertical-align: 2px;
+}
+.cardframe__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.cardframe__art--none { opacity: 0.45; filter: grayscale(0.4); }
+.cardframe__note { margin: 8px 2px 0; color: var(--faint); font-size: 12.5px; line-height: 1.45; }
+.cardhero__body { min-width: 0; flex: 1; }
+.cardhero__kicker {
+  margin: 2px 0 4px;
+  color: var(--faint);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.cardhero__name {
+  margin: 0;
+  font: 700 clamp(26px, 4vw, 38px)/1.35 var(--font-chakra), sans-serif;
+  color: var(--text);
+  text-shadow: 0 0 18px rgba(61, 232, 255, 0.45);
+}
+
+.cardsoon__line {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 229, 61, 0.45);
+  border-radius: 8px;
+  background: rgba(255, 229, 61, 0.08);
+  color: var(--yellow);
+  font-size: 13.5px;
+}
+
+/* ---------- shared: droppers ---------- */
+.droplist { margin-top: 22px; }
+.droplist__rows { list-style: none; margin: 10px 0 0; padding: 0; border: 1px solid var(--hair); border-radius: 10px; background: var(--panel); overflow: hidden; }
+.droprow { display: flex; align-items: center; gap: 14px; padding: 9px 14px; border-top: 1px solid var(--hair); }
+.droprow:first-child { border-top: 0; }
+.droprow__who { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; text-decoration: none; }
+.droprow__sprite { image-rendering: pixelated; flex: none; }
+.droprow__sprite--none { display: inline-block; width: 28px; height: 28px; border: 1px dashed var(--hair); border-radius: 4px; }
+.droprow__name { color: var(--cyan); font-weight: 600; }
+.droprow__level { color: var(--faint); font-size: 12px; }
+.droprow__bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--cyan), var(--pink)); box-shadow: 0 0 8px rgba(61, 232, 255, 0.5); }

@@ -4,6 +4,7 @@
 // so a single quest is shareable as /database/quests/louyang#q12424 without
 // existing as a page of its own -- the design's answer to 766 thin pages.
 
+import '../page.css';
 import { linkItemRefs } from '@/lib/quest-item-refs';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';

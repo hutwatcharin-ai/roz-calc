@@ -4,6 +4,7 @@
 // Hubs, not 766 detail pages, on purpose -- the design folds quests into
 // town-sized pages so none of them is thin (spec 2026-08-31-quests).
 
+import './page.css';
 import Link from 'next/link';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';

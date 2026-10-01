@@ -1,4 +1,5 @@
 // app/database/monsters/page.tsx
+import './page.css';
 import type { Metadata } from 'next';
 import { Fragment } from 'react';
 import AdsenseUnit from '@/components/AdsenseUnit';

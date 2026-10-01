@@ -1,0 +1,5 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* /guides/vending steps. */
+.vendsteps { margin: 0; padding-inline-start: 22px; font-size: 15px; line-height: 1.65; }
+.vendsteps li + li { margin-top: 8px; }

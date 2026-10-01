@@ -13,6 +13,7 @@
 // materials and the enchant rules come from roz-global.info, credited at the
 // foot of the page; all 44 piece names matched our table and its HP/SP/DEF/
 // FLEE figures agree with the client on all 44.
+import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';

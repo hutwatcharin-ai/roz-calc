@@ -16,6 +16,7 @@
 // Do not move an item from the plan list into the landed list on the strength
 // of the roadmap alone. It moves when one of our own patch pages shows it.
 
+import './page.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';

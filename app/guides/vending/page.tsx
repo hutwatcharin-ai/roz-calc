@@ -18,6 +18,7 @@
 // Unknown and said so: what the three grades change, and which grade the
 // quest gives (the quest text only says it depends on the job's difficulty).
 
+import './page.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';

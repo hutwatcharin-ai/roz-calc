@@ -3,6 +3,7 @@
 // The one rozerodb section we lacked. 77 items captured 2026-08-31 -- cash
 // shop prices move with events and nothing updates them automatically, so the
 // capture date is stated on the page, not buried in a footnote.
+import './page.css';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { supabaseBrowser } from '@/lib/supabase';

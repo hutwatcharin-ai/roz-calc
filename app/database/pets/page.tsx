@@ -21,6 +21,7 @@
 // in the enchantment window, and "level 2" is a second copy of the same egg at
 // 50% -- see lib/qpet-ring, written after this page shipped a sentence about
 // intimacy that nothing in the source supports.
+import './page.css';
 import { itemFormerNames, itemNamesOf } from '@/lib/item-former-names';
 import Link from 'next/link';
 import type { Metadata } from 'next';

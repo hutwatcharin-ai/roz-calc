@@ -1,0 +1,65 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+.reward-row { display: flex; flex-wrap: wrap; gap: 28px; }
+.reward-row > div { display: flex; flex-direction: column; gap: 2px; }
+.moncard {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  text-decoration: none;
+  min-height: 44px;
+}
+.moncard:hover { border-color: var(--cyan); }
+.moncard__sprite {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.moncard__body { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.moncard__top { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.moncard__name {
+  color: var(--text);
+  font: 400 13px/1.35 var(--font-sarabun), sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.moncard__meta { color: var(--faint); font: 400 12.5px/1.4 var(--font-sarabun), sans-serif; }
+
+/* The drop a monster is looked up for, on its card in the list. */
+.moncard__drops {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.moncard__rate { font-family: var(--font-mono), ui-monospace, monospace; color: var(--faint); }
+.advfilter__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dim);
+  font: 400 13px/1.4 var(--font-sarabun), sans-serif;
+}
+.fpanel__sec { display: flex; flex-direction: column; gap: 10px; padding: 12px 0; border-top: 1px solid var(--hair); }
+.fpanel__sec:first-child { border-top: 0; }
+.fpanel__title { margin: 0; font: 700 14px/1.4 var(--font-sarabun), sans-serif; color: var(--text); }
+.monc__help { margin-inline-start: 6px; font-weight: 400; font-size: 12.5px; color: var(--cyan); }
+.monfilter__check { min-height: 44px; }
+.monfilter__check input { width: 20px; height: 20px; accent-color: var(--cyan); }
+
+/* Monster page header: sprite in an element-coloured ring (owner's pick C,
+   30 Sep 2026). */
+.monhead { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+
+/* Players' name beside a shared client name (lib/monster-known-as). */
+.pagehead__known { font-size: 0.55em; color: var(--yellow); vertical-align: middle; }

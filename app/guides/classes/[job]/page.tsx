@@ -12,6 +12,7 @@
 // - sources sit on their own quiet line under each claim instead of pills in
 //   the middle of the sentence, and still open the clip at the second.
 // Nearly all of it comes from players' videos, so every line keeps its source.
+import '../page.css';
 import Link from 'next/link';
 import AdsenseUnit from '@/components/AdsenseUnit';
 import type { Metadata } from 'next';

@@ -5,6 +5,7 @@
 // Thai player with instructions and an honest note that most launch codes
 // expire. Facts only -- the code strings and where they land -- written here
 // rather than lifted, and the source is credited below.
+import './page.css';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';

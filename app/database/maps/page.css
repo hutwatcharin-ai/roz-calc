@@ -1,0 +1,19 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* Map list rows: thumbnail before the name. */
+.maprow { display: inline-flex; align-items: center; gap: 10px; }
+.maprow__thumb {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.maprow__thumb--none { display: inline-block; }
+
+/* Notable drops on a map page (22 Sep 2026): the rate sits at the row's end
+   so a column of percentages reads down the right edge. */
+.mapdrops__title { margin: 14px 0 4px; font: 700 14px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); }
+.mapdrops__icon { vertical-align: middle; margin-inline-end: 6px; }

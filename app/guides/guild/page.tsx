@@ -9,6 +9,7 @@
 // The event items say in their own description that they are deleted when the
 // event ends, so the page says the same rather than reading as permanent gear.
 
+import './page.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';

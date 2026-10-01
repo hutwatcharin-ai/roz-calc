@@ -1,0 +1,9 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+.guildp__flame { display: grid; justify-items: center; gap: 2px; padding: 12px 8px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); text-align: center; font-size: 13px; }
+.guildp__flamedot { width: 26px; height: 26px; border-radius: 50% 50% 50% 0; rotate: -45deg; margin-bottom: 8px; box-shadow: 0 0 14px currentColor; }
+.guildp__rowicon { image-rendering: pixelated; vertical-align: -6px; margin-inline-end: 8px; }
+.guildp__row { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }
+.guildp__row img { image-rendering: pixelated; }
+.guildp__row strong { font-size: 14px; }
+.guildp__row p { margin: 2px 0 0; font-size: 13px; line-height: 1.6; }

@@ -14,6 +14,7 @@
 //     (theirs x10), but Zero has changed values before -- the client's own
 //     Blue Potion reads ~60 where rAthena has 40-60 -- so the page says so.
 //   - Who drops what: our monster_drops table, read at request time.
+import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';

@@ -14,6 +14,7 @@
 // Not shown on purpose: the MVPs whose raid maps sit in these areas. The
 // notice names no MVP, and MVP Raid rotates by daily quest, so "Baphomet is
 // out" would be our guess, not the notice.
+import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';

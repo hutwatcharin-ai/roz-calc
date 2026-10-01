@@ -1,4 +1,5 @@
 // app/database/maps/page.tsx
+import './page.css';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { mapImage } from '@/lib/map-image';

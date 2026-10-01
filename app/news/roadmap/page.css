@@ -1,0 +1,8 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* ---------- /news/roadmap ---------- */
+.woe__landed { padding: 12px 14px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel-2); }
+.woe__when { margin: 0; font: 700 12px/1 var(--font-mono), monospace; color: var(--cyan); }
+.roadmap__month { font: 700 13px/1.4 var(--font-mono), monospace; color: var(--yellow); }
+.roadmap__items { font-size: 13.5px; line-height: 1.7; }
+.roadmap__done { color: var(--cyan); }

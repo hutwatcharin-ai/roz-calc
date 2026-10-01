@@ -1,3 +1,4 @@
+import '../page.css';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import { isAbsentFromGame } from '@/lib/game-absent';

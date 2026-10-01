@@ -23,6 +23,7 @@
 //
 // The two-NPC method and the activation costs are the mirrored guide's, not
 // the client's, and the page says so where they appear.
+import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';

@@ -1,4 +1,5 @@
 // app/database/monsters/[id]/page.tsx
+import '../page.css';
 import MonsterRing from '@/components/MonsterRing';
 import SpawnCards from '@/components/SpawnCards';
 import { knownAs } from '@/lib/monster-known-as';

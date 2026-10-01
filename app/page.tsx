@@ -1,3 +1,4 @@
+import './page.css';
 import siteUpdates from '@/data/site-updates.json';
 import { supabaseBrowser } from '@/lib/supabase';
 import FarmingTable from '@/components/FarmingTable';

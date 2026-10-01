@@ -1,0 +1,5 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* The code list: fixed-width chips, because a coupon code is read character
+   by character and a proportional font hides the difference between 0 and O. */
+.codegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }

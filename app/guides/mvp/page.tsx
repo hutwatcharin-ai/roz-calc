@@ -19,6 +19,7 @@
 // No respawn times: no source has Global numbers (checked 30 Sep 2026), and
 // the owner cut the "not known yet" section rather than show it.
 
+import './page.css';
 import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
 import type { Metadata } from 'next';
 import Link from 'next/link';

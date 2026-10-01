@@ -21,6 +21,7 @@
 // and our monsters table holds none of them. Even Orc Skeleton, the one name
 // that matches, is a different creature in here: level 60 with 4,458 HP
 // against the level 53 and 3,376 HP of the one that walks around outside.
+import './page.css';
 import { itemNamesOf } from '@/lib/item-former-names';
 import Link from 'next/link';
 import type { Metadata } from 'next';

@@ -1,0 +1,12 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+.gearstate {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  color: var(--faint);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.gearstate--open { border-color: var(--status-safe); color: var(--status-safe); }

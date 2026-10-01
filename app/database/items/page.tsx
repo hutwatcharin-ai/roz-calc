@@ -1,4 +1,5 @@
 // app/database/items/page.tsx
+import './page.css';
 import SuggestInput from '@/components/SuggestInput';
 import { ITEM_LIST_CATEGORIES } from '@/lib/item-list-categories';
 import { itemFormerNameIdsFor } from '@/lib/item-former-names';

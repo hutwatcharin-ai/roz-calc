@@ -1,0 +1,8 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+/* MVP boss cards on /guides/mvp (1 Oct 2026). */
+.bossgrid { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.bosscard__art { display: grid; place-items: end center; width: 100%; height: 110px; background: radial-gradient(circle at 50% 70%, color-mix(in srgb, var(--el, var(--pink)) 25%, transparent), transparent 70%); }
+.bosscard__art img { max-width: 100%; max-height: 110px; image-rendering: pixelated; }
+.bosscard__name { font: 700 15px var(--font-chakra), var(--font-sarabun), sans-serif; line-height: 1.25; }
+.bosscard__lv { font: 700 12px var(--font-chakra), sans-serif; letter-spacing: 0.1em; color: var(--pink); text-shadow: 0 0 8px var(--pink); }

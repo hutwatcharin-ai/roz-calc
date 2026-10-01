@@ -1,4 +1,5 @@
 // app/database/maps/[code]/page.tsx
+import '../page.css';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';

@@ -1,0 +1,14 @@
+/* Styles used by this page only, moved out of app/globals.css on 1 Oct 2026
+   so other pages stop downloading them (scripts/css-split.py). */
+.woe__sub { margin: 0 0 8px; font: 700 14px/1.4 var(--font-sarabun), sans-serif; color: var(--cyan); }
+.woe__item { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--text); text-decoration: none; }
+.woe__item:hover { color: var(--cyan); }
+.woe__icon { image-rendering: pixelated; flex: none; }
+
+/* WoE time box. */
+.woe__rules { margin: 8px 0 0; padding-inline-start: 22px; display: grid; gap: 6px; line-height: 1.5; }
+.woe__rules li::marker { color: var(--muted); font-weight: 600; }
+.woe__times { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 8px; }
+.woe__time { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border: 1px solid var(--hair); border-radius: 12px; background: rgba(11, 8, 32, 0.45); }
+.woe__time strong { font: 700 20px/1.3 var(--font-sarabun), sans-serif; color: var(--yellow); }
+.woe__srv { font-size: 12.5px; color: var(--faint); letter-spacing: 0.04em; }

@@ -30,6 +30,7 @@
 // exists because the reference half is long and a returning reader wants the
 // feeding table, not a scroll past sixteen skills.
 
+import './page.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';

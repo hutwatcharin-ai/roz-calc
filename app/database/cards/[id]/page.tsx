@@ -4,6 +4,7 @@
 // landed on the generic item template, which leads with prices and slots and
 // buries the one line a card is read for. Split out 3 Sep 2026, the same day as
 // gear and costumes; lib/item-href.ts holds the rule all four routes key off.
+import '../page.css';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import { isAbsentFromGame } from '@/lib/game-absent';

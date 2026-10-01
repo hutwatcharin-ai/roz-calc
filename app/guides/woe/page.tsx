@@ -11,6 +11,7 @@
 // the open castles and the twelve rules were added on 1 Oct 2026 from the
 // official Thai notice the owner sent as a screenshot.
 
+import './page.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
