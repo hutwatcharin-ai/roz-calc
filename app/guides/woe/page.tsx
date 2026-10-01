@@ -27,9 +27,9 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'สงครามกิลด์ WoE Ragnarok Zero — ของที่ใช้ได้ ใช้ไม่ได้ และชุดกิลด์',
+  title: 'สงครามกิลด์ WoE Ragnarok Zero — เวลาวอร์ (อาทิตย์ 21:00 น.) ของที่ใช้ได้ ใช้ไม่ได้ และชุดกิลด์',
   description:
-    'War of Emperium ใน Ragnarok Zero Global — ยาที่ใช้ไม่ได้ในเขตสงครามกิลด์, ยาเฉพาะ WoE, สกรอล Force/Resist, ชุดสมาชิกกิลด์ 2 ระดับที่ค่าทำงานเฉพาะในเขต WoE และ Emperium ทุกบรรทัดยกมาจากคำอธิบายไอเทมในเกม',
+    'War of Emperium ใน Ragnarok Zero Global — เปิดวันอาทิตย์ 21:00–22:00 น. เวลาไทย (เซิร์ฟ SEA) ปราสาท 10 หลัง · ยาที่ใช้ไม่ได้ในเขตสงครามกิลด์, ยาเฉพาะ WoE, สกรอล Force/Resist, ชุดสมาชิกกิลด์ 2 ระดับที่ค่าทำงานเฉพาะในเขต WoE และ Emperium ทุกบรรทัดยกมาจากคำอธิบายไอเทมในเกม',
 };
 
 type Row = { id: number; name: string; note: string; full: string };
@@ -45,6 +45,8 @@ const OTHER = woe.other as Row[];
 
 type Castle = { code: string; number: number; name: string; region: string; warpZeny: number; warpZenySiege: number };
 const CASTLES = castleFile.castles as Castle[];
+// The four towns prontera.info says the ten sieged castles are in (1 Oct 2026).
+const WAR_TOWNS = new Set(['Al De Baran', 'Prontera', 'Geffen', 'Payon']);
 const REGIONS = [...new Set(CASTLES.map((c) => c.region))];
 // One pair of numbers for all thirty, so the sentence can quote it as a rule.
 const WARP = { normal: CASTLES[0].warpZeny, siege: CASTLES[0].warpZenySiege };
@@ -119,15 +121,29 @@ export default async function WoeGuidePage() {
         lead="War of Emperium อยู่ในเซิร์ฟแล้ว หน้านี้รวมเฉพาะสิ่งที่เกมเขียนไว้เอง: ยาที่ถูกปิดในเขตสงคราม ยาที่ใช้ได้เฉพาะที่นั่น สกรอลเฉพาะสงคราม และชุดกิลด์ที่ค่าโผล่เฉพาะในเขต WoE"
       />
 
-      <section className="card card--yellow" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>สองข้อที่หน้านี้ยังตอบไม่ได้</h2>
-        <ul style={{ margin: '8px 0 0', paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <li><strong>เวลาเปิดสงครามกิลด์</strong> วันไหน กี่โมง ยาวกี่ชั่วโมง ยังไม่มีในข้อมูลที่เว็บนี้มี</li>
-          <li><strong>ปราสาทที่เปิดจริงในเซิร์ฟนี้</strong> <a href="#castles">รายชื่อปราสาทในไคลเอนต์อยู่ด้านล่าง</a> แต่ไฟล์ที่มีอยู่ไม่ได้แปลว่าเซิร์ฟเปิดสงครามที่นั่นครบทุกหลัง</li>
+      {/* Times from prontera.info's raid planner (owner's screenshot, 1 Oct
+          2026), shown there in Asia/Bangkok time; the SEA hour matches the
+          Thai clip in docs/GAME_MODEL.md (21:00-22:00, one hour). prontera's
+          header also says "Sunday and Wednesday" but lists only the Sunday
+          sessions, so Wednesday is mentioned, not tabled. */}
+      <section className="card card--yellow" id="time" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>เวลาสงครามกิลด์ (เวลาไทย)</h2>
+        <div className="woe__times">
+          <div className="woe__time">
+            <span className="woe__srv">เซิร์ฟ SEA</span>
+            <strong>วันอาทิตย์ 21:00–22:00 น.</strong>
+          </div>
+          <div className="woe__time">
+            <span className="woe__srv">เซิร์ฟ EU</span>
+            <strong>วันจันทร์ 02:00–03:00 น.</strong>
+            <span className="muted" style={{ fontSize: 13 }}>คืนวันอาทิตย์ต่อเช้าวันจันทร์</span>
+          </div>
+        </div>
+        <ul style={{ margin: '10px 0 0', paddingInlineStart: 20, display: 'flex', flexDirection: 'column', gap: 4, fontSize: 14 }}>
+          <li>รอบละ 1 ชั่วโมง · ตีปราสาท 10 หลังใน Al De Baran, Prontera, Geffen และ Payon</li>
+          <li className="muted">prontera.info เขียนว่ามีวันอาทิตย์และวันพุธ แต่บอกเวลาไว้แค่รอบวันอาทิตย์ ยังไม่รู้เวลาของวันพุธ</li>
         </ul>
-        <p className="muted" style={{ marginTop: 10 }}>
-          สองข้อนี้ต้องดูจากประกาศในเกมหรือหน้าประกาศทางการ ถ้าใครมีภาพหน้าประกาศเวลา WoE ส่งมาได้ จะใส่ให้พร้อมบอกที่มา
-        </p>
+        <Src>ตารางวอร์ของ prontera.info (ดู 1 ต.ค. 2569) ตรงกับคลิปผู้เล่นไทยที่บอก 21:00–22:00 น.</Src>
       </section>
 
       <nav className="guildp__toc" aria-label="สารบัญ">
@@ -260,8 +276,11 @@ export default async function WoeGuidePage() {
         </p>
         <div className="woe__castles">
           {REGIONS.map((region) => (
-            <div key={region} className="woe__castleblock">
-              <h3 className="woe__sub">{region}</h3>
+            <div key={region} className={'woe__castleblock' + (WAR_TOWNS.has(region) ? '' : ' woe__castleblock--off')}>
+              <h3 className="woe__sub">
+                {region}
+                {!WAR_TOWNS.has(region) && <> <span className="tag tag--unknown">ยังไม่เปิดสงคราม</span></>}
+              </h3>
               <ul className="woe__list woe__list--tight">
                 {CASTLES.filter((c) => c.region === region).map((c) => (
                   <li key={c.code}>
