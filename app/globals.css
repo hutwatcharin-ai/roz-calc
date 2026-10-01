@@ -3783,3 +3783,19 @@ a.iset__piece:hover, a.iset__piece:focus-visible { background: color-mix(in srgb
 /* Players' name beside a shared client name (lib/monster-known-as). */
 .pagehead__known { font-size: 0.55em; color: var(--yellow); vertical-align: middle; }
 .aliasline__known strong { color: var(--yellow); }
+
+/* Patch page: "what the notice does not say". */
+.pxh { margin: 22px 0 4px; font: 700 17px/1.4 var(--font-sarabun), sans-serif; color: var(--yellow); }
+.pxp { margin: 0 0 10px; font-size: 14px; }
+.pcards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, 46%), 1fr)); gap: 8px; }
+.pcard { display: grid; grid-template-columns: 48px 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; min-height: 64px; padding: 8px 10px; border: 1px solid var(--hair); border-radius: 12px; color: var(--text); text-decoration: none; }
+.pcard:hover, .pcard:focus-visible { border-color: var(--cyan); }
+.pcard__mob { grid-row: 1 / span 2; width: 48px; height: 48px; object-fit: contain; image-rendering: pixelated; }
+.pcard__name { font-weight: 700; font-size: 14.5px; line-height: 1.3; }
+.pcard__from { font-size: 12.5px; color: var(--faint); }
+.pstar { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pstar__row { display: flex; gap: 10px; align-items: center; padding: 8px 12px; border: 1px solid var(--hair); border-radius: 12px; color: var(--text); text-decoration: none; }
+.pstar__row:hover, .pstar__row:focus-visible { border-color: var(--cyan); }
+.pstar__row img { flex: none; image-rendering: pixelated; }
+.pstar__from { display: block; font-size: 13px; color: var(--dim); }
+.phero__pill--link { margin-left: 6px; border-color: color-mix(in srgb, var(--yellow) 55%, transparent); color: var(--yellow); text-decoration: none; }

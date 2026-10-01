@@ -21,6 +21,9 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { supabaseBrowser } from '@/lib/supabase';
 import { mapImage } from '@/lib/map-image';
 import { monsterLabel } from '@/lib/monster-known-as';
+import ItemSetCard from '@/components/ItemSetCard';
+import { ITEM_SETS } from '@/lib/item-sets';
+import starDroppers from '@/data/star-droppers.json';
 
 export const revalidate = 3600;
 
@@ -69,6 +72,32 @@ const HIGHLIGHTS = [
   { big: 'Shop', title: 'Kafra Shop และคอลแลบ', body: 'เริ่ม Kumamon · จบ Baby Shark · ของใหม่ Gacha Scroll, คอสตูม, แพ็กเกจผูกบัญชี' },
 ];
 
+// What the notice does not say, worked out from our own data on 1 Oct 2026
+// (owner's pick: everything except a level-cap warning). Every id below came
+// from comparing data/map-availability.json before and after this patch:
+// monsters whose every spawn was on a closed map and now has an open one.
+const NEW_CARD_MONSTERS = [1120, 1092, 1243, 1169, 1101, 1145, 1209, 1121, 1151, 1098, 1140, 1154, 1164, 1178];
+const NEW_SETS = ['Vagabond Wolf & Wolf Card', 'Cramp & Tarou Card'];
+// Star pieces that gained an open dropper, and which newly reachable monster.
+const NEW_STAR = [
+  { star: 470418, monsters: [1101] },
+  { star: 610092, monsters: [1145] },
+  { star: 600070, monsters: [1209] },
+  { star: 500124, monsters: [1209, 1151] },
+  { star: 530080, monsters: [1154] },
+];
+const RAID_MVPS = [1039, 1157];
+const LABYRINTH_CODES = ['prt_maze01', 'prt_maze02', 'prt_maze03'];
+
+type StarPiece = { star: string; plainName: string; plainIcon: string; droppers: { id: number; name: string; rate: number | null }[] };
+const STAR = (starDroppers as unknown as { pieces: Record<string, StarPiece> }).pieces;
+
+interface CardRow {
+  monster_id: number;
+  rate: number | null;
+  items: { id: number; name_en: string; icon_url: string | null; category: string | null } | null;
+}
+
 interface Spawn {
   map_code: string;
   map_display_name: string | null;
@@ -97,6 +126,21 @@ export default async function Patch20261001Page() {
     .select('map_code, map_display_name, amount, monsters(id, name_en, level, is_aggressive)')
     .in('map_code', DUNGEONS.flatMap((d) => d.codes));
   const spawns = (data ?? []) as unknown as Spawn[];
+  const [cardsRes, zenyRes, mvpRes] = await Promise.all([
+    db.from('monster_drops').select('monster_id, rate, items!inner(id, name_en, icon_url, category)').in('monster_id', NEW_CARD_MONSTERS).eq('items.category', 'Card'),
+    db.from('monster_farming_stats').select('monster_id, avg_zeny_per_kill'),
+    db.from('monsters').select('id, name_en, level').in('id', RAID_MVPS),
+  ]);
+  const cardRows = ((cardsRes.data ?? []) as unknown as CardRow[]).filter((c) => c.items);
+  const zeny = new Map(((zenyRes.data ?? []) as { monster_id: number; avg_zeny_per_kill: number | null }[]).map((z) => [z.monster_id, z.avg_zeny_per_kill]));
+  const mvps = (mvpRes.data ?? []) as { id: number; name_en: string; level: number }[];
+  const monsterName = new Map(spawns.filter((s) => s.monsters).map((s) => [s.monsters!.id, s.monsters!]));
+  // Mini-bosses in Labyrinth: one of each per floor.
+  const minis = [...new Map(
+    spawns
+      .filter((s) => LABYRINTH_CODES.includes(s.map_code) && s.amount === 1 && s.monsters && !/^C\d /.test(s.monsters.name_en))
+      .map((s) => [s.monsters!.id, s.monsters!]),
+  ).values()].sort((a, b) => (zeny.get(b.id) ?? 0) - (zeny.get(a.id) ?? 0));
 
   return (
     <main className="shell" style={{ paddingBlock: 32, maxWidth: 1000 }}>
@@ -129,7 +173,8 @@ export default async function Patch20261001Page() {
         <p className="phero__lead">
           Labyrinth Forest, Sphinx และ Mjolnir Abandoned Mine เปิดให้เข้าแล้ว · เควสรายวันใหม่สำหรับเลเวล 60–70 · อีเวนต์ Amon Ra กับ Baphomet Cult
         </p>
-        <p className="phero__pill">ปิดปรับปรุง 08:00–14:00 น. เวลาไทย</p>
+        <p className="phero__pill">ปิดปรับปรุง 08:00–14:00 น. เวลาไทย</p>{' '}
+        <a className="phero__pill phero__pill--link" href="#hidden">การ์ดใหม่ {cardRows.length} ใบ และสิ่งที่ประกาศไม่ได้บอก ↓</a>
       </header>
 
       <section className="phl" aria-label="สรุปแพทช์">
@@ -150,6 +195,97 @@ export default async function Patch20261001Page() {
           โหลดข้อมูลจากฐานข้อมูลไม่ครบ บางส่วนด้านล่างอาจว่าง
         </p>
       )}
+
+      <section id="hidden" style={{ marginTop: 34, scrollMarginTop: 90 }}>
+        <h2 className="section-title">สิ่งที่ประกาศไม่ได้บอก</h2>
+        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
+          เทียบแมพที่เปิดก่อนกับหลังแพทช์ในข้อมูลของเว็บนี้ แล้วดูว่าอะไรเพิ่งหาได้
+        </p>
+
+        <h3 className="pxh">การ์ดที่หาได้ครั้งแรก</h3>
+        <p className="muted pxp">มอนพวกนี้ก่อนแพทช์เกิดแต่ในแมพที่ยังไม่เปิด การ์ดจึงเพิ่งตีได้</p>
+        <ul className="pcards">
+          {NEW_CARD_MONSTERS.flatMap((mid) => cardRows.filter((c) => c.monster_id === mid)).map((c) => (
+            <li key={c.items!.id}>
+              <Link href={`/database/cards/${c.items!.id}`} className="pcard">
+                <img src={`/images/monsters/${c.monster_id}.gif`} alt="" className="pcard__mob" loading="lazy" />
+                <span className="pcard__name">{c.items!.name_en}</span>
+                <span className="pcard__from">
+                  จาก {monsterLabel(c.monster_id, monsterName.get(c.monster_id)?.name_en ?? '')}
+                  {monsterName.get(c.monster_id) ? ` Lv ${monsterName.get(c.monster_id)!.level}` : ''}
+                  {c.rate != null ? ` · ${c.rate}%` : ''}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="pxh">ไอเทมเซ็ตที่ทำครบได้แล้ว</h3>
+        <p className="muted pxp">การ์ดอีกใบในเซ็ตเพิ่งหาได้จากดันใหม่</p>
+        <div className="isetgrid">
+          {NEW_SETS.map((name) => ITEM_SETS.find((s) => s.name === name)).filter(Boolean).map((s) => (
+            <ItemSetCard key={s!.name} set={s!} />
+          ))}
+        </div>
+
+        <h3 className="pxh">ของติดดาวที่มีมอนดรอปเพิ่ม</h3>
+        <p className="muted pxp">ของธรรมดาที่เอาไปแลกโทเคนปลุก ★ ได้ มีมอนในดันใหม่ดรอปด้วย</p>
+        <ul className="pstar">
+          {NEW_STAR.map(({ star, monsters }) => {
+            const piece = STAR[String(star)];
+            if (!piece) return null;
+            return (
+              <li key={star}>
+                <Link href={`/guides/star-gear#drops-${star}`} className="pstar__row">
+                  <img src={piece.plainIcon} alt="" width={28} height={28} loading="lazy" />
+                  <span>
+                    <strong>{piece.star}</strong> <span className="muted">(ของธรรมดา {piece.plainName})</span>
+                    <span className="pstar__from">
+                      ดรอปจาก{' '}
+                      {monsters
+                        .map((m) => piece.droppers.find((d) => d.id === m))
+                        .filter(Boolean)
+                        .map((d) => `${monsterLabel(d!.id, d!.name)}${d!.rate != null ? ` ${d!.rate}%` : ''}`)
+                        .join(' · ')}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <h3 className="pxh">มินิบอสใน Labyrinth Forest</h3>
+        <p className="muted pxp">เกิดชั้นละตัว ตายแล้วเกิดใหม่ช้า แต่ให้ซีนี่ต่อตัวสูงและการ์ดดี · ซีนี่คิดจากราคาขายของที่ดรอปคูณอัตราดรอป</p>
+        <ul className="pmobs">
+          {minis.map((m) => (
+            <li key={m.id}>
+              <Link href={`/database/monsters/${m.id}`} className="pmob">
+                <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
+                <span className="pmob__name">{monsterLabel(m.id, m.name_en)}</span>
+                <span className="pmob__meta">Lv {m.level}{zeny.get(m.id) ? ` · ≈${Math.round(zeny.get(m.id)!)}z` : ''}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="pxh">MVP ที่แมพ Raid อยู่ในโซนที่เปิด</h3>
+        <p className="muted pxp">
+          แมพ Raid ของสองตัวนี้อยู่ใน Labyrinth กับ Sphinx ซึ่งเปิดแล้ว แต่ MVP Raid วนตามเควสรายวัน
+          ประกาศไม่ได้บอกว่าจะวนมาเมื่อไร · <Link href="/guides/mvp">ดูวิธีเข้า MVP Raid</Link>
+        </p>
+        <ul className="pmobs">
+          {mvps.map((m) => (
+            <li key={m.id}>
+              <Link href={`/database/monsters/${m.id}`} className="pmob">
+                <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
+                <span className="pmob__name">{m.name_en}</span>
+                <span className="pmob__meta">MVP Lv {m.level}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section id="dungeons" style={{ marginTop: 34, scrollMarginTop: 90 }}>
         <h2 className="section-title">ดันเจี้ยนใหม่ เจออะไรบ้าง</h2>
