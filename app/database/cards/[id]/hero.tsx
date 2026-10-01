@@ -25,7 +25,14 @@ function price(value: number | null): string {
 function Art({ id, name }: { id: number; name: string }) {
   const art = hasCardArt(id);
   return (
-    <figure className={art ? 'cardframe cardframe--foil' : 'cardframe'}>
+    <figure className="cardframe">
+      {/* Foil shine over real card art (1 Oct 2026). Its own element:
+          the figure's ::before/::after already draw the corner brackets. */}
+      {art && (
+        <span className="cardframe__foil" aria-hidden="true">
+          <span />
+        </span>
+      )}
       <img
         className={art ? 'cardframe__art' : 'cardframe__art cardframe__art--none'}
         src={cardArtUrl(id)}
