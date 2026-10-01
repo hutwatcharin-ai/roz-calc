@@ -1,7 +1,7 @@
 // The base level cap on RO Zero Global, in one place.
 //
-// It was 50 at launch and became 60 with the patch of 3 Sep 2026, the same one
-// that opened the second job. Two files were carrying that number separately
+// It was 50 at launch, became 60 with the patch of 3 Sep 2026 (the one that
+// opened the second job) and 70 with the 1 Oct 2026 patch (base and job level). Two files were carrying that number separately
 // (memorial gear's rank table and nothing else), and the EXP guide was not
 // carrying it at all -- which is how the site ended up publishing a table that
 // stops at 50 without ever telling the reader there are ten levels past it.
@@ -20,7 +20,7 @@
 // unpublished rather than extrapolating a curve that would look official.
 
 /** Highest base level a character can reach today. */
-export const BASE_LEVEL_CAP = 60;
+export const BASE_LEVEL_CAP = 70;
 
 /** When the cap last moved, for a sentence that has to age honestly. */
-export const BASE_LEVEL_CAP_SINCE = '3 ก.ย. 2026';
+export const BASE_LEVEL_CAP_SINCE = '1 ต.ค. 2026';

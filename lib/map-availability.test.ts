@@ -5,9 +5,8 @@ describe('mapRelease', () => {
   it('closes the areas the publisher roadmap has not opened yet', () => {
     // Named by the roadmap but not bannered by rozerodb: without the roadmap
     // rows these sat in the farm rankings as if a player could walk in.
-    expect(mapRelease('prt_maze01')).toMatchObject({ when: 'OCT 2026', area: 'Prontera Labyrinth' });
-    expect(mapRelease('in_sphinx1')?.area).toBe('Sphinx');
-    expect(mapRelease('mjo_dun01')?.area).toBe('Mjolnir Dead Pit');
+    expect(mapRelease('c_tower1')).toMatchObject({ when: 'OCT 2026', area: 'Clock Tower' });
+    expect(mapRelease('alde_dun01')?.area).toBe('Clock Tower');
     expect(mapRelease('anthell01')?.when).toBe('NOV 2026');
     expect(mapRelease('tur_d01_a')?.area).toBe('Turtle Island');
     expect(mapRelease('tre_d01_a')?.area).toBe('Sunken Ship');
@@ -36,8 +35,15 @@ describe('mapRelease', () => {
     for (const code of ['moc_pryd01', 'moc_pryd06', 'pry_d01_a', 'b_pry_d04']) {
       expect(mapRelease(code), code).toBeNull();
     }
-    // The override is scoped to Pyramid: Sphinx next door stays closed.
-    expect(mapRelease('in_sphinx1')?.area).toBe('Sphinx');
+    // The override is scoped: Clock Tower, also bannered OCT, stays closed.
+    expect(mapRelease('c_tower1')?.area).toBe('Clock Tower');
+  });
+
+  it('opens Labyrinth, Sphinx and Mjolnir from the 1 Oct 2026 update, not Clock Tower', () => {
+    for (const code of ['prt_maze01', 'maz_d01_a', 'b_maz_d03', 'in_sphinx1', 'sp_d01_a', 'b_sp_d05', 'mjo_dun01', 'mjo_d01_a']) {
+      expect(mapRelease(code), code).toBeNull();
+    }
+    expect(mapRelease('tow_d01_a')?.area).toBe('Clock Tower');
   });
 
   it('leaves open the maps nothing marks as closed', () => {

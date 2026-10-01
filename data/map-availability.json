@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-17",
+  "generated": "2026-10-01",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)"
@@ -395,20 +395,6 @@
         "roadmap"
       ]
     },
-    "b_maz_d03": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "b_maz_d03_z": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
     "b_nif": {
       "when": "FEB 2027",
       "area": "Niflheim",
@@ -419,20 +405,6 @@
     "b_nif_z": {
       "when": "FEB 2027",
       "area": "Niflheim",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "b_sp_d05": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "b_sp_d05_z": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
       "sources": [
         "roadmap"
       ]
@@ -929,41 +901,6 @@
         "rozerodb"
       ]
     },
-    "in_sphinx1": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "in_sphinx2": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "in_sphinx3": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "in_sphinx4": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "in_sphinx5": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
     "iz_d00_a": {
       "when": "TBD",
       "area": "Pirate Cave",
@@ -1296,132 +1233,6 @@
         "rozerodb"
       ]
     },
-    "maz_d01_a": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "maz_d01_b": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "maz_d01_z": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "maz_d03_a": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "maz_d03_b": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "maz_d03_z": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d01_a": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d01_b": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d01_z": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d02_a": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d02_b": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d02_z": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d03_a": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d03_b": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_d03_z": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_dun01": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_dun02": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "mjo_dun03": {
-      "when": "OCT 2026",
-      "area": "Mjolnir Dead Pit",
-      "sources": [
-        "roadmap"
-      ]
-    },
     "nif_f01_a": {
       "when": "FEB 2027",
       "area": "Niflheim",
@@ -1492,132 +1303,6 @@
       "sources": [
         "roadmap",
         "rozerodb"
-      ]
-    },
-    "prt_maze01": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "prt_maze02": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "prt_maze03": {
-      "when": "OCT 2026",
-      "area": "Prontera Labyrinth",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d01_a": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d01_b": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d01_z": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d02_a": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d02_b": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d02_z": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d03_a": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d03_b": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d03_z": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d04_a": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d04_b": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d04_z": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d05_a": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d05_b": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "sp_d05_z": {
-      "when": "OCT 2026",
-      "area": "Sphinx",
-      "sources": [
-        "roadmap"
       ]
     },
     "tow_d01_a": {

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "what": "Monsters that drop the ordinary twin of each first-tier ★ piece (keyed by the ★ id).",
-    "built": "2026-09-28",
+    "built": "2026-10-01",
     "rates": "null = the source has no rate for that drop; the page shows ไม่ทราบ.",
     "status": "open = spawns on a map not marked closed; closed = only on maps data/map-availability.json marks closed (when = month); nospawn = no spawn row.",
     "regenerate": "node scripts/build-star-droppers.mjs"
@@ -236,6 +236,15 @@
       "plainIcon": "/images/items/470230.gif",
       "droppers": [
         {
+          "id": 1101,
+          "name": "Baphomet",
+          "level": 90,
+          "image": "/images/monsters/1101.gif",
+          "rate": 0.25,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 2891,
           "name": "C5 Argiope",
           "level": 97,
@@ -286,15 +295,6 @@
           "level": 86,
           "image": "/images/monsters/1216.gif",
           "rate": null,
-          "status": "closed",
-          "when": "OCT 2026"
-        },
-        {
-          "id": 1101,
-          "name": "Baphomet",
-          "level": 90,
-          "image": "/images/monsters/1101.gif",
-          "rate": 0.25,
           "status": "closed",
           "when": "OCT 2026"
         },
@@ -542,6 +542,24 @@
           "when": null
         },
         {
+          "id": 1209,
+          "name": "Cramp",
+          "level": 82,
+          "image": "/images/monsters/1209.gif",
+          "rate": null,
+          "status": "open",
+          "when": null
+        },
+        {
+          "id": 1151,
+          "name": "Myst",
+          "level": 98,
+          "image": "/images/monsters/1151.gif",
+          "rate": null,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 1069,
           "name": "Swordfish",
           "level": 57,
@@ -551,15 +569,6 @@
           "when": "TBD"
         },
         {
-          "id": 1209,
-          "name": "Cramp",
-          "level": 82,
-          "image": "/images/monsters/1209.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "OCT 2026, DEC 2026"
-        },
-        {
           "id": 1586,
           "name": "Leaf Cat",
           "level": 96,
@@ -567,15 +576,6 @@
           "rate": null,
           "status": "closed",
           "when": "APR 2027"
-        },
-        {
-          "id": 1151,
-          "name": "Myst",
-          "level": 98,
-          "image": "/images/monsters/1151.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "OCT 2026"
         }
       ]
     },
@@ -705,8 +705,8 @@
           "level": 118,
           "image": "/images/monsters/1154.gif",
           "rate": null,
-          "status": "closed",
-          "when": "OCT 2026"
+          "status": "open",
+          "when": null
         }
       ]
     },
@@ -1031,8 +1031,8 @@
           "level": 82,
           "image": "/images/monsters/1209.gif",
           "rate": null,
-          "status": "closed",
-          "when": "OCT 2026, DEC 2026"
+          "status": "open",
+          "when": null
         },
         {
           "id": 1584,
@@ -1102,22 +1102,13 @@
       "plainIcon": "/images/items/610066.gif",
       "droppers": [
         {
-          "id": 1281,
-          "name": "Sage Worm",
-          "level": 70,
-          "image": "/images/monsters/1281.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "DEC 2026"
-        },
-        {
           "id": 2760,
           "name": "C2 Martin",
           "level": 78,
           "image": "/images/monsters/2760.gif",
           "rate": 0.25,
-          "status": "closed",
-          "when": "OCT 2026"
+          "status": "open",
+          "when": null
         },
         {
           "id": 1145,
@@ -1125,8 +1116,17 @@
           "level": 78,
           "image": "/images/monsters/1145.gif",
           "rate": 0.05,
+          "status": "open",
+          "when": null
+        },
+        {
+          "id": 1281,
+          "name": "Sage Worm",
+          "level": 70,
+          "image": "/images/monsters/1281.gif",
+          "rate": null,
           "status": "closed",
-          "when": "OCT 2026"
+          "when": "DEC 2026"
         }
       ]
     },

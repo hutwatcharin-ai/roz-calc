@@ -21,10 +21,11 @@ describe('the gear ladder', () => {
     expect(levels).toEqual([...levels].sort((a, b) => a - b));
   });
 
-  // The page's whole framing -- one rank wearable, three not -- falls apart if
-  // this stops being true, so it is stated rather than assumed.
-  it('has exactly one rank inside the current level cap', () => {
-    expect(memorialGear.ranks.filter((r) => r.level <= LEVEL_CAP)).toHaveLength(1);
+  // The page splits ranks into wearable now and not yet; both halves must have
+  // something in them at today's cap (70 since 1 Oct 2026: IV and III open).
+  it('has at least one rank inside the level cap and one beyond it', () => {
+    expect(memorialGear.ranks.filter((r) => r.level <= LEVEL_CAP).length).toBeGreaterThan(0);
+    expect(memorialGear.ranks.filter((r) => r.level > LEVEL_CAP).length).toBeGreaterThan(0);
   });
 
   it('gives every set four pieces and a role, and every piece a rank', () => {

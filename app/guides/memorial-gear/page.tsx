@@ -102,7 +102,7 @@ export default async function MemorialGearPage() {
       <PageHeader title="ชุดดันเจี้ยนความทรงจำ — 4 แรงค์" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
         <strong>อัปต่อกันเป็นทอด</strong> ไม่ได้หาทีละชิ้น เก็บแรงค์ IV แล้วอัปขึ้นไป ·
-        เพดานเลเวล {LEVEL_CAP} จึงใส่ได้จริงแรงค์เดียว ที่เหลือคือปลายทางของชิ้นที่เก็บอยู่
+        เพดานเลเวล {LEVEL_CAP} ใส่ได้ {open.length} แรงค์ ({open.map((r) => r.rank).join(', ')}) ที่เหลือคือปลายทางของชิ้นที่เก็บอยู่
       </p>
 
       {failed && <p className="filterstate">โหลดข้อมูลไอเทมไม่สำเร็จ ค่าของแต่ละชิ้นอาจไม่ขึ้น</p>}
@@ -162,8 +162,14 @@ export default async function MemorialGearPage() {
             แรงค์ {r.rank} · {r.name} <span className="muted" style={{ fontWeight: 400 }}>· ใส่ได้ตอนนี้</span>
           </h2>
           <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
-            ได้จากหีบในดันเจี้ยนความทรงจำโหมดปกติ ที่<Link href="/database/maps/prt_sewb1">ท่อ Prontera</Link> และ{' '}
-            <Link href="/database/maps/orcsdun01">ถ้ำออร์ค Geffen</Link>
+            {r.rank === ranks[0].rank ? (
+              <>
+                ได้จากหีบในดันเจี้ยนความทรงจำโหมดปกติ ที่<Link href="/database/maps/prt_sewb1">ท่อ Prontera</Link> และ{' '}
+                <Link href="/database/maps/orcsdun01">ถ้ำออร์ค Geffen</Link>
+              </>
+            ) : (
+              <>อัปจากแรงค์ก่อนหน้าตามสายอัปเกรดข้างบน · เลเวลถึงแล้วตั้งแต่เพดานขึ้นเป็น {LEVEL_CAP}</>
+            )}
           </p>
           {r.sets.map((s) => (
             <SetTable key={s.role} pieces={s.pieces} dim={false} />

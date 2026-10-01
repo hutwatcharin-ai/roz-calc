@@ -59,7 +59,15 @@ const MANUAL_CLOSED = [{ when: 'TBD', area: 'Pirate Cave', test: /^iz_d/, source
 // These win over both sources until the exports are refreshed. Pyramid was
 // bannered "OCT 2026" by rozerodb; the publisher's 16 Sep 2026 notice lists
 // "Pyramid Dungeon and Geffen Dungeon added" in the 17 Sep 2026 update.
-const MANUAL_OPEN = [{ area: 'Pyramid', test: /^(moc_pryd|pry_d|b_pry_d)/, source: 'official notice, 17 Sep 2026 update' }];
+// The 1 Oct 2026 notice (owner's screenshot, 30 Sep 2026) opens Labyrinth
+// Forest, Sphinx and Mjolnir Abandoned Mine. It does not name Clock Tower,
+// which the roadmap had for October too, so Clock Tower stays closed.
+const MANUAL_OPEN = [
+  { area: 'Pyramid', test: /^(moc_pryd|pry_d|b_pry_d)/, source: 'official notice, 17 Sep 2026 update' },
+  { area: 'Prontera Labyrinth', test: /^(prt_maze|maz_d|b_maz_d)/, source: 'official notice, 1 Oct 2026 update' },
+  { area: 'Sphinx', test: /^(in_sphinx|sp_d|b_sp_d)/, source: 'official notice, 1 Oct 2026 update' },
+  { area: 'Mjolnir Dead Pit', test: /^(mjo_dun|mjo_d)/, source: 'official notice, 1 Oct 2026 update' },
+];
 
 const pages = fs
   .readFileSync(ROZERODB_MAPS, 'utf8')
