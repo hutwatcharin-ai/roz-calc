@@ -13,6 +13,7 @@
 // Whether a rank is reachable is not an opinion either: it is the piece's own
 // required_level against the server's level cap.
 
+import { gameThaiDescription } from '@/lib/game-items';
 import { itemFormerNames } from '@/lib/item-former-names';
 import file from '@/data/memorial-gear.json';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -87,6 +88,25 @@ function cleanEffect(description: string | null): string | null {
   return description.replace(/\s*DEF\s*:\s*\d+\s*$/, '').trim() || null;
 }
 
+/**
+ * The effect in Thai, from the Thai client's own item text (owner, 1 Oct
+ * 2026: "translate the stats"). The client lines open with a line or two of
+ * flavour ("ชุดเกราะที่มอบให้เป็นรางวัล...") and close with type / DEF /
+ * weight / level / job rows the page shows elsewhere; both are cut, colour
+ * codes dropped. Lines are kept apart because "เมื่อ..." conditions only read
+ * right on their own line. Null when the client has no Thai text.
+ */
+export function thaiEffect(id: number): string | null {
+  const lines = gameThaiDescription(id);
+  if (!lines) return null;
+  const clean = lines.map((l) => l.replace(/\^[0-9A-Fa-f]{6}_?/g, '').trim()).filter((l) => l && l !== '_');
+  const end = clean.findIndex((l) => /^ประเภท\s*:/.test(l));
+  const body = end === -1 ? clean : clean.slice(0, end);
+  const start = body.findIndex((l) => /[\d%+]|^เพิ่ม|^ลด|^เมื่อ/.test(l));
+  const kept = start === -1 ? [] : body.slice(start);
+  return kept.length ? kept.join('\n') : null;
+}
+
 function key(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
@@ -123,7 +143,7 @@ export async function loadMemorialGear(): Promise<{ ranks: GearRank[]; items: Ma
       id: row.id,
       name: row.name_en,
       icon: row.icon_url,
-      effect: cleanEffect(row.description),
+      effect: thaiEffect(row.id) ?? cleanEffect(row.description),
       level: row.required_level,
       slots: row.slots,
     };

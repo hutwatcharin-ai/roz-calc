@@ -53,7 +53,7 @@ function PieceRow({ piece, dim }: { piece: GearPiece; dim: boolean }) {
       </td>
       <td data-label="เลเวล" className="num">{piece.level ?? '—'}</td>
       <td data-label="ผล" className="effect">
-        <span className="effect__text">{piece.effect ?? '—'}</span>
+        <span className="effect__text" style={{ whiteSpace: 'pre-line' }}>{piece.effect ?? '—'}</span>
       </td>
     </tr>
   );
@@ -107,11 +107,11 @@ export default async function MemorialGearPage() {
 
       {failed && <p className="filterstate">โหลดข้อมูลไอเทมไม่สำเร็จ ค่าของแต่ละชิ้นอาจไม่ขึ้น</p>}
 
-      {/* The stat text is left in English on purpose: the Global client is in
-          English, so this is the wording a player sees on the item in game.
-          Translating it would make the page and the item window disagree. */}
+      {/* Thai since 1 Oct 2026 (owner): the effect is the Thai client's own
+          item text (lib/memorial-gear thaiEffect), English only where the
+          client has no Thai line for that piece. */}
       <p className="muted" style={{ fontSize: 13, marginTop: 0 }}>
-        ช่อง &quot;ผลจากในเกม&quot; คือข้อความบนไอเทมในเกมตรงๆ ไม่ได้แปล จะได้ตรงกับที่เห็นตอนกดดูของ
+        ช่อง &quot;ผลจากในเกม&quot; คือข้อความภาษาไทยบนไอเทมในไคลเอนต์เกม ตัดบรรทัดเกริ่นกับบรรทัดน้ำหนัก/เลเวลออก
       </p>
 
       <section className="card card--cyan">
