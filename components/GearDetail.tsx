@@ -4,6 +4,7 @@
 // each route passes its own section rather than keeping a second copy in sync.
 
 import DropperGrid, { type Dropper } from '@/components/DropperGrid';
+import CostumeFit from '@/components/CostumeFit';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import AdSlot from '@/components/AdSlot';
@@ -183,6 +184,8 @@ export default function GearDetail({
           </p>
         </div>
       </div>
+
+      {section.recentKind === 'costume' && <CostumeFit id={item.id} name={item.name_en} />}
 
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 12 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>

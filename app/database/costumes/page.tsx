@@ -25,6 +25,8 @@ import Pagination from '@/components/Pagination';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { COSTUME_CATEGORY } from '@/lib/item-href';
 import ItemIcon from '@/components/ItemIcon';
+import { CostumeThumb } from '@/components/CostumeFit';
+import { costumeFit } from '@/lib/costume-fit';
 
 export const revalidate = 86400;
 
@@ -285,7 +287,9 @@ export default async function CostumesPage({
           <div className="itemgrid">
             {rows.map((it) => (
               <Link key={it.id} href={`/database/costumes/${it.id}`} className="itemcard" data-kind="costume">
-                <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />
+                {/* The Novice wearing it (2 Oct 2026); the inventory icon only
+                    where the client has no sprite to draw. */}
+                {costumeFit(it.id) ? <CostumeThumb id={it.id} /> : <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />}
                 <span className="itemcard__name">{it.name_en}</span>
                 <span className="itemcard__meta">
                   {it.weapon_type ? POSITION_LABELS[it.weapon_type] ?? it.weapon_type : 'ไม่ระบุตำแหน่ง'}
