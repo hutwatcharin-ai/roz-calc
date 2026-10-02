@@ -71,6 +71,58 @@ function SectionRow({ links, pathname, className, onPick }: { links: readonly Se
   );
 }
 
+// A guide page gets a one-line stage bar instead of the 27-button row
+// (owner, 2 Oct 2026, public/draft/arcade-rest): back to /guides, the world
+// this guide is in, the stages either side, and a picker with every guide.
+// The worlds and their order are the ones /guides draws (GUIDE_GROUPS).
+const WORLD_EN: Record<string, string> = {
+  เริ่มเล่น: 'START',
+  คราฟต์: 'CRAFT',
+  ดันเจี้ยน: 'DUNGEON',
+  ตารางอ้างอิง: 'TABLES',
+  ระบบในเกม: 'SYSTEMS',
+};
+
+function GuideStageBar({ links, pathname }: { links: readonly SectionLink[]; pathname: string }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => setOpen(false), [pathname]);
+  const idx = links.findIndex((l) => isActiveLink(l.href, pathname));
+  if (idx < 0) return null;
+  const here = links[idx];
+  const groups = [...new Set(links.map((l) => l.group))];
+  const world = groups.indexOf(here.group) + 1;
+  const inWorld = links.filter((l) => l.group === here.group);
+  const stage = inWorld.indexOf(here) + 1;
+  const prev = links[idx - 1];
+  const next = links[idx + 1];
+  const code = (l: SectionLink) => `${groups.indexOf(l.group) + 1}-${links.filter((x) => x.group === l.group).indexOf(l) + 1}`;
+  return (
+    <div className="gstage" data-world={WORLD_EN[here.group ?? '']?.toLowerCase()}>
+      <nav className="gstage__bar" aria-label="ไกด์">
+        <Link href="/guides" className="gstage__home">◀ ไกด์ทั้งหมด</Link>
+        <span className="gstage__world">
+          {here.icon && <img src={here.icon} alt="" width={18} height={18} />}
+          STAGE {world}-{stage} · {WORLD_EN[here.group ?? ''] ?? here.group}
+        </span>
+        {prev && (
+          <Link href={prev.href} className="gstage__step" rel="prev">
+            ◀ <span className="mono">{code(prev)}</span> <span className="gstage__steplabel">{prev.label}</span>
+          </Link>
+        )}
+        {next && (
+          <Link href={next.href} className="gstage__step" rel="next">
+            <span className="mono">{code(next)}</span> <span className="gstage__steplabel">{next.label}</span> ▶
+          </Link>
+        )}
+        <details className="gstage__pick" open={open} onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)}>
+          <summary>☰ เลือกด่าน</summary>
+          <SectionRow links={links} pathname={pathname} className="subnav gstage__all" onPick={() => setOpen(false)} />
+        </details>
+      </nav>
+    </div>
+  );
+}
+
 export default function NavTabs() {
   const pathname = usePathname() ?? '/';
   const section = sectionForPath(pathname);
@@ -106,7 +158,10 @@ export default function NavTabs() {
         )}
       </nav>
 
-      {secondRow && (
+      {/* /guides itself has its own search and world tabs, so no row at all. */}
+      {section === 'guides' && secondRow && (pathname === '/guides' || secondRow.some((l) => isActiveLink(l.href, pathname))) ? (
+        pathname === '/guides' ? null : <GuideStageBar links={secondRow} pathname={pathname} />
+      ) : secondRow && (
         <>
           <SectionRow links={secondRow} pathname={pathname} className="subnav subnav--wide" />
           <details className="subnavpick" open={open} onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)}>

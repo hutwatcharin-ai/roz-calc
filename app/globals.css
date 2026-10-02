@@ -4073,3 +4073,41 @@ html .bptable tbody tr:hover td { background: linear-gradient(90deg, rgba(255, 2
   .nowcard__badge { width: 52px; height: 52px; font-size: 21px; }
 }
 @media (prefers-reduced-motion: reduce) { .nowlead, .nowcard { transition: none; } .nowlead__live::before { animation: none; } }
+
+/* Guide stage bar (components/NavTabs GuideStageBar, 2 Oct 2026): one line
+   in place of the 27-button guide row, coloured by the guide's world like
+   the /guides tiles. The page h1 under it turns chrome. */
+.gstage { --gc: var(--cyan); flex-basis: 100%; order: 1; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--hair); }
+.gstage[data-world=start] { --gc: var(--yellow); }
+.gstage[data-world=craft] { --gc: #3DFF8F; }
+.gstage[data-world=dungeon] { --gc: var(--pink); }
+.gstage[data-world=tables] { --gc: var(--cyan); }
+.gstage[data-world=systems] { --gc: #B26BFF; }
+.gstage__bar { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px; background: #07051a; border: 2px solid var(--gc); border-radius: 8px; box-shadow: 0 0 12px color-mix(in srgb, var(--gc) 22%, transparent); }
+.gstage__home, .gstage__step, .gstage__pick > summary { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; padding: 0 11px; border-radius: 6px; font: 700 13px var(--font-chakra), var(--font-sarabun), sans-serif; text-decoration: none; }
+.gstage__home { background: #2a1f55; color: var(--text); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .35); }
+.gstage__world { padding: 8px 10px; border-radius: 6px; background: var(--gc); color: #0b0820; font: 900 11px/1 ui-monospace, monospace; letter-spacing: .15em; }
+.gstage__step { border: 1px solid color-mix(in srgb, var(--gc) 50%, transparent); color: var(--gc); }
+.gstage__step:hover { background: var(--gc); color: #0b0820; }
+.gstage__pick { margin-left: auto; }
+.gstage__pick > summary { list-style: none; cursor: pointer; border: 1px solid var(--hair); color: var(--dim); }
+.gstage__pick > summary::-webkit-details-marker { display: none; }
+.gstage__pick[open] > summary { border-color: var(--gc); color: var(--text); }
+.gstage__all { position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px); display: grid !important; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; padding: 12px; background: #0d0824; border: 2px solid var(--gc); border-radius: 8px; box-shadow: 0 12px 30px rgba(0, 0, 0, .6); max-height: 70vh; overflow-y: auto; }
+.gstage__all .subnav__group { display: block; grid-column: 1 / -1; margin-top: 4px; }
+.gstage__all .subnav__group::before { display: none; }
+.gstage__all .subnav__grouplabel { display: block; color: var(--faint); font: 700 12px var(--font-sarabun), sans-serif; }
+body:has(.gstage) main .pagehead__title {
+  font-style: italic; color: transparent; text-shadow: none; padding-inline-end: 0.15em;
+  background: linear-gradient(180deg, #fff 0%, #cfe9ff 42%, #3a2a7a 48%, #ff7ad0 54%, #ffe53d 100%);
+  -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 3px 0 #000) drop-shadow(0 0 10px rgba(255, 61, 154, 0.45));
+}
+@media (max-width: 640px) {
+  .gstage { order: 3; }
+  .gstage__steplabel { display: none; }
+  .gstage__pick { margin-left: 0; }
+}
+.gstage__world { display: inline-flex; align-items: center; gap: 6px; }
+.gstage__world img { width: 18px; height: 18px; object-fit: contain; image-rendering: pixelated; }
+@media (max-width: 640px) { .gstage__all { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
