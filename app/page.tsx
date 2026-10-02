@@ -13,6 +13,8 @@ import { websiteJsonLd } from '@/lib/jsonld';
 import { timeAgoTh } from '@/lib/time-ago';
 import { getLastUpdated } from '@/lib/last-updated';
 import ReactDOM from 'react-dom';
+import NowPlaying from '@/components/NowPlaying';
+import { splitNews } from '@/lib/news';
 
 
 export const metadata = {
@@ -214,6 +216,11 @@ export default async function HomePage({
         </Link>
       </div>
 
+      {/* News under the four MODE cards (2 Oct 2026): it was five chips at
+          the bottom of the page and the owner could not find them. Running
+          events and the newest patch, from lib/news. */}
+      <NowPlaying live={splitNews(Date.now()).live} now={Date.now()} moreHref="/news" />
+
       {/* What the site added lately (UX pass 28 Sep 2026): returning players
           had no way to see new pages -- the patch chips below are game news,
           not site news. Rows live in data/site-updates.json. */}
@@ -258,29 +265,8 @@ export default async function HomePage({
       <div className="explorerow">
         {/* No counts here: the live numbers sit in SiteStats right above, and
             hardcoded copies drift the day the data changes. */}
-        {/* The timeline leads the row. Unlike the patch chips it does not time
-            out -- it answers "what has landed and what is coming" and keeps
-            working as each patch ages. Put fourth on 24 Sep 2026 and the owner
-            could not find it among twelve chips. */}
-        <Link href="/news/roadmap" className="chiplink chiplink--patch">
-          <span className="chiplink__dot" aria-hidden="true" />
-          ไทม์ไลน์อัปเดต มาแล้วอะไร เดือนหน้ามีอะไร
-        </Link>
-        {/* Time-boxed: the patch chip leads while the patch is news, then
-            drops back out of the row (see docs/PATCH-2026-09-03.md). */}
-        <Link href="/news/patch-2026-10-01" className="chiplink">
-          <span className="chiplink__dot" aria-hidden="true" />
-          แพทช์ 1 ต.ค. เลเวล 70 กับดันใหม่ 3 ที่
-        </Link>
-        <Link href="/news/events-2026-10" className="chiplink">
-          <span className="chiplink__dot" aria-hidden="true" />
-          กิจกรรม ต.ค. Baphomet Cult · Amon Ra · Kumamon
-        </Link>
-        <Link href="/news/battle-pass-summer-2026" className="chiplink">
-          <span className="chiplink__dot" aria-hidden="true" />
-          Battle Pass ฤดูร้อน มีรางวัลทุก Tier
-        </Link>
-        <Link href="/news/patch-2026-09-03" className="chiplink">แพทช์ 3 ก.ย. เปิดเลเวล 60 กับอาชีพ 2</Link>
+        {/* The news chips that led this row (timeline, patches, events) moved
+            into NOW PLAYING above on 2 Oct 2026. */}
         <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>
