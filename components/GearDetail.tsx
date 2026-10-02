@@ -5,6 +5,7 @@
 
 import DropperGrid, { type Dropper } from '@/components/DropperGrid';
 import CostumeFit from '@/components/CostumeFit';
+import { costumeFit } from '@/lib/costume-fit';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import AdSlot from '@/components/AdSlot';
@@ -72,6 +73,34 @@ export default function GearDetail({
     ? rows.reduce((a: any, b: any) => ((b.monsters.level ?? 999) < (a.monsters.level ?? 999) ? b : a))
     : null;
 
+  // Costumes with a fitting-room picture use layout D (owner, 2 Oct 2026):
+  // the droppers move up beside the picture instead of sitting under the
+  // description.
+  const fitted = section.recentKind === 'costume' && costumeFit(item.id) !== null;
+  const dropsCard = (
+  <div className="card" style={{ marginTop: 20 }}>
+    <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
+    {droppedByError ? (
+      <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
+    ) : (droppedBy ?? []).length === 0 && boundTwin ? (
+      <>
+        <p className="boundtwin">
+          ชิ้นนี้ไม่มีมอนดรอป แต่ตัวผูกบัญชี{' '}
+          <Link href={itemHref(boundTwin.id, 'Costume Equipment')}>
+            <strong>{boundTwin.name_en}</strong>
+          </Link>{' '}
+          หน้าตาเหมือนกัน ดรอปจากมอนเหล่านี้ (ตัวที่ดรอปซื้อขายไม่ได้)
+        </p>
+        <DropperGrid droppers={boundTwin.droppedBy as unknown as Dropper[]} />
+      </>
+    ) : (droppedBy ?? []).length === 0 ? (
+      <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปชิ้นนี้</p>
+    ) : (
+      <DropperGrid droppers={(droppedBy ?? []) as unknown as Dropper[]} />
+    )}
+  </div>
+  );
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
@@ -112,6 +141,8 @@ export default function GearDetail({
         })}
       />
 
+      <div className={fitted ? 'costumetop' : 'gdflow'}>
+      <div className={fitted ? 'costumetop__main' : 'gdflow'}>
       {/* Hero: sprite, name, and the chips that say what slot this fills --
           the question a player asks before any number on the page matters. */}
       <div className="equiphero">
@@ -185,8 +216,6 @@ export default function GearDetail({
         </div>
       </div>
 
-      {section.recentKind === 'costume' && <CostumeFit id={item.id} name={item.name_en} />}
-
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 12 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
       )}
@@ -237,6 +266,10 @@ export default function GearDetail({
           </Link>
         )}
       </div>
+      {fitted && dropsCard}
+      </div>
+      {fitted && <CostumeFit id={item.id} name={item.name_en} />}
+      </div>
 
       {randomOptions && randomOptions.length > 0 && (
         <div style={{ marginTop: 20 }}>
@@ -281,27 +314,7 @@ export default function GearDetail({
           and the recipe is the shorter answer. */}
       <ItemCrafting itemId={item.id} />
 
-      <div className="card" style={{ marginTop: 20 }}>
-        <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
-        {droppedByError ? (
-          <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
-        ) : (droppedBy ?? []).length === 0 && boundTwin ? (
-          <>
-            <p className="boundtwin">
-              ชิ้นนี้ไม่มีมอนดรอป แต่ตัวผูกบัญชี{' '}
-              <Link href={itemHref(boundTwin.id, 'Costume Equipment')}>
-                <strong>{boundTwin.name_en}</strong>
-              </Link>{' '}
-              หน้าตาเหมือนกัน ดรอปจากมอนเหล่านี้ (ตัวที่ดรอปซื้อขายไม่ได้)
-            </p>
-            <DropperGrid droppers={boundTwin.droppedBy as unknown as Dropper[]} />
-          </>
-        ) : (droppedBy ?? []).length === 0 ? (
-          <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปชิ้นนี้</p>
-        ) : (
-          <DropperGrid droppers={(droppedBy ?? []) as unknown as Dropper[]} />
-        )}
-      </div>
+      {!fitted && dropsCard}
 
       <div style={{ marginTop: 20 }}>
         <AdSlot slot="detail" />
