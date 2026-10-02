@@ -7,6 +7,7 @@ import { supabaseBrowser } from './supabase';
 import { fetchAllRows } from './fetch-all-rows';
 import { gearCategory, gearType } from './gear-type';
 import { isAbsentFromGame } from './game-absent';
+import { isBound } from './bound-items';
 
 // Cached so generateMetadata and the page body cost one query, not two.
 // Returns the raw { data, error } -- each caller keeps its own handling, and a
@@ -38,6 +39,10 @@ export interface GearExtras {
   /** Other wearables with exactly this name: the client holds 39 weapons
    *  twice (classic id + Zero re-id, identical text and stats). */
   sameName: { id: number; slots: number | null; category: string | null }[];
+  /** For a free costume: its (Bound) copy and who drops that. Monsters drop
+   *  the Bound copy (all 81 dropped costumes, 2 Oct 2026), so without this a
+   *  free costume's page said "nothing drops this" when the look is farmable. */
+  boundTwin: { id: number; name_en: string; droppedBy: any[] } | null;
   dict: {
     lines: Map<string, string>;
     terms: Map<string, string | null>;
@@ -58,6 +63,27 @@ export async function loadGearExtras(id: number, name?: string): Promise<GearExt
     .eq('item_id', id)
     .order('rate', { ascending: false });
   if (droppedByError) console.error('gear dropped-by query failed', droppedByError);
+
+  let boundTwin: GearExtras['boundTwin'] = null;
+  if (name && !isBound(name)) {
+    const { data: twins, error: twinError } = await db
+      .from('items')
+      .select('id, name_en')
+      .in('name_en', [`${name} (Bound)`, `${name} [Bound]`])
+      .eq('category', 'Costume Equipment')
+      .order('id');
+    if (twinError) console.error('gear bound-twin query failed', twinError);
+    const twin = (twins ?? []).find((row) => !isAbsentFromGame(row.id));
+    if (twin) {
+      const { data: twinDrops, error: twinDropsError } = await db
+        .from('monster_drops')
+        .select('rate, monsters(id, name_en, image_url, level)')
+        .eq('item_id', twin.id)
+        .order('rate', { ascending: false });
+      if (twinDropsError) console.error('gear bound-twin drops query failed', twinDropsError);
+      if ((twinDrops ?? []).length > 0) boundTwin = { ...twin, droppedBy: twinDrops ?? [] };
+    }
+  }
 
   // Paginated, not a bare select(): PostgREST caps at 1,000 rows and stays
   // silent when it truncates, which would render hundreds of items' effects in
@@ -89,6 +115,7 @@ export async function loadGearExtras(id: number, name?: string): Promise<GearExt
     droppedBy: droppedBy ?? null,
     droppedByError: Boolean(droppedByError),
     sameName: (sameName ?? []).filter((row) => !isAbsentFromGame(row.id)),
+    boundTwin,
     dict: {
       lines: new Map((lineRows ?? []).map((r) => [r.source_line, r.thai_line])),
       terms: new Map((termRows ?? []).map((r) => [r.source_term, r.thai_term])),

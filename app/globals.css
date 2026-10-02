@@ -3953,3 +3953,6 @@ html .stat-table tbody tr:hover td { background: linear-gradient(90deg, rgba(255
 html .stat-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--yellow); }
 html .bptable th { color: var(--cyan); font: 700 11px/1.6 var(--font-chakra), var(--font-sarabun), sans-serif; letter-spacing: 0.12em; border-bottom: 2px solid rgba(61, 232, 255, 0.45); }
 html .bptable tbody tr:hover td { background: linear-gradient(90deg, rgba(255, 229, 61, 0.12), transparent 60%); }
+
+/* Free costume whose Bound copy is the one monsters drop (2 Oct 2026). */
+.boundtwin { margin: 0 0 12px; color: var(--dim); font-size: 14px; border-left: 3px solid var(--cyan, #22d3ee); padding: 6px 10px; background: rgba(34,211,238,.06); }

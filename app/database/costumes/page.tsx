@@ -107,10 +107,17 @@ export default async function CostumesPage({
   // list, so they are hidden unless asked for (?bound=1). The count is shown
   // next to the checkbox: hiding rows silently is how the whole set came to
   // be deleted in August.
-  const boundCount = items.filter((it) => isBound(it.name_en)).length;
+  //
+  // Except a Bound copy a monster drops: since the 22 Sep rename to the
+  // game's own names, every costume a monster drops is the Bound copy (81 of
+  // 81), and hiding them emptied the "dropped" filter. The free twin has no
+  // source at all, so the Bound row is the only answer to "where do I farm
+  // this" and stays in the list.
+  const isDropped = (it: { id: number }) => sourcesKnown && dropIds.has(it.id);
+  const boundCount = items.filter((it) => isBound(it.name_en) && !isDropped(it)).length;
   const needle = q.trim().toLowerCase();
   const positionOf = (it: { weapon_type: string | null }) => it.weapon_type ?? NO_POSITION;
-  const keepBound = (it: { name_en: string }) => showBound || !isBound(it.name_en);
+  const keepBound = (it: { id: number; name_en: string }) => showBound || !isBound(it.name_en) || isDropped(it);
   // Former names count too (lib/item-former-names).
   const matchesQ = (it: { id: number; name_en: string }) => !needle || itemNamesOf(it).some((n) => matches(n, needle));
   const matchesType = (it: { weapon_type: string | null }) => !type || positionOf(it) === type;

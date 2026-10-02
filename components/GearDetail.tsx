@@ -61,7 +61,7 @@ export default function GearDetail({
   extras: GearExtras;
   section: GearSection;
 }) {
-  const { droppedBy, droppedByError, dict, sameName } = extras;
+  const { droppedBy, droppedByError, dict, sameName, boundTwin } = extras;
   const displayName = item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en;
   const categoryLabel = CATEGORY_LABELS[item.category ?? ''] ?? item.category ?? section.label;
   const randomOptions = randomOptionsFor(item.category, item.weapon_type, item.weapon_level);
@@ -282,6 +282,17 @@ export default function GearDetail({
         <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
         {droppedByError ? (
           <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
+        ) : (droppedBy ?? []).length === 0 && boundTwin ? (
+          <>
+            <p className="boundtwin">
+              ชิ้นนี้ไม่มีมอนดรอป แต่ตัวผูกบัญชี{' '}
+              <Link href={itemHref(boundTwin.id, 'Costume Equipment')}>
+                <strong>{boundTwin.name_en}</strong>
+              </Link>{' '}
+              หน้าตาเหมือนกัน ดรอปจากมอนเหล่านี้ (ตัวที่ดรอปซื้อขายไม่ได้)
+            </p>
+            <DropperGrid droppers={boundTwin.droppedBy as unknown as Dropper[]} />
+          </>
         ) : (droppedBy ?? []).length === 0 ? (
           <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปชิ้นนี้</p>
         ) : (
