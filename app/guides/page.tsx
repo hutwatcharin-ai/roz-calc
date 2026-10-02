@@ -5,10 +5,9 @@
 // somewhere to point, and because "which table do I want" is a question worth
 // answering in a sentence each rather than by chip label alone.
 //
-// Redesigned 2 Oct 2026 from three of five drafts the owner mixed: a
-// "start here" strip of three steps for a new player (draft B), a search box
-// with world tabs (draft C), and each group as a world of stage-select tiles
-// (draft A) -- components/GuideBrowser.
+// Redesigned 2 Oct 2026 from drafts the owner mixed: a search box with world
+// tabs (draft C) and each group as a world of stage-select tiles (draft A) --
+// components/GuideBrowser. A "start here" strip (draft B) was tried and cut.
 import Link from 'next/link';
 import './page.css';
 import siteUpdates from '@/data/site-updates.json';
@@ -36,13 +35,6 @@ const WORLD_EN: Record<string, { en: string; slug: string }> = {
   ระบบในเกม: { en: 'SYSTEMS', slug: 'systems' },
 };
 
-// The three pages a new player needs before any other, in reading order.
-const START_HERE = [
-  { href: '/guides/faq', title: 'ถามบ่อย', sub: 'ข้อสงสัยของคนเพิ่งเริ่ม' },
-  { href: '/guides/classes', title: 'เลือกอาชีพ', sub: '19 อาชีพ แผนสกิล สเตตัส' },
-  { href: '/guides/farm-guide', title: 'ไปฟาร์มที่ไหน', sub: 'ไล่ตามช่วงเลเวล' },
-];
-
 const NEW_FOR_MS = 3 * 86400000;
 
 export default function GuidesPage() {
@@ -54,7 +46,6 @@ export default function GuidesPage() {
       .map((u) => u.href.split(/[?#]/)[0]),
   );
   const links = SECTION_LINKS.guides;
-  const iconOf = (href: string) => links.find((l) => l.href === href)?.icon ?? '';
 
   const worlds: GuideWorld[] = GUIDE_GROUPS.map((group) => ({
     name: group,
@@ -88,24 +79,6 @@ export default function GuidesPage() {
         <Link href="/news/roadmap">ไทม์ไลน์อัปเดต</Link> · วิธีได้สัตว์เลี้ยง (Qpet) อยู่ที่{' '}
         <Link href="/database/pets">ฐานข้อมูลสัตว์เลี้ยง</Link>
       </p>
-
-      <section className="gstart" aria-labelledby="gstart-title">
-        <h2 id="gstart-title" className="gstart__title">▶ เพิ่งเริ่มเล่น? อ่าน 3 หน้านี้ก่อน</h2>
-        <ol className="gstart__steps">
-          {START_HERE.map((s, i) => (
-            <li key={s.href}>
-              <Link href={s.href} className="gstep">
-                <span className="gstep__n" aria-hidden="true">{i + 1}</span>
-                {iconOf(s.href) && <img className="gstep__icon" src={iconOf(s.href)} alt="" width={32} height={32} />}
-                <span>
-                  <b>{s.title}</b>
-                  <small>{s.sub}</small>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
 
       <GuideBrowser worlds={worlds} />
     </main>
