@@ -111,11 +111,17 @@ export default async function HitFleePage({
         </div>
       )}
 
+      {/* Before the form is filled the page was a lone sentence under the
+          form; now it is the attract screen of a cabinet (arcade pass,
+          2 Oct 2026). Same words, same no-JS form. */}
       {!filled && (
-        <p className="muted" style={{ marginTop: 18, maxWidth: '65ch' }}>
-          ใส่เลเวลกับ HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วกดคำนวณ —
-          ได้ตารางต่อมอน: ตีโดนกี่ % โดนตีกี่ % และเป้า HIT/FLEE สำหรับ &ldquo;โดน 100%&rdquo; / &ldquo;หลบตัน 95%&rdquo; · เลเวลใช้เลือกช่วงมอนที่โชว์เท่านั้น
-        </p>
+        <div className="attract">
+          <b className="attract__title">INSERT STATS</b>
+          <p>
+            ใส่เลเวลกับ HIT/FLEE จากหน้าต่างสเตตัส (Alt+A) แล้วกดคำนวณ —
+            ได้ตารางต่อมอน: ตีโดนกี่ % โดนตีกี่ % และเป้า HIT/FLEE สำหรับ &ldquo;โดน 100%&rdquo; / &ldquo;หลบตัน 95%&rdquo; · เลเวลใช้เลือกช่วงมอนที่โชว์เท่านั้น
+          </p>
+        </div>
       )}
 
       {filled && (monsters ?? []).length === 0 && (

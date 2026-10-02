@@ -68,7 +68,7 @@ function SkillCell({
 
   return (
     <div
-      className={`skillcell${level > 0 ? ' skillcell--taken' : ''}${locked ? ' skillcell--locked' : ''}`}
+      className={`skillcell${level > 0 ? ' skillcell--taken' : ''}${level > 0 && level >= max ? ' skillcell--max' : ''}${locked ? ' skillcell--locked' : ''}`}
     >
       {/* Replaces the browser's own tooltip (7 Sep 2026): that one could not
           be formatted, waited half a second, and had nowhere to put what the
@@ -106,10 +106,13 @@ function SkillCell({
         )}
         <span className="skillcell__name">{skill.name}</span>
       </div>
-      {/* A bar rather than only a number: at a glance a stage shows which
+      {/* One lamp per level rather than only a number (arcade pass, 2 Oct
+          2026; a thin bar before that): at a glance a stage shows which
           skills are maxed, which are started, and which are untouched. */}
-      <div className="skillcell__bar" aria-hidden="true">
-        <span style={{ width: `${(level / max) * 100}%` }} />
+      <div className="skillcell__leds" aria-hidden="true">
+        {Array.from({ length: max }, (_, i) => (
+          <i key={i} className={i < level ? 'on' : undefined} />
+        ))}
       </div>
       <div className="skillcell__row">
         <button type="button" onClick={onLower} disabled={level === 0} aria-label={`ลด ${skill.name}`}>

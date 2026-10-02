@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 const getMapSpawns = cache(async (code: string) => {
   return await supabaseBrowser()
     .from('monster_spawns')
-    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, is_mvp, atk_max, hit_100, flee_95)')
+    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, is_mvp, atk_max, hit_100, flee_95, element)')
     .eq('map_code', code);
 });
 
@@ -162,7 +162,8 @@ export default async function MapDetailPage({ params }: { params: { code: string
           { name, path: `/database/maps/${params.code}` },
         ])}
       />
-      <h1 className="pagehead__title">{name}</h1>
+      <p className="arckicker">MAP · {code}</p>
+      <h1 className="pagehead__title arcname">{name}</h1>
       <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>
         {code}
         {/* The channels this page stands for. Naming them keeps the fold
@@ -180,7 +181,8 @@ export default async function MapDetailPage({ params }: { params: { code: string
           leave its right half empty (UX critique, 6 Sep). Stacked on phones. */}
       <div className={picture ? 'maplayout' : undefined}>
       {picture && (
-        <figure className={picture.kind === 'full' ? 'mapimg mapimg--full' : 'mapimg'}>
+        <figure className={picture.kind === 'full' ? 'mapimg mapimg--full mapimg--stage' : 'mapimg mapimg--stage'}>
+          <span className="mapimg__stage" aria-hidden="true">STAGE</span>
           {/* Two sources: prontera.info's ~512 px terrain render when it has
               the map, else ratemyserver's 205 px minimap (scaled up, kept
               crisp). Decorative next to the monster table, so the caption

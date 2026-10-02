@@ -1,13 +1,19 @@
 'use client';
 
-// The map page's monster table with clickable column sorting. Extracted from
-// the server page so the sort can live in the browser; the page still fetches
-// and passes plain rows.
+// The map page's monsters with sorting. Extracted from the server page so the
+// sort can live in the browser; the page still fetches and passes plain rows.
+//
+// A table until 2 Oct 2026, now character-select tiles like the monster list
+// (owner's pick, public/draft/arcade-rest): frame in the element's colour,
+// level in the corner, EXP in yellow, the HIT/FLEE targets and the
+// first-strike badge kept on every tile. The column headers became a row of
+// sort buttons.
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import CVariantToggle from '@/components/CVariantToggle';
 import { isCVariant } from '@/lib/c-variant';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
+import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
 
 export interface MapMonsterRow {
   id: number;
@@ -23,6 +29,7 @@ export interface MapMonsterRow {
   // lib/monster-thresholds.ts.
   hit_100?: number | null;
   flee_95?: number | null;
+  element?: string | null;
 }
 
 export default function MapMonsterTable({ monsters, cCount }: { monsters: MapMonsterRow[]; cCount: number }) {
@@ -41,44 +48,46 @@ export default function MapMonsterTable({ monsters, cCount }: { monsters: MapMon
   return (
     <>
       {cCount > 0 && <CVariantToggle mode="local" />}
-      <div className="card" style={{ marginTop: 20 }}>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th><button type="button" className="thsort" onClick={() => toggle('name', false)}>มอนสเตอร์ {indicator('name')}</button></th>
-              <th className="num"><button type="button" className="thsort" onClick={() => toggle('level', false)}>Lv {indicator('level')}</button></th>
-              <th className="num"><button type="button" className="thsort" onClick={() => toggle('hp')}>HP {indicator('hp')}</button></th>
-              <th className="num"><button type="button" className="thsort" onClick={() => toggle('exp')}>Base EXP {indicator('exp')}</button></th>
-              <th className="num"><button type="button" className="thsort" title="HIT ที่ต้องมีเพื่อตีมอนตัวนี้โดน 100%" onClick={() => toggle('hit', false)}>HIT 100% {indicator('hit')}</button></th>
-              <th className="num"><button type="button" className="thsort" title="FLEE ที่ต้องมีเพื่อหลบมอนตัวนี้ 95%" onClick={() => toggle('flee', false)}>FLEE 95% {indicator('flee')}</button></th>
-              <th>โจมตีก่อน</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((m) => (
-              <tr key={m.id} className={isCVariant(m.name_en) ? 'cvariant' : undefined}>
-                <td data-label="">
-                  <Link href={`/database/monsters/${m.id}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {m.image_url && (
-                      <img src={m.image_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                    )}
-                    {m.name_en}
-                  </Link>
-                </td>
-                <td data-label="Lv" className="num">{m.level}</td>
-                {/* hp and base_exp of 0 are the unknown-value sentinels, not real zeros. */}
-                <td data-label="HP" className="num">{m.hp && m.hp > 0 ? m.hp.toLocaleString('en-US') : '—'}</td>
-                <td data-label="Base EXP" className="num">{m.base_exp && m.base_exp > 0 ? m.base_exp.toLocaleString('en-US') : '—'}</td>
-                <td data-label="HIT 100%" className="num" style={{ color: 'var(--yellow)' }}>{m.hit_100 ?? '—'}</td>
-                <td data-label="FLEE 95%" className="num" style={{ color: 'var(--cyan)' }}>{m.flee_95 ?? '—'}</td>
-                <td data-label="โจมตีก่อน">
-                  <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="mapsort" role="group" aria-label="เรียงมอนสเตอร์">
+        <span className="mapsort__label">เรียง</span>
+        {(
+          [
+            ['level', 'LV', false],
+            ['name', 'ชื่อ', false],
+            ['hp', 'HP', true],
+            ['exp', 'EXP', true],
+            ['hit', 'HIT 100%', false],
+            ['flee', 'FLEE 95%', false],
+          ] as const
+        ).map(([key, label, desc]) => (
+          <button key={key} type="button" className={`mapsort__btn${sort?.key === key ? ' on' : ''}`} onClick={() => toggle(key, desc)}>
+            {label} {indicator(key)}
+          </button>
+        ))}
       </div>
+      <ul className="maproster">
+        {rows.map((m) => (
+          <li key={m.id} className={isCVariant(m.name_en) ? 'cvariant' : undefined}>
+            <Link
+              href={`/database/monsters/${m.id}`}
+              className="maptile"
+              style={{ ['--el' as string]: (m.element && ELEMENT_COLOUR[m.element]) || ELEMENT_COLOUR_UNKNOWN }}
+            >
+              <span className="maptile__lv">LV {m.level ?? '—'}</span>
+              <span className="maptile__art">{m.image_url && <img src={m.image_url} alt="" loading="lazy" />}</span>
+              <b className="maptile__name">{m.name_en}</b>
+              {/* hp and base_exp of 0 are the unknown-value sentinels, not real zeros. */}
+              <span className="maptile__exp">{m.base_exp && m.base_exp > 0 ? `${m.base_exp.toLocaleString('en-US')} EXP` : 'EXP —'}</span>
+              <span className="maptile__stats">
+                HP {m.hp && m.hp > 0 ? m.hp.toLocaleString('en-US') : '—'}
+                <span title="HIT ที่ต้องมีเพื่อตีมอนตัวนี้โดน 100%"> · HIT <b className="maptile__hit">{m.hit_100 ?? '—'}</b></span>
+                <span title="FLEE ที่ต้องมีเพื่อหลบมอนตัวนี้ 95%"> · FLEE <b className="maptile__flee">{m.flee_95 ?? '—'}</b></span>
+              </span>
+              <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
+            </Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

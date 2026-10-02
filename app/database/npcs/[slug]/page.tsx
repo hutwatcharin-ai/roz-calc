@@ -89,9 +89,14 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
           to a mirrored sprite; the rest lead with the name alone rather than
           with someone else's picture. */}
       <div className="equiphero">
-        {npc.sprite && <img className="npcportrait npcportrait--hero" src={`/images/npcs/${npc.sprite}`} alt="" height={72} />}
+        {npc.sprite && (
+          <span className="npcstage">
+            <img className="npcportrait npcportrait--hero" src={`/images/npcs/${npc.sprite}`} alt="" height={72} />
+          </span>
+        )}
         <div>
-          <h1 className="pagehead__title">{npc.name}</h1>
+          <p className="arckicker">NPC{npc.mapName ? ` · ${npc.mapName}` : ''}</p>
+          <h1 className="pagehead__title arcname">{npc.name}</h1>
           <p className="equiphero__chips">
             {npc.source === 'rathena' ? <span className="tag">NPC ร้านค้า</span> : <span className="tag">NPC เควส</span>}
             {npc.mapName && <span className="tag">{npc.mapName}</span>}
@@ -116,8 +121,9 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
           </tbody>
         </table>
         {navi && (
-          <p style={{ marginTop: 10 }}>
-            ก๊อป <code className="mono navicmd">{navi}</code> ไปวางในแชต เกมจะขึ้นเส้นนำทางให้เดินตาม
+          <p className="naviconsole">
+            <code className="mono navicmd">{navi}</code>
+            <span>ก๊อปไปวางในแชต เกมจะขึ้นเส้นนำทางให้เดินตาม</span>
           </p>
         )}
       </section>

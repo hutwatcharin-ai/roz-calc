@@ -310,47 +310,35 @@ export default async function SkillsPage({
         </div>
       </form>
 
-      <div className="card">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>ชื่อ</th>
-              <th>ชนิด</th>
-              <th className="num">เลเวลสูงสุด</th>
-              <th>ธาตุ</th>
-              <th>อาชีพ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {error ? (
-              <tr>
-                <td colSpan={5} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                  เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง
-                </td>
-              </tr>
-            ) : (
-              <>
-                {rows.map((s) => (
-                  <tr key={s.slug}>
-                    <td data-label="">
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        {s.icon_url && (
-                          <img loading="lazy" decoding="async" src={s.icon_url} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                        )}
-                        {s.name}
-                      </span>
-                    </td>
-                    {/* 448 skills have no type and 691 no element. Those are real
-                        gaps in the source data, so they show as em-dashes. */}
-                    <td data-label="ชนิด">{s.type ?? '—'}</td>
-                    <td data-label="เลเวลสูงสุด" className="num">{s.max_level ?? '—'}</td>
-                    <td data-label="ธาตุ">{s.element ?? '—'}</td>
-                    <td data-label="อาชีพ">{(s.classes ?? []).length > 0 ? s.classes.join(', ') : '—'}</td>
-                    {/* 581 skills carry a description from the export; the rest
-                        genuinely have none upstream and get no empty cell. */}
+      {/* Skill cards (2 Oct 2026, arcade pass): icon in a frame, the classes,
+          ACTIVE/PASSIVE and max level on the right, the edge coloured by type.
+          The per-skill details still open inside the card. */}
+      {error ? (
+        <p className="card" style={{ color: 'var(--faint)' }}>เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง</p>
+      ) : rows.length === 0 ? (
+        <p className="card" style={{ color: 'var(--faint)' }}>ไม่พบสกิลที่ตรงเงื่อนไข</p>
+      ) : (
+        <ul className="skillcards">
+          {rows.map((s) => (
+            <li key={s.slug} className="skillcard" data-type={s.type ?? undefined}>
+              <div className="skillcard__head">
+                <span className="skillcard__icon">
+                  {s.icon_url && <img loading="lazy" decoding="async" src={s.icon_url} alt="" width={32} height={32} />}
+                </span>
+                <span className="skillcard__main">
+                  <b className="skillcard__name">{s.name}</b>
+                  <small>{(s.classes ?? []).length > 0 ? s.classes.join(', ') : 'ไม่ระบุอาชีพ'}</small>
+                </span>
+                {/* 448 skills have no type and 691 no element. Those are real
+                    gaps in the source data, so they show as em-dashes. */}
+                <span className="skillcard__k">
+                  {s.type ? s.type.toUpperCase() : '—'}
+                  <i>{s.max_level ?? '—'}</i>
+                  {s.element && <em>{s.element}</em>}
+                </span>
+              </div>
                     {(s.description || s.requires || (levelsBySkill.get(s.slug)?.length ?? 0) > 0) && (
-                      <td data-label="" className="wide">
-                        <details className="disclose disclose--row">
+                                              <details className="disclose disclose--row">
                           <summary>รายละเอียดสกิล</summary>
                           <div className="disclose__body">
                             {/* Thai leads once translated; the English original
@@ -410,27 +398,16 @@ export default async function SkillsPage({
                             })()}
                           </div>
                         </details>
-                      </td>
                     )}
-                  </tr>
-                ))}
-                {rows.length === 0 && (
-                  <tr>
-                    <td colSpan={5} data-label="" style={{ color: 'var(--faint)', padding: '16px 0' }}>
-                      ไม่พบสกิลที่ตรงเงื่อนไข
-                    </td>
-                  </tr>
-                )}
-              </>
-            )}
-          </tbody>
-        </table>
-      </div>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <Pagination page={safePage} totalPages={totalPages} buildHref={(p) => buildHref(p)} total={filtered.length} pageSize={PAGE_SIZE} />
 
       <p style={{ color: 'var(--faint)', marginTop: 24, fontSize: 13 }}>
-        หน้านี้คือรายการสกิล ตัววางแผนบิลด์ยังไม่มี (ต้องใช้ข้อมูลเงื่อนไขสกิลที่ยังไม่มีในฐาน)
+        อยากลองลงแต้มสกิลของอาชีพ ใช้ <Link href="/tools/skill-planner">ตัววางแผนสกิล</Link>
       </p>
     </main>
   );

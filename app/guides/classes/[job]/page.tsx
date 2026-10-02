@@ -432,7 +432,11 @@ export default async function ClassGuidePage({ params }: { params: { job: string
       />
 
       <div className="cguide__hero">
-        <img className="cguide__sprite" src={`/images/jobs/${guide.slug}.png`} alt={`ตัวละครอาชีพ ${guide.job}`} width={96} height={96} />
+        {/* The job on a lit stage with its tier (arcade pass, 2 Oct 2026). */}
+        <span className="cguide__stage">
+          <span className="cguide__tier" aria-hidden="true">JOB {guide.path.length === 1 ? 1 : 2}</span>
+          <img className="cguide__sprite" src={`/images/jobs/${guide.slug}.png`} alt={`ตัวละครอาชีพ ${guide.job}`} width={96} height={96} />
+        </span>
         <PageHeader
           title={`${guide.job} — ไกด์บิลด์ RO Zero`}
           lead={guide.summary}
