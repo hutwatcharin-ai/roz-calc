@@ -8,16 +8,22 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { AD_PRICES, AD_SIZES, AD_STATS, INLINE_AD_PAGES, introSeatsLeft, priceFor } from '@/lib/ads';
+import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, introSeatsLeft, priceFor } from '@/lib/ads';
+import { getAdStats } from '@/lib/ad-stats-live';
 import PageHeader from '@/components/PageHeader';
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: 'ลงโฆษณากับ RO Zero Thai',
-  description:
-    'ลงแบนเนอร์บนเว็บฐานข้อมูล Ragnarok Zero Global ภาษาไทย ยอดเปิดหน้ากว่า 170,000 ครั้งต่อเดือน ผู้อ่านคนไทย 97% ดูตำแหน่ง ขนาด ราคา และเงื่อนไขทั้งหมดที่นี่',
-};
+// The figures come from GA4 each time the page is rebuilt (lib/ad-stats-live),
+// so the search snippet quotes them too instead of a number typed in once.
+export async function generateMetadata(): Promise<Metadata> {
+  const stats = await getAdStats();
+  const views = Math.floor(stats.pageViews / 10000) * 10000;
+  return {
+    title: 'ลงโฆษณากับ RO Zero Thai',
+    description: `ลงแบนเนอร์บนเว็บฐานข้อมูล Ragnarok Zero Global ภาษาไทย ยอดเปิดหน้ากว่า ${views.toLocaleString('en-US')} ครั้งใน ${stats.periodDays} วัน ผู้อ่านคนไทย ${stats.thaiShare}% ดูตำแหน่ง ขนาด ราคา และเงื่อนไขทั้งหมดที่นี่`,
+  };
+}
 
 const MAIL = 'kidkrob@gmail.com';
 const mailto = (subject: string) => `mailto:${MAIL}?subject=${encodeURIComponent(subject)}`;
@@ -56,7 +62,8 @@ const FILE_SPEC = [
   'ส่งลิงก์ปลายทาง 1 ลิงก์ และข้อความกำกับภาพสั้น ๆ สำหรับผู้ใช้ที่มองไม่เห็น',
 ];
 
-export default function AdvertisePage() {
+export default async function AdvertisePage() {
+  const AD_STATS = await getAdStats();
   const seats = introSeatsLeft();
   const slots = [
     {

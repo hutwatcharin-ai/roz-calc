@@ -18,18 +18,18 @@
     "detail": 1500
   },
   "stats": {
-    "asOf": "2026-09-23",
+    "asOf": "2026-10-03",
     "periodDays": 28,
-    "users": 4887,
-    "sessions": 16710,
-    "pageViews": 177509,
-    "pagesPerSession": 10.6,
+    "users": 7020,
+    "sessions": 29242,
+    "pageViews": 306164,
+    "pagesPerSession": 10.5,
     "avgMinutes": 9,
-    "desktopShare": 77,
+    "desktopShare": 79,
     "thaiShare": 96,
-    "topSlotViews": 177509,
-    "inlineSlotViews": 56903,
-    "detailSlotViews": 53449
+    "topSlotViews": 306164,
+    "inlineSlotViews": 96107,
+    "detailSlotViews": 94956
   },
   "ads": []
 }
