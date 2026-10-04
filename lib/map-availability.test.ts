@@ -7,9 +7,10 @@ describe('mapRelease', () => {
     // rows these sat in the farm rankings as if a player could walk in.
     expect(mapRelease('c_tower1')).toMatchObject({ when: 'OCT 2026', area: 'Clock Tower' });
     expect(mapRelease('alde_dun01')?.area).toBe('Clock Tower');
-    expect(mapRelease('anthell01')?.when).toBe('NOV 2026');
     expect(mapRelease('tur_d01_a')?.area).toBe('Turtle Island');
-    expect(mapRelease('tre_d01_a')?.area).toBe('Sunken Ship');
+    // The deeper rooms the client does not navigate to yet stay closed.
+    expect(mapRelease('b_an_d02')?.area).toBe('Ant Hell');
+    expect(mapRelease('b_tre_d02')?.area).toBe('Sunken Ship');
   });
 
   it('closes the Zero copies rozerodb files under another name', () => {
@@ -23,11 +24,15 @@ describe('mapRelease', () => {
     expect(mapRelease('gl_knt01')).toMatchObject({ when: 'DEC 2026', sources: ['roadmap', 'rozerodb'] });
   });
 
-  it('closes Izlude Pirate Cave / Undersea on the owner\'s in-game confirmation, not a crawled source', () => {
-    // iz_d has no rozerodb banner and no roadmap line at all -- this is a
-    // manual close, unlike every other entry in this file.
-    expect(mapRelease('iz_dun02')).toMatchObject({ when: 'TBD', area: 'Pirate Cave' });
-    expect(mapRelease('iz_d00_a')?.area).toBe('Pirate Cave');
+  it('opens what the client navigates to, even when a calendar regex caught it (4 Oct 2026)', () => {
+    // anthell, iz_dun and treasure are classic dungeons that share a prefix
+    // with a scheduled area; the 1 Oct client lists all three in navi_map.lub
+    // and the site was calling them closed.
+    for (const code of ['anthell01', 'anthell02', 'iz_dun00', 'iz_dun02', 'iz_d00_a', 'treasure01', 'tre_d01_a']) {
+      expect(mapRelease(code), code).toBeNull();
+    }
+    // Floors the client does not list are still closed.
+    expect(mapRelease('iz_dun03')?.area).toBe('Pirate Cave');
   });
 
   it('opens Pyramid from the 17 Sep 2026 update even though rozerodb still banners it', () => {

@@ -69,6 +69,26 @@ const MANUAL_OPEN = [
   { area: 'Mjolnir Dead Pit', test: /^(mjo_dun|mjo_d)/, source: 'official notice, 1 Oct 2026 update' },
 ];
 
+// The client's own navigation table is the strongest "open" signal there is
+// (4 Oct 2026). The publisher adds a map to navi_map.lub when it opens on
+// Global: the 1 Oct patch added exactly Labyrinth, Sphinx and Mjolnir, and on
+// that build it lists Umbala (owner-confirmed open) but no Clock Tower, Glast
+// Heim, Niflheim, Turtle Island, Louyang, Ayothaya, Amatsu, Yuno or Lutie.
+// The roadmap regexes above also swept up classic dungeons that share a
+// prefix with a scheduled memorial dungeon -- anthell01/02 (Ant Hell), the
+// Izlude undersea dungeon iz_dun00-02, treasure01/02 (Sunken Ship) -- and the
+// site called all three closed while players were in them. A code the client
+// navigates to is open, whatever a crawled calendar says. Point CLIENT_NAVI at
+// the newest extract after each patch.
+const CLIENT_NAVI =
+  process.env.CLIENT_NAVI ??
+  'D:/Data grf roz/data_grf_comparison_20261001/extracted/changed/data/luafiles514/lua files/navigation/navi_map.lub';
+const naviOpen = fs.existsSync(CLIENT_NAVI)
+  ? new Set([...fs.readFileSync(CLIENT_NAVI).toString('latin1').matchAll(/[a-z][a-z0-9_@]{2,20}/g)].map((m) => m[0]))
+  : null;
+if (!naviOpen) console.warn(`no client navi_map at ${CLIENT_NAVI}: open status from the calendars only`);
+let fromNavi = 0;
+
 const pages = fs
   .readFileSync(ROZERODB_MAPS, 'utf8')
   .split('\n')
@@ -82,6 +102,10 @@ let fromRoadmap = 0;
 for (const page of pages) {
   const code = page.slug;
   if (MANUAL_OPEN.some((row) => row.test.test(code))) continue;
+  if (naviOpen?.has(code)) {
+    fromNavi += 1;
+    continue;
+  }
   const banner = BANNER.exec(page.text);
   const roadmap = ROADMAP.find((row) => row.test.test(code));
   const manual = MANUAL_CLOSED.find((row) => row.test.test(code));
@@ -110,6 +134,7 @@ const out = {
   sources: {
     roadmap: 'docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)',
     rozerodb: `docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled ${pages[0]?.fetched_at?.slice(0, 10) ?? '?'})`,
+    clientNavi: naviOpen ? 'client navi_map.lub (1 Oct 2026 patch): a map listed there is open' : 'not available',
   },
   maps: Object.fromEntries(Object.entries(maps).sort(([a], [b]) => a.localeCompare(b))),
 };
@@ -117,5 +142,5 @@ fs.writeFileSync(DEST, `${JSON.stringify(out, null, 2)}\n`);
 
 const byArea = {};
 for (const row of Object.values(maps)) byArea[`${row.when} ${row.area}`] = (byArea[`${row.when} ${row.area}`] ?? 0) + 1;
-console.log(`${pages.length} map pages · ${Object.keys(maps).length} closed (roadmap ${fromRoadmap}, rozerodb banner ${fromBanner})`);
+console.log(`${pages.length} map pages · ${Object.keys(maps).length} closed (roadmap ${fromRoadmap}, rozerodb banner ${fromBanner}) · ${fromNavi} open per client navi`);
 for (const [area, count] of Object.entries(byArea).sort()) console.log(`  ${area}: ${count}`);
