@@ -18,6 +18,8 @@ export interface ReaderItem {
   name: string;
   sell: number | null;
   icon: string | null;
+  /** Card slots: twins like Muffler and Muffler [1] share one icon. */
+  slots: number;
 }
 
 interface Found {
@@ -32,6 +34,14 @@ interface Found {
 }
 
 const PICKS_KEY = 'roz-sell-picks';
+
+/** "Muffler [1] · ขาย 10z (#480378)" -- enough to tell same-icon items apart. */
+function label(item: ReaderItem | undefined, id: number): string {
+  if (!item) return `#${id}`;
+  const slots = item.slots > 0 ? ` [${item.slots}]` : '';
+  const sell = item.sell === null ? 'ไม่มีราคา' : `ขาย ${item.sell.toLocaleString('en-US')}z`;
+  return `${item.name}${slots} · ${sell} (#${id})`;
+}
 
 function loadPicks(): Record<string, number> {
   try {
@@ -250,13 +260,14 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
                         <select value={f.chosen} onChange={(e) => choose(i, Number(e.target.value))}>
                           {f.candidates.map((id) => (
                             <option key={id} value={id}>
-                              {byId.get(id)?.name ?? id} (#{id})
+                              {label(byId.get(id), id)}
                             </option>
                           ))}
                         </select>
                       ) : (
                         <span>
-                          {item?.name ?? f.chosen} <small className="mono">#{f.chosen}</small>
+                          {item?.name ?? f.chosen}
+                          {item && item.slots > 0 && <span className="pt__slots mono"> [{item.slots}]</span>} <small className="mono">#{f.chosen}</small>
                         </span>
                       )}
                       {f.candidates.length > 1 && <small className="ssr__warn">ไอคอนเหมือนกัน {f.candidates.length} ชิ้น เลือกให้ถูก</small>}
