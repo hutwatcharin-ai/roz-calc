@@ -17,3 +17,6 @@ docs/prontera-export/data/
 docs/prontera-export/map-images/
 docs/card-art/
 docs/prontera-export/craft-cache/
+
+# Owner price edits from /admin/prices (local working record)
+.price-log.jsonl
