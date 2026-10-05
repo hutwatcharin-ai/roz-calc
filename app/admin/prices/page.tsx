@@ -51,7 +51,7 @@ export default async function PricesAdminPage() {
   );
   if (dropError) throw new Error(`drops query failed: ${dropError.message}`);
   const twins = classicTwinIds(
-    (data ?? []).filter((it) => !isAbsentFromGame(it.id)).map((it) => ({ id: it.id, name: it.name_en })),
+    (data ?? []).filter((it) => !isAbsentFromGame(it.id)).map((it) => ({ id: it.id, name: it.name_en, category: it.category })),
     new Set((drops ?? []).map((d) => d.item_id)),
   );
 
