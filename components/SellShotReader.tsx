@@ -160,7 +160,8 @@ export default function SellShotReader({
         if (!result) continue;
         for (const row of result.rows) {
           if (!row.candidates.length) continue;
-          const key = row.candidates.join(',');
+          // A pick in the sell window says nothing about the shop: own key.
+          const key = (result.kind === 'buy' ? 'buy:' : '') + row.candidates.join(',');
           const crop = document.createElement('canvas');
           crop.width = 48;
           crop.height = 48;
