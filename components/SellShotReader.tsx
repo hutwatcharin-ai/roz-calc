@@ -22,6 +22,9 @@ export interface ReaderItem {
   icon: string | null;
   /** Card slots: twins like Muffler and Muffler [1] share one icon. */
   slots: number;
+  /** A classic leftover with a Zero copy (lib/classic-twins): never offered
+   *  when another candidate is left. */
+  classicTwin?: boolean;
 }
 
 interface Found {
@@ -159,6 +162,10 @@ export default function SellShotReader({
         const result = readSellWindow(pixels, a, live);
         if (!result) continue;
         for (const row of result.rows) {
+          // Hallberd 1463 is the classic copy nobody holds; offer 630039 and
+          // 630053 only (owner, 5 Oct 2026).
+          const real = row.candidates.filter((id) => !byId.get(id)?.classicTwin);
+          if (real.length) row.candidates = real;
           if (!row.candidates.length) continue;
           // A pick in the sell window says nothing about the shop: own key.
           const key = (result.kind === 'buy' ? 'buy:' : '') + row.candidates.join(',');

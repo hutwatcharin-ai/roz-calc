@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import PriceTool, { type PriceRow } from '@/components/PriceTool';
 import { adminEnabled } from '@/lib/admin';
+import { classicTwinIds } from '@/lib/classic-twins';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { itemFormerNames } from '@/lib/item-former-names';
@@ -44,6 +45,16 @@ export default async function PricesAdminPage() {
   );
   if (error) throw new Error(`items query failed: ${error.message}`);
 
+  // Classic leftovers (lib/classic-twins) never win a same-icon pick.
+  const { data: drops, error: dropError } = await fetchAllRows<{ item_id: number }>((from, to) =>
+    db.from('monster_drops').select('item_id').order('item_id').range(from, to),
+  );
+  if (dropError) throw new Error(`drops query failed: ${dropError.message}`);
+  const twins = classicTwinIds(
+    (data ?? []).filter((it) => !isAbsentFromGame(it.id)).map((it) => ({ id: it.id, name: it.name_en })),
+    new Set((drops ?? []).map((d) => d.item_id)),
+  );
+
   const checked = new Map<number, string>();
   for (const edit of readPriceLog()) if (edit.field !== 'buy') checked.set(edit.id, edit.at);
 
@@ -59,6 +70,7 @@ export default async function PricesAdminPage() {
       sell: it.sell_price,
       slots: it.slots ?? 0,
       checkedAt: checked.get(it.id) ?? null,
+      classicTwin: twins.has(it.id),
     }));
 
   return (

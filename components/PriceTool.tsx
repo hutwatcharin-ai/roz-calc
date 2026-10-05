@@ -24,6 +24,8 @@ export interface PriceRow {
   /** Card slots, so two copies of one weapon can be told apart. */
   slots: number;
   checkedAt: string | null;
+  /** A classic-RO id with a Zero copy of the same name (lib/classic-twins). */
+  classicTwin: boolean;
 }
 
 type Status = 'missing' | 'zero' | 'odd' | 'ok';
