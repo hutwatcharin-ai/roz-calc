@@ -4,6 +4,7 @@ import {
   CLASS_SLUGS,
   decodeBuild,
   encodeBuild,
+  levelOf,
   lineFor,
   lower,
   raise,
@@ -143,5 +144,23 @@ describe('encodeBuild / decodeBuild', () => {
   it('ignores junk instead of throwing', () => {
     expect(decodeBuild('swordsman', 'bash:abc~~:5~bash:0')).toEqual({});
     expect(decodeBuild('swordsman', '')).toEqual({});
+  });
+});
+
+describe('quest skills come with the job', () => {
+  it('counts a first-class quest skill as learned without storing it', () => {
+    expect(levelOf('blacksmith', {}, 'crazy-uproar')).toBe(1);
+    expect(raise('blacksmith', {}, 'crazy-uproar')).toEqual({});
+  });
+  it('treats second-job quest skills the same (Dubious Salesmanship, Charge Attack)', () => {
+    expect(levelOf('blacksmith', {}, 'dubious-salesmanship')).toBe(1);
+    expect(levelOf('knight', {}, 'charge-attack')).toBe(1);
+    expect(spendByStage('knight', {}).every((s) => s.spent === 0)).toBe(true);
+  });
+  it('drops quest skills an older link carried, keeping the rest', () => {
+    expect(decodeBuild('blacksmith', 'crazy-uproar:1~axe-tornado:5')).toEqual({ 'axe-tornado': 5 });
+  });
+  it('never lowers a quest skill', () => {
+    expect(lower('blacksmith', {}, 'crazy-uproar')).toEqual({});
   });
 });

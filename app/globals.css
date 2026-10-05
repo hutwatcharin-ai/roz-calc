@@ -4268,3 +4268,5 @@ html .tag { border-radius: 4px; }
 .warps__navi { font-size: 12px; color: #7bffcf; background: #1c1442; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
 @media (max-width: 480px) { .warps__list li { grid-template-columns: 24px minmax(0, 1fr); } .warps__navi { grid-column: 2; justify-self: start; } }
 .warps__doors, .warps__from { margin: 12px 0 0; font-size: 13px; }
+/* Quest skills come with the job (components/SkillPlanner, 6 Oct 2026). */
+.skillcell__auto { margin: 4px 0 0; text-align: center; font: 700 11.5px var(--font-sarabun), sans-serif; color: #3DFF8F; }

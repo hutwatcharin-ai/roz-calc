@@ -15,6 +15,7 @@ import {
   CLASS_SLUGS,
   decodeBuild,
   encodeBuild,
+  levelOf,
   lineFor,
   lower,
   raise,
@@ -61,7 +62,7 @@ function SkillCell({
   const locked = blocking.length > 0 && level === 0;
   // Conditions on one line, the same set the browser tooltip used to carry.
   const conditions = [
-    skill.free ? 'สกิลเควส ไม่กินแต้ม' : null,
+    skill.free ? 'สกิลเควส ได้มาพร้อมอาชีพ ไม่ต้องทำเควส ไม่กินแต้ม' : null,
     skill.required_job_level !== null ? `ต้อง Job Lv ${skill.required_job_level}` : null,
     locked ? `ต้องมี ${blocking.map((b) => `${b.name} Lv ${b.level}`).join(' + ')} ก่อน` : null,
   ].filter(Boolean) as string[];
@@ -114,17 +115,23 @@ function SkillCell({
           <i key={i} className={i < level ? 'on' : undefined} />
         ))}
       </div>
-      <div className="skillcell__row">
-        <button type="button" onClick={onLower} disabled={level === 0} aria-label={`ลด ${skill.name}`}>
-          −
-        </button>
-        <span className="skillcell__lv mono">
-          {level}<span className="skillcell__max">/{max}</span>
-        </span>
-        <button type="button" onClick={onRaise} disabled={level >= max} aria-label={`เพิ่ม ${skill.name}`}>
-          +
-        </button>
-      </div>
+      {skill.free ? (
+        // Owner, 6 Oct 2026: quest skills come with the job in Zero, so the
+        // card says so instead of offering buttons nobody needs to press.
+        <p className="skillcell__auto">ได้อัตโนมัติ · ไม่กินแต้ม</p>
+      ) : (
+        <div className="skillcell__row">
+          <button type="button" onClick={onLower} disabled={level === 0} aria-label={`ลด ${skill.name}`}>
+            −
+          </button>
+          <span className="skillcell__lv mono">
+            {level}<span className="skillcell__max">/{max}</span>
+          </span>
+          <button type="button" onClick={onRaise} disabled={level >= max} aria-label={`เพิ่ม ${skill.name}`}>
+            +
+          </button>
+        </div>
+      )}
       {/* Only the blocking reason survives on the card itself: it is the
           question the grid exists to answer, and it disappears once met. */}
       {locked && <p className="skillcell__need">ต้องมี {blocking.map((b) => b.name).join(' + ')}</p>}
@@ -252,10 +259,10 @@ export default function SkillPlanner({
                   key={skill.slug}
                   skill={skill}
                   icon={icons[skill.slug] ?? null}
-                  level={build[skill.slug] ?? 0}
+                  level={levelOf(classSlug, build, skill.slug)}
                   blocking={blockedBy(classSlug, build, skill.slug)}
-                  facts={tipFacts(levels, skill.slug, build[skill.slug] ?? 0)}
-                  factsLevel={tipLevel(levels, skill.slug, build[skill.slug] ?? 0)}
+                  facts={tipFacts(levels, skill.slug, levelOf(classSlug, build, skill.slug))}
+                  factsLevel={tipLevel(levels, skill.slug, levelOf(classSlug, build, skill.slug))}
                   description={descriptions[skill.slug] ?? null}
                   onRaise={() => setBuild((b) => raise(classSlug, b, skill.slug))}
                   onLower={() => setBuild((b) => lower(classSlug, b, skill.slug))}

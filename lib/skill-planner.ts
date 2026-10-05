@@ -51,10 +51,24 @@ export interface PlannerStage {
   skills: PlannerSkill[];
 }
 
+// Quest skills (owner, 6 Oct 2026): in RO Zero a class's quest skills come
+// with the job -- nobody runs the quest, and they cost no points. The source
+// flags the 16 first-class ones as free; these are the second-job ones it
+// counts as ordinary skills (Charge Attack, Redemptio, Dubious Salesmanship...),
+// the classic quest skills of each second job.
+const SECOND_JOB_QUEST_SKILLS = new Set([
+  'bioethics', 'dubious-salesmanship', 'venom-knife', 'sonic-acceleration', 'pang-voice', 'shrink', 'charming-wink',
+  'phantasmic-arrow', 'charge-attack', 'redemptio', 'close-confine', 'create-elemental-converter', 'sight-blaster',
+]);
+
 const RAW = tree as { lines: Record<string, string[]>; stages: PlannerStage[] };
 const TREE = {
   ...RAW,
-  stages: RAW.stages.map((s) => (s.tier === 'second_job' ? { ...s, skill_points: SECOND_JOB_LEVEL_CAP - 1 } : s)),
+  stages: RAW.stages.map((s) => ({
+    ...s,
+    skill_points: s.tier === 'second_job' ? SECOND_JOB_LEVEL_CAP - 1 : s.skill_points,
+    skills: s.skills.map((k) => (SECOND_JOB_QUEST_SKILLS.has(k.slug) ? { ...k, free: true } : k)),
+  })),
 };
 const STAGE_BY_SLUG = new Map(TREE.stages.map((s) => [s.slug, s]));
 
@@ -77,6 +91,17 @@ function skillsOf(classSlug: string): Map<string, PlannerSkill> {
 }
 
 /**
+ * A skill's level in this build. Quest skills are always at their max: the
+ * game hands them over with the job, so the build never stores them and the
+ * player never clicks them.
+ */
+export function levelOf(classSlug: string, build: Build, slug: string): number {
+  const skill = skillsOf(classSlug).get(slug);
+  if (skill?.free) return skill.max_level ?? 1;
+  return build[slug] ?? 0;
+}
+
+/**
  * Raises one skill by one level, pulling every prerequisite up to the level it
  * demands first. Returns the new build, or the same object when the raise is
  * impossible (unknown skill, already at max, or a prerequisite that cannot
@@ -94,6 +119,8 @@ export function raise(classSlug: string, build: Build, slug: string): Build {
 
     const skill = skills.get(target);
     if (!skill) return false;
+    // Quest skills are already learned; nothing to raise, nothing to store.
+    if (skill.free) return true;
     const max = skill.max_level ?? 1;
     if (wanted > max) return false;
     if ((next[target] ?? 0) >= wanted) return true;
@@ -116,6 +143,7 @@ export function raise(classSlug: string, build: Build, slug: string): Build {
  * dropping the dependents, loses work the player did on purpose.
  */
 export function lower(classSlug: string, build: Build, slug: string): Build {
+  if (skillsOf(classSlug).get(slug)?.free) return build;
   const current = build[slug] ?? 0;
   if (current <= 0) return build;
 
@@ -149,7 +177,7 @@ export function blockedBy(classSlug: string, build: Build, slug: string): Blocke
   const skill = skills.get(slug);
   if (!skill) return [];
   return skill.prerequisites
-    .filter((p) => p.slug !== null && (build[p.slug] ?? 0) < (p.level ?? 1))
+    .filter((p) => p.slug !== null && levelOf(classSlug, build, p.slug) < (p.level ?? 1))
     .map((p) => ({
       slug: p.slug as string,
       name: skills.get(p.slug as string)?.name ?? (p.slug as string),
@@ -202,7 +230,9 @@ export function decodeBuild(classSlug: string, encoded: string): Build {
     if (!pair) continue;
     const [slug, rawLevel] = pair.split(':');
     const skill = skills.get(slug);
-    if (!skill) continue;
+    // Quest skills come with the job; an older link that listed them still
+    // opens, it just does not need them.
+    if (!skill || skill.free) continue;
     const level = Number(rawLevel);
     if (!Number.isInteger(level) || level <= 0) continue;
     build[slug] = Math.min(level, skill.max_level ?? 1);
