@@ -1,0 +1,239 @@
+'use client';
+
+// "Read new screenshots" on /admin/prices (owner, 5 Oct 2026). Opens the
+// game's screenshots of the NPC sell window in the browser, reads each row's
+// item and plain price with lib/sell-reader (pixel matching, no outside
+// service), and hands the ones the owner ticks to the price list as unsaved
+// drafts -- nothing is written until they press save there.
+//
+// Some items share one picture (Butterfly Wing and Novice Butterfly Wing);
+// those rows offer the candidates, and the owner's pick is remembered for
+// that set so the next screenshot chooses it on its own.
+
+import { useEffect, useRef, useState } from 'react';
+import { readSellWindow, type IconAtlas, type Pixels } from '@/lib/sell-reader';
+
+export interface ReaderItem {
+  id: number;
+  name: string;
+  sell: number | null;
+  icon: string | null;
+}
+
+interface Found {
+  key: string;
+  shot: string;
+  candidates: number[];
+  chosen: number;
+  price: number | null;
+  text: string | null;
+  crop: string;
+  use: boolean;
+}
+
+const PICKS_KEY = 'roz-sell-picks';
+
+function loadPicks(): Record<string, number> {
+  try {
+    return JSON.parse(localStorage.getItem(PICKS_KEY) ?? '{}') as Record<string, number>;
+  } catch {
+    return {};
+  }
+}
+
+async function pixelsOf(src: string): Promise<{ pixels: Pixels; canvas: HTMLCanvasElement }> {
+  const img = new Image();
+  img.src = src;
+  await img.decode();
+  const canvas = document.createElement('canvas');
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
+  ctx.drawImage(img, 0, 0);
+  const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  return { pixels: { width: d.width, height: d.height, data: d.data }, canvas };
+}
+
+export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[]; onDrafts: (prices: Record<number, string>) => void }) {
+  const [shots, setShots] = useState<{ name: string; read: boolean }[]>([]);
+  const [dirError, setDirError] = useState<string | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [found, setFound] = useState<Found[]>([]);
+  const [readNames, setReadNames] = useState<string[]>([]);
+  const atlasRef = useRef<IconAtlas | null>(null);
+  const byId = new Map(items.map((i) => [i.id, i]));
+
+  const refresh = () =>
+    fetch('/admin/prices/shots')
+      .then((r) => r.json())
+      .then((d: { shots: { name: string; read: boolean }[]; error?: string; dir: string }) => {
+        setShots(d.shots);
+        setDirError(d.error ? `${d.error}: ${d.dir}` : null);
+      })
+      .catch(() => setDirError('อ่านรายการภาพไม่สำเร็จ'));
+
+  useEffect(() => {
+    void refresh();
+  }, []);
+
+  async function atlas(): Promise<IconAtlas> {
+    if (atlasRef.current) return atlasRef.current;
+    const meta = (await (await fetch('/admin-data/icon-atlas.json')).json()) as { cell: number; cols: number; ids: number[] };
+    const { pixels } = await pixelsOf('/admin-data/icon-atlas.png');
+    atlasRef.current = { ...meta, pixels };
+    return atlasRef.current;
+  }
+
+  async function read(names: string[]) {
+    if (!names.length) return;
+    const live = new Set(items.map((i) => i.id));
+    const picks = loadPicks();
+    setBusy('กำลังโหลดไอคอน…');
+    const a = await atlas();
+    const out: Found[] = [];
+    for (const [n, name] of names.entries()) {
+      setBusy(`กำลังอ่าน ${n + 1}/${names.length}: ${name}`);
+      // Let the browser paint the progress before the heavy loop.
+      await new Promise((r) => setTimeout(r, 0));
+      const { pixels, canvas } = await pixelsOf(`/admin/prices/shots?file=${encodeURIComponent(name)}`);
+      const result = readSellWindow(pixels, a, live);
+      if (!result) continue;
+      for (const row of result.rows) {
+        if (!row.candidates.length) continue;
+        const key = row.candidates.join(',');
+        const crop = document.createElement('canvas');
+        crop.width = 48;
+        crop.height = 48;
+        const c = crop.getContext('2d')!;
+        c.imageSmoothingEnabled = false;
+        c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
+        const chosen = row.candidates.includes(picks[key]) ? picks[key] : row.candidates[0];
+        out.push({ key, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
+      }
+    }
+    // One line per item and price: the same row on several screenshots reads
+    // the same. A row whose price was hidden (mouse pointer over it) is
+    // dropped when another screenshot read that item's price.
+    const merged = new Map<string, Found>();
+    for (const f of out) {
+      const k = `${f.chosen}|${f.price}`;
+      if (!merged.has(k)) merged.set(k, f);
+    }
+    for (const [k, f] of merged) {
+      if (f.price === null && [...merged.values()].some((o) => o.chosen === f.chosen && o.price !== null)) merged.delete(k);
+    }
+    const list = [...merged.values()].map((f) => ({ ...f, use: f.price !== null && byId.get(f.chosen)?.sell !== f.price }));
+    setFound(list);
+    setReadNames(names);
+    setBusy(null);
+  }
+
+  function choose(i: number, id: number) {
+    setFound((prev) => prev.map((f, n) => (n === i ? { ...f, chosen: id, use: f.price !== null && byId.get(id)?.sell !== f.price } : f)));
+    const picks = loadPicks();
+    picks[found[i].key] = id;
+    try {
+      localStorage.setItem(PICKS_KEY, JSON.stringify(picks));
+    } catch {
+      // No storage: the pick holds for this screen only.
+    }
+  }
+
+  async function apply() {
+    const prices: Record<number, string> = {};
+    for (const f of found) if (f.use && f.price !== null) prices[f.chosen] = String(f.price);
+    onDrafts(prices);
+    await fetch('/admin/prices/shots', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ read: readNames }) });
+    setFound([]);
+    setReadNames([]);
+    void refresh();
+  }
+
+  const unread = shots.filter((s) => !s.read).map((s) => s.name);
+
+  return (
+    <section className="ssr">
+      <div className="ssr__head">
+        <b>📷 อ่านราคาจากภาพแคปหน้าต่างขาย NPC</b>
+        <span className="muted">แคปในเกมด้วย Fn + PrintScreen ตอนเปิดหน้าต่างขาย แล้วกดอ่าน</span>
+      </div>
+      {dirError && <p className="pt__msg pt__msg--err">{dirError}</p>}
+      <div className="ssr__actions">
+        <button type="button" className="btn" disabled={!!busy || unread.length === 0} onClick={() => void read(unread)}>
+          อ่านภาพแคปใหม่ ({unread.length})
+        </button>
+        {shots.length > 0 && (
+          <button type="button" className="pt__chip" disabled={!!busy} onClick={() => void read(shots.slice(0, 3).map((s) => s.name))}>
+            อ่าน 3 ภาพล่าสุดอีกครั้ง
+          </button>
+        )}
+        {busy && <span className="mono">{busy}</span>}
+      </div>
+
+      {found.length > 0 && (
+        <>
+          <table className="ssr__table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ไอคอนในภาพ</th>
+                <th>ของ</th>
+                <th>อ่านได้</th>
+                <th>ในเว็บตอนนี้</th>
+              </tr>
+            </thead>
+            <tbody>
+              {found.map((f, i) => {
+                const item = byId.get(f.chosen);
+                const same = item?.sell === f.price;
+                return (
+                  <tr key={`${f.key}|${f.price}|${i}`} data-state={f.price === null ? 'unread' : same ? 'same' : 'diff'}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={f.use}
+                        disabled={f.price === null}
+                        onChange={(e) => setFound((prev) => prev.map((x, n) => (n === i ? { ...x, use: e.target.checked } : x)))}
+                        aria-label="ใช้ราคานี้"
+                      />
+                    </td>
+                    <td>
+                      <img src={f.crop} alt="" width={48} height={48} className="ssr__crop" />
+                    </td>
+                    <td>
+                      {f.candidates.length > 1 ? (
+                        <select value={f.chosen} onChange={(e) => choose(i, Number(e.target.value))}>
+                          {f.candidates.map((id) => (
+                            <option key={id} value={id}>
+                              {byId.get(id)?.name ?? id} (#{id})
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <span>
+                          {item?.name ?? f.chosen} <small className="mono">#{f.chosen}</small>
+                        </span>
+                      )}
+                      {f.candidates.length > 1 && <small className="ssr__warn">ไอคอนเหมือนกัน {f.candidates.length} ชิ้น เลือกให้ถูก</small>}
+                    </td>
+                    <td className="mono">{f.price === null ? <span className="ssr__warn">อ่านไม่ออก (มีอะไรบัง)</span> : `${f.price.toLocaleString('en-US')}z`}</td>
+                    <td className="mono">
+                      {item?.sell === null || item?.sell === undefined ? '—' : `${item.sell.toLocaleString('en-US')}z`}
+                      {f.price !== null && (same ? ' ✓ ตรง' : ' ≠')}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div className="ssr__actions">
+            <button type="button" className="btn" onClick={() => void apply()}>
+              ใส่ {found.filter((f) => f.use && f.price !== null).length} ราคาเป็นรายการรอบันทึก
+            </button>
+            <span className="muted">ยังไม่บันทึกลงเว็บ ตรวจในรายการแล้วกด &ldquo;บันทึกทั้งหมด&rdquo;</span>
+          </div>
+        </>
+      )}
+    </section>
+  );
+}

@@ -17,6 +17,10 @@ import { supabaseAdmin } from '@/lib/supabase';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 
 export const dynamic = 'force-dynamic';
+// Never serve a cached read: the page showed Black Hair at 10z for an hour
+// after the owner had saved 109 (5 Oct 2026), because Next's data cache kept
+// supabase's GET. Every read here must be the database as it is now.
+export const fetchCache = 'force-no-store';
 
 export const metadata: Metadata = {
   title: 'ใส่ราคาขาย NPC',

@@ -9,6 +9,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { halfOfBuy, parsePriceInput } from '@/lib/admin';
 import { matches } from '@/lib/smart-search';
 import type { PriceEdit } from '@/lib/price-log';
+import SellShotReader from '@/components/SellShotReader';
 
 export interface PriceRow {
   id: number;
@@ -250,6 +251,14 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   return (
     <div className="pt">
       <div className="pt__main">
+        <SellShotReader
+          items={rows}
+          onDrafts={(prices) => {
+            setDrafts((prev) => ({ ...prev, ...prices }));
+            const n = Object.keys(prices).length;
+            setMessage({ kind: 'ok', text: `ใส่ ${n} ราคาจากภาพเป็นรายการรอบันทึกแล้ว ตรวจแล้วกด "บันทึกทั้งหมด"` });
+          }}
+        />
         <div className="pt__bar">
           <input
             ref={searchRef}

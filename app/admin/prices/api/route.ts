@@ -8,6 +8,10 @@ import { appendPriceLog, readPriceLog } from '@/lib/price-log';
 import { supabaseAdmin } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
+// Never serve a cached read: the page showed Black Hair at 10z for an hour
+// after the owner had saved 109 (5 Oct 2026), because Next's data cache kept
+// supabase's GET. Every read here must be the database as it is now.
+export const fetchCache = 'force-no-store';
 
 const notFound = () => new NextResponse('Not found', { status: 404 });
 
