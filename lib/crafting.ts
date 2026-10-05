@@ -5,6 +5,7 @@
 // it never decides what is true. See the file's own _meta for provenance.
 
 import file from '@/data/crafting-recipes.json';
+import { toZeroId } from '@/lib/classic-twins';
 
 export type CraftKind = 'forge' | 'arrow' | 'brew' | 'cook' | 'ore' | 'quest' | 'other';
 export type Confidence = 'both' | 'rathena-only' | 'prontera-only';
@@ -79,9 +80,15 @@ export function recipesOfSkill(skillId: number): Recipe[] {
   return RECIPES.filter((r) => r.skillId === skillId);
 }
 
-const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes.filter(
-  (recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId),
-);
+// rAthena's forge rows name classic ids; the sword you forge is the Zero copy
+// (lib/classic-twins), so the product and materials point there.
+const zero = (m: CraftMaterial): CraftMaterial => {
+  const id = toZeroId(m.id);
+  return id === m.id ? m : { ...m, id, icon: `/images/items/${id}.gif` };
+};
+const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes
+  .filter((recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId))
+  .map((recipe) => ({ ...recipe, product: zero(recipe.product), materials: recipe.materials.map(zero) }));
 
 /** How many the filter above removes, for a page that wants to say so. */
 export const RECIPES_HIDDEN_UNAVAILABLE =

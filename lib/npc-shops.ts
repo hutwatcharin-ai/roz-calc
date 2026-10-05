@@ -16,6 +16,7 @@
 // Lighthalzen, which have not opened here.
 
 import file from '@/data/npc-shops.json';
+import { toZeroId } from '@/lib/classic-twins';
 
 export interface ShopEntry {
   npc: string;
@@ -27,7 +28,13 @@ export interface ShopEntry {
   price: number | null;
 }
 
-const shops = (file as { items: Record<string, ShopEntry[]> }).items;
+// rAthena lists classic ids; a classic leftover's sellers belong to the Zero
+// copy the game actually sells (1463 Hallberd -> 630053, lib/classic-twins).
+const shops: Record<string, ShopEntry[]> = {};
+for (const [id, rows] of Object.entries((file as { items: Record<string, ShopEntry[]> }).items)) {
+  const key = String(toZeroId(Number(id)));
+  shops[key] = [...(shops[key] ?? []), ...rows];
+}
 
 /**
  * The towns a player is actually in, first. Aloe has 21 sellers and the file's

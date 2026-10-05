@@ -3,6 +3,7 @@ import DropperGrid, { type Dropper } from '@/components/DropperGrid';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import { isAbsentFromGame } from '@/lib/game-absent';
+import { toZeroId } from '@/lib/classic-twins';
 import { isCVariant } from '@/lib/c-variant';
 import ItemCrafting from '@/components/ItemCrafting';
 import ItemShops from '@/components/ItemShops';
@@ -137,8 +138,10 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   // bookmarks and anything already crawled land here and are sent on
   // permanently, so a row has one canonical URL rather than two pages holding
   // it. What is left here is consumables and materials.
+  // A classic leftover goes straight to its Zero copy (lib/classic-twins), not
+  // through /database/equipment/<old id> first.
   if (isEquipmentCategory(item.category) || isCardCategory(item.category)) {
-    permanentRedirect(itemHref(id, item.category));
+    permanentRedirect(itemHref(toZeroId(id), item.category));
   }
 
   // A failed query must not read as "nothing drops this" (data: null looks

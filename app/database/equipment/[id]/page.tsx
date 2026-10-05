@@ -7,6 +7,7 @@
 // holds the rule all three routes key off; a row landing on the wrong one is
 // redirected, so it keeps exactly one canonical URL.
 import { isAbsentFromGame } from '@/lib/game-absent';
+import { zeroTwinOf } from '@/lib/classic-twins';
 import GearDetail, { CATEGORY_LABELS, type GearSection } from '@/components/GearDetail';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isGearCategory, itemHref } from '@/lib/item-href';
@@ -76,6 +77,14 @@ export default async function EquipmentDetailPage({ params }: { params: { id: st
 
   if (!item) {
     notFound();
+  }
+
+  // A classic leftover (1463 Hallberd) is the same item as a Zero copy
+  // (630053) that the game actually has; that page is the one with the
+  // drops and the shop. Sent on permanently (owner, 5 Oct 2026).
+  const twin = zeroTwinOf(id);
+  if (twin !== null) {
+    permanentRedirect(itemHref(twin, item.category));
   }
 
   // A costume or a plain item has its canonical home elsewhere. Redirect

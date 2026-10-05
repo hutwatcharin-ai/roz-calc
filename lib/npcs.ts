@@ -19,6 +19,7 @@
 // the data rather than papered over.
 
 import file from '@/data/npcs.json';
+import { toZeroId } from '@/lib/classic-twins';
 
 export interface NpcQuestLink {
   slug: string | null;
@@ -55,7 +56,11 @@ export interface Npc {
 
 const data = file as unknown as { _meta: Record<string, unknown>; mapNames: Record<string, string>; npcs: Npc[] };
 
-export const ALL_NPCS: Npc[] = data.npcs;
+// A shopkeeper's goods point at the Zero copy, not rAthena's classic id
+// (lib/classic-twins).
+export const ALL_NPCS: Npc[] = data.npcs.map((npc) =>
+  npc.sells.length ? { ...npc, sells: [...new Set(npc.sells.map(toZeroId))] } : npc,
+);
 export const NPC_MAP_NAMES: Record<string, string> = data.mapNames;
 
 const bySlug = new Map(ALL_NPCS.map((npc) => [npc.slug, npc]));
