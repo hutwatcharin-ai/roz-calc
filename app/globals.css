@@ -4240,3 +4240,31 @@ html .chiplink[aria-current='true'], html .modebar__tab--on, html .lang-toggle b
 html .chiplink[aria-current='true']::before, html .modebar__tab--on::before, html .lang-toggle button.on::before, html .srctoggle[aria-pressed='true']::before, html .planbtn--on::before { content: '▶ '; font-size: .7em; }
 html .farmbar__chip { border-radius: 3px; background: #07051a; border-color: rgba(61, 232, 255, .4); color: var(--cyan); }
 html .tag { border-radius: 4px; }
+
+/* Map page warps (components/MapWarps, 5 Oct 2026): the client minimap with
+   numbered warp marks, beside the list of where each leads. */
+.warps__lead { margin: 4px 0 12px; font-size: 13px; }
+.warps__key { display: inline-flex; align-items: center; gap: 5px; }
+.warps__key::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); }
+.warps__key--npc::before { background: var(--cyan); }
+.warps__lay { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 760px) { .warps__lay { grid-template-columns: minmax(0, 1fr); } }
+.warps__map { position: relative; margin: 0; max-width: 100%; aspect-ratio: 1; background: #0d0824; border: 2px solid color-mix(in srgb, var(--cyan) 55%, transparent); border-radius: 6px; box-shadow: 0 0 14px rgba(61, 232, 255, .18); }
+.warps__map img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.warps__map figcaption { position: absolute; left: 6px; bottom: 4px; font-size: 10.5px; color: var(--faint); }
+.warps__dot { position: absolute; transform: translate(-50%, -50%); min-width: 18px; height: 18px; padding: 0 3px; border-radius: 9px; background: var(--yellow); color: #0B0820; font: 800 11px/18px var(--font-chakra), sans-serif; text-align: center; box-shadow: 0 0 0 2px #0B0820, 0 0 8px var(--yellow); pointer-events: none; }
+.warps__dot--npc { background: var(--cyan); box-shadow: 0 0 0 2px #0B0820, 0 0 8px var(--cyan); }
+.warps__dot--closed { opacity: .45; }
+.warps__door { position: absolute; transform: translate(-50%, -50%); width: 7px; height: 7px; border-radius: 50%; background: var(--dim); box-shadow: 0 0 0 1.5px #0B0820; pointer-events: none; }
+.warps__door--key { position: static; display: inline-block; transform: none; vertical-align: middle; margin-right: 2px; }
+.warps__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.warps__list li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 6px 8px; background: #0d0824; border-radius: 4px; }
+.warps__num { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 11px; background: var(--yellow); color: #0B0820; font: 800 12px var(--font-chakra), sans-serif; }
+.warps__num--npc { background: var(--cyan); }
+.warps__to { min-width: 0; }
+.warps__to a, .warps__to > span { font-weight: 700; }
+.warps__to small { display: block; color: var(--faint); font-size: 11.5px; }
+.warps__closed { margin-left: 6px; font-style: normal; font-size: 11px; color: var(--pink); }
+.warps__navi { font-size: 12px; color: #7bffcf; background: #1c1442; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+@media (max-width: 480px) { .warps__list li { grid-template-columns: 24px minmax(0, 1fr); } .warps__navi { grid-column: 2; justify-self: start; } }
+.warps__doors, .warps__from { margin: 12px 0 0; font-size: 13px; }

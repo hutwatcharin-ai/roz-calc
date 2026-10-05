@@ -8,6 +8,7 @@ import { cache } from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase';
 import MapMonsterTable from '@/components/MapMonsterTable';
+import MapWarps from '@/components/MapWarps';
 import { isCVariant } from '@/lib/c-variant';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { mapImage } from '@/lib/map-image';
@@ -206,6 +207,8 @@ export default async function MapDetailPage({ params }: { params: { code: string
         <MapMonsterTable monsters={monsters} cCount={cCount} />
       </div>
       </div>
+
+      <MapWarps code={code} name={name} />
 
       {drops && (drops.cards.length > 0 || drops.gear.length > 0) && (
         <div className="card" style={{ marginTop: 20 }}>

@@ -22,3 +22,4 @@ docs/prontera-export/craft-cache/
 .price-log.jsonl
 .shots-read.json
 .aggro-log.jsonl
+.proxy-log.txt
