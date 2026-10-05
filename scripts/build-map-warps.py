@@ -45,15 +45,16 @@ def env(name):
 
 
 def page_codes():
+    """Map codes with a page, and the name each page shows."""
     url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
-    codes, start = set(), 0
+    codes, start = {}, 0
     while True:
         req = urllib.request.Request(
-            f'{url}/rest/v1/map_stats?select=map_code&order=map_code',
+            f'{url}/rest/v1/map_stats?select=map_code,map_display_name&order=map_code',
             headers={'apikey': key, 'Authorization': f'Bearer {key}', 'Range': f'{start}-{start + 999}'},
         )
         rows = json.load(urllib.request.urlopen(req))
-        codes.update(r['map_code'] for r in rows)
+        codes.update({r['map_code']: r['map_display_name'] for r in rows})
         if len(rows) < 1000:
             return codes
         start += 1000
@@ -77,6 +78,29 @@ links_file = json.load(open(os.path.join(ROOT, 'data', 'map-links.json'), encodi
 channel_of = links_file['channelOf']
 base = lambda c: channel_of.get(c, c)  # noqa: E731
 pages = page_codes()
+
+
+def spawn_names():
+    """The name a map page shows: monster_spawns.map_display_name ("Orc Village"
+    for gef_fild10, where map_stats says only "Geffen Field")."""
+    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    found, start = {}, 0
+    while True:
+        req = urllib.request.Request(
+            f'{url}/rest/v1/monster_spawns?select=map_code,map_display_name&map_display_name=not.is.null&order=map_code',
+            headers={'apikey': key, 'Authorization': f'Bearer {key}', 'Range': f'{start}-{start + 999}'},
+        )
+        rows = json.load(urllib.request.urlopen(req))
+        for r in rows:
+            found.setdefault(r['map_code'], r['map_display_name'])
+        if len(rows) < 1000:
+            return found
+        start += 1000
+
+
+for code, shown in spawn_names().items():
+    if code in pages:
+        pages[code] = shown
 
 # map-links.json only knows the channel copies that appear in a warp. A page
 # for pay_d00_z (built on pay_dun00) has none, so read its .rsw the same way.
@@ -151,13 +175,27 @@ for code, entry in sorted(maps.items()):
         exits.append({'to': dest, 'kind': int(kind), 'pts': sorted(pts), 'navi': entry['navi'][key], 'page': dest in pages})
     out[code] = {'w': w, 'h': h, 'pic': pic, 'exits': exits, 'from': [[f, f in pages] for f in sorted(entry['from'])]}
 
+# Several maps share one name ("Geffen Field" is gef_fild00 to 14); a list of
+# three "Geffen Field" says nothing, so a shared name carries its code.
+def shown_names(codes):
+    raw = {c: pages.get(c) or names.get(c) for c in codes}
+    raw = {c: n for c, n in raw.items() if n}
+    # Channel copies of one map (gef_fild10, gef_f10_a) are not a clash.
+    count = {}
+    for n in {(base(c), n) for c, n in raw.items()}:
+        count[n[1]] = count.get(n[1], 0) + 1
+    return {c: (f'{n} ({c})' if count[n] > 1 else n) for c, n in sorted(raw.items())}
+
+
 used = {e['to'] for m in out.values() for e in m['exits']} | {f for m in out.values() for f, _ in m['from']}
 with open(OUT_JSON, 'w', encoding='utf-8') as f:
     json.dump(
         {
             '_meta': {'how': 'python scripts/build-map-warps.py', 'maps': len(out), 'source': 'client navi_link_data, .gat sizes, minimaps, mapnametable_enus'},
             'maps': out,
-            'names': {c: names[c] for c in sorted(used | set(out)) if c in names},
+            # The site's own page name first ("Orc Village"): the client calls
+            # every Geffen field "Geffen Field", which says nothing in a list.
+            'names': shown_names(used | set(out)),
         },
         f,
         ensure_ascii=False,
