@@ -24,6 +24,7 @@ const CLAIM = new RegExp(String.raw`\d[\d,]{1,}\s*(?:${UNITS.join('|')})`, 'g');
  * describes what is in the database now, it belongs in lib/counts.
  */
 const ALLOWED: { file: string; text: string; why: string }[] = [
+  { file: 'app/admin/prices/page.tsx', text: '50 ชิ้น', why: 'an example of the stack input (50 pieces for 150z), not a count of anything' },
   { file: 'app/news/events-2026-10/page.tsx', text: '66 ตัว', why: 'Baphomet Jr. kill count for the daily quest, from the NPC dialogue' },
   { file: 'app/news/events-2026-10/page.tsx', text: '30 ตัว', why: 'Ancient Mummy kill count for the Amon Ra daily quest, from the NPC dialogue' },
   { file: 'app/guides/memorial-dungeons/page.tsx', text: '50 ชิ้น', why: 'Jellopy cost of one headgear enchant, a game price quoted from the guide' },
