@@ -18,9 +18,9 @@ describe('lineFor', () => {
   });
 
   it('gives the point budget the source states for each tier', () => {
-    // 10 / 49 / 59, matching one point per job level against the caps the
-    // planner's own job-level fields carry (11 / 50 / 60).
-    expect(lineFor('knight').map((s) => s.skill_points)).toEqual([10, 49, 59]);
+    // 10 / 49 from the source; a second job follows the job 70 cap (69), not
+    // the source's 59 from the job 60 days.
+    expect(lineFor('knight').map((s) => s.skill_points)).toEqual([10, 49, 69]);
   });
 
   it('has every class the planner offers, and nothing else', () => {

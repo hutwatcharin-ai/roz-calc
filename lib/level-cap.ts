@@ -22,5 +22,9 @@
 /** Highest base level a character can reach today. */
 export const BASE_LEVEL_CAP = 70;
 
+/** Highest job level of a second job today (owner, 5 Oct 2026: base and job
+ *  both 70). First classes still stop at job 50, Novice at 10. */
+export const SECOND_JOB_LEVEL_CAP = 70;
+
 /** When the cap last moved, for a sentence that has to age honestly. */
 export const BASE_LEVEL_CAP_SINCE = '1 ต.ค. 2026';

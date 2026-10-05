@@ -107,7 +107,7 @@ export default async function SkillPlannerPage() {
         <SkillPlanner icons={icons} levels={details.levels} descriptions={details.descriptions} />
       </Suspense>
       <Caveat label="ที่มาของข้อมูล">
-        เงื่อนไขสกิล ตำแหน่งช่อง และเพดานแต้มต่ออาชีพ (10 / 49 / 59) มาจากฐานข้อมูลของ prontera.info ·
+        เงื่อนไขสกิลกับตำแหน่งช่องมาจากฐานข้อมูลของ prontera.info · เพดานแต้มต่ออาชีพ 10 / 49 / 69 ตาม Job ตัน 70 ของอาชีพ 2 ·
         เพดานแต้มใช้เป็นคำเตือน ไม่ได้ล็อก
       </Caveat>
     </main>

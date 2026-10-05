@@ -18,7 +18,12 @@
 // a build saved on that same site spends 60 in a 59-point stage, so the site
 // does not treat it as a wall either. Blocking on a number we have not seen
 // the game itself enforce would make the tool quietly wrong; a warning cannot.
+//
+// The source still says 59 for a second job, its job 60 cap. The cap is 70
+// now (owner, 5 Oct 2026; the class guides already say "Knight at job 70 gets
+// 69 points"), so a second job's budget follows SECOND_JOB_LEVEL_CAP - 1.
 
+import { SECOND_JOB_LEVEL_CAP } from './level-cap';
 import tree from './data/skill-tree.json';
 
 export interface PlannerPrereq {
@@ -46,7 +51,11 @@ export interface PlannerStage {
   skills: PlannerSkill[];
 }
 
-const TREE = tree as { lines: Record<string, string[]>; stages: PlannerStage[] };
+const RAW = tree as { lines: Record<string, string[]>; stages: PlannerStage[] };
+const TREE = {
+  ...RAW,
+  stages: RAW.stages.map((s) => (s.tier === 'second_job' ? { ...s, skill_points: SECOND_JOB_LEVEL_CAP - 1 } : s)),
+};
 const STAGE_BY_SLUG = new Map(TREE.stages.map((s) => [s.slug, s]));
 
 /** Class slugs a player can plan, in the order the planner lists them. */
