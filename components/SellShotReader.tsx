@@ -167,7 +167,11 @@ export default function SellShotReader({
           const c = crop.getContext('2d')!;
           c.imageSmoothingEnabled = false;
           c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
-          const chosen = row.candidates.includes(picks[key]) ? picks[key] : row.candidates[0];
+          // Same picture, several items: the owner's last pick for this set,
+          // else the one whose price already matches what the screenshot
+          // says (Buckler, not Ahura Mazdah, for a 50z shield), else the first.
+          const matching = row.candidates.find((id) => current(byId.get(id), result.kind) === row.price);
+          const chosen = row.candidates.includes(picks[key]) ? picks[key] : (matching ?? row.candidates[0]);
           out.push({ key, kind: result.kind, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
         }
       }
