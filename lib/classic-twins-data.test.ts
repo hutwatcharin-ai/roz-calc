@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import file from '@/data/classic-twins.json';
-import { ZERO_ID_FLOOR, shopIdOf, zeroTwinOf } from './classic-twins';
+import { ZERO_ID_FLOOR, isDropCopy, shopIdOf, zeroTwinOf } from './classic-twins';
 import { recipesMaking } from './crafting';
 import { isAbsentFromGame } from './game-absent';
 import { ALL_NPCS } from './npcs';
@@ -49,5 +49,22 @@ describe('classic leftovers moved to their Zero copy', () => {
   it('keeps leftovers out of lists and the sitemap', () => {
     expect(isAbsentFromGame(1463)).toBe(true);
     expect(isAbsentFromGame(630053)).toBe(false);
+  });
+});
+
+describe('drop copies are not sold', () => {
+  it('marks Gladius [3] not sold, pointing at Gladius [2]', () => {
+    const r = isDropCopy({ id: 510182, slots: 3, category: 'Weapon' }, [{ id: 510136, slots: 2 }]);
+    expect(r).toEqual({ shopCopy: { id: 510136, slots: 2 } });
+  });
+  it('leaves the shop copy alone', () => {
+    expect(isDropCopy({ id: 510136, slots: 2, category: 'Weapon' }, [{ id: 510182, slots: 3 }])).toBeNull();
+  });
+  it('marks a copy Zero has only as a drop (Sword [4]) with no shop copy', () => {
+    expect(isDropCopy({ id: 500096, slots: 4, category: 'Weapon' }, [])).toEqual({ shopCopy: null });
+  });
+  it('ignores costumes and classic ids', () => {
+    expect(isDropCopy({ id: 420000, slots: 1, category: 'Costume Equipment' }, [{ id: 420001, slots: 0 }])).toBeNull();
+    expect(isDropCopy({ id: 1219, slots: 2, category: 'Weapon' }, [{ id: 1220, slots: 1 }])).toBeNull();
   });
 });

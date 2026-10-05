@@ -12,6 +12,7 @@ import AdSlot from '@/components/AdSlot';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
 import Link from 'next/link';
 import { itemHref } from '@/lib/item-href';
+import { isDropCopy } from '@/lib/classic-twins';
 import ItemCrafting from '@/components/ItemCrafting';
 import { isCVariant } from '@/lib/c-variant';
 import JsonLd from '@/components/JsonLd';
@@ -64,6 +65,9 @@ export default function GearDetail({
   section: GearSection;
 }) {
   const { droppedBy, droppedByError, dict, sameName, boundTwin } = extras;
+  // The max-slot drop copy is not sold (lib/classic-twins): its database buy
+  // price is the shop copy's, so the tile says "not sold" instead.
+  const dropCopy = isDropCopy(item, sameName);
   const displayName = item.slots > 0 ? `${item.name_en} [${item.slots}]` : item.name_en;
   const categoryLabel = CATEGORY_LABELS[item.category ?? ''] ?? item.category ?? section.label;
   const randomOptions = randomOptionsFor(item.category, item.weapon_type, item.weapon_level);
@@ -133,7 +137,7 @@ export default function GearDetail({
             ...(item.weapon_type ? [{ name: 'Type', value: item.weapon_type }] : []),
             ...(item.atk !== null ? [{ name: 'ATK', value: item.atk }] : []),
             ...(item.required_level !== null ? [{ name: 'RequiredLevel', value: item.required_level }] : []),
-            ...(item.buy_price ? [{ name: 'BuyPrice', value: item.buy_price, unitText: 'Zeny' }] : []),
+            ...(item.buy_price && !dropCopy ? [{ name: 'BuyPrice', value: item.buy_price, unitText: 'Zeny' }] : []),
             ...(item.sell_price ? [{ name: 'SellPrice', value: item.sell_price, unitText: 'Zeny' }] : []),
             ...(item.slots > 0 ? [{ name: 'Slots', value: item.slots }] : []),
           ],
@@ -238,9 +242,27 @@ export default function GearDetail({
         )}
         <div className="statgrid__cell">
           <span className="reward-label">ราคาซื้อ</span>
-          <span className="reward-value mono">
-            {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
-          </span>
+          {dropCopy ? (
+            <>
+              <span className="reward-value">ซื้อไม่ได้</span>
+              <small className="statgrid__note">
+                {dropCopy.shopCopy ? (
+                  <>
+                    ต้องหาจากมอน ·{' '}
+                    <Link href={itemHref(dropCopy.shopCopy.id, item.category)}>
+                      ซื้อแบบ [{dropCopy.shopCopy.slots}] ได้
+                    </Link>
+                  </>
+                ) : (
+                  'ต้องหาจากมอน'
+                )}
+              </small>
+            </>
+          ) : (
+            <span className="reward-value mono">
+              {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
+            </span>
+          )}
         </div>
         <div className="statgrid__cell">
           <span className="reward-label">ราคาขาย</span>

@@ -43,6 +43,27 @@ export const LEFTOVER_IDS_BY_CATEGORY: Record<string, number[]> = Object.entries
 /** A data id (rAthena forge row) moved to the Zero copy when it is a leftover. */
 export const toZeroId = (id: number): number => zeroTwinOf(id) ?? id;
 
+/** Zero items that exist only as the drop copy (Sword [4] 500096): no shop copy. */
+const DROP_ONLY = new Set(Object.values(TWINS).filter((t) => t.to !== null && t.shop === null).map((t) => t.to as number));
+
+/**
+ * The shop does not sell this piece (owner, 5 Oct 2026: "the max-slot drop
+ * copy has no buy price, you can only find it"). True for a Zero weapon or
+ * armour with a same-name Zero copy that has fewer slots -- Gladius [3] next
+ * to Gladius [2] -- and for the copies Zero has only as a drop.
+ */
+export function isDropCopy(
+  item: { id: number; slots: number | null; category: string | null },
+  sameName: readonly { id: number; slots: number | null }[],
+): { shopCopy: { id: number; slots: number } | null } | null {
+  if (item.id < ZERO_ID_FLOOR || (item.category !== 'Weapon' && item.category !== 'Armor')) return null;
+  const fewer = sameName
+    .filter((o) => o.id >= ZERO_ID_FLOOR && (o.slots ?? 0) < (item.slots ?? 0))
+    .sort((a, b) => (a.slots ?? 0) - (b.slots ?? 0));
+  if (fewer.length) return { shopCopy: { id: fewer[0].id, slots: fewer[0].slots ?? 0 } };
+  return DROP_ONLY.has(item.id) ? { shopCopy: null } : null;
+}
+
 /**
  * Where a shop row for `id` belongs: the Zero shop copy, `id` itself when it
  * is not a leftover, or null when the leftover has no shop copy in Zero
