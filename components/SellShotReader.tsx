@@ -169,11 +169,12 @@ export default function SellShotReader({
           c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
           // Same picture, several items: the owner's last pick for this set,
           // else the one whose price already matches what the screenshot
-          // says (Buckler, not Ahura Mazdah, for a 50z shield), else a Zero
-          // item (six-digit id, what Zero's shops sell) over a classic or
-          // guild copy (Waghnak 560054, not 1801), else the first.
+          // says (Buckler, not Ahura Mazdah, for a 50z shield), else in a shop
+          // a Zero copy (six-digit id, what Zero's shops stock) over a classic
+          // or guild one (Waghnak 560054, not 1801), else the first. Not for
+          // the sell window: Novice Butterfly Wing is 12324, not 105052.
           const matching = row.candidates.find((id) => current(byId.get(id), result.kind) === row.price);
-          const zero = row.candidates.find((id) => id >= 100000);
+          const zero = result.kind === 'buy' ? row.candidates.find((id) => id >= 100000) : undefined;
           const chosen = row.candidates.includes(picks[key]) ? picks[key] : (matching ?? zero ?? row.candidates[0]);
           out.push({ key, kind: result.kind, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
         }
