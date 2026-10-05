@@ -41,3 +41,10 @@
   .pt__nums, .pt__edit { grid-column: 2; }
 }
 .pt__slots { color: var(--cyan); font-weight: 700; }
+
+.pt__save { min-height: 40px; padding: 0 12px; border: 0; border-radius: 6px; background: var(--yellow); color: var(--yellow-ink); font: 800 13px var(--font-chakra), var(--font-sarabun), sans-serif; cursor: pointer; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .25); }
+.pt__save:disabled { background: #2a2450; color: var(--faint); cursor: default; box-shadow: none; }
+.pt__saved { color: #3DFF8F; font-weight: 700; font-size: 12px; }
+.pt__draft { color: var(--yellow); font-weight: 700; font-size: 12px; }
+.pt__pending { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding: 10px 12px; border: 2px dashed var(--yellow); border-radius: 8px; background: rgba(255, 229, 61, .06); font-size: 14px; }
+.pt__row { grid-template-columns: 44px minmax(0, 1.4fr) minmax(0, 1fr) 290px; }

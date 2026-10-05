@@ -59,6 +59,7 @@ const STATUS_FILTERS: { key: string; label: string; test: (r: PriceRow) => boole
 ];
 
 const SHOW = 60;
+const DRAFTS_KEY = 'roz-price-drafts';
 const fmt = (n: number | null) => (n === null ? '—' : n.toLocaleString('en-US'));
 
 type Publishing = { startedAt: string; done: boolean; ok: boolean | null; tail: string } | null;
@@ -71,6 +72,12 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   const [log, setLog] = useState<PriceEdit[]>([]);
   const [message, setMessage] = useState<{ kind: 'ok' | 'err'; text: string } | null>(null);
   const [publishing, setPublishing] = useState<Publishing>(null);
+  // What has been typed into a price box but not saved yet (owner, 5 Oct
+  // 2026: "a button to save what I typed, for peace of mind"). Kept in this
+  // browser too, so a closed tab or a refresh does not lose it.
+  const [drafts, setDrafts] = useState<Record<number, string>>({});
+  const [justSaved, setJustSaved] = useState<Record<number, true>>({});
+  const [savingAll, setSavingAll] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const priceRefs = useRef(new Map<number, HTMLInputElement>());
 
@@ -82,8 +89,31 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
         setPublishing(d.publishing);
       })
       .catch(() => {});
+    try {
+      const kept = JSON.parse(localStorage.getItem(DRAFTS_KEY) ?? '{}') as Record<number, string>;
+      setDrafts(kept);
+    } catch {
+      // No storage (private window): drafts just live for this visit.
+    }
     searchRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+    } catch {
+      // Same: nothing to keep them in.
+    }
+  }, [drafts]);
+
+  function setDraft(id: number, text: string) {
+    setDrafts((prev) => {
+      const next = { ...prev };
+      if (text.trim()) next[id] = text;
+      else delete next[id];
+      return next;
+    });
+  }
 
   // While a publish runs, ask how it is going every 10 seconds.
   useEffect(() => {
@@ -148,21 +178,52 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
     setLog((prev) => [edit, ...prev].slice(0, 200));
   }
 
-  async function save(row: PriceRow, text: string) {
+  /** Saves one price; true when it went in. `jump` returns to the search box. */
+  async function save(row: PriceRow, text: string, jump = true): Promise<boolean> {
     const price = parsePriceInput(text);
     if (price === null) {
-      setMessage({ kind: 'err', text: `อ่านราคา "${text}" ไม่ออก ใส่ตัวเลข หรือ ยอดรวม/จำนวน เช่น 150/50` });
-      return;
+      setMessage({ kind: 'err', text: `อ่านราคา "${text}" ของ ${row.name} ไม่ออก ใส่ตัวเลข หรือ ยอดรวม/จำนวน เช่น 150/50` });
+      return false;
     }
     try {
       const { edit } = (await post({ action: 'save', id: row.id, price })) as { edit: PriceEdit };
       applyEdit(edit);
-      setMessage({ kind: 'ok', text: `${row.name}: ${fmt(edit.from)} → ${fmt(edit.to)}z` });
-      setQ('');
-      searchRef.current?.focus();
+      setDraft(row.id, '');
+      setJustSaved((prev) => ({ ...prev, [row.id]: true }));
+      setTimeout(
+        () =>
+          setJustSaved((prev) => {
+            const next = { ...prev };
+            delete next[row.id];
+            return next;
+          }),
+        5000,
+      );
+      setMessage({ kind: 'ok', text: `✓ บันทึกแล้ว ${row.name}: ${fmt(edit.from)} → ${fmt(edit.to)}z` });
+      if (jump) {
+        setQ('');
+        searchRef.current?.focus();
+      }
+      return true;
     } catch (e) {
-      setMessage({ kind: 'err', text: `บันทึกไม่สำเร็จ: ${(e as Error).message}` });
+      setMessage({ kind: 'err', text: `บันทึก ${row.name} ไม่สำเร็จ: ${(e as Error).message}` });
+      return false;
     }
+  }
+
+  async function saveAll() {
+    setSavingAll(true);
+    let ok = 0;
+    const pending = Object.entries(drafts);
+    for (const [id, text] of pending) {
+      const row = rows.find((r) => r.id === Number(id));
+      if (row && (await save(row, text, false))) ok += 1;
+    }
+    setSavingAll(false);
+    setMessage({
+      kind: ok === pending.length ? 'ok' : 'err',
+      text: `✓ บันทึกแล้ว ${ok} จาก ${pending.length} ชิ้น${ok < pending.length ? ' · ที่เหลือยังค้างอยู่ในช่อง แก้ตามข้อความแล้วกดใหม่' : ''}`,
+    });
   }
 
   async function undo(edit: PriceEdit) {
@@ -225,6 +286,21 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
           </span>
         </div>
         {message && <p className={`pt__msg pt__msg--${message.kind}`}>{message.text}</p>}
+        {Object.keys(drafts).length > 0 && (
+          <div className="pt__pending">
+            <span>
+              ✏️ พิมพ์ไว้ยังไม่บันทึก <b>{Object.keys(drafts).length}</b> ชิ้น:{' '}
+              {Object.keys(drafts)
+                .slice(0, 6)
+                .map((id) => rows.find((r) => r.id === Number(id))?.name ?? id)
+                .join(', ')}
+              {Object.keys(drafts).length > 6 && ' …'}
+            </span>
+            <button type="button" className="btn" onClick={() => void saveAll()} disabled={savingAll}>
+              {savingAll ? 'กำลังบันทึก…' : 'บันทึกทั้งหมด'}
+            </button>
+          </div>
+        )}
 
         <ul className="pt__list">
           {shown.slice(0, SHOW).map((r) => {
@@ -248,7 +324,13 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
                   <span>
                     ขาย <b>{fmt(r.sell)}</b> <em className="pt__st">{STATUS_LABEL[st]}</em>
                   </span>
-                  {r.checkedAt && <span className="pt__checked">✓ ตรวจแล้ว {r.checkedAt.slice(0, 10)}</span>}
+                  {justSaved[r.id] ? (
+                    <span className="pt__saved">✓ บันทึกแล้ว</span>
+                  ) : drafts[r.id] ? (
+                    <span className="pt__draft">✏️ ยังไม่บันทึก</span>
+                  ) : (
+                    r.checkedAt && <span className="pt__checked">✓ ตรวจแล้ว {r.checkedAt.slice(0, 10)}</span>
+                  )}
                 </span>
                 <span className="pt__edit">
                   <input
@@ -260,18 +342,20 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
                     inputMode="numeric"
                     placeholder={r.sell !== null ? String(r.sell) : 'ราคา'}
                     aria-label={`ราคาขายของ ${r.name}`}
+                    value={drafts[r.id] ?? ''}
+                    onChange={(e) => setDraft(r.id, e.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         e.preventDefault();
-                        const input = e.currentTarget;
-                        void save(r, input.value).then(() => {
-                          input.value = '';
-                        });
+                        void save(r, e.currentTarget.value);
                       } else if (e.key === 'Escape') {
                         searchRef.current?.focus();
                       }
                     }}
                   />
+                  <button type="button" className="pt__save" disabled={!drafts[r.id]} onClick={() => void save(r, drafts[r.id] ?? '', false)}>
+                    บันทึก
+                  </button>
                   {half !== null && half !== r.sell && (
                     <button type="button" className="pt__half" onClick={() => void save(r, String(half))} title="ใส่ครึ่งหนึ่งของราคาซื้อ">
                       ½ = {fmt(half)}
