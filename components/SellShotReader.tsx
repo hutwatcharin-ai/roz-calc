@@ -63,17 +63,49 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
   const atlasRef = useRef<IconAtlas | null>(null);
   const byId = new Map(items.map((i) => [i.id, i]));
 
+  // Screenshot names already on the list when this page opened or last
+  // looked; anything new after that is read on its own (below).
+  const seenRef = useRef<Set<string> | null>(null);
+  const busyRef = useRef(false);
+
   const refresh = () =>
     fetch('/admin/prices/shots')
       .then((r) => r.json())
       .then((d: { shots: { name: string; read: boolean }[]; error?: string; dir: string }) => {
         setShots(d.shots);
         setDirError(d.error ? `${d.error}: ${d.dir}` : null);
+        return d.shots;
       })
-      .catch(() => setDirError('อ่านรายการภาพไม่สำเร็จ'));
+      .catch(() => {
+        setDirError('อ่านรายการภาพไม่สำเร็จ');
+        return [] as { name: string; read: boolean }[];
+      });
 
   useEffect(() => {
-    void refresh();
+    void refresh().then((list) => {
+      seenRef.current = new Set(list.map((s) => s.name));
+    });
+    // Coming back to this tab from the game reads the screenshots taken in
+    // the meantime, without a click (owner, 5 Oct 2026).
+    const onBack = () => {
+      if (document.visibilityState === 'hidden' || busyRef.current) return;
+      void refresh().then((list) => {
+        const seen = seenRef.current;
+        if (!seen) return;
+        const fresh = list.filter((s) => !s.read && !seen.has(s.name)).map((s) => s.name);
+        list.forEach((s) => seen.add(s.name));
+        if (fresh.length) void read(fresh, true);
+      });
+    };
+    window.addEventListener('focus', onBack);
+    document.addEventListener('visibilitychange', onBack);
+    return () => {
+      window.removeEventListener('focus', onBack);
+      document.removeEventListener('visibilitychange', onBack);
+    };
+    // read() is recreated each render; the listener only needs the latest
+    // items, which it gets through the closure of this first render's props.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function atlas(): Promise<IconAtlas> {
@@ -84,48 +116,61 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
     return atlasRef.current;
   }
 
-  async function read(names: string[]) {
-    if (!names.length) return;
+  async function read(names: string[], append = false) {
+    if (!names.length || busyRef.current) return;
+    busyRef.current = true;
     const live = new Set(items.map((i) => i.id));
     const picks = loadPicks();
-    setBusy('กำลังโหลดไอคอน…');
-    const a = await atlas();
-    const out: Found[] = [];
-    for (const [n, name] of names.entries()) {
-      setBusy(`กำลังอ่าน ${n + 1}/${names.length}: ${name}`);
-      // Let the browser paint the progress before the heavy loop.
-      await new Promise((r) => setTimeout(r, 0));
-      const { pixels, canvas } = await pixelsOf(`/admin/prices/shots?file=${encodeURIComponent(name)}`);
-      const result = readSellWindow(pixels, a, live);
-      if (!result) continue;
-      for (const row of result.rows) {
-        if (!row.candidates.length) continue;
-        const key = row.candidates.join(',');
-        const crop = document.createElement('canvas');
-        crop.width = 48;
-        crop.height = 48;
-        const c = crop.getContext('2d')!;
-        c.imageSmoothingEnabled = false;
-        c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
-        const chosen = row.candidates.includes(picks[key]) ? picks[key] : row.candidates[0];
-        out.push({ key, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
+    try {
+      setBusy('กำลังโหลดไอคอน…');
+      const a = await atlas();
+      const out: Found[] = [];
+      for (const [n, name] of names.entries()) {
+        setBusy(`กำลังอ่าน ${n + 1}/${names.length}: ${name}`);
+        // Let the browser paint the progress before the heavy loop.
+        await new Promise((r) => setTimeout(r, 0));
+        const { pixels, canvas } = await pixelsOf(`/admin/prices/shots?file=${encodeURIComponent(name)}`);
+        const result = readSellWindow(pixels, a, live);
+        if (!result) continue;
+        for (const row of result.rows) {
+          if (!row.candidates.length) continue;
+          const key = row.candidates.join(',');
+          const crop = document.createElement('canvas');
+          crop.width = 48;
+          crop.height = 48;
+          const c = crop.getContext('2d')!;
+          c.imageSmoothingEnabled = false;
+          c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
+          const chosen = row.candidates.includes(picks[key]) ? picks[key] : row.candidates[0];
+          out.push({ key, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
+        }
       }
+      // One line per item and price: the same row on several screenshots reads
+      // the same. A row whose price was hidden (mouse pointer over it) is
+      // dropped when another screenshot read that item's price.
+      const merged = new Map<string, Found>();
+      for (const f of out) {
+        const k = `${f.chosen}|${f.price}`;
+        if (!merged.has(k)) merged.set(k, f);
+      }
+      for (const [k, f] of merged) {
+        if (f.price === null && [...merged.values()].some((o) => o.chosen === f.chosen && o.price !== null)) merged.delete(k);
+      }
+      const list = [...merged.values()].map((f) => ({ ...f, use: f.price !== null && byId.get(f.chosen)?.sell !== f.price }));
+      if (append) {
+        // Keep what is already on screen; add only items not listed yet.
+        setFound((prev) => [...prev, ...list.filter((f) => !prev.some((p) => p.chosen === f.chosen && p.price === f.price))]);
+        setReadNames((prev) => [...prev, ...names]);
+      } else {
+        setFound(list);
+        setReadNames(names);
+      }
+    } catch (e) {
+      setDirError(`อ่านภาพไม่สำเร็จ: ${(e as Error).message}`);
+    } finally {
+      setBusy(null);
+      busyRef.current = false;
     }
-    // One line per item and price: the same row on several screenshots reads
-    // the same. A row whose price was hidden (mouse pointer over it) is
-    // dropped when another screenshot read that item's price.
-    const merged = new Map<string, Found>();
-    for (const f of out) {
-      const k = `${f.chosen}|${f.price}`;
-      if (!merged.has(k)) merged.set(k, f);
-    }
-    for (const [k, f] of merged) {
-      if (f.price === null && [...merged.values()].some((o) => o.chosen === f.chosen && o.price !== null)) merged.delete(k);
-    }
-    const list = [...merged.values()].map((f) => ({ ...f, use: f.price !== null && byId.get(f.chosen)?.sell !== f.price }));
-    setFound(list);
-    setReadNames(names);
-    setBusy(null);
   }
 
   function choose(i: number, id: number) {
@@ -155,7 +200,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
     <section className="ssr">
       <div className="ssr__head">
         <b>📷 อ่านราคาจากภาพแคปหน้าต่างขาย NPC</b>
-        <span className="muted">แคปในเกมด้วย Fn + PrintScreen ตอนเปิดหน้าต่างขาย แล้วกดอ่าน</span>
+        <span className="muted">แคปในเกมด้วย Fn + PrintScreen ตอนเปิดหน้าต่างขาย แล้วสลับกลับมาหน้านี้ ระบบอ่านภาพใหม่ให้เอง</span>
       </div>
       {dirError && <p className="pt__msg pt__msg--err">{dirError}</p>}
       <div className="ssr__actions">
