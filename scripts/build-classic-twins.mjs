@@ -5,19 +5,26 @@
 // In the client they read the same; only the id differs, and monsters drop
 // the six-digit ones. Our shop and forge data come from rAthena, which knows
 // only the classic ids, so until now "sold by Weapon Dealer" sat on 1463 --
-// a page nobody's item is -- while 630053, the one the shop really sells for
-// 1,650z (owner's shop screenshot), said nothing about shops.
+// a page nobody's item is.
 //
 // A leftover is lib/classic-twins' rule: equipment, id under 100000, a Zero
-// id with the same name exists, no monster drops it. Each is mapped to one
-// Zero twin, by the first test that leaves exactly one:
+// id with the same name exists, no monster drops it.
 //
-//   1. the twin with an NPC buy price (the shop copy: 630053 at 1,650z)
-//   2. the twin a monster drops
-//   3. the twin with the same card slots
+// Which Zero copy, the owner's rule (5 Oct 2026, from play): Zero has a shop
+// copy with the classic slot count and a drop copy with one slot more --
+// Gladius [2] 510136 is sold for 1,200z, Gladius [3] 510182 drops. So:
 //
-// and to null when none does, so the page can say "in game this is one of
-// ..." instead of guessing.
+//   to    the copy with the fewest slots: the leftover page redirects here
+//         and the forge recipe sits here (the forged weapon itself is another
+//         item again -- no slots, four random option rows -- that the site
+//         has no page for)
+//   shop  the same copy, but only when its slots are no more than the
+//         classic one's. 14 items exist in Zero only as the drop copy (Sword
+//         [4], Rapier [3]); nobody has seen a shop sell those, so no shop.
+//
+// The first version of this file (same day) picked the copy with a buy price,
+// then the dropped one -- which put "sold by Weapon Dealer" on 41 drop copies,
+// Gladius [3] among them.
 //
 //   node --env-file=.env.local scripts/build-classic-twins.mjs
 
@@ -50,24 +57,23 @@ for (const i of items.filter((i) => i.id >= 100000)) {
 
 const one = (list) => (list.length === 1 ? list[0].id : null);
 const twins = {};
-const how = { buy: 0, drop: 0, slots: 0, none: 0 };
+const how = { shopCopy: 0, dropCopyOnly: 0, none: 0 };
 for (const i of items) {
   if (!gear(i) || i.id >= 100000 || dropped.has(i.id)) continue;
   const zero = zeroByName.get(i.name_en.toLowerCase());
   if (!zero) continue;
-  const byBuy = one(zero.filter((z) => (z.buy_price ?? 0) > 0));
-  const byDrop = one(zero.filter((z) => dropped.has(z.id)));
-  const bySlots = one(zero.filter((z) => (z.slots ?? 0) === (i.slots ?? 0)));
-  const to = byBuy ?? byDrop ?? bySlots;
-  how[byBuy ? 'buy' : byDrop ? 'drop' : bySlots ? 'slots' : 'none'] += 1;
-  twins[i.id] = { name: i.name_en, category: i.category, to, among: zero.map((z) => z.id) };
+  const fewest = Math.min(...zero.map((z) => z.slots ?? 0));
+  const to = one(zero.filter((z) => (z.slots ?? 0) === fewest));
+  const shop = to !== null && fewest <= (i.slots ?? 0) ? to : null;
+  how[to === null ? 'none' : shop === null ? 'dropCopyOnly' : 'shopCopy'] += 1;
+  twins[i.id] = { name: i.name_en, category: i.category, slots: i.slots ?? 0, to, shop, among: zero.map((z) => z.id) };
 }
 
 const out = {
   _meta: {
     built: new Date().toISOString().slice(0, 10),
     how: 'node --env-file=.env.local scripts/build-classic-twins.mjs',
-    rule: 'equipment, id < 100000, a Zero (>= 100000) id with the same name, no monster drop; mapped by buy price, then drop, then slots',
+    rule: 'equipment, id < 100000, a Zero (>= 100000) id with the same name, no monster drop; to = the fewest-slot Zero copy; shop = that copy when its slots <= the classic one',
     counts: { leftovers: Object.keys(twins).length, mappedBy: how },
   },
   twins,

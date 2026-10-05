@@ -2,13 +2,12 @@
   "_meta": {
     "built": "2026-10-05",
     "how": "node --env-file=.env.local scripts/build-classic-twins.mjs",
-    "rule": "equipment, id < 100000, a Zero (>= 100000) id with the same name, no monster drop; mapped by buy price, then drop, then slots",
+    "rule": "equipment, id < 100000, a Zero (>= 100000) id with the same name, no monster drop; to = the fewest-slot Zero copy; shop = that copy when its slots <= the classic one",
     "counts": {
       "leftovers": 47,
       "mappedBy": {
-        "buy": 30,
-        "drop": 14,
-        "slots": 3,
+        "shopCopy": 33,
+        "dropCopyOnly": 14,
         "none": 0
       }
     }
@@ -17,7 +16,9 @@
     "1101": {
       "name": "Sword",
       "category": "Weapon",
+      "slots": 3,
       "to": 500096,
+      "shop": null,
       "among": [
         500096
       ]
@@ -25,7 +26,9 @@
     "1104": {
       "name": "Falchion",
       "category": "Weapon",
+      "slots": 3,
       "to": 500084,
+      "shop": null,
       "among": [
         500084
       ]
@@ -33,7 +36,9 @@
     "1107": {
       "name": "Blade",
       "category": "Weapon",
-      "to": 500099,
+      "slots": 3,
+      "to": 500085,
+      "shop": 500085,
       "among": [
         500085,
         500099
@@ -42,7 +47,9 @@
     "1110": {
       "name": "Rapier",
       "category": "Weapon",
+      "slots": 2,
       "to": 500113,
+      "shop": null,
       "among": [
         500113
       ]
@@ -50,7 +57,9 @@
     "1113": {
       "name": "Scimiter",
       "category": "Weapon",
-      "to": 500111,
+      "slots": 2,
+      "to": 500086,
+      "shop": 500086,
       "among": [
         500086,
         500111
@@ -59,7 +68,9 @@
     "1116": {
       "name": "Katana",
       "category": "Weapon",
-      "to": 600048,
+      "slots": 3,
+      "to": 600050,
+      "shop": 600050,
       "among": [
         600048,
         600050
@@ -68,7 +79,9 @@
     "1119": {
       "name": "Tsurugi",
       "category": "Weapon",
-      "to": 500098,
+      "slots": 1,
+      "to": 500088,
+      "shop": 500088,
       "among": [
         500088,
         500098
@@ -77,7 +90,9 @@
     "1122": {
       "name": "Ring Pommel Saber",
       "category": "Weapon",
-      "to": 500112,
+      "slots": 2,
+      "to": 500087,
+      "shop": 500087,
       "among": [
         500087,
         500112
@@ -86,7 +101,9 @@
     "1123": {
       "name": "Haedonggum",
       "category": "Weapon",
-      "to": 500127,
+      "slots": 1,
+      "to": 500089,
+      "shop": 500089,
       "among": [
         500089,
         500127
@@ -95,7 +112,9 @@
     "1126": {
       "name": "Saber",
       "category": "Weapon",
-      "to": 500116,
+      "slots": 2,
+      "to": 500090,
+      "shop": 500090,
       "among": [
         500090,
         500116
@@ -104,7 +123,9 @@
     "1129": {
       "name": "Flamberge",
       "category": "Weapon",
+      "slots": 0,
       "to": 500091,
+      "shop": 500091,
       "among": [
         500091,
         500095
@@ -113,7 +134,9 @@
     "1151": {
       "name": "Slayer",
       "category": "Weapon",
+      "slots": 2,
       "to": 600058,
+      "shop": null,
       "among": [
         600058
       ]
@@ -121,7 +144,9 @@
     "1154": {
       "name": "Bastard Sword",
       "category": "Weapon",
-      "to": 600049,
+      "slots": 2,
+      "to": 600051,
+      "shop": 600051,
       "among": [
         600049,
         600051
@@ -130,7 +155,9 @@
     "1157": {
       "name": "Two-Handed Sword",
       "category": "Weapon",
-      "to": 600068,
+      "slots": 1,
+      "to": 600052,
+      "shop": 600052,
       "among": [
         600052,
         600068
@@ -139,7 +166,9 @@
     "1160": {
       "name": "Broad Sword",
       "category": "Weapon",
+      "slots": 1,
       "to": 600053,
+      "shop": 600053,
       "among": [
         600047,
         600053
@@ -148,7 +177,9 @@
     "1204": {
       "name": "Cutter",
       "category": "Weapon",
+      "slots": 3,
       "to": 510144,
+      "shop": null,
       "among": [
         510144
       ]
@@ -156,7 +187,9 @@
     "1207": {
       "name": "Main Gauche",
       "category": "Weapon",
-      "to": 510129,
+      "slots": 3,
+      "to": 510134,
+      "shop": 510134,
       "among": [
         510129,
         510134
@@ -165,7 +198,9 @@
     "1210": {
       "name": "Dirk",
       "category": "Weapon",
+      "slots": 2,
       "to": 510143,
+      "shop": null,
       "among": [
         510143
       ]
@@ -173,7 +208,9 @@
     "1213": {
       "name": "Dagger",
       "category": "Weapon",
+      "slots": 2,
       "to": 510130,
+      "shop": null,
       "among": [
         510130
       ]
@@ -181,7 +218,9 @@
     "1216": {
       "name": "Stiletto",
       "category": "Weapon",
-      "to": 510131,
+      "slots": 2,
+      "to": 510135,
+      "shop": 510135,
       "among": [
         510131,
         510135
@@ -190,7 +229,9 @@
     "1219": {
       "name": "Gladius",
       "category": "Weapon",
-      "to": 510182,
+      "slots": 2,
+      "to": 510136,
+      "shop": 510136,
       "among": [
         510136,
         510182
@@ -199,7 +240,9 @@
     "1222": {
       "name": "Damascus",
       "category": "Weapon",
-      "to": 510132,
+      "slots": 1,
+      "to": 510137,
+      "shop": 510137,
       "among": [
         510132,
         510137
@@ -208,7 +251,9 @@
     "1351": {
       "name": "Battle Axe",
       "category": "Weapon",
-      "to": 620039,
+      "slots": 3,
+      "to": 620034,
+      "shop": 620034,
       "among": [
         620034,
         620039
@@ -217,7 +262,9 @@
     "1354": {
       "name": "Hammer",
       "category": "Weapon",
-      "to": 620049,
+      "slots": 2,
+      "to": 620035,
+      "shop": 620035,
       "among": [
         620035,
         620049
@@ -226,7 +273,9 @@
     "1357": {
       "name": "Buster",
       "category": "Weapon",
+      "slots": 1,
       "to": 620033,
+      "shop": null,
       "among": [
         620033
       ]
@@ -234,7 +283,9 @@
     "1360": {
       "name": "Two-Handed Axe",
       "category": "Weapon",
-      "to": 620048,
+      "slots": 1,
+      "to": 620036,
+      "shop": 620036,
       "among": [
         620036,
         620048
@@ -243,7 +294,9 @@
     "1401": {
       "name": "Javelin",
       "category": "Weapon",
+      "slots": 3,
       "to": 530056,
+      "shop": null,
       "among": [
         530056
       ]
@@ -251,7 +304,9 @@
     "1404": {
       "name": "Spear",
       "category": "Weapon",
+      "slots": 3,
       "to": 530052,
+      "shop": null,
       "among": [
         530052
       ]
@@ -259,7 +314,9 @@
     "1407": {
       "name": "Pike",
       "category": "Weapon",
-      "to": 530055,
+      "slots": 3,
+      "to": 530053,
+      "shop": 530053,
       "among": [
         530053,
         530055
@@ -268,7 +325,9 @@
     "1410": {
       "name": "Lance",
       "category": "Weapon",
-      "to": 630036,
+      "slots": 0,
+      "to": 630040,
+      "shop": 630040,
       "among": [
         630036,
         630040
@@ -277,7 +336,9 @@
     "1451": {
       "name": "Guisarme",
       "category": "Weapon",
+      "slots": 2,
       "to": 630044,
+      "shop": null,
       "among": [
         630044
       ]
@@ -285,7 +346,9 @@
     "1454": {
       "name": "Glaive",
       "category": "Weapon",
+      "slots": 2,
       "to": 630043,
+      "shop": null,
       "among": [
         630043
       ]
@@ -293,7 +356,9 @@
     "1457": {
       "name": "Partizan",
       "category": "Weapon",
-      "to": 630035,
+      "slots": 1,
+      "to": 630038,
+      "shop": 630038,
       "among": [
         630035,
         630038
@@ -302,7 +367,9 @@
     "1463": {
       "name": "Hallberd",
       "category": "Weapon",
-      "to": 630053,
+      "slots": 1,
+      "to": 630039,
+      "shop": 630039,
       "among": [
         630039,
         630053
@@ -311,7 +378,9 @@
     "1501": {
       "name": "Club",
       "category": "Weapon",
+      "slots": 3,
       "to": 590072,
+      "shop": null,
       "among": [
         590072
       ]
@@ -319,7 +388,9 @@
     "1504": {
       "name": "Mace",
       "category": "Weapon",
+      "slots": 3,
       "to": 590073,
+      "shop": 590073,
       "among": [
         590069,
         590073
@@ -328,7 +399,9 @@
     "1507": {
       "name": "Smasher",
       "category": "Weapon",
-      "to": 590083,
+      "slots": 2,
+      "to": 590074,
+      "shop": 590074,
       "among": [
         590074,
         590083
@@ -337,7 +410,9 @@
     "1513": {
       "name": "Morning Star",
       "category": "Weapon",
+      "slots": 1,
       "to": 590076,
+      "shop": 590076,
       "among": [
         590076,
         590113
@@ -346,7 +421,9 @@
     "1516": {
       "name": "Sword Mace",
       "category": "Weapon",
-      "to": 590070,
+      "slots": 0,
+      "to": 590077,
+      "shop": 590077,
       "among": [
         590070,
         590077
@@ -355,7 +432,9 @@
     "1519": {
       "name": "Chain",
       "category": "Weapon",
-      "to": 590071,
+      "slots": 2,
+      "to": 590075,
+      "shop": 590075,
       "among": [
         590071,
         590075
@@ -364,7 +443,9 @@
     "1522": {
       "name": "Stunner",
       "category": "Weapon",
+      "slots": 0,
       "to": 590078,
+      "shop": 590078,
       "among": [
         590078
       ]
@@ -372,7 +453,9 @@
     "1803": {
       "name": "Knuckle Dusters",
       "category": "Weapon",
+      "slots": 2,
       "to": 560084,
+      "shop": null,
       "among": [
         560084
       ]
@@ -380,7 +463,9 @@
     "1805": {
       "name": "Studded Knuckles",
       "category": "Weapon",
-      "to": 560053,
+      "slots": 2,
+      "to": 560056,
+      "shop": 560056,
       "among": [
         560053,
         560056
@@ -389,7 +474,9 @@
     "1807": {
       "name": "Fist",
       "category": "Weapon",
-      "to": 560078,
+      "slots": 0,
+      "to": 560057,
+      "shop": 560057,
       "among": [
         560057,
         560078
@@ -398,7 +485,9 @@
     "1809": {
       "name": "Claw",
       "category": "Weapon",
-      "to": 560079,
+      "slots": 1,
+      "to": 560058,
+      "shop": 560058,
       "among": [
         560058,
         560079
@@ -407,7 +496,9 @@
     "1811": {
       "name": "Finger",
       "category": "Weapon",
-      "to": 560062,
+      "slots": 1,
+      "to": 560059,
+      "shop": 560059,
       "among": [
         560059,
         560062
@@ -416,7 +507,9 @@
     "13040": {
       "name": "Novice Cutter",
       "category": "Weapon",
+      "slots": 3,
       "to": 510046,
+      "shop": 510046,
       "among": [
         510046
       ]

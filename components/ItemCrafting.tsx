@@ -9,7 +9,7 @@
 
 import Link from 'next/link';
 import RecipeTable from '@/components/RecipeTable';
-import { KIND_NEEDS, KIND_TITLES, SKILL_NEEDS, recipesMaking, recipesUsing, type CraftKind } from '@/lib/crafting';
+import { FORGED_NOTE, KIND_NEEDS, KIND_TITLES, SKILL_NEEDS, recipesMaking, recipesUsing, type CraftKind } from '@/lib/crafting';
 
 const GUIDE_OF: Partial<Record<CraftKind, string>> = {
   forge: '/guides/forging',
@@ -50,7 +50,14 @@ export default function ItemCrafting({ itemId }: { itemId: number }) {
     <>
       {making.length > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
-          <h2 className="section-title">ทำเองได้จาก</h2>
+          {/* A forged weapon is another item (no slots, four random rows), so
+              the heading says "another version" rather than "make this". */}
+          <h2 className="section-title">{making.every((r) => r.kind === 'forge') ? 'ตีเองได้ (ได้อีกแบบ)' : 'ทำเองได้จาก'}</h2>
+          {making.some((r) => r.kind === 'forge') && (
+            <p className="muted" style={{ marginTop: 0, marginBottom: 10, fontSize: 13 }}>
+              <strong>ได้อีกแบบ:</strong> {FORGED_NOTE}
+            </p>
+          )}
           {/* The materials alone do not tell a reader where the crafting
               happens, which is what someone asked about Autumn Red Tea. */}
           {needs.map(([title, text]) => (

@@ -27,7 +27,7 @@ export function classicTwinIds(items: { id: number; name: string; category: stri
 // The site's own list, built by scripts/build-classic-twins.mjs with the rule
 // above, each leftover mapped to the one Zero copy it stands for (the shop
 // copy first: 1463 Hallberd -> 630053, sold for 1,650z).
-const TWINS = (file as { twins: Record<string, { category: string; to: number | null }> }).twins;
+const TWINS = (file as { twins: Record<string, { category: string; to: number | null; shop: number | null }> }).twins;
 
 /** The Zero item a classic leftover stands for, or null when `id` is not one. */
 export function zeroTwinOf(id: number): number | null {
@@ -40,5 +40,15 @@ export const LEFTOVER_IDS_BY_CATEGORY: Record<string, number[]> = Object.entries
   return acc;
 }, {});
 
-/** A data id (rAthena shop or forge row) moved to the Zero copy when it is a leftover. */
+/** A data id (rAthena forge row) moved to the Zero copy when it is a leftover. */
 export const toZeroId = (id: number): number => zeroTwinOf(id) ?? id;
+
+/**
+ * Where a shop row for `id` belongs: the Zero shop copy, `id` itself when it
+ * is not a leftover, or null when the leftover has no shop copy in Zero
+ * (Sword exists only as the [4] drop copy; nobody has seen a shop sell it).
+ */
+export function shopIdOf(id: number): number | null {
+  const t = TWINS[String(id)];
+  return t ? t.shop : id;
+}

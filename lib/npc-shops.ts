@@ -16,7 +16,7 @@
 // Lighthalzen, which have not opened here.
 
 import file from '@/data/npc-shops.json';
-import { toZeroId } from '@/lib/classic-twins';
+import { shopIdOf } from '@/lib/classic-twins';
 
 export interface ShopEntry {
   npc: string;
@@ -29,10 +29,14 @@ export interface ShopEntry {
 }
 
 // rAthena lists classic ids; a classic leftover's sellers belong to the Zero
-// copy the game actually sells (1463 Hallberd -> 630053, lib/classic-twins).
+// shop copy, the one with the classic slot count (1219 Gladius [2] -> 510136
+// Gladius [2], not the [3] drop copy). A leftover with no shop copy in Zero
+// has no seller here at all (lib/classic-twins).
 const shops: Record<string, ShopEntry[]> = {};
 for (const [id, rows] of Object.entries((file as { items: Record<string, ShopEntry[]> }).items)) {
-  const key = String(toZeroId(Number(id)));
+  const target = shopIdOf(Number(id));
+  if (target === null) continue;
+  const key = String(target);
   shops[key] = [...(shops[key] ?? []), ...rows];
 }
 

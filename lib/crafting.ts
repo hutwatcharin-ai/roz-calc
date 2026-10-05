@@ -80,8 +80,10 @@ export function recipesOfSkill(skillId: number): Recipe[] {
   return RECIPES.filter((r) => r.skillId === skillId);
 }
 
-// rAthena's forge rows name classic ids; the sword you forge is the Zero copy
-// (lib/classic-twins), so the product and materials point there.
+// rAthena's forge rows name classic ids; they point at the Zero copy with the
+// fewest slots (lib/classic-twins). What a forge actually makes is another
+// item again -- same name, no slots, four random option rows (owner, 5 Oct
+// 2026) -- with no page here; FORGED_NOTE says so wherever a recipe shows.
 const zero = (m: CraftMaterial): CraftMaterial => {
   const id = toZeroId(m.id);
   return id === m.id ? m : { ...m, id, icon: `/images/items/${id}.gif` };
@@ -93,6 +95,10 @@ const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes
 /** How many the filter above removes, for a page that wants to say so. */
 export const RECIPES_HIDDEN_UNAVAILABLE =
   (file as unknown as { recipes: Recipe[] }).recipes.length - RECIPES.length;
+
+/** Under every forge recipe: what comes out is not the item on the page. */
+export const FORGED_NOTE =
+  'ของที่ตีได้ชื่อเดียวกัน แต่เป็นอีกแบบ: ไม่มีช่องการ์ด และสุ่มออปชั่นเพิ่ม 4 แถว · เว็บยังไม่มีหน้าของแบบตีเอง';
 
 export const KIND_TITLES: Record<CraftKind, string> = {
   forge: 'ตีอาวุธ',

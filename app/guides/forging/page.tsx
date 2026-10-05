@@ -53,6 +53,10 @@ export default function ForgingPage() {
         ใช้สูตรเดียวกันนี้แหละ แล้วใส่หินธาตุ 1 ก้อนตอนกดตี อาวุธที่ออกมาจะเป็นธาตุของหินก้อนนั้น
         แลกกับโอกาสสำเร็จที่ลดลง
       </p>
+      {/* Owner, 5 Oct 2026: a forged weapon is its own item. */}
+      <p className="muted" style={{ marginTop: 8, maxWidth: '68ch' }}>
+        <strong>ของที่ตีได้ไม่ใช่ตัวเดียวกับที่ร้านขายหรือมอนดรอป</strong> ชื่อเหมือนกัน แต่ไม่มีช่องการ์ด และสุ่มออปชั่นเพิ่ม 4 แถว · ลิงก์ในตารางพาไปหน้าแบบที่ร้านขาย
+      </p>
 
       <section className="card card--cyan" style={{ marginTop: 18 }}>
         <h2 className="section-title">ต้องเตรียมอะไร</h2>
