@@ -112,7 +112,7 @@ export default function GearDetail({
             <span className="crumbs__sep" aria-hidden="true">›</span>
           </>
         ) : null}
-        <span className="crumbs__here">{item.name_en}</span>
+        <span className="crumbs__here">{displayName}</span>
       </nav>
       <RecordVisit kind={section.recentKind} id={item.id} name={displayName} />
       <AbsentFromGameNote id={item.id} />
@@ -120,7 +120,7 @@ export default function GearDetail({
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
           { name: section.label, path: section.basePath },
-          { name: item.name_en, path: detailPath },
+          { name: displayName, path: detailPath },
         ])}
       />
       <JsonLd
