@@ -34,27 +34,63 @@ export function canonicalOf(codes: string[]): string {
   return [...pool].sort((a, b) => a.length - b.length || a.localeCompare(b))[0];
 }
 
-/**
- * Groups maps that share a display name AND an identical monster set.
- * Maps with nothing to fold into return a group of one, so a caller can treat
- * every map the same way.
- */
-export function groupMapVariants(
-  maps: MapRow[],
-  monstersByMap: Map<string, Set<number>>,
-): MapGroup[] {
-  const byKey = new Map<string, string[]>();
+/** Spawns of one map: monster ids, or monster id -> how many spawn. */
+export type MapSpawns = Set<number> | Map<number, number>;
 
-  for (const map of maps) {
-    const species = [...(monstersByMap.get(map.map_code) ?? [])].sort((a, b) => a - b).join(',');
-    // The name is part of the key as well as the species: two unrelated maps
-    // can both hold nothing but Poring, and folding those together would claim
-    // they are one place.
-    const key = `${map.map_display_name ?? map.map_code}|${species}`;
-    byKey.set(key, [...(byKey.get(key) ?? []), map.map_code]);
+const stem = (code: string) => code.replace(/_[abz]$/, '');
+
+/**
+ * Groups channel copies of one map.
+ *
+ * Two maps fold when they hold the same monsters and either
+ *   - share a display name (gef_fild10 / gef_f10_a, both "Orc Village"), or
+ *   - are the same code but for a channel suffix (b_nif / b_nif_z), or
+ *   - hold two or more species in exactly the same numbers (5 Oct 2026).
+ *
+ * The third rule is for the Zero channel copies of a classic dungeon, which
+ * the game names differently: iz_dun02 "Izlude Undersea Tunnel 3F" and
+ * iz_d02_a "Undersea Cave 3F" are one map -- an NPC on the first moves you to
+ * the others -- and their spawn lists match monster for monster. It needs the
+ * counts: Greenwood Lake Dungeon 1F and 2F hold the same species in different
+ * numbers and are different floors. One species is never enough on its own:
+ * two fields that both hold only Poring are not one place.
+ */
+export function groupMapVariants(maps: MapRow[], monstersByMap: Map<string, MapSpawns>): MapGroup[] {
+  const info = maps.map((map) => {
+    const spawns = monstersByMap.get(map.map_code);
+    const ids = spawns ? [...spawns.keys()].sort((a, b) => a - b) : [];
+    const counted = spawns instanceof Map;
+    const species = ids.join(',');
+    const full = counted ? ids.map((id) => `${id}x${(spawns as Map<number, number>).get(id)}`).join(',') : species;
+    return { code: map.map_code, name: map.map_display_name ?? map.map_code, species, full, counted, size: ids.length };
+  });
+
+  // Union-find over maps that share a monster set.
+  const parent = info.map((_, i) => i);
+  const find = (i: number): number => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  const bySpecies = new Map<string, number[]>();
+  info.forEach((m, i) => {
+    // The name is part of the key for a map with no spawns: two empty maps
+    // under different names must not collapse into one page.
+    const key = m.size ? m.species : `|${m.name}`;
+    bySpecies.set(key, [...(bySpecies.get(key) ?? []), i]);
+  });
+  for (const members of bySpecies.values()) {
+    for (let x = 0; x < members.length; x++) {
+      for (let y = x + 1; y < members.length; y++) {
+        const a = info[members[x]];
+        const b = info[members[y]];
+        const sameCounts = a.counted && b.counted && a.full === b.full;
+        if (a.name === b.name || stem(a.code) === stem(b.code) || (sameCounts && a.size >= 2)) {
+          parent[find(members[x])] = find(members[y]);
+        }
+      }
+    }
   }
 
-  return [...byKey.values()].map((codes) => {
+  const groups = new Map<number, string[]>();
+  info.forEach((m, i) => groups.set(find(i), [...(groups.get(find(i)) ?? []), m.code]));
+  return [...groups.values()].map((codes) => {
     const canonical = canonicalOf(codes);
     return { canonical, variants: codes.filter((c) => c !== canonical).sort() };
   });

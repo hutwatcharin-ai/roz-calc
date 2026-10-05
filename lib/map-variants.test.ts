@@ -72,6 +72,41 @@ describe('groupMapVariants', () => {
     expect(groups).toHaveLength(2);
   });
 
+  it('folds a Zero channel copy the game names differently when every count matches (5 Oct 2026)', () => {
+    const counts = new Map<string, Map<number, number>>([
+      ['iz_dun02', new Map([[1069, 40], [1070, 30]])],
+      ['iz_d02_a', new Map([[1069, 40], [1070, 30]])],
+      ['iz_d02_b', new Map([[1070, 30], [1069, 40]])],
+    ]);
+    const groups = groupMapVariants(
+      maps(['iz_dun02', 'Izlude Undersea Tunnel 3F'], ['iz_d02_a', 'Undersea Cave 3F'], ['iz_d02_b', 'Undersea Cave 3F']),
+      counts,
+    );
+    expect(groups).toEqual([{ canonical: 'iz_dun02', variants: ['iz_d02_a', 'iz_d02_b'] }]);
+  });
+
+  it('keeps two floors apart when they hold the same species in different numbers', () => {
+    const counts = new Map<string, Map<number, number>>([
+      ['gld_dun01', new Map([[1001, 20], [1002, 10]])],
+      ['gld_dun01_2', new Map([[1001, 35], [1002, 10]])],
+    ]);
+    const groups = groupMapVariants(maps(['gld_dun01', 'Greenwood Lake Dungeon 1F'], ['gld_dun01_2', 'Greenwood Lake Dungeon 2F']), counts);
+    expect(groups).toHaveLength(2);
+  });
+
+  it('never folds two differently named maps on one species, even with equal counts', () => {
+    const counts = new Map<string, Map<number, number>>([
+      ['prt_fild08', new Map([[1002, 50]])],
+      ['pay_fild04', new Map([[1002, 50]])],
+    ]);
+    expect(groupMapVariants(maps(['prt_fild08', 'Prontera Field'], ['pay_fild04', 'Payon Field']), counts)).toHaveLength(2);
+  });
+
+  it('folds a boss room with its _z copy by code even when the names differ', () => {
+    const counts = new Map<string, Map<number, number>>([['b_nif', new Map([[1291, 1]])], ['b_nif_z', new Map([[1291, 1]])]]);
+    expect(groupMapVariants(maps(['b_nif', 'b_nif'], ['b_nif_z', 'b_nif_z']), counts)).toEqual([{ canonical: 'b_nif', variants: ['b_nif_z'] }]);
+  });
+
   it('returns a group of one for a map with nothing to fold', () => {
     const groups = groupMapVariants(maps(['gef_fild10', 'Orc Village']), spawns);
     expect(groups).toEqual([{ canonical: 'gef_fild10', variants: [] }]);

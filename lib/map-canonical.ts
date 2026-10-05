@@ -34,8 +34,8 @@ export const getMapCanonical = dedupe(async (): Promise<MapCanonical> => {
   const { data: maps, error: mapsError } = await fetchAllRows<MapRow>((from, to) =>
     db.from('map_stats').select('map_code, map_display_name').order('map_code').range(from, to),
   );
-  const { data: spawns, error: spawnsError } = await fetchAllRows<{ map_code: string; monster_id: number }>(
-    (from, to) => db.from('monster_spawns').select('map_code, monster_id').order('map_code').range(from, to),
+  const { data: spawns, error: spawnsError } = await fetchAllRows<{ map_code: string; monster_id: number; amount: number | null }>(
+    (from, to) => db.from('monster_spawns').select('map_code, monster_id, amount').order('map_code').order('monster_id').range(from, to),
   );
 
   // A failed read must not fold every map into one group (an empty monster set
@@ -46,11 +46,13 @@ export const getMapCanonical = dedupe(async (): Promise<MapCanonical> => {
     return { groups: [], byCode: {}, variantsOf: new Map(), failed: true };
   }
 
-  const monstersByMap = new Map<string, Set<number>>();
+  // Monster -> spawn count per map: the counts are what tell a channel copy
+  // under another name (iz_d02_a) from a different floor (lib/map-variants).
+  const monstersByMap = new Map<string, Map<number, number>>();
   for (const spawn of spawns ?? []) {
-    const set = monstersByMap.get(spawn.map_code) ?? new Set<number>();
-    set.add(spawn.monster_id);
-    monstersByMap.set(spawn.map_code, set);
+    const counts = monstersByMap.get(spawn.map_code) ?? new Map<number, number>();
+    counts.set(spawn.monster_id, (counts.get(spawn.monster_id) ?? 0) + (spawn.amount ?? 0));
+    monstersByMap.set(spawn.map_code, counts);
   }
 
   const groups = groupMapVariants(maps ?? [], monstersByMap);
