@@ -79,7 +79,7 @@ export default async function PricesAdminPage() {
       <h1 className="pagehead__title arcname">ใส่ราคาขาย NPC</h1>
       <p className="muted" style={{ maxWidth: '72ch' }}>
         พิมพ์ชื่อของ → Enter → พิมพ์ราคา → Enter บันทึกแล้วกลับมาช่องค้นหาเอง · ใส่ <span className="mono">150/50</span> ได้
-        ถ้าหน้าต่างขายโชว์ยอดรวม (ขาย 50 ชิ้นได้ 150z) · ราคาขึ้นเว็บจริงเองภายใน 1 วัน หรือกด &ldquo;อัปเดตเว็บตอนนี้&rdquo;
+        ถ้าหน้าต่างขายโชว์ยอดรวม (ขาย 50 ชิ้นได้ 150z) · ราคาขึ้นเว็บจริงเองภายใน 1 วัน หรือกด &ldquo;อัปเดตเว็บตอนนี้&rdquo; · <a href="/admin/monsters">ใส่ข้อมูลมอนตีก่อน →</a>
       </p>
       <PriceTool rows={rows} />
     </main>

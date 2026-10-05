@@ -1,0 +1,17 @@
+/* /admin/monsters (local only); shares the .pt layout with /admin/prices. */
+.ag__row { grid-template-columns: 52px minmax(0, 1.2fr) minmax(0, 1fr) 260px; }
+.ag__row[data-aggro=unknown] { --rs: var(--pink); }
+.ag__row[data-aggro=yes] { --rs: var(--yellow); }
+.ag__row[data-aggro=no] { --rs: #3DFF8F; }
+.ag__sprite { display: grid; place-items: center; width: 52px; height: 52px; }
+.ag__sprite img { max-width: 52px; max-height: 52px; image-rendering: pixelated; object-fit: contain; }
+.ag__maps { font-size: 12.5px; color: var(--dim); }
+.ag__btns { display: flex; gap: 6px; }
+.ag__btn { flex: 1; min-height: 42px; padding: 0 8px; border: 2px solid var(--hair); border-radius: 6px; background: #150e33; color: var(--dim); font: 800 13px var(--font-chakra), var(--font-sarabun), sans-serif; cursor: pointer; }
+.ag__btn--yes.on { background: var(--yellow); border-color: var(--yellow); color: var(--yellow-ink); }
+.ag__btn--no.on { background: #3DFF8F; border-color: #3DFF8F; color: #0B0820; }
+.ag__btn--clear { flex: none; padding: 0 10px; font-size: 12px; }
+@media (max-width: 900px) {
+  .ag__row { grid-template-columns: 52px minmax(0, 1fr); }
+  .ag__row .ag__maps, .ag__row .ag__btns { grid-column: 1 / -1; }
+}

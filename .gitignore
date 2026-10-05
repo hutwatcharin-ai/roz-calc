@@ -21,3 +21,4 @@ docs/prontera-export/craft-cache/
 # Owner price edits from /admin/prices (local working record)
 .price-log.jsonl
 .shots-read.json
+.aggro-log.jsonl
