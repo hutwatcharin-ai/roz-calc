@@ -116,7 +116,6 @@ export default function GearDetail({
       </nav>
       <RecordVisit kind={section.recentKind} id={item.id} name={displayName} />
       <AbsentFromGameNote id={item.id} />
-      <ItemFormerNameLine id={item.id} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
@@ -151,7 +150,14 @@ export default function GearDetail({
           <ItemIcon iconUrl={item.icon_url} category={item.category} size={64} />
         </span>
         <div>
-          <p className="arckicker">{section.recentKind === 'costume' ? 'COSTUME' : item.category === 'Weapon' ? 'WEAPON' : 'ARMOR'} · ID {item.id}</p>
+          {/* Owner, 5 Oct 2026: the hero said the id four times and the type
+              three times ("too much, confusing"). Each fact once now: kind
+              and type here, the id in the chips, the sentence below the
+              stat tiles, the site's old name at the foot. */}
+          <p className="arckicker">
+            {section.recentKind === 'costume' ? 'COSTUME' : item.category === 'Weapon' ? 'WEAPON' : 'ARMOR'}
+            {item.weapon_type ? ` · ${item.weapon_type.toUpperCase()}` : ''}
+          </p>
           <h1 className="pagehead__title arcname">
             {item.name_en}
             {item.slots > 0 && (
@@ -168,18 +174,16 @@ export default function GearDetail({
           <ThaiAliasLine kind="items" id={item.id} />
           {sameName.length > 0 && (
             <p className="aliasline">
-              มีของชื่อเดียวกันอีก {sameName.length} ชิ้นในเกม:{' '}
+              อีกแบบในเกม:{' '}
               {sameName.map((other, i) => (
                 <span key={other.id}>
                   {i > 0 && ' · '}
                   <Link href={itemHref(other.id, other.category)}>
-                    <strong>{item.name_en}{other.slots ? ` [${other.slots}]` : ''}</strong>
+                    <strong>{item.name_en}{other.slots ? ` [${other.slots}]` : ' [0]'}</strong>
                   </Link>
-                  <span className="mono aliasline__code"> (รหัส {other.id})</span>
+                  {other.slots === item.slots && <span className="aliasline__code"> (ช่องเท่ากัน ต่างแค่รหัส #{other.id})</span>}
                 </span>
               ))}
-              <span className="aliasline__code"> · ชิ้นนี้รหัส <span className="mono">{item.id}</span></span>
-              {sameName.some((o) => o.slots === item.slots) && ' · ข้อความและค่าพลังเหมือนกัน ต่างกันแค่รหัส เกมมีทั้งสองชิ้น'}
             </p>
           )}
           {(() => {
@@ -197,28 +201,13 @@ export default function GearDetail({
             );
           })()}
           <p className="equiphero__chips">
-            <span className="tag">{categoryLabel}</span>
-            {item.weapon_type && <span className="tag">{item.weapon_type}</span>}
             {item.weapon_level !== null && <span className="tag">Weapon Lv {item.weapon_level}</span>}
-            <span className="tag mono">ID {item.id}</span>
-          </p>
-          {/* One liftable sentence carrying the same facts as the tiles below
-              (GEO audit): a crawler or an answer engine can quote it whole. */}
-          <p className="muted" style={{ marginTop: 6, maxWidth: '65ch' }}>
-            {item.name_en} เป็น{categoryLabel}
-            {item.weapon_type ? ` ชนิด ${item.weapon_type}` : ''}
-            {item.atk !== null ? ` ATK ${item.atk}` : ''}
-            {item.required_level !== null ? ` ใส่ได้ที่เลเวล ${item.required_level}` : ''}
-            {rows.length > 0 && lowest?.monsters
-              ? ` ดรอปจากมอนสเตอร์ ${rows.length} ชนิด ตัวเลเวลต่ำสุดคือ ${lowest.monsters.name_en} (Lv.${lowest.monsters.level ?? '—'}${lowest.rate != null ? ` อัตรา ${lowest.rate}%` : ''})`
-              : ''}
+            {item.equippable_classes.length > 0 && <span className="tag">ใส่ได้: {item.equippable_classes.join(', ')}</span>}
+            <span className="tag mono tag--faint">#{item.id}</span>
           </p>
         </div>
       </div>
 
-      {item.equippable_classes.length > 0 && (
-        <p className="muted" style={{ marginTop: 12 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>
-      )}
       <InSetBox itemId={item.id} />
       <ItemGuideRefs itemId={item.id} />
 
@@ -310,6 +299,19 @@ export default function GearDetail({
         </div>
       )}
 
+      {/* One liftable sentence carrying the same facts as the tiles (GEO
+          audit): a crawler or an answer engine can quote it whole. Below the
+          tiles, not in the hero, since the tiles already say it to a reader. */}
+      <p className="muted" style={{ marginTop: 12, maxWidth: '65ch', fontSize: 13.5 }}>
+        {item.name_en} เป็น{categoryLabel}
+        {item.weapon_type ? ` ชนิด ${item.weapon_type}` : ''}
+        {item.atk !== null ? ` ATK ${item.atk}` : ''}
+        {item.required_level !== null ? ` ใส่ได้ที่เลเวล ${item.required_level}` : ''}
+        {rows.length > 0 && lowest?.monsters
+          ? ` ดรอปจากมอนสเตอร์ ${rows.length} ชนิด ตัวเลเวลต่ำสุดคือ ${lowest.monsters.name_en} (Lv.${lowest.monsters.level ?? '—'}${lowest.rate != null ? ` อัตรา ${lowest.rate}%` : ''})`
+          : ''}
+      </p>
+
       {/* Before the drop list: a craftable item is usually made, not farmed,
           and the recipe is the shorter answer. */}
       <ItemCrafting itemId={item.id} />
@@ -317,6 +319,7 @@ export default function GearDetail({
       {!fitted && dropsCard}
 
       <div style={{ marginTop: 20 }}>
+        <ItemFormerNameLine id={item.id} />
         <AdSlot slot="detail" />
         <FeedbackButton pageType={section.feedbackPageType} entityId={String(item.id)} />
       </div>

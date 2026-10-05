@@ -17,16 +17,19 @@
      as the sole carrier of meaning: every chip and card still says the
      element in words (18 Sep 2026). Picked to match how the game draws each
      element, and kept dim enough that the tinted border stays a border. */
+  /* Palette B (owner, 5 Oct 2026): Earth was green beside a mint Wind, and
+     Poison, Shadow, Ghost and Neutral were four purples. Earth brown as on
+     the game's element icon, Poison toxic green, Ghost pale blue. */
   --el-fire: #ff6a3d;
   --el-water: #3dc8ff;
-  --el-earth: #58d17a;
+  --el-earth: #d29a4e;
   --el-wind: #7bffcf;
-  --el-poison: #c46bff;
+  --el-poison: #9be03d;
   --el-holy: #ffe53d;
-  --el-shadow: #8f6bff;
+  --el-shadow: #9b6bff;
   --el-undead: #9aa88f;
-  --el-ghost: #d7c8ff;
-  --el-neutral: #b3a9e6;
+  --el-ghost: #cfe3ff;
+  --el-neutral: #c9c4dc;
 }
 
 /* ---------- glow ---------- */

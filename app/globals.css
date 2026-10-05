@@ -547,6 +547,7 @@ a.thsort { text-decoration: none; }
 .tag--mini { border-color: var(--yellow); color: var(--yellow); }
 .tag--mvp { border-color: var(--pink); color: var(--pink); }
 .tag--quiet { background: transparent; border: 1px dashed var(--hair); color: var(--faint); }
+.tag--faint { opacity: .7; }
 .tag {
   display: inline-flex;
   align-items: center;
