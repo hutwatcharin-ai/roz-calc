@@ -169,9 +169,12 @@ export default function SellShotReader({
           c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
           // Same picture, several items: the owner's last pick for this set,
           // else the one whose price already matches what the screenshot
-          // says (Buckler, not Ahura Mazdah, for a 50z shield), else the first.
+          // says (Buckler, not Ahura Mazdah, for a 50z shield), else a Zero
+          // item (six-digit id, what Zero's shops sell) over a classic or
+          // guild copy (Waghnak 560054, not 1801), else the first.
           const matching = row.candidates.find((id) => current(byId.get(id), result.kind) === row.price);
-          const chosen = row.candidates.includes(picks[key]) ? picks[key] : (matching ?? row.candidates[0]);
+          const zero = row.candidates.find((id) => id >= 100000);
+          const chosen = row.candidates.includes(picks[key]) ? picks[key] : (matching ?? zero ?? row.candidates[0]);
           out.push({ key, kind: result.kind, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
         }
       }
