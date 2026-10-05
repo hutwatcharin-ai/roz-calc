@@ -34,8 +34,9 @@ export default async function PricesAdminPage() {
     icon_url: string | null;
     buy_price: number | null;
     sell_price: number | null;
+    slots: number | null;
   }>((from, to) =>
-    db.from('items').select('id, name_en, category, icon_url, buy_price, sell_price').order('id').range(from, to),
+    db.from('items').select('id, name_en, category, icon_url, buy_price, sell_price, slots').order('id').range(from, to),
   );
   if (error) throw new Error(`items query failed: ${error.message}`);
 
@@ -52,6 +53,7 @@ export default async function PricesAdminPage() {
       icon: it.icon_url,
       buy: it.buy_price,
       sell: it.sell_price,
+      slots: it.slots ?? 0,
       checkedAt: checked.get(it.id) ?? null,
     }));
 

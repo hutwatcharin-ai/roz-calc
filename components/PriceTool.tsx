@@ -18,6 +18,8 @@ export interface PriceRow {
   icon: string | null;
   buy: number | null;
   sell: number | null;
+  /** Card slots, so two copies of one weapon can be told apart. */
+  slots: number;
   checkedAt: string | null;
 }
 
@@ -232,7 +234,10 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
               <li key={r.id} className="pt__row" data-status={st}>
                 <span className="pt__icon">{r.icon && <img src={r.icon} alt="" width={36} height={36} loading="lazy" />}</span>
                 <span className="pt__name">
-                  <b>{r.name}</b>
+                  <b>
+                    {r.name}
+                    {r.slots > 0 && <span className="pt__slots mono"> [{r.slots}]</span>}
+                  </b>
                   <small className="mono">
                     #{r.id} · {r.category}
                     {r.aka.length > 0 && ` · ${r.aka.slice(0, 2).join(', ')}`}

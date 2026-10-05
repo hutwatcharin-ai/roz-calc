@@ -40,3 +40,4 @@
   .pt__row { grid-template-columns: 40px minmax(0, 1fr); }
   .pt__nums, .pt__edit { grid-column: 2; }
 }
+.pt__slots { color: var(--cyan); font-weight: 700; }
