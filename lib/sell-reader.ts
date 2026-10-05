@@ -12,8 +12,14 @@
 // The left number is the plain NPC price; "125 -> 155" shows a Merchant's
 // Overcharge on the right, which is not the item's price. Positions were
 // measured on a 1024x768 client (5 Oct 2026 screenshots).
+//
+// The shop's buy window ("รายการที่ขายใน Shop") is read the same way: same
+// frame, same rows, its own title. There the right number is the Discount
+// price and thousands carry a comma ("1200 -> 1,068 Z", "2,500 Z"). A shop
+// whose list shows no arrow at all draws its icons 10 px further left, so
+// each window tries both icon columns and keeps the one that fits.
 
-import { SELL_GLYPHS, SELL_TITLE } from './sell-glyphs';
+import { BUY_TITLE, SELL_GLYPHS, SELL_TITLE } from './sell-glyphs';
 
 export interface Pixels {
   width: number;
@@ -29,6 +35,8 @@ export interface IconAtlas {
   /** RGBA of the atlas image. */
   pixels: Pixels;
 }
+
+export type WindowKind = 'sell' | 'buy';
 
 export interface SellRow {
   index: number;
@@ -47,9 +55,10 @@ export interface SellRow {
 const DARK = 110;
 const ROW_PITCH = 32;
 const TEXT_DY = 23;
-const PRICE_X0 = 120;
+const PRICE_X0 = 100;
 const PRICE_X1 = 236;
-const ICON_DX = 14;
+/** Icon column: with an arrow in the price list, and without one. */
+const ICON_DXS = [14, 4];
 const ICON_DY = -8;
 const BG_DX = 90;
 const ICON_ROWS = 12;
@@ -57,7 +66,12 @@ const TIE = 0.6;
 const MAX_ROWS = 14;
 
 const parseBitmap = (code: string) => code.split('.').map((row) => [...row].map((c) => c === '1'));
-const TITLE = parseBitmap(SELL_TITLE);
+// Each title and where its bitmap sits against the sell title's anchor, so
+// both windows share the row geometry below.
+const TITLES: { kind: WindowKind; bitmap: boolean[][]; dx: number; dy: number }[] = [
+  { kind: 'sell', bitmap: parseBitmap(SELL_TITLE), dx: 0, dy: 0 },
+  { kind: 'buy', bitmap: parseBitmap(BUY_TITLE), dx: 14, dy: 1 },
+];
 const GLYPHS = Object.entries(SELL_GLYPHS).map(([char, code]) => ({ char, code }));
 
 function gray(p: Pixels): Uint8Array {
@@ -66,14 +80,15 @@ function gray(p: Pixels): Uint8Array {
   return g;
 }
 
-/** Where the window title is, by exact bitmap with a little JPEG slack. */
-export function findAnchor(p: Pixels, g = gray(p)): { x: number; y: number } | null {
+/** Where a window title is, by exact bitmap with a little JPEG slack. */
+export function findAnchor(p: Pixels, g = gray(p), TITLE = TITLES[0].bitmap): { x: number; y: number } | null {
   const th = TITLE.length;
   const tw = TITLE[0].length;
   const darkCells: [number, number][] = [];
   const lightCells: [number, number][] = [];
   TITLE.forEach((row, y) => row.forEach((on, x) => (on ? darkCells : lightCells).push([x, y])));
   const total = darkCells.length + lightCells.length;
+  const slack = Math.ceil(total * 0.03) - 1;
   let best: { x: number; y: number; miss: number } | null = null;
   for (let y = 0; y + th <= p.height; y++) {
     for (let x = 0; x + tw <= p.width; x++) {
@@ -84,9 +99,17 @@ export function findAnchor(p: Pixels, g = gray(p)): { x: number; y: number } | n
         if (g[(y + dy) * p.width + x + dx] >= DARK) miss++;
       }
       if (miss) continue;
-      for (const [dx, dy] of darkCells) if (g[(y + dy) * p.width + x + dx] >= DARK) miss++;
-      for (const [dx, dy] of lightCells) if (g[(y + dy) * p.width + x + dx] < DARK) miss++;
-      if (miss / total < 0.03 && (!best || miss < best.miss)) best = { x, y, miss };
+      // Light cells first (a dark game scene fails them at once), and stop
+      // as soon as the misses pass the slack.
+      for (let i = 0; i < lightCells.length && miss <= slack; i++) {
+        const [dx, dy] = lightCells[i];
+        if (g[(y + dy) * p.width + x + dx] < DARK) miss++;
+      }
+      for (let i = 0; i < darkCells.length && miss <= slack; i++) {
+        const [dx, dy] = darkCells[i];
+        if (g[(y + dy) * p.width + x + dx] >= DARK) miss++;
+      }
+      if (miss <= slack && (!best || miss < best.miss)) best = { x, y, miss };
     }
   }
   return best && { x: best.x, y: best.y };
@@ -124,10 +147,10 @@ export function readPrice(p: Pixels, g: Uint8Array, x0: number, x1: number, y: n
   return text;
 }
 
-/** "125->155Z" -> 125, "0Z" -> 0. */
+/** "125->155Z" -> 125, "0Z" -> 0, "2,500Z" -> 2500. */
 export function plainPrice(text: string | null): number | null {
-  const m = text && /^(\d+)(?:->\d+)?Z$/.exec(text);
-  return m ? Number(m[1]) : null;
+  const m = text && /^(\d{1,3}(?:,\d{3})*|\d+)(?:->[\d,]+)?Z$/.exec(text);
+  return m ? Number(m[1].replace(/,/g, '')) : null;
 }
 
 /** Icon candidates for the icon whose top-left is (ix, iy). */
@@ -160,26 +183,53 @@ export function matchIcon(p: Pixels, atlas: IconAtlas, ix: number, iy: number, b
   return { candidates, score: best };
 }
 
-/** Reads every visible row of the sell window. Null when no window is found. */
-export function readSellWindow(p: Pixels, atlas: IconAtlas, live?: Set<number>): { anchor: { x: number; y: number }; rows: SellRow[] } | null {
+/** Reads every visible row of the sell or buy window. Null when neither is found. */
+export function readSellWindow(
+  p: Pixels,
+  atlas: IconAtlas,
+  live?: Set<number>,
+): { kind: WindowKind; anchor: { x: number; y: number }; rows: SellRow[] } | null {
   const g = gray(p);
-  const anchor = findAnchor(p, g);
-  if (!anchor) return null;
-  const rows: SellRow[] = [];
+  let kind: WindowKind | null = null;
+  let anchor: { x: number; y: number } | null = null;
+  for (const t of TITLES) {
+    const hit = findAnchor(p, g, t.bitmap);
+    if (hit) {
+      kind = t.kind;
+      anchor = { x: hit.x + t.dx, y: hit.y + t.dy };
+      break;
+    }
+  }
+  if (!kind || !anchor) return null;
+  const at = anchor;
+  const lines: { k: number; ty: number; text: string | null }[] = [];
   for (let k = 0; k < MAX_ROWS; k++) {
     const ty = anchor.y + TEXT_DY + ROW_PITCH * k;
     if (ty + 9 >= p.height) break;
     const text = readPrice(p, g, anchor.x + PRICE_X0, anchor.x + PRICE_X1, ty);
     // Past the last row there is no " Z" at the end of the line.
-    if (text === null && rows.length > 0 && !hasInk(p, g, anchor.x + PRICE_X0, anchor.x + PRICE_X1, ty)) break;
-    const iconAt = { x: anchor.x + ICON_DX, y: ty + ICON_DY };
-    const { candidates, score } = matchIcon(p, atlas, iconAt.x, iconAt.y, { x: anchor.x + BG_DX, y: ty + ICON_DY }, live);
-    rows.push({ index: k, text, price: plainPrice(text), candidates, iconScore: score, iconAt });
+    if (text === null && lines.length > 0 && !hasInk(p, g, anchor.x + PRICE_X0, anchor.x + PRICE_X1, ty)) break;
+    lines.push({ k, ty, text });
     if (text !== null && !text.endsWith('Z')) break;
+  }
+  // One icon column per window: the one whose icons match best overall.
+  let rows: SellRow[] = [];
+  let total = Infinity;
+  for (const dx of ICON_DXS) {
+    const tried = lines.map(({ k, ty, text }) => {
+      const iconAt = { x: at.x + dx, y: ty + ICON_DY };
+      const { candidates, score } = matchIcon(p, atlas, iconAt.x, iconAt.y, { x: at.x + BG_DX, y: ty + ICON_DY }, live);
+      return { index: k, text, price: plainPrice(text), candidates, iconScore: score, iconAt };
+    });
+    const sum = tried.reduce((a, r) => a + r.iconScore, 0);
+    if (sum < total) {
+      total = sum;
+      rows = tried;
+    }
   }
   // Trailing rows with neither a price nor a believable icon are past the list.
   while (rows.length && rows[rows.length - 1].price === null && rows[rows.length - 1].iconScore > 12) rows.pop();
-  return { anchor, rows };
+  return { kind, anchor, rows };
 }
 
 function hasInk(p: Pixels, g: Uint8Array, x0: number, x1: number, y: number): boolean {

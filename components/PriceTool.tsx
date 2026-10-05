@@ -3,7 +3,9 @@
 // The /admin/prices list (owner, 5 Oct 2026). Built to be used with one hand
 // on the keyboard between trips to an NPC: type a name, Enter picks the top
 // row and jumps to its price box, Enter saves and jumps back to the search.
-// "150/50" is read as a stack total over its count (lib/admin).
+// "150/50" is read as a stack total over its count (lib/admin). The smaller
+// box beside it is the NPC shop (buy) price, filled mostly from screenshots
+// of the shop window.
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { halfOfBuy, parsePriceInput } from '@/lib/admin';
@@ -61,6 +63,8 @@ const STATUS_FILTERS: { key: string; label: string; test: (r: PriceRow) => boole
 
 const SHOW = 60;
 const DRAFTS_KEY = 'roz-price-drafts';
+const BUY_DRAFTS_KEY = 'roz-buy-drafts';
+type Field = 'sell' | 'buy';
 const fmt = (n: number | null) => (n === null ? '—' : n.toLocaleString('en-US'));
 
 type Publishing = { startedAt: string; done: boolean; ok: boolean | null; tail: string } | null;
@@ -77,6 +81,7 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   // 2026: "a button to save what I typed, for peace of mind"). Kept in this
   // browser too, so a closed tab or a refresh does not lose it.
   const [drafts, setDrafts] = useState<Record<number, string>>({});
+  const [buyDrafts, setBuyDrafts] = useState<Record<number, string>>({});
   const [justSaved, setJustSaved] = useState<Record<number, true>>({});
   const [savingAll, setSavingAll] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -93,6 +98,7 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
     try {
       const kept = JSON.parse(localStorage.getItem(DRAFTS_KEY) ?? '{}') as Record<number, string>;
       setDrafts(kept);
+      setBuyDrafts(JSON.parse(localStorage.getItem(BUY_DRAFTS_KEY) ?? '{}') as Record<number, string>);
     } catch {
       // No storage (private window): drafts just live for this visit.
     }
@@ -102,13 +108,14 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   useEffect(() => {
     try {
       localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+      localStorage.setItem(BUY_DRAFTS_KEY, JSON.stringify(buyDrafts));
     } catch {
       // Same: nothing to keep them in.
     }
-  }, [drafts]);
+  }, [drafts, buyDrafts]);
 
-  function setDraft(id: number, text: string) {
-    setDrafts((prev) => {
+  function setDraft(id: number, text: string, field: Field = 'sell') {
+    (field === 'buy' ? setBuyDrafts : setDrafts)((prev) => {
       const next = { ...prev };
       if (text.trim()) next[id] = text;
       else delete next[id];
@@ -175,21 +182,23 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   }
 
   function applyEdit(edit: PriceEdit) {
-    setRows((prev) => prev.map((r) => (r.id === edit.id ? { ...r, sell: edit.to, checkedAt: edit.at } : r)));
+    setRows((prev) =>
+      prev.map((r) => (r.id !== edit.id ? r : edit.field === 'buy' ? { ...r, buy: edit.to } : { ...r, sell: edit.to, checkedAt: edit.at })),
+    );
     setLog((prev) => [edit, ...prev].slice(0, 200));
   }
 
   /** Saves one price; true when it went in. `jump` returns to the search box. */
-  async function save(row: PriceRow, text: string, jump = true): Promise<boolean> {
+  async function save(row: PriceRow, text: string, jump = true, field: Field = 'sell'): Promise<boolean> {
     const price = parsePriceInput(text);
     if (price === null) {
       setMessage({ kind: 'err', text: `อ่านราคา "${text}" ของ ${row.name} ไม่ออก ใส่ตัวเลข หรือ ยอดรวม/จำนวน เช่น 150/50` });
       return false;
     }
     try {
-      const { edit } = (await post({ action: 'save', id: row.id, price })) as { edit: PriceEdit };
+      const { edit } = (await post({ action: 'save', id: row.id, price, field })) as { edit: PriceEdit };
       applyEdit(edit);
-      setDraft(row.id, '');
+      setDraft(row.id, '', field);
       setJustSaved((prev) => ({ ...prev, [row.id]: true }));
       setTimeout(
         () =>
@@ -200,7 +209,7 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
           }),
         5000,
       );
-      setMessage({ kind: 'ok', text: `✓ บันทึกแล้ว ${row.name}: ${fmt(edit.from)} → ${fmt(edit.to)}z` });
+      setMessage({ kind: 'ok', text: `✓ บันทึกแล้ว ${row.name}${field === 'buy' ? ' (ราคาซื้อ)' : ''}: ${fmt(edit.from)} → ${fmt(edit.to)}z` });
       if (jump) {
         setQ('');
         searchRef.current?.focus();
@@ -215,10 +224,13 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   async function saveAll() {
     setSavingAll(true);
     let ok = 0;
-    const pending = Object.entries(drafts);
-    for (const [id, text] of pending) {
+    const pending = [
+      ...Object.entries(drafts).map(([id, text]) => ({ id, text, field: 'sell' as const })),
+      ...Object.entries(buyDrafts).map(([id, text]) => ({ id, text, field: 'buy' as const })),
+    ];
+    for (const { id, text, field } of pending) {
       const row = rows.find((r) => r.id === Number(id));
-      if (row && (await save(row, text, false))) ok += 1;
+      if (row && (await save(row, text, false, field))) ok += 1;
     }
     setSavingAll(false);
     setMessage({
@@ -247,6 +259,7 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
   }
 
   const undone = new Set(log.filter((e) => e.undoOf).map((e) => e.undoOf));
+  const pendingCount = Object.keys(drafts).length + Object.keys(buyDrafts).length;
 
   return (
     <div className="pt">
@@ -254,8 +267,9 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
         <SellShotReader
           items={rows}
           onDrafts={(prices) => {
-            setDrafts((prev) => ({ ...prev, ...prices }));
-            const n = Object.keys(prices).length;
+            setDrafts((prev) => ({ ...prev, ...prices.sell }));
+            setBuyDrafts((prev) => ({ ...prev, ...prices.buy }));
+            const n = Object.keys(prices.sell).length + Object.keys(prices.buy).length;
             setMessage({ kind: 'ok', text: `ใส่ ${n} ราคาจากภาพเป็นรายการรอบันทึกแล้ว ตรวจแล้วกด "บันทึกทั้งหมด"` });
           }}
         />
@@ -295,15 +309,17 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
           </span>
         </div>
         {message && <p className={`pt__msg pt__msg--${message.kind}`}>{message.text}</p>}
-        {Object.keys(drafts).length > 0 && (
+        {pendingCount > 0 && (
           <div className="pt__pending">
             <span>
-              ✏️ พิมพ์ไว้ยังไม่บันทึก <b>{Object.keys(drafts).length}</b> ชิ้น:{' '}
-              {Object.keys(drafts)
+              ✏️ พิมพ์ไว้ยังไม่บันทึก <b>{pendingCount}</b> ราคา:{' '}
+              {[
+                ...Object.keys(drafts).map((id) => rows.find((r) => r.id === Number(id))?.name ?? id),
+                ...Object.keys(buyDrafts).map((id) => `${rows.find((r) => r.id === Number(id))?.name ?? id} (ซื้อ)`),
+              ]
                 .slice(0, 6)
-                .map((id) => rows.find((r) => r.id === Number(id))?.name ?? id)
                 .join(', ')}
-              {Object.keys(drafts).length > 6 && ' …'}
+              {pendingCount > 6 && ' …'}
             </span>
             <button type="button" className="btn" onClick={() => void saveAll()} disabled={savingAll}>
               {savingAll ? 'กำลังบันทึก…' : 'บันทึกทั้งหมด'}
@@ -335,7 +351,7 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
                   </span>
                   {justSaved[r.id] ? (
                     <span className="pt__saved">✓ บันทึกแล้ว</span>
-                  ) : drafts[r.id] ? (
+                  ) : drafts[r.id] || buyDrafts[r.id] ? (
                     <span className="pt__draft">✏️ ยังไม่บันทึก</span>
                   ) : (
                     r.checkedAt && <span className="pt__checked">✓ ตรวจแล้ว {r.checkedAt.slice(0, 10)}</span>
@@ -362,7 +378,32 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
                       }
                     }}
                   />
-                  <button type="button" className="pt__save" disabled={!drafts[r.id]} onClick={() => void save(r, drafts[r.id] ?? '', false)}>
+                  <input
+                    className="pt__price pt__price--buy mono"
+                    inputMode="numeric"
+                    placeholder={r.buy !== null ? `ซื้อ ${r.buy}` : 'ซื้อ'}
+                    aria-label={`ราคาซื้อจากร้าน NPC ของ ${r.name}`}
+                    title="ราคาซื้อจากร้าน NPC"
+                    value={buyDrafts[r.id] ?? ''}
+                    onChange={(e) => setDraft(r.id, e.target.value, 'buy')}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        void save(r, e.currentTarget.value, true, 'buy');
+                      } else if (e.key === 'Escape') {
+                        searchRef.current?.focus();
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="pt__save"
+                    disabled={!drafts[r.id] && !buyDrafts[r.id]}
+                    onClick={() => {
+                      if (drafts[r.id]) void save(r, drafts[r.id], false);
+                      if (buyDrafts[r.id]) void save(r, buyDrafts[r.id], false, 'buy');
+                    }}
+                  >
                     บันทึก
                   </button>
                   {half !== null && half !== r.sell && (
@@ -393,7 +434,8 @@ export default function PriceTool({ rows: initial }: { rows: PriceRow[] }) {
           {log.slice(0, 20).map((e) => (
             <li key={e.at}>
               <span>
-                <b>{e.name}</b> <span className="mono">{fmt(e.from)} → {fmt(e.to)}</span>
+                <b>{e.name}</b>
+                {e.field === 'buy' && <em> ซื้อ</em>} <span className="mono">{fmt(e.from)} → {fmt(e.to)}</span>
                 {e.undoOf && <em> (ย้อน)</em>}
               </span>
               {!e.undoOf && !undone.has(e.at) && (

@@ -45,7 +45,7 @@ export default async function PricesAdminPage() {
   if (error) throw new Error(`items query failed: ${error.message}`);
 
   const checked = new Map<number, string>();
-  for (const edit of readPriceLog()) checked.set(edit.id, edit.at);
+  for (const edit of readPriceLog()) if (edit.field !== 'buy') checked.set(edit.id, edit.at);
 
   const rows: PriceRow[] = (data ?? [])
     .filter((it) => !isAbsentFromGame(it.id))

@@ -1,7 +1,8 @@
 'use client';
 
 // "Read new screenshots" on /admin/prices (owner, 5 Oct 2026). Opens the
-// game's screenshots of the NPC sell window in the browser, reads each row's
+// game's screenshots of an NPC's sell window or shop (buy) window in the
+// browser, reads each row's
 // item and plain price with lib/sell-reader (pixel matching, no outside
 // service), and hands the ones the owner ticks to the price list as unsaved
 // drafts -- nothing is written until they press save there.
@@ -11,12 +12,13 @@
 // that set so the next screenshot chooses it on its own.
 
 import { useEffect, useRef, useState } from 'react';
-import { readSellWindow, type IconAtlas, type Pixels } from '@/lib/sell-reader';
+import { readSellWindow, type IconAtlas, type Pixels, type WindowKind } from '@/lib/sell-reader';
 
 export interface ReaderItem {
   id: number;
   name: string;
   sell: number | null;
+  buy: number | null;
   icon: string | null;
   /** Card slots: twins like Muffler and Muffler [1] share one icon. */
   slots: number;
@@ -24,6 +26,8 @@ export interface ReaderItem {
 
 interface Found {
   key: string;
+  /** Which window the row came from: a sell price or a shop (buy) price. */
+  kind: WindowKind;
   shot: string;
   candidates: number[];
   chosen: number;
@@ -35,12 +39,18 @@ interface Found {
 
 const PICKS_KEY = 'roz-sell-picks';
 
+const KIND_TH: Record<WindowKind, string> = { sell: 'ขาย', buy: 'ซื้อ' };
+
+/** The price this window's row is about: the sell price, or the shop price. */
+const current = (item: ReaderItem | undefined, kind: WindowKind) => (kind === 'buy' ? item?.buy : item?.sell);
+
 /** "Muffler [1] · ขาย 10z (#480378)" -- enough to tell same-icon items apart. */
-function label(item: ReaderItem | undefined, id: number): string {
+function label(item: ReaderItem | undefined, id: number, kind: WindowKind): string {
   if (!item) return `#${id}`;
   const slots = item.slots > 0 ? ` [${item.slots}]` : '';
-  const sell = item.sell === null ? 'ไม่มีราคา' : `ขาย ${item.sell.toLocaleString('en-US')}z`;
-  return `${item.name}${slots} · ${sell} (#${id})`;
+  const now = current(item, kind);
+  const price = now === null || now === undefined ? 'ไม่มีราคา' : `${KIND_TH[kind]} ${now.toLocaleString('en-US')}z`;
+  return `${item.name}${slots} · ${price} (#${id})`;
 }
 
 function loadPicks(): Record<string, number> {
@@ -64,7 +74,13 @@ async function pixelsOf(src: string): Promise<{ pixels: Pixels; canvas: HTMLCanv
   return { pixels: { width: d.width, height: d.height, data: d.data }, canvas };
 }
 
-export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[]; onDrafts: (prices: Record<number, string>) => void }) {
+export default function SellShotReader({
+  items,
+  onDrafts,
+}: {
+  items: ReaderItem[];
+  onDrafts: (prices: Record<WindowKind, Record<number, string>>) => void;
+}) {
   const [shots, setShots] = useState<{ name: string; read: boolean }[]>([]);
   const [dirError, setDirError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
@@ -152,7 +168,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
           c.imageSmoothingEnabled = false;
           c.drawImage(canvas, row.iconAt.x, row.iconAt.y, 24, 24, 0, 0, 48, 48);
           const chosen = row.candidates.includes(picks[key]) ? picks[key] : row.candidates[0];
-          out.push({ key, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
+          out.push({ key, kind: result.kind, shot: name, candidates: row.candidates, chosen, price: row.price, text: row.text, crop: crop.toDataURL(), use: false });
         }
       }
       // One line per item and price: the same row on several screenshots reads
@@ -160,16 +176,16 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
       // dropped when another screenshot read that item's price.
       const merged = new Map<string, Found>();
       for (const f of out) {
-        const k = `${f.chosen}|${f.price}`;
+        const k = `${f.kind}|${f.chosen}|${f.price}`;
         if (!merged.has(k)) merged.set(k, f);
       }
       for (const [k, f] of merged) {
-        if (f.price === null && [...merged.values()].some((o) => o.chosen === f.chosen && o.price !== null)) merged.delete(k);
+        if (f.price === null && [...merged.values()].some((o) => o.kind === f.kind && o.chosen === f.chosen && o.price !== null)) merged.delete(k);
       }
-      const list = [...merged.values()].map((f) => ({ ...f, use: f.price !== null && byId.get(f.chosen)?.sell !== f.price }));
+      const list = [...merged.values()].map((f) => ({ ...f, use: f.price !== null && current(byId.get(f.chosen), f.kind) !== f.price }));
       if (append) {
         // Keep what is already on screen; add only items not listed yet.
-        setFound((prev) => [...prev, ...list.filter((f) => !prev.some((p) => p.chosen === f.chosen && p.price === f.price))]);
+        setFound((prev) => [...prev, ...list.filter((f) => !prev.some((p) => p.kind === f.kind && p.chosen === f.chosen && p.price === f.price))]);
         setReadNames((prev) => [...prev, ...names]);
       } else {
         setFound(list);
@@ -184,7 +200,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
   }
 
   function choose(i: number, id: number) {
-    setFound((prev) => prev.map((f, n) => (n === i ? { ...f, chosen: id, use: f.price !== null && byId.get(id)?.sell !== f.price } : f)));
+    setFound((prev) => prev.map((f, n) => (n === i ? { ...f, chosen: id, use: f.price !== null && current(byId.get(id), f.kind) !== f.price } : f)));
     const picks = loadPicks();
     picks[found[i].key] = id;
     try {
@@ -195,8 +211,8 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
   }
 
   async function apply() {
-    const prices: Record<number, string> = {};
-    for (const f of found) if (f.use && f.price !== null) prices[f.chosen] = String(f.price);
+    const prices: Record<WindowKind, Record<number, string>> = { sell: {}, buy: {} };
+    for (const f of found) if (f.use && f.price !== null) prices[f.kind][f.chosen] = String(f.price);
     onDrafts(prices);
     await fetch('/admin/prices/shots', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ read: readNames }) });
     setFound([]);
@@ -209,8 +225,8 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
   return (
     <section className="ssr">
       <div className="ssr__head">
-        <b>📷 อ่านราคาจากภาพแคปหน้าต่างขาย NPC</b>
-        <span className="muted">แคปในเกมด้วย Fn + PrintScreen ตอนเปิดหน้าต่างขาย แล้วสลับกลับมาหน้านี้ ระบบอ่านภาพใหม่ให้เอง</span>
+        <b>📷 อ่านราคาจากภาพแคปหน้าต่าง NPC (ขายของ / ซื้อของ)</b>
+        <span className="muted">แคปในเกมด้วย Fn + PrintScreen ตอนเปิดหน้าต่างขายหรือหน้าต่างร้าน แล้วสลับกลับมาหน้านี้ ระบบอ่านภาพใหม่ให้เอง</span>
       </div>
       {dirError && <p className="pt__msg pt__msg--err">{dirError}</p>}
       <div className="ssr__actions">
@@ -231,6 +247,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
             <thead>
               <tr>
                 <th></th>
+                <th>ราคา</th>
                 <th>ไอคอนในภาพ</th>
                 <th>ของ</th>
                 <th>อ่านได้</th>
@@ -240,7 +257,8 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
             <tbody>
               {found.map((f, i) => {
                 const item = byId.get(f.chosen);
-                const same = item?.sell === f.price;
+                const now = current(item, f.kind);
+                const same = now === f.price;
                 return (
                   <tr key={`${f.key}|${f.price}|${i}`} data-state={f.price === null ? 'unread' : same ? 'same' : 'diff'}>
                     <td>
@@ -252,6 +270,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
                         aria-label="ใช้ราคานี้"
                       />
                     </td>
+                    <td className={`ssr__kind ssr__kind--${f.kind}`}>{KIND_TH[f.kind]}</td>
                     <td>
                       <img src={f.crop} alt="" width={48} height={48} className="ssr__crop" />
                     </td>
@@ -260,7 +279,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
                         <select value={f.chosen} onChange={(e) => choose(i, Number(e.target.value))}>
                           {f.candidates.map((id) => (
                             <option key={id} value={id}>
-                              {label(byId.get(id), id)}
+                              {label(byId.get(id), id, f.kind)}
                             </option>
                           ))}
                         </select>
@@ -274,7 +293,7 @@ export default function SellShotReader({ items, onDrafts }: { items: ReaderItem[
                     </td>
                     <td className="mono">{f.price === null ? <span className="ssr__warn">อ่านไม่ออก (มีอะไรบัง)</span> : `${f.price.toLocaleString('en-US')}z`}</td>
                     <td className="mono">
-                      {item?.sell === null || item?.sell === undefined ? '—' : `${item.sell.toLocaleString('en-US')}z`}
+                      {now === null || now === undefined ? '—' : `${now.toLocaleString('en-US')}z`}
                       {f.price !== null && (same ? ' ✓ ตรง' : ' ≠')}
                     </td>
                   </tr>

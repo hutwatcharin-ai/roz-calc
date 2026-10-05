@@ -1,4 +1,4 @@
-// Every sell price the owner enters through /admin/prices, one JSON line each,
+// Every sell (or buy) price the owner enters through /admin/prices, one JSON line each,
 // in .price-log.jsonl at the project root (git-ignored: it is the owner's
 // working record, not site data). It is what makes a wrong Enter undoable --
 // each line keeps the value it replaced -- and what marks a price as checked
@@ -14,6 +14,8 @@ export interface PriceEdit {
   name: string;
   from: number | null;
   to: number | null;
+  /** 'buy' for an NPC shop price; absent means the sell price. */
+  field?: 'buy';
   /** Set on a line that reverses an earlier one. */
   undoOf?: string;
 }
