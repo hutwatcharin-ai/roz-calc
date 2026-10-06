@@ -37,7 +37,7 @@ for (const [name, viewport] of [['desktop', { width: 1280, height: 900 }], ['mob
   const el = await page.$('main');
   await el.screenshot({ path: `${outDir}/build-${name}.png` });
   if (name === 'mobile') {
-    await page.click('.buildsim__slot:nth-child(3) .buildsim__pick');
+    await page.click('.buildsim__slot--head_upper .buildsim__pick');
     await page.waitForTimeout(300);
     await page.screenshot({ path: `${outDir}/build-${name}-picker.png` });
   }

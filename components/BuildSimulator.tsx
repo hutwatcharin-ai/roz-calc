@@ -16,7 +16,7 @@
 // numbers stay in sight while stats change, and the item picker as a bottom
 // sheet on phones instead of a dropdown that ran off the screen.
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS, MAX_OPTIONS,
   OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsLeftHand, fitsSlot, gearById, slotLabel,
@@ -64,7 +64,8 @@ function costBetween(from: number, to: number): number {
 // What the open picker fills: a gear slot's item, card or enchant stone, or a
 // costume slot's stone. `at` is the gear slot or the costume slot.
 type PickKind = 'item' | 'card' | 'enchant' | 'costume';
-type Picking = { at: string; kind: PickKind; index: number } | null;
+// `editor`: opened from the piece editor, so the picker shows there, not on the tile.
+type Picking = { at: string; kind: PickKind; index: number; editor?: boolean } | null;
 const PICK_TITLE: Record<PickKind, string> = { item: 'SELECT ITEM', card: 'SELECT CARD', enchant: 'SELECT ENCHANT', costume: 'SELECT STONE' };
 
 /** An option line's name without a number: "HIT", "ตีเผ่าสัตว์ %". */
@@ -90,6 +91,15 @@ export default function BuildSimulator() {
   const [build, setBuild] = useState<Build>(EMPTY_BUILD);
   const [ready, setReady] = useState(false);
   const [picking, setPicking] = useState<Picking>(null);
+  const [eqTab, setEqTab] = useState<'gear' | 'costume'>('gear');
+  // The equipped piece open in the editor under the equip window.
+  const [active, setActive] = useState<Slot | null>(null);
+  const editorRef = useRef<HTMLDivElement>(null);
+  // On a phone the editor sits under all ten tiles: bring it into view when a tile is tapped.
+  function openEditor(slot: Slot) {
+    setActive(slot);
+    if (window.innerWidth <= 640) requestAnimationFrame(() => editorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
   const [query, setQuery] = useState('');
   const [target, setTarget] = useState<Target | null>(null);
   const [targetImg, setTargetImg] = useState<string | null>(null);
@@ -106,7 +116,11 @@ export default function BuildSimulator() {
     } catch {
       // Blocked or broken storage: start empty.
     }
-    if (start) setBuild(start);
+    if (start) {
+      setBuild(start);
+      // Open the weapon in the editor when the build has one.
+      if (start.g.weapon) setActive('weapon');
+    }
     const mob = Number(new URLSearchParams(window.location.search).get('monster'));
     if (mob > 0) void loadMonster(mob);
     setReady(true);
@@ -154,6 +168,7 @@ export default function BuildSimulator() {
       // A hat covering more head slots empties them.
       for (const s of coveredSlots(item, slot)) delete g[s];
       if (slot === 'weapon' && isTwoHanded(item.wt)) delete g.shield;
+      setActive(slot);
     }
     update({ g });
     setPicking(null);
@@ -290,6 +305,7 @@ export default function BuildSimulator() {
   const mobHits = useMemo(() => (mobs && mobQuery ? rankSuggestions(mobs, mobQuery, 8) : []), [mobs, mobQuery]);
 
   const vs = result.vs;
+  const costumeCount = COSTUME_SLOTS.reduce((n, cs) => n + (build.cos?.[cs]?.filter(Boolean).length ?? 0), 0);
   const needDex = vs?.hitShort ? build.st.dex + vs.hitShort : null;
   const needAgi = vs?.fleeShort ? build.st.agi + vs.fleeShort : null;
 
@@ -421,161 +437,231 @@ export default function BuildSimulator() {
                 </li>
               ))}
             </ul>
+            {result.skills.length > 0 && (
+              <div className="buildsim__skillbox">
+                <h3 className="buildsim__h3">เลเวลสกิล <small>ของที่ใส่มีผลตามเลเวลสกิลเหล่านี้</small></h3>
+                <ul className="buildsim__skills">
+                  {result.skills.map((name) => (
+                    <li key={name}>
+                      <span>{name}</span>
+                      <input className="mono" type="number" inputMode="numeric" min={0} max={10} aria-label={`เลเวล ${name}`}
+                        value={build.sk?.[name] ?? ''} placeholder="0" onChange={(e) => setSkill(name, Number(e.target.value))} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </section>
 
-          {/* EQUIPMENT */}
+          {/* EQUIPMENT: the equip window keeps to compact tiles; the piece you
+              tap opens in the editor under it (refine, cards, enchants,
+              options), so the window stays readable with everything on. */}
           <section className="card buildsim__panel">
             <PanelHead icon="/images/items/1116.gif" title="EQUIPMENT" meta={`ใส่แล้ว ${Object.keys(build.g).length}/${SLOTS.length}`} />
-            <ul className="buildsim__slots">
-              <li className="buildsim__doll" aria-hidden="true">
-                <span className="buildsim__dollstage">
-                  {HAS_SPRITE.has(build.cls) ? <img src={`/images/jobs/${build.cls}.png`} alt="" width={107} height={107} /> : <b>?</b>}
-                </span>
-                <b>{cls?.name}</b>
-                <small className="mono">Lv {build.lv} · Job {build.job}</small>
-              </li>
-              {/* The game's own equip window: slots down both sides, the
-                  character in the middle (grid areas in CSS). Phones list
-                  them in SLOTS order. */}
-              {SLOTS.map((slot) => {
-                const w = build.g[slot];
-                const item = w ? gearById(w.id) : null;
-                const coveredBy = SLOTS.find((s) => {
-                  const o = build.g[s];
-                  const it = o ? gearById(o.id) : null;
-                  return it && coveredSlots(it, s).includes(slot);
-                });
-                const blockedShield = slot === 'shield' && isTwoHanded(weapon?.wt);
-                const off = coveredBy || blockedShield;
-                return (
-                  <li key={slot} className={`buildsim__slot buildsim__slot--${slot}${item ? ' is-filled' : ''}${off ? ' is-off' : ''}`}>
-                    {off ? (
-                      <span className="buildsim__offnote">
-                        <em>{slotLabel(slot, build.cls)}</em>
-                        {coveredBy ? `ใช้ร่วมกับ${SLOT_TH[coveredBy]}` : `จับสองมือ: ${weapon?.n ?? ''}`}
-                      </span>
-                    ) : (
-                      <>
-                        <button type="button" className="buildsim__pick" onClick={() => openPicker({ at: slot, kind: 'item', index: 0 })}>
-                          <span className="buildsim__icon">
-                            <img src={item?.i ?? `/images/items/${SLOT_ICON[slot]}.gif`} alt="" width={24} height={24} />
-                            {item && w!.r > 0 && <b className="buildsim__refine mono">+{w!.r}</b>}
-                          </span>
-                          <span className="buildsim__pickname">
+            <div className="buildsim__tabs" role="tablist" aria-label="ชนิดของที่ใส่">
+              <button type="button" role="tab" aria-selected={eqTab === 'gear'} className={eqTab === 'gear' ? 'is-on' : undefined} onClick={() => setEqTab('gear')}>
+                อุปกรณ์ <small>{Object.keys(build.g).length}/{SLOTS.length}</small>
+              </button>
+              <button type="button" role="tab" aria-selected={eqTab === 'costume'} className={eqTab === 'costume' ? 'is-on' : undefined} onClick={() => setEqTab('costume')}>
+                คอสตูมเอนชานต์ <small>{costumeCount}</small>
+              </button>
+            </div>
+
+            {eqTab === 'gear' ? (
+              <>
+                <ul className="buildsim__slots">
+                  <li className="buildsim__doll" aria-hidden="true">
+                    <span className="buildsim__dollstage">
+                      {HAS_SPRITE.has(build.cls) ? <img src={`/images/jobs/${build.cls}.png`} alt="" width={107} height={107} /> : <b>?</b>}
+                    </span>
+                    <b>{cls?.name}</b>
+                    <small className="mono">Lv {build.lv} · Job {build.job}</small>
+                  </li>
+                  {/* The game's own equip window: slots down both sides, the
+                      character in the middle (grid areas in CSS). Phones list
+                      them two to a row in SLOTS order. */}
+                  {SLOTS.map((slot) => {
+                    const w = build.g[slot];
+                    const item = w ? gearById(w.id) : null;
+                    const coveredBy = SLOTS.find((s) => {
+                      const o = build.g[s];
+                      const it = o ? gearById(o.id) : null;
+                      return it && coveredSlots(it, s).includes(slot);
+                    });
+                    const blockedShield = slot === 'shield' && isTwoHanded(weapon?.wt);
+                    const off = coveredBy || blockedShield;
+                    return (
+                      <li key={slot} className={`buildsim__slot buildsim__slot--${slot}${item ? ' is-filled' : ''}${off ? ' is-off' : ''}${active === slot && item ? ' is-active' : ''}`}>
+                        {off ? (
+                          <span className="buildsim__offnote">
                             <em>{slotLabel(slot, build.cls)}</em>
-                            {item ? item.n : slot === 'shield' && build.cls === 'assassin' ? '+ โล่ หรือ อาวุธมือซ้าย' : '+ เลือก'}
-                            {item && (() => {
-                              const ref = refineBonusAt(item.rs, w!.r);
-                              return (
-                                <small>
-                                  {[item.atk ? `ATK ${item.atk}` : '', item.matk ? `MATK ${item.matk}` : '', item.def ? `DEF ${item.def}` : ''].filter(Boolean).join(' · ')}
-                                  {ref && <b> · ตีบวก {ref.stat} +{ref.value}</b>}
-                                </small>
-                              );
-                            })()}
+                            {coveredBy ? `ใช้ร่วมกับ${SLOT_TH[coveredBy]}` : `จับสองมือ: ${weapon?.n ?? ''}`}
                           </span>
-                        </button>
-                        {item && (
-                          <span className="buildsim__slotctl">
-                            {item.rs && (
-                              <label className="buildsim__refinepick">
-                                <span>ตีบวก</span>
-                                <select aria-label="ตีบวก" value={w!.r} onChange={(e) => setRefine(slot, Number(e.target.value))}>
-                                  {Array.from({ length: 21 }, (_, r) => <option key={r} value={r}>+{r}</option>)}
-                                </select>
-                              </label>
-                            )}
-                            {w!.c.map((cid, i) => {
-                              const card = cid ? cardById(cid) : null;
-                              return (
-                                <button key={i} type="button" className={`buildsim__socket${card ? ' is-filled' : ''}`}
-                                  aria-label={card ? `การ์ด ${card.n}` : 'ช่องการ์ดว่าง'} title={card?.n ?? 'ช่องการ์ด'}
-                                  onClick={() => openPicker({ at: slot, kind: 'card', index: i })}>
-                                  {card?.i ? <img src={card.i} alt="" width={20} height={20} /> : '◇'}
-                                </button>
-                              );
-                            })}
-                            <button type="button" className="buildsim__clear" aria-label={`ถอด${slotLabel(slot, build.cls)}`} onClick={() => setSlot(slot, null)}>×</button>
-                          </span>
-                        )}
-                        {item && w!.c.some(Boolean) && (
-                          <span className="buildsim__cardnames">
-                            {w!.c.map((cid) => (cid ? cardById(cid)?.n : null)).filter(Boolean).join(' · ')}
-                          </span>
-                        )}
-                        {item && (
-                          <div className="buildsim__extras">
-                            {(w!.e ?? []).map((sid, i) => {
-                              const st = stoneById(sid);
-                              return st ? (
-                                <button key={i} type="button" className="buildsim__stone" title="เปลี่ยน/ถอดเอนชานต์"
-                                  onClick={() => openPicker({ at: slot, kind: 'enchant', index: i })}>
-                                  {st.i && <img src={st.i} alt="" width={18} height={18} />}{st.n}
-                                </button>
-                              ) : null;
-                            })}
-                            {(w!.o ?? []).map(([k, v], i) => (
-                              <span key={i} className="buildsim__opt">
-                                <select aria-label="ชนิดออปชั่น" value={k} onChange={(e) => setOption(slot, i, [e.target.value, v])}>
-                                  {OPTION_LABELS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
-                                </select>
-                                <input className="mono" type="number" inputMode="numeric" aria-label="ค่าออปชั่น" value={v || ''} placeholder="0"
-                                  onChange={(e) => setOption(slot, i, [k, Math.max(-999, Math.min(9999, Math.floor(Number(e.target.value)) || 0))])} />
-                                <button type="button" aria-label="ลบออปชั่น" onClick={() => setOption(slot, i, null)}>×</button>
-                              </span>
-                            ))}
-                            <span className="buildsim__addrow">
-                              {(w!.e ?? []).length < MAX_ENCHANTS && (
-                                <button type="button" onClick={() => openPicker({ at: slot, kind: 'enchant', index: (w!.e ?? []).length })}>
-                                  + เอนชานต์{slot === 'armor' ? '/Essence' : ''}
-                                </button>
-                              )}
-                              {(w!.o ?? []).length < MAX_OPTIONS && (
-                                <button type="button" onClick={() => setOption(slot, (w!.o ?? []).length, ['atk', 0])}>+ ออปชั่น</button>
+                        ) : (
+                          <button type="button" className="buildsim__pick" aria-pressed={item ? active === slot : undefined}
+                            onClick={() => (item ? openEditor(slot) : openPicker({ at: slot, kind: 'item', index: 0 }))}>
+                            <span className="buildsim__icon">
+                              <img src={item?.i ?? `/images/items/${SLOT_ICON[slot]}.gif`} alt="" width={24} height={24} />
+                              {item && w!.r > 0 && <b className="buildsim__refine mono">+{w!.r}</b>}
+                            </span>
+                            <span className="buildsim__pickname">
+                              <em>{slotLabel(slot, build.cls)}</em>
+                              {item ? item.n : slot === 'shield' && build.cls === 'assassin' ? '+ โล่/อาวุธมือซ้าย' : '+ เลือก'}
+                              {item && (
+                                <span className="buildsim__pips" aria-hidden="true">
+                                  {w!.c.map((cid, i) => <i key={`c${i}`} className={cid ? 'is-card' : 'is-empty'} />)}
+                                  {(w!.e ?? []).map((_, i) => <i key={`e${i}`} className="is-stone" />)}
+                                  {(w!.o ?? []).some(([, v]) => v) && <b>ออป {(w!.o ?? []).filter(([, v]) => v).length}</b>}
+                                </span>
                               )}
                             </span>
-                          </div>
-                        )}
-                      </>
-                    )}
-                    {renderPicker(slot)}
-                  </li>
-                );
-              })}
-            </ul>
-            <label className="buildsim__check">
-              <input type="checkbox" checked={!!build.siege} onChange={(e) => update({ siege: e.target.checked || undefined })} />
-              อยู่ในวอร์ (นับผลที่ใช้ได้เฉพาะในวอร์)
-            </label>
-          </section>
-
-          {/* COSTUME: the stones costume slots take (the costume itself adds nothing). */}
-          <section className="card buildsim__panel">
-            <PanelHead icon="/images/items/6638.gif" title="COSTUME ENCHANT"
-              meta={`ใส่แล้ว ${COSTUME_SLOTS.reduce((n, cs) => n + (build.cos?.[cs]?.filter(Boolean).length ?? 0), 0)}`} />
-            <ul className="buildsim__costumes">
-              {COSTUME_SLOTS.map((cs) => {
-                const list = build.cos?.[cs] ?? [];
-                return (
-                  <li key={cs} className={`buildsim__slot${list.some(Boolean) ? ' is-filled' : ''}`}>
-                    <span className="buildsim__pickname"><em>{COSTUME_TH[cs]}</em></span>
-                    <span className="buildsim__cosstones">
-                      {Array.from({ length: COSTUME_STONES[cs] }, (_, i) => {
-                        const st = list[i] ? stoneById(list[i]) : null;
-                        return (
-                          <button key={i} type="button" className={`buildsim__stone${st ? ' is-filled' : ' is-empty'}`}
-                            onClick={() => openPicker({ at: cs, kind: 'costume', index: st ? i : list.filter(Boolean).length })}>
-                            {st?.i && <img src={st.i} alt="" width={18} height={18} />}
-                            {st ? st.n : '+ ใส่หิน'}
                           </button>
-                        );
-                      })}
-                    </span>
-                    {renderPicker(cs)}
-                  </li>
-                );
-              })}
-            </ul>
+                        )}
+                        {!picking?.editor && renderPicker(slot)}
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                {(() => {
+                  const slot = active;
+                  const w = slot ? build.g[slot] : undefined;
+                  const item = w ? gearById(w.id) : null;
+                  if (!slot || !w || !item) {
+                    return <p className="buildsim__edithint">▶ แตะของที่ใส่แล้วเพื่อตีบวก ใส่การ์ด เอนชานต์ และออปชั่น</p>;
+                  }
+                  const ref = refineBonusAt(item.rs, w.r);
+                  return (
+                    <div ref={editorRef} className="buildsim__editor" aria-label={`แก้${slotLabel(slot, build.cls)}`}>
+                      <div className="buildsim__edithead">
+                        <span className="buildsim__icon buildsim__icon--big">
+                          {item.i && <img src={item.i} alt="" width={24} height={24} />}
+                          {w.r > 0 && <b className="buildsim__refine mono">+{w.r}</b>}
+                        </span>
+                        <div>
+                          <em>{slotLabel(slot, build.cls)}</em>
+                          <b>{item.n}{item.sl ? ` [${item.sl}]` : ''}</b>
+                          <small>
+                            {[item.wt ? WEAPON_TH[item.wt] ?? '' : '', item.atk ? `ATK ${item.atk}` : '', item.matk ? `MATK ${item.matk}` : '', item.def ? `DEF ${item.def}` : '', item.lv ? `Lv ${item.lv}` : '']
+                              .filter(Boolean)
+                              .join(' · ')}
+                          </small>
+                        </div>
+                        <span className="buildsim__editbtns">
+                          <button type="button" onClick={() => openPicker({ at: slot, kind: 'item', index: 0, editor: true })}>เปลี่ยน</button>
+                          <button type="button" onClick={() => setSlot(slot, null)}>ถอด</button>
+                        </span>
+                      </div>
+
+                      <div className="buildsim__editrow">
+                        <span className="buildsim__editlabel">ตีบวก</span>
+                        {item.rs ? (
+                          <span className="buildsim__refinebar">
+                            <select aria-label="ตีบวก" value={w.r} onChange={(e) => setRefine(slot, Number(e.target.value))}>
+                              {Array.from({ length: 21 }, (_, r) => <option key={r} value={r}>+{r}</option>)}
+                            </select>
+                            {ref ? <b className="mono">{ref.stat} +{ref.value}</b> : <small className="muted">ยังไม่ได้ตีบวก</small>}
+                          </span>
+                        ) : (
+                          <small className="muted">ของชิ้นนี้ตีบวกไม่ได้</small>
+                        )}
+                      </div>
+
+                      {w.c.length > 0 && (
+                        <div className="buildsim__editrow">
+                          <span className="buildsim__editlabel">การ์ด</span>
+                          <span className="buildsim__chips">
+                            {w.c.map((cid, i) => {
+                              const card = cid ? cardById(cid) : null;
+                              return (
+                                <button key={i} type="button" className={`buildsim__chip buildsim__chip--card${card ? '' : ' is-empty'}`}
+                                  onClick={() => openPicker({ at: slot, kind: 'card', index: i, editor: true })}>
+                                  {card?.i && <img src={card.i} alt="" width={18} height={18} />}
+                                  {card ? card.n : '+ การ์ด'}
+                                </button>
+                              );
+                            })}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="buildsim__editrow">
+                        <span className="buildsim__editlabel">{slot === 'armor' ? 'เอนชานต์ / Essence' : 'เอนชานต์'}</span>
+                        <span className="buildsim__chips">
+                          {(w.e ?? []).map((sid, i) => {
+                            const st = stoneById(sid);
+                            return st ? (
+                              <button key={i} type="button" className="buildsim__chip buildsim__chip--stone"
+                                onClick={() => openPicker({ at: slot, kind: 'enchant', index: i, editor: true })}>
+                                {st.i && <img src={st.i} alt="" width={18} height={18} />}{st.n}
+                              </button>
+                            ) : null;
+                          })}
+                          {(w.e ?? []).length < MAX_ENCHANTS && (
+                            <button type="button" className="buildsim__chip is-empty"
+                              onClick={() => openPicker({ at: slot, kind: 'enchant', index: (w.e ?? []).length, editor: true })}>
+                              + เพิ่ม
+                            </button>
+                          )}
+                        </span>
+                      </div>
+
+                      <div className="buildsim__editrow">
+                        <span className="buildsim__editlabel">ออปชั่น</span>
+                        <span className="buildsim__optlist">
+                          {(w.o ?? []).map(([k, v], i) => (
+                            <span key={i} className="buildsim__opt">
+                              <select aria-label="ชนิดออปชั่น" value={k} onChange={(e) => setOption(slot, i, [e.target.value, v])}>
+                                {OPTION_LABELS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
+                              </select>
+                              <input className="mono" type="number" inputMode="numeric" aria-label="ค่าออปชั่น" value={v || ''} placeholder="0"
+                                onChange={(e) => setOption(slot, i, [k, Math.max(-999, Math.min(9999, Math.floor(Number(e.target.value)) || 0))])} />
+                              <button type="button" aria-label="ลบออปชั่น" onClick={() => setOption(slot, i, null)}>×</button>
+                            </span>
+                          ))}
+                          {(w.o ?? []).length < MAX_OPTIONS && (
+                            <button type="button" className="buildsim__chip is-empty" onClick={() => setOption(slot, (w.o ?? []).length, ['atk', 0])}>
+                              + เพิ่มออปชั่น
+                            </button>
+                          )}
+                        </span>
+                      </div>
+                      {picking?.editor && renderPicker(slot)}
+                    </div>
+                  );
+                })()}
+
+                <label className="buildsim__check">
+                  <input type="checkbox" checked={!!build.siege} onChange={(e) => update({ siege: e.target.checked || undefined })} />
+                  อยู่ในวอร์ (นับผลที่ใช้ได้เฉพาะในวอร์)
+                </label>
+              </>
+            ) : (
+              /* COSTUME: the stones costume slots take (the costume itself adds nothing). */
+              <ul className="buildsim__costumes">
+                {COSTUME_SLOTS.map((cs) => {
+                  const list = build.cos?.[cs] ?? [];
+                  return (
+                    <li key={cs} className={`buildsim__slot${list.some(Boolean) ? ' is-filled' : ''}`}>
+                      <span className="buildsim__pickname"><em>{COSTUME_TH[cs]}</em></span>
+                      <span className="buildsim__chips">
+                        {Array.from({ length: COSTUME_STONES[cs] }, (_, i) => {
+                          const st = list[i] ? stoneById(list[i]) : null;
+                          return (
+                            <button key={i} type="button" className={`buildsim__chip buildsim__chip--stone${st ? '' : ' is-empty'}`}
+                              onClick={() => openPicker({ at: cs, kind: 'costume', index: st ? i : list.filter(Boolean).length })}>
+                              {st?.i && <img src={st.i} alt="" width={18} height={18} />}
+                              {st ? st.n : '+ ใส่หิน'}
+                            </button>
+                          );
+                        })}
+                      </span>
+                      {renderPicker(cs)}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </section>
 
           {/* FOOD */}
@@ -601,21 +687,6 @@ export default function BuildSimulator() {
               ))}
             </select>
           </section>
-
-          {result.skills.length > 0 && (
-            <section className="card buildsim__panel">
-              <PanelHead icon="/images/items/7433.gif" title="SKILL LV" meta="ผลที่ขึ้นกับเลเวลสกิล" />
-              <ul className="buildsim__skills">
-                {result.skills.map((name) => (
-                  <li key={name}>
-                    <span>{name}</span>
-                    <input className="mono" type="number" inputMode="numeric" min={0} max={10} aria-label={`เลเวล ${name}`}
-                      value={build.sk?.[name] ?? ''} placeholder="0" onChange={(e) => setSkill(name, Number(e.target.value))} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
         </div>
 
         <aside className="buildsim__side">
