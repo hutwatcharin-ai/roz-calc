@@ -1,4 +1,5 @@
 // app/database/skills/page.tsx
+import skillExtra from '@/data/skill-level-extra.json';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -35,6 +36,8 @@ interface SkillLevel {
 // Milliseconds are what the source stores; seconds are what a player thinks
 // in. 1500 reads as 1.5 วิ, 800 as 0.8 วิ, and a null stays a dash rather
 // than becoming a zero.
+const SKILL_EXTRA = (skillExtra as { skills: Record<string, Record<string, { cv?: number; cf?: number; acd?: number; cd?: number; h?: number; aspd?: number }>> }).skills;
+
 function seconds(ms: number | null): string {
   if (ms === null) return '—';
   if (ms === 0) return 'ทันที';
@@ -365,9 +368,14 @@ export default async function SkillsPage({
                             {(() => {
                               const levels = levelsBySkill.get(s.slug) ?? [];
                               if (levels.length === 0) return null;
+                              // Cast split, after-cast delay, cooldown and hits from
+                              // roz.prontera.info (data/skill-level-extra.json).
+                              const extra = (l: SkillLevel) => SKILL_EXTRA[l.skill_slug]?.[String(l.level)] ?? {};
                               const hasRange = levels.some((l) => l.attack_range !== null);
-                              const hasCast = levels.some((l) => l.cast_time_ms !== null);
-                              const hasCooldown = levels.some((l) => l.cooldown_ms !== null);
+                              const hasCast = levels.some((l) => l.cast_time_ms !== null || extra(l).cv || extra(l).cf);
+                              const hasCooldown = levels.some((l) => l.cooldown_ms !== null || extra(l).cd);
+                              const hasDelay = levels.some((l) => extra(l).acd || extra(l).aspd);
+                              const hasHits = levels.some((l) => (extra(l).h ?? 0) > 1);
                               const hasSp = levels.some((l) => l.sp_cost !== null);
                               return (
                                 <table className="data-table" style={{ marginTop: 10 }}>
@@ -378,7 +386,9 @@ export default async function SkillsPage({
                                       {hasSp && <th className="num">SP</th>}
                                       {hasRange && <th className="num">ระยะ</th>}
                                       {hasCast && <th className="num">ร่าย</th>}
+                                      {hasDelay && <th className="num">ดีเลย์</th>}
                                       {hasCooldown && <th className="num">คูลดาวน์</th>}
+                                      {hasHits && <th className="num">ตี</th>}
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -388,8 +398,16 @@ export default async function SkillsPage({
                                         <td data-label="ผล">{l.effect ?? '—'}</td>
                                         {hasSp && <td data-label="SP" className="num mono">{l.sp_cost ?? '—'}</td>}
                                         {hasRange && <td data-label="ระยะ" className="num mono">{l.attack_range ?? '—'}</td>}
-                                        {hasCast && <td data-label="ร่าย" className="num mono">{seconds(l.cast_time_ms)}</td>}
-                                        {hasCooldown && <td data-label="คูลดาวน์" className="num mono">{seconds(l.cooldown_ms)}</td>}
+                                        {hasCast && (
+                                          <td data-label="ร่าย" className="num mono">
+                                            {extra(l).cv || extra(l).cf
+                                              ? `${seconds(extra(l).cv ?? 0)} + คงที่ ${seconds(extra(l).cf ?? 0)}`
+                                              : seconds(l.cast_time_ms)}
+                                          </td>
+                                        )}
+                                        {hasDelay && <td data-label="ดีเลย์" className="num mono">{extra(l).aspd ? 'ตาม ASPD' : seconds(extra(l).acd ?? null)}</td>}
+                                        {hasCooldown && <td data-label="คูลดาวน์" className="num mono">{seconds(l.cooldown_ms ?? extra(l).cd ?? null)}</td>}
+                                        {hasHits && <td data-label="ตี" className="num mono">{(extra(l).h ?? 1) > 1 ? `${extra(l).h} ครั้ง` : '—'}</td>}
                                       </tr>
                                     ))}
                                   </tbody>
