@@ -7,12 +7,17 @@
 
 import { bonusText, conditionText, isPenalty, itemEffects, ITEM_EFFECTS_SOURCE } from '@/lib/item-effects';
 
-export default function ItemEffectsCard({ id }: { id: number }) {
+/**
+ * `onlyIfMore`: a card's hero already prints its effect, so a card with a
+ * single unconditional bonus would repeat it; the card page passes this.
+ */
+export default function ItemEffectsCard({ id, onlyIfMore = false }: { id: number; onlyIfMore?: boolean }) {
   const effects = itemEffects(id);
   const groups = effects?.g ?? [];
   if (groups.length === 0) return null;
   const always = groups.filter((g) => !conditionText(g.c)).flatMap((g) => g.b);
   const conditional = groups.filter((g) => conditionText(g.c));
+  if (onlyIfMore && conditional.length === 0 && always.length < 2) return null;
 
   return (
     <section className="card effects" style={{ marginTop: 20 }} aria-labelledby="effects-title">

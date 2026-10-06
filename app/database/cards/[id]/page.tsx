@@ -166,7 +166,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
       />
       <InSetBox itemId={item.id} />
       <ItemGuideRefs itemId={item.id} />
-      <ItemEffectsCard id={item.id} />
+      <ItemEffectsCard id={item.id} onlyIfMore />
 
       {english.length > 0 && (
         <div className="card card--cyan" style={{ marginTop: 20 }}>
