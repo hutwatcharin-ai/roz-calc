@@ -62,7 +62,7 @@ function SkillCell({
   const locked = blocking.length > 0 && level === 0;
   // Conditions on one line, the same set the browser tooltip used to carry.
   const conditions = [
-    skill.free ? 'สกิลเควส ได้มาพร้อมอาชีพ ไม่ต้องทำเควส ไม่กินแต้ม' : null,
+    skill.free ? 'สกิลเควส ได้มาพร้อมอาชีพ ไม่ต้องทำเควส' : null,
     skill.required_job_level !== null ? `ต้อง Job Lv ${skill.required_job_level}` : null,
     locked ? `ต้องมี ${blocking.map((b) => `${b.name} Lv ${b.level}`).join(' + ')} ก่อน` : null,
   ].filter(Boolean) as string[];
@@ -118,7 +118,7 @@ function SkillCell({
       {skill.free ? (
         // Owner, 6 Oct 2026: quest skills come with the job in Zero, so the
         // card says so instead of offering buttons nobody needs to press.
-        <p className="skillcell__auto">ได้อัตโนมัติ · ไม่กินแต้ม</p>
+        <p className="skillcell__auto">ได้อัตโนมัติ</p>
       ) : (
         <div className="skillcell__row">
           <button type="button" onClick={onLower} disabled={level === 0} aria-label={`ลด ${skill.name}`}>
