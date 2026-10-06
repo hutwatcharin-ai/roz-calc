@@ -22,7 +22,8 @@ export interface WarpExit {
 interface WarpMap {
   w: number;
   h: number;
-  pic: string;
+  /** null for an indoor map: the client has no minimap for it. */
+  pic: string | null;
   exits: WarpExit[];
   from: [string, boolean][];
 }
@@ -49,7 +50,7 @@ export function warpMapName(code: string): string {
 }
 
 export interface MapWarps {
-  picture: string;
+  picture: string | null;
   w: number;
   h: number;
   /** Numbered on the minimap, in list order. */
@@ -64,7 +65,7 @@ export function mapWarps(code: string): MapWarps | null {
   if (!m) return null;
   const byName = (a: WarpExit, b: WarpExit) => warpMapName(a.to).localeCompare(warpMapName(b.to));
   return {
-    picture: `/images/maps/navi/${m.pic}.webp`,
+    picture: m.pic ? `/images/maps/navi/${m.pic}.webp` : null,
     w: m.w,
     h: m.h,
     exits: m.exits.filter((e) => e.pts.length < DOOR_MIN).sort(byName),

@@ -56,13 +56,22 @@ export interface Npc {
 
 const data = file as unknown as { _meta: Record<string, unknown>; mapNames: Record<string, string>; npcs: Npc[] };
 
+// Nordfeld's townsfolk reached the source as sprite file names -- "Roz M
+// Dwarf Hat", "Portal 2" -- 91 of them, none with a quest or goods. They are
+// not names in the game; marking them unnamed keeps them off town pages and
+// out of the NPC pages (owner, 6 Oct 2026).
+const SPRITE_LABEL = /^(Roz |Portal \d+$)/;
+
 // A shopkeeper's goods point at the Zero shop copy, not rAthena's classic id;
 // goods with no shop copy in Zero drop off the list (lib/classic-twins).
-export const ALL_NPCS: Npc[] = data.npcs.map((npc) =>
-  npc.sells.length
-    ? { ...npc, sells: [...new Set(npc.sells.map(shopIdOf).filter((id): id is number => id !== null))] }
-    : npc,
-);
+// The file lists named NPCs first; the relabelled ones move down with the
+// other sprite labels (a stable sort keeps every other order as it was).
+export const ALL_NPCS: Npc[] = data.npcs.map((npc) => {
+  const named = npc.hasName && !SPRITE_LABEL.test(npc.name) ? npc : { ...npc, hasName: false };
+  return named.sells.length
+    ? { ...named, sells: [...new Set(named.sells.map(shopIdOf).filter((id): id is number => id !== null))] }
+    : named;
+}).sort((a, b) => Number(b.hasName) - Number(a.hasName));
 export const NPC_MAP_NAMES: Record<string, string> = data.mapNames;
 
 const bySlug = new Map(ALL_NPCS.map((npc) => [npc.slug, npc]));

@@ -18,6 +18,7 @@ import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { itemHref } from '@/lib/item-href';
 import { notableDrops, type MapDropRow, type NotableDrop } from '@/lib/map-drops';
 import { townByCode, townPlaces, type Town } from '@/lib/towns';
+import { mapWarps, warpMapName } from '@/lib/map-warps';
 import type { Npc } from '@/lib/npcs';
 
 export const revalidate = 86400;
@@ -53,6 +54,12 @@ export async function generateMetadata({ params }: { params: { code: string } })
     const town = townByCode(code);
     if (!town) return { title: 'ไม่พบแมพนี้' };
     const shown = town.nameTh ? `${town.nameTh} (${town.nameEn})` : town.nameEn;
+    if (town.kind === 'passage') {
+      return {
+        title: `${shown} — ทางผ่าน วาร์ป /navi`,
+        description: `${town.nameEn} (${code}) ใน RO Zero: แมพทางผ่านเข้าดันเจี้ยน วาร์ปไปที่ไหนบ้าง พร้อมพิกัด /navi และ NPC ในแมพ`,
+      };
+    }
     return {
       title: `${shown} — เมือง วาร์ป NPC ร้านค้า`,
       description: `เมือง ${town.nameEn} (${code}) ใน RO Zero: แผนที่ย่อพร้อมจุดวาร์ปออกไปแมพรอบเมือง พิกัด /navi รายชื่อ NPC ร้านค้า และเควสในเมือง`,
@@ -342,6 +349,8 @@ async function TownView({ town }: { town: Town }) {
   const places = townPlaces(code);
   const npcCount = places.reduce((n, p) => n + p.npcs.length, 0);
   const shops = places.reduce((n, p) => n + p.npcs.filter((npc) => npc.sells.length > 0).length, 0);
+  const warps = mapWarps(code);
+  const leadsTo = [...(warps?.exits ?? []), ...(warps?.doors ?? [])].filter((e, i, all) => all.findIndex((o) => o.to === e.to) === i);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -357,34 +366,47 @@ async function TownView({ town }: { town: Town }) {
           { name, path: `/database/maps/${code}` },
         ])}
       />
-      <p className="arckicker">TOWN · {code}</p>
+      <p className="arckicker">{town.kind === 'passage' ? 'WAY IN' : 'TOWN'} · {code}</p>
       <h1 className="pagehead__title arcname">{name}</h1>
       <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>
         {town.nameTh ? `${town.nameEn} · ${code}` : code}
       </p>
-      <p style={{ color: 'var(--dim)', marginTop: 10 }}>
-        เมือง · ไม่มีมอนสเตอร์ · NPC {npcCount} คน{shops > 0 && ` · ร้านค้า ${shops} ร้าน`}
-        {(quests ?? []).length > 0 && ` · เควส ${quests!.length}`}
-      </p>
+      {town.kind === 'passage' ? (
+        // A way through: what it leads to is the point of the page.
+        <p style={{ color: 'var(--dim)', marginTop: 10 }}>
+          ทางผ่าน · ไม่มีมอนสเตอร์ · ต่อไปได้ที่{' '}
+          {leadsTo.map((exit, i) => (
+            <span key={exit.to}>
+              {i > 0 && ', '}
+              {exit.page ? <Link href={`/database/maps/${encodeURIComponent(exit.to)}`}>{warpMapName(exit.to)}</Link> : warpMapName(exit.to)}
+            </span>
+          ))}
+        </p>
+      ) : (
+        <p style={{ color: 'var(--dim)', marginTop: 10 }}>
+          เมือง · ไม่มีมอนสเตอร์{npcCount > 0 && ` · NPC ${npcCount} คน`}{shops > 0 && ` · ร้านค้า ${shops} ร้าน`}
+          {(quests ?? []).length > 0 && ` · เควส ${quests!.length}`}
+        </p>
+      )}
 
       <MapWarps code={code} name={name} />
 
       {(quests ?? []).length > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
-          <h2 className="section-title">เควสที่เกิดในเมืองนี้ ({quests!.length})</h2>
+          <h2 className="section-title">{town.kind === 'passage' ? 'เควสที่เกิดในแมพนี้' : 'เควสที่เกิดในเมืองนี้'} ({quests!.length})</h2>
           <QuestList quests={quests!} />
         </div>
       )}
 
       {npcCount > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
-          <h2 className="section-title">NPC ในเมือง ({npcCount})</h2>
+          <h2 className="section-title">{town.kind === 'passage' ? 'NPC ในแมพนี้' : 'NPC ในเมือง'} ({npcCount})</h2>
           {places.map((place) =>
             place.npcs.length === 0 ? null : (
               <div key={place.code}>
                 {places.length > 1 && (
                   <h3 className="mapdrops__title">
-                    {place.name || 'ในเมือง'} <span className="muted mono" style={{ fontSize: 12 }}>{place.code}</span>
+                    {place.name || (town.kind === 'passage' ? 'ในแมพนี้' : 'ในเมือง')} <span className="muted mono" style={{ fontSize: 12 }}>{place.code}</span>
                   </h3>
                 )}
                 <NpcList npcs={place.npcs} />

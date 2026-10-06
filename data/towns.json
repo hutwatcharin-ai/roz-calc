@@ -1,21 +1,104 @@
 {
   "_meta": {
     "what": "Towns that get a page at /database/maps/<code> although nothing spawns there (owner, 6 Oct 2026: town maps like Geffen had no page). Read by lib/towns.ts and scripts/build-map-warps.py. Only towns open on Global; a closed town (xmas, gonryun...) joins the day its area opens.",
-    "nameTh": "Only where the site already uses a Thai name (data/map-regions.ts); no invented ones."
+    "nameTh": "Only where the site already uses a Thai name (data/map-regions.ts); no invented ones.",
+    "passages": "Maps walked through on the way into a dungeon (a dock, a lobby, a castle hall): the round cells of the world map grid. Same page as a town, labelled as a way through (owner, 6 Oct 2026)."
   },
   "towns": [
-    { "code": "prontera", "nameEn": "Prontera", "nameTh": "พรอนเทรา" },
-    { "code": "izlude", "nameEn": "Izlude", "nameTh": "อิซลูด" },
-    { "code": "geffen", "nameEn": "Geffen", "nameTh": "เกฟเฟน" },
-    { "code": "payon", "nameEn": "Payon", "nameTh": "พะยอน" },
-    { "code": "pay_arche", "nameEn": "Payon Archer Village" },
-    { "code": "alberta", "nameEn": "Alberta", "nameTh": "อัลเบอร์ตา" },
-    { "code": "morocc", "nameEn": "Morroc", "nameTh": "มอร็อค" },
-    { "code": "moc_ruins", "nameEn": "Morroc Ruins" },
-    { "code": "aldebaran", "nameEn": "Aldebaran", "nameTh": "อัลเดบารัน" },
-    { "code": "comodo", "nameEn": "Comodo", "nameTh": "โคโมโด" },
-    { "code": "umbala", "nameEn": "Umbala", "nameTh": "อุมบาลา" },
-    { "code": "prt_monk", "nameEn": "St. Capitolina Abbey" },
-    { "code": "nordfeld", "nameEn": "Nordfeld" }
+    {
+      "code": "prontera",
+      "nameEn": "Prontera",
+      "nameTh": "พรอนเทรา"
+    },
+    {
+      "code": "izlude",
+      "nameEn": "Izlude",
+      "nameTh": "อิซลูด"
+    },
+    {
+      "code": "geffen",
+      "nameEn": "Geffen",
+      "nameTh": "เกฟเฟน"
+    },
+    {
+      "code": "payon",
+      "nameEn": "Payon",
+      "nameTh": "พะยอน"
+    },
+    {
+      "code": "pay_arche",
+      "nameEn": "Payon Archer Village"
+    },
+    {
+      "code": "alberta",
+      "nameEn": "Alberta",
+      "nameTh": "อัลเบอร์ตา"
+    },
+    {
+      "code": "morocc",
+      "nameEn": "Morroc",
+      "nameTh": "มอร็อค"
+    },
+    {
+      "code": "moc_ruins",
+      "nameEn": "Morroc Ruins"
+    },
+    {
+      "code": "aldebaran",
+      "nameEn": "Aldebaran",
+      "nameTh": "อัลเดบารัน"
+    },
+    {
+      "code": "comodo",
+      "nameEn": "Comodo",
+      "nameTh": "โคโมโด"
+    },
+    {
+      "code": "umbala",
+      "nameEn": "Umbala",
+      "nameTh": "อุมบาลา"
+    },
+    {
+      "code": "prt_monk",
+      "nameEn": "St. Capitolina Abbey"
+    },
+    {
+      "code": "nordfeld",
+      "nameEn": "Nordfeld"
+    }
+  ],
+  "passages": [
+    {
+      "code": "alb2trea",
+      "nameEn": "Alberta Island"
+    },
+    {
+      "code": "alde_gld",
+      "nameEn": "Luina"
+    },
+    {
+      "code": "gef_tower",
+      "nameEn": "Geffen Tower"
+    },
+    {
+      "code": "in_orcs01",
+      "nameEn": "Inside Orc Village"
+    },
+    {
+      "code": "izlu2dun",
+      "nameEn": "Byalan Island"
+    },
+    {
+      "code": "pay_gld",
+      "nameEn": "Greenwood Lake"
+    },
+    {
+      "code": "prt_cas",
+      "nameEn": "Central Palace of Prontera"
+    },
+    {
+      "code": "prt_gld",
+      "nameEn": "Valkyrie Realm"
+    }
   ]
 }

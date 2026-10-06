@@ -10,7 +10,9 @@ export interface WorldGridView {
   /** Fields, towns and dungeon floors, positioned in grid pixels. */
   entries: WorldMapEntry[];
   /** Each dungeon's way in, anchor to first floor, in grid pixels. */
-  lines: { dungeon: string; anchor: string; points: { x: number; y: number }[] }[];
+  lines: { dungeon: string; anchor: string; always?: boolean; points: { x: number; y: number }[] }[];
+  /** Regions boxed off the grid (Nordfeld), with the line that leads there. */
+  frames?: { code: string; x: number; y: number; width: number; height: number; label: string }[];
   /** A name over each dungeon cluster. */
   labels: { dungeon: string; x: number; y: number; text: string }[];
   width: number;
@@ -290,11 +292,16 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
             {mode === 'atlas' && regions.map((region) => <span key={region.id} className="worldmap__region-label" style={{ left: region.x, top: region.y, color: region.color }}>{region.label}</span>)}
             {mode === 'grid' && grid && (
               <svg className="worldmap__gridlines" width={grid.width} height={grid.height} aria-hidden="true">
-                {grid.lines.filter((l) => traced.has(l.dungeon)).map((l) => (
-                  <polyline key={l.dungeon} points={l.points.map((p) => `${p.x},${p.y}`).join(' ')} />
+                {grid.lines.filter((l) => l.always || traced.has(l.dungeon)).map((l) => (
+                  <polyline key={l.dungeon} className={l.always && !traced.has(l.dungeon) ? 'is-always' : undefined} points={l.points.map((p) => `${p.x},${p.y}`).join(' ')} />
                 ))}
               </svg>
             )}
+            {mode === 'grid' && grid?.frames?.map((frame) => (
+              <div key={frame.code} className="worldmap__frame" style={{ left: frame.x, top: frame.y, width: frame.width, height: frame.height }} aria-hidden="true">
+                <span>{frame.label}</span>
+              </div>
+            ))}
             {mode === 'grid' && grid && grid.labels.map((label) => (
               <span key={label.dungeon} className={`worldmap__grouplabel${traced.has(label.dungeon) ? ' is-traced' : ''}`} style={{ left: label.x, top: label.y }}>{label.text}</span>
             ))}

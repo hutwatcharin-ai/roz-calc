@@ -94,7 +94,8 @@ channel_of = links_file['channelOf']
 base = lambda c: channel_of.get(c, c)  # noqa: E731
 pages = page_codes()
 # Towns have a page too though nothing spawns there (data/towns.json).
-for town in json.load(open(os.path.join(ROOT, 'data', 'towns.json'), encoding='utf-8'))['towns']:
+_places = json.load(open(os.path.join(ROOT, 'data', 'towns.json'), encoding='utf-8'))
+for town in _places['towns'] + _places.get('passages', []):
     pages.setdefault(town['code'], town['nameEn'])
 
 
@@ -228,11 +229,15 @@ for code, entry in sorted(maps.items()):
     )
     size = gat_size(code) or gat_size(base(code))
     bmp = os.path.join(MINI, pic + '.bmp')
-    if not size or not os.path.exists(bmp):
+    if not size:
         continue
     w, h = size
-    target = os.path.join(OUT_IMG, pic + '.webp')
-    if not os.path.exists(target):
+    # Indoor maps (gef_tower, prt_cas) have no minimap in the client: the
+    # page lists their warps without a picture to place them on.
+    if not os.path.exists(bmp):
+        pic = None
+    target = os.path.join(OUT_IMG, f'{pic}.webp')
+    if pic and not os.path.exists(target):
         a = np.array(Image.open(bmp).convert('RGBA'))
         magenta = (a[:, :, 0] > 240) & (a[:, :, 1] < 16) & (a[:, :, 2] > 240)
         a[magenta, 3] = 0
@@ -246,7 +251,7 @@ for code, entry in sorted(maps.items()):
 
 # Maps the English name table has not caught up with (Nordfeld is only in the
 # Korean table, as 노르트펠트).
-EXTRA_NAMES = {'nordfeld': 'Nordfeld'}
+EXTRA_NAMES = {'nordfeld': 'Nordfeld', 'nrd_in': 'Nordfeld Interior'}
 
 
 # Several maps share one name ("Geffen Field" is gef_fild00 to 14); a list of

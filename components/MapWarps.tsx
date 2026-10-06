@@ -22,11 +22,12 @@ export default function MapWarps({ code, name }: { code: string; name: string })
         ทางเชื่อม · วาร์ป
       </h2>
       <p className="muted warps__lead">
-        เลขบนแผนที่ตรงกับรายการ · <span className="warps__key warps__key--portal">ประตูวาร์ป</span>{' '}
+        {warps.picture && 'เลขบนแผนที่ตรงกับรายการ · '}<span className="warps__key warps__key--portal">ประตูวาร์ป</span>{' '}
         <span className="warps__key warps__key--npc">NPC พาไป</span> · ก๊อป <code className="mono">/navi</code> ไปวางในแชต
         เกมจะนำทางไปที่ประตู
       </p>
-      <div className="warps__lay">
+      <div className={warps.picture ? 'warps__lay' : undefined}>
+        {warps.picture && (
         <figure className="warps__map">
           <img src={warps.picture} alt={`แผนที่ย่อ ${name} พร้อมจุดวาร์ป`} width={512} height={512} loading="lazy" decoding="async" />
           {warps.doors.flatMap((exit) =>
@@ -61,6 +62,7 @@ export default function MapWarps({ code, name }: { code: string; name: string })
           )}
           <figcaption>แผนที่ย่อจากไฟล์ของตัวเกม</figcaption>
         </figure>
+        )}
 
         <div className="warps__side">
           {warps.exits.length > 0 && (

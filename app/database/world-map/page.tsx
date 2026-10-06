@@ -22,6 +22,7 @@ import mapLinks from '@/data/map-links.json';
 import layout from '@/data/world-map-layout.json';
 import mapPictures from '@/public/images/maps/full/_index.json';
 import { layoutGrid } from '@/lib/world-grid';
+import { mapWarps, warpMapName } from '@/lib/map-warps';
 import type { WorldGridView } from '@/components/WorldMap';
 
 // Towns drawn as cells in the grid view: every place players walk out of onto
@@ -41,7 +42,27 @@ const WAY_IN_BY_HAND: Record<string, string[]> = {
 // Nordfeld: a quest from the NPC in north Prontera sends you to one in Alberta,
 // who takes you there; its fields are not in the client files we hold
 // (youtube.com/watch?v=QIPSG6aKCDI, 4:00-4:48).
-const OUTPOSTS = [{ code: 'nordfeld', from: 'alberta', name: 'Nordfeld', note: 'เมืองนอกแผนที่ · ไปได้จาก NPC ในเมือง Alberta (รับเควสจาก NPC ทางเหนือของ Prontera ก่อน) · ไม่มีวาร์ปไปแมพอื่น' }];
+// Nordfeld has maps of its own (owner, 6 Oct 2026, from the game's region
+// map): town, plains, hills, then the cave -- boxed off the grid as one row.
+const OUTPOSTS = [{
+  code: 'nordfeld', from: 'alberta', name: 'Nordfeld',
+  note: 'เมืองนอกแผนที่ · ไปได้จาก NPC ในเมือง Alberta (รับเควสจาก NPC ทางเหนือของ Prontera ก่อน) · เดินต่อไปทุ่ง เนิน และถ้ำ Nordfeld',
+  chain: ['nrd_fild01', 'nrd_fild02', 'nrd_dun01', 'nrd_dun02'],
+}];
+const OUTPOST_MAPS = new Map(OUTPOSTS.flatMap((o) => o.chain.map((code) => [code, o] as const)));
+// Which side of a map its warp to another stands on, from the client's
+// navigation table (lib/map-warps): a passage cell goes on that side.
+function exitSide(from: string, to: string): [number, number] | null {
+  const warps = mapWarps(from);
+  const exit = [...(warps?.exits ?? []), ...(warps?.doors ?? [])].find((e) => e.to === to);
+  if (!warps || !exit) return null;
+  const [x, y] = exit.pts[0];
+  const dx = x / warps.w - 0.5;
+  const dy = 0.5 - y / warps.h; // rows count from the bottom
+  // A door near the middle has no side; a third of the way out does.
+  return [Math.abs(dx) > 1 / 6 ? Math.sign(dx) : 0, Math.abs(dy) > 1 / 6 ? Math.sign(dy) : 0];
+}
+
 const CELL = 64;
 const PITCH = 70;
 
@@ -148,6 +169,7 @@ export default async function WorldMapPage() {
     tiles: tiles.map((t) => ({ code: t.mapCode, x: rawTiles[t.mapCode]?.x ?? t.x, y: rawTiles[t.mapCode]?.y ?? t.y })),
     towns,
     dungeons: [...gridDungeons.values()],
+    exitSide,
     outposts: OUTPOSTS,
   });
   const centre = (col: number, row: number) => ({ x: col * PITCH + PITCH / 2, y: row * PITCH + PITCH / 2 });
@@ -157,6 +179,16 @@ export default async function WorldMapPage() {
   const gridEntries: WorldMapEntry[] = laid.cells.map((cell) => {
     const at = centre(cell.col, cell.row);
     const box = { x: at.x, y: at.y, width: CELL, height: CELL, cellKind: cell.kind };
+    const region = OUTPOST_MAPS.get(cell.code);
+    if (region) {
+      const from = towns.find((t) => t.code === region.from);
+      const monsters = monstersFor([cell.code], rows);
+      return {
+        key: `region:${cell.code}`, mapCode: cell.code, mapCodes: [cell.code], nameEn: mapNames.get(cell.code) ?? warpMapName(cell.code),
+        regionId: regionOf.get(from?.fields[0] ?? '') ?? '', kind: 'tile' as const, ...box,
+        ...stats(monsters), image: mapImage(cell.code)?.src ?? mapWarps(cell.code)?.picture ?? null,
+      };
+    }
     if (cell.kind === 'field') {
       const tile = tileByCode.get(cell.code)!;
       return { ...tile, ...box };
@@ -199,7 +231,11 @@ export default async function WorldMapPage() {
   });
   const gridView: WorldGridView = {
     entries: gridEntries,
-    lines: laid.lines.map((l) => ({ dungeon: l.dungeon, anchor: l.anchor, points: l.points.map((p) => centre(p.col, p.row)) })),
+    lines: laid.lines.map((l) => ({ dungeon: l.dungeon, anchor: l.anchor, always: l.always, points: l.points.map((p) => centre(p.col, p.row)) })),
+    frames: laid.frames.map((f) => ({
+      code: f.code, x: f.col * PITCH, y: f.row * PITCH, width: f.cols * PITCH, height: f.rows * PITCH,
+      label: `${OUTPOSTS.find((o) => o.code === f.code)?.name ?? f.code} · NPC ใน ${warpMapName(OUTPOSTS.find((o) => o.code === f.code)?.from ?? '')} พาไป`,
+    })),
     labels: laid.lines.filter((l) => gridDungeons.has(l.dungeon)).map((l) => {
       const first = l.points[l.points.length - 1];
       const at = centre(first.col, first.row);

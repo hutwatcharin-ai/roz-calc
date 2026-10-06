@@ -12,20 +12,25 @@ import { mapWarps, warpMapName } from '@/lib/map-warps';
 import { ALL_NPCS, type Npc } from '@/lib/npcs';
 
 export interface Town {
+  /** 'passage': a map walked through on the way into a dungeon (a dock, a
+   *  lobby, a castle hall) -- the round cells of the world map grid. */
+  kind: 'town' | 'passage';
   code: string;
   nameEn: string;
   /** Only where the site already uses a Thai name; null otherwise. */
   nameTh: string | null;
 }
 
-export const TOWNS: Town[] = (file as { towns: { code: string; nameEn: string; nameTh?: string }[] }).towns.map((t) => ({
-  code: t.code,
-  nameEn: t.nameEn,
-  nameTh: t.nameTh ?? null,
-}));
+type Row = { code: string; nameEn: string; nameTh?: string };
+const raw = file as { towns: Row[]; passages: Row[] };
+const read = (kind: Town['kind']) => (t: Row): Town => ({ kind, code: t.code, nameEn: t.nameEn, nameTh: t.nameTh ?? null });
 
-const byCode = new Map(TOWNS.map((t) => [t.code, t]));
+export const TOWNS: Town[] = raw.towns.map(read('town'));
+export const PASSAGES: Town[] = raw.passages.map(read('passage'));
 
+const byCode = new Map([...TOWNS, ...PASSAGES].map((t) => [t.code, t]));
+
+/** A town or a passage map: a place with a page and no monsters. */
 export function townByCode(code: string): Town | null {
   return byCode.get(code) ?? null;
 }
