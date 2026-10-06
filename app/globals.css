@@ -4503,7 +4503,18 @@ html .tag { border-radius: 4px; }
 .buildsim__grid .is-est dd { color: var(--text); }
 .buildsim__warn { list-style: none; margin: 10px 0 0; padding: 8px 10px; border: 1px solid var(--pink); border-radius: 8px; font-size: 12.5px; color: var(--pink); display: grid; gap: 2px; }
 .buildsim__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.buildsim__actions .btn { flex: 1; }
+.buildsim__actions { flex-direction: column; align-items: stretch; }
+.buildsim__actions .btn { flex: none; }
+/* Facebook blue inside the arcade frame: the one place a brand colour helps the eye find the button. */
+.buildsim__fb { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; background: #1877F2; border-color: #1877F2; color: #fff; }
+.buildsim__fb:hover { background: #2d86ff; border-color: #2d86ff; }
+.buildsim__sharerow { display: flex; flex-wrap: wrap; gap: 6px; }
+.buildsim__sharerow button { flex: 1 1 0; min-height: 40px; padding: 0 8px; border: 1px solid var(--cyan); border-radius: 10px; background: transparent; color: var(--cyan); font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.buildsim__sharerow button:hover { background: rgba(61, 232, 255, .12); }
+.buildsim__actions button:disabled { opacity: .6; cursor: progress; }
+.buildsim__sharemsg { margin: 0; font-size: 12.5px; color: var(--yellow); word-break: break-all; }
+.buildsim__reset { align-self: flex-start; min-height: 32px; padding: 0; border: 0; background: none; color: var(--faint); font: inherit; font-size: 12.5px; text-decoration: underline; cursor: pointer; }
+.bhero--shared { border-color: var(--yellow); }
 
 /* Target */
 .buildsim__mob input { width: 100%; }

@@ -2,6 +2,9 @@
 const nextConfig = {
   // Framework fingerprint header off (SEO audit 2026-09-01, Low #9).
   poweredByHeader: false,
+  // The build card (lib/build-card) loads resvg's wasm and omggif at run
+  // time; left to webpack they would be bundled and the wasm path lost.
+  experimental: { serverComponentsExternalPackages: ['@resvg/resvg-wasm', 'omggif'] },
   // The reference tables and the written guide moved out of /tools on
   // 3 Sep 2026: /tools is where you put your own numbers in and get an answer,
   // /guides is what you read. Permanent, because the new path is where these

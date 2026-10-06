@@ -22,8 +22,10 @@
   },
   "dependencies": {
     "@next/third-parties": "^14.2.0",
+    "@resvg/resvg-wasm": "^2.6.2",
     "@supabase/supabase-js": "^2.45.0",
     "next": "^14.2.0",
+    "omggif": "^1.0.10",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

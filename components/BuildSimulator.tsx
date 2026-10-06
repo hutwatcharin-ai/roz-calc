@@ -87,7 +87,11 @@ function PanelHead({ icon, title, meta, pink }: { icon: string; title: string; m
 }
 
 
-export default function BuildSimulator() {
+export default function BuildSimulator({ initial, sharedId }: {
+  /** A shared build (/b/<id>): opened as is, and not saved over this browser's own build until edited. */
+  initial?: Build;
+  sharedId?: string;
+} = {}) {
   const [build, setBuild] = useState<Build>(EMPTY_BUILD);
   const [ready, setReady] = useState(false);
   const [picking, setPicking] = useState<Picking>(null);
@@ -105,13 +109,18 @@ export default function BuildSimulator() {
   const [targetImg, setTargetImg] = useState<string | null>(null);
   const [mobQuery, setMobQuery] = useState('');
   const [mobs, setMobs] = useState<SuggestEntry[] | null>(null);
-  const [copied, setCopied] = useState(false);
+  // Sharing (owner, 7 Oct 2026): a short link per build, its picture, Facebook.
+  const [link, setLink] = useState<{ key: string; id: string } | null>(sharedId && initial ? { key: encodeBuild(initial), id: sharedId } : null);
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
+  const [sharing, setSharing] = useState(false);
+  // Edited since the page opened: until then a shared build is someone else's.
+  const [dirty, setDirty] = useState(false);
 
   // A share link wins over what this browser remembers.
   useEffect(() => {
     let start: Build | null = null;
     try {
-      start = decodeBuild(new URLSearchParams(window.location.search).get('b'));
+      start = initial ?? decodeBuild(new URLSearchParams(window.location.search).get('b'));
       if (!start) start = sanitizeBuild(JSON.parse(window.localStorage.getItem(BUILD_KEY) ?? 'null'));
     } catch {
       // Blocked or broken storage: start empty.
@@ -129,7 +138,7 @@ export default function BuildSimulator() {
   const result = useMemo(() => calcBuild(build, target), [build, target]);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || (initial && !dirty)) return;
     try {
       window.localStorage.setItem(BUILD_KEY, JSON.stringify(build));
       const prev = readPlayerNumbers(window.localStorage);
@@ -137,7 +146,7 @@ export default function BuildSimulator() {
     } catch {
       // Not remembering it does not stop the page working.
     }
-  }, [ready, build, result.hit, result.flee]);
+  }, [ready, dirty, initial, build, result.hit, result.flee]);
 
   // The bottom sheet on phones: no page scroll behind it.
   useEffect(() => {
@@ -153,7 +162,8 @@ export default function BuildSimulator() {
       next.job = Math.min(next.job, maxJobLevel(next.cls));
       return next;
     });
-    setCopied(false);
+    setDirty(true);
+    setShareMsg(null);
   }
   function setStat(s: Stat, raw: number) {
     const v = Math.max(1, Math.min(99, Math.floor(raw) || 1));
@@ -258,11 +268,83 @@ export default function BuildSimulator() {
     }
   }
 
-  function share() {
-    const url = `${window.location.origin}/tools/build?b=${encodeBuild(build)}`;
-    void navigator.clipboard?.writeText(url).then(() => setCopied(true), () => setCopied(false));
-    window.history.replaceState(null, '', url);
+  /** The short link's id for the build on screen, storing it the first time. */
+  async function shortId(): Promise<string | null> {
+    const key = encodeBuild(build);
+    if (link?.key === key) return link.id;
+    setSharing(true);
+    try {
+      const res = await fetch('/api/build-link', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ build }) });
+      const data = (await res.json()) as { id?: string; error?: string };
+      if (!res.ok || !data.id) {
+        setShareMsg(data.error ?? 'สร้างลิงก์ไม่สำเร็จ ลองใหม่อีกครั้ง');
+        return null;
+      }
+      setLink({ key, id: data.id });
+      return data.id;
+    } catch {
+      setShareMsg('สร้างลิงก์ไม่สำเร็จ เช็กอินเทอร์เน็ตแล้วลองใหม่');
+      return null;
+    } finally {
+      setSharing(false);
+    }
   }
+  const shortUrl = (id: string) => `${window.location.origin}/b/${id}`;
+
+  async function shareFacebook() {
+    // Open the window inside the click, or the browser blocks it as a popup.
+    const win = window.open('', '_blank');
+    const id = await shortId();
+    if (!id) {
+      win?.close();
+      return;
+    }
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shortUrl(id))}`;
+    if (win) win.location.href = url;
+    else window.location.href = url;
+  }
+  async function copyLink() {
+    const id = await shortId();
+    if (!id) return;
+    try {
+      await navigator.clipboard.writeText(shortUrl(id));
+      setShareMsg(`คัดลอกแล้ว: ${shortUrl(id).replace(/^https?:\/\//, '')}`);
+    } catch {
+      setShareMsg(shortUrl(id));
+    }
+  }
+  async function shareNative() {
+    const id = await shortId();
+    if (!id) return;
+    try {
+      await navigator.share({ title: 'จำลองบิลด์ Ragnarok Zero', url: shortUrl(id) });
+    } catch {
+      // Closed the share sheet.
+    }
+  }
+  async function saveImage() {
+    const id = await shortId();
+    if (!id) return;
+    setSharing(true);
+    try {
+      const res = await fetch(`/b/${id}/card.png`);
+      if (!res.ok) throw new Error(String(res.status));
+      const url = URL.createObjectURL(await res.blob());
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `rozerothai-build-${id}.png`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      setShareMsg('บันทึกรูปแล้ว โพสต์รูปนี้พร้อมลิงก์ได้เลย');
+    } catch {
+      setShareMsg('บันทึกรูปไม่สำเร็จ ลองใหม่อีกครั้ง');
+    } finally {
+      setSharing(false);
+    }
+  }
+  // Phones offer their own share sheet (LINE, Messenger); known only after mount.
+  const [canNativeShare, setCanNativeShare] = useState(false);
+  useEffect(() => setCanNativeShare(typeof navigator.share === 'function'), []);
 
   const cls = classStats(build.cls);
   const left = result.budget - result.used;
@@ -719,8 +801,17 @@ export default function BuildSimulator() {
               </ul>
             )}
             <div className="buildsim__actions">
-              <button type="button" className="btn" onClick={share}>{copied ? '✔ คัดลอกลิงก์แล้ว' : 'แชร์บิลด์'}</button>
-              <button type="button" className="btn btn--quiet" onClick={() => { setBuild(EMPTY_BUILD); setTarget(null); setTargetImg(null); }}>เริ่มใหม่</button>
+              <button type="button" className="btn buildsim__fb" disabled={sharing} onClick={() => void shareFacebook()}>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg>
+                แชร์ Facebook
+              </button>
+              <span className="buildsim__sharerow">
+                <button type="button" disabled={sharing} onClick={() => void copyLink()}>คัดลอกลิงก์</button>
+                <button type="button" disabled={sharing} onClick={() => void saveImage()}>บันทึกเป็นรูป</button>
+                {canNativeShare && <button type="button" disabled={sharing} onClick={() => void shareNative()}>แชร์ไป LINE/แอปอื่น</button>}
+              </span>
+              {shareMsg && <p className="buildsim__sharemsg" role="status">{shareMsg}</p>}
+              <button type="button" className="buildsim__reset" onClick={() => { update(EMPTY_BUILD); setTarget(null); setTargetImg(null); setActive(null); }}>เริ่มบิลด์ใหม่</button>
             </div>
             <p className="buildsim__legend"><i>ประมาณ</i> = สูตรที่ยังไม่มีใครวัดใน Global</p>
           </section>
