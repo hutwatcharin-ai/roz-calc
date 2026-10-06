@@ -163,7 +163,12 @@ function thai(piece: Piece): { base: string; tiers: { key: string; label: string
 const NPCS = [
   {
     step: 'ขั้นที่ 1',
-    name: 'Apprenti d’atelier Mingjia',
+    // Two unconfirmed names for the same NPC (owner, 6 Oct 2026): the French
+    // guide's "Apprenti d'atelier Mingjia" and rozerodb's English "Workshop
+    // Apprentice Nariya" (rozerodb.com/guides/stellar-weapons). Neither is in
+    // the client yet, so both are shown.
+    name: 'Workshop Apprentice Nariya',
+    aka: 'Apprenti d’atelier Mingjia',
     where: 'prontera 272,264',
     confirmed: false,
     what: 'เอาของไปแลกเป็นโทเคน ของที่มอนดรอป 1 ชิ้นแลกโทเคน ★ ได้ 1 อัน ส่วนอาวุธที่ปลุกแล้ว 1 ชิ้นแลกโทเคน ★★ ได้ 1 อัน',
@@ -171,6 +176,7 @@ const NPCS = [
   {
     step: 'ขั้นที่ 2',
     name: 'Nagging Old Man',
+    aka: null,
     where: 'prontera 272,260',
     confirmed: true,
     what: 'พอมีโทเคนครบกับ Goblin Coin Shard แล้ว ตัวนี้เป็นคนเปิดหน้าต่างปลุกให้',
@@ -234,6 +240,10 @@ const FAQ = [
   {
     question: 'ซื้ออาวุธจากร้าน NPC มาแลกโทเคนได้ไหม',
     answer: 'ไม่ได้ ประกาศฝั่งไต้หวันเขียนตรง ๆ ว่าของซื้อร้านใช้ทำไม่ได้ ต้องเป็นชิ้นที่มอนสเตอร์ดรอปเท่านั้น',
+  },
+  {
+    question: 'อาวุธที่ Blacksmith ตีเองเอาไปแลกโทเคนได้ไหม',
+    answer: 'ยังไม่รู้ อาวุธตีเองในเกมเป็นไอเทมคนละตัวกับตัวที่มอนดรอป (ไม่มีช่อง สุ่มออป 4 แถว) และทุกแหล่งทั้งประกาศไต้หวัน roz-global.info และ rozerodb เขียนแค่ "ของที่มอนดรอป" อย่าเพิ่งตีเองมาหวังแลกโทเคนจนกว่าระบบจะเปิดใน Global',
   },
   {
     question: 'Goblin Coin Shard หาจากไหน',
@@ -526,6 +536,7 @@ export default async function StarGearPage() {
             <strong>เก็บของชนิดเดียวกันที่มอนดรอปให้ครบจำนวน</strong> แล้วเอาไปแลกโทเคนกับ NPC ตัวแรก ของ 1 ชิ้นได้โทเคน ★ 1 อัน
             ของซื้อจากร้าน NPC ใช้แลกไม่ได้ โทเคนของชิ้นไหนใช้ปลุกได้เฉพาะชิ้นนั้น
             <span className="star__unconfirmed">ยังไม่ยืนยัน: คลิปผู้เล่นไทยบอกว่าของดรอปที่เอาไปแลกต้องติดออปอย่างน้อย 1 บรรทัด ส่วนประกาศไต้หวันเขียนแค่ &quot;ของที่มอนดรอป&quot; เก็บตัวที่ติดออปไว้ก่อนจะปลอดภัยกว่า</span>
+            <span className="star__unconfirmed">ยังไม่ยืนยัน: อาวุธที่ Blacksmith ตีเอง (Guisarme, Stiletto ฯลฯ) ในเกมเป็นไอเทมคนละตัวกับตัวที่มอนดรอป ทุกแหล่งเขียนแค่ &quot;ของที่มอนดรอป&quot; จึงอย่าเพิ่งตีเองมาหวังแลกโทเคน</span>
           </li>
           <li>
             <strong>หา <Link href={itemHref(SHARD_ITEM.id, null)}>{SHARD_ITEM.name}</Link></strong> จาก NPC แลกที่ {SHARD_NPC.where} ({SHARD_NPC.name})
@@ -562,7 +573,12 @@ export default async function StarGearPage() {
               <div>
                 <p className="star__npcname">
                   {npc.name} <span className="star__where">{npc.where}</span>
-                  {!npc.confirmed && <span className="star__unconfirmed">ชื่อนี้มาจากไกด์และประกาศไต้หวัน ยังไม่มีในข้อมูลไคลเอนต์ที่เรามี</span>}
+                  {npc.aka && <span className="star__where"> หรือ {npc.aka}</span>}
+                  {!npc.confirmed && (
+                    <span className="star__unconfirmed">
+                      ชื่อยังไม่ตรงกัน: rozerodb เรียก Workshop Apprentice Nariya ไกด์ฝรั่งเศสเรียก Mingjia ทั้งคู่มาจากเซิร์ฟไต้หวัน ยังไม่มีในข้อมูลไคลเอนต์ที่เรามี ดูที่พิกัดแทนชื่อ
+                    </span>
+                  )}
                 </p>
                 <p className="star__detail">{npc.what}</p>
               </div>
