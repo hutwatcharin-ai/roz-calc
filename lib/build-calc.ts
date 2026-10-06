@@ -172,6 +172,17 @@ export function coveredSlots(item: GearItem, slot: Slot): Slot[] {
 // own skill text (prontera's client extract) gives the damage each hand keeps
 // while dual wielding: right 50% + 10% per Righthand Mastery level (lv 5 =
 // 100%), left 30% + 10% per Lefthand Mastery level (lv 5 = 80%).
+//
+// The rest is rAthena Renewal, the engine Zero is built on, and nobody has
+// measured it on Global (looked 7 Oct 2026):
+// - ASPD: the left weapon adds a quarter of its own delay to the right's
+//   (status_base_amotion_pc, RENEWAL_ASPD branch).
+// - Damage: the left hand uses its own weapon ATK, size penalty and element,
+//   and status ATK once where the right hand counts it twice (rAthena commit
+//   9e959f7, "Renewal Offhand Damage").
+// - Cards in either hand count for both (official behaviour per rAthena
+//   issue #7659), so they simply add up here.
+// - Double Attack and skills use the right hand only (not modelled here).
 export const DUAL_CLASSES = new Set(['assassin']);
 export const LEFT_WEAPON_TYPES = new Set(['dagger', 'sword_1h', 'axe_1h']);
 export const RIGHT_MASTERY = 'Righthand Mastery';
@@ -538,13 +549,13 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
 
   let aspd = aspdFor(build.cls, wt, agi, dex, { ranged, shield });
   if (left && aspd !== null) {
-    // Two weapons swing on (delay right + delay left) × 0.7, where a base
-    // ASPD b is a delay of 200 - b (rAthena Renewal; not measured on Global).
+    // The left weapon adds a quarter of its delay (200 - its base ASPD) to
+    // the right's: a dagger at base 154 costs 11.5 ASPD.
     const table = classStats(build.cls)?.aspd ?? {};
     const bR = table[wt];
     const bL = table[left.wt ?? ''];
     if (bR !== undefined && bL !== undefined) {
-      const base = 200 - 0.7 * ((200 - bR) + (200 - bL));
+      const base = bR - (200 - bL) / 4;
       aspd = Math.min(ASPD_CAP, Math.floor((base + Math.sqrt((agi * agi) / 2 + (dex * dex) / 5) / 4) * 10) / 10);
     }
   }
@@ -586,10 +597,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     }
     const multiplier = [...byKind.values()].reduce((m, p) => m * (1 + p / 100), 1);
     const def = target.def === null ? null : Math.floor(target.def * (1 - Math.min(100, ignoreDef) / 100));
-    const hand = (atk: number, type: string, el: string | null) => physicalDamagePerHit({
+    const hand = (atk: number, type: string, el: string | null, statusTimes: number) => physicalDamagePerHit({
       weaponAtk: Math.floor(atk * (1 + get('atk_percent') / 100)),
-      // Status ATK counts twice in damage (lib/damage), flat ATK from gear once.
-      statusAtk: statusAtk * 2 + Math.floor(get('atk') * (1 + get('atk_percent') / 100)),
+      // Status ATK counts twice in the right hand's damage (lib/damage) and
+      // once in the left's; flat ATK from gear once.
+      statusAtk: statusAtk * statusTimes + Math.floor(get('atk') * (1 + get('atk_percent') / 100)),
       weaponType: SIZE_ROW[type] ?? 'Bare hand',
       weaponElement: (el ? cap(el) : 'Neutral') as Element,
       targetSize: target.size,
@@ -599,11 +611,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       targetLevel: target.level,
       targetVit: target.vit,
     });
-    const raw = hand(weaponAtk, wt, weaponEl);
+    const raw = hand(weaponAtk, wt, weaponEl, 2);
     let hands: TargetResult['hands'] = null;
     let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier)) : null;
     if (left && damage !== null) {
-      const leftRaw = hand(leftAtk, left.wt ?? 'dagger', leftEl);
+      const leftRaw = hand(leftAtk, left.wt ?? 'dagger', leftEl, 1);
       const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
       const leftPct = 30 + 10 * Math.min(5, build.sk?.[LEFT_MASTERY] ?? 0);
       const r = Math.max(1, Math.floor((damage * rightPct) / 100));

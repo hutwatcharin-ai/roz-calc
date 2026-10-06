@@ -173,9 +173,16 @@ describe('two weapons', () => {
     expect(maxed.vs?.hands).toMatchObject({ rightPct: 100, leftPct: 80 });
     expect(maxed.vs?.hands?.right).toBe(one.vs!.damage);
     expect(maxed.vs!.damage!).toBeGreaterThan(one.vs!.damage!);
-    // Renewal: two weapons swing on 0.7 × both delays, slower than one
-    // dagger (each swing lands both hands).
-    expect(two.aspd!).toBeLessThan(one.aspd!);
+    // Renewal: the left dagger adds a quarter of its delay. Assassin dagger
+    // base 154 → 46 delay → 11.5 ASPD less (both before the AGI/DEX part).
+    expect(Math.round((one.aspd! - two.aspd!) * 10) / 10).toBeCloseTo(11.5, 0);
+  });
+
+  it('counts status ATK once in the left hand', () => {
+    const strong = { ...base, cls: 'assassin', st: { ...base.st, str: 80 }, g: { weapon: knife, shield: knife }, sk: { 'Righthand Mastery': 5, 'Lefthand Mastery': 5 } };
+    const r = calcBuild(strong, mob);
+    // Same knife both hands: the left differs from the right by status ATK, not just by 80%.
+    expect(r.vs!.hands!.left).toBeLessThan(Math.floor(r.vs!.hands!.right * 0.8));
   });
 
   it('refuses a left-hand weapon for another class', () => {
