@@ -60,3 +60,11 @@ describe('item effects caveats', () => {
     expect(conditionText(flee.c)).toBe('มีเงื่อนไข ดูข้อความในเกม');
   });
 });
+
+describe('numbers from our own card text', () => {
+  it('gives Andre Card ATK +20 where prontera had nothing, and skips combo clauses', () => {
+    expect(itemEffects(4043)).toMatchObject({ src: 'text', g: [{ c: {}, b: [['atk', 20, null, null, null]] }] });
+    // Kobold Archer-style combos: only the card's own line, not the set's STR +10.
+    expect(effectTypes(itemEffects(4246))).toEqual(new Set(['crit_damage_percent']));
+  });
+});

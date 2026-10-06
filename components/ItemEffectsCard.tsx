@@ -46,7 +46,7 @@ export default function ItemEffectsCard({ id, onlyIfMore = false }: { id: number
         </dl>
       )}
       <p className="muted effects__src">
-        สรุปจากข้อมูล {ITEM_EFFECTS_SOURCE} · ข้อความในเกมด้านล่างเป็นหลัก ถ้าไม่ตรงกันให้เชื่อข้อความในเกม
+        {effects?.src === 'text' ? 'สรุปจากข้อความในเกม' : `สรุปจากข้อมูล ${ITEM_EFFECTS_SOURCE}`} · ข้อความในเกมด้านล่างเป็นหลัก ถ้าไม่ตรงกันให้เชื่อข้อความในเกม
       </p>
     </section>
   );

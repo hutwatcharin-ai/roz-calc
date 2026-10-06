@@ -41,6 +41,8 @@ export interface ItemEffects {
   el?: string;
   rs?: string;
   g?: BonusGroup[];
+  /** 'text': numbers read from our own item text, where prontera.info had none. */
+  src?: 'text';
 }
 
 const data = file as unknown as { items: Record<string, ItemEffects> };

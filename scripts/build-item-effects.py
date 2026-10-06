@@ -114,6 +114,73 @@ for path in sorted(glob.glob(os.path.join(SRC, '*.json'))):
         if str(iid) not in items or len(json.dumps(entry)) > len(json.dumps(items[str(iid)])):
             items[str(iid)] = entry
 
+# Cards prontera has no numbers for (131 of 315, mostly procs and skills):
+# the plain stat sentences of our own item text ("ATK +20.", "DEF +2. MDEF
+# +2."), so the effect filters find Andre Card. Only sentences with no
+# condition in them; a proc, a combo or a refine clause is left to the text.
+# Marked src: 'text' so the page credits the game text, not prontera.
+TEXT_STATS = [
+    (r'\bSTR', 'str'), (r'\bAGI', 'agi'), (r'\bVIT', 'vit'), (r'\bINT', 'int'), (r'\bDEX', 'dex'), (r'\bLUK', 'luk'),
+    (r'\bMATK', 'matk'), (r'(?<![M])\bATK', 'atk'), (r'\bHIT', 'hit'), (r'\bFLEE', 'flee'), (r'\b(?:CRIT|Critical Rate)', 'crit'),
+    (r'\bMDEF', 'mdef'), (r'(?<![M])\bDEF', 'def'), (r'\b(?:MHP|MaxHP|Max HP)', 'hp'), (r'\b(?:MSP|MaxSP|Max SP)', 'sp'),
+    (r'\bCritical Damage', 'crit_damage_percent'), (r'\bPerfect Dodge', 'perfect_dodge'),
+]
+
+
+def env(name):
+    for line in open(os.path.join(ROOT, '.env.local'), encoding='utf-8'):
+        if line.startswith(name + '='):
+            return line.split('=', 1)[1].strip().strip('"')
+    return None
+
+
+def our_cards():
+    import urllib.request
+    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    req = urllib.request.Request(f'{url}/rest/v1/items?select=id,description&category=eq.Card&limit=2000',
+                                 headers={'apikey': key, 'Authorization': f'Bearer {key}'})
+    return json.load(urllib.request.urlopen(req))
+
+
+def text_bonuses(text):
+    text = re.sub(r'\^[0-9a-fA-F]{6}', '', text or '').split('Type :')[0]
+    out = []
+    for sentence in re.split(r'(?<=[.!])\s+|\n', text):
+        # A combo clause ("When equipped together with X, Y and Z Cards, the
+        # following: STR +10. MaxHP +20%.") owns every sentence after it.
+        if re.search(r'together with|equipped with|used with|following|:\s*$', sentence, re.I):
+            break
+        if not sentence.strip() or CONDITIONAL.search(sentence) or re.search(r'chance|autocast|can be used|\[', sentence, re.I):
+            continue
+        if re.search(r'All (?:basic )?stats \+(\d+)', sentence, re.I):
+            n = int(re.search(r'All (?:basic )?stats \+(\d+)', sentence, re.I).group(1))
+            out += [[k, n, None, None, None] for k in ('str', 'agi', 'vit', 'int', 'dex', 'luk')]
+            continue
+        for pattern, key in TEXT_STATS:
+            m = re.search(pattern + r'\s*([+-]\d+)\s*(%?)', sentence)
+            if not m:
+                continue
+            value = int(m.group(1))
+            kind = key
+            if m.group(2) == '%' and key in ('atk', 'matk', 'hp', 'sp'):
+                kind = key + '_percent'
+            if not any(b[0] == kind for b in out):
+                out.append([kind, value, None, None, None])
+    return out
+
+
+added = 0
+for card in our_cards():
+    key = str(card['id'])
+    if items.get(key, {}).get('g'):
+        continue
+    found = text_bonuses(card.get('description'))
+    if found:
+        items.setdefault(key, {})['g'] = [{'c': {}, 'b': found}]
+        items[key]['src'] = 'text'
+        added += 1
+print(added, 'cards given numbers from our own item text')
+
 with open(OUT, 'w', encoding='utf-8') as f:
     json.dump({
         '_meta': {
