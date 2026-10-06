@@ -60,8 +60,23 @@ def page_codes():
         start += 1000
 
 
+# resnametable.txt points one map name at another map's files: the boss room
+# b_sp_d05 is drawn from in_sphinx5, gld_dun01_2 from gld_dun01, the
+# channel nrd_d01_a from nrd_dun01. Those names have no .gat or minimap of
+# their own, so without it they had no picture and no size.
+alias = {}
+for line in open(os.path.join(DATA, 'resnametable.txt'), encoding='latin-1'):
+    m = re.match(r'^([\w@\-]+)\.gat#([\w@\-]+)\.gat#', line)
+    if m and m.group(1).lower() != m.group(2).lower():
+        alias[m.group(1).lower()] = m.group(2).lower()
+
+
+def files_of(code):
+    return alias.get(code, code)
+
+
 def gat_size(code):
-    path = os.path.join(DATA, code + '.gat')
+    path = os.path.join(DATA, files_of(code) + '.gat')
     if not os.path.exists(path):
         return None
     head = open(path, 'rb').read(14)
@@ -113,6 +128,54 @@ for page in pages:
         if found and found[0].decode().lower() != page.lower():
             channel_of[page] = found[0].decode().lower()
 
+linked = {l[0] for l in links_file['links']} | {l[3] for l in links_file['links']}
+for page in pages:
+    if page in channel_of or page in linked:
+        continue
+    # A boss room (b_sp_d05) is another map's files under its own name and
+    # stands where that floor stands. A page with a floor of its own and its
+    # own warps (gld_dun01_2) is left alone: folding it into gld_dun01 would
+    # drop the stairs between the two.
+    if page in alias:
+        # The channels drawn from the same files may already know the floor
+        # they belong to (sp_d05_z and b_sp_d05 are both in_sphinx5, filed
+        # under rin_sphinx5); join them there rather than start a new one.
+        twins = [channel_of[s] for s, f in alias.items() if f == alias[page] and s in channel_of]
+        channel_of[page] = twins[0] if twins else alias[page]
+    # Two pages carry a stray underscore (gef_fild03_, moc_fild17_) on a code
+    # the game has without one.
+    elif page.endswith('_') and os.path.exists(os.path.join(DATA, page.rstrip('_') + '.gat')):
+        channel_of[page] = page.rstrip('_')
+
+# Nordfeld is in the client's maps but not in the Global navigation table;
+# the Korean table shipped beside it (navi_link.lub) has its warps. Read it
+# only for maps the Global table says nothing about, so Global data wins
+# wherever it exists. Its channel names (nrd_d01_a) resolve through
+# resnametable to the page they belong to.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import lub  # noqa: E402
+
+KR_FIELDS = (1, 7, 8, 9, 3)  # from, x, y, to, kind
+known = {base(l[0]) for l in links_file['links']}
+kr_lua = lub.runtime()
+lub.load(kr_lua, os.path.join(DATA, 'luafiles514', 'lua files', 'navigation', 'navi_link.lub'))
+norm = lambda c: c if c in pages else alias.get(c, c)  # noqa: E731
+kr_added = 0
+page_bases = {base(p) for p in pages}
+for _, row in kr_lua.globals().Navi_Link.items():
+    r = lub.to_py(row)
+    frm, x, y, to, kind = (r.get(i) for i in KR_FIELDS)
+    if kind not in (200, 201) or not isinstance(frm, str) or not isinstance(to, str):
+        continue
+    frm, to = norm(frm.lower()), norm(to.lower())
+    if frm == to or base(frm) in known:
+        continue
+    if base(frm) not in page_bases:
+        continue
+    links_file['links'].append([frm, int(x or 0), int(y or 0), to, kind])
+    kr_added += 1
+print(f'{kr_added} warps from the Korean navigation table')
+
 # The navigation table names the base map (moc_fild12) while the site may
 # only have pages for its channel copies (moc_f12_a, _b, _z): a warp belongs
 # to every page built on the map it stands on.
@@ -156,7 +219,10 @@ for frm, x, y, to, kind in links_file['links']:
 out = {}
 made = 0
 for code, entry in sorted(maps.items()):
-    pic = code if os.path.exists(os.path.join(MINI, code + '.bmp')) else base(code)
+    pic = next(
+        (c for c in (code, files_of(code), base(code), files_of(base(code))) if os.path.exists(os.path.join(MINI, c + '.bmp'))),
+        code,
+    )
     size = gat_size(code) or gat_size(base(code))
     bmp = os.path.join(MINI, pic + '.bmp')
     if not size or not os.path.exists(bmp):
@@ -175,10 +241,15 @@ for code, entry in sorted(maps.items()):
         exits.append({'to': dest, 'kind': int(kind), 'pts': sorted(pts), 'navi': entry['navi'][key], 'page': dest in pages})
     out[code] = {'w': w, 'h': h, 'pic': pic, 'exits': exits, 'from': [[f, f in pages] for f in sorted(entry['from'])]}
 
+# Maps the English name table has not caught up with (Nordfeld is only in the
+# Korean table, as 노르트펠트).
+EXTRA_NAMES = {'nordfeld': 'Nordfeld'}
+
+
 # Several maps share one name ("Geffen Field" is gef_fild00 to 14); a list of
 # three "Geffen Field" says nothing, so a shared name carries its code.
 def shown_names(codes):
-    raw = {c: pages.get(c) or names.get(c) for c in codes}
+    raw = {c: pages.get(c) or names.get(c) or EXTRA_NAMES.get(c) for c in codes}
     raw = {c: n for c, n in raw.items() if n}
     # Channel copies of one map (gef_fild10, gef_f10_a) are not a clash.
     count = {}

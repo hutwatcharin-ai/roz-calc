@@ -26,6 +26,15 @@ describe('mapWarps', () => {
       for (const e of w!.exits) expect(e.pts.length).toBeLessThan(DOOR_MIN);
     }
   });
+  it('reads a boss room from the floor whose files it borrows', () => {
+    // b_sp_d05 has no files of its own; resnametable draws it from in_sphinx5.
+    const room = mapWarps('b_sp_d05');
+    expect(room?.picture).toBe('/images/maps/navi/in_sphinx5.webp');
+    expect(room?.exits.some((e) => e.to === 'in_sphinx4')).toBe(true);
+  });
+  it('has Nordfeld, which only the Korean navigation table lists', () => {
+    expect(mapWarps('nrd_fild01')?.exits.map((e) => warpMapName(e.to))).toContain('Nordfeld');
+  });
   it("names a map by the game's own table", () => {
     expect(warpMapName('pay_arche')).toBe('Payon Archer Village');
   });
