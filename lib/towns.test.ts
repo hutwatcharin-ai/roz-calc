@@ -23,6 +23,10 @@ describe('towns', () => {
     const names = townPlaces('nordfeld').flatMap((p) => p.npcs.map((n) => n.name));
     expect(names.some((n) => n.startsWith('Roz '))).toBe(false);
   });
+  it('names the NPC in Alberta who takes you to Nordfeld', () => {
+    const alberta = townPlaces('alberta')[0].npcs;
+    expect(alberta.find((n) => n.name === 'Nordfeld Ambassador')).toMatchObject({ slug: 'nordfeld-ambassador', x: 232, y: 118 });
+  });
   it('knows a town by its code and nothing else', () => {
     expect(townByCode('geffen')?.nameTh).toBe('เกฟเฟน');
     expect(townByCode('gef_fild10')).toBeNull();

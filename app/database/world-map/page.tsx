@@ -45,8 +45,8 @@ const WAY_IN_BY_HAND: Record<string, string[]> = {
 // Nordfeld has maps of its own (owner, 6 Oct 2026, from the game's region
 // map): town, plains, hills, then the cave -- boxed off the grid as one row.
 const OUTPOSTS = [{
-  code: 'nordfeld', from: 'alberta', name: 'Nordfeld',
-  note: 'เมืองนอกแผนที่ · ไปได้จาก NPC ในเมือง Alberta (รับเควสจาก NPC ทางเหนือของ Prontera ก่อน) · เดินต่อไปทุ่ง เนิน และถ้ำ Nordfeld',
+  code: 'nordfeld', from: 'alberta', name: 'Nordfeld', via: 'Nordfeld Ambassador',
+  note: 'เมืองนอกแผนที่ · ไปได้จาก Nordfeld Ambassador ในเมือง Alberta (รับเควสจาก NPC ทางเหนือของ Prontera ก่อน) · เดินต่อไปทุ่ง เนิน และถ้ำ Nordfeld',
   chain: ['nrd_fild01', 'nrd_fild02', 'nrd_dun01', 'nrd_dun02'],
 }];
 const OUTPOST_MAPS = new Map(OUTPOSTS.flatMap((o) => o.chain.map((code) => [code, o] as const)));
@@ -234,7 +234,7 @@ export default async function WorldMapPage() {
     lines: laid.lines.map((l) => ({ dungeon: l.dungeon, anchor: l.anchor, always: l.always, points: l.points.map((p) => centre(p.col, p.row)) })),
     frames: laid.frames.map((f) => ({
       code: f.code, x: f.col * PITCH, y: f.row * PITCH, width: f.cols * PITCH, height: f.rows * PITCH,
-      label: `${OUTPOSTS.find((o) => o.code === f.code)?.name ?? f.code} · NPC ใน ${warpMapName(OUTPOSTS.find((o) => o.code === f.code)?.from ?? '')} พาไป`,
+      label: `${OUTPOSTS.find((o) => o.code === f.code)?.name ?? f.code} · ${OUTPOSTS.find((o) => o.code === f.code)?.via ?? 'NPC'} ใน ${warpMapName(OUTPOSTS.find((o) => o.code === f.code)?.from ?? '')} พาไป`,
     })),
     labels: laid.lines.filter((l) => gridDungeons.has(l.dungeon)).map((l) => {
       const first = l.points[l.points.length - 1];

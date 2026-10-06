@@ -62,12 +62,22 @@ const data = file as unknown as { _meta: Record<string, unknown>; mapNames: Reco
 // out of the NPC pages (owner, 6 Oct 2026).
 const SPRITE_LABEL = /^(Roz |Portal \d+$)/;
 
+// Real names for sprite-labelled NPCs, from players who have stood there,
+// keyed by the source's slug. The page takes the new slug from the name.
+const NAMED_BY_HAND: Record<string, string> = {
+  // Owner, 6 Oct 2026: the NPC in Alberta who takes you to Nordfeld.
+  'roz-nordfeld-soldier': 'Nordfeld Ambassador',
+};
+
 // A shopkeeper's goods point at the Zero shop copy, not rAthena's classic id;
 // goods with no shop copy in Zero drop off the list (lib/classic-twins).
 // The file lists named NPCs first; the relabelled ones move down with the
 // other sprite labels (a stable sort keeps every other order as it was).
 export const ALL_NPCS: Npc[] = data.npcs.map((npc) => {
-  const named = npc.hasName && !SPRITE_LABEL.test(npc.name) ? npc : { ...npc, hasName: false };
+  const real = NAMED_BY_HAND[npc.slug];
+  const named = real
+    ? { ...npc, name: real, slug: real.toLowerCase().replace(/[^a-z0-9]+/g, '-'), hasName: true }
+    : npc.hasName && !SPRITE_LABEL.test(npc.name) ? npc : { ...npc, hasName: false };
   return named.sells.length
     ? { ...named, sells: [...new Set(named.sells.map(shopIdOf).filter((id): id is number => id !== null))] }
     : named;
