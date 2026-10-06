@@ -7,8 +7,14 @@ const outDir = process.argv[3] ?? '.';
 const build = {
   cls: 'assassin', lv: 60, job: 40,
   st: { str: 50, agi: 70, vit: 20, int: 1, dex: 40, luk: 20 },
-  g: { weapon: { id: 1201, r: 7, c: [4029, 4006, 0] }, garment: { id: 480414, r: 4, c: [4183] }, armor: { id: 2301, r: 5, c: [] } },
+  g: {
+    weapon: { id: 1201, r: 7, c: [4029, 4006, 0], o: [['atk', 12], ['damage_percent@race:brute', 5]] },
+    garment: { id: 480414, r: 4, c: [4183], e: [4730] },
+    armor: { id: 2301, r: 5, c: [], e: [29413] },
+  },
   f: [12065],
+  cos: { upper: [6638], garment: [6908] },
+  sk: { Grimtooth: 5 },
 };
 
 const browser = await chromium.launch();

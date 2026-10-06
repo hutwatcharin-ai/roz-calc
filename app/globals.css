@@ -4457,6 +4457,9 @@ html .tag { border-radius: 4px; }
 .buildsim__socket.is-filled { border-color: var(--pink); box-shadow: 0 0 8px rgba(255, 61, 154, .45); }
 .buildsim__socket:hover { border-color: var(--pink); color: var(--pink); }
 .buildsim__clear:hover { color: var(--pink); border-color: var(--pink); }
+/* Unequip sits in the slot's corner so the refine and card row keeps one line. */
+.buildsim__slotctl .buildsim__clear { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; font-size: 13px; }
+.buildsim__slot.is-filled .buildsim__pick { padding-right: 26px; }
 .buildsim__cardnames { flex: 1 1 100%; font-size: 11.5px; color: var(--pink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Picker: a dropdown under the slot on wide screens, a bottom sheet on phones. */
@@ -4526,6 +4529,34 @@ html .tag { border-radius: 4px; }
 .buildsim__fx { margin: 4px 0 0; padding-left: 18px; font-size: 13px; display: grid; gap: 3px; }
 .buildsim__details { margin-top: 8px; font-size: 13px; }
 .buildsim__details summary { cursor: pointer; color: var(--cyan); min-height: 36px; display: flex; align-items: center; }
+
+/* Refine, enchants, random options, costume stones, skill levels (6 Oct 2026). */
+.buildsim__icon { position: relative; }
+.buildsim__refine { position: absolute; right: -7px; bottom: -7px; padding: 0 4px; border-radius: 5px; font-size: 10.5px; line-height: 15px; color: var(--yellow-ink); background: var(--yellow); box-shadow: 0 0 8px rgba(255, 229, 61, .7); }
+.buildsim__pickname small b { font-weight: 400; color: var(--yellow); }
+.buildsim__refinepick { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--faint); }
+.buildsim__extras { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 6px; padding-top: 8px; border-top: 1px dashed rgba(61, 232, 255, .2); }
+.buildsim__stone { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 32px; padding: 2px 10px 2px 6px; border: 1px solid rgba(255, 229, 61, .55); border-radius: 8px; background: rgba(255, 229, 61, .07); color: var(--text); font: inherit; font-size: 12px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.buildsim__stone img { flex: none; image-rendering: pixelated; }
+.buildsim__stone:hover { border-color: var(--yellow); box-shadow: 0 0 8px rgba(255, 229, 61, .4); }
+.buildsim__stone.is-empty { border-style: dashed; border-color: rgba(61, 232, 255, .35); background: transparent; color: var(--dim); }
+.buildsim__opt { flex: 1 1 100%; display: flex; gap: 4px; align-items: center; min-width: 0; }
+.buildsim__opt select { flex: 1 1 0; width: 0; min-width: 0; min-height: 34px; padding: 0 28px 0 8px; font-size: 12.5px; background-position: right 8px center; }
+.buildsim__opt input { width: 64px; min-height: 34px; padding: 0 6px; text-align: center; }
+.buildsim__opt button { width: 34px; height: 34px; border: 1px solid var(--hair); border-radius: 8px; background: #07051a; color: var(--faint); cursor: pointer; }
+.buildsim__opt button:hover { color: var(--pink); border-color: var(--pink); }
+.buildsim__addrow { display: flex; gap: 6px; flex-wrap: wrap; }
+.buildsim__addrow button { min-height: 32px; padding: 0 10px; border: 1px dashed rgba(61, 232, 255, .45); border-radius: 8px; background: transparent; color: var(--cyan); font: inherit; font-size: 12px; cursor: pointer; }
+.buildsim__addrow button:hover { border-style: solid; background: rgba(61, 232, 255, .1); }
+.buildsim__costumes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.buildsim__costumes .buildsim__pickname { flex: 1 1 100%; }
+.buildsim__cosstones { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.buildsim__skills { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.buildsim__skills li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 10px; border-radius: 8px; background: rgba(7, 5, 26, .55); font-size: 13px; }
+.buildsim__skills input { width: 64px; min-height: 36px; padding: 0 6px; text-align: center; }
+@media (max-width: 640px) {
+  .buildsim__costumes { grid-template-columns: minmax(0, 1fr); }
+}
 
 @media (max-width: 900px) {
   .buildsim { grid-template-columns: minmax(0, 1fr); }
