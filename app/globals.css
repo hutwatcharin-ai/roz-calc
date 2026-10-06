@@ -4325,3 +4325,32 @@ html .tag { border-radius: 4px; }
 .dropfind__quick { margin-top: 12px; display: grid; gap: 8px; }
 .dropfind__quick p { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
 .dropfind__quick strong { font-size: 13px; color: var(--dim); margin-right: 4px; }
+
+/* Drop finder, neon arcade pass (owner, 6 Oct 2026): a hi-score board. */
+.dropfind { position: relative; overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 61, 154, .35), 0 0 24px rgba(255, 61, 154, .18), inset 0 0 40px rgba(61, 232, 255, .06); }
+.dropfind::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px); }
+.dropfind > * { position: relative; z-index: 1; }
+.dropfind__insert { margin: 0 0 8px; font: 900 13px var(--font-chakra), monospace; letter-spacing: .3em; color: var(--cyan); text-shadow: 0 0 10px var(--cyan); animation: attractblink 1.2s steps(2) infinite; }
+.dropfind__board { margin: 16px 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--yellow); color: var(--dim); font-size: 13px; }
+.dropfind__board span { margin-right: 8px; font: 900 15px var(--font-chakra), monospace; letter-spacing: .2em; color: var(--yellow); text-shadow: 0 0 10px var(--glow-yellow); }
+.dropfind__rows li { position: relative; }
+.dropfind__rank { flex: none; width: 46px; font: 900 13px var(--font-chakra), monospace; letter-spacing: .05em; color: var(--faint); }
+.dropfind__rank i { font-style: normal; margin-right: 2px; color: var(--yellow); animation: attractblink 1s steps(2) infinite; }
+.dropfind__rows li.is-rank1 .dropfind__rank { color: var(--yellow); text-shadow: 0 0 10px var(--glow-yellow); }
+.dropfind__rows li.is-rank2 .dropfind__rank { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
+.dropfind__rows li.is-rank3 .dropfind__rank { color: var(--pink); text-shadow: 0 0 8px var(--glow-pink); }
+.dropfind__rows li.is-rank1:not(.is-closed) { margin: 6px -10px 0; padding: 12px 10px; border: 1px solid var(--yellow); border-radius: 8px; background: linear-gradient(90deg, rgba(255, 229, 61, .1), transparent 70%); box-shadow: 0 0 16px rgba(255, 229, 61, .18); }
+.dropfind__who { flex: 1; }
+.dropfind__score { font: 800 15px var(--font-chakra), monospace; color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+.dropfind__nums .dropgauge { margin: 2px 0; }
+.dropfind__quick strong b { margin-right: 6px; font: 900 11px var(--font-chakra), monospace; letter-spacing: .2em; color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
+.dropfind__quick p:nth-child(2) strong b { color: var(--yellow); text-shadow: 0 0 8px var(--glow-yellow); }
+@media (max-width: 560px) {
+  .dropfind__rank { width: 34px; font-size: 11px; }
+  .dropfind__rows li.is-rank1:not(.is-closed) { margin-inline: -6px; }
+  /* Phone: the numbers go under the name on one line, so the name keeps the width. */
+  .dropfind__rows li { flex-wrap: wrap; row-gap: 6px; }
+  .dropfind__who { flex-basis: calc(100% - 46px); }
+  .dropfind__nums { flex: 1 1 100%; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 4px 12px; padding-left: 46px; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { .dropfind__insert, .dropfind__rank i { animation: none; } }

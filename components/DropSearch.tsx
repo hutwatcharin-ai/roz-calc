@@ -43,6 +43,8 @@ interface Choice {
   icon_url?: string | null;
 }
 
+const RANKS = ['1ST', '2ND', '3RD'];
+
 function perClearText(n: number): string {
   if (n >= 1) return `≈ ${Number(n.toFixed(1))} ชิ้น/รอบ`;
   return `≈ 1 ชิ้นต่อ ${Math.round(1 / n)} รอบ`;
@@ -81,9 +83,10 @@ export default function DropSearch({
   }
 
   return (
-    <div className="card card--pink">
+    <div className="card card--pink dropfind">
       {/* An unresolved item is a search with no result, whatever rows says. */}
       <TrackSearch term={query} count={resolvedName ? rows.length : 0} />
+      {!query && <p className="dropfind__insert" aria-hidden="true">▶ INSERT ITEM</p>}
       <form className="dropfind__form">
         <SuggestInput
           src="/suggest/drops"
@@ -146,15 +149,28 @@ export default function DropSearch({
       {/* Same rule as every other monster surface: Challenge clones hidden by
           default, one checkbox to reveal. */}
       {rows.some((row) => isCVariant(row.monster_name)) && <CVariantToggle mode="local" />}
+      {rows.length > 0 && (
+        <p className="dropfind__board" aria-hidden="true">
+          <span>HI-SCORE</span> ฟาร์มตัวไหนได้ของเร็วสุด
+        </p>
+      )}
       <ol className="dropfind__rows">
-        {rows.map((row) => {
+        {rows.map((row, i) => {
+          // Rank among the rows shown by default: Challenge clones are hidden
+          // until toggled, and a hidden clone must not take the 1ST slot.
+          const c = isCVariant(row.monster_name);
+          const index = c ? -1 : rows.slice(0, i).filter((r) => !isCVariant(r.monster_name)).length;
           const penalty = level && row.monster_level !== null ? dropPenalty(level, row.monster_level) : 'none';
           const far = penalty !== 'none';
           return (
             <li
               key={row.monster_id}
-              className={[isCVariant(row.monster_name) ? 'cvariant' : '', row.closed ? 'is-closed' : '', far ? 'is-far' : ''].filter(Boolean).join(' ') || undefined}
+              className={[c ? 'cvariant' : '', row.closed ? 'is-closed' : '', far ? 'is-far' : '', index >= 0 && index < 3 ? `is-rank${index + 1}` : ''].filter(Boolean).join(' ') || undefined}
             >
+              <span className="dropfind__rank mono" aria-hidden="true">
+                {index === 0 && !row.closed && <i>▶</i>}
+                {index < 0 ? 'C' : RANKS[index] ?? `${index + 1}TH`}
+              </span>
               <span className="dropfind__who">
                 {row.monster_image_url && (
                   <img loading="lazy" decoding="async" src={row.monster_image_url} alt="" width={28} height={28} />
@@ -179,9 +195,18 @@ export default function DropSearch({
                 </span>
               </span>
               <span className="dropfind__nums">
-                <span className="mono dropfind__rate">{row.rate != null ? `${row.rate}%` : '?'}</span>
+                {row.perClear && !row.closed && <span className="dropfind__score mono">{perClearText(row.perClear)}</span>}
+                <span className="dropgauge">
+                  {row.rate != null && (
+                    <span
+                      className="dropgauge__bar"
+                      style={{ ['--fill' as string]: Math.min(1, Math.max(0.04, (Math.log10(row.rate) + 2) / 4)) }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span className="mono dropfind__rate">{row.rate != null ? `${row.rate}%` : '?'}</span>
+                </span>
                 {row.killsPerItem && <small>ฆ่า ~{row.killsPerItem.toLocaleString('en-US')} ตัว/ชิ้น</small>}
-                {row.perClear && !row.closed && <small className="dropfind__clear">{perClearText(row.perClear)}</small>}
               </span>
             </li>
           );

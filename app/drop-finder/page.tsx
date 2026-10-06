@@ -238,9 +238,9 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">
-        <span className="nobr">ค้นของดรอป</span> <span className="nobr">ไอเทมดรอป</span>
-        <span className="nobr">จากมอนตัวไหน</span>
+      <p className="arckicker">DROP FINDER · ค้นของดรอป</p>
+      <h1 className="pagehead__title arcname">
+        <span className="nobr">ไอเทมนี้ดรอป</span> <span className="nobr">จากมอนตัวไหน</span>
       </h1>
       <div className="panel" style={{ marginTop: 14 }}>
         <DropSearch query={query || resolvedInputName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} choices={choices} />
@@ -250,7 +250,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
       {!searched && (
         <div className="dropfind__quick">
           <p>
-            <strong>วัตถุดิบที่ค้นบ่อย</strong>
+            <strong><b>SELECT</b> วัตถุดิบที่ค้นบ่อย</strong>
             {SAMPLE_SEARCHES.map((name) => (
               <a key={name} className="chiplink" href={`/drop-finder?q=${encodeURIComponent(name)}`}>
                 {name}
@@ -258,7 +258,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
             ))}
           </p>
           <p>
-            <strong>เก็บของดรอปไว้ทำโทเคนของติดดาว</strong>
+            <strong><b>★ BONUS</b> เก็บของดรอปไว้ทำโทเคนของติดดาว</strong>
             {STAR_BASES.map((name) => (
               <a key={name} className="chiplink" href={`/drop-finder?q=${encodeURIComponent(name)}`}>
                 {name}
@@ -270,6 +270,7 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
       )}
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>
+          <p className="arckicker" style={{ color: 'var(--yellow)', textShadow: '0 0 8px var(--glow-yellow)' }}>TREASURE LIST</p>
           <h2 style={{ font: '700 16px/1.6 var(--font-sarabun), sans-serif' }}>ของขายได้ราคาที่ฟาร์มได้</h2>
           <p className="muted" style={{ marginTop: 2 }}>เรียงตามราคาขายร้าน NPC · กดชื่อเพื่อดูว่าตัวไหนดรอป</p>
           <div style={{ overflowX: 'auto' }}>
