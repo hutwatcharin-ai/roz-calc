@@ -93,17 +93,6 @@ with open(OUT, 'w', encoding='utf-8') as f:
     }, f, ensure_ascii=False, separators=(',', ':'))
 print(f'{len(items)} items -> {os.path.normpath(OUT)} ({os.path.getsize(OUT) // 1024} KB)')
 
-# The refine bonus tables: the total ATK (weapons; MATK is the same number)
-# or DEF (armour) an item has at each refine, +1 to +20. Totals, not steps --
-# a level 3 weapon gains 5 a refine to +15 and 59 a refine after.
-schedules = json.load(open(os.path.join(os.path.dirname(SRC), 'refine.json'), encoding='utf-8'))['schedules']
-refine = {
-    s['key']: [step['bonus_def'] if s['key'] == 'armor' else step['bonus_atk'] for step in sorted(s['steps'], key=lambda x: x['level'])]
-    for s in schedules
-}
-with open(os.path.join(ROOT, 'data', 'refine-bonus.json'), 'w', encoding='utf-8') as f:
-    json.dump({'_meta': {'how': 'python scripts/build-item-effects.py', 'what': 'total ATK (weapons, MATK equal) or DEF (armor) at refine +1..+20', 'source': 'roz.prontera.info refine schedules, 6 Oct 2026'}, 'schedules': refine}, f, separators=(',', ':'))
-print('refine schedules', {k: v[:3] + ['...', v[-1]] for k, v in refine.items()})
 
 # Food and buff items that raise a stat, HIT, FLEE or CRI: the "what can I eat
 # for more HIT" list on /tools/hit-flee. From prontera's buff table; only

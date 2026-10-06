@@ -8,7 +8,7 @@
 // ตีเผ่า, ทะลุ DEF, ลดร่าย, คริแรง, กันธาตุ.
 
 import file from '@/data/item-effects.json';
-import refineFile from '@/data/refine-bonus.json';
+import { ARMOUR_DEF, WEAPON_ATK, WEAPON_ATK_BONUS } from '@/lib/refine-table';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 
 /** [type, value, target, every N refines, skill name, per level of this skill] */
@@ -164,13 +164,21 @@ export function effectTypes(effects: ItemEffects | null): Set<string> {
   return out;
 }
 
-/** Total ATK (weapon; MATK is the same) or DEF (armour) at refine +1..+20. */
-const REFINE = (refineFile as { schedules: Record<string, number[]> }).schedules;
-
+/**
+ * ATK (weapon; MATK is the same) or DEF (armour) an item has at a refine
+ * level, from the official refine table on /tools/refine (lib/refine-table):
+ * the base line plus the extra high refines add. prontera.info's schedule
+ * carries the base line only -- 50 at +10 for a level 3 weapon where the
+ * official table gives 50 + 40 -- so the schedule key comes from there and
+ * the numbers do not.
+ */
 export function refineBonusAt(schedule: string | undefined, refine: number): { stat: 'ATK' | 'DEF'; value: number } | null {
-  const row = schedule ? REFINE[schedule] : undefined;
-  if (!row || refine < 1 || refine > row.length) return null;
-  return { stat: schedule === 'armor' ? 'DEF' : 'ATK', value: row[refine - 1] };
+  if (!schedule || refine < 1 || refine > ARMOUR_DEF.length) return null;
+  if (schedule === 'armor') return { stat: 'DEF', value: ARMOUR_DEF[refine - 1] };
+  const m = /^weapon_lv([1-4])$/.exec(schedule);
+  if (!m) return null;
+  const key = `weapon${m[1]}` as keyof typeof WEAPON_ATK;
+  return { stat: 'ATK', value: WEAPON_ATK[key][refine - 1] + WEAPON_ATK_BONUS[key][refine - 1] };
 }
 
 /**

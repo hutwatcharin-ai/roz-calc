@@ -36,9 +36,10 @@ describe('item effects', () => {
     for (const type of used) expect(BONUS_TYPES[type], type).toBeDefined();
   });
 
-  it('gives refine totals, not steps (a level 3 weapon jumps after +15)', () => {
-    expect(refineBonusAt('weapon_lv3', 10)).toEqual({ stat: 'ATK', value: 50 });
-    expect(refineBonusAt('weapon_lv3', 16)).toEqual({ stat: 'ATK', value: 134 });
+  it('gives refine totals from the official table, high-refine extra included', () => {
+    // Level 3 weapon at +10: base 50 plus the extra 40 the official guide prints.
+    expect(refineBonusAt('weapon_lv3', 10)).toEqual({ stat: 'ATK', value: 90 });
+    expect(refineBonusAt('weapon_lv3', 16)).toEqual({ stat: 'ATK', value: 222 });
     expect(refineBonusAt('armor', 7)).toEqual({ stat: 'DEF', value: 49 });
     expect(refineBonusAt(undefined, 7)).toBeNull();
   });
