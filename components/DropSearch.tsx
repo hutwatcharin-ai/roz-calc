@@ -1,12 +1,26 @@
 'use client';
 
 // components/DropSearch.tsx
+//
+// The drop finder's search and answer (rebuilt 6 Oct 2026, owner: "lots of
+// people use it and it looks plain"). The answer is "where do I farm this",
+// not a list of rates: rows come ranked by items per clear of the best open
+// map (lib/drop-rank), each saying how many kills one item takes, where the
+// monster stands thickest, and whether it attacks first. A level typed once
+// (kept with the site's other tool numbers) fades monsters far enough away
+// that the drop rate drops.
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import MonsterLink from '@/components/MonsterLink';
 import TrackSearch from '@/components/TrackSearch';
 import AggroBadge from '@/components/AggroBadge';
 import CVariantToggle from '@/components/CVariantToggle';
+import SuggestInput from '@/components/SuggestInput';
 import { isCVariant } from '@/lib/c-variant';
+import { dropPenalty, DROP_PENALTY_LABELS } from '@/lib/drop-penalty';
+import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
+import type { BestMap } from '@/lib/drop-rank';
 
 interface DropRow {
   monster_id: number;
@@ -15,7 +29,23 @@ interface DropRow {
   monster_level: number | null;
   is_aggressive: boolean | null;
   atk_max: number | null;
-  rate: number;
+  rate: number | null;
+  best?: BestMap | null;
+  perClear?: number | null;
+  killsPerItem?: number | null;
+  closed?: boolean;
+}
+
+interface Choice {
+  id: number;
+  name_en: string;
+  slots?: number | null;
+  icon_url?: string | null;
+}
+
+function perClearText(n: number): string {
+  if (n >= 1) return `≈ ${Number(n.toFixed(1))} ชิ้น/รอบ`;
+  return `≈ 1 ชิ้นต่อ ${Math.round(1 / n)} รอบ`;
 }
 
 export default function DropSearch({
@@ -23,22 +53,80 @@ export default function DropSearch({
   resolvedName,
   resolvedId,
   rows,
+  choices = [],
 }: {
   query: string;
   resolvedName?: string | null;
   resolvedId?: number | null;
   rows: DropRow[];
+  choices?: Choice[];
 }) {
+  const [level, setLevel] = useState<number | null>(null);
+  useEffect(() => {
+    try {
+      setLevel(readPlayerNumbers(window.localStorage).level ?? null);
+    } catch {
+      // Blocked site data: no level, no fading.
+    }
+  }, []);
+  function saveLevel(raw: string) {
+    const n = Math.max(0, Math.min(99, Number(raw) || 0));
+    setLevel(n || null);
+    try {
+      const prev = readPlayerNumbers(window.localStorage);
+      writePlayerNumbers(window.localStorage, { ...prev, level: n || undefined });
+    } catch {
+      // Not remembering it does not stop it working on this page.
+    }
+  }
 
   return (
     <div className="card card--pink">
       {/* An unresolved item is a search with no result, whatever rows says. */}
       <TrackSearch term={query} count={resolvedName ? rows.length : 0} />
-      <form>
-        <input className="mono" type="search" name="q" defaultValue={query} placeholder="เช่น Elunium" aria-label="ชื่อไอเทมที่อยากหา" enterKeyHint="search" autoComplete="off" />
-        <button type="submit">ค้นหา</button>
+      <form className="dropfind__form">
+        <SuggestInput
+          src="/suggest/drops"
+          look="icon"
+          heading="SELECT ITEM"
+          listLabel="ไอเทมที่มีมอนดรอป"
+          placeholder="เช่น Elunium, Steel, หินโอริ"
+          defaultValue={query}
+        />
+        <button type="submit" className="btn">ค้นหา</button>
       </form>
-      {query && !resolvedName && <p style={{ color: 'var(--faint)' }}>ไม่พบไอเทมนี้</p>}
+      <label className="dropfind__lv">
+        เลเวลคุณ
+        <input
+          className="mono"
+          type="number"
+          inputMode="numeric"
+          min={1}
+          max={99}
+          value={level ?? ''}
+          placeholder="—"
+          onChange={(e) => saveLevel(e.target.value)}
+        />
+        <span className="muted">ใส่แล้วมอนที่ห่างเกิน 19 เลเวลจะขึ้นจาง (ดรอปอาจโดนหัก)</span>
+      </label>
+
+      {choices.length > 0 && (
+        <div className="dropfind__choices">
+          <p className="muted">เจอ {choices.length} ไอเทมที่มีมอนดรอป เลือกตัวที่ต้องการ</p>
+          <ul>
+            {choices.map((c) => (
+              <li key={c.id}>
+                <a href={`/drop-finder?id=${c.id}`}>
+                  {c.icon_url && <img src={c.icon_url} alt="" width={24} height={24} />}
+                  {c.name_en}
+                  {(c.slots ?? 0) > 0 && <span className="mono"> [{c.slots}]</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {query && !resolvedName && choices.length === 0 && <p style={{ color: 'var(--faint)' }}>ไม่พบไอเทมนี้</p>}
       {resolvedName && (
         <p style={{ marginTop: 10, fontSize: 13, color: 'var(--dim)' }}>
           ผลลัพธ์สำหรับ:{' '}
@@ -49,61 +137,62 @@ export default function DropSearch({
           ) : (
             <b className="mono" style={{ color: 'var(--pink)' }}>{resolvedName}</b>
           )}
+          {rows.length > 0 && <span> · เรียงจากตัวที่ได้ของเร็วสุดเมื่อกวาดแมพที่มีมันเยอะสุด 1 รอบ</span>}
         </p>
       )}
       {resolvedName && rows.length === 0 && (
         <p style={{ color: 'var(--faint)' }}>ไอเทมนี้ไม่มีมอนสเตอร์ตัวไหนดรอป</p>
       )}
-      {/* Capped width: on a wide screen the % sat a full viewport away from
-          the name (user screenshot, 1 Sep) -- an eye has to travel the gap.
-          65ch keeps name and rate in one glance. */}
       {/* Same rule as every other monster surface: Challenge clones hidden by
-          default, one checkbox to reveal (they carried 7 of 10 result rows on
-          common items and buried the real monsters). */}
+          default, one checkbox to reveal. */}
       {rows.some((row) => isCVariant(row.monster_name)) && <CVariantToggle mode="local" />}
-      <div style={{ marginTop: 12, maxWidth: 720 }}>
-        {rows.map((row) => (
-          <div
-            key={row.monster_id}
-            className={isCVariant(row.monster_name) ? 'cvariant' : undefined}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: 10,
-              padding: '9px 0',
-              borderBottom: '1px solid var(--hair)',
-              flexWrap: 'wrap',
-            }}
-          >
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-              {row.monster_image_url && (
-                <img loading="lazy" decoding="async" src={row.monster_image_url} alt="" width={20} height={20} style={{ imageRendering: 'pixelated' }} />
-              )}
-              <MonsterLink id={row.monster_id} name={row.monster_name} />
-              {row.monster_level !== null && <span className="muted">Lv.{row.monster_level}</span>}
-              {/* The flag belongs on every surface a monster appears on
-                  (spec 3.15.1), and a drop hunt is one of the places a player
-                  decides where to stand. */}
-              <AggroBadge monster={{ is_aggressive: row.is_aggressive, atk_max: row.atk_max }} />
-              {/* Drops are what this page is about, so the level-gap penalty
-                  belongs here more than anywhere (spec 3.9). */}
-            </span>
-            <span className="dropgauge">
-              {/* Arcade gauge (1 Oct 2026). Log scale, 0.01% to 100%: on a
-                  straight line every card-rate drop would be an empty bar. */}
-              {row.rate != null && (
-                <span
-                  className="dropgauge__bar"
-                  style={{ ['--fill' as string]: Math.min(1, Math.max(0.04, (Math.log10(row.rate) + 2) / 4)) }}
-                  aria-hidden="true"
-                />
-              )}
-              <span className="mono" style={{ color: 'var(--pink)' }}>{row.rate != null ? `${row.rate}%` : '?'}</span>
-            </span>
-          </div>
-        ))}
-      </div>
+      <ol className="dropfind__rows">
+        {rows.map((row) => {
+          const penalty = level && row.monster_level !== null ? dropPenalty(level, row.monster_level) : 'none';
+          const far = penalty !== 'none';
+          return (
+            <li
+              key={row.monster_id}
+              className={[isCVariant(row.monster_name) ? 'cvariant' : '', row.closed ? 'is-closed' : '', far ? 'is-far' : ''].filter(Boolean).join(' ') || undefined}
+            >
+              <span className="dropfind__who">
+                {row.monster_image_url && (
+                  <img loading="lazy" decoding="async" src={row.monster_image_url} alt="" width={28} height={28} />
+                )}
+                <span>
+                  <MonsterLink id={row.monster_id} name={row.monster_name} />
+                  {row.monster_level !== null && <span className="muted"> Lv.{row.monster_level}</span>}{' '}
+                  <AggroBadge monster={{ is_aggressive: row.is_aggressive, atk_max: row.atk_max }} />
+                  <small className="dropfind__where">
+                    {row.closed ? (
+                      'ยังไม่มีในเกม (แมพยังไม่เปิด)'
+                    ) : row.best ? (
+                      <>
+                        เยอะสุดที่ <Link href={`/database/maps/${encodeURIComponent(row.best.code)}`}>{row.best.name}</Link>
+                        {row.best.amount ? ` · ${row.best.amount} ตัว` : ' · ไม่ทราบจำนวน'}
+                      </>
+                    ) : (
+                      'ไม่ทราบแมพ'
+                    )}
+                    {far && ` · ${DROP_PENALTY_LABELS[penalty]}`}
+                  </small>
+                </span>
+              </span>
+              <span className="dropfind__nums">
+                <span className="mono dropfind__rate">{row.rate != null ? `${row.rate}%` : '?'}</span>
+                {row.killsPerItem && <small>ฆ่า ~{row.killsPerItem.toLocaleString('en-US')} ตัว/ชิ้น</small>}
+                {row.perClear && !row.closed && <small className="dropfind__clear">{perClearText(row.perClear)}</small>}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+      {rows.length > 0 && (
+        <p className="muted" style={{ marginTop: 10, fontSize: 12.5 }}>
+          &quot;รอบ&quot; คือฆ่ามอนตัวนั้นครบทุกตัวในแมพ 1 ครั้ง · อยากรู้เป็นชิ้นต่อชั่วโมง ใช้{' '}
+          <Link href="/tools/leveling-spots">หาจุดฟาร์ม</Link> ที่คิดจากความเร็วฆ่าของคุณ
+        </p>
+      )}
     </div>
   );
 }

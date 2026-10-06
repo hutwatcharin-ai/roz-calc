@@ -5,6 +5,8 @@ import DropSearch from '@/components/DropSearch';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import Pagination from '@/components/Pagination';
+import { rankDrops } from '@/lib/drop-rank';
+import { mapRelease } from '@/lib/map-availability';
 
 export const metadata = {
   title: 'ค้นของดรอป Ragnarok Zero',
@@ -51,10 +53,10 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
 
   const { data: partial, error: partialError } = await db
     .from('items')
-    .select('id, name_en, slots')
+    .select('id, name_en, slots, icon_url')
     .ilike('name_en', `%${needle}%`)
     .order('name_en')
-    .limit(10);
+    .limit(40);
 
   if (partialError) {
     console.error('item substring lookup failed', partialError);
@@ -62,11 +64,26 @@ async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string
   }
   if (!partial || partial.length === 0) return null;
 
-  return pickDroppable(db, partial);
+  // A part of a name ("arc", "cross") used to pick one item for the player.
+  // When several items that drop match, the page lists them to choose from
+  // instead (owner, 6 Oct 2026).
+  const { data: dropRows } = await db.from('monster_drops').select('item_id').in('item_id', partial.map((c) => c.id));
+  const dropping = new Set((dropRows ?? []).map((d) => d.item_id));
+  const choices = partial.filter((c) => dropping.has(c.id) && !isAbsentFromGame(c.id));
+  if (choices.length > 1) return { choices };
+  return pickDroppable(db, choices.length ? choices : partial);
+}
+
+interface Choice {
+  id: number;
+  name_en: string;
+  slots?: number | null;
+  icon_url?: string | null;
 }
 
 async function findDrops(query: string, itemId: number | null) {
-  if (!query && !itemId) return { resolvedName: null, resolvedInputName: null, resolvedId: null, rows: [] };
+  const none = { resolvedName: null, resolvedInputName: null, resolvedId: null, rows: [], choices: [] as Choice[] };
+  if (!query && !itemId) return none;
   const db = supabaseBrowser();
 
   // An explicit id (starter-table links) skips name resolution entirely:
@@ -77,45 +94,64 @@ async function findDrops(query: string, itemId: number | null) {
     if (error) console.error('item id lookup failed', error);
     item = data?.[0] ?? null;
   } else {
-    item = await resolveItem(db, query);
+    const found = await resolveItem(db, query);
+    if (found && 'choices' in found) return { ...none, choices: found.choices as Choice[] };
+    item = found;
   }
-  if (!item) return { resolvedName: null, resolvedInputName: null, resolvedId: null, rows: [] };
+  if (!item) return none;
 
   const { data: drops, error: dropsError } = await db
     .from('monster_drops')
     .select('monster_id, rate, monsters(name_en, image_url, level, is_aggressive, atk_max)')
     .eq('item_id', item.id)
     .order('rate', { ascending: false })
-    // 40 not 10: Challenge clones are hidden by default on the client, and a
-    // popular item's top-10 can be mostly C rows -- the visible list would
-    // shrink to two or three real monsters.
-    .limit(40);
+    // 80: Challenge clones are hidden by default on the client, and a popular
+    // item's top rows can be mostly C rows.
+    .limit(80);
 
+  const resolvedName = (item.slots ?? 0) > 0 ? `${item.name_en} [${item.slots}]` : (item.name_en as string);
   if (dropsError || !drops) {
     if (dropsError) console.error('monster_drops query failed', dropsError);
-    return { resolvedName: (item.slots ?? 0) > 0 ? `${item.name_en} [${item.slots}]` : item.name_en, resolvedInputName: item.name_en, resolvedId: item.id as number, rows: [] };
+    return { ...none, resolvedName, resolvedInputName: item.name_en, resolvedId: item.id as number };
   }
 
+  // Where each monster stands and how many of it: the ranking wants the open
+  // map with the most of it (lib/drop-rank, owner 6 Oct 2026).
+  const ids = [...new Set(drops.map((d: any) => d.monster_id as number))];
+  const { data: spawns, error: spawnsError } = ids.length
+    ? await db.from('monster_spawns').select('monster_id, map_code, map_display_name, amount').in('monster_id', ids)
+    : { data: [], error: null };
+  if (spawnsError) console.error('drop finder spawns failed', spawnsError);
+
+  const base = drops.map((d: any) => ({
+    monster_id: d.monster_id as number,
+    monster_name: d.monsters.name_en as string,
+    monster_image_url: d.monsters.image_url as string | null,
+    monster_level: (d.monsters.level ?? null) as number | null,
+    is_aggressive: (d.monsters.is_aggressive ?? null) as boolean | null,
+    atk_max: (d.monsters.atk_max ?? null) as number | null,
+    rate: d.rate as number | null,
+  }));
+  const ranked = rankDrops(
+    base,
+    (spawns ?? []).map((s: any) => ({ monster_id: s.monster_id, map_code: s.map_code, map_name: s.map_display_name, amount: s.amount })),
+    (code) => Boolean(mapRelease(code)),
+  );
   return {
-    resolvedName: (item.slots ?? 0) > 0 ? `${item.name_en} [${item.slots}]` : (item.name_en as string),
+    resolvedName,
     resolvedInputName: item.name_en as string,
     resolvedId: item.id as number,
-    rows: drops.map((d: any) => ({
-      monster_id: d.monster_id,
-      monster_name: d.monsters.name_en,
-      monster_image_url: d.monsters.image_url as string | null,
-      monster_level: (d.monsters.level ?? null) as number | null,
-      is_aggressive: (d.monsters.is_aggressive ?? null) as boolean | null,
-      atk_max: (d.monsters.atk_max ?? null) as number | null,
-      rate: d.rate,
-    })),
+    rows: ranked.map((r) => ({ ...r.row, best: r.best, perClear: r.perClear, killsPerItem: r.killsPerItem, closed: r.closed })),
+    choices: [] as Choice[],
   };
 }
 
 // Example searches for the empty state. Hand-picked common farm targets, not
 // data-derived: they are prompts that show what the page does, so they should
 // stay recognizable names rather than whatever tops a price sort.
-const SAMPLE_SEARCHES = ['Jellopy', 'Elunium Ore', 'Steel', 'Emperium', 'Fluff', 'Witherless Rose'];
+const SAMPLE_SEARCHES = ['Steel', 'Elunium Ore', 'Rough Oridecon', 'Evil Horn', 'Jellopy', 'Emperium', 'Witherless Rose'];
+// The plain weapons with a ★ version that people search here most.
+const STAR_BASES = ['Ring Pommel Saber', 'Chain', 'Book', 'Cross Bow', 'Jur', 'Stiletto', 'Wand', 'Slayer', 'Guisarme'];
 
 // Fills the page before the first search: every NPC-sellable item that drops
 // from a monster, best price first, 40 a page (user, 7 Sep 2026: the top-12
@@ -183,9 +219,11 @@ async function starterList(): Promise<StarterItem[]> {
 }
 
 export default async function DropFinderPage({ searchParams }: { searchParams: { q?: string; id?: string; page?: string; sort?: string } }) {
-  const query = searchParams.q ?? '';
+  // Some links reach here as ?q=steel?q=steel (about 200 views in the 28 days
+  // to 6 Oct 2026, source not found); the first value is what was meant.
+  const query = (searchParams.q ?? '').split('?')[0].trim();
   const itemId = Number(searchParams.id) || null;
-  const { resolvedName, resolvedInputName, resolvedId, rows } = await findDrops(query, itemId);
+  const { resolvedName, resolvedInputName, resolvedId, rows, choices } = await findDrops(query, itemId);
   const searched = Boolean(query || itemId);
   const sort = searchParams.sort === 'drops' || searchParams.sort === 'name' ? searchParams.sort : 'price';
   const allStarters = searched ? [] : await starterList();
@@ -205,17 +243,30 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
         <span className="nobr">จากมอนตัวไหน</span>
       </h1>
       <div className="panel" style={{ marginTop: 14 }}>
-        <DropSearch query={query || resolvedInputName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} />
+        <DropSearch query={query || resolvedInputName || ''} resolvedName={resolvedName} resolvedId={resolvedId} rows={rows} choices={choices} />
       </div>
+      {/* Shortcuts from what people search here (GA4, 28 days to 6 Oct 2026):
+          materials, and the dropped weapons people stock up for star tokens. */}
       {!searched && (
-        <p className="muted" style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-          ลองค้น:
-          {SAMPLE_SEARCHES.map((name) => (
-            <a key={name} className="chiplink" href={`/drop-finder?q=${encodeURIComponent(name)}`}>
-              {name}
-            </a>
-          ))}
-        </p>
+        <div className="dropfind__quick">
+          <p>
+            <strong>วัตถุดิบที่ค้นบ่อย</strong>
+            {SAMPLE_SEARCHES.map((name) => (
+              <a key={name} className="chiplink" href={`/drop-finder?q=${encodeURIComponent(name)}`}>
+                {name}
+              </a>
+            ))}
+          </p>
+          <p>
+            <strong>เก็บของดรอปไว้ทำโทเคนของติดดาว</strong>
+            {STAR_BASES.map((name) => (
+              <a key={name} className="chiplink" href={`/drop-finder?q=${encodeURIComponent(name)}`}>
+                {name}
+              </a>
+            ))}
+            <a className="chiplink" href="/guides/star-gear">ไกด์ของติดดาว →</a>
+          </p>
+        </div>
       )}
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>

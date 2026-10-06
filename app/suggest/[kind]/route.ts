@@ -35,7 +35,7 @@ const KINDS = {
 type Kind = keyof typeof KINDS;
 
 export function generateStaticParams() {
-  return [...Object.keys(KINDS), 'monsters'].map((kind) => ({ kind }));
+  return [...Object.keys(KINDS), 'monsters', 'drops'].map((kind) => ({ kind }));
 }
 
 interface MonsterRow {
@@ -78,6 +78,37 @@ async function monsterEntries(): Promise<SuggestEntry[]> {
   });
 }
 
+// The drop finder's box (owner, 6 Oct 2026): every item some monster drops,
+// whatever its category, each linking straight to its drop list. Names that
+// several items share show their slots so the player picks the copy that
+// drops.
+async function dropEntries(): Promise<SuggestEntry[]> {
+  const db = supabaseBrowser();
+  const { data: drops, error: dropsError } = await fetchAllRows<{ id: number; item_id: number }>((from, to) =>
+    db.from('monster_drops').select('id, item_id').order('id').range(from, to),
+  );
+  if (dropsError) throw new Error(`suggest/drops: ${dropsError.message}`);
+  const dropped = new Set((drops ?? []).map((d) => d.item_id));
+  const { data, error } = await fetchAllRows<Row>((from, to) =>
+    db.from('items').select('id, name_en, category, icon_url, slots, required_level, weapon_type, description').order('id').range(from, to),
+  );
+  if (error) throw new Error(`suggest/drops: ${error.message}`);
+  return (data ?? [])
+    .filter((r) => dropped.has(r.id) && !isAbsentFromGame(r.id))
+    .map((r) => ({
+      id: r.id,
+      href: `/drop-finder?id=${r.id}`,
+      name: r.name_en,
+      label: r.slots && r.slots > 0 ? `${r.name_en} [${r.slots}]` : r.name_en,
+      sub: r.category ?? '',
+      aliases: thaiAliasNames('items', r.id),
+      sprite: r.icon_url,
+      el: '',
+      lv: null,
+      tag: null,
+    }));
+}
+
 const HEADERS = { 'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=3600' };
 
 interface Row {
@@ -107,6 +138,7 @@ function sub(kind: Kind, row: Row): string {
 
 export async function GET(_request: Request, { params }: { params: { kind: string } }) {
   if (params.kind === 'monsters') return NextResponse.json(await monsterEntries(), { headers: HEADERS });
+  if (params.kind === 'drops') return NextResponse.json(await dropEntries(), { headers: HEADERS });
   if (!(params.kind in KINDS)) return NextResponse.json([], { status: 404 });
   const kind = params.kind as Kind;
   const db = supabaseBrowser();
