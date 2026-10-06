@@ -39,3 +39,10 @@ const LABEL: Record<string, string> = { str: 'STR', agi: 'AGI', vit: 'VIT', int:
 export function foodText(food: FoodBuff): string {
   return Object.entries(food.b).map(([k, v]) => `${LABEL[k] ?? k} ${v > 0 ? '+' : ''}${v}`).join(' · ');
 }
+
+const BY_ID = new Map(FOODS.map((f) => [f.id, f]));
+
+/** The buff a food item gives, for recipe and item lists. */
+export function foodById(id: number): FoodBuff | null {
+  return BY_ID.get(id) ?? null;
+}

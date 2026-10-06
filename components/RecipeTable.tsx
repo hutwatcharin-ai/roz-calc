@@ -12,6 +12,7 @@
 // that a recipe can say "10 Iron" and the reader can go and find out where
 // Iron comes from.
 
+import { foodById, foodText } from '@/lib/food-buffs';
 import Link from 'next/link';
 import ItemIcon from '@/components/ItemIcon';
 import { itemHref } from '@/lib/item-href';
@@ -55,6 +56,8 @@ export default function RecipeTable({
             const productCell = (
               <td data-label={materialFirst ? 'ได้เป็น' : 'ของที่ได้'} key="p">
                 <ItemCell item={r.product as CraftMaterial} amount={r.product.amount} />
+                {/* What a dish does (lib/food-buffs, from roz.prontera.info). */}
+                {foodById(r.product.id) && <small className="recipe__effect">{foodText(foodById(r.product.id)!)}</small>}
               </td>
             );
             const materialCell = (

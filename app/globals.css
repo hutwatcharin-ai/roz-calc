@@ -4293,3 +4293,4 @@ html .tag { border-radius: 4px; }
 .toolnumbers__stats { border: 0; padding: 0; margin: 0; min-width: 0; }
 .toolnumbers__stats input { width: 64px; margin-right: 4px; }
 .toolnumbers__stats small { display: block; margin-top: 4px; font-size: 12px; }
+.recipe__effect { display: block; margin-top: 4px; color: var(--cyan); font-size: 12.5px; }

@@ -81,6 +81,13 @@ function iconOf(id: number) {
   return id === 1100061 ? `/images/items/${id}.png` : `/images/items/${id}.gif`;
 }
 
+/** SP back per regen tick: floor(INT/6) + floor(MaxSP/100) + 1, plus extra from INT 120 (rAthena, via roz.prontera.info). */
+function spRegen(int: number, maxSp: number): number {
+  return Math.floor(int / 6) + Math.floor(maxSp / 100) + 1 + (int >= 120 ? Math.floor((int - 120) / 2) + 4 : 0);
+}
+const SP_REGEN_INT = [1, 30, 50, 70, 90];
+const SP_REGEN_MAXSP = [200, 400, 600, 800];
+
 export default async function SpRecoveryPage() {
   const db = supabaseBrowser();
   const { data, error } = await db
@@ -137,6 +144,34 @@ export default async function SpRecoveryPage() {
             <img src={iconOf(100005)} alt="" width={32} height={32} />
             <div><strong>MaxSP สูง / ตีนาน → Small Mana Potion</strong><span>ฟื้นเป็น % ต่อเนื่อง 10–30 นาที ดีกว่าของกินทุกตัว</span></div>
           </div>
+        </div>
+      </section>
+
+      {/* Natural SP regen (6 Oct 2026): the free SP every bot player gets
+          between kills, from the formula roz.prontera.info uses. */}
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>SP ที่ฟื้นเองต่อรอบ</h2>
+        <p className="muted" style={{ marginTop: 4 }}>
+          ฟื้นเองต่อรอบ = floor(INT ÷ 6) + floor(MaxSP ÷ 100) + 1 · INT ตั้งแต่ 120 ได้เพิ่มอีก ·
+          สูตร rAthena ที่ roz.prontera.info ใช้ ยังไม่มีใครวัดใน Global · ยิ่ง INT กับ MaxSP สูง ยิ่งพกของฟื้น SP น้อยลงได้
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table className="stat-table">
+            <thead>
+              <tr>
+                <th scope="col">INT ↓ · MaxSP →</th>
+                {SP_REGEN_MAXSP.map((sp) => <th key={sp} scope="col" className="num">{sp}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {SP_REGEN_INT.map((int) => (
+                <tr key={int}>
+                  <th scope="row" className="mono">{int}</th>
+                  {SP_REGEN_MAXSP.map((sp) => <td key={sp} className="num">{spRegen(int, sp)}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 

@@ -14,7 +14,8 @@
 // lists only overrides rather than the whole matrix. Classic Ragnarok gives Whip
 // and Book the same profile, which would make 50 right, but that is an argument
 // from convention rather than a reading of the page, so the transcription
-// stands until someone looks at the guide again.
+// stands until someone looks at the guide again. roz.prontera.info reads 75
+// too and matches every cell both tables have (54 of 54, 6 Oct 2026).
 //
 // rozerodb also carries a row this table does not: Spear while mounted on a
 // Peco or Gryphon, at 75 / 100 / 100. Whether the official page prints it is
