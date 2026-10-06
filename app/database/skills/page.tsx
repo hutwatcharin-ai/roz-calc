@@ -33,15 +33,16 @@ interface SkillLevel {
   cooldown_ms: number | null;
 }
 
-// Milliseconds are what the source stores; seconds are what a player thinks
-// in. 1500 reads as 1.5 วิ, 800 as 0.8 วิ, and a null stays a dash rather
-// than becoming a zero.
 const SKILL_EXTRA = (skillExtra as { skills: Record<string, Record<string, { cv?: number; cf?: number; acd?: number; cd?: number; h?: number; aspd?: number }>> }).skills;
 
-function seconds(ms: number | null): string {
-  if (ms === null) return '—';
-  if (ms === 0) return 'ทันที';
-  return `${(ms / 1000).toFixed(ms % 1000 === 0 ? 0 : 1)} วิ`;
+// Milliseconds are what the source stores; seconds are what a player thinks
+// in, and a null stays a dash rather than becoming a zero. The unit lives in
+// the column header and cells carry the bare number (owner, 6 Oct 2026: the
+// cells wrapped into towers).
+function secs(ms: number | null | undefined): string {
+  if (ms === null || ms === undefined) return '—';
+  if (ms === 0) return '0';
+  return String(Number((ms / 1000).toFixed(ms % 100 === 0 ? 1 : 2)));
 }
 
 // 851 rows is under the cap today but close enough that a plain select()
@@ -371,47 +372,66 @@ export default async function SkillsPage({
                               // Cast split, after-cast delay, cooldown and hits from
                               // roz.prontera.info (data/skill-level-extra.json).
                               const extra = (l: SkillLevel) => SKILL_EXTRA[l.skill_slug]?.[String(l.level)] ?? {};
-                              const hasRange = levels.some((l) => l.attack_range !== null);
-                              const hasCast = levels.some((l) => l.cast_time_ms !== null || extra(l).cv || extra(l).cf);
-                              const hasCooldown = levels.some((l) => l.cooldown_ms !== null || extra(l).cd);
-                              const hasDelay = levels.some((l) => extra(l).acd || extra(l).aspd);
-                              const hasHits = levels.some((l) => (extra(l).h ?? 0) > 1);
-                              const hasSp = levels.some((l) => l.sp_cost !== null);
+                              // One column per number. A column with the same value at
+                              // every level moves up into a one-line summary, so the table
+                              // keeps only what changes and fits the skill card (owner,
+                              // 6 Oct 2026: the cells had wrapped into towers).
+                              const castText = (l: SkillLevel) =>
+                                extra(l).cv || extra(l).cf ? `${secs(extra(l).cv ?? 0)} +${secs(extra(l).cf ?? 0)}` : l.cast_time_ms !== null ? secs(l.cast_time_ms) : null;
+                              const columns: { label: string; unit: string; value: (l: SkillLevel) => string | null; title?: string }[] = [
+                                { label: 'SP', unit: '', value: (l) => (l.sp_cost !== null ? String(l.sp_cost) : null) },
+                                { label: 'ระยะ', unit: 'ช่อง', value: (l) => (l.attack_range !== null ? String(l.attack_range) : null) },
+                                { label: 'ร่าย', unit: 'วิ', value: castText, title: 'ร่ายแปรผัน +คงที่ (DEX/INT ลดได้แค่ส่วนแปรผัน)' },
+                                { label: 'ดีเลย์', unit: 'วิ', value: (l) => (extra(l).aspd ? 'ตาม ASPD' : extra(l).acd ? secs(extra(l).acd) : null), title: 'ดีเลย์หลังร่าย' },
+                                { label: 'คูลดาวน์', unit: 'วิ', value: (l) => (l.cooldown_ms !== null ? secs(l.cooldown_ms) : extra(l).cd ? secs(extra(l).cd) : null) },
+                                { label: 'ตี', unit: 'ครั้ง', value: (l) => ((extra(l).h ?? 1) > 1 ? String(extra(l).h) : null) },
+                              ];
+                              const present = columns.filter((c) => levels.some((l) => c.value(l) !== null));
+                              const same = present.filter((c) => levels.length > 1 && new Set(levels.map((l) => c.value(l))).size === 1);
+                              const varying = present.filter((c) => !same.includes(c));
                               return (
-                                <table className="data-table" style={{ marginTop: 10 }}>
-                                  <thead>
-                                    <tr>
-                                      <th className="num">Lv</th>
-                                      <th>ผล</th>
-                                      {hasSp && <th className="num">SP</th>}
-                                      {hasRange && <th className="num">ระยะ</th>}
-                                      {hasCast && <th className="num">ร่าย</th>}
-                                      {hasDelay && <th className="num">ดีเลย์</th>}
-                                      {hasCooldown && <th className="num">คูลดาวน์</th>}
-                                      {hasHits && <th className="num">ตี</th>}
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {levels.map((l) => (
-                                      <tr key={l.level}>
-                                        <td data-label="Lv" className="num mono">{l.level}</td>
-                                        <td data-label="ผล">{l.effect ?? '—'}</td>
-                                        {hasSp && <td data-label="SP" className="num mono">{l.sp_cost ?? '—'}</td>}
-                                        {hasRange && <td data-label="ระยะ" className="num mono">{l.attack_range ?? '—'}</td>}
-                                        {hasCast && (
-                                          <td data-label="ร่าย" className="num mono">
-                                            {extra(l).cv || extra(l).cf
-                                              ? `${seconds(extra(l).cv ?? 0)} + คงที่ ${seconds(extra(l).cf ?? 0)}`
-                                              : seconds(l.cast_time_ms)}
-                                          </td>
-                                        )}
-                                        {hasDelay && <td data-label="ดีเลย์" className="num mono">{extra(l).aspd ? 'ตาม ASPD' : seconds(extra(l).acd ?? null)}</td>}
-                                        {hasCooldown && <td data-label="คูลดาวน์" className="num mono">{seconds(l.cooldown_ms ?? extra(l).cd ?? null)}</td>}
-                                        {hasHits && <td data-label="ตี" className="num mono">{(extra(l).h ?? 1) > 1 ? `${extra(l).h} ครั้ง` : '—'}</td>}
+                                <>
+                                  {same.length > 0 && (
+                                    <p className="skilllv__same">
+                                      ทุกเลเวล:{' '}
+                                      {same.map((c, i) => {
+                                        const v = c.value(levels[0])!;
+                                        return (
+                                          <span key={c.label} title={c.title}>
+                                            {i > 0 && ' · '}
+                                            {c.label} <b className="mono">{v}</b>
+                                            {c.unit && v !== 'ตาม ASPD' ? ` ${c.unit}` : ''}
+                                          </span>
+                                        );
+                                      })}
+                                    </p>
+                                  )}
+                                  <table className="data-table skilllv" style={{ marginTop: 10 }}>
+                                    <thead>
+                                      <tr>
+                                        <th className="num">Lv</th>
+                                        <th>ผล</th>
+                                        {varying.map((c) => (
+                                          <th key={c.label} className="num" title={c.title}>
+                                            {c.label}
+                                            {c.unit && ` (${c.unit})`}
+                                          </th>
+                                        ))}
                                       </tr>
-                                    ))}
-                                  </tbody>
-                                </table>
+                                    </thead>
+                                    <tbody>
+                                      {levels.map((l) => (
+                                        <tr key={l.level}>
+                                          <td data-label="Lv" className="num mono">{l.level}</td>
+                                          <td data-label="ผล">{l.effect ?? '—'}</td>
+                                          {varying.map((c) => (
+                                            <td key={c.label} data-label={c.label} className="num mono">{c.value(l) ?? '—'}</td>
+                                          ))}
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </>
                               );
                             })()}
                           </div>

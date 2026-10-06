@@ -4294,3 +4294,10 @@ html .tag { border-radius: 4px; }
 .toolnumbers__stats input { width: 64px; margin-right: 4px; }
 .toolnumbers__stats small { display: block; margin-top: 4px; font-size: 12px; }
 .recipe__effect { display: block; margin-top: 4px; color: var(--cyan); font-size: 12.5px; }
+/* Skill level table (database/skills): numbers stay on one line, the
+   effect column takes the slack, fixed cast reads as the lesser half. */
+.skilllv td.num, .skilllv th.num { white-space: nowrap; }
+.skilllv th { font-size: 11px; }
+.skilllv td:nth-child(2) { min-width: 140px; }
+.skilllv__same { margin: 10px 0 0; font-size: 13px; color: var(--dim); }
+.skilllv__same b { color: var(--text); }
