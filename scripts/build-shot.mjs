@@ -27,7 +27,7 @@ for (const [name, viewport] of [['desktop', { width: 1280, height: 900 }], ['mob
     broken: [...document.images].filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.src),
   }));
   console.log(name, JSON.stringify(m), errors.length ? `errors: ${errors.join(' | ')}` : '');
-  const el = await page.$('.buildsim');
+  const el = await page.$('main');
   await el.screenshot({ path: `${outDir}/build-${name}.png` });
   if (name === 'mobile') {
     await page.click('.buildsim__slot:nth-child(3) .buildsim__pick');

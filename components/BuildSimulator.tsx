@@ -17,13 +17,12 @@
 // sheet on phones instead of a dropdown that ran off the screen.
 
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
 import {
   ALL_CARDS, ALL_GEAR, BUILD_KEY, EMPTY_BUILD, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild,
   encodeBuild, fitsSlot, gearById, isTwoHanded, maxJobLevel, sanitizeBuild, type Build, type Slot, type Target,
 } from '@/lib/build-calc';
 import { STATS, type Stat, classStats, statCost, WEAPON_TH } from '@/lib/class-stats';
-import { foodText, foodsFor, foodById } from '@/lib/food-buffs';
+import { foodText, foodById } from '@/lib/food-buffs';
 import { bonusText } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
@@ -62,6 +61,18 @@ function costBetween(from: number, to: number): number {
 }
 
 type Picking = { slot: Slot; card?: number } | null;
+
+/** A panel title: pixel icon, arcade label, and an optional count on the right. */
+function PanelHead({ icon, title, meta, pink }: { icon: string; title: string; meta?: string; pink?: boolean }) {
+  return (
+    <h2 className={`buildsim__h${pink ? ' buildsim__h--pink' : ''}`}>
+      <span className="buildsim__hicon" aria-hidden="true"><img src={icon} alt="" width={24} height={24} /></span>
+      {title}
+      {meta && <small>{meta}</small>}
+    </h2>
+  );
+}
+
 
 export default function BuildSimulator() {
   const [build, setBuild] = useState<Build>(EMPTY_BUILD);
@@ -249,16 +260,8 @@ export default function BuildSimulator() {
         <div className="buildsim__main">
           {/* CHARACTER */}
           <section className="card buildsim__panel">
-            <h2 className="buildsim__h">▶ CHARACTER</h2>
+            <PanelHead icon={HAS_SPRITE.has(build.cls) ? `/images/jobs/${build.cls}.png` : '/images/items/2228.gif'} title="CHARACTER" meta={`${TIER_TH[CLASSES.find((c) => c.slug === build.cls)?.tier ?? ''] ?? ''}`} />
             <div className="buildsim__hero">
-              <div className="buildsim__sprite">
-                {HAS_SPRITE.has(build.cls) ? (
-                  <img src={`/images/jobs/${build.cls}.png`} alt={cls?.name ?? ''} width={107} height={107} />
-                ) : (
-                  <span aria-hidden="true">?</span>
-                )}
-                <b>{cls?.name}</b>
-              </div>
               <div className="buildsim__heroform">
                 <label className="buildsim__field buildsim__field--wide">
                   อาชีพ
@@ -322,8 +325,18 @@ export default function BuildSimulator() {
 
           {/* EQUIPMENT */}
           <section className="card buildsim__panel">
-            <h2 className="buildsim__h">▶ EQUIPMENT</h2>
+            <PanelHead icon="/images/items/1116.gif" title="EQUIPMENT" meta={`ใส่แล้ว ${Object.keys(build.g).length}/${SLOTS.length}`} />
             <ul className="buildsim__slots">
+              <li className="buildsim__doll" aria-hidden="true">
+                <span className="buildsim__dollstage">
+                  {HAS_SPRITE.has(build.cls) ? <img src={`/images/jobs/${build.cls}.png`} alt="" width={107} height={107} /> : <b>?</b>}
+                </span>
+                <b>{cls?.name}</b>
+                <small className="mono">Lv {build.lv} · Job {build.job}</small>
+              </li>
+              {/* The game's own equip window: slots down both sides, the
+                  character in the middle (grid areas in CSS). Phones list
+                  them in SLOTS order. */}
               {SLOTS.map((slot) => {
                 const w = build.g[slot];
                 const item = w ? gearById(w.id) : null;
@@ -335,12 +348,12 @@ export default function BuildSimulator() {
                 const blockedShield = slot === 'shield' && isTwoHanded(weapon?.wt);
                 const off = coveredBy || blockedShield;
                 return (
-                  <li key={slot} className={`buildsim__slot${item ? ' is-filled' : ''}${off ? ' is-off' : ''}`}>
-                    <span className="buildsim__slotname">{SLOT_TH[slot]}</span>
-                    {coveredBy ? (
-                      <span className="buildsim__offnote">ใช้ร่วมกับ{SLOT_TH[coveredBy]}</span>
-                    ) : blockedShield ? (
-                      <span className="buildsim__offnote">อาวุธสองมือ ใส่โล่ไม่ได้</span>
+                  <li key={slot} className={`buildsim__slot buildsim__slot--${slot}${item ? ' is-filled' : ''}${off ? ' is-off' : ''}`}>
+                    {off ? (
+                      <span className="buildsim__offnote">
+                        <em>{SLOT_TH[slot]}</em>
+                        {coveredBy ? `ใช้ร่วมกับ${SLOT_TH[coveredBy]}` : 'อาวุธสองมือ ใส่โล่ไม่ได้'}
+                      </span>
                     ) : (
                       <>
                         <button type="button" className="buildsim__pick" onClick={() => openPicker({ slot })}>
@@ -348,6 +361,7 @@ export default function BuildSimulator() {
                             <img src={item?.i ?? `/images/items/${SLOT_ICON[slot]}.gif`} alt="" width={24} height={24} />
                           </span>
                           <span className="buildsim__pickname">
+                            <em>{SLOT_TH[slot]}</em>
                             {item ? item.n : '+ เลือก'}
                             {item && <small>{[item.atk ? `ATK ${item.atk}` : '', item.matk ? `MATK ${item.matk}` : '', item.def ? `DEF ${item.def}` : ''].filter(Boolean).join(' · ')}</small>}
                           </span>
@@ -422,7 +436,7 @@ export default function BuildSimulator() {
 
           {/* FOOD */}
           <section className="card buildsim__panel">
-            <h2 className="buildsim__h">▶ FOOD &amp; BUFF</h2>
+            <PanelHead icon="/images/items/12065.gif" title="FOOD & BUFF" meta={build.f.length ? `${build.f.length} อย่าง` : undefined} />
             <div className="buildsim__foods">
               {build.f.map((id) => {
                 const f = foodById(id);
@@ -442,17 +456,13 @@ export default function BuildSimulator() {
                 <option key={f.id} value={f.id}>{f.name} — {foodText(foodById(f.id)!)}</option>
               ))}
             </select>
-            <p className="muted buildsim__note">
-              อาหารที่เพิ่มสเตตัสเดียวกันไม่ทับกันในเกม นับแค่อันที่มากที่สุด · อยากได้ HIT เพิ่ม ลอง{' '}
-              {foodsFor('hit').slice(0, 2).map((f) => f.food.name).join(', ')}
-            </p>
           </section>
         </div>
 
         <aside className="buildsim__side">
           {/* STATUS WINDOW */}
           <section className="card buildsim__window">
-            <h2 className="buildsim__h buildsim__h--pink">▶ STATUS</h2>
+            <PanelHead icon="/images/items/7433.gif" title="STATUS" pink meta={`Lv ${build.lv} / ${build.job}`} />
             <p className="buildsim__who">{cls?.name} · Lv {build.lv} / Job {build.job} · {weapon ? WEAPON_TH[weapon.wt ?? ''] ?? weapon.n : 'มือเปล่า'}</p>
             <dl className="buildsim__grid">
               <div className="is-big"><dt>HIT</dt><dd className="mono">{result.hit}</dd></div>
@@ -482,15 +492,12 @@ export default function BuildSimulator() {
               <button type="button" className="btn" onClick={share}>{copied ? '✔ คัดลอกลิงก์แล้ว' : 'แชร์บิลด์'}</button>
               <button type="button" className="btn btn--quiet" onClick={() => { setBuild(EMPTY_BUILD); setTarget(null); setTargetImg(null); }}>เริ่มใหม่</button>
             </div>
-            <p className="muted buildsim__note">
-              HIT FLEE CRI ATK MATK DEF MDEF ใช้สูตรที่วัดในเกมแล้ว · &ldquo;ประมาณ&rdquo; = สูตรที่ยังไม่มีใครวัดใน Global
-              {!result.hpMeasured && ' · HP/SP อาชีพนี้อาจสูงเกินจริง 20-25%'} · ร่ายแปรผัน = เหลือกี่ % ของเวลาร่ายเดิม
-            </p>
+            <p className="buildsim__legend"><i>ประมาณ</i> = สูตรที่ยังไม่มีใครวัดใน Global</p>
           </section>
 
           {/* TARGET */}
           <section className="card buildsim__panel">
-            <h2 className="buildsim__h">▶ TARGET</h2>
+            <PanelHead icon="/images/monsters/1002.gif" title="TARGET" />
             <div className="buildsim__mob">
               <input type="search" placeholder="ชื่อมอน เช่น Poring, หมาป่า" value={mobQuery}
                 onFocus={() => void wantMobs()} onChange={(e) => setMobQuery(e.target.value)} aria-label="ค้นหามอน" />
@@ -552,14 +559,11 @@ export default function BuildSimulator() {
                     </li>
                   ) : null}
                 </ul>
-                <p className="muted buildsim__note">
-                  ดาเมจ = ตีธรรมดา 1 ครั้งแบบไม่คริ ไม่รวมช่วงสุ่มดาเมจ สกิลติดตัว และสกิลโจมตี
-                  {vs.multiplier !== 1 && ` · รวมผลตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}
-                </p>
+                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ ไม่รวมสกิล{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
               </div>
             ) : (
               <p className="buildsim__empty">
-                <img src="/images/items/1002.gif" alt="" width={32} height={32} />
+                <img src="/images/monsters/1002.gif" alt="" width={41} height={39} />
                 เลือกมอน ดูว่าบิลด์นี้ตีโดนกี่ % หลบได้กี่ % และต้องอัปอะไรอีก
               </p>
             )}
@@ -567,7 +571,7 @@ export default function BuildSimulator() {
 
           {/* EFFECTS */}
           <section className="card buildsim__panel">
-            <h2 className="buildsim__h">▶ EFFECTS</h2>
+            <PanelHead icon="/images/items/4001.gif" title="EFFECTS" meta={result.skipped.length ? `ยังไม่นับ ${result.skipped.length}` : undefined} />
             {result.other.length > 0 && (
               <>
                 <h3 className="buildsim__h3">ผลอื่นที่ได้ (ไม่อยู่ในหน้าต่างสเตตัส)</h3>
@@ -595,10 +599,6 @@ export default function BuildSimulator() {
               <p className="muted">ยังไม่ได้ใส่ของ</p>
             )}
           </section>
-          <p className="muted buildsim__note">
-            บิลด์ถูกจำไว้ในเครื่องนี้ หน้ามอนแต่ละตัวจะบอก % ตีโดน/หลบ ของบิลด์นี้ให้เอง ·{' '}
-            <Link href="/tools/damage">คำนวณดาเมจละเอียด</Link>
-          </p>
         </aside>
       </div>
     </>

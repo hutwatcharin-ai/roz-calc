@@ -76,9 +76,10 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
   // two fight tools keeps them from reading as refine (ตีบวก) siblings.
   // Only pages that take the player's own numbers and answer with theirs.
   tools: [
+    // The flagship tool first (owner, 6 Oct 2026).
+    { href: '/tools/build', label: 'จำลองบิลด์', icon: '/images/items/2228.gif', ready: true },
     { href: '/tools/leveling-spots', label: 'ฟาร์มที่ไหนดี', icon: '/images/items/607.gif', ready: true },
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
-    { href: '/tools/build', label: 'จำลองบิลด์', icon: '/images/items/1750.gif', ready: true },
     { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
   ],

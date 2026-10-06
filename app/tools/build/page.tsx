@@ -7,8 +7,11 @@
 // stats, gear, cards, food -- and see the status window before spending
 // points or zeny. The old path redirects here (next.config.mjs), and monster
 // pages read the HIT/FLEE this page saves.
+//
+// The site's flagship tool (owner, same day): its own arcade marquee instead
+// of the plain page header, and the source as one short line at the foot
+// rather than a paragraph above the tool.
 import BuildSimulator from '@/components/BuildSimulator';
-import PageHeader from '@/components/PageHeader';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 
@@ -19,25 +22,30 @@ export const metadata = {
   alternates: { canonical: '/tools/build' },
 };
 
+// A parade of classes across the marquee: decoration, one of each line.
+const PARADE = ['knight', 'wizard', 'hunter', 'priest', 'assassin', 'blacksmith'];
+
 export default function BuildPage() {
   return (
-    <main className="shell" style={{ paddingBlock: 32 }}>
+    <main className="shell" style={{ paddingBlock: 24 }}>
       <JsonLd data={breadcrumbJsonLd([
         { name: 'หน้าแรก', path: '/' },
         { name: 'จำลองบิลด์', path: '/tools/build' },
       ])} />
-      <PageHeader
-        title="จำลองบิลด์ — อัปสเตตัส ใส่ของ ดูค่าจริงก่อนลงแต้ม"
-        lead="เลือกอาชีพ อัปสเตตัส ใส่อุปกรณ์ ตีบวก การ์ด และอาหาร แล้วดูหน้าต่างสเตตัสทั้งหมด พร้อมเช็กกับมอนที่จะตีว่าโดนกี่ % ต้องอัป DEX/AGI อีกเท่าไหร่"
-        source={
-          <>
-            <strong>ที่มา:</strong> สูตร ค่าอาชีพ ผลของไอเทม การ์ด เซ็ต และอาหาร จาก{' '}
-            <a href="https://roz.prontera.info/builds/new" rel="noopener" target="_blank">roz.prontera.info</a> · ค่าตีบวกจากตารางทางการ ·
-            ฝั่งมอนใช้ HIT/FLEE เป้าจาก midgardhub
-          </>
-        }
-      />
+      <header className="bhero">
+        <div className="bhero__text">
+          <p className="bhero__kicker mono">▶ BUILD SIMULATOR</p>
+          <h1 className="bhero__title">จำลองบิลด์</h1>
+          <p className="bhero__lead">อัปสเตตัส ใส่ของ ตีบวก การ์ด อาหาร แล้วดูค่าจริงก่อนลงแต้ม</p>
+        </div>
+        <div className="bhero__parade" aria-hidden="true">
+          {PARADE.map((c) => <img key={c} src={`/images/jobs/${c}.png`} alt="" width={72} height={72} />)}
+        </div>
+      </header>
       <BuildSimulator />
+      <p className="bhero__credit">
+        สูตรและข้อมูลไอเทม: <a href="https://roz.prontera.info/builds/new" rel="noopener" target="_blank">roz.prontera.info</a> · HIT/FLEE มอน: midgardhub
+      </p>
     </main>
   );
 }
