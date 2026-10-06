@@ -4358,83 +4358,176 @@ html .tag { border-radius: 4px; }
 }
 @media (prefers-reduced-motion: reduce) { .dropfind__insert, .dropfind__rank i { animation: none; } }
 
-/* Build simulator, /tools/build (6 Oct 2026). Two columns on a wide screen:
-   what you put on the left, the status window and target on the right. */
+/* Build simulator, /tools/build (6 Oct 2026; second pass the same day for
+   pictures and phones). Two columns on a wide screen: what you put on the
+   left, the status window and target on the right. One column under 900px,
+   with a sticky score strip (.buildsim__hud) so the numbers stay in sight. */
 .buildsim { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 16px; align-items: start; margin-top: 16px; }
 .buildsim__main, .buildsim__side { display: grid; gap: 16px; min-width: 0; }
 .buildsim__side { position: sticky; top: 12px; }
-.buildsim__panel { position: relative; }
-.buildsim__h { margin: 0 0 10px; font-size: 14px; letter-spacing: .12em; color: var(--cyan); text-shadow: 0 0 8px rgba(61, 232, 255, .6); }
+.buildsim__panel { position: relative; min-width: 0; }
+.buildsim__h { margin: 0 0 12px; font-size: 14px; letter-spacing: .14em; color: var(--cyan); text-shadow: 0 0 8px rgba(61, 232, 255, .6); }
+.buildsim__h--pink { color: var(--pink); text-shadow: 0 0 8px rgba(255, 61, 154, .6); }
 .buildsim__h3 { margin: 8px 0 4px; font-size: 13px; color: var(--dim); }
-.buildsim__row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; }
-.buildsim__row label { display: grid; gap: 4px; font-size: 12.5px; color: var(--dim); }
-.buildsim__row input { width: 76px; }
-.buildsim__points { margin: 0 0 0 auto; text-align: right; font-size: 26px; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .55); line-height: 1.1; }
-.buildsim__points span { display: block; font-size: 11px; letter-spacing: .14em; color: var(--dim); text-shadow: none; }
-.buildsim__points small { display: block; font-size: 11.5px; color: var(--faint); text-shadow: none; }
-.buildsim__points.is-over { color: var(--pink); text-shadow: 0 0 10px rgba(255, 61, 154, .6); }
-.buildsim__stats { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 13.5px; }
-.buildsim__stats th, .buildsim__stats td { padding: 4px 6px; text-align: center; }
-.buildsim__stats thead th { font-size: 11.5px; color: var(--faint); font-weight: 500; }
-.buildsim__stats tbody th { color: var(--cyan); text-align: left; }
-.buildsim__total { color: var(--yellow); font-weight: 700; font-size: 15px; }
-.buildsim__stepper { display: inline-flex; align-items: center; gap: 2px; }
-.buildsim__stepper input { width: 56px; min-height: 36px; padding: 0 4px; text-align: center; }
-.buildsim__stepper button { width: 36px; height: 36px; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); border-radius: 6px; font-size: 16px; cursor: pointer; }
-.buildsim__stepper button:hover { background: rgba(61, 232, 255, .12); }
+.buildsim__note { margin: 10px 0 0; font-size: 12px; line-height: 1.6; }
+
+/* Score strip: hidden on wide screens, where the status window is beside you. */
+.buildsim__hud { display: none; }
+
+/* Character: the class sprite on a lit pedestal beside the form. */
+.buildsim__hero { display: flex; gap: 16px; align-items: stretch; }
+.buildsim__sprite { position: relative; flex: 0 0 132px; display: grid; place-items: center; align-content: end; gap: 4px; padding: 10px 6px 8px; border: 2px solid var(--cyan); border-radius: 12px; background: radial-gradient(ellipse at 50% 85%, rgba(61, 232, 255, .28), transparent 60%), #07051a; box-shadow: 0 0 16px rgba(61, 232, 255, .25), inset 0 0 18px rgba(61, 232, 255, .12); overflow: hidden; }
+.buildsim__sprite::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px); pointer-events: none; }
+.buildsim__sprite img { image-rendering: pixelated; filter: drop-shadow(0 0 10px rgba(255, 61, 154, .45)); }
+.buildsim__sprite > span { font-size: 56px; color: var(--faint); line-height: 107px; }
+.buildsim__sprite b { font-size: 12px; letter-spacing: .08em; color: var(--yellow); text-transform: uppercase; }
+.buildsim__heroform { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; align-content: start; }
+.buildsim__field { display: grid; gap: 4px; font-size: 12.5px; color: var(--dim); min-width: 0; }
+.buildsim__field--wide { grid-column: 1 / -1; }
+.buildsim__field input, .buildsim__field select { width: 100%; }
+.buildsim__points { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0; padding: 8px 12px; border: 1px dashed rgba(255, 229, 61, .45); border-radius: 8px; }
+.buildsim__points span { font-size: 11px; letter-spacing: .16em; color: var(--dim); }
+.buildsim__points b { font-size: 28px; line-height: 1; color: var(--yellow); text-shadow: 0 0 12px rgba(255, 229, 61, .6); }
+.buildsim__points small { margin-left: auto; font-size: 11.5px; color: var(--faint); }
+.buildsim__points.is-over { border-color: rgba(255, 61, 154, .6); }
+.buildsim__points.is-over b { color: var(--pink); text-shadow: 0 0 12px rgba(255, 61, 154, .6); }
+
+/* Stats: one row each, with a gauge. Your points fill cyan, Job and gear pink. */
+.buildsim__stats { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 6px; }
+.buildsim__stats li { display: grid; grid-template-columns: 112px auto minmax(0, 1fr) 48px; gap: 10px; align-items: center; padding: 6px 8px; border-radius: 8px; background: rgba(7, 5, 26, .55); }
+.buildsim__statname b { display: block; color: var(--cyan); font-size: 15px; letter-spacing: .06em; }
+.buildsim__statname small { display: block; font-size: 11px; color: var(--faint); line-height: 1.3; }
+.buildsim__stepper { display: inline-flex; align-items: center; gap: 3px; }
+.buildsim__stepper input { width: 52px; min-height: 36px; padding: 0 4px; text-align: center; }
+.buildsim__stepper button { width: 36px; height: 36px; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); border-radius: 8px; font-size: 18px; line-height: 1; cursor: pointer; touch-action: manipulation; }
+.buildsim__stepper button:hover { background: rgba(61, 232, 255, .14); box-shadow: 0 0 8px rgba(61, 232, 255, .4); }
+.buildsim__stepper button:active { transform: translateY(1px); }
+.buildsim__gauge { min-width: 0; display: grid; gap: 3px; }
+.buildsim__gauge small { font-size: 11px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.buildsim__bar { position: relative; display: flex; height: 8px; border-radius: 4px; background: rgba(244, 242, 255, .08); overflow: hidden; }
+.buildsim__bar i { display: block; height: 100%; background: linear-gradient(90deg, #1fa9c4, var(--cyan)); box-shadow: 0 0 8px rgba(61, 232, 255, .7); transition: width .18s ease-out; }
+.buildsim__bar i.is-bonus { background: linear-gradient(90deg, #c22a74, var(--pink)); box-shadow: 0 0 8px rgba(255, 61, 154, .7); }
+.buildsim__total { text-align: right; font-size: 20px; color: var(--yellow); text-shadow: 0 0 8px rgba(255, 229, 61, .45); }
+
+/* Equipment */
 .buildsim__slots { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.buildsim__slot { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px; border: 1px dashed rgba(61, 232, 255, .35); border-radius: 8px; min-height: 52px; }
-.buildsim__slot.is-filled { border-style: solid; border-color: var(--cyan); box-shadow: 0 0 10px rgba(61, 232, 255, .18) inset; }
-.buildsim__slotname { flex: 1 1 100%; font-size: 11px; letter-spacing: .1em; color: var(--faint); }
-.buildsim__pick { display: flex; align-items: center; justify-content: flex-start; gap: 6px; flex: 1; min-width: 0; min-height: 36px; padding: 2px 6px; border: 0; background: transparent; color: var(--text); text-align: left; cursor: pointer; font: inherit; font-size: 13.5px; }
-.buildsim__pick span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.buildsim__pick:hover span { color: var(--yellow); }
-.buildsim__slotctl { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-.buildsim__slotctl select { min-width: 84px; min-height: 36px; padding: 0 30px 0 10px; background-position: right 10px center; }
-.buildsim__socket, .buildsim__clear { width: 32px; height: 32px; display: inline-grid; place-items: center; border: 1px solid var(--hair, #3a2f78); border-radius: 6px; background: #07051a; color: var(--faint); cursor: pointer; }
+.buildsim__slot { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 8px 10px; border: 1px dashed rgba(61, 232, 255, .3); border-radius: 10px; min-height: 64px; background: rgba(7, 5, 26, .4); min-width: 0; }
+.buildsim__slot.is-filled { border-style: solid; border-color: var(--cyan); background: linear-gradient(135deg, rgba(61, 232, 255, .08), rgba(7, 5, 26, .6)); box-shadow: 0 0 12px rgba(61, 232, 255, .15) inset; }
+.buildsim__slot.is-off { opacity: .55; }
+.buildsim__slotname { flex: 1 1 100%; font-size: 11px; letter-spacing: .12em; color: var(--faint); }
+.buildsim__offnote { font-size: 12.5px; color: var(--faint); }
+.buildsim__pick { display: flex; align-items: center; justify-content: flex-start; gap: 8px; flex: 1 1 160px; min-width: 0; min-height: 40px; padding: 0; border: 0; background: transparent; color: var(--text); text-align: left; cursor: pointer; font: inherit; font-size: 13.5px; }
+.buildsim__icon { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--hair); border-radius: 8px; background: #07051a; }
+.buildsim__slot:not(.is-filled) .buildsim__icon img { opacity: .28; filter: grayscale(1); }
+.buildsim__slot.is-filled .buildsim__icon { border-color: rgba(61, 232, 255, .5); box-shadow: 0 0 8px rgba(61, 232, 255, .3); }
+.buildsim__pickname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.buildsim__pickname small { display: block; font-size: 11px; color: var(--faint); }
+.buildsim__slot:not(.is-filled) .buildsim__pickname { color: var(--dim); }
+.buildsim__pick:hover .buildsim__pickname { color: var(--yellow); }
+.buildsim__slotctl { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+.buildsim__slotctl select { min-width: 76px; min-height: 36px; padding: 0 28px 0 10px; background-position: right 9px center; }
+.buildsim__socket, .buildsim__clear { width: 36px; height: 36px; display: inline-grid; place-items: center; border: 1px solid var(--hair); border-radius: 8px; background: #07051a; color: var(--faint); cursor: pointer; font-size: 14px; }
 .buildsim__socket.is-filled { border-color: var(--pink); box-shadow: 0 0 8px rgba(255, 61, 154, .45); }
+.buildsim__socket:hover { border-color: var(--pink); color: var(--pink); }
 .buildsim__clear:hover { color: var(--pink); border-color: var(--pink); }
-.buildsim__picker { position: absolute; z-index: 20; left: 0; right: 0; top: 100%; margin-top: 4px; padding: 8px; background: #07051a; border: 2px solid var(--cyan); border-radius: 10px; box-shadow: 0 0 18px rgba(61, 232, 255, .35); min-width: 260px; }
-.buildsim__picker--inline { position: static; margin-top: 6px; min-width: 0; list-style: none; }
+.buildsim__cardnames { flex: 1 1 100%; font-size: 11.5px; color: var(--pink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Picker: a dropdown under the slot on wide screens, a bottom sheet on phones. */
+.buildsim__backdrop { display: none; }
+.buildsim__picker { position: absolute; z-index: 30; left: 0; right: 0; top: 100%; margin-top: 4px; padding: 10px; background: #07051a; border: 2px solid var(--cyan); border-radius: 12px; box-shadow: 0 0 22px rgba(61, 232, 255, .35), 0 12px 30px rgba(0, 0, 0, .6); min-width: 280px; }
 .buildsim__pickerhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; color: var(--pink); font-size: 12px; letter-spacing: .14em; }
-.buildsim__pickerhead button { width: 32px; height: 32px; border: 0; background: transparent; color: var(--dim); font-size: 18px; cursor: pointer; }
+.buildsim__pickerhead button { width: 36px; height: 36px; border: 0; background: transparent; color: var(--dim); font-size: 20px; cursor: pointer; }
 .buildsim__picker input { width: 100%; }
-.buildsim__picker ul { list-style: none; margin: 6px 0 0; padding: 0; max-height: 320px; overflow-y: auto; }
-.buildsim__picker li button { display: flex; align-items: center; justify-content: flex-start; gap: 8px; width: 100%; min-height: 40px; padding: 4px 6px; border: 0; border-radius: 6px; background: transparent; color: var(--text); text-align: left; font: inherit; font-size: 13.5px; cursor: pointer; }
-.buildsim__picker li button:hover, .buildsim__picker li button:focus-visible { background: rgba(61, 232, 255, .12); }
+.buildsim__picker ul, .buildsim__moblist { list-style: none; margin: 6px 0 0; padding: 0; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; }
+.buildsim__picker li button, .buildsim__moblist li button { display: flex; align-items: center; justify-content: flex-start; gap: 10px; width: 100%; min-height: 44px; padding: 4px 8px; border: 0; border-radius: 8px; background: transparent; color: var(--text); text-align: left; font: inherit; font-size: 13.5px; cursor: pointer; }
+.buildsim__picker li button:hover, .buildsim__picker li button:focus-visible, .buildsim__moblist li button:hover, .buildsim__moblist li button:focus-visible { background: rgba(61, 232, 255, .12); }
 .buildsim__picker li button.is-locked { opacity: .5; }
-.buildsim__picker li small { display: block; color: var(--faint); font-size: 11.5px; }
-.buildsim__picker li.muted { padding: 6px; font-size: 12.5px; }
-.buildsim__check { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; color: var(--dim); }
-.buildsim__check input { width: 18px; height: 18px; accent-color: var(--cyan); }
-.buildsim__foods { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.buildsim__foods .chip small { color: var(--faint); }
-.buildsim__foods select { max-width: 100%; }
-.buildsim__note { margin: 8px 0 0; font-size: 12px; }
-.buildsim__window { border: 2px solid var(--pink); background: linear-gradient(180deg, #120a2e, #07051a); }
-.buildsim__who { margin: 0 0 8px; font-size: 13px; color: var(--dim); }
+.buildsim__picker li small, .buildsim__moblist li small { display: block; color: var(--faint); font-size: 11.5px; }
+.buildsim__picker li.muted { padding: 8px; font-size: 12.5px; }
+.buildsim__picker img { image-rendering: pixelated; }
+
+.buildsim__check { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 13px; color: var(--dim); min-height: 36px; }
+.buildsim__check input { width: 20px; height: 20px; accent-color: var(--cyan); }
+
+/* Food */
+.buildsim__foods { display: flex; flex-wrap: wrap; gap: 8px; }
+.buildsim__foods:not(:empty) { margin-bottom: 10px; }
+.buildsim__food { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 44px; padding: 4px 10px 4px 6px; border: 1px solid var(--pink); border-radius: 10px; background: rgba(255, 61, 154, .08); color: var(--text); font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.buildsim__food small { display: block; font-size: 11px; color: var(--yellow); }
+.buildsim__food i { font-style: normal; color: var(--faint); font-size: 16px; }
+.buildsim__food:hover i { color: var(--pink); }
+.buildsim__foodpick { width: 100%; }
+
+/* Status window */
+.buildsim__window { border: 2px solid var(--pink); background: linear-gradient(180deg, #160b34, #07051a); box-shadow: 0 0 22px rgba(255, 61, 154, .25), 4px 4px 0 var(--pink); }
+.buildsim__who { margin: 0 0 10px; font-size: 13px; color: var(--dim); }
 .buildsim__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
-.buildsim__grid div { padding: 6px 8px; border: 1px solid rgba(61, 232, 255, .25); border-radius: 6px; background: rgba(7, 5, 26, .6); }
+.buildsim__grid div { padding: 6px 10px; border: 1px solid rgba(61, 232, 255, .22); border-radius: 8px; background: rgba(7, 5, 26, .65); min-width: 0; }
+.buildsim__grid .is-big { border-color: rgba(255, 229, 61, .5); box-shadow: 0 0 10px rgba(255, 229, 61, .15) inset; }
+.buildsim__grid .is-big dd { font-size: 26px; }
+.buildsim__grid .is-wide { grid-column: 1 / -1; }
 .buildsim__grid dt { font-size: 11px; color: var(--faint); letter-spacing: .06em; }
 .buildsim__grid dt i { margin-left: 4px; font-style: normal; color: var(--pink); font-size: 10px; }
-.buildsim__grid dd { margin: 2px 0 0; font-size: 18px; color: var(--yellow); }
+.buildsim__grid dd { margin: 2px 0 0; font-size: 18px; color: var(--yellow); white-space: nowrap; }
+.buildsim__grid dd small { color: var(--faint); font-size: 12px; }
 .buildsim__grid .is-est dd { color: var(--text); }
-.buildsim__warn { list-style: none; margin: 10px 0 0; padding: 8px; border: 1px solid var(--pink); border-radius: 6px; font-size: 12.5px; color: var(--pink); }
+.buildsim__warn { list-style: none; margin: 10px 0 0; padding: 8px 10px; border: 1px solid var(--pink); border-radius: 8px; font-size: 12.5px; color: var(--pink); display: grid; gap: 2px; }
 .buildsim__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.buildsim__actions .btn { flex: 1; }
+
+/* Target */
 .buildsim__mob input { width: 100%; }
-.buildsim__need { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13.5px; }
-.buildsim__fx { margin: 4px 0 0; padding-left: 18px; font-size: 13px; display: grid; gap: 2px; }
+.buildsim__moblist { margin-top: 6px; border: 1px solid var(--cyan); border-radius: 10px; padding: 4px; background: #07051a; }
+.buildsim__moblist img { image-rendering: pixelated; object-fit: contain; }
+.buildsim__foe { display: flex; align-items: center; gap: 12px; margin: 12px 0 10px; padding: 8px; border-radius: 10px; background: radial-gradient(ellipse at 20% 80%, rgba(255, 61, 154, .22), transparent 60%), rgba(7, 5, 26, .6); }
+.buildsim__foe img { width: 64px; height: 64px; object-fit: contain; image-rendering: pixelated; }
+.buildsim__foe b { display: block; font-size: 16px; color: var(--text); }
+.buildsim__foe small { display: block; font-size: 12px; color: var(--dim); }
+.buildsim__meter { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-top: 6px; font-size: 13px; color: var(--dim); }
+.buildsim__meter i { font-style: normal; font-size: 10px; color: var(--pink); }
+.buildsim__meter b { font-size: 18px; color: var(--yellow); min-width: 3.5em; text-align: right; }
+.buildsim__meter .buildsim__dmg { grid-column: 2 / -1; text-align: left; }
+.buildsim__bar--hit, .buildsim__bar--flee { height: 10px; }
+.buildsim__bar--flee i { background: linear-gradient(90deg, #c22a74, var(--pink)); box-shadow: 0 0 8px rgba(255, 61, 154, .7); }
+.buildsim__need { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; font-size: 13px; }
+.buildsim__need li { padding: 6px 10px; border-left: 3px solid var(--pink); background: rgba(255, 61, 154, .07); border-radius: 0 6px 6px 0; }
+.buildsim__need li.is-ok { border-left-color: var(--cyan); background: rgba(61, 232, 255, .07); color: var(--cyan); }
+.buildsim__need b { color: var(--yellow); }
+.buildsim__empty { display: flex; align-items: center; gap: 10px; margin: 10px 0 0; font-size: 13px; color: var(--dim); }
+
+/* Effects */
+.buildsim__fx { margin: 4px 0 0; padding-left: 18px; font-size: 13px; display: grid; gap: 3px; }
 .buildsim__details { margin-top: 8px; font-size: 13px; }
-.buildsim__details summary { cursor: pointer; color: var(--cyan); min-height: 32px; display: flex; align-items: center; }
+.buildsim__details summary { cursor: pointer; color: var(--cyan); min-height: 36px; display: flex; align-items: center; }
+
 @media (max-width: 900px) {
   .buildsim { grid-template-columns: minmax(0, 1fr); }
   .buildsim__side { position: static; }
+  .buildsim__hud { position: sticky; top: 0; z-index: 25; display: flex; gap: 4px; justify-content: space-between; margin: 12px 0 0; padding: 6px 8px; border: 1px solid var(--cyan); border-radius: 10px; background: rgba(7, 5, 26, .94); box-shadow: 0 0 14px rgba(61, 232, 255, .3); backdrop-filter: blur(8px); font-size: 15px; color: var(--yellow); }
+  .buildsim__hud span { display: grid; text-align: center; min-width: 0; }
+  .buildsim__hud i { font-style: normal; font-size: 9.5px; letter-spacing: .1em; color: var(--faint); }
+  .buildsim__hud .is-over { color: var(--pink); }
+  .buildsim__hud .is-target { color: var(--cyan); }
 }
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  .buildsim__hero { flex-direction: column; }
+  .buildsim__sprite { flex-basis: auto; grid-template-columns: auto 1fr; justify-items: start; align-items: center; padding: 6px 12px; }
+  .buildsim__sprite img { width: 72px; height: 72px; }
+  .buildsim__sprite > span { line-height: 72px; font-size: 40px; }
+  .buildsim__sprite b { font-size: 15px; }
+  .buildsim__stats li { grid-template-columns: minmax(0, 1fr) auto 40px; row-gap: 4px; }
+  .buildsim__gauge { grid-column: 1 / -1; grid-row: 2; }
+  .buildsim__statname small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .buildsim__slots { grid-template-columns: minmax(0, 1fr); }
-  .buildsim__stats th:nth-child(6), .buildsim__stats td:nth-child(6) { display: none; }
-  .buildsim__points { margin-left: 0; text-align: left; flex-basis: 100%; }
+  .buildsim__slotctl { margin-left: 44px; }
+  /* Picker as a bottom sheet over the page and the site's bottom bar. */
+  .buildsim__backdrop { display: block; position: fixed; inset: 0; z-index: 60; border: 0; background: rgba(4, 2, 16, .7); }
+  .buildsim__picker { position: fixed; z-index: 61; left: 0; right: 0; top: auto; bottom: 0; margin: 0; min-width: 0; border-radius: 16px 16px 0 0; border-bottom: 0; padding: 12px 12px calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .buildsim__picker ul { max-height: 58vh; }
+  .buildsim__grid dd { font-size: 17px; }
+  .buildsim__grid .is-big dd { font-size: 22px; }
 }
+@media (prefers-reduced-motion: reduce) { .buildsim__bar i { transition: none; } }
 /* A monster page's HIT/FLEE targets read against the saved build (6 Oct 2026). */
 .myhitflee { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; margin: 8px 0 0; padding: 8px 10px; border: 1px dashed var(--cyan); border-radius: 8px; font-size: 13px; color: var(--dim); }
 .myhitflee > b { color: var(--cyan); letter-spacing: .04em; }
