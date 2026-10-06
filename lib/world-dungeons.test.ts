@@ -72,3 +72,19 @@ describe('the way in', () => {
     expect(pyramid.via).toEqual(['moc_ruins']);
   });
 });
+
+describe('file-base folding', () => {
+  it("keeps a passage under its own name when its file base is in no warp (Luina, drawn from d6alde_gld)", () => {
+    const luina: MapLinksFile = {
+      links: [
+        ['alde_fild', 1, 1, 'alde_gld', 200],
+        ['alde_gld', 2, 2, 'gld_dun02_2', 200],
+      ],
+      channelOf: { alde_gld: 'd6alde_gld' },
+    };
+    const out = dungeonsByTile(luina, new Set(['alde_fild']), new Set(['alde_fild', 'gld_dun02_2']));
+    const via = JSON.stringify(out.get('alde_fild'));
+    expect(via).toContain('alde_gld');
+    expect(via).not.toContain('d6alde_gld');
+  });
+});

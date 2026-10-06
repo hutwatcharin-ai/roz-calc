@@ -63,7 +63,19 @@ export function dungeonsByTile(
   canonical: (code: string) => string = (code) => code,
 ): Map<string, TileDungeon[]> {
   // Floors fold channels first, then whatever the site's own channel rule says.
-  const fold = (code: string) => canonical(file.channelOf[code] ?? code);
+  // A map whose files are another's (alde_gld, Luina, is drawn from
+  // d6alde_gld) folds only when that other map is itself somewhere in the warp
+  // table; otherwise the world map showed a passage named d6alde_gld that no
+  // warp, page or name knows (owner, 6 Oct 2026).
+  // (Sphinx B5F's four copies share rin_sphinx5, which no warp names either:
+  // a base shared by several maps still folds them together.)
+  const inTable = new Set(file.links.flatMap(([from, , , to]) => [from, to]));
+  const sharers = new Map<string, number>();
+  for (const base of Object.values(file.channelOf)) sharers.set(base, (sharers.get(base) ?? 0) + 1);
+  const fold = (code: string) => {
+    const base = file.channelOf[code];
+    return canonical(base && (inTable.has(base) || (sharers.get(base) ?? 0) > 1) ? base : code);
+  };
   const floorsOnSite = new Set<string>();
   const channelsOf = new Map<string, Set<string>>();
   for (const code of mapsWithMonsters) {

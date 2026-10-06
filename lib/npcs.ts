@@ -67,6 +67,8 @@ const SPRITE_LABEL = /^(Roz |Portal \d+$)/;
 const NAMED_BY_HAND: Record<string, string> = {
   // Owner, 6 Oct 2026: the NPC in Alberta who takes you to Nordfeld.
   'roz-nordfeld-soldier': 'Nordfeld Ambassador',
+  // Owner, 6 Oct 2026: the one in north Prontera who gives the Nordfeld quest.
+  'roz-nordfeld-soldier-prontera': 'Nordfeld Publicist',
 };
 
 // A shopkeeper's goods point at the Zero shop copy, not rAthena's classic id;

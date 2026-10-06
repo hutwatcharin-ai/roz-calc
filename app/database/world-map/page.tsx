@@ -46,7 +46,7 @@ const WAY_IN_BY_HAND: Record<string, string[]> = {
 // map): town, plains, hills, then the cave -- boxed off the grid as one row.
 const OUTPOSTS = [{
   code: 'nordfeld', from: 'alberta', name: 'Nordfeld', via: 'Nordfeld Ambassador',
-  note: 'เมืองนอกแผนที่ · ไปได้จาก Nordfeld Ambassador ในเมือง Alberta (รับเควสจาก NPC ทางเหนือของ Prontera ก่อน) · เดินต่อไปทุ่ง เนิน และถ้ำ Nordfeld',
+  note: 'เมืองนอกแผนที่ · ไปได้จาก Nordfeld Ambassador ในเมือง Alberta (รับเควสจาก Nordfeld Publicist ทางเหนือของ Prontera ก่อน) · เดินต่อไปทุ่ง เนิน และถ้ำ Nordfeld',
   chain: ['nrd_fild01', 'nrd_fild02', 'nrd_dun01', 'nrd_dun02'],
 }];
 const OUTPOST_MAPS = new Map(OUTPOSTS.flatMap((o) => o.chain.map((code) => [code, o] as const)));
