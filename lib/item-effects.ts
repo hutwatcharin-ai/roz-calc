@@ -25,6 +25,8 @@ export interface BonusCondition {
   /** Fires on an event (a skill used, a hit landed) rather than always. */
   proc?: string;
   event?: boolean;
+  /** The item text states this under a condition the data does not carry (a card combo, a refine level). */
+  text?: boolean;
 }
 
 export interface BonusGroup {
@@ -124,7 +126,11 @@ export function bonusText([type, value, target, per, skill, scaling]: Bonus): st
   const info = BONUS_TYPES[type];
   const t = targetLabel(target);
   let label = info?.label ?? type;
-  label = label.replace('{t}', t && t !== 'ผู้เล่น' ? t : t === 'ผู้เล่น' ? 'ผู้เล่น' : '');
+  // A Thai target after a Latin word needs a space ("ทะลุ MDEF ผู้เล่น"); after
+  // Thai it runs on ("ตีเผ่าแมลง").
+  const at = label.indexOf('{t}');
+  const space = at > 0 && /[A-Za-z]/.test(label.charAt(at - 1)) ? ' ' : '';
+  label = label.replace('{t}', t ? `${space}${t}` : '');
   label = label.replace('{s}', skill ? ` ${skill}` : '').replace(/\s+/g, ' ').trim();
   // "ตี" with no target is just more damage.
   if (type === 'damage_percent' && !t) label = 'ดาเมจ';
@@ -154,6 +160,7 @@ export function conditionText(c: BonusCondition): string | null {
   if (c.siege) parts.push('เฉพาะในวอร์');
   if (c.proc) parts.push(c.proc === 'on_skill_use' ? 'ตอนใช้สกิล' : 'มีโอกาสติดตอนตี/โดนตี');
   if (c.event) parts.push('ช่วงอีเวนต์');
+  if (c.text) parts.push('มีเงื่อนไข ดูข้อความในเกม');
   return parts.length ? parts.join(' · ') : null;
 }
 

@@ -49,3 +49,14 @@ describe('item effects', () => {
     expect(effectTypes(null).size).toBe(0);
   });
 });
+
+describe('item effects caveats', () => {
+  it('keeps a space between a Latin label and a Thai target', () => {
+    expect(bonusText(['ignore_mdef_percent', 10, 'player', null, null])).toBe('ทะลุ MDEF ผู้เล่น +10%');
+  });
+  it("flags Eclipse Card's FLEE +18, which only holds with Lunatic Card", () => {
+    const eclipse = itemEffects(4266)!;
+    const flee = eclipse.g!.find((g) => g.b.some((b) => b[0] === 'flee'))!;
+    expect(conditionText(flee.c)).toBe('มีเงื่อนไข ดูข้อความในเกม');
+  });
+});

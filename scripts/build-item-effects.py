@@ -21,6 +21,7 @@ Run: python scripts/build-item-effects.py
 import glob
 import json
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'docs', 'prontera-build-planner-2026-10-06', 'data', 'items')
@@ -28,6 +29,20 @@ OUT = os.path.join(ROOT, 'data', 'item-effects.json')
 
 FLAT = {'str': 'str', 'agi': 'agi', 'vit': 'vit', 'int': 'int', 'dex': 'dex', 'luck': 'luk',
         'hit': 'hit', 'flee': 'flee', 'crit': 'crit', 'hp': 'hp', 'sp': 'sp'}
+
+LABELS = {'str': 'STR', 'agi': 'AGI', 'vit': 'VIT', 'int': 'INT', 'dex': 'DEX', 'luck': 'LUK', 'hit': 'HIT',
+          'flee': 'FLEE', 'crit': r'(?:CRIT|Critical)', 'hp': r'(?:MHP|Max ?HP)', 'sp': r'(?:MSP|Max ?SP)'}
+CONDITIONAL = re.compile(r'\b(when|if|for each|for every|each|while|during|combined|used with|equipped with|together with|refine)', re.I)
+
+
+def flat_is_conditional(text, key, value):
+    """Whether the sentence that states this flat stat is a conditional one."""
+    pattern = re.compile(LABELS[key] + r'[^.0-9]{0,12}[+-]?\s*' + str(abs(value)) + r'(?!\d)', re.I)
+    for sentence in re.split(r'(?<=[.!])\s+|\n', text):
+        if pattern.search(sentence):
+            return bool(CONDITIONAL.search(sentence))
+    return False
+
 
 items = {}
 for path in sorted(glob.glob(os.path.join(SRC, '*.json'))):
@@ -37,9 +52,20 @@ for path in sorted(glob.glob(os.path.join(SRC, '*.json'))):
     if not isinstance(iid, int):
         continue
     groups = []
-    flat = [[FLAT[k], it[k], None, None, None] for k in FLAT if it.get(k)]
+    # The flat fields fold conditional lines in: Eclipse Card's "When used with
+    # Lunatic Card, FLEE +18" arrives as flee: 18, Nine Tail's "at +9, FLEE
+    # +20" as flee: 20. A flat stat whose sentence in the item text is
+    # conditional goes into its own group, flagged for the reader to check.
+    flat, flagged = [], []
+    for k in FLAT:
+        if not it.get(k):
+            continue
+        row = [FLAT[k], it[k], None, None, None]
+        (flagged if flat_is_conditional(it.get('description') or '', k, it[k]) else flat).append(row)
     if flat:
         groups.append({'c': {}, 'b': flat})
+    if flagged:
+        groups.append({'c': {'text': True}, 'b': flagged})
     for g in rec.get('bonus_groups') or []:
         cond = {}
         if g.get('refine_min'):
@@ -56,6 +82,12 @@ for path in sorted(glob.glob(os.path.join(SRC, '*.json'))):
             cond['proc'] = g['proc_trigger']
         if g.get('is_event_limited'):
             cond['event'] = True
+        # A group with no condition whose own sentence is conditional ("When
+        # equipped with Rocker Card, FLEE +18") lost its condition upstream.
+        # "For each refine" and "per level of X" are already in the numbers.
+        scaled = all(bb.get('per_refine_levels') or bb.get('scaling_skill') for bb in g.get('bonuses') or [])
+        if not cond and not scaled and g.get('effect_text') and CONDITIONAL.search(g['effect_text']):
+            cond['text'] = True
         bonuses = []
         for b in g.get('bonuses') or []:
             skill = (b.get('target_skill') or {}).get('name')

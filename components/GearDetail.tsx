@@ -269,8 +269,9 @@ export default function GearDetail({
         )}
         {refineAt7 && refineAt10 && (
           <div className="statgrid__cell">
-            <span className="reward-label">ตีบวกได้ {refineAt7.stat} เพิ่ม</span>
-            <span className="reward-value mono">+7: {refineAt7.value} · +10: {refineAt10.value}</span>
+            <span className="reward-label">{refineAt10.stat} จากตีบวก +10</span>
+            <span className="reward-value mono">+{refineAt10.value}</span>
+            <small className="statgrid__note">+7 ได้ {refineAt7.value}</small>
           </div>
         )}
         {item.required_level !== null && (
