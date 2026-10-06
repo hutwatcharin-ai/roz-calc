@@ -752,6 +752,7 @@
 - น้ำหนัก = 2000 + STR×30 + โบนัสอาชีพ (Blacksmith +1000, Sage +400)
 - SP ฟื้น = floor(INT/6) + floor(MaxSP/100) + 1 (+ เพิ่มเมื่อ INT ≥ 120) · HP ฟื้น = floor(MaxHP/200) (rAthena บวก VIT/5 อีก แหล่งยังขัดกัน)
 - ร่ายแปรผัน = 1 − √((2×DEX + INT)/530) (ไม่ติดลบ)
+- **Assassin ถือสองอาวุธ (ค้น 7 ต.ค. 2026):** มือซ้ายใส่ได้ มีด/ดาบมือเดียว/ขวานมือเดียว · % ดาเมจต่อมือมาจากข้อความสกิลในไคลเอนต์ Zero เอง: ขวา 50% +10%/เลเวล Righthand Mastery (Lv5 = 100%) ซ้าย 30% +10%/เลเวล Lefthand Mastery (Lv5 = 80%) · ที่เหลือเป็น rAthena Renewal ยังไม่มีใครวัดใน Global: ASPD = base มือขวา − (ดีเลย์อาวุธซ้าย)/4 (`status_base_amotion_pc` สาย RENEWAL_ASPD) · มือซ้ายใช้ ATK/ขนาด/ธาตุของอาวุธตัวเอง และนับ status ATK ครั้งเดียว (มือขวานับ 2) (rAthena commit 9e959f7) · การ์ดในมือไหนก็นับให้ทั้งสองมือ (rAthena issue #7659 อ้าง iRO wiki) · Double Attack กับสกิลใช้มือขวาอย่างเดียว · ใช้ใน `lib/build-calc.ts`
 - MaxHP = floor(base_hp × (1 + VIT/100)) + HP จากของ แล้วคูณ HP% · MaxSP แบบเดียวกันกับ INT
 - ตีบวกอาวุธ/ทำยา: สูตร rAthena ยังไม่วัดใน Global (เรื่อง Potion Research 0.5% หรือ 1% ยังขัดกัน)
 
