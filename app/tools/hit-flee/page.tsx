@@ -6,6 +6,7 @@
 // hits you. GET params, not the character bar: this page must work as a
 // shareable link ("ดูตารางกู" in a game chat) with no setup.
 import HitFleeTable, { type HitFleeRow } from '@/components/HitFleeTable';
+import FoodBuffList from '@/components/FoodBuffList';
 import { supabaseBrowser } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import { playerFlee, playerHit } from '@/lib/hit-flee';
@@ -136,6 +137,8 @@ export default async function HitFleePage({
           </p>
         </div>
       )}
+
+      <FoodBuffList />
     </main>
   );
 }

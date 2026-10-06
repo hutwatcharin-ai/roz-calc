@@ -104,3 +104,32 @@ refine = {
 with open(os.path.join(ROOT, 'data', 'refine-bonus.json'), 'w', encoding='utf-8') as f:
     json.dump({'_meta': {'how': 'python scripts/build-item-effects.py', 'what': 'total ATK (weapons, MATK equal) or DEF (armor) at refine +1..+20', 'source': 'roz.prontera.info refine schedules, 6 Oct 2026'}, 'schedules': refine}, f, separators=(',', ':'))
 print('refine schedules', {k: v[:3] + ['...', v[-1]] for k, v in refine.items()})
+
+# Food and buff items that raise a stat, HIT, FLEE or CRI: the "what can I eat
+# for more HIT" list on /tools/hit-flee. From prontera's buff table; only
+# consumables (skills are the class guides' business), with the item id the
+# slug ends in so the page can link our own item page.
+RELEVANT = {'str', 'agi', 'vit', 'int', 'dex', 'luk', 'hit', 'flee', 'crit', 'perfect_dodge', 'aspd', 'aspd_percent', 'atk', 'matk'}
+buffs = json.load(open(os.path.join(os.path.dirname(SRC), 'skill-buffs.json'), encoding='utf-8'))['buffs']
+foods = []
+for buff in buffs:
+    if buff['source'] != 'consumable':
+        continue
+    tail = buff['slug'].rsplit('-', 1)[-1]
+    if not tail.isdigit():
+        continue
+    # Enchant stones (Sharp, Fighting Spirit, Spell) are listed as consumables
+    # there; they are not eaten. All 19 sit in 4700-4999.
+    if 4700 <= int(tail) <= 4999:
+        continue
+    level = buff['levels'][0]
+    bonuses = {}
+    for g in level.get('groups') or []:
+        for b in g.get('bonuses') or []:
+            if b['bonus_type'] in RELEVANT and not b.get('target_skill'):
+                bonuses[b['bonus_type']] = bonuses.get(b['bonus_type'], 0) + b['value']
+    if bonuses:
+        foods.append({'id': int(tail), 'name': buff['name'], 'b': bonuses, 'text': level.get('text') or ''})
+with open(os.path.join(ROOT, 'data', 'food-buffs.json'), 'w', encoding='utf-8') as f:
+    json.dump({'_meta': {'how': 'python scripts/build-item-effects.py', 'source': 'roz.prontera.info buff table, 6 Oct 2026'}, 'foods': sorted(foods, key=lambda x: x['name'])}, f, ensure_ascii=False, separators=(',', ':'))
+print(len(foods), 'food buffs')
