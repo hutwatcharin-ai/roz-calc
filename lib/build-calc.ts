@@ -20,6 +20,7 @@
 // goes to `skipped` with the reason, never into the totals.
 
 import gearFile from '@/data/build-gear.json';
+import enchantFile from '@/data/build-enchants.json';
 import { STATS, type Stat, aspdFor, baseHpSp, classStats, jobBonusAt, statBudget, statCost, ASPD_CAP, RANGED_WEAPONS } from '@/lib/class-stats';
 import { itemEffects, refineBonusAt, bonusText, type Bonus, type BonusCondition, type BonusGroup } from '@/lib/item-effects';
 import { foodById } from '@/lib/food-buffs';
@@ -77,6 +78,57 @@ export function cardById(id: number): CardItem | null {
 export const ALL_GEAR = data.gear;
 export const ALL_CARDS = data.cards;
 
+// --- Enchants, essences, costume stones, random options (owner, 6 Oct 2026) --
+
+export type StoneKind = 'plain' | 'essence' | 'upper' | 'middle' | 'lower' | 'garment';
+export interface Stone {
+  n: string;
+  k: StoneKind;
+  i: string | null;
+}
+export const ALL_STONES = (enchantFile as unknown as { stones: Record<string, Stone> }).stones;
+export function stoneById(id: number): Stone | null {
+  return ALL_STONES[String(id)] ?? null;
+}
+
+/** Enchant stones one gear piece takes (slots 2-4 in game; which pieces take which is not in the data). */
+export const MAX_ENCHANTS = 3;
+/** Random option rows on one piece. */
+export const MAX_OPTIONS = 4;
+
+export const COSTUME_SLOTS = ['upper', 'middle', 'lower', 'garment'] as const;
+export type CostumeSlot = (typeof COSTUME_SLOTS)[number];
+export const COSTUME_TH: Record<CostumeSlot, string> = { upper: 'คอสตูมหัวบน', middle: 'คอสตูมหัวกลาง', lower: 'คอสตูมหัวล่าง', garment: 'คอสตูมผ้าคลุม' };
+/** Stones per costume slot: a garment costume also has a 4th-slot stone. */
+export const COSTUME_STONES: Record<CostumeSlot, number> = { upper: 1, middle: 1, lower: 1, garment: 2 };
+
+/**
+ * Random option lines a player can type in, as [type, target]. The game's
+ * option table (docs/prontera-build-planner-2026-10-06/14-options-...) has more,
+ * most of them damage-taken lines; these are the ones the window and the
+ * damage line use. The ranges Global rolls are not known (GAME_MODEL §9), so
+ * the value is the player's.
+ */
+const RACES = ['angel', 'brute', 'demi_human', 'demon', 'dragon', 'fish', 'formless', 'insect', 'plant', 'undead'];
+const ELEMENTS_LOW = ['neutral', 'water', 'earth', 'fire', 'wind', 'poison', 'holy', 'shadow', 'ghost', 'undead'];
+export const OPTION_TYPES: [string, string | null][] = [
+  ['str', null], ['agi', null], ['vit', null], ['int', null], ['dex', null], ['luk', null],
+  ['atk', null], ['atk_percent', null], ['matk', null], ['matk_percent', null], ['hit', null], ['flee', null],
+  ['crit', null], ['crit_damage_percent', null], ['perfect_dodge', null], ['aspd', null], ['aspd_percent', null],
+  ['hp', null], ['hp_percent', null], ['sp', null], ['sp_percent', null], ['def', null], ['mdef', null],
+  ['cast_time_variable_percent', null], ['heal_amount_percent', null], ['hp_recovery_percent', null], ['sp_recovery_percent', null],
+  ...RACES.map((r): [string, string] => ['damage_percent', `race:${r}`]),
+  ...ELEMENTS_LOW.map((e): [string, string] => ['damage_percent', `element:${e}`]),
+  ...RACES.map((r): [string, string] => ['magic_damage_percent', `race:${r}`]),
+  ...ELEMENTS_LOW.map((e): [string, string] => ['magic_damage_percent', `element:${e}`]),
+  ...ELEMENTS_LOW.map((e): [string, string] => ['resistance_percent', `element:${e}`]),
+  ...RACES.map((r): [string, string] => ['damage_taken_percent', `race:${r}`]),
+];
+export function optionKey([type, target]: [string, string | null]): string {
+  return target ? `${type}@${target}` : type;
+}
+const OPTION_BY_KEY = new Map(OPTION_TYPES.map((o) => [optionKey(o), o]));
+
 // Second classes wear what their first class wears: an item's class list
 // names "swordsman" for Knight swords (74 items list swordsman alone).
 const PARENT: Record<string, string> = {
@@ -125,6 +177,10 @@ export interface Worn {
   r: number;
   /** card ids, one per card slot, 0 for empty */
   c: number[];
+  /** enchant stones (plain stones; an essence on armour) */
+  e?: number[];
+  /** random options: [option key (lib OPTION_TYPES), value] */
+  o?: [string, number][];
 }
 
 export interface Build {
@@ -136,6 +192,10 @@ export interface Build {
   f: number[];
   /** In War of Emperium: siege-only lines count. */
   siege?: boolean;
+  /** Costume enchant stones by costume slot. */
+  cos?: Partial<Record<CostumeSlot, number[]>>;
+  /** Skill levels for lines that scale with one ("CRIT +5 per level of Grimtooth"). */
+  sk?: Record<string, number>;
 }
 
 export const EMPTY_BUILD: Build = {
@@ -202,6 +262,8 @@ export interface BuildResult {
   counted: Line[];
   skipped: Line[];
   warnings: string[];
+  /** Skills some worn line scales with; their levels come from Build.sk. */
+  skills: string[];
   vs: TargetResult | null;
 }
 
@@ -275,19 +337,25 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   const counted: Line[] = [];
   const skipped: Line[] = [];
   const sums = new Map<string, Sum>();
+  const skills = new Set<string>();
   const add = (from: string, b: Bonus, refine: number) => {
     const [type, value, target, per, skill, scaling] = b;
+    let level = 1;
     if (scaling) {
-      skipped.push({ from, text: bonusText(b), why: 'ขึ้นกับเลเวลสกิล ไม่นับรวม' });
-      return;
+      skills.add(scaling);
+      level = build.sk?.[scaling] ?? 0;
+      if (!level) {
+        skipped.push({ from, text: bonusText(b), why: `ใส่เลเวลสกิล ${scaling} ก่อนถึงจะนับ` });
+        return;
+      }
     }
-    const v = per ? value * Math.floor(refine / per) : value;
+    const v = (per ? value * Math.floor(refine / per) : value) * level;
     if (!v) return;
     const t = target === 'player' ? 'player' : target;
     const s = sums.get(key({ type, target: t, skill })) ?? { type, target: t, skill, value: 0 };
     s.value += v;
     sums.set(key(s), s);
-    counted.push({ from, text: bonusText([type, v, target, null, skill]) });
+    counted.push({ from, text: bonusText([type, v, target, null, skill]) + (scaling ? ` (${scaling} Lv ${level})` : '') });
   };
   const addGroups = (from: string, groups: BonusGroup[] | undefined, refine: number, refineSum: number | null) => {
     for (const g of groups ?? []) {
@@ -349,6 +417,29 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       if (card.on !== cardKind(slot)) warnings.push(`${card.n}: ใส่ใน${SLOT_TH[slot]}ไม่ได้`);
       worn.add(cid);
       addGroups(card.n, itemEffects(cid)?.g, w.r, null);
+    }
+    for (const sid of w.e ?? []) {
+      const stone = stoneById(sid);
+      if (!stone) continue;
+      if (stone.k === 'essence' && slot !== 'armor') warnings.push(`${stone.n}: Essence ใส่ได้ที่เสื้อ`);
+      else if (stone.k !== 'plain' && stone.k !== 'essence') warnings.push(`${stone.n}: เป็นหินคอสตูม`);
+      worn.add(sid);
+      addGroups(stone.n, itemEffects(sid)?.g, w.r, null);
+    }
+    for (const [k, v] of w.o ?? []) {
+      const opt = OPTION_BY_KEY.get(k);
+      if (opt && v) add(`ออปชั่น ${item.n}`, [opt[0], v, opt[1], null, null], 0);
+    }
+  }
+
+  // Costume enchant stones.
+  for (const cs of COSTUME_SLOTS) {
+    for (const sid of build.cos?.[cs] ?? []) {
+      const stone = sid ? stoneById(sid) : null;
+      if (!stone) continue;
+      if (stone.k !== cs) warnings.push(`${stone.n}: ใส่ใน${COSTUME_TH[cs]}ไม่ได้`);
+      worn.add(sid);
+      addGroups(stone.n, itemEffects(sid)?.g, 0, null);
     }
   }
   if (shield && isTwoHanded(weapon?.wt)) warnings.push('อาวุธสองมือใส่คู่กับโล่ไม่ได้');
@@ -490,6 +581,7 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     counted,
     skipped,
     warnings: [...new Set(warnings)],
+    skills: [...skills].sort(),
     vs,
   };
 }
@@ -532,7 +624,23 @@ export function sanitizeBuild(raw: any): Build | null {
     const item = w ? gearById(Number(w.id)) : null;
     if (!item) continue;
     const cards = Array.isArray(w.c) ? w.c.slice(0, item.sl).map((c: unknown) => (cardById(Number(c)) ? Number(c) : 0)) : [];
-    g[slot] = { id: Number(w.id), r: item.rs ? clampInt(w.r, 0, 20, 0) : 0, c: cards };
+    const e = Array.isArray(w.e) ? w.e.map(Number).filter((id: number) => stoneById(id)).slice(0, MAX_ENCHANTS) : [];
+    const o = Array.isArray(w.o)
+      ? w.o.filter((x: unknown) => Array.isArray(x) && OPTION_BY_KEY.has(String(x[0]))).map((x: [string, number]) => [String(x[0]), clampInt(x[1], -999, 9999, 0)] as [string, number]).slice(0, MAX_OPTIONS)
+      : [];
+    g[slot] = { id: Number(w.id), r: item.rs ? clampInt(w.r, 0, 20, 0) : 0, c: cards, ...(e.length ? { e } : {}), ...(o.length ? { o } : {}) };
+  }
+  const cos: Partial<Record<CostumeSlot, number[]>> = {};
+  for (const cs of COSTUME_SLOTS) {
+    const list = raw.cos?.[cs];
+    if (!Array.isArray(list)) continue;
+    const ids = list.map(Number).filter((id: number) => stoneById(id)?.k === cs).slice(0, COSTUME_STONES[cs]);
+    if (ids.length) cos[cs] = ids;
+  }
+  const sk: Record<string, number> = {};
+  for (const [name, lv] of Object.entries(raw.sk ?? {})) {
+    const n = clampInt(lv, 0, 10, 0);
+    if (n) sk[String(name).slice(0, 60)] = n;
   }
   return {
     cls,
@@ -542,5 +650,7 @@ export function sanitizeBuild(raw: any): Build | null {
     g,
     f: Array.isArray(raw.f) ? raw.f.map(Number).filter((id: number) => foodById(id)).slice(0, 12) : [],
     siege: raw.siege === true || undefined,
+    ...(Object.keys(cos).length ? { cos } : {}),
+    ...(Object.keys(sk).length ? { sk } : {}),
   };
 }

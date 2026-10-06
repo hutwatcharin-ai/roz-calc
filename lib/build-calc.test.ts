@@ -112,6 +112,48 @@ describe('gear rules', () => {
   });
 });
 
+describe('enchants, options, costumes, skill levels', () => {
+  it('counts an enchant stone on a piece', () => {
+    const r = calcBuild({ ...base, g: { garment: { id: GARMENT, r: 0, c: [0], e: [4730] } } });
+    expect(r.total.agi).toBe(1 + 1);
+  });
+
+  it('counts a costume stone and warns when it sits in the wrong costume slot', () => {
+    const ok = calcBuild({ ...base, cos: { upper: [6638] } });
+    expect(ok.total.agi).toBe(2);
+    const wrong = calcBuild({ ...base, cos: { lower: [6638] } });
+    expect(wrong.warnings.some((w) => w.includes('คอสตูมหัวล่าง'))).toBe(true);
+  });
+
+  it('counts a typed random option', () => {
+    const r = calcBuild({ ...base, g: { garment: { id: GARMENT, r: 0, c: [0], o: [['hit', 7], ['damage_percent@race:brute', 5]] } } });
+    expect(r.hit).toBe(175 + 50 + 1 + 0 + 7);
+    expect(r.other.some((s) => s.type === 'damage_percent' && s.target === 'race:brute' && s.value === 5)).toBe(true);
+  });
+
+  it('counts a skill-scaled line only once the skill level is given', () => {
+    const armor = { id: 2301, r: 0, c: [], e: [29413] };
+    const without = calcBuild({ ...base, cls: 'assassin', g: { armor } });
+    expect(without.skills).toContain('Grimtooth');
+    expect(without.skipped.some((l) => l.why?.includes('Grimtooth'))).toBe(true);
+    const withLv = calcBuild({ ...base, cls: 'assassin', g: { armor }, sk: { Grimtooth: 5 } });
+    expect(withLv.crit - without.crit).toBe(25);
+  });
+
+  it('warns about an essence off the armour', () => {
+    const r = calcBuild({ ...base, g: { garment: { id: GARMENT, r: 0, c: [0], e: [29413] } } });
+    expect(r.warnings.some((w) => w.includes('Essence'))).toBe(true);
+  });
+
+  it('keeps them through a share link and drops what is not real', () => {
+    const b: Build = { ...base, g: { armor: { id: 2301, r: 3, c: [], e: [29413, 999999], o: [['hit', 5], ['nope', 3]] } }, cos: { upper: [6638], lower: [6638] }, sk: { Grimtooth: 5 } };
+    const back = decodeBuild(encodeBuild(b))!;
+    expect(back.g.armor).toEqual({ id: 2301, r: 3, c: [], e: [29413], o: [['hit', 5]] });
+    expect(back.cos).toEqual({ upper: [6638] });
+    expect(back.sk).toEqual({ Grimtooth: 5 });
+  });
+});
+
 describe('share link', () => {
   it('round-trips a build', () => {
     const b: Build = { ...base, g: { weapon: { id: 1201, r: 7, c: [4029, 0, 0] } }, f: [12065] };
