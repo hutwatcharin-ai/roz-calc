@@ -154,6 +154,43 @@ describe('enchants, options, costumes, skill levels', () => {
   });
 });
 
+describe('two weapons', () => {
+  const mob: Target = {
+    name: 'Test', level: 40, vit: 20, def: 30, size: 'Medium', element: 'Water', element_level: 1, race: 'Fish', boss: false,
+    hit_100: 300, flee_95: 280,
+  };
+  const knife = { id: 1201, r: 0, c: [0, 0, 0] };
+
+  it('lets an Assassin hold a second weapon and splits damage by mastery', () => {
+    const one = calcBuild({ ...base, cls: 'assassin', g: { weapon: knife } }, mob);
+    const two = calcBuild({ ...base, cls: 'assassin', g: { weapon: knife, shield: knife } }, mob);
+    expect(two.warnings).toEqual([]);
+    expect(two.skills).toEqual(expect.arrayContaining(['Righthand Mastery', 'Lefthand Mastery']));
+    // No mastery: right keeps 50%, left 30%.
+    expect(two.vs?.hands).toMatchObject({ rightPct: 50, leftPct: 30 });
+    expect(two.vs?.hands?.right).toBe(Math.floor(one.vs!.damage! * 0.5));
+    const maxed = calcBuild({ ...base, cls: 'assassin', g: { weapon: knife, shield: knife }, sk: { 'Righthand Mastery': 5, 'Lefthand Mastery': 5 } }, mob);
+    expect(maxed.vs?.hands).toMatchObject({ rightPct: 100, leftPct: 80 });
+    expect(maxed.vs?.hands?.right).toBe(one.vs!.damage);
+    expect(maxed.vs!.damage!).toBeGreaterThan(one.vs!.damage!);
+    // Renewal: two weapons swing on 0.7 × both delays, slower than one
+    // dagger (each swing lands both hands).
+    expect(two.aspd!).toBeLessThan(one.aspd!);
+  });
+
+  it('refuses a left-hand weapon for another class', () => {
+    const r = calcBuild({ ...base, cls: 'knight', g: { weapon: knife, shield: knife } }, mob);
+    expect(r.warnings.some((w) => w.includes('มือซ้าย'))).toBe(true);
+    expect(r.vs?.hands).toBeNull();
+  });
+
+  it('takes weapon cards in the left hand', () => {
+    const r = calcBuild({ ...base, cls: 'assassin', g: { weapon: knife, shield: { id: 1201, r: 0, c: [4029, 0, 0] } } });
+    expect(r.warnings).toEqual([]);
+    expect(r.counted.some((l) => l.from === 'Wolf Card')).toBe(true);
+  });
+});
+
 describe('share link', () => {
   it('round-trips a build', () => {
     const b: Build = { ...base, g: { weapon: { id: 1201, r: 7, c: [4029, 0, 0] } }, f: [12065] };

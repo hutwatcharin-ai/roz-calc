@@ -4518,6 +4518,8 @@ html .tag { border-radius: 4px; }
 .buildsim__meter b { font-size: 18px; color: var(--yellow); min-width: 3.5em; text-align: right; }
 .buildsim__meter .buildsim__dmg { grid-column: 2 / -1; text-align: left; }
 .buildsim__bar--hit, .buildsim__bar--flee { height: 10px; }
+.buildsim__hands { margin: 4px 0 0 86px; font-size: 12.5px; color: var(--dim); }
+.buildsim__hands small { color: var(--faint); }
 .buildsim__bar--flee i { background: linear-gradient(90deg, #c22a74, var(--pink)); box-shadow: 0 0 8px rgba(255, 61, 154, .7); }
 .buildsim__need { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; font-size: 13px; }
 .buildsim__need li { padding: 6px 10px; border-left: 3px solid var(--pink); background: rgba(255, 61, 154, .07); border-radius: 0 6px 6px 0; }

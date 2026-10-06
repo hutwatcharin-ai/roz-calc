@@ -11,10 +11,11 @@ const build = {
     weapon: { id: 1201, r: 7, c: [4029, 4006, 0], o: [['atk', 12], ['damage_percent@race:brute', 5]] },
     garment: { id: 480414, r: 4, c: [4183], e: [4730] },
     armor: { id: 2301, r: 5, c: [], e: [29413] },
+    shield: { id: 1201, r: 4, c: [0, 0, 0] },
   },
   f: [12065],
   cos: { upper: [6638], garment: [6908] },
-  sk: { Grimtooth: 5 },
+  sk: { Grimtooth: 5, 'Righthand Mastery': 5, 'Lefthand Mastery': 3 },
 };
 
 const browser = await chromium.launch();

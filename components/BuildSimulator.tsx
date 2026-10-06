@@ -19,7 +19,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS, MAX_OPTIONS,
-  OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsSlot, gearById,
+  OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsLeftHand, fitsSlot, gearById, slotLabel,
   isTwoHanded, maxJobLevel, optionKey, sanitizeBuild, stoneById, type Build, type CostumeSlot, type Slot, type Target,
 } from '@/lib/build-calc';
 import { STATS, type Stat, classStats, statCost, WEAPON_TH } from '@/lib/class-stats';
@@ -266,14 +266,15 @@ export default function BuildSimulator() {
     }
     const slot = picking.at as Slot;
     if (picking.kind === 'card') {
-      const kind = cardKind(slot);
+      const kind = cardKind(slot, build.g[slot] ? gearById(build.g[slot]!.id) : null);
       return Object.entries(ALL_CARDS)
         .filter(([, c]) => c.on === kind && (!q || c.n.toLowerCase().includes(q)))
         .map(([id, c]) => ({ id: Number(id), name: c.n, icon: c.i, sub: '', locked: false }))
         .sort((a, b) => a.name.localeCompare(b.name));
     }
     return Object.entries(ALL_GEAR)
-      .filter(([, g]) => fitsSlot(g, slot) && classFits(build.cls, g.cls) && (!q || g.n.toLowerCase().includes(q)))
+      // The left hand takes shields and, for an Assassin, a second weapon.
+      .filter(([, g]) => (fitsSlot(g, slot) || (slot === 'shield' && fitsLeftHand(g, build.cls))) && classFits(build.cls, g.cls) && (!q || g.n.toLowerCase().includes(q)))
       .map(([id, g]) => ({
         id: Number(id),
         name: g.sl ? `${g.n} [${g.sl}]` : g.n,
@@ -310,7 +311,7 @@ export default function BuildSimulator() {
   }
   function renderPicker(at: string) {
     if (picking?.at !== at) return null;
-    const label = picking.kind === 'costume' ? COSTUME_TH[at as CostumeSlot] : SLOT_TH[at as Slot];
+    const label = picking.kind === 'costume' ? COSTUME_TH[at as CostumeSlot] : slotLabel(at as Slot, build.cls);
     return (
       <>
         <button type="button" className="buildsim__backdrop" aria-label="ปิด" onClick={() => setPicking(null)} />
@@ -450,8 +451,8 @@ export default function BuildSimulator() {
                   <li key={slot} className={`buildsim__slot buildsim__slot--${slot}${item ? ' is-filled' : ''}${off ? ' is-off' : ''}`}>
                     {off ? (
                       <span className="buildsim__offnote">
-                        <em>{SLOT_TH[slot]}</em>
-                        {coveredBy ? `ใช้ร่วมกับ${SLOT_TH[coveredBy]}` : 'อาวุธสองมือ ใส่โล่ไม่ได้'}
+                        <em>{slotLabel(slot, build.cls)}</em>
+                        {coveredBy ? `ใช้ร่วมกับ${SLOT_TH[coveredBy]}` : `จับสองมือ: ${weapon?.n ?? ''}`}
                       </span>
                     ) : (
                       <>
@@ -461,8 +462,8 @@ export default function BuildSimulator() {
                             {item && w!.r > 0 && <b className="buildsim__refine mono">+{w!.r}</b>}
                           </span>
                           <span className="buildsim__pickname">
-                            <em>{SLOT_TH[slot]}</em>
-                            {item ? item.n : '+ เลือก'}
+                            <em>{slotLabel(slot, build.cls)}</em>
+                            {item ? item.n : slot === 'shield' && build.cls === 'assassin' ? '+ โล่ หรือ อาวุธมือซ้าย' : '+ เลือก'}
                             {item && (() => {
                               const ref = refineBonusAt(item.rs, w!.r);
                               return (
@@ -494,7 +495,7 @@ export default function BuildSimulator() {
                                 </button>
                               );
                             })}
-                            <button type="button" className="buildsim__clear" aria-label={`ถอด${SLOT_TH[slot]}`} onClick={() => setSlot(slot, null)}>×</button>
+                            <button type="button" className="buildsim__clear" aria-label={`ถอด${slotLabel(slot, build.cls)}`} onClick={() => setSlot(slot, null)}>×</button>
                           </span>
                         )}
                         {item && w!.c.some(Boolean) && (
@@ -697,6 +698,11 @@ export default function BuildSimulator() {
                   <span>ดาเมจ <i>ประมาณ</i></span>
                   <b className="mono buildsim__dmg">{vs.damage ?? 'ไม่ทราบ'}</b>
                 </div>
+                {vs.hands && (
+                  <p className="buildsim__hands mono">
+                    ขวา {vs.hands.right} <small>({vs.hands.rightPct}%)</small> + ซ้าย {vs.hands.left} <small>({vs.hands.leftPct}%)</small>
+                  </p>
+                )}
                 <ul className="buildsim__need">
                   {vs.hitShort === 0 && <li className="is-ok">✔ ตีโดน 100% แล้ว</li>}
                   {vs.hitShort ? (

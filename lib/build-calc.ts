@@ -165,7 +165,31 @@ export function coveredSlots(item: GearItem, slot: Slot): Slot[] {
 }
 
 /** The card slot kind a gear slot takes. */
-export function cardKind(slot: Slot): string {
+// --- Two weapons (owner, 7 Oct 2026) ---------------------------------------
+//
+// An Assassin holds a second weapon in the left hand, where other classes
+// hold a shield: a dagger, a one-handed sword or a one-handed axe. The game's
+// own skill text (prontera's client extract) gives the damage each hand keeps
+// while dual wielding: right 50% + 10% per Righthand Mastery level (lv 5 =
+// 100%), left 30% + 10% per Lefthand Mastery level (lv 5 = 80%).
+export const DUAL_CLASSES = new Set(['assassin']);
+export const LEFT_WEAPON_TYPES = new Set(['dagger', 'sword_1h', 'axe_1h']);
+export const RIGHT_MASTERY = 'Righthand Mastery';
+export const LEFT_MASTERY = 'Lefthand Mastery';
+
+/** A weapon this class can hold in the left hand. */
+export function fitsLeftHand(item: GearItem, cls: string): boolean {
+  return DUAL_CLASSES.has(cls) && item.on.includes('weapon') && LEFT_WEAPON_TYPES.has(item.wt ?? '');
+}
+
+/** The shield slot is "the left hand" for a class that can put a weapon there. */
+export function slotLabel(slot: Slot, cls: string): string {
+  return slot === 'shield' && DUAL_CLASSES.has(cls) ? 'มือซ้าย' : SLOT_TH[slot];
+}
+
+export function cardKind(slot: Slot, item?: GearItem | null): string {
+  // A weapon in the left hand takes weapon cards.
+  if (slot === 'shield' && item?.on.includes('weapon')) return 'weapon';
   if (slot.startsWith('head_')) return 'head_upper';
   if (slot.startsWith('accessory_')) return 'accessory_1';
   return slot;
@@ -276,6 +300,8 @@ export interface TargetResult {
   fleeShort: number | null;
   damage: number | null;
   multiplier: number;
+  /** Dual wielding: what each hand lands after its mastery share; damage is their sum. */
+  hands?: { right: number; left: number; rightPct: number; leftPct: number } | null;
 }
 
 const WINDOW = new Set([
@@ -380,6 +406,9 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   let weaponAtk = 0;
   let weaponMatk = 0;
   let shield = false;
+  let left: GearItem | null = null;
+  let leftAtk = 0;
+  let leftEl: string | null = null;
   const covered = new Set<Slot>();
   for (const slot of SLOTS) {
     const w = build.g[slot];
@@ -391,6 +420,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       continue;
     }
     for (const s of coveredSlots(item, slot)) covered.add(s);
+    const leftWeapon = slot === 'shield' && item.on.includes('weapon');
+    if (leftWeapon && !fitsLeftHand(item, build.cls)) {
+      warnings.push(`${item.n}: ถือมือซ้ายได้เฉพาะ Assassin กับมีด ดาบมือเดียว ขวานมือเดียว ไม่นับ`);
+      continue;
+    }
     if (!classFits(build.cls, item.cls)) warnings.push(`${item.n}: อาชีพนี้ใส่ไม่ได้`);
     if (item.lv && build.lv < item.lv) warnings.push(`${item.n}: ต้องเลเวล ${item.lv}`);
     worn.add(w.id);
@@ -406,15 +440,19 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       weaponAtk = (item.atk ?? 0) + (ref?.stat === 'ATK' ? ref.value : 0);
       // Staffs and other MATK weapons: refine adds the same to MATK (lib/item-effects refineBonusAt).
       weaponMatk = item.matk ? item.matk + (ref?.stat === 'ATK' ? ref.value : 0) : 0;
+    } else if (leftWeapon) {
+      left = item;
+      leftEl = fx?.el ?? null;
+      leftAtk = (item.atk ?? 0) + (ref?.stat === 'ATK' ? ref.value : 0);
     } else if (ref?.stat === 'DEF') {
       hardDef += ref.value;
     }
-    if (slot === 'shield') shield = true;
+    if (slot === 'shield' && !leftWeapon) shield = true;
     addGroups(item.n, fx?.g, w.r, null);
     for (const cid of w.c) {
       const card = cid ? cardById(cid) : null;
       if (!card) continue;
-      if (card.on !== cardKind(slot)) warnings.push(`${card.n}: ใส่ใน${SLOT_TH[slot]}ไม่ได้`);
+      if (card.on !== cardKind(slot, item)) warnings.push(`${card.n}: ใส่ใน${slotLabel(slot, build.cls)}ไม่ได้`);
       worn.add(cid);
       addGroups(card.n, itemEffects(cid)?.g, w.r, null);
     }
@@ -442,7 +480,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       addGroups(stone.n, itemEffects(sid)?.g, 0, null);
     }
   }
-  if (shield && isTwoHanded(weapon?.wt)) warnings.push('อาวุธสองมือใส่คู่กับโล่ไม่ได้');
+  if ((shield || left) && isTwoHanded(weapon?.wt)) warnings.push(`อาวุธสองมือใส่คู่กับ${left ? 'อาวุธมือซ้าย' : 'โล่'}ไม่ได้`);
+  if (left) {
+    skills.add(RIGHT_MASTERY);
+    skills.add(LEFT_MASTERY);
+  }
 
   // Sets and card combos: every piece worn.
   for (const set of data.sets) {
@@ -495,6 +537,17 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   const softMdef = Math.floor(int + lv / 4 + (dex + vit) / 5);
 
   let aspd = aspdFor(build.cls, wt, agi, dex, { ranged, shield });
+  if (left && aspd !== null) {
+    // Two weapons swing on (delay right + delay left) × 0.7, where a base
+    // ASPD b is a delay of 200 - b (rAthena Renewal; not measured on Global).
+    const table = classStats(build.cls)?.aspd ?? {};
+    const bR = table[wt];
+    const bL = table[left.wt ?? ''];
+    if (bR !== undefined && bL !== undefined) {
+      const base = 200 - 0.7 * ((200 - bR) + (200 - bL));
+      aspd = Math.min(ASPD_CAP, Math.floor((base + Math.sqrt((agi * agi) / 2 + (dex * dex) / 5) / 4) * 10) / 10);
+    }
+  }
   if (aspd === null) {
     warnings.push(`${classStats(build.cls)?.name ?? build.cls} ใช้อาวุธประเภทนี้ไม่ได้ (ไม่มีค่า ASPD)`);
   } else {
@@ -533,12 +586,12 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     }
     const multiplier = [...byKind.values()].reduce((m, p) => m * (1 + p / 100), 1);
     const def = target.def === null ? null : Math.floor(target.def * (1 - Math.min(100, ignoreDef) / 100));
-    const raw = physicalDamagePerHit({
-      weaponAtk: Math.floor(weaponAtk * (1 + get('atk_percent') / 100)),
+    const hand = (atk: number, type: string, el: string | null) => physicalDamagePerHit({
+      weaponAtk: Math.floor(atk * (1 + get('atk_percent') / 100)),
       // Status ATK counts twice in damage (lib/damage), flat ATK from gear once.
       statusAtk: statusAtk * 2 + Math.floor(get('atk') * (1 + get('atk_percent') / 100)),
-      weaponType: SIZE_ROW[wt] ?? 'Bare hand',
-      weaponElement: (weaponEl ? cap(weaponEl) : 'Neutral') as Element,
+      weaponType: SIZE_ROW[type] ?? 'Bare hand',
+      weaponElement: (el ? cap(el) : 'Neutral') as Element,
       targetSize: target.size,
       targetElement: (target.element as Element | null) ?? null,
       targetElementLevel: (target.element_level as ElementLevel | null) ?? null,
@@ -546,13 +599,26 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       targetLevel: target.level,
       targetVit: target.vit,
     });
+    const raw = hand(weaponAtk, wt, weaponEl);
+    let hands: TargetResult['hands'] = null;
+    let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier)) : null;
+    if (left && damage !== null) {
+      const leftRaw = hand(leftAtk, left.wt ?? 'dagger', leftEl);
+      const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
+      const leftPct = 30 + 10 * Math.min(5, build.sk?.[LEFT_MASTERY] ?? 0);
+      const r = Math.max(1, Math.floor((damage * rightPct) / 100));
+      const l = leftRaw ? Math.max(1, Math.floor((Math.floor(leftRaw.damage * multiplier) * leftPct) / 100)) : 0;
+      hands = { right: r, left: l, rightPct, leftPct };
+      damage = r + l;
+    }
     vs = {
       hitChance,
       hitShort: target.hit_100 !== null ? Math.max(0, target.hit_100 - hit) : null,
       dodge,
       fleeShort: target.flee_95 !== null ? Math.max(0, target.flee_95 - flee) : null,
-      damage: raw ? Math.max(1, Math.floor(raw.damage * multiplier)) : null,
+      damage,
       multiplier,
+      hands,
     };
   }
 
