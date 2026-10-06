@@ -1,4 +1,5 @@
 // app/database/monsters/[id]/page.tsx
+import MyHitFlee from '@/components/MyHitFlee';
 import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { STAT_BAND, statSegments } from '@/lib/stat-rank';
 import '../page.css';
@@ -505,6 +506,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
                 );
               })()}
             </div>
+            <MyHitFlee monsterId={monster.id} hit100={mobThresholds(monster).hit100} flee95={mobThresholds(monster).flee95} />
             <div className="statgrid statgrid--dense" style={{ marginTop: 10 }}>
               {([['STR', monster.str], ['AGI', monster.agi], ['VIT', monster.vit], ['INT', monster.int_], ['DEX', monster.dex], ['LUK', monster.luk]] as const).map(([label, value]) => (
                 <div key={label} className="statgrid__cell">

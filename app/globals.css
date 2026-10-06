@@ -4357,3 +4357,86 @@ html .tag { border-radius: 4px; }
   .dropfind__nums { flex: 1 1 100%; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 4px 12px; padding-left: 46px; text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) { .dropfind__insert, .dropfind__rank i { animation: none; } }
+
+/* Build simulator, /tools/build (6 Oct 2026). Two columns on a wide screen:
+   what you put on the left, the status window and target on the right. */
+.buildsim { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 16px; align-items: start; margin-top: 16px; }
+.buildsim__main, .buildsim__side { display: grid; gap: 16px; min-width: 0; }
+.buildsim__side { position: sticky; top: 12px; }
+.buildsim__panel { position: relative; }
+.buildsim__h { margin: 0 0 10px; font-size: 14px; letter-spacing: .12em; color: var(--cyan); text-shadow: 0 0 8px rgba(61, 232, 255, .6); }
+.buildsim__h3 { margin: 8px 0 4px; font-size: 13px; color: var(--dim); }
+.buildsim__row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; }
+.buildsim__row label { display: grid; gap: 4px; font-size: 12.5px; color: var(--dim); }
+.buildsim__row input { width: 76px; }
+.buildsim__points { margin: 0 0 0 auto; text-align: right; font-size: 26px; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .55); line-height: 1.1; }
+.buildsim__points span { display: block; font-size: 11px; letter-spacing: .14em; color: var(--dim); text-shadow: none; }
+.buildsim__points small { display: block; font-size: 11.5px; color: var(--faint); text-shadow: none; }
+.buildsim__points.is-over { color: var(--pink); text-shadow: 0 0 10px rgba(255, 61, 154, .6); }
+.buildsim__stats { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 13.5px; }
+.buildsim__stats th, .buildsim__stats td { padding: 4px 6px; text-align: center; }
+.buildsim__stats thead th { font-size: 11.5px; color: var(--faint); font-weight: 500; }
+.buildsim__stats tbody th { color: var(--cyan); text-align: left; }
+.buildsim__total { color: var(--yellow); font-weight: 700; font-size: 15px; }
+.buildsim__stepper { display: inline-flex; align-items: center; gap: 2px; }
+.buildsim__stepper input { width: 56px; min-height: 36px; padding: 0 4px; text-align: center; }
+.buildsim__stepper button { width: 36px; height: 36px; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); border-radius: 6px; font-size: 16px; cursor: pointer; }
+.buildsim__stepper button:hover { background: rgba(61, 232, 255, .12); }
+.buildsim__slots { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.buildsim__slot { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px; border: 1px dashed rgba(61, 232, 255, .35); border-radius: 8px; min-height: 52px; }
+.buildsim__slot.is-filled { border-style: solid; border-color: var(--cyan); box-shadow: 0 0 10px rgba(61, 232, 255, .18) inset; }
+.buildsim__slotname { flex: 1 1 100%; font-size: 11px; letter-spacing: .1em; color: var(--faint); }
+.buildsim__pick { display: flex; align-items: center; justify-content: flex-start; gap: 6px; flex: 1; min-width: 0; min-height: 36px; padding: 2px 6px; border: 0; background: transparent; color: var(--text); text-align: left; cursor: pointer; font: inherit; font-size: 13.5px; }
+.buildsim__pick span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.buildsim__pick:hover span { color: var(--yellow); }
+.buildsim__slotctl { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.buildsim__slotctl select { min-width: 84px; min-height: 36px; padding: 0 30px 0 10px; background-position: right 10px center; }
+.buildsim__socket, .buildsim__clear { width: 32px; height: 32px; display: inline-grid; place-items: center; border: 1px solid var(--hair, #3a2f78); border-radius: 6px; background: #07051a; color: var(--faint); cursor: pointer; }
+.buildsim__socket.is-filled { border-color: var(--pink); box-shadow: 0 0 8px rgba(255, 61, 154, .45); }
+.buildsim__clear:hover { color: var(--pink); border-color: var(--pink); }
+.buildsim__picker { position: absolute; z-index: 20; left: 0; right: 0; top: 100%; margin-top: 4px; padding: 8px; background: #07051a; border: 2px solid var(--cyan); border-radius: 10px; box-shadow: 0 0 18px rgba(61, 232, 255, .35); min-width: 260px; }
+.buildsim__picker--inline { position: static; margin-top: 6px; min-width: 0; list-style: none; }
+.buildsim__pickerhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; color: var(--pink); font-size: 12px; letter-spacing: .14em; }
+.buildsim__pickerhead button { width: 32px; height: 32px; border: 0; background: transparent; color: var(--dim); font-size: 18px; cursor: pointer; }
+.buildsim__picker input { width: 100%; }
+.buildsim__picker ul { list-style: none; margin: 6px 0 0; padding: 0; max-height: 320px; overflow-y: auto; }
+.buildsim__picker li button { display: flex; align-items: center; justify-content: flex-start; gap: 8px; width: 100%; min-height: 40px; padding: 4px 6px; border: 0; border-radius: 6px; background: transparent; color: var(--text); text-align: left; font: inherit; font-size: 13.5px; cursor: pointer; }
+.buildsim__picker li button:hover, .buildsim__picker li button:focus-visible { background: rgba(61, 232, 255, .12); }
+.buildsim__picker li button.is-locked { opacity: .5; }
+.buildsim__picker li small { display: block; color: var(--faint); font-size: 11.5px; }
+.buildsim__picker li.muted { padding: 6px; font-size: 12.5px; }
+.buildsim__check { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; color: var(--dim); }
+.buildsim__check input { width: 18px; height: 18px; accent-color: var(--cyan); }
+.buildsim__foods { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.buildsim__foods .chip small { color: var(--faint); }
+.buildsim__foods select { max-width: 100%; }
+.buildsim__note { margin: 8px 0 0; font-size: 12px; }
+.buildsim__window { border: 2px solid var(--pink); background: linear-gradient(180deg, #120a2e, #07051a); }
+.buildsim__who { margin: 0 0 8px; font-size: 13px; color: var(--dim); }
+.buildsim__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.buildsim__grid div { padding: 6px 8px; border: 1px solid rgba(61, 232, 255, .25); border-radius: 6px; background: rgba(7, 5, 26, .6); }
+.buildsim__grid dt { font-size: 11px; color: var(--faint); letter-spacing: .06em; }
+.buildsim__grid dt i { margin-left: 4px; font-style: normal; color: var(--pink); font-size: 10px; }
+.buildsim__grid dd { margin: 2px 0 0; font-size: 18px; color: var(--yellow); }
+.buildsim__grid .is-est dd { color: var(--text); }
+.buildsim__warn { list-style: none; margin: 10px 0 0; padding: 8px; border: 1px solid var(--pink); border-radius: 6px; font-size: 12.5px; color: var(--pink); }
+.buildsim__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.buildsim__mob input { width: 100%; }
+.buildsim__need { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13.5px; }
+.buildsim__fx { margin: 4px 0 0; padding-left: 18px; font-size: 13px; display: grid; gap: 2px; }
+.buildsim__details { margin-top: 8px; font-size: 13px; }
+.buildsim__details summary { cursor: pointer; color: var(--cyan); min-height: 32px; display: flex; align-items: center; }
+@media (max-width: 900px) {
+  .buildsim { grid-template-columns: minmax(0, 1fr); }
+  .buildsim__side { position: static; }
+}
+@media (max-width: 560px) {
+  .buildsim__slots { grid-template-columns: minmax(0, 1fr); }
+  .buildsim__stats th:nth-child(6), .buildsim__stats td:nth-child(6) { display: none; }
+  .buildsim__points { margin-left: 0; text-align: left; flex-basis: 100%; }
+}
+/* A monster page's HIT/FLEE targets read against the saved build (6 Oct 2026). */
+.myhitflee { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; margin: 8px 0 0; padding: 8px 10px; border: 1px dashed var(--cyan); border-radius: 8px; font-size: 13px; color: var(--dim); }
+.myhitflee > b { color: var(--cyan); letter-spacing: .04em; }
+.myhitflee span b { color: var(--yellow); }
+.myhitflee a { min-height: 32px; display: inline-flex; align-items: center; }

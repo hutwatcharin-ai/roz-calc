@@ -17,6 +17,8 @@ const nextConfig = {
       // The card guide lived here for a few hours on 8 Sep 2026 before the
       // grouping moved onto the card list it was duplicating.
       { source: '/guides/cards', destination: '/database/cards', permanent: true },
+      // The HIT/FLEE table became the build simulator on 6 Oct 2026.
+      { source: '/tools/hit-flee', destination: '/tools/build', permanent: true },
       { source: '/tools/elements', destination: '/guides/elements', permanent: true },
       { source: '/tools/sizes', destination: '/guides/sizes', permanent: true },
       { source: '/tools/exp', destination: '/guides/exp', permanent: true },
