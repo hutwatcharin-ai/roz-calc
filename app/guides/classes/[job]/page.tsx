@@ -25,6 +25,8 @@ import { itemHref } from '@/lib/item-href';
 import { mapImage } from '@/lib/map-image';
 import { CLASS_GUIDES, citeHref, classGuide } from '@/lib/class-guides';
 import type { Cite, CitedLine, ClassBuild, ClassGuide, StatRow } from '@/lib/class-guides/types';
+import { BASE_LEVEL_CAP as LEVEL_CAP } from '@/lib/level-cap';
+import { ASPD_CAP, baseHpSp, classStats, jobBonusAt, rowMinLevel, STATS, WEAPON_TH } from '@/lib/class-stats';
 import { buildPlan, type JobPlan } from '@/lib/skill-plan';
 import trees from '@/data/skill-trees.json';
 import SourceToggle from '@/components/SourceToggle';
@@ -154,8 +156,84 @@ function StatBars({ row, guide }: { row: StatRow; guide: ClassGuide }) {
         <p className="muted">คลิปไม่ได้บอกตัวเลข</p>
       )}
       {row.note && <p className="cguide__note">{row.note}</p>}
+      <RowBudget row={row} />
       <Src cites={row.cites} guide={guide} />
     </div>
+  );
+}
+
+// What level a player's stats need (owner, 6 Oct 2026: use the prontera.info
+// stat rules on the guides). A row from a clip is often a status window that
+// already includes Job bonuses, so this is the most it can cost, said so.
+function RowBudget({ row }: { row: StatRow }) {
+  const need = rowMinLevel(row);
+  if (!need) return null;
+  return (
+    <p className={`cguide__budget${need.level === null || need.level > LEVEL_CAP ? ' is-over' : ''}`}>
+      {need.level === null
+        ? `ใช้แต้มสเตตัส ${need.points.toLocaleString('en-US')} แต้ม เกินที่ Lv 99 มีให้`
+        : `ใช้แต้มสเตตัส ${need.points.toLocaleString('en-US')} แต้ม · ต้อง Lv ${need.level} ขึ้นไป`}
+      {need.level !== null && need.level > LEVEL_CAP && ` · เกินเลเวลตันตอนนี้ (Lv ${LEVEL_CAP})`}
+      {!need.complete && ' (นับเฉพาะช่องที่เป็นตัวเลข)'}
+      {' · ไม่หักโบนัสจาก Job'}
+    </p>
+  );
+}
+
+// The class's own numbers: Job bonuses, base HP/SP, base ASPD per weapon and
+// carry weight (lib/class-stats, from roz.prontera.info).
+function ClassNumbers({ slug, job }: { slug: string; job: string }) {
+  const c = classStats(slug);
+  if (!c) return null;
+  const maxJob = c.jobBonuses.length ? Math.max(...c.jobBonuses.map(([lv]) => lv)) : 0;
+  const jobSteps = [10, 20, 30, 40, 50, 60].filter((lv) => lv <= Math.max(maxJob, 50));
+  const levels = [30, 50, 60, 70];
+  const measured = baseHpSp(slug, 1)?.measured ?? false;
+  const weapons = Object.entries(c.aspd).sort((a, b) => b[1] - a[1]);
+  return (
+    <section id="numbers" className="card cguide__build">
+      <h2 className="cguide__buildtitle">ตัวเลขประจำอาชีพ {job}</h2>
+      <h3 className="cguide__glance-title">สเตตัสที่ได้ฟรีจาก Job Lv</h3>
+      <div className="cguide__numtable" role="table" aria-label="โบนัสสเตตัสจาก Job Lv">
+        <div role="row" className="cguide__numrow is-head">
+          <span role="columnheader">Job Lv</span>
+          {STATS.map((s) => <span key={s} role="columnheader" className="mono">{s.toUpperCase()}</span>)}
+        </div>
+        {jobSteps.map((lv) => {
+          const b = jobBonusAt(slug, lv);
+          return (
+            <div key={lv} role="row" className="cguide__numrow">
+              <span role="cell" className="mono">{lv}</span>
+              {STATS.map((s) => <span key={s} role="cell" className="mono">{b[s] ? `+${b[s]}` : '—'}</span>)}
+            </div>
+          );
+        })}
+      </div>
+      <h3 className="cguide__glance-title">HP / SP ฐาน (ก่อน VIT, INT และของ)</h3>
+      <p className="cguide__note">
+        {levels.map((lv, i) => {
+          const v = baseHpSp(slug, lv);
+          return v ? <span key={lv}>{i > 0 && ' · '}Lv {lv}: HP {v.hp.toLocaleString('en-US')} / SP {v.sp}</span> : null;
+        })}
+        {!measured && ' · ค่าประมาณ วัดจริงแล้วแค่ Acolyte กับ Thief อาชีพอื่นอาจสูงกว่าจริงราว 20-25%'}
+      </p>
+      {weapons.length > 0 && (
+        <>
+          <h3 className="cguide__glance-title">ASPD ฐานตามอาวุธ (ยังไม่บวก AGI/DEX)</h3>
+          <p className="cguide__note">
+            {weapons.map(([w, v], i) => <span key={w}>{i > 0 && ' · '}{WEAPON_TH[w] ?? w} {v}</span>)}
+            {c.shieldPenalty > 0 && ` · ถือโล่ −${c.shieldPenalty}`}
+            {' '}· ASPD จริง ≈ ค่าฐาน + √(AGI²/2 + DEX²/5)/4 (อาวุธระยะไกลหาร DEX ด้วย 7) ตันที่ {ASPD_CAP} · ค่าฐานมาจากเซิร์ฟอื่น ยังไม่ได้วัดใน Global
+          </p>
+        </>
+      )}
+      <h3 className="cguide__glance-title">น้ำหนักแบก</h3>
+      <p className="cguide__note">2,000 + STR × 30{c.weightBonus > 0 ? ` + ${c.weightBonus.toLocaleString('en-US')} (โบนัส ${job})` : ''}</p>
+      <p className="cguide__note muted">
+        ตัวเลขจาก roz.prontera.info · แต้มสเตตัส: เริ่ม 48 แต้ม, เลเวล L ได้ floor((L−1)/5)+3, อัปสเตตัสจาก x ใช้ floor((x−1)/10)+2 ·{' '}
+        <Link href="/guides/faq">คำถามที่พบบ่อย</Link>
+      </p>
+    </section>
   );
 }
 
@@ -407,6 +485,7 @@ export default async function ClassGuidePage({ params }: { params: { job: string
     { id: 'builds', label: 'เลือกสาย', sub: guide.builds.map((b) => ({ id: b.id, label: b.name })) },
     ...(guide.route?.length ? [{ id: 'route', label: 'เส้นทางเก็บเลเวล' }] : []),
     ...(guide.gearByLevel?.length ? [{ id: 'gear', label: 'ของตามช่วงเลเวล' }] : []),
+    ...(classStats(guide.slug) ? [{ id: 'numbers', label: 'ตัวเลขประจำอาชีพ' }] : []),
     { id: 'limits', label: 'เชื่อได้แค่ไหน' },
     { id: 'sources', label: 'คลิปและแหล่งที่มา' },
   ];
@@ -604,6 +683,8 @@ export default async function ClassGuidePage({ params }: { params: { job: string
               </p>
             </section>
           )}
+
+          <ClassNumbers slug={guide.slug} job={guide.job} />
 
           <section id="limits" className="card cguide__build">
             <h2 className="cguide__buildtitle">เชื่อได้แค่ไหน</h2>
