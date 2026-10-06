@@ -723,9 +723,42 @@
 **ข้อมูล TW ที่โผล่ในคลิปสั้น**
 - Crusader Shield Chain 30,000+ ต่อครั้ง ต้องใช้หอก +11 ปลุก 2 ขั้น (Global ยังไม่มี) · ไต้หวันเคยออนพร้อมกันสูงสุด ~29,000 [Ryan Geldun / Xiendong]
 
+## 8.6 สูตรสเตตัส [prontera.info charsim — ดึง 6 ต.ค. 2026, ไฟล์ดิบ local-only ที่ docs/prontera-export/]
+
+ที่มา: หน้า https://roz.prontera.info/builds/new อ่านข้อมูลจาก `/api/stats/formulas` (61 สูตร), `/api/combat/tables` และ `/api/stats/planner?class=<อาชีพ>` ทุกสูตรติดป้ายสถานะไว้เอง: **verified_ingame** = เขาวัดในเกม ROZ Global เอง (18 ส.ค. 2026), **test_formula** = สูตร rAthena Renewal ที่ยังไม่วัด, **placeholder** = ยังไม่เสร็จ
+บันทึกจาก prontera: Zero ใช้แกนสูตร Renewal (อ้างโน้ตทีมพัฒนา Gravity)
+
+**แต้มสเตตัส (ตอบคำถามที่ค้างในหัวข้อ 9)**
+- เริ่ม 48 แต้ม · เลเวล L ได้ floor((L-1)/5)+3 แต้ม · สเตตัสสูงสุด 99 · Job Lv สูงสุด 60
+- อัปจาก x เป็น x+1 ใช้ floor((x-1)/10)+2 แต้ม
+- ตรวจกับบิลด์ Blacksmith ที่ให้เจ้าของเว็บไป: Lv60 งบ 555 ใช้ 554 · Lv70 งบ 710 ใช้ 706 (ตรงกัน)
+- โบนัสสเตตัสจาก Job Lv มีรายอาชีพ (`job_bonuses`) · ฐาน HP/SP รายเลเวลมีครบ 1-99 แต่ **วัดจริงแค่ Acolyte กับ Thief** อาชีพอื่นอาจสูงเกินจริง 20-25%
+
+**วัดในเกมแล้ว (verified_ingame)**
+- HIT = 175 + BaseLv + DEX + floor(LUK/3) · FLEE = 100 + BaseLv + AGI + floor(LUK/5) → ตรงกับ `lib/hit-flee.ts` ของเรา
+- CRI = 1 + LUK×0.3 + BaseLv/100 · Perfect Dodge = 1 + floor(LUK/10)
+- Status ATK ใกล้ = floor(STR + DEX/5 + LUK/3 + BaseLv/4) · ไกล (ธนู/เครื่องดนตรี/แส้/ปืน) = floor(DEX + STR/5 + LUK/3 + BaseLv/4)
+- Status MATK = INT + floor(INT/2) + floor(DEX/5) + floor(LUK/3) + floor(BaseLv/4)
+- Soft DEF = floor((BaseLv+VIT)/2 + AGI/5) · Soft MDEF = floor(INT + BaseLv/4 + (DEX+VIT)/5)
+- ดาเมจตีธรรมดาแบบกายภาพ วัดแล้วกับ Merchant Lv14 (status ATK นับ ×2 ในส่วนที่ไม่ใช่อาวุธ)
+
+**ยังเป็นสูตร rAthena ยังไม่วัด**
+- โอกาสตีโดน = 100 + HIT − hit_100 ของมอน (ต่ำสุด 5%) · โอกาสหลบ = 95 + FLEE − flee_95 ของมอน (สูงสุด 95%) → ตรงกับ `lib/hit-flee.ts`
+- โดนรุมตั้งแต่ตัวที่ 3 หลบลดลง (Renewal −10%/ตัว) **Zero ว่าเบากว่าแต่ไม่รู้ตัวเลข**
+- ASPD = base_aspd − โทษโล่ + √(AGI²/2 + DEX²/หาร)/4 + (สกิล/ยา)×AGI/200 · หาร = 5 ตีใกล้, 7 ตีไกล · **เพดาน ASPD 190** · ASPD% = (195 − ASPD)×%/100
+  - base_aspd จากเซิร์ฟอื่น (`tables_data_source: other_region`) เช่น Blacksmith มือเปล่า 156, ขวาน 1 มือ 150, ขวาน 2 มือ 143, กระบอง 148, มีด/ดาบ 1 มือ 146 · โทษโล่ Blacksmith 5
+  - ตีต่อวินาที = 50 / (200 − ASPD)
+- คริแรง ×1.4 · คริจริงต่อมอน = CRI − LUK มอน×0.2
+- น้ำหนัก = 2000 + STR×30 + โบนัสอาชีพ (Blacksmith +1000, Sage +400)
+- SP ฟื้น = floor(INT/6) + floor(MaxSP/100) + 1 (+ เพิ่มเมื่อ INT ≥ 120) · HP ฟื้น = floor(MaxHP/200) (rAthena บวก VIT/5 อีก แหล่งยังขัดกัน)
+- ร่ายแปรผัน = 1 − √((2×DEX + INT)/530) (ไม่ติดลบ)
+- MaxHP = floor(base_hp × (1 + VIT/100)) + HP จากของ แล้วคูณ HP% · MaxSP แบบเดียวกันกับ INT
+- ตีบวกอาวุธ/ทำยา: สูตร rAthena ยังไม่วัดใน Global (เรื่อง Potion Research 0.5% หรือ 1% ยังขัดกัน)
+
+**ยังไม่ตอบ:** EXP ต่อเลเวล 51-70 · Heal Received มีผลกับ SP ไหม (prontera มีแค่ `heal_amount_bonus` ไม่แยก HP/SP) · บัฟ/อาหาร FLEE/HIT/CRI ของ Zero
+
 ## 9. ยังไม่รู้ (ถ้าเจอคำตอบ ย้ายขึ้นไปหมวดที่ถูกแล้วลบจากตรงนี้)
 
-- แต้มสเตตัสต่อเลเวล และค่าอัปสเตตัสทีละแต้ม (ปลดล็อก stat planner) — ต้องอ่านจากหน้าต่างสเตตัสในเกม
 - ช่วงสุ่มจริงและน้ำหนักการสุ่มของออปชันแต่ละช่องใน Global (มีแค่ค่าที่เห็นขาย) · โล่ติดออปได้ไหม · ออปอาวุธตีเองมีอะไรบ้าง
 - ตลาดยืนยันอาวุธของ Crusader, Dancer, Alchemist, Monk · อาชีพขั้น 1: มีรายการอาวุธต้นเกมจากคู่มือ Global (8.5) แต่ยังไม่มีจากตลาด
 - ของเควสทุกชิ้นติดออปได้ไหม หรือเฉพาะบางชุด · ของจากร้าน NPC ไม่ติดออปจริงไหม (อนุมาน)
