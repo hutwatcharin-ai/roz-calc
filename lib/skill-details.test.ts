@@ -57,12 +57,12 @@ describe('tipFacts timing (prontera.info extra)', () => {
     expect(tipFacts(levels, 'sg', 1)).toEqual([
       { label: 'ผล', value: 'MATK 100%' },
       { label: 'ร่าย', value: 'แปรผัน 5 วิ · คงที่ 1 วิ' },
-      { label: 'ดีเลย์หลังร่าย', value: '4 วิ' },
+      { label: 'ดีเลย์', value: '4 วิ' },
       { label: 'คูลดาวน์', value: '5 วิ' },
       { label: 'ตี', value: '10 ครั้ง' },
     ]);
   });
   it('says a delay that follows ASPD', () => {
-    expect(tipFacts({ x: { '1': { aspd: 1, acd: 300 } } }, 'x', 1)).toEqual([{ label: 'ดีเลย์หลังร่าย', value: 'ตาม ASPD' }]);
+    expect(tipFacts({ x: { '1': { aspd: 1, acd: 300 } } }, 'x', 1)).toEqual([{ label: 'ดีเลย์', value: 'ตาม ASPD' }]);
   });
 });

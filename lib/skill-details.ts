@@ -57,7 +57,9 @@ export function tipLevel(levels: SkillLevelMap, slug: string, chosen: number): n
 }
 
 function ms(value: number): string {
-  return value >= 1000 ? `${(value / 1000).toFixed(value % 1000 === 0 ? 0 : 1)} วิ` : `${value} มิลลิวิ`;
+  // Seconds throughout, so 480 ms and 1.9 s read on one scale (0.48 วิ).
+  if (value >= 1000) return `${(value / 1000).toFixed(value % 1000 === 0 ? 0 : 1)} วิ`;
+  return `${Number((value / 1000).toFixed(2))} วิ`;
 }
 
 /**
@@ -79,8 +81,8 @@ export function tipFacts(levels: SkillLevelMap, slug: string, chosen: number): S
   } else if (row.c) {
     out.push({ label: 'ร่าย', value: ms(row.c) });
   }
-  if (row.aspd) out.push({ label: 'ดีเลย์หลังร่าย', value: 'ตาม ASPD' });
-  else if (row.acd) out.push({ label: 'ดีเลย์หลังร่าย', value: ms(row.acd) });
+  if (row.aspd) out.push({ label: 'ดีเลย์', value: 'ตาม ASPD' });
+  else if (row.acd) out.push({ label: 'ดีเลย์', value: ms(row.acd) });
   if (row.cd) out.push({ label: 'คูลดาวน์', value: ms(row.cd) });
   if (row.h && row.h > 1) out.push({ label: 'ตี', value: `${row.h} ครั้ง` });
   return out;
