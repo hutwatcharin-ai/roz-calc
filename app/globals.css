@@ -4327,9 +4327,12 @@ html .tag { border-radius: 4px; }
 .dropfind__quick strong { font-size: 13px; color: var(--dim); margin-right: 4px; }
 
 /* Drop finder, neon arcade pass (owner, 6 Oct 2026): a hi-score board. */
-.dropfind { position: relative; overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 61, 154, .35), 0 0 24px rgba(255, 61, 154, .18), inset 0 0 40px rgba(61, 232, 255, .06); }
-.dropfind::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px); }
+.dropfind { position: relative; box-shadow: 0 0 0 1px rgba(255, 61, 154, .35), 0 0 24px rgba(255, 61, 154, .18), inset 0 0 40px rgba(61, 232, 255, .06); }
+.dropfind::after { content: ''; position: absolute; inset: 0; z-index: 0; border-radius: inherit; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px); }
 .dropfind > * { position: relative; z-index: 1; }
+/* The suggestion list must open over the rows below and past the cabinet's
+   edge, so the search row sits above its siblings and nothing clips it. */
+.dropfind > .dropfind__form { z-index: 5; }
 .dropfind__insert { margin: 0 0 8px; font: 900 13px var(--font-chakra), monospace; letter-spacing: .3em; color: var(--cyan); text-shadow: 0 0 10px var(--cyan); animation: attractblink 1.2s steps(2) infinite; }
 .dropfind__board { margin: 16px 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--yellow); color: var(--dim); font-size: 13px; }
 .dropfind__board span { margin-right: 8px; font: 900 15px var(--font-chakra), monospace; letter-spacing: .2em; color: var(--yellow); text-shadow: 0 0 10px var(--glow-yellow); }
