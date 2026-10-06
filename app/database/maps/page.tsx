@@ -11,6 +11,8 @@ import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, itemListJsonLd } from '@/lib/jsonld';
+import { TOWNS } from '@/lib/towns';
+import { mapWarps } from '@/lib/map-warps';
 
 export const revalidate = 86400;
 
@@ -131,7 +133,7 @@ export default async function MapsPage({
         />
       )}
       <p style={{ color: 'var(--faint)', marginTop: 4, fontSize: 13 }}>
-        แสดงเฉพาะแมพที่มีมอนสเตอร์เกิด · แมพเดียวกันคนละช่อง (เช่น _a, _b) ยุบเป็นแถวเดียว · บางแมพขึ้นเป็นรหัสเพราะไม่มีชื่อเรียกอื่น
+        เมืองอยู่ด้านบน · รายการด้านล่างคือแมพที่มีมอนสเตอร์เกิด · แมพเดียวกันคนละช่อง (เช่น _a, _b) ยุบเป็นแถวเดียว · บางแมพขึ้นเป็นรหัสเพราะไม่มีชื่อเรียกอื่น
       </p>
 
 
@@ -156,6 +158,35 @@ export default async function MapsPage({
         </label>
         </div>
       </form>
+
+      {/* Towns first (owner, 6 Oct 2026): they have no monsters, so the
+          list below -- maps with spawns -- never showed them. Hidden while
+          searching or paging, where they would push the results down. */}
+      {!q && safePage === 1 && (
+        <div className="card" style={{ marginBottom: 16 }}>
+          <h2 className="section-title">เมือง ({TOWNS.length})</h2>
+          <ul className="mapgrid" style={{ marginTop: 10 }}>
+            {TOWNS.map((town) => {
+              const pic = mapImage(town.code);
+              const src = pic?.src ?? mapWarps(town.code)?.picture ?? null;
+              return (
+                <li key={town.code}>
+                  <Link href={`/database/maps/${encodeURIComponent(town.code)}`} className="maptile">
+                    <span className="maptile__pic">
+                      {src ? (
+                        <img src={src} alt="" width={pic?.width ?? 512} height={pic?.height ?? 512} loading="lazy" decoding="async" />
+                      ) : <span className="maptile__none" aria-hidden="true">NO MAP</span>}
+                      <b className="maptile__count">เมือง</b>
+                    </span>
+                    <span className="maptile__name">{town.nameTh ?? town.nameEn}</span>
+                    <code className="maptile__code">{town.code}</code>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
 
       {/* Map cards (1 Oct 2026, arcade standard): the map picture is what
           tells two fields apart, so it leads, with the monster count as the

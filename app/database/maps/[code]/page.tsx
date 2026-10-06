@@ -17,6 +17,8 @@ import { ALL_NPCS } from '@/lib/npcs';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { itemHref } from '@/lib/item-href';
 import { notableDrops, type MapDropRow, type NotableDrop } from '@/lib/map-drops';
+import { townByCode, townPlaces, type Town } from '@/lib/towns';
+import type { Npc } from '@/lib/npcs';
 
 export const revalidate = 86400;
 
@@ -47,7 +49,15 @@ export async function generateMetadata({ params }: { params: { code: string } })
     console.error('map metadata query failed', error);
     return {};
   }
-  if (!data || data.length === 0) return { title: 'ไม่พบแมพนี้' };
+  if (!data || data.length === 0) {
+    const town = townByCode(code);
+    if (!town) return { title: 'ไม่พบแมพนี้' };
+    const shown = town.nameTh ? `${town.nameTh} (${town.nameEn})` : town.nameEn;
+    return {
+      title: `${shown} — เมือง วาร์ป NPC ร้านค้า`,
+      description: `เมือง ${town.nameEn} (${code}) ใน RO Zero: แผนที่ย่อพร้อมจุดวาร์ปออกไปแมพรอบเมือง พิกัด /navi รายชื่อ NPC ร้านค้า และเควสในเมือง`,
+    };
+  }
 
   const name = data.find((r) => r.map_display_name)?.map_display_name ?? code;
   return {
@@ -85,6 +95,9 @@ export default async function MapDetailPage({ params }: { params: { code: string
   // A clean query returning nothing is a genuine 404 -- unlike the error
   // branch above, which must never become one.
   if (!spawns || spawns.length === 0) {
+    // A town has no monsters and still a page (lib/towns).
+    const town = townByCode(code);
+    if (town) return <TownView town={town} />;
     notFound();
   }
 
@@ -235,37 +248,14 @@ export default async function MapDetailPage({ params }: { params: { code: string
       {(questsHere ?? []).length > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
           <h2 className="section-title">เควสที่เกิดในแมพนี้ ({questsHere!.length})</h2>
-          <ul className="shoplist">
-            {questsHere!.map((quest) => (
-              <li key={quest.id} className="shoprow">
-                <span className="shoprow__who">
-                  <Link href={`/database/quests/${quest.town_key}#q${quest.id}`}>{quest.name_th ?? quest.name}</Link>
-                  {quest.name_th && <span className="muted" style={{ marginInlineStart: 8, fontSize: 12.5 }}>{quest.name}</span>}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <QuestList quests={questsHere!} />
         </div>
       )}
 
       {npcsHere.length > 0 && (
         <div className="card" style={{ marginTop: 20 }}>
           <h2 className="section-title">NPC ในแมพนี้ ({npcsHere.length})</h2>
-          <ul className="shoplist">
-            {npcsHere.map((npc) => (
-              <li key={npc.slug} className="shoprow">
-                <span className="shoprow__who">
-                  {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}`} alt="" height={24} />}
-                  <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
-                  {npc.quests.length > 0 && <span className="muted"> · เควส {npc.quests.length}</span>}
-                  {npc.sells.length > 0 && <span className="muted"> · ขายของ {npc.sells.length} ชนิด</span>}
-                </span>
-                {naviCommand(npc.map, npc.x, npc.y) && (
-                  <code className="mono navicmd shoprow__navi">{naviCommand(npc.map, npc.x, npc.y)}</code>
-                )}
-              </li>
-            ))}
-          </ul>
+          <NpcList npcs={npcsHere} />
         </div>
       )}
     </main>
@@ -292,5 +282,117 @@ function DropGroup({ title, rows }: { title: string; rows: NotableDrop[] }) {
         ))}
       </ul>
     </>
+  );
+}
+
+interface QuestRow {
+  id: number;
+  name: string;
+  name_th: string | null;
+  town_key: string;
+}
+
+function QuestList({ quests }: { quests: QuestRow[] }) {
+  return (
+    <ul className="shoplist">
+      {quests.map((quest) => (
+        <li key={quest.id} className="shoprow">
+          <span className="shoprow__who">
+            <Link href={`/database/quests/${quest.town_key}#q${quest.id}`}>{quest.name_th ?? quest.name}</Link>
+            {quest.name_th && <span className="muted" style={{ marginInlineStart: 8, fontSize: 12.5 }}>{quest.name}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function NpcList({ npcs }: { npcs: Npc[] }) {
+  return (
+    <ul className="shoplist">
+      {npcs.map((npc) => (
+        <li key={npc.slug} className="shoprow">
+          <span className="shoprow__who">
+            {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}`} alt="" height={24} />}
+            <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
+            {npc.quests.length > 0 && <span className="muted"> · เควส {npc.quests.length}</span>}
+            {npc.sells.length > 0 && <span className="muted"> · ขายของ {npc.sells.length} ชนิด</span>}
+          </span>
+          {naviCommand(npc.map, npc.x, npc.y) && (
+            <code className="mono navicmd shoprow__navi">{naviCommand(npc.map, npc.x, npc.y)}</code>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// A town's page (owner, 6 Oct 2026): no monster table, the rest of a map page
+// -- warps, quests, NPCs -- plus the NPCs inside the buildings its doors lead
+// to, which is where most of a town's shops and job NPCs stand.
+async function TownView({ town }: { town: Town }) {
+  const { code } = town;
+  const name = town.nameTh ?? town.nameEn;
+  const { data: quests, error } = await supabaseBrowser()
+    .from('quests')
+    .select('id, name, name_th, town_key')
+    .eq('map_code', code)
+    .order('id');
+  if (error) console.error('town quest query failed', error);
+  const places = townPlaces(code);
+  const npcCount = places.reduce((n, p) => n + p.npcs.length, 0);
+  const shops = places.reduce((n, p) => n + p.npcs.filter((npc) => npc.sells.length > 0).length, 0);
+
+  return (
+    <main className="shell" style={{ paddingBlock: 32 }}>
+      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
+        <Link href="/database/maps">แมพ</Link>
+        <span className="crumbs__sep" aria-hidden="true">›</span>
+        <span className="crumbs__here">{name}</span>
+      </nav>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'หน้าแรก', path: '/' },
+          { name: 'แมพ', path: '/database/maps' },
+          { name, path: `/database/maps/${code}` },
+        ])}
+      />
+      <p className="arckicker">TOWN · {code}</p>
+      <h1 className="pagehead__title arcname">{name}</h1>
+      <p className="mono" style={{ color: 'var(--faint)', marginTop: 6 }}>
+        {town.nameTh ? `${town.nameEn} · ${code}` : code}
+      </p>
+      <p style={{ color: 'var(--dim)', marginTop: 10 }}>
+        เมือง · ไม่มีมอนสเตอร์ · NPC {npcCount} คน{shops > 0 && ` · ร้านค้า ${shops} ร้าน`}
+        {(quests ?? []).length > 0 && ` · เควส ${quests!.length}`}
+      </p>
+
+      <MapWarps code={code} name={name} />
+
+      {(quests ?? []).length > 0 && (
+        <div className="card" style={{ marginTop: 20 }}>
+          <h2 className="section-title">เควสที่เกิดในเมืองนี้ ({quests!.length})</h2>
+          <QuestList quests={quests!} />
+        </div>
+      )}
+
+      {npcCount > 0 && (
+        <div className="card" style={{ marginTop: 20 }}>
+          <h2 className="section-title">NPC ในเมือง ({npcCount})</h2>
+          {places.map((place) =>
+            place.npcs.length === 0 ? null : (
+              <div key={place.code}>
+                {places.length > 1 && (
+                  <h3 className="mapdrops__title">
+                    {place.name || 'ในเมือง'} <span className="muted mono" style={{ fontSize: 12 }}>{place.code}</span>
+                  </h3>
+                )}
+                <NpcList npcs={place.npcs} />
+              </div>
+            ),
+          )}
+        </div>
+      )}
+    </main>
   );
 }

@@ -1,4 +1,5 @@
 import { isAbsentFromGame } from '@/lib/game-absent';
+import { TOWNS } from '@/lib/towns';
 import type { MetadataRoute } from 'next';
 import { supabaseBrowser } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
@@ -184,6 +185,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .map((code) => ({
         url: `${SITE_URL}/database/maps/${encodeURIComponent(code)}`,
       })),
+    // Towns have a page without a map_stats row (lib/towns).
+    ...TOWNS.map((town) => ({ url: `${SITE_URL}/database/maps/${encodeURIComponent(town.code)}` })),
     ...[...questTowns.entries()].map(([town, lastModified]) => ({
       url: `${SITE_URL}/database/quests/${encodeURIComponent(town)}`,
       lastModified,

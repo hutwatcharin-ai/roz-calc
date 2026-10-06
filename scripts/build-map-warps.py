@@ -93,6 +93,9 @@ links_file = json.load(open(os.path.join(ROOT, 'data', 'map-links.json'), encodi
 channel_of = links_file['channelOf']
 base = lambda c: channel_of.get(c, c)  # noqa: E731
 pages = page_codes()
+# Towns have a page too though nothing spawns there (data/towns.json).
+for town in json.load(open(os.path.join(ROOT, 'data', 'towns.json'), encoding='utf-8'))['towns']:
+    pages.setdefault(town['code'], town['nameEn'])
 
 
 def spawn_names():
@@ -252,10 +255,17 @@ def shown_names(codes):
     raw = {c: pages.get(c) or names.get(c) or EXTRA_NAMES.get(c) for c in codes}
     raw = {c: n for c, n in raw.items() if n}
     # Channel copies of one map (gef_fild10, gef_f10_a) are not a clash.
-    count = {}
-    for n in {(base(c), n) for c, n in raw.items()}:
-        count[n[1]] = count.get(n[1], 0) + 1
-    return {c: (f'{n} ({c})' if count[n] > 1 else n) for c, n in sorted(raw.items())}
+    count, among_pages = {}, {}
+    for b_, n in {(base(c), n) for c, n in raw.items()}:
+        count[n] = count.get(n, 0) + 1
+    for b_, n in {(base(c), n) for c, n in raw.items() if c in pages}:
+        among_pages[n] = among_pages.get(n, 0) + 1
+    # A map with a page keeps its plain name unless another page shares it: a
+    # side map without one (pay_dc01, a second "Payon Cave 1F" reached from
+    # the Archer Village) carries the code instead of every Payon Cave link.
+    def clash(c, n):
+        return among_pages.get(n, 0) > 1 if c in pages else count[n] > 1
+    return {c: (f'{n} ({c})' if clash(c, n) else n) for c, n in sorted(raw.items())}
 
 
 used = {e['to'] for m in out.values() for e in m['exits']} | {f for m in out.values() for f, _ in m['from']}

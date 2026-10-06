@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-10-06", "href": "/database/maps/geffen", "title": "หน้าเมืองครบ 13 เมือง", "note": "Prontera, Geffen, Payon, Morroc และเมืองอื่นมีหน้าของตัวเองแล้ว: แผนที่ย่อพร้อมวาร์ปออกนอกเมือง, NPC บนถนนและในอาคาร, เควสในเมือง" },
     { "date": "2026-10-06", "href": "/database/maps/nrd_fild01", "title": "จุดวาร์ปครบทุกแมพที่เปิดแล้ว", "note": "เพิ่มวาร์ปของ Nordfeld, ห้องบอส (Geffen Dungeon, Sphinx B5F, Labyrinth Forest 3F) และดันเจี้ยนกิลด์ชั้น 2" },
     { "date": "2026-10-06", "href": "/tools/skill-planner", "title": "วางแผนสกิล: สกิลเควสได้อัตโนมัติ", "note": "สกิลเควสทั้งอาชีพ 1 และอาชีพ 2 (เช่น Crazy Uproar, Charge Attack, Dubious Salesmanship) ขึ้นเป็นได้แล้ว ไม่ต้องกดเอง เหมือนในเกม" },
     { "date": "2026-10-05", "href": "/database/maps/gef_fild10", "title": "หน้าแมพบอกจุดวาร์ปแล้ว", "note": "แผนที่ย่อจากไฟล์เกมพร้อมเลขจุดวาร์ป รายการทางออกแต่ละทางพร้อมคำสั่ง /navi และแมพที่เดินเข้ามาได้ ครบ 186 แมพที่เปิดอยู่" },
