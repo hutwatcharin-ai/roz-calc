@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { physicalDamagePerHit, sizeModifier, type DamageInput } from './damage';
+import { physicalDamagePerHit, sizeModifier, statusAtkFromStats, type DamageInput } from './damage';
 
 const BASE: DamageInput = {
   weaponAtk: 100,
@@ -111,5 +111,13 @@ describe('physicalDamagePerHit', () => {
     // soft DEF, and 0 is what the column means when a mob has none.
     const d = physicalDamagePerHit({ ...BASE, weaponType: 'Bare hand', targetLevel: 40, targetVit: null })!;
     expect(d.softDef).toBe(20);
+  });
+});
+
+describe('statusAtkFromStats', () => {
+  it('follows the verified melee and ranged formulas', () => {
+    // STR 63, DEX 15, LUK 1, Lv 60: 63 + 3 + 0 + 15
+    expect(statusAtkFromStats(60, 63, 15, 1, false)).toBe(81);
+    expect(statusAtkFromStats(60, 10, 80, 30, true)).toBe(80 + 2 + 10 + 15);
   });
 });

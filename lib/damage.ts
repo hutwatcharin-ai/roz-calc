@@ -111,3 +111,21 @@ export function physicalDamagePerHit(input: DamageInput): DamageBreakdown | null
     softDef,
   };
 }
+
+/**
+ * Status ATK from stats, the verified formula (prontera.info, measured on
+ * Global 18 Aug 2026): melee STR + DEX/5 + LUK/3 + Lv/4, ranged (bow,
+ * instrument, whip) DEX + STR/5 + LUK/3 + Lv/4.
+ *
+ * In damage it counts TWICE: prontera's measurement on a Lv 14 Merchant
+ * (117 predicted, 114-120 measured over 15 swings) only fits with status ATK
+ * doubled in the neutral share, which the status window does not show.
+ */
+export function statusAtkFromStats(level: number, str: number, dex: number, luk: number, ranged: boolean): number {
+  return ranged
+    ? Math.floor(dex + str / 5 + luk / 3 + level / 4)
+    : Math.floor(str + dex / 5 + luk / 3 + level / 4);
+}
+
+/** Weapon rows of SIZE_TABLE whose status ATK follows DEX. */
+export const RANGED_WEAPON_ROWS = new Set(['Bow', 'Instrument', 'Musical Instrument', 'Whip']);

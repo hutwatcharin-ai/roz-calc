@@ -11,7 +11,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import MonsterLink from '@/components/MonsterLink';
 import { useToolUse } from '@/lib/use-tool-use';
-import { physicalDamagePerHit } from '@/lib/damage';
+import { physicalDamagePerHit, RANGED_WEAPON_ROWS, statusAtkFromStats } from '@/lib/damage';
 import { killRate, expPerHour, KILL_RATE_DISCLAIMER } from '@/lib/kills-per-hour';
 import { hitChanceVsMob } from '@/lib/hit-flee';
 import { ELEMENTS, type Element, type ElementLevel } from '@/lib/element-table';
@@ -39,6 +39,11 @@ const WEAPON_KEY = 'roz-calc:weapon';
 interface WeaponChoice {
   weaponAtk: string;
   statusAtk: string;
+  /** Optional: base level and stats, to work status ATK out (lib/damage). */
+  lv?: string;
+  str?: string;
+  dex?: string;
+  luk?: string;
   weaponType: string;
   weaponElement: Element;
 }
@@ -100,10 +105,18 @@ export default function MonsterDamageCalculator({
 
   const monster = monsters.find((m) => m.id === monsterId) ?? null;
 
+  // With level and stats in, status ATK is worked out and counted twice, as
+  // the measured formula does (lib/damage); the ATK field is then the flat ATK
+  // other gear adds. Without them the field is taken as typed, as before.
+  const fromStats =
+    weapon.lv && weapon.str && weapon.dex && weapon.luk
+      ? statusAtkFromStats(Number(weapon.lv) || 0, Number(weapon.str) || 0, Number(weapon.dex) || 0, Number(weapon.luk) || 0, RANGED_WEAPON_ROWS.has(weapon.weaponType))
+      : null;
+  const neutralAtk = fromStats !== null ? fromStats * 2 + (Number(weapon.statusAtk) || 0) : Number(weapon.statusAtk) || 0;
   const damage = monster
     ? physicalDamagePerHit({
         weaponAtk: Number(weapon.weaponAtk) || 0,
-        statusAtk: Number(weapon.statusAtk) || 0,
+        statusAtk: neutralAtk,
         weaponType: weapon.weaponType,
         weaponElement: weapon.weaponElement,
         targetSize: monster.size,
@@ -148,7 +161,8 @@ export default function MonsterDamageCalculator({
           </label>
           <label className="toolnumbers__field">
             <span className="toolnumbers__label">
-              ATK ตัวละคร<span className="toolnumbers__unlocks"> · ไร้ธาตุเสมอ</span>
+              {fromStats !== null ? 'ATK จากของอื่น (ไม่นับอาวุธ)' : 'ATK ตัวละคร'}
+              <span className="toolnumbers__unlocks"> · ไร้ธาตุเสมอ</span>
             </span>
             <input
               className="mono"
@@ -159,6 +173,28 @@ export default function MonsterDamageCalculator({
               onChange={(e) => updateWeapon({ statusAtk: e.target.value })}
             />
           </label>
+          {/* Stats instead of a status ATK nobody can read off the window
+              (owner, 6 Oct 2026). */}
+          <fieldset className="toolnumbers__field toolnumbers__stats">
+            <legend className="toolnumbers__label">
+              หรือคิดจากสเตตัส<span className="toolnumbers__unlocks"> · Lv STR DEX LUK</span>
+            </legend>
+            {(['lv', 'str', 'dex', 'luk'] as const).map((key) => (
+              <input
+                key={key}
+                className="mono"
+                type="number"
+                inputMode="numeric"
+                placeholder={key.toUpperCase()}
+                aria-label={key === 'lv' ? 'เลเวล' : key.toUpperCase()}
+                value={weapon[key] ?? ''}
+                onChange={(e) => updateWeapon({ [key]: e.target.value })}
+              />
+            ))}
+            {fromStats !== null && (
+              <small className="muted">ATK จากสเตตัส {fromStats} · ในดาเมจนับ 2 เท่า (สูตรที่วัดในเกมแล้ว)</small>
+            )}
+          </fieldset>
           <label className="toolnumbers__field">
             <span className="toolnumbers__label">ชนิดอาวุธ</span>
             <select value={weapon.weaponType} onChange={(e) => updateWeapon({ weaponType: e.target.value })}>
