@@ -18,6 +18,14 @@ export interface SkillLevelFacts {
   r?: number;
   /** Cast time in milliseconds. */
   c?: number;
+  /** From roz.prontera.info (data/skill-level-extra.json): variable and fixed cast, after-cast delay, cooldown (ms), hits. */
+  cv?: number;
+  cf?: number;
+  acd?: number;
+  cd?: number;
+  h?: number;
+  /** The after-cast delay follows ASPD rather than a fixed time. */
+  aspd?: number;
 }
 
 export type SkillLevelMap = Record<string, Record<string, SkillLevelFacts>>;
@@ -65,6 +73,15 @@ export function tipFacts(levels: SkillLevelMap, slug: string, chosen: number): S
   if (row.e) out.push({ label: 'ผล', value: row.e });
   if (row.sp) out.push({ label: 'SP', value: String(row.sp) });
   if (row.r) out.push({ label: 'ระยะ', value: `${row.r} ช่อง` });
-  if (row.c) out.push({ label: 'ร่าย', value: ms(row.c) });
+  // Split cast when the split is known: a fixed part DEX cannot shorten.
+  if (row.cv || row.cf) {
+    out.push({ label: 'ร่าย', value: [row.cv ? `แปรผัน ${ms(row.cv)}` : null, row.cf ? `คงที่ ${ms(row.cf)}` : null].filter(Boolean).join(' · ') });
+  } else if (row.c) {
+    out.push({ label: 'ร่าย', value: ms(row.c) });
+  }
+  if (row.aspd) out.push({ label: 'ดีเลย์หลังร่าย', value: 'ตาม ASPD' });
+  else if (row.acd) out.push({ label: 'ดีเลย์หลังร่าย', value: ms(row.acd) });
+  if (row.cd) out.push({ label: 'คูลดาวน์', value: ms(row.cd) });
+  if (row.h && row.h > 1) out.push({ label: 'ตี', value: `${row.h} ครั้ง` });
   return out;
 }

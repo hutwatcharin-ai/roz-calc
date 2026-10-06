@@ -50,3 +50,19 @@ describe('tipFacts', () => {
     expect(tipFacts(LEVELS, 'nope', 2)).toEqual([]);
   });
 });
+
+describe('tipFacts timing (prontera.info extra)', () => {
+  it('splits the cast and adds delay, cooldown and hits', () => {
+    const levels: SkillLevelMap = { sg: { '1': { e: 'MATK 100%', c: 6000, cv: 5000, cf: 1000, acd: 4000, cd: 5000, h: 10 } } };
+    expect(tipFacts(levels, 'sg', 1)).toEqual([
+      { label: 'ผล', value: 'MATK 100%' },
+      { label: 'ร่าย', value: 'แปรผัน 5 วิ · คงที่ 1 วิ' },
+      { label: 'ดีเลย์หลังร่าย', value: '4 วิ' },
+      { label: 'คูลดาวน์', value: '5 วิ' },
+      { label: 'ตี', value: '10 ครั้ง' },
+    ]);
+  });
+  it('says a delay that follows ASPD', () => {
+    expect(tipFacts({ x: { '1': { aspd: 1, acd: 300 } } }, 'x', 1)).toEqual([{ label: 'ดีเลย์หลังร่าย', value: 'ตาม ASPD' }]);
+  });
+});

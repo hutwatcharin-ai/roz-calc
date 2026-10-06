@@ -8,6 +8,7 @@ import { fetchAllRows } from '@/lib/fetch-all-rows';
 import type { SkillLevelMap } from '@/lib/skill-details';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
+import skillExtra from '@/data/skill-level-extra.json';
 
 export const revalidate = 86400;
 
@@ -69,6 +70,13 @@ async function skillDetails(): Promise<{ levels: SkillLevelMap; descriptions: Re
     if (r.cast_time_ms) facts.c = r.cast_time_ms;
     if (Object.keys(facts).length === 0) continue;
     levels[r.skill_slug] = { ...(levels[r.skill_slug] ?? {}), [r.level]: facts };
+  }
+  // Cast split, after-cast delay, cooldown and hits per level, which
+  // skill_levels does not carry (data/skill-level-extra.json, prontera.info).
+  for (const [slug, byLevel] of Object.entries((skillExtra as { skills: Record<string, Record<string, object>> }).skills)) {
+    for (const [lv, extra] of Object.entries(byLevel)) {
+      levels[slug] = { ...(levels[slug] ?? {}), [lv]: { ...(levels[slug]?.[lv] ?? {}), ...extra } };
+    }
   }
 
   const { data: skills, error: skillsError } = await db

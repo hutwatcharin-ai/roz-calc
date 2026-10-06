@@ -55,3 +55,23 @@ with open(OUT, 'w', encoding='utf-8') as f:
         'classes': classes,
     }, f, ensure_ascii=False, separators=(',', ':'))
 print(f'{len(classes)} classes -> {os.path.normpath(OUT)}')
+
+# Per-level timing a skill tooltip needs and our skill_levels table lacks:
+# variable and fixed cast, after-cast delay, cooldown, hits. Keyed by
+# prontera's skill slug, which is the slug our skill_levels rows carry.
+skills = json.load(open(os.path.join(SRC, 'skills-catalog.json'), encoding='utf-8'))
+skills = skills if isinstance(skills, list) else skills.get('skills', [])
+extra = {}
+for skill in skills:
+    for lv in skill.get('levels') or []:
+        row = {}
+        for key, field in (('cv', 'cast_variable_ms'), ('cf', 'cast_fixed_ms'), ('acd', 'after_cast_delay_ms'), ('cd', 'cooldown_ms'), ('h', 'hit_count')):
+            if lv.get(field) not in (None, 0):
+                row[key] = lv[field]
+        if lv.get('delay_follows_aspd'):
+            row['aspd'] = 1
+        if row:
+            extra.setdefault(skill['slug'], {})[str(lv['level'])] = row
+with open(os.path.join(ROOT, 'data', 'skill-level-extra.json'), 'w', encoding='utf-8') as f:
+    json.dump({'_meta': {'how': 'python scripts/build-class-stats.py', 'source': 'roz.prontera.info skill levels (client_extract), 6 Oct 2026'}, 'skills': extra}, f, separators=(',', ':'))
+print(len(extra), 'skills with timing')
