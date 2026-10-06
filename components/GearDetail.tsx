@@ -30,6 +30,9 @@ import { randomOptionsFor } from '@/lib/random-options';
 import { cardSlotForGearType } from '@/lib/card-slot';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
 import InSetBox from '@/components/InSetBox';
+import ItemEffectsCard from '@/components/ItemEffectsCard';
+import { itemEffects, refineBonusAt } from '@/lib/item-effects';
+import { ELEMENT_TH } from '@/lib/monster-th';
 import { starTwinOf } from '@/lib/star-twins';
 import type { GearExtras } from '@/lib/gear-detail';
 
@@ -81,6 +84,12 @@ export default function GearDetail({
   // the droppers move up beside the picture instead of sitting under the
   // description.
   const fitted = section.recentKind === 'costume' && costumeFit(item.id) !== null;
+  // Weight, DEF/MDEF, weapon element and the refine totals from prontera.info
+  // (lib/item-effects). A costume is never refined, so it shows no refine tile.
+  const effects = itemEffects(item.id);
+  const refinable = section.recentKind !== 'costume';
+  const refineAt7 = refinable ? refineBonusAt(effects?.rs, 7) : null;
+  const refineAt10 = refinable ? refineBonusAt(effects?.rs, 10) : null;
   const dropsCard = (
   <div className="card" style={{ marginTop: 20 }}>
     <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
@@ -234,6 +243,36 @@ export default function GearDetail({
             <span className="reward-value mono">{item.weapon_level}</span>
           </div>
         )}
+        {effects?.def !== undefined && (
+          <div className="statgrid__cell">
+            <span className="reward-label">DEF</span>
+            <span className="reward-value mono">{effects.def}</span>
+          </div>
+        )}
+        {effects?.mdef !== undefined && (
+          <div className="statgrid__cell">
+            <span className="reward-label">MDEF</span>
+            <span className="reward-value mono">{effects.mdef}</span>
+          </div>
+        )}
+        {effects?.el && (
+          <div className="statgrid__cell">
+            <span className="reward-label">ธาตุอาวุธ</span>
+            <span className="reward-value">{ELEMENT_TH[effects.el.charAt(0).toUpperCase() + effects.el.slice(1)] ?? effects.el}</span>
+          </div>
+        )}
+        {effects?.w !== undefined && (
+          <div className="statgrid__cell">
+            <span className="reward-label">น้ำหนัก</span>
+            <span className="reward-value mono">{effects.w}</span>
+          </div>
+        )}
+        {refineAt7 && refineAt10 && (
+          <div className="statgrid__cell">
+            <span className="reward-label">ตีบวกได้ {refineAt7.stat} เพิ่ม</span>
+            <span className="reward-value mono">+7: {refineAt7.value} · +10: {refineAt10.value}</span>
+          </div>
+        )}
         {item.required_level !== null && (
           <div className="statgrid__cell">
             <span className="reward-label">ใช้ได้ที่เลเวล</span>
@@ -281,6 +320,8 @@ export default function GearDetail({
       </div>
       {fitted && <CostumeFit id={item.id} name={item.name_en} />}
       </div>
+
+      <ItemEffectsCard id={item.id} />
 
       {randomOptions && randomOptions.length > 0 && (
         <div style={{ marginTop: 20 }}>

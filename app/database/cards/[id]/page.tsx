@@ -25,6 +25,7 @@ import { cardRelease, releaseText } from '@/lib/card-availability';
 import { CardDroppers, CardHero } from './hero';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
 import InSetBox from '@/components/InSetBox';
+import ItemEffectsCard from '@/components/ItemEffectsCard';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -165,6 +166,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
       />
       <InSetBox itemId={item.id} />
       <ItemGuideRefs itemId={item.id} />
+      <ItemEffectsCard id={item.id} />
 
       {english.length > 0 && (
         <div className="card card--cyan" style={{ marginTop: 20 }}>

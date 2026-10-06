@@ -20,6 +20,8 @@ import { fetchAllRows } from '@/lib/fetch-all-rows';
 import ItemIcon from '@/components/ItemIcon';
 import { CATEGORY_TH, TYPE_TH, gearCategory, gearType, typesFor } from '@/lib/gear-type';
 import { ROLE_ORDER, ROLE_TH, gearRoles, isGearRole, type GearRole } from '@/lib/gear-roles';
+import EffectMatchLine from '@/components/EffectMatchLine';
+import { EFFECT_FILTERS, effectFilter, filterStrength, ITEM_EFFECTS_SOURCE, itemEffects, matchingBonuses } from '@/lib/item-effects';
 
 export const revalidate = 86400;
 
@@ -39,7 +41,7 @@ const PAGE_SIZE = 50;
 export default async function EquipmentPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; type?: string; use?: string; job?: string; mylv?: string; slots?: string; wlv?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; type?: string; use?: string; job?: string; mylv?: string; slots?: string; wlv?: string; fx?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   // Anything still asking this list for costumes -- an old link, a bookmark,
@@ -71,6 +73,9 @@ export default async function EquipmentPage({
   // level, so a set value narrows the list to weapons by itself.
   const wlvParam = ['1', '2', '3', '4'].includes(searchParams.wlv ?? '') ? (searchParams.wlv as string) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  // "มีผล": gear that does a thing, from the numbers in lib/item-effects
+  // (owner, 6 Oct 2026). Strongest first while it is on.
+  const fx = effectFilter(searchParams.fx);
 
   const db = supabaseBrowser();
 
@@ -135,6 +140,7 @@ export default async function EquipmentPage({
     if (job && !canJobEquip(it.equippable_classes, job)) return false;
     // Former names count: "Orc Trophy" still finds "Horro of Tribe".
     if (needle && !itemNamesOf(it).some((n) => matches(n, needle))) return false;
+    if (fx && matchingBonuses(itemEffects(it.id), fx).length === 0) return false;
     return true;
   });
 
@@ -157,7 +163,9 @@ export default async function EquipmentPage({
     if (role && !it.roles.includes(role)) return false;
     return true;
   });
-  if (sort === 'atk') {
+  if (fx) {
+    filtered.sort((a, b) => filterStrength(itemEffects(b.id), fx) - filterStrength(itemEffects(a.id), fx) || a.id - b.id);
+  } else if (sort === 'atk') {
     filtered.sort((a, b) => (b.atk ?? -1) - (a.atk ?? -1) || a.id - b.id);
   } else if (sort === 'level') {
     filtered.sort((a, b) => (a.required_level ?? 999) - (b.required_level ?? 999) || a.id - b.id);
@@ -182,6 +190,7 @@ export default async function EquipmentPage({
     if (mylv > 0) params.set('mylv', String(mylv));
     if (slotsParam !== '') params.set('slots', slotsParam);
     if (wlvParam !== '') params.set('wlv', wlvParam);
+    if (fx) params.set('fx', fx.key);
     if (sort !== 'name') params.set('sort', sort);
     if (targetPage > 1) params.set('page', String(targetPage));
     const qs = params.toString();
@@ -206,6 +215,7 @@ export default async function EquipmentPage({
     if (mylv > 0) params.set('mylv', String(mylv));
     if (slotsParam !== '') params.set('slots', slotsParam);
     if (wlvParam !== '') params.set('wlv', wlvParam);
+    if (fx) params.set('fx', fx.key);
     if (sort !== 'name') params.set('sort', sort);
     const qs = params.toString();
     return `/database/equipment${qs ? `?${qs}` : ''}`;
@@ -247,6 +257,7 @@ export default async function EquipmentPage({
             { label: 'ใส่ได้ที่ Lv', value: mylv > 0 ? String(mylv) : '' },
             { label: 'Slot', value: slotsParam !== '' ? (slotsParam === '0' ? 'ไม่มี Slot' : `${slotsParam} Slot`) : '' },
             { label: 'เลเวลอาวุธ', value: wlvParam !== '' ? `Lv ${wlvParam}` : '' },
+            { label: 'มีผล', value: fx?.label ?? '' },
           ]}
           clearHref="/database/equipment"
         />
@@ -309,6 +320,11 @@ export default async function EquipmentPage({
         </section>
       )}
 
+      {fx && (
+        <p className="muted" style={{ margin: '0 0 10px', fontSize: 13 }}>
+          นับจากตัวเลขผลของไอเทมที่ {ITEM_EFFECTS_SOURCE} แยกไว้ ซึ่งยังไม่ครบทุกอุปกรณ์ ถ้าหาไม่เจอให้ลองพิมพ์ชื่อผลในช่องค้นหาด้วย
+        </p>
+      )}
       <form className="filterbar">
         <FilterAutoSubmit />
         <div className="filterbar__row filterbar__row--search">
@@ -360,6 +376,15 @@ export default async function EquipmentPage({
           </select>
         </label>
         <label className="field">
+          <span className="field__label">มีผล</span>
+          <select name="fx" defaultValue={fx?.key ?? ''}>
+            <option value="">ทุกอย่าง</option>
+            {EFFECT_FILTERS.map((f) => (
+              <option key={f.key} value={f.key}>{f.label}</option>
+            ))}
+          </select>
+        </label>
+        <label className="field">
           <span className="field__label">เรียงตาม</span>
           <select name="sort" defaultValue={sort}>
             {Object.entries(SORTS).map(([key, v]) => (
@@ -404,6 +429,7 @@ export default async function EquipmentPage({
                   {it.atk != null && it.atk > 0 ? ` · ATK ${it.atk}` : ''}
                   {it.required_level != null && it.required_level > 1 ? ` · Lv ${it.required_level}` : ''}
                 </span>
+                {fx && <EffectMatchLine effects={itemEffects(it.id)} filter={fx} />}
               </Link>
             ))}
           </div>

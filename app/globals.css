@@ -4270,3 +4270,17 @@ html .tag { border-radius: 4px; }
 .warps__doors, .warps__from { margin: 12px 0 0; font-size: 13px; }
 /* Quest skills come with the job (components/SkillPlanner, 6 Oct 2026). */
 .skillcell__auto { margin: 4px 0 0; text-align: center; font: 700 11.5px var(--font-sarabun), sans-serif; color: #3DFF8F; }
+
+/* Item effects as numbers (components/ItemEffectsCard, 6 Oct 2026). */
+.effects__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.effects__chip { display: inline-block; padding: 3px 9px; border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--cyan) 10%, transparent); color: var(--text); font: 600 13px/1.4 var(--font-sarabun), sans-serif; }
+.effects__chip--minus { border-color: color-mix(in srgb, var(--pink) 60%, transparent); background: color-mix(in srgb, var(--pink) 10%, transparent); color: #ff9ac8; }
+.effects__when { display: grid; gap: 8px; margin: 12px 0 0; }
+.effects__when > div { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: 10px; align-items: start; padding-top: 8px; border-top: 1px solid var(--hair); }
+.effects__when dt { color: var(--yellow); font: 700 12.5px/1.6 var(--font-sarabun), sans-serif; }
+.effects__when dd { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
+.effects__src { margin: 12px 0 0; font-size: 12px; }
+@media (max-width: 560px) { .effects__when > div { grid-template-columns: 1fr; gap: 4px; } }
+.itemcard__fx { grid-column: 2; display: block; margin-top: 3px; color: var(--cyan); font-size: 12px; line-height: 1.45; }
+.itemcard__fx em { color: var(--yellow); font-style: normal; }
+.cardtile__body .itemcard__fx { grid-column: auto; }

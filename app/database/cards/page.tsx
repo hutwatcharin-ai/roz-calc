@@ -13,6 +13,8 @@ import SuggestInput from '@/components/SuggestInput';
 import { itemFormerNames } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
+import EffectMatchLine from '@/components/EffectMatchLine';
+import { EFFECT_FILTERS, effectFilter, filterStrength, ITEM_EFFECTS_SOURCE, itemEffects, matchingBonuses } from '@/lib/item-effects';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
 import { cardRelease, releaseText } from '@/lib/card-availability';
@@ -53,12 +55,15 @@ function cardEffect(description: string | null): string | null {
 export default async function CardsPage({
   searchParams,
 }: {
-  searchParams: { q?: string; slot?: string; role?: string; page?: string; sort?: string; live?: string };
+  searchParams: { q?: string; slot?: string; role?: string; fx?: string; page?: string; sort?: string; live?: string };
 }) {
   const q = searchParams.q ?? '';
   const slot = SLOT_ORDER.includes(searchParams.slot as CardSlot) ? (searchParams.slot as CardSlot) : '';
   const role = ROLE_ORDER.includes(searchParams.role as CardRole) ? (searchParams.role as CardRole) : '';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
+  // "มีผล": cards that do a thing, from the numbers in lib/item-effects
+  // (owner, 6 Oct 2026). Strongest first while it is on.
+  const fx = effectFilter(searchParams.fx);
   // Off by default: a card that arrives in January is still worth reading
   // about while planning, and hiding rows by default is how a database
   // quietly stops being one.
@@ -163,6 +168,7 @@ export default async function CardsPage({
     if (hideUnreleased && c.release !== null) return false;
     if (slot && c.slot !== slot) return false;
     if (role && !c.roles.includes(role)) return false;
+    if (fx && matchingBonuses(itemEffects(c.id), fx).length === 0) return false;
     if (!needle) return true;
     // Searching effect text is the point: a player looks for "cards that add
     // LUK", not for a card whose name they already know.
@@ -171,7 +177,9 @@ export default async function CardsPage({
     return matches(`${c.name_en} ${itemFormerNames(c.id).join(' ')} ${c.effect ?? ''} ${c.effectEn ?? ''}`, needle);
   });
 
-  if (sort === 'slot') {
+  if (fx) {
+    filtered.sort((a, b) => filterStrength(itemEffects(b.id), fx) - filterStrength(itemEffects(a.id), fx) || a.name.localeCompare(b.name));
+  } else if (sort === 'slot') {
     // Cards with no "Equipped on" line sort last rather than first: an unknown
     // slot is not a slot that comes before Accessory.
     filtered.sort((a, b) => (a.slot ?? 'zzz').localeCompare(b.slot ?? 'zzz') || a.name_en.localeCompare(b.name_en));
@@ -185,6 +193,7 @@ export default async function CardsPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (slot) params.set('slot', slot);
+    if (fx) params.set('fx', fx.key);
     if (role) params.set('role', role);
     if (sort !== 'name') params.set('sort', sort);
     if (hideUnreleased) params.set('live', '1');
@@ -198,6 +207,7 @@ export default async function CardsPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (slot) params.set('slot', slot);
+    if (fx) params.set('fx', fx.key);
     if (role) params.set('role', role);
     if (sort !== 'name') params.set('sort', sort);
     if (next) params.set('live', '1');
@@ -211,6 +221,7 @@ export default async function CardsPage({
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (slot) params.set('slot', slot);
+    if (fx) params.set('fx', fx.key);
     if (target) params.set('role', target);
     if (sort !== 'name') params.set('sort', sort);
     if (hideUnreleased) params.set('live', '1');
@@ -250,6 +261,7 @@ export default async function CardsPage({
             { label: 'คำค้น', value: q },
             { label: 'ช่อง', value: slot ? SLOT_TH[slot] : '' },
             { label: 'เอาไว้', value: role ? ROLE_TH[role].title : '' },
+            { label: 'มีผล', value: fx?.label ?? '' },
           ]}
           clearHref="/database/cards"
         />
@@ -273,6 +285,11 @@ export default async function CardsPage({
         </div>
         {role && <p className="rolepick__asks">{ROLE_TH[role].asks}</p>}
       </section>
+      {fx && (
+        <p className="muted" style={{ margin: '0 0 10px', fontSize: 13 }}>
+          นับจากตัวเลขผลของไอเทมที่ {ITEM_EFFECTS_SOURCE} แยกไว้ ซึ่งยังไม่ครบทุกการ์ด ถ้าหาไม่เจอให้ลองพิมพ์ชื่อผลในช่องค้นหาด้วย
+        </p>
+      )}
       <form className="filterbar">
         <FilterAutoSubmit />
         <div className="filterbar__row filterbar__row--search">
@@ -293,6 +310,15 @@ export default async function CardsPage({
             </option>
           ))}
         </select>
+        </label>
+        <label className="field">
+          <span className="field__label">มีผล</span>
+          <select name="fx" defaultValue={fx?.key ?? ''}>
+            <option value="">ทุกอย่าง</option>
+            {EFFECT_FILTERS.map((f) => (
+              <option key={f.key} value={f.key}>{f.label}</option>
+            ))}
+          </select>
         </label>
         <label className="field">
           <span className="field__label">เรียงตาม</span>
@@ -357,6 +383,7 @@ export default async function CardsPage({
                     )}
                   </span>
                   <span className="cardtile__effect">{c.effect ?? '—'}</span>
+                  {fx && <EffectMatchLine effects={itemEffects(c.id)} filter={fx} />}
                   {/* Where it drops, only where that is not the monster the
                       card is named after (244 of 315 are). */}
                   {dropsKnown && c.dropNote && (
