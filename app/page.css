@@ -68,9 +68,9 @@ html .qcard__go { text-shadow: 0 0 8px var(--glow-yellow); }
 a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }
 
 /* Build simulator strip (owner, 7 Oct 2026): the flagship tool between the
-   hero and the four cards. One lit button and something to look at; three
-   looks (marquee, status window, class select) for the owner to pick from.
-   On phones each stays short so the search cards keep their place. */
+   hero and the four cards. One lit button beside a status window (the
+   owner's pick of three looks). On phones it stays short so the search
+   cards keep their place. */
 .homebuild {
   position: relative; overflow: hidden; margin-top: 18px; padding: 16px 20px; border: 2px solid var(--cyan); border-radius: 12px;
   background: radial-gradient(ellipse at 90% 120%, rgba(255, 61, 154, .3), transparent 55%), radial-gradient(ellipse at 0% 0%, rgba(61, 232, 255, .16), transparent 50%), repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px), #0b0724;
@@ -88,22 +88,9 @@ a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }
 .homebuild__go > span:last-child { animation: homebuild-blink 1s steps(2, start) infinite; }
 @keyframes homebuild-blink { to { visibility: hidden; } }
 
-/* 1. Marquee: text left, a parade of classes marching on a lit floor, PRESS START. */
-.homebuild--marquee { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) auto; align-items: center; gap: 18px; }
-.homebuild__parade {
-  position: relative; display: flex; justify-content: space-around; align-items: flex-end; height: 92px; padding: 0 6px 8px;
-  background: linear-gradient(transparent 70%, rgba(61, 232, 255, .25)), repeating-linear-gradient(90deg, rgba(61, 232, 255, .25) 0 1px, transparent 1px 28px);
-  border-bottom: 2px solid var(--cyan); box-shadow: 0 6px 14px -8px var(--cyan);
-}
-.homebuild__parade img { width: 60px; height: 60px; object-fit: contain; image-rendering: pixelated; animation: homebuild-hop .9s ease-in-out calc(var(--i) * .15s) infinite alternate; }
-@keyframes homebuild-hop { to { transform: translateY(-7px); } }
-.homebuild__go--start { flex-direction: column; gap: 4px; min-height: 64px; padding: 6px 22px; }
-.homebuild__press { font-size: 10px; letter-spacing: .22em; color: #7a1048; animation: homebuild-blink 1.2s steps(2, start) infinite; }
-.homebuild__go--start > span:last-child { display: none; }
-
-/* 2. Status window: what the tool works out, in lit digits. */
-.homebuild--stat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); align-items: center; gap: 22px; }
-.homebuild--stat .homebuild__lead { margin-bottom: 12px; }
+/* A status window: what the tool works out, in lit digits. */
+.homebuild { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); align-items: center; gap: 22px; }
+.homebuild .homebuild__lead { margin-bottom: 12px; }
 .homebuild__window { padding: 10px 12px 8px; border: 2px solid var(--pink); border-radius: 8px; background: #08051a; box-shadow: inset 0 0 18px rgba(255, 61, 154, .2), 0 0 14px rgba(255, 61, 154, .35); }
 .homebuild__wintitle { margin: 0 0 6px; font-size: 11px; letter-spacing: .12em; color: var(--pink); }
 .homebuild__window dl { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 0; }
@@ -112,14 +99,6 @@ a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }
 .homebuild__window dd { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.15; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .6); }
 .homebuild__winnote { margin: 6px 0 0; font: 400 11px/1.4 var(--font-sarabun), sans-serif; color: var(--faint); }
 
-/* 3. Class select: a roster with a blinking cursor walking along it. */
-.homebuild--select { text-align: left; }
-.homebuild__roster { display: flex; gap: 8px; margin: 8px 0 12px; overflow: hidden; }
-.homebuild__roster span { position: relative; flex: 0 0 auto; display: grid; place-items: center; width: 72px; height: 72px; border: 2px solid rgba(61, 232, 255, .3); border-radius: 6px; background: radial-gradient(ellipse at 50% 90%, rgba(61, 232, 255, .25), transparent 60%), #120b33; animation: homebuild-cursor 8s steps(1) calc(var(--i) * 1s) infinite; }
-.homebuild__roster img { width: 56px; height: 56px; object-fit: contain; image-rendering: pixelated; }
-@keyframes homebuild-cursor { 0%, 12.4% { border-color: var(--yellow); box-shadow: 0 0 14px rgba(255, 229, 61, .6); } 12.5%, 100% { border-color: rgba(61, 232, 255, .3); box-shadow: none; } }
-.homebuild__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-
 @media (prefers-reduced-motion: reduce) { .homebuild *, .homebuild *::before { animation: none !important; } .homebuild__go { transition: none; } }
 @media (max-width: 640px) {
   .homebuild { padding: 12px; margin-top: 14px; }
@@ -127,22 +106,10 @@ a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }
   .homebuild__title { font-size: 18px; }
   .homebuild__lead { font-size: 12.5px; line-height: 1.45; }
   .homebuild__go { min-height: 44px; padding: 0 16px; font-size: 15px; }
-  .homebuild--marquee { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; }
-  .homebuild--marquee .homebuild__body { grid-column: 1 / -1; }
-  .homebuild__parade { height: 64px; padding-bottom: 4px; }
-  .homebuild__parade { min-width: 0; overflow: hidden; }
-  .homebuild__parade img { width: 40px; height: 40px; }
-  .homebuild__parade img:nth-child(n+5) { display: none; }
-  .homebuild__go--start { min-height: 56px; padding: 4px 14px; }
-  .homebuild--stat { grid-template-columns: minmax(0, 1fr) 132px; gap: 10px; }
-  .homebuild--stat .homebuild__lead { display: none; }
+  .homebuild { grid-template-columns: minmax(0, 1fr) 132px; gap: 10px; }
+  .homebuild .homebuild__lead { display: none; }
   .homebuild__window { padding: 6px; }
   .homebuild__wintitle, .homebuild__winnote { display: none; }
   .homebuild__window dl { gap: 4px; }
   .homebuild__window dd { font-size: 17px; }
-  .homebuild__roster { margin: 2px 0 8px; gap: 6px; }
-  .homebuild__roster span { width: 48px; height: 48px; }
-  .homebuild__roster img { width: 38px; height: 38px; }
-  .homebuild__row { gap: 10px; }
-  .homebuild--select .homebuild__lead { display: none; }
 }
