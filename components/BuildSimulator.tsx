@@ -194,6 +194,19 @@ export default function BuildSimulator({ initial, sharedId }: {
     try {
       start = initial ?? decodeBuild(new URLSearchParams(window.location.search).get('b'));
       if (start && !initial) setFromLink(true);
+      // ?open=<name>: a build saved in this browser, opened by name (the
+      // homepage's "open the latest saved build"). Chosen on purpose, so it
+      // becomes the build on screen like picking it from the list.
+      const open = new URLSearchParams(window.location.search).get('open');
+      if (!start && open) {
+        const list = JSON.parse(window.localStorage.getItem(SAVED_KEY) ?? '[]');
+        const pick = Array.isArray(list) ? list.find((x) => x && x.name === open && typeof x.b === 'string') : null;
+        start = pick ? decodeBuild(pick.b) : null;
+        if (start) {
+          setLoadedName(open);
+          setDirty(true);
+        }
+      }
       if (!start) start = sanitizeBuild(JSON.parse(window.localStorage.getItem(BUILD_KEY) ?? 'null'));
     } catch {
       // Blocked or broken storage: start empty.
