@@ -6,7 +6,7 @@ import Link from 'next/link';
 import SiteStats, { getSiteStats } from '@/components/SiteStats';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import CVariantToggle from '@/components/CVariantToggle';
-import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { rankFarmRange } from '@/lib/farm-picks';
 import JsonLd from '@/components/JsonLd';
 import { websiteJsonLd } from '@/lib/jsonld';
@@ -38,7 +38,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
   // Challenge clones dominate the EXP/HP ranking (they are inflated copies),
   // so the default ranking is the real world; ?c=1 opts them in, same rule as
   // the monster list.
-  if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+  if (!showC) query = query.not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE);
   // Every monster in the range, not the top 20 by ratio: the ranking needs to
   // know how many of each stand on a map before it can pick a top 20, and
   // ordering by exp_per_hp first threw that away. It used to put Eclipse first

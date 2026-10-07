@@ -1,21 +1,32 @@
 import { describe, expect, it } from 'vitest';
-import { isCVariant, isMjVariant, isInstanceVariant, INSTANCE_VARIANT_SQL_NOT_LIKE } from './c-variant';
+import { championOf, isCVariant, isMjVariant, isInstanceVariant, INSTANCE_VARIANT_SQL_NOT_LIKE } from './c-variant';
 
 describe('isCVariant', () => {
-  it('matches C<digit><space> prefixes', () => {
-    expect(isCVariant('C1 Yoyo')).toBe(true);
-    expect(isCVariant('C3 Drops')).toBe(true);
-    expect(isCVariant('C9 Baphomet')).toBe(true);
+  it('matches the champion names the game shows', () => {
+    expect(isCVariant('Swift Poring')).toBe(true);
+    expect(isCVariant('Solid Zombie Prisoner')).toBe(true);
+    expect(isCVariant('Drops Ringleader')).toBe(true);
+    expect(isCVariant('Furious Zombie')).toBe(true);
+    expect(isCVariant('Elusive Goblin')).toBe(true);
   });
 
   it('rejects everything else', () => {
-    expect(isCVariant('Yoyo')).toBe(false);
-    expect(isCVariant('Cornutus')).toBe(false); // C + letter, not digit
-    expect(isCVariant('C1Yoyo')).toBe(false); // no space
-    expect(isCVariant('Mini C1 Yoyo')).toBe(false); // not a prefix
+    expect(isCVariant('Poring')).toBe(false);
+    expect(isCVariant('Swift')).toBe(false); // the word alone is not a monster
+    expect(isCVariant('Ringleader')).toBe(false);
+    expect(isCVariant('C1 Poring')).toBe(false); // the old import name
     expect(isCVariant('')).toBe(false);
     expect(isCVariant(null)).toBe(false);
     expect(isCVariant(undefined)).toBe(false);
+  });
+});
+
+describe('championOf', () => {
+  it('splits the tier from the normal monster', () => {
+    expect(championOf('Swift Poring')).toMatchObject({ base: 'Poring', tier: { prefix: 'Swift' } });
+    expect(championOf('Sea-Otter Ringleader')).toMatchObject({ base: 'Sea-Otter', tier: { prefix: 'Ringleader' } });
+    expect(championOf('Elusive Peco Peco')).toMatchObject({ base: 'Peco Peco', tier: { prefix: 'Elusive' } });
+    expect(championOf('Poring')).toBeNull();
   });
 });
 

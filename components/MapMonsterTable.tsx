@@ -10,7 +10,6 @@
 // sort buttons.
 import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
-import CVariantToggle from '@/components/CVariantToggle';
 import { isCVariant } from '@/lib/c-variant';
 import { bySorted, useTableSort } from '@/lib/use-table-sort';
 import { ELEMENT_COLOUR, ELEMENT_COLOUR_UNKNOWN } from '@/lib/element-colour';
@@ -32,7 +31,7 @@ export interface MapMonsterRow {
   element?: string | null;
 }
 
-export default function MapMonsterTable({ monsters, cCount }: { monsters: MapMonsterRow[]; cCount: number }) {
+export default function MapMonsterTable({ monsters }: { monsters: MapMonsterRow[]; cCount?: number }) {
   const { sort, toggle, indicator } = useTableSort();
 
   const rows = bySorted(monsters, sort, (m, key) =>
@@ -47,7 +46,8 @@ export default function MapMonsterTable({ monsters, cCount }: { monsters: MapMon
 
   return (
     <>
-      {cCount > 0 && <CVariantToggle mode="local" />}
+      {/* Champions spawn here among the normal ones, so the roster shows
+          them, marked, rather than hiding them (owner, 7 Oct 2026). */}
       <div className="mapsort" role="group" aria-label="เรียงมอนสเตอร์">
         <span className="mapsort__label">เรียง</span>
         {(
@@ -67,7 +67,7 @@ export default function MapMonsterTable({ monsters, cCount }: { monsters: MapMon
       </div>
       <ul className="maproster">
         {rows.map((m) => (
-          <li key={m.id} className={isCVariant(m.name_en) ? 'cvariant' : undefined}>
+          <li key={m.id} className={isCVariant(m.name_en) ? 'is-champ' : undefined}>
             <Link
               href={`/database/monsters/${m.id}`}
               className="maptile"
@@ -84,6 +84,7 @@ export default function MapMonsterTable({ monsters, cCount }: { monsters: MapMon
                 <span title="FLEE ที่ต้องมีเพื่อหลบมอนตัวนี้ 95%"> · FLEE <b className="maptile__flee">{m.flee_95 ?? '—'}</b></span>
               </span>
               <AggroBadge monster={{ is_aggressive: m.is_aggressive, atk_max: m.atk_max }} />
+              {isCVariant(m.name_en) && <span className="maptile__champ">แชมเปียน</span>}
             </Link>
           </li>
         ))}

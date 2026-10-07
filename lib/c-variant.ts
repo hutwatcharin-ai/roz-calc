@@ -1,11 +1,35 @@
-// Challenge-dungeon clones ("C1 Yoyo" ... "C9 ..."): 159 monsters whose
-// name_en starts with C<digit><space>. Verified against the full table —
-// every C-variant matches this prefix and nothing else does, so the same
-// pattern drives both the SQL filter and the per-row class.
-export const C_VARIANT_SQL_NOT_LIKE = 'C_ %';
+// Champion monsters: the game's C1-C5 series of a normal monster ("Swift
+// Poring", internally C1_PORING). They spawn one or two at a time among the
+// normal ones in fields and dungeons, with more HP, far more EXP and better
+// drops (rozerodb's spawn atlas; the owner has met them in game). Our import
+// filed them as "C1 Poring"; scripts/rename-champions.mjs gave them the names
+// the game shows on 7 Oct 2026. 159 rows, and nothing else in the table
+// starts with these words or ends in "Ringleader" (checked that day).
+export const CHAMPION_TIERS = [
+  { prefix: 'Swift', th: 'เร็ว' },
+  { prefix: 'Solid', th: 'ถึก' },
+  { prefix: 'Ringleader', th: 'หัวหน้าฝูง' },
+  { prefix: 'Furious', th: 'ดุ' },
+  { prefix: 'Elusive', th: 'หลบเก่ง' },
+] as const;
+const CHAMPION_RE = /^(Swift|Solid|Furious|Elusive) .|. Ringleader$/;
+
+// For PostgREST: .not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE)
+export const C_VARIANT_SQL_OP = 'like(any)';
+export const C_VARIANT_SQL_NOT_LIKE = '{"Swift %","Solid %","Furious %","Elusive %","% Ringleader"}';
 
 export function isCVariant(name: string | null | undefined): boolean {
-  return !!name && /^C\d /.test(name);
+  return !!name && CHAMPION_RE.test(name);
+}
+
+/** The normal monster's name and the tier ("Swift Poring" -> Poring, Swift), or null. */
+export function championOf(name: string | null | undefined): { base: string; tier: (typeof CHAMPION_TIERS)[number] } | null {
+  if (!name || !CHAMPION_RE.test(name)) return null;
+  const ring = / Ringleader$/.exec(name);
+  if (ring) return { base: name.slice(0, ring.index), tier: CHAMPION_TIERS[2] };
+  const [prefix, ...rest] = name.split(' ');
+  const tier = CHAMPION_TIERS.find((t) => t.prefix === prefix)!;
+  return { base: rest.join(' '), tier };
 }
 
 // Monsters that only exist inside an instance, an event, or a memorial

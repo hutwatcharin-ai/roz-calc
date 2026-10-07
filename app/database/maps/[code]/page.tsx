@@ -113,8 +113,8 @@ export default async function MapDetailPage({ params }: { params: { code: string
     .map((s: any) => s.monsters)
     .filter(Boolean)
     .sort((a: any, b: any) => a.level - b.level);
-  // Challenge clones stay in the static HTML (this page is ISR) but carry the
-  // cvariant class, hidden by CSS until the player opts in via the toggle.
+  // Champions (Swift Poring...) spawn here one or two at a time among the
+  // normal monsters; the roster shows them, marked, and counts them apart.
   const cCount = monsters.filter((m: any) => isCVariant(m.name_en)).length;
   // Not every map has a picture, so this is null on 149 of them and the block
   // below disappears rather than leaving a broken image behind.
@@ -196,7 +196,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
       </p>
       <p style={{ color: 'var(--dim)', marginTop: 10 }}>
         มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
-        {cCount > 0 && ` (+${cCount} มอน Challenge)`}
+        {cCount > 0 && ` + มอนแชมเปียน ${cCount} ชนิด (ตัวพิเศษ HP/EXP สูง เกิดปนทีละ 1–2 ตัว)`}
       </p>
       {/* Picture beside the table on wide screens: the map page used to
           leave its right half empty (UX critique, 6 Sep). Stacked on phones. */}

@@ -153,7 +153,7 @@ export default async function FarmGuidePage() {
       ))}
 
       <p className="source-note" style={{ marginTop: 16 }}>
-        ช่วงเลเวลหยุดที่ {BASE_LEVEL_CAP} ตามเพดานปัจจุบัน · ไม่รวมมอน Challenge (C1–C9) · ตัวที่โจมตีก่อนมีป้ายเตือน ·{' '}
+        ช่วงเลเวลหยุดที่ {BASE_LEVEL_CAP} ตามเพดานปัจจุบัน · ไม่รวมมอนแชมเปียน (Swift, Furious …) · ตัวที่โจมตีก่อนมีป้ายเตือน ·{' '}
         <strong>{dropped} ตัวไม่ได้อยู่ในตาราง</strong>เพราะฐานข้อมูลยังไม่รู้ว่ามันเกิดที่แมพไหน ไม่เอามาแนะนำทั้งที่บอกไม่ได้ว่าไปตีที่ไหน
       </p>
     </main>

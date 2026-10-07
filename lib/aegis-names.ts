@@ -16,3 +16,12 @@ const names = file as Record<string, string>;
 export function aegisName(id: number): string | null {
   return names[String(id)] ?? null;
 }
+
+const idByName = new Map(Object.entries(names).map(([id, n]) => [n, Number(id)]));
+
+/** A champion's normal monster: C1_PORING (2699) -> PORING (1002). */
+export function normalOf(id: number): number | null {
+  const n = aegisName(id);
+  const m = n ? /^C\d_(.+)$/.exec(n) : null;
+  return m ? idByName.get(m[1]) ?? null : null;
+}

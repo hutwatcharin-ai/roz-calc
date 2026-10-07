@@ -1,7 +1,8 @@
 'use client';
 
-// One checkbox, site-wide effect: Challenge clones (C1-C9) are hidden by
-// default and revealed on demand. Two mechanisms behind the same control:
+// One checkbox, site-wide effect: champion monsters (Swift Poring...) are
+// hidden from lists by default and revealed on demand. Map rosters show them
+// regardless (components/MapMonsterTable). Two mechanisms behind the same control:
 //
 // - 'local' mode (map page, afk-finder): C rows are in the HTML with the
 //   `cvariant` class and hidden by CSS unless <html data-show-cvariant> is
@@ -90,7 +91,7 @@ export default function CVariantToggle({
         checked={!show}
         onChange={(e) => onChange(e.target.checked)}
       />
-      ซ่อนมอน Challenge (C1–C9)
+      ซ่อนมอนแชมเปียน (Swift, Solid, Ringleader, Furious, Elusive)
     </label>
   );
 }

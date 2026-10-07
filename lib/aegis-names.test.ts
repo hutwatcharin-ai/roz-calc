@@ -1,7 +1,7 @@
 // The internal names are only worth showing if they actually tell the
 // duplicates apart, so that is what this checks -- not that the file parsed.
 import { describe, it, expect } from 'vitest';
-import { aegisName } from '@/lib/aegis-names';
+import { aegisName, normalOf } from '@/lib/aegis-names';
 import file from '@/data/monster-aegis-names.json';
 
 const names = file as Record<string, string>;
@@ -34,5 +34,12 @@ describe('aegisName', () => {
 
   it('returns null for an id the export did not cover', () => {
     expect(aegisName(999999)).toBeNull();
+  });
+});
+
+describe('normalOf', () => {
+  it("finds a champion's normal monster through the internal name", () => {
+    expect(normalOf(2699)).toBe(1002); // C1_PORING -> PORING
+    expect(normalOf(1002)).toBeNull(); // Poring is not a champion
   });
 });

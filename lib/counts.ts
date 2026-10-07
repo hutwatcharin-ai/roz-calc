@@ -19,7 +19,7 @@
 
 import { cache } from 'react';
 import { supabaseBrowser } from '@/lib/supabase';
-import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 export interface MonsterCounts {
   /** Every row in the table. */
@@ -54,13 +54,13 @@ export const monsterCounts = cache(async (): Promise<MonsterCounts> => {
     db.from('monsters').select('id', { count: 'exact', head: true }),
     INSTANCE_VARIANT_SQL_NOT_LIKE.reduce(
       (query, pattern) => query.not('name_en', 'like', pattern),
-      db.from('monsters').select('id', { count: 'exact', head: true }).not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE),
+      db.from('monsters').select('id', { count: 'exact', head: true }).not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE),
     ),
-    db.from('monsters').select('id', { count: 'exact', head: true }).not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE),
+    db.from('monsters').select('id', { count: 'exact', head: true }).not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE),
     db
       .from('monsters')
       .select('id', { count: 'exact', head: true })
-      .not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE)
+      .not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE)
       .or('hit_100.is.null,flee_95.is.null'),
     // The same patterns the list filters *out* with, used here to count what
     // is being hidden. PostgREST has no OR of LIKEs on one column without the

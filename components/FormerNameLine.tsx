@@ -17,7 +17,7 @@ export default function FormerNameLine({ id }: { id: number }) {
       {names.map((n, i) => (
         <span key={n.name}>
           {i > 0 && ' · '}
-          <strong title={`เปลี่ยนชื่อเมื่อ ${n.until} ให้ตรงกับชื่อการ์ดของมันเอง`}>{n.name}</strong>
+          <strong title={`เปลี่ยนชื่อเมื่อ ${n.until} ${/^C\d /.test(n.name) ? 'ให้ตรงกับชื่อที่เกมแสดง' : 'ให้ตรงกับชื่อการ์ดของมันเอง'}`}>{n.name}</strong>
         </span>
       ))}
     </p>

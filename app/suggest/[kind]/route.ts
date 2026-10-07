@@ -19,7 +19,7 @@ import type { SuggestEntry } from '@/lib/suggest';
 import { monsterLabel } from '@/lib/monster-known-as';
 import { monsterModes } from '@/lib/monster-modes';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
-import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { cardArtThumbUrl, hasCardArt } from '@/lib/card-art';
 import { cardSlot, SLOT_TH } from '@/lib/card-slot';
 
@@ -55,7 +55,7 @@ interface MonsterRow {
 async function monsterEntries(): Promise<SuggestEntry[]> {
   const db = supabaseBrowser();
   const { data, error } = await fetchAllRows<MonsterRow>((from, to) => {
-    let q = db.from('monsters').select('id, name_en, level, is_mvp, race, element, image_url').not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+    let q = db.from('monsters').select('id, name_en, level, is_mvp, race, element, image_url').not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE);
     for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) q = q.not('name_en', 'like', pattern);
     return q.order('id').range(from, to);
   });

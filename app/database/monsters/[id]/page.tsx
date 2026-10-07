@@ -1,6 +1,6 @@
 // app/database/monsters/[id]/page.tsx
 import MyHitFlee from '@/components/MyHitFlee';
-import { C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { STAT_BAND, statSegments } from '@/lib/stat-rank';
 import '../page.css';
 import { BossStage, MonsterCard } from '@/components/MonsterCard';
@@ -13,6 +13,8 @@ import AdSlot from '@/components/AdSlot';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import { thaiAliasNames } from '@/lib/thai-aliases';
 import FormerNameLine from '@/components/FormerNameLine';
+import { championOf } from '@/lib/c-variant';
+import { normalOf } from '@/lib/aegis-names';
 import SameNameLine from '@/components/SameNameLine';
 import { riskySkills, SKILL_RISK_LABELS } from '@/lib/afk-safety';
 import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
@@ -142,7 +144,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     .from('monsters')
     .select('id, level, hp, atk_max, matk_max, def, mdef')
     .eq('is_mvp', false)
-    .not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE)
+    .not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE)
     .gte('level', monster.level - STAT_BAND)
     .lte('level', monster.level + STAT_BAND)
     .range(0, 999);
@@ -188,6 +190,16 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
     .neq('id', id)
     .order('level');
   if (sameNameError) console.error('same-name monster query failed', sameNameError);
+
+  // A champion (Swift Poring) next to its normal monster (Poring): how much
+  // more HP and EXP it carries is the reason to hunt one.
+  const champ = championOf(monster.name_en);
+  const normalId = champ ? normalOf(monster.id) : null;
+  const { data: normal } = normalId
+    ? await db.from('monsters').select('id, name_en, hp, base_exp').eq('id', normalId).maybeSingle()
+    : { data: null };
+  const times = (a: number | null | undefined, b: number | null | undefined) =>
+    a && b && a > 0 && b > 0 ? `×${(Math.round((a / b) * 10) / 10).toLocaleString('en-US')}` : null;
 
   const { data: monsterSkills, error: skillsError } = await db
     .from('monster_skills')
@@ -305,6 +317,15 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <ThaiAliasLine kind="monsters" id={monster.id} />
           <FormerNameLine id={monster.id} />
           <SameNameLine id={monster.id} name={monster.name_en} others={sameName ?? []} />
+          {champ && (
+            <p className="aliasline champline">
+              มอนแชมเปียน <b>{champ.tier.prefix}</b> ({champ.tier.th})
+              {normal ? <> ของ <Link href={`/database/monsters/${normal.id}`}>{normal.name_en}</Link></> : null}
+              {' '}· เกิดปนกับตัวปกติในแมพเดียวกัน ทีละ 1–2 ตัว
+              {normal && times(monster.hp, normal.hp) && <> · HP {times(monster.hp, normal.hp)}</>}
+              {normal && times(monster.base_exp, normal.base_exp) && <> · Base EXP {times(monster.base_exp, normal.base_exp)}</>}
+            </p>
+          )}
           <p className="monhead__chips">
             {monster.element && (
               <span className="monchip monchip--el">◆ {monster.element} {monster.element_level ?? ''}{ELEMENT_TH[monster.element] ? ` · ${ELEMENT_TH[monster.element]}` : ''}</span>
@@ -340,6 +361,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
               <>
                 <AggroBadge monster={{ is_aggressive: aggro, atk_max: monster.atk_max }} />
                 {monster.is_mvp && <span className="tag tag--behaviour tag--mvp">MVP</span>}
+                {champ && <span className="tag tag--behaviour tag--champ">แชมเปียน</span>}
                 {modes?.known && modes.mini && <span className="tag tag--behaviour tag--mini">มินิบอส</span>}
                 {modes?.known && !modes.canMove && <span className="tag tag--behaviour tag--rooted" title="ยืนอยู่กับที่ ไม่เดินตาม">ขยับไม่ได้</span>}
               </>

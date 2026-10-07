@@ -23,7 +23,7 @@ import { aliasIdsFor } from '@/lib/thai-aliases';
 import { formerNameIdsFor } from '@/lib/former-names';
 import { cardNameMonsterIds } from '@/lib/card-name-aliases';
 import CVariantToggle from '@/components/CVariantToggle';
-import { C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
+import { C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 import { monsterCounts } from '@/lib/counts';
 import { isFilteredView } from '@/lib/filtered-view';
 import { cardRelease } from '@/lib/card-availability';
@@ -202,7 +202,7 @@ export default async function MonsterListPage({
         : query.eq('is_aggressive', aggro === '1');
     }
     if (modeIds) query = query.in('id', modeIds);
-    if (!showC) query = query.not('name_en', 'like', C_VARIANT_SQL_NOT_LIKE);
+    if (!showC) query = query.not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE);
     if (!showMj) for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) query = query.not('name_en', 'like', pattern);
     if (mvpOnly) query = query.eq('is_mvp', true);
     if (lvmin > 0) query = query.gte('level', lvmin);
