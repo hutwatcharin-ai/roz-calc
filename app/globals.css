@@ -4486,7 +4486,8 @@ html .tag { border-radius: 4px; }
 .buildsim__food small { display: block; font-size: 11px; color: var(--yellow); }
 .buildsim__food i { font-style: normal; color: var(--faint); font-size: 16px; }
 .buildsim__food:hover i { color: var(--pink); }
-.buildsim__foodpick { width: 100%; }
+.buildsim__foodadd { position: relative; }
+.buildsim__foodadd > .buildsim__chip { width: 100%; justify-content: center; min-height: 44px; font-size: 14px; }
 
 /* Status window */
 .buildsim__window { border: 2px solid var(--pink); background: linear-gradient(180deg, #160b34, #07051a); box-shadow: 0 0 22px rgba(255, 61, 154, .25), 4px 4px 0 var(--pink); }

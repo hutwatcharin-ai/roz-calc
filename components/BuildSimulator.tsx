@@ -63,10 +63,10 @@ function costBetween(from: number, to: number): number {
 
 // What the open picker fills: a gear slot's item, card or enchant stone, or a
 // costume slot's stone. `at` is the gear slot or the costume slot.
-type PickKind = 'item' | 'card' | 'enchant' | 'costume';
+type PickKind = 'item' | 'card' | 'enchant' | 'costume' | 'food';
 // `editor`: opened from the piece editor, so the picker shows there, not on the tile.
 type Picking = { at: string; kind: PickKind; index: number; editor?: boolean } | null;
-const PICK_TITLE: Record<PickKind, string> = { item: 'SELECT ITEM', card: 'SELECT CARD', enchant: 'SELECT ENCHANT', costume: 'SELECT STONE' };
+const PICK_TITLE: Record<PickKind, string> = { item: 'SELECT ITEM', card: 'SELECT CARD', enchant: 'SELECT ENCHANT', costume: 'SELECT STONE', food: 'SELECT FOOD' };
 
 /** An option line's name without a number: "HIT", "ตีเผ่าสัตว์ %". */
 function optionLabel([type, target]: [string, string | null]): string {
@@ -354,6 +354,11 @@ export default function BuildSimulator({ initial, sharedId }: {
   const options = useMemo(() => {
     if (!picking) return [];
     const q = query.trim().toLowerCase();
+    // Foods with their pictures (owner, 7 Oct 2026: a plain list showed no icons).
+    if (picking.kind === 'food') {
+      return FOODS.filter((f) => !build.f.includes(f.id) && (!q || f.name.toLowerCase().includes(q)))
+        .map((f) => ({ id: f.id, name: f.name, icon: `/images/items/${f.id}.gif`, sub: foodText(foodById(f.id)!), locked: false }));
+    }
     if (picking.kind === 'enchant' || picking.kind === 'costume') {
       return Object.entries(ALL_STONES)
         .filter(([, st]) => (picking.kind === 'costume' ? st.k === picking.at : st.k === 'plain' || (st.k === 'essence' && picking.at === 'armor')))
@@ -397,7 +402,11 @@ export default function BuildSimulator({ initial, sharedId }: {
     if (kind === 'item') setSlot(at as Slot, id);
     else if (kind === 'card') setCard(at as Slot, index, id);
     else if (kind === 'enchant') setEnchant(at as Slot, index, id);
-    else setCostume(at as CostumeSlot, index, id);
+    else if (kind === 'food') {
+      if (id) update({ f: [...build.f, id] });
+      setPicking(null);
+      setQuery('');
+    } else setCostume(at as CostumeSlot, index, id);
   }
   function current(): number {
     if (!picking) return 0;
@@ -409,7 +418,7 @@ export default function BuildSimulator({ initial, sharedId }: {
   }
   function renderPicker(at: string) {
     if (picking?.at !== at) return null;
-    const label = picking.kind === 'costume' ? COSTUME_TH[at as CostumeSlot] : slotLabel(at as Slot, build.cls);
+    const label = picking.kind === 'food' ? 'อาหาร/ยา' : picking.kind === 'costume' ? COSTUME_TH[at as CostumeSlot] : slotLabel(at as Slot, build.cls);
     return (
       <>
         <button type="button" className="buildsim__backdrop" aria-label="ปิด" onClick={() => setPicking(null)} />
@@ -762,12 +771,13 @@ export default function BuildSimulator({ initial, sharedId }: {
                 ) : null;
               })}
             </div>
-            <select className="buildsim__foodpick" value="" aria-label="เพิ่มอาหาร" onChange={(e) => e.target.value && update({ f: [...build.f, Number(e.target.value)] })}>
-              <option value="">+ เพิ่มอาหาร/ยา</option>
-              {FOODS.filter((f) => !build.f.includes(f.id)).map((f) => (
-                <option key={f.id} value={f.id}>{f.name} — {foodText(foodById(f.id)!)}</option>
-              ))}
-            </select>
+            <div className="buildsim__foodadd">
+              <button type="button" className="buildsim__chip is-empty" onClick={() => openPicker({ at: 'food', kind: 'food', index: 0 })}>
+                <img src="/images/items/12065.gif" alt="" width={20} height={20} />
+                + เพิ่มอาหาร/ยา
+              </button>
+              {renderPicker('food')}
+            </div>
           </section>
         </div>
 
