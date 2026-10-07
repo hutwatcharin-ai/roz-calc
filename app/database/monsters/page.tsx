@@ -101,7 +101,9 @@ export default async function MonsterListPage({
   const aggro = searchParams.aggro === '1' ? '1' : searchParams.aggro === '0' ? '0' : '';
   // Challenge clones are opt-in: absent param = hidden. Server-side so the
   // result count and pagination stay exact (unlike the CSS hide elsewhere).
-  const showC = searchParams.c === '1';
+  // Typing a champion's name ("Swift Poring", or the old "C1 Poring") asks for
+  // it, so the search shows champions without the toggle.
+  const showC = searchParams.c === '1' || /\b(swift|solid|furious|elusive|ringleader)\b|\bc[1-5]\b/i.test(q);
   // Instance, event and memorial-dungeon monsters, hidden the same way and for
   // the same reason: "Orc Warrior" and "Orc Warrior Mj" next to each other is
   // one entry the reader wants and one they have to read past. The Mq, Ztw and

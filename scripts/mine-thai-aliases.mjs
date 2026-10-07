@@ -61,7 +61,7 @@ function main() {
     // Strip the " ro" / " ragnarok" people append to every game search.
     const name = query
       .replace(QUESTION, ' ')
-      .replace(/(ro zero|rozero|ragnarok|ro)/gi, ' ')
+      .replace(/\b(ro zero|rozero|ragnarok|ro)\b/gi, ' ')
       // Latin letters left over belong to the English name, not a Thai one.
       .replace(/[a-z0-9]+/gi, ' ')
       .replace(/\s+/g, ' ')
