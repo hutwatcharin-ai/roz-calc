@@ -1,95 +1,91 @@
-'use client';
+// The build simulator on the homepage: a strip under the hero that sends
+// players to /tools/build (owner, 7 Oct 2026). Plain on purpose: no saved
+// builds, nothing read from the browser -- the owner found anything about
+// "your build" here confusing. One button, and something nice to look at.
+// A server component: no JavaScript reaches the page for it.
+//
+// Three looks for the owner to choose from (?hb=1|2|3); the pick stays,
+// the others go.
 
-// The build simulator on the homepage: a strip under the hero (owner, 7 Oct
-// 2026). One primary action. A first visit sees what the tool answers and a
-// start button; a player with saved builds sees how many and the latest, with
-// a way to open it or start over.
-//
-// The owner picked this over a row of 13 class buttons, which read as busy
-// and left a new player wondering what the buttons did.
-//
-// Reads the list of builds the player saved (owner, 7 Oct 2026), not the
-// build the simulator keeps open between visits: a player who deleted every
-// saved build expects the homepage to have nothing of theirs to show.
-//
-// Deliberately light: no simulator code or gear data comes to the homepage.
-// A saved build's class and level are read straight out of its share-link
-// encoding (base64 JSON).
-
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { track } from '@/lib/analytics';
 
-// BuildSimulator SAVED_KEY, written out so that module stays off this page.
-const SAVED_KEY = 'roz-calc:builds';
+const PARADE = ['knight', 'wizard', 'hunter', 'priest', 'assassin', 'blacksmith'];
+const SELECT = ['knight', 'wizard', 'hunter', 'priest', 'assassin', 'blacksmith', 'monk', 'dancer'];
 
-interface Saved {
-  count: number;
-  name: string;
-  cls: string | null;
-  lv: number | null;
-}
-
-const className = (slug: string) => slug.charAt(0).toUpperCase() + slug.slice(1);
-
-function peek(b: string): { cls: string | null; lv: number | null } {
-  try {
-    const raw = JSON.parse(decodeURIComponent(escape(atob(b.replace(/-/g, '+').replace(/_/g, '/')))));
-    return { cls: typeof raw.cls === 'string' ? raw.cls : null, lv: Number(raw.lv) || null };
-  } catch {
-    return { cls: null, lv: null };
-  }
-}
-
-export default function HomeBuildStrip({ newHref }: { newHref: string }) {
-  const [saved, setSaved] = useState<Saved | null>(null);
-
-  useEffect(() => {
-    try {
-      const list = JSON.parse(window.localStorage.getItem(SAVED_KEY) ?? '[]');
-      const ok = Array.isArray(list) ? list.filter((x) => x && typeof x.name === 'string' && typeof x.b === 'string') : [];
-      if (!ok.length) return;
-      // The simulator puts the newest save first.
-      setSaved({ count: ok.length, name: ok[0].name, ...peek(ok[0].b) });
-    } catch {
-      // Blocked storage: the strip works as for a first visit.
-    }
-  }, []);
-
-  // public/images/jobs has every class but Novice.
-  const sprite = saved?.cls && saved.cls !== 'novice' ? saved.cls : 'knight';
-
+function Go({ label }: { label: string }) {
   return (
-    <section className="homebuild" aria-labelledby="homebuild-h">
-      <div className="homebuild__stage" aria-hidden="true">
-        <img key={sprite} className="homebuild__sprite" src={`/images/jobs/${sprite}.png`} alt="" width={84} height={84} />
-      </div>
+    <Link href="/tools/build" className="homebuild__go">
+      {label} <span aria-hidden="true">▶</span>
+    </Link>
+  );
+}
+
+export default function HomeBuildStrip({ variant = 1 }: { variant?: 1 | 2 | 3 }) {
+  if (variant === 2) {
+    // The status window the tool works out, with real numbers: the owner's
+    // own Blacksmith, checked against the game's window on 7 Oct 2026.
+    const rows: [string, string][] = [['HIT', '268'], ['FLEE', '248'], ['ASPD', '168'], ['CRI', '21']];
+    return (
+      <section className="homebuild homebuild--stat" aria-labelledby="homebuild-h">
+        <div className="homebuild__body">
+          <p className="homebuild__kicker mono">▶ BUILD SIMULATOR</p>
+          <h2 id="homebuild-h" className="homebuild__title">จำลองบิลด์ ลองก่อนลงแต้มจริง</h2>
+          <p className="homebuild__lead">อัปสเตตัส ใส่ของ ตีบวก การ์ด แล้วดูค่าในหน้าต่างสเตตัส ก่อนลงแต้มจริงในเกม</p>
+          <Go label="เริ่มจำลองบิลด์" />
+        </div>
+        <div className="homebuild__window" aria-hidden="true">
+          <p className="homebuild__wintitle mono">STATUS · Blacksmith Lv 60</p>
+          <dl>
+            {rows.map(([k, v]) => (
+              <div key={k}>
+                <dt className="mono">{k}</dt>
+                <dd className="mono">{v}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="homebuild__winnote">ตัวอย่างจากตัวละครจริง ตรงกับหน้าต่างในเกม</p>
+        </div>
+      </section>
+    );
+  }
+  if (variant === 3) {
+    return (
+      <section className="homebuild homebuild--select" aria-labelledby="homebuild-h">
+        <p className="homebuild__kicker mono">▶ SELECT YOUR CLASS</p>
+        <div className="homebuild__roster" aria-hidden="true">
+          {SELECT.map((c, i) => (
+            <span key={c} className={i === 0 ? 'is-on' : undefined} style={{ ['--i' as string]: i }}>
+              <img src={`/images/jobs/${c}.png`} alt="" width={56} height={56} loading="lazy" />
+            </span>
+          ))}
+        </div>
+        <div className="homebuild__row">
+          <div>
+            <h2 id="homebuild-h" className="homebuild__title">จำลองบิลด์ ลองก่อนลงแต้มจริง</h2>
+            <p className="homebuild__lead">เลือกอาชีพ อัปสเตตัส ใส่ของ แล้วดูว่าตีโดนกี่ % หลบได้กี่ %</p>
+          </div>
+          <Go label="เริ่มจำลองบิลด์" />
+        </div>
+      </section>
+    );
+  }
+  // 1: an arcade marquee, the classes marching along the floor.
+  return (
+    <section className="homebuild homebuild--marquee" aria-labelledby="homebuild-h">
       <div className="homebuild__body">
         <p className="homebuild__kicker mono">▶ BUILD SIMULATOR</p>
-        <h2 id="homebuild-h" className="homebuild__title">จำลองบิลด์<span> ลองก่อนลงแต้มจริง</span></h2>
-        {saved ? (
-          <p className="homebuild__saved">
-            บิลด์ที่คุณบันทึกไว้ {saved.count} อัน · ล่าสุด: <b>{saved.name}</b>
-            {saved.cls && <> ({className(saved.cls)}{saved.lv ? ` Lv ${saved.lv}` : ''})</>}
-          </p>
-        ) : (
-          <p className="homebuild__lead">อัปสเตตัส ใส่ของ เลือกมอน แล้วดูว่าตีโดนกี่ % หลบได้กี่ % ตีกี่ทีตาย</p>
-        )}
+        <h2 id="homebuild-h" className="homebuild__title">จำลองบิลด์ ลองก่อนลงแต้มจริง</h2>
+        <p className="homebuild__lead">อัปสเตตัส ใส่ของ ตีบวก การ์ด อาหาร แล้วดูค่าจริงก่อนลงแต้ม</p>
       </div>
-      <div className="homebuild__act">
-        <Link
-          href={saved ? `/tools/build?${new URLSearchParams({ open: saved.name })}` : '/tools/build'}
-          className="homebuild__go"
-          onClick={() => track('home_build_click', { kind: saved ? 'resume' : 'start', cls: saved?.cls ?? '' })}
-        >
-          {saved ? 'เปิดบิลด์ล่าสุด' : 'เริ่มจำลองบิลด์'} <span aria-hidden="true">▶</span>
-        </Link>
-        {saved && (
-          <Link href={newHref} className="homebuild__new" onClick={() => track('home_build_click', { kind: 'new', cls: '' })}>
-            หรือเริ่มบิลด์ใหม่
-          </Link>
-        )}
+      <div className="homebuild__parade" aria-hidden="true">
+        {PARADE.map((c, i) => (
+          <img key={c} src={`/images/jobs/${c}.png`} alt="" width={64} height={64} loading="lazy" style={{ ['--i' as string]: i }} />
+        ))}
       </div>
+      <Link href="/tools/build" className="homebuild__go homebuild__go--start">
+        <span className="homebuild__press mono" aria-hidden="true">PRESS START</span>
+        เริ่มจำลองบิลด์ <span aria-hidden="true">▶</span>
+      </Link>
     </section>
   );
 }
