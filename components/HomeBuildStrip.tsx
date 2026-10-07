@@ -2,12 +2,13 @@
 // players to /tools/build (owner, 7 Oct 2026). Plain on purpose: no saved
 // builds, nothing read from the browser -- the owner found anything about
 // "your build" here confusing. One button, and a status window showing what
-// the tool works out. A server component: no JavaScript reaches the page.
+// the tool works out. A server component; only the button (HomeBuildGo) runs
+// in the browser, to report the click.
 //
 // The owner picked this look (a status window) over an arcade parade of
 // classes and a class-select roster, on 7 Oct 2026.
 
-import Link from 'next/link';
+import HomeBuildGo from '@/components/HomeBuildGo';
 
 // Real numbers: the owner's own Blacksmith Lv 60, checked against the game's
 // status window on 7 Oct 2026 (docs/GAME_MODEL.md).
@@ -20,9 +21,7 @@ export default function HomeBuildStrip() {
         <p className="homebuild__kicker mono">▶ BUILD SIMULATOR</p>
         <h2 id="homebuild-h" className="homebuild__title">จำลองบิลด์ ลองก่อนลงแต้มจริง</h2>
         <p className="homebuild__lead">อัปสเตตัส ใส่ของ ตีบวก การ์ด แล้วดูค่าในหน้าต่างสเตตัส ก่อนลงแต้มจริงในเกม</p>
-        <Link href="/tools/build" className="homebuild__go">
-          เริ่มจำลองบิลด์ <span aria-hidden="true">▶</span>
-        </Link>
+        <HomeBuildGo />
       </div>
       <div className="homebuild__window" aria-hidden="true">
         <p className="homebuild__wintitle mono">STATUS · Blacksmith Lv 60</p>
