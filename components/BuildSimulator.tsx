@@ -829,8 +829,9 @@ export default function BuildSimulator({ initial, sharedId }: {
               {/* The game's window shows CRI without decimals. */}
               <div><dt>CRI</dt><dd className="mono">{Math.floor(result.crit)}</dd></div>
               <div><dt>Perfect Dodge</dt><dd className="mono">{result.pd}</dd></div>
-              <div><dt>DEF</dt><dd className="mono">{result.def.hard} <small>+</small> {result.def.soft}</dd></div>
-              <div><dt>MDEF</dt><dd className="mono">{result.mdef.hard} <small>+</small> {result.mdef.soft}</dd></div>
+              {/* Same order as the game's window: from stats first, then from gear (owner's window read 46 + 0 naked). */}
+              <div><dt>DEF</dt><dd className="mono">{result.def.soft} <small>+</small> {result.def.hard}</dd></div>
+              <div><dt>MDEF</dt><dd className="mono">{result.mdef.soft} <small>+</small> {result.mdef.hard}</dd></div>
               <div className="is-est"><dt>ASPD <i>ประมาณ</i></dt><dd className="mono">{result.aspd ?? '—'}</dd></div>
               <div className="is-est"><dt>ร่ายแปรผัน <i>ประมาณ</i></dt><dd className="mono">{Math.round(result.vct * 100)}%</dd></div>
               <div className={result.hpMeasured ? undefined : 'is-est'}><dt>HP{!result.hpMeasured && <i>ประมาณ</i>}</dt><dd className="mono">{result.hp?.toLocaleString('en-US') ?? '—'}</dd></div>
