@@ -211,3 +211,30 @@ describe('share link', () => {
     expect(b?.g.weapon).toBeUndefined();
   });
 });
+
+// The owner's Blacksmith, read off the in-game status window on 7 Oct 2026
+// (naked, Base 60 / Job 60): every number the window shows.
+describe('matches a real status window', () => {
+  it("reproduces the owner's Blacksmith", () => {
+    const r = calcBuild({
+      cls: 'blacksmith', lv: 60, job: 60,
+      st: { str: 1, agi: 62, vit: 1, int: 1, dex: 1, luk: 61 },
+      g: {}, f: [],
+      sk: { 'Hilt Binding': 1, 'Enlarge Weight Limit': 10 },
+    });
+    expect(r.total).toEqual({ str: 8, agi: 68, vit: 6, int: 6, dex: 11, luk: 67 });
+    expect(r.budget - r.used).toBe(7);
+    expect(r.atk.status).toBe(47);
+    expect(r.matk.status).toBe(48);
+    expect(r.hit).toBe(268);
+    expect(r.flee).toBe(241);
+    expect(r.pd).toBe(7);
+    expect(Math.floor(r.crit)).toBe(21);
+    expect(r.def.soft).toBe(46);
+    expect(r.mdef.soft).toBe(24);
+    expect(r.aspd).toBe(168);
+    expect(r.hp).toBe(1840);
+    expect(r.sp).toBe(231);
+    expect(r.weight.cap).toBe(5030);
+  });
+});

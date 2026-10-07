@@ -826,7 +826,8 @@ export default function BuildSimulator({ initial, sharedId }: {
               <div className="is-big"><dt>FLEE</dt><dd className="mono">{result.flee}</dd></div>
               <div><dt>ATK</dt><dd className="mono">{result.atk.status} <small>+</small> {result.atk.equip}</dd></div>
               <div><dt>MATK</dt><dd className="mono">{result.matk.status} <small>+</small> {result.matk.equip}</dd></div>
-              <div><dt>CRI</dt><dd className="mono">{result.crit}</dd></div>
+              {/* The game's window shows CRI without decimals. */}
+              <div><dt>CRI</dt><dd className="mono">{Math.floor(result.crit)}</dd></div>
               <div><dt>Perfect Dodge</dt><dd className="mono">{result.pd}</dd></div>
               <div><dt>DEF</dt><dd className="mono">{result.def.hard} <small>+</small> {result.def.soft}</dd></div>
               <div><dt>MDEF</dt><dd className="mono">{result.mdef.hard} <small>+</small> {result.mdef.soft}</dd></div>
@@ -834,8 +835,8 @@ export default function BuildSimulator({ initial, sharedId }: {
               <div className="is-est"><dt>ร่ายแปรผัน <i>ประมาณ</i></dt><dd className="mono">{Math.round(result.vct * 100)}%</dd></div>
               <div className={result.hpMeasured ? undefined : 'is-est'}><dt>HP{!result.hpMeasured && <i>ประมาณ</i>}</dt><dd className="mono">{result.hp?.toLocaleString('en-US') ?? '—'}</dd></div>
               <div className={result.hpMeasured ? undefined : 'is-est'}><dt>SP{!result.hpMeasured && <i>ประมาณ</i>}</dt><dd className="mono">{result.sp?.toLocaleString('en-US') ?? '—'}</dd></div>
-              <div className="is-est is-wide">
-                <dt>น้ำหนักของที่ใส่ / แบกได้ <i>ประมาณ</i></dt>
+              <div className="is-wide">
+                <dt>น้ำหนักของที่ใส่ / แบกได้</dt>
                 <dd className="mono">{result.weight.worn} / {result.weight.cap.toLocaleString('en-US')}</dd>
               </div>
               {result.fct !== 0 && <div className="is-wide"><dt>ร่ายคงที่</dt><dd className="mono">{result.fct > 0 ? '+' : ''}{result.fct}%</dd></div>}

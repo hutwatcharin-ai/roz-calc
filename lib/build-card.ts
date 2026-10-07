@@ -143,7 +143,7 @@ export function buildCardSvg(build: Build, id: string, footer?: string): string 
   const tiles: [string, string][] = [
     ['HIT', String(r.hit)], ['FLEE', String(r.flee)],
     ['ATK', `${r.atk.status} + ${r.atk.equip}`], ['MATK', `${r.matk.status} + ${r.matk.equip}`],
-    ['ASPD', r.aspd === null ? '—' : String(r.aspd)], ['CRI', String(r.crit)],
+    ['ASPD', r.aspd === null ? '—' : String(r.aspd)], ['CRI', String(Math.floor(r.crit))],
     ['HP', r.hp === null ? '—' : r.hp.toLocaleString('en-US')], ['SP', r.sp === null ? '—' : r.sp.toLocaleString('en-US')],
   ];
   tiles.forEach(([label, value], i) => {

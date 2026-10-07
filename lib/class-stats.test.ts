@@ -45,7 +45,14 @@ describe('class numbers', () => {
   });
   it('flags HP/SP that prontera only estimates', () => {
     expect(baseHpSp('acolyte', 50)?.measured).toBe(true);
-    expect(baseHpSp('blacksmith', 60)).toEqual({ hp: 1984, sp: 250, measured: false });
+    expect(baseHpSp('knight', 60)?.measured).toBe(false);
+    expect(baseHpSp('knight', 60)?.calibrated).toBe(false);
+  });
+  it('scales a class to a status window read in game', () => {
+    // prontera's table says 1984 / 250 at Lv 60; the owner's naked Blacksmith
+    // (VIT 6, INT 6) shows 1840 / 231, so the base is 1736 / 218.
+    expect(baseHpSp('blacksmith', 60)).toEqual({ hp: 1736, sp: 218, measured: false, calibrated: true });
+    expect(baseHpSp('blacksmith', 30)!.hp).toBeLessThan(1736);
   });
   it('gives base ASPD by weapon, with the shield penalty', () => {
     // 150 + sqrt(1/2 + 225/5)/4 = 151.69

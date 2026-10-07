@@ -61,11 +61,34 @@ export function jobBonusAt(slug: string, jobLevel: number): Record<Stat, number>
   return out;
 }
 
-/** Base HP/SP at a base level; `measured` is false where prontera only estimates (may read 20-25% high). */
-export function baseHpSp(slug: string, level: number): { hp: number; sp: number; measured: boolean } | null {
+/**
+ * Status windows read in game, naked, used to correct a class's estimated
+ * HP/SP curve: base = shown / (1 + VIT or INT / 100). The whole curve is
+ * scaled by measured / table at that level -- one point, so between levels
+ * it is still an estimate, but no longer 14% high.
+ */
+const READINGS: Record<string, { level: number; hp: number; sp: number; note: string }> = {
+  // Owner's Blacksmith, 7 Oct 2026: Lv 60, VIT 6, INT 6, HP 1,840, SP 231.
+  blacksmith: { level: 60, hp: 1736, sp: 218, note: 'owner status window, 7 Oct 2026' },
+};
+
+/**
+ * Base HP/SP at a base level. `measured`: prontera measured the class
+ * (Acolyte, Thief); `calibrated`: scaled to a reading of our own; neither
+ * means prontera's estimate, which may read 20-25% high.
+ */
+export function baseHpSp(slug: string, level: number): { hp: number; sp: number; measured: boolean; calibrated: boolean } | null {
   const c = classStats(slug);
   if (!c || level < 1 || level > c.hp.length) return null;
-  return { hp: c.hp[level - 1], sp: c.sp[level - 1], measured: data._meta.hpSpMeasured.includes(slug) };
+  const r = READINGS[slug];
+  const hpF = r ? r.hp / c.hp[r.level - 1] : 1;
+  const spF = r ? r.sp / c.sp[r.level - 1] : 1;
+  return {
+    hp: Math.round(c.hp[level - 1] * hpF),
+    sp: Math.round(c.sp[level - 1] * spF),
+    measured: data._meta.hpSpMeasured.includes(slug),
+    calibrated: !!r,
+  };
 }
 
 /**

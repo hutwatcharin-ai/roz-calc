@@ -315,6 +315,15 @@ export interface TargetResult {
   hands?: { right: number; left: number; rightPct: number; leftPct: number } | null;
 }
 
+// Passive class skills that change the status window. Enlarge Weight Limit
+// is +200 weight a level (client skill text); Hilt Binding is STR +1 (and
+// physical damage +4, not shown in the window, not modelled).
+const ENLARGE_WEIGHT = 'Enlarge Weight Limit';
+const CLASS_PASSIVES: { skill: string; classes: string[]; max: number; bonus?: [string, number] }[] = [
+  { skill: 'Hilt Binding', classes: ['blacksmith'], max: 1, bonus: ['str', 1] },
+  { skill: ENLARGE_WEIGHT, classes: ['merchant', 'blacksmith', 'alchemist'], max: 10 },
+];
+
 const WINDOW = new Set([
   ...STATS, 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
   'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent',
@@ -518,6 +527,16 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   }
   for (const [k, { from, value }] of best) add(from, [k, value, null, null, null], 0);
 
+  // Class passives the status window shows (owner's Blacksmith, 7 Oct 2026:
+  // STR read 1 + 7 where the Job bonus gives 6 -- the seventh is Hilt
+  // Binding). Their levels come from the skill-level inputs like any other.
+  for (const p of CLASS_PASSIVES) {
+    if (!p.classes.includes(build.cls)) continue;
+    skills.add(p.skill);
+    const lv = Math.min(p.max, build.sk?.[p.skill] ?? 0);
+    if (lv && p.bonus) add(`สกิล ${p.skill}`, [p.bonus[0], p.bonus[1] * lv, null, null, null], 0);
+  }
+
   const get = (type: string) => sums.get(key({ type, target: null, skill: null }))?.value ?? 0;
 
   // Stats.
@@ -651,8 +670,13 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     aspd,
     hp,
     sp,
-    hpMeasured: base?.measured ?? false,
-    weight: { cap: 2000 + str * 30 + (classStats(build.cls)?.weightBonus ?? 0), worn: wornWeight / 10 },
+    hpMeasured: !!(base?.measured || base?.calibrated),
+    // From the STR you put in, not the total: the owner's Blacksmith (base STR 1,
+    // total 8, Enlarge Weight Limit 10) reads 5,030 = 2,000 + 1,000 + 30 + 2,000.
+    weight: {
+      cap: 2000 + build.st.str * 30 + (classStats(build.cls)?.weightBonus ?? 0) + 200 * Math.min(10, CLASS_PASSIVES.some((p) => p.skill === ENLARGE_WEIGHT && p.classes.includes(build.cls)) ? build.sk?.[ENLARGE_WEIGHT] ?? 0 : 0),
+      worn: wornWeight / 10,
+    },
     vct,
     fct: get('cast_time_fixed_percent'),
     other,
