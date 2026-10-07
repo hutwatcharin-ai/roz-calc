@@ -125,6 +125,10 @@ export const BONUS_TYPES: Record<string, TypeInfo> = {
 
 /** One bonus as a short line: "ตีเผ่ากึ่งมนุษย์ +10%", "ร่ายแปรผัน -30%". */
 export function bonusText([type, value, target, per, skill, scaling]: Bonus): string {
+  // Effects with no number of their own (build simulator buffs).
+  if (type === 'endow') return `อาวุธเป็น${targetLabel(target) ?? ''}`;
+  if (type === 'no_size_penalty') return 'ไม่โดนหักดาเมจตามขนาดมอน';
+  if (target?.startsWith('skill_element:')) return `ดาเมจเวทธาตุ${(targetLabel(target.replace('skill_', '')) ?? '').replace('ธาตุ', '')} ${value > 0 ? '+' : ''}${value}%`;
   const info = BONUS_TYPES[type];
   const t = targetLabel(target);
   let label = info?.label ?? type;

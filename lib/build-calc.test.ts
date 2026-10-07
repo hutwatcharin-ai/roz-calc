@@ -327,3 +327,32 @@ describe('passives, buffs, skills, option ranges', () => {
     expect(back.as).toEqual(['sonic-blow', 7]);
   });
 });
+
+describe('buffs read from the skill text', () => {
+  const mob: Target = {
+    name: 'Test', level: 40, vit: 20, def: 30, size: 'Large', element: 'Shadow', element_level: 1, race: 'Demon', boss: false,
+    hit_100: 250, flee_95: 280, hp: 5000, mdef: 10, int: 10,
+  };
+  const knife = { weapon: { id: 1201, r: 0, c: [0, 0, 0] } };
+
+  it('Gloria gives LUK +30', () => {
+    expect(calcBuild({ ...base, bf: { gloria: 5 } }).total.luk - calcBuild({ ...base }).total.luk).toBe(30);
+  });
+
+  it('Aspersio makes the weapon holy: more damage on a shadow monster', () => {
+    const plain = calcBuild({ ...base, g: knife }, mob).vs!.damage!;
+    const holy = calcBuild({ ...base, g: knife, bf: { aspersio: 5 } }, mob).vs!.damage!;
+    expect(holy).toBeGreaterThan(plain);
+  });
+
+  it('Weapon Perfection removes the dagger size penalty on a large monster', () => {
+    const plain = calcBuild({ ...base, g: knife }, mob).vs!.damage!;
+    const perfect = calcBuild({ ...base, g: knife, bf: { 'weapon-perfection': 5 } }, mob).vs!.damage!;
+    expect(perfect).toBeGreaterThan(plain);
+  });
+
+  it('Rising Dragon raises MaxHP by its level in percent', () => {
+    const plain = calcBuild({ ...base, cls: 'monk' }).hp!;
+    expect(calcBuild({ ...base, cls: 'monk', bf: { 'rising-dragon': 10 } }).hp).toBe(Math.floor(plain * 1.1));
+  });
+});

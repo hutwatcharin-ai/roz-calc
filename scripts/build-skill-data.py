@@ -163,6 +163,25 @@ for slug, entry in passives.items():
     if 'second' in entry:
         entry['secondCls'] = sorted(c for c in owners[slug] if c in SECOND_JOBS)
 
+# Buffs whose numbers the buff table leaves out but the skill's own text
+# gives (owner, 7 Oct 2026): Gloria "LUK +30", Rising Dragon "MHP and MSP +
+# (Skill Lv)%", the weapon endows (Aspersio holy, Enchant Poison poison, the
+# Sage endows), and Weapon Perfection "removes weapon size penalties".
+# `endow` sets the weapon's element; `no_size_penalty` drops the size table.
+# The Sage endows' "Fire Magical Damage +x%" is fire *magic*, not damage to
+# fire monsters as the table filed it: skill_element:fire.
+EXTRA = {
+    'gloria': lambda lv: [['luk', 30, None]],
+    'rising-dragon': lambda lv: [['hp_percent', lv, None], ['sp_percent', lv, None]],
+    'aspersio': lambda lv: [['endow', 1, 'element:holy']],
+    'enchant-poison': lambda lv: [['endow', 1, 'element:poison']],
+    'endow-blaze': lambda lv: [['endow', 1, 'element:fire']],
+    'endow-quake': lambda lv: [['endow', 1, 'element:earth']],
+    'endow-tornado': lambda lv: [['endow', 1, 'element:wind']],
+    'endow-tsunami': lambda lv: [['endow', 1, 'element:water']],
+    'weapon-perfection': lambda lv: [['no_size_penalty', 1, None]],
+}
+
 buffs = []
 for b in json.load(open(os.path.join(SRC, 'skill-buffs.json'), encoding='utf-8'))['buffs']:
     if b['source'] != 'skill':
@@ -180,6 +199,12 @@ for b in json.load(open(os.path.join(SRC, 'skill-buffs.json'), encoding='utf-8')
                 if x.get('target_kind') and x.get('target') and x['target_kind'] != 'player':
                     target = f"{x['target_kind']}:{x['target']}"
                 rows.append([x['bonus_type'], x['value'], target])
+        if b['slug'] in EXTRA:
+            rows = [r for r in rows if not (r[0] == 'magic_damage_percent' and b['slug'].startswith('endow-'))]
+            if b['slug'].startswith('endow-'):
+                rows += [['magic_damage_percent', x['value'], f"skill_element:{x['target']}"]
+                         for g in level.get('groups') or [] for x in g.get('bonuses') or [] if x['bonus_type'] == 'magic_damage_percent']
+            rows += EXTRA[b['slug']](len(lv) + 1)
         lv.append(rows)
     if not any(lv):
         continue

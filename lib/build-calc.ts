@@ -458,7 +458,7 @@ export interface SkillResult {
 
 
 const WINDOW = new Set([
-  ...STATS, ...STATS.map((s) => `${s}_percent`), 'hit_percent', 'mastery', 'weight', 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
+  ...STATS, ...STATS.map((s) => `${s}_percent`), 'hit_percent', 'mastery', 'weight', 'endow', 'no_size_penalty', 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
   'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent',
 ]);
 
@@ -783,14 +783,18 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       }
     }
     const multiplier = [...byKind.values()].reduce((m, p) => m * (1 + p / 100), 1);
+    // An endow buff (Aspersio, Enchant Poison, a Sage endow) gives the weapon
+    // its element; Weapon Perfection takes the size table out.
+    const endow = [...sums.values()].find((x) => x.type === 'endow' && x.target)?.target?.split(':')[1] ?? null;
+    const noSize = get('no_size_penalty') > 0;
     const def = target.def === null ? null : Math.floor(target.def * (1 - Math.min(100, ignoreDef) / 100));
     const hand = (atk: number, type: string, el: string | null, statusTimes: number, ratio = 100) => physicalDamagePerHit({
       weaponAtk: Math.floor((atk * (1 + get('atk_percent') / 100) * ratio) / 100),
       // Status ATK counts twice in the right hand's damage (lib/damage) and
       // once in the left's; flat ATK from gear once. A skill scales both.
       statusAtk: Math.floor(((statusAtk * statusTimes + Math.floor(get('atk') * (1 + get('atk_percent') / 100))) * ratio) / 100),
-      weaponType: SIZE_ROW[type] ?? 'Bare hand',
-      weaponElement: (el ? cap(el) : 'Neutral') as Element,
+      weaponType: noSize ? 'Bare hand' : SIZE_ROW[type] ?? 'Bare hand',
+      weaponElement: ((endow ?? el) ? cap((endow ?? el)!) : 'Neutral') as Element,
       targetSize: target.size,
       targetElement: (target.element as Element | null) ?? null,
       targetElementLevel: (target.element_level as ElementLevel | null) ?? null,
@@ -837,7 +841,9 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
         const mdef = Math.floor((target.mdef ?? 0) * (1 - Math.min(100, ignoreMdef) / 100));
         const elem = elementModifier(cap(el ?? 'neutral') as Element, target.element as Element, target.element_level as ElementLevel);
         const softM = Math.floor(((target.int ?? 0) + target.level) / 4);
-        const magicMul = [...magicByKind.values()].reduce((m, p) => m * (1 + p / 100), 1);
+        // Magic of this skill's element (a Sage endow's "Fire Magical Damage +3%").
+        const ownEl = [...sums.values()].filter((x) => x.type === 'magic_damage_percent' && x.target === `skill_element:${el ?? 'neutral'}`).reduce((t, x) => t + x.value, 0);
+        const magicMul = [...magicByKind.values()].reduce((m, p) => m * (1 + p / 100), 1) * (1 + ownEl / 100);
         const raw = ((statusMatk + equipMatk) * ratio) / 100 * (elem / 100) * ((1000 + mdef) / (1000 + 10 * mdef)) - softM;
         perHit = Math.max(1, Math.floor(raw * magicMul));
       }
