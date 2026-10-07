@@ -577,7 +577,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                       const body = dollBody(build.cls, sex, stance);
                       const held = [dollWeapon(rightId, leftWeaponId, build.cls, sex), dollShield(shieldId, build.cls, sex)];
                       const hats = (['head_lower', 'head_middle', 'head_upper'] as const)
-                        .map((s) => (build.g[s] && body ? dollHat(build.g[s]!.id, body.anchor, sex) : null));
+                        .map((s) => (build.g[s] && body ? dollHat(build.g[s]!.id, body.anchor, sex, stance) : null));
                       const layers = [...held, ...hats].filter((h): h is NonNullable<typeof h> => !!h);
                       return (
                         <span className="buildsim__dollstage" aria-hidden="true">

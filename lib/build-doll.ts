@@ -23,7 +23,8 @@ interface Picture {
 const data = file as unknown as {
   /** [stand anchor x, y, stance anchor x, y] */
   bodies: Record<string, [number, number, number, number]>;
-  views: Record<string, Partial<Record<Sex, [number, number, number, number]>>>;
+  /** view -> sex (standing) or sex + 'r' (battle stance) -> [x, y, w, h] from the anchor */
+  views: Record<string, Record<string, [number, number, number, number]>>;
   hats: Record<string, string>;
   /** item -> sprite names to try (its own, then its weapon type's) */
   weapons: Record<string, string[]>;
@@ -49,11 +50,13 @@ export function dollBody(cls: string, sex: Sex, stance: boolean): { src: string;
 }
 
 /** A head item's picture on the body canvas; null when the game draws nothing for it. */
-export function dollHat(itemId: number, anchor: [number, number], sex: Sex): Picture | null {
+export function dollHat(itemId: number, anchor: [number, number], sex: Sex, stance: boolean): Picture | null {
   const key = data.hats[String(itemId)];
-  const box = key ? data.views[key]?.[sex] : undefined;
+  // The stance frame tilts with the head; fall back to standing if a hat has none.
+  const pose = stance && data.views[key ?? '']?.[`${sex}r`] ? `${sex}r` : sex;
+  const box = key ? data.views[key]?.[pose] : undefined;
   if (!key || !box) return null;
-  return { src: `/images/build-doll/hat-${key.slice(1)}-${sex}.webp`, x: anchor[0] + box[0], y: anchor[1] + box[1], w: box[2], h: box[3] };
+  return { src: `/images/build-doll/hat-${key.slice(1)}-${pose}.webp`, x: anchor[0] + box[0], y: anchor[1] + box[1], w: box[2], h: box[3] };
 }
 
 function layer(cls: string, sex: Sex, name: string): Picture | null {

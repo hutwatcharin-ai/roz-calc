@@ -104,14 +104,16 @@ def body(cls, sex, action=STAND):
     return canvas, anchor
 
 
-def hat(view, sex):
+def hat(view, sex, action=STAND):
     name = acc_name.get(view)
     s = SEXES[sex]
     path = f'{SPRITE}/악세사리/{s}/{s}{name}' if name else None
     if not path or not os.path.exists(path + '.spr') or not os.path.exists(path + '.act'):
         return None
     sp, ac = part(path)
-    f = first(ac)
+    # The hat's frame for the same action as the body: in the battle stance
+    # the head tilts, and the hat's own frame tilts with it.
+    f = first(ac, action)
     shift = (-f['anchors'][0][0], -f['anchors'][0][1]) if f['anchors'] else (0, 0)
     canvas = Image.new('RGBA', (200, 200))
     draw_layers(canvas, HAT_ORIGIN, sp, f, shift)
@@ -171,12 +173,13 @@ def main():
         if key not in views:
             entry = {}
             for sex in SEXES:
-                got = hat(view, sex)
-                if not got:
-                    continue
-                img, (x, y) = got
-                img.save(os.path.join(OUT, f'hat-{view}-{sex}.webp'), lossless=True, method=6)
-                entry[sex] = [x, y, img.width, img.height]
+                for action, tag in ((STAND, ''), (READY, 'r')):
+                    got = hat(view, sex, action)
+                    if not got:
+                        continue
+                    img, (x, y) = got
+                    img.save(os.path.join(OUT, f'hat-{view}-{sex}{tag}.webp'), lossless=True, method=6)
+                    entry[sex + tag] = [x, y, img.width, img.height]
             views[key] = entry
         if views[key]:
             hats[sid] = key
