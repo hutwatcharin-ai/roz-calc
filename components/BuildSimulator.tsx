@@ -28,7 +28,7 @@ import { bonusText, refineBonusAt } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
 import { supabaseBrowser } from '@/lib/supabase';
-import { dollBody, dollHat, dollSex, type Sex } from '@/lib/build-doll';
+import { dollBody, dollHat, dollSex, dollShield, dollStance, dollWeapon, type Sex } from '@/lib/build-doll';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import foodFile from '@/data/food-buffs.json';
 import classFile from '@/data/class-stats.json';
@@ -569,15 +569,21 @@ export default function BuildSimulator({ initial, sharedId }: {
                       // The class in the game's own sprite, wearing the head
                       // items (lower, middle, upper: the order the game draws them).
                       const sex = dollSex(build.cls, dollGender);
-                      const body = dollBody(build.cls, sex);
+                      const rightId = build.g.weapon?.id ?? null;
+                      const leftItem = build.g.shield ? gearById(build.g.shield.id) : null;
+                      const leftWeaponId = leftItem?.on.includes('weapon') ? build.g.shield!.id : null;
+                      const shieldId = leftItem && !leftWeaponId ? build.g.shield!.id : null;
+                      const stance = dollStance(rightId, leftWeaponId, shieldId, build.cls, sex);
+                      const body = dollBody(build.cls, sex, stance);
+                      const held = [dollWeapon(rightId, leftWeaponId, build.cls, sex), dollShield(shieldId, build.cls, sex)];
                       const hats = (['head_lower', 'head_middle', 'head_upper'] as const)
-                        .map((s) => (build.g[s] ? dollHat(build.g[s]!.id, build.cls, sex) : null))
-                        .filter((h): h is NonNullable<typeof h> => !!h);
+                        .map((s) => (build.g[s] && body ? dollHat(build.g[s]!.id, body.anchor, sex) : null));
+                      const layers = [...held, ...hats].filter((h): h is NonNullable<typeof h> => !!h);
                       return (
                         <span className="buildsim__dollstage" aria-hidden="true">
                           <span className="buildsim__dollcanvas">
                             {body && <img src={body.src} alt="" width={200} height={200} />}
-                            {hats.map((h) => (
+                            {layers.map((h) => (
                               <img key={h.src} src={h.src} alt="" width={h.w} height={h.h} style={{ left: h.x, top: h.y, width: h.w, height: h.h }} />
                             ))}
                           </span>
