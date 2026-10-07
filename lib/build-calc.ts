@@ -21,7 +21,11 @@
 
 import gearFile from '@/data/build-gear.json';
 import enchantFile from '@/data/build-enchants.json';
-import { STATS, type Stat, aspdFor, baseHpSp, classStats, jobBonusAt, statBudget, statCost, ASPD_CAP, RANGED_WEAPONS } from '@/lib/class-stats';
+import skillFile from '@/data/build-skills.json';
+import rangesFile from '@/data/option-ranges.json';
+import { attacksPerSecond } from '@/lib/player-numbers';
+import { elementModifier } from '@/lib/element-table';
+import { STATS, type Stat, aspdFor, baseHpSp, classStats, jobBonusAt, statBudget, statCost, ASPD_CAP, RANGED_WEAPONS, WEAPON_TH } from '@/lib/class-stats';
 import { itemEffects, refineBonusAt, bonusText, type Bonus, type BonusCondition, type BonusGroup } from '@/lib/item-effects';
 import { foodById } from '@/lib/food-buffs';
 import { physicalDamagePerHit, statusAtkFromStats } from '@/lib/damage';
@@ -124,6 +128,114 @@ export const OPTION_TYPES: [string, string | null][] = [
   ...ELEMENTS_LOW.map((e): [string, string] => ['resistance_percent', `element:${e}`]),
   ...RACES.map((r): [string, string] => ['damage_taken_percent', `race:${r}`]),
 ];
+// --- Skills: passives, buffs, attack skills (owner, 7 Oct 2026) -------------
+// data/build-skills.json (scripts/build-skill-data.py, from prontera's skill
+// planner and buff table). Passives are keyed by their name in Build.sk, like
+// every other skill level; buffs by slug in Build.bf.
+
+export interface PassiveSkill {
+  n: string;
+  max: number;
+  i: string | null;
+  cls: string[];
+  /** bonus type -> value per level (index 0 = level 1) */
+  fx?: Record<string, number[]>;
+  /** only with a weapon in `w` */
+  wfx?: Record<string, number[]>;
+  /** replaces fx for the classes in secondCls (Improve Dodge after the 2nd job) */
+  second?: Record<string, number[]>;
+  secondCls?: string[];
+  w?: string[];
+  /** only against these targets (Demon Bane: race:demon, element:undead) */
+  t?: string[];
+}
+export interface BuffSkill {
+  s: string;
+  n: string;
+  max: number;
+  i: string | null;
+  cls: string[];
+  /** per level: [type, value, target] */
+  lv: [string, number, string | null][][];
+  txt: string;
+}
+export interface AttackSkill {
+  s: string;
+  n: string;
+  max: number;
+  k: 'atk' | 'matk';
+  el: string | null;
+  i: string | null;
+  /** per level: [ratio %, hits (0 = not per hit), vct ms, fct ms, after-cast delay ms, cooldown ms, SP] */
+  lv: [number, number, number, number, number, number, number][];
+  /** damage % as a formula of slv, str, agi, vit, int, dex, luk, base_level, cart_weight */
+  f?: string;
+}
+const skills = skillFile as unknown as { passives: Record<string, PassiveSkill>; buffs: BuffSkill[]; attacks: Record<string, AttackSkill[]> };
+export const ALL_BUFFS = skills.buffs;
+const BUFF_BY_SLUG = new Map(skills.buffs.map((b) => [b.s, b]));
+export function buffBySlug(slug: string): BuffSkill | null {
+  return BUFF_BY_SLUG.get(slug) ?? null;
+}
+export function passivesFor(cls: string): PassiveSkill[] {
+  return Object.values(skills.passives).filter((p) => p.cls.includes(cls));
+}
+export function attacksFor(cls: string): AttackSkill[] {
+  return skills.attacks[cls] ?? [];
+}
+function attackBySlug(cls: string, slug: string): AttackSkill | null {
+  return attacksFor(cls).find((a) => a.s === slug) ?? null;
+}
+
+/** A skill's damage formula, evaluated; null when it is not a plain arithmetic expression. */
+export function evalRatio(expr: string, vars: Record<string, number>): number | null {
+  if (!/^[\w\s+\-*/().]+$/.test(expr)) return null;
+  const names = ['slv', 'str', 'agi', 'vit', 'int', 'dex', 'luk', 'base_level', 'cart_weight'];
+  const words = expr.match(/[a-z_]+/g) ?? [];
+  if (words.some((w) => !names.includes(w) && w !== 'floor')) return null;
+  try {
+    // eslint-disable-next-line no-new-func
+    const v = new Function(...names, 'floor', `return (${expr});`)(...names.map((n) => vars[n] ?? 0), Math.floor) as number;
+    return Number.isFinite(v) && v > 0 ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+// --- Random option ranges (rozerodb.com/tools/affixes, 7 Oct 2026) ----------
+const ranges = (rangesFile as unknown as { ranges: Record<string, [string, string, number, number, number][]> }).ranges;
+/** The option pools a slot's item rolls from. */
+export function optionPools(slot: Slot, item: GearItem | null): string[] {
+  if (slot === 'weapon' || (slot === 'shield' && item?.on.includes('weapon'))) {
+    const wt = item?.wt ?? '';
+    if (['staff_1h', 'staff_2h', 'book'].includes(wt)) return ['magic', 'forged'];
+    if (RANGED_WEAPONS.has(wt)) return ['ranged', 'forged'];
+    return ['melee', 'forged'];
+  }
+  if (slot === 'armor') return ['armor'];
+  if (slot === 'garment') return ['garment'];
+  if (slot === 'footgear') return ['shoes'];
+  return [];
+}
+/** "5-30 ดรอปมอน · 10-25 MVP": where and how high an option rolls on this slot; null when the data has none. */
+export function optionRangeText(key: string, slot: Slot, item: GearItem | null): string | null {
+  const pools = optionPools(slot, item);
+  const rows = (ranges[key] ?? []).filter((r) => pools.includes(r[0]));
+  if (!rows.length) return null;
+  const bySource = new Map<string, [number, number]>();
+  for (const [, src, , lo, hi] of rows) {
+    const cur = bySource.get(src);
+    bySource.set(src, cur ? [Math.min(cur[0], lo), Math.max(cur[1], hi)] : [lo, hi]);
+  }
+  return [...bySource].map(([src, [lo, hi]]) => `${lo === hi ? lo : `${lo} ถึง ${hi}`} ${src}`).join(' · ');
+}
+/** Option rows a piece carries in game: weapons 4 (MVP drops), armour, garment and shoes 3, the rest 2 (rozeroplanner's rule, not checked). */
+export function maxOptionsFor(slot: Slot): number {
+  if (slot === 'weapon') return 4;
+  if (slot === 'armor' || slot === 'garment' || slot === 'footgear') return 3;
+  return 2;
+}
+
 export function optionKey([type, target]: [string, string | null]): string {
   return target ? `${type}@${target}` : type;
 }
@@ -231,6 +343,10 @@ export interface Build {
   cos?: Partial<Record<CostumeSlot, number[]>>;
   /** Skill levels for lines that scale with one ("CRIT +5 per level of Grimtooth"). */
   sk?: Record<string, number>;
+  /** Buffs on the character: buff slug -> level. */
+  bf?: Record<string, number>;
+  /** The attack skill to measure against the target: [slug, level]. */
+  as?: [string, number];
 }
 
 export const EMPTY_BUILD: Build = {
@@ -254,6 +370,9 @@ export interface Target {
   boss: boolean;
   hit_100: number | null;
   flee_95: number | null;
+  hp?: number | null;
+  mdef?: number | null;
+  int?: number | null;
 }
 
 export interface Line {
@@ -313,19 +432,33 @@ export interface TargetResult {
   multiplier: number;
   /** Dual wielding: what each hand lands after its mastery share; damage is their sum. */
   hands?: { right: number; left: number; rightPct: number; leftPct: number } | null;
+  /** Monster HP, and how long auto-attacks take to bring it down. */
+  hp?: number | null;
+  autoHits?: number | null;
+  autoSeconds?: number | null;
+  skill?: SkillResult | null;
 }
 
-// Passive class skills that change the status window. Enlarge Weight Limit
-// is +200 weight a level (client skill text); Hilt Binding is STR +1 (and
-// physical damage +4, not shown in the window, not modelled).
-const ENLARGE_WEIGHT = 'Enlarge Weight Limit';
-const CLASS_PASSIVES: { skill: string; classes: string[]; max: number; bonus?: [string, number] }[] = [
-  { skill: 'Hilt Binding', classes: ['blacksmith'], max: 1, bonus: ['str', 1] },
-  { skill: ENLARGE_WEIGHT, classes: ['merchant', 'blacksmith', 'alchemist'], max: 10 },
-];
+export interface SkillResult {
+  name: string;
+  level: number;
+  kind: 'atk' | 'matk';
+  /** Damage % used (from the formula when there is one). */
+  ratio: number;
+  hits: number;
+  /** Damage of one cast, all hits. */
+  damage: number;
+  /** Seconds between casts: cast time + delay, or the attack interval if longer. */
+  interval: number;
+  castSeconds: number;
+  casts: number | null;
+  seconds: number | null;
+  sp: number;
+}
+
 
 const WINDOW = new Set([
-  ...STATS, 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
+  ...STATS, ...STATS.map((s) => `${s}_percent`), 'hit_percent', 'mastery', 'weight', 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
   'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent',
 ]);
 
@@ -527,14 +660,36 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   }
   for (const [k, { from, value }] of best) add(from, [k, value, null, null, null], 0);
 
-  // Class passives the status window shows (owner's Blacksmith, 7 Oct 2026:
-  // STR read 1 + 7 where the Job bonus gives 6 -- the seventh is Hilt
-  // Binding). Their levels come from the skill-level inputs like any other.
-  for (const p of CLASS_PASSIVES) {
-    if (!p.classes.includes(build.cls)) continue;
-    skills.add(p.skill);
-    const lv = Math.min(p.max, build.sk?.[p.skill] ?? 0);
-    if (lv && p.bonus) add(`สกิล ${p.skill}`, [p.bonus[0], p.bonus[1] * lv, null, null, null], 0);
+  // Class passives (owner's Blacksmith, 7 Oct 2026: STR read 1 + 7 where the
+  // Job bonus gives 6 -- the seventh is Hilt Binding). Levels come from the
+  // skill-level inputs; weapon-bound lines need that weapon in either hand.
+  const heldTypes = new Set([weapon?.wt ?? 'bare_hand', left?.wt ?? '']);
+  for (const p of passivesFor(build.cls)) {
+    skills.add(p.n);
+    const lv = Math.min(p.max, build.sk?.[p.n] ?? 0);
+    if (!lv) continue;
+    const holds = !p.w || p.w.some((w) => heldTypes.has(w));
+    const fx = p.second && p.secondCls?.includes(build.cls) ? p.second : p.fx;
+    const groups: [Record<string, number[]> | undefined, boolean][] = [[fx, p.wfx ? true : holds], [p.wfx, holds]];
+    for (const [table, on] of groups) {
+      for (const [type, values] of Object.entries(table ?? {})) {
+        const v = values[lv - 1];
+        if (!v) continue;
+        if (!on) {
+          skipped.push({ from: `สกิล ${p.n}`, text: bonusText([type === 'mastery' ? 'atk' : type, v, null, null, null]), why: `ต้องถือ ${p.w?.map((w) => WEAPON_TH[w] ?? w).join('/')}` });
+          continue;
+        }
+        for (const t of p.t ?? [null]) add(`สกิล ${p.n}`, [type, v, t, null, null], 0);
+      }
+    }
+  }
+
+  // Buffs: skill buffs at the level chosen, from anyone (a party's Priest).
+  for (const [slug, level] of Object.entries(build.bf ?? {})) {
+    const b = buffBySlug(slug);
+    const lv = Math.min(b?.max ?? 0, level);
+    if (!b || !lv) continue;
+    for (const [type, value, t] of b.lv[lv - 1] ?? []) add(`บัฟ ${b.n} Lv ${lv}`, [type, value, t, null, null], 0);
   }
 
   const get = (type: string) => sums.get(key({ type, target: null, skill: null }))?.value ?? 0;
@@ -542,7 +697,10 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   // Stats.
   const job = jobBonusAt(build.cls, build.job);
   const bonus = Object.fromEntries(STATS.map((s) => [s, get(s)])) as Record<Stat, number>;
-  const total = Object.fromEntries(STATS.map((s) => [s, build.st[s] + job[s] + bonus[s]])) as Record<Stat, number>;
+  // A stat % (Improve Concentration: AGI/DEX +12%) is of the stat before gear.
+  const total = Object.fromEntries(
+    STATS.map((s) => [s, build.st[s] + job[s] + bonus[s] + Math.floor(((build.st[s] + job[s]) * get(`${s}_percent`)) / 100)]),
+  ) as Record<Stat, number>;
   const used = STATS.reduce((sum, s) => sum + statCost(build.st[s]), 0);
   const budget = statBudget(build.lv);
   if (used > budget) warnings.push(`ใช้แต้มเกิน ${used - budget} แต้ม`);
@@ -553,7 +711,7 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   const wt = weapon?.wt ?? 'bare_hand';
   const ranged = RANGED_WEAPONS.has(wt);
 
-  const hit = 175 + lv + dex + Math.floor(luk / 3) + get('hit');
+  const hit = Math.floor((175 + lv + dex + Math.floor(luk / 3) + get('hit')) * (1 + get('hit_percent') / 100));
   const flee = 100 + lv + agi + Math.floor(luk / 5) + get('flee');
   const crit = Math.floor((1 + luk * 0.3 + lv / 100) * 10) / 10 + get('crit');
   const pd = 1 + Math.floor(luk / 10) + get('perfect_dodge');
@@ -604,11 +762,21 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     // factor per kind (race, size, element, boss), plus the untargeted ones.
     const byKind = new Map<string, number>();
     let ignoreDef = 0;
+    let ignoreMdef = 0;
+    let mastery = 0;
+    const magicByKind = new Map<string, number>();
     for (const s of sums.values()) {
       if (s.skill) continue;
       const matches = s.target === null || (s.target !== 'player' && targetMatches(s.target, target, ranged));
       if (!matches) continue;
       if (s.type === 'ignore_def_percent') ignoreDef += s.value;
+      if (s.type === 'ignore_mdef_percent') ignoreMdef += s.value;
+      // Mastery: flat damage per hit after DEF (Sword Mastery, Demon Bane...).
+      if (s.type === 'mastery') mastery += s.value;
+      if (s.type === 'magic_damage_percent') {
+        const kind = (s.target ?? 'all').split(':')[0];
+        magicByKind.set(kind, (magicByKind.get(kind) ?? 0) + s.value);
+      }
       if (s.type === 'damage_percent' || (s.type === 'ranged_damage_percent' && ranged)) {
         const kind = s.type === 'ranged_damage_percent' ? 'ranged' : (s.target ?? 'all').split(':')[0];
         byKind.set(kind, (byKind.get(kind) ?? 0) + s.value);
@@ -616,11 +784,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     }
     const multiplier = [...byKind.values()].reduce((m, p) => m * (1 + p / 100), 1);
     const def = target.def === null ? null : Math.floor(target.def * (1 - Math.min(100, ignoreDef) / 100));
-    const hand = (atk: number, type: string, el: string | null, statusTimes: number) => physicalDamagePerHit({
-      weaponAtk: Math.floor(atk * (1 + get('atk_percent') / 100)),
+    const hand = (atk: number, type: string, el: string | null, statusTimes: number, ratio = 100) => physicalDamagePerHit({
+      weaponAtk: Math.floor((atk * (1 + get('atk_percent') / 100) * ratio) / 100),
       // Status ATK counts twice in the right hand's damage (lib/damage) and
-      // once in the left's; flat ATK from gear once.
-      statusAtk: statusAtk * statusTimes + Math.floor(get('atk') * (1 + get('atk_percent') / 100)),
+      // once in the left's; flat ATK from gear once. A skill scales both.
+      statusAtk: Math.floor(((statusAtk * statusTimes + Math.floor(get('atk') * (1 + get('atk_percent') / 100))) * ratio) / 100),
       weaponType: SIZE_ROW[type] ?? 'Bare hand',
       weaponElement: (el ? cap(el) : 'Neutral') as Element,
       targetSize: target.size,
@@ -632,7 +800,7 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     });
     const raw = hand(weaponAtk, wt, weaponEl, 2);
     let hands: TargetResult['hands'] = null;
-    let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier)) : null;
+    let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier) + mastery) : null;
     if (left && damage !== null) {
       const leftRaw = hand(leftAtk, left.wt ?? 'dagger', leftEl, 1);
       const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
@@ -642,6 +810,59 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       hands = { right: r, left: l, rightPct, leftPct };
       damage = r + l;
     }
+    // Time to kill with auto-attacks: expected damage per swing (hit chance
+    // counted) at the swing rate ASPD gives.
+    const aps = aspd !== null ? attacksPerSecond(aspd) : null;
+    const mobHp = target.hp && target.hp > 0 ? target.hp : null;
+    const landed = (hitChance ?? 100) / 100;
+    const autoHits = mobHp && damage ? Math.ceil(mobHp / damage) : null;
+    const autoSeconds = mobHp && damage && aps && landed > 0 ? Math.round((mobHp / (damage * landed * aps)) * 10) / 10 : null;
+
+    // One attack skill.
+    let skill: SkillResult | null = null;
+    const pick = build.as ? attackBySlug(build.cls, build.as[0]) : null;
+    if (pick) {
+      const slv = Math.max(1, Math.min(pick.max, build.as![1] || pick.max));
+      const row = pick.lv[slv - 1];
+      const ratio = (pick.f && evalRatio(pick.f, { slv, ...total, base_level: lv, cart_weight: 0 })) || row[0];
+      const hits = row[1] || 1;
+      const el = pick.el && pick.el !== 'neutral' ? pick.el : null;
+      let perHit: number | null = null;
+      if (pick.k === 'atk') {
+        const r = hand(weaponAtk, wt, el ?? weaponEl, 2, ratio);
+        perHit = r ? Math.max(1, Math.floor(r.damage * multiplier) + mastery) : null;
+      } else if (target.element && target.element_level) {
+        // Magic: MATK × % × element, reduced by MDEF (Renewal curve, as
+        // rozeroplanner and rAthena have it) and the monster's soft MDEF.
+        const mdef = Math.floor((target.mdef ?? 0) * (1 - Math.min(100, ignoreMdef) / 100));
+        const elem = elementModifier(cap(el ?? 'neutral') as Element, target.element as Element, target.element_level as ElementLevel);
+        const softM = Math.floor(((target.int ?? 0) + target.level) / 4);
+        const magicMul = [...magicByKind.values()].reduce((m, p) => m * (1 + p / 100), 1);
+        const raw = ((statusMatk + equipMatk) * ratio) / 100 * (elem / 100) * ((1000 + mdef) / (1000 + 10 * mdef)) - softM;
+        perHit = Math.max(1, Math.floor(raw * magicMul));
+      }
+      if (perHit !== null) {
+        const total1 = perHit * hits;
+        const castSeconds = (row[2] / 1000) * vct + (row[3] / 1000) * Math.max(0, 1 + get('cast_time_fixed_percent') / 100);
+        const interval = Math.max(aps ? 1 / aps : 0, castSeconds + Math.max(row[4], row[5]) / 1000);
+        const chance = pick.k === 'atk' ? landed : 1;
+        const casts = mobHp ? Math.ceil(mobHp / total1) : null;
+        skill = {
+          name: pick.n,
+          level: slv,
+          kind: pick.k,
+          ratio: Math.round(ratio),
+          hits,
+          damage: total1,
+          interval: Math.round(interval * 100) / 100,
+          castSeconds: Math.round(castSeconds * 100) / 100,
+          casts,
+          seconds: mobHp && chance > 0 ? Math.round(((mobHp / (total1 * chance)) * interval) * 10) / 10 : null,
+          sp: row[6],
+        };
+      }
+    }
+
     vs = {
       hitChance,
       hitShort: target.hit_100 !== null ? Math.max(0, target.hit_100 - hit) : null,
@@ -650,6 +871,10 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       damage,
       multiplier,
       hands,
+      hp: mobHp,
+      autoHits,
+      autoSeconds,
+      skill,
     };
   }
 
@@ -674,7 +899,7 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     // From the STR you put in, not the total: the owner's Blacksmith (base STR 1,
     // total 8, Enlarge Weight Limit 10) reads 5,030 = 2,000 + 1,000 + 30 + 2,000.
     weight: {
-      cap: 2000 + build.st.str * 30 + (classStats(build.cls)?.weightBonus ?? 0) + 200 * Math.min(10, CLASS_PASSIVES.some((p) => p.skill === ENLARGE_WEIGHT && p.classes.includes(build.cls)) ? build.sk?.[ENLARGE_WEIGHT] ?? 0 : 0),
+      cap: 2000 + build.st.str * 30 + (classStats(build.cls)?.weightBonus ?? 0) + get('weight'),
       worn: wornWeight / 10,
     },
     vct,
@@ -739,6 +964,14 @@ export function sanitizeBuild(raw: any): Build | null {
     const ids = list.map(Number).filter((id: number) => stoneById(id)?.k === cs).slice(0, COSTUME_STONES[cs]);
     if (ids.length) cos[cs] = ids;
   }
+  const bf: Record<string, number> = {};
+  for (const [slug, lv] of Object.entries(raw.bf ?? {})) {
+    const b = buffBySlug(String(slug));
+    const n = b ? clampInt(lv, 0, b.max, 0) : 0;
+    if (b && n) bf[b.s] = n;
+  }
+  const asPick = Array.isArray(raw.as) ? attackBySlug(cls, String(raw.as[0])) : null;
+  const as: [string, number] | null = asPick ? [asPick.s, clampInt(raw.as[1], 1, asPick.max, asPick.max)] : null;
   const sk: Record<string, number> = {};
   for (const [name, lv] of Object.entries(raw.sk ?? {})) {
     const n = clampInt(lv, 0, 10, 0);
@@ -754,5 +987,7 @@ export function sanitizeBuild(raw: any): Build | null {
     siege: raw.siege === true || undefined,
     ...(Object.keys(cos).length ? { cos } : {}),
     ...(Object.keys(sk).length ? { sk } : {}),
+    ...(Object.keys(bf).length ? { bf } : {}),
+    ...(as ? { as } : {}),
   };
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_GEAR, calcBuild, decodeBuild, encodeBuild, fitsSlot, gearById, classFits, type Build, type Target } from './build-calc';
+import { ALL_GEAR, calcBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, optionRangeText, type Build, type Target } from './build-calc';
 
 const first = (test: (g: (typeof ALL_GEAR)[string]) => boolean) => Number(Object.entries(ALL_GEAR).find(([, g]) => test(g))![0]);
 // Hood: a garment with a card slot and no effects of its own.
@@ -236,5 +236,94 @@ describe('matches a real status window', () => {
     expect(r.hp).toBe(1840);
     expect(r.sp).toBe(231);
     expect(r.weight.cap).toBe(5030);
+  });
+});
+
+describe('passives, buffs, skills, option ranges', () => {
+  const mob: Target = {
+    name: 'Test', level: 40, vit: 20, def: 30, size: 'Medium', element: 'Earth', element_level: 1, race: 'Brute', boss: false,
+    hit_100: 250, flee_95: 280, hp: 5000, mdef: 10, int: 10,
+  };
+
+  it("counts a passive at the level given: Owl's Eye", () => {
+    const off = calcBuild({ ...base, cls: 'archer' });
+    const on = calcBuild({ ...base, cls: 'archer', sk: { "Owl's Eye": 10 } });
+    expect(off.skills).toContain("Owl's Eye");
+    expect(on.total.dex - off.total.dex).toBe(10);
+  });
+
+  it('uses the second-job value of Improve Dodge on an Assassin', () => {
+    const thief = calcBuild({ ...base, cls: 'thief', sk: { 'Improve Dodge': 10 } });
+    const sin = calcBuild({ ...base, cls: 'assassin', sk: { 'Improve Dodge': 10 } });
+    expect(thief.flee - calcBuild({ ...base, cls: 'thief' }).flee).toBe(30);
+    expect(sin.flee - calcBuild({ ...base, cls: 'assassin' }).flee).toBe(40);
+  });
+
+  it("raises HIT by a percent: Vulture's Eye with a bow", () => {
+    const bow = first((g) => g.wt === 'bow');
+    const plain = calcBuild({ ...base, cls: 'archer', g: { weapon: { id: bow, r: 0, c: [] } } });
+    const eye = calcBuild({ ...base, cls: 'archer', g: { weapon: { id: bow, r: 0, c: [] } }, sk: { "Vulture's Eye": 10 } });
+    expect(eye.hit).toBe(Math.floor(plain.hit * 1.1));
+  });
+
+  it('counts a weapon mastery only with that weapon', () => {
+    const bare = calcBuild({ ...base, cls: 'thief', sk: { 'Sword Mastery': 10 } }, mob);
+    expect(bare.skipped.some((l) => l.from.includes('Sword Mastery'))).toBe(true);
+    const knife = calcBuild({ ...base, cls: 'thief', g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } } }, mob);
+    const knifeM = calcBuild({ ...base, cls: 'thief', g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } }, sk: { 'Sword Mastery': 10 } }, mob);
+    expect(knifeM.vs!.damage! - knife.vs!.damage!).toBe(40);
+  });
+
+  it('counts buffs: Blessing 10 and Increase Agility 10', () => {
+    const plain = calcBuild({ ...base });
+    const blessed = calcBuild({ ...base, bf: { blessing: 10 } });
+    expect(blessed.total.str - plain.total.str).toBe(10);
+    expect(blessed.hit - plain.hit).toBe(30); // DEX +10 and HIT +20
+    const agi = calcBuild({ ...base, bf: { 'increase-agility': 10 } });
+    expect(agi.total.agi - plain.total.agi).toBe(12);
+    expect(agi.aspd!).toBeGreaterThan(plain.aspd!);
+  });
+
+  it('says how long auto-attacks and a skill take to kill', () => {
+    const b: Build = { ...base, cls: 'assassin', lv: 60, st: { ...base.st, str: 60, dex: 40 }, g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } }, as: ['sonic-blow', 10] };
+    const r = calcBuild(b, mob);
+    expect(r.vs!.autoHits).toBe(Math.ceil(5000 / r.vs!.damage!));
+    expect(r.vs!.autoSeconds).toBeGreaterThan(0);
+    // Sonic Blow 10: 200 + slv × 100 = 1200%.
+    expect(r.vs!.skill).toMatchObject({ name: 'Sonic Blow', level: 10, ratio: 1200, kind: 'atk' });
+    expect(r.vs!.skill!.damage).toBeGreaterThan(r.vs!.damage! * 5);
+    expect(r.vs!.skill!.casts).toBe(Math.ceil(5000 / r.vs!.skill!.damage));
+  });
+
+  it('works out magic by element: Fire Bolt hits an Earth monster harder than a Water one', () => {
+    const b: Build = { ...base, cls: 'mage', lv: 60, st: { ...base.st, int: 70, dex: 40 }, as: ['fire-bolt', 10] };
+    const earth = calcBuild(b, mob).vs!.skill!;
+    const water = calcBuild(b, { ...mob, element: 'Water' }).vs!.skill!;
+    expect(earth.kind).toBe('matk');
+    expect(earth.hits).toBe(10);
+    expect(earth.damage).toBeGreaterThan(water.damage);
+    expect(earth.castSeconds).toBeGreaterThan(0);
+  });
+
+  it('only evaluates plain arithmetic in a skill formula', () => {
+    expect(evalRatio('100 + slv * 30', { slv: 10 })).toBe(400);
+    expect(evalRatio('floor((230 * slv + agi * 3) * base_level / 100)', { slv: 10, agi: 90, base_level: 60 })).toBe(1542);
+    expect(evalRatio('alert(1)', {})).toBeNull();
+    expect(evalRatio('constructor', {})).toBeNull();
+  });
+
+  it('gives the roll range of an option for the slot', () => {
+    const knife = gearById(1201)!;
+    expect(optionRangeText('atk', 'weapon', knife)).toContain('ดรอปมอน');
+    expect(optionRangeText('atk', 'accessory_1', null)).toBeNull();
+    expect(maxOptionsFor('weapon')).toBe(4);
+    expect(maxOptionsFor('accessory_1')).toBe(2);
+  });
+
+  it('keeps buffs and the attack skill through a share link', () => {
+    const b: Build = { ...base, cls: 'assassin', bf: { blessing: 10, nope: 3 }, as: ['sonic-blow', 7] };
+    const back = decodeBuild(encodeBuild(b))!;
+    expect(back.bf).toEqual({ blessing: 10 });
+    expect(back.as).toEqual(['sonic-blow', 7]);
   });
 });
