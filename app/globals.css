@@ -4365,8 +4365,8 @@ html .tag { border-radius: 4px; }
 .bhero::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .2) 0 1px, transparent 1px 3px); pointer-events: none; }
 .bhero__text { position: relative; z-index: 1; min-width: 0; }
 .bhero__kicker { margin: 0; font-size: 12px; letter-spacing: .24em; color: var(--pink); text-shadow: 0 0 8px rgba(255, 61, 154, .7); }
-.bhero__title { margin: 4px 0 6px; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; color: var(--yellow); text-shadow: 0 0 14px rgba(255, 229, 61, .55), 3px 3px 0 #c22a74; }
-.bhero__lead { margin: 0; font-size: 15px; color: var(--dim); }
+.bhero__title { margin: 4px 0 6px; font-family: var(--font-chakra), var(--font-sarabun), sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 46px); line-height: 1.25; color: var(--yellow); text-shadow: 0 0 14px rgba(255, 229, 61, .55), 3px 3px 0 #c22a74; }
+.bhero__lead { margin: 0; font: 400 15px/1.65 var(--font-sarabun), sans-serif; color: var(--dim); }
 .bhero__parade { position: relative; z-index: 1; display: flex; align-items: flex-end; flex: none; }
 .bhero__parade img { width: 72px; height: 72px; margin-left: -14px; image-rendering: pixelated; filter: drop-shadow(0 0 8px rgba(61, 232, 255, .45)); animation: bhero-bob 2.4s ease-in-out infinite; }
 .bhero__parade img:nth-child(even) { animation-delay: -1.2s; }
