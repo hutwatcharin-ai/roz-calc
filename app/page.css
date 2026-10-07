@@ -68,48 +68,52 @@ html .qcard__go { text-shadow: 0 0 8px var(--glow-yellow); }
 a.qcard:hover > strong::before { content: '▶ MODE 0' counter(qmode); }
 
 /* Build simulator strip (owner, 7 Oct 2026): the flagship tool between the
-   hero and the four cards. One lit button, a class row underneath. On phones
-   it stays under ~140px so the search cards keep their place near the top. */
+   hero and the four cards. One lit button; variant b adds a labelled row of
+   sample builds. On phones it stays short so the search cards keep their
+   place near the top. */
 .homebuild {
-  display: grid; grid-template-columns: 104px minmax(0, 1fr) auto; align-items: center; gap: 6px 18px;
-  margin-top: 18px; padding: 14px 18px 12px; border: 2px solid var(--cyan); border-radius: 12px;
+  display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; align-items: center; gap: 6px 18px;
+  margin-top: 18px; padding: 14px 18px; border: 2px solid var(--cyan); border-radius: 12px;
   background: radial-gradient(ellipse at 90% 120%, rgba(255, 61, 154, .28), transparent 55%), repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px), #0b0724;
   box-shadow: 0 0 22px rgba(61, 232, 255, .22), 5px 5px 0 var(--pink);
 }
-.homebuild__stage { grid-row: span 2; display: grid; place-items: end center; height: 104px; border-radius: 8px; background: radial-gradient(ellipse at 50% 92%, rgba(61, 232, 255, .35), transparent 55%), #120b33; }
-.homebuild__sprite { width: 96px; height: 96px; object-fit: contain; image-rendering: pixelated; animation: homebuild-bob 1.4s ease-in-out infinite alternate; }
+.homebuild__stage { display: grid; place-items: end center; height: 88px; border-radius: 8px; background: radial-gradient(ellipse at 50% 92%, rgba(61, 232, 255, .35), transparent 55%), #120b33; }
+.homebuild__sprite { width: 84px; height: 84px; object-fit: contain; image-rendering: pixelated; animation: homebuild-bob 1.4s ease-in-out infinite alternate; }
 @keyframes homebuild-bob { to { transform: translateY(-4px); } }
 .homebuild__kicker { margin: 0; font-size: 11px; letter-spacing: .22em; color: var(--pink); text-shadow: 0 0 8px rgba(255, 61, 154, .7); }
-.homebuild__title { margin: 2px 0 2px; font: 700 clamp(18px, 3.4vw, 24px)/1.35 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .45); }
+.homebuild__title { margin: 2px 0; font: 700 clamp(18px, 3.4vw, 24px)/1.35 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .45); }
 .homebuild__lead, .homebuild__saved { margin: 0; font: 400 14px/1.55 var(--font-sarabun), sans-serif; color: var(--dim); }
 .homebuild__saved b { color: var(--text); }
 .homebuild__saved .mono { color: var(--cyan); }
+.homebuild__act { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .homebuild__go {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 6px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 6px; white-space: nowrap;
   font: 700 16px/1 var(--font-chakra), var(--font-sarabun), sans-serif; color: #12081f; text-decoration: none;
   background: var(--yellow); box-shadow: 0 4px 0 #b08f00, 0 0 18px rgba(255, 229, 61, .55);
 }
 .homebuild__go:hover { transform: translateY(-1px); }
 .homebuild__go span { animation: homebuild-blink 1s steps(2, start) infinite; }
 @keyframes homebuild-blink { to { visibility: hidden; } }
-.homebuild__classes { grid-column: 2 / -1; display: flex; gap: 6px; margin: 4px 0 0; padding: 0 0 4px; list-style: none; overflow-x: auto; scrollbar-width: thin; }
+.homebuild__new { display: inline-flex; align-items: center; min-height: 32px; font: 400 13px/1 var(--font-sarabun), sans-serif; color: var(--cyan); }
+.homebuild__samples { grid-column: 2 / -1; padding-top: 8px; border-top: 1px dashed rgba(61, 232, 255, .25); }
+.homebuild__samplelabel { margin: 0 0 6px; font: 400 13px/1.4 var(--font-sarabun), sans-serif; color: var(--faint); }
+.homebuild__classes { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0; padding: 0; list-style: none; }
 .homebuild__classes a {
-  display: flex; flex-direction: column; align-items: center; gap: 1px; width: 64px; padding: 4px 2px 3px; border: 1px solid rgba(61, 232, 255, .3); border-radius: 6px;
-  background: #120b33; color: var(--dim); text-decoration: none; font: 600 11px/1.3 var(--font-sarabun), sans-serif;
+  display: inline-flex; align-items: center; gap: 2px; min-height: 32px; padding: 0 8px 0 2px; border: 1px solid rgba(61, 232, 255, .25); border-radius: 999px;
+  background: #120b33; color: var(--dim); text-decoration: none; font: 600 12px/1 var(--font-sarabun), sans-serif;
 }
 .homebuild__classes a:hover, .homebuild__classes a:focus-visible { border-color: var(--yellow); color: var(--yellow); }
-.homebuild__classes img { width: 36px; height: 36px; object-fit: contain; image-rendering: pixelated; }
+.homebuild__classes img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; }
 @media (prefers-reduced-motion: reduce) { .homebuild__sprite, .homebuild__go span { animation: none; } .homebuild__go:hover { transform: none; } }
 @media (max-width: 640px) {
-  .homebuild { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; padding: 10px 12px 8px; margin-top: 14px; }
-  .homebuild__stage, .homebuild__lead, .homebuild__kicker { display: none; }
+  .homebuild { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; padding: 10px 12px; margin-top: 14px; }
+  .homebuild__stage, .homebuild__kicker { display: none; }
   .homebuild__title { font-size: 18px; }
   .homebuild__title span { display: none; }
-  .homebuild__classes { scrollbar-width: none; }
-  .homebuild__classes::-webkit-scrollbar { display: none; }
-  .homebuild__saved { font-size: 12.5px; line-height: 1.45; }
+  .homebuild__lead, .homebuild__saved { font-size: 12.5px; line-height: 1.45; }
   .homebuild__go { min-height: 44px; padding: 0 14px; font-size: 14px; }
-  .homebuild__classes { grid-column: 1 / -1; }
-  .homebuild__classes a { width: 52px; font-size: 10px; }
-  .homebuild__classes img { width: 30px; height: 30px; }
+  .homebuild__samples { grid-column: 1 / -1; }
+  .homebuild__classes { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .homebuild__classes::-webkit-scrollbar { display: none; }
+  .homebuild__classes li { flex: none; }
 }

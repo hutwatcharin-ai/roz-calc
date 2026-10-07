@@ -10,7 +10,7 @@
 
 import { unstable_cache } from 'next/cache';
 import { buildPresets } from '@/lib/build-presets';
-import { decodeBuild, encodeBuild, maxJobLevel, sanitizeBuild } from '@/lib/build-calc';
+import { EMPTY_BUILD, decodeBuild, encodeBuild, maxJobLevel, sanitizeBuild } from '@/lib/build-calc';
 import { classStats } from '@/lib/class-stats';
 import { C_VARIANT_SQL_NOT_LIKE, C_VARIANT_SQL_OP } from '@/lib/c-variant';
 import { rankFarmRange } from '@/lib/farm-picks';
@@ -97,5 +97,9 @@ async function load(): Promise<HomeBuildClass[]> {
   }
   return out;
 }
+
+// A blank build as a link: the simulator keeps the remembered build until the
+// visitor edits this one (BuildSimulator fromLink).
+export const NEW_BUILD_HREF = `/tools/build?${new URLSearchParams({ b: encodeBuild(EMPTY_BUILD) })}`;
 
 export const homeBuildClasses = unstable_cache(load, ['home-build-classes-v2'], { revalidate: 86400 });

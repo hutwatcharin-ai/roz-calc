@@ -15,7 +15,7 @@ import { getLastUpdated } from '@/lib/last-updated';
 import ReactDOM from 'react-dom';
 import NowPlaying from '@/components/NowPlaying';
 import HomeBuildStrip from '@/components/HomeBuildStrip';
-import { homeBuildClasses } from '@/lib/home-build';
+import { homeBuildClasses, NEW_BUILD_HREF } from '@/lib/home-build';
 import { splitNews } from '@/lib/news';
 
 
@@ -93,7 +93,7 @@ async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: { level?: string; range?: string; c?: string };
+  searchParams: { level?: string; range?: string; c?: string; hb?: string };
 }) {
   // The farming finder still lives at "/" (spec 6.2: the link people share in
   // game chat keeps working, params and all). What changed is the default
@@ -168,7 +168,7 @@ export default async function HomePage({
 
       {/* The flagship tool, above the four cards and below the hero that
           says what the site is (owner, 7 Oct 2026). */}
-      <HomeBuildStrip classes={buildClasses} />
+      <HomeBuildStrip classes={buildClasses} newHref={NEW_BUILD_HREF} variant={searchParams.hb === 'b' ? 'b' : 'a'} />
 
       <div className="qgrid">
         {/* Card one IS the tool, not a link to it: the embedded form submits
