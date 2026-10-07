@@ -4553,6 +4553,13 @@ html .tag { border-radius: 4px; }
 .buildsim__meter .buildsim__dmg { grid-column: 2 / -1; text-align: left; }
 .buildsim__bar--hit, .buildsim__bar--flee { height: 10px; }
 .buildsim__hands { margin: 4px 0 0 86px; font-size: 12.5px; color: var(--dim); }
+.buildsim__dmg small { font-size: 12px; color: var(--dim); font-weight: 400; }
+.buildsim__situ { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin: 0 0 8px; font-size: 13px; color: var(--dim); }
+.buildsim__situ label { display: inline-flex; gap: 6px; align-items: center; }
+.buildsim__situ select { min-height: 32px; }
+.buildsim__situ small { flex-basis: 100%; font-size: 12px; color: var(--yellow); }
+.buildsim__potionheal { display: block; grid-column: 1 / -1; font-size: 12px; color: var(--dim); }
+.buildsim__potionheal b { color: var(--yellow); }
 .buildsim__hands small { color: var(--faint); }
 .buildsim__bar--flee i { background: linear-gradient(90deg, #c22a74, var(--pink)); box-shadow: 0 0 8px rgba(255, 61, 154, .7); }
 .buildsim__need { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; font-size: 13px; }

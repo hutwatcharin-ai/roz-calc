@@ -22,6 +22,7 @@ import {
   attacksFor, buffBySlug, maxOptionsFor, optionRangeText, passivesFor,
   OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsLeftHand, fitsSlot, gearById, slotLabel,
   isTwoHanded, maxJobLevel, optionKey, sanitizeBuild, stoneById, type Build, type CostumeSlot, type Slot, type Target,
+  AILMENTS, POTION_HEAL, type Ailment,
 } from '@/lib/build-calc';
 import { STATS, type Stat, classStats, statCost, WEAPON_TH } from '@/lib/class-stats';
 import { foodText, foodById } from '@/lib/food-buffs';
@@ -987,6 +988,11 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
                 // 50% stops natural HP/SP regen, 70% is where a bot heads home, 90% stops attacking.
                 const w = POTIONS.find((x) => x[0] === potion) ?? POTIONS[3];
                 const room = (pct: number) => Math.max(0, Math.floor(((result.weight.cap * pct) / 100 - result.weight.worn) / (w[2] / 10)));
+                // Healing: the amount the game's item text gives, +2% per VIT (INT for SP).
+                const heal = POTION_HEAL[w[0]];
+                const rate = heal?.sp ? result.potionRate.sp : result.potionRate.hp;
+                const each = heal ? Math.floor((heal.amount * rate) / 100) : 0;
+                const pool = heal?.sp ? result.sp : result.hp;
                 return (
                   <div className="is-wide buildsim__potion">
                     <dt>
@@ -999,6 +1005,12 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
                       <img src={`/images/items/${w[0]}.gif`} alt="" width={20} height={20} />
                       {room(50).toLocaleString('en-US')} <small>ถึง 50%</small> · {room(70).toLocaleString('en-US')} <small>ถึง 70%</small> · {room(90).toLocaleString('en-US')} <small>ถึง 90%</small>
                     </dd>
+                    {heal && (
+                      <small className="buildsim__potionheal">
+                        ขวดละ ~<b className="mono">{each}</b> {heal.sp ? 'SP' : 'HP'} ({heal.sp ? 'INT' : 'VIT'} เพิ่ม {rate - 100}%) · แบกถึง 70% ฟื้นรวม ~<b className="mono">{(each * room(70)).toLocaleString('en-US')}</b> {heal.sp ? 'SP' : 'HP'}
+                        {pool ? ` = ${Math.floor((each * room(70)) / pool)} หลอดเต็ม` : ''}
+                      </small>
+                    )}
                     <small className="buildsim__potionnote">50% หยุดฟื้น HP/SP เอง · 70% บอทกลับเมือง · 90% ตีไม่ได้ (นับแค่ของที่ใส่ ไม่รวมของอื่นในกระเป๋า)</small>
                   </div>
                 );
@@ -1056,6 +1068,30 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
                     </small>
                   </div>
                 </div>
+                <div className="buildsim__situ">
+                  <label>
+                    มอนรุมคุณ
+                    <select value={build.mob ?? 1} onChange={(e) => update({ mob: Number(e.target.value) > 1 ? Number(e.target.value) : undefined })}>
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => <option key={n} value={n}>{n} ตัว</option>)}
+                    </select>
+                  </label>
+                  <label>
+                    มอนติดสถานะ
+                    <select value={build.ail ?? ''} onChange={(e) => update({ ail: (e.target.value || undefined) as Ailment | undefined })}>
+                      <option value="">ไม่มี</option>
+                      {(Object.keys(AILMENTS) as Ailment[]).map((a) => <option key={a} value={a}>{AILMENTS[a].th}</option>)}
+                    </select>
+                  </label>
+                  {(build.mob ?? 1) >= 3 && (
+                    <small>โดนรุม {build.mob} ตัว FLEE เหลือ {vs.fleeMobbed} จาก {result.flee} (ลด 10% ต่อตัวตั้งแต่ตัวที่ 3 · สูตร rAthena ยังไม่มีใครวัดใน Zero)</small>
+                  )}
+                  {build.ail && (
+                    <small>
+                      มอน{AILMENTS[build.ail].th}: ตีโดนทุกที
+                      {AILMENTS[build.ail].element && ` · กลายเป็น${ELEMENT_TH[AILMENTS[build.ail].element!] ?? AILMENTS[build.ail].element} 1 · DEF เหลือครึ่ง · MDEF +25%`}
+                    </small>
+                  )}
+                </div>
                 <div className="buildsim__meter">
                   <span>ตีโดน</span>
                   <span className="buildsim__bar buildsim__bar--hit" aria-hidden="true"><i style={{ width: `${vs.hitChance ?? 0}%` }} /></span>
@@ -1068,7 +1104,10 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
                 </div>
                 <div className="buildsim__meter">
                   <span>ดาเมจ <i>ประมาณ</i></span>
-                  <b className="mono buildsim__dmg">{vs.damage ?? 'ไม่ทราบ'}</b>
+                  <b className="mono buildsim__dmg">
+                    {vs.damage ?? 'ไม่ทราบ'}
+                    {vs.damageMin !== null && vs.damageMax !== null && vs.damageMin !== vs.damageMax && <small> สุ่ม {vs.damageMin}–{vs.damageMax}</small>}
+                  </b>
                 </div>
                 {vs.hands && (
                   <p className="buildsim__hands mono">
@@ -1130,7 +1169,7 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
                     </dl>
                   )}
                 </div>
-                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · เวลาฆ่านับโอกาสตีโดนแล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
+                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · ช่วงสุ่มมาจาก ATK อาวุธ ±5% ต่อเลเวลอาวุธ · เวลาฆ่านับโอกาสตีโดนแล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
               </div>
             ) : (
               <p className="buildsim__empty">
