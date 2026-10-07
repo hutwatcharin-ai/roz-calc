@@ -93,6 +93,28 @@
       ]
     },
     {
+      "name": "AGI +3 LUK -3 & AGI +3 STR -3",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29022,
+          "name": "AGI +3 LUK -3",
+          "category": "Other",
+          "icon": "/images/items/29022.gif"
+        },
+        {
+          "id": 29023,
+          "name": "AGI +3 STR -3",
+          "category": "Other",
+          "icon": "/images/items/29023.gif"
+        }
+      ],
+      "bonus": "LUK +3 · STR +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Ancient Mummy & Mummy Card",
       "kind": "card",
       "pieces": [
@@ -200,6 +222,138 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "Change AGI (Middle) & (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25004,
+          "name": "Change AGI (Middle)",
+          "category": "Enchantment",
+          "icon": "/images/items/25004.gif"
+        },
+        {
+          "id": 25009,
+          "name": "Change AGI (Lower)",
+          "category": "Enchantment",
+          "icon": "/images/items/25009.gif"
+        }
+      ],
+      "bonus": "LUK +3 · STR +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Change DEX (Middle) & (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25007,
+          "name": "Change DEX (Middle)",
+          "category": "Enchantment",
+          "icon": "/images/items/25007.gif"
+        },
+        {
+          "id": 25010,
+          "name": "Change DEX (Lower)",
+          "category": "Enchantment",
+          "icon": "/images/items/25010.gif"
+        }
+      ],
+      "bonus": "VIT +3 · AGI +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Change INT (Middle) & (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25005,
+          "name": "Change INT (Middle)",
+          "category": "Enchantment",
+          "icon": "/images/items/25005.gif"
+        },
+        {
+          "id": 25013,
+          "name": "Change INT (Lower)",
+          "category": "Enchantment",
+          "icon": "/images/items/25013.gif"
+        }
+      ],
+      "bonus": "DEX +3 · VIT +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Change LUK (Middle) & (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25002,
+          "name": "Change LUK (Middle)",
+          "category": "Enchantment",
+          "icon": "/images/items/25002.gif"
+        },
+        {
+          "id": 25011,
+          "name": "Change LUK (Lower)",
+          "category": "Enchantment",
+          "icon": "/images/items/25011.gif"
+        }
+      ],
+      "bonus": "STR +3 · INT +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Change STR (Middle) & (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25003,
+          "name": "Change STR (Middle)",
+          "category": "Enchantment",
+          "icon": "/images/items/25003.gif"
+        },
+        {
+          "id": 25012,
+          "name": "Change STR (Lower)",
+          "category": "Enchantment",
+          "icon": "/images/items/25012.gif"
+        }
+      ],
+      "bonus": "INT +3 · DEX +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Change VIT (Middle) & (Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 25006,
+          "name": "Change VIT (Middle)",
+          "category": "Enchantment",
+          "icon": "/images/items/25006.gif"
+        },
+        {
+          "id": 25008,
+          "name": "Change VIT (Lower)",
+          "category": "Enchantment",
+          "icon": "/images/items/25008.gif"
+        }
+      ],
+      "bonus": "AGI +3 · LUK +3",
+      "sources": [
+        "item text"
       ]
     },
     {
@@ -330,6 +484,28 @@
         }
       ],
       "bonus": "HIT +5 · FLEE +5",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "DEX +3 VIT -3 & DEX +3 AGI -3",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29018,
+          "name": "DEX +3 VIT -3",
+          "category": "Other",
+          "icon": "/images/items/29018.gif"
+        },
+        {
+          "id": 29019,
+          "name": "DEX +3 AGI -3",
+          "category": "Other",
+          "icon": "/images/items/29019.gif"
+        }
+      ],
+      "bonus": "VIT +3 · AGI +3",
       "sources": [
         "item text"
       ]
@@ -543,6 +719,28 @@
       ]
     },
     {
+      "name": "Gentleman Staff & Magician Hat",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 1629,
+          "name": "Gentleman Staff",
+          "category": "Weapon",
+          "icon": "/images/items/1629.gif"
+        },
+        {
+          "id": 5045,
+          "name": "Magician Hat",
+          "category": "Armor",
+          "icon": "/images/items/5045.gif"
+        }
+      ],
+      "bonus": "DEX +2 · INT +2 · ฟื้น SP เร็วขึ้น 5%",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Injustice & Zealotus Card",
       "kind": "card",
       "pieces": [
@@ -563,6 +761,28 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "INT +3 DEX -3 & INT +3 VIT -3",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29016,
+          "name": "INT +3 DEX -3",
+          "category": "Other",
+          "icon": "/images/items/29016.gif"
+        },
+        {
+          "id": 29017,
+          "name": "INT +3 VIT -3",
+          "category": "Other",
+          "icon": "/images/items/29017.gif"
+        }
+      ],
+      "bonus": "DEX +3 · VIT +3",
+      "sources": [
+        "item text"
       ]
     },
     {
@@ -589,6 +809,28 @@
       ]
     },
     {
+      "name": "LUK +3 STR -3 & LUK +3 INT -3",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29024,
+          "name": "LUK +3 STR -3",
+          "category": "Other",
+          "icon": "/images/items/29024.gif"
+        },
+        {
+          "id": 29025,
+          "name": "LUK +3 INT -3",
+          "category": "Other",
+          "icon": "/images/items/29025.gif"
+        }
+      ],
+      "bonus": "STR +3 · INT +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Mastering & Poring Card",
       "kind": "card",
       "pieces": [
@@ -609,6 +851,28 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "MDEF +4 & DEF +20",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29033,
+          "name": "MDEF +4",
+          "category": "Other",
+          "icon": "/images/items/29033.gif"
+        },
+        {
+          "id": 29026,
+          "name": "DEF +20",
+          "category": "Other",
+          "icon": "/images/items/29026.gif"
+        }
+      ],
+      "bonus": "HIT +5 · FLEE +5",
+      "sources": [
+        "item text"
       ]
     },
     {
@@ -768,6 +1032,28 @@
       ]
     },
     {
+      "name": "Pantie & Undershirt",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 2339,
+          "name": "Pantie",
+          "category": "Armor",
+          "icon": "/images/items/2339.gif"
+        },
+        {
+          "id": 2522,
+          "name": "Undershirt",
+          "category": "Armor",
+          "icon": "/images/items/2522.gif"
+        }
+      ],
+      "bonus": "AGI +5 · FLEE +10",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Picky Poring Card & Criatura Academy Hat",
       "kind": "gear",
       "pieces": [
@@ -834,6 +1120,28 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "Prison Uniform & Shackles",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 15040,
+          "name": "Prison Uniform",
+          "category": "Armor",
+          "icon": "/images/items/15040.gif"
+        },
+        {
+          "id": 2408,
+          "name": "Shackles",
+          "category": "Armor",
+          "icon": "/images/items/2408.gif"
+        }
+      ],
+      "bonus": "ATK +5 และ ATK เพิ่มตามขั้นตีบวกของ Shackles",
+      "sources": [
+        "item text"
       ]
     },
     {
@@ -1228,6 +1536,28 @@
       ]
     },
     {
+      "name": "STR +3 INT -3 & STR +3 DEX -3",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29014,
+          "name": "STR +3 INT -3",
+          "category": "Other",
+          "icon": "/images/items/29014.gif"
+        },
+        {
+          "id": 29015,
+          "name": "STR +3 DEX -3",
+          "category": "Other",
+          "icon": "/images/items/29015.gif"
+        }
+      ],
+      "bonus": "DEX +3 · INT +3",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Subjugation Team's Set",
       "kind": "gear",
       "pieces": [
@@ -1260,6 +1590,28 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "Toad & Roda Frog Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4306,
+          "name": "Toad Card",
+          "category": "Card",
+          "icon": "/images/items/4306.gif"
+        },
+        {
+          "id": 4014,
+          "name": "Roda Frog Card",
+          "category": "Card",
+          "icon": "/images/items/4014.gif"
+        }
+      ],
+      "bonus": "FLEE +18",
+      "sources": [
+        "item text"
       ]
     },
     {
@@ -1344,6 +1696,34 @@
       ]
     },
     {
+      "name": "Variable Cast Reduction (Upper, Middle & Lower)",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29156,
+          "name": "Variable Cast Reduction Upper",
+          "category": "Other",
+          "icon": "/images/items/29156.gif"
+        },
+        {
+          "id": 29157,
+          "name": "Variable Cast Reduction Middle",
+          "category": "Other",
+          "icon": "/images/items/29157.gif"
+        },
+        {
+          "id": 29158,
+          "name": "Variable Cast Reduction Lower",
+          "category": "Other",
+          "icon": "/images/items/29158.gif"
+        }
+      ],
+      "bonus": "ลดร่ายแปรผันเพิ่มอีก 6%",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Variable Casting Stones (Upper, Middle & Lower)",
       "kind": "stone",
       "pieces": [
@@ -1370,6 +1750,28 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "VIT +3 AGI -3 & VIT +3 LUK -3",
+      "kind": "stone",
+      "pieces": [
+        {
+          "id": 29020,
+          "name": "VIT +3 AGI -3",
+          "category": "Other",
+          "icon": "/images/items/29020.gif"
+        },
+        {
+          "id": 29021,
+          "name": "VIT +3 LUK -3",
+          "category": "Other",
+          "icon": "/images/items/29021.gif"
+        }
+      ],
+      "bonus": "AGI +3 · LUK +3",
+      "sources": [
+        "item text"
       ]
     },
     {

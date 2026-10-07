@@ -90,6 +90,27 @@ const EXTRA = [
   { name: 'Nordfeld Onyx Helm & Gem Poring Card', ids: [401509, 300938], bonus_th: 'ATK +1 และ MATK +1 ต่อขั้นตีบวกของหมวก', sources: ['prontera', 'item text'] },
   { name: 'Nordfeld Platinum Helm & Gem Poring Card', ids: [401510, 300938], bonus_th: 'ATK +1 และ MATK +1 ต่อขั้นตีบวกของหมวก', sources: ['prontera', 'item text'] },
   { name: 'DEF Stone (Middle) & MDEF Stone (Lower)', ids: [25001, 25014], bonus_th: 'HIT +5 · FLEE +5', sources: ['item text'] },
+  // Read from the client's Thai item text, 7 Oct 2026, while checking
+  // rozeroplanner's set list (its numbers are not used: it gives Toad + Roda
+  // Frog MaxHP +300 where the card says FLEE +18).
+  { name: 'Pantie & Undershirt', ids: [2339, 2522], bonus_th: 'AGI +5 · FLEE +10', sources: ['item text'] },
+  { name: 'Gentleman Staff & Magician Hat', ids: [1629, 5045], bonus_th: 'DEX +2 · INT +2 · ฟื้น SP เร็วขึ้น 5%', sources: ['item text'] },
+  { name: 'Toad & Roda Frog Card', ids: [4306, 4014], bonus_th: 'FLEE +18', sources: ['item text'] },
+  { name: 'Change STR (Middle) & (Lower)', ids: [25003, 25012], bonus_th: 'INT +3 · DEX +3', sources: ['item text'] },
+  { name: 'Change INT (Middle) & (Lower)', ids: [25005, 25013], bonus_th: 'DEX +3 · VIT +3', sources: ['item text'] },
+  { name: 'Change DEX (Middle) & (Lower)', ids: [25007, 25010], bonus_th: 'VIT +3 · AGI +3', sources: ['item text'] },
+  { name: 'Change VIT (Middle) & (Lower)', ids: [25006, 25008], bonus_th: 'AGI +3 · LUK +3', sources: ['item text'] },
+  { name: 'Change AGI (Middle) & (Lower)', ids: [25004, 25009], bonus_th: 'LUK +3 · STR +3', sources: ['item text'] },
+  { name: 'Change LUK (Middle) & (Lower)', ids: [25002, 25011], bonus_th: 'STR +3 · INT +3', sources: ['item text'] },
+  { name: 'STR +3 INT -3 & STR +3 DEX -3', ids: [29014, 29015], bonus_th: 'DEX +3 · INT +3', sources: ['item text'] },
+  { name: 'INT +3 DEX -3 & INT +3 VIT -3', ids: [29016, 29017], bonus_th: 'DEX +3 · VIT +3', sources: ['item text'] },
+  { name: 'DEX +3 VIT -3 & DEX +3 AGI -3', ids: [29018, 29019], bonus_th: 'VIT +3 · AGI +3', sources: ['item text'] },
+  { name: 'VIT +3 AGI -3 & VIT +3 LUK -3', ids: [29020, 29021], bonus_th: 'AGI +3 · LUK +3', sources: ['item text'] },
+  { name: 'AGI +3 LUK -3 & AGI +3 STR -3', ids: [29022, 29023], bonus_th: 'LUK +3 · STR +3', sources: ['item text'] },
+  { name: 'LUK +3 STR -3 & LUK +3 INT -3', ids: [29024, 29025], bonus_th: 'STR +3 · INT +3', sources: ['item text'] },
+  { name: 'MDEF +4 & DEF +20', ids: [29033, 29026], bonus_th: 'HIT +5 · FLEE +5', sources: ['item text'] },
+  { name: 'Variable Cast Reduction (Upper, Middle & Lower)', ids: [29156, 29157, 29158], bonus_th: 'ลดร่ายแปรผันเพิ่มอีก 6%', sources: ['item text'] },
+  { name: 'Prison Uniform & Shackles', ids: [15040, 2408], bonus_th: 'ATK +5 และ ATK เพิ่มตามขั้นตีบวกของ Shackles', sources: ['item text'] },
 ];
 
 function parseRozerodb() {
@@ -109,7 +130,7 @@ function parseRozerodb() {
 }
 
 function kindOf(pieces) {
-  if (pieces.every((p) => /Stone \(/.test(p.name))) return 'stone';
+  if (pieces.every((p) => /Stone \(|^Change |Cast Reduction|^(STR|AGI|VIT|INT|DEX|LUK|DEF|MDEF) \+\d/.test(p.name))) return 'stone';
   if (pieces.some((p) => /Egg Lv/.test(p.name))) return 'pet';
   if (pieces.every((p) => p.category === 'Card')) return 'card';
   return 'gear';

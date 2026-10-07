@@ -408,3 +408,14 @@ describe('mobbing, ailments, damage roll, potions', () => {
     expect(decodeBuild(encodeBuild({ ...base, mob: 99, ail: 'x' as never }))!.mob).toBe(10);
   });
 });
+
+describe('sets read from the client item text', () => {
+  it('Change STR (Middle) + (Lower) adds INT +3 and DEX +3 on top of the stones', () => {
+    const mid = calcBuild({ ...base, cos: { middle: [25003] } });
+    const both = calcBuild({ ...base, cos: { middle: [25003], lower: [25012] } });
+    // Lower alone: STR +3, DEX -3; the pair adds INT +3, DEX +3.
+    expect(both.total.int - mid.total.int).toBe(3);
+    expect(both.total.dex - mid.total.dex).toBe(0);
+    expect(both.counted.some((l) => l.from.includes('Change STR'))).toBe(true);
+  });
+});
