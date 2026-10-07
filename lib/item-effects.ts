@@ -140,6 +140,7 @@ export function bonusText([type, value, target, per, skill, scaling]: Bonus): st
   label = label.replace('{s}', skill ? ` ${skill}` : '').replace(/\s+/g, ' ').trim();
   // "ตี" with no target is just more damage.
   if (type === 'damage_percent' && !t) label = 'ดาเมจ';
+  if (type === 'damage_taken_percent' && !t) label = 'ดาเมจที่โดนทุกแบบ';
   const num = `${value > 0 ? '+' : ''}${value}${info?.unit ?? ''}`;
   if (scaling) return `${label} ${num} ต่อเลเวล ${scaling}`;
   return per ? `${label} ${num} ทุก +${per}` : `${label} ${num}`;

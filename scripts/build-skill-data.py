@@ -180,6 +180,10 @@ EXTRA = {
     'endow-tornado': lambda lv: [['endow', 1, 'element:wind']],
     'endow-tsunami': lambda lv: [['endow', 1, 'element:water']],
     'weapon-perfection': lambda lv: [['no_size_penalty', 1, None]],
+    # Client text: Magnificat "doubles natural SP recovery", Mental Strength
+    # "reduces all damage taken by 90%" (its ASPD cut has no number, left out).
+    'magnificat': lambda lv: [['sp_recovery_percent', 100, None]],
+    'mental-strength': lambda lv: [['damage_taken_percent', -90, None]],
 }
 
 buffs = []

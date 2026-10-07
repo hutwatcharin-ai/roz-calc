@@ -347,7 +347,55 @@ export interface Build {
   bf?: Record<string, number>;
   /** The attack skill to measure against the target: [slug, level]. */
   as?: [string, number];
+  /** Monsters attacking you at once (3 and up cut FLEE). */
+  mob?: number;
+  /** The target is frozen, stoned, stunned or asleep. */
+  ail?: Ailment;
 }
+
+/**
+ * A status on the target (rAthena Renewal, the same in rozeroplanner's
+ * model): any of them makes every attack land; freeze and stone also halve
+ * hard DEF, raise MDEF by a quarter, and turn the monster Water 1 or Earth 1.
+ */
+export type Ailment = 'freeze' | 'stone' | 'stun' | 'sleep';
+export const AILMENTS: Record<Ailment, { th: string; element?: string }> = {
+  freeze: { th: 'แข็ง', element: 'Water' },
+  stone: { th: 'กลายเป็นหิน', element: 'Earth' },
+  stun: { th: 'มึน' },
+  sleep: { th: 'หลับ' },
+};
+
+/** The monster as a frozen or stoned one is: Water/Earth 1, hard DEF halved, MDEF +25%. */
+function withAilment(target: Target | null, ail: Ailment | undefined): Target | null {
+  const el = ail ? AILMENTS[ail].element : undefined;
+  if (!target || !el) return target;
+  return {
+    ...target,
+    element: el,
+    element_level: 1,
+    def: target.def === null ? null : Math.floor(target.def / 2),
+    mdef: target.mdef == null ? target.mdef : target.mdef + Math.floor(target.mdef / 4),
+  };
+}
+
+/**
+ * FLEE left when several monsters attack at once (rAthena agi_penalty:
+ * from the 3rd attacker on, 10% of FLEE per monster past the 2nd). Not
+ * measured in Global yet.
+ */
+export function mobbedFlee(flee: number, attackers: number): number {
+  const n = Math.max(0, attackers - 2);
+  return Math.max(0, flee - Math.floor((flee * n * 10) / 100));
+}
+
+/**
+ * Potions in the simulator, with what the game's own text says each heals
+ * ("Recovers about 325 HP"). sp: heals SP instead of HP.
+ */
+export const POTION_HEAL: Record<number, { amount: number; sp?: boolean }> = {
+  501: { amount: 45 }, 502: { amount: 105 }, 503: { amount: 175 }, 504: { amount: 325 }, 505: { amount: 60, sp: true },
+};
 
 export const EMPTY_BUILD: Build = {
   cls: 'swordsman',
@@ -418,6 +466,8 @@ export interface BuildResult {
   warnings: string[];
   /** Skills some worn line scales with; their levels come from Build.sk. */
   skills: string[];
+  /** Potion healing in percent of the potion's own amount: VIT (INT for SP) ×2 plus item bonuses. */
+  potionRate: { hp: number; sp: number };
   vs: TargetResult | null;
 }
 
@@ -428,7 +478,12 @@ export interface TargetResult {
   dodge: number | null;
   /** FLEE still needed for the 95% cap; 0 when there. */
   fleeShort: number | null;
+  /** FLEE after the mobbing cut (equals flee with fewer than 3 attackers). */
+  fleeMobbed: number;
   damage: number | null;
+  /** Lowest and highest auto-attack damage from the weapon ATK roll. */
+  damageMin: number | null;
+  damageMax: number | null;
   multiplier: number;
   /** Dual wielding: what each hand lands after its mastery share; damage is their sum. */
   hands?: { right: number; left: number; rightPct: number; leftPct: number } | null;
@@ -511,7 +566,8 @@ function cap(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-export function calcBuild(build: Build, target: Target | null = null): BuildResult {
+export function calcBuild(build: Build, mobTarget: Target | null = null): BuildResult {
+  const target = withAilment(mobTarget, build.ail);
   const warnings: string[] = [];
   const counted: Line[] = [];
   const skipped: Line[] = [];
@@ -557,6 +613,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   let hardMdef = 0;
   let wornWeight = 0;
   let weaponAtk = 0;
+  // Weapon ATK rolls ±5% per weapon level around the item's own ATK each hit
+  // (rAthena Renewal); refine is not rolled. Fits prontera's in-game check
+  // (117 predicted, 114-120 seen) where a flat ±15% would not.
+  let weaponVar = 0;
+  let leftVar = 0;
   let weaponMatk = 0;
   let shield = false;
   let left: GearItem | null = null;
@@ -591,12 +652,14 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       weaponRefine = w.r;
       weaponEl = fx?.el ?? null;
       weaponAtk = (item.atk ?? 0) + (ref?.stat === 'ATK' ? ref.value : 0);
+      weaponVar = Math.floor(((item.atk ?? 0) * 5 * (item.wl ?? 1)) / 100);
       // Staffs and other MATK weapons: refine adds the same to MATK (lib/item-effects refineBonusAt).
       weaponMatk = item.matk ? item.matk + (ref?.stat === 'ATK' ? ref.value : 0) : 0;
     } else if (leftWeapon) {
       left = item;
       leftEl = fx?.el ?? null;
       leftAtk = (item.atk ?? 0) + (ref?.stat === 'ATK' ? ref.value : 0);
+      leftVar = Math.floor(((item.atk ?? 0) * 5 * (item.wl ?? 1)) / 100);
     } else if (ref?.stat === 'DEF') {
       hardDef += ref.value;
     }
@@ -755,9 +818,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
   const other = [...sums.values()].filter((s) => s.target !== null || s.skill !== null || !WINDOW.has(s.type));
 
   let vs: TargetResult | null = null;
+  const fleeMobbed = mobbedFlee(flee, build.mob ?? 1);
   if (target) {
-    const hitChance = target.hit_100 !== null ? hitChanceVsMob(hit, target.hit_100) : null;
-    const dodge = target.flee_95 !== null ? 100 - mobHitChance(target.flee_95, flee) : null;
+    const ail = build.ail ? AILMENTS[build.ail] : null;
+    const hitChance = ail ? 100 : target.hit_100 !== null ? hitChanceVsMob(hit, target.hit_100) : null;
+    const dodge = target.flee_95 !== null ? 100 - mobHitChance(target.flee_95, fleeMobbed) : null;
     // Damage multipliers from lines aimed at what this monster is, one
     // factor per kind (race, size, element, boss), plus the untargeted ones.
     const byKind = new Map<string, number>();
@@ -802,18 +867,25 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       targetLevel: target.level,
       targetVit: target.vit,
     });
-    const raw = hand(weaponAtk, wt, weaponEl, 2);
-    let hands: TargetResult['hands'] = null;
-    let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier) + mastery) : null;
-    if (left && damage !== null) {
-      const leftRaw = hand(leftAtk, left.wt ?? 'dagger', leftEl, 1);
-      const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
-      const leftPct = 30 + 10 * Math.min(5, build.sk?.[LEFT_MASTERY] ?? 0);
-      const r = Math.max(1, Math.floor((damage * rightPct) / 100));
-      const l = leftRaw ? Math.max(1, Math.floor((Math.floor(leftRaw.damage * multiplier) * leftPct) / 100)) : 0;
-      hands = { right: r, left: l, rightPct, leftPct };
-      damage = r + l;
-    }
+    // One auto-attack with the weapon ATK rolled at `roll` (-1 low, 0 mid, 1 high).
+    const auto = (roll: number) => {
+      const raw = hand(weaponAtk + roll * weaponVar, wt, weaponEl, 2);
+      let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier) + mastery) : null;
+      let hands: TargetResult['hands'] = null;
+      if (left && damage !== null) {
+        const leftRaw = hand(leftAtk + roll * leftVar, left.wt ?? 'dagger', leftEl, 1);
+        const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
+        const leftPct = 30 + 10 * Math.min(5, build.sk?.[LEFT_MASTERY] ?? 0);
+        const r = Math.max(1, Math.floor((damage * rightPct) / 100));
+        const l = leftRaw ? Math.max(1, Math.floor((Math.floor(leftRaw.damage * multiplier) * leftPct) / 100)) : 0;
+        hands = { right: r, left: l, rightPct, leftPct };
+        damage = r + l;
+      }
+      return { damage, hands };
+    };
+    const { damage, hands } = auto(0);
+    const damageMin = damage === null ? null : auto(-1).damage;
+    const damageMax = damage === null ? null : auto(1).damage;
     // Time to kill with auto-attacks: expected damage per swing (hit chance
     // counted) at the swing rate ASPD gives.
     const aps = aspd !== null ? attacksPerSecond(aspd) : null;
@@ -873,8 +945,11 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
       hitChance,
       hitShort: target.hit_100 !== null ? Math.max(0, target.hit_100 - hit) : null,
       dodge,
-      fleeShort: target.flee_95 !== null ? Math.max(0, target.flee_95 - flee) : null,
+      fleeShort: target.flee_95 !== null ? Math.max(0, target.flee_95 - fleeMobbed) : null,
+      fleeMobbed,
       damage,
+      damageMin,
+      damageMax,
       multiplier,
       hands,
       hp: mobHp,
@@ -915,6 +990,8 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     skipped,
     warnings: [...new Set(warnings)],
     skills: [...skills].sort(),
+    // rAthena: a potion heals +2% per VIT (SP potions: per INT), plus item lines.
+    potionRate: { hp: 100 + vit * 2 + get('item_heal_percent'), sp: 100 + int * 2 + get('item_heal_percent') },
     vs,
   };
 }
@@ -995,5 +1072,7 @@ export function sanitizeBuild(raw: any): Build | null {
     ...(Object.keys(sk).length ? { sk } : {}),
     ...(Object.keys(bf).length ? { bf } : {}),
     ...(as ? { as } : {}),
+    ...(clampInt(raw.mob, 1, 10, 1) > 1 ? { mob: clampInt(raw.mob, 1, 10, 1) } : {}),
+    ...(typeof raw.ail === 'string' && raw.ail in AILMENTS ? { ail: raw.ail as Ailment } : {}),
   };
 }

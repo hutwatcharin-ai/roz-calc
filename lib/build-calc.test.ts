@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_GEAR, calcBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, optionRangeText, type Build, type Target } from './build-calc';
+import { ALL_GEAR, calcBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, mobbedFlee, optionRangeText, type Build, type Target } from './build-calc';
 
 const first = (test: (g: (typeof ALL_GEAR)[string]) => boolean) => Number(Object.entries(ALL_GEAR).find(([, g]) => test(g))![0]);
 // Hood: a garment with a card slot and no effects of its own.
@@ -354,5 +354,57 @@ describe('buffs read from the skill text', () => {
   it('Rising Dragon raises MaxHP by its level in percent', () => {
     const plain = calcBuild({ ...base, cls: 'monk' }).hp!;
     expect(calcBuild({ ...base, cls: 'monk', bf: { 'rising-dragon': 10 } }).hp).toBe(Math.floor(plain * 1.1));
+  });
+});
+
+describe('mobbing, ailments, damage roll, potions', () => {
+  const mob: Target = {
+    name: 'Test', level: 40, vit: 20, def: 30, size: 'Medium', element: 'Fire', element_level: 1, race: 'Brute', boss: false,
+    hit_100: 400, flee_95: 280, hp: 5000, mdef: 20, int: 10,
+  };
+
+  it('cuts FLEE by 10% per attacker from the third', () => {
+    expect(mobbedFlee(200, 1)).toBe(200);
+    expect(mobbedFlee(200, 2)).toBe(200);
+    expect(mobbedFlee(200, 3)).toBe(180);
+    expect(mobbedFlee(200, 5)).toBe(140);
+    const flee = calcBuild({ ...base }).flee;
+    const near = { ...mob, flee_95: flee + 10 }; // 85% dodge alone
+    const one = calcBuild({ ...base }, near).vs!;
+    const four = calcBuild({ ...base, mob: 4 }, near).vs!;
+    expect(four.fleeMobbed).toBe(mobbedFlee(flee, 4));
+    expect(four.dodge!).toBeLessThan(one.dodge!);
+  });
+
+  it('a frozen monster is always hit, Water 1, with half its DEF', () => {
+    const b: Build = { ...base, g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } } };
+    const plain = calcBuild(b, mob).vs!;
+    expect(plain.hitChance).toBeLessThan(100);
+    const frozen = calcBuild({ ...b, ail: 'freeze' }, mob).vs!;
+    expect(frozen.hitChance).toBe(100);
+    const water = calcBuild(b, { ...mob, element: 'Water', def: 15 }).vs!;
+    expect(frozen.damage).toBe(water.damage);
+    expect(calcBuild({ ...b, ail: 'stun' }, mob).vs!.damage).toBe(plain.damage);
+  });
+
+  it('rolls weapon ATK ±5% per weapon level', () => {
+    const [id] = Object.entries(ALL_GEAR).find(([, g]) => g.on.includes('weapon') && (g.wl ?? 0) >= 3 && (g.atk ?? 0) >= 100 && g.cls?.includes('swordsman'))!;
+    const r = calcBuild({ ...base, g: { weapon: { id: Number(id), r: 0, c: [] } } }, mob).vs!;
+    expect(r.damageMin!).toBeLessThan(r.damage!);
+    expect(r.damageMax!).toBeGreaterThan(r.damage!);
+    const knife = calcBuild({ ...base, g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } } }, mob).vs!;
+    expect(knife.damageMin).toBe(knife.damage); // 17 ATK × 5%: rounds to no roll
+  });
+
+  it('potions heal 2% more per VIT', () => {
+    const r = calcBuild({ ...base, st: { ...base.st, vit: 50 } });
+    expect(r.potionRate.hp).toBe(100 + r.total.vit * 2);
+  });
+
+  it('keeps mob and ailment through a share link', () => {
+    const b = decodeBuild(encodeBuild({ ...base, mob: 5, ail: 'stone' }))!;
+    expect(b.mob).toBe(5);
+    expect(b.ail).toBe('stone');
+    expect(decodeBuild(encodeBuild({ ...base, mob: 99, ail: 'x' as never }))!.mob).toBe(10);
   });
 });
