@@ -20,7 +20,6 @@
 import BuildSimulator from '@/components/BuildSimulator';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/jsonld';
-import { buildPresets } from '@/lib/build-presets';
 
 const DESCRIPTION =
   'จำลองบิลด์และคำนวณสเตตัส Ragnarok Zero: เลือกอาชีพ อัปสเตตัสตามแต้มจริง ใส่อุปกรณ์ ตีบวก การ์ด เอนชานต์ อาหาร แล้วดู HIT FLEE CRI ATK MATK ASPD HP SP และตีมอนที่เลือกโดนกี่ %';
@@ -54,7 +53,7 @@ export default function BuildPage() {
           {PARADE.map((c) => <img key={c} src={`/images/jobs/${c}.png`} alt="" width={72} height={72} />)}
         </div>
       </header>
-      <BuildSimulator presets={buildPresets()} />
+      <BuildSimulator />
 
       <article className="bguide">
         <section className="card">

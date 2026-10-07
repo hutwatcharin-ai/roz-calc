@@ -30,7 +30,6 @@ import { bonusText, refineBonusAt } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
 import { supabaseBrowser } from '@/lib/supabase';
-import type { BuildPreset } from '@/lib/build-presets';
 import { dollBody, dollHat, dollSex, dollShield, dollStance, dollWeapon, type Sex } from '@/lib/build-doll';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import foodFile from '@/data/food-buffs.json';
@@ -111,12 +110,10 @@ function PanelHead({ icon, title, th, meta, pink }: { icon: string; title: strin
 }
 
 
-export default function BuildSimulator({ initial, sharedId, presets = [] }: {
+export default function BuildSimulator({ initial, sharedId }: {
   /** A shared build (/b/<id>): opened as is, and not saved over this browser's own build until edited. */
   initial?: Build;
   sharedId?: string;
-  /** Sample builds from the class guides (lib/build-presets). */
-  presets?: BuildPreset[];
 } = {}) {
   const [build, setBuild] = useState<Build>(EMPTY_BUILD);
   const [ready, setReady] = useState(false);
@@ -149,6 +146,10 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
   const [fromLink, setFromLink] = useState(false);
   const [saved, setSaved] = useState<SavedBuild[]>([]);
   const [saveName, setSaveName] = useState('');
+  // Which saved build is on screen, so the list shows it rather than snapping
+  // back to its placeholder, and which one is waiting for a delete confirm.
+  const [loadedName, setLoadedName] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
   const [potion, setPotion] = useState(504);
   useEffect(() => {
     try {
@@ -170,7 +171,14 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
     const name = (saveName.trim() || `${classStats(build.cls)?.name ?? build.cls} Lv${build.lv}`).slice(0, 40);
     storeSaved([{ name, b: encodeBuild(build) }, ...saved.filter((x) => x.name !== name)].slice(0, MAX_SAVED));
     setSaveName('');
+    setLoadedName(name);
     setShareMsg(`บันทึก "${name}" แล้ว`);
+  }
+  function deleteSaved(name: string) {
+    storeSaved(saved.filter((x) => x.name !== name));
+    if (loadedName === name) setLoadedName('');
+    setConfirmDelete(null);
+    setShareMsg(`ลบ "${name}" แล้ว`);
   }
   function loadEncoded(b: string) {
     const next = decodeBuild(b);
@@ -558,33 +566,36 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
           {/* CHARACTER */}
           <section className="card buildsim__panel">
             <PanelHead icon={HAS_SPRITE.has(build.cls) ? `/images/jobs/${build.cls}.png` : '/images/items/2228.gif'} title="CHARACTER" th="ตัวละคร" meta={`${TIER_TH[CLASSES.find((c) => c.slug === build.cls)?.tier ?? ''] ?? ''}`} />
-            {/* Several builds in this browser, and samples from the class guides. */}
+            {/* Builds saved in this browser (owner, 7 Oct 2026: only the
+                player's own -- the guide samples crowded the list). The list
+                keeps showing the build that was loaded; deleting asks first. */}
             <div className="buildsim__saved">
-              <select aria-label="โหลดบิลด์" value="" onChange={(e) => e.target.value && loadEncoded(e.target.value)}>
-                <option value="">โหลดบิลด์…</option>
-                {saved.length > 0 && (
-                  <optgroup label="บิลด์ที่บันทึกไว้">
-                    {saved.map((x) => <option key={`s${x.name}`} value={x.b}>{x.name}</option>)}
-                  </optgroup>
-                )}
-                {presets.some((x) => x.cls === build.cls) && (
-                  <optgroup label={`ตัวอย่างจากไกด์ ${classStats(build.cls)?.name ?? ''}`}>
-                    {presets.filter((x) => x.cls === build.cls).map((x) => <option key={x.label} value={x.b}>{x.label}</option>)}
-                  </optgroup>
-                )}
-                {presets.some((x) => x.cls !== build.cls) && (
-                  <optgroup label="ตัวอย่างจากไกด์ อาชีพอื่น">
-                    {presets.filter((x) => x.cls !== build.cls).map((x) => <option key={x.label} value={x.b}>{x.label}</option>)}
-                  </optgroup>
-                )}
+              <select
+                aria-label="บิลด์ที่บันทึกไว้"
+                value={saved.some((x) => x.name === loadedName) ? loadedName : ''}
+                disabled={saved.length === 0}
+                onChange={(e) => {
+                  const pick = saved.find((x) => x.name === e.target.value);
+                  if (!pick) return;
+                  loadEncoded(pick.b);
+                  setLoadedName(pick.name);
+                  setConfirmDelete(null);
+                }}
+              >
+                <option value="">{saved.length ? 'เปิดบิลด์ที่บันทึกไว้…' : 'ยังไม่มีบิลด์ที่บันทึกไว้'}</option>
+                {saved.map((x) => <option key={x.name} value={x.name}>{x.name}</option>)}
               </select>
               <input type="text" maxLength={40} placeholder="ตั้งชื่อบิลด์" value={saveName} aria-label="ชื่อบิลด์" onChange={(e) => setSaveName(e.target.value)} />
               <button type="button" onClick={saveCurrent}>บันทึก</button>
-              {saved.length > 0 && (
-                <select aria-label="ลบบิลด์ที่บันทึก" value="" onChange={(e) => e.target.value && storeSaved(saved.filter((x) => x.name !== e.target.value))}>
-                  <option value="">ลบ…</option>
-                  {saved.map((x) => <option key={`d${x.name}`} value={x.name}>{x.name}</option>)}
-                </select>
+              {saved.some((x) => x.name === loadedName) && confirmDelete !== loadedName && (
+                <button type="button" className="buildsim__del" onClick={() => setConfirmDelete(loadedName)}>ลบบิลด์นี้</button>
+              )}
+              {confirmDelete && (
+                <span className="buildsim__confirm" role="alert">
+                  ลบ &ldquo;{confirmDelete}&rdquo; ทิ้งเลยไหม?
+                  <button type="button" className="buildsim__del" onClick={() => deleteSaved(confirmDelete)}>ลบเลย</button>
+                  <button type="button" onClick={() => setConfirmDelete(null)}>ยกเลิก</button>
+                </span>
               )}
             </div>
             <div className="buildsim__hero">

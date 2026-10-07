@@ -4663,9 +4663,11 @@ html .tag { border-radius: 4px; }
 /* Saved builds, passives, buffs, option ranges, potions, skills vs target (7 Oct 2026). */
 .buildsim__saved { display: flex; flex-wrap: wrap; gap: 6px; margin: -2px 0 14px; padding-bottom: 14px; border-bottom: 1px dashed rgba(61, 232, 255, .2); }
 .buildsim__saved select { flex: 1 1 200px; min-width: 0; min-height: 38px; font-size: 13px; }
-.buildsim__saved select:last-child { flex: 0 0 auto; }
 .buildsim__saved input { flex: 1 1 140px; min-width: 0; min-height: 38px; font-size: 13px; }
 .buildsim__saved button { min-height: 38px; padding: 0 14px; border: 1px solid var(--yellow); border-radius: 8px; background: rgba(255, 229, 61, .1); color: var(--yellow); font: inherit; font-size: 13px; cursor: pointer; }
+.buildsim__saved select:disabled { opacity: .6; }
+.buildsim__saved .buildsim__del { border-color: var(--pink); background: rgba(255, 61, 154, .1); color: var(--pink); }
+.buildsim__confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; flex-basis: 100%; font-size: 13px; color: var(--text); }
 .buildsim__skills li img, .buildsim__noicon { flex: none; width: 24px; height: 24px; image-rendering: pixelated; }
 .buildsim__noicon { border: 1px dashed var(--hair); border-radius: 6px; }
 .buildsim__skills li > span { flex: 1; min-width: 0; }
