@@ -14,6 +14,8 @@ import { timeAgoTh } from '@/lib/time-ago';
 import { getLastUpdated } from '@/lib/last-updated';
 import ReactDOM from 'react-dom';
 import NowPlaying from '@/components/NowPlaying';
+import HomeBuildStrip from '@/components/HomeBuildStrip';
+import { homeBuildClasses } from '@/lib/home-build';
 import { splitNews } from '@/lib/news';
 
 
@@ -103,10 +105,15 @@ export default async function HomePage({
   const range = Number(searchParams.range ?? 10);
   const showC = searchParams.c === '1';
 
-  const [rows, stats, lastUpdated] = await Promise.all([
+  const [rows, stats, lastUpdated, buildClasses] = await Promise.all([
     searched ? getFarmingRows(Math.max(1, level - range), level + range, showC) : Promise.resolve([]),
     getSiteStats(),
     getLastUpdated(),
+    // A failed lookup leaves the strip with its start button only.
+    homeBuildClasses().catch((e) => {
+      console.error('home build classes failed', e);
+      return [];
+    }),
   ]);
 
   // The equipment card's figure comes from the same count the stat row uses,
@@ -158,6 +165,10 @@ export default async function HomePage({
           <Link href="/guides/faq" className="homehero__faq">เล่นใหม่? เริ่มที่คำถามที่ถามบ่อย →</Link>
         </p>
       </section>
+
+      {/* The flagship tool, above the four cards and below the hero that
+          says what the site is (owner, 7 Oct 2026). */}
+      <HomeBuildStrip classes={buildClasses} />
 
       <div className="qgrid">
         {/* Card one IS the tool, not a link to it: the embedded form submits

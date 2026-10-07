@@ -143,6 +143,10 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
   const [sharing, setSharing] = useState(false);
   // Edited since the page opened: until then a shared build is someone else's.
   const [dirty, setDirty] = useState(false);
+  // Opened from a link that carries a build (?b=, the homepage's class
+  // buttons): the build this browser remembers stays until the visitor
+  // changes something, so a look at a sample never costs them their own.
+  const [fromLink, setFromLink] = useState(false);
   const [saved, setSaved] = useState<SavedBuild[]>([]);
   const [saveName, setSaveName] = useState('');
   const [potion, setPotion] = useState(504);
@@ -181,6 +185,7 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
     let start: Build | null = null;
     try {
       start = initial ?? decodeBuild(new URLSearchParams(window.location.search).get('b'));
+      if (start && !initial) setFromLink(true);
       if (!start) start = sanitizeBuild(JSON.parse(window.localStorage.getItem(BUILD_KEY) ?? 'null'));
     } catch {
       // Blocked or broken storage: start empty.
@@ -198,15 +203,15 @@ export default function BuildSimulator({ initial, sharedId, presets = [] }: {
   const result = useMemo(() => calcBuild(build, target), [build, target]);
 
   useEffect(() => {
-    if (!ready || (initial && !dirty)) return;
+    if (!ready || ((initial || fromLink) && !dirty)) return;
     try {
       window.localStorage.setItem(BUILD_KEY, JSON.stringify(build));
       const prev = readPlayerNumbers(window.localStorage);
-      writePlayerNumbers(window.localStorage, { ...prev, level: build.lv, hit: result.hit, flee: result.flee });
+      writePlayerNumbers(window.localStorage, { ...prev, level: build.lv, hit: result.hit, flee: result.flee, ...(result.aspd ? { aspd: result.aspd } : {}) });
     } catch {
       // Not remembering it does not stop the page working.
     }
-  }, [ready, dirty, initial, build, result.hit, result.flee]);
+  }, [ready, dirty, initial, fromLink, build, result.hit, result.flee, result.aspd]);
 
   // The bottom sheet on phones: no page scroll behind it.
   useEffect(() => {
