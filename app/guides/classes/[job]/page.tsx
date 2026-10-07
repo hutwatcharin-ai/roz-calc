@@ -26,7 +26,8 @@ import { mapImage } from '@/lib/map-image';
 import { CLASS_GUIDES, citeHref, classGuide } from '@/lib/class-guides';
 import type { Cite, CitedLine, ClassBuild, ClassGuide, StatRow } from '@/lib/class-guides/types';
 import { BASE_LEVEL_CAP as LEVEL_CAP } from '@/lib/level-cap';
-import { ASPD_CAP, baseHpSp, classStats, jobBonusAt, rowMinLevel, STATS, WEAPON_TH } from '@/lib/class-stats';
+import { ASPD_CAP, baseHpSp, classStats, jobBonusAt, rowMinLevel, statFromText, STATS, WEAPON_TH } from '@/lib/class-stats';
+import { EMPTY_BUILD, encodeBuild, maxJobLevel, sanitizeBuild } from '@/lib/build-calc';
 import { buildPlan, type JobPlan } from '@/lib/skill-plan';
 import trees from '@/data/skill-trees.json';
 import SourceToggle from '@/components/SourceToggle';
@@ -157,6 +158,7 @@ function StatBars({ row, guide }: { row: StatRow; guide: ClassGuide }) {
       )}
       {row.note && <p className="cguide__note">{row.note}</p>}
       <RowBudget row={row} />
+      <OpenInBuild row={row} slug={guide.slug} />
       <Src cites={row.cites} guide={guide} />
     </div>
   );
@@ -177,6 +179,24 @@ function RowBudget({ row }: { row: StatRow }) {
       {!need.complete && ' (นับเฉพาะช่องที่เป็นตัวเลข)'}
       {' · ไม่หักโบนัสจาก Job'}
     </p>
+  );
+}
+
+// A player's stat row opened in the build simulator (SEO pass, 7 Oct 2026):
+// the class and the stats given as numbers, at the lowest level that can pay
+// for them (capped at the level cap). A row read off a status window may
+// already hold Job bonuses, so the simulator can show it over budget; it
+// says so itself.
+function OpenInBuild({ row, slug }: { row: StatRow; slug: string }) {
+  const need = rowMinLevel(row);
+  if (!need || !classStats(slug)) return null;
+  const st = Object.fromEntries(STATS.map((s) => [s, Math.max(1, statFromText(row[s]) ?? 1)])) as Record<(typeof STATS)[number], number>;
+  const build = sanitizeBuild({ ...EMPTY_BUILD, cls: slug, lv: Math.min(LEVEL_CAP, need.level ?? LEVEL_CAP), job: maxJobLevel(slug), st, g: {}, f: [] });
+  if (!build) return null;
+  return (
+    <Link className="cguide__tobuild" href={`/tools/build?b=${encodeBuild(build)}`} prefetch={false}>
+      ▶ เปิดสเตตัสนี้ในเครื่องจำลองบิลด์
+    </Link>
   );
 }
 

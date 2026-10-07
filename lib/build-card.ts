@@ -102,8 +102,8 @@ function clip(s: string, n: number): string {
   return s.length > n ? `${s.slice(0, n - 1)}…` : s;
 }
 
-/** The card as SVG text. */
-export function buildCardSvg(build: Build, id: string): string {
+/** The card as SVG text. `footer` replaces the short link (the tool page's own preview card). */
+export function buildCardSvg(build: Build, id: string, footer?: string): string {
   const r = calcBuild(build);
   const cls = classStats(build.cls);
   const parts: string[] = [];
@@ -174,16 +174,16 @@ export function buildCardSvg(build: Build, id: string): string {
     }
   });
   parts.push(text(W - 60, 552, 'จำลองบิลด์ Ragnarok Zero', 22, C.dim, { bold: true, anchor: 'end' }));
-  parts.push(text(W - 60, 584, `rozerothai.com/b/${id}`, 24, C.cyan, { bold: true, anchor: 'end' }));
+  parts.push(text(W - 60, 584, footer ?? `rozerothai.com/b/${id}`, 24, C.cyan, { bold: true, anchor: 'end' }));
 
   parts.push(`<rect width="${W}" height="${H}" fill="url(#scan)"/>`);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${parts.join('')}</svg>`;
 }
 
 /** The card as PNG bytes. */
-export async function buildCardPng(build: Build, id: string): Promise<Uint8Array> {
+export async function buildCardPng(build: Build, id: string, footer?: string): Promise<Uint8Array> {
   await init();
-  const resvg = new Resvg(buildCardSvg(build, id), {
+  const resvg = new Resvg(buildCardSvg(build, id, footer), {
     font: { fontBuffers: fonts, defaultFontFamily: 'Sarabun', loadSystemFonts: false },
     fitTo: { mode: 'original' },
   });

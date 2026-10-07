@@ -77,11 +77,13 @@ function optionLabel([type, target]: [string, string | null]): string {
 const OPTION_LABELS = OPTION_TYPES.map((o) => ({ key: optionKey(o), label: optionLabel(o) }));
 
 /** A panel title: pixel icon, arcade label, and an optional count on the right. */
-function PanelHead({ icon, title, meta, pink }: { icon: string; title: string; meta?: string; pink?: boolean }) {
+function PanelHead({ icon, title, th, meta, pink }: { icon: string; title: string; th: string; meta?: string; pink?: boolean }) {
   return (
     <h2 className={`buildsim__h${pink ? ' buildsim__h--pink' : ''}`}>
       <span className="buildsim__hicon" aria-hidden="true"><img src={icon} alt="" width={24} height={24} /></span>
       {title}
+      {/* The Thai name, so the heading says something to a reader (and to search). */}
+      <span className="buildsim__hth">{th}</span>
       {meta && <small>{meta}</small>}
     </h2>
   );
@@ -470,7 +472,7 @@ export default function BuildSimulator({ initial, sharedId }: {
         <div className="buildsim__main">
           {/* CHARACTER */}
           <section className="card buildsim__panel">
-            <PanelHead icon={HAS_SPRITE.has(build.cls) ? `/images/jobs/${build.cls}.png` : '/images/items/2228.gif'} title="CHARACTER" meta={`${TIER_TH[CLASSES.find((c) => c.slug === build.cls)?.tier ?? ''] ?? ''}`} />
+            <PanelHead icon={HAS_SPRITE.has(build.cls) ? `/images/jobs/${build.cls}.png` : '/images/items/2228.gif'} title="CHARACTER" th="ตัวละคร" meta={`${TIER_TH[CLASSES.find((c) => c.slug === build.cls)?.tier ?? ''] ?? ''}`} />
             <div className="buildsim__hero">
               <div className="buildsim__heroform">
                 <label className="buildsim__field buildsim__field--wide">
@@ -551,7 +553,7 @@ export default function BuildSimulator({ initial, sharedId }: {
               tap opens in the editor under it (refine, cards, enchants,
               options), so the window stays readable with everything on. */}
           <section className="card buildsim__panel">
-            <PanelHead icon="/images/items/1116.gif" title="EQUIPMENT" meta={`ใส่แล้ว ${Object.keys(build.g).length}/${SLOTS.length}`} />
+            <PanelHead icon="/images/items/1116.gif" title="EQUIPMENT" th="ของที่ใส่" meta={`ใส่แล้ว ${Object.keys(build.g).length}/${SLOTS.length}`} />
             <div className="buildsim__tabs" role="tablist" aria-label="ชนิดของที่ใส่">
               <button type="button" role="tab" aria-selected={eqTab === 'gear'} className={eqTab === 'gear' ? 'is-on' : undefined} onClick={() => setEqTab('gear')}>
                 อุปกรณ์ <small>{Object.keys(build.g).length}/{SLOTS.length}</small>
@@ -790,7 +792,7 @@ export default function BuildSimulator({ initial, sharedId }: {
 
           {/* FOOD */}
           <section className="card buildsim__panel">
-            <PanelHead icon="/images/items/12065.gif" title="FOOD & BUFF" meta={build.f.length ? `${build.f.length} อย่าง` : undefined} />
+            <PanelHead icon="/images/items/12065.gif" title="FOOD & BUFF" th="อาหารและยา" meta={build.f.length ? `${build.f.length} อย่าง` : undefined} />
             <div className="buildsim__foods">
               {build.f.map((id) => {
                 const f = foodById(id);
@@ -817,7 +819,7 @@ export default function BuildSimulator({ initial, sharedId }: {
         <aside className="buildsim__side">
           {/* STATUS WINDOW */}
           <section className="card buildsim__window">
-            <PanelHead icon="/images/items/2228.gif" title="STATUS" pink meta={`Lv ${build.lv} / ${build.job}`} />
+            <PanelHead icon="/images/items/2228.gif" title="STATUS" th="หน้าต่างสเตตัส" pink meta={`Lv ${build.lv} / ${build.job}`} />
             <p className="buildsim__who">{cls?.name} · Lv {build.lv} / Job {build.job} · {weapon ? WEAPON_TH[weapon.wt ?? ''] ?? weapon.n : 'มือเปล่า'}</p>
             <dl className="buildsim__grid">
               <div className="is-big"><dt>HIT</dt><dd className="mono">{result.hit}</dd></div>
@@ -861,7 +863,7 @@ export default function BuildSimulator({ initial, sharedId }: {
 
           {/* TARGET */}
           <section className="card buildsim__panel">
-            <PanelHead icon="/images/monsters/1002.gif" title="TARGET" />
+            <PanelHead icon="/images/monsters/1002.gif" title="TARGET" th="มอนเป้าหมาย" />
             <div className="buildsim__mob">
               <input type="search" placeholder="ชื่อมอน เช่น Poring, หมาป่า" value={mobQuery}
                 onFocus={() => void wantMobs()} onChange={(e) => setMobQuery(e.target.value)} aria-label="ค้นหามอน" />
@@ -940,7 +942,7 @@ export default function BuildSimulator({ initial, sharedId }: {
 
           {/* EFFECTS */}
           <section className="card buildsim__panel">
-            <PanelHead icon="/images/items/4001.gif" title="EFFECTS" meta={result.skipped.length ? `ยังไม่นับ ${result.skipped.length}` : undefined} />
+            <PanelHead icon="/images/items/4001.gif" title="EFFECTS" th="ผลของไอเทม" meta={result.skipped.length ? `ยังไม่นับ ${result.skipped.length}` : undefined} />
             {result.other.length > 0 && (
               <>
                 <h3 className="buildsim__h3">ผลอื่นที่ได้ (ไม่อยู่ในหน้าต่างสเตตัส)</h3>

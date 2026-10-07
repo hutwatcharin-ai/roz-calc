@@ -2826,6 +2826,8 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .cguide__tag { display: inline-block; margin-inline-start: 8px; padding: 1px 9px; border-radius: 999px; background: var(--yellow); color: var(--yellow-ink); font: 700 12px/1.7 var(--font-sarabun), sans-serif; vertical-align: middle; }
 .cguide__pick .cguide__tag, .cguide__pick-body > .cguide__tag { margin: 0; align-self: flex-start; color: var(--yellow-ink); }
 .cguide__build { margin-top: 20px; }
+.cguide__tobuild { display: inline-flex; align-items: center; min-height: 36px; margin-top: 6px; padding: 0 12px; border: 1px solid var(--cyan); border-radius: 8px; color: var(--cyan); font-size: 13px; text-decoration: none; }
+.cguide__tobuild:hover { background: rgba(61, 232, 255, .12); }
 .cguide__buildtitle { margin: 0 0 6px; font: 700 20px/1.35 var(--font-sarabun), sans-serif; color: var(--text); }
 .cguide__glance-stats { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
 .cguide__glance-stats b { color: var(--yellow); font-weight: 700; }
@@ -4369,6 +4371,19 @@ html .tag { border-radius: 4px; }
 .bhero__parade img { width: 72px; height: 72px; margin-left: -14px; image-rendering: pixelated; filter: drop-shadow(0 0 8px rgba(61, 232, 255, .45)); animation: bhero-bob 2.4s ease-in-out infinite; }
 .bhero__parade img:nth-child(even) { animation-delay: -1.2s; }
 @keyframes bhero-bob { 50% { transform: translateY(-4px); } }
+.bhero__title span { display: block; margin-top: 4px; font-size: .46em; letter-spacing: .02em; color: var(--cyan); text-shadow: 0 0 10px rgba(61, 232, 255, .5); }
+/* Reading under the tool (SEO pass, 7 Oct 2026): how to use it, formulas, answers. */
+.bguide { display: grid; gap: 20px; margin-top: 28px; }
+.bguide h2 { margin: 0 0 12px; font-size: 18px; color: var(--cyan); }
+.bguide h3 { margin: 16px 0 4px; font-size: 15px; color: var(--yellow); }
+.bguide p, .bguide li { font-size: 14.5px; line-height: 1.75; color: var(--text); }
+.bguide p { margin: 0; }
+.bguide p.muted { color: var(--dim); font-size: 13px; margin-top: 10px; }
+.bguide ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.bguide__formulas { margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 8px; }
+.bguide__formulas div { padding: 10px 12px; border: 1px solid var(--hair); border-radius: 10px; background: rgba(7, 5, 26, .5); }
+.bguide__formulas dt { font-size: 13px; color: var(--yellow); font-weight: 600; }
+.bguide__formulas dd { margin: 4px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--dim); }
 .bhero__credit { margin: 22px 0 0; font-size: 11.5px; color: var(--faint); text-align: center; }
 .bhero__credit a { color: var(--faint); }
 
@@ -4382,6 +4397,7 @@ html .tag { border-radius: 4px; }
 .buildsim__side { position: sticky; top: 12px; }
 .buildsim__panel { position: relative; min-width: 0; }
 .buildsim__h { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(61, 232, 255, .18); font-size: 15px; letter-spacing: .16em; color: var(--cyan); text-shadow: 0 0 8px rgba(61, 232, 255, .6); }
+.buildsim__hth { font-size: 12.5px; letter-spacing: .02em; color: var(--dim); text-shadow: none; font-weight: 400; }
 .buildsim__h small { margin-left: auto; font-size: 11.5px; letter-spacing: .04em; color: var(--faint); text-shadow: none; font-weight: 400; }
 .buildsim__hicon { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--cyan); border-radius: 9px; background: #07051a; box-shadow: 0 0 10px rgba(61, 232, 255, .35); }
 .buildsim__hicon img { max-width: 28px; max-height: 28px; object-fit: contain; image-rendering: pixelated; }

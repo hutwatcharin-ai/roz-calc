@@ -12,7 +12,7 @@ export function websiteJsonLd() {
     name: 'RO Zero Thai',
     url: `${SITE_URL}/`,
     description:
-      'ฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด เควส ภาษาไทยของ Ragnarok Zero Global พร้อมเครื่องมือค้นของดรอปและคำนวณ HIT/FLEE',
+      'ฐานข้อมูลมอนสเตอร์ ไอเทม การ์ด เควส ภาษาไทยของ Ragnarok Zero Global พร้อมเครื่องมือค้นของดรอปและจำลองบิลด์',
     inLanguage: 'th',
     potentialAction: {
       '@type': 'SearchAction',
@@ -22,6 +22,24 @@ export function websiteJsonLd() {
       },
       'query-input': 'required name=search_term_string',
     },
+  };
+}
+
+/**
+ * A tool page (SEO audit of /tools/build, 7 Oct 2026). WebApplication with no
+ * Offer: the rule above keeps Offer off this site, and the tool is free.
+ */
+export function webApplicationJsonLd(opts: { name: string; path: string; description: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: opts.name,
+    url: `${SITE_URL}${opts.path}`,
+    description: opts.description,
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    inLanguage: 'th',
+    isAccessibleForFree: true,
   };
 }
 
