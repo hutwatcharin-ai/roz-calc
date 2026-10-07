@@ -28,6 +28,7 @@ import { bonusText, refineBonusAt } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
 import { supabaseBrowser } from '@/lib/supabase';
+import { dollBody, dollHat, dollSex, type Sex } from '@/lib/build-doll';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import foodFile from '@/data/food-buffs.json';
 import classFile from '@/data/class-stats.json';
@@ -98,6 +99,8 @@ export default function BuildSimulator({ initial, sharedId }: {
   const [eqTab, setEqTab] = useState<'gear' | 'costume'>('gear');
   // The equipped piece open in the editor under the equip window.
   const [active, setActive] = useState<Slot | null>(null);
+  // Which body the equip window draws; looks only, the numbers are the same.
+  const [dollGender, setDollGender] = useState<Sex>('m');
   const editorRef = useRef<HTMLDivElement>(null);
   // On a phone the editor sits under all ten tiles: bring it into view when a tile is tapped.
   function openEditor(slot: Slot) {
@@ -561,12 +564,36 @@ export default function BuildSimulator({ initial, sharedId }: {
             {eqTab === 'gear' ? (
               <>
                 <ul className="buildsim__slots">
-                  <li className="buildsim__doll" aria-hidden="true">
-                    <span className="buildsim__dollstage">
-                      {HAS_SPRITE.has(build.cls) ? <img src={`/images/jobs/${build.cls}.png`} alt="" width={107} height={107} /> : <b>?</b>}
-                    </span>
+                  <li className="buildsim__doll">
+                    {(() => {
+                      // The class in the game's own sprite, wearing the head
+                      // items (lower, middle, upper: the order the game draws them).
+                      const sex = dollSex(build.cls, dollGender);
+                      const body = dollBody(build.cls, sex);
+                      const hats = (['head_lower', 'head_middle', 'head_upper'] as const)
+                        .map((s) => (build.g[s] ? dollHat(build.g[s]!.id, build.cls, sex) : null))
+                        .filter((h): h is NonNullable<typeof h> => !!h);
+                      return (
+                        <span className="buildsim__dollstage" aria-hidden="true">
+                          <span className="buildsim__dollcanvas">
+                            {body && <img src={body.src} alt="" width={200} height={200} />}
+                            {hats.map((h) => (
+                              <img key={h.src} src={h.src} alt="" width={h.w} height={h.h} style={{ left: h.x, top: h.y, width: h.w, height: h.h }} />
+                            ))}
+                          </span>
+                        </span>
+                      );
+                    })()}
                     <b>{cls?.name}</b>
                     <small className="mono">Lv {build.lv} · Job {build.job}</small>
+                    <span className="buildsim__sex" role="group" aria-label="เพศตัวละคร">
+                      {(['m', 'f'] as const).map((g) => (
+                        <button key={g} type="button" aria-pressed={dollSex(build.cls, dollGender) === g}
+                          disabled={dollSex(build.cls, g) !== g} onClick={() => setDollGender(g)}>
+                          {g === 'm' ? '♂' : '♀'}
+                        </button>
+                      ))}
+                    </span>
                   </li>
                   {/* The game's own equip window: slots down both sides, the
                       character in the middle (grid areas in CSS). Phones list
