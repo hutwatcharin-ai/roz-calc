@@ -816,7 +816,7 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
     const mobHp = target.hp && target.hp > 0 ? target.hp : null;
     const landed = (hitChance ?? 100) / 100;
     const autoHits = mobHp && damage ? Math.ceil(mobHp / damage) : null;
-    const autoSeconds = mobHp && damage && aps && landed > 0 ? Math.round((mobHp / (damage * landed * aps)) * 10) / 10 : null;
+    const autoSeconds = mobHp && damage && aps && landed > 0 ? Math.round((mobHp / (damage * landed * aps)) * 100) / 100 : null;
 
     // One attack skill.
     let skill: SkillResult | null = null;
@@ -857,7 +857,7 @@ export function calcBuild(build: Build, target: Target | null = null): BuildResu
           interval: Math.round(interval * 100) / 100,
           castSeconds: Math.round(castSeconds * 100) / 100,
           casts,
-          seconds: mobHp && chance > 0 ? Math.round(((mobHp / (total1 * chance)) * interval) * 10) / 10 : null,
+          seconds: mobHp && chance > 0 ? Math.round(((mobHp / (total1 * chance)) * interval) * 100) / 100 : null,
           sp: row[6],
         };
       }

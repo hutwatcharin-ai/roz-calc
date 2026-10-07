@@ -4648,6 +4648,44 @@ html .tag { border-radius: 4px; }
   .buildsim__editbtns button { flex: 1; }
 }
 
+/* Saved builds, passives, buffs, option ranges, potions, skills vs target (7 Oct 2026). */
+.buildsim__saved { display: flex; flex-wrap: wrap; gap: 6px; margin: -2px 0 14px; padding-bottom: 14px; border-bottom: 1px dashed rgba(61, 232, 255, .2); }
+.buildsim__saved select { flex: 1 1 200px; min-width: 0; min-height: 38px; font-size: 13px; }
+.buildsim__saved select:last-child { flex: 0 0 auto; }
+.buildsim__saved input { flex: 1 1 140px; min-width: 0; min-height: 38px; font-size: 13px; }
+.buildsim__saved button { min-height: 38px; padding: 0 14px; border: 1px solid var(--yellow); border-radius: 8px; background: rgba(255, 229, 61, .1); color: var(--yellow); font: inherit; font-size: 13px; cursor: pointer; }
+.buildsim__skills li img, .buildsim__noicon { flex: none; width: 24px; height: 24px; image-rendering: pixelated; }
+.buildsim__noicon { border: 1px dashed var(--hair); border-radius: 6px; }
+.buildsim__skills li > span { flex: 1; min-width: 0; }
+.buildsim__skills li small { display: block; font-size: 10.5px; color: var(--faint); }
+.buildsim__optwrap { display: grid; gap: 2px; width: 100%; }
+.buildsim__optrange { font-size: 11px; color: var(--cyan); padding-left: 4px; }
+.buildsim__buffs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(61, 232, 255, .2); }
+.buildsim__buff { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 44px; padding: 4px 6px 4px 8px; border: 1px solid var(--cyan); border-radius: 10px; background: rgba(61, 232, 255, .07); font-size: 13px; }
+.buildsim__buff img { image-rendering: pixelated; flex: none; }
+.buildsim__buff > span { min-width: 0; }
+.buildsim__buff small { display: block; font-size: 10.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+.buildsim__buff select { min-height: 32px; padding: 0 24px 0 8px; font-size: 12px; background-position: right 7px center; }
+.buildsim__buff button { width: 30px; height: 30px; border: 0; background: transparent; color: var(--faint); font-size: 16px; cursor: pointer; }
+.buildsim__buff button:hover { color: var(--pink); }
+.buildsim__buffs .buildsim__foodadd { flex: 1 1 100%; }
+.buildsim__potion dt { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.buildsim__potion dt select { min-height: 30px; padding: 0 24px 0 8px; font-size: 12px; background-position: right 7px center; }
+.buildsim__potion dd { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 16px; }
+.buildsim__potion dd img { image-rendering: pixelated; }
+.buildsim__potionnote { display: block; margin-top: 4px; font-size: 10.5px; color: var(--faint); }
+.buildsim__ttk { margin-top: 12px; padding: 10px 12px; border: 1px solid rgba(255, 229, 61, .35); border-radius: 10px; background: rgba(255, 229, 61, .05); display: grid; gap: 8px; }
+.buildsim__ttk p { margin: 0; font-size: 13.5px; color: var(--dim); }
+.buildsim__ttk b { color: var(--yellow); }
+.buildsim__skillpick { display: flex; gap: 6px; }
+.buildsim__skillpick select { min-height: 38px; font-size: 13px; }
+.buildsim__skillpick select:first-child { flex: 1; min-width: 0; }
+.buildsim__skillres { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.buildsim__skillres div { padding: 6px 8px; border: 1px solid rgba(255, 229, 61, .25); border-radius: 8px; background: rgba(7, 5, 26, .55); }
+.buildsim__skillres dt { font-size: 10.5px; color: var(--faint); }
+.buildsim__skillres dt i { font-style: normal; color: var(--pink); }
+.buildsim__skillres dd { margin: 2px 0 0; font-size: 14px; color: var(--yellow); }
+
 @media (max-width: 900px) {
   .buildsim { grid-template-columns: minmax(0, 1fr); }
   .buildsim__side { position: static; }

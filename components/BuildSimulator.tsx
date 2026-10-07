@@ -18,7 +18,8 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS, MAX_OPTIONS,
+  ALL_BUFFS, ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS,
+  attacksFor, buffBySlug, maxOptionsFor, optionRangeText, passivesFor,
   OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsLeftHand, fitsSlot, gearById, slotLabel,
   isTwoHanded, maxJobLevel, optionKey, sanitizeBuild, stoneById, type Build, type CostumeSlot, type Slot, type Target,
 } from '@/lib/build-calc';
@@ -28,6 +29,7 @@ import { bonusText, refineBonusAt } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
 import { supabaseBrowser } from '@/lib/supabase';
+import type { BuildPreset } from '@/lib/build-presets';
 import { dollBody, dollHat, dollSex, dollShield, dollStance, dollWeapon, type Sex } from '@/lib/build-doll';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import foodFile from '@/data/food-buffs.json';
@@ -54,8 +56,26 @@ const SLOT_ICON: Record<Slot, number> = {
   weapon: 1201, shield: 460058, head_upper: 2220, head_middle: 2276, head_lower: 2267, armor: 2301, garment: 480378,
   footgear: 470011, accessory_1: 2601, accessory_2: 2601,
 };
+// Potions for "how many can I carry" (weights from the item data, in 0.1 units).
+const POTIONS: [number, string, number][] = [
+  [501, 'Red Potion', 7], [502, 'Orange Potion', 10], [503, 'Yellow Potion', 13], [504, 'White Potion', 15],
+  [505, 'Blue Potion', 15], [645, 'Concentration Potion', 10], [656, 'Awakening Potion', 15], [657, 'Berserk Potion', 20],
+];
+// Several builds kept in this browser (owner, 7 Oct 2026), beside the one in use.
+const SAVED_KEY = 'roz-calc:builds';
+const MAX_SAVED = 20;
+interface SavedBuild {
+  name: string;
+  b: string;
+}
+
 // Gauges fill against this; totals past 99 come from gear and Job bonuses.
 const STAT_GAUGE_MAX = 130;
+
+/** Seconds for a time-to-kill line: one decimal, "<0.1" for a one-hit kill. */
+function secs(x: number): string {
+  return x < 0.1 ? '<0.1' : String(Math.round(x * 10) / 10);
+}
 
 /** Points to go from `from` to `to` (0 when not higher). */
 function costBetween(from: number, to: number): number {
@@ -64,10 +84,10 @@ function costBetween(from: number, to: number): number {
 
 // What the open picker fills: a gear slot's item, card or enchant stone, or a
 // costume slot's stone. `at` is the gear slot or the costume slot.
-type PickKind = 'item' | 'card' | 'enchant' | 'costume' | 'food';
+type PickKind = 'item' | 'card' | 'enchant' | 'costume' | 'food' | 'buff';
 // `editor`: opened from the piece editor, so the picker shows there, not on the tile.
 type Picking = { at: string; kind: PickKind; index: number; editor?: boolean } | null;
-const PICK_TITLE: Record<PickKind, string> = { item: 'SELECT ITEM', card: 'SELECT CARD', enchant: 'SELECT ENCHANT', costume: 'SELECT STONE', food: 'SELECT FOOD' };
+const PICK_TITLE: Record<PickKind, string> = { item: 'SELECT ITEM', card: 'SELECT CARD', enchant: 'SELECT ENCHANT', costume: 'SELECT STONE', food: 'SELECT FOOD', buff: 'SELECT BUFF' };
 
 /** An option line's name without a number: "HIT", "ตีเผ่าสัตว์ %". */
 function optionLabel([type, target]: [string, string | null]): string {
@@ -90,10 +110,12 @@ function PanelHead({ icon, title, th, meta, pink }: { icon: string; title: strin
 }
 
 
-export default function BuildSimulator({ initial, sharedId }: {
+export default function BuildSimulator({ initial, sharedId, presets = [] }: {
   /** A shared build (/b/<id>): opened as is, and not saved over this browser's own build until edited. */
   initial?: Build;
   sharedId?: string;
+  /** Sample builds from the class guides (lib/build-presets). */
+  presets?: BuildPreset[];
 } = {}) {
   const [build, setBuild] = useState<Build>(EMPTY_BUILD);
   const [ready, setReady] = useState(false);
@@ -120,6 +142,38 @@ export default function BuildSimulator({ initial, sharedId }: {
   const [sharing, setSharing] = useState(false);
   // Edited since the page opened: until then a shared build is someone else's.
   const [dirty, setDirty] = useState(false);
+  const [saved, setSaved] = useState<SavedBuild[]>([]);
+  const [saveName, setSaveName] = useState('');
+  const [potion, setPotion] = useState(504);
+  useEffect(() => {
+    try {
+      const list = JSON.parse(window.localStorage.getItem(SAVED_KEY) ?? '[]');
+      if (Array.isArray(list)) setSaved(list.filter((x) => x && typeof x.name === 'string' && typeof x.b === 'string').slice(0, MAX_SAVED));
+    } catch {
+      // No saved builds.
+    }
+  }, []);
+  function storeSaved(list: SavedBuild[]) {
+    setSaved(list);
+    try {
+      window.localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+    } catch {
+      // Not kept; the list still works for this visit.
+    }
+  }
+  function saveCurrent() {
+    const name = (saveName.trim() || `${classStats(build.cls)?.name ?? build.cls} Lv${build.lv}`).slice(0, 40);
+    storeSaved([{ name, b: encodeBuild(build) }, ...saved.filter((x) => x.name !== name)].slice(0, MAX_SAVED));
+    setSaveName('');
+    setShareMsg(`บันทึก "${name}" แล้ว`);
+  }
+  function loadEncoded(b: string) {
+    const next = decodeBuild(b);
+    if (!next) return;
+    setBuild(next);
+    setDirty(true);
+    setActive(next.g.weapon ? 'weapon' : null);
+  }
 
   // A share link wins over what this browser remembers.
   useEffect(() => {
@@ -228,6 +282,15 @@ export default function BuildSimulator({ initial, sharedId }: {
     setPicking(null);
     setQuery('');
   }
+  function setBuff(slug: string, lv: number | null) {
+    const bf = { ...build.bf };
+    if (lv === null) delete bf[slug];
+    else bf[slug] = lv;
+    update({ bf });
+  }
+  function setAttack(slug: string, lv: number) {
+    update({ as: slug ? [slug, lv] : undefined });
+  }
   function setSkill(name: string, lv: number) {
     update({ sk: { ...build.sk, [name]: Math.max(0, Math.min(10, Math.floor(lv) || 0)) } });
   }
@@ -239,7 +302,7 @@ export default function BuildSimulator({ initial, sharedId }: {
   async function loadMonster(id: number) {
     const { data, error } = await supabaseBrowser()
       .from('monsters')
-      .select('id, name_en, level, vit, def, size, element, element_level, race, is_mvp, hit_100, flee_95, image_url')
+      .select('id, name_en, level, vit, def, mdef, int_, hp, size, element, element_level, race, is_mvp, hit_100, flee_95, image_url')
       .eq('id', id)
       .maybeSingle();
     if (error || !data) {
@@ -259,6 +322,10 @@ export default function BuildSimulator({ initial, sharedId }: {
       boss: !!data.is_mvp || entry?.tag === 'mini',
       hit_100: data.hit_100,
       flee_95: data.flee_95,
+      // 0 is the table's "unknown" for HP.
+      hp: data.hp && data.hp > 0 ? data.hp : null,
+      mdef: data.mdef,
+      int: data.int_,
     });
     setTargetImg(data.image_url ?? null);
     setMobQuery('');
@@ -359,6 +426,13 @@ export default function BuildSimulator({ initial, sharedId }: {
   const options = useMemo(() => {
     if (!picking) return [];
     const q = query.trim().toLowerCase();
+    // Buffs: the class's own first, then everyone else's (a party's Priest).
+    if (picking.kind === 'buff') {
+      return ALL_BUFFS.map((b, i) => ({ b, i }))
+        .filter(({ b }) => !build.bf?.[b.s] && (!q || b.n.toLowerCase().includes(q)))
+        .sort((x, y) => Number(y.b.cls.includes(build.cls)) - Number(x.b.cls.includes(build.cls)) || x.b.n.localeCompare(y.b.n))
+        .map(({ b, i }) => ({ id: i, name: b.n, icon: b.i, sub: b.txt.slice(0, 70), locked: false }));
+    }
     // Foods with their pictures (owner, 7 Oct 2026: a plain list showed no icons).
     if (picking.kind === 'food') {
       return FOODS.filter((f) => !build.f.includes(f.id) && (!q || f.name.toLowerCase().includes(q)))
@@ -407,7 +481,12 @@ export default function BuildSimulator({ initial, sharedId }: {
     if (kind === 'item') setSlot(at as Slot, id);
     else if (kind === 'card') setCard(at as Slot, index, id);
     else if (kind === 'enchant') setEnchant(at as Slot, index, id);
-    else if (kind === 'food') {
+    else if (kind === 'buff') {
+      const b = ALL_BUFFS[id];
+      if (b) setBuff(b.s, b.max);
+      setPicking(null);
+      setQuery('');
+    } else if (kind === 'food') {
       if (id) update({ f: [...build.f, id] });
       setPicking(null);
       setQuery('');
@@ -423,7 +502,7 @@ export default function BuildSimulator({ initial, sharedId }: {
   }
   function renderPicker(at: string) {
     if (picking?.at !== at) return null;
-    const label = picking.kind === 'food' ? 'อาหาร/ยา' : picking.kind === 'costume' ? COSTUME_TH[at as CostumeSlot] : slotLabel(at as Slot, build.cls);
+    const label = picking.kind === 'buff' ? 'บัฟ' : picking.kind === 'food' ? 'อาหาร/ยา' : picking.kind === 'costume' ? COSTUME_TH[at as CostumeSlot] : slotLabel(at as Slot, build.cls);
     return (
       <>
         <button type="button" className="buildsim__backdrop" aria-label="ปิด" onClick={() => setPicking(null)} />
@@ -473,6 +552,35 @@ export default function BuildSimulator({ initial, sharedId }: {
           {/* CHARACTER */}
           <section className="card buildsim__panel">
             <PanelHead icon={HAS_SPRITE.has(build.cls) ? `/images/jobs/${build.cls}.png` : '/images/items/2228.gif'} title="CHARACTER" th="ตัวละคร" meta={`${TIER_TH[CLASSES.find((c) => c.slug === build.cls)?.tier ?? ''] ?? ''}`} />
+            {/* Several builds in this browser, and samples from the class guides. */}
+            <div className="buildsim__saved">
+              <select aria-label="โหลดบิลด์" value="" onChange={(e) => e.target.value && loadEncoded(e.target.value)}>
+                <option value="">โหลดบิลด์…</option>
+                {saved.length > 0 && (
+                  <optgroup label="บิลด์ที่บันทึกไว้">
+                    {saved.map((x) => <option key={`s${x.name}`} value={x.b}>{x.name}</option>)}
+                  </optgroup>
+                )}
+                {presets.some((x) => x.cls === build.cls) && (
+                  <optgroup label={`ตัวอย่างจากไกด์ ${classStats(build.cls)?.name ?? ''}`}>
+                    {presets.filter((x) => x.cls === build.cls).map((x) => <option key={x.label} value={x.b}>{x.label}</option>)}
+                  </optgroup>
+                )}
+                {presets.some((x) => x.cls !== build.cls) && (
+                  <optgroup label="ตัวอย่างจากไกด์ อาชีพอื่น">
+                    {presets.filter((x) => x.cls !== build.cls).map((x) => <option key={x.label} value={x.b}>{x.label}</option>)}
+                  </optgroup>
+                )}
+              </select>
+              <input type="text" maxLength={40} placeholder="ตั้งชื่อบิลด์" value={saveName} aria-label="ชื่อบิลด์" onChange={(e) => setSaveName(e.target.value)} />
+              <button type="button" onClick={saveCurrent}>บันทึก</button>
+              {saved.length > 0 && (
+                <select aria-label="ลบบิลด์ที่บันทึก" value="" onChange={(e) => e.target.value && storeSaved(saved.filter((x) => x.name !== e.target.value))}>
+                  <option value="">ลบ…</option>
+                  {saved.map((x) => <option key={`d${x.name}`} value={x.name}>{x.name}</option>)}
+                </select>
+              )}
+            </div>
             <div className="buildsim__hero">
               <div className="buildsim__heroform">
                 <label className="buildsim__field buildsim__field--wide">
@@ -533,20 +641,27 @@ export default function BuildSimulator({ initial, sharedId }: {
                 </li>
               ))}
             </ul>
-            {result.skills.length > 0 && (
-              <div className="buildsim__skillbox">
-                <h3 className="buildsim__h3">เลเวลสกิล <small>ของที่ใส่มีผลตามเลเวลสกิลเหล่านี้</small></h3>
-                <ul className="buildsim__skills">
-                  {result.skills.map((name) => (
-                    <li key={name}>
-                      <span>{name}</span>
-                      <input className="mono" type="number" inputMode="numeric" min={0} max={10} aria-label={`เลเวล ${name}`}
-                        value={build.sk?.[name] ?? ''} placeholder="0" onChange={(e) => setSkill(name, Number(e.target.value))} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {result.skills.length > 0 && (() => {
+              const passive = new Map(passivesFor(build.cls).map((p) => [p.n, p]));
+              return (
+                <div className="buildsim__skillbox">
+                  <h3 className="buildsim__h3">สกิลติดตัว <small>ใส่เลเวลที่เรียนไว้ · สกิลที่ของบางชิ้นใช้คิดก็อยู่ที่นี่</small></h3>
+                  <ul className="buildsim__skills">
+                    {result.skills.map((name) => {
+                      const p = passive.get(name);
+                      return (
+                        <li key={name}>
+                          {p?.i ? <img src={p.i} alt="" width={24} height={24} loading="lazy" /> : <i className="buildsim__noicon" aria-hidden="true" />}
+                          <span>{name}<small>{p ? `สูงสุด ${p.max}` : 'ใช้คิดผลของไอเทม'}</small></span>
+                          <input className="mono" type="number" inputMode="numeric" min={0} max={p?.max ?? 10} aria-label={`เลเวล ${name}`}
+                            value={build.sk?.[name] ?? ''} placeholder="0" onChange={(e) => setSkill(name, Math.min(p?.max ?? 10, Number(e.target.value)))} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })()}
           </section>
 
           {/* EQUIPMENT: the equip window keeps to compact tiles; the piece you
@@ -736,7 +851,8 @@ export default function BuildSimulator({ initial, sharedId }: {
                         <span className="buildsim__editlabel">ออปชั่น</span>
                         <span className="buildsim__optlist">
                           {(w.o ?? []).map(([k, v], i) => (
-                            <span key={i} className="buildsim__opt">
+                            <span key={i} className="buildsim__optwrap">
+                            <span className="buildsim__opt">
                               <select aria-label="ชนิดออปชั่น" value={k} onChange={(e) => setOption(slot, i, [e.target.value, v])}>
                                 {OPTION_LABELS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
                               </select>
@@ -744,8 +860,13 @@ export default function BuildSimulator({ initial, sharedId }: {
                                 onChange={(e) => setOption(slot, i, [k, Math.max(-999, Math.min(9999, Math.floor(Number(e.target.value)) || 0))])} />
                               <button type="button" aria-label="ลบออปชั่น" onClick={() => setOption(slot, i, null)}>×</button>
                             </span>
+                            {(() => {
+                              const range = optionRangeText(k, slot, item);
+                              return <small className="buildsim__optrange">{range ? `สุ่มได้ ${range}` : 'ไม่มีข้อมูลช่วงสุ่มของออปนี้ในช่องนี้'}</small>;
+                            })()}
+                            </span>
                           ))}
-                          {(w.o ?? []).length < MAX_OPTIONS && (
+                          {(w.o ?? []).length < maxOptionsFor(slot) && (
                             <button type="button" className="buildsim__chip is-empty" onClick={() => setOption(slot, (w.o ?? []).length, ['atk', 0])}>
                               + เพิ่มออปชั่น
                             </button>
@@ -792,7 +913,28 @@ export default function BuildSimulator({ initial, sharedId }: {
 
           {/* FOOD */}
           <section className="card buildsim__panel">
-            <PanelHead icon="/images/items/12065.gif" title="FOOD & BUFF" th="อาหารและยา" meta={build.f.length ? `${build.f.length} อย่าง` : undefined} />
+            <PanelHead icon="/images/items/12065.gif" title="FOOD & BUFF" th="อาหาร ยา และบัฟ" meta={build.f.length + Object.keys(build.bf ?? {}).length ? `${build.f.length + Object.keys(build.bf ?? {}).length} อย่าง` : undefined} />
+            <div className="buildsim__buffs">
+              {Object.entries(build.bf ?? {}).map(([slug, lv]) => {
+                const b = buffBySlug(slug);
+                return b ? (
+                  <span key={slug} className="buildsim__buff">
+                    {b.i && <img src={b.i} alt="" width={24} height={24} />}
+                    <span>{b.n}<small>{b.txt.slice(0, 60)}</small></span>
+                    <select aria-label={`เลเวล ${b.n}`} value={lv} onChange={(e) => setBuff(slug, Number(e.target.value))}>
+                      {Array.from({ length: b.max }, (_, i) => <option key={i} value={i + 1}>Lv {i + 1}</option>)}
+                    </select>
+                    <button type="button" aria-label={`เอา ${b.n} ออก`} onClick={() => setBuff(slug, null)}>×</button>
+                  </span>
+                ) : null;
+              })}
+              <span className="buildsim__foodadd">
+                <button type="button" className="buildsim__chip is-empty" onClick={() => openPicker({ at: 'buff', kind: 'buff', index: 0 })}>
+                  + เพิ่มบัฟ (Blessing, Increase Agility…)
+                </button>
+                {renderPicker('buff')}
+              </span>
+            </div>
             <div className="buildsim__foods">
               {build.f.map((id) => {
                 const f = foodById(id);
@@ -840,6 +982,27 @@ export default function BuildSimulator({ initial, sharedId }: {
                 <dt>น้ำหนักของที่ใส่ / แบกได้</dt>
                 <dd className="mono">{result.weight.worn} / {result.weight.cap.toLocaleString('en-US')}</dd>
               </div>
+              {(() => {
+                // How many potions fit before the weight thresholds that matter:
+                // 50% stops natural HP/SP regen, 70% is where a bot heads home, 90% stops attacking.
+                const w = POTIONS.find((x) => x[0] === potion) ?? POTIONS[3];
+                const room = (pct: number) => Math.max(0, Math.floor(((result.weight.cap * pct) / 100 - result.weight.worn) / (w[2] / 10)));
+                return (
+                  <div className="is-wide buildsim__potion">
+                    <dt>
+                      แบกยาได้อีก
+                      <select aria-label="ยา" value={potion} onChange={(e) => setPotion(Number(e.target.value))}>
+                        {POTIONS.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
+                      </select>
+                    </dt>
+                    <dd className="mono">
+                      <img src={`/images/items/${w[0]}.gif`} alt="" width={20} height={20} />
+                      {room(50).toLocaleString('en-US')} <small>ถึง 50%</small> · {room(70).toLocaleString('en-US')} <small>ถึง 70%</small> · {room(90).toLocaleString('en-US')} <small>ถึง 90%</small>
+                    </dd>
+                    <small className="buildsim__potionnote">50% หยุดฟื้น HP/SP เอง · 70% บอทกลับเมือง · 90% ตีไม่ได้ (นับแค่ของที่ใส่ ไม่รวมของอื่นในกระเป๋า)</small>
+                  </div>
+                );
+              })()}
               {result.fct !== 0 && <div className="is-wide"><dt>ร่ายคงที่</dt><dd className="mono">{result.fct > 0 ? '+' : ''}{result.fct}%</dd></div>}
             </dl>
             {result.warnings.length > 0 && (
@@ -932,7 +1095,42 @@ export default function BuildSimulator({ initial, sharedId }: {
                     </li>
                   ) : null}
                 </ul>
-                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ ไม่รวมสกิล{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
+                <div className="buildsim__ttk">
+                  <p>
+                    HP มอน <b className="mono">{vs.hp ? vs.hp.toLocaleString('en-US') : 'ไม่ทราบ'}</b>
+                    {vs.autoHits && <> · ตีธรรมดา <b className="mono">{vs.autoHits}</b> ที</>}
+                    {vs.autoSeconds != null && <> · ~<b className="mono">{secs(vs.autoSeconds)}</b> วิ</>}
+                  </p>
+                  {attacksFor(build.cls).length > 0 && (
+                    <div className="buildsim__skillpick">
+                      <select aria-label="สกิลโจมตี" value={build.as?.[0] ?? ''} onChange={(e) => {
+                        const a = attacksFor(build.cls).find((x) => x.s === e.target.value);
+                        setAttack(e.target.value, a?.max ?? 1);
+                      }}>
+                        <option value="">เลือกสกิลโจมตี…</option>
+                        {attacksFor(build.cls).map((a) => <option key={a.s} value={a.s}>{a.n} ({a.k === 'matk' ? 'เวท' : 'กายภาพ'})</option>)}
+                      </select>
+                      {build.as && (() => {
+                        const a = attacksFor(build.cls).find((x) => x.s === build.as![0]);
+                        return a ? (
+                          <select aria-label="เลเวลสกิล" value={build.as[1]} onChange={(e) => setAttack(a.s, Number(e.target.value))}>
+                            {Array.from({ length: a.max }, (_, i) => <option key={i} value={i + 1}>Lv {i + 1}</option>)}
+                          </select>
+                        ) : null;
+                      })()}
+                    </div>
+                  )}
+                  {vs.skill && (
+                    <dl className="buildsim__skillres">
+                      <div><dt>ดาเมจต่อครั้ง <i>ประมาณ</i></dt><dd className="mono">{vs.skill.damage.toLocaleString('en-US')}</dd></div>
+                      <div><dt>ตัวคูณ</dt><dd className="mono">{vs.skill.ratio}%{vs.skill.hits > 1 ? ` × ${vs.skill.hits} ฮิต` : ''}</dd></div>
+                      <div><dt>ร่าย + ดีเลย์</dt><dd className="mono">{vs.skill.castSeconds} / {vs.skill.interval} วิ</dd></div>
+                      <div><dt>ฆ่าได้ใน</dt><dd className="mono">{vs.skill.casts ? `${vs.skill.casts} ครั้ง` : '?'}{vs.skill.seconds != null ? ` · ~${secs(vs.skill.seconds)} วิ` : ''}</dd></div>
+                      <div><dt>SP</dt><dd className="mono">{vs.skill.sp}{vs.skill.casts ? ` × ${vs.skill.casts} = ${(vs.skill.sp * vs.skill.casts).toLocaleString('en-US')}` : ''}</dd></div>
+                    </dl>
+                  )}
+                </div>
+                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · เวลาฆ่านับโอกาสตีโดนแล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
               </div>
             ) : (
               <p className="buildsim__empty">
