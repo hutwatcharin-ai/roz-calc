@@ -9,6 +9,7 @@
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
 import { isCVariant } from '@/lib/c-variant';
+import { publishedTopics } from '@/lib/card-topics';
 import './page.css';
 import SuggestInput from '@/components/SuggestInput';
 import { itemFormerNames } from '@/lib/item-former-names';
@@ -39,6 +40,7 @@ export const metadata = {
 };
 
 const PAGE_SIZE = 50;
+const TOPICS = publishedTopics();
 
 // Type, Equipped on and Weight are structure, not effect. Repeating them in
 // every row would bury the one line a player is actually scanning for.
@@ -272,6 +274,27 @@ export default async function CardsPage({
           dropdown because the list of jobs IS the thing worth reading -- a
           player who does not know what a card can do for them learns it here.
           A card sits in every group it truly serves, so the counts overlap. */}
+      {/* One page per thing a card does (lib/card-topics): the words players
+          search -- "การ์ดกันใบ้", "การ์ดใส่โล่" -- each with its own page. */}
+      <details className="disclose cardhub">
+        <summary>
+          หาการ์ดตามผล: กันสถานะ กันธาตุ ตีธาตุ ตีเผ่า ช่องที่ใส่
+          <span className="disclose__count">{TOPICS.length} หน้า</span>
+        </summary>
+        <div className="disclose__body">
+          {[...new Set(TOPICS.map((t) => t.group))].map((g) => (
+            <div key={g}>
+              <p className="cardhub__group">{g}</p>
+              <div className="chips">
+                {TOPICS.filter((t) => t.group === g).map((t) => (
+                  <Link key={t.slug} className="chip" href={`/database/cards/effect/${t.slug}`}>{t.title.replace(/^การ์ด/, '')}</Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </details>
+
       <section className="rolepick">
         <h2 className="rolepick__label">เอาไว้ทำอะไร</h2>
         <div className="chips">

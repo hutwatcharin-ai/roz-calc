@@ -8,6 +8,7 @@ import { itemHref } from '@/lib/item-href';
 import { ALL_NPCS } from '@/lib/npcs';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { CLASS_GUIDES } from '@/lib/class-guides';
+import { publishedTopics } from '@/lib/card-topics';
 
 // Regenerated with the daily ISR window, same as the list pages.
 export const revalidate = 86400;
@@ -160,6 +161,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...STATIC_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
     ...CLASS_GUIDE_PATHS.map((path) => ({ url: `${SITE_URL}${path}` })),
+    // Card pages by effect (lib/card-topics), the ones that exist.
+    ...publishedTopics().map((t) => ({ url: `${SITE_URL}/database/cards/effect/${t.slug}` })),
     ...monsterIds.map((row) => ({ url: `${SITE_URL}/database/monsters/${row.id}`, lastModified: row.updated_at })),
     // Items the live client does not know are noindex on their page; keep them
     // out of the sitemap too so the two signals agree.
