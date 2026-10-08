@@ -13,12 +13,13 @@
 //     sites like this one).
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import AdSlot from '@/components/AdSlot';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
+import FaqBrowser, { type FaqGroup } from '@/components/FaqBrowser';
+import './page.css';
 
 export const revalidate = 86400;
 
@@ -30,13 +31,14 @@ export const metadata: Metadata = {
     'รวมคำถามที่ผู้เล่น Ragnarok Zero Global ถามบ่อยในกลุ่ม: ต้องเติมเงินไหม ไอดีทดลองทำอะไรไม่ได้ บอทในเกมโดนแบนไหม ลงสเตตัสยังไง รีเซ็ตฟรีถึงเลเวลไหน ตั้งร้านยังไง ตีบวกแตกไหม เวลาเซิร์ฟเป็นเวลาไทยเท่าไร',
 };
 
-type QA = { q: string; a: ReactNode; unsure?: boolean };
-type Group = { id: string; title: string; items: QA[] };
-
-const GROUPS: Group[] = [
+// Updated 8 Oct 2026 (owner: refresh, easier to read): refine answer matched
+// to the official tables and HD's real rule, new questions for champion
+// monsters, enchanting (live), card-by-effect and the build simulator.
+const GROUPS: FaqGroup[] = [
   {
     id: 'pay',
     title: 'ค่าเล่นและไอดี',
+    icon: '/images/items/12324.gif',
     items: [
       {
         q: 'เล่นฟรีได้ไหม ต้องเติมเงินอะไรบ้าง',
@@ -60,10 +62,12 @@ const GROUPS: Group[] = [
   {
     id: 'start',
     title: 'เริ่มเล่นและเก็บเลเวล',
+    icon: '/images/items/607.gif',
     items: [
       {
         q: 'เริ่มแรกลงสเตตัสยังไง',
-        a: <>ทุกคลิปไทยแนะนำตรงกันว่า <strong>ลง DEX ราว 20 ก่อน</strong> จะได้ตีโดน ที่เหลือตามสายอาชีพ · ลงผิดไม่ต้องกลัว รีเซ็ตฟรีถึงเลเวล 40 · ดูบิลด์รายอาชีพที่ <Link href="/guides/classes">ไกด์อาชีพ</Link></>,
+        a: <>ทุกคลิปไทยแนะนำตรงกันว่า <strong>ลง DEX ราว 20 ก่อน</strong> จะได้ตีโดน ที่เหลือตามสายอาชีพ · ลงผิดไม่ต้องกลัว รีเซ็ตฟรีถึงเลเวล 40 · ดูบิลด์รายอาชีพที่ <Link href="/guides/classes">ไกด์อาชีพ</Link> แล้วลองลงแต้มก่อนได้ที่ <Link href="/tools/build">จำลองบิลด์</Link> เห็น HIT FLEE ASPD และตีมอนโดนกี่ %</>,
+        k: 'สเตตัส stat แต้ม บิลด์ build',
       },
       {
         q: 'รีเซ็ตสเตตัสกับสกิลฟรีถึงเลเวลไหน',
@@ -72,6 +76,11 @@ const GROUPS: Group[] = [
       {
         q: 'ไปเก็บเลเวลที่ไหนดี',
         a: <>ใส่เลเวลแล้วดูได้ที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> มีทั้งจุดเก็บเลเวล จุดทิ้งบอท และจุดหาเงิน พร้อมจุดที่ผู้เล่นใช้จริง เช่น Horn/Elder Willow ช่วง 40 และหมู่บ้าน Goblin ช่วง 40-50</>,
+      },
+      {
+        q: 'มอนชื่อ Swift / Solid / Furious / Elusive หรือ ... Ringleader คืออะไร',
+        a: <>คือ<strong>มอนแชมเปียน</strong> ร่างพิเศษของมอนปกติ เกิดปนในแมพเดียวกันทีละ 1-2 ตัว · เลือดหนากว่า (เช่น Swift Poring HP ×5) แต่ให้ EXP มากกว่ามาก (×30) และดรอปดีกว่า · หน้าแมพในเว็บบอกว่าแมพไหนมีแชมเปียนอะไร เช่น <Link href="/database/maps/prt_fild08">Prontera Field 8</Link></>,
+        k: 'แชมเปียน champion มอนพิเศษ ตัวใหญ่',
       },
       {
         q: 'ติดเลเวล 47-48 ขึ้นช้ามาก',
@@ -90,9 +99,11 @@ const GROUPS: Group[] = [
   {
     id: 'bot',
     title: 'บอทในเกม (Auto-Hunt)',
+    icon: '/images/items/2228.gif',
     items: [
       {
         q: 'ใช้บอทในเกมโดนแบนไหม',
+        k: 'bot auto แบน ban',
         a: <><strong>บอทในเกมใช้ได้ ฟรี ไม่จำกัด</strong> ตั้งแต่เลเวล 1 เปิดทิ้งไว้ 10 ชั่วโมงก็ไม่หลุด · ที่โดนแบนเป็นระลอกคือ<strong>โปรแกรมบอทจากนอกเกม</strong></>,
       },
       {
@@ -117,6 +128,7 @@ const GROUPS: Group[] = [
   {
     id: 'trade',
     title: 'ซื้อขาย',
+    icon: '/images/items/909.gif',
     items: [
       {
         q: 'ตั้งร้านขายของยังไง',
@@ -136,10 +148,12 @@ const GROUPS: Group[] = [
   {
     id: 'gear',
     title: 'ของสวมใส่',
+    icon: '/images/items/985.gif',
     items: [
       {
         q: 'ตีบวกแตกไหม',
-        a: <>แตกได้ตั้งแต่ +1 · ตีจริงผ่านราว 50% ช่วง +5 ถึง +7 และราว 40% ช่วง +7 ถึง +8 · HD Oridecon (จากการเติมเงิน) พลาดแค่ลดขั้นไม่แตก · Blacksmith Blessing กันแตกตอนตีขึ้น +8 ได้จาก MVP Raid หรือกาชาไข่ครบ 60 ครั้ง · คำนวณที่ <Link href="/tools/refine">คำนวณตีบวก</Link></>,
+        a: <>แตกได้ตั้งแต่ +1 ถ้าใช้แร่ธรรมดา (แร่เข้มข้นติดแน่นช่วงแรก ๆ) · โอกาสขึ้นกับชนิดของ เช่น อาวุธ Lv4 กับเกราะ แร่ธรรมดา +5 สำเร็จ 60% แต่ +8 เหลือ 20% · <strong>แร่ HD</strong> ใช้ได้ตอนของอยู่ +7 ถึง +9 พลาดแล้วลด 1 ขั้นแทนแตก · Blacksmith Blessing กันแตกตอนตีขึ้น +8 ได้จาก MVP Raid หรือกาชาไข่ครบ 60 ครั้ง · ดูว่าต้องเตรียมของกี่ชิ้น ลองตีดูได้ที่ <Link href="/tools/refine">ตีบวก</Link></>,
+        k: 'refine แตก พัง oridecon elunium hd',
       },
       {
         q: 'สีชื่อไอเทมบอกอะไร',
@@ -148,6 +162,16 @@ const GROUPS: Group[] = [
       {
         q: 'ของแบบไหนสุ่มออปชันได้',
         a: <>อาวุธ เสื้อ ผ้าคลุม รองเท้า หมวก และเครื่องประดับ ทั้งของดรอปและของเควส · ของจากร้าน NPC ไม่มีออป · โล่ยังไม่เคยเห็นมีออป</>,
+      },
+      {
+        q: 'เอนแชนต์ชุดดันความทรงจำทำยังไง เสี่ยงไหม',
+        a: <>เปิดแล้ว · ใส่ที่ NPC ครั้งละ 100,000 Zeny <strong>ใส่ไม่มีความเสี่ยง</strong> แต่ถอดด้วยเงินมีโอกาสของหาย 30% (ถอดด้วย Zelstar ไม่หาย) · ลุ้นค่าไหนกี่ครั้ง ดูที่ <Link href="/tools/enchant">คำนวณเอนแชนต์</Link></>,
+        k: 'enchant เอนชานต์ เอนแชน memorial subjugation',
+      },
+      {
+        q: 'อยากได้การ์ดกันใบ้ กันสตัน กันธาตุไฟ ใส่ใบไหน',
+        a: <>ดูแยกตามผลได้ เช่น <Link href="/database/cards/effect/guard-silence">การ์ดกันใบ้</Link> · <Link href="/database/cards/effect/guard-stun">การ์ดกันสตัน</Link> · <Link href="/database/cards/effect/guard-fire">การ์ดกันธาตุไฟ</Link> · <Link href="/database/cards/effect/slot-shield">การ์ดใส่โล่</Link> · ทุกหมวดอยู่ในกล่อง &quot;หาการ์ดตามผล&quot; ใน <Link href="/database/cards">หน้าการ์ด</Link></>,
+        k: 'card การ์ด กันสถานะ silence stun',
       },
       {
         q: 'หมวก Nordfeld ที่ไกด์อาชีพแนะนำ หาจากไหน',
@@ -162,6 +186,7 @@ const GROUPS: Group[] = [
   {
     id: 'server',
     title: 'เซิร์ฟและอัปเดต',
+    icon: '/images/items/602.gif',
     items: [
       {
         q: 'เวลาในประกาศเป็นเวลาไทยเท่าไร',
@@ -203,29 +228,9 @@ export default function FaqPage() {
         lead="รวมจากคำถามที่เจอซ้ำในกลุ่มผู้เล่นไทย ตอบสั้น ๆ แล้วพาไปหน้าที่มีรายละเอียด ข้อไหนยังไม่มีคำตอบที่ยืนยันได้ จะบอกไว้ตรง ๆ"
       />
 
-      <nav className="guildp__toc" aria-label="สารบัญ">
-        {GROUPS.map((g) => <a key={g.id} href={`#${g.id}`}>{g.title}</a>)}
-      </nav>
+      <FaqBrowser groups={GROUPS} />
 
-      {GROUPS.map((group, i) => (
-        <div key={group.id}>
-          {i === 2 && <AdSlot slot="inline" />}
-          <section className="card" id={group.id} style={{ marginTop: 14 }}>
-            <h2 className="section-title" style={{ marginTop: 0 }}>{group.title}</h2>
-            <dl className="star__faq">
-              {group.items.map((qa) => (
-                <div key={qa.q}>
-                  <dt>{qa.q}</dt>
-                  <dd>
-                    {qa.a}
-                    {qa.unsure && <span className="star__unconfirmed">ยังไม่ยืนยัน</span>}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-        </div>
-      ))}
+      <AdSlot slot="inline" />
 
       <Caveat label="เชื่อได้แค่ไหน">
         คำถามมาจากกลุ่ม Facebook ผู้เล่นไทยและคลิป YouTube ช่วง ส.ค.-ก.ย. 2569 · คำตอบรวมจากประกาศปิดปรับปรุง ข้อความในเกม และคลิปที่ผู้เล่นทำเอง ·
