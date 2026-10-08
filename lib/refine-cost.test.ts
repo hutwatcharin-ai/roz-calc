@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { itemsForConfidence, refineCost } from './refine-cost';
+import { chanceWithItems, itemsForConfidence, oreAt, refineCost, refinePlan } from './refine-cost';
 import { chanceAt, type GearType } from './refine-table';
 
 // A tiny deterministic generator so the simulation below is reproducible. The
@@ -133,5 +133,55 @@ describe('itemsForConfidence', () => {
     // 81% per run: one item already clears 50%, two are needed for 90%.
     expect(itemsForConfidence(81, 0.5)).toBe(1);
     expect(itemsForConfidence(81, 0.9)).toBe(2);
+  });
+});
+
+describe('refinePlan: mixed ores and HD', () => {
+  it('matches the closed form when no HD is used', () => {
+    for (const [gear, target, special] of [['weapon3', 7, false], ['armour', 9, true], ['weapon1', 10, false]] as const) {
+      const closed = refineCost(gear, target, special);
+      const plan = refinePlan(gear, target, special ? 'special' : 'normal');
+      expect(plan.expectedItems).toBeCloseTo(closed.expectedItems, 6);
+      expect(plan.expectedAttempts).toBeCloseTo(closed.expectedAttempts, 6);
+      expect(plan.expectedFeeZeny).toBeCloseTo(closed.expectedFeeZeny, 4);
+    }
+  });
+
+  it('HD at +7..+9 burns fewer items than the plain ore on the way to +10', () => {
+    const plain = refinePlan('weapon4', 10, 'normal');
+    const hd = refinePlan('weapon4', 10, 'hd');
+    expect(hd.expectedItems).toBeLessThan(plain.expectedItems);
+    expect(hd.expectedHdAttempts).toBeGreaterThan(0);
+  });
+
+  it('agrees with a plain simulation of the HD rules', () => {
+    const rand = lcg(7);
+    const gear = 'armour';
+    const target = 9;
+    let items = 0;
+    let attempts = 0;
+    const runs = 40000;
+    for (let r = 0; r < runs; r += 1) {
+      items += 1;
+      let level = 0;
+      while (level < target) {
+        attempts += 1;
+        const hd = oreAt('hd', level) === 'hd';
+        if (rand() * 100 < chanceAt(gear, level + 1, false)) level += 1;
+        else if (hd) level -= 1;
+        else {
+          items += 1;
+          level = 0;
+        }
+      }
+    }
+    const plan = refinePlan(gear, target, 'hd');
+    expect(Math.abs(items / runs - plan.expectedItems) / plan.expectedItems).toBeLessThan(0.03);
+    expect(Math.abs(attempts / runs - plan.expectedAttempts) / plan.expectedAttempts).toBeLessThan(0.03);
+  });
+
+  it('gives the chance of finishing with N items', () => {
+    expect(chanceWithItems(50, 1)).toBeCloseTo(50);
+    expect(chanceWithItems(50, 2)).toBeCloseTo(75);
   });
 });

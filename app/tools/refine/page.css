@@ -1,0 +1,62 @@
+/* Refine calculator pictures (owner, 8 Oct 2026): the ladder, the pile of
+   broken items, the chance-by-items curve and the try-it anvil. */
+.refcalc__h { margin: 20px 0 8px; font: 700 16px/1.4 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--yellow); }
+.refcalc__sub { display: block; font-size: 12px; }
+.refcalc__total td { font-weight: 700; color: var(--yellow); }
+.refcalc__compare { margin-top: 12px; }
+.refcalc__compare tr.is-on th, .refcalc__compare tr.is-on td { background: rgba(255, 229, 61, .08); }
+.refcalc__best { display: inline-block; margin-left: 8px; padding: 1px 6px; border-radius: 4px; font-size: 11px; color: #0b0820; background: var(--status-safe); }
+
+/* The pile: one icon per item; broken ones grey with a pink crack. */
+.refpile { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 6px 0 4px; }
+.refpile__item { position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 6px; border: 1px solid rgba(255, 61, 154, .35); background: #150a26; }
+.refpile__item img { width: 24px; height: 24px; image-rendering: pixelated; filter: grayscale(1) brightness(.6); }
+.refpile__item::after { content: ''; position: absolute; inset: 6px; background: linear-gradient(135deg, transparent 46%, var(--pink) 47%, var(--pink) 53%, transparent 54%); opacity: .8; }
+.refpile__item.is-kept { border-color: var(--yellow); box-shadow: 0 0 10px rgba(255, 229, 61, .6); background: #221a05; }
+.refpile__item.is-kept img { filter: none; }
+.refpile__item.is-kept::after { display: none; }
+.refpile__more { font-size: 13px; color: var(--pink); }
+.refpile__legend { flex-basis: 100%; font-size: 12px; color: var(--faint); }
+
+/* The ladder and the curve share a frame. */
+.refladder, .refcurve { margin: 14px 0 0; padding: 10px 10px 4px; border: 1px solid rgba(61, 232, 255, .3); border-radius: 8px; background: #0a0720; }
+.refladder figcaption, .refcurve figcaption { font-size: 12px; color: var(--dim); margin-bottom: 4px; }
+.refladder svg, .refcurve svg { display: block; width: 100%; height: auto; }
+.refladder__axis { stroke: rgba(61, 232, 255, .4); stroke-width: 1; }
+.refladder__bar.is-safe { fill: var(--status-safe); }
+.refladder__bar.is-ok { fill: var(--cyan); }
+.refladder__bar.is-risky { fill: var(--yellow); }
+.refladder__bar.is-cliff { fill: var(--pink); }
+.refladder__bar.is-hd { stroke: #fff; stroke-width: 1.5; stroke-dasharray: 3 2; }
+.refladder__pct { fill: var(--text); font: 700 11px var(--font-mono), monospace; text-anchor: middle; }
+.refladder__lv { fill: var(--dim); font: 10px var(--font-mono), monospace; text-anchor: middle; }
+.refladder__line { fill: none; stroke: #fff; stroke-width: 2; stroke-dasharray: 4 3; filter: drop-shadow(0 0 3px var(--pink)); }
+.refcurve__guide { stroke: rgba(255, 255, 255, .15); stroke-dasharray: 3 3; }
+.refcurve__line { fill: none; stroke: var(--cyan); stroke-width: 2.5; filter: drop-shadow(0 0 4px var(--cyan)); }
+.refcurve__dot { fill: var(--yellow); }
+.refcurve__label { fill: var(--yellow); font: 700 12px var(--font-sarabun), sans-serif; text-anchor: middle; }
+.refcurve__axis { fill: var(--faint); font: 10px var(--font-sarabun), sans-serif; }
+
+/* The anvil. */
+.refanvil { margin-top: 18px; padding: 12px 14px; border: 2px solid var(--pink); border-radius: 10px; background: radial-gradient(ellipse at 50% 100%, rgba(255, 61, 154, .2), transparent 60%), #0b0724; box-shadow: 0 0 16px rgba(255, 61, 154, .25); }
+.refanvil .refcalc__h { margin-top: 0; }
+.refanvil__stage { position: relative; display: flex; align-items: center; gap: 16px; min-height: 92px; }
+.refanvil__item { position: relative; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 10px; border: 2px solid var(--cyan); background: #120b33; }
+.refanvil__item img { width: 48px; height: 48px; image-rendering: pixelated; }
+.refanvil__item b { position: absolute; right: 4px; bottom: 2px; font-size: 16px; color: var(--yellow); text-shadow: 0 0 6px rgba(255, 229, 61, .7); }
+.refanvil__item.is-ok { animation: refanvil-ok .5s ease-out; border-color: var(--yellow); }
+.refanvil__item.is-broke { animation: refanvil-broke .5s ease-out; border-color: var(--pink); }
+.refanvil__item.is-down { animation: refanvil-shake .4s ease-out; border-color: var(--yellow); }
+.refanvil__hammer { position: absolute; left: 64px; top: -4px; width: 28px; height: 28px; image-rendering: pixelated; animation: refanvil-hammer .35s ease-in; transform-origin: 80% 80%; }
+.refanvil__msg { margin: 0; font-size: 20px; font-weight: 700; color: var(--dim); }
+.refanvil__msg.is-ok { color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .7); }
+.refanvil__msg.is-broke { color: var(--pink); text-shadow: 0 0 10px rgba(255, 61, 154, .7); }
+.refanvil__msg.is-down { color: var(--cyan); }
+.refanvil__score { margin: 6px 0; font-size: 13px; color: var(--dim); }
+.refanvil__btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.refanvil__reset { min-height: 40px; padding: 0 14px; border: 1px solid var(--cyan); border-radius: 8px; background: transparent; color: var(--cyan); font: inherit; cursor: pointer; }
+@keyframes refanvil-ok { 0% { box-shadow: 0 0 0 rgba(255, 229, 61, 0); transform: scale(1); } 40% { box-shadow: 0 0 28px rgba(255, 229, 61, .9); transform: scale(1.08); } 100% { box-shadow: 0 0 10px rgba(255, 229, 61, .4); transform: scale(1); } }
+@keyframes refanvil-broke { 0%, 100% { transform: translateX(0); filter: none; } 20% { transform: translateX(-6px) rotate(-4deg); filter: brightness(2) hue-rotate(-60deg); } 40% { transform: translateX(6px) rotate(4deg); } 60% { transform: translateX(-4px); } }
+@keyframes refanvil-shake { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@keyframes refanvil-hammer { 0% { transform: rotate(-50deg) translateY(-14px); opacity: 0; } 60% { opacity: 1; } 100% { transform: rotate(0) translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .refanvil__item, .refanvil__hammer { animation: none !important; } }

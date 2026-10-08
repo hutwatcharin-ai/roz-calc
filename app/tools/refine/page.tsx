@@ -4,6 +4,7 @@
 // rendered on the server: the numbers are the reason to visit, and a visitor
 // who arrives from search should see them without waiting for JavaScript.
 
+import './page.css';
 import Caveat from '@/components/Caveat';
 import { Fragment } from 'react';
 import PageHeader from '@/components/PageHeader';
@@ -128,6 +129,14 @@ export default function RefinePage() {
       <p className="muted" style={{ maxWidth: '65ch' }}>
         อาวุธได้ ATK/MATK สองส่วน: ส่วนหลักขึ้นทุกขั้น + ส่วนพิเศษเมื่อถึงขั้นสูง (อาวุธเลเวลสูงได้เร็วและมากกว่า) ·
         เกราะได้ DEF = ขั้น²
+      </p>
+      {/* The extra part is what rAthena and rozeroplanner call the over-refine
+          bonus, rolled 1..max on each hit rather than added in full. Not yet
+          checked in Global (owner, 8 Oct 2026: servers down); until then the
+          table shows the guide's numbers and says what is unsure. */}
+      <p className="muted" style={{ maxWidth: '65ch', fontSize: 13 }}>
+        <strong>ยังไม่ยืนยัน:</strong> ส่วนพิเศษ (ตัวเลขหลัง +) ในเกมอื่นของ Ragnarok เป็นค่าสุ่ม 1 ถึงตัวเลขนี้ทุกครั้งที่ตี
+        ไม่ได้บวกเต็ม และไม่ขึ้นในหน้าต่างสเตตัส · ถ้า Zero เป็นแบบเดียวกัน ค่าเฉลี่ยจะราวครึ่งเดียว
       </p>
       <p className="tablescroll__hint">เลื่อนตารางซ้ายขวาได้ · ชื่อแถวจะค้างไว้ให้</p>
       <div className="card tablescroll" style={{ marginTop: 12 }}>
