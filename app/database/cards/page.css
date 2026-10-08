@@ -74,9 +74,10 @@
 
 /* Card pages by effect (/database/cards/effect/<topic>, 8 Oct 2026). */
 .cardtopic { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
-.cardtopic__row { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 4px 14px; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
+.cardtopic__row { display: grid; align-items: center; grid-template-columns: minmax(170px, 240px) minmax(0, 1fr); gap: 4px 14px; padding: 10px 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
 .cardtopic__name { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text); }
-.cardtopic__name img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; }
+.cardtopic__name { grid-row: span 2; }
+.cardtopic__art { width: 60px; height: 80px; border-radius: 4px; box-shadow: 0 0 10px rgba(61, 232, 255, .25); }
 .cardtopic__fx { color: var(--yellow); font-size: 14px; line-height: 1.6; }
 .cardtopic__meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; }
 .cardhub__group { margin: 8px 0 2px; font-size: 13px; color: var(--dim); }

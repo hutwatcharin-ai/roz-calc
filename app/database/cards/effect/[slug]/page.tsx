@@ -18,6 +18,7 @@ import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
 import { cardSlotWord, cardsForTopic, publishedTopics, topicBySlug } from '@/lib/card-topics';
 import { ELEMENT_TH } from '@/lib/monster-th';
+import { cardArtAlt, cardArtThumbUrl } from '@/lib/card-art';
 import { ELEMENTS, elementModifier, type Element } from '@/lib/element-table';
 
 export const revalidate = 86400;
@@ -72,7 +73,7 @@ export default async function CardTopicPage({ params }: { params: { slug: string
     droppers.set(d.item_id, [...(droppers.get(d.item_id) ?? []), { id: d.monster_id, name, rate: d.rate ?? 0 }]);
   }
   const cards = found
-    .map((c) => ({ ...c, name: (info.get(c.id)?.name_en ?? '').replace(/ Card$/, ''), icon: info.get(c.id)?.icon_url ?? `/images/items/${c.id}.gif`, release: cardRelease(info.get(c.id)?.name_en ?? '', c.id) }))
+    .map((c) => ({ ...c, name: (info.get(c.id)?.name_en ?? '').replace(/ Card$/, ''), release: cardRelease(info.get(c.id)?.name_en ?? '', c.id) }))
     .filter((c) => c.name)
     .sort((a, b) => Number(a.release !== null) - Number(b.release !== null) || a.name.localeCompare(b.name));
 
@@ -115,7 +116,8 @@ export default async function CardTopicPage({ params }: { params: { slug: string
             return (
               <li key={c.id} className="cardtopic__row">
                 <Link href={`/database/cards/${c.id}`} className="cardtopic__name">
-                  <img src={c.icon} alt="" width={28} height={28} loading="lazy" />
+                  {/* The card's own artwork (owner, 8 Oct 2026), 60x80. */}
+                  <img className="cardtopic__art" src={cardArtThumbUrl(c.id)} alt={cardArtAlt(c.id, c.name)} width={60} height={80} loading="lazy" />
                   {c.name}
                 </Link>
                 <span className="cardtopic__fx">{c.lines.join(' · ')}</span>
