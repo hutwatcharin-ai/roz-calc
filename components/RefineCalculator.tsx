@@ -54,7 +54,7 @@ function band(chance: number): string {
 }
 
 function modeLabel(gear: GearType, mode: OreMode): string {
-  if (mode === 'hd') return `HD ช่วง +${HD_FROM}→+${HD_TO + 1}`;
+  if (mode === 'hd') return `เข้มข้น + HD ช่วง +${HD_FROM}→+${HD_TO + 1}`;
   return mode === 'special' ? ORE[gear].special?.ore ?? '' : ORE[gear].normal.ore;
 }
 
@@ -91,7 +91,8 @@ export default function RefineCalculator() {
   // Changing the equipment type can leave the start above the target, so the
   // start is clamped here rather than letting the maths throw at the user.
   const start = Math.min(from, target - 1);
-  const hdUseful = target > HD_FROM && start <= HD_TO;
+  // HD exists only beside Concentrated ore (weapon Lv3, Lv4, armour).
+  const hdUseful = hasSpecial && target > HD_FROM && start <= HD_TO;
   const modes: OreMode[] = ['normal', ...(hasSpecial ? (['special'] as const) : []), ...(hdUseful ? (['hd'] as const) : [])];
   const useMode: OreMode = modes.includes(mode) ? mode : 'normal';
 
@@ -131,7 +132,7 @@ export default function RefineCalculator() {
             ของ 1 ชิ้นรอดถึง +{target} {closed.runChance.toFixed(closed.runChance < 1 ? 3 : 1)}%
           </>
         ) : (
-          <>ใช้แร่ HD ช่วง +{HD_FROM} ถึง +{HD_TO}: พลาดแล้วลด 1 ขั้น ไม่พัง · ตีด้วย HD เฉลี่ย {count(plan.expectedHdAttempts)} ครั้ง</>
+          <>แร่เข้มข้น และใช้ HD ตอนอยู่ +{HD_FROM} ถึง +{HD_TO}: พลาดแล้วลด 1 ขั้น ไม่พัง · ตีด้วย HD เฉลี่ย {count(plan.expectedHdAttempts)} ครั้ง</>
         )}
       </p>
 
@@ -220,7 +221,7 @@ export default function RefineCalculator() {
       <table className="stat-table" style={{ marginTop: 8 }}>
         <tbody>
           <tr>
-            <td>ค่าตีบวก<span className="muted refcalc__sub">ต่อครั้ง {zeny(useMode === 'hd' ? ORE[gear].normal.feeZeny : (useMode === 'special' ? ORE[gear].special! : ORE[gear].normal).feeZeny)}{useMode === 'hd' ? ` · ครั้งที่ใช้ HD ${zeny(HD_FEE_ZENY)}` : ''} เสียทั้งตอนสำเร็จและตอนพัง</span></td>
+            <td>ค่าตีบวก<span className="muted refcalc__sub">ต่อครั้ง {zeny((useMode === 'normal' ? ORE[gear].normal : ORE[gear].special ?? ORE[gear].normal).feeZeny)}{useMode === 'hd' ? ` · ครั้งที่ใช้ HD ${zeny(HD_FEE_ZENY)}` : ''} เสียทั้งตอนสำเร็จและตอนพัง</span></td>
             <td className="num">{zeny(plan.expectedFeeZeny)}</td>
           </tr>
           <tr>

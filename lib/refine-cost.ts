@@ -139,9 +139,13 @@ export interface RefinePlan {
   expectedFeeZeny: number;
 }
 
-/** The ore an attempt from +level uses under a mode; HD only where the game allows it. */
+/**
+ * The ore an attempt from +level uses under a mode. The HD plan is what a
+ * player does: Concentrated ore below +7 and above +9, HD from +7 to +9 (the
+ * guide lists HD only for the equipment that also has Concentrated ore).
+ */
 export function oreAt(mode: OreMode, level: number): 'normal' | 'special' | 'hd' {
-  if (mode === 'hd') return level >= HD_FROM && level <= HD_TO ? 'hd' : 'normal';
+  if (mode === 'hd') return level >= HD_FROM && level <= HD_TO ? 'hd' : 'special';
   return mode;
 }
 

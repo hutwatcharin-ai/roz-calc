@@ -21,7 +21,7 @@
 /* The ladder and the curve share a frame. */
 .refladder, .refcurve { margin: 14px 0 0; padding: 10px 10px 4px; border: 1px solid rgba(61, 232, 255, .3); border-radius: 8px; background: #0a0720; }
 .refladder figcaption, .refcurve figcaption { font-size: 12px; color: var(--dim); margin-bottom: 4px; }
-.refladder svg, .refcurve svg { display: block; width: 100%; height: auto; }
+.refladder svg, .refcurve svg { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
 .refladder__axis { stroke: rgba(61, 232, 255, .4); stroke-width: 1; }
 .refladder__bar.is-safe { fill: var(--status-safe); }
 .refladder__bar.is-ok { fill: var(--cyan); }

@@ -147,11 +147,13 @@ describe('refinePlan: mixed ores and HD', () => {
     }
   });
 
-  it('HD at +7..+9 burns fewer items than the plain ore on the way to +10', () => {
-    const plain = refinePlan('weapon4', 10, 'normal');
-    const hd = refinePlan('weapon4', 10, 'hd');
-    expect(hd.expectedItems).toBeLessThan(plain.expectedItems);
-    expect(hd.expectedHdAttempts).toBeGreaterThan(0);
+  it('HD is not always the cheaper plan: it wins to +8, loses to +10', () => {
+    // HD rolls the plain ore's chance and a miss at +7 drops to +6, where
+    // Concentrated ore can still break the item -- so past +8 the
+    // Concentrated-only plan burns fewer items (8 Oct 2026).
+    expect(refinePlan('weapon4', 8, 'hd').expectedItems).toBeLessThan(refinePlan('weapon4', 8, 'special').expectedItems);
+    expect(refinePlan('weapon4', 10, 'hd').expectedItems).toBeGreaterThan(refinePlan('weapon4', 10, 'special').expectedItems);
+    expect(refinePlan('weapon4', 10, 'hd').expectedHdAttempts).toBeGreaterThan(0);
   });
 
   it('agrees with a plain simulation of the HD rules', () => {
@@ -167,7 +169,7 @@ describe('refinePlan: mixed ores and HD', () => {
       while (level < target) {
         attempts += 1;
         const hd = oreAt('hd', level) === 'hd';
-        if (rand() * 100 < chanceAt(gear, level + 1, false)) level += 1;
+        if (rand() * 100 < chanceAt(gear, level + 1, !hd)) level += 1;
         else if (hd) level -= 1;
         else {
           items += 1;
