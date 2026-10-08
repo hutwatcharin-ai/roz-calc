@@ -1,5 +1,6 @@
 // app/guides/elements/page.tsx
 import Link from 'next/link';
+import { ELEMENT_TH } from '@/lib/monster-th';
 
 // The element column's own values, paired with the Thai the monster list
 // shows. Only the ten a monster can carry -- the table above also has rows
@@ -18,7 +19,24 @@ const MONSTER_ELEMENTS: [string, string][] = [
 ];
 import ElementTable from '@/components/ElementTable';
 import DamagePicker from '@/components/DamagePicker';
-import type { ElementLevel } from '@/lib/element-table';
+import PageHeader from '@/components/PageHeader';
+import { ELEMENTS, elementModifier, type Element, type ElementLevel } from '@/lib/element-table';
+
+const EL_COLOR: Record<Element, string> = {
+  Neutral: '#c9c3e6', Water: '#3d9bff', Earth: '#d9a640', Fire: '#ff6b3d', Wind: '#4dffb8',
+  Poison: '#b26bff', Holy: '#ffe53d', Shadow: '#8a7bb8', Ghost: '#7ad7ff', Undead: '#ff5c8a',
+};
+
+/** For each monster element at level 1: the attack elements that hit hardest, and the ones that do nothing. */
+function cheat(def: Element) {
+  const rows = ELEMENTS.map((a) => ({ a, v: elementModifier(a, def, 1) }));
+  const top = Math.max(...rows.map((r) => r.v));
+  return {
+    best: top > 100 ? rows.filter((r) => r.v === top) : [],
+    top,
+    none: rows.filter((r) => r.v <= 0),
+  };
+}
 
 export const metadata = {
   title: 'ตารางธาตุ Ragnarok Zero',
@@ -31,11 +49,36 @@ const LEVELS: ElementLevel[] = [1, 2, 3, 4];
 export default function ElementsPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตารางธาตุ Ragnarok Zero</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        แถว = ธาตุอาวุธ · คอลัมน์ = ธาตุเป้าหมาย · ตัวเลข = ดาเมจที่เหลือ (100% เท่าเดิม, เกินคือแรงขึ้น) ·
-        ระดับธาตุของมอน (1–4) ดูได้ในหน้ามอนตัวนั้น
-      </p>
+      <PageHeader
+        title="ตารางธาตุ Ragnarok Zero"
+        lead="แถว = ธาตุอาวุธ · คอลัมน์ = ธาตุเป้าหมาย · ตัวเลข = ดาเมจที่เหลือ (100% เท่าเดิม, เกินคือแรงขึ้น) · ระดับธาตุของมอน (1–4) ดูได้ในหน้ามอนตัวนั้น"
+      />
+
+      {/* The answer most readers came for, before the 400-cell tables. */}
+      <section className="card card--yellow">
+        <h2 className="section-title">เจอมอนธาตุนี้ ใช้ธาตุอะไรตี (ระดับ 1)</h2>
+        <div className="elcheat">
+          {MONSTER_ELEMENTS.map(([code, th]) => {
+            const c = cheat(code as Element);
+            return (
+              <Link key={code} className="elcheat__row" href={`/database/monsters?element=${code}`} style={{ '--el': EL_COLOR[code as Element] } as React.CSSProperties}>
+                <span className="elcheat__def">มอน{th}</span>
+                <span className="elcheat__best">
+                  {c.best.length ? (
+                    <>
+                      <b>{c.top}%</b> {c.best.map((r) => ELEMENT_TH[r.a] ?? r.a).join(' · ')}
+                    </>
+                  ) : (
+                    <span className="muted">ไม่มีธาตุไหนแรงกว่าปกติ</span>
+                  )}
+                </span>
+                {c.none.length > 0 && <span className="elcheat__none">0% {c.none.map((r) => ELEMENT_TH[r.a] ?? r.a).join(' · ')}</span>}
+              </Link>
+            );
+          })}
+        </div>
+        <p className="muted" style={{ marginBottom: 0 }}>กดแถวเพื่อดูมอนธาตุนั้นทั้งหมด · ระดับธาตุสูงขึ้นตัวเลขเปลี่ยน ดูตารางเต็มด้านล่าง</p>
+      </section>
 
       {/* Spec 3.5 asked for a permanent warning because the only source at the
           time was Renewal reference data. The source is now the game's own

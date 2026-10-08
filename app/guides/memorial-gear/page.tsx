@@ -36,45 +36,39 @@ export const metadata: Metadata = {
     'ชุด Subjugation → Expedition → Contingent → Conqueror ใน Ragnarok Zero Global ครบทุกชิ้น บอกค่าจากในเกม ชิ้นไหนอัปเป็นชิ้นไหน ใช้คริสตัลกี่ก้อน และใส่คู่กับอะไร',
 };
 
-/** A piece: sprite, name, link, and what the game says it does. */
-function PieceRow({ piece, dim }: { piece: GearPiece; dim: boolean }) {
+/** A piece as a card: sprite, name, level, and the game's own text line by
+ *  line (owner, 8 Oct 2026: cards instead of a text-heavy table). */
+function PieceCard({ piece, dim }: { piece: GearPiece; dim: boolean }) {
+  const lines = (piece.effect ?? '').split(/\n/).map((l) => l.trim()).filter(Boolean);
+  const head = (
+    <>
+      <span className="rcard__icon"><ItemIcon iconUrl={piece.icon} category="Armor" size={32} /></span>
+      <span className="rcard__name">{piece.name}</span>
+    </>
+  );
   return (
-    <tr className={dim ? 'gear--locked' : undefined}>
-      <td data-label="ชิ้น">
-        {piece.id === null ? (
-          <span className="recipe__item">{piece.name}</span>
-        ) : (
-          <Link className="recipe__item" href={itemHref(piece.id, 'Armor')}>
-            <ItemIcon iconUrl={piece.icon} category="Armor" size={22} />
-            <span>{piece.name}</span>
-          </Link>
-        )}
-      </td>
-      <td data-label="เลเวล" className="num">{piece.level ?? '—'}</td>
-      <td data-label="ผล" className="effect">
-        <span className="effect__text" style={{ whiteSpace: 'pre-line' }}>{piece.effect ?? '—'}</span>
-      </td>
-    </tr>
+    <article className={'rcard mgpiece' + (dim ? ' is-locked' : '')}>
+      <header className="rcard__head">
+        {piece.id === null ? <span className="rcard__product">{head}</span> : <Link className="rcard__product" href={itemHref(piece.id, 'Armor')}>{head}</Link>}
+        <span className="rcard__badge mono">Lv {piece.level ?? '?'}</span>
+      </header>
+      {lines.length ? (
+        <ul className="mgpiece__fx">
+          {lines.map((l, i) => <li key={i}>{l}</li>)}
+        </ul>
+      ) : (
+        <p className="muted" style={{ margin: 0 }}>ยังไม่มีข้อความผล</p>
+      )}
+    </article>
   );
 }
 
 function SetTable({ pieces, dim }: { pieces: GearPiece[]; dim: boolean }) {
   return (
-    <div className="recipe__scroll">
-      <table className="data-table recipe">
-        <thead>
-          <tr>
-            <th>ชิ้น</th>
-            <th className="num">เลเวล</th>
-            <th>ผลจากในเกม</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pieces.map((p) => (
-            <PieceRow key={p.name} piece={p} dim={dim} />
-          ))}
-        </tbody>
-      </table>
+    <div className="rcards">
+      {pieces.map((p) => (
+        <PieceCard key={p.name} piece={p} dim={dim} />
+      ))}
     </div>
   );
 }
@@ -98,11 +92,24 @@ export default async function MemorialGearPage() {
           { name: 'ชุดดันเจี้ยนความทรงจำ', path: '/guides/memorial-gear' },
         ])}
       />
-      <PageHeader title="ชุดดันเจี้ยนความทรงจำ — 4 แรงค์" />
-      <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
-        <strong>อัปต่อกันเป็นทอด</strong> ไม่ได้หาทีละชิ้น เก็บแรงค์ IV แล้วอัปขึ้นไป ·
-        เพดานเลเวล {LEVEL_CAP} ใส่ได้ {open.length} แรงค์ ({open.map((r) => r.rank).join(', ')}) ที่เหลือคือปลายทางของชิ้นที่เก็บอยู่
-      </p>
+      <PageHeader
+        title="ชุดดันเจี้ยนความทรงจำ — 4 แรงค์"
+        lead={
+          <>
+            <strong>อัปต่อกันเป็นทอด</strong> ไม่ได้หาทีละชิ้น เก็บแรงค์ IV แล้วอัปขึ้นไป · เพดานเลเวล {LEVEL_CAP} ใส่ได้ {open.length} แรงค์
+            ({open.map((r) => r.rank).join(', ')}) ที่เหลือคือปลายทางของชิ้นที่เก็บอยู่
+          </>
+        }
+      />
+
+      <nav className="guildp__toc" aria-label="ในหน้านี้">
+        <a href="#ladder">สายอัปเกรด</a>
+        {open.map((r) => <a key={r.rank} href={`#rank-${r.rank}`}>แรงค์ {r.rank}</a>)}
+        <a href="#locked">แรงค์ที่ยังใส่ไม่ได้</a>
+        <a href="#stones">Jellostone</a>
+        <a href="#accessories">เครื่องประดับ</a>
+        {SHOW_ENCHANT && <a href="#enchant">เอนแชนต์</a>}
+      </nav>
 
       {failed && <p className="filterstate">โหลดข้อมูลไอเทมไม่สำเร็จ ค่าของแต่ละชิ้นอาจไม่ขึ้น</p>}
 
@@ -113,50 +120,35 @@ export default async function MemorialGearPage() {
         ช่อง &quot;ผลจากในเกม&quot; แรงค์ IV และ III คือข้อความภาษาไทยบนไอเทมในไคลเอนต์เกม · แรงค์ II และ I ยังไม่ลงเซิร์ฟ ไคลเอนต์ยังไม่มีภาษาไทย เว็บนี้แปลเองจากข้อความภาษาอังกฤษ
       </p>
 
-      <section className="card card--cyan">
+      <section id="ladder" className="card card--cyan" style={{ scrollMarginTop: 90 }}>
         <h2 className="section-title">สายอัปเกรด</h2>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>แรงค์</th>
-                <th>ชื่อ</th>
-                <th className="num">ใส่ได้ที่เลเวล</th>
-                <th>ได้มาจาก</th>
-                <th>สถานะตอนนี้</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ranks.map((r) => (
-                <tr key={r.rank}>
-                  <td data-label="แรงค์">{r.rank}</td>
-                  <td data-label="ชื่อ"><strong>{r.name}</strong></td>
-                  <td data-label="เลเวล" className="num">{r.level}</td>
-                  <td data-label="ได้มาจาก">
-                    {r.from}
-                    {r.crystal && (
-                      <>
-                        {' · '}
-                        <MaterialLink piece={lookup(items, r.crystal)} /> ×{r.crystalAmount}
-                      </>
-                    )}
-                    {!r.crystal && r.crystalAmount > 0 && ' · คริสตัลอีกชนิด ×50 (ยังไม่มีในฐานข้อมูลเรา)'}
-                  </td>
-                  <td data-label="สถานะ">
-                    {r.open ? <span className="gearstate gearstate--open">ใส่ได้</span> : <span className="gearstate">ยังใส่ไม่ได้</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ol className="mgladder">
+          {ranks.map((r) => (
+            <li key={r.rank} className={r.open ? 'is-open' : undefined}>
+              <span className="mgladder__rank mono">{r.rank}</span>
+              <strong>{r.name}</strong>
+              <small>เลเวล {r.level}</small>
+              <span className={r.open ? 'gearstate gearstate--open' : 'gearstate'}>{r.open ? 'ใส่ได้' : 'ยังใส่ไม่ได้'}</span>
+              <span className="mgladder__from">
+                {r.from}
+                {r.crystal && (
+                  <>
+                    <br />
+                    <MaterialLink piece={lookup(items, r.crystal)} /> ×{r.crystalAmount}
+                  </>
+                )}
+                {!r.crystal && r.crystalAmount > 0 && <><br />คริสตัลอีกชนิด ×50 (ยังไม่มีในฐานข้อมูลเรา)</>}
+              </span>
+            </li>
+          ))}
+        </ol>
         <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
           ทุกขั้นใช้ของแรงค์ก่อนหน้า 1 ชิ้น + คริสตัล 50 ก้อน + Jellostone ตามชิ้น ของเดิมหายไปกลายเป็นชิ้นใหม่
         </p>
       </section>
 
       {open.map((r) => (
-        <section key={r.rank} style={{ marginTop: 26 }}>
+        <section key={r.rank} id={`rank-${r.rank}`} className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
           <h2 className="section-title">
             แรงค์ {r.rank} · {r.name} <span className="muted" style={{ fontWeight: 400 }}>· ใส่ได้ตอนนี้</span>
           </h2>
@@ -176,7 +168,7 @@ export default async function MemorialGearPage() {
         </section>
       ))}
 
-      <section style={{ marginTop: 30 }}>
+      <section id="locked" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
         <h2 className="section-title">แรงค์ที่ยังใส่ไม่ได้</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 12, maxWidth: '70ch', fontSize: 13 }}>
           ต้องเลเวล {locked.map((r) => r.level).join(' / ')} เกินเพดาน {LEVEL_CAP} · ใส่ครบ 4 ชิ้นในชุดเดียวกันถึงได้โบนัสเซ็ต
@@ -196,30 +188,19 @@ export default async function MemorialGearPage() {
         ))}
       </section>
 
-      <section style={{ marginTop: 30 }}>
+      <section id="stones" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
         <h2 className="section-title">Jellostone ทำจากอะไร</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
           หินก้อนหนึ่งใช้เศษ 5 ชิ้น เศษดรอปจากมอนที่ชื่อตรงกับหิน
         </p>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>หิน</th>
-                <th>ทำจาก</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stoneFromFragment.map((s) => (
-                <tr key={s.stone}>
-                  <td data-label="หิน"><MaterialLink piece={lookup(items, s.stone)} /></td>
-                  <td data-label="ทำจาก">
-                    <MaterialLink piece={lookup(items, s.fragment)} /> ×{s.amount}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="oflows">
+          {stoneFromFragment.map((st) => (
+            <div key={st.stone} className="oflow">
+              <span className="oflow__in"><MaterialLink piece={lookup(items, st.fragment)} /> <b className="mono" style={{ color: 'var(--yellow)' }}>×{st.amount}</b></span>
+              <span className="oflow__arrow" aria-hidden="true">▶</span>
+              <span className="oflow__out"><MaterialLink piece={lookup(items, st.stone)} /></span>
+            </div>
+          ))}
         </div>
 
         <h3 className="section-title" style={{ fontSize: 15, marginTop: 20 }}>ชิ้นไหนใช้หินอะไร</h3>
@@ -254,7 +235,7 @@ export default async function MemorialGearPage() {
         </div>
       </section>
 
-      <section style={{ marginTop: 30 }}>
+      <section id="accessories" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
         <h2 className="section-title">เครื่องประดับ 4 ชิ้น คนละสายกับชุด</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
           ไม่ได้อยู่ในสายอัปเกรด ทำเองจากอัญมณีที่ดรอปในดันเจี้ยนโหมดยาก ดันเจี้ยนละชิ้น
@@ -292,8 +273,13 @@ export default async function MemorialGearPage() {
       </section>
 
       {SHOW_ENCHANT && (
-      <section style={{ marginTop: 30 }}>
+      <section id="enchant" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
           <h2 className="section-title">เอนแชนต์</h2>
+          <Link className="gtile" href="/tools/enchant" style={{ marginBottom: 12, maxWidth: 420 }}>
+            <span className="gtile__k">เครื่องมือ</span>
+            <span className="gtile__v">คำนวณเอนแชนต์ ▶</span>
+            <span className="gtile__s">ลุ้นค่าที่อยากได้ ต้องลองกี่ครั้ง เสียเงินเท่าไร</span>
+          </Link>
           <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
             ใส่ได้เฉพาะเกราะ และลงในสล็อตที่ต่างกันตามแรงค์ · <strong>ใส่ไม่มีความเสี่ยง แต่ถอดด้วยเงินมีโอกาสของหาย 30%</strong>
           </p>
