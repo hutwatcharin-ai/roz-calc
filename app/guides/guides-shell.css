@@ -279,3 +279,8 @@
 .gx .farmmon__map dd { color: var(--text); font-family: var(--font-sarabun), sans-serif; }
 .gx .farmmon__map small { color: var(--faint); }
 .gx .stardrop__item[hidden], .gx .stardrop__mon[hidden] { display: none; }
+
+/* /navi commands in prose copy on tap (components/NaviTapCopy). */
+.gx code.navicmd { cursor: pointer; position: relative; }
+.gx code.navicmd:hover { outline: 1px solid var(--yellow); }
+.gx code.navicmd.is-copied::after { content: 'ก๊อปแล้ว ✓'; position: absolute; left: 50%; bottom: calc(100% + 4px); transform: translateX(-50%); padding: 2px 7px; border-radius: 4px; background: #4dffb8; color: #0b0820; font: 800 11px var(--font-sarabun), sans-serif; white-space: nowrap; }
