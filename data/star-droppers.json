@@ -18,7 +18,7 @@
       "droppers": [
         {
           "id": 2648,
-          "name": "C3 Soldier Skeleton",
+          "name": "Soldier Skeleton Ringleader",
           "level": 34,
           "image": "/images/monsters/2648.gif",
           "rate": 0.05,
@@ -27,7 +27,7 @@
         },
         {
           "id": 2649,
-          "name": "C4 Soldier Skeleton",
+          "name": "Furious Soldier Skeleton",
           "level": 34,
           "image": "/images/monsters/2649.gif",
           "rate": 0.05,
@@ -72,7 +72,7 @@
         },
         {
           "id": 2691,
-          "name": "C2 Raydric",
+          "name": "Solid Raydric",
           "level": 85,
           "image": "/images/monsters/2691.gif",
           "rate": 0.05,
@@ -99,7 +99,7 @@
         },
         {
           "id": 2639,
-          "name": "C4 Tamruan",
+          "name": "Furious Tamruan",
           "level": 109,
           "image": "/images/monsters/2639.gif",
           "rate": 0.1,
@@ -128,7 +128,7 @@
       "droppers": [
         {
           "id": 2878,
-          "name": "C1 Caramel",
+          "name": "Swift Caramel",
           "level": 27,
           "image": "/images/monsters/2878.gif",
           "rate": 0.15,
@@ -146,7 +146,7 @@
         },
         {
           "id": 2829,
-          "name": "C1 Fur Seal",
+          "name": "Swift Fur Seal",
           "level": 56,
           "image": "/images/monsters/2829.gif",
           "rate": 0.15,
@@ -174,7 +174,7 @@
       "droppers": [
         {
           "id": 2632,
-          "name": "C2 Thief Bug",
+          "name": "Solid Thief Bug",
           "level": 23,
           "image": "/images/monsters/2632.gif",
           "rate": 3,
@@ -183,7 +183,7 @@
         },
         {
           "id": 2633,
-          "name": "C3 Thief Bug",
+          "name": "Thief Bug Ringleader",
           "level": 23,
           "image": "/images/monsters/2633.gif",
           "rate": 3,
@@ -192,7 +192,7 @@
         },
         {
           "id": 2634,
-          "name": "C4 Thief Bug",
+          "name": "Furious Thief Bug",
           "level": 23,
           "image": "/images/monsters/2634.gif",
           "rate": 3,
@@ -246,7 +246,7 @@
         },
         {
           "id": 2891,
-          "name": "C5 Argiope",
+          "name": "Elusive Argiope",
           "level": 97,
           "image": "/images/monsters/2891.gif",
           "rate": 0.15,
@@ -255,7 +255,7 @@
         },
         {
           "id": 2892,
-          "name": "C1 Argiope",
+          "name": "Swift Argiope",
           "level": 97,
           "image": "/images/monsters/2892.gif",
           "rate": 0.15,
@@ -300,7 +300,7 @@
         },
         {
           "id": 2796,
-          "name": "C3 Hyegun",
+          "name": "Hyegun Ringleader",
           "level": 113,
           "image": "/images/monsters/2796.gif",
           "rate": 0.05,
@@ -329,7 +329,7 @@
       "droppers": [
         {
           "id": 2718,
-          "name": "C5 Pecopeco",
+          "name": "Elusive Pecopeco",
           "level": 27,
           "image": "/images/monsters/2718.gif",
           "rate": 0.5,
@@ -347,7 +347,7 @@
         },
         {
           "id": 2868,
-          "name": "C1 Coco",
+          "name": "Swift Coco",
           "level": 41,
           "image": "/images/monsters/2868.gif",
           "rate": 0.65,
@@ -356,7 +356,7 @@
         },
         {
           "id": 2869,
-          "name": "C2 Coco",
+          "name": "Solid Coco",
           "level": 41,
           "image": "/images/monsters/2869.gif",
           "rate": 0.65,
@@ -374,7 +374,7 @@
         },
         {
           "id": 2865,
-          "name": "C3 Cookie",
+          "name": "Cookie Ringleader",
           "level": 70,
           "image": "/images/monsters/2865.gif",
           "rate": 0.75,
@@ -403,7 +403,7 @@
       "droppers": [
         {
           "id": 2868,
-          "name": "C1 Coco",
+          "name": "Swift Coco",
           "level": 41,
           "image": "/images/monsters/2868.gif",
           "rate": 0.5,
@@ -412,7 +412,7 @@
         },
         {
           "id": 2869,
-          "name": "C2 Coco",
+          "name": "Solid Coco",
           "level": 41,
           "image": "/images/monsters/2869.gif",
           "rate": 0.5,
@@ -459,7 +459,7 @@
       "droppers": [
         {
           "id": 2651,
-          "name": "C1 Sohee",
+          "name": "Swift Sohee",
           "level": 64,
           "image": "/images/monsters/2651.gif",
           "rate": 0.15,
@@ -477,7 +477,7 @@
         },
         {
           "id": 2852,
-          "name": "C5 Disguise",
+          "name": "Elusive Disguise",
           "level": 103,
           "image": "/images/monsters/2852.gif",
           "rate": 0.05,
@@ -600,7 +600,7 @@
         },
         {
           "id": 2648,
-          "name": "C3 Soldier Skeleton",
+          "name": "Soldier Skeleton Ringleader",
           "level": 34,
           "image": "/images/monsters/2648.gif",
           "rate": 1.25,
@@ -609,7 +609,7 @@
         },
         {
           "id": 2649,
-          "name": "C4 Soldier Skeleton",
+          "name": "Furious Soldier Skeleton",
           "level": 34,
           "image": "/images/monsters/2649.gif",
           "rate": 1.25,
@@ -627,7 +627,7 @@
         },
         {
           "id": 2651,
-          "name": "C1 Sohee",
+          "name": "Swift Sohee",
           "level": 64,
           "image": "/images/monsters/2651.gif",
           "rate": 0.15,
@@ -768,7 +768,7 @@
       "droppers": [
         {
           "id": 2718,
-          "name": "C5 Pecopeco",
+          "name": "Elusive Pecopeco",
           "level": 27,
           "image": "/images/monsters/2718.gif",
           "rate": 2.5,
@@ -1103,7 +1103,7 @@
       "droppers": [
         {
           "id": 2760,
-          "name": "C2 Martin",
+          "name": "Solid Martin",
           "level": 78,
           "image": "/images/monsters/2760.gif",
           "rate": 0.25,
@@ -1198,7 +1198,7 @@
       "droppers": [
         {
           "id": 2741,
-          "name": "C3 Muka",
+          "name": "Muka Ringleader",
           "level": 25,
           "image": "/images/monsters/2741.gif",
           "rate": 1.25,
@@ -1225,7 +1225,7 @@
         },
         {
           "id": 2800,
-          "name": "C2 Horn",
+          "name": "Solid Horn",
           "level": 35,
           "image": "/images/monsters/2800.gif",
           "rate": 0.4,
@@ -1243,7 +1243,7 @@
         },
         {
           "id": 2829,
-          "name": "C1 Fur Seal",
+          "name": "Swift Fur Seal",
           "level": 56,
           "image": "/images/monsters/2829.gif",
           "rate": 0.05,

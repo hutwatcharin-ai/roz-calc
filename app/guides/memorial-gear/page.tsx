@@ -54,7 +54,7 @@ function PieceCard({ piece, dim }: { piece: GearPiece; dim: boolean }) {
       </header>
       {lines.length ? (
         <ul className="mgpiece__fx">
-          {lines.map((l, i) => <li key={i}>{l}</li>)}
+          {lines.map((l, i) => <li key={i} className={/^(เมื่อ|When)/.test(l) ? 'is-cond' : undefined}>{l}</li>)}
         </ul>
       ) : (
         <p className="muted" style={{ margin: 0 }}>ยังไม่มีข้อความผล</p>
@@ -117,7 +117,7 @@ export default async function MemorialGearPage() {
           item text (lib/memorial-gear thaiEffect), English only where the
           client has no Thai line for that piece. */}
       <p className="muted" style={{ fontSize: 13, marginTop: 0 }}>
-        ช่อง &quot;ผลจากในเกม&quot; แรงค์ IV และ III คือข้อความภาษาไทยบนไอเทมในไคลเอนต์เกม · แรงค์ II และ I ยังไม่ลงเซิร์ฟ ไคลเอนต์ยังไม่มีภาษาไทย เว็บนี้แปลเองจากข้อความภาษาอังกฤษ
+        ผลในการ์ดแต่ละชิ้น แรงค์ IV และ III คือข้อความภาษาไทยบนไอเทมในไคลเอนต์เกม · แรงค์ II และ I ยังไม่ลงเซิร์ฟ ไคลเอนต์ยังไม่มีภาษาไทย เว็บนี้แปลเองจากข้อความภาษาอังกฤษ
       </p>
 
       <section id="ladder" className="card card--cyan" style={{ scrollMarginTop: 90 }}>

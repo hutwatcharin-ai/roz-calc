@@ -97,4 +97,12 @@ describe('no page still looks for the old "C1 Poring" names', () => {
     for (const d of ['app', 'components', 'lib']) walk(d);
     expect(hits).toEqual([]);
   });
+
+  // The star gear guide still printed "C3 Muka" a day after the rename: its
+  // droppers are a JSON snapshot built before it (found 8 Oct 2026).
+  it('has no old champion name in the data snapshots pages read', async () => {
+    const fs = await import('node:fs');
+    const hits = ['data/star-droppers.json'].filter((f) => /"name": ?"C[1-5] /.test(fs.readFileSync(f, 'utf8')));
+    expect(hits).toEqual([]);
+  });
 });
