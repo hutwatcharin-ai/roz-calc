@@ -5,7 +5,8 @@
 //
 // Crab Card (owner, 8 Oct 2026): in game it is ATK +5 and nothing else. The
 // client's "Physical Damage to Water-property monsters +30%" line had put it
-// on the "cards that hit Water monsters" page.
+// on the "cards that hit Water monsters" page. Its one-line Thai effect
+// (items.description_th) was corrected in the database the same day.
 
 export interface ClientTextFix {
   /** Card topic slugs (lib/card-topics) this item must not appear on. */
@@ -19,7 +20,6 @@ export interface ClientTextFix {
 export const CLIENT_TEXT_FIXES: Record<number, ClientTextFix> = {
   4153: {
     topics: ['vs-water'],
-    effectTh: 'ATK +5 · ดาเมจกายภาพต่อ Aster +30% · ใส่ครบชุดกับ Crab, Shellfish และ Aster Card: มอนเผ่าปลามีโอกาสดรอป Sashimi',
     note: 'บรรทัด "เพิ่ม Damage ทางกายภาพต่อมอนสเตอร์ธาตุ Water 30%" ไม่มีผลในเกมจริง ใส่แล้วได้แค่ ATK +5 (เจ้าของเว็บทดสอบ 8 ต.ค. 2026)',
   },
 };
