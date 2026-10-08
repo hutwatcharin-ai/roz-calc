@@ -14,6 +14,7 @@
 // Not shown on purpose: the MVPs whose raid maps sit in these areas. The
 // notice names no MVP, and MVP Raid rotates by daily quest, so "Baphomet is
 // out" would be our guess, not the notice.
+import { isCVariant } from '@/lib/c-variant';
 import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -116,7 +117,7 @@ function floorMobs(rows: Spawn[]): Mob[] {
   const seen = new Map<number, Mob>();
   for (const row of rows) {
     const m = row.monsters;
-    if (!m || /^C\d /.test(m.name_en) || !row.amount) continue;
+    if (!m || isCVariant(m.name_en) || !row.amount) continue;
     const prev = seen.get(m.id);
     seen.set(m.id, { id: m.id, name: monsterLabel(m.id, m.name_en), level: m.level, amount: (prev?.amount ?? 0) + row.amount, aggressive: m.is_aggressive });
   }
@@ -143,7 +144,7 @@ export default async function Patch20261001Page() {
   // merely spawns once on a floor, like Creamy, is not one).
   const minis = [...new Map(
     spawns
-      .filter((s) => LABYRINTH_CODES.includes(s.map_code) && s.monsters && isMini(s.monsters.id) && !/^C\d /.test(s.monsters.name_en))
+      .filter((s) => LABYRINTH_CODES.includes(s.map_code) && s.monsters && isMini(s.monsters.id) && !isCVariant(s.monsters.name_en))
       .map((s) => [s.monsters!.id, s.monsters!]),
   ).values()].sort((a, b) => (zeny.get(b.id) ?? 0) - (zeny.get(a.id) ?? 0));
 

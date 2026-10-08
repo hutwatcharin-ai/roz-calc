@@ -65,7 +65,7 @@ async function main() {
   const droppers = new Map();
   for (const d of drops) {
     const name = monsterName.get(d.monster_id);
-    if (!cardName.has(d.item_id) || !name || /^C\d /.test(name)) continue;
+    if (!cardName.has(d.item_id) || !name || /^(Swift|Solid|Furious|Elusive) |Ringleader$|^C\d /.test(name)) continue;
     const set = droppers.get(d.item_id) ?? new Set();
     set.add(d.monster_id);
     droppers.set(d.item_id, set);

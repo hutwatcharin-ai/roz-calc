@@ -8,6 +8,7 @@
 // columns, two URLs competing for the same search, and two places to fix
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
+import { isCVariant } from '@/lib/c-variant';
 import './page.css';
 import SuggestInput from '@/components/SuggestInput';
 import { itemFormerNames } from '@/lib/item-former-names';
@@ -111,7 +112,7 @@ export default async function CardsPage({
     const name = monsterName.get(d.monster_id);
     // A Challenge-dungeon clone is the same monster met somewhere else;
     // listing both doubles the cell and tells the reader nothing new.
-    if (!name || /^C\d /.test(name)) continue;
+    if (!name || isCVariant(name)) continue;
     const list = droppers.get(d.item_id) ?? [];
     list.push({ id: d.monster_id, name, rate: d.rate ?? 0 });
     droppers.set(d.item_id, list);

@@ -9,6 +9,7 @@
 //
 // The owner asked for this page on 17 Sep 2026 after reading the notice; the
 // notice text came from their screenshot (roz.mygnjoy.com is off limits to us).
+import { isCVariant } from '@/lib/c-variant';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -108,7 +109,7 @@ function plainMonsters(rows: Spawn[]) {
   const seen = new Map<number, { id: number; name: string; level: number; amount: number; aggressive: boolean }>();
   for (const row of rows) {
     const m = row.monsters;
-    if (!m || /^C\d /.test(m.name_en) || !row.amount) continue;
+    if (!m || isCVariant(m.name_en) || !row.amount) continue;
     const prev = seen.get(m.id);
     seen.set(m.id, {
       id: m.id,

@@ -76,3 +76,25 @@ describe('isInstanceVariant', () => {
     }
   });
 });
+
+describe('no page still looks for the old "C1 Poring" names', () => {
+  // The champions were renamed on 7 Oct 2026 (Swift Poring ...), and five
+  // places kept testing /^C\d / for a day, which matched nothing any more and
+  // let champions through. Everything goes through isCVariant now.
+  it('has no /^C\d / name test outside c-variant itself', async () => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const hits: string[] = [];
+    const walk = (dir: string) => {
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        const p = path.join(dir, e.name);
+        if (e.isDirectory()) walk(p);
+        else if (/\.(ts|tsx)$/.test(e.name) && !/\.test\.tsx?$/.test(e.name) && !p.includes('c-variant') && !p.includes('FormerNameLine')) {
+          if (fs.readFileSync(p, 'utf8').includes(String.raw`/^C\d /`)) hits.push(p);
+        }
+      }
+    };
+    for (const d of ['app', 'components', 'lib']) walk(d);
+    expect(hits).toEqual([]);
+  });
+});
