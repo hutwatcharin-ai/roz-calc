@@ -4,7 +4,8 @@
   "how": "node scripts/build-crafting-recipes.mjs",
   "sources": {
    "rathena": "db/pre-re/produce_db.txt + db/create_arrow_db.yml (server production tables, classic RO)",
-   "prontera": "roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)"
+   "prontera": "roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)",
+   "rozerodb": "rozerodb.com item pages (one hand-listed recipe neither other source has)"
   },
   "confidence": {
    "both": "rAthena and the Zero database list it with the same materials",
@@ -17895,6 +17896,41 @@
    "otherRegion": false,
    "sources": [
     "prontera"
+   ]
+  },
+  {
+   "id": "z5063-930-970",
+   "kind": "quest",
+   "product": {
+    "id": 5063,
+    "name": "Giant Band Aid",
+    "icon": "/images/items/5063.gif",
+    "category": "Armor",
+    "amount": 1
+   },
+   "materials": [
+    {
+     "id": 930,
+     "name": "Rotten Bandage",
+     "icon": "/images/items/930.gif",
+     "category": "Other",
+     "amount": 50
+    },
+    {
+     "id": 970,
+     "name": "Alcohol",
+     "icon": "/images/items/970.gif",
+     "category": "Other",
+     "amount": 1
+    }
+   ],
+   "itemLevel": null,
+   "skillId": null,
+   "skillLevel": null,
+   "confidence": "prontera-only",
+   "otherRegion": false,
+   "sources": [
+    "rozerodb"
    ]
   },
   {

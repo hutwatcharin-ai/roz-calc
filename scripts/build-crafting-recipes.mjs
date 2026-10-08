@@ -299,6 +299,29 @@ async function main() {
     });
   }
 
+  // Recipes neither source has, read off rozerodb's own item pages (another
+  // Zero database; same "one Zero source" trust as prontera-only).
+  // Giant Band Aid: rozerodb /items/930 and /items/970, "Headgear Crafting"
+  // (found 8 Oct 2026 checking rozeroplanner's quest-reward flags).
+  const ROZERODB_ONLY = [{ product: 5063, materials: [{ id: 930, amount: 50 }, { id: 970, amount: 1 }], kind: 'quest' }];
+  for (const r of ROZERODB_ONLY) {
+    const k = `${r.product}|${r.materials.map((m) => m.id).sort().join(',')}`;
+    if (seen.has(k) || !has(r.product) || r.materials.some((m) => !has(m.id))) continue;
+    seen.add(k);
+    recipes.push({
+      id: `z${r.product}-${r.materials.map((m) => m.id).join('-')}`,
+      kind: r.kind,
+      product: itemRef(r.product, { amount: 1 }),
+      materials: r.materials.map((m) => itemRef(m.id, { amount: m.amount })),
+      itemLevel: null,
+      skillId: null,
+      skillLevel: null,
+      confidence: 'prontera-only',
+      otherRegion: false,
+      sources: ['rozerodb'],
+    });
+  }
+
   const byKind = {};
   const byConfidence = {};
   for (const r of recipes) {
@@ -319,6 +342,7 @@ async function main() {
           sources: {
             rathena: 'db/pre-re/produce_db.txt + db/create_arrow_db.yml (server production tables, classic RO)',
             prontera: 'roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)',
+            rozerodb: 'rozerodb.com item pages (one hand-listed recipe neither other source has)',
           },
           confidence: {
             both: 'rAthena and the Zero database list it with the same materials',
