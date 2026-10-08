@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import CraftGuide from '@/components/CraftGuide';
+import PageHeader from '@/components/PageHeader';
 import RecipeTable from '@/components/RecipeTable';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
-import { CREATE_DEADLY_POISON, recipesOfSkill } from '@/lib/crafting';
+import { CREATE_DEADLY_POISON, recipesOfKind, recipesOfSkill, type Recipe } from '@/lib/crafting';
 
 export const metadata = {
   title: 'วิธีทำยา Alchemist และขวดพิษ Assassin — สูตร Ragnarok Zero',
@@ -99,7 +100,15 @@ function CraftTable({ rows, withHats }: { rows: { out: Mat; zeny: number; mats: 
   );
 }
 
+// The Creation Guide a recipe needs is its held material; it is the natural
+// way to group them (owner, 8 Oct 2026: filter chips on every recipe list).
+const bookOf = (r: Recipe) => r.materials.find((m) => m.held && /Guide$/.test(m.name)) ?? null;
+const bookTag = (name: string) => 'g' + name.replace(/[^A-Za-z]/g, '');
+const shortBook = (name: string) => name.replace(/ Creation Guide$/, '');
+
 export default function PotionCraftingGuidePage() {
+  const confirmed = recipesOfKind('brew').filter((r) => r.confidence === 'both');
+  const books = [...new Map(confirmed.map(bookOf).filter((b): b is NonNullable<typeof b> => b != null).map((b) => [b.name, b])).values()];
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <JsonLd data={breadcrumbJsonLd([
@@ -107,17 +116,32 @@ export default function PotionCraftingGuidePage() {
         { name: 'ไกด์', path: '/guides' },
         { name: 'ทำยา Alchemist และขวดพิษ Assassin', path: '/guides/potion-crafting' },
       ])} />
-      <h1 className="pagehead__title">วิธีทำยา Alchemist และขวดพิษ Assassin</h1>
-      <p className="muted" style={{ marginTop: 8 }}>
-        เป็น Assassin? ข้ามไปที่ <a href="#assassin">สูตร Poison Bottle</a>
-      </p>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '68ch' }}>
-        ทุกครั้งที่ปรุงต้องมีวัตถุดิบของสูตร ตำราที่ตรงกับยา และ <strong>Mortar Bowl 1 ชิ้น</strong> ตำราไม่หาย แต่ Mortar Bowl กับวัตถุดิบถูกใช้ต่อการลอง 1 ครั้ง
-      </p>
+      <PageHeader
+        title="วิธีทำยา Alchemist และขวดพิษ Assassin"
+        lead={<>ทุกครั้งที่ปรุงต้องมีวัตถุดิบของสูตร ตำราที่ตรงกับยา และ <strong>Mortar Bowl 1 ชิ้น</strong> ตำราไม่หาย แต่ Mortar Bowl กับวัตถุดิบถูกใช้ต่อการลอง 1 ครั้ง</>}
+      />
+
+      <nav className="gtiles" aria-label="เลือกส่วนที่จะอ่าน">
+        <a className="gtile" href="#recipes">
+          <span className="gtile__k">ALCHEMIST</span>
+          <span className="gtile__v"><img src="/images/items/501.gif" alt="" width={24} height={24} />{confirmed.length} สูตร</span>
+          <span className="gtile__s">Prepare Potion · ยา ขวดเคมี ยาต้านธาตุ</span>
+        </a>
+        <a className="gtile" href="#assassin">
+          <span className="gtile__k">ASSASSIN</span>
+          <span className="gtile__v"><img src="/images/items/678.gif" alt="" width={24} height={24} />Poison Bottle</span>
+          <span className="gtile__s">Create Deadly Poison</span>
+        </a>
+        <a className="gtile" href="#alchemy-lab">
+          <span className="gtile__k">ทุกอาชีพ</span>
+          <span className="gtile__v"><img src="/images/items/975.gif" alt="" width={24} height={24} />สีย้อม 8 สี</span>
+          <span className="gtile__s">ทำกับ NPC ไม่ต้องมีสกิล</span>
+        </a>
+      </nav>
 
       <section className="card card--cyan" style={{ marginTop: 18 }}>
         <h2 className="section-title">เตรียมก่อนกดทำยา</h2>
-        <ol style={{ margin: 0, paddingInlineStart: 22 }}>
+        <ol className="gsteps">
           <li>เปลี่ยนเป็น Alchemist และเรียน Potion Research Lv.5 เพื่อปลด Prepare Potion</li>
           <li>พก <Link href="/database/items/7134">Medicine Bowl (Mortar Bowl)</Link> ตามจำนวนครั้งที่จะลอง</li>
           <li>พกตำราของสูตรนั้น ตำราเป็นกุญแจปลดสูตรและไม่ถูกใช้หมด</li>
@@ -129,12 +153,18 @@ export default function PotionCraftingGuidePage() {
           of this table, with no sprites and no links, and the grouping they
           carried -- which Creation Guide each recipe needs -- is the
           "ต้องมีติดตัว" column here. */}
-      <section style={{ marginTop: 24 }}>
-        <h2 className="section-title">สูตรทั้งหมด</h2>
-        <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
-          กดชื่อของได้ทุกชิ้นเพื่อดูว่าหาจากไหน · ตำราที่ต้องพกอยู่ในคอลัมน์ &ldquo;ต้องมีติดตัว&rdquo;
-        </p>
-        <CraftGuide kind="brew">
+      <section id="recipes" style={{ scrollMarginTop: 90 }}>
+        <CraftGuide
+          kind="brew"
+          title={`สูตรยา Alchemist (${confirmed.length})`}
+          placeholder="ค้นชื่อยา หรือวัตถุดิบ เช่น Red Herb"
+          tagsOf={(r) => { const b = bookOf(r); return b ? [bookTag(b.name)] : []; }}
+          badgeOf={(r) => { const b = bookOf(r); return b ? shortBook(b.name) : null; }}
+          facets={[{
+            label: 'ตำรา',
+            options: books.map((b) => ({ value: bookTag(b.name), label: shortBook(b.name), icon: b.icon ?? `/images/items/${b.id}.gif`, count: confirmed.filter((r) => bookOf(r)?.name === b.name).length })),
+          }]}
+        >
           <></>
         </CraftGuide>
       </section>
@@ -188,9 +218,9 @@ export default function PotionCraftingGuidePage() {
         </p>
 
         <h3 className="section-title" style={{ fontSize: 15, marginTop: 14 }}>1. ปลดทำน้ำยา (ทำครั้งเดียว)</h3>
-        <ol style={{ margin: 0, paddingInlineStart: 22 }}>
+        <ol className="gsteps">
           {UNLOCK.map((u) => (
-            <li key={u.who} style={{ marginBottom: 6 }}>
+            <li key={u.who}>
               <strong>{u.who}</strong> <code className="mono navicmd">/navi {u.map} {u.x}/{u.y}</code>
               <br />
               <span className="muted">{u.what}</span>

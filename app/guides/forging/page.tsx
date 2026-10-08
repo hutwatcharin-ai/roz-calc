@@ -7,37 +7,57 @@
 // contains an element stone, and no elemental weapon appears as a product,
 // because an elemental weapon is not a separate item. You forge the ordinary
 // weapon from the ordinary recipe and drop a stone in during the same craft.
-// Two pages described one action, and neither could be read without the
-// other -- the forging page never mentioned that stones existed, and the
-// elemental page never said which weapons you could forge.
+//
+// Redesigned 8 Oct 2026 (owner: every guide in the newer arcade look, and
+// fill in what is missing): recipe cards filtered by the Smith skill and the
+// weapon level, the stones as tiles, and each skill's own success bonus from
+// the skill data.
 
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
 import CraftGuide from '@/components/CraftGuide';
 import ItemIcon from '@/components/ItemIcon';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
-import { craftCounts } from '@/lib/crafting';
+import { recipesOfKind, type Recipe } from '@/lib/crafting';
 
 export const revalidate = 86400;
 
 export const metadata = {
   title: 'ตีอาวุธ Blacksmith Ragnarok Zero — สูตร วัตถุดิบ และอาวุธธาตุ',
   description:
-    'อาวุธที่ Blacksmith ตีเองได้ใน Ragnarok Zero Global ครบทุกสูตรพร้อมวัตถุดิบ วิธีใส่หินธาตุให้เป็นอาวุธธาตุ หินแต่ละก้อนทำจากอะไร และอะไรทำให้ตีติดบ่อยขึ้น',
+    'อาวุธที่ Blacksmith ตีเองได้ใน Ragnarok Zero Global ครบทุกสูตรพร้อมวัตถุดิบ กรองตามสกิล Smith และระดับอาวุธ วิธีใส่หินธาตุให้เป็นอาวุธธาตุ หินแต่ละก้อนทำจากอะไร และอะไรทำให้ตีติดบ่อยขึ้น',
 };
 
 // Which stone makes which element. This is the one thing the recipe data
-// cannot say -- the stone is chosen at the forge, so it is in no recipe --
-// and it is the whole reason the elemental guide existed.
+// cannot say -- the stone is chosen at the forge, so it is in no recipe.
 const ELEMENT_STONES = [
-  { element: 'ไฟ', stone: 'Flame Heart', id: 994 },
-  { element: 'น้ำ', stone: 'Mystic Frozen', id: 995 },
-  { element: 'ลม', stone: 'Rough Wind', id: 996 },
-  { element: 'ดิน', stone: 'Great Nature', id: 997 },
+  { element: 'ไฟ', stone: 'Flame Heart', id: 994, color: '#ff6b3d' },
+  { element: 'น้ำ', stone: 'Mystic Frozen', id: 995, color: '#3d9bff' },
+  { element: 'ลม', stone: 'Rough Wind', id: 996, color: '#4dffb8' },
+  { element: 'ดิน', stone: 'Great Nature', id: 997, color: '#d9a640' },
 ] as const;
 
+// rAthena skill ids on the forge rows. The names and the 5% per level (max
+// 3) are the client's own skill text in data/skill-trees.json.
+const SMITH: Record<number, { name: string; th: string }> = {
+  98: { name: 'Smith Dagger', th: 'มีด' },
+  99: { name: 'Smith Sword', th: 'ดาบมือเดียว' },
+  100: { name: 'Smith Two-handed Sword', th: 'ดาบสองมือ' },
+  101: { name: 'Smith Axe', th: 'ขวาน' },
+  102: { name: 'Smith Mace', th: 'กระบอง' },
+  103: { name: 'Smith Knuckle', th: 'สนับมือ' },
+  104: { name: 'Smith Spear', th: 'หอก' },
+};
+
+const tagsOf = (r: Recipe) => [r.skillId != null ? `s${r.skillId}` : '', r.itemLevel != null ? `l${r.itemLevel}` : ''].filter(Boolean);
+const badgeOf = (r: Recipe) => (r.itemLevel != null ? `อาวุธ Lv ${r.itemLevel}` : null);
+
 export default function ForgingPage() {
-  const counts = craftCounts();
+  const all = recipesOfKind('forge');
+  const confirmed = all.filter((r) => r.confidence === 'both');
+  const count = (pred: (r: Recipe) => boolean) => confirmed.filter(pred).length;
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <JsonLd
@@ -47,98 +67,133 @@ export default function ForgingPage() {
           { name: 'ตีอาวุธ', path: '/guides/forging' },
         ])}
       />
-      <h1 className="pagehead__title">ตีอาวุธเอง — สูตรทั้งหมด และวิธีทำอาวุธธาตุ</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '68ch' }}>
-        Blacksmith ตีอาวุธเองได้ {counts.forge?.total ?? 0} แบบ <strong>อาวุธธาตุไม่ใช่สูตรแยก</strong>
-        ใช้สูตรเดียวกันนี้แหละ แล้วใส่หินธาตุ 1 ก้อนตอนกดตี อาวุธที่ออกมาจะเป็นธาตุของหินก้อนนั้น
-        แลกกับโอกาสสำเร็จที่ลดลง
-      </p>
-      {/* Owner, 5 Oct 2026: a forged weapon is its own item. */}
-      <p className="muted" style={{ marginTop: 8, maxWidth: '68ch' }}>
-        <strong>ของที่ตีได้ไม่ใช่ตัวเดียวกับที่ร้านขายหรือมอนดรอป</strong> ชื่อเหมือนกัน แต่ไม่มีช่องการ์ด และสุ่มออปชั่นเพิ่ม 4 แถว · ลิงก์ในตารางพาไปหน้าแบบที่ร้านขาย
-      </p>
+      <PageHeader
+        title="ตีอาวุธเอง — สูตรทั้งหมด และวิธีทำอาวุธธาตุ"
+        lead={
+          <>
+            Blacksmith ตีอาวุธเองได้ {confirmed.length} แบบ · <strong>อาวุธธาตุไม่ใช่สูตรแยก</strong> ใช้สูตรเดียวกัน
+            แล้วใส่หินธาตุ 1 ก้อนตอนกดตี
+          </>
+        }
+      />
 
-      <section className="card card--cyan" style={{ marginTop: 18 }}>
-        <h2 className="section-title">ต้องเตรียมอะไร</h2>
-        <ol style={{ margin: 0, paddingInlineStart: 22, lineHeight: 1.9 }}>
-          <li>Blacksmith ที่มีสกิลตีอาวุธชนิดนั้น เช่น Smith Sword, Smith Dagger หรือ Smith Axe</li>
-          <li>วัตถุดิบตามสูตรในตารางด้านล่าง</li>
-          <li>ค้อนตีเหล็กและทั่ง (Anvil) โดยทั่งที่ดีกว่าจะเพิ่มโอกาสสำเร็จ</li>
-          <li>ถ้าจะทำอาวุธธาตุ เตรียมหินธาตุ 1 ก้อนไปด้วย</li>
-          <li>ช่องเก็บของและน้ำหนักเหลือพอ เพราะถ้าสำเร็จจะได้อาวุธทันที</li>
+      <div className="gtiles">
+        <div className="gtile">
+          <span className="gtile__k">สูตรที่ยืนยันแล้ว</span>
+          <span className="gtile__v">{confirmed.length}</span>
+          <span className="gtile__s">ใช้ได้กับ 7 สกิล Smith</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">วัตถุดิบหลัก</span>
+          <span className="gtile__v">
+            <img src="/images/items/998.gif" alt="" width={24} height={24} />
+            <img src="/images/items/999.gif" alt="" width={24} height={24} />
+            <img src="/images/items/984.gif" alt="" width={24} height={24} />
+          </span>
+          <span className="gtile__s">Iron · Steel · Oridecon</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">สกิล Smith</span>
+          <span className="gtile__v">+5% / Lv</span>
+          <span className="gtile__s">เต็ม Lv 3 = +15% ต่อชนิดอาวุธ</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">ของที่ตีได้</span>
+          <span className="gtile__v">0 ช่อง</span>
+          <span className="gtile__s">แต่สุ่มออปชั่นเพิ่ม 4 แถว</span>
+        </div>
+      </div>
+
+      <section className="card card--cyan" style={{ marginTop: 16 }}>
+        <h2 className="section-title">ตียังไง</h2>
+        <ol className="gsteps">
+          <li>เป็น Blacksmith ที่อัปสกิลตีอาวุธชนิดนั้นแล้ว เช่น <strong>Smith Sword</strong> สำหรับดาบมือเดียว (ทุกสาย Smith ต่อจาก Smith Dagger)</li>
+          <li>เตรียมวัตถุดิบตามสูตรด้านล่าง กับค้อนตีเหล็กและทั่ง (Anvil) ไว้ในกระเป๋า</li>
+          <li>ถ้าจะทำอาวุธธาตุ ใส่หินธาตุ 1 ก้อนในหน้าต่างตอนกดตี</li>
+          <li>เหลือช่องและน้ำหนักในกระเป๋าไว้ด้วย ตีติดแล้วได้อาวุธทันที</li>
         </ol>
+        <p className="muted" style={{ marginBottom: 0 }}>
+          <strong>ของที่ตีได้ไม่ใช่ตัวเดียวกับที่ร้านขายหรือมอนดรอป</strong> ชื่อเหมือนกัน แต่ไม่มีช่องการ์ด และสุ่มออปชั่นเพิ่ม 4 แถว ·
+          ลิงก์ในการ์ดพาไปหน้าแบบที่ร้านขาย
+        </p>
       </section>
 
       <CraftGuide
         kind="forge"
+        title={`สูตรตีอาวุธ (${confirmed.length})`}
+        placeholder="ค้นชื่ออาวุธ หรือวัตถุดิบ เช่น Oridecon"
+        tagsOf={tagsOf}
+        badgeOf={badgeOf}
+        facets={[
+          {
+            label: 'สกิล',
+            options: Object.entries(SMITH)
+              .map(([id, s]) => ({ value: `s${id}`, label: s.th, count: count((r) => r.skillId === Number(id)) }))
+              .filter((o) => o.count > 0),
+          },
+          {
+            label: 'ระดับอาวุธ',
+            options: [1, 2, 3].map((l) => ({ value: `l${l}`, label: `Lv ${l}`, count: count((r) => r.itemLevel === l) })),
+          },
+        ]}
         extra={
           <>
             <section className="card" style={{ marginTop: 20 }}>
               <h2 className="section-title">ทำให้เป็นอาวุธธาตุ</h2>
               <p className="muted" style={{ marginTop: 0, maxWidth: '68ch' }}>
-                ใส่หินธาตุ 1 ก้อนในหน้าต่างตอนกดตี สูตรอาวุธไม่เปลี่ยน วัตถุดิบเท่าเดิม
-                สิ่งที่เปลี่ยนคือธาตุของอาวุธที่ได้ กับโอกาสสำเร็จที่ลดลงราว 25%
+                ใส่หินธาตุ 1 ก้อนตอนกดตี สูตรไม่เปลี่ยน วัตถุดิบเท่าเดิม สิ่งที่เปลี่ยนคือธาตุของอาวุธ กับโอกาสสำเร็จที่ลดลงราว 25%
               </p>
-              <div className="recipe__scroll">
-                <table className="data-table recipe">
-                  <thead>
-                    <tr>
-                      <th>อยากได้อาวุธธาตุ</th>
-                      <th>ใส่หินก้อนนี้</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ELEMENT_STONES.map((row) => (
-                      <tr key={row.element}>
-                        <td data-label="ธาตุ">{row.element}</td>
-                        <td data-label="หิน">
-                          <Link className="recipe__item" href={`/database/items/${row.id}`}>
-                            <ItemIcon iconUrl={`/images/items/${row.id}.gif`} category="Other" size={22} />
-                            <span>{row.stone}</span>
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="fstones">
+                {ELEMENT_STONES.map((row) => (
+                  <Link key={row.id} className="fstone" href={`/database/items/${row.id}`} style={{ '--el': row.color } as React.CSSProperties}>
+                    <span className="fstone__el">ธาตุ{row.element}</span>
+                    <ItemIcon iconUrl={`/images/items/${row.id}.gif`} category="Other" size={32} />
+                    <span className="fstone__name">{row.stone}</span>
+                  </Link>
+                ))}
               </div>
-              <p className="muted" style={{ marginTop: 12 }}>
-                <strong>อย่าใส่ Star Crumb โดยไม่ตั้งใจ</strong> มันเพิ่มความแรงก็จริง แต่ลดโอกาสสำเร็จอีก
-                ก้อนละ 15% และไม่เกี่ยวกับการทำให้อาวุธมีธาตุเลย
+              <p className="ceiling-note" style={{ marginTop: 12 }}>
+                <strong>อย่าใส่ Star Crumb โดยไม่ตั้งใจ</strong> มันเพิ่มความแรงก็จริง แต่ลดโอกาสสำเร็จอีกก้อนละ 15% และไม่ได้ทำให้อาวุธมีธาตุ
               </p>
             </section>
 
-            <section style={{ marginTop: 24 }}>
-              <h2 className="section-title">หินธาตุทำจากอะไร</h2>
-              <p className="muted" style={{ marginTop: 6, maxWidth: '68ch' }}>
-                หลอมเองได้จากของที่มอนธาตุนั้นดรอป ดูครบที่{' '}
-                <Link href="/guides/ore-refining">หลอมแร่และหินธาตุ</Link>
-              </p>
-              <CraftGuide kind="ore">
-                <></>
+            <section style={{ marginTop: 20 }}>
+              <CraftGuide kind="ore" title="หินธาตุกับเหล็กทำจากอะไร">
+                <p className="muted" style={{ margin: '0 0 -4px' }}>
+                  หลอมเองได้จากของที่มอนธาตุนั้นดรอป · ละเอียดกว่านี้ที่ <Link href="/guides/ore-refining">หลอมแร่และหินธาตุ</Link>
+                </p>
               </CraftGuide>
             </section>
 
             <section className="card card--yellow" style={{ marginTop: 20 }}>
               <h2 className="section-title">อยากให้ตีติดบ่อยขึ้น</h2>
-              <ul style={{ marginTop: 8, paddingInlineStart: 20, lineHeight: 1.9 }}>
-                <li><strong>Job level, DEX, LUK</strong> สามตัวนี้เป็นฐานของอัตราสำเร็จ</li>
-                <li><strong>ระดับอาวุธ</strong> อาวุธระดับ 1-3 ได้โบนัส ระดับ 4 ไม่ได้</li>
-                <li><strong>สกิล</strong> Smith สายนั้นให้ +5% ต่อเลเวล Weaponry Research ให้ +1% ต่อเลเวล ส่วน Enchanted Stone Craft ใช้หลอมหินธาตุ</li>
-                <li><strong>ทั่ง</strong> ทั่งธรรมดา +0% · Oridecon +2.5% · ทอง +5% · Emperium +10%</li>
-                <li><strong>ของที่ทำให้ยากขึ้น</strong> หินธาตุ −25% · Star Crumb ก้อนละ −15%</li>
-              </ul>
-              <p className="muted" style={{ marginTop: 10 }}>
-                เซิร์ฟเวอร์สุ่มโบนัสบวกเข้าไปในอัตราสำเร็จทุกครั้งที่ตี อัตราจึงไม่ใช่ตัวเลขเดียวคงที่
-                ตัวละครเดิม ตีรอบนี้กับรอบหน้าโอกาสไม่เท่ากัน เตรียมวัตถุดิบเผื่อแตกไว้เสมอ
+              <div className="fodds">
+                <div className="fodds__col is-up">
+                  <h3>เพิ่มโอกาส</h3>
+                  <ul>
+                    <li><strong>Job level, DEX, LUK</strong> ฐานของอัตราสำเร็จ</li>
+                    <li><strong>สกิล Smith</strong> สายนั้น +5% ต่อเลเวล (เต็ม 3)</li>
+                    <li><strong>Weaponry Research</strong> +1% ต่อเลเวล</li>
+                    <li><strong>ทั่ง</strong> ธรรมดา +0% · Oridecon +2.5% · ทอง +5% · Emperium +10%</li>
+                    <li><strong>ระดับอาวุธ 1-3</strong> ได้โบนัส ระดับ 4 ไม่ได้</li>
+                  </ul>
+                </div>
+                <div className="fodds__col is-down">
+                  <h3>ลดโอกาส</h3>
+                  <ul>
+                    <li><strong>หินธาตุ</strong> −25%</li>
+                    <li><strong>Star Crumb</strong> ก้อนละ −15%</li>
+                  </ul>
+                  <p className="muted">เซิร์ฟเวอร์สุ่มโบนัสบวกทุกครั้งที่ตี โอกาสจึงไม่คงที่ เตรียมวัตถุดิบเผื่อพลาดไว้เสมอ</p>
+                </div>
+              </div>
+              <p className="source-note" style={{ marginTop: 12 }}>
+                <strong>ที่มา:</strong> ปัจจัยโอกาสสำเร็จเทียบกับสูตรที่ prontera.info เผยแพร่ ซึ่งระบุเองว่าอ้างอิง TWRO
+                จึงไม่นำเปอร์เซ็นต์ตายตัวมาอ้างเป็นค่าทางการของ RO Zero Global · สกิล Smith +5% ต่อเลเวลมาจากคำอธิบายสกิลในไคลเอนต์
               </p>
             </section>
 
-            <p className="source-note" style={{ marginTop: 16 }}>
-              <strong>ที่มา:</strong> ปัจจัยโอกาสสำเร็จเทียบกับสูตรที่ prontera.info เผยแพร่ ซึ่งระบุเองว่าอ้างอิง TWRO
-              จึงไม่นำเปอร์เซ็นต์ตายตัวมาอ้างเป็นค่าทางการของ RO Zero Global ส่วนรายละเอียดสกิลมาจากข้อมูลไคลเอนต์ในฐานข้อมูลของเว็บนี้
-            </p>
-            <p className="muted" style={{ marginTop: 12 }}>
+            <p className="muted" style={{ marginTop: 16 }}>
               ตีเสร็จแล้วเอาไปใช้กับมอนธาตุไหน ดู <Link href="/guides/elements">ตารางธาตุ</Link> หรือลองอาวุธกับมอนจริงที่{' '}
               <Link href="/tools/build">จำลองบิลด์</Link>
             </p>

@@ -47,6 +47,7 @@ export default function ArrowCraftingPage() {
       <CraftGuide
         kind="arrow"
         sortBy="material"
+        view="table"
         extra={
           <p className="muted" style={{ marginTop: 16 }}>
             อยากรู้ว่ามอนตัวไหนดรอปของที่เอามาทำลูกศรได้ ลองที่{' '}
