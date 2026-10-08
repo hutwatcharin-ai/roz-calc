@@ -96,7 +96,7 @@ export default async function CardTopicPage({ params }: { params: { slug: string
 
       {cards.length === 0 ? (
         <section className="card" style={{ marginTop: 16 }}>
-          <p style={{ margin: 0 }}>ตอนนี้ยังไม่มีการ์ดใน Ragnarok Zero Global ที่{topic.lead.replace(/^การ์ดที่/, '')}โดยตรง</p>
+          <p style={{ margin: 0 }}>ตอนนี้ยังไม่มีการ์ดใน Ragnarok Zero Global ที่{topic.lead.replace(/^การ์ดที่/, '')} โดยตรง</p>
           {vsElement && counterElements(vsElement).length > 0 && (
             <p className="muted" style={{ marginTop: 8 }}>
               ทางที่ใช้แทน: ตีด้วยอาวุธหรือเอนชานต์ธาตุ{' '}
