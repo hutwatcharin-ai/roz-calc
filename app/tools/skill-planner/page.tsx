@@ -90,10 +90,13 @@ async function skillDetails(): Promise<{ levels: SkillLevelMap; descriptions: Re
   return { levels, descriptions };
 }
 
+// The words people type are "อัพสกิล ro" (490 impressions in 28 days, average
+// position 7.4) and "ทดลอง/จำลองอัพสกิล ro"; the title said neither (8 Oct
+// 2026). Check GSC on 21 Oct: position and clicks for those queries.
 export const metadata = {
-  title: 'วางแผนสกิล (Skill Simulator)',
+  title: 'จำลองอัพสกิล Ragnarok Zero — วางแผนสกิลทุกอาชีพ (Skill Simulator)',
   description:
-    'จัดสกิลของทุกอาชีพใน Ragnarok Zero Global แบบเดียวกับหน้าต่างสกิลในเกม กดใส่แต้มได้ ล็อกสกิลที่ยังไม่ปลด นับแต้มต่ออาชีพ แชร์บิลด์ด้วยลิงก์',
+    'ทดลองอัพสกิลทุกอาชีพใน Ragnarok Zero Global แบบเดียวกับหน้าต่างสกิลในเกม กดใส่แต้มได้ สกิลที่ยังไม่ปลดไล่ใส่ให้เอง นับแต้มต่ออาชีพ แชร์บิลด์ด้วยลิงก์',
 };
 
 export default async function SkillPlannerPage() {
@@ -105,7 +108,7 @@ export default async function SkillPlannerPage() {
         { name: 'หน้าแรก', path: '/' },
         { name: 'วางแผนสกิล', path: '/tools/skill-planner' },
       ])} />
-      <PageHeader title="วางแผนสกิล Ragnarok Zero" />
+      <PageHeader title="จำลองอัพสกิล Ragnarok Zero" />
       <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
         กด + ใส่แต้ม สกิลที่ยังไม่ปลดจะไล่ใส่ให้เอง · ลิงก์บนแถบที่อยู่คือบิลด์
       </p>
