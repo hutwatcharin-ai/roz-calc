@@ -3,3 +3,4 @@
 /* The code list: fixed-width chips, because a coupon code is read character
    by character and a proportional font hides the difference between 0 and O. */
 .codegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.gx .codegrid--live .navicopy { justify-content: space-between; min-height: 46px; font-size: 17px; font-weight: 800; letter-spacing: .06em; border-width: 2px; box-shadow: 0 0 10px rgba(61, 232, 255, .2); }

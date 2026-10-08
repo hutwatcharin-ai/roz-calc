@@ -11,6 +11,7 @@ import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
+import NaviCopy from '@/components/NaviCopy';
 
 export const metadata = {
   title: 'โค้ดรับของ Ragnarok Zero (Coupon Code)',
@@ -69,22 +70,41 @@ export default function CodesPage() {
           { name: 'โค้ดรับของ', path: '/guides/codes' },
         ])}
       />
-      <PageHeader title="โค้ดรับของ Ragnarok Zero" />
-      <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        กรอกที่บัญชี GNJOY ของคุณ ของจะเข้า<strong>เมลในเกม (RODEX)</strong> ไม่ใช่ในกระเป๋าโดยตรง ·
-        โค้ดชุดเปิดเซิร์ฟ <strong>ปิดไปแล้ว {EXPIRED_CODES.length + EXPIRED_LATER_CODES.length} โค้ด</strong> ({EXPIRED_CODES.length} โค้ดเมื่อ {EXPIRED_ON} อีก {EXPIRED_LATER_CODES.length} โค้ดเมื่อ {EXPIRED_LATER_ON}) เหลือที่มีรายงานว่ายังใช้ได้ {LIVE_CODES.length} โค้ด
-      </p>
+      <PageHeader
+        title="โค้ดรับของ Ragnarok Zero"
+        lead={<>โค้ดชุดเปิดเซิร์ฟ <strong>ปิดไปแล้ว {EXPIRED_CODES.length + EXPIRED_LATER_CODES.length} โค้ด</strong> ({EXPIRED_CODES.length} โค้ดเมื่อ {EXPIRED_ON} อีก {EXPIRED_LATER_CODES.length} โค้ดเมื่อ {EXPIRED_LATER_ON}) เหลือที่มีรายงานว่ายังใช้ได้ {LIVE_CODES.length} โค้ด</>}
+      />
+
+      <div className="gtiles" style={{ marginBottom: 16 }}>
+        <div className="gtile">
+          <span className="gtile__k">ยังใช้ได้</span>
+          <span className="gtile__v">{LIVE_CODES.length}</span>
+          <span className="gtile__s">ออกวันที่ 3 ก.ย. ยังไม่มีวันหมด</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">ปิดแล้ว</span>
+          <span className="gtile__v" style={{ color: 'var(--faint)' }}>{EXPIRED_CODES.length + EXPIRED_LATER_CODES.length}</span>
+          <span className="gtile__s">เก็บไว้ให้เช็ก</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">ของเข้าที่</span>
+          <span className="gtile__v">RODEX</span>
+          <span className="gtile__s">เมลในเกม ไม่ใช่กระเป๋า</span>
+        </div>
+      </div>
 
       <div className="card card--cyan">
         <h2 className="section-title">ยังใช้ได้ ลองชุดนี้ก่อน</h2>
-        <div className="codegrid" style={{ marginTop: 10 }}>
+        <div className="codegrid codegrid--live" style={{ marginTop: 10 }}>
           {LIVE_CODES.map((code) => (
-            <code key={code} className="codegrid__item mono">{code}</code>
+            <NaviCopy key={code} cmd={code} />
           ))}
         </div>
-        <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
-          {LIVE_CODES.length} โค้ด · พิมพ์ตัวพิมพ์ใหญ่ทั้งหมด · เป็นชุดที่ออกวันที่ 3 ก.ย. ทั้งหมด ยังไม่มีวันหมด
-        </p>
+        <ol className="gsteps" style={{ marginTop: 14 }}>
+          <li>กดที่โค้ดเพื่อก๊อป (ถ้าพิมพ์เอง ใช้ตัวพิมพ์ใหญ่ทั้งหมด)</li>
+          <li>กรอกในหน้าคูปองของบัญชี GNJOY ของคุณ</li>
+          <li>เข้าเกม เปิด<strong>เมล (RODEX)</strong> แล้วกดรับของ</li>
+        </ol>
       </div>
 
       <div className="card" style={{ marginTop: 14 }}>

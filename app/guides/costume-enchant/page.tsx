@@ -22,6 +22,7 @@ import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
+import NaviCopy from '@/components/NaviCopy';
 
 export const metadata: Metadata = {
   title: 'หินเอนแชนต์คอสตูม Ragnarok Zero — ช่องไหนใส่หินอะไร ได้อะไร',
@@ -38,9 +39,10 @@ const BOX_LABEL: Record<Box, string> = {
   none: 'ยังไม่รู้',
 };
 
-const SLOTS: { key: string; title: string; stones: Stone[] }[] = [
+const SLOTS: { key: string; title: string; short: string; stones: Stone[] }[] = [
   {
     key: 'upper',
+    short: 'บน',
     title: 'หมวกบน (Upper)',
     stones: [
       { id: 6636, name: 'STR Stone (Upper)', effect: 'STR +1', box: 'stat' },
@@ -61,6 +63,7 @@ const SLOTS: { key: string; title: string; stones: Stone[] }[] = [
   },
   {
     key: 'middle',
+    short: 'กลาง',
     title: 'หมวกกลาง (Middle)',
     stones: [
       { id: 6945, name: 'STR Stone (Middle)', effect: 'STR +1', box: 'stat' },
@@ -82,6 +85,7 @@ const SLOTS: { key: string; title: string; stones: Stone[] }[] = [
   },
   {
     key: 'lower',
+    short: 'ล่าง',
     title: 'หมวกล่าง (Lower)',
     stones: [
       { id: 25016, name: 'ATK Stone (Lower)', effect: 'ATK +1%', box: 'a' },
@@ -98,6 +102,7 @@ const SLOTS: { key: string; title: string; stones: Stone[] }[] = [
   },
   {
     key: 'garment',
+    short: 'ผ้าคลุม',
     title: 'ผ้าคลุม (Garment)',
     stones: [
       { id: 6908, name: 'ASPD Stone (Garment)', effect: 'ASPD +1', box: 'stat' },
@@ -133,20 +138,35 @@ export default function CostumeEnchantPage() {
           { name: 'หินเอนแชนต์คอสตูม', path: '/guides/costume-enchant' },
         ])}
       />
-      <PageHeader title="หินเอนแชนต์คอสตูม" />
-      <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '70ch' }}>
-        คอสตูม 4 ชิ้น หมวกบน กลาง ล่าง และผ้าคลุม ใส่หินได้ชิ้นละ 1 ก้อน ตามชื่อช่องที่เขียนในวงเล็บ · มีทั้งหมด {total} แบบ ·
-        ใส่หินที่ <strong>Costume Enchant Master</strong> <code className="mono navicmd">/navi itemmall 41/54</code>
-      </p>
+      <PageHeader
+        title="หินเอนแชนต์คอสตูม"
+        lead={<>คอสตูม 4 ชิ้น หมวกบน กลาง ล่าง และผ้าคลุม ใส่หินได้ชิ้นละ 1 ก้อน ตามชื่อช่องที่เขียนในวงเล็บ · มีทั้งหมด {total} แบบ</>}
+      />
+
+      <div className="cslots">
+        {SLOTS.map((slot) => (
+          <a key={slot.key} className="cslots__slot" href={`#${slot.key}`}>
+            <span className="cslots__name">{slot.short}</span>
+            <span className="cslots__icons">
+              {slot.stones.slice(0, 3).map((st) => <Icon key={st.id} id={st.id} />)}
+            </span>
+            <small>{slot.stones.length} แบบ</small>
+          </a>
+        ))}
+        <div className="cslots__npc">
+          <span>ใส่หินที่ <strong>Costume Enchant Master</strong></span>
+          <NaviCopy cmd="/navi itemmall 41/54" />
+        </div>
+      </div>
 
       <section className="card card--cyan">
         <h2 className="section-title">ทำหินยังไง</h2>
-        <ol style={{ margin: 0, paddingInlineStart: 22 }}>
-          <li style={{ marginBottom: 6 }}>
+        <ol className="gsteps">
+          <li>
             ใช้ <Link href="/database/items/105913">Enchant Stone Craft Box B</Link> ใส่<strong>คอสตูม 5 ชิ้นที่ยังไม่ผูกตัว</strong> + 10,000z ·
             คอสตูมต้องเป็นแบบที่ดรอปจากมอน ของจาก Cash Shop ใช้ไม่ได้
           </li>
-          <li style={{ marginBottom: 6 }}>ได้<strong>กล่อง A</strong> ของช่องใดช่องหนึ่งแบบสุ่ม (บน กลาง ล่าง หรือผ้าคลุม)</li>
+          <li>ได้<strong>กล่อง A</strong> ของช่องใดช่องหนึ่งแบบสุ่ม (บน กลาง ล่าง หรือผ้าคลุม)</li>
           <li>เปิดกล่องได้หิน 1 ก้อนแบบสุ่มจากรายการของช่องนั้น ดูได้ในตารางข้างล่าง</li>
         </ol>
         <p className="muted" style={{ marginTop: 10, marginBottom: 0, fontSize: 13 }}>
@@ -156,32 +176,19 @@ export default function CostumeEnchantPage() {
       </section>
 
       {SLOTS.map((slot) => (
-        <section key={slot.key} id={slot.key} style={{ marginTop: 24, scrollMarginTop: 90 }}>
+        <section key={slot.key} id={slot.key} className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
           <h2 className="section-title">{slot.title} <span className="muted" style={{ fontWeight: 400 }}>· {slot.stones.length} แบบ</span></h2>
-          <div className="recipe__scroll">
-            <table className="data-table recipe">
-              <thead>
-                <tr>
-                  <th>หิน</th>
-                  <th>ได้อะไร</th>
-                  <th>สุ่มจาก</th>
-                </tr>
-              </thead>
-              <tbody>
-                {slot.stones.map((s) => (
-                  <tr key={s.id}>
-                    <td data-label="หิน">
-                      <Link className="recipe__item" href={`/database/items/${s.id}`}>
-                        <Icon id={s.id} />
-                        <span>{s.name}</span>
-                      </Link>
-                    </td>
-                    <td data-label="ได้อะไร"><strong>{s.effect}</strong></td>
-                    <td data-label="สุ่มจาก" className={s.box === 'none' ? 'muted' : undefined}>{BOX_LABEL[s.box]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="cstones">
+            {slot.stones.map((st) => (
+              <Link key={st.id} className={`cstone is-${st.box}`} href={`/database/items/${st.id}`}>
+                <span className="cstone__icon"><Icon id={st.id} /></span>
+                <span className="cstone__body">
+                  <strong>{st.effect}</strong>
+                  <small>{st.name}</small>
+                </span>
+                <span className="cstone__box">{BOX_LABEL[st.box]}</span>
+              </Link>
+            ))}
           </div>
           {slot.key === 'middle' && (
             <p className="muted" style={{ marginTop: 8, fontSize: 13 }}>
@@ -200,23 +207,14 @@ export default function CostumeEnchantPage() {
 
       <section className="card card--yellow" style={{ marginTop: 24 }}>
         <h2 className="section-title">ใส่ครบชุดได้โบนัสเพิ่ม</h2>
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>ใส่อะไรคู่กัน</th>
-                <th>ได้เพิ่ม</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SETS.map((s) => (
-                <tr key={s.need}>
-                  <td data-label="ใส่คู่กัน">{s.need}</td>
-                  <td data-label="ได้เพิ่ม"><strong>{s.gives}</strong></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="csets">
+          {SETS.map((st) => (
+            <div key={st.need} className="csets__row">
+              <span>{st.need}</span>
+              <b aria-hidden="true">▶</b>
+              <strong>{st.gives}</strong>
+            </div>
+          ))}
         </div>
       </section>
 

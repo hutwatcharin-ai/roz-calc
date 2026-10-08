@@ -15,6 +15,31 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { naviCommand, rozglobalGuides } from '@/lib/rozglobal-guides';
+import { bonusText, itemEffects } from '@/lib/item-effects';
+import NaviCopy from '@/components/NaviCopy';
+import RecipeFilter from '@/components/RecipeFilter';
+
+// Which town an NPC's map belongs to, for the filter chips (owner, 8 Oct
+// 2026: cards with filters on every guide list).
+const TOWNS: [RegExp, string][] = [
+  [/^(prontera|prt_)/, 'Prontera'], [/^(geffen|gef_)/, 'Geffen'], [/^(payon|pay_)/, 'Payon'], [/^(morocc|moc_)/, 'Morroc'],
+  [/^(alberta|alb_)/, 'Alberta'], [/^(izlude|iz_)/, 'Izlude'], [/^(aldebaran|alde_)/, 'Al De Baran'], [/^(comodo|cmd_)/, 'Comodo'],
+  [/^xmas/, 'Lutie'],
+];
+function townOf(map: string | null): { value: string; label: string } {
+  if (!map) return { value: 'tunknown', label: 'ไม่ทราบ' };
+  const hit = TOWNS.find(([re]) => re.test(map));
+  const label = hit ? hit[1] : map;
+  return { value: 't' + label.replace(/\W/g, ''), label };
+}
+
+/** The hat's unconditional bonuses, "AGI +1 · MDEF +3". */
+function effectLine(id: number): string | null {
+  const e = itemEffects(id);
+  if (!e) return null;
+  const parts = (e.g ?? []).filter((g) => Object.keys(g.c).length === 0).flatMap((g) => g.b).map(bonusText).filter(Boolean);
+  return parts.length ? parts.slice(0, 4).join(' · ') : null;
+}
 
 export const revalidate = 86400;
 
@@ -31,6 +56,15 @@ export default function CostumeCraftPage() {
     0,
   );
   const totalMaterials = cosmetics.reduce((n, c) => n + c.materials.filter((m) => m.item !== 'Zeny').length, 0);
+  const townCount = new Map<string, { value: string; label: string; count: number }>();
+  for (const c of cosmetics) {
+    const t = townOf(c.map);
+    const row = townCount.get(t.value) ?? { ...t, count: 0 };
+    row.count += 1;
+    townCount.set(t.value, row);
+  }
+  const towns = [...townCount.values()].sort((a, b) => b.count - a.count);
+  const withEffect = cosmetics.filter((c) => c.itemId && effectLine(c.itemId)).length;
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -41,65 +75,82 @@ export default function CostumeCraftPage() {
           { name: 'คราฟต์หมวกแฟชั่น', path: '/guides/costume-craft' },
         ])}
       />
-      <PageHeader title="คราฟต์หมวกแฟชั่น — เอาของไปให้ NPC ทำ" />
-      <p className="muted" style={{ marginTop: -6, marginBottom: 16, maxWidth: '72ch' }}>
-        หมวกพวกนี้<strong>ไม่มีมอนตัวไหนดรอป</strong> ต้องเก็บของไปให้ NPC ทำให้ · ก๊อป{' '}
-        <code className="mono">/navi</code> ไปวางในแชตแล้วเดินตามเส้นนำทาง ·
-        อยากได้หมวกที่ดรอปจากมอนดู <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
-      </p>
+      <PageHeader
+        title="คราฟต์หมวกแฟชั่น — เอาของไปให้ NPC ทำ"
+        lead={
+          <>
+            หมวกพวกนี้<strong>ไม่มีมอนตัวไหนดรอป</strong> ต้องเก็บของไปให้ NPC ทำให้ · กดคำสั่ง <code className="mono">/navi</code> ในการ์ดเพื่อก๊อป ·
+            อยากได้หมวกที่ดรอปจากมอนดู <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
+          </>
+        }
+      />
 
-      <div className="card">
-        <div className="recipe__scroll">
-          <table className="data-table recipe">
-            <thead>
-              <tr>
-                <th>ได้หมวก</th>
-                <th>เอาของไป</th>
-                <th>NPC อยู่ที่</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cosmetics.map((entry) => {
-                const navi = naviCommand(entry.map, entry.x, entry.y);
-                return (
-                  <tr key={entry.item}>
-                    <td data-label="ได้หมวก">
-                      {entry.itemId ? (
-                        <Link className="recipe__item" href={itemHref(entry.itemId, null)}>
-                          <ItemIcon iconUrl={`/images/items/${entry.itemId}.gif`} category="Other" size={22} />
-                          <span>{entry.item}</span>
-                        </Link>
-                      ) : (
-                        <span className="recipe__item">{entry.item}</span>
-                      )}
-                    </td>
-                    <td data-label="เอาของไป">
-                      <span className="recipe__list">
-                        {entry.materials.map((material, i) => (
-                          <span key={`${material.item}-${i}`}>
-                            {material.itemId ? (
-                              <Link className="recipe__item" href={itemHref(material.itemId, null)}>
-                                <ItemIcon iconUrl={`/images/items/${material.itemId}.gif`} category="Other" size={18} />
-                                <span>{material.item}</span>
-                              </Link>
-                            ) : (
-                              <span className="recipe__item">{material.item}</span>
-                            )}
-                            <span className="recipe__amount">×{material.amount.toLocaleString('en-US')}</span>
-                          </span>
-                        ))}
-                      </span>
-                    </td>
-                    <td data-label="NPC">
-                      {navi ? <code className="mono navicmd">{navi}</code> : <span className="muted">ไม่ทราบพิกัด</span>}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+      <div className="gtiles">
+        <div className="gtile">
+          <span className="gtile__k">หมวกที่ทำได้</span>
+          <span className="gtile__v">{cosmetics.length}</span>
+          <span className="gtile__s">ใน {towns.length} เมือง</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">มีผลกับสเตตัส</span>
+          <span className="gtile__v">{withEffect}</span>
+          <span className="gtile__s">ใบที่เหลือเป็นของแต่งตัวอย่างเดียว</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">เมืองที่มี NPC มากสุด</span>
+          <span className="gtile__v">{towns[0]?.label}</span>
+          <span className="gtile__s">{towns[0]?.count} ใบ</span>
         </div>
       </div>
+
+      <section className="card rguide" style={{ marginTop: 16 }}>
+        <h2 className="section-title">หมวกทั้งหมด ({cosmetics.length})</h2>
+        <RecipeFilter
+          group="costume"
+          placeholder="ค้นชื่อหมวก หรือของที่ต้องใช้ เช่น Steel"
+          facets={[{ label: 'NPC อยู่ที่', options: towns.map((t) => ({ value: t.value, label: t.label, count: t.count })) }]}
+        />
+        <div className="rcards" data-rgroup="costume">
+          {cosmetics.map((entry) => {
+            const navi = naviCommand(entry.map, entry.x, entry.y);
+            const effect = entry.itemId ? effectLine(entry.itemId) : null;
+            const q = [entry.item, effect, ...entry.materials.map((m) => m.item)].filter(Boolean).join(' ').toLowerCase();
+            return (
+              <article key={entry.item} className="rcard" data-tags={townOf(entry.map).value} data-q={q}>
+                <header className="rcard__head">
+                  {entry.itemId ? (
+                    <Link className="rcard__product" href={itemHref(entry.itemId, null)}>
+                      <span className="rcard__icon"><ItemIcon iconUrl={`/images/items/${entry.itemId}.gif`} category="Other" size={32} /></span>
+                      <span className="rcard__name">{entry.item}</span>
+                    </Link>
+                  ) : (
+                    <span className="rcard__product"><span className="rcard__name">{entry.item}</span></span>
+                  )}
+                  <span className="rcard__badge mono">{townOf(entry.map).label}</span>
+                </header>
+                {effect && <p className="rcard__effect">{effect}</p>}
+                <div className="rcard__mats">
+                  {entry.materials.map((m, i) =>
+                    m.itemId ? (
+                      <Link key={`${m.item}-${i}`} className="rcard__mat" href={itemHref(m.itemId, null)}>
+                        <ItemIcon iconUrl={`/images/items/${m.itemId}.gif`} category="Other" size={22} />
+                        <span>{m.item}</span>
+                        {m.amount > 1 && <b className="mono">×{m.amount.toLocaleString('en-US')}</b>}
+                      </Link>
+                    ) : (
+                      <span key={`${m.item}-${i}`} className="rcard__mat">
+                        <span>{m.item}</span>
+                        {m.amount > 1 && <b className="mono">×{m.amount.toLocaleString('en-US')}</b>}
+                      </span>
+                    ),
+                  )}
+                </div>
+                <p className="rcard__held">{navi ? <NaviCopy cmd={navi} /> : <span>ไม่ทราบพิกัด NPC</span>}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
         สูตรและพิกัด NPC มาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) ·

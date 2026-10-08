@@ -5,6 +5,7 @@
 // needs JavaScript to show its numbers is a worse reference table.
 
 import Caveat from '@/components/Caveat';
+import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
 import ExpRangeCalculator from '@/components/ExpRangeCalculator';
 import { PARTY_EXP } from '@/lib/party-exp';
@@ -35,18 +36,65 @@ function runningTotals(rows: number[]): number[] {
 }
 
 const BASE_TOTALS = runningTotals(BASE_EXP_ROWS);
+const BASE_MAX = Math.max(...BASE_EXP_ROWS);
+
+/** The base curve as bars (owner, 8 Oct 2026: graphics on every guide). */
+function ExpCurve() {
+  const w = 600, h = 160, n = BASE_EXP_ROWS.length, bw = w / n;
+  const half = BASE_TOTALS[n - 1] / 2;
+  const halfAt = BASE_TOTALS.findIndex((t) => t >= half) + 1;
+  return (
+    <figure className="expcurve">
+      <svg viewBox={`0 0 ${w} ${h + 18}`} role="img" aria-label={`EXP ต่อเลเวล 1 ถึง ${n} เพิ่มขึ้นเรื่อยๆ เลเวลท้ายใช้มากที่สุด`}>
+        {[0.25, 0.5, 0.75].map((f) => (
+          <line key={f} x1={0} x2={w} y1={h - h * f} y2={h - h * f} className="expcurve__grid" />
+        ))}
+        {BASE_EXP_ROWS.map((v, i) => {
+          const bh = Math.max(1, (v / BASE_MAX) * h);
+          return <rect key={i} x={i * bw + 1} y={h - bh} width={bw - 2} height={bh} rx={1.5} className={i + 1 >= halfAt ? 'is-late' : undefined} />;
+        })}
+        {[1, 10, 20, 30, 40, n].map((l) => (
+          <text key={l} x={(l - 0.5) * bw} y={h + 14} textAnchor="middle">{l}</text>
+        ))}
+      </svg>
+      <figcaption>
+        แท่งสีชมพู = เลเวล {halfAt}-{n} ใช้ EXP <strong>ครึ่งหนึ่งของทั้งหมด</strong> ตั้งแต่เลเวล 1 ถึง {n}
+      </figcaption>
+    </figure>
+  );
+}
 
 export default function ExpPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
-      <h1 className="pagehead__title">ตาราง EXP ต่อเลเวล Ragnarok Zero</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '65ch' }}>
-        EXP ที่ต้องใช้ต่อเลเวล พร้อมคอลัมน์รวมสะสมตั้งแต่เลเวล 1
-      </p>
+      <PageHeader
+        title="ตาราง EXP ต่อเลเวล Ragnarok Zero"
+        lead="EXP ที่ต้องใช้ต่อเลเวล พร้อมคอลัมน์รวมสะสมตั้งแต่เลเวล 1"
+        source={<><strong>ที่มา:</strong> คู่มือเกมทางการ · เส้นโค้งฐานขึ้นราว 1.2 เท่าต่อเลเวล</>}
+      />
 
-      <p className="source-note">
-        <strong>ที่มา:</strong> คู่มือเกมทางการ · เส้นโค้งฐานขึ้นราว 1.2 เท่าต่อเลเวล
-      </p>
+      <div className="gtiles">
+        <div className="gtile">
+          <span className="gtile__k">เพดานเลเวลตอนนี้</span>
+          <span className="gtile__v">{BASE_LEVEL_CAP}</span>
+          <span className="gtile__s">ตั้งแต่ {BASE_LEVEL_CAP_SINCE}</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">EXP รวม 1 ถึง {MAX_PUBLISHED_BASE_LEVEL}</span>
+          <span className="gtile__v">{num(BASE_TOTALS[BASE_TOTALS.length - 1])}</span>
+          <span className="gtile__s">ตามตารางที่เผยแพร่</span>
+        </div>
+        <div className="gtile">
+          <span className="gtile__k">เลเวลที่ใช้ EXP มากสุด</span>
+          <span className="gtile__v">{num(BASE_MAX)}</span>
+          <span className="gtile__s">เลเวล {BASE_EXP_ROWS.indexOf(BASE_MAX) + 1}</span>
+        </div>
+      </div>
+
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title">เส้นโค้ง EXP เลเวลฐาน</h2>
+        <ExpCurve />
+      </section>
 
       {/* The gap between the cap and the published table is the first thing a
           reader needs, not a footnote: they will hit level 50 and find the
@@ -81,7 +129,7 @@ export default function ExpPage() {
             {BASE_EXP_ROWS.map((exp, i) => (
               <tr key={i}>
                 <th scope="row">{i + 1}</th>
-                <td className="num">{num(exp)}</td>
+                <td className="num expbar" style={{ '--w': `${(exp / BASE_MAX) * 100}%` } as React.CSSProperties}>{num(exp)}</td>
                 <td className="num">{num(BASE_TOTALS[i])}</td>
               </tr>
             ))}
@@ -157,6 +205,18 @@ export default function ExpPage() {
         ปาร์ตี้ได้ EXP รวมมากกว่า แต่ต้องหารกัน <strong>ต่อหัวน้อยลงตั้งแต่คนที่สอง</strong>{' '}
         สิ่งที่ซื้อคือความเร็ว ไม่ใช่ EXP ต่อหัว
       </p>
+      <div className="partyexp" aria-hidden="true">
+        {[{ members: 1, total: 100, each: 100 }, ...PARTY_EXP].map((row) => (
+          <div key={row.members} className="partyexp__col">
+            <span className="partyexp__bars">
+              <span className="partyexp__total" style={{ height: `${(row.total / 140) * 100}%` }} />
+              <span className="partyexp__each" style={{ height: `${(row.each / 140) * 100}%` }} />
+            </span>
+            <small>{row.members} คน</small>
+          </div>
+        ))}
+        <p className="partyexp__key"><i className="is-total" /> รวมทั้งปาร์ตี้ <i className="is-each" /> ต่อหัว</p>
+      </div>
       <div className="card" style={{ overflowX: 'auto' }}>
         <table className="data-table">
           <thead>
