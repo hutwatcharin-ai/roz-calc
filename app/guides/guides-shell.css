@@ -1,0 +1,82 @@
+/* The guides' shared look (owner, 8 Oct 2026: bring every /guides page to
+   the newer arcade style -- the build strip, refine, enchant, arrow and FAQ
+   pages). Scoped to .gx, which app/guides/layout.tsx wraps around every
+   guide, so the rest of the site is untouched. Content and markup stay as
+   they are: this restyles the parts every guide already shares -- the page
+   header, cards, section titles, tables, contents chips, notes and lists. */
+
+/* Page header: a lit frame, like the homepage build strip. */
+.gx .pagehead {
+  position: relative; margin-block: 6px 18px; padding: 18px 20px 14px; border: 2px solid var(--cyan); border-radius: 14px;
+  background: radial-gradient(ellipse at 92% 120%, rgba(255, 61, 154, .26), transparent 55%), radial-gradient(ellipse at 0% 0%, rgba(61, 232, 255, .14), transparent 50%), repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px), #0b0724;
+  box-shadow: 0 0 22px rgba(61, 232, 255, .2), 5px 5px 0 var(--pink);
+}
+.gx .pagehead__title, .gx > main > h1.pagehead__title {
+  color: var(--yellow); text-shadow: 0 0 12px rgba(255, 229, 61, .45), 2px 2px 0 #c22a74;
+}
+.gx .pagehead__lead { color: var(--dim); }
+.gx .pagehead .source-note { margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(61, 232, 255, .25); border-left: 0; padding-left: 0; }
+
+/* Pages that print their own h1 (no PageHeader) get the same frame. */
+.gx > main > h1.pagehead__title {
+  margin-block: 6px 12px; padding: 16px 20px; border: 2px solid var(--cyan); border-radius: 14px;
+  background: radial-gradient(ellipse at 92% 120%, rgba(255, 61, 154, .26), transparent 55%), repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px), #0b0724;
+  box-shadow: 0 0 22px rgba(61, 232, 255, .2), 5px 5px 0 var(--pink);
+}
+
+/* Cards: a cyan frame with a lit top edge. */
+.gx .card {
+  position: relative; border: 1px solid rgba(61, 232, 255, .28); border-radius: 12px;
+  background: linear-gradient(180deg, rgba(61, 232, 255, .05), transparent 120px), var(--panel);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 6px 18px rgba(0, 0, 0, .25);
+}
+.gx .card::before {
+  content: ''; position: absolute; left: 14px; right: 14px; top: -1px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), transparent); opacity: .7;
+}
+.gx .card.card--yellow { border-color: rgba(255, 229, 61, .5); box-shadow: 0 0 14px rgba(255, 229, 61, .12), 4px 4px 0 rgba(255, 229, 61, .35); }
+.gx .card.card--yellow::before { background: linear-gradient(90deg, transparent, var(--yellow), transparent); }
+
+/* Section titles: yellow, lit, with a play marker. */
+.gx .section-title {
+  display: flex; align-items: center; gap: 8px; font: 700 18px/1.35 var(--font-chakra), var(--font-sarabun), sans-serif;
+  color: var(--yellow); text-shadow: 0 0 8px rgba(255, 229, 61, .3); margin-bottom: 12px;
+}
+.gx .section-title::before { content: '▶'; flex: none; font-size: 11px; color: var(--pink); text-shadow: 0 0 6px var(--pink); }
+.gx h3 { color: var(--cyan); }
+
+/* Tables: a framed block, a lit header, zebra rows, a row you can follow. */
+.gx .data-table, .gx .stat-table { border-collapse: separate; border-spacing: 0; border: 1px solid rgba(61, 232, 255, .22); border-radius: 10px; overflow: hidden; background: rgba(0, 0, 0, .15); }
+.gx .data-table th, .gx .stat-table th[scope='col'], .gx .stat-table thead th {
+  color: #0b0820; background: linear-gradient(180deg, var(--cyan), #2bb8cf); border-bottom: 0;
+  font: 700 12px/1.6 var(--font-chakra), var(--font-sarabun), sans-serif; letter-spacing: .06em; text-shadow: none;
+}
+.gx .data-table tbody tr:nth-child(even) td, .gx .stat-table tbody tr:nth-child(even) td { background: rgba(255, 255, 255, .025); }
+.gx .data-table tbody tr:hover td, .gx .stat-table tbody tr:hover td { background: rgba(61, 232, 255, .08); }
+.gx .data-table td, .gx .stat-table td { border-bottom: 1px solid rgba(61, 232, 255, .1); }
+
+/* Contents chips: arcade buttons. */
+.gx .guildp__toc a, .gx .star__toc a {
+  padding: 6px 14px; border: 1px solid rgba(61, 232, 255, .4); border-radius: 8px; background: #120b33;
+  font: 700 13px/1.3 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--text); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .35);
+}
+.gx .guildp__toc a:hover, .gx .star__toc a:hover { border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 10px rgba(255, 229, 61, .35); }
+
+/* Notes: the folded caveat as a dashed pink tab. */
+.gx .caveat { border: 1px dashed rgba(255, 61, 154, .45); border-radius: 10px; background: rgba(255, 61, 154, .04); }
+.gx .caveat > summary { color: var(--pink); font-weight: 600; }
+.gx .caveat > summary::before { content: 'ⓘ '; }
+
+/* Lists: lit markers. */
+.gx main ul:not([class]) { list-style: none; padding-left: 4px; }
+.gx main ul:not([class]) > li { position: relative; padding-left: 18px; }
+.gx main ul:not([class]) > li::before { content: '▸'; position: absolute; left: 2px; top: 0; color: var(--cyan); }
+
+/* Inline links read as links on the dark frame. */
+.gx .card a:not([class]) { color: var(--cyan); text-underline-offset: 3px; }
+.gx .card a:not([class]):hover { color: var(--yellow); }
+
+@media (max-width: 640px) {
+  .gx .pagehead { padding: 14px 14px 10px; box-shadow: 0 0 16px rgba(61, 232, 255, .18), 4px 4px 0 var(--pink); }
+  .gx .section-title { font-size: 16.5px; }
+}
