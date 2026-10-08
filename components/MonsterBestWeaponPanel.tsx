@@ -108,7 +108,7 @@ export default function MonsterBestWeaponPanel({
         </div>
       </div>
       <p className="muted" style={{ marginTop: 8, fontSize: 12 }}>
-        ตัวคูณธาตุ×ขนาดเท่านั้น ยังไม่รวม ATK/DEF/การ์ด · ลองอาวุธของคุณที่ <Link href="/tools/damage">หน้าเทียบอาวุธ</Link>
+        ตัวคูณธาตุ×ขนาดเท่านั้น ยังไม่รวม ATK/DEF/การ์ด · ลองอาวุธของคุณที่ <Link href="/tools/build">จำลองบิลด์</Link>
       </p>
     </div>
   );

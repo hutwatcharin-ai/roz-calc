@@ -22,6 +22,10 @@ const nextConfig = {
       { source: '/guides/cards', destination: '/database/cards', permanent: true },
       // The HIT/FLEE table became the build simulator on 6 Oct 2026.
       { source: '/tools/hit-flee', destination: '/tools/build', permanent: true },
+      // The damage calculator went into the build simulator too (owner, 8 Oct
+      // 2026); ?monster=<id> carries over and the simulator opens on it. Its
+      // element x size picker moved to /guides/elements.
+      { source: '/tools/damage', destination: '/tools/build', permanent: true },
       { source: '/tools/elements', destination: '/guides/elements', permanent: true },
       { source: '/tools/sizes', destination: '/guides/sizes', permanent: true },
       { source: '/tools/exp', destination: '/guides/exp', permanent: true },

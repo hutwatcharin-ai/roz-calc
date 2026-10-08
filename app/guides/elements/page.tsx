@@ -17,6 +17,7 @@ const MONSTER_ELEMENTS: [string, string][] = [
   ['Undead', 'อันเดด'],
 ];
 import ElementTable from '@/components/ElementTable';
+import DamagePicker from '@/components/DamagePicker';
 import type { ElementLevel } from '@/lib/element-table';
 
 export const metadata = {
@@ -48,6 +49,16 @@ export default function ElementsPage() {
       <p className="muted" style={{ marginTop: 12, maxWidth: '65ch' }}>
         คู่มือเรียกธาตุ Ghost ว่า <strong>Ninja Aura</strong> เว็บนี้ใช้ชื่อ Ghost ตามตัวเกม
       </p>
+
+      {/* Element and size multiply: pick a weapon element, its size row and a
+          target, see the product. Moved here from /tools/damage when that page
+          went into the build simulator (owner, 8 Oct 2026). */}
+      <h2 className="section-title" style={{ marginTop: 24 }}>เทียบธาตุกับขนาดอาวุธ ตีเข้ากี่ %</h2>
+      <p className="muted" style={{ marginTop: 6, maxWidth: '65ch' }}>
+        ธาตุกับขนาดเป็นตัวคูณคนละตัวที่<strong>คูณกัน</strong> ธาตุ 200% เจอขนาด 50% ก็เหลือ 100% เท่ามือเปล่า ·
+        อยากรู้ดาเมจจริงของบิลด์คุณ ใช้ <Link href="/tools/build">จำลองบิลด์</Link>
+      </p>
+      <DamagePicker />
 
       {LEVELS.map((level) => (
         <ElementTable key={level} level={level} />

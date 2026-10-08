@@ -80,7 +80,6 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/tools/build', label: 'จำลองบิลด์', icon: '/images/items/2228.gif', ready: true },
     { href: '/tools/leveling-spots', label: 'ฟาร์มที่ไหนดี', icon: '/images/items/607.gif', ready: true },
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
-    { href: '/tools/damage', label: 'ตีมอนด้วยอะไรดี', icon: '/images/items/1201.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
   ],
   // Pages you read: fixed game tables, and the written guide. Moved here from

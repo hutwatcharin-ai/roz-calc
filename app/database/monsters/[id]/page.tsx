@@ -466,10 +466,11 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           </div>
           {/* No input boxes on a database page (4 Sep 2026): a player who came
               to read stats gets stats. The one who wants their own numbers
-              follows this to the calculator, which opens on this monster. */}
+              follows this to the build simulator, which opens on this monster
+              (owner's wording, 8 Oct 2026). */}
           <p style={{ marginTop: 20 }}>
-            <Link className="chiplink" href={`/tools/damage?monster=${monster.id}`}>
-              คำนวณดาเมจกับตัวนี้ →
+            <Link className="chiplink" href={`/tools/build?monster=${monster.id}`}>
+              ดูบิลด์คุณตีตัวนี้ →
             </Link>
           </p>
 

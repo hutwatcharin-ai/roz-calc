@@ -139,8 +139,8 @@ export default function ForgingPage() {
               จึงไม่นำเปอร์เซ็นต์ตายตัวมาอ้างเป็นค่าทางการของ RO Zero Global ส่วนรายละเอียดสกิลมาจากข้อมูลไคลเอนต์ในฐานข้อมูลของเว็บนี้
             </p>
             <p className="muted" style={{ marginTop: 12 }}>
-              ตีเสร็จแล้วเอาไปใช้กับมอนธาตุไหน ดู <Link href="/guides/elements">ตารางธาตุ</Link> หรือเทียบดาเมจที่{' '}
-              <Link href="/tools/damage">ตีมอนด้วยอะไรดี</Link>
+              ตีเสร็จแล้วเอาไปใช้กับมอนธาตุไหน ดู <Link href="/guides/elements">ตารางธาตุ</Link> หรือลองอาวุธกับมอนจริงที่{' '}
+              <Link href="/tools/build">จำลองบิลด์</Link>
             </p>
           </>
         }
