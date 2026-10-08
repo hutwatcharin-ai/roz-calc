@@ -10,12 +10,11 @@ import { SITE_URL } from '@/lib/site';
 // reference page, and a Disallow rule added "just in case" is how a site
 // quietly loses pages it wanted indexed.
 //
-// /tools/enchant is parked: the system is not in the live game yet (owner,
-// 24 Sep 2026). It was reachable for a few minutes, so it is refused here as
-// well as carrying a noindex, and it is out of the menu and the sitemap.
+// Nothing is parked now: /tools/enchant was, until enchanting reached the live
+// game (owner, 8 Oct 2026).
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: '*', allow: '/', disallow: ['/tools/enchant'] }],
+    rules: [{ userAgent: '*', allow: '/' }],
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

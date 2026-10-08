@@ -81,6 +81,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/tools/leveling-spots', label: 'ฟาร์มที่ไหนดี', icon: '/images/items/607.gif', ready: true },
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
+    // Back in the menu 8 Oct 2026: enchanting is live (owner).
+    { href: '/tools/enchant', label: 'เอนแชนต์', icon: '/images/items/6636.gif', ready: true },
   ],
   // Pages you read: fixed game tables, and the written guide. Moved here from
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).

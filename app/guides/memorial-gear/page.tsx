@@ -24,11 +24,9 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { LEVEL_CAP, loadMemorialGear, lookup, memorialGear, type GearPiece } from '@/lib/memorial-gear';
 
-// Enchanting is not in the live game yet (owner, 24 Sep 2026). The rates came
-// from the official guide and are kept here with the rest of the gear data, but
-// the section stays hidden until the system ships, along with /tools/enchant.
-// Flip this back to true and the section returns exactly as it was.
-const SHOW_ENCHANT = false;
+// Enchanting was hidden 24 Sep 2026 while it was not in the live game, and
+// shown again 8 Oct 2026 when the owner confirmed it is, with /tools/enchant.
+const SHOW_ENCHANT = true;
 
 export const revalidate = 86400;
 
