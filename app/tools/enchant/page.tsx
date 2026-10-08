@@ -8,6 +8,7 @@
 // The table is rendered on the server: a visitor from search sees the rates
 // without waiting for the calculator's JavaScript.
 
+import './page.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
