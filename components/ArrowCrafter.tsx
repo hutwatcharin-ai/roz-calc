@@ -85,7 +85,7 @@ export default function ArrowCrafter({ recipes }: { recipes: ArrowRecipe[] }) {
             {shown.map((a) => (
               <li key={a.arrow.id}>
                 <button type="button" className={`arrowtile${pick === a.arrow.id ? ' is-on' : ''}`} onClick={() => setPick(a.arrow.id)} aria-pressed={pick === a.arrow.id}>
-                  <img src={a.arrow.icon} alt="" width={32} height={32} loading="lazy" />
+                  <Icon src={a.arrow.icon} size={32} />
                   <b>{a.arrow.name.replace(/ Arrow$/, '')}</b>
                   <small className={`el-${a.arrow.element ?? 'neutral'}`}>
                     {STATUS_TH[a.arrow.name] ? `ติด${STATUS_TH[a.arrow.name]}` : ELEMENT_TH[a.arrow.element ?? 'neutral']}
@@ -98,7 +98,7 @@ export default function ArrowCrafter({ recipes }: { recipes: ArrowRecipe[] }) {
           {chosen ? (
             <section className="arrowtool__panel" aria-live="polite">
               <h2 className="arrowtool__h">
-                <img src={chosen.arrow.icon} alt="" width={32} height={32} />
+                <Icon src={chosen.arrow.icon} size={32} />
                 {chosen.arrow.name} ทำจากอะไรได้บ้าง
                 <span className="muted"> · {chosen.rows.length} อย่าง เรียงจากได้ลูกศรต่อชิ้นมากสุด</span>
               </h2>
@@ -120,14 +120,14 @@ export default function ArrowCrafter({ recipes }: { recipes: ArrowRecipe[] }) {
             {found.map((m) => (
               <li key={m.material.id} className="arrowtool__panel">
                 <Link href={m.material.href} className="arrowtool__mat">
-                  <img src={m.material.icon} alt="" width={28} height={28} loading="lazy" />
+                  <Icon src={m.material.icon} size={28} />
                   {m.material.name}
                 </Link>
                 <span className="arrowtool__gives">1 ชิ้นได้</span>
                 <ul className="arrowtool__outs">
                   {m.rows.map((r) => (
                     <li key={r.arrow.id}>
-                      <img src={r.arrow.icon} alt="" width={24} height={24} loading="lazy" />
+                      <Icon src={r.arrow.icon} size={24} />
                       {r.arrow.name} <b className="mono">×{r.amount}</b>
                       {!r.confirmed && <span className="arrowtool__unsure" title="มีแหล่งเดียว ยังยืนยันกับ Zero ไม่ได้">ยังไม่ยืนยัน</span>}
                     </li>
@@ -142,6 +142,11 @@ export default function ArrowCrafter({ recipes }: { recipes: ArrowRecipe[] }) {
   );
 }
 
+/** An item icon; 22 of the 135 materials have none on the site, and a broken-image box reads as an error. */
+function Icon({ src, size }: { src: string; size: number }) {
+  return <img src={src} alt="" width={size} height={size} loading="lazy" onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} />;
+}
+
 function MaterialList({ rows }: { rows: ArrowRecipe[] }) {
   const top = Math.max(...rows.map((r) => r.amount));
   return (
@@ -149,7 +154,7 @@ function MaterialList({ rows }: { rows: ArrowRecipe[] }) {
       {rows.map((r) => (
         <li key={r.material.id}>
           <Link href={r.material.href} className="arrowtool__mat">
-            <img src={r.material.icon} alt="" width={28} height={28} loading="lazy" />
+            <Icon src={r.material.icon} size={28} />
             {r.material.name}
           </Link>
           <span className="arrowtool__bar"><i style={{ width: `${(r.amount / top) * 100}%` }} /></span>
