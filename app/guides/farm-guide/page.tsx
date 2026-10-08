@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
 import MonsterLink from '@/components/MonsterLink';
 import { supabaseBrowser } from '@/lib/supabase';
 import AggroBadge from '@/components/AggroBadge';
@@ -7,7 +8,7 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { isCVariant } from '@/lib/c-variant';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { countText, monsterCounts } from '@/lib/counts';
-import { farmBands, farmPicks, unplaceable, type FarmCandidate, type SpawnPlace } from '@/lib/farm-picks';
+import { farmBands, farmPicks, unplaceable, type FarmCandidate, type FarmPick, type SpawnPlace } from '@/lib/farm-picks';
 import { BASE_LEVEL_CAP } from '@/lib/level-cap';
 import type { Metadata } from 'next';
 
@@ -98,64 +99,78 @@ export default async function FarmGuidePage() {
           { name: 'จุดฟาร์มแนะนำ', path: '/guides/farm-guide' },
         ])}
       />
-      <h1 className="pagehead__title">จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero</h1>
-      <p className="muted" style={{ marginTop: 8, maxWidth: '70ch' }}>
-        เรียงจาก <strong>EXP ต่อ HP คูณจำนวนตัวในแมพที่หนาที่สุด</strong> ตีคุ้มอย่างเดียวไม่พอ ต้องมีตัวถัดไปให้ตีด้วย ·
-        อยากได้ EXP ต่อชั่วโมงของตัวเอง กรอกดาเมจกับ ASPD ที่{' '}
-        <Link href="/tools/leveling-spots">หาจุดเก็บเลเวล</Link>
-      </p>
+      <PageHeader
+        title="จุดฟาร์มแนะนำตามเลเวล Ragnarok Zero"
+        lead={
+          <>
+            เรียงจาก <strong>EXP ต่อ HP คูณจำนวนตัวในแมพที่หนาที่สุด</strong> ตีคุ้มอย่างเดียวไม่พอ ต้องมีตัวถัดไปให้ตีด้วย ·
+            อยากได้ EXP ต่อชั่วโมงของตัวเอง กรอกดาเมจกับ ASPD ที่ <Link href="/tools/leveling-spots">หาจุดเก็บเลเวล</Link>
+          </>
+        }
+      />
 
-      {perBracket.map(({ lo, hi, top }) => (
-        <section key={lo} className="card" style={{ marginTop: 16 }}>
-          <h2 className="section-title">เลเวล {lo}–{hi} ตีอะไรดี</h2>
-          <div style={{ overflowX: 'auto' }}>
-            <table className="data-table" style={{ marginTop: 10 }}>
-              <thead>
-                <tr>
-                  <th>มอนสเตอร์</th>
-                  <th className="num">Lv</th>
-                  <th className="num">HP</th>
-                  <th className="num">Base EXP</th>
-                  {/* Both halves of the ranking are on the row, so a reader can
-                      see why it sits where it does. */}
-                  <th>แมพที่มีเยอะสุด</th>
-                </tr>
-              </thead>
-              <tbody>
-                {top.map((r) => (
-                  <tr key={r.monsterId}>
-                    <td data-label="">
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                        {r.imageUrl && (
-                          <img loading="lazy" decoding="async" src={r.imageUrl} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} />
-                        )}
-                        <MonsterLink id={r.monsterId} name={r.name} />
-                        <AggroBadge monster={{ is_aggressive: r.isAggressive, atk_max: null }} />
-                      </span>
-                    </td>
-                    <td data-label="Lv" className="num">{r.level}</td>
-                    <td data-label="HP" className="num">{r.hp && r.hp > 0 ? r.hp.toLocaleString() : '—'}</td>
-                    <td data-label="Base EXP" className="num">{r.baseExp && r.baseExp > 0 ? r.baseExp.toLocaleString() : '—'}</td>
-                    <td data-label="แมพที่มีเยอะสุด">
-                      {r.bestMap} <span className="muted">{r.amount} ตัว</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p style={{ marginTop: 8 }}>
-            <Link className="chiplink" href={`/?level=${Math.round((lo + hi) / 2)}&range=${Math.ceil((hi - lo) / 2)}#results`}>
-              ดูจัดอันดับเต็มช่วง {lo}–{hi} →
-            </Link>
-          </p>
-        </section>
-      ))}
+      <nav className="guildp__toc" aria-label="เลือกช่วงเลเวล">
+        {perBracket.map(({ lo, hi }) => (
+          <a key={lo} href={`#lv-${lo}`}>เลเวล {lo}–{hi}</a>
+        ))}
+      </nav>
+
+      {perBracket.map(({ lo, hi, top }) => {
+        const [first, ...rest] = top;
+        return (
+          <section key={lo} id={`lv-${lo}`} className="card farmband" style={{ marginTop: 16, scrollMarginTop: 90 }}>
+            <h2 className="section-title">เลเวล {lo}–{hi} ตีอะไรดี</h2>
+            <div className="farmband__grid">
+              <article className="farmmon is-top">
+                <span className="farmmon__rank mono">#1</span>
+                {first.imageUrl && <img loading="lazy" decoding="async" src={first.imageUrl} alt="" className="farmmon__img" />}
+                <div className="farmmon__body">
+                  <span className="farmmon__name">
+                    <MonsterLink id={first.monsterId} name={first.name} />
+                    <AggroBadge monster={{ is_aggressive: first.isAggressive, atk_max: null }} />
+                  </span>
+                  <FarmStats r={first} />
+                </div>
+              </article>
+              {rest.map((r, i) => (
+                <article key={r.monsterId} className="farmmon">
+                  <span className="farmmon__rank mono">#{i + 2}</span>
+                  {r.imageUrl && <img loading="lazy" decoding="async" src={r.imageUrl} alt="" className="farmmon__img" />}
+                  <div className="farmmon__body">
+                    <span className="farmmon__name">
+                      <MonsterLink id={r.monsterId} name={r.name} />
+                      <AggroBadge monster={{ is_aggressive: r.isAggressive, atk_max: null }} />
+                    </span>
+                    <FarmStats r={r} />
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p style={{ marginTop: 10, marginBottom: 0 }}>
+              <Link className="chiplink" href={`/?level=${Math.round((lo + hi) / 2)}&range=${Math.ceil((hi - lo) / 2)}#results`}>
+                ดูจัดอันดับเต็มช่วง {lo}–{hi} →
+              </Link>
+            </p>
+          </section>
+        );
+      })}
 
       <p className="source-note" style={{ marginTop: 16 }}>
         ช่วงเลเวลหยุดที่ {BASE_LEVEL_CAP} ตามเพดานปัจจุบัน · ไม่รวมมอนแชมเปียน (Swift, Furious …) · ตัวที่โจมตีก่อนมีป้ายเตือน ·{' '}
         <strong>{dropped} ตัวไม่ได้อยู่ในตาราง</strong>เพราะฐานข้อมูลยังไม่รู้ว่ามันเกิดที่แมพไหน ไม่เอามาแนะนำทั้งที่บอกไม่ได้ว่าไปตีที่ไหน
       </p>
     </main>
+  );
+}
+
+/** Level, HP, EXP and where the most of them are, as a small stat grid. */
+function FarmStats({ r }: { r: FarmPick }) {
+  return (
+    <dl className="farmmon__stats">
+      <div><dt>Lv</dt><dd>{r.level}</dd></div>
+      <div><dt>HP</dt><dd>{r.hp && r.hp > 0 ? r.hp.toLocaleString('en-US') : '—'}</dd></div>
+      <div><dt>Base EXP</dt><dd>{r.baseExp && r.baseExp > 0 ? r.baseExp.toLocaleString('en-US') : '—'}</dd></div>
+      <div className="farmmon__map"><dt>เยอะสุดที่</dt><dd>{r.bestMap} <small>{r.amount} ตัว</small></dd></div>
+    </dl>
   );
 }
