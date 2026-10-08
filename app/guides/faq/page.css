@@ -31,7 +31,14 @@
 .faqb__a strong { color: var(--text); }
 .faqb__a a { color: var(--cyan); }
 @media (max-width: 640px) {
-  .faqb__tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* A swipeable row of compact tiles, so the questions start on the first screen. */
+  .faqb__tiles { display: flex; overflow-x: auto; gap: 6px; scrollbar-width: none; }
+  .faqb__tiles::-webkit-scrollbar { display: none; }
+  .faqb__tile { flex: 0 0 auto; grid-template-columns: 24px auto; padding: 6px 10px; }
+  .faqb__tile img, .faqb__tileicon { width: 22px; height: 22px; }
+  .faqb__tile b { font-size: 12.5px; white-space: nowrap; }
+  .faqb__search input { flex-basis: 100%; min-height: 46px; }
+  .faqb__all { min-height: 36px; font-size: 13px; padding: 0 12px; }
   .faqb__qt { font-size: 14px; }
   .faqb__a { font-size: 14px; }
 }
