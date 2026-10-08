@@ -54,8 +54,11 @@
 @keyframes enchtry-hit { 0% { box-shadow: 0 0 0 rgba(255, 229, 61, 0); transform: scale(1); } 40% { box-shadow: 0 0 30px rgba(255, 229, 61, .9); transform: scale(1.1) rotate(-3deg); } 100% { box-shadow: 0 0 10px rgba(255, 229, 61, .4); transform: scale(1); } }
 @keyframes enchtry-miss { 0%, 100% { filter: none; } 50% { filter: brightness(1.8) saturate(0); } }
 @media (prefers-reduced-motion: reduce) { .enchtry__piece { animation: none !important; } }
+.enchbars__more { display: none; }
 @media (max-width: 720px) {
   .enchbars, .enchcalc__out { grid-template-columns: minmax(0, 1fr); }
+  .enchbars:not(.is-open) li:nth-child(n+7):not(.is-on) { display: none; }
+  .enchbars__more { display: block; width: 100%; min-height: 40px; margin-top: 6px; border: 1px dashed rgba(61, 232, 255, .4); border-radius: 8px; background: transparent; color: var(--cyan); font: 600 13px var(--font-sarabun), sans-serif; cursor: pointer; }
   .enchbar { grid-template-columns: 110px minmax(0, 1fr) 54px; }
   .enchpiece { flex-direction: column; gap: 2px; font-size: 13px; }
 }

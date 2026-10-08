@@ -46,6 +46,8 @@ export default function EnchantCalculator({
   const [slot, setSlot] = useState<Slot>('armor');
   const [pick, setPick] = useState(0);
   const [count, setCount] = useState(20);
+  // On phones the roll list folds to its first rows plus the chosen one.
+  const [allRolls, setAllRolls] = useState(false);
 
   const available = useMemo(
     () => outcomes.map((o, i) => ({ ...o, index: i })).filter((o) => o[slot] != null),
@@ -74,12 +76,12 @@ export default function EnchantCalculator({
 
       {/* 2. Every roll this piece can give, as a bar; pick the one you want. */}
       <p className="enchsub">ได้อะไรบ้าง และโอกาสเท่าไร · กดเลือกตัวที่อยากได้</p>
-      <ul className="enchbars" role="radiogroup" aria-label="อยากได้">
+      <ul className={`enchbars${allRolls ? ' is-open' : ''}`} role="radiogroup" aria-label="อยากได้">
         {available.map((o) => {
           const r = o[slot] ?? 0;
           const on = o.index === chosen?.index;
           return (
-            <li key={o.index}>
+            <li key={o.index} className={on ? 'is-on' : undefined}>
               <button type="button" role="radio" aria-checked={on} className={`enchbar${on ? ' is-on' : ''}`} onClick={() => setPick(o.index)}>
                 <span className="enchbar__name">{o.stat} <b>{o.value}</b></span>
                 <span className="enchbar__track"><i style={{ width: `${(r / top) * 100}%` }} /></span>
@@ -89,6 +91,11 @@ export default function EnchantCalculator({
           );
         })}
       </ul>
+      {available.length > 6 && (
+        <button type="button" className="enchbars__more" onClick={() => setAllRolls((v) => !v)}>
+          {allRolls ? 'ย่อรายการ' : `ดูทั้งหมด ${available.length} แบบ`}
+        </button>
+      )}
 
       <div className="enchcalc__out">
         {/* 3. One in how many: a hundred tries, the hits lit. */}
