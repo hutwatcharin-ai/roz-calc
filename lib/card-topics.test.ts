@@ -37,3 +37,14 @@ describe('card topics from the client text', () => {
     for (const s of slugs) expect(topicBySlug(s)).not.toBeNull();
   });
 });
+
+describe('owner-tested client lines', () => {
+  // Crab Card's client text claims +30% against Water monsters; in game it is
+  // ATK +5 and nothing else (owner, 8 Oct 2026).
+  it('keeps Crab Card off the Water page', () => {
+    expect(cardsForTopic('vs-water').map((c) => c.id)).not.toContain(4153);
+  });
+  it('still lists the real Water cards', () => {
+    expect(cardsForTopic('vs-water').map((c) => c.id)).toContain(4069);
+  });
+});

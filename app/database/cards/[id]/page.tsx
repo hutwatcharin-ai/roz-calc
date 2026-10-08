@@ -16,6 +16,7 @@ import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { gameThaiDescription } from '@/lib/game-items';
+import { clientTextFix } from '@/lib/client-text-fixes';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCardCategory, itemHref } from '@/lib/item-href';
 import { thaiAliasNames } from '@/lib/thai-aliases';
@@ -172,6 +173,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         <div className="card card--cyan" style={{ marginTop: 20 }}>
           <h2 className="section-title">ข้อความเต็มจากในเกม</h2>
           <DescriptionLanguageToggle thaiLines={gameThaiDescription(item.id) ?? (thai.length > 0 ? thai : english)} englishLines={english} />
+          {clientTextFix(item.id) && <p className="ceiling-note" style={{ marginTop: 10 }}>{clientTextFix(item.id)!.note}</p>}
         </div>
       )}
 

@@ -11,6 +11,7 @@
 
 import file from '@/data/game-items.json';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
+import { clientTextFix } from '@/lib/client-text-fixes';
 
 const items = (file as unknown as { items: Record<string, { name: string; desc?: string[] }> }).items;
 
@@ -152,6 +153,8 @@ export function cardsForTopic(slugName: string, ids = allCardIds()): { id: numbe
   if (!t) return [];
   if ('word' in t) return ids.filter((id) => cardSlotWord(id) === t.word).map((id) => ({ id, lines: cardLines(id) }));
   return ids.flatMap((id) => {
+    // Owner-tested: the client line that would put it here does nothing.
+    if (clientTextFix(id)?.topics.includes(slugName)) return [];
     const m = t.match(cardLines(id));
     return m ? [{ id, lines: m }] : [];
   });
