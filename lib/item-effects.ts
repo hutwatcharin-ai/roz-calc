@@ -94,6 +94,7 @@ export const BONUS_TYPES: Record<string, TypeInfo> = {
   matk: { label: 'MATK', group: 'offence' }, matk_percent: { label: 'MATK', unit: '%', group: 'offence' },
   hit: { label: 'HIT', group: 'offence' }, flee: { label: 'FLEE', group: 'defence' },
   crit: { label: 'CRI', group: 'offence' }, crit_damage_percent: { label: 'คริแรง', unit: '%', group: 'offence' },
+  double_attack: { label: 'โอกาส Double Attack', unit: '%', group: 'offence' },
   perfect_dodge: { label: 'Perfect Dodge', group: 'defence' },
   def: { label: 'DEF', group: 'defence' }, mdef: { label: 'MDEF', group: 'defence' },
   aspd: { label: 'ASPD', group: 'offence' }, aspd_percent: { label: 'ASPD', unit: '%', group: 'offence' },

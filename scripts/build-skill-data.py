@@ -73,6 +73,9 @@ PASSIVES = {
     'two-handed-sword-mastery': {'fx': [('mastery', r'Damage \+(\d+)')], 'w': ['sword_2h']},
     'spear-mastery': {'fx': [('mastery', r'Damage \+(\d+)')], 'w': ['spear_1h', 'spear_2h']},
     'katar-mastery': {'fx': [('mastery', r'Damage: \+(\d+)')], 'w': ['katar']},
+    # Zero's own numbers (8 Oct 2026): 7% a level, plus HIT a percent a level;
+    # with a dagger only, as the skill text says.
+    'double-attack': {'fx': [('double_attack', r'Activation Chance: (\d+)%'), ('hit_percent', r'HIT Bonus: (\d+)%')], 'w': ['dagger']},
     'advanced-katar-mastery': {'fx': [('damage_percent', r'Damage Increase: \+(\d+)%')], 'w': ['katar']},
     'iron-fists': {'fx': [('mastery', r'Damage \+(\d+)')], 'w': ['bare_hand', 'knuckle']},
     'demon-bane': {'fx': [('mastery', r'Damage \+(\d+)')], 't': ['race:demon', 'element:undead']},

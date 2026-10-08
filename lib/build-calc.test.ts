@@ -419,3 +419,31 @@ describe('sets read from the client item text', () => {
     expect(both.counted.some((l) => l.from.includes('Change STR'))).toBe(true);
   });
 });
+
+describe('crits and Double Attack in the time to kill', () => {
+  const mob: Target = {
+    name: 'Test', level: 40, vit: 20, def: 30, size: 'Medium', element: 'Fire', element_level: 1, race: 'Brute', boss: false,
+    hit_100: 200, flee_95: 280, hp: 5000, mdef: 10, int: 10, luk: 20,
+  };
+  const knife = { weapon: { id: 1201, r: 0, c: [0, 0, 0] } };
+
+  it("takes 0.2% crit off per point of the monster's LUK", () => {
+    const r = calcBuild({ ...base, st: { ...base.st, luk: 50 } }, mob);
+    expect(r.vs!.critChance).toBeCloseTo(r.crit - 4, 1);
+  });
+
+  it('a crit hits harder than the top of the normal roll', () => {
+    const r = calcBuild({ ...base, g: knife, st: { ...base.st, luk: 60 } }, mob).vs!;
+    expect(r.critDamage!).toBeGreaterThan(r.damageMax!);
+    expect(r.avgSwing!).toBeGreaterThan(r.damage!);
+  });
+
+  it('Double Attack counts with a dagger, not bare-handed', () => {
+    const thief = { ...base, cls: 'thief', g: knife };
+    const plain = calcBuild(thief, mob).vs!;
+    const da = calcBuild({ ...thief, sk: { 'Double Attack': 10 } }, mob).vs!;
+    expect(da.doubleAttack).toBe(70);
+    expect(da.autoSeconds!).toBeLessThan(plain.autoSeconds!);
+    expect(calcBuild({ ...base, cls: 'thief', sk: { 'Double Attack': 10 } }, mob).vs!.doubleAttack).toBe(0);
+  });
+});

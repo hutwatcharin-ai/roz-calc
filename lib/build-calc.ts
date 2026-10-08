@@ -421,6 +421,8 @@ export interface Target {
   hp?: number | null;
   mdef?: number | null;
   int?: number | null;
+  /** Lowers the crit chance against it: 0.2% a point (prontera, rAthena). */
+  luk?: number | null;
 }
 
 export interface Line {
@@ -484,6 +486,14 @@ export interface TargetResult {
   /** Lowest and highest auto-attack damage from the weapon ATK roll. */
   damageMin: number | null;
   damageMax: number | null;
+  /** Crit chance against this monster, after its LUK; Katar doubles CRI. */
+  critChance: number;
+  /** One crit: the top of the weapon roll, x1.4, plus crit damage %. */
+  critDamage: number | null;
+  /** Double Attack chance with a dagger in the right hand (Thief line). */
+  doubleAttack: number;
+  /** Average damage one swing does, misses, crits and Double Attack counted. */
+  avgSwing: number | null;
   multiplier: number;
   /** Dual wielding: what each hand lands after its mastery share; damage is their sum. */
   hands?: { right: number; left: number; rightPct: number; leftPct: number } | null;
@@ -514,7 +524,7 @@ export interface SkillResult {
 
 const WINDOW = new Set([
   ...STATS, ...STATS.map((s) => `${s}_percent`), 'hit_percent', 'mastery', 'weight', 'endow', 'no_size_penalty', 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
-  'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent',
+  'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent', 'double_attack',
 ]);
 
 /** Why a group does not count now, or null when it does. */
@@ -891,8 +901,20 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
     const aps = aspd !== null ? attacksPerSecond(aspd) : null;
     const mobHp = target.hp && target.hp > 0 ? target.hp : null;
     const landed = (hitChance ?? 100) / 100;
+    // Crits always land and take the top of the weapon roll, x1.4 and the
+    // crit damage lines (rAthena; prontera's crit chance against a target:
+    // CRI - its LUK x 0.2). Katar doubles CRI. Double Attack (Thief line,
+    // dagger in the right hand) swings twice and cannot crit, so per swing:
+    // DA, else crit, else a normal hit.
+    const critChance = Math.max(0, Math.min(100, crit * (wt === 'katar' ? 2 : 1) - (target.luk ?? 0) * 0.2));
+    const critDamage = damageMax === null ? null : Math.floor(damageMax * 1.4 * (1 + get('crit_damage_percent') / 100));
+    const doubleAttack = wt === 'dagger' ? Math.min(100, get('double_attack')) : 0;
+    const da = doubleAttack / 100;
+    const c = critChance / 100;
+    const avgSwing = damage === null ? null
+      : da * 2 * landed * damage + (1 - da) * (c * (critDamage ?? damage) + (1 - c) * landed * damage);
     const autoHits = mobHp && damage ? Math.ceil(mobHp / damage) : null;
-    const autoSeconds = mobHp && damage && aps && landed > 0 ? Math.round((mobHp / (damage * landed * aps)) * 100) / 100 : null;
+    const autoSeconds = mobHp && avgSwing && aps ? Math.round((mobHp / (avgSwing * aps)) * 100) / 100 : null;
 
     // One attack skill.
     let skill: SkillResult | null = null;
@@ -950,6 +972,10 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
       damage,
       damageMin,
       damageMax,
+      critChance: Math.round(critChance * 10) / 10,
+      critDamage,
+      doubleAttack,
+      avgSwing: avgSwing === null ? null : Math.round(avgSwing * 10) / 10,
       multiplier,
       hands,
       hp: mobHp,

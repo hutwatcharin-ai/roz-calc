@@ -316,7 +316,7 @@ export default function BuildSimulator({ initial, sharedId }: {
   async function loadMonster(id: number) {
     const { data, error } = await supabaseBrowser()
       .from('monsters')
-      .select('id, name_en, level, vit, def, mdef, int_, hp, size, element, element_level, race, is_mvp, hit_100, flee_95, image_url')
+      .select('id, name_en, level, vit, def, mdef, int_, luk, hp, size, element, element_level, race, is_mvp, hit_100, flee_95, image_url')
       .eq('id', id)
       .maybeSingle();
     if (error || !data) {
@@ -340,6 +340,7 @@ export default function BuildSimulator({ initial, sharedId }: {
       hp: data.hp && data.hp > 0 ? data.hp : null,
       mdef: data.mdef,
       int: data.int_,
+      luk: data.luk,
     });
     setTargetImg(data.image_url ?? null);
     setMobQuery('');
@@ -1123,6 +1124,8 @@ export default function BuildSimulator({ initial, sharedId }: {
                   <b className="mono buildsim__dmg">
                     {vs.damage ?? 'ไม่ทราบ'}
                     {vs.damageMin !== null && vs.damageMax !== null && vs.damageMin !== vs.damageMax && <small> สุ่ม {vs.damageMin}–{vs.damageMax}</small>}
+                    {vs.critDamage !== null && vs.critChance > 0 && <small> · คริ {vs.critChance}% ({vs.critDamage})</small>}
+                    {vs.doubleAttack > 0 && <small> · Double Attack {vs.doubleAttack}%</small>}
                   </b>
                 </div>
                 {vs.hands && (
@@ -1185,7 +1188,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                     </dl>
                   )}
                 </div>
-                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · ช่วงสุ่มมาจาก ATK อาวุธ ±5% ต่อเลเวลอาวุธ · เวลาฆ่านับโอกาสตีโดนแล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
+                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · ช่วงสุ่มมาจาก ATK อาวุธ ±5% ต่อเลเวลอาวุธ · คริตีโดนเสมอ ใช้ค่าสุ่มสูงสุด ×1.4 (โอกาสคริหัก LUK มอน×0.2) · เวลาฆ่านับโอกาสตีโดน คริ และ Double Attack แล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
               </div>
             ) : (
               <p className="buildsim__empty">
