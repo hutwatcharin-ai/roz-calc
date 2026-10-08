@@ -74,6 +74,14 @@ const LESSER = GEAR.filter((g) => g.tier === 'lesser');
 const ADVANCED = GEAR.filter((g) => g.tier === 'advanced');
 const FORCE = SCROLLS.filter((s) => s.kind === 'force');
 const RESIST = SCROLLS.filter((s) => s.kind === 'resist');
+const skillOf = (name: string) => name.replace(/^(Force|Resist): /, '').replace(/ Lv\.1$/, '');
+const SCROLL_SKILLS = [...new Set([...FORCE, ...RESIST].map((s) => skillOf(s.name)))].map((skill) => ({
+  skill,
+  force: FORCE.find((s) => skillOf(s.name) === skill) ?? null,
+  resist: RESIST.find((s) => skillOf(s.name) === skill) ?? null,
+}));
+/** "เพิ่ม Damage ของสกิล Pierce 7%" -> "7%" (the item's own number). */
+const pctOf = (effect: string) => /(\d+(?:\.\d+)?)%/.exec(effect)?.[1].concat('%') ?? '?';
 
 // Emperium is not in the list above: its own description is flavour text and
 // never says the word WoE. It is here because it is the thing being broken.
@@ -189,7 +197,7 @@ export default async function WoeGuidePage() {
           และเอฟเฟกต์ไม่ทำงาน แปลว่ากดไปก็เสียของ ต้องเปลี่ยนไปใช้ยาแบบกดทีละขวดหรือยาเฉพาะ WoE ด้านล่างแทน
           ในลิสต์นี้มีของที่ไม่ใช่ยาอยู่ชิ้นเดียวคือเอนชานต์เงาช่อง Middle ซึ่งเขียนว่าไม่มีผลทั้งในเขต WoE และ PvP
         </p>
-        <ul className="woe__list woe__list--tight">
+        <ul className="woe__list woe__list--tight woe__list--grid">
           {BLOCKED.map((r) => (
             <li key={r.id}>
               <ItemLink id={r.id} name={r.name} />
@@ -206,7 +214,7 @@ export default async function WoeGuidePage() {
         <p style={{ marginTop: 8 }}>
           อีกฝั่งหนึ่งคือของที่มีไว้สำหรับสงครามโดยเฉพาะ ออกนอกเขตแล้วกดไม่ได้ ถือติดตัวไว้ก่อนเข้าสงครามได้เลย
         </p>
-        <ul className="woe__list woe__list--tight">
+        <ul className="woe__list woe__list--tight woe__list--grid">
           {ONLY.map((r) => (
             <li key={r.id}>
               <ItemLink id={r.id} name={r.name} />
@@ -223,29 +231,18 @@ export default async function WoeGuidePage() {
           <strong> Force {FORCE.length} ใบ</strong> เพิ่มดาเมจของสกิลที่ระบุ และ <strong>Resist {RESIST.length} ใบ</strong> ลดดาเมจที่โดนจากสกิลนั้น
           ทั้งคู่เจาะจงเป็นรายสกิล ไม่ใช่บัฟรวม
         </p>
-        <div className="woe__cols">
-          <div>
-            <h3 className="woe__sub">Force เพิ่มดาเมจสกิลตัวเอง</h3>
-            <ul className="woe__list woe__list--tight">
-              {FORCE.map((s) => (
-                <li key={s.id}>
-                  <strong>{s.name.replace('Force: ', '').replace(' Lv.1', '')}</strong>
-                  <span className="muted">{s.effect}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="woe__sub">Resist ลดดาเมจที่โดนจากสกิลนั้น</h3>
-            <ul className="woe__list woe__list--tight">
-              {RESIST.map((s) => (
-                <li key={s.id}>
-                  <strong>{s.name.replace('Resist: ', '').replace(' Lv.1', '')}</strong>
-                  <span className="muted">{s.effect}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* One tile per skill with both scrolls side by side (owner, 8 Oct
+            2026: the two 23-row columns repeated every skill name twice). */}
+        <div className="woe__scrolls">
+          {SCROLL_SKILLS.map((k) => (
+            <div key={k.skill} className="woe__scroll">
+              <strong>{k.skill}</strong>
+              <span className="woe__pills">
+                {k.force ? <span className="woe__pill is-force" title={k.force.effect}>Force +{pctOf(k.force.effect)}</span> : <span className="woe__pill is-none">ไม่มี Force</span>}
+                {k.resist ? <span className="woe__pill is-resist" title={k.resist.effect}>Resist −{pctOf(k.resist.effect)}</span> : <span className="woe__pill is-none">ไม่มี Resist</span>}
+              </span>
+            </div>
+          ))}
         </div>
         <Src>คำอธิบายไอเทมในไคลเอนต์ภาษาไทย ส่วนที่ยังไม่ทราบคือสกรอลเหล่านี้ได้มาจากไหนในเซิร์ฟนี้</Src>
       </section>
