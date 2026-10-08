@@ -80,7 +80,9 @@ export default async function QuestIndexPage({
   const matches =
     needle === ''
       ? []
-      : rows.filter((quest) => quest.name.toLowerCase().includes(escapeLikePattern(needle).toLowerCase())).slice(0, 50);
+      : rows
+          .filter((quest) => [quest.name, quest.name_th ?? ''].some((n) => n.toLowerCase().includes(escapeLikePattern(needle).toLowerCase())))
+          .slice(0, 50);
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -106,7 +108,7 @@ export default async function QuestIndexPage({
         source={
           <>
             <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม (ผ่านชุดข้อมูลสาธารณะของ rozerodb) ·
-            ภาษาอังกฤษตามต้นฉบับ คำแปลไทยจะทยอยตามมา
+            แปลไทยครบทุกเควส ชื่อภาษาอังกฤษตามเกมอยู่คู่กัน
           </>
         }
       />
@@ -114,8 +116,8 @@ export default async function QuestIndexPage({
       <form className="filterbar">
         <div className="filterbar__row filterbar__row--search">
           <label className="field field--grow">
-            <span className="field__label">ค้นชื่อเควส (ภาษาอังกฤษ)</span>
-        <input type="search" name="q" defaultValue={q} placeholder="เช่น Novice Training" />
+            <span className="field__label">ค้นชื่อเควส (ไทยหรืออังกฤษ)</span>
+        <input type="search" name="q" defaultValue={q} placeholder="เช่น เก็บไข่ หรือ Novice Training" />
           </label>
         <button type="submit" className="btn">ค้นหา</button>
         </div>
@@ -147,7 +149,8 @@ export default async function QuestIndexPage({
                 {matches.map((quest) => (
                   <tr key={quest.id}>
                     <td data-label="">
-                      <Link href={`/database/quests/${quest.town_key}#q${quest.id}`}>{quest.name}</Link>
+                      <Link href={`/database/quests/${quest.town_key}#q${quest.id}`}>{quest.name_th ?? quest.name}</Link>
+                      {quest.name_th && <span className="muted" style={{ display: 'block', fontSize: 12 }}>{quest.name}</span>}
                     </td>
                     <td data-label="ชนิด">{TYPE_LABELS[quest.type] ?? quest.type}</td>
                     <td data-label="เมือง">{hubLabel(quest.town_key, quest.zone)}</td>

@@ -281,7 +281,7 @@ export default async function QuestTownPage({
         lead={`${typeFilter ? `${quests.length} จาก ${allQuests.length}` : allQuests.length} เควส · กดชื่อเควสเพื่อคัดลอกลิงก์เจาะรายเควสได้`}
         source={
           <>
-            <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม ภาษาอังกฤษตามต้นฉบับ ·
+            <strong>ที่มา:</strong> ข้อความเควสจากไฟล์เกม แปลไทย ชื่อภาษาอังกฤษตามเกมอยู่คู่กัน ·
             พิกัดคือจุดที่เกมผูกไว้กับเควส ไม่ใช่ทุกเควสจะมี
           </>
         }
