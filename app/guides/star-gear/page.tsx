@@ -23,6 +23,7 @@
 //
 // The two-NPC method and the activation costs are the mirrored guide's, not
 // the client's, and the page says so where they appear.
+import StarDropFilter from '@/components/StarDropFilter';
 import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -609,6 +610,7 @@ export default async function StarGearPage() {
           ของติดดาวแต่ละชิ้นทำจากตัวธรรมดาที่มอนดรอป ข้างล่างคือตัวธรรมดาของทุกชิ้น กับมอนที่ดรอปและเปอร์เซ็นต์
           มอนที่ตีได้ตอนนี้ขึ้นก่อน เรียงตามเลเวล ตัวสีจางคือมอนที่ยังไม่มีในเกม · มอนเลเวลห่างจากเราเกิน ~19 ดรอปโดนหัก
         </p>
+        <StarDropFilter />
         <h3 className="star__h3" style={{ marginTop: 14 }}>อาวุธ</h3>
         <DropsSection pieces={WEAPON_FIRST} />
         <h3 className="star__h3" style={{ marginTop: 18 }}>ของสวมใส่</h3>

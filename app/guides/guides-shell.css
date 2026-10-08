@@ -278,3 +278,4 @@
 .gx .farmmon__map { grid-column: 1 / -1; }
 .gx .farmmon__map dd { color: var(--text); font-family: var(--font-sarabun), sans-serif; }
 .gx .farmmon__map small { color: var(--faint); }
+.gx .stardrop__item[hidden], .gx .stardrop__mon[hidden] { display: none; }
