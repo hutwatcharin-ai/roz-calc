@@ -8,6 +8,7 @@
 // columns, two URLs competing for the same search, and two places to fix
 // anything. This page already had 360 views in 30 days and a slot filter, so
 // the grouping belongs on it. /guides/cards now redirects here.
+import { cardEffectTh } from '@/lib/client-text-fixes';
 import { isCVariant } from '@/lib/c-variant';
 import { publishedTopics } from '@/lib/card-topics';
 import './page.css';
@@ -140,7 +141,7 @@ export default async function CardsPage({
       roles: cardRoles(c.description),
       // Thai translation leads when present; the English effect still powers
       // the search below so "LUK" and English phrasing keep matching.
-      effect: c.description_th ?? cardEffect(c.description),
+      effect: cardEffectTh(c.id, c.description_th) ?? cardEffect(c.description),
       effectEn: cardEffect(c.description),
       from,
       // Worth printing only when it is not the obvious answer: a single

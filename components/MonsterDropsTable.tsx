@@ -6,6 +6,7 @@
 // is worth picking up", and rate alone does not answer it. Equipment prices
 // are shown as-is; they are the rozerodb-synced NPC price.
 
+import { cardEffectTh } from '@/lib/client-text-fixes';
 import { dropTier, TIER_LABEL } from '@/lib/drop-tier';
 import Link from 'next/link';
 import { itemHref } from '@/lib/item-href';
@@ -80,7 +81,7 @@ export default function MonsterDropsTable({ drops, failed }: { drops: MonsterDro
                     <CardLink
                       id={d.items.id}
                       name={d.items.name_en ?? '—'}
-                      effect={cardEffectText(d.items.description_th, d.items.description)}
+                      effect={cardEffectText(cardEffectTh(d.items.id, d.items.description_th), d.items.description)}
                       slot={cardSlotTh(d.items.description)}
                     />
                   </span>

@@ -4,6 +4,7 @@
 // landed on the generic item template, which leads with prices and slots and
 // buries the one line a card is read for. Split out 3 Sep 2026, the same day as
 // gear and costumes; lib/item-href.ts holds the rule all four routes key off.
+import { cardEffectTh, clientTextFix } from '@/lib/client-text-fixes';
 import '../page.css';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
@@ -16,7 +17,6 @@ import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { gameThaiDescription } from '@/lib/game-items';
-import { clientTextFix } from '@/lib/client-text-fixes';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCardCategory, itemHref } from '@/lib/item-href';
 import { thaiAliasNames } from '@/lib/thai-aliases';
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   if (!item) return { title: 'ไม่พบการ์ดใบนี้' };
 
   const slot = parseCardSlot(item.description);
-  const effect = item.description_th ?? effectLines(item.description).join(' ');
+  const effect = cardEffectTh(item.id, item.description_th) ?? effectLines(item.description).join(' ');
 
   // Cards get nicknamed after what they do, not what they are called:
   // "การ์ดเทเล" is the Creamy Card, which grants Teleport.
@@ -102,8 +102,9 @@ export default async function CardDetailPage({ params }: { params: { id: string 
   const english = effectLines(item.description);
   // description_th is a curated one-line translation (all 313 cards have one);
   // the generic line dictionary is the fallback for a row that ever lacks it.
-  const thai = item.description_th
-    ? [item.description_th]
+  const effectTh = cardEffectTh(item.id, item.description_th);
+  const thai = effectTh
+    ? [effectTh]
     : composeThaiDescription(item.description ?? '', dict)
         .map((l) => l.thai ?? l.source)
         .filter((l) => l !== '' && !BOILERPLATE.test(l));
@@ -147,7 +148,7 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         data={entityJsonLd({
           path: `/database/cards/${item.id}`,
           name: item.name_en,
-          description: item.description_th ?? item.description,
+          description: cardEffectTh(item.id, item.description_th) ?? item.description,
           properties: [
             { name: 'Category', value: 'Card' },
             ...(slot ? [{ name: 'EquippedOn', value: slot }] : []),
