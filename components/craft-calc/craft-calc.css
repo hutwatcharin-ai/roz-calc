@@ -121,11 +121,11 @@ a.ccbar__from:hover { text-decoration: underline; }
 }
 .ccbar__basket:hover { background: rgba(61, 232, 255, .06); }
 .ccpage { display: grid; gap: 16px; margin-top: 16px; }
-.ccfind input {
+.ccfind > input {
   width: 100%; min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(61, 232, 255, .35);
   background: #07041a; color: var(--text); font-size: 15px;
 }
-.ccfind input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.ccfind > input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .ccfind__list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
 .ccfind__list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; padding: 6px 10px; border-radius: 8px; background: #0b0724; }
 .ccfind__list .rqty { margin: 0; padding: 0; border: 0; }
