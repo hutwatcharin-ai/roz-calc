@@ -48,14 +48,3 @@ describe('owner-tested client lines', () => {
     expect(cardsForTopic('vs-water').map((c) => c.id)).toContain(4069);
   });
 });
-
-describe('Crab Card in-game text', () => {
-  it('cuts the dead Water line in Thai and English', async () => {
-    const { fixGameLines } = await import('./client-text-fixes');
-    const th = ['ATK +5', 'เพิ่ม Damage ทางกายภาพ', 'ต่อ Aster 30%', 'เพิ่ม Damage ทางกายภาพต่อมอนสเตอร์', 'ธาตุ Water 30%', 'น้ำหนัก : 1'];
-    expect(fixGameLines(4153, th, 'th')).toEqual(['ATK +5', 'เพิ่ม Damage ทางกายภาพ', 'ต่อ Aster 30%', 'น้ำหนัก : 1']);
-    const en = ['When equipped together with Crab, Shellfish, and Aster Card, Fish monsters have a chance to drop Sashimi when hunted, and Physical Damage to Water-property Monsters +30%.'];
-    expect(fixGameLines(4153, en, 'en')[0]).toBe('When equipped together with Crab, Shellfish, and Aster Card, Fish monsters have a chance to drop Sashimi when hunted.');
-    expect(fixGameLines(4069, th, 'th')).toEqual(th);
-  });
-});

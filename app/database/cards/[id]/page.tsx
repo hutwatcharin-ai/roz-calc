@@ -4,7 +4,7 @@
 // landed on the generic item template, which leads with prices and slots and
 // buries the one line a card is read for. Split out 3 Sep 2026, the same day as
 // gear and costumes; lib/item-href.ts holds the rule all four routes key off.
-import { cardEffectTh, clientTextFix, fixGameLines } from '@/lib/client-text-fixes';
+import { cardEffectTh, clientTextFix } from '@/lib/client-text-fixes';
 import '../page.css';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import AbsentFromGameNote from '@/components/AbsentFromGameNote';
@@ -173,11 +173,8 @@ export default async function CardDetailPage({ params }: { params: { id: string 
       {english.length > 0 && (
         <div className="card card--cyan" style={{ marginTop: 20 }}>
           <h2 className="section-title">ข้อความเต็มจากในเกม</h2>
-          <DescriptionLanguageToggle
-            thaiLines={gameThaiDescription(item.id) ? fixGameLines(item.id, gameThaiDescription(item.id)!, 'th') : thai.length > 0 ? thai : fixGameLines(item.id, english, 'en')}
-            englishLines={fixGameLines(item.id, english, 'en')}
-          />
-          {clientTextFix(item.id)?.note && <p className="ceiling-note" style={{ marginTop: 10 }}>{clientTextFix(item.id)!.note}</p>}
+          <DescriptionLanguageToggle thaiLines={gameThaiDescription(item.id) ?? (thai.length > 0 ? thai : english)} englishLines={english} />
+          {clientTextFix(item.id) && <p className="ceiling-note" style={{ marginTop: 10 }}>{clientTextFix(item.id)!.note}</p>}
         </div>
       )}
 
