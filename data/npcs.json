@@ -39,6 +39,7 @@
     "prt_fild08": "Prontera Field 08",
     "cmd_in01": "Inside Comodo",
     "tu_ac01_e": "Academy 1F",
+    "iz_ac01": "Academy 1F",
     "moc_fild17": "Sograt Desert 17",
     "pay_fild01": "Payon Forest 01 (pay_fild01)",
     "moc_fild07": "Sograt Desert 07",
@@ -6769,7 +6770,7 @@
       "types": [
         "quest"
       ],
-      "map": "tu_ac01_e",
+      "map": "iz_ac01",
       "mapName": "Academy 1F",
       "x": 137,
       "y": 69,
