@@ -95,7 +95,10 @@ async function droppersOf(itemId: number): Promise<Dropper[]> {
 
 // Mishuna's quest for the skill (quest 8184; amounts from the quest text in
 // data/quest-th, the same four drops DOUGH farms in the clip).
-const QUEST_NPC = { name: 'Mishuna', map: 'tu_ac01_e', mapName: 'Academy 1F', x: 137, y: 69 };
+// The Academy is entered from Izlude (map-warps: izlude -> iz_ac01). Our NPC
+// table files Mishuna under tu_ac01_e, which no warp reaches; rozeroplanner's
+// quest record has iz_ac01 at the same 137/69, so /navi uses that.
+const QUEST_NPC = { name: 'Mishuna', map: 'iz_ac01', mapName: 'Academy 1F', x: 137, y: 69 };
 const QUEST_ITEMS = [
   { id: 904, name: 'Scorpion Tail', amount: 10 },
   { id: 947, name: 'Horn', amount: 7 },
@@ -208,7 +211,7 @@ export default async function ElementalConverterPage() {
             เปลี่ยนเป็น Sage แล้วสกิล Create Elemental Converter จะขึ้นในหน้าต่างสกิลแต่<strong>เป็นสีเทา ยังใช้ไม่ได้</strong>
           </li>
           <li>
-            ไปหา <strong>{QUEST_NPC.name}</strong> ที่ {QUEST_NPC.mapName} ห้องที่สองนับจากล่างฝั่งขวา (ห้องเดียวกับที่เปลี่ยนเป็น Sage){' '}
+            ไปหา <strong>{QUEST_NPC.name}</strong> ใน<strong>เมือง Izlude</strong> เดินเข้า Academy ({QUEST_NPC.mapName}) ห้องที่สองนับจากล่างฝั่งขวา (ห้องเดียวกับที่เปลี่ยนเป็น Sage){' '}
             <code className="mono navicmd">/navi {QUEST_NPC.map} {QUEST_NPC.x}/{QUEST_NPC.y}</code> · เลือกเรียน Create Elemental Converter
           </li>
           <li>ฟามของ 4 อย่างด้านล่างให้ครบ</li>

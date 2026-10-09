@@ -77,7 +77,7 @@ export const SKILL_NEEDS: Record<number, { title: string; needs: string; guide: 
   },
   [CREATE_ELEMENTAL_CONVERTER]: {
     title: 'ใบธาตุ Sage',
-    needs: 'ต้องเป็น Sage และทำเควสต์ Create Elemental Converter กับ Mishuna ที่ Academy ก่อน (เปลี่ยนอาชีพแล้วสกิลยังเป็นสีเทา)',
+    needs: 'ต้องเป็น Sage และทำเควสต์ Create Elemental Converter กับ Mishuna ที่ Academy เมือง Izlude ก่อน (เปลี่ยนอาชีพแล้วสกิลยังเป็นสีเทา)',
     guide: '/guides/elemental-converter',
   },
 };
