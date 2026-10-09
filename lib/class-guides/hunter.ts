@@ -76,6 +76,17 @@ export const hunter: ClassGuide = {
         text: 'ใช้ Focused Arrow Strike เป็นสกิลตีหมู่หลัก เปิดบัฟ Improve Concentration กับ Falcon Eyes และ Wind Walker ไว้เดินไว เซิร์ฟนี้มอนเลือดเยอะ ตีธรรมดาต้องราว 10 ครั้งถึงเท่า Focused Arrow Strike ครั้งเดียว',
         cites: [['vrvsch', '01:37'], ['shank', '01:28'], ['vrvsch', '16:28']],
       },
+      stats: [
+        {
+          who: 'Gabsy (ฟาร์ม Parasite)',
+          agi: '50',
+          int: '23',
+          dex: '50',
+          note: 'ค่าฐานก่อนบัฟ คลิปไม่บอก STR VIT LUK และเลเวล · SP ราว 1,250-1,300 (ของทุกชิ้นเน้น Max SP) HP 2,400 FLEE 285 CRIT 28 ตอนเปิด Falcon Eyes',
+          cites: [['gabsy', '00:54'], ['gabsy', '01:06'], ['gabsy', '03:22'], ['gabsy', '03:47'], ['gabsy', '04:07']],
+        },
+        { who: 'Richmore Gaming (โซโล Orc Hero Memorial)', agi: 'ที่เหลือ', dex: '80', note: 'คลิปไม่บอกเลเวล', cites: [['richmore', '00:13']] },
+      ],
       statNotes: [
         {
           text: 'DEX คือสเตตัสหลักของดาเมจ: hellyy ทดสอบโดยเปิดแค่ Improve Concentration กับ Falcon Eyes ได้ DEX 92 ตี 23,737 ส่วน DEX 1 ยังตีได้ราว 12,400 อาวุธและของยังสำคัญที่สุด',
@@ -88,7 +99,10 @@ export const hunter: ClassGuide = {
         },
         { text: 'ถ้าไม่คริ ดาเมจต่อ Willow ต่ำลงราว 25%', cites: [['hskill', '02:28']] },
         { text: 'FLEE: แชงค์888 ทำราว 300 เลยแทบไม่โดนตี Xiendong บอกว่าช่วงต้นทำ 250-300 ได้ไม่ยาก เพราะออปชั่นบนของมี FLEE ชิ้นละ 15 ขึ้นไป', cites: [['shank', '00:10'], ['shank', '05:14'], ['xmeta', '03:34'], ['xmeta', '06:59']] },
-        { text: 'ยังไม่มีคลิปโชว์ตัวเลขสเตตัสครบทุกตัว VRVSCH บอกแค่ว่าลงแบบบ้าเลือดและคิดจะลด DEX กับ AGI ลงบ้าง', cites: [['vrvsch', '11:03']] },
+        { text: 'ทั้งสอง build ลง DEX กับ AGI เป็นหลัก DEX เพื่อดาเมจ AGI เพื่อ FLEE ให้ฟาร์มได้ไม่ค่อยโดนตี', cites: [['gabsy', '04:07'], ['richmore', '00:13']] },
+        { text: 'Gabsy ลง INT 23 และเน้น Max SP ทั้งตัว (ผ้าคลุม Nidhogg Field Mantle ออปชั่น Max SP 2 บรรทัด + Roda Frog Card, รองเท้า Max SP กับฟื้น SP) ให้กด Focused Arrow Strike ได้ทั้งคืน', cites: [['gabsy', '01:06'], ['gabsy', '01:37'], ['gabsy', '01:50'], ['gabsy', '02:29']] },
+        { text: 'คนพากย์คลิป Gabsy เสนอให้ย้าย AGI ไป LUK เพราะเพิ่ม CRIT แต่ยอมรับว่าจะโดนตีง่ายขึ้น · ยังไม่มีคลิป Zero ทดสอบว่า LUK เพิ่มดาเมจตรงๆ ตามที่เขาบอกจริงไหม', cites: [['gabsy', '04:36'], ['gabsy', '04:54']] },
+        { text: 'ยังไม่มีคลิปโชว์ตัวเลขสเตตัสครบทั้ง 6 ตัวพร้อมเลเวล VRVSCH บอกแค่ว่าลงแบบบ้าเลือดและคิดจะลด DEX กับ AGI ลงบ้าง', cites: [['vrvsch', '11:03']] },
       ],
       skills: [
         { skill: 'Improve Concentration', level: 10, why: 'บัฟ AGI กับ DEX และเป็นเงื่อนไขของ Focused Arrow Strike', cites: [['shank', '01:28'], ['db']] },
@@ -161,7 +175,7 @@ export const hunter: ClassGuide = {
     },
   ],
   gaps: [
-    'ยังไม่มีคลิป Zero บอกลำดับอัพสกิลทีละขั้นและตัวเลขสเตตัสครบ',
+    'ยังไม่มีคลิป Zero บอกลำดับอัพสกิลทีละขั้น และตัวเลขสเตตัสครบทั้ง 6 ตัวพร้อมเลเวล (ที่มีคือ AGI/INT/DEX ของ Gabsy กับ DEX 80 ของ Richmore)',
     'Wind Walker ควรอัพกี่เลเวล และแต้มที่เหลือควรลงอะไร',
     'ค่า CRIT ที่พอให้ Focused Arrow Strike คริทุกนัด แต่ละคลิปบอกไม่ตรงกัน',
     'สายเหยี่ยวและสายกับดักยังไม่มีข้อมูลพอทำไกด์',
@@ -172,6 +186,8 @@ export const hunter: ClassGuide = {
     hbow: { label: 'hellyy', title: 'Hunter Guide | Best Bows, Cards & Affixes', url: 'https://www.youtube.com/watch?v=fGg65Z7MOq0', kind: 'clip', lang: 'en' },
     vrvsch: { label: 'VRVSCH', title: 'Ragnarok Zero Global: INSANE Focus Hunter Build Review!!', url: 'https://www.youtube.com/watch?v=R0RJRtGS75c', kind: 'clip', lang: 'th' },
     shank: { label: 'แชงค์888', title: 'Ragnarok Zero Hunter Focus Arrow Strike Build: Gear and Stats', url: 'https://www.youtube.com/watch?v=fwomJmqy0i4', kind: 'clip', lang: 'th' },
+    gabsy: { label: 'Ryan Geldun', title: 'Hunter build Focused Arrow Strike by Gabsy - Ragnarok Zero Global', url: 'https://www.youtube.com/watch?v=-LtqoQUI_WY', kind: 'clip', lang: 'en' },
+    richmore: { label: 'Richmore Gaming', title: 'FAS HUNTER SOLO ORC HERO! Focused Arrow Strike Build', url: 'https://www.youtube.com/watch?v=rPmerk1nAgY', kind: 'clip', lang: 'en' },
     tako: { label: 'TakoyakiCh', title: 'จัด Tierlist Class2 ในโลก RO-Zero', url: 'https://www.youtube.com/watch?v=Y7MKIY0KiYo', kind: 'clip', lang: 'th' },
     xmeta: { label: 'Xiendong', title: 'Why Taiwan Players Build These Stats', url: 'https://www.youtube.com/watch?v=T5bjOqQomUc', kind: 'clip', lang: 'en' },
     xroad: { label: 'Xiendong', title: 'My Current 1–60 Levelling Roadmap', url: 'https://www.youtube.com/watch?v=7ymM15xvYAY', kind: 'clip', lang: 'en' },
