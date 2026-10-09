@@ -75,9 +75,18 @@ export const priest: ClassGuide = {
       stats: [
         { who: 'Viva-Tz (Lv 60)', str: 'ที่เหลือ', agi: '70', int: '25', dex: '25', note: 'HIT เสริมจากหมวกออปชั่น HIT +15', cites: [['viva', '08:32'], ['viva', '08:54']] },
         { who: 'MimiwPK (Lv 60)', agi: '70', int: '29', dex: '20', note: 'FLEE ราว 300 ตอนมีบัฟ ถ้ามอนหลบเกิน 300 ให้เพิ่ม DEX', cites: [['mimiw', '00:17'], ['mimiw', '00:47']] },
+        { who: 'Brightburn Plays (Lv 60)', str: '12', agi: '84', int: '24', dex: 'ไม่อัพ', note: 'Clementia ที่ Job 60 กับชุด Nordfeld ให้ DEX/HIT พอ · บัฟกับของเพิ่ม AGI 42 INT 29 DEX/STR 27 · ASPD 183', cites: [['bright', '01:20'], ['bright', '01:26'], ['bright', '01:44']] },
+        { who: 'TKGaming', str: '30', agi: '65', int: '25', dex: '33', note: 'จะเพิ่ม INT ทีหลังเพื่อ MATK กับ SP · ซับไทยอัตโนมัติ', cites: [['tk', '02:32'], ['tk', '02:36']] },
+        { who: 'KamonWay (บอท 24 ชม.)', str: '18', agi: 'ที่เหลือ', int: '20', dex: '15', note: 'STR ไว้แบกของ · ลด DEX จาก 30 เหลือ 15 ยังได้ HIT 341 · ตัวใหม่ให้ DEX 30 INT 20 ก่อน · ซับไทยอัตโนมัติ', cites: [['kamonDL', '02:23'], ['kamonDL', '03:25'], ['kamonDL', '03:38'], ['kamonDL', '03:56']] },
+        { who: 'Trust Z ไลฟ์', str: 'ราว 20', agi: 'หลัก', int: '30-40', dex: 'ราว 30', note: 'INT 40 ถ้าเล่นมือด้วย · บอทล้วนลง STR ตาม INT เช่น INT 30 STR 20 · ซับไทยอัตโนมัติ', cites: [['trustz', '1:08:25'], ['trustz', '1:08:36'], ['trustz', '1:09:05']] },
+        { who: 'แชงค์888 ไลฟ์', agi: 'ที่เหลือ', int: '15', dex: '30', note: 'ตั้งบอทได้สบาย · ซับไทยอัตโนมัติ', cites: [['shankDL', '11:56'], ['shankDL', '11:59']] },
       ],
       statNotes: [
         { text: 'เน้น ASPD ให้สูงสุด Viva-Tz ตั้งเป้าราว 180 ผู้เล่นไต้หวันถือ 190 เป็นเลขเป้าหมาย', cites: [['ryan', '03:05'], ['viva', '11:33'], ['meta', '01:23']] },
+        { text: 'Brightburn: AGI ทุก 6 แต้มได้ ASPD 1 เขาไต่ทีละแต้มจนได้ 183 ตอนบัฟครบ แล้วเก็บแต้มที่เหลือไว้ลง INT', cites: [['bright', '01:41'], ['bright', '01:44']] },
+        { text: 'วิธีลงแต้มของ Yoino: ลง AGI ครึ่งหนึ่งของแต้มก่อน แล้ว DEX 30 INT 30 จากนั้นกินยาเร่งแล้วเพิ่ม AGI ทีละแต้มจน ASPD ไม่ขึ้น (เกิน 170 ขึ้นยาก) · ซับไทยอัตโนมัติ', cites: [['yoino24', '50:29'], ['yoino24', '50:40'], ['yoino24', '51:03']] },
+        { text: 'ลูกแสงฝั่งกายภาพโดนโทษขนาดมอนตามอาวุธ (กระบอง: เล็ก 75% กลาง/ใหญ่ 100%) ฝั่งเวทไม่โดน', cites: [['zixmaP', '07:02'], ['zixmaP', '07:11']] },
+        { text: 'KamonWay แนะนำ HIT และ FLEE เกิน 300 สำหรับแมพฟาร์มตอนนี้', cites: [['kamonDL', '04:08']] },
       ],
       skills: [
         { skill: 'Duple Light', level: 10, why: 'เอาก่อนเลย ต้องผ่าน Aspersio 1 (ซึ่งต้อง Aqua Benedicta 1 กับ Impositio Manus 3)', cites: [['viva', '04:28'], ['mimiw', '02:22'], ['ryan', '01:16']] },
@@ -172,6 +181,7 @@ export const priest: ClassGuide = {
       },
       stats: [
         { who: 'Yoino Buten (Lv 60)', str: 'ที่เหลือ', agi: '69', int: '70 (รวมโบนัส)', dex: '30', note: 'AGI 69 ได้ ASPD 179 พอดีตอนใช้ไอเทมบัฟ · DEX 30 ช่วยลดร่าย', cites: [['yoinoM', '09:37'], ['yoinoM', '14:58'], ['yoinoM', '15:38']] },
+        { who: 'Zeztz ไลฟ์', agi: '70', int: 'ที่เหลือ', dex: '30', note: 'หยุด AGI ที่ 70 แล้วลง INT หมด · หมวก Nordfeld ออปชั่น MATK · ซับไทยอัตโนมัติ', cites: [['zeztzP', '37:12'], ['zeztzP', '37:15'], ['zeztzP', '37:20']] },
       ],
       skills: [
         { skill: 'Duple Light', level: 10, why: 'กดอัพตัวนี้ก่อน ระบบจะบังคับอัพทางผ่านให้เอง', cites: [['yoinoM', '06:48']] },
@@ -221,10 +231,33 @@ export const priest: ClassGuide = {
       missing: 'ยังไม่มีคลิป RO Zero สอนสายนี้โดยตรง ของที่ไกด์ midgardhub แนะนำไม่มีในฐานข้อมูลเกมของเราเลยสักชิ้น จึงไม่ได้ใส่',
     },
     {
+      id: 'turn-undead',
+      name: 'สาย Turn Undead (ฟาร์มเหมือง)',
+      pickIf: 'อยากฟาร์มมอนอันเดดอย่างเหมืองถ่านหิน',
+      idea: {
+        text: 'ใช้ Turn Undead ฆ่ามอนอันเดดทีเดียว KamonWay เปิดบอทฟาร์มเหมือง 24 ชั่วโมง แชงค์888 พาไปเหมืองเลเวล 70+',
+        cites: [['kamonTU', '02:10'], ['shankTU', '38:21']],
+      },
+      stats: [
+        { who: 'KamonWay (Lv 61, แบบหลบได้)', agi: '70', int: '50', luk: '15', note: 'ซับไทยอัตโนมัติ', cites: [['kamonTU', '02:10'], ['kamonTU', '02:13']] },
+        { who: 'KamonWay เล่าแบบของคนดู (TU แท้)', int: '70', luk: '50', note: 'TU ไม่ติดก็บินหนี ไม่ต้องหลบ', cites: [['kamonTU', '02:36'], ['kamonTU', '02:58']] },
+        { who: 'แชงค์888 ไลฟ์ (เหมือง Lv 70+)', agi: 'ที่เหลือ', int: '20', dex: '20', note: 'เน้น FLEE เกิน 332 กับ HP เกิน 3,200 ให้รอด Critical Slash ไม่เน้นให้ TU ติดบ่อย · ซับไทยอัตโนมัติ', cites: [['shankTU', '38:21'], ['shankTU', '38:37'], ['shankTU', '40:22'], ['shankTU', '40:26']] },
+      ],
+      statNotes: [
+        { text: 'ยังเถียงกันอยู่: KamonWay บอกว่า INT กับ LUK ช่วยให้ TU ติดเท่าๆ กัน แต่ INT ช่วยฟื้น SP ด้วย · MimiwPK เห็น TU ติดบ่อยที่ INT 30 ไม่มี LUK และมีคนดูบอกว่าไม่ต้องอัพ INT โอกาสเท่าเดิม แต่เธอยังไม่ได้ยืนยัน', cites: [['kamonTU', '02:17'], ['mimiwTU', '1:47:22'], ['mimiwTU', '1:47:35'], ['mimiwTU', '1:50:44']] },
+      ],
+      gear: [
+        { slot: 'ของ (KamonWay)', text: 'หมวก Nordfeld รุ่น INT +3 · เสื้อ Nordfeld ออปชั่นฟื้น SP 10% · เอนแชนต์เสื้อลดดาเมจจากอันเดด (สูงสุด 7%) · ประดับ Yoyo Card 2 ใบ (Perfect Dodge)', cites: [['kamonTU', '04:00'], ['kamonTU', '06:01']] },
+      ],
+    },
+    {
       id: 'magnus',
       name: 'สายเวท Magnus Exorcismus',
       pickIf: 'อยากฟาร์มมอนเป็นกลุ่ม',
       idea: { text: 'มีคนพูดถึงว่าเป็นหนึ่งในสายหลักของ Priest ใน Zero', cites: [['round1']] },
+      cautions: [
+        { text: 'Yoino ลอง Magnus ในไลฟ์ ตีอันเดดได้ราว 5,000 คนที่เล่นด้วยว่าเบากว่า Duple Light · ซับไทยอัตโนมัติ', cites: [['yoino19', '9:20:33'], ['yoino19', '9:21:18']] },
+      ],
       missing: 'คลิปที่สอนสายนี้ไม่มีคำบรรยายให้ดึง ยังไม่มีข้อมูลสกิล สเตตัส หรือของ',
     },
   ],
@@ -248,6 +281,18 @@ export const priest: ClassGuide = {
     midgard: { label: 'midgardhub', title: 'Priest guide', url: 'https://midgardhub.com/guides/priest', kind: 'web' },
     planner: { label: 'rozeroplanner', title: 'RO Zero skill planner', url: 'https://rozeroplanner.com/', kind: 'web' },
     round1: { label: 'Ryan Geldun (เบต้า)', title: 'Priest builds for Ragnarok Zero Global', url: 'https://www.youtube.com/watch?v=4P_y8nJdTqI', kind: 'clip', lang: 'en' },
+    bright: { label: 'Brightburn Plays', title: 'Duple Light Battle Priest Build Level 60: Stat, Skills, Gear, Card, Auto Hunt', url: 'https://www.youtube.com/watch?v=-xW3b8yiP4E', kind: 'clip', lang: 'en' },
+    tk: { label: 'TKGaming', title: '[ROZG] แนวทาง Priest สาย Duple Light', url: 'https://www.youtube.com/watch?v=E2XJicWPe54', kind: 'clip', lang: 'th' },
+    kamonDL: { label: 'KamonWay', title: 'แนวทาง Priest สายทุบ Duple Light บอทฟาร์ม 24 ชั่วโมง', url: 'https://www.youtube.com/watch?v=qbsycMdd20o', kind: 'clip', lang: 'th' },
+    kamonTU: { label: 'KamonWay', title: 'Priest สาย Turn Undead ฟาร์มคนเหมือง 24 Hr.', url: 'https://www.youtube.com/watch?v=VUz4Byay6Z8', kind: 'clip', lang: 'th' },
+    trustz: { label: 'Trust Z', title: 'ตีดาเมจช้า แต่ไม่เคยหยุดตี Duple Light Priest (ไลฟ์)', url: 'https://www.youtube.com/watch?v=UYIAdO8ubeY', kind: 'clip', lang: 'th' },
+    shankDL: { label: 'แชงค์888', title: 'คราส 2 เข้าแล้วพระทุบ Duple Light (ไลฟ์)', url: 'https://www.youtube.com/watch?v=U821FfAvLVQ', kind: 'clip', lang: 'th' },
+    shankTU: { label: 'แชงค์888', title: 'บิ้วพระไปตีเหมืองเวล 70+ Turn Undead (ไลฟ์)', url: 'https://www.youtube.com/watch?v=bY6XyVaENuU', kind: 'clip', lang: 'th' },
+    zeztzP: { label: 'Zeztz', title: 'Priest สาย Duple Light บอทง่าย ฟาร์มเพลิน (ไลฟ์)', url: 'https://www.youtube.com/watch?v=JIRmyA8vcNM', kind: 'clip', lang: 'th' },
+    zixmaP: { label: 'ZixmaOne', title: 'ทำความเข้าใจสกิล Duple Light ใส่ของให้ถูก', url: 'https://www.youtube.com/watch?v=C4xJFkBVzGY', kind: 'clip', lang: 'th' },
+    yoino24: { label: 'Yoino Buten', title: 'SV.ODIN รีสกิลฟรีจะไปแล้ว! Priest ไปสายไหนดี? #24 (ไลฟ์)', url: 'https://www.youtube.com/watch?v=_u2CHMnIRgc', kind: 'clip', lang: 'th' },
+    yoino19: { label: 'Yoino Buten', title: 'SV.ODIN เปลี่ยนคลาส 2 PRIEST สาย Magnus จะไหวมั้ย!? #19 (ไลฟ์)', url: 'https://www.youtube.com/watch?v=SwnxNwtQ3Xo', kind: 'clip', lang: 'th' },
+    mimiwTU: { label: 'MimiwPK', title: '[Live] ลองเทสสกิล Turn Undead ก่อนไปเวลต่อ', url: 'https://www.youtube.com/watch?v=DP25ZbXIo1U', kind: 'clip', lang: 'th' },
     owner: { label: 'ยืนยันในเกม', title: 'เจ้าของเว็บตรวจในเกม 22 ก.ย. 2026', url: '', kind: 'web' },
   },
 };
