@@ -72,7 +72,7 @@
  "counter-instinct": "ถ้าศัตรูใช้อาวุธตระกูลดาบ มีโอกาสปัดการโจมตี ลดดาเมจที่รับ 50% โอกาสเพิ่มตามเลเวลสกิล ปัดได้สูงสุด 3 ครั้งต่อการใช้ ใช้ได้กับมอนทุกตัว และดาเมจที่ปัดสะท้อนกลับผู้โจมตี",
  "crash": "โจมตีเป้าหมาย มีโอกาสทำให้ติดสตัน",
  "crazy-uproar": "ตะโกนปลุกใจ เพิ่ม STR +4 และ ATK +30 ให้ตัวเองและปาร์ตี้ทั้งจอ นาน 5 นาที",
- "create-elemental-converter": "สร้างไอเทม Elemental Converter ได้ 4 ธาตุ ใช้ Empty Scroll 1 กับ: ไฟ (Scorpion Tail 3), น้ำ (Snail's Shell 3), ดิน (Horn 3), ลม (Rainbow Shell 3)",
+ "create-elemental-converter": "สร้างไอเทม Elemental Converter ได้ 4 ธาตุ ทำติด 100%: น้ำ (Crystal Blue 1 + Empty Scroll 1), ลม (Wind of Verdure 1 + Empty Scroll 1), ดิน (Green Live 1 + Empty Scroll 1), ไฟ (Red Blood 1 + Empty Scroll 1) · ต้องทำเควสต์กับ Mishuna ที่ Academy ก่อนถึงจะใช้ได้",
  "creature-creation": "สร้างไอเทมชีวิตใหม่ Embryo จากต้นกำเนิดชีวิต โอกาสสำเร็จเพิ่มตามเลเวลสกิล",
  "cultivation": "ฟัก Embryo เป็นโฮมุนคุลุส สำเร็จหรือไม่วัดดวง โอกาสพื้นฐานเพิ่มตามเลเวลสกิล มีโฮมุนคุลุสอยู่แล้วใช้ไม่ได้ สร้างสำเร็จจะกลายเป็นตัวประจำอัตโนมัติ",
  "cure": "รักษาสถานะใบ้ สับสน หรือตาบอด เมื่อใช้กับผู้เล่นที่ติดอยู่",

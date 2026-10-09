@@ -75,3 +75,13 @@ describe('lookups from an item page', () => {
     expect(recipesMaking(-1)).toEqual([]);
   });
 });
+
+describe('Zero recipe fixes', () => {
+  it('makes an Elemental Converter from one Empty Scroll and one elemental stone', () => {
+    const fire = ALL_RECIPES.find((r) => r.product.id === 12114 && r.kind === 'other')!;
+    expect(fire.materials.map((m) => [m.id, m.amount])).toEqual([
+      [7433, 1],
+      [990, 1],
+    ]);
+  });
+});

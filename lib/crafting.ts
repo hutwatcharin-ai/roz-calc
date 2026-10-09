@@ -77,7 +77,7 @@ export const SKILL_NEEDS: Record<number, { title: string; needs: string; guide: 
   },
   [CREATE_ELEMENTAL_CONVERTER]: {
     title: 'ใบธาตุ Sage',
-    needs: 'ต้องเป็น Sage (ได้สกิล Create Elemental Converter ทันทีที่เปลี่ยนอาชีพ)',
+    needs: 'ต้องเป็น Sage และทำเควสต์ Create Elemental Converter กับ Mishuna ที่ Academy ก่อน (เปลี่ยนอาชีพแล้วสกิลยังเป็นสีเทา)',
     guide: '/guides/elemental-converter',
   },
 };
@@ -94,9 +94,31 @@ const zero = (m: CraftMaterial): CraftMaterial => {
   const id = toZeroId(m.id);
   return id === m.id ? m : { ...m, id, icon: `/images/items/${id}.gif` };
 };
+// Recipes the live game makes differently from both sources. Applied here,
+// on read, so a rebuild of data/crafting-recipes.json cannot undo them.
+//
+// Elemental Converter (owner, 9 Oct 2026, from DOUGH's Zero clip
+// https://www.youtube.com/watch?v=7BC1BCsxteE at 7:28-8:06): one Empty Scroll
+// and ONE elemental stone of that element, 100% success. rAthena's and
+// prontera's "Empty Scroll + 3 Scorpion Tail" style rows are the classic
+// recipe; the four drops it names are what the skill's quest asks for.
+const mat = (id: number, name: string, amount = 1): CraftMaterial => ({ id, name, icon: `/images/items/${id}.gif`, category: 'Other', amount });
+const EMPTY_SCROLL = mat(7433, 'Empty Scroll');
+const ZERO_RECIPE_FIXES: Record<number, CraftMaterial[]> = {
+  12114: [EMPTY_SCROLL, mat(990, 'Red Blood')],
+  12115: [EMPTY_SCROLL, mat(991, 'Crystal Blue')],
+  12116: [EMPTY_SCROLL, mat(993, 'Green Live')],
+  12117: [EMPTY_SCROLL, mat(992, 'Wind of Verdure')],
+};
+
 const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes
   .filter((recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId))
-  .map((recipe) => ({ ...recipe, product: zero(recipe.product), materials: recipe.materials.map(zero) }));
+  .map((recipe) => {
+    const fix = ZERO_RECIPE_FIXES[recipe.product.id];
+    return fix && recipe.kind === 'other'
+      ? { ...recipe, product: zero(recipe.product), materials: fix }
+      : { ...recipe, product: zero(recipe.product), materials: recipe.materials.map(zero) };
+  });
 
 /** How many the filter above removes, for a page that wants to say so. */
 export const RECIPES_HIDDEN_UNAVAILABLE =

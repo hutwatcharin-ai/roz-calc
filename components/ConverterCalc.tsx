@@ -1,8 +1,9 @@
 'use client';
 
 // How much to farm for N converters of each element (/guides/elemental-converter).
-// One converter = 1 Empty Scroll + 3 of the element's material, so the sums
-// are exact; the kill count is an average from the best dropper's rate.
+// One converter = 1 Empty Scroll + the element's stone (matAmount each), 100%
+// success, so the sums are exact; the kill count is an average from the best
+// dropper's rate.
 
 import { useState } from 'react';
 import QtyStepper, { QTY_PRESETS } from '@/components/craft-calc/QtyStepper';
@@ -15,6 +16,8 @@ export interface ConverterCalcRow {
   productId: number;
   matId: number;
   matName: string;
+  /** Stones per converter. */
+  matAmount: number;
   /** Best open-map dropper's rate in %, null when unknown. */
   rate: number | null;
   monster: string | null;
@@ -30,7 +33,7 @@ export default function ConverterCalc({ rows }: { rows: ConverterCalcRow[] }) {
       <div className="ccalc__rows">
         {rows.map((r) => {
           const n = count[r.key];
-          const mats = n * 3;
+          const mats = n * r.matAmount;
           const kills = r.rate ? Math.ceil((mats * 100) / r.rate) : null;
           return (
             <div key={r.key} className={`ccalc__row${n ? ' is-on' : ''}`} style={{ '--el': r.color } as React.CSSProperties}>
@@ -63,7 +66,11 @@ export default function ConverterCalc({ rows }: { rows: ConverterCalcRow[] }) {
       <p className="ccalc__total">
         <img src="/images/items/7433.gif" alt="" width={20} height={20} />
         Empty Scroll รวม <b>×{scrolls}</b>
-        {scrolls > 0 && <span className="muted"> · ใช้ได้รวม {scrolls * 20} นาที ({(scrolls / 3).toFixed(1)} ชม.)</span>}
+        {scrolls > 0 && (
+          <span className="muted">
+            {' '}· ซื้อจาก NPC ราว {(scrolls * 4000).toLocaleString('en-US')}z · ใช้ได้รวม {scrolls * 20} นาที ({(scrolls / 3).toFixed(1)} ชม.)
+          </span>
+        )}
       </p>
     </div>
   );

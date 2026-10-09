@@ -1,11 +1,12 @@
 // app/guides/elemental-converter/page.tsx
 //
-// Sage's Elemental Converters (owner, 9 Oct 2026). The skill comes with the
-// job change itself, so the page skips how to learn it and goes straight to
-// what each converter costs, who drops the material on an open map, and which
-// monsters each element is for. Recipes from data/crafting-recipes.json
-// (rAthena and prontera agree); droppers ranked by lib/drop-rank as on
-// /drop-finder; element multipliers from lib/element-table.
+// Sage's Elemental Converters (owner, 9 Oct 2026). Rewritten the same day from
+// DOUGH's Zero clip (https://www.youtube.com/watch?v=7BC1BCsxteE): the skill
+// is grey after the job change until Mishuna's quest is done, and a converter
+// is one Empty Scroll + ONE elemental stone, 100% success. The quest's four
+// drops are what rAthena listed as the recipe. Recipes via lib/crafting
+// (ZERO_RECIPE_FIXES); droppers ranked by lib/drop-rank as on /drop-finder;
+// element multipliers from lib/element-table.
 
 import Link from 'next/link';
 import './page.css';
@@ -13,6 +14,9 @@ import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import ConverterCalc, { type ConverterCalcRow } from '@/components/ConverterCalc';
+import MaterialRow from '@/components/craft-calc/MaterialRow';
+import '@/components/craft-calc/craft-calc.css';
+import { materialSources } from '@/lib/material-sources';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { CREATE_ELEMENTAL_CONVERTER, recipesOfSkill } from '@/lib/crafting';
 import { supabaseBrowser } from '@/lib/supabase';
@@ -90,6 +94,16 @@ async function droppersOf(itemId: number): Promise<Dropper[]> {
     }));
 }
 
+// Mishuna's quest for the skill (quest 8184; amounts from the quest text in
+// data/quest-th, the same four drops DOUGH farms in the clip).
+const QUEST_NPC = { name: 'Mishuna', map: 'tu_ac01_e', mapName: 'Academy 1F', x: 137, y: 69 };
+const QUEST_ITEMS = [
+  { id: 904, name: 'Scorpion Tail', amount: 10 },
+  { id: 947, name: 'Horn', amount: 7 },
+  { id: 1013, name: 'Rainbow Shell', amount: 12 },
+  { id: 946, name: "Snail's Shell", amount: 10 },
+];
+
 const pct = (n: number | null) => (n === null ? '?' : `${Number.isInteger(n) ? n : n.toFixed(1)}%`);
 
 export default async function ElementalConverterPage() {
@@ -114,6 +128,8 @@ export default async function ElementalConverterPage() {
     }),
   );
 
+  const questSources = await materialSources(QUEST_ITEMS.map((q) => q.id));
+
   const calcRows: ConverterCalcRow[] = rows
     .filter((r) => r.mat)
     .map((r) => ({
@@ -123,6 +139,7 @@ export default async function ElementalConverterPage() {
       productId: r.product,
       matId: r.mat!.id,
       matName: r.mat!.name,
+      matAmount: r.mat!.amount,
       rate: r.droppers[0]?.rate ?? null,
       monster: r.droppers[0]?.name ?? null,
     }));
@@ -149,12 +166,17 @@ export default async function ElementalConverterPage() {
         title="ใบธาตุ Sage ทำจากอะไร"
         lead={
           <>
-            Sage ได้สกิล <strong>Create Elemental Converter</strong> ทันทีที่เปลี่ยนอาชีพ ·
-            ทำ 1 ใบใช้ <strong>Empty Scroll 1 + วัตถุดิบธาตุนั้น 3 ชิ้น</strong> ·
+            Sage ต้อง<strong>ทำเควสต์ก่อน</strong> เปลี่ยนอาชีพแล้วสกิลยังเป็นสีเทา ·
+            ทำ 1 ใบใช้ <strong>Empty Scroll 1 + หินธาตุนั้น 1 ก้อน</strong> ติด 100% ·
             ใช้แล้วอาวุธเป็นธาตุนั้น <strong>20 นาที</strong>
           </>
         }
-        source="สูตรจาก rAthena กับ roz.prontera.info ตรงกัน · มอนและแมพจากฐานข้อมูลเว็บนี้ เฉพาะแมพที่เปิดแล้ว"
+        source={
+          <>
+            วิธีปลดสกิลและสูตรจาก <a href="https://www.youtube.com/watch?v=7BC1BCsxteE" target="_blank" rel="noopener noreferrer">คลิปของ DOUGH</a> ·
+            จำนวนของในเควสต์จากข้อความเควสต์ในเกม · มอนและแมพจากฐานข้อมูลเว็บนี้ เฉพาะแมพที่เปิดแล้ว
+          </>
+        }
       />
 
       <nav className="gtiles" aria-label="ไปที่ใบธาตุ">
@@ -168,12 +190,44 @@ export default async function ElementalConverterPage() {
             <span className="gtile__s">{r.mat ? `${r.mat.name} ×${r.mat.amount}` : 'ไม่รู้สูตร'}</span>
           </a>
         ))}
+        <a className="gtile" href="#unlock">
+          <span className="gtile__k">STEP 1</span>
+          <span className="gtile__v">ปลดสกิล</span>
+          <span className="gtile__s">เควสต์ Mishuna · ของ 4 อย่าง</span>
+        </a>
         <a className="gtile" href="#calc">
           <span className="gtile__k">CALC</span>
           <span className="gtile__v">ต้องฟามเท่าไร</span>
           <span className="gtile__s">ใส่จำนวนใบ ได้ยอดวัตถุดิบ</span>
         </a>
       </nav>
+
+      <section id="unlock" className="card card--cyan" style={{ marginTop: 18, scrollMarginTop: 90 }}>
+        <h2 className="section-title">ปลดสกิลก่อน: เควสต์ของ Mishuna</h2>
+        <ol className="gsteps">
+          <li>
+            เปลี่ยนเป็น Sage แล้วสกิล Create Elemental Converter จะขึ้นในหน้าต่างสกิลแต่<strong>เป็นสีเทา ยังใช้ไม่ได้</strong>
+          </li>
+          <li>
+            ไปหา <strong>{QUEST_NPC.name}</strong> ที่ {QUEST_NPC.mapName} ห้องที่สองนับจากล่างฝั่งขวา (ห้องเดียวกับที่เปลี่ยนเป็น Sage){' '}
+            <code className="mono navicmd">/navi {QUEST_NPC.map} {QUEST_NPC.x}/{QUEST_NPC.y}</code> · เลือกเรียน Create Elemental Converter
+            (อีกตัวคือ Elemental Change คลิปแนะนำว่ายังไม่ต้องเรียน)
+          </li>
+          <li>ฟามของ 4 อย่างด้านล่างให้ครบ</li>
+          <li>
+            ซื้อ <strong>Empty Scroll 4 ใบ</strong> จาก NPC ที่ยืนข้าง {QUEST_NPC.name} แล้วกลับไปส่งของ ได้สกิลทันที
+          </li>
+        </ol>
+        <h3 className="section-title" style={{ fontSize: 14, marginTop: 14 }}>ของที่เควสต์ขอ</h3>
+        <ul className="mrows">
+          {QUEST_ITEMS.map((q) => (
+            <MaterialRow key={q.id} id={q.id} name={q.name} icon={`/images/items/${q.id}.gif`} category="Other" amount={q.amount} source={questSources[q.id]} />
+          ))}
+        </ul>
+        <p className="muted" style={{ marginBottom: 0 }}>
+          ตอนนี้เกมยังไม่มีเมือง Juno ถ้าเปิด Juno ทีหลัง NPC เควสต์นี้อาจย้ายไปที่นั่น
+        </p>
+      </section>
 
       <div className="cvgrid">
         {rows.map((r) => (
@@ -289,14 +343,13 @@ export default async function ElementalConverterPage() {
         </p>
       </section>
 
-      <Caveat label="ยังไม่รู้อะไรบ้าง">
+      <Caveat label="รู้อะไร ไม่รู้อะไร">
         <ul>
           <li>
-            <strong>Empty Scroll ซื้อจากไหน:</strong> ยังไม่รู้ ฐานข้อมูลเว็บนี้ไม่มีมอนตัวไหนดรอป และยังไม่เจอร้าน NPC ที่ขายในเกมนี้ ·
-            ราคาซื้อที่ตั้งไว้ในไอเทมคือ 4,000z
+            <strong>Empty Scroll:</strong> ซื้อจาก NPC ข้าง Mishuna · ราคาที่ตั้งไว้ในไอเทมคือ 4,000z คลิปบอกว่าใช้ Merchant ที่มี Discount ซื้อได้ราว 3,000z
           </li>
           <li>
-            <strong>โอกาสทำสำเร็จ:</strong> ยังไม่รู้ ข้อความสกิลในเกมไม่บอก
+            <strong>โอกาสทำสำเร็จ:</strong> 100% ไม่มีพลาด (คลิปของ DOUGH)
           </li>
           <li>ใบธาตุเปลี่ยนธาตุอาวุธอย่างเดียว ใช้กับเวทไม่ได้</li>
         </ul>
