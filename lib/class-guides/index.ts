@@ -38,6 +38,7 @@ export function classGuide(slug: string): ClassGuide | null {
 export function citeHref(url: string, at?: string): string {
   if (!url) return '';
   if (!at || !url.includes('youtube.com/watch')) return url;
-  const [m, s] = at.split(':').map(Number);
-  return `${url}&t=${m * 60 + s}s`;
+  // "m:ss", or "h:mm:ss" for the long Thai live streams.
+  const secs = at.split(':').map(Number).reduce((t, n) => t * 60 + n, 0);
+  return `${url}&t=${secs}s`;
 }

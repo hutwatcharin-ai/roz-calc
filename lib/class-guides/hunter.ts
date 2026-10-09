@@ -94,6 +94,14 @@ export const hunter: ClassGuide = {
           note: 'ค่าฐานก่อนบัฟ คลิปไม่บอก STR VIT LUK และเลเวล · SP ราว 1,250-1,300 (ของทุกชิ้นเน้น Max SP) HP 2,400 FLEE 285 CRIT 28 ตอนเปิด Falcon Eyes',
           cites: [['gabsy', '00:54'], ['gabsy', '01:06'], ['gabsy', '03:22'], ['gabsy', '03:47'], ['gabsy', '04:07']],
         },
+        {
+          who: 'แชงค์888 ไลฟ์ Hunter สายโฟกัส',
+          agi: '40',
+          int: '28',
+          dex: '70',
+          note: 'โชว์สเตตัสสองรอบในไลฟ์ ได้เลขเดิม ช่วงต้นไลฟ์ยังเป็น AGI 52 DEX 52 และบอกว่า FLEE ต้องราว 300 ถึงจะฟาร์มสบาย · ไม่ได้บอกเลเวล · ตัวเลขฟังจากซับอัตโนมัติ',
+          cites: [['shanklive', '4:49:40'], ['shanklive', '6:33:56'], ['shanklive', '3:13:49']],
+        },
         { who: 'Richmore Gaming (โซโล Orc Hero Memorial)', agi: 'ที่เหลือ', dex: '80', note: 'คลิปไม่บอกเลเวล', cites: [['richmore', '00:13']] },
       ],
       statNotes: [
@@ -179,6 +187,14 @@ export const hunter: ClassGuide = {
           cites: [['hbuild1', '02:13'], ['hbuild1', '02:20'], ['hbuild1', '02:28'], ['hbuild1', '02:36'], ['hbuild1', '02:50'], ['hbuild1', '03:02']],
         },
         {
+          who: 'GrizkornCN ไลฟ์สายเหยี่ยว (ตัวจริง)',
+          agi: '50',
+          dex: 'ราว 60',
+          luk: '32',
+          note: 'รีสเตตัสระหว่างไลฟ์ จากเดิม AGI 40 DEX 66 LUK 35 ที่เขาบอกว่าเหยี่ยวออกไม่พอ · วางแผนไว้ที่เลเวล 99: AGI 99 DEX 74 LUK 60 · ตัวเลขฟังจากซับอัตโนมัติ',
+          cites: [['grizkorn', '05:15'], ['grizkorn', '3:03:21'], ['grizkorn', '3:03:48'], ['grizkorn', '15:30']],
+        },
+        {
           who: 'hellyy สาย Falcon Assault ฟาร์ม (ข้อเสนอ ยังไม่มีคนเล่นจริง)',
           agi: '90',
           int: '35',
@@ -221,6 +237,8 @@ export const hunter: ClassGuide = {
     hbuild1: { label: 'hellyy', title: 'Hunter Builds Guide | FaS AGI/DEX | Falconer Auto Blitz | Pure FA | WoE (Part 1)', url: 'https://www.youtube.com/watch?v=UTysho7Wd0E', kind: 'clip', lang: 'en' },
     hbuild2: { label: 'hellyy', title: 'Hunter Builds Guide Part 2 | Falcon Assault & WoE AGI/DEX', url: 'https://www.youtube.com/watch?v=1WbkjQRhZj8', kind: 'clip', lang: 'en' },
     hcompare: { label: 'hellyy', title: 'Hunter Guide | Pros & Contras of 4 Hunter Builds', url: 'https://www.youtube.com/watch?v=BtCHAEQNYQ8', kind: 'clip', lang: 'en' },
+    shanklive: { label: 'แชงค์888', title: 'Ragnarok Zero ไลฟ์ Hunter สายโฟกัส', url: 'https://www.youtube.com/watch?v=-Ga2pGgxidg', kind: 'clip', lang: 'th' },
+    grizkorn: { label: 'GrizkornCN', title: 'Build ฮันเตอร์สายเหยี่ยว ไลฟ์ 24 ชม. | RO ZERO:GLOBAL', url: 'https://www.youtube.com/watch?v=vYBl9DtPbUM', kind: 'clip', lang: 'th' },
     gabsy: { label: 'Ryan Geldun', title: 'Hunter build Focused Arrow Strike by Gabsy - Ragnarok Zero Global', url: 'https://www.youtube.com/watch?v=-LtqoQUI_WY', kind: 'clip', lang: 'en' },
     richmore: { label: 'Richmore Gaming', title: 'FAS HUNTER SOLO ORC HERO! Focused Arrow Strike Build', url: 'https://www.youtube.com/watch?v=rPmerk1nAgY', kind: 'clip', lang: 'en' },
     tako: { label: 'TakoyakiCh', title: 'จัด Tierlist Class2 ในโลก RO-Zero', url: 'https://www.youtube.com/watch?v=Y7MKIY0KiYo', kind: 'clip', lang: 'th' },

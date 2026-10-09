@@ -22,7 +22,7 @@ export function checkGuide(guide: ClassGuide) {
   const cites = lines.flatMap((line) => line.cites);
 
   expect(cites.map(([key]) => key).filter((key) => !guide.sources[key]), 'cites a source key that is not in sources').toEqual([]);
-  expect(cites.map(([, at]) => at).filter((at) => at !== undefined && !/^\d{2}:\d{2}$/.test(at)), 'timestamps must be mm:ss').toEqual([]);
+  expect(cites.map(([, at]) => at).filter((at) => at !== undefined && !/^(\d{1,2}:)?\d{2}:\d{2}$/.test(at)), 'timestamps must be mm:ss or h:mm:ss').toEqual([]);
   expect(lines.filter((line) => line.cites.length === 0).map((line) => ('text' in line ? line.text : '')), 'every line needs a source').toEqual([]);
 
   for (const job of guide.path) expect(TREES.jobs[job], `unknown job slug ${job}`).toBeTruthy();
