@@ -11,7 +11,6 @@
 import Link from 'next/link';
 import './page.css';
 import PageHeader from '@/components/PageHeader';
-import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import ConverterCalc, { type ConverterCalcRow } from '@/components/ConverterCalc';
 import MaterialRow from '@/components/craft-calc/MaterialRow';
@@ -211,7 +210,6 @@ export default async function ElementalConverterPage() {
           <li>
             ไปหา <strong>{QUEST_NPC.name}</strong> ที่ {QUEST_NPC.mapName} ห้องที่สองนับจากล่างฝั่งขวา (ห้องเดียวกับที่เปลี่ยนเป็น Sage){' '}
             <code className="mono navicmd">/navi {QUEST_NPC.map} {QUEST_NPC.x}/{QUEST_NPC.y}</code> · เลือกเรียน Create Elemental Converter
-            (อีกตัวคือ Elemental Change คลิปแนะนำว่ายังไม่ต้องเรียน)
           </li>
           <li>ฟามของ 4 อย่างด้านล่างให้ครบ</li>
           <li>
@@ -343,17 +341,6 @@ export default async function ElementalConverterPage() {
         </p>
       </section>
 
-      <Caveat label="รู้อะไร ไม่รู้อะไร">
-        <ul>
-          <li>
-            <strong>Empty Scroll:</strong> ซื้อจาก NPC ข้าง Mishuna · ราคาที่ตั้งไว้ในไอเทมคือ 4,000z คลิปบอกว่าใช้ Merchant ที่มี Discount ซื้อได้ราว 3,000z
-          </li>
-          <li>
-            <strong>โอกาสทำสำเร็จ:</strong> 100% ไม่มีพลาด (คลิปของ DOUGH)
-          </li>
-          <li>ใบธาตุเปลี่ยนธาตุอาวุธอย่างเดียว ใช้กับเวทไม่ได้</li>
-        </ul>
-      </Caveat>
     </main>
   );
 }
