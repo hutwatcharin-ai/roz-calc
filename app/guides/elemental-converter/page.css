@@ -1,0 +1,101 @@
+/* /guides/elemental-converter -- one neon card per element, each in its own
+   element colour (--el), the same colours /guides/elements and /guides/forging use. */
+
+.gx .cvjump { border-color: color-mix(in srgb, var(--el) 45%, transparent); }
+.gx a.cvjump:hover { border-color: var(--el); box-shadow: 0 0 12px color-mix(in srgb, var(--el) 35%, transparent); }
+.gx .cvjump .gtile__k { color: var(--el); }
+
+.gx .cvgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 14px; margin-top: 18px; }
+.gx .cvcard {
+  position: relative; padding: 14px 16px 16px; border: 2px solid var(--el); border-radius: 12px; scroll-margin-top: 80px;
+  background: radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--el) 18%, transparent), transparent 55%), #0b0724;
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--el) 70%, #000), 0 0 16px color-mix(in srgb, var(--el) 25%, transparent);
+}
+.gx .cvcard__head { display: flex; align-items: center; gap: 12px; }
+.gx .cvcard__icon {
+  display: grid; place-items: center; width: 56px; height: 56px; flex: none; border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--el) 60%, transparent); background: color-mix(in srgb, var(--el) 12%, #0b0724);
+}
+.gx .cvcard__icon img { image-rendering: pixelated; }
+.gx .cvcard__title { margin: 0; color: var(--el); font: 800 22px var(--font-chakra), var(--font-sarabun), sans-serif; text-shadow: 0 0 10px color-mix(in srgb, var(--el) 50%, transparent); }
+.gx .cvcard__en { margin: 2px 0 0; font-size: 12px; color: var(--muted, #a59fc9); }
+.gx .cvcard__h { margin: 16px 0 8px; font-size: 13px; letter-spacing: .04em; color: var(--muted, #a59fc9); }
+
+.gx .cvcard__recipe { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.gx .cvplus { color: var(--el); font: 900 20px var(--font-chakra), monospace; }
+.gx .cvmat {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 12px; border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, .15); background: #120c33; color: var(--text); text-decoration: none;
+}
+.gx .cvmat img { image-rendering: pixelated; }
+.gx .cvmat b { font-family: var(--font-chakra), monospace; color: var(--yellow); }
+.gx .cvmat--el { border-color: color-mix(in srgb, var(--el) 60%, transparent); }
+.gx .cvmat:hover { border-color: var(--el); }
+
+.gx .cvdrop { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.gx .cvdrop li {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px;
+  padding: 6px 10px; border-radius: 8px; background: #120c33; border: 1px solid rgba(255, 255, 255, .08);
+}
+.gx .cvdrop li.is-top { border-color: color-mix(in srgb, var(--el) 55%, transparent); }
+.gx .cvdrop__mon, .gx .cvdrop__map { display: flex; align-items: center; gap: 8px; color: var(--text); text-decoration: none; min-height: 40px; }
+.gx .cvdrop__mon img { object-fit: contain; image-rendering: pixelated; }
+.gx .cvdrop__noimg { width: 36px; height: 36px; }
+.gx .cvdrop__mon span, .gx .cvdrop__map { display: flex; flex-direction: column; justify-content: center; }
+.gx .cvdrop__mon small, .gx .cvdrop__map small { font-size: 12px; color: var(--muted, #a59fc9); }
+.gx .cvdrop__map { align-items: flex-end; text-align: right; font-size: 14px; }
+.gx .cvdrop__mon:hover strong, .gx .cvdrop__map:hover { color: var(--el); }
+
+.gx .cvhits { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; }
+.gx .cvhits__label { font-size: 12px; color: var(--muted, #a59fc9); margin-right: 2px; }
+.gx .cvhit { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; font-size: 13px; text-decoration: none; border: 1px solid; }
+.gx .cvhit b { font-family: var(--font-chakra), monospace; }
+.gx .cvhit.is-up { color: #4dffb8; border-color: rgba(77, 255, 184, .45); background: rgba(77, 255, 184, .08); }
+.gx .cvhit.is-down { color: #ff7a9c; border-color: rgba(255, 92, 138, .4); background: rgba(255, 92, 138, .07); }
+
+/* Calculator */
+.gx .ccalc__rows { display: grid; gap: 8px; }
+.gx .ccalc__row {
+  display: grid; grid-template-columns: 110px auto 1fr; grid-template-areas: 'el step presets' 'need need need';
+  align-items: center; gap: 8px 12px; padding: 10px 12px; border-radius: 8px; background: #0b0724;
+  border: 1px solid color-mix(in srgb, var(--el) 30%, transparent);
+}
+.gx .ccalc__row.is-on { border-color: var(--el); box-shadow: 0 0 10px color-mix(in srgb, var(--el) 25%, transparent); }
+.gx .ccalc__el { grid-area: el; display: flex; align-items: center; gap: 6px; color: var(--el); font-weight: 700; }
+.gx .ccalc__step { grid-area: step; display: inline-flex; align-items: center; }
+.gx .ccalc__step button, .gx .ccalc__presets button {
+  min-width: 44px; min-height: 44px; border: 1px solid rgba(255, 255, 255, .18); background: #120c33; color: var(--text);
+  font: 700 16px var(--font-chakra), monospace; cursor: pointer;
+}
+.gx .ccalc__step button:first-child { border-radius: 8px 0 0 8px; }
+.gx .ccalc__step button:last-child { border-radius: 0 8px 8px 0; }
+.gx .ccalc__step input {
+  width: 64px; min-height: 44px; border: 1px solid rgba(255, 255, 255, .18); border-inline: 0; background: #07041a; color: var(--yellow);
+  text-align: center; font: 700 18px var(--font-chakra), monospace; -moz-appearance: textfield;
+}
+.gx .ccalc__step input::-webkit-inner-spin-button, .gx .ccalc__step input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.gx .ccalc__presets { grid-area: presets; display: flex; flex-wrap: wrap; gap: 4px; }
+.gx .ccalc__presets button { min-width: 40px; min-height: 36px; border-radius: 6px; font-size: 13px; }
+.gx .ccalc__presets button.is-on { border-color: var(--el); color: var(--el); }
+.gx .ccalc button:hover { border-color: var(--el); }
+.gx .ccalc button:focus-visible, .gx .ccalc input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.gx .ccalc__need { grid-area: need; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 14px; }
+.gx .ccalc__need b { color: var(--yellow); font-family: var(--font-chakra), monospace; font-size: 16px; }
+.gx .ccalc__need small { flex-basis: 100%; color: var(--muted, #a59fc9); font-size: 12px; }
+.gx .ccalc__total { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 12px 0 0; font-size: 15px; }
+.gx .ccalc__total b { color: var(--yellow); font: 800 20px var(--font-chakra), monospace; }
+.gx .ccalc img { image-rendering: pixelated; }
+
+@media (max-width: 560px) {
+  .gx .ccalc__row { grid-template-columns: 1fr auto; grid-template-areas: 'el step' 'presets presets' 'need need'; }
+}
+
+/* Which converter for which monster */
+.gx .cvpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; margin-bottom: 10px; }
+.gx .cvpick__row {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px;
+  background: #0b0724; border-left: 3px solid var(--el, rgba(255, 255, 255, .15));
+}
+.gx .cvpick__def { font-weight: 700; }
+.gx .cvpick__best { display: inline-flex; align-items: center; gap: 4px; color: var(--el); }
+.gx .cvpick__best b { font-family: var(--font-chakra), monospace; }

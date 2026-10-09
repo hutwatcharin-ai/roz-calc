@@ -62,6 +62,7 @@ export interface Recipe {
 const SKILLS_NOT_IN_THIS_GAME = new Set([2494, 2039]);
 
 export const CREATE_DEADLY_POISON = 407;
+export const CREATE_ELEMENTAL_CONVERTER = 1007;
 
 /**
  * Recipes whose requirement is a specific skill rather than the kind's usual
@@ -73,6 +74,11 @@ export const SKILL_NEEDS: Record<number, { title: string; needs: string; guide: 
     title: 'ขวดพิษ Assassin',
     needs: 'ต้องเป็น Assassin ที่เรียน Create Deadly Poison (ต้องมี Envenom Lv 10, Detoxify Lv 1 และ Enchant Poison Lv 5 ก่อน)',
     guide: '/guides/potion-crafting#assassin',
+  },
+  [CREATE_ELEMENTAL_CONVERTER]: {
+    title: 'ใบธาตุ Sage',
+    needs: 'ต้องเป็น Sage (ได้สกิล Create Elemental Converter ทันทีที่เปลี่ยนอาชีพ)',
+    guide: '/guides/elemental-converter',
   },
 };
 

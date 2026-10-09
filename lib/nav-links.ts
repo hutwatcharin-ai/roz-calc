@@ -100,6 +100,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/costume-enchant', label: 'หินเอนแชนต์คอสตูม', icon: '/images/items/6636.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/elemental-converter', label: 'ใบธาตุ Sage', icon: '/images/items/12114.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true, group: 'ดันเจี้ยน' },
