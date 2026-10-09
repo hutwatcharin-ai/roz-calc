@@ -1181,7 +1181,13 @@ export default function BuildSimulator({ initial, sharedId }: {
                   {vs.skill && (
                     <dl className="buildsim__skillres">
                       <div><dt>ดาเมจต่อครั้ง <i>ประมาณ</i></dt><dd className="mono">{vs.skill.damage.toLocaleString('en-US')}</dd></div>
-                      <div><dt>ตัวคูณ</dt><dd className="mono">{vs.skill.ratio}%{vs.skill.hits > 1 ? ` × ${vs.skill.hits} ฮิต` : ''}</dd></div>
+                      <div>
+                        <dt>ตัวคูณ</dt>
+                        <dd className="mono">
+                          {vs.skill.ratio}%{vs.skill.hits > 1 ? ` × ${vs.skill.hits} ฮิต` : ''}
+                          {vs.skill.ratioSource && <small className="buildsim__src">{vs.skill.ratioSource}</small>}
+                        </dd>
+                      </div>
                       <div><dt>ร่าย + ดีเลย์</dt><dd className="mono">{vs.skill.castSeconds} / {vs.skill.interval} วิ</dd></div>
                       <div><dt>ฆ่าได้ใน</dt><dd className="mono">{vs.skill.casts ? `${vs.skill.casts} ครั้ง` : '?'}{vs.skill.seconds != null ? ` · ~${secs(vs.skill.seconds)} วิ` : ''}</dd></div>
                       <div><dt>SP</dt><dd className="mono">{vs.skill.sp}{vs.skill.casts ? ` × ${vs.skill.casts} = ${(vs.skill.sp * vs.skill.casts).toLocaleString('en-US')}` : ''}</dd></div>

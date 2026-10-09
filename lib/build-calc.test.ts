@@ -301,6 +301,13 @@ describe('passives, buffs, skills, option ranges', () => {
     expect(r.vs!.skill!.ratio).toBe(5 * 700 + r.total.vit * 10);
   });
 
+  it('scales Grimtooth with AGI from the Elvyl sheet and says so', () => {
+    const b: Build = { ...base, cls: 'assassin', lv: 60, st: { ...base.st, agi: 50 }, g: { weapon: { id: 1250, r: 0, c: [0] } }, as: ['grimtooth', 5] };
+    const r = calcBuild(b, mob);
+    expect(r.vs!.skill!.ratio).toBe(5 * 40 + 100 + r.total.agi);
+    expect(r.vs!.skill!.ratioSource).toContain('Elvyl');
+  });
+
   it('adds Shattering Strike to each auto-attack, Power Thrust as damage %', () => {
     const b: Build = { ...base, cls: 'blacksmith', lv: 60, st: { ...base.st, str: 40 }, g: { weapon: { id: 1301, r: 0, c: [0] } } };
     const plain = calcBuild(b, mob).vs!;

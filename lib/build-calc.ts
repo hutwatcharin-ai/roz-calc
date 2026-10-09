@@ -170,6 +170,8 @@ export interface AttackSkill {
   lv: [number, number, number, number, number, number, number][];
   /** damage % as a formula of slv, str, agi, vit, int, dex, luk, base_level, cart_weight */
   f?: string;
+  /** Where `f` came from when it is not the planner data (shown under the ratio). */
+  fs?: string;
 }
 const skillData = skillFile as unknown as { passives: Record<string, PassiveSkill>; buffs: BuffSkill[]; attacks: Record<string, AttackSkill[]> };
 
@@ -179,6 +181,24 @@ const skillData = skillFile as unknown as { passives: Record<string, PassiveSkil
 // Axe Tornado (owner, 8 Oct 2026): about 7,000 on a Golem where
 // slv × 700 + VIT × 10 % predicted 7,742; no Base Level factor.
 const ZERO_FORMULAS: Record<string, string> = { 'blacksmith:axe-tornado': 'slv * 700 + vit * 10' };
+// Skills whose damage grows with a stat but whose planner rows are fixed
+// numbers (owner, 9 Oct 2026: use the French Zero sheet's formulas). From the
+// "Formules Skill" table of Encyclop'Elvyl (docs/elvyl-sheet, tab DPS [DEV]);
+// its author rates the damage chain 95-99% right, and none of these six has
+// been checked in game here. Only filled where the data has no formula; the
+// fixed part of each matches the planner rows already. Left out: the ones
+// that need a weapon or shield weight (Axe Boomerang, Shield Boomerang,
+// Rapid Smiting), which the simulator does not track, and the rows the sheet
+// itself marks "?".
+const ELVYL_FORMULAS: Record<string, string> = {
+  'assassin:grimtooth': 'slv * 40 + 100 + agi',
+  'assassin:soul-destroyer': 'slv * 150 + str + int',
+  'assassin:meteor-assault': 'slv * 120 + 200 + str * 5',
+  'blacksmith:power-swing': 'slv * 100 + 300 + str + dex',
+  'crusader:cannon-spear': 'slv * (120 + str)',
+  'crusader:holy-cross': 'slv * 35 + 100 + vit * 2',
+};
+const ELVYL_NOTE = 'สูตรจากชีต Encyclop\'Elvyl ยังไม่ได้เช็กในเกม';
 // Blacksmith self-buffs the planner's buff table lacks, from the client's
 // skill text (data/skill-trees.json). Shattering Strike's +100 per level on
 // each auto-attack was checked in game by the owner (9 Oct 2026: +1,000 at
@@ -209,7 +229,15 @@ const skills = {
   ...skillData,
   buffs: [...skillData.buffs, ...ZERO_BUFFS.filter((b) => !skillData.buffs.some((x) => x.s === b.s))],
   attacks: Object.fromEntries(
-    Object.entries(skillData.attacks).map(([cls, list]) => [cls, list.map((a) => (ZERO_FORMULAS[`${cls}:${a.s}`] ? { ...a, f: ZERO_FORMULAS[`${cls}:${a.s}`] } : a))]),
+    Object.entries(skillData.attacks).map(([cls, list]) => [
+      cls,
+      list.map((a) => {
+        const k = `${cls}:${a.s}`;
+        if (ZERO_FORMULAS[k]) return { ...a, f: ZERO_FORMULAS[k], fs: 'สูตรเช็กกับเกมแล้ว' };
+        if (!a.f && ELVYL_FORMULAS[k]) return { ...a, f: ELVYL_FORMULAS[k], fs: ELVYL_NOTE };
+        return a;
+      }),
+    ]),
   ),
 };
 export const ALL_BUFFS = skills.buffs;
@@ -550,6 +578,8 @@ export interface SkillResult {
   kind: 'atk' | 'matk';
   /** Damage % used (from the formula when there is one). */
   ratio: number;
+  /** Where the ratio's formula came from, when not the planner data. */
+  ratioSource?: string;
   hits: number;
   /** Damage of one cast, all hits. */
   damage: number;
@@ -994,6 +1024,7 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
           level: slv,
           kind: pick.k,
           ratio: Math.round(ratio),
+          ratioSource: pick.fs,
           hits,
           damage: total1,
           interval: Math.round(interval * 100) / 100,

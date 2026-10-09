@@ -4737,3 +4737,6 @@ html .tag { border-radius: 4px; }
 .myhitflee > b { color: var(--cyan); letter-spacing: .04em; }
 .myhitflee span b { color: var(--yellow); }
 .myhitflee a { min-height: 32px; display: inline-flex; align-items: center; }
+
+/* Where a skill ratio formula came from (lib/build-calc fs). */
+.buildsim__src { display: block; margin-top: 2px; font: 400 11px var(--font-sarabun), sans-serif; color: var(--muted, #a59fc9); }
