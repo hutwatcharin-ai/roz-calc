@@ -10,7 +10,10 @@ import { CANONICAL_HOST } from './lib/site';
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host') ?? '';
   const bare = host.split(':')[0];
-  if (bare === CANONICAL_HOST || bare === 'localhost' || bare.startsWith('127.')) {
+  // 100.64.0.0/10 is Tailscale: the owner's phone preview of a local build
+  // (http://100.108.70.113:3178) must stay on that build, not bounce to prod.
+  const tailnet = /^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(bare);
+  if (bare === CANONICAL_HOST || bare === 'localhost' || bare.startsWith('127.') || tailnet) {
     const response = NextResponse.next();
     // The /database/* index pages read searchParams for their filters, which
     // makes Next render them per request and stamp them private/no-cache --
