@@ -10,7 +10,7 @@ export const crusader: ClassGuide = {
   job: 'Crusader',
   jobTh: 'ครูเซเดอร์',
   from: 'Swordman',
-  gathered: '22 ก.ย. 2026',
+  gathered: '9 ต.ค. 2026',
   summary:
     'อาชีพสองของ Swordman สายถึกถือโล่ ท่าหลักที่มีคนสอนใน Zero คือ Rapid Smiting ที่แรงตามโล่ ถึกพอเปิดบอทได้ไม่เปลืองยา ข้อมูลสายอื่นยังมีน้อยมาก',
   facts: [

@@ -12,7 +12,7 @@ export const rogue: ClassGuide = {
   job: 'Rogue',
   jobTh: 'โร้ก',
   from: 'Thief',
-  gathered: '22 ก.ย. 2026',
+  gathered: '9 ต.ค. 2026',
   summary:
     'อาชีพสองของ Thief สายหลักใน Zero คือ Shadow Spell ก๊อป Meteor Storm มาร่ายเองตอนตีปกติ เปิดบอทได้ทั้งวันโดยไม่ใช้ยาบัฟแคช ส่วนสายธนูยังมีแค่คลิปจากเซิร์ฟทดสอบ',
   facts: [

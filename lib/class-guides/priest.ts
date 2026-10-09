@@ -9,7 +9,7 @@ export const priest: ClassGuide = {
   job: 'Priest',
   jobTh: 'พรีสต์',
   from: 'Acolyte',
-  gathered: '22 ก.ย. 2026',
+  gathered: '9 ต.ค. 2026',
   summary:
     'อาชีพสองของ Acolyte เล่นได้ทั้งสายตี (Duple Light) สายลงดัน และสายซัพพอร์ต เด่นเรื่องเปิดบอททั้งคืนได้เพราะ SP แทบไม่หมด',
   facts: [
