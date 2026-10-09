@@ -171,7 +171,47 @@ export interface AttackSkill {
   /** damage % as a formula of slv, str, agi, vit, int, dex, luk, base_level, cart_weight */
   f?: string;
 }
-const skills = skillFile as unknown as { passives: Record<string, PassiveSkill>; buffs: BuffSkill[]; attacks: Record<string, AttackSkill[]> };
+const skillData = skillFile as unknown as { passives: Record<string, PassiveSkill>; buffs: BuffSkill[]; attacks: Record<string, AttackSkill[]> };
+
+// What the live game does that the captured planner data does not have.
+// Applied here so a rebuild of data/build-skills.json cannot drop them.
+//
+// Axe Tornado (owner, 8 Oct 2026): about 7,000 on a Golem where
+// slv × 700 + VIT × 10 % predicted 7,742; no Base Level factor.
+const ZERO_FORMULAS: Record<string, string> = { 'blacksmith:axe-tornado': 'slv * 700 + vit * 10' };
+// Blacksmith self-buffs the planner's buff table lacks, from the client's
+// skill text (data/skill-trees.json). Shattering Strike's +100 per level on
+// each auto-attack was checked in game by the owner (9 Oct 2026: +1,000 at
+// Lv 10); whether it adds to skills too is not known, so only auto-attacks
+// get it. Power Thrust is its "Self" line as a damage %.
+const ZERO_BUFFS: BuffSkill[] = [
+  {
+    s: 'power-thrust',
+    n: 'Power Thrust',
+    max: 5,
+    i: '/images/skills/1e679b876e173e76ddda04133b7b4cb3.webp',
+    cls: ['blacksmith'],
+    lv: [5, 10, 15, 20, 25].map((v) => [['damage_percent', v, null]] as [string, number, string | null][]),
+    txt: 'ดาเมจกายภาพ +5% ต่อเลเวล (ตัวเอง)',
+  },
+  {
+    s: 'shattering-strike',
+    n: 'Shattering Strike',
+    max: 10,
+    i: '/images/skills/4b919762247282f3a6edcb3cdf7ef4b8.webp',
+    cls: ['blacksmith'],
+    lv: Array.from({ length: 10 }, (_, i) => [['flat_damage', (i + 1) * 100, null]] as [string, number, string | null][]),
+    txt: 'ตีธรรมดา +100 ดาเมจต่อเลเวลทุกฮิต (Lv 10 = +1,000 ยืนยันในเกม) · ยังไม่รู้ว่าบวกกับสกิลด้วยไหม',
+  },
+];
+
+const skills = {
+  ...skillData,
+  buffs: [...skillData.buffs, ...ZERO_BUFFS.filter((b) => !skillData.buffs.some((x) => x.s === b.s))],
+  attacks: Object.fromEntries(
+    Object.entries(skillData.attacks).map(([cls, list]) => [cls, list.map((a) => (ZERO_FORMULAS[`${cls}:${a.s}`] ? { ...a, f: ZERO_FORMULAS[`${cls}:${a.s}`] } : a))]),
+  ),
+};
 export const ALL_BUFFS = skills.buffs;
 const BUFF_BY_SLUG = new Map(skills.buffs.map((b) => [b.s, b]));
 export function buffBySlug(slug: string): BuffSkill | null {
@@ -524,7 +564,7 @@ export interface SkillResult {
 
 const WINDOW = new Set([
   ...STATS, ...STATS.map((s) => `${s}_percent`), 'hit_percent', 'mastery', 'weight', 'endow', 'no_size_penalty', 'hit', 'flee', 'crit', 'perfect_dodge', 'atk', 'matk', 'atk_percent', 'matk_percent', 'def', 'mdef',
-  'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent', 'double_attack',
+  'hp', 'hp_percent', 'sp', 'sp_percent', 'aspd', 'aspd_percent', 'cast_time_variable_percent', 'cast_time_fixed_percent', 'double_attack', 'flat_damage',
 ]);
 
 /** Why a group does not count now, or null when it does. */
@@ -877,10 +917,12 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
       targetLevel: target.level,
       targetVit: target.vit,
     });
+    // Added to every auto-attack hit after the multipliers (Shattering Strike).
+    const flat = get('flat_damage');
     // One auto-attack with the weapon ATK rolled at `roll` (-1 low, 0 mid, 1 high).
     const auto = (roll: number) => {
       const raw = hand(weaponAtk + roll * weaponVar, wt, weaponEl, 2);
-      let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier) + mastery) : null;
+      let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier) + mastery + flat) : null;
       let hands: TargetResult['hands'] = null;
       if (left && damage !== null) {
         const leftRaw = hand(leftAtk + roll * leftVar, left.wt ?? 'dagger', leftEl, 1);
@@ -907,7 +949,7 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
     // dagger in the right hand) swings twice and cannot crit, so per swing:
     // DA, else crit, else a normal hit.
     const critChance = Math.max(0, Math.min(100, crit * (wt === 'katar' ? 2 : 1) - (target.luk ?? 0) * 0.2));
-    const critDamage = damageMax === null ? null : Math.floor(damageMax * 1.4 * (1 + get('crit_damage_percent') / 100));
+    const critDamage = damageMax === null ? null : Math.floor((damageMax - flat) * 1.4 * (1 + get('crit_damage_percent') / 100)) + flat;
     const doubleAttack = wt === 'dagger' ? Math.min(100, get('double_attack')) : 0;
     const da = doubleAttack / 100;
     const c = critChance / 100;

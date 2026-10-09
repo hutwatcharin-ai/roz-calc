@@ -295,6 +295,22 @@ describe('passives, buffs, skills, option ranges', () => {
     expect(r.vs!.skill!.casts).toBe(Math.ceil(5000 / r.vs!.skill!.damage));
   });
 
+  it('uses the in-game Axe Tornado ratio: slv x 700 + VIT x 10', () => {
+    const b: Build = { ...base, cls: 'blacksmith', lv: 60, st: { ...base.st, str: 40, vit: 20 }, g: { weapon: { id: 1301, r: 0, c: [0] } }, as: ['axe-tornado', 5] };
+    const r = calcBuild(b, mob);
+    expect(r.vs!.skill!.ratio).toBe(5 * 700 + r.total.vit * 10);
+  });
+
+  it('adds Shattering Strike to each auto-attack, Power Thrust as damage %', () => {
+    const b: Build = { ...base, cls: 'blacksmith', lv: 60, st: { ...base.st, str: 40 }, g: { weapon: { id: 1301, r: 0, c: [0] } } };
+    const plain = calcBuild(b, mob).vs!;
+    const ss = calcBuild({ ...b, bf: { 'shattering-strike': 10 } }, mob).vs!;
+    expect(ss.damage! - plain.damage!).toBe(1000);
+    const pt = calcBuild({ ...b, bf: { 'power-thrust': 5 } }, mob).vs!;
+    expect(pt.damage!).toBeGreaterThan(plain.damage!);
+    expect(pt.damage!).toBeLessThanOrEqual(Math.ceil(plain.damage! * 1.25) + 1);
+  });
+
   it('works out magic by element: Fire Bolt hits an Earth monster harder than a Water one', () => {
     const b: Build = { ...base, cls: 'mage', lv: 60, st: { ...base.st, int: 70, dex: 40 }, as: ['fire-bolt', 10] };
     const earth = calcBuild(b, mob).vs!.skill!;
