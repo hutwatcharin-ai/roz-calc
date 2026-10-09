@@ -110,3 +110,25 @@
   .ccbar__prod { flex: 1 1 auto; min-width: 0; font-size: 14px; }
   .ccbar__picks .qty__step input { width: 48px; }
 }
+
+/* Shared basket */
+.ccbar__from { display: block; font-size: 11px; font-weight: 400; color: var(--cyan); text-decoration: none; }
+a.ccbar__from:hover { text-decoration: underline; }
+.ccbar__more { color: var(--muted, #a59fc9); font-size: 12px; }
+.ccbar__basket {
+  display: block; padding: 10px 14px; border-bottom: 1px solid rgba(255, 229, 61, .25); color: var(--cyan);
+  font-size: 14px; font-weight: 700; text-decoration: none;
+}
+.ccbar__basket:hover { background: rgba(61, 232, 255, .06); }
+.ccpage { display: grid; gap: 16px; margin-top: 16px; }
+.ccfind input {
+  width: 100%; min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(61, 232, 255, .35);
+  background: #07041a; color: var(--text); font-size: 15px;
+}
+.ccfind input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.ccfind__list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.ccfind__list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; padding: 6px 10px; border-radius: 8px; background: #0b0724; }
+.ccfind__list .rqty { margin: 0; padding: 0; border: 0; }
+.ccfind__list .rqty__add { width: auto; min-height: 36px; padding: 0 12px; }
+
+.ccpage__empty { margin: 16px 0 0; padding: 18px; border: 1px dashed rgba(255, 229, 61, .4); border-radius: 10px; text-align: center; color: var(--muted, #a59fc9); }

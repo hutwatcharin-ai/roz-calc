@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-10-09", "href": "/guides/craft-basket", "title": "ตะกร้าวัตถุดิบรวม: กดคำนวณจากหลายหน้าแล้วรวมยอดในที่เดียว", "note": "ของที่กด + คำนวณวัตถุดิบ ในหน้าทำอาหาร ทำยา ตีอาวุธ หลอมแร่ อยู่ในตะกร้าเดียวกัน · วัตถุดิบซ้ำข้ามหน้าบวกรวม · ค้นแล้วเพิ่มของจากหน้าตะกร้าได้เลย · แถบด้านล่างของแต่ละหน้ามีลิงก์ไปตะกร้า" },
     { "date": "2026-10-09", "href": "/tools/build", "title": "จำลองบิลด์: Axe Tornado ตามสูตรในเกม + บัฟ Power Thrust และ Shattering Strike", "note": "Axe Tornado = Lv×700 + VIT×10 % (เช็กกับเกมแล้ว) · Shattering Strike บวกตีธรรมดา +100 ต่อเลเวลทุกฮิต (Lv 10 = +1,000 ยืนยันในเกม) · Power Thrust ดาเมจ +5% ต่อเลเวล" },
     { "date": "2026-10-09", "href": "/guides/elemental-converter", "title": "แก้ไกด์ใบธาตุ Sage: ต้องทำเควสต์ก่อน และ 1 ใบใช้หินธาตุ 1 ก้อน", "note": "สกิลเป็นสีเทาจนกว่าจะส่งของให้ Mishuna ที่ Academy (Scorpion Tail, Horn, Rainbow Shell, Snail's Shell + Empty Scroll 4) · ทำใบธาตุใช้ Empty Scroll 1 + Red Blood / Crystal Blue / Green Live / Wind of Verdure 1 ก้อน ติด 100% · ข้อมูลจากคลิปของ DOUGH" },
     { "date": "2026-10-09", "href": "/guides/classes/hunter", "title": "ไกด์ Hunter: เพิ่มสเตตัสสาย Focused Arrow Strike และสายเหยี่ยว", "note": "แนวทางลงแต้มทีละช่วงของ hellyy · build จริงของ Gabsy (AGI 50 INT 23 DEX 50 เน้น Max SP) กับ Richmore (DEX 80 ที่เหลือ AGI) · สายเหยี่ยว Auto Blitz และ Falcon Assault มีตัวเลข AGI LUK DEX แล้ว · เพิ่มสเตตัสจากไลฟ์ไทยของแชงค์888 (AGI 40 INT 28 DEX 70) และ GrizkornCN สายเหยี่ยว" },
