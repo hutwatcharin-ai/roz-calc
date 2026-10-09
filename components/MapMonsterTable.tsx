@@ -78,7 +78,7 @@ export default function MapMonsterTable({ monsters }: { monsters: MapMonsterRow[
               style={{ ['--el' as string]: (m.element && ELEMENT_COLOUR[m.element]) || ELEMENT_COLOUR_UNKNOWN }}
             >
               <span className="maptile__lv">LV {m.level ?? '—'}</span>
-              <span className="maptile__count" title="จำนวนที่เกิดในแมพนี้">{m.amount != null ? `×${m.amount.toLocaleString('en-US')}` : '×?'}</span>
+              <span className="maptile__n" title="จำนวนที่เกิดในแมพนี้">{m.amount != null ? `×${m.amount.toLocaleString('en-US')}` : '×?'}</span>
               <span className="maptile__art">{m.image_url && <img src={m.image_url} alt="" loading="lazy" />}</span>
               <b className="maptile__name">{m.name_en}</b>
               {/* hp and base_exp of 0 are the unknown-value sentinels, not real zeros. */}
