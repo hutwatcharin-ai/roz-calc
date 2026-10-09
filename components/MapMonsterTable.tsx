@@ -29,6 +29,8 @@ export interface MapMonsterRow {
   hit_100?: number | null;
   flee_95?: number | null;
   element?: string | null;
+  /** How many stand on this map; null when the spawn data does not say. */
+  amount?: number | null;
 }
 
 export default function MapMonsterTable({ monsters }: { monsters: MapMonsterRow[]; cCount?: number }) {
@@ -41,6 +43,7 @@ export default function MapMonsterTable({ monsters }: { monsters: MapMonsterRow[
     : key === 'exp' ? (m.base_exp && m.base_exp > 0 ? m.base_exp : null)
     : key === 'hit' ? m.hit_100 ?? null
     : key === 'flee' ? m.flee_95 ?? null
+    : key === 'count' ? m.amount ?? null
     : null,
   );
 
@@ -52,6 +55,7 @@ export default function MapMonsterTable({ monsters }: { monsters: MapMonsterRow[
         <span className="mapsort__label">เรียง</span>
         {(
           [
+            ['count', 'จำนวน', true],
             ['level', 'LV', false],
             ['name', 'ชื่อ', false],
             ['hp', 'HP', true],
@@ -74,6 +78,7 @@ export default function MapMonsterTable({ monsters }: { monsters: MapMonsterRow[
               style={{ ['--el' as string]: (m.element && ELEMENT_COLOUR[m.element]) || ELEMENT_COLOUR_UNKNOWN }}
             >
               <span className="maptile__lv">LV {m.level ?? '—'}</span>
+              <span className="maptile__count" title="จำนวนที่เกิดในแมพนี้">{m.amount != null ? `×${m.amount.toLocaleString('en-US')}` : '×?'}</span>
               <span className="maptile__art">{m.image_url && <img src={m.image_url} alt="" loading="lazy" />}</span>
               <b className="maptile__name">{m.name_en}</b>
               {/* hp and base_exp of 0 are the unknown-value sentinels, not real zeros. */}

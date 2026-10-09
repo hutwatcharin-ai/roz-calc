@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 const getMapSpawns = cache(async (code: string) => {
   return await supabaseBrowser()
     .from('monster_spawns')
-    .select('map_display_name, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, is_mvp, atk_max, hit_100, flee_95, element)')
+    .select('map_display_name, amount, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, is_mvp, atk_max, hit_100, flee_95, element)')
     .eq('map_code', code);
 });
 
@@ -109,13 +109,34 @@ export default async function MapDetailPage({ params }: { params: { code: string
   }
 
   const name = spawns.find((s: any) => s.map_display_name)?.map_display_name ?? code;
-  const monsters = spawns
-    .map((s: any) => s.monsters)
-    .filter(Boolean)
-    .sort((a: any, b: any) => a.level - b.level);
+  // How many of each stand here (owner, 9 Oct 2026: the page never said).
+  // A monster can have several spawn groups on one map; what a player meets
+  // is their sum. An unknown count (307 of 3,050 rows) stays unknown, and a
+  // total that includes one says "at least".
+  const byMonster = new Map<number, any>();
+  for (const s of spawns as any[]) {
+    if (!s.monsters) continue;
+    const cur = byMonster.get(s.monsters.id);
+    const amount = s.amount ?? null;
+    if (cur) cur.amount = cur.amount === null || amount === null ? null : cur.amount + amount;
+    else byMonster.set(s.monsters.id, { ...s.monsters, amount });
+  }
+  // Most of it first: the reason to open a map page is what you will be
+  // hitting. Unknown counts last, then by level.
+  const monsters = [...byMonster.values()].sort(
+    (a: any, b: any) => (b.amount ?? -1) - (a.amount ?? -1) || (a.level ?? 0) - (b.level ?? 0),
+  );
   // Champions (Swift Poring...) spawn here one or two at a time among the
   // normal monsters; the roster shows them, marked, and counts them apart.
   const cCount = monsters.filter((m: any) => isCVariant(m.name_en)).length;
+  const headcount = (list: any[]) => ({
+    total: list.reduce((t, m) => t + (m.amount ?? 0), 0),
+    partial: list.some((m) => m.amount === null),
+  });
+  const normal = headcount(monsters.filter((m: any) => !isCVariant(m.name_en)));
+  const champs = headcount(monsters.filter((m: any) => isCVariant(m.name_en)));
+  const howMany = (h: { total: number; partial: boolean }) =>
+    h.total > 0 ? ` รวม${h.partial ? 'อย่างน้อย' : ''} ${h.total.toLocaleString('en-US')} ตัว` : '';
   // Not every map has a picture, so this is null on 149 of them and the block
   // below disappears rather than leaving a broken image behind.
   const picture = mapImage(code);
@@ -195,8 +216,8 @@ export default async function MapDetailPage({ params }: { params: { code: string
         )}
       </p>
       <p style={{ color: 'var(--dim)', marginTop: 10 }}>
-        มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้
-        {cCount > 0 && ` + มอนแชมเปียน ${cCount} ชนิด (ตัวพิเศษ HP/EXP สูง เกิดปนทีละ 1–2 ตัว)`}
+        มอนสเตอร์ {monsters.length - cCount} ชนิดในแมพนี้{howMany(normal)}
+        {cCount > 0 && ` + มอนแชมเปียน ${cCount} ชนิด${howMany(champs)} (ตัวพิเศษ HP/EXP สูง เกิดปนทีละ 1–2 ตัว)`}
       </p>
       {/* Picture beside the table on wide screens: the map page used to
           leave its right half empty (UX critique, 6 Sep). Stacked on phones. */}
