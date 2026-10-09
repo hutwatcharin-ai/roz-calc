@@ -14,7 +14,8 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { recipesOfKind, recipesUsing, type CraftMaterial } from '@/lib/crafting';
-import trees from '@/data/skill-trees.json';
+import CraftCalc, { RecipeQty } from '@/components/craft-calc/CraftCalc';
+import { craftCalcConfig, oreSkillRates, skillRatesOf } from '@/lib/craft-calc-config';
 
 export const revalidate = 86400;
 
@@ -30,25 +31,6 @@ const SKILLS = [
   { id: 96, slug: 'enchanted-stone-craft', name: 'Enchanted Stone Craft', what: 'ของดรอปจากมอนธาตุเป็นหินธาตุ และ Star Dust เป็น Star Crumb' },
 ];
 
-/** "Success Rate: 45%" per level, from the client's skill text. */
-function ratesOf(slug: string): number[] {
-  let found: number[] = [];
-  const walk = (o: unknown): void => {
-    if (found.length) return;
-    if (Array.isArray(o)) o.forEach(walk);
-    else if (o && typeof o === 'object') {
-      const r = o as { slug?: string; levels?: string[] };
-      if (r.slug === slug && Array.isArray(r.levels) && r.levels.length) {
-        found = r.levels.map((t) => Number(/(\d+)%/.exec(t)?.[1] ?? NaN));
-        return;
-      }
-      Object.values(o).forEach(walk);
-    }
-  };
-  walk(trees);
-  return found.every(Number.isFinite) ? found : [];
-}
-
 function Chip({ m }: { m: CraftMaterial }) {
   return (
     <Link className="oflow__item" href={itemHref(m.id, m.category ?? null)}>
@@ -59,10 +41,21 @@ function Chip({ m }: { m: CraftMaterial }) {
   );
 }
 
-export default function OreRefiningPage() {
+export default async function OreRefiningPage() {
   const all = recipesOfKind('ore');
   const confirmed = all.filter((r) => r.confidence === 'both');
   const unconfirmed = all.filter((r) => r.confidence !== 'both');
+  // Steel takes Iron: picking Steel walks back to Iron Ore unless the reader
+  // says they already have the Iron.
+  const calc = await craftCalcConfig({
+    id: 'ore',
+    recipes: all,
+    chain: confirmed,
+    expandLabel: 'หลอม Iron ที่ใช้ทำ Steel เองด้วย',
+    expandDefault: true,
+    skillRates: oreSkillRates(),
+    unknownRateNote: 'สูตรที่ไม่ได้ใช้สกิล Blacksmith ยังไม่รู้โอกาสสำเร็จ คิดแบบทำติดทุกครั้ง',
+  });
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -73,19 +66,20 @@ export default function OreRefiningPage() {
           { name: 'หลอมแร่', path: '/guides/ore-refining' },
         ])}
       />
+      <CraftCalc config={calc}>
       <PageHeader
         title="หลอมแร่และหินธาตุ"
         lead={
           <>
             {confirmed.length} สูตรพื้นฐานที่งานตีอาวุธของ Blacksmith ตั้งอยู่บนนี้ — แร่ดิบเป็นแร่ใช้งาน และของดรอปจากมอนธาตุเป็นหินธาตุ
-            · เป็นสกิลติดตัว (passive) อัปแล้วกดใช้ผ่านหน้าต่างหลอมได้เลย
+            · เป็นสกิลติดตัว (passive) อัปแล้วกดใช้ผ่านหน้าต่างหลอมได้เลย · กด <strong>+ คำนวณวัตถุดิบ</strong> ที่ของที่อยากได้ แล้วเว็บไล่ย้อนให้ว่าต้องหาแร่ดิบเท่าไร เผื่อหลอมไม่ติดตามเลเวลสกิล
           </>
         }
       />
 
       {SKILLS.map((s) => {
         const rows = confirmed.filter((r) => r.skillId === s.id);
-        const rates = ratesOf(s.slug);
+        const rates = skillRatesOf(s.slug);
         if (!rows.length) return null;
         return (
           <section key={s.id} className="card oskill" style={{ marginTop: 16 }}>
@@ -118,6 +112,7 @@ export default function OreRefiningPage() {
                     <span className="oflow__out">
                       <Chip m={r.product} />
                       {uses > 0 && <small>ใช้ต่อใน {uses} สูตร</small>}
+                      <RecipeQty id={r.id} name={r.product.name} />
                     </span>
                   </div>
                 );
@@ -136,7 +131,7 @@ export default function OreRefiningPage() {
               <div key={r.id} className="oflow">
                 <span className="oflow__in">{r.materials.map((m) => <Chip key={m.id} m={m} />)}</span>
                 <span className="oflow__arrow" aria-hidden="true">▶</span>
-                <span className="oflow__out"><Chip m={r.product} /></span>
+                <span className="oflow__out"><Chip m={r.product} /><RecipeQty id={r.id} name={r.product.name} /></span>
               </div>
             ))}
           </div>
@@ -153,6 +148,7 @@ export default function OreRefiningPage() {
         หินธาตุเอาไปทำอาวุธธาตุที่ <Link href="/guides/forging">ตีอาวุธ</Link> · แร่ที่หลอมแล้วเอาไปตีบวก คิดต้นทุนได้ที่{' '}
         <Link href="/tools/refine">ตีบวก</Link> · ของดรอปจากมอนตัวไหน ค้นที่ <Link href="/drop-finder">ค้นของดรอป</Link>
       </p>
+      </CraftCalc>
     </main>
   );
 }

@@ -20,6 +20,8 @@ import ItemIcon from '@/components/ItemIcon';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { recipesOfKind, type Recipe } from '@/lib/crafting';
+import CraftCalc from '@/components/craft-calc/CraftCalc';
+import { craftCalcConfig, oreSkillRates } from '@/lib/craft-calc-config';
 
 export const revalidate = 86400;
 
@@ -53,8 +55,18 @@ const SMITH: Record<number, { name: string; th: string }> = {
 const tagsOf = (r: Recipe) => [r.skillId != null ? `s${r.skillId}` : '', r.itemLevel != null ? `l${r.itemLevel}` : ''].filter(Boolean);
 const badgeOf = (r: Recipe) => (r.itemLevel != null ? `อาวุธ Lv ${r.itemLevel}` : null);
 
-export default function ForgingPage() {
+export default async function ForgingPage() {
   const all = recipesOfKind('forge');
+  const ore = recipesOfKind('ore');
+  const calc = await craftCalcConfig({
+    id: 'forge',
+    recipes: [...all, ...ore],
+    chain: ore.filter((r) => r.confidence === 'both'),
+    expandLabel: 'หลอม Iron, Steel และหินธาตุเอง (นับเป็นแร่ดิบแทน)',
+    expandDefault: false,
+    skillRates: oreSkillRates(),
+    unknownRateNote: 'ยังไม่รู้โอกาสตีอาวุธติดในเซิร์ฟนี้ ยอดอาวุธคิดแบบตีติดทุกครั้ง ถ้าตีไม่ติดวัตถุดิบหายด้วย ควรเผื่อไว้อีก',
+  });
   const confirmed = all.filter((r) => r.confidence === 'both');
   const count = (pred: (r: Recipe) => boolean) => confirmed.filter(pred).length;
 
@@ -118,8 +130,10 @@ export default function ForgingPage() {
         </p>
       </section>
 
+      <CraftCalc config={calc}>
       <CraftGuide
         kind="forge"
+        calc
         title={`สูตรตีอาวุธ (${confirmed.length})`}
         placeholder="ค้นชื่ออาวุธ หรือวัตถุดิบ เช่น Oridecon"
         tagsOf={tagsOf}
@@ -158,7 +172,7 @@ export default function ForgingPage() {
             </section>
 
             <section style={{ marginTop: 20 }}>
-              <CraftGuide kind="ore" title="หินธาตุกับเหล็กทำจากอะไร">
+              <CraftGuide kind="ore" title="หินธาตุกับเหล็กทำจากอะไร" calc>
                 <p className="muted" style={{ margin: '0 0 -4px' }}>
                   หลอมเองได้จากของที่มอนธาตุนั้นดรอป · ละเอียดกว่านี้ที่ <Link href="/guides/ore-refining">หลอมแร่และหินธาตุ</Link>
                 </p>
@@ -202,6 +216,7 @@ export default function ForgingPage() {
       >
         <></>
       </CraftGuide>
+      </CraftCalc>
     </main>
   );
 }

@@ -11,6 +11,7 @@ import ItemIcon from '@/components/ItemIcon';
 import { itemHref } from '@/lib/item-href';
 import { foodById, foodText } from '@/lib/food-buffs';
 import type { CraftMaterial, Recipe } from '@/lib/crafting';
+import { RecipeQty } from '@/components/craft-calc/CraftCalc';
 
 function Mat({ m, showAmount = true }: { m: CraftMaterial; showAmount?: boolean }) {
   return (
@@ -27,6 +28,7 @@ export default function RecipeCards({
   tagsOf,
   badgeOf,
   group,
+  calc = false,
 }: {
   rows: Recipe[];
   /** Filter values this recipe belongs to (see RecipeFilter's facets). */
@@ -35,6 +37,8 @@ export default function RecipeCards({
   badgeOf?: (r: Recipe) => string | null;
   /** Which RecipeFilter drives these cards. */
   group: string;
+  /** Inside a CraftCalc: give each card a quantity control. */
+  calc?: boolean;
 }) {
   return (
     <div className="rcards" data-rgroup={group}>
@@ -81,6 +85,7 @@ export default function RecipeCards({
               </p>
             )}
             {r.confidence !== 'both' && <p className="rcard__unsure">ยังไม่ยืนยันกับ Zero · มีในแหล่งเดียว</p>}
+            {calc && <RecipeQty id={r.id} name={r.product.name} />}
           </article>
         );
       })}

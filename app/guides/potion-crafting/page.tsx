@@ -4,6 +4,8 @@ import CraftGuide from '@/components/CraftGuide';
 import PageHeader from '@/components/PageHeader';
 import RecipeTable from '@/components/RecipeTable';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
+import CraftCalc from '@/components/craft-calc/CraftCalc';
+import { craftCalcConfig } from '@/lib/craft-calc-config';
 import { CREATE_DEADLY_POISON, recipesOfKind, recipesOfSkill, type Recipe } from '@/lib/crafting';
 
 export const metadata = {
@@ -106,8 +108,15 @@ const bookOf = (r: Recipe) => r.materials.find((m) => m.held && /Guide$/.test(m.
 const bookTag = (name: string) => 'g' + name.replace(/[^A-Za-z]/g, '');
 const shortBook = (name: string) => name.replace(/ Creation Guide$/, '');
 
-export default function PotionCraftingGuidePage() {
+export default async function PotionCraftingGuidePage() {
   const confirmed = recipesOfKind('brew').filter((r) => r.confidence === 'both');
+  const calc = await craftCalcConfig({
+    id: 'brew',
+    recipes: recipesOfKind('brew'),
+    // One Mortar Bowl per try, success or not (the steps above).
+    perTry: [{ id: 7134, name: 'Medicine Bowl (Mortar Bowl)', icon: '/images/items/7134.gif', category: 'Other', amount: 1 }],
+    unknownRateNote: 'ยังไม่รู้โอกาสปรุงสำเร็จในเซิร์ฟนี้ (ขึ้นกับ INT DEX LUK Job Level และสกิล) ยอดนี้คิดแบบทำติดทุกครั้ง ถ้าทำไม่ติด Mortar Bowl กับวัตถุดิบก็หายด้วย ควรเผื่อไว้อีก',
+  });
   const books = [...new Map(confirmed.map(bookOf).filter((b): b is NonNullable<typeof b> => b != null).map((b) => [b.name, b])).values()];
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -154,8 +163,10 @@ export default function PotionCraftingGuidePage() {
           carried -- which Creation Guide each recipe needs -- is the
           "ต้องมีติดตัว" column here. */}
       <section id="recipes" style={{ scrollMarginTop: 90 }}>
+        <CraftCalc config={calc}>
         <CraftGuide
           kind="brew"
+          calc
           title={`สูตรยา Alchemist (${confirmed.length})`}
           placeholder="ค้นชื่อยา หรือวัตถุดิบ เช่น Red Herb"
           tagsOf={(r) => { const b = bookOf(r); return b ? [bookTag(b.name)] : []; }}
@@ -167,6 +178,7 @@ export default function PotionCraftingGuidePage() {
         >
           <></>
         </CraftGuide>
+        </CraftCalc>
       </section>
 
       <section className="card card--yellow" style={{ marginTop: 16 }}>

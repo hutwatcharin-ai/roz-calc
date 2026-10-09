@@ -5,6 +5,8 @@
 // are exact; the kill count is an average from the best dropper's rate.
 
 import { useState } from 'react';
+import QtyStepper, { QTY_PRESETS } from '@/components/craft-calc/QtyStepper';
+import '@/components/craft-calc/craft-calc.css';
 
 export interface ConverterCalcRow {
   key: string;
@@ -17,8 +19,6 @@ export interface ConverterCalcRow {
   rate: number | null;
   monster: string | null;
 }
-
-const PRESETS = [0, 5, 10, 30, 50];
 
 export default function ConverterCalc({ rows }: { rows: ConverterCalcRow[] }) {
   const [count, setCount] = useState<Record<string, number>>(() => Object.fromEntries(rows.map((r) => [r.key, 0])));
@@ -38,25 +38,8 @@ export default function ConverterCalc({ rows }: { rows: ConverterCalcRow[] }) {
                 <img src={`/images/items/${r.productId}.gif`} alt="" width={24} height={24} />
                 ใบ{r.th}
               </span>
-              <span className="ccalc__step">
-                <button type="button" onClick={() => set(r.key, n - 1)} aria-label={`ลดใบ${r.th}`}>−</button>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min={0}
-                  max={999}
-                  value={n}
-                  onChange={(e) => set(r.key, Number(e.target.value))}
-                  aria-label={`จำนวนใบ${r.th}`}
-                />
-                <button type="button" onClick={() => set(r.key, n + 1)} aria-label={`เพิ่มใบ${r.th}`}>+</button>
-              </span>
-              <span className="ccalc__presets">
-                {PRESETS.map((p) => (
-                  <button key={p} type="button" className={n === p ? 'is-on' : ''} onClick={() => set(r.key, p)}>
-                    {p}
-                  </button>
-                ))}
+              <span className="ccalc__qty">
+                <QtyStepper value={n} onChange={(v) => set(r.key, v)} label={`ใบ${r.th}`} presets={QTY_PRESETS} max={999} />
               </span>
               <span className="ccalc__need">
                 {n ? (

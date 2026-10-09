@@ -13,6 +13,8 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { recipesOfKind, type Recipe } from '@/lib/crafting';
 import { foodById } from '@/lib/food-buffs';
+import CraftCalc from '@/components/craft-calc/CraftCalc';
+import { craftCalcConfig } from '@/lib/craft-calc-config';
 
 export const revalidate = 86400;
 
@@ -31,8 +33,13 @@ const statsOf = (r: Recipe) => {
 const tagsOf = (r: Recipe) => [...statsOf(r), bookLevel(r) != null ? `b${bookLevel(r)}` : ''].filter(Boolean);
 const badgeOf = (r: Recipe) => (bookLevel(r) != null ? `ตำรา Lv ${bookLevel(r)}` : null);
 
-export default function CookingPage() {
+export default async function CookingPage() {
   const confirmed = recipesOfKind('cook').filter((r) => r.confidence === 'both');
+  const calc = await craftCalcConfig({
+    id: 'cook',
+    recipes: recipesOfKind('cook'),
+    unknownRateNote: 'ยังไม่รู้โอกาสทำอาหารสำเร็จ ยอดนี้คิดแบบทำติดทุกครั้ง ควรเผื่อวัตถุดิบไว้อีก',
+  });
   const books = [...new Set(confirmed.map(bookLevel).filter((l): l is number => l != null))].sort((a, b) => a - b);
 
   // The strongest confirmed dish for each stat.
@@ -96,7 +103,7 @@ export default function CookingPage() {
           <li>
             มี<strong>ชุดทำอาหาร</strong>ติดตัว ในเกมมี 3 แบบ: Outdoor, Indoor และ High end Cooking Kits
           </li>
-          <li>เตรียมวัตถุดิบตามการ์ดด้านล่าง ตัวเลข ×10 คือจำนวนที่ใช้ต่อครั้ง</li>
+          <li>เตรียมวัตถุดิบตามการ์ดด้านล่าง ตัวเลข ×10 คือจำนวนที่ใช้ต่อครั้ง · กด <strong>+ คำนวณวัตถุดิบ</strong> ที่การ์ดได้หลายเมนู แล้วดูยอดรวมที่แถบด้านล่าง</li>
           <li>ใช้ชุดทำอาหาร แล้วเลือกเมนูจากตำราที่ถืออยู่</li>
         </ol>
         <p className="muted" style={{ marginBottom: 0 }}>
@@ -104,8 +111,10 @@ export default function CookingPage() {
         </p>
       </section>
 
+      <CraftCalc config={calc}>
       <CraftGuide
         kind="cook"
+        calc
         title={`สูตรอาหาร (${confirmed.length})`}
         placeholder="ค้นชื่ออาหาร หรือวัตถุดิบ เช่น Honey"
         tagsOf={tagsOf}
@@ -129,6 +138,7 @@ export default function CookingPage() {
       >
         <></>
       </CraftGuide>
+      </CraftCalc>
     </main>
   );
 }

@@ -56,29 +56,14 @@
 /* Calculator */
 .gx .ccalc__rows { display: grid; gap: 8px; }
 .gx .ccalc__row {
-  display: grid; grid-template-columns: 110px auto 1fr; grid-template-areas: 'el step presets' 'need need need';
+  display: grid; grid-template-columns: 110px 1fr; grid-template-areas: 'el qty' 'need need';
   align-items: center; gap: 8px 12px; padding: 10px 12px; border-radius: 8px; background: #0b0724;
   border: 1px solid color-mix(in srgb, var(--el) 30%, transparent);
 }
 .gx .ccalc__row.is-on { border-color: var(--el); box-shadow: 0 0 10px color-mix(in srgb, var(--el) 25%, transparent); }
 .gx .ccalc__el { grid-area: el; display: flex; align-items: center; gap: 6px; color: var(--el); font-weight: 700; }
-.gx .ccalc__step { grid-area: step; display: inline-flex; align-items: center; }
-.gx .ccalc__step button, .gx .ccalc__presets button {
-  min-width: 44px; min-height: 44px; border: 1px solid rgba(255, 255, 255, .18); background: #120c33; color: var(--text);
-  font: 700 16px var(--font-chakra), monospace; cursor: pointer;
-}
-.gx .ccalc__step button:first-child { border-radius: 8px 0 0 8px; }
-.gx .ccalc__step button:last-child { border-radius: 0 8px 8px 0; }
-.gx .ccalc__step input {
-  width: 64px; min-height: 44px; border: 1px solid rgba(255, 255, 255, .18); border-inline: 0; background: #07041a; color: var(--yellow);
-  text-align: center; font: 700 18px var(--font-chakra), monospace; -moz-appearance: textfield;
-}
-.gx .ccalc__step input::-webkit-inner-spin-button, .gx .ccalc__step input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.gx .ccalc__presets { grid-area: presets; display: flex; flex-wrap: wrap; gap: 4px; }
-.gx .ccalc__presets button { min-width: 40px; min-height: 36px; border-radius: 6px; font-size: 13px; }
-.gx .ccalc__presets button.is-on { border-color: var(--el); color: var(--el); }
-.gx .ccalc button:hover { border-color: var(--el); }
-.gx .ccalc button:focus-visible, .gx .ccalc input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.gx .ccalc__qty { grid-area: qty; }
+.gx .ccalc__row.is-on .qty__presets button.is-on { border-color: var(--el); color: var(--el); }
 .gx .ccalc__need { grid-area: need; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 14px; }
 .gx .ccalc__need b { color: var(--yellow); font-family: var(--font-chakra), monospace; font-size: 16px; }
 .gx .ccalc__need small { flex-basis: 100%; color: var(--muted, #a59fc9); font-size: 12px; }
@@ -87,7 +72,7 @@
 .gx .ccalc img { image-rendering: pixelated; }
 
 @media (max-width: 560px) {
-  .gx .ccalc__row { grid-template-columns: 1fr auto; grid-template-areas: 'el step' 'presets presets' 'need need'; }
+  .gx .ccalc__row { grid-template-columns: 1fr; grid-template-areas: 'el' 'qty' 'need'; }
 }
 
 /* Which converter for which monster */
