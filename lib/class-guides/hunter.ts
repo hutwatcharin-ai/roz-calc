@@ -11,7 +11,7 @@ export const hunter: ClassGuide = {
   job: 'Hunter',
   jobTh: 'ฮันเตอร์',
   from: 'Archer',
-  gathered: '22 ก.ย. 2026',
+  gathered: '9 ต.ค. 2026',
   summary:
     'อาชีพสองของ Archer สายฟาร์มยิงไกล สกิลหลักคือ Focused Arrow Strike ยิงเป้าเดียวแล้วดาเมจกระจายรอบตัว ติดคริได้ ทุกคลิป Zero เล่นสายนี้',
   facts: [
