@@ -96,6 +96,10 @@ const EXTRA = [
   { name: 'Pantie & Undershirt', ids: [2339, 2522], bonus_th: 'AGI +5 · FLEE +10', sources: ['item text'] },
   { name: 'Gentleman Staff & Magician Hat', ids: [1629, 5045], bonus_th: 'DEX +2 · INT +2 · ฟื้น SP เร็วขึ้น 5%', sources: ['item text'] },
   { name: 'Toad & Roda Frog Card', ids: [4306, 4014], bonus_th: 'FLEE +18', sources: ['item text'] },
+  // The Water +30% in Crab Card's text is this set's, not the card's: one
+  // Crab Card alone gives ATK +5 in game (owner, 8 Oct 2026), and
+  // ratemyserver's combo 162 scripts bAddEle,Ele_Water,30 on the three (9 Oct).
+  { name: 'Crab, Aster & Shell Fish Card', ids: [4153, 4247, 4273], bonus_th: 'ดาเมจกายภาพต่อมอนธาตุน้ำ +30% · ฆ่ามอนเผ่าปลามีโอกาส 30% ได้ Raw Fish', sources: ['item text', 'ratemyserver'] },
   { name: 'Change STR (Middle) & (Lower)', ids: [25003, 25012], bonus_th: 'INT +3 · DEX +3', sources: ['item text'] },
   { name: 'Change INT (Middle) & (Lower)', ids: [25005, 25013], bonus_th: 'DEX +3 · VIT +3', sources: ['item text'] },
   { name: 'Change DEX (Middle) & (Lower)', ids: [25007, 25010], bonus_th: 'VIT +3 · AGI +3', sources: ['item text'] },

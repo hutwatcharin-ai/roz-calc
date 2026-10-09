@@ -3,10 +3,11 @@
 // word (it is what players read in game), with a note under it; the lines are
 // kept out of anything that lists items by effect.
 //
-// Crab Card (owner, 8 Oct 2026): in game it is ATK +5 and nothing else. The
-// client's "Physical Damage to Water-property monsters +30%" line had put it
-// on the "cards that hit Water monsters" page. Its one-line Thai effect
-// (items.description_th) was corrected in the database the same day.
+// Crab Card (owner, 8 Oct 2026): one card alone is ATK +5 in game. The
+// client's "Physical Damage to Water-property monsters +30%" is the bonus of
+// the Crab + Aster + Shell Fish set (ratemyserver combo 162, read 9 Oct), not
+// of the card, so it stays off the "cards that hit Water monsters" page and
+// the note says what it takes.
 
 export interface ClientTextFix {
   /** Card topic slugs (lib/card-topics) this item must not appear on. */
@@ -20,7 +21,7 @@ export interface ClientTextFix {
 export const CLIENT_TEXT_FIXES: Record<number, ClientTextFix> = {
   4153: {
     topics: ['vs-water'],
-    note: 'บรรทัด "เพิ่ม Damage ทางกายภาพต่อมอนสเตอร์ธาตุ Water 30%" ไม่มีผลในเกมจริง ใส่แล้วได้แค่ ATK +5 (เจ้าของเว็บทดสอบ 8 ต.ค. 2026)',
+    note: 'ดาเมจต่อมอนธาตุน้ำ +30% กับ Raw Fish ได้เฉพาะใส่ครบ 3 ใบ (Crab, Aster และ Shell Fish Card) ในอาวุธเดียว · ใส่ Crab ใบเดียวได้แค่ ATK +5 กับดาเมจต่อ Aster +30% (เจ้าของเว็บทดสอบ 8 ต.ค. 2026)',
   },
 };
 

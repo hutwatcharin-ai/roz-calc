@@ -357,6 +357,35 @@
       ]
     },
     {
+      "name": "Crab, Aster & Shell Fish Card",
+      "kind": "card",
+      "pieces": [
+        {
+          "id": 4153,
+          "name": "Crab Card",
+          "category": "Card",
+          "icon": "/images/items/4153.gif"
+        },
+        {
+          "id": 4247,
+          "name": "Aster Card",
+          "category": "Card",
+          "icon": "/images/items/4247.gif"
+        },
+        {
+          "id": 4273,
+          "name": "Shell Fish Card",
+          "category": "Card",
+          "icon": "/images/items/4273.gif"
+        }
+      ],
+      "bonus": "ดาเมจกายภาพต่อมอนธาตุน้ำ +30% · ฆ่ามอนเผ่าปลามีโอกาส 30% ได้ Raw Fish",
+      "sources": [
+        "item text",
+        "ratemyserver"
+      ]
+    },
+    {
       "name": "Cramp & Tarou Card",
       "kind": "card",
       "pieces": [
