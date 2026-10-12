@@ -1246,7 +1246,7 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
     // total 8, Enlarge Weight Limit 10) reads 5,030 = 2,000 + 1,000 + 30 + 2,000.
     weight: {
       cap: 2000 + build.st.str * 30 + (classStats(build.cls)?.weightBonus ?? 0) + get('weight'),
-      worn: wornWeight / 10,
+      worn: wornWeight,
     },
     vct,
     fct: get('cast_time_fixed_percent'),

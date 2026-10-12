@@ -55,7 +55,7 @@ const SLOT_ICON: Record<Slot, number> = {
   weapon: 1201, shield: 460058, head_upper: 2220, head_middle: 2276, head_lower: 2267, armor: 2301, garment: 480378,
   footgear: 470011, accessory_1: 2601, accessory_2: 2601,
 };
-// Potions for "how many can I carry" (weights from the item data, in 0.1 units).
+// Potions for "how many can I carry" (weights as the game shows them: a Red Potion is 7).
 const POTIONS: [number, string, number][] = [
   [501, 'Red Potion', 7], [502, 'Orange Potion', 10], [503, 'Yellow Potion', 13], [504, 'White Potion', 15],
   [505, 'Blue Potion', 15], [645, 'Concentration Potion', 10], [656, 'Awakening Potion', 15], [657, 'Berserk Potion', 20],
@@ -1032,9 +1032,9 @@ export default function BuildSimulator({ initial, sharedId }: {
               </div>
               {(() => {
                 // How many potions fit before the weight thresholds that matter:
-                // 50% stops natural HP/SP regen, 70% is where a bot heads home, 90% stops attacking.
+                // 70% stops natural HP/SP regen (owner, 12 Oct 2026: not 50%), 90% stops attacks and skills.
                 const w = POTIONS.find((x) => x[0] === potion) ?? POTIONS[3];
-                const room = (pct: number) => Math.max(0, Math.floor(((result.weight.cap * pct) / 100 - result.weight.worn) / (w[2] / 10)));
+                const room = (pct: number) => Math.max(0, Math.floor(((result.weight.cap * pct) / 100 - result.weight.worn) / w[2]));
                 // Healing: the amount the game's item text gives, +2% per VIT (INT for SP).
                 const heal = POTION_HEAL[w[0]];
                 const rate = heal?.sp ? result.potionRate.sp : result.potionRate.hp;
@@ -1050,7 +1050,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                     </dt>
                     <dd className="mono">
                       <img src={`/images/items/${w[0]}.gif`} alt="" width={20} height={20} />
-                      {room(50).toLocaleString('en-US')} <small>ถึง 50%</small> · {room(70).toLocaleString('en-US')} <small>ถึง 70%</small> · {room(90).toLocaleString('en-US')} <small>ถึง 90%</small>
+                      {room(70).toLocaleString('en-US')} <small>ถึง 70%</small> · {room(90).toLocaleString('en-US')} <small>ถึง 90%</small>
                     </dd>
                     {heal && (
                       <small className="buildsim__potionheal">
@@ -1058,7 +1058,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                         {pool ? ` = ${Math.floor((each * room(70)) / pool)} หลอดเต็ม` : ''}
                       </small>
                     )}
-                    <small className="buildsim__potionnote">50% หยุดฟื้น HP/SP เอง · 70% บอทกลับเมือง · 90% ตีไม่ได้ (นับแค่ของที่ใส่ ไม่รวมของอื่นในกระเป๋า)</small>
+                    <small className="buildsim__potionnote">70% หยุดฟื้น HP/SP เอง · 90% ตีและใช้สกิลไม่ได้ (นับแค่ของที่ใส่ ไม่รวมของอื่นในกระเป๋า)</small>
                   </div>
                 );
               })()}

@@ -529,3 +529,10 @@ describe('buffs, falcon and forged weapons added 12 Oct 2026', () => {
     expect(round.g.weapon).toMatchObject({ fg: 'fire', c: [] });
   });
 });
+
+describe('weight units (12 Oct 2026)', () => {
+  it('counts worn weight as the game shows it: a Two-Handed Axe weighs 250', () => {
+    const r = calcBuild({ ...base, cls: 'blacksmith', lv: 60, g: { weapon: { id: 620048, r: 0, c: [0, 0] } } });
+    expect(r.weight.worn).toBe(250);
+  });
+});
