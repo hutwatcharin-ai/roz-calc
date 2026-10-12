@@ -206,6 +206,7 @@ export const hunter: ClassGuide = {
       ],
       statNotes: [
         { text: 'LUK ทุก 3 แต้ม เหยี่ยวออกเองเพิ่ม 1%', cites: [['hbuild1', '02:57']] },
+        { text: 'ในคลิป Gabsy เล่นสายเหยี่ยวที่ Lv 60 เหยี่ยวออกบ่อยแล้ว ยิ่งเลเวลและ ASPD สูง เหยี่ยวยิ่งออกบ่อย สุดท้ายต้องเกลี่ยระหว่าง ASPD โอกาสเหยี่ยวออก และ DEX ให้ตีธรรมดายังแรง', cites: [['hbuild1', '01:56'], ['hbuild1', '02:05'], ['hbuild1', '03:14']] },
         { text: 'ข้อดีสาย Auto Blitz: ใช้ SP น้อย เหมาะตั้งบอทฟาร์มนาน · ข้อเสีย: DEX น้อยกว่าสาย AGI/DEX ดาเมจตีธรรมดากับ Focused Arrow Strike จึงต่ำกว่า ต้องมี AGI กับ LUK สูงก่อนถึงจะเห็นผล และเหยี่ยวออกเป็นโอกาส', cites: [['hcompare', '00:48'], ['hcompare', '01:01'], ['hcompare', '01:26'], ['hcompare', '01:42']] },
         { text: 'ผลทดสอบ Falcon Assault ที่ Lv 60: AGI 92 ได้ 9,715 ส่วน AGI 1 กับ DEX 92 ได้ราว 6,900 build AGI/DEX กับ AGI ล้วนต่างกันแค่ราว 400', cites: [['hskill', '02:55'], ['hskill', '03:07']] },
       ],
@@ -219,7 +220,7 @@ export const hunter: ClassGuide = {
       name: 'สายวางกับดัก',
       pickIf: 'อยากเล่นกับดัก',
       idea: { text: 'ผังสกิลมีกับดักครบ เช่น Land Mine, Anklesnare, Sandman, Claymore Trap, Freezing Trap แต่บางตัวไม่มีคำอธิบายในฐานข้อมูล', cites: [['db']] },
-      missing: 'ยังไม่มีคลิป Zero หรือ build บนเว็บพูดถึงสายนี้',
+      missing: 'ยังไม่มีคลิป Zero หรือ build บนเว็บพูดถึงสายนี้ · hellyy ข้ามสายนี้ไปเพราะเซิร์ฟตอนนี้ยังขาดข้อมูลหลายอย่างจนประเมินไม่ได้',
     },
   ],
   gaps: [
