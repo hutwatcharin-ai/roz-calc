@@ -6,7 +6,7 @@
 import './page.css';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -45,7 +45,7 @@ export default async function CashShopPage({
   const sort = (searchParams.sort ?? 'name') in SORTS ? ((searchParams.sort ?? 'name') as keyof typeof SORTS) : 'name';
   const cat = (searchParams.cat ?? '') in CATEGORY_LABELS ? (searchParams.cat as CashCategory) : '';
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   let query = db.from('cash_shop_items').select('*');
   if (q) query = query.ilike('name_en', `%${escapeLikePattern(q)}%`);
   const { data, error } = await query.order('name_en').order('item_id');

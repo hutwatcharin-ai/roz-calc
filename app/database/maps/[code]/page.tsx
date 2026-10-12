@@ -6,7 +6,7 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import MapMonsterTable from '@/components/MapMonsterTable';
 import MapWarps from '@/components/MapWarps';
 import { isCVariant } from '@/lib/c-variant';
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 // Shared by generateMetadata and the page body so one request does one query.
 // Returns the raw { data, error } so each caller keeps its own handling.
 const getMapSpawns = cache(async (code: string) => {
-  return await supabaseBrowser()
+  return await supabaseRead()
     .from('monster_spawns')
     .select('map_display_name, amount, monsters(id, name_en, level, hp, base_exp, image_url, is_aggressive, is_mvp, atk_max, hit_100, flee_95, element)')
     .eq('map_code', code);
@@ -145,7 +145,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
   // its monsters and nothing else, while 78 of them have an NPC on them and 84
   // carry a quest -- both facts this site already held and never showed.
   const npcsHere = ALL_NPCS.filter((npc) => npc.map === code && npc.hasName);
-  const { data: questsHere, error: questError } = await supabaseBrowser()
+  const { data: questsHere, error: questError } = await supabaseRead()
     .from('quests')
     .select('id, name, name_th, town_key, type')
     .eq('map_code', code)
@@ -159,7 +159,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
   const monsterIds = [...new Set(monsters.map((m: any) => m.id as number))];
   const [dropsRead, countsRead] = await Promise.all([
     fetchAllRows<any>((from, to) =>
-      supabaseBrowser()
+      supabaseRead()
         .from('monster_drops')
         .select('id, monster_id, rate, items(id, name_en, icon_url, category)')
         .in('monster_id', monsterIds)
@@ -167,7 +167,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
         .range(from, to),
     ),
     fetchAllRows<{ id: number; monster_id: number; amount: number | null }>((from, to) =>
-      supabaseBrowser()
+      supabaseRead()
         .from('monster_spawns')
         .select('id, monster_id, amount')
         .in('monster_id', monsterIds)
@@ -361,7 +361,7 @@ function NpcList({ npcs }: { npcs: Npc[] }) {
 async function TownView({ town }: { town: Town }) {
   const { code } = town;
   const name = town.nameTh ?? town.nameEn;
-  const { data: quests, error } = await supabaseBrowser()
+  const { data: quests, error } = await supabaseRead()
     .from('quests')
     .select('id, name, name_th, town_key')
     .eq('map_code', code)

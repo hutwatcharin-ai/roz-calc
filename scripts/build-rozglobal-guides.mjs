@@ -160,7 +160,7 @@ const jobChange = tables['changement-de-classe-2.html'].map((table, i) => {
 
 async function crossCheck() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {
     console.log('ไม่มี key ใน env — ข้ามการตรวจไขว้');
     return null;

@@ -9,7 +9,7 @@ import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { unknownIfZero } from '@/lib/unknown-stat';
 import Pagination from '@/components/Pagination';
 import PageHeader from '@/components/PageHeader';
@@ -134,7 +134,7 @@ export default async function MonsterListPage({
   const sort = (searchParams.sort ?? 'level') in SORTS ? ((searchParams.sort ?? 'level') as keyof typeof SORTS) : 'level';
   const page = Math.max(1, Number(searchParams.page ?? 1) || 1);
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const counts = await monsterCounts();
 
   // Monsters that drop a card a player can actually get today. "Has a card"

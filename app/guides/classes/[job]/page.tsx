@@ -20,7 +20,7 @@ import { notFound } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { itemHref } from '@/lib/item-href';
 import { mapImage } from '@/lib/map-image';
 import { CLASS_GUIDES, citeHref, classGuide } from '@/lib/class-guides';
@@ -480,7 +480,7 @@ export default async function ClassGuidePage({ params }: { params: { job: string
   ])];
   const monsterIds = [...new Set((guide.route ?? []).flatMap((s) => s.monsters ?? []))];
   const mapCodes = [...new Set((guide.route ?? []).flatMap((s) => s.maps ?? []))];
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const none = Promise.resolve({ data: [], error: null });
   const [skillRead, itemRead, monsterRead, mapRead] = await Promise.all([
     skillNames.length ? db.from('skills').select('name, icon_url, max_level').in('name', skillNames) : none,

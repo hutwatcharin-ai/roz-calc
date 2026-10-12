@@ -18,7 +18,7 @@ import { normalOf } from '@/lib/aegis-names';
 import SameNameLine from '@/components/SameNameLine';
 import { riskySkills, SKILL_RISK_LABELS } from '@/lib/afk-safety';
 import MonsterDropsTable, { type MonsterDropRow } from '@/components/MonsterDropsTable';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { stat, unknownIfZero } from '@/lib/unknown-stat';
 import FeedbackButton from '@/components/FeedbackButton';
 import type { Metadata } from 'next';
@@ -64,7 +64,7 @@ const getMonster = cache(async (id: number) => {
   // Short-circuit to the same shape a clean "not found" query already
   // returns, so it 404s through the existing !monster check instead.
   if (Number.isNaN(id)) return { data: null, error: null } as const;
-  return await supabaseBrowser().from('monsters').select('*').eq('id', id).maybeSingle();
+  return await supabaseRead().from('monsters').select('*').eq('id', id).maybeSingle();
 });
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -110,7 +110,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 const SIZE_TH: Record<string, string> = { Small: 'เล็ก', Medium: 'กลาง', Large: 'ใหญ่' };
 
 export default async function MonsterDetailPage({ params }: { params: { id: string } }) {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const id = Number(params.id);
 
   // maybeSingle (not single): a missing id must come back as data:null with no

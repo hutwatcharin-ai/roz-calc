@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import PageHeader from '@/components/PageHeader';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { isCVariant } from '@/lib/c-variant';
@@ -56,7 +56,7 @@ export default async function CardTopicPage({ params }: { params: { slug: string
   const found = cardsForTopic(params.slug).filter((c) => !isAbsentFromGame(c.id));
   const ids = found.map((c) => c.id);
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const [{ data: rows }, drops, monsters] = await Promise.all([
     ids.length ? db.from('items').select('id, name_en, icon_url').in('id', ids) : Promise.resolve({ data: [] as { id: number; name_en: string; icon_url: string | null }[] }),
     ids.length

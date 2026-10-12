@@ -20,7 +20,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { mapImage } from '@/lib/map-image';
 import { monsterLabel } from '@/lib/monster-known-as';
 import ItemSetCard from '@/components/ItemSetCard';
@@ -125,7 +125,7 @@ function floorMobs(rows: Spawn[]): Mob[] {
 }
 
 export default async function Patch20261001Page() {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data, error } = await db
     .from('monster_spawns')
     .select('map_code, map_display_name, amount, monsters(id, name_en, level, is_aggressive)')

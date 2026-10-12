@@ -1,4 +1,4 @@
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 
 // Newest updated_at across the three tables whose rows change when the game
 // data does. Read as a freshness signal, not a claim -- if the column stops
@@ -7,7 +7,7 @@ import { supabaseBrowser } from '@/lib/supabase';
 // never to a failed render.
 export async function getLastUpdated(): Promise<string | null> {
   try {
-    const db = supabaseBrowser();
+    const db = supabaseRead();
     const [m, i, q] = await Promise.all([
       db.from('monsters').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),
       db.from('items').select('updated_at').order('updated_at', { ascending: false }).limit(1).maybeSingle(),

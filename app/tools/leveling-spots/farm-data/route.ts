@@ -5,7 +5,7 @@
 // server: map pictures are found by reading public/ on disk, and channel
 // folding needs the canonical map rule. The player's numbers never reach here.
 
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { mapImage } from '@/lib/map-image';
@@ -19,7 +19,7 @@ import type { FarmData, FarmMonster } from '@/lib/farm-engine/types';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   const [drops, items, monsters, spawns, names, skills, canonical] = await Promise.all([
     fetchAllRows<{ monster_id: number; item_id: number; rate: number | null }>((from, to) =>

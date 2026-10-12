@@ -14,7 +14,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import eventPorings from '@/data/raw/event-porings.json';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import AdSlot from '@/components/AdSlot';
 
 export const revalidate = 86400;
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 // Icon paths come from the items table, not from a guessed filename: half of
 // these are .png, and guessing .gif drew nine broken images (23 Sep 2026).
 async function iconsFor(ids: number[]): Promise<Map<number, string>> {
-  const { data, error } = await supabaseBrowser().from('items').select('id, icon_url').in('id', ids);
+  const { data, error } = await supabaseRead().from('items').select('id, icon_url').in('id', ids);
   if (error) console.error('guild guide icons failed', error);
   return new Map((data ?? []).filter((row) => row.icon_url).map((row) => [row.id as number, row.icon_url as string]));
 }

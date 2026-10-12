@@ -12,7 +12,7 @@
 
 import { itemFormerNames } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isCVariant } from '@/lib/c-variant';
 import { itemHref } from '@/lib/item-href';
@@ -46,7 +46,7 @@ function itemKind(category: string | null): SearchKind {
 }
 
 export async function loadCatalog(): Promise<CatalogEntry[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const out: CatalogEntry[] = [];
 
   const { data: monsters, error: monstersError } = await db

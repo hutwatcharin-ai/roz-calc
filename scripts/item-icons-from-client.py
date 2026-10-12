@@ -37,7 +37,7 @@ def env():
 
 def rest(path, method='GET', body=None, service=False):
     e = env()
-    key = e['SUPABASE_SERVICE_ROLE_KEY'] if service else e['NEXT_PUBLIC_SUPABASE_ANON_KEY']
+    key = e['SUPABASE_SERVICE_ROLE_KEY'] if service else e['SUPABASE_SERVICE_ROLE_KEY']
     req = urllib.request.Request(
         f"{e['NEXT_PUBLIC_SUPABASE_URL']}/rest/v1/{path}", method=method,
         data=json.dumps(body).encode() if body is not None else None,

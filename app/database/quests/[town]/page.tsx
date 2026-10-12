@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { npcsForQuest } from '@/lib/npcs';
 import { naviCommand } from '@/lib/rozglobal-guides';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
@@ -67,7 +67,7 @@ export default async function QuestTownPage({
   params: { town: string };
   searchParams: { type?: string };
 }) {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data, error } = await db
     .from('quests')
     .select('id, name, name_th, map_code, coord_x, coord_y, zone, type, objective, objective_th, description, description_th, chain_name, chain_next_id, reward_base_exp, reward_job_exp, reward_zeny')

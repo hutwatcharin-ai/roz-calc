@@ -1,6 +1,6 @@
 import './page.css';
 import siteUpdates from '@/data/site-updates.json';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import FarmingTable from '@/components/FarmingTable';
 import Link from 'next/link';
 import SiteStats, { getSiteStats } from '@/components/SiteStats';
@@ -30,7 +30,7 @@ export const metadata = {
 };
 
 async function getFarmingRows(minLevel: number, maxLevel: number, showC: boolean) {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   let query = db
     .from('monster_farming_stats')
     .select('*')

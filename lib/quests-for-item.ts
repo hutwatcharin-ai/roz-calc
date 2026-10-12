@@ -11,7 +11,7 @@
 // pirates"), and matching that to a row in the monsters table produced wrong
 // answers more often than right ones, so it is not published at all.
 
-import { supabaseBrowser } from './supabase';
+import { supabaseRead } from './supabase';
 
 export interface QuestNeedingItem {
   id: number;
@@ -34,7 +34,7 @@ export function referencesItem(text: string | null | undefined, itemId: number):
 
 export async function questsForItem(itemId: number): Promise<QuestNeedingItem[]> {
   const like = `%]${itemId}%`;
-  const { data, error } = await supabaseBrowser()
+  const { data, error } = await supabaseRead()
     .from('quests')
     .select('id, name, name_th, town_key, objective, objective_th, description, description_th')
     .or(`objective.ilike.${like},objective_th.ilike.${like},description.ilike.${like},description_th.ilike.${like}`)

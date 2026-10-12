@@ -18,7 +18,7 @@ import { isBound } from '@/lib/bound-items';
 import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
@@ -67,7 +67,7 @@ export default async function CostumesPage({
   const sort = (searchParams.sort ?? 'name') in SORTS ? ((searchParams.sort ?? 'name') as keyof typeof SORTS) : 'name';
   const showBound = searchParams.bound === '1';
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   // Paginated: 1,634 costume rows on 11 Sep 2026, past PostgREST's silent
   // 1,000-row cap.

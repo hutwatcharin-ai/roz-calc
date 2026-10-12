@@ -7,7 +7,7 @@
 // ~340 monsters are.
 
 import { NextResponse } from 'next/server';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { itemHref, GEAR_CATEGORIES, COSTUME_CATEGORY, CARD_CATEGORY } from '@/lib/item-href';
@@ -53,7 +53,7 @@ interface MonsterRow {
 // TBT 790 ms on /database/monsters). The C and Mj copies are left out; the
 // list's own switches still show them after Enter.
 async function monsterEntries(): Promise<SuggestEntry[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data, error } = await fetchAllRows<MonsterRow>((from, to) => {
     let q = db.from('monsters').select('id, name_en, level, is_mvp, race, element, image_url').not('name_en', C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE);
     for (const pattern of INSTANCE_VARIANT_SQL_NOT_LIKE) q = q.not('name_en', 'like', pattern);
@@ -83,7 +83,7 @@ async function monsterEntries(): Promise<SuggestEntry[]> {
 // several items share show their slots so the player picks the copy that
 // drops.
 async function dropEntries(): Promise<SuggestEntry[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data: drops, error: dropsError } = await fetchAllRows<{ id: number; item_id: number }>((from, to) =>
     db.from('monster_drops').select('id, item_id').order('id').range(from, to),
   );
@@ -141,7 +141,7 @@ export async function GET(_request: Request, { params }: { params: { kind: strin
   if (params.kind === 'drops') return NextResponse.json(await dropEntries(), { headers: HEADERS });
   if (!(params.kind in KINDS)) return NextResponse.json([], { status: 404 });
   const kind = params.kind as Kind;
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data, error } = await fetchAllRows<Row>((from, to) =>
     db
       .from('items')

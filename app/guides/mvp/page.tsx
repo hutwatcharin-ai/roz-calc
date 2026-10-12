@@ -27,7 +27,7 @@ import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import availability from '@/data/map-availability.json';
 
 export const revalidate = 86400;
@@ -52,7 +52,7 @@ const PVP_MAPS: { group: string; codes: string[] }[] = [
 type Mvp = { id: number; name: string; level: number; image: string | null; element: string | null; open: boolean };
 
 async function loadMvps(): Promise<Mvp[]> {
-  const { data } = await supabaseBrowser()
+  const { data } = await supabaseRead()
     .from('monsters')
     .select('id, name_en, level, image_url, element, monster_spawns(map_code)')
     .eq('is_mvp', true)

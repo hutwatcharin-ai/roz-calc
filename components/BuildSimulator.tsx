@@ -29,7 +29,6 @@ import { foodText, foodById } from '@/lib/food-buffs';
 import { bonusText, refineBonusAt } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
-import { supabaseBrowser } from '@/lib/supabase';
 import { dollBody, dollHat, dollSex, dollShield, dollStance, dollWeapon, type Sex } from '@/lib/build-doll';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import foodFile from '@/data/food-buffs.json';
@@ -314,11 +313,17 @@ export default function BuildSimulator({ initial, sharedId }: {
   }
 
   async function loadMonster(id: number) {
-    const { data, error } = await supabaseBrowser()
-      .from('monsters')
-      .select('id, name_en, level, vit, def, mdef, int_, luk, hp, size, element, element_level, race, is_mvp, hit_100, flee_95, image_url')
-      .eq('id', id)
-      .maybeSingle();
+    // Read through app/api/monster since 12 Oct 2026: the browser holds no
+    // database key any more.
+    let data: any = null;
+    let error: unknown = null;
+    try {
+      const res = await fetch(`/api/monster/${id}`);
+      if (res.ok) data = await res.json();
+      else if (res.status !== 404) error = new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      error = err;
+    }
     if (error || !data) {
       if (error) console.error('build: monster lookup failed', error);
       return;

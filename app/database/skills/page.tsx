@@ -2,7 +2,7 @@
 import skillExtra from '@/data/skill-level-extra.json';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
@@ -59,7 +59,7 @@ function secs(ms: number | null | undefined): string {
 // allIds() throws on. This page renders its own error state instead of
 // throwing, so the failure comes back as a flag rather than an exception.
 async function allSkills(): Promise<{ skills: any[]; error: boolean }> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const rows: any[] = [];
 
   for (let from = 0; ; from += FETCH_PAGE) {
@@ -172,7 +172,7 @@ export default async function SkillsPage({
   // than with an empty one.
   const levelsBySkill = new Map<string, SkillLevel[]>();
   if (rows.length > 0) {
-    const { data: levelRows, error: levelsError } = await supabaseBrowser()
+    const { data: levelRows, error: levelsError } = await supabaseRead()
       .from('skill_levels')
       .select('skill_slug, level, effect, sp_cost, attack_range, cast_time_ms, cooldown_ms')
       .in('skill_slug', rows.map((s) => s.slug))

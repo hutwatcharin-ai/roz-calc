@@ -6,7 +6,7 @@
 
 import './page.css';
 import Link from 'next/link';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import { escapeLikePattern } from '@/lib/like-escape';
@@ -35,7 +35,7 @@ export default async function QuestIndexPage({
   searchParams: { q?: string };
 }) {
   const q = searchParams.q ?? '';
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   // Hub cards come from grouping the whole table; 766 rows is one query.
   const { data: quests, error } = await db

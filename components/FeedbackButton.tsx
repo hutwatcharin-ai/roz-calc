@@ -11,10 +11,19 @@ export default function FeedbackButton({ pageType, entityId }: { pageType: strin
 
   async function submit() {
     setFailed(false);
-    // Imported on submit so the client is not in the page's first load.
-    const { supabaseBrowser } = await import('@/lib/supabase');
-    const db = supabaseBrowser();
-    const { error } = await db.from('feedback_reports').insert({ page_type: pageType, entity_id: entityId, message });
+    // Stored through app/api/feedback since 12 Oct 2026: the browser holds
+    // no database key any more.
+    let error: unknown = null;
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pageType, entityId, message }),
+      });
+      if (!res.ok) error = new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      error = err;
+    }
     if (error) {
       console.error('feedback insert failed', error);
       setFailed(true);

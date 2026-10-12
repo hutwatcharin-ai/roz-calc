@@ -1,6 +1,6 @@
 // app/drop-finder/page.tsx
 import { isAbsentFromGame } from '@/lib/game-absent';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import DropSearch from '@/components/DropSearch';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
@@ -21,7 +21,7 @@ export const metadata = {
 // 460071; only one drops). On a drop-finder, the candidate that has drops is
 // always the one the player means, so ties resolve toward it.
 async function pickDroppable(
-  db: ReturnType<typeof supabaseBrowser>,
+  db: ReturnType<typeof supabaseRead>,
   candidates: { id: number; name_en: string; slots?: number | null }[],
 ) {
   if (candidates.length === 1) return candidates[0];
@@ -37,7 +37,7 @@ async function pickDroppable(
   return candidates.find((c) => withDrops.has(c.id)) ?? candidates[0];
 }
 
-async function resolveItem(db: ReturnType<typeof supabaseBrowser>, query: string) {
+async function resolveItem(db: ReturnType<typeof supabaseRead>, query: string) {
   const needle = escapeLikePattern(query);
   const { data: exact, error: exactError } = await db
     .from('items')
@@ -84,7 +84,7 @@ interface Choice {
 async function findDrops(query: string, itemId: number | null) {
   const none = { resolvedName: null, resolvedInputName: null, resolvedId: null, rows: [], choices: [] as Choice[] };
   if (!query && !itemId) return none;
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   // An explicit id (starter-table links) skips name resolution entirely:
   // same-name items make a name round-trip ambiguous.
@@ -179,7 +179,7 @@ interface StarterItem {
 }
 
 async function starterList(): Promise<StarterItem[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data: items, error } = await fetchAllRows<{
     id: number;
     name_en: string;

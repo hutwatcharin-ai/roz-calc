@@ -30,7 +30,7 @@ def env(name):
 
 
 def ours():
-    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY')
     rows, start = {}, 0
     while True:
         req = urllib.request.Request(

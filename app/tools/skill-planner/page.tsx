@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
 import SkillPlanner from '@/components/SkillPlanner';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import type { SkillLevelMap } from '@/lib/skill-details';
 import JsonLd from '@/components/JsonLd';
@@ -18,7 +18,7 @@ export const revalidate = 86400;
 async function skillIcons(): Promise<Record<string, string>> {
   const icons: Record<string, string> = {};
   for (let from = 0; ; from += 1000) {
-    const { data, error } = await supabaseBrowser()
+    const { data, error } = await supabaseRead()
       .from('skills')
       .select('slug, icon_url')
       .order('slug')
@@ -41,7 +41,7 @@ async function skillIcons(): Promise<Record<string, string>> {
 // maps instead of a query: 339 of the tree's 341 skills have per-level rows
 // and 259 have a Thai description.
 async function skillDetails(): Promise<{ levels: SkillLevelMap; descriptions: Record<string, string> }> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const levels: SkillLevelMap = {};
   const descriptions: Record<string, string> = {};
 

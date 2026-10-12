@@ -12,7 +12,7 @@ import {
   type WorldMapEntry,
   type WorldMapSpawnRow,
 } from '@/lib/world-map';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { mapImage } from '@/lib/map-image';
 import { mapRelease } from '@/lib/map-availability';
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 const TILE_CODES = new Set(WORLD_MAP_CODES);
 
 export default async function WorldMapPage() {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const [{ data: mapRows, error: mapsError }, canonical] = await Promise.all([
     fetchAllRows<{ map_code: string; map_display_name: string | null }>((from, to) =>
       db.from('map_stats').select('map_code, map_display_name').order('map_code').range(from, to),

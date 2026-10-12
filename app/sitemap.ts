@@ -1,7 +1,7 @@
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { PASSAGES, TOWNS } from '@/lib/towns';
 import type { MetadataRoute } from 'next';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 import { itemHref } from '@/lib/item-href';
@@ -78,7 +78,7 @@ interface IdRow {
 // true, so nothing here is written until the column exists and is
 // maintained by the actual write path.
 async function allIds(table: 'monsters' | 'items'): Promise<IdRow[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const rows: IdRow[] = [];
 
   for (let from = 0; ; from += PAGE) {
@@ -112,7 +112,7 @@ async function allIds(table: 'monsters' | 'items'): Promise<IdRow[]> {
 // wave that grows past it doesn't silently drop URLs the way a plain
 // select() would.
 async function allMapCodes(): Promise<string[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const codes: string[] = [];
 
   for (let from = 0; ; from += PAGE) {
@@ -139,7 +139,7 @@ async function allMapCodes(): Promise<string[]> {
 // lastmod per hub is the newest updated_at among the quests folded into it --
 // a hub page's content changes the day any quest in it does.
 async function allQuestTowns(): Promise<Map<string, string>> {
-  const { data, error } = await supabaseBrowser().from('quests').select('town_key, updated_at').order('town_key');
+  const { data, error } = await supabaseRead().from('quests').select('town_key, updated_at').order('town_key');
   if (error) throw new Error(`sitemap: quests query failed: ${error.message}`);
   const latest = new Map<string, string>();
   for (const row of data ?? []) {

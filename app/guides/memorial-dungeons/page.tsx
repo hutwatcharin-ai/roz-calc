@@ -31,7 +31,7 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import ItemIcon from '@/components/ItemIcon';
 import { itemHref } from '@/lib/item-href';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { ELEMENTS, elementModifier, type Element, type ElementLevel } from '@/lib/element-table';
 import file from '@/data/memorial-dungeons.json';
@@ -166,7 +166,7 @@ export default async function MemorialDungeonsPage() {
   // name in the file resolved on 9 Sep 2026; one that stops resolving renders
   // as plain text rather than vanishing.
   const { data: itemRows } = await fetchAllRows<{ id: number; name_en: string; icon_url: string | null }>(
-    (from, to) => supabaseBrowser().from('items').select('id, name_en, icon_url').order('id').range(from, to),
+    (from, to) => supabaseRead().from('items').select('id, name_en, icon_url').order('id').range(from, to),
   );
   const items = new Map((itemRows ?? []).flatMap((i) => itemNamesOf(i).map((n) => [n.toLowerCase(), i] as const)));
   const reward = (name: string) => items.get(name.toLowerCase()) ?? null;

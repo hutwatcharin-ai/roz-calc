@@ -9,7 +9,7 @@ import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
 import { redirect } from 'next/navigation';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -84,7 +84,7 @@ export default async function ItemListPage({
   // name.
   const role = isItemRole(searchParams.use) ? searchParams.use : '';
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   let query = db.from('items').select('id, name_en, category, weapon_type, icon_url', { count: 'exact' });
 
   if (q) {

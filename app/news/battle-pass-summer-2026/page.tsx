@@ -14,7 +14,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ItemIcon from '@/components/ItemIcon';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { itemHref } from '@/lib/item-href';
 import {
   BATTLE_PASS_ITEM_ID,
@@ -46,7 +46,7 @@ export const revalidate = 3600;
 /** Icons come from our own table, so a row still reads correctly without them. */
 async function loadIcons(): Promise<Map<number, { icon_url: string | null; category: string | null }>> {
   const ids = itemIdsIn(FREE_TRACK, PAID_TRACK);
-  const { data, error } = await supabaseBrowser().from('items').select('id, icon_url, category').in('id', ids);
+  const { data, error } = await supabaseRead().from('items').select('id, icon_url, category').in('id', ids);
   if (error) {
     console.error('battle pass icon query failed', error);
     return new Map();

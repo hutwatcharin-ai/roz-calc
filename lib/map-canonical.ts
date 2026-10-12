@@ -8,7 +8,7 @@
 // and the sitemap -- pay for the two queries once.
 
 import * as React from 'react';
-import { supabaseBrowser } from './supabase';
+import { supabaseRead } from './supabase';
 import { fetchAllRows } from './fetch-all-rows';
 import { canonicalByCode, groupMapVariants, type MapGroup, type MapRow } from './map-variants';
 
@@ -29,7 +29,7 @@ const dedupe =
   (<T extends (...args: never[]) => unknown>(fn: T) => fn);
 
 export const getMapCanonical = dedupe(async (): Promise<MapCanonical> => {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   const { data: maps, error: mapsError } = await fetchAllRows<MapRow>((from, to) =>
     db.from('map_stats').select('map_code, map_display_name').order('map_code').range(from, to),

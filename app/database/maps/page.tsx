@@ -3,7 +3,7 @@ import './page.css';
 import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { mapImage } from '@/lib/map-image';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { getMapCanonical } from '@/lib/map-canonical';
 import PageHeader from '@/components/PageHeader';
@@ -38,7 +38,7 @@ export default async function MapsPage({
   } as const;
   const sort = (searchParams.sort ?? 'monsters') in SORTS ? ((searchParams.sort ?? 'monsters') as keyof typeof SORTS) : 'monsters';
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   // 497 rows, well inside the 1,000-row cap, so this fetches the set and pages
   // in memory like the other list pages. It used to page in SQL, which needed

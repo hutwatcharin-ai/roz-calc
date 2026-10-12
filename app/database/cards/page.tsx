@@ -22,7 +22,7 @@ import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
 import { cardRelease, releaseText } from '@/lib/card-availability';
 import { CARDS_WITHOUT_ART, cardArtAlt, cardArtThumbUrl, hasCardArt } from '@/lib/card-art';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -78,7 +78,7 @@ export default async function CardsPage({
   } as const;
   const sort = (searchParams.sort ?? 'name') in SORTS ? ((searchParams.sort ?? 'name') as keyof typeof SORTS) : 'name';
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   // Slot lives inside description text, so it cannot be filtered in SQL. 289
   // rows is far under the 1,000-row cap, so the whole set is fetched once and

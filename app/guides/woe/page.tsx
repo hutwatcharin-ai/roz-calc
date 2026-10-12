@@ -19,7 +19,7 @@ import AdSlot from '@/components/AdSlot';
 import woe from '@/data/woe-items.json';
 import castleFile from '@/data/woe-castles.json';
 import { itemHref } from '@/lib/item-href';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 
@@ -99,7 +99,7 @@ const ALL_IDS = [
 // Category decides which of the four detail routes a row belongs to, and the
 // icon path is read, never guessed -- half of them are .png (23 Sep 2026).
 async function rowsById(ids: number[]) {
-  const { data, error } = await supabaseBrowser().from('items').select('id, icon_url, category').in('id', ids);
+  const { data, error } = await supabaseRead().from('items').select('id, icon_url, category').in('id', ids);
   if (error) console.error('woe guide lookup failed', error);
   return new Map(
     (data ?? []).map((row) => [row.id as number, { icon: (row.icon_url as string) ?? null, category: row.category as string | null }]),

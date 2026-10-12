@@ -18,7 +18,7 @@ import Link from 'next/link';
 import RecordVisit from '@/components/RecordVisit';
 import ItemIcon from '@/components/ItemIcon';
 // app/database/items/[id]/page.tsx
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
@@ -57,7 +57,7 @@ const getItem = cache(async (id: number) => {
   // Short-circuit to the same shape a clean "not found" query already
   // returns, so it 404s through the existing !item check instead.
   if (Number.isNaN(id)) return { data: null, error: null } as const;
-  return await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
+  return await supabaseRead().from('items').select('*').eq('id', id).maybeSingle();
 });
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -100,7 +100,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 }
 
 export default async function ItemDetailPage({ params }: { params: { id: string } }) {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const id = Number(params.id);
 
   // maybeSingle (not single): a missing id must come back as data:null with no

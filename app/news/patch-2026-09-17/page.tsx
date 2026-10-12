@@ -18,7 +18,7 @@ import MonsterLink from '@/components/MonsterLink';
 import ItemIcon from '@/components/ItemIcon';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 
 export const revalidate = 3600;
 
@@ -169,7 +169,7 @@ function DungeonTable({ title, codes, spawns }: { title: string; codes: string[]
 }
 
 export default async function Patch20260917Page() {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const [mvps, drops, raidSpawns, dungeonSpawns, beer] = await Promise.all([
     db.from('monsters').select('id, name_en, level, hp, element, element_level, race, size, def, mdef').in('id', MVP_IDS),
     db.from('monster_drops').select('monster_id, rate, items(id, name_en, category, icon_url)').in('monster_id', MVP_IDS),

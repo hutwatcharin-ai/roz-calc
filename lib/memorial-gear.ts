@@ -17,7 +17,7 @@ import { gameThaiDescription } from '@/lib/game-items';
 import handThai from '@/data/memorial-gear-th.json';
 import { itemFormerNames } from '@/lib/item-former-names';
 import file from '@/data/memorial-gear.json';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { BASE_LEVEL_CAP } from '@/lib/level-cap';
 
@@ -122,7 +122,7 @@ function key(name: string): string {
  * visible on the page instead of quietly shrinking it.
  */
 export async function loadMemorialGear(): Promise<{ ranks: GearRank[]; items: Map<string, GearPiece>; failed: boolean }> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data, error } = await fetchAllRows<{
     id: number;
     name_en: string;

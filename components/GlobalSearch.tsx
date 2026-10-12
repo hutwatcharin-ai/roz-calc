@@ -18,10 +18,7 @@ import { useRouter } from 'next/navigation';
 import { highlightParts } from '@/lib/suggest';
 import { monsterLabel } from '@/lib/monster-known-as';
 import { mergeSearchResults, SEARCH_TYPE_LABELS, type SearchResult } from '@/lib/search';
-import { escapeLikePattern } from '@/lib/like-escape';
-import { matchScore, searchWords } from '@/lib/smart-search';
-
-const LIMIT_PER_KIND = 5;
+import { matchScore } from '@/lib/smart-search';
 
 // The arcade tag per kind (owner, 1 Oct 2026: the header search in the same
 // "SELECT ..." look as the list boxes). English caps like a cabinet's menu;
@@ -90,64 +87,28 @@ export default function GlobalSearch() {
 
     setLoading(true);
     const timer = setTimeout(async () => {
-      // Loaded here, not at the top: this component sits in the site's nav,
-      // so importing supabase-js normally shipped 49 kB of it to every page
-      // for a client that only runs once someone types (Lighthouse, 23 Sep
-      // 2026: 46 kB of it unused).
-      const { supabaseBrowser } = await import('@/lib/supabase');
-      const db = supabaseBrowser();
-      const words = searchWords(query);
-      // Every word has to appear, in any order: "card poring" finds Poring
-      // Card, which a single `%card poring%` never could.
-      const allWords = <T,>(q: T, column: string): T => {
-        let out = q;
-        for (const word of words) {
-          out = (out as { ilike: (c: string, p: string) => T }).ilike(
-            column,
-            `%${escapeLikePattern(word)}%`,
-          );
-        }
-        return out;
-      };
-
-      const [monsters, items, cards, equipment, costumes, skills, maps] = await Promise.all([
-        allWords(db.from('monsters').select('id, name_en, image_url'), 'name_en').limit(LIMIT_PER_KIND),
-        // Items excludes cards and equipment so the same row cannot appear
-        // twice under two different badges.
-        allWords(
-          db
-            .from('items')
-            .select('id, name_en, icon_url')
-            .not('category', 'in', '("Card","Armor","Weapon","Costume Equipment")'),
-          'name_en',
-        ).limit(LIMIT_PER_KIND),
-        allWords(db.from('items').select('id, name_en, icon_url').eq('category', 'Card'), 'name_en').limit(LIMIT_PER_KIND),
-        allWords(db.from('items').select('id, name_en, icon_url').in('category', ['Armor', 'Weapon']), 'name_en').limit(LIMIT_PER_KIND),
-        // Costumes are their own group, not gear: they outnumber real
-        // equipment 940 to 875, so sharing one bucket of five meant a search
-        // for "wing" could return nothing a player can fight in.
-        allWords(db.from('items').select('id, name_en, icon_url').eq('category', 'Costume Equipment'), 'name_en').limit(LIMIT_PER_KIND),
-        // classes is fetched so mergeSearchResults can route a skill to the
-        // tab it actually lives on (isInGameSkill(classes)) instead of always
-        // landing on the default "ingame" tab, which 511 of 851 skills fail.
-        allWords(db.from('skills').select('slug, name, icon_url, classes'), 'name').limit(LIMIT_PER_KIND),
-        // map_stats is one row per map already, so no de-duplication is
-        // needed here the way monster_spawns would have required.
-        allWords(db.from('map_stats').select('map_code, map_display_name'), 'search_text').limit(LIMIT_PER_KIND),
-      ]);
-
-      const failures = [monsters, items, cards, equipment, costumes, skills, maps].filter((r) => r.error);
-      for (const f of failures) console.error('global search: a query failed', f.error);
-      setHasError(failures.length > 0);
+      // The lookups run on the server (app/api/search) since 12 Oct 2026, so
+      // the browser holds no database key and ships no supabase-js at all.
+      let groups: Record<string, any[]> = {};
+      let failed = 0;
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        ({ groups, failed } = await res.json());
+      } catch (err) {
+        console.error('global search: request failed', err);
+        failed = 7;
+      }
+      setHasError(failed > 0);
 
       const merged = mergeSearchResults({
-        monsters: monsters.data ?? [],
-        items: items.data ?? [],
-        cards: cards.data ?? [],
-        equipment: equipment.data ?? [],
-        costumes: costumes.data ?? [],
-        skills: skills.data ?? [],
-        maps: maps.data ?? [],
+        monsters: groups.monsters ?? [],
+        items: groups.items ?? [],
+        cards: groups.cards ?? [],
+        equipment: groups.equipment ?? [],
+        costumes: groups.costumes ?? [],
+        skills: groups.skills ?? [],
+        maps: groups.maps ?? [],
       });
       // Best name first across all seven groups, so "orc" opens on Orc and
       // not on whichever category happened to be listed first. Ties go to

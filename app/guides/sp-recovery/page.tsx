@@ -23,7 +23,7 @@ import JsonLd from '@/components/JsonLd';
 import AdSlot from '@/components/AdSlot';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { isCVariant, isInstanceVariant, isMjVariant } from '@/lib/c-variant';
 
 export const revalidate = 86400;
@@ -89,7 +89,7 @@ const SP_REGEN_INT = [1, 30, 50, 70, 90];
 const SP_REGEN_MAXSP = [200, 400, 600, 800];
 
 export default async function SpRecoveryPage() {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data, error } = await db
     .from('monster_drops')
     .select('item_id, rate, monsters(id, name_en, level, image_url)')

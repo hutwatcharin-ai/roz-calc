@@ -18,8 +18,8 @@ import fs from 'node:fs';
 import { cardSlot } from '../lib/card-roles';
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-if (!url || !key) throw new Error('export NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY first');
+const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+if (!url || !key) throw new Error('export NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY first');
 
 const res = await fetch(`${url}/rest/v1/items?select=id,name_en,description&category=eq.Card&limit=1000`, {
   headers: { apikey: key, Authorization: `Bearer ${key}` },

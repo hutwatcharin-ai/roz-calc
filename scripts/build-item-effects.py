@@ -136,7 +136,7 @@ def env(name):
 
 def our_cards():
     import urllib.request
-    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY')
     req = urllib.request.Request(f'{url}/rest/v1/items?select=id,description&category=eq.Card&limit=2000',
                                  headers={'apikey': key, 'Authorization': f'Bearer {key}'})
     return json.load(urllib.request.urlopen(req))

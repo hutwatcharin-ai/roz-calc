@@ -3,7 +3,7 @@
 // differs, so the queries live here rather than being copied per route.
 
 import { cache } from 'react';
-import { supabaseBrowser } from './supabase';
+import { supabaseRead } from './supabase';
 import { fetchAllRows } from './fetch-all-rows';
 import { gearCategory, gearType } from './gear-type';
 import { isAbsentFromGame } from './game-absent';
@@ -25,7 +25,7 @@ export const getGearItem = cache(async (id: number) => {
   // Short-circuit to the same shape a clean "not found" query already
   // returns, so it 404s through the existing !data check instead.
   if (Number.isNaN(id)) return { data: null, error: null } as const;
-  const result = await supabaseBrowser().from('items').select('*').eq('id', id).maybeSingle();
+  const result = await supabaseRead().from('items').select('*').eq('id', id).maybeSingle();
   if (!result.data) return result;
   return {
     ...result,
@@ -50,7 +50,7 @@ export interface GearExtras {
 }
 
 export async function loadGearExtras(id: number, name?: string): Promise<GearExtras> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   const { data: sameName, error: sameNameError } = name
     ? await db.from('items').select('id, slots, category').eq('name_en', name).neq('id', id).in('category', ['Weapon', 'Armor', 'Costume Equipment']).order('id')

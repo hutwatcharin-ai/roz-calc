@@ -38,7 +38,7 @@ def site_map_codes():
     e = env()
     req = urllib.request.Request(
         f"{e['NEXT_PUBLIC_SUPABASE_URL']}/rest/v1/map_stats?select=map_code,map_display_name&limit=2000",
-        headers={'apikey': e['NEXT_PUBLIC_SUPABASE_ANON_KEY'], 'Authorization': 'Bearer ' + e['NEXT_PUBLIC_SUPABASE_ANON_KEY']},
+        headers={'apikey': e['SUPABASE_SERVICE_ROLE_KEY'], 'Authorization': 'Bearer ' + e['SUPABASE_SERVICE_ROLE_KEY']},
     )
     return {r['map_code']: r.get('map_display_name') for r in json.load(urllib.request.urlopen(req))}
 

@@ -18,7 +18,7 @@
 // never checked. Those keep their literal and gain a date instead.
 
 import { cache } from 'react';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { C_VARIANT_SQL_OP, C_VARIANT_SQL_NOT_LIKE, INSTANCE_VARIANT_SQL_NOT_LIKE } from '@/lib/c-variant';
 
 export interface MonsterCounts {
@@ -49,7 +49,7 @@ export interface MonsterCounts {
  * the thing this module exists to keep honest.
  */
 export const monsterCounts = cache(async (): Promise<MonsterCounts> => {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const [total, listed, noChallenge, missing, mj] = await Promise.all([
     db.from('monsters').select('id', { count: 'exact', head: true }),
     INSTANCE_VARIANT_SQL_NOT_LIKE.reduce(

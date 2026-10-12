@@ -7,7 +7,7 @@
 // shop layout filtered to this game's maps; its own _meta says the NPCs are
 // unverified for Zero, so the calculator words it as "listed", not "sold".
 
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { rankDrops } from '@/lib/drop-rank';
 import { mapRelease } from '@/lib/map-availability';
@@ -30,7 +30,7 @@ export async function materialSources(ids: number[]): Promise<Record<number, Mat
   for (const id of want) out[id] = { monster: null, rate: null, map: null, killsPerItem: null, shop: SHOP_IDS.has(id) };
   if (!want.length) return out;
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data: drops, error } = await fetchAllRows<any>((from, to) =>
     db
       .from('monster_drops')

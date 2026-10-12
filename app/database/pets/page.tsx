@@ -33,7 +33,7 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { matches } from '@/lib/smart-search';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { naviCommand, qpetFor, rozglobalGuides } from '@/lib/rozglobal-guides';
 import { LEVEL_2_SUCCESS_PERCENT, RING_TABS, TAMING_QUEST, TAMING_RING_PRICE } from '@/lib/qpet-ring';
 
@@ -58,7 +58,7 @@ interface PetRow {
 export default async function PetsDatabasePage({ searchParams }: { searchParams: { q?: string } }) {
   const q = (searchParams.q ?? '').trim();
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   // 54 rows in the whole Pet category, so one select covers it.
   const { data, error } = await db
     .from('items')

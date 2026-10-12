@@ -6,7 +6,7 @@
 // adds one.
 
 import Link from 'next/link';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { COSTUME_CATEGORY, GEAR_CATEGORIES } from '@/lib/item-href';
 
 export interface SiteStat {
@@ -20,7 +20,7 @@ export interface SiteStat {
 // head: true asks PostgREST for the count header with no rows at all, so six
 // counts cost six empty responses rather than six full tables.
 export async function getSiteStats(): Promise<SiteStat[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   const [monsters, items, cards, equipment, costumes, skills, maps] = await Promise.all([
     db.from('monsters').select('id', { count: 'exact', head: true }),

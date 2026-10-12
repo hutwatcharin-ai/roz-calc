@@ -8,7 +8,7 @@ import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { matches } from '@/lib/smart-search';
 import JsonLd from '@/components/JsonLd';
 import { itemListJsonLd } from '@/lib/jsonld';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import Pagination from '@/components/Pagination';
@@ -77,7 +77,7 @@ export default async function EquipmentPage({
   // (owner, 6 Oct 2026). Strongest first while it is on.
   const fx = effectFilter(searchParams.fx);
 
-  const db = supabaseBrowser();
+  const db = supabaseRead();
 
   // 875 rows since costumes moved out, under PostgREST's silent 1,000-row cap
   // -- but it stays paginated (fetchAllRows), because a cap that truncates

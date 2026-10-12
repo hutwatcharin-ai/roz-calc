@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { naviCommand } from '@/lib/rozglobal-guides';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import ItemIcon from '@/components/ItemIcon';
 import { itemHref } from '@/lib/item-href';
 import { ALL_NPCS, npcBySlug, questKey } from '@/lib/npcs';
@@ -46,7 +46,7 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
   // it is done here rather than in SQL: the source writes curly apostrophes.
   const names = npc.quests.map((quest) => quest.name);
   const { data: questRows, error } = names.length
-    ? await supabaseBrowser().from('quests').select('id, name, name_th, town_key, type').in('name', names)
+    ? await supabaseRead().from('quests').select('id, name, name_th, town_key, type').in('name', names)
     : { data: [], error: null };
   if (error) console.error('npc quest lookup failed', error);
   const ours = new Map((questRows ?? []).map((row) => [questKey(row.name), row]));
@@ -57,13 +57,13 @@ export default async function NpcDetailPage({ params }: { params: { slug: string
   // field and dungeon and no town. So the link is offered where there is one
   // and the code stays plain text where there is not.
   const { data: mapRow } = npc.map
-    ? await supabaseBrowser().from('map_stats').select('map_code').eq('map_code', npc.map).maybeSingle()
+    ? await supabaseRead().from('map_stats').select('map_code').eq('map_code', npc.map).maybeSingle()
     : { data: null };
   const mapHref = mapRow ? `/database/maps/${encodeURIComponent(npc.map as string)}` : null;
 
   // What a shopkeeper sells, with the icons the item pages already use.
   const { data: goods, error: goodsError } = npc.sells.length
-    ? await supabaseBrowser().from('items').select('id, name_en, category, icon_url').in('id', npc.sells)
+    ? await supabaseRead().from('items').select('id, name_en, category, icon_url').in('id', npc.sells)
     : { data: [], error: null };
   if (goodsError) console.error('npc goods lookup failed', goodsError);
   const sells = (goods ?? []).sort((a, b) => a.name_en.localeCompare(b.name_en));

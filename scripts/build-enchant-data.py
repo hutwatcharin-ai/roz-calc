@@ -56,7 +56,7 @@ for path in sorted(glob.glob(os.path.join(SRC, '*.json'))):
     stones[str(iid)] = {'n': name, 'k': kind}
 
 # Names and icons as our own pages show them.
-url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY')
 ids = list(stones)
 for i in range(0, len(ids), 150):
     req = urllib.request.Request(

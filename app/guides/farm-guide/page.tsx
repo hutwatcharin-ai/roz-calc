@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import MonsterLink from '@/components/MonsterLink';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import AggroBadge from '@/components/AggroBadge';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
@@ -48,7 +48,7 @@ interface FarmRow {
 }
 
 export default async function FarmGuidePage() {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const counts = await monsterCounts();
   const { data: rowsData, error: rowsError } = await fetchAllRows<FarmRow>((from, to) =>
     db

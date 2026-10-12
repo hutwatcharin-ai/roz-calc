@@ -40,7 +40,7 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import homun from '@/data/homunculus.json';
 import care from '@/data/homunculus-care.json';
 import { itemHref } from '@/lib/item-href';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 
 export const revalidate = 86400;
 
@@ -152,7 +152,7 @@ function OldRoWarning() {
 }
 
 async function itemMeta(ids: number[]) {
-  const { data, error } = await supabaseBrowser()
+  const { data, error } = await supabaseRead()
     .from('items')
     .select('id, name_en, icon_url, category, buy_price')
     .in('id', ids);

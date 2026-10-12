@@ -18,7 +18,7 @@ import '@/components/craft-calc/craft-calc.css';
 import { materialSources } from '@/lib/material-sources';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { CREATE_ELEMENTAL_CONVERTER, recipesOfSkill } from '@/lib/crafting';
-import { supabaseBrowser } from '@/lib/supabase';
+import { supabaseRead } from '@/lib/supabase';
 import { rankDrops } from '@/lib/drop-rank';
 import { mapRelease } from '@/lib/map-availability';
 import { ELEMENTS, elementModifier, type Element } from '@/lib/element-table';
@@ -56,7 +56,7 @@ interface Dropper {
 }
 
 async function droppersOf(itemId: number): Promise<Dropper[]> {
-  const db = supabaseBrowser();
+  const db = supabaseRead();
   const { data: drops, error } = await db
     .from('monster_drops')
     .select('monster_id, rate, monsters(name_en, level, image_url)')

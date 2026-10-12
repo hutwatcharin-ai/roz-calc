@@ -70,7 +70,7 @@ def table(path, name):
 game = json.load(open(os.path.join(ROOT, 'data', 'game-items.json'), encoding='utf-8'))['items']
 have = set()
 for off in range(0, 20000, 1000):
-    page = http('GET', f'{URL}?select=id&order=id&offset={off}&limit=1000', env['NEXT_PUBLIC_SUPABASE_ANON_KEY'])
+    page = http('GET', f'{URL}?select=id&order=id&offset={off}&limit=1000', env['SUPABASE_SERVICE_ROLE_KEY'])
     have.update(r['id'] for r in page)
     if len(page) < 1000:
         break

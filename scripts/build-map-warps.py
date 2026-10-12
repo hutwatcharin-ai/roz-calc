@@ -46,7 +46,7 @@ def env(name):
 
 def page_codes():
     """Map codes with a page, and the name each page shows."""
-    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY')
     codes, start = {}, 0
     while True:
         req = urllib.request.Request(
@@ -102,7 +102,7 @@ for town in _places['towns'] + _places.get('passages', []):
 def spawn_names():
     """The name a map page shows: monster_spawns.map_display_name ("Orc Village"
     for gef_fild10, where map_stats says only "Geffen Field")."""
-    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+    url, key = env('NEXT_PUBLIC_SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY')
     found, start = {}, 0
     while True:
         req = urllib.request.Request(
