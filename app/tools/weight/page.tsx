@@ -23,11 +23,53 @@ export const metadata: Metadata = {
     'คำนวณน้ำหนักที่แบกได้ใน Ragnarok Zero Global จาก STR อาชีพ Enlarge Weight Limit และ Gym Membership Card แล้วเลือกยา ลูกธนู ปีก หรือไอเทมไหนก็ได้ ดูว่าหนักรวมกี่ % เหลือที่เท่าไหร่ และใส่เพิ่มได้อีกกี่ชิ้นก่อนเกิน 70% (หยุดฟื้น HP/SP) หรือ 90% (ตีไม่ได้)',
 };
 
-// The things players carry on every trip, in the order they reach for them.
-const QUICK_IDS = [501, 502, 503, 504, 505, 506, 533, 578, 548, 645, 656, 610, 601, 602, 1750, 1751, 717];
+// The things players carry on every trip, grouped the way they think of them
+// (owner, 12 Oct 2026). The class group only shows for the classes that use it.
+const GROUPS: { title: string; ids: number[] }[] = [
+  { title: 'ฟื้น HP', ids: [501, 502, 503, 504, 517, 516] },
+  { title: 'ฟื้น SP', ids: [505, 533, 578, 548] },
+  { title: 'ฟื้นทั้งคู่ / แก้สถานะ', ids: [506, 525, 526, 608, 610] },
+  { title: 'บัฟ', ids: [645, 656, 657] },
+  { title: 'เดินทาง', ids: [601, 602] },
+];
+const ARROWS = [1750, 1751, 1752, 1770];
+const CLASS_IDS: Record<string, number[]> = {
+  archer: ARROWS,
+  hunter: [...ARROWS, 1065],
+  bard: ARROWS,
+  dancer: ARROWS,
+  acolyte: [717, 523],
+  priest: [717, 523],
+  mage: [717, 716],
+  wizard: [717, 716, 715],
+  sage: [717, 716, 715],
+  alchemist: [7136, 7135, 7137, 7138, 7139],
+};
+// A starting bag for a bot left out in the field; the numbers are a starting
+// point to edit, not advice tuned per map.
+const KIT_BASE: [number, number][] = [[501, 100], [505, 20], [601, 100], [602, 2]];
+const KIT_CLASS: Record<string, [number, number][]> = {
+  archer: [[1750, 2000]],
+  hunter: [[1750, 2000], [1065, 200]],
+  bard: [[1750, 2000]],
+  dancer: [[1750, 2000]],
+  acolyte: [[717, 20]],
+  priest: [[717, 20]],
+  mage: [[717, 10]],
+  wizard: [[717, 10]],
+  sage: [[717, 10]],
+  alchemist: [[7136, 100]],
+};
 
 const weights = new Map((weightFile as unknown as { items: [number, string, number][] }).items.map(([id, name, weight]) => [id, { id, name, weight }]));
-const quick: WeightItem[] = QUICK_IDS.map((id) => weights.get(id)).filter((x): x is WeightItem => !!x);
+const pick = (ids: number[]): WeightItem[] => ids.map((id) => weights.get(id)).filter((x): x is WeightItem => !!x);
+const groups = GROUPS.map((g) => ({ title: g.title, items: pick(g.ids) }));
+const classItems = Object.fromEntries(Object.entries(CLASS_IDS).map(([cls, ids]) => [cls, pick(ids)]));
+const kitFor = (cls: string) =>
+  [...KIT_BASE, ...(KIT_CLASS[cls] ?? [])].flatMap(([id, qty]) => {
+    const it = weights.get(id);
+    return it ? [{ ...it, qty }] : [];
+  });
 const classes = Object.entries((classFile as unknown as { classes: Record<string, { name: string }> }).classes)
   .map(([slug, c]) => ({ slug, name: c.name }))
   .sort((a, b) => a.name.localeCompare(b.name));
@@ -46,7 +88,7 @@ export default function WeightToolPage() {
         lead="ใส่อาชีพกับ STR แล้วเลือกของที่จะถือ ดูน้ำหนักรวมเป็น % และใส่เพิ่มได้อีกกี่ชิ้นก่อนเกิน 70% (หยุดฟื้น HP/SP เอง) หรือ 90% (ตีและใช้สกิลไม่ได้)"
       />
 
-      <WeightCalculator classes={classes} quick={quick} />
+      <WeightCalculator classes={classes} groups={groups} classItems={classItems} kits={Object.fromEntries(classes.map((c) => [c.slug, kitFor(c.slug)]))} />
 
       <AdSlot slot="inline" />
 

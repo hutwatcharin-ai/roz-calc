@@ -27,7 +27,17 @@ function num(v: number): string {
   return v.toLocaleString('en-US', { maximumFractionDigits: 1 });
 }
 
-export default function WeightCalculator({ classes, quick }: { classes: { slug: string; name: string }[]; quick: WeightItem[] }) {
+interface Group {
+  title: string;
+  items: WeightItem[];
+}
+
+export default function WeightCalculator({ classes, groups, classItems, kits }: {
+  classes: { slug: string; name: string }[];
+  groups: Group[];
+  classItems: Record<string, WeightItem[]>;
+  kits: Record<string, (WeightItem & { qty: number })[]>;
+}) {
   const [cls, setCls] = useState('merchant');
   const [str, setStr] = useState(1);
   const [ewl, setEwl] = useState(0);
@@ -76,6 +86,12 @@ export default function WeightCalculator({ classes, quick }: { classes: { slug: 
       return [...prev, { ...it, qty }];
     });
     setQuery('');
+  }
+  const kit = kits[cls] ?? [];
+  const mine = classItems[cls] ?? [];
+  const className = classes.find((c) => c.slug === cls)?.name ?? '';
+  function addKit() {
+    for (const k of kit) addItem({ id: k.id, name: k.name, weight: k.weight }, k.qty);
   }
   function setQty(id: number, qty: number) {
     setRows((prev) => prev.map((r) => (r.id === id ? { ...r, qty: Math.max(0, Math.min(99999, Math.floor(qty) || 0)) } : r)));
@@ -143,15 +159,24 @@ export default function WeightCalculator({ classes, quick }: { classes: { slug: 
 
       <section className="card wcalc__bag" aria-labelledby="wcalc-bag">
         <h2 id="wcalc-bag" className="section-title">2 · ของที่ถือ</h2>
-        <div className="wcalc__quick" role="group" aria-label="ของที่พกบ่อย">
-          {quick.map((it) => (
-            <button key={it.id} type="button" className="wcalc__chip" onClick={() => addItem(it, it.weight < 1 ? 100 : 10)}>
-              <img src={`/images/items/${it.id}.gif`} alt="" width={24} height={24} loading="lazy" />
-              <span>{it.name}<small className="mono">{num(it.weight)}</small></span>
-            </button>
-          ))}
+        <div className="wcalc__kit">
+          <button type="button" className="wcalc__kitbtn" onClick={addKit}>▶ ใส่ชุดตั้งบอท {className}</button>
+          <span className="muted">{kit.map((k) => `${k.name} ${num(k.qty)}`).join(' · ')}</span>
         </div>
-        <p className="muted wcalc__note">กดหนึ่งครั้งเพิ่ม 10 ชิ้น (ลูกธนูและของเบา 100) แล้วแก้จำนวนในรายการได้</p>
+        {[...groups, ...(mine.length ? [{ title: `ของใช้ ${className}`, items: mine }] : [])].map((g) => (
+          <div key={g.title} className="wcalc__group" role="group" aria-label={g.title}>
+            <h3 className="wcalc__gtitle">{g.title}</h3>
+            <div className="wcalc__quick">
+              {g.items.map((it) => (
+                <button key={it.id} type="button" className="wcalc__chip" onClick={() => addItem(it, it.weight < 1 ? 100 : 10)}>
+                  <img src={`/images/items/${it.id}.gif`} alt="" width={24} height={24} loading="lazy" />
+                  <span>{it.name}<small className="mono">{num(it.weight)}</small></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+        <p className="muted wcalc__note">กดหนึ่งครั้งเพิ่ม 10 ชิ้น (ลูกธนูและของเบา 100) แล้วแก้จำนวนในรายการได้ · ชุดตั้งบอทเป็นจำนวนตั้งต้น แก้ต่อตามแมพที่ไป</p>
         <div className="wcalc__search">
           <input type="search" placeholder="ค้นของอื่น เช่น Oridecon" value={query} aria-label="ค้นไอเทม"
             onFocus={() => void wantAll()} onChange={(e) => setQuery(e.target.value)} />
