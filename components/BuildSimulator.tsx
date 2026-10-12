@@ -814,7 +814,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                         </span>
                         <div>
                           <em>{slotLabel(slot, build.cls)}</em>
-                          <b>{item.n}{item.sl ? ` [${item.sl}]` : ''}</b>
+                          <b>{item.n}{w.fg !== undefined ? ' (ตีเอง)' : item.sl ? ` [${item.sl}]` : ''}</b>
                           <small>
                             {[item.wt ? WEAPON_TH[item.wt] ?? '' : '', item.atk ? `ATK ${item.atk}` : '', item.matk ? `MATK ${item.matk}` : '', item.def ? `DEF ${item.def}` : '', item.lv ? `Lv ${item.lv}` : '']
                               .filter(Boolean)
