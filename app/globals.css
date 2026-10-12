@@ -4742,3 +4742,13 @@ html .tag { border-radius: 4px; }
 
 /* Where a skill ratio formula came from (lib/build-calc fs). */
 .buildsim__src { display: block; margin-top: 2px; font: 400 11px var(--font-sarabun), sans-serif; color: var(--muted, #a59fc9); }
+
+/* Map page, one map (owner, 12 Oct 2026): the warp minimap moved up beside
+   the monsters, so it takes the STAGE frame and the legend sits under it. */
+.mapimg--warps { margin-top: 16px; }
+.mapimg--warps .warps__map { max-width: 420px; border: 2px solid var(--cyan); box-shadow: 0 0 16px rgba(61, 232, 255, .3); }
+.mapimg--warps .warps__map img { border: 0 !important; box-shadow: none; max-width: none; border-radius: 4px; }
+.mapimg__key { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; font-size: 12.5px; color: var(--dim); }
+.warps__key--pin::before { background: var(--pink); }
+.warps__pin { position: absolute; transform: translate(-50%, -50%); width: 10px; height: 10px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 2px #0B0820, 0 0 8px var(--pink); pointer-events: none; }
+@media (min-width: 900px) { .maplayout .mapimg--warps { grid-column: 2; grid-row: 1; margin-top: 36px; position: sticky; top: 16px; } }

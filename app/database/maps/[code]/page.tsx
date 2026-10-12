@@ -8,7 +8,7 @@ import { cache } from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { supabaseRead } from '@/lib/supabase';
 import MapMonsterTable from '@/components/MapMonsterTable';
-import MapWarps from '@/components/MapWarps';
+import MapWarps, { WarpMap } from '@/components/MapWarps';
 import { isCVariant } from '@/lib/c-variant';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { mapImage } from '@/lib/map-image';
@@ -140,6 +140,8 @@ export default async function MapDetailPage({ params }: { params: { code: string
   // Not every map has a picture, so this is null on 149 of them and the block
   // below disappears rather than leaving a broken image behind.
   const picture = mapImage(code);
+  const warps = mapWarps(code);
+  const warpPic = warps?.picture ?? null;
 
   // Who else is standing here, and what there is to do here. A map page listed
   // its monsters and nothing else, while 78 of them have an NPC on them and 84
@@ -151,6 +153,9 @@ export default async function MapDetailPage({ params }: { params: { code: string
     .eq('map_code', code)
     .order('id');
   if (questError) console.error('map quest query failed', questError);
+  const pins = npcsHere
+    .filter((npc) => npc.x !== null && npc.y !== null)
+    .map((npc) => ({ x: npc.x!, y: npc.y!, name: npc.name }));
 
   // What the map is worth farming for. Two reads keyed on this map's monsters:
   // their drops, and every spawn count they have anywhere (the boss test needs
@@ -221,8 +226,22 @@ export default async function MapDetailPage({ params }: { params: { code: string
       </p>
       {/* Picture beside the table on wide screens: the map page used to
           leave its right half empty (UX critique, 6 Sep). Stacked on phones. */}
-      <div className={picture ? 'maplayout' : undefined}>
-      {picture && (
+      <div className={picture || warpPic ? 'maplayout' : undefined}>
+      {/* One map per page (owner, 12 Oct 2026): the game's own minimap with
+          the warp numbers and NPC pins when there is one, so the warp list
+          below reads off this picture instead of drawing the terrain twice. */}
+      {warpPic && warps && (
+        <div className="mapimg mapimg--stage mapimg--warps">
+          <span className="mapimg__stage" aria-hidden="true">STAGE</span>
+          <WarpMap warps={warps} name={name} pins={pins} eager />
+          <p className="mapimg__key">
+            <span className="warps__key warps__key--portal">ประตูวาร์ป</span>
+            <span className="warps__key warps__key--npc">NPC พาไป</span>
+            {pins.length > 0 && <span className="warps__key warps__key--pin">NPC ในแมพ</span>}
+          </p>
+        </div>
+      )}
+      {!warpPic && picture && (
         <figure className={picture.kind === 'full' ? 'mapimg mapimg--full mapimg--stage' : 'mapimg mapimg--stage'}>
           <span className="mapimg__stage" aria-hidden="true">STAGE</span>
           {/* Two sources: prontera.info's ~512 px terrain render when it has
@@ -249,7 +268,7 @@ export default async function MapDetailPage({ params }: { params: { code: string
       </div>
       </div>
 
-      <MapWarps code={code} name={name} />
+      <MapWarps code={code} name={name} mapShown={Boolean(warpPic)} />
 
       {drops && (drops.cards.length > 0 || drops.gear.length > 0) && (
         <div className="card" style={{ marginTop: 20 }}>
@@ -273,17 +292,24 @@ export default async function MapDetailPage({ params }: { params: { code: string
         </div>
       )}
 
-      {(questsHere ?? []).length > 0 && (
+      {/* Quests and NPCs in one card (owner, 12 Oct 2026): on a field they
+          are a line or two each, and usually the same story (the NPC gives
+          the quest). */}
+      {((questsHere ?? []).length > 0 || npcsHere.length > 0) && (
         <div className="card" style={{ marginTop: 20 }}>
-          <h2 className="section-title">เควสที่เกิดในแมพนี้ ({questsHere!.length})</h2>
-          <QuestList quests={questsHere!} />
-        </div>
-      )}
-
-      {npcsHere.length > 0 && (
-        <div className="card" style={{ marginTop: 20 }}>
-          <h2 className="section-title">NPC ในแมพนี้ ({npcsHere.length})</h2>
-          <NpcList npcs={npcsHere} />
+          <h2 className="section-title">
+            {[npcsHere.length > 0 && `NPC (${npcsHere.length})`, (questsHere ?? []).length > 0 && `เควส (${questsHere!.length})`]
+              .filter(Boolean)
+              .join(' · ')}{' '}
+            ในแมพนี้
+          </h2>
+          {npcsHere.length > 0 && <NpcList npcs={npcsHere} />}
+          {(questsHere ?? []).length > 0 && (
+            <>
+              {npcsHere.length > 0 && <h3 className="mapdrops__title">เควส</h3>}
+              <QuestList quests={questsHere!} />
+            </>
+          )}
         </div>
       )}
     </main>
