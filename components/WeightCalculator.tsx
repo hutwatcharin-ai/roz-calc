@@ -94,7 +94,13 @@ export default function WeightCalculator({ classes, quick }: { classes: { slug: 
     const q = query.trim().toLowerCase();
     if (!all || q.length < 2) return [];
     const byId = /^\d+$/.test(q) ? Number(q) : null;
-    return all.filter((it) => (byId !== null ? it.id === byId : it.name.toLowerCase().includes(q))).slice(0, 12);
+    // "Oridecon" should put Oridecon before Oridecon Hammer: exact, then
+    // starts-with, then anywhere in the name.
+    const rank = (n: string) => (n === q ? 0 : n.startsWith(q) ? 1 : 2);
+    return all
+      .filter((it) => (byId !== null ? it.id === byId : it.name.toLowerCase().includes(q)))
+      .sort((a, b) => rank(a.name.toLowerCase()) - rank(b.name.toLowerCase()) || a.name.length - b.name.length)
+      .slice(0, 12);
   }, [all, query]);
 
   const zone = !l.attack ? 'is-stop' : !l.regen ? 'is-heavy' : 'is-ok';
