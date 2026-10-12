@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_GEAR, calcBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, mobbedFlee, optionRangeText, type Build, type Target } from './build-calc';
+import { ALL_GEAR, calcBuild, passivesFor, sanitizeBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, mobbedFlee, optionRangeText, type Build, type Target } from './build-calc';
 
 const first = (test: (g: (typeof ALL_GEAR)[string]) => boolean) => Number(Object.entries(ALL_GEAR).find(([, g]) => test(g))![0]);
 // Hood: a garment with a card slot and no effects of its own.
@@ -468,5 +468,64 @@ describe('crits and Double Attack in the time to kill', () => {
     expect(da.doubleAttack).toBe(70);
     expect(da.autoSeconds!).toBeLessThan(plain.autoSeconds!);
     expect(calcBuild({ ...base, cls: 'thief', sk: { 'Double Attack': 10 } }, mob).vs!.doubleAttack).toBe(0);
+  });
+});
+
+describe('buffs, falcon and forged weapons added 12 Oct 2026', () => {
+  const mob: Target = {
+    name: 'Dwarf', level: 64, vit: 30, def: 198, size: 'Medium', element: 'Earth', element_level: 2, race: 'Demi-Human', boss: false,
+    hit_100: 300, flee_95: 250, hp: 32952,
+  };
+  const bs: Build = { ...base, cls: 'blacksmith', lv: 60, st: { ...base.st, str: 60, vit: 30, dex: 40 }, g: { weapon: { id: 620048, r: 0, c: [0, 0] } }, as: ['axe-tornado', 5] };
+  const hunter: Build = { ...base, cls: 'hunter', lv: 60, st: { ...base.st, agi: 92, dex: 40 }, g: { weapon: { id: 1701, r: 0, c: [0] } } };
+
+  it('counts the lines the planner rows left out', () => {
+    const plain = calcBuild(hunter, mob).vs!;
+    const fe = calcBuild({ ...hunter, bf: { 'falcon-eyes': 10 } }, mob).vs!;
+    expect(fe.multiplier).toBeCloseTo(plain.multiplier * 1.2);
+    expect(calcBuild({ ...bs, bf: { 'impositio-manus': 5 } }).atk.equip).toBe(calcBuild(bs).atk.equip + 25);
+    expect(calcBuild({ ...bs, bf: { angelus: 10 } }).def.soft).toBe(Math.floor(calcBuild(bs).def.soft * 1.5));
+    const armored: Build = { ...bs, cls: 'knight', g: { armor: { id: 2301, r: 0, c: [] } } };
+    expect(calcBuild({ ...armored, bf: { 'spear-dynamo': 5 } }).def.hard).toBe(Math.floor(calcBuild(armored).def.hard * 0.85));
+  });
+
+  it('adds Crazy Uproar, Maximize Power, Provoke and Lex Aeterna', () => {
+    const plain = calcBuild(bs, mob);
+    expect(calcBuild({ ...bs, bf: { 'crazy-uproar': 1 } }).total.str).toBe(plain.total.str + 4);
+    const mp = calcBuild({ ...bs, bf: { 'maximize-power': 5 } }, mob).vs!;
+    expect(mp.damageMin).toBe(mp.damageMax);
+    expect(mp.damage).toBe(plain.vs!.damageMax);
+    const pv = calcBuild({ ...bs, bf: { provoke: 10 } }, mob).vs!;
+    expect(pv.skill!.damage).toBeGreaterThan(plain.vs!.skill!.damage);
+    expect(calcBuild({ ...bs, bf: { provoke: 10 } }, { ...mob, boss: true }).vs!.skill!.damage).toBe(calcBuild(bs, { ...mob, boss: true }).vs!.skill!.damage);
+    const lex = calcBuild({ ...bs, bf: { 'lex-aeterna': 1 } }, mob).vs!;
+    expect(lex.skill!.damage).toBe(plain.vs!.skill!.damage);
+    expect(lex.skill!.casts).toBeLessThan(plain.vs!.skill!.casts!);
+    expect(calcBuild({ ...bs, bf: { 'maximum-power-thrust': 5 } }, mob).skipped.some((l) => l.from.includes('Maximum Power-Thrust'))).toBe(true);
+  });
+
+  it('gives Elemental Converter the endow a Sage gives', () => {
+    expect(calcBuild({ ...bs, bf: { 'converter-fire': 1 } }, mob).vs!.skill!.damage).toBe(calcBuild({ ...bs, bf: { 'endow-blaze': 1 } }, mob).vs!.skill!.damage);
+  });
+
+  it('runs the falcon on the Elvyl formulas, past DEF', () => {
+    const fa = (st: Build['st']) => calcBuild({ ...hunter, st, sk: { 'Steel Crow': 10 }, as: ['falcon-assault', 5] }, mob).vs!.skill!;
+    const agi = fa({ ...base.st, agi: 92, dex: 1 });
+    expect(agi.ratio).toBe(5 * (100 + 60 + (46 + 0) * 2));
+    // hellyy's Zero test: AGI 92 vs AGI 1 / DEX 92 was 9,715 to about 6,900.
+    expect(agi.ratio / fa({ ...base.st, agi: 1, dex: 92 }).ratio).toBeCloseTo(1.41, 1);
+    const tough = calcBuild({ ...hunter, as: ['blitz-beat', 5] }, { ...mob, def: 900 }).vs!.skill!.damage;
+    expect(tough).toBe(calcBuild({ ...hunter, as: ['blitz-beat', 5] }, { ...mob, def: 0 }).vs!.skill!.damage);
+    expect(passivesFor('hunter').some((p) => p.n === 'Steel Crow')).toBe(true);
+  });
+
+  it('forges: no cards, the stone element', () => {
+    const carded: Build = { ...bs, g: { weapon: { id: 620048, r: 0, c: [4035, 4035] } } };
+    const forged = calcBuild({ ...bs, g: { weapon: { id: 620048, r: 0, c: [4035, 4035], fg: 'fire' } } }, mob);
+    expect(forged.warnings.some((w) => w.includes('ไม่มีช่องการ์ด'))).toBe(true);
+    expect(forged.vs!.skill!.damage).toBe(calcBuild({ ...bs, bf: { 'endow-blaze': 1 } }, mob).vs!.skill!.damage);
+    expect(calcBuild(carded, mob).vs!.multiplier).toBeGreaterThan(forged.vs!.multiplier);
+    const round = sanitizeBuild(JSON.parse(JSON.stringify({ ...bs, g: { weapon: { id: 620048, r: 0, c: [4035], fg: 'fire' } } })))!;
+    expect(round.g.weapon).toMatchObject({ fg: 'fire', c: [] });
   });
 });

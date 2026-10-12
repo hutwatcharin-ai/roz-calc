@@ -19,7 +19,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ALL_BUFFS, ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS,
-  attacksFor, buffBySlug, maxOptionsFor, optionRangeText, passivesFor,
+  attacksFor, buffBySlug, FORGE_ELEMENTS, maxOptionsFor, optionRangeText, passivesFor,
   OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsLeftHand, fitsSlot, gearById, slotLabel,
   isTwoHanded, maxJobLevel, optionKey, sanitizeBuild, stoneById, type Build, type CostumeSlot, type Slot, type Target,
   AILMENTS, POTION_HEAL, type Ailment,
@@ -94,6 +94,7 @@ function optionLabel([type, target]: [string, string | null]): string {
   return text.replace(/\s*\+1(%?)$/, (_m, pct: string) => (pct ? ' %' : ''));
 }
 const OPTION_LABELS = OPTION_TYPES.map((o) => ({ key: optionKey(o), label: optionLabel(o) }));
+const FORGE_EL_TH: Record<string, string> = { fire: 'ไฟ', water: 'น้ำ', wind: 'ลม', earth: 'ดิน' };
 
 /** A panel title: pixel icon, arcade label, and an optional count on the right. */
 function PanelHead({ icon, title, th, meta, pink }: { icon: string; title: string; th: string; meta?: string; pink?: boolean }) {
@@ -278,6 +279,15 @@ export default function BuildSimulator({ initial, sharedId }: {
     update({ g: { ...build.g, [slot]: { ...w, e } } });
     setPicking(null);
     setQuery('');
+  }
+  // Forged (owner, 12 Oct 2026): no card slots, an element stone, forged options.
+  function setForged(slot: Slot, fg: string | null) {
+    const w = build.g[slot];
+    const item = w ? gearById(w.id) : null;
+    if (!w || !item) return;
+    const { fg: _old, ...rest } = w;
+    const next = fg === null ? { ...rest, c: Array.from({ length: item.sl }, () => 0) } : { ...rest, c: [], fg };
+    update({ g: { ...build.g, [slot]: next } });
   }
   function setOption(slot: Slot, index: number, row: [string, number] | null) {
     const w = build.g[slot];
@@ -831,6 +841,21 @@ export default function BuildSimulator({ initial, sharedId }: {
                         )}
                       </div>
 
+                      {item.on.includes('weapon') && (
+                        <div className="buildsim__editrow">
+                          <span className="buildsim__editlabel">ที่มา</span>
+                          <span className="buildsim__refinebar">
+                            <select aria-label="ที่มาของอาวุธ" value={w.fg ?? ''} onChange={(e) => setForged(slot, e.target.value || null)}>
+                              <option value="">ดรอป / ร้าน (มีช่องการ์ด)</option>
+                              {FORGE_ELEMENTS.map((el) => (
+                                <option key={el} value={el}>ตีเอง{el === 'neutral' ? ' ไม่ใส่หินธาตุ' : ` ธาตุ${FORGE_EL_TH[el]}`}</option>
+                              ))}
+                            </select>
+                            {w.fg !== undefined && <small className="muted">ไม่มีช่องการ์ด สุ่มออปชั่นสายตีเอง · ยังไม่นับ Star Crumb</small>}
+                          </span>
+                        </div>
+                      )}
+
                       {w.c.length > 0 && (
                         <div className="buildsim__editrow">
                           <span className="buildsim__editlabel">การ์ด</span>
@@ -884,7 +909,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                               <button type="button" aria-label="ลบออปชั่น" onClick={() => setOption(slot, i, null)}>×</button>
                             </span>
                             {(() => {
-                              const range = optionRangeText(k, slot, item);
+                              const range = optionRangeText(k, slot, item, w.fg !== undefined);
                               return <small className="buildsim__optrange">{range ? `สุ่มได้ ${range}` : 'ไม่มีข้อมูลช่วงสุ่มของออปนี้ในช่องนี้'}</small>;
                             })()}
                             </span>

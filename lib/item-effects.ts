@@ -122,6 +122,16 @@ export const BONUS_TYPES: Record<string, TypeInfo> = {
   exp_percent: { label: 'EXP', unit: '%', group: 'utility' },
   job_exp_percent: { label: 'Job EXP', unit: '%', group: 'utility' },
   drop_rate_percent: { label: 'อัตราดรอป', unit: '%', group: 'utility' },
+  // Build simulator buff lines only (no item carries these).
+  hit_percent: { label: 'HIT', unit: '%', group: 'offence' },
+  str_percent: { label: 'STR', unit: '%', group: 'stat' }, agi_percent: { label: 'AGI', unit: '%', group: 'stat' },
+  vit_percent: { label: 'VIT', unit: '%', group: 'stat' }, int_percent: { label: 'INT', unit: '%', group: 'stat' },
+  dex_percent: { label: 'DEX', unit: '%', group: 'stat' }, luk_percent: { label: 'LUK', unit: '%', group: 'stat' },
+  flat_damage: { label: 'ดาเมจตีธรรมดาทุกฮิต', group: 'offence' },
+  movement_speed_percent: { label: 'ความเร็วเดิน', unit: '%', group: 'utility' },
+  def_percent: { label: 'DEF', unit: '%', group: 'defence' },
+  soft_def_percent: { label: 'DEF จาก VIT', unit: '%', group: 'defence' },
+  target_def_percent: { label: 'DEF มอน', unit: '%', group: 'offence' },
 };
 
 /** One bonus as a short line: "ตีเผ่ากึ่งมนุษย์ +10%", "ร่ายแปรผัน -30%". */
@@ -129,6 +139,8 @@ export function bonusText([type, value, target, per, skill, scaling]: Bonus): st
   // Effects with no number of their own (build simulator buffs).
   if (type === 'endow') return `อาวุธเป็น${targetLabel(target) ?? ''}`;
   if (type === 'no_size_penalty') return 'ไม่โดนหักดาเมจตามขนาดมอน';
+  if (type === 'max_roll') return 'ดาเมจอาวุธออกค่าสูงสุดทุกครั้ง';
+  if (type === 'lex') return 'ครั้งแรกที่ตีเป้า ดาเมจ x2';
   if (target?.startsWith('skill_element:')) return `ดาเมจเวทธาตุ${(targetLabel(target.replace('skill_', '')) ?? '').replace('ธาตุ', '')} ${value > 0 ? '+' : ''}${value}%`;
   const info = BONUS_TYPES[type];
   const t = targetLabel(target);

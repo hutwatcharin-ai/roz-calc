@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-10-12", "href": "/tools/build", "title": "เครื่องจำลองบิลด์นับบัฟครบขึ้น", "note": "เพิ่ม Crazy Uproar, Maximize Power, Provoke, Lex Aeterna, Elemental Converter · สกิลเหยี่ยว Blitz Beat กับ Falcon Assault · อาวุธตีเองเลือกธาตุได้ · แก้ Falcon Eyes, Impositio Manus, Angelus, Spear Dynamo ที่นับไม่ครบ · มอน Nordfeld มี HP/DEF แล้ว" },
     { "date": "2026-10-12", "href": "/guides/classes/hunter", "title": "ไกด์ Hunter สายเหยี่ยวเพิ่มเติม", "note": "เพิ่มจากคลิป hellyy: เหยี่ยวออกบ่อยขึ้นตามเลเวลและ ASPD และต้องเกลี่ย ASPD กับ LUK กับ DEX" },
     { "date": "2026-10-12", "href": "/database/maps/prt_fild11", "title": "หน้าแมพเหลือแผนที่รูปเดียว", "note": "แผนที่ข้างมอนมีเลขประตูวาร์ปและจุด NPC ในตัว ไม่ต้องเลื่อนไปดูอีกรูป · รวมกล่อง NPC กับเควสเป็นกล่องเดียว" },
     { "date": "2026-10-09", "href": "/database/maps/pay_fild09", "title": "หน้าแมพบอกจำนวนมอนแต่ละตัวแล้ว", "note": "ป้าย ×จำนวน บนการ์ดมอน เรียงจากตัวที่เยอะสุด มีปุ่มเรียงตามจำนวน · ใต้ชื่อแมพบอกยอดรวมทั้งแมพ แยกมอนแชมเปียน · ตัวที่ข้อมูลไม่บอกจำนวนขึ้น ×?" },
