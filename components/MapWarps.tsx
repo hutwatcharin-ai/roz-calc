@@ -74,14 +74,23 @@ export function WarpMap({ warps, name, pins = [], className = 'warps__map', eage
       {warps.exits.flatMap((exit, i) =>
         exit.pts.map(([x, y]) => {
           const p = warpPosition(x, y, warps.w, warps.h);
-          return (
-            <span
+          const cls = `warps__dot${exit.kind === 201 ? ' warps__dot--npc' : ''}${closed(exit.to) ? ' warps__dot--closed' : ''}`;
+          const at = { left: `${p.left}%`, top: `${p.top}%` };
+          // A number that leads to a map with a page is a link to it (owner,
+          // 12 Oct 2026): walk the world from the minimap.
+          return exit.page ? (
+            <Link
               key={`e-${exit.to}-${x}-${y}`}
-              className={`warps__dot${exit.kind === 201 ? ' warps__dot--npc' : ''}${closed(exit.to) ? ' warps__dot--closed' : ''}`}
-              style={{ left: `${p.left}%`, top: `${p.top}%` }}
-              title={warpMapName(exit.to)}
-              aria-hidden="true"
+              href={`/database/maps/${exit.to}`}
+              className={cls}
+              style={at}
+              title={`ไป ${warpMapName(exit.to)}`}
+              aria-label={`ประตู ${i + 1} ไป ${warpMapName(exit.to)}`}
             >
+              {i + 1}
+            </Link>
+          ) : (
+            <span key={`e-${exit.to}-${x}-${y}`} className={cls} style={at} title={warpMapName(exit.to)} aria-hidden="true">
               {i + 1}
             </span>
           );

@@ -2015,13 +2015,15 @@ a.cashlist__row:hover { background: var(--panel-2); }
   aspect-ratio: 1 / 1;
   object-fit: contain;
 }
-/* Map page on a phone: the monster table first, the picture after it. The
-   picture led, and the list a reader opened the page for started at 923px
-   (UX review, 11 Sep 2026). */
+/* Map page on a phone: the picture first, full width, then the monsters
+   (owner, 12 Oct 2026). It was moved below the table on 11 Sep, when it was
+   only a picture; its warp numbers now take you to the next map, so it is
+   the page's way around and leads again. */
 @media (max-width: 899px) {
   .maplayout { display: flex; flex-direction: column; }
-  .maplayout .mapimg { order: 2; }
-  .maplayout__table { order: 1; min-width: 0; }
+  .maplayout .mapimg { order: 1; }
+  .maplayout__table { order: 2; min-width: 0; }
+  .maplayout .mapimg--warps .warps__map { max-width: none; }
 }
 /* Map page: monster table left, picture right from 900px up. The figure
    is first in the DOM (screen readers hear the map before the table, same
@@ -4752,3 +4754,12 @@ html .tag { border-radius: 4px; }
 .warps__key--pin::before { background: var(--pink); }
 .warps__pin { position: absolute; transform: translate(-50%, -50%); width: 10px; height: 10px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 2px #0B0820, 0 0 8px var(--pink); pointer-events: none; }
 @media (min-width: 900px) { .maplayout .mapimg--warps { grid-column: 2; grid-row: 1; margin-top: 36px; position: sticky; top: 16px; } }
+
+/* A warp number on the minimap is a link to that map (owner, 12 Oct 2026),
+   with a finger-sized hit area around the 18px badge. */
+a.warps__dot { pointer-events: auto; text-decoration: none; cursor: pointer; }
+a.warps__dot::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; }
+a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outline-offset: 1px; z-index: 2; }
+/* The STAGE tag sits above the minimap, not on it: on a square map it
+   covered a warp number in the top-left corner (gef_fild03, 12 Oct 2026). */
+.mapimg--warps .mapimg__stage { position: static; display: inline-block; margin-bottom: 6px; }
