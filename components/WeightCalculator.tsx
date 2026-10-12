@@ -97,6 +97,8 @@ export default function WeightCalculator({ classes, groups, classItems }: {
   function setQty(id: number, qty: number) {
     setRows((prev) => prev.map((r) => (r.id === id ? { ...r, qty: Math.max(0, Math.min(99999, Math.floor(qty) || 0)) } : r)));
   }
+  // Arrows and gemstones come by the hundred; everything else by ten.
+  const big = (it: WeightItem) => (it.weight < 1 ? 100 : 10);
   function remove(id: number) {
     setRows((prev) => prev.filter((r) => r.id !== id));
   }
@@ -180,7 +182,7 @@ export default function WeightCalculator({ classes, groups, classItems }: {
             <h3 className="wcalc__gtitle">{g.title}</h3>
             <div className="wcalc__quick">
               {g.items.map((it) => (
-                <button key={it.id} type="button" className="wcalc__chip" onClick={() => addItem(it, it.weight < 1 ? 100 : 10)}>
+                <button key={it.id} type="button" className="wcalc__chip" onClick={() => addItem(it, big(it))}>
                   <img src={`/images/items/${it.id}.gif`} alt="" width={24} height={24} loading="lazy" />
                   <span>{it.name}<small className="mono">{num(it.weight)}</small></span>
                 </button>
@@ -214,8 +216,16 @@ export default function WeightCalculator({ classes, groups, classItems }: {
               <li key={r.id}>
                 <img src={`/images/items/${r.id}.gif`} alt="" width={24} height={24} loading="lazy" />
                 <span className="wcalc__name">{r.name}<small className="mono">ชิ้นละ {num(r.weight)}</small></span>
-                <input className="mono" type="number" inputMode="numeric" min={0} aria-label={`จำนวน ${r.name}`} value={r.qty || ''} placeholder="0"
-                  onChange={(e) => setQty(r.id, Number(e.target.value))} />
+                <div className="wcalc__step">
+                  {[-big(r), -1].map((d) => (
+                    <button key={d} type="button" aria-label={`ลด ${r.name} ${-d}`} onClick={() => setQty(r.id, r.qty + d)}>−{-d}</button>
+                  ))}
+                  <input className="mono" type="number" inputMode="numeric" min={0} aria-label={`จำนวน ${r.name}`} value={r.qty || ''} placeholder="0"
+                    onChange={(e) => setQty(r.id, Number(e.target.value))} />
+                  {[1, big(r)].map((d) => (
+                    <button key={d} type="button" aria-label={`เพิ่ม ${r.name} ${d}`} onClick={() => setQty(r.id, r.qty + d)}>+{d}</button>
+                  ))}
+                </div>
                 <b className="mono wcalc__sub">{num((Math.round(r.weight * 10) * r.qty) / 10)}</b>
                 <button type="button" className="wcalc__x" aria-label={`เอา ${r.name} ออก`} onClick={() => remove(r.id)}>×</button>
               </li>
