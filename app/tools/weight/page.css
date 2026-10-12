@@ -11,9 +11,8 @@
 .wcalc__cap b { color: var(--yellow); font-size: 22px; }
 .wcalc__note { margin: 6px 0 0; font-size: 12.5px; }
 
-.wcalc__kit { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 4px; font-size: 12.5px; }
-.wcalc__kitbtn { min-height: 44px; padding: 0 14px; border: 1px solid var(--pink); border-radius: 8px; background: rgba(255, 61, 154, .12); color: var(--text); font: 700 14px var(--font-sarabun), sans-serif; cursor: pointer; box-shadow: 0 0 10px rgba(255, 61, 154, .3); }
-.wcalc__kitbtn:hover, .wcalc__kitbtn:focus-visible { background: rgba(255, 61, 154, .22); }
+.wcalc__game { margin-top: 12px; padding: 10px; border: 1px dashed rgba(61, 232, 255, .35); border-radius: 8px; }
+.wcalc__game .wcalc__gtitle { font-weight: 600; line-height: 1.5; }
 .wcalc__group { margin-top: 12px; }
 .wcalc__gtitle { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--cyan); letter-spacing: .02em; }
 .wcalc__quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }

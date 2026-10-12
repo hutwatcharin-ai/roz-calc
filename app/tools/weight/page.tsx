@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 // (owner, 12 Oct 2026). The class group only shows for the classes that use it.
 const GROUPS: { title: string; ids: number[] }[] = [
   { title: 'ฟื้น HP', ids: [501, 502, 503, 504, 517, 516] },
-  { title: 'ฟื้น SP', ids: [505, 533, 578, 548] },
+  { title: 'ฟื้น SP', ids: [505, 510, 533, 578, 548] },
   { title: 'ฟื้นทั้งคู่ / แก้สถานะ', ids: [506, 525, 526, 608, 610] },
   { title: 'บัฟ', ids: [645, 656, 657] },
   { title: 'เดินทาง', ids: [601, 602] },
@@ -45,31 +45,10 @@ const CLASS_IDS: Record<string, number[]> = {
   sage: [717, 716, 715],
   alchemist: [7136, 7135, 7137, 7138, 7139],
 };
-// A starting bag for a bot left out in the field; the numbers are a starting
-// point to edit, not advice tuned per map.
-const KIT_BASE: [number, number][] = [[501, 100], [505, 20], [601, 100], [602, 2]];
-const KIT_CLASS: Record<string, [number, number][]> = {
-  archer: [[1750, 2000]],
-  hunter: [[1750, 2000], [1065, 200]],
-  bard: [[1750, 2000]],
-  dancer: [[1750, 2000]],
-  acolyte: [[717, 20]],
-  priest: [[717, 20]],
-  mage: [[717, 10]],
-  wizard: [[717, 10]],
-  sage: [[717, 10]],
-  alchemist: [[7136, 100]],
-};
-
 const weights = new Map((weightFile as unknown as { items: [number, string, number][] }).items.map(([id, name, weight]) => [id, { id, name, weight }]));
 const pick = (ids: number[]): WeightItem[] => ids.map((id) => weights.get(id)).filter((x): x is WeightItem => !!x);
 const groups = GROUPS.map((g) => ({ title: g.title, items: pick(g.ids) }));
 const classItems = Object.fromEntries(Object.entries(CLASS_IDS).map(([cls, ids]) => [cls, pick(ids)]));
-const kitFor = (cls: string) =>
-  [...KIT_BASE, ...(KIT_CLASS[cls] ?? [])].flatMap(([id, qty]) => {
-    const it = weights.get(id);
-    return it ? [{ ...it, qty }] : [];
-  });
 const classes = Object.entries((classFile as unknown as { classes: Record<string, { name: string }> }).classes)
   .map(([slug, c]) => ({ slug, name: c.name }))
   .sort((a, b) => a.name.localeCompare(b.name));
@@ -88,7 +67,7 @@ export default function WeightToolPage() {
         lead="ใส่อาชีพกับ STR แล้วเลือกของที่จะถือ ดูน้ำหนักรวมเป็น % และใส่เพิ่มได้อีกกี่ชิ้นก่อนเกิน 70% (หยุดฟื้น HP/SP เอง) หรือ 90% (ตีและใช้สกิลไม่ได้)"
       />
 
-      <WeightCalculator classes={classes} groups={groups} classItems={classItems} kits={Object.fromEntries(classes.map((c) => [c.slug, kitFor(c.slug)]))} />
+      <WeightCalculator classes={classes} groups={groups} classItems={classItems} />
 
       <AdSlot slot="inline" />
 
@@ -97,6 +76,7 @@ export default function WeightToolPage() {
         <ul className="wcalc__how">
           <li>แบกได้ = 2,000 + STR ที่ลงเอง × 30 + โบนัสอาชีพ + Enlarge Weight Limit (เลเวลละ 200) + Gym Membership Card (ใบละ 200)</li>
           <li>เกิน 70% HP กับ SP หยุดฟื้นเอง · เกิน 90% ตีและใช้สกิลไม่ได้ (เจ้าของเว็บเช็กในเกม 12 ต.ค. 2026)</li>
+          <li>ตัวเลขรวมนับเฉพาะของที่เลือก ไม่รวมของสวมใส่และของอื่นในตัวละคร ถ้าอยากให้ตรงกับเกม ใส่เลขจากบรรทัด Weight ในหน้าต่างข้อมูลตัวละคร (เช่น 1247 / 2230) ในช่องตัวเลขจากเกม</li>
           <li>น้ำหนักไอเทมอ่านจากข้อความในไคลเอนต์เกม เป็นเลขเดียวกับที่เกมแสดง เช่น Red Potion 7</li>
         </ul>
         <p className="muted" style={{ fontSize: 13 }}>

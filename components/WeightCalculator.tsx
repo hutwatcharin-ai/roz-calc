@@ -32,16 +32,19 @@ interface Group {
   items: WeightItem[];
 }
 
-export default function WeightCalculator({ classes, groups, classItems, kits }: {
+export default function WeightCalculator({ classes, groups, classItems }: {
   classes: { slug: string; name: string }[];
   groups: Group[];
   classItems: Record<string, WeightItem[]>;
-  kits: Record<string, (WeightItem & { qty: number })[]>;
 }) {
   const [cls, setCls] = useState('merchant');
   const [str, setStr] = useState(1);
   const [ewl, setEwl] = useState(0);
   const [gym, setGym] = useState(0);
+  // Read off the game's Weight line ("1247 / 2230"): what the character
+  // already carries (gear and all), and the game's own cap when known.
+  const [held, setHeld] = useState(0);
+  const [gameCap, setGameCap] = useState(0);
   const [rows, setRows] = useState<Row[]>([]);
   const [ready, setReady] = useState(false);
   const [all, setAll] = useState<WeightItem[] | null>(null);
@@ -57,6 +60,8 @@ export default function WeightCalculator({ classes, groups, classItems, kits }: 
         if (Number.isFinite(s.str)) setStr(s.str);
         if (Number.isFinite(s.ewl)) setEwl(s.ewl);
         if (Number.isFinite(s.gym)) setGym(s.gym);
+        if (Number.isFinite(s.held)) setHeld(s.held);
+        if (Number.isFinite(s.gameCap)) setGameCap(s.gameCap);
         if (Array.isArray(s.rows)) setRows(s.rows.filter((r: Row) => Number.isFinite(r?.id) && Number.isFinite(r?.weight)).slice(0, 40));
       }
     } catch {
@@ -67,16 +72,16 @@ export default function WeightCalculator({ classes, groups, classItems, kits }: 
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ cls, str, ewl, gym, rows }));
+      localStorage.setItem(KEY, JSON.stringify({ cls, str, ewl, gym, held, gameCap, rows }));
     } catch {
       // Nothing to do: the numbers on screen are still right.
     }
-  }, [ready, cls, str, ewl, gym, rows]);
+  }, [ready, cls, str, ewl, gym, held, gameCap, rows]);
 
   useToolUse('weight', { cls, str, ewl, gym, items: rows.length }, ready);
 
-  const cap = weightCap({ cls, str, ewl, gym });
-  const l = load(cap, rows);
+  const cap = gameCap > 0 ? gameCap : weightCap({ cls, str, ewl, gym });
+  const l = load(cap, held > 0 ? [{ weight: held, qty: 1 }, ...rows] : rows);
   const hasEwl = EWL_CLASSES.has(cls);
 
   function addItem(it: WeightItem, qty = 1) {
@@ -87,12 +92,8 @@ export default function WeightCalculator({ classes, groups, classItems, kits }: 
     });
     setQuery('');
   }
-  const kit = kits[cls] ?? [];
   const mine = classItems[cls] ?? [];
   const className = classes.find((c) => c.slug === cls)?.name ?? '';
-  function addKit() {
-    for (const k of kit) addItem({ id: k.id, name: k.name, weight: k.weight }, k.qty);
-  }
   function setQty(id: number, qty: number) {
     setRows((prev) => prev.map((r) => (r.id === id ? { ...r, qty: Math.max(0, Math.min(99999, Math.floor(qty) || 0)) } : r)));
   }
@@ -153,16 +154,27 @@ export default function WeightCalculator({ classes, groups, classItems, kits }: 
             </select>
           </label>
         </div>
-        <p className="wcalc__cap">แบกได้ <b className="mono">{num(cap)}</b></p>
+        <div className="wcalc__game">
+          <p className="wcalc__gtitle">ตัวเลขจากเกม (ไม่บังคับ) · ดูบรรทัด Weight ในหน้าต่างข้อมูลตัวละคร เช่น 1247 / 2230</p>
+          <div className="wcalc__fields">
+            <label>
+              <span>ถืออยู่แล้ว (เลขหน้า /)</span>
+              <input className="mono" type="number" inputMode="numeric" min={0} placeholder="0" value={held || ''}
+                onChange={(e) => setHeld(Math.max(0, Math.min(99999, Math.floor(Number(e.target.value)) || 0)))} />
+            </label>
+            <label>
+              <span>แบกได้ (เลขหลัง /)</span>
+              <input className="mono" type="number" inputMode="numeric" min={0} placeholder="คิดจากข้างบน" value={gameCap || ''}
+                onChange={(e) => setGameCap(Math.max(0, Math.min(99999, Math.floor(Number(e.target.value)) || 0)))} />
+            </label>
+          </div>
+        </div>
+        <p className="wcalc__cap">แบกได้ <b className="mono">{num(cap)}</b>{gameCap > 0 && <small className="muted"> (ตามเกม)</small>}</p>
         <p className="muted wcalc__note">STR จากอาชีพและจากของที่ใส่ไม่ช่วยเพิ่มน้ำหนัก นับเฉพาะที่ลงเอง · ยังไม่รวมรถเข็นของ Merchant ซึ่งแยกน้ำหนักต่างหาก</p>
       </section>
 
       <section className="card wcalc__bag" aria-labelledby="wcalc-bag">
         <h2 id="wcalc-bag" className="section-title">2 · ของที่ถือ</h2>
-        <div className="wcalc__kit">
-          <button type="button" className="wcalc__kitbtn" onClick={addKit}>▶ ใส่ชุดตั้งบอท {className}</button>
-          <span className="muted">{kit.map((k) => `${k.name} ${num(k.qty)}`).join(' · ')}</span>
-        </div>
         {[...groups, ...(mine.length ? [{ title: `ของใช้ ${className}`, items: mine }] : [])].map((g) => (
           <div key={g.title} className="wcalc__group" role="group" aria-label={g.title}>
             <h3 className="wcalc__gtitle">{g.title}</h3>
@@ -176,7 +188,7 @@ export default function WeightCalculator({ classes, groups, classItems, kits }: 
             </div>
           </div>
         ))}
-        <p className="muted wcalc__note">กดหนึ่งครั้งเพิ่ม 10 ชิ้น (ลูกธนูและของเบา 100) แล้วแก้จำนวนในรายการได้ · ชุดตั้งบอทเป็นจำนวนตั้งต้น แก้ต่อตามแมพที่ไป</p>
+        <p className="muted wcalc__note">กดหนึ่งครั้งเพิ่ม 10 ชิ้น (ลูกธนูและของเบา 100) แล้วแก้จำนวนในรายการได้</p>
         <div className="wcalc__search">
           <input type="search" placeholder="ค้นของอื่น เช่น Oridecon" value={query} aria-label="ค้นไอเทม"
             onFocus={() => void wantAll()} onChange={(e) => setQuery(e.target.value)} />
@@ -218,6 +230,11 @@ export default function WeightCalculator({ classes, groups, classItems, kits }: 
         <h2 id="wcalc-out" className="section-title">3 · ผล</h2>
         <p className="wcalc__big">
           <b className="mono">{num(l.total)}</b> / {num(cap)} <span className="mono">({l.pct.toFixed(1)}%)</span>
+        </p>
+        <p className="muted wcalc__note">
+          {held > 0
+            ? `รวมของที่ถืออยู่แล้ว ${num(held)} (ของสวมใส่และของในกระเป๋า) กับของที่เลือก ${num(Math.round((l.total - held) * 10) / 10)}`
+            : 'นับเฉพาะของที่เลือก ยังไม่รวมของสวมใส่และของอื่นที่ตัวละครถืออยู่ ใส่เลข "ถืออยู่แล้ว" จากเกมในข้อ 1 เพื่อให้ตรง'}
         </p>
         <div className="wcalc__bar" role="img" aria-label={`ถือ ${l.pct.toFixed(1)}% ของที่แบกได้`}>
           <i style={{ width: `${fill}%` }} />
