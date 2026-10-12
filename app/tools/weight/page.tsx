@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 // The things players carry on every trip, in the order they reach for them.
-const QUICK_IDS = [501, 502, 503, 504, 505, 506, 533, 645, 656, 610, 601, 602, 1750, 1751, 717];
+const QUICK_IDS = [501, 502, 503, 504, 505, 506, 533, 578, 548, 645, 656, 610, 601, 602, 1750, 1751, 717];
 
 const weights = new Map((weightFile as unknown as { items: [number, string, number][] }).items.map(([id, name, weight]) => [id, { id, name, weight }]));
 const quick: WeightItem[] = QUICK_IDS.map((id) => weights.get(id)).filter((x): x is WeightItem => !!x);
