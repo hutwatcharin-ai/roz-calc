@@ -217,12 +217,12 @@ export default function WeightCalculator({ classes, groups, classItems }: {
                 <img src={`/images/items/${r.id}.gif`} alt="" width={24} height={24} loading="lazy" />
                 <span className="wcalc__name">{r.name}<small className="mono">ชิ้นละ {num(r.weight)}</small></span>
                 <div className="wcalc__step">
-                  {[-big(r), -1].map((d) => (
+                  {[-100, -10, -1].map((d) => (
                     <button key={d} type="button" aria-label={`ลด ${r.name} ${-d}`} onClick={() => setQty(r.id, r.qty + d)}>−{-d}</button>
                   ))}
                   <input className="mono" type="number" inputMode="numeric" min={0} aria-label={`จำนวน ${r.name}`} value={r.qty || ''} placeholder="0"
                     onChange={(e) => setQty(r.id, Number(e.target.value))} />
-                  {[1, big(r)].map((d) => (
+                  {[1, 10, 100].map((d) => (
                     <button key={d} type="button" aria-label={`เพิ่ม ${r.name} ${d}`} onClick={() => setQty(r.id, r.qty + d)}>+{d}</button>
                   ))}
                 </div>
