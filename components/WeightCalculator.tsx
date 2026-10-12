@@ -153,7 +153,7 @@ export default function WeightCalculator({ classes, quick }: { classes: { slug: 
         </div>
         <p className="muted wcalc__note">กดหนึ่งครั้งเพิ่ม 10 ชิ้น (ลูกธนูและของเบา 100) แล้วแก้จำนวนในรายการได้</p>
         <div className="wcalc__search">
-          <input type="search" placeholder="ค้นของอื่น เช่น Oridecon, Two-Handed Axe หรือเลข ID" value={query} aria-label="ค้นไอเทม"
+          <input type="search" placeholder="ค้นของอื่น เช่น Oridecon" value={query} aria-label="ค้นไอเทม"
             onFocus={() => void wantAll()} onChange={(e) => setQuery(e.target.value)} />
           {hits.length > 0 && (
             <ul className="wcalc__hits">

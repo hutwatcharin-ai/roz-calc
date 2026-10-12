@@ -65,7 +65,8 @@
 @media (max-width: 560px) {
   .wcalc__rows li { grid-template-columns: 24px minmax(0, 1fr) 72px 40px; }
   .wcalc__sub { display: none; }
-  .wcalc__room li { grid-template-columns: 20px minmax(0, 1fr); }
-  .wcalc__room li > span.mono { grid-column: 2; }
+  .wcalc__room li { grid-template-columns: 20px minmax(0, 1fr) minmax(0, 1fr); row-gap: 0; padding: 4px 0; border-bottom: 1px solid var(--hair); }
+  .wcalc__room li > span:not(.mono) { grid-column: 2 / 4; }
+  .wcalc__room li > span.mono:nth-of-type(2) { grid-column: 2; }
   .wcalc__nums dd { font-size: 16px; }
 }
