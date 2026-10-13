@@ -1,0 +1,30 @@
+/* Advertiser sample page (13 Oct 2026): real-size banners inside a sketch of the page. */
+.adpreview__block { margin-top: 14px; }
+.adpreview__block > .muted { margin: 4px 0 12px; font-size: 14px; }
+.adpreview__frame { padding: 12px; border: 1px solid var(--hair); border-radius: 10px; background: #0a0720; overflow: hidden; }
+.adpreview__frame .adslot { margin: 12px auto; padding-inline: 0; max-width: 100%; }
+.adpreview__frame .adslot__tag { left: 8px; }
+.adsample__art {
+  flex-direction: column; gap: 6px;
+  border: 2px solid var(--pink); background: linear-gradient(135deg, rgba(255, 61, 154, .22), rgba(61, 232, 255, .18));
+  box-shadow: 0 0 14px rgba(255, 61, 154, .35); color: var(--text);
+}
+.adsample__art strong { font: 700 20px/1.2 var(--font-chakra), sans-serif; }
+.adsample__art span { font-size: 13px; color: var(--cyan); }
+.adsample__narrow { display: none; }
+.adpreview__nav { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: var(--panel-2); }
+.adpreview__nav b { font: 700 12px var(--font-mono), monospace; color: var(--yellow); margin-right: auto; }
+.adpreview__nav i { width: 48px; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .14); }
+.adsample__lines { display: grid; gap: 8px; margin: 12px 0 4px; }
+.adsample__lines i { height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .1); }
+.adpreview__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.adpreview__grid i { height: 64px; border-radius: 8px; background: rgba(255, 255, 255, .07); border: 1px solid var(--hair); }
+.adpreview__back { margin: 18px 0 0; text-align: center; }
+
+@media (max-width: 700px) {
+  .adsample__wide { display: none; }
+  .adsample__narrow { display: inline; }
+  .adsample__art strong { font-size: 15px; }
+  .adpreview__nav i { width: 26px; }
+  .adpreview__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

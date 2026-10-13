@@ -10,6 +10,8 @@ import localFont from 'next/font/local';
 import Analytics from '@/components/Analytics';
 import AdSlot from '@/components/AdSlot';
 import AdsenseScript from '@/components/AdsenseScript';
+import TopAdGate from '@/components/TopAdGate';
+import { adToShow } from '@/lib/ads';
 import { SITE_URL } from '@/lib/site';
 import { GA_DEBUG, gaBootstrap } from '@/lib/analytics';
 
@@ -111,7 +113,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Sold space, top of every page (lib/ads). It reserves its
                 pixels whether or not a banner is sold, so nothing below it
                 moves once the picture arrives. */}
-            <AdSlot slot="top" />
+            <TopAdGate sold={!!adToShow('top', new Date().toISOString().slice(0, 10))}>
+              <AdSlot slot="top" />
+            </TopAdGate>
             {children}
             <SiteFooter />
             {/* Phone only (CSS breakpoint): the five primary links move down

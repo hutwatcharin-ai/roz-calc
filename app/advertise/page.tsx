@@ -114,6 +114,9 @@ export default async function AdvertisePage() {
 
       <section className="card" aria-labelledby="ad-slots" style={{ marginTop: 14 }}>
         <h2 className="section-title" id="ad-slots">ตำแหน่งและราคา</h2>
+        <p style={{ margin: '6px 0 12px' }}>
+          <Link href="/advertise/preview">▶ ดูตัวอย่างแบนเนอร์ขนาดจริงในแต่ละตำแหน่ง</Link>
+        </p>
         <div className="adpage__slots">
           {slots.map((slot) => (
             <div key={slot.key} className="adpage__slot">

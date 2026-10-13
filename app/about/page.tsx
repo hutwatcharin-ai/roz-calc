@@ -14,8 +14,8 @@ export const metadata = {
 };
 
 // Static trust page (SEO audit High #6): who runs the site, how the numbers
-// are verified, and a real contact channel. No fabricated identity — the
-// maintainer stays "ผู้เล่นคนไทยคนหนึ่ง" until they choose otherwise.
+// are verified, and a real contact channel. The maintainer's name is the
+// one the owner gave (13 Oct 2026).
 export default function AboutPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32, maxWidth: 820 }}>
@@ -37,7 +37,7 @@ export default function AboutPage() {
         <h2 className="section-title">เว็บนี้คืออะไร</h2>
         <p style={{ marginTop: 8 }}>
           ฐานข้อมูลและเครื่องมือสำหรับ <strong>Ragnarok Zero Global</strong> ภาษาไทย
-          ทำโดยผู้เล่นคนไทยคนหนึ่ง ไม่ใช่เว็บทางการ และไม่ได้เกี่ยวข้องกับ Gravity
+          ทำและดูแลโดย <strong>Watcharin Hut</strong> ผู้เล่นคนไทยคนหนึ่ง ไม่ใช่เว็บทางการ และไม่ได้เกี่ยวข้องกับ Gravity
           หรือผู้ให้บริการเกม ทำเพราะอยากได้ฐานข้อมูลภาษาไทยที่เช็คได้ว่าตัวเลขมาจากไหน
         </p>
       </section>

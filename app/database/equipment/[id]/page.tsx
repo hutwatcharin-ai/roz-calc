@@ -26,6 +26,7 @@ const SECTION: GearSection = {
   label: 'อุปกรณ์',
   recentKind: 'equipment',
   feedbackPageType: 'equipment',
+  adsense: true,
   // The gear list ignores `type` unless `category` comes with it.
   subtypeHref: (item) =>
     `/database/equipment?category=${encodeURIComponent(item.category ?? '')}&type=${encodeURIComponent(item.weapon_type ?? '')}`,

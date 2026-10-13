@@ -11,7 +11,7 @@ import { AD_SIZES, adToShow, type AdSlot as Slot } from '@/lib/ads';
 import AdImpression from './AdImpression';
 import AdsenseUnit from './AdsenseUnit';
 
-export default function AdSlot({ slot }: { slot: Slot }) {
+export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?: boolean }) {
   const today = new Date().toISOString().slice(0, 10);
   const ad = adToShow(slot, today);
   const size = AD_SIZES[slot];
@@ -21,6 +21,12 @@ export default function AdSlot({ slot }: { slot: Slot }) {
     '--ad-narrow-w': `${size.narrow[0]}px`,
     '--ad-narrow-h': `${size.narrow[1]}px`,
   } as React.CSSProperties;
+
+  // Google does not allow its ads on pages with little of our own content
+  // (Publisher Policies; the site was refused for low-value content on
+  // 4 Oct 2026). Such a page still shows a banner sold directly, but takes
+  // no AdSense fill.
+  if (!ad && slot !== 'top' && !adsense) return null;
 
   if (!ad && slot !== 'top') {
     // Nothing sold here: AdSense fills it rather than the space earning

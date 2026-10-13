@@ -50,6 +50,9 @@ export interface GearSection {
   /** RecordVisit kind, so the "เพิ่งดู" strip links back to the right route */
   recentKind: 'equipment' | 'costume';
   feedbackPageType: string;
+  /** False where the page is mostly the game's own text and picture, so
+   *  AdSense must not fill the slot (costumes). A sold banner still shows. */
+  adsense: boolean;
   /**
    * Breadcrumb link back to this row's own kind in the list. The two lists
    * take different params -- the gear list ignores `type` unless `category`
@@ -384,7 +387,7 @@ export default function GearDetail({
 
       <div style={{ marginTop: 20 }}>
         <ItemFormerNameLine id={item.id} />
-        <AdSlot slot="detail" />
+        <AdSlot slot="detail" adsense={section.adsense} />
         <FeedbackButton pageType={section.feedbackPageType} entityId={String(item.id)} />
       </div>
     </main>

@@ -23,6 +23,7 @@ const SECTION: GearSection = {
   label: 'คอสตูม',
   recentKind: 'costume',
   feedbackPageType: 'costume',
+  adsense: false,
   // The costume list has one kind, so its subtype filter takes `type` alone.
   subtypeHref: (item) => `/database/costumes?type=${encodeURIComponent(item.weapon_type ?? '')}`,
 };
