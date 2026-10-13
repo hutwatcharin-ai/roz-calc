@@ -22,6 +22,9 @@
 .adpreview__back { margin: 18px 0 0; text-align: center; }
 
 @media (max-width: 700px) {
+  /* Give the samples the full phone width so they draw at their real size. */
+  .adpreview__frame { padding: 12px 0; margin-inline: -12px; }
+  .adpreview__nav, .adsample__lines, .adpreview__grid { margin-inline: 10px; }
   .adsample__wide { display: none; }
   .adsample__narrow { display: inline; }
   .adsample__art strong { font-size: 15px; }
