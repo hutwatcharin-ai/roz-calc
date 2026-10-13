@@ -4763,3 +4763,27 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 /* The STAGE tag sits above the minimap, not on it: on a square map it
    covered a warp number in the top-left corner (gef_fild03, 12 Oct 2026). */
 .mapimg--warps .mapimg__stage { position: static; display: inline-block; margin-bottom: 6px; }
+
+/* "ฟาร์มที่ไหนดี" on item, gear and card pages (components/FarmSpots). */
+.farmspots { margin-top: 20px; }
+.farmspots__list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.farmspots__list li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--hair); border-radius: 8px; background: #0d0824; }
+.farmspots__list li.is-best { border-color: color-mix(in srgb, var(--yellow) 60%, transparent); box-shadow: inset 4px 0 0 var(--yellow), 0 0 12px color-mix(in srgb, var(--yellow) 22%, transparent); }
+.farmspots__rank { font-weight: 700; font-size: 12px; letter-spacing: .06em; color: var(--dim); text-align: center; }
+.is-best .farmspots__rank { color: var(--yellow); }
+.farmspots__where { display: grid; gap: 2px; min-width: 0; }
+.farmspots__where strong { font: 700 16px/1.3 var(--font-chakra), sans-serif; }
+.farmspots__where .muted { font-size: 13px; }
+.farmspots__nums { display: grid; grid-template-columns: repeat(3, auto); gap: 6px 18px; margin: 0; }
+.farmspots__nums dt { font-size: 11.5px; color: var(--dim); white-space: nowrap; }
+.farmspots__nums dd { margin: 0; font-size: 15px; font-weight: 700; color: var(--cyan); white-space: nowrap; }
+.farmspots__note { margin: 10px 0 0; font-size: 12.5px; }
+@media (max-width: 700px) {
+  .farmspots__list li { grid-template-columns: 44px minmax(0, 1fr); }
+  .farmspots__nums { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding-top: 8px; border-top: 1px solid var(--hair); }
+  .farmspots__nums dt { white-space: normal; }
+  .farmspots__nums dd { font-size: 14px; }
+}
+
+/* Numbered how-to lists under a tool (skill planner, craft basket). */
+.splan__how { margin: 8px 0 10px; padding-left: 20px; display: grid; gap: 6px; font-size: 14.5px; line-height: 1.65; }

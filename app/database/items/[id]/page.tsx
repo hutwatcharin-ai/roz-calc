@@ -6,6 +6,7 @@ import { isAbsentFromGame } from '@/lib/game-absent';
 import { toZeroId } from '@/lib/classic-twins';
 import { isCVariant } from '@/lib/c-variant';
 import ItemCrafting from '@/components/ItemCrafting';
+import FarmSpots from '@/components/FarmSpots';
 import ItemShops from '@/components/ItemShops';
 import ItemQuests from '@/components/ItemQuests';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
@@ -345,6 +346,8 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       <ItemQuests itemId={item.id} />
 
       <ItemCrafting itemId={item.id} />
+
+      <FarmSpots droppers={(droppedBy ?? []).filter((d: any) => d.monsters).map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate }))} />
 
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>

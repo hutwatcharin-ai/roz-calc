@@ -80,6 +80,19 @@ export default async function CraftBasketPage() {
         ))}
       </nav>
 
+      <section className="card" style={{ marginTop: 16 }}>
+        <h2 className="section-title">ใช้ยังไง</h2>
+        <ol className="splan__how">
+          <li>เปิดหน้าสูตรหน้าไหนก็ได้ข้างบน แล้วกด <strong>+ คำนวณวัตถุดิบ</strong> ที่ของที่อยากทำ ใส่จำนวนชิ้นได้</li>
+          <li>กลับมาหน้านี้ ของที่เลือกจากทุกหน้าจะรวมอยู่ในรายการเดียว วัตถุดิบที่ใช้ซ้ำกันบวกยอดให้แล้ว</li>
+          <li>แต่ละวัตถุดิบบอกว่ามอนตัวไหนดรอป อยู่แมพไหน และของชิ้นไหนมีร้าน NPC อยู่ในรายชื่อว่าขาย</li>
+        </ol>
+        <p className="muted" style={{ fontSize: 13.5 }}>
+          รวมได้ {all.length} สูตรจาก 4 หมวด: {byKind.map((k) => `${k.label} ${k.recipes.length}`).join(' · ')} ·
+          รายการเก็บไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น ไม่ได้ส่งขึ้นเซิร์ฟเวอร์
+        </p>
+      </section>
+
       <CraftCalc config={config} inline>
         <section className="card card--yellow" style={{ marginTop: 16 }}>
           <h2 className="section-title">เพิ่มของจากที่นี่เลย</h2>

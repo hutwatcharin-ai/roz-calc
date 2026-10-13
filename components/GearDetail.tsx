@@ -4,6 +4,7 @@
 // each route passes its own section rather than keeping a second copy in sync.
 
 import DropperGrid, { type Dropper } from '@/components/DropperGrid';
+import FarmSpots from '@/components/FarmSpots';
 import CostumeFit from '@/components/CostumeFit';
 import { costumeFit } from '@/lib/costume-fit';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
@@ -382,6 +383,9 @@ export default function GearDetail({
       {/* Before the drop list: a craftable item is usually made, not farmed,
           and the recipe is the shorter answer. */}
       <ItemCrafting itemId={item.id} />
+
+      {/* Costumes take no farm box: theirs come from boxes and events. */}
+      {section.adsense && <FarmSpots what="ชิ้นนี้" droppers={(droppedBy ?? []).filter((d: any) => d.monsters).map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate }))} />}
 
       {!fitted && dropsCard}
 

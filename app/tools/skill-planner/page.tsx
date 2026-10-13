@@ -9,6 +9,9 @@ import type { SkillLevelMap } from '@/lib/skill-details';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import skillExtra from '@/data/skill-level-extra.json';
+import Link from 'next/link';
+import { CLASS_SLUGS, lineFor } from '@/lib/skill-planner';
+import { classGuide } from '@/lib/class-guides';
 
 export const revalidate = 86400;
 
@@ -117,6 +120,54 @@ export default async function SkillPlannerPage() {
       <Suspense fallback={<p className="muted">กำลังโหลด…</p>}>
         <SkillPlanner icons={icons} levels={details.levels} descriptions={details.descriptions} />
       </Suspense>
+      {/* The tool above is all buttons; a reader (or a crawler) who lands here
+          gets no words about what it does. Everything below is read off the
+          same tree the planner uses, so the numbers cannot drift from it. */}
+      <section className="card" style={{ marginTop: 20 }}>
+        <h2 className="section-title">ใช้ยังไง</h2>
+        <ol className="splan__how">
+          <li>เลือกอาชีพที่แถบด้านบน ต้นไม้สกิลจะขึ้นครบทั้งสาย ตั้งแต่อาชีพแรกจนถึงอาชีพสอง</li>
+          <li>กด + ที่สกิลที่อยากได้ ถ้าสกิลนั้นต้องอัพสกิลอื่นก่อน เครื่องมือจะใส่แต้มสกิลที่ต้องมีให้เอง</li>
+          <li>ชี้หรือแตะที่สกิลเพื่อดูผลของแต่ละเลเวล SP ที่ใช้ ระยะ เวลาร่าย และดีเลย์</li>
+          <li>ดูแต้มที่ใช้ไปของแต่ละอาชีพ ถ้าเกินแต้มที่มีจะขึ้นเตือน แต่ไม่ล็อก เผื่ออยากลองดูก่อน</li>
+          <li>กด “คัดลอกลิงก์บิลด์” แล้วส่งให้เพื่อน เปิดลิงก์แล้วได้บิลด์เดียวกันทันที ไม่ต้องสมัครสมาชิก</li>
+        </ol>
+        <p className="muted" style={{ fontSize: 13.5 }}>
+          สกิลเควสของ Ragnarok Zero ได้มาพร้อมอาชีพ ไม่ต้องทำเควสและไม่เสียแต้ม เครื่องมือจึงไม่นับแต้มสกิลกลุ่มนี้
+        </p>
+      </section>
+
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title">อาชีพที่วางแผนได้</h2>
+        <div style={{ overflowX: 'auto' }}>
+          <table className="stat-table">
+            <thead>
+              <tr><th scope="col">อาชีพ</th><th scope="col">สายอาชีพ</th><th scope="col" className="num">สกิลทั้งสาย</th><th scope="col" className="num">แต้มสกิลที่มี</th><th scope="col">ไกด์</th></tr>
+            </thead>
+            <tbody>
+              {CLASS_SLUGS.map((slug) => {
+                const line = lineFor(slug);
+                const last = line[line.length - 1];
+                const guide = classGuide(slug);
+                return (
+                  <tr key={slug}>
+                    <th scope="row"><Link href={`/tools/skill-planner?class=${slug}`}>{last?.name ?? slug}</Link></th>
+                    <td>{line.map((s) => s.name).join(' → ')}</td>
+                    <td className="num mono">{line.reduce((n, s) => n + s.skills.length, 0)}</td>
+                    <td className="num mono">{line.map((s) => s.skill_points).join(' + ')}</td>
+                    <td>{guide ? <Link href={`/guides/classes/${guide.slug}`}>ไกด์ {guide.job}</Link> : '—'}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p className="muted" style={{ fontSize: 13.5, marginTop: 8 }}>
+          อยากรู้ว่าแต่ละสกิลทำอะไรแบบละเอียด ดูที่ <Link href="/database/skills">ฐานข้อมูลสกิล</Link> ·
+          อยากลองว่าบิลด์นี้ตีแรงแค่ไหน ใช้ <Link href="/tools/build">เครื่องจำลองบิลด์</Link>
+        </p>
+      </section>
+
       <Caveat label="ที่มาของข้อมูล">
         เงื่อนไขสกิลกับตำแหน่งช่องมาจากฐานข้อมูลของ prontera.info · เพดานแต้มต่ออาชีพ 10 / 49 / 69 ตาม Job ตัน 70 ของอาชีพ 2 ·
         เพดานแต้มใช้เป็นคำเตือน ไม่ได้ล็อก

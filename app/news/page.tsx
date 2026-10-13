@@ -49,7 +49,7 @@ export default function NewsPage() {
                   <time dateTime={item.date}>{item.dateTh}</time>
                   <span>
                     <b>{item.kind === 'patch' ? `แพทช์ ${item.dateTh} · ` : ''}{item.title}</b>
-                    <small>{item.kind === 'patch' ? 'แพทช์' : 'กิจกรรม'}</small>
+                    <small>{item.kind === 'patch' ? 'แพทช์' : 'กิจกรรม'} · {item.blurb}</small>
                   </span>
                   {item.kind === 'event' && !isLive(item, now) && <span className="newsrow__ended">จบแล้ว</span>}
                 </Link>

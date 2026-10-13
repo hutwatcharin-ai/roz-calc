@@ -25,6 +25,7 @@ import { isCVariant } from '@/lib/c-variant';
 import { cardRelease, releaseText } from '@/lib/card-availability';
 import { CardDroppers, CardHero } from './hero';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
+import FarmSpots from '@/components/FarmSpots';
 import InSetBox from '@/components/InSetBox';
 import ItemEffectsCard from '@/components/ItemEffectsCard';
 import type { Metadata } from 'next';
@@ -177,6 +178,8 @@ export default async function CardDetailPage({ params }: { params: { id: string 
           {clientTextFix(item.id) && <p className="ceiling-note" style={{ marginTop: 10 }}>{clientTextFix(item.id)!.note}</p>}
         </div>
       )}
+
+      <FarmSpots what="การ์ดใบนี้" droppers={rows.map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate ?? null }))} />
 
       <CardDroppers
         error={Boolean(droppedByError)}
