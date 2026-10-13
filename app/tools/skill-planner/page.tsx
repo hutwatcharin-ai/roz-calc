@@ -142,7 +142,7 @@ export default async function SkillPlannerPage() {
         <div style={{ overflowX: 'auto' }}>
           <table className="stat-table">
             <thead>
-              <tr><th scope="col">อาชีพ</th><th scope="col">สายอาชีพ</th><th scope="col" className="num">สกิลทั้งสาย</th><th scope="col" className="num">แต้มสกิลที่มี</th><th scope="col">ไกด์</th></tr>
+              <tr><th scope="col">อาชีพ</th><th scope="col" className="splan__line">สายอาชีพ</th><th scope="col" className="num">สกิลทั้งสาย</th><th scope="col" className="num">แต้มสกิลที่มี</th><th scope="col">ไกด์</th></tr>
             </thead>
             <tbody>
               {CLASS_SLUGS.map((slug) => {
@@ -152,9 +152,9 @@ export default async function SkillPlannerPage() {
                 return (
                   <tr key={slug}>
                     <th scope="row"><Link href={`/tools/skill-planner?class=${slug}`}>{last?.name ?? slug}</Link></th>
-                    <td>{line.map((s) => s.name).join(' → ')}</td>
+                    <td className="splan__line">{line.map((s) => s.name).join(' → ')}</td>
                     <td className="num mono">{line.reduce((n, s) => n + s.skills.length, 0)}</td>
-                    <td className="num mono">{line.map((s) => s.skill_points).join(' + ')}</td>
+                    <td className="num mono splan__pts">{line.map((s) => s.skill_points).join(' + ')}</td>
                     <td>{guide ? <Link href={`/guides/classes/${guide.slug}`}>ไกด์ {guide.job}</Link> : '—'}</td>
                   </tr>
                 );
