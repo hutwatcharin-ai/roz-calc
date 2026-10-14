@@ -235,6 +235,9 @@ export default async function CostumesPage({
                 ))}
               </div>
               <p className="rolepick__asks">ชิ้นที่ไม่อยู่ในสองกลุ่มนี้ ข้อมูลยังไม่บอกว่าได้จากไหน ไม่ได้แปลว่าหาไม่ได้</p>
+              <p style={{ margin: '8px 0 0' }}>
+                <Link href="/database/costumes/drops">▶ คอสตูมดรอปจากมอน: ตีตัวไหน แมพไหน</Link>
+              </p>
             </>
           )}
         </section>

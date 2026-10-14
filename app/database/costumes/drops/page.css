@@ -1,0 +1,39 @@
+/* /database/costumes/drops */
+.cdrops__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 12px; }
+.cdrops__facts > div { border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); padding: 10px 12px; }
+.cdrops__facts dt { font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .12em; color: var(--pink); }
+.cdrops__facts dd { margin: 4px 0 0; font-weight: 700; color: var(--cyan); }
+.cdrops__notes { margin: 0 0 14px; padding-left: 18px; color: var(--faint); font-size: 14px; line-height: 1.6; }
+.cdrops__views { margin: 10px 0 6px; }
+
+.cdrops__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.cdrops__row {
+  display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 12px; align-items: start;
+  border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); padding: 12px;
+}
+.cdrops__row:hover { border-color: var(--cyan); }
+.cdrops__item { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; min-width: 0; }
+.cdrops__item .cthumb, .cdrops__item > img { flex: 0 0 48px; width: 48px; height: 48px; }
+.cdrops__name { display: block; font-weight: 700; overflow-wrap: anywhere; }
+.cdrops__pos { display: block; font-size: 13px; color: var(--faint); }
+
+.cdrops__mobs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cdrops__mobs > li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 14px; }
+.cdrops__mob { font-weight: 700; color: var(--cyan); }
+.cdrops__lv { font: 700 12px/1 ui-monospace, monospace; color: var(--pink); }
+.cdrops__maps { flex-basis: 100%; color: var(--faint); }
+
+.cdrops__maplist { display: grid; gap: 12px; }
+.cdrops__map { padding: 14px; }
+.cdrops__maphead { margin: 0 0 10px; font-size: 16px; }
+.cdrops__maphead .muted { font-weight: 400; font-size: 13px; }
+.cdrops__mapitems { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+
+@media (max-width: 640px) {
+  .cdrops__row { grid-template-columns: 1fr; }
+  .cdrops__facts dd { font-size: 14px; }
+}
+
+.cdrops__upcoming { margin-top: 16px; }
+.cdrops__upcoming .cdrops__mapitems { margin-top: 10px; }
+.cdrops__when { color: var(--yellow, #FFE14D); font-weight: 700; }

@@ -50,7 +50,7 @@ const NPCS_DATA_LAST_MODIFIED = '2026-09-10T23:48:03+07:00';
 // page itself comes in through the nav.
 export const CLASS_GUIDE_PATHS: string[] = CLASS_GUIDES.map((guide) => `/guides/classes/${guide.slug}`);
 
-export const EXTRA_STATIC_PATHS: string[] = ['/about', '/advertise', '/privacy', ...NEWS_PATHS];
+export const EXTRA_STATIC_PATHS: string[] = ['/about', '/advertise', '/privacy', '/database/costumes/drops', ...NEWS_PATHS];
 
 export const STATIC_PATHS: string[] = [
   ...new Set([...PRIMARY_LINKS, ...SECTION_LINKS.database, ...SECTION_LINKS.tools, ...SECTION_LINKS.guides]
