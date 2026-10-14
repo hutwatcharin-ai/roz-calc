@@ -77,6 +77,11 @@ export default function JobChangePage() {
             <span className="gtile__v">50</span>
             <span className="gtile__s">แต้มสกิลอาชีพ 1 ลงได้ครบก่อนเปลี่ยน</span>
           </div>
+          <div className="gtile">
+            <span className="gtile__k">เควสต์</span>
+            <span className="gtile__v">ไม่มี</span>
+            <span className="gtile__s">ถึงเงื่อนไขแล้วคุยกับ NPC เปลี่ยนได้เลย</span>
+          </div>
         </div>
       )}
 
@@ -117,7 +122,7 @@ export default function JobChangePage() {
         พิกัดทั้ง {jobChange.length} จุดมาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) ·
         <strong>เป็นแหล่งเดียว ไม่มีที่สองให้ตรวจ</strong> ตาราง map_stats ของเว็บนี้สร้างจากจุดเกิดมอน
         แมพในอาคารที่ NPC ยืนอยู่จึงไม่มีในฐานข้อมูลเราเลยสักแมพ ·
-        ขั้นตอนเควสต์ของแต่ละอาชีพยังไม่ได้รวบรวม ·
+        เรื่องไม่มีเควสต์ เจ้าของเว็บยืนยันจากในเกม (14 ต.ค. 2026) ·
         ถ้าเดินไปแล้วไม่เจอ NPC ตรงจุด บอกได้ จะได้แก้
       </Caveat>
 
