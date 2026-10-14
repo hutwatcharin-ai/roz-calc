@@ -99,7 +99,7 @@ export default async function AdvertisePage() {
       <section className="card adpage__stats" aria-labelledby="ad-stats">
         <h2 className="section-title" id="ad-stats">ตัวเลขผู้อ่าน</h2>
         <p className="muted adpage__note">
-          จาก Google Analytics ของเว็บ ช่วง {AD_STATS.periodDays} วันก่อนวันที่ {thaiDate(AD_STATS.asOf)} ไม่ใช่ตัวเลขประมาณ
+          จาก Google Analytics ของเว็บ ช่วง {AD_STATS.periodDays} วันล่าสุด ถึงวันที่ {thaiDate(AD_STATS.asOf)} ไม่ใช่ตัวเลขประมาณ
         </p>
         <dl className="adpage__figures">
           <div><dt>เปิดหน้า</dt><dd>{baht(AD_STATS.pageViews)} ครั้ง</dd></div>

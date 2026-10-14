@@ -19,7 +19,9 @@ import { createSign } from 'node:crypto';
 import { AD_STATS, INLINE_AD_PAGES, type AdStats } from './ads';
 
 const PROPERTY = 'properties/552516626';
-const DAYS = 28;
+// 30 complete days ending yesterday: the range the GA app shows by default
+// (owner, 14 Oct 2026), so the page and the app read the same figure.
+const DAYS = 30;
 const DETAIL_PATH = /^\/database\/(monsters|items|cards|costumes|equipment)\/[^/]+$/;
 const TIMEOUT_MS = 8000;
 // No `cache: 'no-store'` on these fetches: that marks /advertise dynamic and
@@ -79,7 +81,7 @@ async function report(token: string, dimensions: string[], metrics: string[]): P
     method: 'POST',
     headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
     body: JSON.stringify({
-      dateRanges: [{ startDate: `${DAYS}daysAgo`, endDate: 'today' }],
+      dateRanges: [{ startDate: `${DAYS}daysAgo`, endDate: 'yesterday' }],
       dimensions: dimensions.map((name) => ({ name })),
       metrics: metrics.map((name) => ({ name })),
       limit: 100000,
@@ -102,8 +104,8 @@ const share = (rows: Row[], match: string) => {
   return Math.round((100 * hit) / Math.max(1, total));
 };
 
-/** Bangkok's calendar date, the day the figures were read. */
-const todayBangkok = () => new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 10);
+/** Bangkok's calendar date of the last day counted (yesterday). */
+const lastDayBangkok = () => new Date(Date.now() + 7 * 3600_000 - 86400_000).toISOString().slice(0, 10);
 
 export async function getAdStats(): Promise<AdStats> {
   const key = readKey();
@@ -121,7 +123,7 @@ export async function getAdStats(): Promise<AdStats> {
     if (!views) return AD_STATS;
     const path = (r: Row) => r.dims[0].split('?')[0];
     return {
-      asOf: todayBangkok(),
+      asOf: lastDayBangkok(),
       periodDays: DAYS,
       users: Math.round(users),
       sessions: Math.round(sessions),

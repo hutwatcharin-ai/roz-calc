@@ -9,7 +9,7 @@ Slot reach is counted the way the slots are actually placed:
   inline  the three pages that carry the in-content slot
   detail  the detail pages: a monster, item, card, costume or equipment page
 
-Usage:  python scripts/refresh-ad-stats.py [days]     (default 28)
+Usage:  python scripts/refresh-ad-stats.py [days]     (default 30, ending yesterday)
         python scripts/refresh-ad-stats.py --dry-run  (print, write nothing)
 
 Needs the service-account key at ~/.config/claude-seo/service_account.json,
@@ -18,7 +18,7 @@ the same one scripts/ga4-report.py uses.
 import json
 import re
 import sys
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
@@ -37,7 +37,7 @@ INLINE_PAGES = {"/database/monsters", "/database/equipment", "/tools/leveling-sp
 DETAIL_PATH = re.compile(r"^/database/(monsters|items|cards|costumes|equipment)/[^/]+$")
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
-DAYS = int(args[0]) if args else 28
+DAYS = int(args[0]) if args else 30
 DRY = "--dry-run" in sys.argv
 
 
@@ -52,7 +52,7 @@ def report(c, dims, mets, limit=100000):
     resp = c.run_report(
         RunReportRequest(
             property=PROPERTY,
-            date_ranges=[DateRange(start_date=f"{DAYS}daysAgo", end_date="today")],
+            date_ranges=[DateRange(start_date=f"{DAYS}daysAgo", end_date="yesterday")],
             dimensions=[Dimension(name=d) for d in dims],
             metrics=[Metric(name=m) for m in mets],
             limit=limit,
@@ -78,7 +78,7 @@ def main():
     detail_views = sum(m[0] for d, m in pages if DETAIL_PATH.match(d[0].split("?")[0]))
 
     stats = {
-        "asOf": date.today().isoformat(),
+        "asOf": (date.today() - timedelta(days=1)).isoformat(),
         "periodDays": DAYS,
         "users": int(users),
         "sessions": int(sessions),
