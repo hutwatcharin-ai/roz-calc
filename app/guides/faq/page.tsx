@@ -75,7 +75,7 @@ const GROUPS: FaqGroup[] = [
       },
       {
         q: 'ไปเก็บเลเวลที่ไหนดี',
-        a: <>ใส่เลเวลแล้วดูได้ที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> มีทั้งจุดเก็บเลเวล จุดทิ้งบอท และจุดหาเงิน พร้อมจุดที่ผู้เล่นใช้จริง เช่น Horn/Elder Willow ช่วง 40 และหมู่บ้าน Goblin ช่วง 40-50</>,
+        a: <>ใส่เลเวลแล้วดูได้ที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link> มีทั้งจุดเก็บเลเวล จุดทิ้งบอท และจุดหาเงิน</>,
       },
       {
         q: 'มอนชื่อ Swift / Solid / Furious / Elusive หรือ ... Ringleader คืออะไร',
