@@ -31,7 +31,8 @@
 - **เว็บทางการ `roz.mygnjoy.com` / `getporing.mygnjoy.com` อ่านได้แล้ว** (owner 15 ต.ค. 2569 สั่งเอากฎห้ามออก · robots.txt วันนั้นเหลือแค่ `User-Agent: * Allow: /` ไม่มีบรรทัด ClaudeBot แล้ว) · อ่านทีละหน้าเท่าที่ต้องใช้ ไม่ไล่ดูดทั้งเว็บ · ก่อนแตะ subdomain mygnjoy ใหม่ เช็ก robots.txt ให้ถึงท้ายไฟล์ก่อน ถ้ากลับมาบล็อก ClaudeBot ให้หยุดและบอก owner
 - **midgardhub.com**: ToS ห้าม bulk scrape/republish — ใช้ได้แค่ข้อมูล fact ที่อยู่ใน `docs/midgardhub-export/data/` (local เท่านั้น อยู่ใน .gitignore **ห้ามหลุดเข้า repo สาธารณะ** — เคยหลุดแล้วต้อง force-push ลบ) และให้เครดิตใน footer
 - **ใช้ได้**: rozerodb.com (ยกเว้น `/api/`) — export อยู่ `docs/rozerodb-export/data/*.jsonl`, sprite NPC ดึงจาก `/assets/npcs/<code>.gif` · ragnarokzero.net (ยกเว้น /m/) · ratemyserver (ไอคอน item id-addressed — แต่ id ใหม่ๆ ได้ป้าย "No Image" md5 `a34c3279…` ต้อง reject) · static.divine-pride.net (รูป item ทาง PNG, robots เปิด) · rAthena raw GitHub
-- ห้ามแกะ `D:\RagnarokZero\data.grf` · ห้ามใช้ Divine-Pride API มา mirror DB
+- `D:\RagnarokZero\data.grf` แตกได้ (owner 15 ต.ค. 2569 ยกเลิกกฎห้าม) — ใช้เครื่องมือของ owner `tools\GrfDiffTool` (เรียก GrfCL) ผลไปที่ `D:\Data grf roz\weekly` · คู่มือ `D:\Data grf roz\GRF_WEEKLY_DIFF_GUIDE.md` · ⚠️ ถ้า GrfCL เปิด GRF ไม่ได้ โปรแกรมใช้ fallback ของเก่าเงียบๆ ต้องเทียบ manifest เองว่าได้ไฟล์ใหม่จริง · ไม่เอาไฟล์ดิบ GRF ทั้งก้อนขึ้น repo สาธารณะ
+- ห้ามใช้ Divine-Pride API มา mirror DB
 
 ## แพทเทิร์นในโค้ดที่ต้องรักษา
 
