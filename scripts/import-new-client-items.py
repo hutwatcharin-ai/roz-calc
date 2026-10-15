@@ -31,6 +31,8 @@ APPLY = '--apply' in sys.argv
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 SYSTEM = r'D:\RagnarokZero\System'
 ICON_DIRS = [
+    # 15 Oct 2026 patch, read with tools/grf-extract.mjs (flag-1 icons only).
+    r'D:\Data grf roz\grf-2026-10-15-icons\files\data\texture\유저인터페이스\item',
     r'D:\data_grf_comparison_20261001\extracted\added\data\texture\유저인터페이스\item',
     r'D:\data_grf_comparison_20261001\extracted\changed\data\texture\유저인터페이스\item',
     r'D:\data_grf_extracted\files\data\texture\유저인터페이스\item',
@@ -88,6 +90,11 @@ for sid, g in game.items():
     lines = [l for l in lines if l and l != '_']
     desc = ' '.join(lines)
     pos = next((l.split(':', 1)[1].strip() for l in lines if l.startswith('Position')), None)
+    if pos not in POSITION:
+        # 15 Oct 2026: some new costumes have an English text without the
+        # Position line; the Thai text still says "ตำแหน่ง : Upper".
+        th = [strip(l) for l in g.get('desc') or []]
+        pos = next((l.split(':', 1)[1].strip() for l in th if l.startswith('ตำแหน่ง')), None)
     lvl = next((l.split(':', 1)[1].strip() for l in lines if l.startswith('Required Level')), None)
     d = data.get(iid, {})
     name = g['name'].strip()
