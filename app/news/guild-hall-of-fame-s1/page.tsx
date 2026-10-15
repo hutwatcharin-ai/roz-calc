@@ -43,6 +43,13 @@ const TICKETS = [
   { id: 108173, name: 'Embrace', fx: 'DEF +3, MDEF +1', flame: 'Green' },
   { id: 108203, name: 'Wisdom', fx: 'MaxHP +50, MaxSP +20', flame: 'Yellow' },
 ];
+const KNIGHTS = [
+  { img: 'red', name: 'Poring Knight', drop: 'Iron 1' },
+  { img: 'yellow', name: 'Drops Knight', drop: 'Iron 1' },
+  { img: 'blue', name: 'Pouring Knight', drop: 'Iron 1' },
+  { img: 'green', name: 'Poporing Knight', drop: 'Iron 1' },
+  { img: 'gold', name: 'Golden Knight', drop: 'Iron 1-8' },
+];
 const FLAMES: Record<string, number> = { Red: 1003110, Blue: 1003111, Green: 1003112, Yellow: 1003113 };
 const MVP_HONOR = [
   [1086, 'Golden Thief Bug'], [1150, 'Moonlight Flower'], [1087, 'Orc Hero'], [1046, 'Doppelganger'], [1190, 'Orc Lord'],
@@ -117,6 +124,26 @@ export default function GuildHallOfFamePage() {
             </tbody>
           </table>
         </div>
+        {/* Where the Knights are: the 15 Oct client's navi_mob lists all
+            five on 215 of the 239 map groups it covers (fields and
+            dungeons), at Lv 15. Sprites from the same client
+            (scripts/build-guild-knight-images.py). */}
+        <p className="ghsub" id="knights">มอน Knight ออกที่ไหน</p>
+        <ul className="pmobs">
+          {KNIGHTS.map((k) => (
+            <li key={k.img}>
+              <span className="pmob">
+                <span className="pmob__art"><img src={`/images/events/guild-s1/knight-${k.img}.png`} alt="" loading="lazy" /></span>
+                <span className="pmob__name">{k.name}</span>
+                <span className="pmob__meta">{k.drop}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="muted" style={{ fontSize: 13.5, marginTop: 8 }}>
+          ไฟล์นำทางในเกม (แพทช์ 15 ต.ค.) ใส่ Knight ทั้ง 5 สีไว้ <strong>แทบทุกแมพ ทั้งทุ่งและดันเจี้ยน</strong>
+          เลเวล 15 · ตีที่แมพที่ฟาร์มอยู่แล้วได้เลย ไม่ต้องไปที่เฉพาะ · ไฟล์ไม่ได้บอกว่าเกิดถี่แค่ไหน
+        </p>
         <p className="ghsub">MVP ที่ดรอป Guild&apos;s Honor (MVP)</p>
         <ul className="pmobs">
           {MVP_HONOR.map(([id, name]) => (
@@ -130,7 +157,7 @@ export default function GuildHallOfFamePage() {
           ))}
         </ul>
         <p className="muted" style={{ fontSize: 13.5, marginTop: 8 }}>
-          หน้าทางการไม่บอกอัตราดรอป และไม่บอกว่ามอนพวก Knight เกิดที่แมพไหน · <Link href="/guides/mvp">วิธีเข้า MVP Raid</Link>
+          หน้าทางการไม่บอกอัตราดรอป · <Link href="/guides/mvp">วิธีเข้า MVP Raid</Link>
         </p>
       </section>
 
@@ -142,7 +169,7 @@ export default function GuildHallOfFamePage() {
         <ol className="ghsteps">
           <li>
             <b>For the Guild</b>
-            <span>ล่า Poring Knight, Drops Knight, Pouring Knight, Poporing Knight อย่างละ 10 ตัว · ส่ง {item(FLAMES.Red, 'Flame of the Guild')} แดง น้ำเงิน เขียว เหลือง สีละ 10 ชิ้น</span>
+            <span>ล่า Poring Knight, Drops Knight, Pouring Knight, Poporing Knight อย่างละ 10 ตัว · ส่ง {item(FLAMES.Red, 'Flame of the Guild')} แดง น้ำเงิน เขียว เหลือง สีละ 10 ชิ้น · ในไฟล์เกมแบ่งเป็น 2 เควสชื่อเดียวกัน (Poring + Drops กับ Flame แดง เหลือง / Pouring + Poporing กับ Flame น้ำเงิน เขียว)</span>
           </li>
           <li>
             <b>คุณธรรมที่สำคัญที่สุด</b>
@@ -276,7 +303,8 @@ export default function GuildHallOfFamePage() {
 
       <aside className="pnote">
         ที่มา: <a href={OFFICIAL} rel="noopener" target="_blank">หน้ากิจกรรม Guild Hall of Fame ทางการ</a> แท็บ step1-step6 (บันทึก 15 ต.ค. 2569) ·
-        ยังไม่ระบุ: จุดเกิดมอน Knight, อัตราดรอป, วิธีกดส่งคะแนน, เวลาตัดคะแนน, รางวัล Pre-Season · ถ้าในเกมไม่ตรงบอกได้ ·{' '}
+        จุดเกิด Knight และรายการเควสมาจากไฟล์เกมแพทช์ 15 ต.ค. ·
+        ยังไม่ระบุ: อัตราดรอป, วิธีกดส่งคะแนน, เวลาตัดคะแนน, รางวัล Pre-Season · ถ้าในเกมไม่ตรงบอกได้ ·{' '}
         <Link href="/news/patch-2026-10-15">แพทช์ 15 ต.ค.</Link> · <Link href="/guides/guild">ไกด์กิลด์</Link>
       </aside>
     </main>

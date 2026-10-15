@@ -35,13 +35,20 @@ const RAID_MVPS = [1511, 1039];
 const MARC = 1045;
 const MARC_CARD = 4105;
 
+const HALLOWEEN = [
+  { id: 19893, name: 'Fasolla Magic Hat', slot: 'หัวบน', box: 'Special Shadow Costume Box', icon: false },
+  { id: 31852, name: "Witch's Cloak", slot: 'หัวล่าง', box: 'Special Shadow Costume Box', icon: true },
+  { id: 410198, name: 'Deviruchi Party', slot: 'หัวกลาง', box: 'Premium Shadow Costume Box', icon: true },
+  { id: 20588, name: 'Broom of Witch', slot: 'ผ้าคลุม', box: 'Premium Shadow Costume Box', icon: true },
+];
+
 const CLOSED = (availability as { maps: Record<string, { when: string; area?: string }> }).maps;
 
 const HIGHLIGHTS = [
   { big: '2', title: 'MVP Raid ใหม่', body: 'Amon Ra และ Baphomet', href: '#raids', link: 'ดูค่าสถานะและธาตุ' },
   { big: 'GM', title: 'The Deep Deep Sea', body: '15-29 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) ล่า Marc เอาการ์ดก่อนแมพเปิด', href: '#marc', link: 'เวลาและวิธีเข้า' },
   { big: 'S1', title: 'Guild Hall of Fame', body: 'ซีซั่น 1 ถึง 7 ม.ค. 2570 · เควส Liechtenauer เก็บคะแนนกิลด์', href: '/news/guild-hall-of-fame-s1', link: 'วิธีเก็บคะแนนและรางวัล' },
-  { big: 'HW', title: 'คอสตูมฮาโลวีน', body: 'คอสตูมธีมฮาโลวีนใหม่ใน Kafra Shop' },
+  { big: 'HW', title: 'คอสตูมฮาโลวีน', body: "กาชา Shadow Scroll: Fasolla Magic Hat, Witch's Cloak, Deviruchi Party, Broom of Witch", href: '#halloween', link: 'ดูทั้งหมด' },
   { big: 'FIX', title: 'ปรับระบบ แก้บั๊ก', body: 'ประกาศยังไม่บอกว่าแก้อะไร' },
 ];
 
@@ -151,7 +158,7 @@ export default async function Patch20261015Page() {
       <section id="raids" style={{ marginTop: 34, scrollMarginTop: 90 }}>
         <h2 className="section-title">MVP Raid ใหม่ 2 ตัว</h2>
         <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
-          <strong>Amon Ra</strong> ในส่วนลึกของ Pyramid · <strong>Baphomet</strong> ใน Labyrinth Forest ·
+          <strong>Amon Ra</strong> ในส่วนลึกของ Pyramid (<code>/navi moc_pryd06 99/121</code>) · <strong>Baphomet</strong> ใน Labyrinth Forest ชั้น 3 (<code>/navi prt_maze03 93/104</code>) ·
           เข้าแบบเดียวกับ MVP Raid ตัวอื่น รับเควสรายวันที่ Eden Group แล้วเข้าประตูแดง · <Link href="/guides/mvp">ดูวิธีเข้า MVP Raid</Link>
         </p>
         <ul className="pmobs" style={{ marginTop: 10 }}>
@@ -224,11 +231,33 @@ export default async function Patch20261015Page() {
         </p>
       </section>
 
+      {/* From the 15 Oct client's item table (data/game-items.json): the two
+          Shadow costume boxes name what they hold. Price not in the client. */}
+      <section id="halloween" style={{ marginTop: 34, scrollMarginTop: 90 }}>
+        <h2 className="section-title">คอสตูมฮาโลวีน (กาชา Shadow Scroll)</h2>
+        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
+          เปิด <Link href="/database/items/108332">Shadow Scroll</Link> ลุ้นกล่องคอสตูม · ในกล่องเลือกได้ 1 ชิ้น
+        </p>
+        <ul className="pcards" style={{ marginTop: 10 }}>
+          {HALLOWEEN.map((c) => (
+            <li key={c.id}>
+              <Link href={`/database/costumes/${c.id}`} className="pcard">
+                <img src={c.icon ? `/images/items/${c.id}.png` : '/images/items/108332.png'} alt="" className="pcard__mob" loading="lazy" />
+                <span className="pcard__name">{c.name}</span>
+                <span className="pcard__from">{c.slot} · {c.box}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
+          ในไฟล์เกมมีคอสตูมผูกตัวมาใหม่ด้วย: Helmet of Light and Darkness, Eremes Scarf, Wings of Uriel, Haunting Skull, Abyssal Hair · ราคาใน Kafra Shop ยังไม่รู้
+        </p>
+      </section>
+
       <section style={{ marginTop: 34 }}>
         <h2 className="section-title">ส่วนที่ยังไม่มีรายละเอียด</h2>
         <ul style={{ margin: '6px 0 0', paddingInlineStart: 22, lineHeight: 1.7 }}>
           <li><strong>รางวัล Guild Hall of Fame พรีซีซั่น</strong> แจกรอบนี้ · ยังไม่รู้ว่าแต่ละอันดับได้อะไรและรับทางไหน</li>
-          <li><strong>คอสตูมฮาโลวีนใน Kafra Shop</strong> · ยังไม่รู้ชื่อชิ้นและราคา</li>
           <li><strong>ปรับระบบและแก้บั๊ก</strong> · ยังไม่มีรายการ</li>
         </ul>
       </section>
