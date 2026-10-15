@@ -3,7 +3,7 @@
 // every picture is pre-drawn into one sheet (lib/costume-fit), and the radios
 // only move the sheet through CSS :has() -- no client JS.
 
-import { costumeFit } from '@/lib/costume-fit';
+import { costumeArt, costumeFit } from '@/lib/costume-fit';
 
 const DIRS = [
   ['front', 'ด้านหน้า'],
@@ -17,7 +17,21 @@ const SEXES = [
 
 export default function CostumeFit({ id, name }: { id: number; name: string }) {
   const fit = costumeFit(id);
-  if (!fit) return null;
+  if (!fit) {
+    const art = costumeArt(id);
+    if (!art) return null;
+    return (
+      <section className="cfit cfit--art" aria-label={`ภาพประกอบ ${name}`}>
+        <p className="cfit__label">▶ COSTUME EFFECT</p>
+        <div className="cfit__stage cfit__stage--art">
+          <img src={art} alt={`ภาพประกอบ ${name} จากในเกม`} width={150} height={200} style={{ imageRendering: 'pixelated' }} />
+        </div>
+        <p className="cfit__note">
+          คอสตูมแบบเอฟเฟกต์ (ออร่าหรือของที่ลอยรอบตัว) เกมวาดด้วยระบบเอฟเฟกต์ ไม่ใช่ภาพบนตัวละคร เลยไม่มีภาพตอนใส่ · ภาพนี้คือภาพประกอบในหน้าต่างไอเทมของเกม
+        </p>
+      </section>
+    );
+  }
   const { w, h, garment, head } = fit.sheet;
   // A garment is mostly hidden behind the body from the front.
   const startDir = garment ? 'back' : 'front';

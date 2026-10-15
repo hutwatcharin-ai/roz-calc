@@ -4,6 +4,7 @@
 // client lets us draw (auras, effect-only pieces) and simply shows none.
 
 import fit from '@/data/costume-fit.json';
+import art from '@/data/costume-art.json';
 
 export interface FitSheet {
   /** One cell at 1x. Sheet: columns front, three-quarter, back; rows male, female. */
@@ -31,4 +32,14 @@ export function costumeFit(id: number): { src: string; headSrc: string | null; s
     headStillSrc: sheet.head ? `/images/costume-fit/${key}-head${sheet.frames ? '-still' : ''}.webp` : null,
     sheet,
   };
+}
+
+const artItems = art.items as Record<string, string>;
+
+/** The client's collection illustration for a costume the fitting room cannot
+ *  draw -- mostly effect costumes (auras) the game draws with its effect
+ *  engine (scripts/build-costume-art.py). */
+export function costumeArt(id: number): string | null {
+  const key = artItems[String(id)];
+  return key ? `/images/costume-art/${key}.webp` : null;
 }

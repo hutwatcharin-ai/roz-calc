@@ -6,7 +6,7 @@
 import DropperGrid, { type Dropper } from '@/components/DropperGrid';
 import FarmSpots from '@/components/FarmSpots';
 import CostumeFit from '@/components/CostumeFit';
-import { costumeFit } from '@/lib/costume-fit';
+import { costumeArt, costumeFit } from '@/lib/costume-fit';
 import ItemFormerNameLine from '@/components/ItemFormerNameLine';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
 import AdSlot from '@/components/AdSlot';
@@ -87,7 +87,7 @@ export default function GearDetail({
   // Costumes with a fitting-room picture use layout D (owner, 2 Oct 2026):
   // the droppers move up beside the picture instead of sitting under the
   // description.
-  const fitted = section.recentKind === 'costume' && costumeFit(item.id) !== null;
+  const fitted = section.recentKind === 'costume' && (costumeFit(item.id) !== null || costumeArt(item.id) !== null);
   // Weight, DEF/MDEF, weapon element and the refine totals from prontera.info
   // (lib/item-effects). A costume is never refined, so it shows no refine tile.
   const effects = itemEffects(item.id);
