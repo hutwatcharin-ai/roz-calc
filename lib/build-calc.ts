@@ -76,6 +76,15 @@ export interface ItemSet {
 
 const data = gearFile as unknown as { gear: Record<string, GearItem>; cards: Record<string, CardItem>; sets: ItemSet[] };
 
+// The 1 Oct 2026 Nordfeld armour and boots came without a refine schedule in
+// the captured data, so the simulator called them unrefinable (owner, 15 Oct
+// 2026: "this one can be refined"). They refine like any armour. Mid and lower
+// headgear and accessories have none on purpose: those cannot be refined.
+for (const id of [450586, 450587, 450588, 470464, 470465, 470466]) {
+  const g = data.gear[String(id)];
+  if (g && !g.rs) g.rs = 'armor';
+}
+
 export function gearById(id: number): GearItem | null {
   return data.gear[String(id)] ?? null;
 }

@@ -591,3 +591,13 @@ describe("staged chain after Landgris's ROZ Global calculator (15 Oct 2026)", ()
     expect(calcBuild({ ...gc, bf: { 'endow-blaze': 1 } }, mob).vs!.skill!.damage).toBe(calcBuild(gc, mob).vs!.skill!.damage);
   });
 });
+
+describe('Nordfeld gear refines (15 Oct 2026)', () => {
+  it('gives Nordfeld Mantle and Guard\'s Boots an armour refine schedule', () => {
+    expect(gearById(450587)?.rs).toBe('armor');
+    expect(gearById(470464)?.rs).toBe('armor');
+    const plain = calcBuild({ ...base, lv: 60, g: { armor: { id: 450587, r: 0, c: [0] } } });
+    const plus7 = calcBuild({ ...base, lv: 60, g: { armor: { id: 450587, r: 7, c: [0] } } });
+    expect(plus7.def.hard).toBeGreaterThan(plain.def.hard);
+  });
+});

@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-10-15", "href": "/tools/build", "title": "จำลองบิลด์: ชุด Nordfeld ตีบวกได้แล้ว", "note": "Nordium Plate, Nordfeld Mantle, Nordfeld Soldier's Armor, Guard's Boots, Archeologist's Shoes, Hill Patrol Boots เลือกตีบวกได้ DEF ขึ้นตามขั้น" },
     { "date": "2026-10-15", "href": "/news/guild-hall-of-fame-s1", "title": "ไกด์ Guild Hall of Fame ซีซั่น 1", "note": "เควส Liechtenauer 3 ขั้น เลือกโล่ 4 แบบ เควสรายวันกับ Dangle คะแนน Guild's Honor (Iron 1 / Bronze 30 / MVP 100) รางวัลอันดับและรายเดือน เครื่องแลกโล่ · หน้าแพทช์ 15 ต.ค. เติมเวลาอีเวนต์ The Deep Deep Sea แล้ว" },
     { "date": "2026-10-15", "href": "/guides/exp#exp-table", "title": "หน้า EXP ใหม่: ตัวคำนวณอยู่บนสุด ตารางเลเวล 1-70", "note": "คำนวณ EXP จากเลเวลนี้ไปเลเวลนั้นได้ถึง 70 ใส่ EXP ต่อชั่วโมงแล้วบอกเวลาที่ใช้ · ตารางแบ่งช่วงละ 10 เลเวลกดเปิดดู พร้อมยอดรวมแต่ละช่วง · เลเวล 51-70 จากแหล่งรอง (roztoday) ติดป้ายว่ายังไม่ยืนยันในเกม" },
     { "date": "2026-10-15", "href": "/tools/build", "title": "จำลองบิลด์: สูตรดาเมจใหม่ตามเครื่องคิด ROZ Global + ดาเมจต่อวินาที", "note": "ATK อาวุธขึ้นตาม STR (ธนูใช้ DEX) · การ์ดคูณเฉพาะส่วนอาวุธ · สูตรสกิล จำนวนฮิต เวลาร่ายและดีเลย์ 47 สกิลตามไคลเอนต์ Zero · Pierce ฮิตตามขนาดมอน Back Stab ใช้มีดได้ 2 ฮิต · เพิ่ม Meteor Storm, Grand Cross, กับดัก Hunter, Guillotine Fist · บอกดาเมจต่อวินาทีทั้งตีธรรมดาและสกิล" },
