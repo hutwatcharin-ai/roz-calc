@@ -45,6 +45,15 @@ export const NEWS: NewsItem[] = [
     ],
   },
   {
+    href: '/news/patch-2026-10-15',
+    kind: 'patch',
+    title: 'MVP Raid Amon Ra, Baphomet · การ์ด Marc',
+    blurb: 'Raid ใหม่ 2 ตัว อีเวนต์ GM ล่า Marc Guild Hall of Fame คอสตูมฮาโลวีน',
+    date: '2026-10-15T08:00:00+07:00',
+    dateTh: '15 ต.ค.',
+    badge: 'MVP',
+  },
+  {
     href: '/news/patch-2026-10-01',
     kind: 'patch',
     title: 'เลเวล 70, Labyrinth Forest, Sphinx, Mjolnir',
