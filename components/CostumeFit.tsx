@@ -76,6 +76,31 @@ export default function CostumeFit({ id, name }: { id: number; name: string }) {
   );
 }
 
+/** One cell of the fitting-room sheet (male), drawn `scale` times bigger:
+ *  a costume shown inside an article. A garment shows from behind. Moving
+ *  costumes move here too (the sheet is an animated WebP). */
+export function CostumeCell({ id, scale = 2, dir }: { id: number; scale?: number; dir?: 'front' | 'diag' | 'back' }) {
+  const fit = costumeFit(id);
+  if (!fit) return null;
+  const { w, h, garment } = fit.sheet;
+  const col = { front: 0, diag: 1, back: 2 }[dir ?? (garment ? 'back' : 'front')];
+  return (
+    <span
+      className="ccell"
+      role="img"
+      aria-label="ตัวอย่างตอนใส่"
+      style={{
+        width: w * scale,
+        height: h * scale,
+        backgroundImage: `url(${fit.src})`,
+        backgroundSize: `${w * 3 * scale}px ${h * 2 * scale}px`,
+        backgroundPosition: `${-w * col * scale}px 0`,
+        imageRendering: 'pixelated',
+      }}
+    />
+  );
+}
+
 /** Small picture for a list tile: the head close-up for headgear, the back
  *  of the body for a garment, fitted into the tile's 48px plinth (the outer
  *  span takes the plinth styles the list gives every tile's first child). */
@@ -93,7 +118,9 @@ export function CostumeThumb({ id }: { id: number }) {
     <span className="cthumb" aria-hidden="true">
       <span
         style={{
-          backgroundImage: `url(${useHead ? fit.headSrc : fit.src})`,
+          // A moving costume's tile stays still: dozens of animated sheets in
+          // one list would be heavy for nothing.
+          backgroundImage: `url(${useHead ? fit.headStillSrc : fit.stillSrc})`,
           width: Math.round(cw * s),
           height: Math.round(ch * s),
           backgroundSize: `${Math.round(cw * s * 3)}px ${Math.round(ch * s * 2)}px`,

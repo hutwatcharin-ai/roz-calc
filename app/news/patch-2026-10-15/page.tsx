@@ -15,6 +15,8 @@ import '../patch-2026-10-01/page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
+import { CostumeCell } from '@/components/CostumeFit';
+import './page.css';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { supabaseRead } from '@/lib/supabase';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
@@ -35,11 +37,28 @@ const RAID_MVPS = [1511, 1039];
 const MARC = 1045;
 const MARC_CARD = 4105;
 
-const HALLOWEEN = [
-  { id: 19893, name: 'Fasolla Magic Hat', slot: 'หัวบน', box: 'Special Shadow Costume Box', icon: false },
-  { id: 31852, name: "Witch's Cloak", slot: 'หัวล่าง', box: 'Special Shadow Costume Box', icon: true },
-  { id: 410198, name: 'Deviruchi Party', slot: 'หัวกลาง', box: 'Premium Shadow Costume Box', icon: true },
-  { id: 20588, name: 'Broom of Witch', slot: 'ผ้าคลุม', box: 'Premium Shadow Costume Box', icon: true },
+const HALLOWEEN_BOXES = [
+  {
+    id: 201148, tier: 'special', name: 'Special Shadow Costume Box',
+    costumes: [
+      { id: 19893, name: 'Fasolla Magic Hat', slot: 'หัวบน', quote: 'โดเรมีโดเรมีซ้อลหล่า~ หนูขอเวลาซักสามนาที....', note: '' },
+      { id: 31852, name: "Witch's Cloak", slot: 'หัวล่าง', quote: 'ผ้าคลุมที่มอบให้แก่แม่มดฝึกหัด', note: 'ในเกมนับเป็นช่องหัวล่าง' },
+    ],
+  },
+  {
+    id: 201149, tier: 'premium', name: 'Premium Shadow Costume Box',
+    costumes: [
+      { id: 410198, name: 'Deviruchi Party', slot: 'หัวกลาง', quote: 'สวมใส่แล้วเหมือนได้เข้าร่วมปาร์ตี้กับเหล่า Deviruchi', note: 'ขยับได้' },
+      { id: 20588, name: 'Broom of Witch', slot: 'ผ้าคลุม', quote: 'ไม้กวาดในฝันของผู้ที่เลือกเดินบนเส้นทางแห่งเวทมนตร์', note: '' },
+    ],
+  },
+] as const;
+const BOUND_NEW = [
+  { id: 401615, name: 'Helmet of Light and Darkness', slot: 'หัวบน', quote: 'มงกุฎสำหรับวีรบุรุษผู้กอบกู้ Rune-Midgarts' },
+  { id: 410201, name: 'Haunting Skull', slot: 'หัวกลาง', quote: 'กะโหลกวิญญาณกับหนังสือลอยวนรอบตัว' },
+  { id: 420449, name: 'Abyssal Hair', slot: 'หัวล่าง', quote: 'วิกผมสไตล์คลาสสิก' },
+  { id: 421025, name: 'Eremes Scarf', slot: 'หัวล่าง', quote: 'ผ้าพันคอแดงขาดรุ่งริ่งแบบ Eremes Guile' },
+  { id: 480971, name: 'Wings of Uriel', slot: 'ผ้าคลุม', quote: 'ปีกมหาเทวทูต Uriel' },
 ];
 
 const CLOSED = (availability as { maps: Record<string, { when: string; area?: string }> }).maps;
@@ -48,7 +67,7 @@ const HIGHLIGHTS = [
   { big: '2', title: 'MVP Raid ใหม่', body: 'Amon Ra และ Baphomet', href: '#raids', link: 'ดูค่าสถานะและธาตุ' },
   { big: 'GM', title: 'The Deep Deep Sea', body: '15-29 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) ล่า Marc เอาการ์ดก่อนแมพเปิด', href: '#marc', link: 'เวลาและวิธีเข้า' },
   { big: 'S1', title: 'Guild Hall of Fame', body: 'ซีซั่น 1 ถึง 7 ม.ค. 2570 · เควส Liechtenauer เก็บคะแนนกิลด์', href: '/news/guild-hall-of-fame-s1', link: 'วิธีเก็บคะแนนและรางวัล' },
-  { big: 'HW', title: 'คอสตูมฮาโลวีน', body: "กาชา Shadow Scroll: Fasolla Magic Hat, Witch's Cloak, Deviruchi Party, Broom of Witch", href: '#halloween', link: 'ดูทั้งหมด' },
+  { big: 'HW', title: 'คอสตูมฮาโลวีน', body: `กาชา Shadow Scroll ลุ้นกล่องแล้วเลือกเองได้ 1 จาก 2 ชิ้น · คอสตูมใหม่ ${4 + BOUND_NEW.length} แบบ`, href: '#halloween', link: 'ดูภาพตอนใส่' },
   { big: 'FIX', title: 'ปรับระบบ แก้บั๊ก', body: 'ประกาศยังไม่บอกว่าแก้อะไร' },
 ];
 
@@ -231,26 +250,57 @@ export default async function Patch20261015Page() {
         </p>
       </section>
 
-      {/* From the 15 Oct client's item table (data/game-items.json): the two
-          Shadow costume boxes name what they hold. Price not in the client. */}
-      <section id="halloween" style={{ marginTop: 34, scrollMarginTop: 90 }}>
-        <h2 className="section-title">คอสตูมฮาโลวีน (กาชา Shadow Scroll)</h2>
-        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
-          เปิด <Link href="/database/items/108332">Shadow Scroll</Link> ลุ้นกล่องคอสตูม · ในกล่องเลือกได้ 1 ชิ้น
-        </p>
-        <ul className="pcards" style={{ marginTop: 10 }}>
-          {HALLOWEEN.map((c) => (
+      {/* Halloween, from the 15 Oct client itself (data/game-items.json): the
+          two Shadow costume boxes name what they hold, each costume's own
+          text says where it sits, and the fitting-room pictures are drawn
+          from its sprites (scripts/build-costume-fit.py). Price and the odds
+          of each box are not in the client. */}
+      <section id="halloween" className="hwsec">
+        <p className="hwsec__kicker" aria-hidden="true">🎃 HALLOWEEN · SHADOW SCROLL</p>
+        <h2 className="hwsec__title">คอสตูมฮาโลวีน กาชา Shadow Scroll</h2>
+        <ol className="hwflow">
+          <li><b>ซื้อกล่อง</b><span><Link href="/database/items/201146">Shadow Scroll Box</Link> (1 ใบ) หรือ <Link href="/database/items/201147">10 Shadow Scroll Box</Link> ใน Kafra Shop</span></li>
+          <li><b>เปิด Shadow Scroll</b><span><Link href="/database/items/108332">Shadow Scroll</Link> &ldquo;เมื่อใช้ อาจมีบางสิ่งปรากฏขึ้น&rdquo; ลุ้นได้กล่องคอสตูม</span></li>
+          <li><b>เลือก 1 ชิ้น</b><span>กล่อง Special หรือ Premium ให้เลือกคอสตูมเองได้ 1 จาก 2 ชิ้นในกล่องนั้น</span></li>
+        </ol>
+        {HALLOWEEN_BOXES.map((box) => (
+          <div key={box.id} className={`hwbox hwbox--${box.tier}`}>
+            <p className="hwbox__head">
+              <span className="hwbox__tag">{box.tier === 'premium' ? 'PREMIUM' : 'SPECIAL'}</span>
+              <Link href={`/database/items/${box.id}`}>{box.name}</Link>
+              <small>เลือกได้ 1 ชิ้น</small>
+            </p>
+            <ul className="hwcards">
+              {box.costumes.map((c) => (
+                <li key={c.id}>
+                  <Link href={`/database/costumes/${c.id}`} className="hwcard">
+                    <span className="hwcard__stage"><CostumeCell id={c.id} scale={2} /></span>
+                    <span className="hwcard__body">
+                      <span className="hwcard__slot">{c.slot}</span>
+                      <strong className="hwcard__name">{c.name}</strong>
+                      <span className="hwcard__quote">&ldquo;{c.quote}&rdquo;</span>
+                      {c.note && <span className="hwcard__note">{c.note}</span>}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <h3 className="hwsub">คอสตูมใหม่อื่นในไฟล์เกม (แบบผูกตัว)</h3>
+        <p className="muted" style={{ margin: '2px 0 10px', fontSize: 14 }}>มากับแพทช์นี้ ยังไม่รู้ว่าแจกหรือขายทางไหน · Costume Unbinding Injector ใช้ไม่ได้</p>
+        <ul className="hwmini">
+          {BOUND_NEW.map((c) => (
             <li key={c.id}>
-              <Link href={`/database/costumes/${c.id}`} className="pcard">
-                <img src={c.icon ? `/images/items/${c.id}.png` : '/images/items/108332.png'} alt="" className="pcard__mob" loading="lazy" />
-                <span className="pcard__name">{c.name}</span>
-                <span className="pcard__from">{c.slot} · {c.box}</span>
+              <Link href={`/database/costumes/${c.id}`} className="hwmini__card">
+                <span className="hwmini__stage"><CostumeCell id={c.id} scale={1} /></span>
+                <span><strong>{c.name}</strong><small>{c.slot} · {c.quote}</small></span>
               </Link>
             </li>
           ))}
         </ul>
-        <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
-          ในไฟล์เกมมีคอสตูมผูกตัวมาใหม่ด้วย: Helmet of Light and Darkness, Eremes Scarf, Wings of Uriel, Haunting Skull, Abyssal Hair · ราคาใน Kafra Shop ยังไม่รู้
+        <p className="muted" style={{ marginTop: 12, fontSize: 13.5 }}>
+          ภาพจากไฟล์ในเกม ใส่บนตัว Novice · คอสตูมที่ขยับได้จะขยับในภาพ · ยังไม่รู้: ราคา Shadow Scroll Box และโอกาสได้กล่อง Special/Premium
         </p>
       </section>
 

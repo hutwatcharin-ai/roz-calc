@@ -3,9 +3,10 @@
 // data.grf is allowed). Writes:
 //   <out>/index.jsonl   one line per entry: name, size, compressed, flags, offset
 //   <out>/files/...     the entries whose name matches --match, decompressed
-// Only plain zlib entries (flag 1, or 0 for stored) are written; entries with
-// the DES flags (2 = mixed, 4 = header) are listed in the index but skipped --
-// the game's text tables (.lub, .txt, .csv, .xml, .bson) are all flag 1.
+// Entries with flag 4 (header DES) are decoded first (tools/grf-des.mjs),
+// checked byte for byte against the 22 Sep 2026 extraction. Flag 2 (mixed
+// cipher) entries are listed but not written; files the patch adds or
+// changes have so far all been flag 1, and older ones are in that extraction.
 //
 //   node tools/grf-extract.mjs <data.grf> <outDir> [--match <regex>]
 //
@@ -18,6 +19,7 @@ import { openSync, readSync, mkdirSync, writeFileSync, createWriteStream } from 
 import { dirname, join } from 'node:path';
 import { inflateSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
+import { grfDecode } from './grf-des.mjs';
 
 const [grf, out, ...rest] = process.argv.slice(2);
 if (!grf || !out) throw new Error('usage: grf-extract.mjs <data.grf> <outDir> [--match <regex>]');
@@ -54,10 +56,12 @@ while (p < table.length) {
   entries++;
   const row = { name, size, compressed, flags, offset };
   if ((flags & 1) && match.test(name)) {
-    if (flags & 6) skippedCrypt++;
-    else {
+    // Flag 2 (mixed cipher) does not decode correctly yet: skipped, listed.
+    // Flag 4 (header only) matches the 22 Sep extraction byte for byte.
+    if (flags & 2) { skippedCrypt++; index.write(JSON.stringify(row) + '\n'); continue; }
+    {
       try {
-        const raw = read(offset + 46, aligned);
+        const raw = grfDecode(read(offset + 46, aligned), flags, compressed);
         const data = compressed === size && compressed === aligned ? raw : inflateSync(raw.subarray(0, compressed));
         const dest = join(out, 'files', name);
         mkdirSync(dirname(dest), { recursive: true });

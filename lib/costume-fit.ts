@@ -12,18 +12,23 @@ export interface FitSheet {
   garment: boolean;
   /** Head close-up cell size, when there is a head sheet (headgear only). */
   head?: number;
+  /** Frames, when the costume moves standing still: the sheet is an animated
+   *  WebP, and `-still.webp` beside it is its first frame (for list tiles). */
+  frames?: number;
 }
 
 const items = fit.items as Record<string, string>;
 const sheets = fit.sheets as Record<string, FitSheet>;
 
-export function costumeFit(id: number): { src: string; headSrc: string | null; sheet: FitSheet } | null {
+export function costumeFit(id: number): { src: string; headSrc: string | null; stillSrc: string; headStillSrc: string | null; sheet: FitSheet } | null {
   const key = items[String(id)];
   const sheet = key ? sheets[key] : undefined;
   if (!key || !sheet) return null;
   return {
     src: `/images/costume-fit/${key}.webp`,
     headSrc: sheet.head ? `/images/costume-fit/${key}-head.webp` : null,
+    stillSrc: `/images/costume-fit/${key}${sheet.frames ? '-still' : ''}.webp`,
+    headStillSrc: sheet.head ? `/images/costume-fit/${key}-head${sheet.frames ? '-still' : ''}.webp` : null,
     sheet,
   };
 }
