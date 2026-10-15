@@ -601,3 +601,40 @@ describe('Nordfeld gear refines (15 Oct 2026)', () => {
     expect(plus7.def.hard).toBeGreaterThan(plain.def.hard);
   });
 });
+
+describe('Boulder Dwarf cards (15 Oct 2026)', () => {
+  const dwarf: Target = {
+    name: 'Boulder Dwarf Mace', level: 55, vit: 30, def: 40, size: 'Medium', element: 'Earth', element_level: 1, race: 'Demi-Human', boss: false,
+    hit_100: 250, flee_95: 280, hp: 9000, mdef: 10, int: 10,
+  };
+  const other: Target = { ...dwarf, name: 'Orc Warrior' };
+  const knife = (c: number[]): Build => ({ ...base, cls: 'thief', lv: 55, st: { ...base.st, str: 50 }, g: { weapon: { id: 1201, r: 0, c } } });
+
+  it('Captain Card: physical damage +30% only against Boulder Dwarves', () => {
+    const plain = calcBuild(knife([0, 0, 0]), dwarf).vs!.damage!;
+    const carded = calcBuild(knife([300944, 0, 0]), dwarf).vs!.damage!;
+    expect(carded).toBeGreaterThan(plain);
+    expect(calcBuild(knife([300944, 0, 0]), other).vs!.damage).toBe(calcBuild(knife([0, 0, 0]), other).vs!.damage);
+  });
+  it('Squad Leader Card counts as a line, not skipped', () => {
+    const r = calcBuild(knife([300943, 0, 0]), dwarf);
+    expect(r.counted.some((l) => l.from.includes('Squad Leader'))).toBe(true);
+  });
+});
+
+describe('family cards beyond the Boulder Dwarves (15 Oct 2026)', () => {
+  const mob: Target = {
+    name: 'Orc Zombie', level: 30, vit: 20, def: 20, size: 'Medium', element: 'Undead', element_level: 1, race: 'Undead', boss: false,
+    hit_100: 200, flee_95: 250, hp: 3000, mdef: 5, int: 5,
+  };
+  const knife = (c: number[]): Build => ({ ...base, cls: 'thief', lv: 40, st: { ...base.st, str: 40 }, g: { weapon: { id: 1201, r: 0, c } } });
+  it('Orc Lady Card counts against an Orc, not against a name that only contains the letters', () => {
+    expect(calcBuild(knife([4255, 0, 0]), mob).vs!.damage!).toBeGreaterThan(calcBuild(knife([0, 0, 0]), mob).vs!.damage!);
+    const sorc = { ...mob, name: 'Sorcerer' };
+    expect(calcBuild(knife([4255, 0, 0]), sorc).vs!.damage).toBe(calcBuild(knife([0, 0, 0]), sorc).vs!.damage);
+  });
+  it('Drake Card removes the size penalty', () => {
+    const big = { ...mob, size: 'Large' };
+    expect(calcBuild(knife([4137, 0, 0]), big).vs!.damage!).toBeGreaterThan(calcBuild(knife([0, 0, 0]), big).vs!.damage!);
+  });
+});

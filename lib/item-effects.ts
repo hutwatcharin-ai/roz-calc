@@ -47,6 +47,29 @@ export interface ItemEffects {
 
 const data = file as unknown as { items: Record<string, ItemEffects> };
 
+// Cards whose lines the captured records left empty, mostly ones aimed at one
+// monster family (owner, 15 Oct 2026: the Boulder Dwarf cards did nothing
+// against Boulder Dwarves). Read from each card's own client text. The target
+// "monster_group:<name>" matches every monster whose name contains <name>,
+// champions included.
+const FAMILY_CARDS: Record<number, Bonus[]> = {
+  // "Physical damage against Boulder Dwarves +30%."
+  300944: [['damage_percent', 30, 'monster_group:Boulder Dwarf', null, null]],
+  // "Magic damage against Boulder Dwarves +30%."
+  300943: [['magic_damage_percent', 30, 'monster_group:Boulder Dwarf', null, null]],
+  // "Physical Damage to Goblin +30%." / "Physical damage to Orcs +30%."
+  4155: [['damage_percent', 30, 'monster_group:Goblin', null, null]],
+  4255: [['damage_percent', 30, 'monster_group:Orc', null, null]],
+  // "Removes size penalties on weapons." Empty in the records too.
+  4137: [['no_size_penalty', 1, null, null, null]],
+  // "Each refine on Shield grants MDEF +10."
+  27270: [['mdef', 10, null, 1, null]],
+};
+for (const [id, b] of Object.entries(FAMILY_CARDS)) {
+  const fx = (data.items[id] ??= {} as ItemEffects);
+  if (!fx.g?.length) fx.g = [{ c: {}, b }];
+}
+
 export function itemEffects(id: number): ItemEffects | null {
   return data.items[String(id)] ?? null;
 }
@@ -72,6 +95,7 @@ export function targetLabel(target: string | null): string | null {
   if (kind === 'size') return `ขนาด${SIZE[what] ?? what}`;
   if (kind === 'status') return STATUS[what] ?? what;
   if (kind === 'monster_kind') return what === 'boss' ? 'บอส' : 'มอนธรรมดา';
+  if (kind === 'monster_group') return `มอน ${what}`;
   return what ?? null;
 }
 

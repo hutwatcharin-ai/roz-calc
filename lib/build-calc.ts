@@ -863,6 +863,9 @@ function targetMatches(target: string, t: Target, ranged: boolean): boolean {
   if (kind === 'element') return (t.element ?? '').toLowerCase() === what;
   if (kind === 'size') return (t.size ?? '').toLowerCase() === what;
   if (kind === 'monster_kind') return what === 'boss' ? t.boss : !t.boss;
+  // A monster family named on a card (Boulder Dwarf Captain Card), champions included.
+  // Whole words only: "Orc" is Orc Zombie, not Sorcerer.
+  if (kind === 'monster_group') return new RegExp(`\\b${what}\\b`, 'i').test(t.name);
   if (kind === 'ranged') return ranged;
   return false;
 }
