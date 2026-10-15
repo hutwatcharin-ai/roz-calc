@@ -133,3 +133,18 @@ export function totalExpBetweenAnySource(from: number, to: number): { total: num
   }
   return { total, secondSource: to > MAX_PUBLISHED_BASE_LEVEL };
 }
+
+export interface ExpRow {
+  level: number;
+  exp: number;
+  /** The guide's table, or the second source (roztoday) past level 50. */
+  source: 'guide' | 'second';
+}
+
+/** Base EXP rows 1-70 in one list, each marked with where it comes from. */
+export function baseRowsAllSources(): ExpRow[] {
+  return [
+    ...BASE_EXP_ROWS.map((exp, i) => ({ level: i + 1, exp, source: 'guide' as const })),
+    ...SECOND_SOURCE_BASE_EXP_ROWS.map((exp, i) => ({ level: SECOND_SOURCE_FIRST_LEVEL + i, exp, source: 'second' as const })),
+  ];
+}

@@ -3,91 +3,103 @@
 // "From here to there, how much EXP is that?" The guide prints one bar per
 // level and never a total, so anyone planning a climb has been adding fifty
 // numbers by hand.
+//
+// Redesigned 15 Oct 2026 (owner: "make the EXP page easier to read"): it is
+// the first thing on the page now, as one arcade panel. Quick buttons for the
+// usual targets, and an optional EXP-per-hour box that turns the total into
+// hours. Up to the level cap: past 50 the rows are roztoday's unconfirmed
+// figures, and the result says so.
 
 import { useMemo, useState } from 'react';
 import { MAX_ANY_SOURCE_LEVEL, MAX_PUBLISHED_BASE_LEVEL, totalExpBetweenAnySource } from '@/lib/exp-table';
 
-// Up to the level cap (owner, 15 Oct 2026): past 50 the rows are roztoday's
-// unconfirmed figures, and the result says so.
 const LEVELS = Array.from({ length: MAX_ANY_SOURCE_LEVEL }, (_, i) => i + 1);
+const num = (n: number) => Math.round(n).toLocaleString('en-US');
+
+function hoursText(h: number): string {
+  if (h < 1) return `${Math.max(1, Math.round(h * 60))} นาที`;
+  if (h < 48) return `${h < 10 ? h.toFixed(1) : Math.round(h)} ชม.`;
+  return `${Math.round(h / 24)} วัน (${num(h)} ชม.)`;
+}
 
 export default function ExpRangeCalculator() {
   const [from, setFrom] = useState(1);
   const [to, setTo] = useState(30);
+  const [rate, setRate] = useState('');
 
-  // A "to" below "from" is a state the selects allow, so it is handled rather
-  // than prevented -- the answer is simply that there is nothing to climb.
   const result = useMemo(() => totalExpBetweenAnySource(from, to), [from, to]);
   const total = result?.total ?? null;
-  const perLevel = to > from ? (total ?? 0) / (to - from) : null;
+  const levels = to - from;
+  const perHour = Number(rate.replace(/[,\s]/g, ''));
+  const hours = total !== null && perHour > 0 ? total / perHour : null;
+  const lastBar = totalExpBetweenAnySource(to - 1, to)?.total ?? null;
+
+  const pickFrom = (n: number) => {
+    setFrom(n);
+    if (to <= n) setTo(Math.min(MAX_ANY_SOURCE_LEVEL, n + 1));
+  };
+  const chips: [string, number][] = [
+    ['+1 เลเวล', Math.min(MAX_ANY_SOURCE_LEVEL, from + 1)],
+    ['+5 เลเวล', Math.min(MAX_ANY_SOURCE_LEVEL, from + 5)],
+    ['ถึง 50', 50],
+    ['ถึง 60', 60],
+    ['ถึง 70', 70],
+  ];
 
   return (
-    <div className="card" style={{ marginTop: 16 }}>
-      <h2 className="section-title">จากเลเวลนี้ไปเลเวลนั้น ใช้ EXP เท่าไร</h2>
+    <section className="expcalc" aria-labelledby="expcalc-h">
+      <p className="expcalc__kicker" aria-hidden="true">▶ EXP CALCULATOR</p>
+      <h2 id="expcalc-h" className="expcalc__title">จากเลเวลนี้ ไปเลเวลนั้น ใช้ EXP เท่าไร</h2>
 
-      <form className="controlrow" onSubmit={(e) => e.preventDefault()}>
+      <div className="expcalc__pick">
         <label>
-          ตอนนี้เลเวล
-          <select value={from} onChange={(e) => setFrom(Number(e.target.value))}>
-            {LEVELS.map((n) => (
-              <option key={n} value={n} disabled={n >= to}>
-                {n}
-              </option>
-            ))}
+          <span>ตอนนี้เลเวล</span>
+          <select value={from} onChange={(e) => pickFrom(Number(e.target.value))}>
+            {LEVELS.slice(0, -1).map((n) => <option key={n} value={n}>{n}</option>)}
           </select>
         </label>
+        <span className="expcalc__arrow" aria-hidden="true">→</span>
         <label>
-          อยากได้เลเวล
+          <span>อยากได้เลเวล</span>
           <select value={to} onChange={(e) => setTo(Number(e.target.value))}>
-            {LEVELS.map((n) => (
-              <option key={n} value={n} disabled={n <= from}>
-                {n}
-              </option>
-            ))}
+            {LEVELS.map((n) => <option key={n} value={n} disabled={n <= from}>{n}</option>)}
           </select>
         </label>
-      </form>
+      </div>
+      <div className="expcalc__chips" role="group" aria-label="เลือกเป้าหมายเร็ว">
+        {chips.map(([label, n]) => (
+          <button key={label} type="button" disabled={n <= from} aria-pressed={to === n} onClick={() => setTo(n)}>
+            {label}
+          </button>
+        ))}
+      </div>
 
-      <table className="stat-table" style={{ marginTop: 12 }}>
-        <tbody>
-          <tr>
-            <td>
-              <strong>
-                EXP รวมจาก {from} ถึง {to}
-              </strong>
-            </td>
-            <td className="num">
-              {total === null ? (
-                <span className="muted">เลือกเลเวลปลายทางให้สูงกว่าเลเวลตอนนี้</span>
-              ) : (
-                <strong>{total.toLocaleString('en-US')}</strong>
-              )}
-            </td>
-          </tr>
-          <tr>
-            <td>เฉลี่ยต่อเลเวล</td>
-            <td className="num">
-              {perLevel === null ? '—' : Math.round(perLevel).toLocaleString('en-US')}
-            </td>
-          </tr>
-          <tr>
-            <td>บาร์เลเวลสุดท้ายก่อนถึง {to}</td>
-            <td className="num">
-              {totalExpBetweenAnySource(to - 1, to)?.total.toLocaleString('en-US') ?? '—'}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="expcalc__result" aria-live="polite">
+        <span className="expcalc__k">EXP ที่ต้องเก็บ (เลเวล {from} → {to})</span>
+        <strong className="expcalc__big">{total === null ? '—' : num(total)}</strong>
+        {result?.secondSource && (
+          <span className="expcalc__warn">
+            เลเวลเกิน {MAX_PUBLISHED_BASE_LEVEL} ใช้ตัวเลขแหล่งรอง ยังไม่ยืนยันในเกม · <a href="#exp-table">ดูตาราง</a>
+          </span>
+        )}
+      </div>
 
-      {result?.secondSource && (
-        <p className="filterstate" style={{ marginTop: 10 }}>
-          เลเวลเกิน {MAX_PUBLISHED_BASE_LEVEL} ใช้ตัวเลขจากแหล่งรอง (roztoday) ยังไม่ยืนยันในเกม · <a href="#exp-60-70">ดูตาราง</a>
+      <dl className="expcalc__facts">
+        <div><dt>ขึ้นทั้งหมด</dt><dd>{levels > 0 ? `${levels} เลเวล` : '—'}</dd></div>
+        <div><dt>เฉลี่ยต่อเลเวล</dt><dd>{total !== null && levels > 0 ? num(total / levels) : '—'}</dd></div>
+        <div><dt>ใบสุดท้าย ({to - 1} → {to})</dt><dd>{lastBar === null ? '—' : num(lastBar)}</dd></div>
+      </dl>
+
+      <label className="expcalc__rate">
+        <span>ได้ EXP ชั่วโมงละเท่าไร <i>(ไม่ใส่ก็ได้)</i></span>
+        <input inputMode="numeric" placeholder="เช่น 2,000,000" value={rate} onChange={(e) => setRate(e.target.value)} />
+      </label>
+      {hours !== null && (
+        <p className="expcalc__time">
+          ใช้เวลาประมาณ <strong>{hoursText(hours)}</strong> ถ้าได้ EXP เท่านี้ทุกชั่วโมง
         </p>
       )}
-      <p className="muted" style={{ marginTop: 10 }}>
-        นับจากแถบ EXP ว่างที่เลเวล {from} · แถบรีเซ็ตเป็น 0 ทุกครั้งที่ขึ้นเลเวล
-        ตัวเลขนี้จึงเป็นผลรวมของแถบทุกใบระหว่างทาง
-      </p>
-    </div>
+      <p className="expcalc__note">แถบ EXP รีเซ็ตเป็น 0 ทุกครั้งที่ขึ้นเลเวล ตัวเลขนี้คือผลรวมของทุกแถบระหว่างทาง นับจากแถบว่างที่เลเวล {from}</p>
+    </section>
   );
 }
