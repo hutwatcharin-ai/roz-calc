@@ -42,6 +42,23 @@ export const FIRST_JOB_EXP_ROWS: number[] = [
 export const MAX_PUBLISHED_BASE_LEVEL = BASE_EXP_ROWS.length;
 
 /**
+ * Base EXP for levels 60-70 from roztoday.com/th/tools/exp (Emperium Weekly,
+ * a fan site; read 15 Oct 2026 as the page shows it, owner: "only 60-70").
+ * A second source, kept apart from the guide's rows above so the range
+ * calculator never mixes them. Same row meaning as ours: its rows 2-50 equal
+ * the guide's exactly. Caution: every row it has, 1 to 100, is the row before
+ * x 1.2 rounded down to 100 -- including 71-100, which it marks estimated --
+ * so these cannot be told apart from an extrapolation, and Taiwan's notes
+ * (docs/GAME_MODEL.md) speak of a steeper 51-60 and an EXP cut near 70.
+ * Not checked in game. Index 0 = level 60.
+ */
+export const SECOND_SOURCE_FIRST_LEVEL = 60;
+export const SECOND_SOURCE_BASE_EXP_ROWS: number[] = [
+  91_852_000, 110_222_400, 132_266_800, 158_720_100, 190_464_100, 228_556_900,
+  274_268_200, 329_121_800, 394_946_100, 473_935_300, 568_722_300,
+];
+
+/**
  * The bar filled to arrive at this level, which a character one level below is
  * currently working on. Returns null past the last row the guide publishes
  * rather than extrapolating a number nobody has seen.

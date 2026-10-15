@@ -15,6 +15,8 @@ import {
   FIRST_JOB_EXP_ROWS,
   MAX_PUBLISHED_BASE_LEVEL,
   NOVICE_JOB_EXP_ROWS,
+  SECOND_SOURCE_BASE_EXP_ROWS,
+  SECOND_SOURCE_FIRST_LEVEL,
 } from '@/lib/exp-table';
 
 export const metadata = {
@@ -104,7 +106,8 @@ export default function ExpPage() {
           เพดานเลเวลตอนนี้คือ {BASE_LEVEL_CAP} (ตั้งแต่ {BASE_LEVEL_CAP_SINCE}) แต่ตารางที่เผยแพร่มีถึงเลเวล{' '}
           {MAX_PUBLISHED_BASE_LEVEL}
         </strong>{' '}
-        ส่วนเลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} ยังไม่มีใครลงตัวเลขไว้ ที่นี่จึงไม่เดาให้
+        ส่วนเลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} คู่มือทางการยังไม่ลงตัวเลข ·{' '}
+        <a href="#exp-60-70">เลเวล 60-70 มีตัวเลขจากแหล่งรอง</a> ยังไม่ได้ยืนยันในเกม
       </p>
 
       <Caveat label="วิธีอ่านตาราง">
@@ -136,6 +139,39 @@ export default function ExpPage() {
           </tbody>
         </table>
       </div>
+
+      {/* Levels 60-70 from a second source (owner, 15 Oct 2026). Its own
+          table and its own warning: never merged into the guide's rows. */}
+      <section id="exp-60-70" style={{ marginTop: 22, scrollMarginTop: 90 }}>
+        <h2 className="section-title">
+          เลเวล 60-70 <span className="tag tag--unknown">แหล่งรอง ยังไม่ยืนยัน</span>
+        </h2>
+        <p className="muted" style={{ marginTop: 4, maxWidth: '70ch' }}>
+          ตัวเลขจาก <a href="https://roztoday.com/th/tools/exp/" rel="nofollow noopener" target="_blank">roztoday</a> (เว็บแฟนเกม)
+          · แถวเลเวล 2-50 ของเขาตรงกับคู่มือทางการทุกแถว แต่ทุกแถวของเขาคือแถวก่อนหน้า ×1.2 พอดี
+          จึงยังบอกไม่ได้ว่าเป็นค่าจากเกมหรือคำนวณต่อเอง · ถ้าแถบ EXP ในเกมไม่ตรง บอกได้
+        </p>
+        <div className="card" style={{ marginTop: 12, overflowX: 'auto' }}>
+          <table className="stat-table">
+            <thead>
+              <tr>
+                <th scope="col">เลเวล</th>
+                <th scope="col">EXP</th>
+                <th scope="col">รวมจากเลเวล 60</th>
+              </tr>
+            </thead>
+            <tbody>
+              {runningTotals(SECOND_SOURCE_BASE_EXP_ROWS).map((sum, i) => (
+                <tr key={i}>
+                  <th scope="row">{SECOND_SOURCE_FIRST_LEVEL + i}</th>
+                  <td className="num">{num(SECOND_SOURCE_BASE_EXP_ROWS[i])}</td>
+                  <td className="num">{num(sum)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {/* Two more fifty-row tables. Most readers came for the base curve, and
           stacking all three made the page seven phone screens tall. */}
