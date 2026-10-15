@@ -44,7 +44,7 @@
 .hwmini__card:hover, .hwmini__card:focus-visible { border-color: #c58bff; }
 .hwmini__stage { min-height: 72px; }
 .hwmini__card strong { display: block; font-size: 14.5px; }
-.hwmini__card small { color: var(--faint); font-size: 12.5px; }
+.hwmini__card small { display: block; color: var(--faint); font-size: 12.5px; }
 
 @media (max-width: 420px) {
   .hwcard { grid-template-columns: 1fr; }

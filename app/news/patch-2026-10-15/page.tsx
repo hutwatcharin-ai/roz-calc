@@ -53,10 +53,16 @@ const HALLOWEEN_BOXES = [
     ],
   },
 ] as const;
+// Rewards of the KP spending event (22-30 Sep 2026, official event 123,
+// text pasted by the owner on 15 Oct 2026); the client only named them on
+// 15 Oct. "Book of Skulls" in the notice is the client's Haunting Skull --
+// a floating skull and book.
+const KP_REWARDS = [
+  { id: 420449, name: 'Abyssal Hair', slot: 'หัวล่าง', tier: 'กล่อง IV · เติม KP สะสม 100,000', quote: 'วิกผมสไตล์คลาสสิก' },
+  { id: 410201, name: 'Haunting Skull', slot: 'หัวกลาง', tier: 'กล่อง V · เติม KP สะสม 200,000', quote: 'ประกาศเรียก Book of Skulls · กะโหลกวิญญาณกับหนังสือลอยวนรอบตัว' },
+];
 const BOUND_NEW = [
   { id: 401615, name: 'Helmet of Light and Darkness', slot: 'หัวบน', quote: 'มงกุฎสำหรับวีรบุรุษผู้กอบกู้ Rune-Midgarts' },
-  { id: 410201, name: 'Haunting Skull', slot: 'หัวกลาง', quote: 'กะโหลกวิญญาณกับหนังสือลอยวนรอบตัว' },
-  { id: 420449, name: 'Abyssal Hair', slot: 'หัวล่าง', quote: 'วิกผมสไตล์คลาสสิก' },
   { id: 421025, name: 'Eremes Scarf', slot: 'หัวล่าง', quote: 'ผ้าพันคอแดงขาดรุ่งริ่งแบบ Eremes Guile' },
   { id: 480971, name: 'Wings of Uriel', slot: 'ผ้าคลุม', quote: 'ปีกมหาเทวทูต Uriel' },
 ];
@@ -67,7 +73,7 @@ const HIGHLIGHTS = [
   { big: '2', title: 'MVP Raid ใหม่', body: 'Amon Ra และ Baphomet', href: '#raids', link: 'ดูค่าสถานะและธาตุ' },
   { big: 'GM', title: 'The Deep Deep Sea', body: '15-29 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) ล่า Marc เอาการ์ดก่อนแมพเปิด', href: '#marc', link: 'เวลาและวิธีเข้า' },
   { big: 'S1', title: 'Guild Hall of Fame', body: 'ซีซั่น 1 ถึง 7 ม.ค. 2570 · เควส Liechtenauer เก็บคะแนนกิลด์', href: '/news/guild-hall-of-fame-s1', link: 'วิธีเก็บคะแนนและรางวัล' },
-  { big: 'HW', title: 'คอสตูมฮาโลวีน', body: `กาชา Shadow Scroll ลุ้นกล่องแล้วเลือกเองได้ 1 จาก 2 ชิ้น · คอสตูมใหม่ ${4 + BOUND_NEW.length} แบบ`, href: '#halloween', link: 'ดูภาพตอนใส่' },
+  { big: 'HW', title: 'คอสตูมฮาโลวีน', body: `กาชา Shadow Scroll ลุ้นกล่องแล้วเลือกเองได้ 1 จาก 2 ชิ้น · คอสตูมใหม่ ${4 + BOUND_NEW.length + KP_REWARDS.length} แบบ`, href: '#halloween', link: 'ดูภาพตอนใส่' },
   { big: 'FIX', title: 'ปรับระบบ แก้บั๊ก', body: 'ประกาศยังไม่บอกว่าแก้อะไร' },
 ];
 
@@ -287,6 +293,20 @@ export default async function Patch20261015Page() {
             </ul>
           </div>
         ))}
+        <h3 className="hwsub">รางวัลกิจกรรมใช้ KP (22-30 ก.ย. จบแล้ว)</h3>
+        <p className="muted" style={{ margin: '2px 0 10px', fontSize: 14 }}>
+          กิจกรรม Spend More. Unlock More. ใช้ KP ที่เติมเงินจริงครบตามขั้นได้กล่องรางวัล สะสมได้ทุกขั้น · ไฟล์เกมเพิ่งใส่ชื่อสองชิ้นนี้ในแพทช์นี้
+        </p>
+        <ul className="hwmini">
+          {KP_REWARDS.map((c) => (
+            <li key={c.id}>
+              <Link href={`/database/costumes/${c.id}`} className="hwmini__card">
+                <span className="hwmini__stage"><CostumeCell id={c.id} scale={1} box={72} /></span>
+                <span><strong>{c.name}</strong><small>{c.slot} · {c.tier}</small><small>{c.quote}</small></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
         <h3 className="hwsub">คอสตูมใหม่อื่นในไฟล์เกม (แบบผูกตัว)</h3>
         <p className="muted" style={{ margin: '2px 0 10px', fontSize: 14 }}>มากับแพทช์นี้ ยังไม่รู้ว่าแจกหรือขายทางไหน · Costume Unbinding Injector ใช้ไม่ได้</p>
         <ul className="hwmini">
