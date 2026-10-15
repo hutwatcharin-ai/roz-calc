@@ -28,6 +28,8 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
   { file: 'components/WeightCalculator.tsx', text: '10 ชิ้น', why: 'how many one tap of a quick button adds to the bag, not a count of anything' },
   { file: 'app/news/events-2026-10/page.tsx', text: '66 ตัว', why: 'Baphomet Jr. kill count for the daily quest, from the NPC dialogue' },
   { file: 'app/news/events-2026-10/page.tsx', text: '30 ตัว', why: 'Ancient Mummy kill count for the Amon Ra daily quest, from the NPC dialogue' },
+  // Guild Hall of Fame quest and exchange quantities, from the official event tabs step2-step6 (15 Oct 2026).
+  ...['10 ชิ้น', '10 ตัว', '30 ตัว', '50 ตัว', '40 ชิ้น', '20 ชิ้น'].map((text) => ({ file: 'app/news/guild-hall-of-fame-s1/page.tsx', text, why: 'quest and exchange quantities from the official Guild Hall of Fame pages' })),
   { file: 'app/guides/memorial-dungeons/page.tsx', text: '50 ชิ้น', why: 'Jellopy cost of one headgear enchant, a game price quoted from the guide' },
   {
     file: 'app/guides/faq/page.tsx',

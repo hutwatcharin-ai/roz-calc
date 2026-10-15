@@ -60,3 +60,8 @@
 .pevents__npcs img { max-height: 56px; width: auto; image-rendering: pixelated; }
 .pevents__go { color: var(--yellow); font-size: 18px; text-shadow: 0 0 8px var(--glow-yellow); }
 @media (prefers-reduced-motion: reduce) { .pevents { transition: none; } }
+/* Patch 15 Oct 2026: the GM event's schedule boxes. */
+.ptimes { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); margin-top: 12px; }
+.ptimes > div { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid rgba(255, 229, 61, .35); border-radius: 10px; background: #0b0724; font-size: 14px; color: var(--dim); }
+.ptimes b { color: var(--yellow); font-size: 15px; }
+.ptimes strong { color: var(--text); }

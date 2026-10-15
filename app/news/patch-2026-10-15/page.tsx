@@ -1,12 +1,11 @@
 // app/news/patch-2026-10-15/page.tsx
 //
-// The 15 Oct 2026 patch. The publisher's maintenance reminder (owner pasted
-// it on 15 Oct 2026, the morning of the patch -- the GNJOY site is off limits
-// to us) is all there is so far: two new MVP raids, Guild Hall of Fame season
-// 1, the GM event "The Deep Deep Sea" with Marc, Halloween costumes in the
-// Kafra Shop, fixes. It says fuller notes come separately, so every part the
-// notice does not spell out is marked unknown and the page is to be extended
-// when the notes arrive.
+// The 15 Oct 2026 patch. First written from the maintenance reminder the
+// owner pasted that morning; filled in the same day from the official pages
+// (update 156, event 157, the Guild Hall of Fame tabs -- the owner's
+// screenshots, PDFs and summary, Ragnarok-Zero-Update-2026-10-15.th.md):
+// where each raid is, the Deep Deep Sea schedule and monsters. Whatever those
+// pages do not spell out stays marked unknown.
 //
 // What is ours: the two MVPs' and Marc's stats and maps (monsters,
 // monster_spawns), Marc Card's effect (item 4105's own description), and that
@@ -40,8 +39,8 @@ const CLOSED = (availability as { maps: Record<string, { when: string; area?: st
 
 const HIGHLIGHTS = [
   { big: '2', title: 'MVP Raid ใหม่', body: 'Amon Ra และ Baphomet', href: '#raids', link: 'ดูค่าสถานะและธาตุ' },
-  { big: 'GM', title: 'The Deep Deep Sea', body: 'อีเวนต์ GM ได้ล่า Marc เอา Marc Card ก่อนแมพเปิด', href: '#marc', link: 'Marc Card ทำอะไร' },
-  { big: 'S1', title: 'Guild Hall of Fame', body: 'เริ่มซีซั่น 1 และแจกรางวัลพรีซีซั่น', href: '/guides/guild', link: 'ไกด์กิลด์' },
+  { big: 'GM', title: 'The Deep Deep Sea', body: '15-29 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) ล่า Marc เอาการ์ดก่อนแมพเปิด', href: '#marc', link: 'เวลาและวิธีเข้า' },
+  { big: 'S1', title: 'Guild Hall of Fame', body: 'ซีซั่น 1 ถึง 7 ม.ค. 2570 · เควส Liechtenauer เก็บคะแนนกิลด์', href: '/news/guild-hall-of-fame-s1', link: 'วิธีเก็บคะแนนและรางวัล' },
   { big: 'HW', title: 'คอสตูมฮาโลวีน', body: 'คอสตูมธีมฮาโลวีนใหม่ใน Kafra Shop' },
   { big: 'FIX', title: 'ปรับระบบ แก้บั๊ก', body: 'ประกาศยังไม่บอกว่าแก้อะไร' },
 ];
@@ -126,7 +125,8 @@ export default async function Patch20261015Page() {
         <p className="phero__lead">
           เพิ่ม MVP Raid 2 ตัว · อีเวนต์ GM ล่า Marc เอาการ์ดกันแช่แข็ง · Guild Hall of Fame ซีซั่น 1 · คอสตูมฮาโลวีนใน Kafra Shop
         </p>
-        <p className="phero__pill">ปิดปรับปรุงเริ่ม 08:00 น. · ประกาศยังไม่บอกเวลาเปิด</p>
+        <p className="phero__pill">ปิดปรับปรุงเริ่ม 08:00 น. เวลาไทย</p>{' '}
+        <Link className="phero__pill phero__pill--link" href="/news/guild-hall-of-fame-s1">ไกด์ Guild Hall of Fame →</Link>
       </header>
 
       <section className="phl" aria-label="สรุปแพทช์">
@@ -151,6 +151,7 @@ export default async function Patch20261015Page() {
       <section id="raids" style={{ marginTop: 34, scrollMarginTop: 90 }}>
         <h2 className="section-title">MVP Raid ใหม่ 2 ตัว</h2>
         <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
+          <strong>Amon Ra</strong> ในส่วนลึกของ Pyramid · <strong>Baphomet</strong> ใน Labyrinth Forest ·
           เข้าแบบเดียวกับ MVP Raid ตัวอื่น รับเควสรายวันที่ Eden Group แล้วเข้าประตูแดง · <Link href="/guides/mvp">ดูวิธีเข้า MVP Raid</Link>
         </p>
         <ul className="pmobs" style={{ marginTop: 10 }}>
@@ -165,8 +166,10 @@ export default async function Patch20261015Page() {
           ))}
         </ul>
         <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
+          ทั้งสองตัวดรอป <Link href="/database/items/107812">Guild&apos;s Honor (MVP)</Link> = 100 คะแนน{' '}
+          <Link href="/news/guild-hall-of-fame-s1#points">Guild Hall of Fame</Link> ·
           ไคลเอนต์แพทช์ 1 ต.ค. มี<Link href="/guides/mvp#dolls">กล่องรางวัลตุ๊กตา Baphomet กับ Amon Ra</Link>รออยู่แล้ว ·
-          ประกาศรอบนี้ไม่ได้บอกว่าเปิดพร้อม Raid หรือไม่
+          ประกาศไม่ได้บอกเงื่อนไขเข้า Raid ของรางวัล และว่าตุ๊กตาเปิดพร้อมกันไหม
         </p>
       </section>
 
@@ -200,26 +203,39 @@ export default async function Patch20261015Page() {
             </p>
           </div>
         </div>
+        <div className="ptimes">
+          <div><b>15-29 ต.ค. ทุกวัน</b><span>Odin, Loki (SEA): <strong>19:00-19:30 น.</strong> เวลาไทย</span><span>Skadi (EU): 01:00-01:30 น. ของวันถัดไป</span></div>
+          <div><b>ที่ <Link href="/database/maps/beach_dun">Western Cave Karu (beach_dun)</Link></b><span>GM เรียกมอนตามจุดต่างๆ ทั่วแมพ เดินหาแล้วตี</span></div>
+        </div>
+        <p className="muted" style={{ margin: '8px 0 4px', fontSize: 14 }}>มอนที่ออกในอีเวนต์</p>
+        <ul className="pcards">
+          {[[1045, 4105, 'Marc'], [1064, 4067, 'Megalodon'], [1044, 4093, 'Obeaune']].map(([mob, card, name]) => (
+            <li key={mob}>
+              <Link href={`/database/cards/${card}`} className="pcard">
+                <img src={`/images/monsters/${mob}.gif`} alt="" className="pcard__mob" loading="lazy" />
+                <span className="pcard__name">{name} Card</span>
+                <span className="pcard__from">จาก {name}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
         <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
-          ยังไม่รู้: อีเวนต์จัดที่ไหน กี่วัน และอัตราดรอปการ์ดในอีเวนต์ · ประกาศบอกแค่ว่าเป็นอีเวนต์ช่วงสั้น
+          หน้าอีเวนต์ทางการบอกว่า Marc Card ช่วยคนที่เตรียมลง <Link href="/guides/woe">WoE</Link> · ไม่ได้บอกอัตราดรอป จำนวนมอนต่อรอบ และไม่รับประกันว่าได้การ์ด
         </p>
       </section>
 
       <section style={{ marginTop: 34 }}>
         <h2 className="section-title">ส่วนที่ยังไม่มีรายละเอียด</h2>
         <ul style={{ margin: '6px 0 0', paddingInlineStart: 22, lineHeight: 1.7 }}>
-          <li>
-            <strong>Guild Hall of Fame ซีซั่น 1</strong> เริ่มแล้ว และแจกรางวัลของพรีซีซั่น · ยังไม่รู้ว่านับคะแนนจากอะไรและรางวัลคืออะไร ·{' '}
-            <Link href="/guides/woe">ไกด์ WoE</Link>
-          </li>
+          <li><strong>รางวัล Guild Hall of Fame พรีซีซั่น</strong> แจกรอบนี้ · ยังไม่รู้ว่าแต่ละอันดับได้อะไรและรับทางไหน</li>
           <li><strong>คอสตูมฮาโลวีนใน Kafra Shop</strong> · ยังไม่รู้ชื่อชิ้นและราคา</li>
           <li><strong>ปรับระบบและแก้บั๊ก</strong> · ยังไม่มีรายการ</li>
         </ul>
       </section>
 
       <aside className="pnote">
-        สรุปจากประกาศปิดปรับปรุงวันที่ 15 ต.ค. ซึ่งบอกว่ารายละเอียดเต็มจะประกาศแยก · ค่าสถานะมอนและผลการ์ดมาจากข้อมูลเกมในฐานข้อมูลเรา ·
-        จะเติมหน้านี้เมื่อมีประกาศเต็ม · <Link href="/news">ข่าวทั้งหมด</Link>
+        สรุปจากประกาศปิดปรับปรุง หน้าอัปเดต และหน้าอีเวนต์ทางการ (15 ต.ค.) · ค่าสถานะมอนและผลการ์ดมาจากข้อมูลเกมในฐานข้อมูลเรา ·
+        อีเวนต์ EXP/ดรอปเพิ่ม (13-15 ต.ค.) จบตอนปิดปรับปรุงนี้ · <Link href="/news">ข่าวทั้งหมด</Link>
       </aside>
     </main>
   );

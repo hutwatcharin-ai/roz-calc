@@ -1,0 +1,40 @@
+/* /news/guild-hall-of-fame-s1 (15 Oct 2026). Builds on the patch page's hero, tiles and sprite cards. */
+.ghof .phl { grid-template-columns: repeat(auto-fill, minmax(min(170px, 45%), 1fr)); }
+.ghsec { margin-top: 30px; scroll-margin-top: 90px; }
+.ghsec__lead { margin: 4px 0 10px; font-size: 14.5px; max-width: 70ch; }
+.ghsub { margin: 16px 0 8px; font: 700 16px var(--font-sarabun), sans-serif; color: var(--yellow); }
+.ghh3 { margin: 0 0 8px; font: 700 16px var(--font-sarabun), sans-serif; color: var(--cyan); }
+.ghof code { padding: 1px 6px; border-radius: 4px; background: rgba(61, 232, 255, .12); color: var(--cyan); font-size: 13px; white-space: nowrap; }
+.ghtable { overflow-x: auto; border: 1px solid var(--hair); border-radius: 10px; }
+.ghtable table { margin: 0; min-width: 480px; }
+.ghtable small { color: var(--faint); font-weight: 400; }
+.ghcols { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.ghlist { margin: 0; padding-inline-start: 20px; line-height: 1.7; font-size: 14.5px; }
+.ghlist--num { margin-top: 6px; }
+
+.ghsteps { list-style: none; counter-reset: gh; margin: 0 0 8px; padding: 0; display: grid; gap: 8px; }
+.ghsteps li {
+  counter-increment: gh; display: grid; grid-template-columns: 40px 1fr; grid-template-rows: auto auto; column-gap: 10px;
+  padding: 10px 12px; border: 1px solid rgba(61, 232, 255, .3); border-radius: 10px; background: #0b0724;
+}
+.ghsteps li::before {
+  content: counter(gh); grid-row: 1 / span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--cyan); color: #0b0724; font: 800 17px var(--font-chakra), sans-serif; box-shadow: 0 0 10px rgba(61, 232, 255, .5);
+}
+.ghsteps b { color: var(--text); font-size: 15.5px; }
+.ghsteps span { color: var(--dim); font-size: 14px; line-height: 1.6; }
+
+.ghshields { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(200px, 46%), 1fr)); }
+.ghshield { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--hair); border-top: 3px solid var(--c); background: #0b0724; }
+.ghshield b { font: 800 17px var(--font-chakra), sans-serif; color: var(--c); }
+.ghshield a { text-decoration: none; }
+.ghshield__fx { color: var(--text); font-weight: 700; font-size: 14.5px; }
+.ghshield__how { color: var(--faint); font-size: 13px; }
+.ghshield--red { --c: #ff5a6e; }
+.ghshield--blue { --c: #5aa8ff; }
+.ghshield--green { --c: #55e08a; }
+.ghshield--yellow { --c: var(--yellow); }
+
+.ghtickets { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 6px; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+.ghtickets li { padding: 8px 12px; border: 1px solid var(--hair); border-radius: 8px; font-size: 14px; }
+.ghtickets span { display: block; color: var(--yellow); font-weight: 700; }

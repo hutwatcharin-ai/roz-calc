@@ -30,6 +30,29 @@ export interface NewsItem {
 
 export const NEWS: NewsItem[] = [
   {
+    href: '/news/guild-hall-of-fame-s1',
+    kind: 'event',
+    title: 'Guild Hall of Fame ซีซั่น 1',
+    blurb: 'เควส Liechtenauer เลือกโล่ เก็บคะแนน Guild’s Honor รางวัลอันดับและรายเดือน',
+    date: '2026-10-15T12:00:00+07:00',
+    dateTh: '15 ต.ค.',
+    // Ends at the 7 Jan 2027 maintenance; 08:00 is this season's usual start.
+    ends: '2027-01-07T08:00:00+07:00',
+    endsTh: '7 ม.ค.',
+    badge: 'S1',
+  },
+  {
+    href: '/news/patch-2026-10-15#marc',
+    kind: 'event',
+    title: 'GM Event: The Deep Deep Sea',
+    blurb: 'ทุกวัน 19:00-19:30 น. ที่ Western Cave Karu ล่า Marc, Megalodon, Obeaune',
+    date: '2026-10-15T12:00:00+07:00',
+    dateTh: '15 ต.ค.',
+    ends: '2026-10-29T19:30:00+07:00',
+    endsTh: '29 ต.ค.',
+    cast: ['/images/monsters/1045.gif', '/images/monsters/1064.gif', '/images/monsters/1044.gif'],
+  },
+  {
     href: '/news/events-2026-10',
     kind: 'event',
     title: 'กิจกรรม ต.ค. · Baphomet Cult · Amon Ra · Kumamon',
