@@ -1188,6 +1188,7 @@ export default function BuildSimulator({ initial, sharedId }: {
                     HP มอน <b className="mono">{vs.hp ? vs.hp.toLocaleString('en-US') : 'ไม่ทราบ'}</b>
                     {vs.autoHits && <> · ตีธรรมดา <b className="mono">{vs.autoHits}</b> ที</>}
                     {vs.autoSeconds != null && <> · ~<b className="mono">{secs(vs.autoSeconds)}</b> วิ</>}
+                    {vs.autoDps != null && <> · <b className="mono">{vs.autoDps.toLocaleString('en-US')}</b> ดาเมจ/วิ</>}
                   </p>
                   {attacksFor(build.cls).length > 0 && (
                     <div className="buildsim__skillpick">
@@ -1210,21 +1211,28 @@ export default function BuildSimulator({ initial, sharedId }: {
                   )}
                   {vs.skill && (
                     <dl className="buildsim__skillres">
-                      <div><dt>ดาเมจต่อครั้ง <i>ประมาณ</i></dt><dd className="mono">{vs.skill.damage.toLocaleString('en-US')}</dd></div>
+                      <div>
+                        <dt>ดาเมจต่อครั้ง <i>ประมาณ</i></dt>
+                        <dd className="mono">
+                          {vs.skill.damage.toLocaleString('en-US')}
+                          {vs.skill.damageMin != null && vs.skill.damageMax != null && vs.skill.damageMin !== vs.skill.damageMax && <small> สุ่ม {vs.skill.damageMin.toLocaleString('en-US')}–{vs.skill.damageMax.toLocaleString('en-US')}</small>}
+                        </dd>
+                      </div>
+                      {vs.skill.dps != null && <div><dt>ดาเมจต่อวินาที</dt><dd className="mono">{vs.skill.dps.toLocaleString('en-US')} <small>({vs.skill.usesPerSecond} ครั้ง/วิ)</small></dd></div>}
                       <div>
                         <dt>ตัวคูณ</dt>
                         <dd className="mono">
-                          {vs.skill.ratio}%{vs.skill.hits > 1 ? ` × ${vs.skill.hits} ฮิต` : ''}
+                          {vs.skill.ratio}%{vs.skill.hits > 1 ? ` × ${vs.skill.hits} ฮิต` : vs.skill.hits < -1 ? ` รวม แบ่งโชว์ ${-vs.skill.hits} ฮิต` : ''}
                           {vs.skill.ratioSource && <small className="buildsim__src">{vs.skill.ratioSource}</small>}
                         </dd>
                       </div>
-                      <div><dt>ร่าย + ดีเลย์</dt><dd className="mono">{vs.skill.castSeconds} / {vs.skill.interval} วิ</dd></div>
+                      <div><dt>ร่าย + ดีเลย์</dt><dd className="mono">{vs.skill.castSeconds} + {vs.skill.delaySeconds ?? '?'} วิ <small>(ใช้ซ้ำทุก {vs.skill.interval} วิ)</small></dd></div>
                       <div><dt>ฆ่าได้ใน</dt><dd className="mono">{vs.skill.casts ? `${vs.skill.casts} ครั้ง` : '?'}{vs.skill.seconds != null ? ` · ~${secs(vs.skill.seconds)} วิ` : ''}</dd></div>
-                      <div><dt>SP</dt><dd className="mono">{vs.skill.sp}{vs.skill.casts ? ` × ${vs.skill.casts} = ${(vs.skill.sp * vs.skill.casts).toLocaleString('en-US')}` : ''}</dd></div>
+                      <div><dt>SP</dt><dd className="mono">{vs.skill.sp ? `${vs.skill.sp}${vs.skill.casts ? ` × ${vs.skill.casts} = ${(vs.skill.sp * vs.skill.casts).toLocaleString('en-US')}` : ''}` : 'ไม่ทราบ'}</dd></div>
                     </dl>
                   )}
                 </div>
-                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · ช่วงสุ่มมาจาก ATK อาวุธ ±5% ต่อเลเวลอาวุธ · คริตีโดนเสมอ ใช้ค่าสุ่มสูงสุด ×1.4 (โอกาสคริหัก LUK มอน×0.2) · เวลาฆ่านับโอกาสตีโดน คริ และ Double Attack แล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
+                <p className="buildsim__legend">ดาเมจตีธรรมดา ไม่คริ · ATK อาวุธ ×(1 + STR/200) สุ่ม ±5% ต่อเลเวลอาวุธ (ธนู/เครื่องดนตรี/แส้ใช้ DEX) · การ์ดตีเผ่า/ธาตุ/ขนาดคูณเฉพาะส่วนอาวุธ · คริตีโดนเสมอ ใช้ค่าสุ่มสูงสุด ×1.4 (โอกาสคริหัก LUK มอน×0.2) · สูตรตามเครื่องคิดของ Landgris โหมด ROZ Global ยังไม่ได้เช็กในเกม · เวลาฆ่านับโอกาสตีโดน คริ และ Double Attack แล้ว ไม่นับเดินหามอน{vs.multiplier !== 1 && ` · ตีเผ่า/ธาตุ/ขนาด ×${vs.multiplier.toFixed(2)}`}</p>
               </div>
             ) : (
               <p className="buildsim__empty">

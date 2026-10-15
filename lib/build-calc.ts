@@ -28,7 +28,10 @@ import { elementModifier } from '@/lib/element-table';
 import { STATS, type Stat, aspdFor, baseHpSp, classStats, jobBonusAt, statBudget, statCost, ASPD_CAP, RANGED_WEAPONS, WEAPON_TH } from '@/lib/class-stats';
 import { itemEffects, refineBonusAt, bonusText, type Bonus, type BonusCondition, type BonusGroup } from '@/lib/item-effects';
 import { foodById } from '@/lib/food-buffs';
-import { physicalDamagePerHit, statusAtkFromStats } from '@/lib/damage';
+import { sizeModifier, statusAtkFromStats } from '@/lib/damage';
+import { castSeconds as castTime, magicStaged, physicalStaged, trapStaged, usesPerSecond, type Range } from '@/lib/damage-staged';
+import zeroSkillFile from '@/data/zero-skills.json';
+import levelExtraFile from '@/data/skill-level-extra.json';
 import { hitChanceVsMob, mobHitChance } from '@/lib/hit-flee';
 import type { Element, ElementLevel } from '@/lib/element-table';
 
@@ -182,6 +185,30 @@ export interface AttackSkill {
   nd?: boolean;
 }
 const skillData = skillFile as unknown as { passives: Record<string, PassiveSkill>; buffs: BuffSkill[]; attacks: Record<string, AttackSkill[]> };
+
+// Skill formulas, hit counts and timings as Landgris's calculator runs ROZ
+// Global (owner, 15 Oct 2026: "follow theirs"; data/zero-skills.json, made by
+// scripts/import-zero-skills.mjs). Where a skill is there, it wins over the
+// planner rows and the formulas below. Hits: negative = the formula is the
+// whole cast, shown as that many hits.
+export interface ZeroSkill {
+  id: string;
+  type: 'atk' | 'matk' | 'trap' | 'mixed' | 'falcon' | 'breath';
+  f: string;
+  hits: string;
+  el: string;
+  ranged: boolean;
+  crit: boolean;
+  /** Per level: [fixed cast, variable cast, cooldown, delay] in seconds, or an expression. */
+  lv: (number | string)[][];
+  needs?: string[];
+}
+const ZERO_SKILLS = (zeroSkillFile as unknown as { skills: Record<string, ZeroSkill> }).skills;
+const ZERO_BY_NAME = new Map(Object.entries(ZERO_SKILLS).map(([n, s]) => [n.toLowerCase(), s]));
+export function zeroSkill(name: string): ZeroSkill | null {
+  return ZERO_BY_NAME.get(name.toLowerCase()) ?? null;
+}
+export const ZERO_SOURCE = 'สูตรตามเครื่องคิดของ Landgris (โหมด ROZ Global) ยังไม่ได้เช็กในเกม';
 
 // What the live game does that the captured planner data does not have.
 // Applied here so a rebuild of data/build-skills.json cannot drop them.
@@ -354,6 +381,27 @@ const ZERO_ATTACKS: Record<string, AttackSkill[]> = {
     },
   ],
 };
+// Attack skills the Zero client's skill tree has (data/skill-trees.json) but
+// the planner's attack list did not (15 Oct 2026). Damage comes from
+// data/zero-skills.json; cast and delay from data/skill-level-extra.json.
+// SP cost is not in our data: 0 here, shown as unknown.
+const LEVEL_EXTRA = (levelExtraFile as unknown as { skills: Record<string, Record<string, { cv?: number; cf?: number; acd?: number; cd?: number; h?: number }>> }).skills;
+function extraRows(slug: string, max: number): AttackSkill['lv'] {
+  return Array.from({ length: max }, (_, i) => {
+    const x = LEVEL_EXTRA[slug]?.[String(i + 1)] ?? {};
+    return [0, x.h ?? 0, x.cv ?? 0, x.cf ?? 0, x.acd ?? 0, x.cd ?? 0, 0];
+  });
+}
+const NEW_ATTACKS: [string, AttackSkill][] = [
+  ['crusader', { s: 'grand-cross', n: 'Grand Cross', max: 10, k: 'atk', el: 'holy', i: null, lv: extraRows('grand-cross', 10) }],
+  ['wizard', { s: 'meteor-storm', n: 'Meteor Storm', max: 10, k: 'matk', el: 'fire', i: null, lv: extraRows('meteor-storm', 10) }],
+  ['hunter', { s: 'land-mine', n: 'Land Mine', max: 5, k: 'atk', el: 'earth', i: null, lv: extraRows('land-mine', 5) }],
+  ['hunter', { s: 'blast-mine', n: 'Blast Mine', max: 5, k: 'atk', el: 'wind', i: null, lv: extraRows('blast-mine', 5) }],
+  ['hunter', { s: 'claymore-trap', n: 'Claymore Trap', max: 5, k: 'atk', el: 'fire', i: null, lv: extraRows('claymore-trap', 5) }],
+  ['monk', { s: 'guillotine-fist', n: 'Guillotine Fist', max: 5, k: 'atk', el: null, i: null, lv: extraRows('guillotine-fist', 5) }],
+];
+for (const [cls, a] of NEW_ATTACKS) (ZERO_ATTACKS[cls] ??= []).push(a);
+
 // Passives the planner data lacks; a level input only (Steel Crow feeds the
 // falcon formulas above).
 const ZERO_PASSIVES: Record<string, PassiveSkill> = {
@@ -396,18 +444,34 @@ function attackBySlug(cls: string, slug: string): AttackSkill | null {
 
 /** A skill's damage formula, evaluated; null when it is not a plain arithmetic expression. */
 export function evalRatio(expr: string, vars: Record<string, number>): number | null {
-  if (!/^[\w\s+\-*/().]+$/.test(expr)) return null;
-  const names = ['slv', 'str', 'agi', 'vit', 'int', 'dex', 'luk', 'base_level', 'cart_weight', 'steel_crow'];
-  const words = expr.match(/[a-z_]+/g) ?? [];
-  if (words.some((w) => !names.includes(w) && w !== 'floor')) return null;
+  const v = evalExpr(expr, vars);
+  return v !== null && v > 0 ? v : null;
+}
+
+/**
+ * A formula from the skill data: numbers, + - * / ( ), ?: and comparisons,
+ * floor(), and lower-case names. A weapon check reads wpt_<type> (1 when the
+ * weapon is that type). Unknown names count as 0. Null when it is not that.
+ */
+export function evalExpr(expr: string, vars: Record<string, number>): number | null {
+  if (!/^[\w\s+\-*/().?:<>=!]+$/.test(expr)) return null;
+  const words = [...new Set((expr.match(/[a-z_][a-z_0-9]*/g) ?? []).filter((w) => w !== 'floor'))];
+  if (words.some((w) => !/^[a-z_][a-z_0-9]*$/.test(w))) return null;
   try {
     // eslint-disable-next-line no-new-func
-    const v = new Function(...names, 'floor', `return (${expr});`)(...names.map((n) => vars[n] ?? 0), Math.floor) as number;
-    return Number.isFinite(v) && v > 0 ? v : null;
+    const v = new Function(...words, 'floor', `return (${expr});`)(...words.map((n) => vars[n] ?? 0), Math.floor) as number;
+    return Number.isFinite(v) ? Number(v) : null;
   } catch {
     return null;
   }
 }
+
+// Our weapon types under the names the formulas test (WPT(Daggers) etc.).
+const WPT: Record<string, string> = {
+  dagger: 'daggers', sword_1h: 'swords', sword_2h: 'twohandedswords', axe_1h: 'axes', axe_2h: 'axestwohand',
+  spear_1h: 'spears', spear_2h: 'spears', mace: 'maces', staff_1h: 'rods', staff_2h: 'rods', bow: 'bows',
+  knuckle: 'knuckles', katar: 'katars', book: 'books', whip: 'whips', instrument: 'instruments',
+};
 
 // --- Random option ranges (rozerodb.com/tools/affixes, 7 Oct 2026) ----------
 const ranges = (rangesFile as unknown as { ranges: Record<string, [string, string, number, number, number][]> }).ranges;
@@ -715,6 +779,8 @@ export interface TargetResult {
   hp?: number | null;
   autoHits?: number | null;
   autoSeconds?: number | null;
+  /** Auto-attack damage a second: the average swing (misses, crits, Double Attack) x swings a second. */
+  autoDps?: number | null;
   skill?: SkillResult | null;
 }
 
@@ -722,16 +788,26 @@ export interface SkillResult {
   name: string;
   level: number;
   kind: 'atk' | 'matk';
+  /** How it is worked out: weapon hit, magic, trap, falcon, or Grand Cross's mix. */
+  type?: ZeroSkill['type'];
   /** Damage % used (from the formula when there is one). */
   ratio: number;
   /** Where the ratio's formula came from, when not the planner data. */
   ratioSource?: string;
+  /** Hit count; negative = the damage is the total, shown as that many hits. */
   hits: number;
-  /** Damage of one cast, all hits. */
+  /** Damage of one cast, all hits (the middle of the range). */
   damage: number;
+  damageMin?: number;
+  damageMax?: number;
   /** Seconds between casts: cast time + delay, or the attack interval if longer. */
   interval: number;
   castSeconds: number;
+  /** The longer of the after-cast delay and the cooldown. */
+  delaySeconds?: number;
+  usesPerSecond?: number;
+  /** Damage a second with this skill alone, misses counted. */
+  dps?: number;
   casts: number | null;
   seconds: number | null;
   sp: number;
@@ -840,11 +916,6 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
   let hardMdef = 0;
   let wornWeight = 0;
   let weaponAtk = 0;
-  // Weapon ATK rolls ±5% per weapon level around the item's own ATK each hit
-  // (rAthena Renewal); refine is not rolled. Fits prontera's in-game check
-  // (117 predicted, 114-120 seen) where a flat ±15% would not.
-  let weaponVar = 0;
-  let leftVar = 0;
   let weaponMatk = 0;
   let shield = false;
   let left: GearItem | null = null;
@@ -882,14 +953,12 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
       weaponRefine = w.r;
       weaponEl = forged ? forgedEl : fx?.el ?? null;
       weaponAtk = (item.atk ?? 0) + (ref?.stat === 'ATK' ? ref.value : 0);
-      weaponVar = Math.floor(((item.atk ?? 0) * 5 * (item.wl ?? 1)) / 100);
       // Staffs and other MATK weapons: refine adds the same to MATK (lib/item-effects refineBonusAt).
       weaponMatk = item.matk ? item.matk + (ref?.stat === 'ATK' ? ref.value : 0) : 0;
     } else if (leftWeapon) {
       left = item;
       leftEl = forged ? forgedEl : fx?.el ?? null;
       leftAtk = (item.atk ?? 0) + (ref?.stat === 'ATK' ? ref.value : 0);
-      leftVar = Math.floor(((item.atk ?? 0) * 5 * (item.wl ?? 1)) / 100);
     } else if (ref?.stat === 'DEF') {
       hardDef += ref.value;
     }
@@ -1037,7 +1106,8 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
     warnings.push(`${classStats(build.cls)?.name ?? build.cls} ใช้อาวุธประเภทนี้ไม่ได้ (ไม่มีค่า ASPD)`);
   } else {
     aspd += get('aspd');
-    const pct = get('aspd_percent');
+    // "Attack delay -10%" lines are ASPD +10%.
+    const pct = get('aspd_percent') - get('attack_delay_percent');
     if (pct) aspd += ((195 - aspd) * pct) / 100;
     aspd = Math.min(ASPD_CAP, Math.floor(aspd * 10) / 10);
   }
@@ -1095,54 +1165,85 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
     const maxRoll = get('max_roll') > 0;
     // Lex Aeterna doubles the first hit on the target.
     const lex = get('lex') > 0;
-    const hand = (atk: number, type: string, el: string | null, statusTimes: number, ratio = 100, noDef = false) => physicalDamagePerHit({
-      weaponAtk: Math.floor((atk * (1 + get('atk_percent') / 100) * ratio) / 100),
-      // Status ATK counts twice in the right hand's damage (lib/damage) and
-      // once in the left's; flat ATK from gear once. A skill scales both.
-      statusAtk: Math.floor(((statusAtk * statusTimes + Math.floor(get('atk') * (1 + get('atk_percent') / 100))) * ratio) / 100),
-      weaponType: noSize || noDef ? 'Bare hand' : SIZE_ROW[type] ?? 'Bare hand',
-      weaponElement: (noDef ? (el ? cap(el) : 'Neutral') : (endow ?? el) ? cap((endow ?? el)!) : 'Neutral') as Element,
-      targetSize: target.size,
-      targetElement: (target.element as Element | null) ?? null,
-      targetElementLevel: (target.element_level as ElementLevel | null) ?? null,
-      targetDef: noDef ? 0 : def,
-      targetLevel: target.level,
-      targetVit: noDef ? 0 : target.vit,
-    });
-    // Added to every auto-attack hit after the multipliers (Shattering Strike).
-    const flat = get('flat_damage');
-    // One auto-attack with the weapon ATK rolled at `roll` (-1 low, 0 mid, 1 high).
-    const auto = (rolled: number) => {
-      const roll = maxRoll ? 1 : rolled;
-      const raw = hand(weaponAtk + roll * weaponVar, wt, weaponEl, 2);
-      let damage = raw ? Math.max(1, Math.floor(raw.damage * multiplier) + mastery + flat) : null;
-      let hands: TargetResult['hands'] = null;
-      if (left && damage !== null) {
-        const leftRaw = hand(leftAtk + roll * leftVar, left.wt ?? 'dagger', leftEl, 1);
-        const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
-        const leftPct = 30 + 10 * Math.min(5, build.sk?.[LEFT_MASTERY] ?? 0);
-        const r = Math.max(1, Math.floor((damage * rightPct) / 100));
-        const l = leftRaw ? Math.max(1, Math.floor((Math.floor(leftRaw.damage * multiplier) * leftPct) / 100)) : 0;
-        hands = { right: r, left: l, rightPct, leftPct };
-        damage = r + l;
-      }
-      return { damage, hands };
+    // The staged chain (lib/damage-staged, after Landgris's ROZ Global
+    // calculator, 15 Oct 2026). Element and DEF need the monster's values:
+    // without them the damage is unknown, never a guess.
+    const known = target.def !== null && target.level !== null && !!target.element && !!target.element_level;
+    const elPct = (el: string | null) =>
+      elementModifier(cap(el ?? 'neutral') as Element, target.element as Element, target.element_level as ElementLevel);
+    const softDefMob = Math.max(0, Math.floor((target.level + (target.vit ?? 0)) / 2));
+    // Card and gear lines by kind (race, size, element, boss, all) multiply
+    // the weapon part; ranged % is its own step.
+    const kinds = [...byKind.entries()].filter(([k]) => k !== 'ranged').map(([, v]) => v);
+    const rangedPct = byKind.get('ranged') ?? 0;
+    const stage = (o: {
+      item: GearItem | null; refineAtk: number; type: string; el: string | null; statusTimes: number;
+      skillPercent?: number | null; hits?: number; crit?: boolean; noDef?: boolean; ranged?: boolean; skillDamagePct?: number;
+    }): Range | null => {
+      if (!known) return null;
+      const size = noSize || o.noDef ? 1 : sizeModifier(SIZE_ROW[o.type] ?? 'Bare hand', target.size);
+      return physicalStaged({
+        weaponAtk: o.item?.atk ?? 0,
+        weaponLevel: o.item?.wl ?? 1,
+        weaponStat: RANGED_WEAPONS.has(o.type) ? dex : str,
+        refineAtk: o.refineAtk,
+        sizePct: Math.round(size * 100),
+        equipAtk: get('atk'),
+        kinds,
+        atkPercent: get('atk_percent'),
+        elementPct: elPct(o.el),
+        statusAtk,
+        statusTimes: o.statusTimes,
+        neutralPct: elPct('neutral'),
+        mastery,
+        rangedPct: o.ranged ? rangedPct : 0,
+        skillPercent: o.skillPercent ?? null,
+        skillDamagePct: o.skillDamagePct ?? 0,
+        hardDef: def ?? 0,
+        softDef: softDefMob,
+        noDef: o.noDef,
+        crit: o.crit,
+        critDamagePct: get('crit_damage_percent'),
+        maxRoll,
+        hits: o.hits,
+      });
     };
-    const { damage, hands } = auto(0);
-    const damageMin = damage === null ? null : auto(-1).damage;
-    const damageMax = damage === null ? null : auto(1).damage;
+    const weaponRefineAtk = weaponAtk - (weapon?.atk ?? 0);
+    const leftRefineAtk = leftAtk - (left?.atk ?? 0);
+    // An endow gives the weapon its element.
+    const autoEl = endow ?? weaponEl;
+    // Added to every auto-attack hit after everything (Shattering Strike, +100 a level, checked in game).
+    const flat = get('flat_damage');
+    const rightPct = 50 + 10 * Math.min(5, build.sk?.[RIGHT_MASTERY] ?? 0);
+    const leftPct = 30 + 10 * Math.min(5, build.sk?.[LEFT_MASTERY] ?? 0);
+    // One auto-attack range; dual wielding takes each hand's mastery share.
+    const autoRange = (crit = false): { r: Range; hands: TargetResult['hands'] } | null => {
+      const right = stage({ item: weapon, refineAtk: weaponRefineAtk, type: wt, el: autoEl, statusTimes: 2, ranged, crit });
+      if (!right) return null;
+      if (!left) return { r: { min: right.min + flat, max: right.max + flat }, hands: null };
+      const l = stage({ item: left, refineAtk: leftRefineAtk, type: left.wt ?? 'dagger', el: endow ?? leftEl, statusTimes: 1, crit });
+      const share = (x: number, pct: number) => Math.max(1, Math.floor((x * pct) / 100));
+      const r = { min: share(right.min, rightPct) + (l ? share(l.min, leftPct) : 0) + flat, max: share(right.max, rightPct) + (l ? share(l.max, leftPct) : 0) + flat };
+      const mid = (x: Range) => Math.floor((x.min + x.max) / 2);
+      return { r, hands: { right: share(mid(right), rightPct), left: l ? share(mid(l), leftPct) : 0, rightPct, leftPct } };
+    };
+    const normal = autoRange();
+    const damageMin = normal ? normal.r.min : null;
+    const damageMax = normal ? normal.r.max : null;
+    const damage = normal ? Math.floor((normal.r.min + normal.r.max) / 2) : null;
+    const hands = normal?.hands ?? null;
     // Time to kill with auto-attacks: expected damage per swing (hit chance
     // counted) at the swing rate ASPD gives.
     const aps = aspd !== null ? attacksPerSecond(aspd) : null;
     const mobHp = target.hp && target.hp > 0 ? target.hp : null;
     const landed = (hitChance ?? 100) / 100;
-    // Crits always land and take the top of the weapon roll, x1.4 and the
-    // crit damage lines (rAthena; prontera's crit chance against a target:
-    // CRI - its LUK x 0.2). Katar doubles CRI. Double Attack (Thief line,
-    // dagger in the right hand) swings twice and cannot crit, so per swing:
-    // DA, else crit, else a normal hit.
+    // Crits always land and take the top of the weapon roll, then x(1.4 +
+    // crit damage %). Crit chance against a target: CRI - its LUK x 0.2;
+    // Katar doubles CRI. Double Attack (Thief line, dagger in the right hand)
+    // swings twice and cannot crit, so per swing: DA, else crit, else normal.
     const critChance = Math.max(0, Math.min(100, crit * (wt === 'katar' ? 2 : 1) - (target.luk ?? 0) * 0.2));
-    const critDamage = damageMax === null ? null : Math.floor((damageMax - flat) * 1.4 * (1 + get('crit_damage_percent') / 100)) + flat;
+    const critRange = autoRange(true);
+    const critDamage = critRange ? critRange.r.max : null;
     const doubleAttack = wt === 'dagger' ? Math.min(100, get('double_attack')) : 0;
     const da = doubleAttack / 100;
     const c = critChance / 100;
@@ -1159,42 +1260,103 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
     if (pick) {
       const slv = Math.max(1, Math.min(pick.max, build.as![1] || pick.max));
       const row = pick.lv[slv - 1];
-      const ratio = (pick.f && evalRatio(pick.f, { slv, ...total, base_level: lv, cart_weight: 0, steel_crow: build.sk?.['Steel Crow'] ?? 0 })) || row[0];
-      const hits = row[1] || 1;
-      const el = pick.el && pick.el !== 'neutral' ? pick.el : null;
-      let perHit: number | null = null;
-      if (pick.k === 'atk') {
-        // The falcon is not the weapon: no weapon element, DEF or size.
-        const r = hand(weaponAtk + (maxRoll ? weaponVar : 0), wt, pick.nd ? el : el ?? weaponEl, 2, ratio, pick.nd);
-        perHit = r ? Math.max(1, Math.floor(r.damage * multiplier) + mastery) : null;
-      } else if (target.element && target.element_level) {
-        // Magic: MATK × % × element, reduced by MDEF (Renewal curve, as
-        // rozeroplanner and rAthena have it) and the monster's soft MDEF.
+      // Magnus Exorcismus hits Demon, Undead and Shadow harder: its own row.
+      const evil = raceKey(target.race) === 'demon' || raceKey(target.race) === 'undead' || ['shadow', 'undead'].includes((target.element ?? '').toLowerCase());
+      const z = (evil && zeroSkill(`${pick.n} (ex)`)) || zeroSkill(pick.n);
+      const vars: Record<string, number> = {
+        slv, ...total, base_level: lv, cart_weight: 0, steel_crow: build.sk?.['Steel Crow'] ?? 0,
+        esize: ['small', 'medium', 'large'].indexOf(String(target.size ?? '').toLowerCase()),
+        max_hp: hp ?? 0, cur_sp: sp ?? 0, target_vit: target.vit ?? 0,
+        ...(WPT[wt] ? { [`wpt_${WPT[wt]}`]: 1 } : {}),
+      };
+      const ratio = (z && evalRatio(z.f, vars)) || (pick.f && evalRatio(pick.f, vars)) || row[0];
+      const hits = z ? evalExpr(z.hits, vars) ?? 1 : row[1] || 1;
+      const kind = z?.type ?? pick.k;
+      // The skill's own element wins; an endow only colours a neutral skill.
+      const ownEl = pick.el && pick.el !== 'neutral' ? pick.el : z && z.el !== 'neutral' ? z.el : null;
+      const el = ownEl ?? (kind === 'atk' || kind === 'mixed' ? autoEl : null);
+      const skillDamagePct = [...sums.values()].filter((x) => x.type === 'skill_damage_percent' && (!x.skill || x.skill.toLowerCase() === pick.n.toLowerCase())).reduce((t, x) => t + x.value, 0);
+      const zRanged = z ? z.ranged : RANGED_WEAPONS.has(wt);
+      const magic = (skillPercent: number, n: number, withDef = true) => {
         const mdef = Math.floor((target.mdef ?? 0) * (1 - Math.min(100, ignoreMdef) / 100));
-        const elem = elementModifier(cap(el ?? 'neutral') as Element, target.element as Element, target.element_level as ElementLevel);
-        const softM = Math.floor(((target.int ?? 0) + target.level) / 4);
         // Magic of this skill's element (a Sage endow's "Fire Magical Damage +3%").
-        const ownEl = [...sums.values()].filter((x) => x.type === 'magic_damage_percent' && x.target === `skill_element:${el ?? 'neutral'}`).reduce((t, x) => t + x.value, 0);
-        const magicMul = [...magicByKind.values()].reduce((m, p) => m * (1 + p / 100), 1) * (1 + ownEl / 100);
-        const raw = ((statusMatk + equipMatk) * ratio) / 100 * (elem / 100) * ((1000 + mdef) / (1000 + 10 * mdef)) - softM;
-        perHit = Math.max(1, Math.floor(raw * magicMul));
+        const ownMagic = [...sums.values()].filter((x) => x.type === 'magic_damage_percent' && x.target === `skill_element:${el ?? 'neutral'}`).reduce((t, x) => t + x.value, 0);
+        return magicStaged({
+          statusMatk,
+          weaponMatk,
+          weaponLevel: weapon?.wl ?? 1,
+          equipMatk: get('matk'),
+          matkPercent: get('matk_percent'),
+          kinds: [...magicByKind.values(), ownMagic].filter(Boolean),
+          skillPercent,
+          hardMdef: withDef ? mdef : 0,
+          softMdef: withDef ? Math.floor(((target.int ?? 0) + target.level) / 4) : 0,
+          skillDamagePct: withDef ? skillDamagePct : 0,
+          elementPct: withDef ? elPct(el) : 100,
+          hits: n,
+        });
+      };
+      let range: Range | null = null;
+      if (!known) range = null;
+      else if (kind === 'falcon' || pick.nd) {
+        // The falcon: a fixed figure from AGI, DEX and Steel Crow, no DEF.
+        const per = Math.floor(ratio);
+        range = { min: per * Math.abs(hits), max: per * Math.abs(hits) };
+      } else if (kind === 'trap') {
+        range = trapStaged(slv, dex, lv, int, elPct(el), skillDamagePct);
+      } else if (kind === 'matk') {
+        range = magic(ratio, hits);
+      } else if (kind === 'mixed') {
+        // Grand Cross: the average of ATK and MATK before the skill, then
+        // the ratio, DEF, MDEF and the element.
+        const a = stage({ item: weapon, refineAtk: weaponRefineAtk, type: wt, el: 'neutral', statusTimes: 2, skillPercent: 100, noDef: true });
+        const m = magic(100, 1, false);
+        if (a) {
+          const mdef = Math.floor((target.mdef ?? 0) * (1 - Math.min(100, ignoreMdef) / 100));
+          const one = (x: number, y: number) => {
+            let d = Math.floor((Math.floor((x + y) / 2) * Math.floor(ratio)) / 100);
+            d = Math.floor(d * ((4000 + (def ?? 0)) / (4000 + 10 * (def ?? 0)))) - softDefMob;
+            d = Math.floor(d * ((1000 + mdef) / (1000 + 10 * mdef))) - Math.floor(((target.int ?? 0) + target.level) / 4);
+            return Math.max(1, Math.floor((d * elPct(el)) / 100));
+          };
+          const n = Math.abs(hits) || 1;
+          range = { min: one(a.min, m.min) * n, max: one(a.max, m.max) * n };
+        }
+      } else {
+        range = stage({ item: weapon, refineAtk: weaponRefineAtk, type: wt, el, statusTimes: 2, skillPercent: ratio, hits, ranged: zRanged, skillDamagePct });
       }
-      if (perHit !== null) {
-        const total1 = perHit * hits;
-        const castSeconds = (row[2] / 1000) * vct + (row[3] / 1000) * Math.max(0, 1 + get('cast_time_fixed_percent') / 100);
-        const interval = Math.max(aps ? 1 / aps : 0, castSeconds + Math.max(row[4], row[5]) / 1000);
-        const chance = pick.k === 'atk' ? landed : 1;
+      if (range) {
+        const total1 = Math.floor((range.min + range.max) / 2);
+        // Timings: the Zero client's table where Landgris has it, else the planner row.
+        const t = z?.lv[slv - 1];
+        const sec = (v: number | string | undefined, fallbackMs: number) =>
+          v === undefined ? fallbackMs / 1000 : typeof v === 'number' ? v : evalExpr(v, vars) ?? fallbackMs / 1000;
+        const fct = sec(t?.[0], row[3]);
+        const vctBase = sec(t?.[1], row[2]);
+        const cd = sec(t?.[2], row[5]);
+        const gcd = sec(t?.[3], row[4]);
+        const cast = castTime(vctBase, fct, dex, int, get('cast_time_variable_percent'), get('cast_time_fixed_percent'));
+        const delay = Math.max(Math.floor(gcd * (100 + get('global_delay_percent'))) / 100, cd);
+        const uses = usesPerSecond(cast, delay, aspd);
+        const interval = Math.round((1 / uses) * 100) / 100;
+        const chance = kind === 'atk' || kind === 'mixed' ? landed : 1;
         const casts = mobHp ? (lex ? hitsFor(total1, total1 * 2) : Math.ceil(mobHp / total1)) : null;
         skill = {
           name: pick.n,
           level: slv,
-          kind: pick.k,
+          kind: kind === 'matk' ? 'matk' : 'atk',
+          type: kind,
           ratio: Math.round(ratio),
-          ratioSource: pick.fs,
+          ratioSource: z ? ZERO_SOURCE : pick.fs,
           hits,
           damage: total1,
-          interval: Math.round(interval * 100) / 100,
-          castSeconds: Math.round(castSeconds * 100) / 100,
+          damageMin: range.min,
+          damageMax: range.max,
+          interval,
+          castSeconds: Math.round(cast * 100) / 100,
+          delaySeconds: Math.round(delay * 100) / 100,
+          usesPerSecond: uses,
+          dps: Math.floor(total1 * uses * chance),
           casts,
           seconds: mobHp && chance > 0 ? Math.round((((Math.max(0, mobHp - (lex ? total1 : 0))) / (total1 * chance)) * interval) * 100) / 100 : null,
           sp: row[6],
@@ -1220,6 +1382,7 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
       hp: mobHp,
       autoHits,
       autoSeconds,
+      autoDps: avgSwing !== null && aps ? Math.floor(avgSwing * aps) : null,
       skill,
     };
   }

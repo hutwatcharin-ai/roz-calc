@@ -1,0 +1,3517 @@
+{
+ "_meta": {
+  "what": "Attack skill formulas (damage %, hit count: negative = the total shown as n hits), element and timings [fct, vct, cooldown, delay] seconds per level, as Landgris's RO Calculator runs ROZ Global (landgris.github.io/ROCalculator/?zero, repo commit b29699b, read 15 Oct 2026). Timings come from the Zero client's skilldelaylist.lua. Not checked in game by us.",
+  "made": "scripts/import-zero-skills.mjs"
+ },
+ "skills": {
+  "Bash": {
+   "id": "SM_BASH",
+   "type": "atk",
+   "f": "100+30*slv",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Pierce": {
+   "id": "KN_PIERCE",
+   "type": "atk",
+   "f": "100+10*slv+str*2",
+   "hits": "esize>0?(esize>1?4:3):2",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Brandish Spear": {
+   "id": "KN_BRANDISHSPEAR",
+   "type": "atk",
+   "f": "400+100*slv+str*5",
+   "hits": "-3",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ]
+   ]
+  },
+  "Bowling Bash": {
+   "id": "MS_BOWLINGBASH",
+   "type": "atk",
+   "f": "100+40*slv+str",
+   "hits": "4",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ],
+    [
+     0.7,
+     0.4,
+     4,
+     2.5
+    ]
+   ]
+  },
+  "Clashing Spiral": {
+   "id": "LK_SPIRALPIERCE",
+   "type": "atk",
+   "f": "(150+50*slv)*100/100",
+   "hits": "5",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.07,
+     0.28,
+     0.5,
+     0.3
+    ],
+    [
+     0.08,
+     0.32,
+     0.5,
+     0.3
+    ],
+    [
+     0.09,
+     0.36,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.11,
+     0.44,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Holy Cross": {
+   "id": "CR_HOLYCROSS",
+   "type": "atk",
+   "f": "(100+35*slv+vit*((wpt_spears)?5:2))*((wpt_spears)?2:1)",
+   "hits": "-2",
+   "el": "holy",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Grand Cross": {
+   "id": "CR_GRANDCROSS",
+   "type": "mixed",
+   "f": "100+slv*40",
+   "hits": "3",
+   "el": "holy",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ],
+    [
+     0.25,
+     1,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Shield Boomerang": {
+   "id": "CR_SHIELDBOOMERANG",
+   "type": "atk",
+   "f": "80*slv+shield_weight+shield_refine*4",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0.35,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.35,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.35,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.35,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.35,
+     0.3
+    ]
+   ],
+   "needs": [
+    "shield_weight",
+    "shield_refine"
+   ]
+  },
+  "Rapid Smiting": {
+   "id": "PA_SHIELDCHAIN",
+   "type": "atk",
+   "f": "600+(400*slv)+shield_weight+shield_refine*4",
+   "hits": "-5",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ]
+   ],
+   "needs": [
+    "shield_weight",
+    "shield_refine"
+   ]
+  },
+  "Cannon Spear": {
+   "id": "LG_CANNONSPEAR",
+   "type": "atk",
+   "f": "(120+str)*slv*100/100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": true,
+   "crit": true,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.1,
+     0.4,
+     1,
+     1
+    ],
+    [
+     0.1,
+     0.4,
+     1,
+     1
+    ],
+    [
+     0.1,
+     0.4,
+     1,
+     1
+    ],
+    [
+     0.1,
+     0.4,
+     1,
+     1
+    ],
+    [
+     0.1,
+     0.4,
+     1,
+     1
+    ]
+   ]
+  },
+  "Sacrifice": {
+   "id": "PA_SACRIFICE",
+   "type": "atk",
+   "f": "max_hp*0.09*(1+(slv-1)*0.1)",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "needs": [
+    "max_hp"
+   ]
+  },
+  "Sonic Blow": {
+   "id": "AS_SONICBLOW",
+   "type": "atk",
+   "f": "100+100*slv",
+   "hits": "-8",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ]
+   ]
+  },
+  "Grimtooth": {
+   "id": "AS_GRIMTOOTH",
+   "type": "atk",
+   "f": "100+20*slv+agi",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ]
+   ]
+  },
+  "Venom Splasher": {
+   "id": "AS_SPLASHER",
+   "type": "atk",
+   "f": "400+100*slv",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     5.5,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     5,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     4.5,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     4,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     3.5,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     3,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     2.5,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     2,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     1.5,
+     0
+    ],
+    [
+     0.2,
+     0.8,
+     1,
+     0
+    ]
+   ]
+  },
+  "Soul Destroyer": {
+   "id": "ASC_BREAKER",
+   "type": "atk",
+   "f": "(150*slv+str+int)*100/100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": true,
+   "crit": true,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Meteor Assault": {
+   "id": "ASC_METEORASSAULT",
+   "type": "atk",
+   "f": "(200+120*slv+agi*5)*100/100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Back Stab": {
+   "id": "RG_BACKSTAP",
+   "type": "atk",
+   "f": "(300+40*slv)*((wpt_bows)?0.5:1)",
+   "hits": "((wpt_daggers)?2:1)",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Sightless Mind": {
+   "id": "RG_RAID",
+   "type": "atk",
+   "f": "100+150*slv+agi*3+dex/2",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Triangle Shot": {
+   "id": "SC_TRIANGLESHOT",
+   "type": "atk",
+   "f": "(230*slv+agi*3)*100/100",
+   "hits": "-3",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.2
+    ]
+   ]
+  },
+  "Double Strafe": {
+   "id": "AC_DOUBLE",
+   "type": "atk",
+   "f": "90+10*slv",
+   "hits": "2",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ],
+    [
+     0,
+     0,
+     0,
+     0.1
+    ]
+   ]
+  },
+  "Blitz Beat": {
+   "id": "HT_BLITZBEAT",
+   "type": "falcon",
+   "f": "((floor(agi/2)+floor(dex/10))*2+10*6+slv*20)",
+   "hits": "slv",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0.5,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     0.5,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     0.5,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     0.5,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     0.5,
+     0.3,
+     0.3
+    ]
+   ]
+  },
+  "Falcon Assault": {
+   "id": "SN_FALCONASSAULT",
+   "type": "falcon",
+   "f": "((floor(agi/2)+floor(dex/10))*2+10*6+slv*20)/10*5*(5+50+100/5)",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Land Mine": {
+   "id": "HT_LANDMINE",
+   "type": "trap",
+   "f": "100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Claymore Trap": {
+   "id": "HT_CLAYMORETRAP",
+   "type": "trap",
+   "f": "100",
+   "hits": "1",
+   "el": "fire",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Blast Mine": {
+   "id": "HT_BLASTMIN",
+   "type": "trap",
+   "f": "100",
+   "hits": "1",
+   "el": "wind",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Focused Arrow Strike": {
+   "id": "SN_SHARPSHOOTING",
+   "type": "atk",
+   "f": "(300+300*slv)*100/100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": true,
+   "crit": true,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     1.2,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     1.2,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     1.2,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     1.2,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     1.2,
+     0.3
+    ]
+   ]
+  },
+  "Melody Strike": {
+   "id": "BA_MUSICALSTRIKE",
+   "type": "atk",
+   "f": "100+40*slv+int",
+   "hits": "2",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ]
+   ]
+  },
+  "Arrow Vulcan": {
+   "id": "CG_ARROWVULCAN",
+   "type": "atk",
+   "f": "(1000+slv*200)*100/100",
+   "hits": "-9",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     1.5,
+     0.3
+    ],
+    [
+     0.22,
+     0.88,
+     1.5,
+     0.3
+    ],
+    [
+     0.24,
+     0.96,
+     1.5,
+     0.3
+    ],
+    [
+     0.26,
+     1.04,
+     1.5,
+     0.3
+    ],
+    [
+     0.28,
+     1.12,
+     1.5,
+     0.3
+    ],
+    [
+     0.3,
+     1.2,
+     1.5,
+     0.3
+    ],
+    [
+     0.32,
+     1.28,
+     1.5,
+     0.3
+    ],
+    [
+     0.34,
+     1.36,
+     1.5,
+     0.3
+    ],
+    [
+     0.36,
+     1.44,
+     1.5,
+     0.3
+    ],
+    [
+     0.38,
+     1.52,
+     1.5,
+     0.3
+    ]
+   ]
+  },
+  "Raging Trifecta Blow": {
+   "id": "MO_TRIPLEATTACK",
+   "type": "atk",
+   "f": "100+20*slv",
+   "hits": "-3",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Raging Quadruple Blow": {
+   "id": "MO_CHAINCOMBO",
+   "type": "atk",
+   "f": "(250+50*slv)*((wpt_knuckles)?2:1)",
+   "hits": "(wpt_knuckles)?-6:-4",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Raging Thrust": {
+   "id": "MO_COMBOFINISH",
+   "type": "atk",
+   "f": "450+230*slv+str*5",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Glacier Fist": {
+   "id": "CH_TIGERFIST",
+   "type": "atk",
+   "f": "500+270*slv",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Chain Crush Combo": {
+   "id": "CH_CHAINCRUSH",
+   "type": "atk",
+   "f": "230*slv+str*5",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Throw Spirit Sphere": {
+   "id": "MO_FINGEROFFENSIVE",
+   "type": "atk",
+   "f": "900+300*slv",
+   "hits": "-5",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ],
+    [
+     0,
+     1,
+     0.3,
+     0.3
+    ]
+   ]
+  },
+  "Guillotine Fist": {
+   "id": "MO_EXTREMITYFIST",
+   "type": "atk",
+   "f": "(8+floor(cur_sp/10))*100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": true,
+   "lv": [
+    [
+     0.8,
+     3.2,
+     3,
+     0.3
+    ],
+    [
+     0.7,
+     2.8,
+     3,
+     0.3
+    ],
+    [
+     0.6,
+     2.4,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.4,
+     1.6,
+     3,
+     0.3
+    ]
+   ],
+   "needs": [
+    "cur_sp"
+   ]
+  },
+  "Magnus Exorcismus": {
+   "id": "PR_MAGNUS",
+   "type": "matk",
+   "f": "100",
+   "hits": "10",
+   "el": "holy",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ]
+   ]
+  },
+  "Magnus Exorcismus (ex)": {
+   "id": "PR_MAGNUS(ex)",
+   "type": "matk",
+   "f": "130",
+   "hits": "10",
+   "el": "holy",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ],
+    [
+     0.5,
+     2,
+     3,
+     0.3
+    ]
+   ]
+  },
+  "Duple Light (2)": {
+   "id": "AB_DUPLELIGHT(2)",
+   "type": "matk",
+   "f": "800+80*slv",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Duple Light (1)": {
+   "id": "AB_DUPLELIGHT(1)",
+   "type": "atk",
+   "f": "500+50*slv",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Cart Revolution": {
+   "id": "MC_CARTREVOLUTION",
+   "type": "atk",
+   "f": "150+cart_weight*100/8000",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "needs": [
+    "cart_weight"
+   ]
+  },
+  "Mammonite": {
+   "id": "MC_MAMMONITE",
+   "type": "atk",
+   "f": "100+50*slv",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "Acid Terror": {
+   "id": "AM_ACIDTERROR",
+   "type": "atk",
+   "f": "200*slv+1000",
+   "hits": "-5",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0,
+     0.3
+    ]
+   ]
+  },
+  "Axe Tornado": {
+   "id": "NC_AXETORNADO",
+   "type": "atk",
+   "f": "(800+700*slv+vit*10)*100/100",
+   "hits": "-6",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ],
+    [
+     0,
+     0,
+     2,
+     0.3
+    ]
+   ]
+  },
+  "Axe Boomerang": {
+   "id": "NC_AXEBOOMERANG",
+   "type": "atk",
+   "f": "(250+50*slv+weapon_weight)*100/100",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ]
+   ],
+   "needs": [
+    "weapon_weight"
+   ]
+  },
+  "Power Swing": {
+   "id": "NC_POWERSWING",
+   "type": "atk",
+   "f": "300+100*slv+str+dex",
+   "hits": "1",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ]
+   ]
+  },
+  "Acid Bomb": {
+   "id": "CR_ACIDDEMONSTRATION",
+   "type": "atk",
+   "f": "(slv*400+int*2+target_vit*10)*100/100",
+   "hits": "-10",
+   "el": "neutral",
+   "ranged": true,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ],
+    [
+     0.2,
+     0.8,
+     0.5,
+     0.3
+    ]
+   ],
+   "needs": [
+    "target_vit"
+   ]
+  },
+  "Fire Bolt": {
+   "id": "MG_FIREBOLT",
+   "type": "matk",
+   "f": "100+int/2",
+   "hits": "10",
+   "el": "fire",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.3,
+     0.5,
+     0.7,
+     0.3
+    ],
+    [
+     0.4,
+     0.8,
+     0.7,
+     0.3
+    ],
+    [
+     0.5,
+     1.1,
+     0.7,
+     0.3
+    ],
+    [
+     0.6,
+     1.4,
+     0.7,
+     0.3
+    ],
+    [
+     0.7,
+     1.7,
+     0.7,
+     0.3
+    ],
+    [
+     0.8,
+     2,
+     0.7,
+     0.3
+    ],
+    [
+     0.9,
+     2.3,
+     0.7,
+     0.3
+    ],
+    [
+     1,
+     2.6,
+     0.7,
+     0.3
+    ],
+    [
+     1.1,
+     2.9,
+     0.7,
+     0.3
+    ],
+    [
+     1.2,
+     3.2,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Cold Bolt": {
+   "id": "MG_COLDBOLT",
+   "type": "matk",
+   "f": "100+int/2",
+   "hits": "10",
+   "el": "water",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.3,
+     0.5,
+     0.7,
+     0.3
+    ],
+    [
+     0.4,
+     0.8,
+     0.7,
+     0.3
+    ],
+    [
+     0.5,
+     1.1,
+     0.7,
+     0.3
+    ],
+    [
+     0.6,
+     1.4,
+     0.7,
+     0.3
+    ],
+    [
+     0.7,
+     1.7,
+     0.7,
+     0.3
+    ],
+    [
+     0.8,
+     2,
+     0.7,
+     0.3
+    ],
+    [
+     0.9,
+     2.3,
+     0.7,
+     0.3
+    ],
+    [
+     1,
+     2.6,
+     0.7,
+     0.3
+    ],
+    [
+     1.1,
+     2.9,
+     0.7,
+     0.3
+    ],
+    [
+     1.2,
+     3.2,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Lightning Bolt": {
+   "id": "MG_LIGHTNINGBOLT",
+   "type": "matk",
+   "f": "100+int/2",
+   "hits": "10",
+   "el": "wind",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.3,
+     0.5,
+     0.7,
+     0.3
+    ],
+    [
+     0.4,
+     0.8,
+     0.7,
+     0.3
+    ],
+    [
+     0.5,
+     1.1,
+     0.7,
+     0.3
+    ],
+    [
+     0.6,
+     1.4,
+     0.7,
+     0.3
+    ],
+    [
+     0.7,
+     1.7,
+     0.7,
+     0.3
+    ],
+    [
+     0.8,
+     2,
+     0.7,
+     0.3
+    ],
+    [
+     0.9,
+     2.3,
+     0.7,
+     0.3
+    ],
+    [
+     1,
+     2.6,
+     0.7,
+     0.3
+    ],
+    [
+     1.1,
+     2.9,
+     0.7,
+     0.3
+    ],
+    [
+     1.2,
+     3.2,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Earth Spike": {
+   "id": "WZ_EARTHSPIKE",
+   "type": "matk",
+   "f": "200+int",
+   "hits": "5",
+   "el": "earth",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.056,
+     0.224,
+     0.7,
+     0.3
+    ],
+    [
+     0.112,
+     0.448,
+     0.7,
+     0.3
+    ],
+    [
+     0.168,
+     0.672,
+     0.7,
+     0.3
+    ],
+    [
+     0.224,
+     0.896,
+     0.7,
+     0.3
+    ],
+    [
+     0.28,
+     1.12,
+     0.7,
+     0.3
+    ]
+   ]
+  },
+  "Fire Ball": {
+   "id": "MG_FIREBALL",
+   "type": "matk",
+   "f": "140+20*slv",
+   "hits": "1",
+   "el": "fire",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.16,
+     0.64,
+     0.35,
+     0.3
+    ],
+    [
+     0.16,
+     0.64,
+     0.35,
+     0.3
+    ],
+    [
+     0.16,
+     0.64,
+     0.35,
+     0.3
+    ],
+    [
+     0.16,
+     0.64,
+     0.35,
+     0.3
+    ],
+    [
+     0.16,
+     0.64,
+     0.35,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.35,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.35,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.35,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.35,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.35,
+     0.3
+    ]
+   ]
+  },
+  "Heaven's Drive": {
+   "id": "WZ_HEAVENDRIVE",
+   "type": "matk",
+   "f": "200+int",
+   "hits": "5",
+   "el": "earth",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.08,
+     0.32,
+     0.5,
+     0.3
+    ],
+    [
+     0.16,
+     0.64,
+     0.5,
+     0.3
+    ],
+    [
+     0.24,
+     0.96,
+     0.5,
+     0.3
+    ],
+    [
+     0.32,
+     1.28,
+     0.5,
+     0.3
+    ],
+    [
+     0.4,
+     1.6,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Thunder Storm": {
+   "id": "MG_THUNDERSTORM",
+   "type": "matk",
+   "f": "100+int",
+   "hits": "10",
+   "el": "wind",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.08,
+     0.32,
+     1,
+     0.3
+    ],
+    [
+     0.16,
+     0.64,
+     1,
+     0.3
+    ],
+    [
+     0.24,
+     0.96,
+     1,
+     0.3
+    ],
+    [
+     0.32,
+     1.28,
+     1,
+     0.3
+    ],
+    [
+     0.4,
+     1.6,
+     1,
+     0.3
+    ],
+    [
+     0.48,
+     1.92,
+     1,
+     0.3
+    ],
+    [
+     0.56,
+     2.24,
+     1,
+     0.3
+    ],
+    [
+     0.64,
+     2.56,
+     1,
+     0.3
+    ],
+    [
+     0.72,
+     2.88,
+     1,
+     0.3
+    ],
+    [
+     0.8,
+     3.2,
+     1,
+     0.3
+    ]
+   ]
+  },
+  "Jupitel Thunder": {
+   "id": "WZ_JUPITEL",
+   "type": "matk",
+   "f": "100",
+   "hits": "12",
+   "el": "wind",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.2,
+     0.8,
+     0,
+     0
+    ],
+    [
+     0.24,
+     0.96,
+     0,
+     0
+    ],
+    [
+     0.28,
+     1.12,
+     0,
+     0
+    ],
+    [
+     0.32,
+     1.28,
+     0,
+     0
+    ],
+    [
+     0.36,
+     1.44,
+     0,
+     0
+    ],
+    [
+     0.4,
+     1.6,
+     0,
+     0
+    ],
+    [
+     0.44,
+     1.76,
+     0,
+     0
+    ],
+    [
+     0.48,
+     1.92,
+     0,
+     0
+    ],
+    [
+     0.52,
+     2.08,
+     0,
+     0
+    ],
+    [
+     0.56,
+     2.24,
+     0,
+     0
+    ]
+   ]
+  },
+  "Meteor Storm": {
+   "id": "WZ_METEOR",
+   "type": "matk",
+   "f": "(125+int)*5",
+   "hits": "7",
+   "el": "fire",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ]
+   ]
+  },
+  "Lord of Vermilion": {
+   "id": "WZ_VERMILION",
+   "type": "matk",
+   "f": "400+slv*100+int",
+   "hits": "-20",
+   "el": "wind",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     1.2,
+     4.8,
+     1.5,
+     0.3
+    ],
+    [
+     1.16,
+     4.64,
+     1.5,
+     0.3
+    ],
+    [
+     1.12,
+     4.48,
+     1.5,
+     0.3
+    ],
+    [
+     1.08,
+     4.32,
+     1.5,
+     0.3
+    ],
+    [
+     1.04,
+     4.16,
+     1.5,
+     0.3
+    ],
+    [
+     1,
+     4,
+     1.5,
+     0.3
+    ],
+    [
+     0.96,
+     3.84,
+     1.5,
+     0.3
+    ],
+    [
+     0.92,
+     3.68,
+     1.5,
+     0.3
+    ],
+    [
+     0.88,
+     3.52,
+     1.5,
+     0.3
+    ],
+    [
+     0.84,
+     3.36,
+     1.5,
+     0.3
+    ]
+   ]
+  },
+  "Storm Gust": {
+   "id": "WZ_STORMGUST",
+   "type": "matk",
+   "f": "70+slv*50+int",
+   "hits": "10",
+   "el": "water",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.48,
+     1.92,
+     2.5,
+     0.3
+    ],
+    [
+     0.56,
+     2.24,
+     2.5,
+     0.3
+    ],
+    [
+     0.64,
+     2.56,
+     2.5,
+     0.3
+    ],
+    [
+     0.72,
+     2.88,
+     2.5,
+     0.3
+    ],
+    [
+     0.8,
+     3.2,
+     2.5,
+     0.3
+    ],
+    [
+     0.88,
+     3.52,
+     2.5,
+     0.3
+    ],
+    [
+     0.96,
+     3.84,
+     2.5,
+     0.3
+    ],
+    [
+     1.04,
+     4.16,
+     2.5,
+     0.3
+    ],
+    [
+     1.12,
+     4.48,
+     2.5,
+     0.3
+    ],
+    [
+     1.2,
+     4.8,
+     2.5,
+     0.3
+    ]
+   ]
+  },
+  "Napalm Vulcan": {
+   "id": "HW_NAPALMVULCAN",
+   "type": "matk",
+   "f": "70*slv*100/100",
+   "hits": "slv",
+   "el": "ghost",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ],
+    [
+     0.1,
+     0.4,
+     0.5,
+     0.3
+    ]
+   ]
+  },
+  "Gravitational Field": {
+   "id": "HW_GRAVITATION",
+   "type": "matk",
+   "f": "slv*100*100/100",
+   "hits": "slv*2",
+   "el": "neutral",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     1,
+     4,
+     2.5,
+     0.3
+    ],
+    [
+     1,
+     4,
+     3,
+     0.3
+    ],
+    [
+     1,
+     4,
+     3.5,
+     0.3
+    ],
+    [
+     1,
+     4,
+     4,
+     0.3
+    ],
+    [
+     1,
+     4,
+     4.5,
+     0.3
+    ]
+   ]
+  },
+  "Spell Fist": {
+   "id": "SO_SPELLFIST",
+   "type": "matk",
+   "f": "1000+slv*100",
+   "hits": "1",
+   "el": "fire",
+   "ranged": false,
+   "crit": false,
+   "ignoreDefSoftOnly": false,
+   "lv": [
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ],
+    [
+     0,
+     0,
+     0,
+     0.3
+    ]
+   ]
+  }
+ }
+}

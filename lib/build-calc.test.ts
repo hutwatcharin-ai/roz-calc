@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_GEAR, calcBuild, passivesFor, sanitizeBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, mobbedFlee, optionRangeText, type Build, type Target } from './build-calc';
+import { ALL_GEAR, attacksFor, calcBuild, passivesFor, sanitizeBuild, decodeBuild, encodeBuild, evalRatio, fitsSlot, gearById, classFits, maxOptionsFor, mobbedFlee, optionRangeText, type Build, type Target } from './build-calc';
 
 const first = (test: (g: (typeof ALL_GEAR)[string]) => boolean) => Number(Object.entries(ALL_GEAR).find(([, g]) => test(g))![0]);
 // Hood: a garment with a card slot and no effects of its own.
@@ -271,7 +271,10 @@ describe('passives, buffs, skills, option ranges', () => {
     expect(bare.skipped.some((l) => l.from.includes('Sword Mastery'))).toBe(true);
     const knife = calcBuild({ ...base, cls: 'thief', g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } } }, mob);
     const knifeM = calcBuild({ ...base, cls: 'thief', g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } }, sk: { 'Sword Mastery': 10 } }, mob);
-    expect(knifeM.vs!.damage! - knife.vs!.damage!).toBe(40);
+    // Mastery joins before DEF and the element step (staged chain, 15 Oct 2026), so DEF trims it a little.
+    const gain = knifeM.vs!.damage! - knife.vs!.damage!;
+    expect(gain).toBeGreaterThanOrEqual(35);
+    expect(gain).toBeLessThanOrEqual(40);
   });
 
   it('counts buffs: Blessing 10 and Increase Agility 10', () => {
@@ -289,23 +292,25 @@ describe('passives, buffs, skills, option ranges', () => {
     const r = calcBuild(b, mob);
     expect(r.vs!.autoHits).toBe(Math.ceil(5000 / r.vs!.damage!));
     expect(r.vs!.autoSeconds).toBeGreaterThan(0);
-    // Sonic Blow 10: 200 + slv × 100 = 1200%.
-    expect(r.vs!.skill).toMatchObject({ name: 'Sonic Blow', level: 10, ratio: 1200, kind: 'atk' });
+    // Sonic Blow 10 on Global: 100 + slv × 100 = 1100%, the total shown as 8 hits.
+    expect(r.vs!.skill).toMatchObject({ name: 'Sonic Blow', level: 10, ratio: 1100, kind: 'atk', hits: -8 });
+    expect(r.vs!.skill!.dps).toBeGreaterThan(0);
     expect(r.vs!.skill!.damage).toBeGreaterThan(r.vs!.damage! * 5);
     expect(r.vs!.skill!.casts).toBe(Math.ceil(5000 / r.vs!.skill!.damage));
   });
 
-  it('uses the in-game Axe Tornado ratio: slv x 700 + VIT x 10', () => {
+  it("uses Landgris's Global Axe Tornado ratio: 800 + slv x 700 + VIT x 10", () => {
     const b: Build = { ...base, cls: 'blacksmith', lv: 60, st: { ...base.st, str: 40, vit: 20 }, g: { weapon: { id: 1301, r: 0, c: [0] } }, as: ['axe-tornado', 5] };
     const r = calcBuild(b, mob);
-    expect(r.vs!.skill!.ratio).toBe(5 * 700 + r.total.vit * 10);
+    expect(r.vs!.skill!.ratio).toBe(800 + 5 * 700 + r.total.vit * 10);
+    expect(r.vs!.skill!.hits).toBe(-6);
   });
 
-  it('scales Grimtooth with AGI from the Elvyl sheet and says so', () => {
+  it('scales Grimtooth with AGI and says where the formula is from', () => {
     const b: Build = { ...base, cls: 'assassin', lv: 60, st: { ...base.st, agi: 50 }, g: { weapon: { id: 1250, r: 0, c: [0] } }, as: ['grimtooth', 5] };
     const r = calcBuild(b, mob);
-    expect(r.vs!.skill!.ratio).toBe(5 * 40 + 100 + r.total.agi);
-    expect(r.vs!.skill!.ratioSource).toContain('Elvyl');
+    expect(r.vs!.skill!.ratio).toBe(100 + 5 * 20 + r.total.agi);
+    expect(r.vs!.skill!.ratioSource).toContain('Landgris');
   });
 
   it('adds Shattering Strike to each auto-attack, Power Thrust as damage %', () => {
@@ -508,10 +513,11 @@ describe('buffs, falcon and forged weapons added 12 Oct 2026', () => {
     expect(calcBuild({ ...bs, bf: { 'converter-fire': 1 } }, mob).vs!.skill!.damage).toBe(calcBuild({ ...bs, bf: { 'endow-blaze': 1 } }, mob).vs!.skill!.damage);
   });
 
-  it('runs the falcon on the Elvyl formulas, past DEF', () => {
+  it("runs the falcon on Landgris's formulas, past DEF", () => {
     const fa = (st: Build['st']) => calcBuild({ ...hunter, st, sk: { 'Steel Crow': 10 }, as: ['falcon-assault', 5] }, mob).vs!.skill!;
     const agi = fa({ ...base.st, agi: 92, dex: 1 });
-    expect(agi.ratio).toBe(5 * (100 + 60 + (46 + 0) * 2));
+    // ((AGI/2 + DEX/10) x 2 + Steel Crow 10 x 6 + 5 x 20) / 10 x 5 x 75
+    expect(agi.ratio).toBe(9450);
     // hellyy's Zero test: AGI 92 vs AGI 1 / DEX 92 was 9,715 to about 6,900.
     expect(agi.ratio / fa({ ...base.st, agi: 1, dex: 92 }).ratio).toBeCloseTo(1.41, 1);
     const tough = calcBuild({ ...hunter, as: ['blitz-beat', 5] }, { ...mob, def: 900 }).vs!.skill!.damage;
@@ -534,5 +540,54 @@ describe('weight units (12 Oct 2026)', () => {
   it('counts worn weight as the game shows it: a Two-Handed Axe weighs 250', () => {
     const r = calcBuild({ ...base, cls: 'blacksmith', lv: 60, g: { weapon: { id: 620048, r: 0, c: [0, 0] } } });
     expect(r.weight.worn).toBe(250);
+  });
+});
+
+describe("staged chain after Landgris's ROZ Global calculator (15 Oct 2026)", () => {
+  const mob: Target = {
+    name: 'Test', level: 40, vit: 20, def: 30, size: 'Medium', element: 'Earth', element_level: 1, race: 'Brute', boss: false,
+    hit_100: 250, flee_95: 280, hp: 50000, mdef: 10, int: 10,
+  };
+  const knife: Build = { ...base, cls: 'rogue', lv: 60, st: { ...base.st, str: 60, dex: 40 }, g: { weapon: { id: 1201, r: 0, c: [0, 0, 0] } } };
+
+  it('weapon ATK grows with STR (x (1 + STR/200)) on top of status ATK', () => {
+    const lo = calcBuild(knife, mob).vs!;
+    const hi = calcBuild({ ...knife, st: { ...knife.st, str: 80 } }, mob).vs!;
+    expect(lo.damageMax! - lo.damageMin!).toBeGreaterThan(0);
+    expect(hi.damage!).toBeGreaterThan(lo.damage!);
+  });
+
+  it('Back Stab hits twice with a dagger', () => {
+    const r = calcBuild({ ...knife, as: ['back-stab', 10] }, mob).vs!.skill!;
+    expect(r.hits).toBe(2);
+    expect(r.ratio).toBe(700);
+  });
+
+  it('Pierce hits by target size: 2 small, 3 medium, 4 large', () => {
+    const kn: Build = { ...base, cls: 'knight', lv: 60, st: { ...base.st, str: 60 }, g: { weapon: { id: 1101, r: 0, c: [0, 0, 0] } }, as: ['pierce', 10] };
+    expect(calcBuild(kn, { ...mob, size: 'Small' }).vs!.skill!.hits).toBe(2);
+    expect(calcBuild(kn, mob).vs!.skill!.hits).toBe(3);
+    expect(calcBuild(kn, { ...mob, size: 'Large' }).vs!.skill!.hits).toBe(4);
+  });
+
+  it('adds the Zero attack skills the planner list lacked', () => {
+    expect(attacksFor('wizard').some((a) => a.n === 'Meteor Storm')).toBe(true);
+    expect(attacksFor('crusader').some((a) => a.n === 'Grand Cross')).toBe(true);
+    expect(attacksFor('hunter').some((a) => a.n === 'Land Mine')).toBe(true);
+    const mine = calcBuild({ ...base, cls: 'hunter', lv: 60, st: { ...base.st, dex: 80, int: 35 }, as: ['land-mine', 5] }, mob).vs!.skill!;
+    // 5 x 80 x (3 + 60/100) x (1 + 35/35) = 2,880 before the element (Earth vs Earth 1).
+    expect(mine.type).toBe('trap');
+    expect(mine.damageMin).toBeGreaterThan(0);
+  });
+
+  it('gives a skill time between uses and damage a second', () => {
+    const r = calcBuild({ ...knife, cls: 'assassin', as: ['sonic-blow', 10] }, mob).vs!.skill!;
+    expect(r.usesPerSecond).toBe(1);
+    expect(r.dps).toBe(Math.floor(r.damage * 1 * (calcBuild({ ...knife, cls: 'assassin' }, mob).vs!.hitChance! / 100)));
+  });
+
+  it("an endow does not repaint a skill's own element", () => {
+    const gc: Build = { ...base, cls: 'crusader', lv: 60, st: { ...base.st, str: 50, int: 50 }, g: { weapon: { id: 1101, r: 0, c: [0, 0, 0] } }, as: ['holy-cross', 10] };
+    expect(calcBuild({ ...gc, bf: { 'endow-blaze': 1 } }, mob).vs!.skill!.damage).toBe(calcBuild(gc, mob).vs!.skill!.damage);
   });
 });
