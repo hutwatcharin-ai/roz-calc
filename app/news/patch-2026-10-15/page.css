@@ -28,9 +28,9 @@
 .hwbox--premium .hwbox__tag { background: #c58bff; }
 
 .hwcards { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-.hwcard { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: center; height: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--hair); background: #0b0724; color: var(--text); text-decoration: none; }
+.hwcard { display: grid; grid-template-columns: 150px 1fr; gap: 12px; align-items: center; height: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--hair); background: #0b0724; color: var(--text); text-decoration: none; }
 .hwcard:hover, .hwcard:focus-visible { border-color: #ff8a2b; }
-.hwcard__stage, .hwmini__stage { display: grid; place-items: center; min-height: 120px; border-radius: 8px; background: radial-gradient(circle at 50% 70%, rgba(255, 138, 43, .2), transparent 70%); overflow: hidden; }
+.hwcard__stage, .hwmini__stage { display: grid; place-items: center; min-height: 150px; border-radius: 8px; background: radial-gradient(circle at 50% 70%, rgba(255, 138, 43, .2), transparent 70%); overflow: hidden; }
 .hwcard__stage .ccell, .hwmini__stage .ccell { display: block; max-width: 100%; }
 .hwcard__body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .hwcard__slot { align-self: flex-start; padding: 0 7px; border-radius: 999px; background: rgba(255, 138, 43, .16); color: #ffb36b; font-size: 12px; font-weight: 700; }
@@ -47,6 +47,6 @@
 .hwmini__card small { color: var(--faint); font-size: 12.5px; }
 
 @media (max-width: 420px) {
-  .hwcard { grid-template-columns: 96px 1fr; }
-  .hwcard__stage { min-height: 96px; }
+  .hwcard { grid-template-columns: 1fr; }
+  .hwcard__stage { min-height: 150px; }
 }

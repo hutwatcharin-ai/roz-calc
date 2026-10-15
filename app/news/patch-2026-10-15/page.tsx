@@ -274,7 +274,7 @@ export default async function Patch20261015Page() {
               {box.costumes.map((c) => (
                 <li key={c.id}>
                   <Link href={`/database/costumes/${c.id}`} className="hwcard">
-                    <span className="hwcard__stage"><CostumeCell id={c.id} scale={2} /></span>
+                    <span className="hwcard__stage"><CostumeCell id={c.id} scale={2} box={150} /></span>
                     <span className="hwcard__body">
                       <span className="hwcard__slot">{c.slot}</span>
                       <strong className="hwcard__name">{c.name}</strong>
@@ -293,7 +293,7 @@ export default async function Patch20261015Page() {
           {BOUND_NEW.map((c) => (
             <li key={c.id}>
               <Link href={`/database/costumes/${c.id}`} className="hwmini__card">
-                <span className="hwmini__stage"><CostumeCell id={c.id} scale={1} /></span>
+                <span className="hwmini__stage"><CostumeCell id={c.id} scale={1} box={72} /></span>
                 <span><strong>{c.name}</strong><small>{c.slot} · {c.quote}</small></span>
               </Link>
             </li>

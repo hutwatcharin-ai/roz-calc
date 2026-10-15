@@ -79,10 +79,12 @@ export default function CostumeFit({ id, name }: { id: number; name: string }) {
 /** One cell of the fitting-room sheet (male), drawn `scale` times bigger:
  *  a costume shown inside an article. A garment shows from behind. Moving
  *  costumes move here too (the sheet is an animated WebP). */
-export function CostumeCell({ id, scale = 2, dir }: { id: number; scale?: number; dir?: 'front' | 'diag' | 'back' }) {
+export function CostumeCell({ id, scale: want = 2, dir, box }: { id: number; scale?: number; dir?: 'front' | 'diag' | 'back'; box?: number }) {
   const fit = costumeFit(id);
   if (!fit) return null;
   const { w, h, garment } = fit.sheet;
+  // A big costume (Deviruchi Party) is shrunk to fit `box` px rather than cut off.
+  const scale = box ? Math.min(want, box / w, box / h) : want;
   const col = { front: 0, diag: 1, back: 2 }[dir ?? (garment ? 'back' : 'front')];
   return (
     <span
