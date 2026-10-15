@@ -5,9 +5,11 @@
 // numbers by hand.
 
 import { useMemo, useState } from 'react';
-import { MAX_PUBLISHED_BASE_LEVEL, totalExpBetween } from '@/lib/exp-table';
+import { MAX_ANY_SOURCE_LEVEL, MAX_PUBLISHED_BASE_LEVEL, totalExpBetweenAnySource } from '@/lib/exp-table';
 
-const LEVELS = Array.from({ length: MAX_PUBLISHED_BASE_LEVEL }, (_, i) => i + 1);
+// Up to the level cap (owner, 15 Oct 2026): past 50 the rows are roztoday's
+// unconfirmed figures, and the result says so.
+const LEVELS = Array.from({ length: MAX_ANY_SOURCE_LEVEL }, (_, i) => i + 1);
 
 export default function ExpRangeCalculator() {
   const [from, setFrom] = useState(1);
@@ -15,7 +17,8 @@ export default function ExpRangeCalculator() {
 
   // A "to" below "from" is a state the selects allow, so it is handled rather
   // than prevented -- the answer is simply that there is nothing to climb.
-  const total = useMemo(() => totalExpBetween(from, to), [from, to]);
+  const result = useMemo(() => totalExpBetweenAnySource(from, to), [from, to]);
+  const total = result?.total ?? null;
   const perLevel = to > from ? (total ?? 0) / (to - from) : null;
 
   return (
@@ -70,12 +73,17 @@ export default function ExpRangeCalculator() {
           <tr>
             <td>บาร์เลเวลสุดท้ายก่อนถึง {to}</td>
             <td className="num">
-              {totalExpBetween(to - 1, to)?.toLocaleString('en-US') ?? '—'}
+              {totalExpBetweenAnySource(to - 1, to)?.total.toLocaleString('en-US') ?? '—'}
             </td>
           </tr>
         </tbody>
       </table>
 
+      {result?.secondSource && (
+        <p className="filterstate" style={{ marginTop: 10 }}>
+          เลเวลเกิน {MAX_PUBLISHED_BASE_LEVEL} ใช้ตัวเลขจากแหล่งรอง (roztoday) ยังไม่ยืนยันในเกม · <a href="#exp-60-70">ดูตาราง</a>
+        </p>
+      )}
       <p className="muted" style={{ marginTop: 10 }}>
         นับจากแถบ EXP ว่างที่เลเวล {from} · แถบรีเซ็ตเป็น 0 ทุกครั้งที่ขึ้นเลเวล
         ตัวเลขนี้จึงเป็นผลรวมของแถบทุกใบระหว่างทาง

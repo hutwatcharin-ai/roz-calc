@@ -138,10 +138,15 @@ describe('killsToLevelUp', () => {
   });
 });
 
-describe('second-source levels 60-70 (roztoday, 15 Oct 2026)', () => {
+describe('second-source levels 51-70 (roztoday, 15 Oct 2026)', () => {
   it('sums to the 2,953,076,000 roztoday shows for 60-70', async () => {
-    const { SECOND_SOURCE_BASE_EXP_ROWS } = await import('./exp-table');
-    expect(SECOND_SOURCE_BASE_EXP_ROWS).toHaveLength(11);
-    expect(SECOND_SOURCE_BASE_EXP_ROWS.reduce((a, b) => a + b, 0)).toBe(2_953_076_000);
+    const { SECOND_SOURCE_BASE_EXP_ROWS, totalExpBetweenAnySource, totalExpBetween } = await import('./exp-table');
+    expect(SECOND_SOURCE_BASE_EXP_ROWS).toHaveLength(20);
+    expect(SECOND_SOURCE_BASE_EXP_ROWS.slice(9).reduce((a, b) => a + b, 0)).toBe(2_953_076_000);
+    // 59 to 70 climbs bars 60..70; up to 50 it is the guide's figure, not flagged.
+    expect(totalExpBetweenAnySource(59, 70)).toEqual({ total: 2_953_076_000, secondSource: true });
+    expect(totalExpBetweenAnySource(1, 30)).toEqual({ total: totalExpBetween(1, 30), secondSource: false });
+    expect(totalExpBetweenAnySource(50, 51)!.total).toBe(17_801_700);
+    expect(totalExpBetweenAnySource(1, 71)).toBeNull();
   });
 });

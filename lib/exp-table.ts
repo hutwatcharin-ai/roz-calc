@@ -42,18 +42,21 @@ export const FIRST_JOB_EXP_ROWS: number[] = [
 export const MAX_PUBLISHED_BASE_LEVEL = BASE_EXP_ROWS.length;
 
 /**
- * Base EXP for levels 60-70 from roztoday.com/th/tools/exp (Emperium Weekly,
- * a fan site; read 15 Oct 2026 as the page shows it, owner: "only 60-70").
+ * Base EXP for levels 51-70 from roztoday.com/th/tools/exp (Emperium Weekly,
+ * a fan site; read 15 Oct 2026 as the page shows it; owner asked for 60-70,
+ * then 51-59 too, and for the range calculator to reach 70).
  * A second source, kept apart from the guide's rows above so the range
  * calculator never mixes them. Same row meaning as ours: its rows 2-50 equal
  * the guide's exactly. Caution: every row it has, 1 to 100, is the row before
  * x 1.2 rounded down to 100 -- including 71-100, which it marks estimated --
  * so these cannot be told apart from an extrapolation, and Taiwan's notes
  * (docs/GAME_MODEL.md) speak of a steeper 51-60 and an EXP cut near 70.
- * Not checked in game. Index 0 = level 60.
+ * Not checked in game. Index 0 = level 51.
  */
-export const SECOND_SOURCE_FIRST_LEVEL = 60;
+export const SECOND_SOURCE_FIRST_LEVEL = 51;
 export const SECOND_SOURCE_BASE_EXP_ROWS: number[] = [
+  17_801_700, 21_362_000, 25_634_400, 30_761_200, 36_913_400, 44_296_000, 53_155_200,
+  63_786_200, 76_543_400,
   91_852_000, 110_222_400, 132_266_800, 158_720_100, 190_464_100, 228_556_900,
   274_268_200, 329_121_800, 394_946_100, 473_935_300, 568_722_300,
 ];
@@ -112,4 +115,21 @@ export function killsToLevelUp(level: number, expPerKill: number): LevelProgress
   if (need === null) return null;
   if (!Number.isFinite(expPerKill) || expPerKill <= 0) return null;
   return { need, kills: Math.ceil(need / expPerKill) };
+}
+
+/** Highest level the range calculator offers: the guide's rows, then the second source's. */
+export const MAX_ANY_SOURCE_LEVEL = MAX_PUBLISHED_BASE_LEVEL + SECOND_SOURCE_BASE_EXP_ROWS.length;
+
+/**
+ * Like totalExpBetween, but past level 50 it adds the second source's rows,
+ * and says so (secondSource) so the page can label the figure.
+ */
+export function totalExpBetweenAnySource(from: number, to: number): { total: number; secondSource: boolean } | null {
+  if (!Number.isInteger(from) || !Number.isInteger(to)) return null;
+  if (from < 1 || to <= from || to > MAX_ANY_SOURCE_LEVEL) return null;
+  let total = 0;
+  for (let level = from + 1; level <= to; level += 1) {
+    total += level <= MAX_PUBLISHED_BASE_LEVEL ? BASE_EXP_ROWS[level - 1] : SECOND_SOURCE_BASE_EXP_ROWS[level - SECOND_SOURCE_FIRST_LEVEL];
+  }
+  return { total, secondSource: to > MAX_PUBLISHED_BASE_LEVEL };
 }

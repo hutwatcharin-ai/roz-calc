@@ -107,7 +107,7 @@ export default function ExpPage() {
           {MAX_PUBLISHED_BASE_LEVEL}
         </strong>{' '}
         ส่วนเลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} คู่มือทางการยังไม่ลงตัวเลข ·{' '}
-        <a href="#exp-60-70">เลเวล 60-70 มีตัวเลขจากแหล่งรอง</a> ยังไม่ได้ยืนยันในเกม
+        <a href="#exp-60-70">เลเวล 51-70 มีตัวเลขจากแหล่งรอง</a> ยังไม่ได้ยืนยันในเกม
       </p>
 
       <Caveat label="วิธีอ่านตาราง">
@@ -140,11 +140,11 @@ export default function ExpPage() {
         </table>
       </div>
 
-      {/* Levels 60-70 from a second source (owner, 15 Oct 2026). Its own
+      {/* Levels 51-70 from a second source (owner, 15 Oct 2026). Its own
           table and its own warning: never merged into the guide's rows. */}
       <section id="exp-60-70" style={{ marginTop: 22, scrollMarginTop: 90 }}>
         <h2 className="section-title">
-          เลเวล 60-70 <span className="tag tag--unknown">แหล่งรอง ยังไม่ยืนยัน</span>
+          เลเวล 51-70 <span className="tag tag--unknown">แหล่งรอง ยังไม่ยืนยัน</span>
         </h2>
         <p className="muted" style={{ marginTop: 4, maxWidth: '70ch' }}>
           ตัวเลขจาก <a href="https://roztoday.com/th/tools/exp/" rel="nofollow noopener" target="_blank">roztoday</a> (เว็บแฟนเกม)
@@ -157,7 +157,7 @@ export default function ExpPage() {
               <tr>
                 <th scope="col">เลเวล</th>
                 <th scope="col">EXP</th>
-                <th scope="col">รวมจากเลเวล 60</th>
+                <th scope="col">รวมจากเลเวล 51</th>
               </tr>
             </thead>
             <tbody>
