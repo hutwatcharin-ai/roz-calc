@@ -111,13 +111,18 @@ const ZERO_RECIPE_FIXES: Record<number, CraftMaterial[]> = {
   12117: [EMPTY_SCROLL, mat(992, 'Wind of Verdure')],
 };
 
+// Cooking in Zero takes ONE of each ingredient (owner checked in game, 16 Oct
+// 2026; the Korean Zero guide says the same patch, dcinside ragzero 48973).
+// Both sources list classic amounts (x10, x20 ...). Held cookbooks stay 0.
+const oneEach = (m: CraftMaterial): CraftMaterial => (m.amount > 0 ? { ...m, amount: 1 } : m);
+
 const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes
   .filter((recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId))
   .map((recipe) => {
     const fix = ZERO_RECIPE_FIXES[recipe.product.id];
-    return fix && recipe.kind === 'other'
-      ? { ...recipe, product: zero(recipe.product), materials: fix }
-      : { ...recipe, product: zero(recipe.product), materials: recipe.materials.map(zero) };
+    if (fix && recipe.kind === 'other') return { ...recipe, product: zero(recipe.product), materials: fix };
+    const materials = recipe.materials.map(zero);
+    return { ...recipe, product: zero(recipe.product), materials: recipe.kind === 'cook' ? materials.map(oneEach) : materials };
   });
 
 /** How many the filter above removes, for a page that wants to say so. */
