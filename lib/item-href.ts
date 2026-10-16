@@ -9,6 +9,10 @@
 // redirect to each other on a mismatch, so the rule lives here once.
 
 import { freeTwinOf } from './costume-twins';
+import familyHeads from '@/data/item-family-heads.json';
+
+// Item levels folded into one page (scripts/build-item-links.mts).
+const FAMILY_HEAD = familyHeads as unknown as Record<string, number>;
 
 export const GEAR_CATEGORIES = ['Armor', 'Weapon'] as const;
 export const COSTUME_CATEGORY = 'Costume Equipment';
@@ -36,5 +40,5 @@ export function itemHref(id: number | string, category: string | null | undefine
   // A Bound costume's page is its free twin's (lib/costume-twins).
   if (isCostumeCategory(category)) return `/database/costumes/${freeTwinOf(Number(id)) ?? id}`;
   if (isCardCategory(category)) return `/database/cards/${id}`;
-  return `/database/items/${id}`;
+  return `/database/items/${FAMILY_HEAD[id] ?? id}`;
 }

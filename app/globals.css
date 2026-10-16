@@ -4798,3 +4798,4 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 .npcgoods__where { margin: 0 0 6px; font-size: 14px; color: var(--dim); font-weight: 700; }
 .npcgoods__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
 .npcgoods__list li { display: inline-flex; align-items: center; gap: 6px; }
+.statgrid:empty { display: none; }

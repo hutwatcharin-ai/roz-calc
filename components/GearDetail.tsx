@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { itemHref } from '@/lib/item-href';
 import { isDropCopy } from '@/lib/classic-twins';
 import ItemCrafting from '@/components/ItemCrafting';
+import ItemLinks from '@/components/ItemLinks';
 import { isCVariant } from '@/lib/c-variant';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
@@ -405,6 +406,7 @@ export default function GearDetail({
       {/* Before the drop list: a craftable item is usually made, not farmed,
           and the recipe is the shorter answer. */}
       <ItemCrafting itemId={item.id} />
+      <ItemLinks itemId={item.id} />
 
       {/* Costumes take no farm box: theirs come from boxes and events. */}
       {section.adsense && <FarmSpots what="ชิ้นนี้" droppers={(droppedBy ?? []).filter((d: any) => d.monsters).map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate }))} />}

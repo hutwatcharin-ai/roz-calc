@@ -11,6 +11,8 @@ import ItemShops from '@/components/ItemShops';
 import ItemQuests from '@/components/ItemQuests';
 import { questsForItem } from '@/lib/quests-for-item';
 import { itemSummary } from '@/lib/item-summary';
+import ItemLinks from '@/components/ItemLinks';
+import { boxesHolding, familyHeadOf, familyOf } from '@/lib/item-links';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
 import InSetBox from '@/components/InSetBox';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
@@ -97,7 +99,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   return {
     // Not in the live client: the page stays, search engines are asked to skip it.
     ...(isAbsentFromGame(item.id) ? { robots: { index: false, follow: true } } : {}),
-    title: `${item.name_en}${slotPart}${thaiPart} — ${angle}`,
+    title: familyOf(item.id)
+      ? `${familyOf(item.id)!.name} ทุกระดับ (${familyOf(item.id)!.members.length}) — ผลแต่ละระดับ`
+      : `${item.name_en}${slotPart}${thaiPart} — ${angle}`,
     description: `${item.name_en}${thai.length > 0 ? ` หรือที่เรียกกันว่า ${thai.join(' / ')}` : ''}${parts.length ? ` ${parts.join(' ')}` : ''}${buyable ? ` ซื้อจาก NPC ${item.buy_price.toLocaleString('en-US')}z` : ''} — ดูว่าดรอปจากมอนสเตอร์ตัวไหน อัตราดรอปเท่าไร และราคาขายใน RO Zero Thai`,
   };
 }
@@ -146,6 +150,10 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   if (isEquipmentCategory(item.category) || isCardCategory(item.category)) {
     permanentRedirect(itemHref(toZeroId(id), item.category));
   }
+  // One level of a ladder ("STR +3") lives on the ladder's page (lib/item-links).
+  const head = familyHeadOf(id);
+  if (head !== null) permanentRedirect(`/database/items/${head}#i${id}`);
+  const family = familyOf(id);
 
   // A failed query must not read as "nothing drops this" (data: null looks
   // identical to a real empty result without its own error slot).
@@ -196,6 +204,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       .filter((d: any) => d.monsters && !isCVariant(d.monsters.name_en))
       .map((d: any) => ({ name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate })),
     questCount: (await questsForItem(item.id)).length,
+    boxCount: boxesHolding(item.id).length,
   });
 
   return (
@@ -243,7 +252,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <div>
           <p className="arckicker">ITEM · {item.category ?? 'Other'} · ID {item.id}</p>
           <h1 className="pagehead__title arcname">
-            {item.name_en}
+            {family ? `${family.name} ทุกระดับ` : item.name_en}
             {item.slots > 0 && (
               <span className="slotbadge" title={`ใส่การ์ดได้ ${item.slots} ช่อง`}>
                 [{item.slots}]
@@ -346,6 +355,8 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
       <ItemQuests itemId={item.id} />
 
       <ItemCrafting itemId={item.id} />
+
+      <ItemLinks itemId={item.id} />
 
       <FarmSpots droppers={(droppedBy ?? []).filter((d: any) => d.monsters).map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate }))} />
 

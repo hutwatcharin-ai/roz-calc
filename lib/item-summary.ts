@@ -21,6 +21,7 @@ export function itemSummary(opts: {
   sellPrice: number | null;
   drops: SummaryDrop[];
   questCount: number;
+  boxCount?: number;
 }): string[] {
   const parts: string[] = [];
 
@@ -43,6 +44,8 @@ export function itemSummary(opts: {
   const spent = using.filter((r) => !held.includes(r));
   if (spent.length > 0) parts.push(`ใช้เป็นวัตถุดิบ ${spent.length} สูตร (${kindsOf(spent)})`);
   if (held.length > 0) parts.push(`ต้องมีติดตัวตอนทำ ${held.length} สูตร (${kindsOf(held)}) ไม่ถูกใช้หมด`);
+
+  if (opts.boxCount) parts.push(`ได้จากกล่องหรือแพ็กเกจ ${opts.boxCount} แบบ`);
 
   if (opts.questCount > 0) parts.push(`เควส ${opts.questCount} เควสต้องใช้`);
 

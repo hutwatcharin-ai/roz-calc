@@ -6,6 +6,7 @@ import { SITE_URL } from '@/lib/site';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
 import { isCostumeCategory, itemHref } from '@/lib/item-href';
 import { FOLDED_BOUND_IDS } from '@/lib/costume-twins';
+import { FOLDED_ITEM_IDS } from '@/lib/item-links';
 import { NPC_PAGES } from '@/lib/npcs';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { CLASS_GUIDES } from '@/lib/class-guides';
@@ -168,7 +169,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Items the live client does not know are noindex on their page; keep them
     // out of the sitemap too so the two signals agree.
     // A Bound costume folded into its free twin (lib/costume-twins) has no page of its own.
-    ...itemIds.filter((row) => !isAbsentFromGame(row.id) && !(isCostumeCategory(row.category) && FOLDED_BOUND_IDS.has(row.id))).map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
+    ...itemIds.filter((row) => !isAbsentFromGame(row.id) && !(isCostumeCategory(row.category) && FOLDED_BOUND_IDS.has(row.id)) && !FOLDED_ITEM_IDS.has(row.id)).map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but
