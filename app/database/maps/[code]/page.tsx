@@ -13,7 +13,7 @@ import { isCVariant } from '@/lib/c-variant';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { mapImage } from '@/lib/map-image';
 import { naviCommand } from '@/lib/rozglobal-guides';
-import { ALL_NPCS } from '@/lib/npcs';
+import { ALL_NPCS, npcAnchor, npcHref } from '@/lib/npcs';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { itemHref } from '@/lib/item-href';
 import { notableDrops, type MapDropRow, type NotableDrop } from '@/lib/map-drops';
@@ -365,10 +365,10 @@ function NpcList({ npcs }: { npcs: Npc[] }) {
   return (
     <ul className="shoplist">
       {npcs.map((npc) => (
-        <li key={npc.slug} className="shoprow">
+        <li key={npc.slug} id={npcAnchor(npc)} className="shoprow">
           <span className="shoprow__who">
             {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}`} alt="" height={24} />}
-            <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
+            {npcHref(npc) ? <Link href={npcHref(npc)!}>{npc.name}</Link> : <span>{npc.name}</span>}
             {npc.quests.length > 0 && <span className="muted"> · เควส {npc.quests.length}</span>}
             {npc.sells.length > 0 && <span className="muted"> · ขายของ {npc.sells.length} ชนิด</span>}
           </span>

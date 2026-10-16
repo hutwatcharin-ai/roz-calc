@@ -16,6 +16,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
+import { costumeId } from '@/lib/costume-twins';
 
 export const revalidate = 86400;
 
@@ -188,7 +189,7 @@ export default function GuildHallOfFamePage() {
         <ul className="ghshields">
           {SHIELDS.map((s) => (
             <li key={s.id} className={`ghshield ghshield--${s.flame.toLowerCase()}`}>
-              <Link href={`/database/costumes/${s.id}`}><b>{s.name}</b></Link>
+              <Link href={`/database/costumes/${costumeId(s.id)}`}><b>{s.name}</b></Link>
               <span className="ghshield__fx">{s.fx}</span>
               <span className="ghshield__how">ล่า {s.hunt} 30 ตัว</span>
             </li>

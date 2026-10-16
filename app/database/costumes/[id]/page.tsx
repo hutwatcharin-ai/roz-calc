@@ -9,6 +9,7 @@ import GearDetail, { type GearSection } from '@/components/GearDetail';
 import { getGearItem, loadGearExtras } from '@/lib/gear-detail';
 import { isCostumeCategory, itemHref } from '@/lib/item-href';
 import { thaiAliasNames } from '@/lib/thai-aliases';
+import { freeTwinOf } from '@/lib/costume-twins';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 
@@ -50,6 +51,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 export default async function CostumeDetailPage({ params }: { params: { id: string } }) {
   const id = Number(params.id);
+  // One page per look: a Bound copy shows on its free twin's page.
+  const twin = freeTwinOf(id);
+  if (twin !== null) permanentRedirect(`/database/costumes/${twin}`);
   const { data: item, error } = await getGearItem(id);
 
   if (error) {

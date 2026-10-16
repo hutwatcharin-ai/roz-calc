@@ -15,7 +15,7 @@ import Pagination from '@/components/Pagination';
 import { itemListJsonLd } from '@/lib/jsonld';
 import { matches } from '@/lib/smart-search';
 import { naviCommand } from '@/lib/rozglobal-guides';
-import { ALL_NPCS, npcMaps } from '@/lib/npcs';
+import { ALL_NPCS, npcHref, npcMaps } from '@/lib/npcs';
 
 export const revalidate = 86400;
 
@@ -82,7 +82,7 @@ export default function NpcListPage({
         <JsonLd
           data={itemListJsonLd({
             path: '/database/npcs',
-            rows: rows.filter((npc) => npc.hasName).map((npc) => ({ id: npc.slug, name: npc.name })),
+            rows: [...new Map(rows.filter((npc) => npcHref(npc)).map((npc) => [npcHref(npc)!, { id: npcHref(npc)!.slice('/database/npcs/'.length), name: npc.name }])).values()],
             detailPath: (slug) => `/database/npcs/${slug}`,
           })}
         />
@@ -162,7 +162,7 @@ export default function NpcListPage({
                 <tr key={npc.slug}>
                   <td>
                     {npc.sprite && <img className="npcportrait" src={`/images/npcs/${npc.sprite}`} alt="" height={28} />}
-                    {npc.hasName ? <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link> : <span className="muted">{npc.name}</span>}
+                    {npcHref(npc) ? <Link href={npcHref(npc)!}>{npc.name}</Link> : <span className={npc.hasName ? undefined : 'muted'}>{npc.name}</span>}
                     {npc.source === 'rathena' && <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>ร้านค้า</span>}
                     {npc.source === 'client' && <span className="muted" style={{ marginInlineStart: 6, fontSize: 12 }}>{npc.types[1] ?? 'ประจำเมือง'}</span>}
                   </td>

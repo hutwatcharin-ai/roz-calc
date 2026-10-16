@@ -150,3 +150,50 @@ export const SHOP_NPCS = ALL_NPCS.filter((npc) => npc.source === 'rathena').leng
 export const TOWN_NPCS = ALL_NPCS.filter((npc) => npc.source === 'client').length;
 export const NPCS_WITH_SPRITE = ALL_NPCS.filter((npc) => npc.sprite).length;
 export const NPC_META = data._meta;
+
+// One page per NPC name, and only for NPCs with something to read (owner,
+// 16 Oct 2026, after AdSense turned the site down for low-value content).
+// 278 of the 619 named NPC pages held a map, a coordinate and a /navi line
+// and nothing else -- the same row the map page already lists -- and the same
+// name standing in several places had a page per place. Now a name's page
+// lists every place it stands, and a name with no quest, goods or
+// description has no page: its row lives on the map page.
+export interface NpcPage {
+  slug: string;
+  name: string;
+  npcs: Npc[];
+}
+
+export function npcHasContent(npc: Npc): boolean {
+  return npc.quests.length > 0 || npc.sells.length > 0 || Boolean(npc.description);
+}
+
+const pageSlugOf = (npc: Npc): string => npc.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || npc.slug;
+
+const pagesBySlug = new Map<string, NpcPage>();
+for (const npc of ALL_NPCS) {
+  if (!npc.hasName) continue;
+  const slug = pageSlugOf(npc);
+  const page = pagesBySlug.get(slug);
+  if (page) page.npcs.push(npc);
+  else pagesBySlug.set(slug, { slug, name: npc.name, npcs: [npc] });
+}
+for (const [slug, page] of pagesBySlug) if (!page.npcs.some(npcHasContent)) pagesBySlug.delete(slug);
+
+export const NPC_PAGES: NpcPage[] = [...pagesBySlug.values()];
+
+export function npcPage(slug: string): NpcPage | null {
+  return pagesBySlug.get(slug) ?? null;
+}
+
+/** The page that shows this NPC, or null when it has none (a map-page row). */
+export function npcHref(npc: Npc): string | null {
+  if (!npc.hasName) return null;
+  const slug = pageSlugOf(npc);
+  return pagesBySlug.has(slug) ? `/database/npcs/${slug}` : null;
+}
+
+/** The anchor an NPC's row carries on its map page. */
+export function npcAnchor(npc: Npc): string {
+  return `npc-${npc.slug}`;
+}

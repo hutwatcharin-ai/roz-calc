@@ -94,29 +94,47 @@ export default function GearDetail({
   const refinable = section.recentKind !== 'costume';
   const refineAt7 = refinable ? refineBonusAt(effects?.rs, 7) : null;
   const refineAt10 = refinable ? refineBonusAt(effects?.rs, 10) : null;
-  const dropsCard = (
-  <div className="card" style={{ marginTop: 20 }}>
-    <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
-    {droppedByError ? (
+  // The Bound copy lives on this page (lib/costume-twins): one page per look.
+  const twinDrops = (boundTwin?.droppedBy ?? []) as unknown as Dropper[];
+  const ownDrops = (droppedBy ?? []) as unknown as Dropper[];
+  // An empty drop list is not shown (owner, 16 Oct 2026): a box that says
+  // "no data" on most pages is what made them read as filler.
+  const dropsCard = droppedByError ? (
+    <div className="card" style={{ marginTop: 20 }}>
+      <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
       <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
-    ) : (droppedBy ?? []).length === 0 && boundTwin ? (
-      <>
-        <p className="boundtwin">
-          ชิ้นนี้ไม่มีมอนดรอป แต่ตัวผูกบัญชี{' '}
-          <Link href={itemHref(boundTwin.id, 'Costume Equipment')}>
-            <strong>{boundTwin.name_en}</strong>
-          </Link>{' '}
-          หน้าตาเหมือนกัน ดรอปจากมอนเหล่านี้ (ตัวที่ดรอปซื้อขายไม่ได้)
-        </p>
-        <DropperGrid droppers={boundTwin.droppedBy as unknown as Dropper[]} />
-      </>
-    ) : (droppedBy ?? []).length === 0 ? (
-      <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปชิ้นนี้</p>
-    ) : (
-      <DropperGrid droppers={(droppedBy ?? []) as unknown as Dropper[]} />
-    )}
-  </div>
-  );
+    </div>
+  ) : ownDrops.length > 0 || twinDrops.length > 0 ? (
+    <div className="card" style={{ marginTop: 20 }}>
+      <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
+      {ownDrops.length > 0 && <DropperGrid droppers={ownDrops} />}
+      {twinDrops.length > 0 && (
+        <>
+          <p className="boundtwin" style={ownDrops.length > 0 ? { marginTop: 14 } : undefined}>
+            {ownDrops.length > 0 ? 'แบบผูกบัญชี (Bound) ดรอปจาก:' : 'มอนดรอปแบบผูกบัญชี (Bound) หน้าตาเหมือนกัน แต่ซื้อขายไม่ได้'}
+          </p>
+          <DropperGrid droppers={twinDrops} />
+        </>
+      )}
+    </div>
+  ) : null;
+  const twinCard = boundTwin ? (
+    <div className="card" style={{ marginTop: 20 }}>
+      <h2 className="section-title">มี 2 แบบ หน้าตาเหมือนกัน</h2>
+      <ul className="twinlist">
+        <li>
+          <strong>แบบปกติ</strong> <span className="mono muted">#{item.id}</span> — ซื้อขายได้
+        </li>
+        <li>
+          <strong>แบบผูกบัญชี (Bound)</strong> <span className="mono muted">#{boundTwin.id}</span> — ซื้อขายไม่ได้
+          {twinDrops.length > 0 ? ` · ได้จากมอนดรอป ${twinDrops.length} ชนิด` : ''}
+        </li>
+      </ul>
+      <p className="muted" style={{ marginBottom: 0, fontSize: 13 }}>
+        ใส่แล้วหน้าตาบนตัวเหมือนกันทั้งสองแบบ
+      </p>
+    </div>
+  ) : null;
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -235,7 +253,9 @@ export default function GearDetail({
             <span className="reward-value mono">{item.atk}</span>
           </div>
         )}
-        {item.slots !== null && item.slots !== undefined && (
+        {/* A costume never takes a card; "Slot: none" on 600 costume pages
+            said nothing (owner, 16 Oct 2026). */}
+        {item.slots !== null && item.slots !== undefined && (section.recentKind !== 'costume' || item.slots > 0) && (
           <div className="statgrid__cell">
             <span className="reward-label">Slot</span>
             <span className="reward-value mono">{item.slots > 0 ? `[${item.slots}]` : 'ไม่มี'}</span>
@@ -278,12 +298,14 @@ export default function GearDetail({
             <small className="statgrid__note">+7 ได้ {refineAt7.value}</small>
           </div>
         )}
-        {item.required_level !== null && (
+        {item.required_level ? (
           <div className="statgrid__cell">
             <span className="reward-label">ใช้ได้ที่เลเวล</span>
             <span className="reward-value mono">{item.required_level}</span>
           </div>
-        )}
+        ) : null}
+        {/* A blank or 0 price is the table's blank, not a price: no tile. */}
+        {(dropCopy || item.buy_price) ? (
         <div className="statgrid__cell">
           <span className="reward-label">ราคาซื้อ</span>
           {dropCopy ? (
@@ -303,17 +325,16 @@ export default function GearDetail({
               </small>
             </>
           ) : (
-            <span className="reward-value mono">
-              {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
-            </span>
+            <span className="reward-value mono">{item.buy_price.toLocaleString('en-US')}</span>
           )}
         </div>
-        <div className="statgrid__cell">
-          <span className="reward-label">ราคาขาย</span>
-          <span className="reward-value mono">
-            {item.sell_price === null ? '—' : item.sell_price.toLocaleString('en-US')}
-          </span>
-        </div>
+        ) : null}
+        {item.sell_price ? (
+          <div className="statgrid__cell">
+            <span className="reward-label">ราคาขาย</span>
+            <span className="reward-value mono">{item.sell_price.toLocaleString('en-US')}</span>
+          </div>
+        ) : null}
         {item.weapon_level !== null && item.weapon_level >= 1 && (
           <Link href="/tools/refine" className="statgrid__cell statgrid__cell--link">
             <span className="reward-label">ตีบวกตัวนี้</span>
@@ -321,6 +342,7 @@ export default function GearDetail({
           </Link>
         )}
       </div>
+      {fitted && twinCard}
       {fitted && dropsCard}
       </div>
       {fitted && <CostumeFit id={item.id} name={item.name_en} />}
@@ -387,6 +409,7 @@ export default function GearDetail({
       {/* Costumes take no farm box: theirs come from boxes and events. */}
       {section.adsense && <FarmSpots what="ชิ้นนี้" droppers={(droppedBy ?? []).filter((d: any) => d.monsters).map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate }))} />}
 
+      {!fitted && twinCard}
       {!fitted && dropsCard}
 
       <div style={{ marginTop: 20 }}>

@@ -3863,6 +3863,7 @@ html .arcname, html .cardhero__name {
 }
 html .arcname .slotbadge { -webkit-text-fill-color: var(--cyan); font-style: normal; }
 .archero { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.archero > div { flex: 1 1 280px; min-width: 0; }
 /* The item frame takes the colour of what it is. */
 .itemframe[data-kind='weapon'] { --fk: var(--cyan); }
 .itemframe[data-kind='armor'] { --fk: var(--yellow); }
@@ -4792,3 +4793,8 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 /* Effect costumes: the client's collection illustration in the fitting room's place (15 Oct 2026). */
 .cfit--art .cfit__stage--art { display: grid; place-items: center; padding: 16px; }
 .cfit--art .cfit__stage--art img { width: 150px; height: 200px; }
+.twinlist { margin: 6px 0 10px; padding-left: 18px; display: grid; gap: 4px; color: var(--dim); }
+.npcgoods + .npcgoods { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); }
+.npcgoods__where { margin: 0 0 6px; font-size: 14px; color: var(--dim); font-weight: 700; }
+.npcgoods__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.npcgoods__list li { display: inline-flex; align-items: center; gap: 6px; }

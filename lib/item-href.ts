@@ -8,6 +8,8 @@
 // surface that links to a row branches on the row's category, and the routes
 // redirect to each other on a mismatch, so the rule lives here once.
 
+import { freeTwinOf } from './costume-twins';
+
 export const GEAR_CATEGORIES = ['Armor', 'Weapon'] as const;
 export const COSTUME_CATEGORY = 'Costume Equipment';
 export const CARD_CATEGORY = 'Card';
@@ -31,7 +33,8 @@ export function isEquipmentCategory(category: string | null | undefined): boolea
 
 export function itemHref(id: number | string, category: string | null | undefined): string {
   if (isGearCategory(category)) return `/database/equipment/${id}`;
-  if (isCostumeCategory(category)) return `/database/costumes/${id}`;
+  // A Bound costume's page is its free twin's (lib/costume-twins).
+  if (isCostumeCategory(category)) return `/database/costumes/${freeTwinOf(Number(id)) ?? id}`;
   if (isCardCategory(category)) return `/database/cards/${id}`;
   return `/database/items/${id}`;
 }

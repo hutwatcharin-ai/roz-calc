@@ -8,7 +8,7 @@ import '../page.css';
 import { linkItemRefs } from '@/lib/quest-item-refs';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { npcsForQuest } from '@/lib/npcs';
+import { npcHref, npcsForQuest } from '@/lib/npcs';
 import { naviCommand } from '@/lib/rozglobal-guides';
 import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
@@ -180,7 +180,7 @@ export default async function QuestTownPage({
                   with a name, a town and a coordinate. */}
               {npcsForQuest(quest.name).filter((npc) => npc.hasName).slice(0, 2).map((npc) => (
                 <span key={npc.slug}>
-                  {' · '}คุยกับ <Link href={`/database/npcs/${npc.slug}`}>{npc.name}</Link>
+                  {' · '}คุยกับ {npcHref(npc) ? <Link href={npcHref(npc)!}>{npc.name}</Link> : npc.name}
                   {npc.mapName ? ` ที่ ${npc.mapName}` : ''}
                   {naviCommand(npc.map, npc.x, npc.y) && (
                     <span className="mono navicmd" style={{ marginInlineStart: 6, fontSize: 12 }}>

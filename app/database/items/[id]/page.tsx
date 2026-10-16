@@ -9,6 +9,8 @@ import ItemCrafting from '@/components/ItemCrafting';
 import FarmSpots from '@/components/FarmSpots';
 import ItemShops from '@/components/ItemShops';
 import ItemQuests from '@/components/ItemQuests';
+import { questsForItem } from '@/lib/quests-for-item';
+import { itemSummary } from '@/lib/item-summary';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
 import InSetBox from '@/components/InSetBox';
 import ThaiAliasLine from '@/components/ThaiAliasLine';
@@ -187,6 +189,15 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
     terms: new Map((termRows ?? []).map((r) => [r.source_term, r.thai_term])),
   };
 
+  const summary = itemSummary({
+    id: item.id,
+    sellPrice: item.sell_price,
+    drops: (droppedBy ?? [])
+      .filter((d: any) => d.monsters && !isCVariant(d.monsters.name_en))
+      .map((d: any) => ({ name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate })),
+    questCount: (await questsForItem(item.id)).length,
+  });
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
@@ -242,24 +253,12 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           </h1>
           <ThaiAliasLine kind="items" id={item.id} />
           {/* One fluent sentence a crawler or reader can lift whole (GEO
-              audit): the same facts the tables below hold, as prose. */}
-          {(() => {
-            const rows = (droppedBy ?? []).filter((d: any) => d.monsters && !isCVariant(d.monsters.name_en));
-            const lowest = rows.length
-              ? rows.reduce((a: any, b: any) => ((b.monsters.level ?? 999) < (a.monsters.level ?? 999) ? b : a))
-              : null;
-            return (
-              <p className="muted" style={{ marginTop: 6 }}>
-                {item.name_en}
-                {item.category ? ` เป็นไอเทมหมวด ${item.category}` : ''}
-                {item.sell_price ? ` ขายร้าน NPC ได้ ${item.sell_price.toLocaleString()} Zeny` : ''}
-                {rows.length > 0 && lowest?.monsters
-                  ? ` ดรอปจากมอนสเตอร์ ${rows.length} ชนิด ตัวเลเวลต่ำสุดคือ ${(lowest.monsters as any).name_en} (Lv.${(lowest.monsters as any).level ?? '—'}${lowest.rate != null ? ` อัตรา ${lowest.rate}%` : ''})`
-                  : ''}
-              </p>
-            );
-          })()}
-          <p style={{ color: 'var(--dim)' }}>{item.category}{item.weapon_type ? ` · ${item.weapon_type}` : ''}</p>
+              audit), built from this item's own facts (lib/item-summary). */}
+          {summary.length > 0 && (
+            <p className="muted" style={{ marginTop: 6 }}>
+              {item.name_en} {summary.join(' · ')}
+            </p>
+          )}
         </div>
       </div>
 
@@ -282,24 +281,25 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
             <span className="reward-value mono">{item.weapon_level}</span>
           </div>
         )}
-        {item.required_level !== null && (
+        {/* A 0 here is the table's blank, not a fact (owner, 16 Oct 2026). */}
+        {item.required_level ? (
           <div className="statgrid__cell">
             <span className="reward-label">ใช้ได้ที่เลเวล</span>
             <span className="reward-value mono">{item.required_level}</span>
           </div>
-        )}
-        <div className="statgrid__cell">
-          <span className="reward-label">ราคาซื้อ</span>
-          <span className="reward-value mono">
-            {item.buy_price === null ? '—' : item.buy_price.toLocaleString('en-US')}
-          </span>
-        </div>
-        <div className="statgrid__cell">
-          <span className="reward-label">ราคาขาย</span>
-          <span className="reward-value mono">
-            {item.sell_price === null ? '—' : item.sell_price.toLocaleString('en-US')}
-          </span>
-        </div>
+        ) : null}
+        {item.buy_price ? (
+          <div className="statgrid__cell">
+            <span className="reward-label">ราคาซื้อ</span>
+            <span className="reward-value mono">{item.buy_price.toLocaleString('en-US')}</span>
+          </div>
+        ) : null}
+        {item.sell_price ? (
+          <div className="statgrid__cell">
+            <span className="reward-label">ราคาขาย</span>
+            <span className="reward-value mono">{item.sell_price.toLocaleString('en-US')}</span>
+          </div>
+        ) : null}
         {item.weapon_level !== null && item.weapon_level >= 1 && (
           <Link href="/tools/refine" className="statgrid__cell statgrid__cell--link">
             <span className="reward-label">ตีบวกตัวนี้</span>
@@ -349,12 +349,13 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
 
       <FarmSpots droppers={(droppedBy ?? []).filter((d: any) => d.monsters).map((d: any) => ({ monster_id: d.monsters.id, name: d.monsters.name_en, level: d.monsters.level ?? null, rate: d.rate }))} />
 
+      {/* No box at all when nothing drops it: "no data" on most pages read as
+          filler (owner, 16 Oct 2026). */}
+      {(droppedByError || (droppedBy ?? []).length > 0) && (
       <div className="card" style={{ marginTop: 20 }}>
         <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
         {droppedByError ? (
           <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
-        ) : (droppedBy ?? []).length === 0 ? (
-          <p style={{ color: 'var(--faint)' }}>ไม่มีข้อมูลมอนสเตอร์ที่ดรอปไอเทมนี้</p>
         ) : (
           // Cards with the sprite at its own shape and the rate as the big
           // number (owner, 30 Sep 2026), the same read as the star-gear
@@ -362,6 +363,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           <DropperGrid droppers={(droppedBy ?? []) as unknown as Dropper[]} />
         )}
       </div>
+      )}
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="item" entityId={String(item.id)} />
       </div>

@@ -4,6 +4,7 @@
 // covering all six.
 
 import { isInGameSkill } from './zero-jobs';
+import { costumeId } from '@/lib/costume-twins';
 
 export type SearchType = 'monster' | 'item' | 'card' | 'equipment' | 'costume' | 'skill' | 'map';
 
@@ -70,7 +71,7 @@ function fromItemRow(row: SearchRow, type: SearchType): SearchResult {
       type === 'equipment'
         ? `/database/equipment/${row.id}`
         : type === 'costume'
-          ? `/database/costumes/${row.id}`
+          ? `/database/costumes/${costumeId(row.id)}`
           : type === 'card'
             ? `/database/cards/${row.id}`
             : `/database/items/${row.id}`,

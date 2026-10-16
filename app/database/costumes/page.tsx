@@ -27,6 +27,7 @@ import { COSTUME_CATEGORY } from '@/lib/item-href';
 import ItemIcon from '@/components/ItemIcon';
 import { CostumeThumb } from '@/components/CostumeFit';
 import { costumeFit } from '@/lib/costume-fit';
+import { boundTwinsOf, costumeId, FOLDED_BOUND_IDS } from '@/lib/costume-twins';
 
 export const revalidate = 86400;
 
@@ -101,10 +102,14 @@ export default async function CostumesPage({
   if (!sourcesKnown) console.error('costume source query failed', drops.error ?? cash.error);
   const dropIds = new Set((drops.data ?? []).map((row) => row.item_id));
   const cashIds = new Set((cash.data ?? []).map((row) => row.item_id));
-  const hasSource = (id: number, source: Source) => (source === 'drop' ? dropIds.has(id) : cashIds.has(id));
+  // A free costume's row carries its folded Bound copy's sources too
+  // (lib/costume-twins): monsters drop the Bound copy.
+  const hasSource = (id: number, source: Source) =>
+    [id, ...boundTwinsOf(id)].some((one) => (source === 'drop' ? dropIds.has(one) : cashIds.has(one)));
 
   // Items the live client does not know stay out of the list (lib/game-absent).
-  const items = (allItems ?? []).filter((it) => !isAbsentFromGame(it.id));
+  // A Bound copy with a free twin is that twin's row (one entry per look).
+  const items = (allItems ?? []).filter((it) => !isAbsentFromGame(it.id) && !FOLDED_BOUND_IDS.has(it.id));
   // Most bound rows are the account-bound copy of a costume already in the
   // list, so they are hidden unless asked for (?bound=1). The count is shown
   // next to the checkbox: hiding rows silently is how the whole set came to
@@ -115,7 +120,7 @@ export default async function CostumesPage({
   // 81), and hiding them emptied the "dropped" filter. The free twin has no
   // source at all, so the Bound row is the only answer to "where do I farm
   // this" and stays in the list.
-  const isDropped = (it: { id: number }) => sourcesKnown && dropIds.has(it.id);
+  const isDropped = (it: { id: number }) => sourcesKnown && hasSource(it.id, 'drop');
   const boundCount = items.filter((it) => isBound(it.name_en) && !isDropped(it)).length;
   const needle = q.trim().toLowerCase();
   const positionOf = (it: { weapon_type: string | null }) => it.weapon_type ?? NO_POSITION;
@@ -179,7 +184,7 @@ export default async function CostumesPage({
           data={itemListJsonLd({
             path: '/database/costumes',
             rows: rows.map((r) => ({ id: r.id, name: r.name_en })),
-            detailPath: (id) => `/database/costumes/${id}`,
+            detailPath: (id) => `/database/costumes/${costumeId(id)}`,
           })}
         />
       )}
@@ -268,12 +273,14 @@ export default async function CostumesPage({
         </div>
       </form>
 
-      <p className="filterbar" style={{ marginTop: 8 }}>
-        <Link className="cvtoggle" href={hrefWith({ bound: !showBound })} scroll={false}>
-          <input type="checkbox" checked={!showBound} readOnly tabIndex={-1} aria-hidden="true" />
-          ซ่อนคอสตูมแบบผูกบัญชี (Bound) {boundCount.toLocaleString()} ชิ้น
-        </Link>
-      </p>
+      {boundCount > 0 && (
+        <p className="filterbar" style={{ marginTop: 8 }}>
+          <Link className="cvtoggle" href={hrefWith({ bound: !showBound })} scroll={false}>
+            <input type="checkbox" checked={!showBound} readOnly tabIndex={-1} aria-hidden="true" />
+            ซ่อนคอสตูมแบบผูกบัญชี (Bound) {boundCount.toLocaleString()} ชิ้น
+          </Link>
+        </p>
+      )}
 
       {error ? (
         <div className="card">
@@ -289,7 +296,7 @@ export default async function CostumesPage({
               sprite carries the row and the meta line only says where it sits. */}
           <div className="itemgrid">
             {rows.map((it) => (
-              <Link key={it.id} href={`/database/costumes/${it.id}`} className="itemcard" data-kind="costume">
+              <Link key={it.id} href={`/database/costumes/${costumeId(it.id)}`} className="itemcard" data-kind="costume">
                 {/* The Novice wearing it (2 Oct 2026); the inventory icon only
                     where the client has no sprite to draw. */}
                 {costumeFit(it.id) ? <CostumeThumb id={it.id} /> : <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />}

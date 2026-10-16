@@ -24,7 +24,7 @@
 import Link from 'next/link';
 import { naviCommand } from '@/lib/rozglobal-guides';
 import { shopsFor, type ShopEntry } from '@/lib/npc-shops';
-import { mapDisplayName, shopNpcAt } from '@/lib/npcs';
+import { mapDisplayName, npcHref, shopNpcAt } from '@/lib/npcs';
 
 const ALWAYS_VISIBLE = 5;
 
@@ -37,7 +37,7 @@ function Seller({ shop }: { shop: ShopEntry }) {
   return (
     <li className="shoprow">
       <span className="shoprow__who">
-        {npc ? <Link href={`/database/npcs/${npc.slug}`}>{shop.npc}</Link> : shop.npc}
+        {npc && npcHref(npc) ? <Link href={npcHref(npc)!}>{shop.npc}</Link> : shop.npc}
         {place && <span className="muted"> · {place}</span>}
       </span>
       {navi && <code className="mono navicmd shoprow__navi">{navi}</code>}

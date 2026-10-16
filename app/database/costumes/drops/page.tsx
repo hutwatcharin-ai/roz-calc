@@ -23,6 +23,7 @@ import { isCVariant } from '@/lib/c-variant';
 import { mapRelease } from '@/lib/map-availability';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { buildCostumeDrops, groupByMap, matchesCostumeDrop, upcomingCostumes, type CostumeDrop, type UpcomingCostume } from '@/lib/costume-drops';
+import { costumeId } from '@/lib/costume-twins';
 
 export const revalidate = 86400;
 
@@ -164,7 +165,7 @@ export default async function CostumeDropsPage({ searchParams }: { searchParams:
             <ul className="cdrops__list">
               {shown.map((c) => (
                 <li key={c.id} className="cdrops__row">
-                  <Link href={`/database/costumes/${c.id}`} className="cdrops__item">
+                  <Link href={`/database/costumes/${costumeId(c.id)}`} className="cdrops__item">
                     <Thumb id={c.id} icon={icons.get(c.id)} />
                     <span>
                       <span className="cdrops__name">{c.name.replace(/\s*[[(]Bound[\])]$/, '')}</span>
@@ -205,7 +206,7 @@ export default async function CostumeDropsPage({ searchParams }: { searchParams:
                   <ul className="cdrops__mapitems">
                     {g.entries.map((e) => (
                       <li key={`${e.costume.id}-${e.dropper.id}`}>
-                        <Link href={`/database/costumes/${e.costume.id}`} className="cdrops__item">
+                        <Link href={`/database/costumes/${costumeId(e.costume.id)}`} className="cdrops__item">
                           <Thumb id={e.costume.id} icon={icons.get(e.costume.id)} />
                           <span>
                             <span className="cdrops__name">{e.costume.name.replace(/\s*[[(]Bound[\])]$/, '')}</span>
@@ -231,7 +232,7 @@ export default async function CostumeDropsPage({ searchParams }: { searchParams:
               <ul className="cdrops__mapitems">
                 {upcoming.map(({ costume: c, when }) => (
                   <li key={c.id}>
-                    <Link href={`/database/costumes/${c.id}`} className="cdrops__item">
+                    <Link href={`/database/costumes/${costumeId(c.id)}`} className="cdrops__item">
                       <Thumb id={c.id} icon={icons.get(c.id)} />
                       <span>
                         <span className="cdrops__name">{c.name.replace(/\s*[[(]Bound[\])]$/, '')}</span>

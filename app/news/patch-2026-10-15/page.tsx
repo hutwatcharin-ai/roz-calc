@@ -21,6 +21,7 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { supabaseRead } from '@/lib/supabase';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import availability from '@/data/map-availability.json';
+import { costumeId } from '@/lib/costume-twins';
 
 export const revalidate = 3600;
 
@@ -279,7 +280,7 @@ export default async function Patch20261015Page() {
             <ul className="hwcards">
               {box.costumes.map((c) => (
                 <li key={c.id}>
-                  <Link href={`/database/costumes/${c.id}`} className="hwcard">
+                  <Link href={`/database/costumes/${costumeId(c.id)}`} className="hwcard">
                     <span className="hwcard__stage"><CostumeCell id={c.id} scale={2} box={150} /></span>
                     <span className="hwcard__body">
                       <span className="hwcard__slot">{c.slot}</span>
@@ -300,7 +301,7 @@ export default async function Patch20261015Page() {
         <ul className="hwmini">
           {KP_REWARDS.map((c) => (
             <li key={c.id}>
-              <Link href={`/database/costumes/${c.id}`} className="hwmini__card">
+              <Link href={`/database/costumes/${costumeId(c.id)}`} className="hwmini__card">
                 <span className="hwmini__stage"><CostumeCell id={c.id} scale={1} box={72} /></span>
                 <span><strong>{c.name}</strong><small>{c.slot} · {c.tier}</small><small>{c.quote}</small></span>
               </Link>
@@ -312,7 +313,7 @@ export default async function Patch20261015Page() {
         <ul className="hwmini">
           {BOUND_NEW.map((c) => (
             <li key={c.id}>
-              <Link href={`/database/costumes/${c.id}`} className="hwmini__card">
+              <Link href={`/database/costumes/${costumeId(c.id)}`} className="hwmini__card">
                 <span className="hwmini__stage"><CostumeCell id={c.id} scale={1} box={72} /></span>
                 <span><strong>{c.name}</strong><small>{c.slot} · {c.quote}</small></span>
               </Link>

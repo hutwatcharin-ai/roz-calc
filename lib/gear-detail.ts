@@ -8,6 +8,7 @@ import { fetchAllRows } from './fetch-all-rows';
 import { gearCategory, gearType } from './gear-type';
 import { isAbsentFromGame } from './game-absent';
 import { isBound } from './bound-items';
+import { boundTwinsOf } from './costume-twins';
 
 // Cached so generateMetadata and the page body cost one query, not two.
 // Returns the raw { data, error } -- each caller keeps its own handling, and a
@@ -64,14 +65,13 @@ export async function loadGearExtras(id: number, name?: string): Promise<GearExt
     .order('rate', { ascending: false });
   if (droppedByError) console.error('gear dropped-by query failed', droppedByError);
 
+  // The Bound copy folded into this page (lib/costume-twins), with its own
+  // droppers: monsters drop the Bound copy, so this is usually the only way
+  // the look is farmed.
   let boundTwin: GearExtras['boundTwin'] = null;
-  if (name && !isBound(name)) {
-    const { data: twins, error: twinError } = await db
-      .from('items')
-      .select('id, name_en')
-      .in('name_en', [`${name} (Bound)`, `${name} [Bound]`])
-      .eq('category', 'Costume Equipment')
-      .order('id');
+  const twinIds = name && !isBound(name) ? boundTwinsOf(id) : [];
+  if (twinIds.length) {
+    const { data: twins, error: twinError } = await db.from('items').select('id, name_en').in('id', twinIds).order('id');
     if (twinError) console.error('gear bound-twin query failed', twinError);
     const twin = (twins ?? []).find((row) => !isAbsentFromGame(row.id));
     if (twin) {
@@ -81,7 +81,7 @@ export async function loadGearExtras(id: number, name?: string): Promise<GearExt
         .eq('item_id', twin.id)
         .order('rate', { ascending: false });
       if (twinDropsError) console.error('gear bound-twin drops query failed', twinDropsError);
-      if ((twinDrops ?? []).length > 0) boundTwin = { ...twin, droppedBy: twinDrops ?? [] };
+      boundTwin = { ...twin, droppedBy: twinDrops ?? [] };
     }
   }
 

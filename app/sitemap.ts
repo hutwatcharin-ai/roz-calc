@@ -4,8 +4,9 @@ import type { MetadataRoute } from 'next';
 import { supabaseRead } from '@/lib/supabase';
 import { SITE_URL } from '@/lib/site';
 import { PRIMARY_LINKS, SECTION_LINKS } from '@/lib/nav-links';
-import { itemHref } from '@/lib/item-href';
-import { ALL_NPCS } from '@/lib/npcs';
+import { isCostumeCategory, itemHref } from '@/lib/item-href';
+import { FOLDED_BOUND_IDS } from '@/lib/costume-twins';
+import { NPC_PAGES } from '@/lib/npcs';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { CLASS_GUIDES } from '@/lib/class-guides';
 import { publishedTopics } from '@/lib/card-topics';
@@ -166,7 +167,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...monsterIds.map((row) => ({ url: `${SITE_URL}/database/monsters/${row.id}`, lastModified: row.updated_at })),
     // Items the live client does not know are noindex on their page; keep them
     // out of the sitemap too so the two signals agree.
-    ...itemIds.filter((row) => !isAbsentFromGame(row.id)).map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
+    // A Bound costume folded into its free twin (lib/costume-twins) has no page of its own.
+    ...itemIds.filter((row) => !isAbsentFromGame(row.id) && !(isCostumeCategory(row.category) && FOLDED_BOUND_IDS.has(row.id))).map((row) => ({ url: `${SITE_URL}${itemHref(row.id, row.category)}`, lastModified: row.updated_at })),
     // map_code is a string, not a numeric id, so it needs encodeURIComponent
     // the way app/database/maps/page.tsx and monster spawn chips already link
     // to it -- some codes carry characters (e.g. underscores are fine, but
@@ -197,8 +199,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Only the NPCs with a real name have a page; the rest are rows on the
     // index (lib/npcs marks the difference), and a sitemap entry for one would
     // be a 404.
-    ...ALL_NPCS.filter((npc) => npc.hasName).map((npc) => ({
-      url: `${SITE_URL}/database/npcs/${encodeURIComponent(npc.slug)}`,
+    // One page per NPC name with something to read (lib/npcs NPC_PAGES).
+    ...NPC_PAGES.map((page) => ({
+      url: `${SITE_URL}/database/npcs/${encodeURIComponent(page.slug)}`,
       lastModified: NPCS_DATA_LAST_MODIFIED,
     })),
   ];
