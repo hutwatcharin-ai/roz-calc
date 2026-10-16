@@ -15,6 +15,18 @@ import { recipesOfKind, type Recipe } from '@/lib/crafting';
 import { foodById } from '@/lib/food-buffs';
 import CraftCalc from '@/components/craft-calc/CraftCalc';
 import { craftCalcConfig } from '@/lib/craft-calc-config';
+import { materialSources } from '@/lib/material-sources';
+
+// Cookbooks Lv.1-10 are items 7472-7481. The Korean Zero guide (dcinside
+// ragzero no=48973, Jan 2021) says the town cooking merchant sells Lv.1-5
+// and Lv.6+ only drop from monsters; who drops them is our own drop table.
+const COOKBOOKS = Array.from({ length: 10 }, (_, i) => ({ level: i + 1, id: 7472 + i }));
+// Buy prices are the items' own shop prices (rozerodb / item table).
+const KITS = [
+  { id: 12125, name: 'Outdoor Cooking Kits', price: 500 },
+  { id: 12126, name: 'Indoor Cooking Kits', price: 1000 },
+  { id: 12127, name: 'High end Cooking Kits', price: 2000 },
+];
 
 export const revalidate = 86400;
 
@@ -40,6 +52,7 @@ export default async function CookingPage() {
     recipes: recipesOfKind('cook'),
     unknownRateNote: 'ยังไม่รู้โอกาสทำอาหารสำเร็จ ยอดนี้คิดแบบทำติดทุกครั้ง ควรเผื่อวัตถุดิบไว้อีก',
   });
+  const src = await materialSources([...COOKBOOKS.map((b) => b.id), ...KITS.map((k) => k.id)]);
   const books = [...new Set(confirmed.map(bookLevel).filter((l): l is number => l != null))].sort((a, b) => a - b);
 
   // The strongest confirmed dish for each stat.
@@ -105,7 +118,57 @@ export default async function CookingPage() {
           </li>
           <li>เตรียมวัตถุดิบตามการ์ดด้านล่าง ตัวเลข ×10 คือจำนวนที่ใช้ต่อครั้ง · กด <strong>+ คำนวณวัตถุดิบ</strong> ที่การ์ดได้หลายเมนู แล้วดูยอดรวมที่แถบด้านล่าง</li>
           <li>ใช้ชุดทำอาหาร แล้วเลือกเมนูจากตำราที่ถืออยู่</li>
+          <li>
+            กินแล้วบัฟอยู่ <strong>20 นาที</strong> · อาหารสเตตัสพวกนี้ใช้ซ้อนกับคอร์สอาหารชั้นสูงไม่ได้
+          </li>
         </ol>
+      </section>
+
+      <section className="card card--pink" style={{ marginTop: 16 }}>
+        <h2 className="section-title">ตำราได้จากไหน</h2>
+        <p className="muted" style={{ marginTop: 0 }}>
+          <strong>Lv.1–5</strong> ซื้อจากพ่อค้าเครื่องครัวในเมือง · <strong>Lv.6 ขึ้นไป</strong> ไม่มีขาย ต้องตีมอนหรือซื้อต่อจากผู้เล่น
+        </p>
+        <div className="gtiles">
+          {COOKBOOKS.map((b) => {
+            const s = src[b.id];
+            return (
+              <Link key={b.id} className="gtile" href={`/database/items/${b.id}`}>
+                <span className="gtile__k">ตำรา Lv {b.level}</span>
+                <span className="gtile__v">
+                  <img src={`/images/items/${b.id}.gif`} alt="" width={24} height={24} />
+                  {b.level <= 5 ? 'ร้านในเมือง' : s?.monster ? s.monster.name : 'ยังฟาร์มไม่ได้'}
+                </span>
+                <span className="gtile__s">
+                  {b.level <= 5
+                    ? 'ไม่ต้องตีมอน'
+                    : s?.monster
+                      ? `${s.map ? s.map.name : 'ยังไม่รู้แมพ'}${s.killsPerItem ? ` · เฉลี่ย ~${s.killsPerItem.toLocaleString()} ตัว/เล่ม` : ''}`
+                      : 'ยังไม่มีมอนในแมพที่เปิดที่ดรอป'}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="card card--cyan" style={{ marginTop: 16 }}>
+        <h2 className="section-title">ชุดทำอาหาร</h2>
+        <div className="gtiles">
+          {KITS.map((k) => {
+            const s = src[k.id];
+            return (
+              <Link key={k.id} className="gtile" href={`/database/items/${k.id}`}>
+                <span className="gtile__k">{k.name}</span>
+                <span className="gtile__v">
+                  <img src={`/images/items/${k.id}.gif`} alt="" width={24} height={24} />
+                  {k.price.toLocaleString()}z
+                </span>
+                <span className="gtile__s">{s?.monster ? `ร้านในเมือง · ดรอปจาก ${s.monster.name} ด้วย` : 'ร้านในเมือง'}</span>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
       <CraftCalc config={calc}>
