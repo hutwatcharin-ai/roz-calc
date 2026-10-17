@@ -6,10 +6,16 @@ import { NextResponse } from 'next/server';
 import { supabaseRead } from '@/lib/supabase';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { searchWords } from '@/lib/smart-search';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export const dynamic = 'force-dynamic';
 
 const LIMIT_PER_KIND = 5;
+// Items the live client lacks stay out of search (lib/game-absent, owner 22
+// Sep 2026), as they do from every list. 501 of the costume rows are such
+// items -- too many ids for a `not.in` in the URL -- so the item kinds read
+// more rows and drop them here before keeping five.
+const ITEM_READ = LIMIT_PER_KIND * 8;
 const MAX_QUERY = 60;
 
 export async function GET(req: Request) {
@@ -38,13 +44,13 @@ export async function GET(req: Request) {
         .select('id, name_en, icon_url')
         .not('category', 'in', '("Card","Armor","Weapon","Costume Equipment")'),
       'name_en',
-    ).limit(LIMIT_PER_KIND),
-    allWords(db.from('items').select('id, name_en, icon_url').eq('category', 'Card'), 'name_en').limit(LIMIT_PER_KIND),
-    allWords(db.from('items').select('id, name_en, icon_url').in('category', ['Armor', 'Weapon']), 'name_en').limit(LIMIT_PER_KIND),
+    ).limit(ITEM_READ),
+    allWords(db.from('items').select('id, name_en, icon_url').eq('category', 'Card'), 'name_en').limit(ITEM_READ),
+    allWords(db.from('items').select('id, name_en, icon_url').in('category', ['Armor', 'Weapon']), 'name_en').limit(ITEM_READ),
     // Costumes are their own group, not gear: they outnumber real
     // equipment 940 to 875, so sharing one bucket of five meant a search
     // for "wing" could return nothing a player can fight in.
-    allWords(db.from('items').select('id, name_en, icon_url').eq('category', 'Costume Equipment'), 'name_en').limit(LIMIT_PER_KIND),
+    allWords(db.from('items').select('id, name_en, icon_url').eq('category', 'Costume Equipment'), 'name_en').limit(ITEM_READ),
     // classes is fetched so mergeSearchResults can route a skill to the
     // tab it actually lives on (isInGameSkill(classes)) instead of always
     // landing on the default "ingame" tab, which 511 of 851 skills fail.
@@ -55,6 +61,7 @@ export async function GET(req: Request) {
   ]);
 
   const all = { monsters, items, cards, equipment, costumes, skills, maps };
+  const ITEM_KINDS = new Set(['items', 'cards', 'equipment', 'costumes']);
   let failed = 0;
   const groups: Record<string, unknown[]> = {};
   for (const [kind, r] of Object.entries(all)) {
@@ -62,7 +69,8 @@ export async function GET(req: Request) {
       failed += 1;
       console.error(`api/search: ${kind} query failed`, r.error);
     }
-    groups[kind] = r.data ?? [];
+    const rows = (r.data ?? []) as { id?: number }[];
+    groups[kind] = ITEM_KINDS.has(kind) ? rows.filter((row) => !isAbsentFromGame(Number(row.id))).slice(0, LIMIT_PER_KIND) : rows;
   }
   return NextResponse.json(
     { groups, failed },
