@@ -5,6 +5,11 @@
 
 import { isInGameSkill } from './zero-jobs';
 import { costumeId } from '@/lib/costume-twins';
+import familyHeads from '@/data/item-family-heads.json';
+
+// Item levels folded into one page (scripts/build-item-links.mts): a search
+// for "Dishes Lv.3" lands on its own row of the family table, not a redirect.
+const FAMILY_HEAD = familyHeads as unknown as Record<string, number>;
 
 export type SearchType = 'monster' | 'item' | 'card' | 'equipment' | 'costume' | 'skill' | 'map';
 
@@ -74,7 +79,9 @@ function fromItemRow(row: SearchRow, type: SearchType): SearchResult {
           ? `/database/costumes/${costumeId(row.id)}`
           : type === 'card'
             ? `/database/cards/${row.id}`
-            : `/database/items/${row.id}`,
+            : FAMILY_HEAD[row.id]
+              ? `/database/items/${FAMILY_HEAD[row.id]}#i${row.id}`
+              : `/database/items/${row.id}`,
     iconUrl: row.icon_url ?? null,
   };
 }

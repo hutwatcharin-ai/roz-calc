@@ -131,8 +131,12 @@ export default function GlobalSearch() {
           // into the MVP that shares its client name.
           const shown = r.type === 'monster' ? monsterLabel(Number(r.id), r.name) : r.name;
           const key = `${r.type}:${shown.toLowerCase()}`;
-          if (seen.has(key)) return false;
+          // And one row per page: a (Bound) costume folds into its free
+          // twin's page (lib/costume-twins), so "Feather Beret" and "Feather
+          // Beret (Bound)" were two rows opening the same page.
+          if (seen.has(key) || seen.has(r.href)) return false;
           seen.add(key);
+          seen.add(r.href);
           return true;
         }),
       );

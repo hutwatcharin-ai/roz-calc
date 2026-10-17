@@ -108,6 +108,23 @@ describe('mergeSearchResults', () => {
     expect(r.href).toBe('/database/costumes/19585');
   });
 
+  it('sends a Bound costume to its free twin, the same href the search box folds on', () => {
+    const [bound, free] = mergeSearchResults({
+      ...empty,
+      costumes: [
+        { id: 400823, name_en: 'B', icon_url: null },
+        { id: 20157, name_en: 'F', icon_url: null },
+      ],
+    });
+    expect(bound.href).toBe('/database/costumes/20157');
+    expect(bound.href).toBe(free.href);
+  });
+
+  it('sends a folded item level to its row on the family head page', () => {
+    const [r] = mergeSearchResults({ ...empty, items: [{ id: 4701, name_en: 'X Lv.2' }] });
+    expect(r.href).toBe('/database/items/4700#i4701');
+  });
+
   it('defaults a missing icon to null rather than undefined', () => {
     const [r] = mergeSearchResults({ ...empty, items: [{ id: 9, name_en: 'X' }] });
     expect(r.iconUrl).toBeNull();
