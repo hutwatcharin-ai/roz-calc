@@ -19,6 +19,7 @@ import ItemIcon from '@/components/ItemIcon';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { supabaseRead } from '@/lib/supabase';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export const revalidate = 3600;
 
@@ -184,7 +185,8 @@ export default async function Patch20260917Page() {
   const mvpRows = MVP_IDS.map((id) => ((mvps.data ?? []) as Mvp[]).find((m) => m.id === id)).filter(
     (m): m is Mvp => Boolean(m),
   );
-  const dropRows = (drops.data ?? []) as unknown as Drop[];
+  // Not-in-game rows (classic Ring 2621) stay out, as on the monster page.
+  const dropRows = ((drops.data ?? []) as unknown as Drop[]).filter((d) => !d.items || !isAbsentFromGame(d.items.id));
   const spawnRows = (dungeonSpawns.data ?? []) as unknown as Spawn[];
   // Raid maps come as a plain code and a _z copy; one name per MVP is enough.
   const raidMap = new Map<number, string>();

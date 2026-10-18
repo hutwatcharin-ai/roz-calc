@@ -4,7 +4,8 @@
 // reason, so a future rebuild of the recipe file cannot quietly bring them
 // back.
 import { describe, it, expect } from 'vitest';
-import { ALL_RECIPES, CREATE_DEADLY_POISON, RECIPES_HIDDEN_UNAVAILABLE, recipesMaking, recipesOfSkill } from '@/lib/crafting';
+import { isAbsentFromGame } from '@/lib/game-absent';
+import { ALL_RECIPES, CREATE_DEADLY_POISON, RECIPES_HIDDEN_ABSENT, RECIPES_HIDDEN_UNAVAILABLE, recipesMaking, recipesOfSkill } from '@/lib/crafting';
 import file from '@/data/crafting-recipes.json';
 
 const raw = (file as unknown as { recipes: { skillId: number | null; product: { id: number } }[] }).recipes;
@@ -21,7 +22,16 @@ describe('recipes for skills this game does not have', () => {
     const unavailable = raw.filter((r) => r.skillId === 2494 || r.skillId === 2039);
     expect(unavailable.length).toBe(RECIPES_HIDDEN_UNAVAILABLE);
     expect(ALL_RECIPES.some((r) => r.skillId === 2494 || r.skillId === 2039)).toBe(false);
-    expect(ALL_RECIPES.length + RECIPES_HIDDEN_UNAVAILABLE).toBe(raw.length);
+    expect(ALL_RECIPES.length + RECIPES_HIDDEN_UNAVAILABLE + RECIPES_HIDDEN_ABSENT).toBe(raw.length);
+  });
+
+  it('drops recipes that name an item the live client lacks', () => {
+    // Arrow Crafting from Fin Helm, Red Bijou, Fang of Hatii: classic only.
+    expect(RECIPES_HIDDEN_ABSENT).toBeGreaterThan(0);
+    for (const r of ALL_RECIPES) {
+      expect(isAbsentFromGame(r.product.id)).toBe(false);
+      for (const m of r.materials) expect(isAbsentFromGame(m.id)).toBe(false);
+    }
   });
 
   it('keeps the skills the game does have', () => {

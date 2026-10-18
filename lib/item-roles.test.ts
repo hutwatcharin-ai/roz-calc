@@ -14,9 +14,9 @@ describe('crafting ids', () => {
 
   it('has enough of both to be worth a chip, counting only doable recipes', () => {
     // Read through lib/crafting, which drops the 58 recipes whose skill this
-    // game does not have: 366 materials and 244 products in the raw file
-    // become 318 and 190.
-    expect(CRAFT_MATERIAL_IDS.length).toBeGreaterThan(300);
+    // game does not have and the 76 Arrow Crafting rows whose source item is
+    // not in the live client: 366 materials in the raw file become 278.
+    expect(CRAFT_MATERIAL_IDS.length).toBeGreaterThan(250);
     expect(CRAFT_PRODUCT_IDS.length).toBeGreaterThan(150);
     expect(CRAFT_PRODUCT_IDS.length).toBeLessThan(244);
   });

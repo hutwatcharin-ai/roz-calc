@@ -20,6 +20,7 @@
 
 import file from '@/data/npcs.json';
 import { shopIdOf } from '@/lib/classic-twins';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export interface NpcQuestLink {
   slug: string | null;
@@ -81,7 +82,11 @@ export const ALL_NPCS: Npc[] = data.npcs.map((npc) => {
     ? { ...npc, name: real, slug: real.toLowerCase().replace(/[^a-z0-9]+/g, '-'), hasName: true }
     : npc.hasName && !SPRITE_LABEL.test(npc.name) ? npc : { ...npc, hasName: false };
   return named.sells.length
-    ? { ...named, sells: [...new Set(named.sells.map(shopIdOf).filter((id): id is number => id !== null))] }
+    ? {
+        ...named,
+        // What the live client lacks is not on sale (lib/game-absent).
+        sells: [...new Set(named.sells.map(shopIdOf).filter((id): id is number => id !== null && !isAbsentFromGame(id)))],
+      }
     : named;
 }).sort((a, b) => Number(b.hasName) - Number(a.hasName));
 export const NPC_MAP_NAMES: Record<string, string> = data.mapNames;

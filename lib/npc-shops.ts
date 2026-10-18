@@ -17,6 +17,7 @@
 
 import file from '@/data/npc-shops.json';
 import { shopIdOf } from '@/lib/classic-twins';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export interface ShopEntry {
   npc: string;
@@ -35,7 +36,8 @@ export interface ShopEntry {
 const shops: Record<string, ShopEntry[]> = {};
 for (const [id, rows] of Object.entries((file as { items: Record<string, ShopEntry[]> }).items)) {
   const target = shopIdOf(Number(id));
-  if (target === null) continue;
+  // A shop cannot sell what the live client lacks (lib/game-absent).
+  if (target === null || isAbsentFromGame(target)) continue;
   const key = String(target);
   shops[key] = [...(shops[key] ?? []), ...rows];
 }

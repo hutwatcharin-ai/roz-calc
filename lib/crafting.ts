@@ -6,6 +6,7 @@
 
 import file from '@/data/crafting-recipes.json';
 import { toZeroId } from '@/lib/classic-twins';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export type CraftKind = 'forge' | 'arrow' | 'brew' | 'cook' | 'ore' | 'quest' | 'other';
 export type Confidence = 'both' | 'rathena-only' | 'prontera-only';
@@ -116,18 +117,27 @@ const ZERO_RECIPE_FIXES: Record<number, CraftMaterial[]> = {
 // Both sources list classic amounts (x10, x20 ...). Held cookbooks stay 0.
 const oneEach = (m: CraftMaterial): CraftMaterial => (m.amount > 0 ? { ...m, amount: 1 } : m);
 
-const RECIPES = (file as unknown as { recipes: Recipe[] }).recipes
-  .filter((recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId))
+const OF_SKILLS_HERE = (file as unknown as { recipes: Recipe[] }).recipes.filter(
+  (recipe) => recipe.skillId === null || !SKILLS_NOT_IN_THIS_GAME.has(recipe.skillId),
+);
+const RECIPES = OF_SKILLS_HERE
   .map((recipe) => {
     const fix = ZERO_RECIPE_FIXES[recipe.product.id];
     if (fix && recipe.kind === 'other') return { ...recipe, product: zero(recipe.product), materials: fix };
     const materials = recipe.materials.map(zero);
     return { ...recipe, product: zero(recipe.product), materials: recipe.kind === 'cook' ? materials.map(oneEach) : materials };
-  });
+  })
+  // A recipe whose product or any material the live client lacks cannot be
+  // made here: Arrow Crafting's classic sources (Fin Helm, Red Bijou, Fang of
+  // Hatii) are not in Zero (lib/game-absent).
+  .filter((recipe) => !isAbsentFromGame(recipe.product.id) && !recipe.materials.some((m) => isAbsentFromGame(m.id)));
 
-/** How many the filter above removes, for a page that wants to say so. */
+/** How many the skill filter above removes, for a page that wants to say so. */
 export const RECIPES_HIDDEN_UNAVAILABLE =
-  (file as unknown as { recipes: Recipe[] }).recipes.length - RECIPES.length;
+  (file as unknown as { recipes: Recipe[] }).recipes.length - OF_SKILLS_HERE.length;
+
+/** How many the not-in-game filter removes on top of that. */
+export const RECIPES_HIDDEN_ABSENT = OF_SKILLS_HERE.length - RECIPES.length;
 
 /** Under every forge recipe: what comes out is not the item on the page. */
 export const FORGED_NOTE =

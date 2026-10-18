@@ -36,6 +36,7 @@ import MonsterBestWeaponPanel from '@/components/MonsterBestWeaponPanel';
 import RecordVisit from '@/components/RecordVisit';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { foldSpawns, type SpawnRow } from '@/lib/spawn-chips';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 // ISR (SEO audit Critical-adjacent, perf #1): game reference data changes only
 // when we import — cache the rendered page and let the CDN serve it. A deploy
@@ -157,12 +158,16 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
   // Drops are the reason most players open this page, and a failed query
   // here must not read as "this monster drops nothing" -- the same failure
   // class the spawns/skills/farming queries below were already fixed for.
-  const { data: drops, error: dropsError } = await db
+  const { data: allDrops, error: dropsError } = await db
     .from('monster_drops')
     .select('rate, items(id, name_en, sell_price, icon_url, slots, category, description, description_th)')
     .eq('monster_id', id)
     .order('rate', { ascending: false });
   if (dropsError) console.error('monster drops query failed', dropsError);
+  // The drop data still carries classic rows (Masamune, Hatii Claw) and items
+  // a later patch may add; what the live client lacks cannot drop, so it is
+  // left out here as it is from every list (lib/game-absent).
+  const drops = (allDrops ?? []).filter((d: any) => !d.items || !isAbsentFromGame(d.items.id));
 
   // Each of these three has its own error slot: a failed spawn/skill/farming
   // query must not read as "this monster has none of that" (which is what

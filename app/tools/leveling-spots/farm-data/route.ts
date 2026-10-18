@@ -15,6 +15,7 @@ import { riskySkills } from '@/lib/afk-safety';
 import { walkInReason, zenyPerKill } from '@/lib/zeny-farm';
 import { mapRelease } from '@/lib/map-availability';
 import type { FarmData, FarmMonster } from '@/lib/farm-engine/types';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export const dynamic = 'force-dynamic';
 
@@ -77,7 +78,9 @@ export async function GET() {
   }
 
   const dropsOf = new Map<number, { item_id: number; rate: number | null }[]>();
-  for (const drop of drops.data ?? []) {
+  // An item the live client lacks cannot drop: counting its sell price would
+  // inflate zeny per kill (lib/game-absent).
+  for (const drop of (drops.data ?? []).filter((d) => !isAbsentFromGame(d.item_id))) {
     const list = dropsOf.get(drop.monster_id) ?? [];
     list.push(drop);
     dropsOf.set(drop.monster_id, list);
