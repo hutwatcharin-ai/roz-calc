@@ -111,7 +111,7 @@ describe('zeny mode', () => {
 });
 
 describe('level mode', () => {
-  const melee = { ...noSurvival, style: 'melee' as const, level: 50, damage: 500, perSecond: 2, hit: 200, flee: null };
+  const melee = { ...noSurvival, walkSeconds: 0, style: 'melee' as const, level: 50, damage: 500, perSecond: 2, hit: 200, flee: null };
 
   it('ranks by density tapered by level distance without numbers', () => {
     const data = world([mob(1, { level: 50, baseExp: 100 })], [place('a', [[1, 10]])]);
@@ -136,6 +136,33 @@ describe('level mode', () => {
 
   it('leaves out a map where every monster is outside ±15 levels', () => {
     expect(rankMaps(world([mob(1, { level: 80 })], [place('a', [[1, 20]])]), nobody, 'level', at50).ranked).toEqual([]);
+  });
+
+  it('keeps to the level band with the speed filled in too', () => {
+    // A Lv 90 worth ten times the EXP used to top a Lv 50's list once the
+    // ranking went by EXP an hour (Requiem Lv 106 for a Lv 70, 19 Oct 2026).
+    const data = world(
+      [mob(1, { level: 50, hp: 1000, hit100: 200 }), mob(2, { level: 90, hp: 1000, hit100: 200, baseExp: 1000 })],
+      [place('mine', [[1, 20]]), place('far', [[2, 20]]), place('mixed', [[1, 20], [2, 20]])],
+    );
+    const { ranked } = rankMaps(data, melee, 'level', at50);
+    expect(ranked.map((m) => m.code).sort()).toEqual(['mine', 'mixed']);
+    expect(ranked.find((m) => m.code === 'mixed')!.perHour).toBeCloseTo(ranked.find((m) => m.code === 'mine')!.perHour!, 6);
+  });
+
+  it('counts the walk to the next monster in the band', () => {
+    const data = world([mob(1, { level: 50, hp: 1000, hit100: 200 })], [place('a', [[1, 20]])]);
+    const still = rankMaps(data, melee, 'level', at50).ranked[0].perHour!;
+    const walking = rankMaps(data, { ...melee, walkSeconds: 1 }, 'level', at50).ranked[0].perHour!;
+    // One second a kill at 500 x 2 a second against 1,000 HP, plus one of walking.
+    expect(walking / still).toBeCloseTo(0.5, 6);
+  });
+
+  it('warns instead of gating when the player would not last', () => {
+    const data = world([mob(1, { level: 50, hp: 1000, hit100: 200, atk: 5000, atkMax: 5000, flee95: 400 })], [place('a', [[1, 20]])]);
+    const { ranked } = rankMaps(data, { ...melee, flee: 100, maxHp: 1000 }, 'level', at50);
+    expect(ranked).toHaveLength(1);
+    expect(ranked[0].warnings.length).toBeGreaterThan(0);
   });
 
   it('never gates, even with FLEE entered', () => {

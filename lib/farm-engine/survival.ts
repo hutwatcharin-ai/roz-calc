@@ -185,9 +185,16 @@ interface Threat {
   dps: number;
 }
 
-export function mapSurvival(map: FarmMap, data: FarmData, player: PlayerInput, ctx: SurvivalContext): MapSurvival | null {
+export function mapSurvival(
+  map: FarmMap,
+  data: FarmData,
+  player: PlayerInput,
+  ctx: SurvivalContext,
+  /** Fight only these (the level mode: monsters within the player's level band). */
+  only: (row: MapRow) => boolean = () => true,
+): MapSurvival | null {
   if (!canSurvive(player)) return null;
-  const farmed = farmedOn(map, data.monsters);
+  const farmed = farmedOn(map, data.monsters).filter(only);
   const mobs = headcount(farmed);
   if (mobs === 0) return null;
   const maxHp = player.maxHp as number;

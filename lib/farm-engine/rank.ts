@@ -73,6 +73,8 @@ export interface RankedMap {
   top: { id: number; value: number; amount: number }[];
   /** null when the mode does not gate or FLEE is unknown; empty when the map passes. */
   blockers: Blocker[] | null;
+  /** The level mode: what the survival model would have taken the map out for, shown as warnings. */
+  warnings: Blocker[];
   tags: MapTags;
   /** Level drop tags present among the zeny contributors. */
   dropTags: DropTag[];
@@ -111,14 +113,21 @@ function scoreMap(
 
   const overnight = mode !== 'level';
   if (overnight && opts.bot && canSurvive(player)) return botMap(map, data, player, mode, opts.bot, ctx, farmed, mobs, contributors);
-  const survival = overnight ? mapSurvival(map, data, player, ctx) : null;
-  const walk = overnight ? walkSeconds(map, mobs, player, ctx) : 0;
+  // The level mode (19 Oct 2026): the player fights the monsters within
+  // ±LEVEL_SPAN of their level, with or without their speed filled in --
+  // with it the band used to vanish and a Lv 70 got Requiem Lv 106 maps.
+  // They walk between those, and the survival model warns but never removes
+  // a map: someone at the keyboard drinks and retreats.
+  const inBand = (row: MapRow) => mode !== 'level' || (row.m.level !== null && levelWeight(row.m.level, opts.level) > 0);
+  const fought = farmed.filter(inBand);
+  const survival = canSurvive(player) ? mapSurvival(map, data, player, ctx, inBand) : null;
+  const walk = canRate(player) ? walkSeconds(map, headcount(fought), player, ctx) : 0;
 
   if (canRate(player)) {
     let count = 0;
     let seconds = 0;
     const timed: (MapRow & { s: number })[] = [];
-    for (const row of farmed) {
+    for (const row of fought) {
       const fight = survival?.fightSeconds.get(row.m.id) ?? secondsPerKill(row.m, player);
       if (fight === null) continue;
       const s = fight + walk;
@@ -169,6 +178,7 @@ function scoreMap(
       .sort((a, b) => b.value * b.amount - a.value * a.amount)
       .slice(0, 4),
     blockers: !overnight ? null : survival ? survival.blockers : mapBlockers(farmed, player),
+    warnings: !overnight && survival ? survival.blockers : [],
     tags: mapTags(met),
     dropTags: zenyMode ? (['halved', 'unconfirmed'] as DropTag[]).filter((t) => tagsPresent.has(t)) : [],
     fingerprint: contributors
@@ -247,6 +257,7 @@ function botMap(
       .sort((a, b) => b.value * b.amount - a.value * a.amount)
       .slice(0, 4),
     blockers: best ? [] : run ? runBlockers(run) : [{ id: 0, name: '', reason: 'short', theirHitPct: null, hours: 0 }],
+    warnings: [],
     tags: mapTags(metOn(map, data.monsters)),
     dropTags: zenyMode ? (['halved', 'unconfirmed'] as DropTag[]).filter((t) => tagsPresent.has(t)) : [],
     fingerprint: contributors
