@@ -46,7 +46,25 @@ function missingHints(mode: FarmMode, player: PlayerInput): string[] {
 }
 
 export default function FarmTool({ initialMode, initialLevel }: { initialMode: FarmMode; initialLevel: number | null }) {
+  // The tab answers the tap at once; the results follow once it has been
+  // painted. Ranking every map for the overnight modes takes seconds on a
+  // phone, and a tab that did not light up until then read as a dead button
+  // (owner, 19 Oct 2026). Not a React transition: a long ranking restarted
+  // by any update that arrives meanwhile never finished on a slow phone.
   const [mode, setMode] = useState<FarmMode>(initialMode);
+  const [tab, setTab] = useState<FarmMode>(initialMode);
+  const switching = tab !== mode;
+  useEffect(() => {
+    if (tab === mode) return;
+    let timer = 0;
+    const frame = requestAnimationFrame(() => {
+      timer = window.setTimeout(() => setMode(tab), 0);
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+    };
+  }, [tab, mode]);
   const [numbers, setNumbers, ready] = useRememberedNumbers();
   const [style, setStyle] = useBotStyle();
   const [bot, setBot] = useBotSettings();
@@ -95,16 +113,19 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
             key={m.key}
             type="button"
             role="tab"
-            aria-selected={mode === m.key}
-            className={`modebar__tab${mode === m.key ? ' modebar__tab--on' : ''}`}
-            onClick={() => setMode(m.key)}
+            aria-selected={tab === m.key}
+            className={`modebar__tab${tab === m.key ? ' modebar__tab--on' : ''}`}
+            onClick={() => setTab(m.key)}
           >
             <img src={m.icon} alt="" width={18} height={18} className="modebar__icon" />
             <span className="modebar__label">{m.label}</span>
           </button>
         ))}
       </div>
-      <p className="modebar__blurb">{MODES.find((m) => m.key === mode)?.blurb}</p>
+      <p className="modebar__blurb" aria-live="polite">
+        {MODES.find((m) => m.key === tab)?.blurb}
+        {switching && <span className="muted"> · กำลังคำนวณ…</span>}
+      </p>
 
       {farm.failed && (
         <div className="card farm-state">

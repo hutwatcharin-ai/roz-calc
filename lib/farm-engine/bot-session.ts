@@ -39,6 +39,7 @@ import {
   WALK_CELLS_PER_SECOND,
   crowdedFlee,
   damageTaken,
+  type Defense,
   playerDefense,
   type SurvivalContext,
 } from './survival';
@@ -196,6 +197,54 @@ function mix(rows: { w: number; h: Hits | undefined }[], pick: (h: Hits) => numb
   return rows.reduce((sum, r) => sum + r.w * (r.h ? pick(r.h) : 0), 0);
 }
 
+/**
+ * One kind of attack a monster makes: how many a second it tries, how it
+ * lands, and what it does (average and top). Everything but the hit chance,
+ * which moves with the crowd's FLEE.
+ */
+interface AttackPart {
+  uses: number;
+  /** 'normal': at the hit chance; 'weapon': at the hit chance raised by hitBonus; 'sure': always. */
+  land: 'normal' | 'weapon' | 'sure';
+  hitBonus: number;
+  dmg: number;
+  top: number;
+  skill: boolean;
+}
+
+// The parts depend on the monster and the player's DEF only, so a search
+// over target sets (bestTargets, up to 2^MAX_PICK runs a map, every map at
+// once) works them out once. Rebuilding them per run froze a phone for
+// 8 seconds on switching the farm tool's mode (owner, 19 Oct 2026).
+const partsCache = new WeakMap<FarmMonster, { key: string; parts: AttackPart[] }>();
+
+function attackParts(m: FarmMonster, def: Defense, fallbackDelay: number): AttackPart[] {
+  const key = `${def.hard}|${def.soft}|${fallbackDelay}`;
+  const cached = partsCache.get(m);
+  if (cached && cached.key === key) return cached.parts;
+  const parts: AttackPart[] = [];
+  const delay = m.attackDelay ?? fallbackDelay;
+  if (delay > 0) {
+    const attempts = 1000 / delay;
+    const atkOf = (top: boolean) => (top ? m.atkMax ?? m.atk : m.atk) as number;
+    const physical = (ratio: number, top: boolean, ignoreDef: boolean) => {
+      const atk = atkOf(top) * (ratio / 100);
+      return ignoreDef ? Math.max(1, Math.floor(atk)) : (damageTaken({ ...m, atk }, def) as number);
+    };
+    let skillUses = 0;
+    for (const sk of m.skills) {
+      const uses = Math.min(attempts * (sk.rate / 10000), sk.delay > 0 ? 1000 / sk.delay : Infinity) * sk.share;
+      skillUses += uses;
+      const each = (top: boolean) =>
+        sk.kind === 3 ? Math.max(1, Math.floor(atkOf(top) * (m.magicRatio ?? 1) * (sk.ratio / 100))) : physical(sk.ratio, top, sk.kind === 2);
+      parts.push({ uses, land: sk.kind === 0 ? 'weapon' : 'sure', hitBonus: sk.hitBonus, dmg: each(false) * sk.hits, top: each(true) * sk.hits, skill: true });
+    }
+    parts.push({ uses: Math.max(0, attempts - skillUses), land: 'normal', hitBonus: 0, dmg: physical(100, false, false), top: physical(100, true, false), skill: false });
+  }
+  partsCache.set(m, { key, parts });
+  return parts;
+}
+
 /** The bot on `map` hunting `targets`, its run measured against a `window` of hours. */
 export function botRun(
   map: FarmMap,
@@ -258,43 +307,27 @@ export function botRun(
   // timer). Weapon skills miss like a normal hit (NPC_ attribute attacks 20%
   // less often); FLEE-ignoring, critical and magic ones always land. A hit
   // past the damage limit is a teleport, not damage.
+  const rows = [...ticked, ...followRows];
+  const partsOf = new Map(rows.map((row) => [row.m.id, attackParts(row.m, def, ctx.attackDelay)]));
   const hitsAt = (flee: number) => {
     const out = new Map<number, Hits>();
-    for (const row of [...ticked, ...followRows]) {
+    for (const row of rows) {
       const m = row.m;
       const hitPct = m.flee95 === null ? 100 : mobHitChance(m.flee95, flee);
-      const delay = m.attackDelay ?? ctx.attackDelay;
       const h: Hits = { landed: 0, dps: 0, skillDps: 0, spread: 0, trip: 0, tripHp: 0, hitMax: 0 };
-      if (delay > 0) {
-        const attempts = 1000 / delay;
-        const atkOf = (top: boolean) => (top ? m.atkMax ?? m.atk : m.atk) as number;
-        const physical = (ratio: number, top: boolean, ignoreDef: boolean) => {
-          const atk = atkOf(top) * (ratio / 100);
-          return ignoreDef ? Math.max(1, Math.floor(atk)) : (damageTaken({ ...m, atk }, def) as number);
-        };
-        const add = (perSec: number, dmg: number, top: number, skill: boolean) => {
-          h.landed += perSec;
-          if (limit !== null && top > limit) {
-            h.trip += perSec;
-            h.tripHp += perSec * dmg;
-            return;
-          }
-          h.dps += perSec * dmg;
-          if (skill) h.skillDps += perSec * dmg;
-          h.spread += perSec * dmg * dmg;
-          if (perSec > 0) h.hitMax = Math.max(h.hitMax, top);
-        };
-        let skillUses = 0;
-        for (const sk of m.skills) {
-          const uses = Math.min(attempts * (sk.rate / 10000), sk.delay > 0 ? 1000 / sk.delay : Infinity) * sk.share;
-          skillUses += uses;
-          const land = sk.kind === 0 ? (hitPct <= 5 ? 5 : Math.min(100, hitPct * (1 + sk.hitBonus / 100))) / 100 : 1;
-          const each = (top: boolean) =>
-            sk.kind === 3 ? Math.max(1, Math.floor(atkOf(top) * (m.magicRatio ?? 1) * (sk.ratio / 100))) : physical(sk.ratio, top, sk.kind === 2);
-          add(uses * land, each(false) * sk.hits, each(true) * sk.hits, true);
+      for (const p of partsOf.get(m.id) as AttackPart[]) {
+        const land = p.land === 'sure' ? 1 : p.land === 'normal' ? hitPct / 100 : (hitPct <= 5 ? 5 : Math.min(100, hitPct * (1 + p.hitBonus / 100))) / 100;
+        const perSec = p.uses * land;
+        h.landed += perSec;
+        if (limit !== null && p.top > limit) {
+          h.trip += perSec;
+          h.tripHp += perSec * p.dmg;
+          continue;
         }
-        const normal = Math.max(0, attempts - skillUses) * (hitPct / 100);
-        add(normal, physical(100, false, false), physical(100, true, false), false);
+        h.dps += perSec * p.dmg;
+        if (p.skill) h.skillDps += perSec * p.dmg;
+        h.spread += perSec * p.dmg * p.dmg;
+        if (perSec > 0) h.hitMax = Math.max(h.hitMax, p.top);
       }
       out.set(m.id, h);
     }
