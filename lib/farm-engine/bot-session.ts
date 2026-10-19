@@ -120,6 +120,8 @@ export interface BotRun {
   wingCostPerHour: number;
   /** Potions it sets out with: typed, else what fits under 70% of the max weight; null = no limit known. */
   potionsCarried: number | null;
+  /** HP lost an hour, by where it comes from: the ticked monsters, the crowd round a fight, one-hit meetings that send the bot away. */
+  hurtPerHour: { targets: number; crowd: number; teleportHits: number; worstName: string | null };
   /** SP short an hour for teleporting after natural regen; <= 0 keeps up. */
   spShortPerHour: number;
   /** Hours until it goes back to town, capped at MAX_RUN_HOURS. */
@@ -158,6 +160,8 @@ export function searchModel(density: number, reach: number): { cells: number; te
 interface Hits {
   /** Landed hits a second. */
   landed: number;
+  /** One average hit, after DEF. */
+  dmg: number;
   /** HP a second. */
   dps: number;
   /** One hit at the top of its ATK range, after DEF. */
@@ -200,8 +204,23 @@ export function botRun(
   const pileRows = ticked.filter(aggressive);
   const pileOn = pileRows.reduce((sum, row) => sum + circle(row), 0);
   const followRows = all.filter((row) => aggressive(row) && !targets.includes(row.m.id));
-  const picked = followRows.map((row) => (row.amount / cells) * 2 * range(row) * search.cells + circle(row));
+
+  // A monster whose top hit is past the "teleport when hit for more than"
+  // setting never stays on the bot: its first landed hit sends the bot away.
+  // It costs one hit and one teleport per meeting, not a hit every second of
+  // every fight -- counting it the second way had a Mutant Dragon follower
+  // costing 6,000 potions an hour (owner, Zenhai Marsh, 19 Oct 2026).
+  const limit = bot.teleportOnDamage;
+  const topHit = (row: MapRow) => damageTaken({ ...row.m, atk: row.m.atkMax ?? row.m.atk }, def) ?? 0;
+  const trips = (row: MapRow) => limit !== null && topHit(row) > limit;
+  const meet = (row: MapRow) => (row.amount / cells) * 2 * range(row) * search.cells + circle(row);
+  const stayRows = followRows.filter((row) => !trips(row));
+  const fleeRows = followRows.filter(trips);
+  const picked = stayRows.map(meet);
   const gainPerKill = picked.reduce((a, b) => a + b, 0);
+  const fleeMeets = fleeRows.map(meet);
+  /** Meetings per kill with followers that send the bot away. */
+  const fleePerKill = fleeMeets.reduce((a, b) => a + b, 0);
 
   const dangers: DangerNote[] = [];
   for (const row of [...ticked, ...followRows]) {
@@ -217,7 +236,7 @@ export function botRun(
       const hitPct = row.m.flee95 === null ? 100 : mobHitChance(row.m.flee95, flee);
       const delay = row.m.attackDelay ?? ctx.attackDelay;
       const landed = delay > 0 ? (hitPct / 100) * (1000 / delay) : 0;
-      out.set(row.m.id, { landed, dps: landed * dmg, hitMax });
+      out.set(row.m.id, { landed, dmg, dps: landed * dmg, hitMax });
     }
     return out;
   };
@@ -235,6 +254,9 @@ export function botRun(
     dangers.push({ kind: 'followers', id: followRows[0].m.id, name: followRows.map((r) => r.m.name).join(', ') });
   }
   dangers.push(...round.dangers);
+  for (const row of followRows) {
+    if (topHit(row) >= maxHp) dangers.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: topHit(row) });
+  }
 
   // Potions and how long they last.
   const perHour = 3600 / round.cycle;
@@ -291,6 +313,12 @@ export function botRun(
     wingCostPerHour,
     potionsCarried,
     spShortPerHour,
+    hurtPerHour: {
+      targets: round.fromTargets * perHour,
+      crowd: round.fromCrowd * perHour,
+      teleportHits: round.fromTrips * perHour,
+      worstName: fleeRows.length ? fleeRows.slice().sort((a, b) => topHit(b) - topHit(a))[0].m.name : null,
+    },
     hours,
     stop,
     lootHours,
@@ -302,18 +330,26 @@ export function botRun(
   function evaluate(onBot: number) {
     const flee = crowdedFlee(player.flee as number, 1 + pileOn + onBot);
     const hits = hitsAt(flee);
-    const pile = pileRows.map((row) => ({ w: circle(row), h: hits.get(row.m.id) }));
-    const follow = followRows.map((row, i) => ({ w: gainPerKill > 0 ? (picked[i] / gainPerKill) * onBot : 0, h: hits.get(row.m.id) }));
-    const limit = bot.teleportOnDamage;
-    const crowdDps = mix(pile, (h) => h.dps) + mix(follow, (h) => h.dps);
-    const crowdLanded = mix(pile, (h) => h.landed) + mix(follow, (h) => h.landed);
-    // Followers that trip the damage limit, per second of fighting.
-    const trips = limit === null ? 0 : mix(follow, (h) => (h.hitMax > limit ? h.landed : 0));
+    // Ticked aggressive monsters joining a fight: the ones under the damage
+    // limit hit for as long as the fight lasts, the ones over it end the
+    // fight with their first landed hit.
+    const pileStay = pileRows.filter((row) => !trips(row)).map((row) => ({ w: circle(row), h: hits.get(row.m.id) }));
+    const pileFlee = pileRows.filter(trips).map((row) => ({ w: circle(row), h: hits.get(row.m.id) }));
+    const follow = stayRows.map((row, i) => ({ w: gainPerKill > 0 ? (picked[i] / gainPerKill) * onBot : 0, h: hits.get(row.m.id) }));
+    const crowdDps = mix(pileStay, (h) => h.dps) + mix(follow, (h) => h.dps);
+    const crowdLanded = mix(pileStay, (h) => h.landed) + mix(follow, (h) => h.landed) + mix(pileFlee, (h) => h.landed);
+    const pileTrips = mix(pileFlee, (h) => h.landed);
+    const pileTripHit = pileTrips > 0 ? mix(pileFlee, (h) => h.landed * h.dmg) / pileTrips : 0;
+    // One hit from each flee-follower met, and a teleport.
+    const fleeHit = fleePerKill > 0 ? fleeRows.reduce((s, row, i) => s + (fleeMeets[i] / fleePerKill) * (hits.get(row.m.id)?.dmg ?? 0), 0) : 0;
 
     const notes: DangerNote[] = [];
     let cycle = 0;
     let fighting = 0;
     let damage = 0;
+    let fromTargets = 0;
+    let fromCrowd = 0;
+    let fromTrips = 0;
     let retries = 0;
     let exp = 0;
     let zeny = 0;
@@ -332,14 +368,21 @@ export function botRun(
         fight = Math.min(fight, free) + exposed;
       }
       // A hit past the damage limit sends the bot away mid-fight: the kill
-      // only lands if no such hit does first.
-      const ownTrips = limit !== null && h.hitMax > limit ? h.landed : 0;
-      const success = Math.max(Math.exp(-(ownTrips + trips) * exposed), MIN_SUCCESS);
+      // only lands if no such hit does first, and each aborted try costs
+      // that one hit, not a fight's worth.
+      const ownFlee = trips(row);
+      const ownTrips = ownFlee ? h.landed : 0;
+      const tripRate = ownTrips + pileTrips;
+      const success = Math.max(Math.exp(-tripRate * exposed), MIN_SUCCESS);
       const attempts = 1 / success;
-      const hurt = (h.dps + crowdDps) * exposed;
+      const tripHit = tripRate > 0 ? (ownTrips * h.dmg + pileTrips * pileTripHit) / tripRate : 0;
+      const hurt = ((ownFlee ? 0 : h.dps) + crowdDps) * exposed;
       cycle += share * attempts * (fight + searchSeconds);
       fighting += share * attempts * fight;
-      damage += share * attempts * hurt;
+      damage += share * (attempts * hurt + (attempts - 1) * tripHit);
+      fromTargets += share * attempts * (ownFlee ? 0 : h.dps) * exposed;
+      fromCrowd += share * attempts * crowdDps * exposed;
+      fromTrips += share * (attempts - 1) * tripHit;
       retries += share * (attempts - 1);
       exp += share * (row.m.baseExp ?? 0);
       zeny += share * row.m.perKill * dropFactor(row.m);
@@ -347,11 +390,15 @@ export function botRun(
       if (h.hitMax >= maxHp) notes.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: h.hitMax });
       else if (limit === null && hurt > maxHp) notes.push({ kind: 'burst', id: row.m.id, name: row.m.name, damage: Math.round(hurt) });
     }
+    // Flee-followers: a teleport, a hit, and the kill under way lost, each.
+    cycle += fleePerKill * (TELEPORT_SECONDS + searchSeconds);
+    damage += fleePerKill * fleeHit;
+    fromTrips += fleePerKill * fleeHit;
 
     // Teleports per kill: idle searches plus aborted fights. Followers grow
     // gainPerKill a kill between teleports; a crowd limit caps them and
     // teleports once each time it is reached.
-    let teleportsPerKill = search.teleports + retries;
+    let teleportsPerKill = search.teleports + retries + fleePerKill;
     let nextFollowers = 0;
     if (gainPerKill > 0) {
       const segment = teleportsPerKill > 0 ? 1 / teleportsPerKill : Infinity;
@@ -363,7 +410,7 @@ export function botRun(
         nextFollowers = segment === Infinity ? 50 : (gainPerKill * (segment + 1)) / 2;
       }
     }
-    return { cycle, fighting, damage, exp, zeny, loot, kills: 1, teleportsPerKill, nextFollowers, dangers: notes };
+    return { cycle, fighting, damage, fromTargets, fromCrowd, fromTrips, exp, zeny, loot, kills: 1, teleportsPerKill, nextFollowers, dangers: notes };
   }
 
   function failed(): BotRun {
@@ -382,6 +429,7 @@ export function botRun(
       wingCostPerHour: 0,
       potionsCarried: null,
       spShortPerHour: 0,
+      hurtPerHour: { targets: 0, crowd: 0, teleportHits: 0, worstName: null },
       hours: 0,
       stop: 'hp',
       lootHours: Infinity,

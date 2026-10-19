@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useFarmPlan } from '@/components/FarmPlanProvider';
 
 // Sits on a monster page and on every farming-finder row (spec 3.6). Since
@@ -15,7 +16,7 @@ export default function AddToPlanButton({
   monsterId: number;
   compact?: boolean;
 }) {
-  const { add, remove, has, full, ready } = useFarmPlan();
+  const { add, remove, has, full, ready, plan } = useFarmPlan();
 
   // Before storage has been read the button is drawn but hidden, not skipped:
   // rendering nothing let the row grow by 19 px the moment the plan loaded and
@@ -39,7 +40,10 @@ export default function AddToPlanButton({
   const inPlan = has(monsterId);
   const blocked = !inPlan && full;
 
-  return (
+  // Where the list is read (owner, 19 Oct 2026: "after pressing it, where do
+  // I look?"): a link beside the button once the list has anything in it.
+  // Not on the compact rows of a table, where one link per row is noise.
+  const button = (
     <button
       type="button"
       className={`planbtn${inPlan ? ' planbtn--on' : ''}${compact ? ' planbtn--compact' : ''}`}
@@ -50,5 +54,14 @@ export default function AddToPlanButton({
     >
       {inPlan ? '✓ อยู่ในรายการเปรียบเทียบ' : blocked ? 'รายการเต็ม' : '+ เปรียบเทียบ'}
     </button>
+  );
+  if (compact || plan.length === 0) return button;
+  return (
+    <>
+      {button}
+      <Link href="/database/monsters/compare" className="planlink">
+        ดูที่เปรียบเทียบ ({plan.length}) ›
+      </Link>
+    </>
   );
 }

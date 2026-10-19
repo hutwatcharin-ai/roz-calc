@@ -83,6 +83,20 @@ describe('botRun', () => {
     expect(jumpy.expPerHour).toBeLessThan(calm.expPerHour);
   });
 
+  it('costs a hard-hitting follower one hit and a teleport per meeting, not a fight of hits', () => {
+    // A 999-a-hit monster past a 100 limit, 5 of them on the map: met now and
+    // then, each meeting one hit. Counted as a follower on the bot every
+    // second it cost thousands of potions an hour (Zenhai Marsh, 19 Oct 2026).
+    const d = world([soft(1), mob(2, { isAggressive: true, atk: 1000, atkMax: 1000, flee95: 400 })], [field([[1, 50], [2, 5]], 40000)]);
+    const run = botRun(d.maps[0], d, me({ maxHp: 5000, potionId: 501 }), bot({ teleportOnDamage: 100 }), [1], ctx, 8)!;
+    expect(run.avgFollowers).toBe(0);
+    expect(run.hurtPerHour.teleportHits).toBeGreaterThan(0);
+    // Damage per meeting is one hit: total over meetings, not over fight time.
+    const meetings = run.teleportsPerHour;
+    expect(run.hurtPerHour.teleportHits / meetings).toBeLessThanOrEqual(1000);
+    expect(run.dangers).toEqual([]);
+  });
+
   it('stops looting at the weight setting, and goes home there when told not to keep hunting', () => {
     // 1 weight a kill; 2,000 max x 85% - 700 carried = 1,000 to fill.
     const d = world([soft(1, { lootWeight: 1 })], [field([[1, 20]])]);

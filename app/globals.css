@@ -4865,3 +4865,5 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 .linkbtn { padding: 0; border: 0; background: none; color: var(--cyan); font: inherit; text-decoration: underline; cursor: pointer; }
 .botsetup__apply { display: block; margin-top: 6px; min-height: 40px; }
 .botsetup__applied { display: block; margin-top: 4px; color: var(--cyan); font-size: 13px; }
+.botsetup__wide { grid-column: 1 / -1; }
+.planlink { display: inline-flex; align-items: center; min-height: 32px; padding: 0 10px; color: var(--cyan); font: 700 13px/1 var(--font-sarabun), sans-serif; text-decoration: underline; }

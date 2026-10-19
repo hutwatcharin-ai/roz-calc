@@ -224,6 +224,19 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
                 {run.potionsCarried !== null && run.potionsPerHour > 0 ? ` · ถือไป ${whole(run.potionsCarried)} ขวด` : ''}
               </dd>
             </div>
+            {run.potionsPerHour > 0 && (
+              <div className="botsetup__wide">
+                <dt>เลือดหายต่อชั่วโมงมาจาก</dt>
+                <dd>
+                  มอนที่ติ๊ก {whole(run.hurtPerHour.targets)} · โดนรุมตอนสู้ {whole(run.hurtPerHour.crowd)} · โดนตีแรงทีเดียวแล้ววาร์ปหนี {whole(run.hurtPerHour.teleportHits)}
+                  {run.hurtPerHour.teleportHits > run.hurtPerHour.targets + run.hurtPerHour.crowd && run.hurtPerHour.worstName && (
+                    <small>
+                      ยาส่วนใหญ่หมดไปกับ {run.hurtPerHour.worstName} ที่เดินมาตีทีเดียวแรงเกินค่าวาร์ป · ลองแมพอื่น หรือติ๊กมันถ้าสู้ไหว
+                    </small>
+                  )}
+                </dd>
+              </div>
+            )}
             <div>
               <dt>วาร์ป</dt>
               <dd>
