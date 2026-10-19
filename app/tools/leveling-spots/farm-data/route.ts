@@ -26,6 +26,7 @@ const WALK = afkReference.walk as Record<string, number>;
 const MOB = afkReference.mob as unknown as Record<string, [number, number | null, number | null, number | null, 1?]>;
 const WEIGHT = new Map((itemWeights.items as [number, string, number][]).map(([id, , w]) => [id, w]));
 const HP_POTIONS = [501, 502, 503, 504];
+const FLY_WING = 601;
 
 /** A map code the client stores under another name: b_ copies and trailing-underscore channels. */
 function walkCells(code: string): number | null {
@@ -77,7 +78,7 @@ export async function GET() {
       db.from('monster_skills').select('monster_id, skill_name').order('monster_id').order('skill_name').range(from, to),
     ),
     getMapCanonical(),
-    db.from('items').select('id, buy_price').in('id', HP_POTIONS),
+    db.from('items').select('id, buy_price').in('id', [...HP_POTIONS, FLY_WING]),
   ]);
 
   const failed = [drops, items, monsters, spawns, names, skills].find((result) => result.error);
@@ -157,6 +158,10 @@ export async function GET() {
         : null,
       risks: riskySkills(skillsOf.get(row.id) ?? []),
       atk: row.atk_min !== null && row.atk_max !== null && row.atk_max > 0 ? (row.atk_min + row.atk_max) / 2 : null,
+      atkMax: row.atk_max !== null && row.atk_max > 0 ? row.atk_max : null,
+      // Everything with a rate goes in the bag, sellable or not: the bot's
+      // weight stop does not care what an item is worth.
+      lootWeight: rows.reduce((sum, drop) => sum + (drop.rate !== null ? (drop.rate / 100) * (WEIGHT.get(drop.item_id) ?? 0) : 0), 0),
       attackDelay: MOB[row.id]?.[0] ?? null,
       viewRange: MOB[row.id]?.[1] ?? null,
       walkSpeed: MOB[row.id]?.[2] ?? null,
@@ -210,6 +215,7 @@ export async function GET() {
       ratedDrops: (drops.data ?? []).filter((drop) => drop.rate !== null).length,
       totalDrops: (drops.data ?? []).length,
     },
+    flyWingPrice: buyOf.get(FLY_WING) ?? null,
     potions: HP_POTIONS.map((id): FarmPotion => {
       const item = itemById.get(id);
       return {

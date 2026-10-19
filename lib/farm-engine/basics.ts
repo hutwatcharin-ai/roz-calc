@@ -58,6 +58,8 @@ export function playerFromNumbers(numbers: PlayerNumbers, style: BotStyle): Play
     potionId: numbers.potionId ?? null,
     potions: numbers.potions ?? null,
     maxWeight: numbers.maxWeight ?? null,
+    weightNow: numbers.weightNow ?? null,
+    maxSp: numbers.maxSp ?? null,
     walkSeconds: numbers.walkSeconds ?? null,
   };
 }

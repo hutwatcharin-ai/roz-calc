@@ -27,6 +27,8 @@ export const mob = (id: number, over: Partial<FarmMonster> = {}): FarmMonster =>
   walkSpeed: 200,
   attackRange: 1,
   oneDamage: false,
+  atkMax: 100,
+  lootWeight: 0,
   ...over,
 });
 
@@ -44,6 +46,7 @@ export const world = (monsters: FarmMonster[], maps: FarmMap[]): FarmData => ({
   excluded: { mvp: 0, solo: 0, closedMaps: 0 },
   coverage: { pricedItems: 0, totalItems: 0, ratedDrops: 0, totalDrops: 0 },
   potions: [{ id: 501, name: 'Red Potion', icon: null, heal: 45, price: 10, weight: 7 }],
+  flyWingPrice: 250,
 });
 
 /** The survival model's inputs left blank: the fallback dodge gate applies. */
@@ -54,6 +57,8 @@ export const noSurvival = {
   potionId: null,
   potions: null,
   maxWeight: null,
+  weightNow: null,
+  maxSp: null,
   walkSeconds: null,
 } as const;
 

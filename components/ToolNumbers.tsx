@@ -31,6 +31,8 @@ const LABELS: Record<PlayerField, { label: string; hint: string; unlocks: string
   potions: { label: 'ถือยากี่ขวด', hint: 'เช่น 200', unlocks: 'ยาพอทั้งคืนไหม' },
   walkSeconds: { label: 'เดินหามอน (วิ/ตัว)', hint: 'เช่น 3', unlocks: 'ว่าง = คิดจากแมพ' },
   maxWeight: { label: 'น้ำหนักสูงสุด', hint: 'เช่น 5030', unlocks: 'ถือยาได้กี่ขวด' },
+  weightNow: { label: 'น้ำหนักตอนนี้', hint: 'เช่น 953', unlocks: 'เหลือที่เก็บของ' },
+  maxSp: { label: 'Max SP', hint: 'เช่น 300', unlocks: 'SP พอวาร์ปไหม' },
 };
 
 export default function ToolNumbers({

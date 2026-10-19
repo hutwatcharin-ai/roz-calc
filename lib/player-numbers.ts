@@ -36,7 +36,10 @@ export type PlayerField =
   | 'potions'
   | 'walkSeconds'
   // Max weight from the status window: how many potions fit when the count is blank.
-  | 'maxWeight';
+  | 'maxWeight'
+  // Bot setup (19 Oct 2026): weight carried at the start, Max SP for teleports.
+  | 'weightNow'
+  | 'maxSp';
 
 export type PlayerNumbers = Partial<Record<PlayerField, number>>;
 
@@ -60,6 +63,8 @@ const FIELDS: PlayerField[] = [
   'potions',
   'walkSeconds',
   'maxWeight',
+  'weightNow',
+  'maxSp',
 ];
 
 function usable(value: unknown): value is number {

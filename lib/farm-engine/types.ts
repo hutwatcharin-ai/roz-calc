@@ -37,6 +37,10 @@ export interface FarmMonster {
   risks: RiskySkill[];
   /** Average of the physical attack range; null when the table has none. */
   atk: number | null;
+  /** Top of the range: what a bot's "teleport when hit for more than" setting is tripped by. */
+  atkMax: number | null;
+  /** Expected weight picked up per kill, over every drop with a rate (priced or not). */
+  lootWeight: number;
   /** ms between its attacks, from rAthena (classic RO); 0 never attacks (plants); null when rAthena has no such monster. */
   attackDelay: number | null;
   /** Cells an aggressive one sees a player from (rAthena view range); null when unknown. */
@@ -84,6 +88,8 @@ export interface FarmData {
   excluded: { mvp: number; solo: number; closedMaps: number };
   coverage: { pricedItems: number; totalItems: number; ratedDrops: number; totalDrops: number };
   potions: FarmPotion[];
+  /** NPC price of a Fly Wing, for bots teleporting without the Creamy Card. */
+  flyWingPrice: number | null;
 }
 
 export type BotStyle = 'melee' | 'magic';
@@ -107,6 +113,10 @@ export interface PlayerInput {
   potions: number | null;
   /** Max weight from the status window; sizes the potion stack when the count is blank. */
   maxWeight: number | null;
+  /** Weight already carried when the bot sets out (status window). */
+  weightNow: number | null;
+  /** Max SP: natural SP regen for Creamy Card teleports. */
+  maxSp: number | null;
   /** Seconds the bot walks between kills; null works it out from the map. */
   walkSeconds: number | null;
 }
