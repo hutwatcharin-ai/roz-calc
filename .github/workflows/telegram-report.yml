@@ -5,11 +5,10 @@ on:
   schedule:
     - cron: '0 2 * * *' # daily 09:00 Thailand: yesterday's visitors
     - cron: '15 2 * * 1' # Monday 09:15 Thailand: the week on Google Search
-    - cron: '*/15 * * * *' # every 15 minutes: is the site up
   workflow_dispatch:
     inputs:
       mode:
-        description: daily, weekly or uptime
+        description: daily, weekly or uptime (uptime runs by hand only)
         required: true
         default: daily
 
@@ -32,6 +31,5 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then mode="${{ github.event.inputs.mode }}"
           elif [ "${{ github.event.schedule }}" = "0 2 * * *" ]; then mode=daily
-          elif [ "${{ github.event.schedule }}" = "15 2 * * 1" ]; then mode=weekly
-          else mode=uptime; fi
+          else mode=weekly; fi
           node scripts/telegram-report.mjs "$mode"

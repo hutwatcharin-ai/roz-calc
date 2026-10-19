@@ -6,7 +6,8 @@
 //                                              pages, searches that found nothing
 //   node scripts/telegram-report.mjs weekly   Search Console: last 7 days against
 //                                              the 7 before, queries that moved
-//   node scripts/telegram-report.mjs uptime   the home page and the farm data
+//   node scripts/telegram-report.mjs uptime   (by hand; the 15-minute schedule was
+//                                              dropped 19 Oct 2026) the home page and the farm data
 //                                              answer 200; a message only if not
 //   add --dry to print instead of sending
 //
