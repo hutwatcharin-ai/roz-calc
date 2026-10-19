@@ -412,6 +412,11 @@ function Advice({
       ? 'การวาร์ปทุกข้อในแท็บพื้นฐานใช้สิ่งที่วางในแท็บนี้ · Creamy วาร์ปได้ไม่จำกัด เสีย SP แทนปีก'
       : 'การวาร์ปทุกข้อในแท็บพื้นฐานใช้สิ่งที่วางในแท็บนี้ · ถือ Fly Wing ให้พอทั้งคืน',
   });
+  items.push({
+    tab: 'เคลื่อนที่',
+    text: 'ตั้งค่าการกลับเมือง: วาง Butterfly Wing ในช่องไอเทม หรือสกิล Teleport Lv2 ในช่องสกิล',
+    why: 'บอทใช้ช่องนี้กลับเมืองตอนยาหมด ไอเทมบัฟหมด หรือกระเป๋าถึงน้ำหนักที่ตั้ง · Creamy Card ให้แค่ Teleport Lv1 ใช้ช่องนี้ไม่ได้',
+  });
   if (run.potionsPerHourHigh > 0) {
     const short = run.potionsCarried !== null && run.potionsCarried < night;
     items.push({
