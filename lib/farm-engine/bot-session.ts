@@ -87,6 +87,15 @@ export const MAX_RUN_HOURS = 24;
  * on a laptop; past seven kinds the rest are a handful of monsters each.
  */
 export const MAX_PICK = 7;
+/**
+ * Share of "teleport when hit for more than" trips where the hit lands anyway
+ * before the bot is gone. The owner sees the bot teleport before the damage
+ * applies (19 Oct 2026) but also that it "is not that steady"; one in five is
+ * an estimate for the cautious figure, not a measurement.
+ */
+export const TRIP_MISS = 0.2;
+/** The cautious figure plans for this many standard deviations of bad luck in an hour. */
+export const BAD_LUCK_SIGMAS = 2;
 /** A kill the bot has to restart this often is not worth modelling further. */
 const MIN_SUCCESS = 0.02;
 
@@ -115,16 +124,24 @@ export interface BotRun {
   avgFollowers: number;
   /** Ticked aggressive monsters fighting alongside the target, on average. */
   pileOn: number;
+  /** Potions an hour on average luck, teleports always in time. */
   potionsPerHour: number;
+  /** The cautious figure: a bad hour (BAD_LUCK_SIGMAS), and 1 in 5 teleports late (TRIP_MISS). What the run length and the carry advice use. */
+  potionsPerHourHigh: number;
   potionCostPerHour: number;
   wingCostPerHour: number;
   /** Potions it sets out with: typed, else what fits under 70% of the max weight; null = no limit known. */
   potionsCarried: number | null;
-  /** HP lost an hour, by where it comes from: the ticked monsters, the crowd round a fight, one-hit meetings that send the bot away. */
-  hurtPerHour: { targets: number; crowd: number; teleportHits: number; worstName: string | null };
+  /**
+   * HP lost an hour, by where it comes from: normal hits of the ticked
+   * monsters and of the crowd round a fight, monster skills, and -- in the
+   * cautious figure only -- hits that land before a damage teleport and a
+   * bad-luck hour.
+   */
+  hurtPerHour: { targets: number; crowd: number; skills: number; teleportHits: number; badLuck: number; worstName: string | null };
   /** SP short an hour for teleporting after natural regen; <= 0 keeps up. */
   spShortPerHour: number;
-  /** Hours until it goes back to town, capped at MAX_RUN_HOURS. */
+  /** Hours until it goes back to town on the cautious potion figure, capped at MAX_RUN_HOURS. */
   hours: number;
   stop: StopReason;
   /** Hours until looting stops; Infinity when no weight limit is known. */
@@ -158,13 +175,19 @@ export function searchModel(density: number, reach: number): { cells: number; te
 }
 
 interface Hits {
-  /** Landed hits a second. */
+  /** Landed hits a second, skills included. */
   landed: number;
-  /** One average hit, after DEF. */
-  dmg: number;
-  /** HP a second. */
+  /** HP a second from hits under the damage limit (all of them with no limit). */
   dps: number;
-  /** One hit at the top of its ATK range, after DEF. */
+  /** The part of dps that comes from skills. */
+  skillDps: number;
+  /** Sum over those hits of rate x damage^2: the spread of an hour's damage. */
+  spread: number;
+  /** Landed hits a second past the damage limit: each sends the bot away. */
+  trip: number;
+  /** HP a second those would do if they landed (late teleports). */
+  tripHp: number;
+  /** Biggest hit that can land, after DEF. */
   hitMax: number;
 }
 
@@ -230,15 +253,50 @@ export function botRun(
   }
   if (dangers.length) return failed();
 
+  // Each attack the monster makes is a normal hit or, at its rate and
+  // cooldown, one of its skills (rAthena mobskill_use runs on the attack
+  // timer). Weapon skills miss like a normal hit (NPC_ attribute attacks 20%
+  // less often); FLEE-ignoring, critical and magic ones always land. A hit
+  // past the damage limit is a teleport, not damage.
   const hitsAt = (flee: number) => {
     const out = new Map<number, Hits>();
     for (const row of [...ticked, ...followRows]) {
-      const dmg = damageTaken(row.m, def) as number;
-      const hitMax = damageTaken({ ...row.m, atk: row.m.atkMax ?? row.m.atk }, def) as number;
-      const hitPct = row.m.flee95 === null ? 100 : mobHitChance(row.m.flee95, flee);
-      const delay = row.m.attackDelay ?? ctx.attackDelay;
-      const landed = delay > 0 ? (hitPct / 100) * (1000 / delay) : 0;
-      out.set(row.m.id, { landed, dmg, dps: landed * dmg, hitMax });
+      const m = row.m;
+      const hitPct = m.flee95 === null ? 100 : mobHitChance(m.flee95, flee);
+      const delay = m.attackDelay ?? ctx.attackDelay;
+      const h: Hits = { landed: 0, dps: 0, skillDps: 0, spread: 0, trip: 0, tripHp: 0, hitMax: 0 };
+      if (delay > 0) {
+        const attempts = 1000 / delay;
+        const atkOf = (top: boolean) => (top ? m.atkMax ?? m.atk : m.atk) as number;
+        const physical = (ratio: number, top: boolean, ignoreDef: boolean) => {
+          const atk = atkOf(top) * (ratio / 100);
+          return ignoreDef ? Math.max(1, Math.floor(atk)) : (damageTaken({ ...m, atk }, def) as number);
+        };
+        const add = (perSec: number, dmg: number, top: number, skill: boolean) => {
+          h.landed += perSec;
+          if (limit !== null && top > limit) {
+            h.trip += perSec;
+            h.tripHp += perSec * dmg;
+            return;
+          }
+          h.dps += perSec * dmg;
+          if (skill) h.skillDps += perSec * dmg;
+          h.spread += perSec * dmg * dmg;
+          if (perSec > 0) h.hitMax = Math.max(h.hitMax, top);
+        };
+        let skillUses = 0;
+        for (const sk of m.skills) {
+          const uses = Math.min(attempts * (sk.rate / 10000), sk.delay > 0 ? 1000 / sk.delay : Infinity) * sk.share;
+          skillUses += uses;
+          const land = sk.kind === 0 ? (hitPct <= 5 ? 5 : Math.min(100, hitPct * (1 + sk.hitBonus / 100))) / 100 : 1;
+          const each = (top: boolean) =>
+            sk.kind === 3 ? Math.max(1, Math.floor(atkOf(top) * (m.magicRatio ?? 1) * (sk.ratio / 100))) : physical(sk.ratio, top, sk.kind === 2);
+          add(uses * land, each(false) * sk.hits, each(true) * sk.hits, true);
+        }
+        const normal = Math.max(0, attempts - skillUses) * (hitPct / 100);
+        add(normal, physical(100, false, false), physical(100, true, false), false);
+      }
+      out.set(m.id, h);
     }
     return out;
   };
@@ -256,23 +314,31 @@ export function botRun(
     dangers.push({ kind: 'followers', id: followRows[0].m.id, name: followRows.map((r) => r.m.name).join(', ') });
   }
   dangers.push(...round.dangers);
+  const atFull = hitsAt(player.flee);
   for (const row of stayRows) {
-    if (topHit(row) >= maxHp) dangers.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: topHit(row) });
+    const top = (atFull.get(row.m.id) as Hits).hitMax;
+    if (top >= maxHp) dangers.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: top });
   }
 
   // Potions and how long they last.
   const perHour = 3600 / round.cycle;
   const regen = Math.max(1, Math.floor(maxHp / 200)) * (3600 / REGEN_TICK_SECONDS) * (round.fighting / round.cycle);
   const net = round.damage * perHour - regen;
+  // The cautious hour: some damage teleports come too late, and the hits
+  // come in clumps -- an hour BAD_LUCK_SIGMAS worse than average.
+  const lateHits = TRIP_MISS * round.tripHp * perHour;
+  const badLuck = BAD_LUCK_SIGMAS * Math.sqrt(round.spread * perHour);
+  const netHigh = net + lateHits + badLuck;
   const potion = player.potionId !== null ? data.potions.find((x) => x.id === player.potionId) ?? null : null;
   const heal = potion ? Math.floor((potion.heal * (100 + 2 * (player.vit ?? 1))) / 100) : 0;
   const potionsPerHour = net > 0 && heal ? net / heal : 0;
+  const potionsPerHourHigh = netHigh > 0 && heal ? netHigh / heal : 0;
   const potionCostPerHour = potionsPerHour * (potion?.price ?? 0);
   const potionsCarried = !potion
     ? null
     : potionStack(player, potion.weight);
   let hpHours = Infinity;
-  if (net > 0 && !(potion && potionsCarried === null)) hpHours = (maxHp + (potionsCarried ?? 0) * heal) / net;
+  if (netHigh > 0 && !(potion && potionsCarried === null)) hpHours = (maxHp + (potionsCarried ?? 0) * heal) / netHigh;
 
   const teleportsPerHour = round.teleportsPerKill * round.kills * perHour;
   const wingCostPerHour = bot.creamy ? 0 : teleportsPerHour * (data.flyWingPrice ?? 0);
@@ -281,7 +347,7 @@ export function botRun(
 
   // The bag: loot in, potions out.
   let lootHours = Infinity;
-  const lootRate = bot.loot ? round.loot * perHour - potionsPerHour * (potion?.weight ?? 0) : 0;
+  const lootRate = bot.loot ? round.loot * perHour - potionsPerHourHigh * (potion?.weight ?? 0) : 0;
   if (player.maxWeight && lootRate > 0) {
     lootHours = Math.max(0, ((player.maxWeight * bot.stopWeightPct) / 100 - (player.weightNow ?? 0)) / lootRate);
   }
@@ -311,6 +377,7 @@ export function botRun(
     avgFollowers: followers,
     pileOn,
     potionsPerHour,
+    potionsPerHourHigh,
     potionCostPerHour,
     wingCostPerHour,
     potionsCarried,
@@ -318,7 +385,9 @@ export function botRun(
     hurtPerHour: {
       targets: round.fromTargets * perHour,
       crowd: round.fromCrowd * perHour,
-      teleportHits: round.fromTrips * perHour,
+      skills: round.fromSkills * perHour,
+      teleportHits: lateHits,
+      badLuck,
       worstName: fleeRows.length ? fleeRows.slice().sort((a, b) => topHit(b) - topHit(a))[0].m.name : null,
     },
     hours,
@@ -335,15 +404,19 @@ export function botRun(
     // Ticked aggressive monsters joining a fight: the ones under the damage
     // limit hit for as long as the fight lasts, the ones over it end the
     // fight with their first landed hit.
-    const pileStay = pileRows.filter((row) => !trips(row)).map((row) => ({ w: circle(row), h: hits.get(row.m.id) }));
-    const pileFlee = pileRows.filter(trips).map((row) => ({ w: circle(row), h: hits.get(row.m.id) }));
+    const pile = pileRows.map((row) => ({ w: circle(row), h: hits.get(row.m.id) }));
     const follow = stayRows.map((row, i) => ({ w: gainPerKill > 0 ? (picked[i] / gainPerKill) * onBot : 0, h: hits.get(row.m.id) }));
-    const crowdDps = mix(pileStay, (h) => h.dps) + mix(follow, (h) => h.dps);
-    const crowdLanded = mix(pileStay, (h) => h.landed) + mix(follow, (h) => h.landed) + mix(pileFlee, (h) => h.landed);
-    const pileTrips = mix(pileFlee, (h) => h.landed);
-    // The hit that trips a teleport is dodged by the teleport itself.
-    const pileTripHit = 0;
-    const fleeHit = 0;
+    const crowd = [...pile, ...follow];
+    const crowdDps = mix(crowd, (h) => h.dps);
+    const crowdSkillDps = mix(crowd, (h) => h.skillDps);
+    const crowdSpread = mix(crowd, (h) => h.spread);
+    const crowdLanded = mix(crowd, (h) => h.landed);
+    // A hit past the limit is dodged by the teleport itself; tripHp is what
+    // such hits would do when the teleport is late (the cautious figure).
+    const pileTrips = mix(crowd, (h) => h.trip);
+    const pileTripHp = mix(crowd, (h) => h.tripHp);
+    // A flee-follower trips the teleport with its first landed hit.
+    const fleeHit = fleePerKill > 0 ? fleeRows.reduce((sum, row, i) => sum + fleeMeets[i] * (damageTaken(row.m, def) ?? 0), 0) / fleePerKill : 0;
 
     const notes: DangerNote[] = [];
     let cycle = 0;
@@ -351,7 +424,9 @@ export function botRun(
     let damage = 0;
     let fromTargets = 0;
     let fromCrowd = 0;
-    let fromTrips = 0;
+    let fromSkills = 0;
+    let tripHp = 0;
+    let spread = 0;
     let retries = 0;
     let exp = 0;
     let zeny = 0;
@@ -370,32 +445,31 @@ export function botRun(
         fight = Math.min(fight, free) + exposed;
       }
       // A hit past the damage limit sends the bot away mid-fight: the kill
-      // only lands if no such hit does first, and each aborted try costs
-      // that one hit, not a fight's worth.
-      const ownFlee = trips(row);
-      const ownTrips = ownFlee ? h.landed : 0;
-      const tripRate = ownTrips + pileTrips;
+      // only lands if no such hit does first. The hit itself never lands
+      // (the bot is gone first), except in the cautious figure.
+      const tripRate = h.trip + pileTrips;
       const success = Math.max(Math.exp(-tripRate * exposed), MIN_SUCCESS);
       const attempts = 1 / success;
-      const tripHit = tripRate > 0 ? (pileTrips * pileTripHit) / tripRate : 0;
-      const hurt = ((ownFlee ? 0 : h.dps) + crowdDps) * exposed;
+      const tripHit = tripRate > 0 ? (h.tripHp + pileTripHp) / tripRate : 0;
+      const hurt = (h.dps + crowdDps) * exposed;
       cycle += share * attempts * (fight + searchSeconds);
       fighting += share * attempts * fight;
-      damage += share * (attempts * hurt + (attempts - 1) * tripHit);
-      fromTargets += share * attempts * (ownFlee ? 0 : h.dps) * exposed;
-      fromCrowd += share * attempts * crowdDps * exposed;
-      fromTrips += share * (attempts - 1) * tripHit;
+      damage += share * attempts * hurt;
+      fromTargets += share * attempts * (h.dps - h.skillDps) * exposed;
+      fromCrowd += share * attempts * (crowdDps - crowdSkillDps) * exposed;
+      fromSkills += share * attempts * (h.skillDps + crowdSkillDps) * exposed;
+      spread += share * attempts * (h.spread + crowdSpread) * exposed;
+      tripHp += share * (attempts - 1) * tripHit;
       retries += share * (attempts - 1);
       exp += share * (row.m.baseExp ?? 0);
       zeny += share * row.m.perKill * dropFactor(row.m);
       loot += share * row.m.lootWeight;
-      if (h.hitMax >= maxHp && !ownFlee) notes.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: h.hitMax });
+      if (h.hitMax >= maxHp) notes.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: h.hitMax });
       else if (limit === null && hurt > maxHp) notes.push({ kind: 'burst', id: row.m.id, name: row.m.name, damage: Math.round(hurt) });
     }
-    // Flee-followers: a teleport, a hit, and the kill under way lost, each.
+    // Flee-followers: a teleport and the kill under way lost, each.
     cycle += fleePerKill * (TELEPORT_SECONDS + searchSeconds);
-    damage += fleePerKill * fleeHit;
-    fromTrips += fleePerKill * fleeHit;
+    tripHp += fleePerKill * fleeHit;
 
     // Teleports per kill: idle searches plus aborted fights. Followers grow
     // gainPerKill a kill between teleports; a crowd limit caps them and
@@ -412,7 +486,7 @@ export function botRun(
         nextFollowers = segment === Infinity ? 50 : (gainPerKill * (segment + 1)) / 2;
       }
     }
-    return { cycle, fighting, damage, fromTargets, fromCrowd, fromTrips, exp, zeny, loot, kills: 1, teleportsPerKill, nextFollowers, dangers: notes };
+    return { cycle, fighting, damage, fromTargets, fromCrowd, fromSkills, tripHp, spread, exp, zeny, loot, kills: 1, teleportsPerKill, nextFollowers, dangers: notes };
   }
 
   function failed(): BotRun {
@@ -427,11 +501,12 @@ export function botRun(
       avgFollowers: 0,
       pileOn,
       potionsPerHour: 0,
+      potionsPerHourHigh: 0,
       potionCostPerHour: 0,
       wingCostPerHour: 0,
       potionsCarried: null,
       spShortPerHour: 0,
-      hurtPerHour: { targets: 0, crowd: 0, teleportHits: 0, worstName: null },
+      hurtPerHour: { targets: 0, crowd: 0, skills: 0, teleportHits: 0, badLuck: 0, worstName: null },
       hours: 0,
       stop: 'hp',
       lootHours: Infinity,

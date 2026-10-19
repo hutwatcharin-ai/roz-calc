@@ -91,10 +91,46 @@ describe('botRun', () => {
     const d = world([soft(1), mob(2, { isAggressive: true, atk: 1000, atkMax: 1000, flee95: 400 })], [field([[1, 50], [2, 5]], 40000)]);
     const run = botRun(d.maps[0], d, me({ maxHp: 5000, potionId: 501 }), bot({ teleportOnDamage: 100 }), [1], ctx, 8)!;
     expect(run.avgFollowers).toBe(0);
-    expect(run.hurtPerHour.teleportHits).toBe(0);
     expect(run.teleportsPerHour).toBeGreaterThan(0);
     expect(run.potionsPerHour).toBe(0);
     expect(run.dangers).toEqual([]);
+    // The cautious figure lets one in five of those hits land (TRIP_MISS).
+    expect(run.hurtPerHour.teleportHits).toBeGreaterThan(0);
+    expect(run.potionsPerHourHigh).toBeGreaterThan(0);
+  });
+
+  it('adds skills that ignore FLEE, which a high-FLEE character still takes', () => {
+    // FLEE 400 against flee95 0: normal hits floor at 5%. A FLEE-ignoring
+    // skill on every attack (rate 10,000, no cooldown) always lands.
+    const dodgy = { flee: 400, potionId: 501, maxHp: 100000 };
+    const plain = mob(1, { atk: 100, atkMax: 100, flee95: 0, hit100: 100 });
+    const caster = mob(1, { atk: 100, atkMax: 100, flee95: 0, hit100: 100, skills: [{ kind: 1, ratio: 100, hits: 1, rate: 10000, delay: 0, hitBonus: 0, share: 1 }] });
+    const w = world([plain], [field([[1, 20]])]);
+    const a = botRun(w.maps[0], w, me(dodgy), bot(), [1], ctx, 8)!;
+    const d = world([caster], [field([[1, 20]])]);
+    const b = botRun(d.maps[0], d, me(dodgy), bot(), [1], ctx, 8)!;
+    expect(b.hurtPerHour.skills).toBeGreaterThan(0);
+    expect(a.hurtPerHour.skills).toBe(0);
+    // Every attack is the skill: 20 x as much as the 5% normal hits.
+    expect(b.hurtPerHour.skills).toBeCloseTo(a.hurtPerHour.targets * 20, 0);
+  });
+
+  it('sends the bot away on a skill past the damage limit instead of counting its damage', () => {
+    const nuke = { kind: 3 as const, ratio: 1000, hits: 1, rate: 10000, delay: 5000, hitBonus: 0, share: 1 };
+    const d = world([mob(1, { atk: 100, atkMax: 100, flee95: 0, skills: [nuke], magicRatio: 1 })], [field([[1, 20]])]);
+    const run = botRun(d.maps[0], d, me({ potionId: 501, flee: 400 }), bot({ teleportOnDamage: 500 }), [1], ctx, 8)!;
+    expect(run.hurtPerHour.skills).toBe(0);
+    expect(run.teleportsPerHour).toBeGreaterThan(0);
+  });
+
+  it('plans potions for a bad hour, and runs out sooner on that figure', () => {
+    const biter = mob(1, { atk: 100, atkMax: 100, flee95: 146, hit100: 100 });
+    const d = world([biter], [field([[1, 20]])]);
+    const run = botRun(d.maps[0], d, me({ potionId: 501, potions: 200 }), bot(), [1], ctx, 8)!;
+    expect(run.potionsPerHourHigh).toBeGreaterThan(run.potionsPerHour);
+    expect(run.hurtPerHour.badLuck).toBeGreaterThan(0);
+    const heal = Math.floor((45 * (100 + 2)) / 100);
+    expect(run.hours).toBeCloseTo((1000 + 200 * heal) / (run.potionsPerHourHigh * heal), 3);
   });
 
   it('stops looting at the weight setting, and goes home there when told not to keep hunting', () => {

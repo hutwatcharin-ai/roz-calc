@@ -14,16 +14,20 @@ import { mapDisplayName } from '@/lib/npcs';
 import { riskySkills } from '@/lib/afk-safety';
 import { walkInReason, zenyPerKill } from '@/lib/zeny-farm';
 import { mapRelease } from '@/lib/map-availability';
-import type { FarmData, FarmMonster, FarmPotion } from '@/lib/farm-engine/types';
+import type { FarmData, FarmMonster, FarmPotion, MobSkill } from '@/lib/farm-engine/types';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import { POTION_HEAL } from '@/lib/build-calc';
 import afkReference from '@/data/afk-reference.json';
 import itemWeights from '@/data/item-weights.json';
+import mobSkills from '@/data/mob-skills.json';
 
 // Walkable cells per map and rAthena attack delay / view range per monster
 // (scripts/build-afk-reference.mjs).
 const WALK = afkReference.walk as Record<string, number>;
 const MOB = afkReference.mob as unknown as Record<string, [number, number | null, number | null, number | null, 1?]>;
+// Attack skills per monster (scripts/build-mob-skills.mjs).
+const SKILLS = mobSkills.skills as unknown as Record<string, [MobSkill['kind'], number, number, number, number, number, number][]>;
+const MAGIC = mobSkills.magic as Record<string, number>;
 const WEIGHT = new Map((itemWeights.items as [number, string, number][]).map(([id, , w]) => [id, w]));
 const HP_POTIONS = [501, 502, 503, 504];
 const FLY_WING = 601;
@@ -167,6 +171,8 @@ export async function GET() {
       walkSpeed: MOB[row.id]?.[2] ?? null,
       attackRange: MOB[row.id]?.[3] ?? null,
       oneDamage: MOB[row.id]?.[4] === 1,
+      skills: (SKILLS[row.id] ?? []).map(([kind, ratio, hits, rate, delay, hitBonus, share]) => ({ kind, ratio, hits, rate, delay, hitBonus, share })),
+      magicRatio: MAGIC[row.id] ?? null,
     };
   }
 

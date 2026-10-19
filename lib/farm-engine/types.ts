@@ -51,6 +51,27 @@ export interface FarmMonster {
   attackRange: number | null;
   /** Every hit does 1 damage, whatever the player's damage: plants and mushrooms. */
   oneDamage: boolean;
+  /** Attack skills it casts on the player (rAthena mob_skill_db; data/mob-skills.json). */
+  skills: MobSkill[];
+  /** Its magic hit as a share of its ATK (rAthena MATK / ATK); null when it casts no magic. */
+  magicRatio: number | null;
+}
+
+/** One attack skill a monster casts, from rAthena (scripts/build-mob-skills.mjs). */
+export interface MobSkill {
+  /** 0 weapon, FLEE applies; 1 weapon ignoring FLEE; 2 always critical (no FLEE, no DEF); 3 magic (no FLEE, no DEF). */
+  kind: 0 | 1 | 2 | 3;
+  /** Damage ratio, 100 = one normal hit. */
+  ratio: number;
+  hits: number;
+  /** Chance per attack it would make, out of 10,000. */
+  rate: number;
+  /** Cooldown, ms. */
+  delay: number;
+  /** Extra hit chance, % of the normal one (NPC_ attribute attacks: 20). */
+  hitBonus: number;
+  /** Share of a fight its condition holds (1, or X/100 for "HP below X%"). */
+  share: number;
 }
 
 export interface FarmSpawn {

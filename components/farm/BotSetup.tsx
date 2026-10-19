@@ -26,7 +26,7 @@ import { farmedOn, metOn, playerFromNumbers } from '@/lib/farm-engine/basics';
 import { MAX_RUN_HOURS, bestTargets, botRun, type BotRun, type BotSettings } from '@/lib/farm-engine/bot-session';
 import { canSurvive, damageTaken, playerDefense, survivalContext } from '@/lib/farm-engine/survival';
 import { NIGHT_HOURS, type FarmData } from '@/lib/farm-engine/types';
-import { small, whole } from './card-helpers';
+import { potionRange, small, whole } from './card-helpers';
 
 const STOP: Record<BotRun['stop'], string> = {
   hp: 'ยาหมด เลือดไม่พอ',
@@ -220,15 +220,23 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
             <div>
               <dt>ยา</dt>
               <dd>
-                {run.potionsPerHour > 0 ? `${small(run.potionsPerHour)} ขวด/ชม.` : 'ไม่ต้องใช้ (เลือดฟื้นเองทัน)'}
-                {run.potionsCarried !== null && run.potionsPerHour > 0 ? ` · ถือไป ${whole(run.potionsCarried)} ขวด` : ''}
+                {run.potionsPerHourHigh > 0 ? `${potionRange(run)} ขวด/ชม.` : 'ไม่ต้องใช้ (เลือดฟื้นเองทัน)'}
+                {run.potionsCarried !== null && run.potionsPerHourHigh > 0 ? ` · ถือไป ${whole(run.potionsCarried)} ขวด` : ''}
+                {run.potionsPerHourHigh > run.potionsPerHour && (
+                  <small> ค่าน้อยคือดวงปกติ ค่ามากคือเผื่อชั่วโมงที่โดนติดกันและวาร์ปไม่ทัน เวลาที่บอทอยู่ได้คิดจากค่ามาก</small>
+                )}
               </dd>
             </div>
-            {run.potionsPerHour > 0 && (
+            {run.potionsPerHourHigh > 0 && (
               <div className="botsetup__wide">
                 <dt>เลือดหายต่อชั่วโมงมาจาก</dt>
                 <dd>
-                  มอนที่ติ๊ก {whole(run.hurtPerHour.targets)} · โดนรุมตอนสู้ {whole(run.hurtPerHour.crowd)}
+                  มอนที่ติ๊กตีธรรมดา {whole(run.hurtPerHour.targets)} · โดนรุมตอนสู้ {whole(run.hurtPerHour.crowd)} · สกิลมอน{' '}
+                  {whole(run.hurtPerHour.skills)}
+                  <small>
+                    {' '}
+                    เผื่อเพิ่ม: วาร์ปไม่ทัน {whole(run.hurtPerHour.teleportHits)} · โดนติดกัน {whole(run.hurtPerHour.badLuck)}
+                  </small>
                 </dd>
               </div>
             )}
@@ -251,14 +259,14 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
                 <dt>ตามตี (ไม่ได้ติ๊ก)</dt>
                 <dd>
                   {run.followers.map((f) => f.name).join(', ')} ·{' '}
-                  {run.avgFollowers >= 0.05 ? `เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว` : 'ตีแรงเกินค่าวาร์ป บอทวาร์ปหนีก่อนดาเมจเข้า ไม่เสียเลือด แค่เสียเวลา'}
+                  {run.avgFollowers >= 0.05 ? `เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว` : 'ตีแรงเกินค่าวาร์ป บอทวาร์ปหนีก่อนดาเมจเข้าแทบทุกครั้ง เสียเวลาเป็นหลัก (ค่ายามากเผื่อวาร์ปไม่ทัน)'}
                 </dd>
               </div>
             )}
           </dl>
         )}
         <p className="muted botsetup__note">
-          คิดจากสูตรและค่าความเร็วตีของมอนจาก rAthena (ยังไม่ได้วัดใน Zero) · ไม่คิดสกิลของมอนและบอสที่เดินผ่าน · เวลาหามอนไม่รวมกำแพงกับคนแย่งมอน
+          คิดจากสูตร ความเร็วตี และสกิลของมอนจาก rAthena (ยังไม่ได้วัดใน Zero) · ยาเป็นช่วง: ดวงปกติ ถึงเผื่อโดนติดกันและวาร์ปไม่ทัน 1 ใน 5 (ประมาณ) · ไม่คิดบอสที่เดินผ่าน · เวลาหามอนไม่รวมกำแพงกับคนแย่งมอน
           · {data.potions.length > 0 ? 'ยาฟื้นตามข้อความในเกม × (100 + VIT×2)%' : ''}
         </p>
       </section>
@@ -364,7 +372,7 @@ function Advice({
     .filter((row) => run.targets.includes(row.m.id))
     .reduce((max, row) => Math.max(max, damageTaken({ ...row.m, atk: row.m.atkMax ?? row.m.atk }, def) ?? 0), 0);
   const fleeAbove = Math.ceil((hardest + 1) / 10) * 10;
-  const night = Math.ceil(run.potionsPerHour * NIGHT_HOURS);
+  const night = Math.ceil(run.potionsPerHourHigh * NIGHT_HOURS);
   // apply: the settings change that makes the run above use this advice.
   const items: { tab: string; text: string; why: string; apply?: Partial<BotSettings> }[] = [];
   items.push({
@@ -385,11 +393,11 @@ function Advice({
   if (bot.idleTeleport === null) {
     items.push({ tab: 'พื้นฐาน', text: 'ใช้ Teleport หากไม่มีการต่อสู้ภายใน 5 วินาที', why: 'มอนที่ติ๊กอยู่ไกล วาร์ปหาใหม่เร็วกว่าเดินไป', apply: { idleTeleport: 5 } });
   }
-  if (run.potionsPerHour > 0) {
+  if (run.potionsPerHourHigh > 0) {
     items.push({
       tab: 'Potion',
       text: `ใส่ยาที่เลือกไว้ ถือไปราว ${whole(night)} ขวดสำหรับ ${NIGHT_HOURS} ชม.`,
-      why: `บอทใช้ราว ${small(run.potionsPerHour)} ขวดต่อชั่วโมง`,
+      why: `บอทใช้ราว ${potionRange(run)} ขวดต่อชั่วโมง คิดจำนวนที่ถือจากค่ามาก เผื่อชั่วโมงที่โดนติดกันและวาร์ปไม่ทัน`,
     });
   }
   if (Number.isFinite(run.lootHours) && run.lootHours < NIGHT_HOURS) {

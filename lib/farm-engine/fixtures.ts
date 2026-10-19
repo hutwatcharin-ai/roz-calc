@@ -27,6 +27,8 @@ export const mob = (id: number, over: Partial<FarmMonster> = {}): FarmMonster =>
   walkSpeed: 200,
   attackRange: 1,
   oneDamage: false,
+  skills: [],
+  magicRatio: null,
   atkMax: 100,
   lootWeight: 0,
   ...over,

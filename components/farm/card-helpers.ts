@@ -106,6 +106,17 @@ const STOP_TEXT: Record<BotRun['stop'], string> = {
   none: '',
 };
 
+/**
+ * Potions an hour as a range: average luck to the cautious figure (a bad hour,
+ * some teleports late -- lib/farm-engine/bot-session). Owner, 19 Oct 2026:
+ * one optimistic number had players packing too few.
+ */
+export function potionRange(run: BotRun): string {
+  const low = small(run.potionsPerHour);
+  const high = small(run.potionsPerHourHigh);
+  return low === high ? low : `${low}–${high}`;
+}
+
 /** What a bot run adds to an overnight card. */
 export function botFigures(run: BotRun | null): CardFigure[] {
   if (!run) return [];
@@ -115,7 +126,7 @@ export function botFigures(run: BotRun | null): CardFigure[] {
       ? { label: 'บอทอยู่ได้', value: `${MAX_RUN_HOURS}+`, unit: ' ชม.' }
       : { label: `อยู่ได้ (${STOP_TEXT[run.stop]})`, value: run.hours.toFixed(1), unit: ' ชม.' },
   );
-  if (run.potionsPerHour > 0) out.push({ label: 'ยาที่ใช้', value: small(run.potionsPerHour), unit: ' ขวด/ชม.' });
+  if (run.potionsPerHourHigh > 0) out.push({ label: 'ยาที่ใช้', value: potionRange(run), unit: ' ขวด/ชม.' });
   if (Number.isFinite(run.lootHours) && run.lootHours < MAX_RUN_HOURS) out.push({ label: 'กระเป๋าถึงที่ตั้งใน', value: run.lootHours.toFixed(1), unit: ' ชม.' });
   if (run.teleportsPerHour >= 1) out.push({ label: 'วาร์ป', value: whole(run.teleportsPerHour), unit: ' ครั้ง/ชม.' });
   return out;
