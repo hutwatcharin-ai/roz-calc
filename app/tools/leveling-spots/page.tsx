@@ -5,6 +5,8 @@
 // computed in the browser from one payload (farm-data/route.ts) so the modes
 // can never disagree. Search Console showed 0 impressions for this URL over
 // 90 days, so moving the ranked rows out of the HTML costs no search traffic.
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import AdSlot from '@/components/AdSlot';
 import FarmTool, { type FarmMode } from '@/components/farm/FarmTool';
@@ -20,7 +22,7 @@ export const metadata = {
 
 function readMode(raw: string | string[] | undefined): FarmMode {
   const value = Array.isArray(raw) ? raw[0] : raw;
-  return value === 'afk' || value === 'plan' || value === 'zeny' ? value : 'level';
+  return value === 'afk' || value === 'zeny' ? value : 'level';
 }
 
 /** The level a link asked for, or null when it asked for none. */
@@ -38,6 +40,8 @@ export default function LevelingSpotsPage({
 }: {
   searchParams: { level?: string | string[]; mode?: string | string[] };
 }) {
+  // The "รายการของฉัน" tab moved to its own page (19 Oct 2026).
+  if ((Array.isArray(searchParams.mode) ? searchParams.mode[0] : searchParams.mode) === 'plan') redirect('/database/monsters/compare');
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <JsonLd data={breadcrumbJsonLd([
@@ -54,7 +58,7 @@ export default function LevelingSpotsPage({
           __html: `window.__farmData=fetch(${JSON.stringify(FARM_DATA_URL)}).then(function(r){return r.ok?r.json():Promise.reject(new Error('HTTP '+r.status))});`,
         }}
       />
-      <PageHeader title="ฟาร์มที่ไหนดี" lead="ไม่กรอกอะไรก็ได้คำตอบ — กรอกตัวเลขตัวละครครั้งเดียว ใช้ได้ทั้ง 4 โหมด" />
+      <PageHeader title="ฟาร์มที่ไหนดี" lead="ไม่กรอกอะไรก็ได้คำตอบ — กรอกตัวเลขตัวละครครั้งเดียว ใช้ได้ทั้ง 3 โหมด" />
 
       <FarmTool initialMode={readMode(searchParams.mode)} initialLevel={readLevel(searchParams.level)} />
 
@@ -63,20 +67,21 @@ export default function LevelingSpotsPage({
 
       <section className="farm-section" aria-labelledby="farm-modes">
         <h2 id="farm-modes" className="section-title">
-          4 โหมดนี้ต่างกันยังไง
+          3 โหมดนี้ต่างกันยังไง
         </h2>
         <ul className="muted" style={{ margin: 0, paddingInlineStart: 18, lineHeight: 1.7, maxWidth: '75ch' }}>
           <li>
             <strong>เก็บเลเวล</strong> เล่นเองตอนนี้ แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP หรือ EXP ต่อชั่วโมงของคุณ
           </li>
           <li>
-            <strong>ทิ้งบอท AFK</strong> แมพที่บอทเก็บ EXP ข้ามคืนได้โดยไม่ตาย คิดจากดาเมจที่โดนตีจริงเทียบกับ HP และยาที่ถือไป
+            <strong>ทิ้งบอท AFK</strong> แมพที่บอทในเกมเก็บ EXP ได้มากสุดก่อนกลับเมือง พร้อมบอกว่าควรติ๊กมอนตัวไหน คิดตามที่บอทจริงทำ
           </li>
           <li>
-            <strong>หาเงิน</strong> แมพที่ปล่อยบอทเก็บของดรอปไปขายร้าน NPC แล้วได้เงินมากสุด หักดรอปตามช่วงเลเวลให้ด้วย
+            <strong>หาเงิน</strong> แมพที่ปล่อยบอทเก็บของไปขายร้าน NPC แล้วได้เงินมากสุด หักค่ายาและนับว่ากระเป๋าเต็มเมื่อไร
           </li>
           <li>
-            <strong>รายการของฉัน</strong> เทียบมอนที่กดเพิ่มเข้าแผนไว้ทีละตัว ทั้ง EXP และเงินต่อชั่วโมง
+            ได้แมพแล้ว ดูวิธีตั้งบอททีละแท็บที่ <Link href="/tools/bot-setup">จัดเซ็ตบอท</Link> · เทียบมอนทีละตัวที่{' '}
+            <Link href="/database/monsters/compare">เปรียบเทียบมอน</Link>
           </li>
         </ul>
       </section>

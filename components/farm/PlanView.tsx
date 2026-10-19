@@ -1,6 +1,8 @@
 'use client';
 
-// รายการของฉัน: the monsters a player picked with "เพิ่มเข้าแผน", compared one
+// เปรียบเทียบมอน (/database/monsters/compare since 19 Oct 2026; it was the
+// farm tool's "รายการของฉัน" tab): the monsters a player picked with the
+// "เปรียบเทียบ" button, compared one
 // at a time on EXP and zeny. Never added up -- a player stands in one place
 // at a time, so a total would describe something that cannot happen.
 
@@ -13,6 +15,7 @@ import type { ViewProps } from './LevelView';
 import { useFarmPlan } from '@/components/FarmPlanProvider';
 import { comparePlan, type PlanRow } from '@/lib/farm-engine/plan';
 import { canRate } from '@/lib/farm-engine/basics';
+import { damageTaken, playerDefense } from '@/lib/farm-engine/survival';
 import { SKILL_RISK_LABELS } from '@/lib/afk-safety';
 
 function rowTags(row: PlanRow): CardTag[] {
@@ -44,7 +47,7 @@ export default function PlanView({ data, player }: ViewProps) {
     return (
       <div className="card farm-state">
         <p>
-          ยังไม่มีมอนสเตอร์ในแผน เปิด <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link> แล้วกด &ldquo;เพิ่มเข้าแผน&rdquo; ที่ตัวที่สนใจ
+          ยังไม่มีมอนในรายการ เปิด <Link href="/database/monsters">หน้ารายการมอนสเตอร์</Link> หรือหน้ามอนตัวไหนก็ได้ แล้วกด &ldquo;+ เปรียบเทียบ&rdquo;
         </p>
       </div>
     );
@@ -69,12 +72,12 @@ export default function PlanView({ data, player }: ViewProps) {
           </>
         ) : (
           <>
-            ในแผน <strong>{result.rows.length}</strong> ตัว · กรอกดาเมจกับ ASPD ในแถบด้านบน แล้วจะได้ EXP/ชม. และ z/ชม. ของแต่ละตัว
+            ในรายการ <strong>{result.rows.length}</strong> ตัว · กรอกดาเมจกับ ASPD ในแถบด้านบน แล้วจะได้ EXP/ชม. และ z/ชม. ของแต่ละตัว
           </>
         )}
-        {result.missing.length > 0 && <> · มี {result.missing.length} ตัวในแผนที่ไม่มีในข้อมูลแล้ว</>}
+        {result.missing.length > 0 && <> · มี {result.missing.length} ตัวในรายการที่ไม่มีในข้อมูลแล้ว</>}
       </p>
-      {!persisted && <p className="charbar__error">เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) แผนใช้ได้ระหว่างเปิดแท็บนี้ แต่ปิดแล้วจะหาย</p>}
+      {!persisted && <p className="charbar__error">เบราว์เซอร์นี้เก็บค่าไม่ได้ (เช่นโหมดส่วนตัว) รายการใช้ได้ระหว่างเปิดแท็บนี้ แต่ปิดแล้วจะหาย</p>}
 
       <ul className="farmplan">
         {result.rows.map((row) => {
@@ -84,6 +87,14 @@ export default function PlanView({ data, player }: ViewProps) {
           if (row.m.hp !== null) stats.push({ label: 'HP', value: whole(row.m.hp) });
           if (row.myHitPct !== null) stats.push({ label: 'เราตีโดน', value: `${row.myHitPct}%` });
           if (row.theirHitPct !== null) stats.push({ label: 'มันตีเราโดน', value: `${row.theirHitPct}%` });
+          // How hard and how often it hits back (19 Oct 2026): ATK after the
+          // player's DEF, and rAthena's attack delay (classic, not measured in Zero).
+          if (row.m.attackDelay === 0) stats.push({ label: 'ตีคน', value: 'ไม่ตี' });
+          else {
+            const hit = damageTaken(row.m, playerDefense(player));
+            if (hit !== null) stats.push({ label: 'ตีเราทีละราว', value: whole(hit) });
+            if (row.m.attackDelay !== null) stats.push({ label: 'ตีทุก', value: (row.m.attackDelay / 1000).toFixed(1), unit: ' วิ' });
+          }
           return (
             <MonsterCard
               key={row.m.id}

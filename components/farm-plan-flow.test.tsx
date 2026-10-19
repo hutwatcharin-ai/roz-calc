@@ -59,12 +59,12 @@ describe('add to plan, from a click', () => {
       </FarmPlanProvider>,
     );
 
-    expect(button().textContent).toContain('เพิ่มเข้าแผน');
+    expect(button().textContent).toContain('+ เปรียบเทียบ');
     expect(button().getAttribute('aria-pressed')).toBe('false');
 
     click(button());
 
-    expect(button().textContent).toContain('อยู่ในแผน');
+    expect(button().textContent).toContain('อยู่ในรายการเปรียบเทียบ');
     expect(button().getAttribute('aria-pressed')).toBe('true');
   });
 
@@ -88,7 +88,7 @@ describe('add to plan, from a click', () => {
     click(button());
     click(button());
 
-    expect(button().textContent).toContain('เพิ่มเข้าแผน');
+    expect(button().textContent).toContain('+ เปรียบเทียบ');
     expect(window.localStorage.getItem(FARM_PLAN_STORAGE_KEY)).toBe('[]');
   });
 
@@ -103,7 +103,7 @@ describe('add to plan, from a click', () => {
       </FarmPlanProvider>,
     );
 
-    expect(button().textContent).toContain('อยู่ในแผน');
+    expect(button().textContent).toContain('อยู่ในรายการเปรียบเทียบ');
   });
 
   it('refuses rather than silently evicting when the plan is full', () => {
@@ -116,7 +116,7 @@ describe('add to plan, from a click', () => {
     );
 
     expect(button().disabled).toBe(true);
-    expect(button().textContent).toContain('แผนเต็ม');
+    expect(button().textContent).toContain('รายการเต็ม');
 
     click(button());
     expect(window.localStorage.getItem(FARM_PLAN_STORAGE_KEY)).toBe(full);
@@ -136,6 +136,6 @@ describe('add to plan, from a click', () => {
     );
     click(button());
 
-    expect(button().textContent).toContain('อยู่ในแผน');
+    expect(button().textContent).toContain('อยู่ในรายการเปรียบเทียบ');
   });
 });

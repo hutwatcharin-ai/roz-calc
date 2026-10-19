@@ -279,7 +279,7 @@ export default async function HomePage({
         {/* ตารางธาตุ was orphaned (only reachable from monster-page footers)
             while its Thai keyword has no Zero-specific competitor (SXO audit). */}
         <Link href="/guides/elements" className="chiplink">ตารางธาตุ</Link>
-        <Link href="/tools/leveling-spots?mode=plan" className="chiplink">แผนฟาร์ม</Link>
+        <Link href="/database/monsters/compare" className="chiplink">เปรียบเทียบมอน</Link>
         <Link href="/tools/leveling-spots?mode=zeny" className="chiplink">ฟาร์มเงินที่ไหนดี</Link>
         <Link href="/database/maps" className="chiplink">แมพ</Link>
       </div>

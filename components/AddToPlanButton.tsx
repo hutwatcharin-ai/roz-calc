@@ -2,7 +2,9 @@
 
 import { useFarmPlan } from '@/components/FarmPlanProvider';
 
-// Sits on a monster page and on every farming-finder row (spec 3.6). Renders
+// Sits on a monster page and on every farming-finder row (spec 3.6). Since
+// 19 Oct 2026 the list it fills is the monster comparison page
+// (/database/monsters/compare), so it says "เปรียบเทียบ", not "แผน". Renders
 // nothing until storage has been read: showing "เพิ่มเข้าแผน" for a moment to
 // someone whose plan already contains this monster would be a wrong claim,
 // however brief.
@@ -29,7 +31,7 @@ export default function AddToPlanButton({
         aria-hidden="true"
         tabIndex={-1}
       >
-        + เพิ่มเข้าแผน
+        + เปรียบเทียบ
       </button>
     );
   }
@@ -43,10 +45,10 @@ export default function AddToPlanButton({
       className={`planbtn${inPlan ? ' planbtn--on' : ''}${compact ? ' planbtn--compact' : ''}`}
       onClick={() => (inPlan ? remove(monsterId) : add(monsterId))}
       disabled={blocked}
-      title={blocked ? 'แผนเต็มแล้ว เอาตัวอื่นออกก่อน' : undefined}
+      title={blocked ? 'รายการเปรียบเทียบเต็มแล้ว เอาตัวอื่นออกก่อน' : inPlan ? 'กดอีกทีเพื่อเอาออก · ดูที่หน้าเปรียบเทียบมอน' : undefined}
       aria-pressed={inPlan}
     >
-      {inPlan ? '✓ อยู่ในแผน' : blocked ? 'แผนเต็ม' : '+ เพิ่มเข้าแผน'}
+      {inPlan ? '✓ อยู่ในรายการเปรียบเทียบ' : blocked ? 'รายการเต็ม' : '+ เปรียบเทียบ'}
     </button>
   );
 }

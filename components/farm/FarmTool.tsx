@@ -6,14 +6,15 @@
 //   เก็บเลเวล      where do I level by hand now
 //   ทิ้งบอท AFK    where does a bot collect EXP overnight and survive
 //   หาเงิน         where does a bot collect zeny overnight and survive
-//   รายการของฉัน   compare the monsters I picked, EXP and zeny side by side
+//
+// The fourth mode, รายการของฉัน, became /database/monsters/compare on
+// 19 Oct 2026.
 
 import { useEffect, useMemo, useState } from 'react';
 import FarmNumbersBar from './FarmNumbersBar';
 import LevelView from './LevelView';
 import AfkView from './AfkView';
 import ZenyView from './ZenyView';
-import PlanView from './PlanView';
 import { useRememberedNumbers } from '@/components/ToolNumbers';
 import { useToolUse } from '@/lib/use-tool-use';
 import { useFarmData } from '@/lib/use-farm-data';
@@ -23,13 +24,12 @@ import { canRate, playerFromNumbers } from '@/lib/farm-engine/basics';
 import { canSurvive } from '@/lib/farm-engine/survival';
 import { DEFAULT_LEVEL, type PlayerInput } from '@/lib/farm-engine/types';
 
-export type FarmMode = 'level' | 'afk' | 'zeny' | 'plan';
+export type FarmMode = 'level' | 'afk' | 'zeny';
 
 const MODES: { key: FarmMode; icon: string; label: string; blurb: string }[] = [
   { key: 'level', icon: '/images/items/607.gif', label: 'เก็บเลเวล', blurb: 'เล่นเองตอนนี้ ไปแมพไหน EXP ดี' },
   { key: 'afk', icon: '/images/items/610.gif', label: 'ทิ้งบอท AFK', blurb: 'ทิ้งบอทเก็บ EXP ข้ามคืน แมพไหนรอด' },
   { key: 'zeny', icon: '/images/items/909.gif', label: 'หาเงิน', blurb: 'ทิ้งบอทเก็บของไปขายร้าน NPC ข้ามคืน แมพไหนได้เงินมากสุด' },
-  { key: 'plan', icon: '/images/items/512.gif', label: 'รายการของฉัน', blurb: 'เทียบมอนที่กด “เพิ่มเข้าแผน” ไว้ ทั้ง EXP และเงิน' },
 ];
 
 /** What each mode would add if the player filled in more of the bar. */
@@ -37,7 +37,7 @@ function missingHints(mode: FarmMode, player: PlayerInput): string[] {
   const speed = player.style === 'magic' ? 'วินาทีต่อร่าย' : 'ASPD';
   const hints: string[] = [];
   if (!canRate(player)) {
-    const unlock = mode === 'zeny' ? 'z/ชม.' : mode === 'plan' ? 'EXP/ชม. และ z/ชม.' : 'EXP/ชม.';
+    const unlock = mode === 'zeny' ? 'z/ชม.' : 'EXP/ชม.';
     hints.push(`ดาเมจ + ${speed} → ${unlock}`);
   }
   if ((mode === 'afk' || mode === 'zeny') && !canSurvive(player)) hints.push('Max HP + FLEE → บอทรอดทั้งคืนไหม ใช้ยากี่ขวด');
@@ -131,7 +131,6 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
       {viewProps && mode === 'level' && <LevelView {...viewProps} />}
       {viewProps && mode === 'afk' && <AfkView {...viewProps} />}
       {viewProps && mode === 'zeny' && <ZenyView {...viewProps} />}
-      {viewProps && mode === 'plan' && <PlanView {...viewProps} />}
     </>
   );
 }

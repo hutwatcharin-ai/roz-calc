@@ -28,6 +28,7 @@ import Link from 'next/link';
 import AggroBadge from '@/components/AggroBadge';
 import { BEHAVIOUR_LABELS, modesMeta, monsterModes } from '@/lib/monster-modes';
 import AddToPlanButton from '@/components/AddToPlanButton';
+import afkReference from '@/data/afk-reference.json';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import MonsterElementPanel from '@/components/MonsterElementPanel';
@@ -505,6 +506,27 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
               <div className="statgrid__cell"><span className="reward-label">MDEF</span><span className="reward-value mono">{num(monster.mdef)}</span>{bar(seg('mdef'))}</div>
             </div>
             <p className="statbar__note">แถบ = เทียบกับมอนธรรมดาเลเวล {Math.max(1, monster.level - STAT_BAND)}–{monster.level + STAT_BAND} เต็ม 10 ช่องคือสูงกว่าทุกตัว</p>
+            {(() => {
+              // How it fights back (19 Oct 2026, for the bot setup): rAthena's
+              // attack delay, classic RO's value -- Zero's is not published.
+              const ref = (afkReference.mob as unknown as Record<string, [number, number | null, number | null, number | null, 1?]>)[monster.id];
+              if (!ref) return null;
+              if (ref[0] === 0) {
+                return (
+                  <p className="statbar__note">
+                    <strong>ไม่ตีคน</strong>
+                    {ref[4] === 1 ? ' · โดนตีทีละ 1 ไม่ว่าดาเมจเท่าไร' : ''} · ทิ้งบอทติ๊กได้ไม่ต้องกลัวโดนตี
+                  </p>
+                );
+              }
+              return (
+                <p className="statbar__note">
+                  ตีทุกราว <strong>{(ref[0] / 1000).toFixed(1)} วิ</strong>
+                  {ref[1] !== null && monster.is_aggressive ? ` · เห็นเราจากระยะ ${ref[1]} ช่องแล้วเดินเข้ามาตี` : ''} · ค่าจาก rAthena (RO คลาสสิก) ยังไม่ได้วัดใน Zero ·
+                  ดูว่าตีเราทีละเท่าไรที่ <Link href="/database/monsters/compare">เปรียบเทียบมอน</Link>
+                </p>
+              );
+            })()}
             {/* The two numbers a player builds toward (owner, 1 Oct 2026:
                 make them stand out): lit target panels. */}
             <div className="statgrid statgrid--two statgrid--target" style={{ marginTop: 10 }}>

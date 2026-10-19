@@ -59,7 +59,7 @@ describe('the plan tab', () => {
     await mountPlan();
 
     expect(container.querySelector('.farmplan')).toBeNull();
-    expect(container.textContent).toContain('ยังไม่มีมอนสเตอร์ในแผน');
+    expect(container.textContent).toContain('ยังไม่มีมอนในรายการ');
   });
 
   it('takes a monster out when its remove button is pressed', async () => {

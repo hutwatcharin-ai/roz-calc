@@ -140,7 +140,7 @@ export default function FarmNumbersBar({
           castSeconds: { unlocks: 'ต่อชั่วโมง' },
           flee: { unlocks: 'มันตีเราโดนแค่ไหน' },
         }}
-        note="ทุกช่องไม่บังคับ ใช้ร่วมกันทั้ง 4 โหมด"
+        note="ทุกช่องไม่บังคับ ใช้ร่วมกันทุกเครื่องมือฟาร์ม"
       />
       {overnight && (
         <div className="farmbar__survive">
