@@ -32,6 +32,7 @@ import { buildPlan, type JobPlan } from '@/lib/skill-plan';
 import trees from '@/data/skill-trees.json';
 import SourceToggle from '@/components/SourceToggle';
 import OpenOnHash from '@/components/OpenOnHash';
+import { isAbsentFromGame } from '@/lib/game-absent';
 
 export const revalidate = 86400;
 
@@ -120,6 +121,9 @@ function ItemChips({ ids, items }: { ids?: number[]; items: Map<number, ItemInfo
           <Link key={id} className="chip" href={itemHref(id, item.category)}>
             {item.icon_url && <img src={item.icon_url} alt="" width={24} height={24} loading="lazy" />}
             {item.name_en}
+            {/* Gear seen in a video from another server: the Global client
+                (data/game-absent-items.json) has no such item yet. */}
+            {isAbsentFromGame(id) && <span className="muted">ยังไม่มีในเซิร์ฟ Global</span>}
           </Link>
         );
       })}
@@ -299,7 +303,8 @@ function planSummary(plans: JobPlan[]): string {
 
 function BuildSection({ build, look, plans, folded = false }: { build: ClassBuild; look: Lookups; plans: JobPlan[] | null; folded?: boolean }) {
   const { guide, skills, items } = look;
-  const keyItems = [...new Set((build.gear ?? []).flatMap((g) => g.items ?? []))].slice(0, 6);
+  // The glance row is gear to go and get: none the Global server lacks.
+  const keyItems = [...new Set((build.gear ?? []).flatMap((g) => g.items ?? []))].filter((id) => !isAbsentFromGame(id)).slice(0, 6);
   const topStats = build.stats?.find((row) => STAT_KEYS.some((k) => row[k]));
   let step = 0;
   const h = (title: string) => <h3 className="cguide__h3"><span className="cguide__num mono">{++step}</span>{title}</h3>;

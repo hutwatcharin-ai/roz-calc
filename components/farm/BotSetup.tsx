@@ -401,6 +401,17 @@ function Advice({
   if (bot.idleTeleport === null) {
     items.push({ tab: 'พื้นฐาน', text: 'ใช้ Teleport หากไม่มีการต่อสู้ภายใน 5 วินาที', why: 'มอนที่ติ๊กอยู่ไกล วาร์ปหาใหม่เร็วกว่าเดินไป', apply: { idleTeleport: 5 } });
   }
+  // The Movement tab is where the bot is told what to teleport with
+  // (docs/bot-settings/movement.jpg).
+  items.push({
+    tab: 'เคลื่อนที่',
+    text: bot.creamy
+      ? 'ตั้งค่าการใช้ Teleport: ติ๊ก "ใช่" ช่องสกิล แล้ววางสกิล Teleport (จาก Creamy Card)'
+      : 'ตั้งค่าการใช้ Teleport: ติ๊ก "ใช่" ช่องไอเทม แล้ววาง Fly Wing',
+    why: bot.creamy
+      ? 'การวาร์ปทุกข้อในแท็บพื้นฐานใช้สิ่งที่วางในแท็บนี้ · Creamy วาร์ปได้ไม่จำกัด เสีย SP แทนปีก'
+      : 'การวาร์ปทุกข้อในแท็บพื้นฐานใช้สิ่งที่วางในแท็บนี้ · ถือ Fly Wing ให้พอทั้งคืน',
+  });
   if (run.potionsPerHourHigh > 0) {
     const short = run.potionsCarried !== null && run.potionsCarried < night;
     items.push({
