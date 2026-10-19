@@ -104,12 +104,12 @@ describe('mapSurvival', () => {
     expect(out.blockers[0].reason).toBe('runs_out');
   });
 
-  it('sizes the potion stack from half the max weight when the count is blank', () => {
-    // Red Potion weighs 7 in the fixture: 2,000 x 0.5 / 7 = 142 potions.
+  it('sizes the potion stack to fill up to the 70% regen line when the count is blank', () => {
+    // Red Potion weighs 7 in the fixture: (2,000 x 0.7 - 300 carried) / 7 = 157.
     const d = data();
-    const out = mapSurvival(d.maps[0], d, tank({ potionId: 501, maxWeight: 2000 }), ctx)!;
-    expect(out.potionsCarried).toBe(142);
-    expect(out.hoursAlive).toBeCloseTo((1000 + 142 * 45) / 175200, 6);
+    const out = mapSurvival(d.maps[0], d, tank({ potionId: 501, maxWeight: 2000, weightNow: 300 }), ctx)!;
+    expect(out.potionsCarried).toBe(157);
+    expect(out.hoursAlive).toBeCloseTo((1000 + 157 * 45) / 175200, 6);
     expect(mapSurvival(d.maps[0], d, tank({ potionId: 501, maxWeight: 2000, potions: 10 }), ctx)!.potionsCarried).toBe(10);
   });
 

@@ -75,6 +75,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
+/** Creamy Card: Teleport Lv.1 (client text), what all-day bots teleport with. */
+const CREAMY_CARD = 4040;
+
 export default async function CardDetailPage({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   const { data: item, error } = await getGearItem(id);
@@ -168,6 +171,16 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         release={release}
       />
       <InSetBox itemId={item.id} />
+      {item.id === CREAMY_CARD && (
+        // Owner, 19 Oct 2026: nearly every all-day bot wears this card.
+        <div className="card card--pink" style={{ marginTop: 20 }}>
+          <h2 className="section-title">ใช้กับบอทในเกม</h2>
+          <p style={{ margin: 0 }}>
+            คนเปิดบอททั้งวันเกือบทั้งหมดใส่การ์ดใบนี้ ให้บอท &ldquo;ใช้ Teleport หากไม่มีการต่อสู้ภายใน ... วินาที&rdquo; และวาร์ปหนีตอนโดนตีแรง ด้วยสกิลแทนการเผา Fly Wing
+            ในกระเป๋า เสีย SP แทน · ดูว่าแมพไหนวาร์ปบ่อยแค่ไหน SP พอไหม ที่ <Link href="/tools/bot-setup">จัดเซ็ตบอท</Link>
+          </p>
+        </div>
+      )}
       <ItemGuideRefs itemId={item.id} />
       <ItemEffectsCard id={item.id} onlyIfMore />
 

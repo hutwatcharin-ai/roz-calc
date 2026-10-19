@@ -126,7 +126,7 @@ export default function FarmNumbersBar({
         </label>
         <label className="cvtoggle">
           <input type="radio" name="farm-style" checked={style === 'magic'} onChange={() => onStyle('magic')} />
-          สายเวท (ร่ายสกิล)
+          ใช้สกิลโจมตี (สายเวท หรือสกิลในแท็บสกิลบอท)
         </label>
       </div>
       <ToolNumbers
@@ -137,7 +137,7 @@ export default function FarmNumbersBar({
           level: { unlocks: 'ช่วงเลเวล · หักดรอป' },
           damagePerHit: style === 'magic' ? { label: 'ดาเมจต่อร่าย', hint: 'เช่น 900', unlocks: 'ต่อชั่วโมง' } : { label: 'ดาเมจต่อที', hint: 'เช่น 400', unlocks: 'ต่อชั่วโมง' },
           aspd: { unlocks: 'ต่อชั่วโมง' },
-          castSeconds: { unlocks: 'ต่อชั่วโมง' },
+          castSeconds: { label: 'วินาทีต่อสกิล', hint: 'เช่น 0.5', unlocks: 'ดีเลย์ที่ตั้งในแท็บสกิลบอท' },
           flee: { unlocks: 'มันตีเราโดนแค่ไหน' },
         }}
         note="ทุกช่องไม่บังคับ ใช้ร่วมกันทุกเครื่องมือฟาร์ม"
@@ -156,7 +156,7 @@ export default function FarmNumbersBar({
               maxHp: { unlocks: 'รอดไหม' },
               def: { label: 'DEF', unlocks: 'ตามหน้าต่างสเตตัส' },
             }}
-            note="ตัวเลขจากหน้าต่างสเตตัส · DEF ว่าง = คิดเฉพาะ DEF จากเลเวลกับ VIT · ถือยา ว่าง = เต็มครึ่งหนึ่งของน้ำหนักสูงสุด"
+            note="ตัวเลขจากหน้าต่างสเตตัส · DEF ว่าง = คิดเฉพาะ DEF จากเลเวลกับ VIT · ถือยา ว่าง = ใส่เต็มถึง 70% ของน้ำหนักสูงสุด (เกิน 70% เลือดไม่ฟื้นเอง)"
           />
           <div className="farmbar__potions" role="radiogroup" aria-label="ยาที่บอทใช้">
             <span className="toolnumbers__label">ยาที่บอทกิน</span>

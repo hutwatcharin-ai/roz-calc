@@ -34,7 +34,7 @@ import {
   DEFAULT_MOB_WALK,
   DEFAULT_VIEW_RANGE,
   MAX_CAST_PENALTY,
-  POTION_WEIGHT_SHARE,
+  potionStack,
   REGEN_TICK_SECONDS,
   WALK_CELLS_PER_SECOND,
   crowdedFlee,
@@ -118,7 +118,7 @@ export interface BotRun {
   potionsPerHour: number;
   potionCostPerHour: number;
   wingCostPerHour: number;
-  /** Potions it sets out with: typed, else what half the max weight holds; null = no limit known. */
+  /** Potions it sets out with: typed, else what fits under 70% of the max weight; null = no limit known. */
   potionsCarried: number | null;
   /** SP short an hour for teleporting after natural regen; <= 0 keeps up. */
   spShortPerHour: number;
@@ -246,7 +246,7 @@ export function botRun(
   const potionCostPerHour = potionsPerHour * (potion?.price ?? 0);
   const potionsCarried = !potion
     ? null
-    : player.potions ?? (player.maxWeight && potion.weight ? Math.floor((player.maxWeight * POTION_WEIGHT_SHARE) / potion.weight) : null);
+    : potionStack(player, potion.weight);
   let hpHours = Infinity;
   if (net > 0 && !(potion && potionsCarried === null)) hpHours = (maxHp + (potionsCarried ?? 0) * heal) / net;
 

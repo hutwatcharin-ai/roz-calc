@@ -175,6 +175,47 @@ export default async function SpRecoveryPage() {
         </div>
       </section>
 
+      {/* Creamy Card teleports (19 Oct 2026): what all-day bots spend SP on.
+          10 SP a cast is rAthena's skill_db; the regen interval is rAthena's
+          natural_healsp_interval (8 s). Neither is measured in Global. */}
+      <section className="card" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>วาร์ปด้วยการ์ด Creamy ใช้ SP เท่าไร</h2>
+        <p className="muted" style={{ marginTop: 4 }}>
+          คนเปิดบอททั้งวันใส่ <Link href="/database/cards/4040">Creamy Card</Link> ให้บอทวาร์ปเองตอนหามอนไม่เจอ · Teleport ใช้ SP 10 ต่อครั้ง (ค่า rAthena) ·
+          SP ฟื้นเองทุก 8 วินาที (rAthena) ตามสูตรด้านบน · ตารางนี้ = SP ที่ขาดต่อชั่วโมงหลังหักที่ฟื้นเอง (INT 1) และ Strawberry ที่ต้องพกต่อชั่วโมง (เฉลี่ย 22 SP ต่อลูก)
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table className="stat-table">
+            <thead>
+              <tr>
+                <th scope="col">วาร์ป/ชม. ↓ · MaxSP →</th>
+                {[100, 200, 300].map((sp) => (
+                  <th key={sp} scope="col" className="num">{sp}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[60, 120, 240, 480].map((tele) => (
+                <tr key={tele}>
+                  <th scope="row" className="mono">{tele}</th>
+                  {[100, 200, 300].map((sp) => {
+                    const short = tele * 10 - spRegen(1, sp) * (3600 / 8);
+                    return (
+                      <td key={sp} className="num">
+                        {short <= 0 ? 'พอ' : `ขาด ${short} · Strawberry ${Math.ceil(short / 22)}`}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="muted" style={{ marginBottom: 0 }}>
+          บอทวาร์ปกี่ครั้งต่อชั่วโมงขึ้นกับแมพกับมอนที่ติ๊ก ดูของแมพที่คุณจะไปได้ที่ <Link href="/tools/bot-setup">จัดเซ็ตบอท</Link>
+        </p>
+      </section>
+
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title" style={{ marginTop: 0 }}>เทียบทุกตัว เรียงจากคุ้มน้ำหนักที่สุด</h2>
         <p className="muted" style={{ marginTop: 4 }}>

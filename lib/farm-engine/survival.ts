@@ -43,8 +43,20 @@ export const DEFAULT_VIEW_RANGE = 10;
 export const REGEN_TICK_SECONDS = 6;
 /** One fight may take at most this share of the HP bar. */
 export const BURST_SHARE = 0.5;
-/** Share of max weight the potion stack may fill: past half, natural HP regen stops (rAthena). */
-export const POTION_WEIGHT_SHARE = 0.5;
+/**
+ * Share of max weight the bag may fill before natural HP/SP regen stops: 70%
+ * in Zero, not classic RO's 50% (owner, in game, 12 Oct 2026 -- GAME_MODEL;
+ * the same line as lib/weight-calc REGEN_LINE). The potion stack fills it,
+ * less what is already carried.
+ */
+export const POTION_WEIGHT_SHARE = 0.7;
+
+/** Potions that fit under the regen line: typed count first, else from the weights; null = unknown. */
+export function potionStack(player: PlayerInput, weight: number | null): number | null {
+  if (player.potions !== null) return player.potions;
+  if (!player.maxWeight || !weight) return null;
+  return Math.max(0, Math.floor((player.maxWeight * POTION_WEIGHT_SHARE - (player.weightNow ?? 0)) / weight));
+}
 /** Past this, a caster spends its night restarting casts. */
 export const MAX_CAST_PENALTY = 4;
 /** Cells a caster's bolt reaches from (rAthena skill_db: Fire/Cold/Lightning Bolt, Soul Strike, Holy Light). */
@@ -162,7 +174,7 @@ export interface MapSurvival {
   netDamagePerHour: number;
   potionsPerHour: number;
   potionCostPerHour: number;
-  /** Potions the bot sets out with: typed, else what half the max weight holds; null = no limit known. */
+  /** Potions the bot sets out with: typed, else what fits under 70% of the max weight; null = no limit known. */
   potionsCarried: number | null;
   /** Hours until HP and carried potions are gone; Infinity when it never loses ground. */
   hoursAlive: number;
@@ -300,12 +312,12 @@ export function mapSurvival(
   const potionsPerHour = netDamagePerHour > 0 && healEach ? netDamagePerHour / healEach : 0;
   const potionCostPerHour = potionsPerHour * (potion?.price ?? 0);
 
-  // The stack: what the player typed, else what fits in half the max weight
-  // (past half, natural regen stops), else unknown -- and unknown is no limit,
+  // The stack: what the player typed, else what fits under the 70% regen
+  // line (potionStack), else unknown -- and unknown is no limit,
   // with the night's total on the card for the player to judge.
   const potionsCarried = !potion
     ? null
-    : player.potions ?? (player.maxWeight && potion.weight ? Math.floor((player.maxWeight * POTION_WEIGHT_SHARE) / potion.weight) : null);
+    : potionStack(player, potion.weight);
 
   let hoursAlive = Infinity;
   if (netDamagePerHour > 0) {
