@@ -83,17 +83,17 @@ describe('botRun', () => {
     expect(jumpy.expPerHour).toBeLessThan(calm.expPerHour);
   });
 
-  it('costs a hard-hitting follower one hit and a teleport per meeting, not a fight of hits', () => {
-    // A 999-a-hit monster past a 100 limit, 5 of them on the map: met now and
-    // then, each meeting one hit. Counted as a follower on the bot every
-    // second it cost thousands of potions an hour (Zenhai Marsh, 19 Oct 2026).
+  it('costs a hard-hitting follower a teleport per meeting and no HP', () => {
+    // A 999-a-hit monster past a 100 limit, 5 of them on the map. The bot
+    // teleports in the moment before the damage applies, so the hit never
+    // lands (owner, in game, 19 Oct 2026). Counted as a follower hitting every
+    // second it cost thousands of potions an hour (Zenhai Marsh).
     const d = world([soft(1), mob(2, { isAggressive: true, atk: 1000, atkMax: 1000, flee95: 400 })], [field([[1, 50], [2, 5]], 40000)]);
     const run = botRun(d.maps[0], d, me({ maxHp: 5000, potionId: 501 }), bot({ teleportOnDamage: 100 }), [1], ctx, 8)!;
     expect(run.avgFollowers).toBe(0);
-    expect(run.hurtPerHour.teleportHits).toBeGreaterThan(0);
-    // Damage per meeting is one hit: total over meetings, not over fight time.
-    const meetings = run.teleportsPerHour;
-    expect(run.hurtPerHour.teleportHits / meetings).toBeLessThanOrEqual(1000);
+    expect(run.hurtPerHour.teleportHits).toBe(0);
+    expect(run.teleportsPerHour).toBeGreaterThan(0);
+    expect(run.potionsPerHour).toBe(0);
     expect(run.dangers).toEqual([]);
   });
 
@@ -135,9 +135,10 @@ describe('botRun', () => {
     expect(run.hours).toBeLessThan(1);
   });
 
-  it('flags a monster whose one hit is the whole HP bar', () => {
+  it('flags a monster whose one hit is the whole HP bar, unless the damage limit teleports first', () => {
     const d = world([mob(1, { atk: 2000, atkMax: 2000, flee95: 400 })], [field([[1, 20]])]);
     expect(botRun(d.maps[0], d, me(), bot(), [1], ctx, 8)!.dangers[0].kind).toBe('one_shot');
+    expect(botRun(d.maps[0], d, me(), bot({ teleportOnDamage: 500 }), [1], ctx, 8)!.dangers).toEqual([]);
   });
 });
 

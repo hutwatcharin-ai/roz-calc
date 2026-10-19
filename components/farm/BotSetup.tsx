@@ -228,12 +228,7 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
               <div className="botsetup__wide">
                 <dt>เลือดหายต่อชั่วโมงมาจาก</dt>
                 <dd>
-                  มอนที่ติ๊ก {whole(run.hurtPerHour.targets)} · โดนรุมตอนสู้ {whole(run.hurtPerHour.crowd)} · โดนตีแรงทีเดียวแล้ววาร์ปหนี {whole(run.hurtPerHour.teleportHits)}
-                  {run.hurtPerHour.teleportHits > run.hurtPerHour.targets + run.hurtPerHour.crowd && run.hurtPerHour.worstName && (
-                    <small>
-                      ยาส่วนใหญ่หมดไปกับ {run.hurtPerHour.worstName} ที่เดินมาตีทีเดียวแรงเกินค่าวาร์ป · ลองแมพอื่น หรือติ๊กมันถ้าสู้ไหว
-                    </small>
-                  )}
+                  มอนที่ติ๊ก {whole(run.hurtPerHour.targets)} · โดนรุมตอนสู้ {whole(run.hurtPerHour.crowd)}
                 </dd>
               </div>
             )}
@@ -256,7 +251,7 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
                 <dt>ตามตี (ไม่ได้ติ๊ก)</dt>
                 <dd>
                   {run.followers.map((f) => f.name).join(', ')} ·{' '}
-                  {run.avgFollowers >= 0.05 ? `เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว` : 'ตีแรงเกินค่าวาร์ป บอทวาร์ปหนีทันทีที่โดนตี'}
+                  {run.avgFollowers >= 0.05 ? `เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว` : 'ตีแรงเกินค่าวาร์ป บอทวาร์ปหนีก่อนดาเมจเข้า ไม่เสียเลือด แค่เสียเวลา'}
                 </dd>
               </div>
             )}

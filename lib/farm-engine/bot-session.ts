@@ -206,10 +206,12 @@ export function botRun(
   const followRows = all.filter((row) => aggressive(row) && !targets.includes(row.m.id));
 
   // A monster whose top hit is past the "teleport when hit for more than"
-  // setting never stays on the bot: its first landed hit sends the bot away.
-  // It costs one hit and one teleport per meeting, not a hit every second of
-  // every fight -- counting it the second way had a Mutant Dragon follower
-  // costing 6,000 potions an hour (owner, Zenhai Marsh, 19 Oct 2026).
+  // setting never stays on the bot, and never hurts it either: the game
+  // shows the damage number a moment before applying it, and the bot
+  // teleports in that moment, so that hit never lands (owner, in game,
+  // 19 Oct 2026). Each meeting costs a teleport and the kill under way, no
+  // HP. Counting it as a follower hitting every second had a Mutant Dragon
+  // costing 6,000 potions an hour at Zenhai Marsh.
   const limit = bot.teleportOnDamage;
   const topHit = (row: MapRow) => damageTaken({ ...row.m, atk: row.m.atkMax ?? row.m.atk }, def) ?? 0;
   const trips = (row: MapRow) => limit !== null && topHit(row) > limit;
@@ -254,7 +256,7 @@ export function botRun(
     dangers.push({ kind: 'followers', id: followRows[0].m.id, name: followRows.map((r) => r.m.name).join(', ') });
   }
   dangers.push(...round.dangers);
-  for (const row of followRows) {
+  for (const row of stayRows) {
     if (topHit(row) >= maxHp) dangers.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: topHit(row) });
   }
 
@@ -339,9 +341,9 @@ export function botRun(
     const crowdDps = mix(pileStay, (h) => h.dps) + mix(follow, (h) => h.dps);
     const crowdLanded = mix(pileStay, (h) => h.landed) + mix(follow, (h) => h.landed) + mix(pileFlee, (h) => h.landed);
     const pileTrips = mix(pileFlee, (h) => h.landed);
-    const pileTripHit = pileTrips > 0 ? mix(pileFlee, (h) => h.landed * h.dmg) / pileTrips : 0;
-    // One hit from each flee-follower met, and a teleport.
-    const fleeHit = fleePerKill > 0 ? fleeRows.reduce((s, row, i) => s + (fleeMeets[i] / fleePerKill) * (hits.get(row.m.id)?.dmg ?? 0), 0) : 0;
+    // The hit that trips a teleport is dodged by the teleport itself.
+    const pileTripHit = 0;
+    const fleeHit = 0;
 
     const notes: DangerNote[] = [];
     let cycle = 0;
@@ -375,7 +377,7 @@ export function botRun(
       const tripRate = ownTrips + pileTrips;
       const success = Math.max(Math.exp(-tripRate * exposed), MIN_SUCCESS);
       const attempts = 1 / success;
-      const tripHit = tripRate > 0 ? (ownTrips * h.dmg + pileTrips * pileTripHit) / tripRate : 0;
+      const tripHit = tripRate > 0 ? (pileTrips * pileTripHit) / tripRate : 0;
       const hurt = ((ownFlee ? 0 : h.dps) + crowdDps) * exposed;
       cycle += share * attempts * (fight + searchSeconds);
       fighting += share * attempts * fight;
@@ -387,7 +389,7 @@ export function botRun(
       exp += share * (row.m.baseExp ?? 0);
       zeny += share * row.m.perKill * dropFactor(row.m);
       loot += share * row.m.lootWeight;
-      if (h.hitMax >= maxHp) notes.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: h.hitMax });
+      if (h.hitMax >= maxHp && !ownFlee) notes.push({ kind: 'one_shot', id: row.m.id, name: row.m.name, damage: h.hitMax });
       else if (limit === null && hurt > maxHp) notes.push({ kind: 'burst', id: row.m.id, name: row.m.name, damage: Math.round(hurt) });
     }
     // Flee-followers: a teleport, a hit, and the kill under way lost, each.
