@@ -11,6 +11,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useToolUse } from '@/lib/use-tool-use';
 import { ATTACK_LINE, EWL_CLASSES, REGEN_LINE, load, roomUnder, weightCap } from '@/lib/weight-calc';
+import { useBotSettings } from '@/lib/use-bot-settings';
+import Link from 'next/link';
 
 export interface WeightItem {
   id: number;
@@ -37,6 +39,7 @@ export default function WeightCalculator({ classes, groups, classItems }: {
   groups: Group[];
   classItems: Record<string, WeightItem[]>;
 }) {
+  const [bot, setBot] = useBotSettings();
   const [cls, setCls] = useState('merchant');
   const [str, setStr] = useState(1);
   const [ewl, setEwl] = useState(0);
@@ -259,6 +262,31 @@ export default function WeightCalculator({ classes, groups, classItems }: {
           <div><dt>ก่อนถึง 70%</dt><dd className="mono">{num(Math.max(0, Math.round((cap * 0.7 - l.total) * 10) / 10))}</dd></div>
           <div><dt>ก่อนถึง 90%</dt><dd className="mono">{num(Math.max(0, Math.round((cap * 0.9 - l.total) * 10) / 10))}</dd></div>
         </dl>
+        {/* The bot's loot stop (19 Oct 2026), shared with the farm tools
+            through lib/use-bot-settings: what is left for drops. */}
+        <div className="wcalc__bot">
+          <label>
+            บอทหยุดเก็บของที่{' '}
+            <input
+              className="mono"
+              type="number"
+              inputMode="numeric"
+              min={1}
+              max={90}
+              value={bot.stopWeightPct}
+              onChange={(e) => {
+                const n = Number(e.target.value);
+                if (Number.isFinite(n) && n >= 1 && n <= 90) setBot({ ...bot, stopWeightPct: n });
+              }}
+            />{' '}
+            % <small>(แท็บเก็บไอเทมของบอท)</small>
+          </label>
+          <p>
+            เหลือที่ให้บอทเก็บของดรอป <b className="mono">{num(Math.max(0, Math.round((cap * (bot.stopWeightPct / 100) - l.total) * 10) / 10))}</b>
+            {bot.stopWeightPct > REGEN_LINE ? ` · เกิน ${REGEN_LINE}% แล้วเลือดไม่ฟื้นเอง บอทจะพึ่งยาอย่างเดียวช่วงท้าย` : ''} · ดูว่ากระเป๋าเต็มกี่ชั่วโมงในแต่ละแมพที่{' '}
+            <Link href="/tools/bot-setup">จัดเซ็ตบอท</Link>
+          </p>
+        </div>
         {rows.length > 0 && (
           <>
             <h3 className="wcalc__h3">ใส่เพิ่มได้อีกกี่ชิ้น</h3>

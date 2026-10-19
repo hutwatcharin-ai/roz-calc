@@ -82,3 +82,9 @@
   .wcalc__room li > span.mono:nth-of-type(2) { grid-column: 2; }
   .wcalc__nums dd { font-size: 16px; }
 }
+
+/* The bot's loot stop (19 Oct 2026). */
+.wcalc__bot { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--pink); border-radius: var(--radius); }
+.wcalc__bot label { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.wcalc__bot input { width: 72px; }
+.wcalc__bot p { margin: 8px 0 0; font-size: 14px; }
