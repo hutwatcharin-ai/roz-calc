@@ -23,7 +23,7 @@ import itemWeights from '@/data/item-weights.json';
 // Walkable cells per map and rAthena attack delay / view range per monster
 // (scripts/build-afk-reference.mjs).
 const WALK = afkReference.walk as Record<string, number>;
-const MOB = afkReference.mob as unknown as Record<string, [number, number | null, number | null, number | null]>;
+const MOB = afkReference.mob as unknown as Record<string, [number, number | null, number | null, number | null, 1?]>;
 const WEIGHT = new Map((itemWeights.items as [number, string, number][]).map(([id, , w]) => [id, w]));
 const HP_POTIONS = [501, 502, 503, 504];
 
@@ -161,6 +161,7 @@ export async function GET() {
       viewRange: MOB[row.id]?.[1] ?? null,
       walkSpeed: MOB[row.id]?.[2] ?? null,
       attackRange: MOB[row.id]?.[3] ?? null,
+      oneDamage: MOB[row.id]?.[4] === 1,
     };
   }
 

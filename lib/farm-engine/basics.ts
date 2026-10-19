@@ -79,7 +79,8 @@ export function secondsPerKill(m: FarmMonster, player: PlayerInput): number | nu
   if (!canRate(player) || m.hp === null) return null;
   const rate = killRate({
     monsterHp: m.hp,
-    damagePerHit: player.damage as number,
+    // A plant takes 1 a hit however hard the player hits (owner, 19 Oct 2026).
+    damagePerHit: m.oneDamage ? 1 : (player.damage as number),
     attacksPerSecond: player.perSecond as number,
     hitChancePercent: myHitChance(m, player),
   });

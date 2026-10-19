@@ -31,6 +31,10 @@ describe('mapBlockers', () => {
     expect(out).toEqual([{ id: 3, name: 'mob 3', reason: 'dodge', theirHitPct: 100 }]);
   });
 
+  it('ignores a monster that never attacks', () => {
+    expect(mapBlockers(rows([mob(1), 20], [mob(2, { attackDelay: 0, flee95: 400 }), 5]), player())).toEqual([]);
+  });
+
   it('treats a monster with no FLEE figure as unsafe', () => {
     expect(mapBlockers(rows([mob(4, { flee95: null }), 5]), player())?.[0].reason).toBe('unknown_flee');
   });

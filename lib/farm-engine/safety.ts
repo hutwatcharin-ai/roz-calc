@@ -21,6 +21,9 @@ export function mapBlockers(farmed: MapRow[], player: PlayerInput): Blocker[] | 
   const aggroKinds = farmed.filter((row) => row.m.isAggressive !== false).length;
   const blockers: Blocker[] = [];
   for (const row of farmed) {
+    // Plants, mushrooms and eggs never attack: nothing to dodge
+    // (owner, 19 Oct 2026: Shining Plant was taking Zenhai Marsh out).
+    if (row.m.attackDelay === 0) continue;
     const verdict = afkVerdict({
       style: player.style,
       monster: {

@@ -26,6 +26,7 @@ export const mob = (id: number, over: Partial<FarmMonster> = {}): FarmMonster =>
   viewRange: 10,
   walkSpeed: 200,
   attackRange: 1,
+  oneDamage: false,
   ...over,
 });
 

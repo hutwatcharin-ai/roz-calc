@@ -45,6 +45,8 @@ export interface FarmMonster {
   walkSpeed: number | null;
   /** Cells it attacks from (rAthena); null when unknown. */
   attackRange: number | null;
+  /** Every hit does 1 damage, whatever the player's damage: plants and mushrooms. */
+  oneDamage: boolean;
 }
 
 export interface FarmSpawn {

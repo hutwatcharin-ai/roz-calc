@@ -10,6 +10,9 @@
 //                  AttackDelay of 1 would otherwise read as 1,000 hits a
 //                  second). Zero's own values are not public; these are
 //                  classic RO's, and the page labels them as such.
+//                  A fifth element, 1, marks a monster every hit does 1 to
+//                  (Modes IgnoreMelee + IgnoreMagic: plants and mushrooms).
+//                  The owner confirms it in game (19 Oct 2026).
 //
 //   node scripts/build-afk-reference.mjs <data.grf> <rathena re/mob_db.yml> <farm-data.json> [gatDir]
 //
@@ -67,6 +70,8 @@ for (const line of readFileSync(mobDb, 'utf8').split(/\r?\n/)) {
   if ((m = line.match(/^  - Id: (\d+)/))) {
     cur = { id: Number(m[1]) };
     byId.set(cur.id, cur);
+  } else if (cur && (m = line.match(/^      (IgnoreMelee|IgnoreMagic): true/))) {
+    cur[m[1]] = true;
   } else if (cur && (m = line.match(/^    (Name|AttackDelay|SkillRange|WalkSpeed|AttackRange|Ai): (.+)$/))) {
     cur[m[1]] = m[1] === 'Name' || m[1] === 'Ai' ? m[2].trim() : Number(m[2]);
     if (m[1] === 'Name') byName.set(m[2].trim().toLowerCase(), cur);
@@ -87,6 +92,7 @@ for (const m of Object.values(farm.monsters)) {
   }
   if (r && r.AttackDelay) {
     mob[m.id] = [r.Ai === '06' ? 0 : r.AttackDelay, r.SkillRange ?? null, r.WalkSpeed ?? null, r.AttackRange ?? null];
+    if (r.IgnoreMelee && r.IgnoreMagic) mob[m.id].push(1);
   }
 }
 
@@ -94,7 +100,7 @@ const out = {
   _meta: {
     how: 'node scripts/build-afk-reference.mjs <data.grf> <mob_db.yml> <farm-data.json>',
     walk: 'walkable .gat cells (types 0 and 3) per map, RO Zero Global client data.grf',
-    mob: '[AttackDelay ms (0 = never attacks, Ai 06), SkillRange (view range) cells, WalkSpeed ms a cell, AttackRange cells] from rAthena db/re/mob_db.yml, matched by id (Gravity ids are shared; some names differ, e.g. 1025 Snake = Boa), else by name. Classic RO values, not measured in Zero.',
+    mob: '[AttackDelay ms (0 = never attacks, Ai 06), SkillRange (view range) cells, WalkSpeed ms a cell, AttackRange cells, then 1 when every hit does 1 damage (plants)] from rAthena db/re/mob_db.yml, matched by id (Gravity ids are shared; some names differ, e.g. 1025 Snake = Boa), else by name. Classic RO values, not measured in Zero.',
     built: new Date().toISOString().slice(0, 10),
   },
   walk,

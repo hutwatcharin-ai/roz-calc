@@ -91,6 +91,11 @@ describe('player readiness', () => {
 });
 
 describe('secondsPerKill', () => {
+  it('takes one hit per HP point from a plant, whatever the damage', () => {
+    // 10 HP at 1 a hit, two swings a second: 5 s, not one swing.
+    expect(secondsPerKill(mob(1, { hp: 10, oneDamage: true, hit100: 100 }), player())).toBeCloseTo(5, 6);
+  });
+
   it('counts misses', () => {
     // hit_100 220 against HIT 200 is 80%: a long fight costs a quarter more time.
     const easy = secondsPerKill(mob(1, { hp: 100000, hit100: 200 }), player())!;
