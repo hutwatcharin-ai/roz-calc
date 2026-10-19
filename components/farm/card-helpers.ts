@@ -21,6 +21,12 @@ export function survivalFigures(map: RankedMap): CardFigure[] {
   const s = map.survival;
   if (!s) return [];
   const out: CardFigure[] = [];
+  // Without every monster's ATK there is no damage figure to show: saying
+  // "0 potions" there would be a claim the model never made.
+  if (s.blockers.some((b) => b.reason === 'unknown_atk')) {
+    out.push({ label: 'เดินหามอน', value: s.walkSeconds.toFixed(1), unit: ' วิ/ตัว' });
+    return out;
+  }
   if (s.potionsPerHour > 0) {
     out.push({ label: 'ยาที่ใช้', value: small(s.potionsPerHour), unit: ' ขวด/ชม.' });
     if (s.potionsCarried === null) out.push({ label: 'ทั้งคืนต้องมี', value: whole(s.potionsPerHour * NIGHT_HOURS), unit: ' ขวด' });
