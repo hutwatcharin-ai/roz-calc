@@ -79,6 +79,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     // The flagship tool first (owner, 6 Oct 2026).
     { href: '/tools/build', label: 'จำลองบิลด์', icon: '/images/items/2228.gif', ready: true },
     { href: '/tools/leveling-spots', label: 'ฟาร์มที่ไหนดี', icon: '/images/items/607.gif', ready: true },
+    // 19 Oct 2026: one map, the built-in bot's settings and the run they give.
+    { href: '/tools/bot-setup', label: 'จัดเซ็ตบอท', icon: '/images/items/4040.gif', ready: true },
     { href: '/tools/skill-planner', label: 'วางแผนสกิล', icon: '/images/items/7433.gif', ready: true },
     { href: '/tools/refine', label: 'ตีบวก', icon: '/images/items/985.gif', ready: true },
     // Back in the menu 8 Oct 2026: enchanting is live (owner).

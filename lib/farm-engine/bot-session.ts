@@ -81,8 +81,12 @@ export const TELEPORT_SECONDS = 1;
 export const SP_TICK_SECONDS = 8;
 /** Longest run reported; past this the page says "all day". */
 export const MAX_RUN_HOURS = 24;
-/** Most monster kinds on one map the engine tries ticking combinations of. */
-export const MAX_PICK = 9;
+/**
+ * Most monster kinds on one map the engine tries ticking combinations of,
+ * the most numerous first. 2^7 runs a map keeps the AFK list under a second
+ * on a laptop; past seven kinds the rest are a handful of monsters each.
+ */
+export const MAX_PICK = 7;
 /** A kill the bot has to restart this often is not worth modelling further. */
 const MIN_SUCCESS = 0.02;
 
@@ -410,8 +414,13 @@ export function bestTargets(
   /** Kinds worth ticking for what they give; aggressive ones are always tried too. */
   useful: (m: FarmMonster) => boolean = () => true,
 ): { best: BotRun | null; worst: BotRun | null } {
+  // A kind that is fatal on its own (one hit kills, no ATK figure) is fatal
+  // in any set: leave it out before trying combinations.
+  const fatalAlone = (id: number) =>
+    botRun(map, data, player, bot, [id], ctx, window, dropFactor)?.dangers.some((d) => d.id === id && (d.kind === 'one_shot' || d.kind === 'unknown_atk')) ?? false;
   const kinds = farmedOn(map, data.monsters)
     .filter((row) => useful(row.m) || (row.m.isAggressive !== false && row.m.attackDelay !== 0))
+    .filter((row) => !fatalAlone(row.m.id))
     .sort((a, b) => b.amount - a.amount)
     .slice(0, MAX_PICK)
     .map((row) => row.m.id);
