@@ -25,6 +25,12 @@ const LABELS: Record<PlayerField, { label: string; hint: string; unlocks: string
   maxHp: { label: 'Max HP', hint: 'เช่น 4200', unlocks: 'มอนตีเราแรงแค่ไหน' },
   castSeconds: { label: 'วินาทีต่อร่าย', hint: 'เช่น 1.5', unlocks: 'EXP/ชม.' },
   maxHits: { label: 'ฆ่าได้ภายใน (ที)', hint: 'เช่น 5', unlocks: 'ตัดตัวที่สู้นาน' },
+  def: { label: 'DEF', hint: 'เช่น 60', unlocks: 'โดนตีเจ็บแค่ไหน' },
+  vit: { label: 'VIT', hint: 'เช่น 30', unlocks: 'DEF และยาฟื้นมากขึ้น' },
+  potionId: { label: 'ยา', hint: '', unlocks: 'ยาที่ใช้' },
+  potions: { label: 'ถือยากี่ขวด', hint: 'เช่น 200', unlocks: 'ยาพอทั้งคืนไหม' },
+  walkSeconds: { label: 'เดินหามอน (วิ/ตัว)', hint: 'เช่น 3', unlocks: 'ว่าง = คิดจากแมพ' },
+  maxWeight: { label: 'น้ำหนักสูงสุด', hint: 'เช่น 5030', unlocks: 'ถือยาได้กี่ขวด' },
 };
 
 export default function ToolNumbers({
@@ -88,8 +94,8 @@ export default function ToolNumbers({
             <input
               className="mono"
               type="number"
-              inputMode={field === 'castSeconds' ? 'decimal' : 'numeric'}
-              step={field === 'castSeconds' ? 0.1 : undefined}
+              inputMode={field === 'castSeconds' || field === 'walkSeconds' ? 'decimal' : 'numeric'}
+              step={field === 'castSeconds' || field === 'walkSeconds' ? 0.1 : undefined}
               placeholder={labels?.[field]?.hint ?? LABELS[field].hint}
               value={draft[field] ?? ''}
               onChange={(e) => update(field, e.target.value)}

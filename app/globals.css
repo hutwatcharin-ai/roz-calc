@@ -2729,6 +2729,20 @@ a.cashlist__row:hover { background: var(--panel-2); }
 }
 .farmbar__chev { flex: none; color: var(--cyan); font: 600 15px/1 var(--font-sarabun), sans-serif; white-space: nowrap; }
 .farm-filters { margin-top: 12px; }
+/* Overnight survival group (19 Oct 2026): HP, DEF, VIT, potions, walk. */
+.farmbar__survive {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--pink);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: 0 0 10px rgba(255, 61, 154, .18);
+}
+.farmbar__group { margin: 0 0 10px; color: var(--dim); font: 400 13px/1.5 var(--font-sarabun), sans-serif; }
+.farmbar__group strong { color: var(--pink); }
+.farmbar__potions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.farmbar__potions img { image-rendering: pixelated; }
+.farmbar__price { color: var(--faint); font: 400 12px/1 var(--font-mono), ui-monospace, monospace; }
 .farmplan { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
 .farmplan__card { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
 .farmplan__top { display: flex; align-items: center; gap: 10px; min-width: 0; }

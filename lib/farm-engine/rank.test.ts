@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { rankMaps } from './rank';
-import { caster, mob, nobody, place, world } from './fixtures';
+import { caster, mob, nobody, noSurvival, place, world } from './fixtures';
 
 const at50 = { level: 50 };
 
@@ -91,9 +91,12 @@ describe('zeny mode', () => {
     expect(rankMaps(data, caster(), 'zeny', at50).blocked[0].blockers?.[0].reason).toBe('unknown_flee');
   });
 
-  it('counts an MVP on the map for safety even though it never earns', () => {
+  it('tags an MVP on the map instead of judging the map by it', () => {
+    // Met now and then, not farmed (19 Oct 2026). It used to take the map out.
     const data = world([mob(1), mob(2, { isMvp: true, flee95: 500, perKill: 1000 })], [place('a', [[1, 20], [2, 1]])]);
-    expect(rankMaps(data, caster(), 'zeny', at50).ranked).toEqual([]);
+    const { ranked } = rankMaps(data, caster(), 'zeny', at50);
+    expect(ranked).toHaveLength(1);
+    expect(ranked[0].tags.bosses).toEqual(['mob 2']);
   });
 
   it('keeps the safe channel when another copy of the map is not', () => {
@@ -108,7 +111,7 @@ describe('zeny mode', () => {
 });
 
 describe('level mode', () => {
-  const melee = { style: 'melee' as const, level: 50, damage: 500, perSecond: 2, hit: 200, flee: null };
+  const melee = { ...noSurvival, style: 'melee' as const, level: 50, damage: 500, perSecond: 2, hit: 200, flee: null };
 
   it('ranks by density tapered by level distance without numbers', () => {
     const data = world([mob(1, { level: 50, baseExp: 100 })], [place('a', [[1, 10]])]);
@@ -153,6 +156,41 @@ describe('afk mode', () => {
 
   it('turns kill time into EXP per hour', () => {
     expect(rankMaps(world([mob(1)], [place('a', [[1, 20]])]), caster(), 'afk', at50).ranked[0].perHour).toBeCloseTo(180000, 3);
+  });
+
+  it('adds the walk to the next monster to every kill', () => {
+    // Two seconds a kill plus two of walking: half the EXP an hour.
+    const walking = rankMaps(world([mob(1)], [place('a', [[1, 20]])]), caster({ walkSeconds: 2 }), 'afk', at50);
+    expect(walking.ranked[0].perHour).toBeCloseTo(90000, 3);
+  });
+
+  it('works the walk out from how thinly the map spreads its monsters', () => {
+    // 20 monsters on 8,000 walkable cells: 400 cells each, 0.5 x sqrt(400) =
+    // 10 cells to the nearest, at 1000/150 cells a second = 1.5 s.
+    const map = { ...place('a', [[1, 20]]), walkCells: 8000 };
+    const { ranked } = rankMaps(world([mob(1)], [map]), caster({ walkSeconds: null }), 'afk', at50);
+    expect(ranked[0].perHour).toBeCloseTo((100 / 3.5) * 3600, 3);
+  });
+
+  it('stops a one-hit weak map from beating a stronger one once walking counts', () => {
+    // Weak: 10 EXP, dies to one cast (1 s). Strong: 60 EXP, four casts (4 s).
+    // Swing time alone: 36,000 vs 54,000 -- but with 3 s of walking each,
+    // 9,000 vs 30,857. The order holds; the gap is what changes.
+    const data = world(
+      [mob(1, { hp: 50, baseExp: 10 }), mob(2, { hp: 200, baseExp: 60 })],
+      [place('weak', [[1, 20]]), place('strong', [[2, 20]])],
+    );
+    const fast = rankMaps(data, caster({ walkSeconds: 0 }), 'afk', at50).ranked;
+    const slow = rankMaps(data, caster({ walkSeconds: 3 }), 'afk', at50).ranked;
+    expect(fast.map((m) => m.code)).toEqual(['strong', 'weak']);
+    expect(slow[0].perHour! / slow[1].perHour!).toBeGreaterThan(fast[0].perHour! / fast[1].perHour!);
+  });
+
+  it('hides maps far under the player when asked', () => {
+    const data = world([mob(1, { level: 10 }), mob(2, { level: 45 })], [place('low', [[1, 20]]), place('mine', [[2, 20]])]);
+    const out = rankMaps(data, caster({ level: 50 }), 'afk', { level: 50, hideLowMaps: true });
+    expect(out.ranked.map((m) => m.code)).toEqual(['mine']);
+    expect(out.hiddenLow).toBe(1);
   });
 
   it('uses the same gate as the zeny mode', () => {

@@ -26,7 +26,17 @@ export type PlayerField =
   // AFK finder, 7 Sep 2026: seconds per cast for a caster (stands in for
   // ASPD), and the longest fight the player will leave the bot in.
   | 'castSeconds'
-  | 'maxHits';
+  | 'maxHits'
+  // Overnight-bot survival, 19 Oct 2026 (lib/farm-engine/survival): DEF and
+  // VIT for the damage taken, the potion the bot drinks (item id) and how
+  // many it carries, and the player's own walking time between kills.
+  | 'def'
+  | 'vit'
+  | 'potionId'
+  | 'potions'
+  | 'walkSeconds'
+  // Max weight from the status window: how many potions fit when the count is blank.
+  | 'maxWeight';
 
 export type PlayerNumbers = Partial<Record<PlayerField, number>>;
 
@@ -35,7 +45,22 @@ export interface StorageLike {
   setItem(key: string, value: string): void;
 }
 
-const FIELDS: PlayerField[] = ['level', 'damagePerHit', 'aspd', 'hit', 'flee', 'maxHp', 'castSeconds', 'maxHits'];
+const FIELDS: PlayerField[] = [
+  'level',
+  'damagePerHit',
+  'aspd',
+  'hit',
+  'flee',
+  'maxHp',
+  'castSeconds',
+  'maxHits',
+  'def',
+  'vit',
+  'potionId',
+  'potions',
+  'walkSeconds',
+  'maxWeight',
+];
 
 function usable(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value) && value > 0;

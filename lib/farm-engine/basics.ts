@@ -52,6 +52,13 @@ export function playerFromNumbers(numbers: PlayerNumbers, style: BotStyle): Play
     perSecond,
     hit: style === 'magic' ? null : numbers.hit ?? null,
     flee: numbers.flee ?? null,
+    maxHp: numbers.maxHp ?? null,
+    def: numbers.def ?? null,
+    vit: numbers.vit ?? null,
+    potionId: numbers.potionId ?? null,
+    potions: numbers.potions ?? null,
+    maxWeight: numbers.maxWeight ?? null,
+    walkSeconds: numbers.walkSeconds ?? null,
   };
 }
 

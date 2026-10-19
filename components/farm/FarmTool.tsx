@@ -18,7 +18,8 @@ import { useRememberedNumbers } from '@/components/ToolNumbers';
 import { useToolUse } from '@/lib/use-tool-use';
 import { useFarmData } from '@/lib/use-farm-data';
 import { useBotStyle } from '@/lib/use-bot-style';
-import { canGate, canRate, playerFromNumbers } from '@/lib/farm-engine/basics';
+import { canRate, playerFromNumbers } from '@/lib/farm-engine/basics';
+import { canSurvive } from '@/lib/farm-engine/survival';
 import { DEFAULT_LEVEL, type PlayerInput } from '@/lib/farm-engine/types';
 
 export type FarmMode = 'level' | 'afk' | 'zeny' | 'plan';
@@ -38,7 +39,7 @@ function missingHints(mode: FarmMode, player: PlayerInput): string[] {
     const unlock = mode === 'zeny' ? 'z/ชม.' : mode === 'plan' ? 'EXP/ชม. และ z/ชม.' : 'EXP/ชม.';
     hints.push(`ดาเมจ + ${speed} → ${unlock}`);
   }
-  if ((mode === 'afk' || mode === 'zeny') && !canGate(player)) hints.push('FLEE → ตัดแมพที่หลบไม่พ้น');
+  if ((mode === 'afk' || mode === 'zeny') && !canSurvive(player)) hints.push('Max HP + FLEE → บอทรอดทั้งคืนไหม ใช้ยากี่ขวด');
   if (player.level === null) hints.push(mode === 'level' ? 'เลเวล → แมพช่วงของคุณ' : 'เลเวล → หักดรอปตามช่วงเลเวล');
   return hints;
 }
@@ -55,7 +56,7 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
 
   useToolUse(
     'leveling_spots',
-    { mode, style, level: numbers.level, damage: numbers.damagePerHit, aspd: numbers.aspd, hit: numbers.hit, flee: numbers.flee },
+    { mode, style, level: numbers.level, damage: numbers.damagePerHit, aspd: numbers.aspd, hit: numbers.hit, flee: numbers.flee, hp: numbers.maxHp, potion: numbers.potionId },
     ready,
   );
 
@@ -74,7 +75,15 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
 
   return (
     <>
-      <FarmNumbersBar style={style} onStyle={setStyle} numbers={numbers} onNumbers={setNumbers} hints={hints} />
+      <FarmNumbersBar
+        style={style}
+        onStyle={setStyle}
+        numbers={numbers}
+        onNumbers={setNumbers}
+        hints={hints}
+        potions={farm.data?.potions ?? []}
+        overnight={mode === 'afk' || mode === 'zeny'}
+      />
 
       <div className="modebar" role="tablist" aria-label="โหมดการค้นหา">
         {MODES.map((m) => (

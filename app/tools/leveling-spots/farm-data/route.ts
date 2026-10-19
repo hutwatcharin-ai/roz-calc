@@ -14,15 +14,31 @@ import { mapDisplayName } from '@/lib/npcs';
 import { riskySkills } from '@/lib/afk-safety';
 import { walkInReason, zenyPerKill } from '@/lib/zeny-farm';
 import { mapRelease } from '@/lib/map-availability';
-import type { FarmData, FarmMonster } from '@/lib/farm-engine/types';
+import type { FarmData, FarmMonster, FarmPotion } from '@/lib/farm-engine/types';
 import { isAbsentFromGame } from '@/lib/game-absent';
+import { POTION_HEAL } from '@/lib/build-calc';
+import afkReference from '@/data/afk-reference.json';
+import itemWeights from '@/data/item-weights.json';
+
+// Walkable cells per map and rAthena attack delay / view range per monster
+// (scripts/build-afk-reference.mjs).
+const WALK = afkReference.walk as Record<string, number>;
+const MOB = afkReference.mob as unknown as Record<string, [number, number | null, number | null, number | null]>;
+const WEIGHT = new Map((itemWeights.items as [number, string, number][]).map(([id, , w]) => [id, w]));
+const HP_POTIONS = [501, 502, 503, 504];
+
+/** A map code the client stores under another name: b_ copies and trailing-underscore channels. */
+function walkCells(code: string): number | null {
+  const lower = code.toLowerCase();
+  return WALK[lower] ?? WALK[lower.replace(/^b_/, '')] ?? WALK[lower.replace(/_$/, '')] ?? null;
+}
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const db = supabaseRead();
 
-  const [drops, items, monsters, spawns, names, skills, canonical] = await Promise.all([
+  const [drops, items, monsters, spawns, names, skills, canonical, potionPrices] = await Promise.all([
     fetchAllRows<{ monster_id: number; item_id: number; rate: number | null }>((from, to) =>
       db.from('monster_drops').select('monster_id, item_id, rate').order('monster_id').order('item_id').range(from, to),
     ),
@@ -40,10 +56,12 @@ export async function GET() {
       is_aggressive: boolean | null;
       flee_95: number | null;
       hit_100: number | null;
+      atk_min: number | null;
+      atk_max: number | null;
     }>((from, to) =>
       db
         .from('monsters')
-        .select('id, name_en, level, hp, base_exp, image_url, is_mvp, is_aggressive, flee_95, hit_100')
+        .select('id, name_en, level, hp, base_exp, image_url, is_mvp, is_aggressive, flee_95, hit_100, atk_min, atk_max')
         .order('id')
         .range(from, to),
     ),
@@ -59,6 +77,7 @@ export async function GET() {
       db.from('monster_skills').select('monster_id, skill_name').order('monster_id').order('skill_name').range(from, to),
     ),
     getMapCanonical(),
+    db.from('items').select('id, buy_price').in('id', HP_POTIONS),
   ]);
 
   const failed = [drops, items, monsters, spawns, names, skills].find((result) => result.error);
@@ -68,6 +87,7 @@ export async function GET() {
   }
 
   const itemById = new Map((items.data ?? []).map((item) => [item.id, item]));
+  const buyOf = new Map((potionPrices.data ?? []).map((row) => [row.id, row.buy_price]));
   const nameOf = new Map((names.data ?? []).map((row) => [row.map_code, row.map_display_name]));
 
   const skillsOf = new Map<number, string[]>();
@@ -136,6 +156,11 @@ export async function GET() {
           }
         : null,
       risks: riskySkills(skillsOf.get(row.id) ?? []),
+      atk: row.atk_min !== null && row.atk_max !== null && row.atk_max > 0 ? (row.atk_min + row.atk_max) / 2 : null,
+      attackDelay: MOB[row.id]?.[0] ?? null,
+      viewRange: MOB[row.id]?.[1] ?? null,
+      walkSpeed: MOB[row.id]?.[2] ?? null,
+      attackRange: MOB[row.id]?.[3] ?? null,
     };
   }
 
@@ -171,6 +196,7 @@ export async function GET() {
       name: nameOf.get(code) ?? mapDisplayName(code) ?? code,
       image: mapImage(code)?.src ?? null,
       spawns: [...byMonster].map(([id, amount]) => ({ id, amount })),
+      walkCells: walkCells(code),
     })),
     excluded: {
       mvp: standing.filter((m) => m.isMvp).length,
@@ -183,6 +209,17 @@ export async function GET() {
       ratedDrops: (drops.data ?? []).filter((drop) => drop.rate !== null).length,
       totalDrops: (drops.data ?? []).length,
     },
+    potions: HP_POTIONS.map((id): FarmPotion => {
+      const item = itemById.get(id);
+      return {
+        id,
+        name: item?.name_en ?? String(id),
+        icon: item?.icon_url ?? null,
+        heal: POTION_HEAL[id].amount,
+        price: buyOf.get(id) ?? null,
+        weight: WEIGHT.get(id) ?? null,
+      };
+    }),
   };
 
   return Response.json(data, { headers: { 'cache-control': 'public, s-maxage=3600', 'x-robots-tag': 'noindex' } });

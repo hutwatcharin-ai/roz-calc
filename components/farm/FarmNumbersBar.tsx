@@ -13,13 +13,16 @@
 
 import { useState } from 'react';
 import ToolNumbers from '@/components/ToolNumbers';
-import type { PlayerField, PlayerNumbers } from '@/lib/player-numbers';
-import type { BotStyle } from '@/lib/farm-engine/types';
+import { writePlayerNumbers, type PlayerField, type PlayerNumbers } from '@/lib/player-numbers';
+import type { BotStyle, FarmPotion } from '@/lib/farm-engine/types';
 
 export const BAR_FIELDS: Record<BotStyle, PlayerField[]> = {
   melee: ['level', 'damagePerHit', 'aspd', 'hit', 'flee'],
   magic: ['level', 'damagePerHit', 'castSeconds', 'flee'],
 };
+
+/** The overnight modes' second group: what decides whether the bot lives till morning. */
+export const SURVIVAL_FIELDS: PlayerField[] = ['maxHp', 'def', 'vit', 'potions', 'maxWeight', 'walkSeconds'];
 
 function summary(style: BotStyle, numbers: PlayerNumbers): string[] {
   const parts = [style === 'magic' ? 'สายเวท' : 'สายตี'];
@@ -29,6 +32,8 @@ function summary(style: BotStyle, numbers: PlayerNumbers): string[] {
   if (style === 'magic' && numbers.castSeconds !== undefined) parts.push(`${numbers.castSeconds} วิ/ร่าย`);
   if (style === 'melee' && numbers.hit !== undefined) parts.push(`HIT ${numbers.hit}`);
   if (numbers.flee !== undefined) parts.push(`FLEE ${numbers.flee}`);
+  if (numbers.maxHp !== undefined) parts.push(`HP ${numbers.maxHp}`);
+  if (numbers.def !== undefined) parts.push(`DEF ${numbers.def}`);
   return parts;
 }
 
@@ -38,6 +43,8 @@ export default function FarmNumbersBar({
   numbers,
   onNumbers,
   hints,
+  potions,
+  overnight,
 }: {
   style: BotStyle;
   onStyle: (style: BotStyle) => void;
@@ -45,9 +52,21 @@ export default function FarmNumbersBar({
   onNumbers: (next: PlayerNumbers) => void;
   /** What filling in more would unlock in the mode on screen. */
   hints: string[];
+  /** HP potions to pick from; empty until the payload loads. */
+  potions: FarmPotion[];
+  /** The mode on screen leaves a bot overnight: show the survival group. */
+  overnight: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const filled = BAR_FIELDS[style].some((field) => numbers[field] !== undefined);
+  const filled = [...BAR_FIELDS[style], ...SURVIVAL_FIELDS].some((field) => numbers[field] !== undefined);
+
+  function pickPotion(id: number | null) {
+    const next = { ...numbers };
+    if (id === null) delete next.potionId;
+    else next.potionId = id;
+    onNumbers(next);
+    writePlayerNumbers(typeof window === 'undefined' ? null : window.localStorage, next);
+  }
 
   if (!expanded) {
     return (
@@ -113,10 +132,43 @@ export default function FarmNumbersBar({
           damagePerHit: style === 'magic' ? { label: 'ดาเมจต่อร่าย', hint: 'เช่น 900', unlocks: 'ต่อชั่วโมง' } : { label: 'ดาเมจต่อที', hint: 'เช่น 400', unlocks: 'ต่อชั่วโมง' },
           aspd: { unlocks: 'ต่อชั่วโมง' },
           castSeconds: { unlocks: 'ต่อชั่วโมง' },
-          flee: { unlocks: 'ตัดแมพที่หลบไม่พ้น' },
+          flee: { unlocks: 'มันตีเราโดนแค่ไหน' },
         }}
         note="ทุกช่องไม่บังคับ ใช้ร่วมกันทั้ง 4 โหมด"
       />
+      {overnight && (
+        <div className="farmbar__survive">
+          <p className="farmbar__group">
+            <strong>บอทรอดทั้งคืนไหม</strong> · กรอก Max HP (กับดาเมจ, {style === 'magic' ? 'วินาทีต่อร่าย' : 'ASPD'}, FLEE ด้านบน)
+            แล้วเว็บจะคิดจากดาเมจที่โดนตีจริงแทนการหลบอย่างเดียว
+          </p>
+          <ToolNumbers
+            fields={SURVIVAL_FIELDS}
+            numbers={numbers}
+            onChange={onNumbers}
+            labels={{
+              maxHp: { unlocks: 'รอดไหม' },
+              def: { label: 'DEF', unlocks: 'ตามหน้าต่างสเตตัส' },
+            }}
+            note="DEF ว่าง = คิดเฉพาะ DEF จากเลเวลกับ VIT · ถือยา ว่าง = เต็มครึ่งหนึ่งของน้ำหนักสูงสุด (เกินครึ่งเลือดไม่ฟื้นเอง) · ว่างทั้งคู่ = ไม่จำกัด"
+          />
+          <div className="farmbar__potions" role="radiogroup" aria-label="ยาที่บอทใช้">
+            <span className="toolnumbers__label">ยาที่บอทกิน</span>
+            <label className="cvtoggle">
+              <input type="radio" name="farm-potion" checked={numbers.potionId === undefined} onChange={() => pickPotion(null)} />
+              ไม่ใช้ยา
+            </label>
+            {potions.map((p) => (
+              <label key={p.id} className="cvtoggle">
+                <input type="radio" name="farm-potion" checked={numbers.potionId === p.id} onChange={() => pickPotion(p.id)} />
+                {p.icon && <img src={p.icon} alt="" width={18} height={18} />}
+                {p.name}
+                {p.price !== null && <span className="farmbar__price">{p.price.toLocaleString('en-US')}z</span>}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
       <button type="button" className="btn" style={{ marginTop: 8 }} onClick={() => setExpanded(false)}>
         เสร็จ
       </button>

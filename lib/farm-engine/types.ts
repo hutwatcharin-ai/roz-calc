@@ -35,6 +35,16 @@ export interface FarmMonster {
   perKill: number;
   best: { name: string; icon: string | null; category: string | null; value: number } | null;
   risks: RiskySkill[];
+  /** Average of the physical attack range; null when the table has none. */
+  atk: number | null;
+  /** ms between its attacks, from rAthena (classic RO); 0 never attacks (plants); null when rAthena has no such monster. */
+  attackDelay: number | null;
+  /** Cells an aggressive one sees a player from (rAthena view range); null when unknown. */
+  viewRange: number | null;
+  /** ms it takes to walk one cell (rAthena); null when unknown. */
+  walkSpeed: number | null;
+  /** Cells it attacks from (rAthena); null when unknown. */
+  attackRange: number | null;
 }
 
 export interface FarmSpawn {
@@ -49,6 +59,18 @@ export interface FarmMap {
   name: string;
   image: string | null;
   spawns: FarmSpawn[];
+  /** Walkable cells, counted from the map's .gat in the client; null when the client has no file under this code. */
+  walkCells: number | null;
+}
+
+/** An HP potion the bot can carry: what it heals before VIT, what it costs, what it weighs. */
+export interface FarmPotion {
+  id: number;
+  name: string;
+  icon: string | null;
+  heal: number;
+  price: number | null;
+  weight: number | null;
 }
 
 export interface FarmData {
@@ -59,6 +81,7 @@ export interface FarmData {
   /** closedMaps: walk-in maps left out because they are not open on Global yet. */
   excluded: { mvp: number; solo: number; closedMaps: number };
   coverage: { pricedItems: number; totalItems: number; ratedDrops: number; totalDrops: number };
+  potions: FarmPotion[];
 }
 
 export type BotStyle = 'melee' | 'magic';
@@ -72,6 +95,18 @@ export interface PlayerInput {
   /** Melee only; null for magic. */
   hit: number | null;
   flee: number | null;
+  /** The survival model's inputs (lib/farm-engine/survival); all optional. */
+  maxHp: number | null;
+  /** DEF as the status window shows it. */
+  def: number | null;
+  vit: number | null;
+  /** The HP potion the bot drinks, by item id, and how many it carries. */
+  potionId: number | null;
+  potions: number | null;
+  /** Max weight from the status window; sizes the potion stack when the count is blank. */
+  maxWeight: number | null;
+  /** Seconds the bot walks between kills; null works it out from the map. */
+  walkSeconds: number | null;
 }
 
 /** A monster standing on a map, with its count (0 when unknown). */

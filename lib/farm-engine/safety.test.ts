@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { mapBlockers, mapTags } from './safety';
-import { mob } from './fixtures';
+import { mob, noSurvival } from './fixtures';
 import type { MapRow, PlayerInput } from './types';
 
 const player = (over: Partial<PlayerInput> = {}): PlayerInput => ({
+  ...noSurvival,
   style: 'melee',
   level: null,
   damage: 500,

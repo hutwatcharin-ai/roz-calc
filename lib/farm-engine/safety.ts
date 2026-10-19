@@ -1,28 +1,26 @@
-// "Will the bot survive the night here?" -- one answer for both overnight modes.
+// The fallback gate for the two overnight modes, used when the player has
+// given FLEE but not enough for the damage model (lib/farm-engine/survival):
+// a map is out when a monster the bot farms lands hits past the AFK dodge cap,
+// or has no FLEE figure to judge by.
 //
-// A map is out when anything standing on it, MVP included, lands hits past the
-// AFK dodge cap, or has no FLEE figure to judge by. Slow kills and misses do
-// not remove a map: they lower its per-hour figure, which says so already.
-// Checked against real data on 11 Sep 2026: adding the hit and hit-count
-// rules left the top three unchanged for weak, mid and strong characters.
+// It used to count everything standing on the map, MVP included. An MVP or a
+// one-at-a-time spawn is met now and then, not farmed (owner, 19 Oct 2026):
+// it now only tags the map (mapTags.bosses), the way the ranking already
+// treated it.
 
 import { afkVerdict, type SkillRisk } from '../afk-safety';
+import type { Blocker } from './survival';
 import type { MapRow, PlayerInput } from './types';
 
-export interface Blocker {
-  id: number;
-  name: string;
-  reason: 'dodge' | 'unknown_flee';
-  /** % it lands on the player; null when its FLEE is unknown. */
-  theirHitPct: number | null;
-}
+export type { Blocker } from './survival';
 
-export function mapBlockers(met: MapRow[], player: PlayerInput): Blocker[] | null {
+/** farmed: the monsters the bot fights (basics.farmedOn), not MVPs or solo spawns. */
+export function mapBlockers(farmed: MapRow[], player: PlayerInput): Blocker[] | null {
   if (player.flee === null) return null;
   // An unknown aggression flag counts as aggressive, as in the AFK rule.
-  const aggroKinds = met.filter((row) => row.m.isAggressive !== false).length;
+  const aggroKinds = farmed.filter((row) => row.m.isAggressive !== false).length;
   const blockers: Blocker[] = [];
-  for (const row of met) {
+  for (const row of farmed) {
     const verdict = afkVerdict({
       style: player.style,
       monster: {
@@ -47,6 +45,8 @@ export function mapBlockers(met: MapRow[], player: PlayerInput): Blocker[] | nul
 export interface MapTags {
   aggressiveKinds: number;
   risks: { risk: SkillRisk; names: string[] }[];
+  /** MVPs and one-at-a-time spawns on the map: met now and then, not farmed, not judged. */
+  bosses: string[];
 }
 
 const RISK_ORDER: SkillRisk[] = ['summons', 'locks', 'explodes', 'transforms'];
@@ -63,5 +63,6 @@ export function mapTags(met: MapRow[]): MapTags {
   return {
     aggressiveKinds: met.filter((row) => row.m.isAggressive === true).length,
     risks: RISK_ORDER.filter((risk) => names.has(risk)).map((risk) => ({ risk, names: names.get(risk) as string[] })),
+    bosses: [...new Set(met.filter((row) => row.m.isMvp || row.m.solo).map((row) => row.m.name))],
   };
 }

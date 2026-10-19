@@ -2,7 +2,8 @@
 
 // หาเงิน: where a bot collects zeny overnight and survives. Same gate and
 // cards as the AFK mode; the figure is zeny from drops sold to an NPC, after
-// the level drop factor, counting only drops a night would actually see.
+// the level drop factor, counting only drops a night would actually see, less
+// what the potions cost.
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
@@ -10,29 +11,28 @@ import Caveat from '@/components/Caveat';
 import ItemIcon from '@/components/ItemIcon';
 import RankedMaps from './RankedMaps';
 import BlockedMaps from './BlockedMaps';
-import { MapFilters } from './AfkView';
-import { commonestBlocker, mapCardTags, mobsFigure, small, whole } from './card-helpers';
+import { DEFAULT_FILTERS } from './AfkView';
+import { MapFilters, OvernightSummary, RateCaveat, SurvivalCaveat, type OvernightFilters } from './OvernightParts';
+import { blockerText, mapCardTags, mobsFigure, small, survivalFigures, whole } from './card-helpers';
 import type { ViewProps } from './LevelView';
 import { rankMaps, type RankedMap } from '@/lib/farm-engine/rank';
 import { topEarners } from '@/lib/farm-engine/plan';
 import { canGate, canRate } from '@/lib/farm-engine/basics';
+import { canSurvive } from '@/lib/farm-engine/survival';
 import { NIGHT_HOURS, STEADY_DROPS_PER_NIGHT } from '@/lib/farm-engine/types';
-import { DODGE_CAP_RELAXED, DODGE_CAP_STRICT } from '@/lib/afk-safety';
-import { KILL_RATE_DISCLAIMER } from '@/lib/kills-per-hour';
 
 const EARNERS_OPEN = 12;
 const EARNERS_SHOWN = 60;
 
 export default function ZenyView({ data, player, level }: ViewProps) {
-  const [cleanOnly, setCleanOnly] = useState(false);
-  const [noRiskOnly, setNoRiskOnly] = useState(false);
-  const { ranked, blocked } = useMemo(
-    () => rankMaps(data, player, 'zeny', { level, cleanOnly, noRiskOnly }),
-    [data, player, level, cleanOnly, noRiskOnly],
+  const [filters, setFilters] = useState<OvernightFilters>(DEFAULT_FILTERS);
+  const { ranked, blocked, hiddenLow } = useMemo(
+    () => rankMaps(data, player, 'zeny', { level, ...filters, hideLowMaps: filters.hideLow }),
+    [data, player, level, filters],
   );
   const earners = useMemo(() => topEarners(data, EARNERS_SHOWN, player.level), [data, player.level]);
   const rate = canRate(player);
-  const gate = canGate(player);
+  const judged = canSurvive(player) || canGate(player);
 
   const toCard = (map: RankedMap) => ({
     code: map.code,
@@ -41,12 +41,13 @@ export default function ZenyView({ data, player, level }: ViewProps) {
     channels: map.channels,
     headline:
       rate && map.perHour !== null
-        ? { label: 'ได้ราว', value: `${whole(map.perHour)}z`, unit: '/ชม.' }
+        ? { label: map.survival?.potionCostPerHour ? 'หักค่ายาแล้ว ได้ราว' : 'ได้ราว', value: `${whole(map.perHour)}z`, unit: '/ชม.' }
         : { label: 'เฉลี่ยตัวละ', value: `${small(map.avgPerKill)}z` },
-    stats:
-      rate && map.perHour !== null
-        ? [{ label: `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`, value: `${whole(map.perHour * NIGHT_HOURS)}z` }, mobsFigure(map)]
-        : [mobsFigure(map)],
+    stats: [
+      ...(rate && map.perHour !== null ? [{ label: `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`, value: `${whole(map.perHour * NIGHT_HOURS)}z` }] : []),
+      mobsFigure(map),
+      ...survivalFigures(map),
+    ],
     monsters: map.top.map((t) => {
       const m = data.monsters[t.id];
       return { id: t.id, name: m.name, sprite: m.sprite, note: `${small(t.value)}z ×${t.amount}` };
@@ -54,41 +55,31 @@ export default function ZenyView({ data, player, level }: ViewProps) {
     tags: mapCardTags(map),
   });
 
-  const blocker = commonestBlocker(blocked);
-
   return (
     <>
-      <p className="farm-summary">
-        {gate ? (
-          <>
-            ปล่อยบอทได้ทั้งคืน <strong>{ranked.length}</strong> แมพ · ตัดออก <strong>{blocked.length}</strong> แมพ เพราะมีมอนที่คุณหลบไม่พ้น
-          </>
-        ) : (
-          <>
-            เรียงตามเงินที่มอนในแมพดรอป · <strong>กรอก FLEE</strong> แล้วจะตัดแมพที่หลบไม่พ้นออก
-          </>
-        )}
-        {player.level === null && <> · ยังไม่ได้หักดรอปตามเลเวล (กรอกเลเวลด้านบน)</>}
-        <span className="farm-summary__rule">
-          {' '}
-          · ไม่รวม {data.excluded.closedMaps} แมพที่ยังไม่เปิดในเซิร์ฟ · ไม่นับ MVP {data.excluded.mvp} ตัว และมอนที่เกิดทีละตัว {data.excluded.solo} ตัว
-        </span>
-      </p>
+      <OvernightSummary
+        player={player}
+        ranked={ranked.length}
+        blocked={blocked.length}
+        hiddenLow={hiddenLow}
+        data={data}
+        unrated={player.level === null ? 'เรียงตามเงินที่มอนในแมพดรอป · ยังไม่ได้หักดรอปตามเลเวล (กรอกเลเวลด้านบน)' : 'เรียงตามเงินที่มอนในแมพดรอป'}
+      />
 
-      <MapFilters cleanOnly={cleanOnly} noRiskOnly={noRiskOnly} onClean={setCleanOnly} onNoRisk={setNoRiskOnly} />
+      <MapFilters filters={filters} onChange={setFilters} canHideLow={player.level !== null} />
 
       {ranked.length === 0 ? (
         <div className="card farm-state">
           <p>
-            {gate && blocker
-              ? `ไม่มีแมพไหนที่หลบได้ครบทุกตัวด้วย FLEE ${player.flee} ติดบ่อยสุดที่ ${blocker} ลองเช็คค่า FLEE หรือเปิดดูแมพที่ถูกตัด`
+            {judged && blocked.length > 0
+              ? `ไม่มีแมพไหนที่บอทอยู่รอดทั้งคืน ตัวอย่าง: ${blocked[0].name} — ${blockerText((blocked[0].blockers ?? [])[0])} ลองเลือกยา เพิ่มจำนวนยา หรือเช็คค่าที่กรอก`
               : 'ไม่มีแมพที่ผ่านตัวกรองที่ติ๊กไว้ ลองเอาติ๊กออก'}
           </p>
         </div>
       ) : (
         <RankedMaps maps={ranked} toCard={toCard} idPrefix="farm-zeny" podiumTitle="3 แมพหาเงินที่คุ้มสุด" />
       )}
-      {gate && <BlockedMaps blocked={blocked} />}
+      {judged && <BlockedMaps blocked={blocked} />}
 
       <section className="farm-section" aria-labelledby="farm-earners">
         <h2 id="farm-earners" className="section-title">
@@ -114,14 +105,12 @@ export default function ZenyView({ data, player, level }: ViewProps) {
 
       <Caveat label="คิดยังไง และข้อจำกัดของตัวเลข">
         <p>
-          ไม่กรอกเลข: เรียงตามมูลค่าของที่ดรอปต่อ HP คูณจำนวนตัว · กรอกเลขแล้ว: z/ชม. = เงินเฉลี่ยต่อตัว ÷ เวลาฆ่าเฉลี่ยต่อตัว
+          ไม่กรอกเลข: เรียงตามมูลค่าของที่ดรอปต่อ HP คูณจำนวนตัว · กรอกเลขแล้ว: z/ชม. = เงินเฉลี่ยต่อตัว ÷ (เวลาฆ่า + เวลาเดินหามอน) − ค่ายาต่อชั่วโมง
           โดยบอทตีมอนที่เจอตามสัดส่วนจำนวนตัวในแมพ · นับเฉพาะของที่ทั้งคืน {NIGHT_HOURS} ชม. น่าจะดรอปอย่างน้อย {STEADY_DROPS_PER_NIGHT} ครั้ง ·
           ห่างจากเลเวลคุณเกิน 40 เลเวลดรอปหักครึ่ง ห่าง 20–40 ยังไม่มีใครยืนยัน จึงคิดเต็มพร้อมป้ายเตือน
         </p>
-        <p>
-          แมพถูกตัดเมื่อมีมอนชนิดไหนก็ได้ตีคุณโดนเกิน {DODGE_CAP_RELAXED}% (แมพมีมอนโจมตีก่อนหรือสายเวท: เกิน {DODGE_CAP_STRICT}%) หรือไม่มีค่า FLEE ของมอน ·
-          z/ชม. เป็น{KILL_RATE_DISCLAIMER}
-        </p>
+        <SurvivalCaveat player={player} />
+        <RateCaveat />
         <p>
           ตัวเลขเป็นอย่างน้อยที่สุด: ไอเทมมีราคาขาย {data.coverage.pricedItems.toLocaleString('en-US')} จาก{' '}
           {data.coverage.totalItems.toLocaleString('en-US')} ชิ้น ดรอปมีอัตรา {data.coverage.ratedDrops.toLocaleString('en-US')} จาก{' '}

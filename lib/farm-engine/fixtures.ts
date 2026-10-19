@@ -21,6 +21,11 @@ export const mob = (id: number, over: Partial<FarmMonster> = {}): FarmMonster =>
   perKill: 5,
   best: null,
   risks: [],
+  atk: 100,
+  attackDelay: 1000,
+  viewRange: 10,
+  walkSpeed: 200,
+  attackRange: 1,
   ...over,
 });
 
@@ -29,6 +34,7 @@ export const place = (code: string, spawns: [number, number | null][]): FarmMap 
   name: code,
   image: null,
   spawns: spawns.map(([id, amount]) => ({ id, amount })),
+  walkCells: null,
 });
 
 export const world = (monsters: FarmMonster[], maps: FarmMap[]): FarmData => ({
@@ -36,9 +42,25 @@ export const world = (monsters: FarmMonster[], maps: FarmMap[]): FarmData => ({
   maps,
   excluded: { mvp: 0, solo: 0, closedMaps: 0 },
   coverage: { pricedItems: 0, totalItems: 0, ratedDrops: 0, totalDrops: 0 },
+  potions: [{ id: 501, name: 'Red Potion', icon: null, heal: 45, price: 10, weight: 7 }],
 });
 
-/** A caster never misses: 100 HP at 50 a cast, one cast a second, is two seconds. */
+/** The survival model's inputs left blank: the fallback dodge gate applies. */
+export const noSurvival = {
+  maxHp: null,
+  def: null,
+  vit: null,
+  potionId: null,
+  potions: null,
+  maxWeight: null,
+  walkSeconds: null,
+} as const;
+
+/**
+ * A caster never misses: 100 HP at 50 a cast, one cast a second, is two
+ * seconds. No walking between kills unless a test asks for it, so the kill
+ * time is the whole cycle.
+ */
 export const caster = (over: Partial<PlayerInput> = {}): PlayerInput => ({
   style: 'magic',
   level: null,
@@ -46,7 +68,9 @@ export const caster = (over: Partial<PlayerInput> = {}): PlayerInput => ({
   perSecond: 1,
   hit: null,
   flee: 200,
+  ...noSurvival,
+  walkSeconds: 0,
   ...over,
 });
 
-export const nobody: PlayerInput = { style: 'melee', level: null, damage: null, perSecond: null, hit: null, flee: null };
+export const nobody: PlayerInput = { style: 'melee', level: null, damage: null, perSecond: null, hit: null, flee: null, ...noSurvival };

@@ -13,10 +13,11 @@ import {
   secondsPerKill,
   steadyPerKill,
 } from './basics';
-import { mob } from './fixtures';
+import { mob, noSurvival } from './fixtures';
 import type { FarmMap, PlayerInput } from './types';
 
 const player = (over: Partial<PlayerInput> = {}): PlayerInput => ({
+  ...noSurvival,
   style: 'melee',
   level: null,
   damage: 500,
@@ -38,6 +39,7 @@ describe('population', () => {
     code: 'a',
     name: 'A',
     image: null,
+    walkCells: null,
     spawns: [
       { id: 1, amount: 20 },
       { id: 2, amount: 1 },
@@ -82,9 +84,9 @@ describe('player readiness', () => {
   it('reads melee speed from ASPD and caster speed from seconds per cast', () => {
     // ASPD 150 is exactly one swing a second: 50 / (200 - 150).
     const melee = playerFromNumbers({ damagePerHit: 400, aspd: 150, hit: 290, flee: 260, level: 45 }, 'melee');
-    expect(melee).toEqual({ style: 'melee', level: 45, damage: 400, perSecond: 1, hit: 290, flee: 260 });
+    expect(melee).toEqual({ ...noSurvival, style: 'melee', level: 45, damage: 400, perSecond: 1, hit: 290, flee: 260 });
     const magic = playerFromNumbers({ damagePerHit: 900, castSeconds: 2, hit: 290 }, 'magic');
-    expect(magic).toEqual({ style: 'magic', level: null, damage: 900, perSecond: 0.5, hit: null, flee: null });
+    expect(magic).toEqual({ ...noSurvival, style: 'magic', level: null, damage: 900, perSecond: 0.5, hit: null, flee: null });
   });
 });
 
