@@ -37,7 +37,7 @@ const STOP: Record<BotRun['stop'], string> = {
 const DANGER: Record<string, string> = {
   one_shot: 'ตีทีเดียวเกินเลือดเต็มหลอด',
   burst: 'สู้ตัวเดียวเลือดหายเกินหลอด',
-  followers: 'โจมตีก่อน ไม่ได้ติ๊ก ตามตีไม่เลิกเพราะไม่ได้ตั้งวาร์ป',
+  followers: 'มอนโจมตีก่อนที่ไม่ได้ติ๊กจะเข้ามาตีบอทไม่หยุด บอทไม่ตีมันและไม่ได้ตั้งวาร์ปหนี',
   unknown_atk: 'ไม่มีค่า ATK คิดไม่ได้',
   interrupted: 'ตีขัดร่ายจนแทบร่ายไม่ออก',
 };
@@ -214,7 +214,7 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
               <dd>{whole(run.killsPerHour)} ตัว/ชม.</dd>
             </div>
             <div>
-              <dt>หามอนต่อตัว</dt>
+              <dt>เดินหามอนตัวต่อไป</dt>
               <dd>{run.searchSeconds.toFixed(1)} วิ</dd>
             </div>
             <div>
@@ -223,7 +223,7 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
                 {run.potionsPerHourHigh > 0 ? `${potionRange(run)} ขวด/ชม.` : 'ไม่ต้องใช้ (เลือดฟื้นเองทัน)'}
                 {run.potionsCarried !== null && run.potionsPerHourHigh > 0 ? ` · ถือไป ${whole(run.potionsCarried)} ขวด` : ''}
                 {run.potionsPerHourHigh > run.potionsPerHour && (
-                  <small> ค่าน้อยคือดวงปกติ ค่ามากคือเผื่อชั่วโมงที่โดนติดกันและวาร์ปไม่ทัน เวลาที่บอทอยู่ได้คิดจากค่ามาก</small>
+                  <small> ค่าน้อย = ดวงปกติ · ค่ามาก = เผื่อชั่วโมงที่ดวงไม่ดี โดนตีเข้าติดกัน และวาร์ปหนีไม่ทัน · ชั่วโมงที่บอทอยู่ได้คิดจากค่ามาก</small>
                 )}
               </dd>
             </div>
@@ -231,11 +231,11 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
               <div className="botsetup__wide">
                 <dt>เลือดหายต่อชั่วโมงมาจาก</dt>
                 <dd>
-                  มอนที่ติ๊กตีธรรมดา {whole(run.hurtPerHour.targets)} · โดนรุมตอนสู้ {whole(run.hurtPerHour.crowd)} · สกิลมอน{' '}
+                  มอนที่ติ๊ก (ตีธรรมดา) {whole(run.hurtPerHour.targets)} · มอนอื่นมารุมตอนสู้ {whole(run.hurtPerHour.crowd)} · สกิลมอน{' '}
                   {whole(run.hurtPerHour.skills)}
                   <small>
                     {' '}
-                    เผื่อเพิ่ม: วาร์ปไม่ทัน {whole(run.hurtPerHour.teleportHits)} · โดนติดกัน {whole(run.hurtPerHour.badLuck)}
+                    เผื่อเพิ่มในค่ามาก: วาร์ปหนีไม่ทัน {whole(run.hurtPerHour.teleportHits)} · ดวงไม่ดี โดนตีเข้าติดกันหลายที {whole(run.hurtPerHour.badLuck)}
                   </small>
                 </dd>
               </div>
@@ -256,17 +256,17 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
             )}
             {run.followers.length > 0 && (
               <div className="botsetup__warn">
-                <dt>ตามตี (ไม่ได้ติ๊ก)</dt>
+                <dt>ไม่ได้ติ๊ก แต่จะเข้ามาตีบอท</dt>
                 <dd>
                   {run.followers.map((f) => f.name).join(', ')} ·{' '}
-                  {run.avgFollowers >= 0.05 ? `เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว` : 'ตีแรงเกินค่าวาร์ป บอทวาร์ปหนีก่อนดาเมจเข้าแทบทุกครั้ง เสียเวลาเป็นหลัก (ค่ายามากเผื่อวาร์ปไม่ทัน)'}
+                  {run.avgFollowers >= 0.05 ? `บอทไม่ตีมัน โดนมันรุมตีอยู่เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว จนกว่าจะวาร์ป` : 'ตีแรงกว่าค่าวาร์ปที่ตั้ง เจอเมื่อไรบอทวาร์ปหนีทันที ส่วนใหญ่ไม่โดนดาเมจ แค่เสียเวลา (ค่ายามากเผื่อวาร์ปไม่ทันไว้แล้ว)'}
                 </dd>
               </div>
             )}
           </dl>
         )}
         <p className="muted botsetup__note">
-          คิดจากสูตร ความเร็วตี และสกิลของมอนจาก rAthena (ยังไม่ได้วัดใน Zero) · ยาเป็นช่วง: ดวงปกติ ถึงเผื่อโดนติดกันและวาร์ปไม่ทัน 1 ใน 5 (ประมาณ) · ไม่คิดบอสที่เดินผ่าน · เวลาหามอนไม่รวมกำแพงกับคนแย่งมอน
+          คิดจากสูตร ความเร็วตี และสกิลของมอนจาก rAthena (ยังไม่ได้วัดใน Zero) · ยาเป็นช่วง: ดวงปกติ ถึงเผื่อดวงไม่ดีและวาร์ปหนีไม่ทัน 1 ใน 5 ครั้ง (ประมาณ) · ไม่คิดบอสที่เดินผ่าน · เวลาหามอนไม่รวมกำแพงกับคนแย่งมอน
           · {data.potions.length > 0 ? 'ยาฟื้นตามข้อความในเกม × (100 + VIT×2)%' : ''}
         </p>
       </section>
@@ -335,7 +335,7 @@ function MonsterTicks({
                       {row.m.attackDelay === 0 ? ' · ไม่ตีคน' : aggressive ? ' · โจมตีก่อน' : ''}
                     </small>
                   </span>
-                  {!on && aggressive && <span className="tag tag--risk">จะตามตี</span>}
+                  {!on && aggressive && <span className="tag tag--risk" title="มอนโจมตีก่อนที่ไม่ได้ติ๊ก บอทจะไม่ตีมัน แต่มันจะเข้ามาตีบอทจนกว่าบอทจะวาร์ปหนี">ไม่ติ๊ก = มันมาตีบอท</span>}
                 </label>
               </li>
             );
@@ -381,12 +381,14 @@ function Advice({
     why: `มอนที่ติ๊กตีแรงสุดราว ${whole(hardest)} ต่อที ตั้งเกินนี้นิดเดียว บอทจะไม่หนีมอนที่มาล่า แต่หนีตัวที่แรงกว่า (บอส มอนแชมเปียน มอนที่ไม่ได้ติ๊ก)`,
     apply: { teleportOnDamage: fleeAbove },
   });
-  if (run.followers.length > 0) {
+  // Only followers that stay on the bot: the ones past the damage limit are
+  // already shaken off by the damage teleport.
+  if (run.avgFollowers >= 0.05) {
     const n = Math.max(3, Math.ceil(run.avgFollowers + 2));
     items.push({
       tab: 'พื้นฐาน',
       text: `ใช้ Teleport เมื่อมีมอนสเตอร์ ${n} ตัวขึ้นไปโจมตี`,
-      why: `${run.followers.map((f) => f.name).join(', ')} โจมตีก่อนแต่ไม่ได้ติ๊ก บอทไม่สู้กลับ มันจะตามตีสะสม`,
+      why: `${run.followers.map((f) => f.name).join(', ')} เป็นมอนโจมตีก่อนที่ไม่ได้ติ๊ก บอทจะไม่ตีมัน แต่มันจะเข้ามาตีบอท ยิ่งนานยิ่งมาหลายตัว ตั้งค่านี้ให้บอทวาร์ปหนีเมื่อโดนรุม`,
       apply: { teleportOnMobs: n },
     });
   }
@@ -394,10 +396,15 @@ function Advice({
     items.push({ tab: 'พื้นฐาน', text: 'ใช้ Teleport หากไม่มีการต่อสู้ภายใน 5 วินาที', why: 'มอนที่ติ๊กอยู่ไกล วาร์ปหาใหม่เร็วกว่าเดินไป', apply: { idleTeleport: 5 } });
   }
   if (run.potionsPerHourHigh > 0) {
+    const short = run.potionsCarried !== null && run.potionsCarried < night;
     items.push({
       tab: 'Potion',
-      text: `ใส่ยาที่เลือกไว้ ถือไปราว ${whole(night)} ขวดสำหรับ ${NIGHT_HOURS} ชม.`,
-      why: `บอทใช้ราว ${potionRange(run)} ขวดต่อชั่วโมง คิดจำนวนที่ถือจากค่ามาก เผื่อชั่วโมงที่โดนติดกันและวาร์ปไม่ทัน`,
+      text: short
+        ? `ถือยาเต็มเท่าที่ถือได้ (ราว ${whole(run.potionsCarried as number)} ขวด) บอทอยู่ได้ราว ${run.hours.toFixed(1)} ชม.`
+        : `ใส่ยาที่เลือกไว้ ถือไปราว ${whole(night)} ขวดสำหรับ ${NIGHT_HOURS} ชม.`,
+      why: short
+        ? `อยู่ครบ ${NIGHT_HOURS} ชม. ต้องใช้ราว ${whole(night)} ขวด เกินน้ำหนักที่ถือได้ ลองยาที่ฟื้นเยอะกว่า เพิ่ม DEF/FLEE หรือเลือกแมพที่เบากว่า · บอทใช้ราว ${potionRange(run)} ขวด/ชม. คิดจากค่ามาก`
+        : `บอทใช้ราว ${potionRange(run)} ขวด/ชม. คิดจำนวนที่ถือจากค่ามาก เผื่อชั่วโมงที่ดวงไม่ดีและวาร์ปหนีไม่ทัน`,
     });
   }
   if (Number.isFinite(run.lootHours) && run.lootHours < NIGHT_HOURS) {
@@ -441,7 +448,7 @@ function Advice({
         })}
       </ol>
       <p className="muted botsetup__note">
-        เปลี่ยนค่าในแถบด้านบนแล้วผลข้อ 3 เปลี่ยนตามทันที · ไม่ได้แนะนำแท็บสกิล เพราะแต่ละอาชีพต่างกัน ใช้ &ldquo;ดาเมจต่อครั้ง&rdquo; ที่กรอกแทน
+        เปลี่ยนค่าในแถบด้านบนแล้วผลข้อ 3 เปลี่ยนตามทันที · ไม่ได้แนะนำแท็บสกิล เพราะแต่ละอาชีพต่างกัน ความแรงของเราคิดจากช่อง &ldquo;ดาเมจ&rdquo; ที่กรอกไว้ด้านบน
       </p>
     </section>
   );

@@ -94,7 +94,7 @@ export function blockerText(b: NonNullable<RankedMap['blockers']>[number]): stri
     case 'one_shot':
       return `${b.name} ตีทีเดียวราว ${whole(b.damage ?? 0)} เกินเลือดเต็มหลอด`;
     case 'followers':
-      return `${b.name} โจมตีก่อนแต่ติ๊กแล้วสู้ไม่ไหว ไม่ติ๊กก็ตามตีไม่เลิก (ลองตั้งวาร์ปเมื่อโดนรุม)`;
+      return `${b.name} เป็นมอนโจมตีก่อน ติ๊กให้บอทตีก็สู้ไม่ไหว ไม่ติ๊กมันก็เข้ามาตีบอทไม่หยุด (ลองตั้งวาร์ปเมื่อโดนรุม)`;
     case 'short':
       return `บอทอยู่ได้ไม่ถึงชั่วโมง เลือดกับยาก็หมด`;
   }
@@ -157,8 +157,8 @@ export function botTags(run: BotRun | null, data: { monsters: Record<number, { n
   if (run.followers.length > 0) {
     tags.push({
       tone: 'warn',
-      text: `ไม่ติ๊ก ${run.followers.map((f) => f.name).join(', ')} (ตามตี)`,
-      title: 'มอนโจมตีก่อนที่ไม่ได้ติ๊ก บอทไม่สู้กลับ มันจะเดินตามตีจนกว่าบอทจะวาร์ป',
+      text: `${run.followers.map((f) => f.name).join(', ')} ไม่ได้ติ๊ก แต่จะเข้ามาตีบอท`,
+      title: 'มอนโจมตีก่อนที่ไม่ได้ติ๊ก บอทจะไม่ตีมัน แต่มันจะเข้ามาตีบอทจนกว่าบอทจะวาร์ปหนี',
     });
   }
   if (run.spShortPerHour > 0) {
