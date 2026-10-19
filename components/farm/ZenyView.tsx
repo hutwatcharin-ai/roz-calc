@@ -13,7 +13,7 @@ import RankedMaps from './RankedMaps';
 import BlockedMaps from './BlockedMaps';
 import { DEFAULT_FILTERS } from './AfkView';
 import { MapFilters, OvernightSummary, RateCaveat, SurvivalCaveat, type OvernightFilters } from './OvernightParts';
-import { blockerText, mapCardTags, mobsFigure, small, survivalFigures, whole } from './card-helpers';
+import { blockerText, nightLabel, botFigures, botSetupHref, botTags, mapCardTags, mobsFigure, small, survivalFigures, whole } from './card-helpers';
 import type { ViewProps } from './LevelView';
 import { rankMaps, type RankedMap } from '@/lib/farm-engine/rank';
 import { topEarners } from '@/lib/farm-engine/plan';
@@ -24,11 +24,11 @@ import { NIGHT_HOURS, STEADY_DROPS_PER_NIGHT } from '@/lib/farm-engine/types';
 const EARNERS_OPEN = 12;
 const EARNERS_SHOWN = 60;
 
-export default function ZenyView({ data, player, level }: ViewProps) {
+export default function ZenyView({ data, player, level, bot }: ViewProps) {
   const [filters, setFilters] = useState<OvernightFilters>(DEFAULT_FILTERS);
   const { ranked, blocked, hiddenLow } = useMemo(
-    () => rankMaps(data, player, 'zeny', { level, ...filters, hideLowMaps: filters.hideLow }),
-    [data, player, level, filters],
+    () => rankMaps(data, player, 'zeny', { level, ...filters, hideLowMaps: filters.hideLow, bot }),
+    [data, player, level, filters, bot],
   );
   const earners = useMemo(() => topEarners(data, EARNERS_SHOWN, player.level), [data, player.level]);
   const rate = canRate(player);
@@ -44,15 +44,20 @@ export default function ZenyView({ data, player, level }: ViewProps) {
         ? { label: map.survival?.potionCostPerHour ? 'หักค่ายาแล้ว ได้ราว' : 'ได้ราว', value: `${whole(map.perHour)}z`, unit: '/ชม.' }
         : { label: 'เฉลี่ยตัวละ', value: `${small(map.avgPerKill)}z` },
     stats: [
-      ...(rate && map.perHour !== null ? [{ label: `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`, value: `${whole(map.perHour * NIGHT_HOURS)}z` }] : []),
+      ...(map.bot && map.perHour !== null
+        ? [{ label: nightLabel(map.bot), value: `${whole(map.bot.zeny)}z` }]
+        : rate && map.perHour !== null
+          ? [{ label: `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`, value: `${whole(map.perHour * NIGHT_HOURS)}z` }]
+          : []),
       mobsFigure(map),
-      ...survivalFigures(map),
+      ...(map.bot ? botFigures(map.bot) : survivalFigures(map)),
     ],
     monsters: map.top.map((t) => {
       const m = data.monsters[t.id];
       return { id: t.id, name: m.name, sprite: m.sprite, note: `${small(t.value)}z ×${t.amount}` };
     }),
-    tags: mapCardTags(map),
+    tags: [...botTags(map.bot, data), ...mapCardTags(map)],
+    action: { href: botSetupHref(map.code, map.bot), label: 'ดูค่าเซ็ตบอทแมพนี้' },
   });
 
   return (

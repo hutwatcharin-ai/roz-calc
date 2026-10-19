@@ -127,7 +127,17 @@ export function walkSeconds(map: FarmMap, mobs: number, player: PlayerInput, ctx
   return (0.5 * Math.sqrt(cellsPerMob)) / WALK_CELLS_PER_SECOND;
 }
 
-export type BlockReason = 'burst' | 'runs_out' | 'unknown_atk' | 'interrupted' | 'dodge' | 'unknown_flee';
+export type BlockReason =
+  | 'burst'
+  | 'runs_out'
+  | 'unknown_atk'
+  | 'interrupted'
+  | 'dodge'
+  | 'unknown_flee'
+  // lib/farm-engine/bot-session
+  | 'one_shot'
+  | 'followers'
+  | 'short';
 
 export interface Blocker {
   id: number;

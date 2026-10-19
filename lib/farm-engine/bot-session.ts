@@ -407,8 +407,11 @@ export function bestTargets(
   window: number,
   score: (run: BotRun) => number,
   dropFactor?: (m: FarmMonster) => number,
+  /** Kinds worth ticking for what they give; aggressive ones are always tried too. */
+  useful: (m: FarmMonster) => boolean = () => true,
 ): { best: BotRun | null; worst: BotRun | null } {
   const kinds = farmedOn(map, data.monsters)
+    .filter((row) => useful(row.m) || (row.m.isAggressive !== false && row.m.attackDelay !== 0))
     .sort((a, b) => b.amount - a.amount)
     .slice(0, MAX_PICK)
     .map((row) => row.m.id);

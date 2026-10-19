@@ -15,6 +15,8 @@ import { useState } from 'react';
 import ToolNumbers from '@/components/ToolNumbers';
 import { writePlayerNumbers, type PlayerField, type PlayerNumbers } from '@/lib/player-numbers';
 import type { BotStyle, FarmPotion } from '@/lib/farm-engine/types';
+import type { BotSettings } from '@/lib/farm-engine/bot-session';
+import BotSettingsPanel from './BotSettingsPanel';
 
 export const BAR_FIELDS: Record<BotStyle, PlayerField[]> = {
   melee: ['level', 'damagePerHit', 'aspd', 'hit', 'flee'],
@@ -22,7 +24,7 @@ export const BAR_FIELDS: Record<BotStyle, PlayerField[]> = {
 };
 
 /** The overnight modes' second group: what decides whether the bot lives till morning. */
-export const SURVIVAL_FIELDS: PlayerField[] = ['maxHp', 'def', 'vit', 'potions', 'maxWeight', 'walkSeconds'];
+export const SURVIVAL_FIELDS: PlayerField[] = ['maxHp', 'maxSp', 'def', 'vit', 'potions', 'maxWeight', 'weightNow'];
 
 function summary(style: BotStyle, numbers: PlayerNumbers): string[] {
   const parts = [style === 'magic' ? 'สายเวท' : 'สายตี'];
@@ -45,6 +47,8 @@ export default function FarmNumbersBar({
   hints,
   potions,
   overnight,
+  bot,
+  onBot,
 }: {
   style: BotStyle;
   onStyle: (style: BotStyle) => void;
@@ -56,6 +60,8 @@ export default function FarmNumbersBar({
   potions: FarmPotion[];
   /** The mode on screen leaves a bot overnight: show the survival group. */
   overnight: boolean;
+  bot: BotSettings;
+  onBot: (next: BotSettings) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const filled = [...BAR_FIELDS[style], ...SURVIVAL_FIELDS].some((field) => numbers[field] !== undefined);
@@ -150,7 +156,7 @@ export default function FarmNumbersBar({
               maxHp: { unlocks: 'รอดไหม' },
               def: { label: 'DEF', unlocks: 'ตามหน้าต่างสเตตัส' },
             }}
-            note="DEF ว่าง = คิดเฉพาะ DEF จากเลเวลกับ VIT · ถือยา ว่าง = เต็มครึ่งหนึ่งของน้ำหนักสูงสุด (เกินครึ่งเลือดไม่ฟื้นเอง) · ว่างทั้งคู่ = ไม่จำกัด"
+            note="ตัวเลขจากหน้าต่างสเตตัส · DEF ว่าง = คิดเฉพาะ DEF จากเลเวลกับ VIT · ถือยา ว่าง = เต็มครึ่งหนึ่งของน้ำหนักสูงสุด"
           />
           <div className="farmbar__potions" role="radiogroup" aria-label="ยาที่บอทใช้">
             <span className="toolnumbers__label">ยาที่บอทกิน</span>
@@ -167,6 +173,10 @@ export default function FarmNumbersBar({
               </label>
             ))}
           </div>
+          <p className="farmbar__group" style={{ marginTop: 14 }}>
+            <strong>ตั้งค่าบอท</strong> · ตามหน้าต่างบอทในเกม เครื่องมือเลือกมอนที่ควรติ๊กให้เอง
+          </p>
+          <BotSettingsPanel value={bot} onChange={onBot} />
         </div>
       )}
       <button type="button" className="btn" style={{ marginTop: 8 }} onClick={() => setExpanded(false)}>

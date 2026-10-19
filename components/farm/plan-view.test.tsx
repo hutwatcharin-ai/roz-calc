@@ -2,6 +2,7 @@
 // directly -- since the integration the plan reads the same farm-data every
 // mode reads, so there is no per-plan query left to stub.
 
+import { DEFAULT_BOT } from '@/lib/farm-engine/bot-session';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
@@ -25,7 +26,7 @@ async function mountPlan(player: PlayerInput = nobody) {
   await act(async () => {
     root.render(
       <FarmPlanProvider>
-        <PlanView data={DATA} player={player} level={50} levelGuessed />
+        <PlanView data={DATA} player={player} level={50} levelGuessed bot={DEFAULT_BOT} />
       </FarmPlanProvider>,
     );
   });

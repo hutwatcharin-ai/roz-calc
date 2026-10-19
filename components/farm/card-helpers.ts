@@ -3,6 +3,7 @@
 
 import { SKILL_RISK_LABELS, SKILL_RISK_WHY } from '@/lib/afk-safety';
 import type { RankedMap } from '@/lib/farm-engine/rank';
+import { MAX_RUN_HOURS, type BotRun } from '@/lib/farm-engine/bot-session';
 import { NIGHT_HOURS } from '@/lib/farm-engine/types';
 import type { CardFigure, CardTag } from './MapCard';
 
@@ -84,7 +85,69 @@ export function blockerText(b: NonNullable<RankedMap['blockers']>[number]): stri
       return `อยู่ได้ราว ${hoursText(b.hours ?? 0)} เลือดกับยาก็หมด (${b.name} ตีเจ็บสุด)`;
     case 'interrupted':
       return `${b.name} ตีขัดร่ายจนแทบร่ายไม่ออก`;
+    case 'one_shot':
+      return `${b.name} ตีทีเดียวราว ${whole(b.damage ?? 0)} เกินเลือดเต็มหลอด`;
+    case 'followers':
+      return `${b.name} โจมตีก่อนแต่ติ๊กแล้วสู้ไม่ไหว ไม่ติ๊กก็ตามตีไม่เลิก (ลองตั้งวาร์ปเมื่อโดนรุม)`;
+    case 'short':
+      return `บอทอยู่ได้ไม่ถึงชั่วโมง เลือดกับยาก็หมด`;
   }
+}
+
+const STOP_TEXT: Record<BotRun['stop'], string> = {
+  hp: 'ยาหมด',
+  weight: 'กระเป๋าเต็ม',
+  none: '',
+};
+
+/** What a bot run adds to an overnight card. */
+export function botFigures(run: BotRun | null): CardFigure[] {
+  if (!run) return [];
+  const out: CardFigure[] = [];
+  out.push(
+    run.stop === 'none'
+      ? { label: 'บอทอยู่ได้', value: `${MAX_RUN_HOURS}+`, unit: ' ชม.' }
+      : { label: `อยู่ได้ (${STOP_TEXT[run.stop]})`, value: run.hours.toFixed(1), unit: ' ชม.' },
+  );
+  if (run.potionsPerHour > 0) out.push({ label: 'ยาที่ใช้', value: small(run.potionsPerHour), unit: ' ขวด/ชม.' });
+  if (Number.isFinite(run.lootHours) && run.lootHours < MAX_RUN_HOURS) out.push({ label: 'กระเป๋าถึงที่ตั้งใน', value: run.lootHours.toFixed(1), unit: ' ชม.' });
+  if (run.teleportsPerHour >= 1) out.push({ label: 'วาร์ป', value: whole(run.teleportsPerHour), unit: ' ครั้ง/ชม.' });
+  return out;
+}
+
+/** "ทั้งคืน 8 ชม." or, when the bot goes home first, how long it lasted. */
+export function nightLabel(run: BotRun): string {
+  return run.hours < NIGHT_HOURS ? `จนบอทกลับเมือง (${run.hours.toFixed(1)} ชม.) ราว` : `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`;
+}
+
+/** The bot setup page for a map, with the ticked set carried over. */
+export function botSetupHref(code: string, run: BotRun | null): string {
+  const q = new URLSearchParams({ map: code });
+  if (run) q.set('tick', run.targets.join(','));
+  return `/tools/bot-setup?${q.toString()}`;
+}
+
+/** The bot run's own warnings, as card tags. */
+export function botTags(run: BotRun | null, data: { monsters: Record<number, { name: string }> }): CardTag[] {
+  if (!run) return [];
+  const tags: CardTag[] = [
+    {
+      tone: 'info',
+      text: `ติ๊ก ${run.targets.map((id) => data.monsters[id]?.name ?? id).join(', ')}`,
+      title: 'มอนที่ควรติ๊กในแท็บมอนสเตอร์ของบอท ชุดนี้ได้มากสุดทั้งคืน',
+    },
+  ];
+  if (run.followers.length > 0) {
+    tags.push({
+      tone: 'warn',
+      text: `ไม่ติ๊ก ${run.followers.map((f) => f.name).join(', ')} (ตามตี)`,
+      title: 'มอนโจมตีก่อนที่ไม่ได้ติ๊ก บอทไม่สู้กลับ มันจะเดินตามตีจนกว่าบอทจะวาร์ป',
+    });
+  }
+  if (run.spShortPerHour > 0) {
+    tags.push({ tone: 'warn', text: 'SP ไม่พอวาร์ป', title: `วาร์ปด้วย Creamy ใช้ SP มากกว่าที่ฟื้นเองราว ${whole(run.spShortPerHour)} ต่อชั่วโมง` });
+  }
+  return tags;
 }
 
 /** The monster that took out the most maps, for an empty list's explanation. */

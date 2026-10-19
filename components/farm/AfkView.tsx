@@ -10,7 +10,7 @@ import Caveat from '@/components/Caveat';
 import RankedMaps from './RankedMaps';
 import BlockedMaps from './BlockedMaps';
 import { MapFilters, OvernightSummary, RateCaveat, SurvivalCaveat, type OvernightFilters } from './OvernightParts';
-import { blockerText, mapCardTags, mobsFigure, survivalFigures, whole } from './card-helpers';
+import { blockerText, nightLabel, botFigures, botSetupHref, botTags, mapCardTags, mobsFigure, survivalFigures, whole } from './card-helpers';
 import type { ViewProps } from './LevelView';
 import { rankMaps, type RankedMap } from '@/lib/farm-engine/rank';
 import { canGate, canRate } from '@/lib/farm-engine/basics';
@@ -19,11 +19,11 @@ import { NIGHT_HOURS } from '@/lib/farm-engine/types';
 
 export const DEFAULT_FILTERS: OvernightFilters = { cleanOnly: false, noRiskOnly: false, hideLow: true };
 
-export default function AfkView({ data, player, level }: ViewProps) {
+export default function AfkView({ data, player, level, bot }: ViewProps) {
   const [filters, setFilters] = useState<OvernightFilters>(DEFAULT_FILTERS);
   const { ranked, blocked, hiddenLow } = useMemo(
-    () => rankMaps(data, player, 'afk', { level, ...filters, hideLowMaps: filters.hideLow }),
-    [data, player, level, filters],
+    () => rankMaps(data, player, 'afk', { level, ...filters, hideLowMaps: filters.hideLow, bot }),
+    [data, player, level, filters, bot],
   );
   const rate = canRate(player);
   const judged = canSurvive(player) || canGate(player);
@@ -38,15 +38,20 @@ export default function AfkView({ data, player, level }: ViewProps) {
         ? { label: 'ได้ราว', value: whole(map.perHour), unit: ' EXP/ชม.' }
         : { label: 'เฉลี่ยตัวละ', value: whole(map.avgPerKill), unit: ' EXP' },
     stats: [
-      ...(rate && map.perHour !== null ? [{ label: `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`, value: whole(map.perHour * NIGHT_HOURS), unit: ' EXP' }] : []),
+      ...(map.bot && map.perHour !== null
+        ? [{ label: nightLabel(map.bot), value: whole(map.bot.exp), unit: ' EXP' }]
+        : rate && map.perHour !== null
+          ? [{ label: `ทั้งคืน ${NIGHT_HOURS} ชม. ราว`, value: whole(map.perHour * NIGHT_HOURS), unit: ' EXP' }]
+          : []),
       mobsFigure(map),
-      ...survivalFigures(map),
+      ...(map.bot ? botFigures(map.bot) : survivalFigures(map)),
     ],
     monsters: map.top.map((t) => {
       const m = data.monsters[t.id];
       return { id: t.id, name: m.name, sprite: m.sprite, note: `Lv${m.level ?? '?'} · ${whole(t.value)} EXP ×${t.amount}` };
     }),
-    tags: mapCardTags(map),
+    tags: [...botTags(map.bot, data), ...mapCardTags(map)],
+    action: { href: botSetupHref(map.code, map.bot), label: 'ดูค่าเซ็ตบอทแมพนี้' },
   });
 
   return (

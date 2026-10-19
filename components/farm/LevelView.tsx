@@ -11,6 +11,7 @@ import { mapCardTags, mobsFigure, whole } from './card-helpers';
 import { rankMaps, type RankedMap } from '@/lib/farm-engine/rank';
 import { canRate } from '@/lib/farm-engine/basics';
 import { KILL_RATE_DISCLAIMER } from '@/lib/kills-per-hour';
+import type { BotSettings } from '@/lib/farm-engine/bot-session';
 import type { FarmData, PlayerInput } from '@/lib/farm-engine/types';
 
 export interface ViewProps {
@@ -18,6 +19,8 @@ export interface ViewProps {
   player: PlayerInput;
   level: number;
   levelGuessed: boolean;
+  /** The built-in bot's settings (overnight modes). */
+  bot: BotSettings;
 }
 
 export default function LevelView({ data, player, level, levelGuessed }: ViewProps) {

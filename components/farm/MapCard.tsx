@@ -34,6 +34,8 @@ export interface MapCardProps {
   stats: CardFigure[];
   monsters: CardMonster[];
   tags: CardTag[];
+  /** A follow-up link under the card, e.g. the bot setup for this map. */
+  action?: { href: string; label: string };
 }
 
 function Figure({ figure, money }: { figure: CardFigure; money?: boolean }) {
@@ -63,7 +65,7 @@ export function CardTags({ tags }: { tags: CardTag[] }) {
   );
 }
 
-export default function MapCard({ rank, big, code, name, image, channels, headline, stats, monsters, tags }: MapCardProps) {
+export default function MapCard({ rank, big, code, name, image, channels, headline, stats, monsters, tags, action }: MapCardProps) {
   const href = `/database/maps/${encodeURIComponent(code)}`;
   return (
     <li className={`farmcard${big ? ' farmcard--big' : ''}`} data-rank={rank <= 3 ? rank : undefined}>
@@ -110,6 +112,11 @@ export default function MapCard({ rank, big, code, name, image, channels, headli
             </li>
           ))}
         </ul>
+        {action && (
+          <Link href={action.href} className="farmcard__action">
+            {action.label} ›
+          </Link>
+        )}
       </div>
     </li>
   );

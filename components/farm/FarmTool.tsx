@@ -18,6 +18,7 @@ import { useRememberedNumbers } from '@/components/ToolNumbers';
 import { useToolUse } from '@/lib/use-tool-use';
 import { useFarmData } from '@/lib/use-farm-data';
 import { useBotStyle } from '@/lib/use-bot-style';
+import { useBotSettings } from '@/lib/use-bot-settings';
 import { canRate, playerFromNumbers } from '@/lib/farm-engine/basics';
 import { canSurvive } from '@/lib/farm-engine/survival';
 import { DEFAULT_LEVEL, type PlayerInput } from '@/lib/farm-engine/types';
@@ -48,6 +49,7 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
   const [mode, setMode] = useState<FarmMode>(initialMode);
   const [numbers, setNumbers, ready] = useRememberedNumbers();
   const [style, setStyle] = useBotStyle();
+  const [bot, setBot] = useBotSettings();
   const farm = useFarmData();
 
   const player = useMemo(() => playerFromNumbers(numbers, style), [numbers, style]);
@@ -71,7 +73,7 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
   }, [mode, numbers.level]);
 
   const hints = missingHints(mode, player);
-  const viewProps = farm.data ? { data: farm.data, player, level, levelGuessed } : null;
+  const viewProps = farm.data ? { data: farm.data, player, level, levelGuessed, bot } : null;
 
   return (
     <>
@@ -83,6 +85,8 @@ export default function FarmTool({ initialMode, initialLevel }: { initialMode: F
         hints={hints}
         potions={farm.data?.potions ?? []}
         overnight={mode === 'afk' || mode === 'zeny'}
+        bot={bot}
+        onBot={setBot}
       />
 
       <div className="modebar" role="tablist" aria-label="โหมดการค้นหา">

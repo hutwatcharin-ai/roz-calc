@@ -28,7 +28,8 @@ import {
   type DropTag,
 } from './basics';
 import { mapBlockers, mapTags, type Blocker, type MapTags } from './safety';
-import { mapSurvival, survivalContext, walkSeconds, type MapSurvival, type SurvivalContext } from './survival';
+import { canSurvive, mapSurvival, survivalContext, walkSeconds, type MapSurvival, type SurvivalContext } from './survival';
+import { bestTargets, type BotRun, type BotSettings } from './bot-session';
 import { MIN_MOBS, NIGHT_HOURS, type FarmData, type FarmMap, type MapRow, type PlayerInput } from './types';
 
 /** Maps whose monsters average this many levels under the player are hidden by default in the overnight modes. */
@@ -43,6 +44,12 @@ export interface RankOptions {
   noRiskOnly?: boolean;
   /** Overnight modes: hide maps LOW_MAP_GAP+ levels under the player (needs the player's level). */
   hideLowMaps?: boolean;
+  /**
+   * Overnight modes: the bot's settings. With them and enough of the
+   * player's numbers, each map is judged as a run of the built-in bot
+   * (lib/farm-engine/bot-session) on the best set of monsters to tick.
+   */
+  bot?: BotSettings;
 }
 
 export interface RankedMap {
@@ -59,6 +66,8 @@ export interface RankedMap {
   avgLevel: number | null;
   /** The damage model's answer (overnight modes, enough numbers filled in); null otherwise. */
   survival: MapSurvival | null;
+  /** The bot run on the best ticked set (overnight modes with bot settings); the longest failing run when none works. */
+  bot: BotRun | null;
   sortKey: number;
   /** Best contributors; value is the per-kill figure used. */
   top: { id: number; value: number; amount: number }[];
@@ -101,6 +110,7 @@ function scoreMap(
   let perHour: number | null = null;
 
   const overnight = mode !== 'level';
+  if (overnight && opts.bot && canSurvive(player)) return botMap(map, data, player, mode, opts.bot, ctx, farmed, mobs, contributors);
   const survival = overnight ? mapSurvival(map, data, player, ctx) : null;
   const walk = overnight ? walkSeconds(map, mobs, player, ctx) : 0;
 
@@ -151,6 +161,7 @@ function scoreMap(
     perHour,
     avgLevel: levelCount > 0 ? levelSum / levelCount : null,
     survival,
+    bot: null,
     sortKey: perHour !== null ? perHour : mode === 'level' ? density : score,
     top: contributors
       .map((row) => ({ id: row.m.id, value: valueOf.get(row.m.id) ?? 0, amount: row.amount }))
@@ -168,6 +179,84 @@ function scoreMap(
   };
 }
 
+/** Why a bot run is not offered, as the blocked list shows it. */
+function runBlockers(run: BotRun): Blocker[] {
+  if (run.dangers.length > 0) {
+    return run.dangers.map((d) => ({
+      id: d.id,
+      name: d.name,
+      reason: d.kind === 'burst' ? 'burst' : d.kind,
+      theirHitPct: null,
+      damage: d.damage,
+    }));
+  }
+  return [{ id: run.targets[0], name: '', reason: 'short', theirHitPct: null, hours: run.hours }];
+}
+
+/** An overnight map judged as a run of the built-in bot. */
+function botMap(
+  map: FarmMap,
+  data: FarmData,
+  player: PlayerInput,
+  mode: RankMode,
+  bot: BotSettings,
+  ctx: SurvivalContext,
+  farmed: MapRow[],
+  mobs: number,
+  contributors: MapRow[],
+): RankedMap {
+  const zenyMode = mode === 'zeny';
+  const factor = (m: FarmData['monsters'][number]) => dropFactor(player.level, m.level);
+  const { best, worst } = bestTargets(
+    map,
+    data,
+    player,
+    bot,
+    ctx,
+    NIGHT_HOURS,
+    (run) => (zenyMode ? run.zeny : run.exp),
+    factor,
+    (m) => (zenyMode ? m.perKill > 0 : (m.baseExp ?? 0) > 0),
+  );
+  const run = best ?? worst;
+  const picked = run ? farmed.filter((row) => run.targets.includes(row.m.id)) : farmed;
+  const value = (row: MapRow) => (zenyMode ? row.m.perKill * factor(row.m) : row.m.baseExp ?? 0);
+  const count = headcount(picked);
+  let levelSum = 0;
+  let levelCount = 0;
+  for (const row of picked) {
+    if (row.m.level === null) continue;
+    levelSum += row.m.level * row.amount;
+    levelCount += row.amount;
+  }
+  const tagsPresent = new Set(picked.map((row) => dropTag(player.level, row.m.level)).filter((t): t is DropTag => t !== null));
+  return {
+    code: map.code,
+    name: map.name,
+    image: map.image,
+    mobs: count || mobs,
+    avgPerKill: count ? picked.reduce((s, row) => s + value(row) * row.amount, 0) / count : 0,
+    perHour: best ? (zenyMode ? best.zenyPerHour : best.expPerHour) : null,
+    avgLevel: levelCount > 0 ? levelSum / levelCount : null,
+    survival: null,
+    bot: run,
+    sortKey: best ? (zenyMode ? best.zeny : best.exp) : -Infinity,
+    top: picked
+      .map((row) => ({ id: row.m.id, value: value(row), amount: row.amount }))
+      .filter((row) => row.value > 0)
+      .sort((a, b) => b.value * b.amount - a.value * a.amount)
+      .slice(0, 4),
+    blockers: best ? [] : run ? runBlockers(run) : [{ id: 0, name: '', reason: 'short', theirHitPct: null, hours: 0 }],
+    tags: mapTags(metOn(map, data.monsters)),
+    dropTags: zenyMode ? (['halved', 'unconfirmed'] as DropTag[]).filter((t) => tagsPresent.has(t)) : [],
+    fingerprint: contributors
+      .map((row) => `${row.m.id}x${row.amount}`)
+      .sort()
+      .join(','),
+    channels: 1,
+  };
+}
+
 export function rankMaps(
   data: FarmData,
   player: PlayerInput,
@@ -175,7 +264,19 @@ export function rankMaps(
   opts: RankOptions,
 ): { ranked: RankedMap[]; blocked: RankedMap[]; hiddenLow: number } {
   const ctx = survivalContext(data);
-  let scored = data.maps.map((map) => scoreMap(map, data, player, mode, opts, ctx)).filter((m): m is RankedMap => m !== null);
+  // Channel copies hold the same monsters on the same ground: score one and
+  // reuse it (the bot search tries every ticked set, so this halves the work).
+  const seen = new Map<string, RankedMap | null>();
+  let scored = data.maps
+    .map((map) => {
+      const key = `${map.walkCells}|${map.spawns.map((s) => `${s.id}x${s.amount}`).sort().join(',')}`;
+      const hit = seen.get(key);
+      if (hit !== undefined) return hit ? { ...hit, code: map.code, name: map.name, image: map.image } : null;
+      const out = scoreMap(map, data, player, mode, opts, ctx);
+      seen.set(key, out);
+      return out;
+    })
+    .filter((m): m is RankedMap => m !== null);
   let hiddenLow = 0;
   if (opts.hideLowMaps && mode !== 'level' && player.level !== null) {
     const floor = player.level - LOW_MAP_GAP;
