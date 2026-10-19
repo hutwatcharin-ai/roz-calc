@@ -16,12 +16,12 @@ export default function RandomOptionsCard({ lines }: { lines: ResolvedPoolLine[]
   return (
     <details className="rndopt">
       <summary className="rndopt__summary">
-        <span>ออปชั่นสุ่มที่ชิ้นนี้ทอยได้</span>
+        <span>ออปชั่นสุ่มที่ชิ้นนี้มีได้</span>
         <span className="rndopt__count mono">{lines.length} บรรทัด</span>
       </summary>
       <div className="rndopt__body">
         <p className="muted" style={{ marginTop: 0 }}>
-          ดรอปจากมอนสเตอร์ทั่วไป แต่ละบรรทัดทอยได้ตัวเลือกเดียวจากรายการของบรรทัดนั้น
+          ดรอปจากมอนสเตอร์ทั่วไป แต่ละบรรทัดสุ่มได้ตัวเลือกเดียวจากรายการของบรรทัดนั้น
           ชิ้นหนึ่งจึงติดออปชั่นได้ {lines.length} ออปชั่น
         </p>
         {/* The halo tells you how many options a piece rolled before you pick
