@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_BOT, TELEPORT_SP, bestTargets, botRun, searchModel, type BotSettings } from './bot-session';
+import { DEFAULT_BOT, TELEPORT_SP, bestTargets, botRun, hardestHit, searchModel, type BotSettings } from './bot-session';
 import { mob, noSurvival, place, world } from './fixtures';
 import { WALK_CELLS_PER_SECOND } from './survival';
 import type { FarmMap, PlayerInput } from './types';
@@ -36,6 +36,27 @@ describe('searchModel', () => {
 
   it('agrees with the no-teleport walk when the reach is huge', () => {
     expect(searchModel(1 / 400, 1e6).cells).toBeCloseTo(10, 4);
+  });
+});
+
+describe('hardestHit', () => {
+  const nuke = { kind: 3 as const, ratio: 1000, hits: 1, rate: 10000, delay: 5000, hitBonus: 0, share: 1 };
+
+  it('reports the skill hit apart from the normal one', () => {
+    // Both from the top of the ATK range: 120, and 120 x 1000% for the skill.
+    const m = mob(1, { atk: 100, atkMax: 120, skills: [nuke], magicRatio: 1 });
+    expect(hardestHit(m, { hard: 0, soft: 0 }, 1000)).toEqual({ normal: 120, skill: 1200 });
+  });
+
+  it('follows the DEF it is asked about, not the first one it saw', () => {
+    // The parts are cached per monster: a second DEF must not get the first's numbers.
+    const m = mob(1, { atk: 100, atkMax: 100 });
+    expect(hardestHit(m, { hard: 0, soft: 0 }, 1000).normal).toBe(100);
+    expect(hardestHit(m, { hard: 0, soft: 30 }, 1000).normal).toBe(70);
+  });
+
+  it('leaves out a monster that never attacks', () => {
+    expect(hardestHit(mob(1, { atk: 100, attackDelay: 0, skills: [nuke] }), { hard: 0, soft: 0 }, 1000)).toEqual({ normal: 0, skill: 0 });
   });
 });
 

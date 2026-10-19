@@ -245,6 +245,18 @@ function attackParts(m: FarmMonster, def: Defense, fallbackDelay: number): Attac
   return parts;
 }
 
+/** The hardest hit `m` can land after DEF: its normal hit and, separately, its skills. */
+export function hardestHit(m: FarmMonster, def: Defense, fallbackDelay: number): { normal: number; skill: number } {
+  let normal = 0;
+  let skill = 0;
+  for (const p of attackParts(m, def, fallbackDelay)) {
+    if (p.uses <= 0) continue;
+    if (p.skill) skill = Math.max(skill, p.top);
+    else normal = Math.max(normal, p.top);
+  }
+  return { normal, skill };
+}
+
 /** The bot on `map` hunting `targets`, its run measured against a `window` of hours. */
 export function botRun(
   map: FarmMap,

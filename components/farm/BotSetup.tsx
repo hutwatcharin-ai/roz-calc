@@ -23,8 +23,8 @@ import { useFarmData } from '@/lib/use-farm-data';
 import { useBotStyle } from '@/lib/use-bot-style';
 import { useBotSettings } from '@/lib/use-bot-settings';
 import { farmedOn, metOn, playerFromNumbers } from '@/lib/farm-engine/basics';
-import { MAX_RUN_HOURS, bestTargets, botRun, type BotRun, type BotSettings } from '@/lib/farm-engine/bot-session';
-import { canSurvive, damageTaken, playerDefense, survivalContext } from '@/lib/farm-engine/survival';
+import { MAX_RUN_HOURS, bestTargets, botRun, hardestHit, type BotRun, type BotSettings } from '@/lib/farm-engine/bot-session';
+import { canSurvive, playerDefense, survivalContext } from '@/lib/farm-engine/survival';
 import { NIGHT_HOURS, type FarmData } from '@/lib/farm-engine/types';
 import { potionRange, small, whole } from './card-helpers';
 
@@ -367,10 +367,16 @@ function Advice({
 }) {
   const map = data.maps.find((m) => m.code === mapCode)!;
   const def = playerDefense(player);
-  // The hardest hit any ticked monster can land, after DEF.
-  const hardest = farmedOn(map, data.monsters)
+  // The hardest hit any ticked monster can land, after DEF, its skills
+  // included: a limit under a ticked monster's skill sends the bot away from
+  // the monster it came to hunt each time the skill lands.
+  const ctx = survivalContext(data);
+  const hits = farmedOn(map, data.monsters)
     .filter((row) => run.targets.includes(row.m.id))
-    .reduce((max, row) => Math.max(max, damageTaken({ ...row.m, atk: row.m.atkMax ?? row.m.atk }, def) ?? 0), 0);
+    .map((row) => hardestHit(row.m, def, ctx.attackDelay));
+  const normalTop = Math.max(0, ...hits.map((h) => h.normal));
+  const skillTop = Math.max(0, ...hits.map((h) => h.skill));
+  const hardest = Math.max(normalTop, skillTop);
   const fleeAbove = Math.ceil((hardest + 1) / 10) * 10;
   const night = Math.ceil(run.potionsPerHourHigh * NIGHT_HOURS);
   // apply: the settings change that makes the run above use this advice.
@@ -378,7 +384,7 @@ function Advice({
   items.push({
     tab: 'พื้นฐาน',
     text: `ใช้ Teleport เมื่อได้รับ Damage มากกว่า ${whole(fleeAbove)}`,
-    why: `มอนที่ติ๊กตีแรงสุดราว ${whole(hardest)} ต่อที ตั้งเกินนี้นิดเดียว บอทจะไม่หนีมอนที่มาล่า แต่หนีตัวที่แรงกว่า (บอส มอนแชมเปียน มอนที่ไม่ได้ติ๊ก)`,
+    why: `มอนที่ติ๊กตีแรงสุดราว ${whole(hardest)} ต่อที${skillTop > normalTop ? ` (ตีธรรมดา ${whole(normalTop)} · สกิลมอน ${whole(skillTop)})` : ''} ตั้งเกินนี้นิดเดียว บอทจะไม่หนีมอนที่มาล่า แต่หนีตัวที่แรงกว่า (บอส มอนแชมเปียน มอนที่ไม่ได้ติ๊ก)`,
     apply: { teleportOnDamage: fleeAbove },
   });
   // Only followers that stay on the bot: the ones past the damage limit are

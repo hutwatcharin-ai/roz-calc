@@ -1,6 +1,9 @@
 // The ranked list every map mode shares: the top three large, four to ten
-// compact, the rest folded away, forty at most.
+// compact, the rest folded away, forty at most. The folded ones are built
+// only when opened: thirty cards nobody has asked for were a good part of
+// the wait on switching modes on a phone (owner, 19 Oct 2026).
 
+import { useState } from 'react';
 import MapCard, { type MapCardProps } from './MapCard';
 import type { RankedMap } from '@/lib/farm-engine/rank';
 
@@ -21,6 +24,7 @@ export default function RankedMaps({
   idPrefix: string;
   podiumTitle: string;
 }) {
+  const [moreOpen, setMoreOpen] = useState(false);
   const shown = maps.slice(0, SHOWN);
   if (shown.length === 0) return null;
   const card = (map: RankedMap, rank: number, big = false) => <MapCard key={map.code} {...toCard(map)} rank={rank} big={big} />;
@@ -41,11 +45,11 @@ export default function RankedMaps({
           </h2>
           <ol className="farm-maplist">{shown.slice(PODIUM, OPEN).map((map, i) => card(map, PODIUM + i + 1))}</ol>
           {shown.length > OPEN && (
-            <details className="farm-more">
+            <details className="farm-more" onToggle={(e) => e.currentTarget.open && setMoreOpen(true)}>
               <summary>
                 ดูอันดับ {OPEN + 1}–{shown.length}
               </summary>
-              <ol className="farm-maplist">{shown.slice(OPEN).map((map, i) => card(map, OPEN + i + 1))}</ol>
+              {moreOpen && <ol className="farm-maplist">{shown.slice(OPEN).map((map, i) => card(map, OPEN + i + 1))}</ol>}
             </details>
           )}
         </section>
