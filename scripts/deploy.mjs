@@ -364,9 +364,10 @@ async function main() {
   const text = previewOnly({ shortSha, subject, filesChanged, path, verified, purged, minutes });
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  // The chat is the same one Coolify's own notifications go to (set up 3 Sep,
-  // bot @kidkrob_bot). A chat id is not a secret, so it has a default; the
-  // token is, and lives only in .env.local.
+  // The owner's chat, through rozerothai's own bot @rozerothaibot since
+  // 19 Oct 2026 (before that @kidkrob_bot, shared with Coolify). A chat id is
+  // not a secret, so it has a default; the token is, and lives only in
+  // .env.local (and the repo's Actions secrets, for scripts/telegram-report).
   const chat = process.env.TELEGRAM_CHAT_ID ?? '6242848323';
   if (!token || !chat) {
     console.log('\n--- Telegram not configured, message would have been ---\n' + text);
