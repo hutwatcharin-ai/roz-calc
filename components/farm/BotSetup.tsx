@@ -255,7 +255,8 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
               <div className="botsetup__warn">
                 <dt>ตามตี (ไม่ได้ติ๊ก)</dt>
                 <dd>
-                  {run.followers.map((f) => f.name).join(', ')} · เฉลี่ย {run.avgFollowers.toFixed(1)} ตัว
+                  {run.followers.map((f) => f.name).join(', ')} ·{' '}
+                  {run.avgFollowers >= 0.05 ? `เฉลี่ย ${run.avgFollowers.toFixed(1)} ตัว` : 'ตีแรงเกินค่าวาร์ป บอทวาร์ปหนีทันทีที่โดนตี'}
                 </dd>
               </div>
             )}
