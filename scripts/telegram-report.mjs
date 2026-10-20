@@ -1,7 +1,7 @@
 // rozerothai.com's own Telegram bot (@rozerothaibot, 19 Oct 2026): what the
 // owner used to go and look up by hand, sent to them instead.
 //
-//   node scripts/telegram-report.mjs daily    yesterday: visitors against the
+//   node scripts/telegram-report.mjs daily    yesterday (sent 14:00): visitors against the
 //                                              same weekday a week before, top
 //                                              pages, searches that found nothing
 //   node scripts/telegram-report.mjs weekly   Search Console: last 7 days against
@@ -92,6 +92,16 @@ async function daily() {
   const [users, sessions, views] = pick('now');
   const [usersB, sessionsB, viewsB] = pick('before');
 
+  // GA4 fills a day in over about half a day (19 Oct 2026: at 07:00 the day
+  // before stopped at 19:00 and tapered off). The report runs at 14:00 for
+  // that; if the last hours are still missing, say so rather than send a drop.
+  const hours = await ga4(token, {
+    dateRanges: [{ startDate: 'yesterday', endDate: 'yesterday' }],
+    dimensions: [{ name: 'hour' }],
+    metrics: [{ name: 'activeUsers' }],
+  });
+  const lastHour = Math.max(-1, ...hours.filter((r) => r.mets[0] > 0).map((r) => Number(r.dims[0])));
+
   const pages = await ga4(token, {
     dateRanges: [{ startDate: 'yesterday', endDate: 'yesterday' }],
     dimensions: [{ name: 'pagePath' }],
@@ -145,6 +155,7 @@ async function daily() {
     `📊 <b>rozerothai.com</b> · ${day}`,
     `คนเข้า <b>${fmt(users)}</b>${delta(users, usersB)} · เซสชัน ${fmt(sessions)}${delta(sessions, sessionsB)} · เปิดหน้า ${fmt(views)}${delta(views, viewsB)}`,
     `<i>เทียบกับวันเดียวกันสัปดาห์ก่อน</i>`,
+    ...(lastHour < 23 ? [`⚠️ ตัวเลขยังไม่ครบ: Google ประมวลผลถึงแค่ ${lastHour + 1}:00 น. ยอดจริงจะสูงกว่านี้`] : []),
     '',
     '<b>หน้าที่คนเข้าเยอะสุด</b>',
     ...pages.map((r, i) => `${i + 1}. ${esc(r.dims[0])} — ${fmt(r.mets[0])}`),

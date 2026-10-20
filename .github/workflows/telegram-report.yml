@@ -3,7 +3,7 @@ name: Telegram reports
 # @rozerothaibot (scripts/telegram-report.mjs). Times are UTC; Thailand is +7.
 on:
   schedule:
-    - cron: '0 2 * * *' # daily 09:00 Thailand: yesterday's visitors
+    - cron: '0 7 * * *' # daily 14:00 Thailand: yesterday's visitors, once GA4 has filled the day in
     - cron: '15 2 * * 1' # Monday 09:15 Thailand: the week on Google Search
   workflow_dispatch:
     inputs:
@@ -30,6 +30,6 @@ jobs:
           GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then mode="${{ github.event.inputs.mode }}"
-          elif [ "${{ github.event.schedule }}" = "0 2 * * *" ]; then mode=daily
+          elif [ "${{ github.event.schedule }}" = "0 7 * * *" ]; then mode=daily
           else mode=weekly; fi
           node scripts/telegram-report.mjs "$mode"
