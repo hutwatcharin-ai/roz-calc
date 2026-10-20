@@ -39,7 +39,7 @@ function esc(s: string): string {
 }
 
 /** A public image as SVG: GIF pixels as rectangles, PNG embedded. Empty when missing. */
-function picture(publicPath: string | null | undefined, x: number, y: number, size: number): string {
+export function picture(publicPath: string | null | undefined, x: number, y: number, size: number): string {
   if (!publicPath || publicPath.includes('..')) return '';
   const file = path.join(ROOT, 'public', publicPath);
   if (!fs.existsSync(file)) return '';
@@ -86,10 +86,12 @@ function picture(publicPath: string | null | undefined, x: number, y: number, si
   }
 }
 
-const C = { bg: '#0b0724', panel: '#120a2e', cyan: '#3DE8FF', pink: '#FF3D9A', yellow: '#FFE53D', text: '#F4F2FF', dim: '#B3A9E6', faint: '#8F86C4' };
+export const C = { bg: '#0b0724', panel: '#120a2e', cyan: '#3DE8FF', pink: '#FF3D9A', yellow: '#FFE53D', text: '#F4F2FF', dim: '#B3A9E6', faint: '#8F86C4' };
 
-function text(x: number, y: number, s: string, size: number, fill: string, opts: { bold?: boolean; anchor?: 'start' | 'end' | 'middle'; spacing?: number } = {}): string {
-  return `<text x="${x}" y="${y}" font-family="Sarabun" font-size="${size}" font-weight="${opts.bold ? 700 : 400}" fill="${fill}"${opts.anchor ? ` text-anchor="${opts.anchor}"` : ''}${opts.spacing ? ` letter-spacing="${opts.spacing}"` : ''}>${esc(s)}</text>`;
+export function text(x: number, y: number, s: string, size: number, fill: string, opts: { bold?: boolean; anchor?: 'start' | 'end' | 'middle'; spacing?: number } = {}): string {
+  // SARA AM (ำ) is split into NIKHAHIT + SARA AA: resvg drew the whole
+  // ligature on top of the next letter ("ทำเควส" on the news card, 20 Oct 2026).
+  return `<text x="${x}" y="${y}" font-family="Sarabun" font-size="${size}" font-weight="${opts.bold ? 700 : 400}" fill="${fill}"${opts.anchor ? ` text-anchor="${opts.anchor}"` : ''}${opts.spacing ? ` letter-spacing="${opts.spacing}"` : ''}>${esc(s.replace(/ำ/g, 'ํา'))}</text>`;
 }
 
 // Short words for an empty slot box (54 px wide).
@@ -98,7 +100,7 @@ const EMPTY_LABEL: Record<Slot, string> = {
   armor: 'เสื้อ', garment: 'คลุม', footgear: 'รองเท้า', accessory_1: 'ประดับ', accessory_2: 'ประดับ',
 };
 
-function clip(s: string, n: number): string {
+export function clip(s: string, n: number): string {
   return s.length > n ? `${s.slice(0, n - 1)}…` : s;
 }
 
@@ -182,8 +184,13 @@ export function buildCardSvg(build: Build, id: string, footer?: string): string 
 
 /** The card as PNG bytes. */
 export async function buildCardPng(build: Build, id: string, footer?: string): Promise<Uint8Array> {
+  return svgToPng(buildCardSvg(build, id, footer));
+}
+
+/** Any 1200x630 card SVG drawn with the helpers above, as PNG bytes. */
+export async function svgToPng(svg: string): Promise<Uint8Array> {
   await init();
-  const resvg = new Resvg(buildCardSvg(build, id, footer), {
+  const resvg = new Resvg(svg, {
     font: { fontBuffers: fonts, defaultFontFamily: 'Sarabun', loadSystemFonts: false },
     fitTo: { mode: 'original' },
   });
