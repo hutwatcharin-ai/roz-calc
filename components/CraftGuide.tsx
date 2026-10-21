@@ -29,7 +29,10 @@ export default function CraftGuide({
   placeholder = 'ค้นชื่อของที่ได้ หรือวัตถุดิบ',
   title,
   calc = false,
+  shown,
 }: {
+  /** Unconfirmed recipes shown without ticking the box, still labelled. */
+  shown?: (r: Recipe) => boolean;
   kind: CraftKind;
   /** Which column the reader looks things up in. See sortRecipes. */
   sortBy?: 'product' | 'material';
@@ -69,8 +72,10 @@ export default function CraftGuide({
         {children}
         <section className="card rguide" style={{ marginTop: 16 }}>
           <h2 className="section-title">{title ?? `สูตรทั้งหมด (${confirmed.length})`}</h2>
-          {total > 8 && <RecipeFilter group={kind} facets={facets} placeholder={placeholder} unsureCount={unconfirmed.length} />}
-          <RecipeCards group={kind} rows={[...confirmed, ...unconfirmed]} tagsOf={tagsOf} badgeOf={badgeOf} calc={calc} />
+          {total > 8 && (
+            <RecipeFilter group={kind} facets={facets} placeholder={placeholder} unsureCount={unconfirmed.filter((r) => !shown?.(r)).length} />
+          )}
+          <RecipeCards group={kind} rows={[...confirmed, ...unconfirmed]} tagsOf={tagsOf} badgeOf={badgeOf} calc={calc} shown={shown} />
           {total <= 8 && unconfirmed.length > 0 && (
             <p className="muted" style={{ marginTop: 10 }}>มีอีก {unconfirmed.length} สูตรที่ยังไม่ยืนยันกับ Zero ไม่ได้แสดง</p>
           )}

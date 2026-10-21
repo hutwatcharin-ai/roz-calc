@@ -29,8 +29,11 @@ export default function RecipeCards({
   badgeOf,
   group,
   calc = false,
+  shown,
 }: {
   rows: Recipe[];
+  /** Unconfirmed recipes that show without the filter's box ticked. */
+  shown?: (r: Recipe) => boolean;
   /** Filter values this recipe belongs to (see RecipeFilter's facets). */
   tagsOf?: (r: Recipe) => string[];
   /** A short label in the card's corner, e.g. "Lv.3 Cookbook" or "อาวุธ Lv 2". */
@@ -49,14 +52,15 @@ export default function RecipeCards({
         const effect = food ? foodText(food) : null;
         const badge = badgeOf?.(r) ?? null;
         const q = [r.product.name, effect, ...r.materials.map((m) => m.name)].filter(Boolean).join(' ').toLowerCase();
+        const hide = r.confidence !== 'both' && !shown?.(r);
         return (
           <article
             key={r.id}
             className={'rcard' + (r.confidence === 'both' ? '' : ' is-unsure')}
             data-tags={(tagsOf?.(r) ?? []).join(' ')}
             data-q={q}
-            data-unsure={r.confidence === 'both' ? undefined : '1'}
-            hidden={r.confidence !== 'both'}
+            data-unsure={hide ? '1' : undefined}
+            hidden={hide}
           >
             <header className="rcard__head">
               <Link className="rcard__product" href={itemHref(r.product.id, r.product.category ?? null)}>

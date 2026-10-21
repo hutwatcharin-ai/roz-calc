@@ -58,8 +58,13 @@ const stem = (code: string) => code.replace(/_[abz]$/, '');
 export function groupMapVariants(maps: MapRow[], monstersByMap: Map<string, MapSpawns>): MapGroup[] {
   const info = maps.map((map) => {
     const spawns = monstersByMap.get(map.map_code);
-    const ids = spawns ? [...spawns.keys()].sort((a, b) => a - b) : [];
     const counted = spawns instanceof Map;
+    // A species listed with a count of 0 does not spawn there. Ztw Ricecake
+    // sits on 88 _z maps that way, which kept maz_d01_z apart from
+    // prt_maze01 with nothing else between them (owner, 21 Oct 2026).
+    const ids = spawns
+      ? [...spawns.keys()].filter((id) => !counted || (spawns as Map<number, number>).get(id) !== 0).sort((a, b) => a - b)
+      : [];
     const species = ids.join(',');
     const full = counted ? ids.map((id) => `${id}x${(spawns as Map<number, number>).get(id)}`).join(',') : species;
     return { code: map.map_code, name: map.map_display_name ?? map.map_code, species, full, counted, size: ids.length };

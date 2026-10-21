@@ -44,16 +44,23 @@ const statsOf = (r: Recipe) => {
 };
 const tagsOf = (r: Recipe) => [...statsOf(r), bookLevel(r) != null ? `b${bookLevel(r)}` : ''].filter(Boolean);
 const badgeOf = (r: Recipe) => (bookLevel(r) != null ? `ตำรา Lv ${bookLevel(r)}` : null);
+// Lv.6-10 Cookbook recipes are rAthena's alone (prontera lists none), so they
+// sat behind the "unconfirmed" box and the page read as if cooking stopped at
+// Lv.5. Players cook Lv.6 dishes in game now (owner, 21 Oct 2026), and
+// rAthena matched prontera on 28 of the 30 Lv.1-5 recipes, so these show by
+// default, each still labelled unconfirmed.
+const HIGH_BOOK = (r: Recipe) => (bookLevel(r) ?? 0) >= 6;
 
 export default async function CookingPage() {
   const confirmed = recipesOfKind('cook').filter((r) => r.confidence === 'both');
+  const listed = recipesOfKind('cook').filter((r) => r.confidence === 'both' || HIGH_BOOK(r));
   const calc = await craftCalcConfig({
     id: 'cook',
     recipes: recipesOfKind('cook'),
     unknownRateNote: 'ยังไม่รู้โอกาสทำอาหารสำเร็จ ยอดนี้คิดแบบทำติดทุกครั้ง ควรเผื่อวัตถุดิบไว้อีก',
   });
   const src = await materialSources([...COOKBOOKS.map((b) => b.id), ...KITS.map((k) => k.id)]);
-  const books = [...new Set(confirmed.map(bookLevel).filter((l): l is number => l != null))].sort((a, b) => a - b);
+  const books = [...new Set(listed.map(bookLevel).filter((l): l is number => l != null))].sort((a, b) => a - b);
 
   // The strongest confirmed dish for each stat.
   const best = STATS.map((s) => {
@@ -175,18 +182,19 @@ export default async function CookingPage() {
       <CraftGuide
         kind="cook"
         calc
-        title={`สูตรอาหาร (${confirmed.length})`}
+        title={`สูตรอาหาร (${listed.length})`}
+        shown={HIGH_BOOK}
         placeholder="ค้นชื่ออาหาร หรือวัตถุดิบ เช่น Honey"
         tagsOf={tagsOf}
         badgeOf={badgeOf}
         facets={[
           {
             label: 'เพิ่ม',
-            options: STATS.map((s) => ({ value: s, label: s.toUpperCase(), count: confirmed.filter((r) => statsOf(r).includes(s)).length })).filter((o) => o.count > 0),
+            options: STATS.map((s) => ({ value: s, label: s.toUpperCase(), count: listed.filter((r) => statsOf(r).includes(s)).length })).filter((o) => o.count > 0),
           },
           {
             label: 'ตำรา',
-            options: books.map((l) => ({ value: `b${l}`, label: `Lv ${l}`, count: confirmed.filter((r) => bookLevel(r) === l).length })),
+            options: books.map((l) => ({ value: `b${l}`, label: `Lv ${l}`, count: listed.filter((r) => bookLevel(r) === l).length })),
           },
         ]}
         extra={

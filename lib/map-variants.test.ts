@@ -48,6 +48,18 @@ describe('groupMapVariants', () => {
     expect(groups).toHaveLength(2);
   });
 
+  it('folds an event channel whose extra monster spawns 0 (21 Oct 2026)', () => {
+    const counts = new Map<string, Map<number, number>>([
+      ['prt_maze01', new Map([[1095, 40], [1104, 20]])],
+      ['maz_d01_z', new Map([[1095, 40], [1104, 20], [25188, 0]])],
+    ]);
+    const groups = groupMapVariants(
+      maps(['prt_maze01', 'Prontera Labyrinth Forest 1F'], ['maz_d01_z', 'Labyrinth Forest 1F']),
+      counts,
+    );
+    expect(groups).toEqual([{ canonical: 'prt_maze01', variants: ['maz_d01_z'] }]);
+  });
+
   it('keeps the boss room out', () => {
     const groups = groupMapVariants(
       maps(['gef_fild10', 'Orc Village'], ['b_gef_f10', 'Orc Village']),
