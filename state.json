@@ -1,3 +1,25 @@
 {
-  "last": "1562414028867895336"
+  "cursor": {
+    "1562409676228792371": "1562414028867895336"
+  },
+  "posts": [
+    {
+      "id": "1562413745244868622",
+      "file": "posts/2026-10-21-1562413745244868622.md",
+      "title": "[Notice] Ragnarok Zero: Global Scheduled Maintenance Reminder – 22nd October, 2026",
+      "kind": "official",
+      "urgent": true,
+      "at": "2026-10-21",
+      "done": false
+    },
+    {
+      "id": "1562414028867895336",
+      "file": "posts/2026-10-21-1562414028867895336.md",
+      "title": "[Crossover Event] ROZG X RO Lite Arrow Cross Event #3",
+      "kind": "official",
+      "urgent": false,
+      "at": "2026-10-21",
+      "done": false
+    }
+  ]
 }
