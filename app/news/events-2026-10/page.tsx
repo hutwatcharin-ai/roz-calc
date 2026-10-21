@@ -12,6 +12,10 @@
 //     to read a number, the page says so rather than guessing.
 //
 // Pictures come from the same client (scripts/build-event-2026-10-images.py).
+//
+// The RO Lite crossover (EVENT 04) came later, from the official Discord
+// announcement of 21 Oct 2026 (the discord-inbox branch); it runs on its own
+// dates, 19 Oct - 1 Nov, and is played in another game.
 
 import './page.css';
 import Link from 'next/link';
@@ -95,7 +99,7 @@ export default function Events202610() {
       </nav>
 
       <header className="evhero">
-        <p className="evhero__kicker">EVENT · 3 กิจกรรม</p>
+        <p className="evhero__kicker">EVENT · 4 กิจกรรม</p>
         <h1 className="pagehead__title">กิจกรรมเดือนตุลาคม 2569</h1>
         <p className="evhero__date">
           {over ? <span className="tag tag--unknown">จบแล้ว</span> : <span className="evhero__live">กำลังจัด</span>} 1 ต.ค. หลังปิดปรับปรุง – 29 ต.ค. ก่อนปิดปรับปรุง
@@ -104,6 +108,7 @@ export default function Events202610() {
           <li><a href="#baphomet"><img src={`${IMG}/raymond.png`} alt="" width={40} /><span>Baphomet Cult</span><small>ได้หมวก Golden Majestic Goat</small></a></li>
           <li><a href="#amonra"><img src={`${IMG}/amon-ra.png`} alt="" width={56} /><span>The Legend of Amon Ra</span><small>ได้หมวก Sun God&apos;s Hat</small></a></li>
           <li><a href="#kumamon"><img src={`${IMG}/kumamon.png`} alt="" width={46} /><span>Kumamon Collab</span><small>ได้ Kumamon Mask</small></a></li>
+          <li><a href="#rolite"><img src="/images/items/12887.gif" alt="" width={40} /><span>RO Lite × ROZ</span><small>19 ต.ค. – 1 พ.ย. · ได้คูปอง</small></a></li>
         </ul>
         <p className="muted evhero__src">
           ขั้นตอน จำนวนของ และพิกัดทุกจุดในหน้านี้มาจากบทพูดของ NPC และไฟล์นำทางในไคลเอนต์แพทช์ 1 ต.ค. · รูปจากไฟล์เกม
@@ -307,6 +312,40 @@ export default function Events202610() {
         <p className="evnote">
           <Link href="/database/costumes/480559">[Costume] Kumamon Doll</Link> เป็นผ้าคลุม (Garment) ใส่ได้ทุกอาชีพ ออปชันช่วงกิจกรรม: EXP จากมอน <b>+5%</b> และถ้าใส่คู่ Kumamon Mask อัตราดรอปไอเทม <b>+5%</b> · ออปชันหายเมื่อจบกิจกรรม ·
           จำนวนของอื่นในแพ็กเกจอ่านจากภาพประกาศไม่ชัด จึงไม่ได้ใส่ตัวเลข
+        </p>
+      </section>
+
+      {/* ---------------- RO Lite crossover ---------------- */}
+      <section id="rolite" className="evsec evsec--pink">
+        <p className="evsec__tag">EVENT 04 · CROSSOVER</p>
+        <h2 className="evsec__title">RO Lite - ARROW × Ragnarok Zero (ภาค 3)</h2>
+        <p className="evsec__lead">
+          เล่นโหมด <b>Monster Card</b> ในเกมมือถือ RO Lite - ARROW ผ่านด่านของการ์ดมอนสเตอร์ให้ครบจำนวน ได้คูปองของใช้ใน Ragnarok Zero Global
+        </p>
+        <p className="evhero__date" style={{ marginTop: 0 }}>19 ต.ค. – 1 พ.ย. 2569 · กิจกรรมแยกจากอีก 3 อันในหน้านี้</p>
+
+        <h3 className="evh">กิจกรรม 1: ผ่านด่านในโหมด Monster Card</h3>
+        <ul className="evsteps">
+          <li>ผ่าน <b>5 ใบ</b>: คูปอง <Link href="/database/items/12887">Unlimited Fly Wing</Link> 1 วัน</li>
+          <li>ผ่าน <b>10 ใบ</b>: คูปอง Kafra Storage Bell Box 7 วัน</li>
+        </ul>
+        <p className="evnote">
+          นับเฉพาะการ์ดที่ผ่านครั้งแรกหลังกิจกรรมเริ่ม การ์ดที่ผ่านไปก่อนหน้านี้ไม่นับ (การ์ดที่มีแต่ยังไม่เคยผ่านนับได้) · คูปองแต่ละอันได้ครั้งเดียว ·
+          ดูคูปองที่ได้ใน RO Lite: ไอคอนมุมขวาบนของหน้าหลัก แล้วเลือก Go to Coupon Box
+        </p>
+
+        <h3 className="evh">กิจกรรม 2: ยืนยันใน Discord ของ RO Lite (ถึง 4 พ.ย.)</h3>
+        <ol className="evsteps">
+          <li>ทำกิจกรรม 1 ให้ครบ 10 ใบ จนได้คูปอง Kafra Storage Bell Box</li>
+          <li>เปิด Coupon Box แล้วแคปหน้าจอให้เห็นเลขคูปอง</li>
+          <li>ตั้งโพสต์ส่วนตัวในห้อง event-verification ของ Discord RO Lite แล้วแนบรูป</li>
+        </ol>
+        <div className="evreward">
+          <span className="evreward__tag">REWARD</span> คูปอง <Link href="/database/items/7621">Token of Siegfried</Link> ×5 · ทีมงานส่งโค้ดให้ทาง Discord หลังตรวจ · ได้ครั้งเดียว
+        </div>
+        <p className="evnote">
+          คูปองทุกใบใช้ได้ถึง <b>31 ธ.ค. 2569</b> หมดอายุแล้วออกใหม่ไม่ได้ · ประกาศบอกว่ารางวัลและวันอาจเปลี่ยนหรือจบก่อนกำหนดได้ ·
+          ที่มา: ประกาศใน Discord ทางการ 21 ต.ค. 2569
         </p>
       </section>
 

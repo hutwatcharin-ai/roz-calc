@@ -48,8 +48,9 @@ export const NEWS: NewsItem[] = [
     blurb: 'ทุกวัน 19:00-19:30 น. ที่ Western Cave Karu ล่า Marc, Megalodon, Obeaune',
     date: '2026-10-15T12:00:00+07:00',
     dateTh: '15 ต.ค.',
-    ends: '2026-10-29T19:30:00+07:00',
-    endsTh: '29 ต.ค.',
+    // Cut short: the 22 Oct maintenance ends it (Discord notice, 21 Oct).
+    ends: '2026-10-22T08:00:00+07:00',
+    endsTh: '22 ต.ค.',
     cast: ['/images/monsters/1045.gif', '/images/monsters/1064.gif', '/images/monsters/1044.gif'],
   },
   {

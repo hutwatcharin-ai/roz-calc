@@ -72,7 +72,7 @@ const CLOSED = (availability as { maps: Record<string, { when: string; area?: st
 
 const HIGHLIGHTS = [
   { big: '2', title: 'MVP Raid ใหม่', body: 'Amon Ra และ Baphomet', href: '#raids', link: 'ดูค่าสถานะและธาตุ' },
-  { big: 'GM', title: 'The Deep Deep Sea', body: '15-29 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) ล่า Marc เอาการ์ดก่อนแมพเปิด', href: '#marc', link: 'เวลาและวิธีเข้า' },
+  { big: 'GM', title: 'The Deep Deep Sea', body: '15-21 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) จบที่ปิดปรับปรุง 22 ต.ค. หลังจากนั้น Marc เกิดเองที่ Northern Cave Luanda', href: '#marc', link: 'เวลาและวิธีเข้า' },
   { big: 'S1', title: 'Guild Hall of Fame', body: 'ซีซั่น 1 ถึง 7 ม.ค. 2570 · เควส Liechtenauer เก็บคะแนนกิลด์', href: '/news/guild-hall-of-fame-s1', link: 'วิธีเก็บคะแนนและรางวัล' },
   { big: 'HW', title: 'คอสตูมฮาโลวีน', body: `กาชา Shadow Scroll ลุ้นกล่องแล้วเลือกเองได้ 1 จาก 2 ชิ้น · คอสตูมใหม่ ${4 + BOUND_NEW.length + KP_REWARDS.length} แบบ`, href: '#halloween', link: 'ดูภาพตอนใส่' },
   { big: 'FIX', title: 'ปรับระบบ แก้บั๊ก', body: 'ประกาศยังไม่บอกว่าแก้อะไร' },
@@ -237,9 +237,17 @@ export default async function Patch20261015Page() {
           </div>
         </div>
         <div className="ptimes">
-          <div><b>15-29 ต.ค. ทุกวัน</b><span>Odin, Loki (SEA): <strong>19:00-19:30 น.</strong> เวลาไทย</span><span>Skadi (EU): 01:00-01:30 น. ของวันถัดไป</span></div>
+          <div><b>15-21 ต.ค. ทุกวัน</b><span>Odin, Loki (SEA): <strong>19:00-19:30 น.</strong> เวลาไทย</span><span>Skadi (EU): 01:00-01:30 น. ของวันถัดไป</span></div>
           <div><b>ที่ <Link href="/database/maps/beach_dun">Western Cave Karu (beach_dun)</Link></b><span>GM เรียกมอนตามจุดต่างๆ ทั่วแมพ เดินหาแล้วตี</span></div>
         </div>
+        {/* Discord announcement of 21 Oct 2026 (discord-inbox branch): the
+            22 Oct maintenance ends the event early and makes Marc a normal
+            spawn. It gives no count, so the map's spawn list waits for one. */}
+        <p className="card card--yellow" style={{ margin: "10px 0", fontSize: 14 }}>
+          <b>อัปเดต 21 ต.ค.:</b> อีเวนต์จบที่ปิดปรับปรุง <b>22 ต.ค. 08:00 น.</b> เร็วกว่าที่ประกาศไว้เดิม (29 ต.ค.) · หลังปิดปรับปรุง
+          Marc จะเกิดเองตามปกติที่ <Link href="/database/maps/beach_dun2">Northern Cave Luanda</Link> ฟาร์มการ์ดได้โดยไม่ต้องรออีเวนต์ ·
+          ประกาศไม่ได้บอกจำนวนที่เกิด
+        </p>
         <p className="muted" style={{ margin: '8px 0 4px', fontSize: 14 }}>มอนที่ออกในอีเวนต์</p>
         <ul className="pcards">
           {[[1045, 4105, 'Marc'], [1064, 4067, 'Megalodon'], [1044, 4093, 'Obeaune']].map(([mob, card, name]) => (
