@@ -88,7 +88,7 @@ export default function RecipeCards({
                 ))}
               </p>
             )}
-            {r.confidence !== 'both' && <p className="rcard__unsure">ยังไม่ยืนยันกับ Zero · มีในแหล่งเดียว</p>}
+            {hide && <p className="rcard__unsure">ยังไม่ยืนยันกับ Zero · มีในแหล่งเดียว</p>}
             {calc && <RecipeQty id={r.id} name={r.product.name} />}
           </article>
         );
