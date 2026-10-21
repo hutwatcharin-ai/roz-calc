@@ -21,6 +21,12 @@ jobs:
         with:
           sparse-checkout: scripts/telegram-report.mjs
           sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4 # Discord posts still to do, for the daily report
+        with:
+          ref: discord-inbox
+          path: inbox
+          sparse-checkout: state.json
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22

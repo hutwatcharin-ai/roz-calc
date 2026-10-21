@@ -22,7 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: scripts/discord-news.mjs
+          sparse-checkout: |
+            scripts/discord-news.mjs
+            scripts/discord-match.mjs
           sparse-checkout-cone-mode: false
       - uses: actions/checkout@v4
         with:

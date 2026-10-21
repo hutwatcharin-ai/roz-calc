@@ -18,6 +18,7 @@
 // service-account token is signed with node:crypto.
 
 import { createSign } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
 
 const MODE = process.argv[2];
 const DRY = process.argv.includes('--dry');
@@ -163,8 +164,26 @@ async function daily() {
     ...(empty === null
       ? ['<b>คำที่ค้นในเว็บเยอะสุด</b>', ...(common.length ? common.map((r) => `• ${esc(r.dims[0])} ×${fmt(r.mets[0])}`) : ['ไม่มี'])]
       : ['<b>ค้นแล้วไม่เจอ</b>', ...(empty.length ? empty.map((r) => `• ${esc(r.dims[0])} ×${fmt(r.mets[0])}`) : ['ไม่มี'])]),
+    ...inboxLines(),
   ];
   await send(lines.join('\n'));
+}
+
+// Discord posts not yet turned into site changes (scripts/discord-news.mjs),
+// so one nobody acted on does not sit unseen. The workflow checks the
+// discord-inbox branch out at INBOX; without it the report just leaves this out.
+function inboxLines() {
+  const file = `${process.env.INBOX || 'inbox'}/state.json`;
+  if (!existsSync(file)) return [];
+  const left = (JSON.parse(readFileSync(file, 'utf8')).posts ?? []).filter((p) => !p.done);
+  if (!left.length) return [];
+  const urgent = left.filter((p) => p.urgent).length;
+  return [
+    '',
+    `📥 <b>ประกาศ Discord ค้าง ${left.length} อัน</b>${urgent ? ` (🔴 ด่วน ${urgent})` : ''}`,
+    ...left.slice(0, 5).map((p) => `• ${p.urgent ? '🔴 ' : ''}${esc(p.title)}`),
+    'พิมพ์บอก Claude ว่า "ทำข่าว"',
+  ];
 }
 
 async function gsc(token, start, end, dims, limit) {
