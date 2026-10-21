@@ -5,7 +5,7 @@ name: Discord news
 # master only changes when someone means it to.
 on:
   schedule:
-    - cron: '7 * * * *' # hourly
+    - cron: '7 */3 * * *' # every 3 hours (owner, 21 Oct 2026); public repo, so minutes are free anyway
   workflow_dispatch:
 
 permissions:

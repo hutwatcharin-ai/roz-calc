@@ -15,7 +15,7 @@
 // a day. The owner gets a Telegram line per post. <inbox>/state.json holds
 // the last message id read.
 //
-// Runs hourly on GitHub Actions (.github/workflows/discord-news.yml), which
+// Runs every 3 hours on GitHub Actions (.github/workflows/discord-news.yml), which
 // keeps the inbox on its own branch, discord-inbox, so master never gets a
 // commit it did not ask for. Read it locally with
 //   git fetch origin discord-inbox && git worktree add ../roz-inbox discord-inbox
