@@ -1,0 +1,48 @@
+name: Discord news
+
+# Official announcements, followed into the owner's server and read by our bot
+# (scripts/discord-news.mjs). The posts live on the discord-inbox branch so
+# master only changes when someone means it to.
+on:
+  schedule:
+    - cron: '7 * * * *' # hourly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: discord-news
+  cancel-in-progress: false
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/discord-news.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4
+        with:
+          ref: discord-inbox
+          path: inbox
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read new posts
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          INBOX: inbox
+        run: node scripts/discord-news.mjs
+      - name: Save
+        working-directory: inbox
+        run: |
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "rozerothai-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "Discord posts $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
