@@ -240,13 +240,15 @@ export default async function Patch20261015Page() {
           <div><b>15-21 ต.ค. ทุกวัน</b><span>Odin, Loki (SEA): <strong>19:00-19:30 น.</strong> เวลาไทย</span><span>Skadi (EU): 01:00-01:30 น. ของวันถัดไป</span></div>
           <div><b>ที่ <Link href="/database/maps/beach_dun">Western Cave Karu (beach_dun)</Link></b><span>GM เรียกมอนตามจุดต่างๆ ทั่วแมพ เดินหาแล้วตี</span></div>
         </div>
-        {/* Discord announcement of 21 Oct 2026 (discord-inbox branch): the
-            22 Oct maintenance ends the event early and makes Marc a normal
-            spawn. It gives no count, so the map's spawn list waits for one. */}
+        {/* Discord announcements of 21 and 22 Oct 2026 (discord-inbox branch):
+            the 22 Oct maintenance (done at 10:20) ended the event early and
+            made Marc a normal spawn. Neither gives a count, and the owner
+            could not count in game -- players kill each one as it appears --
+            so the map's spawn list waits for one. */}
         <p className="card card--yellow" style={{ margin: "10px 0", fontSize: 14 }}>
-          <b>อัปเดต 21 ต.ค.:</b> อีเวนต์จบที่ปิดปรับปรุง <b>22 ต.ค. 08:00 น.</b> เร็วกว่าที่ประกาศไว้เดิม (29 ต.ค.) · หลังปิดปรับปรุง
-          Marc จะเกิดเองตามปกติที่ <Link href="/database/maps/beach_dun2">Northern Cave Luanda</Link> ฟาร์มการ์ดได้โดยไม่ต้องรออีเวนต์ ·
-          ประกาศไม่ได้บอกจำนวนที่เกิด
+          <b>อัปเดต 22 ต.ค.:</b> อีเวนต์จบแล้วที่ปิดปรับปรุง <b>22 ต.ค.</b> เร็วกว่าที่ประกาศไว้เดิม (29 ต.ค.) · ตอนนี้
+          Marc เกิดเองแล้วที่ <Link href="/database/maps/beach_dun2">Northern Cave Luanda</Link> ฟาร์มการ์ดได้เลยไม่ต้องรออีเวนต์ ·
+          คนแย่งตีเยอะ เกิดมาไม่นานก็โดนตีตาย
         </p>
         <p className="muted" style={{ margin: '8px 0 4px', fontSize: 14 }}>มอนที่ออกในอีเวนต์</p>
         <ul className="pcards">
