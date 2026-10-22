@@ -4,6 +4,7 @@ import { parseCommand, reply, type BotDeps, type InboxPost } from './telegram-bo
 const POSTS: InboxPost[] = [
   { id: '1', title: 'Old notice', kind: 'official', urgent: false, at: '2026-10-20', done: true },
   { id: '2', title: 'Maintenance 22 Oct', kind: 'official', urgent: true, at: '2026-10-21T03:00:00.000Z', done: false },
+  { id: '4', title: 'Maintenance Has Begun', kind: 'official', urgent: false, at: '2026-10-22T01:11:00.000Z', done: true, notice: true },
   { id: '3', title: 'Player says <drop>', kind: 'player', urgent: false, at: '2026-10-21T05:00:00.000Z', done: false },
 ];
 
@@ -44,6 +45,7 @@ describe('reply', () => {
     expect(out.indexOf('Maintenance')).toBeLessThan(out.indexOf('Old notice'));
     expect(out).not.toContain('Player says');
     expect(out).toMatch(/Old notice<\/a> · 20 ต.ค\. ✅/);
+    expect(out).toContain('Maintenance Has Begun</a> · 22 ต.ค. 🔔 แจ้งเวลา');
   });
 
   it('/check starts the workflow', async () => {

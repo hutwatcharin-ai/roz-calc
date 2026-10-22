@@ -33,6 +33,8 @@ export interface InboxPost {
   urgent: boolean;
   at: string;
   done: boolean;
+  /** Only says when the servers go down or come back; arrives done. */
+  notice?: boolean;
 }
 
 export interface Visitors {
@@ -109,7 +111,7 @@ export async function reply(text: string, deps: BotDeps): Promise<string> {
         const posts = (await deps.inbox()).filter((p) => p.kind === 'official');
         const last = posts.sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 5);
         if (!last.length) return 'ยังไม่มีประกาศ';
-        return ['📢 <b>ประกาศ Discord ล่าสุด</b>', ...last.map((p) => postLine(p) + (p.done ? ' ✅' : ''))].join('\n');
+        return ['📢 <b>ประกาศ Discord ล่าสุด</b>', ...last.map((p) => postLine(p) + (p.notice ? ' 🔔 แจ้งเวลา' : p.done ? ' ✅' : ''))].join('\n');
       }
 
       case 'inbox': {

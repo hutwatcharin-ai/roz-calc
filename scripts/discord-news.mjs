@@ -38,6 +38,7 @@ const CHANNELS = [
   { id: '1562409676228792371', kind: 'official' }, // #ข่าวทางการ
   { id: '1562420024122277888', kind: 'player' }, // #ส่งต่อ
 ];
+const GUILD = '1562409530212614216'; // ROZ ข่าว
 const INBOX = process.env.INBOX || 'inbox';
 const DRY = process.argv.includes('--dry');
 const CHAT = process.env.TELEGRAM_CHAT_ID || '6242848323';
@@ -162,16 +163,23 @@ for (const ch of CHANNELS) {
       .join('\n\n');
     fs.writeFileSync(path.join(INBOX, file), body + '\n');
 
-    const urgent = ch.kind === 'official' && isUrgent(title);
-    state.posts.push({ id: m.id, file, title, kind: ch.kind, urgent, at: m.timestamp, done: false });
+    const touched = findNames(`${title}\n${text}`, NAMES);
+    // Timing-only notices are kept but need nothing done, so they arrive done.
+    const notice = ch.kind === 'official' && isTimingOnly(title, text, touched);
+    const urgent = ch.kind === 'official' && !notice && isUrgent(title);
+    state.posts.push({ id: m.id, file, title, kind: ch.kind, urgent, at: m.timestamp, done: notice, ...(notice && { notice: true }) });
     saved++;
 
-    const touched = findNames(`${title}\n${text}`, NAMES);
+    const link = `https://discord.com/channels/${GUILD}/${ch.id}/${m.id}`;
+    if (notice) {
+      await telegram(`🔔 <b>แจ้งเวลา</b> (#${esc(source)}) · ไม่ต้องทำข่าว\n<a href="${link}">${esc(title)}</a>`);
+      continue;
+    }
     const lines = [
       ch.kind === 'official'
         ? `${urgent ? '🔴 <b>ด่วน</b> ' : '📢 '}<b>ประกาศใหม่</b> (#${esc(source)})`
         : '📨 <b>โพสต์ผู้เล่นที่ส่งต่อมา</b> (ยังไม่ยืนยัน)',
-      esc(title),
+      `<a href="${link}">${esc(title)}</a>`,
     ];
     if (touched.length) {
       lines.push('', 'เกี่ยวกับ: ' + touched.map((n) => `<a href="https://rozerothai.com${n.href}">${esc(n.name)}</a>`).join(' · '));

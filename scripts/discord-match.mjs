@@ -7,6 +7,20 @@
 /** Maintenance and patch posts: the days the site gets its most visitors. */
 export const isUrgent = (title) => /maintenance|patch\s*notes?|update/i.test(title ?? '');
 
+/**
+ * A post that only says when the servers go down or come back ("Has Begun",
+ * "Completed", "Extended"), with the details to follow in a later post (owner,
+ * 22 Oct 2026). The title alone is not enough: the 22 Oct "Maintenance
+ * Reminder" hid "Marc will be added ..." in a bullet. So the post also has to
+ * have no bulleted or numbered list, and name nothing the site has
+ * (`touched`, from findNames).
+ */
+export function isTimingOnly(title, text, touched) {
+  if (!/has\s+begun|\bcompleted?\b|\bextended\b|\bextension\b|\bdelayed\b|\bended\b/i.test(title ?? '')) return false;
+  if (/^\s*(?:[•\-*▪◦●]|\d+[.)])\s/m.test(text ?? '')) return false;
+  return touched.length === 0;
+}
+
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /**
