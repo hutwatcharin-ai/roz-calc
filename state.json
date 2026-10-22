@@ -26,9 +26,10 @@
       "file": "posts/2026-10-22-1562634351961702530.md",
       "title": "[Notice] Ragnarok Zero: Global Scheduled Maintenance Has Begun – 22nd October 2026",
       "kind": "official",
-      "urgent": true,
+      "urgent": false,
       "at": "2026-10-22T01:11:01.850000+00:00",
-      "done": false
+      "done": true,
+      "notice": true
     }
   ]
 }
