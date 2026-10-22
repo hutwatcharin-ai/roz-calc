@@ -28,7 +28,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { findNames, isUrgent } from './discord-match.mjs';
+import { findNames, isTimingOnly, isUrgent } from './discord-match.mjs';
 
 // Two channels in ROZ ข่าว: #ข่าวทางการ gets the followed official posts;
 // #ส่งต่อ gets player posts the owner forwards by hand from the official
