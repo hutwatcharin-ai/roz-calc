@@ -181,5 +181,9 @@ for (const ch of CHANNELS) {
   }
 }
 
+// A run started by hand -- the bot's /check -- says so even when nothing came,
+// or the owner is left waiting for a message that never arrives.
+if (!saved && process.env.GITHUB_EVENT_NAME === 'workflow_dispatch') await telegram('🔄 เช็ก Discord แล้ว ไม่มีประกาศใหม่');
+
 fs.writeFileSync(statePath, JSON.stringify(state, null, 2) + '\n');
 console.log(`${read} messages read, ${saved} posts saved, ${state.posts.filter((p) => !p.done).length} not done`);

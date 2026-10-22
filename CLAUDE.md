@@ -34,6 +34,10 @@
 - `D:\RagnarokZero\data.grf` แตกได้ (owner 15 ต.ค. 2569 ยกเลิกกฎห้าม) — ใช้เครื่องมือของ owner `tools\GrfDiffTool` (เรียก GrfCL) ผลไปที่ `D:\Data grf roz\weekly` · คู่มือ `D:\Data grf roz\GRF_WEEKLY_DIFF_GUIDE.md` · ⚠️ ถ้า GrfCL เปิด GRF ไม่ได้ โปรแกรมใช้ fallback ของเก่าเงียบๆ ต้องเทียบ manifest เองว่าได้ไฟล์ใหม่จริง · ไม่เอาไฟล์ดิบ GRF ทั้งก้อนขึ้น repo สาธารณะ
 - ห้ามใช้ Divine-Pride API มา mirror DB
 
+## คำสั่งบอท Telegram (@rozerothaibot)
+
+owner พิมพ์ / ในแชตบอท: /news /inbox /check /today /week /up /events /find /help · โค้ดคำสั่ง `lib/telegram-bot.ts` (มีเทสต์) ตัวดึงข้อมูลจริง `lib/telegram-deps.ts` รับ webhook ที่ `app/api/telegram/route.ts` (เช็ก `TELEGRAM_WEBHOOK_SECRET` + ตอบเฉพาะแชต owner) · แก้รายการคำสั่งแล้วรัน `npx tsx --env-file=.env.local scripts/telegram-setup.mts` ให้เมนูอัปเดต · Coolify ต้องมี `TELEGRAM_BOT_TOKEN` `TELEGRAM_WEBHOOK_SECRET` `GA4_SERVICE_ACCOUNT_JSON` `GITHUB_DISPATCH_TOKEN` (fine-grained, repo นี้, Actions เขียนได้อย่างเดียว ใช้กับ /check)
+
 ## ประกาศ Discord ทางการ → "ทำข่าว"
 
 ระบบ: ห้อง #ข่าวทางการ ในเซิร์ฟเวอร์ ROZ ข่าว ของเจ้าของเว็บ กด Follow 5 ช่องทางการไว้ ส่วนห้อง #ส่งต่อ เป็นโพสต์ผู้เล่นที่เจ้าของเว็บกด Forward มาเอง บอท ROZ Reader อ่านทุกชั่วโมงด้วย `scripts/discord-news.mjs` ผ่าน workflow `discord-news.yml` แล้วเก็บลง branch `discord-inbox` พร้อมส่ง Telegram รายงาน 14:00 นับประกาศที่ยังค้างให้ด้วย
