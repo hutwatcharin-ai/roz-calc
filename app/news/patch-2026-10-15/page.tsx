@@ -207,7 +207,7 @@ export default async function Patch20261015Page() {
       </section>
 
       <section id="marc" style={{ marginTop: 34, scrollMarginTop: 90 }}>
-        <p className="stagebanner" aria-hidden="true">GM EVENT · THE DEEP DEEP SEA</p>
+        <p className="stagebanner" aria-hidden="true">GM EVENT · THE DEEP DEEP SEA · จบแล้ว</p>
         <h2 className="section-title">ล่า Marc เอา Marc Card</h2>
         <div className="pdun__head" style={{ marginTop: 8 }}>
           {marc && (
@@ -232,25 +232,33 @@ export default async function Patch20261015Page() {
                     </span>
                   ))
                 : ' แมพที่ยังไม่มีข้อมูล'}
-              {' '}อีเวนต์นี้จึงเป็นโอกาสแรกที่จะได้การ์ด
+              {' '}· ตั้งแต่ 22 ต.ค. เกิดที่ Northern Cave Luanda ด้วย
             </p>
           </div>
-        </div>
-        <div className="ptimes">
-          <div><b>15-21 ต.ค. ทุกวัน</b><span>Odin, Loki (SEA): <strong>19:00-19:30 น.</strong> เวลาไทย</span><span>Skadi (EU): 01:00-01:30 น. ของวันถัดไป</span></div>
-          <div><b>ที่ <Link href="/database/maps/beach_dun">Western Cave Karu (beach_dun)</Link></b><span>GM เรียกมอนตามจุดต่างๆ ทั่วแมพ เดินหาแล้วตี</span></div>
         </div>
         {/* Discord announcements of 21 and 22 Oct 2026 (discord-inbox branch):
             the 22 Oct maintenance (done at 10:20) ended the event early and
             made Marc a normal spawn. Neither gives a count, and the owner
             could not count in game -- players kill each one as it appears --
-            so the map's spawn list waits for one. */}
-        <p className="card card--yellow" style={{ margin: "10px 0", fontSize: 14 }}>
-          <b>อัปเดต 22 ต.ค.:</b> อีเวนต์จบแล้วที่ปิดปรับปรุง <b>22 ต.ค.</b> เร็วกว่าที่ประกาศไว้เดิม (29 ต.ค.) · ตอนนี้
-          Marc เกิดเองแล้วที่ <Link href="/database/maps/beach_dun2">Northern Cave Luanda</Link> ฟาร์มการ์ดได้เลยไม่ต้องรออีเวนต์ ·
-          คนแย่งตีเยอะ เกิดมาไม่นานก็โดนตีตาย
+            so the map's spawn list waits for one. Where to go now leads; the
+            event's own times and map are kept below as history (owner, 22 Oct:
+            the old map has no Marc any more). */}
+        <div className="card card--cyan" style={{ margin: '14px 0', padding: '16px 18px' }}>
+          <p style={{ margin: 0, fontSize: 13, letterSpacing: '.08em', color: 'var(--cyan)' }}>▶ ฟาร์ม MARC ตอนนี้ · ตั้งแต่ 22 ต.ค.</p>
+          <p style={{ margin: '6px 0 4px', fontSize: 20, fontWeight: 700 }}>
+            <Link href="/database/maps/beach_dun2">Northern Cave Luanda (beach_dun2)</Link>
+          </p>
+          <p style={{ margin: 0, fontSize: 14.5 }}>
+            Marc เกิดเองตลอด ไม่ต้องรอ GM · คนแย่งตีเยอะ เกิดมาไม่นานก็โดนตีตาย
+          </p>
+          <Link href="/database/maps/beach_dun2" className="btn" style={{ marginTop: 12 }}>ดูแมพและมอนในแมพ →</Link>
+        </div>
+        <p className="muted" style={{ margin: '10px 0', fontSize: 13.5 }}>
+          <b>อีเวนต์ GM ที่จบแล้ว:</b> 15-21 ต.ค. ทุกวัน 19:00-19:30 น. (Odin, Loki) GM เรียกมอนทั่ว{' '}
+          <Link href="/database/maps/beach_dun">Western Cave Karu (beach_dun)</Link> · จบที่ปิดปรับปรุง 22 ต.ค. เร็วกว่าที่ประกาศไว้เดิม (29 ต.ค.)
+          แมพนี้ไม่มี Marc แล้ว
         </p>
-        <p className="muted" style={{ margin: '8px 0 4px', fontSize: 14 }}>มอนที่ออกในอีเวนต์</p>
+        <p className="muted" style={{ margin: '8px 0 4px', fontSize: 14 }}>การ์ดจากมอนในอีเวนต์</p>
         <ul className="pcards">
           {[[1045, 4105, 'Marc'], [1064, 4067, 'Megalodon'], [1044, 4093, 'Obeaune']].map(([mob, card, name]) => (
             <li key={mob}>
