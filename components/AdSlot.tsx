@@ -64,7 +64,7 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
         className="adslot__link"
         rel="sponsored nofollow noopener"
         target="_blank"
-        title={ad.advertiser}
+        title={ad.alt}
       >
         <AdMedia ad={ad} size={size} />
       </a>

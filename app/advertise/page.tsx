@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const MAIL = 'kidkrob@gmail.com';
+const MAIL = 'rozthai.contact@gmail.com';
 const mailto = (subject: string) => `mailto:${MAIL}?subject=${encodeURIComponent(subject)}`;
 const baht = (n: number) => n.toLocaleString('en-US');
 const thaiDate = (iso: string) =>

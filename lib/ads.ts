@@ -15,7 +15,7 @@ export type AdSlot = 'top' | 'inline' | 'detail';
 export interface Ad {
   id: string;
   slot: AdSlot;
-  /** Who bought it, for the report and the title attribute. */
+  /** Who bought it, for the report. */
   advertiser: string;
   /** Where the click goes. Never rendered directly: clicks pass /go/ad/<id>. */
   href: string;
@@ -28,7 +28,7 @@ export interface Ad {
    *  readers who ask for less motion. */
   wideVideo?: string;
   narrowVideo?: string;
-  /** What a screen reader reads, supplied by the advertiser. */
+  /** What a screen reader reads and the hover text, supplied by the advertiser. */
   alt: string;
   starts: string;
   ends: string;

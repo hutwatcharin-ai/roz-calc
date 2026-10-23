@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'เว็บนี้เก็บอะไรบ้าง ใช้คุกกี้อะไร และข้อมูลอะไรอยู่ในเครื่องคุณเอง — นโยบายความเป็นส่วนตัวของ RO Zero Thai',
 };
 
-const MAIL = 'kidkrob@gmail.com';
+const MAIL = 'rozthai.contact@gmail.com';
 
 const STORED = [
   ['roz-calc:farm-plan', 'แผนฟาร์มที่คุณกดเก็บไว้'],
