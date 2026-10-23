@@ -9,6 +9,7 @@
 import Link from 'next/link';
 import { AD_SIZES, adToShow, type AdSlot as Slot } from '@/lib/ads';
 import AdImpression from './AdImpression';
+import AdMedia from './AdMedia';
 import AdsenseUnit from './AdsenseUnit';
 
 export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?: boolean }) {
@@ -63,17 +64,7 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
         target="_blank"
         title={ad.advertiser}
       >
-        <picture>
-          {ad.narrow && <source media="(max-width: 700px)" srcSet={ad.narrow} width={size.narrow[0]} height={size.narrow[1]} />}
-          <img
-            src={ad.wide}
-            alt={ad.alt}
-            width={size.wide[0]}
-            height={size.wide[1]}
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
+        <AdMedia ad={ad} size={size} />
       </a>
     </aside>
   );

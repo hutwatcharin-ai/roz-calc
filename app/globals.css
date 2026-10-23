@@ -3068,7 +3068,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
   border: 1px solid var(--hair); border-radius: var(--radius);
   overflow: hidden; text-decoration: none;
 }
-.adslot__link img { width: 100%; height: 100%; object-fit: contain; }
+.adslot__link img, .adslot__link video { display: block; width: 100%; height: 100%; object-fit: contain; }
 .adslot__house {
   flex-direction: column; gap: 4px; text-align: center; padding: 10px 14px;
   border-style: dashed; border-color: color-mix(in srgb, var(--cyan) 45%, transparent);

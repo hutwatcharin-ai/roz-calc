@@ -31,5 +31,19 @@
     "inlineSlotViews": 96107,
     "detailSlotViews": 94956
   },
-  "ads": []
+  "ads": [
+    {
+      "id": "shortone-2610",
+      "slot": "top",
+      "advertiser": "ShortOne",
+      "href": "https://shortone.net/",
+      "wide": "/images/ads/shortone-970.webp",
+      "narrow": "/images/ads/shortone-320.webp",
+      "wideVideo": "/images/ads/shortone-970.mp4",
+      "narrowVideo": "/images/ads/shortone-320.mp4",
+      "alt": "ShortOne รวมซีรีส์สั้นแนวตั้งทุกแอป เริ่มต้น 19 บาท",
+      "starts": "2026-10-23",
+      "ends": "2026-11-22"
+    }
+  ]
 }

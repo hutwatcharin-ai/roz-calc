@@ -55,3 +55,22 @@ describe('ads', () => {
     expect(AD_SIZES.inline.wide).toEqual([336, 280]);
   });
 });
+
+describe('data/ads.json bookings', () => {
+  // A booking whose file is missing draws a broken picture in a slot someone
+  // paid for, on every page.
+  it('every file a booking names is in public/, and under 150 KB', async () => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const { default: file } = await import('@/data/ads.json');
+    for (const booking of (file as unknown as { ads: Ad[] }).ads) {
+      for (const src of [booking.wide, booking.narrow, booking.wideVideo, booking.narrowVideo]) {
+        if (!src) continue;
+        const local = path.join(process.cwd(), 'public', src);
+        expect(fs.existsSync(local), src).toBe(true);
+        expect(fs.statSync(local).size, src).toBeLessThanOrEqual(150 * 1024);
+      }
+      expect(booking.starts <= booking.ends, booking.id).toBe(true);
+    }
+  });
+});

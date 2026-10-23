@@ -22,6 +22,12 @@ export interface Ad {
   /** Pictures under /public/images/ads. `wide` is the desktop one. */
   wide: string;
   narrow?: string;
+  /** A moving banner, as a short silent looping MP4 made from the
+   *  advertiser's GIF (owner, 23 Oct 2026: a GIF this size weighs 900 KB, the
+   *  video 130 KB). `wide` and `narrow` stay as the still drawn first and for
+   *  readers who ask for less motion. */
+  wideVideo?: string;
+  narrowVideo?: string;
   /** What a screen reader reads, supplied by the advertiser. */
   alt: string;
   starts: string;
