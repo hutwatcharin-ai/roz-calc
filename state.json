@@ -1,6 +1,6 @@
 {
   "cursor": {
-    "1562409676228792371": "1562667419653374052"
+    "1562409676228792371": "1563112622721863720"
   },
   "posts": [
     {
@@ -39,6 +39,15 @@
       "urgent": true,
       "at": "2026-10-22T03:22:25.802000+00:00",
       "done": true
+    },
+    {
+      "id": "1563112622721863720",
+      "file": "posts/2026-10-23-1563112622721863720.md",
+      "title": "[Siege Notice] War of Emperium EU Schedule Adjustment – Daylight Saving Time",
+      "kind": "official",
+      "urgent": false,
+      "at": "2026-10-23T08:51:30.485000+00:00",
+      "done": false
     }
   ]
 }
