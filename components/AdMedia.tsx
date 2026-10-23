@@ -20,17 +20,26 @@ export default function AdMedia({ ad, size }: Props) {
   useEffect(() => {
     if (!ad.wideVideo) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const narrow = window.matchMedia('(max-width: 700px)').matches && !!ad.narrowVideo;
-    setVideo(
-      narrow
-        ? { src: ad.narrowVideo!, poster: ad.narrow ?? ad.wide }
-        : { src: ad.wideVideo, poster: ad.wide },
-    );
+    // Follows the screen as it changes (a window resized, a tablet turned),
+    // or the box takes the phone shape around the desktop video.
+    const query = window.matchMedia('(max-width: 700px)');
+    const pick = () => {
+      const narrow = query.matches && !!ad.narrowVideo;
+      setVideo(
+        narrow
+          ? { src: ad.narrowVideo!, poster: ad.narrow ?? ad.wide }
+          : { src: ad.wideVideo!, poster: ad.wide },
+      );
+    };
+    pick();
+    query.addEventListener('change', pick);
+    return () => query.removeEventListener('change', pick);
   }, [ad.wideVideo, ad.narrowVideo, ad.wide, ad.narrow]);
 
   if (video) {
     return (
       <video
+        key={video.src}
         src={video.src}
         poster={video.poster}
         autoPlay

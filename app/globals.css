@@ -3074,7 +3074,8 @@ a.cashlist__row:hover { background: var(--panel-2); }
    ratio is in the stylesheet, known before any picture arrives. */
 .adslot--top .adslot__link { height: auto; aspect-ratio: var(--ad-ratio); }
 @media (max-width: 700px) {
-  .adslot--top .adslot__link { width: 100%; height: auto; aspect-ratio: var(--ad-narrow-ratio); }
+  /* No frame on a phone: the banner itself is the box (owner, 24 Oct 2026). */
+  .adslot--top .adslot__link { width: 100%; height: auto; aspect-ratio: var(--ad-narrow-ratio); border: 0; border-radius: 0; }
 }
 .adslot__house {
   flex-direction: column; gap: 4px; text-align: center; padding: 10px 14px;
