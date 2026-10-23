@@ -21,6 +21,8 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
     '--ad-h': `${size.wide[1]}px`,
     '--ad-narrow-w': `${size.narrow[0]}px`,
     '--ad-narrow-h': `${size.narrow[1]}px`,
+    '--ad-ratio': `${size.wide[0]} / ${size.wide[1]}`,
+    '--ad-narrow-ratio': `${size.narrow[0]} / ${size.narrow[1]}`,
   } as React.CSSProperties;
 
   // Google does not allow its ads on pages with little of our own content

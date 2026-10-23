@@ -72,7 +72,10 @@ export const AD_STATS: AdStats = data.stats;
 /** Pixel size of each slot, which the page reserves whether or not an ad is
  *  sold: a box that appears late shoves the article down the screen. */
 export const AD_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number, number] }> = {
-  top: { wide: [970, 250], narrow: [320, 100] },
+  // The top slot spans the content column, 1200 px on a desktop, and scales
+  // with the screen below that, keeping its shape (owner, 23 Oct 2026: the
+  // advertiser wanted it as wide as the cards under it, and lower).
+  top: { wide: [1200, 200], narrow: [640, 200] },
   inline: { wide: [336, 280], narrow: [336, 280] },
   detail: { wide: [336, 280], narrow: [300, 250] },
 };

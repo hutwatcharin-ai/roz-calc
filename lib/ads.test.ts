@@ -50,8 +50,8 @@ describe('ads', () => {
   });
 
   it('states a size for every slot, which the page reserves', () => {
-    expect(AD_SIZES.top.wide).toEqual([970, 250]);
-    expect(AD_SIZES.top.narrow).toEqual([320, 100]);
+    expect(AD_SIZES.top.wide).toEqual([1200, 200]);
+    expect(AD_SIZES.top.narrow).toEqual([640, 200]);
     expect(AD_SIZES.inline.wide).toEqual([336, 280]);
   });
 });
