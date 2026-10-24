@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "dress-up:build": "py -3 scripts/build-dress-up.py",
+    "dress-up:build": "py -3 scripts/build-dress-up.py && node scripts/build-dress-up-client.mjs",
     "dress-up:upload": "node --env-file=.env.local scripts/upload-dress-up.mjs",
     "import-data": "tsx scripts/import-data.ts",
     "mirror-skill-icons": "tsx scripts/mirror-skill-icons.ts",

@@ -1,0 +1,140 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import full from '@/data/dress-up.json';
+import { dollSex } from '@/lib/build-doll';
+import {
+  DEFAULT_LOOK, actionFor, drawable, frameFor, partsFor, sexOf, takeOff, wear, type Look,
+} from './look';
+import { DressUpUnavailable, loadPart } from './load';
+import type { PartData } from './types';
+
+// Real ids from the index: Wedding Veil (upper), Sunglasses and Glasses (mid),
+// Goggles (upper+mid), Costume Sword Wing (garment).
+const UPPER_A = 2206;
+const MID_B = 2201;
+const MID_C = 2203;
+const UPPER_MID = 2225;
+const GARMENT = 20510;
+const NO_SPRITE = full.coverage.missing[0].id;
+
+const keysOf = (look: Look) => {
+  const r = partsFor(look);
+  if ('missing' in r) throw new Error(`missing ${r.missing}`);
+  return r.map((p) => p.key);
+};
+
+describe('wear and takeOff (Review Focus 2)', () => {
+  it('an upper+mid item replaces both the upper and the mid it lands on', () => {
+    const before = wear(wear(DEFAULT_LOOK, UPPER_A), MID_B);
+    expect([before.upper, before.mid]).toEqual([UPPER_A, MID_B]);
+    const after = wear(before, UPPER_MID);
+    expect(after.upper).toBe(UPPER_MID);
+    expect(after.mid).toBe(UPPER_MID);
+  });
+
+  it('a mid-only item then removes the whole upper+mid item', () => {
+    const look = wear(wear(wear(DEFAULT_LOOK, UPPER_A), MID_B), UPPER_MID);
+    const after = wear(look, MID_C);
+    expect(after.mid).toBe(MID_C);
+    expect(after.upper).toBeUndefined();
+  });
+
+  it('takeOff clears every slot the item fills', () => {
+    const look = takeOff(wear(DEFAULT_LOOK, UPPER_MID), 'mid');
+    expect(look.upper).toBeUndefined();
+    expect(look.mid).toBeUndefined();
+  });
+
+  it('a garment goes in the garment slot; an unknown id changes nothing', () => {
+    expect(wear(DEFAULT_LOOK, GARMENT).garment).toBe(GARMENT);
+    expect(wear(DEFAULT_LOOK, 1)).toEqual(DEFAULT_LOOK);
+  });
+});
+
+describe('partsFor', () => {
+  it('lists an item with no sprite for knight-f as missing (Review Focus 1)', () => {
+    const look = wear({ ...DEFAULT_LOOK, cls: 'knight', sex: 'f' }, NO_SPRITE);
+    expect(partsFor(look)).toEqual({ missing: [NO_SPRITE] });
+    // drawable still draws the rest, without the missing item
+    const d = drawable(look);
+    expect(d.missing).toEqual([NO_SPRITE]);
+    expect(d.parts.map((p) => p.key)).toEqual(['body/knight-f-0', 'head/1-f-0']);
+  });
+
+  it('resolves logical keys for a full look, the double-slot item once', () => {
+    let look: Look = { ...DEFAULT_LOOK, cls: 'knight', sex: 'm', hair: 5, hairColour: 8, cloth: 2, weapon: 'sword' };
+    look = wear(wear(wear(look, UPPER_MID), GARMENT), UPPER_A);
+    const view = (id: number) => (full.items as Record<string, { view: number }>)[id].view;
+    expect(partsFor(look)).toEqual([
+      { key: 'body/knight-m-2', anchored: false, kind: 'body' },
+      { key: 'head/5-m-8', anchored: true, kind: 'head' },
+      { key: `acc/${view(UPPER_A)}-m`, anchored: true, kind: 'acc' },
+      { key: `robe/${view(GARMENT)}-knight-m`, anchored: false, kind: 'robe' },
+      { key: 'weapon/knight-m-sword', anchored: false, kind: 'weapon' },
+    ]);
+    for (const k of keysOf(look)) expect((full.files as Record<string, string>)[k]).toBeTruthy();
+  });
+
+  it('a weapon type the class cannot hold and a cloth it lacks are dropped', () => {
+    const keys = keysOf({ ...DEFAULT_LOOK, cls: 'mage', weapon: 'katar', cloth: 7 });
+    expect(keys).toEqual(['body/mage-m-0', 'head/1-m-0']);
+  });
+
+  it('Bard + f resolves to m, as dollSex says, for every class', () => {
+    expect(sexOf({ ...DEFAULT_LOOK, cls: 'bard', sex: 'f' })).toBe('m');
+    expect(keysOf({ ...DEFAULT_LOOK, cls: 'bard', sex: 'f' })[0]).toBe('body/bard-m-0');
+    for (const c of full.classes) {
+      for (const s of ['m', 'f'] as const) expect(sexOf({ ...DEFAULT_LOOK, cls: c.slug, sex: s })).toBe(dollSex(c.slug, s));
+    }
+  });
+});
+
+describe('actionFor', () => {
+  it('pose type x 8 + direction', () => {
+    expect(actionFor({ ...DEFAULT_LOOK, pose: 'sit', dir: 3 })).toBe(19);
+    expect(actionFor({ ...DEFAULT_LOOK, pose: 'dead', dir: 7 })).toBe(71);
+  });
+
+  it('attack takes the type for the sex and weapon, 5 when there is none', () => {
+    expect(actionFor({ ...DEFAULT_LOOK, pose: 'attack', dir: 0 })).toBe(40);
+    // novice: dagger is 10 for m and 11 for f
+    expect(actionFor({ ...DEFAULT_LOOK, pose: 'attack', weapon: 'dagger', dir: 2 })).toBe(82);
+    expect(actionFor({ ...DEFAULT_LOOK, sex: 'f', pose: 'attack', weapon: 'dagger', dir: 2 })).toBe(90);
+  });
+});
+
+describe('frameFor', () => {
+  const part = (n: number, delay = 100): PartData => ({
+    v: 1, w: 1, h: 1, acts: { '0': Array.from({ length: n }, () => [[], null, 0]) }, delay: { '0': delay },
+  });
+
+  it('in stand, body/head/acc show headDir; a 24-frame garment keeps animating', () => {
+    const look = { ...DEFAULT_LOOK, headDir: 2 as const };
+    expect(frameFor('head', part(3), 0, look, 12345)).toBe(2);
+    expect(frameFor('body', part(3), 0, look, 12345)).toBe(2);
+    expect(frameFor('robe', part(24), 0, look, 1650)).toBe(16);
+  });
+
+  it('in walk, every part runs on its own delay', () => {
+    const walk = { ...DEFAULT_LOOK, pose: 'walk' as const, headDir: 2 as const };
+    expect(frameFor('head', part(3), 8, walk, 250)).toBe(2);
+    expect(frameFor('head', part(8), 8, walk, 450)).toBe(4);
+  });
+});
+
+describe('loadPart (Review Focus 4)', () => {
+  afterEach(() => vi.unstubAllEnvs());
+
+  it('rejects with DressUpUnavailable when the base URL is unset', async () => {
+    vi.stubEnv('NEXT_PUBLIC_DRESSUP_BASE', '');
+    await expect(loadPart('body/novice-m-0')).rejects.toBeInstanceOf(DressUpUnavailable);
+  });
+
+  it('rejects with DressUpUnavailable when the fetch fails', async () => {
+    vi.stubEnv('NEXT_PUBLIC_DRESSUP_BASE', 'http://127.0.0.1:9/');
+    const fetchMock = vi.fn().mockRejectedValue(new TypeError('network'));
+    vi.stubGlobal('fetch', fetchMock);
+    await expect(loadPart('body/novice-f-0')).rejects.toBeInstanceOf(DressUpUnavailable);
+    expect(fetchMock.mock.calls[0][0]).toMatch(/^http:\/\/127\.0\.0\.1:9\/body\/novice-f-0\.[0-9a-f]{8}\.json$/);
+    vi.unstubAllGlobals();
+  });
+});
