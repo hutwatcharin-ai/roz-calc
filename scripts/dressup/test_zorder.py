@@ -88,6 +88,31 @@ class ImfTest(unittest.TestCase):
         self.assertGreater(z('head', None, 32, 0, sex='f'), z('body', None, 32, 0, sex='f'))
 
 
+class HeadgearFollowsHeadTest(unittest.TestCase):
+    def test_headgear_moves_behind_body_with_the_head(self):
+        # 초보자_남 action 32 frame 0: the imf puts the head behind the body. Every headgear
+        # (slot defaults and TB_Layer_Priority ranks alike) stays above the head, below the body.
+        for f in range(3):
+            head, body = z('head', None, 32, f), z('body', None, 32, f)
+            zs = [z('acc_lower', 446, 32, f), z('acc_mid', 1, 32, f), z('acc_upper', 2517, 32, f),
+                  z('acc_upper', 1, 32, f), z('acc_lower', 1, 32, f)]
+            for v in zs:
+                self.assertGreater(v, head)
+                self.assertLess(v, body)
+            # relative order between headgear is kept: lower < mid < 143-ranked < upper
+            self.assertLess(z('acc_lower', 1, 32, f), z('acc_mid', 1, 32, f))
+            self.assertLess(z('acc_mid', 1, 32, f), z('acc_upper', 2517, 32, f))
+            self.assertLess(z('acc_upper', 2517, 32, f), z('acc_upper', 1, 32, f))
+        # same rule for the Knight's hurt frame
+        self.assertLess(z('acc_upper', 1, 50, 0, job=KNIGHT), z('body', None, 50, 0, job=KNIGHT))
+        self.assertGreater(z('acc_upper', 1, 50, 0, job=KNIGHT), z('head', None, 50, 0, job=KNIGHT))
+
+    def test_headgear_unchanged_when_head_in_front(self):
+        self.assertEqual(z('acc_upper', 1, 0), 19 * S)
+        self.assertEqual(z('acc_upper', 2517, 0), 18 * S + 43)
+        self.assertGreater(z('acc_upper', 1, 32, 0, sex='f'), z('body', None, 32, 0, sex='f'))
+
+
 class PartZTest(unittest.TestCase):
     def test_part_frame_maps_onto_body_frame(self):
         z_of = zorder.part_z_of('robe', 61, NOVICE, 'm')

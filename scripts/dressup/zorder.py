@@ -19,7 +19,8 @@ Client rules (see task-4-report.md for the evidence):
         the rest (value - band * 100) ranks it inside the band. Values under 100 rank below the
         mids (one item: 53).
   imf   imf/<job>_<sex>.imf: layer 0 = body, layer 1 = head; where the head's priority is above
-        the body's (both 0/1) the head is drawn first: head z = body z - 1.
+        the body's (both 0/1) the head is drawn first: head z = body z - 1, and headgear
+        moves with it (between the head and the body, order kept: _follow_head).
 `frame` is the BODY's frame index; part_z_of() maps a part's own frame onto it.
 """
 import functools
@@ -156,6 +157,17 @@ def _base(kind, action):
     return (BASE_AWAY if facing_away(action) else BASE_TOWARDS)[kind]
 
 
+def _follow_head(z, action):
+    """A headgear z when the imf puts the head behind the body: headgear is drawn with the head,
+    so it keeps its order among the headgear but is squeezed into the gap between the moved head
+    ((body - 1) * SCALE) and the body (body * SCALE). The usual headgear range, head + 2 .. head
+    + 5 slots (lower band rank 0 .. upper band rank 99), maps monotonically onto head + 1 .. + 98."""
+    head = _base('head', action) * SCALE
+    lo, hi = head + 2 * SCALE, head + 5 * SCALE
+    offset = min(max(z, lo), hi - 1) - lo
+    return (_base('body', action) - 1) * SCALE + 1 + offset * 98 // (hi - lo)
+
+
 def z_for(kind, view, job, sex, action, frame):
     if kind not in KINDS:
         raise ValueError(kind)
@@ -180,7 +192,10 @@ def z_for(kind, view, job, sex, action, frame):
             # for _New_DrawOnTop, so it goes behind the body facing towards, over it facing away.
             z = _base('body', action) + 1 if facing_away(action) else _base('robe', action)
             return z * SCALE + rank
-        return _base(slot, action) * SCALE + rank
+        z = _base(slot, action) * SCALE + rank
+        if head_behind_body(job, sex, action, frame):
+            return _follow_head(z, action)
+        return z
     return _base(kind, action) * SCALE
 
 
