@@ -1,16 +1,19 @@
 'use client';
-// Everything the character can change: class, sex, hair, cloth colour, the
-// four costume slots, weapon type, direction and pose. Item names come from
-// the server (the game client's own item table); the slots, views and which
-// classes have a sprite come from the slim index in lib/dress-up/look.ts.
+// Everything the character can change, all picked by tapping: headgear and
+// garments as a grid of their own sprites (one tile per look, lib/dress-up/catalog.ts),
+// classes as their portraits, hair as drawn heads, poses and weapons as buttons.
+// Three tabs: wear, class and hair, pose and weapon. Item names come from the
+// server (the game client's own item table).
 import { useMemo, useState } from 'react';
 import {
-  INDEX, POSE_TYPE, SLOTS, classOf, hasSprite, sexOf, slotsOf, takeOff, wear, withClass,
-  type Look, type Pose, type Slot,
+  INDEX, POSE_TYPE, SLOTS, classOf, hasSprite, sexOf, takeOff, wear, withClass,
+  type Look, type Pose, type Sex, type Slot,
 } from '@/lib/dress-up/look';
+import { THUMBS, pickId, randomLook, tileDrawn, tileOf, tilesFor, type Filter, type Tile } from '@/lib/dress-up/catalog';
+import { assetUrl } from '@/lib/dress-up/load';
 
-const SLOT_TH: Record<Slot, string> = { upper: 'หมวกบน', mid: 'หมวกกลาง', lower: 'หมวกล่าง', garment: 'ผ้าคลุม (คอสตูม)' };
-const SLOT_SHORT: Record<Slot, string> = { upper: 'บน', mid: 'กลาง', lower: 'ล่าง', garment: 'ผ้าคลุม' };
+const SLOT_TH: Record<Slot, string> = { upper: 'หมวกบน', mid: 'หมวกกลาง', lower: 'หมวกล่าง', garment: 'ผ้าคลุม' };
+const FILTER_TH: Record<Filter, string> = { all: 'ทั้งหมด', costume: 'คอสตูม', plain: 'หมวกธรรมดา' };
 
 const POSE_TH: Record<Pose, string> = {
   stand: 'ยืน', walk: 'เดิน', sit: 'นั่ง', ready: 'ตั้งท่า', attack: 'โจมตี', hurt: 'โดนตี', dead: 'นอนตาย',
@@ -26,207 +29,271 @@ const WEAPON_TH: Record<string, string> = {
 };
 const weaponTh = (w: string) => w.split('-').map((p) => WEAPON_TH[p] ?? p).join(' + ');
 
-// 0 faces the viewer, then clockwise as the game counts.
-const ARROWS = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
+// The direction pad: game direction per cell, 0 faces the viewer, then clockwise.
+const PAD: (number | null)[] = [3, 4, 5, 2, null, 6, 1, 0, 7];
+const PAD_ARROW = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
 
 // Cloth palettes by position: the game's own colour, then the stylist's alternatives.
 const CLOTH_TH = (i: number) => (i === 0 ? 'เดิม' : `แบบ ${i}`);
+
+// Classes with a portrait in public/images/jobs.
+const NO_PORTRAIT = new Set(['novice']);
+
+const PAGE = 60;
+
+type Tab = 'wear' | 'job' | 'pose';
+const TAB_TH: Record<Tab, string> = { wear: 'ใส่ของ', job: 'อาชีพ · ผม', pose: 'ท่า · อาวุธ' };
 
 interface Props {
   look: Look;
   onChange: (look: Look) => void;
   /** item id -> name */
   names: Record<string, string>;
+  /** item ids that are costumes */
+  costume: number[];
   /** class slug -> name */
   classNames: Record<string, string>;
 }
 
-function SlotPicker({ slot, look, onChange, names }: { slot: Slot } & Omit<Props, 'classNames'>) {
-  const [q, setQ] = useState('');
-  const sex = sexOf(look);
-  const pool = useMemo(
-    () => Object.keys(INDEX.items).map(Number).filter((id) => slotsOf(id).includes(slot))
-      .sort((a, b) => (names[a] ?? '').localeCompare(names[b] ?? '')),
-    [slot, names],
+const SHEET = assetUrl(THUMBS.file);
+const ROWS = Math.ceil((Math.max(-1, ...Object.values(THUMBS.at)) + 1) / THUMBS.cols);
+
+/** One cell of the thumb sheet, scaled to fill its box. */
+function Thumb({ cell }: { cell: number | undefined }) {
+  if (cell === undefined || !SHEET) return <span className="dress__nopic" aria-hidden>?</span>;
+  const col = cell % THUMBS.cols;
+  const row = Math.floor(cell / THUMBS.cols);
+  return (
+    <span
+      className="dress__pic"
+      aria-hidden
+      style={{
+        backgroundImage: `url(${SHEET})`,
+        backgroundSize: `${THUMBS.cols * 100}% ${ROWS * 100}%`,
+        backgroundPosition: `${(col / Math.max(1, THUMBS.cols - 1)) * 100}% ${(row / Math.max(1, ROWS - 1)) * 100}%`,
+      }}
+    />
   );
-  const hits = useMemo(() => {
-    const t = q.trim().toLowerCase();
-    if (!t) return [];
-    return pool.filter((id) => String(id) === t || (names[id] ?? '').toLowerCase().includes(t)).slice(0, 8);
-  }, [q, pool, names]);
+}
+
+function WearTab({ look, onChange, names, costume }: Omit<Props, 'classNames'>) {
+  const [slot, setSlot] = useState<Slot>('upper');
+  const [filter, setFilter] = useState<Filter>('all');
+  const [shown, setShown] = useState(PAGE);
+  const sex = sexOf(look);
+  const cos = useMemo(() => new Set(costume), [costume]);
+  const tiles = useMemo(() => tilesFor(slot, filter, cos), [slot, filter, cos]);
   const worn = look[slot];
-  const tag = (id: number) => {
-    const s = slotsOf(id);
-    return s.length > 1 ? s.map((x) => SLOT_SHORT[x]).join('+') : null;
+  const wornTile = worn !== undefined ? tileOf(worn) : undefined;
+  const label = (t: Tile) => [...new Set(t.ids.map((id) => names[id] ?? `#${id}`))].join(' / ');
+
+  const tap = (t: Tile) => {
+    if (wornTile === t) onChange(takeOff(look, slot));
+    else onChange(wear(look, pickId(t, look.cls, sex, filter, cos)));
   };
+  const goSlot = (s: Slot) => { setSlot(s); setShown(PAGE); };
+  const goFilter = (f: Filter) => { setFilter(f); setShown(PAGE); };
 
   return (
-    <div className="dress__slot">
-      <span className="dress__slotname">{SLOT_TH[slot]}</span>
-      {worn !== undefined ? (
-        <span className="dress__worn">
-          <span className="dress__wornname">{names[worn] ?? `#${worn}`}</span>
-          {tag(worn) && <small className="dress__tag">{tag(worn)}</small>}
-          {!hasSprite(worn, look.cls, sex) && <small className="dress__none">ยังไม่มีภาพ</small>}
-          <button type="button" className="dress__x" onClick={() => onChange(takeOff(look, slot))} aria-label={`ถอด${SLOT_TH[slot]}`}>✕</button>
-        </span>
-      ) : null}
-      <input
-        type="search"
-        className="dress__input"
-        placeholder={`ค้นหา${SLOT_TH[slot]} (ชื่อหรือไอดี)`}
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        aria-label={`ค้นหา${SLOT_TH[slot]}`}
-      />
-      {hits.length > 0 && (
-        <ul className="dress__hits">
-          {hits.map((id) => (
-            <li key={id}>
-              <button type="button" onClick={() => { onChange(wear(look, id)); setQ(''); }}>
-                <span>{names[id] ?? `#${id}`}</span>
-                {tag(id) && <small className="dress__tag">{tag(id)}</small>}
-                {!hasSprite(id, look.cls, sex) && <small className="dress__none">ยังไม่มีภาพ</small>}
-              </button>
-            </li>
-          ))}
-        </ul>
+    <div className="dress__tabbody">
+      <button type="button" className="dress__dice" onClick={() => onChange(randomLook(look, sex))}>
+        🎲 สุ่มทั้งตัว
+      </button>
+      <div className="dress__slots" role="tablist" aria-label="ช่องที่ใส่">
+        {SLOTS.map((s) => {
+          const id = look[s];
+          const t = id !== undefined ? tileOf(id) : undefined;
+          return (
+            <button key={s} type="button" role="tab" aria-selected={slot === s} className="dress__slottab" onClick={() => goSlot(s)}>
+              <span className="dress__slotpic">{t ? <Thumb cell={t.thumb} /> : <span className="dress__plus" aria-hidden>＋</span>}</span>
+              {SLOT_TH[s]}
+            </button>
+          );
+        })}
+      </div>
+      <div className="dress__chips" role="group" aria-label="กรอง">
+        {(Object.keys(FILTER_TH) as Filter[]).map((f) => (
+          <button key={f} type="button" className="dress__chip dress__chip--pill" aria-pressed={filter === f} onClick={() => goFilter(f)}>
+            {FILTER_TH[f]}
+          </button>
+        ))}
+      </div>
+      <div className="dress__grid">
+        {tiles.slice(0, shown).map((t) => {
+          const on = wornTile === t;
+          const drawn = tileDrawn(t, look.cls, sex);
+          const name = label(t);
+          return (
+            <button
+              key={t.key}
+              type="button"
+              className="dress__tile"
+              aria-pressed={on}
+              data-undrawn={drawn ? undefined : ''}
+              title={drawn ? name : `${name} (อาชีพนี้ยังไม่มีภาพ)`}
+              aria-label={name}
+              onClick={() => tap(t)}
+            >
+              <Thumb cell={t.thumb} />
+              {t.slots.length > 1 && <small className="dress__ms" title={t.slots.map((x) => SLOT_TH[x]).join(' + ')}>{t.slots.length} ช่อง</small>}
+            </button>
+          );
+        })}
+      </div>
+      {shown < tiles.length && (
+        <button type="button" className="dress__more" onClick={() => setShown((n) => n + PAGE * 2)}>
+          ดูเพิ่ม (อีก {tiles.length - shown} แบบ)
+        </button>
       )}
-      {q.trim() && hits.length === 0 && <p className="dress__empty">ไม่เจอชื่อนี้ใน{SLOT_TH[slot]}</p>}
+      <p className="dress__namebar" aria-live="polite">
+        {worn !== undefined ? (
+          <>
+            <span>{SLOT_TH[slot]}: <b>{names[worn] ?? `#${worn}`}</b></span>
+            {!hasSprite(worn, look.cls, sex) && <small className="dress__none">อาชีพนี้ยังไม่มีภาพ</small>}
+            <button type="button" className="dress__x" onClick={() => onChange(takeOff(look, slot))}>ถอด</button>
+          </>
+        ) : (
+          <span>{SLOT_TH[slot]}: ยังไม่ได้ใส่ · จิ้มรูปเพื่อใส่ จิ้มซ้ำเพื่อถอด</span>
+        )}
+      </p>
     </div>
   );
 }
 
-export default function DressPicker({ look, onChange, names, classNames }: Props) {
+function JobTab({ look, onChange, classNames }: Pick<Props, 'look' | 'onChange' | 'classNames'>) {
   const cls = classOf(look.cls);
   const sex = sexOf(look);
   const set = (patch: Partial<Look>) => onChange({ ...look, ...patch });
-  const turn = (by: number) => set({ dir: (look.dir + by + 8) % 8 });
-  const still = look.pose === 'stand' || look.pose === 'sit';
-
   return (
-    <div className="dress__picker">
-      <fieldset className="dress__group">
-        <legend>อาชีพ</legend>
-        <div className="dress__chips">
+    <div className="dress__tabbody">
+      <section className="dress__sec">
+        <h3 className="dress__h">อาชีพ</h3>
+        <div className="dress__jobs">
           {INDEX.classes.map((c) => (
-            <button
-              key={c.slug}
-              type="button"
-              className="dress__chip"
-              aria-pressed={c.slug === look.cls}
-              onClick={() => onChange(withClass(look, c.slug))}
-            >
-              {classNames[c.slug] ?? c.slug}
+            <button key={c.slug} type="button" className="dress__job" aria-pressed={c.slug === look.cls} onClick={() => onChange(withClass(look, c.slug))}>
+              {NO_PORTRAIT.has(c.slug)
+                ? <span className="dress__jobpic dress__jobpic--none" aria-hidden>N</span>
+                : <img className="dress__jobpic" src={`/images/jobs/${c.slug}.png`} alt="" loading="lazy" />}
+              <span className="dress__jobname">{classNames[c.slug] ?? c.slug}</span>
             </button>
           ))}
         </div>
-      </fieldset>
-
-      <div className="dress__row">
-        <fieldset className="dress__group">
-          <legend>เพศ</legend>
-          <div className="dress__chips">
-            {(['m', 'f'] as const).map((s) => (
-              <button
-                key={s}
-                type="button"
-                className="dress__chip dress__chip--sex"
-                aria-pressed={sex === s}
-                disabled={!cls?.sexes.includes(s)}
-                onClick={() => set({ sex: s })}
-              >
-                {s === 'm' ? 'ชาย' : 'หญิง'}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-        <fieldset className="dress__group">
-          <legend>สีชุด</legend>
-          <div className="dress__chips">
-            {(cls?.cloth ?? [0]).map((c, i) => (
-              <button key={c} type="button" className="dress__chip" aria-pressed={look.cloth === c} onClick={() => set({ cloth: c })}>
-                {CLOTH_TH(i)}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-      </div>
-
-      <div className="dress__row">
-        <fieldset className="dress__group">
-          <legend>ทรงผม</legend>
-          <div className="dress__stepper">
-            <button type="button" className="dress__chip" aria-label="ทรงก่อนหน้า"
-              onClick={() => set({ hair: look.hair <= 1 ? INDEX.hair.styles : look.hair - 1 })}>‹</button>
-            <output className="dress__num mono">{look.hair}</output>
-            <button type="button" className="dress__chip" aria-label="ทรงถัดไป"
-              onClick={() => set({ hair: look.hair >= INDEX.hair.styles ? 1 : look.hair + 1 })}>›</button>
-          </div>
-        </fieldset>
-        <fieldset className="dress__group">
-          <legend>สีผม</legend>
-          <div className="dress__chips">
-            {INDEX.hair.colours.map((c) => (
-              <button key={c.id} type="button" className="dress__chip" aria-pressed={look.hairColour === c.id} onClick={() => set({ hairColour: c.id })}>
-                {c.th}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-      </div>
-
-      <fieldset className="dress__group">
-        <legend>ของสวม</legend>
-        {SLOTS.map((s) => <SlotPicker key={s} slot={s} look={look} onChange={onChange} names={names} />)}
-      </fieldset>
-
-      <fieldset className="dress__group">
-        <legend>อาวุธ</legend>
-        <select
-          className="dress__input"
-          value={look.weapon ?? ''}
-          onChange={(e) => set({ weapon: e.target.value || undefined })}
-          aria-label="ประเภทอาวุธ"
-        >
-          <option value="">ไม่ถืออาวุธ</option>
-          {(cls?.weapons ?? []).map((w) => <option key={w} value={w}>{weaponTh(w)}</option>)}
-        </select>
-      </fieldset>
-
-      <div className="dress__row">
-        <fieldset className="dress__group">
-          <legend>ทิศ</legend>
-          <div className="dress__stepper">
-            <button type="button" className="dress__chip" onClick={() => turn(-1)} aria-label="หมุนทวนเข็ม">⟲</button>
-            <output className="dress__arrow" aria-label={`ทิศ ${look.dir}`}>{ARROWS[look.dir]}</output>
-            <button type="button" className="dress__chip" onClick={() => turn(1)} aria-label="หมุนตามเข็ม">⟳</button>
-          </div>
-        </fieldset>
-        {still && (
-          <fieldset className="dress__group">
-            <legend>หัน</legend>
-            <div className="dress__chips">
-              {HEAD_TH.map((t, i) => (
-                <button key={t} type="button" className="dress__chip" aria-pressed={look.headDir === i} onClick={() => set({ headDir: i as 0 | 1 | 2 })}>
-                  {t}
-                </button>
-              ))}
-            </div>
-          </fieldset>
-        )}
-      </div>
-
-      <fieldset className="dress__group">
-        <legend>ท่า</legend>
+      </section>
+      <section className="dress__sec">
+        <h3 className="dress__h">เพศ</h3>
         <div className="dress__chips">
+          {(['m', 'f'] as const).map((s) => (
+            <button key={s} type="button" className="dress__chip dress__chip--sex" aria-pressed={sex === s} disabled={!cls?.sexes.includes(s)} onClick={() => set({ sex: s })}>
+              {s === 'm' ? 'ชาย' : 'หญิง'}
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="dress__sec">
+        <h3 className="dress__h">ทรงผม</h3>
+        <div className="dress__grid dress__grid--hair">
+          {Array.from({ length: INDEX.hair.styles }, (_, i) => i + 1).map((n) => (
+            <button key={n} type="button" className="dress__tile" aria-pressed={look.hair === n} aria-label={`ทรงที่ ${n}`} onClick={() => set({ hair: n })}>
+              <Thumb cell={THUMBS.at[`head/${n}-${sex as Sex}`]} />
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="dress__sec">
+        <h3 className="dress__h">สีผม</h3>
+        <div className="dress__grid dress__grid--hair">
+          {INDEX.hair.colours.map((c) => (
+            <button key={c.id} type="button" className="dress__tile" aria-pressed={look.hairColour === c.id} aria-label={c.th} title={c.th} onClick={() => set({ hairColour: c.id })}>
+              <Thumb cell={THUMBS.at[`colour/${c.id}-${sex}`]} />
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="dress__sec">
+        <h3 className="dress__h">สีชุด</h3>
+        <div className="dress__chips">
+          {(cls?.cloth ?? [0]).map((c, i) => (
+            <button key={c} type="button" className="dress__chip" aria-pressed={look.cloth === c} onClick={() => set({ cloth: c })}>
+              {CLOTH_TH(i)}
+            </button>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function PoseTab({ look, onChange }: Pick<Props, 'look' | 'onChange'>) {
+  const cls = classOf(look.cls);
+  const set = (patch: Partial<Look>) => onChange({ ...look, ...patch });
+  const still = look.pose === 'stand' || look.pose === 'sit';
+  return (
+    <div className="dress__tabbody">
+      <section className="dress__sec">
+        <h3 className="dress__h">ท่า</h3>
+        <div className="dress__poses">
           {(Object.keys(POSE_TYPE) as Pose[]).map((p) => (
             <button key={p} type="button" className="dress__chip" aria-pressed={look.pose === p} onClick={() => set({ pose: p })}>
               {POSE_TH[p]}
             </button>
           ))}
         </div>
-      </fieldset>
+      </section>
+      <div className="dress__pair">
+        <section className="dress__sec">
+          <h3 className="dress__h">หันตัว</h3>
+          <div className="dress__pad">
+            {PAD.map((d, i) => (d === null
+              ? <span key={i} className="dress__padmid" aria-hidden>◆</span>
+              : (
+                <button key={i} type="button" className="dress__padbtn" aria-pressed={look.dir === d} aria-label={`ทิศ ${PAD_ARROW[d]}`} onClick={() => set({ dir: d })}>
+                  {PAD_ARROW[d]}
+                </button>
+              )))}
+          </div>
+        </section>
+        {still && (
+          <section className="dress__sec">
+            <h3 className="dress__h">หันหัว</h3>
+            <div className="dress__chips dress__chips--col">
+              {HEAD_TH.map((t, i) => (
+                <button key={t} type="button" className="dress__chip" aria-pressed={look.headDir === i} onClick={() => set({ headDir: i as 0 | 1 | 2 })}>
+                  {t}
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+      <section className="dress__sec">
+        <h3 className="dress__h">อาวุธ</h3>
+        <div className="dress__chips">
+          <button type="button" className="dress__chip" aria-pressed={!look.weapon} onClick={() => set({ weapon: undefined })}>ไม่ถือ</button>
+          {(cls?.weapons ?? []).map((w) => (
+            <button key={w} type="button" className="dress__chip" aria-pressed={look.weapon === w} onClick={() => set({ weapon: w })}>
+              {weaponTh(w)}
+            </button>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default function DressPicker({ look, onChange, names, costume, classNames }: Props) {
+  const [tab, setTab] = useState<Tab>('wear');
+  return (
+    <div className="dress__picker">
+      <div className="dress__tabs" role="tablist" aria-label="แต่งตัว">
+        {(Object.keys(TAB_TH) as Tab[]).map((t) => (
+          <button key={t} type="button" role="tab" aria-selected={tab === t} className="dress__tab" onClick={() => setTab(t)}>
+            {TAB_TH[t]}
+          </button>
+        ))}
+      </div>
+      {tab === 'wear' && <WearTab look={look} onChange={onChange} names={names} costume={costume} />}
+      {tab === 'job' && <JobTab look={look} onChange={onChange} classNames={classNames} />}
+      {tab === 'pose' && <PoseTab look={look} onChange={onChange} />}
     </div>
   );
 }

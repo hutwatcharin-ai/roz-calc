@@ -29,6 +29,9 @@ const local = {};
 for (const [key, p] of Object.entries(manifest.parts)) {
   for (const ext of ['.json', '.webp']) local[`${key}.${p.hash}${ext}`] = p.hash;
 }
+// The picker's tile sheet (scripts/build-dress-up-thumbs.py): its name carries its hash too.
+const thumbs = JSON.parse(await readFile(path.join(ROOT, 'data', 'dress-up-thumbs.json'), 'utf8'));
+local[thumbs.file] = thumbs.file.split('.').at(-2);
 
 if (process.argv.includes('--check')) {
   const base = process.env.NEXT_PUBLIC_DRESSUP_BASE;

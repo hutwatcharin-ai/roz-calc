@@ -5,8 +5,9 @@ import { DEFAULT_LOOK, type Look } from '@/lib/dress-up/look';
 import DressPicker from './DressPicker';
 import DressStage from './DressStage';
 
-export default function DressRoom({ names, classNames, initial = DEFAULT_LOOK }: {
+export default function DressRoom({ names, costume, classNames, initial = DEFAULT_LOOK }: {
   names: Record<string, string>;
+  costume: number[];
   classNames: Record<string, string>;
   initial?: Look;
 }) {
@@ -17,7 +18,7 @@ export default function DressRoom({ names, classNames, initial = DEFAULT_LOOK }:
         <p className="cfit__label">▶ DRESS ROOM</p>
         <DressStage look={look} />
       </div>
-      <DressPicker look={look} onChange={setLook} names={names} classNames={classNames} />
+      <DressPicker look={look} onChange={setLook} names={names} costume={costume} classNames={classNames} />
     </div>
   );
 }

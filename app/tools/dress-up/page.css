@@ -1,7 +1,7 @@
 /* Dress-up room (dress-up plan 1, Task 6): the .cfit stage look, larger, beside the picker. */
 .dress { display: grid; gap: 16px; align-items: start; }
 @media (min-width: 960px) {
-  .dress { grid-template-columns: minmax(0, 600px) minmax(0, 1fr); }
+  .dress { grid-template-columns: minmax(0, 520px) minmax(0, 1fr); }
   .dress__stagewrap { position: sticky; top: 84px; }
 }
 
@@ -18,10 +18,57 @@
 .dress__msg { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; padding: 8px 14px; border-radius: 8px; background: rgba(11, 7, 36, .85); color: var(--dim); font-size: 15px; white-space: nowrap; }
 .dress__msg--err { border: 1px solid var(--pink); color: var(--pink); text-shadow: 0 0 8px rgba(255, 61, 154, .5); }
 
-.dress__picker { display: grid; gap: 12px; min-width: 0; }
-.dress__row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-.dress__group { min-width: 0; margin: 0; padding: 10px 12px 12px; border: 1px solid var(--hair); border-radius: 10px; background: var(--panel); }
-.dress__group > legend { padding: 0 6px; font: 700 11px/1 ui-monospace, monospace; letter-spacing: .14em; color: var(--cyan); }
+
+.dress__picker { min-width: 0; border: 1px solid var(--hair); border-radius: 10px; background: var(--panel); padding: 10px; }
+.dress__tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+.dress__tab { min-height: 42px; border: 1px solid var(--hair); border-radius: 8px; background: none; color: var(--dim); font: 600 15px var(--font-sarabun), sans-serif; cursor: pointer; }
+.dress__tab[aria-selected=true] { background: var(--cyan); border-color: var(--cyan); color: #071020; box-shadow: 0 0 10px var(--cyan); }
+.dress__tab:focus-visible, .dress__tile:focus-visible, .dress__slottab:focus-visible, .dress__job:focus-visible, .dress__padbtn:focus-visible, .dress__dice:focus-visible, .dress__more:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.dress__tabbody { display: grid; gap: 10px; min-width: 0; }
+
+.dress__dice { min-height: 44px; border: 2px solid var(--yellow); border-radius: 10px; background: rgba(255, 229, 61, .08); color: var(--yellow); font: 700 16px var(--font-sarabun), sans-serif; cursor: pointer; text-shadow: 0 0 8px rgba(255, 229, 61, .45); }
+.dress__dice:hover { background: rgba(255, 229, 61, .16); }
+
+.dress__slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.dress__slottab { display: grid; justify-items: center; gap: 2px; padding: 6px 2px; border: 1px solid var(--hair); border-radius: 10px; background: #0d0926; color: var(--dim); font: 400 13px var(--font-sarabun), sans-serif; cursor: pointer; }
+.dress__slottab[aria-selected=true] { border-color: var(--cyan); color: var(--text); box-shadow: 0 0 8px rgba(61, 232, 255, .5); }
+.dress__slotpic { display: grid; place-items: center; width: 44px; height: 44px; }
+.dress__plus { color: var(--faint); font-size: 22px; }
+
+
+.dress__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 6px; }
+.dress__grid--hair { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); }
+.dress__tile { position: relative; aspect-ratio: 1; padding: 4px; border: 1px solid var(--hair); border-radius: 8px; background: #0d0926; cursor: pointer; }
+.dress__tile:hover { border-color: var(--cyan); }
+.dress__tile[aria-pressed=true] { border: 2px solid var(--yellow); box-shadow: 0 0 10px rgba(255, 229, 61, .6); }
+.dress__tile[aria-pressed=true]::after { content: '✓'; position: absolute; right: 3px; top: 0; color: var(--yellow); font-weight: 700; font-size: 13px; }
+.dress__tile[data-undrawn] { opacity: .35; }
+.dress__pic { display: block; width: 100%; height: 100%; background-repeat: no-repeat; image-rendering: pixelated; }
+.dress__nopic { display: grid; place-items: center; width: 100%; height: 100%; color: var(--faint); }
+.dress__ms { position: absolute; left: 2px; bottom: 1px; padding: 0 3px; border-radius: 3px; background: rgba(0, 0, 0, .65); color: var(--cyan); font-size: 10px; line-height: 1.4; }
+.dress__more { min-height: 40px; border: 1px dashed var(--cyan); border-radius: 8px; background: none; color: var(--cyan); font: 600 14px var(--font-sarabun), sans-serif; cursor: pointer; }
+.dress__namebar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 44px; margin: 0; padding: 6px 6px 6px 10px; border: 1px dashed rgba(61, 232, 255, .35); border-radius: 8px; color: var(--dim); font-size: 14px; }
+.dress__namebar > span { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.dress__namebar b { color: var(--text); }
+.dress__none { padding: 1px 6px; border: 1px solid var(--pink); border-radius: 4px; color: var(--pink); font-size: 11.5px; white-space: nowrap; }
+.dress__x { flex: none; min-height: 32px; padding: 0 12px; border: 1px solid var(--hair); border-radius: 6px; background: none; color: var(--dim); font: 400 13px var(--font-sarabun), sans-serif; cursor: pointer; }
+.dress__x:hover { border-color: var(--pink); color: var(--pink); }
+
+.dress__sec { min-width: 0; }
+.dress__h { margin: 0 0 6px; font: 700 12px/1 ui-monospace, monospace; letter-spacing: .12em; color: var(--cyan); }
+.dress__jobs { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; }
+.dress__job { display: grid; justify-items: center; gap: 2px; padding: 4px 2px 6px; border: 1px solid var(--hair); border-radius: 8px; background: #0d0926; color: var(--dim); font: 400 12px/1.2 var(--font-sarabun), sans-serif; cursor: pointer; }
+.dress__job[aria-pressed=true] { border: 2px solid var(--yellow); color: var(--text); box-shadow: 0 0 10px rgba(255, 229, 61, .5); }
+.dress__jobpic { width: 44px; height: 52px; object-fit: contain; image-rendering: pixelated; }
+.dress__jobpic--none { display: grid; place-items: center; color: var(--faint); font: 700 20px ui-monospace, monospace; }
+.dress__jobname { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.dress__poses { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 6px; }
+.dress__pair { display: flex; flex-wrap: wrap; gap: 16px; }
+.dress__pad { display: grid; grid-template-columns: repeat(3, 44px); gap: 4px; }
+.dress__padbtn { height: 44px; border: 1px solid var(--hair); border-radius: 8px; background: #0d0926; color: var(--yellow); font-size: 20px; cursor: pointer; }
+.dress__padbtn[aria-pressed=true] { background: var(--yellow); border-color: var(--yellow); color: #160c00; }
+.dress__padmid { display: grid; place-items: center; color: var(--faint); font-size: 12px; }
 .dress__chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .dress__chip { cursor: pointer; min-height: 36px; display: inline-flex; align-items: center; padding: 0 12px; border: 1px solid var(--hair); border-radius: 6px; background: transparent; color: var(--dim); font: 400 13.5px var(--font-sarabun), sans-serif; }
 .dress__chip:hover:not(:disabled) { border-color: var(--cyan); color: var(--text); }
@@ -29,25 +76,16 @@
 .dress__chip[aria-pressed=true] { color: #0b0b1a; background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
 .dress__chip--sex[aria-pressed=true] { background: #FF3DB8; border-color: #FF3DB8; box-shadow: 0 0 8px #FF3DB8; }
 .dress__chip:disabled { opacity: .35; cursor: not-allowed; }
-.dress__stepper { display: flex; align-items: center; gap: 8px; }
-.dress__num { min-width: 2.5ch; text-align: center; font-size: 20px; color: var(--yellow); }
-.dress__arrow { min-width: 2ch; text-align: center; font-size: 26px; line-height: 1; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 229, 61, .55); }
-
-.dress__slot { position: relative; display: grid; gap: 6px; padding: 8px 0; border-top: 1px dashed rgba(61, 232, 255, .2); }
-.dress__slot:first-of-type { border-top: 0; padding-top: 2px; }
-.dress__slotname { font-size: 13px; font-weight: 700; color: var(--text); }
-.dress__worn { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px 4px 4px 10px; border: 1px solid var(--cyan); border-radius: 8px; background: #120b33; box-shadow: 0 0 8px rgba(61, 232, 255, .25); }
-.dress__wornname { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
-.dress__tag { padding: 1px 6px; border-radius: 4px; background: rgba(61, 232, 255, .14); color: var(--cyan); font-size: 11.5px; }
-.dress__none { padding: 1px 6px; border: 1px solid var(--pink); border-radius: 4px; color: var(--pink); font-size: 11.5px; white-space: nowrap; }
-.dress__x { flex: none; width: 32px; height: 32px; border: 1px solid var(--hair); border-radius: 6px; background: none; color: var(--dim); cursor: pointer; }
-.dress__x:hover { border-color: var(--pink); color: var(--pink); }
-.dress__input { width: 100%; min-height: 40px; padding: 0 10px; border: 1px solid var(--field-edge); border-radius: 8px; background: var(--field); color: var(--text); font: 400 15px var(--font-sarabun), sans-serif; }
-.dress__hits { list-style: none; margin: 0; padding: 4px; border: 1px solid var(--hair); border-radius: 8px; background: #0a0720; }
-.dress__hits button { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%; min-height: 40px; padding: 2px 8px; border: 0; border-radius: 6px; background: none; color: var(--text); font: 400 14px var(--font-sarabun), sans-serif; text-align: left; cursor: pointer; }
-.dress__hits button > span { flex: 1 1 auto; min-width: 0; }
-.dress__hits button:hover, .dress__hits button:focus-visible { background: rgba(61, 232, 255, .08); }
-.dress__empty { margin: 0; font-size: 13px; color: var(--faint); }
 .dress__msg--err { display: grid; justify-items: center; gap: 8px; }
 .dress__msg--err p { margin: 0; }
 .dress__msg--err .dress__chip { color: var(--text); border-color: var(--pink); }
+.dress__chip--pill { min-height: 34px; border-radius: 999px; }
+.dress__chip--pill[aria-pressed=true] { background: rgba(255, 61, 154, .25); border-color: var(--pink); color: #fff; box-shadow: none; }
+.dress__chips--col { flex-direction: column; align-items: stretch; }
+.dress__poses .dress__chip { justify-content: center; }
+/* Last, so it wins over the rules above. Phone: the stage stays pinned at the top while the panel scrolls under it (layout A). */
+@media (max-width: 959px) {
+  .dress__stagewrap { position: sticky; top: 0; z-index: 5; padding: 6px; }
+  .dress__stagewrap > .cfit__label { display: none; }
+  .dress__stage { max-width: min(600px, 34vh); }
+}

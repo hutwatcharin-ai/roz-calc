@@ -19,7 +19,12 @@ export const metadata = {
 export default function DressUpPage() {
   // Only the names the picker can offer: the items the index draws.
   const names: Record<string, string> = {};
-  for (const id of Object.keys(INDEX.items)) names[id] = gameItem(Number(id))?.name ?? `#${id}`;
+  const costume: number[] = [];
+  for (const id of Object.keys(INDEX.items)) {
+    const g = gameItem(Number(id));
+    names[id] = g?.name ?? `#${id}`;
+    if (g?.costume) costume.push(Number(id));
+  }
   const classNames: Record<string, string> = {};
   for (const c of INDEX.classes) classNames[c.slug] = classStats(c.slug)?.name ?? c.slug;
 
@@ -29,10 +34,10 @@ export default function DressUpPage() {
         <div className="bhero__text">
           <p className="bhero__kicker mono">▶ DRESS ROOM · TEST</p>
           <h1 className="bhero__title">ห้องแต่งตัว <span>(ทดสอบ)</span></h1>
-          <p className="bhero__lead">เลือกอาชีพ ทรงผม สีผม คอสตูม อาวุธ แล้วดูตัวละครขยับแบบในเกม</p>
+          <p className="bhero__lead">จิ้มเลือกหมวก คอสตูม ทรงผม อาชีพ ท่า แล้วดูตัวละครขยับแบบในเกม</p>
         </div>
       </header>
-      <DressRoom names={names} classNames={classNames} />
+      <DressRoom names={names} costume={costume} classNames={classNames} />
     </main>
   );
 }

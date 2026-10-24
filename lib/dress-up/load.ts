@@ -23,6 +23,15 @@ function base(): string {
   return b.endsWith('/') ? b : `${b}/`;
 }
 
+/** A published file's full URL (thumb/sheet.<hash>.webp, ...), or null when no base URL is set. */
+export function assetUrl(rel: string): string | null {
+  try {
+    return base() + rel;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchOk(url: string): Promise<Response> {
   let res: Response;
   try {
