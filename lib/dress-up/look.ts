@@ -129,7 +129,9 @@ export function drawable(look: Look): { parts: PartRef[]; missing: number[] } {
     return !!files[key];
   };
   const cloth = c?.cloth.includes(look.cloth) ? look.cloth : 0;
-  add(`body/${look.cls}-${sex}-${cloth}`, false, 'body');
+  // No body, nothing to draw: every other part is placed on the body's anchor,
+  // and the compositor would take the first part's anchor instead (the head's).
+  if (!add(`body/${look.cls}-${sex}-${cloth}`, false, 'body')) return { parts: [], missing: [] };
   add(`head/${look.hair}-${sex}-${look.hairColour}`, true, 'head');
   const robes: number[] = [];
   for (const id of wornItems(look)) {
@@ -164,13 +166,22 @@ export function actionFor(look: Look): number {
 /**
  * The frame a part shows. In stand and sit the body, head and headgear frames
  * are head directions (ahead, left, right), not animation, so they show
- * headDir. Robes and weapons always loop on their own delay, whatever the
- * body's frame count (Review Focus 5).
+ * headDir. A part with 3 x g frames there (animated headgear, 24 = 3 x 8) is
+ * g frames per head direction: it shows group headDir, looping on its delay.
+ * Robes and weapons always loop on their own delay, whatever the body's frame
+ * count (Review Focus 5).
  */
 export function frameFor(kind: PartKind, part: PartData, action: number, look: Look, ms: number): number {
   if ((look.pose === 'stand' || look.pose === 'sit') && (kind === 'body' || kind === 'head' || kind === 'acc')) {
-    const list = part.acts[String(action)] ?? part.acts['0'];
-    return Math.min(look.headDir, list.length - 1);
+    const key = part.acts[String(action)] ? String(action) : '0';
+    const n = part.acts[key].length;
+    // Animated headgear: 3 head directions x g frames each (ghostring hat: 24 = 3 x 8).
+    if (n > 3 && n % 3 === 0) {
+      const g = n / 3;
+      const delay = part.delay[key] || 40;
+      return look.headDir * g + (Math.floor(ms / delay) % g);
+    }
+    return Math.min(look.headDir, n - 1);
   }
   return frameAt(part, action, ms);
 }

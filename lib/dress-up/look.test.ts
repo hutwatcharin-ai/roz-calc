@@ -74,6 +74,12 @@ describe('partsFor', () => {
     for (const k of keysOf(look)) expect((full.files as Record<string, string>)[k]).toBeTruthy();
   });
 
+  it('no body file means nothing is drawn, never a look anchored on the head', () => {
+    const look = wear({ ...DEFAULT_LOOK, cls: 'gunslinger', weapon: 'dagger' }, UPPER_A);
+    expect(drawable(look).parts).toEqual([]);
+    expect(partsFor(look)).toEqual([]);
+  });
+
   it('a weapon type the class cannot hold and a cloth it lacks are dropped', () => {
     const keys = keysOf({ ...DEFAULT_LOOK, cls: 'mage', weapon: 'katar', cloth: 7 });
     expect(keys).toEqual(['body/mage-m-0', 'head/1-m-0']);
@@ -130,6 +136,16 @@ describe('frameFor', () => {
     expect(frameFor('robe', part(3), 0, look, 0)).toBe(0);
     expect(frameFor('robe', part(3), 0, look, 150)).toBe(1);
     expect(frameFor('weapon', part(3), 0, { ...look, pose: 'sit' }, 150)).toBe(1);
+  });
+
+  it('in stand, a 24-frame headgear is 3 head directions x 8 frames that keep animating', () => {
+    const hat = part(24, 100);
+    for (const headDir of [0, 1, 2] as const) {
+      const look = { ...DEFAULT_LOOK, headDir };
+      for (let t = 0; t < 8; t++) expect(frameFor('acc', hat, 0, look, t * 100 + 50)).toBe(headDir * 8 + t);
+      expect(frameFor('acc', hat, 0, look, 850)).toBe(headDir * 8); // wraps inside its group
+    }
+    expect(frameFor('acc', hat, 0, { ...DEFAULT_LOOK, pose: 'sit', headDir: 2 }, 350)).toBe(19);
   });
 
   it('in walk, every part runs on its own delay', () => {

@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import full from '@/data/dress-up.json';
 import slim from '@/data/dress-up-client.json';
-// @ts-expect-error plain .mjs script without types
 import { buildClient } from '@/scripts/build-dress-up-client.mjs';
 
 describe('data/dress-up-client.json', () => {

@@ -53,7 +53,7 @@ describe('composeFrame', () => {
       return list[pl.frame % list.length][0].some((l) => l[9] !== 0);
     });
     if (rotated) {
-      console.log(`look #${i} has rot: ${diff} differing pixels`);
+      if (diff > 0) console.log(`look #${i} has rot: ${diff} differing pixels`);
       expect(diff).toBeLessThanOrEqual(200 * 200 * 0.005);
     } else {
       expect(diff).toBe(0);

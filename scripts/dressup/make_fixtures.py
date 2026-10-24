@@ -26,8 +26,7 @@ from dressup import part, reference, zorder  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(HERE))
 OUT = os.path.join(ROOT, 'lib', 'dress-up', '__fixtures__')
 LIMIT = 1536 * 1024
-GRF = 'D:/Data grf roz/data_grf_extracted/files/data'
-NEW = 'D:/Data grf roz/grf-2026-10-15-sprites/files/data'
+GRF = zorder.GRF  # the 22 Sep extract; src() takes the 15 Oct copy when there is one
 SPRITE = f'{GRF}/sprite'
 SEXES = {'m': '남', 'f': '여'}
 LOOKS = 30
@@ -162,4 +161,5 @@ def main():
         sys.exit(1)
 
 
-main()
+if __name__ == '__main__':
+    main()
