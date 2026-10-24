@@ -113,6 +113,35 @@ class HeadgearFollowsHeadTest(unittest.TestCase):
         self.assertGreater(z('acc_upper', 1, 32, 0, sex='f'), z('body', None, 32, 0, sex='f'))
 
 
+class BakedZTest(unittest.TestCase):
+    """z_baked: head and headgear files are shared by every class, so their z cannot hold the
+    per-class imf rule; the body (a per-class file) carries it instead. The drawing order must
+    be the same as z_for's."""
+
+    PARTS = (('robe', 1), ('robe', 2), ('body', None), ('head', None), ('acc_lower', 446), ('acc_mid', 1),
+             ('acc_upper', 2517), ('acc_upper', 1), ('weapon', None))
+
+    def order(self, fn, action, frame, job=NOVICE, sex='m', parts=PARTS):
+        zs = {p: fn(p[0], p[1], job, sex, action, frame) for p in parts}
+        return sorted(parts, key=lambda p: (zs[p], parts.index(p)))
+
+    def test_same_order_as_z_for(self):
+        cases = [(NOVICE, 'm', 32, f) for f in range(3)] + [(KNIGHT, 'm', 50, 0), (NOVICE, 'm', 0, 0),
+                                                              (NOVICE, 'm', 4, 0), (NOVICE, 'f', 32, 0)]
+        for job, sex, action, frame in cases:
+            for parts in (tuple(p for p in self.PARTS if p != ('robe', 2)), tuple(p for p in self.PARTS if p != ('robe', 1))):
+                self.assertEqual(self.order(zorder.z_baked, action, frame, job, sex, parts),
+                                 self.order(zorder.z_for, action, frame, job, sex, parts), (job, sex, action, frame))
+
+    def test_head_and_headgear_do_not_depend_on_the_class(self):
+        for kind, view in (('head', None), ('acc_upper', 1), ('acc_upper', 2517), ('acc_lower', 446)):
+            self.assertEqual(zorder.z_baked(kind, view, NOVICE, 'm', 32, 0), zorder.z_baked(kind, view, KNIGHT, 'm', 32, 0))
+            self.assertEqual(zorder.z_baked(kind, view, NOVICE, 'm', 32, 0), zorder.z_baked(kind, view, NOVICE, 'f', 32, 0))
+        # where the imf puts the head behind, the body goes over the head and every headgear
+        self.assertGreater(zorder.z_baked('body', None, NOVICE, 'm', 32, 0), zorder.z_baked('acc_upper', 1, NOVICE, 'm', 32, 0))
+        self.assertLess(zorder.z_baked('body', None, NOVICE, 'm', 0, 0), zorder.z_baked('head', None, NOVICE, 'm', 0, 0))
+
+
 class PartZTest(unittest.TestCase):
     def test_part_frame_maps_onto_body_frame(self):
         z_of = zorder.part_z_of('robe', 61, NOVICE, 'm')

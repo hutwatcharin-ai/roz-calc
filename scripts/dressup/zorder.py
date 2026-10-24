@@ -171,7 +171,6 @@ def _follow_head(z, action):
 def z_for(kind, view, job, sex, action, frame):
     if kind not in KINDS:
         raise ValueError(kind)
-    d = action % 8
     if kind == 'head':
         if head_behind_body(job, sex, action, frame):
             return (_base('body', action) - 1) * SCALE
@@ -182,21 +181,52 @@ def z_for(kind, view, job, sex, action, frame):
         if is_top_layer(view) and facing_away(action):
             return (_base('head', action) + 1) * SCALE
         return (_base('body', action) + 1) * SCALE
-    if kind in LAYER_CODE and view is not None:
-        p = layer_priority(view, d, kind)
-        band = min(max(p // 100, 1), 4)
-        rank = p - band * 100
-        slot = BAND_SLOT[band]
-        if slot == 'robe':
-            # A headgear the client draws at the robe layer (vehicles, tents). It has no robe view
-            # for _New_DrawOnTop, so it goes behind the body facing towards, over it facing away.
-            z = _base('body', action) + 1 if facing_away(action) else _base('robe', action)
-            return z * SCALE + rank
-        z = _base(slot, action) * SCALE + rank
-        if head_behind_body(job, sex, action, frame):
+    if kind in LAYER_CODE:
+        z, robe_band = _acc_z(kind, view, action, with_band=True)
+        if not robe_band and head_behind_body(job, sex, action, frame):
             return _follow_head(z, action)
         return z
     return _base(kind, action) * SCALE
+
+
+def _acc_z(kind, view, action, with_band=False):
+    """A headgear's z from TB_Layer_Priority, before the imf rule."""
+    if view is None:
+        z, robe_band = _base(kind, action) * SCALE, False
+    else:
+        p = layer_priority(view, action % 8, kind)
+        band = min(max(p // 100, 1), 4)
+        rank = p - band * 100
+        slot = BAND_SLOT[band]
+        robe_band = slot == 'robe'
+        if robe_band:
+            # A headgear the client draws at the robe layer (vehicles, tents). It has no robe view
+            # for _New_DrawOnTop, so it goes behind the body facing towards, over it facing away.
+            base = _base('body', action) + 1 if facing_away(action) else _base('robe', action)
+            z = base * SCALE + rank
+        else:
+            z = _base(slot, action) * SCALE + rank
+    return (z, robe_band) if with_band else z
+
+
+def z_baked(kind, view, job, sex, action, frame):
+    """The z written into exported files. Head and headgear files are shared by every class, so
+    they cannot carry the per-class imf rule; where it puts the head behind the body, the body
+    (a per-class file) goes over the head and all its headgear instead, and a robe drawn over the
+    body goes over that body. Drawing order is the same as z_for's (test_zorder.BakedZTest), except
+    a robe-band headgear (vehicles) facing away on those frames, which stays under the body."""
+    behind = kind in ('body', 'robe') and head_behind_body(job, sex, action, frame)
+    lifted = (_base('head', action) + 5) * SCALE  # over the head + 2..4 headgear slots and ranks
+    if kind == 'body':
+        return lifted if behind else _base('body', action) * SCALE
+    if kind == 'robe':
+        z = z_for('robe', view, job, sex, action, frame)
+        return lifted + SCALE if behind and z > _base('robe', action) * SCALE else z
+    if kind == 'head':
+        return _base('head', action) * SCALE
+    if kind in LAYER_CODE:
+        return _acc_z(kind, view, action)
+    return z_for(kind, view, job, sex, action, frame)
 
 
 @functools.lru_cache(maxsize=None)
@@ -206,12 +236,14 @@ def body_frames(job, sex):
     return [len(a) for a in act.actions]
 
 
-def part_z_of(kind, view, job, sex):
+def part_z_of(kind, view, job, sex, fn=None):
     """z_of(action, frame) for part.export_part: a part's own frame f is taken as body frame
-    f % (body frames in that action), so a 24-frame robe keeps the body's beat."""
+    f % (body frames in that action), so a 24-frame robe keeps the body's beat. fn defaults to
+    z_for (one class, as in the fixtures); the full export passes z_baked."""
+    fn = fn or z_for
     counts = body_frames(job, sex)
 
     def z_of(action, frame):
         n = counts[action] if action < len(counts) else counts[0]
-        return z_for(kind, view, job, sex, action, frame % max(1, n))
+        return fn(kind, view, job, sex, action, frame % max(1, n))
     return z_of
