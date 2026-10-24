@@ -22,7 +22,9 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
     '--ad-narrow-w': `${size.narrow[0]}px`,
     '--ad-narrow-h': `${size.narrow[1]}px`,
     '--ad-ratio': `${size.wide[0]} / ${size.wide[1]}`,
-    '--ad-narrow-ratio': `${size.narrow[0]} / ${size.narrow[1]}`,
+    // A banner sold without a phone picture keeps its desktop shape on a
+    // phone rather than sit letterboxed in the phone-shaped box.
+    '--ad-narrow-ratio': ad && !ad.narrow ? `${size.wide[0]} / ${size.wide[1]}` : `${size.narrow[0]} / ${size.narrow[1]}`,
   } as React.CSSProperties;
 
   // Google does not allow its ads on pages with little of our own content
