@@ -18,6 +18,7 @@
 // ask -- written for players, rendered on the server so search engines read
 // it too. No FAQPage or HowTo markup (lib/jsonld rules); WebApplication only.
 import BuildSimulator from '@/components/BuildSimulator';
+import { buildPresets } from '@/lib/build-presets';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/jsonld';
 
@@ -53,6 +54,20 @@ export default function BuildPage() {
           {PARADE.map((c) => <img key={c} src={`/images/jobs/${c}.png`} alt="" width={72} height={72} />)}
         </div>
       </header>
+      {/* A plain <a>: the simulator reads ?b= when it mounts, so the sample
+          opens as a shared build would, without overwriting the player's own
+          saved one until they edit it. */}
+      <nav className="bpresets" aria-label="บิลด์ตัวอย่าง">
+        <p className="bpresets__label mono">▶ เริ่มจากบิลด์ตัวอย่าง</p>
+        <div className="bpresets__row">
+          {buildPresets().map((p) => (
+            <a key={p.slug} className="bpresets__chip" href={p.href}>
+              <img src={`/images/jobs/${p.slug}.png`} alt="" width={28} height={28} />
+              {p.job} <span>{p.label}</span>
+            </a>
+          ))}
+        </div>
+      </nav>
       <BuildSimulator />
 
       <article className="bguide">

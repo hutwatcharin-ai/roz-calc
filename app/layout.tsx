@@ -1,6 +1,7 @@
 import './globals.css';
 import Nav from '@/components/Nav';
 import NavProgress from '@/components/NavProgress';
+import ChipRowFocus from '@/components/ChipRowFocus';
 import { Suspense } from 'react';
 import SiteFooter from '@/components/SiteFooter';
 import BottomNav from '@/components/BottomNav';
@@ -108,6 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Suspense because it reads the search params. */}
             <Suspense fallback={null}>
               <NavProgress />
+              <ChipRowFocus />
             </Suspense>
             <Nav />
             {/* Sold space, top of every page (lib/ads). It reserves its

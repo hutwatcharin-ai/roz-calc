@@ -155,6 +155,12 @@ export default async function HomePage({
           มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
           เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
         </p>
+        {/* The site's most-used action, in the hero (owner, 24 Oct 2026: the
+            drop finder took 3,294 searches in 28 days, more than any page). */}
+        <form className="homehero__search" action="/drop-finder" role="search">
+          <input type="search" name="q" placeholder="ชื่อของที่อยากได้ เช่น Jellopy" aria-label="ค้นชื่อไอเทม ดูมอนที่ดรอป" />
+          <button type="submit" className="btn">หามอนที่ดรอป</button>
+        </form>
         <p style={{ marginTop: 6 }}>
           <Link href="/guides/faq" className="homehero__faq">เล่นใหม่? เริ่มที่คำถามที่ถามบ่อย →</Link>
         </p>

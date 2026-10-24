@@ -2,7 +2,7 @@
   "_comment": "Banners sold direct (owner, 23 Sep 2026). Adding an advertiser means an entry in `ads` and a deploy; a slot with no live ad shows the house ad instead. Prices and the traffic figures on /advertise come from here, so the page can never disagree with what is sold. `statsAsOf` is the GA4 period the figures cover -- refresh it monthly with scripts/ga4-report.py.",
   "prices": {
     "top": 3500,
-    "inline": 1000,
+    "inline": 1500,
     "introSeats": 3,
     "introSeatsTaken": 0,
     "discounts": [
@@ -15,7 +15,7 @@
         "percent": 20
       }
     ],
-    "detail": 1500
+    "detail": 1000
   },
   "stats": {
     "asOf": "2026-10-03",
