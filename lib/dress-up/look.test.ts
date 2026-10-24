@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import full from '@/data/dress-up.json';
 import { dollSex } from '@/lib/build-doll';
 import {
-  DEFAULT_LOOK, actionFor, drawable, frameFor, partsFor, sexOf, takeOff, wear, type Look,
+  DEFAULT_LOOK, actionFor, drawable, frameFor, partsFor, sexOf, takeOff, wear, withClass, type Look,
 } from './look';
 import { DressUpUnavailable, loadPart } from './load';
 import type { PartData } from './types';
@@ -88,6 +88,17 @@ describe('partsFor', () => {
   });
 });
 
+describe('withClass', () => {
+  it('resets a cloth palette and a weapon type the new class lacks, keeps ones it has', () => {
+    const odd = withClass({ ...DEFAULT_LOOK, cloth: 7, weapon: 'katar' }, 'mage');
+    expect(odd.cls).toBe('mage');
+    expect(odd.cloth).toBe(0);
+    expect(odd.weapon).toBeUndefined();
+    const kept = withClass({ ...DEFAULT_LOOK, cloth: 2, weapon: 'dagger' }, 'assassin');
+    expect([kept.cloth, kept.weapon]).toEqual([2, 'dagger']);
+  });
+});
+
 describe('actionFor', () => {
   it('pose type x 8 + direction', () => {
     expect(actionFor({ ...DEFAULT_LOOK, pose: 'sit', dir: 3 })).toBe(19);
@@ -112,6 +123,13 @@ describe('frameFor', () => {
     expect(frameFor('head', part(3), 0, look, 12345)).toBe(2);
     expect(frameFor('body', part(3), 0, look, 12345)).toBe(2);
     expect(frameFor('robe', part(24), 0, look, 1650)).toBe(16);
+  });
+
+  it('in stand, a 3-frame robe or weapon still advances with time, not headDir', () => {
+    const look = { ...DEFAULT_LOOK, headDir: 2 as const };
+    expect(frameFor('robe', part(3), 0, look, 0)).toBe(0);
+    expect(frameFor('robe', part(3), 0, look, 150)).toBe(1);
+    expect(frameFor('weapon', part(3), 0, { ...look, pose: 'sit' }, 150)).toBe(1);
   });
 
   it('in walk, every part runs on its own delay', () => {

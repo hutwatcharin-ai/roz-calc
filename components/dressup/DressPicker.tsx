@@ -5,7 +5,7 @@
 // classes have a sprite come from the slim index in lib/dress-up/look.ts.
 import { useMemo, useState } from 'react';
 import {
-  INDEX, POSE_TYPE, SLOTS, classOf, hasSprite, sexOf, slotsOf, takeOff, wear,
+  INDEX, POSE_TYPE, SLOTS, classOf, hasSprite, sexOf, slotsOf, takeOff, wear, withClass,
   type Look, type Pose, type Slot,
 } from '@/lib/dress-up/look';
 
@@ -115,7 +115,7 @@ export default function DressPicker({ look, onChange, names, classNames }: Props
               type="button"
               className="dress__chip"
               aria-pressed={c.slug === look.cls}
-              onClick={() => set({ cls: c.slug, weapon: look.weapon && c.weapons.includes(look.weapon) ? look.weapon : undefined })}
+              onClick={() => onChange(withClass(look, c.slug))}
             >
               {classNames[c.slug] ?? c.slug}
             </button>

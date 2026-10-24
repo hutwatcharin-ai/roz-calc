@@ -3,6 +3,10 @@
 // parts the look needs and scaled up 3x with nearest-neighbour pixels. Each
 // part keeps its own frame clock (lib/dress-up/look.ts frameFor); the canvas
 // is only redrawn when some part's frame changes.
+//
+// The drawing always pairs a look with the parts loaded for that look: while a
+// new set is on its way the last picture stays put, so old parts are never
+// drawn in the new pose.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { actionFor, drawable, frameFor, type Look, type PartRef } from '@/lib/dress-up/look';
 import { DressUpUnavailable, loadPart, type LoadedPart } from '@/lib/dress-up/load';
@@ -10,23 +14,25 @@ import { composeFrame } from '@/lib/dress-up/render';
 import type { Placed } from '@/lib/dress-up/types';
 
 type Loaded = PartRef & LoadedPart;
+type Scene = { look: Look; loaded: Loaded[] };
 type Status = 'loading' | 'ready' | 'unavailable';
 
 export default function DressStage({ look }: { look: Look }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState<Status>('loading');
-  const [loaded, setLoaded] = useState<Loaded[] | null>(null);
+  const [scene, setScene] = useState<Scene | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const { parts } = useMemo(() => drawable(look), [look]);
-  const partKey = parts.map((p) => p.key).join('|');
 
-  // Fetch the parts; the previous drawing stays up until the new set is in.
+  // Load the look's parts (memoised in loadPart, so a pose change resolves at
+  // once), then swap look and parts in together.
   useEffect(() => {
     let alive = true;
-    setStatus((s) => (s === 'unavailable' ? s : 'loading'));
+    setStatus('loading');
     Promise.all(parts.map((p) => loadPart(p.key)))
       .then((got) => {
         if (!alive) return;
-        setLoaded(parts.map((p, i) => ({ ...p, ...got[i] })));
+        setScene({ look, loaded: parts.map((p, i) => ({ ...p, ...got[i] })) });
         setStatus('ready');
       })
       .catch((e) => {
@@ -35,21 +41,24 @@ export default function DressStage({ look }: { look: Look }) {
         setStatus('unavailable');
       });
     return () => { alive = false; };
-    // partKey stands for parts
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partKey]);
+  }, [look, parts, attempt]);
 
-  // Animate: restart the clock whenever the look or its parts change.
+  // Animate the current scene; the clock restarts with each new scene.
   useEffect(() => {
     const ctx = canvas.current?.getContext('2d');
-    if (!ctx || !loaded || loaded.length === 0) return;
-    const action = actionFor(look);
+    if (!ctx || !scene) return;
+    const { look: shown, loaded } = scene;
+    if (loaded.length === 0) {
+      ctx.clearRect(0, 0, 200, 200);
+      return;
+    }
+    const action = actionFor(shown);
     const start = performance.now();
     let last = '';
     let raf = 0;
     const tick = (now: number) => {
       const ms = now - start;
-      const frames = loaded.map((p) => frameFor(p.kind, p.part, action, look, ms));
+      const frames = loaded.map((p) => frameFor(p.kind, p.part, action, shown, ms));
       const sig = frames.join(',');
       if (sig !== last) {
         last = sig;
@@ -63,15 +72,20 @@ export default function DressStage({ look }: { look: Look }) {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [loaded, look]);
+  }, [scene]);
 
+  const empty = status === 'ready' && scene?.loaded.length === 0;
   return (
-    <div className="dress__stage" data-status={status}>
+    <div className="dress__stage" data-status={empty ? 'empty' : status}>
       <canvas ref={canvas} width={200} height={200} className="dress__canvas" aria-label="ตัวละครที่แต่งไว้" role="img" />
       {status === 'unavailable' && (
-        <p className="dress__msg dress__msg--err" role="alert">ยังโหลดภาพตัวละครไม่ได้</p>
+        <div className="dress__msg dress__msg--err" role="alert">
+          <p>ยังโหลดภาพตัวละครไม่ได้</p>
+          <button type="button" className="dress__chip" onClick={() => setAttempt((n) => n + 1)}>ลองใหม่</button>
+        </div>
       )}
-      {status === 'loading' && !loaded && <p className="dress__msg">กำลังโหลด…</p>}
+      {empty && <p className="dress__msg">ยังไม่มีภาพ</p>}
+      {status === 'loading' && !scene && <p className="dress__msg">กำลังโหลด…</p>}
     </div>
   );
 }

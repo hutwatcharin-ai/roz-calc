@@ -48,3 +48,6 @@
 .dress__hits button > span { flex: 1 1 auto; min-width: 0; }
 .dress__hits button:hover, .dress__hits button:focus-visible { background: rgba(61, 232, 255, .08); }
 .dress__empty { margin: 0; font-size: 13px; color: var(--faint); }
+.dress__msg--err { display: grid; justify-items: center; gap: 8px; }
+.dress__msg--err p { margin: 0; }
+.dress__msg--err .dress__chip { color: var(--text); border-color: var(--pink); }

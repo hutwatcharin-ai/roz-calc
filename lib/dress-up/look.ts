@@ -164,15 +164,24 @@ export function actionFor(look: Look): number {
 /**
  * The frame a part shows. In stand and sit the body, head and headgear frames
  * are head directions (ahead, left, right), not animation, so they show
- * headDir; so does any other part with exactly those 3 frames. Everything
- * else loops on its own delay, whatever the body's frame count (Review Focus 5).
+ * headDir. Robes and weapons always loop on their own delay, whatever the
+ * body's frame count (Review Focus 5).
  */
 export function frameFor(kind: PartKind, part: PartData, action: number, look: Look, ms: number): number {
-  if (look.pose === 'stand' || look.pose === 'sit') {
+  if ((look.pose === 'stand' || look.pose === 'sit') && (kind === 'body' || kind === 'head' || kind === 'acc')) {
     const list = part.acts[String(action)] ?? part.acts['0'];
-    if (kind === 'body' || kind === 'head' || kind === 'acc' || list.length === 3) {
-      return Math.min(look.headDir, list.length - 1);
-    }
+    return Math.min(look.headDir, list.length - 1);
   }
   return frameAt(part, action, ms);
+}
+
+/** Switch class, keeping what still fits: a cloth palette or weapon type the class lacks is reset. */
+export function withClass(look: Look, slug: string): Look {
+  const c = classOf(slug);
+  return {
+    ...look,
+    cls: slug,
+    cloth: c?.cloth.includes(look.cloth) ? look.cloth : 0,
+    weapon: look.weapon && c?.weapons.includes(look.weapon) ? look.weapon : undefined,
+  };
 }
