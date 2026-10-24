@@ -24,3 +24,5 @@ docs/prontera-export/craft-cache/
 .aggro-log.jsonl
 .proxy-log.txt
 .superpowers/
+scripts/__pycache__/
+__pycache__/
