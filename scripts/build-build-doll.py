@@ -249,4 +249,5 @@ def main():
           len(item_weapon), 'weapons,', len(item_shield), 'shields')
 
 
-main()
+if __name__ == '__main__':
+    main()

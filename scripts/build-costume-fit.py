@@ -96,11 +96,12 @@ def frames_of(a, action):
     return len(frames), max(40, round(delay * 25))
 
 
-def robe_files(name, sex):
+def robe_files(name, sex, job='초보자'):
     """A garment's own .spr per job, or one shared .spr at the folder root
-    with only the .act per job (Wings_Of_Raguel and 25 others)."""
+    with only the .act per job (Wings_Of_Raguel and 25 others).
+    scripts/build-dress-up.py asks for every job; this script only the Novice."""
     base = f'{SPRITE}/로브/{name}'
-    own = f'{base}/{sex}/초보자_{sex}'
+    own = f'{base}/{sex}/{job}_{sex}'
     if exists(own + '.spr') and exists(own + '.act'):
         return own + '.spr', own + '.act'
     shared = f'{base}/{name.lower()}.spr'
@@ -269,4 +270,5 @@ def main():
     print('items', len(items), 'sheets', len(sheets), 'skipped', skipped)
 
 
-main()
+if __name__ == '__main__':
+    main()

@@ -61,6 +61,7 @@ owner พิมพ์ / ในแชตบอท: /news /inbox /check /today /we
 - คำว่า "Slot" ไม่ใช่ "ช่อง" สำหรับช่องการ์ดในอุปกรณ์ · **ศัพท์อาวุธ/เกมใช้ตาม `docs/PLAYER_GLOSSARY.md`** (มีด ไม่ใช่กริช · คทา ไม่ใช่ไม้เท้า · สนับมือ · กาต้า · "ตีกี่ที" ไม่ใช่หมัด)
 - component client ที่เป็น controlled input: ต้อง sync state ตาม prop/URL หลัง navigation (บั๊ก checkbox ดีดกลับเคยเกิด) · ห้ามส่ง function จาก server เข้า client component (500 เฉพาะ runtime, build จับไม่ได้ — พิสูจน์ด้วย `next start` ก่อน deploy)
 - มีอีก Claude session ทำงาน repo นี้ขนานกันบ่อย: **ห้าม `git add -A`** (เลือกไฟล์รายตัว) · ห้าม `taskkill /IM node.exe` ทั้งเครื่อง
+- **ภาพห้องแต่งตัว (dress-up)**: atlas+JSON ทุกชิ้นอยู่บน R2 (`NEXT_PUBLIC_DRESSUP_BASE`) ไม่อยู่ใน git · `npm run dress-up:build` (อ่านไคลเอนต์ที่แตกไว้ → `out/dress-up/` + `data/dress-up.json` index + `data/dress-up-manifest.json`, ทำเฉพาะชิ้นที่ไฟล์ต้นทางเปลี่ยน) แล้ว `npm run dress-up:upload` (ส่งเฉพาะไฟล์ที่ bucket ยังไม่มี) · **ห้าม commit `out/dress-up/`** และห้ามเอาไฟล์ดิบไคลเอนต์ (.spr/.act/.pal/.imf/.lub) เข้า repo หรือ R2 · env R2: `R2_ACCOUNT_ID` `R2_ACCESS_KEY_ID` `R2_SECRET_ACCESS_KEY` `R2_BUCKET` — เช็กได้แค่ชื่อกับความยาว ห้ามพิมพ์ค่า
 
 ## ประวัติ/สถานะละเอียด
 
