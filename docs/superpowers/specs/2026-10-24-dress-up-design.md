@@ -184,6 +184,17 @@ Search demand for "dress-up" is close to zero ("แต่งตัว ro" had 5 
 - **Monsters** that have no sprite in the Zero client are left out of the monster search. The coverage report lists them.
 - **The asset pipeline can be re-run** after a weekly GRF patch. It is incremental per file.
 
-## Open (for the owner)
+## Asset hosting (owner's call, 24 Oct)
 
-- **The total weight ceiling for repo and site, and where the assets live.** The question is whether to commit everything to git or to host it outside, for example on Cloudflare R2.
+- **Generated assets live outside git, on Cloudflare R2.** These are the sprite atlases, the JSON and the scene backgrounds. The owner chose this over committing them to the repo.
+- **The owner creates the R2 bucket and token.** Claude never handles credentials.
+  - Keys go in `.env.local` and Coolify env only.
+  - The bucket is served on a public custom domain or an r2.dev URL.
+- **The pipeline uploads only changed files**, matched by content hash, and writes one versioned manifest that the page reads.
+  - The repo keeps the scripts, the manifest and small indexes.
+  - It never keeps the bulk pictures.
+- **The site's CSP and image settings must allow the R2 host.**
+
+## Related project
+
+The owner also wants a separate tool that makes trade-post images ("ทำภาพโพสต์ขายของ"). It gets its own design. The owner said to build both.
