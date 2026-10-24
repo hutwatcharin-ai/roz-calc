@@ -1483,7 +1483,7 @@ button:hover, input[type='submit']:hover { border-color: var(--hair2, var(--dim)
    another source citation (user, 2 Sep). */
 .sitefooter__adlink {
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 14px;
   padding: 7px 13px;
   border-radius: 999px;
   background: var(--yellow);
@@ -3140,7 +3140,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 @media (max-width: 700px) { .adslot--unit .adslot__ins { width: var(--ad-narrow-w); height: var(--ad-narrow-h); } }
 /* An ad inside a card grid takes a whole row, never one card's cell. */
 .mongrid > .adslot, .itemgrid > .adslot { grid-column: 1 / -1; }
-.sitefooter__privacy { display: inline-block; margin-top: 10px; color: var(--faint); font-size: 12.5px; }
+.sitefooter__privacy { display: block; width: fit-content; margin-top: 10px; color: var(--faint); font-size: 12.5px; }
 .sitefooter__privacy:hover { color: var(--cyan); }
 
 /* Reserved space for the farming answers while their data loads. */

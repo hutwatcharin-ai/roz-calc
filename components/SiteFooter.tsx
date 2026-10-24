@@ -81,14 +81,15 @@ export default async function SiteFooter() {
                 </a>
               </li>
             </ul>
-            {/* The media kit, not a bare mailto: a price list answers most of
-                what someone writing that email would have asked. */}
-            <Link className="sitefooter__adlink" href="/advertise">
-              ลงโฆษณา / ติดต่อธุรกิจ →
-            </Link>
             {/* AdSense requires a reachable privacy policy; the footer is
                 where readers look for one. */}
             <Link className="sitefooter__privacy" href="/privacy">นโยบายความเป็นส่วนตัว</Link>
+            {/* The media kit, not a bare mailto: a price list answers most of
+                what someone writing that email would have asked. Last in the
+                column (owner, 24 Oct 2026). */}
+            <Link className="sitefooter__adlink" href="/advertise">
+              ลงโฆษณา / ติดต่อธุรกิจ →
+            </Link>
           </FooterSection>
         </div>
 
