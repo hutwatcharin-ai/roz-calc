@@ -76,7 +76,7 @@ export default async function AdvertisePage() {
     {
       key: 'inline' as const,
       name: 'แบนเนอร์แทรกเนื้อหา',
-      where: 'กลางหน้าฐานข้อมูลมอนสเตอร์ อุปกรณ์ และหาจุดเลเวล',
+      where: `แถบกลางหน้า ${INLINE_AD_PAGES.length} หน้า: ฐานข้อมูลมอนสเตอร์ อุปกรณ์ เครื่องมือ และไกด์`,
       views: AD_STATS.inlineSlotViews,
       price: AD_PRICES.inline,
     },

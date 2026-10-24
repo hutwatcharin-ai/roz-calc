@@ -76,12 +76,32 @@ export const AD_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number,
   // with the screen below that, keeping its shape (owner, 23 Oct 2026: the
   // advertiser wanted it as wide as the cards under it, and lower).
   top: { wide: [1200, 200], narrow: [640, 200] },
-  inline: { wide: [336, 280], narrow: [336, 280] },
+  // A strip, not a square: it sits between rows of cards, and the unsold
+  // AdSense unit in the same place is 728x90 / 320x100, so a sold banner now
+  // looks like what readers already see there (owner, 24 Oct 2026).
+  inline: { wide: [728, 90], narrow: [320, 100] },
   detail: { wide: [336, 280], narrow: [300, 250] },
 };
 
-/** The pages that carry the inline slot, the three most-read ones. */
-export const INLINE_AD_PAGES = ['/database/monsters', '/database/equipment', '/tools/leveling-spots'];
+/** Every page that carries the inline slot, for the view count on /advertise.
+ *  A test keeps it in step with the pages themselves; the monster list stays
+ *  first, /advertise links to it as the most-read page. */
+export const INLINE_AD_PAGES = [
+  '/database/monsters',
+  '/database/equipment',
+  '/tools/leveling-spots',
+  '/tools/bot-setup',
+  '/tools/enchant',
+  '/tools/weight',
+  '/guides/faq',
+  '/guides/guild',
+  '/guides/homunculus',
+  '/guides/nordfeld-helm',
+  '/guides/sp-recovery',
+  '/guides/star-gear',
+  '/guides/woe',
+  '/news/roadmap',
+];
 
 export function adsFor(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad[] {
   return ads.filter((ad) => ad.slot === slot && ad.starts <= today && ad.ends >= today);

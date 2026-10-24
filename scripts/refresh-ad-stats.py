@@ -6,7 +6,7 @@ they cover -- a figure nobody can date is not evidence. This writes both.
 
 Slot reach is counted the way the slots are actually placed:
   top     every page view on the site
-  inline  the three pages that carry the in-content slot
+  inline  the pages that carry the in-content slot (INLINE_AD_PAGES in lib/ads.ts)
   detail  the detail pages: a monster, item, card, costume or equipment page
 
 Usage:  python scripts/refresh-ad-stats.py [days]     (default 30, ending yesterday)
@@ -33,7 +33,9 @@ from google.oauth2 import service_account
 PROPERTY = "properties/552516626"
 KEY = Path.home() / ".config" / "claude-seo" / "service_account.json"
 ADS_JSON = Path(__file__).resolve().parent.parent / "data" / "ads.json"
-INLINE_PAGES = {"/database/monsters", "/database/equipment", "/tools/leveling-spots"}
+# Read from lib/ads.ts so the script and the live page count the same pages.
+_ADS_TS = (Path(__file__).resolve().parent.parent / "lib" / "ads.ts").read_text(encoding="utf-8")
+INLINE_PAGES = set(re.findall(r"'(/[^']+)'", re.search(r"INLINE_AD_PAGES = \[(.*?)\];", _ADS_TS, re.S).group(1)))
 DETAIL_PATH = re.compile(r"^/database/(monsters|items|cards|costumes|equipment)/[^/]+$")
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]

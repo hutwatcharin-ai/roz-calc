@@ -3093,7 +3093,6 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .adslot__house em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--cyan); }
 @media (max-width: 700px) {
   .adslot__link, .adslot__house { width: min(100%, var(--ad-narrow-w)); height: var(--ad-narrow-h); }
-  .adslot--inline .adslot__link, .adslot--inline .adslot__house { width: min(100%, var(--ad-w)); height: var(--ad-h); }
   .adslot--house .adslot__house { height: 72px; }
   .adslot--inline.adslot--house .adslot__house { height: 96px; }
   .adslot__house strong { font-size: 14px; }

@@ -72,7 +72,7 @@ export default function AdPreviewPage() {
 
       <section className="card adpreview__block" aria-labelledby="ap-inline">
         <h2 className="section-title" id="ap-inline">2 · แบนเนอร์แทรกเนื้อหา</h2>
-        <p className="muted">อยู่กลางหน้าฐานข้อมูลมอนสเตอร์ อุปกรณ์ และหาจุดเลเวล คั่นระหว่างรายการ</p>
+        <p className="muted">แถบแนวนอนกลางหน้า คั่นระหว่างรายการ ในฐานข้อมูลมอนสเตอร์ อุปกรณ์ เครื่องมือ และไกด์</p>
         <div className="adpreview__frame">
           <div className="adpreview__grid" aria-hidden="true">{Array.from({ length: 6 }, (_, i) => <i key={i} />)}</div>
           <Sample slot="inline" name="แบนเนอร์แทรกเนื้อหา" />

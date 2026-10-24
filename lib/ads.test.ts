@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AD_PRICES, AD_SIZES, adToShow, adsFor, introSeatsLeft, priceFor, type Ad } from './ads';
+import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, introSeatsLeft, priceFor, type Ad } from './ads';
 
 const ad = (id: string, over: Partial<Ad> = {}): Ad => ({
   id,
@@ -52,7 +52,27 @@ describe('ads', () => {
   it('states a size for every slot, which the page reserves', () => {
     expect(AD_SIZES.top.wide).toEqual([1200, 200]);
     expect(AD_SIZES.top.narrow).toEqual([640, 200]);
-    expect(AD_SIZES.inline.wide).toEqual([336, 280]);
+    expect(AD_SIZES.inline.wide).toEqual([728, 90]);
+    expect(AD_SIZES.inline.narrow).toEqual([320, 100]);
+  });
+
+  // The view count sold on /advertise adds up these pages, so a page that
+  // gains or loses the slot must change the list too.
+  it('lists exactly the pages that carry the inline slot', async () => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const found: string[] = [];
+    const walk = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) walk(full);
+        else if (entry.name === 'page.tsx' && fs.readFileSync(full, 'utf8').includes('<AdSlot slot="inline"')) {
+          found.push('/' + path.relative(path.join(process.cwd(), 'app'), path.dirname(full)).split(path.sep).join('/'));
+        }
+      }
+    };
+    walk(path.join(process.cwd(), 'app'));
+    expect([...found].sort()).toEqual([...INLINE_AD_PAGES].sort());
   });
 });
 
