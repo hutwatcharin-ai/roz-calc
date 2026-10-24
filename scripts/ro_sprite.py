@@ -24,6 +24,8 @@ class Spr:
         off = 8 if ver >= 2.0 else 6
         pal_raw = d[-1024:]
         pal = [tuple(pal_raw[i * 4:i * 4 + 3]) for i in range(256)]
+        self.pal = pal
+        self.pal_px = []  # raw palette indices per image, to re-colour later
         self.pal_images = []
         for _ in range(n_pal):
             w, h = struct.unpack_from('<HH', d, off)
@@ -47,7 +49,8 @@ class Spr:
             else:
                 px = d[off:off + w * h]
                 off += w * h
-            px = px[:w * h].ljust(w * h, b'\x00')
+            px = bytes(px[:w * h].ljust(w * h, b'\x00'))
+            self.pal_px.append(px)
             img = Image.new('RGBA', (w, h))
             img.putdata([(0, 0, 0, 0) if c == 0 else pal[c] + (255,) for c in px])
             self.pal_images.append(img)
