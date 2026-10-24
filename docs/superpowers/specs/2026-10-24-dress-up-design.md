@@ -159,3 +159,28 @@ The canvas uses `imageSmoothingEnabled = false`, and the page scales it with pix
 - **Repo weight:** about 40 MB of binary files across about 10k files.
   - Option: put `public/dress-up/` in `.gitignore` and generate it during the deploy build. But the deploy machine has no client files, so in practice the files have to be committed, as costume-fit's are today.
   - This needs the owner's decision before step 1.
+
+## Brainstorm notes, same day (supersede the scope above where they differ)
+
+The owner's answers, in their words where quoted:
+
+- **Purpose:** players screenshot the result to show off in groups and make memes ("แคปไปอวดในกลุ่ม ไปทำมีม"). So this is a photo scene, not just a fitting room.
+- **The owner wants it complete:** movement, hitting a monster, picking which monster to hit, and typing a chat line over the head like in game.
+- **Output:** a still picture is enough ("ภาพนิ่งก็พอ"). The page itself still animates. The capture takes the frame on screen.
+- **Actors:** up to 2 characters plus 1 monster. This was Claude's recommendation; the owner left it to Claude.
+- **Background:** real in-game scenes ("ฉากในเกม").
+  - Spike result: roBrowserLegacy's MapViewer, run locally against the extracted Zero client, renders any of the 1,204 maps.
+  - The throwaway setup is in the session scratchpad: `grfserve/serve.mjs`, the robl clone and `zmap.html`.
+  - roBrowser can also drop a Novice entity into the scene, which serves as the calibration reference for scale and feet position.
+- **Camera:**
+  - The owner wants it closer than the game's default ("ซูมกว่านี้ เห็นตัวละครชัดๆ").
+  - The game's own zoom limit is 65. 45 looks good.
+  - The owner then asked for a lower angle so that 3D buildings show, not just floor.
+  - Tested vertical angles: default 230, then 188, 185 and 183.
+  - **185 with zoom about 90** shows the fountain statue, buildings and trees, with the character in front. This is Claude's pick.
+  - At 183 a black sky shows, because town maps have no sky.
+- **Characters away from the camera must shrink with depth.** Use the known ground position in the scene to compute the scale.
+- Backgrounds are shot at 2x so the page can offer 2-3 zoom steps.
+- **Open questions:**
+  - One standard angle for all scenes, or a best angle per scene?
+  - Which 10 scenes first?
