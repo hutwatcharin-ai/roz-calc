@@ -140,9 +140,17 @@ export function composeFrame(
   const bodyList = frames(placed[0].part, action);
   const bodyAnchor = bodyList[placed[0].frame % bodyList.length][1];
 
-  for (const p of placed) {
-    const list = frames(p.part, action);
-    const [layers, anchor] = list[p.frame % list.length];
+  // Draw in z order (each part's own frame z; stable, so equal z keeps array order).
+  // The anchor above still comes from placed[0], the body, wherever it lands.
+  const order = placed
+    .map((p, n) => {
+      const list = frames(p.part, action);
+      return { p, n, fd: list[p.frame % list.length] };
+    })
+    .sort((a, b) => a.fd[2] - b.fd[2] || a.n - b.n);
+
+  for (const { p, fd } of order) {
+    const [layers, anchor] = fd;
     let shiftX = 0, shiftY = 0;
     if (p.anchored && bodyAnchor && anchor) {
       shiftX = bodyAnchor[0] - anchor[0];

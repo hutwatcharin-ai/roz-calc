@@ -1,0 +1,202 @@
+"""Draw order (z) of every dress-up part, per direction and frame, from the client's own tables.
+
+z_for(kind, view, job, sex, action, frame) -> int; a higher z draws later.
+
+Scale: every value is the plan's z times SCALE (100), so a headgear's client priority offset
+(e.g. 143 = mid band + 43) fits between two slots without floats. Base z (x SCALE):
+  facing away (d = action % 8 in 2..5): body 15, head 20, acc lower/mid/upper 22/23/24, weapon 28, robe 5
+  otherwise:                            body 10, head 15, acc 17/18/19,              weapon 23, robe 5
+
+Client rules (see task-4-report.md for the evidence):
+  robe  IsTopLayer(view) (spriterobename_f) takes ONE argument and is plain membership of
+        RobeTopLayer (a flat list, no direction). Whether a robe is drawn over the body is the
+        client's _New_DrawOnTop(view, sex, job, action, frame) (spreditinfo/_new_2dlayerdir_f +
+        _new_{big,small}layerdir_{male,female}): it lists, per job and action, the frames where
+        the robe goes BEHIND the body. Behind: robe 5. Over: body + 1, or head + 1 for a
+        RobeTopLayer robe facing away.
+  acc   TB_Layer_Priority via the client's GetLayerPriority(direction, layer, view): Direction[d],
+        else Default, else the slot default. Band = value // 100: 1 mid, 2 upper, 3 lower, 4 robe;
+        the rest (value - band * 100) ranks it inside the band. Values under 100 rank below the
+        mids (one item: 53).
+  imf   imf/<job>_<sex>.imf: layer 0 = body, layer 1 = head; where the head's priority is above
+        the body's (both 0/1) the head is drawn first: head z = body z - 1.
+`frame` is the BODY's frame index; part_z_of() maps a part's own frame onto it.
+"""
+import functools
+import os
+import struct
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
+import lub  # noqa: E402
+from ro_sprite import Act  # noqa: E402
+
+GRF = 'D:/Data grf roz/data_grf_extracted/files/data'
+# Newer copies first: the 15 Oct sprite/table extraction, then the 15 Oct full patch.
+NEWER = ('D:/Data grf roz/grf-2026-10-15-sprites/files/data', 'D:/Data grf roz/grf-2026-10-15/files/data')
+LUA = f'{GRF}/luafiles514/lua files'
+SCALE = 100
+
+KINDS = ('body', 'head', 'acc_lower', 'acc_mid', 'acc_upper', 'robe', 'weapon')
+BASE_TOWARDS = dict(body=10, head=15, acc_lower=17, acc_mid=18, acc_upper=19, weapon=23, robe=5)
+BASE_AWAY = dict(body=15, head=20, acc_lower=22, acc_mid=23, acc_upper=24, weapon=28, robe=5)
+# GetLayerPriority's `layer` argument: 2 bottom, 3 top, 4 mid (8 robe).
+LAYER_CODE = dict(acc_lower=2, acc_upper=3, acc_mid=4)
+BAND_SLOT = {1: 'acc_mid', 2: 'acc_upper', 3: 'acc_lower', 4: 'robe'}
+SEX_ID = {'m': 1, '남': 1, 'f': 0, '여': 0}  # _new_2dlayerdir_f: SEX_FEMALE 0, SEX_MALE 1
+SEX_KR = {'m': '남', '남': '남', 'f': '여', '여': '여'}
+# Body sprite name -> JTtbl name (jobidentity.lub). The sprite names live in the exe, not in a table.
+JOB_NAMES = {
+    '초보자': 'JT_NOVICE', '검사': 'JT_SWORDMAN', '마법사': 'JT_MAGICIAN', '궁수': 'JT_ARCHER',
+    '성직자': 'JT_ACOLYTE', '상인': 'JT_MERCHANT', '도둑': 'JT_THIEF', '기사': 'JT_KNIGHT',
+    '프리스트': 'JT_PRIEST', '위저드': 'JT_WIZARD', '제철공': 'JT_BLACKSMITH', '헌터': 'JT_HUNTER',
+    '어세신': 'JT_ASSASSIN', '크루세이더': 'JT_CRUSADER', '몽크': 'JT_MONK', '세이지': 'JT_SAGE',
+    '로그': 'JT_ROGUE', '연금술사': 'JT_ALCHEMIST', '바드': 'JT_BARD', '무희': 'JT_DANCER',
+    '슈퍼노비스': 'JT_SUPERNOVICE',
+}
+
+
+def src(path):
+    """The newest copy of a client file."""
+    if path.startswith(GRF):
+        for root in NEWER:
+            newer = root + path[len(GRF):]
+            if os.path.exists(newer):
+                return newer
+    return path
+
+
+# The client's JOBID table is built into the exe; jobidentity.lub's JTtbl has the same names. The
+# few names it lacks (costume jobs such as JT_SUMMER, used only as keys in _new_2dlayerdir_f)
+# get unique negative ids so the file loads; no real job maps to them.
+_JOBID_SHIM = ('JOBID = setmetatable({}, {__index = function(t, k) local v = JTtbl[k] '
+               'if v == nil then _jobid_miss = (_jobid_miss or 0) - 1 v = _jobid_miss - 100000 '
+               'rawset(t, k, v) end return v end})')
+LUA_FILES = (
+    'datainfo/accessoryid.lub', 'datainfo/tb_layer_priority.lub',
+    'datainfo/spriterobeid.lub', 'datainfo/spriterobename.lub', 'datainfo/spriterobename_f.lub',
+    'spreditinfo/2dlayerdir_f.lub',  # defines GetLayerSizeType, used by the _New_ functions
+    'spreditinfo/_new_2dlayerdir_f.lub',
+    'spreditinfo/_new_biglayerdir_male.lub', 'spreditinfo/_new_biglayerdir_female.lub',
+    'spreditinfo/_new_smalllayerdir_male.lub', 'spreditinfo/_new_smalllayerdir_female.lub',
+)
+
+
+@functools.lru_cache(maxsize=None)
+def lua():
+    L = lub.runtime()
+    err = lub.load(L, src(f'{LUA}/datainfo/jobidentity.lub'))
+    assert err is None, err
+    L.execute(_JOBID_SHIM)
+    for f in LUA_FILES:
+        err = lub.load(L, src(f'{LUA}/{f}'))
+        assert err is None, (f, err)
+    return L
+
+
+def job_id(job):
+    return int(lua().globals()[b'JTtbl'][JOB_NAMES[job].encode()])
+
+
+def facing_away(action):
+    return 2 <= action % 8 <= 5
+
+
+def is_top_layer(view):
+    return bool(lua().globals()[b'IsTopLayer'](view))
+
+
+def robe_on_top(view, job, sex, action, frame):
+    on_top, _job = lua().globals()[b'_New_DrawOnTop'](view, SEX_ID[sex], job_id(job), action, frame)
+    return bool(on_top)
+
+
+def layer_priority(view, d, kind):
+    return int(lua().globals()[b'GetLayerPriority'](d, LAYER_CODE[kind], view))
+
+
+@functools.lru_cache(maxsize=None)
+def imf(job, sex):
+    """[layer][action][frame] -> priority, or None when the job has no imf file."""
+    path = src(f'{GRF}/imf/{job}_{SEX_KR[sex]}.imf')
+    if not os.path.exists(path):
+        return None
+    with open(path, 'rb') as fh:
+        data = fh.read()
+    _version, _checksum, max_layer = struct.unpack_from('<fii', data, 0)
+    pos = 12
+    layers = []
+    for _ in range(max_layer + 1):
+        (n_act,) = struct.unpack_from('<i', data, pos)
+        pos += 4
+        acts = []
+        for _ in range(n_act):
+            (n_frame,) = struct.unpack_from('<i', data, pos)
+            pos += 4
+            acts.append([struct.unpack_from('<iii', data, pos + 12 * i)[0] for i in range(n_frame)])
+            pos += 12 * n_frame
+        layers.append(acts)
+    if pos != len(data):
+        raise ValueError(f'{path}: {len(data) - pos} trailing bytes')
+    return layers
+
+
+def head_behind_body(job, sex, action, frame):
+    t = imf(job, sex)
+    if t is None or len(t) < 2:
+        return False
+    try:
+        return t[1][action][frame] > t[0][action][frame]
+    except IndexError:
+        return False
+
+
+def _base(kind, action):
+    return (BASE_AWAY if facing_away(action) else BASE_TOWARDS)[kind]
+
+
+def z_for(kind, view, job, sex, action, frame):
+    if kind not in KINDS:
+        raise ValueError(kind)
+    d = action % 8
+    if kind == 'head':
+        if head_behind_body(job, sex, action, frame):
+            return (_base('body', action) - 1) * SCALE
+        return _base('head', action) * SCALE
+    if kind == 'robe':
+        if view is None or not robe_on_top(view, job, sex, action, frame):
+            return _base('robe', action) * SCALE
+        if is_top_layer(view) and facing_away(action):
+            return (_base('head', action) + 1) * SCALE
+        return (_base('body', action) + 1) * SCALE
+    if kind in LAYER_CODE and view is not None:
+        p = layer_priority(view, d, kind)
+        band = min(max(p // 100, 1), 4)
+        rank = p - band * 100
+        slot = BAND_SLOT[band]
+        if slot == 'robe':
+            # A headgear the client draws at the robe layer (vehicles, tents). It has no robe view
+            # for _New_DrawOnTop, so it goes behind the body facing towards, over it facing away.
+            z = _base('body', action) + 1 if facing_away(action) else _base('robe', action)
+            return z * SCALE + rank
+        return _base(slot, action) * SCALE + rank
+    return _base(kind, action) * SCALE
+
+
+@functools.lru_cache(maxsize=None)
+def body_frames(job, sex):
+    s = SEX_KR[sex]
+    act = Act(src(f'{GRF}/sprite/인간족/몸통/{s}/{job}_{s}.act'))
+    return [len(a) for a in act.actions]
+
+
+def part_z_of(kind, view, job, sex):
+    """z_of(action, frame) for part.export_part: a part's own frame f is taken as body frame
+    f % (body frames in that action), so a 24-frame robe keeps the body's beat."""
+    counts = body_frames(job, sex)
+
+    def z_of(action, frame):
+        n = counts[action] if action < len(counts) else counts[0]
+        return z_for(kind, view, job, sex, action, frame % max(1, n))
+    return z_of

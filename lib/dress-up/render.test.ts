@@ -24,6 +24,15 @@ function load(key: string) {
 }
 
 describe('composeFrame', () => {
+  it('has the 30 random looks plus the dead and 24-frame robe looks', () => {
+    expect(looks).toHaveLength(32);
+    expect(looks[30].action >> 3).toBe(8);
+    const robe = looks[31].parts.findIndex((p) => p.key.startsWith('robe-angel-'));
+    expect(looks[31].action).toBe(0);
+    expect(looks[31].frames[0]).toBe(0);
+    expect(looks[31].frames[robe]).toBe(16);
+  });
+
   it.each(looks.map((l, i) => [i, l] as const))('matches the client reference #%#', (i, look) => {
     const placed: Placed[] = look.parts.map((p, n) => ({
       ...load(p.key),
@@ -52,6 +61,40 @@ describe('composeFrame', () => {
   });
 });
 
+describe('z order', () => {
+  // 1x1 parts: a red body with an anchor, a blue anchored part on the same pixel.
+  const px = (r: number, g: number, b: number): Atlas => ({ w: 1, h: 1, data: new Uint8ClampedArray([r, g, b, 255]) });
+  const one = (z: number, anchor: [number, number]): PartData => ({
+    v: 1, w: 1, h: 1,
+    acts: { '0': [[[[0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 255, 255, 255, 255]], anchor, z]] },
+    delay: { '0': 100 },
+  });
+  const at = (a: Atlas, x: number, y: number) => Array.from(a.data.subarray((y * a.w + x) * 4, (y * a.w + x) * 4 + 4));
+
+  it('draws a higher z later whatever the array order', () => {
+    const body: Placed = { part: one(10, [0, 0]), atlas: px(255, 0, 0), anchored: false, frame: 0 };
+    const head: Placed = { part: one(5, [0, 0]), atlas: px(0, 0, 255), anchored: true, frame: 0 };
+    expect(at(composeFrame([body, head], 0), 100, 150)).toEqual([255, 0, 0, 255]);
+    head.part = one(15, [0, 0]);
+    expect(at(composeFrame([body, head], 0), 100, 150)).toEqual([0, 0, 255, 255]);
+  });
+
+  it('keeps array order for equal z', () => {
+    const a: Placed = { part: one(3, [0, 0]), atlas: px(255, 0, 0), anchored: false, frame: 0 };
+    const b: Placed = { part: one(3, [0, 0]), atlas: px(0, 255, 0), anchored: false, frame: 0 };
+    expect(at(composeFrame([a, b], 0), 100, 150)).toEqual([0, 255, 0, 255]);
+    expect(at(composeFrame([b, a], 0), 100, 150)).toEqual([255, 0, 0, 255]);
+  });
+
+  it('anchors on placed[0] even when it draws last', () => {
+    const body: Placed = { part: one(10, [4, 2]), atlas: px(255, 0, 0), anchored: false, frame: 0 };
+    const head: Placed = { part: one(5, [0, 0]), atlas: px(0, 0, 255), anchored: true, frame: 0 };
+    const out = composeFrame([body, head], 0);
+    expect(at(out, 104, 152)).toEqual([0, 0, 255, 255]);
+    expect(at(out, 100, 150)).toEqual([255, 0, 0, 255]);
+  });
+});
+
 describe('frameAt', () => {
   const mk = (n: number): PartData => ({
     v: 1, w: 1, h: 1,
@@ -60,4 +103,11 @@ describe('frameAt', () => {
   });
   it('steps by the part delay', () => expect(frameAt(mk(4), 0, 250)).toBe(2));
   it('single frame stays 0', () => expect(frameAt(mk(1), 0, 9999)).toBe(0));
+  it('a missing action uses action 0 frames and delay', () => expect(frameAt(mk(4), 66, 250)).toBe(2));
+  it('uses the action own delay', () => {
+    const p = mk(4);
+    p.acts['8'] = Array.from({ length: 8 }, () => [[], null, 0] as FrameData);
+    p.delay['8'] = 50;
+    expect(frameAt(p, 8, 250)).toBe(5);
+  });
 });

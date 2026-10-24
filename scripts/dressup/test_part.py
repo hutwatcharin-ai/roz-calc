@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 import unittest
@@ -59,6 +60,48 @@ class PartTest(unittest.TestCase):
         got = reference.render(parts, 0, [0, 0])
         want = ro_sprite.render(parts, 0, 0)
         self.assertEqual(got.tobytes(), want.tobytes())
+
+    def test_export_omits_missing_actions(self):
+        spr, act = self.body
+        short = copy.copy(act)
+        short.actions = act.actions[:3]
+        short.delays = act.delays[:3]
+        _, meta = part.export_part(spr, short)
+        self.assertEqual(set(meta['acts']), {'0', '1', '2'})
+        self.assertEqual(set(meta['delay']), {'0', '1', '2'})
+
+    def test_z_of_is_baked_per_frame(self):
+        _, meta = part.export_part(*self.body, z_of=lambda a, f: a * 10 + f)
+        self.assertEqual(meta['acts']['4'][1][2], 41)
+        self.assertEqual(meta['acts']['0'][2][2], 2)
+        _, plain = part.export_part(*self.body)
+        self.assertEqual({fr[2] for frames in plain['acts'].values() for fr in frames}, {0})
+
+    def test_reference_sorts_by_z_stable(self):
+        body_spr, body_act = self.body
+        head_spr, head_act = self.head
+        # head below the body: drawn first, still anchored on the body (parts[0])
+        got = reference.render([(body_spr, body_act, False, lambda a, f: 10),
+                                (head_spr, head_act, True, lambda a, f: 5)], 0, [0, 0])
+        want = Image.new('RGBA', (200, 200))
+        bf, hf = body_act.actions[0][0], head_act.actions[0][0]
+        shift = (bf['anchors'][0][0] - hf['anchors'][0][0], bf['anchors'][0][1] - hf['anchors'][0][1])
+        ro_sprite.draw_layers(want, (100, 150), head_spr, hf, shift)
+        ro_sprite.draw_layers(want, (100, 150), body_spr, bf)
+        self.assertEqual(got.tobytes(), want.tobytes())
+        self.assertNotEqual(got.tobytes(), reference.render([(*self.body, False), (*self.head, True)], 0, [0, 0]).tobytes())
+        # equal z keeps list order
+        same = reference.render([(body_spr, body_act, False, lambda a, f: 7),
+                                 (head_spr, head_act, True, lambda a, f: 7)], 0, [0, 0])
+        self.assertEqual(same.tobytes(), ro_sprite.render([(*self.body, False), (*self.head, True)], 0, 0).tobytes())
+
+    def test_reference_missing_action_uses_action_0_z(self):
+        spr, act = self.head
+        short = copy.copy(act)
+        short.actions = act.actions[:1]
+        seen = []
+        reference.render([(*self.body, False), (spr, short, True, lambda a, f: seen.append((a, f)) or 0)], 4, [0, 1])
+        self.assertEqual(seen, [(0, 1)])
 
     def test_apply_palette_changes_pixels(self):
         spr = Spr(src(f'{GRF}/sprite/인간족/머리통/남/1_남.spr'))

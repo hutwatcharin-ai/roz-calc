@@ -53,13 +53,15 @@ def _pack(sizes):
     return pos, y + shelf
 
 
-def export_part(spr, act, types=KEPT_TYPES, palette=None):
+def export_part(spr, act, types=KEPT_TYPES, palette=None, z_of=lambda a, f: 0):
+    """z_of(action, frame) -> int is baked into every frame (zorder.part_z_of gives the
+    client's draw order). Only actions the act has are written; a reader falls back to "0"."""
     if palette is not None:
         spr = apply_palette(spr, palette)
-    actions = [t * 8 + d for t in types for d in range(8)]
+    actions = [t * 8 + d for t in types for d in range(8) if t * 8 + d < len(act.actions)]
 
     def frames_for(a):
-        return act.actions[a] if a < len(act.actions) else act.actions[0]
+        return act.actions[a]
 
     used = {}
     for a in actions:
@@ -82,7 +84,7 @@ def export_part(spr, act, types=KEPT_TYPES, palette=None):
     acts, delay = {}, {}
     for a in actions:
         frames = []
-        for frame in frames_for(a):
+        for f, frame in enumerate(frames_for(a)):
             layers = []
             for l in frame['layers']:
                 key = (l['kind'], l['spr'])
@@ -94,7 +96,7 @@ def export_part(spr, act, types=KEPT_TYPES, palette=None):
                 layers.append([l['x'], l['y'], ax, ay, aw, ah, 1 if l['mirror'] else 0,
                                l['sx'], l['sy'], l['rot'], r, g, b, al])
             anchor = list(frame['anchors'][0]) if frame['anchors'] else None
-            frames.append([layers, anchor, 0])
+            frames.append([layers, anchor, int(z_of(a, f))])
         acts[str(a)] = frames
         d = act.delays[a] if a < len(act.delays) else 4.0
         delay[str(a)] = max(40, round(d * 25))
