@@ -29,6 +29,7 @@ Usage: PYTHONIOENCODING=utf-8 py -3 scripts/build-dress-up.py [--jobs N] [--only
 import argparse
 import hashlib
 import importlib.util
+import inspect
 import io
 import json
 import os
@@ -66,7 +67,9 @@ HAIR_TH = {'기본': 'สีเดิม', '노란색': 'เหลือง', '�
            '파란색': 'น้ำเงิน', '흰색': 'ขาว', '진갈색': 'น้ำตาลเข้ม', '붉은색': 'แดง'}
 SLOT_WORDS = (('Upper', 'upper'), ('Middle', 'mid'), ('Lower', 'lower'))
 FOLDERS = ('body', 'head', 'acc', 'robe', 'weapon')
-CODE_FILES = ('build-dress-up.py', 'dressup/part.py', 'dressup/zorder.py', 'ro_sprite.py')
+# What a part's bytes depend on besides its sources: these modules, plus export_one() and integral()
+# here (hashed by source, so editing the rest of this script does not force a full rebuild).
+CODE_FILES = ('dressup/part.py', 'dressup/zorder.py', 'ro_sprite.py')
 
 
 def load_script(name, filename):
@@ -91,7 +94,9 @@ def code_signature():
     for f in CODE_FILES:
         with open(os.path.join(HERE, f), 'rb') as fh:
             h.update(fh.read())
-    for f in ('datainfo/jobidentity.lub',) + zorder.LUA_FILES:
+    for fn in (export_one, integral):
+        h.update(inspect.getsource(fn).encode())
+    for f in zorder.LUA_FILES:
         h.update(json.dumps(stat(zorder.src(f'{zorder.LUA}/{f}'))).encode())
     return h.hexdigest()[:16]
 
@@ -136,14 +141,16 @@ def export_one(spec):
 
 # ---------------------------------------------------------------- the wardrobe
 
-def slots_of(desc, fit):
+def slots_of(sid, desc, fit):
     """['garment'] or the head slots in the item's position line; the same test as
     build-costume-fit.position(), split into Upper/Middle/Lower."""
     kind = fit.position(desc)
     if kind == 'garment':
         return ['garment']
     if kind == 'head':
-        line = next(l for l in desc if re.search(r'Upper|Middle|Lower', l))
+        line = next((l for l in desc if re.search(r'Upper|Middle|Lower', l)), None)
+        if line is None:
+            raise ValueError(f'item {sid}: position() says headgear but no desc line names Upper/Middle/Lower')
         return [slot for word, slot in SLOT_WORDS if word in line]
     return []
 
@@ -215,14 +222,12 @@ def wardrobe():
                 if wslug not in weapons:
                     weapons.append(wslug)
         # The attack action differs by sex for some pairs (the Novice's female dagger is attack3,
-        # the male's attack2), so attackType is the first sex's and attackTypeBySex is complete.
-        attack = dict(by_sex.get(sexes[0], {}))
+        # the male's attack2), so the index has only attackTypeBySex: no per-class value a reader
+        # could apply to the wrong sex.
+        first = by_sex.get(sexes[0], {})
         for sx in sexes[1:]:
-            for w, t in by_sex.get(sx, {}).items():
-                attack.setdefault(w, t)
-                if t != attack[w]:
-                    attack_disagree.append(f'{slug}-{sx}-{w}')
-        classes.append({'slug': slug, 'sexes': sexes, 'cloth': list(CLOTH), 'weapons': weapons, 'attackType': attack,
+            attack_disagree += [f'{slug}-{sx}-{w}' for w, t in by_sex.get(sx, {}).items() if w in first and first[w] != t]
+        classes.append({'slug': slug, 'sexes': sexes, 'cloth': list(CLOTH), 'weapons': weapons,
                         'attackTypeBySex': by_sex})
 
     for sx, s in SEXES.items():
@@ -237,7 +242,7 @@ def wardrobe():
     zkind_of = lambda slots: 'acc_upper' if 'upper' in slots else 'acc_mid' if 'mid' in slots else 'acc_lower'
     every = set(cls_sexes)
     for sid, it in sorted(fit.game.items(), key=lambda kv: int(kv[0])):
-        slots = slots_of(it['desc'], fit)
+        slots = slots_of(sid, it['desc'], fit)
         view = fit.class_num.get(int(sid))
         if not slots or not view:
             continue
@@ -332,7 +337,8 @@ def main():
     for s in specs:
         sig = [stat(p) for p in s['sources']]
         prev = old_parts.get(s['key'])
-        if prev and prev['src'] == sig and all(
+        z = [s['zkind'], s['view']]  # a slot change in game-items changes the baked z
+        if prev and prev['src'] == sig and prev.get('z') == z and all(
                 os.path.exists(os.path.join(OUT, f"{s['key']}.{prev['hash']}.{ext}")) for ext in ('json', 'webp')):
             parts[s['key']] = prev
         else:
@@ -340,6 +346,7 @@ def main():
     print(f'{len(specs)} parts, {len(specs) - len(todo)} unchanged, {len(todo)} to export ({args.jobs} jobs)')
     failed = {}
     sig_of = {s['key']: sig for s, sig in todo}
+    z_of = {s['key']: [s['zkind'], s['view']] for s, _ in todo}
     if todo:
         from multiprocessing import Pool
         with Pool(args.jobs) as pool:
@@ -347,7 +354,7 @@ def main():
                 if h is None:
                     failed[key] = a
                 else:
-                    parts[key] = {'src': sig_of[key], 'hash': h, 'json': a, 'webp': b}
+                    parts[key] = {'src': sig_of[key], 'z': z_of[key], 'hash': h, 'json': a, 'webp': b}
                 if n % 200 == 0 or n == len(todo):
                     print(f'  {n}/{len(todo)}  {time.time() - t0:.0f}s', flush=True)
     for key, err in sorted(failed.items()):
