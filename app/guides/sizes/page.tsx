@@ -14,8 +14,10 @@ const SIZE_CARDS = [
   { id: 4126, name: 'Minorous Card' },
 ];
 
+// Searchers type "ขนาดอาวุธ ro" and "ตีขนาด ro"; the old title said only
+// "ตารางขนาด" (905 impressions, 3.3% clicked, 28 days to 22 Oct 2026).
 export const metadata = {
-  title: 'ตารางขนาด Ragnarok Zero',
+  title: 'ตารางขนาดอาวุธ RO Zero — อาวุธไหนตีมอนเล็ก กลาง ใหญ่ ได้เต็ม',
   description:
     'ตารางตัวคูณความเสียหายตามประเภทอาวุธ × ขนาดมอนสเตอร์ของ Ragnarok Zero Global — ดูว่าอาวุธชนิดไหนตีมอนขนาดเล็ก กลาง ใหญ่ ได้เต็มหรือโดนหัก',
 };

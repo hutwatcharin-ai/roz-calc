@@ -95,7 +95,8 @@ async function skillDetails(): Promise<{ levels: SkillLevelMap; descriptions: Re
 
 // The words people type are "อัพสกิล ro" (490 impressions in 28 days, average
 // position 7.4) and "ทดลอง/จำลองอัพสกิล ro"; the title said neither (8 Oct
-// 2026). Check GSC on 21 Oct: position and clicks for those queries.
+// 2026). Checked 24 Oct: "อัพสกิล ro" 601 impressions, position 7.8, 14 clicks --
+// no better, so the title is left alone rather than tuned again.
 export const metadata = {
   title: 'จำลองอัพสกิล Ragnarok Zero — วางแผนสกิลทุกอาชีพ (Skill Simulator)',
   description:

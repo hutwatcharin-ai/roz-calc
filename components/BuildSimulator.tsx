@@ -28,6 +28,7 @@ import { STATS, type Stat, classStats, statCost, WEAPON_TH } from '@/lib/class-s
 import { foodText, foodById } from '@/lib/food-buffs';
 import { bonusText, refineBonusAt } from '@/lib/item-effects';
 import { readPlayerNumbers, writePlayerNumbers } from '@/lib/player-numbers';
+import { reportToolUse, track } from '@/lib/analytics';
 import { rankSuggestions, type SuggestEntry } from '@/lib/suggest';
 import { dollBody, dollHat, dollSex, dollShield, dollStance, dollWeapon, type Sex } from '@/lib/build-doll';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
@@ -209,6 +210,13 @@ export default function BuildSimulator({ initial, sharedId }: {
   }, []);
 
   const result = useMemo(() => calcBuild(build, target), [build, target]);
+
+  // The flagship had no usage count, only page views (owner, 24 Oct 2026).
+  // `dirty` turns on at the player's first edit, never on a load.
+  useEffect(() => {
+    if (dirty) reportToolUse('build', { cls: build.cls });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dirty]);
 
   useEffect(() => {
     if (!ready || ((initial || fromLink) && !dirty)) return;
@@ -394,6 +402,7 @@ export default function BuildSimulator({ initial, sharedId }: {
   const shortUrl = (id: string) => `${window.location.origin}/b/${id}`;
 
   async function shareFacebook() {
+    track('build_share', { via: 'facebook' });
     // Open the window inside the click, or the browser blocks it as a popup.
     const win = window.open('', '_blank');
     const id = await shortId();
@@ -406,6 +415,7 @@ export default function BuildSimulator({ initial, sharedId }: {
     else window.location.href = url;
   }
   async function copyLink() {
+    track('build_share', { via: 'copy' });
     const id = await shortId();
     if (!id) return;
     try {
@@ -416,6 +426,7 @@ export default function BuildSimulator({ initial, sharedId }: {
     }
   }
   async function shareNative() {
+    track('build_share', { via: 'native' });
     const id = await shortId();
     if (!id) return;
     try {
@@ -425,6 +436,7 @@ export default function BuildSimulator({ initial, sharedId }: {
     }
   }
   async function saveImage() {
+    track('build_share', { via: 'image' });
     const id = await shortId();
     if (!id) return;
     setSharing(true);
