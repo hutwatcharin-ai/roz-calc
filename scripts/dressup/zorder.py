@@ -47,7 +47,7 @@ LAYER_CODE = dict(acc_lower=2, acc_upper=3, acc_mid=4)
 BAND_SLOT = {1: 'acc_mid', 2: 'acc_upper', 3: 'acc_lower', 4: 'robe'}
 SEX_ID = {'m': 1, '남': 1, 'f': 0, '여': 0}  # _new_2dlayerdir_f: SEX_FEMALE 0, SEX_MALE 1
 SEX_KR = {'m': '남', '남': '남', 'f': '여', '여': '여'}
-# Body sprite name -> JTtbl name (jobidentity.lub). The sprite names live in the exe, not in a table.
+# Body sprite name -> JOBID name (skillinfoz/jobinheritlist.lub). The sprite names live in the exe, not in a table.
 JOB_NAMES = {
     '초보자': 'JT_NOVICE', '검사': 'JT_SWORDMAN', '마법사': 'JT_MAGICIAN', '궁수': 'JT_ARCHER',
     '성직자': 'JT_ACOLYTE', '상인': 'JT_MERCHANT', '도둑': 'JT_THIEF', '기사': 'JT_KNIGHT',
@@ -68,13 +68,8 @@ def src(path):
     return path
 
 
-# The client's JOBID table is built into the exe; jobidentity.lub's JTtbl has the same names. The
-# few names it lacks (costume jobs such as JT_SUMMER, used only as keys in _new_2dlayerdir_f)
-# get unique negative ids so the file loads; no real job maps to them.
-_JOBID_SHIM = ('JOBID = setmetatable({}, {__index = function(t, k) local v = JTtbl[k] '
-               'if v == nil then _jobid_miss = (_jobid_miss or 0) - 1 v = _jobid_miss - 100000 '
-               'rawset(t, k, v) end return v end})')
 LUA_FILES = (
+    'skillinfoz/jobinheritlist.lub',  # defines JOBID, which the spreditinfo tables are keyed by
     'datainfo/accessoryid.lub', 'datainfo/tb_layer_priority.lub',
     'datainfo/spriterobeid.lub', 'datainfo/spriterobename.lub', 'datainfo/spriterobename_f.lub',
     'spreditinfo/2dlayerdir_f.lub',  # defines GetLayerSizeType, used by the _New_ functions
@@ -87,9 +82,6 @@ LUA_FILES = (
 @functools.lru_cache(maxsize=None)
 def lua():
     L = lub.runtime()
-    err = lub.load(L, src(f'{LUA}/datainfo/jobidentity.lub'))
-    assert err is None, err
-    L.execute(_JOBID_SHIM)
     for f in LUA_FILES:
         err = lub.load(L, src(f'{LUA}/{f}'))
         assert err is None, (f, err)
@@ -97,7 +89,7 @@ def lua():
 
 
 def job_id(job):
-    return int(lua().globals()[b'JTtbl'][JOB_NAMES[job].encode()])
+    return int(lua().globals()[b'JOBID'][JOB_NAMES[job].encode()])
 
 
 def facing_away(action):
