@@ -12,8 +12,10 @@
 // which is also what happens for a reader with an ad blocker, and why the
 // report an advertiser gets counts our own numbers, not Google's.
 
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { ADSENSE_CLIENT, ADSENSE_HEIGHT, ADSENSE_SLOTS, ADSENSE_WIDTH, type AdsenseSlot } from '@/lib/ads';
+import { track } from '@/lib/analytics';
 
 declare global {
   interface Window {
@@ -48,11 +50,26 @@ export default function AdsenseUnit({ slot }: { slot: AdsenseSlot }) {
           itself once the script ran and grew the box from 250 px to 390 px on
           a phone, moving the page under the reader (CLS 0.07 in testing,
           0.003 with this). The sizes are the ones the slots are sold at. */}
-      <ins
-        className="adsbygoogle adslot__ins"
-        data-ad-client={ADSENSE_CLIENT}
-        data-ad-slot={ADSENSE_SLOTS[slot]}
-      />
+      <div className="adslot__box">
+        <ins
+          className="adsbygoogle adslot__ins"
+          data-ad-client={ADSENSE_CLIENT}
+          data-ad-slot={ADSENSE_SLOTS[slot]}
+        />
+        {/* While Google has nothing here (not approved yet, "unfilled", or
+            blocked) the empty box offers itself for sale (owner, 24 Oct 2026).
+            The stylesheet hides it the moment the unit is filled, so it never
+            sits over a Google ad. */}
+        <Link
+          href="/advertise"
+          className="adslot__vacant"
+          onClick={() => track('house_ad_click', { ad_slot: slot })}
+        >
+          <b>INSERT COIN</b>
+          <span>ช่องนี้ว่าง · ลงโฆษณาที่นี่</span>
+          <em>ดูราคา →</em>
+        </Link>
+      </div>
     </aside>
   );
 }

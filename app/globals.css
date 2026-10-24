@@ -3826,10 +3826,24 @@ tr[data-tier] .droprate { font: 700 15px var(--font-chakra), sans-serif; color: 
 }
 .adslot--unit .adslot__ins { position: relative; }
 .adslot--unit .adslot__ins:not([data-ad-status='filled']) > * { opacity: 0; }
-.adslot--unit .adslot__ins:not([data-ad-status='filled'])::after {
-  content: 'INSERT COIN'; position: absolute; inset: 0; display: grid; place-items: center;
-  font: 700 11px var(--font-chakra), sans-serif; letter-spacing: 0.3em; color: rgba(255, 229, 61, 0.35);
+/* The empty unit sells itself (owner, 24 Oct 2026): the same faint arcade
+   panel, now a link to /advertise. Gone as soon as Google fills the unit. */
+.adslot__box { position: relative; display: flex; max-width: 100%; }
+.adslot__vacant {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  text-align: center; text-decoration: none; border-radius: 4px;
 }
+.adslot__ins[data-ad-status='filled'] + .adslot__vacant { display: none; }
+.adslot__vacant b { font: 700 11px var(--font-chakra), sans-serif; letter-spacing: 0.3em; color: rgba(255, 229, 61, 0.45); }
+.adslot__vacant b::before { content: '▶ '; animation: vacant-blink 1.6s steps(2, start) infinite; }
+.adslot__vacant span { font: 600 12.5px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); }
+.adslot__vacant em { font: 700 12px var(--font-sarabun), sans-serif; font-style: normal; color: rgba(61, 232, 255, 0.7); }
+.adslot__vacant:hover { background: rgba(61, 232, 255, 0.05); }
+.adslot__vacant:hover b { color: var(--yellow); }
+.adslot__vacant:hover em { color: var(--cyan); }
+@keyframes vacant-blink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .adslot__vacant b::before { animation: none; } }
 
 /* "ตีตัวนี้ด้วยอะไรดี": answers as lit chips (owner, 1 Oct 2026). */
 .weak { display: grid; gap: 12px; }
