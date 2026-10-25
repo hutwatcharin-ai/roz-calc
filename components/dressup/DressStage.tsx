@@ -57,7 +57,8 @@ export default function DressStage({ look }: { look: Look }) {
     let last = '';
     let raf = 0;
     const tick = (now: number) => {
-      const ms = now - start;
+      // rAF's timestamp is when the frame began, which can be just before `start`.
+      const ms = Math.max(0, now - start);
       const frames = loaded.map((p) => frameFor(p.kind, p.part, action, shown, ms));
       const sig = frames.join(',');
       if (sig !== last) {

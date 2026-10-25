@@ -13,10 +13,15 @@ function frames(part: PartData, action: number): FrameData[] {
   return part.acts[actKey(part, action)];
 }
 
+/** Frame `step` of a loop of n, wrapping negatives too (JS % keeps the sign). */
+export function loopIndex(step: number, n: number): number {
+  return ((Math.floor(step) % n) + n) % n;
+}
+
 export function frameAt(part: PartData, action: number, ms: number): number {
   const list = frames(part, action);
   const delay = part.delay[actKey(part, action)] || 40;
-  return Math.floor(ms / delay) % list.length;
+  return loopIndex(ms / delay, list.length);
 }
 
 type Img = { w: number; h: number; d: Uint8ClampedArray };

@@ -103,6 +103,15 @@ describe('frameAt', () => {
   });
   it('steps by the part delay', () => expect(frameAt(mk(4), 0, 250)).toBe(2));
   it('single frame stays 0', () => expect(frameAt(mk(1), 0, 9999)).toBe(0));
+  // requestAnimationFrame's timestamp is when the frame began, which can be a moment before the
+  // performance.now() the stage started its clock with: a small negative ms must still give a frame.
+  it('a clock a moment before zero still gives a frame in range', () => {
+    for (const ms of [-1, -16, -250]) {
+      const f = frameAt(mk(4), 0, ms);
+      expect(f).toBeGreaterThanOrEqual(0);
+      expect(f).toBeLessThan(4);
+    }
+  });
   it('a missing action uses action 0 frames and delay', () => expect(frameAt(mk(4), 66, 250)).toBe(2));
   it('uses the action own delay', () => {
     const p = mk(4);

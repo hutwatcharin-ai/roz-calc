@@ -124,6 +124,18 @@ describe('frameFor', () => {
     v: 1, w: 1, h: 1, acts: { '0': Array.from({ length: n }, () => [[], null, 0]) }, delay: { '0': delay },
   });
 
+  it('stays in range on a clock a moment before zero (requestAnimationFrame timestamps)', () => {
+    const look = { ...DEFAULT_LOOK, headDir: 1 as const };
+    for (const ms of [-1, -40, -900]) {
+      const f = frameFor('acc', part(24, 40), 0, look, ms);
+      expect(f).toBeGreaterThanOrEqual(8);
+      expect(f).toBeLessThan(16);
+      const r = frameFor('robe', part(5), 0, look, ms);
+      expect(r).toBeGreaterThanOrEqual(0);
+      expect(r).toBeLessThan(5);
+    }
+  });
+
   it('in stand, body/head/acc show headDir; a 24-frame garment keeps animating', () => {
     const look = { ...DEFAULT_LOOK, headDir: 2 as const };
     expect(frameFor('head', part(3), 0, look, 12345)).toBe(2);

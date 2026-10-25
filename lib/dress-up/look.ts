@@ -3,7 +3,7 @@
 // scripts/build-dress-up-client.mjs) is the only data it reads, so it runs the
 // same in the browser and in tests.
 import index from '@/data/dress-up-client.json';
-import { frameAt } from './render';
+import { frameAt, loopIndex } from './render';
 import type { PartData } from './types';
 
 export type Sex = 'm' | 'f';
@@ -179,7 +179,7 @@ export function frameFor(kind: PartKind, part: PartData, action: number, look: L
     if (n > 3 && n % 3 === 0) {
       const g = n / 3;
       const delay = part.delay[key] || 40;
-      return look.headDir * g + (Math.floor(ms / delay) % g);
+      return look.headDir * g + loopIndex(ms / delay, g);
     }
     return Math.min(look.headDir, n - 1);
   }
