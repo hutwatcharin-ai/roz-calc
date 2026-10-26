@@ -800,25 +800,6 @@ a.thsort { text-decoration: none; }
 .sitestats__item:hover { background: var(--panel-2); border-color: var(--cyan); }
 .sitestats__count { font: 700 18px/1.2 var(--font-mono), monospace; color: var(--yellow); }
 .sitestats__label { font-size: 12px; color: var(--dim); }
-.qcard__form {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: auto;
-  padding-top: 10px;
-}
-.qcard__form label { font: 400 13px/1.4 var(--font-sarabun), sans-serif; color: var(--dim); white-space: nowrap; }
-.qcard__form input {
-  background: var(--panel-2);
-  border: 1px solid var(--hair);
-  border-radius: 6px;
-  color: var(--text);
-  font: 400 14px/1.4 var(--font-sarabun), sans-serif;
-  padding: 8px 10px;
-  min-height: 40px;
-}
-.qcard__form .btn { min-height: 40px; }
 
 .explorerow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
 .chiplink {
@@ -3046,8 +3027,6 @@ a.cashlist__row:hover { background: var(--panel-2); }
   .arcade__foe i { background-position: -1032px 0; }
   .arcade__dmg:not(.arcade__dmg--crit) { opacity: 1; }
 }
-@keyframes qcard-breathe { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(2px) scaleY(.93); } }
-@keyframes qcard-zz { 0%, 100% { opacity: .35; transform: translateY(2px); } 50% { opacity: 1; transform: translateY(-3px); } }
 .sitestats__icon { width: 24px; height: 24px; object-fit: contain; image-rendering: pixelated; vertical-align: -5px; margin-right: 6px; }
 
 /* ---------- advertising slots (owner, 23 Sep 2026) ----------

@@ -11,7 +11,8 @@ import { timeAgoTh } from '@/lib/time-ago';
 import { getLastUpdated } from '@/lib/last-updated';
 import ReactDOM from 'react-dom';
 import NowPlaying from '@/components/NowPlaying';
-import HomeBuildStrip from '@/components/HomeBuildStrip';
+import HomeSearch from '@/components/HomeSearch';
+import HomeTools from '@/components/HomeTools';
 import { splitNews } from '@/lib/news';
 import { getFarmingRows } from '@/lib/home-farm';
 
@@ -47,10 +48,6 @@ export default async function HomePage({
     getSiteStats(),
     getLastUpdated(),
   ]);
-
-  // The equipment card's figure comes from the same count the stat row uses,
-  // so the two can never disagree the way they did.
-  const gearCount = stats.find((stat) => stat.href === '/database/equipment')?.count ?? null;
 
   const resultsHref = (show: boolean) =>
     `/?level=${level}&range=${range}${show ? '&c=1' : ''}#results`;
@@ -93,113 +90,63 @@ export default async function HomePage({
           มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ สกิล <strong>เควสและการ์ดแปลไทยครบ ที่เดียวที่ทำ</strong> ·
           เครื่องมือทุกตัวคิดเป็นตัวเลขของตัวละครคุณ
         </p>
-        {/* The site's most-used action, in the hero (owner, 24 Oct 2026: the
-            drop finder took 3,294 searches in 28 days, more than any page). */}
-        <form className="homehero__search" action="/drop-finder" role="search">
-          <input type="search" name="q" placeholder="ชื่อของที่อยากได้ เช่น Jellopy" aria-label="ค้นชื่อไอเทม ดูมอนที่ดรอป" />
-          <button type="submit" className="btn">หามอนที่ดรอป</button>
-        </form>
+        {/* One box for the homepage's two searches (owner's pick C, 26 Oct
+            2026): a level opens the ranking below, a name the drop finder. */}
+        <HomeSearch />
         <p style={{ marginTop: 6 }}>
           <Link href="/guides/faq" className="homehero__faq">เล่นใหม่? เริ่มที่คำถามที่ถามบ่อย →</Link>
         </p>
       </section>
 
-      {/* The flagship tool, above the four cards and below the hero that
-          says what the site is (owner, 7 Oct 2026). */}
-      <HomeBuildStrip />
-
-      <div className="qgrid">
-        {/* Card one IS the tool, not a link to it: the embedded form submits
-            to this same page, so the regular player still searches from "/"
-            in one step, exactly like before the redesign. */}
-        <div className="qcard qcard--yellow qcard--art">
-          <img className="qcard__art" src="/images/items/1101.gif" alt="" width={24} height={24} loading="lazy" />
-          <strong>เลเวลนี้ตีอะไรดี</strong>
-          <span>จัดอันดับมอนคุ้มสุดในช่วงเลเวล พร้อมเตือนตัวที่โจมตีก่อน</span>
-          <form className="qcard__form" action="/#results">
-            {showC && <input type="hidden" name="c" value="1" />}
-            <label>
-              เลเวล{' '}
-              <input className="mono" type="number" name="level" defaultValue={searched ? level : 50} inputMode="numeric" style={{ width: 80 }} />
-            </label>
-            <label>
-              ±<input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" style={{ width: 72 }} />
-            </label>
-            <button type="submit" className="btn">ค้นหา</button>
-          </form>
-        </div>
-
-        <div className="qcard qcard--cyan qcard--art">
-          <img className="qcard__art" src="/images/items/909.gif" alt="" width={24} height={24} loading="lazy" />
-          <strong>อยากได้ของชิ้นนี้</strong>
-          <span>พิมพ์ชื่อไอเทม ดูว่ามอนตัวไหนดรอป อัตราเท่าไร</span>
-          <form className="qcard__form" action="/drop-finder">
-            <input type="search" name="q" placeholder="เช่น Jellopy" aria-label="ค้นชื่อไอเทม" style={{ flex: 1, minWidth: 110 }} />
-            <button type="submit" className="btn">ค้นดรอป</button>
-          </form>
-        </div>
-
-        {/* Only three accent colours exist in the palette (yellow/cyan/pink --
-            see the "Neon Arcade" note above), so one of these four cards must
-            repeat one. Grouped by kind rather than left as a coin flip: card
-            1 (yellow) is the primary action; cards 2 and 3 share cyan because
-            both are "look something up" tools (drop → monster, item → gear);
-            card 4 gets its own colour (pink) because it's a different kind of
-            action (leaving a bot unattended), not another lookup. */}
-        <Link href="/database/equipment" className="qcard qcard--cyan qcard--art">
-          <img className="qcard__art" src="/images/items/2302.gif" alt="" width={24} height={24} loading="lazy" />
-          <strong>ของชิ้นนี้ดีไหม ใส่ได้ไหม</strong>
-          {/* Counted, not written. This card claimed "กว่า 1,800 ชิ้น" while
-              the page it links to lists 876 -- the stat row directly above it
-              was already saying the real number (8 Sep 2026). */}
-          <span>{gearCount === null ? 'อุปกรณ์ กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ' : `อุปกรณ์กว่า ${gearCount.toLocaleString('en-US')} ชิ้น กรองตามอาชีพ ชนิด เลเวล และการ์ดทุกใบ`}</span>
-          <em className="qcard__go">เปิดฐานข้อมูลอุปกรณ์ →</em>
-        </Link>
-
-        <Link href="/tools/leveling-spots?mode=afk" className="qcard qcard--pink qcard--art">
-          <img className="qcard__art qcard__art--sleep" src="/images/monsters/1002.gif" alt="" width={41} height={39} loading="lazy" />
-          <i className="qcard__zz" aria-hidden="true">z<b>z</b></i>
-          <strong>จะนอนแล้ว ทิ้งบอทไว้ไหน</strong>
-          <span>มอนที่คุณหลบได้ ตีโดน และฆ่าได้ในไม่กี่ที พร้อมเตือนสกิลอันตราย</span>
-          <em className="qcard__go">หาจุด AFK →</em>
-        </Link>
-      </div>
-
-      {/* News under the four MODE cards (2 Oct 2026): it was five chips at
-          the bottom of the page and the owner could not find them. Running
-          events and the newest patch, from lib/news. */}
-      <NowPlaying live={splitNews(Date.now()).live} now={Date.now()} moreHref="/news" />
-
-      {/* What the site added lately (UX pass 28 Sep 2026): returning players
-          had no way to see new pages -- the patch chips below are game news,
-          not site news. Rows live in data/site-updates.json. */}
-      <section className="siteupd" aria-labelledby="siteupd-h">
-        <h2 id="siteupd-h" className="siteupd__title">ใหม่ในเว็บ</h2>
-        <ul className="siteupd__list">
-          {(siteUpdates.items as { date: string; href: string; title: string; note: string }[]).slice(0, 5).map((u) => (
-            <li key={u.href}>
-              {/* NEW! for the last three days (1 Oct 2026, arcade pass). */}
-              {Date.now() - Date.parse(`${u.date}T00:00:00+07:00`) < 3 * 86400000 && <span className="newbadge">NEW!</span>}
-              <Link href={u.href}><strong>{u.title}</strong></Link>
-              <span className="muted"> · {u.note}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
+      {/* Results right under the search that asked for them (owner's pick C,
+          26 Oct 2026): they used to sit below the news and the site updates. */}
       {searched && (
-        <div className="panel" id="results" style={{ marginTop: 24 }}>
+        <div className="panel" id="results" style={{ marginTop: 20 }}>
           <div className="pagehead__row" style={{ alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
             <h2 className="pagehead__title" style={{ fontSize: 20, margin: 0 }}>
               มอนคุ้มสุดช่วงเลเวล {Math.max(1, level - range)}–{level + range}
             </h2>
             <CVariantToggle mode="nav" navShow={showC} navHrefShow={resultsHref(true)} navHrefHide={resultsHref(false)} />
           </div>
+          {/* The search box takes a level only, so the range is changed here. */}
+          <form className="farmrefine" action="/#results">
+            {showC && <input type="hidden" name="c" value="1" />}
+            <label>เลเวล <input className="mono" type="number" name="level" defaultValue={level} inputMode="numeric" /></label>
+            <label>± <input className="mono" type="number" name="range" defaultValue={range} inputMode="numeric" /></label>
+            <button type="submit" className="btn">ค้นใหม่</button>
+          </form>
           <FarmingTable rows={rows} />
         </div>
       )}
 
       <RecentlyViewed />
+
+      {/* Tools beside what the site added lately (owner's pick C, 26 Oct
+          2026): 85% of homepage views are returning players (GA4), so the
+          page is a board to jump from, not a tour. The tiles replace the four
+          MODE cards and the build strip, which overlapped (two drop searches,
+          three ways into one leveling tool). */}
+      <div className="board">
+        <section aria-labelledby="board-tools">
+          <h2 id="board-tools" className="board__h mono">▶ TOOLS</h2>
+          <HomeTools />
+        </section>
+        <section className="siteupd" aria-labelledby="siteupd-h">
+          <h2 id="siteupd-h" className="siteupd__title">ใหม่ในเว็บ</h2>
+          <ul className="siteupd__list">
+            {(siteUpdates.items as { date: string; href: string; title: string; note: string }[]).slice(0, 4).map((u) => (
+              <li key={u.href + u.date}>
+                {Date.now() - Date.parse(`${u.date}T00:00:00+07:00`) < 3 * 86400000 && <span className="newbadge">NEW!</span>}
+                <Link href={u.href}><strong>{u.title}</strong></Link>
+                <span className="muted"> · {u.note}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <NowPlaying live={splitNews(Date.now()).live} now={Date.now()} moreHref="/news" />
+
       <SiteStats stats={stats} />
       {/* Freshness badge, not a trust claim (user, 2 Sep): computed live from
           updated_at, so it can only ever say something true. */}
@@ -209,23 +156,20 @@ export default async function HomePage({
         </p>
       )}
 
-      {/* Explore row: the sections the four cards do not cover. Chips, not
-          cards -- this row must stay quieter than the questions above it. */}
+      {/* Explore row: the database sections the tiles do not cover. Chips,
+          quieter than the tiles. No counts: SiteStats above carries them. */}
       <div className="explorerow">
-        {/* No counts here: the live numbers sit in SiteStats right above, and
-            hardcoded copies drift the day the data changes. */}
-        {/* The news chips that led this row (timeline, patches, events) moved
-            into NOW PLAYING above on 2 Oct 2026. */}
         <Link href="/database/monsters" className="chiplink">มอนสเตอร์</Link>
+        <Link href="/database/cards" className="chiplink">การ์ด</Link>
+        <Link href="/database/costumes" className="chiplink">คอสตูม</Link>
+        <Link href="/database/items" className="chiplink">ไอเทม</Link>
         <Link href="/database/quests" className="chiplink">เควสแปลไทย</Link>
         <Link href="/database/world-map" className="chiplink">แผนที่โลก</Link>
         <Link href="/database/skills" className="chiplink">สกิล</Link>
         {/* ตารางธาตุ was orphaned (only reachable from monster-page footers)
             while its Thai keyword has no Zero-specific competitor (SXO audit). */}
         <Link href="/guides/elements" className="chiplink">ตารางธาตุ</Link>
-        <Link href="/database/monsters/compare" className="chiplink">เปรียบเทียบมอน</Link>
-        <Link href="/tools/leveling-spots?mode=zeny" className="chiplink">ฟาร์มเงินที่ไหนดี</Link>
-        <Link href="/database/maps" className="chiplink">แมพ</Link>
+        <Link href="/guides" className="chiplink">ไกด์ทั้งหมด</Link>
       </div>
     </main>
   );
