@@ -16,16 +16,28 @@
 .board__h { margin: 0 0 8px; font-size: 12px; letter-spacing: .22em; color: var(--pink); }
 .board > .siteupd { margin-top: 26px; }
 .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.tile { position: relative; display: flex; flex-direction: column; gap: 2px; min-height: 104px; padding: 12px; border: 1px solid var(--hair); border-radius: 10px; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px), var(--panel); text-decoration: none; transition: transform .12s; }
-.tile:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--cyan); }
-.tile img { height: 34px; width: auto; max-width: 48px; object-fit: contain; image-rendering: pixelated; align-self: flex-start; margin-bottom: 4px; }
-.tile b { font: 700 15px/1.3 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--text); }
-.tile small { font-size: 12px; color: var(--faint); }
-.tile--y { border-color: var(--yellow); box-shadow: 3px 3px 0 var(--yellow); }
-.tile--p { border-color: var(--pink); }
+.tiles { counter-reset: mode; }
+.tile {
+  --c: var(--cyan);
+  counter-increment: mode; position: relative; display: flex; flex-direction: column; gap: 2px; min-height: 104px; padding: 12px;
+  border: 2px solid var(--c); border-radius: 10px; text-decoration: none; transition: transform .12s, box-shadow .12s;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px), var(--panel);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--c) 35%, transparent), inset 0 0 20px color-mix(in srgb, var(--c) 12%, transparent), 4px 4px 0 var(--c);
+}
+/* MODE number in the corner, a lit title, a ▶ that blinks on the first tile. */
+.tile::before { content: 'MODE 0' counter(mode); position: absolute; top: 10px; right: 10px; padding: 1px 6px; font: 700 9px/1.5 var(--font-chakra), sans-serif; letter-spacing: .18em; color: #0B0820; background: var(--c); }
+.tile::after { content: '▶'; position: absolute; right: 12px; bottom: 10px; font-size: 13px; color: var(--c); text-shadow: 0 0 8px var(--c); }
+.tile:first-child::after { animation: tile-blink 1s steps(2, start) infinite; }
+.tile:hover { transform: translate(-3px, -3px); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 55%, transparent), inset 0 0 20px color-mix(in srgb, var(--c) 18%, transparent), 7px 7px 0 var(--c); }
+.tile img { height: 34px; width: auto; max-width: 48px; object-fit: contain; image-rendering: pixelated; align-self: flex-start; margin-bottom: 4px; animation: tile-bob 1.6s ease-in-out infinite alternate; }
+.tile:nth-child(2n) img { animation-delay: .5s; }
+.tile b { font: 700 15px/1.3 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--c); text-shadow: 0 0 10px color-mix(in srgb, var(--c) 55%, transparent); }
+.tile small { padding-right: 18px; font-size: 12px; color: var(--faint); }
+@keyframes tile-bob { to { transform: translateY(-4px); } }
+@keyframes tile-blink { to { visibility: hidden; } }
 .farmrefine { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 10px; }
 .farmrefine label { display: inline-flex; align-items: center; gap: 6px; color: var(--dim); }
 .farmrefine input { width: 72px; min-height: 40px; padding: 6px 10px; border: 1px solid var(--hair); border-radius: 6px; background: var(--panel-2); color: var(--text); font-size: 15px; }
 @media (max-width: 860px) { .board { grid-template-columns: 1fr; } .board > .siteupd { margin-top: 0; } }
 @media (max-width: 480px) { .tiles { grid-template-columns: 1fr 1fr; } }
-@media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } .tile img, .tile::after { animation: none !important; } }
