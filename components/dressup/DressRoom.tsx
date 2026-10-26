@@ -37,7 +37,7 @@ export default function DressRoom({ names, costume, classNames, initial = DEFAUL
       <div className="dress__stagewrap">
         <p className="cfit__label">▶ DRESS ROOM</p>
         <DressStage look={look} scene={scene} onTurn={(dir) => setLook((l) => ({ ...l, dir }))} />
-        <p className="dress__hint">↔ ลากที่ตัวละครเพื่อหมุน</p>
+        <p className="dress__hint">↔ ลากที่ตัวละครเพื่อหมุน · หมุนล้อเมาส์หรือถ่างสองนิ้วเพื่อซูม</p>
         <div className="dress__scenes" role="group" aria-label="ฉากหลัง">
           <span className="dress__scenelabel">ฉาก</span>
           {SCENES.map((x) => (
