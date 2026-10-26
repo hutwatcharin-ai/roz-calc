@@ -107,6 +107,23 @@ describe('withClass', () => {
   });
 });
 
+describe('carts', () => {
+  it('the merchant line pushes any of the carts; other classes draw none and drop it', () => {
+    expect(INDEX.carts).toBe(9);
+    for (const slug of ['merchant', 'blacksmith', 'alchemist', 'whitesmith', 'creator']) {
+      for (let n = 0; n < INDEX.carts; n++) {
+        const keys = drawable({ ...withClass(DEFAULT_LOOK, slug), cart: n }).parts.map((p) => p.key);
+        expect(keys, `${slug} ${n}`).toContain(`cart/${n}`);
+      }
+    }
+    const pushing = { ...withClass(DEFAULT_LOOK, 'merchant'), cart: 3 };
+    expect(drawable({ ...pushing, cls: 'knight' }).parts.some((p) => p.kind === 'cart')).toBe(false);
+    expect(withClass(pushing, 'knight').cart).toBeUndefined();
+    expect(withClass(pushing, 'blacksmith').cart).toBe(3);
+    expect(withOutfit(withClass(pushing, 'blacksmith'), true).cart).toBe(3);
+  });
+});
+
 describe('high class outfits', () => {
   const SECOND = ['knight', 'priest', 'wizard', 'blacksmith', 'hunter', 'assassin', 'crusader', 'monk', 'sage',
     'rogue', 'alchemist', 'bard', 'dancer'];

@@ -9,7 +9,7 @@ import type { PartData } from './types';
 export type Sex = 'm' | 'f';
 export type Slot = 'upper' | 'mid' | 'lower' | 'garment';
 export type Pose = 'stand' | 'walk' | 'sit' | 'ready' | 'attack' | 'hurt' | 'dead';
-export type PartKind = 'body' | 'head' | 'acc' | 'robe' | 'weapon';
+export type PartKind = 'body' | 'head' | 'acc' | 'robe' | 'weapon' | 'cart';
 
 export type Look = {
   cls: string;
@@ -23,6 +23,8 @@ export type Look = {
   garment?: number;
   /** a weapon type the class holds (dagger, sword2h, dagger-sword, ...) */
   weapon?: string;
+  /** merchant line only: which cart (0 .. INDEX.carts - 1), none when undefined */
+  cart?: number;
   /** 0 faces the viewer, then clockwise: 2 left, 4 away, 6 right */
   dir: number;
   pose: Pose;
@@ -40,6 +42,8 @@ export interface ClientClass {
   atk: Record<Sex, Record<string, number>>;
   /** a high class outfit: the 2nd class it dresses */
   of?: string;
+  /** pushes a cart */
+  cart?: boolean;
 }
 
 /** [slot letters, view] | [.., .., 0 = no sprite anywhere] | [.., .., class-sexes without one] */
@@ -49,6 +53,8 @@ export interface ClientIndex {
   v: number;
   classes: ClientClass[];
   hair: { styles: number; colours: { id: number; th: string }[] };
+  /** cart looks: cart/0 .. cart/(carts - 1) */
+  carts: number;
   items: Record<string, ClientItem>;
   files: Record<string, string>;
 }
@@ -146,6 +152,7 @@ export function drawable(look: Look): { parts: PartRef[]; missing: number[] } {
     if (!add(`robe/${INDEX.items[String(id)][1]}-${look.cls}-${sex}`, false, 'robe')) missing.push(id);
   }
   if (look.weapon && c?.weapons.includes(look.weapon)) add(`weapon/${look.cls}-${sex}-${look.weapon}`, false, 'weapon');
+  if (look.cart !== undefined && c?.cart) add(`cart/${look.cart}`, false, 'cart');
   return { parts, missing };
 }
 
@@ -211,7 +218,7 @@ export function withOutfit(look: Look, high: boolean): Look {
   return switchTo(look, high ? highClass(base) ?? base : base);
 }
 
-/** Switch class, keeping what still fits: a cloth palette or weapon type the class lacks is reset. */
+/** Switch class, keeping what still fits: a cloth palette, weapon type or cart the class lacks is reset. */
 function switchTo(look: Look, slug: string): Look {
   const c = classOf(slug);
   return {
@@ -219,5 +226,6 @@ function switchTo(look: Look, slug: string): Look {
     cls: slug,
     cloth: c?.cloth.includes(look.cloth) ? look.cloth : 0,
     weapon: look.weapon && c?.weapons.includes(look.weapon) ? look.weapon : undefined,
+    cart: c?.cart ? look.cart : undefined,
   };
 }

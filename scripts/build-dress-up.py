@@ -9,6 +9,7 @@ Writes (out/dress-up/ is not committed; it goes to R2 with scripts/upload-dress-
   out/dress-up/acc/<view>-<sex>.<hash>.{json,webp}
   out/dress-up/robe/<view>-<cls>-<sex>.<hash>.{json,webp}
   out/dress-up/weapon/<cls>-<sex>-<wtype>.<hash>.{json,webp}
+  out/dress-up/cart/<n>.<hash>.{json,webp}   the merchant carts (scripts/dressup/cart.py)
   data/dress-up.json           the index the page reads (files: logical key -> hashed stem; the
                                page fetches <stem>.json and <stem>.webp)
   data/dress-up-manifest.json  per part: source files (mtime, size) and the content hash
@@ -42,7 +43,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 sys.stdout.reconfigure(encoding='utf-8')
 
-from dressup import part, zorder  # noqa: E402
+from dressup import cart, part, zorder  # noqa: E402
 
 GRF = zorder.GRF
 SPRITE = f'{GRF}/sprite'
@@ -72,15 +73,17 @@ HIGH = {
     'stalker': ('스토커', 'rogue'), 'creator': ('크리에이터', 'alchemist'), 'clown': ('클라운', 'bard'),
     'gypsy': ('집시', 'dancer'),
 }
+# Classes that push a cart (Pushcart): the merchant line and its high class outfits.
+CART_CLASSES = {'merchant', 'blacksmith', 'alchemist', 'whitesmith', 'creator'}
 ATTACK_TYPES = (5, 10, 11)
 # Hair colour names: the client's _DressHeadPaletteList (Korean, read through cp874 by lupa).
 HAIR_TH = {'기본': 'สีเดิม', '노란색': 'เหลือง', '보라색': 'ม่วง', '연갈색': 'น้ำตาลอ่อน', '녹색': 'เขียว',
            '파란색': 'น้ำเงิน', '흰색': 'ขาว', '진갈색': 'น้ำตาลเข้ม', '붉은색': 'แดง'}
 SLOT_WORDS = (('Upper', 'upper'), ('Middle', 'mid'), ('Lower', 'lower'))
-FOLDERS = ('body', 'head', 'acc', 'robe', 'weapon')
+FOLDERS = ('body', 'head', 'acc', 'robe', 'weapon', 'cart')
 # What a part's bytes depend on besides its sources: these modules, plus export_one() and integral()
 # here (hashed by source, so editing the rest of this script does not force a full rebuild).
-CODE_FILES = ('dressup/part.py', 'dressup/zorder.py', 'ro_sprite.py')
+CODE_FILES = ('dressup/part.py', 'dressup/zorder.py', 'dressup/cart.py', 'ro_sprite.py')
 
 
 def load_script(name, filename):
@@ -131,7 +134,10 @@ def export_one(spec):
     from ro_sprite import Spr, Act
     try:
         spr, act = Spr(spec['spr']), Act(spec['act'])
-        z_of = zorder.part_z_of(spec['zkind'], spec['view'], spec['job'], spec['sex'], fn=zorder.z_baked)
+        if spec['kind'] == 'cart':
+            act, z_of = cart.act_for(act), cart.z_of
+        else:
+            z_of = zorder.part_z_of(spec['zkind'], spec['view'], spec['job'], spec['sex'], fn=zorder.z_baked)
         atlas, meta = part.export_part(spr, act, palette=spec['pal'], z_of=z_of)
         jb = json.dumps(integral(meta), separators=(',', ':')).encode()
         buf = io.BytesIO()
@@ -246,7 +252,13 @@ def wardrobe():
         row = {'slug': slug, 'sexes': sexes, 'cloth': cloth or [0], 'weapons': weapons, 'attackTypeBySex': by_sex}
         if of:
             row['of'] = of
+        if slug in CART_CLASSES:
+            row['cart'] = True
         classes.append(row)
+
+    for n, name in enumerate(cart.NAMES):
+        base = f'{SPRITE}/이팩트/{name}'
+        add(f'cart/{n}', 'cart', 'cart', None, '초보자', '남', base + '.spr', base + '.act')
 
     for sx, s in SEXES.items():
         for h in range(1, HAIR_STYLES + 1):
@@ -315,6 +327,7 @@ def wardrobe():
         'classes': classes,
         'hair': {'styles': HAIR_STYLES, 'colours': hair_colours()},
         'clothZero': part.CLOTH_ZERO,
+        'carts': len(cart.NAMES),
         'items': items,
     }
     coverage = {'itemsWithView': len(items), 'drawnEverywhere': len(items) - len(missing), 'missing': missing}

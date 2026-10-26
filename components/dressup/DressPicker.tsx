@@ -291,6 +291,19 @@ function PoseTab({ look, onChange }: Pick<Props, 'look' | 'onChange'>) {
           ))}
         </div>
       </section>
+      {cls?.cart && (
+        <section className="dress__sec">
+          <h3 className="dress__h">รถเข็น</h3>
+          <div className="dress__chips">
+            <button type="button" className="dress__chip" aria-pressed={look.cart === undefined} onClick={() => set({ cart: undefined })}>ไม่ใช้</button>
+            {Array.from({ length: INDEX.carts }, (_, n) => (
+              <button key={n} type="button" className="dress__chip" aria-pressed={look.cart === n} onClick={() => set({ cart: n })}>
+                แบบ {n + 1}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
