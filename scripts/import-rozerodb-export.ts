@@ -77,6 +77,9 @@ async function main(): Promise<void> {
 
   const dropRows = await all<{ monster_id: number; item_id: number }>('monster_drops', 'monster_id, item_id', 'item_id');
   const dropPairs = new Set(dropRows.map((d) => `${d.monster_id}:${d.item_id}`));
+  // Pairs the source lists but the game does not drop; deleted from the table
+  // and never re-added. Wolf (1013) -> Red Blood (990): removed 26 Oct 2026.
+  for (const pair of ['1013:990']) dropPairs.add(pair);
 
   const skills = await all<{ slug: string; name: string }>('skills', 'slug, name', 'slug');
   const skillByName = new Map(skills.map((s) => [s.name.toLowerCase(), s.slug]));
