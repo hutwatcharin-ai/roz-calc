@@ -1,5 +1,5 @@
 """The dress room's scene backdrops (grass field, Prontera plaza), drawn from the client's ground
-and building textures: a sky, a horizon line of trees or houses, and the ground laid back in
+and castle textures: a sky, a horizon line of trees or the Prontera castle, and the ground laid back in
 perspective under the character's feet (y 450 of 600, the stage's origin 150 of 200 at 3x).
 
 Only these derived pictures are committed; the textures stay in the local client.
@@ -163,20 +163,77 @@ def grass():
     return im
 
 
+def tiled(im, texture, box, scale, shade=0.0):
+    """Fill box (x0, y0, x1, y1) with texture repeated at scale, anchored at the box's top left."""
+    x0, y0, x1, y1 = (int(v) for v in box)
+    t = texture.resize((max(1, int(texture.width * scale)), max(1, int(texture.height * scale))), Image.LANCZOS)
+    fill = Image.new('RGBA', (x1 - x0, y1 - y0))
+    for ty in range(0, y1 - y0, t.height):
+        for tx in range(0, x1 - x0, t.width):
+            fill.alpha_composite(t, (tx, ty))
+    if shade:
+        a = np.asarray(fill).astype(np.float32)
+        a[..., :3] *= 1 - shade
+        fill = Image.fromarray(a.astype(np.uint8))
+    im.alpha_composite(fill, (x0, y0))
+
+
+def cone(im, slate, cx, base_y, half_w, height):
+    """A pointed slate roof on a round tower."""
+    mask = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(mask).polygon([(cx - half_w, base_y), (cx + half_w, base_y), (cx, base_y - height)], fill=255)
+    layer = Image.new('RGBA', (W, H))
+    tiled(layer, slate, (0, 0, W, H), 0.5)
+    a = np.asarray(layer).astype(np.float32)
+    xs = np.arange(W)[None, :]
+    a[..., :3] *= (0.75 + 0.35 * np.clip(1 - np.abs(xs - cx) / max(half_w, 1), 0, 1))[..., None]  # rounded light
+    layer = Image.fromarray(a.astype(np.uint8))
+    layer.putalpha(mask)
+    im.alpha_composite(layer)
+
+
+def castle(im):
+    """Prontera castle on the horizon: a keep with a rose window and a gate, two tall towers with
+    slate cones, smaller towers at the sides, and the outer wall across."""
+    P = '프론테라/'
+    wall = keyed(P + 'pron-newcastle.bmp')
+    tower = keyed(P + 'pron-newcastle-1.bmp')
+    plain = keyed(P + 'pron-castle7.bmp')
+    slate = keyed(P + 'pron-castle4.bmp').crop((0, 0, 128, 70))
+    rose = keyed(P + 'pron-castle-2.bmp')
+    base = HZ + 6
+    for cx, top, w in ((40, 105, 42), (560, 105, 42)):            # far side towers
+        tiled(im, tower, (cx - w / 2, top, cx + w / 2, base), 0.32, shade=0.12)
+        cone(im, slate, cx, top + 2, w / 2 + 6, 42)
+    tiled(im, wall, (0, base - 62, W, base), 0.38, shade=0.08)    # outer wall
+    tiled(im, wall, (205, 70, 395, base), 0.45)                    # keep
+    tiled(im, plain, (205, 70, 395, 82), 0.3, shade=0.2)           # cornice
+    r = rose.resize((54, 54), Image.LANCZOS)
+    im.alpha_composite(r, (300 - 27, 92))
+    d = ImageDraw.Draw(im)
+    gx, gw, gh = 300, 26, 58                                       # the gate: an arch with a portcullis
+    d.rectangle([gx - gw, base - gh + gw, gx + gw, base], fill=(46, 34, 28, 255))
+    d.pieslice([gx - gw, base - gh, gx + gw, base - gh + 2 * gw], 180, 360, fill=(46, 34, 28, 255))
+    for bx in range(gx - gw + 6, gx + gw, 8):
+        d.line([bx, base - gh + 6, bx, base], fill=(92, 78, 64, 255), width=2)
+    for by in range(base - gh + 16, base, 10):
+        d.line([gx - gw + 3, by, gx + gw - 3, by], fill=(92, 78, 64, 255), width=1)
+    for bx in (238, 352):                                          # Prontera's red banners
+        d.rectangle([bx, 128, bx + 14, 168], fill=(158, 30, 36, 255))
+        d.polygon([(bx, 168), (bx + 14, 168), (bx + 7, 176)], fill=(158, 30, 36, 255))
+        d.line([bx + 3, 132, bx + 3, 164], fill=(222, 182, 82, 255), width=1)
+        d.line([bx + 11, 132, bx + 11, 164], fill=(222, 182, 82, 255), width=1)
+    for cx in (185, 415):                                          # main towers
+        tiled(im, tower, (cx - 30, 52, cx + 30, base), 0.42)
+        cone(im, slate, cx, 54, 38, 70)
+
+
 def prontera():
     im = sky((120, 150, 205), (240, 214, 180), clouds=4, seed=11)
-    walls = [keyed(f'프론테라/{n}') for n in ('ho-wall-1.bmp', 'ho-wall-2.bmp', 'ho-wall-3.bmp', 'ho-wall.bmp')]
-    x, i = -40, 0
-    while x < W:
-        w = walls[i % len(walls)]
-        h = 105 + (i * 37) % 30
-        s = w.resize((int(w.width * h / w.height), h), Image.LANCZOS)
-        im.alpha_composite(s, (x, HZ + 8 - h))
-        x += s.width
-        i += 1
+    castle(im)
     haze = Image.new('RGBA', (W, H), (240, 214, 180, 0))
     a = np.zeros((H, W), np.uint8)
-    a[:HZ + 8] = np.linspace(40, 90, HZ + 8)[:, None].astype(np.uint8)
+    a[:HZ + 8] = np.linspace(30, 80, HZ + 8)[:, None].astype(np.uint8)
     haze.putalpha(Image.fromarray(a))
     im.alpha_composite(haze)
     g, mask = floor(tex('필드바닥/prt_도시02.bmp'), 95, centre=tex('필드바닥/prt_도시01.bmp'), haze=(232, 212, 186), fog=0.5)
