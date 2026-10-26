@@ -4,6 +4,13 @@
 // only move the sheet through CSS :has() -- no client JS.
 
 import { costumeArt, costumeFit } from '@/lib/costume-fit';
+import { INDEX } from '@/lib/dress-up/look';
+
+/** Whether the dress room draws the item on some class (so the link opens wearing it). */
+const inDressRoom = (id: number) => {
+  const it = INDEX.items[String(id)];
+  return !!it && it[2] !== 0;
+};
 
 const DIRS = [
   ['front', 'ด้านหน้า'],
@@ -86,6 +93,9 @@ export default function CostumeFit({ id, name }: { id: number; name: string }) {
         ))}
       </div>
       <p className="cfit__note">ภาพจากไฟล์ในเกม ใส่บนตัว Novice ทรงผมเริ่มต้น</p>
+      {inDressRoom(id) && (
+        <a className="cfit__go" href={`/tools/dress-up?wear=${id}`}>▶ ลองใส่ในห้องแต่งตัว</a>
+      )}
     </section>
   );
 }

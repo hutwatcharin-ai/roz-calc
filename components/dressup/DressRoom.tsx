@@ -2,7 +2,7 @@
 // Holds the look and lays out the stage beside the picker, with the backdrop
 // switch under the stage (remembered in this browser).
 import { useEffect, useState } from 'react';
-import { DEFAULT_LOOK, type Look } from '@/lib/dress-up/look';
+import { DEFAULT_LOOK, slotsOf, wear, type Look } from '@/lib/dress-up/look';
 import DressPicker from './DressPicker';
 import DressStage from './DressStage';
 
@@ -27,6 +27,11 @@ export default function DressRoom({ names, costume, classNames, initial = DEFAUL
       const saved = localStorage.getItem(SCENE_KEY);
       if (saved && SCENES.some((x) => x.id === saved)) setScene(saved);
     } catch { /* storage blocked: keep the default */ }
+    // ?wear=<item id>, from the button on a costume page: start wearing it, a
+    // garment seen from behind. Read here, not on the server, so the page stays static.
+    const id = Number(new URLSearchParams(window.location.search).get('wear'));
+    const slots = Number.isInteger(id) ? slotsOf(id) : [];
+    if (slots.length) setLook((l) => ({ ...wear(l, id), dir: slots.includes('garment') ? 4 : l.dir }));
   }, []);
   const pickScene = (id: string) => {
     setScene(id);
