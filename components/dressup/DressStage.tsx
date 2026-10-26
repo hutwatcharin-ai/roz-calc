@@ -24,7 +24,12 @@ const TURN_PX = 28;
 /** Turning right (a drag or the right arrow) walks the directions down: front, front-right, right... */
 const turned = (dir: number, steps: number) => (((dir - steps) % 8) + 8) % 8;
 
-export default function DressStage({ look, onTurn }: { look: Look; onTurn?: (dir: number) => void }) {
+export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
+  look: Look;
+  onTurn?: (dir: number) => void;
+  /** the backdrop, styled in app/tools/dress-up/page.css */
+  scene?: string;
+}) {
   const drag = useRef<{ id: number; x: number; dir: number } | null>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState<Status>('loading');
@@ -88,6 +93,7 @@ export default function DressStage({ look, onTurn }: { look: Look; onTurn?: (dir
     <div
       className="dress__stage"
       data-status={empty ? 'empty' : status}
+      data-scene={backdrop}
       data-turn={onTurn ? '' : undefined}
       tabIndex={onTurn ? 0 : undefined}
       aria-label={onTurn ? 'ลากซ้ายขวาหรือกดลูกศรเพื่อหมุนตัวละคร' : undefined}
