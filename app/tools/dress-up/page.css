@@ -23,6 +23,7 @@
 .dress__stage[data-scene="studio"] { background: radial-gradient(ellipse 22% 6% at 50% 76%, rgba(190, 170, 230, .55), transparent), linear-gradient(135deg, #fde7f3, #e6f0ff 55%, #e9fbf2); }
 .dress__stage[data-scene="grass"]::before, .dress__stage[data-scene="prontera"]::before, .dress__stage[data-scene="studio"]::before { opacity: .15; }
 .dress__stage[data-scene="grass"]::after, .dress__stage[data-scene="prontera"]::after, .dress__stage[data-scene="studio"]::after { display: none; }
+.dress__note { margin: 6px 0 0; color: var(--dim); font-size: 13px; }
 .dress__scenes { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; }
 .dress__scenelabel { color: var(--dim); font-size: 13px; margin-right: 2px; }
 .dress__hint { margin: 6px 0 0; text-align: center; color: var(--dim); font-size: 13px; }

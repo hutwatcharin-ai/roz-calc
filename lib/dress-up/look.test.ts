@@ -2,8 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import full from '@/data/dress-up.json';
 import { dollSex } from '@/lib/build-doll';
 import {
-  DEFAULT_LOOK, INDEX, actionFor, baseClass, drawable, frameFor, highClass, partsFor, sexOf, takeOff, wear, withClass,
-  withOutfit, type Look,
+  DEFAULT_LOOK, INDEX, actionFor, baseClass, drawable, frameFor, highClass, mountOf, partsFor, sexOf, takeOff, wear,
+  withClass, withMount, withOutfit, type Look,
 } from './look';
 import { DressUpUnavailable, loadPart } from './load';
 import type { PartData } from './types';
@@ -90,7 +90,7 @@ describe('partsFor', () => {
     expect(sexOf({ ...DEFAULT_LOOK, cls: 'bard', sex: 'f' })).toBe('m');
     expect(keysOf({ ...DEFAULT_LOOK, cls: 'bard', sex: 'f' })[0]).toBe('body/bard-m-0');
     for (const c of full.classes) {
-      const doll = (c as { of?: string }).of ?? c.slug; // a high class outfit is drawn as its 2nd class's sexes
+      const doll = baseClass(c.slug); // an outfit or a mount is drawn as its class's sexes
       for (const s of ['m', 'f'] as const) expect(sexOf({ ...DEFAULT_LOOK, cls: c.slug, sex: s })).toBe(dollSex(doll, s));
     }
   });
@@ -121,6 +121,35 @@ describe('carts', () => {
     expect(withClass(pushing, 'knight').cart).toBeUndefined();
     expect(withClass(pushing, 'blacksmith').cart).toBe(3);
     expect(withOutfit(withClass(pushing, 'blacksmith'), true).cart).toBe(3);
+  });
+});
+
+describe('mounts', () => {
+  const ALL = ['novice', 'swordsman', 'mage', 'archer', 'acolyte', 'merchant', 'thief', 'knight', 'priest', 'wizard',
+    'blacksmith', 'hunter', 'assassin', 'crusader', 'monk', 'sage', 'rogue', 'alchemist', 'bard', 'dancer'];
+
+  it('every class and every high class outfit has a mounted body', () => {
+    for (const slug of ALL) {
+      for (const high of [false, true]) {
+        const plain = withOutfit(withClass(DEFAULT_LOOK, slug), high);
+        if (high && !highClass(slug)) continue;
+        const riding = withMount(plain, true);
+        expect(riding.cls, `${plain.cls}`).toBe(mountOf(plain.cls));
+        expect(baseClass(riding.cls)).toBe(slug);
+        expect(drawable(riding).parts[0]?.key).toMatch(new RegExp(`^body/${riding.cls}-`));
+        expect(withMount(riding, false).cls).toBe(plain.cls);
+      }
+    }
+  });
+
+  it('stays on across classes and outfits, and only the Pecos hold weapons', () => {
+    const peco = withMount(withClass(DEFAULT_LOOK, 'knight'), true);
+    expect(peco.cls).toBe('knight-riding');
+    expect(withClass(peco, 'mage').cls).toBe('mage-riding');
+    expect(withOutfit(peco, true).cls).toBe('lord-knight-riding');
+    expect(withOutfit(withOutfit(peco, true), false).cls).toBe('knight-riding');
+    expect(INDEX.classes.find((c) => c.slug === 'knight-riding')!.weapons.length).toBeGreaterThan(0);
+    expect(INDEX.classes.find((c) => c.slug === 'mage-riding')!.weapons).toEqual([]);
   });
 });
 

@@ -44,6 +44,8 @@ export interface ClientClass {
   of?: string;
   /** pushes a cart */
   cart?: boolean;
+  /** a mounted body: the class riding it */
+  rides?: string;
 }
 
 /** [slot letters, view] | [.., .., 0 = no sprite anywhere] | [.., .., class-sexes without one] */
@@ -195,27 +197,52 @@ export function frameFor(kind: PartKind, part: PartData, action: number, look: L
   return frameAt(part, action, ms);
 }
 
-/** The class a slug dresses: the 2nd class behind a high class outfit, else the slug. */
-export function baseClass(slug: string): string {
-  return classOf(slug)?.of ?? slug;
+/** The class without its mount: a mounted body gives the class riding it. */
+export function plainOf(slug: string): string {
+  return classOf(slug)?.rides ?? slug;
 }
 
-/** The high class outfit a class (or its outfit) can wear, if the game sells one. */
+/** The class a slug dresses: the 2nd class behind a high class outfit or a mount, else the slug. */
+export function baseClass(slug: string): string {
+  const plain = plainOf(slug);
+  return classOf(plain)?.of ?? plain;
+}
+
+/** The high class outfit a class (or its outfit or mount) can wear, if the game sells one. */
 export function highClass(slug: string): string | undefined {
   const base = baseClass(slug);
   return INDEX.classes.find((c) => c.of === base)?.slug;
 }
 
-/** Switch class, keeping the high class outfit on when the new class has one. */
+/** The mounted body of a class (or of its outfit), if there is one. */
+export function mountOf(slug: string): string | undefined {
+  const plain = plainOf(slug);
+  return INDEX.classes.find((c) => c.rides === plain)?.slug;
+}
+
+const isHigh = (slug: string) => !!classOf(plainOf(slug))?.of;
+const isRiding = (slug: string) => !!classOf(slug)?.rides;
+
+/** The slug for a class with the outfit and the mount on or off, each falling back when missing. */
+function compose(base: string, high: boolean, ride: boolean): string {
+  let slug = high ? highClass(base) ?? base : base;
+  if (ride) slug = mountOf(slug) ?? slug;
+  return slug;
+}
+
+/** Switch class, keeping the high class outfit and the mount on when the new class has them. */
 export function withClass(look: Look, slug: string): Look {
-  const keepHigh = !!classOf(look.cls)?.of && !classOf(slug)?.of;
-  return switchTo(look, keepHigh ? highClass(slug) ?? slug : slug);
+  return switchTo(look, compose(baseClass(slug), isHigh(slug) || isHigh(look.cls), isRiding(slug) || isRiding(look.cls)));
 }
 
 /** Put the high class outfit on or take it off; a class without one stays as it is. */
 export function withOutfit(look: Look, high: boolean): Look {
-  const base = baseClass(look.cls);
-  return switchTo(look, high ? highClass(base) ?? base : base);
+  return switchTo(look, compose(baseClass(look.cls), high, isRiding(look.cls)));
+}
+
+/** Get on the class's mount or off it; a class without one stays as it is. */
+export function withMount(look: Look, ride: boolean): Look {
+  return switchTo(look, compose(baseClass(look.cls), isHigh(look.cls), ride));
 }
 
 /** Switch class, keeping what still fits: a cloth palette, weapon type or cart the class lacks is reset. */

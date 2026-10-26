@@ -7,7 +7,8 @@
 // Shape:
 //   v, hair                 as in the full index
 //   classes[]               {slug, sexes, cloth, weapons, atk: attackTypeBySex, of?}
-//                           of: the 2nd class a high class outfit dresses; cart: pushes a cart
+//                           of: the 2nd class a high class outfit dresses; cart: pushes a cart;
+//                           rides: the class a mounted body carries
 //   carts                   how many cart looks there are (cart/0 .. cart/n-1)
 //   items{id: [slots, view] | [slots, view, 0] | [slots, view, ["knight-f", ...]]}
 //                           slots is letters: u upper, m mid, l lower, g garment.
@@ -43,7 +44,7 @@ export function buildClient(full) {
   return {
     v: full.v,
     classes: full.classes.map((c) => ({
-      slug: c.slug, sexes: c.sexes, cloth: c.cloth, weapons: c.weapons, atk: c.attackTypeBySex, ...(c.of ? { of: c.of } : {}), ...(c.cart ? { cart: true } : {}),
+      slug: c.slug, sexes: c.sexes, cloth: c.cloth, weapons: c.weapons, atk: c.attackTypeBySex, ...(c.of ? { of: c.of } : {}), ...(c.cart ? { cart: true } : {}), ...(c.rides ? { rides: c.rides } : {}),
     })),
     hair: full.hair,
     carts: full.carts ?? 0,

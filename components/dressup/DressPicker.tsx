@@ -6,7 +6,8 @@
 // server (the game client's own item table).
 import { useMemo, useState } from 'react';
 import {
-  INDEX, POSE_TYPE, SLOTS, baseClass, classOf, hasSprite, highClass, sexOf, takeOff, wear, withClass, withOutfit,
+  INDEX, POSE_TYPE, SLOTS, baseClass, classOf, hasSprite, highClass, mountOf, plainOf, sexOf, takeOff, wear, withClass,
+  withMount, withOutfit,
   type Look, type Pose, type Sex, type Slot,
 } from '@/lib/dress-up/look';
 import { THUMBS, pickId, randomLook, tileDrawn, tileOf, tilesFor, type Filter, type Tile } from '@/lib/dress-up/catalog';
@@ -35,6 +36,15 @@ const PAD_ARROW = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
 
 // Cloth palettes by position: the game's own colour, then the stylist's alternatives.
 const CLOTH_TH = (i: number) => (i === 0 ? 'เดิม' : `แบบ ${i}`);
+
+// What each class line rides (docs/PLAYER_GLOSSARY.md words), by the 2nd class or the class itself.
+const MOUNT_TH: Record<string, string> = {
+  novice: 'โพริง', swordsman: 'เพโค', knight: 'เพโค', crusader: 'แกรนด์เพโค',
+  mage: 'จิ้งจอก', wizard: 'จิ้งจอก', sage: 'จิ้งจอก', archer: 'นกกระจอกเทศ', hunter: 'นกกระจอกเทศ',
+  bard: 'นกกระจอกเทศ', dancer: 'นกกระจอกเทศ', acolyte: 'อัลปาก้า', priest: 'อัลปาก้า', monk: 'อัลปาก้า',
+  merchant: 'หมูป่า', blacksmith: 'หมูป่า', alchemist: 'หมูป่า', thief: 'เคอร์เบอรัส', assassin: 'เคอร์เบอรัส',
+  rogue: 'เคอร์เบอรัส',
+};
 
 // Classes with a portrait in public/images/jobs.
 const NO_PORTRAIT = new Set(['novice']);
@@ -166,12 +176,14 @@ function JobTab({ look, onChange, classNames }: Pick<Props, 'look' | 'onChange' 
   const set = (patch: Partial<Look>) => onChange({ ...look, ...patch });
   const base = baseClass(look.cls);
   const high = highClass(look.cls);
+  const mount = mountOf(look.cls);
+  const riding = !!cls?.rides;
   return (
     <div className="dress__tabbody">
       <section className="dress__sec">
         <h3 className="dress__h">อาชีพ</h3>
         <div className="dress__jobs">
-          {INDEX.classes.filter((c) => !c.of).map((c) => (
+          {INDEX.classes.filter((c) => !c.of && !c.rides).map((c) => (
             <button key={c.slug} type="button" className="dress__job" aria-pressed={c.slug === base} onClick={() => onChange(withClass(look, c.slug))}>
               {NO_PORTRAIT.has(c.slug)
                 ? <span className="dress__jobpic dress__jobpic--none" aria-hidden>N</span>
@@ -185,11 +197,24 @@ function JobTab({ look, onChange, classNames }: Pick<Props, 'look' | 'onChange' 
         <section className="dress__sec">
           <h3 className="dress__h">ชุด</h3>
           <div className="dress__chips">
-            <button type="button" className="dress__chip" aria-pressed={look.cls === base} onClick={() => onChange(withOutfit(look, false))}>
+            <button type="button" className="dress__chip" aria-pressed={plainOf(look.cls) === base} onClick={() => onChange(withOutfit(look, false))}>
               ชุดอาชีพ
             </button>
-            <button type="button" className="dress__chip" aria-pressed={look.cls === high} onClick={() => onChange(withOutfit(look, true))}>
+            <button type="button" className="dress__chip" aria-pressed={plainOf(look.cls) === high} onClick={() => onChange(withOutfit(look, true))}>
               ชุดไฮคลาส · {classNames[high] ?? high}
+            </button>
+          </div>
+        </section>
+      )}
+      {mount && (
+        <section className="dress__sec">
+          <h3 className="dress__h">สัตว์ขี่</h3>
+          <div className="dress__chips">
+            <button type="button" className="dress__chip" aria-pressed={!riding} onClick={() => onChange(withMount(look, false))}>
+              เดินเอง
+            </button>
+            <button type="button" className="dress__chip" aria-pressed={riding} onClick={() => onChange(withMount(look, true))}>
+              ขี่{MOUNT_TH[base] ?? 'สัตว์'}
             </button>
           </div>
         </section>
@@ -290,6 +315,7 @@ function PoseTab({ look, onChange }: Pick<Props, 'look' | 'onChange'>) {
             </button>
           ))}
         </div>
+        {cls?.rides && cls.weapons.length === 0 && <p className="dress__note">ตอนขี่สัตว์ ไฟล์เกมยังไม่มีภาพอาวุธ</p>}
       </section>
       {cls?.cart && (
         <section className="dress__sec">

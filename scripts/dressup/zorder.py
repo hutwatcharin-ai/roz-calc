@@ -60,6 +60,18 @@ JOB_NAMES = {
     '스나이퍼': 'JT_HUNTER_H', '어쌔신크로스': 'JT_ASSASSIN_H', '팔라딘': 'JT_CRUSADER_H', '챔피온': 'JT_MONK_H',
     '프로페서': 'JT_SAGE_H', '스토커': 'JT_ROGUE_H', '크리에이터': 'JT_ALCHEMIST_H', '클라운': 'JT_BARD_H',
     '집시': 'JT_DANCER_H',
+    # Mounted bodies: the rider and the animal in one sprite.
+    '노비스포링': 'JT_PORING_NOVICE', '페코검사': 'JT_PECO_SWORD', '여우마법사': 'JT_FOX_MAGICIAN',
+    '타조궁수': 'JT_OSTRICH_ARCHER', '복사알파카': 'JT_SHEEP_ACO', '상인멧돼지': 'JT_PIG_MERCHANT',
+    '켈베로스도둑': 'JT_DOG_THIEF', '페코페코_기사': 'JT_CHICKEN', '프리스트알파카': 'JT_SHEEP_PRIEST',
+    '여우위저드': 'JT_FOX_WIZ', '제철공멧돼지': 'JT_PIG_BLACKSMITH', '타조헌터': 'JT_OSTRICH_HUNTER',
+    '켈베로스어쎄신': 'JT_DOG_ASSASSIN', '신페코크루세이더': 'JT_CHICKEN2', '몽크알파카': 'JT_SHEEP_MONK',
+    '여우세이지': 'JT_FOX_SAGE', '켈베로스로그': 'JT_DOG_ROGUE', '연금술사멧돼지': 'JT_PIG_ALCHE',
+    '타조바드': 'JT_OSTRICH_BARD', '타조무희': 'JT_OSTRICH_DANCER', '로드페코': 'JT_CHICKEN_H',
+    '페코팔라딘': 'JT_CHICKEN2_H', '켈베로스어쎄신크로스': 'JT_DOG_ASSA_X', '켈베로스스토커': 'JT_DOG_STALKER',
+    '하이프리스트알파카': 'JT_SHEEP_HPRIEST', '챔피온알파카': 'JT_SHEEP_CHAMP', '여우하이위저드': 'JT_FOX_HWIZ',
+    '여우프로페서': 'JT_FOX_PROF', '화이트스미스멧돼지': 'JT_PIG_WHITESMITH', '크리에이터멧돼지': 'JT_PIG_CREATOR',
+    '타조스나이퍼': 'JT_OSTRICH_SNIPER', '타조크라운': 'JT_OSTRICH_CROWN', '타조짚시': 'JT_OSTRICH_ZIPSI',
 }
 
 

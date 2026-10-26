@@ -73,6 +73,20 @@ HIGH = {
     'stalker': ('스토커', 'rogue'), 'creator': ('크리에이터', 'alchemist'), 'clown': ('클라운', 'bard'),
     'gypsy': ('집시', 'dancer'),
 }
+# Mounts: class slug -> the mounted body (rider and animal in one sprite). The mounted class is
+# `<slug>-riding` in the index, with `rides` naming the class. Only the Knight's and the Crusader's
+# Peco Pecos have weapon sprites of their own; the other mounts are drawn without a weapon.
+MOUNT = {
+    'novice': '노비스포링', 'swordsman': '페코검사', 'mage': '여우마법사', 'archer': '타조궁수', 'acolyte': '복사알파카',
+    'merchant': '상인멧돼지', 'thief': '켈베로스도둑', 'knight': '페코페코_기사', 'priest': '프리스트알파카',
+    'wizard': '여우위저드', 'blacksmith': '제철공멧돼지', 'hunter': '타조헌터', 'assassin': '켈베로스어쎄신',
+    'crusader': '신페코크루세이더', 'monk': '몽크알파카', 'sage': '여우세이지', 'rogue': '켈베로스로그',
+    'alchemist': '연금술사멧돼지', 'bard': '타조바드', 'dancer': '타조무희', 'lord-knight': '로드페코',
+    'paladin': '페코팔라딘', 'assassin-cross': '켈베로스어쎄신크로스', 'stalker': '켈베로스스토커',
+    'high-priest': '하이프리스트알파카', 'champion': '챔피온알파카', 'high-wizard': '여우하이위저드',
+    'professor': '여우프로페서', 'whitesmith': '화이트스미스멧돼지', 'creator': '크리에이터멧돼지',
+    'sniper': '타조스나이퍼', 'clown': '타조크라운', 'gypsy': '타조짚시',
+}
 # Classes that push a cart (Pushcart): the merchant line and its high class outfits.
 CART_CLASSES = {'merchant', 'blacksmith', 'alchemist', 'whitesmith', 'creator'}
 ATTACK_TYPES = (5, 10, 11)
@@ -217,10 +231,12 @@ def wardrobe():
 
     classes, cls_sexes = [], []
     attack_fallback, attack_disagree = 0, []
-    body_of = {**doll.BODY, **{slug: job for slug, (job, _) in HIGH.items()}}
-    rows = [(slug, job, job, None) for slug, job in doll.BODY.items()]
-    rows += [(slug, job, doll.BODY[of], of) for slug, (job, of) in HIGH.items()]
-    for slug, job, wjob, of in rows:
+    body_of = {**doll.BODY, **{slug: job for slug, (job, _) in HIGH.items()},
+               **{f'{slug}-riding': job for slug, job in MOUNT.items()}}
+    rows = [(slug, job, job, None, None) for slug, job in doll.BODY.items()]
+    rows += [(slug, job, doll.BODY[of], of, None) for slug, (job, of) in HIGH.items()]
+    rows += [(f'{slug}-riding', job, job, None, slug) for slug, job in MOUNT.items()]
+    for slug, job, wjob, of, rides in rows:
         sexes = [sx for sx, s in SEXES.items() if exists(f'{SPRITE}/인간족/몸통/{s}/{job}_{s}.spr')]
         weapons, by_sex, cloth = [], {}, None
         for sx in sexes:
@@ -252,6 +268,8 @@ def wardrobe():
         row = {'slug': slug, 'sexes': sexes, 'cloth': cloth or [0], 'weapons': weapons, 'attackTypeBySex': by_sex}
         if of:
             row['of'] = of
+        if rides:
+            row['rides'] = rides
         if slug in CART_CLASSES:
             row['cart'] = True
         classes.append(row)
