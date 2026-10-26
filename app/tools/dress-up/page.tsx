@@ -1,19 +1,20 @@
 // app/tools/dress-up/page.tsx
 //
-// The dress-up room, bare test page (dress-up plan 1, Task 6). The character
-// is drawn in the browser from sprite parts exported out of the client
-// (scripts/build-dress-up.py) and served from the dress-up bucket at
-// NEXT_PUBLIC_DRESSUP_BASE. Not indexed, not in the nav or the sitemap until
-// plans 2 and 3 (scenes, studio) land.
+// The dress-up room. The character is drawn in the browser from sprite parts
+// exported out of the client (scripts/build-dress-up.py) and served from the
+// dress-up bucket at NEXT_PUBLIC_DRESSUP_BASE. Public since 26 Oct 2026
+// (owner): in the tools menu, so in the sitemap too.
+import type { Metadata } from 'next';
 import DressRoom from '@/components/dressup/DressRoom';
 import { INDEX } from '@/lib/dress-up/look';
 import { gameItem } from '@/lib/game-items';
 import { classStats } from '@/lib/class-stats';
 import './page.css';
 
-export const metadata = {
-  title: 'ห้องแต่งตัว (ทดสอบ)',
-  robots: { index: false, follow: false },
+export const metadata: Metadata = {
+  title: 'ห้องแต่งตัว Ragnarok Zero — ลองใส่คอสตูม หมวก ชุดไฮคลาส สัตว์ขี่',
+  description:
+    'ลองแต่งตัวละคร Ragnarok Zero Global ก่อนซื้อจริง จิ้มเลือกหมวก คอสตูม ผ้าคลุม ทรงผม สีผม สีชุด ทุกอาชีพ ใส่ชุดไฮคลาส ขี่สัตว์ เข็นรถเข็น เปลี่ยนท่า หมุนตัว ซูมดูใกล้ๆ ภาพทุกชิ้นวาดจากไฟล์เกมจริง',
 };
 
 export default function DressUpPage() {
@@ -34,9 +35,9 @@ export default function DressUpPage() {
     <main className="shell" style={{ paddingBlock: 24 }}>
       <header className="bhero">
         <div className="bhero__text">
-          <p className="bhero__kicker mono">▶ DRESS ROOM · TEST</p>
-          <h1 className="bhero__title">ห้องแต่งตัว <span>(ทดสอบ)</span></h1>
-          <p className="bhero__lead">จิ้มเลือกหมวก คอสตูม ทรงผม อาชีพ ท่า แล้วดูตัวละครขยับแบบในเกม</p>
+          <p className="bhero__kicker mono">▶ DRESS ROOM</p>
+          <h1 className="bhero__title">ห้องแต่งตัว</h1>
+          <p className="bhero__lead">ลองใส่ก่อนซื้อ จิ้มเลือกหมวก คอสตูม ทรงผม อาชีพ ชุดไฮคลาส สัตว์ขี่ แล้วดูตัวละครขยับแบบในเกม ภาพทุกชิ้นวาดจากไฟล์เกมจริง</p>
         </div>
       </header>
       <DressRoom names={names} costume={costume} classNames={classNames} />

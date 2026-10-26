@@ -87,6 +87,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/tools/enchant', label: 'เอนแชนต์', icon: '/images/items/6636.gif', ready: true },
     // Owner, 12 Oct 2026: how much the bag holds before 70% / 90%.
     { href: '/tools/weight', label: 'คำนวณน้ำหนัก', icon: '/images/items/501.gif', ready: true },
+    // Owner, 26 Oct 2026: try headgear, costumes, outfits and mounts on before buying.
+    { href: '/tools/dress-up', label: 'ห้องแต่งตัว', icon: '/images/items/2220.gif', ready: true },
   ],
   // Pages you read: fixed game tables, and the written guide. Moved here from
   // /tools on 3 Sep 2026, old paths 301 (next.config.mjs).
