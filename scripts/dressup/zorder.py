@@ -55,6 +55,11 @@ JOB_NAMES = {
     '어세신': 'JT_ASSASSIN', '크루세이더': 'JT_CRUSADER', '몽크': 'JT_MONK', '세이지': 'JT_SAGE',
     '로그': 'JT_ROGUE', '연금술사': 'JT_ALCHEMIST', '바드': 'JT_BARD', '무희': 'JT_DANCER',
     '슈퍼노비스': 'JT_SUPERNOVICE',
+    # High class bodies: the outfits the game sells to 2nd classes.
+    '로드나이트': 'JT_KNIGHT_H', '하이프리': 'JT_PRIEST_H', '하이위저드': 'JT_WIZARD_H', '화이트스미스': 'JT_BLACKSMITH_H',
+    '스나이퍼': 'JT_HUNTER_H', '어쌔신크로스': 'JT_ASSASSIN_H', '팔라딘': 'JT_CRUSADER_H', '챔피온': 'JT_MONK_H',
+    '프로페서': 'JT_SAGE_H', '스토커': 'JT_ROGUE_H', '크리에이터': 'JT_ALCHEMIST_H', '클라운': 'JT_BARD_H',
+    '집시': 'JT_DANCER_H',
 }
 
 

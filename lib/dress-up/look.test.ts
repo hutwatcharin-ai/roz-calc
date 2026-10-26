@@ -2,7 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import full from '@/data/dress-up.json';
 import { dollSex } from '@/lib/build-doll';
 import {
-  DEFAULT_LOOK, actionFor, drawable, frameFor, partsFor, sexOf, takeOff, wear, withClass, type Look,
+  DEFAULT_LOOK, INDEX, actionFor, baseClass, drawable, frameFor, highClass, partsFor, sexOf, takeOff, wear, withClass,
+  withOutfit, type Look,
 } from './look';
 import { DressUpUnavailable, loadPart } from './load';
 import type { PartData } from './types';
@@ -89,7 +90,8 @@ describe('partsFor', () => {
     expect(sexOf({ ...DEFAULT_LOOK, cls: 'bard', sex: 'f' })).toBe('m');
     expect(keysOf({ ...DEFAULT_LOOK, cls: 'bard', sex: 'f' })[0]).toBe('body/bard-m-0');
     for (const c of full.classes) {
-      for (const s of ['m', 'f'] as const) expect(sexOf({ ...DEFAULT_LOOK, cls: c.slug, sex: s })).toBe(dollSex(c.slug, s));
+      const doll = (c as { of?: string }).of ?? c.slug; // a high class outfit is drawn as its 2nd class's sexes
+      for (const s of ['m', 'f'] as const) expect(sexOf({ ...DEFAULT_LOOK, cls: c.slug, sex: s })).toBe(dollSex(doll, s));
     }
   });
 });
@@ -102,6 +104,46 @@ describe('withClass', () => {
     expect(odd.weapon).toBeUndefined();
     const kept = withClass({ ...DEFAULT_LOOK, cloth: 2, weapon: 'dagger' }, 'assassin');
     expect([kept.cloth, kept.weapon]).toEqual([2, 'dagger']);
+  });
+});
+
+describe('high class outfits', () => {
+  const SECOND = ['knight', 'priest', 'wizard', 'blacksmith', 'hunter', 'assassin', 'crusader', 'monk', 'sage',
+    'rogue', 'alchemist', 'bard', 'dancer'];
+
+  it('every 2nd class has one, drawn with a body, its weapons and the stylist colours', () => {
+    for (const slug of SECOND) {
+      const high = highClass(slug)!;
+      expect(high, slug).toBeDefined();
+      expect(baseClass(high)).toBe(slug);
+      const look = withOutfit({ ...withClass(DEFAULT_LOOK, slug), weapon: undefined }, true);
+      expect(look.cls).toBe(high);
+      const { parts } = drawable(look);
+      expect(parts[0]?.key, high).toMatch(new RegExp(`^body/${high}-`));
+      const c = INDEX.classes.find((x) => x.slug === high)!;
+      expect(c.weapons).toEqual(INDEX.classes.find((x) => x.slug === slug)!.weapons);
+    }
+    expect(INDEX.classes.find((x) => x.slug === 'lord-knight')!.cloth).toEqual([0, 2, 3]);
+  });
+
+  it('first classes and the novice have none, and the toggle leaves them alone', () => {
+    for (const slug of ['novice', 'swordsman', 'mage', 'acolyte']) {
+      expect(highClass(slug)).toBeUndefined();
+      expect(withOutfit(withClass(DEFAULT_LOOK, slug), true).cls).toBe(slug);
+    }
+  });
+
+  it('keeps the outfit on across 2nd classes, drops it on a class without one, and takes it off', () => {
+    const lk = withOutfit(withClass(DEFAULT_LOOK, 'knight'), true);
+    expect(withClass(lk, 'priest').cls).toBe('high-priest');
+    expect(withClass(lk, 'mage').cls).toBe('mage');
+    expect(withOutfit(lk, false).cls).toBe('knight');
+  });
+
+  it('wears garments on the outfit body', () => {
+    const { parts, missing } = drawable(wear(withOutfit(withClass(DEFAULT_LOOK, 'knight'), true), GARMENT));
+    expect(missing).toEqual([]);
+    expect(parts.map((p) => p.key)).toContain(`robe/${INDEX.items[String(GARMENT)][1]}-lord-knight-m`);
   });
 });
 

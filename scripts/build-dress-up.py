@@ -61,6 +61,17 @@ WTYPES = {
     17: 'revolver', 18: 'rifle', 19: 'gatling', 20: 'shotgun', 22: 'shuriken',
     25: 'dagger-dagger', 26: 'sword-sword', 27: 'axe-axe', 28: 'dagger-sword', 29: 'dagger-axe', 30: 'sword-axe',
 }
+# High class outfits the game sells to 2nd classes: slug -> (body sprite, the class it dresses).
+# They are classes of their own in the index, with `of` naming the 2nd class. The client has no
+# high class weapon sprites, so they hold the 2nd class's weapons.
+HIGH = {
+    'lord-knight': ('로드나이트', 'knight'), 'high-priest': ('하이프리', 'priest'),
+    'high-wizard': ('하이위저드', 'wizard'), 'whitesmith': ('화이트스미스', 'blacksmith'),
+    'sniper': ('스나이퍼', 'hunter'), 'assassin-cross': ('어쌔신크로스', 'assassin'),
+    'paladin': ('팔라딘', 'crusader'), 'champion': ('챔피온', 'monk'), 'professor': ('프로페서', 'sage'),
+    'stalker': ('스토커', 'rogue'), 'creator': ('크리에이터', 'alchemist'), 'clown': ('클라운', 'bard'),
+    'gypsy': ('집시', 'dancer'),
+}
 ATTACK_TYPES = (5, 10, 11)
 # Hair colour names: the client's _DressHeadPaletteList (Korean, read through cp874 by lupa).
 HAIR_TH = {'기본': 'สีเดิม', '노란색': 'เหลือง', '보라색': 'ม่วง', '연갈색': 'น้ำตาลอ่อน', '녹색': 'เขียว',
@@ -200,18 +211,23 @@ def wardrobe():
 
     classes, cls_sexes = [], []
     attack_fallback, attack_disagree = 0, []
-    for slug, job in doll.BODY.items():
+    body_of = {**doll.BODY, **{slug: job for slug, (job, _) in HIGH.items()}}
+    rows = [(slug, job, job, None) for slug, job in doll.BODY.items()]
+    rows += [(slug, job, doll.BODY[of], of) for slug, (job, of) in HIGH.items()]
+    for slug, job, wjob, of in rows:
         sexes = [sx for sx, s in SEXES.items() if exists(f'{SPRITE}/인간족/몸통/{s}/{job}_{s}.spr')]
-        weapons, by_sex = [], {}
+        weapons, by_sex, cloth = [], {}, None
         for sx in sexes:
             s = SEXES[sx]
             cls_sexes.append(f'{slug}-{sx}')
             body = f'{SPRITE}/인간족/몸통/{s}/{job}_{s}'
-            for c in CLOTH:
-                pal = None if c == 0 else src(f'{GRF}/palette/몸/{job}_{s}_{c}.pal')
+            pals = {c: None if c == 0 else src(f'{GRF}/palette/몸/{job}_{s}_{c}.pal') for c in CLOTH}
+            pals = {c: p for c, p in pals.items() if p is None or os.path.exists(p)}  # the Clown has none
+            cloth = [c for c in CLOTH if c in pals and (cloth is None or c in cloth)]
+            for c, pal in pals.items():
                 add(f'body/{slug}-{sx}-{c}', 'body', 'body', None, job, s, body + '.spr', body + '.act', pal, imf=True)
             for wid, wslug in WTYPES.items():
-                path = f'{SPRITE}/인간족/{job}/{job}_{s}{doll.weapon_name[wid]}'
+                path = f'{SPRITE}/인간족/{wjob}/{wjob}_{s}{doll.weapon_name[wid]}'
                 if not (exists(path + '.spr') and exists(path + '.act')):
                     continue
                 add(f'weapon/{slug}-{sx}-{wslug}', 'weapon', 'weapon', None, job, s, path + '.spr', path + '.act')
@@ -227,8 +243,10 @@ def wardrobe():
         first = by_sex.get(sexes[0], {})
         for sx in sexes[1:]:
             attack_disagree += [f'{slug}-{sx}-{w}' for w, t in by_sex.get(sx, {}).items() if w in first and first[w] != t]
-        classes.append({'slug': slug, 'sexes': sexes, 'cloth': list(CLOTH), 'weapons': weapons,
-                        'attackTypeBySex': by_sex})
+        row = {'slug': slug, 'sexes': sexes, 'cloth': cloth or [0], 'weapons': weapons, 'attackTypeBySex': by_sex}
+        if of:
+            row['of'] = of
+        classes.append(row)
 
     for sx, s in SEXES.items():
         for h in range(1, HAIR_STYLES + 1):
@@ -257,10 +275,10 @@ def wardrobe():
                     slug, sx = cs.rsplit('-', 1)
                     key = f'robe/{view}-{cs}'
                     if key not in robe_done:
-                        files = fit.robe_files(name, SEXES[sx], doll.BODY[slug])
+                        files = fit.robe_files(name, SEXES[sx], body_of[slug])
                         robe_done[key] = bool(files)
                         if files:
-                            add(key, 'robe', 'robe', view, doll.BODY[slug], SEXES[sx], files[0], files[1], imf=True)
+                            add(key, 'robe', 'robe', view, body_of[slug], SEXES[sx], files[0], files[1], imf=True)
                     if robe_done[key]:
                         has[cs] = True
                     else:

@@ -6,7 +6,8 @@
 //
 // Shape:
 //   v, hair                 as in the full index
-//   classes[]               {slug, sexes, cloth, weapons, atk: attackTypeBySex}
+//   classes[]               {slug, sexes, cloth, weapons, atk: attackTypeBySex, of?}
+//                           of: the 2nd class a high class outfit dresses
 //   items{id: [slots, view] | [slots, view, 0] | [slots, view, ["knight-f", ...]]}
 //                           slots is letters: u upper, m mid, l lower, g garment.
 //                           A third value 0 means no sprite anywhere; a list names
@@ -41,7 +42,7 @@ export function buildClient(full) {
   return {
     v: full.v,
     classes: full.classes.map((c) => ({
-      slug: c.slug, sexes: c.sexes, cloth: c.cloth, weapons: c.weapons, atk: c.attackTypeBySex,
+      slug: c.slug, sexes: c.sexes, cloth: c.cloth, weapons: c.weapons, atk: c.attackTypeBySex, ...(c.of ? { of: c.of } : {}),
     })),
     hair: full.hair,
     items,

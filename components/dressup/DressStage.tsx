@@ -7,6 +7,9 @@
 // The drawing always pairs a look with the parts loaded for that look: while a
 // new set is on its way the last picture stays put, so old parts are never
 // drawn in the new pose.
+//
+// Dragging across the stage turns the character like a turntable, one
+// direction every TURN_PX; the arrow keys do the same when it has focus.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { actionFor, drawable, frameFor, type Look, type PartRef } from '@/lib/dress-up/look';
 import { DressUpUnavailable, loadPart, type LoadedPart } from '@/lib/dress-up/load';
@@ -17,7 +20,12 @@ type Loaded = PartRef & LoadedPart;
 type Scene = { look: Look; loaded: Loaded[] };
 type Status = 'loading' | 'ready' | 'unavailable';
 
-export default function DressStage({ look }: { look: Look }) {
+const TURN_PX = 28;
+/** Turning right (a drag or the right arrow) walks the directions down: front, front-right, right... */
+const turned = (dir: number, steps: number) => (((dir - steps) % 8) + 8) % 8;
+
+export default function DressStage({ look, onTurn }: { look: Look; onTurn?: (dir: number) => void }) {
+  const drag = useRef<{ id: number; x: number; dir: number } | null>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState<Status>('loading');
   const [scene, setScene] = useState<Scene | null>(null);
@@ -77,7 +85,31 @@ export default function DressStage({ look }: { look: Look }) {
 
   const empty = status === 'ready' && scene?.loaded.length === 0;
   return (
-    <div className="dress__stage" data-status={empty ? 'empty' : status}>
+    <div
+      className="dress__stage"
+      data-status={empty ? 'empty' : status}
+      data-turn={onTurn ? '' : undefined}
+      tabIndex={onTurn ? 0 : undefined}
+      aria-label={onTurn ? 'ลากซ้ายขวาหรือกดลูกศรเพื่อหมุนตัวละคร' : undefined}
+      onPointerDown={onTurn && ((e) => {
+        if (e.button !== 0) return;
+        drag.current = { id: e.pointerId, x: e.clientX, dir: look.dir };
+        e.currentTarget.setPointerCapture(e.pointerId);
+      })}
+      onPointerMove={onTurn && ((e) => {
+        const d = drag.current;
+        if (!d || d.id !== e.pointerId) return;
+        const dir = turned(d.dir, Math.round((e.clientX - d.x) / TURN_PX));
+        if (dir !== look.dir) onTurn(dir);
+      })}
+      onPointerUp={() => { drag.current = null; }}
+      onPointerCancel={() => { drag.current = null; }}
+      onKeyDown={onTurn && ((e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        onTurn(turned(look.dir, e.key === 'ArrowRight' ? 1 : -1));
+      })}
+    >
       <canvas ref={canvas} width={200} height={200} className="dress__canvas" aria-label="ตัวละครที่แต่งไว้" role="img" />
       {status === 'unavailable' && (
         <div className="dress__msg dress__msg--err" role="alert">

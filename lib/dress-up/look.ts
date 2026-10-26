@@ -38,6 +38,8 @@ export interface ClientClass {
   cloth: number[];
   weapons: string[];
   atk: Record<Sex, Record<string, number>>;
+  /** a high class outfit: the 2nd class it dresses */
+  of?: string;
 }
 
 /** [slot letters, view] | [.., .., 0 = no sprite anywhere] | [.., .., class-sexes without one] */
@@ -186,8 +188,31 @@ export function frameFor(kind: PartKind, part: PartData, action: number, look: L
   return frameAt(part, action, ms);
 }
 
-/** Switch class, keeping what still fits: a cloth palette or weapon type the class lacks is reset. */
+/** The class a slug dresses: the 2nd class behind a high class outfit, else the slug. */
+export function baseClass(slug: string): string {
+  return classOf(slug)?.of ?? slug;
+}
+
+/** The high class outfit a class (or its outfit) can wear, if the game sells one. */
+export function highClass(slug: string): string | undefined {
+  const base = baseClass(slug);
+  return INDEX.classes.find((c) => c.of === base)?.slug;
+}
+
+/** Switch class, keeping the high class outfit on when the new class has one. */
 export function withClass(look: Look, slug: string): Look {
+  const keepHigh = !!classOf(look.cls)?.of && !classOf(slug)?.of;
+  return switchTo(look, keepHigh ? highClass(slug) ?? slug : slug);
+}
+
+/** Put the high class outfit on or take it off; a class without one stays as it is. */
+export function withOutfit(look: Look, high: boolean): Look {
+  const base = baseClass(look.cls);
+  return switchTo(look, high ? highClass(base) ?? base : base);
+}
+
+/** Switch class, keeping what still fits: a cloth palette or weapon type the class lacks is reset. */
+function switchTo(look: Look, slug: string): Look {
   const c = classOf(slug);
   return {
     ...look,

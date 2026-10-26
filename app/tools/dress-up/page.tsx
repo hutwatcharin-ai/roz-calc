@@ -26,7 +26,9 @@ export default function DressUpPage() {
     if (g?.costume) costume.push(Number(id));
   }
   const classNames: Record<string, string> = {};
-  for (const c of INDEX.classes) classNames[c.slug] = classStats(c.slug)?.name ?? c.slug;
+  // High class outfits have no class page: their slug is the game's name (lord-knight: Lord Knight).
+  const title = (slug: string) => slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+  for (const c of INDEX.classes) classNames[c.slug] = classStats(c.slug)?.name ?? (c.of ? title(c.slug) : c.slug);
 
   return (
     <main className="shell" style={{ paddingBlock: 24 }}>

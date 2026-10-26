@@ -16,7 +16,8 @@ export default function DressRoom({ names, costume, classNames, initial = DEFAUL
     <div className="dress">
       <div className="dress__stagewrap">
         <p className="cfit__label">▶ DRESS ROOM</p>
-        <DressStage look={look} />
+        <DressStage look={look} onTurn={(dir) => setLook((l) => ({ ...l, dir }))} />
+        <p className="dress__hint">↔ ลากที่ตัวละครเพื่อหมุน</p>
       </div>
       <DressPicker look={look} onChange={setLook} names={names} costume={costume} classNames={classNames} />
     </div>

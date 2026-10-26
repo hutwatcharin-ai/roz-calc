@@ -14,6 +14,10 @@
 .dress__stage::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px); pointer-events: none; z-index: 1; }
 /* the ground glow under the feet: origin y 150 of 200 */
 .dress__stage::after { content: ''; position: absolute; left: 50%; top: 75%; width: 30%; height: 6%; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(rgba(61, 232, 255, .45), transparent 70%); }
+.dress__stage[data-turn] { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.dress__stage[data-turn]:active { cursor: grabbing; }
+.dress__stage[data-turn]:focus-visible { outline: 2px solid var(--cyan, #3de8ff); outline-offset: 2px; }
+.dress__hint { margin: 6px 0 0; text-align: center; color: var(--dim); font-size: 13px; }
 .dress__canvas { position: relative; z-index: 2; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
 .dress__msg { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; padding: 8px 14px; border-radius: 8px; background: rgba(11, 7, 36, .85); color: var(--dim); font-size: 15px; white-space: nowrap; }
 .dress__msg--err { border: 1px solid var(--pink); color: var(--pink); text-shadow: 0 0 8px rgba(255, 61, 154, .5); }

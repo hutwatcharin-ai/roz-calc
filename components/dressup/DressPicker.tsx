@@ -6,7 +6,7 @@
 // server (the game client's own item table).
 import { useMemo, useState } from 'react';
 import {
-  INDEX, POSE_TYPE, SLOTS, classOf, hasSprite, sexOf, takeOff, wear, withClass,
+  INDEX, POSE_TYPE, SLOTS, baseClass, classOf, hasSprite, highClass, sexOf, takeOff, wear, withClass, withOutfit,
   type Look, type Pose, type Sex, type Slot,
 } from '@/lib/dress-up/look';
 import { THUMBS, pickId, randomLook, tileDrawn, tileOf, tilesFor, type Filter, type Tile } from '@/lib/dress-up/catalog';
@@ -164,13 +164,15 @@ function JobTab({ look, onChange, classNames }: Pick<Props, 'look' | 'onChange' 
   const cls = classOf(look.cls);
   const sex = sexOf(look);
   const set = (patch: Partial<Look>) => onChange({ ...look, ...patch });
+  const base = baseClass(look.cls);
+  const high = highClass(look.cls);
   return (
     <div className="dress__tabbody">
       <section className="dress__sec">
         <h3 className="dress__h">อาชีพ</h3>
         <div className="dress__jobs">
-          {INDEX.classes.map((c) => (
-            <button key={c.slug} type="button" className="dress__job" aria-pressed={c.slug === look.cls} onClick={() => onChange(withClass(look, c.slug))}>
+          {INDEX.classes.filter((c) => !c.of).map((c) => (
+            <button key={c.slug} type="button" className="dress__job" aria-pressed={c.slug === base} onClick={() => onChange(withClass(look, c.slug))}>
               {NO_PORTRAIT.has(c.slug)
                 ? <span className="dress__jobpic dress__jobpic--none" aria-hidden>N</span>
                 : <img className="dress__jobpic" src={`/images/jobs/${c.slug}.png`} alt="" loading="lazy" />}
@@ -179,6 +181,19 @@ function JobTab({ look, onChange, classNames }: Pick<Props, 'look' | 'onChange' 
           ))}
         </div>
       </section>
+      {high && (
+        <section className="dress__sec">
+          <h3 className="dress__h">ชุด</h3>
+          <div className="dress__chips">
+            <button type="button" className="dress__chip" aria-pressed={look.cls === base} onClick={() => onChange(withOutfit(look, false))}>
+              ชุดอาชีพ
+            </button>
+            <button type="button" className="dress__chip" aria-pressed={look.cls === high} onClick={() => onChange(withOutfit(look, true))}>
+              ชุดไฮคลาส · {classNames[high] ?? high}
+            </button>
+          </div>
+        </section>
+      )}
       <section className="dress__sec">
         <h3 className="dress__h">เพศ</h3>
         <div className="dress__chips">
