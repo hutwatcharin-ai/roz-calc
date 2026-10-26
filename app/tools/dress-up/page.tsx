@@ -12,9 +12,12 @@ import { classStats } from '@/lib/class-stats';
 import './page.css';
 
 export const metadata: Metadata = {
-  title: 'ห้องแต่งตัว Ragnarok Zero — ลองใส่คอสตูม หมวก ชุดไฮคลาส สัตว์ขี่',
+  // Search Console, 90 days to 26 Oct 2026: players type "ro", "คอสตูม ro", "costume ro zero",
+  // and "ทดลอง/จำลอง ... ro" for simulators ("ทดลองอัพสกิล ro"), plus "แต่งตัว ro"; not the
+  // full game name and not "ห้องแต่งตัว". So the title leads with those words.
+  title: 'จำลองแต่งตัว RO Zero ลองใส่คอสตูม หมวก ก่อนซื้อ — ห้องแต่งตัว',
   description:
-    'ลองแต่งตัวละคร Ragnarok Zero Global ก่อนซื้อจริง จิ้มเลือกหมวก คอสตูม ผ้าคลุม ทรงผม สีผม สีชุด ทุกอาชีพ ใส่ชุดไฮคลาส ขี่สัตว์ เข็นรถเข็น เปลี่ยนท่า หมุนตัว ซูมดูใกล้ๆ ภาพทุกชิ้นวาดจากไฟล์เกมจริง',
+    'ทดลองใส่คอสตูม RO Zero (Ragnarok Zero Global) ก่อนซื้อจริง จิ้มเลือกหมวก costume ผ้าคลุม ทรงผม สีผม สีชุด ทุกอาชีพ ใส่ชุดไฮคลาส ขี่สัตว์ เข็นรถเข็น เปลี่ยนท่า หมุนตัว ซูมดูใกล้ๆ ภาพทุกชิ้นวาดจากไฟล์เกมจริง',
 };
 
 export default function DressUpPage() {
