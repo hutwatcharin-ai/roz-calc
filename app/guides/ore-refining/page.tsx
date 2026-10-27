@@ -122,6 +122,23 @@ export default async function OreRefiningPage() {
         );
       })}
 
+      {/* No skill: raw ore traded 5 for 1 (Oridecon, Elunium). */}
+      {confirmed.some((r) => r.skillId === null) && (
+        <section className="card oskill" style={{ marginTop: 16 }}>
+          <h2 className="section-title">แร่ดิบเป็นแร่ตีบวก</h2>
+          <p className="muted" style={{ marginTop: -4 }}>ไม่ต้องใช้สกิล แร่ดิบ 5 ก้อนได้แร่ใช้ตีบวก 1 ก้อน</p>
+          <div className="oflows">
+            {confirmed.filter((r) => r.skillId === null).map((r) => (
+              <div key={r.id} className="oflow">
+                <span className="oflow__in">{r.materials.filter((m) => !m.held).map((m) => <Chip key={m.id} m={m} />)}</span>
+                <span className="oflow__arrow" aria-hidden="true">▶</span>
+                <span className="oflow__out"><Chip m={r.product} /><RecipeQty id={r.id} name={r.product.name} /></span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {unconfirmed.length > 0 && (
         <section className="card" style={{ marginTop: 16, borderStyle: 'dashed' }}>
           <h2 className="section-title">ยังไม่ยืนยันกับ Zero</h2>
@@ -141,7 +158,7 @@ export default async function OreRefiningPage() {
       <Caveat label="ที่มาของสูตร">
         สูตรทานกัน 2 แหล่ง ตารางการผลิตฝั่งเซิร์ฟเวอร์ของ{' '}
         <a href="https://github.com/rathena/rathena" rel="noopener nofollow" target="_blank">rAthena</a> กับฐานข้อมูล Zero ของ prontera.info ·
-        สูตร Elunium จาก Rough Elunium มาจาก rozeroplanner แหล่งเดียว (คู่กับสูตร Oridecon ที่ prontera.info มี) ·
+        สูตร Oridecon กับ Elunium จากแร่ดิบ เจ้าของเว็บยืนยันกับในเกมแล้ว ·
         โอกาสสำเร็จต่อเลเวลมาจากคำอธิบายสกิลในไคลเอนต์ ยังไม่ได้ทดสอบในเกมว่า DEX LUK หรือ Job level บวกเพิ่มเท่าไร
       </Caveat>
 

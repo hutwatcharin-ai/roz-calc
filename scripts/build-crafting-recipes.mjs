@@ -327,6 +327,16 @@ async function main() {
     });
   }
 
+  // Recipes the owner confirmed against the game (27 Oct 2026: the two ore
+  // trades, "the data is exactly this"). They count as confirmed whatever
+  // the sources say.
+  const OWNER_CHECKED = new Set(['x984-756', 'z985-757']);
+  for (const r of recipes) {
+    if (!OWNER_CHECKED.has(r.id)) continue;
+    r.confidence = 'both';
+    if (!r.sources.includes('owner')) r.sources.push('owner');
+  }
+
   const byKind = {};
   const byConfidence = {};
   for (const r of recipes) {
@@ -349,9 +359,10 @@ async function main() {
             prontera: 'roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)',
             rozerodb: 'rozerodb.com item pages (one hand-listed recipe neither other source has)',
             rozeroplanner: 'rozeroplanner.com MCP lookup_recipe, checked one recipe at a time (Elunium)',
+            owner: 'the site owner confirmed it against the game (27 Oct 2026)',
           },
           confidence: {
-            both: 'rAthena and the Zero database list it with the same materials',
+            both: 'rAthena and the Zero database list it with the same materials, or the owner checked it in game (sources has owner)',
             'rathena-only': "rAthena's server table has it; no Zero database mentions it",
             'prontera-only': 'only the Zero database has it (otherRegion marks the ones it took from another region)',
           },

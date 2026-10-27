@@ -6,10 +6,11 @@
    "rathena": "db/pre-re/produce_db.txt + db/create_arrow_db.yml (server production tables, classic RO)",
    "prontera": "roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)",
    "rozerodb": "rozerodb.com item pages (one hand-listed recipe neither other source has)",
-   "rozeroplanner": "rozeroplanner.com MCP lookup_recipe, checked one recipe at a time (Elunium)"
+   "rozeroplanner": "rozeroplanner.com MCP lookup_recipe, checked one recipe at a time (Elunium)",
+   "owner": "the site owner confirmed it against the game (27 Oct 2026)"
   },
   "confidence": {
-   "both": "rAthena and the Zero database list it with the same materials",
+   "both": "rAthena and the Zero database list it with the same materials, or the owner checked it in game (sources has owner)",
    "rathena-only": "rAthena's server table has it; no Zero database mentions it",
    "prontera-only": "only the Zero database has it (otherRegion marks the ones it took from another region)"
   },
@@ -16969,10 +16970,11 @@
    "itemLevel": null,
    "skillId": null,
    "skillLevel": null,
-   "confidence": "prontera-only",
+   "confidence": "both",
    "otherRegion": false,
    "sources": [
-    "rozeroplanner"
+    "rozeroplanner",
+    "owner"
    ]
   },
   {
@@ -17109,10 +17111,11 @@
    "itemLevel": null,
    "skillId": null,
    "skillLevel": null,
-   "confidence": "prontera-only",
+   "confidence": "both",
    "otherRegion": false,
    "sources": [
-    "prontera"
+    "prontera",
+    "owner"
    ]
   },
   {
