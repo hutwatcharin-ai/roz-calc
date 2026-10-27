@@ -4051,6 +4051,16 @@ html .bptable tbody tr:hover td { background: linear-gradient(90deg, rgba(255, 2
 .cfit:has(.cfit__s0:checked) .cfit__btn[data-v=m],
 .cfit:has(.cfit__s1:checked) .cfit__btn[data-v=f] { color: #0b0b1a; background: #FF3DB8; border-color: #FF3DB8; box-shadow: 0 0 8px #FF3DB8; }
 .cfit:has(> input:focus-visible) .cfit__ctrl { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+/* The turnable version (components/CostumeSpin, 27 Oct 2026): the dress
+   room's stage, with the still picture over it until the stage has drawn. */
+.cspin__box { position: relative; }
+.cspin__box .dress__stage { max-width: none; }
+.cspin__box .dress__stage[data-status=loading] .dress__msg { display: none; }
+.cspin__still { position: absolute; z-index: 2; left: 50%; bottom: 8%; transform: translateX(-50%); background-repeat: no-repeat; image-rendering: pixelated; pointer-events: none; }
+.cspin__hint { margin: 6px 0 0; text-align: center; font-size: 12.5px; color: var(--faint); }
+.cspin .cfit__btn { background: none; font: inherit; font-size: 13.5px; }
+.cspin .cfit__btn[aria-pressed=true] { color: #0b0b1a; background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+.cspin .cfit__btn--sex[aria-pressed=true] { background: #FF3DB8; border-color: #FF3DB8; box-shadow: 0 0 8px #FF3DB8; }
 .cfit__note { margin: 8px 0 0; font-size: 12.5px; color: var(--faint); }
 .cfit__go { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 10px; padding: 0 14px; border: 1px solid var(--pink); border-radius: 8px; color: var(--pink); font-weight: 700; text-decoration: none; box-shadow: 0 0 10px rgba(255, 61, 154, .25); }
 .cfit__go:hover { background: rgba(255, 61, 154, .12); }

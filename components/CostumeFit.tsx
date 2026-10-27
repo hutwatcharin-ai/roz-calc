@@ -5,6 +5,7 @@
 
 import { costumeArt, costumeFit } from '@/lib/costume-fit';
 import { INDEX } from '@/lib/dress-up/look';
+import CostumeSpin from '@/components/CostumeSpin';
 
 /** Whether the dress room draws the item on some class (so the link opens wearing it). */
 const inDressRoom = (id: number) => {
@@ -40,6 +41,17 @@ export default function CostumeFit({ id, name }: { id: number; name: string }) {
     );
   }
   const { w, h, garment, head } = fit.sheet;
+  // Drawn by the dress room too: the turnable stage (owner, 27 Oct 2026).
+  if (inDressRoom(id)) {
+    return (
+      <section className="cfit" aria-label={`ตัวอย่างตอนใส่ ${name}`}>
+        <p className="cfit__label">▶ FITTING ROOM</p>
+        <CostumeSpin id={id} name={name} sheet={{ src: fit.src, w, h }} garment={!!garment} />
+        <p className="cfit__note">ภาพจากไฟล์ในเกม ใส่บนตัว Novice ทรงผมเริ่มต้น</p>
+        <a className="cfit__go" href={`/tools/dress-up?wear=${id}`}>▶ ลองใส่ในห้องแต่งตัว</a>
+      </section>
+    );
+  }
   // A garment is mostly hidden behind the body from the front.
   const startDir = garment ? 'back' : 'front';
   const vars = { ['--w' as string]: w, ['--h' as string]: h, ['--hd' as string]: head ?? 0 };

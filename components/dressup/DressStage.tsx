@@ -44,9 +44,15 @@ function middleOf(out: { w: number; h: number; data: Uint8ClampedArray }): { x: 
   return { x: Math.round(((x0 + x1) / 2 / out.w) * 100), y: Math.round(((y0 + y1) / 2 / out.h) * 100) };
 }
 
-export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
+export default function DressStage({ look, onTurn, scene: backdrop = 'neon', zoomable = true, startZoom = 1, onReady }: {
   look: Look;
   onTurn?: (dir: number) => void;
+  /** false on a page that scrolls past the stage (a costume page): no wheel or pinch zoom, no buttons */
+  zoomable?: boolean;
+  /** the zoom it opens at (kept when not zoomable) */
+  startZoom?: number;
+  /** called once the first picture is drawn */
+  onReady?: () => void;
   /** the backdrop, styled in app/tools/dress-up/page.css */
   scene?: string;
 }) {
@@ -54,7 +60,7 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
   const touches = useRef(new Map<number, { x: number; y: number }>());
   const pinch = useRef<{ dist: number; zoom: number } | null>(null);
   const stage = useRef<HTMLDivElement>(null);
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(startZoom);
   /** the zoom's fixed point: the middle of what the scene draws, in % of the stage */
   const [centre, setCentre] = useState({ x: 50, y: 60 });
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -73,6 +79,7 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
         if (!alive) return;
         setScene({ look, loaded: parts.map((p, i) => ({ ...p, ...got[i] })) });
         setStatus('ready');
+        onReady?.();
       })
       .catch((e) => {
         if (!alive) return;
@@ -123,14 +130,14 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
   // (a native listener: React's wheel handler is passive and cannot stop the scroll).
   useEffect(() => {
     const el = stage.current;
-    if (!el) return;
+    if (!el || !zoomable) return;
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       setZoom((z) => clampZoom(z * (e.deltaY < 0 ? 1.15 : 1 / 1.15)));
     };
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
-  }, []);
+  }, [zoomable]);
 
   const spread = () => {
     const [a, b] = [...touches.current.values()];
@@ -152,12 +159,12 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
       data-scene={backdrop}
       data-turn={onTurn ? '' : undefined}
       tabIndex={0}
-      aria-label={onTurn ? 'ลากซ้ายขวาเพื่อหมุน หมุนล้อเมาส์หรือถ่างสองนิ้วเพื่อซูม' : 'หมุนล้อเมาส์หรือถ่างสองนิ้วเพื่อซูม'}
+      aria-label={[onTurn && 'ลากซ้ายขวาเพื่อหมุน', zoomable && 'หมุนล้อเมาส์หรือถ่างสองนิ้วเพื่อซูม'].filter(Boolean).join(' ')}
       onPointerDown={(e) => {
         if (e.button !== 0) return;
         touches.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
         e.currentTarget.setPointerCapture(e.pointerId);
-        if (touches.current.size === 2) {
+        if (zoomable && touches.current.size === 2) {
           drag.current = null; // a second finger: pinch, not turn
           pinch.current = { dist: spread(), zoom };
         } else if (onTurn && touches.current.size === 1) {
@@ -180,19 +187,19 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon' }: {
       onPointerUp={(e) => lift(e.pointerId)}
       onPointerCancel={(e) => lift(e.pointerId)}
       onKeyDown={(e) => {
-        if (e.key === '+' || e.key === '=') setZoom((z) => clampZoom(z + 0.25));
-        else if (e.key === '-') setZoom((z) => clampZoom(z - 0.25));
+        if (zoomable && (e.key === '+' || e.key === '=')) setZoom((z) => clampZoom(z + 0.25));
+        else if (zoomable && e.key === '-') setZoom((z) => clampZoom(z - 0.25));
         else if (onTurn && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) onTurn(turned(look.dir, e.key === 'ArrowRight' ? 1 : -1));
         else return;
         e.preventDefault();
       }}
     >
       <canvas ref={canvas} width={200} height={200} className="dress__canvas" aria-label="ตัวละครที่แต่งไว้" role="img" />
-      <div className="dress__zoom" onPointerDown={(e) => e.stopPropagation()}>
+      {zoomable && <div className="dress__zoom" onPointerDown={(e) => e.stopPropagation()}>
         <button type="button" aria-label="ซูมเข้า" disabled={zoom >= ZOOM_MAX} onClick={() => setZoom((z) => clampZoom(z + 0.25))}>+</button>
         <button type="button" aria-label="ซูมออก" disabled={zoom <= 1} onClick={() => setZoom((z) => clampZoom(z - 0.25))}>−</button>
         {zoom > 1 && <button type="button" aria-label="กลับขนาดเดิม" className="dress__zoomreset" onClick={() => setZoom(1)}>{zoom.toFixed(1)}x</button>}
-      </div>
+      </div>}
       {status === 'unavailable' && (
         <div className="dress__msg dress__msg--err" role="alert">
           <p>ยังโหลดภาพตัวละครไม่ได้</p>
