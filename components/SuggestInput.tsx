@@ -10,11 +10,14 @@
 // - Picking a row (click, or arrows then Enter) opens that row's page.
 // - Enter with no row picked still submits the form, so the box filters the
 //   list exactly as it always did.
+// - With `onPick` (the dress room, 27 Oct 2026) a row is handed back
+//   instead of opened, Enter takes the top row when none is picked, and
+//   there is no "see all" line: the box only finds, it does not filter.
 // - Rows come either with the page (`entries`, the ~340 monsters) or from a
 //   cached JSON fetched the first time the box is focused (`src`, the lists
 //   with thousands of rows), so a page that is only browsed pays nothing.
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { highlightParts, rankSuggestions, type SuggestEntry } from '@/lib/suggest';
@@ -39,6 +42,8 @@ export default function SuggestInput({
   placeholder,
   listLabel,
   look = 'sprite',
+  onPick,
+  pic,
 }: {
   entries?: SuggestEntry[];
   src?: string;
@@ -48,6 +53,10 @@ export default function SuggestInput({
   listLabel: string;
   /** How to draw the picture: a monster sprite, a 24px item icon, or a portrait card. */
   look?: 'sprite' | 'icon' | 'art';
+  /** Hand the picked row back instead of opening its page. */
+  onPick?: (entry: SuggestEntry) => void;
+  /** Draw a row's picture instead of `sprite`. */
+  pic?: (entry: SuggestEntry) => ReactNode;
 }) {
   const listId = useId();
   const router = useRouter();
@@ -94,6 +103,16 @@ export default function SuggestInput({
   const hits = useMemo(() => (loaded ? rankSuggestions(loaded, value) : []), [loaded, value]);
   const shown = open && hits.length > 0;
 
+  function pick(entry: SuggestEntry) {
+    setOpen(false);
+    setActive(-1);
+    if (onPick) {
+      onPick(entry);
+      setValue('');
+      if (inputRef.current) inputRef.current.value = '';
+    } else router.push(entry.href);
+  }
+
   function onKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'ArrowDown') {
       if (!hits.length) return;
@@ -107,8 +126,10 @@ export default function SuggestInput({
     } else if (event.key === 'Enter') {
       if (shown && active >= 0) {
         event.preventDefault();
-        setOpen(false);
-        router.push(hits[active].entry.href);
+        pick(hits[active].entry);
+      } else if (onPick) {
+        event.preventDefault();
+        if (hits.length) pick(hits[0].entry);
       }
     } else if (event.key === 'Escape') {
       if (shown) {
@@ -158,12 +179,16 @@ export default function SuggestInput({
                   className={'msug__it' + (i === active ? ' is-on' : '')}
                   style={e.el && ELEMENT_COLOUR[e.el] ? { ['--el' as string]: ELEMENT_COLOUR[e.el] } : undefined}
                   onMouseEnter={() => setActive(i)}
-                  onClick={() => setOpen(false)}
+                  onClick={(event) => {
+                    if (!onPick) return setOpen(false);
+                    event.preventDefault();
+                    pick(e);
+                  }}
                   tabIndex={-1}
                 >
                   <span className="msug__cur" aria-hidden="true">▶</span>
                   <span className="msug__sprite">
-                    {e.sprite ? <img src={e.sprite} alt="" loading="lazy" decoding="async" /> : <span className="msug__none">?</span>}
+                    {pic ? pic(e) : e.sprite ? <img src={e.sprite} alt="" loading="lazy" decoding="async" /> : <span className="msug__none">?</span>}
                   </span>
                   <span className="msug__nm">
                     <Marked text={e.label} query={value} />
@@ -182,9 +207,11 @@ export default function SuggestInput({
               </li>
             ))}
           </ul>
-          <button type="submit" className="msug__all">
-            PRESS <b>ENTER</b> · ดูทั้งหมดที่มี &ldquo;{value.trim()}&rdquo;
-          </button>
+          {!onPick && (
+            <button type="submit" className="msug__all">
+              PRESS <b>ENTER</b> · ดูทั้งหมดที่มี &ldquo;{value.trim()}&rdquo;
+            </button>
+          )}
         </div>
       )}
     </div>

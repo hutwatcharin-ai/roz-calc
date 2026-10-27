@@ -14,8 +14,9 @@ const SCENES = [
 ] as const;
 const SCENE_KEY = 'dress-up:scene';
 
-export default function DressRoom({ names, costume, classNames, initial = DEFAULT_LOOK }: {
+export default function DressRoom({ names, aliases, costume, classNames, initial = DEFAULT_LOOK }: {
   names: Record<string, string>;
+  aliases: Record<string, string[]>;
   costume: number[];
   classNames: Record<string, string>;
   initial?: Look;
@@ -52,7 +53,7 @@ export default function DressRoom({ names, costume, classNames, initial = DEFAUL
           ))}
         </div>
       </div>
-      <DressPicker look={look} onChange={setLook} names={names} costume={costume} classNames={classNames} />
+      <DressPicker look={look} onChange={setLook} names={names} aliases={aliases} costume={costume} classNames={classNames} />
     </div>
   );
 }

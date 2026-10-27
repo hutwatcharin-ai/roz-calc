@@ -9,6 +9,7 @@ import DressRoom from '@/components/dressup/DressRoom';
 import { INDEX } from '@/lib/dress-up/look';
 import { gameItem } from '@/lib/game-items';
 import { classStats } from '@/lib/class-stats';
+import { thaiAliasNames } from '@/lib/thai-aliases';
 import './page.css';
 
 export const metadata: Metadata = {
@@ -24,10 +25,13 @@ export default function DressUpPage() {
   // Only the names the picker can offer: the items the index draws.
   const names: Record<string, string> = {};
   const costume: number[] = [];
+  const aliases: Record<string, string[]> = {};
   for (const id of Object.keys(INDEX.items)) {
     const g = gameItem(Number(id));
     names[id] = g?.name ?? `#${id}`;
     if (g?.costume) costume.push(Number(id));
+    const thai = thaiAliasNames('items', id);
+    if (thai.length) aliases[id] = thai;
   }
   const classNames: Record<string, string> = {};
   // High class outfits have no class page: their slug is the game's name (lord-knight: Lord Knight).
@@ -43,7 +47,7 @@ export default function DressUpPage() {
           <p className="bhero__lead">ลองใส่ก่อนซื้อ จิ้มเลือกหมวก คอสตูม ทรงผม อาชีพ ชุดไฮคลาส สัตว์ขี่ แล้วดูตัวละครขยับแบบในเกม ภาพทุกชิ้นวาดจากไฟล์เกมจริง</p>
         </div>
       </header>
-      <DressRoom names={names} costume={costume} classNames={classNames} />
+      <DressRoom names={names} aliases={aliases} costume={costume} classNames={classNames} />
     </main>
   );
 }

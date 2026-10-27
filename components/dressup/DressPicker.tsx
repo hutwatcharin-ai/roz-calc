@@ -12,6 +12,8 @@ import {
 } from '@/lib/dress-up/look';
 import { THUMBS, pickId, randomLook, tileDrawn, tileOf, tilesFor, type Filter, type Tile } from '@/lib/dress-up/catalog';
 import { assetUrl } from '@/lib/dress-up/load';
+import SuggestInput from '@/components/SuggestInput';
+import type { SuggestEntry } from '@/lib/suggest';
 
 const SLOT_TH: Record<Slot, string> = { upper: 'หมวกบน', mid: 'หมวกกลาง', lower: 'หมวกล่าง', garment: 'ผ้าคลุม' };
 const FILTER_TH: Record<Filter, string> = { all: 'ทั้งหมด', costume: 'คอสตูม', plain: 'หมวกธรรมดา' };
@@ -59,6 +61,8 @@ interface Props {
   onChange: (look: Look) => void;
   /** item id -> name */
   names: Record<string, string>;
+  /** item id -> Thai names players search by */
+  aliases: Record<string, string[]>;
   /** item ids that are costumes */
   costume: number[];
   /** class slug -> name */
@@ -86,7 +90,7 @@ function Thumb({ cell }: { cell: number | undefined }) {
   );
 }
 
-function WearTab({ look, onChange, names, costume }: Omit<Props, 'classNames'>) {
+function WearTab({ look, onChange, names, aliases, costume }: Omit<Props, 'classNames'>) {
   const [slot, setSlot] = useState<Slot>('upper');
   const [filter, setFilter] = useState<Filter>('all');
   const [shown, setShown] = useState(PAGE);
@@ -102,6 +106,29 @@ function WearTab({ look, onChange, names, costume }: Omit<Props, 'classNames'>) 
     else onChange(wear(look, pickId(t, look.cls, sex, filter, cos)));
   };
   const goSlot = (s: Slot) => { setSlot(s); setShown(PAGE); };
+
+  // The search box: only items this room can draw, one row per item.
+  const entries = useMemo<SuggestEntry[]>(() => Object.keys(names).flatMap((key) => {
+    const id = Number(key);
+    const t = tileOf(id);
+    if (!t || t.thumb === undefined) return [];
+    const kind = cos.has(id) ? 'คอสตูม' : 'หมวกธรรมดา';
+    return [{
+      id, href: '', name: names[key], label: names[key], sprite: null, el: '', lv: null, tag: null,
+      sub: `${t.slots.map((x) => SLOT_TH[x]).join(' + ')} · ${kind}`,
+      aliases: aliases[key] ?? [],
+    }];
+  }), [names, aliases, cos]);
+  const found = (e: SuggestEntry) => {
+    const t = tileOf(e.id);
+    if (!t) return;
+    const s = t.slots.includes(slot) ? slot : t.slots[0];
+    setSlot(s);
+    setFilter('all');
+    const at = tilesFor(s, 'all', cos).indexOf(t);
+    setShown(Math.max(PAGE, at + 1));
+    onChange(wear(look, e.id));
+  };
   const goFilter = (f: Filter) => { setFilter(f); setShown(PAGE); };
 
   return (
@@ -120,6 +147,18 @@ function WearTab({ look, onChange, names, costume }: Omit<Props, 'classNames'>) 
             </button>
           );
         })}
+      </div>
+      <div className="dress__find">
+        <SuggestInput
+          entries={entries}
+          look="icon"
+          heading="SELECT ITEM"
+          listLabel="ไอเทมที่ลองใส่ได้"
+          placeholder="ค้นชื่อหมวก คอสตูม ผ้าคลุม"
+          defaultValue=""
+          onPick={found}
+          pic={(e) => <Thumb cell={tileOf(e.id)?.thumb} />}
+        />
       </div>
       <div className="dress__chips" role="group" aria-label="กรอง">
         {(Object.keys(FILTER_TH) as Filter[]).map((f) => (
@@ -334,7 +373,7 @@ function PoseTab({ look, onChange }: Pick<Props, 'look' | 'onChange'>) {
   );
 }
 
-export default function DressPicker({ look, onChange, names, costume, classNames }: Props) {
+export default function DressPicker({ look, onChange, names, aliases, costume, classNames }: Props) {
   const [tab, setTab] = useState<Tab>('wear');
   return (
     <div className="dress__picker">
@@ -345,7 +384,7 @@ export default function DressPicker({ look, onChange, names, costume, classNames
           </button>
         ))}
       </div>
-      {tab === 'wear' && <WearTab look={look} onChange={onChange} names={names} costume={costume} />}
+      {tab === 'wear' && <WearTab look={look} onChange={onChange} names={names} aliases={aliases} costume={costume} />}
       {tab === 'job' && <JobTab look={look} onChange={onChange} classNames={classNames} />}
       {tab === 'pose' && <PoseTab look={look} onChange={onChange} />}
     </div>
