@@ -34,6 +34,7 @@
   "ads": [
     {
       "id": "shortone-2610",
+      "report": true,
       "slot": "top",
       "advertiser": "ShortOne",
       "href": "https://shortone.net/",

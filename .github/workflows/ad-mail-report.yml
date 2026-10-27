@@ -1,0 +1,34 @@
+name: Banner reports
+
+# Mails each advertiser their banner numbers (scripts/ad-mail-report.mjs).
+# Runs daily at 09:00 Thailand (02:00 UTC); the script sends only on Fridays
+# and on the day after a booking ends. "Run workflow" by hand sends one now.
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/ad-mail-report.mjs
+            data/ads.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        run: npm install --no-save --no-package-lock nodemailer@6.9.16 playwright-core@1.49.1
+      - name: Run
+        env:
+          GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          AD_REPORT_TO: ${{ secrets.AD_REPORT_TO }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node scripts/ad-mail-report.mjs ${{ github.event_name == 'workflow_dispatch' && '--now' || '' }}
