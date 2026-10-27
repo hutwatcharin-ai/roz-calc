@@ -1,0 +1,337 @@
+{
+ "_meta": {
+  "source": "RO Zero Global client, luafiles514/lua files/itemreform/itemreformsystem_data.lub (ReformInfo_data)",
+  "built": "2026-10-27",
+  "how": "py -3 scripts/build-reform.py"
+ },
+ "reforms": [
+  {
+   "star": 590098,
+   "base": "Chain",
+   "baseIds": [
+    1519,
+    590071,
+    590075,
+    590098
+   ],
+   "token": 1002312,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 510183,
+   "base": "Stiletto",
+   "baseIds": [
+    1216,
+    510131,
+    510135,
+    510183
+   ],
+   "token": 1002313,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 700118,
+   "base": "Crossbow",
+   "baseIds": [
+    700086,
+    700116,
+    700118
+   ],
+   "token": 1002314,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 600070,
+   "base": "Bastard Sword",
+   "baseIds": [
+    1154,
+    600049,
+    600051,
+    600070
+   ],
+   "token": 1002315,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 620053,
+   "base": "Hammer",
+   "baseIds": [
+    1354,
+    620035,
+    620049,
+    620053
+   ],
+   "token": 1002316,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 550175,
+   "base": "Wand",
+   "baseIds": [
+    550125,
+    550138,
+    550175
+   ],
+   "token": 1002317,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 540118,
+   "base": "Book",
+   "baseIds": [
+    540084,
+    540106,
+    540118
+   ],
+   "token": 1002453,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 600074,
+   "base": "Slayer",
+   "baseIds": [
+    1151,
+    600058,
+    600074
+   ],
+   "token": 1002454,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 500124,
+   "base": "Ring Pommel Saber",
+   "baseIds": [
+    1122,
+    500087,
+    500112,
+    500124
+   ],
+   "token": 1002455,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 700123,
+   "base": "Great Bow",
+   "baseIds": [
+    700083,
+    700123
+   ],
+   "token": 1002456,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 590110,
+   "base": "Smasher",
+   "baseIds": [
+    1507,
+    590074,
+    590083,
+    590110
+   ],
+   "token": 1002457,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 610092,
+   "base": "Jur",
+   "baseIds": [
+    610061,
+    610066,
+    610092
+   ],
+   "token": 1002537,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 630065,
+   "base": "Guisarme",
+   "baseIds": [
+    1451,
+    630044,
+    630065
+   ],
+   "token": 1002540,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 570092,
+   "base": "Lute",
+   "baseIds": [
+    570056,
+    570058,
+    570092
+   ],
+   "token": 1002538,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 580092,
+   "base": "Wire Whip",
+   "baseIds": [
+    580057,
+    580063,
+    580092
+   ],
+   "token": 1002539,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 560087,
+   "base": "Studded Knuckles",
+   "baseIds": [
+    1805,
+    560053,
+    560056
+   ],
+   "token": 1002542,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  },
+  {
+   "star": 530080,
+   "base": "Short Spear",
+   "baseIds": [
+    530078,
+    530079,
+    530080
+   ],
+   "token": 1002546,
+   "tokenAmount": 100,
+   "coin": 1002346,
+   "coinAmount": 8,
+   "refineMin": 7,
+   "refineMax": 20,
+   "refineChange": -7,
+   "keepsCards": true,
+   "keepsGrade": true,
+   "keepsOptions": true
+  }
+ ]
+}

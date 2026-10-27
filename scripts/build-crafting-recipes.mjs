@@ -303,7 +303,12 @@ async function main() {
   // Zero database; same "one Zero source" trust as prontera-only).
   // Giant Band Aid: rozerodb /items/930 and /items/970, "Headgear Crafting"
   // (found 8 Oct 2026 checking rozeroplanner's quest-reward flags).
-  const ROZERODB_ONLY = [{ product: 5063, materials: [{ id: 930, amount: 50 }, { id: 970, amount: 1 }], kind: 'quest' }];
+  // Elunium from 5 Rough Elunium: rozeroplanner's MCP lookup_recipe, the
+  // twin of the Oridecon row prontera has (checked 27 Oct 2026).
+  const ROZERODB_ONLY = [
+    { product: 5063, materials: [{ id: 930, amount: 50 }, { id: 970, amount: 1 }], kind: 'quest', source: 'rozerodb' },
+    { product: 985, materials: [{ id: 757, amount: 5 }], kind: 'ore', source: 'rozeroplanner' },
+  ];
   for (const r of ROZERODB_ONLY) {
     const k = `${r.product}|${r.materials.map((m) => m.id).sort().join(',')}`;
     if (seen.has(k) || !has(r.product) || r.materials.some((m) => !has(m.id))) continue;
@@ -318,7 +323,7 @@ async function main() {
       skillLevel: null,
       confidence: 'prontera-only',
       otherRegion: false,
-      sources: ['rozerodb'],
+      sources: [r.source],
     });
   }
 
@@ -343,6 +348,7 @@ async function main() {
             rathena: 'db/pre-re/produce_db.txt + db/create_arrow_db.yml (server production tables, classic RO)',
             prontera: 'roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)',
             rozerodb: 'rozerodb.com item pages (one hand-listed recipe neither other source has)',
+            rozeroplanner: 'rozeroplanner.com MCP lookup_recipe, checked one recipe at a time (Elunium)',
           },
           confidence: {
             both: 'rAthena and the Zero database list it with the same materials',

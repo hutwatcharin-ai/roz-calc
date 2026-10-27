@@ -38,6 +38,7 @@ import star from '@/data/star-gear.json';
 import effectsTh from '@/data/star-effects-th.json';
 import chainFile from '@/data/star-chain.json';
 import guideOnly from '@/data/star-guide-only.json';
+import reformFile from '@/data/reform.json';
 import droppersFile from '@/data/star-droppers.json';
 
 export const revalidate = 86400;
@@ -193,7 +194,17 @@ const NPCS = [
 // by two independent sources: the mirrored French guide and the TWROZ patch
 // notes of 28 Aug 2025 as relayed on Bahamut (forum.gamer.com.tw, bsn 83142),
 // which print the same 100 / 8 / −7 and 3 / 30 / −3.
-const WEAPON_TIER1 = { tokens: 100, shards: 8, refine: 7 };
+// Weapon tier 1 is in our own client's reform table (data/reform.json, read
+// 27 Oct 2026 by scripts/build-reform.py): the same cost for all 17 weapons,
+// and the refine a weapon must reach first, which no other source gave.
+const REFORMS = reformFile.reforms;
+const WEAPON_TIER1 = {
+  tokens: REFORMS[0].tokenAmount,
+  shards: REFORMS[0].coinAmount,
+  refine: -REFORMS[0].refineChange,
+  min: REFORMS[0].refineMin,
+  max: REFORMS[0].refineMax,
+};
 const WEAPON_TIER2 = { tokens: 3, shards: 30, refine: 3 };
 const ARMOR_STABLE = { tokens: 100, shards: 30, refine: 3 };
 const ARMOR_STRONG = { tokens: 10, shards: 3, refine: 7 };
@@ -530,7 +541,8 @@ export default async function StarGearPage() {
         <ol className="star__prep">
           <li>
             <strong>เลือกชิ้นที่จะปลุก แล้วตีบวกให้สูงไว้ก่อน</strong> ต้องเป็นชิ้นที่มีรุ่นติดดาว (ดูรายการในหัวข้ออาวุธ/ของสวมใส่)
-            เพราะปลุกแล้วขั้นตีบวกหายไป 3 หรือ 7 ขั้น ตัวอย่างในประกาศไต้หวันคือเอาอาวุธ +{WEAPON_TIER1.refine} ไปปลุก ออกมาเป็น ★ +0
+            เพราะปลุกแล้วขั้นตีบวกหายไป 3 หรือ 7 ขั้น · <strong>อาวุธ ★ ต้องตีบวกถึง +{WEAPON_TIER1.min} ขึ้นไปก่อน</strong> (สูงสุด +{WEAPON_TIER1.max}) ถึงจะปลุกได้
+            แล้วลดลง {WEAPON_TIER1.refine} ขั้น เช่น +{WEAPON_TIER1.min} ออกมาเป็น ★ +0 ส่วน +10 ออกมาเป็น ★ +{10 - WEAPON_TIER1.refine}
             · <strong>เลือกตัวที่สุ่มออปสวย</strong> เพราะออปชันติดไปกับของติดดาวด้วย ตัวที่ปลุกคือตัวที่จะใช้ยาว ๆ
           </li>
           <li>
@@ -600,7 +612,9 @@ export default async function StarGearPage() {
           ที่มา: ขั้นตอน จำนวนโทเคน เศษเหรียญ และขั้นตีบวกที่หาย ตรงกันสองแหล่ง คือไกด์ roz-global.info (อ่าน 8 ก.ย. 2026)
           กับประกาศแพตช์เซิร์ฟไต้หวัน 28 ส.ค. 2025 ที่ผู้เล่นคัดลอกไว้บนบอร์ด Bahamut (อ่าน 25 ก.ย. 2026) · ไกด์ Activation ของ midgardhub (อ่าน 28 ก.ย. 2026) ให้ตัวเลขเดียวกัน แต่อ้างประกาศไต้หวันฉบับเดียวกันนั้น จึงไม่นับเป็นแหล่งที่สาม ·
           ข้อที่ติดป้ายยังไม่ยืนยันมาจาก<a href="https://www.youtube.com/shorts/6zWrEXCTRSo" target="_blank" rel="noopener noreferrer">คลิปสั้น ZixmaOne</a> คลิปเดียว · NPC แลกเศษเหรียญและอัตราแลก มาจากบอร์ด Bahamut แหล่งเดียว ·
-          ชื่อและพิกัด NPC ขั้นที่ 2 ตรวจกับข้อมูลไคลเอนต์ของเราเองแล้ว
+          ชื่อและพิกัด NPC ขั้นที่ 2 ตรวจกับข้อมูลไคลเอนต์ของเราเองแล้ว ·
+          อาวุธขั้นที่ 1 (★) ทั้ง {REFORMS.length} ชิ้น ตรวจกับตารางปลุกในไคลเอนต์ Global ของเราแล้ว (อ่าน 27 ต.ค. 2026): โทเคน {WEAPON_TIER1.tokens} อัน เศษเหรียญ {WEAPON_TIER1.shards} อัน
+          ต้องตีบวก +{WEAPON_TIER1.min} ถึง +{WEAPON_TIER1.max} ลด {WEAPON_TIER1.refine} ขั้น การ์ด เอนแชนต์ ออปชัน และเกรดอยู่ครบ · ตารางอยู่ในไฟล์เกมแล้วไม่ได้แปลว่าระบบเปิด
         </p>
       </section>
 

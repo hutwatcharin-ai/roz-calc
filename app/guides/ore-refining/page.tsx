@@ -141,6 +141,7 @@ export default async function OreRefiningPage() {
       <Caveat label="ที่มาของสูตร">
         สูตรทานกัน 2 แหล่ง ตารางการผลิตฝั่งเซิร์ฟเวอร์ของ{' '}
         <a href="https://github.com/rathena/rathena" rel="noopener nofollow" target="_blank">rAthena</a> กับฐานข้อมูล Zero ของ prontera.info ·
+        สูตร Elunium จาก Rough Elunium มาจาก rozeroplanner แหล่งเดียว (คู่กับสูตร Oridecon ที่ prontera.info มี) ·
         โอกาสสำเร็จต่อเลเวลมาจากคำอธิบายสกิลในไคลเอนต์ ยังไม่ได้ทดสอบในเกมว่า DEX LUK หรือ Job level บวกเพิ่มเท่าไร
       </Caveat>
 

@@ -5,7 +5,8 @@
   "sources": {
    "rathena": "db/pre-re/produce_db.txt + db/create_arrow_db.yml (server production tables, classic RO)",
    "prontera": "roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)",
-   "rozerodb": "rozerodb.com item pages (one hand-listed recipe neither other source has)"
+   "rozerodb": "rozerodb.com item pages (one hand-listed recipe neither other source has)",
+   "rozeroplanner": "rozeroplanner.com MCP lookup_recipe, checked one recipe at a time (Elunium)"
   },
   "confidence": {
    "both": "rAthena and the Zero database list it with the same materials",
@@ -16944,6 +16945,34 @@
    "otherRegion": false,
    "sources": [
     "prontera"
+   ]
+  },
+  {
+   "id": "z985-757",
+   "kind": "ore",
+   "product": {
+    "id": 985,
+    "name": "Elunium",
+    "icon": "/images/items/985.gif",
+    "category": "Other",
+    "amount": 1
+   },
+   "materials": [
+    {
+     "id": 757,
+     "name": "Rough Elunium",
+     "icon": "/images/items/757.gif",
+     "category": "Other",
+     "amount": 5
+    }
+   ],
+   "itemLevel": null,
+   "skillId": null,
+   "skillLevel": null,
+   "confidence": "prontera-only",
+   "otherRegion": false,
+   "sources": [
+    "rozeroplanner"
    ]
   },
   {
