@@ -755,6 +755,22 @@ a.thsort { text-decoration: none; }
 .tag--halved { border-color: var(--status-danger); color: var(--status-danger); }
 .tag--unknown { border-color: var(--hair); color: var(--faint); }
 .tag--risk { border-color: var(--yellow); color: var(--yellow); }
+/* The farm tool's popular-map tag (owner, 28 Oct 2026: make it stand out):
+   filled neon pink with a glow, the arcade "hot" marker. */
+.tag--hot {
+  border-color: var(--pink);
+  background: var(--pink);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--pink) 70%, transparent);
+  animation: tag-hot 1.6s ease-in-out infinite;
+}
+@keyframes tag-hot {
+  50% { box-shadow: 0 0 2px color-mix(in srgb, var(--pink) 40%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tag--hot { animation: none; }
+}
 
 /* Add-to-plan control. Same pill language as the nav toggle so it reads as a
    control rather than a status tag -- .tag shapes are reserved for state the

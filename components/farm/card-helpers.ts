@@ -46,7 +46,7 @@ export function survivalFigures(map: RankedMap, opts: { calm?: boolean } = {}): 
 export function mapCardTags(map: RankedMap): CardTag[] {
   const tags: CardTag[] = [];
   if (map.popular) {
-    tags.push({ tone: 'info', text: 'แมพยอดนิยม', title: 'แมพดีที่สุดในรายการ คนไปเยอะ มอนมักโดนคนอื่นตีก่อน ของจริงจะได้น้อยกว่าตัวเลขนี้' });
+    tags.push({ tone: 'hot', text: '🔥 แมพยอดนิยม', title: 'แมพดีที่สุดในรายการ คนไปเยอะ มอนมักโดนคนอื่นตีก่อน ของจริงจะได้น้อยกว่าตัวเลขนี้' });
   }
   if (map.dropTags.includes('unconfirmed')) {
     tags.push({

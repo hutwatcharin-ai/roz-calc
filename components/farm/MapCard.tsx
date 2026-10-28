@@ -18,7 +18,7 @@ export interface CardMonster {
 }
 
 export interface CardTag {
-  tone: 'warn' | 'info';
+  tone: 'warn' | 'info' | 'hot';
   text: string;
   title?: string;
 }
@@ -56,8 +56,9 @@ export function CardTags({ tags }: { tags: CardTag[] }) {
   if (tags.length === 0) return null;
   return (
     <ul className="farmcard__tags">
-      {tags.map((tag) => (
-        <li key={tag.text} className={`tag ${tag.tone === 'warn' ? 'tag--risk' : 'tag--unknown'}`} title={tag.title}>
+      {/* The popular-map tag leads, ahead of the warnings. */}
+      {[...tags.filter((t) => t.tone === 'hot'), ...tags.filter((t) => t.tone !== 'hot')].map((tag) => (
+        <li key={tag.text} className={`tag ${tag.tone === 'hot' ? 'tag--hot' : tag.tone === 'warn' ? 'tag--risk' : 'tag--unknown'}`} title={tag.title}>
           {tag.text}
         </li>
       ))}
