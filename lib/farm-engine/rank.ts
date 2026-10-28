@@ -33,6 +33,14 @@ import { canSurvive, mapSurvival, survivalContext, walkSeconds, type MapSurvival
 import { bestTargets, type BotRun, type BotSettings } from './bot-session';
 import { MIN_MOBS, NIGHT_HOURS, type FarmData, type FarmMap, type MapRow, type PlayerInput } from './types';
 
+/**
+ * The best maps in a ranking are where everyone goes: monsters there die to
+ * other players soon after they spawn (owner, 28 Oct 2026). The tool cannot
+ * see crowds, so the top of each ranking carries a "popular" tag; the figure
+ * itself stays the one-player estimate.
+ */
+export const POPULAR_TOP = 5;
+
 /** Maps whose monsters average this many levels under the player are hidden by default in the overnight modes. */
 export const LOW_MAP_GAP = 20;
 
@@ -81,6 +89,8 @@ export interface RankedMap {
   dropTags: DropTag[];
   fingerprint: string;
   channels: number;
+  /** One of the POPULAR_TOP best of the ranking: other players crowd it (owner, 28 Oct 2026). */
+  popular: boolean;
 }
 
 function scoreMap(
@@ -191,6 +201,7 @@ function scoreMap(
       .sort()
       .join(','),
     channels: 1,
+    popular: false,
   };
 }
 
@@ -270,6 +281,7 @@ function botMap(
       .sort()
       .join(','),
     channels: 1,
+    popular: false,
   };
 }
 
@@ -305,7 +317,9 @@ export function rankMaps(
   scored.sort((a, b) => b.sortKey - a.sortKey || a.name.localeCompare(b.name));
 
   // Fold after the gate, so a safe channel is never hidden behind an unsafe copy.
-  const ranked = collapseChannels(scored.filter((m) => !m.blockers || m.blockers.length === 0));
+  const ranked = collapseChannels(scored.filter((m) => !m.blockers || m.blockers.length === 0)).map((m, i) =>
+    i < POPULAR_TOP ? { ...m, popular: true } : m,
+  );
   const safe = new Set(ranked.map((m) => m.fingerprint));
   const blocked = collapseChannels(scored.filter((m) => m.blockers !== null && m.blockers.length > 0 && !safe.has(m.fingerprint)));
   return { ranked, blocked, hiddenLow };

@@ -45,6 +45,9 @@ export function survivalFigures(map: RankedMap, opts: { calm?: boolean } = {}): 
 
 export function mapCardTags(map: RankedMap): CardTag[] {
   const tags: CardTag[] = [];
+  if (map.popular) {
+    tags.push({ tone: 'info', text: 'แมพยอดนิยม', title: 'แมพดีที่สุดในรายการ คนไปเยอะ มอนมักโดนคนอื่นตีก่อน ของจริงจะได้น้อยกว่าตัวเลขนี้' });
+  }
   if (map.dropTags.includes('unconfirmed')) {
     tags.push({
       tone: 'warn',
@@ -65,7 +68,7 @@ export function mapCardTags(map: RankedMap): CardTag[] {
     tags.push({
       tone: 'warn',
       text: `มีบอสเดินอยู่ ${map.tags.bosses.length} ตัว`,
-      title: `${map.tags.bosses.join(', ')} — MVP หรือมอนที่เกิดทีละตัว ไม่ได้เอามาคิดว่ารอดไหม ถ้าบอทไปเจอเข้าอาจตาย`,
+      title: `${map.tags.bosses.join(', ')} — MVP มินิบอส หรือมอนที่เกิดทีละตัว ไม่ได้เอามาคิด EXP และรอดไหม ถ้าบอทไปเจอเข้าอาจตาย`,
     });
   }
   const s = map.survival;

@@ -83,7 +83,7 @@ export function OvernightSummary({
       {hiddenLow > 0 && <> · ซ่อน {hiddenLow} แมพที่มอนต่ำกว่าเลเวลคุณ {LOW_MAP_GAP}+</>}
       <span className="farm-summary__rule">
         {' '}
-        · ไม่รวม {data.excluded.closedMaps} แมพที่ยังไม่เปิดในเซิร์ฟ · ไม่นับ MVP {data.excluded.mvp} ตัว และมอนที่เกิดทีละตัว {data.excluded.solo} ตัว (ติดป้ายบอสไว้แทน)
+        · ไม่รวม {data.excluded.closedMaps} แมพที่ยังไม่เปิดในเซิร์ฟ · ไม่นับ MVP {data.excluded.mvp} ตัว และมินิบอสหรือมอนที่เกิดทีละตัว {data.excluded.solo} ตัว (ติดป้ายบอสไว้แทน)
       </span>
     </p>
   );

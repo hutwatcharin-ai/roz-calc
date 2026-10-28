@@ -120,6 +120,13 @@ export async function GET() {
     largestKnown.set(spawn.monster_id, Math.max(largestKnown.get(spawn.monster_id) ?? 0, spawn.amount));
   }
 
+  // Mini-bosses that spawn several to a map, so the count rule above misses
+  // them. Nobody fights a Mutant Dragon at Zenhai Marsh (owner, 28 Oct 2026),
+  // and its 498,337 EXP put the map second for EXP an hour. HP against level
+  // peers does not single them out: the Boulder Dwarfs players farm run as
+  // high. Treated like solo spawns: out of the EXP, tagged as a boss.
+  const MINI_BOSSES = new Set([1262]);
+
   const out: Record<number, FarmMonster> = {};
   for (const row of monsters.data ?? []) {
     if (isCVariant(row.name_en)) continue;
@@ -145,7 +152,7 @@ export async function GET() {
       baseExp: row.base_exp && row.base_exp > 0 ? row.base_exp : null,
       sprite: row.image_url,
       isMvp: row.is_mvp === true,
-      solo: known !== undefined && known <= 1,
+      solo: (known !== undefined && known <= 1) || MINI_BOSSES.has(row.id),
       isAggressive: row.is_aggressive,
       flee95: row.flee_95,
       hit100: row.hit_100,

@@ -90,7 +90,7 @@ export default function ZenyView({ data, player, level, bot }: ViewProps) {
         <h2 id="farm-earners" className="section-title">
           ฆ่า 1 ตัว ได้เงินเฉลี่ยเท่าไร
         </h2>
-        <p className="farm-section__note">เก็บของที่ดรอปทุกชิ้นไปขายร้าน NPC · ไม่นับ MVP และมอนที่เกิดทีละตัว</p>
+        <p className="farm-section__note">เก็บของที่ดรอปทุกชิ้นไปขายร้าน NPC · ไม่นับ MVP มินิบอส และมอนที่เกิดทีละตัว</p>
         <ul className="farm-mongrid">
           {earners.slice(0, EARNERS_OPEN).map((e) => (
             <EarnerTile key={e.m.id} earner={e} />

@@ -248,3 +248,13 @@ describe('afk mode', () => {
     expect(rankMaps(data, nobody, 'afk', { level: 50, noRiskOnly: true }).ranked.map((m) => m.code).sort()).toEqual(['a', 'b']);
   });
 });
+
+describe('popular maps', () => {
+  it('tags the five best of a ranking as popular, and no others', () => {
+    // Owner, 28 Oct 2026: the best maps are where everyone goes, and other
+    // players take the kills there; a tag is enough, the figure stays.
+    const maps = Array.from({ length: 7 }, (_, i) => place(`m${i}`, [[1, 10 + i]]));
+    const { ranked } = rankMaps(world([mob(1, { level: 50 })], maps), nobody, 'level', at50);
+    expect(ranked.filter((m) => m.popular).map((m) => m.code)).toEqual(['m6', 'm5', 'm4', 'm3', 'm2']);
+  });
+});
