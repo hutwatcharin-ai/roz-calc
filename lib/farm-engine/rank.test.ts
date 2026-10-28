@@ -113,10 +113,15 @@ describe('zeny mode', () => {
 describe('level mode', () => {
   const melee = { ...noSurvival, walkSeconds: 0, style: 'melee' as const, level: 50, damage: 500, perSecond: 2, hit: 200, flee: null };
 
-  it('ranks by density tapered by level distance without numbers', () => {
+  it('ranks by density, flat from 10 under to 15 over, tapering to 30 over, without numbers', () => {
+    // Zero takes nothing off EXP for a level gap (docs/GAME_MODEL.md), so a
+    // monster above the player is worth its full EXP; the taper only stands in
+    // for "probably too strong" while the player's damage is unknown.
     const data = world([mob(1, { level: 50, baseExp: 100 })], [place('a', [[1, 10]])]);
     expect(rankMaps(data, nobody, 'level', { level: 50 }).ranked[0].sortKey).toBeCloseTo(1000, 5);
-    expect(rankMaps(data, nobody, 'level', { level: 60 }).ranked[0].sortKey).toBeCloseTo(1000 / 3, 5);
+    expect(rankMaps(data, nobody, 'level', { level: 35 }).ranked[0].sortKey).toBeCloseTo(1000, 5);
+    expect(rankMaps(data, nobody, 'level', { level: 60 }).ranked[0].sortKey).toBeCloseTo(1000, 5);
+    expect(rankMaps(data, nobody, 'level', { level: 30 }).ranked[0].sortKey).toBeCloseTo(1000 * (2 / 3), 5);
   });
 
   it('ignores a monster whose EXP is unknown', () => {
@@ -134,20 +139,27 @@ describe('level mode', () => {
     expect(rankMaps(data, melee, 'level', at50).ranked[0].perHour).toBeCloseTo(684000, 0);
   });
 
-  it('leaves out a map where every monster is outside ±15 levels', () => {
+  it('leaves out a map whose monsters are 30+ levels over or 10+ under without numbers', () => {
     expect(rankMaps(world([mob(1, { level: 80 })], [place('a', [[1, 20]])]), nobody, 'level', at50).ranked).toEqual([]);
+    expect(rankMaps(world([mob(1, { level: 39 })], [place('a', [[1, 20]])]), nobody, 'level', at50).ranked).toEqual([]);
   });
 
-  it('keeps to the level band with the speed filled in too', () => {
-    // A Lv 90 worth ten times the EXP used to top a Lv 50's list once the
-    // ranking went by EXP an hour (Requiem Lv 106 for a Lv 70, 19 Oct 2026).
+  it('with damage filled in, fights whatever dies in 15 hits and is hit 70% of the time, at any level', () => {
+    // gef_fild06 for a Lv 60 (owner, 28 Oct 2026): Petit Lv 86 at 23,611 HP
+    // is 8 hits of 3,000, and players level there. A Lv-gap band hid it.
     const data = world(
-      [mob(1, { level: 50, hp: 1000, hit100: 200 }), mob(2, { level: 90, hp: 1000, hit100: 200, baseExp: 1000 })],
-      [place('mine', [[1, 20]]), place('far', [[2, 20]]), place('mixed', [[1, 20], [2, 20]])],
+      [
+        mob(1, { level: 50, hp: 1000, hit100: 200 }),
+        mob(2, { level: 90, hp: 7500, hit100: 200, baseExp: 1000 }),
+        mob(3, { level: 90, hp: 8000, hit100: 200, baseExp: 1000 }),
+        mob(4, { level: 90, hp: 1000, hit100: 231, baseExp: 1000 }),
+      ],
+      [place('mine', [[1, 20]]), place('high', [[2, 20]]), place('tough', [[3, 20]]), place('slippery', [[4, 20]])],
     );
     const { ranked } = rankMaps(data, melee, 'level', at50);
-    expect(ranked.map((m) => m.code).sort()).toEqual(['mine', 'mixed']);
-    expect(ranked.find((m) => m.code === 'mixed')!.perHour).toBeCloseTo(ranked.find((m) => m.code === 'mine')!.perHour!, 6);
+    // 7,500 is 15 hits of 500; 8,000 is 16. HIT 200 against hit100 231 lands 69%.
+    expect(ranked.map((m) => m.code).sort()).toEqual(['high', 'mine']);
+    expect(ranked[0].code).toBe('high');
   });
 
   it('counts the walk to the next monster in the band', () => {

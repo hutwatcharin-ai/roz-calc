@@ -71,7 +71,7 @@ export default function LevelingSpotsPage({
         </h2>
         <ul className="muted" style={{ margin: 0, paddingInlineStart: 18, lineHeight: 1.7, maxWidth: '75ch' }}>
           <li>
-            <strong>เก็บเลเวล</strong> เล่นเองตอนนี้ แมพที่มีมอนช่วงเลเวลคุณ เรียงตาม EXP หรือ EXP ต่อชั่วโมงของคุณ
+            <strong>เก็บเลเวล</strong> เล่นเองตอนนี้ แมพที่มีมอนที่คุณตีไหว (เกมนี้ตีมอนเลเวลสูงกว่าได้ EXP เต็ม) เรียงตาม EXP หรือ EXP ต่อชั่วโมงของคุณ
           </li>
           <li>
             <strong>ทิ้งบอท AFK</strong> แมพที่บอทในเกมเก็บ EXP ได้มากสุดก่อนกลับเมือง พร้อมบอกว่าควรติ๊กมอนตัวไหน คิดตามที่บอทจริงทำ

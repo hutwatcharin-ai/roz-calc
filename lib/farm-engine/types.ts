@@ -153,6 +153,19 @@ export const NIGHT_HOURS = 8;
 export const STEADY_DROPS_PER_NIGHT = 3;
 /** Fewer monsters than this and the bot spends the night walking. */
 export const MIN_MOBS = 10;
-/** Level taper width for the level mode (reproduces prontera.info's order). */
-export const LEVEL_SPAN = 15;
+/**
+ * The level mode's band while the player's damage is unknown (28 Oct 2026).
+ * Zero takes nothing off EXP for a level gap (docs/GAME_MODEL.md), so this is
+ * only a stand-in for "probably too strong": full weight from LEVEL_BELOW
+ * under to LEVEL_FLAT_ABOVE over, tapering to nothing at LEVEL_ABOVE over.
+ * It replaced a ±15 taper that hid gef_fild06 (Lv 84-91) from the Lv 60s
+ * who level there.
+ */
+export const LEVEL_BELOW = 10;
+export const LEVEL_FLAT_ABOVE = 15;
+export const LEVEL_ABOVE = 30;
+/** With damage filled in, the level mode fights what dies in this many hits... */
+export const MAX_HITS_TO_KILL = 15;
+/** ...and what the player lands this % of swings on. */
+export const MIN_HIT_PERCENT = 70;
 export const DEFAULT_LEVEL = 50;

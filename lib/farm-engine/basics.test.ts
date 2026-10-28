@@ -8,6 +8,7 @@ import {
   farmedOn,
   headcount,
   levelWeight,
+  canFight,
   metOn,
   playerFromNumbers,
   secondsPerKill,
@@ -64,11 +65,27 @@ describe('population', () => {
 });
 
 describe('levelWeight', () => {
-  it('is 1 at the player level, 0 at the span edge, never negative', () => {
+  it('is 1 from 10 under to 15 over, 0 at 30 over and past 10 under', () => {
     expect(levelWeight(50, 50)).toBe(1);
-    expect(levelWeight(65, 50)).toBe(0);
+    expect(levelWeight(40, 50)).toBe(1);
+    expect(levelWeight(39, 50)).toBe(0);
+    expect(levelWeight(65, 50)).toBe(1);
+    expect(levelWeight(80, 50)).toBe(0);
     expect(levelWeight(1, 50)).toBe(0);
-    expect(levelWeight(55, 50)).toBeCloseTo(levelWeight(45, 50));
+    expect(levelWeight(72.5, 50)).toBeCloseTo(0.5);
+  });
+});
+
+describe('canFight', () => {
+  it('needs the kill in 15 hits and a 70% chance to land', () => {
+    const p = player({ damage: 500, hit: 200 });
+    expect(canFight(mob(1, { hp: 7500, hit100: 200 }), p)).toBe(true);
+    expect(canFight(mob(1, { hp: 7501, hit100: 200 }), p)).toBe(false);
+    expect(canFight(mob(1, { hp: 100, hit100: 230 }), p)).toBe(true);
+    expect(canFight(mob(1, { hp: 100, hit100: 231 }), p)).toBe(false);
+    // HIT not entered: every swing assumed to land, as elsewhere in the tool.
+    expect(canFight(mob(1, { hp: 100, hit100: 999 }), player({ hit: null }))).toBe(true);
+    expect(canFight(mob(1, { hp: null }), p)).toBe(false);
   });
 });
 

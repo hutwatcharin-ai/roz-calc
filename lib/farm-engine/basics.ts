@@ -5,7 +5,13 @@ import { killRate } from '../kills-per-hour';
 import { hitChanceVsMob, mobHitChance } from '../hit-flee';
 import { dropPenalty } from '../drop-penalty';
 import { attacksPerSecond, castsPerSecond, type PlayerNumbers } from '../player-numbers';
-import { LEVEL_SPAN, STEADY_DROPS_PER_NIGHT, type BotStyle, type FarmMap, type FarmMonster, type MapRow, type PlayerInput } from './types';
+import {
+  LEVEL_ABOVE,
+  LEVEL_BELOW,
+  LEVEL_FLAT_ABOVE,
+  MAX_HITS_TO_KILL,
+  MIN_HIT_PERCENT,
+  STEADY_DROPS_PER_NIGHT, type BotStyle, type FarmMap, type FarmMonster, type MapRow, type PlayerInput } from './types';
 
 /** Every monster standing on the map, known or not; amount 0 when uncounted. */
 export function metOn(map: FarmMap, monsters: Record<number, FarmMonster>): MapRow[] {
@@ -30,9 +36,12 @@ export function headcount(rows: MapRow[]): number {
   return rows.reduce((sum, row) => sum + row.amount, 0);
 }
 
-/** 1 at the player's level, falling to 0 at ±LEVEL_SPAN. */
+/** 1 from LEVEL_BELOW under the player to LEVEL_FLAT_ABOVE over, falling to 0 at LEVEL_ABOVE over. */
 export function levelWeight(monsterLevel: number, playerLevel: number): number {
-  return Math.max(0, 1 - Math.abs(monsterLevel - playerLevel) / LEVEL_SPAN);
+  const gap = monsterLevel - playerLevel;
+  if (gap < -LEVEL_BELOW) return 0;
+  if (gap <= LEVEL_FLAT_ABOVE) return 1;
+  return Math.max(0, (LEVEL_ABOVE - gap) / (LEVEL_ABOVE - LEVEL_FLAT_ABOVE));
 }
 
 export function canRate(player: PlayerInput): boolean {
@@ -69,6 +78,18 @@ export function myHitChance(m: FarmMonster, player: PlayerInput): number | null 
   if (player.style === 'magic') return 100;
   if (player.hit === null || m.hit100 === null) return null;
   return hitChanceVsMob(player.hit, m.hit100);
+}
+
+/**
+ * Whether a player at the keyboard would level on this monster: it dies in
+ * MAX_HITS_TO_KILL hits and they land MIN_HIT_PERCENT of swings (HIT not
+ * entered counts as landing every one, as secondsPerKill does). Needs damage.
+ */
+export function canFight(m: FarmMonster, player: PlayerInput): boolean {
+  if (player.damage === null || player.damage <= 0 || m.hp === null) return false;
+  const perHit = m.oneDamage ? 1 : player.damage;
+  if (Math.ceil(m.hp / perHit) > MAX_HITS_TO_KILL) return false;
+  return (myHitChance(m, player) ?? 100) >= MIN_HIT_PERCENT;
 }
 
 /** % the monster lands on the player; null without FLEE or its flee95. */

@@ -1,6 +1,6 @@
 // Map rankings for the three map modes. One scorer, three questions:
 //
-//   level  where do I level by hand now      EXP, tapered to ±15 levels, no gate
+//   level  where do I level by hand now      EXP of what the player can kill, no gate
 //   afk    where does a bot collect EXP overnight and survive
 //   zeny   where does a bot collect zeny overnight and survive
 //
@@ -15,6 +15,7 @@
 // Lv 40-90), so the Lv 1-25 shelf topped the list however strong the player.
 
 import {
+  canFight,
   canRate,
   collapseChannels,
   dropFactor,
@@ -104,7 +105,7 @@ function scoreMap(
   for (const row of farmed) {
     if (row.m.level !== null && row.m.baseExp) density += row.amount * row.m.baseExp * levelWeight(row.m.level, opts.level);
   }
-  if (mode === 'level' && density <= 0) return null;
+  if (mode === 'level' && !canRate(player) && density <= 0) return null;
 
   const score = farmed.reduce((sum, row) => sum + (baseValue(row) / (row.m.hp as number)) * row.amount, 0);
   const valueOf = new Map(farmed.map((row) => [row.m.id, baseValue(row)]));
@@ -113,13 +114,16 @@ function scoreMap(
 
   const overnight = mode !== 'level';
   if (overnight && opts.bot && canSurvive(player)) return botMap(map, data, player, mode, opts.bot, ctx, farmed, mobs, contributors);
-  // The level mode (19 Oct 2026): the player fights the monsters within
-  // ±LEVEL_SPAN of their level, with or without their speed filled in --
-  // with it the band used to vanish and a Lv 70 got Requiem Lv 106 maps.
-  // They walk between those, and the survival model warns but never removes
-  // a map: someone at the keyboard drinks and retreats.
-  const inBand = (row: MapRow) => mode !== 'level' || (row.m.level !== null && levelWeight(row.m.level, opts.level) > 0);
+  // The level mode fights what the player can kill (28 Oct 2026): with
+  // their damage, whatever dies in MAX_HITS_TO_KILL hits and is hit often
+  // enough, at any level, since Zero takes nothing off EXP for a level gap;
+  // without it, the level band. They walk between those, and the survival
+  // model warns but never removes a map: someone at the keyboard drinks and
+  // retreats.
+  const inBand = (row: MapRow) =>
+    mode !== 'level' || (canRate(player) ? canFight(row.m, player) : row.m.level !== null && levelWeight(row.m.level, opts.level) > 0);
   const fought = farmed.filter(inBand);
+  if (mode === 'level' && canRate(player) && !fought.some((row) => (row.m.baseExp ?? 0) > 0)) return null;
   const survival = canSurvive(player) ? mapSurvival(map, data, player, ctx, inBand) : null;
   const walk = canRate(player) ? walkSeconds(map, headcount(fought), player, ctx) : 0;
 
@@ -172,7 +176,8 @@ function scoreMap(
     survival,
     bot: null,
     sortKey: perHour !== null ? perHour : mode === 'level' ? density : score,
-    top: contributors
+    // The level mode names what the player fights, not a monster it left out.
+    top: (mode === 'level' ? contributors.filter(inBand) : contributors)
       .map((row) => ({ id: row.m.id, value: valueOf.get(row.m.id) ?? 0, amount: row.amount }))
       .filter((row) => row.value > 0)
       .sort((a, b) => b.value * b.amount - a.value * a.amount)
