@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { rankMaps } from './rank';
 import { caster, mob, nobody, noSurvival, place, world } from './fixtures';
+import { BOT_SIGHT, PLAYER_IDLE_TELEPORT, searchModel, TELEPORT_SECONDS } from './search';
 
 const at50 = { level: 50 };
 
@@ -204,11 +205,12 @@ describe('afk mode', () => {
   });
 
   it('works the walk out from how thinly the map spreads its monsters', () => {
-    // 20 monsters on 8,000 walkable cells: 400 cells each, 0.5 x sqrt(400) =
-    // 10 cells to the nearest, at 1000/150 cells a second = 1.5 s.
+    // 20 monsters on 8,000 walkable cells, found by teleporting and looking
+    // round (lib/farm-engine/search), + 2 s a kill.
     const map = { ...place('a', [[1, 20]]), walkCells: 8000 };
     const { ranked } = rankMaps(world([mob(1)], [map]), caster({ walkSeconds: null }), 'afk', at50);
-    expect(ranked[0].perHour).toBeCloseTo((100 / 3.5) * 3600, 3);
+    const s = searchModel(20 / 8000, PLAYER_IDLE_TELEPORT, BOT_SIGHT);
+    expect(ranked[0].perHour).toBeCloseTo((100 / (2 + s.seconds + s.teleports * TELEPORT_SECONDS)) * 3600, 3);
   });
 
   it('stops a one-hit weak map from beating a stronger one once walking counts', () => {

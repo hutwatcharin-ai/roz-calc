@@ -29,7 +29,7 @@ const LABELS: Record<PlayerField, { label: string; hint: string; unlocks: string
   vit: { label: 'VIT', hint: 'เช่น 30', unlocks: 'DEF และยาฟื้นมากขึ้น' },
   potionId: { label: 'ยา', hint: '', unlocks: 'ยาที่ใช้' },
   potions: { label: 'ถือยากี่ขวด', hint: 'เช่น 200', unlocks: 'ยาพอทั้งคืนไหม' },
-  walkSeconds: { label: 'เดินหามอน (วิ/ตัว)', hint: 'เช่น 3', unlocks: 'ว่าง = คิดจากแมพ' },
+  walkSeconds: { label: 'หามอน (วิ/ตัว)', hint: 'เช่น 3', unlocks: 'ว่าง = คิดจากแมพ' },
   maxWeight: { label: 'น้ำหนักสูงสุด', hint: 'เช่น 5030', unlocks: 'ถือยาได้กี่ขวด' },
   weightNow: { label: 'น้ำหนักตอนนี้', hint: 'เช่น 953', unlocks: 'เหลือที่เก็บของ' },
   maxSp: { label: 'Max SP', hint: 'เช่น 300', unlocks: 'SP พอวาร์ปไหม' },

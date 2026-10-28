@@ -8,7 +8,7 @@
 import { useMemo } from 'react';
 import Caveat from '@/components/Caveat';
 import RankedMaps from './RankedMaps';
-import { blockerText, mapCardTags, mobsFigure, survivalFigures, whole } from './card-helpers';
+import { levelWarningText, mapCardTags, mobsFigure, survivalFigures, whole } from './card-helpers';
 import { rankMaps, type RankedMap } from '@/lib/farm-engine/rank';
 import { canRate } from '@/lib/farm-engine/basics';
 import type { BotSettings } from '@/lib/farm-engine/bot-session';
@@ -36,14 +36,14 @@ export default function LevelView({ data, player, level, levelGuessed }: ViewPro
       rate && map.perHour !== null
         ? { label: 'ได้ราว', value: whole(map.perHour), unit: ' EXP/ชม.' }
         : { label: 'เฉลี่ยตัวละ', value: whole(map.avgPerKill), unit: ' EXP' },
-    stats: [mobsFigure(map), ...survivalFigures(map)],
+    stats: [mobsFigure(map), ...survivalFigures(map, { calm: true })],
     monsters: map.top.map((t) => {
       const m = data.monsters[t.id];
       return { id: t.id, name: m.name, sprite: m.sprite, note: `Lv${m.level ?? '?'} · ${whole(t.value)} EXP ×${t.amount}` };
     }),
     // Warnings, not removals: someone at the keyboard drinks and retreats.
     tags: [
-      ...map.warnings.slice(0, 2).map((b) => ({ tone: 'warn' as const, text: `ระวัง: ${blockerText(b)}` })),
+      ...map.warnings.slice(0, 2).map((b) => ({ tone: 'warn' as const, text: `ระวัง: ${levelWarningText(b)}` })),
       ...mapCardTags(map),
     ],
   });
@@ -75,7 +75,7 @@ export default function LevelView({ data, player, level, levelGuessed }: ViewPro
       <Caveat>
         เกมนี้ไม่หัก EXP ตามเลเวลที่ห่างกัน ตีมอนเลเวลสูงกว่าได้ EXP เต็ม · กรอกดาเมจแล้ว นับเฉพาะมอนที่ตีตายภายใน 15 ครั้งและตีโดนอย่างน้อย 70% เลเวลเท่าไรก็ได้ ·
         ไม่กรอกดาเมจ นับมอนตั้งแต่ต่ำกว่าคุณ 10 เลเวลถึงสูงกว่า 30 เลเวล (สูงเกิน 15 นับน้อยลง) · ไม่นับ MVP และมอนที่เกิดทีละตัว ·
-        &ldquo;EXP/ชม.&rdquo; คิดว่าคุณตีมอนที่ตีไหวตามสัดส่วนจำนวนตัวในแมพ รวมเวลาเดินไปหาตัวถัดไปจากพื้นที่เดินได้ของแมพ ไม่รวมรอมอนเกิดใหม่และคนแย่งมอน
+        &ldquo;EXP/ชม.&rdquo; คิดว่าคุณตีมอนที่ตีไหวตามสัดส่วนจำนวนตัวในแมพ รวมเวลาหาตัวถัดไปแบบวาร์ปแล้วเดินหาบนจอ (วาร์ปทุก 5 วิถ้าไม่เจอ) ไม่รวมรอมอนเกิดใหม่และคนแย่งมอน
         ของจริงจึงน้อยกว่านี้ · กรอก FLEE กับ Max HP แล้วการ์ดจะบอกว่าต้องกดยาเท่าไร และเตือนแมพที่ตีเจ็บเกิน (ไม่ตัดออก เพราะเล่นเองกดยาและถอยได้) ·
         โอกาสตีโดนมาจากค่า hit_100 เทียบกับ HIT ที่กรอก (ไม่กรอก HIT = คิดว่าตีโดนทุกที) · ดาเมจใช้ตามที่กรอก ไม่ได้คูณธาตุ
       </Caveat>

@@ -3,6 +3,7 @@ import { canSurvive, crowdedFlee, damageTaken, mapSurvival, playerDefense, survi
 import { mob, noSurvival, place, world } from './fixtures';
 import { rankMaps } from './rank';
 import type { PlayerInput } from './types';
+import { BOT_SIGHT, PLAYER_IDLE_TELEPORT, searchModel, TELEPORT_SECONDS } from './search';
 
 // Lv 1, VIT 1, FLEE 101: AGI 0, so soft DEF floor((1 + 1)/2) = 1 and no hard DEF.
 const tank = (over: Partial<PlayerInput> = {}): PlayerInput => ({
@@ -55,9 +56,10 @@ describe('walkSeconds', () => {
   it('takes the player figure over the map', () => {
     expect(walkSeconds({ ...place('a', []), walkCells: 8000 }, 20, tank({ walkSeconds: 4 }), ctx)).toBe(4);
   });
-  it('falls back to the median spacing when the client has no map file', () => {
-    // 0.5 x sqrt(900) = 15 cells at 1000/150 a second.
-    expect(walkSeconds(place('a', []), 20, tank({ walkSeconds: null }), ctx)).toBeCloseTo(2.25, 5);
+  it('searches by teleport at the median spacing when the client has no map file', () => {
+    const s = searchModel(1 / 900, PLAYER_IDLE_TELEPORT, BOT_SIGHT);
+    expect(walkSeconds(place('a', []), 20, tank({ walkSeconds: null }), ctx)).toBeCloseTo(s.seconds + s.teleports * TELEPORT_SECONDS, 6);
+    expect(s.teleports).toBeGreaterThan(0);
   });
 });
 

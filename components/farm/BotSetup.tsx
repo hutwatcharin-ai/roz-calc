@@ -214,7 +214,7 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
               <dd>{whole(run.killsPerHour)} ตัว/ชม.</dd>
             </div>
             <div>
-              <dt>เดินหามอนตัวต่อไป</dt>
+              <dt>หามอนตัวต่อไป (รวมวาร์ป)</dt>
               <dd>{run.searchSeconds.toFixed(1)} วิ</dd>
             </div>
             <div>

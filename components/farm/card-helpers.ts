@@ -17,14 +17,14 @@ export const mobsFigure = (map: RankedMap): CardFigure => ({ label: 'มอน',
 export const hoursText = (h: number) => (h === Infinity ? 'ไม่หมด' : h >= 100 ? '100+ ชม.' : `${h.toFixed(1)} ชม.`);
 
 /** What the damage model adds to an overnight card: potions, the pile-on, the walk. */
-export function survivalFigures(map: RankedMap): CardFigure[] {
+export function survivalFigures(map: RankedMap, opts: { calm?: boolean } = {}): CardFigure[] {
   const s = map.survival;
   if (!s) return [];
   const out: CardFigure[] = [];
   // Without every monster's ATK there is no damage figure to show: saying
   // "0 potions" there would be a claim the model never made.
   if (s.blockers.some((b) => b.reason === 'unknown_atk')) {
-    out.push({ label: 'เดินหามอน', value: s.walkSeconds.toFixed(1), unit: ' วิ/ตัว' });
+    out.push({ label: 'หามอน', value: s.walkSeconds.toFixed(1), unit: ' วิ/ตัว' });
     return out;
   }
   if (s.potionsPerHour > 0) {
@@ -32,12 +32,14 @@ export function survivalFigures(map: RankedMap): CardFigure[] {
     if (s.potionsCarried === null) out.push({ label: 'ทั้งคืนต้องมี', value: whole(s.potionsPerHour * NIGHT_HOURS), unit: ' ขวด' });
     if (s.potionCostPerHour > 0) out.push({ label: 'ค่ายา', value: `${whole(s.potionCostPerHour)}z`, unit: '/ชม.' });
   } else if (s.netDamagePerHour > 0) {
-    out.push({ label: 'เลือดหมดใน', value: hoursText(s.hoursAlive) });
+    // The level mode leaves this out (owner, 28 Oct 2026): the player at the
+    // keyboard drinks, and the figure read far scarier than play is.
+    if (!opts.calm) out.push({ label: 'เลือดหมดใน', value: hoursText(s.hoursAlive) });
   } else {
     out.push({ label: 'ยาที่ใช้', value: '0', unit: ' (ฟื้นเองทัน)' });
   }
   if (s.extraAttackers >= 0.05) out.push({ label: 'โดนรุมเพิ่มเฉลี่ย', value: s.extraAttackers.toFixed(1), unit: ' ตัว' });
-  out.push({ label: 'เดินหามอน', value: s.walkSeconds.toFixed(1), unit: ' วิ/ตัว' });
+  out.push({ label: 'หามอน', value: s.walkSeconds.toFixed(1), unit: ' วิ/ตัว' });
   return out;
 }
 
@@ -98,6 +100,16 @@ export function blockerText(b: NonNullable<RankedMap['blockers']>[number]): stri
     case 'short':
       return `บอทอยู่ได้ไม่ถึงชั่วโมง เลือดกับยาก็หมด`;
   }
+}
+
+/**
+ * The level mode's softer wording for the same findings (owner, 28 Oct 2026):
+ * "HP gone in 0.1 h" read as far scarier than play is -- with high FLEE the
+ * hits are rare -- yet they do keep landing now and then, so it still warns.
+ */
+export function levelWarningText(b: NonNullable<RankedMap['blockers']>[number]): string {
+  if (b.reason === 'runs_out' || b.reason === 'burst') return `${b.name} ตีเจ็บ โดนเป็นระยะ พกยาไว้`;
+  return blockerText(b);
 }
 
 const STOP_TEXT: Record<BotRun['stop'], string> = {

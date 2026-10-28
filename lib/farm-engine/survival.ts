@@ -34,6 +34,7 @@
 import { mobHitChance } from '../hit-flee';
 import { canRate, farmedOn, headcount, secondsPerKill } from './basics';
 import { NIGHT_HOURS, type FarmData, type FarmMap, type FarmMonster, type MapRow, type PlayerInput } from './types';
+import { BOT_SIGHT, PLAYER_IDLE_TELEPORT, searchModel, TELEPORT_SECONDS } from './search';
 
 /** rAthena DEFAULT_WALK_SPEED: 150 ms a cell for a player with no speed buff. */
 export const WALK_CELLS_PER_SECOND = 1000 / 150;
@@ -127,16 +128,17 @@ export function survivalContext(data: FarmData): SurvivalContext {
 }
 
 /**
- * Seconds from one kill to the next target: the mean distance to the nearest
- * of N monsters spread over the walkable cells (0.5 / sqrt(density) for a
- * random spread) at a player's walking speed. Ignores walls between them and
- * other players taking kills, so it is a floor; the player can type their own.
+ * Seconds from one kill to the next target for a player at the keyboard:
+ * teleport, look round, walk to what comes on screen (lib/farm-engine/search),
+ * with PLAYER_IDLE_TELEPORT as the idle timer. Ignores other players taking
+ * kills; the player can type their own figure.
  */
 export function walkSeconds(map: FarmMap, mobs: number, player: PlayerInput, ctx: SurvivalContext): number {
   if (player.walkSeconds !== null) return player.walkSeconds;
   if (mobs <= 0) return 0;
-  const cellsPerMob = map.walkCells ? map.walkCells / mobs : ctx.cellsPerMob;
-  return (0.5 * Math.sqrt(cellsPerMob)) / WALK_CELLS_PER_SECOND;
+  const cells = map.walkCells ?? mobs * ctx.cellsPerMob;
+  const search = searchModel(mobs / cells, PLAYER_IDLE_TELEPORT, BOT_SIGHT);
+  return search.seconds + search.teleports * TELEPORT_SECONDS;
 }
 
 export type BlockReason =
