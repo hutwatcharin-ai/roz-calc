@@ -4320,6 +4320,15 @@ html .chiplink[aria-current='true'], html .modebar__tab--on, html .lang-toggle b
   background: var(--yellow) !important; border-color: var(--yellow) !important; color: var(--yellow-ink) !important; box-shadow: 0 0 12px var(--glow-yellow);
 }
 html .chiplink[aria-current='true']::before, html .modebar__tab--on::before, html .lang-toggle button.on::before, html .srctoggle[aria-pressed='true']::before, html .planbtn--on::before { content: '▶ '; font-size: .7em; }
+/* A lit chip stays lit under the pointer (owner, 28 Oct 2026). The dark
+   hover rules above (.chips .chip:hover, .fpanel .chip:hover and the lone
+   .chip one, whose :not() lifts it to four classes) all outrank .chip--on,
+   so hovering the chosen chip turned it dark navy under its dark yellow-ink
+   text: the label vanished. The count on a lit chip is ink, not faint grey. */
+html .chip.chip--on, html .chip.chip--on:hover {
+  background: var(--yellow) !important; border-color: var(--yellow) !important; color: var(--yellow-ink) !important; box-shadow: 0 0 12px var(--glow-yellow);
+}
+html .chip.chip--on .chip__count { color: var(--yellow-ink); opacity: .7; }
 html .farmbar__chip { border-radius: 3px; background: #07051a; border-color: rgba(61, 232, 255, .4); color: var(--cyan); }
 html .tag { border-radius: 4px; }
 

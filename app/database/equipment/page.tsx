@@ -21,6 +21,7 @@ import ItemIcon from '@/components/ItemIcon';
 import { CATEGORY_TH, TYPE_TH, gearCategory, gearType, typesFor } from '@/lib/gear-type';
 import { ROLE_ORDER, ROLE_TH, gearRoles, isGearRole, type GearRole } from '@/lib/gear-roles';
 import EffectMatchLine from '@/components/EffectMatchLine';
+import { HEAD_LAYERS, HEAD_LAYER_TH, headLayers, isHeadLayer, type HeadLayer } from '@/lib/headgear-slots';
 import { EFFECT_FILTERS, effectFilter, filterStrength, ITEM_EFFECTS_SOURCE, itemEffects, matchingBonuses } from '@/lib/item-effects';
 
 export const revalidate = 86400;
@@ -41,7 +42,7 @@ const PAGE_SIZE = 50;
 export default async function EquipmentPage({
   searchParams,
 }: {
-  searchParams: { q?: string; category?: string; type?: string; use?: string; job?: string; mylv?: string; slots?: string; wlv?: string; fx?: string; sort?: string; page?: string };
+  searchParams: { q?: string; category?: string; type?: string; head?: string; use?: string; job?: string; mylv?: string; slots?: string; wlv?: string; fx?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q ?? '';
   // Anything still asking this list for costumes -- an old link, a bookmark,
@@ -54,6 +55,8 @@ export default async function EquipmentPage({
   const subtypeOptions = typesFor(category);
   const type = subtypeOptions.includes(searchParams.type ?? '') ? (searchParams.type as string) : '';
   const role: GearRole | '' = isGearRole(searchParams.use) ? searchParams.use : '';
+  // Upper / mid / lower, only under หมวก/ศีรษะ (owner, 28 Oct 2026).
+  const head: HeadLayer | '' = type === 'Headgear' && isHeadLayer(searchParams.head) ? searchParams.head : '';
   const SORTS = {
     name: { label: 'ชื่อ A-Z' },
     atk: { label: 'ATK สูงก่อน' },
@@ -151,15 +154,18 @@ export default async function EquipmentPage({
     if (it.kind) typeCounts.set(it.kind, (typeCounts.get(it.kind) ?? 0) + 1);
   }
   const roleCounts = new Map<GearRole, number>();
+  const headCounts = new Map<HeadLayer, number>();
   for (const it of base) {
     if (category && it.group !== category) continue;
     if (type && it.kind !== type) continue;
-    for (const r of it.roles) roleCounts.set(r, (roleCounts.get(r) ?? 0) + 1);
+    if (!head || headLayers(it.id).includes(head)) for (const r of it.roles) roleCounts.set(r, (roleCounts.get(r) ?? 0) + 1);
+    if (type === 'Headgear' && (!role || it.roles.includes(role))) for (const l of headLayers(it.id)) headCounts.set(l, (headCounts.get(l) ?? 0) + 1);
   }
 
   const filtered = base.filter((it) => {
     if (category && it.group !== category) return false;
     if (type && it.kind !== type) return false;
+    if (head && !headLayers(it.id).includes(head)) return false;
     if (role && !it.roles.includes(role)) return false;
     return true;
   });
@@ -185,6 +191,7 @@ export default async function EquipmentPage({
     if (q) params.set('q', q);
     if (category) params.set('category', category);
     if (type) params.set('type', type);
+    if (head) params.set('head', head);
     if (role) params.set('use', role);
     if (job) params.set('job', job);
     if (mylv > 0) params.set('mylv', String(mylv));
@@ -202,13 +209,16 @@ export default async function EquipmentPage({
    * page 4 of the old filter is not page 4 of this one. Picking a kind clears
    * the type under it: a Bow filter must not survive a switch to armour.
    */
-  function chipHref(next: { category?: string; type?: string; use?: GearRole | '' }) {
+  function chipHref(next: { category?: string; type?: string; head?: HeadLayer | ''; use?: GearRole | '' }) {
     const nextCategory = next.category ?? category;
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (nextCategory) params.set('category', nextCategory);
     const nextType = next.type ?? (nextCategory === category ? type : '');
     if (nextType) params.set('type', nextType);
+    // The position belongs to หมวก/ศีรษะ: any other type drops it.
+    const nextHead = nextType === 'Headgear' ? next.head ?? head : '';
+    if (nextHead) params.set('head', nextHead);
     const nextRole = next.use ?? role;
     if (nextRole) params.set('use', nextRole);
     if (job) params.set('job', job);
@@ -252,6 +262,7 @@ export default async function EquipmentPage({
             { label: 'คำค้น', value: q },
             { label: 'หมวด', value: CATEGORY_TH[category] ?? category },
             { label: 'ชนิด', value: type ? TYPE_TH[type] ?? type : '' },
+            { label: 'ตำแหน่ง', value: head ? HEAD_LAYER_TH[head] : '' },
             { label: 'เอาไว้', value: role ? ROLE_TH[role].title : '' },
             { label: 'อาชีพ', value: job },
             { label: 'ใส่ได้ที่ Lv', value: mylv > 0 ? String(mylv) : '' },
@@ -297,6 +308,18 @@ export default async function EquipmentPage({
               ))}
           </div>
         )}
+        {type === 'Headgear' && (
+          <div className="chips" style={{ marginTop: 8 }}>
+            <Link className={`chip${head === '' ? ' chip--on' : ''}`} href={chipHref({ head: '' })}>
+              ทุกตำแหน่งหัว
+            </Link>
+            {HEAD_LAYERS.filter((l) => (headCounts.get(l) ?? 0) > 0).map((l) => (
+              <Link key={l} className={`chip${head === l ? ' chip--on' : ''}`} href={chipHref({ head: l })}>
+                {HEAD_LAYER_TH[l]} <span className="chip__count">{headCounts.get(l)}</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* The second dimension, the one the card and item lists already have:
@@ -340,6 +363,7 @@ export default async function EquipmentPage({
             search. */}
         {category && <input type="hidden" name="category" value={category} />}
         {type && <input type="hidden" name="type" value={type} />}
+        {head && <input type="hidden" name="head" value={head} />}
         {role && <input type="hidden" name="use" value={role} />}
         <label className="field">
           <span className="field__label">อาชีพ</span>
