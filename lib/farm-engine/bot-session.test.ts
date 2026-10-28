@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_BOT, TELEPORT_SP, bestTargets, botRun, hardestHit, searchModel, type BotSettings } from './bot-session';
+import { BOT_SIGHT, DEFAULT_BOT, TELEPORT_SP, bestTargets, botRun, hardestHit, searchModel, type BotSettings } from './bot-session';
 import { mob, noSurvival, place, world } from './fixtures';
 import { WALK_CELLS_PER_SECOND } from './survival';
 import type { FarmMap, PlayerInput } from './types';
@@ -23,19 +23,36 @@ const field = (spawns: [number, number][], walkCells = 8000): FarmMap => ({ ...p
 const soft = (id: number, over = {}) => mob(id, { atk: 1, atkMax: 1, flee95: 0, hit100: 100, ...over });
 
 describe('searchModel', () => {
-  it('walks half the mean spacing to the nearest monster when it never teleports', () => {
-    expect(searchModel(1 / 400, Infinity)).toEqual({ cells: 10, teleports: 0 });
+  const sec = (cells: number) => cells / WALK_CELLS_PER_SECOND;
+
+  it('walks straight to a target already on screen', () => {
+    // One a 4 cells: the nearest is almost always well inside 14.
+    const s = searchModel(1 / 4, 5, 14);
+    expect(s.teleports).toBeCloseTo(0, 6);
+    expect(s.seconds).toBeCloseTo(sec(1), 1);
   });
 
-  it('teleports instead of walking far, and walks less for it', () => {
-    const s = searchModel(1 / 400, 5);
-    expect(s.teleports).toBeGreaterThan(0);
-    // P(nearest past 5 cells) = exp(-pi x 25 / 400).
-    expect(s.teleports).toBeCloseTo(Math.exp((-Math.PI * 25) / 400) / (1 - Math.exp((-Math.PI * 25) / 400)), 6);
+  it('roams, then teleports, when nothing is on screen', () => {
+    const s = searchModel(1 / 5000, 5, 14);
+    expect(s.teleports).toBeGreaterThan(0.5);
+    // Never cheaper than seeing the nearest one from anywhere, which the old model did.
+    expect(s.seconds).toBeGreaterThan(sec(0.5 * Math.sqrt(5000)));
   });
 
-  it('agrees with the no-teleport walk when the reach is huge', () => {
-    expect(searchModel(1 / 400, 1e6).cells).toBeCloseTo(10, 4);
+  it('never teleports without an idle timer', () => {
+    const s = searchModel(1 / 5000, null, 14);
+    expect(s.teleports).toBe(0);
+    expect(Number.isFinite(s.seconds)).toBe(true);
+  });
+
+  it('makes Mjolnir Dead Pit 1F Martins slow to find (owner, 28 Oct 2026)', () => {
+    // 21 Martins over 24,129 walkable cells: the old all-seeing model found
+    // one every 2.7 seconds and put the map second for a night's EXP.
+    expect(searchModel(21 / 24129, 5, 14).seconds).toBeGreaterThan(2.7 * 1.4);
+  });
+
+  it('finds nothing on an empty map', () => {
+    expect(searchModel(0, 5, 14).seconds).toBe(Infinity);
   });
 });
 
@@ -62,11 +79,13 @@ describe('hardestHit', () => {
 
 describe('botRun', () => {
   it('kills only what is ticked, at the ticked density', () => {
-    // 20 ticked on 8,000 cells: 10 cells to the nearest = 1.5 s, + 2 s fight.
+    // 20 ticked on 8,000 cells, searched for at that density (the 20
+    // unticked ones do not count), + 2 s fight.
     const d = world([soft(1), soft(2)], [field([[1, 20], [2, 20]])]);
     const run = botRun(d.maps[0], d, me(), bot(), [1], ctx, 8)!;
-    expect(run.searchSeconds).toBeCloseTo(10 / WALK_CELLS_PER_SECOND, 6);
-    expect(run.killsPerHour).toBeCloseTo(3600 / (2 + 1.5), 3);
+    const search = searchModel(20 / 8000, null, BOT_SIGHT).seconds;
+    expect(run.searchSeconds).toBeCloseTo(search, 6);
+    expect(run.killsPerHour).toBeCloseTo(3600 / (2 + search), 3);
     expect(run.followers).toEqual([]);
   });
 

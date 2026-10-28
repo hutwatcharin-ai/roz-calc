@@ -18,9 +18,12 @@
 //
 // Search between kills: monsters stand at random over the walkable cells, so
 // the distance to the nearest ticked one is distributed P(d > r) =
-// exp(-density x pi x r^2). The bot walks to it unless it is further than
-// the idle-teleport timer lets it walk, in which case it teleports and looks
-// again from a random spot.
+// exp(-density x pi x r^2). The bot only goes for what is on its screen
+// (BOT_SIGHT cells). With nothing there it roams, sweeping a strip twice its
+// sight wide, until the idle-teleport timer sends it to a random spot to look
+// again. Until 28 Oct 2026 it walked straight to the nearest target wherever
+// that was, which made sparse maps look fast: 21 Martins on Mjolnir Dead
+// Pit 1F came out a kill every 5 seconds and second for a night's EXP.
 //
 // Followers: an unticked aggressive monster joins when the bot passes within
 // its view range -- a strip 2 x range wide along the walk, and the circle
@@ -162,17 +165,36 @@ function erf(x: number): number {
 }
 
 /**
- * Cells walked and teleports made per kill while searching, for targets at
- * `density` a cell and a bot that teleports past `reach` cells (Infinity:
- * no idle teleport).
+ * How far the bot sees: classic RO's on-screen area (AREA_SIZE 14). The bot
+ * picks targets from what the client shows; nobody has measured Zero's.
  */
-export function searchModel(density: number, reach: number): { cells: number; teleports: number } {
-  if (density <= 0) return { cells: Infinity, teleports: 0 };
+export const BOT_SIGHT = 14;
+
+/**
+ * Searching from one kill to the next target, for targets at `density` a
+ * cell, a bot that teleports after `idleSeconds` with nothing to fight (null:
+ * never), and sees `sight` cells. Per kill: cells walked, teleports made, and
+ * seconds taken (the teleports' own casting not included).
+ */
+export function searchModel(density: number, idleSeconds: number | null, sight: number): { cells: number; teleports: number; seconds: number } {
+  if (density <= 0) return { cells: Infinity, teleports: 0, seconds: Infinity };
+  const v = WALK_CELLS_PER_SECOND;
   const k = Math.sqrt(density * Math.PI);
-  if (reach === Infinity) return { cells: 0.5 / Math.sqrt(density), teleports: 0 };
-  const walked = (Math.sqrt(Math.PI) / (2 * k)) * erf(k * reach);
-  const far = Math.exp(-density * Math.PI * reach * reach);
-  return { cells: walked / (1 - far), teleports: far / (1 - far) };
+  // A target on screen from where it stands, and the walk to it when there is one.
+  const seen = 1 - Math.exp(-density * Math.PI * sight * sight);
+  const toSeen = seen > 0 ? ((Math.sqrt(Math.PI) / (2 * k)) * erf(k * sight) - sight * (1 - seen)) / seen : 0;
+  // Roaming sweeps 2 x sight cells of new ground for each cell walked.
+  const rate = density * 2 * sight * v;
+  const found = idleSeconds === null ? 1 : 1 - Math.exp(-rate * idleSeconds);
+  const roam = idleSeconds === null ? 1 / rate : found / rate;
+  // Once one comes into view it is about half the sight away.
+  const approach = sight / 2;
+  // A look from a fresh spot fails when nothing is on screen and roaming finds nothing.
+  const miss = (1 - seen) * (1 - found);
+  const lookCells = seen * toSeen + (1 - seen) * (roam * v + found * approach);
+  const lookSeconds = lookCells / v;
+  const teleports = miss / (1 - miss);
+  return { cells: lookCells / (1 - miss), teleports, seconds: lookSeconds / (1 - miss) };
 }
 
 interface Hits {
@@ -281,9 +303,8 @@ export function botRun(
   const aggressive = (row: MapRow) => row.m.isAggressive !== false && row.m.attackDelay !== 0;
   const circle = (row: MapRow) => (row.amount / cells) * Math.PI * range(row) ** 2;
 
-  const reach = bot.idleTeleport !== null ? bot.idleTeleport * WALK_CELLS_PER_SECOND : Infinity;
-  const search = searchModel(n / cells, reach);
-  const searchSeconds = search.cells / WALK_CELLS_PER_SECOND + search.teleports * TELEPORT_SECONDS;
+  const search = searchModel(n / cells, bot.idleTeleport, BOT_SIGHT);
+  const searchSeconds = search.seconds + search.teleports * TELEPORT_SECONDS;
 
   const pileRows = ticked.filter(aggressive);
   const pileOn = pileRows.reduce((sum, row) => sum + circle(row), 0);
