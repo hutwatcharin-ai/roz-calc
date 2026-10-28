@@ -53,7 +53,15 @@ const BANNER = /UPCOMING\s*·\s*([A-Z]{3}\s+\d{4})\s+Global\s*·\s*(.+?)\s+\d+\s
 // one either crawled source states. Umbala (um_) was flagged the same way
 // earlier and got the opposite answer -- owner confirmed it *is* open -- so
 // it stays out of this list on purpose.
-const MANUAL_CLOSED = [{ when: 'TBD', area: 'Pirate Cave', test: /^iz_d/, source: 'owner confirmed in-game, 14 Sep 2026' }];
+// Geffen Dungeon B3F (gef_dun02) is in the client's navi_map, which would
+// call it open, but the owner found it still closed in game (28 Oct 2026).
+// That one manual close (beatsNavi) wins over the client's navigation table;
+// Pirate Cave's broad /^iz_d/ must not, or it would shut the open Izlude
+// undersea dungeon iz_dun00-02 again.
+const MANUAL_CLOSED = [
+  { when: 'TBD', area: 'Pirate Cave', test: /^iz_d/, source: 'owner confirmed in-game, 14 Sep 2026' },
+  { when: 'TBD', area: 'Geffen Dungeon B3F', test: /^gef_dun02$/, beatsNavi: true, source: 'owner confirmed in-game, 28 Oct 2026' },
+];
 
 // Areas a crawled source still calls upcoming but a patch has since opened.
 // These win over both sources until the exports are refreshed. Pyramid was
@@ -82,7 +90,7 @@ const MANUAL_OPEN = [
 // the newest extract after each patch.
 const CLIENT_NAVI =
   process.env.CLIENT_NAVI ??
-  'D:/Data grf roz/data_grf_comparison_20261001/extracted/changed/data/luafiles514/lua files/navigation/navi_map.lub';
+  'D:/Data grf roz/grf-2026-10-15/files/data/luafiles514/lua files/navigation/navi_map.lub';
 const naviOpen = fs.existsSync(CLIENT_NAVI)
   ? new Set([...fs.readFileSync(CLIENT_NAVI).toString('latin1').matchAll(/[a-z][a-z0-9_@]{2,20}/g)].map((m) => m[0]))
   : null;
@@ -102,7 +110,7 @@ let fromRoadmap = 0;
 for (const page of pages) {
   const code = page.slug;
   if (MANUAL_OPEN.some((row) => row.test.test(code))) continue;
-  if (naviOpen?.has(code)) {
+  if (naviOpen?.has(code) && !MANUAL_CLOSED.some((row) => row.beatsNavi && row.test.test(code))) {
     fromNavi += 1;
     continue;
   }
@@ -134,7 +142,7 @@ const out = {
   sources: {
     roadmap: 'docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)',
     rozerodb: `docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled ${pages[0]?.fetched_at?.slice(0, 10) ?? '?'})`,
-    clientNavi: naviOpen ? 'client navi_map.lub (1 Oct 2026 patch): a map listed there is open' : 'not available',
+    clientNavi: naviOpen ? 'client navi_map.lub (15 Oct 2026 client): a map listed there is open' : 'not available',
   },
   maps: Object.fromEntries(Object.entries(maps).sort(([a], [b]) => a.localeCompare(b))),
 };

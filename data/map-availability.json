@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-04",
+  "generated": "2026-10-28",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)",
-    "clientNavi": "client navi_map.lub (1 Oct 2026 patch): a map listed there is open"
+    "clientNavi": "client navi_map.lub (15 Oct 2026 client): a map listed there is open"
   },
   "maps": {
     "alde_dun01": {
@@ -412,6 +412,13 @@
       "sources": [
         "roadmap",
         "rozerodb"
+      ]
+    },
+    "gef_dun02": {
+      "when": "TBD",
+      "area": "Geffen Dungeon B3F",
+      "sources": [
+        "owner confirmed in-game, 28 Oct 2026"
       ]
     },
     "gl_c01_a": {
