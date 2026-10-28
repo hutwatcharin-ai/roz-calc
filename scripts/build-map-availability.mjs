@@ -61,6 +61,9 @@ const BANNER = /UPCOMING\s*·\s*([A-Z]{3}\s+\d{4})\s+Global\s*·\s*(.+?)\s+\d+\s
 const MANUAL_CLOSED = [
   { when: 'TBD', area: 'Pirate Cave', test: /^iz_d/, source: 'owner confirmed in-game, 14 Sep 2026' },
   { when: 'TBD', area: 'Geffen Dungeon B3F', test: /^gef_dun02$/, beatsNavi: true, source: 'owner confirmed in-game, 28 Oct 2026' },
+  // Open, but no monsters spawn in it yet (owner, 28 Oct 2026). For every
+  // list here that is the same as closed: nothing to farm or drop.
+  { when: 'TBD', area: 'Comodo West Cave: Karu (open, no monsters yet)', test: /^beach_dun$/, beatsNavi: true, source: 'owner confirmed in-game, 28 Oct 2026' },
 ];
 
 // Areas a crawled source still calls upcoming but a patch has since opened.
