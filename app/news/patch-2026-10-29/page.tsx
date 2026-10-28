@@ -183,6 +183,11 @@ export default async function Patch20261029Page() {
         <a className="phero__pill phero__pill--link" href="#woe">WoE EU เลื่อนเวลา ↓</a>
       </header>
 
+      <aside className="pnote" role="note" style={{ marginTop: 14 }}>
+        <strong>⚠ ข้อมูลอาจมีการเปลี่ยนแปลง</strong> หน้านี้สรุปจากประกาศก่อนปิดปรับปรุง ส่วนมอน การ์ด และชั้นต่างๆ มาจากข้อมูลเกมเดิม
+        เกมจริงหลังแพทช์อาจไม่ตรงทั้งหมด ถ้ามีประกาศรายละเอียดหรือเข้าเกมแล้วเจอของใหม่ จะมาอัปเดตหน้านี้
+      </aside>
+
       <Link href="/news/events-2026-10" className="pevents">
         <span className="pevents__tag">จบรอบนี้ · 29 ต.ค.</span>
         <span className="pevents__body">
