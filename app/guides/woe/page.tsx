@@ -151,7 +151,8 @@ export default async function WoeGuidePage() {
       {/* WoE schedule (owner, 1 Oct 2026: state it plainly, no source line).
           From prontera.info's raid planner: Sunday and Wednesday, SEA
           14:00-15:00 UTC and EU 19:00-20:00 UTC, the same both days; shown
-          here in Thai time. */}
+          here in Thai time. EU moved to 20:00-21:00 UTC from the 29 Oct 2026
+          maintenance (Discord notice, 23 Oct). */}
       <section className="card card--yellow" id="time" style={{ marginTop: 14 }}>
         <h2 className="section-title" style={{ marginTop: 0 }}>เวลากิลด์วอร์ (เวลาไทย)</h2>
         <div className="woe__times">
@@ -163,8 +164,8 @@ export default async function WoeGuidePage() {
           <div className="woe__time">
             <span className="woe__srv">เซิร์ฟ EU</span>
             <strong>วันพฤหัส และ วันจันทร์</strong>
-            <strong>02:00–03:00 น.</strong>
-            <span className="muted" style={{ fontSize: 13 }}>คือคืนวันพุธกับคืนวันอาทิตย์ตามเวลายุโรป</span>
+            <strong>03:00–04:00 น.</strong>
+            <span className="muted" style={{ fontSize: 13 }}>คือคืนวันพุธกับคืนวันอาทิตย์ตามเวลายุโรป · ตั้งแต่ 29 ต.ค. 2569 (เดิมตี 2–ตี 3) <Link href="/news/patch-2026-10-29#woe">ประกาศ</Link></span>
           </div>
         </div>
         <p style={{ margin: '10px 0 0', fontSize: 14 }}>
