@@ -173,15 +173,15 @@ export default function Events202611() {
 
         <h3 className="evh">เควสหลัก Visitors from Another World (ทำครั้งเดียว)</h3>
         <ol className="evsteps">
-          <li>คุย <b>Morroc Resident</b> (morocc 248/178) เรื่องรอยแยกที่โผล่ในเมือง</li>
-          <li>ถามคนที่เห็นเหตุการณ์ต่อ: <b>Villager</b> ร้านทางใต้ (morocc 202/101) → <b>Weapon Deliveryman</b> แถวร้านอาวุธ (morocc 259/65) → <b>Water Quality Inspector</b> กลางเมือง (morocc 170/139)</li>
-          <li>ไปดูคนแต่งตัวแปลก ๆ ที่ประตูเหนือ (morocc 129/270) เจอ <b>Jinpei</b> ที่หิวมาก พาไปหาของกินที่ร้านอาหาร (morocc 54/249)</li>
-          <li><b>Ryu</b> ได้ข่าวว่ามีคนชุดขาวออกไปทางประตูใต้ ตามไป (morocc 173/35) แล้วสืบมอนแปลก ๆ นอกเมือง</li>
+          <li>คุย <b>Morroc Resident</b> <NaviCopy cmd="/navi morocc 248/178" /> เรื่องรอยแยกที่โผล่ในเมือง</li>
+          <li>ถามคนที่เห็นเหตุการณ์ต่อ: <b>Villager</b> ร้านทางใต้ <NaviCopy cmd="/navi morocc 202/101" /> → <b>Weapon Deliveryman</b> แถวร้านอาวุธ <NaviCopy cmd="/navi morocc 259/65" /> → <b>Water Quality Inspector</b> กลางเมือง <NaviCopy cmd="/navi morocc 170/139" /></li>
+          <li>ไปดูคนแต่งตัวแปลก ๆ ที่ประตูเหนือ <NaviCopy cmd="/navi morocc 129/270" /> เจอ <b>Jinpei</b> ที่หิวมาก พาไปหาของกินที่ร้านอาหาร <NaviCopy cmd="/navi morocc 54/249" /></li>
+          <li><b>Ryu</b> ได้ข่าวว่ามีคนชุดขาวออกไปทางประตูใต้ ตามไป <NaviCopy cmd="/navi morocc 173/35" /> แล้วสืบมอนแปลก ๆ นอกเมือง</li>
           <li>ล่า Galaring และ Squid Bomb แถว Morocc <b>อย่างละประมาณ 3 ตัว</b> แล้วกลับเข้าเมือง</li>
-          <li><b>Ken</b> อยากรู้สถานการณ์ ไปถามทีมสำรวจ <b>[Emergency] Anomalous Rift Investigation Team</b> (morocc 196/261)</li>
-          <li>ไปดูรอยแยกกับยาม (morocc 296/175) เจอทหาร Galactor แอบดูอยู่ ตามไปจนเห็น <b>Berg Katse</b> คุยอยู่หน้ารอยแยกลับ (morocc 22/188)</li>
+          <li><b>Ken</b> อยากรู้สถานการณ์ ไปถามทีมสำรวจ <b>[Emergency] Anomalous Rift Investigation Team</b> <NaviCopy cmd="/navi morocc 196/261" /></li>
+          <li>ไปดูรอยแยกกับยาม <NaviCopy cmd="/navi morocc 296/175" /> เจอทหาร Galactor แอบดูอยู่ ตามไปจนเห็น <b>Berg Katse</b> คุยอยู่หน้ารอยแยกลับ <NaviCopy cmd="/navi morocc 22/188" /></li>
           <li>รอ Berg Katse ไปแล้วทำให้รอยแยกนิ่ง เข้าไปสำรวจข้างใน (เป็นดันเจี้ยนความทรงจำ ระบบนำทางอาจใช้ไม่ได้ข้างใน)</li>
-          <li>กลับไปคุย <b>Ken</b> (morocc 29/193) แล้วช่วยทีมสร้าง Mid Missile: ล่า Galaring และ Squid Bomb <b>อย่างละ 5 ตัว</b> เก็บ:</li>
+          <li>กลับไปคุย <b>Ken</b> <NaviCopy cmd="/navi morocc 29/193" /> แล้วช่วยทีมสร้าง Mid Missile: ล่า Galaring และ Squid Bomb <b>อย่างละ 5 ตัว</b> เก็บ:</li>
         </ol>
         <ul className="evmats">{[{ id: 1002381, name: 'Mid Powder', qty: 5 }].map(item)}</ul>
         <p className="evnote">Mid Powder ดรอปจากลูกน้อง Galactor (Galaring, Squid Bomb) · หายเมื่ออีเวนต์จบ</p>
@@ -215,12 +215,12 @@ export default function Events202611() {
           </div>
           <div className="evdaily">
             <img src={`${IMG}/mutant-galaring.png`} alt="" width={44} />
-            <div><b>Prepare Yourself, Berg Katse!</b><p className="evsmall">เข้ารอยแยกที่ Berg Katse ซ่อมไว้ (morocc 29/193) ล้ม Mutant Galaring</p></div>
+            <div><b>Prepare Yourself, Berg Katse!</b><p className="evsmall">เข้ารอยแยกที่ Berg Katse ซ่อมไว้ <NaviCopy cmd="/navi morocc 29/193" /> ล้ม Mutant Galaring</p></div>
             <span className="ev11-get">ปุ่ม ×2</span>
           </div>
           <div className="evdaily">
             <img src={`${IMG}/joe.png`} alt="" width={30} />
-            <div><b>Please, I&apos;m Begging You!</b><p className="evsmall">ตามหา Joe ที่หายไป · ขึ้นแบบสุ่มบางวัน (morocc 34/192)</p></div>
+            <div><b>Please, I&apos;m Begging You!</b><p className="evsmall">ตามหา Joe ที่หายไป · ขึ้นแบบสุ่มบางวัน <NaviCopy cmd="/navi morocc 34/192" /></p></div>
             <span className="ev11-get">ปุ่ม ×1</span>
           </div>
         </div>

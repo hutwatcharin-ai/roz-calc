@@ -416,7 +416,7 @@ export default async function Patch20261029Page() {
 
         <h3 className="evh">เควสอีเวนต์ Curse of the Clock Tower (กับ Molden)</h3>
         <ol className="evsteps">
-          <li>คุย <b>Clock Tower Clerk Molden</b> (aldebaran 136/132) รับหนังสือ Romero Speciale&apos;s Book</li>
+          <li>คุย <b>Clock Tower Clerk Molden</b> <NaviCopy cmd="/navi aldebaran 136/132" /> รับหนังสือ Romero Speciale&apos;s Book</li>
           <li>หนังสือบอกให้ไปหาวงเวทจุดทำพิธี 1 ใน 4 แบบ: ที่ได้ยินเสียงคลื่น · ที่มีแสงตะวันตกดินน่ากลัว · ที่มีกลิ่นหญ้าจาง ๆ · ที่รู้สึกพลังของราตรี</li>
           <li>เก็บของทำพิธีตามที่หนังสือสั่ง แต่ละอย่าง <b>10 ชิ้น</b>: คริสตัลสีเขียวทรงกลม · พืชสีขาวที่รักษาแผล · หน้าหนังสือที่มีอักษรโบราณ · เข็มนาฬิกา</li>
           <li>ทำได้วันละครั้ง รีเซ็ต 04:00 แล้วรับใหม่จาก Molden</li>

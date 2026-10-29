@@ -63,3 +63,4 @@
 .evnpc figcaption .navicopy span { white-space: nowrap; overflow-wrap: normal; }
 #quests .evnpcs { grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); }
 #quests .evnpc figcaption { min-width: 0; }
+.evsteps .navicopy { vertical-align: middle; margin: 2px 2px; }

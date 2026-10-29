@@ -33,3 +33,4 @@
 .evnpc figcaption .navicopy span { white-space: nowrap; overflow-wrap: normal; }
 #gatchaman .evnpcs { grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); }
 #gatchaman .evnpc figcaption { min-width: 0; }
+.evsteps .navicopy, .evsmall .navicopy { vertical-align: middle; margin: 2px 2px; }
