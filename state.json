@@ -1,6 +1,6 @@
 {
   "cursor": {
-    "1562409676228792371": "1565168547020144641"
+    "1562409676228792371": "1565258054818078794"
   },
   "posts": [
     {
@@ -74,6 +74,44 @@
       "kind": "official",
       "urgent": false,
       "at": "2026-10-29T01:01:01.035000+00:00",
+      "done": true,
+      "notice": true
+    },
+    {
+      "id": "1565230653505544264",
+      "file": "posts/2026-10-29-1565230653505544264.md",
+      "title": "[Community Event] Kumamon Photo Op Event Has Ended",
+      "kind": "official",
+      "urgent": false,
+      "at": "2026-10-29T05:07:48.375000+00:00",
+      "done": true,
+      "notice": true
+    },
+    {
+      "id": "1565238805118722169",
+      "file": "posts/2026-10-29-1565238805118722169.md",
+      "title": "[Collaboration Event] Science Ninja Team Gatchaman Arrives in Ragnarok Zero: Global! 🦅",
+      "kind": "official",
+      "urgent": false,
+      "at": "2026-10-29T05:40:11.871000+00:00",
+      "done": false
+    },
+    {
+      "id": "1565239336419467274",
+      "file": "posts/2026-10-29-1565239336419467274.md",
+      "title": "[Update Notice] New Mysteries, Legendary Heroes – October 29 Update!",
+      "kind": "official",
+      "urgent": true,
+      "at": "2026-10-29T05:42:18.543000+00:00",
+      "done": false
+    },
+    {
+      "id": "1565258054818078794",
+      "file": "posts/2026-10-29-1565258054818078794.md",
+      "title": "[Notice] Ragnarok Zero: Global Scheduled Maintenance Completed – 29th October 2026",
+      "kind": "official",
+      "urgent": false,
+      "at": "2026-10-29T06:56:41.357000+00:00",
       "done": true,
       "notice": true
     }
