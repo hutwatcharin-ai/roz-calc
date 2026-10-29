@@ -66,7 +66,7 @@ const COSTUMES_2 = ["Galactor's Leader", "Doctor's Urgent Transmission", 'Operat
 const GHOSTLY = [
   { name: 'Ghostring Tall Hat', where: 'หัวบน', note: 'หมวกทรงสูงลายปะผ้าแบบ Ghostring' },
   { name: "Fallen Bishop Hibram's Evil Spirit", where: 'ผ้าคลุม', note: 'วิญญาณร้ายของ Fallen Bishop ตัวพองเหมือนลูกโป่ง' },
-  { name: "Whisper's Blessing", where: 'ผ้าคลุม', note: 'Whisper เกาะหลัง' },
+  { name: "Whisper's Blessing", where: 'ผ้าคลุม', note: 'ผ้าคลุมที่มี Whisper สิง แต่ว่ากันว่าอวยพรคนใส่' },
   { name: 'Ghost Bat', where: 'หัวล่าง', note: 'ค้างคาวสายแวมไพร์' },
   { name: 'Enhanced Whisper Mask', where: 'หัวกลาง', note: 'หน้ากาก Whisper รุ่นแรงขึ้น' },
 ];
@@ -152,7 +152,7 @@ export default function Events202611Page() {
           <li>EXP +100% (x2) · ดรอปไอเทม +20% · ตายแล้วเสีย EXP น้อยลง 50%</li>
           <li>ได้เองทุกตัวละคร ไม่ต้องกดรับ</li>
           <li>ประกาศเขียนเวลาเป็น UTC+0 (ศุกร์ 00:00 ถึงอาทิตย์ 23:59) เว็บนี้บวก 7 ชั่วโมงเป็นเวลาไทย</li>
-          <li>รอบ 5 เลยวันจบอีเวนต์ Black Friday (ปิดปรับปรุง 23 พ.ย.) ตามที่ประกาศเขียนไว้ ประกาศบอกว่าตารางเปลี่ยนได้</li>
+          <li>ประกาศบอกว่าตารางและรายละเอียดเปลี่ยนได้โดยไม่แจ้งล่วงหน้า</li>
         </ul>
       </section>
 
@@ -219,7 +219,6 @@ export default function Events202611Page() {
             <strong> ค่าพวกนี้หายเมื่ออีเวนต์จบ</strong> เหลือแค่ค่าหลัก
           </li>
           <li>ขนนก 4 แบบหายเมื่ออีเวนต์จบ · คอสตูม Honorary Gatchaman อยู่ต่อ แต่ EXP +5% หายเมื่ออีเวนต์จบ</li>
-          <li>ทำเควสรายวันครบได้ปุ่มวันละ 5 อัน (6 อันวันที่เควสหา Joe ขึ้น) การ์ด 1 ใบจึงใช้ราว 10–11 วัน · อีเวนต์ยาว 4 สัปดาห์ เก็บได้ราว 2 ใบ</li>
         </ul>
 
         <h3 className="pxh">4. แพ็กเกจคอสตูมใน Kafra Shop (จำกัดบัญชีละ 5)</h3>
@@ -255,7 +254,7 @@ export default function Events202611Page() {
         <p className="muted pxp" style={{ fontSize: 13.5 }}>
           ประกาศขัดกันเอง: Scroll I เขียนว่าเลือก 1 จาก 6 แต่ลิสต์มา 5 ชิ้น · Scroll II เขียนว่า 1 จาก 2 แต่ลิสต์ 5 ชิ้น ·
           Galactor&apos;s Leader เป็นหัวบน+กลาง ส่วน Doctor&apos;s Urgent Transmission, Farewell Gatchaman! และ Move Out! เป็นหัวล่าง ·
-          Operation Firebird Footprint เป็นของเอ็นชานต์ช่องที่ 4 ของคอสตูมผ้าคลุม ประกาศไม่บอกผล · เช็กในเกมก่อนซื้อ
+          Operation Firebird Footprint เป็นของเอ็นชานต์ช่องที่ 4 ของคอสตูมผ้าคลุม ประกาศไม่บอกผล
         </p>
       </section>
 
@@ -267,7 +266,7 @@ export default function Events202611Page() {
         <div className="ev11-tablewrap">
           <table className="stat-table ev11-table">
             <thead>
-              <tr><th>เซิร์ฟ Asia (เรา)</th><th>ได้</th><th>ราคา</th></tr>
+              <tr><th>เซิร์ฟ Asia</th><th>ได้</th><th>ราคา</th></tr>
             </thead>
             <tbody>
               <tr><td><strong>Ghostly Scroll Box</strong></td><td>Ghostly Scroll ×1</td><td className="num">350 KP</td></tr>
@@ -290,14 +289,13 @@ export default function Events202611Page() {
           ))}
         </ul>
         <p className="muted pxp" style={{ fontSize: 13.5 }}>
-          หลังอีเวนต์จบ คอสตูมพวกนี้เปลี่ยนเป็นผูกบัญชี (ขายต่อไม่ได้) เพื่อให้เอ็นชานต์ได้ · ลองใส่ดูก่อนได้ที่{' '}
-          <Link href="/tools/dress-up">ห้องแต่งตัว</Link> เมื่อของเข้าฐานข้อมูลแล้ว
+          หลังอีเวนต์จบ คอสตูมพวกนี้เปลี่ยนเป็นผูกบัญชีได้ (ขายต่อไม่ได้) เพื่อให้เอ็นชานต์ได้ · Ghostly Scroll Box ขายใน Kafra Shop ตามช่วงเวลาขาย
         </p>
       </section>
 
       <aside className="pnote">
         <strong>ของในหน้านี้ยังไม่มีในฐานข้อมูลของเว็บ</strong> เพราะยังไม่ได้แกะไคลเอนต์แพตช์นี้ ชื่อของสะกดตามประกาศ
-        จะใส่ลิงก์ไอเทม รูป และมอน Galaring / Squid Bomb ตามมา · แพตช์เดียวกัน: <Link href="/news/patch-2026-10-29">Clock Tower</Link>
+        · แพตช์เดียวกัน: <Link href="/news/patch-2026-10-29">Clock Tower</Link>
       </aside>
 
       <p className="source-note" style={{ marginTop: 20 }}>
