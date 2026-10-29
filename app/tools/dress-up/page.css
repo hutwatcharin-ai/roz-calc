@@ -109,7 +109,9 @@
 .dress__poses .dress__chip { justify-content: center; }
 /* Last, so it wins over the rules above. Phone: the stage stays pinned at the top while the panel scrolls under it (layout A). */
 @media (max-width: 959px) {
-  .dress__stagewrap { position: sticky; top: 0; z-index: 5; padding: 6px; }
+  /* Above the search box (z-index 5, so its suggestions cover the item grid): it
+     scrolled over the pinned stage on phones (owner, 29 Oct 2026). */
+  .dress__stagewrap { position: sticky; top: 0; z-index: 10; padding: 6px; }
   .dress__stagewrap > .cfit__label { display: none; }
   .dress__stage { max-width: min(600px, 34vh); }
 }
