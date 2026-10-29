@@ -22,6 +22,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import NaviCopy from '@/components/NaviCopy';
+import { QuestMapFaces, QuestMapParts, QuestMapRoute } from './QuestMap';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const revalidate = 86400;
@@ -164,7 +165,7 @@ export default function Events202611() {
           <li><a href="#ghostly"><img src={ico(108434)} alt="" width={32} /><span>คอสตูมผี Ghostly</span><small>Kafra Shop ถึง 23 พ.ย.</small></a></li>
         </ul>
         <p className="muted evhero__src">
-          ขั้นตอนเควสและพิกัดมาจากบันทึกเควสกับไฟล์นำทางในไคลเอนต์แพทช์ 29 ต.ค. · รางวัล ราคา และวันจากประกาศทางการ · รูปจากไฟล์เกม
+          ขั้นตอนเควส พิกัด รางวัล ราคา และวันจากประกาศทางการ · รูปจากไฟล์เกม
         </p>
       </header>
 
@@ -177,28 +178,27 @@ export default function Events202611() {
           ช่วยพวกเขาสู้กองทัพ Galactor ของ Berg Katse และสร้าง Mid Missile เพื่อกลับบ้าน · เลเวล 10 ขึ้นไป
         </p>
         <div className="evnpcs">
-          <Npc img="ken" name="Ken" navi="morocc 29/193" />
-          <Npc img="joe" name="Joe (ร้านแลกของ)" navi="morocc 34/192" />
+          <Npc img="rift-receptionist" name="Rift Receptionist (เริ่มเควสหลัก)" navi="morocc 196/261" />
           <Npc img="jun" name="Jun (เควสรายวัน)" navi="morocc 32/194" />
-          <Npc img="jinpei" name="Jinpei" navi="morocc 129/270" w={56} />
-          <Npc img="ryu" name="Ryu" navi="morocc 173/35" />
-          <Npc img="berg-katse" name="Berg Katse" navi="morocc 22/188" w={70} />
+          <Npc img="ken" name="Ken (เควส Berg Katse)" navi="morocc 29/193" />
+          <Npc img="joe" name="Joe (ร้านแลกของ)" navi="morocc 34/192" />
         </div>
 
         <h3 className="evh">เควสหลัก Visitors from Another World (ทำครั้งเดียว)</h3>
+        <p className="qmap-try">แบบ A · เส้นทางตามลำดับ</p>
+        <QuestMapRoute />
+        <p className="qmap-try">แบบ B · หน้าตัวละคร</p>
+        <QuestMapFaces />
+        <p className="qmap-try">แบบ C · แบ่ง 3 ช่วงตามสี</p>
+        <QuestMapParts />
         <ol className="evsteps">
-          <li>คุย <b>Morroc Resident</b> <NaviCopy cmd="/navi morocc 248/178" /> เรื่องรอยแยกที่โผล่ในเมือง</li>
-          <li>ถามคนที่เห็นเหตุการณ์ต่อ: <b>Villager</b> ร้านทางใต้ <NaviCopy cmd="/navi morocc 202/101" /> → <b>Weapon Deliveryman</b> แถวร้านอาวุธ <NaviCopy cmd="/navi morocc 259/65" /> → <b>Water Quality Inspector</b> กลางเมือง <NaviCopy cmd="/navi morocc 170/139" /></li>
-          <li>ไปดูคนแต่งตัวแปลก ๆ ที่ประตูเหนือ <NaviCopy cmd="/navi morocc 129/270" /> เจอ <b>Jinpei</b> ที่หิวมาก พาไปหาของกินที่ร้านอาหาร <NaviCopy cmd="/navi morocc 54/249" /></li>
-          <li><b>Ryu</b> ได้ข่าวว่ามีคนชุดขาวออกไปทางประตูใต้ ตามไป <NaviCopy cmd="/navi morocc 173/35" /> แล้วสืบมอนแปลก ๆ นอกเมือง</li>
-          <li>ล่า Galaring และ Squid Bomb แถว Morocc <b>อย่างละประมาณ 3 ตัว</b> แล้วกลับเข้าเมือง</li>
-          <li><b>Ken</b> อยากรู้สถานการณ์ ไปถามทีมสำรวจ <b>[Emergency] Anomalous Rift Investigation Team</b> <NaviCopy cmd="/navi morocc 196/261" /></li>
-          <li>ไปดูรอยแยกกับยาม <NaviCopy cmd="/navi morocc 296/175" /> เจอทหาร Galactor แอบดูอยู่ ตามไปจนเห็น <b>Berg Katse</b> คุยอยู่หน้ารอยแยกลับ <NaviCopy cmd="/navi morocc 22/188" /></li>
-          <li>รอ Berg Katse ไปแล้วทำให้รอยแยกนิ่ง เข้าไปสำรวจข้างใน (เป็นดันเจี้ยนความทรงจำ ระบบนำทางอาจใช้ไม่ได้ข้างใน)</li>
-          <li>กลับไปคุย <b>Ken</b> <NaviCopy cmd="/navi morocc 29/193" /> แล้วช่วยทีมสร้าง Mid Missile: ล่า Galaring และ Squid Bomb <b>อย่างละ 5 ตัว</b> เก็บ:</li>
+          <li>คุย <b>[Urgent] Anomalous Rift Receptionist</b> <NaviCopy cmd="/navi morocc 196/261" /> สมัครเข้าทีมสำรวจรอยแยกที่โผล่กลางเมือง</li>
+          <li>เข้าทีมแล้วจะได้ฟังเรื่องรอยแยก คนแปลกหน้า และมอนแปลก ๆ · เดินตามเบาะแสที่ชาวเมือง Morocc บอก (กด Alt+U ดูว่าต้องไปหาใครต่อ)</li>
+          <li>ตามเบาะแสจนเจอทีม Gatchaman ทั้ง 5 คน พวกเขาอยากพบทีมสำรวจ พาไปหา</li>
+          <li>ช่วยไล่กองทัพ Galactor · <b>[Urgent] Anomalous Rift Investigator</b> จะไปรายงานทีมและเตรียมสร้าง Mid Missile จบเควส</li>
+          <li>จบแล้วทำเควสรายวันได้ที่ฐาน Gatchaman ฝั่งตะวันตกของเมือง (ข้างล่าง)</li>
         </ol>
-        <ul className="evmats">{[{ id: 1002381, name: 'Mid Powder', qty: 5 }].map(item)}</ul>
-        <p className="evnote">Mid Powder ดรอปจากลูกน้อง Galactor (Galaring, Squid Bomb) · หายเมื่ออีเวนต์จบ</p>
+        <p className="evnote">ประกาศทางการให้พิกัดแค่จุดเริ่มกับฐาน Gatchaman · คนที่ต้องไปถามระหว่างทาง เกมจะบอกในหน้าต่างเควส</p>
 
         <h3 className="evh">มอนของอีเวนต์</h3>
         <div className="ev11-mobs">
