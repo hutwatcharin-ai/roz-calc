@@ -84,7 +84,7 @@ public sealed class DiffRunner
             await File.WriteAllTextAsync(Path.Combine(snap, "removed.json"), JsonSerializer.Serialize(rem, J), ct);
             await File.WriteAllTextAsync(Path.Combine(snap, "summary.json"), JsonSerializer.Serialize(new { generatedAt = DateTimeOffset.Now, source = o.GrfPath, entries = cur.Count, added = add.Count, changed = change.Count, removed = rem.Count, unchanged = cur.Count - add.Count - change.Count }, J), ct);
             var report = Path.Combine(snap, "report.md");
-            await File.WriteAllTextAsync(report, Report(o, cur.Count, add, change, rem), Encoding.UTF8, ct);
+            await File.WriteAllTextAsync(report, Report($"`{o.GrfPath}`", cur.Count, add, change, rem), Encoding.UTF8, ct);
             AtomicWrite(Path.Combine(root, "latest.json"), JsonSerializer.Serialize(new { date = day, manifest = Path.Combine(snap, "manifest.jsonl") }, J));
             CleanupOldPayloads(root, snap, log);
             log?.Invoke($"Done: +{add.Count} ~{change.Count} -{rem.Count}");
@@ -114,6 +114,27 @@ public sealed class DiffRunner
         return x.ExitCode;
     }
 
+    // Snapshot folders that hold a manifest, oldest first (names are dates, so they sort).
+    public static List<string> Snapshots(string root) => !Directory.Exists(root) ? new() : Directory.EnumerateDirectories(root).Where(d => File.Exists(Path.Combine(d, "manifest.jsonl"))).Select(Path.GetFileName).OfType<string>().OrderBy(x => x, StringComparer.Ordinal).ToList();
+
+    // Compares two stored snapshots without touching the GRF; files are not copied, only listed.
+    public static DiffResult Compare(string root, string from, string to)
+    {
+        try
+        {
+            var a = LoadManifest(Path.Combine(root, from, "manifest.jsonl"));
+            var b = LoadManifest(Path.Combine(root, to, "manifest.jsonl"));
+            var add = b.Values.Where(x => !a.ContainsKey(x.Path)).ToList();
+            var change = b.Values.Where(x => a.TryGetValue(x.Path, out var old) && Differs(old, x)).ToList();
+            var rem = a.Values.Where(x => !b.ContainsKey(x.Path)).ToList();
+            var dir = Path.Combine(root, "compare"); Directory.CreateDirectory(dir);
+            var report = Path.Combine(dir, $"{from}_vs_{to}.md");
+            File.WriteAllText(report, Report($"snapshot `{from}` → `{to}`", b.Count, add, change, rem), Encoding.UTF8);
+            return new(true, add.Count, change.Count, rem.Count, report);
+        }
+        catch (Exception ex) { return new(false, 0, 0, 0, null, ex.Message); }
+    }
+
     const string Encrypted = "encrypted";
     static bool Differs(ManifestEntry old, ManifestEntry cur) => (old.ReadStatus == Encrypted) == (cur.ReadStatus == Encrypted) ? old.Sha256 != cur.Sha256 : old.Size != cur.Size;
     static async Task<string> Hash(string f, CancellationToken ct) { await using var s = File.OpenRead(f); using var h = IncrementalHash.CreateHash(HashAlgorithmName.SHA256); var b = new byte[1024 * 1024]; int n; while ((n = await s.ReadAsync(b, ct)) > 0) h.AppendData(b, 0, n); return Convert.ToHexString(h.GetHashAndReset()).ToLowerInvariant(); }
@@ -137,6 +158,9 @@ public sealed class DiffRunner
         using var d = JsonDocument.Parse(File.ReadAllText(latest));
         if (!d.RootElement.TryGetProperty("manifest", out var m)) return empty;
         var p = m.GetString(); if (string.IsNullOrWhiteSpace(p) || !File.Exists(p)) return empty;
+        return LoadManifest(p);
+    }
+    static Dictionary<string, ManifestEntry> LoadManifest(string p) {
         var r = new Dictionary<string, ManifestEntry>(StringComparer.OrdinalIgnoreCase);
         // Older snapshots were written indented, so one record spans several lines; split on top-level objects instead of lines.
         foreach (var obj in JsonObjects(File.ReadAllText(p))) { var e = JsonSerializer.Deserialize<ManifestEntry>(obj, J); if (e != null) r[e.Path] = e; }
@@ -154,5 +178,5 @@ public sealed class DiffRunner
         }
         if (depth != 0) throw new InvalidDataException("Baseline manifest ends inside an unclosed record");
     }
-    static string Report(Options o, int total, List<ManifestEntry> a, List<ManifestEntry> c, List<ManifestEntry> r) { static string Rows(IEnumerable<ManifestEntry> x) => string.Join(Environment.NewLine, x.OrderBy(e => e.Path).Select(e => $"- `{e.Path}` ({e.Size:N0} bytes, `{e.Sha256}`)")); return $"# GRF Weekly Diff\n\n- Source: `{o.GrfPath}`\n- Generated: `{DateTimeOffset.Now:O}`\n- Entries: {total:N0}\n\n| State | Count |\n|---|---:|\n| Added | {a.Count:N0} |\n| Changed | {c.Count:N0} |\n| Removed | {r.Count:N0} |\n\n## Added\n\n{Rows(a)}\n\n## Changed\n\n{Rows(c)}\n\n## Removed\n\n{Rows(r)}\n"; }
+    static string Report(string source, int total, List<ManifestEntry> a, List<ManifestEntry> c, List<ManifestEntry> r) { static string Rows(IEnumerable<ManifestEntry> x) => string.Join(Environment.NewLine, x.OrderBy(e => e.Path).Select(e => $"- `{e.Path}` ({e.Size:N0} bytes, `{e.Sha256}`)")); return $"# GRF Weekly Diff\n\n- Source: {source}\n- Generated: `{DateTimeOffset.Now:O}`\n- Entries: {total:N0}\n\n| State | Count |\n|---|---:|\n| Added | {a.Count:N0} |\n| Changed | {c.Count:N0} |\n| Removed | {r.Count:N0} |\n\n## Added\n\n{Rows(a)}\n\n## Changed\n\n{Rows(c)}\n\n## Removed\n\n{Rows(r)}\n"; }
 }

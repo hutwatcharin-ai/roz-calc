@@ -9,7 +9,18 @@ public partial class MainWindow : Window
     readonly Stopwatch timer = new();
     // Closing the window mid-run stops the extractor instead of leaving it running in the background.
     readonly CancellationTokenSource cts = new();
-    public MainWindow(string[] args) { InitializeComponent(); Closing += (_, _) => cts.Cancel(); if (args.Length > 0) { var o = Options.Parse(args); GrfPath.Text = o.GrfPath; OutputPath.Text = o.OutputRoot; } }
+    public MainWindow(string[] args) { InitializeComponent(); Closing += (_, _) => cts.Cancel(); if (args.Length > 0) { var o = Options.Parse(args); GrfPath.Text = o.GrfPath; OutputPath.Text = o.OutputRoot; } LoadSnapshots(); }
+    // Default pair: the two newest snapshots, so Compare shows the latest patch.
+    void LoadSnapshots() { var s = DiffRunner.Snapshots(OutputPath.Text.Trim()); FromBox.ItemsSource = s; ToBox.ItemsSource = s; FromBox.SelectedIndex = s.Count - 2; ToBox.SelectedIndex = s.Count - 1; }
+    void OutputPath_LostFocus(object s, RoutedEventArgs e) => LoadSnapshots();
+    void Compare_Click(object s, RoutedEventArgs e)
+    {
+        if (FromBox.SelectedItem is not string from || ToBox.SelectedItem is not string to || from == to) { Status.Text = "เลือก snapshot 2 อันที่ไม่ซ้ำกัน"; return; }
+        var r = DiffRunner.Compare(OutputPath.Text.Trim(), from, to);
+        Status.Text = r.Success ? $"{from} → {to}: +{r.Added} ~{r.Changed} -{r.Removed}" : "Failed";
+        Log.AppendText((r.Success ? $"Compare {from} → {to}: ใหม่ {r.Added:N0} · เปลี่ยน {r.Changed:N0} · หาย {r.Removed:N0}{Environment.NewLine}Report: {r.ReportPath}" : $"Compare failed: {r.Error}") + Environment.NewLine);
+        if (r.ReportPath != null) Process.Start(new ProcessStartInfo(r.ReportPath) { UseShellExecute = true });
+    }
     void BrowseGrf_Click(object s, RoutedEventArgs e) { var d = new OpenFileDialog { Filter = "GRF files (*.grf)|*.grf|All files (*.*)|*.*" }; if (d.ShowDialog() == true) GrfPath.Text = d.FileName; }
     void BrowseOutput_Click(object s, RoutedEventArgs e) { var d = new OpenFolderDialog(); if (d.ShowDialog() == true) OutputPath.Text = d.FolderName; }
     async void Run_Click(object s, RoutedEventArgs e)
@@ -23,7 +34,7 @@ public partial class MainWindow : Window
             timer.Stop(); Status.Text = r.Success ? $"Done: +{r.Added} ~{r.Changed} -{r.Removed}" : "Failed"; ProgressText.Text = r.Success ? "Completed" : (r.Error ?? "Failed"); ProgressCount.Text = timer.Elapsed.ToString(@"hh\:mm\:ss"); if (r.ReportPath != null) Log.AppendText($"Report: {r.ReportPath}{Environment.NewLine}");
         }
         catch (Exception ex) { timer.Stop(); Status.Text = "Failed"; ProgressText.Text = ex.Message; Log.AppendText(ex + Environment.NewLine); }
-        finally { Progress.Value = Status.Text == "Failed" ? Progress.Value : 100; RunButton.IsEnabled = true; TaskButton.IsEnabled = true; }
+        finally { Progress.Value = Status.Text == "Failed" ? Progress.Value : 100; RunButton.IsEnabled = true; TaskButton.IsEnabled = true; LoadSnapshots(); }
     }
     void Task_Click(object s, RoutedEventArgs e) { var exe = Environment.ProcessPath!; var t = new ProcessStartInfo("schtasks.exe") { UseShellExecute = false, CreateNoWindow = true }; foreach (var a in new[] { "/Create", "/F", "/SC", "WEEKLY", "/D", "SUN", "/TN", "ROZero GRF Weekly Diff", "/TR", $"\"{exe}\" --run --grf \"{GrfPath.Text}\" --output \"{OutputPath.Text}\"", "/ST", "03:00" }) t.ArgumentList.Add(a); using var p = Process.Start(t)!; p.WaitForExit(); MessageBox.Show(p.ExitCode == 0 ? "Weekly task created for Sunday 03:00." : "Could not create task. Run the app as administrator."); }
 }

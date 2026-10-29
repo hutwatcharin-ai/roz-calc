@@ -22,3 +22,7 @@ The run stops without writing a snapshot when another process has `data.grf` ope
 Each run writes a dated snapshot containing `manifest.jsonl`, `summary.json`, `removed.json`, `report.md`, and `added`/`changed` files. The `latest.json` pointer selects the baseline for the next run.
 
 The extractor uses a temporary `.staging` directory and streams SHA-256 hashing so the complete GRF is not retained as a second weekly copy.
+
+## Compare two stored snapshots
+
+The window's "เทียบ snapshot" row (or `GrfDiffTool.exe --compare 2026-10-15 2026-10-29`) compares any two snapshot folders by their manifests, without reading the GRF, and writes `compare/<from>_vs_<to>.md` under the snapshot folder.
