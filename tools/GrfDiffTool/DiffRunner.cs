@@ -27,12 +27,14 @@ public sealed class DiffRunner
         var root = Path.GetFullPath(o.OutputRoot);
         var snap = Path.Combine(root, day);
         var staging = Path.Combine(root, ".staging", run);
+        // Remove what an interrupted run left behind (each one holds a full extraction).
+        if (Directory.Exists(Path.Combine(root, ".staging"))) foreach (var old in Directory.EnumerateDirectories(Path.Combine(root, ".staging"))) { try { Directory.Delete(old, true); } catch { } }
         Directory.CreateDirectory(staging);
         try
         {
             progress?.Invoke(new("Extracting GRF", 0, -1));
             log?.Invoke($"Extracting with {o.ExtractorScript}");
-            var exit = await Extract(o, staging, ct, log);
+            var exit = await Extract(o, staging, ct, log, progress);
             if (exit != 0) throw new InvalidOperationException($"grf-extract.mjs exited with code {exit}");
             var data = Path.Combine(staging, "files");
             Directory.CreateDirectory(data);
@@ -86,15 +88,22 @@ public sealed class DiffRunner
         finally { try { if (Directory.Exists(staging)) Directory.Delete(staging, true); } catch { } }
     }
 
-    static async Task<int> Extract(Options o, string staging, CancellationToken ct, Action<string>? log)
+    static async Task<int> Extract(Options o, string staging, CancellationToken ct, Action<string>? log, Action<DiffProgress>? progress)
     {
         // GrfCL cannot open this client's GRF 0x300 ("Event Horizon"); grf-extract.mjs can.
         var p = new ProcessStartInfo("node") { WorkingDirectory = staging, UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true };
-        foreach (var a in new[] { o.ExtractorScript, o.GrfPath, staging, "--match", ".", "--raw-hash" }) p.ArgumentList.Add(a);
+        foreach (var a in new[] { o.ExtractorScript, o.GrfPath, staging, "--match", ".", "--raw-hash", "--progress" }) p.ArgumentList.Add(a);
         using var x = Process.Start(p) ?? throw new InvalidOperationException("Unable to start node");
-        var so = x.StandardOutput.ReadToEndAsync(); var se = x.StandardError.ReadToEndAsync();
-        await x.WaitForExitAsync(ct); var text = await so + await se;
-        foreach (var l in text.Split('\n', StringSplitOptions.RemoveEmptyEntries).TakeLast(10)) log?.Invoke(l.Trim());
+        using var kill = ct.Register(() => { try { x.Kill(true); } catch { } });
+        var se = x.StandardError.ReadToEndAsync();
+        string? l;
+        while ((l = await x.StandardOutput.ReadLineAsync()) != null)
+        {
+            if (l.StartsWith("{\"progress\"")) { using var d = JsonDocument.Parse(l); progress?.Invoke(new("Extracting GRF", d.RootElement.GetProperty("progress").GetInt32(), d.RootElement.GetProperty("total").GetInt32())); }
+            else if (l.Length > 0) log?.Invoke(l.Trim());
+        }
+        await x.WaitForExitAsync(ct);
+        foreach (var e in (await se).Split('\n', StringSplitOptions.RemoveEmptyEntries).TakeLast(10)) log?.Invoke(e.Trim());
         return x.ExitCode;
     }
 

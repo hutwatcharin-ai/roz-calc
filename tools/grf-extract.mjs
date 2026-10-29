@@ -8,7 +8,7 @@
 // cipher) entries are listed but not written; files the patch adds or
 // changes have so far all been flag 1, and older ones are in that extraction.
 //
-//   node tools/grf-extract.mjs <data.grf> <outDir> [--match <regex>] [--raw-hash]
+//   node tools/grf-extract.mjs <data.grf> <outDir> [--match <regex>] [--raw-hash] [--progress]
 //
 // --raw-hash adds rawSha256 (SHA-256 of the stored, still-encrypted bytes) to
 // skipped flag 2 entries, so a weekly diff can tell whether they changed.
@@ -28,6 +28,8 @@ const [grf, out, ...rest] = process.argv.slice(2);
 if (!grf || !out) throw new Error('usage: grf-extract.mjs <data.grf> <outDir> [--match <regex>]');
 const mi = rest.indexOf('--match');
 const rawHash = rest.includes('--raw-hash');
+// --progress prints {"progress":n,"total":m} lines while it works.
+const showProgress = rest.includes('--progress');
 const match = new RegExp(mi >= 0 ? rest[mi + 1] : '\\.(lub|lua|txt|csv|xml|bson|scp|json)$', 'i');
 
 const fd = openSync(grf, 'r');
@@ -36,6 +38,7 @@ const head = read(0, 46);
 const sig = head.subarray(0, 15).toString('latin1');
 const tableOffset = Number(head.readBigUInt64LE(30));
 const version = head.readUInt32LE(42);
+const total = head.readUInt32LE(38);
 if (version !== 0x300) throw new Error(`not GRF 0x300 (got 0x${version.toString(16)}, signature ${sig})`);
 const th = read(tableOffset + 46, 12);
 const zlen = th.readUInt32LE(4);
@@ -58,6 +61,7 @@ while (p < table.length) {
   const offset = Number(table.readBigUInt64LE(p + 13));
   p += 21;
   entries++;
+  if (showProgress && entries % 2000 === 0) console.log(JSON.stringify({ progress: entries, total }));
   const row = { name, size, compressed, flags, offset };
   if ((flags & 1) && match.test(name)) {
     // Flag 2 (mixed cipher) does not decode correctly yet: skipped, listed.
