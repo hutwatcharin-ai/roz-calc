@@ -56,15 +56,16 @@ export const metadata: Metadata = {
     'สรุปแพทช์ 29 ตุลาคม 2569 ของ Ragnarok Zero Global ภาษาไทย: ปิดเซิร์ฟ 08:00–14:00 น., ดันเจี้ยน Clock Tower มอนทุกชั้น พิกัด NPC เควสรายวันและเควสอีเวนต์ Curse of the Clock Tower อุปกรณ์ใหม่ 12 ชิ้นพร้อมผล วัตถุดิบ Hat Maker จากบอสใต้ดิน การ์ดที่จะหาได้ครั้งแรก, คอลแลบ Gatchaman, Black Friday EXP x2, คอสตูมผี และ WoE เซิร์ฟ EU เลื่อนเป็นตี 3',
 };
 
-const HIGHLIGHTS = [
-  { big: '8', title: 'ดันเจี้ยน Clock Tower', body: 'หอนาฬิกา Al De Baran ชั้นบน 4 ชั้น ใต้ดิน 4 ชั้น', href: '#tower', link: 'มอนแต่ละชั้น' },
-  { big: 'Q', title: 'เควสอีเวนต์', body: 'Curse of the Clock Tower คุยกับ Clerk Molden', href: '#npc', link: 'พิกัด NPC' },
-  { big: 'D', title: 'เควสรายวัน', body: 'Tower Keeper ต้อง Base Lv 70', href: '#npc', link: 'พิกัด NPC' },
-  { big: 'EQ', title: 'อุปกรณ์ใหม่ 12 ชิ้น', body: 'หมวกแลกที่ Hat Maker 2 ชิ้น ของจากหอนาฬิกา 10 ชิ้น', href: '#gear', link: 'ดูผลทุกชิ้น' },
-  { big: 'G', title: 'คอลแลบ Gatchaman', body: 'ถึง 26 พ.ย. เควสที่ Morocc แลกการ์ด', href: '/news/events-2026-11#gatchaman', link: 'วิธีทำ' },
-  { big: 'x2', title: 'Black Friday', body: 'EXP x2 ดรอป +20% ทุกเสาร์อาทิตย์ 5 รอบ', href: '/news/events-2026-11#exp', link: 'เวลาไทย' },
-  { big: '👻', title: 'คอสตูมผี', body: 'Ghostly Scroll สุ่มคอสตูม 5 แบบ', href: '/news/events-2026-11#ghostly', link: 'ดูของ' },
-  { big: '+1h', title: 'WoE เซิร์ฟ EU', body: 'เลื่อนเป็น 03:00–04:00 น. เวลาไทย', href: '#woe', link: 'ดูเวลา' },
+// The page's chapters in reading order; each tile jumps to one (owner,
+// 29 Oct 2026: related parts next to each other, no jumping around).
+const TOC = [
+  { href: '#tower', title: 'ไปหอนาฬิกา', body: 'ทางเข้า ก่อนเข้า มอนแต่ละชั้น' },
+  { href: '#quests', title: 'เควส', body: 'รายวัน Lv 70 · อีเวนต์ Curse of the Clock Tower' },
+  { href: '#gear', title: 'อุปกรณ์ใหม่', body: '10 ชิ้นจากหอนาฬิกา พร้อมผล' },
+  { href: '#hatmaker', title: 'ช่างหมวก Hat Maker', body: 'หมวก 2 ชิ้น วัตถุดิบ บอสใต้ดิน Gear' },
+  { href: '#cards', title: 'การ์ดและของดรอป', body: 'การ์ดใหม่ การ์ดคู่ ของติดดาว คอสตูม' },
+  { href: '#events', title: 'อีเวนต์', body: 'Gatchaman · Black Friday · คอสตูมผี' },
+  { href: '#times', title: 'เวลา', body: 'ปิดปรับปรุง · WoE EU' },
 ];
 
 const STAGES = [
@@ -105,11 +106,9 @@ const HAT_MATS: { boss: number; item: number; name: string; need: number }[] = [
 ];
 
 // From the official patch notes of 29 Oct 2026 (an image, read by hand).
-const NPCS = [
-  { name: 'ทางเข้าหอนาฬิกา', what: 'กลางเมือง Al De Baran', navi: 'aldebaran 139/131' },
-  { name: 'Tower Keeper', what: 'เควสรายวัน · Base Lv 70+', navi: 'aldebaran 143/132' },
-  { name: 'Clock Tower Clerk Molden', what: 'เควสอีเวนต์ Curse of the Clock Tower', navi: 'aldebaran 136/132' },
-  { name: 'Hat Maker', what: 'แลกหมวก Clock Tower', navi: 'aldebaran 130/140' },
+const QUEST_NPCS = [
+  { tag: 'เควสรายวัน', name: 'Tower Keeper', what: 'รับได้เฉพาะ Base Lv 70 ขึ้นไป', navi: 'aldebaran 143/132' },
+  { tag: 'เควสอีเวนต์', name: 'Clock Tower Clerk Molden', what: 'Curse of the Clock Tower', navi: 'aldebaran 136/132' },
 ];
 
 type Gear = { name: string; id?: number; kind: string; who: string; fx: string[] };
@@ -249,130 +248,28 @@ export default async function Patch20261029Page() {
         <p className="phero__date">อัปเดต 29 ตุลาคม 2569</p>
         <h1 className="phero__title">หอนาฬิกา Clock Tower มาแล้ว</h1>
         <p className="phero__lead">
-          ดันใหม่ที่ Al De Baran พร้อมเควสอีเวนต์ Curse of the Clock Tower เควสรายวัน และอุปกรณ์ใหม่ ·
-          คอลแลบ Gatchaman · Black Friday · คอสตูมธีมผี
+          ดันใหม่ที่ Al De Baran พร้อมเควสรายวัน เควสอีเวนต์ Curse of the Clock Tower อุปกรณ์ใหม่ และช่างหมวก ·
+          อีเวนต์ Gatchaman · Black Friday EXP x2 · คอสตูมผี
         </p>
-        <p className="phero__pill">ปิดปรับปรุง พฤหัส 29 ต.ค. 08:00–14:00 น. เวลาไทย</p>{' '}
-        <a className="phero__pill phero__pill--link" href="#cards">การ์ดใหม่ {cards.length} ใบ ↓</a>{' '}
-        <a className="phero__pill phero__pill--link" href="#woe">WoE EU เลื่อนเวลา ↓</a>
+        <p className="phero__pill">ปิดปรับปรุง พฤหัส 29 ต.ค. 08:00–14:00 น. เวลาไทย</p>
       </header>
 
       <aside className="pnote" role="note" style={{ marginTop: 14 }}>
-        <strong>⚠ ข้อมูลอาจมีการเปลี่ยนแปลง</strong> หน้านี้สรุปจากประกาศก่อนปิดปรับปรุง ส่วนมอน การ์ด และชั้นต่างๆ มาจากข้อมูลเกมเดิม
-        เกมจริงหลังแพทช์อาจไม่ตรงทั้งหมด ถ้ามีประกาศรายละเอียดหรือเข้าเกมแล้วเจอของใหม่ จะมาอัปเดตหน้านี้
+        <strong>⚠ ข้อมูลอาจมีการเปลี่ยนแปลง</strong> NPC อุปกรณ์ และเควสมาจากแพตช์โน้ต ส่วนมอนรายชั้น การ์ด และบอสมาจากข้อมูลเกม
+        แพตช์โน้ตไม่บอกว่าเปิดชั้นไหนบ้าง เข้าเกมแล้วเจออะไรเพิ่มจะมาอัปเดตหน้านี้
       </aside>
 
-      <Link href="/news/events-2026-10" className="pevents">
-        <span className="pevents__tag">จบรอบนี้ · 29 ต.ค.</span>
-        <span className="pevents__body">
-          <strong>กิจกรรมตุลาคมจบก่อนปิดปรับปรุง แลกของให้ทัน</strong>
-          <small>Baphomet Cult · The Legend of Amon Ra · Kumamon (RO Lite × ROZ ยังอยู่ถึง 1 พ.ย.)</small>
-        </span>
-        <span className="pevents__npcs" aria-hidden="true">
-          <img src="/images/events/2026-10/raymond.png" alt="" width={34} />
-          <img src="/images/events/2026-10/amon-ra.png" alt="" width={50} />
-          <img src="/images/events/2026-10/kumamon.png" alt="" width={40} />
-        </span>
-        <span className="pevents__go" aria-hidden="true">▶</span>
-      </Link>
-
-      <section className="phl" aria-label="สรุปแพทช์">
-        {HIGHLIGHTS.map((h) => (
-          <article key={h.title} className="phl__tile">
-            <p className="phl__big">{h.big}</p>
-            <h2 className="phl__title">{h.title}</h2>
-            <p className="phl__body">{h.body}</p>
-            {h.href && (
-              h.href.startsWith('#') ? <a className="phl__link" href={h.href}>{h.link} →</a> : <Link className="phl__link" href={h.href}>{h.link} →</Link>
-            )}
-          </article>
+      <nav className="ct-toc" aria-label="ในหน้านี้">
+        {TOC.map((t, i) => (
+          <a key={t.href} href={t.href} className="ct-toc__item">
+            <span className="ct-toc__n">{i + 1}</span>
+            <span>
+              <strong>{t.title}</strong>
+              <small>{t.body}</small>
+            </span>
+          </a>
         ))}
-      </section>
-
-      <section className="card card--cyan" id="npc" style={{ marginTop: 30, scrollMarginTop: 90 }}>
-        <h2 className="section-title">NPC ที่ Al De Baran</h2>
-        <div className="ct-npcs">
-          {NPCS.map((n) => (
-            <div key={n.name} className="ct-npc">
-              <strong>{n.name}</strong>
-              <span className="muted">{n.what}</span>
-              <NaviCopy cmd={`/navi ${n.navi}`} />
-            </div>
-          ))}
-        </div>
-        <p className="muted" style={{ marginTop: 10, fontSize: 14 }}>
-          เควสรายวันรับได้เฉพาะ Base Lv 70 ขึ้นไป · แพตช์โน้ตไม่บอกขั้นตอนเควสและรางวัล
-        </p>
-      </section>
-
-      <section id="gear" style={{ marginTop: 34, scrollMarginTop: 90 }}>
-        <h2 className="section-title">อุปกรณ์ใหม่</h2>
-        <h3 className="pxh">แลกที่ Hat Maker</h3>
-        <ul className="ct-gear">{HAT_MAKER.map(gearRow)}</ul>
-
-        <div className="ct-recipe" id="hatmaker">
-          <p className="ct-recipe__title">ของที่ต้องใช้ต่อหมวก 1 ชิ้น (สองชิ้นใช้ชุดเดียวกัน)</p>
-          <ul className="ct-mats">
-            {HAT_MATS.map((m) => (
-              <li key={m.item}>
-                <Link href={`/database/items/${m.item}`} className="ct-mat">
-                  <img src={`/images/items/${m.item}.gif`} alt="" width={24} height={24} loading="lazy" />
-                  <span>{m.name}</span>
-                  <b>×{m.need}</b>
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href="/database/items/25430" className="ct-mat">
-                <img src="/images/items/25430.gif" alt="" width={24} height={24} loading="lazy" />
-                <span>Mithril</span>
-                <b>×10</b>
-              </Link>
-            </li>
-          </ul>
-          <p className="muted" style={{ margin: '8px 0 0', fontSize: 13.5 }}>
-            สูตรจากข้อมูลเควสของ Hat Maker (/navi aldebaran 130/140 ตรงกับแพตช์โน้ต) แพตช์โน้ตไม่ได้เขียนวัตถุดิบ · ยังไม่ได้เช็กในเกม
-          </p>
-        </div>
-
-        <h3 className="pxh" id="bosses" style={{ scrollMarginTop: 90 }}>บอสชั้นใต้ดิน 5 ตัว: ที่มาของวัตถุดิบ Hat Maker</h3>
-        <p className="muted pxp" style={{ fontSize: 14 }}>
-          วัตถุดิบ 5 อย่างข้างบนดรอปจากบอสตัวละอย่าง Lv 122–126 ชั้นละตัวในหอนาฬิกาใต้ดิน ·
-          ข้อมูลไม่มีจำนวนเกิดและเวลาเกิด แพตช์โน้ตไม่พูดถึงบอสพวกนี้
-        </p>
-        <ul className="pcards ct-cards">
-          {HAT_MATS.filter((m) => monById.has(m.boss)).map((mat) => {
-            const m = monById.get(mat.boss)!;
-            const card = bossCards.get(mat.boss);
-            const floor = STAGES[1].labels[STAGES[1].codes.findIndex((c) => spawns.some((s) => s.map_code === c && s.monsters?.id === mat.boss))];
-            return (
-              <li key={mat.boss}>
-                <Link href={`/database/monsters/${mat.boss}`} className="pcard">
-                  <img src={`/images/monsters/${mat.boss}.gif`} alt="" className="pcard__mob" loading="lazy" />
-                  <span className="pcard__name">{monsterLabel(mat.boss, m.name_en)}</span>
-                  <span className="pcard__from">Lv {m.level}{floor ? ` · ${floor}` : ''} · ธาตุ {th(ELEMENT_TH, m.element)}</span>
-                  <span className="pcard__fx">ดรอป <strong>{mat.name}</strong> (หมวกละ {mat.need}){card ? ` · ${card.name_en}: ${card.description_th ?? '—'}` : ''}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        <h3 className="pxh">ของจาก Clock Tower</h3>
-        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment ไม่บอกว่าดรอปจากมอนตัวไหน</p>
-        <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
-        <h3 className="pxh">คอสตูมธีมหอนาฬิกาในไฟล์เกม</h3>
-        <p className="muted pxp" style={{ fontSize: 14 }}>
-          ไฟล์เกมหลังแพตช์มีคอสตูมใหม่ที่หน้าตามาจากมอนในหอนาฬิกา แพตช์โน้ตไม่ได้พูดถึง ยังไม่รู้ว่าได้จากไหน
-        </p>
-        <ul className="ct-costumes">
-          {CT_COSTUMES.map((c) => <li key={c.name}><strong>{c.name}</strong> <span className="muted">{c.where}</span></li>)}
-        </ul>
-        <h3 className="pxh">Clock Tower Gear อัปเกรดหมวก</h3>
-        <p className="muted pxp" style={{ fontSize: 14, lineHeight: 1.65 }}>
-          ใช้อัปเกรดหมวก 4 ชิ้น: Clock Tower Manager Headphones, Pocket Watch Ornament, Clock Casket, Black Witch Hat
-          ให้ได้ความสามารถเพิ่ม · <strong>ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · หนัก 1 · แพตช์โน้ตและไฟล์เกมไม่บอกว่าได้อะไรเพิ่มและหา Gear จากไหน
-        </p>
-      </section>
+      </nav>
 
       {error && (
         <p className="filterstate" role="alert" style={{ marginTop: 14 }}>
@@ -380,31 +277,37 @@ export default async function Patch20261029Page() {
         </p>
       )}
 
-      {levels.length > 0 && (
-        <section style={{ marginTop: 30 }}>
-          <h2 className="section-title">ก่อนเข้าหอนาฬิกา</h2>
-          <ul className="ct-facts">
-            <li><strong>มอนเลเวล {Math.min(...levels)}–{Math.max(...levels)}</strong>สูงกว่าเพดาน 70 เกือบทุกตัว เกมนี้ตีมอนเลเวลสูงกว่าได้ EXP เต็ม</li>
-            <li><strong>ตีก่อน {aggro} จาก {kinds} ชนิด</strong>เดินเข้าไปโดนรุมได้ง่าย พกยาและปีกแมลงวันไว้</li>
-            {byStage.map((s) => {
-              const mobs = s.floors.flat();
-              return (
-                <li key={s.key}>
-                  <strong>{s.th}</strong>
-                  ส่วนใหญ่ธาตุ {th(ELEMENT_TH, mostly(mobs, 'element'))} เผ่า {th(RACE_TH, mostly(mobs, 'race'))}
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      )}
+      {/* 1. The dungeon: how to get in, what to expect, every floor. */}
+      <section id="tower" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">1</span>ไปหอนาฬิกา</h2>
+        <div className="ct-where">
+          <span><strong>ทางเข้า</strong> กลางเมือง Al De Baran</span>
+          <NaviCopy cmd="/navi aldebaran 139/131" />
+        </div>
 
-      <section id="tower" style={{ marginTop: 34, scrollMarginTop: 90 }}>
-        <h2 className="section-title">Clock Tower เจออะไรบ้าง</h2>
-        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
-          แพตช์โน้ตไม่บอกว่าเปิดชั้นไหนบ้าง ข้างล่างคือมอนทุกชั้นตามข้อมูลเกม · เรียงจากที่เกิดเยอะสุด · กดรูปมอนดูของดรอป
+        {levels.length > 0 && (
+          <>
+            <h3 className="pxh">ก่อนเข้า</h3>
+            <ul className="ct-facts">
+              <li><strong>มอนเลเวล {Math.min(...levels)}–{Math.max(...levels)}</strong>สูงกว่าเพดาน 70 เกือบทุกตัว เกมนี้ตีมอนเลเวลสูงกว่าได้ EXP เต็ม</li>
+              <li><strong>ตีก่อน {aggro} จาก {kinds} ชนิด</strong>เดินเข้าไปโดนรุมได้ง่าย พกยาและปีกแมลงวันไว้</li>
+              {byStage.map((s) => {
+                const mobs = s.floors.flat();
+                return (
+                  <li key={s.key}>
+                    <strong>{s.th}</strong>
+                    ส่วนใหญ่ธาตุ {th(ELEMENT_TH, mostly(mobs, 'element'))} เผ่า {th(RACE_TH, mostly(mobs, 'race'))}
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
+
+        <h3 className="pxh">มอนแต่ละชั้น</h3>
+        <p className="muted pxp" style={{ fontSize: 14 }}>
+          ตามข้อมูลเกม เรียงจากที่เกิดเยอะสุด · กดรูปมอนดูของดรอป · บอส Lv 122–126 ของชั้นใต้ดินอยู่ในหัวข้อ 4
         </p>
-
         {byStage.map((s) => {
           const pic = mapImage(s.codes[0]);
           return (
@@ -453,13 +356,104 @@ export default async function Patch20261029Page() {
         })}
       </section>
 
-      <section id="cards" style={{ marginTop: 34, scrollMarginTop: 90 }}>
-        <h2 className="section-title">สิ่งที่ประกาศไม่ได้บอก</h2>
-        <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
-          มอนในหอนาฬิกาก่อนแพทช์นี้ไม่มีเกิดที่แมพไหนที่เปิดอยู่ ของข้างล่างจึงเพิ่งจะหาได้ ถ้าชั้นนั้นเปิด
+      {/* 2. Quests: the two quest NPCs, side by side. */}
+      <section id="quests" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">2</span>เควส</h2>
+        <div className="ct-npcs">
+          {QUEST_NPCS.map((n) => (
+            <div key={n.name} className="ct-npc">
+              <span className="ct-npc__tag">{n.tag}</span>
+              <strong>{n.name}</strong>
+              <span className="muted">{n.what}</span>
+              <NaviCopy cmd={`/navi ${n.navi}`} />
+            </div>
+          ))}
+        </div>
+        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตไม่บอกขั้นตอนเควสและรางวัล</p>
+      </section>
+
+      {/* 3. The ten new pieces of equipment. */}
+      <section id="gear" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">3</span>อุปกรณ์ใหม่จากหอนาฬิกา</h2>
+        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment ไม่บอกว่าดรอปจากมอนตัวไหน</p>
+        <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
+      </section>
+
+      {/* 4. Hat Maker: the two hats, what they cost, who drops it, then the
+          Gear that upgrades them. One chain, top to bottom. */}
+      <section id="hatmaker" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">4</span>ช่างหมวก Hat Maker</h2>
+        <div className="ct-where">
+          <span><strong>Hat Maker</strong> ที่ Al De Baran</span>
+          <NaviCopy cmd="/navi aldebaran 130/140" />
+        </div>
+
+        <h3 className="pxh">หมวกที่แลกได้</h3>
+        <ul className="ct-gear">{HAT_MAKER.map(gearRow)}</ul>
+
+        <div className="ct-recipe">
+          <p className="ct-recipe__title">ของที่ต้องใช้ต่อหมวก 1 ชิ้น (สองชิ้นใช้ชุดเดียวกัน)</p>
+          <ul className="ct-mats">
+            {HAT_MATS.map((m) => (
+              <li key={m.item}>
+                <Link href={`/database/items/${m.item}`} className="ct-mat">
+                  <img src={`/images/items/${m.item}.gif`} alt="" width={24} height={24} loading="lazy" />
+                  <span>{m.name}</span>
+                  <b>×{m.need}</b>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/database/items/25430" className="ct-mat">
+                <img src="/images/items/25430.gif" alt="" width={24} height={24} loading="lazy" />
+                <span>Mithril</span>
+                <b>×10</b>
+              </Link>
+            </li>
+          </ul>
+          <p className="muted" style={{ margin: '8px 0 0', fontSize: 13.5 }}>
+            สูตรจากข้อมูลเควสของ Hat Maker แพตช์โน้ตไม่ได้เขียนวัตถุดิบ · ยังไม่ได้เช็กในเกม
+          </p>
+        </div>
+
+        <h3 className="pxh" id="bosses" style={{ scrollMarginTop: 90 }}>วัตถุดิบดรอปจากบอสชั้นใต้ดิน</h3>
+        <p className="muted pxp" style={{ fontSize: 14 }}>
+          บอส Lv 122–126 ตัวละอย่าง ชั้นละตัว · ข้อมูลไม่มีจำนวนเกิดและเวลาเกิด แพตช์โน้ตไม่พูดถึงบอสพวกนี้
+        </p>
+        <ul className="pcards ct-cards">
+          {HAT_MATS.filter((m) => monById.has(m.boss)).map((mat) => {
+            const m = monById.get(mat.boss)!;
+            const card = bossCards.get(mat.boss);
+            const floor = STAGES[1].labels[STAGES[1].codes.findIndex((c) => spawns.some((s) => s.map_code === c && s.monsters?.id === mat.boss))];
+            return (
+              <li key={mat.boss}>
+                <Link href={`/database/monsters/${mat.boss}`} className="pcard">
+                  <img src={`/images/monsters/${mat.boss}.gif`} alt="" className="pcard__mob" loading="lazy" />
+                  <span className="pcard__name">{monsterLabel(mat.boss, m.name_en)}</span>
+                  <span className="pcard__from">Lv {m.level}{floor ? ` · ${floor}` : ''} · ธาตุ {th(ELEMENT_TH, m.element)}</span>
+                  <span className="ct-drop">ดรอป {mat.name} · หมวกละ {mat.need}</span>
+                  {card && <span className="pcard__fx">{card.name_en}: {card.description_th ?? '—'}</span>}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <h3 className="pxh">Clock Tower Gear อัปเกรดหมวก</h3>
+        <p className="muted pxp" style={{ fontSize: 14, lineHeight: 1.65 }}>
+          ใช้อัปเกรดหมวก 4 ชิ้น: 2 ชิ้นจาก Hat Maker ข้างบน กับ Clock Casket และ Black Witch Hat จากหัวข้อ 3 ให้ได้ความสามารถเพิ่ม ·
+          <strong> ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · หนัก 1 · แพตช์โน้ตและไฟล์เกมไม่บอกว่าได้อะไรเพิ่มและหา Gear จากไหน
+        </p>
+      </section>
+
+      {/* 5. Cards and drops: everything the tower's monsters newly give. */}
+      <section id="cards" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">5</span>การ์ดและของดรอป</h2>
+        <p className="muted pxp" style={{ fontSize: 14 }}>
+          มอนในหอนาฬิกาก่อนแพตช์นี้ไม่มีเกิดที่แมพไหนที่เปิดอยู่ ของข้างล่างจึงเพิ่งจะหาได้ ถ้าชั้นนั้นเปิด
         </p>
 
-        <h3 className="pxh">การ์ดที่จะหาได้ครั้งแรก</h3>
+        <h3 className="pxh">การ์ดที่จะหาได้ครั้งแรก {cards.length} ใบ</h3>
         <ul className="pcards ct-cards">
           {cards.map((c) => {
             const m = monById.get(c.monster_id);
@@ -477,6 +471,15 @@ export default async function Patch20261029Page() {
             );
           })}
         </ul>
+
+        {sets.length > 0 && (
+          <>
+            <h3 className="pxh">การ์ดคู่ที่ใช้การ์ดจากหอนาฬิกา</h3>
+            <div className="isetgrid">
+              {sets.map((s) => <ItemSetCard key={s.name} set={s} />)}
+            </div>
+          </>
+        )}
 
         {stars.length > 0 && (
           <>
@@ -500,55 +503,87 @@ export default async function Patch20261029Page() {
           </>
         )}
 
-        {sets.length > 0 && (
-          <>
-            <h3 className="pxh">การ์ดคู่ที่ใช้การ์ดจากหอนาฬิกา</h3>
-            <div className="isetgrid">
-              {sets.map((s) => <ItemSetCard key={s.name} set={s} />)}
-            </div>
-          </>
-        )}
+        <h3 className="pxh">คอสตูมธีมหอนาฬิกาในไฟล์เกม</h3>
+        <p className="muted pxp" style={{ fontSize: 14 }}>
+          ไฟล์เกมหลังแพตช์มีคอสตูมใหม่ที่หน้าตามาจากมอนในหอนาฬิกา แพตช์โน้ตไม่ได้พูดถึง ยังไม่รู้ว่าได้จากไหน
+        </p>
+        <ul className="ct-costumes">
+          {CT_COSTUMES.map((c) => <li key={c.name}><strong>{c.name}</strong> <span className="muted">{c.where}</span></li>)}
+        </ul>
       </section>
 
-      <section className="card card--yellow" id="maint" style={{ marginTop: 34 }}>
-        <h2 className="section-title">ปิดปรับปรุงเมื่อไหร่ (เวลาไทย)</h2>
-        <table className="stat-table ct-times">
-          <tbody>
-            <tr><td>วันที่</td><td className="num">พฤหัส 29 ต.ค. 2569</td></tr>
-            <tr><td>เริ่มปิด</td><td className="num">08:00 น.</td></tr>
-            <tr><td>เปิดเซิร์ฟ</td><td className="num">14:00 น. (ปิด 6 ชั่วโมง)</td></tr>
-          </tbody>
-        </table>
-        <p className="muted" style={{ marginTop: 8 }}>
-          เวลาเปิดจากประกาศเริ่มปิดปรับปรุงเช้า 29 ต.ค. อาจเลื่อนได้ · ออกจากเกมก่อนปิด · ของใน Kafra Shop ที่ขายอยู่อาจหมดรอบหลังปิดปรับปรุง ใครจะซื้อให้ดูวันหมดเขตก่อน
-        </p>
+      {/* 6. The other events of this patch, and the ones it closes. */}
+      <section id="events" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">6</span>อีเวนต์ที่มากับแพตช์นี้</h2>
+        <div className="ct-evs">
+          <Link href="/news/events-2026-11#gatchaman" className="ct-ev">
+            <strong>คอลแลบ Gatchaman</strong>
+            <span>ถึงปิดปรับปรุง 26 พ.ย. · เควสที่ Morocc แลกการ์ดและคอสตูม</span>
+          </Link>
+          <Link href="/news/events-2026-11#exp" className="ct-ev">
+            <strong>Black Friday EXP x2</strong>
+            <span>ทุกเสาร์อาทิตย์ 5 รอบ ดรอป +20% · รอบแรกศุกร์ 30 ต.ค. 07:00 น.</span>
+          </Link>
+          <Link href="/news/events-2026-11#ghostly" className="ct-ev">
+            <strong>คอสตูมผี Ghostly</strong>
+            <span>Ghostly Scroll ใน Kafra Shop สุ่มคอสตูม 5 แบบ</span>
+          </Link>
+        </div>
+        <Link href="/news/events-2026-10" className="pevents" style={{ marginTop: 12 }}>
+          <span className="pevents__tag">จบแล้ว · 29 ต.ค.</span>
+          <span className="pevents__body">
+            <strong>กิจกรรมตุลาคมจบตอนปิดปรับปรุงนี้</strong>
+            <small>Baphomet Cult · The Legend of Amon Ra · Kumamon (RO Lite × ROZ ยังอยู่ถึง 1 พ.ย.)</small>
+          </span>
+          <span className="pevents__go" aria-hidden="true">▶</span>
+        </Link>
       </section>
 
-      <section className="card" id="woe" style={{ marginTop: 14, scrollMarginTop: 90 }}>
-        <h2 className="section-title">WoE เซิร์ฟ EU เลื่อนช้าลง 1 ชั่วโมง</h2>
-        <table className="stat-table ct-times">
-          <tbody>
-            <tr><td>เซิร์ฟ</td><td className="num">Skadi (EU)</td></tr>
-            <tr><td>เดิม (เวลาไทย)</td><td className="num">02:00–03:00 น.</td></tr>
-            <tr><td>ใหม่ (เวลาไทย)</td><td className="num">03:00–04:00 น.</td></tr>
-            <tr><td>วัน</td><td className="num">พฤหัส และ จันทร์</td></tr>
-          </tbody>
-        </table>
-        <p className="muted" style={{ marginTop: 8 }}>
-          เพราะยุโรปเปลี่ยนเวลาฤดูหนาว เริ่มรอบแรกหลังปิดปรับปรุง 29 ต.ค. · ประกาศเป็น 20:00–21:00 UTC คืนวันพุธกับคืนวันอาทิตย์ ·
-          เซิร์ฟ SEA (Odin, Loki) เวลาเดิม 21:00–22:00 น. · <Link href="/guides/woe#time">ไกด์ WoE</Link>
-        </p>
+      {/* 7. Times: the maintenance and the WoE EU move. */}
+      <section id="times" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">7</span>เวลา (เวลาไทย)</h2>
+        <div className="ct-two">
+          <div className="card card--yellow" id="maint">
+            <h3 className="pxh" style={{ marginTop: 0 }}>ปิดปรับปรุง</h3>
+            <table className="stat-table ct-times">
+              <tbody>
+                <tr><td>วันที่</td><td className="num">พฤหัส 29 ต.ค. 2569</td></tr>
+                <tr><td>เริ่มปิด</td><td className="num">08:00 น.</td></tr>
+                <tr><td>เปิดเซิร์ฟ</td><td className="num">14:00 น. (6 ชั่วโมง)</td></tr>
+              </tbody>
+            </table>
+            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
+              เวลาอาจเลื่อนได้ · ของใน Kafra Shop ที่ขายอยู่อาจหมดรอบหลังปิดปรับปรุง
+            </p>
+          </div>
+          <div className="card" id="woe">
+            <h3 className="pxh" style={{ marginTop: 0 }}>WoE เซิร์ฟ EU ช้าลง 1 ชั่วโมง</h3>
+            <table className="stat-table ct-times">
+              <tbody>
+                <tr><td>เซิร์ฟ</td><td className="num">Skadi (EU)</td></tr>
+                <tr><td>เดิม</td><td className="num">02:00–03:00 น.</td></tr>
+                <tr><td>ใหม่</td><td className="num">03:00–04:00 น.</td></tr>
+                <tr><td>วัน</td><td className="num">พฤหัส และ จันทร์</td></tr>
+              </tbody>
+            </table>
+            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
+              เพราะยุโรปเปลี่ยนเวลาฤดูหนาว · ประกาศเป็น 20:00–21:00 UTC คืนวันพุธกับคืนวันอาทิตย์ ·
+              เซิร์ฟ SEA (Odin, Loki) เวลาเดิม 21:00–22:00 น. · <Link href="/guides/woe#time">ไกด์ WoE</Link>
+            </p>
+          </div>
+        </div>
       </section>
 
       <aside className="pnote">
-        <strong>ยังไม่รู้</strong> ชั้นไหนเปิดบ้าง ขั้นตอนเควสอีเวนต์ทีละขั้น และอุปกรณ์ใหม่ดรอปจากมอนตัวไหน (แพตช์โน้ตไม่บอก) จะเติมเมื่อเข้าเกม ·{' '}
+        <strong>ยังไม่รู้</strong> ชั้นไหนเปิดบ้าง ขั้นตอนเควสทีละขั้น อุปกรณ์ใหม่ดรอปจากมอนตัวไหน และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
         ตีไหวไหมดูที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
       </aside>
 
       <p className="source-note" style={{ marginTop: 20 }}>
         <strong>ที่มา:</strong> แพตช์โน้ตทางการ roz.mygnjoy.com &ldquo;The Clock Strikes, A New Adventure Begins – October 29 Update&rdquo; (29 ต.ค. 2569) ·
         ประกาศ Discord ทางการ Ragnarok Zero: Global &ldquo;Global Scheduled Maintenance Reminder – 29th October, 2026&rdquo; (28 ต.ค. 2569)
-        และ &ldquo;War of Emperium EU Schedule Adjustment&rdquo; (23 ต.ค. 2569) · มอน การ์ด และจุดเกิดจากฐานข้อมูลของเว็บนี้ · หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
+        และ &ldquo;War of Emperium EU Schedule Adjustment&rdquo; (23 ต.ค. 2569) · ผลของ Safety Boots, น้ำหนัก และคอสตูมจากไฟล์เกมหลังแพตช์ ·
+        สูตร Hat Maker จากข้อมูลเควส · มอน การ์ด และจุดเกิดจากฐานข้อมูลของเว็บนี้ · หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
       </p>
     </main>
   );
