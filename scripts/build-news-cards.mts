@@ -24,8 +24,8 @@ const EXTRA: Record<string, NewsCardExtra> = {
   // MVP Raid Amon Ra and Baphomet, the GM event's Marc.
   'patch-2026-10-15': { cast: ['/images/monsters/1511.gif', '/images/monsters/1039.gif', '/images/monsters/1045.gif'] },
   'events-2026-11': { blurb: 'Gatchaman ถึง 26 พ.ย. · EXP x2 ทุกเสาร์อาทิตย์ · คอสตูมผี' },
-  // No cast: the patch notes name no Clock Tower monster.
-  'patch-2026-10-29': { blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00–14:00 น. · ดันใหม่ เควสรายวัน อุปกรณ์ใหม่ 12 ชิ้น' },
+  // Clock Tower monsters: Clock, Alarm, Rideword.
+  'patch-2026-10-29': { blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00–14:00 น. · ดันใหม่ เควสรายวัน อุปกรณ์ใหม่ 12 ชิ้น', cast: ['/images/monsters/1269.gif', '/images/monsters/1193.gif', '/images/monsters/1195.gif'] },
 };
 
 const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : null;
