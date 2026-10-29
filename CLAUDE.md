@@ -59,6 +59,7 @@ owner ทำแค่: อัปเดตเกม แล้วกด Run ใน
 2. `node scripts/rename-items-to-game.mjs` ดูก่อน แล้ว `--apply` · `node --env-file=.env.local scripts/build-game-absent.mjs` (ลืมแล้วของใหม่ขึ้นป้าย "ไม่พบในเกม")
 3. `node scripts/build-map-availability.mjs` (เปิดแมพจาก navi_map ใหม่) → `node --env-file=.env.local scripts/build-star-droppers.mjs` → แก้เทสต์ map-availability ถ้าพื้นที่เปลี่ยน
 4. ห้องแต่งตัว: `npm run dress-up:build` → `npm run dress-up:upload` (ต้องอัปโหลดก่อน deploy)
+   · พรีวิวหมวก/คอสตูมในหน้าไอเทม: `py -3 scripts/build-costume-fit.py` (~20 นาที ทำทั้งคอสตูมและหมวกธรรมดา)
 5. ของใหม่อื่น (เควส NPC มอน): อ่าน `D:\RagnarokZero\System\OngoingQuestInfoList_enUS.lub` และ navi_npc/navi_mob ใน snapshot ด้วย `scripts/lub.py` · รูป NPC/มอนทำแบบ `scripts/build-event-2026-11-images.py`
 6. ทำข่าวตามหัวข้อข้างบน · หน้าอีเวนต์ทำตามแบบ `/news/events-2026-10` (รูป NPC + /navi กดก๊อป ทุกพิกัด, ขั้นตอนมีเลข, ไอคอนของ, กล่อง REWARD) ที่ owner ชอบ
 
