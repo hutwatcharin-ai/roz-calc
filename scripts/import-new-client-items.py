@@ -31,6 +31,9 @@ APPLY = '--apply' in sys.argv
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 SYSTEM = r'D:\RagnarokZero\System'
 ICON_DIRS = [
+    # 29 Oct 2026 patch: the weekly GRF snapshot (GrfDiffTool, real GRF).
+    r'D:\Data grf roz\weekly\2026-10-29\changed\data\texture\유저인터페이스\item',
+    r'D:\Data grf roz\weekly\2026-10-29\added\data\texture\유저인터페이스\item',
     # 15 Oct 2026 patch, read with tools/grf-extract.mjs (flag-1 icons only).
     r'D:\Data grf roz\grf-2026-10-15-icons\files\data\texture\유저인터페이스\item',
     r'D:\data_grf_comparison_20261001\extracted\added\data\texture\유저인터페이스\item',
@@ -63,6 +66,16 @@ def strip(s):
     return re.sub(r'\^[0-9A-Fa-f]{6}', '', str(s)).strip()
 
 
+def position(lines, label):
+    """The slots a "Position : X" line names. 29 Oct 2026: some lines run on
+    ("Position : Middle/Lower Weight : 0") or have no colon; "/" joins slots."""
+    for l in lines:
+        m = re.match(label + r'\s*:?\s*([A-Za-z ,/]+?)\s*(?:Weight\b.*)?$', l)
+        if m:
+            return ', '.join(x.strip() for x in m.group(1).replace('/', ',').split(',') if x.strip())
+    return None
+
+
 def table(path, name):
     L = lub.runtime()
     lub.load(L, path)
@@ -89,12 +102,12 @@ for sid, g in game.items():
     lines = [strip(e['identifiedDescriptionName'][k]) for k in sorted(e.get('identifiedDescriptionName') or {})]
     lines = [l for l in lines if l and l != '_']
     desc = ' '.join(lines)
-    pos = next((l.split(':', 1)[1].strip() for l in lines if l.startswith('Position')), None)
+    pos = position(lines, 'Position')
     if pos not in POSITION:
         # 15 Oct 2026: some new costumes have an English text without the
         # Position line; the Thai text still says "ตำแหน่ง : Upper".
         th = [strip(l) for l in g.get('desc') or []]
-        pos = next((l.split(':', 1)[1].strip() for l in th if l.startswith('ตำแหน่ง')), None)
+        pos = position(th, 'ตำแหน่ง')
     lvl = next((l.split(':', 1)[1].strip() for l in lines if l.startswith('Required Level')), None)
     d = data.get(iid, {})
     name = g['name'].strip()
@@ -104,6 +117,14 @@ for sid, g in game.items():
         cat = 'Package/Box'
     else:
         cat = 'Other'
+    # 29 Oct 2026: the patch brought real gear (capes) and cards, not only
+    # costumes and boxes. Their "Type : Garment" / "Class : Card" line decides.
+    kind = next((m.group(1) for l in lines for m in [re.match(r'(?:Type|Class)\s*:\s*(\w+)', l)] if m), None)
+    if cat == 'Other' and kind == 'Card':
+        cat = 'Card'
+    elif cat == 'Other' and kind in ('Garment', 'Armor', 'Shoes', 'Shield', 'Headgear', 'Accessory'):
+        cat = 'Armor'
+    jobs = next((l.split(':', 1)[1].strip() for l in lines if l.startswith('Equippable by')), None)
     res = d.get('identifiedResourceName')
     icon = None
     for folder in ICON_DIRS:
@@ -122,9 +143,10 @@ for sid, g in game.items():
             break
     rows.append({
         'id': iid, 'name_en': name, 'category': cat,
-        'weapon_type': POSITION.get(pos) if cat == 'Costume Equipment' else None,
+        'weapon_type': POSITION.get(pos) if cat == 'Costume Equipment' else ('Card' if cat == 'Card' else None),
         'required_level': int(lvl) if lvl and lvl.isdigit() else None,
-        'slots': d.get('slotCount') or 0, 'equippable_classes': [],
+        'slots': d.get('slotCount') or 0,
+        'equippable_classes': [j.strip() for j in jobs.split(',')] if cat == 'Armor' and jobs else [],
         'icon_url': icon, 'description': desc or None,
     })
 
