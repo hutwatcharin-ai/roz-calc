@@ -20,6 +20,7 @@
 // Safety Boots, the three new capes' item ids -- come from the client the
 // owner's game patched to on 29 Oct (D:/RagnarokZero/System, iteminfo).
 import '../patch-2026-10-01/page.css';
+import '../events-2026-10/page.css';
 import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -105,10 +106,26 @@ const HAT_MATS: { boss: number; item: number; name: string; need: number }[] = [
   { boss: 20179, item: 25509, name: 'Shining Round Shell', need: 100 },
 ];
 
-// From the official patch notes of 29 Oct 2026 (an image, read by hand).
+// The patch notes call the daily-quest NPC "Tower Keeper"; the client's quest
+// log and navi_npc name him Serdin at the same spot. Sprites are rendered by
+// scripts/build-event-2026-11-images.py.
 const QUEST_NPCS = [
-  { tag: 'เควสรายวัน', name: 'Tower Keeper', what: 'รับได้เฉพาะ Base Lv 70 ขึ้นไป', navi: 'aldebaran 143/132' },
-  { tag: 'เควสอีเวนต์', name: 'Clock Tower Clerk Molden', what: 'Curse of the Clock Tower', navi: 'aldebaran 136/132' },
+  { tag: 'เควสรายวัน', name: 'Serdin', img: 'serdin', navi: 'aldebaran 143/132' },
+  { tag: 'เควสอีเวนต์', name: 'Clock Tower Clerk Molden', img: 'molden', navi: 'aldebaran 136/132' },
+];
+// Serdin's dailies (quests 21286-21293 in the 29 Oct client).
+const SERDIN = [
+  { title: 'Clock Tower Floor 1 Cleanup', where: 'หอนาฬิกาชั้น 1', mobs: [{ id: 1195, name: 'Rideword' }, { id: 1199, name: 'Punk' }] },
+  { title: 'Living Clocks - 1', where: 'หอนาฬิกาชั้น 2', mobs: [{ id: 1269, name: 'Clock' }] },
+  { title: 'Living Clocks - 2', where: 'หอนาฬิกาชั้น 3', mobs: [{ id: 1193, name: 'Alarm' }] },
+  { title: 'Laughter from Below', where: 'ใต้ดินชั้น 4', mobs: [{ id: 1102, name: 'Bathory' }] },
+];
+// The four magic circles navi_npc gained with Molden (CTowerEvent1-4).
+const RITUAL_SITES = [
+  { floor: 'หอนาฬิกา 1F', navi: 'c_tower1 243/199' },
+  { floor: 'หอนาฬิกา 2F', navi: 'c_tower2 100/237' },
+  { floor: 'ใต้ดิน B1F', navi: 'alde_dun01 59/292' },
+  { floor: 'ใต้ดิน B2F', navi: 'alde_dun02 240/108' },
 ];
 
 type Gear = { name: string; id?: number; kind: string; who: string; fx: string[] };
@@ -356,20 +373,64 @@ export default async function Patch20261029Page() {
         })}
       </section>
 
-      {/* 2. Quests: the two quest NPCs, side by side. */}
+      {/* 2. Quests, laid out like /news/events-2026-10 (owner's pick): NPC
+          sprites, then each quest with the monster it wants. Steps and places
+          are the 29 Oct client's quest log; it has no kill counts or rewards. */}
       <section id="quests" className="ct-ch">
         <h2 className="ct-ch__title"><span className="ct-ch__n">2</span>เควส</h2>
-        <div className="ct-npcs">
+        <div className="evnpcs">
           {QUEST_NPCS.map((n) => (
-            <div key={n.name} className="ct-npc">
-              <span className="ct-npc__tag">{n.tag}</span>
-              <strong>{n.name}</strong>
-              <span className="muted">{n.what}</span>
-              <NaviCopy cmd={`/navi ${n.navi}`} />
+            <figure key={n.name} className="evnpc">
+              <span className="evnpc__art"><img src={`/images/events/2026-11/${n.img}.png`} alt={n.name} width={56} loading="lazy" /></span>
+              <figcaption>
+                <span className="ct-npc__tag">{n.tag}</span>
+                <strong>{n.name}</strong>
+                <code>/navi {n.navi}</code>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <h3 className="evh">เควสรายวันกับ Serdin (Base Lv 70 ขึ้นไป)</h3>
+        <p className="evsmall">
+          ผู้จัดการหอนาฬิกา Serdin ขอให้ช่วยทำความสะอาดหอ · แพตช์โน้ตเรียก NPC นี้ว่า Tower Keeper แต่ในเกมชื่อ Serdin จุดเดียวกัน ·
+          รับซ้ำได้ทุกวัน รีเซ็ต 04:00 UTC (11:00 น. เวลาไทย)
+        </p>
+        <div className="ct-dailies">
+          {SERDIN.map((q) => (
+            <div key={q.title} className="evdaily">
+              <span className="ct-dmobs">
+                {q.mobs.map((m) => (
+                  <Link key={m.id} href={`/database/monsters/${m.id}`} title={m.name}>
+                    <img src={`/images/monsters/${m.id}.gif`} alt={m.name} loading="lazy" />
+                  </Link>
+                ))}
+              </span>
+              <div>
+                <b>{q.title}</b>
+                <p className="evsmall">ล่า {q.mobs.map((m) => m.name).join(' และ ')} · {q.where}</p>
+              </div>
             </div>
           ))}
         </div>
-        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตไม่บอกขั้นตอนเควสและรางวัล</p>
+
+        <h3 className="evh">เควสอีเวนต์ Curse of the Clock Tower (กับ Molden)</h3>
+        <ol className="evsteps">
+          <li>คุย <b>Clock Tower Clerk Molden</b> (aldebaran 136/132) รับหนังสือ Romero Speciale&apos;s Book</li>
+          <li>หนังสือบอกให้ไปหาวงเวทจุดทำพิธี 1 ใน 4 แบบ: ที่ได้ยินเสียงคลื่น · ที่มีแสงตะวันตกดินน่ากลัว · ที่มีกลิ่นหญ้าจาง ๆ · ที่รู้สึกพลังของราตรี</li>
+          <li>เก็บของทำพิธีตามที่หนังสือสั่ง แต่ละอย่าง <b>10 ชิ้น</b>: คริสตัลสีเขียวทรงกลม · พืชสีขาวที่รักษาแผล · หน้าหนังสือที่มีอักษรโบราณ · เข็มนาฬิกา</li>
+          <li>ทำได้วันละครั้ง รีเซ็ต 04:00 แล้วรับใหม่จาก Molden</li>
+        </ol>
+        <div className="ct-sites">
+          <img src="/images/events/2026-11/ritual-site.png" alt="วงเวทจุดทำพิธี" width={90} loading="lazy" />
+          <ul>
+            {RITUAL_SITES.map((r) => <li key={r.navi}><b>{r.floor}</b> <NaviCopy cmd={`/navi ${r.navi}`} /></li>)}
+          </ul>
+        </div>
+        <p className="evnote">
+          วงเวท 4 จุดนี้เพิ่งเพิ่มในไฟล์นำทางพร้อม Molden แต่เกมไม่ได้บอกว่าจุดไหนตรงกับคำใบ้ข้อไหน · บันทึกเควสไม่บอกชื่อไอเทมทำพิธีและรางวัล
+          (Clock Tower Gear น่าจะได้จากเควสนี้ แต่ยังไม่มีอะไรยืนยัน)
+        </p>
       </section>
 
       {/* 3. The ten new pieces of equipment. */}
@@ -384,6 +445,7 @@ export default async function Patch20261029Page() {
       <section id="hatmaker" className="ct-ch">
         <h2 className="ct-ch__title"><span className="ct-ch__n">4</span>ช่างหมวก Hat Maker</h2>
         <div className="ct-where">
+          <img src="/images/events/2026-11/hat-maker.png" alt="Hat Maker" width={38} loading="lazy" />
           <span><strong>Hat Maker</strong> ที่ Al De Baran</span>
           <NaviCopy cmd="/navi aldebaran 130/140" />
         </div>

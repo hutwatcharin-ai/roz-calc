@@ -1,7 +1,7 @@
 {
   "_meta": {
     "what": "Monsters that drop the ordinary twin of each first-tier ★ piece (keyed by the ★ id).",
-    "built": "2026-10-01",
+    "built": "2026-10-29",
     "rates": "null = the source has no rate for that drop; the page shows ไม่ทราบ.",
     "status": "open = spawns on a map not marked closed; closed = only on maps data/map-availability.json marks closed (when = month); nospawn = no spawn row.",
     "regenerate": "node scripts/build-star-droppers.mjs"
@@ -16,6 +16,15 @@
       ],
       "plainIcon": "/images/items/450310.gif",
       "droppers": [
+        {
+          "id": 2406,
+          "name": "Weak Skel Soldier",
+          "level": 23,
+          "image": "/images/monsters/2406.gif",
+          "rate": 0.01,
+          "status": "open",
+          "when": null
+        },
         {
           "id": 2648,
           "name": "Soldier Skeleton Ringleader",
@@ -44,13 +53,13 @@
           "when": null
         },
         {
-          "id": 2406,
-          "name": "Weak Skel Soldier",
-          "level": 23,
-          "image": "/images/monsters/2406.gif",
-          "rate": 0.01,
-          "status": "closed",
-          "when": "MAR 2027"
+          "id": 1213,
+          "name": "High Orc",
+          "level": 85,
+          "image": "/images/monsters/1213.gif",
+          "rate": null,
+          "status": "open",
+          "when": null
         },
         {
           "id": 1065,
@@ -87,15 +96,6 @@
           "rate": 0.01,
           "status": "closed",
           "when": "DEC 2026"
-        },
-        {
-          "id": 1213,
-          "name": "High Orc",
-          "level": 85,
-          "image": "/images/monsters/1213.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "OCT 2026"
         },
         {
           "id": 2639,
@@ -236,6 +236,15 @@
       "plainIcon": "/images/items/470230.gif",
       "droppers": [
         {
+          "id": 1216,
+          "name": "Penomena",
+          "level": 86,
+          "image": "/images/monsters/1216.gif",
+          "rate": null,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 1101,
           "name": "Baphomet",
           "level": 90,
@@ -290,15 +299,6 @@
           "when": "JAN 2027"
         },
         {
-          "id": 1216,
-          "name": "Penomena",
-          "level": 86,
-          "image": "/images/monsters/1216.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "OCT 2026"
-        },
-        {
           "id": 2796,
           "name": "Hyegun Ringleader",
           "level": 113,
@@ -322,14 +322,14 @@
       "star": "★ Sandals",
       "plainName": "Sandals",
       "plainIds": [
-        470257,
-        470231
+        470231,
+        470257
       ],
-      "plainIcon": "/images/items/470257.gif",
+      "plainIcon": "/images/items/470231.gif",
       "droppers": [
         {
           "id": 2718,
-          "name": "Elusive Pecopeco",
+          "name": "Elusive Peco Peco",
           "level": 27,
           "image": "/images/monsters/2718.gif",
           "rate": 0.5,
@@ -396,10 +396,10 @@
       "star": "★ Hood",
       "plainName": "Hood",
       "plainIds": [
-        480414,
-        480384
+        480384,
+        480414
       ],
-      "plainIcon": "/images/items/480414.gif",
+      "plainIcon": "/images/items/480384.gif",
       "droppers": [
         {
           "id": 2868,
@@ -429,6 +429,15 @@
           "when": null
         },
         {
+          "id": 1199,
+          "name": "Punk",
+          "level": 82,
+          "image": "/images/monsters/1199.gif",
+          "rate": 0.08,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 1246,
           "name": "Christmas Cookie",
           "level": 74,
@@ -436,15 +445,6 @@
           "rate": 0.13,
           "status": "closed",
           "when": "JAN 2027"
-        },
-        {
-          "id": 1199,
-          "name": "Punk",
-          "level": 82,
-          "image": "/images/monsters/1199.gif",
-          "rate": 0.08,
-          "status": "closed",
-          "when": "OCT 2026"
         }
       ]
     },
@@ -452,10 +452,10 @@
       "star": "★ Muffler",
       "plainName": "Muffler",
       "plainIds": [
-        480385,
-        480378
+        480378,
+        480385
       ],
-      "plainIcon": "/images/items/480385.gif",
+      "plainIcon": "/images/items/480378.gif",
       "droppers": [
         {
           "id": 2651,
@@ -509,8 +509,8 @@
       "plainName": "Ring Pommel Saber",
       "plainIds": [
         1122,
-        500087,
-        500112
+        500112,
+        500087
       ],
       "plainIcon": "/images/items/1122.gif",
       "droppers": [
@@ -590,6 +590,15 @@
       "plainIcon": "/images/items/510131.gif",
       "droppers": [
         {
+          "id": 2406,
+          "name": "Weak Skel Soldier",
+          "level": 23,
+          "image": "/images/monsters/2406.gif",
+          "rate": 0.1,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 1056,
           "name": "Smokie",
           "level": 31,
@@ -626,6 +635,15 @@
           "when": null
         },
         {
+          "id": 1176,
+          "name": "Vitata",
+          "level": 35,
+          "image": "/images/monsters/1176.gif",
+          "rate": 1,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 2651,
           "name": "Swift Sohee",
           "level": 64,
@@ -651,24 +669,6 @@
           "rate": null,
           "status": "open",
           "when": null
-        },
-        {
-          "id": 2406,
-          "name": "Weak Skel Soldier",
-          "level": 23,
-          "image": "/images/monsters/2406.gif",
-          "rate": 0.1,
-          "status": "closed",
-          "when": "MAR 2027"
-        },
-        {
-          "id": 1176,
-          "name": "Vitata",
-          "level": 35,
-          "image": "/images/monsters/1176.gif",
-          "rate": 1,
-          "status": "closed",
-          "when": "NOV 2026"
         },
         {
           "id": 1516,
@@ -734,8 +734,8 @@
           "level": 74,
           "image": "/images/monsters/1195.gif",
           "rate": null,
-          "status": "closed",
-          "when": "OCT 2026, DEC 2026"
+          "status": "open",
+          "when": null
         },
         {
           "id": 1515,
@@ -768,7 +768,7 @@
       "droppers": [
         {
           "id": 2718,
-          "name": "Elusive Pecopeco",
+          "name": "Elusive Peco Peco",
           "level": 27,
           "image": "/images/monsters/2718.gif",
           "rate": 2.5,
@@ -981,8 +981,8 @@
       "plainName": "Smasher",
       "plainIds": [
         1507,
-        590074,
-        590083
+        590083,
+        590074
       ],
       "plainIcon": "/images/items/1507.gif",
       "droppers": [

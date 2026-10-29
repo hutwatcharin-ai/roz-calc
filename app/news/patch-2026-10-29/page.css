@@ -49,3 +49,13 @@
 .ct-ev strong { color: var(--text); font-size: 15.5px; }
 .ct-ev:hover { border-color: var(--yellow); }
 .ct-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; }
+/* Chapter 2 quests, on the October events sheet's classes. */
+.ct-dailies { display: grid; gap: 8px; }
+.ct-dailies .evdaily { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; }
+.ct-dmobs { display: flex; gap: 4px; align-items: flex-end; min-width: 56px; }
+.ct-dmobs img { max-height: 56px; }
+.ct-sites { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 10px; }
+.ct-sites ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ct-sites li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.ct-where img { image-rendering: auto; }
+.evnpc .ct-npc__tag { display: inline-block; margin-bottom: 2px; }

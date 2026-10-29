@@ -35,7 +35,12 @@ from ro_sprite import Act  # noqa: E402
 
 GRF = 'D:/Data grf roz/data_grf_extracted/files/data'
 # Newer copies first: the 15 Oct sprite/table extraction, then the 15 Oct full patch.
-NEWER = ('D:/Data grf roz/grf-2026-10-15-sprites/files/data', 'D:/Data grf roz/grf-2026-10-15/files/data')
+# Newest first. 29 Oct 2026: the first snapshot extracted from the real GRF
+# (GrfDiffTool) holds only files changed since 22 Sep, in added/ and changed/.
+NEWER = (
+    'D:/Data grf roz/weekly/2026-10-29/added/data', 'D:/Data grf roz/weekly/2026-10-29/changed/data',
+    'D:/Data grf roz/grf-2026-10-15-sprites/files/data', 'D:/Data grf roz/grf-2026-10-15/files/data',
+)
 LUA = f'{GRF}/luafiles514/lua files'
 SCALE = 100
 
