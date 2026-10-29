@@ -78,6 +78,11 @@ const MANUAL_OPEN = [
   { area: 'Prontera Labyrinth', test: /^(prt_maze|maz_d|b_maz_d)/, source: 'official notice, 1 Oct 2026 update' },
   { area: 'Sphinx', test: /^(in_sphinx|sp_d|b_sp_d)/, source: 'official notice, 1 Oct 2026 update' },
   { area: 'Mjolnir Dead Pit', test: /^(mjo_dun|mjo_d)/, source: 'official notice, 1 Oct 2026 update' },
+  // Ready for the 29 Oct 2026 patch (Clock Tower in the 28 Oct notice).
+  // Uncomment once the owner confirms the floors in game; tow_d (the quest
+  // instance) stays closed until something says it opened too. Then update
+  // lib/map-availability.test.ts, which still expects these closed.
+  // { area: 'Clock Tower', test: /^(c_tower|alde_dun)/, source: 'official notice + owner in game, 29 Oct 2026' },
 ];
 
 // The client's own navigation table is the strongest "open" signal there is

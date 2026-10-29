@@ -10,8 +10,7 @@
 // interesting"), on the 1 Oct page's layout: what lives on each of the eight
 // floors is ours (monster_spawns), and so are the cards, star pieces and
 // sets that only Clock Tower monsters drop -- every one of these monsters
-// spawns nowhere open before this patch (data/map-availability.json, 28 Oct).
-// data/map-availability.json itself is left alone until the patch is live.
+// spawns nowhere open before this patch (FRESH_BEFORE_PATCH below).
 import '../patch-2026-10-01/page.css';
 import './page.css';
 import Link from 'next/link';
@@ -26,9 +25,15 @@ import { isCVariant } from '@/lib/c-variant';
 import { ELEMENT_TH, RACE_TH } from '@/lib/monster-th';
 import { setsOf, type ItemSet } from '@/lib/item-sets';
 import starDroppers from '@/data/star-droppers.json';
-import availability from '@/data/map-availability.json';
 
-const CLOSED = (availability as { maps: Record<string, unknown> }).maps;
+// Monsters in the tower whose every spawn was on a closed map before the
+// patch, worked out from data/map-availability.json on 29 Oct 2026 and frozen
+// here (same as the 1 Oct page): once the Clock Tower maps are opened in that
+// file, a live check would find nothing new and empty the card list.
+const FRESH_BEFORE_PATCH = [
+  1102, 1131, 1189, 1193, 1195, 1199, 1211, 1213, 1216, 1269, 1270, 1320, 1377, 2682, 2717, 2721, 2805, 2871, 2885,
+  2894, 2910, 20175, 20176, 20177, 20178, 20179,
+];
 
 export const revalidate = 3600;
 
@@ -118,9 +123,7 @@ export default async function Patch20261029Page() {
   // Monsters every one of whose spawns is on a closed map: what this patch
   // makes reachable for the first time. Mimic, Whisper, Cramp and the like
   // already live elsewhere and stay out of the lists below.
-  const elsewhere = await db.from('monster_spawns').select('map_code, monster_id').in('monster_id', plainIds);
-  const fresh = new Set(plainIds.filter((id) => ((elsewhere.data ?? []) as { map_code: string; monster_id: number }[])
-    .filter((r) => r.monster_id === id).every((r) => r.map_code in CLOSED)));
+  const fresh = new Set(plainIds.filter((id) => FRESH_BEFORE_PATCH.includes(id)));
   const cardsRes = await db
     .from('monster_drops')
     .select('monster_id, rate, items!inner(id, name_en, description_th, category)')
