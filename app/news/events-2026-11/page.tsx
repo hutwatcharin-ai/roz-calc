@@ -22,14 +22,14 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import NaviCopy from '@/components/NaviCopy';
-import { QuestMapFaces, QuestMapParts, QuestMapRoute } from './QuestMap';
+import QuestMap from './QuestMap';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 
 export const revalidate = 86400;
 
 const PATH = '/news/events-2026-11';
 const PUBLISHED = '2026-10-29T15:00:00+07:00';
-const MODIFIED = '2026-10-29T22:00:00+07:00';
+const MODIFIED = '2026-10-29T23:30:00+07:00';
 const ENDS = '2026-11-26T08:00:00+07:00';
 const IMG = '/images/events/2026-11';
 // Item icons: the 29 Oct imports are PNG; older items keep their GIF, and
@@ -185,12 +185,7 @@ export default function Events202611() {
         </div>
 
         <h3 className="evh">เควสหลัก Visitors from Another World (ทำครั้งเดียว)</h3>
-        <p className="qmap-try">แบบ A · เส้นทางตามลำดับ</p>
-        <QuestMapRoute />
-        <p className="qmap-try">แบบ B · หน้าตัวละคร</p>
-        <QuestMapFaces />
-        <p className="qmap-try">แบบ C · แบ่ง 3 ช่วงตามสี</p>
-        <QuestMapParts />
+        <QuestMap />
         <ol className="evsteps">
           <li>คุย <b>[Urgent] Anomalous Rift Receptionist</b> <NaviCopy cmd="/navi morocc 196/261" /> สมัครเข้าทีมสำรวจรอยแยกที่โผล่กลางเมือง</li>
           <li>เข้าทีมแล้วจะได้ฟังเรื่องรอยแยก คนแปลกหน้า และมอนแปลก ๆ · เดินตามเบาะแสที่ชาวเมือง Morocc บอก (กด Alt+U ดูว่าต้องไปหาใครต่อ)</li>

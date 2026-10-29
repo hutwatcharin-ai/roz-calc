@@ -5,7 +5,7 @@
 // the official notice (roz.mygnjoy.com event 174) gives: the Rift Receptionist
 // who starts the main quest, and the Gatchaman base where Ken, Jun and Joe
 // stand. The client quest log's in-between stops did not match the game.
-// Three looks for the owner to pick from.
+// The owner picked the route look (A) of three drafts.
 //
 // The minimap is the client's texture/유저인터페이스/map/morocc.bmp (512 px)
 // and covers the whole map: morocc.gat is 320x320 cells, y counts up from the
@@ -23,19 +23,11 @@ const BASE = [
 ];
 const MID = { x: 31, y: 193 };
 
-// The four gates, read off the minimap.
-const GATES = [
-  { x: 160, y: 300, t: 'ประตูเหนือ' },
-  { x: 160, y: 12, t: 'ประตูใต้' },
-  { x: 306, y: 208, t: 'ตะวันออก' },
-  { x: 14, y: 160, t: 'ตะวันตก' },
-];
-
 const pos = (x: number, y: number) => ({ left: `${(x / W) * 100}%`, top: `${(1 - y / W) * 100}%` });
 
-function Base({ dim, children }: { dim?: boolean; children: React.ReactNode }) {
+function Base({ children }: { children: React.ReactNode }) {
   return (
-    <div className={'qmap__box' + (dim ? ' qmap__box--dim' : '')}>
+    <div className="qmap__box">
       <img src="/images/maps/morocc.png" alt="แผนที่ Morocc" width={512} height={512} />
       {children}
     </div>
@@ -90,7 +82,7 @@ function Legend() {
 }
 
 /** A: start and base, the walk between them, the base enlarged. */
-export function QuestMapRoute() {
+export default function QuestMap() {
   const trail = `${START.x},${W - START.y} 120,${W - 245} 60,${W - 215} ${MID.x + 3},${W - MID.y - 3}`;
   return (
     <figure className="qmap">
@@ -107,64 +99,6 @@ export function QuestMapRoute() {
       </div>
       <figcaption>1 = คนเริ่มเควสหลัก · 2 = ฐาน Gatchaman ที่จบเควสและทำรายวันทุกวัน · กดปุ่มก๊อปแล้ววางในแชตเกมเพื่อเดินไปเอง</figcaption>
       <Legend />
-    </figure>
-  );
-}
-
-/** B: the characters' own faces where they stand. */
-export function QuestMapFaces() {
-  return (
-    <figure className="qmap">
-      <Base>
-        <span className="qmap__face" style={pos(START.x, START.y)}>
-          <span className="qmap__faceart"><img src={`${IMG}/rift-receptionist.png`} alt="" loading="lazy" /></span>
-          <b><i>1</i>Rift Receptionist · เริ่มเควส</b>
-        </span>
-        <span className="qmap__face qmap__face--base" style={pos(MID.x, MID.y)}>
-          <span className="qmap__faceart">
-            {BASE.map((b) => <img key={b.who} src={`${IMG}/${b.img}.png`} alt="" loading="lazy" />)}
-          </span>
-          <b><i>2</i>Ken · Jun · Joe</b>
-        </span>
-      </Base>
-      <figcaption>รูปตัวละครอยู่ตรงที่ยืนจริงในเมือง</figcaption>
-      <Legend />
-    </figure>
-  );
-}
-
-/** C: what to do where, in two colours, with the gates named. */
-export function QuestMapParts() {
-  return (
-    <figure className="qmap qmap--parts">
-      <div className="qmap__side">
-        <Base dim>
-          {GATES.map((g) => (
-            <span key={g.t} className="qmap__gate" style={pos(g.x, g.y)}>{g.t}</span>
-          ))}
-          <span className="qmap__pin qmap__pin--p1" style={pos(START.x, START.y)}>1</span>
-          <span className="qmap__pin qmap__pin--p3" style={pos(MID.x, MID.y)}>2</span>
-        </Base>
-        <div className="qmap__parts">
-          <div className="qmap__part qmap__part--yellow">
-            <p><i>1</i> เริ่มเควสหลัก (ครั้งเดียว)</p>
-            <ul>
-              <li>Rift Receptionist <small>เหนือสระน้ำกลางเมือง</small></li>
-              <li><NaviCopy cmd={`/navi morocc ${START.x}/${START.y}`} /></li>
-              <li><small>แล้วเดินตามเบาะแสชาวเมือง ดู Alt+U</small></li>
-            </ul>
-          </div>
-          <div className="qmap__part qmap__part--pink">
-            <p><i>2</i> ฐาน Gatchaman (ทุกวัน)</p>
-            <ul>
-              {BASE.map((b) => (
-                <li key={b.who}>{b.who} <small>{b.what}</small><br /><NaviCopy cmd={`/navi morocc ${b.x}/${b.y}`} /></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-      <figcaption>เหลือง = เริ่มเควสหลัก · ชมพู = ฐานที่ต้องกลับมาทุกวัน ใกล้ประตูตะวันตก</figcaption>
     </figure>
   );
 }
