@@ -30,10 +30,23 @@ export interface NewsItem {
 
 export const NEWS: NewsItem[] = [
   {
+    href: '/news/events-2026-11',
+    kind: 'event',
+    title: 'Gatchaman · Black Friday EXP x2',
+    blurb: 'เควสคอลแลบที่ Morocc แลกการ์ด · EXP x2 ดรอป +20% ทุกเสาร์อาทิตย์ · คอสตูมผี Ghostly',
+    date: '2026-10-29T08:00:00+07:00',
+    dateTh: '29 ต.ค.',
+    // Gatchaman ends at the 26 Nov maintenance (Black Friday at the 23 Nov
+    // one). The hour is not announced; 08:00 is this season's usual start.
+    ends: '2026-11-26T08:00:00+07:00',
+    endsTh: '26 พ.ย.',
+    badge: 'x2',
+  },
+  {
     href: '/news/patch-2026-10-29',
     kind: 'patch',
     title: 'เปิด Clock Tower · Gatchaman · Black Friday',
-    blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00–14:00 น. ดันใหม่ เควสรายวัน อุปกรณ์ใหม่ คอสตูมธีมผี WoE EU เลื่อนเวลา',
+    blurb: 'ดันใหม่ พิกัด NPC เควสรายวัน Lv 70 อุปกรณ์ใหม่ 12 ชิ้นพร้อมผล WoE EU เลื่อนเวลา',
     date: '2026-10-29T08:00:00+07:00',
     dateTh: '29 ต.ค.',
     badge: 'CT',

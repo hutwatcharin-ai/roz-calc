@@ -17,6 +17,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import ItemSetCard from '@/components/ItemSetCard';
+import NaviCopy from '@/components/NaviCopy';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 import { supabaseRead } from '@/lib/supabase';
 import { mapImage } from '@/lib/map-image';
@@ -39,21 +40,22 @@ export const revalidate = 3600;
 
 const PATH = '/news/patch-2026-10-29';
 const PUBLISHED = '2026-10-28T18:00:00+07:00';
+const MODIFIED = '2026-10-29T15:00:00+07:00';
 
 export const metadata: Metadata = {
   title: 'แพทช์ 29 ต.ค. 2569 Ragnarok Zero — เปิด Clock Tower, อีเวนต์ Gatchaman, Black Friday',
   description:
-    'สรุปแพทช์ 29 ตุลาคม 2569 ของ Ragnarok Zero Global ภาษาไทย: ปิดเซิร์ฟ 08:00 น., ดันเจี้ยน Clock Tower มอนทุกชั้น การ์ดที่จะหาได้ครั้งแรกพร้อมผลการ์ด บอสชั้นใต้ดิน, เควสอีเวนต์ Curse of the Clock Tower, คอลแลบ Gatchaman, Black Friday, คอสตูมธีมผี และ WoE เซิร์ฟ EU เลื่อนเป็นตี 3',
+    'สรุปแพทช์ 29 ตุลาคม 2569 ของ Ragnarok Zero Global ภาษาไทย: ปิดเซิร์ฟ 08:00 น., ดันเจี้ยน Clock Tower มอนทุกชั้น พิกัด NPC เควสรายวันและเควสอีเวนต์ Curse of the Clock Tower อุปกรณ์ใหม่ 12 ชิ้นพร้อมผล การ์ดที่จะหาได้ครั้งแรก บอสชั้นใต้ดิน, คอลแลบ Gatchaman, Black Friday EXP x2, คอสตูมผี และ WoE เซิร์ฟ EU เลื่อนเป็นตี 3',
 };
 
 const HIGHLIGHTS = [
   { big: '8', title: 'ดันเจี้ยน Clock Tower', body: 'หอนาฬิกา Al De Baran ชั้นบน 4 ชั้น ใต้ดิน 4 ชั้น', href: '#tower', link: 'มอนแต่ละชั้น' },
-  { big: 'Q', title: 'เควสอีเวนต์', body: 'Curse of the Clock Tower' },
-  { big: 'D', title: 'เควสรายวัน', body: 'เควสรายวันของ Clock Tower' },
-  { big: 'EQ', title: 'อุปกรณ์ใหม่', body: 'อุปกรณ์ชุด Clock Tower ประกาศยังไม่บอกชื่อ' },
-  { big: 'G', title: 'คอลแลบ Gatchaman', body: 'เริ่มอีเวนต์คอลแลบ Gatchaman' },
-  { big: 'BF', title: 'Black Friday', body: 'อีเวนต์ Black Friday ของ ROZ Global' },
-  { big: '👻', title: 'คอสตูมธีมผี', body: 'คอสตูมใหม่รับฮาโลวีน', href: '/tools/dress-up', link: 'ห้องแต่งตัว' },
+  { big: 'Q', title: 'เควสอีเวนต์', body: 'Curse of the Clock Tower คุยกับ Clerk Molden', href: '#npc', link: 'พิกัด NPC' },
+  { big: 'D', title: 'เควสรายวัน', body: 'Tower Keeper ต้อง Base Lv 70', href: '#npc', link: 'พิกัด NPC' },
+  { big: 'EQ', title: 'อุปกรณ์ใหม่ 12 ชิ้น', body: 'หมวกแลกที่ Hat Maker 2 ชิ้น ของจากหอนาฬิกา 10 ชิ้น', href: '#gear', link: 'ดูผลทุกชิ้น' },
+  { big: 'G', title: 'คอลแลบ Gatchaman', body: 'ถึง 26 พ.ย. เควสที่ Morocc แลกการ์ด', href: '/news/events-2026-11#gatchaman', link: 'วิธีทำ' },
+  { big: 'x2', title: 'Black Friday', body: 'EXP x2 ดรอป +20% ทุกเสาร์อาทิตย์ 5 รอบ', href: '/news/events-2026-11#exp', link: 'เวลาไทย' },
+  { big: '👻', title: 'คอสตูมผี', body: 'Ghostly Scroll สุ่มคอสตูม 5 แบบ', href: '/news/events-2026-11#ghostly', link: 'ดูของ' },
   { big: '+1h', title: 'WoE เซิร์ฟ EU', body: 'เลื่อนเป็น 03:00–04:00 น. เวลาไทย', href: '#woe', link: 'ดูเวลา' },
 ];
 
@@ -82,6 +84,46 @@ const CODES = STAGES.flatMap((s) => s.codes);
 // Monsters in the tower with no fixed spawn count in the data (amount null):
 // level 122-126, one per basement floor. How they appear is not in the data.
 const BOSSES = [20179, 20178, 20177, 20175, 20176];
+
+// From the official patch notes of 29 Oct 2026 (an image, read by hand).
+const NPCS = [
+  { name: 'ทางเข้าหอนาฬิกา', what: 'กลางเมือง Al De Baran', navi: 'aldebaran 139/131' },
+  { name: 'Tower Keeper', what: 'เควสรายวัน · Base Lv 70+', navi: 'aldebaran 143/132' },
+  { name: 'Clock Tower Clerk Molden', what: 'เควสอีเวนต์ Curse of the Clock Tower', navi: 'aldebaran 136/132' },
+  { name: 'Hat Maker', what: 'แลกหมวก Clock Tower', navi: 'aldebaran 130/140' },
+];
+
+type Gear = { name: string; id?: number; kind: string; who: string; fx: string[] };
+// id: our item page when the item is already in the database (28 Oct data).
+const HAT_MAKER: Gear[] = [
+  { name: 'Clock Tower Manager Headphones', kind: 'หัวกลาง · DEF 10 · Lv 60', who: 'ทุกอาชีพ', fx: ['MATK +20', 'ใส่คู่ Tower Keeper Card: ลดร่ายแปรผัน 15%'] },
+  { name: 'Pocket Watch Ornament', id: 19334, kind: 'หัวกลาง · DEF 10 · Lv 60', who: 'ทุกอาชีพ', fx: ['ATK +20', 'ใส่คู่ Clock Card: DEF +20 MSP +100', 'ใส่คู่ Alarm Card: MHP +1000'] },
+];
+const EXCLUSIVE: Gear[] = [
+  { name: 'Encyclopedia [2]', id: 1564, kind: 'หนังสือ · ATK 110 · อาวุธ Lv 3 · Lv 70', who: 'สาย Sage, Priest', fx: ['INT +3 DEX +2 ไม่แตก', 'CRIT +20 และ CRIT เพิ่มตาม LUK', 'MATK +100'] },
+  { name: 'Rabbit Pattern Shirt [1]', id: 15282, kind: 'เกราะ · DEF 10 · Lv 60', who: 'สาย Mage, Acolyte', fx: ['MHP +150 MSP +75', 'MATK +2 ต่อขั้นตีบวก', '+7: MHP +75 MSP +25 · +9: MHP +75 MSP +25'] },
+  { name: 'Clock Casket [1]', id: 19357, kind: 'หัวบน · DEF 10 · Lv 60', who: 'ทุกอาชีพ', fx: ['ทุก +2 ดาเมจกายภาพใส่มอน Formless +1%', '+7: HIT +15 · +9: MHP +250'] },
+  { name: 'Black Witch Hat [1]', id: 19358, kind: 'หัวบน · DEF 10 · Lv 60', who: 'ทุกอาชีพ', fx: ['ทุก +2 MATK +1%', '+7: MHP +50 MSP +100 · +9: ลดร่ายแปรผัน 5%'] },
+  { name: 'Safety Boots [1]', kind: 'รองเท้า · DEF 60 · Lv 60', who: 'สาย Swordman', fx: ['แพตช์โน้ตไม่ได้เขียนผล นอกจาก DEF'] },
+  { name: "General's Cape [1]", kind: 'ผ้าคลุม · DEF 55 · Lv 60', who: 'ทุกอาชีพ', fx: ['MHP +200 MSP +20', 'ทุก +2 MHP +100 MSP +10', '+7 และ +9: ลดร่ายแปรผัน 5% ดีเลย์หลังตี 5% (ขั้นละครั้ง)'] },
+  { name: "Hunter's Cape [1]", kind: 'ผ้าคลุม · DEF 7 · Lv 60', who: 'ทุกอาชีพ', fx: ['ATK +10 HIT +10', '+6 ขึ้นไป: ATK +1 HIT +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ดีเลย์หลังตี −5% (ขั้นละครั้ง)'] },
+  { name: 'Rotating Gear [1]', kind: 'ผ้าคลุม · DEF 2 · Lv 60', who: 'ทุกอาชีพ', fx: ['FLEE +10', '+6 ขึ้นไป: FLEE +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ลดร่ายแปรผัน 5% (ขั้นละครั้ง)'] },
+  { name: 'Joker Claw [1]', id: 1856, kind: 'สนับมือ · ATK 90 · อาวุธ Lv 3 · Lv 60', who: 'สาย Monk, Priest', fx: ['STR +2 Raging Trifecta Blow +10%', 'Trifecta +1% ต่อขั้นตีบวก · ทุก +2 ดีเลย์หลังตี −1%', '+7: Raging Quadruple Blow +15% · +9: Raging Thrust +15%'] },
+  { name: 'Memory Book', id: 2109, kind: 'โล่ · DEF 25 · Lv 1', who: 'สาย Mage', fx: ['INT +1 MDEF +2'] },
+];
+
+function gearRow(g: Gear) {
+  return (
+    <li key={g.name} className="ct-gearrow">
+      {g.id ? <img src={`/images/items/${g.id}.gif`} alt="" width={24} height={24} loading="lazy" /> : <span className="ct-gearrow__noicon" aria-hidden="true" />}
+      <div>
+        <p className="ct-gearrow__name">{g.id ? <Link href={`/database/items/${g.id}`}>{g.name}</Link> : g.name}</p>
+        <p className="ct-gearrow__kind">{g.kind} · {g.who}</p>
+        <ul className="ct-gearrow__fx">{g.fx.map((f) => <li key={f}>{f}</li>)}</ul>
+      </div>
+    </li>
+  );
+}
 
 type StarPiece = { star: string; plainName: string; plainIcon: string; droppers: { id: number; name: string; rate: number | null }[] };
 const STAR = (starDroppers as unknown as { pieces: Record<string, StarPiece> }).pieces;
@@ -163,7 +205,7 @@ export default async function Patch20261029Page() {
           headline: String(metadata.title),
           description: String(metadata.description),
           datePublished: PUBLISHED,
-          dateModified: PUBLISHED,
+          dateModified: MODIFIED,
         })}
       />
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
@@ -218,6 +260,37 @@ export default async function Patch20261029Page() {
         ))}
       </section>
 
+      <section className="card card--cyan" id="npc" style={{ marginTop: 30, scrollMarginTop: 90 }}>
+        <h2 className="section-title">NPC ที่ Al De Baran</h2>
+        <div className="ct-npcs">
+          {NPCS.map((n) => (
+            <div key={n.name} className="ct-npc">
+              <strong>{n.name}</strong>
+              <span className="muted">{n.what}</span>
+              <NaviCopy cmd={`/navi ${n.navi}`} />
+            </div>
+          ))}
+        </div>
+        <p className="muted" style={{ marginTop: 10, fontSize: 14 }}>
+          เควสรายวันรับได้เฉพาะ Base Lv 70 ขึ้นไป · แพตช์โน้ตไม่บอกขั้นตอนเควสและรางวัล
+        </p>
+      </section>
+
+      <section id="gear" style={{ marginTop: 34, scrollMarginTop: 90 }}>
+        <h2 className="section-title">อุปกรณ์ใหม่</h2>
+        <h3 className="pxh">แลกที่ Hat Maker</h3>
+        <p className="muted pxp" style={{ fontSize: 14 }}>ใช้ของที่เก็บระหว่างผจญภัย แพตช์โน้ตไม่บอกว่าต้องใช้อะไร</p>
+        <ul className="ct-gear">{HAT_MAKER.map(gearRow)}</ul>
+        <h3 className="pxh">ของจาก Clock Tower</h3>
+        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment ไม่บอกว่าดรอปจากมอนตัวไหน</p>
+        <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
+        <h3 className="pxh">Clock Tower Gear อัปเกรดหมวก</h3>
+        <p className="muted pxp" style={{ fontSize: 14, lineHeight: 1.65 }}>
+          ใช้อัปเกรดหมวก 4 ชิ้น: Clock Tower Manager Headphones, Pocket Watch Ornament, Clock Casket, Black Witch Hat
+          ให้ได้ความสามารถเพิ่ม · <strong>ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · แพตช์โน้ตไม่บอกว่าได้อะไรเพิ่มและหา Gear จากไหน
+        </p>
+      </section>
+
       {error && (
         <p className="filterstate" role="alert" style={{ marginTop: 14 }}>
           โหลดข้อมูลจากฐานข้อมูลไม่ครบ บางส่วนด้านล่างอาจว่าง
@@ -246,7 +319,7 @@ export default async function Patch20261029Page() {
       <section id="tower" style={{ marginTop: 34, scrollMarginTop: 90 }}>
         <h2 className="section-title">Clock Tower เจออะไรบ้าง</h2>
         <p className="muted" style={{ marginTop: 2, fontSize: 14 }}>
-          ประกาศยังไม่บอกว่าเปิดชั้นไหนบ้าง ข้างล่างคือมอนทุกชั้นตามข้อมูลเกม · เรียงจากที่เกิดเยอะสุด · กดรูปมอนดูของดรอป
+          แพตช์โน้ตไม่บอกว่าเปิดชั้นไหนบ้าง ข้างล่างคือมอนทุกชั้นตามข้อมูลเกม · เรียงจากที่เกิดเยอะสุด · กดรูปมอนดูของดรอป
         </p>
 
         {byStage.map((s) => {
@@ -324,7 +397,7 @@ export default async function Patch20261029Page() {
 
         <h3 className="pxh">บอสชั้นใต้ดิน Lv 122–126</h3>
         <p className="muted pxp" style={{ fontSize: 14 }}>
-          อยู่ในรายชื่อมอนของชั้นใต้ดินชั้นละตัว แต่ข้อมูลไม่บอกจำนวนหรือวิธีเกิด อาจเป็นบอสของเควสอีเวนต์ รอรายละเอียดแพทช์
+          อยู่ในรายชื่อมอนของชั้นใต้ดินชั้นละตัว แต่ข้อมูลไม่บอกจำนวนหรือวิธีเกิด แพตช์โน้ตก็ไม่พูดถึง อาจเป็นบอสของเควสอีเวนต์
         </p>
         <ul className="pcards ct-cards">
           {BOSSES.filter((id) => monById.has(id)).map((id) => {
@@ -407,12 +480,13 @@ export default async function Patch20261029Page() {
       </section>
 
       <aside className="pnote">
-        <strong>ยังรอรายละเอียด</strong> ชั้นที่เปิด ขั้นตอนเควสอีเวนต์ ชื่ออุปกรณ์ใหม่ รางวัล Gatchaman กับ Black Friday และคอสตูมผี ประกาศบอกว่าจะแจ้งแยก ออกเมื่อไหร่จะเติมหน้านี้ ·{' '}
+        <strong>ยังไม่รู้</strong> ชั้นไหนเปิดบ้าง ขั้นตอนเควสอีเวนต์ทีละขั้น และอุปกรณ์ใหม่ดรอปจากมอนตัวไหน (แพตช์โน้ตไม่บอก) จะเติมเมื่อเข้าเกมหรือแกะไคลเอนต์ใหม่ ·{' '}
         ตีไหวไหมดูที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
       </aside>
 
       <p className="source-note" style={{ marginTop: 20 }}>
-        <strong>ที่มา:</strong> ประกาศ Discord ทางการ Ragnarok Zero: Global &ldquo;Global Scheduled Maintenance Reminder – 29th October, 2026&rdquo; (28 ต.ค. 2569)
+        <strong>ที่มา:</strong> แพตช์โน้ตทางการ roz.mygnjoy.com &ldquo;The Clock Strikes, A New Adventure Begins – October 29 Update&rdquo; (29 ต.ค. 2569) ·
+        ประกาศ Discord ทางการ Ragnarok Zero: Global &ldquo;Global Scheduled Maintenance Reminder – 29th October, 2026&rdquo; (28 ต.ค. 2569)
         และ &ldquo;War of Emperium EU Schedule Adjustment&rdquo; (23 ต.ค. 2569) · มอน การ์ด และจุดเกิดจากฐานข้อมูลของเว็บนี้ · หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
       </p>
     </main>

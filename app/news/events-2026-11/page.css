@@ -1,0 +1,14 @@
+/* Gatchaman / Black Friday page, on top of ../patch-2026-10-01/page.css. */
+.ev11-table { width: 100%; margin-top: 8px; }
+.ev11-table th { text-align: left; }
+.ev11-tablewrap { overflow-x: auto; }
+.ev11-list { margin: 10px 0 0; padding-left: 20px; font-size: 14.5px; line-height: 1.65; color: var(--dim); }
+.ev11-steps { margin: 8px 0 0; padding-left: 22px; font-size: 15px; line-height: 1.7; color: var(--dim); }
+.ev11-steps li { margin-bottom: 6px; }
+.ev11-steps .navicopy { display: flex; width: fit-content; margin-top: 6px; }
+.ev11-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; margin-top: 12px; }
+.ev11-k { margin: 0; font-weight: 700; color: var(--text); }
+.ev11-ghost { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 8px; }
+.ev11-ghost li { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid var(--hair); border-radius: 12px; font-size: 14px; }
+.ev11-ghost strong { color: var(--text); }
+.ev11-where { color: var(--pink); font-size: 13px; font-weight: 700; }

@@ -5,3 +5,20 @@
 .ct-facts li { padding: 10px 12px; border: 1px solid var(--hair); border-radius: 12px; font-size: 14px; line-height: 1.55; color: var(--dim); }
 .ct-facts strong { display: block; color: var(--text); font-size: 15px; }
 .ct-times { width: 100%; margin-top: 8px; }
+.ct-npcs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 10px; margin-top: 10px; }
+.ct-npc { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.ct-npc strong { color: var(--text); font-size: 15px; }
+.ct-gear { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 8px; }
+.ct-gearrow { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--hair); border-radius: 12px; }
+.ct-gearrow__noicon { flex: 0 0 24px; height: 24px; border-radius: 6px; border: 1px dashed var(--hair); }
+.ct-gearrow__name { margin: 0; font-weight: 700; color: var(--text); }
+.ct-gearrow__kind { margin: 2px 0 0; font-size: 12.5px; color: var(--faint); }
+.ct-gearrow__fx { margin: 6px 0 0; padding-left: 16px; font-size: 13.5px; line-height: 1.55; color: var(--dim); }
+/* /navi copy buttons; the guides style them under .gx, which news pages lack.
+   Also imported by ../events-2026-11. */
+.navicopy { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 34px; padding: 0 4px 0 10px; border: 1px solid rgba(61, 232, 255, .5); border-radius: 6px; background: #07051a; color: var(--cyan); font-size: 13px; cursor: pointer; }
+.navicopy span { overflow-wrap: anywhere; text-align: left; }
+.navicopy small { flex: none; padding: 3px 7px; border-radius: 4px; background: var(--cyan); color: #0b0820; font: 800 11px var(--font-sarabun), sans-serif; }
+.navicopy:hover { border-color: var(--yellow); }
+.navicopy.is-done small { background: #4dffb8; }
+.ct-npc .navicopy { align-self: flex-start; }

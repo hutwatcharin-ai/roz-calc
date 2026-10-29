@@ -23,6 +23,7 @@ const EXTRA: Record<string, NewsCardExtra> = {
   'patch-2026-09-03': { blurb: 'Episode 1-2 · Orc Underground Caverns · Comodo Luanda · Memorial Dungeon 2 แห่ง' },
   // MVP Raid Amon Ra and Baphomet, the GM event's Marc.
   'patch-2026-10-15': { cast: ['/images/monsters/1511.gif', '/images/monsters/1039.gif', '/images/monsters/1045.gif'] },
+  'events-2026-11': { blurb: 'Gatchaman ถึง 26 พ.ย. · EXP x2 ทุกเสาร์อาทิตย์ · คอสตูมผี' },
   // Clock Tower monsters: Clock, Alarm, Rideword.
   'patch-2026-10-29': { blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00 น. · ดันใหม่ เควสรายวัน อุปกรณ์ใหม่', cast: ['/images/monsters/1269.gif', '/images/monsters/1193.gif', '/images/monsters/1195.gif'] },
 };

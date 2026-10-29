@@ -27,6 +27,9 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
   { file: 'app/admin/prices/page.tsx', text: '50 ชิ้น', why: 'an example of the stack input (50 pieces for 150z), not a count of anything' },
   { file: 'components/WeightCalculator.tsx', text: '10 ชิ้น', why: 'how many one tap of a quick button adds to the bag, not a count of anything' },
   { file: 'app/news/events-2026-10/page.tsx', text: '66 ตัว', why: 'Baphomet Jr. kill count for the daily quest, from the NPC dialogue' },
+  { file: 'app/news/events-2026-11/page.tsx', text: '10 ตัว', why: 'Gatchaman daily quest goals (10 Mid Powder, 10 Galaring, 10 Squid Bomb), from the official notice' },
+  { file: 'app/news/patch-2026-10-29/page.tsx', text: '12 ชิ้น', why: 'new equipment listed in the 29 Oct patch notes (2 Hat Maker + 10 exclusive); none of it is in the database yet' },
+  { file: 'app/news/patch-2026-10-29/page.tsx', text: '10 ชิ้น', why: 'the exclusive equipment count from the same patch notes, beside the 2 Hat Maker hats' },
   { file: 'app/news/events-2026-10/page.tsx', text: '30 ตัว', why: 'Ancient Mummy kill count for the Amon Ra daily quest, from the NPC dialogue' },
   { file: 'app/news/events-2026-10/page.tsx', text: '10 ใบ', why: 'RO Lite crossover reward tier (10 cleared cards), from the official Discord post' },
   // Guild Hall of Fame quest and exchange quantities, from the official event tabs step2-step6 (15 Oct 2026).
