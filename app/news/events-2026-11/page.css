@@ -34,3 +34,8 @@
 #gatchaman .evnpcs { grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); }
 #gatchaman .evnpc figcaption { min-width: 0; }
 .evsteps .navicopy, .evsmall .navicopy { vertical-align: middle; margin: 2px 2px; }
+.ev11-topup { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr)); gap: 6px; }
+.ev11-topup div { display: flex; flex-direction: column; padding: 8px 12px; border: 1px solid var(--hair); border-radius: 10px; }
+.ev11-topup b { color: var(--text); }
+.ev11-topup span { color: var(--yellow); font-size: 13.5px; font-weight: 700; }
+.ev11-hl td { color: var(--yellow); font-weight: 700; }

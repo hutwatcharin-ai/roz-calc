@@ -28,7 +28,7 @@ export const revalidate = 86400;
 
 const PATH = '/news/events-2026-11';
 const PUBLISHED = '2026-10-29T15:00:00+07:00';
-const MODIFIED = '2026-10-29T20:00:00+07:00';
+const MODIFIED = '2026-10-29T22:00:00+07:00';
 const ENDS = '2026-11-26T08:00:00+07:00';
 const IMG = '/images/events/2026-11';
 // Item icons: the 29 Oct imports are PNG; older items keep their GIF, and
@@ -110,6 +110,19 @@ const ROUNDS = [
   ['5', 'ศุกร์ 27 พ.ย. 07:00', 'จันทร์ 30 พ.ย. 06:59'],
 ];
 
+// Black Friday Promotion (notice event 172): top-up bonus tiers and the
+// cumulative KP-spending payback. Free KP does not count toward spending.
+const TOPUP = [[1000, 100], [5000, 500], [10000, 1000], [25000, 2500], [50000, 5000], [100000, 10000], [200000, 20000]];
+const PAYBACK: { kp: number; box: string; got: string; costume?: boolean }[] = [
+  { kp: 10000, box: 'I', got: '[Event] Challenge Drink · [Event] Unlimited Drink ×5' },
+  { kp: 25000, box: 'II', got: '[Event] Agi Up Potion ×15 · [Event] Authoritative Badge ×10' },
+  { kp: 50000, box: 'III', got: "[Event] Authoritative Badge ×10 · Small Mana Potion ×10 · Mimir's Well ×15 · Ale's Blessing ×15" },
+  { kp: 75000, box: 'IV', got: '[Event] Bubble Gum ×10 · Tool Dealer Summon Bell Box 7 วัน · Kafra Storage Bell Box 7 วัน · Premium Course Meal ×10 · Blessing of Yggdrasil ×1' },
+  { kp: 100000, box: 'V', got: '[Costume] Celestial Dark Flame (หัวกลาง)', costume: true },
+  { kp: 200000, box: 'VI', got: '[Costume] Master of Darkness (หัวล่าง)', costume: true },
+  { kp: 300000, box: 'VII', got: "[Costume] Juncea's Bone Wings (ผ้าคลุม)", costume: true },
+];
+
 const GHOSTLY = [
   { id: 31123, name: 'Ghostring Tall Hat', where: 'หัวบน' },
   { id: 31669, name: 'Enhanced Whisper Mask', where: 'หัวกลาง' },
@@ -139,7 +152,7 @@ export default function Events202611() {
       </nav>
 
       <header className="evhero">
-        <p className="evhero__kicker">EVENT · 2 กิจกรรม</p>
+        <p className="evhero__kicker">EVENT · 3 กิจกรรม</p>
         <h1 className="pagehead__title">Gatchaman บุก Morocc · Black Friday EXP x2</h1>
         <p className="evhero__date">
           {over ? <span className="tag tag--unknown">จบแล้ว</span> : <span className="evhero__live">กำลังจัด</span>} 29 ต.ค. หลังปิดปรับปรุง – ปิดปรับปรุง 26 พ.ย.
@@ -147,6 +160,7 @@ export default function Events202611() {
         <ul className="evtiles">
           <li><a href="#gatchaman"><img src={`${IMG}/ken.png`} alt="" width={36} /><span>Gatchaman Collab</span><small>เควสที่ Morocc · แลกการ์ดและคอสตูม</small></a></li>
           <li><a href="#exp"><img src={ico(105671)} alt="" width={32} /><span>Black Friday EXP x2</span><small>ทุกเสาร์อาทิตย์ 5 รอบ</small></a></li>
+          <li><a href="#promotion"><img src={ico(108261)} alt="" width={32} /><span>Black Friday เติม KP</span><small>โบนัสเติม · ใช้ครบรับคอสตูม</small></a></li>
           <li><a href="#ghostly"><img src={ico(108434)} alt="" width={32} /><span>คอสตูมผี Ghostly</span><small>Kafra Shop ถึง 23 พ.ย.</small></a></li>
         </ul>
         <p className="muted evhero__src">
@@ -328,9 +342,54 @@ export default function Events202611() {
         <p className="evnote">หลังอีเวนต์จบ คอสตูมพวกนี้ผูกบัญชีได้ (ขายต่อไม่ได้) เพื่อให้เอ็นชานต์ได้</p>
       </section>
 
+      {/* ---------------- Black Friday Promotion ---------------- */}
+      <section id="promotion" className="evsec evsec--pink">
+        <p className="evsec__tag">EVENT 03 · KAFRA SHOP</p>
+        <h2 className="evsec__title">Black Friday Promotion: เติม KP และใช้ KP</h2>
+        <p className="evsec__lead">สำหรับคนเติมเงิน มี 3 อย่างซ้อนกัน: ส่วนลด KP Shop 10% · โบนัสเติม KP สูงสุด 10% · ใช้ KP ครบตามขั้นได้กล่องรางวัล ขั้นสูงได้คอสตูม</p>
+
+        <h3 className="evh">1. ส่วนลด KP Shop 10% ทั้งร้าน</h3>
+        <ul className="evsteps">
+          <li>รอบ 1: <b>29 ต.ค. – 5 พ.ย.</b></li>
+          <li>รอบ 2: <b>26 พ.ย. – 3 ธ.ค.</b></li>
+        </ul>
+        <p className="evnote">วันตามประกาศ (UTC+0) · แพ็กเกจอีเวนต์บางตัวอาจไม่ลด ดูในร้านในเกม</p>
+
+        <h3 className="evh">2. โบนัสเติม KP (29 ต.ค. – 23 พ.ย.)</h3>
+        <div className="ev11-topup">
+          {TOPUP.map(([kp, bonus]) => (
+            <div key={kp}><b>{kp.toLocaleString('en-US')} KP</b><span>+{bonus.toLocaleString('en-US')} Free KP</span></div>
+          ))}
+        </div>
+        <p className="evnote">ได้ขั้นละครั้งต่อบัญชี GNJOY · Free KP ที่ได้หมดอายุใน 1 ปี</p>
+
+        <h3 className="evh">3. ใช้ KP สะสม รับกล่องรางวัล (29 ต.ค. – 4 ธ.ค. 06:59 น.)</h3>
+        <div className="ev11-tablewrap">
+          <table className="stat-table ev11-table">
+            <thead><tr><th>ใช้ KP รวม</th><th>กล่อง</th><th>ได้</th></tr></thead>
+            <tbody>
+              {PAYBACK.map((r) => (
+                <tr key={r.kp} className={r.costume ? 'ev11-hl' : undefined}>
+                  <td className="num">{r.kp.toLocaleString('en-US')}</td>
+                  <td>Payback Box {r.box}</td>
+                  <td>{r.got}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="evreward">
+          <span className="evreward__tag">REWARD</span> ได้ทุกขั้นที่ผ่าน เช่นใช้ครบ 50,000 KP ได้กล่อง I II III · <b>แจกทางเมล (RODEX) ตอนปิดปรับปรุง 10 ธ.ค. 2569</b>
+        </div>
+        <p className="evnote">
+          นับเฉพาะ KP ที่ใช้ซื้อของใน KP Shop ในเกมช่วงอีเวนต์ · <b>Free KP ไม่นับ</b> · ถ้ายกเลิกหรือคืนเงิน ของที่ได้จะถูกดึงคืน ·
+          คอสตูม 3 ชิ้นยังไม่มีในไฟล์เกม เลยยังไม่มีหน้าไอเทมให้กดดู · หลังอีเวนต์จบผูกบัญชีได้เพื่อเอ็นชานต์
+        </p>
+      </section>
+
       <p className="source-note" style={{ marginTop: 24 }}>
         <strong>ที่มา:</strong> ประกาศทางการ roz.mygnjoy.com &ldquo;[Collaboration Event] Science Ninja Team Gatchaman Arrives in Ragnarok Zero: Global!&rdquo;
-        และ &ldquo;Black Friday Event&rdquo; (29 ต.ค. 2569) · บันทึกเควส ไฟล์นำทาง คำอธิบายไอเทม และรูปจากไคลเอนต์แพทช์ 29 ต.ค. ·
+        &ldquo;Black Friday Event&rdquo; และ &ldquo;Black Friday Promotion&rdquo; (29 ต.ค. 2569) · บันทึกเควส ไฟล์นำทาง คำอธิบายไอเทม และรูปจากไคลเอนต์แพทช์ 29 ต.ค. ·
         หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ · Gatchaman © Tatsunoko Production
       </p>
       <p className="muted" style={{ marginTop: 12 }}>
