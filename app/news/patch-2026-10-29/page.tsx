@@ -385,7 +385,7 @@ export default async function Patch20261029Page() {
               <figcaption>
                 <span className="ct-npc__tag">{n.tag}</span>
                 <strong>{n.name}</strong>
-                <code>/navi {n.navi}</code>
+                <NaviCopy cmd={`/navi ${n.navi}`} />
               </figcaption>
             </figure>
           ))}

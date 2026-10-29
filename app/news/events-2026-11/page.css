@@ -29,3 +29,7 @@
 /* /navi buttons: styled under .gx in the guides only. */
 .evpage .navicopy { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 4px 0 10px; border: 1px solid rgba(61, 232, 255, .5); border-radius: 6px; background: #07051a; color: var(--cyan); font-size: 13px; cursor: pointer; }
 .evpage .navicopy small { padding: 3px 7px; border-radius: 4px; background: var(--cyan); color: #0b0820; font: 800 11px var(--font-sarabun), sans-serif; }
+.evnpc figcaption .navicopy { flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 4px; padding: 6px 8px; font-size: 11.5px; }
+.evnpc figcaption .navicopy span { white-space: nowrap; overflow-wrap: normal; }
+#gatchaman .evnpcs { grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); }
+#gatchaman .evnpc figcaption { min-width: 0; }

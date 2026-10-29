@@ -60,7 +60,7 @@ function Npc({ img, name, navi, w = 60 }: { img: string; name: string; navi: str
       <span className="evnpc__art"><img src={`${IMG}/${img}.png`} alt={name} width={w} loading="lazy" /></span>
       <figcaption>
         <strong>{name}</strong>
-        <code>/navi {navi}</code>
+        <NaviCopy cmd={`/navi ${navi}`} />
       </figcaption>
     </figure>
   );
