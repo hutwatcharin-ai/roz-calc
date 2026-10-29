@@ -170,7 +170,10 @@ export function splitNews(now: number): { live: NewsItem[]; archive: NewsItem[] 
   const patches = NEWS.filter((n) => n.kind === 'patch' && Date.parse(n.date) <= now).sort(
     (a, b) => Date.parse(b.date) - Date.parse(a.date),
   );
-  const live = [...events, ...patches.slice(0, 1)];
+  // A patch from the last week leads: on patch day it is the news (owner,
+  // 29 Oct 2026, asked for the Clock Tower patch on top instead of last).
+  const fresh = patches[0] && now - Date.parse(patches[0].date) < 7 * DAY;
+  const live = fresh ? [patches[0], ...events] : [...events, ...patches.slice(0, 1)];
   const archive = NEWS.filter((n) => !live.includes(n) && Date.parse(n.date) <= now).sort(
     (a, b) => Date.parse(b.date) - Date.parse(a.date),
   );

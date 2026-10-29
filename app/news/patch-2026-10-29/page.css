@@ -24,3 +24,9 @@
 .ct-npc .navicopy { align-self: flex-start; }
 .ct-costumes { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 8px 0 0; padding: 0; }
 .ct-costumes li { padding: 6px 12px; border: 1px solid var(--hair); border-radius: 999px; font-size: 14px; }
+.ct-recipe { margin-top: 12px; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--yellow) 45%, transparent); border-radius: 12px; }
+.ct-recipe__title { margin: 0 0 8px; font-weight: 700; color: var(--yellow); }
+.ct-mats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr)); gap: 6px; }
+.ct-mat { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--hair); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; }
+.ct-mat span { flex: 1; }
+.ct-mat b { color: var(--yellow); }

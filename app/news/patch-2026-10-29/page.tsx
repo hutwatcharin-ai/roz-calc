@@ -12,9 +12,11 @@
 // sets that only Clock Tower monsters drop -- every one of these monsters
 // spawns nowhere open before this patch (FRESH_BEFORE_PATCH below).
 //
-// 29 Oct afternoon: the five Lv 122-126 basement monsters and every card set
-// that needs one of their cards came off (owner: not in the patch notes, no
-// spawn count, nothing says how they appear). Effects the notes leave out --
+// 29 Oct afternoon: the five Lv 122-126 basement monsters came off, then
+// came back the same hour as the Hat Maker's suppliers: each drops one of the
+// five materials the two Hat Maker headgears need (data/crafting-recipes.json,
+// the prontera quest export; the NPC and its spot match the patch notes).
+// Effects the notes leave out --
 // Safety Boots, the three new capes' item ids -- come from the client the
 // owner's game patched to on 29 Oct (D:/RagnarokZero/System, iteminfo).
 import '../patch-2026-10-01/page.css';
@@ -51,7 +53,7 @@ const MODIFIED = '2026-10-29T15:00:00+07:00';
 export const metadata: Metadata = {
   title: 'แพทช์ 29 ต.ค. 2569 Ragnarok Zero — เปิด Clock Tower, อีเวนต์ Gatchaman, Black Friday',
   description:
-    'สรุปแพทช์ 29 ตุลาคม 2569 ของ Ragnarok Zero Global ภาษาไทย: ปิดเซิร์ฟ 08:00–14:00 น., ดันเจี้ยน Clock Tower มอนทุกชั้น พิกัด NPC เควสรายวันและเควสอีเวนต์ Curse of the Clock Tower อุปกรณ์ใหม่ 12 ชิ้นพร้อมผล การ์ดที่จะหาได้ครั้งแรก, คอลแลบ Gatchaman, Black Friday EXP x2, คอสตูมผี และ WoE เซิร์ฟ EU เลื่อนเป็นตี 3',
+    'สรุปแพทช์ 29 ตุลาคม 2569 ของ Ragnarok Zero Global ภาษาไทย: ปิดเซิร์ฟ 08:00–14:00 น., ดันเจี้ยน Clock Tower มอนทุกชั้น พิกัด NPC เควสรายวันและเควสอีเวนต์ Curse of the Clock Tower อุปกรณ์ใหม่ 12 ชิ้นพร้อมผล วัตถุดิบ Hat Maker จากบอสใต้ดิน การ์ดที่จะหาได้ครั้งแรก, คอลแลบ Gatchaman, Black Friday EXP x2, คอสตูมผี และ WoE เซิร์ฟ EU เลื่อนเป็นตี 3',
 };
 
 const HIGHLIGHTS = [
@@ -88,8 +90,19 @@ const STAGES = [
 const CODES = STAGES.flatMap((s) => s.codes);
 
 // Monsters in the tower with no fixed spawn count in the data (amount null):
-// level 122-126, one per basement floor. Kept off the page entirely.
+// level 122-126, one per basement floor. Each drops one Hat Maker material.
 const BOSSES = [20179, 20178, 20177, 20175, 20176];
+
+// What each boss drops for the Hat Maker (monster_drops, rate not in the
+// data), and what one headgear takes of it. Both Hat Maker headgears take the
+// same list, plus Mithril x10.
+const HAT_MATS: { boss: number; item: number; name: string; need: number }[] = [
+  { boss: 20175, item: 25505, name: 'Jokers Wild', need: 1 },
+  { boss: 20176, item: 25506, name: 'Cute Broom', need: 100 },
+  { boss: 20177, item: 25507, name: 'Showy Coral Reef', need: 100 },
+  { boss: 20178, item: 25508, name: 'Orc Warlord Token', need: 100 },
+  { boss: 20179, item: 25509, name: 'Shining Round Shell', need: 100 },
+];
 
 // From the official patch notes of 29 Oct 2026 (an image, read by hand).
 const NPCS = [
@@ -196,12 +209,10 @@ export default async function Patch20261029Page() {
     .filter((c) => !BOSSES.includes(c.monster_id))
     .sort((a, b) => (monById.get(b.monster_id)?.level ?? 0) - (monById.get(a.monster_id)?.level ?? 0))
     .filter((c) => (seenCard.has(c.items!.id) ? false : (seenCard.add(c.items!.id), true)));
-  // Cards only the basement bosses drop: their sets go too.
-  const bossCardIds = new Set(cardRows.filter((c) => BOSSES.includes(c.monster_id)).map((c) => c.items!.id));
-  const sets = [...new Map(cardRows.flatMap((c) => setsOf(c.items!.id)).map((s): [string, ItemSet] => [s.name, s])).values()]
-    .filter((set) => !set.pieces.some((piece) => bossCardIds.has(piece.id)));
+  const bossCards = new Map(cardRows.filter((c) => BOSSES.includes(c.monster_id)).map((c) => [c.monster_id, c.items!]));
+  const sets = [...new Map(cardRows.flatMap((c) => setsOf(c.items!.id)).map((s): [string, ItemSet] => [s.name, s])).values()];
   const stars = Object.entries(STAR)
-    .map(([id, p]) => ({ id, p, hits: p.droppers.filter((d) => fresh.has(d.id) && !BOSSES.includes(d.id)) }))
+    .map(([id, p]) => ({ id, p, hits: p.droppers.filter((d) => fresh.has(d.id)) }))
     .filter((x) => x.hits.length > 0);
   const allMobs = byStage.flatMap((s) => s.floors.flat());
   const levels = allMobs.map((m) => m.level);
@@ -297,8 +308,55 @@ export default async function Patch20261029Page() {
       <section id="gear" style={{ marginTop: 34, scrollMarginTop: 90 }}>
         <h2 className="section-title">อุปกรณ์ใหม่</h2>
         <h3 className="pxh">แลกที่ Hat Maker</h3>
-        <p className="muted pxp" style={{ fontSize: 14 }}>ใช้ของที่เก็บระหว่างผจญภัย แพตช์โน้ตไม่บอกว่าต้องใช้อะไร</p>
         <ul className="ct-gear">{HAT_MAKER.map(gearRow)}</ul>
+
+        <div className="ct-recipe" id="hatmaker">
+          <p className="ct-recipe__title">ของที่ต้องใช้ต่อหมวก 1 ชิ้น (สองชิ้นใช้ชุดเดียวกัน)</p>
+          <ul className="ct-mats">
+            {HAT_MATS.map((m) => (
+              <li key={m.item}>
+                <Link href={`/database/items/${m.item}`} className="ct-mat">
+                  <img src={`/images/items/${m.item}.gif`} alt="" width={24} height={24} loading="lazy" />
+                  <span>{m.name}</span>
+                  <b>×{m.need}</b>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/database/items/25430" className="ct-mat">
+                <img src="/images/items/25430.gif" alt="" width={24} height={24} loading="lazy" />
+                <span>Mithril</span>
+                <b>×10</b>
+              </Link>
+            </li>
+          </ul>
+          <p className="muted" style={{ margin: '8px 0 0', fontSize: 13.5 }}>
+            สูตรจากข้อมูลเควสของ Hat Maker (/navi aldebaran 130/140 ตรงกับแพตช์โน้ต) แพตช์โน้ตไม่ได้เขียนวัตถุดิบ · ยังไม่ได้เช็กในเกม
+          </p>
+        </div>
+
+        <h3 className="pxh" id="bosses" style={{ scrollMarginTop: 90 }}>บอสชั้นใต้ดิน 5 ตัว: ที่มาของวัตถุดิบ Hat Maker</h3>
+        <p className="muted pxp" style={{ fontSize: 14 }}>
+          วัตถุดิบ 5 อย่างข้างบนดรอปจากบอสตัวละอย่าง Lv 122–126 ชั้นละตัวในหอนาฬิกาใต้ดิน ·
+          ข้อมูลไม่มีจำนวนเกิดและเวลาเกิด แพตช์โน้ตไม่พูดถึงบอสพวกนี้
+        </p>
+        <ul className="pcards ct-cards">
+          {HAT_MATS.filter((m) => monById.has(m.boss)).map((mat) => {
+            const m = monById.get(mat.boss)!;
+            const card = bossCards.get(mat.boss);
+            const floor = STAGES[1].labels[STAGES[1].codes.findIndex((c) => spawns.some((s) => s.map_code === c && s.monsters?.id === mat.boss))];
+            return (
+              <li key={mat.boss}>
+                <Link href={`/database/monsters/${mat.boss}`} className="pcard">
+                  <img src={`/images/monsters/${mat.boss}.gif`} alt="" className="pcard__mob" loading="lazy" />
+                  <span className="pcard__name">{monsterLabel(mat.boss, m.name_en)}</span>
+                  <span className="pcard__from">Lv {m.level}{floor ? ` · ${floor}` : ''} · ธาตุ {th(ELEMENT_TH, m.element)}</span>
+                  <span className="pcard__fx">ดรอป <strong>{mat.name}</strong> (หมวกละ {mat.need}){card ? ` · ${card.name_en}: ${card.description_th ?? '—'}` : ''}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
         <h3 className="pxh">ของจาก Clock Tower</h3>
         <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment ไม่บอกว่าดรอปจากมอนตัวไหน</p>
         <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
