@@ -165,7 +165,7 @@ export default function Events202611() {
           <li><a href="#ghostly"><img src={ico(108434)} alt="" width={32} /><span>คอสตูมผี Ghostly</span><small>Kafra Shop ถึง 23 พ.ย.</small></a></li>
         </ul>
         <p className="muted evhero__src">
-          ขั้นตอนเควส พิกัด รางวัล ราคา และวันจากประกาศทางการ · รูปจากไฟล์เกม
+          จุดเริ่มเควส ฐาน Gatchaman รางวัล ราคา และวันจากประกาศทางการ · ขั้นระหว่างทางจากบันทึกเควสในไคลเอนต์ · รูปจากไฟล์เกม
         </p>
       </header>
 
@@ -182,6 +182,9 @@ export default function Events202611() {
           <Npc img="jun" name="Jun (เควสรายวัน)" navi="morocc 32/194" />
           <Npc img="ken" name="Ken (เควส Berg Katse)" navi="morocc 29/193" />
           <Npc img="joe" name="Joe (ร้านแลกของ)" navi="morocc 34/192" />
+          <Npc img="jinpei" name="Jinpei" navi="morocc 129/270" w={56} />
+          <Npc img="ryu" name="Ryu" navi="morocc 173/35" />
+          <Npc img="berg-katse" name="Berg Katse" navi="morocc 22/188" w={70} />
         </div>
 
         <h3 className="evh">เควสหลัก Visitors from Another World (ทำครั้งเดียว)</h3>
@@ -189,11 +192,15 @@ export default function Events202611() {
         <ol className="evsteps">
           <li>คุย <b>[Urgent] Anomalous Rift Receptionist</b> <NaviCopy cmd="/navi morocc 196/261" /> สมัครเข้าทีมสำรวจรอยแยกที่โผล่กลางเมือง</li>
           <li>เข้าทีมแล้วจะได้ฟังเรื่องรอยแยก คนแปลกหน้า และมอนแปลก ๆ · เดินตามเบาะแสที่ชาวเมือง Morocc บอก (กด Alt+U ดูว่าต้องไปหาใครต่อ)</li>
+          <li>ไปดูคนแต่งตัวแปลก ๆ ที่ประตูเหนือ <NaviCopy cmd="/navi morocc 129/270" /> เจอ <b>Jinpei</b> ที่หิวมาก พาไปหาของกินที่ร้านอาหาร <NaviCopy cmd="/navi morocc 54/249" /></li>
+          <li><b>Ryu</b> ได้ข่าวว่ามีคนชุดขาวออกไปทางประตูใต้ ตามไป <NaviCopy cmd="/navi morocc 173/35" /> แล้วสืบมอนแปลก ๆ นอกเมือง</li>
+          <li>ล่า Galaring และ Squid Bomb แถว Morocc <b>อย่างละประมาณ 3 ตัว</b> แล้วกลับเข้าเมือง</li>
           <li>ตามเบาะแสจนเจอทีม Gatchaman ทั้ง 5 คน พวกเขาอยากพบทีมสำรวจ พาไปหา</li>
-          <li>ช่วยไล่กองทัพ Galactor · <b>[Urgent] Anomalous Rift Investigator</b> จะไปรายงานทีมและเตรียมสร้าง Mid Missile จบเควส</li>
-          <li>จบแล้วทำเควสรายวันได้ที่ฐาน Gatchaman ฝั่งตะวันตกของเมือง (ข้างล่าง)</li>
+          <li>ตามทหาร Galactor ไปจนเห็น <b>Berg Katse</b> คุยอยู่หน้ารอยแยกลับ <NaviCopy cmd="/navi morocc 22/188" /> แล้วเข้าไปสำรวจข้างใน (ระบบนำทางอาจใช้ไม่ได้ข้างใน)</li>
+          <li>กลับไปคุย <b>Ken</b> <NaviCopy cmd="/navi morocc 29/193" /> แล้วช่วยทีมสร้าง Mid Missile: ล่า Galaring และ Squid Bomb <b>อย่างละ 5 ตัว</b> เก็บ:</li>
         </ol>
-        <p className="evnote">ประกาศทางการให้พิกัดแค่จุดเริ่มกับฐาน Gatchaman · คนที่ต้องไปถามระหว่างทาง เกมจะบอกในหน้าต่างเควส</p>
+        <ul className="evmats">{[{ id: 1002381, name: 'Mid Powder', qty: 5 }].map(item)}</ul>
+        <p className="evnote">Mid Powder ดรอปจากลูกน้อง Galactor (Galaring, Squid Bomb) · หายเมื่ออีเวนต์จบ · ช่วยไล่ Galactor แล้ว <b>[Urgent] Anomalous Rift Investigator</b> จะไปรายงานทีม จบเควส · จากนั้นทำเควสรายวันที่ฐาน Gatchaman (ข้างล่าง)</p>
 
         <h3 className="evh">มอนของอีเวนต์</h3>
         <div className="ev11-mobs">
