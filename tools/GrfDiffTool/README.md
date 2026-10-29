@@ -17,7 +17,7 @@ The installed copy lives in `D:\Data grf roz\GrfDiffTool` (desktop shortcut poin
 GrfDiffTool.exe --run --grf D:\RagnarokZero\data.grf --output "D:\Data grf roz\weekly"
 ```
 
-The run stops without writing a snapshot when `data.grf` is open in the game, launcher or patcher, or when extraction fails. There is no fallback to an older extraction.
+The run stops without writing a snapshot when another process has `data.grf` open for writing (the patcher mid-update), or when extraction fails. The game itself only reads the file, so it can stay open. There is no fallback to an older extraction.
 
 Each run writes a dated snapshot containing `manifest.jsonl`, `summary.json`, `removed.json`, `report.md`, and `added`/`changed` files. The `latest.json` pointer selects the baseline for the next run.
 

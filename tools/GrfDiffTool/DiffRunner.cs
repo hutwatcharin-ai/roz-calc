@@ -19,9 +19,9 @@ public sealed class DiffRunner
     {
         if (!File.Exists(o.GrfPath)) return new(false, 0, 0, 0, null, $"GRF not found: {o.GrfPath}");
         if (!File.Exists(o.ExtractorScript)) return new(false, 0, 0, 0, null, $"grf-extract.mjs not found: {o.ExtractorScript}");
-        // A running game or patcher keeps data.grf open, and GrfCL then reports the archive as broken.
-        try { using var _ = new FileStream(o.GrfPath, FileMode.Open, FileAccess.Read, FileShare.None); }
-        catch (IOException) { return new(false, 0, 0, 0, null, "data.grf กำลังถูกใช้อยู่ — ปิดเกม/launcher หรือรอแพทช์จบก่อน แล้วลองใหม่"); }
+        // Readers (the running game) are fine; a writer means the patcher is mid-update and the archive is not stable.
+        try { using var _ = new FileStream(o.GrfPath, FileMode.Open, FileAccess.Read, FileShare.Read); }
+        catch (IOException) { return new(false, 0, 0, 0, null, "data.grf กำลังถูกแก้อยู่ (แพทช์ยังลงไม่จบ) — รอแพทช์จบก่อน แล้วลองใหม่"); }
         var day = DateTime.Now.ToString("yyyy-MM-dd");
         var run = DateTime.Now.ToString("yyyyMMdd-HHmmss");
         var root = Path.GetFullPath(o.OutputRoot);
