@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from ro_sprite import Spr, Act, draw_layers  # noqa: E402
 from PIL import Image  # noqa: E402
 
-DATA = 'D:/data_grf_extracted/files/data/sprite/'
+DATA = 'D:/Data grf roz/data_grf_extracted/files/data/sprite/'
 OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'images', 'arcade')
 HUMAN = DATA + '인간족/'
 MOB = DATA + '몬스터/'

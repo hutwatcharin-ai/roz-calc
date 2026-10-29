@@ -26,7 +26,7 @@ import urllib.request
 sys.path.insert(0, os.path.dirname(__file__))
 import lub  # noqa: E402
 
-SYSTEM = 'D:/data_grf_extracted/System/'
+SYSTEM = 'D:/Data grf roz/data_grf_extracted/System/'
 OUT = os.path.join(os.path.dirname(__file__), '..', 'data', 'star-gear.json')
 READ_ON = '2026-09-24'
 

@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from ro_sprite import Spr, Act, draw_layers  # noqa: E402
 from PIL import Image  # noqa: E402
 
-SRC = 'D:/data_grf_extracted/files/data/sprite/homun/'
+SRC = 'D:/Data grf roz/data_grf_extracted/files/data/sprite/homun/'
 OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'images', 'homun')
 NAMES = ['lif', 'amistr', 'filir', 'vanilmirth', 'lif_h', 'amistr_h', 'filir_h', 'vanilmirth_h']
 

@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import lub  # noqa: E402
 
-BASE = "D:/data_grf_extracted/files/data/luafiles514/lua files/agit/"
+BASE = "D:/Data grf roz/data_grf_extracted/files/data/luafiles514/lua files/agit/"
 # The Thai client's own pair: _data holds the map/warp rows, _thth the names
 # it shows (which are the English ones -- castle names are not translated).
 # agitconfig.lub and agitconfig_strings.lub carry the Korean names instead.

@@ -35,7 +35,7 @@ ICON_DIRS = [
     r'D:\Data grf roz\grf-2026-10-15-icons\files\data\texture\유저인터페이스\item',
     r'D:\data_grf_comparison_20261001\extracted\added\data\texture\유저인터페이스\item',
     r'D:\data_grf_comparison_20261001\extracted\changed\data\texture\유저인터페이스\item',
-    r'D:\data_grf_extracted\files\data\texture\유저인터페이스\item',
+    r'D:\Data grf roz\data_grf_extracted\files\data\texture\유저인터페이스\item',
 ]
 POSITION = {
     'Upper': 'Upper Head', 'Middle': 'Mid Head', 'Lower': 'Lower Head', 'Garment': 'Garment',

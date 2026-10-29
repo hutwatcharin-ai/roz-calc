@@ -2,7 +2,7 @@
 
 The deep research round for this page came back almost entirely from rAthena,
 which is a third-party emulator built for a different ruleset. The client in
-D:/data_grf_extracted is this game's own client, so its Thai text is the
+D:/Data grf roz/data_grf_extracted is this game's own client, so its Thai text is the
 strongest source we have and it costs no web quota. This script reads it.
 
 What it writes to data/homunculus.json:
@@ -23,8 +23,8 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 import lub  # noqa: E402
 
-LUA = 'D:/data_grf_extracted/files/data/luafiles514/lua files/'
-SYSTEM = 'D:/data_grf_extracted/System/'
+LUA = 'D:/Data grf roz/data_grf_extracted/files/data/luafiles514/lua files/'
+SYSTEM = 'D:/Data grf roz/data_grf_extracted/System/'
 OUT = os.path.join(os.path.dirname(__file__), '..', 'data', 'homunculus.json')
 READ_ON = '2026-09-24'
 

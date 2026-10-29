@@ -22,7 +22,7 @@ import urllib.request
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = r'D:\data_grf_extracted\files\data'
+DATA = r'D:\Data grf roz\data_grf_extracted\files\data'
 MINI = os.path.join(DATA, 'texture', '유저인터페이스', 'map')
 FULL = os.path.join(ROOT, 'public', 'images', 'maps', 'full')
 INDEX = os.path.join(FULL, '_index.json')

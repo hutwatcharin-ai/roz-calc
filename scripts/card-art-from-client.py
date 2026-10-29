@@ -17,7 +17,7 @@ import sys
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = sys.argv[1] if len(sys.argv) > 1 else r'D:\data_grf_extracted\files\data'
+DATA = sys.argv[1] if len(sys.argv) > 1 else r'D:\Data grf roz\data_grf_extracted\files\data'
 TABLE = os.path.join(DATA, 'num2cardillustnametable.txt')
 BMP = os.path.join(DATA, 'texture', '유저인터페이스', 'cardbmp')
 OUT = os.path.join(ROOT, 'public', 'images', 'cards')

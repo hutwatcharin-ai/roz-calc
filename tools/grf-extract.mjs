@@ -8,7 +8,10 @@
 // cipher) entries are listed but not written; files the patch adds or
 // changes have so far all been flag 1, and older ones are in that extraction.
 //
-//   node tools/grf-extract.mjs <data.grf> <outDir> [--match <regex>]
+//   node tools/grf-extract.mjs <data.grf> <outDir> [--match <regex>] [--raw-hash]
+//
+// --raw-hash adds rawSha256 (SHA-256 of the stored, still-encrypted bytes) to
+// skipped flag 2 entries, so a weekly diff can tell whether they changed.
 //
 // Layout (public GRF 0x300 format): 46-byte header -- 16-byte signature,
 // 14-byte key, u64 table offset, u32 file count, u32 version 0x300. At
@@ -24,6 +27,7 @@ import { grfDecode } from './grf-des.mjs';
 const [grf, out, ...rest] = process.argv.slice(2);
 if (!grf || !out) throw new Error('usage: grf-extract.mjs <data.grf> <outDir> [--match <regex>]');
 const mi = rest.indexOf('--match');
+const rawHash = rest.includes('--raw-hash');
 const match = new RegExp(mi >= 0 ? rest[mi + 1] : '\\.(lub|lua|txt|csv|xml|bson|scp|json)$', 'i');
 
 const fd = openSync(grf, 'r');
@@ -58,7 +62,7 @@ while (p < table.length) {
   if ((flags & 1) && match.test(name)) {
     // Flag 2 (mixed cipher) does not decode correctly yet: skipped, listed.
     // Flag 4 (header only) matches the 22 Sep extraction byte for byte.
-    if (flags & 2) { skippedCrypt++; index.write(JSON.stringify(row) + '\n'); continue; }
+    if (flags & 2) { skippedCrypt++; if (rawHash) row.rawSha256 = createHash('sha256').update(read(offset + 46, aligned)).digest('hex'); index.write(JSON.stringify(row) + '\n'); continue; }
     {
       try {
         const raw = grfDecode(read(offset + 46, aligned), flags, compressed);

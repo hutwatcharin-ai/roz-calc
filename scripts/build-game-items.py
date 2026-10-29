@@ -1,7 +1,7 @@
 """Item names and Thai descriptions straight from the live RO Zero Global client.
 
 Source: the client's System folder (itemInfo_data.lub + iteminfo_thTH.lub),
-copied by the owner on 22 Sep 2026 to D:\\data_grf_extracted\\System. Those
+copied by the owner on 22 Sep 2026 to D:\\Data grf roz\\data_grf_extracted\\System. Those
 files ship with the game's own patcher (path _patch_glob_roz_live), so this is
 the text a player reads in game -- names, Thai descriptions, slot counts.
 
@@ -25,7 +25,7 @@ from datetime import date
 sys.path.insert(0, os.path.dirname(__file__))
 import lub  # noqa: E402
 
-SYSTEM = sys.argv[1] if len(sys.argv) > 1 else r'D:\data_grf_extracted\System'
+SYSTEM = sys.argv[1] if len(sys.argv) > 1 else r'D:\Data grf roz\data_grf_extracted\System'
 OUT = os.path.join(os.path.dirname(__file__), '..', 'data', 'game-items.json')
 
 

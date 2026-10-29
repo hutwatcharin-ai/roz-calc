@@ -5,7 +5,7 @@ farm map and the two produce icons.
 
 Run: python scripts/build-event-2026-10-images.py
 Reads D:/data_grf_comparison_20261001/extracted (the 1 Oct 2026 patch) and
-D:/data_grf_extracted/files (the 22 Sep 2026 client) for older sprites.
+D:/Data grf roz/data_grf_extracted/files (the 22 Sep 2026 client) for older sprites.
 """
 import io, os, sys
 from PIL import Image
@@ -15,7 +15,7 @@ import lub
 from ro_sprite import Spr, Act, render
 
 NEW = r'D:\data_grf_comparison_20261001\extracted'
-OLD = r'D:\data_grf_extracted\files'
+OLD = r'D:\Data grf roz\data_grf_extracted\files'
 OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'images', 'events', '2026-10')
 os.makedirs(OUT, exist_ok=True)
 

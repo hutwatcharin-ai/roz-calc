@@ -23,8 +23,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 import lub  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SYSTEM = r'D:\data_grf_extracted\System'
-ICONS = r'D:\data_grf_extracted\files\data\texture\유저인터페이스\item'
+SYSTEM = r'D:\Data grf roz\data_grf_extracted\System'
+ICONS = r'D:\Data grf roz\data_grf_extracted\files\data\texture\유저인터페이스\item'
 OUT = os.path.join(ROOT, 'public', 'images', 'items')
 LIST = os.path.join(ROOT, 'data', 'raw', 'client-icons.json')
 APPLY = '--apply' in sys.argv
