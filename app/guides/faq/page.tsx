@@ -204,7 +204,7 @@ const GROUPS: FaqGroup[] = [
       },
       {
         q: 'เพดานเลเวลขยายเมื่อไร มีอะไรมาต่อ',
-        a: <>ขยายเป็น Base 70 / Job 70 แล้ว (แพตช์ <Link href="/news/patch-2026-10-01">1 ต.ค. 2569</Link>) · Clock Tower ที่แผนเคยบอกว่ามาพร้อมกันยังไม่อยู่ในประกาศ · รอบถัดไปดูที่ <Link href="/news/roadmap">ไทม์ไลน์อัปเดต</Link></>,
+        a: <>ขยายเป็น Base 70 / Job 70 แล้ว (แพตช์ <Link href="/news/patch-2026-10-01">1 ต.ค. 2569</Link>) · Clock Tower เปิดแล้วใน<Link href="/news/patch-2026-10-29">แพตช์ 29 ต.ค. 2569</Link> · รอบถัดไปดูที่ <Link href="/news/roadmap">ไทม์ไลน์อัปเดต</Link></>,
       },
       {
         q: 'WoE วันไหน กี่โมง',

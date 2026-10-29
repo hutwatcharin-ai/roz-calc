@@ -5,8 +5,6 @@ describe('mapRelease', () => {
   it('closes the areas the publisher roadmap has not opened yet', () => {
     // Named by the roadmap but not bannered by rozerodb: without the roadmap
     // rows these sat in the farm rankings as if a player could walk in.
-    expect(mapRelease('c_tower1')).toMatchObject({ when: 'OCT 2026', area: 'Clock Tower' });
-    expect(mapRelease('alde_dun01')?.area).toBe('Clock Tower');
     expect(mapRelease('tur_d01_a')?.area).toBe('Turtle Island');
     // The deeper rooms the client does not navigate to yet stay closed.
     expect(mapRelease('b_an_d02')?.area).toBe('Ant Hell');
@@ -14,8 +12,7 @@ describe('mapRelease', () => {
   });
 
   it('closes the Zero copies rozerodb files under another name', () => {
-    // tow_d is rozerodb's "Clock Tower F1", xma_d its "Toy Factory".
-    expect(mapRelease('tow_d01_a')?.area).toBe('Clock Tower');
+    // xma_d is rozerodb's "Toy Factory".
     expect(mapRelease('xma_d01_a')?.area).toBe('Lutie');
   });
 
@@ -40,15 +37,21 @@ describe('mapRelease', () => {
     for (const code of ['moc_pryd01', 'moc_pryd06', 'pry_d01_a', 'b_pry_d04']) {
       expect(mapRelease(code), code).toBeNull();
     }
-    // The override is scoped: Clock Tower, also bannered OCT, stays closed.
-    expect(mapRelease('c_tower1')?.area).toBe('Clock Tower');
+    // The override is scoped: Glast Heim, still on the calendar, stays closed.
+    expect(mapRelease('gl_knt01')?.area).toBe('Old Glast Heim');
   });
 
-  it('opens Labyrinth, Sphinx and Mjolnir from the 1 Oct 2026 update, not Clock Tower', () => {
+  it('opens Labyrinth, Sphinx and Mjolnir from the 1 Oct 2026 update', () => {
     for (const code of ['prt_maze01', 'maz_d01_a', 'b_maz_d03', 'in_sphinx1', 'sp_d01_a', 'b_sp_d05', 'mjo_dun01', 'mjo_d01_a']) {
       expect(mapRelease(code), code).toBeNull();
     }
-    expect(mapRelease('tow_d01_a')?.area).toBe('Clock Tower');
+  });
+
+  it('opens Clock Tower from the 29 Oct 2026 client, quest copies included', () => {
+    // The 29 Oct navi_map.lub added exactly these areas' 56 codes.
+    for (const code of ['c_tower1', 'c_tower4', 'alde_dun01', 'alde_dun04', 'tow_d01_a', 'tow_d04_z']) {
+      expect(mapRelease(code), code).toBeNull();
+    }
   });
 
   it('leaves open the maps nothing marks as closed', () => {

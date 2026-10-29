@@ -32,12 +32,12 @@ const PATH = '/news/roadmap';
 // roadmap source's "read" date -- those are cited inline in the body, this
 // is dateModified for the page as a whole. Bump the day this file's content
 // next changes (new LANDED entry, new DONE_MONTHS, etc).
-const PUBLISHED = '2026-09-26';
+const PUBLISHED = '2026-10-29';
 
 export const metadata: Metadata = {
   title: 'ไทม์ไลน์อัปเดต Ragnarok Zero Global — มาแล้วอะไร กำลังจะมาอะไร',
   description:
-    'RO Zero Global อัปเดตอะไรมาแล้วบ้างและตามแผนเดือนไหนมีอะไร — อาชีพขั้น 2 และ WoE เข้าแล้วเดือนกันยายน 2569 · แผนปีแรกถึงกรกฎาคม 2570 มี Clock Tower, Glast Heim, Lutie, Niflheim, ระบบแต่งงาน, Ayothaya และอาชีพ Ninja',
+    'RO Zero Global อัปเดตอะไรมาแล้วบ้างและตามแผนเดือนไหนมีอะไร — อาชีพขั้น 2 และ WoE เข้าแล้วเดือนกันยายน 2569 Clock Tower เข้าแล้ว 29 ต.ค. · แผนปีแรกถึงกรกฎาคม 2570 มี Glast Heim, Lutie, Niflheim, ระบบแต่งงาน, Ayothaya และอาชีพ Ninja',
 };
 
 type Plan = { month: string; label: string; items: string[] };
@@ -45,6 +45,12 @@ const PLAN = roadmap.plan as Plan[];
 
 // Our own patch pages: the half of this page that is not somebody's plan.
 const LANDED = [
+  {
+    href: '/news/patch-2026-10-29',
+    when: '29 ต.ค. 2569',
+    title: 'Clock Tower, Gatchaman, Black Friday',
+    body: 'เปิดหอนาฬิกา Al De Baran ชั้นบนและใต้ดิน · เควสรายวัน Lv 70 และเควสอีเวนต์ Curse of the Clock Tower · อุปกรณ์ใหม่และช่างหมวก · คอลแลบ Gatchaman · Black Friday EXP x2',
+  },
   {
     href: '/news/patch-2026-10-01',
     when: '1 ต.ค. 2569',
@@ -72,7 +78,7 @@ const LANDED = [
 ];
 
 // The months the roadmap lists that our own patch pages already show live.
-const DONE_MONTHS = new Set(['2026-08', '2026-09']);
+const DONE_MONTHS = new Set(['2026-08', '2026-09', '2026-10']);
 
 export default function RoadmapPage() {
   return (

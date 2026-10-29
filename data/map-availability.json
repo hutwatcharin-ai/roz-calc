@@ -1,43 +1,11 @@
 {
-  "generated": "2026-10-28",
+  "generated": "2026-10-29",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)",
     "clientNavi": "client navi_map.lub (15 Oct 2026 client): a map listed there is open"
   },
   "maps": {
-    "alde_dun01": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
-    "alde_dun02": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
-    "alde_dun03": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
-    "alde_dun04": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
     "ama_d02_a": {
       "when": "MAY 2027",
       "area": "Amatsu",
@@ -387,38 +355,6 @@
       "area": "Comodo West Cave: Karu (open, no monsters yet)",
       "sources": [
         "owner confirmed in-game, 28 Oct 2026"
-      ]
-    },
-    "c_tower1": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
-    "c_tower2": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
-    "c_tower3": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
-      ]
-    },
-    "c_tower4": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap",
-        "rozerodb"
       ]
     },
     "gef_dun02": {
@@ -1178,69 +1114,6 @@
       "sources": [
         "roadmap",
         "rozerodb"
-      ]
-    },
-    "tow_d01_a": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d01_b": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d01_z": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d02_a": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d02_b": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d02_z": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d03_a": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d03_b": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "tow_d03_z": {
-      "when": "OCT 2026",
-      "area": "Clock Tower",
-      "sources": [
-        "roadmap"
       ]
     },
     "tur_d01_a": {

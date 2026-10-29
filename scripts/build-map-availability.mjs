@@ -78,11 +78,6 @@ const MANUAL_OPEN = [
   { area: 'Prontera Labyrinth', test: /^(prt_maze|maz_d|b_maz_d)/, source: 'official notice, 1 Oct 2026 update' },
   { area: 'Sphinx', test: /^(in_sphinx|sp_d|b_sp_d)/, source: 'official notice, 1 Oct 2026 update' },
   { area: 'Mjolnir Dead Pit', test: /^(mjo_dun|mjo_d)/, source: 'official notice, 1 Oct 2026 update' },
-  // Ready for the 29 Oct 2026 patch (Clock Tower in the 28 Oct notice).
-  // Uncomment once the owner confirms the floors in game; tow_d (the quest
-  // instance) stays closed until something says it opened too. Then update
-  // lib/map-availability.test.ts, which still expects these closed.
-  // { area: 'Clock Tower', test: /^(c_tower|alde_dun)/, source: 'official notice + owner in game, 29 Oct 2026' },
 ];
 
 // The client's own navigation table is the strongest "open" signal there is
@@ -98,7 +93,10 @@ const MANUAL_OPEN = [
 // the newest extract after each patch.
 const CLIENT_NAVI =
   process.env.CLIENT_NAVI ??
-  'D:/Data grf roz/grf-2026-10-15/files/data/luafiles514/lua files/navigation/navi_map.lub';
+  // 29 Oct 2026 patch: the first snapshot extracted from the real GRF. It
+  // added exactly the 56 Clock Tower codes (c_tower1-4, alde_dun01-04, tow_d*,
+  // alde_d*), which is what opens Clock Tower here -- no manual row needed.
+  'D:/Data grf roz/weekly/2026-10-29/changed/data/luafiles514/lua files/navigation/navi_map.lub';
 const naviOpen = fs.existsSync(CLIENT_NAVI)
   ? new Set([...fs.readFileSync(CLIENT_NAVI).toString('latin1').matchAll(/[a-z][a-z0-9_@]{2,20}/g)].map((m) => m[0]))
   : null;
