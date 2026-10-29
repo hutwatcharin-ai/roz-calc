@@ -52,6 +52,16 @@ owner พิมพ์ / ในแชตบอท: /news /inbox /check /today /we
 4. ส่งพรีวิวตามปกติ ขึ้นเว็บเมื่อ owner บอก "ขึ้น" เท่านั้น
 5. หลังขึ้นเว็บแล้ว: `scripts/discord-inbox.mts done <id...>` · ถ้าแพทช์เพิ่มมอนหรือแมพ ให้รัน `... names` ใหม่ เพื่อให้ระบบจับชื่อในประกาศรอบหน้าได้
 
+## แพทช์ลงแล้ว → อ่านไคลเอนต์ใหม่ (ทำเองทั้งหมด)
+
+owner ทำแค่: อัปเดตเกม แล้วกด Run ใน GrfDiffTool (~25 นาที) แล้วบอก "แพทช์ลงแล้ว" · ไม่ต้องแก้พาธใดๆ: `scripts/grf_snapshots.py` / `grf-snapshots.mjs` หาโฟลเดอร์ `D:\Data grf roz\weekly\<วันที่>` ใหม่สุดเอง (ห้ามกลับไปเขียนวันที่ลงโค้ด โดยเฉพาะ `scripts/dressup/zorder.py` ซึ่งถ้าแก้ ห้องแต่งตัวจะ re-export ทุกชิ้น)
+1. `py -3 scripts/build-game-items.py "D:\RagnarokZero\System"` (System ของเกมที่แพทช์แล้ว) → `py -3 scripts/import-new-client-items.py` ดูก่อน แล้ว `--apply`
+2. `node scripts/rename-items-to-game.mjs` ดูก่อน แล้ว `--apply` · `node --env-file=.env.local scripts/build-game-absent.mjs` (ลืมแล้วของใหม่ขึ้นป้าย "ไม่พบในเกม")
+3. `node scripts/build-map-availability.mjs` (เปิดแมพจาก navi_map ใหม่) → `node --env-file=.env.local scripts/build-star-droppers.mjs` → แก้เทสต์ map-availability ถ้าพื้นที่เปลี่ยน
+4. ห้องแต่งตัว: `npm run dress-up:build` → `npm run dress-up:upload` (ต้องอัปโหลดก่อน deploy)
+5. ของใหม่อื่น (เควส NPC มอน): อ่าน `D:\RagnarokZero\System\OngoingQuestInfoList_enUS.lub` และ navi_npc/navi_mob ใน snapshot ด้วย `scripts/lub.py` · รูป NPC/มอนทำแบบ `scripts/build-event-2026-11-images.py`
+6. ทำข่าวตามหัวข้อข้างบน · หน้าอีเวนต์ทำตามแบบ `/news/events-2026-10` (รูป NPC + /navi กดก๊อป ทุกพิกัด, ขั้นตอนมีเลข, ไอคอนของ, กล่อง REWARD) ที่ owner ชอบ
+
 ## แพทเทิร์นในโค้ดที่ต้องรักษา
 
 - ตัวเลขที่ไม่รู้ = แสดง "—"/"ไม่ทราบ" ห้ามมโน · ค่าที่คำนวณจากตัวละคร = บอกว่าเป็นเพดานบน

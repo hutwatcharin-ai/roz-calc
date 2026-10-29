@@ -34,13 +34,12 @@ import lub  # noqa: E402
 from ro_sprite import Act  # noqa: E402
 
 GRF = 'D:/Data grf roz/data_grf_extracted/files/data'
-# Newer copies first: the 15 Oct sprite/table extraction, then the 15 Oct full patch.
-# Newest first. 29 Oct 2026: the first snapshot extracted from the real GRF
-# (GrfDiffTool) holds only files changed since 22 Sep, in added/ and changed/.
-NEWER = (
-    'D:/Data grf roz/weekly/2026-10-29/added/data', 'D:/Data grf roz/weekly/2026-10-29/changed/data',
-    'D:/Data grf roz/grf-2026-10-15-sprites/files/data', 'D:/Data grf roz/grf-2026-10-15/files/data',
-)
+# Newer copies first: every GrfDiffTool snapshot, newest first (found at run
+# time by scripts/grf_snapshots.py, so a new patch changes no line here and the
+# exporter does not re-export every part for it), then the 15 Oct extractions.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from grf_snapshots import weekly_roots  # noqa: E402
+NEWER = (*weekly_roots(), 'D:/Data grf roz/grf-2026-10-15-sprites/files/data', 'D:/Data grf roz/grf-2026-10-15/files/data')
 LUA = f'{GRF}/luafiles514/lua files'
 SCALE = 100
 

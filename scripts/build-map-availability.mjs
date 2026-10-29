@@ -20,6 +20,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { newest } from './grf-snapshots.mjs';
 
 const ROZERODB_MAPS = path.join(process.cwd(), 'docs', 'rozerodb-export', 'data', 'maps.jsonl');
 const DEST = path.join(process.cwd(), 'data', 'map-availability.json');
@@ -89,14 +90,14 @@ const MANUAL_OPEN = [
 // prefix with a scheduled memorial dungeon -- anthell01/02 (Ant Hell), the
 // Izlude undersea dungeon iz_dun00-02, treasure01/02 (Sunken Ship) -- and the
 // site called all three closed while players were in them. A code the client
-// navigates to is open, whatever a crawled calendar says. Point CLIENT_NAVI at
-// the newest extract after each patch.
+// navigates to is open, whatever a crawled calendar says. The newest
+// GrfDiffTool snapshot that has navi_map.lub is used (scripts/grf-snapshots.mjs),
+// so a patch needs no edit here. The 29 Oct 2026 one added exactly the 56
+// Clock Tower codes (c_tower1-4, alde_dun01-04, tow_d*, alde_d*).
 const CLIENT_NAVI =
   process.env.CLIENT_NAVI ??
-  // 29 Oct 2026 patch: the first snapshot extracted from the real GRF. It
-  // added exactly the 56 Clock Tower codes (c_tower1-4, alde_dun01-04, tow_d*,
-  // alde_d*), which is what opens Clock Tower here -- no manual row needed.
-  'D:/Data grf roz/weekly/2026-10-29/changed/data/luafiles514/lua files/navigation/navi_map.lub';
+  newest('luafiles514/lua files/navigation/navi_map.lub') ??
+  'D:/Data grf roz/grf-2026-10-15/files/data/luafiles514/lua files/navigation/navi_map.lub';
 const naviOpen = fs.existsSync(CLIENT_NAVI)
   ? new Set([...fs.readFileSync(CLIENT_NAVI).toString('latin1').matchAll(/[a-z][a-z0-9_@]{2,20}/g)].map((m) => m[0]))
   : null;

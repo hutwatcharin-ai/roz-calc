@@ -30,10 +30,10 @@ import lub
 APPLY = '--apply' in sys.argv
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 SYSTEM = r'D:\RagnarokZero\System'
+from grf_snapshots import weekly_roots  # noqa: E402
 ICON_DIRS = [
-    # 29 Oct 2026 patch: the weekly GRF snapshot (GrfDiffTool, real GRF).
-    r'D:\Data grf roz\weekly\2026-10-29\changed\data\texture\유저인터페이스\item',
-    r'D:\Data grf roz\weekly\2026-10-29\added\data\texture\유저인터페이스\item',
+    # Every GrfDiffTool snapshot, newest first (no date to edit per patch).
+    *(f'{root}/texture/유저인터페이스/item' for root in weekly_roots()),
     # 15 Oct 2026 patch, read with tools/grf-extract.mjs (flag-1 icons only).
     r'D:\Data grf roz\grf-2026-10-15-icons\files\data\texture\유저인터페이스\item',
     r'D:\data_grf_comparison_20261001\extracted\added\data\texture\유저인터페이스\item',
