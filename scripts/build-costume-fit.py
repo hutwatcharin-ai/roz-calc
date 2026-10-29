@@ -1,4 +1,5 @@
-"""Pictures of a Novice wearing each costume, out of the client's own sprites.
+"""Pictures of a Novice wearing each costume -- and each ordinary headgear --
+out of the client's own sprites.
 
 The costume pages showed only the inventory icon, which says little about how
 a hat looks on a character (owner, 2 Oct 2026: "a preview, not a simulator").
@@ -18,6 +19,10 @@ One sheet per view id, 3 columns (front, diag, back) by 2 rows (male, female),
 every cell the same size, at 1x; the page scales it with pixelated rendering.
 Headgear also gets a head close-up sheet in the same layout.
 
+29 Oct 2026 (owner: "a preview for every hat, the ordinary ones too"):
+non-costume headgear (type Headgear, an Upper/Middle/Lower position) gets the
+same sheet. Ordinary garments are left out: the game draws no robe for them.
+
 Usage: python scripts/build-costume-fit.py
 """
 import functools
@@ -35,19 +40,22 @@ from PIL import Image  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SYSTEM = 'D:/RagnarokZero/System'
 GRF = 'D:/Data grf roz/data_grf_extracted/files/data'
-# The latest patch's costume sprites and tables, read with tools/grf-extract.mjs
-# (15 Oct 2026). A file there wins over the 22 Sep extraction.
-NEW = 'D:/Data grf roz/grf-2026-10-15-sprites/files/data'
+# Newer copies first: every GrfDiffTool snapshot, newest first
+# (scripts/grf_snapshots.py), then the 15 Oct 2026 sprite extraction. A file
+# there wins over the 22 Sep extraction.
+from grf_snapshots import weekly_roots  # noqa: E402
+NEWER = (*weekly_roots(), 'D:/Data grf roz/grf-2026-10-15-sprites/files/data')
 SPRITE = f'{GRF}/sprite'
 LUA = f'{GRF}/luafiles514/lua files'
 
 
 def src(path):
-    """The newest copy of a client file: the patch's, else the 22 Sep one."""
+    """The newest copy of a client file: the latest snapshot's, else the 22 Sep one."""
     if path.startswith(GRF):
-        newer = NEW + path[len(GRF):]
-        if os.path.exists(newer):
-            return newer
+        for root in NEWER:
+            newer = root + path[len(GRF):]
+            if os.path.exists(newer):
+                return newer
     return path
 
 
@@ -147,14 +155,19 @@ def position(desc):
     return None
 
 
+def is_headgear(desc):
+    """An ordinary hat: its description's type line says Headgear."""
+    return bool(re.search(r':\s*(\^[0-9A-Fa-f]{6})?Headgear\b', ' '.join(desc)))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     items, sheets, skipped = {}, {}, {'no_view': 0, 'no_sprite': 0, 'no_position': 0}
     naked = {(sex, d): draw(sex, d).getbbox() for sex in SEXES for d in DIRS}
     for sid, it in sorted(game.items(), key=lambda kv: int(kv[0])):
-        if not it.get('costume'):
-            continue
         kind = position(it['desc'])
+        if not it.get('costume') and not (kind == 'head' and is_headgear(it['desc'])):
+            continue
         if not kind:
             skipped['no_position'] += 1
             continue
@@ -253,7 +266,7 @@ def main():
     json.dump(
         {
             '_meta': {
-                'what': 'Costume item id -> sheet in public/images/costume-fit (scripts/build-costume-fit.py). '
+                'what': 'Costume or headgear item id -> sheet in public/images/costume-fit (scripts/build-costume-fit.py). '
                         'Sheet: columns front, three-quarter, back; rows male, female; cell w x h at 1x.',
                 'source': 'RO Zero Global client sprites (Novice body, head 1)',
                 'items': len(items),

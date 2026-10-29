@@ -88,7 +88,11 @@ export default function GearDetail({
   // Costumes with a fitting-room picture use layout D (owner, 2 Oct 2026):
   // the droppers move up beside the picture instead of sitting under the
   // description.
-  const fitted = section.recentKind === 'costume' && (costumeFit(item.id) !== null || costumeArt(item.id) !== null);
+  // 29 Oct 2026: ordinary headgear has fitting-room sheets too (owner: "a
+  // preview for every hat"), so an equipment page with one uses the layout.
+  const fitted =
+    (section.recentKind === 'costume' && (costumeFit(item.id) !== null || costumeArt(item.id) !== null)) ||
+    (section.recentKind === 'equipment' && costumeFit(item.id) !== null);
   // Weight, DEF/MDEF, weapon element and the refine totals from prontera.info
   // (lib/item-effects). A costume is never refined, so it shows no refine tile.
   const effects = itemEffects(item.id);
