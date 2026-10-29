@@ -50,6 +50,9 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-29T08:00:00+07:00',
     dateTh: '29 ต.ค.',
     badge: 'CT',
+    // One face per headline topic (owner, 29 Oct 2026): Clock for Clock
+    // Tower, Ken for Gatchaman, Ghostring for Black Friday's ghost costumes.
+    cast: ['/images/monsters/1269.gif', '/images/events/2026-11/ken.png', '/images/monsters/1120.gif'],
   },
   {
     href: '/news/guild-hall-of-fame-s1',
