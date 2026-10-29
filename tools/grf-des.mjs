@@ -70,7 +70,8 @@ function desBlock(buf, off) {
 const SUB = new Map([[0x00, 0x2b], [0x2b, 0x00], [0x6c, 0x80], [0x01, 0x68], [0x68, 0x01], [0x48, 0x77], [0x60, 0xff],
   [0x77, 0x48], [0xb9, 0xc0], [0xc0, 0xb9], [0xfe, 0xeb], [0xeb, 0xfe], [0x80, 0x6c], [0xff, 0x60]]);
 function shuffle(buf, off) {
-  const s = buf.slice(off, off + 8);
+  // A copy: Buffer#slice is a view, and the writes below would read their own output.
+  const s = Uint8Array.prototype.slice.call(buf, off, off + 8);
   buf[off] = s[3]; buf[off + 1] = s[4]; buf[off + 2] = s[6]; buf[off + 3] = s[0];
   buf[off + 4] = s[1]; buf[off + 5] = s[2]; buf[off + 6] = s[5]; buf[off + 7] = SUB.get(s[7]) ?? s[7];
 }

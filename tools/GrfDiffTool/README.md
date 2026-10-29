@@ -9,7 +9,7 @@ dotnet build .\GrfDiffTool.csproj -c Release -p:EnableWindowsTargeting=true
 dotnet publish .\GrfDiffTool.csproj -c Release -r win-x64 --self-contained false -o "D:\Data grf roz\GrfDiffTool"
 ```
 
-The installed copy lives in `D:\Data grf roz\GrfDiffTool` (desktop shortcut points there). Publishing also copies `../grf-extract.mjs` and `../grf-des.mjs` next to the exe; the tool runs them with `node`, because GrfCL cannot open this client's GRF 0x300 ("Event Horizon"). Flag 2 entries cannot be decoded, so they are tracked by the SHA-256 of their stored bytes and are never copied out.
+The installed copy lives in `D:\Data grf roz\GrfDiffTool` (desktop shortcut points there). Publishing also copies `../grf-extract.mjs` and `../grf-des.mjs` next to the exe; the tool runs them with `node`, because GrfCL cannot open this client's GRF 0x300 ("Event Horizon"). Every entry decodes, flag 2 (mixed cipher) included; an entry that ever fails is tracked by the SHA-256 of its stored bytes and is not copied out.
 
 ## Headless run
 

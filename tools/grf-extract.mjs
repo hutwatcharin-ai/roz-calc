@@ -3,15 +3,14 @@
 // data.grf is allowed). Writes:
 //   <out>/index.jsonl   one line per entry: name, size, compressed, flags, offset
 //   <out>/files/...     the entries whose name matches --match, decompressed
-// Entries with flag 4 (header DES) are decoded first (tools/grf-des.mjs),
-// checked byte for byte against the 22 Sep 2026 extraction. Flag 2 (mixed
-// cipher) entries are listed but not written; files the patch adds or
-// changes have so far all been flag 1, and older ones are in that extraction.
+// Entries with flag 2 (mixed cipher) or 4 (header DES) are decoded first
+// (tools/grf-des.mjs); both match the 22 Sep 2026 extraction byte for byte
+// (flag 3 checked on 29 Oct over files the patches left alone).
 //
 //   node tools/grf-extract.mjs <data.grf> <outDir> [--match <regex>] [--raw-hash] [--progress]
 //
-// --raw-hash adds rawSha256 (SHA-256 of the stored, still-encrypted bytes) to
-// skipped flag 2 entries, so a weekly diff can tell whether they changed.
+// --raw-hash adds rawSha256 (SHA-256 of the stored bytes) to entries that fail
+// to decode, so a weekly diff can still tell whether they changed.
 //
 // Layout (public GRF 0x300 format): 46-byte header -- 16-byte signature,
 // 14-byte key, u64 table offset, u32 file count, u32 version 0x300. At
@@ -49,7 +48,7 @@ if (table.length !== len) throw new Error(`table length ${table.length} != ${len
 const cp949 = new TextDecoder('euc-kr');
 mkdirSync(out, { recursive: true });
 const index = createWriteStream(join(out, 'index.jsonl'));
-let p = 0, entries = 0, written = 0, skippedCrypt = 0, failed = 0;
+let p = 0, entries = 0, written = 0, failed = 0;
 while (p < table.length) {
   const end = table.indexOf(0, p);
   const name = cp949.decode(table.subarray(p, end)).replace(/\\/g, '/');
@@ -64,25 +63,21 @@ while (p < table.length) {
   if (showProgress && entries % 2000 === 0) console.log(JSON.stringify({ progress: entries, total }));
   const row = { name, size, compressed, flags, offset };
   if ((flags & 1) && match.test(name)) {
-    // Flag 2 (mixed cipher) does not decode correctly yet: skipped, listed.
-    // Flag 4 (header only) matches the 22 Sep extraction byte for byte.
-    if (flags & 2) { skippedCrypt++; if (rawHash) row.rawSha256 = createHash('sha256').update(read(offset + 46, aligned)).digest('hex'); index.write(JSON.stringify(row) + '\n'); continue; }
-    {
-      try {
-        const raw = grfDecode(read(offset + 46, aligned), flags, compressed);
-        const data = compressed === size && compressed === aligned ? raw : inflateSync(raw.subarray(0, compressed));
-        const dest = join(out, 'files', name);
-        mkdirSync(dirname(dest), { recursive: true });
-        writeFileSync(dest, data);
-        row.sha256 = createHash('sha256').update(data).digest('hex');
-        written++;
-      } catch (e) {
-        row.error = String(e.message ?? e);
-        failed++;
-      }
+    try {
+      const raw = grfDecode(read(offset + 46, aligned), flags, compressed);
+      const data = compressed === size && compressed === aligned ? raw : inflateSync(raw.subarray(0, compressed));
+      const dest = join(out, 'files', name);
+      mkdirSync(dirname(dest), { recursive: true });
+      writeFileSync(dest, data);
+      row.sha256 = createHash('sha256').update(data).digest('hex');
+      written++;
+    } catch (e) {
+      row.error = String(e.message ?? e);
+      if (rawHash) row.rawSha256 = createHash('sha256').update(read(offset + 46, aligned)).digest('hex');
+      failed++;
     }
   }
   index.write(JSON.stringify(row) + '\n');
 }
 index.end();
-console.log(JSON.stringify({ signature: sig, version: '0x300', entries, written, skippedCrypt, failed }));
+console.log(JSON.stringify({ signature: sig, version: '0x300', entries, written, failed }));

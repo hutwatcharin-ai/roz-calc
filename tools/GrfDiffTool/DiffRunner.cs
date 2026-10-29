@@ -52,7 +52,7 @@ public sealed class DiffRunner
                 cur[rel] = new(rel, new FileInfo(f).Length, await Hash(f, ct));
                 progress?.Invoke(new("Hashing files", i + 1, files.Count));
             }
-            // Flag 2 entries cannot be decoded, so they are tracked by the hash of their stored bytes.
+            // Entries that fail to decode are tracked by the hash of their stored bytes.
             foreach (var l in File.ReadLines(Path.Combine(staging, "index.jsonl")))
             {
                 using var d = JsonDocument.Parse(l); var e = d.RootElement;
@@ -61,7 +61,7 @@ public sealed class DiffRunner
                 cur[rel] = new(rel, e.GetProperty("size").GetInt64(), raw.GetString()!, Encrypted);
             }
             var enc = cur.Values.Count(x => x.ReadStatus == Encrypted);
-            log?.Invoke($"{enc:N0} encrypted entries compared by stored bytes (size only against a baseline that has their plain content).");
+            if (enc > 0) log?.Invoke($"{enc:N0} entries failed to decode; compared by stored bytes (size only against a baseline that has their plain content).");
             progress?.Invoke(new("Comparing with previous snapshot", 0, 1));
             var baseM = Load(root);
             var add = cur.Values.Where(x => !baseM.ContainsKey(x.Path)).ToList();
