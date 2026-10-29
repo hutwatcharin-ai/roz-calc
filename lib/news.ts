@@ -33,7 +33,7 @@ export const NEWS: NewsItem[] = [
     href: '/news/patch-2026-10-29',
     kind: 'patch',
     title: 'เปิด Clock Tower · Gatchaman · Black Friday',
-    blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00 น. ดันใหม่ เควสรายวัน อุปกรณ์ใหม่ คอสตูมธีมผี WoE EU เลื่อนเวลา',
+    blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00–14:00 น. ดันใหม่ เควสรายวัน อุปกรณ์ใหม่ คอสตูมธีมผี WoE EU เลื่อนเวลา',
     date: '2026-10-29T08:00:00+07:00',
     dateTh: '29 ต.ค.',
     badge: 'CT',

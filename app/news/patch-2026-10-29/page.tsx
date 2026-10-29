@@ -181,7 +181,7 @@ export default async function Patch20261029Page() {
           ดันใหม่ที่ Al De Baran พร้อมเควสอีเวนต์ Curse of the Clock Tower เควสรายวัน และอุปกรณ์ใหม่ ·
           คอลแลบ Gatchaman · Black Friday · คอสตูมธีมผี
         </p>
-        <p className="phero__pill">ปิดปรับปรุง พฤหัส 29 ต.ค. 08:00 น. เวลาไทย</p>{' '}
+        <p className="phero__pill">ปิดปรับปรุง พฤหัส 29 ต.ค. 08:00–14:00 น. เวลาไทย</p>{' '}
         <a className="phero__pill phero__pill--link" href="#cards">การ์ดใหม่ {cards.length} ใบ ↓</a>{' '}
         <a className="phero__pill phero__pill--link" href="#woe">WoE EU เลื่อนเวลา ↓</a>
       </header>
@@ -382,11 +382,11 @@ export default async function Patch20261029Page() {
           <tbody>
             <tr><td>วันที่</td><td className="num">พฤหัส 29 ต.ค. 2569</td></tr>
             <tr><td>เริ่มปิด</td><td className="num">08:00 น.</td></tr>
-            <tr><td>เปิดเมื่อไหร่</td><td className="num">ยังไม่ประกาศ</td></tr>
+            <tr><td>เปิดเซิร์ฟ</td><td className="num">14:00 น. (ปิด 6 ชั่วโมง)</td></tr>
           </tbody>
         </table>
         <p className="muted" style={{ marginTop: 8 }}>
-          เวลาอาจเลื่อนได้ · ออกจากเกมก่อนปิด · ของใน Kafra Shop ที่ขายอยู่อาจหมดรอบหลังปิดปรับปรุง ใครจะซื้อให้ดูวันหมดเขตก่อน
+          เวลาเปิดจากประกาศเริ่มปิดปรับปรุงเช้า 29 ต.ค. อาจเลื่อนได้ · ออกจากเกมก่อนปิด · ของใน Kafra Shop ที่ขายอยู่อาจหมดรอบหลังปิดปรับปรุง ใครจะซื้อให้ดูวันหมดเขตก่อน
         </p>
       </section>
 
