@@ -572,6 +572,10 @@
    {
     "name": "ASPD +1",
     "until": "2026-09-22"
+   },
+   {
+    "name": "ASPD +3",
+    "until": "2026-10-29"
    }
   ],
   "4861": [
@@ -584,6 +588,10 @@
    {
     "name": "HIT +1",
     "until": "2026-09-22"
+   },
+   {
+    "name": "HIT +3",
+    "until": "2026-10-29"
    }
   ],
   "4885": [
@@ -1598,6 +1606,10 @@
    {
     "name": "Clock Tower Manager Headphones",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Clock Tower Manager Hat",
+    "until": "2026-10-29"
    }
   ],
   "19507": [
@@ -2916,6 +2928,12 @@
     "until": "2026-09-22"
    }
   ],
+  "20547": [
+   {
+    "name": "Costume Ghost Effect",
+    "until": "2026-10-29"
+   }
+  ],
   "20548": [
    {
     "name": "[Costume] Popping Poring Aura",
@@ -3292,24 +3310,40 @@
    {
     "name": "[NFS] Red Potion 20ea Box",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Event] 20 Red Potion Box",
+    "until": "2026-10-29"
    }
   ],
   "23504": [
    {
     "name": "[NFS] Orange Potion 20ea Box",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Event] 20 Orange Potion Box",
+    "until": "2026-10-29"
    }
   ],
   "23505": [
    {
     "name": "[NFS] Yellow Potion 20ea Box",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Event] 20 Yellow Potion Box",
+    "until": "2026-10-29"
    }
   ],
   "23506": [
    {
     "name": "[NFS] White Potion 20ea Box",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Event] 20 White Potion Box",
+    "until": "2026-10-29"
    }
   ],
   "23582": [
@@ -3652,18 +3686,30 @@
    {
     "name": "Variable Casting Reduction (Upper)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Variable Cast Reduction Upper",
+    "until": "2026-10-29"
    }
   ],
   "29157": [
    {
     "name": "Variable Casting Reduction (Middle)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Variable Cast Reduction Middle",
+    "until": "2026-10-29"
    }
   ],
   "29158": [
    {
     "name": "Variable Casting Reduction (Lower)",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Variable Cast Reduction Lower",
+    "until": "2026-10-29"
    }
   ],
   "29358": [
@@ -4030,6 +4076,12 @@
    {
     "name": "[Costume] Observer",
     "until": "2026-09-22"
+   }
+  ],
+  "31261": [
+   {
+    "name": "Costume Soda In Mouth",
+    "until": "2026-10-29"
    }
   ],
   "31299": [
@@ -7080,10 +7132,46 @@
     "until": "2026-10-01"
    }
   ],
+  "401186": [
+   {
+    "name": "[Costume] Flying Galapago Hat",
+    "until": "2026-10-29"
+   }
+  ],
+  "401187": [
+   {
+    "name": "[Costume] Owl Duke's Silk Hat",
+    "until": "2026-10-29"
+   }
+  ],
+  "401188": [
+   {
+    "name": "[Costume] Orc Helm",
+    "until": "2026-10-29"
+   }
+  ],
+  "401189": [
+   {
+    "name": "[Costume] Yellow Brain Hat",
+    "until": "2026-10-29"
+   }
+  ],
+  "401207": [
+   {
+    "name": "Costume Honor Eagle Five Brothers",
+    "until": "2026-10-29"
+   }
+  ],
   "401234": [
    {
     "name": "[Costume] Ice Cream Hat (Bound)",
     "until": "2026-09-22"
+   }
+  ],
+  "401311": [
+   {
+    "name": "[Costume] Blue Ghost Long Hat [Bound]",
+    "until": "2026-10-29"
    }
   ],
   "401367": [
@@ -9636,6 +9724,30 @@
     "until": "2026-09-22"
    }
   ],
+  "420723": [
+   {
+    "name": "Soda In Mouth",
+    "until": "2026-10-29"
+   }
+  ],
+  "420729": [
+   {
+    "name": "Costume Goodbye Five Eagle Brothers",
+    "until": "2026-10-29"
+   }
+  ],
+  "420730": [
+   {
+    "name": "Costume Let's go Five Eagle Brothers",
+    "until": "2026-10-29"
+   }
+  ],
+  "420731": [
+   {
+    "name": "Costume Emergency Communication",
+    "until": "2026-10-29"
+   }
+  ],
   "420813": [
    {
     "name": "[Costume] Fluttering Angel Wings (Bound)",
@@ -9898,6 +10010,42 @@
     "until": "2026-09-22"
    }
   ],
+  "430025": [
+   {
+    "name": "Costume Leader of the Galaxy",
+    "until": "2026-10-29"
+   }
+  ],
+  "430026": [
+   {
+    "name": "Costume Eagle Ken",
+    "until": "2026-10-29"
+   }
+  ],
+  "430027": [
+   {
+    "name": "Costume Condor Joe",
+    "until": "2026-10-29"
+   }
+  ],
+  "430028": [
+   {
+    "name": "Costume Swan Jun",
+    "until": "2026-10-29"
+   }
+  ],
+  "430029": [
+   {
+    "name": "Costume Swallow Jinpei",
+    "until": "2026-10-29"
+   }
+  ],
+  "430030": [
+   {
+    "name": "Costume Owl",
+    "until": "2026-10-29"
+   }
+  ],
   "435001": [
    {
     "name": "[Costume] Sphinx Helm (Bound)",
@@ -9988,6 +10136,12 @@
    {
     "name": "[Costume] Tear Drop (Bound)",
     "until": "2026-09-22"
+   }
+  ],
+  "436025": [
+   {
+    "name": "[Costume] Bell Ghost Mask",
+    "until": "2026-10-29"
    }
   ],
   "440000": [
@@ -10092,16 +10246,34 @@
     "until": "2026-09-22"
    }
   ],
+  "480055": [
+   {
+    "name": "Costume Fluffy Red Angel Wings",
+    "until": "2026-10-29"
+   }
+  ],
   "480056": [
    {
     "name": "[Costume] Fluttering Fallen Angel Wings",
     "until": "2026-09-22"
    }
   ],
+  "480057": [
+   {
+    "name": "Costume Fluffy Vermilion Wings",
+    "until": "2026-10-29"
+   }
+  ],
   "480058": [
    {
     "name": "[Costume] Fluttering Golden Angel Wings",
     "until": "2026-09-22"
+   }
+  ],
+  "480060": [
+   {
+    "name": "Costume Fluffy Nature Wings",
+    "until": "2026-10-29"
    }
   ],
   "480069": [
@@ -10636,6 +10808,12 @@
     "until": "2026-09-22"
    }
   ],
+  "480714": [
+   {
+    "name": "Rotating Gears",
+    "until": "2026-10-29"
+   }
+  ],
   "480735": [
    {
     "name": "[Costume] Mystery Wing (Bound)",
@@ -10646,6 +10824,12 @@
    {
     "name": "[Costume] Phoenix Holy Sword [Bound]",
     "until": "2026-09-22"
+   }
+  ],
+  "480777": [
+   {
+    "name": "[Costume] Giant White Ghost Wings [Bound]",
+    "until": "2026-10-29"
    }
   ],
   "480788": [
@@ -10738,10 +10922,28 @@
     "until": "2026-09-22"
    }
   ],
+  "480924": [
+   {
+    "name": "Costume Fluffy Red Angel Wings (Bound)",
+    "until": "2026-10-29"
+   }
+  ],
   "480932": [
    {
     "name": "[Costume] Meow Jelly Backpack (Bound)",
     "until": "2026-09-22"
+   }
+  ],
+  "480948": [
+   {
+    "name": "Costume Fluffy Nature Wings (Bound)",
+    "until": "2026-10-29"
+   }
+  ],
+  "480949": [
+   {
+    "name": "Costume Fluffy Vermilion Wings (Bound)",
+    "until": "2026-10-29"
    }
   ],
   "500006": [
@@ -11198,6 +11400,10 @@
    {
     "name": "[GetPoring] Pecoring Device",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Get Poring] Pecoring Device",
+    "until": "2026-10-29"
    }
   ],
   "1240001": [
@@ -11222,6 +11428,10 @@
    {
     "name": "[GetPoring] Poodle Poring Device",
     "until": "2026-09-22"
+   },
+   {
+    "name": "[Get Poring] Poodle Poring Device",
+    "until": "2026-10-29"
    }
   ],
   "1240005": [
@@ -11282,6 +11492,24 @@
    {
     "name": "[GetPoring] UFOring Device",
     "until": "2026-09-22"
+   }
+  ],
+  "1240015": [
+   {
+    "name": "[GetPoring] Banarina Device",
+    "until": "2026-10-29"
+   }
+  ],
+  "1240016": [
+   {
+    "name": "[GetPoring] Loli Ruring Device",
+    "until": "2026-10-29"
+   }
+  ],
+  "1240017": [
+   {
+    "name": "[GetPoring] Sporing Device",
+    "until": "2026-10-29"
    }
   ],
   "1270260": [
