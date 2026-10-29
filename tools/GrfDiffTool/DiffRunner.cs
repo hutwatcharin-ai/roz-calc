@@ -25,7 +25,9 @@ public sealed class DiffRunner
         var day = DateTime.Now.ToString("yyyy-MM-dd");
         var run = DateTime.Now.ToString("yyyyMMdd-HHmmss");
         var root = Path.GetFullPath(o.OutputRoot);
+        // A second run on the same day gets its own folder instead of overwriting the first one's report.
         var snap = Path.Combine(root, day);
+        if (Directory.Exists(snap)) snap = Path.Combine(root, $"{day}_{DateTime.Now:HHmm}");
         var staging = Path.Combine(root, ".staging", run);
         // Remove what an interrupted run left behind (each one holds a full extraction).
         if (Directory.Exists(Path.Combine(root, ".staging"))) foreach (var old in Directory.EnumerateDirectories(Path.Combine(root, ".staging"))) { try { Directory.Delete(old, true); } catch { } }
@@ -65,6 +67,11 @@ public sealed class DiffRunner
             var add = cur.Values.Where(x => !baseM.ContainsKey(x.Path)).ToList();
             var change = cur.Values.Where(x => baseM.TryGetValue(x.Path, out var old) && Differs(old, x)).ToList();
             var rem = baseM.Values.Where(x => !cur.ContainsKey(x.Path)).ToList();
+            if (baseM.Count > 0 && add.Count + change.Count + rem.Count == 0)
+            {
+                log?.Invoke($"ไม่มีไฟล์เปลี่ยนเลยจาก snapshot ล่าสุด ({baseM.Count:N0} ไฟล์เหมือนเดิม) — ยังไม่มีแพทช์ใหม่ ไม่ได้สร้าง snapshot");
+                return new(true, 0, 0, 0, null);
+            }
             Directory.CreateDirectory(snap);
             Directory.CreateDirectory(Path.Combine(snap, "added"));
             Directory.CreateDirectory(Path.Combine(snap, "changed"));
