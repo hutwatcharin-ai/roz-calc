@@ -297,6 +297,10 @@ export default function Events202610() {
           </div>
           <figcaption className="muted">ในฟาร์มยังมีจุดถ่ายรูปคู่ Kumamon 7 จุด เปิด/ปิดตุ๊กตาและป้าย Kumamon ยักษ์ได้ · ปราสาทคุมาโมโตะทางซ้ายบน ภูเขาอะโซะทางขวาบน</figcaption>
         </figure>
+        <div className="evtips"><p>
+          <strong>กิจกรรมถ่ายรูปจบแล้ว ได้โค้ดครบ 5 โค้ด</strong> KUMAMON20–KUMAMON60 กรอกได้ถึง 1 ธ.ค. 2569 06:59 น. ·{' '}
+          <Link href="/guides/codes#kumamon">ก๊อปโค้ด</Link>
+        </p></div>
 
         <h3 className="evh">แพ็กเกจใน Cash Shop (1–29 ต.ค.)</h3>
         <div className="evshop">

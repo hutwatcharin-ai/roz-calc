@@ -16,7 +16,7 @@ import NaviCopy from '@/components/NaviCopy';
 export const metadata = {
   title: 'โค้ดรับของ Ragnarok Zero (Coupon Code)',
   description:
-    'โค้ดคูปอง Ragnarok Zero Global ครบ 22 โค้ด แยกชัดว่าอันไหนยังใช้ได้ 4 โค้ด (ROZGTH THAIROZG ROZGHYPE) อันไหนปิดไปแล้ว พร้อมวิธีกรอก — ของเข้าเมลในเกม (RODEX) ไม่ใช่กระเป๋า',
+    'โค้ดคูปอง Ragnarok Zero Global ครบ 27 โค้ด ใหม่ KUMAMON20–KUMAMON60 ใช้ได้ถึง 1 ธ.ค. 2569 แยกชัดว่าอันไหนยังใช้ได้ (ROZGTH THAIROZG ROZGHYPE) อันไหนปิดไปแล้ว พร้อมวิธีกรอก — ของเข้าเมลในเกม (RODEX) ไม่ใช่กระเป๋า',
 };
 
 // Verbatim strings, because a code with a letter changed is not a code.
@@ -60,6 +60,13 @@ const EXPIRED_CODES = [
  *  its own end dates are all in the past. Re-read 29 Sep 2026. */
 const EXPIRED_LATER_CODES = ['THAIEVENT', 'ZEROSTART', 'MIDGARD2026', 'ROZGCREATOR', 'ROZGLAUNCH'];
 
+/** Kumamon Photo-Op community milestones, all five unlocked (official
+ *  Discord, 29 Oct 2026). Redeem before 1 Dec 2026 6:59 AM as announced --
+ *  the hour reads as Thai time (23:59 UTC 30 Nov), the same 7-hour shift the
+ *  maintenance notices use. What each code gives was not announced. */
+const KUMAMON_CODES = ['KUMAMON20', 'KUMAMON30', 'KUMAMON40', 'KUMAMON50', 'KUMAMON60'];
+const KUMAMON_UNTIL = '1 ธ.ค. 2569 06:59 น.';
+
 export default function CodesPage() {
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -72,14 +79,14 @@ export default function CodesPage() {
       />
       <PageHeader
         title="โค้ดรับของ Ragnarok Zero"
-        lead={<>โค้ดชุดเปิดเซิร์ฟ <strong>ปิดไปแล้ว {EXPIRED_CODES.length + EXPIRED_LATER_CODES.length} โค้ด</strong> ({EXPIRED_CODES.length} โค้ดเมื่อ {EXPIRED_ON} อีก {EXPIRED_LATER_CODES.length} โค้ดเมื่อ {EXPIRED_LATER_ON}) เหลือที่มีรายงานว่ายังใช้ได้ {LIVE_CODES.length} โค้ด</>}
+        lead={<>โค้ดชุดเปิดเซิร์ฟ <strong>ปิดไปแล้ว {EXPIRED_CODES.length + EXPIRED_LATER_CODES.length} โค้ด</strong> ({EXPIRED_CODES.length} โค้ดเมื่อ {EXPIRED_ON} อีก {EXPIRED_LATER_CODES.length} โค้ดเมื่อ {EXPIRED_LATER_ON}) เหลือที่มีรายงานว่ายังใช้ได้ {LIVE_CODES.length} โค้ด · <strong>ใหม่ 29 ต.ค.: โค้ด Kumamon {KUMAMON_CODES.length} โค้ด</strong></>}
       />
 
       <div className="gtiles" style={{ marginBottom: 16 }}>
         <div className="gtile">
           <span className="gtile__k">ยังใช้ได้</span>
-          <span className="gtile__v">{LIVE_CODES.length}</span>
-          <span className="gtile__s">ออกวันที่ 3 ก.ย. ยังไม่มีวันหมด</span>
+          <span className="gtile__v">{LIVE_CODES.length + KUMAMON_CODES.length}</span>
+          <span className="gtile__s">Kumamon {KUMAMON_CODES.length} + ชุด 3 ก.ย. {LIVE_CODES.length}</span>
         </div>
         <div className="gtile">
           <span className="gtile__k">ปิดแล้ว</span>
@@ -93,7 +100,20 @@ export default function CodesPage() {
         </div>
       </div>
 
-      <div className="card card--cyan">
+      <div className="card card--cyan" id="kumamon">
+        <h2 className="section-title">ใหม่ · โค้ด Kumamon ใช้ได้ถึง {KUMAMON_UNTIL}</h2>
+        <div className="codegrid codegrid--live" style={{ marginTop: 10 }}>
+          {KUMAMON_CODES.map((code) => (
+            <NaviCopy key={code} cmd={code} />
+          ))}
+        </div>
+        <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
+          รางวัลจากกิจกรรมถ่ายรูปกับ Kumamon (15–29 ต.ค.) ผู้เล่นทำครบทุกเป้า ทีมงานเลยปล่อยครบ {KUMAMON_CODES.length} โค้ด ·
+          ประกาศใน Discord ทางการ 29 ต.ค. · ไม่ได้บอกว่าแต่ละโค้ดได้อะไร · กรอกวิธีเดียวกับด้านล่าง
+        </p>
+      </div>
+
+      <div className="card card--cyan" style={{ marginTop: 14 }}>
         <h2 className="section-title">ยังใช้ได้ ลองชุดนี้ก่อน</h2>
         <div className="codegrid codegrid--live" style={{ marginTop: 10 }}>
           {LIVE_CODES.map((code) => (
