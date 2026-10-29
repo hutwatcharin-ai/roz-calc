@@ -108,7 +108,7 @@ export default function GuildHallOfFamePage() {
         <article className="phl__tile">
           <p className="phl__big">1 / วัน</p>
           <h2 className="phl__title">เควสรายวัน</h2>
-          <p className="phl__body">ส่ง Flame สีเดียว 10 ชิ้น · รีเซ็ต 04:00 เวลาเซิร์ฟเวอร์</p>
+          <p className="phl__body">ส่ง Flame สีเดียว 10 ชิ้น · รีเซ็ต 11:00 น. เวลาไทย</p>
         </article>
       </section>
 
@@ -207,7 +207,7 @@ export default function GuildHallOfFamePage() {
               <li>ต้องผ่านเควสหลักครบก่อน</li>
               <li>ส่ง Flame of the Guild <strong>สีเดียวกัน 10 ชิ้น</strong> สีไหนก็ได้</li>
               <li>ได้ Bronze (30 คะแนน) + {item(108202, '[Event] Guild Ticket Box')} สุ่มตั๋ว 1 ใบจาก 4 แบบ</li>
-              <li>วันละ 1 ครั้ง · รีเซ็ต 04:00 น. เวลาเซิร์ฟเวอร์ (หน้าทางการไม่ได้บอกโซนเวลา)</li>
+              <li>วันละ 1 ครั้ง · รีเซ็ต 11:00 น. เวลาไทย</li>
             </ul>
           </div>
           <div className="card">

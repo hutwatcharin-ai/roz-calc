@@ -242,7 +242,7 @@ export default function Events202611() {
         </div>
         <div className="evreward">
           <span className="evreward__tag">DAILY</span>{' '}
-          <Link href="/database/items/1002382">Mid Missile Button</Link> ตามจำนวนข้างบน (ตามประกาศ) · รีเซ็ตทุกวัน 04:00 ตามที่เกมเขียน · ปุ่มหายเมื่ออีเวนต์จบ
+          <Link href="/database/items/1002382">Mid Missile Button</Link> ตามจำนวนข้างบน (ตามประกาศ) · รีเซ็ตทุกวัน 11:00 น. เวลาไทย · ปุ่มหายเมื่ออีเวนต์จบ
         </div>
 
         <h3 className="evh">Let&apos;s Go! Gatchaman! แลกของที่ Joe</h3>
