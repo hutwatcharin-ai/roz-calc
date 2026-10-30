@@ -224,6 +224,10 @@ export default async function MvpGuidePage() {
           <li>กดใช้กุญแจได้บัฟ <strong>EXP +10% และดรอป +10%</strong> อยู่ได้ 12 ชั่วโมง แต่ใช้ได้เฉพาะตอนอยู่ในแมพนี้ ออกจากแมพแล้วหาย</li>
           <li>มอนเยอะขึ้นและเกิดเร็วขึ้น 1.5 เท่าของแมพปกติ</li>
           <li><strong>ทุกคนที่ไม่ใช่ปาร์ตี้ กิลด์ หรือพันธมิตรเป็นศัตรู</strong></li>
+          <li>
+            คุยกับ NPC แล้วเลือก <strong>Channel Y หรือ Z</strong> (Channel A–D คือแมพปกติ ไม่มี PvP) · เข้าไปแล้ว<strong>ใช้ Teleport หรือ Fly Wing ไม่ได้</strong> ต่างจากแมพปกติ · ออกด้วยการกลับไปหน้าเลือกตัวละคร ตามไกด์ผู้เล่น{' '}
+            <a href="https://sites.google.com/view/rozeroguide" target="_blank" rel="noopener noreferrer">ROZero Guide ของ Lymd</a>
+          </li>
           <li>รีเซ็ตทุกวัน ทุกคนถูกส่งกลับแมพปกติ · หลุดหรือออกเกมแล้วเข้าใหม่จะกลับมาจุดเซฟ</li>
         </ul>
         {PVP_MAPS.map((g) => (
