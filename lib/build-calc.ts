@@ -638,10 +638,6 @@ export interface Build {
   mob?: number;
   /** The target is frozen, stoned, stunned or asleep. */
   ail?: Ailment;
-  /** Weapon type when no weapon is worn: the farm bar asks for the type, not the item. */
-  wt?: string;
-  /** Stat bonus typed off the status window ("57+19"): replaces the job bonus. */
-  xb?: Partial<Record<Stat, number>>;
 }
 
 /**
@@ -1076,11 +1072,7 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
   const get = (type: string) => sums.get(key({ type, target: null, skill: null }))?.value ?? 0;
 
   // Stats.
-  // A bonus read off the status window (the 19 of "57+19") already holds
-  // the job bonus, so it stands in for it.
-  const job = build.xb
-    ? (Object.fromEntries(STATS.map((s) => [s, build.xb?.[s] ?? 0])) as Record<Stat, number>)
-    : jobBonusAt(build.cls, build.job);
+  const job = jobBonusAt(build.cls, build.job);
   const bonus = Object.fromEntries(STATS.map((s) => [s, get(s)])) as Record<Stat, number>;
   // A stat % (Improve Concentration: AGI/DEX +12%) is of the stat before gear.
   const total = Object.fromEntries(
@@ -1093,7 +1085,7 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
   const { str, agi, vit, dex, luk } = total;
   const int = total.int;
   const lv = build.lv;
-  const wt = weapon?.wt ?? build.wt ?? 'bare_hand';
+  const wt = weapon?.wt ?? 'bare_hand';
   const ranged = RANGED_WEAPONS.has(wt);
 
   const hit = Math.floor((175 + lv + dex + Math.floor(luk / 3) + get('hit')) * (1 + get('hit_percent') / 100));
@@ -1447,8 +1439,6 @@ export function calcBuild(build: Build, mobTarget: Target | null = null): BuildR
 // --- Saving and sharing -----------------------------------------------------
 
 export const BUILD_KEY = 'roz-calc:build';
-// Several builds kept in this browser (owner, 7 Oct 2026), beside the one in use.
-export const SAVED_BUILDS_KEY = 'roz-calc:builds';
 
 /** Compact text for a share link: base64url of the JSON. */
 export function encodeBuild(build: Build): string {

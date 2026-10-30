@@ -2763,46 +2763,6 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .farmbar__potions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
 .farmbar__potions img { image-rendering: pixelated; }
 .farmbar__price { color: var(--faint); font: 400 12px/1 var(--font-mono), ui-monospace, monospace; }
-/* Opened bar: summary line, then tabs (owner picked the tabbed draft, 30 Oct 2026). */
-.farmbar--open { padding: 12px; border: 1px solid var(--field-edge); border-radius: var(--radius); background: var(--panel); }
-.farmbar__sum { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--hair); }
-.farmbar__sum .farmbar__chips { flex: 1 1 auto; }
-.farmbar__savedbtn { flex: none; }
-.farmbar__savedlist { margin-bottom: 10px; }
-.farmbar__tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
-.farmbar__tab {
-  flex: none; min-height: 40px; padding: 0 14px; border: 1px solid var(--hair); border-bottom: none; border-radius: 6px 6px 0 0;
-  background: transparent; color: var(--dim); font: 600 14px/1 var(--font-sarabun), sans-serif; cursor: pointer;
-}
-.farmbar__tab--on { background: var(--panel-2); color: var(--text); border-color: var(--field-edge); box-shadow: inset 0 2px 0 var(--pink); }
-.farmbar__pane { padding: 12px; border: 1px solid var(--field-edge); border-radius: 0 6px 6px 6px; background: var(--panel-2); }
-.farmbar__chiplist { display: flex; flex-wrap: wrap; gap: 6px; }
-.farmchip {
-  min-height: 36px; padding: 0 12px; border: 1px solid var(--hair); border-radius: 999px; background: var(--field);
-  color: var(--dim); font: 400 13px/1.2 var(--font-sarabun), sans-serif; cursor: pointer;
-}
-.farmchip:hover { border-color: var(--cyan); color: var(--text); }
-.farmchip--on { border-color: var(--cyan); background: rgba(61, 232, 255, .14); color: var(--text); }
-.farmchip--on::before { content: '✓ '; color: var(--cyan); font-weight: 700; }
-.farmwin__top, .farmwin__food { display: flex; flex-wrap: wrap; gap: 10px; }
-.farmwin__top label, .farmwin__food label { display: flex; flex-direction: column; gap: 4px; }
-.farmwin__top input { width: 72px; }
-.farmwin__top select, .farmwin__food select { min-height: 40px; }
-.farmwin__food select { max-width: 220px; }
-.farmwin__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 16px; margin-top: 12px; }
-.farmwin__stat { display: flex; align-items: center; gap: 6px; }
-.farmwin__stat b { width: 34px; color: var(--cyan); font: 700 13px/1 var(--font-mono), ui-monospace, monospace; }
-.farmwin__stat input { width: 58px; min-height: 40px; text-align: center; padding: 0 2px !important; -moz-appearance: textfield; appearance: textfield; }
-.farmwin__stat input::-webkit-inner-spin-button, .farmwin__stat input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.farmwin input, .farmwin select, .farmwin__food select {
-  background: var(--field); color: var(--text); border: 1px solid var(--field-edge); border-radius: 6px; padding: 0 8px; font-size: 15px;
-}
-.farmwin__top input { min-height: 40px; }
-@media (max-width: 600px) {
-  .farmwin__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .farmwin__stat input { width: 48px; }
-  .farmbar__savedbtn { width: 100%; }
-}
 .farmplan { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
 .farmplan__card { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 12px; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--panel); }
 .farmplan__top { display: flex; align-items: center; gap: 10px; min-width: 0; }
