@@ -232,7 +232,7 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
         onPointerLeave={() => setHoveredKey((key) => key === entry.key ? null : key)}
         onClick={(event) => event.stopPropagation()}
       >
-        <span className="worldmap__tooltip-region" style={{ color: regions.find((region) => region.id === entry.regionId)?.color }}>{regions.find((region) => region.id === entry.regionId)?.label ?? (entry.kind === 'dungeon' ? 'Dungeon' : '')}</span>
+        <span className="worldmap__tooltip-region" style={{ color: regions.find((region) => region.id === entry.regionId)?.color }}>{regions.find((region) => region.id === entry.regionId)?.label ?? (entry.kind === 'dungeon' ? 'ดันเจี้ยน' : '')}</span>
         {/* Decorative: the name under it says which map this is. Keyed so a
             new tile never flashes the previous tile's picture while loading. */}
         {entry.image && <img key={entry.image} className="worldmap__tooltip-pic" src={entry.image} alt="" width="200" height="200" decoding="async" />}
@@ -241,19 +241,19 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
         <div className="worldmap__tooltip-icons">
           {icons.map((monster) => <img key={monster.id} src={monster.imageUrl ?? ''} alt={monster.nameEn} title={`${monster.nameEn} · Lv.${monster.level}`} width="28" height="28" loading="lazy" />)}
           {remaining > 0 && <span>+{remaining}</span>}
-          {!entry.monsters.length && <em>{entry.note ?? (entry.cellKind === 'town' ? 'เมือง · ชี้เพื่อดูทางเข้าดันเจี้ยน' : entry.cellKind === 'passage' ? `ทางผ่านไป ${entry.dungeonName ?? 'ดันเจี้ยน'}` : 'No monsters recorded')}</em>}
+          {!entry.monsters.length && <em>{entry.note ?? (entry.cellKind === 'town' ? 'เมือง · ชี้เพื่อดูทางเข้าดันเจี้ยน' : entry.cellKind === 'passage' ? `ทางผ่านไป ${entry.dungeonName ?? 'ดันเจี้ยน'}` : 'ไม่มีข้อมูลมอน')}</em>}
         </div>
         {entry.monsters.length > 0 && <small>{levelText(entry)} · {entry.monsters.length} monsters{entry.aggressiveCount ? ` · ⚠ ${entry.aggressiveCount} aggressive` : ''}</small>}
         {entry.dungeons?.length ? <small className="worldmap__tooltip-dungeons">ดันเจี้ยน: {entry.dungeons.map((d) => `${d.name} (${d.floors.length} ชั้น)`).join(' · ')}</small> : null}
-        {selectedKey === entry.key && <Link href={`/database/maps/${encodeURIComponent(entry.mapCode)}`}>Open full map page →</Link>}
+        {selectedKey === entry.key && <Link href={`/database/maps/${encodeURIComponent(entry.mapCode)}`}>เปิดหน้าแมพเต็ม →</Link>}
       </div>
     );
   }
 
   return (
-    <section className="worldmap" aria-label="Interactive Ragnarok Zero world map">
+    <section className="worldmap" aria-label="แผนที่โลก Ragnarok Zero">
       <div className="worldmap__toolbar">
-        <label className="worldmap__search"><span className="sr-only">ค้นหาในแผนที่</span><input type="search" value={query} onChange={(event) => onSearch(event.target.value)} placeholder="Search map ID, English name or monster..." /></label>
+        <label className="worldmap__search"><span className="sr-only">ค้นหาในแผนที่</span><input type="search" value={query} onChange={(event) => onSearch(event.target.value)} placeholder="ค้นชื่อแมพ รหัสแมพ หรือชื่อมอน (อังกฤษ)" /></label>
         {grid && (
           <div className="worldmap__views" role="group" aria-label="มุมมอง">
             <button type="button" aria-pressed={mode === 'grid'} onClick={() => { setMode('grid'); setSelectedKey(null); }}>ตารางแมพ</button>
@@ -267,13 +267,13 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
             {dungeonChoices.map((d) => <option key={d.key} value={d.key}>{d.name}</option>)}
           </select>
         </label>
-        <span className="worldmap__match" aria-live="polite">{query ? `${matches.size} matches` : `${tiles.length} plotted · ${Math.max(0, totalMaps - tiles.length)} in full database`}</span>
+        <span className="worldmap__match" aria-live="polite">{query ? `เจอ ${matches.size} แมพ` : `บนแผนที่ ${tiles.length} แมพ · ในฐานข้อมูลอีก ${Math.max(0, totalMaps - tiles.length)} แมพ`}</span>
       </div>
 
-      <div className="worldmap__jump" aria-label="Jump to Region">
-        <strong>JUMP TO REGION</strong>
+      <div className="worldmap__jump" aria-label="ไปที่ภูมิภาค">
+        <strong>ไปที่ภูมิภาค</strong>
         <div>{regions.map((region) => <button key={region.id} type="button" style={{ '--region': region.color } as React.CSSProperties} onClick={() => jumpToRegion(region.id)}>{region.label}</button>)}</div>
-        <span className="worldmap__legend"><i />Field tile <b className="worldmap__badge worldmap__badge--legend" aria-hidden="true">1</b> ทางเข้าดันเจี้ยน</span>
+        <span className="worldmap__legend"><i />ช่องแมพ <b className="worldmap__badge worldmap__badge--legend" aria-hidden="true">1</b> ทางเข้าดันเจี้ยน</span>
       </div>
 
       <div className="worldmap__layout">
@@ -314,7 +314,7 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
                 type="button"
                 className={`worldmap__cell is-${entry.cellKind ?? 'field'}${traced.size && tracedCodes.has(entry.mapCode) ? ' is-traced' : ''}${traced.size && !tracedCodes.has(entry.mapCode) && hoveredKey !== entry.key && selectedKey !== entry.key ? ' is-faded' : ''}${selectedKey === entry.key ? ' is-selected' : ''}${query && !matches.has(entry.key) ? ' is-dimmed' : ''}${query && matches.has(entry.key) ? ' is-match' : ''}`}
                 style={{ left: entry.x, top: entry.y, width: entry.width, height: entry.height }}
-                aria-label={`${entry.nameEn}, ${entry.mapCode}${entry.monsters.length ? `, ${entry.monsters.length} monsters` : ''}`}
+                aria-label={`${entry.nameEn}, ${entry.mapCode}${entry.monsters.length ? `, มอน ${entry.monsters.length} ชนิด` : ''}`}
                 aria-pressed={selectedKey === entry.key}
                 onPointerEnter={() => setHoveredKey(entry.key)}
                 onPointerLeave={() => setHoveredKey((k) => (k === entry.key ? null : k))}
@@ -333,21 +333,21 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
             })}
             {active && tiles.includes(active) && renderTooltip(active)}
           </div>
-          <div className="worldmap__controls" aria-label="ควบคุมการซูม"><button type="button" onClick={() => changeZoom(1.25)} aria-label="ซูมเข้า">+</button><button type="button" onClick={() => changeZoom(0.8)} aria-label="ซูมออก">−</button><button type="button" onClick={reset}>RESET</button></div>
-          <p className="worldmap__hint">{mode === 'grid' ? 'ชี้รูปแมพเพื่อดูมอนและทางเข้าดันเจี้ยน · กดเพื่อดูรายละเอียด' : 'Hover a tile to preview monsters · click for details'}</p>
+          <div className="worldmap__controls" aria-label="ควบคุมการซูม"><button type="button" onClick={() => changeZoom(1.25)} aria-label="ซูมเข้า">+</button><button type="button" onClick={() => changeZoom(0.8)} aria-label="ซูมออก">−</button><button type="button" onClick={reset}>รีเซ็ต</button></div>
+          <p className="worldmap__hint">{mode === 'grid' ? 'ชี้รูปแมพเพื่อดูมอนและทางเข้าดันเจี้ยน · กดเพื่อดูรายละเอียด' : 'ชี้ช่องบนภาพโลกเพื่อดูมอน · กดเพื่อดูรายละเอียด'}</p>
         </div>
 
         <aside className={`worldmap__panel${selected ? ' is-open' : ''}`} aria-live="polite">
           {selected ? <>
             <button className="worldmap__close" type="button" onClick={() => selectEntry(null)} aria-label="ปิดรายละเอียด">×</button>
-            <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? `DUNGEON${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : selected.cellKind === 'town' ? 'TOWN' : selected.cellKind === 'passage' ? `ทางผ่าน${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : regions.find((region) => region.id === selected.regionId)?.label}</span>
+            <span className="worldmap__eyebrow">{selected.kind === 'dungeon' ? `ดันเจี้ยน${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : selected.cellKind === 'town' ? 'เมือง' : selected.cellKind === 'passage' ? `ทางผ่าน${selected.dungeonName ? ` · ${selected.dungeonName}` : ''}` : regions.find((region) => region.id === selected.regionId)?.label}</span>
             <h2>{selected.nameEn}</h2><p className="mono worldmap__code">{selected.mapCode}</p>
             {selected.note && <p className="worldmap__note">{selected.note}</p>}
             {/* Touch has no hover, so the panel carries the same picture. */}
             {selected.image && <img key={selected.image} className="worldmap__panel-pic" src={selected.image} alt={`แผนที่ ${selected.nameEn}`} width="240" height="240" decoding="async" />}
-            <dl className="worldmap__stats"><div><dt>Map IDs</dt><dd>{selected.mapCodes.length}</dd></div><div><dt>Monster level</dt><dd>{levelText(selected)}</dd></div><div><dt>Monsters</dt><dd>{selected.monsters.length || '—'}</dd></div><div><dt>Aggressive</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount}` : '—'}</dd></div></dl>
-            <h3>Monsters on this map</h3>
-            <ul className="worldmap__monsters">{selected.monsters.map((monster) => <li key={monster.id}><Link href={`/database/monsters/${monster.id}`}>{monster.imageUrl && <img src={monster.imageUrl} alt="" width="32" height="32" loading="lazy" />}<span><strong>{monster.nameEn}</strong><small>Lv.{monster.level}{monster.isAggressive ? ' · ⚠ Aggressive' : ''}</small></span></Link></li>)}{!selected.monsters.length && <li className="worldmap__none">No monsters recorded</li>}</ul>
+            <dl className="worldmap__stats"><div><dt>จำนวนแมพ</dt><dd>{selected.mapCodes.length}</dd></div><div><dt>เลเวลมอน</dt><dd>{levelText(selected)}</dd></div><div><dt>มอน</dt><dd>{selected.monsters.length || '—'}</dd></div><div><dt>โจมตีก่อน</dt><dd>{selected.aggressiveCount ? `⚠ ${selected.aggressiveCount}` : '—'}</dd></div></dl>
+            <h3>มอนในแมพนี้</h3>
+            <ul className="worldmap__monsters">{selected.monsters.map((monster) => <li key={monster.id}><Link href={`/database/monsters/${monster.id}`}>{monster.imageUrl && <img src={monster.imageUrl} alt="" width="32" height="32" loading="lazy" />}<span><strong>{monster.nameEn}</strong><small>Lv.{monster.level}{monster.isAggressive ? ' · ⚠ โจมตีก่อน' : ''}</small></span></Link></li>)}{!selected.monsters.length && <li className="worldmap__none">ไม่มีข้อมูลมอน</li>}</ul>
             {selected.dungeons?.length ? (
               <section className="worldmap__dungeons" aria-label="ดันเจี้ยนจากแมพนี้">
                 <h3>ดันเจี้ยนจากแมพนี้</h3>
@@ -382,8 +382,8 @@ export default function WorldMap({ tiles: atlasTiles, dungeons, regions, totalMa
                 ))}
               </section>
             ) : null}
-            <Link className="btn worldmap__open" href={`/database/maps/${encodeURIComponent(selected.mapCode)}`}>Open full map page →</Link>
-          </> : <div className="worldmap__empty"><strong>Hover any map tile</strong><p>ดูมอนสเตอร์ทันที หรือคลิกช่องเพื่อเปิดรายละเอียดและรายชื่อเต็ม</p></div>}
+            <Link className="btn worldmap__open" href={`/database/maps/${encodeURIComponent(selected.mapCode)}`}>เปิดหน้าแมพเต็ม →</Link>
+          </> : <div className="worldmap__empty"><strong>ชี้หรือกดช่องแมพ</strong><p>ดูมอนสเตอร์ทันที หรือคลิกช่องเพื่อเปิดรายละเอียดและรายชื่อเต็ม</p></div>}
         </aside>
       </div>
     </section>

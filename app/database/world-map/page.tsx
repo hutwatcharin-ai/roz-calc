@@ -250,9 +250,9 @@ export default async function WorldMapPage() {
   return (
     <main className="shell worldmap-page">
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
-        <Link href="/database/maps">ฐานข้อมูลแมพ</Link><span className="crumbs__sep" aria-hidden="true">›</span><span className="crumbs__here">Interactive World Map</span>
+        <Link href="/database/maps">ฐานข้อมูลแมพ</Link><span className="crumbs__sep" aria-hidden="true">›</span><span className="crumbs__here">แผนที่โลก</span>
       </nav>
-      <PageHeader title="แผนที่โลก Ragnarok Zero — Interactive World Map" lead="ชี้แต่ละช่องเพื่อดูมอนสเตอร์ทันที ช่องที่มีเลขสีเหลืองที่มุม คือมีทางเข้าดันเจี้ยน กดเพื่อดูทุกชั้น" />
+      <PageHeader title="แผนที่โลก Ragnarok Zero" lead="ชี้แต่ละช่องเพื่อดูมอนสเตอร์ทันที ช่องที่มีเลขสีเหลืองที่มุม คือมีทางเข้าดันเจี้ยน กดเพื่อดูทุกชั้น" />
       {(error || mapsError) && <p className="worldmap-page__warning">โหลดสถิติบางส่วนไม่สำเร็จชั่วคราว แต่ยังค้นหาและเปิดแผนที่ได้</p>}
       <WorldMap tiles={tiles} dungeons={[]} regions={WORLD_MAP_REGIONS} totalMaps={mapNames.size || 497} grid={gridView} />
       <p className="worldmap-page__foot">World atlas แสดง {tiles.length} ช่องแมพ และดันเจี้ยน {dungeonCount} แห่งจากตารางวาร์ปของตัวเกม ส่วนรายการฐานข้อมูลครบทั้งหมดอยู่ที่ <Link href="/database/maps">ฐานข้อมูลแมพ →</Link></p>
