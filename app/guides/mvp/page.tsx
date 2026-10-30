@@ -123,7 +123,7 @@ export default async function MvpGuidePage() {
           </li>
           <li style={{ marginBottom: 6 }}>
             <strong>ไปแมพที่ MVP ตัวนั้นเคยเกิด</strong> จะมี<strong>ประตูแดง</strong>พาเข้าแมพของ MVP ·
-            ในนั้นมีประตูขาวไว้กลับ และ<strong>ประตูเหลือง</strong>พาไปแมพเดียวกันแบบเปิด PvP (ใช้ Fly Wing กับ Teleport ไม่ได้)
+            ในนั้นมีประตูขาวไว้กลับ และ<strong>ประตูเหลือง</strong>พาไปแมพเดียวกันแบบเปิด PvP (ใช้ Fly Wing กับ Teleport ไม่ได้ แต่ใช้ Giant Fly Wing ได้)
           </li>
           <li style={{ marginBottom: 6 }}>
             <strong>ช่วยกันตี</strong> MVP แรง เล่นคนเดียวไม่ค่อยไหว · ทำดาเมจนิดเดียว หรืออยู่ปาร์ตี้เดียวกับคนที่ตี ก็นับว่าเควสผ่าน
