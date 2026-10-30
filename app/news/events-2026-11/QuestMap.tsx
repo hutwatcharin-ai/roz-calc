@@ -97,7 +97,7 @@ export default function QuestMap() {
         </Base>
         <BaseZoom />
       </div>
-      <figcaption>1 = คนเริ่มเควสหลัก · 2 = ฐาน Gatchaman ที่จบเควสและทำรายวันทุกวัน · กดปุ่มก๊อปแล้ววางในแชตเกมเพื่อเดินไปเอง</figcaption>
+      <figcaption>1 = คนเริ่มเควสหลัก · 2 = ฐาน Gatchaman ที่จบเควสและทำรายวันทุกวัน · กดปุ่มก๊อปแล้ววางในแชตเกม เกมจะชี้ทางให้</figcaption>
       <Legend />
     </figure>
   );
