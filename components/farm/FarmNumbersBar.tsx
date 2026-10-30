@@ -29,7 +29,6 @@ import {
   buildNumbers,
   EMPTY_WINDOW,
   readSavedBuilds,
-  lowDamage,
   readWindow,
   windowNumbers,
   writeWindow,
@@ -102,26 +101,12 @@ export default function FarmNumbersBar({
   const [usedBuild, setUsedBuild] = useState<string | null>(null);
   const filled = [...BAR_FIELDS[style], ...SURVIVAL_FIELDS].some((field) => numbers[field] !== undefined);
 
-  // The window the player filled in, if any: the damage check needs it
-  // folded or not.
-  const [stored, setStored] = useState<FarmWindow | null>(null);
-
   useEffect(() => {
-    const w = readWindow(storage());
-    setStored(w);
     if (!expanded) return;
+    const w = readWindow(storage());
     if (w) setWin(w);
     else if (numbers.level !== undefined) setWin({ ...EMPTY_WINDOW, lv: numbers.level });
   }, [expanded]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Typed damage under what the stats hit bare-handed rules out monsters the
-  // player can fight. Melee only: the floor is an auto-attack.
-  const floor = style === 'melee' ? lowDamage(numbers.damagePerHit, stored) : null;
-  const warn = floor !== null && (
-    <p className="farmbar__warn" role="alert">
-      ⚠ ดาเมจ {numbers.damagePerHit} ต่ำกว่าที่สเตตัสนี้ตีได้แม้ไม่ถืออาวุธ (ราว {floor}) · ถ้าจดจากมอน DEF สูงหรือพิมพ์ผิด เครื่องมือจะตัดมอนที่คุณตีไหวทิ้ง
-    </p>
-  );
 
   function apply(next: PlayerNumbers) {
     onNumbers(next);
@@ -132,7 +117,6 @@ export default function FarmNumbersBar({
   // follow it; damage and the rest stay as they were.
   function changeWindow(w: FarmWindow) {
     setWin(w);
-    setStored(w);
     writeWindow(storage(), w);
     setUsedBuild(null);
     apply({ ...numbers, ...windowNumbers(w) });
@@ -190,7 +174,6 @@ export default function FarmNumbersBar({
             {filled ? 'แก้ ›' : '›'}
           </span>
         </button>
-        {warn}
       </div>
     );
   }
@@ -209,7 +192,6 @@ export default function FarmNumbersBar({
           ▶ ใช้บิลด์ที่บันทึกไว้
         </button>
       </div>
-      {warn}
       {saved && (
         <div className="farmbar__chiplist farmbar__savedlist">
           {saved.length === 0 ? (
