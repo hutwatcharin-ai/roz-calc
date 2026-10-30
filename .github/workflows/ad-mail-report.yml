@@ -9,9 +9,10 @@ name: Banner reports
 # scheduled task at 09:00 Thailand calls this workflow's dispatch with
 # GITHUB_DISPATCH_TOKEN, and a dispatch starts within seconds. The `force`
 # box on "Run workflow" sends a weekly report now, whatever the day.
+#
+# No GitHub schedule: a late scheduled run after the Coolify one would mail
+# the advertiser twice the same day.
 on:
-  schedule:
-    - cron: '0 2 * * *'
   workflow_dispatch:
     inputs:
       force:
