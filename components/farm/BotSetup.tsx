@@ -17,6 +17,7 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import FarmNumbersBar from './FarmNumbersBar';
+import MapPicker from './MapPicker';
 import FeedbackButton from '@/components/FeedbackButton';
 import { useRememberedNumbers } from '@/components/ToolNumbers';
 import { useFarmData } from '@/lib/use-farm-data';
@@ -46,8 +47,8 @@ function mapOptions(data: FarmData) {
   // One entry per map name+code; channel copies stay separate (different maps in game).
   return data.maps
     .filter((m) => farmedOn(m, data.monsters).length > 0)
-    .map((m) => ({ code: m.code, label: `${m.name} (${m.code})` }))
-    .sort((a, b) => a.label.localeCompare(b.label));
+    .map((m) => ({ code: m.code, name: m.name, image: m.image }))
+    .sort((a, b) => `${a.name} (${a.code})`.localeCompare(`${b.name} (${b.code})`));
 }
 
 export default function BotSetup({ initialMap, initialTick }: { initialMap: string | null; initialTick: number[] | null }) {
@@ -111,23 +112,17 @@ export default function BotSetup({ initialMap, initialTick }: { initialMap: stri
           <h2 id="bot-map" className="section-title">
             1. เลือกแมพ
           </h2>
-          <label className="botsetup__map">
-            <span className="toolnumbers__label">แมพที่จะทิ้งบอท</span>
-            <select
-              value={code ?? ''}
-              onChange={(e) => {
-                setCode(e.target.value || null);
+          <div className="botsetup__map">
+            <MapPicker
+              label="แมพที่จะทิ้งบอท"
+              options={mapOptions(data)}
+              value={code}
+              onChange={(next) => {
+                setCode(next);
                 setTick(null);
               }}
-            >
-              <option value="">— เลือกแมพ —</option>
-              {mapOptions(data).map((o) => (
-                <option key={o.code} value={o.code}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </label>
+            />
+          </div>
           {!code && (
             <p className="muted">
               ยังไม่รู้จะไปแมพไหน ดูอันดับที่ <Link href="/tools/leveling-spots?mode=afk">ฟาร์มที่ไหนดี โหมดทิ้งบอท</Link> แล้วกด &ldquo;ดูค่าเซ็ตบอทแมพนี้&rdquo;
