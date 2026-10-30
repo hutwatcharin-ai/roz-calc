@@ -165,7 +165,9 @@ export default async function MvpGuidePage() {
           </li>
           <li style={{ marginBottom: 6 }}>
             <strong>Energy Fragment ของ MVP ตัวนั้น</strong> เช่น{' '}
-            <Link href="/database/items/1002385">[Golden Thief Bug] Energy Fragment</Link> ตกระหว่างสู้ ใครอยู่ในแมพก็เก็บได้
+            <Link href="/database/items/1002385">[Golden Thief Bug] Energy Fragment</Link> ตกระหว่างสู้ ใครอยู่ในแมพก็เก็บได้ ·
+            เอาไปส่ง <strong>Raid Manager Yakt</strong> ใน Eden Group ตามไกด์ผู้เล่น{' '}
+            <a href="https://sites.google.com/view/rozeroguide" target="_blank" rel="noopener noreferrer">ROZero Guide ของ Lymd</a>
           </li>
           <li>แมพแบบ PvP (ประตูเหลือง) ดรอปกล่องต่างจากแมพปกติ</li>
         </ul>
