@@ -7,7 +7,8 @@ const player = (over: Partial<PlayerInput> = {}): PlayerInput => ({
   ...noSurvival,
   style: 'melee',
   level: null,
-  damage: 500,
+  // Under the fixtures' 100 HP: two hits a kill, so dodging is judged.
+  damage: 50,
   perSecond: 2,
   hit: 300,
   flee: 200,
@@ -49,6 +50,20 @@ describe('mapBlockers', () => {
     const map = rows([mob(1, { flee95: 212 }), 20]);
     expect(mapBlockers(map, player())).toEqual([]);
     expect(mapBlockers(map, player({ style: 'magic', hit: null }))).toHaveLength(1);
+  });
+
+  it('does not ask a one-hit kill that waits to be hit to be dodged', () => {
+    // Owner, 30 Oct 2026: it never gets a swing in. 100 HP, 100 damage.
+    const map = rows([mob(1, { flee95: 400 }), 20], [mob(2, { flee95: null }), 5]);
+    expect(mapBlockers(map, player({ damage: 100 }))).toEqual([]);
+    expect(mapBlockers(map, player({ damage: 100, style: 'magic', hit: null }))).toEqual([]);
+    expect(mapBlockers(map, player({ damage: 99 }))?.map((b) => b.reason)).toEqual(['dodge', 'unknown_flee']);
+  });
+
+  it('holds a one-hit kill that comes to us to the relaxed cap, not none', () => {
+    // 17% passes the relaxed 20%; 100% does not.
+    expect(mapBlockers(rows([mob(1, { flee95: 212, isAggressive: true }), 20]), player({ damage: 100 }))).toEqual([]);
+    expect(mapBlockers(rows([mob(1, { flee95: 400, isAggressive: true }), 20]), player({ damage: 100 }))).toHaveLength(1);
   });
 
   it('holds everything to the strict cap on a map with an aggressive kind', () => {

@@ -119,6 +119,8 @@ export interface AfkVerdict {
   hits: number | null;
   /** The dodge cap this monster was held to: 10 (strict) or 20. */
   dodgeCap: number;
+  /** Dies to one hit: a monster that waits is not judged on dodging at all. */
+  oneHit: boolean;
 }
 
 // One in five for a monster that waits to be hit; one in ten when it comes
@@ -143,13 +145,25 @@ export function afkVerdict(input: AfkRuleInput): AfkVerdict {
   // cap, the same as a known aggressive one. A missing threshold has always
   // failed here rather than passed, and the aggression flag is a threshold.
   const strict = style === 'magic' || monster.isAggressive !== false || (monster.mapAggroCount ?? 0) > 0;
-  const dodgeCap = strict ? DODGE_CAP_STRICT : DODGE_CAP_RELAXED;
+
+  let hits: number | null = null;
+  const hpKnown = monster.hp != null && Number.isFinite(monster.hp) && monster.hp > 0;
+  const dmgKnown = Number.isFinite(me.damagePerHit) && me.damagePerHit > 0;
+  if (hpKnown && dmgKnown) hits = Math.ceil((monster.hp as number) / me.damagePerHit);
+
+  // Dead in one hit (owner, 30 Oct 2026). A monster that waits to be hit
+  // never gets a swing in, so dodging does not come into it. One that comes
+  // to us can still land while we cast or swing, but only for that moment:
+  // it is held to the relaxed cap instead of the strict one.
+  const oneHit = hits === 1;
+  const waits = monster.isAggressive === false;
+  const dodgeCap = strict && !oneHit ? DODGE_CAP_STRICT : DODGE_CAP_RELAXED;
 
   let theirHitPct: number | null = null;
-  if (monster.flee95 == null) fails.push('unknown_flee');
-  else {
-    theirHitPct = theirChance(monster.flee95, me.flee);
-    if (theirHitPct > dodgeCap) fails.push('dodge');
+  if (monster.flee95 != null) theirHitPct = theirChance(monster.flee95, me.flee);
+  if (!(oneHit && waits)) {
+    if (theirHitPct === null) fails.push('unknown_flee');
+    else if (theirHitPct > dodgeCap) fails.push('dodge');
   }
 
   let myHitPct: number | null = null;
@@ -160,13 +174,8 @@ export function afkVerdict(input: AfkRuleInput): AfkVerdict {
     if (myHitPct < MY_HIT_FLOOR) fails.push('hit');
   }
 
-  let hits: number | null = null;
-  if (monster.hp == null || !Number.isFinite(monster.hp) || monster.hp <= 0) fails.push('unknown_hp');
-  else if (!Number.isFinite(me.damagePerHit) || me.damagePerHit <= 0) fails.push('unknown_hp');
-  else {
-    hits = Math.ceil(monster.hp / me.damagePerHit);
-    if (hits > maxHits) fails.push('hits');
-  }
+  if (hits === null) fails.push('unknown_hp');
+  else if (hits > maxHits) fails.push('hits');
 
-  return { ok: fails.length === 0, fails, theirHitPct, myHitPct, hits, dodgeCap };
+  return { ok: fails.length === 0, fails, theirHitPct, myHitPct, hits, dodgeCap, oneHit };
 }

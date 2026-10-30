@@ -83,6 +83,17 @@ describe('mapSurvival', () => {
     expect(out.blockers.map((b) => b.reason)).toEqual(['runs_out']);
   });
 
+  it('takes nothing from a monster that waits and dies to the first hit', () => {
+    // Owner, 30 Oct 2026. 100 damage on 100 HP: it never swings back.
+    const d = data();
+    const out = mapSurvival(d.maps[0], d, tank({ damage: 100 }), ctx)!;
+    expect(out.netDamagePerHour).toBeLessThan(0);
+    expect(out.blockers).toEqual([]);
+    // One that comes to us still lands while we swing.
+    const a = data({ isAggressive: true });
+    expect(mapSurvival(a.maps[0], a, tank({ damage: 100 }), ctx)!.netDamagePerHour).toBeGreaterThan(0);
+  });
+
   it('takes no hits and regains no HP while walking', () => {
     // 2 s fighting + 2 s walking: 900 kills = 89,100 taken; regen only the
     // half spent standing, 1,500.

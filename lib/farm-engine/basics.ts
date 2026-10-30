@@ -92,6 +92,12 @@ export function canFight(m: FarmMonster, player: PlayerInput): boolean {
   return (myHitChance(m, player) ?? 100) >= MIN_HIT_PERCENT;
 }
 
+/** The player's first hit kills it (owner, 30 Oct 2026: then dodging matters little or not at all). */
+export function killsInOneHit(m: FarmMonster, player: PlayerInput): boolean {
+  if (player.damage === null || player.damage <= 0 || m.hp === null || m.hp <= 0) return false;
+  return m.oneDamage ? m.hp <= 1 : player.damage >= m.hp;
+}
+
 /** % the monster lands on the player; null without FLEE or its flee95. */
 export function theirHitChance(m: FarmMonster, player: PlayerInput): number | null {
   if (player.flee === null || m.flee95 === null) return null;

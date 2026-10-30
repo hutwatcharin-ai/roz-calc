@@ -9,6 +9,7 @@
 // treated it.
 
 import { afkVerdict, type SkillRisk } from '../afk-safety';
+import { killsInOneHit } from './basics';
 import type { Blocker } from './survival';
 import type { MapRow, PlayerInput } from './types';
 
@@ -50,11 +51,13 @@ export interface MapTags {
   risks: { risk: SkillRisk; names: string[] }[];
   /** MVPs and one-at-a-time spawns on the map: met now and then, not farmed, not judged. */
   bosses: string[];
+  /** Farmed monsters that wait to be hit and die to the first hit: dodging is not asked of them. */
+  oneHit: string[];
 }
 
 const RISK_ORDER: SkillRisk[] = ['summons', 'locks', 'explodes', 'transforms'];
 
-export function mapTags(met: MapRow[]): MapTags {
+export function mapTags(met: MapRow[], player?: PlayerInput, farmed: MapRow[] = []): MapTags {
   const names = new Map<SkillRisk, string[]>();
   for (const row of met) {
     for (const { risk } of row.m.risks) {
@@ -67,5 +70,8 @@ export function mapTags(met: MapRow[]): MapTags {
     aggressiveKinds: met.filter((row) => row.m.isAggressive === true).length,
     risks: RISK_ORDER.filter((risk) => names.has(risk)).map((risk) => ({ risk, names: names.get(risk) as string[] })),
     bosses: [...new Set(met.filter((row) => row.m.isMvp || row.m.solo).map((row) => row.m.name))],
+    oneHit: player
+      ? [...new Set(farmed.filter((row) => row.m.isAggressive === false && killsInOneHit(row.m, player)).map((row) => row.m.name))]
+      : [],
   };
 }

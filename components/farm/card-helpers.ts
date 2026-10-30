@@ -64,6 +64,13 @@ export function mapCardTags(map: RankedMap): CardTag[] {
   for (const { risk, names } of map.tags.risks) {
     tags.push({ tone: 'warn', text: SKILL_RISK_LABELS[risk], title: `${names.join(', ')} — ${SKILL_RISK_WHY[risk]}` });
   }
+  if (map.tags.oneHit.length > 0) {
+    tags.push({
+      tone: 'info',
+      text: `ทีเดียวตาย ${map.tags.oneHit.length} ชนิด`,
+      title: `${map.tags.oneHit.join(', ')} — ไม่ตีก่อนและตายในทีเดียว มันจึงตีคุณไม่ทัน ไม่ต้องหลบ`,
+    });
+  }
   if (map.tags.bosses.length > 0) {
     tags.push({
       tone: 'warn',

@@ -32,7 +32,7 @@
 // ranking, the walking time.
 
 import { mobHitChance } from '../hit-flee';
-import { canRate, farmedOn, headcount, secondsPerKill } from './basics';
+import { canRate, farmedOn, headcount, killsInOneHit, secondsPerKill } from './basics';
 import { NIGHT_HOURS, type FarmData, type FarmMap, type FarmMonster, type MapRow, type PlayerInput } from './types';
 import { BOT_SIGHT, PLAYER_IDLE_TELEPORT, searchModel, TELEPORT_SECONDS } from './search';
 
@@ -274,9 +274,12 @@ export function mapSurvival(
   let damage = 0;
   for (const t of threats.values()) {
     let seconds = secondsPerKill(t.row.m, player) as number;
-    // The part of the fight the monster can hit back in.
+    // The part of the fight the monster can hit back in. One that waits to
+    // be hit and dies to the first one never hits back (owner, 30 Oct 2026).
     let exposed = seconds;
-    if (player.style === 'magic') {
+    if (t.row.m.isAggressive === false && killsInOneHit(t.row.m, player)) {
+      exposed = 0;
+    } else if (player.style === 'magic') {
       const reach = Math.max(0, CASTER_RANGE - (t.row.m.attackRange ?? 1));
       const free = (reach * (t.row.m.walkSpeed ?? DEFAULT_MOB_WALK)) / 1000;
       exposed = Math.max(0, seconds - free);

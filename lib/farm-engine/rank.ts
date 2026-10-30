@@ -194,7 +194,7 @@ function scoreMap(
       .slice(0, 4),
     blockers: !overnight ? null : survival ? survival.blockers : mapBlockers(farmed, player),
     warnings: !overnight && survival ? survival.blockers : [],
-    tags: mapTags(met),
+    tags: overnight ? mapTags(met, player, farmed) : mapTags(met),
     dropTags: zenyMode ? (['halved', 'unconfirmed'] as DropTag[]).filter((t) => tagsPresent.has(t)) : [],
     fingerprint: contributors
       .map((row) => `${row.m.id}x${row.amount}`)
@@ -274,7 +274,7 @@ function botMap(
       .slice(0, 4),
     blockers: best ? [] : run ? runBlockers(run) : [{ id: 0, name: '', reason: 'short', theirHitPct: null, hours: 0 }],
     warnings: [],
-    tags: mapTags(metOn(map, data.monsters)),
+    tags: mapTags(metOn(map, data.monsters), player, farmed),
     dropTags: zenyMode ? (['halved', 'unconfirmed'] as DropTag[]).filter((t) => tagsPresent.has(t)) : [],
     fingerprint: contributors
       .map((row) => `${row.m.id}x${row.amount}`)
