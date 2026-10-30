@@ -1,12 +1,23 @@
 name: Banner reports
 
 # Mails each advertiser their banner numbers (scripts/ad-mail-report.mjs).
-# Runs daily at 09:00 Thailand (02:00 UTC); the script sends only on Fridays
-# and on the day after a booking ends. "Run workflow" by hand sends one now.
+# Runs daily at 09:00 Thailand; the script sends only on Fridays and on the
+# day after a booking ends.
+#
+# GitHub's own schedule ran up to six hours late (08:09 and 08:17 UTC for
+# 02:00, 28-29 Oct 2026), so the Coolify server starts it instead: a daily
+# scheduled task at 09:00 Thailand calls this workflow's dispatch with
+# GITHUB_DISPATCH_TOKEN, and a dispatch starts within seconds. The `force`
+# box on "Run workflow" sends a weekly report now, whatever the day.
 on:
   schedule:
     - cron: '0 2 * * *'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Send a weekly report now, whatever the day'
+        type: boolean
+        default: false
 
 jobs:
   report:
@@ -31,4 +42,4 @@ jobs:
           AD_REPORT_TO: ${{ secrets.AD_REPORT_TO }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHROME_PATH: /usr/bin/google-chrome
-        run: node scripts/ad-mail-report.mjs ${{ github.event_name == 'workflow_dispatch' && '--now' || '' }}
+        run: node scripts/ad-mail-report.mjs ${{ inputs.force && '--now' || '' }}
