@@ -18,7 +18,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  ALL_BUFFS, ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS,
+  ALL_BUFFS, ALL_CARDS, ALL_GEAR, ALL_STONES, BUILD_KEY, SAVED_BUILDS_KEY, COSTUME_SLOTS, COSTUME_STONES, COSTUME_TH, EMPTY_BUILD, MAX_ENCHANTS,
   attacksFor, buffBySlug, FORGE_ELEMENTS, maxOptionsFor, optionRangeText, passivesFor,
   OPTION_TYPES, SLOTS, SLOT_TH, calcBuild, cardById, cardKind, classFits, coveredSlots, decodeBuild, encodeBuild, fitsLeftHand, fitsSlot, gearById, slotLabel,
   isTwoHanded, maxJobLevel, optionKey, sanitizeBuild, stoneById, type Build, type CostumeSlot, type Slot, type Target,
@@ -61,8 +61,7 @@ const POTIONS: [number, string, number][] = [
   [501, 'Red Potion', 7], [502, 'Orange Potion', 10], [503, 'Yellow Potion', 13], [504, 'White Potion', 15],
   [505, 'Blue Potion', 15], [645, 'Concentration Potion', 10], [656, 'Awakening Potion', 15], [657, 'Berserk Potion', 20],
 ];
-// Several builds kept in this browser (owner, 7 Oct 2026), beside the one in use.
-const SAVED_KEY = 'roz-calc:builds';
+const SAVED_KEY = SAVED_BUILDS_KEY;
 const MAX_SAVED = 20;
 interface SavedBuild {
   name: string;

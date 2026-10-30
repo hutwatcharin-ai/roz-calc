@@ -42,6 +42,11 @@ export function foodText(food: FoodBuff): string {
 
 const BY_ID = new Map(FOODS.map((f) => [f.id, f]));
 
+/** Every food in the game, for pickers. */
+export function allFoods(): FoodBuff[] {
+  return FOODS;
+}
+
 /** The buff a food item gives, for recipe and item lists. */
 export function foodById(id: number): FoodBuff | null {
   return BY_ID.get(id) ?? null;
