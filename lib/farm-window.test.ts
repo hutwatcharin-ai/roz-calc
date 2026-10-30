@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { calcBuild, encodeBuild, EMPTY_BUILD, SAVED_BUILDS_KEY, type Build } from '@/lib/build-calc';
-import { buildNumbers, EMPTY_WINDOW, readSavedBuilds, sanitizeWindow, windowNumbers, type FarmWindow } from '@/lib/farm-window';
+import { buildNumbers, damageFloor, EMPTY_WINDOW, lowDamage, readSavedBuilds, sanitizeWindow, windowNumbers, type FarmWindow } from '@/lib/farm-window';
 
 const knight: FarmWindow = {
   ...EMPTY_WINDOW,
@@ -73,5 +73,18 @@ describe('buildNumbers damage', () => {
   it('gives a damage figure against the dummy', () => {
     const b: Build = { ...EMPTY_BUILD, cls: 'knight', lv: 60, job: 30, st: { str: 70, agi: 50, vit: 20, int: 1, dex: 30, luk: 1 } };
     expect(buildNumbers(b).damagePerHit).toBeGreaterThan(0);
+  });
+});
+
+describe('lowDamage', () => {
+  it('flags a typed damage under what the stats hit bare-handed', () => {
+    const floor = damageFloor(knight)!;
+    expect(floor).toBeGreaterThan(100);
+    expect(lowDamage(100, knight)).toBe(floor);
+    expect(lowDamage(floor + 50, knight)).toBeNull();
+  });
+  it('says nothing without a window or a typed damage', () => {
+    expect(lowDamage(100, null)).toBeNull();
+    expect(lowDamage(undefined, knight)).toBeNull();
   });
 });

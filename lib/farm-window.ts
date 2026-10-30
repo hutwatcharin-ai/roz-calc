@@ -132,3 +132,21 @@ export function readSavedBuilds(storage: StorageLike | null): SavedBuildRef[] {
     return [];
   }
 }
+
+/**
+ * The least this window hits for: the status part alone, no weapon, against
+ * a monster with no DEF. A typed damage under it was read off a hard monster
+ * or mistyped, and would make the farm tool rule out monsters the player
+ * can fight (owner, 30 Oct 2026).
+ */
+export function damageFloor(w: FarmWindow): number | null {
+  const dmg = calcBuild(windowBuild(w), DUMMY).vs?.damage;
+  return dmg != null && dmg > 0 ? Math.floor(dmg) : null;
+}
+
+/** The floor when typed damage falls under it, else null. */
+export function lowDamage(typed: number | undefined, w: FarmWindow | null): number | null {
+  if (typed === undefined || !w) return null;
+  const floor = damageFloor(w);
+  return floor !== null && typed < floor ? floor : null;
+}
