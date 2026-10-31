@@ -128,23 +128,23 @@ const RITUAL_SITES = [
   { floor: 'ใต้ดิน B2F', navi: 'alde_dun02 240/108' },
 ];
 
-type Gear = { name: string; id?: number; png?: boolean; kind: string; who: string; fx: string[] };
+type Gear = { name: string; id?: number; png?: boolean; kind: string; who: string; fx: string[]; drop?: { id: number; name: string; rate?: number }[] };
 // id: our item page when the item is already in the database (28 Oct data).
 const HAT_MAKER: Gear[] = [
   { name: 'Clock Tower Manager Headphones', id: 19333, kind: 'หัวกลาง · DEF 10 · Lv 60 · หนัก 10', who: 'ทุกอาชีพ', fx: ['MATK +20', 'ใส่คู่ Tower Keeper Card: ลดร่ายแปรผัน 15%'] },
   { name: 'Pocket Watch Ornament', id: 19334, kind: 'หัวกลาง · DEF 10 · Lv 60 · หนัก 10', who: 'ทุกอาชีพ', fx: ['ATK +20', 'ใส่คู่ Clock Card: DEF +20 MSP +100', 'ใส่คู่ Alarm Card: MHP +1000'] },
 ];
 const EXCLUSIVE: Gear[] = [
-  { name: 'Encyclopedia [2]', id: 1564, kind: 'หนังสือ · ATK 110 · อาวุธ Lv 3 · Lv 70 · หนัก 200', who: 'สาย Sage, Priest', fx: ['INT +3 DEX +2 ไม่แตก', 'CRIT +20 และ CRIT เพิ่มตาม LUK', 'MATK +100'] },
-  { name: 'Rabbit Pattern Shirt [1]', id: 15282, kind: 'เกราะ · DEF 10 · Lv 60 · หนัก 50', who: 'สาย Mage, Acolyte', fx: ['MHP +150 MSP +75', 'MATK +2 ต่อขั้นตีบวก', '+7: MHP +75 MSP +25 · +9: MHP +75 MSP +25'] },
+  { name: 'Encyclopedia [2]', id: 1564, kind: 'หนังสือ · ATK 110 · อาวุธ Lv 3 · Lv 70 · หนัก 200', who: 'สาย Sage, Priest', fx: ['INT +3 DEX +2 ไม่แตก', 'CRIT +20 และ CRIT เพิ่มตาม LUK', 'MATK +100'], drop: [{ id: 1377, name: 'Elder', rate: 0.05 }] },
+  { name: 'Rabbit Pattern Shirt [1]', id: 15282, kind: 'เกราะ · DEF 10 · Lv 60 · หนัก 50', who: 'สาย Mage, Acolyte', fx: ['MHP +150 MSP +75', 'MATK +2 ต่อขั้นตีบวก', '+7: MHP +75 MSP +25 · +9: MHP +75 MSP +25'], drop: [{ id: 20176, name: 'Erzsebet' }] },
   { name: 'Clock Casket [1]', id: 19357, kind: 'หัวบน · DEF 10 · Lv 60 · หนัก 70', who: 'ทุกอาชีพ', fx: ['ทุก +2 ดาเมจกายภาพใส่มอน Formless +1%', '+7: HIT +15 · +9: MHP +250'] },
   { name: 'Black Witch Hat [1]', id: 19358, kind: 'หัวบน · DEF 10 · Lv 60 · หนัก 70', who: 'ทุกอาชีพ', fx: ['ทุก +2 MATK +1%', '+7: MHP +50 MSP +100 · +9: ลดร่ายแปรผัน 5%'] },
   { name: 'Safety Boots [1]', id: 22188, kind: 'รองเท้า · DEF 60 · Lv 60 · หนัก 35', who: 'สาย Swordman', fx: ['MHP +250 MSP +50', '+7: ลดดาเมจกายภาพและเวทจากศัตรูทุกธาตุ 5%', '(แพตช์โน้ตไม่ได้เขียนผล ค่านี้จากไฟล์เกม)'] },
-  { name: "General's Cape [1]", id: 480999, png: true, kind: 'ผ้าคลุม · DEF 55 · Lv 60 · หนัก 150', who: 'ทุกอาชีพ', fx: ['MHP +200 MSP +20', 'ทุก +2 MHP +100 MSP +10', '+7 และ +9: ลดร่ายแปรผัน 5% ดีเลย์หลังตี 5% (ขั้นละครั้ง)'] },
-  { name: "Hunter's Cape [1]", id: 481000, png: true, kind: 'ผ้าคลุม · DEF 7 · Lv 60 · หนัก 50', who: 'ทุกอาชีพ', fx: ['ATK +10 HIT +10', '+6 ขึ้นไป: ATK +1 HIT +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ดีเลย์หลังตี −5% (ขั้นละครั้ง)'] },
-  { name: 'Rotating Gear [1]', id: 481001, png: true, kind: 'ผ้าคลุม · DEF 2 · Lv 60 · หนัก 10', who: 'ทุกอาชีพ', fx: ['FLEE +10', '+6 ขึ้นไป: FLEE +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ลดร่ายแปรผัน 5% (ขั้นละครั้ง)'] },
-  { name: 'Joker Claw [1]', id: 1856, kind: 'สนับมือ · ATK 90 · อาวุธ Lv 3 · Lv 60 · หนัก 40', who: 'สาย Monk, Priest', fx: ['STR +2 Raging Trifecta Blow +10%', 'Trifecta +1% ต่อขั้นตีบวก · ทุก +2 ดีเลย์หลังตี −1%', '+7: Raging Quadruple Blow +15% · +9: Raging Thrust +15%'] },
-  { name: 'Memory Book', id: 2109, kind: 'โล่ · DEF 25 · Lv 1 · หนัก 100', who: 'สาย Mage', fx: ['INT +1 MDEF +2'] },
+  { name: "General's Cape [1]", id: 480999, png: true, kind: 'ผ้าคลุม · DEF 55 · Lv 60 · หนัก 150', who: 'ทุกอาชีพ', fx: ['MHP +200 MSP +20', 'ทุก +2 MHP +100 MSP +10', '+7 และ +9: ลดร่ายแปรผัน 5% ดีเลย์หลังตี 5% (ขั้นละครั้ง)'], drop: [{ id: 20178, name: 'General Orc' }] },
+  { name: "Hunter's Cape [1]", id: 481000, png: true, kind: 'ผ้าคลุม · DEF 7 · Lv 60 · หนัก 50', who: 'ทุกอาชีพ', fx: ['ATK +10 HIT +10', '+6 ขึ้นไป: ATK +1 HIT +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ดีเลย์หลังตี −5% (ขั้นละครั้ง)'], drop: [{ id: 1211, name: 'Brilight' }] },
+  { name: 'Rotating Gear [1]', id: 481001, png: true, kind: 'ผ้าคลุม · DEF 2 · Lv 60 · หนัก 10', who: 'ทุกอาชีพ', fx: ['FLEE +10', '+6 ขึ้นไป: FLEE +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ลดร่ายแปรผัน 5% (ขั้นละครั้ง)'], drop: [{ id: 1269, name: 'Clock' }] },
+  { name: 'Joker Claw [1]', id: 1856, kind: 'สนับมือ · ATK 90 · อาวุธ Lv 3 · Lv 60 · หนัก 40', who: 'สาย Monk, Priest', fx: ['STR +2 Raging Trifecta Blow +10%', 'Trifecta +1% ต่อขั้นตีบวก · ทุก +2 ดีเลย์หลังตี −1%', '+7: Raging Quadruple Blow +15% · +9: Raging Thrust +15%'], drop: [{ id: 20175, name: 'Extra Joker' }] },
+  { name: 'Memory Book', id: 2109, kind: 'โล่ · DEF 25 · Lv 1 · หนัก 100', who: 'สาย Mage', fx: ['INT +1 MDEF +2'], drop: [{ id: 1270, name: 'Clock Tower Manager', rate: 0.01 }] },
 ];
 
 // New in the client of 29 Oct 2026, styled on Clock Tower monsters; no
@@ -165,6 +165,18 @@ function gearRow(g: Gear) {
         <p className="ct-gearrow__name">{g.id ? <Link href={`/database/items/${g.id}`}>{g.name}</Link> : g.name}</p>
         <p className="ct-gearrow__kind">{g.kind} · {g.who}</p>
         <ul className="ct-gearrow__fx">{g.fx.map((f) => <li key={f}>{f}</li>)}</ul>
+        {g.drop && (
+          <p className="ct-gearrow__drop">
+            ดรอปจาก{' '}
+            {g.drop.map((d, i) => (
+              <span key={d.id}>
+                {i > 0 && ', '}
+                <Link href={`/database/monsters/${d.id}`}>{d.name}</Link>
+                {d.rate != null && ` ${d.rate}%`}
+              </span>
+            ))}
+          </p>
+        )}
       </div>
     </li>
   );
@@ -436,7 +448,7 @@ export default async function Patch20261029Page() {
       {/* 3. The ten new pieces of equipment. */}
       <section id="gear" className="ct-ch">
         <h2 className="ct-ch__title"><span className="ct-ch__n">3</span>อุปกรณ์ใหม่จากหอนาฬิกา</h2>
-        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment ไม่บอกว่าดรอปจากมอนตัวไหน</p>
+        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment · Clock Casket, Black Witch Hat และ Safety Boots ยังไม่มีใครเจอว่าได้จากไหน</p>
         <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
       </section>
 
@@ -637,7 +649,7 @@ export default async function Patch20261029Page() {
       </section>
 
       <aside className="pnote">
-        <strong>ยังไม่รู้</strong> ขั้นตอนเควสทีละขั้น อุปกรณ์ใหม่ดรอปจากมอนตัวไหน และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
+        <strong>ยังไม่รู้</strong> ขั้นตอนเควสทีละขั้น ที่มาของ Clock Casket, Black Witch Hat, Safety Boots และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
         ตีไหวไหมดูที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
       </aside>
 
