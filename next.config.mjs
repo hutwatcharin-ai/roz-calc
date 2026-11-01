@@ -68,6 +68,13 @@ const nextConfig = {
         source: '/images/:path*',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
+      {
+        // Coolify's Traefik gzips anything without a Content-Encoding, and a
+        // gzipped mp4 loses byte ranges -- iOS Safari then shows only the
+        // poster. Saying the file is already as-is makes Traefik leave it.
+        source: '/images/ads/:file(.*\\.mp4)',
+        headers: [{ key: 'Content-Encoding', value: 'identity' }],
+      },
     ];
   },
 };
