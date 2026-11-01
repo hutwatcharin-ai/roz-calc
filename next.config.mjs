@@ -2,6 +2,10 @@
 const nextConfig = {
   // Framework fingerprint header off (SEO audit 2026-09-01, Low #9).
   poweredByHeader: false,
+  // Cloudflare compresses for readers. Next's own gzip also wrapped the banner
+  // mp4s, which drops byte ranges -- iOS Safari will not play a video without
+  // a 206 answer, so the ShortOne banner sat still on iPhones (1 Nov 2026).
+  compress: false,
   // The build card (lib/build-card) loads resvg's wasm and omggif at run
   // time; left to webpack they would be bundled and the wasm path lost.
   experimental: { serverComponentsExternalPackages: ['@resvg/resvg-wasm', 'omggif'] },
