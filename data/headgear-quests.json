@@ -2,7 +2,8 @@
  "_meta": {
   "built": "2026-11-02",
   "how": "hand list from our quests table (the game quest log); item ids from data/game-items.json",
-  "note": "Quest log names differ from item names (Soft Fur = Feather, Wood Piece = Trunk, Red Dye = Scarlet Dyestuffs ...). Each mapping checked against the classic rAthena recipe for the same hat."
+  "note": "Quest log names differ from item names (Soft Fur = Feather, Wood Piece = Trunk, Red Dye = Scarlet Dyestuffs ...). Each mapping checked against the classic rAthena recipe for the same hat.",
+  "februs": "Clock Casket and Black Witch Hat: Februs's crafting dialogue in the client's NPC text (data/i18n/sc, client of 29 Oct 2026). His map is not in the Global client's navigation data, so no /navi."
  },
  "hats": [
   {
@@ -1209,7 +1210,7 @@
    "zeny": 0,
    "quest": 22109,
    "start": null,
-   "note": "วัตถุดิบชุดเดียวกับ Pocket Watch Ornament ดรอปจากมอนหอนาฬิกา ดูในหน้าแพตช์ 29 ต.ค.",
+   "note": "วัตถุดิบชุดเดียวกับ Pocket Watch Ornament ดรอปจากมอนหอนาฬิกา ดูในหน้าแพตช์ 29 ต.ค. · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
    "bonus": "MATK +20 · ใส่คู่ Clock Tower Manager Card: ร่ายแบบแปรผันเร็วขึ้น 15%",
    "pos": "Middle",
    "level": "60",
@@ -1308,7 +1309,7 @@
    "zeny": 0,
    "quest": 22110,
    "start": null,
-   "note": null,
+   "note": "ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
    "bonus": "ATK +20 · ใส่คู่ Clock Card: DEF +20 MaxSP +100 · ใส่คู่ Alarm Card: MaxHP +1,000",
    "pos": "Middle",
    "level": "60",
@@ -1936,6 +1937,178 @@
    "noRefine": false,
    "def": "0",
    "category": "Armor"
+  },
+  {
+   "town": "Februs",
+   "id": 19357,
+   "name": "Clock Casket",
+   "icon": "/images/items/19357.gif",
+   "category": "Armor",
+   "npc": "Februs",
+   "navi": null,
+   "mats": [
+    {
+     "id": 1095,
+     "name": "Clock Hand",
+     "n": 100,
+     "icon": "/images/items/1095.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1193,
+      "name": "Alarm",
+      "level": 88,
+      "rate": 26.68,
+      "others": 2
+     }
+    },
+    {
+     "id": 7026,
+     "name": "Clock Tower Key",
+     "n": 5,
+     "icon": "/images/items/7026.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1270,
+      "name": "C Tower Manager",
+      "level": 90,
+      "rate": 10,
+      "others": 2
+     }
+    },
+    {
+     "id": 7027,
+     "name": "Key of the Underground",
+     "n": 5,
+     "icon": "/images/items/7027.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1377,
+      "name": "Elder",
+      "level": 92,
+      "rate": 15,
+      "others": 2
+     }
+    },
+    {
+     "id": 978,
+     "name": "Cobaltblue Dyestuffs",
+     "n": 3,
+     "icon": "/images/items/978.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 982,
+     "name": "White Dyestuffs",
+     "n": 3,
+     "icon": "/images/items/982.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 25429,
+     "name": "Mithril Ore",
+     "n": 50,
+     "icon": "/images/items/25429.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 50000,
+   "quest": 0,
+   "start": null,
+   "note": "Mithril Ore 50 ชิ้นได้จากดันเจี้ยนความทรงจำ ถ้าไม่พอ NPC ใช้ Zelstar แทนส่วนที่ขาด · Mithril 1 ชิ้นแตกเป็น Mithril Ore 10 ชิ้นได้ที่ Thor's Dismantling Flame · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
+   "bonus": "ATK +20 · ทุกการตีบวก 2 ขั้น ดาเมจกายภาพใส่มอนทุกเผ่า +1% · +7: HIT +15 · +9: MaxHP +250",
+   "pos": "Upper",
+   "def": "10",
+   "level": "60",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false
+  },
+  {
+   "town": "Februs",
+   "id": 19358,
+   "name": "Black Witch Hat",
+   "icon": "/images/items/19358.gif",
+   "category": "Armor",
+   "npc": "Februs",
+   "navi": null,
+   "mats": [
+    {
+     "id": 1061,
+     "name": "Witch Starsand",
+     "n": 200,
+     "icon": "/images/items/1061.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1102,
+      "name": "Bathory",
+      "level": 88,
+      "rate": 24.25,
+      "others": 1
+     }
+    },
+    {
+     "id": 983,
+     "name": "Black Dyestuffs",
+     "n": 5,
+     "icon": "/images/items/983.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1582,
+      "name": "Deviling",
+      "level": 85,
+      "rate": 0.5,
+      "others": 0
+     }
+    },
+    {
+     "id": 2252,
+     "name": "Wizard Hat",
+     "n": 1,
+     "icon": "/images/items/2252.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1102,
+      "name": "Bathory",
+      "level": 88,
+      "rate": 0.02,
+      "others": 0
+     }
+    },
+    {
+     "id": 25506,
+     "name": "Cute Broom",
+     "n": 1,
+     "icon": "/images/items/25506.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20176,
+      "name": "Erzsebet",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25429,
+     "name": "Mithril Ore",
+     "n": 50,
+     "icon": "/images/items/25429.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 50000,
+   "quest": 0,
+   "start": null,
+   "note": "Mithril Ore 50 ชิ้นได้จากดันเจี้ยนความทรงจำ ถ้าไม่พอ NPC ใช้ Zelstar แทนส่วนที่ขาด · Mithril 1 ชิ้นแตกเป็น Mithril Ore 10 ชิ้นได้ที่ Thor's Dismantling Flame · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
+   "bonus": "MATK +20 · ทุกการตีบวก 2 ขั้น MATK +1% · +7: MaxHP +50 MaxSP +100 · +9: ลดเวลาร่ายแปรผัน 5%",
+   "pos": "Upper",
+   "def": "10",
+   "level": "60",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false
   }
  ]
 }

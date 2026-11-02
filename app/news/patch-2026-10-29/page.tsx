@@ -448,7 +448,7 @@ export default async function Patch20261029Page() {
       {/* 3. The ten new pieces of equipment. */}
       <section id="gear" className="ct-ch">
         <h2 className="ct-ch__title"><span className="ct-ch__n">3</span>อุปกรณ์ใหม่จากหอนาฬิกา</h2>
-        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment · Clock Casket, Black Witch Hat และ Safety Boots ยังไม่มีใครเจอว่าได้จากไหน</p>
+        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment · Clock Casket กับ Black Witch Hat ให้ NPC Februs ทำ ดูสูตรที่ <Link href="/guides/costume-craft#februs">คราฟต์หมวก</Link> · Safety Boots ยังไม่มีใครเจอว่าได้จากไหน</p>
         <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
       </section>
 
@@ -649,7 +649,7 @@ export default async function Patch20261029Page() {
       </section>
 
       <aside className="pnote">
-        <strong>ยังไม่รู้</strong> ขั้นตอนเควสทีละขั้น ที่มาของ Clock Casket, Black Witch Hat, Safety Boots และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
+        <strong>ยังไม่รู้</strong> ขั้นตอนเควสทีละขั้น ที่มาของ Safety Boots, Clock Tower Gear และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
         ตีไหวไหมดูที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
       </aside>
 

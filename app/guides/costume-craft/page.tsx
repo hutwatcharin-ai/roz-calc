@@ -18,6 +18,10 @@
 //   - Hat stats: the game's Thai item text (data/game-items.json).
 //   - "Drops from": our monster_drops table, the best normal (not champion)
 //     monster for each material.
+//   - Clock Casket and Black Witch Hat: Februs's crafting dialogue in the
+//     client's NPC text (data/i18n/sc). The quest log has no entry for them
+//     and his map is not in the Global client's navigation data, so they
+//     carry no /navi.
 //   - Hats the old guide listed that the quest log does not: still from
 //     roz-global.info, shown apart and labelled.
 //   Nothing here is checked in game yet, so the page says so.
@@ -48,7 +52,7 @@ export const metadata: Metadata = {
 interface Drop { id: number; name: string; level: number; rate: number; others: number }
 interface Mat { id: number; name: string; n: number; icon: string; category: string; drop: Drop | null }
 interface Hat {
-  town: string; id: number; name: string; icon: string; category: string; npc: string; navi: string;
+  town: string; id: number; name: string; icon: string; category: string; npc: string; navi: string | null;
   mats: Mat[]; zeny: number; quest: number; start: { npc: string; navi: string } | null; note: string | null;
   bonus: string; pos: string; def: string; level: string; jobs: string; noRefine: boolean;
 }
@@ -57,6 +61,8 @@ const HATS = (data as { hats: Hat[] }).hats;
 const TOWNS = [...new Set(HATS.map((h) => h.town))];
 const POS: Record<string, string> = { Upper: 'หมวกบน', Middle: 'หมวกกลาง', Lower: 'หมวกล่าง', 'Middle, Lower': 'หมวกกลาง+ล่าง' };
 const slug = (town: string) => town.toLowerCase().replace(/\s+/g, '-');
+// A group named after its NPC rather than a town says so in its heading.
+const HEADING: Record<string, string> = { Februs: 'Februs — ยังไม่รู้ว่า NPC อยู่แมพไหน' };
 
 // The old guide's hats that the quest log has no recipe for.
 const known = new Set(HATS.map((h) => h.name.toLowerCase()));
@@ -99,7 +105,8 @@ function HatCard({ h }: { h: Hat }) {
         </div>
       </div>
       <p className="hq__npc">
-        คุย <strong>{h.npc}</strong> <code className="navicmd">{h.navi}</code>
+        คุย <strong>{h.npc}</strong>{' '}
+        {h.navi ? <code className="navicmd">{h.navi}</code> : <span className="muted">ยังไม่รู้พิกัด ไฟล์นำทางของเกมยังไม่มี NPC ตัวนี้</span>}
       </p>
       {h.start && (
         <p className="hq__npc">
@@ -149,7 +156,7 @@ export default function CostumeCraftPage() {
       {TOWNS.map((town, i) => (
         <div key={town}>
           <section className="card" id={slug(town)} style={{ marginTop: 14 }}>
-            <h2 className="section-title" style={{ marginTop: 0 }}>{town}</h2>
+            <h2 className="section-title" style={{ marginTop: 0 }}>{HEADING[town] ?? town}</h2>
             <div className="hq__grid">
               {HATS.filter((h) => h.town === town).map((h) => <HatCard key={h.id} h={h} />)}
             </div>
@@ -177,9 +184,6 @@ export default function CostumeCraftPage() {
               );
             })}
           </ul>
-          <p className="muted" style={{ marginBottom: 0, fontSize: 13 }}>
-            Black Witch Hat และ Clock Casket ก็ไม่อยู่ในบันทึกเควส ยังไม่รู้ว่าได้จากไหน
-          </p>
         </section>
       )}
 
@@ -190,6 +194,8 @@ export default function CostumeCraftPage() {
         บันทึกเควสเรียกของบางชิ้นด้วยชื่ออื่น (เช่น Soft Fur คือ Feather, Wood Piece คือ Trunk, Red Dye คือ Scarlet Dyestuffs)
         เราจับคู่กับไอเทมจริงด้วยสูตรเดียวกันของ RO คลาสสิก ·
         ค่าหมวกจากข้อความไอเทมในเกม · มอนที่ดรอปเลือกตัวธรรมดาที่ดรอปมากสุดในฐานข้อมูลเรา ไม่นับมอนแชมเปียน ·
+        Clock Casket กับ Black Witch Hat มาจากบทพูดของ NPC Februs ในไฟล์เกม ยังไม่รู้ว่า NPC ยืนอยู่ไหน ·
+        Clock Tower Gear ยังไม่รู้ว่าได้จากไหน ·
         หมวก Nordfeld: ค่าหมวก กติกาใบสุ่ม และชื่อโทเคนมาจากข้อความไอเทมในเกม ส่วนเส้นทาง ราคาแลก และเลเวลเข้าถ้ำมาจากคลิปผู้เล่นไทยสองคลิปที่ตรงกัน ·
         รายชื่อคนแคระชั้น 2 เป็นการอนุมานจากเลเวล
       </Caveat>
