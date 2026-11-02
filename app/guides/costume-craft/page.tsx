@@ -53,7 +53,7 @@ interface Drop { id: number; name: string; level: number; rate: number; others: 
 interface Mat { id: number; name: string; n: number; icon: string; category: string; drop: Drop | null }
 interface Hat {
   town: string; id: number; name: string; icon: string; category: string; npc: string; navi: string | null;
-  mats: Mat[]; zeny: number; quest: number; start: { npc: string; navi: string } | null; note: string | null;
+  where?: string; mats: Mat[]; zeny: number; quest: number; start: { npc: string; navi: string } | null; note: string | null;
   bonus: string; pos: string; def: string; level: string; jobs: string; noRefine: boolean;
 }
 
@@ -62,7 +62,7 @@ const TOWNS = [...new Set(HATS.map((h) => h.town))];
 const POS: Record<string, string> = { Upper: 'หมวกบน', Middle: 'หมวกกลาง', Lower: 'หมวกล่าง', 'Middle, Lower': 'หมวกกลาง+ล่าง' };
 const slug = (town: string) => town.toLowerCase().replace(/\s+/g, '-');
 // A group named after its NPC rather than a town says so in its heading.
-const HEADING: Record<string, string> = { Februs: 'Februs — หมวกหอนาฬิกา' };
+const HEADING: Record<string, string> = { Februs: 'Februs (paramk) — หมวกหอนาฬิกา' };
 
 // The old guide's hats that the quest log has no recipe for.
 const known = new Set(HATS.map((h) => h.name.toLowerCase()));
@@ -106,7 +106,7 @@ function HatCard({ h }: { h: Hat }) {
       </div>
       <p className="hq__npc">
         คุย <strong>{h.npc}</strong>{' '}
-        {h.navi ? <code className="navicmd">{h.navi}</code> : <span className="muted">ยังไม่รู้พิกัด ไฟล์นำทางของเกมยังไม่มี NPC ตัวนี้</span>}
+        {h.navi ? <code className="navicmd">{h.navi}</code> : <span className="muted">{h.where ?? 'ยังไม่รู้พิกัด'}</span>}
       </p>
       {h.start && (
         <p className="hq__npc">
@@ -194,7 +194,7 @@ export default function CostumeCraftPage() {
         บันทึกเควสเรียกของบางชิ้นด้วยชื่ออื่น (เช่น Soft Fur คือ Feather, Wood Piece คือ Trunk, Red Dye คือ Scarlet Dyestuffs)
         เราจับคู่กับไอเทมจริงด้วยสูตรเดียวกันของ RO คลาสสิก ·
         ค่าหมวกจากข้อความไอเทมในเกม · มอนที่ดรอปเลือกตัวธรรมดาที่ดรอปมากสุดในฐานข้อมูลเรา ไม่นับมอนแชมเปียน ·
-        Clock Casket กับ Black Witch Hat มาจากบทพูดของ NPC Februs ในไฟล์เกม ยังไม่รู้ว่า NPC ยืนอยู่ไหน ·
+        Clock Casket กับ Black Witch Hat มาจากบทพูดของ NPC Februs ในไฟล์เกม เช็กสูตรและพิกัดในเกมแล้ว 2 พ.ย. ·
         Clock Tower Gear ยังไม่รู้ว่าได้จากไหน ·
         หมวก Nordfeld: ค่าหมวก กติกาใบสุ่ม และชื่อโทเคนมาจากข้อความไอเทมในเกม ส่วนเส้นทาง ราคาแลก และเลเวลเข้าถ้ำมาจากคลิปผู้เล่นไทยสองคลิปที่ตรงกัน ·
         รายชื่อคนแคระชั้น 2 เป็นการอนุมานจากเลเวล

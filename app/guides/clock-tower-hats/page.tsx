@@ -17,8 +17,11 @@
 //     hats it works on). The owner, who plays, says it rerolls options the
 //     way the Nordfeld scroll does. Where the Gear comes from is not in the
 //     client.
-//   - Februs's map: not in the Global client's navigation data. The owner
-//     will bring the coordinates from the game; FEBRUS_NAVI waits for them.
+//   - Where Februs and Thor's Dismantle Flame stand: the owner's in-game
+//     screenshots, 2 Nov 2026 (/where prints "paramk"). The same shots show
+//     both recipes as the client has them, and the Thai menu calling Clock
+//     Casket "Elestra's Queen Cap". paramk is not in the client's navigation
+//     data, so /navi cannot path there; the spots are shown as plain text.
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -49,8 +52,9 @@ const HAT_MAKER = pick([19333, 19334]);
 const FEBRUS = pick([19357, 19358]);
 const HATS = [...FEBRUS, ...HAT_MAKER];
 
-// Februs's spot, from the owner once it is checked in game.
-const FEBRUS_NAVI: string | null = null;
+// Seen in game by the owner, 2 Nov 2026. Plain text, not /navi: the map is
+// not in the navigation data.
+const SPOT = { februs: 'paramk 23, 186', dismantle: 'paramk 48, 172' };
 
 const GEAR = { id: 108494, name: 'Clock Tower Gear', icon: '/images/items/108494.png' };
 const ORE = { id: 25429, name: 'Mithril Ore', icon: '/images/items/25429.gif' };
@@ -157,8 +161,9 @@ export default function ClockTowerHatsPage() {
           </li>
           <li><strong>เตรียมค่าทำ {(FEBRUS[0]?.zeny ?? 0).toLocaleString()} Zeny</strong></li>
           <li>
-            <strong>คุย Februs</strong> เลือก &quot;Request crafting&quot; แล้วเลือกหมวก ·{' '}
-            {FEBRUS_NAVI ? <NaviCopy cmd={FEBRUS_NAVI} /> : <span className="muted">พิกัดกำลังเช็กในเกม จะเติมเร็ว ๆ นี้</span>}
+            <strong>คุย Februs &lt;Workshop Manus&gt; แมพ <span className="mono">{SPOT.februs}</span></strong> เลือก &quot;ขอให้ผลิต&quot; แล้วเลือกหมวก ·
+            ในเมนู <strong>Clock Casket ชื่อว่า Elestra&apos;s Queen Cap [1]</strong> ·
+            แมพนี้ไม่มีในระบบ /navi
           </li>
           <li><strong>หมวกที่ได้ยังไม่มีออปชัน</strong> ใช้ <a href="#gear">Clock Tower Gear</a> สุ่มต่อได้</li>
         </ol>
@@ -227,16 +232,16 @@ export default function ClockTowerHatsPage() {
             Hat Maker ใช้ Mithril
           </li>
           <li>
-            <strong>Thor&apos;s Dismantling Flame แตก Mithril 1 ชิ้นกลับเป็น Mithril Ore {ORE_PER_MITHRIL} ชิ้น</strong> ·
-            Februs ใช้ Mithril Ore
+            <strong>Thor&apos;s Dismantle Flame แตก Mithril 1 ชิ้นกลับเป็น Mithril Ore {ORE_PER_MITHRIL} ชิ้น</strong> ·
+            Februs ใช้ Mithril Ore · อยู่ห้องเดียวกับ Februs แมพ <span className="mono">{SPOT.dismantle}</span>
           </li>
           <li>
             <strong>Mithril Ore ไม่พอตอนสั่ง Februs</strong> เขาใช้ <Icon src={ZELSTAR.icon} size={20} /> {ZELSTAR.name} แทนส่วนที่ขาดให้เอง
             และถามก่อนว่าจะทำต่อไหม
           </li>
         </ul>
-        <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>พิกัด Thor&apos;s Flame ทั้งสองตัวกำลังเช็กในเกม</p>
-        <p className="guildp__src">ที่มา: บทพูดของ Thor&apos;s Flame, Thor&apos;s Dismantling Flame และ Februs ในไฟล์เกม · รายชื่อดันเจี้ยนจากหน้าดันเจี้ยนความทรงจำ</p>
+        <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>พิกัด Thor&apos;s Flame (ตัวหลอม) ยังไม่ได้เช็กในเกม</p>
+        <p className="guildp__src">ที่มา: บทพูดของ Thor&apos;s Flame, Thor&apos;s Dismantle Flame และ Februs ในไฟล์เกม · พิกัดจากภาพในเกม 2 พ.ย. · รายชื่อดันเจี้ยนจากหน้าดันเจี้ยนความทรงจำ</p>
       </section>
 
       <section className="card" id="gear" style={{ marginTop: 14 }}>
@@ -261,9 +266,9 @@ export default function ClockTowerHatsPage() {
       </section>
 
       <Caveat label="เชื่อได้แค่ไหน">
-        สูตร วัตถุดิบ และค่าทำ <strong>มาจากไฟล์เกม ยังไม่ได้เช็กในเกม</strong> ·
+        สูตรของ Februs <strong>เช็กในเกมแล้ว 2 พ.ย.</strong> ตรงกับไฟล์เกม · สูตรของ Hat Maker มาจากไฟล์เกม ยังไม่ได้เช็กในเกม ·
         ค่าหมวกจากข้อความไอเทมในเกม · มอนที่ดรอปเลือกตัวธรรมดาที่ดรอปมากสุดในฐานข้อมูลเรา ไม่นับมอนแชมเปียน ·
-        พิกัด Februs และ Thor&apos;s Flame ยังไม่มีในไฟล์นำทางของเกม กำลังเช็กในเกม ·
+        พิกัด Februs และ Thor&apos;s Dismantle Flame จากภาพในเกม · พิกัด Thor&apos;s Flame ตัวหลอมยังไม่รู้ ·
         Clock Tower Gear สุ่มออปได้ตามที่ผู้เล่นเล่า ส่วนที่มาของ Gear ยังไม่รู้
       </Caveat>
 

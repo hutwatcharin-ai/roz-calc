@@ -3,7 +3,7 @@
   "built": "2026-11-02",
   "how": "hand list from our quests table (the game quest log); item ids from data/game-items.json",
   "note": "Quest log names differ from item names (Soft Fur = Feather, Wood Piece = Trunk, Red Dye = Scarlet Dyestuffs ...). Each mapping checked against the classic rAthena recipe for the same hat.",
-  "februs": "Clock Casket and Black Witch Hat: Februs's crafting dialogue in the client's NPC text (data/i18n/sc, client of 29 Oct 2026). His map is not in the Global client's navigation data, so no /navi."
+  "februs": "Clock Casket and Black Witch Hat: Februs's crafting dialogue in the client's NPC text (data/i18n/sc, client of 29 Oct 2026). His map is not in the Global client's navigation data, so no /navi. Spot paramk 23,186 and Thor's Dismantle Flame paramk 48,172 from the owner's in-game screenshots, 2 Nov 2026; recipes match the client there."
  },
  "hats": [
   {
@@ -2017,13 +2017,14 @@
    "zeny": 50000,
    "quest": 0,
    "start": null,
-   "note": "Mithril Ore 50 ชิ้นได้จากดันเจี้ยนความทรงจำ ถ้าไม่พอ NPC ใช้ Zelstar แทนส่วนที่ขาด · Mithril 1 ชิ้นแตกเป็น Mithril Ore 10 ชิ้นได้ที่ Thor's Dismantling Flame · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
+   "note": "ในเมนูของ Februs ชื่อว่า Elestra's Queen Cap [1] · Mithril Ore 50 ชิ้นได้จากดันเจี้ยนความทรงจำ ถ้าไม่พอ NPC ใช้ Zelstar แทนส่วนที่ขาด · Mithril 1 ชิ้นแตกเป็น Mithril Ore 10 ชิ้นได้ที่ Thor's Dismantle Flame (paramk 48, 172) · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
    "bonus": "ATK +20 · ทุกการตีบวก 2 ขั้น ดาเมจกายภาพใส่มอนทุกเผ่า +1% · +7: HIT +15 · +9: MaxHP +250",
    "pos": "Upper",
    "def": "10",
    "level": "60",
    "jobs": "ทุกอาชีพ",
-   "noRefine": false
+   "noRefine": false,
+   "where": "แมพ paramk 23, 186 · แมพนี้ไม่มีในระบบ /navi"
   },
   {
    "town": "Februs",
@@ -2102,13 +2103,14 @@
    "zeny": 50000,
    "quest": 0,
    "start": null,
-   "note": "Mithril Ore 50 ชิ้นได้จากดันเจี้ยนความทรงจำ ถ้าไม่พอ NPC ใช้ Zelstar แทนส่วนที่ขาด · Mithril 1 ชิ้นแตกเป็น Mithril Ore 10 ชิ้นได้ที่ Thor's Dismantling Flame · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
+   "note": "Mithril Ore 50 ชิ้นได้จากดันเจี้ยนความทรงจำ ถ้าไม่พอ NPC ใช้ Zelstar แทนส่วนที่ขาด · Mithril 1 ชิ้นแตกเป็น Mithril Ore 10 ชิ้นได้ที่ Thor's Dismantle Flame (paramk 48, 172) · ใช้ Clock Tower Gear สุ่มออปชันใหม่ได้ ขั้นตีบวกกับการ์ดไม่หาย",
    "bonus": "MATK +20 · ทุกการตีบวก 2 ขั้น MATK +1% · +7: MaxHP +50 MaxSP +100 · +9: ลดเวลาร่ายแปรผัน 5%",
    "pos": "Upper",
    "def": "10",
    "level": "60",
    "jobs": "ทุกอาชีพ",
-   "noRefine": false
+   "noRefine": false,
+   "where": "แมพ paramk 23, 186 · แมพนี้ไม่มีในระบบ /navi"
   }
  ]
 }
