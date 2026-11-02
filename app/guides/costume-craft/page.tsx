@@ -62,7 +62,7 @@ const TOWNS = [...new Set(HATS.map((h) => h.town))];
 const POS: Record<string, string> = { Upper: 'หมวกบน', Middle: 'หมวกกลาง', Lower: 'หมวกล่าง', 'Middle, Lower': 'หมวกกลาง+ล่าง' };
 const slug = (town: string) => town.toLowerCase().replace(/\s+/g, '-');
 // A group named after its NPC rather than a town says so in its heading.
-const HEADING: Record<string, string> = { Februs: 'Februs (paramk) — หมวกหอนาฬิกา' };
+const HEADING: Record<string, string> = { Februs: 'Februs (บ้านใน Prontera) — หมวกหอนาฬิกา' };
 
 // The old guide's hats that the quest log has no recipe for.
 const known = new Set(HATS.map((h) => h.name.toLowerCase()));
@@ -82,7 +82,7 @@ function MatChip({ m }: { m: Mat }) {
         <span className="hq__drop">
           ดรอป <Link href={`/database/monsters/${m.drop.id}`}>{m.drop.name}</Link>
           {rate(m.drop.rate)}
-          {m.drop.others > 0 && <> · อีก {m.drop.others} ตัว</>}
+          {m.drop.others > 0 && <> · มอนอื่นดรอปด้วยอีก {m.drop.others} ตัว</>}
         </span>
       )}
     </li>

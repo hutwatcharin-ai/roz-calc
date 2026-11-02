@@ -20,8 +20,10 @@
 //   - Where Februs and Thor's Dismantle Flame stand: the owner's in-game
 //     screenshots, 2 Nov 2026 (/where prints "paramk"). The same shots show
 //     both recipes as the client has them, and the Thai menu calling Clock
-//     Casket "Elestra's Queen Cap". paramk is not in the client's navigation
-//     data, so /navi cannot path there; the spots are shown as plain text.
+//     Casket "Elestra's Queen Cap". paramk is the inside of a house; /navi
+//     cannot path into it, so the command goes to the house's door in
+//     Prontera, prontera 50/290, which the owner had taken from roztoday's
+//     headgear page (one fact, read in the browser).
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
@@ -52,8 +54,9 @@ const HAT_MAKER = pick([19333, 19334]);
 const FEBRUS = pick([19357, 19358]);
 const HATS = [...FEBRUS, ...HAT_MAKER];
 
-// Seen in game by the owner, 2 Nov 2026. Plain text, not /navi: the map is
-// not in the navigation data.
+// The house door in Prontera, then the spots inside (paramk), seen in game
+// by the owner, 2 Nov 2026.
+const DOOR = '/navi prontera 50/290';
 const SPOT = { februs: 'paramk 23, 186', dismantle: 'paramk 48, 172' };
 
 const GEAR = { id: 108494, name: 'Clock Tower Gear', icon: '/images/items/108494.png' };
@@ -106,7 +109,7 @@ function Mats({ h }: { h: Hat }) {
               ดรอป <Link href={`/database/monsters/${m.drop.id}`}>{m.drop.name}</Link>
               {m.drop.rate > 0 && ` ${m.drop.rate}%`}
               {FLOORS[m.drop.id] && ` · ${FLOORS[m.drop.id]}`}
-              {m.drop.others > 0 && <> · อีก {m.drop.others} ตัว</>}
+              {m.drop.others > 0 && <> · มอนอื่นดรอปด้วยอีก {m.drop.others} ตัว</>}
             </span>
           )}
         </li>
@@ -161,9 +164,8 @@ export default function ClockTowerHatsPage() {
           </li>
           <li><strong>เตรียมค่าทำ {(FEBRUS[0]?.zeny ?? 0).toLocaleString()} Zeny</strong></li>
           <li>
-            <strong>คุย Februs &lt;Workshop Manus&gt; แมพ <span className="mono">{SPOT.februs}</span></strong> เลือก &quot;ขอให้ผลิต&quot; แล้วเลือกหมวก ·
-            ในเมนู <strong>Clock Casket ชื่อว่า Elestra&apos;s Queen Cap [1]</strong> ·
-            แมพนี้ไม่มีในระบบ /navi
+            <strong>เข้าบ้านใน Prontera</strong> <NaviCopy cmd={DOOR} /> แล้ว<strong>คุย Februs &lt;Workshop Manus&gt;</strong> ในบ้าน (จุด {SPOT.februs}) เลือก &quot;ขอให้ผลิต&quot; แล้วเลือกหมวก ·
+            ในเมนู <strong>Clock Casket ชื่อว่า Elestra&apos;s Queen Cap [1]</strong>
           </li>
           <li><strong>หมวกที่ได้ยังไม่มีออปชัน</strong> ใช้ <a href="#gear">Clock Tower Gear</a> สุ่มต่อได้</li>
         </ol>
@@ -233,7 +235,7 @@ export default function ClockTowerHatsPage() {
           </li>
           <li>
             <strong>Thor&apos;s Dismantle Flame แตก Mithril 1 ชิ้นกลับเป็น Mithril Ore {ORE_PER_MITHRIL} ชิ้น</strong> ·
-            Februs ใช้ Mithril Ore · อยู่ห้องเดียวกับ Februs แมพ <span className="mono">{SPOT.dismantle}</span>
+            Februs ใช้ Mithril Ore · อยู่ในบ้านเดียวกับ Februs (จุด {SPOT.dismantle}) <NaviCopy cmd={DOOR} />
           </li>
           <li>
             <strong>Mithril Ore ไม่พอตอนสั่ง Februs</strong> เขาใช้ <Icon src={ZELSTAR.icon} size={20} /> {ZELSTAR.name} แทนส่วนที่ขาดให้เอง
