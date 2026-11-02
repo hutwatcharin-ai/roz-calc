@@ -110,6 +110,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/craft-basket', label: 'ตะกร้าวัตถุดิบรวม', icon: '/images/items/7134.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/ore-refining', label: 'หลอมแร่', icon: '/images/items/998.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true, group: 'คราฟต์' },
+    { href: '/guides/headgear-quests', label: 'เควสทำหมวก', icon: '/images/items/5012.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true, group: 'ดันเจี้ยน' },
     { href: '/guides/memorial-dungeons', label: 'ดันเจี้ยนความทรงจำ', icon: '/images/items/7126.gif', ready: true, group: 'ดันเจี้ยน' },
     { href: '/guides/nordfeld-helm', label: 'หมวก Nordfeld', icon: '/images/items/401510.png', ready: true, group: 'ดันเจี้ยน' },

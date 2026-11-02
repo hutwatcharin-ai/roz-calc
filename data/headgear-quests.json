@@ -1,0 +1,1941 @@
+{
+ "_meta": {
+  "built": "2026-11-02",
+  "how": "hand list from our quests table (the game quest log); item ids from data/game-items.json",
+  "note": "Quest log names differ from item names (Soft Fur = Feather, Wood Piece = Trunk, Red Dye = Scarlet Dyestuffs ...). Each mapping checked against the classic rAthena recipe for the same hat."
+ },
+ "hats": [
+  {
+   "town": "Prontera",
+   "id": 2281,
+   "name": "Opera Masque",
+   "icon": "/images/items/2281.gif",
+   "npc": "Stranger",
+   "navi": "/navi prontera 27/237",
+   "mats": [
+    {
+     "id": 999,
+     "name": "Steel",
+     "n": 20,
+     "icon": "/images/items/999.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1492,
+      "name": "Incantation Samurai",
+      "level": 120,
+      "rate": 31.53,
+      "others": 11
+     }
+    },
+    {
+     "id": 707,
+     "name": "Singing Plant",
+     "n": 1,
+     "icon": "/images/items/707.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1058,
+      "name": "Metaller",
+      "level": 66,
+      "rate": 0.1,
+      "others": 1
+     }
+    }
+   ],
+   "zeny": 5000,
+   "quest": 22107,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Middle, Lower",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Prontera",
+   "id": 5012,
+   "name": "Ph.D Hat",
+   "icon": "/images/items/5012.gif",
+   "npc": "Krolla",
+   "navi": "/navi prontera 40/237",
+   "mats": [
+    {
+     "id": 703,
+     "name": "Hinalle",
+     "n": 10,
+     "icon": "/images/items/703.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1082,
+      "name": "White Plant",
+      "level": 1,
+      "rate": 0.25,
+      "others": 1
+     }
+    },
+    {
+     "id": 704,
+     "name": "Aloe",
+     "n": 10,
+     "icon": "/images/items/704.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1080,
+      "name": "Green Plant",
+      "level": 1,
+      "rate": 0.25,
+      "others": 1
+     }
+    },
+    {
+     "id": 708,
+     "name": "Ment",
+     "n": 10,
+     "icon": "/images/items/708.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1078,
+      "name": "Red Plant",
+      "level": 1,
+      "rate": 0.5,
+      "others": 1
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22108,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "5",
+   "category": "Armor"
+  },
+  {
+   "town": "Izlude",
+   "id": 2273,
+   "name": "Doctor Band",
+   "icon": "/images/items/2273.gif",
+   "npc": "Dana",
+   "navi": "/navi izlude 83/205",
+   "mats": [
+    {
+     "id": 2275,
+     "name": "Red Bandana",
+     "n": 1,
+     "icon": "/images/items/2275.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1124,
+      "name": "Goblin 3",
+      "level": 52,
+      "rate": 0.02,
+      "others": 0
+     }
+    },
+    {
+     "id": 998,
+     "name": "Iron",
+     "n": 50,
+     "icon": "/images/items/998.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1403,
+      "name": "Antique Firelock",
+      "level": 123,
+      "rate": 27.5,
+      "others": 10
+     }
+    },
+    {
+     "id": 733,
+     "name": "Cracked Diamond",
+     "n": 1,
+     "icon": "/images/items/733.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1029,
+      "name": "Isis",
+      "level": 59,
+      "rate": 0.75,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22059,
+   "start": null,
+   "note": null,
+   "bonus": "INT +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "5",
+   "category": "Armor"
+  },
+  {
+   "town": "Izlude",
+   "id": 5034,
+   "name": "Bulb Band",
+   "icon": "/images/items/5034.gif",
+   "npc": "Olli",
+   "navi": "/navi izlude 85/204",
+   "mats": [
+    {
+     "id": 2210,
+     "name": "Hair Band",
+     "n": 1,
+     "icon": "/images/items/2210.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 746,
+     "name": "Glass Bead",
+     "n": 20,
+     "icon": "/images/items/746.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1323,
+      "name": "Sea-Otter",
+      "level": 57,
+      "rate": 3.25,
+      "others": 4
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22060,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "0",
+   "category": "Armor"
+  },
+  {
+   "town": "Izlude",
+   "id": 5036,
+   "name": "Cross Hat",
+   "icon": "/images/items/5036.gif",
+   "npc": "Redon",
+   "navi": "/navi izlude 87/205",
+   "mats": [
+    {
+     "id": 2210,
+     "name": "Hair Band",
+     "n": 1,
+     "icon": "/images/items/2210.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 2608,
+     "name": "Rosary",
+     "n": 1,
+     "icon": "/images/items/2608.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1198,
+      "name": "Dark Priest",
+      "level": 98,
+      "rate": 0.15,
+      "others": 1
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22061,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "10",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Izlude",
+   "id": 5049,
+   "name": "Striped Hairband",
+   "icon": "/images/items/5049.gif",
+   "npc": "Guso",
+   "navi": "/navi izlude 89/204",
+   "mats": [
+    {
+     "id": 2210,
+     "name": "Hair Band",
+     "n": 1,
+     "icon": "/images/items/2210.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 978,
+     "name": "Cobaltblue Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/978.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22062,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": true,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Izlude",
+   "id": 5052,
+   "name": "Blue Hairband",
+   "icon": "/images/items/5052.gif",
+   "npc": "Rita",
+   "navi": "/navi izlude 85/207",
+   "mats": [
+    {
+     "id": 2211,
+     "name": "Bandana",
+     "n": 1,
+     "icon": "/images/items/2211.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 978,
+     "name": "Cobaltblue Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/978.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22063,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Geffen",
+   "id": 2283,
+   "name": "Ear Muffs",
+   "icon": "/images/items/2283.gif",
+   "npc": "Swordman",
+   "navi": "/navi geffen_in 82/59",
+   "mats": [
+    {
+     "id": 724,
+     "name": "Cursed Ruby",
+     "n": 1,
+     "icon": "/images/items/724.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1503,
+      "name": "Gibbet",
+      "level": 105,
+      "rate": 1.5,
+      "others": 2
+     }
+    },
+    {
+     "id": 949,
+     "name": "Feather",
+     "n": 200,
+     "icon": "/images/items/949.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1063,
+      "name": "Lunatic",
+      "level": 3,
+      "rate": 30,
+      "others": 10
+     }
+    },
+    {
+     "id": 5001,
+     "name": "Headset",
+     "n": 1,
+     "icon": "/images/items/5001.gif",
+     "category": "Armor",
+     "drop": null
+    }
+   ],
+   "zeny": 5000,
+   "quest": 22102,
+   "start": null,
+   "note": null,
+   "bonus": "ต้านทาน Curse 10%",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "4",
+   "category": "Armor"
+  },
+  {
+   "town": "Geffen",
+   "id": 5018,
+   "name": "Feather Bonnet",
+   "icon": "/images/items/5018.gif",
+   "npc": "Norbert",
+   "navi": "/navi geffen 76/135",
+   "mats": [
+    {
+     "id": 2247,
+     "name": "Romantic Gent",
+     "n": 1,
+     "icon": "/images/items/2247.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1088,
+      "name": "Vocal",
+      "level": 18,
+      "rate": 0.25,
+      "others": 0
+     }
+    },
+    {
+     "id": 916,
+     "name": "Feather of Birds",
+     "n": 300,
+     "icon": "/images/items/916.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1049,
+      "name": "Picky",
+      "level": 9,
+      "rate": 70,
+      "others": 3
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22105,
+   "start": null,
+   "note": null,
+   "bonus": "AGI +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "Archer Class",
+   "noRefine": false,
+   "def": "8",
+   "category": "Armor"
+  },
+  {
+   "town": "Geffen",
+   "id": 5031,
+   "name": "Mine Hat",
+   "icon": "/images/items/5031.gif",
+   "npc": "Mini Pot",
+   "navi": "/navi geffen 83/189",
+   "mats": [
+    {
+     "id": 5009,
+     "name": "Safety Headgear",
+     "n": 1,
+     "icon": "/images/items/5009.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1145,
+      "name": "Martin",
+      "level": 78,
+      "rate": 0.01,
+      "others": 1
+     }
+    },
+    {
+     "id": 1041,
+     "name": "Lantern",
+     "n": 1,
+     "icon": "/images/items/1041.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1169,
+      "name": "Skeleton Worker",
+      "level": 88,
+      "rate": 27.5,
+      "others": 0
+     }
+    },
+    {
+     "id": 999,
+     "name": "Steel",
+     "n": 25,
+     "icon": "/images/items/999.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1492,
+      "name": "Incantation Samurai",
+      "level": 120,
+      "rate": 31.53,
+      "others": 11
+     }
+    },
+    {
+     "id": 747,
+     "name": "Crystal Mirror",
+     "n": 1,
+     "icon": "/images/items/747.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1260,
+      "name": "Dark Frame",
+      "level": 76,
+      "rate": 0.02,
+      "others": 1
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22152,
+   "start": null,
+   "note": "สองขั้น: ขั้นแรกหา Safety Headgear กับ Lantern ที่หายในเหมือง (แถว Skel Worker) ขั้นสองเอา Steel 25 กับ Crystal Mirror (ขายที่ Morroc) มาให้",
+   "bonus": "DEX +2",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "Swordman Class, Thief Class, Acolyte Class, Merchant Class",
+   "noRefine": false,
+   "def": "9",
+   "category": "Armor"
+  },
+  {
+   "town": "Geffen",
+   "id": 2292,
+   "name": "Welding Mask",
+   "icon": "/images/items/2292.gif",
+   "npc": "Golden Hand",
+   "navi": "/navi geffen_in 144/166",
+   "mats": [
+    {
+     "id": 999,
+     "name": "Steel",
+     "n": 50,
+     "icon": "/images/items/999.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1492,
+      "name": "Incantation Samurai",
+      "level": 120,
+      "rate": 31.53,
+      "others": 11
+     }
+    }
+   ],
+   "zeny": 2000,
+   "quest": 22164,
+   "start": null,
+   "note": "สองขั้น ขั้นละ Steel 25 ค่าเชื้อเพลิง 2,000 Zeny จ่ายตอนขั้นสอง",
+   "bonus": "ต้านทานธาตุ Fire 10%",
+   "pos": "Middle, Lower",
+   "level": "50",
+   "jobs": "Merchant Class",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Geffen",
+   "id": 5076,
+   "name": "Beanie",
+   "icon": "/images/items/5076.gif",
+   "npc": "Teamin",
+   "navi": "/navi geffen 207/163",
+   "mats": [
+    {
+     "id": 2226,
+     "name": "Cap",
+     "n": 1,
+     "icon": "/images/items/2226.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1321,
+      "name": "Dragon Tail",
+      "level": 86,
+      "rate": 0.01,
+      "others": 0
+     }
+    },
+    {
+     "id": 914,
+     "name": "Fluff",
+     "n": 50,
+     "icon": "/images/items/914.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1007,
+      "name": "Fabre",
+      "level": 6,
+      "rate": 70,
+      "others": 3
+     }
+    },
+    {
+     "id": 916,
+     "name": "Feather of Birds",
+     "n": 50,
+     "icon": "/images/items/916.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1049,
+      "name": "Picky",
+      "level": 9,
+      "rate": 70,
+      "others": 3
+     }
+    },
+    {
+     "id": 949,
+     "name": "Feather",
+     "n": 10,
+     "icon": "/images/items/949.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1063,
+      "name": "Lunatic",
+      "level": 3,
+      "rate": 30,
+      "others": 10
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22208,
+   "start": null,
+   "note": null,
+   "bonus": "LUK +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "3",
+   "category": "Armor"
+  },
+  {
+   "town": "Geffen",
+   "id": 5064,
+   "name": "Smokie Leaf",
+   "icon": "/images/items/5064.gif",
+   "npc": "Ranuka",
+   "navi": "/navi gef_fild07 71/233",
+   "mats": [
+    {
+     "id": 945,
+     "name": "Raccoon Leaf",
+     "n": 10,
+     "icon": "/images/items/945.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1056,
+      "name": "Smokie",
+      "level": 31,
+      "rate": 27.5,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22203,
+   "start": null,
+   "note": "NPC อยู่ทุ่งนอกเมือง Geffen (gef_fild07) ไม่ใช่ในเมือง",
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Payon",
+   "id": 2296,
+   "name": "Binoculars",
+   "icon": "/images/items/2296.gif",
+   "npc": "Barriojuna",
+   "navi": "/navi payon 207/172",
+   "mats": [
+    {
+     "id": 2243,
+     "name": "Geek Glasses",
+     "n": 1,
+     "icon": "/images/items/2243.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 999,
+     "name": "Steel",
+     "n": 100,
+     "icon": "/images/items/999.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1492,
+      "name": "Incantation Samurai",
+      "level": 120,
+      "rate": 31.53,
+      "others": 11
+     }
+    }
+   ],
+   "zeny": 50000,
+   "quest": 22056,
+   "start": null,
+   "note": null,
+   "bonus": "DEX +1",
+   "pos": "Middle",
+   "level": "50",
+   "jobs": "Archer Class",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Payon",
+   "id": 5069,
+   "name": "Kitsune Mask",
+   "icon": "/images/items/5069.gif",
+   "npc": "Man with Fox Mask",
+   "navi": "/navi pay_arche 63/109",
+   "mats": [
+    {
+     "id": 1022,
+     "name": "Nine Tails",
+     "n": 999,
+     "icon": "/images/items/1022.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1180,
+      "name": "Nine Tail",
+      "level": 72,
+      "rate": 23.28,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22064,
+   "start": null,
+   "note": null,
+   "bonus": "AGI +1 · LUK +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Payon",
+   "id": 5063,
+   "name": "Giant Band Aid",
+   "icon": "/images/items/5063.gif",
+   "npc": "Michael",
+   "navi": "/navi payon 185/181",
+   "mats": [
+    {
+     "id": 930,
+     "name": "Rotten Bandage",
+     "n": 50,
+     "icon": "/images/items/930.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1041,
+      "name": "Mummy",
+      "level": 55,
+      "rate": 45,
+      "others": 5
+     }
+    },
+    {
+     "id": 970,
+     "name": "Alcohol",
+     "n": 1,
+     "icon": "/images/items/970.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1084,
+      "name": "Black Mushroom",
+      "level": 1,
+      "rate": 0.5,
+      "others": 5
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22167,
+   "start": {
+    "npc": "Ram",
+    "navi": "/navi payon 95/198"
+   },
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Payon",
+   "id": 2293,
+   "name": "Pretend Murdered",
+   "icon": "/images/items/2293.gif",
+   "npc": "Forest",
+   "navi": "/navi payon_in01 100/22",
+   "mats": [
+    {
+     "id": 1049,
+     "name": "Skirt of Virgin",
+     "n": 4,
+     "icon": "/images/items/1049.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1170,
+      "name": "Sohee",
+      "level": 64,
+      "rate": 0.25,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22156,
+   "start": {
+    "npc": "เริ่มที่ Peach",
+    "navi": "/navi payon 130/67"
+   },
+   "note": "เควสเนื้อเรื่อง ต้องถามทางหาบ้าน Forest ก่อน (คุยผู้ใหญ่แล้วคุยเด็กในเมือง) เอา Skirt of Virgin 4 ชิ้นให้ Forest แล้วกลับไปหา Peach",
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Alberta",
+   "id": 2284,
+   "name": "Antlers",
+   "icon": "/images/items/2284.gif",
+   "npc": "Cherokee",
+   "navi": "/navi alberta_in 122/53",
+   "mats": [
+    {
+     "id": 923,
+     "name": "Evil Horn",
+     "n": 3,
+     "icon": "/images/items/923.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1101,
+      "name": "Baphomet",
+      "level": 90,
+      "rate": 2.5,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22057,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "8",
+   "category": "Armor"
+  },
+  {
+   "town": "Alberta",
+   "id": 2272,
+   "name": "Stop Post",
+   "icon": "/images/items/2272.gif",
+   "npc": "Jingleheimer",
+   "navi": "/navi alberta 26/25",
+   "mats": [
+    {
+     "id": 1019,
+     "name": "Trunk",
+     "n": 50,
+     "icon": "/images/items/1019.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1400,
+      "name": "Karakasa",
+      "level": 100,
+      "rate": 16,
+      "others": 4
+     }
+    },
+    {
+     "id": 983,
+     "name": "Black Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/983.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1582,
+      "name": "Deviling",
+      "level": 85,
+      "rate": 0.5,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22103,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Alberta",
+   "id": 5033,
+   "name": "Raccoon Hat",
+   "icon": "/images/items/5033.gif",
+   "npc": "Distracted Merchant",
+   "navi": "/navi alberta 92/110",
+   "mats": [
+    {
+     "id": 945,
+     "name": "Raccoon Leaf",
+     "n": 50,
+     "icon": "/images/items/945.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1056,
+      "name": "Smokie",
+      "level": 31,
+      "rate": 27.5,
+      "others": 0
+     }
+    },
+    {
+     "id": 2213,
+     "name": "Kitty Band",
+     "n": 1,
+     "icon": "/images/items/2213.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1056,
+      "name": "Smokie",
+      "level": 31,
+      "rate": 0.01,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22162,
+   "start": {
+    "npc": "Guard ที่ท่าเรือ",
+    "navi": "/navi alberta 222/112"
+   },
+   "note": "คุย Distracted Merchant ไปถาม Guard ที่ท่าเรือ แล้วกลับมาหา Distracted Merchant",
+   "bonus": "",
+   "pos": "Upper",
+   "level": "50",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "6",
+   "category": "Armor"
+  },
+  {
+   "town": "Morroc",
+   "id": 2280,
+   "name": "Sakkat",
+   "icon": "/images/items/2280.gif",
+   "npc": "Merchant",
+   "navi": "/navi morocc 127/59",
+   "mats": [
+    {
+     "id": 1019,
+     "name": "Trunk",
+     "n": 120,
+     "icon": "/images/items/1019.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1400,
+      "name": "Karakasa",
+      "level": 100,
+      "rate": 16,
+      "others": 4
+     }
+    }
+   ],
+   "zeny": 10000,
+   "quest": 22106,
+   "start": null,
+   "note": null,
+   "bonus": "AGI +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "4",
+   "category": "Armor"
+  },
+  {
+   "town": "Morroc",
+   "id": 5070,
+   "name": "Hot-Blooded Headband",
+   "icon": "/images/items/5070.gif",
+   "npc": "Hot-Blooded Evangelist",
+   "navi": "/navi morocc 85/74",
+   "mats": [
+    {
+     "id": 4008,
+     "name": "Picky Card",
+     "n": 1,
+     "icon": "/images/items/4008.gif",
+     "category": "Card",
+     "drop": {
+      "id": 1049,
+      "name": "Picky",
+      "level": 9,
+      "rate": 0.2,
+      "others": 0
+     }
+    },
+    {
+     "id": 2210,
+     "name": "Hair Band",
+     "n": 1,
+     "icon": "/images/items/2210.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 982,
+     "name": "White Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/982.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22202,
+   "start": null,
+   "note": null,
+   "bonus": "STR +2",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "3",
+   "category": "Armor"
+  },
+  {
+   "town": "Morroc",
+   "id": 5039,
+   "name": "Rainbow Eggshell",
+   "icon": "/images/items/5039.gif",
+   "npc": "Yeonghwa",
+   "navi": "/navi morocc 217/225",
+   "mats": [
+    {
+     "id": 5015,
+     "name": "Egg Shell",
+     "n": 1,
+     "icon": "/images/items/5015.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1050,
+      "name": "Picky",
+      "level": 10,
+      "rate": 0.3,
+      "others": 1
+     }
+    },
+    {
+     "id": 978,
+     "name": "Cobaltblue Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/978.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 975,
+     "name": "Scarlet Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/975.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 976,
+     "name": "Lemon Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/976.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22177,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": true,
+   "def": "8",
+   "category": "Weapon"
+  },
+  {
+   "town": "Al De Baran",
+   "id": 19333,
+   "name": "Clock Tower Manager Headphones",
+   "icon": "/images/items/19333.gif",
+   "npc": "Hat Maker",
+   "navi": "/navi aldebaran 130/140",
+   "mats": [
+    {
+     "id": 25505,
+     "name": "Jokers Wild",
+     "n": 1,
+     "icon": "/images/items/25505.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20175,
+      "name": "Extra Joker",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25506,
+     "name": "Cute Broom",
+     "n": 100,
+     "icon": "/images/items/25506.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20176,
+      "name": "Erzsebet",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25507,
+     "name": "Showy Coral Reef",
+     "n": 100,
+     "icon": "/images/items/25507.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20177,
+      "name": "Jeniffer",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25508,
+     "name": "Orc Warlord Token",
+     "n": 100,
+     "icon": "/images/items/25508.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20178,
+      "name": "General Orc",
+      "level": 125,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25509,
+     "name": "Shining Round Shell",
+     "n": 100,
+     "icon": "/images/items/25509.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 20179,
+      "name": "Sieglouse",
+      "level": 122,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25430,
+     "name": "Mithril",
+     "n": 10,
+     "icon": "/images/items/25430.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22109,
+   "start": null,
+   "note": "วัตถุดิบชุดเดียวกับ Pocket Watch Ornament ดรอปจากมอนหอนาฬิกา ดูในหน้าแพตช์ 29 ต.ค.",
+   "bonus": "MATK +20 · ใส่คู่ Clock Tower Manager Card: ร่ายแบบแปรผันเร็วขึ้น 15%",
+   "pos": "Middle",
+   "level": "60",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "10",
+   "category": "Armor"
+  },
+  {
+   "town": "Al De Baran",
+   "id": 19334,
+   "name": "Pocket Watch Ornament",
+   "icon": "/images/items/19334.gif",
+   "npc": "Hat Maker",
+   "navi": "/navi aldebaran 130/140",
+   "mats": [
+    {
+     "id": 25505,
+     "name": "Jokers Wild",
+     "n": 1,
+     "icon": "/images/items/25505.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20175,
+      "name": "Extra Joker",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25506,
+     "name": "Cute Broom",
+     "n": 100,
+     "icon": "/images/items/25506.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20176,
+      "name": "Erzsebet",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25507,
+     "name": "Showy Coral Reef",
+     "n": 100,
+     "icon": "/images/items/25507.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20177,
+      "name": "Jeniffer",
+      "level": 126,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25508,
+     "name": "Orc Warlord Token",
+     "n": 100,
+     "icon": "/images/items/25508.gif",
+     "category": "Material",
+     "drop": {
+      "id": 20178,
+      "name": "General Orc",
+      "level": 125,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25509,
+     "name": "Shining Round Shell",
+     "n": 100,
+     "icon": "/images/items/25509.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 20179,
+      "name": "Sieglouse",
+      "level": 122,
+      "rate": 0,
+      "others": 0
+     }
+    },
+    {
+     "id": 25430,
+     "name": "Mithril",
+     "n": 10,
+     "icon": "/images/items/25430.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22110,
+   "start": null,
+   "note": null,
+   "bonus": "ATK +20 · ใส่คู่ Clock Card: DEF +20 MaxSP +100 · ใส่คู่ Alarm Card: MaxHP +1,000",
+   "pos": "Middle",
+   "level": "60",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "10",
+   "category": "Armor"
+  },
+  {
+   "town": "Al De Baran",
+   "id": 5082,
+   "name": "Decorative Mushroom",
+   "icon": "/images/items/5082.gif",
+   "npc": "Hat Artisan",
+   "navi": "/navi aldebaran 51/202",
+   "mats": [
+    {
+     "id": 921,
+     "name": "Mushroom Spore",
+     "n": 50,
+     "icon": "/images/items/921.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1014,
+      "name": "Spore",
+      "level": 18,
+      "rate": 80,
+      "others": 3
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22159,
+   "start": null,
+   "note": "เริ่มจากเดินตามลูกหมาที่ Al De Baran ไปหา Hat Artisan",
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "3",
+   "category": "Armor"
+  },
+  {
+   "town": "Al De Baran",
+   "id": 5077,
+   "name": "Tulip Hairpin",
+   "icon": "/images/items/5077.gif",
+   "npc": "Cedric",
+   "navi": "/navi aldebaran 240/164",
+   "mats": [
+    {
+     "id": 2278,
+     "name": "Mr. Smile",
+     "n": 1,
+     "icon": "/images/items/2278.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 975,
+     "name": "Scarlet Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/975.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22176,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5047,
+   "name": "Fashionable Glasses",
+   "icon": "/images/items/5047.gif",
+   "npc": "Pero",
+   "navi": "/navi comodo 214/186",
+   "mats": [
+    {
+     "id": 2271,
+     "name": "Jack be Dandy",
+     "n": 1,
+     "icon": "/images/items/2271.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 975,
+     "name": "Scarlet Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/975.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22173,
+   "start": {
+    "npc": "ชายใส่แว่นหน้าท่าเรือ",
+    "navi": "/navi comodo 147/112"
+   },
+   "note": "ฟังเรื่องชายใส่แว่นที่ท่าเรือ กับผู้หญิงที่ลานบาร์บีคิว (comodo 147/300) ก่อน แล้วกลับไปหา Pero",
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "0",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5041,
+   "name": "Heart Hairpin",
+   "icon": "/images/items/5041.gif",
+   "npc": "Pero",
+   "navi": "/navi comodo 214/186",
+   "mats": [
+    {
+     "id": 994,
+     "name": "Flame Heart",
+     "n": 1,
+     "icon": "/images/items/994.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1308,
+      "name": "Panzer Goblin",
+      "level": 62,
+      "rate": 0.8,
+      "others": 1
+     }
+    },
+    {
+     "id": 2210,
+     "name": "Hair Band",
+     "n": 1,
+     "icon": "/images/items/2210.gif",
+     "category": "Armor",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22174,
+   "start": null,
+   "note": "เควสเดียวกับ Fashionable Glasses ปลดพร้อมกัน",
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "0",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5444,
+   "name": "Hair Brush",
+   "icon": "/images/items/5444.gif",
+   "npc": "Nana",
+   "navi": "/navi comodo 236/164",
+   "mats": [
+    {
+     "id": 974,
+     "name": "Mixture",
+     "n": 1,
+     "icon": "/images/items/974.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 975,
+     "name": "Scarlet Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/975.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 943,
+     "name": "Solid Shell",
+     "n": 50,
+     "icon": "/images/items/943.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1035,
+      "name": "Hunter Fly",
+      "level": 63,
+      "rate": 26.68,
+      "others": 9
+     }
+    },
+    {
+     "id": 1301,
+     "name": "Axe",
+     "n": 1,
+     "icon": "/images/items/1301.gif",
+     "category": "Weapon",
+     "drop": {
+      "id": 1149,
+      "name": "Minorous",
+      "level": 58,
+      "rate": 1,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22175,
+   "start": null,
+   "note": null,
+   "bonus": "CRI +6",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "0",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5061,
+   "name": "Flower Hairpin",
+   "icon": "/images/items/5061.gif",
+   "npc": "Cinder",
+   "navi": "/navi comodo 242/179",
+   "mats": [
+    {
+     "id": 2269,
+     "name": "Romantic Flower",
+     "n": 1,
+     "icon": "/images/items/2269.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1078,
+      "name": "Red Plant",
+      "level": 1,
+      "rate": 0.2,
+      "others": 2
+     }
+    },
+    {
+     "id": 999,
+     "name": "Steel",
+     "n": 10,
+     "icon": "/images/items/999.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1492,
+      "name": "Incantation Samurai",
+      "level": 120,
+      "rate": 31.53,
+      "others": 11
+     }
+    }
+   ],
+   "zeny": 20000,
+   "quest": 22201,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "1",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5062,
+   "name": "Straw Hat",
+   "icon": "/images/items/5062.gif",
+   "npc": "Numero",
+   "navi": "/navi comodo 110/260",
+   "mats": [
+    {
+     "id": 577,
+     "name": "Grain",
+     "n": 100,
+     "icon": "/images/items/577.gif",
+     "category": "Consumable / Recovery",
+     "drop": null
+    },
+    {
+     "id": 7197,
+     "name": "Tough Vines",
+     "n": 30,
+     "icon": "/images/items/7197.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1493,
+      "name": "Dryad",
+      "level": 88,
+      "rate": 26.68,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22206,
+   "start": null,
+   "note": null,
+   "bonus": "AGI +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "6",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5067,
+   "name": "Sombrero",
+   "icon": "/images/items/5067.gif",
+   "npc": "Numero",
+   "navi": "/navi comodo 110/260",
+   "mats": [
+    {
+     "id": 5062,
+     "name": "Straw Hat",
+     "n": 1,
+     "icon": "/images/items/5062.gif",
+     "category": "Armor",
+     "drop": null
+    },
+    {
+     "id": 952,
+     "name": "Cactus Needle",
+     "n": 50,
+     "icon": "/images/items/952.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1055,
+      "name": "Muka",
+      "level": 25,
+      "rate": 45,
+      "others": 0
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22207,
+   "start": null,
+   "note": null,
+   "bonus": "AGI +1",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "8",
+   "category": "Armor"
+  },
+  {
+   "town": "Comodo",
+   "id": 5065,
+   "name": "Blue Fish",
+   "icon": "/images/items/5065.gif",
+   "npc": "Tanyuu",
+   "navi": "/navi comodo 300/230",
+   "mats": [
+    {
+     "id": 624,
+     "name": "Rotten Fish",
+     "n": 1,
+     "icon": "/images/items/624.gif",
+     "category": "Pet",
+     "drop": {
+      "id": 1261,
+      "name": "Wild Rose",
+      "level": 91,
+      "rate": 0.18,
+      "others": 1
+     }
+    },
+    {
+     "id": 959,
+     "name": "Stinky Scale",
+     "n": 30,
+     "icon": "/images/items/959.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1064,
+      "name": "Megalodon",
+      "level": 46,
+      "rate": 27.5,
+      "others": 0
+     }
+    },
+    {
+     "id": 551,
+     "name": "Sushi",
+     "n": 5,
+     "icon": "/images/items/551.gif",
+     "category": "Consumable / Recovery",
+     "drop": null
+    },
+    {
+     "id": 1023,
+     "name": "Fish Tail",
+     "n": 1,
+     "icon": "/images/items/1023.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1158,
+      "name": "Phen",
+      "level": 52,
+      "rate": 27.5,
+      "others": 1
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22204,
+   "start": null,
+   "note": null,
+   "bonus": "ดาเมจต่อมอนเผ่า Fish +10%",
+   "pos": "Upper",
+   "level": "50",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "4",
+   "category": "Armor"
+  },
+  {
+   "town": "Lutie",
+   "id": 5026,
+   "name": "Chef Hat",
+   "icon": "/images/items/5026.gif",
+   "npc": "Nari",
+   "navi": "/navi xmas_in 178/177",
+   "mats": [
+    {
+     "id": 539,
+     "name": "Piece of Cake",
+     "n": 20,
+     "icon": "/images/items/539.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 1249,
+      "name": "Mystcase",
+      "level": 78,
+      "rate": 10,
+      "others": 0
+     }
+    },
+    {
+     "id": 982,
+     "name": "White Dyestuffs",
+     "n": 1,
+     "icon": "/images/items/982.gif",
+     "category": "Other",
+     "drop": null
+    },
+    {
+     "id": 949,
+     "name": "Feather",
+     "n": 30,
+     "icon": "/images/items/949.gif",
+     "category": "Material",
+     "drop": {
+      "id": 1063,
+      "name": "Lunatic",
+      "level": 3,
+      "rate": 30,
+      "others": 10
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22181,
+   "start": {
+    "npc": "Sam ข้างทางรถไฟ",
+    "navi": "/navi xmas 196/234"
+   },
+   "note": "ช่วย Nari ชวน Sam กับ Albert (xmas 161/165) มางานปาร์ตี้ก่อน แล้วแลกหมวกได้ทั้งสองแบบ",
+   "bonus": "DEX +1",
+   "pos": "Upper",
+   "level": "50",
+   "jobs": "ทุกอาชีพยกเว้น Novice",
+   "noRefine": false,
+   "def": "3",
+   "category": "Armor"
+  },
+  {
+   "town": "Lutie",
+   "id": 5024,
+   "name": "Cake Hat",
+   "icon": "/images/items/5024.gif",
+   "npc": "Nari",
+   "navi": "/navi xmas_in 178/177",
+   "mats": [
+    {
+     "id": 539,
+     "name": "Piece of Cake",
+     "n": 20,
+     "icon": "/images/items/539.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 1249,
+      "name": "Mystcase",
+      "level": 78,
+      "rate": 10,
+      "others": 0
+     }
+    },
+    {
+     "id": 530,
+     "name": "Candy Cane",
+     "n": 5,
+     "icon": "/images/items/530.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 1265,
+      "name": "Cookie",
+      "level": 70,
+      "rate": 0.75,
+      "others": 1
+     }
+    },
+    {
+     "id": 538,
+     "name": "Well-Baked Cookie",
+     "n": 15,
+     "icon": "/images/items/538.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 1246,
+      "name": "Christmas Cookie",
+      "level": 74,
+      "rate": 20,
+      "others": 1
+     }
+    },
+    {
+     "id": 999,
+     "name": "Steel",
+     "n": 10,
+     "icon": "/images/items/999.gif",
+     "category": "Other",
+     "drop": {
+      "id": 1492,
+      "name": "Incantation Samurai",
+      "level": 120,
+      "rate": 31.53,
+      "others": 11
+     }
+    },
+    {
+     "id": 529,
+     "name": "Candy",
+     "n": 10,
+     "icon": "/images/items/529.gif",
+     "category": "Consumable / Recovery",
+     "drop": {
+      "id": 3816,
+      "name": "Md Marin",
+      "level": 33,
+      "rate": 1.75,
+      "others": 3
+     }
+    }
+   ],
+   "zeny": 0,
+   "quest": 22182,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "2",
+   "category": "Armor"
+  },
+  {
+   "town": "Lutie",
+   "id": 5028,
+   "name": "Candle",
+   "icon": "/images/items/5028.gif",
+   "npc": "Movie",
+   "navi": "/navi xmas 222/156",
+   "mats": [
+    {
+     "id": 2279,
+     "name": "Bomb Wick",
+     "n": 1,
+     "icon": "/images/items/2279.gif",
+     "category": "Armor",
+     "drop": {
+      "id": 1129,
+      "name": "Horong",
+      "level": 66,
+      "rate": 0.03,
+      "others": 0
+     }
+    },
+    {
+     "id": 7035,
+     "name": "Matchstick",
+     "n": 1,
+     "icon": "/images/items/7035.gif",
+     "category": "Other",
+     "drop": null
+    }
+   ],
+   "zeny": 0,
+   "quest": 22183,
+   "start": null,
+   "note": null,
+   "bonus": "",
+   "pos": "Upper",
+   "level": "1",
+   "jobs": "ทุกอาชีพ",
+   "noRefine": false,
+   "def": "0",
+   "category": "Armor"
+  }
+ ]
+}

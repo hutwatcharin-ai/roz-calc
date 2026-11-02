@@ -118,6 +118,11 @@ export const GUIDES = [
     blurb: 'หมวกที่ไกด์อาชีพแนะนำ แลกด้วยโทเคนเหลือง 300 อันจากถ้ำ Nordfeld ชั้น 2 · ใบสุ่มออป 10 อัน สุ่มใหม่ได้เรื่อย ๆ',
   },
   {
+    href: '/guides/headgear-quests',
+    title: 'เควสทำหมวก',
+    blurb: 'หมวกที่ NPC ทำให้ แยกตามเมือง · พิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ',
+  },
+  {
     href: '/guides/sp-recovery',
     title: 'ของฟื้น SP ตัวไหนคุ้ม',
     blurb: 'Strawberry, Blue Herb, Cheese และอื่น ๆ เทียบ SP ต่อน้ำหนัก สำหรับเปิดบอท พร้อมมอนที่ดรอป',

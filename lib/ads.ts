@@ -95,6 +95,7 @@ export const INLINE_AD_PAGES = [
   '/tools/weight',
   '/guides/faq',
   '/guides/guild',
+  '/guides/headgear-quests',
   '/guides/homunculus',
   '/guides/nordfeld-helm',
   '/guides/sp-recovery',
