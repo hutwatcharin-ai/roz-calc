@@ -259,7 +259,7 @@ export default function ClockTowerHatsPage() {
           </div>
         </div>
         <ul className="guildp__steps" style={{ listStyle: 'disc' }}>
-          <li><strong>ใช้สุ่มออปชันใหม่ให้หมวก</strong> แบบเดียวกับใบสุ่มของ <Link href="/guides/costume-craft#nordfeld">หมวก Nordfeld</Link></li>
+          <li><strong>ใช้สุ่มออปชันใหม่ให้หมวก</strong> แบบเดียวกับใบสุ่มของ <Link href="/guides/nordfeld-helm">หมวก Nordfeld</Link></li>
           <li><strong>ขั้นตีบวกและการ์ดที่ใส่อยู่ไม่หาย</strong> ข้อความในเกมเขียนไว้เอง</li>
           <li>
             <strong>ใช้ได้กับ</strong>{' '}

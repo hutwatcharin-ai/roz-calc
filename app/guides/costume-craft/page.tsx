@@ -1,12 +1,11 @@
 // app/guides/costume-craft/page.tsx
 //
-// Headgear an NPC makes for you, and the Nordfeld helm you trade tokens for:
-// who, where, and what to bring.
+// Headgear an NPC makes for you: who, where, and what to bring.
 //
 // Until 2 Nov 2026 this page read roz-global.info's French guide. That day a
-// rebuild from the game's own quest log went up as /guides/headgear-quests,
-// and the owner had both folded in here along with /guides/nordfeld-helm, so
-// one page answers "how do I get this hat". The two old URLs redirect here.
+// rebuild from the game's own quest log went up as /guides/headgear-quests
+// and the owner had it folded in here; the old URL redirects here. The
+// Nordfeld helm keeps its own page (/guides/nordfeld-helm).
 //
 // What is from where:
 //   - NPC, map, coordinates, amounts and zeny: our quests table, which is the
@@ -36,7 +35,6 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { naviCommand, rozglobalGuides } from '@/lib/rozglobal-guides';
 import data from '@/data/headgear-quests.json';
-import Nordfeld from './Nordfeld';
 import './page.css';
 
 export const revalidate = 86400;
@@ -44,9 +42,9 @@ export const revalidate = 86400;
 const PATH = '/guides/costume-craft';
 
 export const metadata: Metadata = {
-  title: 'คราฟต์หมวก Ragnarok Zero — เควสทำหมวกทุกเมือง และหมวก Nordfeld',
+  title: 'คราฟต์หมวก Ragnarok Zero — เควสทำหมวกทุกเมือง NPC ทำให้ ใช้ของอะไร',
   description:
-    `รวมหมวก ${data.hats.length} ชิ้นที่ NPC ทำให้ใน Ragnarok Zero Global แยกตามเมือง บอกพิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ · วิธีแลกหมวก Nordfeld Platinum Helm ด้วยโทเคน 300 อันและใบสุ่มออปชัน`,
+    `รวมหมวก ${data.hats.length} ชิ้นที่ NPC ทำให้ใน Ragnarok Zero Global แยกตามเมือง บอกพิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ`,
 };
 
 interface Drop { id: number; name: string; level: number; rate: number; others: number }
@@ -140,7 +138,7 @@ export default function CostumeCraftPage() {
         title="คราฟต์หมวก — NPC ทำให้ ไปหาใคร ใช้ของอะไร"
         lead={
           <>
-            หมวก {HATS.length} ชิ้นที่ NPC ทำให้ แยกตามเมือง และหมวก Nordfeld ที่แลกด้วยโทเคน ·
+            หมวก {HATS.length} ชิ้นที่ NPC ทำให้ แยกตามเมือง ·
             กดคำสั่ง /navi เพื่อก๊อปไปวางในแชตเกม · อยากได้หมวกที่ดรอปจากมอนดู <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
           </>
         }
@@ -150,7 +148,6 @@ export default function CostumeCraftPage() {
         {TOWNS.map((t) => (
           <a key={t} href={`#${slug(t)}`}>{t} ({HATS.filter((h) => h.town === t).length})</a>
         ))}
-        <a href="#nordfeld">หมวก Nordfeld</a>
       </nav>
 
       {TOWNS.map((town, i) => (
@@ -187,8 +184,6 @@ export default function CostumeCraftPage() {
         </section>
       )}
 
-      <Nordfeld />
-
       <Caveat label="เชื่อได้แค่ไหน">
         หมวกที่ NPC ทำ: NPC พิกัด จำนวนของ และค่าทำ <strong>มาจากบันทึกเควสในไฟล์เกม ยังไม่ได้เช็กในเกม</strong> ·
         บันทึกเควสเรียกของบางชิ้นด้วยชื่ออื่น (เช่น Soft Fur คือ Feather, Wood Piece คือ Trunk, Red Dye คือ Scarlet Dyestuffs)
@@ -196,8 +191,7 @@ export default function CostumeCraftPage() {
         ค่าหมวกจากข้อความไอเทมในเกม · มอนที่ดรอปเลือกตัวธรรมดาที่ดรอปมากสุดในฐานข้อมูลเรา ไม่นับมอนแชมเปียน ·
         Clock Casket กับ Black Witch Hat มาจากบทพูดของ NPC Februs ในไฟล์เกม เช็กสูตรและพิกัดในเกมแล้ว 2 พ.ย. ·
         Clock Tower Gear ดรอปจากมอนหอนาฬิกา ยังไม่รู้ว่าตัวไหน ·
-        หมวก Nordfeld: ค่าหมวก กติกาใบสุ่ม และชื่อโทเคนมาจากข้อความไอเทมในเกม ส่วนเส้นทาง ราคาแลก และเลเวลเข้าถ้ำมาจากคลิปผู้เล่นไทยสองคลิปที่ตรงกัน ·
-        รายชื่อคนแคระชั้น 2 เป็นการอนุมานจากเลเวล
+        หมวกที่แลกด้วยโทเคนดูหน้า <Link href="/guides/nordfeld-helm">หมวก Nordfeld</Link>
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>

@@ -104,7 +104,6 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/sp-recovery', label: 'ของฟื้น SP', icon: '/images/items/578.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/star-gear', label: 'ของติดดาว', icon: '/images/nav/star.png', ready: true, group: 'คราฟต์' },
     { href: '/guides/costume-craft', label: 'คราฟต์หมวก', icon: '/images/items/2220.gif', ready: true, group: 'คราฟต์' },
-    { href: '/guides/clock-tower-hats', label: 'หมวกหอนาฬิกา', icon: '/images/items/19357.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/costume-enchant', label: 'หินเอนแชนต์คอสตูม', icon: '/images/items/6636.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/potion-crafting', label: 'ทำยา + ขวดพิษ', icon: '/images/items/7134.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/elemental-converter', label: 'ใบธาตุ Sage', icon: '/images/items/12114.gif', ready: true, group: 'คราฟต์' },
@@ -122,6 +121,8 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/vending', label: 'ตั้งร้านขายของ', icon: '/images/items/23342.gif', ready: true, group: 'ระบบในเกม' },
     { href: '/guides/woe', label: 'สงครามกิลด์ (WoE)', icon: '/images/items/714.gif', ready: true, group: 'ระบบในเกม' },
     { href: '/guides/homunculus', label: 'โฮมุนคูลัส', icon: '/images/items/7142.gif', ready: true, group: 'ระบบในเกม' },
+    { href: '/guides/clock-tower-hats', label: 'หมวกหอนาฬิกา', icon: '/images/items/19357.gif', ready: true, group: 'ระบบในเกม' },
+    { href: '/guides/nordfeld-helm', label: 'หมวก Nordfeld', icon: '/images/items/401510.png', ready: true, group: 'ระบบในเกม' },
   ],
 };
 

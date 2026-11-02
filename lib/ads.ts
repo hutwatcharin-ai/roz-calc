@@ -98,6 +98,7 @@ export const INLINE_AD_PAGES = [
   '/guides/faq',
   '/guides/guild',
   '/guides/homunculus',
+  '/guides/nordfeld-helm',
   '/guides/sp-recovery',
   '/guides/star-gear',
   '/guides/woe',

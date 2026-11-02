@@ -51,7 +51,7 @@ const ALLOWED: { file: string; text: string; why: string }[] = [
     why: 'worked example: level 60 needs 20 Zelstar at one per level above 40; arithmetic on the stated rule, not a database count',
   },
   {
-    file: 'app/guides/costume-craft/Nordfeld.tsx',
+    file: 'app/guides/nordfeld-helm/page.tsx',
     text: '100 ชิ้น',
     why: 'the helm price one clip mentions in passing, quoted only to say the two on-screen clips show 300; not a count of anything this site holds',
   },

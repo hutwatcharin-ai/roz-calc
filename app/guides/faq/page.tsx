@@ -185,7 +185,7 @@ const GROUPS: FaqGroup[] = [
       },
       {
         q: 'หมวก Nordfeld ที่ไกด์อาชีพแนะนำ หาจากไหน',
-        a: <>แลกด้วยโทเคนสีเหลือง 300 อันจากถ้ำ Nordfeld ชั้น 2 แล้วใช้ใบสุ่มหาออป · วิธีเต็มอยู่ที่ <Link href="/guides/costume-craft#nordfeld">หมวก Nordfeld</Link></>,
+        a: <>แลกด้วยโทเคนสีเหลือง 300 อันจากถ้ำ Nordfeld ชั้น 2 แล้วใช้ใบสุ่มหาออป · วิธีเต็มอยู่ที่ <Link href="/guides/nordfeld-helm">หมวก Nordfeld</Link></>,
       },
       {
         q: 'ของติดดาว ★ ปลุกได้หรือยัง',

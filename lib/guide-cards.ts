@@ -59,8 +59,8 @@ export const GUIDES = [
   },
   {
     href: '/guides/costume-craft',
-    title: 'คราฟต์หมวก และหมวก Nordfeld',
-    blurb: 'หมวกที่ NPC ทำให้ แยกตามเมือง · พิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ · หมวก Nordfeld แลกด้วยโทเคน 300 อัน พร้อมใบสุ่มออป',
+    title: 'คราฟต์หมวก',
+    blurb: 'หมวกที่ NPC ทำให้ แยกตามเมือง · พิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ',
   },
   {
     href: '/guides/clock-tower-hats',
@@ -116,6 +116,11 @@ export const GUIDES = [
     href: '/guides/faq',
     title: 'คำถามที่ถามบ่อย',
     blurb: 'ค่าเล่นกับไอดีทดลอง · บอทในเกม · รีเซ็ตสเตตัส · ตั้งร้าน · ตีบวกแตกไหม · เวลาเซิร์ฟเป็นเวลาไทย รวมจากคำถามที่เจอซ้ำในกลุ่ม',
+  },
+  {
+    href: '/guides/nordfeld-helm',
+    title: 'หมวก Nordfeld',
+    blurb: 'หมวกที่ไกด์อาชีพแนะนำ แลกด้วยโทเคนเหลือง 300 อันจากถ้ำ Nordfeld ชั้น 2 · ใบสุ่มออป 10 อัน สุ่มใหม่ได้เรื่อย ๆ · ใส่คู่ Gem Poring Card',
   },
   {
     href: '/guides/sp-recovery',
