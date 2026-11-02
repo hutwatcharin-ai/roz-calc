@@ -4024,6 +4024,18 @@ html .bptable tbody tr:hover td { background: linear-gradient(90deg, rgba(255, 2
 /* Free costume whose Bound copy is the one monsters drop (2 Oct 2026). */
 .boundtwin { margin: 0 0 12px; color: var(--dim); font-size: 14px; border-left: 3px solid var(--cyan, #22d3ee); padding: 6px 10px; background: rgba(34,211,238,.06); }
 
+/* Costume drops players report on the Taiwan server (components/TwDropReports,
+   2 Nov 2026): yellow rule so they never read as Global data. */
+.twdrops { border-left: 3px solid var(--yellow); padding: 8px 12px; background: rgba(255, 229, 61, .06); font-size: 14px; }
+.twdrops__head { margin: 0 0 6px; color: var(--dim); }
+.twdrops__badge { display: inline-block; margin-right: 4px; padding: 1px 8px; border-radius: 999px; background: var(--yellow); color: var(--yellow-ink); font: 700 12px/1.6 var(--font-sarabun), sans-serif; }
+.twdrops__list { margin: 0; padding-left: 18px; line-height: 1.8; }
+.twdrops__mob { font-weight: 700; color: var(--cyan); }
+.twdrops__none { color: var(--pink); font-size: 13px; }
+.twdrops__costume { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.twdrops__kind { padding: 0 6px; border: 1px solid var(--cyan); border-radius: 4px; color: var(--cyan); font-size: 12px; line-height: 1.6; }
+.twdrops__src { margin: 6px 0 0; color: var(--faint); font-size: 12px; }
+
 /* Fitting room on costume pages (components/CostumeFit, 2 Oct 2026). The
    sheet holds 3 directions x 2 sexes; the checked radios set --c / --r and
    the background moves -- no script. */

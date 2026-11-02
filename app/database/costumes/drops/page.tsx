@@ -24,6 +24,8 @@ import { mapRelease } from '@/lib/map-availability';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { buildCostumeDrops, groupByMap, matchesCostumeDrop, upcomingCostumes, type CostumeDrop, type UpcomingCostume } from '@/lib/costume-drops';
 import { costumeId } from '@/lib/costume-twins';
+import { twReports } from '@/lib/costume-drops-tw';
+import { TwMonsterName } from '@/components/TwDropReports';
 
 export const revalidate = 86400;
 
@@ -98,6 +100,8 @@ export default async function CostumeDropsPage({ searchParams }: { searchParams:
   const shown = rows.filter((r) => matchesCostumeDrop(r, q));
   const groups = view === 'map' ? groupByMap(shown) : [];
   const monsterCount = new Set(rows.flatMap((r) => r.droppers.map((d) => d.id))).size;
+  const tw = twReports();
+  const twIcons = new Map(tw.map((r) => [r.item_id, `/images/items/${r.item_id}.gif`]));
 
   const href = (next: { view?: string }) => {
     const params = new URLSearchParams();
@@ -241,6 +245,36 @@ export default async function CostumeDropsPage({ searchParams }: { searchParams:
                         </span>
                       </span>
                     </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {!q && (
+            <section className="card cdrops__tw" aria-labelledby="cdrops-tw">
+              <h2 className="section-title" id="cdrops-tw">เซิร์ฟไต้หวันรายงานเพิ่ม {tw.length} ชิ้น</h2>
+              <p className="muted" style={{ marginTop: 6 }}>
+                <span className="twdrops__badge">ผู้เล่นรายงาน · เซิร์ฟ TW</span> มอนที่ผู้เล่นเซิร์ฟไต้หวันบอกว่าดรอปคอสตูมเหล่านี้ แต่ข้อมูล Global ยังไม่มี ยังไม่มีใครยืนยันว่าใน Global ดรอปเหมือนกัน
+              </p>
+              <ul className="cdrops__list" style={{ marginTop: 10 }}>
+                {tw.map((r) => (
+                  <li key={r.item_id} className="cdrops__row">
+                    <Link href={`/database/costumes/${costumeId(r.item_id)}`} className="cdrops__item">
+                      <Thumb id={r.item_id} icon={twIcons.get(r.item_id)} />
+                      <span>
+                        <span className="cdrops__name">{r.name}</span>
+                        <span className="cdrops__pos">
+                          {r.name_zh} · {r.kind === 'extra' ? 'Global มีมอนดรอปอยู่แล้ว TW มีเพิ่ม' : 'Global ยังไม่มีมอนดรอป'}
+                          {r.guess && ' · จับคู่ชื่อจากความหมาย'}
+                        </span>
+                      </span>
+                    </Link>
+                    <ul className="cdrops__mobs">
+                      {r.monsters.map((m) => (
+                        <li key={`${m.id}-${m.name_zh}`}><TwMonsterName m={m} /></li>
+                      ))}
+                    </ul>
                   </li>
                 ))}
               </ul>

@@ -1,0 +1,114 @@
+{
+  "_meta": {
+    "what": "Costume drops reported by players on the Taiwan server (twROZ) that our Global data does not have. Shown with a 'player reported, TW server' label; never written into monster_drops.",
+    "source": "Player-made public Google Sheet 1W8vbAFTSxkcCTrkHTSxJcyw92hJLgeTSZImWncjcaps (linked from Bahamut forum bsn=83142 snA=251), plus Bahamut thread snA=2612. ragnaplace.com and twroz.wiki block ClaudeBot, so neither was read.",
+    "sheet_edited": "2025-10-04",
+    "checked": "2026-11-02",
+    "kinds": "extra = Global already lists droppers for this costume, TW reports another monster; new = Global lists no dropper for this costume at all",
+    "guess": "true = the Chinese costume name was matched to the Global item by meaning, not by a literal name match"
+  },
+  "sourceUrl": "https://forum.gamer.com.tw/C.php?bsn=83142&snA=251",
+  "reports": [
+    {
+      "item_id": 400832,
+      "name": "Poo Poo Hat",
+      "kind": "extra",
+      "name_zh": "糞便帽",
+      "monsters": [
+        { "id": 1035, "name": "Hunter Fly", "name_zh": "獵蠅" }
+      ]
+    },
+    {
+      "item_id": 400824,
+      "name": "Claws Hairpin",
+      "kind": "extra",
+      "name_zh": "螃蟹鉗髮夾",
+      "monsters": [
+        { "id": 1073, "name": "Crab", "name_zh": "螃蟹" }
+      ]
+    },
+    {
+      "item_id": 400867,
+      "name": "Vampire Hairband",
+      "kind": "extra",
+      "name_zh": "吸血蝙蝠髮夾",
+      "monsters": [
+        { "id": 1005, "name": "Familiar", "name_zh": "吸血蝙蝠" }
+      ]
+    },
+    {
+      "item_id": 401286,
+      "name": "Monkey Fur Hat",
+      "kind": "extra",
+      "name_zh": "猴子毛帽",
+      "monsters": [
+        { "id": 1416, "name": "Wicked Nymph", "name_zh": "妖仙女" }
+      ]
+    },
+    {
+      "item_id": 420455,
+      "name": "Centimental Flower",
+      "kind": "extra",
+      "name_zh": "花葉",
+      "monsters": [
+        { "id": 1052, "name": "Rocker", "name_zh": "搖滾蝗蟲" }
+      ]
+    },
+    {
+      "item_id": 400850,
+      "name": "Black Ribbon",
+      "kind": "new",
+      "name_zh": "黑色髮帶",
+      "monsters": [
+        { "id": 1051, "name": "Thief Bug", "name_zh": "小盜蟲" }
+      ]
+    },
+    {
+      "item_id": 400917,
+      "name": "Pirate Bandana",
+      "kind": "new",
+      "name_zh": "海盜頭巾",
+      "monsters": [
+        { "id": 1071, "name": "Pirate Skel", "name_zh": "邪骸海盜" }
+      ]
+    },
+    {
+      "item_id": 401078,
+      "name": "Cowhide Hat",
+      "kind": "new",
+      "name_zh": "鬥牛帽",
+      "guess": true,
+      "monsters": [
+        { "id": 1310, "name": "Majoruros", "name_zh": "狂暴米諾斯" }
+      ]
+    },
+    {
+      "item_id": 400855,
+      "name": "Aqua Ten Gallon Hat",
+      "kind": "new",
+      "name_zh": "水藍緞帶遮陽帽",
+      "guess": true,
+      "monsters": [
+        { "id": 1323, "name": "Sea-Otter", "name_zh": "海獺" }
+      ]
+    },
+    {
+      "item_id": 400872,
+      "name": "Black Hand of Destiny",
+      "kind": "new",
+      "name_zh": "命運的黑手",
+      "monsters": [
+        { "id": null, "name": null, "name_zh": "黑狐" }
+      ]
+    },
+    {
+      "item_id": 410473,
+      "name": "Ghoul Mask",
+      "kind": "new",
+      "name_zh": "綠腐屍面具",
+      "monsters": [
+        { "id": 1036, "name": "Ghoul", "name_zh": "綠腐屍" }
+      ]
+    }
+  ]
+}

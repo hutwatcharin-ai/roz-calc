@@ -38,6 +38,8 @@ import RecordVisit from '@/components/RecordVisit';
 import { getMapCanonical } from '@/lib/map-canonical';
 import { foldSpawns, type SpawnRow } from '@/lib/spawn-chips';
 import { isAbsentFromGame } from '@/lib/game-absent';
+import { TwCostumesCard } from '@/components/TwDropReports';
+import { twReportsByMonster } from '@/lib/costume-drops-tw';
 
 // ISR (SEO audit Critical-adjacent, perf #1): game reference data changes only
 // when we import — cache the rendered page and let the CDN serve it. A deploy
@@ -572,6 +574,7 @@ export default async function MonsterDetailPage({ params }: { params: { id: stri
           <div className="card">
             <h2 className="section-title" id="sec-drops">ของที่ดรอป</h2>
             <MonsterDropsTable drops={(drops ?? []) as unknown as MonsterDropRow[]} failed={Boolean(dropsError)} />
+            <TwCostumesCard reports={twReportsByMonster(monster.id)} />
           </div>
 
           <div className="card">

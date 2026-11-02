@@ -4,6 +4,8 @@
 // each route passes its own section rather than keeping a second copy in sync.
 
 import DropperGrid, { type Dropper } from '@/components/DropperGrid';
+import { TwDroppersCard } from '@/components/TwDropReports';
+import { twReportsFor } from '@/lib/costume-drops-tw';
 import FarmSpots from '@/components/FarmSpots';
 import CostumeFit from '@/components/CostumeFit';
 import { costumeArt, costumeFit } from '@/lib/costume-fit';
@@ -104,12 +106,14 @@ export default function GearDetail({
   const ownDrops = (droppedBy ?? []) as unknown as Dropper[];
   // An empty drop list is not shown (owner, 16 Oct 2026): a box that says
   // "no data" on most pages is what made them read as filler.
+  // Taiwan-server player reports (lib/costume-drops-tw), costumes only.
+  const twReports = section.recentKind === 'costume' ? twReportsFor([item.id, boundTwin?.id]) : [];
   const dropsCard = droppedByError ? (
     <div className="card" style={{ marginTop: 20 }}>
       <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
       <p style={{ color: 'var(--faint)' }}>โหลดข้อมูลมอนสเตอร์ที่ดรอปไม่สำเร็จ ลองใหม่อีกครั้ง</p>
     </div>
-  ) : ownDrops.length > 0 || twinDrops.length > 0 ? (
+  ) : ownDrops.length > 0 || twinDrops.length > 0 || twReports.length > 0 ? (
     <div className="card" style={{ marginTop: 20 }}>
       <h2 style={{ fontFamily: 'var(--font-chakra), sans-serif', marginBottom: 10 }}>มอนสเตอร์ที่ดรอปของนี้</h2>
       {ownDrops.length > 0 && <DropperGrid droppers={ownDrops} />}
@@ -121,6 +125,7 @@ export default function GearDetail({
           <DropperGrid droppers={twinDrops} />
         </>
       )}
+      <TwDroppersCard reports={twReports} hasGlobal={ownDrops.length > 0 || twinDrops.length > 0} />
     </div>
   ) : null;
   const twinCard = boundTwin ? (
