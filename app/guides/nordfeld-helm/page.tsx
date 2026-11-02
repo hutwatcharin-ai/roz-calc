@@ -43,6 +43,13 @@ const SCROLL = { id: 107871, name: 'Nordfeld Helm Scroll', icon: '/images/items/
 const TOKEN = { id: 1002998, name: 'Advanced Boulder Dwarf Token', icon: '/images/items/1002998.png' };
 const TOKEN_PLAIN = { id: 1002997, name: 'Boulder Dwarf Token', icon: '/images/items/1002997.png' };
 const ONYX = { id: 401509, name: 'Nordfeld Onyx Helm', icon: '/images/items/401509.png' };
+// What the Quartermaster asks for the Onyx helm, read off the owner's
+// screenshot of the exchange window, 2 Nov 2026 (icons matched to ids).
+const ONYX_COST = [
+  { id: 1002995, name: 'Gleaming Pebble', n: 100 },
+  { id: 1002996, name: 'Nordium Fragment', n: 100 },
+  { id: 1002997, name: 'Boulder Dwarf Token', n: 100 },
+];
 const GEM_CARD = { id: 300938, name: 'Gem Poring Card' };
 const GEM_PORING = { id: 25323, name: 'Gem Poring' };
 
@@ -127,7 +134,7 @@ export default function NordfeldHelmPage() {
             Thief ใช้ Steal ขโมยจากมอนได้ด้วย
           </li>
           <li>
-            <strong>เดินตรงเข้าปราสาท Nordfeld ไปจนสุดทาง</strong> คุย NPC แลกของ (ในปราสาทเข้าได้ทุกเลเวล) แลกหมวกด้วยโทเคนสีเหลือง <strong>{HELM_COST} อัน</strong>
+            <strong>เดินตรงเข้าปราสาท Nordfeld ไปจนสุดทาง</strong> คุย <strong>Quartermaster &lt;Headgear Exchange&gt;</strong> (ในปราสาทเข้าได้ทุกเลเวล) แลกหมวกด้วยโทเคนสีเหลือง <strong>{HELM_COST} อัน</strong>
           </li>
           <li>
             <strong>หมวกที่แลกมายังไม่มีออปชัน</strong> ต้องแลกใบสุ่มมาใช้ต่อ (หัวข้อถัดไป)
@@ -221,10 +228,14 @@ export default function NordfeldHelmPage() {
         <h2 className="section-title" style={{ marginTop: 0 }}>ของอื่นที่เกี่ยว</h2>
         <ul style={{ margin: 0, paddingInlineStart: 20, lineHeight: 1.9 }}>
           <li>
-            <Icon src={TOKEN_PLAIN.icon} size={20} /> <Link href={itemHref(TOKEN_PLAIN.id, 'Other')}>{TOKEN_PLAIN.name}</Link> โทเคนธรรมดา (ไม่ใช่สีทอง) ใช้แลกหมวกไม่ได้
+            <Icon src={TOKEN_PLAIN.icon} size={20} /> <Link href={itemHref(TOKEN_PLAIN.id, 'Other')}>{TOKEN_PLAIN.name}</Link> โทเคนธรรมดา (ไม่ใช่สีทอง) แลก Platinum Helm ไม่ได้ แต่ใช้แลก Onyx Helm
           </li>
           <li>
-            <Icon src={ONYX.icon} size={20} /> <Link href={itemHref(ONYX.id, 'Armor')}>{ONYX.name}</Link> หมวกรุ่นเล็ก เลเวล 20 DEF 4 MaxHP +50 MaxSP +20 · ไม่มีใบสุ่ม · ยังไม่รู้ว่าแลกด้วยอะไร
+            <Icon src={ONYX.icon} size={20} /> <Link href={itemHref(ONYX.id, 'Armor')}>{ONYX.name}</Link> หมวกรุ่นเล็ก เลเวล 20 DEF 4 MaxHP +50 MaxSP +20 · ไม่มีใบสุ่ม ·
+            <strong> แลกที่ Quartermaster ตัวเดียวกัน</strong> ใช้{' '}
+            {ONYX_COST.map((c, i) => (
+              <span key={c.id}>{i > 0 && ' + '}<Icon src={`/images/items/${c.id}.png`} size={20} /> <Link href={itemHref(c.id, 'Other')}>{c.name}</Link> {c.n}</span>
+            ))}
           </li>
           <li>ชุดอื่นจาก Nordfeld: <Link href={itemHref(450588, 'Armor')}>Nordfeld Soldier&apos;s Armor</Link> · <Link href={itemHref(450587, 'Armor')}>Nordfeld Mantle</Link></li>
         </ul>
@@ -235,7 +246,7 @@ export default function NordfeldHelmPage() {
         เส้นทาง ราคาแลก และเลเวลเข้าถ้ำ <strong>มาจากคลิปผู้เล่นไทยสองคลิปที่ตรงกัน</strong> ·
         รายชื่อคนแคระชั้น 2 เป็นการอนุมานจากเลเวล ·
         ออปชันที่เห็นมาจากคนละแหล่ง ไม่ใช่ตารางสุ่มทางการ ·
-        โบนัส Gem Poring Card จากข้อความการ์ดในเกม
+        โบนัส Gem Poring Card จากข้อความการ์ดในเกม · ชื่อ NPC และราคาแลกหมวก Onyx จากภาพในเกม 2 พ.ย.
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
