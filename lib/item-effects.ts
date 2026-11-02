@@ -70,6 +70,33 @@ for (const [id, b] of Object.entries(FAMILY_CARDS)) {
   if (!fx.g?.length) fx.g = [{ c: {}, b }];
 }
 
+// The four Clock Tower hats (patch of 29 Oct 2026), read from the game's Thai
+// item text and checked against the owner's in-game screenshots, 2 Nov 2026.
+// The captured records left out the flat ATK / MATK +20 on all four, and gave
+// Clock Casket's per-two-refines damage as Formless only; the game says every
+// race.
+const CLOCK_TOWER_HATS: Record<number, BonusGroup[]> = {
+  19357: [
+    { c: {}, b: [['atk', 20, null, null, null], ['damage_percent', 1, null, 2, null]] },
+    { c: { refine: 7 }, b: [['hit', 15, null, null, null]] },
+    { c: { refine: 9 }, b: [['hp', 250, null, null, null]] },
+  ],
+  19358: [
+    { c: {}, b: [['matk', 20, null, null, null], ['matk_percent', 1, null, 2, null]] },
+    { c: { refine: 7 }, b: [['hp', 50, null, null, null], ['sp', 100, null, null, null]] },
+    { c: { refine: 9 }, b: [['cast_time_variable_percent', -5, null, null, null]] },
+  ],
+};
+for (const [id, g] of Object.entries(CLOCK_TOWER_HATS)) {
+  (data.items[id] ??= {} as ItemEffects).g = g;
+}
+// The two Hat Maker hats: only the flat stat was missing; their card pairings
+// stay as the records have them.
+for (const [id, b] of [[19333, ['matk', 20, null, null, null]], [19334, ['atk', 20, null, null, null]]] as [number, Bonus][]) {
+  const fx = (data.items[id] ??= {} as ItemEffects);
+  fx.g = [{ c: {}, b: [b] }, ...(fx.g ?? [])];
+}
+
 export function itemEffects(id: number): ItemEffects | null {
   return data.items[String(id)] ?? null;
 }

@@ -137,8 +137,8 @@ const HAT_MAKER: Gear[] = [
 const EXCLUSIVE: Gear[] = [
   { name: 'Encyclopedia [2]', id: 1564, kind: 'หนังสือ · ATK 110 · อาวุธ Lv 3 · Lv 70 · หนัก 200', who: 'สาย Sage, Priest', fx: ['INT +3 DEX +2 ไม่แตก', 'CRIT +20 และ CRIT เพิ่มตาม LUK', 'MATK +100'], drop: [{ id: 1377, name: 'Elder', rate: 0.05 }] },
   { name: 'Rabbit Pattern Shirt [1]', id: 15282, kind: 'เกราะ · DEF 10 · Lv 60 · หนัก 50', who: 'สาย Mage, Acolyte', fx: ['MHP +150 MSP +75', 'MATK +2 ต่อขั้นตีบวก', '+7: MHP +75 MSP +25 · +9: MHP +75 MSP +25'], drop: [{ id: 20176, name: 'Erzsebet' }] },
-  { name: 'Clock Casket [1]', id: 19357, kind: 'หัวบน · DEF 10 · Lv 60 · หนัก 70', who: 'ทุกอาชีพ', fx: ['ทุก +2 ดาเมจกายภาพใส่มอน Formless +1%', '+7: HIT +15 · +9: MHP +250'] },
-  { name: 'Black Witch Hat [1]', id: 19358, kind: 'หัวบน · DEF 10 · Lv 60 · หนัก 70', who: 'ทุกอาชีพ', fx: ['ทุก +2 MATK +1%', '+7: MHP +50 MSP +100 · +9: ลดร่ายแปรผัน 5%'] },
+  { name: 'Clock Casket [1]', id: 19357, kind: 'หัวบน · DEF 10 · Lv 60 · หนัก 70', who: 'ทุกอาชีพ', fx: ['ATK +20', 'ทุก +2 ดาเมจกายภาพใส่มอนทุกเผ่า +1%', '+7: HIT +15 · +9: MHP +250'] },
+  { name: 'Black Witch Hat [1]', id: 19358, kind: 'หัวบน · DEF 10 · Lv 60 · หนัก 70', who: 'ทุกอาชีพ', fx: ['MATK +20', 'ทุก +2 MATK +1%', '+7: MHP +50 MSP +100 · +9: ลดร่ายแปรผัน 5%'] },
   { name: 'Safety Boots [1]', id: 22188, kind: 'รองเท้า · DEF 60 · Lv 60 · หนัก 35', who: 'สาย Swordman', fx: ['MHP +250 MSP +50', '+7: ลดดาเมจกายภาพและเวทจากศัตรูทุกธาตุ 5%', '(แพตช์โน้ตไม่ได้เขียนผล ค่านี้จากไฟล์เกม)'] },
   { name: "General's Cape [1]", id: 480999, png: true, kind: 'ผ้าคลุม · DEF 55 · Lv 60 · หนัก 150', who: 'ทุกอาชีพ', fx: ['MHP +200 MSP +20', 'ทุก +2 MHP +100 MSP +10', '+7 และ +9: ลดร่ายแปรผัน 5% ดีเลย์หลังตี 5% (ขั้นละครั้ง)'], drop: [{ id: 20178, name: 'General Orc' }] },
   { name: "Hunter's Cape [1]", id: 481000, png: true, kind: 'ผ้าคลุม · DEF 7 · Lv 60 · หนัก 50', who: 'ทุกอาชีพ', fx: ['ATK +10 HIT +10', '+6 ขึ้นไป: ATK +1 HIT +1 ทุกขั้นที่เกิน +5', '+7 และ +9: ดีเลย์หลังตี −5% (ขั้นละครั้ง)'], drop: [{ id: 1211, name: 'Brilight' }] },
