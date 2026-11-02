@@ -448,7 +448,7 @@ export default async function Patch20261029Page() {
       {/* 3. The ten new pieces of equipment. */}
       <section id="gear" className="ct-ch">
         <h2 className="ct-ch__title"><span className="ct-ch__n">3</span>อุปกรณ์ใหม่จากหอนาฬิกา</h2>
-        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment · Clock Casket กับ Black Witch Hat ให้ NPC Februs ทำ ดูสูตรที่ <Link href="/guides/costume-craft#februs">คราฟต์หมวก</Link> · Safety Boots ยังไม่มีใครเจอว่าได้จากไหน</p>
+        <p className="muted pxp" style={{ fontSize: 14 }}>แพตช์โน้ตเรียกว่า Exclusive Equipment · Clock Casket กับ Black Witch Hat ให้ NPC Februs ทำ ดูวิธีทำที่ <Link href="/guides/clock-tower-hats">หมวกหอนาฬิกา</Link> · Safety Boots ยังไม่มีใครเจอว่าได้จากไหน</p>
         <ul className="ct-gear">{EXCLUSIVE.map(gearRow)}</ul>
       </section>
 
@@ -516,7 +516,7 @@ export default async function Patch20261029Page() {
         <h3 className="pxh">Clock Tower Gear อัปเกรดหมวก</h3>
         <p className="muted pxp" style={{ fontSize: 14, lineHeight: 1.65 }}>
           ใช้อัปเกรดหมวก 4 ชิ้น: 2 ชิ้นจาก Hat Maker ข้างบน กับ Clock Casket และ Black Witch Hat จากหัวข้อ 3 ให้ได้ความสามารถเพิ่ม ·
-          <strong> ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · หนัก 1 · แพตช์โน้ตและไฟล์เกมไม่บอกว่าได้อะไรเพิ่มและหา Gear จากไหน
+          <strong> ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · หนัก 1 · แพตช์โน้ตและไฟล์เกมไม่บอกว่าได้อะไรเพิ่มและหา Gear จากไหน · วิธีทำหมวกทั้ง 4 ใบรวมไว้ที่ <Link href="/guides/clock-tower-hats">หมวกหอนาฬิกา</Link>
         </p>
       </section>
 

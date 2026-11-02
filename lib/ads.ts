@@ -93,6 +93,7 @@ export const INLINE_AD_PAGES = [
   '/tools/bot-setup',
   '/tools/enchant',
   '/tools/weight',
+  '/guides/clock-tower-hats',
   '/guides/costume-craft',
   '/guides/faq',
   '/guides/guild',

@@ -63,6 +63,11 @@ export const GUIDES = [
     blurb: 'หมวกที่ NPC ทำให้ แยกตามเมือง · พิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ · หมวก Nordfeld แลกด้วยโทเคน 300 อัน พร้อมใบสุ่มออป',
   },
   {
+    href: '/guides/clock-tower-hats',
+    title: 'หมวกหอนาฬิกา',
+    blurb: 'Clock Casket, Black Witch Hat และหมวก Hat Maker ทำยังไง ใช้ของอะไร · Mithril หาจากไหน · Clock Tower Gear สุ่มออปชัน',
+  },
+  {
     href: '/guides/costume-enchant',
     title: 'หินเอนแชนต์คอสตูม',
     blurb: 'หินทุกแบบแยกตามช่องหมวกบน กลาง ล่าง ผ้าคลุม ได้อะไร สุ่มจากกล่องไหน · ทำกล่องจากคอสตูม 5 ชิ้น · โบนัสใส่ครบชุด',

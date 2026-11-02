@@ -62,7 +62,7 @@ const TOWNS = [...new Set(HATS.map((h) => h.town))];
 const POS: Record<string, string> = { Upper: 'หมวกบน', Middle: 'หมวกกลาง', Lower: 'หมวกล่าง', 'Middle, Lower': 'หมวกกลาง+ล่าง' };
 const slug = (town: string) => town.toLowerCase().replace(/\s+/g, '-');
 // A group named after its NPC rather than a town says so in its heading.
-const HEADING: Record<string, string> = { Februs: 'Februs — ยังไม่รู้ว่า NPC อยู่แมพไหน' };
+const HEADING: Record<string, string> = { Februs: 'Februs — หมวกหอนาฬิกา' };
 
 // The old guide's hats that the quest log has no recipe for.
 const known = new Set(HATS.map((h) => h.name.toLowerCase()));
@@ -201,7 +201,7 @@ export default function CostumeCraftPage() {
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
-        ดูต่อ: <Link href="/guides/costume-enchant">หินเอนแชนต์คอสตูม</Link> · <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link> ·{' '}
+        ดูต่อ: <Link href="/guides/clock-tower-hats">หมวกหอนาฬิกา</Link> · <Link href="/guides/costume-enchant">หินเอนแชนต์คอสตูม</Link> · <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link> ·{' '}
         <Link href="/guides/classes">ไกด์อาชีพ</Link> · <Link href="/tools/refine">คำนวณตีบวก</Link>
       </p>
     </main>
