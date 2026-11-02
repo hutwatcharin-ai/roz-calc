@@ -115,6 +115,10 @@ const EXTRA = [
   { name: 'MDEF +4 & DEF +20', ids: [29033, 29026], bonus_th: 'HIT +5 · FLEE +5', sources: ['item text'] },
   { name: 'Variable Cast Reduction (Upper, Middle & Lower)', ids: [29156, 29157, 29158], bonus_th: 'ลดร่ายแปรผันเพิ่มอีก 6%', sources: ['item text'] },
   { name: 'Prison Uniform & Shackles', ids: [15040, 2408], bonus_th: 'ATK +5 และ ATK เพิ่มตามขั้นตีบวกของ Shackles', sources: ['item text'] },
+  // The Clock Tower patch's Hat Maker hats, from their Thai item text (2 Nov
+  // 2026); the client calls Tower Keeper Card "Clock Tower Manager Card".
+  { name: 'Pocket Watch Ornament & Alarm Card', ids: [19334, 4244], bonus_th: 'MaxHP +1000', sources: ['item text'] },
+  { name: 'Clock Tower Manager Headphones & Tower Keeper Card', ids: [19333, 4229], bonus_th: 'ลดร่ายแปรผัน 15%', sources: ['item text'] },
 ];
 
 function parseRozerodb() {

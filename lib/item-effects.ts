@@ -90,11 +90,10 @@ const CLOCK_TOWER_HATS: Record<number, BonusGroup[]> = {
 for (const [id, g] of Object.entries(CLOCK_TOWER_HATS)) {
   (data.items[id] ??= {} as ItemEffects).g = g;
 }
-// The two Hat Maker hats: only the flat stat was missing; their card pairings
-// stay as the records have them.
+// The two Hat Maker hats: the flat stat alone. Their card pairings are item
+// sets (scripts/build-item-sets.mjs), which the item page lists on its own.
 for (const [id, b] of [[19333, ['matk', 20, null, null, null]], [19334, ['atk', 20, null, null, null]]] as [number, Bonus][]) {
-  const fx = (data.items[id] ??= {} as ItemEffects);
-  fx.g = [{ c: {}, b: [b] }, ...(fx.g ?? [])];
+  (data.items[id] ??= {} as ItemEffects).g = [{ c: {}, b: [b] }];
 }
 
 export function itemEffects(id: number): ItemEffects | null {

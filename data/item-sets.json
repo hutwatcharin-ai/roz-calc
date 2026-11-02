@@ -99,13 +99,13 @@
         {
           "id": 29022,
           "name": "AGI +3 LUK -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29022.gif"
         },
         {
           "id": 29023,
           "name": "AGI +3 STR -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29023.gif"
         }
       ],
@@ -357,6 +357,28 @@
       ]
     },
     {
+      "name": "Clock Tower Manager Headphones & Tower Keeper Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 19333,
+          "name": "Clock Tower Manager Headphones",
+          "category": "Armor",
+          "icon": "/images/items/19333.gif"
+        },
+        {
+          "id": 4229,
+          "name": "Tower Keeper Card",
+          "category": "Card",
+          "icon": "/images/items/4229.gif"
+        }
+      ],
+      "bonus": "ลดร่ายแปรผัน 15%",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Crab, Aster & Shell Fish Card",
       "kind": "card",
       "pieces": [
@@ -524,13 +546,13 @@
         {
           "id": 29018,
           "name": "DEX +3 VIT -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29018.gif"
         },
         {
           "id": 29019,
           "name": "DEX +3 AGI -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29019.gif"
         }
       ],
@@ -799,13 +821,13 @@
         {
           "id": 29016,
           "name": "INT +3 DEX -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29016.gif"
         },
         {
           "id": 29017,
           "name": "INT +3 VIT -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29017.gif"
         }
       ],
@@ -844,13 +866,13 @@
         {
           "id": 29024,
           "name": "LUK +3 STR -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29024.gif"
         },
         {
           "id": 29025,
           "name": "LUK +3 INT -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29025.gif"
         }
       ],
@@ -889,13 +911,13 @@
         {
           "id": 29033,
           "name": "MDEF +4",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29033.gif"
         },
         {
           "id": 29026,
           "name": "DEF +20",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29026.gif"
         }
       ],
@@ -1149,6 +1171,28 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "Pocket Watch Ornament & Alarm Card",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 19334,
+          "name": "Pocket Watch Ornament",
+          "category": "Armor",
+          "icon": "/images/items/19334.gif"
+        },
+        {
+          "id": 4244,
+          "name": "Alarm Card",
+          "category": "Card",
+          "icon": "/images/items/4244.gif"
+        }
+      ],
+      "bonus": "MaxHP +1000",
+      "sources": [
+        "item text"
       ]
     },
     {
@@ -1571,13 +1615,13 @@
         {
           "id": 29014,
           "name": "STR +3 INT -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29014.gif"
         },
         {
           "id": 29015,
           "name": "STR +3 DEX -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29015.gif"
         }
       ],
@@ -1690,7 +1734,7 @@
         },
         {
           "id": 19333,
-          "name": "Clock Tower Manager Hat",
+          "name": "Clock Tower Manager Headphones",
           "category": "Armor",
           "icon": "/images/items/19333.gif"
         }
@@ -1730,20 +1774,20 @@
       "pieces": [
         {
           "id": 29156,
-          "name": "Variable Cast Reduction Upper",
-          "category": "Other",
+          "name": "Variable Cast Reduction (Upper)",
+          "category": "Enchantment",
           "icon": "/images/items/29156.gif"
         },
         {
           "id": 29157,
-          "name": "Variable Cast Reduction Middle",
-          "category": "Other",
+          "name": "Variable Cast Reduction (Middle)",
+          "category": "Enchantment",
           "icon": "/images/items/29157.gif"
         },
         {
           "id": 29158,
-          "name": "Variable Cast Reduction Lower",
-          "category": "Other",
+          "name": "Variable Cast Reduction (Lower)",
+          "category": "Enchantment",
           "icon": "/images/items/29158.gif"
         }
       ],
@@ -1788,13 +1832,13 @@
         {
           "id": 29020,
           "name": "VIT +3 AGI -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29020.gif"
         },
         {
           "id": 29021,
           "name": "VIT +3 LUK -3",
-          "category": "Other",
+          "category": "Enchantment",
           "icon": "/images/items/29021.gif"
         }
       ],
