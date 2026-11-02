@@ -173,7 +173,7 @@ export default function ClockTowerHatsPage() {
         <div className="hq__grid" style={{ marginTop: 14 }}>
           {FEBRUS.map((h) => (
             <article key={h.id} className="hq__hat">
-              <h3 className="hq__name"><Icon src={h.icon} size={28} /> {h.name}</h3>
+              <h3 className="hq__name"><Icon src={h.icon} size={28} /> <Link href={itemHref(h.id, h.category)}>{h.name}</Link></h3>
               <Mats h={h} />
             </article>
           ))}
