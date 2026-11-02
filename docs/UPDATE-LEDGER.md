@@ -27,7 +27,8 @@
 
 ## ข้อมูลจากไฟล์เกมที่ยังไม่ได้เช็กในเกม
 
-(ว่าง)
+- สูตร Hat Maker (หมวกกลาง 19333/19334) จากบันทึกเควส · หน้า /guides/clock-tower-hats
+- Thor's Flame (หลอม Mithril Ore 10 → Mithril 1) จากบทพูด NPC ยังไม่รู้พิกัด · Februs กับ Thor's Dismantle Flame owner เช็กแล้ว 2 พ.ย. (บ้าน /navi prontera 50/290 ในบ้านคือแมพ paramk)
 
 ## ตัดสินแล้ว ไม่ต้องทำ
 

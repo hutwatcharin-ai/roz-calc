@@ -357,28 +357,6 @@
       ]
     },
     {
-      "name": "Clock Tower Manager Headphones & Tower Keeper Card",
-      "kind": "gear",
-      "pieces": [
-        {
-          "id": 19333,
-          "name": "Clock Tower Manager Headphones",
-          "category": "Armor",
-          "icon": "/images/items/19333.gif"
-        },
-        {
-          "id": 4229,
-          "name": "Tower Keeper Card",
-          "category": "Card",
-          "icon": "/images/items/4229.gif"
-        }
-      ],
-      "bonus": "ลดร่ายแปรผัน 15%",
-      "sources": [
-        "item text"
-      ]
-    },
-    {
       "name": "Crab, Aster & Shell Fish Card",
       "kind": "card",
       "pieces": [
@@ -1171,28 +1149,6 @@
       "sources": [
         "rozerodb",
         "prontera"
-      ]
-    },
-    {
-      "name": "Pocket Watch Ornament & Alarm Card",
-      "kind": "gear",
-      "pieces": [
-        {
-          "id": 19334,
-          "name": "Pocket Watch Ornament",
-          "category": "Armor",
-          "icon": "/images/items/19334.gif"
-        },
-        {
-          "id": 4244,
-          "name": "Alarm Card",
-          "category": "Card",
-          "icon": "/images/items/4244.gif"
-        }
-      ],
-      "bonus": "MaxHP +1000",
-      "sources": [
-        "item text"
       ]
     },
     {

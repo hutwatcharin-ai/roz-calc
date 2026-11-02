@@ -195,7 +195,7 @@ export default function ClockTowerHatsPage() {
         <h3 style={{ margin: '16px 0 6px', fontSize: 15 }}>วิธีทำ ทีละขั้น</h3>
         <ol className="guildp__steps">
           <li>
-            <strong>ล่าบอส 5 ตัวใต้ดิน Al De Baran</strong> ชั้นละตัว เลเวล 122–126 ·
+            <strong>ล่าบอส 5 ตัวใต้ดิน Al De Baran</strong> ชั้นละตัว ·
             ของจากบอสใช้หมวกละ {bossMat} ชิ้น (ยกเว้น Jokers Wild ใช้ชิ้นเดียว) · ดูบอสครบที่{' '}
             <Link href="/news/patch-2026-10-29#bosses">หน้าแพตช์หอนาฬิกา</Link>
           </li>

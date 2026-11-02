@@ -7,7 +7,8 @@
    "prontera": "roz.prontera.info crawl of 3 Sep 2026 (a Zero database; labels some of its own rows other_region)",
    "rozerodb": "rozerodb.com item pages (one hand-listed recipe neither other source has)",
    "rozeroplanner": "rozeroplanner.com MCP lookup_recipe, checked one recipe at a time (Elunium)",
-   "owner": "the site owner confirmed it against the game (27 Oct 2026)"
+   "owner": "the site owner confirmed it against the game (27 Oct 2026)",
+   "client": "the game client's NPC text (Februs, Thor's Flame), read 2 Nov 2026"
   },
   "confidence": {
    "both": "rAthena and the Zero database list it with the same materials, or the owner checked it in game (sources has owner)",
@@ -18341,6 +18342,155 @@
    "otherRegion": false,
    "sources": [
     "prontera"
+   ]
+  },
+  {
+   "id": "z19357-1095-7026-7027-978-982-25429",
+   "kind": "quest",
+   "product": {
+    "id": 19357,
+    "name": "Clock Casket",
+    "icon": "/images/items/19357.gif",
+    "category": "Armor",
+    "amount": 1
+   },
+   "materials": [
+    {
+     "id": 1095,
+     "name": "Clock Hand",
+     "icon": "/images/items/1095.gif",
+     "category": "Material",
+     "amount": 100
+    },
+    {
+     "id": 7026,
+     "name": "Clock Tower Key",
+     "icon": "/images/items/7026.gif",
+     "category": "Other",
+     "amount": 5
+    },
+    {
+     "id": 7027,
+     "name": "Key of the Underground",
+     "icon": "/images/items/7027.gif",
+     "category": "Other",
+     "amount": 5
+    },
+    {
+     "id": 978,
+     "name": "Cobaltblue Dyestuffs",
+     "icon": "/images/items/978.gif",
+     "category": "Other",
+     "amount": 3
+    },
+    {
+     "id": 982,
+     "name": "White Dyestuffs",
+     "icon": "/images/items/982.gif",
+     "category": "Other",
+     "amount": 3
+    },
+    {
+     "id": 25429,
+     "name": "Mithril Ore",
+     "icon": "/images/items/25429.gif",
+     "category": "Other",
+     "amount": 50
+    }
+   ],
+   "itemLevel": null,
+   "skillId": null,
+   "skillLevel": null,
+   "confidence": "both",
+   "otherRegion": false,
+   "sources": [
+    "client",
+    "owner"
+   ]
+  },
+  {
+   "id": "z19358-1061-983-2252-25506-25429",
+   "kind": "quest",
+   "product": {
+    "id": 19358,
+    "name": "Black Witch Hat",
+    "icon": "/images/items/19358.gif",
+    "category": "Armor",
+    "amount": 1
+   },
+   "materials": [
+    {
+     "id": 1061,
+     "name": "Witch Starsand",
+     "icon": "/images/items/1061.gif",
+     "category": "Material",
+     "amount": 200
+    },
+    {
+     "id": 983,
+     "name": "Black Dyestuffs",
+     "icon": "/images/items/983.gif",
+     "category": "Other",
+     "amount": 5
+    },
+    {
+     "id": 2252,
+     "name": "Wizard Hat",
+     "icon": "/images/items/2252.gif",
+     "category": "Armor",
+     "amount": 1
+    },
+    {
+     "id": 25506,
+     "name": "Cute Broom",
+     "icon": "/images/items/25506.gif",
+     "category": "Material",
+     "amount": 1
+    },
+    {
+     "id": 25429,
+     "name": "Mithril Ore",
+     "icon": "/images/items/25429.gif",
+     "category": "Other",
+     "amount": 50
+    }
+   ],
+   "itemLevel": null,
+   "skillId": null,
+   "skillLevel": null,
+   "confidence": "both",
+   "otherRegion": false,
+   "sources": [
+    "client",
+    "owner"
+   ]
+  },
+  {
+   "id": "z25430-25429",
+   "kind": "ore",
+   "product": {
+    "id": 25430,
+    "name": "Mithril",
+    "icon": "/images/items/25430.gif",
+    "category": "Other",
+    "amount": 1
+   },
+   "materials": [
+    {
+     "id": 25429,
+     "name": "Mithril Ore",
+     "icon": "/images/items/25429.gif",
+     "category": "Other",
+     "amount": 10
+    }
+   ],
+   "itemLevel": null,
+   "skillId": null,
+   "skillLevel": null,
+   "confidence": "prontera-only",
+   "otherRegion": false,
+   "sources": [
+    "client"
    ]
   }
  ]

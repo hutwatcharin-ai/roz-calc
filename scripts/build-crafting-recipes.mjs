@@ -308,6 +308,13 @@ async function main() {
   const ROZERODB_ONLY = [
     { product: 5063, materials: [{ id: 930, amount: 50 }, { id: 970, amount: 1 }], kind: 'quest', source: 'rozerodb' },
     { product: 985, materials: [{ id: 757, amount: 5 }], kind: 'ore', source: 'rozeroplanner' },
+    // Februs's two hats and Thor's Flame's Mithril, from their dialogue in
+    // the client's NPC text (patch of 29 Oct 2026). The owner checked both
+    // hat recipes in game, 2 Nov 2026 (OWNER_CHECKED below). Februs also
+    // takes 50,000 zeny, which is not a material.
+    { product: 19357, materials: [{ id: 1095, amount: 100 }, { id: 7026, amount: 5 }, { id: 7027, amount: 5 }, { id: 978, amount: 3 }, { id: 982, amount: 3 }, { id: 25429, amount: 50 }], kind: 'quest', source: 'client' },
+    { product: 19358, materials: [{ id: 1061, amount: 200 }, { id: 983, amount: 5 }, { id: 2252, amount: 1 }, { id: 25506, amount: 1 }, { id: 25429, amount: 50 }], kind: 'quest', source: 'client' },
+    { product: 25430, materials: [{ id: 25429, amount: 10 }], kind: 'ore', source: 'client' },
   ];
   for (const r of ROZERODB_ONLY) {
     const k = `${r.product}|${r.materials.map((m) => m.id).sort().join(',')}`;
@@ -330,7 +337,7 @@ async function main() {
   // Recipes the owner confirmed against the game (27 Oct 2026: the two ore
   // trades, "the data is exactly this"). They count as confirmed whatever
   // the sources say.
-  const OWNER_CHECKED = new Set(['x984-756', 'z985-757']);
+  const OWNER_CHECKED = new Set(['x984-756', 'z985-757', 'z19357-1095-7026-7027-978-982-25429', 'z19358-1061-983-2252-25506-25429']);
   for (const r of recipes) {
     if (!OWNER_CHECKED.has(r.id)) continue;
     r.confidence = 'both';
