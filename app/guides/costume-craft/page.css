@@ -1,9 +1,11 @@
-/* /guides/headgear-quests: one card per hat, materials as chips. */
+/* /guides/costume-craft: one card per hat, materials as chips. */
 .gx .hq__toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+/* Town chips and the Nordfeld link jump here; clear the sticky nav and stage bar. */
+.gx .hq__anchor, .gx .guildp section.card[id] { scroll-margin-top: 170px; }
 .gx .hq__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
 .gx .hq__hat {
   padding: 12px 14px; border: 1px solid rgba(61, 232, 255, .25); border-radius: 10px; background: rgba(18, 11, 51, .6);
-  scroll-margin-top: 80px;
+  scroll-margin-top: 170px;
 }
 .gx .hq__head { display: flex; gap: 10px; align-items: flex-start; }
 .gx .hq__icon { image-rendering: pixelated; flex: none; }

@@ -1,168 +1,202 @@
 // app/guides/costume-craft/page.tsx
 //
-// Headgear you have an NPC make for you: what to bring, and where to stand.
+// Headgear an NPC makes for you, and the Nordfeld helm you trade tokens for:
+// who, where, and what to bring.
 //
-// /database/costumes lists cosmetic headgear and where it drops. This is the
-// other half -- the ones nobody drops, that an NPC assembles out of ordinary
-// materials. Neither the NPC nor the recipe is anywhere in our data; the
-// materials are, so they link.
+// Until 2 Nov 2026 this page read roz-global.info's French guide. That day a
+// rebuild from the game's own quest log went up as /guides/headgear-quests,
+// and the owner had both folded in here along with /guides/nordfeld-helm, so
+// one page answers "how do I get this hat". The two old URLs redirect here.
+//
+// What is from where:
+//   - NPC, map, coordinates, amounts and zeny: our quests table, which is the
+//     game's own quest log text. Built into data/headgear-quests.json by hand
+//     from that table.
+//   - The quest log calls materials by its own names (Soft Fur, Wood Piece,
+//     Red Dye ...). Each was matched to the real item through the classic
+//     rAthena recipe for the same hat (Fur_Hat, Fish_On_Head, Jack_A_Dandy).
+//   - Hat stats: the game's Thai item text (data/game-items.json).
+//   - "Drops from": our monster_drops table, the best normal (not champion)
+//     monster for each material.
+//   - Hats the old guide listed that the quest log does not: still from
+//     roz-global.info, shown apart and labelled.
+//   Nothing here is checked in game yet, so the page says so.
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
 import Caveat from '@/components/Caveat';
-import ItemIcon from '@/components/ItemIcon';
 import JsonLd from '@/components/JsonLd';
+import AdSlot from '@/components/AdSlot';
+import NaviCopy from '@/components/NaviCopy';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
 import { naviCommand, rozglobalGuides } from '@/lib/rozglobal-guides';
-import { bonusText, itemEffects } from '@/lib/item-effects';
-import NaviCopy from '@/components/NaviCopy';
-import RecipeFilter from '@/components/RecipeFilter';
-
-// Which town an NPC's map belongs to, for the filter chips (owner, 8 Oct
-// 2026: cards with filters on every guide list).
-const TOWNS: [RegExp, string][] = [
-  [/^(prontera|prt_)/, 'Prontera'], [/^(geffen|gef_)/, 'Geffen'], [/^(payon|pay_)/, 'Payon'], [/^(morocc|moc_)/, 'Morroc'],
-  [/^(alberta|alb_)/, 'Alberta'], [/^(izlude|iz_)/, 'Izlude'], [/^(aldebaran|alde_)/, 'Al De Baran'], [/^(comodo|cmd_)/, 'Comodo'],
-  [/^xmas/, 'Lutie'],
-];
-function townOf(map: string | null): { value: string; label: string } {
-  if (!map) return { value: 'tunknown', label: 'ไม่ทราบ' };
-  const hit = TOWNS.find(([re]) => re.test(map));
-  const label = hit ? hit[1] : map;
-  return { value: 't' + label.replace(/\W/g, ''), label };
-}
-
-/** The hat's unconditional bonuses, "AGI +1 · MDEF +3". */
-function effectLine(id: number): string | null {
-  const e = itemEffects(id);
-  if (!e) return null;
-  const parts = (e.g ?? []).filter((g) => Object.keys(g.c).length === 0).flatMap((g) => g.b).map(bonusText).filter(Boolean);
-  return parts.length ? parts.slice(0, 4).join(' · ') : null;
-}
+import data from '@/data/headgear-quests.json';
+import Nordfeld from './Nordfeld';
+import './page.css';
 
 export const revalidate = 86400;
 
+const PATH = '/guides/costume-craft';
+
 export const metadata: Metadata = {
-  title: 'คราฟต์หมวกแฟชั่น Ragnarok Zero — NPC ทำอะไรได้บ้าง ใช้ของอะไร',
+  title: 'คราฟต์หมวก Ragnarok Zero — เควสทำหมวกทุกเมือง และหมวก Nordfeld',
   description:
-    'หมวกและหน้ากากแฟชั่นใน Ragnarok Zero Global ที่ให้ NPC ทำให้ได้ บอกครบว่าต้องเอาของอะไรไปกี่ชิ้น NPC อยู่แมพไหน พร้อมพิกัด /navi ก๊อปไปวางในแชตได้เลย',
+    `รวมหมวก ${data.hats.length} ชิ้นที่ NPC ทำให้ใน Ragnarok Zero Global แยกตามเมือง บอกพิกัด /navi วัตถุดิบ ค่าทำ และมอนที่ดรอปวัตถุดิบ · วิธีแลกหมวก Nordfeld Platinum Helm ด้วยโทเคน 300 อันและใบสุ่มออปชัน`,
 };
 
-export default function CostumeCraftPage() {
-  const { cosmetics } = rozglobalGuides;
-  const linkedMaterials = cosmetics.reduce(
-    (n, c) => n + c.materials.filter((m) => m.itemId !== null).length,
-    0,
-  );
-  const totalMaterials = cosmetics.reduce((n, c) => n + c.materials.filter((m) => m.item !== 'Zeny').length, 0);
-  const townCount = new Map<string, { value: string; label: string; count: number }>();
-  for (const c of cosmetics) {
-    const t = townOf(c.map);
-    const row = townCount.get(t.value) ?? { ...t, count: 0 };
-    row.count += 1;
-    townCount.set(t.value, row);
-  }
-  const towns = [...townCount.values()].sort((a, b) => b.count - a.count);
-  const withEffect = cosmetics.filter((c) => c.itemId && effectLine(c.itemId)).length;
+interface Drop { id: number; name: string; level: number; rate: number; others: number }
+interface Mat { id: number; name: string; n: number; icon: string; category: string; drop: Drop | null }
+interface Hat {
+  town: string; id: number; name: string; icon: string; category: string; npc: string; navi: string;
+  mats: Mat[]; zeny: number; quest: number; start: { npc: string; navi: string } | null; note: string | null;
+  bonus: string; pos: string; def: string; level: string; jobs: string; noRefine: boolean;
+}
 
+const HATS = (data as { hats: Hat[] }).hats;
+const TOWNS = [...new Set(HATS.map((h) => h.town))];
+const POS: Record<string, string> = { Upper: 'หมวกบน', Middle: 'หมวกกลาง', Lower: 'หมวกล่าง', 'Middle, Lower': 'หมวกกลาง+ล่าง' };
+const slug = (town: string) => town.toLowerCase().replace(/\s+/g, '-');
+
+// The old guide's hats that the quest log has no recipe for.
+const known = new Set(HATS.map((h) => h.name.toLowerCase()));
+const OTHER = rozglobalGuides.cosmetics.filter((c) => !known.has(c.item.toLowerCase()));
+
+function rate(r: number) {
+  return r > 0 ? ` ${r}%` : '';
+}
+
+function MatChip({ m }: { m: Mat }) {
   return (
-    <main className="shell" style={{ paddingBlock: 32 }}>
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: 'หน้าแรก', path: '/' },
-          { name: 'ไกด์', path: '/guides' },
-          { name: 'คราฟต์หมวกแฟชั่น', path: '/guides/costume-craft' },
-        ])}
-      />
+    <li className="hq__mat">
+      <img src={m.icon} alt="" width={24} height={24} loading="lazy" className="hq__icon" />
+      <span className="hq__n">{m.n.toLocaleString()}×</span>
+      <Link href={itemHref(m.id, m.category)}>{m.name}</Link>
+      {m.drop && (
+        <span className="hq__drop">
+          ดรอป <Link href={`/database/monsters/${m.drop.id}`}>{m.drop.name}</Link>
+          {rate(m.drop.rate)}
+          {m.drop.others > 0 && <> · อีก {m.drop.others} ตัว</>}
+        </span>
+      )}
+    </li>
+  );
+}
+
+function HatCard({ h }: { h: Hat }) {
+  const stats = [POS[h.pos] ?? h.pos, `DEF ${h.def}`, `Lv ${h.level}`, h.jobs].filter(Boolean).join(' · ');
+  return (
+    <article className="hq__hat" id={`hat-${h.id}`}>
+      <div className="hq__head">
+        <img src={h.icon} alt="" width={36} height={36} loading="lazy" className="hq__icon" />
+        <div>
+          <h3 className="hq__name"><Link href={itemHref(h.id, h.category)}>{h.name}</Link></h3>
+          <p className="hq__stats">
+            {h.bonus && <strong>{h.bonus} · </strong>}
+            {stats}
+            {h.noRefine && ' · ตีบวกไม่ได้'}
+          </p>
+        </div>
+      </div>
+      <p className="hq__npc">
+        คุย <strong>{h.npc}</strong> <code className="navicmd">{h.navi}</code>
+      </p>
+      {h.start && (
+        <p className="hq__npc">
+          เริ่มเควสที่ <strong>{h.start.npc}</strong> <code className="navicmd">{h.start.navi}</code>
+        </p>
+      )}
+      <ul className="hq__mats">
+        {h.mats.map((m) => <MatChip key={m.id} m={m} />)}
+        {h.zeny > 0 && <li className="hq__mat hq__zeny">ค่าทำ <strong>{h.zeny.toLocaleString()} Zeny</strong></li>}
+      </ul>
+      {h.note && <p className="hq__note">{h.note}</p>}
+    </article>
+  );
+}
+
+export default function CostumeCraftPage() {
+  return (
+    <main className="shell guildp" style={{ paddingBlock: 32 }}>
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'ไกด์', path: '/guides' },
+        { name: 'คราฟต์หมวก', path: PATH },
+      ])} />
+      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
+        <Link href="/">หน้าแรก</Link><span className="crumbs__sep" aria-hidden="true">›</span>
+        <Link href="/guides">ไกด์</Link><span className="crumbs__sep" aria-hidden="true">›</span>
+        <span className="crumbs__here">คราฟต์หมวก</span>
+      </nav>
+
       <PageHeader
-        title="คราฟต์หมวกแฟชั่น — เอาของไปให้ NPC ทำ"
+        title="คราฟต์หมวก — NPC ทำให้ ไปหาใคร ใช้ของอะไร"
         lead={
           <>
-            หมวกพวกนี้<strong>ไม่มีมอนตัวไหนดรอป</strong> ต้องเก็บของไปให้ NPC ทำให้ · กดคำสั่ง <code className="mono">/navi</code> ในการ์ดเพื่อก๊อป ·
-            อยากได้หมวกที่ดรอปจากมอนดู <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
+            หมวก {HATS.length} ชิ้นที่ NPC ทำให้ แยกตามเมือง และหมวก Nordfeld ที่แลกด้วยโทเคน ·
+            กดคำสั่ง /navi เพื่อก๊อปไปวางในแชตเกม · อยากได้หมวกที่ดรอปจากมอนดู <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link>
           </>
         }
       />
 
-      <div className="gtiles">
-        <div className="gtile">
-          <span className="gtile__k">หมวกที่ทำได้</span>
-          <span className="gtile__v">{cosmetics.length}</span>
-          <span className="gtile__s">ใน {towns.length} เมือง</span>
-        </div>
-        <div className="gtile">
-          <span className="gtile__k">มีผลกับสเตตัส</span>
-          <span className="gtile__v">{withEffect}</span>
-          <span className="gtile__s">ใบที่เหลือเป็นของแต่งตัวอย่างเดียว</span>
-        </div>
-        <div className="gtile">
-          <span className="gtile__k">เมืองที่มี NPC มากสุด</span>
-          <span className="gtile__v">{towns[0]?.label}</span>
-          <span className="gtile__s">{towns[0]?.count} ใบ</span>
-        </div>
-      </div>
+      <nav className="guildp__toc hq__toc" aria-label="เลือกเมือง">
+        {TOWNS.map((t) => (
+          <a key={t} href={`#${slug(t)}`}>{t} ({HATS.filter((h) => h.town === t).length})</a>
+        ))}
+        <a href="#nordfeld">หมวก Nordfeld</a>
+      </nav>
 
-      <section className="card rguide" style={{ marginTop: 16 }}>
-        <h2 className="section-title">หมวกทั้งหมด ({cosmetics.length})</h2>
-        <RecipeFilter
-          group="costume"
-          placeholder="ค้นชื่อหมวก หรือของที่ต้องใช้ เช่น Steel"
-          facets={[{ label: 'NPC อยู่ที่', options: towns.map((t) => ({ value: t.value, label: t.label, count: t.count })) }]}
-        />
-        <div className="rcards" data-rgroup="costume">
-          {cosmetics.map((entry) => {
-            const navi = naviCommand(entry.map, entry.x, entry.y);
-            const effect = entry.itemId ? effectLine(entry.itemId) : null;
-            const q = [entry.item, effect, ...entry.materials.map((m) => m.item)].filter(Boolean).join(' ').toLowerCase();
-            return (
-              <article key={entry.item} className="rcard" data-tags={townOf(entry.map).value} data-q={q}>
-                <header className="rcard__head">
-                  {entry.itemId ? (
-                    <Link className="rcard__product" href={itemHref(entry.itemId, null)}>
-                      <span className="rcard__icon"><ItemIcon iconUrl={`/images/items/${entry.itemId}.gif`} category="Other" size={32} /></span>
-                      <span className="rcard__name">{entry.item}</span>
-                    </Link>
-                  ) : (
-                    <span className="rcard__product"><span className="rcard__name">{entry.item}</span></span>
-                  )}
-                  <span className="rcard__badge mono">{townOf(entry.map).label}</span>
-                </header>
-                {effect && <p className="rcard__effect">{effect}</p>}
-                <div className="rcard__mats">
-                  {entry.materials.map((m, i) =>
-                    m.itemId ? (
-                      <Link key={`${m.item}-${i}`} className="rcard__mat" href={itemHref(m.itemId, null)}>
-                        <ItemIcon iconUrl={`/images/items/${m.itemId}.gif`} category="Other" size={22} />
-                        <span>{m.item}</span>
-                        {m.amount > 1 && <b className="mono">×{m.amount.toLocaleString('en-US')}</b>}
-                      </Link>
-                    ) : (
-                      <span key={`${m.item}-${i}`} className="rcard__mat">
-                        <span>{m.item}</span>
-                        {m.amount > 1 && <b className="mono">×{m.amount.toLocaleString('en-US')}</b>}
-                      </span>
-                    ),
-                  )}
-                </div>
-                <p className="rcard__held">{navi ? <NaviCopy cmd={navi} /> : <span>ไม่ทราบพิกัด NPC</span>}</p>
-              </article>
-            );
-          })}
+      {TOWNS.map((town, i) => (
+        <div key={town}>
+          <section className="card" id={slug(town)} style={{ marginTop: 14 }}>
+            <h2 className="section-title" style={{ marginTop: 0 }}>{town}</h2>
+            <div className="hq__grid">
+              {HATS.filter((h) => h.town === town).map((h) => <HatCard key={h.id} h={h} />)}
+            </div>
+          </section>
+          {i === 3 && <AdSlot slot="inline" />}
         </div>
-      </section>
+      ))}
+
+      {OTHER.length > 0 && (
+        <section className="card" style={{ marginTop: 14 }}>
+          <h2 className="section-title" style={{ marginTop: 0 }}>ไม่เจอในบันทึกเควส ({OTHER.length})</h2>
+          <p className="muted" style={{ marginTop: 0 }}>
+            ไกด์ roz-global.info บอกว่า NPC ทำให้ แต่บันทึกเควสในไฟล์เกมไม่มีสูตรนี้ ยังไม่รู้ว่าทำได้จริงไหม
+          </p>
+          <ul className="hq__mats">
+            {OTHER.map((c) => {
+              const navi = naviCommand(c.map, c.x, c.y);
+              const mats = c.materials.map((m) => `${m.item}${m.amount > 1 ? ` ×${m.amount.toLocaleString('en-US')}` : ''}`).join(' · ');
+              return (
+                <li key={c.item} className="hq__mat">
+                  {c.itemId ? <Link href={itemHref(c.itemId, null)}><strong>{c.item}</strong></Link> : <strong>{c.item}</strong>}
+                  <span className="muted">{mats}</span>
+                  {navi && <NaviCopy cmd={navi} />}
+                </li>
+              );
+            })}
+          </ul>
+          <p className="muted" style={{ marginBottom: 0, fontSize: 13 }}>
+            Black Witch Hat และ Clock Casket ก็ไม่อยู่ในบันทึกเควส ยังไม่รู้ว่าได้จากไหน
+          </p>
+        </section>
+      )}
+
+      <Nordfeld />
 
       <Caveat label="เชื่อได้แค่ไหน">
-        สูตรและพิกัด NPC มาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026) ·
-        ของที่ใช้<strong>ตรวจกับฐานข้อมูลไอเทมของเราแล้ว {linkedMaterials} จาก {totalMaterials} ชิ้น</strong> และลิงก์ไปดูได้ —
-        ที่เหลือชื่อไม่ตรงกับในตารางเรา จึงปล่อยเป็นตัวหนังสือเฉยๆ ไม่เดาว่าเป็นของชิ้นไหน ·
-        พิกัด NPC ไม่มีแหล่งที่สองให้ตรวจ ถ้าเดินไปแล้วไม่เจอ บอกได้
+        หมวกที่ NPC ทำ: NPC พิกัด จำนวนของ และค่าทำ <strong>มาจากบันทึกเควสในไฟล์เกม ยังไม่ได้เช็กในเกม</strong> ·
+        บันทึกเควสเรียกของบางชิ้นด้วยชื่ออื่น (เช่น Soft Fur คือ Feather, Wood Piece คือ Trunk, Red Dye คือ Scarlet Dyestuffs)
+        เราจับคู่กับไอเทมจริงด้วยสูตรเดียวกันของ RO คลาสสิก ·
+        ค่าหมวกจากข้อความไอเทมในเกม · มอนที่ดรอปเลือกตัวธรรมดาที่ดรอปมากสุดในฐานข้อมูลเรา ไม่นับมอนแชมเปียน ·
+        หมวก Nordfeld: ค่าหมวก กติกาใบสุ่ม และชื่อโทเคนมาจากข้อความไอเทมในเกม ส่วนเส้นทาง ราคาแลก และเลเวลเข้าถ้ำมาจากคลิปผู้เล่นไทยสองคลิปที่ตรงกัน ·
+        รายชื่อคนแคระชั้น 2 เป็นการอนุมานจากเลเวล
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
-        ดูต่อ: <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link> ·{' '}
-        <Link href="/database/pets">สัตว์เลี้ยง</Link> ·{' '}
-        <Link href="/drop-finder">ค้นของดรอป</Link>
+        ดูต่อ: <Link href="/guides/costume-enchant">หินเอนแชนต์คอสตูม</Link> · <Link href="/database/costumes">ฐานข้อมูลคอสตูม</Link> ·{' '}
+        <Link href="/guides/classes">ไกด์อาชีพ</Link> · <Link href="/tools/refine">คำนวณตีบวก</Link>
       </p>
     </main>
   );

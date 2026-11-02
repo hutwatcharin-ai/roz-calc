@@ -1,9 +1,10 @@
-// app/guides/nordfeld-helm/page.tsx
+// app/guides/costume-craft/Nordfeld.tsx
 //
 // Nordfeld Platinum Helm: how to get it, and the scroll players call "ใบสุ่ม".
 // Ten class guides on this site tell the reader to wear this helm and none
-// said where it comes from -- that gap is why the page exists (owner, 28 Sep
-// 2026).
+// said where it comes from -- that gap is why it was written (owner, 28 Sep
+// 2026). It was its own page, /guides/nordfeld-helm, until 2 Nov 2026, when
+// the owner had it folded into the hat page; the old URL redirects here.
 //
 // What is from where:
 //   - The helm's stats, the scroll's rules (random enchant, keeps refine and
@@ -17,23 +18,7 @@
 //     dwarves in our data), labelled as such. Our drop table has no rows for
 //     the tokens, so no rates are shown.
 import Link from 'next/link';
-import type { Metadata } from 'next';
-import PageHeader from '@/components/PageHeader';
-import Caveat from '@/components/Caveat';
-import JsonLd from '@/components/JsonLd';
-import AdSlot from '@/components/AdSlot';
-import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { itemHref } from '@/lib/item-href';
-
-export const revalidate = 86400;
-
-const PATH = '/guides/nordfeld-helm';
-
-export const metadata: Metadata = {
-  title: 'หมวก Nordfeld Platinum Helm Ragnarok Zero — แลกยังไง ใบสุ่มออปได้จากไหน',
-  description:
-    'วิธีได้หมวก Nordfeld Platinum Helm ใน Ragnarok Zero Global: ไป Nordfeld จากท่าเรือ Alberta (200 Zeny, Lv 50) ฟาร์ม Advanced Boulder Dwarf Token ในถ้ำชั้น 2 แลกหมวก 300 อัน และแลกใบสุ่ม Nordfeld Helm Scroll 10 อันเพื่อสุ่มออปชันใหม่ได้เรื่อย ๆ',
-};
 
 const HELM = { id: 401510, name: 'Nordfeld Platinum Helm', icon: '/images/items/401510.png' };
 const SCROLL = { id: 107871, name: 'Nordfeld Helm Scroll', icon: '/images/items/107871.png' };
@@ -75,26 +60,11 @@ function Icon({ src, size = 32 }: { src: string; size?: number }) {
   return <img src={src} alt="" width={size} height={size} style={{ imageRendering: 'pixelated', verticalAlign: 'middle' }} />;
 }
 
-export default function NordfeldHelmPage() {
+export default function Nordfeld() {
   return (
-    <main className="shell guildp" style={{ paddingBlock: 32 }}>
-      <JsonLd data={breadcrumbJsonLd([
-        { name: 'หน้าแรก', path: '/' },
-        { name: 'ไกด์', path: '/guides' },
-        { name: 'หมวก Nordfeld', path: PATH },
-      ])} />
-      <nav className="crumbs" aria-label="ตำแหน่งหน้า">
-        <Link href="/">หน้าแรก</Link><span className="crumbs__sep" aria-hidden="true">›</span>
-        <Link href="/guides">ไกด์</Link><span className="crumbs__sep" aria-hidden="true">›</span>
-        <span className="crumbs__here">หมวก Nordfeld</span>
-      </nav>
-
-      <PageHeader
-        title="หมวก Nordfeld Platinum Helm — แลกยังไง ใบสุ่มได้จากไหน"
-        lead="หมวกที่ไกด์อาชีพหลายอาชีพแนะนำ แลกฟรีด้วยโทเคนจากถ้ำ Nordfeld แล้วใช้ใบสุ่มหาออปชันที่ต้องการ"
-      />
-
+    <div id="nordfeld" className="hq__anchor">
       <section className="card card--yellow" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>หมวก Nordfeld — แลกด้วยโทเคน ไม่ต้องคราฟต์</h2>
         <div className="guildp__hero">
           <Icon src={HELM.icon} size={40} />
           <div>
@@ -104,13 +74,10 @@ export default function NordfeldHelmPage() {
           </div>
         </div>
         <p style={{ marginTop: 10 }}>
-          <strong>ที่ทำให้มันดีคือออปชัน</strong> ตัวหมวกค่าไม่สูง แต่สุ่มออปได้ไม่จำกัดด้วยใบสุ่ม จึงปั้นให้ตรงบิลด์ได้
+          หมวกที่ไกด์อาชีพหลายอาชีพแนะนำ · <strong>ที่ทำให้มันดีคือออปชัน</strong> ตัวหมวกค่าไม่สูง แต่สุ่มออปได้ไม่จำกัดด้วยใบสุ่ม จึงปั้นให้ตรงบิลด์ได้
         </p>
-        <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>ค่าหมวกจากข้อความในเกม</p>
-      </section>
 
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>วิธีได้หมวก ทีละขั้น</h2>
+        <h3 style={{ margin: '16px 0 6px', fontSize: 15 }}>วิธีได้หมวก ทีละขั้น</h3>
         <ol className="guildp__steps">
           <li><strong>เปิดเควสหลักสาย Nordfeld ก่อน</strong> ยังไม่เปิดเควส ทหารที่ท่าเรือจะไม่พาไป</li>
           <li>
@@ -125,7 +92,7 @@ export default function NordfeldHelmPage() {
             <strong>เดินตรงเข้าปราสาท Nordfeld ไปจนสุดทาง</strong> คุย NPC แลกของ (ในปราสาทเข้าได้ทุกเลเวล) แลกหมวกด้วยโทเคนสีเหลือง <strong>{HELM_COST} อัน</strong>
           </li>
           <li>
-            <strong>หมวกที่แลกมายังไม่มีออปชัน</strong> ต้องแลกใบสุ่มมาใช้ต่อ (หัวข้อถัดไป)
+            <strong>หมวกที่แลกมายังไม่มีออปชัน</strong> ต้องแลกใบสุ่มมาใช้ต่อ
           </li>
         </ol>
         <p className="guildp__src">
@@ -163,10 +130,8 @@ export default function NordfeldHelmPage() {
         </p>
       </section>
 
-      <AdSlot slot="inline" />
-
       <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>ถ้ำชั้น 2 เตรียมตัวยังไง</h2>
+        <h2 className="section-title" style={{ marginTop: 0 }}>ถ้ำ Nordfeld ชั้น 2 เตรียมตัวยังไง</h2>
         <ul className="guildp__steps" style={{ listStyle: 'disc' }}>
           <li><strong>คนแคระไม่โจมตีก่อน</strong> เดินผ่านได้สบาย</li>
           <li><strong>แต่ตีตัวหนึ่ง ตัวชนิดเดียวกันจะเข้ามารุม</strong> ทางในเหมืองแคบ มักโดนหลายตัวพร้อมกัน</li>
@@ -188,10 +153,7 @@ export default function NordfeldHelmPage() {
           เลือกจากเลเวล: สี่ตัวนี้คือคนแคระเลเวล 64–65 ในข้อมูลเรา ส่วนตัวเลเวล 22–25 น่าจะเป็นชั้น 1 · ฐานข้อมูลยังไม่มีเปอร์เซ็นต์ดรอปของโทเคน
         </p>
         <p className="guildp__src">ที่มา: <Clip c={CLIP.ryan} /></p>
-      </section>
-
-      <section className="card" style={{ marginTop: 14 }}>
-        <h2 className="section-title" style={{ marginTop: 0 }}>ของอื่นที่เกี่ยว</h2>
+        <h3 style={{ margin: '16px 0 6px', fontSize: 15 }}>ของอื่นที่เกี่ยว</h3>
         <ul style={{ margin: 0, paddingInlineStart: 20, lineHeight: 1.9 }}>
           <li>
             <Icon src={TOKEN_PLAIN.icon} size={20} /> <Link href={itemHref(TOKEN_PLAIN.id, 'Other')}>{TOKEN_PLAIN.name}</Link> โทเคนธรรมดา (ไม่ใช่สีทอง) ใช้แลกหมวกไม่ได้
@@ -202,18 +164,6 @@ export default function NordfeldHelmPage() {
           <li>ชุดอื่นจาก Nordfeld: <Link href={itemHref(450588, 'Armor')}>Nordfeld Soldier&apos;s Armor</Link> · <Link href={itemHref(450587, 'Armor')}>Nordfeld Mantle</Link></li>
         </ul>
       </section>
-
-      <Caveat label="เชื่อได้แค่ไหน">
-        ค่าหมวก กติกาใบสุ่ม และชื่อโทเคน <strong>มาจากข้อความไอเทมในเกม</strong> ·
-        เส้นทาง ราคาแลก และเลเวลเข้าถ้ำ <strong>มาจากคลิปผู้เล่นไทยสองคลิปที่ตรงกัน</strong> ·
-        รายชื่อคนแคระชั้น 2 เป็นการอนุมานจากเลเวล ·
-        ออปชันที่เห็นมาจากคนละแหล่ง ไม่ใช่ตารางสุ่มทางการ
-      </Caveat>
-
-      <p className="muted" style={{ marginTop: 16 }}>
-        ดูต่อ: <Link href="/guides/classes">ไกด์อาชีพ</Link> · <Link href="/tools/refine">คำนวณตีบวก</Link> ·{' '}
-        <Link href="/guides/faq">คำถามที่ถามบ่อย</Link>
-      </p>
-    </main>
+    </div>
   );
 }

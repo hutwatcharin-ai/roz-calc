@@ -34,6 +34,10 @@ const nextConfig = {
       { source: '/tools/sizes', destination: '/guides/sizes', permanent: true },
       { source: '/tools/exp', destination: '/guides/exp', permanent: true },
       { source: '/tools/farm-guide', destination: '/guides/farm-guide', permanent: true },
+      // The NPC hat rebuild and the Nordfeld helm page joined the hat page on
+      // 2 Nov 2026 (owner): one page for "how do I get this hat".
+      { source: '/guides/headgear-quests', destination: '/guides/costume-craft', permanent: true },
+      { source: '/guides/nordfeld-helm', destination: '/guides/costume-craft#nordfeld', permanent: true },
       // Three tools became one on 4 Sep 2026: they ran the same arithmetic
       // behind three identical forms and differed only in which monsters were
       // in scope. Each old URL lands on the mode it used to be.
