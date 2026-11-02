@@ -441,7 +441,7 @@ export default async function Patch20261029Page() {
         </div>
         <p className="evnote">
           วงเวท 4 จุดนี้เพิ่งเพิ่มในไฟล์นำทางพร้อม Molden แต่เกมไม่ได้บอกว่าจุดไหนตรงกับคำใบ้ข้อไหน · บันทึกเควสไม่บอกชื่อไอเทมทำพิธีและรางวัล
-          (Clock Tower Gear น่าจะได้จากเควสนี้ แต่ยังไม่มีอะไรยืนยัน)
+          (Clock Tower Gear ผู้เล่นเจอว่าดรอปจากมอนในหอนาฬิกา ไม่ใช่รางวัลเควสนี้ ยังไม่รู้ว่าตัวไหน)
         </p>
       </section>
 
@@ -516,7 +516,7 @@ export default async function Patch20261029Page() {
         <h3 className="pxh">Clock Tower Gear อัปเกรดหมวก</h3>
         <p className="muted pxp" style={{ fontSize: 14, lineHeight: 1.65 }}>
           ใช้อัปเกรดหมวก 4 ชิ้น: 2 ชิ้นจาก Hat Maker ข้างบน กับ Clock Casket และ Black Witch Hat จากหัวข้อ 3 ให้ได้ความสามารถเพิ่ม ·
-          <strong> ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · หนัก 1 · แพตช์โน้ตและไฟล์เกมไม่บอกว่าได้อะไรเพิ่มและหา Gear จากไหน · วิธีทำหมวกทั้ง 4 ใบรวมไว้ที่ <Link href="/guides/clock-tower-hats">หมวกหอนาฬิกา</Link>
+          <strong> ค่าตีบวกกับการ์ดที่ใส่อยู่ไม่หาย</strong> · หนัก 1 · Gear ดรอปจากมอนในหอนาฬิกา (ผู้เล่นเจอในเกม ยังไม่รู้ว่าตัวไหน) · ยังไม่รู้ว่าสุ่มได้ออปอะไร · วิธีทำหมวกทั้ง 4 ใบรวมไว้ที่ <Link href="/guides/clock-tower-hats">หมวกหอนาฬิกา</Link>
         </p>
       </section>
 
@@ -649,7 +649,7 @@ export default async function Patch20261029Page() {
       </section>
 
       <aside className="pnote">
-        <strong>ยังไม่รู้</strong> ขั้นตอนเควสทีละขั้น ที่มาของ Safety Boots, Clock Tower Gear และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
+        <strong>ยังไม่รู้</strong> ขั้นตอนเควสทีละขั้น ที่มาของ Safety Boots, มอนตัวไหนดรอป Clock Tower Gear และบอสใต้ดินเกิดยังไง จะเติมเมื่อเข้าเกม ·{' '}
         ตีไหวไหมดูที่ <Link href="/tools/leveling-spots">ฟาร์มที่ไหนดี</Link>
       </aside>
 

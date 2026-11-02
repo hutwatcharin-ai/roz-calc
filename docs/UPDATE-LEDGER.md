@@ -22,13 +22,13 @@
 
 - บอสใต้ดิน 20175–20179: จำนวนใส่ DB แล้ว 30 ต.ค. (Sieglouse 1, General Orc 1, Jeniffer 1, Extra Joker 2, Erzsebet 1 — ไฟล์เกม navi_mob ตรงกับที่ prontera เช็กในเกม) · ยังไม่รู้เวลาเกิด · เลเวลใน DB 122–126 แต่ไฟล์เกมบอก 96–105 ยังไม่ได้แก้
 - ระบบปลุก ★: `/guides/star-gear` ยังเขียนว่ายังไม่เปิด — รอ owner เช็กในเกม
-- ของทำพิธี Molden: ยังไม่รู้ชื่อไอเทมจริง · Clock Tower Gear ได้จากไหนยังไม่รู้
+- ของทำพิธี Molden: ยังไม่รู้ชื่อไอเทมจริง · Clock Tower Gear ดรอปจากมอนหอนาฬิกา (owner 2 พ.ย.) ยังไม่รู้ว่าตัวไหน
 - ตาราง Cash Shop ใหม่ยังไม่เทียบกับ `cash_shop_items`
 
 ## ข้อมูลจากไฟล์เกมที่ยังไม่ได้เช็กในเกม
 
 - สูตร Hat Maker (หมวกกลาง 19333/19334) จากบันทึกเควส · หน้า /guides/clock-tower-hats
-- Thor's Flame (หลอม Mithril Ore 10 → Mithril 1) จากบทพูด NPC ยังไม่รู้พิกัด · Februs กับ Thor's Dismantle Flame owner เช็กแล้ว 2 พ.ย. (บ้าน /navi prontera 50/290 ในบ้านคือแมพ paramk)
+- Thor's Flame (หลอม Mithril Ore 10 → Mithril 1) owner เห็นในเกม 2 พ.ย. อยู่ตรงจุดตีบวกทุกเมือง · Februs กับ Thor's Dismantle Flame owner เช็กแล้ว 2 พ.ย. (บ้าน /navi prontera 50/290 ในบ้านคือแมพ paramk)
 
 ## ตัดสินแล้ว ไม่ต้องทำ
 

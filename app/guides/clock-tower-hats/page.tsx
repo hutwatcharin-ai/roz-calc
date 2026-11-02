@@ -17,6 +17,9 @@
 //     hats it works on). The owner, who plays, says it rerolls options the
 //     way the Nordfeld scroll does. Where the Gear comes from is not in the
 //     client.
+//   - Thor's Flame stands at the refine spot in every town, and Clock Tower
+//     Gear drops from monsters in the Clock Tower maps, which ones not yet
+//     known: the owner, in game, 2 Nov 2026.
 //   - Where Februs and Thor's Dismantle Flame stand: the owner's in-game
 //     screenshots, 2 Nov 2026 (/where prints "paramk"). The same shots show
 //     both recipes as the client has them, and the Thai menu calling Clock
@@ -242,8 +245,8 @@ export default function ClockTowerHatsPage() {
             และถามก่อนว่าจะทำต่อไหม
           </li>
         </ul>
-        <p className="muted" style={{ marginTop: 6, fontSize: 13 }}>พิกัด Thor&apos;s Flame (ตัวหลอม) ยังไม่ได้เช็กในเกม</p>
-        <p className="guildp__src">ที่มา: บทพูดของ Thor&apos;s Flame, Thor&apos;s Dismantle Flame และ Februs ในไฟล์เกม · พิกัดจากภาพในเกม 2 พ.ย. · รายชื่อดันเจี้ยนจากหน้าดันเจี้ยนความทรงจำ</p>
+        <p className="muted" style={{ marginTop: 6, fontSize: 13 }}><strong>Thor&apos;s Flame (ตัวหลอม) อยู่ตรงจุดตีบวกในทุกเมือง</strong> คุยแล้วเอา Mithril Ore ไปให้ทีละ {ORE_PER_MITHRIL} ก้อน</p>
+        <p className="guildp__src">ที่มา: บทพูดของ Thor&apos;s Flame, Thor&apos;s Dismantle Flame และ Februs ในไฟล์เกม · พิกัดและที่อยู่ Thor&apos;s Flame จากภาพในเกม 2 พ.ย. · รายชื่อดันเจี้ยนจากหน้าดันเจี้ยนความทรงจำ</p>
       </section>
 
       <section className="card" id="gear" style={{ marginTop: 14 }}>
@@ -262,7 +265,8 @@ export default function ClockTowerHatsPage() {
             <strong>ใช้ได้กับ</strong>{' '}
             {HATS.map((h, i) => <span key={h.id}>{i > 0 && ' · '}<Link href={itemHref(h.id, h.category)}>{h.name}</Link></span>)}
           </li>
-          <li><strong>ยังไม่รู้ว่า Gear ได้จากไหน</strong> และสุ่มได้ออปอะไรบ้าง ไฟล์เกมกับแพตช์โน้ตไม่บอก</li>
+          <li><strong>ดรอปจากมอนในหอนาฬิกา</strong> ผู้เล่นเจอในเกม แต่ยังไม่รู้ว่าตัวไหนดรอปบ้างและกี่เปอร์เซ็นต์</li>
+          <li><strong>ยังไม่รู้ว่าสุ่มได้ออปอะไรบ้าง</strong> ไฟล์เกมกับแพตช์โน้ตไม่บอก</li>
         </ul>
         <p className="guildp__src">ที่มา: ข้อความไอเทม Clock Tower Gear ในเกม</p>
       </section>
@@ -270,8 +274,8 @@ export default function ClockTowerHatsPage() {
       <Caveat label="เชื่อได้แค่ไหน">
         สูตรของ Februs <strong>เช็กในเกมแล้ว 2 พ.ย.</strong> ตรงกับไฟล์เกม · สูตรของ Hat Maker มาจากไฟล์เกม ยังไม่ได้เช็กในเกม ·
         ค่าหมวกจากข้อความไอเทมในเกม · มอนที่ดรอปเลือกตัวธรรมดาที่ดรอปมากสุดในฐานข้อมูลเรา ไม่นับมอนแชมเปียน ·
-        พิกัด Februs และ Thor&apos;s Dismantle Flame จากภาพในเกม · พิกัด Thor&apos;s Flame ตัวหลอมยังไม่รู้ ·
-        Clock Tower Gear สุ่มออปได้ตามที่ผู้เล่นเล่า ส่วนที่มาของ Gear ยังไม่รู้
+        พิกัด Februs, Thor&apos;s Dismantle Flame และ Thor&apos;s Flame จากภาพในเกม ·
+        Clock Tower Gear สุ่มออปได้และดรอปจากมอนหอนาฬิกาตามที่ผู้เล่นเห็นในเกม ยังไม่รู้ว่ามอนตัวไหน
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
