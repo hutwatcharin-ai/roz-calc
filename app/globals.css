@@ -1689,9 +1689,14 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   flex-direction: column;
   gap: 4px;
 }
-.statgrid__cell--link { text-decoration: none; background: var(--panel-2); }
-.statgrid__cell--link:hover { background: var(--panel); }
-.statgrid__cell--link .reward-value { color: var(--cyan); font-size: 14px; }
+/* The one cell that is a way out, not a number: an arcade button, so it reads
+   as something to press (owner, 3 Nov 2026: "make it stand out"). */
+.statgrid__cell--link { text-decoration: none; background: var(--yellow); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .25), 0 0 16px rgba(255, 229, 61, .35); transition: transform .12s, box-shadow .12s; }
+.statgrid__cell--link .reward-label { color: var(--yellow-ink); opacity: .75; }
+.statgrid__cell--link .reward-value { color: var(--yellow-ink); font: 700 16px var(--font-chakra), var(--font-sarabun), sans-serif; }
+.statgrid__cell--link:hover { transform: translateY(-2px); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .25), 0 0 24px rgba(255, 229, 61, .6); }
+.statgrid__cell--link:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .25); }
+.statgrid__cell--link:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 
 /* Mode tabs on the merged farm tool: three questions, one page. Each tab
    carries a line saying what it answers, because "AFK" and "เก็บเลเวล" alone
@@ -5037,8 +5042,10 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 }
 .holo__card[data-kind='weapon'] { --fk: var(--pink); }
 .holo__top { display: flex; justify-content: space-between; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: .08em; color: var(--fk); }
-.holo__win { display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(255, 255, 255, .15); background: radial-gradient(circle at 50% 40%, #3b2d8f, #0d0828 70%); }
-.holo__win img { width: 112px; height: 150px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .6)); }
+/* White, as in the game's own item window: many pictures carry a soft
+   shadow on that white, which looks wrong cut out (owner, 3 Nov 2026). */
+.holo__win { display: grid; place-items: center; border-radius: 8px; border: 2px solid rgba(255, 255, 255, .5); background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
+.holo__win img { width: 112px; height: 150px; object-fit: contain; }
 .holo__name { font: 700 14px/1.25 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--text); }
 .holo__slots { margin-inline-start: 4px; color: var(--cyan); }
 .holo__type { font: 700 10px var(--font-chakra), sans-serif; letter-spacing: .1em; color: var(--dim); text-transform: uppercase; }

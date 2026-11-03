@@ -5,7 +5,7 @@ The picture is the one the game's own item window shows: the client's
 collection illustration, texture/유저인터페이스/collection/<resource>.bmp,
 named by itemInfo_data.lub's identifiedResourceName. Only the rendered WebP
 goes into the repo, never the client file. Magenta is the client's "nothing
-here", made transparent as in scripts/build-costume-art.py.
+here" and becomes white, the card the picture sits on.
 
 Gear only (Armor and Weapon rows of our items table); costumes keep their
 fitting room and costume-art.
@@ -57,33 +57,18 @@ def gear_ids():
         offset += 1000
 
 
-def clear_background(img):
-    """Magenta anywhere, and the white card the picture sits on, become
-    transparent. The white is cleared only where it touches the edge (a flood
-    fill), so white inside the item -- a blade, a feather -- stays."""
+def clear_magenta(img):
+    """Magenta is the client's "nothing here"; it becomes white, the colour of
+    the card the picture is drawn on. The white card itself stays: many
+    pictures carry a soft shadow on it that looks wrong cut out (owner,
+    3 Nov 2026), so the page shows them on white too."""
     px = img.load()
-    w, h = img.size
-    for y in range(h):
-        for x in range(w):
+    for y in range(img.height):
+        for x in range(img.width):
             r, g, b, a = px[x, y]
             if r > 250 and g < 5 and b > 250:
-                px[x, y] = (0, 0, 0, 0)
-
-    def pale(p):
-        return p[3] == 0 or (p[0] >= 236 and p[1] >= 236 and p[2] >= 236)
-
-    seen = set()
-    stack = [(x, y) for x in range(w) for y in (0, h - 1)] + [(x, y) for y in range(h) for x in (0, w - 1)]
-    while stack:
-        x, y = stack.pop()
-        if (x, y) in seen or not (0 <= x < w and 0 <= y < h):
-            continue
-        seen.add((x, y))
-        if not pale(px[x, y]):
-            continue
-        px[x, y] = (0, 0, 0, 0)
-        stack += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
-    return img
+                px[x, y] = (255, 255, 255, 255)
+    return img.convert('RGB')
 
 
 def main():
@@ -102,7 +87,7 @@ def main():
         # sharing a resource share the file.
         key = next((k for k, v in items.items() if v == name), None)
         if key is None:
-            img = clear_background(Image.open(path).convert('RGBA'))
+            img = clear_magenta(Image.open(path).convert('RGBA'))
             img.save(os.path.join(OUT, f'{iid}.webp'), quality=90, method=6)
             made.add(iid)
         items[str(iid)] = name
