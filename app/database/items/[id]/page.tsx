@@ -22,6 +22,8 @@ import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import Link from 'next/link';
 import RecordVisit from '@/components/RecordVisit';
 import ItemIcon from '@/components/ItemIcon';
+import ItemHoloCard from '@/components/ItemHoloCard';
+import { itemArt } from '@/lib/item-art';
 // app/database/items/[id]/page.tsx
 import { supabaseRead } from '@/lib/supabase';
 import FeedbackButton from '@/components/FeedbackButton';
@@ -243,6 +245,15 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
           they scan a stat window in game, not as a sentence (competitor-gap
           note in memory, plan item 3). Tiles render only for stats the item
           actually has: a potion page shows prices, not a wall of dashes. */}
+      {/* Item window (owner, 3 Nov 2026): the picture card first, the name and
+          stat strip tight beside it. */}
+      <div className={itemArt(item.id) && !family ? 'gearhead' : undefined}>
+        {/* The collection picture as a plain card: everyday items do not get
+            the holo the gear pages have (owner, 3 Nov 2026). */}
+        {!family && itemArt(item.id) && (
+          <ItemHoloCard src={itemArt(item.id)!} name={item.name_en} kind="item" type={item.category} slots={item.slots ?? 0} level={null} plain />
+        )}
+      <div className="gearhead__info">
       <div className="archero">
         {/* flex: none -- in a flex row beside a long description the 64px icon
             was squeezed to about 30px on a phone (UX review, 11 Sep 2026). */}
@@ -271,7 +282,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         </div>
       </div>
 
-      <div className="statgrid" style={{ marginTop: 20 }}>
+      <div className="statgrid statgrid--window" style={{ marginTop: 20 }}>
         {item.slots !== null && item.slots !== undefined && (
           <div className="statgrid__cell">
             <span className="reward-label">Slot</span>
@@ -315,6 +326,8 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
             <span className="reward-value">คิดต้นทุน →</span>
           </Link>
         )}
+      </div>
+      </div>
       </div>
       {item.equippable_classes.length > 0 && (
         <p className="muted" style={{ marginTop: 10 }}>สวมใส่ได้: {item.equippable_classes.join(', ')}</p>

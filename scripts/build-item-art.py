@@ -7,8 +7,8 @@ named by itemInfo_data.lub's identifiedResourceName. Only the rendered WebP
 goes into the repo, never the client file. Magenta is the client's "nothing
 here" and becomes white, the card the picture sits on.
 
-Gear only (Armor and Weapon rows of our items table); costumes keep their
-fitting room and costume-art.
+Every row of our items table except cards, which have their own art
+(owner, 3 Nov 2026: gear first, then items and costumes).
 
 Sources, newest first: weekly GRF snapshots (D:/Data grf roz/weekly), the
 15 Oct collection extract, then the 22 Sep extraction.
@@ -44,11 +44,11 @@ def env():
     return out
 
 
-def gear_ids():
+def item_ids():
     e = env()
     ids, offset = [], 0
     while True:
-        url = f"{e['NEXT_PUBLIC_SUPABASE_URL']}/rest/v1/items?select=id&category=in.(Armor,Weapon)&order=id&offset={offset}&limit=1000"
+        url = f"{e['NEXT_PUBLIC_SUPABASE_URL']}/rest/v1/items?select=id&category=neq.Card&order=id&offset={offset}&limit=1000"
         req = urllib.request.Request(url, headers={'apikey': e['SUPABASE_SERVICE_ROLE_KEY'], 'Authorization': 'Bearer ' + e['SUPABASE_SERVICE_ROLE_KEY']})
         rows = json.load(urllib.request.urlopen(req))
         ids += [r['id'] for r in rows]
@@ -77,7 +77,7 @@ def main():
     res = {int(k): lub.to_py(v, enc='cp949').get('identifiedResourceName') for k, v in L.globals()[b'tbl_data'].items()}
     os.makedirs(OUT, exist_ok=True)
     items, made, none = {}, set(), 0
-    for iid in gear_ids():
+    for iid in item_ids():
         name = res.get(iid)
         path = next((os.path.join(d, f'{name}.bmp') for d in DIRS if name and os.path.exists(os.path.join(d, f'{name}.bmp'))), None)
         if not path:
@@ -96,7 +96,7 @@ def main():
         file_of.setdefault(name, sid)
     json.dump(
         {
-            '_meta': {'what': 'Gear id -> public/images/item-art/<file>.webp, the client collection illustration (scripts/build-item-art.py).', 'items': len(items), 'pictures': len(made), 'none': none},
+            '_meta': {'what': 'Item id -> public/images/item-art/<file>.webp, the client collection illustration (scripts/build-item-art.py).', 'items': len(items), 'pictures': len(made), 'none': none},
             'items': {sid: file_of[name] for sid, name in items.items()},
         },
         open(MAP, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'),

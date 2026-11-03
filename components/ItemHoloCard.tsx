@@ -1,8 +1,10 @@
 'use client';
-// The item's collection picture as a holo trading card on a gear page (owner,
-// 3 Nov 2026, design 1 of 5). The card tilts toward the pointer or finger and
-// a rainbow sheen follows it; with nothing touching it the sheen drifts by
-// itself, since a phone has no hover. Reduced motion keeps the card still.
+// The item's collection picture as a trading card (owner, 3 Nov 2026, design
+// 1 of 5). Gear and costumes get the holo: the card tilts toward the pointer
+// or finger and a rainbow sheen follows it, drifting by itself when nothing
+// touches it, since a phone has no hover. Everyday items (potions, loot) get
+// the plain card, still and without the sheen. Reduced motion keeps every
+// card still.
 import { useRef } from 'react';
 
 export default function ItemHoloCard({
@@ -12,19 +14,21 @@ export default function ItemHoloCard({
   type,
   slots,
   level,
+  plain = false,
 }: {
   src: string;
   name: string;
-  kind: 'weapon' | 'armor';
+  kind: 'weapon' | 'armor' | 'costume' | 'item';
   type: string | null;
   slots: number;
   level: number | null;
+  plain?: boolean;
 }) {
   const card = useRef<HTMLDivElement>(null);
 
   function move(e: React.PointerEvent) {
     const el = card.current;
-    if (!el) return;
+    if (!el || plain) return;
     const r = el.getBoundingClientRect();
     const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
     const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
@@ -45,9 +49,9 @@ export default function ItemHoloCard({
 
   return (
     <div className="holo" onPointerMove={move} onPointerLeave={leave} onPointerUp={leave}>
-      <div ref={card} className="holo__card" data-kind={kind}>
+      <div ref={card} className={plain ? 'holo__card holo__card--plain' : 'holo__card'} data-kind={kind}>
         <div className="holo__top">
-          <span>{kind === 'weapon' ? 'WEAPON' : 'ARMOR'}</span>
+          <span>{kind.toUpperCase()}</span>
           {level !== null && <span>Lv.{level}+</span>}
         </div>
         <div className="holo__win">
@@ -58,7 +62,7 @@ export default function ItemHoloCard({
           {slots > 0 && <span className="holo__slots">[{slots}]</span>}
         </div>
         {type && <div className="holo__type">{type}</div>}
-        <span className="holo__shine" aria-hidden="true" />
+        {!plain && <span className="holo__shine" aria-hidden="true" />}
       </div>
     </div>
   );

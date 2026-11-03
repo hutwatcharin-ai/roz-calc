@@ -148,6 +148,8 @@ export default function GearDetail({
     </div>
   ) : null;
 
+  const heroArt = itemArt(item.id);
+
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
       <nav className="crumbs" aria-label="ตำแหน่งหน้า">
@@ -191,6 +193,22 @@ export default function GearDetail({
       <div className={fitted ? 'costumetop__main' : 'gdflow'}>
       {/* Hero: sprite, name, and the chips that say what slot this fills --
           the question a player asks before any number on the page matters. */}
+      {/* Item window (owner, 3 Nov 2026): the collection card on the left,
+          name and stat strip stacked tight beside it, so the eye stays in one
+          place instead of sweeping from the name across to a card on the far
+          right. Without a picture the block is the old full-width hero. */}
+      <div className={heroArt ? 'gearhead' : undefined}>
+      {heroArt && (
+        <ItemHoloCard
+          src={heroArt}
+          name={item.name_en}
+          kind={section.recentKind === 'costume' ? 'costume' : item.category === 'Weapon' ? 'weapon' : 'armor'}
+          type={item.weapon_type}
+          slots={item.slots ?? 0}
+          level={item.required_level}
+        />
+      )}
+      <div className="gearhead__info">
       <div className="equiphero">
         {/* Arcade frame (1 Oct 2026), the item counterpart of the monster ring. */}
         <span className="itemframe" data-kind={section.recentKind === 'costume' ? 'costume' : item.category === 'Weapon' ? 'weapon' : 'armor'}>
@@ -253,28 +271,9 @@ export default function GearDetail({
             <span className="tag mono tag--faint">#{item.id}</span>
           </p>
         </div>
-        {(() => {
-          // The collection picture as a holo card (owner, 3 Nov 2026). Gear
-          // only: costumes have their fitting room.
-          const art = section.recentKind === 'costume' ? null : itemArt(item.id);
-          if (!art) return null;
-          return (
-            <ItemHoloCard
-              src={art}
-              name={item.name_en}
-              kind={item.category === 'Weapon' ? 'weapon' : 'armor'}
-              type={item.weapon_type}
-              slots={item.slots ?? 0}
-              level={item.required_level}
-            />
-          );
-        })()}
       </div>
 
-      <InSetBox itemId={item.id} />
-      <ItemGuideRefs itemId={item.id} />
-
-      <div className="statgrid" style={{ marginTop: 16 }}>
+      <div className="statgrid statgrid--window" style={{ marginTop: 14 }}>
         {item.atk !== null && (
           <div className="statgrid__cell">
             <span className="reward-label">ATK</span>
@@ -370,6 +369,11 @@ export default function GearDetail({
           </Link>
         )}
       </div>
+      </div>
+      </div>
+
+      <InSetBox itemId={item.id} />
+      <ItemGuideRefs itemId={item.id} />
       {fitted && twinCard}
       {fitted && dropsCard}
       </div>

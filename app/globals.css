@@ -1689,6 +1689,21 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   flex-direction: column;
   gap: 4px;
 }
+/* The stat strip on gear and item pages as the game's status window (owner,
+   3 Nov 2026: "make the whole strip stand out"): neon frame, cyan labels,
+   big yellow numbers. Only where a page asks for it (.statgrid--window). */
+.statgrid--window { gap: 0; background: #110a33; border: 2px solid var(--cyan); box-shadow: 0 0 18px rgba(61, 232, 255, .3); }
+/* Lines drawn by the cells, not the gap: a short last row then leaves dark
+   panel, not a block of frame colour. */
+.statgrid--window .statgrid__cell { background: linear-gradient(180deg, #1b1250, #110a33); padding: 14px 16px; box-shadow: inset -1px -1px 0 rgba(61, 232, 255, .28); }
+/* The refine button takes a whole row of its own under the numbers. */
+.statgrid--window .statgrid__cell--link { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--yellow); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .25); }
+.statgrid--window .statgrid__cell--link .reward-label { color: var(--yellow-ink); text-transform: none; letter-spacing: 0; font-size: 14px; opacity: 1; }
+.statgrid--window .statgrid__cell--link .reward-value { color: var(--yellow-ink); font-size: 18px; text-shadow: none; }
+.statgrid--window .reward-label { color: var(--cyan); font: 700 11px var(--font-chakra), var(--font-sarabun), sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.statgrid--window .reward-value { color: var(--yellow); font-size: 26px; font-weight: 700; text-shadow: 0 0 10px rgba(255, 229, 61, .35); }
+.statgrid--window .statgrid__note { color: var(--dim); }
+
 /* The one cell that is a way out, not a number: an arcade button, so it reads
    as something to press (owner, 3 Nov 2026: "make it stand out"). */
 .statgrid__cell--link { text-decoration: none; background: var(--yellow); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .25), 0 0 16px rgba(255, 229, 61, .35); transition: transform .12s, box-shadow .12s; }
@@ -5032,7 +5047,7 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 /* Holo trading card for a gear page's collection picture (owner, 3 Nov 2026,
    components/ItemHoloCard.tsx). Weapon frames pink, armour cyan, matching
    the kicker colours. The sheen drifts on its own until a pointer takes it. */
-.holo { margin-inline-start: auto; perspective: 800px; touch-action: pan-y; }
+.holo { perspective: 800px; touch-action: pan-y; }
 .holo__card {
   --fk: var(--cyan); position: relative; width: 190px; aspect-ratio: 63 / 88; padding: 10px; border-radius: 14px; overflow: hidden;
   display: grid; grid-template-rows: auto 1fr auto auto; gap: 6px;
@@ -5041,6 +5056,9 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .2s ease-out;
 }
 .holo__card[data-kind='weapon'] { --fk: var(--pink); }
+.holo__card[data-kind='costume'] { --fk: var(--yellow); }
+.holo__card[data-kind='item'] { --fk: rgba(169, 163, 214, .7); }
+.holo__card--plain { transform: none; background: linear-gradient(160deg, #1d1650, #120b33); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .06); }
 .holo__top { display: flex; justify-content: space-between; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: .08em; color: var(--fk); }
 /* White, as in the game's own item window: many pictures carry a soft
    shadow on that white, which looks wrong cut out (owner, 3 Nov 2026). */
@@ -5057,5 +5075,18 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 }
 .holo__card.is-live .holo__shine { animation: none; }
 @keyframes holo-drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
-@media (max-width: 640px) { .holo { margin-inline: auto; } }
+
 @media (prefers-reduced-motion: reduce) { .holo__card { transform: none; } .holo__shine { animation: none; } }
+.archero > .holo { flex: none; }
+
+/* Gear page item window: card, then name and stats beside it. */
+.gearhead { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: start; }
+.gearhead__info { min-width: 0; }
+/* auto-fit, not auto-fill: an empty track would show the frame colour
+   through the gap as a teal block. */
+.statgrid--window { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+.gearhead .statgrid--window { grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); }
+@media (max-width: 640px) {
+  .gearhead { grid-template-columns: 1fr; }
+  .gearhead > .holo { justify-self: center; }
+}
