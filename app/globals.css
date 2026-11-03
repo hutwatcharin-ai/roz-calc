@@ -5086,7 +5086,21 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
    through the gap as a teal block. */
 .statgrid--window { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
 .gearhead .statgrid--window { grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); }
+/* Phone (owner, 3 Nov 2026: the stacked card made the page too long): a
+   small card beside the name, the inventory icon dropped since the card shows
+   the same item, and the stat window across the full width under both. */
 @media (max-width: 640px) {
-  .gearhead { grid-template-columns: 1fr; }
-  .gearhead > .holo { justify-self: center; }
+  .gearhead { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; align-items: center; }
+  .gearhead__info { display: contents; }
+  .gearhead > .holo { grid-column: 1; grid-row: 1; }
+  .gearhead .equiphero, .gearhead .archero { grid-column: 2; grid-row: 1; }
+  .gearhead .itemframe { display: none; }
+  .gearhead .arcname { font-size: 22px; }
+  .gearhead .statgrid--window { grid-column: 1 / -1; margin-top: 2px !important; }
+  .gearhead .statgrid--window .statgrid__cell { padding: 10px 12px; }
+  .gearhead .statgrid--window .reward-value { font-size: 20px; }
+  .gearhead .holo__card { width: 104px; padding: 6px; gap: 4px; border-width: 2px; border-radius: 10px; }
+  .gearhead .holo__top { font-size: 8.5px; }
+  .gearhead .holo__win img { width: 72px; height: 96px; }
+  .gearhead .holo__name, .gearhead .holo__type { display: none; }
 }
