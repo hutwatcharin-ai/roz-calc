@@ -23,6 +23,8 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import RecordVisit from '@/components/RecordVisit';
 import ItemIcon from '@/components/ItemIcon';
+import ItemHoloCard from '@/components/ItemHoloCard';
+import { itemArt } from '@/lib/item-art';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import ItemShops from '@/components/ItemShops';
@@ -251,6 +253,22 @@ export default function GearDetail({
             <span className="tag mono tag--faint">#{item.id}</span>
           </p>
         </div>
+        {(() => {
+          // The collection picture as a holo card (owner, 3 Nov 2026). Gear
+          // only: costumes have their fitting room.
+          const art = section.recentKind === 'costume' ? null : itemArt(item.id);
+          if (!art) return null;
+          return (
+            <ItemHoloCard
+              src={art}
+              name={item.name_en}
+              kind={item.category === 'Weapon' ? 'weapon' : 'armor'}
+              type={item.weapon_type}
+              slots={item.slots ?? 0}
+              level={item.required_level}
+            />
+          );
+        })()}
       </div>
 
       <InSetBox itemId={item.id} />

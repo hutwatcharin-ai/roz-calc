@@ -5023,3 +5023,32 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 .mappick__option.is-active { background: rgba(61, 232, 255, .12); }
 .mappick__option.is-on .mappick__name { color: var(--cyan); }
 .mappick__option.is-on .mappick__thumb { border-color: var(--cyan); }
+
+/* Holo trading card for a gear page's collection picture (owner, 3 Nov 2026,
+   components/ItemHoloCard.tsx). Weapon frames pink, armour cyan, matching
+   the kicker colours. The sheen drifts on its own until a pointer takes it. */
+.holo { margin-inline-start: auto; perspective: 800px; touch-action: pan-y; }
+.holo__card {
+  --fk: var(--cyan); position: relative; width: 190px; aspect-ratio: 63 / 88; padding: 10px; border-radius: 14px; overflow: hidden;
+  display: grid; grid-template-rows: auto 1fr auto auto; gap: 6px;
+  background: linear-gradient(160deg, #2a1d6b, #120b33 55%, #2d0f3a);
+  border: 3px solid var(--fk); box-shadow: 0 0 22px color-mix(in srgb, var(--fk) 40%, transparent), inset 0 0 0 2px rgba(255, 255, 255, .08);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .2s ease-out;
+}
+.holo__card[data-kind='weapon'] { --fk: var(--pink); }
+.holo__top { display: flex; justify-content: space-between; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: .08em; color: var(--fk); }
+.holo__win { display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(255, 255, 255, .15); background: radial-gradient(circle at 50% 40%, #3b2d8f, #0d0828 70%); }
+.holo__win img { width: 112px; height: 150px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .6)); }
+.holo__name { font: 700 14px/1.25 var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--text); }
+.holo__slots { margin-inline-start: 4px; color: var(--cyan); }
+.holo__type { font: 700 10px var(--font-chakra), sans-serif; letter-spacing: .1em; color: var(--dim); text-transform: uppercase; }
+.holo__shine {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: color-dodge; opacity: .5;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 61, 154, .55) 35%, rgba(61, 232, 255, .55) 45%, rgba(255, 229, 61, .5) 55%, transparent 70%);
+  background-size: 250% 250%; background-position: var(--px, 0%) var(--py, 0%);
+  animation: holo-drift 6s ease-in-out infinite alternate;
+}
+.holo__card.is-live .holo__shine { animation: none; }
+@keyframes holo-drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+@media (max-width: 640px) { .holo { margin-inline: auto; } }
+@media (prefers-reduced-motion: reduce) { .holo__card { transform: none; } .holo__shine { animation: none; } }
