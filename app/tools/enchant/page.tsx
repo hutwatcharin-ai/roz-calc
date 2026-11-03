@@ -14,6 +14,8 @@ import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import AdSlot from '@/components/AdSlot';
 import EnchantCalculator from '@/components/EnchantCalculator';
+import EssencePicker from '@/components/EssencePicker';
+import essenceFile from '@/data/essences.json';
 import { memorialGear } from '@/lib/memorial-gear';
 
 export const revalidate = 86400;
@@ -54,6 +56,39 @@ export default function EnchantToolPage() {
       <EnchantCalculator outcomes={outcomes} zenyPerTry={ZENY_PER_TRY} />
 
       <AdSlot slot="inline" />
+
+      <section className="card" id="essence" style={{ marginTop: 14 }}>
+        <h2 className="section-title" style={{ marginTop: 0 }}>Essence ประจำอาชีพ (ออปอาชีพบนเสื้อ)</h2>
+        <ul className="guildp__steps" style={{ listStyle: 'disc', marginTop: 0 }}>
+          <li>
+            <strong>ได้จากการเอนแชนต์เสื้อดันที่ตี +9</strong> มีโอกาสเล็กน้อยได้ Essence แทนสเตตัสธรรมดา ·
+            ค่าเอนแชนต์ 100,000 Zeny เท่าเดิม ไม่แตก
+          </li>
+          <li>
+            <strong>Essence อาชีพ 1 ได้จากเสื้อชุด Subjugation (เลเวล 60)</strong> ที่ตี +9 · <strong>เช็กในเกมแล้ว</strong>
+          </li>
+          <li>
+            <strong>Essence อาชีพ 2 ได้จาก Second Job Officer</strong> ที่รับชุดดันเลเวล 70–99 (Izlude 2F, Ant Hell 1F, Sunken Ship) ·
+            ตามบทพูด NPC ในไฟล์เกม ยังไม่ได้เช็กในเกม
+          </li>
+          <li>
+            <strong>อาชีพ 2 มีให้เลือก 2 แบบ</strong> (I กับ II) ต่างสายสกิลกัน แต่ละแบบมี Lv.1 กับ Lv.2 · Lv.2 แรงกว่า
+            และหลายตัวได้โบนัสเพิ่มถ้าอาชีพตรงสาย
+          </li>
+          <li><strong>ส่วนใหญ่แรงขึ้นตามขั้นตีบวกเสื้อ</strong> ยิ่งตีเสื้อสูงยิ่งคุ้ม</li>
+        </ul>
+        <p className="muted" style={{ fontSize: 13 }}>
+          แตะอาชีพเพื่อดู Essence ทั้งหมด {essenceFile.essences.length} แบบ ·{' '}
+          <span className="ess__tag" style={{ background: 'rgba(255,61,154,.18)', color: 'var(--pink)' }}>อาชีพสายตรง</span> ได้เฉพาะสายอาชีพนั้น ·{' '}
+          <span className="ess__tag" style={{ background: 'rgba(255,229,61,.15)', color: 'var(--yellow)' }}>ตีบวกเสื้อ</span> เพิ่มตามขั้นตีบวกเสื้อ
+        </p>
+        <EssencePicker />
+        <p className="guildp__src">
+          ที่มา: ค่าของ Essence จากข้อความไอเทมภาษาไทยในเกม · Essence อาชีพ 1 จากชุด Subjugation เช็กในเกม 3 พ.ย. · Essence อาชีพ 2 จากบทพูดของ NPC ในไฟล์เกม ·
+          midgardhub บอกว่า NPC อยู่ที่ prt_in 135/35 และ 135/28 <strong>ยังไม่ได้เช็กในเกม</strong> ·
+          ยังไม่รู้ว่าโอกาสได้ Essence กี่เปอร์เซ็นต์ และได้ Lv.1 หรือ Lv.2 ตามอะไร
+        </p>
+      </section>
 
       <section className="card" style={{ marginTop: 14 }}>
         <h2 className="section-title" style={{ marginTop: 0 }}>อัตราที่ใช้คำนวณ</h2>

@@ -1,0 +1,1204 @@
+{
+ "_meta": {
+  "how": "python scripts/build-essences.py",
+  "source": "game client Thai item text (data/game-items.json)"
+ },
+ "classes": [
+  {
+   "key": "swordman",
+   "label": "Swordman",
+   "job": 1
+  },
+  {
+   "key": "mage",
+   "label": "Mage",
+   "job": 1
+  },
+  {
+   "key": "archer",
+   "label": "Archer",
+   "job": 1
+  },
+  {
+   "key": "acolyte",
+   "label": "Acolyte",
+   "job": 1
+  },
+  {
+   "key": "merchant",
+   "label": "Merchant",
+   "job": 1
+  },
+  {
+   "key": "thief",
+   "label": "Thief",
+   "job": 1
+  },
+  {
+   "key": "knight",
+   "label": "Knight",
+   "job": 2
+  },
+  {
+   "key": "crusader",
+   "label": "Crusader",
+   "job": 2
+  },
+  {
+   "key": "wizard",
+   "label": "Wizard",
+   "job": 2
+  },
+  {
+   "key": "sage",
+   "label": "Sage",
+   "job": 2
+  },
+  {
+   "key": "hunter",
+   "label": "Hunter",
+   "job": 2
+  },
+  {
+   "key": "bard",
+   "label": "Bard / Dancer",
+   "job": 2
+  },
+  {
+   "key": "priest",
+   "label": "Priest",
+   "job": 2
+  },
+  {
+   "key": "monk",
+   "label": "Monk",
+   "job": 2
+  },
+  {
+   "key": "blacksmith",
+   "label": "Blacksmith",
+   "job": 2
+  },
+  {
+   "key": "alchemist",
+   "label": "Alchemist",
+   "job": 2
+  },
+  {
+   "key": "assassin",
+   "label": "Assassin",
+   "job": 2
+  },
+  {
+   "key": "rogue",
+   "label": "Rogue",
+   "job": 2
+  }
+ ],
+ "essences": [
+  {
+   "id": 29387,
+   "name": "Swordman's Essence Lv.1",
+   "cls": "swordman",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29387.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "สกิล Magnum Break ใช้ SP ลดลง 10 เพิ่ม ASPD 1% ต่อ ทุก 2 เลเวลของสกิล Bash (ลดดีเลย์หลังการโจมตี 1%)"
+    }
+   ]
+  },
+  {
+   "id": 29393,
+   "name": "Swordman's Essence Lv.2",
+   "cls": "swordman",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29393.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด SP ที่ใช้ของสกิล Magnum Break 10 ทุก 1 เลเวลของสกิล Bash, เพิ่ม ASPD 1%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Magnum Break 15%"
+    }
+   ]
+  },
+  {
+   "id": 29390,
+   "name": "Mage's Essence Lv.1",
+   "cls": "mage",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29390.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "เพิ่ม Damage ของสกิล Cold Bolt, Fire Bolt และ Lightning Bolt 20% ทุก 2 เลเวลของสกิล Fire Wall ลดระยะเวลาร่ายแบบแปรผัน 1%"
+    }
+   ]
+  },
+  {
+   "id": 29396,
+   "name": "Mage's Essence Lv.2",
+   "cls": "mage",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29396.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "เพิ่ม Damage ของสกิล Cold Bolt, Fire Bolt และ Lightning Bolt 20% ทุก 1 เลเวลของสกิล Fire Wall, ลดระยะเวลา ร่ายแบบแปรผัน 1%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxSP +50"
+    }
+   ]
+  },
+  {
+   "id": 29392,
+   "name": "Archer's Essence Lv.1",
+   "cls": "archer",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29392.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด SP ที่ใช้ของสกิล Double Strafe ลง 5 ทุก 1 เลเวลของสกิล Vulture's Eye จะเพิ่ม Damage ของ Bow 1%"
+    }
+   ]
+  },
+  {
+   "id": 29398,
+   "name": "Archer's Essence Lv.2",
+   "cls": "archer",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29398.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด SP ที่ใช้ของสกิล Double Strafe 5 ทุก 1 เลเวลของสกิล Vulture's Eye, Bow ATK +2%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Arrow Shower 5%"
+    }
+   ]
+  },
+  {
+   "id": 29391,
+   "name": "Acolyte's Essence Lv.1",
+   "cls": "acolyte",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29391.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด SP ที่ใช้ของสกิล Heal, Increase AGI และ Blessing ลง 15% ทุก 2 เลเวลของสกิล Heal จะเพิ่มผลของสกิล Heal 1%"
+    }
+   ]
+  },
+  {
+   "id": 29397,
+   "name": "Acolyte's Essence Lv.2",
+   "cls": "acolyte",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29397.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด SP ที่ใช้ของสกิล Heal, Increase AGI และ Blessing 15% ทุก 1 เลเวลของสกิล Heal, เพิ่มผลของสกิล Heal 1%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxHP +70, MaxSP +30"
+    }
+   ]
+  },
+  {
+   "id": 29388,
+   "name": "Merchant's Essence Lv.1",
+   "cls": "merchant",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29388.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK +2 ต่อเลเวลของ สกิล Discount เพิ่ม ASPD 1% ต่อ ทุก 2 เลเวลของสกิล Overcharge (ลดดีเลย์หลังการโจมตี 1%)"
+    }
+   ]
+  },
+  {
+   "id": 29394,
+   "name": "Merchant's Essence Lv.2",
+   "cls": "merchant",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29394.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ทุก 1 เลเวลของสกิล Discount, ATK +2 ทุก 1 เลเวลของสกิล Overcharge, ASPD +1%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxHP +100"
+    }
+   ]
+  },
+  {
+   "id": 29389,
+   "name": "Thief's Essence Lv.1",
+   "cls": "thief",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29389.gif",
+   "parts": [
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Thief Class ATK +30 เพิ่ม ASPD 1% ต่อ ทุก 2 เลเวลของสกิล Steal"
+    }
+   ]
+  },
+  {
+   "id": 29395,
+   "name": "Thief's Essence Lv.2",
+   "cls": "thief",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29395.gif",
+   "parts": [
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Thief Class, ATK +30 ทุก 1 เลเวลของสกิล Steal, ASPD +1%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, FLEE +10"
+    }
+   ]
+  },
+  {
+   "id": 29399,
+   "name": "Knight's Essence Lv.1",
+   "cls": "knight",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29399.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "CRI เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Cavalier Mastery เพิ่ม Damage ของสกิล Bowling Bash 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29411,
+   "name": "Knight's Essence Lv.2",
+   "cls": "knight",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29411.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "CRI เพิ่มขึ้นเท่ากับ 5 เท่าของ เลเวลสกิล Cavalier Mastery เพิ่ม Damage ของสกิล Bowling Bash 20%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Swordman Class, Critical Damage +7%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29553,
+   "name": "Knight's Essence II Lv.1",
+   "cls": "knight",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29553.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "HIT เพิ่มขึ้นเท่ากับเลเวลสกิล Spear Mastery เพิ่ม Damage ของสกิล Pierce 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29566,
+   "name": "Knight's Essence II Lv.2",
+   "cls": "knight",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29566.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "HIT เพิ่มขึ้นเท่ากับ 2 เท่า ของเลเวลสกิล Spear Mastery เพิ่ม Damage ของสกิล Pierce 20% เพิ่ม Damage ของสกิล Brandish Spear 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29405,
+   "name": "Crusader Essence Lv.1",
+   "cls": "crusader",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29405.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Faith เพิ่ม Damage ของสกิล Holy Cross 15%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxHP +100"
+    }
+   ]
+  },
+  {
+   "id": 29417,
+   "name": "Crusader Essence Lv.2",
+   "cls": "crusader",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29417.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Faith เพิ่ม Damage ของสกิล Holy Cross 15%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Swordman Class, DEF +80"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxHP +100"
+    }
+   ]
+  },
+  {
+   "id": 29560,
+   "name": "Crusader Essence II Lv.1",
+   "cls": "crusader",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29560.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "MATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Faith เพิ่ม Damage ของสกิล Grand Cross 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, MATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29573,
+   "name": "Crusader Essence II Lv.2",
+   "cls": "crusader",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29573.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "MATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Faith เพิ่ม Damage ของสกิล Grand Cross 20%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Swordman Class, เพิ่มผลของ สกิล Heal ที่ได้รับ 15%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, MATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29402,
+   "name": "Wizard Essence Lv.1",
+   "cls": "wizard",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29402.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน เท่ากับ 3 เท่าของเลเวลสกิล Heaven's Drive เพิ่ม Damage ของสกิล Meteor Storm, Lord of Vermilion และ Storm Gust 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MATK +1%"
+    }
+   ]
+  },
+  {
+   "id": 29414,
+   "name": "Wizard Essence Lv.2",
+   "cls": "wizard",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29414.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน เท่ากับ 5 เท่าของเลเวลสกิล Heaven's Drive เพิ่ม Damage ของสกิล Meteor Storm, Lord of Vermilion และ Storm Gust 20%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Mage Class, FLEE +30"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MATK +1%"
+    }
+   ]
+  },
+  {
+   "id": 29556,
+   "name": "Wizard Essence II Lv.1",
+   "cls": "wizard",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29556.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน เท่ากับ 2 เท่าของเลเวลสกิล Lord of Vermilion เพิ่ม Damage ของสกิล Jupitel Thunder 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, MATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29569,
+   "name": "Wizard Essence II Lv.2",
+   "cls": "wizard",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29569.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน เท่ากับ 3 เท่าของเลเวลสกิล Lord of Vermilion เพิ่ม Damage ของสกิล Jupitel Thunder 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, MATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29408,
+   "name": "Sage's Essence Lv.1",
+   "cls": "sage",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29408.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "MATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Auto Spell เพิ่ม Damage ของสกิล Heaven's Drive และ Earth Spike 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29420,
+   "name": "Sage's Essence Lv.2",
+   "cls": "sage",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29420.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "MATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Auto Spell เพิ่ม Damage ของสกิล Heaven's Drive และ Earth Spike 20% ASPD +1 เพิ่ม Damage ทางเวทมนตร์ ธาตุ Earth 15%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29563,
+   "name": "Sage's Essence II Lv.1",
+   "cls": "sage",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29563.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "MATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Advanced Book เพิ่ม Damage ของสกิล Fire Bolt, Cold Bolt และ Lightning Bolt 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, MATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29576,
+   "name": "Sage's Essence II Lv.2",
+   "cls": "sage",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29576.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "MATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Advanced Book เพิ่ม Damage ของสกิล Fire Bolt, Cold Bolt และ Lightning Bolt 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, MATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29404,
+   "name": "Hunter Essence Lv.1",
+   "cls": "hunter",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29404.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ASPD เพิ่มขึ้นเท่ากับ 2 เท่า ของเลเวลสกิล Blitz Beat เพิ่ม Damage ของสกิล Blitz Beat 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, LUK +1"
+    }
+   ]
+  },
+  {
+   "id": 29416,
+   "name": "Hunter Essence Lv.2",
+   "cls": "hunter",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29416.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ASPD เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Blitz Beat เพิ่ม Damage ของสกิล Blitz Beat 80%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, LUK +1"
+    }
+   ]
+  },
+  {
+   "id": 29558,
+   "name": "Hunter Essence II Lv.1",
+   "cls": "hunter",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29558.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Beast Bane เพิ่ม Damage ของสกิล Double Strafe 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, Bow ATK +3%"
+    }
+   ]
+  },
+  {
+   "id": 29571,
+   "name": "Hunter Essence II Lv.2",
+   "cls": "hunter",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29571.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Beast Bane เพิ่ม Damage ของสกิล Double Strafe 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, Bow ATK +3%"
+    }
+   ]
+  },
+  {
+   "id": 29410,
+   "name": "Bard & Dancer's Essence Lv.1",
+   "cls": "bard",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29410.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด Cooldown ของสกิล Extemporaneousness เท่ากับเลเวลสกิล Musical Lesson และ Dancing Lesson ลด Cooldown ของสกิล Extemporaneousness 60 วินาที"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxSP +30"
+    }
+   ]
+  },
+  {
+   "id": 29422,
+   "name": "Bard & Dancer's Essence Lv.2",
+   "cls": "bard",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29422.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลด Cooldown ของสกิล Extemporaneousness เท่ากับ 3 เท่าของเลเวลสกิล Musical Lesson และ Dancing Lesson ลด Cooldown ของสกิล Extemporaneousness 60 วินาที"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Archer Class, เพิ่มอัตราการฟื้นฟู SP ตามธรรมชาติ 50%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, MaxSP +30"
+    }
+   ]
+  },
+  {
+   "id": 29565,
+   "name": "Bard & Dancer's Essence II Lv.1",
+   "cls": "bard",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29565.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Musical Lesson หรือ Dancing Lesson เพิ่ม Damage ของสกิล Musical Strike หรือ Dart Arrow 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ทางกายภาพ ของอาวุธระยะไกล 1%"
+    }
+   ]
+  },
+  {
+   "id": 29578,
+   "name": "Bard & Dancer's Essence II Lv.2",
+   "cls": "bard",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29578.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Musical Lesson หรือ Dancing Lesson เพิ่ม Damage ของสกิล Musical Strike หรือ Dart Arrow 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ทางกายภาพ ของอาวุธระยะไกล 1%"
+    }
+   ]
+  },
+  {
+   "id": 29403,
+   "name": "Priest Essence Lv.1",
+   "cls": "priest",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29403.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน เท่ากับ 3 เท่าของเลเวลสกิล Magnificat เพิ่ม Damage ของสกิล Magnus Exorcismus 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Magnus Exorcismus 5%"
+    }
+   ]
+  },
+  {
+   "id": 29415,
+   "name": "Priest Essence Lv.2",
+   "cls": "priest",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29415.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน เท่ากับ 5 เท่าของเลเวลสกิล Magnificat เพิ่ม Damage ของสกิล Magnus Exorcismus 20%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Acolyte Class, MATK +7%, เพิ่มผลของสกิล Heal 15%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Magnus Exorcismus 5%"
+    }
+   ]
+  },
+  {
+   "id": 29557,
+   "name": "Priest Essence II Lv.1",
+   "cls": "priest",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29557.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Mace Mastery Critical Damage +15%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29570,
+   "name": "Priest Essence II Lv.2",
+   "cls": "priest",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29570.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Mace Mastery Critical Damage +15%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Acolyte Class, เมื่อโจมตีทางกายภาพระยะใกล้ มีโอกาสสูงที่จะใช้สกิล Bash Lv.10 อัตโนมัติ"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29409,
+   "name": "Monk's Essence Lv.1",
+   "cls": "monk",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29409.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Demon Bane เพิ่ม Damage ของสกิล Chain Combo 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Combo Finish 5%"
+    }
+   ]
+  },
+  {
+   "id": 29421,
+   "name": "Monk's Essence Lv.2",
+   "cls": "monk",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29421.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Demon Bane เพิ่ม Damage ของสกิล Chain Combo 20%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Acolyte Class, เมื่อโจมตีทางกายภาพระยะใกล้ มีโอกาสสูงที่จะร่ายสกิล Vigor Condensation อัตโนมัติ"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Combo Finish 5%"
+    }
+   ]
+  },
+  {
+   "id": 29564,
+   "name": "Monk's Essence II Lv.1",
+   "cls": "monk",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29564.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน ของสกิล Infiltration เท่ากับ 3 เท่าของเลเวลสกิล Demon Bane เพิ่ม Damage ของสกิล Infiltration 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Infiltration 5%"
+    }
+   ]
+  },
+  {
+   "id": 29577,
+   "name": "Monk's Essence II Lv.2",
+   "cls": "monk",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29577.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ลดระยะเวลาร่ายแบบแปรผัน ของสกิล Infiltration เท่ากับ 5 เท่าของเลเวลสกิล Demon Bane เพิ่ม Damage ของสกิล Infiltration 20% เมื่อใช้สกิล Infiltration มีโอกาสสูงที่จะร่ายสกิล Vigor Condensation อัตโนมัติ"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, เพิ่ม Damage ของสกิล Infiltration 5%"
+    }
+   ]
+  },
+  {
+   "id": 29400,
+   "name": "Blacksmith's Essence Lv.1",
+   "cls": "blacksmith",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29400.gif",
+   "parts": [
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Merchant Class, CRI +10 CRI เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Maximize Power"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29412,
+   "name": "Blacksmith's Essence Lv.2",
+   "cls": "blacksmith",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29412.gif",
+   "parts": [
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Merchant Class, CRI +10 CRI เพิ่มขึ้นเท่ากับ 5 เท่าของ เลเวลสกิล Maximize Power ทุก 1 เลเวลของสกิล Weaponry Research, Critical Damage +1%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29554,
+   "name": "Blacksmith's Essence II Lv.1",
+   "cls": "blacksmith",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29554.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "LUK เพิ่มขึ้นเท่ากับเลเวลสกิล Skin Tempering DEX +10"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, LUK +1"
+    }
+   ]
+  },
+  {
+   "id": 29567,
+   "name": "Blacksmith's Essence II Lv.2",
+   "cls": "blacksmith",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29567.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "LUK เพิ่มขึ้นเท่ากับ 2 เท่า ของเลเวลสกิล Skin Tempering DEX +10"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Merchant Class, DEX +10, LUK +10"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, LUK +1"
+    }
+   ]
+  },
+  {
+   "id": 29406,
+   "name": "Alchemist Essence Lv.1",
+   "cls": "alchemist",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29406.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Learning Potion ASPD +10%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, CRI +5"
+    }
+   ]
+  },
+  {
+   "id": 29418,
+   "name": "Alchemist Essence Lv.2",
+   "cls": "alchemist",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29418.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Learning Potion ASPD +10%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Merchant Class, All Stats +7"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, CRI +5"
+    }
+   ]
+  },
+  {
+   "id": 29561,
+   "name": "Alchemist Essence II Lv.1",
+   "cls": "alchemist",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29561.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Pharmacy เพิ่ม Damage ของสกิล Mammonite 100%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29574,
+   "name": "Alchemist Essence II Lv.2",
+   "cls": "alchemist",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29574.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Pharmacy เพิ่ม Damage ของสกิล Mammonite 100%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Merchant Class, เมื่อโจมตีทางกายภาพระยะใกล้ มีโอกาสสูงที่จะใช้สกิล Bash Lv.10 อัตโนมัติ"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29401,
+   "name": "Assassin Essence Lv.1",
+   "cls": "assassin",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29401.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "CRI เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Grimtooth เพิ่ม Damage ของสกิล Sonic Blow 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, Critical Damage +1%"
+    }
+   ]
+  },
+  {
+   "id": 29413,
+   "name": "Assassin Essence Lv.2",
+   "cls": "assassin",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29413.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "CRI เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Grimtooth เพิ่ม Damage ของสกิล Sonic Blow 20%"
+    },
+    {
+     "kind": "class",
+     "text": "เมื่อสวมใส่โดย Thief Class, ASPD +7%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, Critical Damage +1%"
+    }
+   ]
+  },
+  {
+   "id": 29555,
+   "name": "Assassin Essence Ⅱ Lv.1",
+   "cls": "assassin",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29555.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "FLEE เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Lefthand Mastery เพิ่ม Damage ของสกิล Venom Splasher 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, ลดระยะเวลาร่ายแบบแปรผัน 3%"
+    }
+   ]
+  },
+  {
+   "id": 29568,
+   "name": "Assassin Essence II Lv.2",
+   "cls": "assassin",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29568.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "FLEE เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Lefthand Mastery เพิ่ม Damage ของสกิล Venom Splasher 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 2 ขั้น, ลดระยะเวลาร่ายแบบแปรผัน 3%"
+    }
+   ]
+  },
+  {
+   "id": 29407,
+   "name": "Rogue's Essence Lv.1",
+   "cls": "rogue",
+   "variant": "I",
+   "lv": 1,
+   "icon": "/images/items/29407.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 3 เท่า ของเลเวลสกิล Plagiarism เพิ่ม Damage ของสกิล Raid 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29419,
+   "name": "Rogue's Essence Lv.2",
+   "cls": "rogue",
+   "variant": "I",
+   "lv": 2,
+   "icon": "/images/items/29419.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "ATK เพิ่มขึ้นเท่ากับ 5 เท่า ของเลเวลสกิล Double Attack เพิ่ม Damage ของสกิล Raid 20% ลดปริมาณการใช้ SP ของสกิล Raid 15%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ASPD +1%"
+    }
+   ]
+  },
+  {
+   "id": 29562,
+   "name": "Rogue's Essence II Lv.1",
+   "cls": "rogue",
+   "variant": "II",
+   "lv": 1,
+   "icon": "/images/items/29562.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "HIT เพิ่มขึ้นเท่ากับเลเวลสกิล Snatcher เพิ่ม Damage ของสกิล Back Stab 20%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  },
+  {
+   "id": 29575,
+   "name": "Rogue's Essence II Lv.2",
+   "cls": "rogue",
+   "variant": "II",
+   "lv": 2,
+   "icon": "/images/items/29575.gif",
+   "parts": [
+    {
+     "kind": "base",
+     "text": "HIT เพิ่มขึ้นเท่ากับ 2 เท่า ของเลเวลสกิล Snatcher เพิ่ม Damage ของสกิล Back Stab 40%"
+    },
+    {
+     "kind": "refine",
+     "text": "ทุกการอัปเกรด Armor 1 ขั้น, ATK +2"
+    }
+   ]
+  }
+ ]
+}
