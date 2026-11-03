@@ -84,9 +84,7 @@ export default function EnchantToolPage() {
         </p>
         <EssencePicker />
         <p className="guildp__src">
-          ที่มา: ค่าของ Essence จากข้อความไอเทมภาษาไทยในเกม · Essence อาชีพ 1 จากชุด Subjugation เช็กในเกม 3 พ.ย. · Essence อาชีพ 2 จากบทพูดของ NPC ในไฟล์เกม ·
-          midgardhub บอกว่า NPC อยู่ที่ prt_in 135/35 และ 135/28 <strong>ยังไม่ได้เช็กในเกม</strong> ·
-          ยังไม่รู้ว่าโอกาสได้ Essence กี่เปอร์เซ็นต์ และได้ Lv.1 หรือ Lv.2 ตามอะไร
+          ที่มา: ค่าของ Essence จากข้อความไอเทมภาษาไทยในเกม · Essence อาชีพ 1 จากชุด Subjugation เช็กในเกม 3 พ.ย. · Essence อาชีพ 2 จากบทพูดของ NPC ในไฟล์เกม
         </p>
       </section>
 
