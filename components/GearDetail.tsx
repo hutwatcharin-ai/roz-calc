@@ -206,6 +206,7 @@ export default function GearDetail({
           type={item.weapon_type}
           slots={item.slots ?? 0}
           level={item.required_level}
+          icon={<ItemIcon iconUrl={item.icon_url} category={item.category} size={24} />}
         />
       )}
       <div className="gearhead__info">

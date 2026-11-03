@@ -251,7 +251,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         {/* The collection picture as a plain card: everyday items do not get
             the holo the gear pages have (owner, 3 Nov 2026). */}
         {!family && itemArt(item.id) && (
-          <ItemHoloCard src={itemArt(item.id)!} name={item.name_en} kind="item" type={item.category} slots={item.slots ?? 0} level={null} plain />
+          <ItemHoloCard src={itemArt(item.id)!} name={item.name_en} kind="item" type={item.category} slots={item.slots ?? 0} level={null} plain icon={<ItemIcon iconUrl={item.icon_url} category={item.category} size={24} />} />
         )}
       <div className="gearhead__info">
       <div className="archero">

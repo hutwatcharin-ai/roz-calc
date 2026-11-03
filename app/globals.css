@@ -5059,7 +5059,8 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
 .holo__card[data-kind='costume'] { --fk: var(--yellow); }
 .holo__card[data-kind='item'] { --fk: rgba(169, 163, 214, .7); }
 .holo__card--plain { transform: none; background: linear-gradient(160deg, #1d1650, #120b33); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .06); }
-.holo__top { display: flex; justify-content: space-between; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: .08em; color: var(--fk); }
+.holo__top { display: flex; justify-content: space-between; align-items: center; font: 700 11px var(--font-chakra), sans-serif; letter-spacing: .08em; color: var(--fk); }
+.holo__slot, .holo__foot { display: none; }
 /* White, as in the game's own item window: many pictures carry a soft
    shadow on that white, which looks wrong cut out (owner, 3 Nov 2026). */
 .holo__win { display: grid; place-items: center; border-radius: 8px; border: 2px solid rgba(255, 255, 255, .5); background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
@@ -5099,8 +5100,16 @@ a.warps__dot:hover, a.warps__dot:focus-visible { outline: 2px solid #fff; outlin
   .gearhead .statgrid--window { grid-column: 1 / -1; margin-top: 2px !important; }
   .gearhead .statgrid--window .statgrid__cell { padding: 10px 12px; }
   .gearhead .statgrid--window .reward-value { font-size: 20px; }
-  .gearhead .holo__card { width: 104px; padding: 6px; gap: 4px; border-width: 2px; border-radius: 10px; }
-  .gearhead .holo__top { font-size: 8.5px; }
+  /* Height from the content, not the card ratio: with the icon on top and
+     the kind band at the foot, a fixed 63:88 cut the band off. */
+  .gearhead .holo__card { width: 104px; aspect-ratio: auto; grid-template-rows: auto auto auto; padding: 6px 6px 7px; gap: 5px; border-width: 2px; border-radius: 10px; }
+  .gearhead .holo__top { font-size: 8.5px; min-height: 28px; }
+  /* Inventory icon in the top corner, like an inventory slot; the kind label
+     moves to a matching band at the foot so top and bottom weigh the same. */
+  .gearhead .holo__kind { display: none; }
+  .gearhead .holo__slot { display: inline-grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--fk); border-radius: 4px; background: #08051a; }
+  .gearhead .holo__slot img, .gearhead .holo__slot > * { width: 22px; height: 22px; }
+  .gearhead .holo__foot { display: block; padding-top: 5px; border-top: 1px solid color-mix(in srgb, var(--fk) 45%, transparent); text-align: center; font: 700 8.5px/1 var(--font-chakra), sans-serif; letter-spacing: .14em; color: var(--fk); }
   .gearhead .holo__win img { width: 72px; height: 96px; }
   .gearhead .holo__name, .gearhead .holo__type { display: none; }
 }

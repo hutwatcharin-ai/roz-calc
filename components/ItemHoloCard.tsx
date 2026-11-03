@@ -5,7 +5,7 @@
 // touches it, since a phone has no hover. Everyday items (potions, loot) get
 // the plain card, still and without the sheen. Reduced motion keeps every
 // card still.
-import { useRef } from 'react';
+import { useRef, type ReactNode } from 'react';
 
 export default function ItemHoloCard({
   src,
@@ -15,6 +15,7 @@ export default function ItemHoloCard({
   slots,
   level,
   plain = false,
+  icon = null,
 }: {
   src: string;
   name: string;
@@ -23,6 +24,9 @@ export default function ItemHoloCard({
   slots: number;
   level: number | null;
   plain?: boolean;
+  /** The inventory icon. On a phone it takes the card's top corner, where the
+   *  kind label was, so the page needs no second picture (owner, 3 Nov 2026). */
+  icon?: ReactNode;
 }) {
   const card = useRef<HTMLDivElement>(null);
 
@@ -51,7 +55,8 @@ export default function ItemHoloCard({
     <div className="holo" onPointerMove={move} onPointerLeave={leave} onPointerUp={leave}>
       <div ref={card} className={plain ? 'holo__card holo__card--plain' : 'holo__card'} data-kind={kind}>
         <div className="holo__top">
-          <span>{kind.toUpperCase()}</span>
+          {icon && <span className="holo__slot">{icon}</span>}
+          <span className="holo__kind">{kind.toUpperCase()}</span>
           {level !== null && <span>Lv.{level}+</span>}
         </div>
         <div className="holo__win">
@@ -62,6 +67,7 @@ export default function ItemHoloCard({
           {slots > 0 && <span className="holo__slots">[{slots}]</span>}
         </div>
         {type && <div className="holo__type">{type}</div>}
+        <div className="holo__foot" aria-hidden="true">{kind.toUpperCase()}</div>
         {!plain && <span className="holo__shine" aria-hidden="true" />}
       </div>
     </div>
