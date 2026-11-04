@@ -11,6 +11,11 @@ describe('costume enchant list', () => {
     expect(enchantListId('Snake Hat')).toBe(19730);
   });
 
+  it('matches through the Korean name where the English names differ', () => {
+    expect(enchantListId('Cone Hat')).toBe(20184); // Party Hat, 꼬깔모자
+    expect(enchantListId('White Beard')).toBe(19783); // Grampa Beard, 흰수염
+  });
+
   it('leaves names it cannot match for sure unlinked', () => {
     expect(enchantListId('Old Timey Mustache')).toBeNull();
   });

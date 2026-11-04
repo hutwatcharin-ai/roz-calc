@@ -187,10 +187,10 @@ export default function CostumeEnchantPage() {
       </section>
 
       {/* The official list of costumes that take a stone and go into the craft
-          box (owner, 4 Nov 2026). The website spells some names its own way
-          (Blue Pencil Bite is the game's Blue Pencil in Mouth); those were
-          matched by hand and show the game's name under it. Names no item
-          could be matched to for sure stay plain text, not a guessed link. */}
+          box (owner, 4 Nov 2026). The website uses the client's English item
+          names (iteminfo_enUS); the Thai client shows other names for some, so
+          those were matched through the Korean name and the Thai client's name
+          shows under it. A name no item matches for sure stays plain text. */}
       <section id="list" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
         <h2 className="section-title">
           คอสตูมที่ใช้ได้ <span className="muted" style={{ fontWeight: 400 }}>· {ENCHANTABLE.names.length} ชิ้น</span>
@@ -216,7 +216,7 @@ export default function CostumeEnchantPage() {
           </div>
           {UNMATCHED.length > 0 && (
             <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 13 }}>
-              อีก {UNMATCHED.length} ชิ้นที่ยังจับคู่กับไอเทมในเกมไม่ได้แน่ชัด: {UNMATCHED.join(' · ')}
+              ยังจับคู่ไม่ได้แน่ชัด: {UNMATCHED.join(' · ')} (อาจเป็น Charlie Beard หรือ Lincoln Beard ยังไม่ติดป้ายจนกว่าจะเช็กในเกม)
             </p>
           )}
         </details>
@@ -267,7 +267,7 @@ export default function CostumeEnchantPage() {
 
       <Caveat label="เชื่อได้แค่ไหน">
         ผลของหินทุกก้อน และกล่องไหนสุ่มได้หินอะไร มาจากคำอธิบายไอเทมในข้อมูลเกม · วิธีทำกล่องจากคอสตูม 5 ชิ้นกับค่า 10,000z มาจากไกด์ของ
-        midgardhub (อ่าน 30 ก.ย. 2026) และตรงกับคำอธิบายของ Craft Box B · รายชื่อคอสตูมที่ใช้ได้จากไกด์ Costume Enchant บน roz.mygnjoy.com (อ่าน 4 พ.ย. 2569) · ยังไม่มีข้อมูลโอกาสสุ่มได้แต่ละก้อน และค่าย้ายหิน
+        midgardhub (อ่าน 30 ก.ย. 2026) และตรงกับคำอธิบายของ Craft Box B · รายชื่อคอสตูมที่ใช้ได้จากไกด์ Costume Enchant บน roz.mygnjoy.com (อ่าน 4 พ.ย. 2569) จับคู่กับไอเทมด้วยชื่อภาษาอังกฤษและเกาหลีในไฟล์เกม · ยังไม่มีข้อมูลโอกาสสุ่มได้แต่ละก้อน และค่าย้ายหิน
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
