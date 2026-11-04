@@ -40,6 +40,7 @@ import ItemEffectsCard from '@/components/ItemEffectsCard';
 import { itemEffects, refineBonusAt } from '@/lib/item-effects';
 import { ELEMENT_TH } from '@/lib/monster-th';
 import { starTwinOf } from '@/lib/star-twins';
+import { isEnchantableCostume } from '@/lib/costume-enchant';
 import type { GearExtras } from '@/lib/gear-detail';
 
 export const CATEGORY_LABELS: Record<string, string> = {
@@ -266,6 +267,18 @@ export default function GearDetail({
               </p>
             );
           })()}
+          {/* Owner, 4 Nov 2026: say on the costume itself when it is on the
+              official enchant list, so a player knows not to sell it. */}
+          {section.recentKind === 'costume' && isEnchantableCostume(item.id) && (
+            <p className="startwin">
+              <span className="startwin__star" aria-hidden="true">✦</span>{' '}
+              <span>
+                ชิ้นนี้<strong>ใส่หินเอนแชนต์ได้</strong> และใช้แลก <Link href="/guides/costume-enchant">กล่องหินเอนแชนต์</Link> ได้
+                {' '}(คอสตูม 5 ชิ้น + 10,000z ได้กล่อง 1 ใบ · ต้องเป็นชิ้นที่ยังไม่ผูกตัว) ·{' '}
+                <Link href="/guides/costume-enchant#list">รายชื่อทางการ</Link>
+              </span>
+            </p>
+          )}
           <p className="equiphero__chips">
             {item.weapon_level !== null && <span className="tag">Weapon Lv {item.weapon_level}</span>}
             {item.equippable_classes.length > 0 && <span className="tag">ใส่ได้: {item.equippable_classes.join(', ')}</span>}

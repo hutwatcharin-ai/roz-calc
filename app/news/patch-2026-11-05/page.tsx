@@ -103,6 +103,7 @@ export default function Patch20261105() {
               ชิ้นที่ไม่อยู่ในรายการใช้ไม่ได้
             </p>
             <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
+              หน้าคอสตูมทุกชิ้นในรายการขึ้นป้าย &ldquo;ใส่หินเอนแชนต์ได้&rdquo; แล้ว ·{' '}
               <Link href="/guides/costume-enchant#list">ดูรายชื่อทั้งหมด</Link> · หินแต่ละช่องให้อะไร ดูได้ที่{' '}
               <Link href="/guides/costume-enchant">หินเอนแชนต์คอสตูม</Link>
             </p>

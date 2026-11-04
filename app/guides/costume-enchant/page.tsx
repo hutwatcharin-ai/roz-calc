@@ -24,6 +24,8 @@ import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import NaviCopy from '@/components/NaviCopy';
 import ENCHANTABLE from '@/data/costume-enchant-list.json';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 export const metadata: Metadata = {
   title: 'หินเอนแชนต์คอสตูม Ragnarok Zero — ช่องไหนใส่หินอะไร ได้อะไร',
@@ -125,6 +127,14 @@ const SETS = [
 
 const total = SLOTS.reduce((n, s) => n + s.stones.length, 0);
 
+const LIST = ENCHANTABLE as { names: string[]; ids: Record<string, number | null>; game: Record<string, string> };
+const LISTED = LIST.names
+  .filter((name) => LIST.ids[name])
+  .map((name) => ({ name, id: LIST.ids[name] as number, game: LIST.game[name] ?? null }));
+const UNMATCHED = LIST.names.filter((name) => !LIST.ids[name]);
+// A few costumes have no inventory icon in public/images/items yet.
+const HAS_ICON = new Set(LISTED.map((c) => c.id).filter((id) => existsSync(join(process.cwd(), 'public/images/items', `${id}.gif`))));
+
 function Icon({ id }: { id: number }) {
   return <img src={`/images/items/${id}.gif`} alt="" width={24} height={24} style={{ imageRendering: 'pixelated' }} loading="lazy" />;
 }
@@ -177,31 +187,38 @@ export default function CostumeEnchantPage() {
       </section>
 
       {/* The official list of costumes that take a stone and go into the craft
-          box. Its spelling is the website's, not the client's (Coiled Snake
-          Hat is the client's Snake Hat), so the names stay plain text rather
-          than guessed links. */}
+          box (owner, 4 Nov 2026). The website spells some names its own way
+          (Blue Pencil Bite is the game's Blue Pencil in Mouth); those were
+          matched by hand and show the game's name under it. Names no item
+          could be matched to for sure stay plain text, not a guessed link. */}
       <section id="list" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
         <h2 className="section-title">
           คอสตูมที่ใช้ได้ <span className="muted" style={{ fontWeight: 400 }}>· {ENCHANTABLE.names.length} ชิ้น</span>
         </h2>
         <p className="muted" style={{ marginTop: 0, fontSize: 13.5 }}>
-          ใส่หินได้ และใช้ทำกล่องหินได้ เฉพาะคอสตูมในรายการนี้ · รายการใหม่มีผลหลังปิดปรับปรุง 5 พ.ย. 2569 ·
-          ชื่อตามเว็บทางการ บางชิ้นชื่อในเกมต่างไปเล็กน้อย
+          ใส่หินได้ และใช้ทำกล่องหินได้ เฉพาะคอสตูมในรายการนี้ · รายการอัปเดตตามประกาศปิดปรับปรุง 5 พ.ย. 2569 ·
+          ชื่อตามเว็บทางการ ถ้าชื่อในเกมต่างไป เขียนไว้ใต้ชื่อ · ทำกล่องต้องใช้ชิ้นที่ยังไม่ผูกตัว
         </p>
         <details>
-          <summary style={{ cursor: 'pointer', color: 'var(--cyan)', fontWeight: 600 }}>ดูรายชื่อทั้งหมด</summary>
-          <ul
-            style={{
-              columns: '14em',
-              columnGap: 24,
-              margin: '10px 0 0',
-              paddingLeft: 18,
-              fontSize: 14,
-              lineHeight: 1.7,
-            }}
-          >
-            {ENCHANTABLE.names.map((n) => <li key={n}>{n}</li>)}
-          </ul>
+          <summary style={{ cursor: 'pointer', color: 'var(--cyan)', fontWeight: 600 }}>
+            ดูรายชื่อทั้งหมด ({LISTED.length} ชิ้นกดดูหน้าคอสตูมได้)
+          </summary>
+          <div className="cstones" style={{ marginTop: 10, gridTemplateColumns: 'repeat(auto-fill, minmax(min(170px, 46%), 1fr))' }}>
+            {LISTED.map(({ name, id, game }) => (
+              <Link key={name} className="cstone" href={`/database/costumes/${id}`}>
+                <span className="cstone__icon">{HAS_ICON.has(id) && <Icon id={id} />}</span>
+                <span className="cstone__body">
+                  <strong>{name}</strong>
+                  {game && <small>ในเกม: {game}</small>}
+                </span>
+              </Link>
+            ))}
+          </div>
+          {UNMATCHED.length > 0 && (
+            <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 13 }}>
+              อีก {UNMATCHED.length} ชิ้นที่ยังจับคู่กับไอเทมในเกมไม่ได้แน่ชัด: {UNMATCHED.join(' · ')}
+            </p>
+          )}
         </details>
       </section>
 
