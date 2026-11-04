@@ -94,7 +94,7 @@
       "kind": "official",
       "urgent": false,
       "at": "2026-10-29T05:40:11.871000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1565239336419467274",
@@ -103,7 +103,7 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-10-29T05:42:18.543000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1565258054818078794",
@@ -122,7 +122,7 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-11-03T08:56:18.017000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1567413209026265091",
@@ -131,7 +131,7 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-11-04T05:40:30.161000+00:00",
-      "done": false
+      "done": true
     }
   ]
 }
