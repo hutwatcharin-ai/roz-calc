@@ -64,7 +64,7 @@ export default function ItemShops({ itemId }: { itemId: number }) {
         ))}
       </ul>
       {rest.length > 0 && (
-        <details className="shopmore">
+        <details className="shopmore fold">
           <summary>ดูอีก {rest.length} ร้าน</summary>
           <ul className="shoplist">
             {rest.map((shop) => (

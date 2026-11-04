@@ -1266,7 +1266,7 @@ export default function BuildSimulator({ initial, sharedId }: {
               </>
             )}
             {result.skipped.length > 0 && (
-              <details className="buildsim__details">
+              <details className="buildsim__details fold">
                 <summary>ผลที่ยังไม่นับ ({result.skipped.length})</summary>
                 <ul className="buildsim__fx">
                   {result.skipped.map((l, i) => <li key={i}><b>{l.from}</b> {l.text} <small className="muted">— {l.why}</small></li>)}
@@ -1274,7 +1274,7 @@ export default function BuildSimulator({ initial, sharedId }: {
               </details>
             )}
             {result.counted.length > 0 ? (
-              <details className="buildsim__details">
+              <details className="buildsim__details fold">
                 <summary>ที่มาของตัวเลข ({result.counted.length})</summary>
                 <ul className="buildsim__fx">
                   {result.counted.map((l, i) => <li key={i}><b>{l.from}</b> {l.text}</li>)}

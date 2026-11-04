@@ -23,6 +23,7 @@ import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import NaviCopy from '@/components/NaviCopy';
+import OpenOnHash from '@/components/OpenOnHash';
 import ENCHANTABLE from '@/data/costume-enchant-list.json';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -199,11 +200,12 @@ export default function CostumeEnchantPage() {
           ใส่หินได้ และใช้ทำกล่องหินได้ เฉพาะคอสตูมในรายการนี้ · รายการอัปเดตตามประกาศปิดปรับปรุง 5 พ.ย. 2569 ·
           ชื่อตามเว็บทางการ ถ้าชื่อในเกมต่างไป เขียนไว้ใต้ชื่อ · ทำกล่องต้องใช้ชิ้นที่ยังไม่ผูกตัว
         </p>
+        <OpenOnHash />
         <details className="disclose">
           <summary>
             รายชื่อทั้งหมด <span className="disclose__count">{LIST.names.length} ชิ้น</span>
           </summary>
-          <div className="disclose__body">
+          <div className="disclose__body" id="list-names">
           <div className="cstones" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(170px, 46%), 1fr))' }}>
             {LISTED.map(({ name, id, game }) => (
               <Link key={name} className="cstone" href={`/database/costumes/${id}`}>

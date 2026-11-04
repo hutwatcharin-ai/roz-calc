@@ -102,9 +102,17 @@ export default function Patch20261105() {
               รายชื่อคอสตูมที่ใส่หินเอนแชนต์ได้ และใช้ทำ Enchant Stone Craft Box ได้ อัปเดตเป็น <b>{ENCHANTABLE.names.length} ชิ้น</b> ·
               ชิ้นที่ไม่อยู่ในรายการใช้ไม่ได้
             </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              หน้าคอสตูมทุกชิ้นในรายการขึ้นป้าย &ldquo;ใส่หินเอนแชนต์ได้&rdquo; แล้ว ·{' '}
-              <Link href="/guides/costume-enchant#list">ดูรายชื่อทั้งหมด</Link> · หินแต่ละช่องให้อะไร ดูได้ที่{' '}
+            {/* The one thing to do on this card (owner, 4 Nov 2026: make it
+                stand out, a text link was easy to miss). */}
+            <Link
+              href="/guides/costume-enchant#list-names"
+              className="btn"
+              style={{ display: 'inline-block', marginTop: 12, padding: '9px 18px', fontSize: 15, fontWeight: 700, textDecoration: 'none', background: 'var(--yellow)', color: 'var(--yellow-ink)' }}
+            >
+              ดูรายชื่อคอสตูม {ENCHANTABLE.names.length} ชิ้น ▶
+            </Link>
+            <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
+              หน้าคอสตูมทุกชิ้นในรายการขึ้นป้าย &ldquo;ใส่หินเอนแชนต์ได้&rdquo; แล้ว · หินแต่ละช่องให้อะไร ดูได้ที่{' '}
               <Link href="/guides/costume-enchant">หินเอนแชนต์คอสตูม</Link>
             </p>
           </div>

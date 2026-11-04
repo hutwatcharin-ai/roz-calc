@@ -120,7 +120,7 @@ export default async function PetsDatabasePage({ searchParams }: { searchParams:
           <li>
             ซื้อ <strong>Taming Ring</strong> ราคา {TAMING_RING_PRICE.toLocaleString('en-US')} Zeny จาก Taming Merchant
             แล้วสวมไว้
-            <details style={{ marginTop: 6 }}>
+            <details className="fold" style={{ marginTop: 6 }}>
               <summary>พิกัดร้านแหวนทั้ง {rozglobalGuides.qpetTowns.length} เมือง</summary>
               <p className="muted" style={{ margin: '6px 0 8px', fontSize: 13 }}>
                 ก๊อป <code className="mono">/navi</code> ไปวางในแชต เกมจะขึ้นเส้นนำทางให้ เดินตามเส้นเอง ตัวละครไม่ได้เดินให้

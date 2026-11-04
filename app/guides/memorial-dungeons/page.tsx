@@ -326,7 +326,7 @@ export default async function MemorialDungeonsPage() {
               </div>
             )}
 
-            <details className="mdmobs">
+            <details className="mdmobs fold">
               <summary>มอนในดันทั้งหมด {d.monsters.length} ตัว</summary>
               <div className="recipe__scroll">
                 <table className="data-table recipe">

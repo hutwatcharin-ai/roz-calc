@@ -275,7 +275,7 @@ export default function GearDetail({
               <span>
                 ชิ้นนี้<strong>ใส่หินเอนแชนต์ได้</strong> และใช้แลก <Link href="/guides/costume-enchant">กล่องหินเอนแชนต์</Link> ได้
                 {' '}(คอสตูม 5 ชิ้น + 10,000z ได้กล่อง 1 ใบ · ต้องเป็นชิ้นที่ยังไม่ผูกตัว) ·{' '}
-                <Link href="/guides/costume-enchant#list">รายชื่อทางการ</Link>
+                <Link href="/guides/costume-enchant#list-names">รายชื่อทางการ</Link>
               </span>
             </p>
           )}

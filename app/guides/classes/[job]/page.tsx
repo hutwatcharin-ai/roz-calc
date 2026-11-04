@@ -404,7 +404,7 @@ function BuildSection({ build, look, plans, folded = false }: { build: ClassBuil
       )}
 
       {build.plan && plans && (
-        <details className="cguide__plandetails">
+        <details className="cguide__plandetails fold">
           <summary>
             ดูแผนแต้มครบทุกสกิล <span className="mono muted">({planSummary(plans)})</span>
           </summary>
