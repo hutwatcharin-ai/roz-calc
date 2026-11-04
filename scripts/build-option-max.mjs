@@ -133,12 +133,56 @@ for (const [file, type, source, kinds] of MAP) {
 }
 for (const [en, lo, hi] of GEAR) add('clock', en, 'gear', 1, lo, hi);
 
+// Sections, in the order a player reads gear: stats, attack, damage by
+// element, by race or size, defence piercing, then defence.
+const GROUPS = [
+  ['stat', 'สเตตัส'],
+  ['attack', 'โจมตี'],
+  ['element', 'ดาเมจตามธาตุ'],
+  ['target', 'ดาเมจตามเผ่า ขนาด บอส'],
+  ['pierce', 'เจาะเกราะ'],
+  ['defence', 'ป้องกัน'],
+];
+
+function group(en) {
+  if (/^(STR|AGI|VIT|INT|DEX|LUK|MaxHP|MaxSP)( |$)/.test(en)) return 'stat';
+  if (/^Ignore /.test(en)) return 'pierce';
+  if (/Damage to (Neutral|Water|Earth|Fire|Wind|Poison|Holy|Shadow|Ghost|Undead) enemies/.test(en)) return 'element';
+  if (/Damage to .* (monsters|targets)|Damage to (Normal|Boss) enemies/.test(en)) return 'target';
+  if (/^(DEF|MDEF|FLEE)$|Recovery|Received Healing|reduction \(%\)$|resistance|Resistance/.test(en) && !/Casting|Consumption/.test(en)) return 'defence';
+  return 'attack';
+}
+
+// Ten element rows or ten race rows with the same numbers read as one row
+// with ten names on it, which is how a player thinks of them anyway.
+function fold(list) {
+  const out = [];
+  const byKey = new Map();
+  for (const r of list) {
+    const m = r.th.match(/^(.*(?:ธาตุ|เผ่า|ขนาด)) ?(\S+) %$/);
+    if (!m) { out.push({ ...r, group: group(r.en) }); continue; }
+    const key = m[1] + '|' + JSON.stringify(r.cells);
+    let row = byKey.get(key);
+    if (!row) {
+      row = { en: r.en, th: m[1] + ' %', members: [], cells: r.cells, group: group(r.en) };
+      byKey.set(key, row);
+      out.push(row);
+    }
+    row.members.push(m[2]);
+    if (r.flag) (row.flags ??= []).push(m[2] + ': ' + r.flag);
+  }
+  for (const r of out) if (r.members && r.members.length === 1) { r.th = r.th.replace(/ %$/, ' ' + r.members[0] + ' %'); delete r.members; }
+  const order = Object.fromEntries(GROUPS.map(([g], i) => [g, i]));
+  return out.sort((a, b) => order[a.group] - order[b.group]);
+}
+
 const out = {
   _meta: {
     how: 'node scripts/build-option-max.mjs',
     sources: 'rozerodb.com/tools/affixes (7 Oct 2026); Clock Tower Gear from the game text via roztoday (4 Nov 2026)',
   },
   sources: SOURCES,
+  groups: GROUPS.map(([key, label]) => ({ key, label })),
   kinds: KINDS.map((k) => {
     const list = [...rows[k.key].values()];
     for (const r of list) {
@@ -147,7 +191,7 @@ const out = {
       for (const c of Object.values(r.cells)) c.slots.sort();
     }
     const used = SOURCES.map((s) => s.key).filter((s) => list.some((r) => r.cells[s]));
-    return { ...k, sources: used, rows: list };
+    return { ...k, sources: used, rows: fold(list) };
   }),
 };
 writeFileSync(OUT, JSON.stringify(out) + '\n');

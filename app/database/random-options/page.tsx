@@ -26,10 +26,14 @@ export const metadata: Metadata = {
 };
 
 interface Cell { min: number; max: number; slots: number[] }
-interface Row { en: string; th: string; cells: Record<string, Cell>; flag?: string }
+interface Row { en: string; th: string; group: string; members?: string[]; flags?: string[]; flag?: string; cells: Record<string, Cell> }
 interface Kind { key: string; label: string; sources: string[]; rows: Row[] }
 
-const { sources, kinds } = file as unknown as { sources: { key: string; label: string }[]; kinds: Kind[] };
+const { sources, groups, kinds } = file as unknown as {
+  sources: { key: string; label: string }[];
+  groups: { key: string; label: string }[];
+  kinds: Kind[];
+};
 const SOURCE_LABEL = Object.fromEntries(sources.map((s) => [s.key, s.label]));
 
 // How many option lines a piece can carry, by where it came from. Weapon
@@ -49,44 +53,77 @@ function range(c: Cell) {
   return c.min === c.max ? `${c.min}` : `${c.min}–${c.max}`;
 }
 
-function KindTable({ kind }: { kind: Kind }) {
-  const many = kind.sources.length > 1;
+// One option: its name (and the elements or races it covers), then one
+// power bar per source, scaled to the best of them so the longest bar is the
+// place to farm it. A bar list instead of a grid of columns: it reads top to
+// bottom on a phone with nothing to scroll sideways.
+function Meter({ row, kind }: { row: Row; kind: Kind }) {
+  const have = kind.sources.filter((s) => row.cells[s]);
+  const top = Math.max(...have.map((s) => row.cells[s].max));
+  const solo = kind.sources.length === 1;
   return (
-    <div className="optmax__scroll">
-      <table className="optmax__table">
-        <thead>
-          <tr>
-            <th scope="col">ออปชัน</th>
-            {kind.sources.map((s) => (
-              <th key={s} scope="col" className="optmax__src">{SOURCE_LABEL[s]}</th>
+    <li className="om">
+      <div className="om__name">
+        <span>{row.th}</span>
+        {row.members && (
+          <span className="om__members">
+            {row.members.map((m) => (
+              <span key={m} className={`om__chip om__chip--${m.toLowerCase().replace(/[^a-z]/g, '')}`}>{m}</span>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {kind.rows.map((r) => {
-            const top = Math.max(...Object.values(r.cells).map((c) => c.max));
-            return (
-              <tr key={r.en}>
-                <th scope="row">
-                  {r.th}
-                  {r.flag && <span className="optmax__flag" title={r.flag}>*</span>}
-                </th>
-                {kind.sources.map((s) => {
-                  const c = r.cells[s];
-                  if (!c) return <td key={s} className="optmax__none">–</td>;
-                  return (
-                    <td key={s} className={many && c.max === top ? 'optmax__best' : undefined}>
-                      <b>+{c.max}</b>
-                      <small>{range(c)} · บรรทัด {c.slots.join(',')}</small>
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+          </span>
+        )}
+        {(row.flags || row.flag) && <span className="om__flag" title={(row.flags ?? [row.flag]).join(' · ')}>*</span>}
+      </div>
+      <div className="om__bars">
+        {have.map((s) => {
+          const c = row.cells[s];
+          const best = !solo && c.max === top && have.some((o) => row.cells[o].max < top);
+          return (
+            <div key={s} className={`om__bar om__bar--${s}${best ? ' is-best' : ''}`}>
+              {!solo && <span className="om__src">{SOURCE_LABEL[s]}</span>}
+              <span className="om__track" aria-hidden="true">
+                <i style={{ width: `${Math.max(6, (c.max / top) * 100)}%` }} />
+              </span>
+              <b className="om__max">+{c.max}</b>
+              <small className="om__range">
+                {range(c)} · บ.{c.slots.join(',')}
+              </small>
+            </div>
+          );
+        })}
+      </div>
+    </li>
+  );
+}
+
+function KindMeters({ kind }: { kind: Kind }) {
+  return (
+    <>
+      {kind.sources.length > 1 && (
+        <p className="om-legend">
+          {kind.sources.map((s) => (
+            <span key={s} className={`om-legend__item om__bar--${s}`}>
+              <i /> {SOURCE_LABEL[s]}
+            </span>
+          ))}
+          <span className="om-legend__item om-legend__best">★ ที่ให้ค่าสูงกว่าที่อื่น</span>
+        </p>
+      )}
+      {groups.map((g) => {
+        const rows = kind.rows.filter((r) => r.group === g.key);
+        if (rows.length === 0) return null;
+        return (
+          <div key={g.key} className="om-group">
+            <h3 className="om-group__title">
+              <span>▶</span> {g.label}
+            </h3>
+            <ul className="om-list">
+              {rows.map((r) => <Meter key={r.en} row={r} kind={kind} />)}
+            </ul>
+          </div>
+        );
+      })}
+    </>
   );
 }
 
@@ -97,7 +134,7 @@ export default function RandomOptionsPage() {
       .join(',') +
     `,.optmax:not(:has(.optmax__panel:target)) a[href="#k-${kinds[0].key}"]` +
     '{border-color:var(--yellow);color:var(--yellow);background:#221a05;box-shadow:0 0 12px rgba(255,229,61,.4)}';
-  const flagged = kinds.flatMap((k) => k.rows.filter((r) => r.flag).map((r) => ({ kind: k.label, row: r })));
+  const flagged = kinds.flatMap((k) => k.rows.flatMap((r) => (r.flags ?? []).map((f) => ({ kind: k.label, row: r, f }))));
 
   return (
     <main className="shell" style={{ paddingBlock: 32 }}>
@@ -110,7 +147,7 @@ export default function RandomOptionsPage() {
       />
       <PageHeader
         title="ออปชันสุ่ม — สุ่มได้สูงสุดเท่าไร"
-        lead="เลือกประเภทของ แล้วดูค่าสูงสุดของแต่ละออปชัน แยกตามที่มาของของชิ้นนั้น ช่องสีเหลืองคือที่มาที่ให้ค่าสูงที่สุด"
+        lead="เลือกประเภทของ แล้วดูค่าสูงสุดของแต่ละออปชัน แยกตามที่มาของของชิ้นนั้น แถบยาวสุดที่มีดาวคือที่ที่ควรไปหา"
       />
 
       <div className="optmax">
@@ -126,7 +163,7 @@ export default function RandomOptionsPage() {
             <section key={k.key} id={`k-${k.key}`} className="optmax__panel" aria-label={`ออปชันสุ่ม ${k.label}`}>
               <h2 className="optmax__title">{k.label}</h2>
               <p className="optmax__note">{SLOTS_NOTE[k.key]}</p>
-              <KindTable kind={k} />
+              <KindMeters kind={k} />
             </section>
           ))}
         </div>
@@ -135,7 +172,8 @@ export default function RandomOptionsPage() {
       <section className="card" style={{ marginTop: 20 }}>
         <h2 className="section-title" style={{ marginTop: 0 }}>อ่านตารางยังไง</h2>
         <ul className="optmax__how">
-          <li>ตัวใหญ่คือค่าสูงสุด ตัวเล็กใต้ค่าคือช่วงที่สุ่มได้ และบรรทัดที่ออปชันนั้นออกได้</li>
+          <li>ตัวเลขใหญ่คือค่าสูงสุด ตัวเล็กคือช่วงที่สุ่มได้ และ บ. คือบรรทัดที่ออปชันนั้นออกได้</li>
+          <li>ออปชันที่มีชื่อธาตุหรือเผ่าหลายชื่อ คือค่าเท่ากันทุกตัวในรายการ สุ่มออกมาได้ตัวเดียว</li>
           <li>แต่ละบรรทัดสุ่มได้ 1 ออปชันจากรายการของบรรทัดนั้น ออปชันเดียวกันไม่ได้อยู่ทุกบรรทัด</li>
           <li>
             ออปชันที่ของแต่ละชิ้นมีได้ ดูได้ในหน้าอุปกรณ์ชิ้นนั้นที่{' '}
@@ -145,10 +183,10 @@ export default function RandomOptionsPage() {
         {flagged.length > 0 && (
           <p className="muted" style={{ fontSize: 13 }}>
             * แหล่งข้อมูลไม่ตรงกัน:{' '}
-            {flagged.map(({ kind, row }, i) => (
-              <span key={kind + row.en}>
+            {flagged.map(({ kind, row, f }, i) => (
+              <span key={kind + row.en + f}>
                 {i > 0 && ' · '}
-                {kind} {row.th} ({row.flag})
+                {kind} {row.th} {f}
               </span>
             ))}
           </p>
