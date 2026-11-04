@@ -23,6 +23,7 @@ import Caveat from '@/components/Caveat';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import NaviCopy from '@/components/NaviCopy';
+import ENCHANTABLE from '@/data/costume-enchant-list.json';
 
 export const metadata: Metadata = {
   title: 'หินเอนแชนต์คอสตูม Ragnarok Zero — ช่องไหนใส่หินอะไร ได้อะไร',
@@ -164,7 +165,7 @@ export default function CostumeEnchantPage() {
         <ol className="gsteps">
           <li>
             ใช้ <Link href="/database/items/105913">Enchant Stone Craft Box B</Link> ใส่<strong>คอสตูม 5 ชิ้นที่ยังไม่ผูกตัว</strong> + 10,000z ·
-            คอสตูมต้องเป็นแบบที่ดรอปจากมอน ของจาก Cash Shop ใช้ไม่ได้
+            ใช้ได้เฉพาะคอสตูมใน<a href="#list">รายการทางการ</a> ({ENCHANTABLE.names.length} ชิ้น)
           </li>
           <li>ได้<strong>กล่อง A</strong> ของช่องใดช่องหนึ่งแบบสุ่ม (บน กลาง ล่าง หรือผ้าคลุม)</li>
           <li>เปิดกล่องได้หิน 1 ก้อนแบบสุ่มจากรายการของช่องนั้น ดูได้ในตารางข้างล่าง</li>
@@ -173,6 +174,35 @@ export default function CostumeEnchantPage() {
           <strong>กล่องสเตตัส</strong> (หิน +1 สเตตัส, ASPD และหินลดร่ายของผ้าคลุม) เป็นกล่องอีกชุด ยังไม่รู้ว่าได้จากไหน ·
           ย้ายหินไปคอสตูมอื่นได้ด้วย <Link href="/database/items/1002727">Costume Enchant Transfer Ticket</Link> ที่ NPC Costume Enchant Transfer Yul
         </p>
+      </section>
+
+      {/* The official list of costumes that take a stone and go into the craft
+          box. Its spelling is the website's, not the client's (Coiled Snake
+          Hat is the client's Snake Hat), so the names stay plain text rather
+          than guessed links. */}
+      <section id="list" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
+        <h2 className="section-title">
+          คอสตูมที่ใช้ได้ <span className="muted" style={{ fontWeight: 400 }}>· {ENCHANTABLE.names.length} ชิ้น</span>
+        </h2>
+        <p className="muted" style={{ marginTop: 0, fontSize: 13.5 }}>
+          ใส่หินได้ และใช้ทำกล่องหินได้ เฉพาะคอสตูมในรายการนี้ · รายการใหม่มีผลหลังปิดปรับปรุง 5 พ.ย. 2569 ·
+          ชื่อตามเว็บทางการ บางชิ้นชื่อในเกมต่างไปเล็กน้อย
+        </p>
+        <details>
+          <summary style={{ cursor: 'pointer', color: 'var(--cyan)', fontWeight: 600 }}>ดูรายชื่อทั้งหมด</summary>
+          <ul
+            style={{
+              columns: '14em',
+              columnGap: 24,
+              margin: '10px 0 0',
+              paddingLeft: 18,
+              fontSize: 14,
+              lineHeight: 1.7,
+            }}
+          >
+            {ENCHANTABLE.names.map((n) => <li key={n}>{n}</li>)}
+          </ul>
+        </details>
       </section>
 
       {SLOTS.map((slot) => (
@@ -220,7 +250,7 @@ export default function CostumeEnchantPage() {
 
       <Caveat label="เชื่อได้แค่ไหน">
         ผลของหินทุกก้อน และกล่องไหนสุ่มได้หินอะไร มาจากคำอธิบายไอเทมในข้อมูลเกม · วิธีทำกล่องจากคอสตูม 5 ชิ้นกับค่า 10,000z มาจากไกด์ของ
-        midgardhub (อ่าน 30 ก.ย. 2026) และตรงกับคำอธิบายของ Craft Box B · ยังไม่มีข้อมูลโอกาสสุ่มได้แต่ละก้อน และค่าย้ายหิน
+        midgardhub (อ่าน 30 ก.ย. 2026) และตรงกับคำอธิบายของ Craft Box B · รายชื่อคอสตูมที่ใช้ได้จากไกด์ Costume Enchant บน roz.mygnjoy.com (อ่าน 4 พ.ย. 2569) · ยังไม่มีข้อมูลโอกาสสุ่มได้แต่ละก้อน และค่าย้ายหิน
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>

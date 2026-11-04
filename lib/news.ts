@@ -30,6 +30,17 @@ export interface NewsItem {
 
 export const NEWS: NewsItem[] = [
   {
+    href: '/news/patch-2026-11-05',
+    kind: 'patch',
+    title: 'ปิดปรับปรุง 5 พ.ย.',
+    blurb: 'เริ่ม 08:00 น. · ส่วนลด Kafra Shop 10% รอบแรกจบ · คอสตูมเอนแชนต์รายการใหม่ 124 ชิ้น',
+    // Dated when the page went up (the day before), so it leads NOW PLAYING
+    // ahead of the maintenance it announces.
+    date: '2026-11-04T15:00:00+07:00',
+    dateTh: '5 พ.ย.',
+    badge: '5/11',
+  },
+  {
     href: '/news/events-2026-11',
     kind: 'event',
     title: 'Gatchaman · Black Friday EXP x2',
