@@ -1,6 +1,6 @@
 {
   "cursor": {
-    "1562409676228792371": "1567100095240081419"
+    "1562409676228792371": "1567413209026265091"
   },
   "posts": [
     {
@@ -122,6 +122,15 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-11-03T08:56:18.017000+00:00",
+      "done": false
+    },
+    {
+      "id": "1567413209026265091",
+      "file": "posts/2026-11-04-1567413209026265091.md",
+      "title": "[Notice] Ragnarok Zero: Global Scheduled Maintenance – 5th November 2026",
+      "kind": "official",
+      "urgent": true,
+      "at": "2026-11-04T05:40:30.161000+00:00",
       "done": false
     }
   ]
