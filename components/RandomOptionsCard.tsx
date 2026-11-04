@@ -8,9 +8,10 @@
 // A <details> rather than a useState toggle -- same interaction, no client
 // bundle, and the content stays in the HTML for a crawler to read.
 
+import Link from 'next/link';
 import type { ResolvedPoolLine } from '@/lib/random-options';
 
-export default function RandomOptionsCard({ lines }: { lines: ResolvedPoolLine[] }) {
+export default function RandomOptionsCard({ lines, maxHref = null }: { lines: ResolvedPoolLine[]; maxHref?: string | null }) {
   if (lines.length === 0) return null;
 
   return (
@@ -23,6 +24,12 @@ export default function RandomOptionsCard({ lines }: { lines: ResolvedPoolLine[]
         <p className="muted" style={{ marginTop: 0 }}>
           ดรอปจากมอนสเตอร์ทั่วไป แต่ละบรรทัดสุ่มได้ตัวเลือกเดียวจากรายการของบรรทัดนั้น
           ชิ้นหนึ่งจึงติดออปชั่นได้ {lines.length} ออปชั่น
+          {maxHref && (
+            <>
+              {' · '}
+              <Link href={maxHref}>ค่าสูงสุดของแต่ละออปชัน เทียบทุกแหล่ง →</Link>
+            </>
+          )}
         </p>
         {/* The halo tells you how many options a piece rolled before you pick
             it up. Two of the five are marked "to be checked" by the guide this

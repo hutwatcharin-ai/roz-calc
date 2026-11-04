@@ -132,6 +132,7 @@ describe('link tables', () => {
     // catalogs by size, world map added the day it shipped. Pets joined on
     // 9 Sep 2026, moved out of /guides because the page is one row per pet.
     // NPCs joined on 10 Sep, next to quests: the two are read together.
+    // Random options joined on 4 Nov 2026, last: a lookup, not a catalog.
     expect(SECTION_LINKS.database.map((l) => l.href)).toEqual([
       '/database/monsters',
       '/database/equipment',
@@ -145,6 +146,7 @@ describe('link tables', () => {
       '/database/world-map',
       '/database/pets',
       '/database/skills',
+      '/database/random-options',
     ]);
   });
 

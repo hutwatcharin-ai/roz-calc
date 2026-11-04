@@ -68,6 +68,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/database/world-map', label: 'แผนที่โลก', icon: '/images/items/602.gif', ready: true },
     { href: '/database/pets', label: 'สัตว์เลี้ยง', icon: '/images/items/9001.gif', ready: true },
     { href: '/database/skills', label: 'สกิล', icon: '/images/items/7433.gif', ready: true },
+    { href: '/database/random-options', label: 'ออปชันสุ่ม', icon: '/images/items/984.gif', ready: true },
   ],
   // Red Blood (element stone), Apple, Yggdrasil Leaf, Branch of Dead Tree,
   // Elunium, Knife, Yggdrasil Berry.

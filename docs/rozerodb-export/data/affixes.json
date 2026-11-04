@@ -1,0 +1,4732 @@
+{
+ "_meta": {
+  "source": "https://rozerodb.com/tools/affixes",
+  "fetched": "2026-10-07"
+ },
+ "monsterDrop": [
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK",
+   "value": "5-30",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK",
+   "value": "5-30",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "MATK",
+   "value": "5-30",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "MATK (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD",
+   "value": "1",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD increase (%)",
+   "value": "5-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "HIT",
+   "value": "5-20",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "10-20",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "CRI",
+   "value": "2-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Critical Damage increase (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD",
+   "value": "1",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD increase (%)",
+   "value": "5-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "HIT",
+   "value": "5-20",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "10-20",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "CRI",
+   "value": "2-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Critical Damage increase (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "10-20",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Heal increase (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Variable Casting reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Neutral enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Water enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Earth enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Fire enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Wind enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Poison enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Holy enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Shadow enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Ghost enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Undead enemies (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Phys Def (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Normal enemies (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Boss enemies (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Phys Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Phys Def (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Normal enemies (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Boss enemies (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Formless monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Undead monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Brute monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Plant monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Insect monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Fish monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Demon monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Demi-Human monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Angel monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Dragon monsters (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Magic Def (%)",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Magic Def (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Normal enemies (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Boss enemies (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Heal increase (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP",
+   "value": "150-350",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP",
+   "value": "150-250",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP",
+   "value": "150-250",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "HP Recovery speed increase (%)",
+   "value": "15-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "SP Recovery speed increase (%)",
+   "value": "15-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "DEF",
+   "value": "10-30",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "MDEF",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Received Healing increase",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Variable Casting reduction",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Neutral enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Water enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Earth enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Fire enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Wind enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Poison enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Holy enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Shadow enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Ghost enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Undead enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Neutral enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Water enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Earth enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Fire enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Wind enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Poison enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Holy enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Shadow enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Ghost enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Undead enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "DEF",
+   "value": "10-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "MDEF",
+   "value": "2-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Received Healing increase",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Variable Casting reduction",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Neutral enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Water enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Earth enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Fire enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Wind enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Poison enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Holy enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Shadow enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Ghost enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Undead enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Neutral enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Water enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Earth enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Fire enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Wind enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Poison enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Holy enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Shadow enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Ghost enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Undead enemies reduction (%)",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Water resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Earth resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Fire resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Wind resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Poison resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Holy resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Shadow resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Ghost resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Undead resistance increase (%)",
+   "value": "1-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "5-15",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "DEF",
+   "value": "10-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "MDEF",
+   "value": "2-5",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Received Healing increase",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "HIT",
+   "value": "5-10",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxHP",
+   "value": "150-350",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Formless (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Undead (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Brute (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Plant (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Insect (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Fish (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demon (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demi-Human (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Angel (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Armor",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Dragon (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxHP",
+   "value": "150-300",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Formless (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Undead (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Brute (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Plant (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Insect (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Fish (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demon (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demi-Human (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Angel (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Dragon (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxHP",
+   "value": "150-300",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Formless (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Undead (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Brute (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Plant (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Insect (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Fish (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demon (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demi-Human (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Angel (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  },
+  {
+   "type": "Shoes",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Dragon (%)",
+   "value": "3-7",
+   "source": "Monster Drop"
+  }
+ ],
+ "blacksmith": [
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "ATK",
+   "value": "1-60",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "ATK (%)",
+   "value": "1-15",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "HIT",
+   "value": "1-40",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 1",
+   "name": "CRI",
+   "value": "1-20",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "ASPD",
+   "value": "1-3",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "1-40",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "Phys Damage to Small targets (%)",
+   "value": "1-35",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "Phys Damage to Medium targets (%)",
+   "value": "1-35",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "Phys Damage to Large targets (%)",
+   "value": "1-35",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "Critical Damage increase (%)",
+   "value": "1-35",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "ASPD increase (%)",
+   "value": "1-20",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 2",
+   "name": "Long-range Physical Damage increase (%)",
+   "value": "1-20",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "MaxHP(MHP)",
+   "value": "1-1000",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "MaxSP(MSP)",
+   "value": "1-200",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "SP Consumption reduction (%)",
+   "value": "1-10",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 3",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "1-50",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Formless Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Undead Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Brute Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Plant Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Insect Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Fish Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Demon Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Demi-Human Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Angel Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  },
+  {
+   "tier": "Slot 4",
+   "name": "Ignore Dragon Phys Def (%)",
+   "value": "1-25",
+   "source": "Blacksmith Forging",
+   "type": "Forging Weapons"
+  }
+ ],
+ "activation": [
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK",
+   "value": "1-39",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK (%)",
+   "value": "1-7",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "MATK",
+   "value": "1-39",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "MATK (%)",
+   "value": "1-6",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD",
+   "value": "1-2",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD increase (%)",
+   "value": "4-9",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "HIT",
+   "value": "3-24",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "8-24",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "CRI",
+   "value": "1-7",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Critical Damage increase (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "8-24",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Heal increase (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Variable Casting reduction (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Neutral enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Water enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Earth enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Fire enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Wind enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Poison enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Holy enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Shadow enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Ghost enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Undead enemies (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Phys Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Phys Def (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Normal enemies (%)",
+   "value": "2-9",
+   "source": "Activation System"
+  },
+  {
+   "type": "Physical Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Boss enemies (%)",
+   "value": "2-9",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Formless monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Undead monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Brute monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Plant monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Insect monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Fish monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Demon monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Demi-Human monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Angel monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Dragon monsters (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Magic Def (%)",
+   "value": "4-17",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Magic Def (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Normal enemies (%)",
+   "value": "2-9",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Boss enemies (%)",
+   "value": "2-9",
+   "source": "Activation System"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Heal increase (%)",
+   "value": "4-12",
+   "source": "Activation System"
+  }
+ ],
+ "mvp": [
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK",
+   "value": "5-30",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK (%)",
+   "value": "1-5",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK",
+   "value": "5-30",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "ATK (%)",
+   "value": "1-5",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "MATK",
+   "value": "5-30",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 1",
+   "name": "MATK (%)",
+   "value": "1-5",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD",
+   "value": "1",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD increase (%)",
+   "value": "5-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "HIT",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "10-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "CRI",
+   "value": "2-5",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Critical Damage increase (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD",
+   "value": "1",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "ASPD increase (%)",
+   "value": "5-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "HIT",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "10-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "CRI",
+   "value": "2-5",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Critical Damage increase (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "10-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Heal increase (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Variable Casting reduction (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Neutral enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Water enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Earth enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Fire enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Wind enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Poison enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Holy enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Shadow enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Ghost enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 2",
+   "name": "Magic Damage to Undead enemies (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Phys Def (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Normal enemies (%)",
+   "value": "3-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Boss enemies (%)",
+   "value": "3-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Phys Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Phys Def (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Normal enemies (%)",
+   "value": "3-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Phys Damage to Boss enemies (%)",
+   "value": "3-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Formless monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Undead monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Brute monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Plant monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Insect monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Fish monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Demon monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Demi-Human monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Angel monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Dragon monsters (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Formless Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Undead Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Brute Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Plant Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Insect Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Fish Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demon Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Demi-Human Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Angel Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Dragon Magic Def (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Ignore Normal Enemy Magic Def (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Normal enemies (%)",
+   "value": "3-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Magic Damage to Boss enemies (%)",
+   "value": "3-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 3",
+   "name": "Heal increase (%)",
+   "value": "5-10",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "ATK",
+   "value": "10-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "ATK (%)",
+   "value": "1-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "ASPD",
+   "value": "1-3",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "HIT",
+   "value": "5-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "FLEE",
+   "value": "10-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Melee Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "ATK",
+   "value": "10-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "ATK (%)",
+   "value": "1-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "ASPD",
+   "value": "1-3",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "HIT",
+   "value": "5-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "FLEE",
+   "value": "10-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Neutral enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Water enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Earth enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Fire enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Wind enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Poison enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Holy enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Shadow enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Ghost enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Physical Damage to Undead enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Formless monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Undead monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Brute monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Plant monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Insect monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Fish monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Demon monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Demi-Human monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Angel monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Ranged Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Phys Damage to Dragon monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "MATK",
+   "value": "10-25",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "MATK (%)",
+   "value": "1-7",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Variable Casting reduction (%)",
+   "value": "5-15",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Neutral enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Water enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Earth enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Fire enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Wind enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Poison enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Holy enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Shadow enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Ghost enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Undead enemies (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Formless monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Undead monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Brute monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Plant monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Insect monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Fish monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Demon monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Demi-Human monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Angel monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  },
+  {
+   "type": "Magic Series",
+   "pool": 4,
+   "tier": "Slot 4",
+   "name": "Magic Damage to Dragon monsters (%)",
+   "value": "5-20",
+   "source": "MVP Drop"
+  }
+ ],
+ "glast": [
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP",
+   "value": "150-350",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxHP (%)",
+   "value": "1-5",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 1",
+   "name": "MaxSP (%)",
+   "value": "1-5",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "HP Recovery speed increase (%)",
+   "value": "15-50",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "SP Recovery speed increase (%)",
+   "value": "15-50",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "FLEE",
+   "value": "5-15",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "DEF",
+   "value": "10-30",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "MDEF",
+   "value": "1-5",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Received Healing increase",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Variable Casting reduction",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Neutral enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Water enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Earth enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Fire enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Wind enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Poison enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Holy enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Shadow enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Ghost enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Phys Damage from Undead enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Neutral enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Water enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Earth enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Fire enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Wind enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Poison enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Holy enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Shadow enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Ghost enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 2",
+   "name": "Magic Damage from Undead enemies reduction (%)",
+   "value": "5-10",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxHP",
+   "value": "150-350",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "MaxSP",
+   "value": "25-50",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Formless (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Undead (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Brute (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Plant (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Insect (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Fish (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demon (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Demi-Human (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Angel (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  },
+  {
+   "type": "Garment",
+   "pool": 5,
+   "tier": "Slot 3",
+   "name": "Resistance to Dragon (%)",
+   "value": "3-7",
+   "source": "Glast Heim"
+  }
+ ]
+}

@@ -32,7 +32,7 @@ import ItemQuests from '@/components/ItemQuests';
 import RandomOptionsCard from '@/components/RandomOptionsCard';
 import { composeThaiDescription } from '@/lib/item-description-th';
 import { gameThaiDescription } from '@/lib/game-items';
-import { randomOptionsFor } from '@/lib/random-options';
+import { optionMaxHref, randomOptionsFor } from '@/lib/random-options';
 import { cardSlotForGearType } from '@/lib/card-slot';
 import ItemGuideRefs from '@/components/ItemGuideRefs';
 import InSetBox from '@/components/InSetBox';
@@ -385,7 +385,7 @@ export default function GearDetail({
 
       {randomOptions && randomOptions.length > 0 && (
         <div style={{ marginTop: 20 }}>
-          <RandomOptionsCard lines={randomOptions} />
+          <RandomOptionsCard lines={randomOptions} maxHref={optionMaxHref(item.category, item.weapon_type)} />
         </div>
       )}
 

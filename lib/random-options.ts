@@ -101,3 +101,19 @@ export function randomOptionsFor(
       entries: l.entries,
     }));
 }
+
+// Instruments and whips shoot like bows, so they read the ranged column on
+// /database/random-options (lib/damage RANGED_WEAPON_ROWS).
+const RANGED_WEAPON_TYPES = new Set(['Bow', 'Instrument', 'Musical Instrument', 'Whip']);
+
+/** The tab on /database/random-options that a piece of gear belongs to. */
+export function optionMaxHref(category: string | null, weaponType: string | null): string | null {
+  let kind: string | null = null;
+  if (category === 'Weapon') {
+    if (weaponType !== null && MAGIC_WEAPON_TYPES.has(weaponType)) kind = 'magic';
+    else kind = weaponType !== null && RANGED_WEAPON_TYPES.has(weaponType) ? 'ranged' : 'melee';
+  } else if (category === 'Armor' && weaponType !== null) {
+    kind = { Armor: 'armor', Garment: 'garment', Shoes: 'shoes' }[weaponType] ?? null;
+  }
+  return kind ? `/database/random-options#k-${kind}` : null;
+}
