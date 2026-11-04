@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-11-04", "href": "/database/random-options", "title": "หน้าออปชันสุ่ม: แต่ละออปชันสุ่มได้สูงสุดเท่าไร", "note": "เลือกประเภทของ แล้วเทียบค่าสูงสุดจากดรอปมอน MVP Activation ตีเอง Glast Heim และ Clock Tower Gear เป็นแถบสีในที่เดียว" },
     { "date": "2026-11-04", "href": "/database/equipment/1101", "title": "หน้าไอเทมมีรูปการ์ดสะสมจากในเกมแล้ว", "note": "อุปกรณ์ ไอเทม คอสตูม ขึ้นรูปการ์ดแบบโฮโลเอียงตามนิ้ว · แถบสเตตัสแบบหน้าต่างในเกมเด่นขึ้น · มือถืออ่านจบในจอเดียว" },
     { "date": "2026-11-03", "href": "/tools/enchant#essence", "title": "Essence ประจำอาชีพ (ออปอาชีพบนเสื้อ)", "note": "แตะเลือกอาชีพ ดู Essence ทุกแบบ I/II Lv.1/Lv.2 ค่าจากข้อความในเกม · ได้จากเอนแชนต์เสื้อดัน +9" },
     { "date": "2026-11-02", "href": "/guides/clock-tower-hats", "title": "ไกด์ใหม่: หมวกหอนาฬิกา", "note": "Clock Casket กับ Black Witch Hat ทำที่ Februs · หมวก Hat Maker 2 ใบ · Mithril หาจากไหน · Clock Tower Gear สุ่มออป" },
