@@ -1087,27 +1087,63 @@ a.thsort { text-decoration: none; }
 }
 .disclose > summary {
   cursor: pointer;
-  padding: 13px 14px;
+  padding: 12px 14px;
   font: 700 15px/1.4 var(--font-chakra), sans-serif;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   list-style: none;
-  min-height: 44px; /* touch target */
+  min-height: 48px; /* touch target */
+  border-radius: inherit;
+  transition: background 0.15s, box-shadow 0.15s;
 }
 .disclose > summary::-webkit-details-marker { display: none; }
-.disclose > summary::before {
-  content: '▸';
-  color: var(--faint);
+/* A disclosure has to look pressable, not read as one more line of text
+   (owner, 4 Nov 2026): a lit chevron box on the left and a "กดดู / ซ่อน"
+   pill on the right, the same on every fold of the site. */
+.disclose > summary::before,
+.rndopt__summary::before {
+  content: '▶';
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--cyan) 12%, transparent);
+  color: var(--cyan);
+  font-size: 11px;
+  text-shadow: 0 0 6px var(--cyan);
   transition: transform 0.15s;
 }
-.disclose[open] > summary::before { transform: rotate(90deg); }
+.disclose[open] > summary::before,
+.rndopt[open] .rndopt__summary::before { transform: rotate(90deg); }
+.disclose > summary::after {
+  content: 'กดดู ▾';
+  flex: none;
+  margin-inline-start: auto;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent);
+  border-radius: 999px;
+  color: var(--cyan);
+  font: 600 12.5px/1.2 var(--font-sarabun), sans-serif;
+  white-space: nowrap;
+}
+.disclose[open] > summary::after { content: 'ซ่อน ▴'; color: var(--dim); border-color: var(--hair); }
+.disclose:not([open]) { border-color: color-mix(in srgb, var(--cyan) 35%, var(--hair)); }
+.disclose > summary:hover {
+  background: color-mix(in srgb, var(--cyan) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cyan) 45%, transparent), 0 0 14px rgba(0, 240, 255, 0.15);
+}
 .disclose > summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
 .disclose__count { color: var(--faint); font: 400 13px/1.4 var(--font-sarabun), sans-serif; margin-inline-start: auto; }
+.disclose__count + * { margin-inline-start: 0; }
+.disclose:has(.disclose__count) > summary::after { margin-inline-start: 0; }
 .disclose__body { padding: 0 14px 14px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .disclose > summary::before { transition: none; }
+  .disclose > summary::before, .disclose > summary { transition: none; }
 }
 
 /* Jump links for a page that is genuinely long. Not a substitute for ordering
@@ -1656,6 +1692,12 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
   color: var(--dim);
 }
 .disclose--row .disclose__body { padding: 0 0 6px; }
+/* Inside a table row: keep the lit chevron (it is what says "tap me") but
+   smaller, and no pill or hover glow. */
+.disclose--row > summary::before { width: 18px; height: 18px; font-size: 8px; border-radius: 4px; }
+.disclose--row > summary::after { content: none; }
+.disclose--row > summary:hover { background: transparent; box-shadow: none; color: var(--text); }
+.disclose--row:not([open]) { border-color: transparent; }
 
 /* Stand-in tile for items with no sprite on file. Same footprint as the real
    24px icons so rows with and without art align. */
@@ -1930,13 +1972,20 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 }
 .rndopt__summary::-webkit-details-marker { display: none; }
 .rndopt__summary::after {
-  content: 'ดูออปชั่น ▾';
-  font: 400 12px/1 var(--font-sarabun), sans-serif;
+  content: 'กดดู ▾';
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent);
+  border-radius: 999px;
+  font: 600 12.5px/1.2 var(--font-sarabun), sans-serif;
   color: var(--cyan);
   white-space: nowrap;
 }
-.rndopt[open] .rndopt__summary::after { content: 'ซ่อน ▴'; }
-.rndopt__summary:hover { background: var(--panel-2); }
+.rndopt[open] .rndopt__summary::after { content: 'ซ่อน ▴'; color: var(--dim); border-color: var(--hair); }
+.rndopt:not([open]) { border-color: color-mix(in srgb, var(--cyan) 35%, var(--hair)); }
+.rndopt__summary:hover {
+  background: color-mix(in srgb, var(--cyan) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cyan) 45%, transparent), 0 0 14px rgba(0, 240, 255, 0.15);
+}
 .rndopt__count { color: var(--faint); font-size: 12px; margin-left: auto; }
 .rndopt__body { padding: 0 18px 18px; border-top: 1px solid var(--hair); }
 .rndopt__halo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); margin: 8px 0 0; }

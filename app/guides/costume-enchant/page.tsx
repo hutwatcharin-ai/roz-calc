@@ -199,11 +199,12 @@ export default function CostumeEnchantPage() {
           ใส่หินได้ และใช้ทำกล่องหินได้ เฉพาะคอสตูมในรายการนี้ · รายการอัปเดตตามประกาศปิดปรับปรุง 5 พ.ย. 2569 ·
           ชื่อตามเว็บทางการ ถ้าชื่อในเกมต่างไป เขียนไว้ใต้ชื่อ · ทำกล่องต้องใช้ชิ้นที่ยังไม่ผูกตัว
         </p>
-        <details>
-          <summary style={{ cursor: 'pointer', color: 'var(--cyan)', fontWeight: 600 }}>
-            ดูรายชื่อทั้งหมด ({LISTED.length} ชิ้นกดดูหน้าคอสตูมได้)
+        <details className="disclose">
+          <summary>
+            รายชื่อทั้งหมด <span className="disclose__count">{LIST.names.length} ชิ้น</span>
           </summary>
-          <div className="cstones" style={{ marginTop: 10, gridTemplateColumns: 'repeat(auto-fill, minmax(min(170px, 46%), 1fr))' }}>
+          <div className="disclose__body">
+          <div className="cstones" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(170px, 46%), 1fr))' }}>
             {LISTED.map(({ name, id, game }) => (
               <Link key={name} className="cstone" href={`/database/costumes/${id}`}>
                 <span className="cstone__icon">{HAS_ICON.has(id) && <Icon id={id} />}</span>
@@ -219,6 +220,7 @@ export default function CostumeEnchantPage() {
               ยังจับคู่ไม่ได้แน่ชัด: {UNMATCHED.join(' · ')}
             </p>
           )}
+          </div>
         </details>
       </section>
 
