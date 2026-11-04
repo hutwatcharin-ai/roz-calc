@@ -216,7 +216,7 @@ export default function CostumeEnchantPage() {
           </div>
           {UNMATCHED.length > 0 && (
             <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 13 }}>
-              ยังจับคู่ไม่ได้แน่ชัด: {UNMATCHED.join(' · ')} (อาจเป็น Charlie Beard หรือ Lincoln Beard ยังไม่ติดป้ายจนกว่าจะเช็กในเกม)
+              ยังจับคู่ไม่ได้แน่ชัด: {UNMATCHED.join(' · ')}
             </p>
           )}
         </details>

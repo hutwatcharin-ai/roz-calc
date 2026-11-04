@@ -4,7 +4,7 @@
   "what": "Costumes the official guide lists as usable for costume enchants and the Enchant Stone Craft Box, in the guide own spelling (it differs from the client item names, e.g. Coiled Snake Hat). Updated list announced in the 5 Nov 2026 maintenance notice.",
   "read": "2026-11-04",
   "count": 124,
-  "ids": "Item id of each name. The website names are the client English (iteminfo_enUS.lub) names; most match it exactly. Where enUS differs (Propeller = Mini Propeller), the match is by the Korean name (iteminfo_koKR.lub / resource name). Old Timey Mustache matches no item for sure (Charlie Beard or Lincoln Beard) and stays null. game = the name the Thai client shows, when it differs."
+  "ids": "Item id of each name. The website names are the client English (iteminfo_enUS.lub) names; most match it exactly. Where enUS differs (Propeller = Mini Propeller), the match is by the Korean name (iteminfo_koKR.lub / resource name). Old Timey Mustache is Charlie Beard (19514), checked by the owner on 4 Nov 2026. game = the name the Thai client shows, when it differs."
  },
  "names": [
   "Agami Helm",
@@ -205,7 +205,7 @@
   "Necktie": 20208,
   "Nordfeld Onyx Helm": 401516,
   "Nordfeld Platinum Helm": 401517,
-  "Old Timey Mustache": null,
+  "Old Timey Mustache": 19514,
   "Oliver Wolf Hood": 19543,
   "Orc Helm": 19901,
   "Owlduke Silk Hat": 20037,
@@ -305,6 +305,7 @@
   "Tare Wild Rose": "Wild Rose",
   "Trace of Battle": "Combat Vestige",
   "Veil of Blessing": "Blessed Veil",
-  "White Beard": "Grampa Beard"
+  "White Beard": "Grampa Beard",
+  "Old Timey Mustache": "Charlie Beard"
  }
 }

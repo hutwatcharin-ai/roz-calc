@@ -16,8 +16,8 @@ describe('costume enchant list', () => {
     expect(enchantListId('White Beard')).toBe(19783); // Grampa Beard, 흰수염
   });
 
-  it('leaves names it cannot match for sure unlinked', () => {
-    expect(enchantListId('Old Timey Mustache')).toBeNull();
+  it('takes the owner check where no name in the files matches', () => {
+    expect(enchantListId('Old Timey Mustache')).toBe(19514); // Charlie Beard (owner, 4 Nov 2026)
   });
 
   it('never points at a Bound copy, and no id twice', () => {
