@@ -21,7 +21,7 @@ const MODIFIED = PUBLISHED;
 export const metadata: Metadata = {
   title: 'ปิดปรับปรุง 5 พ.ย. 2569 Ragnarok Zero — เวลาปิดเซิร์ฟ, Black Friday ลด 10% รอบแรกจบ, คอสตูมเอนแชนต์รายการใหม่',
   description:
-    'Ragnarok Zero Global ปิดปรับปรุงพฤหัสบดี 5 พฤศจิกายน 2569 เริ่ม 08:00 น. เวลาไทย: ส่วนลด Kafra Shop 10% Black Friday รอบ 1 จบ, รายชื่อคอสตูมที่ใส่หินเอนแชนต์และทำกล่องหินได้ 124 ชิ้น, อีเวนต์ที่ยังเล่นได้ต่อ',
+    `Ragnarok Zero Global ปิดปรับปรุงพฤหัสบดี 5 พฤศจิกายน 2569 เริ่ม 08:00 น. เวลาไทย: ส่วนลด Kafra Shop 10% Black Friday รอบ 1 จบ, รายชื่อคอสตูมที่ใส่หินเอนแชนต์และทำกล่องหินได้ ${ENCHANTABLE.names.length} ชิ้น, อีเวนต์ที่ยังเล่นได้ต่อ`,
 };
 
 export default function Patch20261105() {
