@@ -2,10 +2,10 @@
 //
 // The 5 Nov 2026 maintenance, written the day before from the two Discord
 // maintenance notices (3 Nov, and the 4 Nov reminder with its short change
-// list) and the official Costume Enchant guide the reminder links to. The
-// patch notes are "shared separately" and had not come out when this was
-// written, so the page says only what the notices say and points to the
-// running events; it gets filled in when the notes arrive (as 15 Oct was).
+// list) and the official Costume Enchant guide the reminder links to.
+// Filled in on 5 Nov from the "Maintenance Completed" notice: the servers
+// opened at 10:00 Thai, two hours in, and no Update Notice came with this
+// round (the official Updates tab still ends at 29 Oct).
 import '../patch-2026-10-01/page.css';
 import '../patch-2026-10-29/page.css';
 import Link from 'next/link';
@@ -16,12 +16,12 @@ import ENCHANTABLE from '@/data/costume-enchant-list.json';
 
 const PATH = '/news/patch-2026-11-05';
 const PUBLISHED = '2026-11-04T15:00:00+07:00';
-const MODIFIED = PUBLISHED;
+const MODIFIED = '2026-11-05T11:30:00+07:00';
 
 export const metadata: Metadata = {
-  title: 'ปิดปรับปรุง 5 พ.ย. 2569 Ragnarok Zero — เวลาปิดเซิร์ฟ, Black Friday ลด 10% รอบแรกจบ, คอสตูมเอนแชนต์รายการใหม่',
+  title: 'ปิดปรับปรุง 5 พ.ย. 2569 Ragnarok Zero — เปิดเซิร์ฟแล้ว 10:00 น., Black Friday ลด 10% รอบแรกจบ, คอสตูมเอนแชนต์รายการใหม่',
   description:
-    `Ragnarok Zero Global ปิดปรับปรุงพฤหัสบดี 5 พฤศจิกายน 2569 เริ่ม 08:00 น. เวลาไทย: ส่วนลด Kafra Shop 10% Black Friday รอบ 1 จบ, รายชื่อคอสตูมที่ใส่หินเอนแชนต์และทำกล่องหินได้ ${ENCHANTABLE.names.length} ชิ้น, อีเวนต์ที่ยังเล่นได้ต่อ`,
+    `Ragnarok Zero Global ปิดปรับปรุงพฤหัสบดี 5 พฤศจิกายน 2569 08:00–10:00 น. เวลาไทย เปิดเซิร์ฟแล้ว ไม่มีแพตช์โน้ตรอบนี้: ส่วนลด Kafra Shop 10% Black Friday รอบ 1 จบ, รายชื่อคอสตูมที่ใส่หินเอนแชนต์และทำกล่องหินได้ ${ENCHANTABLE.names.length} ชิ้น, อีเวนต์ที่ยังเล่นได้ต่อ`,
 };
 
 export default function Patch20261105() {
@@ -52,18 +52,18 @@ export default function Patch20261105() {
       </nav>
 
       <header className="phero">
-        <p className="phero__date">ประกาศ 3–4 พฤศจิกายน 2569</p>
+        <p className="phero__date">ประกาศ 3–5 พฤศจิกายน 2569 · อัปเดต 5 พ.ย. 11:30 น.</p>
         <h1 className="phero__title">ปิดปรับปรุง พฤหัส 5 พ.ย.</h1>
         <p className="phero__lead">
-          ส่วนลด Kafra Shop 10% ของ Black Friday รอบแรกจบ · รายชื่อคอสตูมที่ใส่หินเอนแชนต์ได้อัปเดตใหม่ ·
-          รายละเอียดแพตช์ทางการจะประกาศแยกภายหลัง
+          เปิดเซิร์ฟแล้วตั้งแต่ 10:00 น. ปิดไป 2 ชั่วโมง (ประกาศไว้ถึง 14:00 น.) · ส่วนลด Kafra Shop 10% ของ Black Friday รอบแรกจบ ·
+          รายชื่อคอสตูมที่ใส่หินเอนแชนต์ได้อัปเดตใหม่ · รอบนี้ไม่มีแพตช์โน้ต
         </p>
-        <p className="phero__pill">เริ่มปิด พฤหัส 5 พ.ย. 08:00 น. เวลาไทย</p>
+        <p className="phero__pill">เปิดเซิร์ฟแล้ว 10:00 น. เวลาไทย</p>
       </header>
 
       <aside className="pnote" role="note" style={{ marginTop: 14 }}>
-        <strong>⚠ ยังไม่มีแพตช์โน้ต</strong> หน้านี้เขียนจากประกาศปิดปรับปรุงสองฉบับ ประกาศยังไม่บอกเวลาเปิดเซิร์ฟ และยังไม่บอกว่ามีของใหม่อะไร
-        แพตช์โน้ตออกเมื่อไรจะมาเติมในหน้านี้
+        <strong>รอบนี้ไม่มีแพตช์โน้ต</strong> ประกาศปิดปรับปรุงเสร็จ (5 พ.ย.) บอกแค่เวลาเปิดเซิร์ฟ และหน้า Updates ของเว็บทางการยังไม่มีประกาศอัปเดตรอบ 5 พ.ย.
+        (ล่าสุดยังเป็น 29 ต.ค.) · สิ่งที่เปลี่ยนเท่าที่ประกาศบอก มีสองข้อด้านล่าง ถ้าทีมงานลงแพตช์โน้ตตามมาจะเติมในหน้านี้
       </aside>
 
       <section id="maint" className="ct-ch">
@@ -73,12 +73,13 @@ export default function Patch20261105() {
             <tbody>
               <tr><td>วันที่</td><td className="num">พฤหัส 5 พ.ย. 2569</td></tr>
               <tr><td>เริ่มปิด</td><td className="num">08:00 น.</td></tr>
-              <tr><td>เปิดเซิร์ฟ</td><td className="num">ยังไม่ประกาศ</td></tr>
+              <tr><td>เปิดเซิร์ฟ</td><td className="num">10:00 น. (ปิดจริง 2 ชม.)</td></tr>
+              <tr><td>เวลาที่ประกาศไว้ก่อน</td><td className="num">08:00–14:00 น. (6 ชม.)</td></tr>
             </tbody>
           </table>
           <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-            เวลาอาจเลื่อนได้ · ทีมงานแนะนำให้ออกจากเกมก่อนเริ่มปิด · ของใน Kafra Shop ที่ขายอยู่อาจหมดรอบหลังปิดปรับปรุง
-            ถ้าจะซื้อให้ดูวันหมดเขตในร้านก่อน
+            เปิดเร็วกว่าที่ประกาศไว้ 4 ชั่วโมง ·
+            ของใน Kafra Shop ที่ขายช่วงก่อนหน้าบางชิ้นอาจหมดรอบแล้ว ดูวันหมดเขตในร้าน
           </p>
         </div>
       </section>
@@ -137,7 +138,7 @@ export default function Patch20261105() {
 
       <p className="source-note" style={{ marginTop: 20 }}>
         <strong>ที่มา:</strong> ประกาศ Discord ทางการ Ragnarok Zero: Global &ldquo;Scheduled Maintenance – 5th November 2026&rdquo; (3 พ.ย. 2569)
-        และ &ldquo;Scheduled Maintenance Reminder – 5th November 2026&rdquo; (4 พ.ย. 2569) · รายชื่อคอสตูมจากไกด์ Costume Enchant บน roz.mygnjoy.com
+        และ &ldquo;Scheduled Maintenance Reminder – 5th November 2026&rdquo; (4 พ.ย. 2569) และ &ldquo;Scheduled Maintenance Has Begun / Completed – 5th November 2026&rdquo; (5 พ.ย. 2569) · รายชื่อคอสตูมจากไกด์ Costume Enchant บน roz.mygnjoy.com
         (อ่าน 4 พ.ย. 2569) · วันของ Black Friday จากประกาศ Black Friday Promotion (29 ต.ค. 2569) · หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
       </p>
     </main>
