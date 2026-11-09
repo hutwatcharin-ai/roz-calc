@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Hit the home page (triggers a real Supabase query)
         run: |
-          code=$(curl -s -o /dev/null -w "%{http_code}" "https://rozerothai.com/")
+          code=$(curl -s -A rozerothai-keepalive -o /dev/null -w "%{http_code}" "https://rozerothai.com/")
           echo "home page returned HTTP $code"
           if [ "$code" != "200" ]; then
             echo "::warning::Site did not return 200 (got $code) — check the Coolify deployment"

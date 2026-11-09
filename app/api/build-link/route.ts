@@ -4,6 +4,7 @@
 // classes, items, cards and stones, numbers clamped), stores at most one
 // small file per distinct build, and limits each address to a burst of
 // links. Same build, same id: repeating a request stores nothing.
+import { clientIp } from '@/lib/origin-guard';
 import { NextResponse } from 'next/server';
 import { saveBuild } from '@/lib/build-share';
 
@@ -26,7 +27,7 @@ function allowed(ip: string): boolean {
 }
 
 export async function POST(req: Request) {
-  const ip = req.headers.get('cf-connecting-ip') ?? req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'local';
+  const ip = clientIp(req.headers);
   if (!allowed(ip)) return NextResponse.json({ error: 'ลองใหม่อีกสักครู่' }, { status: 429 });
   const body = await req.text();
   if (body.length > 8000) return NextResponse.json({ error: 'too large' }, { status: 413 });

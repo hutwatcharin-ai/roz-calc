@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // the apex 301s to it, path and query preserved. localhost/127.* stay
 // untouched so local prod tests keep working.
 import { CANONICAL_HOST } from './lib/site';
+import { ORIGIN_KEY_HEADER, originVerdict } from './lib/origin-guard';
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host') ?? '';
@@ -14,6 +15,16 @@ export function middleware(request: NextRequest) {
   // (http://100.108.70.113:3178) must stay on that build, not bounce to prod.
   const tailnet = /^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(bare);
   if (bare === CANONICAL_HOST || bare === 'localhost' || bare.startsWith('127.') || tailnet) {
+    // Direct-to-origin lock (lib/origin-guard.ts). Only the apex host is
+    // checked: localhost/127.* is the Coolify healthcheck and local prod
+    // tests, the tailnet is the owner's phone preview.
+    if (bare === CANONICAL_HOST) {
+      const verdict = originVerdict(request.headers.get(ORIGIN_KEY_HEADER), process.env.ORIGIN_KEY, process.env.ORIGIN_GUARD);
+      if (verdict === 'reject') return new NextResponse('Forbidden', { status: 403 });
+      if (verdict === 'log') {
+        console.warn(`[origin-guard] no key: ${request.method} ${request.nextUrl.pathname} ua=${request.headers.get('user-agent') ?? '-'}`);
+      }
+    }
     const response = NextResponse.next();
     // The /database/* index pages read searchParams for their filters, which
     // makes Next render them per request and stamp them private/no-cache --

@@ -2,6 +2,7 @@
 // stored on the server so the browser holds no database key (owner, 12 Oct
 // 2026). Anyone can call it, so it caps every field and limits each address
 // to a burst of reports, the same way /api/build-link does.
+import { clientIp } from '@/lib/origin-guard';
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 
@@ -26,7 +27,7 @@ function allowed(ip: string): boolean {
 const text = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
 export async function POST(req: Request) {
-  const ip = req.headers.get('cf-connecting-ip') ?? req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'local';
+  const ip = clientIp(req.headers);
   if (!allowed(ip)) return NextResponse.json({ error: 'ลองใหม่อีกสักครู่' }, { status: 429 });
   const body = await req.text();
   if (body.length > 4000) return NextResponse.json({ error: 'too large' }, { status: 413 });

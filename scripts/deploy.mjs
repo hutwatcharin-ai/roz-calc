@@ -84,6 +84,11 @@ function fetchOrigin(path, { headOnly = false } = {}) {
     '-k',
     '--resolve',
     `${SITE}:443:${ORIGIN_IP}`,
+    // The origin lock (lib/origin-guard.ts) 403s a direct request without
+    // the key Cloudflare stamps on proxied traffic; this check is direct.
+    ...(process.env.ORIGIN_KEY ? ['-H', `x-origin-key: ${process.env.ORIGIN_KEY}`] : []),
+    '-A',
+    'rozerothai-deploy',
     ...(headOnly ? ['-o', '/dev/null', '-w', '%{http_code}'] : []),
     `https://${SITE}${path}`,
   ];
