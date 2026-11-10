@@ -73,15 +73,72 @@ function rozerodbRows() {
 // let loose. The 17 Sep 2026 update opened Pyramid Dungeon (see
 // scripts/build-map-availability.mjs); these five spawn there, and every one
 // of them was listed "OCT 2026" only because Pyramid was.
-const MANUAL_AVAILABLE = new Map(
-  ['ancientmummy', 'arclouse', 'isis', 'mummy', 'verit'].map((key) => [key, 'Pyramid Dungeon, 17 Sep 2026 update']),
-);
+const MANUAL_AVAILABLE = new Map([
+  ...['ancientmummy', 'arclouse', 'isis', 'mummy', 'verit'].map((key) => [key, 'Pyramid Dungeon, 17 Sep 2026 update']),
+  // Clock Tower opened with the 29 Oct 2026 patch. Checked 10 Nov 2026 against
+  // the live client (D:\RagnarokZero\data.grf, navi_mob.lub): every one of
+  // these monsters spawns on an alde_dun01-04 / c_tower4 map that is in
+  // navi_map.lub. Both sources had them "OCT 2026" only because of Clock Tower.
+  ...['brilight', 'erzsebet', 'extrajoker', 'highorc', 'jeniffer', 'joker', 'orcarcher', 'orcgeneral', 'owlduke', 'penomena', 'sieglouse'].map(
+    (key) => [key, 'Clock Tower, 29 Oct 2026 patch'],
+  ),
+]);
+
+// Cards both sources call available whose monsters spawn nowhere a player can
+// go. Checked 10 Nov 2026 against the live client (D:\RagnarokZero\data.grf):
+// none of these monsters is in navi_mob.lub, which lists spawns only on maps
+// in navi_map.lub (858 of 858), and every map our monster_spawns table puts
+// them on is either closed in data/map-availability.json or absent from
+// navi_map.lub (guild dungeons gld_dun01-04, Karu bea_d01, the boss rooms
+// b_pay_f10 / b_sp_d05 / b_moc_f17 / b_bea_d01). No client item package
+// (probabilityinfo/packageitem.lub) gives any of them either. The sources
+// were crawled Aug-Sep 2026 and mark "available" anything not on their own
+// calendar, Lutie and Ant Hell cards included. `when` is the area's month in
+// data/map-availability.json where every spawn map shares one; otherwise null.
+const CLIENT = 'game client (navi_mob, 10 Nov 2026)';
+const MANUAL_UNAVAILABLE = new Map([
+  // Pirate Cave iz_dun03-04 (closed, owner in-game 14 Sep 2026)
+  ...['phen', 'marinesphere', 'swordfish', 'strouf', 'deviace', 'merman'].map((key) => [key, null]),
+  // Lutie / Toy Factory
+  ...['mystcase', 'christmascookie', 'cookie', 'cruiser'].map((key) => [key, 'JAN 2027']),
+  // Guild dungeons (gld_dun01-04), not in navi_map
+  ...['gullinbursti', 'leibolmai', 'wraithdead', 'ancientworm', 'gianthornet', 'zombiemaster', 'caterpillar', 'creamyfear'].map(
+    (key) => [key, null],
+  ),
+  // Karu (beach_dun open but empty, owner 28 Oct 2026); Pest also Turtle Island
+  ...['medusa', 'nereid', 'pest'].map((key) => [key, null]),
+  ['dragontail', 'FEB 2027'], // Turtle Island
+  ['maya', 'NOV 2026'], // Ant Hell boss room b_an_d02
+  ['darklord', 'DEC 2026'], // Old Glast Heim boss room b_gl_chy
+  ['drake', 'MAR 2027'], // Sunken Ship boss room b_tre_d02
+  // Boss rooms not in navi_map: b_pay_f10, b_sp_d05, b_moc_f17, b_bea_d01
+  ...['eddga', 'pharaoh', 'phreeoni', 'taogunka'].map((key) => [key, null]),
+  // No drop or spawn row in our DB, and no CHEPET / BLOODY_KNIGHT in navi_mob
+  ...['chepet', 'bloodyknight'].map((key) => [key, null]),
+
+  // Cards neither source covers at all, so nothing flagged them. Same check:
+  // the monster is in no navi_mob row (every navi_mob sprite was matched to a
+  // monster in our DB; none of these is among them), no client package gives
+  // the card, and every map monster_spawns has for it is closed in
+  // data/map-availability.json, which supplies the month.
+  // Niflheim (Lord of the Dead: boss room b_nif)
+  ...['dullahan', 'disguise', 'loliruri', 'lude', 'bloodymurderer', 'gibbet', 'quve', 'hylozoist', 'lordofthedead'].map((key) => [key, 'FEB 2027']),
+  ...['solider', 'springrabbit', 'assaulter', 'permeter', 'freezer', 'heater', 'turtlegeneral'].map((key) => [key, 'FEB 2027']), // Turtle Island
+  ...['dumplingchild', 'enchantedpeachtree', 'hermitplant', 'babyleopard', 'evilnymph', 'cloudhermit', 'zipperbear', 'bloodybutterfly', 'evilsnakelord'].map(
+    (key) => [key, 'MAR 2027'], // Gonryun
+  ),
+  ...['maoguai', 'migao', 'jingguai', 'zhupolong', 'yaojun', 'whitelady', 'greenmaiden'].map((key) => [key, 'APR 2027']), // Louyang
+  ...['leafcat', 'kraben', 'tamruan', 'ladytanee'].map((key) => [key, 'APR 2027']), // Ayothaya
+  ...['firelocksoldier', 'thepaper', 'poisonoustoad', 'miyabidoll', 'shinobi', 'tengu', 'karakasa', 'kapha'].map((key) => [key, 'MAY 2027']), // Amatsu
+  // No spawn row in our DB at all (Incantation Samurai, Garm, Knight of Windstorm)
+  ...['samuraispector', 'hatii', 'frozenknight'].map((key) => [key, null]),
+]);
 
 function main() {
   const guide = guideRows();
   const rozerodb = rozerodbRows();
 
-  const names = new Set([...guide.keys(), ...rozerodb.keys()]);
+  const names = new Set([...guide.keys(), ...rozerodb.keys(), ...MANUAL_UNAVAILABLE.keys()]);
   const cards = {};
   let conflicts = 0;
   let both = 0;
@@ -89,6 +146,12 @@ function main() {
   for (const key of names) {
     const a = guide.get(key);
     const b = rozerodb.get(key);
+    if (!a && !b) {
+      // Only the client check speaks for this card (MANUAL_UNAVAILABLE).
+      const when = MANUAL_UNAVAILABLE.get(key);
+      cards[key] = { when, sortKey: when ? Number(when.slice(-4)) * 100 + MONTHS[when.slice(0, 3)] : 999999, sources: [CLIENT] };
+      continue;
+    }
     if (a && b) {
       both += 1;
       if (a.available !== b.available) {
@@ -100,6 +163,11 @@ function main() {
       }
     }
     const merged = a ?? b;
+    if (merged.available && MANUAL_UNAVAILABLE.has(key)) {
+      const when = MANUAL_UNAVAILABLE.get(key);
+      cards[key] = { when, sortKey: when ? Number(when.slice(-4)) * 100 + MONTHS[when.slice(0, 3)] : 999999, sources: [CLIENT] };
+      continue;
+    }
     if (merged.available) continue; // Available is the default; only the gaps are stored.
     if (MANUAL_AVAILABLE.has(key)) continue;
     const when = a?.when ?? b?.when ?? null;

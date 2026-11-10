@@ -270,7 +270,7 @@
   {
    "alias": "Tower Keeper",
    "monster": 1270,
-   "monsterName": "C Tower Manager",
+   "monsterName": "Clock Tower Manager",
    "card": 4229,
    "cardName": "Tower Keeper Card"
   },

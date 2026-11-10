@@ -24,6 +24,13 @@
         "rozerodb"
       ]
     },
+    "ancientworm": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "anolian": {
       "when": "JAN 2027",
       "sortKey": 202701,
@@ -46,6 +53,20 @@
         "roz-global.info"
       ]
     },
+    "assaulter": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "babyleopard": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "blazer": {
       "when": "JUN 2027",
       "sortKey": 202706,
@@ -53,12 +74,25 @@
         "roz-global.info"
       ]
     },
-    "brilight": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "bloodybutterfly": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "bloodyknight": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "bloodymurderer": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "carat": {
@@ -69,12 +103,61 @@
         "rozerodb"
       ]
     },
+    "caterpillar": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "chepet": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "chimera": {
       "when": "JAN 2027",
       "sortKey": 202701,
       "sources": [
         "roz-global.info",
         "rozerodb"
+      ]
+    },
+    "christmascookie": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "cloudhermit": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "cookie": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "creamyfear": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "cruiser": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "darkframe": {
@@ -93,12 +176,26 @@
         "rozerodb"
       ]
     },
+    "darklord": {
+      "when": "DEC 2026",
+      "sortKey": 202612,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "darkpriest": {
       "when": "JAN 2027",
       "sortKey": 202701,
       "sources": [
         "roz-global.info",
         "rozerodb"
+      ]
+    },
+    "deviace": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "diabolic": {
@@ -115,12 +212,53 @@
         "roz-global.info"
       ]
     },
-    "erzsebet": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "disguise": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "dragontail": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "drake": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "dullahan": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "dumplingchild": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "eddga": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "enchantedpeachtree": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "evildruid": {
@@ -131,6 +269,20 @@
         "rozerodb"
       ]
     },
+    "evilnymph": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "evilsnakelord": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "explosion": {
       "when": "JUN 2027",
       "sortKey": 202706,
@@ -138,12 +290,25 @@
         "roz-global.info"
       ]
     },
-    "extrajoker": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "firelocksoldier": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "freezer": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "frozenknight": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "gargoyle": {
@@ -159,6 +324,20 @@
       "sortKey": 999999,
       "sources": [
         "roz-global.info"
+      ]
+    },
+    "gianthornet": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "gibbet": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "gig": {
@@ -182,6 +361,13 @@
         "roz-global.info"
       ]
     },
+    "greenmaiden": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "grizzly": {
       "when": "JUN 2027",
       "sortKey": 202706,
@@ -196,11 +382,25 @@
         "roz-global.info"
       ]
     },
+    "gullinbursti": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "harpy": {
       "when": null,
       "sortKey": 999999,
       "sources": [
         "roz-global.info"
+      ]
+    },
+    "hatii": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "hatiibebe": {
@@ -211,12 +411,25 @@
         "rozerodb"
       ]
     },
-    "highorc": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "heater": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "hermitplant": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "hylozoist": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "injustice": {
@@ -227,20 +440,11 @@
         "rozerodb"
       ]
     },
-    "jeniffer": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "jingguai": {
+      "when": "APR 2027",
+      "sortKey": 202704,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
-      ]
-    },
-    "joker": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "kaho": {
@@ -248,6 +452,20 @@
       "sortKey": 202706,
       "sources": [
         "roz-global.info"
+      ]
+    },
+    "kapha": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "karakasa": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "khalitzburg": {
@@ -258,11 +476,60 @@
         "rozerodb"
       ]
     },
+    "kraben": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "ladytanee": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "lavagolem": {
       "when": "JUN 2027",
       "sortKey": 202706,
       "sources": [
         "roz-global.info"
+      ]
+    },
+    "leafcat": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "leibolmai": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "loliruri": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "lordofthedead": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "lude": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "majoruros": {
@@ -273,6 +540,48 @@
         "rozerodb"
       ]
     },
+    "maoguai": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "marinesphere": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "maya": {
+      "when": "NOV 2026",
+      "sortKey": 202611,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "medusa": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "merman": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "migao": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "mistress": {
       "when": null,
       "sortKey": 999999,
@@ -280,27 +589,32 @@
         "roz-global.info"
       ]
     },
+    "miyabidoll": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "mystcase": {
+      "when": "JAN 2027",
+      "sortKey": 202701,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "nereid": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "nightmareterror": {
       "when": "JUN 2027",
       "sortKey": 202706,
       "sources": [
         "roz-global.info"
-      ]
-    },
-    "orcarcher": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
-      ]
-    },
-    "orcgeneral": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
-      "sources": [
-        "roz-global.info",
-        "rozerodb"
       ]
     },
     "owlbaron": {
@@ -311,20 +625,32 @@
         "rozerodb"
       ]
     },
-    "owlduke": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "permeter": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
-    "penomena": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "pest": {
+      "when": null,
+      "sortKey": 999999,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "pharaoh": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "phen": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "phendark": {
@@ -333,6 +659,27 @@
       "sources": [
         "roz-global.info",
         "rozerodb"
+      ]
+    },
+    "phreeoni": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "poisonoustoad": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "quve": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "raydric": {
@@ -367,12 +714,18 @@
         "rozerodb"
       ]
     },
-    "sieglouse": {
-      "when": "OCT 2026",
-      "sortKey": 202610,
+    "samuraispector": {
+      "when": null,
+      "sortKey": 999999,
       "sources": [
-        "roz-global.info",
-        "rozerodb"
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "shinobi": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "skelprisoner": {
@@ -397,12 +750,75 @@
         "roz-global.info"
       ]
     },
+    "solider": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "springrabbit": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "sting": {
       "when": "JAN 2027",
       "sortKey": 202701,
       "sources": [
         "roz-global.info",
         "rozerodb"
+      ]
+    },
+    "strouf": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "swordfish": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "tamruan": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "taogunka": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "tengu": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "thepaper": {
+      "when": "MAY 2027",
+      "sortKey": 202705,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "turtlegeneral": {
+      "when": "FEB 2027",
+      "sortKey": 202702,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "venatu": {
@@ -427,6 +843,13 @@
         "rozerodb"
       ]
     },
+    "whitelady": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "windghost": {
       "when": "JAN 2027",
       "sortKey": 202701,
@@ -443,12 +866,47 @@
         "rozerodb"
       ]
     },
+    "wraithdead": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "yaojun": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
     "zealotus": {
       "when": "JAN 2027",
       "sortKey": 202701,
       "sources": [
         "roz-global.info",
         "rozerodb"
+      ]
+    },
+    "zhupolong": {
+      "when": "APR 2027",
+      "sortKey": 202704,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "zipperbear": {
+      "when": "MAR 2027",
+      "sortKey": 202703,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
+      ]
+    },
+    "zombiemaster": {
+      "when": null,
+      "sortKey": 999999,
+      "sources": [
+        "game client (navi_mob, 10 Nov 2026)"
       ]
     },
     "zombieprisoner": {

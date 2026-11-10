@@ -1,12 +1,14 @@
 // Which cards are not in the game yet.
 //
-// The items table carries every card the client ships, and 42 of the 315 on
-// /database/cards belong to content that has not opened on Global. Listing
+// The items table carries every card the client ships, and 105 of the 318 on
+// /database/cards (10 Nov 2026) belong to content that has not opened on
+// Global. Listing
 // them beside cards a player can farm today, with no mark, is the page
 // telling a reader to go and get something that does not drop anywhere.
 //
 // Built by scripts/build-card-availability.mjs from two sources that agree on
-// every card they both cover. Only the unreleased ones are stored: available
+// every card they both cover, corrected against the live client's navi_mob
+// (cards on no source's list are added from that check alone). Only the unreleased ones are stored: available
 // is the default, so an empty answer here means "nothing says otherwise",
 // never "confirmed available".
 

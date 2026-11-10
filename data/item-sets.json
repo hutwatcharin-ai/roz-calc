@@ -138,6 +138,46 @@
       ]
     },
     {
+      "name": "Angel's Set (Super Novice)",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 2420,
+          "name": "Angel's Reincarnation",
+          "category": "Armor",
+          "icon": "/images/items/2420.gif"
+        },
+        {
+          "id": 2116,
+          "name": "Angelic Guard",
+          "category": "Armor",
+          "icon": "/images/items/2116.gif"
+        },
+        {
+          "id": 2355,
+          "name": "Angelic Protection",
+          "category": "Armor",
+          "icon": "/images/items/2355.gif"
+        },
+        {
+          "id": 2521,
+          "name": "Angelic Cardigan",
+          "category": "Armor",
+          "icon": "/images/items/2521.gif"
+        },
+        {
+          "id": 5125,
+          "name": "Angel's Kiss",
+          "category": "Armor",
+          "icon": "/images/items/5125.gif"
+        }
+      ],
+      "bonus": "HP +900 · SP +100 · โดนตีกายภาพมีโอกาสร่าย Assumptio Lv 1 ใส่ตัวเอง",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
       "name": "Basic Guild Set (Plate Armor)",
       "kind": "gear",
       "pieces": [
@@ -1619,6 +1659,50 @@
       "sources": [
         "rozerodb",
         "prontera"
+      ]
+    },
+    {
+      "name": "Thief's Handcuff & Prison Uniform",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 2913,
+          "name": "Thief's Handcuff",
+          "category": "Armor",
+          "icon": "/images/items/2913.gif"
+        },
+        {
+          "id": 15040,
+          "name": "Prison Uniform",
+          "category": "Armor",
+          "icon": "/images/items/15040.gif"
+        }
+      ],
+      "bonus": "ATK +2 ทุกขั้นตีบวกของ Prison Uniform (สูงสุดขั้น 10)",
+      "sources": [
+        "item text"
+      ]
+    },
+    {
+      "name": "Thief's Handcuff & Shackles",
+      "kind": "gear",
+      "pieces": [
+        {
+          "id": 2913,
+          "name": "Thief's Handcuff",
+          "category": "Armor",
+          "icon": "/images/items/2913.gif"
+        },
+        {
+          "id": 2408,
+          "name": "Shackles",
+          "category": "Armor",
+          "icon": "/images/items/2408.gif"
+        }
+      ],
+      "bonus": "ATK +1 ทุกขั้นตีบวกของ Shackles (สูงสุดขั้น 10)",
+      "sources": [
+        "item text"
       ]
     },
     {

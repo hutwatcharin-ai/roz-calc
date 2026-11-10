@@ -138,8 +138,9 @@ export default async function MonsterListPage({
   const counts = await monsterCounts();
 
   // Monsters that drop a card a player can actually get today. "Has a card"
-  // alone would keep 307 of 355 rows -- no filter at all -- so the 37 whose
-  // card belongs to unopened content are dropped here (lib/card-availability).
+  // alone would keep 465 of the 534 monsters -- hardly a filter -- so the 143
+  // whose only card belongs to unopened content are dropped here
+  // (lib/card-availability; 10 Nov 2026 counts, Challenge variants included).
   // Only queried when the filter is on: it is a join the other 99% of visits
   // do not need.
   let cardMonsterIds: number[] | null = null;

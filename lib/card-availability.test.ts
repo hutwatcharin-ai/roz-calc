@@ -19,8 +19,23 @@ describe('cardRelease', () => {
     for (const name of ['Mummy Card', 'Ancient Mummy Card', 'Isis Card', 'Verit Card', 'Arclouse Card']) {
       expect(cardRelease(name), name).toBeNull();
     }
-    // Only Pyramid was opened: an OCT 2026 card from elsewhere keeps its date.
-    expect(cardRelease('Joker Card')?.when).toBe('OCT 2026');
+  });
+
+  it('treats Clock Tower cards as available since the 29 Oct 2026 patch', () => {
+    for (const name of ['Joker Card', 'Brilight Card', 'Owl Duke Card', 'High Orc Card', 'Sieglouse Card']) {
+      expect(cardRelease(name), name).toBeNull();
+    }
+    // Renamed in the items table; still found through its former name.
+    expect(cardRelease('Jennifer Card', 27272)).toBeNull();
+  });
+
+  it('flags cards the sources call available but whose monsters spawn on no open map', () => {
+    // Live client navi_mob, 10 Nov 2026.
+    expect(cardRelease('Cookie Card')?.when).toBe('JAN 2027'); // Lutie
+    expect(cardRelease('Phen Card')?.sources).toEqual(['game client (navi_mob, 10 Nov 2026)']); // Pirate Cave
+    expect(cardRelease('Phen Card')?.when).toBeNull();
+    // Neither source lists it at all; the client check alone flags it.
+    expect(cardRelease('Tengu Card')?.when).toBe('MAY 2027'); // Amatsu
   });
 
   it('records which sources back each row', () => {

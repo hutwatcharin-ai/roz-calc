@@ -20,7 +20,7 @@ describe('notableDrops', () => {
   });
 
   it('leaves out a card the game has not released', () => {
-    const result = notableDrops([mob(1, 'Joker')], [drop(1, 10, 'Joker Card', 'Card', 0.01)]);
+    const result = notableDrops([mob(1, 'Alice')], [drop(1, 10, 'Alice Card', 'Card', 0.01)]);
     expect(result.cards).toEqual([]);
   });
 

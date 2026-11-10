@@ -20,7 +20,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { newest } from './grf-snapshots.mjs';
+import { currentClientFile } from './grf-snapshots.mjs';
 
 const ROZERODB_MAPS = path.join(process.cwd(), 'docs', 'rozerodb-export', 'data', 'maps.jsonl');
 const DEST = path.join(process.cwd(), 'data', 'map-availability.json');
@@ -90,18 +90,17 @@ const MANUAL_OPEN = [
 // prefix with a scheduled memorial dungeon -- anthell01/02 (Ant Hell), the
 // Izlude undersea dungeon iz_dun00-02, treasure01/02 (Sunken Ship) -- and the
 // site called all three closed while players were in them. A code the client
-// navigates to is open, whatever a crawled calendar says. The newest
-// GrfDiffTool snapshot that has navi_map.lub is used (scripts/grf-snapshots.mjs),
-// so a patch needs no edit here. The 29 Oct 2026 one added exactly the 56
-// Clock Tower codes (c_tower1-4, alde_dun01-04, tow_d*, alde_d*).
-const CLIENT_NAVI =
-  process.env.CLIENT_NAVI ??
-  newest('luafiles514/lua files/navigation/navi_map.lub') ??
-  'D:/Data grf roz/grf-2026-10-15/files/data/luafiles514/lua files/navigation/navi_map.lub';
-const naviOpen = fs.existsSync(CLIENT_NAVI)
-  ? new Set([...fs.readFileSync(CLIENT_NAVI).toString('latin1').matchAll(/[a-z][a-z0-9_@]{2,20}/g)].map((m) => m[0]))
-  : null;
-if (!naviOpen) console.warn(`no client navi_map at ${CLIENT_NAVI}: open status from the calendars only`);
+// navigates to is open, whatever a crawled calendar says. The current
+// client's navi_map.lub is used: the newest GrfDiffTool snapshot that has it,
+// else read straight from data.grf (currentClientFile in
+// scripts/grf-snapshots.mjs), so a patch needs no edit here. There is no
+// silent fallback to an old client any more: GrfDiffTool prunes old
+// snapshots, and falling back to the 15 Oct 2026 extract once closed Clock
+// Tower again. The 29 Oct 2026 client added exactly the 56 Clock Tower codes
+// (c_tower1-4, alde_dun01-04, tow_d*, alde_d*).
+const CLIENT_NAVI = process.env.CLIENT_NAVI ?? currentClientFile('luafiles514/lua files/navigation/navi_map.lub');
+if (!fs.existsSync(CLIENT_NAVI)) throw new Error(`no client navi_map at ${CLIENT_NAVI}`);
+const naviOpen = new Set([...fs.readFileSync(CLIENT_NAVI).toString('latin1').matchAll(/[a-z][a-z0-9_@]{2,20}/g)].map((m) => m[0]));
 let fromNavi = 0;
 
 const pages = fs

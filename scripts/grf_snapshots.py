@@ -10,6 +10,14 @@ Scripts call weekly_roots() instead of hard-coding a snapshot path, so a new
 patch needs no code edit: run GrfDiffTool, then rerun the scripts. (Hard-coded
 paths also made scripts/dressup/zorder.py change on every patch, which the
 dress-up exporter treats as an exporter change and re-exports every part.)
+
+Caution: GrfDiffTool deletes the added/changed payload of every snapshot but
+the newest (GRF_WEEKLY_DIFF_GUIDE.md step 10), so walking back through older
+snapshots finds nothing in them; a file the latest patch left alone falls
+through to the callers' fixed fallbacks (15 Oct / 22 Sep extracts). The Node
+twin's currentClientFile() reads such a file from data.grf instead. This
+module's resolution is deliberately left as is: the dress-up exporter hashes
+the files it resolves, so changing where they come from re-exports every part.
 """
 import os
 import re

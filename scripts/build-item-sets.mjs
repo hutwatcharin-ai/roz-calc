@@ -115,6 +115,13 @@ const EXTRA = [
   { name: 'MDEF +4 & DEF +20', ids: [29033, 29026], bonus_th: 'HIT +5 · FLEE +5', sources: ['item text'] },
   { name: 'Variable Cast Reduction (Upper, Middle & Lower)', ids: [29156, 29157, 29158], bonus_th: 'ลดร่ายแปรผันเพิ่มอีก 6%', sources: ['item text'] },
   { name: 'Prison Uniform & Shackles', ids: [15040, 2408], bonus_th: 'ATK +5 และ ATK เพิ่มตามขั้นตีบวกของ Shackles', sources: ['item text'] },
+  // Read from the client's Thai item text, 10 Nov 2026 (Angelic Protection
+  // 2355 for the Super Novice set; Thief's Handcuff 2913 for its two pairs).
+  // Fatal (Upper)/(Garment) also state sets, but no Fatal (Middle) exists in
+  // the client or our items table, so those are left out.
+  { name: "Angel's Set (Super Novice)", ids: [2420, 2116, 2355, 2521, 5125], bonus_th: 'HP +900 · SP +100 · โดนตีกายภาพมีโอกาสร่าย Assumptio Lv 1 ใส่ตัวเอง', sources: ['item text'] },
+  { name: "Thief's Handcuff & Prison Uniform", ids: [2913, 15040], bonus_th: 'ATK +2 ทุกขั้นตีบวกของ Prison Uniform (สูงสุดขั้น 10)', sources: ['item text'] },
+  { name: "Thief's Handcuff & Shackles", ids: [2913, 2408], bonus_th: 'ATK +1 ทุกขั้นตีบวกของ Shackles (สูงสุดขั้น 10)', sources: ['item text'] },
 ];
 
 function parseRozerodb() {
