@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29",
+  "generated": "2026-11-11",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)",
@@ -353,13 +353,6 @@
     "beach_dun": {
       "when": "TBD",
       "area": "Comodo West Cave: Karu (open, no monsters yet)",
-      "sources": [
-        "owner confirmed in-game, 28 Oct 2026"
-      ]
-    },
-    "gef_dun02": {
-      "when": "TBD",
-      "area": "Geffen Dungeon B3F",
       "sources": [
         "owner confirmed in-game, 28 Oct 2026"
       ]

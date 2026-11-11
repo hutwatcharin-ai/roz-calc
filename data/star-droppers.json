@@ -1,7 +1,7 @@
 {
   "_meta": {
     "what": "Monsters that drop the ordinary twin of each first-tier ★ piece (keyed by the ★ id).",
-    "built": "2026-10-29",
+    "built": "2026-11-11",
     "rates": "null = the source has no rate for that drop; the page shows ไม่ทราบ.",
     "status": "open = spawns on a map not marked closed; closed = only on maps data/map-availability.json marks closed (when = month); nospawn = no spawn row.",
     "regenerate": "node scripts/build-star-droppers.mjs"
@@ -803,6 +803,15 @@
           "when": null
         },
         {
+          "id": 1045,
+          "name": "Marc",
+          "level": 56,
+          "image": "/images/monsters/1045.gif",
+          "rate": null,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 1126,
           "name": "Goblin 5",
           "level": 67,
@@ -810,15 +819,6 @@
           "rate": 0.08,
           "status": "open",
           "when": null
-        },
-        {
-          "id": 1045,
-          "name": "Marc",
-          "level": 56,
-          "image": "/images/monsters/1045.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "TBD"
         }
       ]
     },
@@ -948,6 +948,15 @@
           "when": null
         },
         {
+          "id": 1045,
+          "name": "Marc",
+          "level": 56,
+          "image": "/images/monsters/1045.gif",
+          "rate": null,
+          "status": "open",
+          "when": null
+        },
+        {
           "id": 1280,
           "name": "Goblin Steamrider",
           "level": 66,
@@ -961,15 +970,6 @@
           "name": "Marine Sphere",
           "level": 51,
           "image": "/images/monsters/1142.gif",
-          "rate": null,
-          "status": "closed",
-          "when": "TBD"
-        },
-        {
-          "id": 1045,
-          "name": "Marc",
-          "level": 56,
-          "image": "/images/monsters/1045.gif",
           "rate": null,
           "status": "closed",
           "when": "TBD"
