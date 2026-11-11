@@ -60,6 +60,13 @@ class Interpolation(unittest.TestCase):
         self.assertEqual(strfx.layer_state(layer, 1).pos, (0, 0))
         self.assertEqual(strfx.layer_state(layer, 3).pos, (7, 0))
 
+    def test_infinite_texture_rate_means_no_texture_animation(self):
+        base = strfx.StrKey(**{**key(0, 0, 0, 0).__dict__, 'anitype': 3, 'aniframe': 1.0})
+        morph = strfx.StrKey(**{**key(0, 1, 0, 0).__dict__, 'delay': float('inf')})
+        layer = strfx.StrLayer(textures=['a.bmp', 'b.bmp'], keys=[base, morph])
+        self.assertEqual(strfx.layer_state(layer, 0).aniframe, 1.0)
+        self.assertEqual(strfx.layer_state(layer, 5).aniframe, 1.0)
+
     def test_rejects_other_files(self):
         with self.assertRaises(ValueError):
             strfx.parse_str(b'NOPE' + struct.pack('<I', 0x94) + bytes(32))

@@ -12,6 +12,7 @@ A layer's keys come in pairs: type 0 sets the layer's state at its frame, a type
 it holds per-frame deltas from that frame on. Our own reading of the files; no code from
 other projects.
 """
+import math
 import os
 import struct
 from dataclasses import dataclass, field, replace
@@ -99,11 +100,9 @@ def layer_state(layer: StrLayer, frame: int):
     if morph is None:
         return base
     dt = frame - morph.frame
-    if base.anitype in (1, 2, 3, 4):
-        # texture animation runs at `delay` textures per frame
-        ani = base.aniframe + morph.delay * dt
-    else:
-        ani = base.aniframe + morph.aniframe * dt
+    # texture animation runs at `delay` textures per frame; an infinite rate (common) means none
+    rate = morph.delay if base.anitype in (1, 2, 3, 4) else morph.aniframe
+    ani = base.aniframe + (rate * dt if math.isfinite(rate) else 0.0)
     return replace(base, pos=_add(base.pos, morph.pos, dt), uv=_add(base.uv, morph.uv, dt),
                    xy=_add(base.xy, morph.xy, dt), aniframe=ani, angle=base.angle + morph.angle * dt,
                    color=_add(base.color, morph.color, dt))
