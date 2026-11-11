@@ -3945,6 +3945,12 @@ tr[data-tier] .droprate { font: 700 15px var(--font-chakra), sans-serif; color: 
 }
 .adslot--unit .adslot__ins { position: relative; }
 .adslot--unit .adslot__ins:not([data-ad-status='filled']) > * { opacity: 0; }
+/* Once the site was approved (10 Nov 2026) Google started answering
+   "unfilled" by writing height:0 into the unit's inline style, which
+   collapsed the box to 2px and spilled the INSERT COIN text over the cards.
+   An unfilled unit keeps its reserved size. */
+.adslot--unit .adslot__ins:not([data-ad-status='filled']) { height: var(--ad-h) !important; }
+@media (max-width: 700px) { .adslot--unit .adslot__ins:not([data-ad-status='filled']) { height: var(--ad-narrow-h) !important; } }
 /* The empty unit sells itself (owner, 24 Oct 2026): the same faint arcade
    panel, now a link to /advertise. Gone as soon as Google fills the unit. */
 .adslot__box { position: relative; display: flex; max-width: 100%; }
