@@ -30,6 +30,17 @@ export interface NewsItem {
 
 export const NEWS: NewsItem[] = [
   {
+    href: '/news/patch-2026-11-12',
+    kind: 'patch',
+    title: 'แพทช์ 12 พ.ย. · เลเวลตัน 80',
+    blurb: 'ปิดปรับปรุง 08:00 น. · Ant Hell Memorial · ดันใหม่ Karu, Izlude ใต้น้ำ 4–5 · Reset Cat รีเซ็ตฟรี',
+    // Dated when the page went up (the day before), so it leads NOW PLAYING
+    // ahead of the maintenance it announces.
+    date: '2026-11-11T16:00:00+07:00',
+    dateTh: '12 พ.ย.',
+    badge: '80',
+  },
+  {
     href: '/news/patch-2026-11-05',
     kind: 'patch',
     title: 'ปิดปรับปรุง 5 พ.ย.',
