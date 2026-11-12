@@ -25,3 +25,32 @@ export function drawFxRect(ctx: CanvasRenderingContext2D, atlas: CanvasImageSour
   const [ax, ay, w, h, dx, dy] = r;
   ctx.drawImage(atlas, ax, ay, w, h, feetX + dx, feetY + dy, w, h);
 }
+
+/** The fx canvases are this many times the 200x200 stage, the stage in their middle third. */
+export const FX_SCALE = 3;
+/** Where the stage's (0, 0) sits on an fx canvas. */
+export const FX_OFFSET = { x: 200, y: 250 };
+
+/**
+ * The zoom (at most 1) at which every frame of the effects fits the 200x200 view, zooming
+ * about `origin` (stage px) with the feet at `feet`. Never below 1 / FX_SCALE: the fx canvases
+ * end there.
+ */
+export function fxFit(effects: FxData[], origin: { x: number; y: number }, feet: { x: number; y: number }): number {
+  let fit = 1;
+  const side = (o: number, size: number, lo: number, hi: number) => {
+    if (lo < 0) fit = Math.min(fit, o / (o - lo));
+    if (hi > size) fit = Math.min(fit, (size - o) / (hi - o));
+  };
+  for (const fx of effects) {
+    for (const f of fx.frames) {
+      for (const r of [f.n, f.a]) {
+        if (!r) continue;
+        const x = feet.x + r[4], y = feet.y + r[5];
+        side(origin.x, 200, x, x + r[2]);
+        side(origin.y, 200, y, y + r[3]);
+      }
+    }
+  }
+  return Math.max(1 / FX_SCALE, Math.floor(fit * 100) / 100);
+}

@@ -118,13 +118,27 @@ async function loadFxNow(key: string): Promise<LoadedFx> {
   }
 }
 
-/** A hat effect (fx/<efId>), fetched once; drawn with drawImage, so its atlas stays an ImageBitmap. */
+/** Effects kept decoded: a big atlas is tens of MB, so flicking through effect tiles must not keep them all. */
+const FX_KEEP = 6;
+
+/**
+ * A hat effect (fx/<efId>); drawn with drawImage, so its atlas stays an ImageBitmap. The FX_KEEP
+ * most recently asked for stay cached; an older one's atlas is closed (a look wears at most a
+ * few, all asked for when it loads, so the stage never holds one that is closed).
+ */
 export function loadFx(key: string): Promise<LoadedFx> {
   let p = fxCache.get(key);
-  if (!p) {
+  if (p) {
+    fxCache.delete(key); // move to the newest end
+  } else {
     p = loadFxNow(key);
-    fxCache.set(key, p);
     p.catch(() => fxCache.delete(key));
+  }
+  fxCache.set(key, p);
+  while (fxCache.size > FX_KEEP) {
+    const [old, op] = fxCache.entries().next().value as [string, Promise<LoadedFx>];
+    fxCache.delete(old);
+    op.then((l) => l.atlas.close(), () => {});
   }
   return p;
 }

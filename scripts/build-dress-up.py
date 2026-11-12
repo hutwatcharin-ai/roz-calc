@@ -180,6 +180,7 @@ def fx_code():
     for f in FX_CODE:
         with open(os.path.join(HERE, f), 'rb') as fh:
             h.update(fh.read())
+    h.update(inspect.getsource(export_fx_one).encode())  # its arguments shape the output too
     h.update(f'step={FX_STEP}'.encode())
     return 'fx:' + h.hexdigest()[:16]
 
@@ -396,7 +397,7 @@ def add_effects(items, specs, fit):
     with open(DENY, encoding='utf-8') as f:
         deny = json.load(f)
     unmatched = [{'id': i, 'why': why} for i, why in unmatched]
-    denied, done = [], set()
+    denied, done, broken = [], set(), {}
     effect_root = fxmap.effect_dir()
     code = fx_code()
     hatinfo = zorder.src(f'{GRF}/luafiles514/lua files/hateffectinfo/hateffectinfo.lub')
@@ -405,21 +406,27 @@ def add_effects(items, specs, fit):
         if str(ref.ef_id) in deny:
             denied.append({'id': i, 'fx': ref.ef_id, 'why': deny[str(ref.ef_id)]})
             continue
+        if ref.ef_id not in done and ref.ef_id not in broken:
+            path = os.path.join(effect_root, *ref.str_rel.split('/'))
+            try:  # a .str that will not read costs its items, not the run
+                s = strfx.parse_str(open(path, 'rb').read())
+                tex = sorted({p for layer in s.layers for n in layer.textures if (p := strfx.find_texture(path, n))})
+            except Exception as e:
+                broken[ref.ef_id] = f'{ref.str_rel}: {type(e).__name__}: {e}'
+            else:
+                done.add(ref.ef_id)
+                specs.append(dict(key=f'fx/{ref.ef_id}', kind='fx', zkind='fx', view=code, str_path=path,
+                                  before=ref.before, sources=[path, hatinfo] + tex))
+        if ref.ef_id in broken:
+            unmatched.append({'id': i, 'why': broken[ref.ef_id]})
+            continue
         if sid not in items:
-            slots = slots_of(sid, game[sid]['desc'], fit)
+            slots = slots_of(sid, game.get(sid, {}).get('desc') or [], fit)
             if not slots:
                 unmatched.append({'id': i, 'why': 'description names no slot'})
                 continue
             items[sid] = {'slots': slots, 'view': 0, 'has': {}}
         items[sid]['fx'] = ref.ef_id
-        if ref.ef_id in done:
-            continue
-        done.add(ref.ef_id)
-        path = os.path.join(effect_root, *ref.str_rel.split('/'))
-        s = strfx.parse_str(open(path, 'rb').read())
-        tex = sorted({p for layer in s.layers for n in layer.textures if (p := strfx.find_texture(path, n))})
-        specs.append(dict(key=f'fx/{ref.ef_id}', kind='fx', zkind='fx', view=code, str_path=path,
-                          before=ref.before, sources=[path, hatinfo] + tex))
     unmatched.sort(key=lambda u: u['id'])
     return {'mapped': sum(1 for it in items.values() if it.get('fx')), 'unmatched': unmatched, 'denied': denied}
 
