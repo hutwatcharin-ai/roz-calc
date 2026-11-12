@@ -39,6 +39,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-11-11T16:00:00+07:00',
     dateTh: '12 พ.ย.',
     badge: '80',
+    // Ant Hell's Maya, then Hode and Orc Warrior from the hunting event.
+    cast: ['/images/monsters/1147.gif', '/images/monsters/1127.gif', '/images/monsters/1023.gif'],
   },
   {
     href: '/news/patch-2026-11-05',
