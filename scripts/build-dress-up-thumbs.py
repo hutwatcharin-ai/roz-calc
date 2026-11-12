@@ -6,7 +6,9 @@ first frame of each part's first action facing the viewer, trims it, and fits it
 Writes out/dress-up/thumb/sheet.<hash8>.webp and data/dress-up-thumbs.json:
 
     {"v": 1, "cell": 48, "cols": 32, "file": "thumb/sheet.<hash8>.webp",
-     "at": {"acc/<view>": n, "robe/<view>": n, "head/<style>-<sex>": n, "colour/<id>-<sex>": n}}
+     "at": {"acc/<view>": n, "robe/<view>": n, "fx/<efId>": n, "head/<style>-<sex>": n, "colour/<id>-<sex>": n}}
+
+An effect tile is the effect's middle frame, the ordinary layers over the additive ones.
 
 n is the cell index, row-major. Headgear items that share a view share a tile, which is why the picker
 shows one tile per look rather than one per item (half the items are a costume and a plain copy of the
@@ -57,6 +59,25 @@ def draw(stem):
     return None
 
 
+def draw_fx(stem):
+    """The effect's middle frame that draws something (ordinary layers over the lit ones), trimmed."""
+    with open(os.path.join(OUT, stem + '.json'), encoding='utf-8') as f:
+        fx = json.load(f)
+    atlas = Image.open(os.path.join(OUT, stem + '.webp')).convert('RGBA')
+    frames = fx['frames']
+    order = frames[len(frames) // 2:] + frames[:len(frames) // 2]
+    for fr in order:
+        canvas = Image.new('RGBA', (1024, 1024))
+        for r in (fr['a'], fr['n']):
+            if r:
+                ax, ay, w, h, dx, dy = r
+                canvas.alpha_composite(atlas.crop((ax, ay, ax + w, ay + h)), (512 + dx, 700 + dy))
+        box = canvas.getbbox()
+        if box:
+            return canvas.crop(box)
+    return None
+
+
 def fit(img):
     """Centre the picture in a CELL square: pixel-doubled when small, smoothed down when big."""
     side = max(img.size)
@@ -77,7 +98,13 @@ def main():
     want = []  # (thumb key, part key)
     seen = set()
     for it in full['items'].values():
+        if it.get('fx') and f"fx/{it['fx']}" not in seen:
+            seen.add(f"fx/{it['fx']}")
+            if f"fx/{it['fx']}" in files:
+                want.append((f"fx/{it['fx']}", f"fx/{it['fx']}"))
         view = it['view']
+        if not view:
+            continue
         if it['slots'] == ['garment']:
             key = f'robe/{view}'
             cands = [f'robe/{view}-{c}-{s}' for c in ROBE_ORDER for s in ('m', 'f')]
@@ -101,7 +128,7 @@ def main():
 
     cells, at = [], {}
     for key, part in want:
-        img = draw(files[part])
+        img = draw_fx(files[part]) if key.startswith('fx/') else draw(files[part])
         if img is None:
             continue
         at[key] = len(cells)

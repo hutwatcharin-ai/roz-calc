@@ -10,6 +10,8 @@ Writes (out/dress-up/ is not committed; it goes to R2 with scripts/upload-dress-
   out/dress-up/robe/<view>-<cls>-<sex>.<hash>.{json,webp}
   out/dress-up/weapon/<cls>-<sex>-<wtype>.<hash>.{json,webp}
   out/dress-up/cart/<n>.<hash>.{json,webp}   the merchant carts (scripts/dressup/cart.py)
+  out/dress-up/fx/<efId>.<hash>.{json,webp}  hat effects (scripts/dressup/fxrender.py), worn by
+                               the items scripts/dressup/fxmap.py links to one; an item's `fx`
   data/dress-up.json           the index the page reads (files: logical key -> hashed stem; the
                                page fetches <stem>.json and <stem>.webp)
   data/dress-up-manifest.json  per part: source files (mtime, size) and the content hash
@@ -43,7 +45,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 sys.stdout.reconfigure(encoding='utf-8')
 
-from dressup import cart, part, zorder  # noqa: E402
+from dressup import cart, fxmap, part, strfx, zorder  # noqa: E402
 
 GRF = zorder.GRF
 SPRITE = f'{GRF}/sprite'
@@ -94,7 +96,9 @@ ATTACK_TYPES = (5, 10, 11)
 HAIR_TH = {'기본': 'สีเดิม', '노란색': 'เหลือง', '보라색': 'ม่วง', '연갈색': 'น้ำตาลอ่อน', '녹색': 'เขียว',
            '파란색': 'น้ำเงิน', '흰색': 'ขาว', '진갈색': 'น้ำตาลเข้ม', '붉은색': 'แดง'}
 SLOT_WORDS = (('Upper', 'upper'), ('Middle', 'mid'), ('Lower', 'lower'))
-FOLDERS = ('body', 'head', 'acc', 'robe', 'weapon', 'cart')
+FOLDERS = ('body', 'head', 'acc', 'robe', 'weapon', 'cart', 'fx')
+DENY = os.path.join(ROOT, 'data', 'dress-up-fx-deny.json')
+FX_CODE = ('dressup/fxrender.py', 'dressup/strfx.py')
 # What a part's bytes depend on besides its sources: these modules, plus export_one() and integral()
 # here (hashed by source, so editing the rest of this script does not force a full rebuild).
 CODE_FILES = ('dressup/part.py', 'dressup/zorder.py', 'dressup/cart.py', 'ro_sprite.py')
@@ -168,6 +172,30 @@ def export_one(spec):
         return spec['key'], h, len(jb), len(wb)
     except Exception as e:  # a malformed sprite costs one part, not the run
         return spec['key'], None, f'{type(e).__name__}: {e}', 0
+
+
+def fx_code():
+    """Stands in for the view in an fx part's manifest z: an fxrender change re-exports only effects."""
+    h = hashlib.sha256()
+    for f in FX_CODE:
+        with open(os.path.join(HERE, f), 'rb') as fh:
+            h.update(fh.read())
+    return 'fx:' + h.hexdigest()[:16]
+
+
+def export_fx_one(spec):
+    """spec: dict(key, str_path, before). Same return shape as export_one."""
+    from dressup import fxrender
+    try:
+        # hatEffectPos/X are not applied: the owner matched the samples to the game without them
+        h, js, webp = fxrender.export_fx(spec['str_path'], OUT, spec['key'], 0, 0, spec['before'])
+        return spec['key'], h, len(js), len(webp)
+    except Exception as e:  # a broken effect costs one effect, not the run
+        return spec['key'], None, f'{type(e).__name__}: {e}', 0
+
+
+def export_any(spec):
+    return export_fx_one(spec) if spec['kind'] == 'fx' else export_one(spec)
 
 
 # ---------------------------------------------------------------- the wardrobe
@@ -340,6 +368,8 @@ def wardrobe():
         items[sid] = {'slots': slots, 'view': view, 'has': has}
         if set(has) != every:
             missing.append({'id': int(sid), 'why': '; '.join(why) or 'no sprite'})
+    coverage = {'itemsWithView': len(items), 'drawnEverywhere': len(items) - len(missing), 'missing': missing}
+    coverage['fx'] = add_effects(items, specs, fit)
     index = {
         'v': 1,
         'classes': classes,
@@ -348,11 +378,45 @@ def wardrobe():
         'carts': len(cart.NAMES),
         'items': items,
     }
-    coverage = {'itemsWithView': len(items), 'drawnEverywhere': len(items) - len(missing), 'missing': missing}
     notes = {'attackFallback': attack_fallback, 'attackDisagree': attack_disagree,
              'viewSlotConflicts': sum(1 for sid, it in items.items() if it['slots'] != ['garment']
                                       and zkind_of(it['slots']) != view_slot.get(it['view'], zkind_of(it['slots'])))}
     return specs, index, coverage, notes
+
+
+def add_effects(items, specs, fit):
+    """Give items their hat effect (fxmap), add effect-only costumes, one fx/<efId> spec per effect.
+    Returns coverage.fx."""
+    (mapping, unmatched), game, _ = fxmap.real_mapping()
+    with open(DENY, encoding='utf-8') as f:
+        deny = json.load(f)
+    unmatched = [{'id': i, 'why': why} for i, why in unmatched]
+    denied, done = [], set()
+    effect_root = fxmap.effect_dir()
+    code = fx_code()
+    hatinfo = zorder.src(f'{GRF}/luafiles514/lua files/hateffectinfo/hateffectinfo.lub')
+    for i, ref in sorted(mapping.items()):
+        sid = str(i)
+        if str(ref.ef_id) in deny:
+            denied.append({'id': i, 'fx': ref.ef_id, 'why': deny[str(ref.ef_id)]})
+            continue
+        if sid not in items:
+            slots = slots_of(sid, game[sid]['desc'], fit)
+            if not slots:
+                unmatched.append({'id': i, 'why': 'description names no slot'})
+                continue
+            items[sid] = {'slots': slots, 'view': 0, 'has': {}}
+        items[sid]['fx'] = ref.ef_id
+        if ref.ef_id in done:
+            continue
+        done.add(ref.ef_id)
+        path = os.path.join(effect_root, *ref.str_rel.split('/'))
+        s = strfx.parse_str(open(path, 'rb').read())
+        tex = sorted({p for layer in s.layers for n in layer.textures if (p := strfx.find_texture(path, n))})
+        specs.append(dict(key=f'fx/{ref.ef_id}', kind='fx', zkind='fx', view=code, str_path=path,
+                          before=ref.before, sources=[path, hatinfo] + tex))
+    unmatched.sort(key=lambda u: u['id'])
+    return {'mapped': sum(1 for it in items.values() if it.get('fx')), 'unmatched': unmatched, 'denied': denied}
 
 
 def du(path):
@@ -399,7 +463,7 @@ def main():
     if todo:
         from multiprocessing import Pool
         with Pool(args.jobs) as pool:
-            for n, (key, h, a, b) in enumerate(pool.imap_unordered(export_one, [s for s, _ in todo], chunksize=4), 1):
+            for n, (key, h, a, b) in enumerate(pool.imap_unordered(export_any, [s for s, _ in todo], chunksize=4), 1):
                 if h is None:
                     failed[key] = a
                 else:
@@ -412,8 +476,13 @@ def main():
         print('--only: index and manifest not written')
         return
 
-    # A part that failed draws nothing: take it out of `has`.
-    for it in index['items'].values():
+    # A part that failed draws nothing: take it out of `has`, an effect out of its items.
+    for sid, it in list(index['items'].items()):
+        if it.get('fx') and f"fx/{it['fx']}" in failed:
+            del it['fx']
+            if not it['view']:
+                del index['items'][sid]
+                continue
         view = it['view']
         for cs in list(it['has']):
             key = f'robe/{view}-{cs}' if it['slots'] == ['garment'] else f'acc/{view}-{cs.rsplit("-", 1)[1]}'
@@ -422,7 +491,7 @@ def main():
     every = {f"{c['slug']}-{sx}" for c in index['classes'] for sx in c['sexes']}
     known = {m['id'] for m in coverage['missing']}
     for sid, it in index['items'].items():
-        if set(it['has']) != every and int(sid) not in known:
+        if set(it['has']) != every and int(sid) not in known and it['view']:
             coverage['missing'].append({'id': int(sid), 'why': 'sprite failed to export'})
     coverage['missing'].sort(key=lambda m: m['id'])
     coverage['drawnEverywhere'] = coverage['itemsWithView'] - len(coverage['missing'])
@@ -453,6 +522,8 @@ def main():
     print(f"attackType: {notes['attackFallback']} fallback to 5, {len(notes['attackDisagree'])} m/f disagreements"
           f"{' ' + ', '.join(notes['attackDisagree'][:10]) if notes['attackDisagree'] else ''}")
     print(f"headgear views worn in different slots by different items: {notes['viewSlotConflicts']}")
+    fxc = coverage['fx']
+    print(f"effects: {fxc['mapped']} items mapped, {len(fxc['unmatched'])} unmatched, {len(fxc['denied'])} denied")
     print(f"itemsWithView {coverage['itemsWithView']}  drawnEverywhere {coverage['drawnEverywhere']}  "
           f"missing {len(coverage['missing'])}  failed {len(failed)}  ({time.time() - t0:.0f}s)")
 

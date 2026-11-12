@@ -14,6 +14,9 @@
 //                           slots is letters: u upper, m mid, l lower, g garment.
 //                           A third value 0 means no sprite anywhere; a list names
 //                           the class-sexes without one.
+//                           An effect-only costume (no sprite, only a hat effect) is
+//                           [slots, 0, 0] and has an entry in fx.
+//   fx{id: efId}            the hat effect an item wears, drawn from part fx/<efId>
 //   files{logical key: hash8}  the published stem is `${key}.${hash}`
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -25,7 +28,9 @@ const SLOT_LETTER = { upper: 'u', mid: 'm', lower: 'l', garment: 'g' };
 export function buildClient(full) {
   const classSexes = full.classes.flatMap((c) => c.sexes.map((s) => `${c.slug}-${s}`));
   const items = {};
+  const fx = {};
   for (const [id, it] of Object.entries(full.items)) {
+    if (it.fx) fx[id] = it.fx;
     const slots = it.slots.map((s) => {
       if (!SLOT_LETTER[s]) throw new Error(`item ${id}: unknown slot ${s}`);
       return SLOT_LETTER[s];
@@ -49,6 +54,7 @@ export function buildClient(full) {
     hair: full.hair,
     carts: full.carts ?? 0,
     items,
+    fx,
     files,
   };
 }
