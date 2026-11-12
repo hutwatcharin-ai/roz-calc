@@ -9,6 +9,8 @@ import {
   lower,
   raise,
   spendByStage,
+  switchClass,
+  clearStage,
   type Build,
 } from './skill-planner';
 
@@ -162,5 +164,46 @@ describe('quest skills come with the job', () => {
   });
   it('never lowers a quest skill', () => {
     expect(lower('blacksmith', {}, 'crazy-uproar')).toEqual({});
+  });
+});
+
+describe('switchClass', () => {
+  it('keeps the stages both lines share', () => {
+    const build: Build = { bash: 10, 'magnum-break': 3, 'two-hand-quicken': 1 };
+    const next = switchClass('knight', 'crusader', build);
+    expect(next.bash).toBe(10);
+    expect(next['magnum-break']).toBe(3);
+    expect(next['two-hand-quicken']).toBeUndefined();
+  });
+
+  it('drops a skill that only shares its name with one on the new line', () => {
+    // Safety Wall is a Mage skill on the Wizard line and a Priest skill on the
+    // Priest line: points spent as a Mage do not move to a Priest.
+    const wizard = raise('wizard', {}, 'safety-wall');
+    expect(wizard['safety-wall']).toBe(1);
+    expect(switchClass('wizard', 'priest', wizard)['safety-wall']).toBeUndefined();
+  });
+});
+
+describe('clearStage', () => {
+  it('clears one stage and leaves the others', () => {
+    const build: Build = { 'basic-skill': 9, bash: 5, 'two-hand-quicken': 1 };
+    const { build: next } = clearStage('knight', build, 'knight');
+    expect(next).toEqual({ 'basic-skill': 9, bash: 5 });
+  });
+
+  it('also clears later skills that needed the cleared ones, and names them', () => {
+    let build: Build = {};
+    build = raise('knight', build, 'bowling-bash');
+    build = raise('knight', build, 'frenzy');
+    build = { ...build, 'basic-skill': 9 };
+    const { build: next, alsoCleared } = clearStage('knight', build, 'swordsman');
+    expect(next['bash']).toBeUndefined();
+    expect(next['bowling-bash']).toBeUndefined();
+    expect(next['basic-skill']).toBe(9);
+    expect(alsoCleared).toContain('bowling-bash');
+    // Frenzy needs nothing from Swordsman: it stays.
+    expect(next['frenzy']).toBe(1);
+    expect(alsoCleared).not.toContain('frenzy');
   });
 });

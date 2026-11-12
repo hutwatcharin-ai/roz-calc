@@ -1933,6 +1933,9 @@ a.pager__btn:hover { border-color: var(--cyan); color: var(--text); }
 .planstage__head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .planstage__pts { margin-left: auto; color: var(--dim); }
 .planstage__pts--over { color: var(--yellow); font-weight: 700; }
+.planstage__reset { padding: 2px 10px; border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: var(--dim); font: inherit; font-size: 12px; cursor: pointer; }
+.planstage__reset:hover:not(:disabled) { color: var(--yellow); border-color: var(--yellow); }
+.planstage__reset:disabled { opacity: 0.4; cursor: default; }
 .planstage__bar { flex-basis: 100%; height: 3px; border-radius: 2px; background: var(--hair); overflow: hidden; }
 .planstage__bar > span { display: block; height: 100%; background: var(--cyan); }
 .planstage__bar > span.planstage__bar--over { background: var(--yellow); }

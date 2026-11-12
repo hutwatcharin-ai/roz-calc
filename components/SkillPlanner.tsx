@@ -13,6 +13,7 @@ import { tipFacts, tipLevel, type SkillLevelMap, type SkillTipLine } from '@/lib
 import {
   blockedBy,
   CLASS_SLUGS,
+  clearStage,
   decodeBuild,
   encodeBuild,
   levelOf,
@@ -20,6 +21,7 @@ import {
   lower,
   raise,
   spendByStage,
+  switchClass,
   type Build,
   type PlannerSkill,
 } from '@/lib/skill-planner';
@@ -161,6 +163,8 @@ export default function SkillPlanner({
   const [classSlug, setClassSlug] = useState(initialClass);
   const [build, setBuild] = useState<Build>(() => decodeBuild(initialClass, params.get('build') ?? ''));
   const [copied, setCopied] = useState(false);
+  // What a stage reset took with it from later stages, shown once under that stage.
+  const [cleared, setCleared] = useState<{ stage: string; names: string[] } | null>(null);
   useToolUse('skill_planner', { job: classSlug, build: encodeBuild(build) });
 
   const stages = useMemo(() => lineFor(classSlug), [classSlug]);
@@ -177,13 +181,25 @@ export default function SkillPlanner({
   }, [classSlug, build, router]);
 
   const changeClass = useCallback((slug: string) => {
-    // Skills carry over only where the new line has them -- switching Knight
-    // to Crusader keeps the Swordsman half, which is what a player comparing
-    // the two branches wants. The URL follows from the effect above, so it is
-    // not written here as well.
-    setBuild((current) => decodeBuild(slug, encodeBuild(current)));
+    // Only stages both lines share carry over: Knight to Crusader keeps the
+    // Swordsman half, which is what a player comparing the two branches
+    // wants. Matching by skill alone (until 12 Nov 2026) carried a Wizard's
+    // Safety Wall onto a Priest, where it is a different stage's skill. The
+    // URL follows from the effect above, so it is not written here as well.
+    setBuild((current) => switchClass(classSlug, slug, current));
     setClassSlug(slug);
-  }, []);
+    setCleared(null);
+  }, [classSlug]);
+
+  const resetStage = useCallback(
+    (stageSlug: string) => {
+      const result = clearStage(classSlug, build, stageSlug);
+      const names = new Map(stages.flatMap((st) => st.skills.map((k) => [k.slug, k.name] as const)));
+      setBuild(result.build);
+      setCleared(result.alsoCleared.length ? { stage: stageSlug, names: result.alsoCleared.map((x) => names.get(x) ?? x) } : null);
+    },
+    [classSlug, build, stages],
+  );
 
   const totalSpent = spend.reduce((n, s) => n + s.spent, 0);
   const anyOver = spend.some((s) => s.over);
@@ -205,7 +221,7 @@ export default function SkillPlanner({
           </select>
         </label>
         <span className="planbar__total mono">ใช้ไปทั้งหมด {totalSpent} แต้ม</span>
-        <button type="button" className="btn" onClick={() => setBuild({})} disabled={totalSpent === 0}>
+        <button type="button" className="btn" onClick={() => { setBuild({}); setCleared(null); }} disabled={totalSpent === 0}>
           ล้างทั้งหมด
         </button>
         <button
@@ -246,6 +262,14 @@ export default function SkillPlanner({
               <span className={`planstage__pts mono${stageSpend.over ? ' planstage__pts--over' : ''}`}>
                 {stageSpend.spent} / {stageSpend.budget} แต้ม
               </span>
+              <button
+                type="button"
+                className="planstage__reset"
+                onClick={() => resetStage(stage.slug)}
+                disabled={stageSpend.spent === 0}
+              >
+                ล้าง {stage.name}
+              </button>
               <div className="planstage__bar" aria-hidden="true">
                 <span
                   className={stageSpend.over ? 'planstage__bar--over' : undefined}
@@ -253,6 +277,9 @@ export default function SkillPlanner({
                 />
               </div>
             </header>
+            {cleared?.stage === stage.slug && (
+              <p className="planwarn">ล้างสกิลที่ต้องใช้สกิล {stage.name} ไปด้วย: {cleared.names.join(', ')}</p>
+            )}
             <div className="skillgrid">
               {skills.map((skill) => (
                 <SkillCell

@@ -239,3 +239,57 @@ export function decodeBuild(classSlug: string, encoded: string): Build {
   }
   return build;
 }
+
+function stageOfSkill(classSlug: string): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const stage of lineFor(classSlug)) {
+    for (const skill of stage.skills) map.set(skill.slug, stage.slug);
+  }
+  return map;
+}
+
+/**
+ * The build after switching class. Only stages both lines share carry over:
+ * Knight to Crusader keeps the Swordsman points, but Wizard to Priest keeps
+ * nothing past Novice, even though both lines have a skill named Safety Wall
+ * (a Mage skill on one line, a Priest skill on the other).
+ */
+export function switchClass(from: string, to: string, build: Build): Build {
+  const fromStages = stageOfSkill(from);
+  const shared = new Set(lineFor(to).map((s) => s.slug));
+  const kept: Build = {};
+  for (const [slug, level] of Object.entries(build)) {
+    const stage = fromStages.get(slug);
+    if (stage && shared.has(stage)) kept[slug] = level;
+  }
+  return decodeBuild(to, encodeBuild(kept));
+}
+
+/**
+ * Clears every skill of one stage, then every skill elsewhere in the build
+ * that no longer has the prerequisites it needs (Bowling Bash once Bash is
+ * gone). `alsoCleared` names those, so the page can say what went with it.
+ */
+export function clearStage(classSlug: string, build: Build, stageSlug: string): { build: Build; alsoCleared: string[] } {
+  const stage = lineFor(classSlug).find((s) => s.slug === stageSlug);
+  if (!stage) return { build, alsoCleared: [] };
+  const next: Build = { ...build };
+  for (const skill of stage.skills) delete next[skill.slug];
+
+  const alsoCleared: string[] = [];
+  const skills = skillsOf(classSlug);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const slug of Object.keys(next)) {
+      const skill = skills.get(slug);
+      const unmet = skill?.prerequisites.some((p) => p.slug !== null && levelOf(classSlug, next, p.slug) < (p.level ?? 1));
+      if (unmet) {
+        delete next[slug];
+        alsoCleared.push(slug);
+        changed = true;
+      }
+    }
+  }
+  return { build: next, alsoCleared };
+}

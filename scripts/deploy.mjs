@@ -186,6 +186,30 @@ function previewOnly({ shortSha, subject, filesChanged, path, verified, purged, 
   ].join(String.fromCharCode(10));
 }
 
+/**
+ * The homepage "ใหม่ในเว็บ" box is a hand-written list (data/site-updates.json)
+ * and sat at 4 Nov for a week of shipped features (owner, 12 Nov 2026). Warns,
+ * never blocks: a feat or news commit newer than the newest row means a row
+ * is probably missing.
+ */
+function warnStaleSiteUpdates() {
+  try {
+    const rows = JSON.parse(fs.readFileSync(new URL('../data/site-updates.json', import.meta.url), 'utf8')).items;
+    const newest = rows.map((r) => r.date).sort().at(-1);
+    const after = new Date(Date.parse(`${newest}T00:00:00+07:00`) + 86400000).toISOString();
+    const missing = sh(`git log --since=${after} --format=%s`)
+      .split('\n')
+      .filter((line) => /^(feat|news)\b/.test(line));
+    if (missing.length) {
+      console.warn(`\n!! "ใหม่ในเว็บ" newest row is ${newest}; ${missing.length} feat/news commit(s) since then have no row:`);
+      for (const line of missing.slice(0, 8)) console.warn(`   - ${line}`);
+      console.warn('   add rows to data/site-updates.json if players can see the change\n');
+    }
+  } catch (error) {
+    console.warn(`site-updates check skipped: ${error.message}`);
+  }
+}
+
 async function main() {
   loadEnv();
   const path = sitePath(arg('path'));
@@ -207,6 +231,7 @@ async function main() {
   }
   const subject = sh('git log -1 --format=%s');
   const shortSha = local.slice(0, 7);
+  warnStaleSiteUpdates();
   const filesChanged = sh('git diff --name-only HEAD~1 HEAD').split('\n').filter(Boolean).length;
 
   // 2. Trigger -- unless asked only to show what would be sent. Added after
