@@ -1,6 +1,6 @@
 {
   "cursor": {
-    "1562409676228792371": "1570241954002768056"
+    "1562409676228792371": "1570307411615547466"
   },
   "posts": [
     {
@@ -180,6 +180,24 @@
       "at": "2026-11-12T01:00:55.519000+00:00",
       "done": true,
       "notice": true
+    },
+    {
+      "id": "1570302210426933360",
+      "file": "posts/2026-11-12-1570302210426933360.md",
+      "title": "[Notice] Ragnarök Zero: Global Scheduled Maintenance Completed – 12th November 2026",
+      "kind": "official",
+      "urgent": true,
+      "at": "2026-11-12T05:00:21.770000+00:00",
+      "done": false
+    },
+    {
+      "id": "1570307411615547466",
+      "file": "posts/2026-11-12-1570307411615547466.md",
+      "title": "[Original Message Deleted]",
+      "kind": "official",
+      "urgent": false,
+      "at": "2026-11-12T05:21:01.830000+00:00",
+      "done": false
     }
   ]
 }
