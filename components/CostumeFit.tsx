@@ -7,10 +7,10 @@ import { costumeArt, costumeFit } from '@/lib/costume-fit';
 import { INDEX } from '@/lib/dress-up/look';
 import CostumeSpin from '@/components/CostumeSpin';
 
-/** Whether the dress room draws the item on some class (so the link opens wearing it). */
+/** Whether the dress room draws the item on some class, its sprite or its hat effect (so the link opens wearing it). */
 const inDressRoom = (id: number) => {
   const it = INDEX.items[String(id)];
-  return !!it && it[2] !== 0;
+  return !!it && (it[2] !== 0 || INDEX.fx?.[String(id)] !== undefined);
 };
 
 const DIRS = [
@@ -27,16 +27,31 @@ export default function CostumeFit({ id, name }: { id: number; name: string }) {
   const fit = costumeFit(id);
   if (!fit) {
     const art = costumeArt(id);
-    if (!art) return null;
+    if (!art) {
+      if (!inDressRoom(id)) return null;
+      return (
+        <section className="cfit cfit--art" aria-label={`ลองใส่ ${name}`}>
+          <p className="cfit__label">▶ COSTUME EFFECT</p>
+          <a className="cfit__go" href={`/tools/dress-up?wear=${id}`}>▶ ลองใส่ในห้องแต่งตัว</a>
+        </section>
+      );
+    }
     return (
       <section className="cfit cfit--art" aria-label={`ภาพประกอบ ${name}`}>
         <p className="cfit__label">▶ COSTUME EFFECT</p>
         <div className="cfit__stage cfit__stage--art">
           <img src={art} alt={`ภาพประกอบ ${name} จากในเกม`} width={150} height={200} style={{ imageRendering: 'pixelated' }} />
         </div>
-        <p className="cfit__note">
-          คอสตูมแบบเอฟเฟกต์ (ออร่าหรือของที่ลอยรอบตัว) เกมวาดด้วยระบบเอฟเฟกต์ ไม่ใช่ภาพบนตัวละคร เลยไม่มีภาพตอนใส่ · ภาพนี้คือภาพประกอบในหน้าต่างไอเทมของเกม
-        </p>
+        {inDressRoom(id) ? (
+          <>
+            <p className="cfit__note">ภาพประกอบจากหน้าต่างไอเทมในเกม · ดูเอฟเฟกต์ตอนใส่จริงได้ในห้องแต่งตัว</p>
+            <a className="cfit__go" href={`/tools/dress-up?wear=${id}`}>▶ ลองใส่ในห้องแต่งตัว</a>
+          </>
+        ) : (
+          <p className="cfit__note">
+            คอสตูมแบบเอฟเฟกต์ (ออร่าหรือของที่ลอยรอบตัว) เกมวาดด้วยระบบเอฟเฟกต์ ไม่ใช่ภาพบนตัวละคร เลยไม่มีภาพตอนใส่ · ภาพนี้คือภาพประกอบในหน้าต่างไอเทมของเกม
+          </p>
+        )}
       </section>
     );
   }

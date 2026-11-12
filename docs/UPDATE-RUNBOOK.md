@@ -42,6 +42,7 @@ owner ตกลงรูปแบบนี้ 30 ต.ค. 2026 · คำสั�
 - เควสที่เดินหลายจุด: แผนที่ปักหมุดแบบ A (`app/news/events-2026-11/QuestMap.tsx`) · แผนที่เล็กแปลงจาก BMP ไคลเอนต์ไป `public/images/maps/<map>.png` · ตำแหน่ง x/W, 1 − y/H จากขนาด .gat
 - การ์ดข่าว: `scripts/build-news-cards.mts` ทุกหน้าข่าวใหม่
 - ห้องแต่งตัว: มีคอสตูม/หมวกใหม่ ต้อง `npm run dress-up:build` แล้ว `npm run dress-up:upload` **ก่อน deploy**
+  · คอสตูมเอฟเฟกต์ (ออร่า/แลนด์มาร์ก) build จับคู่เองผ่าน `scripts/dressup/fxmap.py` (ดูรายการ `py -3 scripts/dressup/fxmap.py`) · เอฟเฟกต์ใหม่ให้ owner ดูในพรีวิว ตัวไหนเพี้ยนใส่ `data/dress-up-fx-deny.json` (`{"<efId>": "เหตุผล"}`) แล้ว build ใหม่ · ตัวที่จับคู่ไม่ได้ เพิ่มใน `MANUAL` ของ fxmap.py เฉพาะที่ยืนยันจากชื่อไฟล์/โฟลเดอร์ได้
 
 ### 5. ตามแก้จุดเก่าในเว็บ (2 ชั้น)
 
