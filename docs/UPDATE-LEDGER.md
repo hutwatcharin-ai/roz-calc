@@ -9,6 +9,7 @@
 | 173 | Black Friday | /news/events-2026-11 | 2026-10-29 |
 | 174 | Gatchaman: Visitors from Another World | /news/events-2026-11#gatchaman | 2026-10-29 |
 | update 189 | Update Notice 12 พ.ย. (8 รูป: เลเวล 80, ดันใหม่, Ant Hell, อุปกรณ์ Lv 70, Hunting Season, Blessing, Reset Cat, EXP) | /news/patch-2026-11-12 | 2026-11-12 |
+| event 193, 194 | Blacksmith Blessing Exchange (Yakt, Eden Group) · Hunting Season (Joh the Card Collector, การ์ด/ไอเทม → Token → คอสตูม 8 ชิ้น) | /news/patch-2026-11-12 | 2026-11-12 |
 | notice 192 | ปิดปรับปรุงเสร็จ 01:00–04:45 UTC + แก้บั๊ก 8 ข้อ | /news/patch-2026-11-12#maint | 2026-11-12 |
 | guide 21 | Character Level ตาราง EXP ใหม่ 1–80 + Job อาชีพ 2 | /guides/exp | 2026-11-12 |
 
@@ -33,7 +34,7 @@
 - ระบบปลุก ★: `/guides/star-gear` ยังเขียนว่ายังไม่เปิด — รอ owner เช็กในเกม
 - ของทำพิธี Molden: ยังไม่รู้ชื่อไอเทมจริง · Clock Tower Gear ดรอปจากมอนหอนาฬิกา (owner 2 พ.ย.) ยังไม่รู้ว่าตัวไหน
 - ตาราง Cash Shop ใหม่ยังไม่เทียบกับ `cash_shop_items`
-- แพทช์ 12 พ.ย.: เควสรายวัน Lv 80 (ไม่เจอในไฟล์เควสไคลเอนต์ ประกาศไม่บอก NPC) · Hunting Season Event Overview และ Blacksmith Exchange Overview ทีมงานจะลงแยก — ยังไม่ออก 12 พ.ย. 15:00 · ราคา/อัตรา Light Gacha · Memorial แรงค์ II (Lv 80) เปิดหรือยัง — `lib/memorial-gear.ts` ล็อกไว้ที่ 70
+- แพทช์ 12 พ.ย.: เควสรายวัน Lv 80 (ไม่เจอในไฟล์เควสไคลเอนต์ ประกาศไม่บอก NPC) · ราคา/อัตรา Light Gacha · Memorial แรงค์ II (Lv 80) เปิดหรือยัง — `lib/memorial-gear.ts` ล็อกไว้ที่ 70
 - Ant Hell: `b_an_d02`, `b_an_d02_z` ยังปิดตามโรดแมป (ไม่อยู่ใน navi) — ถ้าเป็นแมพของ Memorial Ant Hell ให้เปิด
 
 ## ข้อมูลจากไฟล์เกมที่ยังไม่ได้เช็กในเกม

@@ -6,10 +6,12 @@
 // dungeon areas, Ant Hell memorial with its NPC and /navi, Level 70 memorial
 // gear, Hunting Season, Blacksmith's Blessing exchange, Reset Cat, EXP table),
 // notice 192 (maintenance done 01:00-04:45 UTC, eight bug fixes) and the Game
-// Guide's Character Level table. The patched client (GrfDiffTool snapshot
+// Guide's Character Level table. Event notices 193 (Blessing exchange at Yakt)
+// and 194 (Hunting Season: Joh the Card Collector, tokens, eight costumes)
+// were added the same evening. The patched client (GrfDiffTool snapshot
 // 2026-11-12) fills in what the notices leave out: navi_mob gives every new
 // floor's monsters and counts, new items name the hunting-event tokens and the
-// SEA Light gacha boxes. Those lines carry a small "from the game files" tag.
+// SEA Light gacha (its list is from the owner's official banner). Those lines carry a small "from the game files" tag.
 //
 // Laid out like /news/events-2026-10 (owner's favourite): one coloured section
 // per thing a player can do, numbered steps, NPC picture with a copyable
@@ -111,10 +113,10 @@ function Mats({ items }: { items: Mat[] }) {
 const Tag = () => <span className="unverified">จากไฟล์เกม</span>;
 
 const JUMPS: { href: string; img: string; label: string; sub: string }[] = [
-  { href: '#reset-cat', img: '/images/items/6635.gif', label: 'Reset Cat', sub: 'รีเซ็ตฟรี ถึง 15 พ.ย.' },
+  { href: '#reset-cat', img: `${IMG}/reset-cat.webp`, label: 'Reset Cat', sub: 'รีเซ็ตฟรี ถึง 15 พ.ย.' },
   { href: '#ant-hell', img: '/images/monsters/1147.gif', label: 'Ant Hell Memorial', sub: 'ดันใหม่ Lv 70' },
   { href: '#hunting', img: '/images/monsters/1127.gif', label: 'Hunting Season', sub: 'ถึง 26 พ.ย.' },
-  { href: '#blessing', img: '/images/items/1002357.gif', label: 'แลก Blessing', sub: 'สัปดาห์ละครั้ง ถึง 26 พ.ย.' },
+  { href: '#blessing', img: '/images/items/6635.gif', label: 'แลก Blessing', sub: 'สัปดาห์ละครั้ง ถึง 26 พ.ย.' },
   { href: '#dungeons', img: '/images/monsters/1264.gif', label: 'ดันใหม่ 3 ชั้น', sub: 'Karu · Izlude 4–5' },
   { href: '#level', img: '/images/items/15221.gif', label: 'เลเวล 80 + EXP', sub: 'ตาราง EXP ใหม่' },
 ];
@@ -181,8 +183,17 @@ export default function Patch20261112() {
         <p className="evsec__tag">EVENT · 12–15 NOV</p>
         <h2 className="evsec__title">Reset Cat กลับมา: รีเซ็ตฟรี</h2>
         <p className="evsec__lead">มาให้ทันเลเวลตัน 80 · รีเซ็ตสเตตัสและสกิลได้ฟรี ไม่เสีย Zelstar</p>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img className="partcat" src={`${IMG}/reset-cat.webp`} alt="Reset Cat" width={64} height={64} loading="lazy" /></span>
+            <figcaption>
+              <strong>Reset Cat · Payon</strong>
+              <NaviCopy cmd="/navi payon 165/49" />
+            </figcaption>
+          </figure>
+        </div>
         <ol className="evsteps">
-          <li>ไป Payon <NaviCopy cmd="/navi payon 165/49" /></li>
+          <li>ไป Payon กด /navi ด้านบน</li>
           <li>คุยกับ Reset Cat เลือกรีเซ็ตสเตตัสหรือสกิล</li>
         </ol>
         <p className="evnote">
@@ -260,7 +271,8 @@ export default function Patch20261112() {
         <p className="evsec__tag">EVENT · 12–26 NOV</p>
         <h2 className="evsec__title">Hunting Season: Hode และ Orc Warrior</h2>
         <p className="evsec__lead">
-          สองตัวนี้เกิดถี่ขึ้น · เก็บการ์ดไว้แลกคอสตูมพิเศษ · ประกาศบอกให้เตรียมรับ <b>Phreeoni กับ Maya</b>
+          Hode กับ Orc Warrior รวมถึงร่าง Furious เกิดถี่ขึ้นในแมพของมัน · ล่าการ์ดไปแลก Token แล้วเอา Token ไปแลกคอสตูม ·
+          ประกาศบอกให้เตรียมรับ MVP ใหม่ <b>Phreeoni กับ Maya</b>
         </p>
         <div className="evdaily">
           <div className="evmob">
@@ -272,14 +284,78 @@ export default function Patch20261112() {
             <span><Link href="/database/monsters/1023"><b>Orc Warrior</b></Link> Lv 52 ธาตุดิน<br /><small>Orc Village · <Link href="/database/maps/gef_fild10">gef_fild10</Link></small></span>
           </div>
         </div>
-        <h3 className="evh">ของแลก <Tag /></h3>
-        <Mats items={[
-          { id: 1003364, name: '[Event] Warrior Token', ext: 'png' },
-          { id: 1003365, name: '[Event] Insect Token', ext: 'png' },
-        ]} />
-        <p className="evsmall">ได้จากการแลกการ์ด ใช้แลก Costume · หายเมื่อจบอีเวนต์</p>
+        <p className="evsmall">ทั้งสองตัวธาตุดิน ใช้อาวุธธาตุลม · เกิดถี่ขึ้นเฉพาะแมพที่บอกไว้</p>
+
+        <h3 className="evh">คนรับแลก: Joh the Card Collector</h3>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src={`${IMG}/card-collector.png`} alt="Joh the Card Collector" width={55} loading="lazy" /></span>
+            <figcaption>
+              <strong>Morroc</strong>
+              <NaviCopy cmd="/navi morocc 167/97" />
+            </figcaption>
+          </figure>
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src={`${IMG}/card-collector.png`} alt="Joh the Card Collector" width={55} loading="lazy" /></span>
+            <figcaption>
+              <strong>Payon</strong>
+              <NaviCopy cmd="/navi payon 177/107" />
+            </figcaption>
+          </figure>
+        </div>
+
+        <h3 className="evh">ขั้น 1: แลกเป็น Token</h3>
+        <div className="pswaps">
+          <div className="pswap">
+            <Mats items={[{ id: 4066, name: 'Orc Warrior Card', qty: 3 }]} />
+            <span className="pswap__arrow" aria-hidden="true">→</span>
+            <Mats items={[{ id: 1003364, name: '[Event] Warrior Token', ext: 'png', qty: 1 }]} />
+          </div>
+          <div className="pswap">
+            <Mats items={[{ id: 420456, name: '[Costume] Cigarette (Bound)', qty: 1 }]} />
+            <span className="pswap__arrow" aria-hidden="true">→</span>
+            <Mats items={[{ id: 1003364, name: '[Event] Warrior Token', ext: 'png', qty: 1 }]} />
+          </div>
+          <div className="pswap">
+            <Mats items={[{ id: 4081, name: 'Hode Card', qty: 3 }]} />
+            <span className="pswap__arrow" aria-hidden="true">→</span>
+            <Mats items={[{ id: 1003365, name: '[Event] Insect Token', ext: 'png', qty: 1 }]} />
+          </div>
+          <div className="pswap">
+            <Mats items={[{ id: 7021, name: 'Foolishness of the Blind', qty: 1 }]} />
+            <span className="pswap__arrow" aria-hidden="true">→</span>
+            <Mats items={[{ id: 1003365, name: '[Event] Insect Token', ext: 'png', qty: 1 }]} />
+          </div>
+        </div>
+        <p className="evsmall">ประกาศไม่ได้เขียนจำนวน Token ที่ได้ต่อรอบ</p>
+
+        <h3 className="evh">ขั้น 2: เอา Token แลกคอสตูม</h3>
+        <div className="evshop">
+          <div>
+            <b>ใช้ Warrior Token</b>
+            <Mats items={[
+              { id: 410619, name: 'Closed Eyes · กลาง', ext: 'png', qty: 3 },
+              { id: 420937, name: 'Necklace of Subjugation · ล่าง', ext: 'png', qty: 5 },
+              { id: 401029, name: 'Bone Helm · บน', qty: 5 },
+              { id: 481007, name: 'Beer Server · ผ้าคลุม', ext: 'png', qty: 10 },
+            ]} />
+          </div>
+          <div>
+            <b>ใช้ Insect Token</b>
+            <Mats items={[
+              { id: 421054, name: 'Sunshade Towel · ล่าง', ext: 'png', qty: 3 },
+              { id: 410762, name: 'Bloody’s Ears · กลาง', ext: 'png', qty: 5 },
+              { id: 401640, name: 'Cactus Hat · บน', ext: 'png', qty: 5 },
+              { id: 480861, name: 'Triple Ice Cream · ผ้าคลุม', ext: 'png', qty: 10 },
+            ]} />
+          </div>
+        </div>
+        <div className="evreward">
+          <span className="evreward__tag">NOTE</span> ตัวเลข ×3 / ×5 / ×10 คือจำนวน Token ที่ใช้ · คอสตูมใส่ได้ทุกอาชีพ เลเวล 1 ·{' '}
+          <b>Token หายเมื่อจบอีเวนต์ 26 พ.ย.</b> แลกให้หมดก่อน
+        </div>
         <p className="evnote">
-          ทั้งสองตัวธาตุดิน ใช้อาวุธธาตุลม · กติกาแลกและรายการคอสตูม ทีมงานจะลงประกาศแยก (ยังไม่ออก)
+          ชื่อตามประกาศทางการ · ในเกมบางชิ้นใช้ชื่ออื่น (Sunshade Towel = Desert Scarf, Necklace of Subjugation = Vassalage Necklace, Bloody’s Ears = Ear of Bloody Flame)
         </p>
       </section>
 
@@ -288,6 +364,15 @@ export default function Patch20261112() {
         <p className="evsec__tag">EVENT · 12–26 NOV</p>
         <h2 className="evsec__title">แลก Blacksmith Blessing</h2>
         <p className="evsec__lead">ของกันอุปกรณ์แตกหรือลดขั้นตอนตีบวก +7 ขึ้นไป · อีกทางนอกจากกล่อง MVP Raid</p>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src={`${IMG}/raid-manager.png`} alt="Yakt Raid Manager" width={40} loading="lazy" /></span>
+            <figcaption>
+              <strong>Yakt &lt;Raid Manager&gt; · Eden Group</strong>
+              <NaviCopy cmd="/navi moc_para01 22/35" />
+            </figcaption>
+          </figure>
+        </div>
         <div className="pswap">
           <Mats items={[{ id: 1002357, name: 'Blacksmith Blessing Powder', qty: 100 }]} />
           <span className="pswap__plus">+ 1,000,000 Zeny</span>
@@ -298,7 +383,7 @@ export default function Patch20261112() {
           <span className="evreward__tag">LIMIT</span> สัปดาห์ละครั้ง ต่อตัวละคร · ถึง 26 พ.ย.
         </div>
         <p className="evnote">
-          NPC ที่แลก ทีมงานจะบอกในประกาศแยก · <Link href="/guides/mvp">ไกด์ MVP</Link> · <Link href="/tools/refine">ตีบวก</Link>
+          <Link href="/database/items/1002357">ดูว่า Powder ได้จากไหน</Link> · <Link href="/guides/mvp">ไกด์ MVP</Link> · <Link href="/tools/refine">ตีบวก</Link>
         </p>
       </section>
 
@@ -357,21 +442,30 @@ export default function Patch20261112() {
       <section id="shop" className="evsec evsec--pink">
         <p className="evsec__tag">KAFRA SHOP · BUG FIX</p>
         <h2 className="evsec__title">ร้านและบั๊กที่แก้</h2>
-        <h3 className="evh" style={{ marginTop: 6 }}>Light Gacha Scroll (เซิร์ฟ SEA) <Tag /></h3>
+        <h3 className="evh" style={{ marginTop: 6 }}>กาชาใหม่: Light Gacha Scroll</h3>
+        <p className="evsec__lead" style={{ marginTop: 0 }}>เซิร์ฟ SEA เป็น<b>กาชาสุ่ม</b> · ของที่สุ่มได้ 10 อย่าง</p>
         <div className="evshop">
           <div>
-            <b>Special Light Costume Box</b>
-            <Mats items={[{ id: 31143, name: 'Krathong Crown', ext: 'png' }, { id: 19817, name: 'Ifrit’s Breath', ext: 'png' }]} />
-            <p>เลือกได้ 1 ชิ้น</p>
+            <b>คอสตูม</b>
+            <Mats items={[
+              { id: 31460, name: 'Blessed Sky Lantern' },
+              { id: 420016, name: 'Katashiro Flying' },
+              { id: 20605, name: 'Leaf Umbrella' },
+              { id: 31143, name: 'Lotus Flower Crown', ext: 'png' },
+              { id: 19817, name: 'Ifrit’s Breath', ext: 'png' },
+            ]} />
           </div>
           <div>
-            <b>Premium Light Costume Box</b>
-            <p>เลือก 1 ชิ้น: Sky Lantern, Katashiro Flying หรือ Leaf Umbrella</p>
+            <b>ของใช้</b>
+            <ul className="evmats">
+              {['Giant Fly Wing 100 Box', 'Special Buff Selection Box', 'Token of Siegfried', 'Small Mana Potion', 'Small Healing Potion'].map((n) => (
+                <li key={n}><span className="evmat">{n}</span></li>
+              ))}
+            </ul>
           </div>
         </div>
         <p className="evnote">
-          <Link href="/database/items/108534">Light Scroll</Link> ขายเป็นกล่องเดี่ยวและกล่องสิบ · ยังไม่รู้ราคาและอัตราสุ่ม · เซิร์ฟ EU ได้ Costume Package แทน ·{' '}
-          <Link href="/database/cash-shop">ร้าน Kafra</Link>
+          เซิร์ฟ EU ไม่มีกาชา ซื้อเป็น Costume Package ตรงๆ · <Link href="/database/cash-shop">ร้าน Kafra</Link>
         </p>
 
         <details className="pfixes">

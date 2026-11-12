@@ -48,3 +48,11 @@
 .pnpc .evnpc figcaption { align-items: flex-start; }
 .pnpc .evnpc { max-width: 100%; }
 @media (min-width: 480px) { .pnpc .evnpc figcaption > * { white-space: nowrap; } }
+
+/* Card/item -> token rows, one per line. */
+.pswaps { display: grid; gap: 8px; }
+.pswaps .pswap { padding: 8px 10px; border-radius: 4px; background: #0d0824; border: 1px solid var(--hair); }
+.pnpc + .pswap { margin-top: 12px; }
+
+/* Reset Cat has no sprite in the client; its picture is the official banner art, so it renders smooth and round. */
+.evtiles img[src$="reset-cat.webp"], .partcat { image-rendering: auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }

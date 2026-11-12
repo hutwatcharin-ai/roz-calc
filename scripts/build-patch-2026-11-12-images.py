@@ -22,6 +22,11 @@ os.makedirs(OUT, exist_ok=True)
 NPCS = {
     # Ant Hell memorial entrance, /navi prt_fild06 37/197 (official notice 189)
     702: 'memorial-member',
+    # Joh the Card Collector, Hunting Season exchange (official event 194):
+    # /navi morocc 167/97 and payon 177/107
+    556: 'card-collector',
+    # Yakt <Raid Manager>, Blessing exchange (official event 193): moc_para01 22/35
+    855: 'raid-manager',
 }
 # Event monsters: sprite file name -> output name
 MOBS = {}
