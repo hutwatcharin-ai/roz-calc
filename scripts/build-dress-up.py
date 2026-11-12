@@ -180,7 +180,12 @@ def fx_code():
     for f in FX_CODE:
         with open(os.path.join(HERE, f), 'rb') as fh:
             h.update(fh.read())
+    h.update(f'step={FX_STEP}'.encode())
     return 'fx:' + h.hexdigest()[:16]
+
+
+# effects play at 30 fps (the .str files say 60): half the atlas, no visible difference
+FX_STEP = 2
 
 
 def export_fx_one(spec):
@@ -188,7 +193,7 @@ def export_fx_one(spec):
     from dressup import fxrender
     try:
         # hatEffectPos/X are not applied: the owner matched the samples to the game without them
-        h, js, webp = fxrender.export_fx(spec['str_path'], OUT, spec['key'], 0, 0, spec['before'])
+        h, js, webp = fxrender.export_fx(spec['str_path'], OUT, spec['key'], 0, 0, spec['before'], step=FX_STEP)
         return spec['key'], h, len(js), len(webp)
     except Exception as e:  # a broken effect costs one effect, not the run
         return spec['key'], None, f'{type(e).__name__}: {e}', 0

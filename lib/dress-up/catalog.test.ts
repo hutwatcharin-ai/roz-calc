@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { gameItem } from '@/lib/game-items';
 import { THUMBS, allTiles, pickId, randomLook, tileDrawn, tileOf, tilesFor } from './catalog';
-import { DEFAULT_LOOK, INDEX, SLOTS, hasSprite, slotsOf } from './look';
+import { DEFAULT_LOOK, INDEX, SLOTS, drawsOn, fxOf, hasSprite, slotsOf } from './look';
 
 const COSTUME = new Set(Object.keys(INDEX.items).map(Number).filter((id) => gameItem(id)?.costume));
 
@@ -63,11 +63,12 @@ describe('tilesFor', () => {
     for (const s of SLOTS.filter((x) => !t.slots.includes(x))) expect(tilesFor(s, 'all', COSTUME)).not.toContain(t);
   });
 
-  it('leaves out looks with no sprite on any class', () => {
+  it('leaves out looks with no sprite and no effect on any class', () => {
+    const drawn = (id: number) => INDEX.items[String(id)][2] !== 0 || fxOf(id) !== undefined;
     for (const s of SLOTS) {
-      for (const t of tilesFor(s, 'all', COSTUME)) expect(t.ids.some((id) => INDEX.items[String(id)][2] !== 0)).toBe(true);
+      for (const t of tilesFor(s, 'all', COSTUME)) expect(t.ids.some(drawn)).toBe(true);
     }
-    const none = allTiles().filter((t) => t.ids.every((id) => INDEX.items[String(id)][2] === 0));
+    const none = allTiles().filter((t) => !t.ids.some(drawn));
     expect(none.length).toBeGreaterThan(0);
     for (const t of none) for (const s of t.slots) expect(tilesFor(s, 'all', COSTUME)).not.toContain(t);
   });
@@ -105,7 +106,7 @@ describe('randomLook', () => {
       for (const s of SLOTS) {
         const id = look[s];
         if (id === undefined) continue;
-        expect(hasSprite(id, 'knight', 'm')).toBe(true);
+        expect(drawsOn(id, 'knight', 'm')).toBe(true);
         expect(slotsOf(id)).toContain(s);
         expect(tileDrawn(tileOf(id)!, 'knight', 'm')).toBe(true);
       }

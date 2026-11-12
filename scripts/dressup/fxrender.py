@@ -211,7 +211,8 @@ def export_fx(str_path, out_dir, key, pos_x, pos_y, before, step=1):
     data = {'v': 1, 'fps': round(s.fps / step), 'before': bool(before),
             'frames': [{'n': rect(n), 'a': rect(a)} for n, a in frames]}
     buf = io.BytesIO()
-    atlas.save(buf, 'WEBP', lossless=True, method=6)
+    # lossy: glow and soft edges hide it; 3x smaller than lossless (315: 10.2 MB -> 3.7 MB)
+    atlas.save(buf, 'WEBP', quality=80, alpha_quality=85, method=6)
     webp = buf.getvalue()
     js = json.dumps(data, separators=(',', ':')).encode('utf-8')
     h8 = hashlib.sha1(js + webp).hexdigest()[:8]
