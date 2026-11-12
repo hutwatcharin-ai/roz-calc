@@ -76,7 +76,8 @@ const { dungeons } = file as unknown as { dungeons: Dungeon[] };
 
 // Not open on Global yet (owner, 30 Sep 2026: say "not open", no month --
 // the only dates come from one fan guide and would read as a promise).
-const NOT_OPEN = new Set(['Ant Hell 1F', 'Izlude 2F', 'Sunken Ship']);
+// Ant Hell 1F opened with the 12 Nov 2026 patch.
+const NOT_OPEN = new Set(['Izlude 2F', 'Sunken Ship']);
 
 // How to get in and what to do, per dungeon. Rewritten from the French
 // guide, not quoted.
@@ -107,7 +108,8 @@ const DETAILS: Record<string, { entry: string; navi?: string; steps: string[]; w
     warn: 'ปาร์ตี้ 7 คนขึ้นไป ชุดที่ดรอปดีขึ้น',
   },
   'Ant Hell 1F': {
-    entry: 'แมพทางตะวันออกของ Prontera คุยกับ NPC ก่อนถึงทางเข้า แล้วคุยกับรอยแยกมิติ (Dimensional Rift) ข้าง ๆ',
+    entry: 'แมพทางตะวันออกของ Prontera คุยกับ Memorial Association Member แล้วเข้าวาร์ปข้าง ๆ · ไม่ใช่ในดัน Ant Hell เดิม (ประกาศทางการ 12 พ.ย.)',
+    navi: 'prt_fild06 37/197',
     steps: ['อุดบ่อพิษให้ครบ (จุดแดงบนแผนที่)', 'สู้บอส Cannibal Maya'],
     warn: 'บอสตัวเดียวแต่ HP กว่า 2 ล้าน เตรียมของให้พอ',
   },

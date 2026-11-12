@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-11",
+  "generated": "2026-11-12",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)",
@@ -348,13 +348,6 @@
       "area": "Turtle Island",
       "sources": [
         "roadmap"
-      ]
-    },
-    "beach_dun": {
-      "when": "TBD",
-      "area": "Comodo West Cave: Karu (open, no monsters yet)",
-      "sources": [
-        "owner confirmed in-game, 28 Oct 2026"
       ]
     },
     "gl_c01_a": {
@@ -787,62 +780,6 @@
       "sources": [
         "roadmap",
         "rozerodb"
-      ]
-    },
-    "iz_d03_a": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_d03_b": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_d03_z": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_d04_a": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_d04_b": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_d04_z": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_dun03": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
-      ]
-    },
-    "iz_dun04": {
-      "when": "TBD",
-      "area": "Pirate Cave",
-      "sources": [
-        "owner confirmed in-game, 14 Sep 2026"
       ]
     },
     "lou_d01_a": {

@@ -325,7 +325,8 @@ export default async function MemorialGearPage() {
           </div>
           <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
             ตัว Essence เป็นไอเทมในเกม แยกตามอาชีพและมี Lv.1 กับ Lv.2 —{' '}
-            <Link href="/database/items?q=Essence+Lv">ดูรายการและผลของแต่ละอัน</Link>
+            <Link href="/tools/enchant#essence">ดูรายการและผลของแต่ละอัน</Link> ·
+            เสื้อ Expedition (แรงค์ III, Lv 70) ตี +9 สุ่มได้ Essence อาชีพ 2 (เห็นในเกม 12 พ.ย.)
           </p>
   
           <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>

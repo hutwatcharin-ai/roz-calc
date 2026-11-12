@@ -1,16 +1,24 @@
 // app/news/patch-2026-11-12/page.tsx
 //
-// The 12 Nov 2026 maintenance, written the day before from the two Discord
-// notices: "Scheduled Maintenance – 12th November 2026" (10 Nov) and the
-// 11 Nov reminder with the update highlights. No patch notes yet, and the
-// client files of 9 Nov carry none of this patch, so every line about the
-// update is the reminder's one-line highlight, plus what this site already
-// knew about each map, monster or dungeon it names.
+// The 12 Nov 2026 patch (Base level 80). Written the day before from the
+// Discord notices, then rebuilt on 12 Nov from the official site (owner, 12
+// Nov: read it, every time): Update Notice 189 (eight images: level 80, the two
+// dungeon areas, Ant Hell memorial with its NPC and /navi, Level 70 memorial
+// gear, Hunting Season, Blacksmith's Blessing exchange, Reset Cat, EXP table),
+// notice 192 (maintenance done 01:00-04:45 UTC, eight bug fixes) and the Game
+// Guide's Character Level table. The patched client (GrfDiffTool snapshot
+// 2026-11-12) fills in what the notices leave out: navi_mob gives every new
+// floor's monsters and counts, new items name the hunting-event tokens and the
+// SEA Light gacha boxes. Those lines carry a small "from the game files" tag.
 //
-// The official site was not read for this page: its robots.txt blocks
-// ClaudeBot again (11 Nov 2026).
+// Laid out like /news/events-2026-10 (owner's favourite): one coloured section
+// per thing a player can do, numbered steps, NPC picture with a copyable
+// /navi, item icons, a REWARD box -- and a "before it ends" strip on top,
+// because three of these run out on a date.
 import '../patch-2026-10-01/page.css';
-import '../patch-2026-10-29/page.css';
+import '../events-2026-10/page.css';
+import './page.css';
+import NaviCopy from '@/components/NaviCopy';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
@@ -18,63 +26,52 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 
 const PATH = '/news/patch-2026-11-12';
 const PUBLISHED = '2026-11-11T16:00:00+07:00';
-const MODIFIED = PUBLISHED;
+const MODIFIED = '2026-11-12T16:00:00+07:00';
+const IMG = '/images/events/2026-11-12';
 
 export const metadata: Metadata = {
   title: 'แพทช์ 12 พ.ย. 2569 Ragnarok Zero — เลเวลตัน 80, Ant Hell Memorial, ดันใหม่ Karu และ Izlude ใต้น้ำ 4–5',
   description:
-    'Ragnarok Zero Global ปิดปรับปรุงพฤหัสบดี 12 พฤศจิกายน 2569 เริ่ม 08:00 น. เวลาไทย: ขยายเลเวลตัน Base เป็น 80, เควสรายวัน Lv 80, ดันเจี้ยน Western Cave Karu และ Izlude Undersea Cave ชั้น 4–5, Memorial Dungeon Ant Hell, อุปกรณ์ Memorial Lv 70, อีเวนต์ล่า Hode และ Orc Warrior, แลก Blacksmith Blessing, Reset Cat รีเซ็ตฟรี, EXP เลเวล 2–70 ลดลง',
+    'Ragnarok Zero Global แพทช์ 12 พฤศจิกายน 2569 (ปิดปรับปรุง 08:00–11:45 น.): เลเวลตัน Base 80, ตาราง EXP ใหม่, Memorial Dungeon Ant Hell ทางเข้า /navi prt_fild06 37/197, อุปกรณ์ Memorial Lv 70, ดันใหม่ Western Cave Karu และ Izlude Undersea Cave ชั้น 4–5, Hunting Season Hode/Orc Warrior, แลก Blacksmith Blessing, Reset Cat รีเซ็ตฟรี 12–15 พ.ย.',
 };
 
-const HIGHLIGHTS: { big: string; title: string; body: string; href?: string; link?: string }[] = [
-  { big: '80', title: 'เลเวลตัน Base 80', body: 'จาก 70 เป็น 80 · Job Level ตันที่ 70 เท่าเดิม · มีเควสรายวันใหม่สำหรับ Lv 80', href: '#level', link: 'รายละเอียด' },
-  { big: 'EXP', title: 'EXP เลเวล 2–70 ลดลง', body: 'EXP ที่ต้องใช้ขึ้นเลเวล Base 2 ถึง 70 น้อยลง ประกาศยังไม่บอกตัวเลข', href: '#level', link: 'รายละเอียด' },
-  { big: '2', title: 'ดันเจี้ยนใหม่', body: 'Western Cave Karu (Comodo) · Izlude Undersea Cave ชั้น 4 และ 5', href: '#dungeons', link: 'มอนในแมพ' },
-  { big: 'MD', title: 'Memorial Dungeon Ant Hell', body: 'ดันเจี้ยนความทรงจำใหม่ บอส Cannibal Maya · อุปกรณ์ Memorial Lv 70', href: '#memorial', link: 'ดูข้อมูลดัน' },
-  { big: 'EV', title: 'อีเวนต์ 3 อย่าง', body: 'ล่า Hode กับ Orc Warrior · แลก Blacksmith Blessing · Reset Cat รีเซ็ตฟรี', href: '#events', link: 'รายละเอียด' },
-];
+type Mob = { id: number; name: string; n?: number };
+type Mat = { id: number; name: string; qty?: number | string; ext?: 'gif' | 'png' };
 
-type Mob = { id: number; name: string };
-
-// Monster lists as the site had them before the patch (monster_spawns). Karu
-// had no monsters in the game when the owner walked it on 28 Oct, so its
-// list is from the source database, not the game.
-const DUNGEONS: { code: string; name: string; th: string; where: string; mobs: Mob[] }[] = [
+const DUNGEONS: { code: string; name: string; th: string; mobs: Mob[] }[] = [
   {
     code: 'beach_dun',
     name: 'Western Cave Karu',
-    th: 'ถ้ำตะวันตก Karu',
-    where: 'Comodo · แมพเปิดแล้วแต่ยังไม่มีมอน (เช็กในเกม 28 ต.ค.)',
+    th: 'ถ้ำตะวันตก Karu · Comodo',
     mobs: [
-      { id: 1148, name: 'Medusa' },
-      { id: 1255, name: 'Nereid' },
-      { id: 1256, name: 'Pest' },
+      { id: 1148, name: 'Medusa', n: 60 },
+      { id: 1255, name: 'Nereid', n: 20 },
+      { id: 1256, name: 'Pest', n: 20 },
     ],
   },
   {
     code: 'iz_dun03',
     name: 'Izlude Undersea Cave 4F',
-    th: 'ถ้ำใต้น้ำ Izlude ชั้น 4',
-    where: 'ต่อจากชั้น 3 (iz_dun02)',
+    th: 'ถ้ำใต้น้ำ Izlude ชั้น 4 · ต่อจากชั้น 3',
     mobs: [
-      { id: 1045, name: 'Marc' },
-      { id: 1069, name: 'Swordfish' },
-      { id: 1158, name: 'Phen' },
-      { id: 1142, name: 'Marine Sphere' },
-      { id: 1068, name: 'Hydra' },
+      { id: 1158, name: 'Phen', n: 45 },
+      { id: 1045, name: 'Marc', n: 40 },
+      { id: 1069, name: 'Swordfish', n: 40 },
+      { id: 1068, name: 'Hydra', n: 30 },
+      { id: 1142, name: 'Marine Sphere', n: 20 },
     ],
   },
   {
     code: 'iz_dun04',
     name: 'Izlude Undersea Cave 5F',
-    th: 'ถ้ำใต้น้ำ Izlude ชั้น 5',
-    where: 'ต่อจากชั้น 4',
+    th: 'ถ้ำใต้น้ำ Izlude ชั้น 5 · ต่อจากชั้น 4',
     mobs: [
-      { id: 1264, name: 'Merman' },
-      { id: 1065, name: 'Strouf' },
-      { id: 1069, name: 'Swordfish' },
-      { id: 1108, name: 'Deviace' },
-      { id: 1142, name: 'Marine Sphere' },
+      { id: 1264, name: 'Merman', n: 61 },
+      { id: 1065, name: 'Strouf', n: 58 },
+      { id: 1068, name: 'Hydra', n: 18 },
+      { id: 1069, name: 'Swordfish', n: 11 },
+      { id: 1142, name: 'Marine Sphere', n: 11 },
+      { id: 1108, name: 'Deviace', n: 3 },
     ],
   },
 ];
@@ -87,12 +84,40 @@ function MobList({ mobs }: { mobs: Mob[] }) {
           <Link href={`/database/monsters/${m.id}`} className="pmob">
             <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
             <span className="pmob__name">{m.name}</span>
+            {m.n != null && <span className="pmob__meta">×{m.n}</span>}
           </Link>
         </li>
       ))}
     </ul>
   );
 }
+
+function Mats({ items }: { items: Mat[] }) {
+  return (
+    <ul className="evmats">
+      {items.map((m) => (
+        <li key={m.id}>
+          <Link href={`/database/items/${m.id}`} className="evmat">
+            <img src={`/images/items/${m.id}.${m.ext ?? 'gif'}`} alt="" width={24} height={24} loading="lazy" />
+            <span>{m.name}</span>
+            {m.qty != null && <b>×{m.qty}</b>}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+const Tag = () => <span className="unverified">จากไฟล์เกม</span>;
+
+const JUMPS: { href: string; img: string; label: string; sub: string }[] = [
+  { href: '#reset-cat', img: '/images/items/6635.gif', label: 'Reset Cat', sub: 'รีเซ็ตฟรี ถึง 15 พ.ย.' },
+  { href: '#ant-hell', img: '/images/monsters/1147.gif', label: 'Ant Hell Memorial', sub: 'ดันใหม่ Lv 70' },
+  { href: '#hunting', img: '/images/monsters/1127.gif', label: 'Hunting Season', sub: 'ถึง 26 พ.ย.' },
+  { href: '#blessing', img: '/images/items/1002357.gif', label: 'แลก Blessing', sub: 'สัปดาห์ละครั้ง ถึง 26 พ.ย.' },
+  { href: '#dungeons', img: '/images/monsters/1264.gif', label: 'ดันใหม่ 3 ชั้น', sub: 'Karu · Izlude 4–5' },
+  { href: '#level', img: '/images/items/15221.gif', label: 'เลเวล 80 + EXP', sub: 'ตาราง EXP ใหม่' },
+];
 
 export default function Patch20261112() {
   return (
@@ -121,168 +146,254 @@ export default function Patch20261112() {
         <span className="crumbs__here">แพทช์ 12 พ.ย.</span>
       </nav>
 
-      <header className="phero">
-        <p className="phero__date">ประกาศ 10–11 พฤศจิกายน 2569</p>
-        <h1 className="phero__title">แพทช์ 12 พ.ย. · เลเวลตัน 80</h1>
-        <p className="phero__lead">
-          ขยายเลเวลตันเป็น 80 · ดันเจี้ยนใหม่ Karu และ Izlude ใต้น้ำชั้น 4–5 · Memorial Dungeon Ant Hell ·
-          อีเวนต์ล่า Hode/Orc Warrior, แลก Blacksmith Blessing, Reset Cat รีเซ็ตฟรี
+      <header className="evhero">
+        <p className="evhero__kicker">PATCH · 12 NOV 2026</p>
+        <h1 className="evsec__title" style={{ marginTop: 0 }}>แพทช์ 12 พ.ย. · เลเวลตัน 80</h1>
+        <p className="evhero__date">
+          <span className="evhero__live">LIVE</span>
+          ปิดปรับปรุง 08:00–11:45 น. เซิร์ฟเปิดแล้ว · Base Level สูงสุด 80 (Job ยัง 70)
         </p>
-        <p className="phero__pill">ปิดปรับปรุง พฤหัส 12 พ.ย. 08:00 น. เวลาไทย</p>
+        <ul className="evtiles">
+          {JUMPS.map((j) => (
+            <li key={j.href}>
+              <a href={j.href}>
+                <img src={j.img} alt="" loading="lazy" />
+                <span>{j.label}</span>
+                <small>{j.sub}</small>
+              </a>
+            </li>
+          ))}
+        </ul>
       </header>
 
-      <aside className="pnote" role="note" style={{ marginTop: 14 }}>
-        <strong>เขียนก่อนแพทช์ลง</strong> จากประกาศ Discord ทางการ ซึ่งบอกเป็นหัวข้อสั้นๆ ทีมงานแจ้งว่ารายละเอียดจะประกาศแยก ·
-        ไฟล์เกมชุดล่าสุด (9 พ.ย.) ยังไม่มีของแพทช์นี้ · ข้อมูลมอนและดันเจี้ยนด้านล่างเป็นข้อมูลเดิมของเว็บ อาจเปลี่ยนหลังแพทช์ลง
-      </aside>
-
-      <section className="phl" aria-label="สรุปแพทช์" style={{ marginTop: 18 }}>
-        {HIGHLIGHTS.map((h) => (
-          <article key={h.title} className="phl__tile">
-            <p className="phl__big">{h.big}</p>
-            <h2 className="phl__title">{h.title}</h2>
-            <p className="phl__body">{h.body}</p>
-            {h.href && <a className="phl__link" href={h.href}>{h.link} →</a>}
-          </article>
-        ))}
+      <section className="pdeadline" aria-label="ของที่มีวันหมด">
+        <h2 className="pdeadline__h">ทำก่อนหมดเวลา</h2>
+        <ol className="pdeadline__list">
+          <li><time>15 พ.ย.</time><span><a href="#reset-cat">Reset Cat</a> รีเซ็ตสเตตัสและสกิลฟรี</span></li>
+          <li><time>26 พ.ย.</time><span><a href="#hunting">Hunting Season</a> เก็บการ์ด Hode / Orc Warrior</span></li>
+          <li><time>26 พ.ย.</time><span><a href="#blessing">แลก Blacksmith Blessing</a> สัปดาห์ละ 1 ขวด</span></li>
+        </ol>
+        <p className="pdeadline__note">วันตามประกาศ (เวลา UTC) · ประกาศไม่บอกชั่วโมงที่จบ</p>
       </section>
 
-      <section id="maint" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">1</span>เวลาปิดปรับปรุง (เวลาไทย)</h2>
-        <div className="card card--yellow">
-          <table className="stat-table ct-times">
-            <tbody>
-              <tr><td>วันที่</td><td className="num">พฤหัส 12 พ.ย. 2569</td></tr>
-              <tr><td>เริ่มปิด</td><td className="num">08:00 น.</td></tr>
-              <tr><td>เปิดเซิร์ฟ</td><td className="num">ยังไม่ประกาศ</td></tr>
-            </tbody>
-          </table>
-          <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-            เวลาอาจเลื่อนได้ ถ้าเปลี่ยนทีมงานจะประกาศก่อน · ออกจากเกมก่อน 08:00 น. ·
-            ของใน Kafra Shop บางชิ้นอาจหมดรอบหลังปิดปรับปรุง ดูวันหมดเขตในร้านก่อน
-          </p>
+      {/* ---------------- Reset Cat ---------------- */}
+      <section id="reset-cat" className="evsec evsec--pink">
+        <p className="evsec__tag">EVENT · 12–15 NOV</p>
+        <h2 className="evsec__title">Reset Cat กลับมา: รีเซ็ตฟรี</h2>
+        <p className="evsec__lead">มาให้ทันเลเวลตัน 80 · รีเซ็ตสเตตัสและสกิลได้ฟรี ไม่เสีย Zelstar</p>
+        <ol className="evsteps">
+          <li>ไป Payon <NaviCopy cmd="/navi payon 165/49" /></li>
+          <li>คุยกับ Reset Cat เลือกรีเซ็ตสเตตัสหรือสกิล</li>
+        </ol>
+        <p className="evnote">
+          ปกติรีเซ็ตฟรีถึง Lv 40 เกินจากนั้นเสีย Zelstar (<Link href="/guides/social">ค่ารีเซ็ต</Link>) ·
+          วางแผนก่อนรีเซ็ตที่ <Link href="/tools/build">ตัวจัดบิลด์</Link> กับ <Link href="/tools/skill-planner">วางแผนสกิล</Link>
+        </p>
+      </section>
+
+      {/* ---------------- Ant Hell ---------------- */}
+      <section id="ant-hell" className="evsec evsec--yellow">
+        <p className="evsec__tag">MEMORIAL DUNGEON · LV 70</p>
+        <h2 className="evsec__title">Ant Hell Memorial</h2>
+        <p className="evsec__lead">
+          <b>ทางเข้าอยู่ Prontera Field ไม่ใช่ในดัน Ant Hell เดิม</b> · เข้าเป็นปาร์ตี้ Base Lv 70 ขึ้นไป
+        </p>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src={`${IMG}/memorial-member.png`} alt="Memorial Association Member" width={42} loading="lazy" /></span>
+            <figcaption>
+              <strong>Memorial Association Member</strong>
+              <NaviCopy cmd="/navi prt_fild06 37/197" />
+            </figcaption>
+          </figure>
         </div>
+
+        <h3 className="evh">วิธีเล่น</h3>
+        <ol className="evsteps">
+          <li>คุย Memorial Association Member แล้วเข้าวาร์ปข้าง NPC</li>
+          <li>อุดบ่อพิษให้ครบ (จุดแดงบนแผนที่) ระหว่างทางเจอ Cannibal Deniro, Vitata, Andre, Pierre</li>
+          <li>สู้บอส <b>Cannibal Maya</b></li>
+        </ol>
+        <table className="stat-table pboss">
+          <tbody>
+            <tr><td>บอส</td><td>Cannibal Maya · Lv 70</td></tr>
+            <tr><td>HP</td><td className="num">2,200,000</td></tr>
+            <tr><td>DEF / MDEF</td><td className="num">183 / 50</td></tr>
+            <tr><td>ประเภท</td><td>แมลง ขนาดใหญ่ ธาตุดิน 4 → ใช้อาวุธธาตุลม</td></tr>
+          </tbody>
+        </table>
+
+        <div className="evreward">
+          <span className="evreward__tag">REWARD</span> หีบธรรมดา
+          <Mats items={[
+            { id: 25424, name: 'Faintly Glowing Crystal' },
+            { id: 25475, name: 'Crystal of Blue Light' },
+            { id: 23649, name: 'Jellopy Fragment Box' },
+          ]} />
+          <span className="evreward__tag">REWARD</span> หีบโหด
+          <Mats items={[
+            { id: 28571, name: 'Red Oath Ring' },
+            { id: 25460, name: 'Ruby Soaked in Blood' },
+            { id: 25424, name: 'Faintly Glowing Crystal' },
+          ]} />
+          <span className="evsmall">+ แร่ Mithril / Elunium / Oridecon และหินธาตุ</span>
+        </div>
+        <p className="evnote">
+          ทางเข้าจากประกาศทางการ · วิธีเล่น บอส และของรางวัลจากไกด์ผู้เล่นก่อนเปิดบน Global ยังไม่ได้เช็กในเกม ·{' '}
+          <Link href="/guides/memorial-dungeons">ดันเจี้ยนความทรงจำทั้งหมด</Link>
+        </p>
+
+        <h3 className="evh">อุปกรณ์ Memorial Lv 70 (Expedition)</h3>
+        <Mats items={[{ id: 15221, name: "Expedition's Armor" }, { id: 29405, name: 'Crusader Essence Lv.1' }]} />
+        <ul className="evsteps" style={{ listStyle: 'disc' }}>
+          <li>อัปจากชุด Subjugation (Lv 60) ด้วย <b>Faintly Glowing Crystal ×50</b> + Jellostone · อัปแล้วขั้นตีบวก การ์ด เอนแชนต์ของชิ้นเดิมหาย</li>
+          <li><b>เสื้อ Expedition ตี +9 เอนแชนต์ได้ Essence อาชีพ 2</b> · เห็นในเกมแล้ว 12 พ.ย. (<Link href="/tools/enchant#essence">Essence ทุกอาชีพ</Link>)</li>
+          <li>เซ็ต 4 ชิ้นสายกายภาพ ATK +20 · ตีบวกรวม 21 ขึ้นไป ASPD +5% ลดเวลาร่ายแบบคงที่ 5%</li>
+        </ul>
+        <p className="evnote">
+          <Link href="/guides/memorial-gear">อุปกรณ์ Memorial ทุกแรงค์</Link> · แรงค์ II (Lv 80) ยังไม่ประกาศ
+        </p>
       </section>
 
-      <section id="level" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">2</span>เลเวลตัน 80 และ EXP</h2>
-        <div className="ct-two">
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>Base Lv 70 → 80</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              ขยายเฉพาะ Base Level · Job Level ยังตันที่ 70 เท่าเดิม · เพิ่มเควสรายวันสำหรับ Lv 80 ด้วย
-            </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              เครื่องมือในเว็บ (สกิล บิลด์ อุปกรณ์ Memorial) ยังคิดที่เลเวลตัน 70 จนกว่าแพทช์ลงแล้ว ·
-              ตามแผนปีแรก <Link href="/news/roadmap">โรดแมป</Link> เดือน พ.ย. คือขยายเลเวลตันกับ Ant Hell ตรงกับรอบนี้
-            </p>
+      {/* ---------------- Hunting Season ---------------- */}
+      <section id="hunting" className="evsec evsec--cyan">
+        <p className="evsec__tag">EVENT · 12–26 NOV</p>
+        <h2 className="evsec__title">Hunting Season: Hode และ Orc Warrior</h2>
+        <p className="evsec__lead">
+          สองตัวนี้เกิดถี่ขึ้น · เก็บการ์ดไว้แลกคอสตูมพิเศษ · ประกาศบอกให้เตรียมรับ <b>Phreeoni กับ Maya</b>
+        </p>
+        <div className="evdaily">
+          <div className="evmob">
+            <img src="/images/monsters/1127.gif" alt="" loading="lazy" />
+            <span><Link href="/database/monsters/1127"><b>Hode</b></Link> Lv 81 ธาตุดิน<br /><small>Sograt Desert · <Link href="/database/maps/moc_fild16">moc_fild16</Link> / <Link href="/database/maps/moc_fild17">17</Link></small></span>
           </div>
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>EXP เลเวล 2–70 ลดลง</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              EXP ที่ต้องใช้ขึ้นเลเวล Base 2 ถึง 70 น้อยลง ประกาศยังไม่บอกว่าลดเท่าไร
-            </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              ตารางใน <Link href="/guides/exp">ไกด์ EXP</Link> เป็นค่าก่อนแพทช์ จะอัปเดตเมื่อได้ตัวเลขใหม่
-            </p>
+          <div className="evmob">
+            <img src="/images/monsters/1023.gif" alt="" loading="lazy" />
+            <span><Link href="/database/monsters/1023"><b>Orc Warrior</b></Link> Lv 52 ธาตุดิน<br /><small>Orc Village · <Link href="/database/maps/gef_fild10">gef_fild10</Link></small></span>
           </div>
         </div>
+        <h3 className="evh">ของแลก <Tag /></h3>
+        <Mats items={[
+          { id: 1003364, name: '[Event] Warrior Token', ext: 'png' },
+          { id: 1003365, name: '[Event] Insect Token', ext: 'png' },
+        ]} />
+        <p className="evsmall">ได้จากการแลกการ์ด ใช้แลก Costume · หายเมื่อจบอีเวนต์</p>
+        <p className="evnote">
+          ทั้งสองตัวธาตุดิน ใช้อาวุธธาตุลม · กติกาแลกและรายการคอสตูม ทีมงานจะลงประกาศแยก (ยังไม่ออก)
+        </p>
       </section>
 
-      <section id="dungeons" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">3</span>ดันเจี้ยนใหม่</h2>
-        <div className="ct-two">
+      {/* ---------------- Blacksmith's Blessing ---------------- */}
+      <section id="blessing" className="evsec evsec--pink">
+        <p className="evsec__tag">EVENT · 12–26 NOV</p>
+        <h2 className="evsec__title">แลก Blacksmith Blessing</h2>
+        <p className="evsec__lead">ของกันอุปกรณ์แตกหรือลดขั้นตอนตีบวก +7 ขึ้นไป · อีกทางนอกจากกล่อง MVP Raid</p>
+        <div className="pswap">
+          <Mats items={[{ id: 1002357, name: 'Blacksmith Blessing Powder', qty: 100 }]} />
+          <span className="pswap__plus">+ 1,000,000 Zeny</span>
+          <span className="pswap__arrow" aria-hidden="true">→</span>
+          <Mats items={[{ id: 6635, name: 'Blacksmith Blessing', qty: 1 }]} />
+        </div>
+        <div className="evreward">
+          <span className="evreward__tag">LIMIT</span> สัปดาห์ละครั้ง ต่อตัวละคร · ถึง 26 พ.ย.
+        </div>
+        <p className="evnote">
+          NPC ที่แลก ทีมงานจะบอกในประกาศแยก · <Link href="/guides/mvp">ไกด์ MVP</Link> · <Link href="/tools/refine">ตีบวก</Link>
+        </p>
+      </section>
+
+      {/* ---------------- Dungeons ---------------- */}
+      <section id="dungeons" className="evsec evsec--cyan">
+        <p className="evsec__tag">NEW AREA</p>
+        <h2 className="evsec__title">ดันเจี้ยนใหม่ 3 ชั้น</h2>
+        <p className="evsec__lead">Western Cave Karu ที่ Comodo กับ Izlude Undersea Cave ชั้น 4 และ 5</p>
+        <div className="pdungeons">
           {DUNGEONS.map((d) => (
-            <div key={d.code} className="card">
-              <h3 className="pxh" style={{ marginTop: 0 }}>
+            <div key={d.code} className="pdungeon">
+              <h3 className="evh" style={{ marginTop: 0 }}>
                 <Link href={`/database/maps/${d.code}`}>{d.name}</Link>
               </h3>
-              <p className="muted" style={{ margin: '0 0 10px', fontSize: 13.5 }}>{d.th} · {d.where}</p>
+              <p className="evsmall">{d.th}</p>
               <MobList mobs={d.mobs} />
             </div>
           ))}
         </div>
-        <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
-          รายชื่อมอนเป็นข้อมูลเดิมของเว็บ ยังไม่ได้เช็กกับเกมหลังแพทช์ · Karu ตอนแมพเปิดเมื่อ 28 ต.ค. ยังไม่มีมอน
+        <p className="evnote">
+          <Tag /> มอนและจำนวนจากไคลเอนต์ 12 พ.ย. ไม่รวม Knight Poring ที่ออกทุกแมพและมอน Challenge ·
+          มอนใน Karu เลเวล 89–102 สูงกว่าเลเวลตัน · Strouf กับ Merman ธาตุน้ำ 3 ใช้ธาตุลม
         </p>
       </section>
 
-      <section id="memorial" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">4</span>Memorial Dungeon Ant Hell และอุปกรณ์ Lv 70</h2>
-        <div className="ct-two">
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>Ant Hell (Lv 70)</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              เข้าเป็นปาร์ตี้ · อุดบ่อพิษให้ครบ แล้วสู้บอส <b>Cannibal Maya</b> (HP 2.2 ล้าน ธาตุดิน 4)
-            </p>
-            <MobList mobs={[{ id: 1147, name: 'Maya' }, { id: 1095, name: 'Andre' }]} />
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              ข้อมูลจากไกด์ผู้เล่นก่อนเปิดบน Global รูปในการ์ดเป็นมอนต้นแบบ ไม่ใช่ตัวในดัน ·{' '}
-              <Link href="/guides/memorial-dungeons">ดันเจี้ยนความทรงจำ</Link>
-            </p>
-          </div>
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>อุปกรณ์ Memorial Lv 70</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              ประกาศเขียนว่า &ldquo;Level 70 Memorial Dungeon Equipment&rdquo; · ในเว็บคือแรงค์ III <b>Expedition</b> (สวมได้ Lv 70)
-              อัปจากแรงค์ IV ด้วย Faintly Glowing Crystal
-            </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              <Link href="/guides/memorial-gear">อุปกรณ์ Memorial ทุกแรงค์</Link> · ประกาศยังไม่บอกว่าเปิดทางอัปแบบไหน
-            </p>
-          </div>
+      {/* ---------------- Level and EXP ---------------- */}
+      <section id="level" className="evsec evsec--yellow">
+        <p className="evsec__tag">LEVEL 80</p>
+        <h2 className="evsec__title">เลเวลตัน 80 และ EXP ใหม่</h2>
+        <ul className="evsteps" style={{ listStyle: 'disc' }}>
+          <li>Base Level สูงสุด <b>80</b> · Job Level ยังตันที่ 70</li>
+          <li>เควสรายวันขั้นใหม่สำหรับ Lv 80 (ประกาศยังไม่บอก NPC)</li>
+          <li>EXP เลเวล 2–70 ลดลงมาก เช่น แถบ 49 → 50 จาก 14,834,800 เหลือ <b>1,506,000</b></li>
+        </ul>
+        <h3 className="evh">EXP กระโดดทุก 10 เลเวลหลัง 50</h3>
+        <table className="stat-table pexp">
+          <tbody>
+            <tr><td>Lv 50 → 51</td><td className="num">1,731,900</td></tr>
+            <tr><td>Lv 51 → 52</td><td className="num">8,659,500 <small>×5</small></td></tr>
+            <tr><td>Lv 61 → 62</td><td className="num">81,671,600 <small>×4</small></td></tr>
+            <tr><td>Lv 71 → 72</td><td className="num">577,729,800 <small>×3</small></td></tr>
+            <tr><td>Lv 79 → 80</td><td className="num">853,569,600</td></tr>
+          </tbody>
+        </table>
+        <div className="evreward">
+          <span className="evreward__tag">สรุป</span> 70 → 80 ใช้ราว 6,560 ล้าน EXP · ราว 5 เท่าของ 1 → 70 ทั้งหมด ·
+          ลด EXP 2–70 ช่วยคนตามหลัง ไม่ได้ทำให้ตัน 80 ง่ายขึ้น
         </div>
+        <p className="evnote">
+          <Link href="/guides/exp">ตาราง EXP ทุกเลเวล + ตัวคำนวณ</Link> (มี Job EXP อาชีพ 2 ถึง 70 แล้ว) ·
+          เครื่องมือในเว็บขยับเพดานเป็น 80 แล้ว
+        </p>
       </section>
 
-      <section id="events" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">5</span>อีเวนต์และร้าน</h2>
-        <div className="ct-two">
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>Hunting Season: Hode และ Orc Warrior</h3>
-            <MobList mobs={[{ id: 1127, name: 'Hode' }, { id: 1023, name: 'Orc Warrior' }]} />
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              Hode อยู่ <Link href="/database/maps/moc_fild17">Sograt Desert (moc_fild17)</Link> ·
-              Orc Warrior อยู่ <Link href="/database/maps/gef_fild10">Orc Village (gef_fild10)</Link> ·
-              ประกาศยังไม่บอกกติกาและของรางวัล
-            </p>
+      {/* ---------------- Shop and fixes ---------------- */}
+      <section id="shop" className="evsec evsec--pink">
+        <p className="evsec__tag">KAFRA SHOP · BUG FIX</p>
+        <h2 className="evsec__title">ร้านและบั๊กที่แก้</h2>
+        <h3 className="evh" style={{ marginTop: 6 }}>Light Gacha Scroll (เซิร์ฟ SEA) <Tag /></h3>
+        <div className="evshop">
+          <div>
+            <b>Special Light Costume Box</b>
+            <Mats items={[{ id: 31143, name: 'Krathong Crown', ext: 'png' }, { id: 19817, name: 'Ifrit’s Breath', ext: 'png' }]} />
+            <p>เลือกได้ 1 ชิ้น</p>
           </div>
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>แลก Blacksmith Blessing</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              อีเวนต์แลก <Link href="/database/items/6635">Blacksmith Blessing</Link> ของที่กันอุปกรณ์แตกตอนตีบวก ·
-              ประกาศยังไม่บอกว่าแลกด้วยอะไร
-            </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              ตอนนี้ได้จากกล่อง MVP Raid ด้วย (<Link href="/guides/mvp">ไกด์ MVP</Link>)
-            </p>
-          </div>
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>Reset Cat กลับมา</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              รีเซ็ตสเตตัสและสกิลฟรี · ประกาศยังไม่บอกว่าถึงวันไหน
-            </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              ปกติฟรีถึง Lv 40 เกินจากนั้นเสีย Zelstar (<Link href="/guides/social">ค่ารีเซ็ต</Link>)
-            </p>
-          </div>
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>Kafra Shop</h3>
-            <p style={{ margin: 0, lineHeight: 1.65 }}>
-              เซิร์ฟ SEA: Light Gacha Scroll · เซิร์ฟ EU: Costume Package
-            </p>
-            <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-              <Link href="/database/cash-shop">ร้าน Kafra</Link> · ยังไม่มีรายการของในกาชา
-            </p>
+          <div>
+            <b>Premium Light Costume Box</b>
+            <p>เลือก 1 ชิ้น: Sky Lantern, Katashiro Flying หรือ Leaf Umbrella</p>
           </div>
         </div>
+        <p className="evnote">
+          <Link href="/database/items/108534">Light Scroll</Link> ขายเป็นกล่องเดี่ยวและกล่องสิบ · ยังไม่รู้ราคาและอัตราสุ่ม · เซิร์ฟ EU ได้ Costume Package แทน ·{' '}
+          <Link href="/database/cash-shop">ร้าน Kafra</Link>
+        </p>
+
+        <details className="pfixes">
+          <summary>บั๊กที่แก้รอบนี้ 8 ข้อ</summary>
+          <ul>
+            <li><b>การ์ด Orc Lady</b> เพิ่มดาเมจไม่ติดกับ Orc บางตัว</li>
+            <li>หน้าต่างสเตตัสเขียน ATK ผิดเป็น P. ATK</li>
+            <li>อุปกรณ์โชว์ไอคอนช่องการ์ดผิด</li>
+            <li>มอนใน Clock Tower 4F เกิดใหม่แล้วค้าง</li>
+            <li>ของดรอปตกในจุดที่เดินไปเก็บไม่ได้</li>
+            <li>ประกาศบอส Raid ไม่บอกชื่อบอส</li>
+            <li>จำนวนมอนในหน้าต่าง Navigation แสดงผิด</li>
+            <li>คำอธิบายสกิล Sight ชัดขึ้น</li>
+          </ul>
+        </details>
       </section>
 
-      <section id="ongoing" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">6</span>ที่ยังเล่นได้ต่อ</h2>
+      <section id="ongoing" className="ct-ch" style={{ marginTop: 28 }}>
         <Link href="/news/events-2026-11" className="pevents">
           <span className="pevents__tag">ถึง 26 พ.ย.</span>
           <span className="pevents__body">
-            <strong>Gatchaman · Black Friday EXP x2</strong>
+            <strong>ยังเล่นได้ต่อ: Gatchaman · Black Friday EXP x2</strong>
             <small>เควสคอลแลบที่ Morocc · EXP x2 ดรอป +20% ทุกเสาร์อาทิตย์ · คอสตูมผี Ghostly</small>
           </span>
           <span className="pevents__go" aria-hidden="true">▶</span>
@@ -290,8 +401,11 @@ export default function Patch20261112() {
       </section>
 
       <p className="source-note" style={{ marginTop: 20 }}>
-        <strong>ที่มา:</strong> ประกาศ Discord ทางการ Ragnarok Zero: Global &ldquo;Scheduled Maintenance – 12th November 2026&rdquo; (10 พ.ย. 2569)
-        และ &ldquo;Scheduled Maintenance Reminder – 12th November, 2026&rdquo; (11 พ.ย. 2569) · มอน แมพ และ Memorial Dungeon จากฐานข้อมูลของเว็บก่อนแพทช์ ·
+        <strong>ที่มา:</strong> ประกาศทางการ <a href="https://roz.mygnjoy.com/en/news/update/189" rel="noopener" target="_blank">Update Notice 12 พ.ย.</a>
+        กับ <a href="https://roz.mygnjoy.com/en/news/notice/192" rel="noopener" target="_blank">ปิดปรับปรุงเสร็จ</a> และประกาศ Discord ทางการ 10–12 พ.ย. ·
+        ตาราง EXP จาก <a href="https://roz.mygnjoy.com/en/intro/guide/21" rel="noopener" target="_blank">คู่มือทางการ Character Level</a> ·
+        ป้าย <Tag /> = มาจากไคลเอนต์หลังแพทช์ 12 พ.ย. ยังไม่ได้เช็กในเกม · วิธีเล่นและของรางวัล Ant Hell จากไกด์ผู้เล่น ·
+        Essence อาชีพ 2 และโบนัสเซ็ต Expedition จากภาพหน้าจอในเกมของเจ้าของเว็บ · รูป NPC จากไฟล์เกม ·
         หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
       </p>
     </main>

@@ -2,30 +2,42 @@
 //
 // Two things about this data are worth knowing before using it.
 //
-// 1. The page stops at base level 50. The game does not. Nothing here should be
-//    extrapolated past the last row -- the curve is roughly x1.2 per level and
-//    an extrapolation would look authoritative while being invented.
+// 1. Until 12 Nov 2026 the page stopped at base level 50; it now runs 1-80
+//    (the cap). Nothing here should be extrapolated past the last row.
 //
-// 2. The guide labels the columns "LV" and "exp" and never says which direction
-//    a row means. It is settled now, and by two facts together: the site owner
-//    confirms the EXP bar resets to 0 on every level-up, so each row is one
-//    bar's worth rather than a running total; and row 1 is 0, so row 1 cannot
-//    be the bar a level-1 character fills or that character would level
-//    instantly.
-//
-//    So row N is the bar filled to REACH level N. A level-1 character is
-//    working on row 2 -- 2,500 EXP -- and on reaching level 2 starts again at
-//    zero against row 3. expToLevelUpFrom() is the function that says this.
+// 2. Each row is one bar's worth (the bar resets to 0 on level-up, owner).
+//    Internally row N is the bar filled to REACH level N, so a level-1
+//    character is working on row 2. The 12 Nov official page writes the same
+//    bars one row earlier (its row 1 is the 1 -> 2 bar); BASE_EXP_ROWS below
+//    shifts it. expToLevelUpFrom() is the function that says which bar a
+//    character is filling.
 
-/** The base EXP column, index 0 = level 1. Value is the guide's number for that row. */
+/**
+ * The base EXP column in "bar to reach level N" form, index 0 = level 1.
+ *
+ * Source: the official Game Guide > Character Level page as updated for the
+ * 12 Nov 2026 patch (read 12 Nov 2026), which now runs 1-80. That page lists
+ * row N as the EXP to go from level N to N+1 -- row 1 is 2,100, not 0, and it
+ * has a row for 80 even though 80 is the cap -- so it is shifted by one here:
+ * reach[N] = official[N - 1], and reach[1] = 0. The official row 80 (80 -> 81,
+ * 896,248,000) does not apply until the cap moves again and is left out.
+ * The same numbers appeared on roz.prontera.info the day before.
+ * The table before this patch (official 1-50, roztoday 51-70) is gone: the
+ * patch lowered levels 2-70.
+ */
 export const BASE_EXP_ROWS: number[] = [
-  0, 2_500, 3_000, 3_600, 4_300, 5_100, 6_100, 7_300, 8_700, 10_400,
-  12_400, 14_800, 17_700, 21_200, 25_400, 30_400, 36_400, 43_600, 52_300, 62_700,
-  75_200, 90_200, 108_200, 129_800, 155_700, 186_800, 224_100, 268_900, 322_600, 387_100,
-  464_500, 557_400, 668_800, 802_500, 963_000, 1_155_600, 1_386_700, 1_664_000, 1_996_800, 2_396_100,
-  2_875_300, 3_450_300, 4_140_300, 4_968_300, 5_961_900, 7_154_200, 8_585_000, 10_302_000, 12_362_400,
-  14_834_800,
+  0, 2_100, 2_400, 2_700, 3_100, 3_500, 4_000, 4_600, 5_200, 5_900,
+  6_700, 7_700, 8_800, 10_100, 11_600, 13_300, 15_200, 17_400, 20_000, 23_000,
+  26_400, 30_300, 34_800, 40_000, 46_000, 52_900, 60_800, 69_900, 80_300, 92_300,
+  106_100, 122_000, 140_300, 161_300, 185_400, 213_200, 245_100, 281_800, 324_000, 372_600,
+  428_400, 492_600, 566_400, 651_300, 748_900, 861_200, 990_300, 1_138_800, 1_309_600, 1_506_000,
+  1_731_900, 8_659_500, 9_525_400, 10_477_900, 11_525_600, 12_678_100, 13_945_900, 15_340_400, 16_874_400, 18_561_800,
+  20_417_900, 81_671_600, 89_838_700, 98_822_500, 108_704_700, 119_575_100, 131_532_600, 144_685_800, 159_154_300, 175_069_700,
+  192_576_600, 577_729_800, 606_616_200, 636_947_000, 668_794_300, 702_234_000, 737_345_700, 774_212_900, 812_923_500, 853_569_600,
 ];
+
+/** The official row for 80 -> 81, kept for the note on the page only. */
+export const EXP_PAST_CAP = 896_248_000;
 
 /** Novice job EXP, index 0 = job level 1. Novice caps at job level 10. */
 export const NOVICE_JOB_EXP_ROWS: number[] = [5, 12, 22, 35, 50, 113, 188, 256, 335, 425];
@@ -39,27 +51,27 @@ export const FIRST_JOB_EXP_ROWS: number[] = [
   70_030, 74_940, 79_800, 84_630, 89_610, 95_170, 100_420, 107_250, 112_070, 118_120,
 ];
 
+/** Second-class job EXP, index 0 = job level 1 (official guide, 12 Nov 2026). Job caps at 70. */
+export const SECOND_JOB_EXP_ROWS: number[] = [
+  1_600, 2_500, 4_200, 7_000, 10_300, 15_900, 18_900, 20_900, 22_600, 24_900,
+  28_800, 31_500, 32_000, 33_300, 35_100, 40_500, 44_100, 46_300, 48_500, 50_700,
+  56_000, 59_400, 63_500, 68_100, 76_000, 87_700, 94_500, 104_600, 114_600, 126_600,
+  143_700, 158_000, 172_300, 188_600, 208_100, 233_500, 259_600, 280_400, 300_300, 326_800,
+  384_900, 445_200, 492_000, 575_700, 655_900, 769_300, 894_000, 1_058_700, 1_207_000, 1_335_400,
+  1_669_250, 2_086_562, 2_608_202, 3_260_252, 4_075_315, 5_094_143, 6_367_678, 7_959_597, 9_949_496, 12_436_870,
+  15_546_087, 19_432_608, 24_290_760, 30_363_450, 37_954_312, 47_442_890, 59_303_612, 74_129_515, 92_661_893, 115_827_366,
+];
+
 export const MAX_PUBLISHED_BASE_LEVEL = BASE_EXP_ROWS.length;
 
 /**
- * Base EXP for levels 51-70 from roztoday.com/th/tools/exp (Emperium Weekly,
- * a fan site; read 15 Oct 2026 as the page shows it; owner asked for 60-70,
- * then 51-59 too, and for the range calculator to reach 70).
- * A second source, kept apart from the guide's rows above so the range
- * calculator never mixes them. Same row meaning as ours: its rows 2-50 equal
- * the guide's exactly. Caution: every row it has, 1 to 100, is the row before
- * x 1.2 rounded down to 100 -- including 71-100, which it marks estimated --
- * so these cannot be told apart from an extrapolation, and Taiwan's notes
- * (docs/GAME_MODEL.md) speak of a steeper 51-60 and an EXP cut near 70.
- * Not checked in game. Index 0 = level 51.
+ * A second source for levels past the official table. Empty since the
+ * 12 Nov 2026 official table covers 1-80; roztoday's 51-70 rows (15 Oct 2026)
+ * were retired with it. Kept so the calculator's labelling still works if the
+ * cap outruns the official table again.
  */
-export const SECOND_SOURCE_FIRST_LEVEL = 51;
-export const SECOND_SOURCE_BASE_EXP_ROWS: number[] = [
-  17_801_700, 21_362_000, 25_634_400, 30_761_200, 36_913_400, 44_296_000, 53_155_200,
-  63_786_200, 76_543_400,
-  91_852_000, 110_222_400, 132_266_800, 158_720_100, 190_464_100, 228_556_900,
-  274_268_200, 329_121_800, 394_946_100, 473_935_300, 568_722_300,
-];
+export const SECOND_SOURCE_FIRST_LEVEL = BASE_EXP_ROWS.length + 1;
+export const SECOND_SOURCE_BASE_EXP_ROWS: number[] = [];
 
 /**
  * The bar filled to arrive at this level, which a character one level below is

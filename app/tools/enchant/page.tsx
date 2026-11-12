@@ -68,8 +68,11 @@ export default function EnchantToolPage() {
             <strong>Essence อาชีพ 1 ได้จากเสื้อชุด Subjugation (เลเวล 60)</strong> ที่ตี +9 · <strong>เช็กในเกมแล้ว</strong>
           </li>
           <li>
-            <strong>Essence อาชีพ 2 ได้จาก Second Job Officer</strong> ที่รับชุดดันเลเวล 70–99 (Izlude 2F, Ant Hell 1F, Sunken Ship) ·
-            ตามบทพูด NPC ในไฟล์เกม ยังไม่ได้เช็กในเกม
+            <strong>Essence อาชีพ 2 ได้จากเสื้อชุด Memorial เลเวล 70 (Expedition&rsquo;s Armor)</strong> ที่ตี +9 ·
+            <strong>เห็นในเกมแล้ว 12 พ.ย.</strong> (ผู้เล่นสุ่มได้ Crusader Essence Lv.1) · <Link href="/news/patch-2026-11-12">แพทช์ 12 พ.ย.</Link>
+          </li>
+          <li>
+            บทพูด NPC Second Job Officer ในไฟล์เกมพูดถึงชุดดันเลเวล 70–99 (Izlude 2F, Ant Hell 1F, Sunken Ship) ด้วย · ส่วนนี้ยังไม่ได้เช็กในเกม
           </li>
           <li>
             <strong>อาชีพ 2 มีให้เลือก 2 แบบ</strong> (I กับ II) ต่างสายสกิลกัน แต่ละแบบมี Lv.1 กับ Lv.2 · Lv.2 แรงกว่า
@@ -84,7 +87,7 @@ export default function EnchantToolPage() {
         </p>
         <EssencePicker />
         <p className="guildp__src">
-          ที่มา: ค่าของ Essence จากข้อความไอเทมภาษาไทยในเกม · Essence อาชีพ 1 จากชุด Subjugation เช็กในเกม 3 พ.ย. · Essence อาชีพ 2 จากบทพูดของ NPC ในไฟล์เกม
+          ที่มา: ค่าของ Essence จากข้อความไอเทมภาษาไทยในเกม · Essence อาชีพ 1 จากชุด Subjugation เช็กในเกม 3 พ.ย. · Essence อาชีพ 2 จากเสื้อ Expedition +9 เห็นในเกม 12 พ.ย.
         </p>
       </section>
 

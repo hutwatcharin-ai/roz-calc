@@ -22,11 +22,12 @@ import { fetchAllRows } from '@/lib/fetch-all-rows';
 import { BASE_LEVEL_CAP } from '@/lib/level-cap';
 
 /**
- * Re-exported so this page keeps its own name for the number while the number
- * itself lives in one place (lib/level-cap). Ranks III, II and I need 70, 80
- * and 90, so the cap decides what the page shows as reachable.
+ * Ranks III, II and I need 70, 80 and 90. Until 12 Nov 2026 the base level
+ * cap decided what the page showed as reachable. The 12 Nov patch raised the
+ * cap to 80 but its notice only adds "Level 70 Memorial Dungeon Equipment"
+ * (rank III), so the page stays at 70 until rank II is announced.
  */
-export const LEVEL_CAP = BASE_LEVEL_CAP;
+export const LEVEL_CAP = Math.min(BASE_LEVEL_CAP, 70);
 
 export interface GearPiece {
   id: number | null;

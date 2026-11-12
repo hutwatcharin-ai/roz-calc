@@ -46,6 +46,12 @@ const PLAN = roadmap.plan as Plan[];
 // Our own patch pages: the half of this page that is not somebody's plan.
 const LANDED = [
   {
+    href: '/news/patch-2026-11-12',
+    when: '12 พ.ย. 2569',
+    title: 'เลเวลตัน 80, Ant Hell Memorial, Karu, Izlude ใต้น้ำ 4–5',
+    body: 'Base Level สูงสุด 80 (Job ยัง 70) · เควสรายวัน Lv 80 · Memorial Dungeon Ant Hell และอุปกรณ์ Memorial Lv 70 · ดันใหม่ Western Cave Karu และ Izlude Undersea Cave ชั้น 4–5 · อีเวนต์ล่า Hode/Orc Warrior, แลก Blacksmith Blessing, Reset Cat',
+  },
+  {
     href: '/news/patch-2026-10-29',
     when: '29 ต.ค. 2569',
     title: 'Clock Tower, Gatchaman, Black Friday',
@@ -78,7 +84,7 @@ const LANDED = [
 ];
 
 // The months the roadmap lists that our own patch pages already show live.
-const DONE_MONTHS = new Set(['2026-08', '2026-09', '2026-10']);
+const DONE_MONTHS = new Set(['2026-08', '2026-09', '2026-10', '2026-11']);
 
 export default function RoadmapPage() {
   return (

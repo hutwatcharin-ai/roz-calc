@@ -27,7 +27,7 @@ const EXTRA: Record<string, NewsCardExtra> = {
   // Clock Tower monsters: Clock, Alarm, Rideword.
   'patch-2026-10-29': { blurb: 'ปิดปรับปรุง 29 ต.ค. 08:00–14:00 น. · ดันใหม่ เควสรายวัน อุปกรณ์ใหม่ 12 ชิ้น', cast: ['/images/monsters/1269.gif', '/images/monsters/1193.gif', '/images/monsters/1195.gif'] },
   // Ant Hell's Maya, Hode and Orc Warrior from the hunting event.
-  'patch-2026-11-12': { blurb: 'ปิดปรับปรุง 12 พ.ย. 08:00 น. · เลเวลตัน 80 · Ant Hell Memorial · ดันใหม่ 2 แห่ง', cast: ['/images/monsters/1147.gif', '/images/monsters/1127.gif', '/images/monsters/1023.gif'] },
+  'patch-2026-11-12': { blurb: 'ปิดปรับปรุง 12 พ.ย. 08:00–11:45 น. · เลเวลตัน 80 · Ant Hell Memorial · ดันใหม่ 2 แห่ง', cast: ['/images/monsters/1147.gif', '/images/monsters/1127.gif', '/images/monsters/1023.gif'] },
 };
 
 const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : null;

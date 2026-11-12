@@ -2490,6 +2490,10 @@
    {
     "name": "[Costume] Clock Tower Manager Headphones",
     "until": "2026-09-22"
+   },
+   {
+    "name": "Costume Clock Tower Manager Hat",
+    "until": "2026-11-12"
    }
   ],
   "20132": [
@@ -4272,6 +4276,12 @@
     "until": "2026-09-22"
    }
   ],
+  "31460": [
+   {
+    "name": "Costume Blessing Sky Lantern",
+    "until": "2026-11-12"
+   }
+  ],
   "31463": [
    {
     "name": "[Costume] Mini Scout Drone",
@@ -5148,6 +5158,18 @@
     "until": "2026-09-22"
    }
   ],
+  "106300": [
+   {
+    "name": "Costume Gatchaman Selection Scroll I",
+    "until": "2026-11-12"
+   }
+  ],
+  "106301": [
+   {
+    "name": "Costume Gatchaman Selection Scroll II",
+    "until": "2026-11-12"
+   }
+  ],
   "106337": [
    {
     "name": "[Event] Tool Dealer Summon Bell Box - 7 Days",
@@ -5650,6 +5672,12 @@
    {
     "name": "Fable Scroll 10 Box",
     "until": "2026-09-22"
+   }
+  ],
+  "201231": [
+   {
+    "name": "Ghostly Scroll 10 Box",
+    "until": "2026-11-12"
    }
   ],
   "300550": [
@@ -8190,6 +8218,12 @@
     "until": "2026-09-22"
    }
   ],
+  "410619": [
+   {
+    "name": "[Costume] >_< [Bound]",
+    "until": "2026-11-12"
+   }
+  ],
   "410636": [
    {
     "name": "[Costume] Pilot Fish",
@@ -10144,6 +10178,12 @@
     "until": "2026-10-29"
    }
   ],
+  "436028": [
+   {
+    "name": "[Costume] Praying Sky Lanterns [Bound]",
+    "until": "2026-11-12"
+   }
+  ],
   "440000": [
    {
     "name": "[Costume] Shark Hat",
@@ -10806,6 +10846,12 @@
    {
     "name": "[Costume] Giant Shark (Bound)",
     "until": "2026-09-22"
+   }
+  ],
+  "480711": [
+   {
+    "name": "[Costume] Fairy Leaf Umbrella [Bound]",
+    "until": "2026-11-12"
    }
   ],
   "480714": [

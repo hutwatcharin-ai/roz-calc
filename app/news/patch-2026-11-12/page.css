@@ -1,0 +1,50 @@
+/* /news/patch-2026-11-12: on top of the events-2026-10 look. */
+
+/* Small tag on the lines filled in from the patched client, not yet checked in game. */
+.unverified {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 0 6px;
+  border: 1px solid var(--yellow);
+  border-radius: 6px;
+  color: var(--yellow);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+/* "Before it ends" strip under the hero. */
+.pdeadline { margin-top: 18px; padding: 14px 16px; border-radius: 4px; background: #0d0824; border: 2px dashed var(--yellow); }
+.pdeadline__h { margin: 0 0 8px; font: 700 15px var(--font-chakra), var(--font-sarabun), sans-serif; color: var(--yellow); letter-spacing: 0.04em; }
+.pdeadline__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.pdeadline__list li { display: flex; align-items: baseline; gap: 12px; line-height: 1.5; }
+.pdeadline__list time { flex: none; min-width: 64px; padding: 1px 8px; border-radius: 3px; background: var(--yellow); color: #241E00; font: 700 13px var(--font-chakra), sans-serif; text-align: center; }
+.pdeadline__note { margin: 8px 0 0; color: var(--faint); font-size: 12.5px; }
+
+.pboss { margin-top: 10px; max-width: 460px; }
+.pexp { max-width: 420px; }
+.pexp small { margin-inline-start: 6px; color: var(--pink); font-weight: 700; }
+
+/* Powder + zeny -> Blessing. */
+.pswap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.pswap .evmats { margin: 0; }
+.pswap__plus { font: 700 15px var(--font-chakra), sans-serif; color: var(--yellow); }
+.pswap__arrow { font-size: 24px; color: var(--pink); }
+
+.pdungeons { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px; }
+.pdungeon { padding: 12px; border-radius: 4px; background: #0d0824; border: 1px solid var(--hair); }
+
+.pfixes { margin-top: 16px; padding: 10px 14px; border-radius: 4px; background: #0d0824; border: 1px solid var(--hair); }
+.pfixes summary { cursor: pointer; font-weight: 700; }
+.pfixes ul { margin: 8px 0 0; padding-inline-start: 20px; line-height: 1.7; }
+
+.evreward .evmats { margin: 6px 0 8px; }
+
+/* One NPC: let the card size to its /navi button instead of a 150px grid cell. */
+.pnpc { display: flex; flex-wrap: wrap; gap: 10px; }
+.pnpc .evnpc { flex: 0 1 auto; }
+.pnpc .evnpc figcaption { align-items: flex-start; }
+.pnpc .evnpc { max-width: 100%; }
+@media (min-width: 480px) { .pnpc .evnpc figcaption > * { white-space: nowrap; } }

@@ -8,10 +8,11 @@
 // seven phone screens: three long tables one under another with the
 // calculator buried in the middle. Now the calculator leads, levels 1-70 sit
 // in one table cut into bands of ten that open on tap (each band shows its
-// own total, so most readers never need to open one), and the two Job EXP
-// tables and the party numbers fold the same way. Levels 51-70 are the second
-// source (roztoday): a pink mark on every such row and band, never mixed
-// silently with the guide's.
+// own total, so most readers never need to open one), and the Job EXP
+// tables and the party numbers fold the same way. Since the 12 Nov 2026 patch
+// the official table covers 1-80 and the second job's Job EXP 1-70, so the
+// roztoday second source (51-70) is gone; the pink "second source" styling
+// stays for the day the cap outruns the official table again.
 
 import './page.css';
 import Caveat from '@/components/Caveat';
@@ -21,7 +22,9 @@ import ExpRangeCalculator from '@/components/ExpRangeCalculator';
 import { PARTY_EXP } from '@/lib/party-exp';
 import { BASE_LEVEL_CAP, BASE_LEVEL_CAP_SINCE } from '@/lib/level-cap';
 import {
+  EXP_PAST_CAP,
   FIRST_JOB_EXP_ROWS,
+  SECOND_JOB_EXP_ROWS,
   MAX_PUBLISHED_BASE_LEVEL,
   NOVICE_JOB_EXP_ROWS,
   baseRowsAllSources,
@@ -31,7 +34,7 @@ import {
 export const metadata = {
   title: 'ตาราง EXP ต่อเลเวล Ragnarok Zero',
   description:
-    'ตาราง EXP ต่อเลเวลของ Ragnarok Zero Global เลเวล 1-70 พร้อมยอดสะสม ตัวคำนวณ EXP จากเลเวลนี้ไปเลเวลนั้นและเวลาที่ใช้ Job EXP ของ Novice และอาชีพขั้นที่ 1 และ EXP ตอนเข้าปาร์ตี้',
+    'ตาราง EXP ต่อเลเวลของ Ragnarok Zero Global เลเวล 1-80 ตามคู่มือทางการหลังแพทช์ 12 พ.ย. 2569 พร้อมยอดสะสม ตัวคำนวณ EXP จากเลเวลนี้ไปเลเวลนั้น Job EXP ของ Novice อาชีพขั้นที่ 1 และขั้นที่ 2 และ EXP ตอนเข้าปาร์ตี้',
 };
 
 function num(value: number): string {
@@ -41,11 +44,10 @@ function num(value: number): string {
 const ROWS = baseRowsAllSources();
 const CUMULATIVE = ROWS.reduce<number[]>((acc, r) => [...acc, (acc.at(-1) ?? 0) + r.exp], []);
 const MAX_EXP = Math.max(...ROWS.map((r) => r.exp));
-const GUIDE_TOTAL = CUMULATIVE[MAX_PUBLISHED_BASE_LEVEL - 1];
-const SECOND_TOTAL = CUMULATIVE[CUMULATIVE.length - 1] - GUIDE_TOTAL;
-// For the curve's caption: the last ten levels against everything before.
-const EARLY = CUMULATIVE[59];
-const LATE = CUMULATIVE[CUMULATIVE.length - 1] - EARLY;
+const TOTAL = CUMULATIVE[CUMULATIVE.length - 1];
+// For the curve's caption and the tiles: the last ten levels against everything before.
+const EARLY = CUMULATIVE[69];
+const LATE = TOTAL - EARLY;
 
 /** Rows cut into bands of ten: 1-10, 11-20, ... */
 function bands<T>(rows: T[], size = 10): T[][] {
@@ -54,12 +56,12 @@ function bands<T>(rows: T[], size = 10): T[][] {
   return out;
 }
 
-/** The base curve as bars, 1 to 70; the second source's bars are striped pink. */
+/** The base curve as bars, 1 to the cap; a second source's bars, if any, are striped pink. */
 function ExpCurve() {
   const w = 700, h = 170, n = ROWS.length, bw = w / n;
   return (
     <figure className="expcurve">
-      <svg viewBox={`0 0 ${w} ${h + 18}`} role="img" aria-label={`EXP ต่อเลเวล 1 ถึง ${n} เพิ่มขึ้นเรื่อยๆ ราว 1.2 เท่าต่อเลเวล`}>
+      <svg viewBox={`0 0 ${w} ${h + 18}`} role="img" aria-label={`EXP ต่อเลเวล 1 ถึง ${n} กระโดดทุก 10 เลเวลหลัง 50`}>
         <defs>
           <pattern id="exp-stripe" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="6" height="6" style={{ fill: 'var(--pink)', filter: 'none' }} />
@@ -73,14 +75,13 @@ function ExpCurve() {
           const bh = Math.max(1, (r.exp / MAX_EXP) * h);
           return <rect key={r.level} x={i * bw + 1} y={h - bh} width={bw - 2} height={bh} rx={1.5} className={r.source === 'second' ? 'is-second' : undefined} />;
         })}
-        {[1, 10, 20, 30, 40, 50, 60, 70].map((l) => (
+        {[1, 10, 20, 30, 40, 50, 60, 70, 80].map((l) => (
           <text key={l} x={(l - 0.5) * bw} y={h + 14} textAnchor="middle">{l}</text>
         ))}
       </svg>
       <figcaption>
-        <span className="expkey expkey--guide" /> คู่มือทางการ (1-{MAX_PUBLISHED_BASE_LEVEL}) ·{' '}
-        <span className="expkey expkey--second" /> แหล่งรอง ยังไม่ยืนยัน ({MAX_PUBLISHED_BASE_LEVEL + 1}-{ROWS.length}) ·
-        เลเวล 61-{ROWS.length} รวมกันใช้ EXP ราว {Math.round(LATE / EARLY)} เท่าของเลเวล 1-60
+        <span className="expkey expkey--guide" /> คู่มือทางการ (1-{MAX_PUBLISHED_BASE_LEVEL}) ·
+        เลเวล 71-{ROWS.length} รวมกันใช้ EXP ราว {Math.round(LATE / EARLY)} เท่าของเลเวล 1-70
       </figcaption>
     </figure>
   );
@@ -164,8 +165,13 @@ export default function ExpPage() {
       <PageHeader
         title="ตาราง EXP ต่อเลเวล Ragnarok Zero"
         lead="ใส่เลเวลตอนนี้กับเลเวลที่อยากได้ แล้วดูว่าต้องเก็บ EXP อีกเท่าไร"
-        source={<><strong>ที่มา:</strong> คู่มือเกมทางการ (เลเวล 1-{MAX_PUBLISHED_BASE_LEVEL}) · roztoday (เลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} ยังไม่ยืนยัน)</>}
+        source={<><strong>ที่มา:</strong> คู่มือเกมทางการ Game Guide &gt; Character Level อัปเดตแพทช์ 12 พ.ย. 2569 (เลเวล 1-{MAX_PUBLISHED_BASE_LEVEL} · Job อาชีพ 2 ถึง 70)</>}
       />
+
+      <aside className="card card--yellow" role="note" style={{ marginTop: 14, fontSize: 14.5, lineHeight: 1.6 }}>
+        <strong>ตัวเลขใหม่หลังแพทช์ 12 พ.ย.</strong> EXP เลเวล 2–70 ลดลงมาก เช่น เลเวล 49 → 50 จาก 14,834,800 เหลือ 1,506,000 ·
+        เปิดเลเวล 71–{BASE_LEVEL_CAP} · <Link href="/news/patch-2026-11-12#level">แพทช์ 12 พ.ย.</Link>
+      </aside>
 
       <ExpRangeCalculator />
 
@@ -176,14 +182,14 @@ export default function ExpPage() {
           <span className="gtile__s">ตั้งแต่ {BASE_LEVEL_CAP_SINCE}</span>
         </div>
         <div className="gtile">
-          <span className="gtile__k">EXP รวม 1 → {MAX_PUBLISHED_BASE_LEVEL}</span>
-          <span className="gtile__v">{num(GUIDE_TOTAL)}</span>
+          <span className="gtile__k">EXP รวม 1 → 70</span>
+          <span className="gtile__v">{num(EARLY)}</span>
           <span className="gtile__s">คู่มือทางการ</span>
         </div>
-        <div className="gtile gtile--second">
-          <span className="gtile__k">EXP รวม {MAX_PUBLISHED_BASE_LEVEL} → {ROWS.length}</span>
-          <span className="gtile__v">{num(SECOND_TOTAL)}</span>
-          <span className="gtile__s">แหล่งรอง ยังไม่ยืนยัน</span>
+        <div className="gtile">
+          <span className="gtile__k">EXP รวม 70 → {ROWS.length}</span>
+          <span className="gtile__v">{num(LATE)}</span>
+          <span className="gtile__s">ราว {Math.round(LATE / EARLY)} เท่าของ 1 → 70</span>
         </div>
       </div>
 
@@ -198,13 +204,13 @@ export default function ExpPage() {
         <h2 className="section-title">ตาราง EXP เลเวลฐาน 1-{ROWS.length}</h2>
         <p className="muted expsec__lead">กดช่วงเลเวลเพื่อดูทีละเลเวล · แถว N = EXP ที่ต้องเก็บเพื่อขึ้นถึงเลเวล N</p>
         <span id="exp-60-70" aria-hidden="true" />
+        <span id="exp-70-80" aria-hidden="true" />
         <div className="expbands">
           {bands(ROWS).map((b) => <BaseBand key={b[0].level} rows={b} />)}
         </div>
-        <Caveat label="เลเวล 51-70 มาจากไหน">
-          คู่มือทางการมีถึงเลเวล {MAX_PUBLISHED_BASE_LEVEL} · เลเวล {MAX_PUBLISHED_BASE_LEVEL + 1}-{BASE_LEVEL_CAP} มาจาก{' '}
-          <a href="https://roztoday.com/th/tools/exp/" rel="nofollow noopener" target="_blank">roztoday</a> (เว็บแฟนเกม) ซึ่งแถว 2-50 ตรงกับคู่มือทุกแถว
-          แต่ทุกแถวของเขาคือแถวก่อนหน้า ×1.2 พอดี จึงยังบอกไม่ได้ว่าเป็นค่าจากเกมหรือคำนวณต่อเอง · ถ้าเลเวล 69 แถบเต็มที่ 568,722,300 แปลว่าตรง
+        <Caveat label="อ่านตารางยังไง">
+          คู่มือทางการเขียนแถว 1 = 2,100 คือ EXP จากเลเวล 1 ไป 2 · ตารางนี้เขียนเป็น &ldquo;ถึงเลเวล N&rdquo; จึงเลื่อนไปหนึ่งแถว (ถึงเลเวล 2 = 2,100) ·
+          แถวสุดท้ายของคู่มือ (80 → 81 = {num(EXP_PAST_CAP)}) ยังไม่ใช้จนกว่าเพดานจะขยับ
         </Caveat>
       </section>
 
@@ -217,11 +223,12 @@ export default function ExpPage() {
         <h2 className="section-title">Job EXP</h2>
         <p className="muted expsec__lead">
           Novice ตันที่ Job {NOVICE_JOB_EXP_ROWS.length} · อาชีพขั้นที่ 1 (Swordman, Mage, Archer, Merchant, Thief, Acolyte) ตันที่ Job {FIRST_JOB_EXP_ROWS.length} ·
-          อาชีพขั้นที่ 2 คู่มือยังไม่มีตาราง
+          อาชีพขั้นที่ 2 ตันที่ Job {SECOND_JOB_EXP_ROWS.length}
         </p>
         <div className="expbands">
           <JobBands rows={NOVICE_JOB_EXP_ROWS} label="Novice" />
           <JobBands rows={FIRST_JOB_EXP_ROWS} label="อาชีพ 1" />
+          <JobBands rows={SECOND_JOB_EXP_ROWS} label="อาชีพ 2" />
         </div>
       </section>
 

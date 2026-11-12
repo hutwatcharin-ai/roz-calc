@@ -7,8 +7,8 @@
 // Redesigned 15 Oct 2026 (owner: "make the EXP page easier to read"): it is
 // the first thing on the page now, as one arcade panel. Quick buttons for the
 // usual targets, and an optional EXP-per-hour box that turns the total into
-// hours. Up to the level cap: past 50 the rows are roztoday's unconfirmed
-// figures, and the result says so.
+// hours. Up to the level cap on the official table (1-80 since 12 Nov 2026);
+// if a second source is ever needed again, the result says so.
 
 import { useMemo, useState } from 'react';
 import { MAX_ANY_SOURCE_LEVEL, MAX_PUBLISHED_BASE_LEVEL, totalExpBetweenAnySource } from '@/lib/exp-table';
@@ -44,6 +44,7 @@ export default function ExpRangeCalculator() {
     ['ถึง 50', 50],
     ['ถึง 60', 60],
     ['ถึง 70', 70],
+    ['ถึง 80', 80],
   ];
 
   return (

@@ -28,8 +28,11 @@ describe('mapRelease', () => {
     for (const code of ['anthell01', 'anthell02', 'iz_dun00', 'iz_dun02', 'iz_d00_a', 'treasure01', 'tre_d01_a']) {
       expect(mapRelease(code), code).toBeNull();
     }
-    // Floors the client does not list are still closed.
-    expect(mapRelease('iz_dun03')?.area).toBe('Pirate Cave');
+    // The 12 Nov 2026 client adds Izlude Undersea 4F and 5F; Karu opens by
+    // the notice the same day.
+    for (const code of ['iz_dun03', 'iz_dun04', 'beach_dun']) {
+      expect(mapRelease(code), code).toBeNull();
+    }
   });
 
   it('opens Pyramid from the 17 Sep 2026 update even though rozerodb still banners it', () => {
