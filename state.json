@@ -160,7 +160,7 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-11-10T08:15:42.493000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1569909324791283714",
@@ -169,7 +169,7 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-11-11T02:59:10.535000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1570241954002768056",
