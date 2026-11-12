@@ -5,12 +5,12 @@
 // grid of identical pairs is noise. A tile keeps every item id behind it and
 // wears the first one that suits the filter and has a sprite for the class.
 import thumbs from '@/data/dress-up-thumbs.json';
-import { INDEX, SLOTS, hasSprite, slotsOf, wear, type Look, type Sex, type Slot } from './look';
+import { INDEX, SLOTS, drawsOn, fxOf, slotsOf, wear, type Look, type Sex, type Slot } from './look';
 
 export type Filter = 'all' | 'costume' | 'plain';
 
 export interface Tile {
-  /** `${acc|robe}/${view}|${slot letters}`, stable across builds */
+  /** `${acc|robe}/${view}|${slot letters}`, or `fx/${efId}|${slot letters}` for an effect-only costume */
   key: string;
   slots: Slot[];
   /** newest first */
@@ -29,11 +29,12 @@ export function allTiles(): Tile[] {
   const by = new Map<string, Tile>();
   for (const [sid, it] of Object.entries(INDEX.items)) {
     const id = Number(sid);
-    const kind = it[0] === 'g' ? 'robe' : 'acc';
-    const key = `${kind}/${it[1]}|${it[0]}`;
+    const ef = it[1] === 0 ? fxOf(id) : undefined;
+    const look = ef !== undefined ? `fx/${ef}` : `${it[0] === 'g' ? 'robe' : 'acc'}/${it[1]}`;
+    const key = `${look}|${it[0]}`;
     let t = by.get(key);
     if (!t) {
-      t = { key, slots: slotsOf(id), ids: [], thumb: THUMBS.at[`${kind}/${it[1]}`] };
+      t = { key, slots: slotsOf(id), ids: [], thumb: THUMBS.at[look] };
       by.set(key, t);
     }
     t.ids.push(id);
@@ -47,8 +48,8 @@ export function allTiles(): Tile[] {
 const suits = (id: number, filter: Filter, costume: ReadonlySet<number>) =>
   filter === 'all' || (filter === 'costume') === costume.has(id);
 
-/** Whether any item behind the tile has a sprite on some class (the rest draw nothing anywhere). */
-const drawnAnywhere = (t: Tile) => t.ids.some((id) => INDEX.items[String(id)][2] !== 0);
+/** Whether any item behind the tile shows on some class: a sprite or an effect (the rest draw nothing anywhere). */
+const drawnAnywhere = (t: Tile) => t.ids.some((id) => INDEX.items[String(id)][2] !== 0 || fxOf(id) !== undefined);
 
 /** The tiles that fill `slot`, kept to those with an item that suits the filter and draws on some class. */
 export function tilesFor(slot: Slot, filter: Filter, costume: ReadonlySet<number>): Tile[] {
@@ -59,12 +60,12 @@ export function tilesFor(slot: Slot, filter: Filter, costume: ReadonlySet<number
 export function pickId(tile: Tile, cls: string, sex: Sex, filter: Filter, costume: ReadonlySet<number>): number {
   const ok = tile.ids.filter((id) => suits(id, filter, costume));
   const pool = ok.length ? ok : tile.ids;
-  return pool.find((id) => hasSprite(id, cls, sex)) ?? pool[0];
+  return pool.find((id) => drawsOn(id, cls, sex)) ?? pool[0];
 }
 
-/** Whether any item behind the tile is drawn on this class and sex. */
+/** Whether any item behind the tile is drawn on this class and sex (its sprite or its effect). */
 export function tileDrawn(tile: Tile, cls: string, sex: Sex): boolean {
-  return tile.ids.some((id) => hasSprite(id, cls, sex));
+  return tile.ids.some((id) => drawsOn(id, cls, sex));
 }
 
 /** The tile an item belongs to. */

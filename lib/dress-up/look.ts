@@ -58,6 +58,8 @@ export interface ClientIndex {
   /** cart looks: cart/0 .. cart/(carts - 1) */
   carts: number;
   items: Record<string, ClientItem>;
+  /** item id -> the hat effect it wears (part fx/<efId>); effect-only costumes are [slots, 0, 0] */
+  fx?: Record<string, number>;
   files: Record<string, string>;
 }
 
@@ -96,6 +98,16 @@ export function hasSprite(itemId: number, cls: string, sex: Sex): boolean {
   const without = it[2];
   if (without === 0) return false;
   return !without || !without.includes(`${cls}-${sex}`);
+}
+
+/** The hat effect an item wears, if any. */
+export function fxOf(itemId: number): number | undefined {
+  return INDEX.fx?.[String(itemId)];
+}
+
+/** Whether the item shows anything on this class and sex: its sprite or its effect. */
+export function drawsOn(itemId: number, cls: string, sex: Sex): boolean {
+  return hasSprite(itemId, cls, sex) || fxOf(itemId) !== undefined;
 }
 
 /** Take off whatever fills `slot`, from every slot that item fills. */
@@ -146,7 +158,10 @@ export function drawable(look: Look): { parts: PartRef[]; missing: number[] } {
   const robes: number[] = [];
   for (const id of wornItems(look)) {
     const it = INDEX.items[String(id)];
-    if (!it || !hasSprite(id, look.cls, sex)) { missing.push(id); continue; }
+    if (!it || !hasSprite(id, look.cls, sex)) {
+      if (!it || fxOf(id) === undefined) missing.push(id); // an effect-only costume draws its effect
+      continue;
+    }
     if (it[0].includes('g')) { robes.push(id); continue; }
     if (!add(`acc/${it[1]}-${sex}`, true, 'acc')) missing.push(id);
   }
@@ -156,6 +171,17 @@ export function drawable(look: Look): { parts: PartRef[]; missing: number[] } {
   if (look.weapon && c?.weapons.includes(look.weapon)) add(`weapon/${look.cls}-${sex}-${look.weapon}`, false, 'weapon');
   if (look.cart !== undefined && c?.cart) add(`cart/${look.cart}`, false, 'cart');
   return { parts, missing };
+}
+
+/** The hat effects the worn items show, in slot order, each effect once. */
+export function fxFor(look: Look): { key: string; efId: number }[] {
+  const out: { key: string; efId: number }[] = [];
+  for (const id of wornItems(look)) {
+    const efId = fxOf(id);
+    if (efId === undefined || out.some((f) => f.efId === efId) || !INDEX.files[`fx/${efId}`]) continue;
+    out.push({ key: `fx/${efId}`, efId });
+  }
+  return out;
 }
 
 /** The parts that draw the look, or the worn item ids that have no sprite for its class and sex. */

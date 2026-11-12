@@ -8,18 +8,26 @@
 // new set is on its way the last picture stays put, so old parts are never
 // drawn in the new pose.
 //
+// Hat effects (lib/dress-up/fx.ts) go on four more canvases the same size: behind the
+// character and in front of it, each an ordinary one and an additive one (mix-blend-mode:
+// plus-lighter). They load with the parts and swap in with them; an effect that fails to
+// load is left out rather than taking the character down with it.
+//
 // Dragging across the stage turns the character like a turntable, one
 // direction every TURN_PX; the arrow keys do the same when it has focus.
 // Zoom (1x to ZOOM_MAX, about the middle of the character): the wheel, a two-finger pinch, the
 // + and - buttons in the corner, or the + and - keys.
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { actionFor, drawable, frameFor, type Look, type PartRef } from '@/lib/dress-up/look';
-import { DressUpUnavailable, loadPart, type LoadedPart } from '@/lib/dress-up/load';
+import { drawFxRect, fxFrameAt } from '@/lib/dress-up/fx';
+import { actionFor, drawable, frameFor, fxFor, type Look, type PartRef } from '@/lib/dress-up/look';
+import { DressUpUnavailable, loadFx, loadPart, type LoadedFx, type LoadedPart } from '@/lib/dress-up/load';
 import { composeFrame } from '@/lib/dress-up/render';
 import type { Placed } from '@/lib/dress-up/types';
 
 type Loaded = PartRef & LoadedPart;
-type Scene = { look: Look; loaded: Loaded[] };
+type Scene = { look: Look; loaded: Loaded[]; fx: LoadedFx[] };
+/** the composeFrame origin: the feet on the 200x200 canvas */
+const FEET = { x: 100, y: 150 };
 type Status = 'loading' | 'ready' | 'unavailable';
 
 const TURN_PX = 28;
@@ -64,20 +72,25 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon', zoo
   /** the zoom's fixed point: the middle of what the scene draws, in % of the stage */
   const [centre, setCentre] = useState({ x: 50, y: 60 });
   const canvas = useRef<HTMLCanvasElement>(null);
+  const backN = useRef<HTMLCanvasElement>(null);
+  const backA = useRef<HTMLCanvasElement>(null);
+  const frontN = useRef<HTMLCanvasElement>(null);
+  const frontA = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState<Status>('loading');
   const [scene, setScene] = useState<Scene | null>(null);
   const [attempt, setAttempt] = useState(0);
   const { parts } = useMemo(() => drawable(look), [look]);
+  const effects = useMemo(() => fxFor(look), [look]);
 
   // Load the look's parts (memoised in loadPart, so a pose change resolves at
   // once), then swap look and parts in together.
   useEffect(() => {
     let alive = true;
     setStatus('loading');
-    Promise.all(parts.map((p) => loadPart(p.key)))
-      .then((got) => {
+    Promise.all([Promise.all(parts.map((p) => loadPart(p.key))), Promise.all(effects.map((f) => loadFx(f.key).catch(() => null)))])
+      .then(([got, fx]) => {
         if (!alive) return;
-        setScene({ look, loaded: parts.map((p, i) => ({ ...p, ...got[i] })) });
+        setScene({ look, loaded: parts.map((p, i) => ({ ...p, ...got[i] })), fx: fx.filter((f): f is LoadedFx => f !== null) });
         setStatus('ready');
         onReady?.();
       })
@@ -87,27 +100,43 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon', zoo
         setStatus('unavailable');
       });
     return () => { alive = false; };
-  }, [look, parts, attempt]);
+  }, [look, parts, effects, attempt]);
 
   // Animate the current scene; the clock restarts with each new scene.
   useEffect(() => {
     const ctx = canvas.current?.getContext('2d');
+    const layers = [backN, backA, frontN, frontA].map((r) => r.current?.getContext('2d') ?? null);
     if (!ctx || !scene) return;
-    const { look: shown, loaded } = scene;
+    const { look: shown, loaded, fx } = scene;
+    for (const l of layers) l?.clearRect(0, 0, 200, 200);
     if (loaded.length === 0) {
       ctx.clearRect(0, 0, 200, 200);
       return;
     }
+    const [bn, ba, fn, fa] = layers;
     const action = actionFor(shown);
     const start = performance.now();
     let last = '';
+    let lastFx = '';
     let raf = 0;
     let centred = false;
     const tick = (now: number) => {
       // rAF's timestamp is when the frame began, which can be just before `start`.
       const ms = Math.max(0, now - start);
       const frames = loaded.map((p) => frameFor(p.kind, p.part, action, shown, ms));
+      const fxFrames = fx.map((f) => fxFrameAt(f.fx, ms));
+      const fxSig = fxFrames.join(',');
       const sig = frames.join(',');
+      if (fxSig !== lastFx) {
+        lastFx = fxSig;
+        for (const l of layers) l?.clearRect(0, 0, 200, 200);
+        fx.forEach((f, i) => {
+          const fr = f.fx.frames[fxFrames[i]];
+          if (!fr) return;
+          drawFxRect((f.fx.before ? bn : fn)!, f.atlas, fr.n, FEET.x, FEET.y);
+          drawFxRect((f.fx.before ? ba : fa)!, f.atlas, fr.a, FEET.x, FEET.y);
+        });
+      }
       if (sig !== last) {
         last = sig;
         const placed: Placed[] = loaded.map((p, i) => ({ part: p.part, atlas: p.atlas, anchored: p.anchored, frame: frames[i] }));
@@ -194,7 +223,11 @@ export default function DressStage({ look, onTurn, scene: backdrop = 'neon', zoo
         e.preventDefault();
       }}
     >
+      <canvas ref={backN} width={200} height={200} className="dress__canvas dress__fx" aria-hidden="true" />
+      <canvas ref={backA} width={200} height={200} className="dress__canvas dress__fx dress__fx--add" aria-hidden="true" />
       <canvas ref={canvas} width={200} height={200} className="dress__canvas" aria-label="ตัวละครที่แต่งไว้" role="img" />
+      <canvas ref={frontN} width={200} height={200} className="dress__canvas dress__fx" aria-hidden="true" />
+      <canvas ref={frontA} width={200} height={200} className="dress__canvas dress__fx dress__fx--add" aria-hidden="true" />
       {zoomable && <div className="dress__zoom" onPointerDown={(e) => e.stopPropagation()}>
         <button type="button" aria-label="ซูมเข้า" disabled={zoom >= ZOOM_MAX} onClick={() => setZoom((z) => clampZoom(z + 0.25))}>+</button>
         <button type="button" aria-label="ซูมออก" disabled={zoom <= 1} onClick={() => setZoom((z) => clampZoom(z - 0.25))}>−</button>

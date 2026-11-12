@@ -41,6 +41,21 @@ describe('allTiles', () => {
   });
 });
 
+describe('effect costumes in the picker', () => {
+  const fxOnly = Object.keys(INDEX.fx ?? {}).map(Number).filter((id) => INDEX.items[String(id)][1] === 0);
+
+  it('an effect-only item has a tile keyed by its effect, with a picture, listed for its slot', () => {
+    expect(fxOnly.length).toBeGreaterThan(0);
+    for (const id of fxOnly) {
+      const t = tileOf(id)!;
+      expect(t.key).toBe(`fx/${INDEX.fx![String(id)]}|${INDEX.items[String(id)][0]}`);
+      expect(t.thumb).toBeDefined();
+      expect(tilesFor(t.slots[0], 'all', new Set()).includes(t)).toBe(true);
+      expect(tileDrawn(t, 'knight', 'f')).toBe(true);
+    }
+  });
+});
+
 describe('tilesFor', () => {
   it('lists a multi-slot look under each slot it fills', () => {
     const t = allTiles().find((x) => x.slots.length > 1)!;

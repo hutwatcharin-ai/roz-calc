@@ -2,6 +2,7 @@
 // bucket and decode the atlas to RGBA. Browser only for the decode; memoised per
 // key. Any failure -- no base URL, a network error, a non-200, a bad image --
 // is DressUpUnavailable, so the page has one thing to catch (Review Focus 4).
+import type { FxData } from './fx';
 import { INDEX } from './look';
 import type { Atlas, PartData } from './types';
 
@@ -90,6 +91,40 @@ export function loadPart(key: string): Promise<LoadedPart> {
     cache.set(key, p);
     // A failure is not remembered, so a retry can succeed once the bucket answers.
     p.catch(() => cache.delete(key));
+  }
+  return p;
+}
+
+export type LoadedFx = { fx: FxData; atlas: ImageBitmap };
+
+const fxCache = new Map<string, Promise<LoadedFx>>();
+
+async function loadFxNow(key: string): Promise<LoadedFx> {
+  const root = base();
+  const hash = INDEX.files[key];
+  if (!hash) throw new DressUpUnavailable(`no file for ${key}`);
+  const stem = `${root}${key}.${hash}`;
+  const [jsonRes, webpRes] = await Promise.all([fetchOk(`${stem}.json`), fetchOk(`${stem}.webp`)]);
+  let fx: FxData;
+  try {
+    fx = (await jsonRes.json()) as FxData;
+  } catch {
+    throw new DressUpUnavailable(`bad JSON: ${key}`);
+  }
+  try {
+    return { fx, atlas: await createImageBitmap(await webpRes.blob()) };
+  } catch {
+    throw new DressUpUnavailable('atlas decode failed');
+  }
+}
+
+/** A hat effect (fx/<efId>), fetched once; drawn with drawImage, so its atlas stays an ImageBitmap. */
+export function loadFx(key: string): Promise<LoadedFx> {
+  let p = fxCache.get(key);
+  if (!p) {
+    p = loadFxNow(key);
+    fxCache.set(key, p);
+    p.catch(() => fxCache.delete(key));
   }
   return p;
 }

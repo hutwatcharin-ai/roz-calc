@@ -6,7 +6,7 @@
 // server (the game client's own item table).
 import { useMemo, useState } from 'react';
 import {
-  INDEX, POSE_TYPE, SLOTS, baseClass, classOf, hasSprite, highClass, mountOf, plainOf, sexOf, takeOff, wear, withClass,
+  INDEX, POSE_TYPE, SLOTS, baseClass, classOf, drawsOn, highClass, mountOf, plainOf, sexOf, takeOff, wear, withClass,
   withMount, withOutfit,
   type Look, type Pose, type Sex, type Slot,
 } from '@/lib/dress-up/look';
@@ -198,7 +198,7 @@ function WearTab({ look, onChange, names, aliases, costume }: Omit<Props, 'class
         {worn !== undefined ? (
           <>
             <span>{SLOT_TH[slot]}: <b>{names[worn] ?? `#${worn}`}</b></span>
-            {!hasSprite(worn, look.cls, sex) && <small className="dress__none">อาชีพนี้ยังไม่มีภาพ</small>}
+            {!drawsOn(worn, look.cls, sex) && <small className="dress__none">อาชีพนี้ยังไม่มีภาพ</small>}
             <button type="button" className="dress__x" onClick={() => onChange(takeOff(look, slot))}>ถอด</button>
           </>
         ) : (

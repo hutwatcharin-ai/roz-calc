@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import full from '@/data/dress-up.json';
 import { dollSex } from '@/lib/build-doll';
 import {
-  DEFAULT_LOOK, INDEX, actionFor, baseClass, drawable, frameFor, highClass, mountOf, partsFor, sexOf, takeOff, wear,
+  DEFAULT_LOOK, INDEX, actionFor, baseClass, drawable, drawsOn, frameFor, fxFor, highClass, mountOf, partsFor, sexOf, takeOff, wear,
   withClass, withMount, withOutfit, type Look,
 } from './look';
 import { DressUpUnavailable, loadPart } from './load';
@@ -92,6 +92,65 @@ describe('partsFor', () => {
     for (const c of full.classes) {
       const doll = baseClass(c.slug); // an outfit or a mount is drawn as its class's sexes
       for (const s of ['m', 'f'] as const) expect(sexOf({ ...DEFAULT_LOOK, cls: c.slug, sex: s })).toBe(dollSex(doll, s));
+    }
+  });
+});
+
+// An effect-only costume worn in the lower slot (an aura with no sprite), from the real index.
+const FX_LOWER = Number(Object.keys(INDEX.fx ?? {}).find((id) => INDEX.items[id]?.[0] === 'l' && INDEX.items[id]?.[1] === 0));
+const LOWER_PLAIN = Number(Object.keys(INDEX.items).find((id) => INDEX.items[id][0] === 'l' && INDEX.items[id].length === 2));
+
+describe('effect costumes (Review Focus 1-3)', () => {
+  it('the index has effect-only costumes', () => {
+    expect(FX_LOWER).toBeGreaterThan(0);
+    expect(INDEX.items[String(FX_LOWER)]).toEqual(['l', 0, 0]);
+  });
+
+  it('an effect-only item draws its effect and is not missing, on any class', () => {
+    for (const cls of ['novice', 'knight', 'gypsy']) {
+      const look = wear({ ...DEFAULT_LOOK, cls, sex: cls === 'gypsy' ? 'f' : 'm' }, FX_LOWER);
+      const d = drawable(look);
+      expect(d.missing).toEqual([]);
+      expect(d.parts.some((p) => p.kind === 'acc' || p.kind === 'robe')).toBe(false);
+      const ef = INDEX.fx![String(FX_LOWER)];
+      expect(fxFor(look)).toEqual([{ key: `fx/${ef}`, efId: ef }]);
+      expect(INDEX.files[`fx/${ef}`]).toMatch(/^[0-9a-f]{8}$/);
+      expect(drawsOn(FX_LOWER, cls, look.sex)).toBe(true);
+    }
+  });
+
+  it('a plain headgear worn in the same slot takes the effect off', () => {
+    const look = wear(wear(DEFAULT_LOOK, FX_LOWER), LOWER_PLAIN);
+    expect(fxFor(look)).toEqual([]);
+  });
+
+  it('an item with a sprite and an effect draws both', () => {
+    const items = INDEX.items;
+    const fx = INDEX.fx;
+    INDEX.items = { ...items, [String(UPPER_A)]: items[String(UPPER_A)] };
+    INDEX.fx = { ...fx, [String(UPPER_A)]: 56 };
+    INDEX.files = { ...INDEX.files };
+    const hadFile = 'fx/56' in INDEX.files;
+    if (!hadFile) INDEX.files['fx/56'] = '0123abcd';
+    try {
+      const look = wear(DEFAULT_LOOK, UPPER_A);
+      const view = (full.items as Record<string, { view: number }>)[UPPER_A].view;
+      expect(drawable(look).parts.map((p) => p.key)).toContain(`acc/${view}-m`);
+      expect(fxFor(look)).toEqual([{ key: 'fx/56', efId: 56 }]);
+    } finally {
+      INDEX.items = items;
+      INDEX.fx = fx;
+      if (!hadFile) delete INDEX.files['fx/56'];
+    }
+  });
+
+  it('two worn items with the same effect draw it once', () => {
+    const fx = INDEX.fx;
+    INDEX.fx = { ...fx, [String(MID_B)]: INDEX.fx![String(FX_LOWER)] };
+    try {
+      expect(fxFor(wear(wear(DEFAULT_LOOK, FX_LOWER), MID_B))).toHaveLength(1);
+    } finally {
+      INDEX.fx = fx;
     }
   });
 });
