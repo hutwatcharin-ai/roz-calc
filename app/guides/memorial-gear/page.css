@@ -32,3 +32,7 @@
 .gx .mgpiece__fx li::before { content: '▸'; position: absolute; left: 0; color: var(--cyan); }
 .gx .mgpiece__fx li.is-cond { margin-top: 4px; color: var(--pink); font-size: 12.5px; }
 .gx .mgpiece__fx li.is-cond::before { content: '◆'; color: var(--pink); font-size: 9px; top: 3px; }
+
+/* Lines taken from a player's video, not from the client or an official notice. */
+.preport { margin: 10px 0 0; padding: 8px 12px; border-left: 3px solid var(--yellow); background: rgba(255, 214, 0, 0.06); font-size: 13px; line-height: 1.6; }
+.preport__tag { display: inline-block; margin-right: 6px; padding: 0 6px; border: 1px solid var(--yellow); border-radius: 6px; color: var(--yellow); font-size: 12px; white-space: nowrap; }

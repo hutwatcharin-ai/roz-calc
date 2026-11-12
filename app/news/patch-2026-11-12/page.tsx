@@ -257,9 +257,10 @@ export default function Patch20261112() {
         <h3 className="evh">อุปกรณ์ Memorial Lv 70 (Expedition)</h3>
         <Mats items={[{ id: 15221, name: "Expedition's Armor" }, { id: 29405, name: 'Crusader Essence Lv.1' }]} />
         <ul className="evsteps" style={{ listStyle: 'disc' }}>
-          <li>อัปจากชุด Subjugation (Lv 60) ด้วย <b>Faintly Glowing Crystal ×50</b> + Jellostone · อัปแล้วขั้นตีบวก การ์ด เอนแชนต์ของชิ้นเดิมหาย</li>
+          <li>อัปจากชุด Subjugation (Lv 60) ด้วย <b>Faintly Glowing Crystal ×50</b> + Zelstone · อัปแล้วขั้นตีบวก การ์ด เอนแชนต์ของชิ้นเดิมหาย</li>
           <li><b>เสื้อ Expedition ตี +9 เอนแชนต์ได้ Essence อาชีพ 2</b> · เห็นในเกมแล้ว 12 พ.ย. (<Link href="/tools/enchant#essence">Essence ทุกอาชีพ</Link>)</li>
-          <li>เซ็ต 4 ชิ้นสายกายภาพ ATK +20 · ตีบวกรวม 21 ขึ้นไป ASPD +5% ลดเวลาร่ายแบบคงที่ 5%</li>
+          <li>เซ็ต 4 ชิ้นสายกายภาพ (Armor) ATK +20 · ตีบวกรวม 21 ขึ้นไป ASPD +5% ลดเวลาร่ายแบบคงที่ 5%</li>
+          <li>เซ็ต 4 ชิ้นสายเวท (Robe) MATK +20 · ตีบวกรวม 21 ขึ้นไป ลดเวลาร่ายแบบแปรผัน 5% และแบบคงที่ 5%</li>
         </ul>
         <p className="evnote">
           <Link href="/guides/memorial-gear">อุปกรณ์ Memorial ทุกแรงค์</Link> · แรงค์ II (Lv 80) ยังไม่ประกาศ

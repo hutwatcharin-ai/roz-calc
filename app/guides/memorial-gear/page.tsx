@@ -4,7 +4,7 @@
 //
 // The page exists because the ladder is the part nobody can read off an item:
 // the client tells you what Subjugation Team's Armor does, and never that it
-// turns into Expedition's Armor for 50 crystals and two Jellostones. It also
+// turns into Expedition's Armor for 50 crystals and two Zelstones (called Jellostone before the 22 Sep client). It also
 // exists because only one of the four ranks is wearable right now -- the cap
 // is 60 and the other three want 70, 80 and 90 -- and a player at 60 deciding
 // what to keep needs to see where each piece leads before it is useful.
@@ -63,6 +63,16 @@ function PieceCard({ piece, dim }: { piece: GearPiece; dim: boolean }) {
   );
 }
 
+// Said in a player's video (12 Nov 2026), not seen in the client or a notice.
+function PlayerReport({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="preport">
+      <span className="preport__tag">ผู้เล่นรายงาน 12 พ.ย.</span>
+      {children}
+    </p>
+  );
+}
+
 function SetTable({ pieces, dim }: { pieces: GearPiece[]; dim: boolean }) {
   return (
     <div className="rcards">
@@ -106,7 +116,7 @@ export default async function MemorialGearPage() {
         <a href="#ladder">สายอัปเกรด</a>
         {open.map((r) => <a key={r.rank} href={`#rank-${r.rank}`}>แรงค์ {r.rank}</a>)}
         <a href="#locked">แรงค์ที่ยังใส่ไม่ได้</a>
-        <a href="#stones">Jellostone</a>
+        <a href="#stones">Zelstone</a>
         <a href="#accessories">เครื่องประดับ</a>
         {SHOW_ENCHANT && <a href="#enchant">เอนแชนต์</a>}
       </nav>
@@ -143,8 +153,12 @@ export default async function MemorialGearPage() {
           ))}
         </ol>
         <p className="muted" style={{ marginTop: 12, fontSize: 13 }}>
-          ทุกขั้นใช้ของแรงค์ก่อนหน้า 1 ชิ้น + คริสตัล 50 ก้อน + Jellostone ตามชิ้น ของเดิมหายไปกลายเป็นชิ้นใหม่
+          ทุกขั้นใช้ของแรงค์ก่อนหน้า 1 ชิ้น + คริสตัล 50 ก้อน + Zelstone ตามชิ้น ของเดิมหายไปกลายเป็นชิ้นใหม่
         </p>
+        <PlayerReport>
+          ใส่ชิ้นเดิมไว้ก่อนแล้วคุยกับ NPC อัปอุปกรณ์ที่ยืนข้าง Stone Processor ·{' '}
+          <strong>การ์ดและค่าตีบวกของชิ้นเดิมหายหมด</strong> ถอดการ์ดออกก่อนอัป
+        </PlayerReport>
       </section>
 
       {open.map((r) => (
@@ -189,7 +203,7 @@ export default async function MemorialGearPage() {
       </section>
 
       <section id="stones" className="card" style={{ marginTop: 16, scrollMarginTop: 90 }}>
-        <h2 className="section-title">Jellostone ทำจากอะไร</h2>
+        <h2 className="section-title">Zelstone ทำจากอะไร</h2>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
           หินก้อนหนึ่งใช้เศษ 5 ชิ้น เศษดรอปจากมอนที่ชื่อตรงกับหิน
         </p>
@@ -202,6 +216,11 @@ export default async function MemorialGearPage() {
             </div>
           ))}
         </div>
+
+        <PlayerReport>
+          รวมเศษเป็นหินที่ NPC Stone Processor แล้วรอ 3 วันค่อยกลับมารับ หรือจ่าย Zelstar ×5 ได้ทันที ·
+          เศษดรอปในดันเจี้ยน Poring และดัน Maya
+        </PlayerReport>
 
         <h3 className="section-title" style={{ fontSize: 15, marginTop: 20 }}>ชิ้นไหนใช้หินอะไร</h3>
         <p className="muted" style={{ marginTop: 2, marginBottom: 10, fontSize: 13 }}>
@@ -328,6 +347,10 @@ export default async function MemorialGearPage() {
             <Link href="/tools/enchant#essence">ดูรายการและผลของแต่ละอัน</Link> ·
             เสื้อ Expedition (แรงค์ III, Lv 70) ตี +9 สุ่มได้ Essence อาชีพ 2 (เห็นในเกม 12 พ.ย.)
           </p>
+          <PlayerReport>
+            NPC เอนแชนต์มี 2 ตัว ออปชันอาชีพต้องคุยกับตัว &quot;คลาส 2&quot; และเสื้อต้อง +9 ·
+            อาชีพหนึ่งมีออปชัน 2 แบบ สุ่มได้ Lv 1 หรือ Lv 2 · รองเท้าและเครื่องประดับได้แค่ออปชันสเตตัส ไม่มีออปชันอาชีพ
+          </PlayerReport>
   
           <h3 className="section-title" style={{ fontSize: 15, marginTop: 22 }}>สุ่มได้อะไรบ้าง</h3>
           <p className="muted" style={{ marginTop: 2, marginBottom: 10, maxWidth: '70ch', fontSize: 13 }}>
@@ -365,7 +388,8 @@ export default async function MemorialGearPage() {
         ค่าของแต่ละชิ้นในตารางด้านบนเป็น<strong>ข้อความจากในเกม</strong>ที่เก็บไว้ในฐานข้อมูลเว็บนี้ ไม่ได้แปลหรือสรุปใหม่ ·
         ส่วนสายอัปเกรดและวัตถุดิบมาจากไกด์ภาษาฝรั่งเศส roz-global.info (อ่าน 8 ก.ย. 2026)
         ซึ่งเป็นข้อมูลที่ไคลเอนต์ไม่ได้บอก ตรวจแล้วว่าชื่อชิ้นทั้ง {pieceCount} ชิ้นตรงกับฐานข้อมูลเรา และตัวเลข HP/SP/DEF/FLEE ตรงกับในเกมทุกชิ้น ·
-        <strong>แรงค์ III ขึ้นไปยังไม่มีใครในเซิร์ฟโกลบอลทดสอบได้</strong> เพราะเลเวลยังไม่ถึง ถ้าเปิดแล้วตัวเลขไม่ตรง บอกได้เลย
+        แรงค์ III เพิ่งอัปได้หลัง Ant Hell เปิด 12 พ.ย. สูตรอัป (คริสตัล ×50 + Zelstone) ยังไม่ได้เช็กในเกม ·
+        <strong>แรงค์ II และ I ยังไม่ลงเซิร์ฟ</strong> ถ้าตัวเลขในเกมไม่ตรง บอกได้เลย
       </Caveat>
 
       <p className="muted" style={{ marginTop: 16 }}>
