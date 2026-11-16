@@ -5,6 +5,7 @@ import DropSearch from '@/components/DropSearch';
 import { escapeLikePattern } from '@/lib/like-escape';
 import { fetchAllRows } from '@/lib/fetch-all-rows';
 import Pagination from '@/components/Pagination';
+import AdSlot from '@/components/AdSlot';
 import { rankDrops } from '@/lib/drop-rank';
 import { mapRelease } from '@/lib/map-availability';
 
@@ -268,6 +269,8 @@ export default async function DropFinderPage({ searchParams }: { searchParams: {
           </p>
         </div>
       )}
+      {/* Unsold, AdSense fills it (owner, 16 Nov 2026). */}
+      <AdSlot slot="inline" />
       {starters.length > 0 && (
         <section className="card" style={{ marginTop: 20 }}>
           <p className="arckicker" style={{ color: 'var(--yellow)', textShadow: '0 0 8px var(--glow-yellow)' }}>TREASURE LIST</p>

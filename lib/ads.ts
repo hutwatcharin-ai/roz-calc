@@ -103,6 +103,11 @@ export const INLINE_AD_PAGES = [
   '/guides/star-gear',
   '/guides/woe',
   '/news/roadmap',
+  '/database/cards',
+  '/database/costumes',
+  '/drop-finder',
+  '/news/patch-2026-10-29',
+  '/news/patch-2026-11-12',
 ];
 
 export function adsFor(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad[] {

@@ -22,6 +22,7 @@ import '../events-2026-10/page.css';
 import './page.css';
 import NaviCopy from '@/components/NaviCopy';
 import Link from 'next/link';
+import AdSlot from '@/components/AdSlot';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
@@ -387,6 +388,9 @@ export default function Patch20261112() {
           <Link href="/database/items/1002357">ดูว่า Powder ได้จากไหน</Link> · <Link href="/guides/mvp">ไกด์ MVP</Link> · <Link href="/tools/refine">ตีบวก</Link>
         </p>
       </section>
+
+      {/* Unsold, AdSense fills it (owner, 16 Nov 2026). */}
+      <AdSlot slot="inline" />
 
       {/* ---------------- Dungeons ---------------- */}
       <section id="dungeons" className="evsec evsec--cyan">

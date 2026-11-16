@@ -16,6 +16,8 @@ import SuggestInput from '@/components/SuggestInput';
 import { itemFormerNames } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
+import { Fragment } from 'react';
+import AdSlot from '@/components/AdSlot';
 import EffectMatchLine from '@/components/EffectMatchLine';
 import { EFFECT_FILTERS, effectFilter, filterStrength, ITEM_EFFECTS_SOURCE, itemEffects, matchingBonuses } from '@/lib/item-effects';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
@@ -383,8 +385,11 @@ export default async function CardsPage({
           <p className="muted" style={{ margin: 0 }}>ไม่พบการ์ดที่ตรงเงื่อนไข</p>
         ) : (
           <ul className="cardalbum">
-            {rows.map((c) => (
-              <li key={c.id} className="cardtile">
+            {rows.map((c, i) => (
+              <Fragment key={c.id}>
+              {/* Unsold, AdSense fills a full row after the 12th card (owner, 16 Nov 2026). */}
+              {i === 12 && <li className="cardalbum__ad"><AdSlot slot="inline" /></li>}
+              <li className="cardtile">
                 <Link href={`/database/cards/${c.id}`} tabIndex={-1} aria-hidden="true" className="cardtile__art">
                   <img
                     className={hasCardArt(c.id) ? 'cardart' : 'cardart cardart--none'}
@@ -431,6 +436,7 @@ export default async function CardsPage({
                   )}
                 </div>
               </li>
+              </Fragment>
             ))}
           </ul>
         )}

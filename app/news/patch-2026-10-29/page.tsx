@@ -23,6 +23,7 @@ import '../patch-2026-10-01/page.css';
 import '../events-2026-10/page.css';
 import './page.css';
 import Link from 'next/link';
+import AdSlot from '@/components/AdSlot';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import ItemSetCard from '@/components/ItemSetCard';
@@ -384,6 +385,9 @@ export default async function Patch20261029Page() {
           );
         })}
       </section>
+
+      {/* Unsold, AdSense fills it (owner, 16 Nov 2026). */}
+      <AdSlot slot="inline" />
 
       {/* 2. Quests, laid out like /news/events-2026-10 (owner's pick): NPC
           sprites, then each quest with the monster it wants. Steps and places

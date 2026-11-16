@@ -13,6 +13,8 @@ import { NO_POSITION, POSITIONS, POSITION_LABELS } from '@/lib/costume-position'
 import { itemNamesOf } from '@/lib/item-former-names';
 import { isAbsentFromGame } from '@/lib/game-absent';
 import Link from 'next/link';
+import { Fragment } from 'react';
+import AdSlot from '@/components/AdSlot';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { isBound } from '@/lib/bound-items';
 import { matches } from '@/lib/smart-search';
@@ -295,8 +297,11 @@ export default async function CostumesPage({
           {/* Recognition-first: a costume is chosen by how it looks, so the
               sprite carries the row and the meta line only says where it sits. */}
           <div className="itemgrid">
-            {rows.map((it) => (
-              <Link key={it.id} href={`/database/costumes/${costumeId(it.id)}`} className="itemcard" data-kind="costume">
+            {rows.map((it, i) => (
+              <Fragment key={it.id}>
+              {/* Unsold, AdSense fills a full row after the 12th costume (owner, 16 Nov 2026). */}
+              {i === 12 && <AdSlot slot="inline" />}
+              <Link href={`/database/costumes/${costumeId(it.id)}`} className="itemcard" data-kind="costume">
                 {/* The Novice wearing it (2 Oct 2026); the inventory icon only
                     where the client has no sprite to draw. */}
                 {costumeFit(it.id) ? <CostumeThumb id={it.id} /> : <ItemIcon iconUrl={it.icon_url} category={it.category} size={32} />}
@@ -307,6 +312,7 @@ export default async function CostumesPage({
                   {cashIds.has(it.id) && ' · Cash'}
                 </span>
               </Link>
+              </Fragment>
             ))}
           </div>
         </div>
