@@ -23,9 +23,9 @@ export const metadata = {
   // DB-first positioning (user call, 2 Sep): the Thai-language database IS
   // the moat — the English competitors own lookup, nobody owns Thai. The
   // farm-spot keyword lives on /guides/farm-guide instead.
-  title: 'RO Zero Thai — ฐานข้อมูล Ragnarok Zero ภาษาไทย',
+  title: 'RO Zero Thai — ฐานข้อมูล Ragnarok Zero Global ภาษาไทย',
   description:
-    'ฐานข้อมูล Ragnarok Zero Global ภาษาไทย — มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ และเควสแปลไทยครบ พร้อมเครื่องมือหาจุดฟาร์มที่คิดเป็นตัวเลขของตัวละครคุณ',
+    'ฐานข้อมูล RO Zero Global (Ragnarok Zero) ภาษาไทย — มอนสเตอร์ ไอเทม การ์ด อุปกรณ์ เควสแปลไทยครบ ข่าวแพทช์ไทย จำลองอัพสกิล และหาจุดฟาร์มตามตัวละครคุณ',
 };
 
 export default async function HomePage({

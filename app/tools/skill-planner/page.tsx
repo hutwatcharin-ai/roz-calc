@@ -96,11 +96,13 @@ async function skillDetails(): Promise<{ levels: SkillLevelMap; descriptions: Re
 // The words people type are "อัพสกิล ro" (490 impressions in 28 days, average
 // position 7.4) and "ทดลอง/จำลองอัพสกิล ro"; the title said neither (8 Oct
 // 2026). Checked 24 Oct: "อัพสกิล ro" 601 impressions, position 7.8, 14 clicks --
-// no better, so the title is left alone rather than tuned again.
+// no better, so the title is left alone rather than tuned again. 19 Nov: 2,014
+// impressions in 14 days at 5.7% CTR, position 6.4; title now says "RO Zero" and
+// "ทดลองอัพสกิล", the short forms people type. Recheck around 10 Dec.
 export const metadata = {
-  title: 'จำลองอัพสกิล Ragnarok Zero — วางแผนสกิลทุกอาชีพ (Skill Simulator)',
+  title: 'จำลองอัพสกิล RO Zero — ทดลองอัพสกิลทุกอาชีพ (Skill Simulator)',
   description:
-    'ทดลองอัพสกิลทุกอาชีพใน Ragnarok Zero Global แบบเดียวกับหน้าต่างสกิลในเกม กดใส่แต้มได้ สกิลที่ยังไม่ปลดไล่ใส่ให้เอง นับแต้มต่ออาชีพ แชร์บิลด์ด้วยลิงก์',
+    'ทดลองอัพสกิล RO Zero ได้ทุกอาชีพ 1 และ 2 เหมือนหน้าต่างสกิลในเกม Ragnarok Zero Global กดใส่แต้ม สกิลที่ต้องอัปก่อนใส่ให้เอง นับแต้มต่ออาชีพ แชร์บิลด์ด้วยลิงก์',
 };
 
 export default async function SkillPlannerPage() {

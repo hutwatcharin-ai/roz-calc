@@ -9,7 +9,7 @@ import { craftCalcConfig } from '@/lib/craft-calc-config';
 import { CREATE_DEADLY_POISON, recipesOfKind, recipesOfSkill, type Recipe } from '@/lib/crafting';
 
 export const metadata = {
-  title: 'วิธีทำยา Alchemist และขวดพิษ Assassin — สูตร Ragnarok Zero',
+  title: 'ทำยา Alchemist RO Zero — สูตรยากันธาตุ Alcohol ขวดพิษ Assassin',
   description:
     'วิธีปรุงยา Alchemist ด้วย Prepare Potion ใน Ragnarok Zero Global เตรียม Mortar Bowl ตำรา และวัตถุดิบ พร้อมสูตรยาฟื้น ไอเทมเคมี Slim Potion ยาต้านธาตุ และสูตร Poison Bottle ของ Assassin (Create Deadly Poison) · ทำ Counteragent Mixture และสีย้อม 8 สีกับ NPC',
 };

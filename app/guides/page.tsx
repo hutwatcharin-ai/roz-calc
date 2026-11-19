@@ -19,9 +19,9 @@ import { GUIDE_GROUPS, SECTION_LINKS } from '@/lib/nav-links';
 import { GUIDES } from '@/lib/guide-cards';
 
 export const metadata = {
-  title: 'ไกด์และตารางอ้างอิง',
+  title: 'ไกด์ RO Zero ภาษาไทย — ตารางธาตุ EXP ตีอาวุธ ทำยา เปลี่ยนอาชีพ',
   description:
-    'ตารางธาตุ ตารางขนาด ตาราง EXP ต่อเลเวล และจุดฟาร์มแนะนำของ Ragnarok Zero Global รวมไว้ที่เดียว เปิดดูได้เลยไม่ต้องกรอกอะไร',
+    'ไกด์ Ragnarok Zero Global ภาษาไทยรวมไว้ที่เดียว ตารางธาตุ ตารางขนาด ตาราง EXP ตีอาวุธธาตุ ของติดดาว ทำยา เปลี่ยนอาชีพ จุดฟาร์ม MVP และโค้ดรับของ',
 };
 
 // Rebuilt daily so the NEW! badge (3 days, as on the homepage) wears off.
