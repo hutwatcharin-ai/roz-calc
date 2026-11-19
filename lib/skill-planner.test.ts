@@ -58,6 +58,34 @@ describe('raise', () => {
     const build = { bash: 1 };
     expect(raise('swordsman', build, 'storm-gust')).toBe(build);
   });
+
+  it("lets a Rogue learn Vulture's Eye and the bow skills behind it", () => {
+    // The game client gives Rogue's Vulture's Eye no prerequisite; Owl's Eye
+    // Lv 3 is the Archer's version, and a Rogue has no Owl's Eye to raise.
+    expect(raise('rogue', {}, 'vultures-eye')).toEqual({ 'vultures-eye': 1 });
+    const build = raise('rogue', {}, 'triangle-shot');
+    expect(build['triangle-shot']).toBe(1);
+    expect(build['double-strafe']).toBe(7);
+    expect(build['vultures-eye']).toBe(10);
+  });
+});
+
+describe('skill tree data', () => {
+  it('names only prerequisites that the same class line can learn', () => {
+    const missing: string[] = [];
+    for (const cls of CLASS_SLUGS) {
+      const line = lineFor(cls);
+      const onLine = new Set(line.flatMap((stage) => stage.skills.map((s) => s.slug)));
+      for (const stage of line) {
+        for (const skill of stage.skills) {
+          for (const p of skill.prerequisites) {
+            if (p.slug && !onLine.has(p.slug)) missing.push(`${cls}: ${skill.slug} needs ${p.slug}`);
+          }
+        }
+      }
+    }
+    expect(missing).toEqual([]);
+  });
 });
 
 describe('lower', () => {

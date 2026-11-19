@@ -5069,12 +5069,7 @@
           "required_job_level": null,
           "tree_slot": 0,
           "passive": "passive",
-          "prerequisites": [
-            {
-              "slug": "owls-eye",
-              "level": 3
-            }
-          ]
+          "prerequisites": []
         },
         {
           "slug": "stalk",

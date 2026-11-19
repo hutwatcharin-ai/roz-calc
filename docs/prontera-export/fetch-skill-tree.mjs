@@ -116,6 +116,20 @@ for (const stage of stages.values()) {
 }
 if (unresolved > 0) console.log(`WARNING: ${unresolved} prerequisites reference a skill outside the fetched classes`);
 
+// The source gives every class the skill's default prerequisites, but the game
+// client (SkillInfoList.lub NeedSkillList) can override them per job. Checked
+// against the client on 19 Nov 2026; this is the only override that differs:
+// Rogue's Vulture's Eye has none, the Owl's Eye Lv 3 is the Archer's version
+// (and a Rogue has no Owl's Eye, so the planner could never raise it).
+const JOB_PREREQ_OVERRIDES = { rogue: { 'vultures-eye': [] } };
+for (const [stageSlug, bySkill] of Object.entries(JOB_PREREQ_OVERRIDES)) {
+  for (const [skillSlug, prereqs] of Object.entries(bySkill)) {
+    const skill = stages.get(stageSlug)?.skills.find((s) => s.slug === skillSlug);
+    if (skill) skill.prerequisites = prereqs;
+    else console.log(`WARNING: override for ${stageSlug}/${skillSlug} matched nothing`);
+  }
+}
+
 const payload = {
   fetched_at: new Date().toISOString(),
   source: 'https://roz.prontera.info/skills/planner',
