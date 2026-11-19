@@ -4,6 +4,7 @@
     "added": "2026-09-28"
   },
   "items": [
+    { "date": "2026-11-19", "href": "/guides/ant-hell", "title": "ไกด์ใหม่: Ant Hell Memorial", "note": "ทางเข้าพร้อม /navi · ใช้อาวุธธาตุไฟตีบอส Cannibal Maya · ของในหีบเอาไปทำอะไร · อัปชุด Subjugation เป็น Expedition ใช้อะไรบ้าง · แก้หน้าแพทช์ 12 พ.ย. จากธาตุลมเป็นธาตุไฟ" },
     { "date": "2026-11-19", "href": "/tools/skill-planner?class=rogue", "title": "วางแผนสกิล: Rogue อัป Vulture's Eye ได้แล้ว", "note": "เดิมติดเงื่อนไข Owl's Eye ของสาย Archer ทำให้อัป Vulture's Eye, Double Strafe, Remove Trap, Triangle Shot ไม่ได้ · เช็กเงื่อนไขสกิลทุกอาชีพกับไฟล์เกมแล้ว ไม่มีจุดอื่นผิด" },
     { "date": "2026-11-12", "href": "/tools/skill-planner", "title": "วางแผนสกิล: ล้างทีละคลาสได้แล้ว", "note": "ปุ่มล้างที่หัวคลาส ล้างสกิลคลาสหลังที่ต้องใช้ไปด้วยและบอกว่าล้างอะไร · เปลี่ยนอาชีพแล้วเก็บแต้มเฉพาะคลาสที่ใช้ร่วมกัน (Safety Wall ของ Wizard ไม่ติดไป Priest แล้ว)" },
     { "date": "2026-11-12", "href": "/news/patch-2026-11-12", "title": "แพทช์ 12 พ.ย.: Base 80, Ant Hell, Hunting Season", "note": "ตาราง EXP ทางการถึง 80 · ดันความทรงจำ Ant Hell และชุด Expedition · แลกการ์ด Hunting Season · แลก Blessing · กาชา Light Gacha" },

@@ -1,0 +1,4 @@
+/* Reward list: one item per row, with what it is for under the chip. */
+.ahloot { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 8px; }
+.ahloot li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.ahloot small { font-size: 12.5px; }

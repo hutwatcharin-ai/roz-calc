@@ -113,6 +113,7 @@ export const SECTION_LINKS: Record<'database' | 'tools' | 'guides', NavLink[]> =
     { href: '/guides/arrow-crafting', label: 'ทำลูกศร', icon: '/images/items/1750.gif', ready: true, group: 'คราฟต์' },
     { href: '/guides/memorial-gear', label: 'ชุดดันเจี้ยน', icon: '/images/items/15220.gif', ready: true, group: 'ดันเจี้ยน' },
     { href: '/guides/memorial-dungeons', label: 'ดันเจี้ยนความทรงจำ', icon: '/images/items/7126.gif', ready: true, group: 'ดันเจี้ยน' },
+    { href: '/guides/ant-hell', label: 'Ant Hell Memorial', icon: '/images/monsters/1147.gif', ready: true, group: 'ดันเจี้ยน' },
     { href: '/guides/elements', label: 'ตารางธาตุ', icon: '/images/items/990.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/sizes', label: 'ตารางขนาด', icon: '/images/items/604.gif', ready: true, group: 'ตารางอ้างอิง' },
     { href: '/guides/item-sets', label: 'ไอเทมเซ็ต', icon: '/images/items/4029.gif', ready: true, group: 'ตารางอ้างอิง' },

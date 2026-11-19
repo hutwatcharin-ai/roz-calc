@@ -231,7 +231,7 @@ export default function Patch20261112() {
             <tr><td>บอส</td><td>Cannibal Maya · Lv 70</td></tr>
             <tr><td>HP</td><td className="num">2,200,000</td></tr>
             <tr><td>DEF / MDEF</td><td className="num">183 / 50</td></tr>
-            <tr><td>ประเภท</td><td>แมลง ขนาดใหญ่ ธาตุดิน 4 → ใช้อาวุธธาตุลม</td></tr>
+            <tr><td>ประเภท</td><td>แมลง ขนาดใหญ่ ธาตุดิน 4 → ใช้อาวุธธาตุไฟ</td></tr>
           </tbody>
         </table>
 
@@ -286,7 +286,7 @@ export default function Patch20261112() {
             <span><Link href="/database/monsters/1023"><b>Orc Warrior</b></Link> Lv 52 ธาตุดิน<br /><small>Orc Village · <Link href="/database/maps/gef_fild10">gef_fild10</Link></small></span>
           </div>
         </div>
-        <p className="evsmall">ทั้งสองตัวธาตุดิน ใช้อาวุธธาตุลม · เกิดถี่ขึ้นเฉพาะแมพที่บอกไว้</p>
+        <p className="evsmall">ทั้งสองตัวธาตุดิน ใช้อาวุธธาตุไฟ · เกิดถี่ขึ้นเฉพาะแมพที่บอกไว้</p>
 
         <h3 className="evh">คนรับแลก: Joh the Card Collector</h3>
         <div className="pnpc">
