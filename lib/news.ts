@@ -30,6 +30,18 @@ export interface NewsItem {
 
 export const NEWS: NewsItem[] = [
   {
+    href: '/news/patch-2026-11-26',
+    kind: 'patch',
+    title: 'ปิดปรับปรุง 26 พ.ย. · MVP Raid Maya, Phreeoni',
+    blurb: 'เริ่ม 08:00 น. · เควสอีเวนต์ใหม่ 2 เควส · KP Shop ลด 10% รอบ 2 · Gatchaman, Hunting Season, Blessing จบ',
+    // Dated when the page went up (the day before), so it leads NOW PLAYING
+    // ahead of the maintenance it announces.
+    date: '2026-11-25T15:00:00+07:00',
+    dateTh: '26 พ.ย.',
+    badge: 'MVP',
+    cast: ['/images/monsters/1147.gif', '/images/monsters/1159.gif'],
+  },
+  {
     href: '/news/patch-2026-11-12',
     kind: 'patch',
     title: 'แพทช์ 12 พ.ย. · เลเวลตัน 80',
