@@ -188,7 +188,7 @@
       "kind": "official",
       "urgent": true,
       "at": "2026-11-12T05:00:21.770000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1570307411615547466",
@@ -197,7 +197,7 @@
       "kind": "official",
       "urgent": false,
       "at": "2026-11-12T05:21:01.830000+00:00",
-      "done": false
+      "done": true
     },
     {
       "id": "1574685467784388670",
