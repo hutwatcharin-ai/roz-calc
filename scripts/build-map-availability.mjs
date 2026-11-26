@@ -76,6 +76,10 @@ const MANUAL_OPEN = [
   { area: 'Prontera Labyrinth', test: /^(prt_maze|maz_d|b_maz_d)/, source: 'official notice, 1 Oct 2026 update' },
   { area: 'Sphinx', test: /^(in_sphinx|sp_d|b_sp_d)/, source: 'official notice, 1 Oct 2026 update' },
   { area: 'Mjolnir Dead Pit', test: /^(mjo_dun|mjo_d)/, source: 'official notice, 1 Oct 2026 update' },
+  // Maya's MVP Raid map. The Ant Hell roadmap line closes every b_an_d* code,
+  // but the 26 Nov 2026 Update Notice opens this raid (/navi anthell02
+  // 175/190). The rest of b_an_d* stays with the roadmap.
+  { area: 'Ant Hell MVP Raid', test: /^b_an_d02/, source: 'official notice, 26 Nov 2026 update (MVP Raid Maya)' },
 ];
 
 // The client's own navigation table is the strongest "open" signal there is

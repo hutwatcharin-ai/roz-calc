@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12",
+  "generated": "2026-11-26",
   "sources": {
     "roadmap": "docs/rozglobal-export/pages/10-roadmap.html (publisher calendar, Aug 2026 - Jul 2027)",
     "rozerodb": "docs/rozerodb-export/data/maps.jsonl UPCOMING banners (crawled 2026-08-31)",
@@ -236,20 +236,6 @@
       "sources": [
         "roadmap",
         "rozerodb"
-      ]
-    },
-    "b_an_d02": {
-      "when": "NOV 2026",
-      "area": "Ant Hell",
-      "sources": [
-        "roadmap"
-      ]
-    },
-    "b_an_d02_z": {
-      "when": "NOV 2026",
-      "area": "Ant Hell",
-      "sources": [
-        "roadmap"
       ]
     },
     "b_ayo_d02": {

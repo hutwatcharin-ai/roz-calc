@@ -1,40 +1,120 @@
 // app/news/patch-2026-11-26/page.tsx
 //
-// The 26 Nov 2026 maintenance, written the day before from the official
-// notices: "Scheduled Maintenance – 26th November 2026" (Discord 24 Nov,
-// roz.mygnjoy.com notice 196 on 25 Nov) and the 25 Nov reminder (notice 197),
-// which carries the short change list and the events that end. No Update
-// Notice yet; the reminder says details come separately -- fill in from it.
+// The 26 Nov 2026 maintenance. Written the day before from the maintenance
+// notices (roz.mygnjoy.com notice 196 and the reminder 197), then rebuilt on
+// 26 Nov from the official site: Update Notice 199 (five images: the two MVP
+// Raids with their /navi, A Hard Choice, Bug Extermination, KP Shop 10% round
+// 2, events ending), event notices 198 (A Hard Choice: Guard Ars or Old Woman
+// Enko, tokens and exchange list) and 200 (Bug Extermination: Guillon's main
+// quest, Lyrias's daily), and the Cosmic Costume promo 201. Every fact here is
+// from those notices. The patched client was not read yet (no GrfDiffTool
+// snapshot after 12 Nov), so the new NPCs and costumes have no pictures and
+// the new items no database links.
+//
+// Laid out like /news/patch-2026-11-12: one coloured section per thing a
+// player can do, NPC with a copyable /navi, item icons, a REWARD box.
 import '../patch-2026-10-01/page.css';
 import '../patch-2026-10-29/page.css';
+import '../events-2026-10/page.css';
+import '../patch-2026-11-12/page.css';
+import NaviCopy from '@/components/NaviCopy';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 
 const PATH = '/news/patch-2026-11-26';
 const PUBLISHED = '2026-11-25T15:00:00+07:00';
-const MODIFIED = PUBLISHED;
+const MODIFIED = '2026-11-26T10:00:00+07:00';
 
-// The two new MVP Raids, by the game's monster id.
+// The two new MVP Raids, by the game's monster id, with the /navi the Update
+// Notice gives for each.
 const RAIDS = [
-  { id: 1147, name: 'Maya' },
-  { id: 1159, name: 'Phreeoni' },
+  { id: 1147, name: 'Maya', where: 'Ant Hell ชั้น 2', navi: '/navi anthell02 175/190' },
+  { id: 1159, name: 'Phreeoni', where: 'ทะเลทราย Sograt ใต้ Morocc', navi: '/navi moc_fild17 210/230' },
 ];
 
-// What the 26 Nov maintenance closes, in the reminder's order. A null href is
+// What the 26 Nov maintenance closed, in the notice's order. A null href is
 // one the site has no page for.
-const ENDING: { name: string; th: string; href: string | null }[] = [
-  { name: 'Lifting Curse', th: 'เควสอีเวนต์', href: null },
-  { name: 'Hunting Season – Hode & Orc Warrior', th: 'แลกการ์ด Hode / Orc Warrior', href: '/news/patch-2026-11-12#hunting' },
-  { name: "Blacksmith's Blessing Event", th: 'แลก Blessing', href: '/news/patch-2026-11-12#blessing' },
-  { name: 'Gatchaman Collaboration', th: 'เควสคอลแลบที่ Morocc และร้านแลกการ์ด', href: '/news/events-2026-11' },
+const ENDED: { name: string; href: string | null }[] = [
+  { name: 'Lifting Curse', href: null },
+  { name: 'Hunting Season – Hode & Orc Warrior', href: '/news/patch-2026-11-12#hunting' },
+  { name: "Blacksmith's Blessing Event", href: '/news/patch-2026-11-12#blessing' },
+  { name: 'Gatchaman Collaboration', href: '/news/events-2026-11' },
 ];
+
+// A reward line, linked to the item page. Items this patch added were imported
+// from the 26 Nov client with PNG icons (png: true); older ones have GIFs.
+type Mat = { name: string; id?: number; png?: boolean; qty?: number; note?: string };
+
+function Mats({ items }: { items: Mat[] }) {
+  return (
+    <ul className="evmats">
+      {items.map((m) => {
+        const body = (
+          <>
+            {m.id != null && <img src={`/images/items/${m.id}.${m.png ? 'png' : 'gif'}`} alt="" width={24} height={24} loading="lazy" />}
+            <span>{m.name}</span>
+            {m.qty != null && <b>×{m.qty}</b>}
+          </>
+        );
+        return (
+          <li key={m.name}>
+            {m.id != null ? (
+              <Link href={`/database/items/${m.id}`} className="evmat">{body}</Link>
+            ) : (
+              <span className="evmat">{body}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+// A Hard Choice exchange list, the same at both NPCs except the costume.
+function ItemCell({ id, png, children }: { id: number; png?: boolean; children: ReactNode }) {
+  return (
+    <Link href={`/database/items/${id}`} className="evmat" style={{ display: 'inline-flex' }}>
+      <img src={`/images/items/${id}.${png ? 'png' : 'gif'}`} alt="" width={24} height={24} loading="lazy" />
+      <span>{children}</span>
+    </Link>
+  );
+}
+
+function Exchange({ costumeId, costume, option }: { costumeId: number; costume: string; option: string[] }) {
+  return (
+    <table className="stat-table" style={{ marginTop: 8 }}>
+      <thead>
+        <tr><th>แลกได้</th><th className="num">ใช้ Token</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <ItemCell id={costumeId} png><b>{costume}</b></ItemCell> (หมวกบน)
+            <div className="evsmall">ออปชันช่วงอีเวนต์: {option.join(' · ')} · ออปชันหายเมื่ออีเวนต์จบ ตัวคอสตูมยังอยู่</div>
+          </td>
+          <td className="num">10</td>
+        </tr>
+        <tr><td><ItemCell id={108681} png>[Event] Mixed Dish Lv.10 Box of 10</ItemCell></td><td className="num">3</td></tr>
+        <tr><td><ItemCell id={108680} png>[Event] Yggdrasil Seed Box of 10</ItemCell></td><td className="num">1</td></tr>
+      </tbody>
+    </table>
+  );
+}
+
+// Quest steps the notices leave out, read from the 26 Nov client's
+// OngoingQuestInfoList_enUS.lub. Shown with the "จากไฟล์เกม" tag.
+const Tag = () => <span className="unverified">จากไฟล์เกม</span>;
+
+// The five petrified tourists in Western Cave Karu (beach_dun).
+const TOURISTS = ['109/200', '23/189', '64/92', '246/235', '182/47'];
 
 export const metadata: Metadata = {
-  title: 'ปิดปรับปรุง 26 พ.ย. 2569 Ragnarok Zero — MVP Raid Maya, Phreeoni, เควสอีเวนต์ใหม่, KP Shop ลด 10% รอบ 2',
+  title: 'แพทช์ 26 พ.ย. 2569 Ragnarok Zero — MVP Raid Maya, Phreeoni, อีเวนต์ A Hard Choice, Bug Extermination',
   description:
-    'Ragnarok Zero Global ปิดปรับปรุงพฤหัสบดี 26 พฤศจิกายน 2569 เริ่ม 08:00 น. เวลาไทย: MVP Raid ใหม่ Maya และ Phreeoni, เควสอีเวนต์ A Hard Choice และ Bug Extermination, ส่วนลด KP Shop 10% Black Friday รอบ 2 · อีเวนต์ที่จบรอบนี้ Gatchaman, Hunting Season, Blacksmith’s Blessing, Lifting Curse',
+    'Ragnarok Zero Global แพทช์ 26 พฤศจิกายน 2569: MVP Raid ใหม่ Maya (/navi anthell02 175/190) และ Phreeoni (/navi moc_fild17 210/230), อีเวนต์ A Hard Choice ที่ Comodo เลือกช่วย Guard Ars หรือ Old Woman Enko แลกคอสตูม, Bug Extermination ที่ Ant Hell ได้คอสตูม Jasper Crest, KP Shop ลด 10% รอบ 2 ถึง 3 ธ.ค., คอสตูม Cosmic · อีเวนต์ถึง 10 ธ.ค.',
 };
 
 export default function Patch20261126() {
@@ -44,7 +124,7 @@ export default function Patch20261126() {
         data={breadcrumbJsonLd([
           { name: 'หน้าแรก', path: '/' },
           { name: 'ข่าว', path: '/news' },
-          { name: 'ปิดปรับปรุง 26 พ.ย.', path: PATH },
+          { name: 'แพทช์ 26 พ.ย.', path: PATH },
         ])}
       />
       <JsonLd
@@ -61,43 +141,249 @@ export default function Patch20261126() {
         <span className="crumbs__sep" aria-hidden="true">›</span>
         <Link href="/news">ข่าว</Link>
         <span className="crumbs__sep" aria-hidden="true">›</span>
-        <span className="crumbs__here">ปิดปรับปรุง 26 พ.ย.</span>
+        <span className="crumbs__here">แพทช์ 26 พ.ย.</span>
       </nav>
 
       <header className="phero">
-        <p className="phero__date">ประกาศ 24–25 พฤศจิกายน 2569</p>
-        <h1 className="phero__title">ปิดปรับปรุง พฤหัส 26 พ.ย.</h1>
+        <p className="phero__date">พฤหัส 26 พฤศจิกายน 2569</p>
+        <h1 className="phero__title">แพทช์ 26 พ.ย.: MVP Raid Maya, Phreeoni</h1>
         <p className="phero__lead">
-          MVP Raid ใหม่ Maya กับ Phreeoni · เควสอีเวนต์ใหม่ 2 เควส · ส่วนลด KP Shop 10% รอบ 2 ·
-          Gatchaman, Hunting Season, Blacksmith&apos;s Blessing และ Lifting Curse จบรอบนี้
+          MVP Raid ใหม่ 2 ตัว · อีเวนต์ A Hard Choice ที่ Comodo · อีเวนต์ Bug Extermination ที่ Ant Hell ·
+          KP Shop ลด 10% รอบ 2 · คอสตูม Cosmic ใน Kafra Shop
         </p>
-        <p className="phero__pill">เริ่มปิด 08:00 น. เวลาไทย</p>
+        <ul className="evtiles">
+          <li><a href="#raids"><img src="/images/monsters/1147.gif" alt="" width={36} /><span>MVP Raid ใหม่</span><small>Maya · Phreeoni</small></a></li>
+          <li><a href="#hard-choice"><img src="/images/items/1003367.png" alt="" width={28} /><span>A Hard Choice</span><small>ถึง 10 ธ.ค.</small></a></li>
+          <li><a href="#bug"><img src="/images/monsters/1147.gif" alt="" width={36} /><span>Bug Extermination</span><small>ถึง 10 ธ.ค.</small></a></li>
+          <li><a href="#shop"><img src="/images/items/608.gif" alt="" width={28} /><span>KP Shop ลด 10%</span><small>ถึง 3 ธ.ค.</small></a></li>
+        </ul>
       </header>
 
-      <aside className="pnote" role="note" style={{ marginTop: 14 }}>
-        <strong>แพทช์โน้ตยังไม่ออก</strong> ประกาศบอกแค่หัวข้อ รายละเอียดจะประกาศแยก
-        (เช่น Raid อยู่แมพไหน เควสทำที่ไหน) ออกเมื่อไหร่จะเติมในหน้านี้
-      </aside>
+      <section className="pdeadline" aria-label="ของที่มีวันหมด">
+        <h2 className="pdeadline__h">ทำก่อนหมดเวลา</h2>
+        <ol className="pdeadline__list">
+          <li><time>3 ธ.ค.</time><span><a href="#shop">KP Shop ลด 10% รอบ 2</a></span></li>
+          <li><time>10 ธ.ค.</time><span><a href="#hard-choice">A Hard Choice</a> แลก Token ให้หมด Token หายตอนจบ</span></li>
+          <li><time>10 ธ.ค.</time><span><a href="#bug">Bug Extermination</a> และ<a href="#cosmic">คอสตูม Cosmic</a></span></li>
+        </ol>
+        <p className="pdeadline__note">วันตามประกาศ (UTC) · อีเวนต์จบตอนปิดปรับปรุง 10 ธ.ค.</p>
+      </section>
 
-      <section id="ending" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">1</span>ทำให้เสร็จก่อน 08:00 น. พรุ่งนี้</h2>
-        <div className="card card--yellow">
-          <p style={{ margin: 0, lineHeight: 1.65 }}>
-            อีเวนต์และเควสเหล่านี้<b>จบตอนปิดปรับปรุง 26 พ.ย.</b> ทำเควสที่ค้างและแลกของรางวัลให้เสร็จก่อนเซิร์ฟปิด
-          </p>
-          <ul style={{ margin: '10px 0 0', paddingInlineStart: 20, lineHeight: 1.9 }}>
-            {ENDING.map((e) => (
-              <li key={e.name}>
-                {e.href ? <Link href={e.href}><b>{e.name}</b></Link> : <b>{e.name}</b>}
-                <span className="muted"> · {e.th}</span>
-              </li>
-            ))}
-          </ul>
+      {/* ---------------- MVP Raids ---------------- */}
+      <section id="raids" className="evsec evsec--yellow">
+        <p className="evsec__tag">MVP RAID</p>
+        <h2 className="evsec__title">MVP Raid ใหม่ 2 ตัว</h2>
+        <p className="evsec__lead">ประกาศให้พิกัดจุดเข้าของแต่ละตัว · เข้า Raid แบบเดียวกับตัวก่อนๆ</p>
+        <div className="ct-two">
+          {RAIDS.map((m) => (
+            <div key={m.id} className="card">
+              <ul className="pmobs" style={{ marginTop: 0 }}>
+                <li>
+                  <Link href={`/database/monsters/${m.id}`} className="pmob">
+                    <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
+                    <span className="pmob__name">{m.name}</span>
+                  </Link>
+                </li>
+              </ul>
+              <p className="evsmall" style={{ margin: '8px 0 6px' }}>{m.where}</p>
+              <NaviCopy cmd={m.navi} />
+            </div>
+          ))}
+        </div>
+        <p className="evnote">
+          ขั้นตอนเข้า Raid กับของที่ได้ดูใน <Link href="/guides/mvp">ไกด์ MVP Raid</Link> · Maya อยู่ในเนื้อเรื่อง Bug Extermination ข้างล่าง
+          และเป็นบอสของ <Link href="/guides/ant-hell">Ant Hell Memorial</Link>
+        </p>
+        <p className="evsmall" style={{ marginTop: 8 }}>
+          กล่องรางวัล Subjugation Reward Box ของทั้ง 2 ตัวมี 3 เกรด รับจาก Wolhwa <NaviCopy cmd="/navi moc_para01 18/35" />
+          เมื่อนำตุ๊กตาไปให้ ทุกวัน <Tag /> ·{' '}
+          <Link href="/database/items/108498">Maya</Link> · <Link href="/database/items/108495">Phreeoni</Link>
+        </p>
+      </section>
+
+      {/* ---------------- A Hard Choice ---------------- */}
+      <section id="hard-choice" className="evsec evsec--pink">
+        <p className="evsec__tag">EVENT · 26 NOV – 10 DEC</p>
+        <h2 className="evsec__title">A Hard Choice: ช่วยนักท่องเที่ยว หรือช่วย Medusa</h2>
+        <p className="evsec__lead">
+          นักท่องเที่ยวกลายเป็นหินใน Western Cave Karu ที่ Comodo · มีเควสหลักกับเควสรายวัน
+          แต่<b>เควสรายวันต้องเลือกข้างเดียว</b> รับของ NPC หนึ่งแล้วรับของอีกคนไม่ได้
+        </p>
+
+        <h3 className="evh">1. เควสหลัก</h3>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src="/images/events/2026-11-26/guard-ars.png" alt="Guard Ars" loading="lazy" /></span>
+            <figcaption>
+              <strong>Guard Ars · Comodo</strong>
+              <NaviCopy cmd="/navi comodo 33/212" />
+            </figcaption>
+          </figure>
+        </div>
+        <ol className="evsteps">
+          <li>คุยกับ Guard Ars ที่ Comodo แล้วเข้า Western Cave Karu</li>
+          <li>
+            หานักท่องเที่ยวที่กลายเป็นหิน 5 จุด แก้หินแล้วพากลับ <Tag />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 6 }}>
+              {TOURISTS.map((xy) => <NaviCopy key={xy} cmd={`/navi beach_dun ${xy}`} />)}
+            </div>
+          </li>
+          <li>พานักท่องเที่ยวไปส่ง Guard Ars หรือ Old Woman Enko <Tag /></li>
+        </ol>
+
+        <h3 className="evh">2. เควสรายวัน: เลือก 1 ข้าง</h3>
+        <div className="ct-two">
+          <div className="card">
+            <h4 className="pxh" style={{ marginTop: 0 }}>ข้างทหาร: Guard Ars</h4>
+            <figure className="evnpc">
+              <span className="evnpc__art"><img src="/images/events/2026-11-26/guard-ars.png" alt="Guard Ars" loading="lazy" /></span>
+              <figcaption>
+                <strong>Guard Ars · Comodo</strong>
+                <NaviCopy cmd="/navi comodo 33/212" />
+              </figcaption>
+            </figure>
+            <p className="evsmall" style={{ marginTop: 8 }}>
+              เควส Curious Tourists: ล่า Medusa ใน Western Cave Karu เก็บ <Tag />
+            </p>
+            <Mats items={[{ name: 'Horrendous Hair', id: 1048, qty: 20 }]} />
+            <p className="evsmall">ได้ต่อรอบ:</p>
+            <Mats items={[{ name: 'Token of Courage', id: 1003367, png: true }, { name: 'Panacea', id: 525 }, { name: 'Mixed Dish Lv.10', id: 100080 }]} />
+            <Exchange
+              costumeId={31555}
+              costume="[Costume] Heavy Infantry Helm"
+              option={['EXP จากมอน +5%', 'ดาเมจกายภาพ/เวท ใส่มอนทุกธาตุทุกขนาด +10% (ไม่รวมผู้เล่น)']}
+            />
+          </div>
+          <div className="card">
+            <h4 className="pxh" style={{ marginTop: 0 }}>ข้าง Medusa: Old Woman Enko</h4>
+            <figure className="evnpc">
+              <span className="evnpc__art"><img src="/images/events/2026-11-26/enko.png" alt="Old Woman Enko" loading="lazy" /></span>
+              <figcaption>
+                <strong>Old Woman Enko · Western Cave Karu</strong>
+                <NaviCopy cmd="/navi beach_dun 242/67" />
+              </figcaption>
+            </figure>
+            <p className="evsmall" style={{ marginTop: 8 }}>
+              เควส Medusa&apos;s Tea Party: หาวัตถุดิบงานเลี้ยงน้ำชาของ Medusa ส่ง <Tag />
+            </p>
+            <Mats items={[{ name: 'Ancient Lips', id: 1054, qty: 10 }, { name: 'Earthworm Peeling', id: 1055, qty: 20 }]} />
+            <p className="evsmall">ได้ต่อรอบ:</p>
+            <Mats items={[{ name: 'Token of Friendship', id: 1003368, png: true }, { name: 'Royal Jelly', id: 526 }, { name: 'Mixed Dish Lv.10', id: 100080 }]} />
+            <Exchange
+              costumeId={20485}
+              costume="[Costume] Carnivorous Plant Hairpin"
+              option={['ATK, MATK +10', 'ดรอปไอเทม +5%']}
+            />
+          </div>
+        </div>
+        <div className="evreward">
+          <span className="evreward__tag">เลือกยังไง</span> สายตีมอนเก็บเลเวล: หมวกทหาร (EXP +5% ดาเมจ +10%) ·
+          สายฟาร์มของ: หมวกต้นไม้กินแมลง (ดรอป +5%) · ต้องใช้ 10 Token ทั้งคู่
+        </div>
+        <p className="evnote">
+          Token of Courage / Friendship หายเมื่ออีเวนต์จบ แลกให้หมดก่อน 10 ธ.ค. · Mixed Dish Lv.10 เพิ่มทุกสเตตัส +10 และฟื้น HP/SP 10% ·
+          ประกาศไม่บอกจำนวนของที่ได้ต่อรอบ · ป้าย <Tag /> = จากไคลเอนต์แพทช์ 26 พ.ย. ยังไม่ได้เช็กในเกม
+        </p>
+      </section>
+
+      {/* ---------------- Bug Extermination ---------------- */}
+      <section id="bug" className="evsec evsec--cyan">
+        <p className="evsec__tag">EVENT · 26 NOV – 10 DEC</p>
+        <h2 className="evsec__title">Bug Extermination: กำจัดแมลงใน Ant Hell</h2>
+        <p className="evsec__lead">
+          เนื้อเรื่องเปิดตัว MVP Maya และปูทางสู่ <Link href="/guides/ant-hell">Ant Hell Memorial</Link> · มีเควสหลักกับเควสรายวัน
+        </p>
+
+        <h3 className="evh">1. เควสหลัก: Guillon</h3>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src="/images/events/2026-11-26/guillon.png" alt="Guillon" loading="lazy" /></span>
+            <figcaption>
+              <strong>Guillon · ทุ่ง Comodo</strong>
+              <NaviCopy cmd="/navi cmd_fild08 326/323" />
+            </figcaption>
+          </figure>
+        </div>
+        <p className="evsmall">Guillon กลัวแมลง ขอให้ไปกำจัดแมลงที่ทะลักออกจากหลุมยักษ์กลางทะเลทราย (Ant Hell)</p>
+        <ol className="evsteps">
+          <li>ทำลาย Ant Egg 20 ฟอง <Tag /></li>
+          <li>ไปหา Lyrias ที่ Ant Hell ชั้น 1 <Tag /></li>
+          <li>
+            ล่ามดใน Ant Hell เก็บ Maya&apos;s Relic สีละ 5 (4 สี) ส่ง Lyrias <Tag />
+            <Mats
+              items={[
+                { name: "Maya's Relic (Blue)", id: 1003373, png: true, qty: 5 },
+                { name: "Maya's Relic (Purple)", id: 1003374, png: true, qty: 5 },
+                { name: "Maya's Relic (Green)", id: 1003375, png: true, qty: 5 },
+                { name: "Maya's Relic (Red)", id: 1003376, png: true, qty: 5 },
+              ]}
+            />
+          </li>
+        </ol>
+        <div className="evreward">
+          <span className="evreward__tag">REWARD</span> <ItemCell id={400221} png><b>[Costume] Jasper Crest</b></ItemCell> (หมวกบน ทุกอาชีพ)
+        </div>
+
+        <h3 className="evh">2. เควสรายวัน: Lyrias</h3>
+        <div className="pnpc">
+          <figure className="evnpc">
+            <span className="evnpc__art"><img src="/images/events/2026-11-26/lyrias.png" alt="Lyrias" loading="lazy" /></span>
+            <figcaption>
+              <strong>Pest Extermination Lyrias · Ant Hell ชั้น 1</strong>
+              <NaviCopy cmd="/navi anthell01 53/246" />
+            </figcaption>
+          </figure>
+        </div>
+        <p className="evsmall">
+          ส่ง Maya&apos;s Relic สีละ 5 อีกรอบทุกวัน แล้วกลับมาหา Lyrias วันถัดไปเพื่อเปิดพลัง Relic <Tag /> · Relic หายเมื่ออีเวนต์จบ ·
+          ได้ต่อรอบ:
+        </p>
+        <Mats items={[{ name: 'Royal Jelly', id: 526, qty: 3 }]} />
+        <div className="evreward">
+          <span className="evreward__tag">BUFF 4 ชม.</span> DEF +4, MDEF +4 · รับดาเมจจากมอนเผ่าแมลงลดลง 15% · CRIT +5 ใส่มอนเผ่าแมลง
         </div>
       </section>
 
+      {/* ---------------- Shop ---------------- */}
+      <section id="shop" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">KP</span>KP Shop ลด 10% ทั้งร้าน รอบ 2</h2>
+        <div className="card">
+          <p style={{ margin: 0, lineHeight: 1.65 }}>
+            ส่วนลด Black Friday รอบ 2 <b>26 พ.ย. – 3 ธ.ค.</b> (UTC) ลด 10% ทั้ง KP Shop
+          </p>
+          <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
+            โบนัสเติม KP 10% (ครั้งแรกต่อแพ็กเกจ) ยังได้ถึง 3 ธ.ค. · <Link href="/news/events-2026-11#promotion">Black Friday Promotion</Link>
+          </p>
+        </div>
+      </section>
+
+      <section id="cosmic" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">★</span>คอสตูม Cosmic Collection</h2>
+        <div className="card">
+          <p style={{ margin: 0, lineHeight: 1.65 }}>
+            ขาย <b>26 พ.ย. – 10 ธ.ค.</b> (UTC) · คอสตูม 5 ชิ้น:
+          </p>
+          <ul style={{ margin: '8px 0 0', paddingInlineStart: 20, lineHeight: 1.8 }}>
+            <li><Link href="/database/items/18742">[Costume] Moon and Stars</Link> · หมวกกลาง</li>
+            <li><Link href="/database/items/480457">[Costume] Galapago Aquarium</Link> · ผ้าคลุม</li>
+            <li><Link href="/database/items/20349">[Costume] Flying Galapago</Link> · หมวกล่าง</li>
+            <li><Link href="/database/items/19808">[Costume] Blazing Sun</Link> · หมวกบน</li>
+            <li><Link href="/database/items/410074">[Costume] Gravekeeper Blinker</Link> · หมวกกลาง</li>
+          </ul>
+          <p style={{ marginTop: 10, lineHeight: 1.65 }}>
+            <b>เซิร์ฟ SEA</b>: ขายเป็น <Link href="/database/items/108659"><b>Cosmic Scroll</b></Link> สุ่ม ได้คอสตูม 5 ชิ้นนี้ หรือของปลอบใจ (Giant Fly Wing 100ea Box, Special Buff Selection Box,
+            Small Mana Potion ×2, Token of Siegfried, Small Healing Potion ×3, Life Insurance) ไม่การันตีชิ้นที่อยากได้ ·
+            <b> เซิร์ฟ EU</b>: ขายเป็นกล่องเลือกเอง Premium (3 ชิ้นแรก) กับ Special (Blazing Sun, Gravekeeper Blinker)
+          </p>
+          <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
+            ประกาศไม่บอกราคา · กล่อง Special ของ EU ประกาศเขียนว่า &ldquo;Burning Sun&rdquo; แต่รายการคอสตูมเขียน Blazing Sun
+          </p>
+        </div>
+      </section>
+
+      {/* ---------------- Maintenance ---------------- */}
       <section id="maint" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">2</span>เวลาปิดปรับปรุง (เวลาไทย)</h2>
+        <h2 className="ct-ch__title"><span className="ct-ch__n">⏱</span>ปิดปรับปรุง (เวลาไทย)</h2>
         <div className="card">
           <table className="stat-table ct-times">
             <tbody>
@@ -106,62 +392,26 @@ export default function Patch20261126() {
               <tr><td>เปิดเซิร์ฟ</td><td className="num">—</td></tr>
             </tbody>
           </table>
-          <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-            ประกาศยังไม่บอกเวลาเปิดเซิร์ฟ และบอกว่าเวลาอาจเลื่อน · ควรออกจากเกมก่อนเริ่มปิด ·
-            ของใน Kafra Shop บางชิ้นอาจหมดรอบขายหลังปิดปรับปรุง ดูวันหมดเขตในร้าน
-          </p>
+          <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>ยังไม่มีประกาศปิดปรับปรุงเสร็จ</p>
         </div>
       </section>
 
-      <section id="raids" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">3</span>MVP Raid ใหม่ 2 ตัว</h2>
-        <ul className="pmobs">
-          {RAIDS.map((m) => (
-            <li key={m.id}>
-              <Link href={`/database/monsters/${m.id}`} className="pmob">
-                <span className="pmob__art"><img src={`/images/monsters/${m.id}.gif`} alt="" loading="lazy" /></span>
-                <span className="pmob__name">{m.name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="muted" style={{ marginTop: 10, fontSize: 13.5 }}>
-          ประกาศยังไม่บอกว่า Raid อยู่แมพไหน · MVP Raid ตัวก่อนๆ เข้าด้วยเควสรายวันที่ Eden Group แล้วเข้าประตูแดง
-          (<Link href="/guides/mvp">วิธีเข้า MVP Raid</Link>) รอบนี้น่าจะเหมือนกัน แต่ยังไม่ยืนยัน
-        </p>
-      </section>
-
-      <section id="quests" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">4</span>เควสอีเวนต์ใหม่ (มีเฉพาะ Global)</h2>
-        <div className="ct-two">
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>A Hard Choice</h3>
-            <p className="muted" style={{ margin: 0 }}>ทำที่ไหน ได้อะไร — รอแพทช์โน้ต</p>
-          </div>
-          <div className="card">
-            <h3 className="pxh" style={{ marginTop: 0 }}>Bug Extermination</h3>
-            <p className="muted" style={{ margin: 0 }}>ทำที่ไหน ได้อะไร — รอแพทช์โน้ต</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="shop" className="ct-ch">
-        <h2 className="ct-ch__title"><span className="ct-ch__n">5</span>KP Shop ลด 10% ทั้งร้าน รอบ 2</h2>
+      <section id="ending" className="ct-ch">
+        <h2 className="ct-ch__title"><span className="ct-ch__n">✓</span>จบไปตอนปิดปรับปรุงนี้</h2>
         <div className="card">
-          <p style={{ margin: 0, lineHeight: 1.65 }}>
-            ส่วนลด Black Friday รอบ 2 เริ่มหลังปิดปรับปรุงนี้ ถึง <b>3 ธ.ค.</b> (วันตามประกาศ Black Friday Promotion, UTC+0) ·
-            แพ็กเกจอีเวนต์บางตัวอาจไม่ลด ดูในร้านในเกม
-          </p>
-          <p className="muted" style={{ marginTop: 8, fontSize: 13.5 }}>
-            ของรางวัลจากยอดใช้ KP ยังได้ถึง 4 ธ.ค. · <Link href="/news/events-2026-11#promotion">Black Friday Promotion</Link>
-          </p>
+          <ul style={{ margin: 0, paddingInlineStart: 20, lineHeight: 1.9 }}>
+            {ENDED.map((e) => (
+              <li key={e.name}>{e.href ? <Link href={e.href}>{e.name}</Link> : e.name}</li>
+            ))}
+          </ul>
         </div>
       </section>
 
       <p className="source-note" style={{ marginTop: 20 }}>
-        <strong>ที่มา:</strong> ประกาศทางการ Ragnarok Zero: Global &ldquo;Scheduled Maintenance – 26th November 2026&rdquo; (Discord 24 พ.ย. 2569, roz.mygnjoy.com 25 พ.ย.)
-        และ &ldquo;Scheduled Maintenance Reminder – November 26, 2026&rdquo; (roz.mygnjoy.com 25 พ.ย. 2569) · วันส่วนลด KP รอบ 2 จากประกาศ Black Friday Promotion (29 ต.ค. 2569) ·
-        หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
+        <strong>ที่มา:</strong> ประกาศทางการ Ragnarok Zero: Global บน roz.mygnjoy.com:
+        Update Notice &ldquo;New Threats Stir Across Midgard | November 26 Update!&rdquo; (25 พ.ย. 2569),
+        Event Quest &ldquo;A Hard Choice&rdquo; และ &ldquo;Bug Extermination&rdquo; (25 พ.ย.), Promo Notice &ldquo;Cosmic Costume Collection&rdquo; (26 พ.ย.),
+        ประกาศปิดปรับปรุง 26 พ.ย. (24–25 พ.ย.) · รูป NPC ไอคอนไอเทม และขั้นเควสที่มีป้ายจากไฟล์เกม มาจากไคลเอนต์แพทช์ 26 พ.ย. · หน้านี้เป็นสรุปแปล ไม่ใช่ประกาศทางการ
       </p>
     </main>
   );

@@ -32,14 +32,28 @@ export const NEWS: NewsItem[] = [
   {
     href: '/news/patch-2026-11-26',
     kind: 'patch',
-    title: 'ปิดปรับปรุง 26 พ.ย. · MVP Raid Maya, Phreeoni',
-    blurb: 'เริ่ม 08:00 น. · เควสอีเวนต์ใหม่ 2 เควส · KP Shop ลด 10% รอบ 2 · Gatchaman, Hunting Season, Blessing จบ',
+    title: 'แพทช์ 26 พ.ย. · MVP Raid Maya, Phreeoni',
+    blurb: 'อีเวนต์ A Hard Choice เลือกข้างแลกคอสตูม · Bug Extermination ได้ Jasper Crest · KP Shop ลด 10% รอบ 2 · คอสตูม Cosmic',
     // Dated when the page went up (the day before), so it leads NOW PLAYING
     // ahead of the maintenance it announces.
     date: '2026-11-25T15:00:00+07:00',
     dateTh: '26 พ.ย.',
     badge: 'MVP',
     cast: ['/images/monsters/1147.gif', '/images/monsters/1159.gif'],
+  },
+  {
+    href: '/news/patch-2026-11-26#hard-choice',
+    kind: 'event',
+    title: 'A Hard Choice · Bug Extermination',
+    blurb: 'เลือกช่วย Guard Ars หรือ Old Woman Enko แลกคอสตูม · เควส Guillon ได้ Jasper Crest · เควสรายวันที่ Ant Hell',
+    date: '2026-11-26T08:00:00+07:00',
+    dateTh: '26 พ.ย.',
+    // Ends at the 10 Dec maintenance (event notices 198 and 200). The hour is
+    // not announced; 08:00 is this season's usual start.
+    ends: '2026-12-10T08:00:00+07:00',
+    endsTh: '10 ธ.ค.',
+    // The event NPCs, rendered from the 26 Nov client.
+    cast: ['/images/events/2026-11-26/guard-ars.png', '/images/events/2026-11-26/enko.png', '/images/events/2026-11-26/guillon.png'],
   },
   {
     href: '/news/patch-2026-11-12',

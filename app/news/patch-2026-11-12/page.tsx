@@ -29,7 +29,7 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 
 const PATH = '/news/patch-2026-11-12';
 const PUBLISHED = '2026-11-11T16:00:00+07:00';
-const MODIFIED = '2026-11-12T16:00:00+07:00';
+const MODIFIED = '2026-11-26T10:00:00+07:00';
 const IMG = '/images/events/2026-11-12';
 
 export const metadata: Metadata = {
@@ -114,10 +114,10 @@ function Mats({ items }: { items: Mat[] }) {
 const Tag = () => <span className="unverified">จากไฟล์เกม</span>;
 
 const JUMPS: { href: string; img: string; label: string; sub: string }[] = [
-  { href: '#reset-cat', img: `${IMG}/reset-cat.webp`, label: 'Reset Cat', sub: 'รีเซ็ตฟรี ถึง 15 พ.ย.' },
+  { href: '#reset-cat', img: `${IMG}/reset-cat.webp`, label: 'Reset Cat', sub: 'จบแล้ว 15 พ.ย.' },
   { href: '#ant-hell', img: '/images/monsters/1147.gif', label: 'Ant Hell Memorial', sub: 'ดันใหม่ Lv 70' },
-  { href: '#hunting', img: '/images/monsters/1127.gif', label: 'Hunting Season', sub: 'ถึง 26 พ.ย.' },
-  { href: '#blessing', img: '/images/items/6635.gif', label: 'แลก Blessing', sub: 'สัปดาห์ละครั้ง ถึง 26 พ.ย.' },
+  { href: '#hunting', img: '/images/monsters/1127.gif', label: 'Hunting Season', sub: 'จบแล้ว 26 พ.ย.' },
+  { href: '#blessing', img: '/images/items/6635.gif', label: 'แลก Blessing', sub: 'จบแล้ว 26 พ.ย.' },
   { href: '#dungeons', img: '/images/monsters/1264.gif', label: 'ดันใหม่ 3 ชั้น', sub: 'Karu · Izlude 4–5' },
   { href: '#level', img: '/images/items/15221.gif', label: 'เลเวล 80 + EXP', sub: 'ตาราง EXP ใหม่' },
 ];
@@ -170,18 +170,18 @@ export default function Patch20261112() {
       </header>
 
       <section className="pdeadline" aria-label="ของที่มีวันหมด">
-        <h2 className="pdeadline__h">ทำก่อนหมดเวลา</h2>
+        <h2 className="pdeadline__h">อีเวนต์ในแพทช์นี้จบแล้ว</h2>
         <ol className="pdeadline__list">
           <li><time>15 พ.ย.</time><span><a href="#reset-cat">Reset Cat</a> รีเซ็ตสเตตัสและสกิลฟรี</span></li>
           <li><time>26 พ.ย.</time><span><a href="#hunting">Hunting Season</a> เก็บการ์ด Hode / Orc Warrior</span></li>
           <li><time>26 พ.ย.</time><span><a href="#blessing">แลก Blacksmith Blessing</a> สัปดาห์ละ 1 ขวด</span></li>
         </ol>
-        <p className="pdeadline__note">วันตามประกาศ (เวลา UTC) · ประกาศไม่บอกชั่วโมงที่จบ</p>
+        <p className="pdeadline__note">ทั้ง 3 อย่างจบแล้ว · อีเวนต์ใหม่ดูที่ <Link href="/news/patch-2026-11-26">แพทช์ 26 พ.ย.</Link></p>
       </section>
 
       {/* ---------------- Reset Cat ---------------- */}
       <section id="reset-cat" className="evsec evsec--pink">
-        <p className="evsec__tag">EVENT · 12–15 NOV</p>
+        <p className="evsec__tag">EVENT · 12–15 NOV · จบแล้ว</p>
         <h2 className="evsec__title">Reset Cat กลับมา: รีเซ็ตฟรี</h2>
         <p className="evsec__lead">มาให้ทันเลเวลตัน 80 · รีเซ็ตสเตตัสและสกิลได้ฟรี ไม่เสีย Zelstar</p>
         <div className="pnpc">
@@ -270,11 +270,11 @@ export default function Patch20261112() {
 
       {/* ---------------- Hunting Season ---------------- */}
       <section id="hunting" className="evsec evsec--cyan">
-        <p className="evsec__tag">EVENT · 12–26 NOV</p>
+        <p className="evsec__tag">EVENT · 12–26 NOV · จบแล้ว</p>
         <h2 className="evsec__title">Hunting Season: Hode และ Orc Warrior</h2>
         <p className="evsec__lead">
           Hode กับ Orc Warrior รวมถึงร่าง Furious เกิดถี่ขึ้นในแมพของมัน · ล่าการ์ดไปแลก Token แล้วเอา Token ไปแลกคอสตูม ·
-          ประกาศบอกให้เตรียมรับ MVP ใหม่ <b>Phreeoni กับ Maya</b>
+          ประกาศบอกให้เตรียมรับ MVP ใหม่ <b>Phreeoni กับ Maya</b> (<Link href="/news/patch-2026-11-26#raids">มาแล้ว 26 พ.ย.</Link>)
         </p>
         <div className="evdaily">
           <div className="evmob">
@@ -363,7 +363,7 @@ export default function Patch20261112() {
 
       {/* ---------------- Blacksmith's Blessing ---------------- */}
       <section id="blessing" className="evsec evsec--pink">
-        <p className="evsec__tag">EVENT · 12–26 NOV</p>
+        <p className="evsec__tag">EVENT · 12–26 NOV · จบแล้ว</p>
         <h2 className="evsec__title">แลก Blacksmith Blessing</h2>
         <p className="evsec__lead">ของกันอุปกรณ์แตกหรือลดขั้นตอนตีบวก +7 ขึ้นไป · อีกทางนอกจากกล่อง MVP Raid</p>
         <div className="pnpc">
@@ -489,11 +489,11 @@ export default function Patch20261112() {
       </section>
 
       <section id="ongoing" className="ct-ch" style={{ marginTop: 28 }}>
-        <Link href="/news/events-2026-11" className="pevents">
-          <span className="pevents__tag">ถึง 26 พ.ย.</span>
+        <Link href="/news/patch-2026-11-26" className="pevents">
+          <span className="pevents__tag">ถึง 10 ธ.ค.</span>
           <span className="pevents__body">
-            <strong>ยังเล่นได้ต่อ: Gatchaman · Black Friday EXP x2</strong>
-            <small>เควสคอลแลบที่ Morocc · EXP x2 ดรอป +20% ทุกเสาร์อาทิตย์ · คอสตูมผี Ghostly</small>
+            <strong>อีเวนต์ถัดไป: แพทช์ 26 พ.ย.</strong>
+            <small>MVP Raid Maya, Phreeoni · เควสอีเวนต์ A Hard Choice, Bug Extermination · KP Shop ลด 10% รอบ 2</small>
           </span>
           <span className="pevents__go" aria-hidden="true">▶</span>
         </Link>

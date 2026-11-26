@@ -98,6 +98,11 @@ for sid, g in game.items():
     iid = int(sid)
     if iid in have or not g['name'].strip():
         continue
+    # 26 Nov 2026: the client added ~130 blank "One-Handed Sword Lv.1",
+    # "Hat Lv.2", "Armor Shadow Lv.1" rows -- one per equipment type, no
+    # effect beyond a stub line, not in any notice. Not live; skip them.
+    if re.search(r' Lv\.\d$', g['name'].strip()):
+        continue
     e = en.get(iid, {})
     lines = [strip(e['identifiedDescriptionName'][k]) for k in sorted(e.get('identifiedDescriptionName') or {})]
     lines = [l for l in lines if l and l != '_']

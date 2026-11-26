@@ -7,8 +7,9 @@ describe('mapRelease', () => {
     // rows these sat in the farm rankings as if a player could walk in.
     expect(mapRelease('tur_d01_a')?.area).toBe('Turtle Island');
     // The deeper rooms the client does not navigate to yet stay closed.
-    expect(mapRelease('b_an_d02')?.area).toBe('Ant Hell');
     expect(mapRelease('b_tre_d02')?.area).toBe('Sunken Ship');
+    // Except where a notice opens one: Maya's MVP Raid (26 Nov 2026 update).
+    expect(mapRelease('b_an_d02')).toBeNull();
   });
 
   it('closes the Zero copies rozerodb files under another name', () => {

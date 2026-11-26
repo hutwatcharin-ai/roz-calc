@@ -46,6 +46,12 @@ const PLAN = roadmap.plan as Plan[];
 // Our own patch pages: the half of this page that is not somebody's plan.
 const LANDED = [
   {
+    href: '/news/patch-2026-11-26',
+    when: '26 พ.ย. 2569',
+    title: 'MVP Raid Maya, Phreeoni',
+    body: 'MVP Raid ใหม่ Maya ที่ Ant Hell และ Phreeoni ที่ทะเลทราย Sograt · อีเวนต์ A Hard Choice ที่ Comodo และ Bug Extermination ที่ Ant Hell · KP Shop ลด 10% รอบ 2 · คอสตูม Cosmic',
+  },
+  {
     href: '/news/patch-2026-11-12',
     when: '12 พ.ย. 2569',
     title: 'เลเวลตัน 80, Ant Hell Memorial, Karu, Izlude ใต้น้ำ 4–5',

@@ -12,8 +12,12 @@
 | event 193, 194 | Blacksmith Blessing Exchange (Yakt, Eden Group) · Hunting Season (Joh the Card Collector, การ์ด/ไอเทม → Token → คอสตูม 8 ชิ้น) | /news/patch-2026-11-12 | 2026-11-12 |
 | notice 192 | ปิดปรับปรุงเสร็จ 01:00–04:45 UTC + แก้บั๊ก 8 ข้อ | /news/patch-2026-11-12#maint | 2026-11-12 |
 | guide 21 | Character Level ตาราง EXP ใหม่ 1–80 + Job อาชีพ 2 | /guides/exp | 2026-11-12 |
+| notice 196, 197 | ปิดปรับปรุง 26 พ.ย. 08:00 น. + อีเวนต์ที่จบ | /news/patch-2026-11-26#maint | 2026-11-25 |
+| update 199 | Update Notice 26 พ.ย. (5 รูป: MVP Raid Maya anthell02 175/190, Phreeoni moc_fild17 210/230, A Hard Choice, Bug Extermination, KP 10% รอบ 2, อีเวนต์จบ) | /news/patch-2026-11-26 | 2026-11-26 |
+| event 198, 200 | A Hard Choice (Guard Ars / Old Woman Enko, Token แลกคอสตูม) · Bug Extermination (Guillon → Jasper Crest, Lyrias รายวัน) | /news/patch-2026-11-26#hard-choice | 2026-11-26 |
+| specialoffer 201 | Cosmic Costume Collection (SEA = Cosmic Scroll สุ่ม, EU = กล่องเลือก) | /news/patch-2026-11-26#cosmic | 2026-11-26 |
 
-ประกาศ notice 179 (Black Friday บัฟสุดสัปดาห์ต่อเวลาถึง 2 พ.ย. 13:10 น.) ผ่านไปแล้ว ไม่ได้ลงเว็บ · notice 180 (WoE EU) อยู่ในหน้าแพทช์ 29 ต.ค. แล้ว · ประกาศ Discord ปิดปรับปรุง 5 พ.ย. (3 และ 4 พ.ย.) ทำที่ /news/patch-2026-11-05 วันที่ 4 พ.ย. — 5 พ.ย. เติมแล้ว: เปิดเซิร์ฟ 10:00 น. (ประกาศ notice 184) รอบนี้ไม่มี Update Notice — ถ้ามีแพตช์โน้ตตามมาค่อยเติม
+notice 195 (18 พ.ย. ขอฟีดแบ็ก EXP Lv 2–70 ที่ลดไปแล้ว) ไม่มีข้อมูลใหม่ ไม่ได้ลงเว็บ · ประกาศ notice 179 (Black Friday บัฟสุดสัปดาห์ต่อเวลาถึง 2 พ.ย. 13:10 น.) ผ่านไปแล้ว ไม่ได้ลงเว็บ · notice 180 (WoE EU) อยู่ในหน้าแพทช์ 29 ต.ค. แล้ว · ประกาศ Discord ปิดปรับปรุง 5 พ.ย. (3 และ 4 พ.ย.) ทำที่ /news/patch-2026-11-05 วันที่ 4 พ.ย. — 5 พ.ย. เติมแล้ว: เปิดเซิร์ฟ 10:00 น. (ประกาศ notice 184) รอบนี้ไม่มี Update Notice — ถ้ามีแพตช์โน้ตตามมาค่อยเติม
 
 แพทช์ 29 ต.ค. (Clock Tower) ทำแล้วที่ /news/patch-2026-10-29
 
@@ -23,10 +27,9 @@
 
 | วันที่ | งาน |
 |---|---|
-| 2026-11-16 | Reset Cat (12–15 พ.ย. UTC, /navi payon 165/49) จบ: แก้การ์ด Reset Cat ในหน้า /news/patch-2026-11-12 เป็นจบแล้ว |
-| 2026-11-27 | Hunting Season กับแลก Blacksmith Blessing (12–26 พ.ย. UTC) จบ: แก้การ์ดในหน้า /news/patch-2026-11-12 |
-| 2026-11-26 | อีเวนต์ Gatchaman / หน้า events-2026-11 จบ: ย้ายไปกลุ่มจบแล้ว, ปุ่ม Mid Missile หาย, เอาแถวอีเวนต์ออกจาก NOW PLAYING |
 | 2026-12-01 | โค้ด KUMAMON ใน /guides/codes#kumamon ย้ายไปกลุ่มหมดอายุ |
+| 2026-12-04 | KP Shop ลด 10% รอบ 2 (ถึง 3 ธ.ค. UTC) จบ: แก้ /news/patch-2026-11-26#shop และ /news/events-2026-11#promotion |
+| 2026-12-11 | A Hard Choice, Bug Extermination, คอสตูม Cosmic (ถึงปิดปรับปรุง 10 ธ.ค.) จบ: แก้ /news/patch-2026-11-26 เป็นจบแล้ว (แถว NEWS ออกจาก NOW PLAYING เอง) |
 
 ## รอรูป / รอข้อมูล
 
@@ -35,7 +38,8 @@
 - ของทำพิธี Molden: ยังไม่รู้ชื่อไอเทมจริง · Clock Tower Gear ดรอปจากมอนหอนาฬิกา (owner 2 พ.ย.) ยังไม่รู้ว่าตัวไหน
 - ตาราง Cash Shop ใหม่ยังไม่เทียบกับ `cash_shop_items`
 - แพทช์ 12 พ.ย.: เควสรายวัน Lv 80 (ไม่เจอในไฟล์เควสไคลเอนต์ ประกาศไม่บอก NPC) · ราคา/อัตรา Light Gacha · Memorial แรงค์ II (Lv 80) เปิดหรือยัง — `lib/memorial-gear.ts` ล็อกไว้ที่ 70
-- Ant Hell: `b_an_d02`, `b_an_d02_z` ยังปิดตามโรดแมป (ไม่อยู่ใน navi) — ถ้าเป็นแมพของ Memorial Ant Hell ให้เปิด
+- Ant Hell: `b_an_d02`, `b_an_d02_z` เปิดแล้ว 26 พ.ย. (MANUAL_OPEN ใน build-map-availability.mjs, แมพ MVP Raid Maya)
+- แพทช์ 26 พ.ย.: อ่านไฟล์เกมแล้ว (snapshot 2026-11-26) · import ไอเทมใหม่ 67 ชิ้น (ข้ามแถวเปล่า "X Lv.N" ~130 แถวที่ยังไม่เปิดใช้) · รูป NPC 4 ตัวทำแล้ว · ยังรอ: Sun God’s Ornament, Poncho, Iguazu Falls, Grand Canyon ไม่มีไอคอนในไคลเอนต์ (ยังไม่เปิดขาย) · เพ็ต Pickyring (GetPoring) ยังไม่มีประกาศ · เวลาเปิดเซิร์ฟยังเป็น — รอประกาศ Maintenance Completed · จำนวนของรางวัลรายวัน A Hard Choice ประกาศไม่บอก
 
 ## ข้อมูลจากไฟล์เกมที่ยังไม่ได้เช็กในเกม
 
