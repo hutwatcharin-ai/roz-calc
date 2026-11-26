@@ -17,6 +17,7 @@ import '../patch-2026-10-01/page.css';
 import '../patch-2026-10-29/page.css';
 import '../events-2026-10/page.css';
 import '../patch-2026-11-12/page.css';
+import './page.css';
 import NaviCopy from '@/components/NaviCopy';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
@@ -83,26 +84,92 @@ function ItemCell({ id, png, children }: { id: number; png?: boolean; children: 
   );
 }
 
-function Exchange({ costumeId, costume, option }: { costumeId: number; costume: string; option: string[] }) {
+// One A Hard Choice side, top to bottom: what to hand in, what each run
+// gives, then the hat 10 tokens buy and what the leftovers buy.
+type Side = {
+  title: string;
+  fit: string;
+  npc: { img: string; name: string; where: string; navi: string };
+  quest: string;
+  handIn: Mat[];
+  daily: Mat[];
+  token: string;
+  hat: { id: number; name: string; option: string[] };
+};
+
+function SideCard({ side }: { side: Side }) {
   return (
-    <table className="stat-table" style={{ marginTop: 8 }}>
-      <thead>
-        <tr><th>แลกได้</th><th className="num">ใช้ Token</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <ItemCell id={costumeId} png><b>{costume}</b></ItemCell> (หมวกบน)
-            <div className="evsmall">ออปชันช่วงอีเวนต์: {option.join(' · ')} · ออปชันหายเมื่ออีเวนต์จบ ตัวคอสตูมยังอยู่</div>
-          </td>
-          <td className="num">10</td>
-        </tr>
-        <tr><td><ItemCell id={108681} png>[Event] Mixed Dish Lv.10 Box of 10</ItemCell></td><td className="num">3</td></tr>
-        <tr><td><ItemCell id={108680} png>[Event] Yggdrasil Seed Box of 10</ItemCell></td><td className="num">1</td></tr>
-      </tbody>
-    </table>
+    <div className="hcside">
+      <div className="hcside__hd">
+        <h4 className="hcside__title">{side.title}</h4>
+        <span className="hcside__fit">{side.fit}</span>
+      </div>
+      <figure className="evnpc">
+        <span className="evnpc__art"><img src={`/images/events/2026-11-26/${side.npc.img}.png`} alt={side.npc.name} loading="lazy" /></span>
+        <figcaption>
+          <strong>{side.npc.name} · {side.npc.where}</strong>
+          <NaviCopy cmd={side.npc.navi} />
+        </figcaption>
+      </figure>
+      <div className="hcstep">
+        <span className="hcstep__n">1</span>
+        <div>
+          <p className="hcstep__label">{side.quest} <Tag /></p>
+          <Mats items={side.handIn} />
+        </div>
+      </div>
+      <div className="hcstep">
+        <span className="hcstep__n">2</span>
+        <div>
+          <p className="hcstep__label">ได้ทุกรอบ (วันละครั้ง)</p>
+          <Mats items={side.daily} />
+        </div>
+      </div>
+      <div className="hcstep">
+        <span className="hcstep__n">3</span>
+        <div>
+          <p className="hcstep__label">เก็บ {side.token} ครบ 10 อัน แลกหมวก</p>
+          <Link href={`/database/items/${side.hat.id}`} className="hchat">
+            <span className="hchat__icon"><img src={`/images/items/${side.hat.id}.png`} alt="" loading="lazy" /></span>
+            <span>
+              <span className="hchat__name">{side.hat.name}</span>
+              <span className="hchat__slot">คอสตูมหมวกบน · ใช้ 10 Token</span>
+              <ul>{side.hat.option.map((o) => <li key={o}>{o}</li>)}</ul>
+            </span>
+          </Link>
+          <p className="hcstep__label" style={{ marginTop: 10 }}>Token ที่เหลือแลกได้อีก</p>
+          <ul className="hcextra">
+            <li><ItemCell id={108681} png>Mixed Dish Lv.10 ×10 (กล่อง)</ItemCell><span className="hccost">3 Token</span></li>
+            <li><ItemCell id={108680} png>Yggdrasil Seed ×10 (กล่อง)</ItemCell><span className="hccost">1 Token</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }
+
+const SIDES: Side[] = [
+  {
+    title: 'ข้างทหาร',
+    fit: 'เหมาะกับสายเก็บเลเวล',
+    npc: { img: 'guard-ars', name: 'Guard Ars', where: 'Comodo', navi: '/navi comodo 33/212' },
+    quest: 'ล่า Medusa ใน Western Cave Karu แล้วส่ง',
+    handIn: [{ name: 'Horrendous Hair', id: 1048, qty: 20 }],
+    daily: [{ name: 'Token of Courage', id: 1003367, png: true }, { name: 'Panacea', id: 525 }, { name: 'Mixed Dish Lv.10', id: 100080 }],
+    token: 'Token of Courage',
+    hat: { id: 31555, name: '[Costume] Heavy Infantry Helm', option: ['EXP จากมอน +5%', 'ดาเมจใส่มอนทุกธาตุทุกขนาด +10%'] },
+  },
+  {
+    title: 'ข้าง Medusa',
+    fit: 'เหมาะกับสายฟาร์มของ',
+    npc: { img: 'enko', name: 'Old Woman Enko', where: 'Western Cave Karu', navi: '/navi beach_dun 242/67' },
+    quest: 'หาวัตถุดิบงานเลี้ยงน้ำชาของ Medusa แล้วส่ง',
+    handIn: [{ name: 'Ancient Lips', id: 1054, qty: 10 }, { name: 'Earthworm Peeling', id: 1055, qty: 20 }],
+    daily: [{ name: 'Token of Friendship', id: 1003368, png: true }, { name: 'Royal Jelly', id: 526 }, { name: 'Mixed Dish Lv.10', id: 100080 }],
+    token: 'Token of Friendship',
+    hat: { id: 20485, name: '[Costume] Carnivorous Plant Hairpin', option: ['ATK, MATK +10', 'ดรอปไอเทม +5%'] },
+  },
+];
 
 // Quest steps the notices leave out, read from the 26 Nov client's
 // OngoingQuestInfoList_enUS.lub. Shown with the "จากไฟล์เกม" tag.
@@ -232,56 +299,12 @@ export default function Patch20261126() {
         </ol>
 
         <h3 className="evh">2. เควสรายวัน: เลือก 1 ข้าง</h3>
+        <p className="evsmall">ทำได้วันละครั้ง และวันนั้นทำได้แค่ข้างเดียว · หมวกแต่ละใบใช้ Token ของข้างตัวเอง 10 อัน</p>
         <div className="ct-two">
-          <div className="card">
-            <h4 className="pxh" style={{ marginTop: 0 }}>ข้างทหาร: Guard Ars</h4>
-            <figure className="evnpc">
-              <span className="evnpc__art"><img src="/images/events/2026-11-26/guard-ars.png" alt="Guard Ars" loading="lazy" /></span>
-              <figcaption>
-                <strong>Guard Ars · Comodo</strong>
-                <NaviCopy cmd="/navi comodo 33/212" />
-              </figcaption>
-            </figure>
-            <p className="evsmall" style={{ marginTop: 8 }}>
-              เควส Curious Tourists: ล่า Medusa ใน Western Cave Karu เก็บ <Tag />
-            </p>
-            <Mats items={[{ name: 'Horrendous Hair', id: 1048, qty: 20 }]} />
-            <p className="evsmall">ได้ต่อรอบ:</p>
-            <Mats items={[{ name: 'Token of Courage', id: 1003367, png: true }, { name: 'Panacea', id: 525 }, { name: 'Mixed Dish Lv.10', id: 100080 }]} />
-            <Exchange
-              costumeId={31555}
-              costume="[Costume] Heavy Infantry Helm"
-              option={['EXP จากมอน +5%', 'ดาเมจกายภาพ/เวท ใส่มอนทุกธาตุทุกขนาด +10% (ไม่รวมผู้เล่น)']}
-            />
-          </div>
-          <div className="card">
-            <h4 className="pxh" style={{ marginTop: 0 }}>ข้าง Medusa: Old Woman Enko</h4>
-            <figure className="evnpc">
-              <span className="evnpc__art"><img src="/images/events/2026-11-26/enko.png" alt="Old Woman Enko" loading="lazy" /></span>
-              <figcaption>
-                <strong>Old Woman Enko · Western Cave Karu</strong>
-                <NaviCopy cmd="/navi beach_dun 242/67" />
-              </figcaption>
-            </figure>
-            <p className="evsmall" style={{ marginTop: 8 }}>
-              เควส Medusa&apos;s Tea Party: หาวัตถุดิบงานเลี้ยงน้ำชาของ Medusa ส่ง <Tag />
-            </p>
-            <Mats items={[{ name: 'Ancient Lips', id: 1054, qty: 10 }, { name: 'Earthworm Peeling', id: 1055, qty: 20 }]} />
-            <p className="evsmall">ได้ต่อรอบ:</p>
-            <Mats items={[{ name: 'Token of Friendship', id: 1003368, png: true }, { name: 'Royal Jelly', id: 526 }, { name: 'Mixed Dish Lv.10', id: 100080 }]} />
-            <Exchange
-              costumeId={20485}
-              costume="[Costume] Carnivorous Plant Hairpin"
-              option={['ATK, MATK +10', 'ดรอปไอเทม +5%']}
-            />
-          </div>
-        </div>
-        <div className="evreward">
-          <span className="evreward__tag">เลือกยังไง</span> สายตีมอนเก็บเลเวล: หมวกทหาร (EXP +5% ดาเมจ +10%) ·
-          สายฟาร์มของ: หมวกต้นไม้กินแมลง (ดรอป +5%) · ต้องใช้ 10 Token ทั้งคู่
+          {SIDES.map((side) => <SideCard key={side.title} side={side} />)}
         </div>
         <p className="evnote">
-          Token of Courage / Friendship หายเมื่ออีเวนต์จบ แลกให้หมดก่อน 10 ธ.ค. · Mixed Dish Lv.10 เพิ่มทุกสเตตัส +10 และฟื้น HP/SP 10% ·
+          Token of Courage / Friendship หายเมื่ออีเวนต์จบ แลกให้หมดก่อน 10 ธ.ค. · ออปชันบนหมวกใช้ได้ถึงอีเวนต์จบ ตัวคอสตูมยังอยู่ · ดาเมจ +10% ไม่รวมใส่ผู้เล่น · Mixed Dish Lv.10 เพิ่มทุกสเตตัส +10 และฟื้น HP/SP 10% ·
           ประกาศไม่บอกจำนวนของที่ได้ต่อรอบ · ป้าย <Tag /> = จากไคลเอนต์แพทช์ 26 พ.ย. ยังไม่ได้เช็กในเกม
         </p>
       </section>
