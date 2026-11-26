@@ -144,8 +144,10 @@ export default async function AdvertisePage() {
                   const until = bookedUntil(slot.key, today);
                   return until ? (
                     <>
-                      <p className="adpage__booked">มีผู้จองแล้วถึง {thaiDate(until)} จองคิวต่อจากนี้ได้</p>
-                      <a className="btn" href={mailto(`จองคิว${slot.name} หลัง ${until} rozerothai.com`)}>จองคิวถัดไป</a>
+                      {/* No end date (owner, 26 Nov 2026): the advertiser may renew,
+                          and a date would read as the slot being up for grabs. */}
+                      <p className="adpage__booked">มีผู้จองแล้ว</p>
+                      <a className="btn" href={mailto(`สอบถามคิว${slot.name} rozerothai.com`)}>สอบถามคิว</a>
                     </>
                   ) : (
                     <a className="btn" href={mailto(`จอง${slot.name} rozerothai.com`)}>จองตำแหน่งนี้</a>
