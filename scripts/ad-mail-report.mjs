@@ -15,8 +15,11 @@
 // cannot be read, the owner hears it on Telegram and the advertiser gets
 // nothing rather than an empty report.
 //
-// Only ads with "report": true in data/ads.json are reported. One recipient
-// for now; a second advertiser will need its own address.
+// Only ads with "report": true in data/ads.json are reported. An advertiser
+// with banners in several slots gets one mail covering them all, with a line
+// per slot -- Gametopup.center (26 Nov 2026) took six, and six mails a week
+// would have read as spam. One recipient for now; a second advertiser running
+// at the same time will need its own address.
 
 import { createSign } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -78,8 +81,19 @@ async function ga4(token, body) {
   }));
 }
 
-// Event count and distinct users for one of the ad's events, split by dims.
-function adEvent(token, adId, event, start, end, dims = []) {
+// What each slot is called in the report.
+const SLOT_TH = {
+  top: 'บนสุดทุกหน้า',
+  inline: 'แทรกในเนื้อหาหน้าที่คนเปิดมาก',
+  detail: 'หน้ารายละเอียดมอนสเตอร์และไอเทม',
+  bonus: 'Cash Shop หน้าแพตช์ และหน้าอีเวนต์',
+  list: 'ในตารางการ์ดหน้ามอนสเตอร์',
+  guide: 'ท้ายไกด์อาชีพ',
+};
+const SLOT_ORDER = Object.keys(SLOT_TH);
+
+// Event count and distinct users for the campaign's banners, split by dims.
+function adEvent(token, adIds, event, start, end, dims = []) {
   return ga4(token, {
     dateRanges: [{ startDate: iso(start), endDate: iso(end) }],
     dimensions: dims.map((name) => ({ name })),
@@ -88,26 +102,30 @@ function adEvent(token, adId, event, start, end, dims = []) {
       andGroup: {
         expressions: [
           { filter: { fieldName: 'eventName', stringFilter: { value: event } } },
-          { filter: { fieldName: 'customEvent:ad_id', stringFilter: { value: adId } } },
+          { filter: { fieldName: 'customEvent:ad_id', inListFilter: { values: adIds } } },
         ],
       },
     },
   });
 }
 
-async function numbers(token, adId, start, end) {
-  const [imp, clicks, days, devices] = await Promise.all([
-    adEvent(token, adId, 'banner_impression', start, end),
-    adEvent(token, adId, 'banner_click', start, end),
-    adEvent(token, adId, 'banner_impression', start, end, ['date']),
-    adEvent(token, adId, 'banner_impression', start, end, ['deviceCategory']),
+async function numbers(token, adIds, start, end) {
+  const [imp, clicks, days, devices, slotViews, slotClicks] = await Promise.all([
+    adEvent(token, adIds, 'banner_impression', start, end),
+    adEvent(token, adIds, 'banner_click', start, end),
+    adEvent(token, adIds, 'banner_impression', start, end, ['date']),
+    adEvent(token, adIds, 'banner_impression', start, end, ['deviceCategory']),
+    adEvent(token, adIds, 'banner_impression', start, end, ['customEvent:ad_slot']),
+    adEvent(token, adIds, 'banner_click', start, end, ['customEvent:ad_slot']),
   ]);
   const [views, people] = imp[0]?.mets ?? [0, 0];
   const deviceViews = Object.fromEntries(devices.map((r) => [r.dims[0], r.mets[0]]));
+  const clicksBySlot = Object.fromEntries(slotClicks.map((r) => [r.dims[0], r.mets[0]]));
   return {
     views,
     people,
     clicks: clicks[0]?.mets[0] ?? 0,
+    slots: slotViews.map((r) => ({ slot: r.dims[0], views: r.mets[0], clicks: clicksBySlot[r.dims[0]] ?? 0 })),
     days: Object.fromEntries(days.map((r) => [r.dims[0], r.mets[1]])),
     desktopShare: views ? Math.round(((deviceViews.desktop ?? 0) / views) * 100) : 0,
   };
@@ -126,7 +144,7 @@ function due(ad) {
   return { final: false, start, end: yesterday, starts, ends };
 }
 
-function html(ad, when, n) {
+function html(ad, when, n, slots) {
   const totalDays = Math.round((when.ends - when.starts) / DAY) + 1;
   const done = Math.min(totalDays, Math.round((when.end - when.starts) / DAY) + 1);
   const week = Math.ceil(done / 7);
@@ -164,7 +182,7 @@ function html(ad, when, n) {
 <tr><td style="padding:22px 24px 14px;border-bottom:2px solid #ff3fa4">
   <div style="font-size:12px;color:#39e6ff"><span style="letter-spacing:2px">ROZEROTHAI.COM</span> · รายงานโฆษณา</div>
   <div style="font-size:24px;font-weight:bold;color:#fff;margin-top:6px">แบนเนอร์ ${ad.advertiser} · ${title}</div>
-  <div style="font-size:14px;color:#b9b3e8;margin-top:4px">${range} · แบนเนอร์บนสุดทุกหน้า</div>
+  <div style="font-size:14px;color:#b9b3e8;margin-top:4px">${range} · ${slots.length > 1 ? `แบนเนอร์ ${slots.length} จุดทั่วเว็บ` : 'แบนเนอร์' + (SLOT_TH[slots[0]] ?? '')}</div>
 </td></tr>
 <tr><td style="padding:20px 24px 4px;font-size:17px;line-height:1.7;color:#fff">
   ${period}มีผู้เล่น <b style="color:#39e6ff">${fmt(n.people)} คน</b> เห็นแบนเนอร์ของคุณ<br>
@@ -176,6 +194,7 @@ function html(ad, when, n) {
   ${card(fmt(n.views), 'ครั้งที่เห็น<br>(รวมเห็นซ้ำ)', '#ffe14d')}
   ${card(fmt(n.clicks), 'คลิก<br>ไปเว็บ ' + ad.advertiser, '#ff3fa4')}
 </tr></table></td></tr>
+${slots.length > 1 ? slotTable(slots, n) : ''}
 <tr><td style="padding:12px 24px">
   <div style="font-size:15px;font-weight:bold;color:#fff;margin-bottom:8px">คนที่เห็นในแต่ละวัน</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px">${dayRows.join('')}</table>
@@ -208,14 +227,35 @@ ${renewal}${thanks}
 </body></html>`;
 }
 
+// One line per slot the campaign holds, in the site's order, including a slot
+// nobody has seen yet (a page with no new patch this week still shows as 0).
+function slotTable(slots, n) {
+  const by = Object.fromEntries(n.slots.map((s) => [s.slot, s]));
+  const rows = SLOT_ORDER.filter((s) => slots.includes(s)).map((s) => {
+    const r = by[s] ?? { views: 0, clicks: 0 };
+    return `<tr><td style="padding:4px 0;color:#e8e6ff">${SLOT_TH[s]}</td><td align="right" style="color:#ffe14d">${fmt(r.views)}</td><td align="right" width="70" style="color:#ff3fa4">${fmt(r.clicks)}</td></tr>`;
+  });
+  return `<tr><td style="padding:12px 24px">
+  <div style="font-size:15px;font-weight:bold;color:#fff;margin-bottom:8px">แยกตามจุดที่วาง</div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px">
+    <tr><td style="padding:2px 0;color:#8f89c4">จุด</td><td align="right" style="color:#8f89c4">ครั้งที่เห็น</td><td align="right" style="color:#8f89c4">คลิก</td></tr>
+    ${rows.join('')}
+  </table>
+</td></tr>`;
+}
+
 async function pdf(page) {
   const { chromium } = await import('playwright-core');
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   try {
     const tab = await browser.newPage();
     await tab.setContent(page, { waitUntil: 'networkidle' });
-    await tab.addStyleTag({ content: '@page{size:A4;margin:0} html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}' });
-    return await tab.pdf({ format: 'A4', printBackground: true, pageRanges: '1' });
+    await tab.addStyleTag({ content: '@page{margin:0} html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}' });
+    // One page as tall as the report: A4 with pageRanges '1' cut off the
+    // "how we count" footer, and the per-slot table made the report longer.
+    await tab.setViewportSize({ width: 794, height: 1123 });
+    const height = await tab.evaluate(() => document.documentElement.scrollHeight);
+    return await tab.pdf({ width: '794px', height: `${height + 2}px`, printBackground: true, pageRanges: '1' });
   } finally {
     await browser.close();
   }
@@ -223,7 +263,20 @@ async function pdf(page) {
 
 async function main() {
   const ads = JSON.parse(readFileSync(new URL('../data/ads.json', import.meta.url), 'utf8')).ads.filter((a) => a.report);
-  const jobs = ads.map((ad) => ({ ad, when: due(ad) })).filter((j) => j.when);
+  // One campaign per advertiser: the earliest start and latest end across its
+  // banners, so the weekly and final mails go out once, not once per slot.
+  const campaigns = new Map();
+  for (const ad of ads) {
+    const c = campaigns.get(ad.advertiser);
+    if (!c) campaigns.set(ad.advertiser, { ...ad, ids: [ad.id], slots: [ad.slot] });
+    else {
+      c.ids.push(ad.id);
+      c.slots.push(ad.slot);
+      if (ad.starts < c.starts) c.starts = ad.starts;
+      if (ad.ends > c.ends) c.ends = ad.ends;
+    }
+  }
+  const jobs = [...campaigns.values()].map((ad) => ({ ad, when: due(ad) })).filter((j) => j.when);
   if (!jobs.length) return console.log('nothing due today');
 
   let token;
@@ -237,12 +290,12 @@ async function main() {
   for (const { ad, when } of jobs) {
     let n;
     try {
-      n = await numbers(token, ad.id, when.start, when.end);
+      n = await numbers(token, ad.ids, when.start, when.end);
     } catch (e) {
       await telegram(`รายงานแบนเนอร์ ${ad.advertiser} ไม่ได้ส่ง: อ่าน GA4 ไม่ได้ (${e.message})`);
       throw e;
     }
-    const page = html(ad, when, n);
+    const page = html(ad, when, n, ad.slots);
     const file = await pdf(page);
     const name = `${ad.advertiser}-rozerothai-${iso(when.end)}.pdf`;
     const subject = `รายงานแบนเนอร์ ${ad.advertiser} บน rozerothai.com · ${when.final ? 'สรุปทั้งแคมเปญ' : `${thDate(when.start)} – ${thDate(when.end)}`}`;

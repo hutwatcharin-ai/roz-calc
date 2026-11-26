@@ -3248,6 +3248,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .adpage__specs { margin: 4px 0 0; padding-inline-start: 18px; color: var(--dim); font-size: 13px; line-height: 1.7; }
 .adpage__price { margin: 6px 0 4px; color: var(--text); font-size: 14px; }
 .adpage__price strong { font: 700 24px/1 var(--font-mono), monospace; color: var(--yellow); }
+.adpage__booked { margin: 2px 0 8px; font-size: 13px; color: var(--pink, #ff3fa4); }
 .adpage__slotbody .btn { align-self: flex-start; }
 .adpage__h3 { margin-top: 22px; font: 700 15px/1.3 var(--font-chakra), sans-serif; }
 .adpage__table { margin-top: 10px; }

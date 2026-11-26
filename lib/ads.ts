@@ -149,6 +149,25 @@ export function adToShow(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad 
   return live[day % live.length];
 }
 
+/** The last day a slot is booked, counting bookings that have not started
+ *  yet; null when it is free from today. /advertise shows it so a shop does
+ *  not write in for a slot that is taken. Back-to-back bookings run together:
+ *  a gap of even one day means the slot is free from that day, and that is
+ *  where this stops. */
+export function bookedUntil(slot: AdSlot, today: string, ads: Ad[] = data.ads): string | null {
+  const ahead = ads.filter((ad) => ad.slot === slot && ad.ends >= today).sort((a, b) => a.starts.localeCompare(b.starts));
+  let until: string | null = null;
+  let from = today;
+  for (const ad of ahead) {
+    if (ad.starts > from) break;
+    if (!until || ad.ends > until) until = ad.ends;
+    const next = new Date(until + 'T00:00:00Z');
+    next.setUTCDate(next.getUTCDate() + 1);
+    from = next.toISOString().slice(0, 10);
+  }
+  return until;
+}
+
 /** Price after the length discount, rounded to the baht. */
 export function priceFor(slot: PricedSlot, months: number, prices: AdPrices = data.prices): number {
   const rate = prices[slot];

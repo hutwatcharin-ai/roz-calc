@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
+import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, bookedUntil, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
 
 const ad = (id: string, over: Partial<Ad> = {}): Ad => ({
   id,
@@ -11,6 +11,27 @@ const ad = (id: string, over: Partial<Ad> = {}): Ad => ({
   starts: '2026-10-01',
   ends: '2026-10-30',
   ...over,
+});
+
+describe('bookedUntil', () => {
+  it('is null for a free slot and for one whose booking has ended', () => {
+    expect(bookedUntil('top', '2026-10-15', [])).toBeNull();
+    expect(bookedUntil('top', '2026-10-31', [ad('a')])).toBeNull();
+  });
+  it('gives the last day of the running booking, only for its own slot', () => {
+    expect(bookedUntil('top', '2026-10-15', [ad('a')])).toBe('2026-10-30');
+    expect(bookedUntil('inline', '2026-10-15', [ad('a')])).toBeNull();
+  });
+  it('runs on through a booking that starts the next day, not across a gap', () => {
+    const next = ad('b', { starts: '2026-10-31', ends: '2026-11-29' });
+    const later = ad('c', { starts: '2026-11-05', ends: '2026-11-29' });
+    expect(bookedUntil('top', '2026-10-15', [next, ad('a')])).toBe('2026-11-29');
+    expect(bookedUntil('top', '2026-10-15', [ad('a'), later])).toBe('2026-10-30');
+  });
+  it('counts a booking that has been sold but not started when it starts today', () => {
+    expect(bookedUntil('top', '2026-09-20', [ad('a')])).toBeNull();
+    expect(bookedUntil('top', '2026-10-01', [ad('a')])).toBe('2026-10-30');
+  });
 });
 
 describe('ads', () => {

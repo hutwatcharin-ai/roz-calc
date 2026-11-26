@@ -8,7 +8,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, introSeatsLeft, priceFor } from '@/lib/ads';
+import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, bookedUntil, introSeatsLeft, priceFor } from '@/lib/ads';
 import { getAdStats } from '@/lib/ad-stats-live';
 import PageHeader from '@/components/PageHeader';
 
@@ -65,6 +65,8 @@ const FILE_SPEC = [
 export default async function AdvertisePage() {
   const AD_STATS = await getAdStats();
   const seats = introSeatsLeft();
+  // Rebuilt daily (revalidate), so "today" here is at most a day old.
+  const today = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
   const slots = [
     {
       key: 'top' as const,
@@ -138,7 +140,17 @@ export default async function AdvertisePage() {
                 <p className="adpage__price">
                   <strong>{baht(slot.price)}</strong> บาท/เดือน
                 </p>
-                <a className="btn" href={mailto(`จอง${slot.name} rozerothai.com`)}>จองตำแหน่งนี้</a>
+                {(() => {
+                  const until = bookedUntil(slot.key, today);
+                  return until ? (
+                    <>
+                      <p className="adpage__booked">มีผู้จองแล้วถึง {thaiDate(until)} จองคิวต่อจากนี้ได้</p>
+                      <a className="btn" href={mailto(`จองคิว${slot.name} หลัง ${until} rozerothai.com`)}>จองคิวถัดไป</a>
+                    </>
+                  ) : (
+                    <a className="btn" href={mailto(`จอง${slot.name} rozerothai.com`)}>จองตำแหน่งนี้</a>
+                  );
+                })()}
               </div>
             </div>
           ))}
