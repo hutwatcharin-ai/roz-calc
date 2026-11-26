@@ -170,8 +170,6 @@ export default function Events202611() {
         </p>
       </header>
 
-      <AdSlot slot="bonus" />
-
       {/* ---------------- Gatchaman ---------------- */}
       <section id="gatchaman" className="evsec evsec--cyan">
         <p className="evsec__tag">EVENT 01 · COLLAB</p>
@@ -300,6 +298,10 @@ export default function Events202611() {
           ไฟล์เกมเขียนว่าทั้งสองม้วนเลือกได้ 1 จาก 5 · คอสตูมคอลแลบมีออปชันช่วงอีเวนต์ EXP +5% (บางชิ้นดรอป +5%) หายเมื่ออีเวนต์จบ
         </p>
       </section>
+
+      {/* After the first event, not under the header, where it shared the
+          first screen with the top slot. */}
+      <AdSlot slot="bonus" />
 
       {/* ---------------- Black Friday ---------------- */}
       <section id="exp" className="evsec evsec--yellow">

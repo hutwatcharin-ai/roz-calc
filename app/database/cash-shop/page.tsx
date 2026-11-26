@@ -8,6 +8,7 @@ import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
+import { Fragment } from 'react';
 import AdSlot from '@/components/AdSlot';
 import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
@@ -150,8 +151,6 @@ export default async function CashShopPage({
         clearHref="/database/cash-shop"
       />
 
-      <AdSlot slot="bonus" />
-
       <CashPlanProvider>
         {rows.length === 0 ? (
           <div className="card">
@@ -160,7 +159,7 @@ export default async function CashShopPage({
         ) : (
           <div className="card">
             <div className="cashlist">
-              {rows.map((r) => {
+              {rows.map((r, index) => {
                 const saves = savesPct.get(r.item_id);
                 const body = (
                   <>
@@ -189,7 +188,11 @@ export default async function CashShopPage({
                   </>
                 );
                 return (
-                  <div key={r.item_id} className="cashlist__rowwrap">
+                  <Fragment key={r.item_id}>
+                  {/* After the 12th row, as on the card and costume lists: right
+                      under the header it sat in the same screen as the top slot. */}
+                  {index === 12 && <AdSlot slot="bonus" />}
+                  <div className="cashlist__rowwrap">
                     {linkable.has(r.item_id) ? (
                       <Link href={`/database/items/${r.item_id}`} className="cashlist__row">
                         {body}
@@ -199,6 +202,7 @@ export default async function CashShopPage({
                     )}
                     <CashPlanButton id={r.item_id} name={r.name_en} kp={r.kp_price} />
                   </div>
+                  </Fragment>
                 );
               })}
             </div>

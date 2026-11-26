@@ -618,7 +618,7 @@ export default async function MonsterListPage({
         <div className="mongrid">
           {(monsters ?? []).map((m, index) => (
             <Fragment key={`row-${m.id}`}>
-            {index === 12 && <AdSlot slot="list" />}
+            {index === 24 && <AdSlot slot="list" />}
             {/* Character-select tile (owner's pick L1, 1 Oct 2026, from
                 public/draft/monster-arcade): the sprite large in its
                 element's light, level and element on the top strip, the

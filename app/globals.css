@@ -3265,7 +3265,7 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .adslot--unit .adslot__ins { display: inline-block; width: var(--ad-w); height: var(--ad-h); max-width: 100%; overflow: hidden; }
 @media (max-width: 700px) { .adslot--unit .adslot__ins { width: var(--ad-narrow-w); height: var(--ad-narrow-h); } }
 /* An ad inside a card grid takes a whole row, never one card's cell. */
-.mongrid > .adslot, .itemgrid > .adslot { grid-column: 1 / -1; }
+.mongrid > .adslot, .itemgrid > .adslot, .cashlist > .adslot { grid-column: 1 / -1; }
 .sitefooter__privacy { display: block; width: fit-content; margin-top: 10px; color: var(--faint); font-size: 12.5px; }
 .sitefooter__privacy:hover { color: var(--cyan); }
 
