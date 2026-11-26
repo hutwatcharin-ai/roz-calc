@@ -15,7 +15,9 @@ import AdsenseUnit from './AdsenseUnit';
 export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?: boolean }) {
   const today = new Date().toISOString().slice(0, 10);
   const ad = adToShow(slot, today);
-  const size = AD_SIZES[slot];
+  // A banner may bring another slot's shape (Ad.size); the box follows it.
+  const shape = ad?.size ?? slot;
+  const size = ad?.narrowSize ? { ...AD_SIZES[shape], narrow: ad.narrowSize } : AD_SIZES[shape];
   const style = {
     '--ad-w': `${size.wide[0]}px`,
     '--ad-h': `${size.wide[1]}px`,
@@ -33,11 +35,14 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
   // no AdSense fill.
   if (!ad && slot !== 'top' && !adsense) return null;
 
+  // A bonus spot exists only for the booking that came with it.
+  if (!ad && slot === 'bonus') return null;
+
   if (!ad && slot !== 'top') {
     // Nothing sold here: AdSense fills it rather than the space earning
     // nothing (owner, 23 Sep 2026). The top slot keeps its house ad, which is
     // how the other slots get sold in the first place.
-    return <AdsenseUnit slot={slot === 'detail' ? 'detail' : 'list'} />;
+    return <AdsenseUnit slot={slot === 'detail' ? 'detail' : slot === 'guide' ? 'guide' : 'list'} />;
   }
 
   if (!ad) {
@@ -55,7 +60,7 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
   }
 
   return (
-    <aside className={`adslot adslot--${slot}`} style={style} aria-label="โฆษณา">
+    <aside className={`adslot adslot--${slot}${shape === 'top' ? ' adslot--fluid' : ''}`} style={style} aria-label="โฆษณา">
       <span className="adslot__tag">โฆษณา</span>
       <AdImpression id={ad.id} slot={slot} advertiser={ad.advertiser} />
       {/* The click goes through our own route, so the count is ours and does

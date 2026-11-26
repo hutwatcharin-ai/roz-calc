@@ -23,6 +23,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
+import AdSlot from '@/components/AdSlot';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
 
 const PATH = '/news/patch-2026-11-26';
@@ -235,6 +236,8 @@ export default function Patch20261126() {
         </ol>
         <p className="pdeadline__note">วันตามประกาศ (UTC) · อีเวนต์จบตอนปิดปรับปรุง 10 ธ.ค.</p>
       </section>
+
+      <AdSlot slot="bonus" />
 
       {/* ---------------- MVP Raids ---------------- */}
       <section id="raids" className="evsec evsec--yellow">

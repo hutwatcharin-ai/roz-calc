@@ -4,7 +4,6 @@ import { monsterLabel } from '@/lib/monster-known-as';
 import './page.css';
 import type { Metadata } from 'next';
 import { Fragment } from 'react';
-import AdsenseUnit from '@/components/AdsenseUnit';
 import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -619,7 +618,7 @@ export default async function MonsterListPage({
         <div className="mongrid">
           {(monsters ?? []).map((m, index) => (
             <Fragment key={`row-${m.id}`}>
-            {index === 12 && <AdsenseUnit slot="list" />}
+            {index === 12 && <AdSlot slot="list" />}
             {/* Character-select tile (owner's pick L1, 1 Oct 2026, from
                 public/draft/monster-arcade): the sprite large in its
                 element's light, level and element on the top strip, the

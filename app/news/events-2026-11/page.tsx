@@ -21,6 +21,7 @@ import './page.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
+import AdSlot from '@/components/AdSlot';
 import NaviCopy from '@/components/NaviCopy';
 import QuestMap from './QuestMap';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/jsonld';
@@ -168,6 +169,8 @@ export default function Events202611() {
           จุดเริ่มเควส ฐาน Gatchaman รางวัล ราคา และวันจากประกาศทางการ · ขั้นระหว่างทางจากบันทึกเควสในไคลเอนต์ · รูปจากไฟล์เกม
         </p>
       </header>
+
+      <AdSlot slot="bonus" />
 
       {/* ---------------- Gatchaman ---------------- */}
       <section id="gatchaman" className="evsec evsec--cyan">

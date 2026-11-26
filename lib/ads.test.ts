@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, introSeatsLeft, priceFor, type Ad } from './ads';
+import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
 
 const ad = (id: string, over: Partial<Ad> = {}): Ad => ({
   id,
@@ -35,6 +35,14 @@ describe('ads', () => {
     const list = [ad('a'), ad('b')];
     expect(adToShow('top', '2026-10-02', list)?.id).toBe('a');
     expect(adToShow('top', '2026-10-03', list)?.id).toBe('b');
+  });
+
+  it('finds a live ad for a click in any slot, not only top and inline', () => {
+    const list = [ad('a'), ad('d', { slot: 'detail' }), ad('g', { slot: 'guide' })];
+    expect(liveAd('d', '2026-10-05', list)?.slot).toBe('detail');
+    expect(liveAd('g', '2026-10-05', list)?.slot).toBe('guide');
+    expect(liveAd('d', '2026-10-31', list)).toBeNull();
+    expect(liveAd('zz', '2026-10-05', list)).toBeNull();
   });
 
   it('takes the biggest discount the length earns', () => {

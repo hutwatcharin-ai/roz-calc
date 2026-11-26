@@ -8,6 +8,7 @@ import Link from 'next/link';
 import FilterAutoSubmit from '@/components/FilterAutoSubmit';
 import { supabaseRead } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader';
+import AdSlot from '@/components/AdSlot';
 import ItemIcon from '@/components/ItemIcon';
 import FilterState, { EmptyState } from '@/components/FilterState';
 import { CashPlanBar, CashPlanButton, CashPlanProvider } from '@/components/CashPlan';
@@ -148,6 +149,8 @@ export default async function CashShopPage({
         ]}
         clearHref="/database/cash-shop"
       />
+
+      <AdSlot slot="bonus" />
 
       <CashPlanProvider>
         {rows.length === 0 ? (

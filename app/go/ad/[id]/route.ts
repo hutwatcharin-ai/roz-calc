@@ -9,14 +9,16 @@
 // number would be the wrong trade.
 
 import { NextResponse } from 'next/server';
-import { adsFor } from '@/lib/ads';
+import { liveAd } from '@/lib/ads';
 import { SITE_URL } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
   const today = new Date().toISOString().slice(0, 10);
-  const ad = [...adsFor('top', today), ...adsFor('inline', today)].find((a) => a.id === params.id);
+  // Any slot: this looked in top and inline only, so a sold detail banner
+  // would have sent its clicks to /advertise.
+  const ad = liveAd(params.id, today);
   // SITE_URL, not request.url: behind the proxy the request carries the
   // container's own host, and the fallback sent readers to localhost:3000
   // (seen on production, 23 Sep 2026).

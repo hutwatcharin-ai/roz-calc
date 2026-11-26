@@ -1,8 +1,14 @@
 // Banners sold direct, read from data/ads.json (owner, 23 Sep 2026).
 //
-// Two slots: `top` under the nav on every page, `inline` inside the three
-// most-read pages. A slot with nothing live shows the house ad -- an empty
-// box would read as a broken page, and the house ad sells the space.
+// Three slots on sale: `top` under the nav on every page, `inline` inside
+// the content of the most-read pages, `detail` at the end of a monster or
+// item page. Three more are never sold on their own, only given with a
+// booking (Gametopup.center, 26 Nov 2026, took every spot on the site):
+// `bonus` on pages that had no advertising (the cash shop, new patch and
+// event pages), and `list` and `guide`, the two places AdSense filled alone.
+// Unsold, `top` shows the house ad -- an empty box would read as a broken
+// page, and the house ad sells the space -- `inline`, `detail`, `list` and
+// `guide` fall back to AdSense, and `bonus` draws nothing.
 //
 // Dates are plain YYYY-MM-DD and compared as strings, which is only safe
 // because they are all the same shape and zero-padded; a booking runs from
@@ -10,7 +16,9 @@
 
 import file from '@/data/ads.json';
 
-export type AdSlot = 'top' | 'inline' | 'detail';
+export type AdSlot = 'top' | 'inline' | 'detail' | 'bonus' | 'list' | 'guide';
+/** The slots with a price on /advertise. */
+export type PricedSlot = 'top' | 'inline' | 'detail';
 
 export interface Ad {
   id: string;
@@ -28,6 +36,14 @@ export interface Ad {
    *  readers who ask for less motion. */
   wideVideo?: string;
   narrowVideo?: string;
+  /** Draw at another slot's size. Gametopup.center sent one banner shape for
+   *  every spot (1200x200 on a desktop, 2000x667 on a phone) rather than a
+   *  picture per slot, so its bookings outside the top slot say "top". */
+  size?: AdSlot;
+  /** The phone picture's own pixel size when it is not the slot's phone shape
+   *  (Gametopup.center's is 2000x667, 3:1, against the top slot's 640x200),
+   *  so the box takes the picture's shape instead of letterboxing it. */
+  narrowSize?: [number, number];
   /** What a screen reader reads and the hover text, supplied by the advertiser. */
   alt: string;
   starts: string;
@@ -81,6 +97,11 @@ export const AD_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number,
   // looks like what readers already see there (owner, 24 Oct 2026).
   inline: { wide: [728, 90], narrow: [320, 100] },
   detail: { wide: [336, 280], narrow: [300, 250] },
+  // The given-away slots keep the shape of what was there before, so an
+  // unsold one changes nothing. A banner in them brings its own `size`.
+  bonus: { wide: [728, 90], narrow: [320, 100] },
+  list: { wide: [728, 90], narrow: [320, 100] },
+  guide: { wide: [336, 280], narrow: [300, 250] },
 };
 
 /** Every page that carries the inline slot, for the view count on /advertise.
@@ -114,6 +135,11 @@ export function adsFor(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad[] 
   return ads.filter((ad) => ad.slot === slot && ad.starts <= today && ad.ends >= today);
 }
 
+/** A live ad in any slot, for the click route. */
+export function liveAd(id: string, today: string, ads: Ad[] = data.ads): Ad | null {
+  return ads.find((ad) => ad.id === id && ad.starts <= today && ad.ends >= today) ?? null;
+}
+
 /** The one ad to draw. Several live bookings on a slot rotate by the day, so
  *  a slot double-booked by mistake still shows both rather than dropping one. */
 export function adToShow(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad | null {
@@ -124,7 +150,7 @@ export function adToShow(slot: AdSlot, today: string, ads: Ad[] = data.ads): Ad 
 }
 
 /** Price after the length discount, rounded to the baht. */
-export function priceFor(slot: AdSlot, months: number, prices: AdPrices = data.prices): number {
+export function priceFor(slot: PricedSlot, months: number, prices: AdPrices = data.prices): number {
   const rate = prices[slot];
   const discount = [...prices.discounts].sort((a, b) => b.months - a.months).find((d) => months >= d.months);
   const total = rate * months * (1 - (discount?.percent ?? 0) / 100);
