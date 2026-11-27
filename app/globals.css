@@ -3173,13 +3173,19 @@ a.cashlist__row:hover { background: var(--panel-2); }
   padding-inline: var(--shell);
 }
 .adslot--inline { margin: 18px auto; padding-inline: 0; }
+/* The tag sits in a strip of its own above the banner, never on it: on the
+   banner it covered the shop's name in the top-left corner (owner, 27 Nov
+   2026, Gametopup.center's logo banner). Lined up with the banner's left
+   edge, which is past the side padding where the slot has one. */
+.adslot { padding-top: 18px; }
 .adslot__tag {
-  position: absolute; top: -8px; left: calc(var(--shell) + 8px); z-index: 2;
+  position: absolute; top: 0; left: var(--shell); z-index: 2;
   padding: 2px 7px; border-radius: 3px;
   background: var(--panel-2); color: var(--faint);
   font: 700 9px/1.4 var(--font-mono), monospace; letter-spacing: .1em;
 }
-.adslot--inline .adslot__tag { left: 8px; }
+.adslot--inline .adslot__tag, .adslot--fluid:not(.adslot--top) .adslot__tag { left: 0; }
+@media (max-width: 700px) { .adslot--phonefluid .adslot__tag { left: 0; } }
 .adslot__marker { position: absolute; inset: 0; pointer-events: none; }
 /* Fixed width AND height, not an aspect ratio: the ratio resolved late and
    the box grew 231 px after load, pushing the page down (CLS 0.27 in
