@@ -7,7 +7,7 @@
 // PageSpeed and CLS 0; keep it that way).
 
 import Link from 'next/link';
-import { AD_SIZES, adToShow, type AdSlot as Slot } from '@/lib/ads';
+import { AD_SIZES, adToShow, fillsRow, type AdSlot as Slot } from '@/lib/ads';
 import AdImpression from './AdImpression';
 import AdMedia from './AdMedia';
 import AdsenseUnit from './AdsenseUnit';
@@ -67,7 +67,7 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
     // and not out at the column's edge. A phone picture of its own shape
     // (Ad.narrowSize) scales with the phone's width, as the top slot does.
     <aside
-      className={`adslot adslot--${slot}${shape === 'top' ? ' adslot--fluid' : ' adslot--fit'}${shape !== 'top' && ad.narrowSize ? ' adslot--phonefluid' : ''}`}
+      className={`adslot adslot--${slot}${fillsRow(slot, shape) ? ' adslot--fluid' : ' adslot--fit'}${!fillsRow(slot, shape) && ad.narrowSize ? ' adslot--phonefluid' : ''}`}
       style={style}
       aria-label="โฆษณา"
       data-slot={slot}

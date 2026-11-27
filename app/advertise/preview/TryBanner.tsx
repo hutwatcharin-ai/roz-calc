@@ -14,7 +14,7 @@
 // clicked, so trying a banner counts nothing for anyone.
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AD_FILE_SIZES, AD_SIZES, type AdSlot } from '@/lib/ads';
+import { AD_FILE_SIZES, AD_SIZES, fillsRow, type AdSlot } from '@/lib/ads';
 
 interface SlotInfo {
   key: AdSlot;
@@ -49,11 +49,17 @@ const ratio = (s: [number, number]) => s[0] / s[1];
 const near = (a: number, b: number) => Math.abs(a / b - 1) < 0.08;
 
 /** The box the banner is drawn in: the slot's own, unless the picture is
- *  the top slot's shape -- then it is drawn as the top slot, as a shop that
- *  sends one set for every slot gets on the live site (Ad.size). */
+ *  another slot's shape -- the top slot's, or a long strip in a square slot --
+ *  then it is drawn in that shape, as the live site does for a banner sold
+ *  with one (Ad.size). Without this a 728x90 tried in the guide slot sat
+ *  small inside the square box (Gametopup.center, 27 Nov 2026). */
 function shapeFor(slot: AdSlot, pic: Pic | null): AdSlot {
   if (slot === 'top' || !pic) return slot;
-  return near(pic.w / pic.h, ratio(AD_SIZES.top.wide)) || near(pic.w / pic.h, ratio(AD_SIZES.top.narrow)) ? 'top' : slot;
+  const r = pic.w / pic.h;
+  if (near(r, ratio(AD_SIZES.top.wide)) || near(r, ratio(AD_SIZES.top.narrow))) return 'top';
+  const square = ratio(AD_SIZES[slot].wide) < 4;
+  if (square && (near(r, ratio(AD_SIZES.inline.wide)) || near(r, ratio(AD_SIZES.inline.narrow)))) return 'inline';
+  return slot;
 }
 
 /** What to tell the shop about a file for this slot, if anything. */
@@ -220,7 +226,7 @@ export default function TryBanner() {
 
       const aside = doc.createElement('aside');
       aside.id = 'trybanner';
-      aside.className = `adslot adslot--${slot} ${shape === 'top' ? 'adslot--fluid' : 'adslot--fit'}`;
+      aside.className = `adslot adslot--${slot} ${fillsRow(slot, shape) ? 'adslot--fluid' : 'adslot--fit'}`;
       aside.setAttribute('aria-label', 'แบนเนอร์ทดลอง');
       for (const [k, v] of Object.entries({
         '--ad-w': `${box.wide[0]}px`,
@@ -230,7 +236,7 @@ export default function TryBanner() {
         '--ad-ratio': `${box.wide[0]} / ${box.wide[1]}`,
         '--ad-narrow-ratio': `${narrowBox[0]} / ${narrowBox[1]}`,
       })) aside.style.setProperty(k, v);
-      if (shape !== 'top' && view === 'phone') aside.classList.add('adslot--phonefluid');
+      if (!fillsRow(slot, shape) && view === 'phone') aside.classList.add('adslot--phonefluid');
       // In a grid of cards the real slot spans the row; so does the copy.
       if (real.parentElement && getComputedStyle(real.parentElement).display === 'grid') aside.style.gridColumn = '1 / -1';
 
@@ -308,7 +314,7 @@ export default function TryBanner() {
               </button>
             ))}
           </div>
-          <p className="muted trybanner__hint">ขนาดที่เขียนไว้ใหญ่กว่ากรอบจริง 2 เท่า ให้ภาพคมบนจอรุ่นใหม่ ไม่อยากทำหลายขนาด ส่งชุดบนสุด (2400×400 กับ 1920×640) ชุดเดียวก็ใช้ได้ทุกตำแหน่ง</p>
+          <p className="muted trybanner__hint">ขนาดที่เขียนไว้ใหญ่กว่ากรอบจริง 2 เท่า ให้ภาพคมบนจอรุ่นใหม่ ไม่อยากทำหลายขนาด ส่งชุดบนสุด (2400×400 กับ 1920×640) ชุดเดียวก็ใช้ได้ทุกตำแหน่ง · หน้ารายละเอียด ท้ายไกด์ และ Cash Shop ใส่แบนเนอร์ทรงยาว (1456×180) ได้ด้วย ภาพจะยืดเต็มแถว</p>
         </fieldset>
 
         <fieldset className="trybanner__group">

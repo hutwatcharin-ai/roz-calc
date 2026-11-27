@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AD_FILE_SIZES, AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, bookedUntil, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
+import { AD_FILE_SIZES, AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, bookedUntil, fillsRow, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
 
 const ad = (id: string, over: Partial<Ad> = {}): Ad => ({
   id,
@@ -31,6 +31,21 @@ describe('bookedUntil', () => {
   it('counts a booking that has been sold but not started when it starts today', () => {
     expect(bookedUntil('top', '2026-09-20', [ad('a')])).toBeNull();
     expect(bookedUntil('top', '2026-10-01', [ad('a')])).toBe('2026-10-30');
+  });
+});
+
+describe('fillsRow', () => {
+  it('fills the row with the top shape anywhere, and a strip only where the slot has a row to itself', () => {
+    for (const slot of ['top', 'inline', 'list', 'bonus', 'detail', 'guide'] as const) expect(fillsRow(slot, 'top')).toBe(true);
+    expect(fillsRow('bonus', 'bonus')).toBe(true);
+    expect(fillsRow('detail', 'inline')).toBe(true);
+    expect(fillsRow('guide', 'inline')).toBe(true);
+    expect(fillsRow('inline', 'inline')).toBe(false);
+    expect(fillsRow('list', 'list')).toBe(false);
+  });
+  it('keeps a square banner at its own size', () => {
+    expect(fillsRow('detail', 'detail')).toBe(false);
+    expect(fillsRow('guide', 'guide')).toBe(false);
   });
 });
 

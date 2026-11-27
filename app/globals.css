@@ -3198,7 +3198,9 @@ a.cashlist__row:hover { background: var(--panel-2); }
 .adslot--fluid .adslot__link { height: auto; aspect-ratio: var(--ad-ratio); }
 /* A top-shaped banner inside the content (Ad.size) spans the content column
    and keeps the content's own margins. */
-.adslot--fluid:not(.adslot--top) { padding-inline: 0; margin: 18px auto; }
+.adslot--fluid:not(.adslot--top) { padding-inline: 0; margin: 18px auto; width: 100%; }
+/* width 100%: with auto side margins in a flex or grid row the box shrank to
+   the picture (a 728 px strip in the 1162 px Cash Shop row). */
 .adslot--fluid:not(.adslot--top) .adslot__link { width: 100%; }
 /* The box's own width, not fit-content: fit-content took the picture's
    file width (a 1456 px file for a 728 px box) and an empty box shrank to

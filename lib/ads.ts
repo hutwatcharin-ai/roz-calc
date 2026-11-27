@@ -119,6 +119,20 @@ export const AD_FILE_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [nu
   guide: { wide: [672, 560], narrow: [600, 500] },
 };
 
+/** Whether a banner fills its row instead of sitting at its box's size. The
+ *  top slot always does. A long strip does too in the slots that have a
+ *  whole row to themselves -- Cash Shop/patch/event, monster and item detail,
+ *  the class guides -- (owner, 27 Nov 2026: Gametopup.center wanted its long
+ *  banners "full width like the others" there, not centred in a 728 or a
+ *  square box). In the inline slot and the card table a strip stays 728 wide,
+ *  the size of the Google unit readers see in the same place. */
+export function fillsRow(slot: AdSlot, shape: AdSlot): boolean {
+  if (shape === 'top') return true;
+  if (slot === 'inline' || slot === 'list') return false;
+  const [w, h] = AD_SIZES[shape].wide;
+  return w / h > 4;
+}
+
 /** Every page that carries the inline slot, for the view count on /advertise.
  *  A test keeps it in step with the pages themselves; the monster list stays
  *  first, /advertise links to it as the most-read page. */
