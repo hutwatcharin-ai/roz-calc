@@ -117,9 +117,24 @@ export function inFrame(): boolean {
   }
 }
 
+/** A host that is not the public site: localhost, or an address typed as
+ *  numbers -- our own preview at 100.108.70.113:3178. Looking at a preview
+ *  there counted as banner impressions an advertiser's report would show
+ *  (owner's preview views were half of Gametopup.center's first day, 27 Nov
+ *  2026). Anything else, the real domain included, counts as before. */
+export function devHost(host: string): boolean {
+  return host === 'localhost' || host === '[::1]' || /^[0-9.]+$/.test(host);
+}
+
+/** True where nothing should be counted: in a frame or on a dev host. */
+export function noCount(): boolean {
+  if (typeof window === 'undefined') return false;
+  return inFrame() || devHost(window.location.hostname);
+}
+
 export function track(name: string, params: EventParams = {}): boolean {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') return false;
-  if (inFrame()) return false;
+  if (noCount()) return false;
   window.gtag('event', name, sanitizeParams(params));
   return true;
 }
@@ -189,6 +204,7 @@ export function gaBootstrap(gaId: string, debug: boolean = GA_DEBUG): string {
     "try{if(localStorage.getItem('" + INTERNAL_KEY + "')==='1')gtag('set',{traffic_type:'internal'});}catch(e){}",
     // Not inside a frame (/advertise/preview): gtag.js sends engagement hits
     // of its own once configured, even with every event blocked in track().
-    "if(window.self===window.top)gtag('config','" + gaId + "'," + config + ');',
+    // Nor on a dev host (devHost: the same test, written out for the page).
+    "if(window.self===window.top&&!/^(localhost|[0-9.]+|\\[::1\\])$/.test(location.hostname))gtag('config','" + gaId + "'," + config + ');',
   ].join('');
 }

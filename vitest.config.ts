@@ -15,6 +15,9 @@ export default defineConfig({
     // A component test needs a DOM; a pure-function test does not, and paying
     // for jsdom on all 292 of them would slow the suite for nothing.
     environmentMatchGlobs: [['**/*.test.tsx', 'jsdom']],
+    // The DOM sits on the public site's address: on localhost, as jsdom has
+    // it by default, lib/analytics counts nothing (devHost).
+    environmentOptions: { jsdom: { url: 'https://rozerothai.com/' } },
     include: ['**/*.test.ts', '**/*.test.tsx'],
     exclude: [
       '**/node_modules/**',

@@ -56,7 +56,8 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-27",
       "ends": "2027-02-24",
-      "wideVideo": "/images/ads/gametopup-xmas-top.mp4"
+      "wideVideo": "/images/ads/gametopup-xmas-top.mp4",
+      "countFrom": "2026-11-28"
     },
     {
       "id": "gtc-2611-inline",
@@ -72,7 +73,8 @@
       "narrowSize": [
         728,
         90
-      ]
+      ],
+      "countFrom": "2026-11-28"
     },
     {
       "id": "gtc-2611-list",
@@ -85,7 +87,8 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-27",
       "ends": "2027-02-24",
-      "wideVideo": "/images/ads/gametopup-xmas-games.mp4"
+      "wideVideo": "/images/ads/gametopup-xmas-games.mp4",
+      "countFrom": "2026-11-28"
     },
     {
       "id": "gtc-2611-detail",
@@ -98,7 +101,8 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-27",
       "ends": "2027-02-24",
-      "wideVideo": "/images/ads/gametopup-xmas-packs.mp4"
+      "wideVideo": "/images/ads/gametopup-xmas-packs.mp4",
+      "countFrom": "2026-11-28"
     },
     {
       "id": "gtc-2611-bonus",
@@ -111,7 +115,8 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-27",
       "ends": "2027-02-24",
-      "wideVideo": "/images/ads/gametopup-xmas-packs.mp4"
+      "wideVideo": "/images/ads/gametopup-xmas-packs.mp4",
+      "countFrom": "2026-11-28"
     },
     {
       "id": "gtc-2611-guide",
@@ -124,7 +129,8 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-27",
       "ends": "2027-02-24",
-      "wideVideo": "/images/ads/gametopup-xmas-games.mp4"
+      "wideVideo": "/images/ads/gametopup-xmas-games.mp4",
+      "countFrom": "2026-11-28"
     }
   ]
 }

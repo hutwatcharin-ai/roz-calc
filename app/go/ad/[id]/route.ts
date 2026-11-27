@@ -10,11 +10,12 @@
 
 import { NextResponse } from 'next/server';
 import { liveAd } from '@/lib/ads';
+import { devHost } from '@/lib/analytics';
 import { SITE_URL } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   const today = new Date().toISOString().slice(0, 10);
   // Any slot: this looked in top and inline only, so a sold detail banner
   // would have sent its clicks to /advertise.
@@ -26,7 +27,10 @@ export async function GET(_request: Request, { params }: { params: { id: string 
 
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const secret = process.env.GA4_API_SECRET;
-  if (gaId && secret) {
+  // Not from our preview (devHost): a click there is us testing the link.
+  // The proxy passes the public Host through, so the live site still counts.
+  const host = (request.headers.get('host') ?? '').replace(/:\d+$/, '');
+  if (gaId && secret && !devHost(host)) {
     try {
       await fetch(`https://www.google-analytics.com/mp/collect?measurement_id=${gaId}&api_secret=${secret}`, {
         method: 'POST',

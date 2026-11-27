@@ -277,6 +277,17 @@ async function main() {
     }
   }
   const jobs = [...campaigns.values()].map((ad) => ({ ad, when: due(ad) })).filter((j) => j.when);
+  // "countFrom" on a booking: the first day its numbers count. Before it the
+  // banner was being tried on our preview and clicked through to test the
+  // links, and those views and clicks are ours, not readers' (Gametopup.center,
+  // 27 Nov 2026). The contract dates in the mail stay as booked.
+  for (const { ad, when } of jobs) {
+    const from = ads.filter((a) => a.advertiser === ad.advertiser && a.countFrom).map((a) => a.countFrom).sort().pop();
+    if (from) {
+      const day = new Date(from + 'T00:00:00Z');
+      if (day > when.start) when.start = day;
+    }
+  }
   if (!jobs.length) return console.log('nothing due today');
 
   let token;

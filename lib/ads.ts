@@ -44,6 +44,9 @@ export interface Ad {
    *  (a phone picture sent in a shape other than the slot's own),
    *  so the box takes the picture's shape instead of letterboxing it. */
   narrowSize?: [number, number];
+  /** The first day the advertiser's report counts, when the banner went up
+   *  before that only on our preview (scripts/ad-mail-report.mjs). */
+  countFrom?: string;
   /** What a screen reader reads and the hover text, supplied by the advertiser. */
   alt: string;
   starts: string;

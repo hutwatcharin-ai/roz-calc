@@ -15,7 +15,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { applyInternalParam, inFrame, pageViewParams, pageViewPath, track } from '@/lib/analytics';
+import { applyInternalParam, noCount, pageViewParams, pageViewPath, track } from '@/lib/analytics';
 
 // The last path actually reported, kept outside the component: a soft
 // navigation can remount this, and a remounted ref would forget and send the
@@ -49,7 +49,7 @@ export default function Analytics({ gaId }: { gaId: string }) {
   // Nothing from inside the /advertise/preview frame: a shop trying its
   // banner there is not a reader.
   const [framed, setFramed] = useState(true);
-  useEffect(() => setFramed(inFrame()), []);
+  useEffect(() => setFramed(noCount()), []);
   if (framed) return null;
   return (
     <>

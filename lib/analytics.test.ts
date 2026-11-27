@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   applyInternalParam,
   contentGroupFor,
+  devHost,
   pageViewParams,
   pageViewPath,
   INTERNAL_KEY,
@@ -133,5 +134,17 @@ describe('pageViewPath', () => {
     expect(pageViewPath('/database/items', 'page=2&q=potion')).toBe(
       pageViewPath('/database/items', 'q=potion&page=2'),
     );
+  });
+});
+
+describe('devHost', () => {
+  it('is true for localhost and a numeric address, our preview among them', () => {
+    expect(devHost('localhost')).toBe(true);
+    expect(devHost('100.108.70.113')).toBe(true);
+    expect(devHost('[::1]')).toBe(true);
+  });
+  it('is false for the public site', () => {
+    expect(devHost('rozerothai.com')).toBe(false);
+    expect(devHost('www.rozerothai.com')).toBe(false);
   });
 });
