@@ -60,7 +60,15 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
   }
 
   return (
-    <aside className={`adslot adslot--${slot}${shape === 'top' ? ' adslot--fluid' : ''}`} style={style} aria-label="โฆษณา">
+    // A banner narrower than its column (a 728x90 in a wide content area)
+    // shrinks the box to the picture, so the "โฆษณา" tag sits on the picture
+    // and not out at the column's edge. A phone picture of its own shape
+    // (Ad.narrowSize) scales with the phone's width, as the top slot does.
+    <aside
+      className={`adslot adslot--${slot}${shape === 'top' ? ' adslot--fluid' : ' adslot--fit'}${shape !== 'top' && ad.narrowSize ? ' adslot--phonefluid' : ''}`}
+      style={style}
+      aria-label="โฆษณา"
+    >
       <span className="adslot__tag">โฆษณา</span>
       <AdImpression id={ad.id} slot={slot} advertiser={ad.advertiser} />
       {/* The click goes through our own route, so the count is ours and does

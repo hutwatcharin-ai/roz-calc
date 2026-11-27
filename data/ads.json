@@ -68,10 +68,9 @@
       "id": "gtc-2611-inline",
       "report": true,
       "slot": "inline",
-      "size": "top",
       "advertiser": "Gametopup.center",
       "href": "https://line.me/R/ti/p/@topupcenter",
-      "wide": "/images/ads/gametopup-1200.webp",
+      "wide": "/images/ads/gametopup-red-logo.webp",
       "narrow": "/images/ads/gametopup-960.webp",
       "narrowSize": [
         2000,
@@ -80,17 +79,17 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-26",
       "ends": "2027-02-23",
-      "wideVideo": "/images/ads/gametopup-1200.mp4",
+      "wideVideo": "/images/ads/gametopup-red-logo.mp4",
       "narrowVideo": "/images/ads/gametopup-960.mp4"
     },
     {
       "id": "gtc-2611-detail",
       "report": true,
       "slot": "detail",
-      "size": "top",
+      "size": "inline",
       "advertiser": "Gametopup.center",
       "href": "https://line.me/R/ti/p/@topupcenter",
-      "wide": "/images/ads/gametopup-1200.webp",
+      "wide": "/images/ads/gametopup-red-mix.webp",
       "narrow": "/images/ads/gametopup-960.webp",
       "narrowSize": [
         2000,
@@ -99,17 +98,16 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-26",
       "ends": "2027-02-23",
-      "wideVideo": "/images/ads/gametopup-1200.mp4",
+      "wideVideo": "/images/ads/gametopup-red-mix.mp4",
       "narrowVideo": "/images/ads/gametopup-960.mp4"
     },
     {
       "id": "gtc-2611-bonus",
       "report": true,
       "slot": "bonus",
-      "size": "top",
       "advertiser": "Gametopup.center",
       "href": "https://line.me/R/ti/p/@topupcenter",
-      "wide": "/images/ads/gametopup-1200.webp",
+      "wide": "/images/ads/gametopup-red-mix.webp",
       "narrow": "/images/ads/gametopup-960.webp",
       "narrowSize": [
         2000,
@@ -118,17 +116,17 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-26",
       "ends": "2027-02-23",
-      "wideVideo": "/images/ads/gametopup-1200.mp4",
+      "wideVideo": "/images/ads/gametopup-red-mix.mp4",
       "narrowVideo": "/images/ads/gametopup-960.mp4"
     },
     {
       "id": "gtc-2611-list",
       "report": true,
       "slot": "list",
-      "size": "top",
+      "size": "inline",
       "advertiser": "Gametopup.center",
       "href": "https://line.me/R/ti/p/@topupcenter",
-      "wide": "/images/ads/gametopup-1200.webp",
+      "wide": "/images/ads/gametopup-red-jeep.webp",
       "narrow": "/images/ads/gametopup-960.webp",
       "narrowSize": [
         2000,
@@ -137,17 +135,17 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-26",
       "ends": "2027-02-23",
-      "wideVideo": "/images/ads/gametopup-1200.mp4",
+      "wideVideo": "/images/ads/gametopup-red-jeep.mp4",
       "narrowVideo": "/images/ads/gametopup-960.mp4"
     },
     {
       "id": "gtc-2611-guide",
       "report": true,
       "slot": "guide",
-      "size": "top",
+      "size": "inline",
       "advertiser": "Gametopup.center",
       "href": "https://line.me/R/ti/p/@topupcenter",
-      "wide": "/images/ads/gametopup-1200.webp",
+      "wide": "/images/ads/gametopup-red-logo.webp",
       "narrow": "/images/ads/gametopup-960.webp",
       "narrowSize": [
         2000,
@@ -156,7 +154,7 @@
       "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
       "starts": "2026-11-26",
       "ends": "2027-02-23",
-      "wideVideo": "/images/ads/gametopup-1200.mp4",
+      "wideVideo": "/images/ads/gametopup-red-logo.mp4",
       "narrowVideo": "/images/ads/gametopup-960.mp4"
     }
   ]

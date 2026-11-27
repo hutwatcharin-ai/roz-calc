@@ -3200,9 +3200,11 @@ a.cashlist__row:hover { background: var(--panel-2); }
    and keeps the content's own margins. */
 .adslot--fluid:not(.adslot--top) { padding-inline: 0; margin: 18px auto; }
 .adslot--fluid:not(.adslot--top) .adslot__link { width: 100%; }
+.adslot--fit { width: fit-content; max-width: 100%; }
 @media (max-width: 700px) {
   /* No frame on a phone: the banner itself is the box (owner, 24 Oct 2026). */
-  .adslot--fluid .adslot__link { width: 100%; height: auto; aspect-ratio: var(--ad-narrow-ratio); border: 0; border-radius: 0; }
+  .adslot--fluid .adslot__link, .adslot--phonefluid .adslot__link { width: 100%; height: auto; aspect-ratio: var(--ad-narrow-ratio); border: 0; border-radius: 0; }
+  .adslot--fit.adslot--phonefluid { width: auto; padding-inline: 0; margin: 18px auto; }
 }
 .adslot__house {
   flex-direction: column; gap: 4px; text-align: center; padding: 10px 14px;
