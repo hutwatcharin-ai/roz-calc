@@ -26,6 +26,7 @@ import ItemHoloCard from '@/components/ItemHoloCard';
 import { itemArt } from '@/lib/item-art';
 // app/database/items/[id]/page.tsx
 import { supabaseRead } from '@/lib/supabase';
+import AdSlot from '@/components/AdSlot';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
@@ -388,6 +389,11 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         )}
       </div>
       )}
+      {/* The detail slot, as on monster and gear pages: /advertise sells it on
+          card and item pages too, and these two never had it (Gametopup.center
+          asked where its banner was, 27 Nov 2026). No Google unit when unsold,
+          so the AdSense layout these pages were reviewed with is unchanged. */}
+      <AdSlot slot="detail" adsense={false} />
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="item" entityId={String(item.id)} />
       </div>

@@ -13,6 +13,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, entityJsonLd } from '@/lib/jsonld';
 import RecordVisit from '@/components/RecordVisit';
+import AdSlot from '@/components/AdSlot';
 import FeedbackButton from '@/components/FeedbackButton';
 import DescriptionLanguageToggle from '@/components/DescriptionLanguageToggle';
 import { composeThaiDescription } from '@/lib/item-description-th';
@@ -205,6 +206,11 @@ export default async function CardDetailPage({ params }: { params: { id: string 
         }))}
       />
 
+      {/* The detail slot, as on monster and gear pages: /advertise sells it on
+          card and item pages too, and these two never had it (Gametopup.center
+          asked where its banner was, 27 Nov 2026). No Google unit when unsold,
+          so the AdSense layout these pages were reviewed with is unchanged. */}
+      <AdSlot slot="detail" adsense={false} />
       <div style={{ marginTop: 20 }}>
         <FeedbackButton pageType="card" entityId={String(item.id)} />
       </div>
