@@ -8,9 +8,16 @@
 // same treatment from the start.
 
 import Script from 'next/script';
+import { useEffect, useState } from 'react';
 import { ADSENSE_CLIENT } from '@/lib/ads';
+import { inFrame } from '@/lib/analytics';
 
 export default function AdsenseScript() {
+  // No Google ads inside the /advertise/preview frame: a shop trying its
+  // banner is not a reader, and Google counts every impression it serves.
+  const [framed, setFramed] = useState(true);
+  useEffect(() => setFramed(inFrame()), []);
+  if (framed) return null;
   return (
     <Script
       id="adsbygoogle"

@@ -41,7 +41,7 @@ export interface Ad {
    *  picture per slot, so its bookings outside the top slot say "top". */
   size?: AdSlot;
   /** The phone picture's own pixel size when it is not the slot's phone shape
-   *  (Gametopup.center's is 2000x667, 3:1, against the top slot's 640x200),
+   *  (a phone picture sent in a shape other than the slot's own),
    *  so the box takes the picture's shape instead of letterboxing it. */
   narrowSize?: [number, number];
   /** What a screen reader reads and the hover text, supplied by the advertiser. */
@@ -91,7 +91,9 @@ export const AD_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number,
   // The top slot spans the content column, 1200 px on a desktop, and scales
   // with the screen below that, keeping its shape (owner, 23 Oct 2026: the
   // advertiser wanted it as wide as the cards under it, and lower).
-  top: { wide: [1200, 200], narrow: [640, 200] },
+  // 3:1 on a phone (owner, 27 Nov 2026): the shape Gametopup.center sent,
+  // and the one /advertise now asks for.
+  top: { wide: [1200, 200], narrow: [600, 200] },
   // A strip, not a square: it sits between rows of cards, and the unsold
   // AdSense unit in the same place is 728x90 / 320x100, so a sold banner now
   // looks like what readers already see there (owner, 24 Oct 2026).
@@ -102,6 +104,19 @@ export const AD_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number,
   bonus: { wide: [728, 90], narrow: [320, 100] },
   list: { wide: [728, 90], narrow: [320, 100] },
   guide: { wide: [336, 280], narrow: [300, 250] },
+};
+
+/** The picture size to ask a shop for: twice the box, so it stays sharp on
+ *  the 2x and 3x screens most readers have. A 728x90 file drawn at 728x90 on
+ *  such a screen looked soft next to a larger one (Gametopup.center, 27 Nov
+ *  2026). The top slot's set may be sent for every slot instead. */
+export const AD_FILE_SIZES: Record<AdSlot, { wide: [number, number]; narrow: [number, number] }> = {
+  top: { wide: [2400, 400], narrow: [1920, 640] },
+  inline: { wide: [1456, 180], narrow: [640, 200] },
+  detail: { wide: [672, 560], narrow: [600, 500] },
+  bonus: { wide: [1456, 180], narrow: [640, 200] },
+  list: { wide: [1456, 180], narrow: [640, 200] },
+  guide: { wide: [672, 560], narrow: [600, 500] },
 };
 
 /** Every page that carries the inline slot, for the view count on /advertise.

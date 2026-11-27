@@ -8,7 +8,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, bookedUntil, introSeatsLeft, priceFor } from '@/lib/ads';
+import { AD_FILE_SIZES, AD_PRICES, AD_SIZES, INLINE_AD_PAGES, bookedUntil, introSeatsLeft, priceFor } from '@/lib/ads';
 import { getAdStats } from '@/lib/ad-stats-live';
 import PageHeader from '@/components/PageHeader';
 
@@ -57,8 +57,9 @@ const TERMS = [
 
 const FILE_SPEC = [
   'ไฟล์ JPG, PNG หรือ WebP ส่ง GIF ขยับมาได้ เราแปลงเป็นวิดีโอสั้นไม่มีเสียงให้เอง',
-  'ขนาดไฟล์ไม่เกิน 150 KB ต่อภาพ ส่วน GIF ขยับนับขนาดหลังแปลงเป็นวิดีโอแล้ว',
-  'ตำแหน่งบนสุดต้องส่ง 2 ขนาด คือ 1200×200 สำหรับคอม และ 640×200 สำหรับมือถือ แบนเนอร์ย่อขยายตามจอ ตัวหนังสือสำคัญควรห่างขอบภาพเล็กน้อย',
+  'แต่ละตำแหน่งส่ง 2 ไฟล์ คอมกับมือถือ ขนาดตามที่เขียนไว้ในแต่ละตำแหน่ง ซึ่งใหญ่กว่ากรอบ 2 เท่า ให้ภาพคมบนจอมือถือและโน้ตบุ๊กรุ่นใหม่ แบนเนอร์ย่อขยายตามจอ ตัวหนังสือสำคัญควรห่างขอบภาพเล็กน้อย',
+  'ไม่อยากทำหลายขนาด ส่งชุดบนสุดชุดเดียว (2400×400 กับ 1920×640) ก็ใช้ได้ทุกตำแหน่ง',
+  'ลองใส่แบนเนอร์ของคุณบนหน้าเว็บจริงได้ที่หน้าตัวอย่างตำแหน่ง ก่อนส่งไฟล์มา',
   'ส่งลิงก์ปลายทาง 1 ลิงก์ และข้อความกำกับภาพสั้น ๆ สำหรับผู้ใช้ที่มองไม่เห็น',
 ];
 
@@ -117,7 +118,7 @@ export default async function AdvertisePage() {
       <section className="card" aria-labelledby="ad-slots" style={{ marginTop: 14 }}>
         <h2 className="section-title" id="ad-slots">ตำแหน่งและราคา</h2>
         <p style={{ margin: '6px 0 12px' }}>
-          <Link href="/advertise/preview">▶ ดูตัวอย่างแบนเนอร์ขนาดจริงในแต่ละตำแหน่ง</Link>
+          <Link href="/advertise/preview">▶ ลองใส่แบนเนอร์ของคุณบนหน้าเว็บจริง</Link>
         </p>
         <div className="adpage__slots">
           {slots.map((slot) => (
@@ -134,7 +135,7 @@ export default async function AdvertisePage() {
                 <strong>{slot.name}</strong>
                 <p className="muted">{slot.where}</p>
                 <ul className="adpage__specs">
-                  <li>คอม {AD_SIZES[slot.key].wide[0]}×{AD_SIZES[slot.key].wide[1]} · มือถือ {AD_SIZES[slot.key].narrow[0]}×{AD_SIZES[slot.key].narrow[1]}</li>
+                  <li>ไฟล์คอม {AD_FILE_SIZES[slot.key].wide[0]}×{AD_FILE_SIZES[slot.key].wide[1]} · มือถือ {AD_FILE_SIZES[slot.key].narrow[0]}×{AD_FILE_SIZES[slot.key].narrow[1]}</li>
                   <li>ยอดเห็นประมาณ {baht(slot.views)} ครั้งต่อเดือน</li>
                 </ul>
                 <p className="adpage__price">

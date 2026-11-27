@@ -12,10 +12,10 @@
 // The gtag stub and config are an inline script in the layout head, not here:
 // they must exist before hydration so the first page_view is not lost.
 
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { applyInternalParam, pageViewParams, pageViewPath, track } from '@/lib/analytics';
+import { applyInternalParam, inFrame, pageViewParams, pageViewPath, track } from '@/lib/analytics';
 
 // The last path actually reported, kept outside the component: a soft
 // navigation can remount this, and a remounted ref would forget and send the
@@ -46,6 +46,11 @@ function PageViews() {
 }
 
 export default function Analytics({ gaId }: { gaId: string }) {
+  // Nothing from inside the /advertise/preview frame: a shop trying its
+  // banner there is not a reader.
+  const [framed, setFramed] = useState(true);
+  useEffect(() => setFramed(inFrame()), []);
+  if (framed) return null;
   return (
     <>
       {/* lazyOnload, not afterInteractive: gtag.js is the heaviest script on

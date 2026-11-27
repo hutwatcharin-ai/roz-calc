@@ -104,8 +104,22 @@ export function sanitizeParams(params: EventParams): Record<string, string | num
 
 /** Send one event. Returns false when GA is not on the page (dev server
  *  without the debug flag, a blocked script) so a caller can tell. */
+/** True inside a frame: /advertise/preview shows real pages in one, and a
+ *  shop trying its banner there is not a reader. Its page views, and the
+ *  impressions of whatever banner is running, would pad the counts an
+ *  advertiser pays for. */
+export function inFrame(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+}
+
 export function track(name: string, params: EventParams = {}): boolean {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') return false;
+  if (inFrame()) return false;
   window.gtag('event', name, sanitizeParams(params));
   return true;
 }
@@ -173,6 +187,8 @@ export function gaBootstrap(gaId: string, debug: boolean = GA_DEBUG): string {
     'window.gtag=gtag;',
     "gtag('js',new Date());",
     "try{if(localStorage.getItem('" + INTERNAL_KEY + "')==='1')gtag('set',{traffic_type:'internal'});}catch(e){}",
-    "gtag('config','" + gaId + "'," + config + ');',
+    // Not inside a frame (/advertise/preview): gtag.js sends engagement hits
+    // of its own once configured, even with every event blocked in track().
+    "if(window.self===window.top)gtag('config','" + gaId + "'," + config + ');',
   ].join('');
 }

@@ -33,21 +33,23 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
   // (Publisher Policies; the site was refused for low-value content on
   // 4 Oct 2026). Such a page still shows a banner sold directly, but takes
   // no AdSense fill.
-  if (!ad && slot !== 'top' && !adsense) return null;
+  // An empty spot still leaves an invisible marker, so /advertise/preview can
+  // show a shop's banner where the slot would be.
+  if (!ad && slot !== 'top' && !adsense) return <span data-slot={slot} hidden />;
 
   // A bonus spot exists only for the booking that came with it.
-  if (!ad && slot === 'bonus') return null;
+  if (!ad && slot === 'bonus') return <span data-slot={slot} hidden />;
 
   if (!ad && slot !== 'top') {
     // Nothing sold here: AdSense fills it rather than the space earning
     // nothing (owner, 23 Sep 2026). The top slot keeps its house ad, which is
     // how the other slots get sold in the first place.
-    return <AdsenseUnit slot={slot === 'detail' ? 'detail' : slot === 'guide' ? 'guide' : 'list'} />;
+    return <AdsenseUnit slot={slot === 'detail' ? 'detail' : slot === 'guide' ? 'guide' : 'list'} dataSlot={slot} />;
   }
 
   if (!ad) {
     return (
-      <aside className={`adslot adslot--${slot} adslot--house`} style={style} aria-label="พื้นที่โฆษณา">
+      <aside className={`adslot adslot--${slot} adslot--house`} style={style} aria-label="พื้นที่โฆษณา" data-slot={slot}>
         <span className="adslot__tag">พื้นที่โฆษณา</span>
         <Link href="/advertise" className="adslot__house">
           <strong>ลงโฆษณาตรงนี้</strong>
@@ -68,6 +70,7 @@ export default function AdSlot({ slot, adsense = true }: { slot: Slot; adsense?:
       className={`adslot adslot--${slot}${shape === 'top' ? ' adslot--fluid' : ' adslot--fit'}${shape !== 'top' && ad.narrowSize ? ' adslot--phonefluid' : ''}`}
       style={style}
       aria-label="โฆษณา"
+      data-slot={slot}
     >
       <span className="adslot__tag">โฆษณา</span>
       <AdImpression id={ad.id} slot={slot} advertiser={ad.advertiser} />

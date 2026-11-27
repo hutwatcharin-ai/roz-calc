@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, bookedUntil, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
+import { AD_FILE_SIZES, AD_PRICES, AD_SIZES, INLINE_AD_PAGES, adToShow, adsFor, bookedUntil, introSeatsLeft, liveAd, priceFor, type Ad } from './ads';
 
 const ad = (id: string, over: Partial<Ad> = {}): Ad => ({
   id,
@@ -80,9 +80,22 @@ describe('ads', () => {
 
   it('states a size for every slot, which the page reserves', () => {
     expect(AD_SIZES.top.wide).toEqual([1200, 200]);
-    expect(AD_SIZES.top.narrow).toEqual([640, 200]);
+    expect(AD_SIZES.top.narrow).toEqual([600, 200]);
     expect(AD_SIZES.inline.wide).toEqual([728, 90]);
     expect(AD_SIZES.inline.narrow).toEqual([320, 100]);
+  });
+
+  // /advertise and /advertise/preview tell shops these sizes; a file made to
+  // them must fill its box without bars, and be at least twice its width.
+  it('asks for files the shape of each box, and at least twice its size', () => {
+    for (const slot of Object.keys(AD_SIZES) as (keyof typeof AD_SIZES)[]) {
+      for (const side of ['wide', 'narrow'] as const) {
+        const [bw, bh] = AD_SIZES[slot][side];
+        const [fw, fh] = AD_FILE_SIZES[slot][side];
+        expect(Math.abs(fw / fh / (bw / bh) - 1), `${slot} ${side}`).toBeLessThan(0.01);
+        expect(fw, `${slot} ${side}`).toBeGreaterThanOrEqual(bw * 2);
+      }
+    }
   });
 
   // The view count sold on /advertise adds up these pages, so a page that

@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-export default function AdsenseUnit({ slot }: { slot: AdsenseSlot }) {
+export default function AdsenseUnit({ slot, dataSlot }: { slot: AdsenseSlot; dataSlot?: string }) {
   const pushed = useRef(false);
   const height = ADSENSE_HEIGHT[slot];
   const size = ADSENSE_WIDTH[slot];
@@ -44,6 +44,7 @@ export default function AdsenseUnit({ slot }: { slot: AdsenseSlot }) {
       className={`adslot adslot--inline adslot--unit adslot--unit-${slot}`}
       style={{ '--ad-h': `${height.wide}px`, '--ad-narrow-h': `${height.narrow}px`, '--ad-w': `${size.wide}px`, '--ad-narrow-w': `${size.narrow}px` } as React.CSSProperties}
       aria-label="โฆษณา"
+      data-slot={dataSlot}
     >
       <span className="adslot__tag">โฆษณา</span>
       {/* A fixed size, not data-ad-format="auto": the responsive unit sized
