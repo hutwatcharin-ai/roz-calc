@@ -3200,7 +3200,10 @@ a.cashlist__row:hover { background: var(--panel-2); }
    and keeps the content's own margins. */
 .adslot--fluid:not(.adslot--top) { padding-inline: 0; margin: 18px auto; }
 .adslot--fluid:not(.adslot--top) .adslot__link { width: 100%; }
-.adslot--fit { width: fit-content; max-width: 100%; }
+/* The box's own width, not fit-content: fit-content took the picture's
+   file width (a 1456 px file for a 728 px box) and an empty box shrank to
+   its text. Content-box, so the side padding is added outside it. */
+.adslot--fit { box-sizing: content-box; width: var(--ad-w); max-width: 100%; }
 @media (max-width: 700px) {
   /* No frame on a phone: the banner itself is the box (owner, 24 Oct 2026). */
   .adslot--fluid .adslot__link, .adslot--phonefluid .adslot__link { width: 100%; height: auto; aspect-ratio: var(--ad-narrow-ratio); border: 0; border-radius: 0; }

@@ -29,6 +29,11 @@
 .trybanner__stage { position: relative; overflow: hidden; border: 1px solid var(--hair); border-radius: 10px; background: #0a0720; }
 .trybanner__stage iframe { position: absolute; top: 0; left: 50%; border: 0; transform-origin: top center; translate: -50% 0; background: #0a0720; }
 
+.trybanner__tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+.trybanner__tools .btn, .trybanner__fullbar .btn { padding: 6px 12px; font-size: 13px; }
+.trybanner__stage.is-full { position: fixed; inset: 0; z-index: 1000; height: 100dvh; border: 0; border-radius: 0; }
+.trybanner__fullbar { position: absolute; top: 10px; right: 10px; z-index: 2; display: flex; gap: 8px; }
+
 @media (max-width: 900px) {
   .trybanner { grid-template-columns: 1fr; }
 }

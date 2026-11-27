@@ -65,8 +65,10 @@ function advice(slot: AdSlot, view: View, pic: Pic | null): string | null {
   if (!near(pic.w / pic.h, ratio(box))) {
     return `สัดส่วนไม่ตรงกรอบ (${pic.w}×${pic.h}) ภาพจะมีขอบว่าง ขนาดที่พอดีคือ ${want[0]}×${want[1]}`;
   }
-  if (pic.w < want[0] * 0.75) {
-    return `ภาพเล็กกว่าที่แนะนำ (${pic.w}×${pic.h}) อาจไม่คมบนจอรุ่นใหม่ แนะนำ ${want[0]}×${want[1]}`;
+  // Smaller than the box itself is a real problem; between the box and twice
+  // it is fine, only less sharp on 2x screens (said quietly, under the frame).
+  if (pic.w < box[0] * 0.95) {
+    return `ภาพเล็กกว่ากรอบ (${pic.w}×${pic.h}) จะดูแตก แนะนำ ${want[0]}×${want[1]}`;
   }
   return null;
 }
@@ -93,6 +95,11 @@ export default function TryBanner() {
   const [loaded, setLoaded] = useState(0);
   const [found, setFound] = useState(true);
   const [scale, setScale] = useState(1);
+  const [stageH, setStageH] = useState(0);
+  // Full screen is a fixed layer over the page, not the Fullscreen API:
+  // iPhone Safari gives that only to videos.
+  const [full, setFull] = useState(false);
+  const [busy, setBusy] = useState(false);
   const frame = useRef<HTMLIFrameElement>(null);
   const stage = useRef<HTMLDivElement>(null);
 
@@ -105,12 +112,65 @@ export default function TryBanner() {
   useEffect(() => {
     const node = stage.current;
     if (!node) return;
-    const fit = () => setScale(Math.min(1, node.clientWidth / size.w));
+    const fit = () => {
+      setScale(Math.min(1, node.clientWidth / size.w));
+      setStageH(node.clientHeight);
+    };
     fit();
     const observer = new ResizeObserver(fit);
     observer.observe(node);
     return () => observer.disconnect();
-  }, [size.w]);
+  }, [size.w, full]);
+
+  useEffect(() => {
+    if (!full) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setFull(false);
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [full]);
+
+  // The frame can finish loading before this component has hydrated, and then
+  // its load event is missed: check it once on mount and on each new page.
+  useEffect(() => {
+    if (frame.current?.contentDocument?.readyState === 'complete') setLoaded((n) => n + 1);
+  }, [info.page, view]);
+
+  // The frame's own height: the page height it shows, before scaling.
+  const frameH = full && stageH ? Math.round(stageH / scale) : size.h;
+
+  /** Saves what the frame shows now as a PNG, for a shop to send us. Drawn
+   *  from the framed page itself (modern-screenshot, loaded on the click), so
+   *  a moving banner is caught on one frame. */
+  const capture = useCallback(async () => {
+    const doc = frame.current?.contentDocument;
+    const win = frame.current?.contentWindow;
+    if (!doc || !win) return;
+    setBusy(true);
+    try {
+      const { domToBlob } = await import('modern-screenshot');
+      const blob = await domToBlob(doc.documentElement, {
+        width: VIEW[view].w,
+        height: frameH,
+        scale: view === 'phone' ? 2 : 1,
+        backgroundColor: '#0a0720',
+        style: { marginTop: `-${Math.round(win.scrollY)}px` },
+      });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `แบนเนอร์-${SLOTS.find((s) => s.key === slot)!.name}-${VIEW[view].label}.png`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      setError(null);
+    } catch {
+      setError('แคปภาพไม่สำเร็จ ใช้ปุ่มแคปหน้าจอของเครื่องแทนได้');
+    } finally {
+      setBusy(false);
+    }
+  }, [view, frameH, slot]);
 
   const pick = useCallback(async (file: File | undefined, set: (p: Pic | null) => void, old: Pic | null) => {
     if (!file) return;
@@ -152,7 +212,10 @@ export default function TryBanner() {
       const narrowBox: [number, number] = narrow ? [narrow.w, narrow.h] : wide ? box.wide : box.narrow;
       const style = doc.createElement('style');
       style.id = 'trybanner-style';
-      style.textContent = `[data-slot="${slot}"]{display:none!important}.adslot__link,.adslot a{pointer-events:none}`;
+      // Only the banner being tried: every other slot on the page (another
+      // shop's banner, a Google unit) is hidden, so nothing else reads as
+      // part of what is being tried.
+      style.textContent = `[data-slot]{display:none!important}.adslot:not(#trybanner){display:none!important}.adslot__link,.adslot a{pointer-events:none}`;
       doc.head.appendChild(style);
 
       const aside = doc.createElement('aside');
@@ -183,6 +246,9 @@ export default function TryBanner() {
         link.appendChild(img);
       } else {
         link.classList.add('trybanner__empty');
+        // Nothing inside to give it a size, so it takes the box's own.
+        link.style.width = `${view === 'phone' ? box.narrow[0] : box.wide[0]}px`;
+        link.style.maxWidth = '100%';
         link.innerHTML = '<strong>แบนเนอร์ของคุณ</strong>';
         Object.assign(link.style, {
           flexDirection: 'column', border: '2px dashed #ff3fa4', color: '#fff',
@@ -203,6 +269,8 @@ export default function TryBanner() {
   const wantDesk = AD_FILE_SIZES[shapeFor(slot, pic)].wide;
   const wantPhone = AD_FILE_SIZES[shapeFor(slot, pic)].narrow;
   const note = advice(slot, view, pic);
+  const want = view === 'desk' ? wantDesk : wantPhone;
+  const softer = pic && !note && pic.w < want[0] * 0.95;
 
   return (
     <div className="trybanner">
@@ -263,18 +331,29 @@ export default function TryBanner() {
         </p>
         {note && <p className="trybanner__warn">{note}</p>}
         {!found && <p className="trybanner__warn">ตำแหน่งนี้ไม่มีในหน้าตัวอย่างตอนนี้</p>}
-        <div className="trybanner__stage" ref={stage} style={{ height: size.h * scale }}>
+        <div className="trybanner__tools">
+          <button type="button" className="btn" onClick={() => setFull(true)}>⛶ ดูเต็มจอ</button>
+          <button type="button" className="btn" onClick={capture} disabled={busy}>{busy ? 'กำลังแคป…' : '📷 แคปภาพเก็บไว้'}</button>
+        </div>
+        <div className={`trybanner__stage${full ? ' is-full' : ''}`} ref={stage} style={full ? undefined : { height: size.h * scale }}>
+          {full && (
+            <div className="trybanner__fullbar">
+              <button type="button" className="btn" onClick={capture} disabled={busy}>{busy ? 'กำลังแคป…' : '📷 แคปภาพ'}</button>
+              <button type="button" className="btn" onClick={() => setFull(false)}>✕ ปิด</button>
+            </div>
+          )}
           <iframe
             key={`${info.page}-${view}`}
             ref={frame}
             title={`หน้า ${info.page} พร้อมแบนเนอร์ทดลอง`}
             src={info.page}
             width={size.w}
-            height={size.h}
+            height={frameH}
             style={{ transform: `scale(${scale})` }}
             onLoad={() => setLoaded((n) => n + 1)}
           />
         </div>
+        {softer && <p className="muted trybanner__hint">ใช้ได้ ถ้าส่งไฟล์ใหญ่ขึ้นเป็น {want[0]}×{want[1]} จะคมขึ้นบนจอมือถือและโน้ตบุ๊กรุ่นใหม่</p>}
         <p className="muted trybanner__hint">เลื่อนดูในกรอบได้ ภาพในกรอบคือหน้าจริงของเว็บ แบนเนอร์ GIF ขยับเหมือนบนเว็บจริง</p>
       </div>
     </div>
