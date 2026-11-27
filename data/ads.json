@@ -45,6 +45,86 @@
       "alt": "ShortOne รวมซีรีส์สั้นแนวตั้งทุกแอป เริ่มต้น 19 บาท",
       "starts": "2026-10-23",
       "ends": "2026-11-22"
+    },
+    {
+      "id": "gtc-2611-top",
+      "report": true,
+      "slot": "top",
+      "advertiser": "Gametopup.center",
+      "href": "https://line.me/R/ti/p/@topupcenter",
+      "wide": "/images/ads/gametopup-xmas-top.webp",
+      "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
+      "starts": "2026-11-27",
+      "ends": "2027-02-24",
+      "wideVideo": "/images/ads/gametopup-xmas-top.mp4"
+    },
+    {
+      "id": "gtc-2611-inline",
+      "report": true,
+      "slot": "inline",
+      "advertiser": "Gametopup.center",
+      "href": "https://line.me/R/ti/p/@topupcenter",
+      "wide": "/images/ads/gametopup-xmas-red.webp",
+      "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
+      "starts": "2026-11-27",
+      "ends": "2027-02-24",
+      "wideVideo": "/images/ads/gametopup-xmas-red.mp4",
+      "narrowSize": [
+        728,
+        90
+      ]
+    },
+    {
+      "id": "gtc-2611-list",
+      "report": true,
+      "slot": "list",
+      "size": "top",
+      "advertiser": "Gametopup.center",
+      "href": "https://line.me/R/ti/p/@topupcenter",
+      "wide": "/images/ads/gametopup-xmas-games.webp",
+      "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
+      "starts": "2026-11-27",
+      "ends": "2027-02-24",
+      "wideVideo": "/images/ads/gametopup-xmas-games.mp4"
+    },
+    {
+      "id": "gtc-2611-detail",
+      "report": true,
+      "slot": "detail",
+      "size": "top",
+      "advertiser": "Gametopup.center",
+      "href": "https://line.me/R/ti/p/@topupcenter",
+      "wide": "/images/ads/gametopup-xmas-packs.webp",
+      "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
+      "starts": "2026-11-27",
+      "ends": "2027-02-24",
+      "wideVideo": "/images/ads/gametopup-xmas-packs.mp4"
+    },
+    {
+      "id": "gtc-2611-bonus",
+      "report": true,
+      "slot": "bonus",
+      "size": "top",
+      "advertiser": "Gametopup.center",
+      "href": "https://line.me/R/ti/p/@topupcenter",
+      "wide": "/images/ads/gametopup-xmas-packs.webp",
+      "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
+      "starts": "2026-11-27",
+      "ends": "2027-02-24",
+      "wideVideo": "/images/ads/gametopup-xmas-packs.mp4"
+    },
+    {
+      "id": "gtc-2611-guide",
+      "report": true,
+      "slot": "guide",
+      "size": "top",
+      "advertiser": "Gametopup.center",
+      "href": "https://line.me/R/ti/p/@topupcenter",
+      "wide": "/images/ads/gametopup-xmas-games.webp",
+      "alt": "Game topcenter ร้านเติมเกมออนไลน์ เติมเกมเลย LINE @topupcenter",
+      "starts": "2026-11-27",
+      "ends": "2027-02-24",
+      "wideVideo": "/images/ads/gametopup-xmas-games.mp4"
     }
   ]
 }
